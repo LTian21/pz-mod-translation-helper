@@ -1,0 +1,347 @@
+import configparser
+import json
+import logging
+import re
+from datetime import datetime
+from pathlib import Path
+from typing import Final
+
+CONFIG_FILE: Final[Path] = Path('config.ini')
+ID_LIST_FILE: Final[Path] = Path('id_list.txt')
+STATUS_FILE: Final[Path] = Path('.last_run_status.json')
+
+VERSION_DIR_PATTERN: Final[re.compile] = re.compile(r'^\d+(\.\d+)*$')
+MODULE_PATTERN: Final[re.compile] = re.compile(r"^\s*module\s+([\w.-]+)", re.IGNORECASE | re.MULTILINE)
+TABLE_CONTENT_PATTERN: Final[re.compile] = re.compile(r"=\s*\{(?P<content>[\s\S]*)\}")
+TRANSLATION_LINE_PATTERN: Final[re.compile] = re.compile(r"^\s*([\w.-]+)\s*=\s*.+,?\s*$", re.MULTILINE)
+TRANSLATION_VALUE_PATTERN: Final[re.compile] = re.compile(r"=\s*\"((?:[^\"\\]|\\.)*)\"", re.DOTALL)
+ITEM_PATTERN: Final[re.compile] = re.compile(r"item\s+([\w-]+)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
+RECIPE_PATTERN: Final[re.compile] = re.compile(r"(?:recipe|craftRecipe)\s+(.*?)\s*\{", re.MULTILINE | re.IGNORECASE)
+DISPLAY_NAME_PATTERN: Final[re.compile] = re.compile(r"DisplayName\s*=\s*(.*?)(?:,|\n|$)")
+RECIPE_FORMAT_PATTERN_1: Final[re.compile] = re.compile(r'([a-z\d])([A-Z])')
+RECIPE_FORMAT_PATTERN_2: Final[re.compile] = re.compile(r'([A-Z]+)([A-Z][a-z])')
+
+class Config:
+    def __init__(self):
+        parser = configparser.ConfigParser()
+        if not CONFIG_FILE.is_file():
+            raise FileNotFoundError(f"错误：配置文件 '{CONFIG_FILE}' 不存在。请根据模板创建。")
+        parser.read(CONFIG_FILE, encoding='utf-8')
+        try:
+            self.TARGET_PATH = Path(parser.get('Paths', 'target_path'))
+            self.COMPLETED_PATH = Path(parser.get('Paths', 'completed_path'))
+            self.OUTPUT_PARENT_PATH = Path(parser.get('Paths', 'output_parent_path'))
+            self.PRIORITY_LANGUAGE = parser.get('Settings', 'priority_language')
+            self.BASE_LANGUAGE = parser.get('Settings', 'base_language')
+            self.TRANSLATION_FILE_EXT = parser.get('Settings', 'translation_file_ext')
+            self.SCRIPTS_FILE_EXT = parser.get('Settings', 'scripts_file_ext')
+            self.OUTPUT_FILENAME = parser.get('Output', 'output_filename')
+            self.EN_TODO_FILENAME = parser.get('Output', 'en_todo_filename')
+            self.COMPLETED_FILENAME = parser.get('Output', 'completed_filename')
+            self.CN_ONLY_FILENAME = parser.get('Output', 'cn_only_filename')
+            self.CN_OUTPUT_FILENAME = parser.get('Output', 'cn_output_filename')
+            self.EN_OUTPUT_FILENAME = parser.get('Output', 'en_output_filename')
+            self.LOG_FILENAME_TPL = parser.get('Output', 'log_filename_tpl')
+            self.UPDATE_LOG_FILENAME = parser.get('Output', 'update_log_filename')
+            self.ITEM_PREFIX_TPL = parser.get('Prefixes', 'item_prefix_tpl')
+            self.RECIPE_PREFIX = parser.get('Prefixes', 'recipe_prefix')
+        except (configparser.NoSectionError, configparser.NoOptionError) as e:
+            raise ValueError(f"错误：配置文件 '{CONFIG_FILE}' 中缺少必要的配置项: {e}")
+
+def find_case_insensitive_dir(parent_path, target_dir_name):
+    if not parent_path or not parent_path.is_dir(): return None
+    for entry in parent_path.iterdir():
+        if entry.is_dir() and entry.name.lower() == str(target_dir_name).lower():
+            return entry
+    return None
+
+def find_versioned_dir(parent_path):
+    if not parent_path or not parent_path.is_dir(): return None
+    version_dirs = [d for d in parent_path.iterdir() if d.is_dir() and VERSION_DIR_PATTERN.match(d.name)]
+    if not version_dirs: return None
+    highest_version_dir = sorted(version_dirs, key=lambda v: tuple(map(int, v.name.split('.'))), reverse=True)[0]
+    return highest_version_dir
+
+def find_active_media_path(mod_root_path):
+    logging.info(f"\n--- 正在为 '{mod_root_path.name}' 动态查找 'media' 文件夹 ---")
+    version_dir = find_versioned_dir(mod_root_path)
+    if version_dir:
+        logging.info(f"  -> 发现版本目录: {version_dir.name}")
+        media_in_version = find_case_insensitive_dir(version_dir, 'media')
+        if media_in_version:
+            logging.info(f"  --> 成功找到！将使用此路径进行处理: {media_in_version}")
+            return media_in_version
+    paths_to_check = [
+        find_case_insensitive_dir(mod_root_path, 'media'),
+        find_case_insensitive_dir(find_case_insensitive_dir(mod_root_path, 'common'), 'media')]
+    for path in paths_to_check:
+        if path and path.is_dir():
+            logging.info(f"  --> 成功找到！将使用此路径进行处理: {path}")
+            return path
+    logging.warning("  --> 未能在任何优先路径中找到 'media' 文件夹。")
+    return None
+
+def extract_item_display_names(text_content, prefix):
+    results = {}
+    for item_match in ITEM_PATTERN.finditer(text_content):
+        item_name, item_content = item_match.groups()
+        display_name_match = DISPLAY_NAME_PATTERN.search(item_content)
+        if display_name_match:
+            display_name_raw = display_name_match.group(1).strip()
+            display_name_escaped = display_name_raw.replace('"', '\\"')
+            key = f'{prefix}.{item_name}'; line = f'{key} = "{display_name_escaped}",'
+            results[key] = line
+    return results
+
+def format_recipe_name(name):
+    parts = name.split('.'); formatted_parts = []
+    for part in parts:
+        s1 = RECIPE_FORMAT_PATTERN_1.sub(r'\1 \2', part)
+        s2 = RECIPE_FORMAT_PATTERN_2.sub(r'\1 \2', s1)
+        formatted_parts.append(s2)
+    return ". ".join(formatted_parts)
+
+def extract_recipe_names(text_content, config):
+    results = {}
+    for recipe_match in RECIPE_PATTERN.finditer(text_content):
+        original_name = recipe_match.group(1).strip()
+        friendly_name = format_recipe_name(original_name)
+        modified_name = original_name.replace(' ', '_')
+        key = f"{config.RECIPE_PREFIX}_{modified_name}"; line = f'{key} = "{friendly_name}",'
+        results[key] = line
+    return results
+
+def get_translations_as_dict(file_path_or_dir, config):
+    if isinstance(file_path_or_dir, Path) and file_path_or_dir.is_dir():
+        all_translations = {}
+        logging.info(f"  -> 扫描目录: {file_path_or_dir}")
+        for file_path in sorted(file_path_or_dir.glob(f"*{config.TRANSLATION_FILE_EXT}")):
+            all_translations.update(get_translations_as_dict(file_path, config))
+        return all_translations
+    translations_dict = {}
+    if not file_path_or_dir or not file_path_or_dir.is_file():
+        logging.warning(f"  -> 警告：翻译文件 '{file_path_or_dir}' 无效或不存在，将返回空。")
+        return translations_dict
+    
+    keys_found_in_file = 0
+    try:
+        content = file_path_or_dir.read_text(encoding='utf-8')
+        table_content_match = TABLE_CONTENT_PATTERN.search(content)
+        content_to_parse = table_content_match.group('content') if table_content_match else content
+        for match in TRANSLATION_LINE_PATTERN.finditer(content_to_parse):
+            key, line = match.group(1).strip(), match.group(0).strip()
+            if line.endswith("= {"): continue
+            if not line.endswith(','): line += ","
+            translations_dict[key] = line
+            keys_found_in_file += 1
+    except Exception as e:
+        logging.error(f"    处理文件 {file_path_or_dir.name} 时发生错误: {e}")
+    logging.info(f"     -> 在 '{file_path_or_dir.name}' 中找到 {keys_found_in_file} 个键。")
+    return translations_dict
+
+def extract_value_from_line(line):
+    match = TRANSLATION_VALUE_PATTERN.search(line)
+    return match.group(1) if match else None
+
+def process_single_mod(mod_root_path, config):
+    active_media_path = find_active_media_path(mod_root_path)
+    if not active_media_path:
+        return {}, {}
+    scripts_dir = find_case_insensitive_dir(active_media_path, "scripts")
+    translate_root_dir = find_case_insensitive_dir(active_media_path / "lua" / "shared", "Translate")
+    base_lang_dir = find_case_insensitive_dir(translate_root_dir, config.BASE_LANGUAGE)
+    priority_lang_dir = find_case_insensitive_dir(translate_root_dir, config.PRIORITY_LANGUAGE)
+
+    logging.info(f"\n--- 预加载 {config.BASE_LANGUAGE} (L1) 数据 ---")
+    en_data_raw = get_translations_as_dict(base_lang_dir, config)
+    local_known_en_keys = set(en_data_raw.keys())
+    logging.info(f"预加载完成: 找到 {len(local_known_en_keys)} 个本地 {config.BASE_LANGUAGE} 键。")
+
+    logging.info(f"\n--- 阶段 1: 扫描 Scripts (L0) ---")
+    generated_data = {}
+    if scripts_dir and scripts_dir.is_dir():
+        for file_path in sorted(scripts_dir.rglob(f"*{config.SCRIPTS_FILE_EXT}")):
+            logging.info(f"  -> 处理: {file_path.relative_to(scripts_dir)}")
+            new_items, new_recipes = 0, 0
+            try:
+                content = file_path.read_text(encoding='utf-8')
+                module_match = MODULE_PATTERN.search(content)
+                module_name = module_match.group(1).strip() if module_match else "Base"
+                item_prefix = config.ITEM_PREFIX_TPL.format(module_name=module_name)
+                for key, line in extract_item_display_names(content, item_prefix).items():
+                    if key not in local_known_en_keys: generated_data[key] = line; new_items += 1
+                for key, line in extract_recipe_names(content, config).items():
+                    if key not in local_known_en_keys: generated_data[key] = line; new_recipes += 1
+            except Exception as e: logging.error(f"    处理文件 {file_path.name} 时发生错误: {e}")
+            if new_items or new_recipes:
+                log_parts = []
+                if new_items: log_parts.append(f"{new_items} 个 Item")
+                if new_recipes: log_parts.append(f"{new_recipes} 个 Recipe")
+                logging.info(f"     -> 新增: " + ", ".join(log_parts))
+    else: logging.warning(f"  -> 警告：未找到 Scripts 目录，跳过。")
+    logging.info(f"阶段 1 完成: 从 scripts 新生成了 {len(generated_data)} 条数据。")
+    
+    en_base_data = {**generated_data, **en_data_raw}
+    logging.info(f"\n--- 阶段 2: 合并 L0 与 L1 后，纯净英文基准总计: {len(en_base_data)} 条数据。---")
+
+    cn_base_data = get_translations_as_dict(priority_lang_dir, config)
+    logging.info(f"\n--- 阶段 3: 从 {config.PRIORITY_LANGUAGE} 目录加载了 {len(cn_base_data)} 条数据。---")
+    
+    return en_base_data, cn_base_data
+
+def setup_logger(log_file_path):
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
+    logging.basicConfig(level=logging.INFO, format='%(message)s',
+        handlers=[logging.FileHandler(log_file_path, mode='w', encoding='utf-8'), logging.StreamHandler()])
+
+def write_output_file(path, data):
+    path.write_text("\n".join(data[k] for k in sorted(data.keys())), encoding='utf-8')
+
+def load_status():
+    if STATUS_FILE.is_file():
+        try:
+            return json.loads(STATUS_FILE.read_text(encoding='utf-8'))
+        except json.JSONDecodeError:
+            return {}
+    return {}
+
+def save_status(status_data):
+    STATUS_FILE.write_text(json.dumps(status_data, indent=2), encoding='utf-8')
+
+def main():
+    try:
+        cfg = Config()
+    except (FileNotFoundError, ValueError) as e:
+        logging.error(e)
+        return
+
+    if not cfg.TARGET_PATH.is_dir():
+        logging.error(f"错误：指定的目标路径不存在: {cfg.TARGET_PATH}")
+        return
+
+    run_status = load_status()
+    update_log = []
+
+    completed_path = cfg.COMPLETED_PATH
+    completed_path.mkdir(exist_ok=True)
+    
+    mods_to_process = []
+    if cfg.TARGET_PATH.name == 'mods':
+        mods_to_process.append(cfg.TARGET_PATH.parent)
+    else:
+        try:
+            lines = ID_LIST_FILE.read_text(encoding='utf-8').splitlines()
+            mod_ids_to_process = {line.strip() for line in lines if line.strip().isdigit()}
+            logging.info(f"成功加载 {ID_LIST_FINE} ,将处理 {len(mod_ids_to_process)} 个Mod。")
+            for mod_id in sorted(list(mod_ids_to_process)):
+                mod_id_path = cfg.TARGET_PATH / mod_id
+                if mod_id_path.is_dir(): mods_to_process.append(mod_id_path)
+                else: logging.warning(f"\n警告：在 {cfg.TARGET_PATH} 中未找到 ID 为 {mod_id} 的文件夹，已跳过。")
+        except FileNotFoundError:
+            logging.error(f"错误：未找到 {ID_LIST_FILE} 文件。请在列表模式下提供此文件。")
+            return
+
+    for mod_id_path in mods_to_process:
+        mods_parent_path = mod_id_path / "mods"
+        if not mods_parent_path.is_dir(): continue
+        sub_mods = sorted([d for d in mods_parent_path.iterdir() if d.is_dir()])
+        if not sub_mods: continue
+        
+        main_mod_name = sub_mods[0].name.replace(" ", "_")
+        mod_id = mod_id_path.name
+        output_dir_name = f"{main_mod_name}_{mod_id}"
+        
+        output_parent = cfg.OUTPUT_PARENT_PATH
+        output_parent.mkdir(exist_ok=True)
+        output_dir = output_parent / output_dir_name
+        output_dir.mkdir(exist_ok=True)
+        logs_dir = output_parent / "logs"
+        logs_dir.mkdir(exist_ok=True)
+        
+        log_filename = cfg.LOG_FILENAME_TPL.format(mod_name=main_mod_name, mod_id=mod_id)
+        setup_logger(logs_dir / log_filename)
+        
+        logging.info(f"\n\n{'='*25} 开始处理 Workshop ID: {mod_id} ({main_mod_name}) {'='*25}")
+        
+        completed_mod_path = completed_path / output_dir_name
+        completed_mod_path.mkdir(exist_ok=True) 
+        completed_todo_file = completed_mod_path / cfg.COMPLETED_FILENAME
+        logging.info(f"\n--- 正在检查已完成的翻译于: {completed_todo_file} ---")
+        completed_todo_data = get_translations_as_dict(completed_todo_file, cfg)
+        completed_keys = set(completed_todo_data.keys())
+
+        workshop_en_base, workshop_cn_base = {}, {}
+        global_known_keys_en, global_known_keys_cn = set(), set()
+
+        for sub_mod_path in sub_mods:
+            logging.info(f"\n-------------------- 处理子模组: {sub_mod_path.name} --------------------")
+            en_raw, cn_raw = process_single_mod(sub_mod_path, cfg)
+            for key, val in en_raw.items():
+                if key not in global_known_keys_en: workshop_en_base[key] = val
+            for key, val in cn_raw.items():
+                if key not in global_known_keys_cn: workshop_cn_base[key] = val
+            global_known_keys_en.update(en_raw.keys())
+            global_known_keys_cn.update(cn_raw.keys())
+        
+        final_output = {**workshop_en_base, **workshop_cn_base}
+        en_todo_list, cn_only_list = {}, {}
+        en_keys, cn_keys = set(workshop_en_base.keys()), set(workshop_cn_base.keys())
+        current_todo_list = {}
+        for key, en_line in workshop_en_base.items():
+            if key in cn_keys:
+                cn_line = workshop_cn_base[key]
+                en_val, cn_val = extract_value_from_line(en_line), extract_value_from_line(cn_line)
+                if en_val is not None and en_val == cn_val:
+                    current_todo_list[key] = en_line
+            else:
+                current_todo_list[key] = en_line
+        for key, line in current_todo_list.items():
+            if key not in completed_keys:
+                en_todo_list[key] = line
+        for key, cn_line in workshop_cn_base.items():
+            if key not in en_keys:
+                cn_only_list[key] = cn_line
+
+        logging.info(f"\n--- 正在为 Mod '{main_mod_name}' 生成输出文件 ---")
+        logging.info(f"    - 最终合并 (output.txt): {len(final_output)} 条")
+        logging.info(f"    - 纯净英文 (EN_output.txt): {len(workshop_en_base)} 条")
+        logging.info(f"    - 纯净中文 (CN_output.txt): {len(workshop_cn_base)} 条")
+        logging.info(f"    - 英文待办 (en_todo.txt): {len(en_todo_list)} 条 (增量)")
+        logging.info(f"    - 中文独有 (cn_only.txt): {len(cn_only_list)} 条 (增量)")
+        
+        try:
+            write_output_file(output_dir / cfg.OUTPUT_FILENAME, final_output)
+            write_output_file(output_dir / cfg.EN_OUTPUT_FILENAME, workshop_en_base)
+            write_output_file(output_dir / cfg.CN_OUTPUT_FILENAME, workshop_cn_base)
+            write_output_file(output_dir / cfg.EN_TODO_FILENAME, en_todo_list)
+            write_output_file(output_dir / cfg.CN_ONLY_FILENAME, cn_only_list)
+            
+            last_status = run_status.get(output_dir_name, {"todo": -1, "only": -1})
+            new_todo_count, new_only_count = len(en_todo_list), len(cn_only_list)
+            
+            if (en_todo_list or cn_only_list) and (new_todo_count != last_status.get("todo") or new_only_count != last_status.get("only")):
+                log_msg = f"检测到更新：新增 {new_todo_count} 条待办，{new_only_count} 条待审核。"
+                update_log.append(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] - {output_dir_name}: {log_msg}")
+            
+            run_status[output_dir_name] = {"todo": new_todo_count, "only": new_only_count}
+
+            logging.info(f"\n处理成功！所有输出文件已保存在 '{output_dir_name}' 文件夹中。")
+        except PermissionError:
+            logging.error(f"\n错误：权限不足，无法写入文件到 '{output_dir}'。请检查文件夹权限。")
+        except Exception as e:
+            logging.error(f"写入输出文件时发生致命错误: {e}")
+
+    save_status(run_status)
+    if update_log:
+        update_log_path = Path.cwd() / cfg.UPDATE_LOG_FILENAME
+        with open(update_log_path, 'a', encoding='utf-8') as f:
+            if update_log_path.stat().st_size == 0:
+                f.write("\n".join(update_log))
+            else:
+                f.write("\n" + "\n".join(update_log))
+        print(f"\n更新日志已记录到 {update_log_path}")
+
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO, format='%(message)s')
+    main()
