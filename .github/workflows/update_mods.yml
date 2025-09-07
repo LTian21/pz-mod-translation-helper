@@ -45,7 +45,7 @@ jobs:
         run: |
           echo "根据更新检查结果，开始下载..."
           MODS_TO_DOWNLOAD='${{ steps.check_updates.outputs.mods_to_download }}'
-          TIMESTAMP_FILE="mod_timestamps.json"
+          TIMESTAMP_FILE="data/mod_timestamps.json"
           if [ ! -f "$TIMESTAMP_FILE" ]; then echo "{}" > "$TIMESTAMP_FILE"; fi
           
           # 使用jq来解析Python脚本输出的JSON数组
@@ -84,7 +84,7 @@ jobs:
           name: full-mods-and-timestamp
           path: |
             temp_workshop_full/
-            mod_timestamps.json
+            data/mod_timestamps.json
 
 
   process_and_commit:
@@ -115,8 +115,8 @@ jobs:
 
       - name: Prepare Mods for Processing
         run: |
-          mkdir -p workshop_content
-          mv temp_workshop_full/* ./workshop_content/
+          mkdir -p data/workshop_content
+          mv temp_workshop_full/* ./data/workshop_content/
 
       - name: Run Main Translation Extractor Script
         env:
@@ -127,13 +127,13 @@ jobs:
         run: |
           echo "处理完成，开始修剪mod以提交..."
           mkdir -p pruned_staging
-          find ./workshop_content -mindepth 1 -maxdepth 1 -type d | while read MOD_DIR; do
+          find ./data/workshop_content -mindepth 1 -maxdepth 1 -type d | while read MOD_DIR; do
             STAGING_DIR="pruned_staging/$(basename "$MOD_DIR")"
             mkdir -p "$STAGING_DIR"
             rsync -a --prune-empty-dirs --include='*/' --include='**/media/scripts/***' --include='**/media/lua/shared/Translate/***' --exclude='*' "$MOD_DIR/" "$STAGING_DIR/"
           done
-          rm -rf ./workshop_content
-          mv pruned_staging ./workshop_content
+          rm -rf ./data/workshop_content
+          mv pruned_staging ./data/workshop_content
 
       - name: Commit and Push Changes
         run: |

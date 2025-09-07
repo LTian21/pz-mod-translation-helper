@@ -8,7 +8,7 @@ from typing import Final
 
 CONFIG_FILE: Final[Path] = Path('config.ini')
 ID_LIST_FILE: Final[Path] = Path('id_list.txt')
-STATUS_FILE: Final[Path] = Path('.cache/.last_run_status.json')
+STATUS_FILE: Final[Path] = Path('data/.cache/.last_run_status.json')
 
 VERSION_DIR_PATTERN: Final[re.compile] = re.compile(r'^\d+(\.\d+)*$')
 MODULE_PATTERN: Final[re.compile] = re.compile(r"^\s*module\s+([\w.-]+)", re.IGNORECASE | re.MULTILINE)
@@ -343,6 +343,8 @@ def main():
 
     save_status(run_status)
     if update_log:
+        data_dir = Path('data')
+        data_dir.mkdir(exist_ok=True)
         update_log_path = Path.cwd() / cfg.UPDATE_LOG_FILENAME
         with open(update_log_path, 'a', encoding='utf-8') as f:
             if update_log_path.stat().st_size == 0:

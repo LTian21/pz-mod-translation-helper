@@ -14,6 +14,8 @@ def main():
         print(f"错误: 文件 {id_list_file} 不存在！")
         exit(1)
 
+    data_dir = Path("data")
+    data_dir.mkdir(exist_ok=True)
     timestamp_file = Path("mod_timestamps.json")
     if timestamp_file.exists():
         old_stamps = json.loads(timestamp_file.read_text(encoding='utf-8'))
