@@ -2,13 +2,15 @@ import configparser
 import json
 import logging
 import re
+import subprocess
+import io
 from datetime import datetime
 from pathlib import Path
 from typing import Final
 
 CONFIG_FILE: Final[Path] = Path('config.ini')
 ID_LIST_FILE: Final[Path] = Path('id_list.txt')
-STATUS_FILE: Final[Path] = Path('.cache/.last_run_status.json')
+STATUS_FILE: Final[Path] = Path('data/.cache/.last_run_status.json')
 
 VERSION_DIR_PATTERN: Final[re.compile] = re.compile(r'^\d+(\.\d+)*$')
 MODULE_PATTERN: Final[re.compile] = re.compile(r"^\s*module\s+([\w.-]+)", re.IGNORECASE | re.MULTILINE)
@@ -47,6 +49,56 @@ class Config:
             self.RECIPE_PREFIX = parser.get('Prefixes', 'recipe_prefix')
         except (configparser.NoSectionError, configparser.NoOptionError) as e:
             raise ValueError(f"错误：配置文件 '{CONFIG_FILE}' 中缺少必要的配置项: {e}")
+
+def get_old_file_content(file_path: Path) -> str | None:
+    git_path = file_path.as_posix()
+    command = ["git", "show", f"HEAD:{git_path}"]
+    
+    logging.info(f"    -> 正在尝试从 Git 历史记录中获取旧版本: {git_path}")
+    
+    try:
+        result = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+            check=False
+        )
+        
+        if result.returncode == 0:
+            logging.info("      --> 成功找到旧版本。")
+            return result.stdout
+        else:
+            logging.info("      --> 在 Git 历史记录中未找到该文件，视为全新。")
+            return None
+            
+    except FileNotFoundError:
+        logging.warning("    -> 警告: 'git' 命令未找到。无法执行差异化日志记录。")
+        return None
+    except Exception as e:
+        logging.error(f"    -> 获取旧文件时发生未知错误: {e}")
+        return None
+
+def generate_diff_log(mod_name: str, mod_id: str, added_keys: set, removed_keys: set) -> str | None:
+    if not added_keys and not removed_keys:
+        return None
+
+    log_parts = [f"[{mod_name}_{mod_id}] - 内容变更:"]
+    
+    if added_keys:
+        log_parts.append(f"  (+) 新增 {len(added_keys)} 条待办:")
+        for i, key in enumerate(list(added_keys)[:5]):
+            log_parts.append(f"    - {key}")
+        if len(added_keys) > 5:
+            log_parts.append(f"    - ... (及其他 {len(added_keys) - 5} 项)")
+
+    if removed_keys:
+        log_parts.append(f"  (-) 移除 {len(removed_keys)} 条过时条目:")
+        for i, key in enumerate(list(removed_keys)[:5]):
+            log_parts.append(f"    - {key}")
+        if len(removed_keys) > 5:
+            log_parts.append(f"    - ... (及其他 {len(removed_keys) - 5} 项)")
+            
+    return "\n".join(log_parts)
 
 def find_case_insensitive_dir(parent_path, target_dir_name):
     if not parent_path or not parent_path.is_dir(): return None
@@ -326,14 +378,40 @@ def main():
             write_output_file(output_dir / cfg.EN_TODO_FILENAME, en_todo_list)
             write_output_file(output_dir / cfg.CN_ONLY_FILENAME, cn_only_list)
             
-            last_status = run_status.get(output_dir_name, {"todo": -1, "only": -1})
-            new_todo_count, new_only_count = len(en_todo_list), len(cn_only_list)
-            
-            if (en_todo_list or cn_only_list) and (new_todo_count != last_status.get("todo") or new_only_count != last_status.get("only")):
-                log_msg = f"检测到更新：新增 {new_todo_count} 条待办，{new_only_count} 条待审核。"
-                update_log.append(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] - {output_dir_name}: {log_msg}")
-            
-            run_status[output_dir_name] = {"todo": new_todo_count, "only": new_only_count}
+            new_todo_file_path = output_dir / cfg.EN_TODO_FILENAME
+            old_todo_content = get_old_file_content(new_todo_file_path)
+            timestamp = f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}]"
+            if old_todo_content is None:
+                if en_todo_list:
+                    log_msg = (f"{timestamp} - [基线建立] "
+                               f"{main_mod_name}_{mod_id}: 新增 {len(en_todo_list)} 条待办。")
+                    update_log.append(log_msg)
+            else:
+                new_keys = set(en_todo_list.keys())
+                old_keys = set()
+                
+                try:
+                    class StringPath:
+                        def __init__(self, content, name):
+                            self.content = content
+                            self.name = name
+                        def read_text(self, encoding='utf-8'): return self.content
+                        def is_file(self): return True
+                        @property
+                        def parent(self): return Path('.')
+
+                    old_todo_stream_obj = StringPath(old_todo_content, f"{cfg.EN_TODO_FILENAME} (旧版本)")
+                    old_todo_data = get_translations_as_dict(old_todo_stream_obj, cfg)
+                    old_keys = set(old_todo_data.keys())
+                except Exception as e:
+                    logging.warning(f"解析旧版 todo 文件内容时出错: {e}。将视为全新文件处理。")
+                added_keys = new_keys - old_keys
+                removed_keys = old_keys - new_keys
+                
+                diff_log_message = generate_diff_log(main_mod_name, mod_id, added_keys, removed_keys)
+                
+                if diff_log_message:
+                    update_log.append(f"{timestamp}\n{diff_log_message}")
 
             logging.info(f"\n处理成功！所有输出文件已保存在 '{output_dir_name}' 文件夹中。")
         except PermissionError:
@@ -343,6 +421,8 @@ def main():
 
     save_status(run_status)
     if update_log:
+        data_dir = Path('data')
+        data_dir.mkdir(exist_ok=True)
         update_log_path = Path.cwd() / cfg.UPDATE_LOG_FILENAME
         with open(update_log_path, 'a', encoding='utf-8') as f:
             if update_log_path.stat().st_size == 0:
