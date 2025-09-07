@@ -1,0 +1,91 @@
+name: 自动更新、处理并保存Mod翻译
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 4 * * *' # 每天UTC时间凌晨4点运行 (北京时间中午12点)
+
+jobs:
+  update-and-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Python dependencies
+        run: pip install requests
+
+      - name: Setup SteamCMD
+        uses: CyberAndrii/setup-steamcmd@v1
+        
+      - name: Install latest JQ
+        run: |
+          sudo curl -L https://github.com/jqlang/jq/releases/latest/download/jq-linux64 -o /usr/bin/jq
+          sudo chmod +x /usr/bin/jq
+          jq --version
+
+      - name: Smart Check for Mod Updates
+        id: check_updates
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+        run: python scripts/check_updates.py
+
+      - name: Download, Prune, and Prepare Mods
+        if: steps.check_updates.outputs.mods_to_download != '[]' && steps.check_updates.outputs.mods_to_download != ''
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+        run: |
+          echo "根据更新检查结果，开始下载..."
+          MODS_TO_DOWNLOAD='${{ steps.check_updates.outputs.mods_to_download }}'
+          TIMESTAMP_FILE="mod_timestamps.json"
+          if [ ! -f "$TIMESTAMP_FILE" ]; then echo "{}" > "$TIMESTAMP_FILE"; fi
+          
+          # 使用jq来解析Python脚本输出的JSON数组
+          for MOD_ID_CLEANED in $(echo "$MODS_TO_DOWNLOAD" | jq -r '.[]'); do
+            echo "--> [ID: $MOD_ID_CLEANED] 开始下载..."
+            APP_ID="108600" # !!! 请确保这是您游戏的正确 App ID !!!
+            
+            steamcmd +@sSteamCmdForcePlatformType linux +login anonymous +workshop_download_item "$APP_ID" "$MOD_ID_CLEANED" validate +quit
+            DOWNLOADED_MOD_PATH="${HOME}/Steam/steamapps/workshop/content/$APP_ID/$MOD_ID_CLEANED"
+            
+            if [ -d "$DOWNLOADED_MOD_PATH" ]; then
+                DEST_PATH="workshop_content/$MOD_ID_CLEANED"
+                mkdir -p "$DEST_PATH"
+                rsync -a --prune-empty-dirs --include='*/' --include='**/media/scripts/***' --include='**/media/lua/shared/Translate/***' --exclude='*' "$DOWNLOADED_MOD_PATH/" "$DEST_PATH/"
+                
+                # 更新时间戳
+                api_response_single=$(curl -s -d "itemcount=1&publishedfileids[0]=${MOD_ID_CLEANED}" https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/?key=$STEAM_API_KEY)
+                new_timestamp=$(echo "$api_response_single" | jq '.response.publishedfiledetails[0].time_updated')
+                jq --arg id "$MOD_ID_CLEANED" --argjson time "$new_timestamp" '.[$id] = $time' "$TIMESTAMP_FILE" > tmp.$$.json && mv tmp.$$.json "$TIMESTAMP_FILE"
+                
+                echo "    [ID: $MOD_ID_CLEANED] 修剪完成并更新时间戳。"
+            else
+                echo "    警告：[ID: $MOD_ID_CLEANED] 下载失败。"
+            fi
+          done
+
+      - name: Run Main Translation Extractor Script
+        env:
+          TZ: Asia/Shanghai
+        run: python process_mods.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --staged --quiet; then
+            echo "没有检测到任何文件更新，无需提交。"
+          else
+            echo "检测到文件更新，正在提交..."
+            git commit -m "Chore(自动化): 更新Mod并重新生成翻译文件"
+            git push
+          fi
