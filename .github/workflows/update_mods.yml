@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write
 
     steps:
       - name: Checkout Repository
@@ -21,7 +22,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install Python dependencies
-        run: pip install requests
+        run: pip install -r requirements.txt
 
       - name: Setup SteamCMD
         uses: CyberAndrii/setup-steamcmd@v1
@@ -51,9 +52,14 @@ jobs:
           # 使用jq来解析Python脚本输出的JSON数组
           for MOD_ID_CLEANED in $(echo "$MODS_TO_DOWNLOAD" | jq -r '.[]'); do
             echo "--> [ID: $MOD_ID_CLEANED] 开始下载..."
-            APP_ID="108600" # !!! 请确保这是您游戏的正确 App ID !!!
+            APP_ID="108600" # !!! 请确保这是游戏的正确 App ID !!!
             
-            steamcmd +@sSteamCmdForcePlatformType linux +login anonymous +workshop_download_item "$APP_ID" "$MOD_ID_CLEANED" validate +quit
+            for i in {1..3}; do
+              steamcmd +@sSteamCmdForcePlatformType linux +login anonymous +workshop_download_item "$APP_ID" "$MOD_ID_CLEANED" validate +quit && break
+              echo "  下载失败。15秒后重试... (尝试次数 $i of 3)"
+              sleep 15
+            done
+
             DOWNLOADED_MOD_PATH="${HOME}/Steam/steamapps/workshop/content/$APP_ID/$MOD_ID_CLEANED"
             
             if [ -d "$DOWNLOADED_MOD_PATH" ]; then
@@ -89,3 +95,12 @@ jobs:
             git commit -m "Chore(自动化): 更新Mod并重新生成翻译文件"
             git push
           fi
+      - name: Create Issue on Failure
+        if: Failure()
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_RUN_URL: ${{ github.server_url }}/${{ github.Repository }}/actions/runs/${{ github/run.id }}
+        with:
+          filename: .github/issue-template.md
+          update_existing: true
