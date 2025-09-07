@@ -14,19 +14,39 @@ def main():
         print(f"错误: 文件 {id_list_file} 不存在！")
         exit(1)
 
+    data_dir = Path("data")
+    data_dir.mkdir(exist_ok=True)
     timestamp_file = Path("mod_timestamps.json")
     if timestamp_file.exists():
         old_stamps = json.loads(timestamp_file.read_text(encoding='utf-8'))
     else:
         old_stamps = {}
 
-    mod_ids = [line.strip() for line in id_list_file.read_text(encoding='utf-8').splitlines() if line.strip().isdigit()]
+    raw_mod_ids = [line.strip() for line in id_list_file.read_text(encoding='utf-8').splitlines() if line.strip().isdigit()]
+    
+    seen_ids = set()
+    unique_mod_ids = []
+    duplicates = []
+    
+    for mod_id in raw_mod_ids:
+        if mod_id not in seen_ids:
+            seen_ids.add(mod_id)
+            unique_mod_ids.append(mod_id)
+        else:
+            duplicates.append(mod_id)
+            
+    if duplicates:
+        unique_duplicates = sorted(list(set(duplicates)))
+        print(f"警告: 在 id_list.txt 中发现 {len(duplicates)} 个重复的ID。重复项已被自动忽略。")
+        print(f"  -> 重复的ID是: {', '.join(unique_duplicates)}")
+    
+    mod_ids = unique_mod_ids
     if not mod_ids:
         print("ID列表中没有有效的Mod ID。")
         output_to_github([])
         return
 
-    print(f"准备查询 {len(mod_ids)} 个 Mod。")
+    print(f"去重后，准备查询 {len(mod_ids)} 个唯一的 Mod。")
 
     try:
         payload = {

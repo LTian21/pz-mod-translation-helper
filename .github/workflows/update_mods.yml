@@ -4,13 +4,15 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 4 * * *' # 每天UTC时间凌晨4点运行 (北京时间中午12点)
+env:
+  MODS_PER_JOB: 10 # 每个并行任务处理10个Mod
 
 jobs:
-  update-and-commit:
+  setup_jobs:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      issues: write
+    outputs:
+      mods_to_download: ${{ steps.check_updates.outputs.mods_to_download }}
+      mod_groups: ${{ steps.split_list.outputs.groups }}
 
     steps:
       - name: Checkout Repository
@@ -29,7 +31,7 @@ jobs:
         
       - name: Install latest JQ
         run: |
-          sudo curl -L https://github.com/jqlang/jq/releases/latest/download/jq-linux64 -o /usr/bin/jq
+          sudo curl --retry 5 --retry-delay 5 -L https://github.com/jqlang/jq/releases/latest/download/jq-linux64 -o /usr/bin/jq
           sudo chmod +x /usr/bin/jq
           jq --version
 
@@ -39,49 +41,160 @@ jobs:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
         run: python scripts/check_updates.py
 
-      - name: Download, Prune, and Prepare Mods
+      - name: Split Mod List into Groups for Parallel Jobs
         if: steps.check_updates.outputs.mods_to_download != '[]' && steps.check_updates.outputs.mods_to_download != ''
-        env:
-          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+        id: split_list
         run: |
-          echo "根据更新检查结果，开始下载..."
-          MODS_TO_DOWNLOAD='${{ steps.check_updates.outputs.mods_to_download }}'
-          TIMESTAMP_FILE="mod_timestamps.json"
-          if [ ! -f "$TIMESTAMP_FILE" ]; then echo "{}" > "$TIMESTAMP_FILE"; fi
+          {
+            echo 'groups<<EOF'
+            python scripts/split_ids.py '${{ steps.check_updates.outputs.mods_to_download }}' ${{ env.MODS_PER_JOB }}
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+
+
+
+  download_parallel:
+    needs: setup_jobs
+    if: needs.setup_jobs.outputs.mods_to_download != '[]' && needs.setup_jobs.outputs.mods_to_download != ''
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        mod_group: ${{ fromJson(needs.setup_jobs.outputs.mod_groups) }}
+
+    steps:
+      - name: Setup SteamCMD
+        uses: CyberAndrii/setup-steamcmd@v1
+
+      - name: Install latest JQ
+        run: |
+          sudo curl --retry 5 --retry-delay 5 -L https://github.com/jqlang/jq/releases/latest/download/jq-linux64 -o /usr/bin/jq
+          sudo chmod +x /usr/bin/jq
+
+      - name: Download Mod Group (Job ${{ strategy.job-index}})
+        run: |
+          MODS_JSON='${{ toJson(matrix.mod_group) }}'
+          echo "此任务将下载以下Mod: $MODS_JSON"
           
-          # 使用jq来解析Python脚本输出的JSON数组
-          for MOD_ID_CLEANED in $(echo "$MODS_TO_DOWNLOAD" | jq -r '.[]'); do
-            echo "--> [ID: $MOD_ID_CLEANED] 开始下载..."
-            APP_ID="108600" # !!! 请确保这是游戏的正确 App ID !!!
-            
+          for MOD_ID in $(echo "$MODS_JSON" | jq -r '.[]'); do
+            echo "--> [ID: $MOD_ID] 正在下载..."
+            APP_ID="108600"
             for i in {1..3}; do
-              steamcmd +@sSteamCmdForcePlatformType linux +login anonymous +workshop_download_item "$APP_ID" "$MOD_ID_CLEANED" validate +quit && break
-              echo "  下载失败。15秒后重试... (尝试次数 $i of 3)"
+              steamcmd +@sSteamCmdForcePlatformType linux +login anonymous +workshop_download_item "$APP_ID" "$MOD_ID" validate +quit && break
+              echo "    下载失败。15秒后重试... (第 $i/3 次尝试)"
               sleep 15
             done
 
-            DOWNLOADED_MOD_PATH="${HOME}/Steam/steamapps/workshop/content/$APP_ID/$MOD_ID_CLEANED"
-            
+            DOWNLOADED_MOD_PATH="${HOME}/Steam/steamapps/workshop/content/$APP_ID/$MOD_ID"
             if [ -d "$DOWNLOADED_MOD_PATH" ]; then
-                DEST_PATH="workshop_content/$MOD_ID_CLEANED"
+                DEST_PATH="temp_workshop_full/$MOD_ID"
                 mkdir -p "$DEST_PATH"
-                rsync -a --prune-empty-dirs --include='*/' --include='**/media/scripts/***' --include='**/media/lua/shared/Translate/***' --exclude='*' "$DOWNLOADED_MOD_PATH/" "$DEST_PATH/"
-                
-                # 更新时间戳
-                api_response_single=$(curl -s -d "itemcount=1&publishedfileids[0]=${MOD_ID_CLEANED}" https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/?key=$STEAM_API_KEY)
-                new_timestamp=$(echo "$api_response_single" | jq '.response.publishedfiledetails[0].time_updated')
-                jq --arg id "$MOD_ID_CLEANED" --argjson time "$new_timestamp" '.[$id] = $time' "$TIMESTAMP_FILE" > tmp.$$.json && mv tmp.$$.json "$TIMESTAMP_FILE"
-                
-                echo "    [ID: $MOD_ID_CLEANED] 修剪完成并更新时间戳。"
+                rsync -a "$DOWNLOADED_MOD_PATH/" "$DEST_PATH/"
+                echo "    [ID: $MOD_ID] 下载完成。"
             else
-                echo "    警告：[ID: $MOD_ID_CLEANED] 下载失败。"
+                echo "    警告: [ID: $MOD_ID] 3次重试后下载仍然失败。"
             fi
           done
+
+      - name: Upload Mod Group Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-mods-${{ strategy.job-index }}
+          path: temp_workshop_full/
+
+  process_and_commit:
+    needs: [setup_jobs, download_parallel]
+    if: needs.setup_jobs.outputs.mods_to_download != '[]' && needs.setup_jobs.outputs.mods_to_download != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install JQ using APT
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+          
+      - name: Download all Mod Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: full-mods-*
+          path: temp_artifacts/
+          merge-multiple: true
+
+      - name: Merge and Prepare Mods for Processing
+        run: |
+          rm -rf ./data/workshop_content
+          mkdir -p ./data/workshop_content
+          find temp_artifacts/ -mindepth 1 -maxdepth 1 -type d -exec mv {} ./data/workshop_content/ \;
+
+      - name: Update Timestamps After Successful Download
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+        run: |
+          MODS_DOWNLOADED='${{ needs.setup_jobs.outputs.mods_to_download }}'
+          TIMESTAMP_FILE="data/mod_timestamps.json"
+
+          if [ -z "$MODS_DOWNLOADED" ] || [ "$MODS_DOWNLOADED" = "[]" ]; then
+            echo "没有需要更新时间戳的Mod。"
+            exit 0
+          fi
+          
+          if [ ! -f "$TIMESTAMP_FILE" ]; then echo "{}" > "$TIMESTAMP_FILE"; fi
+          
+          POST_DATA=$(echo "$MODS_DOWNLOADED" | jq -r 'keys[] as $i | "publishedfileids[\($i)]=\(.[$i])"' | paste -sd '&')
+          ITEM_COUNT=$(echo "$MODS_DOWNLOADED" | jq 'length')
+          
+          echo "正在单次API调用中获取 $ITEM_COUNT 个Mod的详情..."
+          API_RESPONSE_BATCH=$(curl --retry 5 --retry-delay 5 --retry-all-errors -s \
+            -X POST "https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/" \
+            -d "itemcount=$ITEM_COUNT" \
+            -d "$POST_DATA")
+
+          if ! echo "$API_RESPONSE_BATCH" | jq -e '.response.publishedfiledetails' > /dev/null; then
+             echo "::error::Steam API调用失败或返回无效数据。响应内容如下:"
+             echo "$API_RESPONSE_BATCH"
+             exit 1
+          fi
+
+          jq -s '
+            .[0] as $api_data | .[1] as $current_timestamps |
+            ($api_data.response.publishedfiledetails | map({(.publishedfileid): .time_updated}) | add) as $new_timestamps |
+            $current_timestamps + $new_timestamps
+          ' <(echo "$API_RESPONSE_BATCH") "$TIMESTAMP_FILE" > tmp.$$.json && mv tmp.$$.json "$TIMESTAMP_FILE"
+    
+          echo "所有Mod的时间戳已通过一次性调用更新成功。"
+ 
 
       - name: Run Main Translation Extractor Script
         env:
           TZ: Asia/Shanghai
         run: python process_mods.py
+
+      - name: Prune Mods for Repository
+        run: |
+          echo "处理完成，开始修剪mod以提交..."
+          mkdir -p pruned_staging
+          find ./data/workshop_content -mindepth 1 -maxdepth 1 -type d | while read MOD_DIR; do
+            STAGING_DIR="pruned_staging/$(basename "$MOD_DIR")"
+            mkdir -p "$STAGING_DIR"
+            rsync -a --prune-empty-dirs --include='*/' --include='**/media/scripts/***' --include='**/media/lua/shared/Translate/***' --exclude='*' "$MOD_DIR/" "$STAGING_DIR/"
+          done
+          rm -rf ./data/workshop_content
+          mv pruned_staging ./data/workshop_content
+          echo "Mod修剪完成。"
 
       - name: Commit and Push Changes
         run: |
@@ -95,12 +208,14 @@ jobs:
             git commit -m "Chore(自动化): 更新Mod并重新生成翻译文件"
             git push
           fi
+
+          
       - name: Create Issue on Failure
         if: failure()
         uses: JasonEtco/create-an-issue@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WORKFLOW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run.id }}
+          WORKFLOW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         with:
-          filename: .github/issue-template.md
+          filename: .github/ISSUE_TEMPLATE/workflow-failure-report.yml
           update_existing: true
