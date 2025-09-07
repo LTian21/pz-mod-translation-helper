@@ -8,7 +8,7 @@ from typing import Final
 
 CONFIG_FILE: Final[Path] = Path('config.ini')
 ID_LIST_FILE: Final[Path] = Path('id_list.txt')
-STATUS_FILE: Final[Path] = Path('.last_run_status.json')
+STATUS_FILE: Final[Path] = Path('.cache/.last_run_status.json')
 
 VERSION_DIR_PATTERN: Final[re.compile] = re.compile(r'^\d+(\.\d+)*$')
 MODULE_PATTERN: Final[re.compile] = re.compile(r"^\s*module\s+([\w.-]+)", re.IGNORECASE | re.MULTILINE)
@@ -119,8 +119,16 @@ def get_translations_as_dict(file_path_or_dir, config):
             all_translations.update(get_translations_as_dict(file_path, config))
         return all_translations
     translations_dict = {}
-    if not file_path_or_dir or not file_path_or_dir.is_file():
-        logging.warning(f"  -> 警告：翻译文件 '{file_path_or_dir}' 无效或不存在，将返回空。")
+    if not file_path_or_dir:
+        return translations_dict
+
+    if not file_path_or_dir.is_file():
+        logging.info(f"  -> 文件 '{file_path_or_dir.name}' 在目标位置不存在，将自动创建。")
+        try:
+            file_path_or_dir.parent.mkdir(parents=True, exist_ok=True)
+            file_path_or_dir.write_text("", encoding='utf-8')
+        except Exception as e:
+            logging.error(f"  -> 错误：自动创建文件 '{file_path_or_dir}' 失败: {e}")        
         return translations_dict
     
     keys_found_in_file = 0
@@ -207,6 +215,7 @@ def load_status():
     return {}
 
 def save_status(status_data):
+    STATUS_FILE.parent.mkdir(parents=True, exist_ok=True)
     STATUS_FILE.write_text(json.dumps(status_data, indent=2), encoding='utf-8')
 
 def main():
@@ -233,7 +242,7 @@ def main():
         try:
             lines = ID_LIST_FILE.read_text(encoding='utf-8').splitlines()
             mod_ids_to_process = {line.strip() for line in lines if line.strip().isdigit()}
-            logging.info(f"成功加载 {ID_LIST_FINE} ,将处理 {len(mod_ids_to_process)} 个Mod。")
+            logging.info(f"成功加载 {ID_LIST_FILE} ,将处理 {len(mod_ids_to_process)} 个Mod。")
             for mod_id in sorted(list(mod_ids_to_process)):
                 mod_id_path = cfg.TARGET_PATH / mod_id
                 if mod_id_path.is_dir(): mods_to_process.append(mod_id_path)
