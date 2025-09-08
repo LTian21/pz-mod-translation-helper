@@ -119,17 +119,28 @@ def find_active_media_path(mod_root_path):
     version_dir = find_versioned_dir(mod_root_path)
     if version_dir:
         logging.info(f"  -> 发现版本目录: {version_dir.name}")
-        media_in_version = find_case_insensitive_dir(version_dir, 'media')
-        if media_in_version:
-            logging.info(f"  --> 成功找到！将使用此路径进行处理: {media_in_version}")
-            return media_in_version
-    paths_to_check = [
+
+    common_dir = find_case_insensitive_dir(mod_root_path, 'common')
+
+    potential_media_paths = [
+        find_case_insensitive_dir(version_dir, 'media') if version_dir else None,
         find_case_insensitive_dir(mod_root_path, 'media'),
-        find_case_insensitive_dir(find_case_insensitive_dir(mod_root_path, 'common'), 'media')]
-    for path in paths_to_check:
-        if path and path.is_dir():
-            logging.info(f"  --> 成功找到！将使用此路径进行处理: {path}")
-            return path
+        find_case_insensitive_dir(common_dir, 'media') if common_dir else None
+    ]
+
+    for media_path in potential_media_paths:
+        if media_path and media_path.is_dir():
+            logging.info(f"  -> 正在检查路径的有效性: {media_path}")
+
+            has_scripts = find_case_insensitive_dir(media_path, "scripts")
+            has_translate = find_case_insensitive_dir(media_path / "lua" / "shared", "Translate")
+
+            if has_scripts or has_translate:
+                logging.info(f"  --> 路径有效！将使用此路径进行处理: {media_path}")
+                return media_path
+            else:
+                logging.info(f"  --> 路径无效 (缺少 scripts 或 Translate)，继续查找...")
+
     logging.warning("  --> 未能在任何优先路径中找到 'media' 文件夹。")
     return None
 
