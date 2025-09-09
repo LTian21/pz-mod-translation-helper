@@ -11,6 +11,7 @@ on:
     - cron: '0 4 * * *' # 每天UTC时间凌晨4点运行 (北京时间中午12点)
 env:
   MODS_PER_JOB: 10 # 每个并行任务处理10个Mod
+  TODAY: ${{ format('{0:YYYY-MM-DD}', github.event.schedule || github.event.inputs.manual_trigger_time || github.run_started_at) }}
 
 jobs:
   setup_jobs:
@@ -43,9 +44,9 @@ jobs:
 
       - name: Handle Manual Trigger Override
         id: manual_check
-        if: github.event_input.mod_id_override != ''
+        if: github.event.inputs.mod_id_override != ''
         run: |
-          MOD_IDS_STRING='${{ github.event_input.mod_id_override }}'
+          MOD_IDS_STRING='${{ github.event.inputs.mod_id_override }}'
           echo "手动触发模式: 准备处理以下 Mod ID: $MOD_IDS_STRING"
           JSON_ARRAY="[\"$(echo "$MOD_IDS_STRING" | tr -d ' ' | sed 's/,/\",\"/g')\"]"
           echo "转换后的JSON数组: $JSON_ARRAY"
@@ -137,6 +138,7 @@ jobs:
     permissions:
       contents: write
       issues: write
+      pull-requests: write
 
     steps:
       - name: Checkout Repository
@@ -245,20 +247,49 @@ jobs:
           mv pruned_staging ./data/workshop_content
           echo "Mod修剪完成。"
 
-      - name: Commit and Push Changes
+      - name: Prepare Pull Request Body
+        id: prep_pr
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -A
-          if git diff --staged --quiet; then
-            echo "没有检测到任何文件更新，无需提交。"
-          else
-            echo "检测到文件更新，正在提交..."
-            git commit -m "Chore(自动化): 更新Mod并重新生成翻译文件"
-            git push
-          fi
-
+          MODS_JSON='${{ needs.setup_jobs.outputs.mods_to_download }}'
           
+          # 检查是否有需要更新的Mod
+          if [ -z "$MODS_JSON" ] || [ "$MODS_JSON" = "[]" ]; then
+            echo "没有需要更新的Mod，无需创建PR。"
+            # 设置一个输出，让下一步可以跳过
+            echo "should_create_pr=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          # 如果有更新，则生成PR的描述内容
+          echo "should_create_pr=true" >> $GITHUB_OUTPUT
+          
+          # PR描述文件的路径
+          PR_BODY_FILE="pr_body.md"
+          echo "### 🤖 自动化Mod更新报告" > "$PR_BODY_FILE"
+          echo "" >> "$PR_BODY_FILE"
+          echo "检测到以下Mod有更新，相关翻译文件已自动生成：" >> "$PR_BODY_FILE"
+          echo "" >> "$PR_BODY_FILE"
+          
+          # 使用jq将JSON数组转换为Markdown列表
+          echo "$MODS_JSON" | jq -r '.[] | "- `\(.)`"' >> "$PR_BODY_FILE"
+          
+          echo "" >> "$PR_BODY_FILE"
+          echo "---" >> "$PR_BODY_FILE"
+          echo "请审核文件变更，确认无误后即可合并此拉取请求。" >> "$PR_BODY_FILE"
+          echo "工作流运行日志: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> "$PR_BODY_FILE"
+          
+      - name: Create Pull Request
+        if: steps.prep_pr.outputs.should_create_pr == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Chore(自动化): 更新Mod并重新生成翻译文件"
+          branch: bot/auto-update-${{ github.run_id }}          
+          title: '🤖 自动化Mod更新 [${{ env.TODAY }}]'
+          body-path: "pr_body.md"
+          
+          labels: "automated-update, bot"
+          reviewers: ${{ github.actor }} 
+
       - name: Create Issue on Failure
         if: failure()
         uses: JasonEtco/create-an-issue@v2
