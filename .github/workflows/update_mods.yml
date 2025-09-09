@@ -40,7 +40,7 @@ jobs:
         run: |
           MOD_IDS_STRING='${{ github.event.inputs.mod_id_override }}'
           echo "手动触发模式: 准备处理以下 Mod ID: $MOD_IDS_STRING"
-          CLEAN_JSON_ARRAY=$(echo "$MOD_IDS_STRING" | grep -oE '[0-9]+' | awk 'length == 10' | sort -u | jq -Rsc 'split("\n") | map(select(. != ""))')
+          CLEAN_JSON_ARRAY=$(echo "$MOD_IDS_STRING" | sed 's/[^0-9]/\ /g' | grep -oE '[0-9]+' | awk 'length == 10' | sort -u | jq -Rsc 'split("\n") | map(select(. != ""))')
           echo "转换后的JSON数组(已清理并去重): $CLEAN_JSON_ARRAY"
           echo "mods_to_download=$CLEAN_JSON_ARRAY" >> $GITHUB_OUTPUT
 
@@ -156,10 +156,9 @@ jobs:
       - name: Dynamically Add New Mod IDs to id_list.txt
         if: needs.setup_jobs.outputs.manual_ids_raw != ''
         run: |
-          NEW_IDS_STRING='${{ needs.setup_jobs.outputs.manual_ids_raw }}'
-          echo "检测到手动触发的新ID，准备智能更新 id_list.txt..."
+          CLEANED_MODS_JSON='${{ needs.setup_jobs.outputs.mods_to_download }}'
           
-          for ID in $(echo "$NEW_IDS_STRING" | tr ',;' ' ' | tr -s ' '); do
+          for ID in $(echo "$CLEANED_MODS_JSON" | jq -r '.[]'); do
             if grep -q -w -x "$ID" id_list.txt; then
               echo "  -> ID: $ID 已存在于 id_list.txt 中，无需添加。"
             else
