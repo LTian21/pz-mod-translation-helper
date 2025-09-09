@@ -1,0 +1,20 @@
+name: Cleanup Old Artifacts
+
+on:
+  workflow_run:
+    workflows: ["自动更新、处理并保存Mod翻译"]
+    types: [completed]
+
+jobs:
+  delete-artifacts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: write
+
+    steps:
+      - name: Delete workflow run artifacts
+        uses: c-hive/gha-remove-artifacts@v1
+        with:
+          run_id: ${{ github.event.workflow_run.id }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
