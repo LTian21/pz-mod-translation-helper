@@ -1,0 +1,33 @@
+name: 'Setup Python and JQ Environment'
+description: 'Sets up Python with dependencies and installs JQ with caching. Assumes code is already checked out.'
+
+runs:
+  using: "composite"
+  
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        cache: 'pip'
+
+    - name: Install Python dependencies
+      run: pip install -r requirements.txt
+      shell: bash
+
+    - name: Install and Cache JQ
+      id: install_jq
+      run: |
+        echo "cache_key_date=$(date -u +'%G-%V')" >> $GITHUB_OUTPUT
+        sudo apt-get update
+        sudo apt-get install -y jq
+        sudo chown -R $USER:$USER /var/cache/apt/archives
+      shell: bash
+        
+    - name: Cache APT packages for JQ
+      uses: actions/cache@v4
+      with:
+        path: /var/cache/apt/archives
+        key: ${{ runner.os }}-apt-jq-${{ steps.install_jq.outputs.cache_key_date }}
+        restore-keys: |
+          ${{ runner.os }}-apt-jq-
