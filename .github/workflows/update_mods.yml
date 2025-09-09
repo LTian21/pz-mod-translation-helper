@@ -11,7 +11,6 @@ on:
     - cron: '0 4 * * *' # 每天UTC时间凌晨4点运行 (北京时间中午12点)
 env:
   MODS_PER_JOB: 10 # 每个并行任务处理10个Mod
-  TODAY: ${{ format('{0:YYYY-MM-DD}', github.event.schedule || github.event.inputs.manual_trigger_time || github.run_started_at) }}
 
 jobs:
   setup_jobs:
@@ -176,16 +175,11 @@ jobs:
           NEW_IDS_STRING='${{ needs.setup_jobs.outputs.manual_ids_raw }}'
           echo "检测到手动触发的新ID，准备智能更新 id_list.txt..."
           
-          # 将逗号分隔的字符串转换为可供循环的列表
-          # tr ',' ' ' 会将所有逗号替换为空格
           for ID in $(echo "$NEW_IDS_STRING" | tr ',' ' '); do
-            # -q: 安静模式, -w: 整词匹配, -x: 整行匹配
-            # 检查ID是否已存在于文件中
             if grep -q -w -x "$ID" id_list.txt; then
               echo "  -> ID: $ID 已存在于 id_list.txt 中，无需添加。"
             else
               echo "  -> ID: $ID 是新ID，正在添加到 id_list.txt..."
-              # 将新ID追加到文件末尾
               echo "$ID" >> id_list.txt
             fi
           done
@@ -255,28 +249,29 @@ jobs:
           # 检查是否有需要更新的Mod
           if [ -z "$MODS_JSON" ] || [ "$MODS_JSON" = "[]" ]; then
             echo "没有需要更新的Mod，无需创建PR。"
-            # 设置一个输出，让下一步可以跳过
             echo "should_create_pr=false" >> $GITHUB_OUTPUT
             exit 0
           fi
           # 如果有更新，则生成PR的描述内容
           echo "should_create_pr=true" >> $GITHUB_OUTPUT
           
-          # PR描述文件的路径
           PR_BODY_FILE="pr_body.md"
           echo "### 🤖 自动化Mod更新报告" > "$PR_BODY_FILE"
           echo "" >> "$PR_BODY_FILE"
           echo "检测到以下Mod有更新，相关翻译文件已自动生成：" >> "$PR_BODY_FILE"
           echo "" >> "$PR_BODY_FILE"
           
-          # 使用jq将JSON数组转换为Markdown列表
           echo "$MODS_JSON" | jq -r '.[] | "- `\(.)`"' >> "$PR_BODY_FILE"
           
           echo "" >> "$PR_BODY_FILE"
           echo "---" >> "$PR_BODY_FILE"
           echo "请审核文件变更，确认无误后即可合并此拉取请求。" >> "$PR_BODY_FILE"
           echo "工作流运行日志: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> "$PR_BODY_FILE"
-          
+      
+      - name: Set Today's Date
+        id: set_date
+        run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV    
+
       - name: Create Pull Request
         if: steps.prep_pr.outputs.should_create_pr == 'true'
         uses: peter-evans/create-pull-request@v6
