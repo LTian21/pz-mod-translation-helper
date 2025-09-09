@@ -1,10 +1,14 @@
 name: 自动更新、处理并保存Mod翻译
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
     inputs:
       mod_id_override:
-        description: '（可选）强制更新一个或多个Mod ID （用逗号,分隔）'
+        description: '填入Mod ID来进行强制更新(可批量粘贴多个)'
         required : false
         type: string
   schedule:
@@ -24,22 +28,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
+      - name: Setup Reusable Environment
+        uses: ./.github/actions/setup-environment
 
       - name: Setup SteamCMD
         uses: CyberAndrii/setup-steamcmd@v1
-        
-      - name: Install latest JQ
-        run: |
-          sudo curl --retry 5 --retry-delay 5 -L https://github.com/jqlang/jq/releases/latest/download/jq-linux64 -o /usr/bin/jq
-          sudo chmod +x /usr/bin/jq
-          jq --version
 
       - name: Handle Manual Trigger Override
         id: manual_check
@@ -47,9 +40,9 @@ jobs:
         run: |
           MOD_IDS_STRING='${{ github.event.inputs.mod_id_override }}'
           echo "手动触发模式: 准备处理以下 Mod ID: $MOD_IDS_STRING"
-          JSON_ARRAY="[\"$(echo "$MOD_IDS_STRING" | tr -d ' ' | sed 's/,/\",\"/g')\"]"
-          echo "转换后的JSON数组: $JSON_ARRAY"
-          echo "mods_to_download=$JSON_ARRAY" >> $GITHUB_OUTPUT
+          CLEAN_JSON_ARRAY=$(echo "$MOD_IDS_STRING" | tr -dc '0-9' | grep -oE '.{10}' | sort -u | jq -Rsc 'split("\n") | map(select(. != ""))')
+          echo "转换后的JSON数组: $CLEAN_JSON_ARRAY"
+          echo "mods_to_download=$CLEAN_JSON_ARRAY" >> $GITHUB_OUTPUT
 
       - name: Smart Check for Mod Updates (Scheduled/Default)
         id: scheduled_check
@@ -91,13 +84,14 @@ jobs:
         mod_group: ${{ fromJson(needs.setup_jobs.outputs.mod_groups) }}
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Reusable Environment
+        uses: ./.github/actions/setup-environment
+
       - name: Setup SteamCMD
         uses: CyberAndrii/setup-steamcmd@v1
-
-      - name: Install latest JQ
-        run: |
-          sudo curl --retry 5 --retry-delay 5 -L https://github.com/jqlang/jq/releases/latest/download/jq-linux64 -o /usr/bin/jq
-          sudo chmod +x /usr/bin/jq
 
       - name: Download Mod Group (Job ${{ strategy.job-index}})
         run: |
@@ -143,18 +137,8 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
-
-      - name: Install JQ using APT
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq
+      - name: Setup Reusable Environment
+        uses: ./.github/actions/setup-environment
           
       - name: Download all Mod Artifacts
         uses: actions/download-artifact@v4
@@ -285,12 +269,39 @@ jobs:
           labels: "automated-update, bot"
           reviewers: ${{ github.actor }} 
 
+      - name: Prepare Issue Body on Failure
+        if: failure()
+        id: prep_issue
+        env:
+          WORKFLOW_NAME: ${{ github.workflow }}
+          EVENT_NAME: ${{ github.event_name }}
+          ACTOR_NAME: ${{ github.actor }}
+          BRANCH_NAME: ${{ github.ref }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          ISSUE_BODY_FILE="issue_body.md"
+          echo "### 🚨 工作流运行失败报告" > "$ISSUE_BODY_FILE"
+          echo "" >> "$ISSUE_BODY_FILE"
+          echo "**工作流:** \`$WORKFLOW_NAME\`" >> "$ISSUE_BODY_FILE"
+          echo "**触发事件:** \`$EVENT_NAME\`" >> "$ISSUE_BODY_FILE"
+          echo "**触发者:** \`$ACTOR_NAME\`" >> "$ISSUE_BODY_FILE"
+          echo "**分支:** \`$BRANCH_NAME\`" >> "$ISSUE_BODY_FILE"
+          echo "" >> "$ISSUE_BODY_FILE"
+          echo "---" >> "$ISSUE_BODY_FILE"
+          echo "" >> "$ISSUE_BODY_FILE"
+          echo "#### 🔴 失败详情" >> "$ISSUE_BODY_FILE"
+          echo "" >> "$ISSUE_BODY_FILE"
+          echo "本次自动化工作流在执行过程中意外中断。请立即检查相关的运行日志以诊断问题。" >> "$ISSUE_BODY_FILE"
+          echo "" >> "$ISSUE_BODY_FILE"
+          echo "**➡️ 点击此处查看详细运行日志 [<sup>1</sup>]($RUN_URL)**" >> "$ISSUE_BODY_FILE"
+          echo "filename=$ISSUE_BODY_FILE" >> $GITHUB_OUTPUT
+
       - name: Create Issue on Failure
         if: failure()
-        uses: JasonEtco/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WORKFLOW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        uses: peter-evans/create-issue-from-file@v5
         with:
-          filename: .github/ISSUE_TEMPLATE/workflow-failure-report.yml
-          update_existing: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "🚨 工作流失败: 自动更新Mod翻译"
+          content-filepath: ${{ steps.prep_issue.outputs.filename }}
+          labels: "bug, CI/CD, automated report"
+          assignees: 'Laotian21'
