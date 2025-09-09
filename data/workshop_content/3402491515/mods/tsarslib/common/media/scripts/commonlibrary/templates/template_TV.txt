@@ -1,0 +1,52 @@
+module Base
+{
+    template vehicle TV
+    {
+		part TV
+		{
+		    area = TruckBed,
+		    itemType = Base.TvWideScreen;Base.TvBlack,
+		    specificItem = false,
+		    table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 100,
+                professions = ,
+                skills = ,
+                traits = ,
+                recipes = ,
+                test = ATATuning.InstallTest.multiRequire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 100,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+			lua
+			{
+				create = CommonTemplates.Create.TV,
+				update = Vehicles.Update.Radio,
+			}
+		}
+	}
+}
+

@@ -1,0 +1,84 @@
+module Base
+{
+    template vehicle Microwaves
+    {
+        part MicrowaveFrontLeft
+        {
+            area = Common,
+        }
+        part MicrowaveFrontRight
+        {
+            area = Common,
+        }
+        part MicrowaveMiddleLeft
+        {
+            area = Common,
+        }
+        part MicrowaveMiddleRight
+        {
+            area = Common,
+        }
+        part MicrowaveRearLeft
+        {
+            area = Common,
+        }
+        part MicrowaveRearRight
+        {
+            area = Common,
+        }
+        
+        part Microwave*
+        {
+            specificItem = false,
+            itemType = Base.TransportMicrowave,
+            category = nodisplay,
+            container
+            {
+                capacity = 10,
+                test = CommonTemplates.ContainerAccess.ContainerByName,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes =,
+                test = ATATuning.InstallTest.multiRequire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                    type = Base.Screwdriver,
+                    count = 1,
+                    keep = true,
+                    equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes =,
+                test = ATATuning.UninstallTest.multiRequire,
+                requireEmpty = true,
+            }
+            lua
+            {
+                create = CommonTemplates.Create.Microwave,
+                init = CommonTemplates.Init.Oven,
+                update = CommonTemplates.Update.Microwave,
+            }
+        }
+    }
+}
+

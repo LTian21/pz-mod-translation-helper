@@ -1,0 +1,81 @@
+module Base
+{
+    template vehicle Medicines
+    {
+        part MedicineFrontLeft
+        {
+            area = Common,
+        }
+        part MedicineFrontRight
+        {
+            area = Common,
+        }
+        part MedicineMiddleLeft
+        {
+            area = Common,
+        }
+        part MedicineMiddleRight
+        {
+            area = Common,
+        }
+        part MedicineRearLeft
+        {
+            area = Common,
+        }
+        part MedicineRearRight
+        {
+            area = Common,
+        }
+        
+        part Medicine*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.TransportMedicine,
+            container
+            {
+                capacity = 10,
+                test = CommonTemplates.ContainerAccess.ContainerByName,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.InstallTest.multiRequire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                    type = Base.Screwdriver,
+                    count = 1,
+                    keep = true,
+                    equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+            lua
+            {
+                create = CommonTemplates.Create.Medicine,
+            }
+        }
+    }
+}
+

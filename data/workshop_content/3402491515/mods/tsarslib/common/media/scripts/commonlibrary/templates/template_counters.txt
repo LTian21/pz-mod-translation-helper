@@ -1,0 +1,82 @@
+module Base
+{
+    template vehicle Counters
+    {
+        part CounterFrontLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part CounterFrontRight
+        {
+            area = SeatFrontRight,
+        }
+        part CounterMiddleLeft
+        {
+            area = SeatMiddleLeft,
+        }
+        part CounterMiddleRight
+        {
+            area = SeatMiddleRight,
+        }
+        part CounterRearLeft
+        {
+            area = SeatRearLeft,
+        }
+        part CounterRearRight
+        {
+            area = SeatRearRight,
+        }
+        
+        part Counter*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.TransportCounter,
+            container
+            {
+                type = counter,
+                capacity = 20,
+                test = CommonTemplates.ContainerAccess.ContainerByName,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.InstallTest.multiRequire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                    type = Base.Screwdriver,
+                    count = 1,
+                    keep = true,
+                    equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+            lua
+            {
+                create = CommonTemplates.Create.Counter,
+            }
+        }
+    }
+}
+

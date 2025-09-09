@@ -1,0 +1,125 @@
+module Base
+{
+    model ATA2DodgeRoofrack
+    {
+        mesh = vehicles/ATA_Dodge_base|roof1_a,
+        texture = Vehicles/ATA_Dodge_items,
+        shader = basicEffect,
+        scale = 0.01,
+    }
+    model ATA2DodgeRoofBag1
+    {
+        mesh = vehicles/ATA_Dodge_base|roof1_bag1,
+        texture = clothes/bag/DuffelBagBlue,
+        shader = basicEffect,
+        scale = 0.01,
+    }
+    model ATA2DodgeRoofBag2
+    {
+        mesh = vehicles/ATA_Dodge_base|roof1_bag2,
+        texture = clothes/bag/DuffelBagGreen,
+        shader = basicEffect,
+        scale = 0.01,
+    }
+    model ATA2DodgeRoofWheel
+    {
+        mesh = vehicles/ATA_Dodge_base|roof1_zapaska,
+        texture =  Vehicles/ATA_Dodge_wheel,
+        shader = basicEffect,
+        scale = 0.01,
+    }
+    
+    model ATA2DodgeWindowRack
+    {
+        mesh = vehicles/ATA_Dodge_base|roof2_a,
+        texture = Vehicles/ATA_Dodge_items,
+        shader = basicEffect,
+        scale = 0.01,
+    }
+    model ATA2DodgeWindowRackBag1
+    {
+        mesh = vehicles/ATA_Dodge_base|roof2_level1,
+        texture = Vehicles/ATA_Dodge_roof2,
+        shader = basicEffect,
+        scale = 0.01,
+    }
+    model ATA2DodgeWindowRackBag2
+    {
+        mesh = vehicles/ATA_Dodge_base|roof2_level2,
+        texture = Vehicles/ATA_Dodge_roof2,
+        shader = basicEffect,
+        scale = 0.01,
+    }
+    model ATA2DodgeWindowRackBag3
+    {
+        mesh = vehicles/ATA_Dodge_base|roof2_level3,
+        texture = Vehicles/ATA_Dodge_roof2,
+        shader = basicEffect,
+        scale = 0.01,
+    }
+    
+    template vehicle ATADodge_RoofRack
+    {
+        template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkRoofRack,
+        part ATA2InteractiveTrunkRoofRack
+        {
+            area = ATARoof,
+            model Default
+            {
+                file = ATA2DodgeRoofrack,
+            }
+            model Filling1
+            {
+                file = ATA2DodgeRoofBag1,
+            }
+            model Filling2
+            {
+                file = ATA2DodgeRoofBag2,
+            }
+            model Item1
+            {
+                file = ATA2DodgeRoofWheel,
+            }
+        }
+    }
+    
+    template vehicle ATADodge_WindowRack
+    {
+        template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkWindowRearRack,
+        part ATA2InteractiveTrunkWindowRearRack
+        {
+            area = ATARoof,
+            model Default
+            {
+                file = ATA2DodgeWindowRack,
+            }
+            model FillingOnlyOne1
+            {
+                file = ATA2DodgeWindowRackBag1,
+            }
+            model FillingOnlyOne2
+            {
+                file = ATA2DodgeWindowRackBag2,
+            }
+            model FillingOnlyOne3
+            {
+                file = ATA2DodgeWindowRackBag3,
+            }
+        }
+        
+        template = Windshield/part/WindshieldRear,
+        part WindshieldRear
+        {
+            table install
+            {
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+                requireUninstalled = ATA2InteractiveTrunkWindowRearRack,
+            }
+        }
+    }
+}

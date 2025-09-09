@@ -1,0 +1,281 @@
+/* Это шаблон палатки для крыши автомобиля. Фактически, роль палатки выполняют изолированные сиденья. По-умолчанию, предалагается изолировать средние сиденья. Для установке в автомобиль палатки, в скрипт необходимо вписать строку:
+    template = ATARoofTent/part/ATARoofTent,
+Спавн палатки (предмет ATARoofTentItem) уже настроен в моде. Однако, вы можете создать свой предмет и переопределить его в шаблоне, тогда спавн необходимо будет настраивать самостоятельно.
+Для отключения части функций в радиальном меню автомобиля, при нахождении игрока в палатке, служат шаблоны "InRoofTent + *название сиденья*".
+Для импортирования готового шаблона палатки, в котором изолированы средние сиденья и отключены лишние функции радиального меню, необходимо использовать строку:
+    template! = ATARoofMiddleTent,
+Внимание! Строка должна быть добавлена после стандартного "ванильного" шаблона с пассажирами и шаблонов с сиденьями.
+
+Палатка предполагает три типа 3д-моделей: "Default" - общая рама, "Open" - открытая палатка, "Close" - закрытая палатка. Модель "Default" - не обязательна.
+Зд-модели должны быть переопределены в скрипте вашего автомобиля. Так же, в ходе этого процесса, вам следуем самостоятельно указать части автомобиля, обязательные для установки/снятия палатки. Пример переопределения:
+    part ATARoofTent
+    {
+        model Default
+        {
+            file = ATA_Jeep_palatka_base,
+        }
+        model Open
+        {
+            file = ATA_Jeep_palatka_open,
+        }
+        model Close
+        {
+            file = ATA_Jeep_palatka_closed,
+        }
+        table install
+        {
+            requireInstalled = ATARoofBase,
+            requireUninstalled = ATARoofRackFirst,
+        }
+    }
+*/
+
+module Base
+{    
+    item ATASleepingBag
+    {
+        Weight    =    1.0,
+        Type    =    Normal,
+        DisplayName    =    ATASleepingBag,
+        Icon    =    ATASleepingBag,
+        ChanceToSpawnDamaged = 0,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+    }
+    
+    template vehicle ATARoofTent
+    {
+        part ATARoofTent
+        {
+            container
+            {
+                capacity = 30,
+                test = ATATuning.ContainerAccess.RoofTent,
+            }
+            area = TruckBed,
+            category = tuning,
+            specificItem = false,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+
+            model Default
+            {
+                file = Vehicles_Wheel,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 400,
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.RoofTent,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 400,
+                test = ATATuning.UninstallTest.RoofTent,
+                complete = ATATuning.UninstallComplete.RoofTent,
+                requireEmpty = true,
+            }
+            lua
+            {
+                create = ATATuning.Create.RoofTent,
+                init = ATATuning.Init.RoofTent,
+            }
+        }
+        
+        part InRoofTentFrontLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part InRoofTentFrontRight
+        {
+            area = SeatFrontRight,
+        }
+        part InRoofTentMiddleLeft
+        {
+            area = SeatMiddleLeft,
+        }
+        part InRoofTentMiddleRight
+        {
+            area = SeatMiddleRight,
+        }
+        part InRoofTentRearLeft
+        {
+            area = SeatRearLeft,
+        }
+        part InRoofTentRearRight
+        {
+            area = SeatRearRight,
+        }
+        part InRoofTent*
+        {
+            category = nodisplay,
+        }
+    }
+    
+    template vehicle ATARoofMiddleTentSetting
+    {
+        template = ATARoofTent/part/InRoofTentMiddleLeft,
+        template = ATARoofTent/part/InRoofTentMiddleRight,
+        template = Mattresses/part/MattressMiddleLeft,
+        template = Mattresses/part/MattressMiddleRight,
+        passenger FrontLeft
+        {
+            switchSeat MiddleLeft
+            {
+            }
+
+            switchSeat MiddleRight
+            {
+            }
+        }
+
+        passenger FrontRight
+        {
+            switchSeat MiddleLeft
+            {
+            }
+
+            switchSeat MiddleRight
+            {
+            }
+        }
+
+        passenger MiddleLeft
+        {
+            switchSeat FrontLeft
+            {
+            }
+
+            switchSeat FrontRight
+            {
+            }
+
+            switchSeat RearLeft
+            {
+            }
+
+            switchSeat RearRight
+            {
+            }
+        }
+
+        passenger MiddleRight
+        {    
+            switchSeat FrontLeft
+            {
+            }
+
+            switchSeat FrontRight
+            {
+            }
+
+            switchSeat RearLeft
+            {
+            }
+
+            switchSeat RearRight
+            {
+            }
+        }
+    
+        passenger RearLeft
+        {
+            switchSeat MiddleLeft
+            {
+            }
+
+            switchSeat MiddleRight
+            {
+            }
+        }
+
+        passenger RearRight
+        {
+            switchSeat MiddleLeft
+            {
+            }
+
+            switchSeat MiddleRight
+            {
+            }
+        }
+        template = Seat/part/SeatMiddleLeft,
+        template = Seat/part/SeatMiddleRight,
+        part SeatMiddleLeft
+        {
+            category = nodisplay,
+        }
+        part SeatMiddleRight
+        {
+            category = nodisplay,
+        }
+        template = Door/part/DoorMiddleRight,
+        template = Door/part/DoorMiddleLeft,
+        part DoorMiddle*
+        {
+            category = nodisplay,
+            anim Open
+            {
+                sound = OpenBag,
+            }
+            anim Close
+            {
+                sound = CloseBag,
+            }
+            anim Lock
+            {
+                sound = PutItemInBag,
+            }
+            anim Unlock
+            {
+                sound = PutItemInBag,
+            }
+            anim IsLocked
+            {
+                sound = PutItemInBag,
+            }
+        }
+    
+        template = Window/part/WindowMiddleRight,
+        template = Window/part/WindowMiddleLeft,
+        part WindowMiddle*
+        {
+            category = nodisplay,
+        }
+        
+        part SeatMiddle*
+        {
+            category = nodisplay,
+            itemType = Base.ATASleepingBag,
+            specificItem = false,
+            container
+            {
+                test = ATATuning.ContainerAccess.BlockSeat,
+            }
+            lua
+            {
+                create = ATATuning.Create.Chance0,
+            }
+        }
+    }
+}
