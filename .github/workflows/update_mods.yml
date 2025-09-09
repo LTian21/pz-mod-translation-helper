@@ -1,7 +1,16 @@
 name: 自动更新、处理并保存Mod翻译
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
+    inputs:
+      mod_id_override:
+        description: '填入Mod ID来进行强制更新(可批量粘贴多个)'
+        required : false
+        type: string
   schedule:
     - cron: '0 4 * * *' # 每天UTC时间凌晨4点运行 (北京时间中午12点)
 env:
@@ -11,47 +20,59 @@ jobs:
   setup_jobs:
     runs-on: ubuntu-latest
     outputs:
-      mods_to_download: ${{ steps.check_updates.outputs.mods_to_download }}
+      mods_to_download: ${{ steps.combine_lists.outputs.mods_to_download }}
       mod_groups: ${{ steps.split_list.outputs.groups }}
+      manual_ids_raw: ${{ github.event.inputs.mod_id_override }}
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
+      - name: Setup Reusable Environment
+        uses: ./.github/actions/setup-environment
 
       - name: Setup SteamCMD
         uses: CyberAndrii/setup-steamcmd@v1
-        
-      - name: Install latest JQ
-        run: |
-          sudo curl --retry 5 --retry-delay 5 -L https://github.com/jqlang/jq/releases/latest/download/jq-linux64 -o /usr/bin/jq
-          sudo chmod +x /usr/bin/jq
-          jq --version
 
-      - name: Smart Check for Mod Updates
-        id: check_updates
+      - name: Handle Manual Trigger Override
+        id: manual_check
+        if: github.event.inputs.mod_id_override != ''
+        run: |
+          MOD_IDS_STRING='${{ github.event.inputs.mod_id_override }}'
+          echo "手动触发模式: 准备处理以下 Mod ID: $MOD_IDS_STRING"
+          CLEAN_JSON_ARRAY=$(echo "$MOD_IDS_STRING" | sed 's/[^0-9]/\ /g' | grep -oE '[0-9]+' | awk 'length == 10' | sort -u | jq -Rsc 'split("\n") | map(select(. != ""))')
+          echo "转换后的JSON数组(已清理并去重): $CLEAN_JSON_ARRAY"
+          echo "mods_to_download=$CLEAN_JSON_ARRAY" >> $GITHUB_OUTPUT
+
+      - name: Smart Check for Mod Updates (Scheduled/Default)
+        id: scheduled_check
+        if: github.event.inputs.mod_id_override == ''
         env:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
         run: python scripts/check_updates.py
 
+      - name: Combine update lists
+        id: combine_lists
+        run: |
+          MANUAL_LIST='${{ steps.manual_check.outputs.mods_to_download }}'
+          SCHEDULED_LIST='${{ steps.scheduled_check.outputs.mods_to_download }}'
+          if [ -n "$MANUAL_LIST" ]; then
+            echo "使用手动触发的Mod列表。"
+            echo "mods_to_download=$MANUAL_LIST" >> $GITHUB_OUTPUT
+          else
+            echo "使用自动检查的Mod列表。"
+            echo "mods_to_download=$SCHEDULED_LIST" >> $GITHUB_OUTPUT
+          fi
+
       - name: Split Mod List into Groups for Parallel Jobs
-        if: steps.check_updates.outputs.mods_to_download != '[]' && steps.check_updates.outputs.mods_to_download != ''
+        if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
         id: split_list
         run: |
           {
             echo 'groups<<EOF'
-            python scripts/split_ids.py '${{ steps.check_updates.outputs.mods_to_download }}' ${{ env.MODS_PER_JOB }}
+            python scripts/split_ids.py '${{ steps.combine_lists.outputs.mods_to_download }}' ${{ env.MODS_PER_JOB }}
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
-
-
 
 
   download_parallel:
@@ -63,13 +84,14 @@ jobs:
         mod_group: ${{ fromJson(needs.setup_jobs.outputs.mod_groups) }}
 
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Reusable Environment
+        uses: ./.github/actions/setup-environment
+
       - name: Setup SteamCMD
         uses: CyberAndrii/setup-steamcmd@v1
-
-      - name: Install latest JQ
-        run: |
-          sudo curl --retry 5 --retry-delay 5 -L https://github.com/jqlang/jq/releases/latest/download/jq-linux64 -o /usr/bin/jq
-          sudo chmod +x /usr/bin/jq
 
       - name: Download Mod Group (Job ${{ strategy.job-index}})
         run: |
@@ -109,23 +131,14 @@ jobs:
     permissions:
       contents: write
       issues: write
+      pull-requests: write
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Install Python dependencies
-        run: pip install -r requirements.txt
-
-      - name: Install JQ using APT
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq
+      - name: Setup Reusable Environment
+        uses: ./.github/actions/setup-environment
           
       - name: Download all Mod Artifacts
         uses: actions/download-artifact@v4
@@ -140,13 +153,27 @@ jobs:
           mkdir -p ./data/workshop_content
           find temp_artifacts/ -mindepth 1 -maxdepth 1 -type d -exec mv {} ./data/workshop_content/ \;
 
+      - name: Dynamically Add New Mod IDs to id_list.txt
+        if: needs.setup_jobs.outputs.manual_ids_raw != ''
+        run: |
+          CLEANED_MODS_JSON='${{ needs.setup_jobs.outputs.mods_to_download }}'
+          
+          for ID in $(echo "$CLEANED_MODS_JSON" | jq -r '.[]'); do
+            if grep -q -w -x "$ID" id_list.txt; then
+              echo "  -> ID: $ID 已存在于 id_list.txt 中，无需添加。"
+            else
+              echo "  -> ID: $ID 是新ID，正在添加到 id_list.txt..."
+              echo "$ID" >> id_list.txt
+            fi
+          done
+          echo "id_list.txt 更新完成。"
+
       - name: Update Timestamps After Successful Download
         env:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
         run: |
           MODS_DOWNLOADED='${{ needs.setup_jobs.outputs.mods_to_download }}'
           TIMESTAMP_FILE="data/mod_timestamps.json"
-
           if [ -z "$MODS_DOWNLOADED" ] || [ "$MODS_DOWNLOADED" = "[]" ]; then
             echo "没有需要更新时间戳的Mod。"
             exit 0
@@ -162,13 +189,12 @@ jobs:
             -X POST "https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/" \
             -d "itemcount=$ITEM_COUNT" \
             -d "$POST_DATA")
-
           if ! echo "$API_RESPONSE_BATCH" | jq -e '.response.publishedfiledetails' > /dev/null; then
              echo "::error::Steam API调用失败或返回无效数据。响应内容如下:"
              echo "$API_RESPONSE_BATCH"
              exit 1
           fi
-
+          echo "$API_RESPONSE_BATCH" > api_response.json
           jq -s '
             .[0] as $api_data | .[1] as $current_timestamps |
             ($api_data.response.publishedfiledetails | map({(.publishedfileid): .time_updated}) | add) as $new_timestamps |
@@ -196,26 +222,87 @@ jobs:
           mv pruned_staging ./data/workshop_content
           echo "Mod修剪完成。"
 
-      - name: Commit and Push Changes
+      - name: Prepare Pull Request Body
+        id: prep_pr
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add -A
-          if git diff --staged --quiet; then
-            echo "没有检测到任何文件更新，无需提交。"
-          else
-            echo "检测到文件更新，正在提交..."
-            git commit -m "Chore(自动化): 更新Mod并重新生成翻译文件"
-            git push
-          fi
-
+          MODS_JSON='${{ needs.setup_jobs.outputs.mods_to_download }}'
           
+          # 检查是否有需要更新的Mod
+          if [ -z "$MODS_JSON" ] || [ "$MODS_JSON" = "[]" ]; then
+            echo "没有需要更新的Mod，无需创建PR。"
+            echo "should_create_pr=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          echo "should_create_pr=true" >> $GITHUB_OUTPUT
+          
+          PR_BODY_FILE="pr_body.md"
+          echo "### 🤖 自动化Mod更新报告" > "$PR_BODY_FILE"
+          echo "" >> "$PR_BODY_FILE"
+          echo "检测到以下Mod有更新，相关翻译文件已自动生成：" >> "$PR_BODY_FILE"
+          echo "" >> "$PR_BODY_FILE"
+          
+          MOD_LIST_MARKDOWN=$(jq --argjson ids "$MODS_JSON" -r '
+            (.response.publishedfiledetails | map({(.publishedfileid): .title}) | add) as $details |
+            $ids[] |
+            "- [**\($details[.])**](https://steamcommunity.com/sharedfiles/filedetails/?id=\(.)) (ID: `\(.)`)"
+          ' api_response.json)
+          echo "$MOD_LIST_MARKDOWN" >> "$PR_BODY_FILE"
+          
+          echo "" >> "$PR_BODY_FILE"
+          echo "---" >> "$PR_BODY_FILE"
+          echo "请审核文件变更，确认无误后即可合并此拉取请求。" >> "$PR_BODY_FILE"
+          echo "工作流运行日志: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> "$PR_BODY_FILE"
+      
+      - name: Set Today's Date
+        id: set_date
+        run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV    
+
+      - name: Create Pull Request
+        if: steps.prep_pr.outputs.should_create_pr == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Chore(自动化): 更新Mod并重新生成翻译文件"
+          branch: bot/auto-update-${{ github.run_id }}          
+          title: '🤖 自动化Mod更新 [${{ env.TODAY }}]'
+          body-path: "pr_body.md"
+          
+          labels: "automated-update, bot"
+          reviewers: ${{ github.actor }} 
+
+      - name: Prepare Issue Body on Failure
+        if: failure()
+        id: prep_issue
+        env:
+          WORKFLOW_NAME: ${{ github.workflow }}
+          EVENT_NAME: ${{ github.event_name }}
+          ACTOR_NAME: ${{ github.actor }}
+          BRANCH_NAME: ${{ github.ref }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          ISSUE_BODY_FILE="issue_body.md"
+          echo "### 🚨 工作流运行失败报告" > "$ISSUE_BODY_FILE"
+          echo "" >> "$ISSUE_BODY_FILE"
+          echo "**工作流:** \`$WORKFLOW_NAME\`" >> "$ISSUE_BODY_FILE"
+          echo "**触发事件:** \`$EVENT_NAME\`" >> "$ISSUE_BODY_FILE"
+          echo "**触发者:** \`$ACTOR_NAME\`" >> "$ISSUE_BODY_FILE"
+          echo "**分支:** \`$BRANCH_NAME\`" >> "$ISSUE_BODY_FILE"
+          echo "" >> "$ISSUE_BODY_FILE"
+          echo "---" >> "$ISSUE_BODY_FILE"
+          echo "" >> "$ISSUE_BODY_FILE"
+          echo "#### 🔴 失败详情" >> "$ISSUE_BODY_FILE"
+          echo "" >> "$ISSUE_BODY_FILE"
+          echo "本次自动化工作流在执行过程中意外中断。请立即检查相关的运行日志以诊断问题。" >> "$ISSUE_BODY_FILE"
+          echo "" >> "$ISSUE_BODY_FILE"
+          echo "**➡️ 点击此处查看详细运行日志 [<sup>1</sup>]($RUN_URL)**" >> "$ISSUE_BODY_FILE"
+          echo "filename=$ISSUE_BODY_FILE" >> $GITHUB_OUTPUT
+
       - name: Create Issue on Failure
         if: failure()
-        uses: JasonEtco/create-an-issue@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WORKFLOW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        uses: peter-evans/create-issue-from-file@v5
         with:
-          filename: .github/ISSUE_TEMPLATE/workflow-failure-report.yml
-          update_existing: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "🚨 工作流失败: 自动更新Mod翻译"
+          content-filepath: ${{ steps.prep_issue.outputs.filename }}
+          labels: "bug, CI/CD, automated report"
+          assignees: 'Laotian21'

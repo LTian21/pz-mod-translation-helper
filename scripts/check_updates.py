@@ -16,7 +16,7 @@ def main():
 
     data_dir = Path("data")
     data_dir.mkdir(exist_ok=True)
-    timestamp_file = Path("mod_timestamps.json")
+    timestamp_file = data_dir / "mod_timestamps.json"
     if timestamp_file.exists():
         old_stamps = json.loads(timestamp_file.read_text(encoding='utf-8'))
     else:

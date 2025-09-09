@@ -1,28 +1,16 @@
-name: 🤖 自动化工作流失败报告
-description: 由 GitHub Actions 自动创建，用于报告工作流运行失败。
-title: "🚨 工作流失败: 自动更新、处理并保存Mod翻译"
+name: '🤖 自动化工作流失败报告'
+description: '由 GitHub Actions 自动创建，用于报告工作流运行失败。'
+title: "🚨 工作流失败: 自动更新Mod翻译"
 labels: ["bug", "CI/CD", "automated report"]
 assignees: 'Laotian21'
 
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## 自动报告：工作流运行失败
-
-        **工作流名称:** `${{ github.workflow }}`
-        **触发事件:** `${{ github.event_name }}`
-        **失败时间:** `$(date -u)`
-
-        ---
-
   - type: textarea
-    id: workflow-run-link
+    id: failure-details
     attributes:
-      label: 失败的工作流运行链接
-      description: "点击下方链接查看详细的运行日志。"
-      # 我们将使用 action 传入的 URL 填充这里
+      label: 失败详情
+      description: "以下是由 GitHub Actions 自动生成的失败报告。"
       value: |
-        [点击查看运行日志](${{ env.WORKFLOW_RUN_URL }})
+        请在此处查看由工作流自动填充的详细失败信息。
     validations:
       required: true
