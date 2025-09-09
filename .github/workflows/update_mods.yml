@@ -123,6 +123,7 @@ jobs:
         with:
           name: full-mods-${{ strategy.job-index }}
           path: temp_workshop_full/
+          retention-days: 0
 
   process_and_commit:
     needs: [setup_jobs, download_parallel]
@@ -268,7 +269,7 @@ jobs:
           body-path: "pr_body.md"
           
           labels: "automated-update, bot"
-          reviewers: ${{ github.actor }} 
+          #reviewers: ${{ github.actor }} 
 
       - name: Prepare Issue Body on Failure
         if: failure()
