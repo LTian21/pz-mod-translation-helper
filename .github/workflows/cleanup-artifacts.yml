@@ -1,0 +1,26 @@
+name: Cleanup Old Artifacts
+
+on:
+  workflow_run:
+    workflows: ["自动更新、处理并保存Mod翻译"]
+    types: [completed]
+  
+  workflow_dispatch:
+    inputs:
+      run_id_to_clean:
+        description: '提供一个特定的Run ID来清理其产物 (留空则清理所有)'
+        required: false
+        type: string
+
+jobs:
+  delete-artifacts:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Delete workflow run artifacts
+        uses: c-hive/gha-remove-artifacts@v1
+        with:
+          # 如果手动提供了ID，就用那个ID，否则行为不变
+          run_id: ${{ github.event.inputs.run_id_to_clean || github.event.workflow_run.id }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
