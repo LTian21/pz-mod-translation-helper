@@ -268,7 +268,7 @@ jobs:
           body-path: "pr_body.md"
           
           labels: "automated-update, bot"
-          reviewers: ${{ github.actor }} 
+          #reviewers: ${{ github.actor }} 
 
       - name: Prepare Issue Body on Failure
         if: failure()
@@ -306,3 +306,14 @@ jobs:
           content-filepath: ${{ steps.prep_issue.outputs.filename }}
           labels: "bug, CI/CD, automated report"
           assignees: 'Laotian21'
+
+  cleanup_artifacts:
+    name: Cleanup Artifacts
+    needs: [setup_jobs, download_parallel, process_and_commit]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Delete all artifacts from this workflow run
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
