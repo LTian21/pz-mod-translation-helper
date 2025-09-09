@@ -18,6 +18,7 @@ jobs:
     outputs:
       mods_to_download: ${{ steps.combine_lists.outputs.mods_to_download }}
       mod_groups: ${{ steps.split_list.outputs.groups }}
+      manual_ids_raw: ${{ github.event.inputs.mod_id_override }}
 
     steps:
       - name: Checkout Repository
@@ -166,6 +167,27 @@ jobs:
           rm -rf ./data/workshop_content
           mkdir -p ./data/workshop_content
           find temp_artifacts/ -mindepth 1 -maxdepth 1 -type d -exec mv {} ./data/workshop_content/ \;
+
+      - name: Dynamically Add New Mod IDs to id_list.txt
+        if: needs.setup_jobs.outputs.manual_ids_raw != ''
+        run: |
+          NEW_IDS_STRING='${{ needs.setup_jobs.outputs.manual_ids_raw }}'
+          echo "检测到手动触发的新ID，准备智能更新 id_list.txt..."
+          
+          # 将逗号分隔的字符串转换为可供循环的列表
+          # tr ',' ' ' 会将所有逗号替换为空格
+          for ID in $(echo "$NEW_IDS_STRING" | tr ',' ' '); do
+            # -q: 安静模式, -w: 整词匹配, -x: 整行匹配
+            # 检查ID是否已存在于文件中
+            if grep -q -w -x "$ID" id_list.txt; then
+              echo "  -> ID: $ID 已存在于 id_list.txt 中，无需添加。"
+            else
+              echo "  -> ID: $ID 是新ID，正在添加到 id_list.txt..."
+              # 将新ID追加到文件末尾
+              echo "$ID" >> id_list.txt
+            fi
+          done
+          echo "id_list.txt 更新完成。"
 
       - name: Update Timestamps After Successful Download
         env:
