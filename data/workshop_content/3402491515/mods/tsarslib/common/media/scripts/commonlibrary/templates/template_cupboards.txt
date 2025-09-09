@@ -1,0 +1,81 @@
+module Base
+{
+    template vehicle Cupboards
+    {
+        part CupboardFrontLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part CupboardFrontRight
+        {
+            area = SeatFrontRight,
+        }
+        part CupboardMiddleLeft
+        {
+            area = SeatMiddleLeft,
+        }
+        part CupboardMiddleRight
+        {
+            area = SeatMiddleRight,
+        }
+        part CupboardRearLeft
+        {
+            area = SeatRearLeft,
+        }
+        part CupboardRearRight
+        {
+            area = SeatRearRight,
+        }
+        
+        part Cupboard*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.TransportCupboard,
+            container
+            {
+                capacity = 30,
+                test = CommonTemplates.ContainerAccess.ContainerByName,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.InstallTest.multiRequire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                    type = Base.Screwdriver,
+                    count = 1,
+                    keep = true,
+                    equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+            lua
+            {
+                create = CommonTemplates.Create.Cupboard,
+            }
+        }
+    }
+}
+

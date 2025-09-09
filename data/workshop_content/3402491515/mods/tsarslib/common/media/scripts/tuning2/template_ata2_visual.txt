@@ -1,0 +1,79 @@
+/* Пример создания деталей без функционала (только визуальный эффект)
+    model ATASpoilerFront
+    {
+        mesh = WorldItems/ATASpoilerFront,
+        texture = WorldItems/ATASpoilerFront,
+        scale = 1.00,
+    }
+    
+    item ATASpoilerFront
+    {
+        Weight    =    2.0,
+        Type    =    Normal,
+        DisplayName    = ATASpoilerFront,
+        Icon    =    ATASpoilerFront,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATASpoilerFront,
+    }
+*/
+
+module Base
+{
+    template vehicle ATA2Visual
+    {
+        part ATA2VisualLadder
+        {
+            area = TruckBed,
+        }
+        part ATA2VisualSpoilerFront
+        {
+            area = Engine,
+        }
+        part ATA2VisualSpoilerRear
+        {
+            area = TruckBed,
+        }
+        part ATA2VisualSkirtsSide
+        {
+            area = SeatFrontLeft,
+        }
+        part ATA2VisualFendersWide
+        {
+            area = TireFrontLeft,
+        }
+        part ATA2VisualSnorkel
+        {
+            area = TireFrontRight,
+        }
+        part ATA2VisualWires
+        {
+            area = Engine,
+        }
+        part ATA2Visual*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+            table install
+            {
+                test = ATATuning2.InstallTest.Tuning,
+                complete = ATATuning2.InstallComplete.Tuning,
+            }
+            table uninstall
+            {
+                test = ATATuning2.UninstallTest.Tuning,
+                complete = ATATuning2.UninstallComplete.Tuning,
+            }
+            lua
+            {
+                create = ATATuning2.Create.Tuning,
+                init = ATATuning2.Init.Tuning,
+            }
+        }
+    }
+}

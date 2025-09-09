@@ -1,0 +1,81 @@
+module Base
+{
+    template vehicle Shelves
+    {
+        part ShelveFrontLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part ShelveFrontRight
+        {
+            area = SeatFrontRight,
+        }
+        part ShelveMiddleLeft
+        {
+            area = SeatMiddleLeft,
+        }
+        part ShelveMiddleRight
+        {
+            area = SeatMiddleRight,
+        }
+        part ShelveRearLeft
+        {
+            area = SeatRearLeft,
+        }
+        part ShelveRearRight
+        {
+            area = SeatRearRight,
+        }
+        
+        part Shelve*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.TransportShelve,
+            container
+            {
+                capacity = 20,
+                test = CommonTemplates.ContainerAccess.ContainerByName,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.InstallTest.multiRequire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                    type = Base.Screwdriver,
+                    count = 1,
+                    keep = true,
+                    equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+            lua
+            {
+                create = CommonTemplates.Create.Shelve,
+            }
+        }
+    }
+}
+

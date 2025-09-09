@@ -1,0 +1,113 @@
+/* Пример создания деталей без функционала (только визуальный эффект)
+model ATASpoilerFront
+    {
+        mesh = WorldItems/ATASpoilerFront,
+        texture = WorldItems/ATASpoilerFront,
+        scale = 1.00,
+    }
+    
+    item ATASpoilerFront
+    {
+        Weight    =    2.0,
+        Type    =    Normal,
+        DisplayName    = ATASpoilerFront,
+        Icon    =    ATASpoilerFront,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATASpoilerFront,
+    }
+*/
+
+module Base
+{
+    template vehicle ata_visual
+    {
+        part ATAVisualLadder
+        {
+            area = TruckBed,
+        }
+        part ATAVisualSpoilerFront
+        {
+            area = Engine,
+        }
+        part ATAVisualSpoilerRear
+        {
+            area = TruckBed,
+        }
+        part ATAVisualSkirtsSide
+        {
+            area = SeatFrontLeft,
+        }
+        part ATAVisualFendersWide
+        {
+            area = TireFrontLeft,
+        }
+        part ATAVisualSnorkel
+        {
+            area = TireFrontRight,
+        }
+        part ATAVisual*
+        {
+            category = tuning,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                    2
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = secondary,
+                    }
+                }
+                skills = Mechanics:6,
+                time = 400,
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                    2
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = secondary,
+                    }
+                }
+                skills = Mechanics:5,
+                time = 400,
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+            lua
+            {
+                create = ATATuning.Create.Chance15,
+                init = ATATuning.Init.Default,
+            }
+        }
+    }
+}

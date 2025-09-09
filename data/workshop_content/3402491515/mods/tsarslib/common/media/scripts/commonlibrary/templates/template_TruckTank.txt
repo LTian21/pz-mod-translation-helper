@@ -1,0 +1,141 @@
+module Base
+{
+	item 500Tank1
+    {
+        Weight	=	15.0,
+        Type	=	Normal,
+        DisplayName	=	Storage Tank,
+        Icon	=	CarGastank,
+        VehicleType =   1,
+        MaxCapacity = 461,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 80,
+        MechanicsItem = TRUE,
+    }
+
+    item 500Tank2
+    {
+        Weight	=	22.0,
+        Type	=	Normal,
+        DisplayName	=	Storage Tank,
+        Icon	=	CarGastank,
+        VehicleType =   2,
+        MaxCapacity = 461,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 80,
+        MechanicsItem = TRUE,
+    }
+
+    item 500Tank3
+    {
+        Weight	=	14.0,
+        Type	=	Normal,
+        DisplayName	=	Storage Tank,
+        Icon	=	CarGastank,
+        VehicleType =   3,
+        MaxCapacity = 461,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 80,
+        MechanicsItem = TRUE,
+    }
+
+
+    item 1000Tank1
+    {
+        Weight	=	15.0,
+        Type	=	Normal,
+        DisplayName	=	Storage Tank,
+        Icon	=	CarGastank,
+        VehicleType =   1,
+        MaxCapacity = 1000,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 60,
+        MechanicsItem = TRUE,
+    }
+
+    item 1000Tank2
+    {
+        Weight	=	22.0,
+        Type	=	Normal,
+        DisplayName	=	Storage Tank,
+        Icon	=	CarGastank,
+        VehicleType =   2,
+        MaxCapacity = 1000,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 60,
+        MechanicsItem = TRUE,
+    }
+
+    item 1000Tank3
+    {
+        Weight	=	14.0,
+        Type	=	Normal,
+        DisplayName	=	Storage Tank,
+        Icon	=	CarGastank,
+        VehicleType =   3,
+        MaxCapacity = 1000,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 60,
+        MechanicsItem = TRUE,
+    }
+
+	fixing Fix BigTank Welding
+	{
+	   Require : 500Tank1;500Tank2;500Tank3;1000Tank1;1000Tank2;1000Tank3,
+	   GlobalItem : BlowTorch=2,
+	   ConditionModifier : 1.2,
+	   Fixer : SheetMetal; MetalWelding=6;Mechanics=7,
+       Fixer : SmallSheetMetal=2; MetalWelding=6;Mechanics=7,
+	}
+
+	template vehicle TruckTank
+	{
+		part 500FuelTank
+		{
+			area = GasTank,
+			category = gastank,
+			itemType = 500Tank,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline Storage,
+				conditionAffectsCapacity = true,
+			}
+			
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+			}
+		}
+		
+		part 1000FuelTank
+		{
+			area = GasTank,
+			category = gastank,
+			itemType = 1000Tank,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline Storage,
+				conditionAffectsCapacity = true,
+			}
+			
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+			}
+		}
+	}
+}
+
+
