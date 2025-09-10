@@ -13,8 +13,6 @@ on:
         type: string
   schedule:
     - cron: '0 4 * * *' # 每天UTC时间凌晨4点运行 (北京时间中午12点)
-env:
-  MODS_PER_JOB: 10 # 每个并行任务处理10个Mod
 
 jobs:
   setup_jobs:
@@ -64,13 +62,20 @@ jobs:
             echo "mods_to_download=$SCHEDULED_LIST" >> $GITHUB_OUTPUT
           fi
 
+      - name: Calculate Mods per Job
+        if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
+        id: job_calculator
+        run: |
+          MODS_PER_JOB=$(python scripts/calculate_jobs.py '${{ steps.combine_lists.outputs.mods_to_download }}')
+          echo "mods_per_job=$MODS_PER_JOB" >> $GITHUB_OUTPUT
+
       - name: Split Mod List into Groups for Parallel Jobs
         if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
         id: split_list
         run: |
           {
             echo 'groups<<EOF'
-            python scripts/split_ids.py '${{ steps.combine_lists.outputs.mods_to_download }}' ${{ env.MODS_PER_JOB }}
+            python scripts/split_ids.py '${{ steps.combine_lists.outputs.mods_to_download }}' ${{ steps.job_calculator.outputs.mods_per_job }}
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
 
