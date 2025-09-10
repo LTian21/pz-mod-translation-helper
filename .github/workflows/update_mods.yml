@@ -118,11 +118,35 @@ jobs:
             fi
           done
 
-      - name: Upload Mod Group Artifact
+      - name: Prune and Prepare Mods for Artifact Upload
+        run: |
+          echo "开始修剪已下载的Mod，仅保留翻译相关文件..."
+          mkdir -p pruned_mods
+          find ./temp_workshop_full -mindepth 1 -maxdepth 1 -type d | while read MOD_DIR; do
+            STAGING_DIR="pruned_mods/$(basename "$MOD_DIR")"
+            mkdir -p "$STAGING_DIR"
+            # 使用与原流程完全相同的rsync逻辑来精确提取文件
+            rsync -a --prune-empty-dirs \
+              --include='*/' \
+              --include='**/media/scripts/***' \
+              --include='**/media/lua/shared/Translate/***' \
+              --exclude='*' \
+              "$MOD_DIR/" "$STAGING_DIR/"
+          done
+          echo "Mod修剪完成。"
+
+      - name: Compress Pruned Mods
+        run: |
+          echo "正在将修剪后的文件压缩为 tar.gz ..."
+          tar -czf pruned-mods-${{ strategy.job-index }}.tar.gz -C pruned_mods/ .
+          echo "压缩完成。"
+
+      - name: Upload Pruned and Compressed Mod Group Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: full-mods-${{ strategy.job-index }}
-          path: temp_workshop_full/
+          name: pruned-mods-${{ strategy.job-index }}
+          path: pruned-mods-${{ strategy.job-index }}.tar.gz
+          retention-days: 1
 
   process_and_commit:
     needs: [setup_jobs, download_parallel]
@@ -140,18 +164,25 @@ jobs:
       - name: Setup Reusable Environment
         uses: ./.github/actions/setup-environment
           
-      - name: Download all Mod Artifacts
+      - name: Download all Pruned Mod Artifacts
         uses: actions/download-artifact@v4
         with:
-          pattern: full-mods-*
+          pattern: pruned-mods-*
           path: temp_artifacts/
-          merge-multiple: true
+          merge-multiple: false
 
-      - name: Merge and Prepare Mods for Processing
+      - name: Decompress and Merge Mods for Processing
         run: |
+          echo "解压并合并所有下载的Mod压缩包..."
           rm -rf ./data/workshop_content
           mkdir -p ./data/workshop_content
-          find temp_artifacts/ -mindepth 1 -maxdepth 1 -type d -exec mv {} ./data/workshop_content/ \;
+          # 循环解压所有下载的tar.gz文件到目标目录
+          for archive in temp_artifacts/pruned-mods-*/pruned-mods-*.tar.gz; do
+            if [ -f "$archive" ]; then
+              tar -xzf "$archive" -C ./data/workshop_content/
+            fi
+          done
+          echo "所有Mod准备就绪。"
 
       - name: Dynamically Add New Mod IDs to id_list.txt
         if: needs.setup_jobs.outputs.manual_ids_raw != ''
@@ -208,19 +239,6 @@ jobs:
         env:
           TZ: Asia/Shanghai
         run: python process_mods.py
-
-      - name: Prune Mods for Repository
-        run: |
-          echo "处理完成，开始修剪mod以提交..."
-          mkdir -p pruned_staging
-          find ./data/workshop_content -mindepth 1 -maxdepth 1 -type d | while read MOD_DIR; do
-            STAGING_DIR="pruned_staging/$(basename "$MOD_DIR")"
-            mkdir -p "$STAGING_DIR"
-            rsync -a --prune-empty-dirs --include='*/' --include='**/media/scripts/***' --include='**/media/lua/shared/Translate/***' --exclude='*' "$MOD_DIR/" "$STAGING_DIR/"
-          done
-          rm -rf ./data/workshop_content
-          mv pruned_staging ./data/workshop_content
-          echo "Mod修剪完成。"
 
       - name: Prepare Pull Request Body
         id: prep_pr
