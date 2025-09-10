@@ -1,0 +1,122 @@
+module Base
+{
+    template vehicle ATAMotoWheels
+    {
+        part ATAMotoTireFrontWheel
+        {
+            area = TireFrontLeft,
+            wheel = RearRight,
+            table install
+			{
+                complete = ATATuning.InstallComplete.ATAMotoTireFrontWheel,
+            }
+            table uninstall
+			{
+                complete = ATATuning.UninstallComplete.ATAMotoTireFrontWheel,
+            }
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = ATATuning.Update.ATAMotoTireFrontWheel,
+			}
+        }
+        part ATAMotoTireRearWheel
+        {
+            area = TireRearLeft,
+            wheel = RearLeft,
+            table install
+			{
+                complete = ATATuning.InstallComplete.ATAMotoTireRearWheel,
+            }
+            table uninstall
+			{
+                complete = ATATuning.UninstallComplete.ATAMotoTireRearWheel,
+            }
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = ATATuning.Update.ATAMotoTireRearWheel,
+			}
+        }
+        part ATAMotoTire*
+        {
+            category = tire,
+			itemType = Base.OldTire;Base.NormalTire;Base.ModernTire,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+        }
+    }
+    
+    template vehicle ATAMotoWheelsReady
+    {
+        template = Tire,
+        part Tire*
+        {
+            category = nodisplay,
+            model InflatedTirePlusWheel
+            {
+                file = TsarNullModel,
+            }
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+			}
+        }
+        template = ATAMotoWheels/part/ATAMotoTireFrontWheel,
+        template = ATAMotoWheels/part/ATAMotoTireRearWheel,
+    }
+}

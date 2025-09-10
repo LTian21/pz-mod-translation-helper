@@ -1,0 +1,184 @@
+module Base
+{
+    model ATARoofLightWorld
+    {
+        mesh = WorldItems/ATA_MiddleLigts,
+        texture = WorldItems/ATA_Common_items,
+        scale = 0.04,
+    }
+    
+    item ATARoofLightItem /* Спавн */ 
+    {
+        Weight    =    1.0,
+        Type    =    Normal,
+        DisplayName    = ATARoofLightItem,
+        Icon    =    ATARoofLightItem,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATARoofLightWorld,
+    }
+    
+    template vehicle ATA2RoofLights
+    {
+        part ATA2RoofLightFront
+        {
+            area = Engine,
+            table uninstall
+            {
+                requireUninstalled = ATA2RoofLampFront,
+            }
+        }
+        
+        part ATA2RoofLightLeft
+        {
+            area = SeatFrontLeft,
+            table uninstall
+            {
+                requireUninstalled = ATA2RoofLampLeft,
+            }
+        }
+
+        part ATA2RoofLightRight
+        {
+            area = SeatFrontRight,
+            table uninstall
+            {
+                requireUninstalled = ATARoofLampRight,
+            }
+        }
+
+        part ATA2RoofLightRear
+        {
+            area = TruckBed,
+            table uninstall
+            {
+                requireUninstalled = ATARoofLampRear,
+            }
+        }
+
+        part ATA2RoofLight*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.ATARoofLightItem,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 100,
+                test = ATATuning.InstallTest.multiRequire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 100,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+            lua
+            {
+                create = ATATuning.Create.Chance0,
+                init = Vehicles.Init.Headlight,
+            }
+        }
+        
+        part ATA2RoofLampFront
+        {
+            area = Engine,
+            table install
+            {
+                requireInstalled = ATA2RoofLightFront,
+            }
+        }
+        
+        part ATA2RoofLampLeft
+        {
+            area = SeatFrontLeft,
+            table install
+            {
+                requireInstalled = ATA2RoofLightLeft,
+            }
+        }
+
+        part ATA2RoofLampRight
+        {
+            area = SeatFrontRight,
+            table install
+            {
+                requireInstalled = ATA2RoofLightRight,
+            }
+        }
+
+        part ATA2RoofLampRear
+        {
+            area = TruckBed,
+            table install
+            {
+                requireInstalled = ATA2RoofLightRear,
+            }
+        }
+
+        part ATA2RoofLamp*
+        {
+            category = lights,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 100,
+                test = ATATuning.InstallTest.multiRequire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 100,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+            lua
+            {
+                create = ATATuning.Create.ATALight,
+                init = Vehicles.Init.Headlight,
+                update = Vehicles.Update.Headlight,
+            }
+        }
+    }
+}

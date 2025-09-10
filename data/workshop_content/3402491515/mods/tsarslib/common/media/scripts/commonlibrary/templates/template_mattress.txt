@@ -1,0 +1,76 @@
+module Base
+{
+    template vehicle Mattresses
+    {
+		part MattressFrontLeft
+		{
+			area = SeatFrontLeft,
+		}
+		part MattressFrontRight
+		{
+			area = SeatFrontRight,
+		}
+		part MattressMiddleLeft
+		{
+			area = SeatMiddleLeft,
+		}
+		part MattressMiddleRight
+		{
+			area = SeatMiddleRight,
+		}
+		part MattressRearLeft
+		{
+			area = SeatRearLeft,
+		}
+		part MattressRearRight
+		{
+			area = SeatRearRight,
+		}
+		
+		part Mattress*
+		{
+		    itemType = Base.Mattress,
+		    specificItem = false,
+			category = nodisplay,
+		    table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 100,
+                professions = ,
+                skills = ,
+                traits = ,
+                recipes = ,
+                test = ATATuning.InstallTest.multiRequire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 100,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

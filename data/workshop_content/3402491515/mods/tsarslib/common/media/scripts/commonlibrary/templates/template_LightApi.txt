@@ -1,0 +1,68 @@
+module Base
+{
+	template vehicle LightApi
+	{
+		/* Boat headlight left. On texture mask use color: #C00000 */
+		part HeadlightLeft
+		{
+			area = Engine,
+		}
+		/* Boat headlight right. On texture mask use color: #400000 */
+		part HeadlightRight
+		{
+			area = Engine,
+		}
+		/* Light in cabin. On texture mask use color: #00C000 */
+		part HeadlightRearRight
+		{
+			area = TruckBed,
+		}
+		
+		part Headlight*
+		{
+			/**/
+			category = nodisplay,
+			
+			specificItem = false,
+			itemType = Base.LightBulb,
+			mechanicRequireKey = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 100,
+				test = ATATuning.InstallTest.multiRequire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 100,
+				test = ATATuning.UninstallTest.multiRequire,
+			}
+			lua
+			{
+				create = CommonTemplates.Create.LightApi,
+				init = Vehicles.Init.Headlight,
+				update = CommonTemplates.Update.LightApi,
+			}
+		}
+	}
+}
+
