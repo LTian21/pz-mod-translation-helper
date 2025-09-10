@@ -194,6 +194,8 @@ jobs:
         run: |
           CLEANED_MODS_JSON='${{ needs.setup_jobs.outputs.mods_to_download }}'
           
+          [ -n "$(tail -c1 id_list.txt)" ] && echo >> id_list.txt
+          
           for ID in $(echo "$CLEANED_MODS_JSON" | jq -r '.[]'); do
             if grep -q -w -x "$ID" id_list.txt; then
               echo "  -> ID: $ID 已存在于 id_list.txt 中，无需添加。"
