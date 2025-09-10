@@ -78,27 +78,6 @@ def get_old_file_content(file_path: Path) -> str | None:
         logging.error(f"    -> 获取旧文件时发生未知错误: {e}")
         return None
 
-def generate_diff_log(mod_name: str, mod_id: str, added_keys: set, removed_keys: set) -> str | None:
-    if not added_keys and not removed_keys:
-        return None
-
-    log_parts = [f"[{mod_name}_{mod_id}] - 内容变更:"]
-    
-    if added_keys:
-        log_parts.append(f"  (+) 新增 {len(added_keys)} 条待办:")
-        for i, key in enumerate(list(added_keys)[:5]):
-            log_parts.append(f"    - {key}")
-        if len(added_keys) > 5:
-            log_parts.append(f"    - ... (及其他 {len(added_keys) - 5} 项)")
-
-    if removed_keys:
-        log_parts.append(f"  (-) 移除 {len(removed_keys)} 条过时条目:")
-        for i, key in enumerate(list(removed_keys)[:5]):
-            log_parts.append(f"    - {key}")
-        if len(removed_keys) > 5:
-            log_parts.append(f"    - ... (及其他 {len(removed_keys) - 5} 项)")
-            
-    return "\n".join(log_parts)
 
 def find_case_insensitive_dir(parent_path, target_dir_name):
     if not parent_path or not parent_path.is_dir(): return None
@@ -292,8 +271,11 @@ def main():
         logging.error(f"错误：指定的目标路径不存在: {cfg.TARGET_PATH}")
         return
 
+    run_id = f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    logging.info(f"--- 本次运行ID: {run_id} ---")
+
     run_status = load_status()
-    update_log = []
+    update_log_entries = []
 
     completed_path = cfg.COMPLETED_PATH
     completed_path.mkdir(exist_ok=True)
@@ -392,16 +374,30 @@ def main():
             
             new_todo_file_path = output_dir / cfg.EN_TODO_FILENAME
             old_todo_content = get_old_file_content(new_todo_file_path)
-            timestamp = f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}]"
+            
+            log_archive_dir = Path('data/logs/archive')
+            log_archive_dir.mkdir(parents=True, exist_ok=True)
+
+            timestamp = datetime.now().isoformat()
+
             if old_todo_content is None:
                 if en_todo_list:
-                    log_msg = (f"{timestamp} - [基线建立] "
-                               f"{main_mod_name}_{mod_id}: 新增 {len(en_todo_list)} 条待办。")
-                    update_log.append(log_msg)
+                    baseline_log_entry = {
+                        "run_id": run_id,
+                        "timestamp": timestamp,
+                        "mod_name": main_mod_name,
+                        "mod_id": mod_id,
+                        "status": "baseline",
+                        "added_count": len(en_todo_list),
+                        "added_keys": sorted(list(en_todo_list.keys()))
+                    }
+                    archive_file = log_archive_dir / f"{main_mod_name}_{mod_id}_baseline_{run_id}.json"
+                    with open(archive_file, 'w', encoding='utf-8') as f:
+                        json.dump(baseline_log_entry, f, ensure_ascii=False, indent=2)
+                    logging.info(f"    -> 基线日志已存档到: {archive_file}")
             else:
                 new_keys = set(en_todo_list.keys())
                 old_keys = set()
-                
                 try:
                     class StringPath:
                         def __init__(self, content, name):
@@ -417,13 +413,24 @@ def main():
                     old_keys = set(old_todo_data.keys())
                 except Exception as e:
                     logging.warning(f"解析旧版 todo 文件内容时出错: {e}。将视为全新文件处理。")
+                
                 added_keys = new_keys - old_keys
                 removed_keys = old_keys - new_keys
-                
-                diff_log_message = generate_diff_log(main_mod_name, mod_id, added_keys, removed_keys)
-                
-                if diff_log_message:
-                    update_log.append(f"{timestamp}\n{diff_log_message}")
+
+                if added_keys or removed_keys:
+                    update_log_entry = {
+                        "run_id": run_id,
+                        "timestamp": timestamp,
+                        "mod_name": main_mod_name,
+                        "mod_id": mod_id,
+                        "status": "updated",
+                        "added_count": len(added_keys),
+                        "removed_count": len(removed_keys),
+                        "added_keys": sorted(list(added_keys)),
+                        "removed_keys": sorted(list(removed_keys))
+                    }
+                    update_log_entries.append(update_log_entry)
+                    logging.info(f"    -> 检测到内容变更。新增: {len(added_keys)}, 移除: {len(removed_keys)}")
 
             logging.info(f"\n处理成功！所有输出文件已保存在 '{output_dir_name}' 文件夹中。")
         except PermissionError:
@@ -432,16 +439,47 @@ def main():
             logging.error(f"写入输出文件时发生致命错误: {e}")
 
     save_status(run_status)
-    if update_log:
-        data_dir = Path('data')
-        data_dir.mkdir(exist_ok=True)
-        update_log_path = Path.cwd() / cfg.UPDATE_LOG_FILENAME
-        with open(update_log_path, 'a', encoding='utf-8') as f:
-            if update_log_path.stat().st_size == 0:
-                f.write("\n".join(update_log))
-            else:
-                f.write("\n" + "\n".join(update_log))
-        print(f"\n更新日志已记录到 {update_log_path}")
+    
+    if update_log_entries:
+        log_dir = Path('data/logs')
+        log_dir.mkdir(parents=True, exist_ok=True)
+        update_log_json_path = log_dir / 'update_log.json'
+        
+        existing_logs = []
+        if update_log_json_path.is_file():
+            try:
+                with open(update_log_json_path, 'r', encoding='utf-8') as f:
+                    existing_logs = json.load(f)
+            except (json.JSONDecodeError, FileNotFoundError):
+                logging.warning(f"无法解析现有的 {update_log_json_path}，将创建一个新的。")
+
+        existing_logs.extend(update_log_entries)
+        
+        with open(update_log_json_path, 'w', encoding='utf-8') as f:
+            json.dump(existing_logs, f, ensure_ascii=False, indent=2)
+        logging.info(f"\n增量更新日志已记录到: {update_log_json_path}")
+
+    logging.info("\n--- 所有模组处理完毕，开始生成状态报告 ---")
+    try:
+        report_script_path = Path('scripts/generate_status.py')
+        if report_script_path.is_file():
+            result = subprocess.run(
+                ['python', str(report_script_path)],
+                capture_output=True, text=True, check=True, encoding='utf-8'
+            )
+            logging.info("状态报告生成脚本输出:\n" + result.stdout)
+            if result.stderr:
+                logging.warning("状态报告生成脚本错误输出:\n" + result.stderr)
+        else:
+            logging.warning(f"未找到报告生成脚本: {report_script_path}")
+    except FileNotFoundError:
+        logging.error("错误: 'python' 命令未找到。无法执行报告生成脚本。")
+    except subprocess.CalledProcessError as e:
+        logging.error(f"执行报告生成脚本失败: {e}")
+        logging.error("脚本输出:\n" + e.stdout)
+        logging.error("脚本错误输出:\n" + e.stderr)
+    except Exception as e:
+        logging.error(f"生成报告时发生未知错误: {e}")
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(message)s')
