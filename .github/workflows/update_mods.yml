@@ -13,16 +13,14 @@ on:
         type: string
   schedule:
     - cron: '0 4 * * *' # 每天UTC时间凌晨4点运行 (北京时间中午12点)
-env:
-  MODS_PER_JOB: 10 # 每个并行任务处理10个Mod
 
 jobs:
   setup_jobs:
     runs-on: ubuntu-latest
     outputs:
-      mods_to_download: ${{ steps.combine_lists.outputs.mods_to_download }}
-      mod_groups: ${{ steps.split_list.outputs.groups }}
+      matrix: ${{ steps.generate_matrix.outputs.matrix }}
       manual_ids_raw: ${{ github.event.inputs.mod_id_override }}
+      mods_to_download: ${{ steps.combine_lists.outputs.mods_to_download }}
 
     steps:
       - name: Checkout Repository
@@ -30,9 +28,6 @@ jobs:
 
       - name: Setup Reusable Environment
         uses: ./.github/actions/setup-environment
-
-      - name: Setup SteamCMD
-        uses: CyberAndrii/setup-steamcmd@v1
 
       - name: Handle Manual Trigger Override
         id: manual_check
@@ -64,24 +59,21 @@ jobs:
             echo "mods_to_download=$SCHEDULED_LIST" >> $GITHUB_OUTPUT
           fi
 
-      - name: Split Mod List into Groups for Parallel Jobs
+      - name: Generate Job Matrix
+        id: generate_matrix
         if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
-        id: split_list
         run: |
-          {
-            echo 'groups<<EOF'
-            python scripts/split_ids.py '${{ steps.combine_lists.outputs.mods_to_download }}' ${{ env.MODS_PER_JOB }}
-            echo 'EOF'
-          } >> "$GITHUB_OUTPUT"
-
+          MATRIX_JSON=$(python scripts/generate_matrix.py '${{ steps.combine_lists.outputs.mods_to_download }}')
+          echo "生成的 Matrix JSON: $MATRIX_JSON"
+          echo "matrix=$MATRIX_JSON" >> $GITHUB_OUTPUT
 
   download_parallel:
     needs: setup_jobs
-    if: needs.setup_jobs.outputs.mods_to_download != '[]' && needs.setup_jobs.outputs.mods_to_download != ''
+    if: needs.setup_jobs.outputs.matrix != '' && needs.setup_jobs.outputs.matrix != null
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        mod_group: ${{ fromJson(needs.setup_jobs.outputs.mod_groups) }}
+      fail-fast: false
+      matrix: ${{ fromJson(needs.setup_jobs.outputs.matrix) }}
 
     steps:
       - name: Checkout Repository
@@ -93,12 +85,14 @@ jobs:
       - name: Setup SteamCMD
         uses: CyberAndrii/setup-steamcmd@v1
 
-      - name: Download Mod Group (Job ${{ strategy.job-index}})
+      - name: Download Mod Group (Job ${{ matrix.job_id }})
         run: |
-          MODS_JSON='${{ toJson(matrix.mod_group) }}'
-          echo "此任务将下载以下Mod: $MODS_JSON"
+          MOD_IDS='${{ matrix.mod_ids }}'
+          echo "此任务将下载以下Mod IDs: $MOD_IDS"
           
-          for MOD_ID in $(echo "$MODS_JSON" | jq -r '.[]'); do
+          IFS=',' read -r -a MOD_ID_ARRAY <<< "$MOD_IDS"
+
+          for MOD_ID in "${MOD_ID_ARRAY[@]}"; do
             echo "--> [ID: $MOD_ID] 正在下载..."
             APP_ID="108600"
             for i in {1..3}; do
@@ -125,7 +119,6 @@ jobs:
           find ./temp_workshop_full -mindepth 1 -maxdepth 1 -type d | while read MOD_DIR; do
             STAGING_DIR="pruned_mods/$(basename "$MOD_DIR")"
             mkdir -p "$STAGING_DIR"
-            # 使用与原流程完全相同的rsync逻辑来精确提取文件
             rsync -a --prune-empty-dirs \
               --include='*/' \
               --include='**/media/scripts/***' \
@@ -138,19 +131,19 @@ jobs:
       - name: Compress Pruned Mods
         run: |
           echo "正在将修剪后的文件压缩为 tar.gz ..."
-          tar -czf pruned-mods-${{ strategy.job-index }}.tar.gz -C pruned_mods/ .
+          tar -czf pruned-mods-${{ matrix.job_id }}.tar.gz -C pruned_mods/ .
           echo "压缩完成。"
 
       - name: Upload Pruned and Compressed Mod Group Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: pruned-mods-${{ strategy.job-index }}
-          path: pruned-mods-${{ strategy.job-index }}.tar.gz
+          name: pruned-mods-${{ matrix.job_id }}
+          path: pruned-mods-${{ matrix.job_id }}.tar.gz
           retention-days: 1
 
   process_and_commit:
     needs: [setup_jobs, download_parallel]
-    if: needs.setup_jobs.outputs.mods_to_download != '[]' && needs.setup_jobs.outputs.mods_to_download != ''
+    if: needs.setup_jobs.outputs.matrix != '' && needs.setup_jobs.outputs.matrix != null
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -176,7 +169,6 @@ jobs:
           echo "解压并合并所有下载的Mod压缩包..."
           rm -rf ./data/workshop_content
           mkdir -p ./data/workshop_content
-          # 循环解压所有下载的tar.gz文件到目标目录
           for archive in temp_artifacts/pruned-mods-*/pruned-mods-*.tar.gz; do
             if [ -f "$archive" ]; then
               tar -xzf "$archive" -C ./data/workshop_content/
@@ -227,14 +219,13 @@ jobs:
           fi
           echo "$API_RESPONSE_BATCH" > api_response.json
           jq -s '
-            .[0] as $api_data | .[1] as $current_timestamps |
+            . as $api_data | . as $current_timestamps |
             ($api_data.response.publishedfiledetails | map({(.publishedfileid): .time_updated}) | add) as $new_timestamps |
             $current_timestamps + $new_timestamps
           ' <(echo "$API_RESPONSE_BATCH") "$TIMESTAMP_FILE" > tmp.$$.json && mv tmp.$$.json "$TIMESTAMP_FILE"
     
           echo "所有Mod的时间戳已通过一次性调用更新成功。"
  
-
       - name: Run Main Translation Extractor Script
         env:
           TZ: Asia/Shanghai
@@ -270,7 +261,6 @@ jobs:
         run: |
           MODS_JSON='${{ needs.setup_jobs.outputs.mods_to_download }}'
           
-          # 检查是否有需要更新的Mod
           if [ -z "$MODS_JSON" ] || [ "$MODS_JSON" = "[]" ]; then
             echo "没有需要更新的Mod，无需创建PR。"
             echo "should_create_pr=false" >> $GITHUB_OUTPUT
