@@ -240,6 +240,31 @@ jobs:
           TZ: Asia/Shanghai
         run: python process_mods.py
 
+      - name: Push to Public Repository
+        if: success()
+        run: |
+          echo "准备将完整的 'data' 文件夹推送到公开仓库..."
+          eval "$(ssh-agent -s)"
+          ssh-add - <<< "${{ secrets.DEPLOY_KEY_PUBLIC_REPO }}"
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions-bot@github.com"
+          git clone git@github.com:Laotian21/PZ-Mod-Translation-Hub.git public_repo_clone
+          cd public_repo_clone
+          echo "正在清理旧的 'data' 文件夹..."
+          rm -rf ./data
+          echo "正在从私有仓库复制最新的 'data' 文件夹..."
+          cp -r ../data .
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "没有检测到文件变更，无需推送。"
+          else
+            echo "检测到文件变更，正在提交并推送..."
+            git add data/
+            git commit -m "Chore(自动化): 同步最新的翻译项目数据" -m "同步时间: $(date -u)"
+            
+            git push origin HEAD:main --force
+            echo "成功推送到公开仓库！"
+          fi
+
       - name: Prepare Pull Request Body
         id: prep_pr
         run: |
