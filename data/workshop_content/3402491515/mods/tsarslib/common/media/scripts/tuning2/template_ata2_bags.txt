@@ -1,0 +1,84 @@
+module Base
+{
+    
+    template vehicle ATA2Bags
+    {
+        part ATA2BagOnProtectionWindowFrontLeft
+        {
+            area = SeatFrontLeft,
+            table install
+            {
+                requireInstalled = ATAProtectionWindowFrontLeft,
+            }
+        }
+        part ATA2BagOnProtectionWindowFrontRight
+        {
+            area = SeatFrontRight,
+            table install
+            {
+                requireInstalled = ATAProtectionWindowFrontRight,
+            }
+        }
+        part ATA2BagOnProtection*
+        {
+            category = nodisplay,
+        }
+        
+        part ATA2BagMotoLeft
+        {
+            
+        }
+        part ATA2BagMotoRight
+        {
+            
+        }
+        part ATA2BagMotoHolsterLeft
+        {
+            
+        }
+        part ATA2BagMotoHolsterRight
+        {
+            
+        }
+                
+        part ATA2BagOn*
+        {
+            itemType = ATA2.ATA2ItemContainer,
+        }
+        
+        part ATA2Bag*
+        {
+            area = TruckBed,
+            specificItem = false,
+            mechanicRequireKey = false,
+            container
+            {
+                conditionAffectsCapacity = false,
+                test = Vehicles.ContainerAccess.TruckBedOpen,
+            }
+            table install
+            {
+                test = ATATuning2.InstallTest.Tuning,
+                complete = ATATuning2.InstallComplete.Tuning,
+            }
+            table uninstall
+            {
+                test = ATATuning2.UninstallTest.Tuning,
+                complete = ATATuning2.UninstallComplete.Tuning,
+            }
+            lua
+            {
+                create = ATATuning2.Create.Tuning,
+                init = ATATuning2.Init.Tuning,
+            }
+        }
+        part ATA2BagMoto*
+        {
+            container
+            {
+                conditionAffectsCapacity = false,
+                test = ATATuning.ContainerAccess.MotoBags,
+            }
+        }
+    }
+}

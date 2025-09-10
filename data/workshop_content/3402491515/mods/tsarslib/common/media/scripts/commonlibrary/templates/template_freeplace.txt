@@ -1,0 +1,193 @@
+module Base
+{
+    item ATAFreestorageTrunk
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight    =    1.0,
+        Type    =    Normal,
+        DisplayName    =    Big Trunk,
+        Icon    =    CarTrunk,
+        VehicleType =   1,
+        MaxCapacity = 300,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 0,
+        MechanicsItem = TRUE,
+    }
+    
+    template vehicle Freeplace
+    {
+        part Freeplace1FrontLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part Freeplace1FrontRight
+        {
+            area = SeatFrontRight,
+        }
+        part Freeplace1MiddleLeft
+        {
+            area = SeatMiddleLeft,
+        }
+        part Freeplace1MiddleRight
+        {
+            area = SeatMiddleRight,
+        }
+        part Freeplace1RearLeft
+        {
+            area = SeatRearLeft,
+        }
+        part Freeplace1RearRight
+        {
+            area = SeatRearRight,
+        }
+        
+        part Freeplace2FrontLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part Freeplace2FrontRight
+        {
+            area = SeatFrontRight,
+        }
+        part Freeplace2MiddleLeft
+        {
+            area = SeatMiddleLeft,
+        }
+        part Freeplace2MiddleRight
+        {
+            area = SeatMiddleRight,
+        }
+        part Freeplace2RearLeft
+        {
+            area = SeatRearLeft,
+        }
+        part Freeplace2RearRight
+        {
+            area = SeatRearRight,
+        }
+        
+        part Freeplace3FrontLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part Freeplace3FrontRight
+        {
+            area = SeatFrontRight,
+        }
+        part Freeplace3MiddleLeft
+        {
+            area = SeatMiddleLeft,
+        }
+        part Freeplace3MiddleRight
+        {
+            area = SeatMiddleRight,
+        }
+        part Freeplace3RearLeft
+        {
+            area = SeatRearLeft,
+        }
+        part Freeplace3RearRight
+        {
+            area = SeatRearRight,
+        }
+        
+        part Freeplace*
+        {
+            category = bodywork,
+            specificItem = false,
+            itemType = Base.Mattress;Base.TransportCounter;Base.Drawer;Base.TransportFreezer;Base.TransportFridge;Base.TransportMedicine;Base.TransportMicrowave;Base.TransportOven;Base.TransportShelve,
+
+            container
+            {
+                test = CommonTemplates.ContainerAccess.Freeplace,
+            }
+            
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics;Basic Tuning,
+                test = ATATuning.InstallTest.multiRequire,
+                complete = CommonTemplates.InstallComplete.Freeplace,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                    type = Base.Screwdriver,
+                    count = 1,
+                    keep = true,
+                    equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics;Basic Tuning,
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = CommonTemplates.UninstallComplete.Freeplace,
+            }
+            lua
+            {
+                create = CommonTemplates.Create.Freeplace,
+                init = CommonTemplates.Init.Freeplace,
+                update = CommonTemplates.Update.Freeplace,
+            }
+        }
+        part FreestorageFrontLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part FreestorageFrontRight
+        {
+            area = SeatFrontRight,
+        }
+        part FreestorageMiddleLeft
+        {
+            area = SeatMiddleLeft,
+        }
+        part FreestorageMiddleRight
+        {
+            area = SeatMiddleRight,
+        }
+        part FreestorageRearLeft
+        {
+            area = SeatRearLeft,
+        }
+        part FreestorageRearRight
+        {
+            area = SeatRearRight,
+        }
+
+        part Freestorage*
+        {
+            category = nodisplay,
+            table container
+            {
+                capacity = 300,
+            }
+            container
+            {
+                capacity = 300,
+                test = CommonTemplates.ContainerAccess.Freestorage,
+            }
+            lua
+            {
+                create = CommonTemplates.Create.Freestorage,
+                init = CommonTemplates.Init.Freestorage,
+            }
+        }
+    }
+}
