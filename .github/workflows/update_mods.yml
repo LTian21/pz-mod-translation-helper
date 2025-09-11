@@ -189,6 +189,9 @@ jobs:
           done
           echo "所有Mod准备就绪。"
 
+      - name: Clean up temporary artifacts
+        run: rm -rf temp_artifacts    
+
       - name: Dynamically Add New Mod IDs to id_list.txt
         if: needs.setup_jobs.outputs.manual_ids_raw != ''
         run: |
