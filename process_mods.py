@@ -4,6 +4,7 @@ import logging
 import re
 import subprocess
 import io
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Final
