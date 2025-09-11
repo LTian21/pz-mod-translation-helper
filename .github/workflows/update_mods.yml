@@ -13,8 +13,6 @@ on:
         type: string
   schedule:
     - cron: '0 4 * * *' # 每天UTC时间凌晨4点运行 (北京时间中午12点)
-env:
-  MODS_PER_JOB: 10 # 每个并行任务处理10个Mod
 
 jobs:
   setup_jobs:
@@ -64,13 +62,20 @@ jobs:
             echo "mods_to_download=$SCHEDULED_LIST" >> $GITHUB_OUTPUT
           fi
 
+      - name: Calculate Mods per Job
+        if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
+        id: job_calculator
+        run: |
+          MODS_PER_JOB=$(python scripts/calculate_jobs.py '${{ steps.combine_lists.outputs.mods_to_download }}')
+          echo "mods_per_job=$MODS_PER_JOB" >> $GITHUB_OUTPUT
+
       - name: Split Mod List into Groups for Parallel Jobs
         if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
         id: split_list
         run: |
           {
             echo 'groups<<EOF'
-            python scripts/split_ids.py '${{ steps.combine_lists.outputs.mods_to_download }}' ${{ env.MODS_PER_JOB }}
+            python scripts/split_ids.py '${{ steps.combine_lists.outputs.mods_to_download }}' ${{ steps.job_calculator.outputs.mods_per_job }}
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
 
@@ -189,6 +194,8 @@ jobs:
         run: |
           CLEANED_MODS_JSON='${{ needs.setup_jobs.outputs.mods_to_download }}'
           
+          [ -n "$(tail -c1 id_list.txt)" ] && echo >> id_list.txt
+          
           for ID in $(echo "$CLEANED_MODS_JSON" | jq -r '.[]'); do
             if grep -q -w -x "$ID" id_list.txt; then
               echo "  -> ID: $ID 已存在于 id_list.txt 中，无需添加。"
@@ -239,36 +246,6 @@ jobs:
         env:
           TZ: Asia/Shanghai
         run: python process_mods.py
-
-      - name: Push to Public Repository
-        if: success()
-        run: |
-          echo "准备将数据和报告推送到公开仓库..."
-          eval "$(ssh-agent -s)"
-          ssh-add - <<< "${{ secrets.DEPLOY_KEY_PUBLIC_REPO }}"
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "actions-bot@github.com"
-          
-          git clone git@github.com:Laotian21/PZ-Mod-Translation-Hub.git public_repo_clone
-          cd public_repo_clone
-          
-          echo "正在清理旧的 'data' 文件夹..."
-          rm -rf ./data
-          echo "正在从私有仓库复制最新的 'data' 文件夹..."
-          cp -r ../data .
-          echo "正在复制报告文件..."
-          cp ../STATUS.md .
-          cp ../MOD_TODO_STATUS.md .
-
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "没有检测到文件变更，无需推送。"
-          else
-            echo "检测到文件变更，正在提交并推送..."
-            git add data/ STATUS.md MOD_TODO_STATUS.md
-            git commit -m "Chore(自动化): 同步翻译数据并更新报告" -m "同步时间: $(date -u)"
-            git push origin HEAD:main --force
-            echo "成功推送到公开仓库！"
-          fi
 
       - name: Prepare Pull Request Body
         id: prep_pr
