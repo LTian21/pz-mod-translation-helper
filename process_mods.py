@@ -281,20 +281,43 @@ def main():
     completed_path.mkdir(exist_ok=True)
     
     mods_to_process = []
-    if cfg.TARGET_PATH.name == 'mods':
-        mods_to_process.append(cfg.TARGET_PATH.parent)
-    else:
+    if len(sys.argv) > 1 and sys.argv[1]:
         try:
-            lines = ID_LIST_FILE.read_text(encoding='utf-8').splitlines()
-            mod_ids_to_process = {line.strip() for line in lines if line.strip().isdigit()}
-            logging.info(f"成功加载 {ID_LIST_FILE} ,将处理 {len(mod_ids_to_process)} 个Mod。")
-            for mod_id in sorted(list(mod_ids_to_process)):
-                mod_id_path = cfg.TARGET_PATH / mod_id
-                if mod_id_path.is_dir(): mods_to_process.append(mod_id_path)
-                else: logging.warning(f"\n警告：在 {cfg.TARGET_PATH} 中未找到 ID 为 {mod_id} 的文件夹，已跳过。")
-        except FileNotFoundError:
-            logging.error(f"错误：未找到 {ID_LIST_FILE} 文件。请在列表模式下提供此文件。")
+            manual_ids_str = sys.argv[1]
+            mod_ids_to_process = json.loads(manual_ids_str)
+            if not isinstance(mod_ids_to_process, list):
+                raise ValueError("传入的参数不是一个有效的JSON列表。")
+                
+            logging.info(f"手动触发模式: 收到 {len(mod_ids_to_process)} 个待处理的Mod ID。")
+            
+            for mod_id in sorted(mod_ids_to_process):
+                mod_id_path = cfg.TARGET_PATH / str(mod_id)
+                if mod_id_path.is_dir():
+                    mods_to_process.append(mod_id_path)
+                else:
+                    logging.warning(f"\n警告：在 {cfg.TARGET_PATH} 中未找到手动传入的 ID {mod_id} 文件夹，已跳过。")
+        except (json.JSONDecodeError, ValueError) as e:
+            logging.error(f"错误：解析手动传入的Mod ID列表时失败: {e}")
+            logging.error(f"收到的原始参数: {sys.argv[1]}")
             return
+    else:
+        logging.info("自动/计划模式: 从 id_list.txt 加载Mod列表。")
+        if cfg.TARGET_PATH.name == 'mods':
+            mods_to_process.append(cfg.TARGET_PATH.parent)
+        else:
+            try:
+                lines = ID_LIST_FILE.read_text(encoding='utf-8').splitlines()
+                mod_ids_to_process = {line.strip() for line in lines if line.strip().isdigit()}
+                logging.info(f"成功加载 {ID_LIST_FILE} ,将处理 {len(mod_ids_to_process)} 个Mod。")
+                for mod_id in sorted(list(mod_ids_to_process)):
+                    mod_id_path = cfg.TARGET_PATH / mod_id
+                    if mod_id_path.is_dir():
+                        mods_to_process.append(mod_id_path)
+                    else:
+                        logging.warning(f"\n警告：在 {cfg.TARGET_PATH} 中未找到 ID 为 {mod_id} 的文件夹，已跳过。")
+            except FileNotFoundError:
+                logging.error(f"错误：未找到 {ID_LIST_FILE} 文件。请在列表模式下提供此文件。")
+                return
 
     for mod_id_path in mods_to_process:
         mods_parent_path = mod_id_path / "mods"
@@ -318,7 +341,7 @@ def main():
         
         logging.info(f"\n\n{'='*25} 开始处理 Workshop ID: {mod_id} ({main_mod_name}) {'='*25}")
         
-        completed_mod_path = completed_path / output_dir_name
+        completed_mod_path = completed_path / mod_id
         completed_mod_path.mkdir(exist_ok=True) 
         completed_todo_file = completed_mod_path / cfg.COMPLETED_FILENAME
         logging.info(f"\n--- 正在检查已完成的翻译于: {completed_todo_file} ---")
