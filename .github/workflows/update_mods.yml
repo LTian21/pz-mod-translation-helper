@@ -13,8 +13,6 @@ on:
         type: string
   schedule:
     - cron: '0 4 * * *' # 每天UTC时间凌晨4点运行 (北京时间中午12点)
-env:
-  MODS_PER_JOB: 10 # 每个并行任务处理10个Mod
 
 jobs:
   setup_jobs:
@@ -64,13 +62,20 @@ jobs:
             echo "mods_to_download=$SCHEDULED_LIST" >> $GITHUB_OUTPUT
           fi
 
+      - name: Calculate Mods per Job
+        if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
+        id: job_calculator
+        run: |
+          MODS_PER_JOB=$(python scripts/calculate_jobs.py '${{ steps.combine_lists.outputs.mods_to_download }}')
+          echo "mods_per_job=$MODS_PER_JOB" >> $GITHUB_OUTPUT
+
       - name: Split Mod List into Groups for Parallel Jobs
         if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
         id: split_list
         run: |
           {
             echo 'groups<<EOF'
-            python scripts/split_ids.py '${{ steps.combine_lists.outputs.mods_to_download }}' ${{ env.MODS_PER_JOB }}
+            python scripts/split_ids.py '${{ steps.combine_lists.outputs.mods_to_download }}' ${{ steps.job_calculator.outputs.mods_per_job }}
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
 
@@ -118,11 +123,35 @@ jobs:
             fi
           done
 
-      - name: Upload Mod Group Artifact
+      - name: Prune and Prepare Mods for Artifact Upload
+        run: |
+          echo "开始修剪已下载的Mod，仅保留翻译相关文件..."
+          mkdir -p pruned_mods
+          find ./temp_workshop_full -mindepth 1 -maxdepth 1 -type d | while read MOD_DIR; do
+            STAGING_DIR="pruned_mods/$(basename "$MOD_DIR")"
+            mkdir -p "$STAGING_DIR"
+            # 使用与原流程完全相同的rsync逻辑来精确提取文件
+            rsync -a --prune-empty-dirs \
+              --include='*/' \
+              --include='**/media/scripts/***' \
+              --include='**/media/lua/shared/Translate/***' \
+              --exclude='*' \
+              "$MOD_DIR/" "$STAGING_DIR/"
+          done
+          echo "Mod修剪完成。"
+
+      - name: Compress Pruned Mods
+        run: |
+          echo "正在将修剪后的文件压缩为 tar.gz ..."
+          tar -czf pruned-mods-${{ strategy.job-index }}.tar.gz -C pruned_mods/ .
+          echo "压缩完成。"
+
+      - name: Upload Pruned and Compressed Mod Group Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: full-mods-${{ strategy.job-index }}
-          path: temp_workshop_full/
+          name: pruned-mods-${{ strategy.job-index }}
+          path: pruned-mods-${{ strategy.job-index }}.tar.gz
+          retention-days: 1
 
   process_and_commit:
     needs: [setup_jobs, download_parallel]
@@ -140,23 +169,35 @@ jobs:
       - name: Setup Reusable Environment
         uses: ./.github/actions/setup-environment
           
-      - name: Download all Mod Artifacts
+      - name: Download all Pruned Mod Artifacts
         uses: actions/download-artifact@v4
         with:
-          pattern: full-mods-*
+          pattern: pruned-mods-*
           path: temp_artifacts/
-          merge-multiple: true
+          merge-multiple: false
 
-      - name: Merge and Prepare Mods for Processing
+      - name: Decompress and Merge Mods for Processing
         run: |
+          echo "解压并合并所有下载的Mod压缩包..."
           rm -rf ./data/workshop_content
           mkdir -p ./data/workshop_content
-          find temp_artifacts/ -mindepth 1 -maxdepth 1 -type d -exec mv {} ./data/workshop_content/ \;
+          # 循环解压所有下载的tar.gz文件到目标目录
+          for archive in temp_artifacts/pruned-mods-*/pruned-mods-*.tar.gz; do
+            if [ -f "$archive" ]; then
+              tar -xzf "$archive" -C ./data/workshop_content/
+            fi
+          done
+          echo "所有Mod准备就绪。"
+
+      - name: Clean up temporary artifacts
+        run: rm -rf temp_artifacts    
 
       - name: Dynamically Add New Mod IDs to id_list.txt
         if: needs.setup_jobs.outputs.manual_ids_raw != ''
         run: |
           CLEANED_MODS_JSON='${{ needs.setup_jobs.outputs.mods_to_download }}'
+          
+          [ -n "$(tail -c1 id_list.txt)" ] && echo >> id_list.txt
           
           for ID in $(echo "$CLEANED_MODS_JSON" | jq -r '.[]'); do
             if grep -q -w -x "$ID" id_list.txt; then
@@ -207,20 +248,7 @@ jobs:
       - name: Run Main Translation Extractor Script
         env:
           TZ: Asia/Shanghai
-        run: python process_mods.py
-
-      - name: Prune Mods for Repository
-        run: |
-          echo "处理完成，开始修剪mod以提交..."
-          mkdir -p pruned_staging
-          find ./data/workshop_content -mindepth 1 -maxdepth 1 -type d | while read MOD_DIR; do
-            STAGING_DIR="pruned_staging/$(basename "$MOD_DIR")"
-            mkdir -p "$STAGING_DIR"
-            rsync -a --prune-empty-dirs --include='*/' --include='**/media/scripts/***' --include='**/media/lua/shared/Translate/***' --exclude='*' "$MOD_DIR/" "$STAGING_DIR/"
-          done
-          rm -rf ./data/workshop_content
-          mv pruned_staging ./data/workshop_content
-          echo "Mod修剪完成。"
+        run: python process_mods.py '${{ needs.setup_jobs.outputs.mods_to_download }}'
 
       - name: Prepare Pull Request Body
         id: prep_pr
@@ -262,13 +290,19 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Chore(自动化): 更新Mod并重新生成翻译文件"
-          branch: bot/auto-update-${{ github.run_id }}          
-          title: '🤖 自动化Mod更新 [${{ env.TODAY }}]'
+          commit-message: |
+            Chore(自动化): 更新Mod并生成报告
+            
+            本次运行 (ID: ${{ github.run_id }}) 的变更包括:
+            - 更新了受影响Mod的翻译文件。
+            - 生成了新的状态报告 (STATUS.md, INTERNAL_STATUS.md, MOD_TODO_STATUS.md)。
+            - 更新了增量日志 (data/logs/update_log.json)。
+            - 存档了新的基线日志 (如果适用)。
+          branch: bot/auto-update-${{ github.run_id }}
+          title: '🤖 自动化Mod更新与报告 [${{ env.TODAY }}]'
           body-path: "pr_body.md"
-          
           labels: "automated-update, bot"
-          reviewers: ${{ github.actor }} 
+          reviewers: ${{ github.actor }}
 
       - name: Prepare Issue Body on Failure
         if: failure()
