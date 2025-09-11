@@ -1,0 +1,85 @@
+module Base
+{
+	item KATTAJ1_TacticalFlashlight
+    {
+        	DisplayCategory 	= 	LightSource,
+       	 	LightDistance		=	18,
+        	Weight				=	0.1,
+        	DisappearOnUse		=	FALSE,
+        	Type				=	Drainable,
+        	TorchCone			=	TRUE,
+        	UseDelta			=	0.00002,
+        	LightStrength		=	3,
+        	DisplayName			=	Tactical Flashlight,
+        	ActivatedItem		=	TRUE,
+		Tooltip 			= 	Tooltip_KATTAJ1_TacticalFlashlight,
+        	Icon				=	KATTAJ1_TacticalFlashlight,
+        	MetalValue 			= 	5,
+        	cantBeConsolided 	= 	TRUE,
+        	StaticModel 		= 	KATTAJ1_TacticalFlashlight,
+        	primaryAnimMask 	= 	HoldingTorchRight,
+        	secondaryAnimMask 	= 	HoldingTorchLeft,
+        	WorldStaticModel 	= 	KATTAJ1_TacticalFlashlight_Ground,
+		AttachmentType 		= 	FlashlightKATTAJ1,
+    }
+
+
+
+
+	model KATTAJ1_TacticalFlashlight
+	{
+        	mesh = KATTAJ1_TacticalFlashlight,
+        	texture = KATTAJ1_TacticalFlashlight,
+        	scale = 1,
+    	}
+
+	model KATTAJ1_TacticalFlashlight_Ground
+	{
+	        mesh = WorldItems/KATTAJ1_TacticalFlashlight_Ground,
+	        texture = KATTAJ1_TacticalFlashlight,
+        	scale = 1,
+    	}
+
+
+
+	
+	recipe Remove Battery
+	{
+		keep KATTAJ1_TacticalFlashlight,
+
+		Result:Battery,
+		Time:30,
+		OnTest:Recipe.OnTest.TorchBatteryRemoval,
+		OnCreate:Recipe.OnCreate.KATTAJ1_RemoveFlashlightBattery,
+		StopOnWalk:false,
+	}
+	
+	
+	recipe Insert Battery into Flashlight
+	{
+		destroy KATTAJ1_TacticalFlashlight,
+		destroy Battery,
+
+		Result:KATTAJ1_TacticalFlashlight,
+		Time:30,
+		OnTest:Recipe.OnTest.KATTAJ1_InsertFlashlightBattery,
+		OnCreate:Recipe.OnCreate.TorchBatteryInsert,
+		StopOnWalk:false,
+	}
+	
+	recipe Dismantle Flashlight
+	{
+		destroy KATTAJ1_TacticalFlashlight,
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+		Result:ElectronicsScrap,
+		Time:30.0,
+		OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+		OnCreate:Recipe.OnCreate.KATTAJ1_DismantleFlashlight,
+		Category:Electrical,
+		AnimNode:Disassemble,
+		Prop1:Screwdriver,
+		Prop2:Source=1,
+	}
+}
+
