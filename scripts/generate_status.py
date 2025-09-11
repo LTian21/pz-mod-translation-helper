@@ -5,7 +5,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 # --- 配置 ---
-COMPLETED_FILES_DIR = Path('data/completed_files')
+COMPLETED_FILES_DIR = Path('data/output_files')
 LOG_DIR = Path('data/logs')
 UPDATE_LOG_JSON = LOG_DIR / 'update_log.json'
 
