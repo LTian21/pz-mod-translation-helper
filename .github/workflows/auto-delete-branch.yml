@@ -1,0 +1,17 @@
+name: Auto Delete 'bot' Branch on PR Close
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  delete-bot-branch:
+    runs-on: ubuntu-latest
+
+    if: contains(github.event.pull_request.labels.*.name, 'bot')
+
+    steps:
+      - name: Delete head branch
+        uses: SvanBoxel/delete-merged-branch@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
