@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-12 21:40:21 UTC+08:00`*
+*最后更新于：`2025-09-12 22:21:52 UTC+08:00`*
 
 ---
 
@@ -51,6 +51,7 @@
 | Wallpapers | 2999595757 | 114 |
 | Vanilla_Clothing_Expansion | 3421271152 | 112 |
 | Tomb's_Goth_Hair | 3531765630 | 111 |
+| USMilitaryPack | 612100872 | 106 |
 | BanditsAddOptions | 3412682512 | 94 |
 | StandardizedVehicleUpgrades3Core | 3403490889 | 89 |
 | B42_Rain's_Pack_Your_Loot | 3490159683 | 88 |
@@ -61,6 +62,7 @@
 | ScavengingSkill_[B42] | 3407792640 | 69 |
 | Farming_Expansion | 3444499190 | 67 |
 | MoreItemInformation | 3494474677 | 67 |
+| SpearFishing | 3539114542 | 63 |
 | ModTemplate | 3026307069 | 62 |
 | A&M_New_Frontier | 3387569160 | 59 |
 | CustomWeight | 3391228479 | 58 |
@@ -70,6 +72,8 @@
 | ARTR_RFGP | 3397215647 | 51 |
 | KeepPerkLevel | 3314107094 | 48 |
 | LastPushTrait | 3028253067 | 46 |
+| Zombaroid | 3519916139 | 42 |
+| SmartHutch | 3556857572 | 41 |
 | CombatTraits | 3427091746 | 40 |
 | ReactiveSoundEvents | 2969551071 | 39 |
 | SoulFilchersBeautifyngTime | 2425267353 | 39 |
@@ -100,6 +104,7 @@
 | Bicycle | 3461415167 | 22 |
 | 86fordE150 | 2870394916 | 22 |
 | Night_Vision | 3470491629 | 21 |
+| ToughnessSkill | 3545533939 | 21 |
 | ClothesBOX | 2847911733 | 21 |
 | ahz_clothing_b42 | 3388910383 | 20 |
 | ClearingTime | 1926311864 | 20 |
@@ -110,6 +115,7 @@
 | Zombies_Congelados_TWD_B42 | 3426132882 | 14 |
 | EFTBackpacks | 3432928943 | 13 |
 | MinimapStyleOptions | 3526517370 | 13 |
+| ExtendedSpices | 3522142755 | 12 |
 | Gunpoint_Redemption | 3078291265 | 11 |
 | Herbalist | 2875059598 | 11 |
 | DivisionBackpack | 3391306957 | 11 |
