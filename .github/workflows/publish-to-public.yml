@@ -4,9 +4,11 @@ on:
   pull_request:
     types: [closed]
 
+  workflow_dispatch:
+
 jobs:
   publish:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'bot/auto-update-')
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.merged == true && github.event.sender.login == 'Laotian21-bot')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -14,6 +16,19 @@ jobs:
     steps:
       - name: Checkout main branch of Private Repo (Source)
         uses: actions/checkout@v4
+        with:
+          ref: 'main'
+
+      - name: Determine Commit Message
+        id: commit_message_step
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # 自动触发时，引用 PR 号
+            echo "message=Chore(自动化): 同步翻译数据 [Private PR #${{ github.event.pull_request.number }}]" >> $GITHUB_OUTPUT
+          else
+            # 手动触发时，使用通用信息
+            echo "message=Chore(自动化): 手动同步翻译数据" >> $GITHUB_OUTPUT
+          fi
 
       - name: Setup SSH for Public Repository Access
         uses: webfactory/ssh-agent@v0.9.0
@@ -61,7 +76,7 @@ jobs:
             git add data/ STATUS.md MOD_TODO_STATUS.md
             
             PR_NUMBER="${{ github.event.pull_request.number }}"
-            COMMIT_MESSAGE="Chore(自动化): 同步翻译数据 [Private PR #${PR_NUMBER}]"
+            COMMIT_MESSAGE="${{ steps.commit_message_step.outputs.message }}"
             COMMIT_DETAILS="同步时间: $(date -u)"
             git commit -m "$COMMIT_MESSAGE" -m "$COMMIT_DETAILS"
             
