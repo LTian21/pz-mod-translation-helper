@@ -18,7 +18,11 @@ def main():
     data_dir.mkdir(exist_ok=True)
     timestamp_file = data_dir / "mod_timestamps.json"
     if timestamp_file.exists():
-        old_stamps = json.loads(timestamp_file.read_text(encoding='utf-8'))
+        try:
+            old_stamps = json.loads(timestamp_file.read_text(encoding='utf-8'))
+        except json.JSONDecodeError:
+            print(f"警告: 文件 {timestamp_file} 内容不是有效的JSON，将使用空数据。")
+            old_stamps = {}
     else:
         old_stamps = {}
 
@@ -48,49 +52,83 @@ def main():
 
     print(f"去重后，准备查询 {len(mod_ids)} 个唯一的 Mod。")
 
-    try:
-        payload = {
-            "itemcount": len(mod_ids),
-            **{f"publishedfileids[{i}]": mod_id for i, mod_id in enumerate(mod_ids)}
-        }
-        response = requests.post(
-            f"https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/?key={api_key}",
-            data=payload
-        )
-        response.raise_for_status()
-        data = response.json()
-    except requests.RequestException as e:
-        print(f"错误: 调用Steam API失败: {e}")
-        exit(1)
-    
-    mod_details = data.get("response", {}).get("publishedfiledetails", [])
-    if not mod_details:
-        print("错误: API响应格式不正确或未返回任何Mod详情。")
-        print("收到的响应:", data)
+    all_mod_details = []
+    chunk_size = 18
+
+    for i in range(0, len(mod_ids), chunk_size):
+        chunk = mod_ids[i:i + chunk_size]
+        print(f"正在查询第 {i//chunk_size + 1} 批 Mod (共 {len(chunk)} 个)...")
+        
+        try:
+            payload = {
+                "itemcount": len(chunk),
+                **{f"publishedfileids[{j}]": mod_id for j, mod_id in enumerate(chunk)}
+            }
+            response = requests.post(
+                f"https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/",
+                params={"key": api_key},
+                data=payload
+            )
+            response.raise_for_status()
+            data = response.json()
+            
+            details = data.get("response", {}).get("publishedfiledetails", [])
+            if details:
+                all_mod_details.extend(details)
+            else:
+                print(f"警告: API响应格式不正确或未返回该批次的Mod详情。")
+                print("收到的响应:", data)
+
+        except requests.RequestException as e:
+            print(f"错误: 调用Steam API失败 (批次 {i//chunk_size + 1}): {e}")
+            continue
+
+    if not all_mod_details:
+        print("错误: 所有API请求均失败或未返回任何有效的Mod详情。")
         exit(1)
 
     mods_to_download = []
-    for detail in mod_details:
+    updated_stamps = old_stamps.copy()
+
+    for detail in all_mod_details:
         if detail.get("result") == 1:
             mod_id = detail["publishedfileid"]
             new_time = detail["time_updated"]
-            old_time = old_stamps.get(mod_id, 0)
+            old_time = int(old_stamps.get(mod_id, 0))
 
             print(f"检查 [ID: {mod_id}]: 最新时间戳={new_time}, 已记录时间戳={old_time}")
-            if new_time > int(old_time): # 确保比较的是整数
+            if new_time > old_time:
                 print("  -> 需要更新。")
                 mods_to_download.append(mod_id)
+                updated_stamps[mod_id] = new_time
             else:
                 print("  -> 无需更新。")
+    
+    try:
+        timestamp_file.write_text(json.dumps(updated_stamps, indent=4), encoding='utf-8')
+        print(f"时间戳文件 {timestamp_file} 已更新。")
+    except IOError as e:
+        print(f"错误: 无法写入时间戳文件 {timestamp_file}: {e}")
+
 
     output_to_github(mods_to_download)
 
 def output_to_github(id_list):
-    output_path = Path(os.environ["GITHUB_OUTPUT"])
+    output_path_str = os.environ.get("GITHUB_OUTPUT")
+    if not output_path_str:
+        print("非 GitHub Actions 环境，将结果打印到控制台。")
+        print(f"mods_to_download={json.dumps(id_list)}")
+        return
+
+    output_path = Path(output_path_str)
     json_output = json.dumps(id_list)
     print(f"需要更新的Mod: {json_output}")
-    with output_path.open("a") as f:
-        f.write(f"mods_to_download={json_output}\n")
+    try:
+        with output_path.open("a") as f:
+            f.write(f"mods_to_download={json_output}\n")
+    except IOError as e:
+        print(f"错误: 无法写入 GitHub output 文件: {e}")
+
 
 if __name__ == "__main__":
     main()

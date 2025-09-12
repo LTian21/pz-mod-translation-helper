@@ -1,0 +1,55 @@
+name: Close Public PR After Merge
+
+on:
+  pull_request:
+    types: [closed]
+
+env:
+  PUBLIC_REPO_FULL_NAME: "Laotian21/PZ-Mod-Translation-Hub"
+
+jobs:
+  sync_close_to_public_repo:
+    # 核心逻辑：仅当 PR 被合并 (merged) 且其源分支名以 'public-pr-' 开头时才运行
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'public-pr-')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Extract Public PR Number from Branch Name
+        id: pr_details
+        run: |
+          BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
+          PUBLIC_PR_NUMBER=${BRANCH_NAME#public-pr-}
+          echo "Extracted Public PR Number: ${PUBLIC_PR_NUMBER}"
+          echo "PUBLIC_PR_NUMBER=${PUBLIC_PR_NUMBER}" >> "$GITHUB_OUTPUT"
+
+      - name: Comment on and Close the Public PR
+        env:
+          # 此令牌必须拥有对公开仓库的 'repo' 权限
+          GH_TOKEN: ${{ secrets.PUBLIC_REPO_TOKEN }}
+        run: |
+          set -e
+          PUBLIC_PR_NUMBER="${{ steps.pr_details.outputs.PUBLIC_PR_NUMBER }}"
+          PRIVATE_MERGE_COMMIT_SHA="${{ github.event.pull_request.merge_commit_sha }}"
+
+          # 【优化】使用 heredoc 格式化多行评论，更安全可靠
+          MESSAGE_BODY=$(cat <<EOF | sed 's/^[ ]*//')
+          🎉 感谢您的贡献！
+
+          您的 Pull Request 已被合并到我们的主仓库中，并将包含在未来的公开发布里。
+
+          *您可以在此提交记录中追踪您的更改：\`${PRIVATE_MERGE_COMMIT_SHA}\`*
+
+          我们期待您的下一次贡献！
+          EOF
+          )
+          
+          echo "Commenting on Public PR #${PUBLIC_PR_NUMBER} in repo ${{ env.PUBLIC_REPO_FULL_NAME }}..."
+          gh pr comment "${PUBLIC_PR_NUMBER}" \
+            --repo "${{ env.PUBLIC_REPO_FULL_NAME }}" \
+            --body "$MESSAGE_BODY"
+
+          echo "Closing Public PR #${PUBLIC_PR_NUMBER}..."
+          gh pr close "${PUBLIC_PR_NUMBER}" \
+            --repo "${{ env.PUBLIC_REPO_FULL_NAME }}" || true
+          
+          echo "Public PR #${PUBLIC_PR_NUMBER} has been successfully closed and commented on."
