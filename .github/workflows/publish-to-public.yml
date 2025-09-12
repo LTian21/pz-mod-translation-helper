@@ -2,50 +2,71 @@ name: Deploy to Public Repository
 
 on:
   pull_request:
-    types: [closed] # 当一个PR被关闭时触发
+    types: [closed]
 
 jobs:
   publish:
-    # 只有当PR被合并(merged)，并且是由我们的bot创建的，才运行此任务
     if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'bot/auto-update-')
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
 
     steps:
-      - name: Checkout main branch of Private Repo
+      - name: Checkout main branch of Private Repo (Source)
         uses: actions/checkout@v4
 
-      - name: Push to Public Repository
+      - name: Setup SSH for Public Repository Access
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY_PUBLIC_REPO }}
+
+      - name: Configure Git for Public Repository
         run: |
-          echo "PR已合并，开始同步数据到公开仓库..."
-          eval "$(ssh-agent -s)"
-          ssh-add - <<< "${{ secrets.DEPLOY_KEY_PUBLIC_REPO }}"
+          set -e
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions-bot@github.com"
+          echo "Adding GitHub to known_hosts..."
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Clone Public Repository (Destination)
+        run: |
+          set -e
+          echo "Cloning public repository with --depth 1..."
+          git clone --depth 1 git@github.com:Laotian21/PZ-Mod-Translation-Hub.git public_repo_clone
           
-          # 克隆公开仓库
-          git clone git@github.com:Laotian21/PZ-Mod-Translation-Hub.git public_repo_clone
-          cd public_repo_clone
+      - name: Sync Data and Report Files
+        working-directory: public_repo_clone
+        run: |
+          set -e
+          echo "PR已合并，开始同步数据到公开仓库..."
           
           echo "正在清理旧的 'data' 文件夹..."
-          rm -rf ./data
+          rm -rf ./data || true
           echo "正在从私有仓库复制最新的 'data' 文件夹..."
-          # ../data 指向的是 checkout 步骤中拉取到的私有库的 data 文件夹
           cp -r ../data .
           echo "正在复制报告文件..."
           cp ../STATUS.md .
           cp ../MOD_TODO_STATUS.md .
 
+      - name: Commit and Push Changes to Public Repository
+        id: commit_push
+        working-directory: public_repo_clone
+        run: |
+          set -e
           if [ -z "$(git status --porcelain)" ]; then
             echo "没有检测到文件变更，无需推送。"
+            echo "pushed=false" >> $GITHUB_OUTPUT
           else
             echo "检测到文件变更，正在提交并推送..."
             git add data/ STATUS.md MOD_TODO_STATUS.md
-            # 提交信息可以引用被合并的PR
-            COMMIT_MESSAGE="Chore(自动化): 同步翻译数据并更新报告"
+            
+            PR_NUMBER="${{ github.event.pull_request.number }}"
+            COMMIT_MESSAGE="Chore(自动化): 同步翻译数据 [Private PR #${PR_NUMBER}]"
             COMMIT_DETAILS="同步时间: $(date -u)"
             git commit -m "$COMMIT_MESSAGE" -m "$COMMIT_DETAILS"
+            
             git push origin HEAD:main --force
             echo "成功推送到公开仓库！"
+            # 使用 $GITHUB_OUTPUT 写入输出变量
+            echo "pushed=true" >> $GITHUB_OUTPUT
           fi
