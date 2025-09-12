@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-11 23:42:19 UTC+08:00`*
+*最后更新于：`2025-09-12 12:16:25 UTC+08:00`*
 
 ---
 
@@ -17,7 +17,7 @@
 | KATTAJ1_Military_Pack | 3470426196 | 644 |
 | Buildables_Expansion | 3463117260 | 617 |
 | Customizable_Containers | 2719850086 | 547 |
-| KnoxEventExpanded | 3397396843 | 490 |
+| KnoxEventExpanded | 3397396843 | 484 |
 | Bandits | 3268487204 | 458 |
 | Firearms | 2256623447 | 408 |
 | Immersive_Lore | 3000924731 | 380 |
