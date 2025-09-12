@@ -23,7 +23,7 @@ def main():
         config.read('config.ini')
         
         # 从config.ini读取max_jobs，如果找不到则默认为20
-        max_jobs = config.getint('Workflow', 'max_jobs', fallback=20)
+        max_jobs = config.getint('Workflow', 'max_jobs', fallback=16)
 
         # 计算每个job需要处理的mod数量，确保job总数不超过max_jobs
         # 使用math.ceil确保所有mod都能被分配

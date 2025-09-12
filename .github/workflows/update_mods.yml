@@ -38,7 +38,7 @@ jobs:
         run: |
           MOD_IDS_STRING='${{ github.event.inputs.mod_id_override }}'
           echo "手动触发模式: 准备处理以下 Mod ID: $MOD_IDS_STRING"
-          CLEAN_JSON_ARRAY=$(echo "$MOD_IDS_STRING" | sed 's/[^0-9]/\ /g' | grep -oE '[0-9]+' | awk 'length == 10' | sort -u | jq -Rsc 'split("\n") | map(select(. != ""))')
+          CLEAN_JSON_ARRAY=$(echo "$MOD_IDS_STRING" | sed 's/[^0-9]/\ /g' | grep -oE '[0-9]+' | awk '/^[0-9]{8,12}$/' | sort -u | jq -Rsc 'split("\n") | map(select(. != ""))')
           echo "转换后的JSON数组(已清理并去重): $CLEAN_JSON_ARRAY"
           echo "mods_to_download=$CLEAN_JSON_ARRAY" >> $GITHUB_OUTPUT
 
@@ -184,6 +184,7 @@ jobs:
           # 循环解压所有下载的tar.gz文件到目标目录
           for archive in temp_artifacts/pruned-mods-*/pruned-mods-*.tar.gz; do
             if [ -f "$archive" ]; then
+              echo "正在解压: $archive"
               tar -xzf "$archive" -C ./data/workshop_content/
             fi
           done
