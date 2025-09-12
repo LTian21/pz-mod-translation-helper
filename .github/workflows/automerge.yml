@@ -14,14 +14,23 @@ permissions:
 jobs:
   automerge:
     runs-on: ubuntu-latest
-    if: github.actor == 'github-actions[bot]'
+    if: github.event.pull_request.user.login == 'Laotian21-bot' && startsWith(github.event.pull_request.head.ref, 'bot/auto-update-')
     steps:
+      - name: Approve the PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          echo "自动批准来自 'Laotian21-bot' 的PR..."
+          gh pr review --approve "$PR_URL"
+          echo "批准成功。"
+
       - name: Enable auto-merge for bot PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_URL: ${{ github.event.pull_request.html_url }}
         run: |
-          echo "检测到来自 'github-actions[bot]' 的PR。"
+          echo "检测到来自 'Laotian21-bot' 的PR。"
           echo "正在为 PR: $PR_URL 启用自动合并..."
           gh pr merge --auto --squash "$PR_URL"
           echo "自动合并已成功启用。当所有检查通过后，GitHub将会自动合并此PR。"
