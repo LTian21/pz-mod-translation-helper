@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-12 12:16:25 UTC+08:00`*
+*最后更新于：`2025-09-12 20:51:11 UTC+08:00`*
 
 ---
 
@@ -36,6 +36,7 @@
 | Advanced_Trajectory's_Realistic_Overhaul | 3036878362 | 238 |
 | B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 221 |
 | MoreDescriptionForTraits4166 | 2685168362 | 206 |
+| Dreams | 1945359259 | 191 |
 | Spongie_Hair | 2463184726 | 185 |
 | More_Traits | 1299328280 | 168 |
 | ATA_Petyarbuilt | 3403314193 | 155 |
