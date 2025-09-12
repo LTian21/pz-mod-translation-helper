@@ -1,0 +1,27 @@
+name: 自动合并机器人PR
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    if: github.actor == 'github-actions[bot]'
+    steps:
+      - name: Enable auto-merge for bot PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: |
+          echo "检测到来自 'github-actions[bot]' 的PR。"
+          echo "正在为 PR: $PR_URL 启用自动合并..."
+          gh pr merge --auto --squash "$PR_URL"
+          echo "自动合并已成功启用。当所有检查通过后，GitHub将会自动合并此PR。"
