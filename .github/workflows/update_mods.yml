@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Reusable Environment
         uses: ./.github/actions/setup-environment
@@ -49,18 +51,42 @@ jobs:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
         run: python scripts/check_updates.py
 
+      - name: Check for Local Completion File Updates
+        id: local_check
+        if: github.event.inputs.mod_id_override == ''
+        run: |
+          python scripts/check_local_changes.py > local_changes.json
+          echo 'mods_to_download<<EOF' >> "$GITHUB_OUTPUT"
+          cat local_changes.json >> "$GITHUB_OUTPUT"
+          echo 'EOF' >> "$GITHUB_OUTPUT"
+
       - name: Combine update lists
         id: combine_lists
         run: |
           MANUAL_LIST='${{ steps.manual_check.outputs.mods_to_download }}'
           SCHEDULED_LIST='${{ steps.scheduled_check.outputs.mods_to_download }}'
-          if [ -n "$MANUAL_LIST" ]; then
+          LOCAL_CHANGES_LIST='${{ steps.local_check.outputs.mods_to_download }}'
+
+          if [ -z "$MANUAL_LIST" ] || [ "$MANUAL_LIST" = "null" ]; then MANUAL_LIST='[]'; fi
+          if [ -z "$SCHEDULED_LIST" ] || [ "$SCHEDULED_LIST" = "null" ]; then SCHEDULED_LIST='[]'; fi
+          if [ -z "$LOCAL_CHANGES_LIST" ] || [ "$LOCAL_CHANGES_LIST" = "null" ]; then LOCAL_CHANGES_LIST='[]'; fi
+          
+          if [ -n "$MANUAL_LIST" ] && [ "$MANUAL_LIST" != "null" ] && [ "$MANUAL_LIST" != "[]" ]; then
             echo "使用手动触发的Mod列表。"
-            echo "mods_to_download=$MANUAL_LIST" >> $GITHUB_OUTPUT
+            COMBINED_LIST=$(echo "$MANUAL_LIST" | jq -c '.')
           else
             echo "使用自动检查的Mod列表。"
-            echo "mods_to_download=$SCHEDULED_LIST" >> $GITHUB_OUTPUT
+            SCHEDULED_LIST=${SCHEDULED_LIST:-'[]'}
+            LOCAL_CHANGES_LIST=${LOCAL_CHANGES_LIST:-'[]'}
+            
+            echo " - Steam更新列表: $SCHEDULED_LIST"
+            echo " - 本地变更列表: $LOCAL_CHANGES_LIST"
+            
+            COMBINED_LIST=$(jq -n --argjson a "$SCHEDULED_LIST" --argjson b "$LOCAL_CHANGES_LIST" '($a + $b) | unique' | jq -c '.')
           fi
+          
+          echo "最终待处理的Mod列表: $COMBINED_LIST"
+          echo "mods_to_download=$COMBINED_LIST" >> $GITHUB_OUTPUT
 
       - name: Calculate Mods per Job
         if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
@@ -165,6 +191,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Reusable Environment
         uses: ./.github/actions/setup-environment

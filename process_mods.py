@@ -249,6 +249,37 @@ def setup_logger(log_file_path):
 def write_output_file(path, data):
     path.write_text("\n".join(data[k] for k in sorted(data.keys())), encoding='utf-8')
 
+def get_file_last_commit_sha(file_path: Path) -> str | None:
+    """获取指定文件的最新一次提交的SHA。"""
+    if not file_path.is_file():
+        return None
+    command = ["git", "log", "-n", "1", "--pretty=format:%H", "--", file_path.as_posix()]
+    try:
+        result = subprocess.run(
+            command, capture_output=True, text=True, check=True, encoding='utf-8'
+        )
+        return result.stdout.strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+
+# (修复2 - 步骤A) 重构函数，使其在内存中更新状态字典，而不是直接写入文件
+def record_completed_sha_in_memory(status_data: dict, mod_id: str, completed_file_path: Path) -> dict:
+    """
+    在内存中的状态字典里，记录指定Mod的已完成文件的最新Commit SHA。
+    返回更新后的字典。
+    """
+    current_sha = get_file_last_commit_sha(completed_file_path)
+    
+    if current_sha:
+        if mod_id not in status_data:
+            status_data[mod_id] = {}
+        status_data[mod_id]['completed_file_sha'] = current_sha
+        logging.info(f"    -> [内存] 已为 Mod {mod_id} 记录 Commit SHA: {current_sha[:7]}")
+    else:
+        logging.warning(f"    -> 警告：未能获取 Mod {mod_id} 的完成文件SHA，状态未记录。")
+        
+    return status_data
+
 def load_status():
     if STATUS_FILE.is_file():
         try:
@@ -457,11 +488,14 @@ def main():
                     logging.info(f"    -> 检测到内容变更。新增: {len(added_keys)}, 移除: {len(removed_keys)}")
 
             logging.info(f"\n处理成功！所有输出文件已保存在 '{output_dir_name}' 文件夹中。")
+            run_status = record_completed_sha_in_memory(run_status, mod_id, completed_todo_file)
+
         except PermissionError:
             logging.error(f"\n错误：权限不足，无法写入文件到 '{output_dir}'。请检查文件夹权限。")
         except Exception as e:
             logging.error(f"写入输出文件时发生致命错误: {e}")
 
+    logging.info("\n--- 所有模组处理循环结束，正在保存最终运行状态 ---")
     save_status(run_status)
     
     if update_log_entries:
