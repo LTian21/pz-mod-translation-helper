@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-12 22:21:52 UTC+08:00`*
+*最后更新于：`2025-09-13 12:16:34 UTC+08:00`*
 
 ---
 
@@ -174,6 +174,7 @@
 | collapsibleladder | 3438123707 | 2 |
 | WaterPipes | 3546314080 | 2 |
 | CommonSense | 2875848298 | 2 |
+| Vanvival | 3547444619 | 2 |
 | HandCrankFlashlights | 2897115343 | 2 |
 | DivisionWatch42 | 3391186580 | 2 |
 | Light_Switch_Plus | 3418843205 | 2 |
@@ -266,7 +267,6 @@
 | Mandarin's_Bedding | 3431960478 | 0 |
 | BarricadedTrait | 3031475005 | 0 |
 | Vehicle_Military_Zone | 3436499337 | 0 |
-| Vanvival | 3547444619 | 0 |
 | U.S._M548_Cargo_Carrier_by_Papa_Chad | 3424497614 | 0 |
 | KitsuneLib | 3390453390 | 0 |
 | BringOutYourDead | 3415416226 | 0 |
