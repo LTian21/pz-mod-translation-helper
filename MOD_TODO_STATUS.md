@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-12 22:21:52 UTC+08:00`*
+*最后更新于：`2025-09-13 14:27:46 UTC+08:00`*
 
 ---
 
@@ -47,7 +47,6 @@
 | Tikitown | 3037854728 | 124 |
 | LWBetterElectronics | 2999183635 | 118 |
 | Chinesecuisine | 3412969115 | 118 |
-| DrivingSkill_[B42] | 3407791878 | 115 |
 | Wallpapers | 2999595757 | 114 |
 | Vanilla_Clothing_Expansion | 3421271152 | 112 |
 | Tomb's_Goth_Hair | 3531765630 | 111 |
@@ -81,36 +80,29 @@
 | [B42]_Bag_Upgrade_Ultra | 3407793320 | 38 |
 | [B42]_Bag_Upgrade_Plus | 3403697073 | 38 |
 | WarThunderVehicleLibrary | 3399660368 | 37 |
-| TchernoLib | 3389605231 | 35 |
 | Frockin_Splendor!_Vol.4 | 3475347500 | 33 |
 | RaccoonCityB42 | 3388468313 | 33 |
 | ART_RFGP | 3396542795 | 30 |
 | B42Survival | 3402516345 | 29 |
 | Training | 3417621776 | 29 |
 | Frockin_Splendor!_Vol.3 | 3431256608 | 28 |
+| FRUsedCarsAnimAlpha | 2959472220 | 28 |
 | 87fordB700 | 3110911330 | 26 |
-| Night_Vision | 3383603346 | 26 |
 | ExploringTime | 2244879881 | 25 |
 | ModName | 3406392630 | 25 |
 | aliceSvanillaDuffelBag | 2959854619 | 24 |
 | SixthSense | 2863908612 | 24 |
-| ProteinsMoodle | 2859304462 | 24 |
 | DFMFoodMod | 3406694220 | 24 |
 | P4MySoCalledBag | 2823166698 | 23 |
 | 85buickLeSabre | 3418252689 | 23 |
 | 85pontiacParisienne | 3413706334 | 23 |
 | 85oldsmobileDelta88 | 3418253716 | 23 |
 | TheDivisionStuff | 3479867929 | 22 |
-| Bicycle | 3461415167 | 22 |
 | 86fordE150 | 2870394916 | 22 |
-| Night_Vision | 3470491629 | 21 |
 | ToughnessSkill | 3545533939 | 21 |
 | ClothesBOX | 2847911733 | 21 |
-| ahz_clothing_b42 | 3388910383 | 20 |
-| ClearingTime | 1926311864 | 20 |
 | AxesRecrafting | 2211423190 | 20 |
 | RandomClothing | 3397182976 | 20 |
-| doorsHaveAChance | 3041602364 | 17 |
 | Farming_Wiki | 3473886171 | 14 |
 | Zombies_Congelados_TWD_B42 | 3426132882 | 14 |
 | EFTBackpacks | 3432928943 | 13 |
@@ -150,7 +142,6 @@
 | GWH_(B42) | 3410972667 | 5 |
 | pzhotbar42 | 3396010813 | 4 |
 | Perts_Party_Tiles | 2837923608 | 4 |
-| MakeCharcoal | 3392674521 | 4 |
 | Sector-7_Breach | 3513107552 | 4 |
 | Ladders | 2737665235 | 4 |
 | Frockin_Splendor!_Vol.2 | 3411888105 | 4 |
@@ -158,7 +149,6 @@
 | [J&G]_Black_Multicam_Uniform | 3315302991 | 4 |
 | BabyAnimalFood | 3422249642 | 4 |
 | UH-1BHelicopter | 3409723807 | 4 |
-| Adrenaline | 2807001835 | 4 |
 | BetterFPS_B42 | 3423115544 | 4 |
 | FunctionalAppliances2 | 3042138819 | 3 |
 | Frockin_Wiseguys | 3538760023 | 3 |
@@ -174,6 +164,7 @@
 | collapsibleladder | 3438123707 | 2 |
 | WaterPipes | 3546314080 | 2 |
 | CommonSense | 2875848298 | 2 |
+| Vanvival | 3547444619 | 2 |
 | HandCrankFlashlights | 2897115343 | 2 |
 | DivisionWatch42 | 3391186580 | 2 |
 | Light_Switch_Plus | 3418843205 | 2 |
@@ -234,6 +225,7 @@
 | B42_Insect_Foraging | 3437552077 | 0 |
 | ATA_Dadge | 3432012226 | 0 |
 | ExtraGunSlot | 3120702374 | 0 |
+| ahz_clothing_b42 | 3388910383 | 0 |
 | Unimogdede | 3399870407 | 0 |
 | P4AlarmSyndrome | 3409527910 | 0 |
 | Nep_Capped_Stress | 3460381012 | 0 |
@@ -245,11 +237,14 @@
 | P4HasBeenRead | 2544353492 | 0 |
 | INeedMoreStyle_CE | 2861393067 | 0 |
 | 78amgeneralM35A2 | 2799152995 | 0 |
+| Night_Vision | 3470491629 | 0 |
 | 85chevyCaprice | 3413704851 | 0 |
 | 89volvo200 | 3292659291 | 0 |
+| MakeCharcoal | 3392674521 | 0 |
 | MetalSpears | 2927603127 | 0 |
 | 89dodgeCaravan | 3034636011 | 0 |
 | RestoreEngineQuality | 3543612325 | 0 |
+| Navigation | 3416036048 | 0 |
 | Tatrapan | 3402789975 | 0 |
 | [B42]_ZuperCarts_-_Carts_&_Trolleys_(forked) | 3433203442 | 0 |
 | 73Winnebago | 3488174689 | 0 |
@@ -266,7 +261,6 @@
 | Mandarin's_Bedding | 3431960478 | 0 |
 | BarricadedTrait | 3031475005 | 0 |
 | Vehicle_Military_Zone | 3436499337 | 0 |
-| Vanvival | 3547444619 | 0 |
 | U.S._M548_Cargo_Carrier_by_Papa_Chad | 3424497614 | 0 |
 | KitsuneLib | 3390453390 | 0 |
 | BringOutYourDead | 3415416226 | 0 |
@@ -286,10 +280,12 @@
 | MakeBurlap | 3409478949 | 0 |
 | 70barracuda | 2913633066 | 0 |
 | Voice_Ellie_Williams | 3464700263 | 0 |
+| doorsHaveAChance | 3041602364 | 0 |
 | MoodleFramework | 3396446795 | 0 |
 | 83amgeneralM923 | 2811383142 | 0 |
 | FirstAidVHSTapes | 3153010942 | 0 |
 | 93chevySuburban | 3152529790 | 0 |
+| Bicycle | 3461415167 | 0 |
 | AdaWongVoice | 3401470591 | 0 |
 | Tomb's_Player_Body_-_Customisation | 3429790870 | 0 |
 | P4VideoMeister | 2744797858 | 0 |
@@ -301,6 +297,7 @@
 | B42_Rain's_Axes_&_Blades | 3388380529 | 0 |
 | StairsAlert | 3044807092 | 0 |
 | PlaidSherryDress | 3419265871 | 0 |
+| DrivingSkill_[B42] | 3407791878 | 0 |
 | TrueMusicJukebox | 3398874593 | 0 |
 | 69mini | 2937786633 | 0 |
 | Plumb_Helper+ | 3386961288 | 0 |
@@ -318,11 +315,14 @@
 | AutoCook | 3388721641 | 0 |
 | ChairBarricade | 3404288341 | 0 |
 | CarHeaterSoundSystem | 3543941897 | 0 |
+| ClearingTime | 1926311864 | 0 |
 | 99fordCVPI | 2971246021 | 0 |
+| Night_Vision | 3383603346 | 0 |
 | 73fordFalcon | 3490370700 | 0 |
 | [B42]_Moodle_Descriptions_Expanded | 3389003300 | 0 |
 | 93mustangSSP | 3001592312 | 0 |
 | KATTAJ1_Clothes_Core | 3470422050 | 0 |
+| ProteinsMoodle | 2859304462 | 0 |
 | 93fordTaurus | 3088951320 | 0 |
 | Brandernburg | 3386447602 | 0 |
 | fastrip | 3414409419 | 0 |
@@ -343,6 +343,7 @@
 | Vanilla_Gear_Expanded | 3401134276 | 0 |
 | NoMoreSicknessInsideVehicle | 3405033818 | 0 |
 | FWO_Treadmill_&_BenchPress | 2940354599 | 0 |
+| TchernoLib | 3389605231 | 0 |
 | 86oshkoshP19A | 2566953935 | 0 |
 | Nep_High_Beams | 3438126404 | 0 |
 | Map_Symbol_Size_Slider | 2734705913 | 0 |
@@ -366,6 +367,7 @@
 | TowTruckMod | 3446203945 | 0 |
 | AmmoLootDropB42 | 3389050623 | 0 |
 | 90fordF350ambulance | 2952802178 | 0 |
+| Adrenaline | 2807001835 | 0 |
 | 67commando | 2478247379 | 0 |
 | [B42]_FlipVehiclePlusTrailer | 3430172149 | 0 |
 | 91fordRanger | 3539691958 | 0 |
