@@ -2,16 +2,16 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-13 17:28:28 UTC+08:00`*
+*最后更新于：`2025-09-13 18:11:26 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
 | Voiced_Radio_and_Tvs | 2950750587 | 9802 |
-| Support_Corps | 3434464110 | 2935 |
 | Lifestyle | 3403870858 | 2398 |
 | Authentic_Z_-_Backpacks+ | 2335368829 | 1383 |
+| Support_Corps | 3434464110 | 1022 |
 | BWardrobe | 3140453034 | 977 |
 | BanditsWeekOne | 3403180543 | 821 |
 | PompsItemsPlushies | 2792387747 | 717 |
@@ -37,7 +37,6 @@
 | Advanced_Trajectory's_Realistic_Overhaul | 3036878362 | 238 |
 | B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 221 |
 | HydeCoBees | 3430224478 | 213 |
-| MoreDescriptionForTraits4166 | 2685168362 | 206 |
 | Spongie_Hair | 2463184726 | 185 |
 | More_Traits | 1299328280 | 168 |
 | ATA_Petyarbuilt | 3403314193 | 155 |
@@ -76,6 +75,7 @@
 | LastPushTrait | 3028253067 | 46 |
 | GaussRifle | 3429953336 | 45 |
 | wandering-zombies | 2983905789 | 45 |
+| MoreDescriptionForTraits4166 | 2685168362 | 45 |
 | Militek_Clothing | 3269061047 | 42 |
 | Operator | 3452171674 | 42 |
 | ReactiveSoundEvents | 2969551071 | 39 |
