@@ -8,9 +8,14 @@ on:
   workflow_dispatch:
     inputs:
       mod_id_override:
-        description: '填入Mod ID来进行强制更新(可批量粘贴多个)'
+        description: '填入Mod ID来进行强制更新'
         required : false
         type: string
+      full_refresh:
+        description: '是否强制刷新所有Mod(id_list.txt)'
+        required: false
+        type: boolean
+        default: false
   schedule:
     - cron: '0 4 * * *' # 每天UTC时间凌晨4点运行 (北京时间中午12点)
 
@@ -44,16 +49,29 @@ jobs:
           echo "转换后的JSON数组(已清理并去重): $CLEAN_JSON_ARRAY"
           echo "mods_to_download=$CLEAN_JSON_ARRAY" >> $GITHUB_OUTPUT
 
+      - name: Handle Full Refresh Trigger
+        id: full_refresh_check
+        if: github.event.inputs.full_refresh == true && github.event.inputs.mod_id_override == ''
+        run: |
+          echo "强制刷新模式: 正在读取 id_list.txt 中的所有 Mod ID..."
+          if [ ! -f "id_list.txt" ]; then
+            echo "::error::id_list.txt 文件不存在，无法执行强制刷新。请确保文件位于仓库根目录。"
+            exit 1
+          fi
+          ALL_MOD_IDS=$(cat id_list.txt | sed 's/[^0-9]/\ /g' | grep -oE '[0-9]+' | awk '/^[0-9]{8,12}$/' | sort -u | jq -Rsc 'split("\n") | map(select(. != ""))')
+          echo "已从 id_list.txt 读取所有 Mod ID: $ALL_MOD_IDS"
+          echo "mods_to_download=$ALL_MOD_IDS" >> $GITHUB_OUTPUT
+
       - name: Smart Check for Mod Updates (Scheduled/Default)
         id: scheduled_check
-        if: github.event.inputs.mod_id_override == ''
+        if: github.event.inputs.mod_id_override == '' && github.event.inputs.full_refresh != true
         env:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
         run: python scripts/check_updates.py
 
       - name: Check for Local Completion File Updates
         id: local_check
-        if: github.event.inputs.mod_id_override == ''
+        if: github.event.inputs.mod_id_override == '' && github.event.inputs.full_refresh != true
         run: |
           python scripts/check_local_changes.py > local_changes.json
           echo 'mods_to_download<<EOF' >> "$GITHUB_OUTPUT"
@@ -62,22 +80,32 @@ jobs:
 
       - name: Combine update lists
         id: combine_lists
+        env:
+          MANUAL_LIST_INPUT: ${{ steps.manual_check.outputs.mods_to_download }}
+          FULL_REFRESH_LIST_INPUT: ${{ steps.full_refresh_check.outputs.mods_to_download }}
+          SCHEDULED_LIST_INPUT: ${{ steps.scheduled_check.outputs.mods_to_download }}
+          LOCAL_CHANGES_LIST_INPUT: ${{ steps.local_check.outputs.mods_to_download }}
+
         run: |
-          MANUAL_LIST='${{ steps.manual_check.outputs.mods_to_download }}'
-          SCHEDULED_LIST='${{ steps.scheduled_check.outputs.mods_to_download }}'
-          LOCAL_CHANGES_LIST='${{ steps.local_check.outputs.mods_to_download }}'
+          MANUAL_LIST="$MANUAL_LIST_INPUT"
+          FULL_REFRESH_LIST="$FULL_REFRESH_LIST_INPUT"
+          SCHEDULED_LIST="$SCHEDULED_LIST_INPUT"
+          LOCAL_CHANGES_LIST="$LOCAL_CHANGES_LIST_INPUT"
 
           if [ -z "$MANUAL_LIST" ] || [ "$MANUAL_LIST" = "null" ]; then MANUAL_LIST='[]'; fi
+          if [ -z "$FULL_REFRESH_LIST" ] || [ "$FULL_REFRESH_LIST" = "null" ]; then FULL_REFRESH_LIST='[]'; fi
           if [ -z "$SCHEDULED_LIST" ] || [ "$SCHEDULED_LIST" = "null" ]; then SCHEDULED_LIST='[]'; fi
           if [ -z "$LOCAL_CHANGES_LIST" ] || [ "$LOCAL_CHANGES_LIST" = "null" ]; then LOCAL_CHANGES_LIST='[]'; fi
+          COMBINED_LIST='[]'
           
-          if [ -n "$MANUAL_LIST" ] && [ "$MANUAL_LIST" != "null" ] && [ "$MANUAL_LIST" != "[]" ]; then
-            echo "使用手动触发的Mod列表。"
+          if [ "$MANUAL_LIST" != "[]" ]; then
+            echo "检测到手动Mod ID覆盖，将使用此列表进行处理 (优先级最高)。"
             COMBINED_LIST=$(echo "$MANUAL_LIST" | jq -c '.')
+          elif [ "$FULL_REFRESH_LIST" != "[]" ]; then
+            echo "检测到强制刷新模式，将使用 id_list.txt 中的所有Mod ID进行处理。"
+            COMBINED_LIST=$(echo "$FULL_REFRESH_LIST" | jq -c '.')
           else
-            echo "使用自动检查的Mod列表。"
-            SCHEDULED_LIST=${SCHEDULED_LIST:-'[]'}
-            LOCAL_CHANGES_LIST=${LOCAL_CHANGES_LIST:-'[]'}
+            echo "未检测到手动覆盖或强制刷新。将使用自动检查的Mod列表。"
             
             echo " - Steam更新列表: $SCHEDULED_LIST"
             echo " - 本地变更列表: $LOCAL_CHANGES_LIST"
@@ -91,17 +119,22 @@ jobs:
       - name: Calculate Mods per Job
         if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
         id: job_calculator
+        env:
+          COMBINED_MODS_JSON: ${{ steps.combine_lists.outputs.mods_to_download }}
         run: |
-          MODS_PER_JOB=$(python scripts/calculate_jobs.py '${{ steps.combine_lists.outputs.mods_to_download }}')
+          MODS_PER_JOB=$(python scripts/calculate_jobs.py "$COMBINED_MODS_JSON")
           echo "mods_per_job=$MODS_PER_JOB" >> $GITHUB_OUTPUT
 
       - name: Split Mod List into Groups for Parallel Jobs
         if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
         id: split_list
+        env:
+          COMBINED_MODS_JSON: ${{ steps.combine_lists.outputs.mods_to_download }}
+          MODS_PER_JOB_VAL: ${{ steps.job_calculator.outputs.mods_per_job }}
         run: |
           {
             echo 'groups<<EOF'
-            python scripts/split_ids.py '${{ steps.combine_lists.outputs.mods_to_download }}' ${{ steps.job_calculator.outputs.mods_per_job }}
+            python scripts/split_ids.py "$COMBINED_MODS_JSON" "$MODS_PER_JOB_VAL"
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"
 
@@ -125,8 +158,10 @@ jobs:
         uses: CyberAndrii/setup-steamcmd@v1
 
       - name: Download Mod Group (Job ${{ strategy.job-index}})
+        env:
+          MOD_GROUP_JSON: ${{ toJson(matrix.mod_group) }}
         run: |
-          MODS_JSON='${{ toJson(matrix.mod_group) }}'
+          MODS_JSON="$MOD_GROUP_JSON"
           echo "此任务将下载以下Mod: $MODS_JSON"
           
           for MOD_ID in $(echo "$MODS_JSON" | jq -r '.[]'); do
@@ -204,27 +239,80 @@ jobs:
           path: temp_artifacts/
           merge-multiple: false
 
-      - name: Decompress and Merge Mods for Processing
+      - name: Prepare workshop_content for updates
+        env:
+          MODS_TO_DOWNLOAD_JSON_FROM_OUTPUT: ${{ needs.setup_jobs.outputs.mods_to_download }}
         run: |
-          echo "解压并合并所有下载的Mod压缩包..."
-          rm -rf ./data/workshop_content
+          TMP_DIRS=()
+          
+          cleanup() {
+            echo "正在执行清理操作..."
+            for d in "${TMP_DIRS[@]}"; do
+              if [ -d "$d" ]; then
+                echo "  -> 移除临时目录: $d"
+                rm -rf "$d"
+              fi
+            done
+            echo "清理完成。"
+          }
+          
+          trap cleanup EXIT # 确保在脚本退出时调用 cleanup 函数
+
+          echo "准备 ./data/workshop_content 目录，合并现有内容与新下载的Mod..."
           mkdir -p ./data/workshop_content
-          # 循环解压所有下载的tar.gz文件到目标目录
-          for archive in temp_artifacts/pruned-mods-*/pruned-mods-*.tar.gz; do
+
+          MODS_TO_UPDATE_JSON="$MODS_TO_DOWNLOAD_JSON_FROM_OUTPUT"
+
+          if [ -n "$MODS_TO_UPDATE_JSON" ] && [ "$MODS_TO_UPDATE_JSON" != "[]" ] && [ "$MODS_TO_UPDATE_JSON" != "null" ]; then
+            echo "正在清除本次更新Mod的旧目录..."
+            for MOD_ID in $(echo "$MODS_TO_UPDATE_JSON" | jq -r '.[]'); do
+              MOD_DIR="./data/workshop_content/$MOD_ID"
+              if [ -d "$MOD_DIR" ]; then
+                echo "  -> 移除旧版Mod目录: $MOD_DIR"
+                rm -rf "$MOD_DIR"
+              else
+                echo "  -> 目录不存在，跳过删除: $MOD_DIR"
+              fi
+            done
+          else
+            echo "  -> 没有Mod需要更新或新增，跳过清除旧目录步骤。"
+          fi
+
+          echo "正在解压并同步更新后的Mod文件..."
+          while IFS= read -r archive; do
             if [ -f "$archive" ]; then
-              echo "正在解压: $archive"
-              tar -xzf "$archive" -C ./data/workshop_content/
+              echo "  -> 正在处理压缩包: $(basename "$archive")"
+              TMP_EXTRACT_DIR=$(mktemp -d)
+              TMP_DIRS+=("$TMP_EXTRACT_DIR")
+              
+              if ! tar -xzf "$archive" -C "$TMP_EXTRACT_DIR"; then
+                echo "  -> 警告: 解压 $archive 失败，跳过此文件。"
+                continue
+              fi
+
+              for MOD_SUB_DIR in "$TMP_EXTRACT_DIR"/*; do
+                if [ -d "$MOD_SUB_DIR" ]; then
+                  MOD_ID=$(basename "$MOD_SUB_DIR")
+                  DEST_MOD_DIR="./data/workshop_content/$MOD_ID"
+                  
+                  echo "    -> 同步Mod $MOD_ID 到 $DEST_MOD_DIR"
+                  mkdir -p "$DEST_MOD_DIR"
+                  rsync -a --delete "$MOD_SUB_DIR/" "$DEST_MOD_DIR/"
+                fi
+              done
             fi
-          done
-          echo "所有Mod准备就绪。"
+          done < <(find temp_artifacts -type f -name "pruned-mods-*.tar.gz")
+          echo "所有Mod内容已合并并准备就绪。"
 
       - name: Clean up temporary artifacts
         run: rm -rf temp_artifacts    
 
       - name: Dynamically Add New Mod IDs to id_list.txt
         if: needs.setup_jobs.outputs.manual_ids_raw != ''
+        env:
+          MODS_TO_ADD_JSON: ${{ needs.setup_jobs.outputs.mods_to_download }}
         run: |
-          CLEANED_MODS_JSON='${{ needs.setup_jobs.outputs.mods_to_download }}'
+          CLEANED_MODS_JSON="$MODS_TO_ADD_JSON"
           
           [ -n "$(tail -c1 id_list.txt)" ] && echo >> id_list.txt
           
@@ -241,17 +329,18 @@ jobs:
       - name: Update Timestamps After Successful Download
         env:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          MODS_TO_DOWNLOAD_JSON_FOR_TIMESTAMP: ${{ needs.setup_jobs.outputs.mods_to_download }}
         run: |
-          MODS_DOWNLOADED='${{ needs.setup_jobs.outputs.mods_to_download }}'
+          MODS_DOWNLOADED="$MODS_TO_DOWNLOAD_JSON_FOR_TIMESTAMP"
           TIMESTAMP_FILE="data/mod_timestamps.json"
-          if [ -z "$MODS_DOWNLOADED" ] || [ "$MODS_DOWNLOADED" = "[]" ]; then
+          if [ -z "$MODS_DOWNLOADED" ] || [ "$MODS_DOWNLOADED" = "[]" ] || [ "$MODS_DOWNLOADED" = "null" ]; then
             echo "没有需要更新时间戳的Mod。"
             exit 0
           fi
           
           if [ ! -f "$TIMESTAMP_FILE" ]; then echo "{}" > "$TIMESTAMP_FILE"; fi
           
-          POST_DATA=$(echo "$MODS_DOWNLOADED" | jq -r 'keys[] as $i | "publishedfileids[\($i)]=\(.[$i])"' | paste -sd '&')
+          POST_DATA=$(echo "$MODS_DOWNLOADED" | jq -r 'to_entries[] | "publishedfileids[\(.key)]=\(.value)"' | paste -sd '&')
           ITEM_COUNT=$(echo "$MODS_DOWNLOADED" | jq 'length')
           
           echo "正在单次API调用中获取 $ITEM_COUNT 个Mod的详情..."
@@ -277,15 +366,18 @@ jobs:
       - name: Run Main Translation Extractor Script
         env:
           TZ: Asia/Shanghai
-        run: python process_mods.py '${{ needs.setup_jobs.outputs.mods_to_download }}'
+          MODS_FOR_PYTHON: ${{ needs.setup_jobs.outputs.mods_to_download }}
+        run: python process_mods.py "$MODS_FOR_PYTHON"
 
       - name: Prepare Pull Request Body
         id: prep_pr
+        env:
+          MODS_TO_DOWNLOAD_JSON_FOR_PR: ${{ needs.setup_jobs.outputs.mods_to_download }}
         run: |
-          MODS_JSON='${{ needs.setup_jobs.outputs.mods_to_download }}'
+          MODS_JSON="$MODS_TO_DOWNLOAD_JSON_FOR_PR"
           
           # 检查是否有需要更新的Mod
-          if [ -z "$MODS_JSON" ] || [ "$MODS_JSON" = "[]" ]; then
+          if [ -z "$MODS_JSON" ] || [ "$MODS_JSON" = "[]" ] || [ "$MODS_JSON" = "null" ]; then
             echo "没有需要更新的Mod，无需创建PR。"
             echo "should_create_pr=false" >> $GITHUB_OUTPUT
             exit 0
@@ -299,7 +391,7 @@ jobs:
           echo "" >> "$PR_BODY_FILE"
           
           MOD_LIST_MARKDOWN=$(jq --argjson ids "$MODS_JSON" -r '
-            (.response.publishedfiledetails | map({(.publishedfileid): .title}) | add) as $details |
+            (.response.publishedfiledetails | map({(.publishedfileid): (.title // "未知Mod")}) | add) as $details |
             $ids[] |
             "- [**\($details[.])**](https://steamcommunity.com/sharedfiles/filedetails/?id=\(.)) (ID: `\(.)`)"
           ' api_response.json)
