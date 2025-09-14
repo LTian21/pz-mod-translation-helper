@@ -189,17 +189,25 @@ jobs:
           echo "开始修剪已下载的Mod，仅保留翻译相关文件..."
           mkdir -p pruned_mods
           find ./temp_workshop_full -mindepth 1 -maxdepth 1 -type d | while read MOD_DIR; do
-            STAGING_DIR="pruned_mods/$(basename "$MOD_DIR")"
+            MOD_ID=$(basename "$MOD_DIR")
+            STAGING_DIR="pruned_mods/$MOD_ID"
             mkdir -p "$STAGING_DIR"
-            # 使用与原流程完全相同的rsync逻辑来精确提取文件
+            
             rsync -a --prune-empty-dirs \
               --include='*/' \
               --include='**/media/scripts/***' \
               --include='**/media/lua/shared/Translate/***' \
+              --include='**/media/lua/shared/translate/***' \
               --exclude='*' \
               "$MOD_DIR/" "$STAGING_DIR/"
+
+            if [ -n "$(find "$STAGING_DIR" -type f -print -quit)" ]; then
+                echo "    [ID: $MOD_ID] Mod修剪完成，包含文件。"
+            else
+                echo "    警告: [ID: $MOD_ID] Mod修剪后目录为空，可能没有翻译相关文件或原始下载失败。"
+            fi
           done
-          echo "Mod修剪完成。"
+          echo "Mod修剪流程完成。"
 
       - name: Compress Pruned Mods
         run: |
