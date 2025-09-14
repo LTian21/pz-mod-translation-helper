@@ -2,13 +2,12 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-14 18:12:51 UTC+08:00`*
+*最后更新于：`2025-09-15 00:05:38 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
-| Voiced_Radio_and_Tvs | 2950750587 | 9802 |
 | Lifestyle | 3403870858 | 2398 |
 | Authentic_Z_-_Backpacks+ | 2335368829 | 1383 |
 | Support_Corps | 3434464110 | 1022 |
@@ -65,6 +64,7 @@
 | MWPWeapons | 2732407704 | 73 |
 | EssentialRecipes | 3401825906 | 72 |
 | ScavengingSkill_[B42] | 3407792640 | 69 |
+| WeatherMoodles | 3565697910 | 68 |
 | Farming_Expansion | 3444499190 | 67 |
 | KnoxEventExpanded | 3397396843 | 65 |
 | 65banshee | 3566868353 | 59 |
