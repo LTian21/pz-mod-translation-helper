@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-13 18:11:26 UTC+08:00`*
+*最后更新于：`2025-09-14 12:17:04 UTC+08:00`*
 
 ---
 
@@ -14,14 +14,14 @@
 | Support_Corps | 3434464110 | 1022 |
 | BWardrobe | 3140453034 | 977 |
 | BanditsWeekOne | 3403180543 | 821 |
-| PompsItemsPlushies | 2792387747 | 717 |
+| PompsItemsPlushies | 2792387747 | 719 |
+| Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
 | KATTAJ1_Military_Pack | 3470426196 | 644 |
 | Buildables_Expansion | 3463117260 | 617 |
-| Immersive_Roleplay_Professions_and_Traits | 3387474156 | 590 |
 | Customizable_Containers | 2719850086 | 547 |
 | AmmoMaker | 2788256295 | 464 |
 | Bandits | 3268487204 | 458 |
-| PompsItemsFood | 2792348686 | 386 |
+| PompsItemsFood | 2792348686 | 394 |
 | Immersive_Lore | 3000924731 | 380 |
 | Erikas_Furniture_Store | 3363546437 | 337 |
 | PZ_BodilyFunctions | 3396456841 | 335 |
@@ -82,14 +82,12 @@
 | SoulFilchersBeautifyngTime | 2425267353 | 39 |
 | [B42]_Bag_Upgrade_Plus | 3403697073 | 38 |
 | WarThunderVehicleLibrary | 3399660368 | 37 |
-| Frockin_Splendor!_Vol.4 | 3475347500 | 33 |
 | RaccoonCityB42 | 3388468313 | 33 |
 | NCR_-_Trooper_Pack | 3508243687 | 31 |
 | ART_RFGP | 3396542795 | 30 |
 | [J&G]_Trauma_Responder_Uniform | 3443982326 | 30 |
 | B42Survival | 3402516345 | 29 |
 | Training | 3417621776 | 29 |
-| Frockin_Splendor!_Vol.3 | 3431256608 | 28 |
 | FRUsedCarsAnimAlpha | 2959472220 | 28 |
 | 87fordB700 | 3110911330 | 26 |
 | HDCP_ImmersiveVehiclePaint | 3464606086 | 26 |
@@ -154,6 +152,7 @@
 | ProcessScrapMetal | 3392186364 | 8 |
 | Draw_On_Map | 2804531012 | 7 |
 | FactoryPieces | 3399263137 | 7 |
+| NiksHairstyles | 3401996053 | 7 |
 | EatSmart | 3456212729 | 7 |
 | fhqwhgads'_Motorious_Zone | 2791656602 | 7 |
 | P4Excalibar | 2868777243 | 7 |
@@ -170,9 +169,9 @@
 | TheBeginning_CDDA | 3461117277 | 5 |
 | CraftableMannequins | 3054341059 | 5 |
 | [J&G]_Caution_Uniform | 3369825662 | 5 |
-| damnlib | 3171167894 | 5 |
 | ArcherLib | 3408337281 | 5 |
 | StandaloneTowels | 3203159242 | 5 |
+| [B42]_Moodle_Descriptions_Expanded | 3389003300 | 5 |
 | Vehicle_Repair_Overhaul | 2757712197 | 5 |
 | TheyAreWatching | 3559704439 | 5 |
 | SpearFishing | 3539114542 | 5 |
@@ -186,20 +185,16 @@
 | TetriZ | 3486780625 | 4 |
 | Sector-7_Breach | 3513107552 | 4 |
 | Ladders | 2737665235 | 4 |
-| NiksHairstyles | 3401996053 | 4 |
-| Frockin_Splendor!_Vol.2 | 3411888105 | 4 |
 | Check_Around | 3300688173 | 4 |
 | P4PickingMeister | 3422220305 | 4 |
 | 92nissanGTR | 2846036306 | 4 |
 | Cerberus_Pack | 3470478700 | 4 |
 | [J&G]_Black_Multicam_Uniform | 3315302991 | 4 |
-| BabyAnimalFood | 3422249642 | 4 |
 | UH-1BHelicopter | 3409723807 | 4 |
 | P4ThiefExpansion | 2596620950 | 4 |
 | BetterFPS_B42 | 3423115544 | 4 |
 | FunctionalAppliances2 | 3042138819 | 3 |
 | Frockin_Wiseguys | 3538760023 | 3 |
-| BathtowelsOverhaul | 3416208765 | 3 |
 | ATA_Jeep | 3407042038 | 3 |
 | TKS42 | 3389805754 | 3 |
 | KI5trailers | 3330403100 | 3 |
@@ -210,10 +205,8 @@
 | BM_Super_Speed_Settings | 3440221534 | 3 |
 | RiskyUnarmed | 3434796669 | 3 |
 | B42Makedriedfruit | 3417502641 | 3 |
-| P4Decoholic | 3197857648 | 3 |
 | [B42]_JunkFoodsPH | 3390901679 | 3 |
 | Willowbrook_Bastion!_(items_part) | 3479667649 | 3 |
-| AutoTailoring | 3388183573 | 3 |
 | ExtraBombs | 3425787685 | 2 |
 | PFO_GUNRUNNER | 3434691822 | 2 |
 | ImperialChops | 3465865657 | 2 |
@@ -361,6 +354,7 @@
 | Pokit_Paradigm | 3476595954 | 0 |
 | 87toyotaMR2 | 3052360250 | 0 |
 | 77firebird | 3346905070 | 0 |
+| Frockin_Splendor!_Vol.4 | 3475347500 | 0 |
 | IndustrialRevolutionVehicleParts | 3404745035 | 0 |
 | 68firebird | 3258343790 | 0 |
 | More_immersive_vehicles | 3162566044 | 0 |
@@ -378,6 +372,7 @@
 | Frockin_Splendor! | 3307376332 | 0 |
 | Voice_Joel_Miller | 3496043022 | 0 |
 | 70dodge | 2873290424 | 0 |
+| BathtowelsOverhaul | 3416208765 | 0 |
 | Random_Airdrops | 3282789883 | 0 |
 | IndustrialRevolutionGenericAddOn | 3359867059 | 0 |
 | 98stagea | 3315443103 | 0 |
@@ -389,6 +384,7 @@
 | MakeBurlap | 3409478949 | 0 |
 | SpongieCharacterCustomisation | 3414634809 | 0 |
 | 70barracuda | 2913633066 | 0 |
+| Frockin_Splendor!_Vol.2 | 3411888105 | 0 |
 | Voice_Ellie_Williams | 3464700263 | 0 |
 | doorsHaveAChance | 3041602364 | 0 |
 | Nep_PR57 | 3487312468 | 0 |
@@ -420,6 +416,7 @@
 | B42Makedriedvegetable | 3418061837 | 0 |
 | ATA_BMW_E36 | 3421748994 | 0 |
 | Excavation | 3392001801 | 0 |
+| damnlib | 3171167894 | 0 |
 | WildFruits | 2618566294 | 0 |
 | 93fordF350 | 3073430075 | 0 |
 | 67gt500 | 3026723485 | 0 |
@@ -439,7 +436,6 @@
 | 99fordCVPI | 2971246021 | 0 |
 | Night_Vision | 3383603346 | 0 |
 | 73fordFalcon | 3490370700 | 0 |
-| [B42]_Moodle_Descriptions_Expanded | 3389003300 | 0 |
 | 93mustangSSP | 3001592312 | 0 |
 | KATTAJ1_Clothes_Core | 3470422050 | 0 |
 | ProteinsMoodle | 2859304462 | 0 |
@@ -454,6 +450,7 @@
 | TheStar | 3412262177 | 0 |
 | 91fordLTD | 3366300557 | 0 |
 | 81deloreanDMC12 | 3253385114 | 0 |
+| P4Decoholic | 3197857648 | 0 |
 | Energy_Drinks | 2674541310 | 0 |
 | EmergencyTVChannel | 3409272479 | 0 |
 | 59_Cadillac_Miller-Meteor | 2772575623 | 0 |
@@ -478,6 +475,8 @@
 | Lucille | 3436159263 | 0 |
 | starving-zombies | 3396867685 | 0 |
 | throw-your-bag-across | 3391902125 | 0 |
+| BabyAnimalFood | 3422249642 | 0 |
+| Frockin_Splendor!_Vol.3 | 3431256608 | 0 |
 | Frogtown | 3449473111 | 0 |
 | 815Tatra | 3404869345 | 0 |
 | TMRRemoveMumble | 3100475013 | 0 |
@@ -496,6 +495,7 @@
 | AmmoLootDropB42 | 3389050623 | 0 |
 | 90fordF350ambulance | 2952802178 | 0 |
 | KnowYourCalories | 3257953004 | 0 |
+| AutoTailoring | 3388183573 | 0 |
 | Read_Book_Bypassing_Level_Restrictions | 3319538177 | 0 |
 | Adrenaline | 2807001835 | 0 |
 | 67commando | 2478247379 | 0 |
