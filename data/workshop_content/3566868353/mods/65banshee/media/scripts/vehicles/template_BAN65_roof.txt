@@ -1,0 +1,159 @@
+module Base
+{
+
+	model 65bansheeRoofM
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_roof,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 65bansheeRoofV
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_roof1,
+		texture = Vehicles/Vehicles_65banshee_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle BAN65Roof
+	{
+		part BAN65Roof
+        	{
+
+			model roof0
+				{
+                		file = 65bansheeRoofM,
+				}
+
+            model roof1
+				{
+                		file = 65bansheeRoofV,
+				}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.65bansheeMetalRoof;Base.65bansheeVinylRoof,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BAN65.InstallComplete.Roof,
+                    requireUninstalled = BAN65Rollbar,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1000,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = DAMN.UninstallTest.Default,
+	            	complete = BAN65.UninstallComplete.Roof,
+	            	requireUninstalled = BAN65Roofrack;WindshieldRear,
+
+            		}
+
+	            lua
+	            {
+                    init = BAN65.Init.Roof,
+				    create = BAN65.Create.Roof,
+				}
+		}
+	}
+
+    template vehicle BAN65RoofXP
+	{
+		part BAN65Roof
+        	{
+
+			model roof0
+				{
+                		file = 65bansheeRoofM,
+				}
+
+            model roof1
+				{
+                		file = 65bansheeRoofV,
+				}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.65bansheeMetalRoof;Base.65bansheeVinylRoof,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BAN65.InstallComplete.RoofXP,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1000,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = DAMN.UninstallTest.Default,
+	            	complete = BAN65.UninstallComplete.RoofXP,
+	            	requireUninstalled = BAN65Roofrack;WindshieldRear,
+
+            		}
+
+	            lua
+	            {
+                    init = BAN65.Init.RoofXP,
+				    create = BAN65.Create.RoofXP,
+				}
+		}
+	}
+}

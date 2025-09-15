@@ -1,0 +1,165 @@
+module Base
+{
+	model 65bansheeBumperFront0
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 65bansheeBumperFrontA
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 65bansheeBumperRear0
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 65bansheeBumperRearA
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_bumper_rearA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BAN65Bumpers
+		{
+        part DAMNBumperFront
+        {
+
+			model BumperFront0
+				{
+                		file = 65bansheeBumperFront0,
+				}
+
+			model BumperFrontA
+				{
+                		file = 65bansheeBumperFrontA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.65bansheeBumperFront0;Base.65bansheeBumperFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BAN65.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BAN65.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = BAN65.Create.BumperFront,
+					init = BAN65.Init.BumperFront,
+					}
+                }
+
+		part DAMNBumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 65bansheeBumperRear0,
+				}
+
+            model BumperRearA
+				{
+                		file = 65bansheeBumperRearA,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.65bansheeBumperRear0;Base.65bansheeBumperRearA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BAN65.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BAN65.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = BAN65.Create.BumperRear,
+					init = BAN65.Init.BumperRear,
+					}
+		}
+	}
+}

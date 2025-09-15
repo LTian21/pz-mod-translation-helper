@@ -1,0 +1,97 @@
+module GaussRifle
+{
+	imports
+	{
+		Base,
+	}
+
+	craftRecipe MakeMagneticRounds
+	{
+		timedAction = MakingElectrical,
+		Time = 40,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		needTobeLearn = true,
+		AutoLearnAny = Electricity:3,
+		xpAward = Maintenance:1,
+		SkillRequired = Electricity:2,
+		category = Electrical,
+		OnCreate = Recipe.OnCreate.MakeMagneticRounds,
+		inputs
+		{
+			item 1 tags[Hammer;ClubHammer;Mallet] mode:keep flags[Prop2],
+			item 1 tags[Saw] mode:keep flags[MayDegradeLight;Prop1],
+			item 1 tags[File] mode:keep flags[MayDegradeLight],
+			item 1 tags[Pliers] mode:keep flags[MayDegradeLight],
+            item 1 tags[IronMaterial],
+            item 2 [GaussRifle.Magnetizer],
+		}
+		outputs
+		{
+			item 1 GaussRifle.MagneticRound,
+		}
+	}
+
+	craftRecipe PlaceMagneticRoundsInBox
+	{
+		timedAction = PlaceAmmoInBox,
+		Time = 15,
+		category = Ammunition,
+        Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 20 [GaussRifle.MagneticRound],
+		}
+		outputs
+		{
+			item 1 GaussRifle.MagneticRoundBox,
+		}
+	}
+
+	craftRecipe PackMagneticRoundBoxInCarton
+	{
+		timedAction = PlaceAmmoInBox,
+		Time = 15,
+		category = Ammunition,
+        Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 12 [GaussRifle.MagneticRoundBox],
+		}
+		outputs
+		{
+			item 1 GaussRifle.MagneticRoundCarton,
+		}
+	}
+
+	craftRecipe OpenMagneticRoundBox
+	{
+		timedAction = OpenAmmoBox,
+		Time = 15,
+		category = Ammunition,
+        Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 1 [GaussRifle.MagneticRoundBox],
+		}
+		outputs
+		{
+			item 20 GaussRifle.MagneticRound,
+		}
+	}
+
+	craftRecipe OpenMagneticRoundCarton
+	{
+		timedAction = OpenAmmoBox,
+		Time = 15,
+		category = Ammunition,
+        Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 1 [GaussRifle.MagneticRoundCarton],
+		}
+		outputs
+		{
+			item 12 GaussRifle.MagneticRoundBox,
+		}
+	}
+}

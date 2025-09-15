@@ -1,0 +1,215 @@
+module Base
+{
+
+	model 65bansheeSeatfl
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_seat_black,
+		texture = Vehicles/Vehicles_65banshee_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 65bansheeSeatfr
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_seat_black,
+		texture = Vehicles/Vehicles_65banshee_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+    model 65bansheeSeatflr
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_seat_red,
+		texture = Vehicles/Vehicles_65banshee_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 65bansheeSeatfrr
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_seat_red,
+		texture = Vehicles/Vehicles_65banshee_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+	template vehicle BAN65Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 65bansheeSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 65bansheeSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.65bansheeSeat,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+    template vehicle BAN65SeatsRed
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 65bansheeSeatflr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 65bansheeSeatfrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.65bansheeSeat,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}

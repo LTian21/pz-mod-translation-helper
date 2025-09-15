@@ -1,0 +1,188 @@
+module Base
+{
+
+	item OldPainless
+	{
+		DisplayName = Old Painless,
+		DisplayCategory = Weapon,
+		Type = Weapon,
+		Weight = 15,
+		Icon = OldPainless,
+		AimingPerkCritModifier = 8,
+		AimingPerkHitChanceModifier = 11,
+		AimingPerkMinAngleModifier = 0.0025,
+		AimingPerkRangeModifier = 3,
+		AimingTime = 35,
+		AmmoBox = 556Box,
+		AmmoType = Base.556Bullets,
+		AttachmentType = Rifle,
+		BreakSound = M16Break,
+		BringToBearSound = M14BringToBear,
+		ClickSound = M14Jam,
+		ConditionLowerChanceOneIn = 200,
+		ConditionMax = 50,
+		CritDmgMultiplier = 6,
+		CriticalChance = 20,
+		DoorDamage = 20,
+		DropSound = M14Drop,
+		EjectAmmoSound = M14EjectAmmo,
+		EjectAmmoStartSound = M14EjectAmmoStart,
+		EjectAmmoStopSound = M14EjectAmmoStop,
+		EquipSound = M14Equip,
+		FireMode = Auto,
+		CyclicRateMultiplier = 2.0,
+		HitChance = 15,
+		HitSound = BulletHitBody,
+		IdleAnim = Idle_Weapon2,
+		ImpactSound = null,
+		InsertAmmoSound = M14InsertAmmo,
+		InsertAmmoStartSound = M14InsertAmmoStart,
+		InsertAmmoStopSound = M14InsertAmmoStop,
+		IsAimedFirearm = TRUE,
+		JamGunChance = 1,
+		KnockBackOnNoDeath = TRUE,
+		KnockdownMod = 4,
+		MagazineType = Base.OldPainlessClip,
+		MaxAmmo = 500,
+		MaxDamage = 2.7,
+		MaxHitCount = 2,
+		MaxRange = 35,
+		MinSightRange = 2,
+		MaxSightRange = 10,
+		MetalValue = 45,
+		MinAngle = 0.975,
+		MinDamage = 1.8,
+		MinRange = 0.61,
+		MinimumSwingTime = 0.5,
+        ModelWeaponPart = x4Scope x4Scope scope scope,
+        ModelWeaponPart = x4ACOGScope x4ACOGScope scope scope,
+        ModelWeaponPart = x8Scope x8Scope scope scope,
+        ModelWeaponPart = x8ACOGScope x8ACOGScope scope scope,
+        ModelWeaponPart = Laser Laser laser laser,
+        ModelWeaponPart = GunLight GunLight gunlight gunlight,
+        ModelWeaponPart = OldPainlessClip_Attachment OldPainlessClip_Attachment magazine magazine,
+		MultipleHitConditionAffected = FALSE,
+		NPCSoundBoost = 1.5,
+		PiercingBullets = TRUE,
+		ProjectileCount = 1,
+		PushBackMod = 0.3,
+		RackSound = M14Rack,
+		Ranged = TRUE,
+		RecoilDelay = 15,
+		ReloadTime = 25,
+		RequiresEquippedBothHands = TRUE,
+		RunAnim = Run_Weapon2,
+		ShareDamage = FALSE,
+		ShellFallSound = M14CartridgeFall,
+		SoundGain = 2,
+		SoundRadius = 150,
+		SoundVolume = 35,
+		SplatBloodOnNoDeath = TRUE,
+		SplatNumber = 3,
+		SplatSize = 3,
+		StopPower = 2,
+		SubCategory = Firearm,
+		SwingAmountBeforeImpact = 0,
+		SwingAnim = Rifle,
+		SwingSound = OldPainlessShoot,
+		SwingTime = 0.5,
+		ToHitModifier = 1.5,
+		TwoHandWeapon = TRUE,
+		UnequipSound = M14UnEquip,
+		UseEndurance = FALSE,
+		WeaponReloadType = boltaction,
+		WeaponSprite = OldPainless,
+		Tags = HasMetal;Firearm,
+	Tooltip = Tooltip_OldPainless,
+	}
+
+	model OldPainless
+	{
+		mesh = weapons/firearm/OldPainless,	
+		texture = weapons/firearm/OldPainless,
+		attachment muzzle
+		{
+			offset = 0.0000 0.5691 0.0674,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+		attachment scope		
+		{		
+			offset = 0.0000 0.0683 0.0198,	
+			rotate = 0.0000 180.0000 0.0000,
+		}
+		attachment laser		
+		{		
+			offset = 0.0000 0.1803 0.1074,	
+			rotate = 0.0000 0.0000 0.0000,
+		}
+		attachment gunlight		
+		{		
+			offset = -0.0264 0.1939 0.0700,	
+			rotate = 0.0000 -90.0000 0.0000,
+		}
+		attachment magazine		
+		{		
+			offset = 0.0000 0.0000 0.0000,	
+			rotate = 0.0000 0.0000 0.0000,
+		}
+		attachment world
+		{
+			offset = -0.0300 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+
+    item OldPainlessClip
+    {
+        DisplayCategory = Ammo,
+        CanStack	=	FALSE,
+        Weight	=	0.5,
+        Type	=	Normal,
+        DisplayName	=	5.56 Old Painless Box Magazine,
+        Icon	=	M60MMag,
+        MaxAmmo = 500,
+        AmmoType = Base.556Bullets,
+        StaticModel = GunMagazine,
+        GunType = OldPainless,
+        WorldStaticModel = OldPainlessMagW,
+    }
+
+	model OldPainlessMagW
+    {
+        mesh = WorldItems/M60Mag,
+        texture = WorldItems/M16A1,
+    }
+
+	sound OldPainlessShoot
+	{
+		category = Item,
+		maxInstancesPerEmitter = 2,
+		clip
+		{
+			file = media/sound/OldPainlessShoot.ogg,
+			distanceMax = 150,
+		}
+	}
+
+	item OldPainlessClip_Attachment
+	{
+		Type			=	WeaponPart,
+		DisplayName		=	This is not the actual magazine,
+		DisplayCategory		=	WeaponPart,
+		Icon			=	M60MMag,
+		Weight			=	0.5,
+		WeightModifier		=	0.5,
+		MountOn			=	OldPainless,
+		PartType		=	Clip,
+		MetalValue		=	22,
+		WorldStaticModel	=	M60Mag,
+		Tooltip 		=	Tooltip_GunMagWeaponPart,
+	}
+
+	model OldPainlessClip_Attachment
+    {
+        mesh = weapons/parts/OldPainlessMagAttach,
+        texture = weapons/firearm/OldPainless,
+    }
+
+}

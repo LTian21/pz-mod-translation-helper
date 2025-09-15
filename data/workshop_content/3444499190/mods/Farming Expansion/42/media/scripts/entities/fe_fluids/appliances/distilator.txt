@@ -1,0 +1,61 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FE_Distilator
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Distillation Unit,
+			Icon		= fe_distillation_unit,
+		}
+	}
+
+    entity FE_Distilator
+    {
+        component UiConfig
+                {
+                    xuiSkin         = default,
+                    entityStyle     = ES_FE_Distilator,
+                    uiEnabled       = true,
+                }
+
+        component CraftBench
+        {
+            Recipes         = DistilatorCrafts,
+        }
+        component SpriteConfig
+        {
+            face N
+            {
+                layer
+                {
+                    row = fe_tiles_2,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = fe_tiles_3,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+			timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            category      = Farming,
+            SkillRequired = MetalWelding:3,
+			xpAward       = MetalWelding:30,
+            inputs
+            {
+                item 3 [Base.BlowTorch] flags[Prop1],
+                item 1 [Base.Mov_OrangeBarrel;Base.Mov_DarkGreenBarrel;Base.Mov_LightGreenBarrel;Base.MetalDrum],
+                item 2 [Base.SmallSheetMetal],
+                item 4 [Base.MetalPipe],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

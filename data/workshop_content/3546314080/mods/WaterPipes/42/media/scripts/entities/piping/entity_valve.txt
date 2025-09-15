@@ -1,0 +1,62 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WaterValve
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Water Valve,
+			Icon		= build_valve,
+		}
+	}
+
+    entity WaterValve
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WaterValve,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            isThumpable     = false,
+		    OnIsValid       = BuildRecipeCode.waterValve.OnIsValid,
+            OnCreate        = BuildRecipeCode.waterValve.OnCreate,
+			health          = 100,
+			
+            face W
+            {
+                layer
+                {
+                    row = waterpipes_01_21,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = waterpipes_01_20,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            timedAction   = BuildPipe,
+            time          = 200,
+            needToBeLearn = false,
+            category      = Plumbing,
+            SkillRequired = MetalWelding:1,
+            xpAward       = MetalWelding:15,
+            ToolTip       = Tooltip_WP_craft_valveDesc,
+            inputs
+            {
+                item 1 tags[PipeWrench] mode:keep flags[MayDegradeLight],
+                item 4 [Base.ScrapMetal],
+                item 10 [Base.Screws],
+            }
+        }
+    }
+}

@@ -1,0 +1,63 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WaterFlowmeter
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Water Flowmeter,
+			Icon		= build_flowmeter,
+		}
+	}
+
+    entity WaterFlowmeter
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WaterFlowmeter,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            isThumpable     = false,
+		    OnIsValid       = BuildRecipeCode.waterFlowmeter.OnIsValid,
+            OnCreate        = BuildRecipeCode.waterFlowmeter.OnCreate,
+			health          = 100,
+			
+            face W
+            {
+                layer
+                {
+                    row = waterpipes_01_23,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = waterpipes_01_22,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            timedAction   = BuildPipe,
+            time          = 200,
+            needToBeLearn = false,
+            category      = Plumbing,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:15,
+            ToolTip       = Tooltip_WP_craft_flowmeterDesc,
+            inputs
+            {
+                item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+                item 1 [Base.AlarmClock2],
+                item 2 [Base.ScrapMetal],
+                item 4 [Base.Screws],
+            }
+        }
+    }
+}

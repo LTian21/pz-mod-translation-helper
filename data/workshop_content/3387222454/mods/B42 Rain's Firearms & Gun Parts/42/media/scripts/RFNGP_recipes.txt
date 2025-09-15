@@ -1,0 +1,422 @@
+module Base
+{
+
+	craftRecipe OpenBoxOfBullets501
+	{
+        timedAction = OpenAmmoBox,
+		Time = 15,
+		category = Ammunition,
+        Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 1 [Base.762x39Box;Base.762Box] mappers[ammoTypes] flags[Prop2],
+		}
+		outputs
+		{
+			item 50 mapper:ammoTypes,
+		}
+        	itemMapper ammoTypes
+        {
+			Base.762x39Bullets = Base.762x39Box,
+			Base.762Bullets = Base.762Box,
+		}
+	}
+
+
+	craftRecipe OpenCartonOfBullets1
+	{
+        timedAction = OpenAmmoBox,
+		Time = 50,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.762x39Carton;Base.762Carton] mappers[ammoTypes],
+		}
+		outputs
+		{
+			item 12 mapper:ammoTypes,
+		}
+        	itemMapper ammoTypes
+        	{
+			Base.762x39Box = Base.762x39Carton,
+			Base.762Box = Base.762Carton,
+		}
+	}
+
+	craftRecipe Place762x39RoundsInBox
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 15,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 50 [Base.762x39Bullets],
+		}
+		outputs
+		{
+			item 1 Base.762x39Box,
+		}
+	}
+
+	craftRecipe Place762RoundsInBox
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 15,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 50 [Base.762Bullets],
+		}
+		outputs
+		{
+			item 1 Base.762Box,
+		}
+	}
+
+	craftRecipe Convert.223to5.56
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 1,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.223Bullets],
+		}
+		outputs
+		{
+			item 1 Base.556Bullets,
+		}
+	}
+
+	craftRecipe Convert5.56to.223
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 1,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.556Bullets],
+		}
+		outputs
+		{
+			item 1 Base.223Bullets,
+		}
+	}
+
+	craftRecipe Convert.308to7.62x51
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 1,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.308Bullets],
+		}
+		outputs
+		{
+			item 1 Base.762Bullets,
+		}
+	}
+
+	craftRecipe Convert7.62x51to.308
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 1,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.762Bullets],
+		}
+		outputs
+		{
+			item 1 Base.308Bullets,
+		}
+	}
+
+	craftRecipe Convert.223Boxto5.56Box
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 50,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.223Box],
+		}
+		outputs
+		{
+			item 1 Base.556Box,
+		}
+	}
+
+	craftRecipe Convert5.56Boxto.223Box
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 50,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.556Box],
+		}
+		outputs
+		{
+			item 1 Base.223Box,
+		}
+	}
+
+	craftRecipe Make Gun Cleaning Kit
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 150,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.Toothbrush],
+			item 5 [Base.RippedSheets],
+			item 1 [Base.Scotchtape],
+			item 1 [Base.CottonBalls],
+			item 1 [Base.OilVegetable],
+		}
+		outputs
+		{
+			item 1 Base.HomeMadeGunCleaningKit,
+		}
+	}
+
+	craftRecipe SawOffRemingtonM1187
+	{
+        timedAction = SawOffShotgun,
+		Time = 200,
+		OnCreate = Recipe.OnCreate.RemingtonM1187Sawnoff,
+		ToolTip = Tooltip_Recipe_NeedSawMetal,
+		Tags = InHandCraft,
+        category = Weaponry,
+		inputs
+		{
+			item 1 tags[MetalSaw;SmallSaw] mode:keep flags[Prop1;MayDegrade],
+			item 1 [Base.RemingtonM1187] flags[Prop2;InheritCondition;InheritAmmunition] mappers[shotgunType],
+		}
+		outputs
+		{
+			item 1 mapper:shotgunType,
+		}
+		itemMapper shotgunType
+		{
+			Base.RemingtonM1187Sawnoff = Base.RemingtonM1187,
+		}
+	}
+
+	craftRecipe SawOffMossbergM590T
+	{
+        timedAction = SawOffShotgun,
+		Time = 200,
+		OnCreate = Recipe.OnCreate.SawnoffM590T,
+		ToolTip = Tooltip_Recipe_SawoffTactical,
+		Tags = InHandCraft,
+        category = Weaponry,
+		inputs
+		{
+			item 1 tags[MetalSaw;SmallSaw] mode:keep flags[Prop1;MayDegrade],
+			item 1 [Base.MossbergM590T] flags[Prop2;InheritCondition;InheritAmmunition] mappers[shotgunType],
+		}
+		outputs
+		{
+			item 1 mapper:shotgunType,
+		}
+		itemMapper shotgunType
+		{
+			Base.SawnoffM590T = Base.MossbergM590T,
+		}
+	}
+
+	craftRecipe SawOffLongRanger
+	{
+        timedAction = SawOffShotgun,
+		Time = 200,
+		OnCreate = Recipe.OnCreate.SawnoffLongRanger,
+		ToolTip = Tooltip_Recipe_NeedSawMetal,
+		Tags = InHandCraft,
+        category = Weaponry,
+		inputs
+		{
+			item 1 tags[MetalSaw;SmallSaw] mode:keep flags[Prop1;MayDegrade],
+			item 1 [Base.VarmintRifle] flags[Prop2;InheritCondition;InheritAmmunition] mappers[shotgunType],
+		}
+		outputs
+		{
+			item 1 mapper:shotgunType,
+		}
+		itemMapper shotgunType
+		{
+			Base.LongRangerPistol = Base.VarmintRifle,
+		}
+	}
+
+	craftRecipe PlaceBoxesOf762x39AmmoInCarton
+	{
+        timedAction = Making,
+		Time = 50,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 12 [Base.762x39Box],
+		}
+		outputs
+		{
+			item 1 Base.762x39Carton,
+		}
+	}
+
+	craftRecipe PlaceBoxesOf762x51AmmoInCarton
+	{
+        timedAction = Making,
+		Time = 50,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 12 [Base.762Box],
+		}
+		outputs
+		{
+			item 1 Base.762Carton,
+		}
+	}
+
+	craftRecipe ConvertMAC10MagazinetoThompsonMagazine
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 50,
+		ToolTip = Tooltip_Recipe_ConvertMagazine,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.MAC10Clip],
+		}
+		outputs
+		{
+			item 1 Base.ThompsonMagazine,
+		}
+	}
+
+	craftRecipe ConvertThompsonMagazinetoMAC10Magazine
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 50,
+		ToolTip = Tooltip_Recipe_ConvertMagazine,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.ThompsonMagazine],
+		}
+		outputs
+		{
+			item 1 Base.MAC10Clip,
+		}
+	}
+
+	craftRecipe MakeDIYSuppressor
+	{
+		timedAction = Welding,
+		Time = 250,
+		SkillRequired = MetalWelding:1,
+		Tags = InHandCraft;Welding,
+        category = Metalworking,
+		xpAward = MetalWelding:25,
+		inputs
+		{
+			item 5 [Base.Screws],
+			item 1 [Base.SmallSheetMetal],
+			item 1 [Base.Wire] mode:destroy flags[InheritUses],
+			item 1 [Base.MetalPipe],
+			item 2 [Base.BlowTorch],
+			item 1 tags[WeldingMask] mode:keep,
+		}
+		outputs
+		{
+			item 1 Base.DIYSuppressor,
+		}
+	}
+
+	craftRecipe SawOffCoachGunStock
+	{
+        timedAction = SawOffShotgun,
+		Time = 200,
+		OnCreate = Recipe.OnCreate.SawOffCoachGunStock,
+		ToolTip = Tooltip_Recipe_NeedSawMetal,
+		Tags = InHandCraft,
+        category = Weaponry,
+		inputs
+		{
+			item 1 tags[MetalSaw;SmallSaw] mode:keep flags[Prop1;MayDegrade],
+			item 1 [Base.DoubleBarrelShotgunSawnoff] flags[Prop2;InheritCondition;InheritAmmunition] mappers[shotgunType],
+		}
+		outputs
+		{
+			item 1 mapper:shotgunType,
+		}
+		itemMapper shotgunType
+		{
+			Base.DoubleBarrelShotgunSawnoffStockless = Base.DoubleBarrelShotgunSawnoff,
+		}
+	}
+
+	craftRecipe SawOff1187Stock
+	{
+        timedAction = SawOffShotgun,
+		Time = 200,
+		OnCreate = Recipe.OnCreate.SawOff1187Stock,
+		ToolTip = Tooltip_Recipe_NeedSawMetal,
+		Tags = InHandCraft,
+        category = Weaponry,
+		inputs
+		{
+			item 1 tags[MetalSaw;SmallSaw] mode:keep flags[Prop1;MayDegrade],
+			item 1 [Base.RemingtonM1187Sawnoff] flags[Prop2;InheritCondition;InheritAmmunition] mappers[shotgunType],
+		}
+		outputs
+		{
+			item 1 mapper:shotgunType,
+		}
+		itemMapper shotgunType
+		{
+			Base.RemingtonM1187SawnoffStockless = Base.RemingtonM1187Sawnoff,
+		}
+	}
+
+	craftRecipe SawOffRemingtonM870Stock
+	{
+        timedAction = SawOffShotgun,
+		Time = 200,
+		OnCreate = Recipe.OnCreate.SawOffRemingtonM870Stock,
+		ToolTip = Tooltip_Recipe_NeedSawMetal,
+		Tags = InHandCraft,
+        category = Weaponry,
+		inputs
+		{
+			item 1 tags[MetalSaw;SmallSaw] mode:keep flags[Prop1;MayDegrade],
+			item 1 [Base.ShotgunSawnoff] flags[Prop2;InheritCondition;InheritAmmunition] mappers[shotgunType],
+		}
+		outputs
+		{
+			item 1 mapper:shotgunType,
+		}
+		itemMapper shotgunType
+		{
+			Base.ShotgunSawnoffStockless = Base.ShotgunSawnoff,
+		}
+	}
+
+}

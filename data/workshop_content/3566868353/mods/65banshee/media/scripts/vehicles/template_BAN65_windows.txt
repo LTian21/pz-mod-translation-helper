@@ -1,0 +1,127 @@
+module Base
+{
+
+	model 65bansheeWindowfl
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_fl_bone 1.0,
+	}
+
+	model 65bansheeWindowfr
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_fr_bone 1.0,
+	}
+
+	template vehicle BAN65Windows
+	{
+		part WindowFrontLeft
+		{
+			
+            model windowFL
+			{
+				file = 65bansheeWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 65bansheeWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+		}
+
+		part WindowFront*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            itemType = Base.65bansheeFrontSideWindow,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}

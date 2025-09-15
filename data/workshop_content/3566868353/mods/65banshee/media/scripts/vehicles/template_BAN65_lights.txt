@@ -1,0 +1,110 @@
+module Base
+{
+	model 65bansheeHeadlights
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_lights,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = lights_bone 1.0,
+	}
+
+	template vehicle BAN65PopupLights
+	{
+		part BAN65PopupLights
+		{
+			model lights5798446
+			{
+				file = 65bansheeHeadlights,
+			}
+
+			anim Close
+			{
+				anim = lights_opening,
+                reverse = TRUE,
+				rate = 1.00,
+			}
+
+			anim Open
+			{
+				anim = lights_opening,
+				rate = 1.00,
+			}
+
+            anim Closed
+			{
+				anim = lights_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = lights_opening,
+                reverse = TRUE,
+				animate = FALSE,
+			}
+		
+			category = lights,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			itemType = Base.65bansheePopupLights,
+			area = Engine,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = HeadlightLeft;HeadlightRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+}

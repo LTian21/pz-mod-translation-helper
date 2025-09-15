@@ -1,0 +1,93 @@
+module Base{
+
+
+craftRecipe OpenSHDLaptop
+	{
+        timedAction = Making,
+		Time = 20,
+		Tags = InHandCraft;CanBeDoneInDark;RightClickOnly,
+		/* CanWalk = true, */
+		inputs
+		{
+			item 1 [SHD.SHDLaptopClosed],
+		}
+		outputs
+		{
+			item 1 SHD.SHDLaptopOpen,
+		}
+	}
+
+	craftRecipe CloseSHDLaptop
+	{
+        timedAction = Making,
+		Time = 20,
+		Tags = InHandCraft;CanBeDoneInDark;RightClickOnly,
+		inputs
+		{
+			item 1 [SHD.SHDLaptopOpen],
+		}
+		outputs
+		{
+			item 1 SHD.SHDLaptopClosed,
+		}
+	}
+
+
+     craftRecipe PutFilterOnSHDGasMask
+	{
+		timedAction = Making,
+		Time = 60,
+		OnCreate = Recipe.OnCreate.GasmaskFilterInsert,
+		OnTest = Recipe.OnTest.GasmaskFilterInsert,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Survival,
+		inputs
+		{
+			item 1 [SHD.Hat_SHDGasMask1_nofilter;SHD.Hat_SHDGasMask2_nofilter;SHD.Hat_SHDGasMask3_nofilter;SHD.Hat_SHDGasMask4_nofilter] mappers[SHDMapper] flags[IsNotWorn;AllowFavorite;InheritFavorite;CopyClothing],
+			item 1 tags[GasmaskFilter] flags[ItemCount] mode:destroy,
+		}
+		outputs
+		{
+			item 1 mapper:SHDMapper,
+		}
+		
+			itemMapper SHDMapper
+		{
+			SHD.Hat_SHDGasMask1 = SHD.Hat_SHDGasMask1_nofilter,
+			SHD.Hat_SHDGasMask2 = SHD.Hat_SHDGasMask2_nofilter,
+			SHD.Hat_SHDGasMask3 = SHD.Hat_SHDGasMask3_nofilter,
+			SHD.Hat_SHDGasMask4 = SHD.Hat_SHDGasMask4_nofilter,
+            default = SHD.Hat_SHDGasMask4,
+		}  
+	}
+    
+	craftRecipe PutFilterOnWornSHDGasMask
+	{
+		timedAction = Making,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.WornGasmaskFilterInsert,
+		OnTest = Recipe.OnTest.WornGasmaskFilterInsert,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Miscellaneous, /*category = Survival,*/
+		inputs
+		{
+			
+			item 1 [SHD.Hat_SHDGasMask1_nofilter;SHD.Hat_SHDGasMask2_nofilter;SHD.Hat_SHDGasMask3_nofilter;SHD.Hat_SHDGasMask4_nofilter]  mappers[SHDWornMappers] flags[IsWorn;AllowFavorite;InheritFavorite;CopyClothing],
+			item 1 tags[GasmaskFilter] flags[ItemCount] mode:destroy,
+		}
+		outputs
+		{
+			item 1 mapper:SHDWornMappers,
+		}
+			itemMapper SHDWornMappers
+		{
+			SHD.Hat_SHDGasMask1 = SHD.Hat_SHDGasMask1_nofilter,
+			SHD.Hat_SHDGasMask2 = SHD.Hat_SHDGasMask2_nofilter,
+			SHD.Hat_SHDGasMask3 = SHD.Hat_SHDGasMask3_nofilter,
+			SHD.Hat_SHDGasMask4 = SHD.Hat_SHDGasMask4_nofilter,
+            default = SHD.Hat_SHDGasMask4,
+		}
+	}
+}
