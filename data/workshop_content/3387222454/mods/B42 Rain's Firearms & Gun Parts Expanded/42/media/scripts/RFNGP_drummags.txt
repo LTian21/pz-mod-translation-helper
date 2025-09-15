@@ -3266,4 +3266,362 @@ module Base
 		}
 	}
 
+	item Beretta93RSMG
+	{
+		DisplayName = Beretta93R,
+		DisplayCategory = Weapon,
+		Type = Weapon,
+		Weight = 1.5,
+		Icon = Beretta93RSMG,
+		AimingPerkCritModifier = 10,
+		AimingPerkHitChanceModifier = 11,
+		AimingPerkMinAngleModifier = 0.005,
+		AimingPerkRangeModifier = 1.5,
+		AimingTime = 15,
+		AmmoBox = Bullets9mmBox,
+		AmmoType = Base.Bullets9mm,
+		AttachmentType = Holster,
+		BreakSound = M9Break,
+		BringToBearSound = M9BringToBear,
+		ClickSound = M9Jam,
+		ClipSize = 30,
+		ConditionLowerChanceOneIn = 200,
+		ConditionMax = 30,
+		CritDmgMultiplier = 4,
+		CriticalChance = 20,
+		DoorDamage = 5,
+		DropSound = M9Drop,
+		EjectAmmoSound = M9EjectAmmo,
+		EjectAmmoStartSound = M9EjectAmmoStart,
+		EjectAmmoStopSound = M9EjectAmmoStop,
+		EquipSound = M9Equip,
+		HitChance = 25,
+		HitSound = BulletHitBody,
+		ImpactSound = null,
+		InsertAmmoSound = M9InsertAmmo,
+		InsertAmmoStartSound = M9InsertAmmoStart,
+		InsertAmmoStopSound = M9InsertAmmoStop,
+		IsAimedFirearm = TRUE,
+		JamGunChance = 3,
+		KnockBackOnNoDeath = TRUE,
+		KnockdownMod = 2,
+		MagazineType = Base.9mm30Magazine,
+		MaxAmmo = 30,
+		MaxDamage = 1.2,
+		MaxHitCount = 1,
+		MaxRange = 20,
+		MinSightRange = 2,
+		MaxSightRange = 6,
+		MetalValue = 30,
+		MinAngle = 0.95,
+		MinDamage = 0.9,
+		MinRange = 0.61,
+		MinimumSwingTime = 0.5,
+        ModelWeaponPart = TritiumSights TritiumSights scope scope,
+        ModelWeaponPart = RedDot RedDot reddot reddot,
+        ModelWeaponPart = SOCOMRedDot SOCOMRedDot reddot reddot,
+        ModelWeaponPart = Laser Laser laser laser,
+        ModelWeaponPart = 9mmSuppressor 9mmSuppressor 9mmsuppressor 9mmsuppressor,
+        ModelWeaponPart = GunLight GunLight gunlight gunlight,
+        ModelWeaponPart = DIYSuppressor DIYSuppressor diysuppressor diysuppressor,
+        ModelWeaponPart = 9mm30Magazine_Attachment 9mm30Magazine_Attachment magazine magazine,
+		MultipleHitConditionAffected = FALSE,
+		NPCSoundBoost = 1.5,
+		ProjectileCount = 1,
+		PushBackMod = 0.3,
+		RackSound = M9Rack,
+		Ranged = TRUE,
+		RecoilDelay = 1,
+		ReloadTime = 30,
+		RunAnim = Run_Weapon2,
+		ShareDamage = FALSE,
+		ShellFallSound = M9CartridgeFall,
+		SoundGain = 1.5,
+		SoundRadius = 100,
+		SoundVolume = 30,
+		SplatBloodOnNoDeath = TRUE,
+		SplatNumber = 3,
+		SplatSize = 3,
+		StopPower = 5,
+		SubCategory = Firearm,
+		SwingAmountBeforeImpact = 0,
+		SwingAnim = Handgun,
+		SwingSound = M9Shoot,
+		SwingTime = 0.5,
+		ToHitModifier = 1.5,
+		UnequipSound = M9UnEquip,
+		UseEndurance = FALSE,
+		WeaponReloadType = handgun,
+		WeaponSprite = Beretta93RSMG,
+		Tags = HasMetal;Firearm,
+	Tooltip = Tooltip_Beretta93R,
+	}
+
+	model Beretta93RSMG
+	{
+		mesh = weapons/firearm/Beretta93R,	
+		texture = weapons/firearm/Beretta93R,
+		attachment muzzle
+		{
+			offset = 0.0000 0.1386 0.0264,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+		attachment scope		
+		{		
+			offset = 0.0000 0.1182 0.0271,	
+			rotate = 0.0000 0.0000 180.0000,
+		}
+		attachment reddot		
+		{		
+			offset = 0.0000 -0.0312 0.0332,	
+			rotate = 0.0000 0.0000 0.0000,
+		}
+		attachment laser		
+		{		
+			offset = 0.0000 0.0847 0.0028,	
+			rotate = 0.0000 180.0000 0.0000,
+		}
+		attachment 9mmsuppressor		
+		{		
+			offset = 0.0000 -0.2421 0.0271,	
+			rotate = 0.0000 0.0000 0.0000,
+		}
+		attachment gunlight		
+		{		
+			offset = 0.0000 0.1010 0.0210,	
+			rotate = 0.0000 -90.0000 0.0000,
+		}
+		attachment diysuppressor		
+		{		
+			offset = 0.0000 -0.2274 0.0259,	
+			rotate = 0.0000 0.0000 0.0000,
+		}
+		attachment magazine		
+		{		
+			scale = 0.8,
+			offset = 0.0000 -0.0565 -0.0018,	
+			rotate = -19.0000 180.0000 0.0000,
+		}
+		attachment world
+		{
+			offset = -0.0300 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+
+	craftRecipe UseSMGMagazineBeretta93R
+	{
+		timedAction = Making,
+		OnTest = UseDrumMagTest,
+		OnCreate = Recipe.OnCreate.UseDrumMag,
+		Time = 50,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.Beretta93R] flags[InheritCondition;InheritAmmunition],
+		}
+		outputs
+		{
+			item 1 Base.Beretta93RSMG,
+		}
+	}
+
+	craftRecipe UseBerettaMagazineBeretta93RSMG
+	{
+		timedAction = Making,
+		OnTest = UseDrumMagTest,
+		OnCreate = Recipe.OnCreate.UseDrumMag,
+		Time = 50,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.Beretta93RSMG] flags[InheritCondition;InheritAmmunition],
+		}
+		outputs
+		{
+			item 1 Base.Beretta93R,
+		}
+	}
+
+	craftRecipe UseDrumMagazineBeretta93R
+	{
+		timedAction = Making,
+		OnTest = UseDrumMagTest,
+		OnCreate = Recipe.OnCreate.UseDrumMag,
+		Time = 50,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.Beretta93R] flags[InheritCondition;InheritAmmunition],
+		}
+		outputs
+		{
+			item 1 Base.Beretta93RDrum,
+		}
+	}
+
+	craftRecipe UseBerettaMagazineBeretta93RDrum
+	{
+		timedAction = Making,
+		OnTest = UseDrumMagTest,
+		OnCreate = Recipe.OnCreate.UseDrumMag,
+		Time = 50,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.Beretta93RDrum] flags[InheritCondition;InheritAmmunition],
+		}
+		outputs
+		{
+			item 1 Base.Beretta93R,
+		}
+	}
+
+	item Beretta93RDrum
+	{
+		DisplayName = Beretta93R,
+		DisplayCategory = Weapon,
+		Type = Weapon,
+		Weight = 1.5,
+		Icon = Beretta93RDrum,
+		AimingPerkCritModifier = 10,
+		AimingPerkHitChanceModifier = 11,
+		AimingPerkMinAngleModifier = 0.005,
+		AimingPerkRangeModifier = 1.5,
+		AimingTime = 15,
+		AmmoBox = Bullets9mmBox,
+		AmmoType = Base.Bullets9mm,
+		AttachmentType = Holster,
+		BreakSound = M9Break,
+		BringToBearSound = M9BringToBear,
+		ClickSound = M9Jam,
+		ClipSize = 60,
+		ConditionLowerChanceOneIn = 200,
+		ConditionMax = 30,
+		CritDmgMultiplier = 4,
+		CriticalChance = 20,
+		DoorDamage = 5,
+		DropSound = M9Drop,
+		EjectAmmoSound = M9EjectAmmo,
+		EjectAmmoStartSound = M9EjectAmmoStart,
+		EjectAmmoStopSound = M9EjectAmmoStop,
+		EquipSound = M9Equip,
+		HitChance = 25,
+		HitSound = BulletHitBody,
+		ImpactSound = null,
+		InsertAmmoSound = M9InsertAmmo,
+		InsertAmmoStartSound = M9InsertAmmoStart,
+		InsertAmmoStopSound = M9InsertAmmoStop,
+		IsAimedFirearm = TRUE,
+		JamGunChance = 3,
+		KnockBackOnNoDeath = TRUE,
+		KnockdownMod = 2,
+		MagazineType = Base.9mm30MagazineDrum,
+		MaxAmmo = 60,
+		MaxDamage = 1.2,
+		MaxHitCount = 1,
+		MaxRange = 20,
+		MinSightRange = 2,
+		MaxSightRange = 6,
+		MetalValue = 30,
+		MinAngle = 0.95,
+		MinDamage = 0.9,
+		MinRange = 0.61,
+		MinimumSwingTime = 0.5,
+        ModelWeaponPart = TritiumSights TritiumSights scope scope,
+        ModelWeaponPart = RedDot RedDot reddot reddot,
+        ModelWeaponPart = SOCOMRedDot SOCOMRedDot reddot reddot,
+        ModelWeaponPart = Laser Laser laser laser,
+        ModelWeaponPart = 9mmSuppressor 9mmSuppressor 9mmsuppressor 9mmsuppressor,
+        ModelWeaponPart = GunLight GunLight gunlight gunlight,
+        ModelWeaponPart = DIYSuppressor DIYSuppressor diysuppressor diysuppressor,
+        ModelWeaponPart = 9mm30MagazineDrum_Attachment 9mm30MagazineDrum_Attachment magazine magazine,
+		MultipleHitConditionAffected = FALSE,
+		NPCSoundBoost = 1.5,
+		ProjectileCount = 1,
+		PushBackMod = 0.3,
+		RackSound = M9Rack,
+		Ranged = TRUE,
+		RecoilDelay = 1,
+		ReloadTime = 30,
+		RunAnim = Run_Weapon2,
+		ShareDamage = FALSE,
+		ShellFallSound = M9CartridgeFall,
+		SoundGain = 1.5,
+		SoundRadius = 100,
+		SoundVolume = 30,
+		SplatBloodOnNoDeath = TRUE,
+		SplatNumber = 3,
+		SplatSize = 3,
+		StopPower = 5,
+		SubCategory = Firearm,
+		SwingAmountBeforeImpact = 0,
+		SwingAnim = Handgun,
+		SwingSound = M9Shoot,
+		SwingTime = 0.5,
+		ToHitModifier = 1.5,
+		UnequipSound = M9UnEquip,
+		UseEndurance = FALSE,
+		WeaponReloadType = handgun,
+		WeaponSprite = Beretta93RDrum,
+		Tags = HasMetal;Firearm,
+	Tooltip = Tooltip_Beretta93R,
+	}
+
+	model Beretta93RDrum
+	{
+		mesh = weapons/firearm/Beretta93R,	
+		texture = weapons/firearm/Beretta93R,
+		attachment muzzle
+		{
+			offset = 0.0000 0.1386 0.0264,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+		attachment scope		
+		{		
+			offset = 0.0000 0.1182 0.0271,	
+			rotate = 0.0000 0.0000 180.0000,
+		}
+		attachment reddot		
+		{		
+			offset = 0.0000 -0.0312 0.0332,	
+			rotate = 0.0000 0.0000 0.0000,
+		}
+		attachment laser		
+		{		
+			offset = 0.0000 0.0847 0.0028,	
+			rotate = 0.0000 180.0000 0.0000,
+		}
+		attachment 9mmsuppressor		
+		{		
+			offset = 0.0000 -0.2421 0.0271,	
+			rotate = 0.0000 0.0000 0.0000,
+		}
+		attachment gunlight		
+		{		
+			offset = 0.0000 0.1010 0.0210,	
+			rotate = 0.0000 -90.0000 0.0000,
+		}
+		attachment diysuppressor		
+		{		
+			offset = 0.0000 -0.2274 0.0259,	
+			rotate = 0.0000 0.0000 0.0000,
+		}
+		attachment magazine		
+		{		
+			scale = 0.8,
+			offset = 0.0000 -0.0565 -0.0229,	
+			rotate = -15.0000 180.0000 0.0000,
+		}
+		attachment world
+		{
+			offset = -0.0300 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+
 }
