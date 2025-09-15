@@ -51,7 +51,7 @@ jobs:
 
       - name: Handle Full Refresh Trigger
         id: full_refresh_check
-        if: github.event.inputs.full_refresh == true && github.event.inputs.mod_id_override == ''
+        if: github.event.inputs.full_refresh == 'true' && github.event.inputs.mod_id_override == ''
         run: |
           echo "强制刷新模式: 正在读取 id_list.txt 中的所有 Mod ID..."
           if [ ! -f "id_list.txt" ]; then
@@ -64,14 +64,14 @@ jobs:
 
       - name: Smart Check for Mod Updates (Scheduled/Default)
         id: scheduled_check
-        if: github.event.inputs.mod_id_override == '' && github.event.inputs.full_refresh != true
+        if: github.event.inputs.mod_id_override == '' && github.event.inputs.full_refresh != 'true'
         env:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
         run: python scripts/check_updates.py
 
       - name: Check for Local Completion File Updates
         id: local_check
-        if: github.event.inputs.mod_id_override == '' && github.event.inputs.full_refresh != true
+        if: github.event.inputs.mod_id_override == '' && github.event.inputs.full_refresh != 'true'
         run: |
           python scripts/check_local_changes.py > local_changes.json
           echo 'mods_to_download<<EOF' >> "$GITHUB_OUTPUT"
