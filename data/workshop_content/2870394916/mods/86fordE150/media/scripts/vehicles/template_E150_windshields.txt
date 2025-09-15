@@ -1,0 +1,336 @@
+module Base
+{
+
+    model 86fordE150windshield
+    {
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 86fordE150rearWindshield
+	{
+		mesh = vehicles/Vehicles_86fordE150_Body|e150_windshieldRear,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle E150Windshield
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 86fordE150windshield,
+            }
+            window
+            {
+            openable = false,
+            }
+            table uninstall
+                {
+                    requireUninstalled = E150WindshieldArmor,
+                }
+                
+            itemType = Base.E150Windshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 600,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 600,
+                  skills = Mechanics:5,
+                  recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+    template vehicle E150RearWindshield
+	{
+		part WindshieldRear
+		{
+
+			model RearWindshield15684846
+			{
+				file = 86fordE150rearWindshield,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			parent = TrunkDoor,
+
+			anim Close
+			{
+				anim = trunk_opening,
+				rate = 0.85,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			window
+            {
+            openable = false,
+            }
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.E150RearWindshield,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireUninstalled = E150WindshieldRearArmor,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+    template vehicle E150RearWindshieldLong
+	{
+		part WindshieldRear
+		{
+
+			model RearLongBoi415777845
+			{
+				file = 86fordE150rearWindshield,
+				offset = 0.0000 0.0000 -0.3726,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			parent = TrunkDoor,
+
+			anim Close
+			{
+				anim = trunk_long_opening,
+				rate = 0.85,
+			}
+
+			anim Open
+			{
+				anim = trunk_long_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_long_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_long_opening,
+				animate = FALSE,
+			}
+
+			window
+            {
+            openable = false,
+            }
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.E150RearWindshield,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireUninstalled = E150WindshieldRearLongArmor,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}

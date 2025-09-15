@@ -1,0 +1,165 @@
+/* Ammo Maker by STIMP_TM, based on SG module_SGuns_recipes.txt by djvirus */
+
+module SGuns {
+
+    imports
+	{
+		Base,
+		ammomaker
+	}
+
+/* Remove SG Salvage GunPowder Recipe (needs to happen within the SGun module) */
+
+	recipe Salvage GunPowder
+	{
+		OnTest:Recipe.OnTest.disabled,
+
+		keep [Recipe.GetItemTypes.Pliers],
+		ScrapBullets/SBullets,
+		ScrapBullets/SBullets,
+		ScrapBullets/SBullets,
+		ScrapBullets/SBullets,
+		ScrapBullets/SBullets,
+		Result:GunPowder,
+		Time:50.0,
+		AnimNode 				: Disassemble,
+        Prop1					: Source=1,
+        Prop2					: Source=2,
+		NeedToBeLearn : false,
+		IsHidden:true,
+        Override:true,
+	}
+
+/* Adjust SG Gunpowder Related Recipes */
+
+	recipe Make Salvaged Bullets
+	{
+		OnTest:Recipe.OnTest.isActivated_SG,
+
+		ammomaker_GunPowderGrains=50,
+		ammomaker_PartsBottleneckM=1,
+		keep [Recipe.GetItemTypes.Pliers],
+		
+		Result 		: SBullets=1,
+		Sound 		: AmmoCrafting2,
+		Time 		: 50.0,
+		Category 		: Weapons,
+		SkillRequired 		: MetalWelding=7,
+		OnGiveXP 		: Give10MWXP,
+		Prop1					: Source=2,
+        Prop2					: SBullets,
+		AnimNode 				: Disassemble,
+		NeedToBeLearn : true,
+		IsHidden:true,
+		Override:true,
+	}
+
+	recipe Make Scrap Bullets
+	{
+		OnTest:Recipe.OnTest.isActivated_SG,
+
+		ammomaker_GunPowderGrains=14,
+		ammomaker_PartsStraightS=1,
+		keep [Recipe.GetItemTypes.Pliers],
+
+		Result 		: ScrapBullets=1,
+		Sound 		: AmmoCrafting2,
+		Time 		: 50.0,
+		Category 		: Weapons,
+		SkillRequired 		: MetalWelding=4,
+		OnGiveXP 		: Give10MWXP,
+		Prop1					: Source=2,
+        Prop2					: ScrapBullets,
+		AnimNode 				: Disassemble,
+		NeedToBeLearn : true,
+		IsHidden:true,
+		Override:true,
+	}
+
+    recipe Make Nail Bomb
+	{
+		OnTest:Recipe.OnTest.isActivated_SG,
+
+		Nails=25,
+		Twine,
+		TinCanEmpty,
+		GunPowder=7,
+		Result 		: NailBomb,
+		Sound 		: AmmoCrafting,
+		Time 		: 650.0,
+		Category 		: Weapons,
+		SkillRequired 		: MetalWelding=1,
+		OnGiveXP 		: Give10MWXP,
+		AnimNode 		: Disassemble,
+		Prop2 		: TinCanEmpty,
+		Prop1 		: Nails,
+		NeedToBeLearn : true,
+		IsHidden:true,
+		Override:true,
+	}
+
+	recipe Make Glass Bomb
+	{
+		OnTest:Recipe.OnTest.isActivated_SG,
+
+		Twine,
+		EmptyJar,
+		GunPowder=10,
+		Result 		: GlassBomb,
+		Sound 		: AmmoCrafting,
+		Time 		: 650.0,
+		Category 		: Weapons,
+		SkillRequired 		: MetalWelding=0,
+		OnGiveXP 		: Give10MWXP,
+		Prop2 		: EmptyJar,
+		Prop1 		: Twine,
+		NeedToBeLearn : true,
+		IsHidden:true,
+		Override:true,
+	}
+
+	recipe Assemble Pipe Bomb
+	{
+		OnTest:Recipe.OnTest.isActivated_SG,
+
+		Twine,
+		MetalPipe/LeadPipe,
+		GunPowder=20,
+		BlowTorch=1,
+		keep [Recipe.GetItemTypes.WeldingMask],
+		keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		Result 		: HPB,
+		Sound 		: HPBCrafting,
+		Time 		: 1500.0,
+		Category 		: Weapons,
+		SkillRequired 	: MetalWelding=3,
+		OnGiveXP 		: Give10MWXP,
+		Prop1 		: GunPowder,
+		Prop2 		: MetalPipe,
+		NeedToBeLearn : true,
+		IsHidden:true,
+		Override:true,
+	}
+
+	recipe Make Decoy
+	{
+		OnTest:Recipe.OnTest.isActivated_SG,
+		
+		Twine,
+		TinCanEmpty,
+		GunPowder=4,
+		Result 		: HD,
+		Sound 		: AmmoCrafting,
+		Time 		: 650.0,
+		Category 		: Weapons,
+		SkillRequired 		: MetalWelding=1,
+		OnGiveXP 		: Give10MWXP,
+		Prop1 		: Twine,
+		Prop2 		: TinCanEmpty,
+		NeedToBeLearn : true,
+		IsHidden:true,
+		Override:true,
+	}
+
+}

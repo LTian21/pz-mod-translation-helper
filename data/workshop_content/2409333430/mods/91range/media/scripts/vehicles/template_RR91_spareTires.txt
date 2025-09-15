@@ -1,0 +1,135 @@
+module Base
+{
+
+    model 91rangespareTrunk
+    {
+        mesh = vehicles/Vehicles_91range_Body_mk2|91range_tire_spare_trunk,
+        texture = Vehicles/Vehicles_91range_Wheel,
+        shader = vehiclewheel,
+        scale = 0.1,
+    }
+
+    model 91rangespareRoof
+    {
+        mesh = vehicles/Vehicles_91range_Body_mk2|91range_tire_spare_roof,
+        texture = Vehicles/Vehicles_91range_Wheel,
+        shader = vehiclewheel,
+        scale = 0.1,
+    }
+
+	template vehicle RR91SpareTires
+	{
+
+        part RR91SpareTireTrunk
+        {
+            model spareTrunk
+            {
+                file = 91rangespareTrunk,
+            }
+                
+            specificItem = false,
+            itemType = Base.91rangeTire2,
+            area = TruckBed,
+            category = tire,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			             equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                door = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = RR91.InstallComplete.SpareTire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = RR91.UninstallComplete.SpareTire,
+            }
+            lua
+            {
+                create = RR91.Create.SpareTire,
+            }
+        }
+
+        part RR91SpareTireRoof
+        {
+            model spareRoof
+            {
+            file = 91rangespareRoof,
+            }
+        
+            specificItem = false,
+            itemType = Base.91rangeTire2,
+            area = TruckBed,
+            category = tire,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+                requireInstalled = RR91Roofrack,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+                {
+                create = DAMN.Create.Blank,
+                }
+        }
+
+    }
+
+}

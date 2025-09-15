@@ -1,0 +1,307 @@
+module Base
+{
+
+	model 93fordF350Wheel
+	{
+		mesh = vehicles/Vehicles_93fordF350_Wheels|f350_wheel,
+		texture = vehicles/Vehicles_93fordF350_Wheel,
+		shader = vehiclewheel,
+		scale = 0.105,
+	}
+
+	model 93fordF350Wheels
+	{
+		mesh = vehicles/Vehicles_93fordF350_Wheels|f350_wheels,
+		texture = vehicles/Vehicles_93fordF350_Wheel,
+		shader = vehiclewheel,
+		scale = 0.105,
+	}
+
+	template vehicle F3502FrontTires
+	{
+		part TireFrontLeft
+		{
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+		}
+
+		part TireFront*
+		{
+			category = tire,
+			itemType = Base.93fordF350Tire,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+
+			model 93fordF350Tire
+			{
+				file = 93fordF350Wheel,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+	}
+
+	template vehicle F3502TiresStock
+	{
+		template! = F3502FrontTires,
+
+		part TireRearLeft
+		{
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part TireRear*
+		{
+			category = tire,
+			itemType = Base.93fordF350Tire,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 800,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 800,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+
+			model 93fordF350TireR
+			{
+				file = 93fordF350Wheel,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+	}
+
+	template vehicle F3502TiresDually
+	{
+		template! = F3502FrontTires,
+
+		part TireRearLeft
+		{
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part TireRear*
+		{
+			category = tire,
+			itemType = Base.93fordF350DoubleTires,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 800,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 800,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+
+			model 93fordF350Tires
+			{
+				file = 93fordF350Wheels,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+	}
+}
+

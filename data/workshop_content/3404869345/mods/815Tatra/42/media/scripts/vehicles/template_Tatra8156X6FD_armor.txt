@@ -1,0 +1,132 @@
+module Base
+{
+    model Tatra8156X6FD_Windshield_Armor
+    {
+        mesh = vehicles/Vehicles_FD6X6Tatra815_Body|windshieldarmor,
+        
+		shader = vehicle,
+		scale = 1,
+    }
+    model Tatra8156X6FD_WindshieldRear_Armor
+    {
+        mesh = vehicles/Vehicles_FD6X6Tatra815_Body|rearwindshieldarmor1,
+        
+		shader = vehicle,
+                invertX = FALSE,
+                static = TRUE,
+		scale = 1,
+    }
+	model Tatra8156X6FD_ProtectionWindowLeft
+    {
+        mesh = vehicles/Vehicles_FD6X6Tatra815_Body|leftfrontwindowarmor1,
+        
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1,
+        boneWeight = leftfrontwindowarmor1Bone 1.0,
+        
+    }
+	model Tatra8156X6FD_ProtectionWindowRight
+    {
+        mesh = vehicles/Vehicles_FD6X6Tatra815_Body|rightfrontwindowarmor1,
+	
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1,
+        boneWeight = rightfrontwindowarmor1Bone 1.0,
+        
+    }
+
+	model Tatra8156X6FD_ProtectionWindowRearLeft
+    {
+        mesh = vehicles/Vehicles_FD6X6Tatra815_Body|rearleftwindowarmor,
+        
+	shader = vehicle,
+        invertX = FALSE,
+        static = TRUE,
+        scale = 1,
+         
+        
+    }
+	model Tatra8156X6FD_ProtectionWindowRearRight
+    {
+        mesh = vehicles/Vehicles_FD6X6Tatra815_Body|rearrightwindowarmor,
+	
+	shader = vehicle,
+        invertX = FALSE,
+        static = TRUE,
+        scale = 1,
+        
+
+    }
+
+    template vehicle Tatra8156X6FD_armor
+    {
+        template = ATA2Protection/part/ATA2ProtectionWindshield,
+        part ATA2ProtectionWindshield
+        {
+            model Default
+            {
+                file = Tatra8156X6FD_Windshield_Armor,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindshieldRear,
+        part ATA2ProtectionWindshieldRear
+        {
+            
+
+            model Default
+            {
+                file = Tatra8156X6FD_WindshieldRear_Armor,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontLeft,
+        part ATA2ProtectionWindowFrontLeft
+        {
+                        parent = DoorFrontLeft,
+
+			model Default
+            {
+                file = Tatra8156X6FD_ProtectionWindowLeft,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontRight,
+        part ATA2ProtectionWindowFrontRight
+        {
+                        parent = DoorFrontRight, 
+                       
+			model Default
+            {
+                file = Tatra8156X6FD_ProtectionWindowRight,
+            }
+        }       
+
+        template = ATA2Protection/part/ATA2ProtectionWindowRearLeft,
+        part ATA2ProtectionWindowRearLeft
+        {
+                        
+
+			model Default
+            {
+                file = Tatra8156X6FD_ProtectionWindowRearLeft,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindowRearRight,
+        part ATA2ProtectionWindowRearRight
+        {
+                        
+                       
+			model Default
+            {
+                file = Tatra8156X6FD_ProtectionWindowRearRight,
+            }
+        }
+
+    }
+}

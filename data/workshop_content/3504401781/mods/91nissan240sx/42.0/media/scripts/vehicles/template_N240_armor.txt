@@ -1,0 +1,426 @@
+module Base
+{
+	model 91nissan240sxWindshieldA
+    	{
+        mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 91nissan240sxWindowflA
+    	{
+        mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 91nissan240sxWindowfrA
+    	{
+        mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 91nissan240sxWindowrlA
+    	{
+        mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 91nissan240sxWindowrrA
+    	{
+        mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 91nissan240sxWindshieldrearA
+    	{
+        mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle N240Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model winda0
+				{
+                		file = 91nissan240sxWindshieldA,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.91nissan240sxWindshieldArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = N240.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = N240.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = N240.Create.WindshieldArmor,
+					init = N240.Init.WindshieldArmor,
+					}
+			}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model leftdoora
+				{
+                		file = 91nissan240sxWindowflA,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.91nissan240sxFrontWindowArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = N240.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = N240.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = N240.Create.FrontLeftArmor,
+					init = N240.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model rightdoora
+				{
+                		file = 91nissan240sxWindowfrA,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.91nissan240sxFrontWindowArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = N240.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = N240.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = N240.Create.FrontRightArmor,
+					init = N240.Init.FrontRightArmor,
+					}
+		}
+
+        part DAMNRearLeftArmor
+        {
+
+			model leftdoorra
+				{
+                		file = 91nissan240sxWindowrlA,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.91nissan240sxRearWindowArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = N240.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = N240.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = N240.Create.RearLeftArmor,
+					init = N240.Init.RearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model rightdoorra
+				{
+                		file = 91nissan240sxWindowrrA,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.91nissan240sxRearWindowArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = N240.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = N240.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = N240.Create.RearRightArmor,
+					init = N240.Init.RearRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model windra
+				{
+                		file = 91nissan240sxWindshieldrearA,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+            parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.91nissan240sxWindshieldRearArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = N240.InstallComplete.WindshieldRearArmor,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = N240.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = N240.Create.WindshieldRearArmor,
+					init = N240.Init.WindshieldRearArmor,
+					}
+			}
+		}
+
+}

@@ -1,0 +1,498 @@
+module Base
+{
+	model 76chevyCseriesMountsL
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76wrecker_left_mounts,
+		texture = vehicles/Vehicles_76chevyKseries_Interior3,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 76chevyCseriesGasCan
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|TIS_GasCan,
+		texture = Vehicles/Items_GasCan,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 76chevyCseriesPropane
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|TIS_PropaneTank,
+		texture = Vehicles/Items_PropaneTank,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 76chevyCseriesMountsR
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76wrecker_right_mounts,
+		texture = vehicles/Vehicles_76chevyKseries_Interior3,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 76chevyCseriesspareStrap
+    {
+        mesh = vehicles/Vehicles_76chevyKseries_Body|76wrecker_strap,
+        texture = Vehicles/Vehicles_76chevyKseries_Interior3,
+        shader = vehiclewheel,
+        scale = 0.1,
+    }
+
+	template vehicle CH76ExtrasWreckerShort
+	{
+		part CH76LeftMounts
+        	{
+
+			model MountsL
+				{
+                		file = 76chevyCseriesMountsL,
+				}
+
+			category = bodywork,
+			area = TireRearLeft,
+            specificItem = false,
+			itemType = Base.76chevyCseriesWreckerMountLeft,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				}
+		}
+
+        part DAMNSpareTire
+        {
+            model wreckerspare
+				{
+                		file = 76chevyKseriesWheel1L,
+                        offset = 0.8585 0.5165 -0.7792,
+                        scale = 0.96,
+				}
+
+            model wreckersparestrap
+				{
+                		file = 76chevyCseriesspareStrap,
+				}
+
+            specificItem = false,
+            itemType = Base.76chevyKseriesTire2,
+            area = TireRearLeft,
+            category = tire,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			             equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = CH76.InstallComplete.SpareTireW,
+                requireInstalled = CH76LeftMounts,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = CH76.UninstallComplete.SpareTireW,
+            }
+            lua
+            {
+                init = CH76.Init.SpareTireW,
+                create = CH76.Create.SpareTireW,
+            }
+        }
+
+        part DAMNGasCanOne
+        	{
+				model gascan1e
+				{
+                file = 76chevyCseriesGasCan,
+                offset = 0.0000 0.0000 -0.1977,
+				}
+                model gascan1
+				{
+                file = 76chevyCseriesGasCan,
+                offset = 0.0000 0.0000 -0.1977,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.EmptyPetrolCan;Base.PetrolCan,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = CH76.InstallComplete.GasCanOne,
+                	requireInstalled = CH76LeftMounts,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.GasCanOne,
+            	}
+
+            	lua
+            	{
+                    init = CH76.Init.GasCanOne,
+				    create = CH76.Create.GasCanOne,
+				}
+			}
+
+			part DAMNGasCanTwo
+        	{
+				model gascan2e
+				{
+                file = 76chevyCseriesGasCan,
+				}
+                model gascan2
+				{
+                file = 76chevyCseriesGasCan,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.EmptyPetrolCan;Base.PetrolCan,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = CH76.InstallComplete.GasCanTwo,
+                	requireInstalled = CH76LeftMounts,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.GasCanTwo,
+            	}
+
+            	lua
+            	{
+                    init = CH76.Init.GasCanTwo,
+				    create = CH76.Create.GasCanTwo,
+				}
+			}
+
+        part CH76RightMounts
+        {
+
+			model MountsR
+				{
+                		file = 76chevyCseriesMountsR,
+				}
+
+			category = bodywork,
+			area = StorageRight,
+            specificItem = false,
+			itemType = Base.76chevyCseriesWreckerMountRight,
+			mechanicRequireKey = false,
+
+            container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				}
+		}
+
+        part DAMNPropaneTankOne
+        	{
+				model prop1
+				{
+                file = 76chevyCseriesPropane,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.PropaneTank,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = CH76.InstallComplete.PropaneTankOne,
+                	requireInstalled = CH76RightMounts,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.PropaneTankOne,
+            	}
+
+            	lua
+            	{
+                    init = CH76.Init.PropaneTankOne,
+				    create = CH76.Create.PropaneTankOne,
+				}
+			}
+
+			part DAMNPropaneTankTwo
+        	{
+				model prop2
+				{
+                file = 76chevyCseriesPropane,
+                offset = 0.0000 0.0000 -0.2824,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.PropaneTank,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = CH76.InstallComplete.PropaneTankTwo,
+                	requireInstalled = CH76RightMounts,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.PropaneTankTwo,
+            	}
+
+            	lua
+            	{
+				    init = CH76.Init.PropaneTankTwo,
+				    create = CH76.Create.PropaneTankTwo,
+				}
+			}
+	}
+
+    template vehicle CH76ExtrasWreckerLong
+	{
+        template! = CH76ExtrasWreckerShort,
+
+		part CH76LeftMounts
+        	{
+
+			model MountsL
+				{
+                		file = 76chevyCseriesMountsL,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+		}
+
+        part DAMNSpareTire
+        {
+            model wreckerspare
+				{
+                		file = 76chevyKseriesWheel1L,
+                        offset = 0.8585 0.5165 -1.5787,
+                        scale = 0.96,
+				}
+
+            model wreckersparestrap
+				{
+                		file = 76chevyCseriesspareStrap,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+        }
+
+        part DAMNGasCanOne
+        	{
+				model gascan1e
+				{
+                file = 76chevyCseriesGasCan,
+                offset = 0.0000 0.0000 -0.9972,
+				}
+                model gascan1
+				{
+                file = 76chevyCseriesGasCan,
+                offset = 0.0000 0.0000 -0.9972,
+				}
+			}
+
+		part DAMNGasCanTwo
+        	{
+				model gascan2e
+				{
+                file = 76chevyCseriesGasCan,
+                offset = 0.0000 0.0000 -0.7995,
+				}
+                model gascan2
+				{
+                file = 76chevyCseriesGasCan,
+                offset = 0.0000 0.0000 -0.7995,
+				}
+			}
+
+        part CH76RightMounts
+        {
+
+			model MountsR
+				{
+                		file = 76chevyCseriesMountsR,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+		}
+
+        part DAMNPropaneTankOne
+        	{
+				model prop1
+				{
+                file = 76chevyCseriesPropane,
+                offset = 0.0000 0.0000 -0.7995,
+				}
+			}
+
+		part DAMNPropaneTankTwo
+        	{
+				model prop2
+				{
+                file = 76chevyCseriesPropane,
+                offset = 0.0000 0.0000 -1.0819,
+				}
+			}
+	}
+}

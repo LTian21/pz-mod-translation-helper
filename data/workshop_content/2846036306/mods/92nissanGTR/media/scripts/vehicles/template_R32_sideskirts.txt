@@ -1,0 +1,107 @@
+module Base
+{
+	
+	model 92nissanGTRsideskirts1
+	{
+		mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_sideskirts_1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 92nissanGTRsideskirts2
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_sideskirts_2,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 92nissanGTRsideskirts3
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_sideskirts_3,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 92nissanGTRsideskirtsA
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_sideskirts_a,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle R32Sideskirts
+		{
+		part R32Sideskirts
+       		{
+
+            model Sideskirts1
+			{
+                	file = 92nissanGTRsideskirts1,
+			}
+
+            model Sideskirts2
+            {
+                    file = 92nissanGTRsideskirts2,
+            }
+
+            model Sideskirts3
+            {
+                    file = 92nissanGTRsideskirts3,
+            }
+
+            model SideskirtsA
+            {
+                    file = 92nissanGTRsideskirtsA,
+            }
+
+            area = SeatFrontLeft,
+            category = bodywork,
+            specificItem = false,
+            itemType = Base.R32Sideskirts1;Base.R32Sideskirts2;Base.R32Sideskirts3;Base.R32SideskirtsA,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = R32.InstallComplete.Sideskirts,
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = R32.UninstallComplete.Sideskirts,
+            }
+            lua
+            {
+                create = R32.Create.Sideskirts,
+                init = R32.Init.Sideskirts,
+            }
+        }
+	}
+}
+

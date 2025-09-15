@@ -1,0 +1,49 @@
+module Base
+{
+    template vehicle ATASpareWheel
+    {
+        part ATASpareWheel
+        {
+            area = TruckBed,
+            category = tire,
+            itemType = Base.OldTire;Base.NormalTire;Base.ModernTire,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.LugWrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 400,
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.LugWrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 400,
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+            lua
+            {
+                create = ATATuning.Create.Chance45,
+                init = ATATuning.Init.Default,
+            }
+        }
+    }
+}

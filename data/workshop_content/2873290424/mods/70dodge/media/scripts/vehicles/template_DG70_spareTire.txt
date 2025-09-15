@@ -1,0 +1,86 @@
+module Base
+{
+
+	model DG70spare
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_spareTire,
+		texture = vehicles/Vehicles_70dodgeRT_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	
+	template vehicle DG70SpareTires
+	{
+		part DG70SpareTire
+        	{
+
+			model DGSpareTire0
+				{
+                		file = DG70spare,
+				}
+			model DGSpareTire1
+				{
+                		file = DG70spare,
+				}
+			model DGSpareTire2
+				{
+                		file = DG70spare,
+				}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.DodgeRTtire;Base.CUDAtire;Base.CamaroSStire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DG70.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = DG70.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = DG70.Create.SpareTire,
+				init = DG70.Init.SpareTire,
+				}
+		}
+	}
+}
+

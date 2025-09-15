@@ -1,0 +1,64 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Wood_WallLvl3
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Wooden Wall (Good),
+			Icon		= Build_WallWood,
+		}
+	}
+
+    entity WoodenWallLvl3
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Wood_WallLvl3,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			LogicClass      = WoodenWall,
+			skillBaseHealth = 300,
+			previousStage   = WoodenWallFrame;MetalWallFrame;WoodenWallLvl1;WoodenWallLvl2,
+			OnCreate = BuildRecipeCode.canBePlastered.OnCreate,
+			
+            face W
+            {
+                layer
+                {
+                    row = walls_exterior_wooden_01_24,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_exterior_wooden_01_25,
+                }
+            }
+			
+			corner = walls_exterior_wooden_01_27,
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = woodenWallLvl3Test,
+            timedAction   = BuildWallHammer,
+            time          = 200,
+            category      = Carpentry,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:6,
+            ToolTip       = Tooltip_craft_NeedsWallframeDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1],
+                item 1 [SWB.PlankKit2x],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

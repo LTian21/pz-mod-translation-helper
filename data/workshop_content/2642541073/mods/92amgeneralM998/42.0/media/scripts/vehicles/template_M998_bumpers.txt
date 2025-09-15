@@ -1,0 +1,86 @@
+module Base
+{
+	model 92amgeneralM998bullbar1
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_smallbullbar,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	model 92amgeneralM998bullbar2
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_bigbullbar,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M998Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model BullbarA
+				{
+                		file = 92amgeneralM998bullbar1,
+				}
+
+			model BullbarB
+				{
+                		file = 92amgeneralM998bullbar2,
+				}
+
+			area = Engine,
+			category = Other,
+			specificItem = false,
+			itemType = Base.92amgeneralM998BullbarA;Base.92amgeneralM998BullbarB,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M998.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Wrench,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 800,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			        complete = M998.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+                    create = M998.Create.BumperFront,
+                    init = M998.Init.BumperFront,
+                    }
+		}
+	}	
+}

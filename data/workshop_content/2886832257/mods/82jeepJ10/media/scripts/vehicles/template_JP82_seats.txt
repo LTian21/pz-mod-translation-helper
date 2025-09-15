@@ -1,0 +1,110 @@
+module Base
+{
+
+	model JP82seatfl
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_seat_fl,
+		texture = Vehicles/Vehicles_82jeepJ10_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model JP82seatfr
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_seat_fl,
+		texture = Vehicles/Vehicles_82jeepJ10_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	
+	template vehicle JP82Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = JP82seatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = JP82seatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.80sPickupSeatFront,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+	}
+}
+

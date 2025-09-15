@@ -1,0 +1,76 @@
+module Base
+{
+	model 92amgeneralM998slopedback
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_sloped_trunk,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M998BackCovers
+		{
+		part M998BackCover
+        	{
+
+			model BackCover1
+				{
+                		file = 92amgeneralM998slopedback,
+				}
+
+			area = TireRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M998BackCover1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M998.InstallComplete.BackCover,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 2000,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = M998.UninstallComplete.BackCover,
+			requireUninstalled = TrunkDoor,
+            		}
+
+            		lua
+            		{
+			create = M998.Create.BackCover,
+			init = M998.Init.BackCover,
+			}
+		}
+	}
+
+		
+}

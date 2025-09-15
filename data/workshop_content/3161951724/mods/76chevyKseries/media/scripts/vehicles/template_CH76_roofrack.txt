@@ -1,0 +1,210 @@
+module Base
+{
+
+	model 76chevyKseriesRoofrack0
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_roofrack,
+		texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 76chevyKseriesRoofrackLights0
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_roofrack_lights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 76chevyCseriesRoofrack1
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76wrecker_roofrack,
+		texture = Vehicles/Vehicles_76chevyKseries_Interior3,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle CH76Roofrack
+	{
+		part CH76Roofrack
+		{
+
+			model CH76Roofrack0
+				{
+                		file = 76chevyKseriesRoofrack0,
+				}
+
+			model CH76RoofrackLights0
+				{
+                		file = 76chevyKseriesRoofrackLights0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.76chevyKseriesRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.Roofrack,
+                	requireInstalled = CH76TruckBedCover,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.Roofrack,
+					requireUninstalled = CH76SpareTireRoof,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = CH76.Create.Roofrack,
+					init = CH76.Init.Roofrack,
+				}
+		}
+	}
+
+    template vehicle CH76RoofrackK30
+	{
+        template! = CH76Roofrack,
+
+		part CH76Roofrack
+		{
+
+			model CH76Roofrack0
+				{
+                		file = 76chevyKseriesRoofrack0,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+
+			model CH76RoofrackLights0
+				{
+                		file = 76chevyKseriesRoofrackLights0,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+		}
+	}
+
+    template vehicle CH76RoofrackWreckerShort
+	{
+		part CH76Roofrack
+		{
+
+			model CH76Roofrack1
+				{
+                		file = 76chevyCseriesRoofrack1,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.76chevyCseriesRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.RoofrackW,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.RoofrackW,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+                    init = CH76.Init.RoofrackW,
+					create = CH76.Create.RoofrackW,
+				}
+		}
+	}
+
+    template vehicle CH76RoofrackWreckerLong
+	{
+        template! = CH76RoofrackWreckerShort,
+
+		part CH76Roofrack
+		{
+			model CH76Roofrack1
+				{
+                	file = 76chevyCseriesRoofrack1,
+                    offset = 0.0000 0.0000 -0.7995,
+				}
+        }
+    }
+}

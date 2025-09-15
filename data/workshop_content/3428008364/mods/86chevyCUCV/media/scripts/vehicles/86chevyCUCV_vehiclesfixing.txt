@@ -1,0 +1,70 @@
+module Base
+{
+	recipe Repair 86 Chevrolet CUCV Tire
+    	{
+		86chevyCUCVTire1/86chevyCUCVTire2,
+		damnCraft.TireRepairTools,
+		damnCraft.TireRepairRubberSolution,
+		damnCraft.TireRepairStrips,
+
+		NoBrokenItems:false,
+		Result:damnCraft.TireRepairTools,
+		Time:250.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+    recipe Repair 86 Chevrolet CUCV Double Tires
+    	{
+		86chevyCUCVDoubleTires2,
+		damnCraft.TireRepairTools,
+		damnCraft.TireRepairRubberSolution=2,
+		damnCraft.TireRepairStrips=2,
+
+		NoBrokenItems:false,
+		Result:damnCraft.TireRepairTools,
+		Time:450.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+	fixing Fix 86 Chevrolet CUCV Seat
+	{
+	   Require : 86chevyCUCVSeatFront2;86chevyCUCVSeatRear2,
+	   ConditionModifier : 0.5,
+
+       Fixer : DuctTape=2;Mechanics=1,
+	}
+	
+	fixing Fix 86 Chevrolet CUCV Trunk Lid Welding
+    {
+       Require : 86chevyM1008Tailgate2;80chevyM1010Tailgate2;80chevyM1028Tailgate2;80chevyM1031Tailgate2;86chevyK5Tailgate2;86chevyCUCVstorageLid2;86chevyCUCVstorageLids2;M101TrunkDoor2,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+    }
+
+    fixing Fix 86 Chevrolet CUCV Trunk Lid
+	{
+       Require : 86chevyM1008Tailgate2;80chevyM1010Tailgate2;80chevyM1028Tailgate2;80chevyM1031Tailgate2;86chevyK5Tailgate2;86chevyCUCVstorageLid2;86chevyCUCVstorageLids2;M101TrunkDoor2,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix 86 Chevrolet CUCV Armor Welding
+    {
+       Require : 86chevyCUCVFrontWindowArmor;86chevyCUCVBackWindowArmor;86chevyCUCVWindshieldArmor;86chevyCUCVWindshieldRearArmor;86chevyM1010WindshieldRearArmor;86chevyCUCVBullbarFrontA;86chevyCUCVBullbarFrontB;86chevyCUCVBullbarFrontC;86chevyCUCVBumperRear1;86chevyCUCVBumperRear2,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 0.75,
+
+       Fixer : SheetMetal; MetalWelding=4;Mechanics=4,
+       Fixer : SmallSheetMetal=2; MetalWelding=4;Mechanics=4,
+    }
+
+}

@@ -1,0 +1,62 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_DeluxeShower
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Deluxe Shower,
+			Icon		= fixtures_bathroom_01_32,
+		}
+	}
+
+    entity DeluxeShower
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_DeluxeShower,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            needToBeAgainstWall = true,
+            face E
+            {
+                layer
+                {
+                    row = fixtures_bathroom_01_33,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = fixtures_bathroom_01_32,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Appliances_Bathroom,
+            SkillRequired = MetalWelding:4;Masonry:6,
+            xpAward       = MetalWelding:5;Masonry:10,
+            ToolTip       = Tooltip_craft_showerDesc,
+            inputs
+            {
+		        item 1 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[MasonsTrowel] mode:keep,
+		        item 1 [Base.WeldingRods],
+                item 1 [Base.BucketConcreteFull],
+                item 4 [Base.ClayTile],
+                item 1 [Base.LeadPipe],
+            }
+        }
+    }
+}

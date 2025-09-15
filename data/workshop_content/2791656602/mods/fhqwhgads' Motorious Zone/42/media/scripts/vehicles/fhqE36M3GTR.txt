@@ -1,0 +1,543 @@
+module Base
+{
+	model fhqM3GTR
+	{
+		mesh = vehicles/vehicle_fhqe36m3gtr,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 1,
+	}
+	model fhqMZM3GTRWheelLeft
+	{
+		mesh = vehicles/vehicles_WheelfhqMZShallow,
+		texture = vehicles/vehicles_WheelfhqMZM3GTR,
+		invertX = FALSE,
+		scale = 1,
+	}
+	model fhqMZM3GTRWheelRight
+	{
+		mesh = vehicles/vehicles_WheelfhqMZShallow,
+		texture = vehicles/vehicles_WheelfhqMZM3GTR,
+		invertX = TRUE,
+		scale = 1,
+	}
+	vehicle fhqE36M3GTR
+	{
+		mechanicType = 3,
+		offRoadEfficiency = 0.7,
+		engineRepairLevel = 6,
+		playerDamageProtection = 0.8,
+
+		model
+		{
+			file = fhqM3GTR,
+			scale = 0.7000,
+			offset = 0.0000 0.3429 -0.1000,
+		}
+
+		spawnOffsetY = 0.12999995,
+
+		skin
+		{
+			texture = Vehicles/vehicle_fhqE36M3GTR_shell,
+		}
+
+		textureMask = Vehicles/vehicle_fhqE36M3GTR_mask,
+		textureLights = Vehicles/vehicle_fhqE36Sed_lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/Veh_Damage1,
+		textureDamage2Shell = Vehicles/Veh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		sound
+		{
+			engine = VehicleEngineSportsCar,
+			engineStart = VehicleEngineSportsCar,
+			engineTurnOff = VehicleEngineSportsCar,
+			horn = VehicleHornStandard,
+			ignitionFail = VehicleIgnitionFailSportsCar,
+		}
+
+		extents = 2.2571 1.4571 5.4571,
+		mass = 770,
+		physicsChassisShape = 2.2571 1.4286 5.4571,
+		centerOfMassOffset = 0.0000 0.7286 0.0000,
+		shadowExtents = 2.3035 5.6723,
+		shadowOffset = 0.0000 0.0260,
+		engineForce = 5250,
+		engineLoudness = 95,
+		engineQuality = 70,
+		maxSpeed = 135f,
+		gearRatioCount = 5,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 0.7f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 50,
+		suspensionCompression = 2.0,
+		suspensionDamping = 2.2,
+		maxSuspensionTravelCm = 15,
+		suspensionRestLength = 0.3f,
+		wheelFriction = 1.9f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.9429 -0.2390 1.8857,
+			radius = 0.37f,
+			width = 0.22f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.9429 -0.2439 1.8857,
+			radius = 0.37f,
+			width = 0.22f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 1.0000 -0.2439 -1.4143,
+			radius = 0.37f,
+			width = 0.22f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -1.0000 -0.2400 -1.4143,
+			radius = 0.37f,
+			width = 0.22f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.5143 0.1000 0.0714,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.5286 -0.6857 0.4857,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.5143 0.0857 0.0714,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.5286 -0.6714 0.4857,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 3.3143 2.2000 1.1714,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -3.2857 2.2286 1.1143,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.7143 0.4143 1.1714 1.1714,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.7143 0.4143 1.1714 1.1714,
+		}
+
+		area GasTank
+		{
+			xywh = -1.3143 -1.9571 0.5714 0.5714,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.3714 1.7857 0.6857 0.6857,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.3714 1.7857 0.6857 0.6857,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.3714 -1.5286 0.6857 0.6857,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.3714 -1.5286 0.6857 0.6857,
+		}
+
+		template = TrunkDoor,
+
+		part TrunkDoor
+		{
+			anim Open
+			{
+				sound = VehicleTrunkOpenSportsCar,
+			}
+
+			anim Close
+			{
+				sound = VehicleTrunkCloseSportsCar,
+			}
+
+			anim Lock
+			{
+				sound = LockVehicleDoorSportsCar,
+			}
+
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorSportsCar,
+			}
+
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedSportsCar,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Trunk/part/TruckBed,
+
+		part TruckBed
+		{
+			itemType = Base.SmallTrunk,
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = GloveBox,
+		template = GasTank,
+
+		part GasTank
+		{
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			anim Open
+			{
+				sound = VehicleHoodOpenSportsCar,
+			}
+
+			anim Close
+			{
+				sound = VehicleHoodCloseSportsCar,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+
+		part Windshield*
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+		template = Window/part/WindowRearLeft,
+		template = Window/part/WindowRearRight,
+
+		part WindowRearLeft
+		{
+			area = TireRearLeft,
+			parent =,
+
+			table install
+			{
+				requireInstalled =,
+			}
+		}
+
+		part WindowRearRight
+		{
+			area = TireRearRight,
+			parent =,
+
+			table install
+			{
+				requireInstalled =,
+			}
+		}
+
+		part Window*
+		{
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+
+		part Door*
+		{
+			anim Open
+			{
+				sound = VehicleDoorOpenSportsCar,
+			}
+
+			anim Close
+			{
+				sound = VehicleDoorCloseSportsCar,
+			}
+
+			anim Lock
+			{
+				sound = LockVehicleDoorSportsCar,
+			}
+
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorSportsCar,
+			}
+
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedSportsCar,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZM3GTRWheelLeft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZM3GTRWheelRight,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZM3GTRWheelLeft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZM3GTRWheelRight,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 0.0676 -2.6216,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 0.0000 2.8108,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

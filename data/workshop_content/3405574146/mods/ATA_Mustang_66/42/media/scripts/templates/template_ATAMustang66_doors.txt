@@ -1,0 +1,340 @@
+module Base
+{
+    
+    model ATAMustang66_DoorFrontLeft
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|DoorFrontLeft,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.0041,
+        boneWeight = LeftDoor 1.0,
+    }
+
+    model ATAMustang66_DoorFrontRight
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|DoorFrontRight,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.0041,
+        boneWeight = RightDoor 1.0,
+    }
+
+    model ATAMustang66_EngineDoor1
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|EngineDoor1,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.0041,
+        boneWeight = Hood 1.0,
+    }
+    model ATAMustang66_EngineDoor2
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|EngineDoor2,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.0041,
+        boneWeight = Hood 1.0,
+    }
+    model ATAMustang66_EngineDoor3
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|EngineDoor3,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.0041,
+        boneWeight = Hood 1.0,
+    }
+    model ATAMustang66_TrunkDoor1
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|TrunkDoor1,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.0041,
+        boneWeight = Trunk 1.0,
+    }
+    model ATAMustang66_TrunkDoor2
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|TrunkDoor2,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.0041,
+        boneWeight = Trunk 1.0,
+    }
+    
+    template vehicle ATAMustang66_doors
+    {
+        template = TrunkDoor,
+        part TrunkDoor
+        {
+            itemType = Base.TrunkDoor;Autotsar.ATAMustang66TrunkDoor,
+            
+            model Trunk1
+            {
+                file = ATAMustang66_TrunkDoor1,
+            }
+            model Trunk2
+            {
+                file = ATAMustang66_TrunkDoor2,
+            }
+            table ATA2ItemSpawnChance 
+            {
+                1 = 70,
+                2 = 30,
+            }
+            table ATA2ItemToModel 
+            {
+                ATAMustang66TrunkDoor3 = Trunk2,
+                Another = Trunk1,
+            }
+            anim Close
+            {
+                anim = Anim_TrunkDoor_open,
+                reverse = TRUE,
+                rate = 1.5,
+                sound = VehicleTrunkCloseSportsCar,
+            }
+
+            anim Open
+            {
+                anim = Anim_TrunkDoor_open,
+                rate = 1.0,
+                sound = VehicleTrunkOpenSportsCar,
+            }
+
+            anim Closed
+            {
+                anim = Anim_TrunkDoor_open,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = Anim_TrunkDoor_open,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+            
+            anim Lock
+            {
+                sound = LockVehicleDoorSportsCar,
+            }
+
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorSportsCar,
+            }
+
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedSportsCar,
+            }
+            
+            table install
+            {
+                recipes = Advanced Mechanics,
+                complete = ATATuning2.InstallComplete.Door,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+                complete = ATATuning2.UninstallComplete.Door,
+            }
+            lua
+            {
+                create = ATATuning2.Create.DefaultModel,
+                init = ATATuning2.Init.Door,
+                update = Vehicles.Update.TrunkDoor,
+                use = Vehicles.Use.TrunkDoor,
+            }
+        }
+        
+        template = EngineDoor,
+        part EngineDoor
+        {
+            itemType = Base.EngineDoor;Autotsar.ATAMustang66Hood2Item;Autotsar.ATAMustang66Hood3Item,
+            model Hood1
+            {
+                file = ATAMustang66_EngineDoor1,
+            }
+            model Hood2
+            {
+                file = ATAMustang66_EngineDoor2,
+            }
+            model Hood3
+            {
+                file = ATAMustang66_EngineDoor3,
+            }
+            table ATA2ItemSpawnChance 
+            {
+                1 = 60,
+                2 = 20,
+                3 = 20,
+            }
+            table ATA2ItemToModel 
+            {
+                ATAMustang66Hood2Item3 = Hood2,
+                ATAMustang66Hood3Item3 = Hood3,
+                Another = Hood1,
+            }
+            anim Close
+            {
+                anim = Anim_Hood_open,
+                reverse = TRUE,
+                rate = 1.5,
+            }
+
+            anim Open
+            {
+                anim = Anim_Hood_open,
+                rate = 1.0,
+            }
+
+            anim Closed
+            {
+                anim = Anim_Hood_open,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = Anim_Hood_open,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+            
+            table install
+            {
+                recipes = Advanced Mechanics,
+                complete = ATATuning2.InstallComplete.Door,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+                complete = ATATuning2.UninstallComplete.Door,
+            }
+            lua
+            {
+                create = ATATuning2.Create.DefaultModel,
+                init = ATATuning2.Init.Door,
+                update = Vehicles.Update.EngineDoor,
+                use = Vehicles.Use.EngineDoor,
+            }
+        }
+        
+        template = Door/part/DoorFrontLeft,
+        template = Door/part/DoorFrontRight,
+        
+        part DoorFrontLeft
+        {
+            model Default
+            {
+                file = ATAMustang66_DoorFrontLeft,
+            }
+            anim Close
+            {
+                anim = Anim_DoorFrontLeft_open,
+                reverse = TRUE,
+                rate = 1.5,
+            }
+
+            anim Open
+            {
+                anim = Anim_DoorFrontLeft_open,
+                rate = 1.0,
+            }
+
+            anim Closed
+            {
+                anim = Anim_DoorFrontLeft_open,
+                animate = FALSE,
+            }
+            anim ActorClose
+            {
+                angle = 0.0 270.0 0.0,
+            }
+            anim Opened
+            {
+                anim = Anim_DoorFrontLeft_open,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+        }
+        
+        part DoorFrontRight
+        {
+            model Default
+            {
+                file = ATAMustang66_DoorFrontRight,
+            }
+            anim Close
+            {
+                anim = Anim_DoorFrontRight_open,
+                reverse = TRUE,
+                rate = 1.5,
+            }
+            anim Open
+            {
+                anim = Anim_DoorFrontRight_open,
+                rate = 1.0,
+            }
+            anim Closed
+            {
+                anim = Anim_DoorFrontRight_open,
+                animate = FALSE,
+            }
+            anim Opened
+            {
+                anim = Anim_DoorFrontRight_open,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+            anim ActorOpen
+            {
+                angle = 0.0 90.0 0.0,
+            }
+            anim ActorClose
+            {
+                angle = 0.0 90.0 0.0,
+            }
+        }
+        
+        part Door*
+        {
+            anim Open
+            {
+                sound = VehicleDoorOpenSportsCar,
+            }
+
+            anim Close
+            {
+                sound = VehicleDoorCloseSportsCar,
+            }
+
+            anim Lock
+            {
+                sound = LockVehicleDoorSportsCar,
+            }
+
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorSportsCar,
+            }
+
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedSportsCar,
+            }
+
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+    }
+}

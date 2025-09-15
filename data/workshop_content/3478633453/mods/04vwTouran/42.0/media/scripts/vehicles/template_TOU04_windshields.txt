@@ -1,0 +1,140 @@
+module Base
+{
+
+    model 04vwTouranwindshield
+    {
+        mesh = vehicles/Vehicles_04vwTouran_Body|04touran_windshield_front,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 04vwTouranwindshieldRear
+    {
+        mesh = vehicles/Vehicles_04vwTouran_Body|04touran_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+
+	template vehicle TOU04Windshields
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 04vwTouranwindshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.04vwTouranWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                requireUninstalled = DAMNWindshieldArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = 04vwTouranwindshieldRear,
+            }
+            window
+            {
+            openable = true,
+            }
+                
+            itemType = Base.04vwTouranWindshieldRear,
+            parent = TrunkDoor,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = DAMNWindshieldRearArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+}

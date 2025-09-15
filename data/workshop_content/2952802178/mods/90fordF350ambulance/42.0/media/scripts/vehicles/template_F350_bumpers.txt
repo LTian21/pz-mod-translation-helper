@@ -1,0 +1,171 @@
+module Base
+{
+	model 90fordF350ambulancefrontBumper0
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 90fordF350ambulancefrontBumper1
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 90fordF350ambulancefrontBumper2
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_bumper_front2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 90fordF350ambulancerearBumper0
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_bumper_rear0,
+		texture = Vehicles/Vehicles_90fordF350ambulance_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+
+	template vehicle F350Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 90fordF350ambulancefrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 90fordF350ambulancefrontBumper1,
+				}
+
+			model FrontBumper2
+				{
+                		file = 90fordF350ambulancefrontBumper2,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.90fordF350ambBumperFront;Base.90fordF350ambBullbarFront;Base.90fordF350ambReinforcedBumperFront,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F350.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F350.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = F350.Create.FrontBumper,
+					init = F350.Init.FrontBumper,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper
+				{
+                		file = 90fordF350ambulancerearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.90fordF350ambBumperRear,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F350.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F350.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = F350.Create.RearBumper,
+					init = F350.Init.RearBumper,
+					}
+		}
+	}
+
+		
+}

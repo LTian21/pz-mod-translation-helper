@@ -1,0 +1,298 @@
+module Base
+{
+    model 70dodgedoorfla
+    	{
+        mesh = vehicles/Vehicles_70dodge_Body|challenger_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 70dodgedoorfra
+    	{
+        mesh = vehicles/Vehicles_70dodge_Body|challenger_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 70dodgewindshielda
+    	{
+        mesh = vehicles/Vehicles_70dodge_Body|challenger_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 70dodgewindshieldb
+    	{
+        mesh = vehicles/Vehicles_70dodge_Body|challenger_windshield_b,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 70dodgewindshieldreara
+    	{
+        mesh = vehicles/Vehicles_70dodge_Body|challenger_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle DG70Armor
+		{
+		part DG70WindshieldArmor
+        	{
+
+			model DG70winda
+				{
+                		file = 70dodgewindshielda,
+				}
+
+			model DG70windb
+				{
+                		file = 70dodgewindshieldb,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.DG70WindshieldArmor;Base.DG70WindshieldArmorB,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DG70.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = DG70.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = DG70.Create.WindshieldArmor,
+					init = DG70.Init.WindshieldArmor,
+					}
+		}
+
+		part DG70DoorLeftArmor
+        {
+
+			model DG70leftdoora
+				{
+                		file = 70dodgedoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.DG70DoorArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DG70.InstallComplete.DoorLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DG70.UninstallComplete.DoorLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = DG70.Create.DoorLeftArmor,
+					init = DG70.Init.DoorLeftArmor,
+					}
+		}
+
+		part DG70DoorRightArmor
+        {
+
+			model DG70rightdoora
+				{
+                		file = 70dodgedoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.DG70DoorArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DG70.InstallComplete.DoorRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DG70.UninstallComplete.DoorRightArmor,
+            		}
+
+            		lua
+            		{
+					create = DG70.Create.DoorRightArmor,
+					init = DG70.Init.DoorRightArmor,
+					}
+		}
+
+		part DG70WindshieldRearArmor
+        {
+
+				model DG70windra
+				{
+                		file = 70dodgewindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.DG70WindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DG70.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DG70.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = DG70.Create.WindshieldRearArmor,
+					init = DG70.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

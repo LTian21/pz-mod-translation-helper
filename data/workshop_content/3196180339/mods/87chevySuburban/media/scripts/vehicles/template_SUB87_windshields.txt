@@ -1,0 +1,169 @@
+module Base
+{
+
+    model 87chevySuburbanWindshield
+    {
+        mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 87chevySuburbanWindshieldRear
+    {
+        mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_windshield_rear_tailgate,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+
+	template vehicle SUB87WindshieldFront
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 87chevySuburbanWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.87chevySuburbanWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = SUB87WindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle SUB87WindshieldRear
+    {
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 87chevySuburbanWindshieldRear,
+            }
+            window
+            {
+                openable = true,
+            }
+
+            anim Close
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                rate = 0.5,
+            }
+
+            anim Open
+            {
+                anim = trunk_opening,
+                rate = 0.5,
+            }
+
+            anim Closed
+            {
+                anim = trunk_opening,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+                
+            itemType = Base.87chevySuburbanRearWindshield,
+            area = TruckBed,
+            parent = TrunkDoor,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = SUB87WindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+}

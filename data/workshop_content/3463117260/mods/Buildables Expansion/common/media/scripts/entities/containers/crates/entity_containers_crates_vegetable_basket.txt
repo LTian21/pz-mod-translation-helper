@@ -1,0 +1,61 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_VegetableBasket
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Vegetable Basket,
+			Icon		= location_shop_greenes_01_37,
+		}
+	}
+
+    entity VegetableBasket
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_VegetableBasket,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = location_shop_greenes_01_37,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_shop_greenes_01_38,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:2,
+            xpAward       = Woodwork:7,
+            category      = Containers_Crates,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_vegetableBasketDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 2 [Base.PlasticSheet] flags[Prop2],
+                item 4 [Base.PlasticSheetSmall],
+                item 2 [Base.Nails],
+            }
+        }
+    }
+}

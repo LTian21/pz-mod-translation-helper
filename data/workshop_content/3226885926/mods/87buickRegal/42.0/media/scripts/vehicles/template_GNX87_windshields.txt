@@ -1,0 +1,134 @@
+module Base
+{
+
+    model 87buickRegalWindshield
+    {
+        mesh = vehicles/Vehicles_87buickRegal_Body|gnx_windshield_front,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 87buickRegalWindshieldRear
+    {
+        mesh = vehicles/Vehicles_87buickRegal_Body|gnx_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle GNX87Windshields
+	{
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 87buickRegalWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.87buickRegalWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = DAMNWindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 87buickRegalWindshieldRear,
+            }
+
+                
+            itemType = Base.87buickRegalRearWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+}

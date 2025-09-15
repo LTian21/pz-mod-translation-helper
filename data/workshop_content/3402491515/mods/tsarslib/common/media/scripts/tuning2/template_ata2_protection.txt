@@ -1,0 +1,223 @@
+module Base
+{
+    template vehicle ATA2Protection
+    {
+        /* ATAProtectionWheels - 3д-модели защиты отображается на самих колесах */
+        part ATA2ProtectionWheels
+        {
+            area = Engine,
+        }
+        part ATA2ProtectionWheelsFront
+        {
+            area = Engine,
+        }
+        part ATA2ProtectionWheelsRear
+        {
+            area = Engine,
+        }
+        
+        /* ATA2Protection****Wheels - 3д-модели защиты закреплена на кузове */
+        part ATA2ProtectionFrontWheels
+        {
+            area = Engine,
+        }
+        part ATA2ProtectionRearWheels
+        {
+            area = Engine,
+        }
+        part ATA2ProtectionFrontLeftWheel
+        {
+            area = TireFrontLeft,
+        }
+        part ATA2ProtectionFrontRightWheel
+        {
+            area = TireFrontRight,
+        }
+        part ATA2ProtectionRearLeftWheel
+        {
+            area = TireRearLeft,
+        }
+        part ATA2ProtectionRearRightWheel
+        {
+            area = TireRearRight,
+        }
+        
+        part ATA2ProtectionDoorFrontLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part ATA2ProtectionDoorFrontRight
+        {
+            area = SeatFrontRight,
+        }
+        part ATA2ProtectionDoorMiddleLeft
+        {
+            area = SeatMiddleLeft,
+        }
+        part ATA2ProtectionDoorMiddleRight
+        {
+            area = SeatMiddleRight,
+        }
+        part ATA2ProtectionDoorRearLeft
+        {
+            area = SeatRearLeft,
+        }
+        part ATA2ProtectionDoorRearRight
+        {
+            area = SeatRearRight,
+        }
+        part ATA2ProtectionDoorsRear
+        {
+            area = TruckBed,
+        }
+        
+        
+        part ATA2ProtectionWindshield
+        {
+            area = Engine,
+        }
+        part ATA2ProtectionWindshieldRear
+        {
+            area = Engine,
+        }
+        part ATA2ProtectionWindowRear
+        {
+            area = TruckBed,
+        }
+        part ATA2ProtectionWindowsLeft
+        {
+            door
+            {
+            }
+            area = SeatFrontLeft,
+        }
+        part ATA2ProtectionWindowsRight
+        {
+            door
+            {
+            }
+            area = SeatFrontRight,
+        }
+        part ATA2ProtectionWindowFrontLeft
+        {
+            door
+            {
+            }
+            area = SeatFrontLeft,
+        }
+        part ATA2ProtectionWindowFrontRight
+        {
+            door
+            {
+            }
+            area = SeatFrontRight,
+        }
+        part ATA2ProtectionWindowMiddleLeft
+        {
+            door
+            {
+            }
+            area = SeatMiddleLeft,
+        }
+        part ATA2ProtectionWindowMiddleRight
+        {
+            door
+            {
+            }
+            area = SeatMiddleRight,
+        }
+        part ATA2ProtectionWindowRearLeft
+        {
+            door
+            {
+            }
+            area = SeatRearLeft,
+        }
+        part ATA2ProtectionWindowRearRight
+        {
+            door
+            {
+            }
+            area = SeatRearRight,
+        }
+        
+        part ATA2ProtectionSideLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part ATA2ProtectionSideRight
+        {
+            area = SeatFrontRight,
+        }
+        part ATA2ProtectionSideFront
+        {
+            area = Engine,
+        }
+        part ATA2ProtectionSideTop
+        {
+            area = Engine,
+        }
+        part ATA2ProtectionSleeper
+        {
+            area = SeatFrontRight,
+        }
+        part ATA2ProtectionGasTank
+        {
+            area = GasTank,
+        }
+        
+        part ATA2ProtectionHood
+        {
+            area = Engine,
+        }
+        
+        part ATA2ProtectionTrunk
+        {
+            area = TruckBed,
+        }
+
+        part ATA2Protection*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            setAllModelsVisible = false,
+            mechanicRequireKey = false,
+            table install
+            {
+                test = ATATuning2.InstallTest.Tuning,
+                complete = ATATuning2.InstallComplete.Tuning,
+            }
+            table uninstall
+            {
+                test = ATATuning2.UninstallTest.Tuning,
+                complete = ATATuning2.UninstallComplete.Tuning,
+            }
+            lua
+            {
+                create = ATATuning2.Create.Tuning,
+                init = ATATuning2.Init.Tuning,
+                update = ATATuning2.Update.Protection,
+            }
+        }
+        
+        part ATA2ProtectionWheels*
+        {
+            itemType = Base.ATAProtectionWheelsChain,
+            table install
+            {
+                complete = ATATuning2.InstallComplete.Tuning,
+            }
+            table uninstall
+            {
+                complete = ATATuning2.UninstallComplete.Tuning,
+            }
+            lua
+            {
+                create = ATATuning2.Create.Tuning,
+                init = ATATuning2.Init.Tuning,
+                update = ATATuning2.Update.Protection,
+            }
+        }
+    }
+}

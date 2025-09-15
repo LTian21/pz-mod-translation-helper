@@ -1,0 +1,62 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WoodFenceLvl2
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Wood Fence (Poor),
+			Icon		= Build_FenceWood,
+		}
+	}
+
+    entity WoodFenceLvl2
+    {
+        component UiConfig
+                {
+                    xuiSkin         = default,
+                    entityStyle     = ES_WoodFenceLvl2,
+                    uiEnabled       = false,
+                }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			bonusHealth     = 400,
+			
+            face W
+            {
+                layer
+                {
+                    row = carpentry_02_44,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = carpentry_02_45,
+                }
+            }
+			
+			corner = carpentry_02_47,
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = woodenFenceLvl2Test,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 200,
+            category      = Carpentry,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:6,
+            ToolTip       = Tooltip_craft_woodenFenceDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1],
+                item 1 [SWB.PlankKit2x],
+                item 2 [Base.Nails],
+            }
+        }
+    }
+}

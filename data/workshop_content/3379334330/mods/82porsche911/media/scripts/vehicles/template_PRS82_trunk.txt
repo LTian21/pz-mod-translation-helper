@@ -1,0 +1,110 @@
+module Base
+{
+    model 82porsche911seatrl
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911_seat_r,
+		texture = Vehicles/Vehicles_82porsche911_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 82porsche911seatrr
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911_seat_r,
+		texture = Vehicles/Vehicles_82porsche911_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle PRS82TrunkCompartment
+	{
+		part PRS82Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = Base.82porsche911Trunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+                capacity = 25,
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+
+	}
+
+    template vehicle PRS82InnerTrunkCompartment
+	{
+        part PRS82SeatRearLeft
+		{
+            model seatRL
+            {
+                file = 82porsche911seatrl,
+            }
+
+			category = bodywork,
+			area = TruckBed,
+			itemType = Base.82porsche911Trunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+                capacity = 20,
+				conditionAffectsCapacity = false,
+				test = PRS82.ContainerAccess.RearSeat,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part PRS82SeatRearRight
+		{
+            model seatRR
+            {
+                file = 82porsche911seatrr,
+            }
+
+			category = bodywork,
+			area = TruckBed,
+			itemType = Base.82porsche911Trunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+                capacity = 20,
+				conditionAffectsCapacity = false,
+				test = PRS82.ContainerAccess.RearSeat,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}

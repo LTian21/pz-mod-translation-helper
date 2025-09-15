@@ -1,0 +1,222 @@
+module Base
+{
+
+	model 91fordCVPIWheel
+	{
+		mesh = vehicles/Vehicles_fordCVPI_Wheel|vic92_tire,
+		texture = vehicles/Vehicles_fordCVPI_Wheel,
+		shader = vehiclewheel,
+		scale = 0.095,
+	}
+
+    model 91fordLTDWheelL
+	{
+		mesh = vehicles/Vehicles_91fordLTD_Wheels|vic91_tire,
+		texture = vehicles/Vehicles_91fordLTD_Wheel,
+		shader = vehiclewheel,
+		scale = 0.090,
+	}
+
+    model 91fordLTDWheelR
+	{
+		mesh = vehicles/Vehicles_91fordLTD_Wheels|vic91_tire,
+		texture = vehicles/Vehicles_91fordLTD_Wheel,
+		shader = vehiclewheel,
+		scale = 0.090,
+        invertX = TRUE,
+	}
+
+	template vehicle LTD91Tires
+	{
+		part TireFrontLeft
+		{
+            model fordCVPITire
+			{
+				file = 91fordCVPIWheel,
+			}
+
+			model fordLTDTire
+			{
+				file = 91fordLTDWheelL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = LTD91.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = LTD91.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = LTD91.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model fordCVPITire
+			{
+				file = 91fordCVPIWheel,
+			}
+
+			model fordLTDTire
+			{
+				file = 91fordLTDWheelR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = LTD91.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = LTD91.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = LTD91.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model fordCVPITire
+			{
+				file = 91fordCVPIWheel,
+			}
+
+			model fordLTDTire
+			{
+				file = 91fordLTDWheelL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = LTD91.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			table uninstall
+			{
+				complete = LTD91.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = LTD91.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model fordCVPITire
+			{
+				file = 91fordCVPIWheel,
+			}
+
+			model fordLTDTire
+			{
+				file = 91fordLTDWheelR,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = LTD91.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = LTD91.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = LTD91.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			itemType = Base.fordCVPITire;Base.91fordLTDTire,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+
+		}
+	}
+}
+

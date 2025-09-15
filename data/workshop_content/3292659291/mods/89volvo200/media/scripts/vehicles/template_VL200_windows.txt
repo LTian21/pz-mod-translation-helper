@@ -1,0 +1,563 @@
+module Base
+{
+
+	model 89volvo242Windowfl
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_coupe_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 89volvo242Windowfr
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_coupe_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 89volvo242Windowrl
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_coupe_window_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89volvo242Windowrr
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_coupe_window_rr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89volvo240Windowfl
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 89volvo240Windowfr
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 89volvo240Windowrl
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_window_rl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 89volvo240Windowrr
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 89volvo244sedanWindowbl
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_sedan_window_bl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89volvo244sedanWindowbr
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_sedan_window_br,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 89volvo245wagonWindowbl
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_wagon_window_bl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89volvo245wagonWindowbr
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_wagon_window_br,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle VL242Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 89volvo242Windowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.89volvo240FrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = VL242FrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 89volvo242Windowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.89volvo240FrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = VL242FrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 89volvo242Windowrl,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.89volvo242RearSideWindow,
+			table uninstall
+				{
+				requireUninstalled = VL242RearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 89volvo242Windowrr,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.89volvo242RearSideWindow,
+			table uninstall
+				{
+				requireUninstalled = VL242RearRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+	template vehicle VL240Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 89volvo240Windowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.89volvo240FrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = VL200FrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 89volvo240Windowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.89volvo240FrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = VL200FrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 89volvo240Windowrl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.89volvo240RearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = VL200RearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 89volvo240Windowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.89volvo240RearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = VL200RearRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+	template vehicle VL245WindowsWagon
+	{
+
+		template! = VL240Windows,
+
+		part WindowBackLeft
+		{
+			model windowBL
+			{
+				file = 89volvo245wagonWindowbl,
+			}
+
+			area = SeatRearLeft,
+
+			table uninstall
+				{
+				requireUninstalled = VL200BackLeftArmor,
+				}
+		}
+
+		part WindowBackRight
+		{
+			model windowBR
+			{
+				file = 89volvo245wagonWindowbr,
+			}
+
+			area = SeatRearRight,
+
+			table uninstall
+				{
+				requireUninstalled = VL200BackRightArmor,
+				}
+		}
+
+		part WindowBack*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            itemType = Base.89volvo245WagonBackSideWindow,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+    template vehicle VL244WindowsSedan
+	{
+
+		template! = VL240Windows,
+
+		part WindowBackLeft
+		{
+			model windowBL
+			{
+				file = 89volvo244sedanWindowbl,
+			}
+
+			area = SeatRearLeft,
+
+			table uninstall
+				{
+				requireUninstalled = VL200BackLeftArmor,
+				}
+		}
+
+		part WindowBackRight
+		{
+			model windowBR
+			{
+				file = 89volvo244sedanWindowbr,
+			}
+
+			area = SeatRearRight,
+
+			table uninstall
+				{
+				requireUninstalled = VL200BackRightArmor,
+				}
+		}
+
+		part WindowBack*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            itemType = Base.89volvo244SedanBackSideWindow,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}

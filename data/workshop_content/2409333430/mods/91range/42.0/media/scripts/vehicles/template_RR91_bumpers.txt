@@ -1,0 +1,180 @@
+module Base
+{
+	model 91rangeFrontBumper0
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 91rangeFrontBumper1
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 91rangeFrontBullbarA
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_bullbar0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 91rangeRearBumper0
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 91rangeRearBullbarA
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_bullbar_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle RR91Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 91rangeFrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 91rangeFrontBumper1,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 91rangeFrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91rangeBumperFront0;Base.91rangeBumperFront1;Base.91rangeBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = RR91.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = RR91.Create.BumperFront,
+					init = RR91.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 91rangeRearBumper0,
+				}
+			model RearBullbarA
+				{
+                		file = 91rangeRearBullbarA,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91rangeBumperRear0;Base.91rangeBullbarRearA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = RR91.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = RR91.Create.BumperRear,
+					init = RR91.Init.BumperRear,
+					}
+		}
+	}
+
+		
+}

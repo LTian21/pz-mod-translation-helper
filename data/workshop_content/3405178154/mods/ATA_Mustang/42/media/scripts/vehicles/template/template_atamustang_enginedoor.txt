@@ -1,0 +1,124 @@
+module Base
+{
+    model ATAMustangHood1
+    {
+        mesh = vehicles/ATA_Mustang_model|Hood1,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.02,
+    }
+    model ATAMustangHood2
+    {
+        mesh = vehicles/ATA_Mustang_model|Hood2,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.02,
+    }
+    model ATAMustangHood3
+    {
+        mesh = vehicles/ATA_Mustang_model|Hood3,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.02,
+    }
+    model ATAMustangHood4
+    {
+        mesh = vehicles/ATA_Mustang_model|Hood4,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.02,
+    }
+    
+    template vehicle ATAMustang_EngineDoor
+    {
+        template = EngineDoor,
+        part EngineDoor
+        {
+            setAllModelsVisible = false,
+            itemType = Base.EngineDoor;Autotsar.ATAMustangHood2Item;Autotsar.ATAMustangHood3Item;Autotsar.ATAMustangHood4Item,
+
+            model ATAMustangHood1
+            {
+                file = ATAMustangHood1,
+                rotate = -90 0 0,
+            }
+            model ATAMustangHood2
+            {
+                file = ATAMustangHood2,
+                rotate = -90 0 0,
+            }
+            model ATAMustangHood3
+            {
+                file = ATAMustangHood3,
+                rotate = -90 0 0,
+            }
+            model ATAMustangHood4
+            {
+                file = ATAMustangHood4,
+                rotate = -90 0 0,
+            }
+            
+            table ATA2ItemSpawnChance 
+            {
+                1 = 40,
+                2 = 30,
+                3 = 20,
+                4 = 10,
+            }
+            table ATA2ItemToModel 
+            {
+                ATAMustangHood2Item3 = ATAMustangHood2,
+                ATAMustangHood3Item3 = ATAMustangHood3,
+                ATAMustangHood4Item3 = ATAMustangHood4,
+                Another = ATAMustangHood1,
+            }
+            
+            anim Close
+            {
+                anim = Hood_closing,
+                rate = 2.5,
+            }
+
+            anim Open
+            {
+                sound = VehicleHoodOpenSportsCar,
+                anim = Hood_closing,
+                reverse = TRUE,
+                rate = 2.0,
+            }
+
+            anim Closed
+            {
+                sound = VehicleHoodCloseSportsCar,
+                anim = Hood_closing,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = Hood_closing,
+                animate = FALSE,
+            }
+
+            table install
+            {
+                recipes = Advanced Mechanics,
+                complete = ATATuning2.InstallComplete.Door,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+                complete = ATATuning2.UninstallComplete.Door,
+            }
+            lua
+            {
+                create = ATATuning2.Create.DefaultModel,
+                init = ATATuning2.Init.Door,
+                update = Vehicles.Update.EngineDoor,
+                use = Vehicles.Use.EngineDoor,
+            }
+        }
+    }
+}

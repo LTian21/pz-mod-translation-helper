@@ -1,0 +1,233 @@
+module Base
+{
+
+	model 91fordRangerSeatfl
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_seat_f,
+		texture = Vehicles/Vehicles_91fordRanger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 91fordRangerSeatfr
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_seat_f,
+		texture = Vehicles/Vehicles_91fordRanger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+	model 91fordRangerSeatrl
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_seat_r,
+		texture = Vehicles/Vehicles_91fordRanger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 91fordRangerSeatrr
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_seat_r,
+		texture = Vehicles/Vehicles_91fordRanger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	
+	template vehicle RNG91SeatsFront
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 91fordRangerSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 91fordRangerSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.91fordRangerSeatFront,
+			mechanicRequireKey = true,
+            durability = 3,
+             
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+	template vehicle RNG91SeatsRear
+	{
+		part SeatRearLeft
+		{
+			
+			model SeatRL
+			{
+				file = 91fordRangerSeatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatRearLeft,
+
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 91fordRangerSeatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.91fordRangerSeatRear,
+			mechanicRequireKey = true,
+            durability = 3,
+             
+			container
+			{
+				test = DAMN.ContainerAccess.TrunkInner,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part RNG91Storage
+		{
+			category = bodywork,
+			area = SeatFrontLeft,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+            durability = 3,
+             
+			repairMechanic = true,
+			container
+			{
+				capacity = 30,
+                conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.TrunkInner,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

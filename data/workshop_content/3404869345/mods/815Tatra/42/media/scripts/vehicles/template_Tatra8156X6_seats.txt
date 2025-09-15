@@ -1,0 +1,73 @@
+module Base
+{
+    model Tatra8156X6_leftfrontseat
+	{
+		mesh = vehicles/Vehicles_6X6Tatra815_Body|leftfrontseat,
+        texture = Vehicles/Tatra815_Seats,
+		shader = basicEffect,
+		scale = 1,
+	}
+	model Tatra8156X6_rightfrontseat
+	{
+		mesh = vehicles/Vehicles_6X6Tatra815_Body|rightfrontseat,
+        texture = Vehicles/Tatra815_Seats,
+		shader = basicEffect,
+		scale = 1,
+	}
+
+ 
+
+
+    template vehicle Tatra8156X6_seats
+    {
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+  
+
+
+		
+		part SeatFrontLeft
+		{
+			model leftfrontseat
+			{
+				file = Tatra8156X6_leftfrontseat,
+			}
+
+			area = SeatFrontLeft,
+                      
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+			model rightfrontseat
+			{
+				file = Tatra8156X6_rightfrontseat,
+			}
+
+			area = SeatFrontRight,
+			
+			{
+				seat = FrontRight,
+			}
+		}
+
+		
+
+		
+
+		
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+		}
+    }
+}

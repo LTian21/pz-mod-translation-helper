@@ -1,0 +1,55 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_CeramicTurquoiseTiles
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Turquoise Smooth Tiles Floor,
+			Icon		= location_restaurant_diner_01_41,
+		}
+	}
+
+    entity CeramicTurquoiseTiles
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_CeramicTurquoiseTiles,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+		    isThumpable     = false,
+		    OnIsValid = BuildRecipeCode.floor.OnIsValid,
+		    OnCreate = BuildRecipeCode.floor.OnCreate,
+			
+            face W
+            {
+                layer
+                {
+                    row = location_restaurant_diner_01_41,
+                }
+            }
+        }
+		
+	    component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildLowNoTool,
+            time          = 200,
+            needToBeLearn = true,
+            tags          = Masonry,
+            category      = Floors_Concrete,
+            SkillRequired = Masonry:2,
+            xpAward       = Masonry:7,
+            ToolTip       = Tooltip_craft_CeramicTurquoiseTilesDesc,
+            inputs
+            {
+                item 1 tags[MasonsTrowel] mode:keep flags[Prop1],
+                item 1 [Base.BucketConcreteFull],
+            }
+        }
+    }
+}

@@ -1,0 +1,76 @@
+module Base
+{
+	model 63beetleHProof
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_roof_hp,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BTL63Roof
+		{
+		part BTL63Roof
+        	{
+
+				model BTL63roof
+				{
+                	file = 63beetleHProof,
+				}
+				area = Engine,
+				category = Other,
+				specificItem = false,
+				itemType = Base.63beetleHPRoof0,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+		            complete = Vehicles.UninstallComplete.Default,
+		            requireUninstalled = BTL63Roofrack;WindowRearLeft;WindowRearRight;WindshieldRear,
+            		}
+
+            		lua
+            		{
+						create = Vehicles.Create.Default,
+					}
+
+			}
+	}
+
+		
+}

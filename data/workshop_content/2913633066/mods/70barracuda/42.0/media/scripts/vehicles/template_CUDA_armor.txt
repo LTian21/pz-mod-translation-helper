@@ -1,0 +1,290 @@
+module Base
+{
+    model 70barracudadoorfla
+    	{
+        mesh = vehicles/Vehicles_70barracuda_Body|cuda_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 70barracudadoorfra
+    	{
+        mesh = vehicles/Vehicles_70barracuda_Body|cuda_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 70barracudawindshielda
+    	{
+        mesh = vehicles/Vehicles_70barracuda_Body|cuda_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 70barracudawindshieldreara
+    	{
+        mesh = vehicles/Vehicles_70barracuda_Body|cuda_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle CUDAArmor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model CUDAwinda
+				{
+                		file = 70barracudawindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.CUDAWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CUDA.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = CUDA.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = CUDA.Create.WindshieldArmor,
+					init = CUDA.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model CUDAleftdoora
+				{
+                		file = 70barracudadoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.CUDADoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CUDA.InstallComplete.DoorLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = CUDA.UninstallComplete.DoorLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = CUDA.Create.DoorLeftArmor,
+					init = CUDA.Init.DoorLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model CUDArightdoora
+				{
+                		file = 70barracudadoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.CUDADoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CUDA.InstallComplete.DoorRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = CUDA.UninstallComplete.DoorRightArmor,
+            		}
+
+            		lua
+            		{
+					create = CUDA.Create.DoorRightArmor,
+					init = CUDA.Init.DoorRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model CUDAwindra
+				{
+                		file = 70barracudawindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.CUDAWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CUDA.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = CUDA.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = CUDA.Create.WindshieldRearArmor,
+					init = CUDA.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

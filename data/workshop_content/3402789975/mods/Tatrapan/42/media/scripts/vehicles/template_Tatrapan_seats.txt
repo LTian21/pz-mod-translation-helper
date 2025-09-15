@@ -1,0 +1,135 @@
+module Base
+{
+    model Tatrapan_leftfrontseat
+	{
+		mesh = vehicles/Tatrapan|leftfrontseat,
+        texture = Vehicles/TatrapanInterior,
+		shader = basicEffect,
+		scale = 0.01,
+	}
+	model Tatrapan_rightfrontseat
+	{
+		mesh = vehicles/Tatrapan|rightfrontseat,
+        texture = Vehicles/TatrapanInterior,
+		shader = basicEffect,
+		scale = 0.01,
+	}
+        model Tatrapan_leftmiddleseat
+	{
+		mesh = vehicles/Tatrapan|Seat11,
+        texture = Vehicles/TatrapanInterior,
+		shader = basicEffect,
+		scale = 0.01,
+	}
+        model Tatrapan_leftrearseat
+	{
+		mesh = vehicles/Tatrapan|Seat6,
+        texture = Vehicles/TatrapanInterior,
+		shader = basicEffect,
+		scale = 0.01,
+	}
+        model Tatrapan_rightrearseat
+	{
+		mesh = vehicles/Tatrapan|Seat3,
+        texture = Vehicles/TatrapanInterior,
+		shader = basicEffect,
+		scale = 0.01,
+	}
+        model Tatrapan_rightmiddleseat
+	{
+		mesh = vehicles/Tatrapan|Seat1,
+        texture = Vehicles/TatrapanInterior,
+		shader = basicEffect,
+		scale = 0.01,
+	}
+
+
+    template vehicle Tatrapan_seats
+    {
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+                template = Seat/part/SeatRearLeft,
+		template = Seat/part/SeatRearRight,
+                template = Seat/part/SeatMiddleLeft,
+		template = Seat/part/SeatMiddleRight,
+
+		part SeatMiddle*
+		{
+			door =,
+		}
+
+		part SeatFrontLeft
+		{
+			model leftfrontseat
+			{
+				file = Tatrapan_leftfrontseat,
+			}
+
+			area = SeatFrontLeft,
+			
+		}
+
+		part SeatFrontRight
+		{
+			model rightfrontseat
+			{
+				file = Tatrapan_rightfrontseat,
+			}
+
+			area = SeatFrontRight,
+			
+		}
+
+		part SeatMiddleLeft
+		{
+			model leftmiddleseat
+			{
+				file = Tatrapan_leftmiddleseat,
+			}
+
+			
+			
+		}
+
+		part SeatMiddleRight
+		{
+			model rightmiddleseat
+			{
+				file = Tatrapan_rightmiddleseat,
+			}
+
+			
+			
+		}
+
+		part SeatRearLeft
+		{
+			model leftrearseat
+			{
+				file = Tatrapan_leftrearseat,
+			}
+
+			area = SeatRearLeft,
+			
+		}
+
+		part SeatRearRight
+		{
+			model rightrearseat
+			{
+				file = Tatrapan_rightrearseat,
+			}
+
+			area = SeatRearRight,
+			
+		}
+
+	
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+		}
+    }
+}

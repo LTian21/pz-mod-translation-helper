@@ -1,0 +1,84 @@
+module Base
+{
+
+	model 87buickRegalRoofrack0
+	{
+		mesh = vehicles/Vehicles_87buickRegal_Body|gnx_roofrack,
+		texture = Vehicles/Vehicles_87buickRegal_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle GNX87Roofrack
+	{
+		part GNX87Roofrack
+		{
+
+			model GNX87Roofrack0
+				{
+                		file = 87buickRegalRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.87buickRegalRoofrack,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = GNX87.InstallComplete.Roofrack,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = GNX87.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = GNX87.Create.Roofrack,
+					init = GNX87.Init.Roofrack,
+				}
+		}
+	}
+}
+

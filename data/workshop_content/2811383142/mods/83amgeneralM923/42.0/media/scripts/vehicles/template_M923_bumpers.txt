@@ -1,0 +1,89 @@
+module Base
+{
+	model 83amgeneralM923bumper1
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_bumper1,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	model 83amgeneralM923bumper2
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_bumper2,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M923Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model M923Bumper1
+				{
+                		file = 83amgeneralM923bumper1,
+				}
+
+			model M923Bumper2
+				{
+                		file = 83amgeneralM923bumper2,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M923Bumper1;Base.M923Bumper2,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M923.InstallComplete.Bumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 650,
+			skills = Mechanics:3,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = M923.UninstallComplete.Bumper,
+            		}
+
+            		lua
+            		{
+			create = M923.Create.Bumper,
+			init = M923.Init.Bumper,
+			}
+		}
+
+	}
+
+		
+}

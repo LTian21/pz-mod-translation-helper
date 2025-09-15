@@ -1,0 +1,144 @@
+module Base
+{
+	template vehicle FRWindow
+	{
+		part WindowFrontLeft
+		{
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.FrontWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+		}
+
+		part WindowFrontRight
+		{
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.FrontWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+		}
+
+		part WindowMiddleLeft
+		{
+			parent = DoorMiddleLeft,
+			area = SeatMiddleLeft,
+			itemType = Base.RearWindow,
+			table install
+			{
+				requireInstalled = DoorMiddleLeft,
+			}
+		}
+
+		part WindowMiddleRight
+		{
+			parent = DoorMiddleRight,
+			area = SeatMiddleRight,
+			itemType = Base.RearWindow,
+			table install
+			{
+				requireInstalled = DoorMiddleRight,
+			}
+		}
+
+		part WindowRearLeft
+		{
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.RearWindow,
+			table install
+			{
+				requireInstalled = DoorRearLeft,
+			}
+		}
+
+		part WindowRearRight
+		{
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.RearWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			anim Open
+			{
+				sound = VehicleWindowHandleOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowHandleClose,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualWindow,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			
+			table FRPartInfo
+			{
+				parentPart = WindowFrontLeft,
+				oneModel = TRUE,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = ArmatureAction,
+				animate = FALSE,
+			}
+			
+			lua
+			{
+				create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualDefault,
+			}
+		}
+	}
+}
+

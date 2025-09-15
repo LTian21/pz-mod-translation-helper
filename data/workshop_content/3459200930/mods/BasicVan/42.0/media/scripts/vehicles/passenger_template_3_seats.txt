@@ -1,0 +1,101 @@
+module Base
+{
+	template vehicle PassengerPosition3
+	{
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.2 0.0 -0.3,
+				rotate = 0.0 0.0 0.0,
+			}
+			position outside
+			{
+				offset = 0.0 0.0 0.0,
+				rotate = 0.0 0.0 0.0,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.2 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+			position outside
+			{
+				offset = 0.0 0.0 0.0,
+				rotate = 0.0 0.0 0.0,
+			}
+		}
+		
+		passenger FrontMiddle
+		{
+			position inside
+			{
+				offset = 0.2 0.0 -0.3,
+				rotate = 0.0 0.0 0.0,
+			}
+			position outside
+			{
+				offset = 0.0 0.0 0.0,
+				rotate = 0.0 0.0 0.0,
+			}
+		}
+	}
+	
+    template vehicle PassengerSeat3
+	{
+		template = PassengerPosition3,
+
+        /* The first passenger is always the driver. */
+		passenger FrontLeft
+		{
+			door = DoorFrontLeft,
+			area = SeatFrontLeft, /* Used for zombie attacks */
+			
+			switchSeat FrontMiddle
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = VehicleChangeSeat,
+			}
+		}
+
+		passenger FrontRight
+		{
+			door = DoorFrontRight,
+			area = SeatFrontRight,
+			
+			switchSeat FrontMiddle
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = VehicleChangeSeat,
+			}
+		}
+
+		passenger FrontMiddle
+		{
+            area = nil,
+            door = nil,
+			switchSeat FrontLeft
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = VehicleChangeSeat,
+			}
+			
+			switchSeat FrontRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = VehicleChangeSeat,
+			}
+		}
+
+		template! = PassengerCommon,
+	}
+}
+

@@ -1,0 +1,73 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FancyDarkDrawers
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Fancy Dark Drawers,
+			Icon		= furniture_storage_01_33,
+		}
+	}
+
+    entity FancyDarkDrawers
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FancyDarkDrawers,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = furniture_storage_01_34,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = furniture_storage_01_35,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = furniture_storage_01_32,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_storage_01_33,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 150,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:5,
+            category      = Furniture_Dressers,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_dressersDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

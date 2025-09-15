@@ -1,0 +1,87 @@
+module Base
+{
+	model 92amgeneralM998bullbar1
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_smallbullbar,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	model 92amgeneralM998bullbar2
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_bigbullbar,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M998Bullbars
+		{
+		part M998Bullbar
+        	{
+
+			model Bullbar1
+				{
+                		file = 92amgeneralM998bullbar1,
+				}
+
+			model Bullbar2
+				{
+                		file = 92amgeneralM998bullbar2,
+				}
+
+			area = Engine,
+			category = Other,
+			specificItem = false,
+			itemType = Base.M998Bullbar1_Item;Base.M998Bullbar2_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M998.InstallComplete.Bullbar,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1500,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = M998.UninstallComplete.Bullbar,
+            		}
+
+            		lua
+            		{
+			create = M998.Create.Bullbar,
+			init = M998.Init.Bullbar,
+			}
+		}
+	}
+
+		
+}

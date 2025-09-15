@@ -1,0 +1,75 @@
+module Base
+{
+	model 87fordF700RoofLights
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700x_rooflights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle F700RoofLights
+		{
+		part B700RoofLights
+        	{
+
+			model B700RoofLights0
+				{
+                	file = 87fordF700RoofLights,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.87fordF700RoofLights,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.RoofLights,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 750,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = B700.UninstallComplete.RoofLights,
+
+            		}
+
+            	lua
+            		{
+					create = B700.Create.RoofLights,
+					init = B700.Init.RoofLights,
+					}
+		}
+	}
+
+		
+}

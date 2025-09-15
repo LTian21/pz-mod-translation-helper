@@ -1,0 +1,83 @@
+module Base
+{
+
+	template vehicle Biochemical_BumperTemplate
+	{
+		part Biochemical_BumperPart
+		{
+			model Default
+			{
+				file = Biochemical_PickupTruck_Bumper,
+			}
+
+			table Biochemical_Armor
+			{
+				part1 = EngineDoor,
+				part2 = HeadlightLeft,
+				part3 = HeadlightRight,
+				part4 = Windshield,
+				part5 = DoorFrontLeft,
+				part6 = DoorFrontRight,
+				part7 = DoorRearLeft,
+				part8 = DoorRearRight,
+				part9 = WindowFrontLeft,
+				part10 = WindowFrontRight,
+				part11 = WindowRearLeft,
+				part12 = WindowRearRight,
+				part13 = Biochemical_PickupTruck_RooftrackPart,
+				part14 = TireFrontLeft,
+				part15 = TireFrontRight,
+				part16 = TireRearLeft,
+				part17 = TireRearRight,
+				part18 = GasTank,
+
+				Biochemical_ArmorRate
+				{
+					Biochemical_Bumper = 0.08, 
+				}
+			}
+		
+			area = Engine,
+			category = bodywork,
+			itemType = Base.Biochemical_Bumper,
+			mechanicRequireKey = true,
+			specificItem = false,    
+		
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+		
+				time = 1500,
+				skills = Mechanics:6,
+				test = Vehicles.InstallTest.Default,
+			}
+		
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+		
+				time = 1500,
+				skills = Mechanics:6,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}

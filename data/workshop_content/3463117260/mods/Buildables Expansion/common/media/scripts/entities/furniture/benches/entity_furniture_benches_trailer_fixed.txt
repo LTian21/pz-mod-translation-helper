@@ -1,0 +1,81 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_TrailerFixedBench
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Trailer Fixed Bench,
+			Icon		= location_trailer_02_3,
+		}
+	}
+
+    entity TrailerFixedBench
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_TrailerFixedBench,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = location_trailer_02_5,
+                    row = location_trailer_02_4,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_trailer_02_6 location_trailer_02_7,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_trailer_02_1,
+                    row = location_trailer_02_0,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_trailer_02_2 location_trailer_02_3,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 350,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:10,
+            category      = Furniture_Seating,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_benchesDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 1 tags[Scissors] mode:keep,
+                item 1 tags[SewingNeedle] mode:keep,
+                item 8 [Base.Plank],
+                item 3 [Base.Nails],
+                item 4 [Base.FabricRoll_Cotton],
+                item 4 [Base.Thread],
+                item 200 [Base.ChickenFeather;Base.TurkeyFeather],
+            }
+        }
+    }
+}

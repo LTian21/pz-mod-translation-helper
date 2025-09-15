@@ -1,0 +1,102 @@
+module Base
+{
+    model 91nissan240sxGuard0
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_privacy_guard,
+		texture = Vehicles/Vehicles_91nissan240sx_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle N240TrunkCompartment
+	{
+		part N240Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+			durability = 5,
+			repairMechanic = true,
+			container
+			{
+                capacity = 55,
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part N240PrivacyCover
+		{
+
+			model Cover0
+				{
+                		file = 91nissan240sxGuard0,
+				}
+
+			category = Other,
+			area = TruckBed,
+            specificItem = false,
+			itemType = Base.91nissan240sxPrivacyCover0,
+			mechanicRequireKey = true,
+			durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+
+			table install
+			{
+                	time = 400,
+                	skills = Mechanics:1,
+                    door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = N240.InstallComplete.PrivacyCover,
+            		}
+
+            table uninstall
+            		{
+
+					time = 500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = N240.UninstallComplete.PrivacyCover,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+                    init = N240.Init.PrivacyCover,
+					create = N240.Create.PrivacyCover,
+				}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+			durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+	}
+}

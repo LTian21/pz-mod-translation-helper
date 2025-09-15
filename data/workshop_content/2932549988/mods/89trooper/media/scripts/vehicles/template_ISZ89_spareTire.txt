@@ -1,0 +1,227 @@
+module Base
+{
+
+	model 89trooperSpare
+	{
+		mesh = vehicles/Vehicles_89trooper_Body|trooper_spare,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 89trooperSpareFront
+	{
+		mesh = vehicles/Vehicles_89trooper_Body|trooper_spare_front,
+		texture = vehicles/Vehicles_89trooper_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 89trooperRSSpare
+	{
+		mesh = vehicles/Vehicles_89trooper_Body|trooperRS_spare,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+	
+	template vehicle ISZ89SpareTires
+	{
+		part ISZ89SpareTire
+        	{
+
+			model ISZ89SpareTire
+				{
+                		file = 89trooperSpare,
+				}
+
+			category = Other,
+			area = TruckBed,
+			parent = TrunkDoor,
+			itemType = Base.89trooperTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ISZ89.InstallComplete.SpareTire,
+                	requireInstalled = TrunkDoor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = ISZ89.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = ISZ89.Create.SpareTire,
+				init = ISZ89.Init.SpareTire,
+				}
+		}
+	}
+
+	template vehicle ISZ89OPSpareTires
+	{
+		part ISZ89SpareTireFront
+        	{
+
+			model ISZ89SpareTireFront
+				{
+                		file = 89trooperWheel,
+                        offset = 0.0000 0.0111 2.5045,
+				        rotate = 180.0000 90.0000 180.0000,
+				}
+
+			category = Other,
+			area = Engine,
+			itemType = Base.89trooperTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ISZ89.InstallComplete.SpareTireFront,
+                	requireInstalled = ISZ89BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = ISZ89.UninstallComplete.SpareTireFront,
+
+            		}
+
+	            lua
+	            {
+				create = ISZ89.Create.SpareTireFront,
+				init = ISZ89.Init.SpareTireFront,
+				}
+		}
+	}
+
+	template vehicle ISZ89RSSpareTires
+	{
+		part ISZ89SpareTire
+        	{
+
+			model ISZ89SpareTire
+				{
+                		file = 89trooperRSSpare,
+				}
+
+			category = Other,
+			area = TruckBed,
+			parent = TrunkDoor,
+			itemType = Base.89trooperTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ISZ89.InstallComplete.SpareTire,
+                	requireInstalled = TrunkDoor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = ISZ89.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = ISZ89.Create.SpareTire,
+				init = ISZ89.Init.SpareTire,
+				}
+		}
+	}
+}
+

@@ -1,0 +1,139 @@
+module Base
+{
+
+    model 49powerWagonwindshield
+    {
+        mesh = vehicles/Vehicles_49powerWagon_Body|power_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 49powerWagonwindshieldRear
+    {
+        mesh = vehicles/Vehicles_49powerWagon_Body|power_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle PWRWindshields
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 49powerWagonwindshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.49powerWagonWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = DAMNWindshieldArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = 49powerWagonwindshieldRear,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.49powerWagonWindshieldRear,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = DAMNWindshieldRearArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+}

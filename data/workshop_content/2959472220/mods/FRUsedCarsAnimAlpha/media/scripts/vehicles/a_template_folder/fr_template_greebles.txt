@@ -1,0 +1,118 @@
+module Base
+{
+
+	template vehicle FRBusStopSign
+	{
+		part FRBusStopSign
+		{		
+			category = nodisplay,
+			
+			door
+			{
+			}
+			
+			model Default
+			{
+				file = Stopsign_fo_b700_90,
+			}
+
+			anim Close
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				rate = 0.8,
+			}
+
+			anim Open
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				rate = 0.8,
+			}
+
+			anim Closed
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			itemType = Base.GloveBox,
+			area = Engine,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			
+			lua
+			{
+                create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+
+	template vehicle FRAwning
+	{
+		part FRAwning
+		{	
+			category = nodisplay,
+			itemType = Base.Tarp,
+			area = Engine,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			specificItem = false,
+			
+			table FRPartInfo
+			{
+				oneModel = TRUE,
+			}
+			
+			door
+			{
+			}
+
+			anim Close
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				rate = 0.8,
+			}
+
+			anim Open
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				rate = 0.8,
+			}
+
+			anim Closed
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.FR_VisualDoor,
+				init = Vehicles.Init.FR_VisualDefault,
+				use = Vehicles.Use.Door,
+			}
+		}
+	}
+}

@@ -1,0 +1,72 @@
+module Base
+{
+	
+    model 87toyotaMR2mudflaps0
+    {
+        mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_mudflaps,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle MR2Mudflaps
+		{
+		part MR2Mudflaps
+       		{
+
+            model MR2mudflaps
+			{
+                	file = 87toyotaMR2mudflaps0,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            itemType = Base.87toyotaMR2Mudflaps,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = MR2.InstallComplete.Mudflaps,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = MR2.UninstallComplete.Mudflaps,
+            }
+            lua
+            {
+                create = MR2.Create.Mudflaps,
+                init = MR2.Init.Mudflaps,
+            }
+        }
+	}
+}
+

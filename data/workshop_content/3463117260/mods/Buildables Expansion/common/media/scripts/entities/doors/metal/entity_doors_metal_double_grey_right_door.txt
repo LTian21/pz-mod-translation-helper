@@ -1,0 +1,78 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_DoubleMetalGreyRightDoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Double Metal Grey Right Door,
+			Icon		= fixtures_doors_02_53,
+		}
+	}
+
+    entity DoubleMetalGreyRightDoor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_DoubleMetalGreyRightDoor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 600,
+			breakSound      = BreakDoor,
+			
+            face W
+            {
+                layer
+                {
+                    row = fixtures_doors_02_48,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_doors_02_53,
+                }
+            }
+			face W_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_02_50,
+                }
+            }
+            face N_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_02_55,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 350,
+            needToBeLearn = true,
+            category      = Doors_Metal,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:10,
+            ToolTip       = Tooltip_craft_DoubleMetalGreyRightDoorDesc,
+            inputs
+            {
+		        item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 6 [Base.SheetMetal],
+				item 2 [Base.Hinge],
+				item 1 [Base.Doorknob],
+		        item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

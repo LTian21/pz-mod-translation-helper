@@ -1,0 +1,44 @@
+module RedDays
+{
+    item Panty_Liner
+    {
+        DisplayName = Panty Liner,
+        DisplayCategory = FeminineHygiene,
+        Type = Clothing,
+        Weight = 0.1,
+        ClothingItem = Panty_Liner,
+        Icon = pantyliner_clean,
+		WorldStaticModel = RedDays.Liner,
+        BodyLocation = HygieneItem,
+		ConditionMax = 2,
+    }
+
+    item PantyLinerBox
+	{
+		DisplayName = Box of Panty Liners,
+		DisplayCategory = FeminineHygiene,
+		Type = Normal,
+		Weight = 1,
+        Icon	=	GenericMedicalParcel2,
+		Medical = TRUE,
+		WorldStaticModel = RedDays.LinerBox,
+		Tags = IgnoreZombieDensity;IsFireFuel,
+		FireFuelRatio = 0.25,
+	}
+
+	craftRecipe UnpackBoxOfPantyLiners
+	{
+        timedAction = UnPackBox_Small,
+		Time = 30,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+		inputs
+		{
+			item 1 [RedDays.PantyLinerBox] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 24 RedDays.Panty_Liner,
+		}
+	}
+}

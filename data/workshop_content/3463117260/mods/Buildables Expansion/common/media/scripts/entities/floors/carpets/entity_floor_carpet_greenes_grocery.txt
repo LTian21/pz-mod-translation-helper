@@ -1,0 +1,55 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FloorGreenesGroceryCarpet
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Floor Greenes Grocery Carpet,
+			Icon		= location_shop_greenes_01_32,
+		}
+	}
+
+    entity FloorGreenesGroceryCarpet
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FloorGreenesGroceryCarpet,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+		    isThumpable     = false,
+		    OnIsValid = BuildRecipeCode.floor.OnIsValid,
+		    OnCreate = BuildRecipeCode.floor.OnCreate,
+		    			
+            face W
+            {
+                layer
+                {
+                    row = location_shop_greenes_01_32,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = SewingCloth,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Floors_Carpets,
+            SkillRequired = Tailoring:3,
+            xpAward       = Tailoring:5,
+            ToolTip       = Tooltip_craft_carpetFloorDesc,
+            inputs
+            {
+                item 1 tags[SewingNeedle] mode:keep flags[Prop1],
+                item 5 [Base.RippedSheets] mode:destroy flags[Prop2],
+                item 3 [Base.Thread],
+            }
+        }
+    }
+}

@@ -1,0 +1,258 @@
+module Base
+{
+	vehicle Trailer_fr_fuel_small
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 0.8,
+		engineRepairLevel = 4,
+		playerDamageProtection = 0.8,
+		spawnOffsetY = 0.19392952,
+
+		model
+		{
+			file = Trailer_fuel_small,
+			scale = 1.8500,
+			offset = 0.0000 0.1405 -0.0703,
+		}
+
+		skin
+		{
+			texture = Vehicles/trailer_fuel_1_shell,
+		}
+
+		skin
+		{
+			texture = Vehicles/trailer_fuel_2_shell,
+		}
+
+		textureMask = Vehicles/trailer_fuel_mask,
+		textureLights = Vehicles/trailer_fuel_lights,
+		textureDamage1Overlay = Vehicles/fr_Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/fr_Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/fr_Veh_Damage1,
+		textureDamage2Shell = Vehicles/fr_Veh_Damage2,
+		textureRust = Vehicles/fr_Veh_Rust,
+		template = FR_CarSpawnInfo,
+		extents = 0.5081 0.4973 1.0486,
+		mass = 200,
+		physicsChassisShape = 0.5081 0.4973 1.0486,
+		centerOfMassOffset = 0.0000 0.2486 -0.0432,
+		shadowExtents = 0.6344 1.0430,
+		shadowOffset = 0.0000 -0.0433,
+		engineForce = 3600,
+		engineQuality = 60,
+		engineLoudness = 55,
+		maxSpeed = 70f,
+		brakingForce = 1,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 1.0f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 100,
+		suspensionCompression = 2.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.2,
+		wheelFriction = 4.0f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+
+		physics box
+		{
+			offset = 0.1189 0.0595 0.6649,
+			extents = 0.0538 0.0538 0.5376,
+			rotate = 0.0000 -25.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = -0.1189 0.0595 0.6649,
+			extents = 0.0538 0.0538 0.5376,
+			rotate = 0.0000 25.0000 0.0000,
+		}
+
+		physics sphere
+		{
+			offset = 0.0000 0.0865 0.9351,
+			radius = 0.0549,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.1838 -0.0649,
+			extents = 0.7957 0.0538 0.4516,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0919 0.0054 0.8108,
+			extents = 0.0541 0.2703 0.0541,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.3405 -0.1622 0.0054,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.3405 -0.1622 0.0054,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.5351 -0.0649 0.4432 0.4757,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.5351 -0.0649 0.4432 0.4757,
+		}
+
+		area FuelStorage
+		{
+			xywh = 0.0000 0.1676 1.5135 0.4541,
+		}
+
+		area SideContainer
+		{
+			xywh = 0.0000 0.4865 0.9622 0.4541,
+		}
+
+		template = FRSideContainer,
+
+		part FRSideContainer
+		{
+			table FRPartInfo
+			{
+				partChance = 100,
+				oneModel = TRUE,
+			}
+
+			itemType = Base.FRSideContainer,
+
+			container
+			{
+				capacity = 15,
+			}
+
+			model FRSideContainer
+			{
+				file = box_trailer_fuel,
+			}
+
+			model FRSideContainerPlatform
+			{
+				file = platform_trailer_fuel,
+			}
+
+			model TrunkFillerEmpty
+			{
+				file = FRTrunkfiller_Empty,
+				offset = -0.09 -0.01 0.545,
+				rotate = 0.0000 180.0000 0.0000,
+				scale = 0.45,
+			}
+
+			model TrunkFiller1
+			{
+				file = FRTrunkfiller_TarpHuge_1,
+				offset = 0.0 -0.01 0.545,
+				rotate = 0.0000 90.0000 0.0000,
+				scale = 0.25,
+			}
+		}
+
+		template = FRSideContainerDoor,
+
+		part FRSideContainerDoor
+		{
+			model TrunkDoor
+			{
+				file = Trunk_trailer_fuel,
+			}
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 270.0 0.0,
+			}
+
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 270.0 0.0,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = FRFuelTankTrailer,
+
+		part FRFuelTank
+		{
+			itemType = Base.FRSmallFuelStorageTank,
+		}
+
+		template = FRTrailerTire/part/TireFrontLeft,
+		template = FRTrailerTire/part/TireFrontRight,
+		template = Suspension/part/SuspensionFrontLeft,
+		template = Suspension/part/SuspensionFrontRight,
+
+		part SuspensionFrontRight
+		{
+			model SuspensionFrontRight
+			{
+				file = SuspensionFR_trailer_fuel,
+			}
+		}
+
+		part SuspensionFrontLeft
+		{
+			model SuspensionRearLeft
+			{
+				file = SuspensionFL_trailer_fuel,
+				offset = 0.0 0.0 0.0,
+			}
+		}
+
+		template = FRTrailerJack,
+
+		part FRTrailerJack
+		{
+			model Default
+			{
+				file = Jack_Trailer_Moving_3,
+				offset = 0.098 0.0 0.90,
+				rotate = 0.0000 115.0000 0.0000,
+			}
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.0919 1.1243,
+			rotate = 0.0000 0.0000 0.0000,
+			canAttach = trailer,
+			updateconstraint = false,
+		}
+	}
+}

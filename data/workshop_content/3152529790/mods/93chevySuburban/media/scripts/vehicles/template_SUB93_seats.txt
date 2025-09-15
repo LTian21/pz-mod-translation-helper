@@ -1,0 +1,614 @@
+module Base
+{
+
+	model 93chevySuburbanSeatfl
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_seat_fl,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 93chevySuburbanSeatfr
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_seat_fl,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 93chevySuburbanSeatrl
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_seat_rl,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 93chevySuburbanSeatrr
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_seat_rl,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+    model 93chevySilveradoSeatrl
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_seat_rl,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 93chevySilveradoSeatrr
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_seat_rl,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 93chevySuburbanSeatbl
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_seat_bl,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 93chevySuburbanSeatbr
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_seat_bl,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	
+	template vehicle SUB93Seats2
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 93chevySuburbanSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 93chevySuburbanSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.93chevySuburbanSeatFront,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+	}
+
+    template vehicle SUB93Seats4
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 93chevySuburbanSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 93chevySuburbanSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 93chevySuburbanSeatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 93chevySuburbanSeatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.93chevySuburbanSeatFront,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.93chevySuburbanSeatRear,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+    template vehicle SUB93Seats4XC
+	{
+        template! = SUB93Seats4,
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 93chevySilveradoSeatrl,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 93chevySilveradoSeatrr,
+			}
+		}
+	}
+
+	template vehicle SUB93Seats6
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 93chevySuburbanSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 93chevySuburbanSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatMiddleLeft
+		{
+
+			model seatML
+			{
+				file = 93chevySuburbanSeatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = MiddleLeft,
+			}
+		}
+
+		part SeatMiddleRight
+		{
+
+			model seatMR
+			{
+				file = 93chevySuburbanSeatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = MiddleRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 93chevySuburbanSeatbl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 93chevySuburbanSeatbr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.93chevySuburbanSeatFront,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatMiddle*
+		{
+			category = seat,
+			itemType = Base.93chevySuburbanSeatRear,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.93chevySuburbanSeatRear,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+}
+

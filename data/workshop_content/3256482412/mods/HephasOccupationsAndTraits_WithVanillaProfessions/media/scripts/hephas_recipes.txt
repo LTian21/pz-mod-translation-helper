@@ -1,0 +1,78 @@
+module Base
+{
+    recipe Chefs Pan Cooking Time {
+        ChefsPan,
+        Result:Pan,
+        Time:30.0,
+        NeedToBeLearn:true,
+        Sound:EmptyPan,
+        OnCreate:recipe_ChefsPan_Cooking_Time
+    }
+
+    recipe Chefs Pan Fighting Time {
+        Pan,
+        ChefsPanHandle,
+        Result:ChefsPan,
+        Time:30.0,
+        NeedToBeLearn:true,
+        Sound:EmptyPan,
+    }
+
+    recipe Make Survivors Crunch {
+        keep Spatula/[Recipe.GetItemTypes.Spoon],
+        keep TinCanEmpty,
+        farming.Potato=3,
+        Water=1,
+        Twigs=1,
+        Grasshopper/Cricket=1,
+        farming.Strewberrie/base.Apple=2,
+        Basil/LemonGrass/CommonMallow/GingerRoot/Lime=1,
+        Result:SurvivorsCrunch,
+        Time:80.0,
+        NeedToBeLearn:true,
+        Category:Cooking,
+        SkillRequired:Cooking=5,
+        OnGiveXP:Recipe.OnGiveXP.Cooking10,
+        Sound:SliceBread,
+    }
+
+    recipe Tool Mode {
+        MechanicsWrench,
+        Result:Wrench,
+        Time:30.0,
+        NeedToBeLearn:true,
+        Sound:Hammering,
+        OnCreate:recipe_MechanicsWrench
+    }
+
+    recipe Weapon Mode {
+        Wrench,
+        HeavyWormScrew,
+        Result:MechanicsWrench,
+        Time:30.0,
+        NeedToBeLearn:true,
+        Sound:Hammering,
+    }
+
+    recipe Cut Flex Tape {
+        keep [Recipe.GetItemTypes.Scissors],
+        FlexTape,
+        Result:DuctTape,
+        Time:50.0,
+        NeedToBeLearn:false,
+        Sound:ClothesRipping,
+    }
+
+    recipe Craft Flex Tape {
+        keep [Recipe.GetItemTypes.Hammer],
+        keep [Recipe.GetItemTypes.SharpKnife],
+        LeatherStrips=5,
+        Water,
+        Glue,
+        Result:FlexTape,
+        Time:50.0,
+        NeedToBeLearn:true,
+    }
+
+    
+}

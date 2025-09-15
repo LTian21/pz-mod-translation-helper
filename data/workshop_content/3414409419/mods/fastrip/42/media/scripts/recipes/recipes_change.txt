@@ -1,0 +1,123 @@
+module Base {
+
+	imports
+	{
+		Base
+	}
+	craftRecipe RipClothing
+	{
+		Time 		=25,
+		xpAward		=Tailoring:1,	
+	}
+	craftRecipe RipWornClothing
+	{
+		Time 		=25,
+		xpAward		=Tailoring:1,
+	}
+	craftRecipe RipDenimClothing
+	{
+		Time 		=50,
+		xpAward		=Tailoring:1.5,
+	}
+	craftRecipe RipWornDenimClothing
+	{
+		Time 		=75,
+		xpAward		=Tailoring:1.5,
+	}
+	craftRecipe CutUpBelt
+	{
+		Time		=75,
+		xpAward		=Tailoring:3,	
+	}
+	craftRecipe RipSLeatherItem
+	{
+        time        = 60,
+        timedAction = CutClothing,
+        tags 		= InHandCraft;CanBeDoneInDark,
+        category 	= Miscellaneous,
+		xpAward 	= Tailoring:1.25,
+		CanWalk 	= FALSE,
+		Tooltip 	= Tooltip_Recipe_ClothingNotWorn,
+        inputs	
+        {
+			item 1 [Base.Wallet;Base.Wallet_Male;Base.Wallet_Female] mode:destroy flags[AllowDestroyedItem;IsNotWorn],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop1;IsNotDull],
+        }
+        outputs
+        {
+            item 1 Base.LeatherStrips,
+			item 1 Base.LeatherStrips chance:0.05,
+        }
+    }
+	craftRecipe RipShoesLeather
+	{
+        time        = 60,
+        timedAction = CutClothing,
+        tags 		= InHandCraft;CanBeDoneInDark,
+        category 	= Miscellaneous,
+		xpAward 	= Tailoring:1.15,
+		CanWalk 	= false,
+		Tooltip 	= Tooltip_Recipe_ClothingNotWorn,
+		inputs
+		{
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop1;IsNotDull],
+			item 1 [Base.Shoes_Random;Base.Shoes_Brown;Base.Shoes_BlackBoots;Base.Shoes_Black;Base.Shoes_HikingBoots;Base.Shoes_WorkBoots;Base.Shoes_ArmyBootsDesert;Base.Shoes_RidingBoots;Base.Shoes_CowboyBoots_Fancy;Base.Shoes_CowboyBoots_SnakeSkin;Base.Shoes_CowboyBoots_Black;Base.Shoes_CowboyBoots_Brown;Base.Shoes_CowboyBoots;Base.Shoes_CrudeLeatherFootwear;Base.Shoes_Strapped] mode:destroy flags[AllowDestroyedItem;IsNotWorn],
+
+		}
+		outputs
+		{
+			item 2 Base.LeatherStrips,
+			item 1 Base.LeatherStrips chance:0.25,
+		}
+	}
+	craftRecipe RipShoesCloth
+	{
+        time        = 60,
+        timedAction = CutClothing,
+        tags 		= InHandCraft;CanBeDoneInDark,
+        category 	= Miscellaneous,
+		xpAward 	= Tailoring:1,
+		Tooltip 	= Tooltip_Recipe_ClothingNotWorn,
+		inputs
+		{
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop1;IsNotDull],
+			item 1 [Base.Shoes_Sandals;Base.Shoes_Fancy;Base.Shoes_Bowling;Base.Shoes_FlipFlop;Base.Shoes_Wellies;Base.Shoes_TrainerTINT;Base.Shoes_Slippers;Base.Shoes_RedTrainers;Base.Shoes_BlueTrainers] mode:destroy flags[AllowDestroyedItem;IsNotWorn],
+		}
+		outputs
+		{
+			item 2 Base.RippedSheets,
+			item 1 Base.RippedSheets chance:0.25,
+		}
+	}
+	craftRecipe PickThread
+	{
+		Time 		= 100,
+		xpAward 	= Tailoring:1,
+		OnCreate 	= Recipe.OnCreate.PickThread2,
+	outputs
+	{
+		item 1 Base.Thread chance:0.25,
+	}
+
+	}
+
+	craftRecipe RipClothingBra
+	{
+        timedAction = RipClothing,
+		Time 		= 45,
+		Tags 		= InHandCraft;CanBeDoneInDark,
+		OnCreate 	= Recipe.OnCreate.RipClothingBra,
+		Tooltip 	= Tooltip_Recipe_ClothingNotWorn,
+		xpAward 	= Tailoring:1,
+		category 	= Miscellaneous,
+		inputs
+		{
+			item 1 tags[RipClothingBra] flags[AllowDestroyedItem;IsNotWorn],
+		}
+		outputs
+		{
+			item 1 Base.RippedSheets,
+			item 1 Base.Wire chance:0.35, 			
+		}
+	}
+}

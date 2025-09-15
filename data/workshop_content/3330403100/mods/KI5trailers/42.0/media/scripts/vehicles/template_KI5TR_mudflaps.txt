@@ -1,0 +1,104 @@
+module Base
+{
+    model KI5trailersMudflaps
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_mudflaps,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle KI5TRMudflapsSmall
+	{
+		part KI5TRMudflaps
+        	{
+
+			model Mudflaps1
+				{
+                	file = KI5trailersMudflaps,
+				}
+
+			area = TireFrontLeft,
+			category = bodywork,
+			itemType = Base.KI5trailersMudflaps,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+				            type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+			        complete = KI5TR.InstallComplete.Mudflaps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 700,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+                    complete = KI5TR.UninstallComplete.Mudflaps,
+            		}
+
+            		lua
+            		{
+                    create = KI5TR.Create.Mudflaps,
+                    init = KI5TR.Init.Mudflaps,
+                    }
+		}
+	}
+
+    template vehicle KI5TRMudflapsLarge
+	{
+        template! = KI5TRMudflapsSmall,
+
+		part KI5TRMudflaps
+        {
+
+			model Mudflaps1
+			{
+                file = KI5trailersMudflaps,
+                offset = 0.0000 0.0000 -0.0736,
+			}
+        }
+    }
+
+    template vehicle KI5TRMudflapsMedium
+	{
+        template! = KI5TRMudflapsSmall,
+
+		part KI5TRMudflaps
+        {
+
+			model Mudflaps1
+			{
+                file = KI5trailersMudflaps,
+                offset = 0.0000 0.0000 0.1861,
+			}
+        }
+    }
+
+}

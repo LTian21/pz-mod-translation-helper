@@ -1,0 +1,154 @@
+module Base
+{
+
+
+	/************************Guns************************/
+
+	craftRecipe MakeImprovisedFlashlightSilencer
+	{
+    timedAction = Making,
+		xpAward = MetalWelding:5,
+		AutoLearnAll = MetalWelding:3,
+		Time = 200,
+		AllowBatchCraft = False,
+		Tags = InHandCraft,
+		category = Weaponry,
+		OnCreate = onImprovisedSilencer_OnCreate,
+		Tooltip = Tooltip_Recipe_ImprovisedSilencer,
+		OnTest = onImprovisedSilencer_OnTest,
+		inputs
+		{
+			item 1 tags[DrillMetal] mode:keep flags[Prop1;MayDegrade],
+			item 1 tags[SheetMetalSnips] mode:keep flags[MayDegradeLight],
+			item 1 [HandTorch;ImprovisedSilencer_Broken] mode:destroy flags[Prop2;AllowDestroyedItem;IsWorn],
+			item 1 [Base.NutsBolts],
+			item 1 [Base.SmallSheetMetal;Base.UnusableMetal],
+		}
+		outputs
+		{
+			item 1 Base.ImprovisedSilencer,
+		}
+	}
+
+	craftRecipe MakeImprovisedBottleSilencer
+	{
+    timedAction = Making,
+		xpAward = Maintenance:5,
+		AutoLearnAll = Maintenance:3,
+		Time = 200,
+		AllowBatchCraft = False,
+		Tags = InHandCraft,
+		category = Weaponry,
+		OnCreate = onImprovisedSilencer_OnCreate,
+		Tooltip = Tooltip_Recipe_ImprovisedSilencer,
+		OnTest = onImprovisedSilencer_OnTest,
+		inputs
+		{
+			item 1 [Base.PopBottle;Base.WaterBottle] flags[Prop1;IsEmpty],
+			item 1 [DuctTape] flags[Prop2],
+		}
+		outputs
+		{
+			item 1 Base.Silencer_PopBottle,
+		}
+	}
+
+	craftRecipe PutScopeOnAdapter
+	{
+    timedAction = Making,
+		Time = 5,
+		AllowBatchCraft = False,
+		Tags = InHandCraft,
+		category = Weaponry,
+		Tooltip = Tooltip_Recipe_ScopeAdapter,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[Prop1],
+			item 1 [picatinnyACOGAdapter] flags[Prop2],
+			item 1 [x4ACOGScope] mappers[scopeType],
+		}
+		outputs
+		{
+			item 1 mapper:scopeType,
+		}
+		itemMapper scopeType
+		{
+			Base.x4Scope = Base.x4ACOGScope,
+		}
+	}
+
+	craftRecipe RemoveScopeAdapter
+	{
+    timedAction = Making,
+		Time = 5,
+		AllowBatchCraft = False,
+		Tags = InHandCraft,
+		category = Weaponry,
+		Tooltip = Tooltip_Recipe_ScopeAdapter,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[Prop2],
+			item 1 [x4Scope] flags[Prop1] mappers[scopeType],
+		}
+		outputs
+		{
+			item 1 picatinnyACOGAdapter,
+			item 1 mapper:scopeType,
+		}
+		itemMapper scopeType
+		{
+			Base.x4ACOGScope = Base.x4Scope,
+		}
+	}
+
+	craftRecipe ExtendStock
+	{
+		Time = 15,
+		OnCreate = onExtendStock_OnCreate,
+		OnTest = onExtendStock_OnTest,
+		ToolTip = Tooltip_Recipe_ExtendStock,
+		Tags = InHandCraft;CanBeDoneInDark;RightClickOnly,
+    category = Weaponry,
+		inputs
+		{
+			item 1 [Base.MP5;Base.UZI;Base.M37;Base.Mac10;Base.SPAS12] flags[InheritCondition;InheritAmmunition] mappers[stockType],
+		}
+		outputs
+		{
+			item 1 mapper:stockType,
+		}
+		itemMapper stockType
+		{
+			Base.MP5 = Base.MP5,
+			Base.UZI = Base.UZI,
+			Base.Mac10 = Base.Mac10,
+			Base.SPAS12 = Base.SPAS12,
+		}
+	}
+
+	craftRecipe DetractStock
+	{
+		Time = 15,
+		OnCreate = onDetractStock_OnCreate,
+		OnTest = onDetractStock_OnTest,
+		ToolTip = Tooltip_Recipe_DetractStock,
+		Tags = InHandCraft;CanBeDoneInDark,
+    category = Weaponry,
+		inputs
+		{
+			item 1 [Base.MP5;Base.UZI;Base.Mac10;Base.SPAS12] flags[InheritCondition;InheritAmmunition] mappers[stockType],
+		}
+		outputs
+		{
+			item 1 mapper:stockType,
+		}
+		itemMapper stockType
+		{
+			Base.MP5 = Base.MP5,
+			Base.UZI = Base.UZI,
+			Base.Mac10 = Base.Mac10,
+			Base.SPAS12 = Base.SPAS12,
+		}
+	}
+
+}

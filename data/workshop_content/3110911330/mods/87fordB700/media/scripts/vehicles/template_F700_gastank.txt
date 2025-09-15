@@ -1,0 +1,94 @@
+module Base
+{
+	model 87fordF700Gastank
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_gastank,
+		texture = Vehicles/Vehicles_87fordB700_Interior5,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle B700GasTank
+	{
+		part GasTank
+		{
+			area = GasTank,
+			category = gastank,
+			itemType = Base.87fordF700GasTank,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline,
+			}
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+				update = Vehicles.Update.GasTank,
+				checkEngine = Vehicles.CheckEngine.GasTank,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = secondary,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = secondary,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+		}
+	}
+
+    template vehicle F700GasTankX
+	{
+        template! = B700GasTank,
+
+		part GasTank
+		{
+			model BusGas121287
+			{
+				file = 87fordF700Gastank,
+			}
+		}
+	}
+}

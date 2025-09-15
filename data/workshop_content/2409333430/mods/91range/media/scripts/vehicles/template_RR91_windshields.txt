@@ -1,0 +1,140 @@
+module Base
+{
+
+    model 91rangeWindshield
+    {
+        mesh = vehicles/Vehicles_91range_Body_mk2|range_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 91rangeWindshieldRear
+    {
+        mesh = vehicles/Vehicles_91range_Body_mk2|range_windshield_rear,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle RR91Windshields
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 91rangeWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.91rangeWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = RR91WindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 91rangeWindshieldRear,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.91rangeRearWindshield,
+            area = TruckBed,
+            parent = TrunkDoor, 
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = RR91WindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+}

@@ -1,0 +1,73 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WhiteFancyShelves
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= White Fancy Shelves,
+			Icon		= furniture_shelving_01_44,
+		}
+	}
+
+    entity WhiteFancyShelves
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WhiteFancyShelves,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = furniture_shelving_01_46,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = furniture_shelving_01_47,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = furniture_shelving_01_45,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_shelving_01_44,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallHammer,
+            time          = 350,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:5,
+            category      = Containers_Bookshelves,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_bookshelvesDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 6 [Base.Plank] flags[Prop2],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

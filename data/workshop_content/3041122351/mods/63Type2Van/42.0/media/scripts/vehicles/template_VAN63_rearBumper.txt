@@ -1,0 +1,238 @@
+module Base
+{
+	model 63Type2VanrearBumper0
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 63Type2VanrearBumper1
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_bumper_rear1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 63Type2VanrearCage1
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_cage_rear_apoc,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle VAN63RearBumpers
+		{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 63Type2VanrearBumper0,
+				}
+
+			model RearBumper1
+				{
+                		file = 63Type2VanrearBumper1,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.63Type2VanBumperRear0;Base.63Type2VanBumperRear1,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VAN63.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = VAN63.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = VAN63.Create.RearBumper,
+					init = VAN63.Init.RearBumper,
+					}
+		}
+	}
+
+	template vehicle VAN63RearBumpersM
+		{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper1
+				{
+                		file = 63Type2VanrearBumper1,
+				}
+
+			model RearBumper0
+				{
+                		file = 63Type2VanrearBumper0,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.63Type2VanBumperRear1;Base.63Type2VanBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VAN63.InstallComplete.RearBumperM,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = VAN63.UninstallComplete.RearBumperM,
+            		}
+
+            		lua
+            		{
+					create = VAN63.Create.RearBumperM,
+					init = VAN63.Init.RearBumperM,
+					}
+		}
+	}
+
+	template vehicle VAN63RearBumpersA
+		{
+		part DAMNBumperRear
+        	{
+
+        	model RearCage1
+				{
+                		file = 63Type2VanrearCage1,
+				}
+
+			model RearBumper1
+				{
+                		file = 63Type2VanrearBumper1,
+				}
+
+			model RearBumper0
+				{
+                		file = 63Type2VanrearBumper0,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.63Type2VanCageRear1;Base.63Type2VanBumperRear1;Base.63Type2VanBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VAN63.InstallComplete.RearBumperA,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = VAN63.UninstallComplete.RearBumperA,
+            		}
+
+            		lua
+            		{
+					create = VAN63.Create.RearBumperA,
+					init = VAN63.Init.RearBumperA,
+					}
+		}
+	}
+}

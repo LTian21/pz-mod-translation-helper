@@ -1,0 +1,72 @@
+module Base
+{
+	
+    model 80manKat1mudflaps0
+    {
+        mesh = vehicles/Vehicles_80manKat1_Body|MAN_mudflaps,
+        shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    }
+
+	template vehicle MAN80Mudflaps
+		{
+		part MAN80Mudflaps
+       		{
+
+            model mudflaps0
+			{
+                	file = 80manKat1mudflaps0,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            itemType = Base.80manKat1Mudflaps,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = MAN80.InstallComplete.Mudflaps,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = MAN80.UninstallComplete.Mudflaps,
+            }
+            lua
+            {
+                create = MAN80.Create.Mudflaps,
+                init = MAN80.Init.Mudflaps,
+            }
+        }
+	}
+}
+

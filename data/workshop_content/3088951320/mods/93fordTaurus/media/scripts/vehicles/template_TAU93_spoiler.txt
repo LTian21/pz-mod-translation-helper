@@ -1,0 +1,76 @@
+module Base
+{
+	
+	model 93fordTaurusspoiler0
+	{
+		mesh = vehicles/Vehicles_93fordTaurus_Body|taurusSHO_spoiler0,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle TAU93SpoilerSHO
+		{
+		part TAU93Spoiler
+       		{
+
+            model TAU93spoiler0
+			{
+                	file = 93fordTaurusspoiler0,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            itemType = Base.93fordTaurusSHOSpoiler,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = TAU93.InstallComplete.Spoiler,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = TAU93.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = TAU93.Create.Spoiler,
+                init = TAU93.Init.Spoiler,
+            }
+        }
+
+	}
+}
+

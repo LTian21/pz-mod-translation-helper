@@ -1,0 +1,207 @@
+module Base
+{
+
+	model 90fordF350ambulancewindowfl
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fl_bone 1.0,
+	}
+
+	model 90fordF350ambulancewindowfr
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fr_bone 1.0,
+	}
+
+	model 90fordF350ambulancewindowrr
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_windows_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle F350Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL4333
+			{
+				file = 90fordF350ambulancewindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.90fordF350WindowFrontSide,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = F350WindowFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR534
+			{
+				file = 90fordF350ambulancewindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.90fordF350WindowFrontSide,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = F350WindowFrontRightArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR124
+			{
+				file = 90fordF350ambulancewindowrr,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.90fordF350WindowRearSide,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = F350WindowRearRightArmor,
+				}
+		}
+
+		part WindowFront*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+
+		part WindowRear*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = false,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}
+

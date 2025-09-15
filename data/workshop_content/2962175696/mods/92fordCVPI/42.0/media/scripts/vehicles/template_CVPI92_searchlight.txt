@@ -1,0 +1,69 @@
+module Base
+{
+	model 92fordCVPIsearchlight
+	{
+		mesh = vehicles/Vehicles_92fordCVPI_Body|vic92_searchlight,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CVPI92Searchlight
+		{
+		part DAMNSearchlight
+        	{
+
+			model searchlight0
+				{
+                		file = 92fordCVPIsearchlight,
+				}
+
+				area = TireFrontLeft,
+				category = bodywork,
+                specificItem = false,
+				itemType = Base.fordCVPIpoliceSearchlight,
+				mechanicRequireKey = false,
+                durability = 5,
+
+                table install
+			    {
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				door = DoorFrontLeft,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			    }
+			    table uninstall
+			    {
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+			    }
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}	
+}

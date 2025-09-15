@@ -1,0 +1,83 @@
+module Base
+{
+    template vehicle Fridges
+    {
+        part FridgeFrontLeft
+        {
+            area = Common,
+        }
+        part FridgeFrontRight
+        {
+            area = Common,
+        }
+        part FridgeMiddleLeft
+        {
+            area = Common,
+        }
+        part FridgeMiddleRight
+        {
+            area = Common,
+        }
+        part FridgeRearLeft
+        {
+            area = Common,
+        }
+        part FridgeRearRight
+        {
+            area = Common,
+        }
+        part Fridge*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.TransportFridge,
+            container
+            {
+                capacity = 25,
+                test = CommonTemplates.ContainerAccess.ContainerByName,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = CommonTemplates.InstallTest.PartInCabin,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                requireEmpty = true,
+                test = CommonTemplates.UninstallTest.PartInCabin,
+            }
+            lua
+            {
+                create = CommonTemplates.Create.Fridge,
+                init = CommonTemplates.Init.Fridge,
+                update = CommonTemplates.Update.Fridge,
+            }
+        }
+    }
+}
+

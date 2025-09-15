@@ -1,0 +1,878 @@
+module Base
+{
+	template vehicle fhqMZPassengerPosition1
+	{
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.2 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+			position outside
+			{
+				offset = 0.6 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+			position outside2
+			{
+				offset = -0.6 0.0 -0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+		}
+	}
+	
+	template vehicle fhqMZPassengerPosition1temp
+	{
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.2 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+			position outside
+			{
+				offset = 0.6 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+		}
+	}
+	
+	template vehicle fhqMZPassengerSeat1
+	{
+		template = fhqMZPassengerPosition1,
+
+		passenger FrontLeft
+		{
+			door = DoorFrontLeft,
+			door2 = DoorFrontRight,
+			area = SeatFrontLeft,
+			
+			switchSeat FrontRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = ,
+			}
+		}
+		
+		template! = PassengerCommon,
+	}
+	
+	template vehicle fhqMZPassengerSeat1temp
+	{
+		template = fhqMZPassengerPosition1temp,
+
+		passenger FrontLeft
+		{
+			door = DoorFrontLeft,
+			area = SeatFrontLeft,
+			
+			switchSeat FrontRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = ,
+			}
+		}
+		
+		template! = PassengerCommon,
+	}
+	
+	template vehicle fhqMZPassengerSeatRHD2
+	{
+		template = PassengerPosition2,
+
+		passenger FrontLeft
+		{
+			door = DoorFrontRight,
+			area = SeatFrontRight,
+			
+			switchSeat FrontRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = ,
+			}
+		}
+
+		passenger FrontRight
+		{
+			door = DoorFrontLeft,
+			area = SeatFrontLeft,
+			
+			switchSeat FrontLeft
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = ,
+			}
+		}
+
+		template! = PassengerCommon,
+	}
+	
+	template vehicle fhqMZPassengerSeatRHD1
+	{
+		template = fhqMZPassengerPosition1,
+
+		passenger FrontLeft
+		{
+			door = DoorFrontRight,
+			door2 = DoorFrontLeft,
+			area = SeatFrontRight,
+			
+			switchSeat FrontRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = ,
+			}
+		}
+
+		template! = PassengerCommon,
+	}
+	
+	template vehicle fhqMZTire3
+	{
+		part TireFrontLeft
+		{
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+		}
+
+		part TireRearLeft
+		{
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			itemType = Base.OldTire;Base.NormalTire;Base.ModernTire,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+			model InflatedTirePlusWheel
+			{
+				file = Vehicles_Wheel,
+			}
+			/*
+			model test
+			{
+				file = Vehicles_Wheel,
+				offset = -0.1 0.0 0.0,
+				rotate = 0.0 0.0 0.0,
+			}
+			*/
+		}
+	}
+	
+	template vehicle fhqMZBrake3
+	{
+		part BrakeFrontLeft
+		{
+			area = TireFrontLeft,
+			table install
+			{
+				requireUninstalled = TireFrontLeft,
+			}
+			table uninstall
+			{
+				requireUninstalled = TireFrontLeft,
+			}
+		}
+
+		part BrakeRearLeft
+		{
+			area = TireRearLeft,
+			table install
+			{
+				requireUninstalled = TireRearLeft,
+			}
+			table uninstall
+			{
+				requireUninstalled = TireRearLeft,
+			}
+		}
+
+		part BrakeRearRight
+		{
+			area = TireRearRight,
+			table install
+			{
+				requireUninstalled = TireRearRight,
+			}
+			table uninstall
+			{
+				requireUninstalled = TireRearRight,
+			}
+		}
+
+		part Brake*
+		{
+			category = brakes,
+			itemType = Base.OldBrake;Base.NormalBrake;Base.ModernBrake,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Brake,
+				update = Vehicles.Update.Brakes,
+			}
+		}
+	}
+	
+	template vehicle fhqMZSuspension3
+	{
+		part SuspensionFrontLeft
+		{
+			area = TireFrontLeft,
+			table install
+			{
+				requireUninstalled = TireFrontLeft,
+			}
+			table uninstall
+			{
+				requireUninstalled = TireFrontLeft,
+			}
+		}
+
+		part SuspensionRearLeft
+		{
+			area = TireRearLeft,
+			table install
+			{
+				requireUninstalled = TireRearLeft,
+			}
+			table uninstall
+			{
+				requireUninstalled = TireRearLeft,
+			}
+		}
+
+		part SuspensionRearRight
+		{
+			area = TireRearRight,
+			table install
+			{
+				requireUninstalled = TireRearRight,
+			}
+			table uninstall
+			{
+				requireUninstalled = TireRearRight,
+			}
+		}
+
+		part Suspension*
+		{
+			category = suspension,
+			itemType = Base.NormalSuspension;Base.ModernSuspension,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				update = Vehicles.Update.Suspension,
+			}
+		}
+	}
+	
+	template vehicle fhqMZPassengerPosition3
+	{
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.2 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+			position outside
+			{
+				offset = 0.6 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.2 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+			position outside
+			{
+				offset = -0.6 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+		}
+		
+		passenger RearLeft
+		{
+			position inside
+			{
+				offset = 0.2 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+		}
+	}
+	
+	template vehicle fhqMZPassengerSeat3CenterDrive
+	{
+		template = fhqMZPassengerPosition3,
+
+		passenger FrontLeft
+		{
+			door = DoorFrontLeft,
+			area = SeatFrontLeft,
+			
+			switchSeat FrontRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = ,
+			}
+			switchSeat RearLeft
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = ,
+			}
+		}
+
+		passenger FrontRight
+		{
+			door = DoorFrontRight,
+			area = SeatFrontRight,
+			
+			switchSeat FrontLeft
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = ,
+			}
+			switchSeat RearLeft
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = ,
+			}
+		}
+		
+		passenger RearLeft
+		{
+			door = DoorRearLeft,
+			area = SeatRearLeft,
+			
+			switchSeat FrontLeft
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = ,
+			}
+			switchSeat FrontRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = ,
+			}
+		}
+
+		template! = PassengerCommon,
+	}
+	
+	/****************************REAR ENGINE STUFF****************************/
+	
+	template vehicle fhqMZWindshieldRE
+	{
+		part Windshield
+        {
+            area = TruckBed,
+            category = bodywork,
+            itemType = Base.Windshield,
+            mechanicRequireKey = true,
+            window
+            {
+                openable = false,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:5,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                  skills = Mechanics:5,
+                  recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+		part WindshieldRear
+		{
+			area = Engine,
+            category = bodywork,
+            itemType = Base.RearWindshield,
+            mechanicRequireKey = true,
+            window
+            {
+                openable = false,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                  skills = Mechanics:5,
+                  recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+ 						equip = primary,
+                   }
+                }
+                time = 300,
+                  skills = Mechanics:5,
+                  recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+	    }
+	}
+	
+	template vehicle fhqMZEngineDoorRE
+	{
+		part EngineDoor
+		{
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleHoodOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleHoodCloseStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 180.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 180.0 0.0,
+			}
+			itemType = Base.EngineDoor,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+	
+	template vehicle fhqMZTrunkDoorRE
+	{
+		part TrunkDoor
+		{
+			category = bodywork,
+			area = Engine,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.TrunkDoor,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.TrunkDoor,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+	
+	template vehicle fhqMZEngineRE
+	{
+		part Engine
+		{
+		    area = TruckBed,
+			category = engine,
+			mechanicRequireKey = true,
+			lua
+			{
+				create = Vehicles.Create.Engine,
+				update = Vehicles.Update.Engine,
+				checkEngine = Vehicles.CheckEngine.Engine,
+			}
+		}
+	}
+	
+	template vehicle fhqMZTrunkRE
+	{
+		part TruckBed
+		{
+			area = Engine,
+			category = bodywork,
+			itemType = Base.NormalTrunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = true,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBedOpen
+		{
+			area = Engine,
+			category = bodywork,
+			itemType = Base.NormalTrunk,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = true,
+				test = Vehicles.ContainerAccess.TruckBedOpen,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}

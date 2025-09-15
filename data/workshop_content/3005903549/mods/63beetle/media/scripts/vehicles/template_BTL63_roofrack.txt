@@ -1,0 +1,154 @@
+module Base
+{
+
+	model 63beetleroofrack0
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_roofrack,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BTL63Roofrack
+	{
+		part BTL63Roofrack
+		{
+
+			model BTL63Roofrack0
+				{
+                		file = 63beetleroofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.63beetleRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = BTL63.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BTL63.InstallComplete.Roofrack,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = BTL63.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+            		create = BTL63.Create.Roofrack,
+            		init = BTL63.Init.Roofrack,
+				}
+		}
+	}
+
+	template vehicle BTL63Roofrackhp
+	{
+		part BTL63Roofrack
+		{
+
+			model BTL63Roofrack0
+				{
+                		file = 63beetleroofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.63beetleRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = BTL63.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BTL63.InstallComplete.Roofrack,
+                	requireInstalled = BTL63Roof,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = BTL63.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+            		create = BTL63.Create.Roofrack,
+            		init = BTL63.Init.Roofrack,
+				}
+		}
+	}
+}
+

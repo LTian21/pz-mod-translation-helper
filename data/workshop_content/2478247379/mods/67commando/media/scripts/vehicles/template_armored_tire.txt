@@ -1,0 +1,27 @@
+module Base
+{
+    model runFlatLargeTireV100
+	{
+		mesh = vehicles/runFlat_models|runFlat_Large,
+		texture = vehicles/Wheels_runFlat_Large,
+		shader = vehiclewheel,
+        scale = 0.675,
+	}
+
+	template vehicle TireV100
+	{
+        template! = runFlatsLargeFront,
+        template! = runFlatsLargeRear,
+
+		part Tire*
+		{
+			model InflatedTirePlusWheel
+				{
+					file = runFlatLargeTireV100,
+				}
+
+                itemType = Base.V100Tire2;runFlat.LargeTire,
+
+		}
+	}
+}

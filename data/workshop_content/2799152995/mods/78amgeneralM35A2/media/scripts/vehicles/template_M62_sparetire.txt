@@ -1,0 +1,71 @@
+module Base
+{
+	template vehicle M62SpareTire
+		{
+		part M62SpareTire
+        	{
+
+			model M62SpareTire2
+				{
+                		file = runFlatMediumTire,
+                        offset = -0.3255 1.2556 -1.9444,
+				        rotate = 0.0000 0.0000 0.0000,
+				}
+
+			category = Other,
+			area = SpareTire2,
+			specificItem = false,
+			itemType = runFlat.MediumTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M35A2.InstallComplete.SpareTire2,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1000,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = M35A2.UninstallComplete.SpareTire2,
+
+            		}
+
+	            lua
+	            {
+				create = M35A2.Create.SpareTire2,
+				init = M35A2.Init.SpareTire2,
+				}
+		}
+	}
+
+		
+}

@@ -1,0 +1,110 @@
+module Base
+{
+	
+	model 69camarospoiler0
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_spoiler0,
+		shader = damn_vehicle_noreflect_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle CAM69Spoilers
+		{
+		part CAM69Spoiler
+       		{
+
+            model spoiler0
+			{
+                	file = 69camarospoiler0,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            door
+            {
+            }
+            anim Open
+            {
+                sound = VehicleTrunkOpenStandard,
+            }
+            anim Close
+            {
+                sound = VehicleTrunkCloseStandard,
+            }
+            anim Lock
+            {
+                sound = LockVehicleDoorStandard,
+            }
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorStandard,
+            }
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedStandard,
+            }
+            anim ActorOpen
+            {
+                anim = WindowOpenSuccess,
+                rate = 0.15,
+                angle = 0.0 0.0 0.0,
+            }
+            anim ActorClose
+            {
+                anim = Attack_Shove,
+                rate = 0.3,
+                angle = 0.0 0.0 0.0,
+            }
+            specificItem = false,
+            itemType = Base.69camaroSpoiler0,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = CAM69.InstallComplete.Spoiler,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = CAM69.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = CAM69.Create.Spoiler,
+                init = CAM69.Init.Spoiler,
+            }
+        }
+	}
+}
+

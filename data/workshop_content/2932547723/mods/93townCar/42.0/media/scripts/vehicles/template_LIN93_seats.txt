@@ -1,0 +1,489 @@
+module Base
+{
+	model 93townCarSeatfl
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_seat_f,
+		texture = Vehicles/Vehicles_93townCar_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 93townCarSeatfr
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_seat_f,
+		texture = Vehicles/Vehicles_93townCar_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 93townCarSeatrl
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_seat_r,
+		texture = Vehicles/Vehicles_93townCar_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 93townCarSeatrr
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_seat_r,
+		texture = Vehicles/Vehicles_93townCar_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 93townCarLimoSeatml
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_seat_ml,
+		texture = Vehicles/Vehicles_93townCar_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 93townCarLimoSeatmr
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_seat_mr,
+		texture = Vehicles/Vehicles_93townCar_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle LIN93Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 93townCarSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 93townCarSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 93townCarSeatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 93townCarSeatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.93townCarSeatFront,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.93townCarSeatRear,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+	template vehicle LIN93SeatsLimo
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 93townCarSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 93townCarSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatMiddleLeft
+		{
+
+			model seatMLLimo
+			{
+				file = 93townCarLimoSeatml,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = MiddleLeft,
+			}
+		}
+
+		part SeatMiddleRight
+		{
+
+			model seatMRLimo
+			{
+				file = 93townCarLimoSeatmr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = Sunroof,
+			container
+			{
+				seat = MiddleRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRLLimo
+			{
+				file = 93townCarSeatrl,
+				offset = 0.0000 0.0000 -1.4673,
+				rotate = 0.0000 0.0000 0.0000,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRRLimo
+			{
+				file = 93townCarSeatrr,
+				offset = 0.0000 0.0000 -1.4673,
+				rotate = 0.0000 0.0000 0.0000,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.93townCarSeatFront,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatMiddle*
+		{
+			category = seat,
+			itemType = Base.93townCarSeatRear,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.93townCarSeatRear,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+}
+

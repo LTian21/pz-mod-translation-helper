@@ -1,0 +1,135 @@
+module Base
+{
+
+	model 67gt500trunkDoor
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_trunkDoor,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle GT500TrunkDoor
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfWouwahhh486
+			{
+				file = 67gt500trunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.67gt500TrunkDoor,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = CAM69Spoiler,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}
+

@@ -1,0 +1,447 @@
+module Base
+{
+    model 88toyotaHiluxWindowfla
+    	{
+        mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 88toyotaHiluxWindowfra
+    	{
+        mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+   model 88toyotaHiluxWindowbla
+    	{
+        mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_window_bl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 88toyotaHiluxWindowbra
+    	{
+        mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_window_br_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 88toyotaHiluxWindshielda
+    	{
+        mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 88toyotaHiluxWindshieldreara
+    	{
+        mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle HLX88ArmorSC
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model winda
+				{
+                		file = 88toyotaHiluxWindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.88toyotaHiluxWindshieldArmor,
+			mechanicRequireKey = false,
+             
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = HLX88.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = HLX88.Create.WindshieldArmor,
+					init = HLX88.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model leftWindowa
+				{
+                		file = 88toyotaHiluxWindowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.88toyotaHiluxFrontWindowArmor,
+			mechanicRequireKey = false,
+             
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = HLX88.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = HLX88.Create.FrontLeftArmor,
+					init = HLX88.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model rightWindowa
+				{
+                		file = 88toyotaHiluxWindowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.88toyotaHiluxFrontWindowArmor,
+			mechanicRequireKey = false,
+             
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = HLX88.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = HLX88.Create.FrontRightArmor,
+					init = HLX88.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model windra
+				{
+                	file = 88toyotaHiluxWindshieldreara,
+                    offset = 0.0000 0.0000 0.4047,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.88toyotaHiluxWindshieldRearArmor,
+			mechanicRequireKey = false,
+             
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = HLX88.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = HLX88.Create.WindshieldRearArmor,
+					init = HLX88.Init.WindshieldRearArmor,
+			}
+		}
+	}
+
+    template vehicle HLX88ArmorXC
+		{
+            template! = HLX88ArmorSC,
+
+		part DAMNBackLeftArmor
+        {
+
+			model winbla
+				{
+                		file = 88toyotaHiluxWindowbla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.88toyotaHiluxBackWindowArmor,
+			mechanicRequireKey = false,
+             
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.BackLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = HLX88.UninstallComplete.BackLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = HLX88.Create.BackLeftArmor,
+					init = HLX88.Init.BackLeftArmor,
+					}
+		}
+
+		part DAMNBackRightArmor
+        {
+
+			model winbra
+				{
+                		file = 88toyotaHiluxWindowbra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.88toyotaHiluxBackWindowArmor,
+			mechanicRequireKey = false,
+             
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.BackRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = HLX88.UninstallComplete.BackRightArmor,
+            		}
+
+            		lua
+            		{
+					create = HLX88.Create.BackRightArmor,
+					init = HLX88.Init.BackRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+				model windra
+				{
+                	file = 88toyotaHiluxWindshieldreara,
+                    offset = 0.0000 0.0000 0.0000,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+		}
+	}
+}

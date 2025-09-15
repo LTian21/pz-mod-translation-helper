@@ -1,0 +1,149 @@
+module Base
+{
+
+	model 49powerWagonsideskirts1
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_sideskirts0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 49powerWagonsideskirts2
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_sideskirts_apoc,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle PWRSideskirts
+	{
+		part DAMNSideskirts
+		{
+			
+			model skirts0
+			{
+				file = 49powerWagonsideskirts1,
+			}
+
+			model skirts1
+			{
+				file = 49powerWagonsideskirts2,
+			}
+			
+			area = GasTank,
+			itemType = Base.49powerWagonSideskirts0;Base.49powerWagonSideskirts1,
+			specificItem = false,
+			category = bodywork,
+			mechanicRequireKey = true,
+            durability = 3,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = PWR.InstallComplete.Sideskirts,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = PWR.UninstallComplete.Sideskirts,
+			}
+			lua
+			{
+				init = PWR.Init.Sideskirts,
+				create = PWR.Create.Sideskirts,
+			}
+		}
+	}
+
+	template vehicle PWRSideskirtsPA
+	{
+		part DAMNSideskirts
+		{
+			model skirts1
+			{
+				file = 49powerWagonsideskirts2,
+			}
+			
+			model skirts0
+			{
+				file = 49powerWagonsideskirts1,
+			}
+			
+			area = GasTank,
+			itemType = Base.49powerWagonSideskirts1;Base.49powerWagonSideskirts0,
+			specificItem = false,
+			category = bodywork,
+			mechanicRequireKey = true,
+            durability = 3,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = PWR.InstallComplete.SideskirtsPA,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = PWR.UninstallComplete.SideskirtsPA,
+			}
+			lua
+			{
+				init = PWR.Init.SideskirtsPA,
+				create = PWR.Create.SideskirtsPA,
+			}
+		}
+	}
+}
+

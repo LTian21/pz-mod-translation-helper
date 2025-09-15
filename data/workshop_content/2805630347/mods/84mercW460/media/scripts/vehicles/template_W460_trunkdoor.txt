@@ -1,0 +1,397 @@
+module Base
+{
+
+	model W460Ltrunk
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_trunk,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model W460Strunk
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_swb_trunk,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model W460LtrunkM
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_trunkM,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle W460LTrunkDoor
+	{
+		part TrunkDoor
+		{
+			model SoHuge
+			{
+				file = W460Ltrunk,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+                reverse = TRUE,
+				rate = 0.4,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+                reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			table uninstall
+				{
+				requireUninstalled = WindshieldRear,
+				}
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.W460TrunkDoor,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle W460STrunkDoor
+	{
+		part TrunkDoor
+		{
+			model SoHuge1
+			{
+				file = W460Strunk,
+			}
+
+            anim Close
+			{
+				anim = trunk_opening,
+                reverse = TRUE,
+				rate = 0.4,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+                reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.W460TrunkDoor,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+                requireUninstalled = WindshieldRear,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle W460LTrunkDoorM
+	{
+		part TrunkDoor
+		{
+			model SoHugeM
+			{
+				file = W460LtrunkM,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+                reverse = TRUE,
+				rate = 0.4,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+                reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.W460TrunkSplitDoor,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+                requireUninstalled = WindshieldRear,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}
+

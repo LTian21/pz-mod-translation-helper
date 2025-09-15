@@ -1,0 +1,75 @@
+module Base
+{
+
+	model 86chevyCUCVMudflaps0
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86flat_mudflaps,
+		texture = vehicles/Vehicles_86chevyCUCV_Interior2,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    template vehicle M1028Mudflaps
+	{
+		part DAMNMudflaps
+        	{
+
+			model Mudflaps0
+				{
+                		file = 86chevyCUCVMudflaps0,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.86chevy1028Mudflaps,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CUCV86.InstallComplete.Mudflaps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = CUCV86.UninstallComplete.Mudflaps,
+
+            		}
+
+	            lua
+	            {
+				create = CUCV86.Create.Mudflaps,
+				init = CUCV86.Init.Mudflaps,
+				}
+		}
+	}
+}

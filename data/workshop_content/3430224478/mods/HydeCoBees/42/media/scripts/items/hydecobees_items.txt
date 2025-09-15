@@ -1,0 +1,781 @@
+module HydeCoBees
+{
+    imports
+    {
+        Base
+    }
+
+    item Honeybee
+    {
+        DisplayName = Honeybee,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 0.01,
+        Icon = Insect_Honeybee,
+        EvolvedRecipe = AddBaitToChum:1,
+        HungerChange = -1,
+        UnhappyChange = 20,
+        Calories = 1.5,
+        Carbohydrates = 0.0,
+        Lipids = 0.05,
+        Proteins = 0.25,
+        FishingLure = true,
+        StaticModel = Insect_Honeybee,
+        WorldStaticModel = Insect_Honeybee,
+        FoodType = Insect,
+        Tags = NoCookingXP,
+    }
+
+    item Honeycomb
+    {
+        DisplayName = Honeycomb,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 0.5,
+        Icon = Honeycomb,
+        HungerChange = -20,
+        UnhappyChange = -15,
+        Calories = 660.0,
+        Carbohydrates = 187.0,
+        Lipids = 0.0,
+        Proteins = 0.0,
+        StaticModel = HoneyComb,
+        WorldStaticModel = HoneyComb,
+        FoodType = Insect,
+        Tags = NoCookingXP,
+    }
+
+    item HoneyPoultice
+    {
+        DisplayName = Honey Poultice,
+        DisplayCategory = FirstAid,
+        Type = Drainable,
+        Weight = 0.8,
+        Icon = HoneyPoultice,
+        Medical = TRUE,
+        Tooltip = Tooltip_HydeCoBees_HoneyPoultice,
+        ReduceInfectionPower = 30,
+        BandagePower = 3,
+        UseDelta = 0.1,
+        ReplaceOnDeplete = EmptyJar,
+        StaticModel = HoneyPoultice,
+        WorldStaticModel = HoneyPoultice,
+    }
+
+    item Beehive
+    {
+        DisplayName = Wild Beehive,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 10.0,
+        Icon = Beehive,
+        StaticModel = Beehive,
+        WorldStaticModel = Beehive,
+        Tooltip = Tooltip_HydeCoBees_Beehive,
+        Tags = IsCraftingMaterial,
+    }
+
+    item CultivatedBeehive
+    {
+        DisplayName = Cultivated Beehive,
+        DisplayCategory = Trapping,
+        Type = Normal,
+        Weight = 8.0,
+        Icon = CultivatedBeehive,
+        Trap = TRUE,
+        StaticModel = CultivatedBeehive,
+        WorldStaticModel = CultivatedBeehive,
+        Tooltip = Tooltip_HydeCoBees_CultivatedBeehive,
+    }
+
+    item QueenBee
+    {
+        DisplayName = Queen Bee,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.05,
+        Icon = QueenBee,
+        EvolvedRecipe = AddBaitToChum:1,
+        Tooltip = Tooltip_HydeCoBees_QueenBee,
+        StaticModel = Insect_Honeybee,
+        WorldStaticModel = Insect_Honeybee,
+        HungerChange = -0.5,
+        UnhappyChange = 15,
+        Calories = 2.0,
+        Carbohydrates = 0.1,
+        Lipids = 0.1,
+        Proteins = 0.5,
+        FishingLure = true,
+        Tags = NoCookingXP,
+    }
+
+    item Mead
+    {
+        DisplayName = Mead (Fermented),
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = MeadBottle,
+        Packaged = TRUE,
+        StaticModel = MeadBottle,
+        WorldStaticModel = MeadBottle,
+        Tooltip = Tooltip_HydeCoBees_Mead,
+        Tags = Glass;GlassBottle,
+        HungerChange = -10,
+        ThirstChange = -50,
+        Calories = 150,
+        Carbohydrates = 20,
+        Lipids = 0,
+        Proteins = 0,
+        ReplaceOnDeplete = Base.EmptyBottle,
+
+        component FluidContainer
+        {
+            ContainerName = BottleGlass,
+            capacity = 1.0,
+            Opened = true,
+            CustomDrinkSound = DrinkingFromBottleGlass,
+            Fluids
+            {
+                fluid = Mead:1.0,
+            }
+        }
+
+        component Durability
+        {
+            Material = Glass_Light,
+            MaxHitPoints = 1.0,
+        }
+    }
+
+    item MeadMixture
+    {
+        DisplayName = Mead Mixture,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 1.2,
+        Icon = MeadBottle,
+        StaticModel = MeadBottle,
+        WorldStaticModel = MeadBottle,
+        Tooltip = Tooltip_HydeCoBees_MeadMixture,
+        Tags = IsCraftingMaterial,
+        IsCookable = TRUE,
+        MinutesToCook = 40,
+        MinutesToBurn = 80,
+        ReplaceOnCooked = HydeCoBees.Mead,
+        GoodHot = TRUE,
+        DaysFresh = 365,
+        DaysTotallyRotten = 730,
+        HungerChange = -5,
+        Calories = 60,
+        Carbohydrates = 15,
+        Lipids = 0,
+        Proteins = 0,
+        CookingSound = BoilingFood,
+    }
+
+    item Wasp
+    {
+        DisplayName = Wasp,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 0.01,
+        Icon = Insect_Wasp,
+        EvolvedRecipe = AddBaitToChum:1,
+        HungerChange = -1,
+        UnhappyChange = 25,
+        Calories = 1.0,
+        Carbohydrates = 0.0,
+        Lipids = 0.05,
+        Proteins = 0.2,
+        FishingLure = true,
+        StaticModel = Insect_Wasp,
+        WorldStaticModel = Insect_Wasp,
+        FoodType = Insect,
+        Tags = NoCookingXP,
+        Tooltip = Tooltip_HydeCoBees_Wasp,
+    }
+
+    item WaspNest
+    {
+        DisplayName = Wasp Nest,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 8.0,
+        Icon = WaspNest,
+        StaticModel = Beehive,
+        WorldStaticModel = WaspNest,
+        Tooltip = Tooltip_HydeCoBees_WaspNest,
+        Tags = IsCraftingMaterial,
+    }
+
+    item WaxCoatedCheeseWheel
+    {
+        DisplayName = Wax-Coated Cheese Wheel,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 1,
+        Icon = WaxCoatedCheeseWheel,
+        FoodType = Cheese,
+        DaysFresh = 547,
+        DaysTotallyRotten = 730,
+        HungerChange = -52,
+        UnhappyChange = 15,
+        Calories = 396,
+        Carbohydrates = 3,
+        Lipids = 33,
+        Proteins = 22,
+        StaticModel = WaxCoatedCheeseWheel,
+        WorldStaticModel = WaxCoatedCheeseWheel,
+        Tooltip = Tooltip_HydeCoBees_WaxCoatedCheeseWheel,
+    }
+
+    item WaxCoatedCheeseSlice
+    {
+        DisplayName = Wax-Coated Cheese Slice,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 0,
+        Icon = WaxCoatedCheeseSlice,
+        FoodType = Cheese,
+        DaysFresh = 547,
+        DaysTotallyRotten = 730,
+        HungerChange = -13,
+        UnhappyChange = 10,
+        Calories = 141,
+        Carbohydrates = 1,
+        Lipids = 12,
+        Proteins = 8,
+        StaticModel = WaxCoatedCheeseSlice,
+        WorldStaticModel = WaxCoatedCheeseSlice,
+        Tooltip = Tooltip_HydeCoBees_WaxCoatedCheeseSlice,
+    }
+
+    item CheeseWheel
+    {
+        DisplayName = Cheese Wheel,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 1.8,
+        Icon = CheeseWheel,
+        FoodType = Cheese,
+        DaysFresh = 14,
+        DaysTotallyRotten = 20,
+        HungerChange = -135,
+        UnhappyChange = 0,
+        Calories = 1017,
+        Carbohydrates = 8,
+        Lipids = 84,
+        Proteins = 58,
+        StaticModel = CheeseWheel,
+        WorldStaticModel = CheeseWheel,
+        Tooltip = Tooltip_HydeCoBees_CheeseWheel,
+    }
+
+    item CheeseCurds
+    {
+        DisplayName = Cheese Curds,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 0.5,
+        Icon = CheeseCurds,
+        FoodType = Cheese,
+        DaysFresh = 10,
+        DaysTotallyRotten = 15,
+        HungerChange = -25,
+        UnhappyChange = -5,
+        Calories = 200,
+        Carbohydrates = 2,
+        Lipids = 15,
+        Proteins = 12,
+        StaticModel = CheeseCurds,
+        WorldStaticModel = CheeseCurds,
+        Tooltip = Tooltip_HydeCoBees_CheeseCurds,
+        IsCookable = TRUE,
+        MinutesToCook = 20,
+        MinutesToBurn = 40,
+        ReplaceOnCooked = Base.Cheese,
+        GoodHot = TRUE,
+    }
+
+    item WaxBits
+    {
+        DisplayName = Bees Wax Bits,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.05,
+        Icon = waxbits,
+        StaticModel = WaxBits,
+        WorldStaticModel = WaxBits,
+        Tooltip = Tooltip_HydeCoBees_WaxBits,
+        Tags = IsCraftingMaterial,
+    }
+
+    item BallOfBeesWax
+    {
+        DisplayName = Ball of Beeswax,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.5,
+        Icon = BallOfBeesWax,
+        StaticModel = BallOfBeesWax,
+        WorldStaticModel = BallOfBeesWax,
+        Tooltip = Tooltip_HydeCoBees_BallOfBeesWax,
+        Tags = IsCraftingMaterial,
+    }
+
+    item BeesWaxBlack
+    {
+        DisplayName = Black Bees Wax,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.5,
+        Icon = BlackBallOfBeesWax,
+        StaticModel = BlackBallOfBeesWax,
+        WorldStaticModel = BlackBallOfBeesWax,
+        Tooltip = Tooltip_HydeCoBees_BeesWaxBlack,
+        Tags = IsCraftingMaterial,
+    }
+
+    item BeesWaxBlue
+    {
+        DisplayName = Blue Bees Wax,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.5,
+        Icon = BlueBallOfBeesWax,
+        StaticModel = BlueBallOfBeesWax,
+        WorldStaticModel = BlueBallOfBeesWax,
+        Tooltip = Tooltip_HydeCoBees_BeesWaxBlue,
+        Tags = IsCraftingMaterial,
+    }
+
+    item BeesWaxGreen
+    {
+        DisplayName = Green Bees Wax,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.5,
+        Icon = GreenBallOfBeesWax,
+        StaticModel = GreenBallOfBeesWax,
+        WorldStaticModel = GreenBallOfBeesWax,
+        Tooltip = Tooltip_HydeCoBees_BeesWaxGreen,
+        Tags = IsCraftingMaterial,
+    }
+
+    item BeesWaxRed
+    {
+        DisplayName = Red Bees Wax,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.5,
+        Icon = RedBallOfBeesWax,
+        StaticModel = RedBallOfBeesWax,
+        WorldStaticModel = RedBallOfBeesWax,
+        Tooltip = Tooltip_HydeCoBees_BeesWaxRed,
+        Tags = IsCraftingMaterial,
+    }
+
+    item CrayonMold
+    {
+        DisplayName = Crayon Mold,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = CrayonMold,
+        StaticModel = CrayonMold,
+        WorldStaticModel = CrayonMold,
+        Tooltip = Tooltip_HydeCoBees_CrayonMold,
+        Tags = IsCraftingMaterial,
+    }
+
+    item PaperyHiveScraps
+    {
+        DisplayName = Papery Hive Scraps,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.1,
+        Icon = PaperyHiveScraps,
+        StaticModel = PaperyHiveScraps,
+        WorldStaticModel = PaperyHiveScraps,
+        Tooltip = Tooltip_HydeCoBees_PaperyHiveScraps,
+        Tags = IsCraftingMaterial;IsFireFuel,
+    }
+
+    item BeesWaxCrayonBlack
+    {
+        DisplayName = Beeswax Crayon - Black,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.1,
+        Icon = BlackCrayon,
+        StaticModel = BeesWaxCrayonBlack,
+        WorldStaticModel = BeesWaxCrayonBlack,
+        Tooltip = Tooltip_HydeCoBees_BeesWaxCrayonBlack,
+        Tags = Write;Pen,
+    }
+
+    item BeesWaxCrayonBlue
+    {
+        DisplayName = Beeswax Crayon - Blue,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.1,
+        Icon = BlueCrayon,
+        StaticModel = BeesWaxCrayonBlue,
+        WorldStaticModel = BeesWaxCrayonBlue,
+        Tooltip = Tooltip_HydeCoBees_BeesWaxCrayonBlue,
+        Tags = Write;BluePen,
+    }
+
+    item BeesWaxCrayonGreen
+    {
+        DisplayName = Beeswax Crayon - Green,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.1,
+        Icon = GreenCrayon,
+        StaticModel = BeesWaxCrayonGreen,
+        WorldStaticModel = BeesWaxCrayonGreen,
+        Tooltip = Tooltip_HydeCoBees_BeesWaxCrayonGreen,
+        Tags = Write;GreenPen,
+    }
+
+    item BeesWaxCrayonRed
+    {
+        DisplayName = Beeswax Crayon - Red,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.1,
+        Icon = RedCrayon,
+        StaticModel = BeesWaxCrayonRed,
+        WorldStaticModel = BeesWaxCrayonRed,
+        Tooltip = Tooltip_HydeCoBees_BeesWaxCrayonRed,
+        Tags = Write;RedPen,
+    }
+
+    item BeesWaxCandle
+    {
+        DisplayName = BeesWax Candle,
+        DisplayCategory = LightSource,
+        Type = Drainable,
+        Weight = 0.2,
+        Icon = Candle,
+        UseDelta = 0.003,
+        cantBeConsolided = TRUE,
+        StaticModel = Candle,
+        WorldStaticModel = CandleGround,
+        Tooltip = Tooltip_HydeCoBees_BeesWaxCandle,
+        UseWhileEquipped = FALSE,
+        Tags = IsCraftingMaterial,
+    }
+
+    item BeesWaxCandle_Lit
+    {
+        DisplayName = Lit BeesWax Candle,
+        DisplayCategory = LightSource,
+        Type = Drainable,
+        Weight = 0.2,
+        Icon = CandleLit,
+        ActivatedItem = TRUE,
+        LightDistance = 5,
+        LightStrength = 1.2,
+        TorchCone = FALSE,
+        UseDelta = 0.003,
+        UseWhileUnequipped = TRUE,
+        cantBeConsolided = TRUE,
+        StaticModel = Candle,
+        WorldStaticModel = CandleGround,
+        Tags = StartFire;IsCraftingMaterial,
+        Tooltip = Tooltip_HydeCoBees_BeesWaxCandleLit,
+    }
+
+    item DyeBlack
+    {
+        DisplayName = Black Dye,
+        DisplayCategory = Appearance,
+        Type = Normal,
+        Weight = 0.1,
+        Icon = HairDye,
+        Tooltip = Tooltip_HydeCoBees_DyeBlack,
+        IconFluidMask = HairDye_Mask,
+        WorldStaticModel = BlackDyeJar,
+        Tags = IsCraftingMaterial,
+        ReplaceOnDeplete = EmptyJar;JarLid,
+
+        component FluidContainer
+        {
+            ContainerName   = BottleHairDye,
+            capacity        = 1.0,
+            Fluids
+            {
+                fluid = HairDye:1.0:0.1:0.09:0.08,
+            }
+        }
+    }
+
+    item DyeBlue
+    {
+        DisplayName = Blue Dye,
+        DisplayCategory = Appearance,
+        Type = Normal,
+        Weight = 0.1,
+        Icon = HairDye,
+        Tooltip = Tooltip_HydeCoBees_DyeBlue,
+        IconFluidMask = HairDye_Mask,
+        WorldStaticModel = BlueDyeJar,
+        Tags = IsCraftingMaterial,
+        ReplaceOnDeplete = EmptyJar;JarLid,
+
+        component FluidContainer
+        {
+            ContainerName   = BottleHairDye,
+            capacity        = 1.0,
+            Fluids
+            {
+                fluid = HairDye:1.0:0.26:0.35:0.81,
+            }
+        }
+    }
+
+    item DyeGreen
+    {
+        DisplayName = Green Dye,
+        DisplayCategory = Appearance,
+        Type = Normal,
+        Weight = 0.1,
+        Icon = HairDye,
+        Tooltip = Tooltip_HydeCoBees_DyeGreen,
+        IconFluidMask = HairDye_Mask,
+        WorldStaticModel = GreenDyeJar,
+        Tags = IsCraftingMaterial,
+        ReplaceOnDeplete = EmptyJar;JarLid,
+
+        component FluidContainer
+        {
+            ContainerName   = BottleHairDye,
+            capacity        = 1.0,
+            Fluids
+            {
+                fluid = HairDye:1.0:0.21:0.42:0.17,
+            }
+        }
+    }
+
+    item DyeRed
+    {
+        DisplayName = Red Dye,
+        DisplayCategory = Appearance,
+        Type = Normal,
+        Weight = 0.1,
+        Icon = HairDye,
+        Tooltip = Tooltip_HydeCoBees_DyeRed,
+        IconFluidMask = HairDye_Mask,
+        WorldStaticModel = RedDyeJar,
+        Tags = IsCraftingMaterial,
+        ReplaceOnDeplete = EmptyJar;JarLid,
+
+        component FluidContainer
+        {
+            ContainerName   = BottleHairDye,
+            capacity        = 1.0,
+            Fluids
+            {
+                fluid = HairDye:1.0:0.96:0.32:0.59,
+            }
+        }
+    }
+
+    item RefinedResin
+    {
+        DisplayName = Refined Resin,
+        DisplayCategory = Material,
+        Type = Drainable,
+        Weight = 0.3,
+        Icon = RefinedResin,
+        StaticModel = RefinedResin,
+        WorldStaticModel = RefinedResin,
+        Tooltip = Tooltip_HydeCoBees_RefinedResin,
+        Tags = IsCraftingMaterial;IsFireFuel;IsFireTinder;Glue,
+        SurvivalGear = TRUE,
+        UseDelta = 0.1,
+    }
+
+    item PineNeedles
+    {
+        DisplayName = Pine Needles,
+        DisplayCategory = Junk,
+        Type = Normal,
+        Weight = 0.01,
+        Icon = PineNeedles,
+        StaticModel = PineNeedles,
+        WorldStaticModel = PineNeedles,
+        Tooltip = Tooltip_HydeCoBees_PineNeedles,
+        Tags = IsCraftingMaterial;IsFireFuel;IsFireTinder,
+    }
+
+    item RawResin
+    {
+        DisplayName = Raw Resin,
+        DisplayCategory = Material,
+        Type = Food,
+        Weight = 0.2,
+        Icon = RawResin,
+        StaticModel = RawResin,
+        WorldStaticModel = RawResin,
+        Tooltip = Tooltip_HydeCoBees_RawResin,
+        Tags = IsCraftingMaterial;IsFireTinder;IsFireFuel,
+        IsCookable = TRUE,
+        MinutesToCook = 10,
+        MinutesToBurn = 20,
+        ReplaceOnCooked = HydeCoBees.RefinedResin,
+        DaysFresh = 365,
+        DaysTotallyRotten = 730,
+        HungerChange = -2,
+        Calories = 15,
+        Carbohydrates = 3,
+        Lipids = 0,
+        Proteins = 0,
+        CookingSound = FryingFood,
+    }
+
+    item BeeswaxStickyResin
+    {
+        DisplayName = Beeswax Sticky Resin,
+        DisplayCategory = Material,
+        Type = Drainable,
+        Weight = 0.3,
+        Icon = BeeswaxStickyResin,
+        StaticModel = BeeswaxStickyResin,
+        WorldStaticModel = BeeswaxStickyResin,
+        Tooltip = Tooltip_HydeCoBees_BeeswaxStickyResin,
+        Tags = IsCraftingMaterial;IsFireFuel;IsFireTinder;NoPour;SewingNeedle,
+        SurvivalGear = TRUE,
+        UseDelta = 0.1,
+        UseWhileEquipped = FALSE,
+    }
+
+    item StickyTapeRoll
+    {
+        DisplayName = Sticky Tape Roll,
+        DisplayCategory = Material,
+        Type = Drainable,
+        Weight = 0.5,
+        Icon = StickyTapeRoll,
+        WorldStaticModel = StickyTapeRoll,
+        Tooltip = Tooltip_HydeCoBees_StickyTapeRoll,
+        Tags = Epoxy,
+        ConsolidateOption = ContextMenu_Merge,
+        SurvivalGear = TRUE,
+        UseDelta = 0.25,
+        UseWhileEquipped = FALSE,
+    }
+
+    item FibrousHiveTape
+    {
+        DisplayName = Fibrous Hive Tape,
+        DisplayCategory = Material,
+        Type = Drainable,
+        Weight = 0.8,
+        Icon = FibrousHiveTape,
+        WorldStaticModel = FibrousHiveTape,
+        Tooltip = Tooltip_HydeCoBees_FibrousHiveTape,
+        Tags = FiberglassTape,
+        ConsolidateOption = ContextMenu_Merge,
+        SurvivalGear = TRUE,
+        UseDelta = 0.25,
+        UseWhileEquipped = FALSE,
+    }
+
+    item PineNeedlePaintbrush
+    {
+        DisplayName = Pine Needle Paintbrush,
+        DisplayCategory = Tool,
+        Type = Normal,
+        Weight = 0.5,
+        Icon = Paintbrush,
+        StaticModel = PaintBrush,
+        WorldStaticModel = PaintBrush_Ground,
+        Tooltip = Tooltip_HydeCoBees_PineNeedlePaintbrush,
+        Tags = Paintbrush,
+    }
+
+    item HoneyBeeLarvae
+    {
+        DisplayName = Honeybee Larvae,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 0.01,
+        Icon = WaspLarvae,
+        EvolvedRecipe = AddBaitToChum:1,
+        HungerChange = -1,
+        UnhappyChange = 20,
+        Calories = 1.5,
+        Carbohydrates = 0.0,
+        Lipids = 0.05,
+        Proteins = 0.25,
+        FishingLure = true,
+        StaticModel = WaspLarvae,
+        WorldStaticModel = WaspLarvae,
+        FoodType = Insect,
+        Tooltip = Tooltip_HydeCoBees_HoneyBeeLarvae,
+        Tags = NoCookingXP,
+    }
+
+    item WaspLarvae
+    {
+        DisplayName = Wasp Larvae,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 0.01,
+        Icon = WaspLarvae,
+        EvolvedRecipe = AddBaitToChum:1,
+        HungerChange = -1,
+        UnhappyChange = 20,
+        Calories = 1.5,
+        Carbohydrates = 0.0,
+        Lipids = 0.05,
+        Proteins = 0.25,
+        FishingLure = true,
+        StaticModel = WaspLarvae,
+        WorldStaticModel = WaspLarvae,
+        FoodType = Insect,
+        Tooltip = Tooltip_HydeCoBees_WaspLarvae,
+        Tags = NoCookingXP,
+    }
+
+    item BeeSmoker
+    {
+        DisplayName = Bee Smoker,
+        DisplayCategory = Tool,
+        Type = Drainable,
+        Weight = 1.0,
+        Icon = BeeSmoker,
+        UseDelta = 0.01,
+        cantBeConsolided = TRUE,
+        StaticModel = BeeSmoker,
+        WorldStaticModel = BeeSmoker,
+        Tooltip = Tooltip_HydeCoBees_BeeSmoker,
+        Tags = IsCraftingMaterial,
+    }
+
+    item BeeSmoker_Lit
+    {
+        DisplayName = Lit Bee Smoker,
+        DisplayCategory = Tool,
+        Type = Drainable,
+        Weight = 1.0,
+        Icon = BeeSmoker,
+        ActivatedItem = TRUE,
+        LightDistance = 3,
+        LightStrength = 0.8,
+        TorchCone = FALSE,
+        UseDelta = 0.01,
+        UseWhileUnequipped = TRUE,
+        cantBeConsolided = TRUE,
+        StaticModel = BeeSmoker,
+        WorldStaticModel = BeeSmoker,
+        Tags = IsCraftingMaterial,
+        Tooltip = Tooltip_HydeCoBees_BeeSmokerLit,
+    }
+}

@@ -1,0 +1,73 @@
+module Base
+{
+	
+	model 98stageasideskirts0
+	{
+		mesh = vehicles/Vehicles_98stagea_Body|stagea_sideskirts,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    template vehicle STAGEASideskirts
+        {
+        part DAMNSideskirts
+            {
+
+            model STAGEAsideskirts
+            {
+                    file = 98stageasideskirts0,
+            }
+
+            category = bodywork,
+            area = TireFrontRight,
+            itemType = Base.98stageaSideskirts,
+            mechanicRequireKey = false,
+            durability = 2,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = STAGEA.InstallComplete.Sideskirts,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = STAGEA.UninstallComplete.Sideskirts,
+            }
+            lua
+            {
+                create = STAGEA.Create.Sideskirts,
+                init = STAGEA.Init.Sideskirts,
+            }
+        }
+    }
+}

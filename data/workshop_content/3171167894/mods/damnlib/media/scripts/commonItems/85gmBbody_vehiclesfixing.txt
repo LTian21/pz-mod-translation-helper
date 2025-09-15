@@ -1,0 +1,56 @@
+module Base
+{
+	recipe Repair 85 GM B-body Tire
+    	{
+		85gmBbodyTire0/85gmBbodyTire1/85gmBbodyTire2/85gmBbodyTire3/85gmBbodyTire4/85gmBbodyTire5/85gmBbodyTire6,
+		damnCraft.TireRepairTools,
+		damnCraft.TireRepairRubberSolution,
+		damnCraft.TireRepairStrips,
+
+		NoBrokenItems:false,
+		Result:damnCraft.TireRepairTools,
+		Time:250.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+	fixing Fix 85 GM B-body Trunk Welding
+	{
+	   Require : 85gmBbodyRoofrack1,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=2,
+	}
+
+	fixing Fix 85 GM B-body Door Welding
+	{
+	   Require : 85gmBbodyFrontDoor1;85gmBbodyRearDoor1,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=3,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=3,
+	}
+
+	fixing Fix 85 GM B-body Armor Welding
+    {
+       Require : 85gmBbodyBullbarFrontA;85gmBbodyWindshieldArmorM;85gmBbodyFrontWindowArmorM;85gmBbodyRearWindowArmorM;85gmBbodyWindshieldRearArmorM,
+       GlobalItem : BlowTorch=8,
+       ConditionModifier : 1.0,
+
+       Fixer : SheetMetal; MetalWelding=4;Mechanics=4,
+       Fixer : SmallSheetMetal=2; MetalWelding=4;Mechanics=4,
+    }
+
+    fixing Fix 85 GM B-body Armor
+    {
+       Require : 85gmBbodyWindshieldArmorW;85gmBbodyFrontWindowArmorW;85gmBbodyRearWindowArmorW;85gmBbodyWindshieldRearArmorW,
+       ConditionModifier : 0.5,
+
+       Fixer : DuctTape=2;Mechanics=1,
+    }
+
+}

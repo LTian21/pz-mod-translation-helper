@@ -1,0 +1,44 @@
+module Base
+{
+
+	template vehicle TAU93SpareTires
+	{
+		part TAU93SpareTire
+        	{
+
+			category = tire,
+			area = TruckBed,
+			itemType = Base.93fordTaurusTire;Base.93fordTaurusSHOTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = TAU93.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = TAU93.Create.SpareTire,
+				init = TAU93.Init.SpareTire,
+				}
+		}
+	}
+}
+

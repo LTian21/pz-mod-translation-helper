@@ -1,0 +1,388 @@
+module Base
+{
+	model TrailerTSMega
+	{
+		mesh = trailers/TSMegatrailer|Trailer_Body,
+		shader = vehicle,
+		invertX = FALSE,
+		scale = 0.05,
+	}
+	model TrailerDoorLeft
+    {
+        mesh = trailers/TSMegatrailer|Trailer_DoorLeft,
+        shader = vehicle,
+        scale = 0.05,
+		static = FALSE,
+		boneWeight = DoorLeft 1.0,
+    }
+	item ATSMegaTrunk
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight    =    40.0,
+        Type    =    Normal,
+        DisplayName    =    Mega Trunk,
+        Icon    =    CarTrunk,
+        VehicleType =   1,
+        MaxCapacity = 1300,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 10,
+        MechanicsItem = TRUE,
+		mechanicRequireKey = false,
+    }
+	fixing Fix Mega Trunk Welding
+    {
+       Require : ATSMegaTrunk,
+       GlobalItem : BlowTorch=10,
+       ConditionModifier : 1.1,
+
+       Fixer : SheetMetal=2; MetalWelding=4;Mechanics=3,
+       Fixer : SmallSheetMetal=8; MetalWelding=4;Mechanics=3,
+    }
+	vehicle TrailerTSMega
+	{
+		model
+		{
+			file = TrailerTSMega,
+			scale = 0.6500,
+			offset = 0.0000 0.4769 1.5538,
+		}
+
+		mechanicType = 2,
+		offRoadEfficiency = 5,
+		engineRepairLevel = 5,
+		playerDamageProtection = 1.3,
+
+		skin
+		{
+			texture = Trailers/TSMegatrailer_container_blue,
+		}
+
+		skin
+		{
+			texture = Trailers/TSMegatrailer_container_green,
+		}
+
+		skin
+		{
+			texture = Trailers/TSMegatrailer_container_grey,
+		}
+
+		skin
+		{
+			texture = Trailers/TSMegatrailer_container_red,
+		}
+		skin
+		{
+			texture = Trailers/TSMegatrailer_container_yellow,
+		}
+		skin
+		{
+			texture = Trailers/TSMegatrailer_container_purple,
+		}
+		skin
+		{
+			texture = Trailers/TSMegatrailer_dhl,
+		}
+
+		skin
+		{
+			texture = Trailers/TSMegatrailer_fedex,
+		}
+
+		skin
+		{
+			texture = Trailers/TSMegatrailer_trailer,
+		}
+
+		skin
+		{
+			texture = Trailers/TSMegatrailer_ups,
+		}
+
+		textureMask = Trailers/TSMegatrailer_mask2,
+		textureLights = Trailers/TSMegatrailer_light,
+		textureRust = Trailers/TSMegatrailer_rust,
+		textureDamage1Shell = Trailers/TSMegatrailer_rust,
+		textureDamage2Shell = Trailers/TSMegatrailer_rust,
+		textureDamage1Overlay = Trailers/TSMegatrailer_rust,
+		textureDamage2Overlay = Trailers/TSMegatrailer_rust,
+		extents = 3.4154 3.4154 15.0769,
+		mass = 300,
+		physicsChassisShape = 3.4154 3.4154 15.0769,
+		centerOfMassOffset = 0.0000 2.7385 2.9538,
+		shadowExtents = 3.7385 16.4923,
+		shadowOffset = 0.0000 1.0308,
+		engineForce = 78000,
+		engineQuality = 80,
+		engineLoudness = 110,
+		maxSpeed = 60f,
+		brakingForce = 1,
+		stoppingMovementForce = 1.0f,
+		rollInfluence = 0.6f,
+		steeringIncrement = 0.001f,
+		steeringClamp = 0.3f,
+		suspensionStiffness = 100,
+		suspensionCompression = 2.83f,
+		suspensionDamping = 2.88f,
+		maxSuspensionTravelCm = 15,
+		suspensionRestLength = 0.4f,
+		wheelFriction = 0.5f,
+		frontEndHealth = 650,
+		rearEndHealth = 450,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.0000 -0.7692 4.1692,
+			radius = 0.5f,
+			width = 2.0f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = 0.0000 -0.5692 -0.6000,
+			radius = 0.7f,
+			width = 2.0f,
+		}
+
+		wheel RearLeft
+		{
+			front = true,
+			offset = 1.2462 -0.5692 -2.4923,
+			radius = 0.7f,
+			width = 0.5f,
+		}
+
+		wheel RearRight
+		{
+			front = true,
+			offset = -1.2462 -0.5692 -2.4923,
+			radius = 0.7f,
+			width = 0.5f,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -5.2154 3.4154 1.2000,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 2.3385 0.8769 1.2615 1.2615,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -2.3385 0.8769 1.2615 1.2615,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 2.3385 -1.0000 1.2615 1.2615,
+		}
+
+		area TireRearRight
+		{
+			xywh = -2.3385 -1.0000 1.2615 1.2615,
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			wheel = FrontRight,
+
+			model InflatedTirePlusWheel
+			{
+				file = ATAPetyarbuilt_WheelRear_L,
+				offset = 1.3000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = ATAPetyarbuilt_WheelRear_R,
+				offset = -1.3000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = ATAPetyarbuilt_WheelRear_L,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = ATAPetyarbuilt_WheelRear_R,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		template = Suspension,
+		template = Headlight/part/HeadlightRearLeft,
+		template = Headlight/part/HeadlightRearRight,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Brake/part/BrakeFrontLeft,
+		template = Brake/part/BrakeFrontRight,
+		template = Brake/part/BrakeRearLeft,
+		template = Brake/part/BrakeRearRight,
+		template = Trunk/part/TruckBed,
+
+		part TruckBed
+		{
+			mechanicRequireKey = false,
+			specificItem = false,
+			itemType = Base.ATSMegaTrunk,
+
+			container
+			{
+				test = Vehicles.ContainerAccess.TruckBed,
+				conditionAffectsCapacity = true,
+				capacity = 1300,
+			}
+		}
+        
+        {
+
+            
+        }
+	template = Door/part/DoorRear,		
+		part DoorRear
+		{
+
+		model Default
+			{
+				file = 	TrailerDoorLeft,
+				rotate = 0.0000 0.0000 0.0000,
+			}			
+			mechanicRequireKey = false,
+
+			anim Close
+			{
+				anim = TrailerDoor,
+				reverse = TRUE,
+				rate = 1.7,
+				sound = VehicleDoorCloseVan,
+				rotate = 0 0 0,
+			}
+
+			anim Open
+			{
+				anim = TrailerDoor,
+				rate = 1.3,
+				sound = VehicleDoorOpenVan,
+			}
+
+			anim Closed
+			{
+				anim = TrailerDoor,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = TrailerDoor,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 600,
+				skills = Mechanics:4,
+				recipes = Advanced Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 600,
+				skills = Mechanics:3,
+				recipes = Advanced Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = ATA2ProtectionDoorsRear,
+			}
+		}
+
+		physics box
+		{
+			offset = 0.0000 2.6769 10.8769,
+			extents = 1.1231 3.5538 1.0769,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.4923 1.2462,
+			extents = 3.2833 0.9833 11.7333,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.0769 7.2000,
+			extents = 1.2769 1.5538 0.3692,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment trailerTruck
+		{
+			offset = 0.0000 0.3231 8.5385,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+}

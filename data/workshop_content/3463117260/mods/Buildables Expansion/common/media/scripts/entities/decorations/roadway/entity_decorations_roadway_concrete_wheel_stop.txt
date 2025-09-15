@@ -1,0 +1,76 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_ConcreteWheelStop
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Concrete Wheel Stop,
+			Icon		= street_decoration_01_34,
+		}
+	}
+
+    entity ConcreteWheelStop
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_ConcreteWheelStop,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = street_decoration_01_45,
+                    row = street_decoration_01_44,
+                    row = street_decoration_01_43,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = street_decoration_01_40 street_decoration_01_41 street_decoration_01_42,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = street_decoration_01_37,
+                    row = street_decoration_01_36,
+                    row = street_decoration_01_35,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = street_decoration_01_32 street_decoration_01_33 street_decoration_01_34,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildLowNoTool,
+            time          = 300,
+            needToBeLearn = true,
+            SkillRequired = Masonry:5,
+            xpAward       = Masonry:10,
+            category      = Decorations_Roadway,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_roadwayDecorationsDesc,
+            inputs
+            {
+                item 1 tags[MasonsTrowel] mode:keep flags[Prop1],
+                item 3 [Base.BucketConcreteFull],
+            }
+        }
+    }
+}

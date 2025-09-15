@@ -1,0 +1,246 @@
+module Base
+{
+    model W460SSpareTire1
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_swb_sparetire1,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+        scale = 0.1,
+        boneWeight = trunk_bone 1.0,
+    }
+
+	model W460LSpareTire1
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_sparetire,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+        scale = 0.1,
+        boneWeight = trunk_bone 1.0,
+    }
+
+    model W460LSpareTireM
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_sparetireM,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle W460LSpareTires
+		{
+		part W460SpareTire
+        	{
+
+			model SpareTire1
+				{
+                		file = W460LSpareTire1,
+				}
+
+			model SpareTire2
+				{
+                		file = W460LSpareTire1,
+				}
+
+			model SpareTire3
+				{
+                		file = W460LSpareTire1,
+				}
+
+			area = TruckBed,
+			parent = TrunkDoor,
+			category = tire,
+			specificItem = false,
+			itemType = Base.W460NormalTire2;Base.W460WideTire2;Base.W460ModernTire2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1100,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = W460.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+			create = W460.Create.SpareTire,
+			init = W460.Init.SpareTire,
+			}
+		}
+	}
+
+    template vehicle W460SSpareTires
+	{
+        template! = W460LSpareTires,
+
+		part W460SpareTire
+        	{
+
+			model SpareTire1
+				{
+                		file = W460SSpareTire1,
+				}
+
+			model SpareTire2
+				{
+                		file = W460SSpareTire1,
+				}
+
+			model SpareTire3
+				{
+                		file = W460SSpareTire1,
+				}
+
+			area = TruckBed,
+			parent = TrunkDoor,
+			category = tire,
+			specificItem = false,
+			itemType = Base.W460NormalTire2;Base.W460WideTire2;Base.W460ModernTire2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1100,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = W460.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+			create = W460.Create.SpareTire,
+			init = W460.Init.SpareTire,
+			}
+		}
+	}
+
+    template vehicle W460LSpareTiresM
+		{
+		part W460SpareTire
+        	{
+
+			model SpareTireM
+				{
+                		file = W460LSpareTireM,
+				}
+
+			area = TruckBed,
+			parent = TrunkDoor,
+			category = tire,
+			specificItem = false,
+			itemType = Base.W460MilitaryTire2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.SpareTireM,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1100,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = W460.UninstallComplete.SpareTireM,
+            		}
+
+            		lua
+            		{
+			create = W460.Create.SpareTireM,
+			init = W460.Init.SpareTireM,
+			}
+		}
+	}
+		
+}

@@ -1,0 +1,138 @@
+module Base
+{
+
+	model 87fordB700stahpSign
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_stop_sign,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    template vehicle B700StopSign
+        {
+        
+        part B700StopSign
+       		{
+
+            model B700sToP
+			{
+                	file = 87fordB700stahpSign,
+			}
+
+            anim Close
+            {
+                anim = sign_opening,
+                reverse = TRUE,
+                rate = 1.0,
+            }
+
+            anim Open
+            {
+                anim = sign_opening,
+                rate = 1.0,
+            }
+
+            anim Closed
+            {
+                anim = sign_opening,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = sign_opening,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+
+            category = Other,
+            area = Sign,
+
+            door
+            {
+            }
+            anim Open
+            {
+                sound = VehicleTrunkOpenStandard,
+            }
+            anim Close
+            {
+                sound = VehicleTrunkCloseStandard,
+            }
+            anim Lock
+            {
+                sound = LockVehicleDoorStandard,
+            }
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorStandard,
+            }
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedStandard,
+            }
+            anim ActorOpen
+            {
+                anim = WindowOpenSuccess,
+                rate = 0.15,
+                angle = 0.0 270.0 0.0,
+            }
+            anim ActorClose
+            {
+                anim = Attack_Shove,
+                rate = 0.3,
+                angle = 0.0 270.0 0.0,
+            }
+
+            itemType = Base.87fordB700StopSign,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 500,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Door,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 500,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Door,
+            }
+            lua
+            {
+                create = Vehicles.Create.TrunkDoor,
+                init = Vehicles.Init.Door,
+                use = Vehicles.Use.TrunkDoor,
+            }
+        }
+
+	}
+}
+

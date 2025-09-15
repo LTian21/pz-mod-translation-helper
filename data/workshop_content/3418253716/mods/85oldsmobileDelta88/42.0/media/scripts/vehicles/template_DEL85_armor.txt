@@ -1,0 +1,510 @@
+module Base
+{
+	model 85oldsmobileDelta88WindshieldaW
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_windshield_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+    model 85oldsmobileDelta88WindshieldaM
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_windshield_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }    
+    model 85oldsmobileDelta88WindowflaW
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_window_fl_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85oldsmobileDelta88WindowflaM
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_window_fl_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85oldsmobileDelta88WindowfraW
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_window_fr_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85oldsmobileDelta88WindowfraM
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_window_fr_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85oldsmobileDelta88WindowrlaW
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_window_rl_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85oldsmobileDelta88WindowrlaM
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_window_rl_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85oldsmobileDelta88WindowrraW
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_window_rr_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85oldsmobileDelta88WindowrraM
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_window_rr_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85oldsmobileDelta88WindshieldRearaW
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_windshield_rear_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+    model 85oldsmobileDelta88WindshieldRearaM
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_windshield_rear_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle DEL85WindshieldArmor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model DEL85windaW
+				{
+                		file = 85oldsmobileDelta88WindshieldaW,
+				}
+            model DEL85windaM
+				{
+                		file = 85oldsmobileDelta88WindshieldaM,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.85gmBbodyWindshieldArmorW;Base.85gmBbodyWindshieldArmorM,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEL85.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = DEL85.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = DEL85.Create.WindshieldArmor,
+					init = DEL85.Init.WindshieldArmor,
+					}
+		}
+
+    }
+
+	template vehicle DEL85SideArmor
+	{
+
+		part DAMNFrontLeftArmor
+        {
+
+			model DEL85leftWindowaW
+				{
+                		file = 85oldsmobileDelta88WindowflaW,
+				}
+            model DEL85leftWindowaM
+				{
+                		file = 85oldsmobileDelta88WindowflaM,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.85gmBbodyFrontWindowArmorW;Base.85gmBbodyFrontWindowArmorM,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEL85.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEL85.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = DEL85.Create.FrontLeftArmor,
+					init = DEL85.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model DEL85rightWindowaW
+				{
+                		file = 85oldsmobileDelta88WindowfraW,
+				}
+            model DEL85rightWindowaM
+				{
+                		file = 85oldsmobileDelta88WindowfraM,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.85gmBbodyFrontWindowArmorW;Base.85gmBbodyFrontWindowArmorM,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEL85.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEL85.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = DEL85.Create.FrontRightArmor,
+					init = DEL85.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model DEL85leftWindowraW
+				{
+                		file = 85oldsmobileDelta88WindowrlaW,
+				}
+            model DEL85leftWindowraM
+				{
+                		file = 85oldsmobileDelta88WindowrlaM,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = WindowRearLeft,
+			specificItem = false,
+			itemType = Base.85gmBbodyRearWindowArmorW;Base.85gmBbodyRearWindowArmorM,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEL85.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEL85.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = DEL85.Create.RearLeftArmor,
+					init = DEL85.Init.RearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model DEL85rightWindowraW
+				{
+                		file = 85oldsmobileDelta88WindowrraW,
+				}
+            model DEL85rightWindowraM
+				{
+                		file = 85oldsmobileDelta88WindowrraM,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = WindowRearRight,
+			specificItem = false,
+			itemType = Base.85gmBbodyRearWindowArmorW;Base.85gmBbodyRearWindowArmorM,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEL85.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEL85.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = DEL85.Create.RearRightArmor,
+					init = DEL85.Init.RearRightArmor,
+					}
+		}
+
+    }
+
+    template vehicle DEL85WindshieldRearArmorSedan
+	{
+
+		part DAMNWindshieldRearArmor
+        	{
+
+			model DEL85windraW
+				{
+                		file = 85oldsmobileDelta88WindshieldRearaW,
+				}
+            model DEL85windraM
+				{
+                		file = 85oldsmobileDelta88WindshieldRearaM,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.85gmBbodyWindshieldRearArmorW;Base.85gmBbodyWindshieldRearArmorM,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEL85.InstallComplete.WindshieldRearArmorS,
+                	requireInstalled = WindshieldRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = DEL85.UninstallComplete.WindshieldRearArmorS,
+            		}
+
+            		lua
+            		{
+					create = DEL85.Create.WindshieldRearArmorS,
+					init = DEL85.Init.WindshieldRearArmorS,
+					}
+		}
+	}
+
+    template vehicle DEL85ArmorSedan
+	{
+        template! = DEL85WindshieldArmor,
+        template! = DEL85SideArmor,
+        template! = DEL85WindshieldRearArmorSedan,
+    }
+
+}

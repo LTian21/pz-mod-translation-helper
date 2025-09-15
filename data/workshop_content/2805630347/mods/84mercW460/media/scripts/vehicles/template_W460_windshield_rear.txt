@@ -1,0 +1,293 @@
+module Base
+{
+
+    model W460Lrearwindshield
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_windshield_rear,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+    model W460Srearwindshield
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_swb_windshield_rear,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+    model W460LrearwindshieldM
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_windshield_rearM,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle W460LRearWindshield
+	{
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = W460Lrearwindshield,
+            }
+            parent = TrunkDoor,
+            anim Close
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                rate = 1.5,
+            }
+
+            anim Open
+            {
+                anim = trunk_opening,
+                rate = 2.0,
+            }
+
+            anim Closed
+            {
+                anim = trunk_opening,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+            
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.W460RearWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                requireUninstalled = W460WindshieldRearArmor,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+    template vehicle W460SRearWindshield
+	{
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = W460Srearwindshield,
+            }
+            parent = TrunkDoor,
+            anim Close
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                rate = 1.5,
+            }
+
+            anim Open
+            {
+                anim = trunk_opening,
+                rate = 2.0,
+            }
+
+            anim Closed
+            {
+                anim = trunk_opening,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+            
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.W460RearWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                requireUninstalled = W460WindshieldRearArmor,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle W460LRearWindshieldM
+	{
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = W460LrearwindshieldM,
+            }
+            parent = TrunkDoor,
+            anim Close
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                rate = 1.5,
+            }
+
+            anim Open
+            {
+                anim = trunk_opening,
+                rate = 2.0,
+            }
+
+            anim Closed
+            {
+                anim = trunk_opening,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+            
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.W460RearSplitWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                requireUninstalled = W460WindshieldRearArmor,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+}

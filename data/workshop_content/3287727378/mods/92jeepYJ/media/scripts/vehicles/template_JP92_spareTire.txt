@@ -1,0 +1,79 @@
+module Base
+{
+    model 92jeepYJSpareTire
+    {
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_sparetire,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle JP92SpareTire
+	{
+		part JP92SpareTire
+        {
+			model SpareTire0
+			{
+                file = 92jeepYJSpareTire,
+			}
+
+            model SpareTire1
+			{
+                file = 92jeepYJSpareTire,
+			}
+
+            area = TruckBed,
+            parent = TrunkDoor,
+            category = tire,
+            specificItem = false,
+            itemType = Base.92jeepYJTire2;Base.84jeepXJTire2,
+            mechanicRequireKey = false,
+
+			table install
+			{
+                items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 900,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP92.InstallComplete.SpareTire,
+                    requireInstalled = TrunkDoor,
+            		}
+
+            table uninstall
+            {
+                items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+                    time = 900,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = JP92.UninstallComplete.SpareTire,
+            		}
+
+            	lua
+            	{
+                create = JP92.Create.SpareTire,
+                init = JP92.Init.SpareTire,
+                }
+		}
+	}
+}

@@ -1,0 +1,83 @@
+module Base
+{
+
+	model 67gt500Roofrack0
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_roofrack,
+		texture = Vehicles/Vehicles_67gt500_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle GT500Roofrack
+	{
+		part GT500Roofrack
+		{
+
+			model GT500Roofrack0
+				{
+                		file = 67gt500Roofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.67gt500Roofrack,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1000,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1000,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = DAMN.Create.Blank,
+				}
+		}
+	}
+}
+

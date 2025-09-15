@@ -1,0 +1,64 @@
+module Base
+{
+	template vehicle PAR85SpareTires
+	{
+		part DAMNSpareTire
+        	{
+
+			category = Other,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.85gmBbodyTire0;Base.85gmBbodyTire1;Base.85gmBbodyTire2;Base.85gmBbodyTire3;Base.85gmBbodyTire4;Base.85gmBbodyTire5;Base.85gmBbodyTire6,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PAR85.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = PAR85.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = PAR85.Create.SpareTire,
+				init = PAR85.Init.SpareTire,
+				}
+		}
+	}
+}

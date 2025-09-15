@@ -1,0 +1,76 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_StandingVault
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Standing Vault,
+			Icon		= location_business_bank_01_42,
+		}
+	}
+
+    entity StandingVault
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_StandingVault,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = location_business_bank_01_45,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_business_bank_01_44,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_business_bank_01_43,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_business_bank_01_42,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:15,
+            category      = Containers_Metal,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_metalLockerDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SmallSheetMetal],
+                item 4 [Base.SheetMetal],
+                item 6 [Base.MetalBar;Base.MetalPipe],
+                item 2 [Base.Hinge],
+                item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

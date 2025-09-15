@@ -1,0 +1,80 @@
+module Base
+{
+/****************************** 50 ******************************/
+item Bullets50
+    {
+        DisplayCategory = Ammo,
+        Count	=	5,
+        Weight	=	0.02,
+        AlwaysWelcomeGift	=	TRUE,
+        Type	=	Normal,
+        DisplayName	=	Bullets50,
+        Icon	=	Bullets50,
+        MetalValue = 1,
+        WorldStaticModel = RifleAmmo,
+    }
+item Bullets50Clip
+    {
+        DisplayCategory = Ammo,
+        CanStack	=	FALSE,
+        Weight	=	0.5,
+        Type	=	Normal,
+        InsertAllBulletsLoad		= TRUE,
+        DisplayName	=	.50弹匣,
+        Icon	=	Bullets50Clip,
+        MaxAmmo = 10,
+        AmmoType = Base.Bullets50,
+        StaticModel = GunMagazine,
+        GunType = Base.M82_cat;M200_cat;AWM_cat;SVD_cat;GM6_cat;QLU_11;Base.AX50_cat,
+        WorldStaticModel = Bullets50Clip,
+    }
+item Bullets50Box
+    {
+        DisplayCategory = Ammo,
+        Weight	=	0.6,
+        AlwaysWelcomeGift	=	TRUE,
+        Type	=	Normal,
+        DisplayName	=	Bullets50Box,
+        Icon	=	Bullets50Box1,
+        MetalValue = 40,
+        WorldStaticModel = RifleAmmoBox,
+        PlaceOneSound = BoxOfRoundsPlaceOne,
+        PlaceMultipleSound = BoxOfRoundsPlaceAll,
+    }
+
+craftRecipe Place50AmmoInBox
+	{
+        timedAction = PlaceAmmoInBox,
+		Time = 15,
+		category = Ammunition,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 50 [Base.Bullets50] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.Bullets50Box,
+		}
+	}
+craftRecipe OpenBoxOfBullets10
+	{
+        timedAction = OpenAmmoBox,
+		Time = 15,
+		category = Ammunition,
+        Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 1 [Base.Bullets50Box] mappers[ammoTypes] flags[Prop2] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 10 mapper:ammoTypes,
+		}
+        	itemMapper ammoTypes
+        	{
+			Base.Bullets50 = Base.Bullets50Box,
+			
+		}
+	}
+}

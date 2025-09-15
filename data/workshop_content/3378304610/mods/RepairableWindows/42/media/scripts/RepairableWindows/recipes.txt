@@ -1,0 +1,52 @@
+module RepairableWindows {
+    craftRecipe MakeLargeSheetMold {
+        timedAction = Craft_PotteryBench,
+        time = 100,
+        Tags = PotteryBench,
+        xpAward = Pottery:15,
+        category = Pottery,
+
+        inputs {
+            item 12 [Base.Clay],
+            item 1 [Base.ClayTool] mode:keep,
+        }
+
+        outputs {
+            item 1 RepairableWindows.ClayLargeSheetMoldUnfired,
+        }
+    }
+
+    craftRecipe FireClayLargeSheetMold {
+        time = 20,
+        Tags = KilnSmall;KilnLarge,
+        category = Pottery,
+
+        inputs {
+            item 1 [RepairableWindows.ClayLargeSheetMoldUnfired],
+            item 1 tags[StartFire],
+            item 1 [Base.Log;Base.Charcoal],
+        }
+
+        outputs {
+            item 1 RepairableWindows.ClayLargeSheetMold,
+        }
+    }
+
+    craftRecipe MakeLargeGlassPane {
+        time = 120,
+        Tags = AnySurfaceCraft;Glassmaking,
+        category = Glassmaking,
+        needToBeLearn = true,
+        metaRecipe = MakeGlassPanel,
+        xpAward = Glassmaking:25,
+
+        inputs {
+            item 1 [RepairableWindows.ClayLargeSheetMold] mode:keep,
+            item 4 [Base.CeramicCrucibleWithGlass],
+        }
+
+        outputs {
+            item 1 RepairableWindows.LargeGlassPane,
+        }
+    }
+}

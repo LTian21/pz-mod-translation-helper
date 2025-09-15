@@ -1,0 +1,235 @@
+module Base
+{
+    /************************ CRAFT STUFF ************************/
+
+    recipe Create-Sheets
+    {
+       destroy RippedSheets=6,
+       keep [Recipe.GetItemTypes.Scissors]/[Recipe.GetItemTypes.SharpKnife],
+
+       Result:Sheet,
+	   Sound:ClothesRipping,
+       Time:100.0,
+       AnimNode:RipSheets,
+    }
+
+    /************************ CONVERT STUFF ************************/
+
+    /* Kill me. This took 500 years, and looks ridiculous. But if I made a function it'd be just as bad, so in pure Dracula fashion, have at you! */
+    recipe Make-Sheets
+    {
+       destroy BathTowel/Apron_Black/Apron_IceCream/Apron_Jay/Apron_PileOCrepe/Apron_PizzaWhirled/Apron_Spiffos/Apron_White/Apron_WhiteTEXTURE/Boilersuit/Boilersuit_BlueRed/Boilersuit_Flying/Boilersuit_Prisoner/Boilersuit_PrisonerKhaki/Boilersuit_Yellow/Dungarees/Dress_Knees/DressKnees_Straps/Dress_Long/Dress_long_Straps/Dress_Normal/Dress_Straps/Dress_Short/Dress_SmallBlackStrapless/Dress_SmallBlackStraps/Dress_SmallStrapless/Dress_SmallStraps/Dress_SatinNegligee/Ghillie_Top/HazmatSuit/HospitalGown/HoodieDOWN_WhiteTINT/HoodieUP_WhiteTINT/Jacket_ArmyCamoDesert/Jacket_ArmyCamoGreen/Jacket_Black/Jacket_Chef/Jacket_CoatArmy/Jacket_Fireman/JacketLong_Doctor/Jacket_NavyBlue/JacketLong_Random/JacketLong_Santa/JacketLong_SantaGreen/Jacket_LeatherBarrelDogs/Jacket_LeatherIronRodent/Jacket_LeatherWildRacoons/Jacket_Police/Jacket_Padded/Jacket_PaddedDOWN/Jacket_Ranger/Jacket_Shellsuit_Black/Jacket_Shellsuit_Blue/Jacket_Shellsuit_Green/Jacket_Shellsuit_Pink/Jacket_Shellsuit_Teal/Jacket_Shellsuit_TINT/Jacket_Varsity/Jacket_WhiteTINT/Jumper_DiamondPatternTINT/Jumper_PoloNeck/Jumper_RoundNeck/Jumper_TankTopDiamondTINT/Jumper_TankTopTINT/Jumper_VNeck/LongJohns/LongCoat_Bathrobe/PonchoGreen/PonchoGreenDOWN/PonchoYellow/PonchoYellowDOWN/SpiffoSuit/Suit_Jacket/Suit_JacketTINT/Shirt_Jockey01/Shirt_Jockey02/Shirt_Jockey03/Shirt_Jockey04/Shirt_Jockey05/Shirt_Jockey06/Shirt_Lumberjack/Shirt_OfficerWhite/Shirt_PoliceBlue/Shirt_PoliceGrey/Shirt_Priest/Shirt_PrisonGuard/Shirt_Ranger/Shirt_Scrubs/Shirt_FormalTINT/Shirt_FormalWhite/Shirt_FormalWhite_ShortSleeve/Shirt_FormalWhite_ShortSleeveTINT/Shirt_Workman/WeddingDress/WeddingJacket,
+       keep [Recipe.GetItemTypes.Scissors]/[Recipe.GetItemTypes.SharpKnife],
+
+       Result:Sheet,
+	   Sound:ClothesRipping,
+       Time:100.0,
+       AnimNode:RipSheets,
+    }
+
+	/************************ EMPTY STUFF ************************/
+
+    recipe Empty-Bag
+    {
+       ConcretePowder/PlasterPowder,
+
+       Result:EmptyConcreteBag,
+	    Sound:PutItemInBag,
+       Time:100.0,
+    }
+
+    recipe Empty-Sack
+    {
+      destroy Dirtbag/Gravelbag/Sandbag=1,
+
+       Result:EmptySandbag,
+	   Sound:PutItemInBag,
+       Time:100.0,
+    }
+
+	/************************ CREATE STUFF ************************/
+
+    recipe Create Spear
+    {
+        Plank/TreeBranch/Mop/Broom,
+        keep [Recipe.GetItemTypes.SharpKnife]/SharpedStone/MeatCleaver,
+
+        Result:SpearCrafted,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.CreateSpear,
+        Category:Survivalist,
+        OnGiveXP:Recipe.OnGiveXP.WoodWork5,
+        Override:true
+    }
+
+   /************************ SPEAR ATTACHMENTS ************************/
+
+    recipe Attach Machete to Spear
+    {
+        SpearCrafted,
+        Machete,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearMachete,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Bread Knife to Spear
+    {
+        SpearCrafted,
+        BreadKnife,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearBreadKnife,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Butter Knife to Spear
+    {
+        SpearCrafted,
+        ButterKnife,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearButterKnife,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Fork to Spear
+    {
+        SpearCrafted,
+        Fork,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearFork,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Letter Opener to Spear
+    {
+        SpearCrafted,
+        LetterOpener,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearLetterOpener,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Scalpel to Spear
+    {
+        SpearCrafted,
+        Scalpel,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearScalpel,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Spoon to Spear
+    {
+        SpearCrafted,
+        Spoon,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearSpoon,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Scissors to Spear
+    {
+        SpearCrafted,
+        Scissors,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearScissors,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Hand Fork to Spear
+    {
+        SpearCrafted,
+        HandFork,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearHandFork,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Screwdriver to Spear
+    {
+        SpearCrafted,
+        Screwdriver,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearScrewdriver,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Kitchen Knife to Spear
+    {
+        SpearCrafted,
+        KitchenKnife,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearKnife,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Hunting Knife to Spear
+    {
+        SpearCrafted,
+        HuntingKnife,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearHuntingKnife,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+
+    recipe Attach Ice Pick to Spear
+    {
+        SpearCrafted,
+        IcePick,
+        Rope/DuctTape/RippedSheets/LeatherStrips,
+
+        Result:SpearIcePick,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+        Override:true
+    }
+}

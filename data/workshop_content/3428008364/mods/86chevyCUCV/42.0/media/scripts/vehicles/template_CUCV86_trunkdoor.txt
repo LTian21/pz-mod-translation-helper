@@ -1,0 +1,1306 @@
+module Base
+{
+	model 86chevyM1008TrunkDoor
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_trunkLid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 86chevyM1009TrunkDoor
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86blazer_tailgate,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 86chevyM1009TrunkDoor2
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86blazer_tailgate_ksp,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 86chevyM1010TrunkDoor
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86amb_trunkLid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 86chevyM1028TrunkDoor
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86flat_tailgate,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 86chevyM1031TrunkDoor
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86con_trunkLid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 86chevyM1031StorageDoorFL
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86con_lid_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 86chevyM1031StorageDoorFR
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86con_lid_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 86chevyM1031StorageDoorRL
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86con_lid_rl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 86chevyM1031StorageDoorRR
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86con_lid_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle M1008TrunkDoor
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfmyyy32708
+			{
+				file = 86chevyM1008TrunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.86chevyM1008Tailgate,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = WindshieldRear,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle M1009TrunkDoor
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfmyyy32709
+			{
+				file = 86chevyM1009TrunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.86chevyK5Tailgate,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = WindshieldRear,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle M1009TrunkDoorKSP
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfmyyy3270934
+			{
+				file = 86chevyM1009TrunkDoor2,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.86chevyK5Tailgate,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = WindshieldRear,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle M1010TrunkDoor
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfmyyy32710
+			{
+				file = 86chevyM1010TrunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.80chevyM1010Tailgate,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = WindshieldRear,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle M1028TrunkDoor
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfmyyy32728
+			{
+				file = 86chevyM1028TrunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.80chevyM1028Tailgate,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = WindshieldRear,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle M1031TrunkDoor
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfmyyy32731
+			{
+				file = 86chevyM1031TrunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.80chevyM1031Tailgate,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = WindshieldRear,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+
+        part CUCVDoorFL
+		{
+
+			model SweetTrunkOfmyyy3273363
+			{
+				file = 86chevyM1031StorageDoorFL,
+			}
+
+			anim Close
+			{
+				anim = storage_fl_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = storage_fl_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage_fl_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage_fl_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageFL,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 270.0 0.0,
+			}
+			itemType = Base.86chevyCUCVstorageLid,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+
+        part CUCVDoorRL
+		{
+
+			model SweetTrunkOfmyyy3273365
+			{
+				file = 86chevyM1031StorageDoorRL,
+			}
+
+			anim Close
+			{
+				anim = storage_rl_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = storage_rl_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage_rl_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage_rl_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageRL,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 270.0 0.0,
+			}
+			itemType = Base.86chevyCUCVstorageLids,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+
+        part CUCVDoorFR
+		{
+
+			model SweetTrunkOfmyyy3273365
+			{
+				file = 86chevyM1031StorageDoorFR,
+			}
+
+			anim Close
+			{
+				anim = storage_fr_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = storage_fr_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage_fr_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage_fr_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageFR,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 90.0 0.0,
+			}
+			itemType = Base.86chevyCUCVstorageLid,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+
+        part CUCVDoorRR
+		{
+
+			model SweetTrunkOfmyyy3273369
+			{
+				file = 86chevyM1031StorageDoorRR,
+			}
+
+			anim Close
+			{
+				anim = storage_rr_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = storage_rr_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage_rr_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage_rr_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageRR,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 90.0 0.0,
+			}
+			itemType = Base.86chevyCUCVstorageLids,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}

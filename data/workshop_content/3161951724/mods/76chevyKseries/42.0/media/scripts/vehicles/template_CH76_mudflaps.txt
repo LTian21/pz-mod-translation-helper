@@ -1,0 +1,137 @@
+module Base
+{
+	model 76chevyKseriesMudflaps
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK_fd_mudflaps,
+		texture = vehicles/Vehicles_fdBoxBed_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 76chevyCseriesMudflaps
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76wrecker_mudflaps,
+		texture = vehicles/Vehicles_76chevyKseries_Interior3,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CH76FDMudflaps
+	{
+		part CH76Mudflaps
+        	{
+
+			model Mudflaps0
+				{
+                		file = 76chevyKseriesMudflaps,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.76chevyKseriesFDMudflaps,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+
+                	time = 1200,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            	table uninstall
+            		{
+
+					time = 900,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+	}
+
+    template vehicle CH76FDMudflapsCC
+	{
+            template! = CH76FDMudflaps,
+
+		part CH76Mudflaps
+        {
+
+			model Mudflaps0
+				{
+                		file = 76chevyKseriesMudflaps,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+        }
+    }
+
+    template vehicle CH76MudflapsWreckerShort
+	{
+		part CH76Mudflaps
+        	{
+
+			model Mudflaps0
+				{
+                		file = 76chevyCseriesMudflaps,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.76chevyCseriesWreckerMudflaps,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+
+                	time = 1200,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            	table uninstall
+            		{
+
+					time = 900,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		    }
+		}
+
+    template vehicle CH76MudflapsWreckerLong
+	{
+        template! = CH76MudflapsWreckerShort,
+
+		part CH76Mudflaps
+        	{
+
+			model Mudflaps0
+				{
+                		file = 76chevyCseriesMudflaps,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+            }
+    }
+}

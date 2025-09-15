@@ -1,0 +1,96 @@
+module Base
+{
+    model W460SbumperRear1
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_swb_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model W460LbumperRear1
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle W460LBumpersRear
+		{
+		part DAMNBumperRear
+        	{
+
+			model BumperRear1
+				{
+                		file = W460LbumperRear1,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.W460BumperRear1,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 650,
+			skills = Mechanics:3,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = W460.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+			create = W460.Create.BumperRear,
+			init = W460.Init.BumperRear,
+			}
+		}
+	}
+
+    template vehicle W460SBumpersRear
+	{
+            template! = W460LBumpersRear,
+            
+            part DAMNBumperRear
+            {
+
+                model BumperRear1
+                    {
+                            file = W460SbumperRear1,
+                    }
+
+            }
+	}
+}

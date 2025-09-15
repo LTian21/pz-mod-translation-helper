@@ -1,0 +1,217 @@
+module Base
+{
+    model Tatra8156X6Civil_TrunkDoor
+    {
+        mesh = vehicles/Vehicles_Civil6X6Tatra815_Body|trunkdoor,
+        shader = vehicle,
+		static = FALSE,
+        scale = 1,
+		boneWeight = TrunkBone 1.0,
+    }
+    model Tatra815LeftContainerDoor
+	{
+		mesh = vehicles/Vehicles_6X6Tatra815_Body|SideContainer,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+		boneWeight = SideBoxBone 1.0,
+	}
+
+template vehicle Tatra815ContainerDoor
+	{
+		part LeftContainerDoor
+		{
+			category = bodywork,
+			area = LeftContainer,
+			door
+			
+			model Default
+			{
+				file = Tatra815Container,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+                       anim Close
+			{
+                                sound = VehicleTrunkCloseStandard,
+				anim = SideBox_closing,
+				reverse = TRUE,
+				rate = 1.5,
+			}
+
+			anim Open
+			{
+                               sound = VehicleTrunkOpenStandard,
+				anim = SideBox_closing,
+				reverse = FALSE,
+				rate = 1.0,
+			}
+
+			anim Closed
+			{
+				anim = SideBox_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = SideBox_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+
+			itemType = Base.TrunkDoor,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.TrunkDoor,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+         }
+
+	template vehicle Tatra8156X6Civil_trunkdoor
+	{
+        template = TrunkDoor,
+
+		part TrunkDoor
+		{
+            model Default
+			{
+				file = Tatra8156X6Civil_TrunkDoor,
+			}
+
+			category = bodywork,
+            
+			area = TruckBed,
+            mechanicRequireKey = true,
+			repairMechanic = true,
+
+			anim Close
+			{                        
+                                sound = VehicleTrunkCloseStandard,       
+				anim = TrunkDoor_closing,
+				reverse = FALSE,
+				rate = 1.5,
+			}
+			anim Open
+			{
+                                sound = VehicleTrunkCloseStandard,
+				anim = TrunkDoor_closing,
+				reverse = TRUE,
+				rate = 1.5,
+			}
+			anim Closed
+			{
+				anim = TrunkDoor_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+			anim Opened
+			{
+				anim = TrunkDoor_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = ATATuning2.InstallComplete.Door,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = ATATuning2.UninstallComplete.Door,
+				requireUninstalled = ATA2VisualSpoilerRear,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.DefaultModel,
+                init = ATATuning2.Init.Door,
+                update = Vehicles.Update.TrunkDoor,
+                use = Vehicles.Use.TrunkDoor,
+			}
+
+                
+		
+			
+
+		
+		}
+
+	
+	}
+}

@@ -1,0 +1,722 @@
+module NnC
+{
+
+imports
+	{
+		Base
+	}
+	
+	craftRecipe MakeBluntWrap
+	{
+        timedAction = Making,
+		Time = 50,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [Base.TobaccoDried] mode:destroy,
+		}
+		outputs
+		{
+			item 1 NnC.BluntWrap,
+		}
+	}
+	craftRecipe MakeRollingPapers
+	{
+        timedAction = Making,
+		Time = 100,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 2 [Base.SheetPaper2] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.CigaretteRollingPapers,
+		}
+	}
+	craftRecipe OpenWeedBrick
+	{
+        timedAction = Making,
+		Time = 300,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.WeedBrick] mode:destroy,
+		}
+		outputs
+		{
+			item 8 NnC.WeedBaggieAK,
+			item 8 NnC.WeedBaggieNorthernLights,
+			item 9 NnC.WeedBaggieSourDiesel,
+		}
+	}
+	craftRecipe RollBlunt
+	{
+        timedAction = Making,
+		Time = 75,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [Base.Cigarillo;NnC.BluntWrap] mode:destroy,
+			item 2 [NnC.WeedBaggieAK;NnC.WeedBaggieNorthernLights;NnC.WeedBaggieSourDiesel;NnC.KiefJar] mappers[BluntWithWeed] flags[IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:BluntWithWeed,
+		}
+        itemMapper BluntWithWeed
+        {
+			NnC.BluntAK = NnC.WeedBaggieAK,
+			NnC.BluntNorthernLights = NnC.WeedBaggieNorthernLights,
+			NnC.BluntSourDiesel = NnC.WeedBaggieSourDiesel,
+			NnC.BluntKief = NnC.KiefJar,
+		}
+	}
+	craftRecipe RollCannagar
+	{
+        timedAction = Making,
+		Time = 75,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [Base.Cigar] mode:destroy,
+			item 1 [NnC.WeedBaggieAK;NnC.WeedBaggieNorthernLights;NnC.WeedBaggieSourDiesel;NnC.KiefJar] mappers[CannagarWithWeed] flags[IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:CannagarWithWeed,
+		}
+        itemMapper CannagarWithWeed
+        {
+			NnC.CannagarAK = NnC.WeedBaggieAK,
+			NnC.CannagarNL = NnC.WeedBaggieNorthernLights,
+			NnC.CannagarSD = NnC.WeedBaggieSourDiesel,
+			NnC.CannagarKief = NnC.KiefJar,
+		}
+	}
+	craftRecipe RollJoint
+	{
+        timedAction = Making,
+		Time = 75,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 tags[RollingPaper],
+			item 2 [NnC.WeedBaggieAK;NnC.WeedBaggieNorthernLights;NnC.WeedBaggieSourDiesel;NnC.KiefJar] mappers[JointWithWeed] flags[IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:JointWithWeed,
+		}
+        itemMapper JointWithWeed
+        {
+			NnC.JointAK = NnC.WeedBaggieAK,
+			NnC.JointNorthernLights = NnC.WeedBaggieNorthernLights,
+			NnC.JointSourDiesel = NnC.WeedBaggieSourDiesel,
+			NnC.JointKief = NnC.KiefJar,
+		}
+	}
+	craftRecipe RollSpliff
+	{
+        timedAction = Making,
+		Time = 75,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 tags[RollingPaper],
+			item 1 [NnC.WeedBaggieAK;NnC.WeedBaggieNorthernLights;NnC.WeedBaggieSourDiesel;NnC.KiefJar] mappers[SpliffWithWeed],
+			item 1 [Base.TobaccoLoose],
+		}
+		outputs
+		{
+			item 1 mapper:SpliffWithWeed,
+		}
+        itemMapper SpliffWithWeed
+        {
+			NnC.SpliffAK = NnC.WeedBaggieAK,
+			NnC.SpliffNL = NnC.WeedBaggieNorthernLights,
+			NnC.SpliffSD = NnC.WeedBaggieSourDiesel,
+			NnC.SpliffKief = NnC.KiefJar,
+		}
+	}
+	craftRecipe UnpackSmokes
+	{
+        timedAction = Making,
+		Time = 25,
+        OnTest = Recipe.OnTest.IsFull,
+        Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.BluntPackAK;NnC.BluntPackNL;NnC.BluntPackSD;NnC.BluntPackKief;NnC.JointPackAK;NnC.JointPackNL;NnC.JointPackSD;NnC.JointPackKief] mappers[UnpackSmoke] mode:destroy flags[IsFull;AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 20 mapper:UnpackSmoke,
+		}
+        itemMapper UnpackSmoke
+        {
+			NnC.BluntAK = NnC.BluntPackAK,
+			NnC.BluntNorthernLights = NnC.BluntPackNL,
+			NnC.BluntSourDiesel = NnC.BluntPackSD,
+			NnC.BluntKief = NnC.BluntPackKief,
+			NnC.JointAK = NnC.JointPackAK,
+			NnC.JointNorthernLights = NnC.JointPackNL,
+			NnC.JointSourDiesel = NnC.JointPackSD,
+			NnC.JointKief = NnC.JointPackKief,
+		}
+	}
+	craftRecipe PackSmokes
+	{
+        timedAction = Making,
+		Time = 25,
+        Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 20 [NnC.BluntAK;NnC.BluntNorthernLights;NnC.BluntSourDiesel;NnC.BluntKief;NnC.JointAK;NnC.JointNorthernLights;NnC.JointSourDiesel;NnC.JointKief] mappers[PackSmoke] flags[AllowFavorite;InheritFavorite;IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:PackSmoke,
+		}
+        itemMapper PackSmoke
+        {
+			NnC.BluntPackAK = NnC.BluntAK,
+			NnC.BluntPackNL = NnC.BluntNorthernLights,
+			NnC.BluntPackSD = NnC.BluntSourDiesel,
+			NnC.BluntPackKief = NnC.BluntKief,
+			NnC.JointPackAK = NnC.JointAK,
+			NnC.JointPackNL = NnC.JointNorthernLights,
+			NnC.JointPackSD = NnC.JointSourDiesel,
+			NnC.JointPackKief = NnC.JointKief,
+		}
+	}
+
+	craftRecipe TakeASmoke
+	{
+        timedAction = Making,
+		Time = 15,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.BluntPackAK;NnC.BluntPackNL;NnC.BluntPackSD;NnC.BluntPackKief;NnC.JointPackAK;NnC.JointPackNL;NnC.JointPackSD;NnC.JointPackKief] mappers[TakeSmoke] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 mapper:TakeSmoke,
+		}
+        itemMapper TakeSmoke
+        {
+			NnC.BluntAK = NnC.BluntPackAK,
+			NnC.BluntNorthernLights = NnC.BluntPackNL,
+			NnC.BluntSourDiesel = NnC.BluntPackSD,
+			NnC.BluntKief = NnC.BluntPackKief,
+			NnC.JointAK = NnC.JointPackAK,
+			NnC.JointNorthernLights = NnC.JointPackNL,
+			NnC.JointSourDiesel = NnC.JointPackSD,
+			NnC.JointKief = NnC.JointPackKief,
+		}
+	}
+	craftRecipe AddABluntAK
+	{
+        timedAction = Making,
+		Time = 15,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.BluntAK] flags[AllowFavorite;InheritFavorite],
+			item 1 [NnC.BluntPackAK] mode:keep flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe AddABluntNL
+	{
+        timedAction = Making,
+		Time = 15,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.BluntNorthernLights] flags[AllowFavorite;InheritFavorite],
+			item 1 [NnC.BluntPackNL] mode:keep flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe AddABluntSD
+	{
+        timedAction = Making,
+		Time = 15,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.BluntSourDiesel] flags[AllowFavorite;InheritFavorite],
+			item 1 [NnC.BluntPackSD] mode:keep flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe AddABluntKief
+	{
+        timedAction = Making,
+		Time = 15,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.BluntKief] flags[AllowFavorite;InheritFavorite],
+			item 1 [NnC.BluntPackKief] mode:keep flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+		}
+	}
+craftRecipe AddAJointAK
+	{
+        timedAction = Making,
+		Time = 15,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.JointAK] flags[AllowFavorite;InheritFavorite],
+			item 1 [NnC.JointPackAK] mode:keep flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe AddAJointNL
+	{
+        timedAction = Making,
+		Time = 15,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.JointNorthernLights] flags[AllowFavorite;InheritFavorite],
+			item 1 [NnC.JointPackNL] mode:keep flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe AddAJointSD
+	{
+        timedAction = Making,
+		Time = 15,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.JointSourDiesel] flags[AllowFavorite;InheritFavorite],
+			item 1 [NnC.JointPackSD] mode:keep flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe AddAJointKief
+	{
+        timedAction = Making,
+		Time = 15,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.JointKief] flags[AllowFavorite;InheritFavorite],
+			item 1 [NnC.JointPackKief] mode:keep flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe PackBong
+	{
+        timedAction = PutSeedsInPacket,
+		Time = 15,
+		Tags = InHandCraft,
+		/*OnCreate = Recipe.OnCreate.JarLid,*/
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.Bong1Green;NnC.Bong1Purple;NnC.Bong1Red;NnC.Bong2Pink;NnC.Bong2Rainbow;NnC.Bong2Red;NnC.BongPoke] mappers[BongWithWeed] mode:destroy,
+			item 2 [NnC.WeedBaggieAK;NnC.WeedBaggieNorthernLights;NnC.WeedBaggieSourDiesel;NnC.KiefJar] mappers[BongWithWeed] flags[IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:BongWithWeed,
+		}
+        itemMapper BongWithWeed
+        {
+			NnC.Bong1GreenAK = NnC.Bong1Green;NnC.WeedBaggieAK,
+			NnC.Bong1PurpleAK = NnC.Bong1Purple;NnC.WeedBaggieAK,
+			NnC.Bong1RedAK = NnC.Bong1Red;NnC.WeedBaggieAK,
+			NnC.Bong2PinkAK = NnC.Bong2Pink;NnC.WeedBaggieAK,
+			NnC.Bong2RainbowAK = NnC.Bong2Rainbow;NnC.WeedBaggieAK,
+			NnC.Bong2RedAK = NnC.Bong2Red;NnC.WeedBaggieAK,
+			NnC.BongPokeAK = NnC.BongPoke;NnC.WeedBaggieAK,
+
+			NnC.Bong1GreenNL = NnC.Bong1Green;NnC.WeedBaggieNorthernLights,
+			NnC.Bong1PurpleNL = NnC.Bong1Purple;NnC.WeedBaggieNorthernLights,
+			NnC.Bong1RedNL = NnC.Bong1Red;NnC.WeedBaggieNorthernLights,
+			NnC.Bong2PinkNL = NnC.Bong2Pink;NnC.WeedBaggieNorthernLights,
+			NnC.Bong2RainbowNL = NnC.Bong2Rainbow;NnC.WeedBaggieNorthernLights,
+			NnC.Bong2RedNL = NnC.Bong2Red;NnC.WeedBaggieNorthernLights,
+			NnC.BongPokeNL = NnC.BongPoke;NnC.WeedBaggieNorthernLights,
+
+			NnC.Bong1GreenSD = NnC.Bong1Green;NnC.WeedBaggieSourDiesel,
+			NnC.Bong1PurpleSD = NnC.Bong1Purple;NnC.WeedBaggieSourDiesel,
+			NnC.Bong1RedSD = NnC.Bong1Red;NnC.WeedBaggieSourDiesel,
+			NnC.Bong2PinkSD = NnC.Bong2Pink;NnC.WeedBaggieSourDiesel,
+			NnC.Bong2RainbowSD = NnC.Bong2Rainbow;NnC.WeedBaggieSourDiesel,
+			NnC.Bong2RedSD = NnC.Bong2Red;NnC.WeedBaggieSourDiesel,
+			NnC.BongPokeSD = NnC.BongPoke;NnC.WeedBaggieSourDiesel,
+
+			NnC.Bong1GreenKief = NnC.Bong1Green;NnC.KiefJar,
+			NnC.Bong1PurpleKief = NnC.Bong1Purple;NnC.KiefJar,
+			NnC.Bong1RedKief = NnC.Bong1Red;NnC.KiefJar,
+			NnC.Bong2PinkKief = NnC.Bong2Pink;NnC.KiefJar,
+			NnC.Bong2RainbowKief = NnC.Bong2Rainbow;NnC.KiefJar,
+			NnC.Bong2RedKief = NnC.Bong2Red;NnC.KiefJar,
+			NnC.BongPokeKief = NnC.BongPoke;NnC.KiefJar,
+		}
+	}
+	craftRecipe PackPipe
+	{
+        timedAction = PutSeedsInPacket,
+		Time = 15,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.Pipe1Green;NnC.Pipe1Orange;NnC.Pipe1Yellow;Base.CanPipe;Base.SmokingPipe] mappers[PipeWithWeed] mode:destroy,
+			item 1 [NnC.WeedBaggieAK;NnC.WeedBaggieNorthernLights;NnC.WeedBaggieSourDiesel;NnC.KiefJar] mappers[PipeWithWeed],
+		}
+		outputs
+		{
+			item 1 mapper:PipeWithWeed,
+		}
+        itemMapper PipeWithWeed
+        {
+			NnC.CanPipeAK = Base.CanPipe;NnC.WeedBaggieAK,
+			NnC.CanPipeNorthernLights = Base.CanPipe;NnC.WeedBaggieNorthernLights,
+			NnC.CanPipeSourDiesel = Base.CanPipe;NnC.WeedBaggieSourDiesel,
+			NnC.CanPipeKief = Base.CanPipe;NnC.KiefJar,
+			
+			NnC.SmokingPipeAK = Base.SmokingPipe;NnC.WeedBaggieAK,
+			NnC.SmokingPipeNorthernLights = Base.SmokingPipe;NnC.WeedBaggieNorthernLights,
+			NnC.SmokingPipeSourDiesel = Base.SmokingPipe;NnC.WeedBaggieSourDiesel,
+			NnC.SmokingPipeKief = Base.SmokingPipe;NnC.KiefJar,
+			
+			NnC.Pipe1GreenAK = NnC.Pipe1Green;NnC.WeedBaggieAK,
+			NnC.Pipe1GreenNL = NnC.Pipe1Green;NnC.WeedBaggieNorthernLights,
+			NnC.Pipe1GreenSD = NnC.Pipe1Green;NnC.WeedBaggieSourDiesel,
+			NnC.Pipe1GreenKief = NnC.Pipe1Green;NnC.KiefJar,
+			
+			NnC.Pipe1OrangeAK = NnC.Pipe1Orange;NnC.WeedBaggieAK,
+			NnC.Pipe1OrangeNL = NnC.Pipe1Orange;NnC.WeedBaggieNorthernLights,
+			NnC.Pipe1OrangeSD = NnC.Pipe1Orange;NnC.WeedBaggieSourDiesel,
+			NnC.Pipe1OrangeKief = NnC.Pipe1Orange;NnC.KiefJar,
+			
+			NnC.Pipe1YellowAK = NnC.Pipe1Yellow;NnC.WeedBaggieAK,
+			NnC.Pipe1YellowNL = NnC.Pipe1Yellow;NnC.WeedBaggieNorthernLights,
+			NnC.Pipe1YellowSD = NnC.Pipe1Yellow;NnC.WeedBaggieSourDiesel,
+			NnC.Pipe1YellowKief = NnC.Pipe1Yellow;NnC.KiefJar,
+		}
+	}
+	craftRecipe PackKiefPipe
+	{
+        timedAction = PutSeedsInPacket,
+		Time = 15,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 4 [NnC.GrinderwithKief],
+			item 1 [NnC.Pipe1Green;NnC.Pipe1Orange;NnC.Pipe1Yellow;Base.CanPipe;Base.SmokingPipe] mappers[PipeWithKief] mode:destroy,
+		}
+		outputs
+		{
+			item 1 mapper:PipeWithKief,
+		}
+        itemMapper PipeWithKief
+        {
+			NnC.Pipe1GreenKief = NnC.Pipe1Green,
+			NnC.Pipe1OrangeKief = NnC.Pipe1Orange,
+			NnC.Pipe1YellowKief = NnC.Pipe1Yellow,
+			NnC.CanPipeKief = Base.CanPipe,
+			NnC.SmokingPipeKief = Base.SmokingPipe,
+		}
+	}
+	craftRecipe PutSeedsInPacket
+	{
+        timedAction = PutSeedsInPacket,
+		Time = 10,
+		Tags = InHandCraft;Farming,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 5 [NnC.SeedsSourDiesel;NnC.SeedsNorthernLights;NnC.SeedsAK;NnC.SeedsCoca;NnC.SeedsOpium] mappers[seedType] flags[IsExclusive],
+			item 1 [NnC.SourDieselBagSeed_Empty;NnC.NorthernLightsBagSeed_Empty;NnC.AKBagSeed_Empty;NnC.CocaBagSeed_Empty;NnC.OpiumBagSeed_Empty] flags[Prop2] mappers[seedType],
+		}
+		outputs
+		{
+			item 1 mapper:seedType,
+		}
+		itemMapper seedType
+		{
+			NnC.SourDieselBagSeed = NnC.SeedsSourDiesel;NnC.SourDieselBagSeed_Empty,
+			NnC.NorthernLightsBagSeed = NnC.SeedsNorthernLights;NnC.NorthernLightsBagSeed_Empty,
+			NnC.AKBagSeed = NnC.SeedsAK;NnC.AKBagSeed_Empty,
+			NnC.CocaBagSeed = NnC.SeedsCoca;NnC.CocaBagSeed_Empty,
+			NnC.OpiumBagSeed = NnC.SeedsOpium;NnC.OpiumBagSeed_Empty,
+		}
+	}
+	craftRecipe OpenPacketOfSeeds
+	{
+        timedAction = PutSeedsInPacket,
+		Time = 10,
+		Tags = InHandCraft;Farming;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.SourDieselBagSeed;NnC.NorthernLightsBagSeed;NnC.AKBagSeed;NnC.CocaBagSeed;NnC.OpiumBagSeed] mappers[seedTypes;packetTypes],
+		}
+		outputs
+		{
+			item 5 mapper:seedTypes,
+			item 1 mapper:packetTypes,
+		}
+        itemMapper seedTypes
+       {
+			NnC.SeedsSourDiesel = NnC.SourDieselBagSeed,
+			NnC.SeedsNorthernLights = NnC.NorthernLightsBagSeed,
+			NnC.SeedsAK = NnC.AKBagSeed,
+			NnC.SeedsCoca = NnC.CocaBagSeed,
+			NnC.SeedsOpium = NnC.OpiumBagSeed,
+		}
+        itemMapper packetTypes
+        {
+			NnC.SourDieselBagSeed_Empty = NnC.SourDieselBagSeed,
+			NnC.NorthernLightsBagSeed_Empty = NnC.NorthernLightsBagSeed,
+			NnC.AKBagSeed_Empty = NnC.AKBagSeed,
+			NnC.CocaBagSeed_Empty = NnC.CocaBagSeed,
+			NnC.OpiumBagSeed_Empty = NnC.OpiumBagSeed,
+		}
+	}
+    craftRecipe DryWeed
+    {
+        time = 50,
+	    tags = DryingRackGrain;DryingRackHerb,
+		NeedToBeLearn = False,
+        category = Drugs,
+        inputs
+		{
+			item 1 [NnC.SourDiesel;NnC.NorthernLights;NnC.AKFlower] mappers[WeedDry],
+		}
+		outputs
+		{
+			item 1 mapper:WeedDry,
+		}
+		itemMapper WeedDry
+		{
+			NnC.SourDieselDry = NnC.SourDiesel,
+			NnC.NorthernLightsDry = NnC.NorthernLights,
+			NnC.AKDry = NnC.AKFlower,
+		}
+	}
+    craftRecipe CureWeed
+    {
+        timedAction = PutSeedsInPacket,
+        time = 15,
+	    tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+        inputs
+		{
+			item 8 [NnC.SourDieselDry;NnC.NorthernLightsDry;NnC.AKDry] mappers[WeedCure] flags[IsExclusive],
+            item 1 [Base.EmptyJar] mode:destroy,
+            item 1 [Base.JarLid] mode:destroy,
+		}
+		outputs
+		{
+			item 1 mapper:WeedCure,
+		}
+		itemMapper WeedCure
+		{
+			NnC.SourDieselCuring = NnC.SourDieselDry,
+			NnC.NorthernLightsCuring = NnC.NorthernLightsDry,
+			NnC.AKCuring = NnC.AKDry,
+		}
+	}
+    craftRecipe OpenCuredWeed
+    {
+        timedAction = PutSeedsInPacket,
+        time = 10,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+        inputs
+		{
+			item 1 [NnC.SourDieselCuredJar;NnC.NorthernLightsCuredJar;NnC.AKCuredJar] mappers[WeedCured],
+		}
+		outputs
+		{
+			item 1 Base.EmptyJar,
+			item 1 Base.JarLid,
+			item 8 mapper:WeedCured,
+		}
+        itemMapper WeedCured
+        {
+			NnC.SourDieselCured = NnC.SourDieselCuredJar,
+			NnC.NorthernLightsCured = NnC.NorthernLightsCuredJar,
+			NnC.AKCured = NnC.AKCuredJar,
+		}
+	}
+    craftRecipe GrindCuredWeed
+	{
+        timedAction = Making,
+        time = 100,
+		OnCreate = Recipe.OnCreate.AddKief,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+        inputs
+		{
+			item 1 [NnC.Grinder] mode:destroy,
+            item 1 [Base.EmptyJar] mode:destroy,
+            item 1 [Base.JarLid] mode:destroy,
+			item 4 [NnC.SourDieselCured;NnC.NorthernLightsCured;NnC.AKCured] mappers[WeedGrind] flags[IsExclusive] mode:destroy,
+		}
+		outputs
+		{
+			item 1 NnC.GrinderwithKief,
+			item 1 mapper:WeedGrind,
+		}
+		itemMapper WeedGrind
+		{
+			NnC.WeedBaggieSourDiesel = NnC.SourDieselCured,
+			NnC.WeedBaggieNorthernLights = NnC.NorthernLightsCured,
+			NnC.WeedBaggieAK = NnC.AKCured,
+		}
+	}
+    craftRecipe GrindCuredWeed2
+    {
+        timedAction = Making,
+        time = 100,
+		OnCreate = Recipe.OnCreate.AddKief2,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+        inputs
+		{
+			item 1 [NnC.GrinderwithKief] mode:keep,
+            item 1 [Base.EmptyJar] mode:destroy,
+            item 1 [Base.JarLid] mode:destroy,
+			item 4 [NnC.SourDieselCured;NnC.NorthernLightsCured;NnC.AKCured] mappers[WeedGrind] flags[IsExclusive] mode:destroy,
+		}
+		outputs
+		{
+			item 1 mapper:WeedGrind,
+		}
+		itemMapper WeedGrind
+		{
+			NnC.WeedBaggieSourDiesel = NnC.SourDieselCured,
+			NnC.WeedBaggieNorthernLights = NnC.NorthernLightsCured,
+			NnC.WeedBaggieAK = NnC.AKCured,
+		}
+	}
+    craftRecipe CreateKiefJar
+    {
+        timedAction = PutSeedsInPacket,
+        time = 15,
+		OnCreate = Recipe.OnCreate.KiefJar,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+        inputs
+		{
+			item 4 [NnC.GrinderwithKief],
+            item 1 [Base.EmptyJar] mode:destroy,
+            item 1 [Base.JarLid] mode:destroy,
+		}
+		outputs
+		{
+			item 1 NnC.KiefJar,
+		}
+	}
+    craftRecipe AddKiefJar
+    {
+        timedAction = PutSeedsInPacket,
+        time = 15,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Drugs,
+        inputs
+		{
+			item 4 [NnC.GrinderwithKief],
+            item 1 [NnC.KiefJar] mode:keep,
+		}
+		outputs
+		{
+		}
+	}
+
+}

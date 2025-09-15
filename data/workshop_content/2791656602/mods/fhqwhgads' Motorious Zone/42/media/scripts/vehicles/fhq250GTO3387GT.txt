@@ -1,0 +1,56 @@
+module Base
+{
+	model fhq250GTOLivery
+	{
+		mesh = vehicles/vehicle_fhq250gto|fhq250GTO,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.39,
+	}
+	
+	model fhq250GTOLiveryHoodCover
+	{
+		mesh = vehicles/vehicle_fhq250gto|fhq250GTOHoodCovers,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.39,
+	}
+	
+	template vehicle fhq250GTOLivery
+	{
+		template! = fhq250GTO,
+		
+		model
+		{
+			file = fhq250GTOLivery,
+			scale = 1.8200,
+			offset = 0.0000 0.0549 -0.1813,
+		}
+	}
+	
+	vehicle fhq250GTO3387GT
+	{
+		template! = fhq250GTOLivery,
+		
+		skin
+		{
+			texture = Vehicles/vehicle_fhq250GTO3387GT_shell,
+		}
+		
+		part EngineDoor
+		{
+			model Default
+			{
+				file = fhq250GTOHoodScoops,
+			}
+		}
+		
+		part WindshieldRear
+		{
+			model Default
+			{
+				file = fhq250GTORearScoop,
+			}
+		}
+	}
+}

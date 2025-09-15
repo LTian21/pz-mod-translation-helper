@@ -1,0 +1,59 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_DoorMat
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Door Mat,
+			Icon		= floors_rugs_01_57,
+		}
+	}
+
+    entity DoorMat
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_DoorMat,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {	
+            face W
+            {
+                layer
+                {
+                    row = floors_rugs_01_59,
+                    row = floors_rugs_01_58,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = floors_rugs_01_56 floors_rugs_01_57,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = SewingCloth,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Decorations_Rugs,
+            SkillRequired = Tailoring:2,
+            xpAward       = Tailoring:4,
+            ToolTip       = Tooltip_craft_rugsDesc,
+            inputs
+            {
+                item 1 tags[SewingNeedle] mode:keep flags[Prop1],
+                item 5 [Base.RippedSheets] mode:destroy flags[Prop2],
+                item 3 [Base.Thread],
+            }
+        }
+    }
+}

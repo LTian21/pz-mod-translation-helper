@@ -1,0 +1,537 @@
+module Base
+{
+    model 91rangeWindowfla2
+    	{
+        mesh = vehicles/Vehicles_91range_Body_mk2|range_2door_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 91rangeWindowfra2
+    	{
+        mesh = vehicles/Vehicles_91range_Body_mk2|range_2door_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 91rangeWindowrla2
+    	{
+        mesh = vehicles/Vehicles_91range_Body_mk2|range_2door_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 91rangeWindowrra2
+    	{
+        mesh = vehicles/Vehicles_91range_Body_mk2|range_2door_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle RR91Armor2
+		{
+		part RR91WindshieldArmor
+        	{
+
+			model RR91winda
+				{
+                		file = 91rangeWindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.91rangeWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = RR91.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = RR91.Create.WindshieldArmor,
+					init = RR91.Init.WindshieldArmor,
+					}
+		}
+
+		part RR91WindowFrontLeftArmor
+        {
+
+			model RR91leftWindowa2
+				{
+                		file = 91rangeWindowfla2,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.91rangeFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = RR91.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = RR91.Create.WindowFrontLeftArmor,
+					init = RR91.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part RR91WindowFrontRightArmor
+        {
+
+			model RR91rightWindowa2
+				{
+                		file = 91rangeWindowfra2,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.91rangeFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = RR91.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = RR91.Create.WindowFrontRightArmor,
+					init = RR91.Init.WindowFrontRightArmor,
+					}
+		}
+
+		part RR91WindowRearLeftArmor
+        {
+
+			model RR91leftWindowra2
+				{
+                		file = 91rangeWindowrla2,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = WindowRearLeft,
+			specificItem = false,
+			itemType = Base.91rangeRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.WindowRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = RR91.UninstallComplete.WindowRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = RR91.Create.WindowRearLeftArmor,
+					init = RR91.Init.WindowRearLeftArmor,
+					}
+		}
+
+		part RR91WindowRearRightArmor
+        {
+
+			model RR91rightWindowra2
+				{
+                		file = 91rangeWindowrra2,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = WindowRearRight,
+			specificItem = false,
+			itemType = Base.91rangeRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.WindowRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = RR91.UninstallComplete.WindowRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = RR91.Create.WindowRearRightArmor,
+					init = RR91.Init.WindowRearRightArmor,
+					}
+		}
+
+		part RR91WindowBackLeftArmor
+        {
+
+			model RR91winbla
+				{
+                		file = 91rangeWindowbla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.91rangeRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.WindowBackLeftArmor,
+                	requireInstalled = WindowBackLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = RR91.UninstallComplete.WindowBackLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = RR91.Create.WindowBackLeftArmor,
+					init = RR91.Init.WindowBackLeftArmor,
+					}
+		}
+
+		part RR91WindowBackRightArmor
+        {
+
+			model RR91winbra
+				{
+                		file = 91rangeWindowbra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.91rangeRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.WindowBackRightArmor,
+                	requireInstalled = WindowBackRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = RR91.UninstallComplete.WindowBackRightArmor,
+            		}
+
+            		lua
+            		{
+					create = RR91.Create.WindowBackRightArmor,
+					init = RR91.Init.WindowBackRightArmor,
+					}
+		}
+
+		part RR91WindshieldRearArmor
+        {
+
+				model RR91windra
+				{
+                		file = 91rangeWindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.91rangeWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = RR91.UninstallComplete.WindshieldRearArmor,
+					requireUninstalled = RR91SpareTireRear,
+            		}
+
+            		lua
+            		{
+					create = RR91.Create.WindshieldRearArmor,
+					init = RR91.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

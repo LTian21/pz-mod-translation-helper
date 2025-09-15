@@ -1,0 +1,100 @@
+module Base
+{
+    model W460Guards
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_guards,
+		texture = Vehicles/Vehicles_84merc_Wheels,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle W460GuardsM
+		{
+		part W460Guards
+        	{
+
+			model GuardsM
+				{
+                		file = W460Guards,
+				}
+
+			category = lights,
+			area = TireFrontRight,
+			specificItem = false,
+			itemType = Base.W460Guards_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = W460.InstallComplete.GuardsM,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 750,
+			skills = Mechanics:1,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = W460.UninstallComplete.GuardsM,
+
+            		}
+
+            		lua
+            		{
+			create = W460.Create.GuardsM,
+			init = W460.Init.GuardsM,
+			}
+		}
+	}
+
+    template vehicle W460CGuards
+	{
+        template! = W460GuardsM,
+
+        part W460Guards
+        {
+
+            table install
+                {
+                complete = W460.InstallComplete.Guards,
+                }
+
+            table uninstall
+                {
+                complete = W460.UninstallComplete.Guards,
+                }
+
+            lua
+                {
+                create = W460.Create.Guards,
+                init = W460.Init.Guards,
+                }
+        }
+	}
+}

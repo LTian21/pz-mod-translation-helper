@@ -1,0 +1,262 @@
+module Base
+{
+    model TatrapanApocalypto_DoorFrontLeft
+	{
+		mesh = vehicles/TatrapanApocalypto|LeftFrontDoor,
+		shader = vehicle_noreflect,
+		scale = 0.01,
+		static = FALSE,
+        boneWeight = FrontLeftDoorBone 1.0,
+	}
+	model TatrapanApocalypto_DoorFrontRight
+	{
+		mesh = vehicles/TatrapanApocalypto|RightFrontDoor,
+		shader = vehicle_noreflect,
+		scale = 0.01,
+		static = FALSE,
+        boneWeight = FrontRightDoorBone 1.0,
+	}
+        model TatrapanApocalypto_DoorRearRight
+	{
+		mesh = vehicles/TatrapanApocalypto|RightRearDoor,
+		shader = vehicle_noreflect,
+		scale = 0.01,
+		static = FALSE,
+        boneWeight = RightRearDoorBone 1.0,
+	}
+        model TatrapanApocalypto_DoorRearLeft
+	{
+		mesh = vehicles/TatrapanApocalypto|LeftRearDoor,
+		shader = vehicle_noreflect,
+		scale = 0.01,
+		static = FALSE,
+        boneWeight = LeftRearDoorBone 1.0,
+	}
+
+
+	template vehicle TatrapanApocalypto_doors
+	{
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+                template = Door/part/DoorRearRight,
+                template = Door/part/DoorRearLeft,
+
+		
+		part DoorFrontLeft
+		{
+			model Default
+			{
+				file = TatrapanApocalypto_DoorFrontLeft,
+			}
+
+			area = SeatFrontLeft,
+			
+            
+						
+
+			anim Close
+			{
+                                sound = VehicleDoorCloseSportsCar,
+				anim = DoorFrontLeft_closing,
+				reverse = FALSE,
+				rate = 2,
+			}
+
+			anim Open
+			{
+                                sound = VehicleDoorOpenSportsCar,
+				anim = DoorFrontLeft_closing,
+				reverse = TRUE,
+				rate = 2,
+			}
+
+			anim Closed
+			{
+				anim = DoorFrontLeft_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorFrontLeft_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindowFrontLeft,
+			}
+		}
+
+		part DoorFrontRight
+		{
+			model Default
+			{
+				file = TatrapanApocalypto_DoorFrontRight,
+			}
+
+			area = SeatFrontRight,
+			
+
+			anim Close
+			{
+                                sound = VehicleDoorCloseSportsCar,
+				anim = DoorFrontRight_closing,
+				reverse = FALSE,
+				rate = 2,
+			}
+
+			anim Open
+			{
+                                sound = VehicleDoorOpenSportsCar,
+				anim = DoorFrontRight_closing,
+				reverse = TRUE,
+				rate = 2,
+			}
+
+			anim Closed
+			{
+				anim = DoorFrontRight_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorFrontRight_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindowFrontRight,
+			}
+		}
+
+                part DoorRearLeft
+		{
+			model Default
+			{
+				file = TatrapanApocalypto_DoorRearLeft,
+			}
+
+			area = SeatRearLeft,
+			
+            
+						
+
+			anim Close
+			{
+                                sound = VehicleDoorCloseSportsCar,
+				anim = DoorRearLeft_closing,
+				reverse = FALSE,
+				rate = 2,
+			}
+
+			anim Open
+			{
+                                sound = VehicleDoorOpenSportsCar,
+				anim = DoorRearLeft_closing,
+				reverse = TRUE,
+				rate = 2,
+			}
+
+			anim Closed
+			{
+				anim = DoorRearLeft_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorRearLeft_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindowRearLeft,
+			}
+		}
+
+                part DoorRearRight
+		{
+			model Default
+			{
+				file = TatrapanApocalypto_DoorRearRight,
+			}
+
+			area = SeatRearRight,
+			
+            
+						
+
+			anim Close
+			{
+                                sound = VehicleDoorCloseSportsCar,
+				anim = DoorRearRight_closing,
+				reverse = FALSE,
+				rate = 2,
+			}
+
+			anim Open
+			{
+                                sound = VehicleDoorOpenSportsCar,
+				anim = DoorRearRight_closing,
+				reverse = TRUE,
+				rate = 2,
+			}
+
+			anim Closed
+			{
+				anim = DoorRearRight_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorRearRight_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindowRearRight,
+			}
+		}
+		
+                
+
+		part Door*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			table install
+			{
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+
+			table uninstall
+			{
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Door,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.Door,
+			}
+		}
+	}
+}

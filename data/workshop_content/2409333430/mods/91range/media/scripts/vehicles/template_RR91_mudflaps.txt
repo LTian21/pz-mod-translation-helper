@@ -1,0 +1,76 @@
+module Base
+{
+	model 91rangeMudflaps0
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_mudflaps,
+		texture = Vehicles/Vehicles_91range_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle RR91Mudflaps
+		{
+		part RR91Mudflaps
+        	{
+
+			model RR91Mudflaps0
+				{
+                	file = 91rangeMudflaps0,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.91rangeMudflaps,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.Mudflaps,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 750,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = RR91.UninstallComplete.Mudflaps,
+
+            		}
+
+            	lua
+            		{
+					create = RR91.Create.Mudflaps,
+					init = RR91.Init.Mudflaps,
+					}
+		}
+	}
+
+		
+}

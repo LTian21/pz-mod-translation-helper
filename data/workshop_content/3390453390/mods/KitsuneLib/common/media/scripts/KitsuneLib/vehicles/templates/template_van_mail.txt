@@ -1,0 +1,417 @@
+module KitsuneLib
+{
+	imports {
+		Base
+	}
+
+	template vehicle VanMail
+	{
+		mechanicType = 2,
+		engineRepairLevel = 5,
+		playerDamageProtection = 1.1,
+		engineRPMType = van,
+
+		model
+		{
+			file = Vehicles_Van_NoRandom,
+			scale = 1.8200,
+			offset = 0.0000 0.3571 0.0000,
+		}
+
+		spawnOffsetY = 0.5,
+
+		textureMask = Vehicles/vehicle_van_mask,
+		textureLights = Vehicles/vehicle_van_lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/Veh_Damage1,
+		textureDamage2Shell = Vehicles/Veh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		sound
+		{
+			backSignal = VehicleBackUpBeeper,
+		}
+
+		extents = 0.9451 0.7253 2.3297,
+		mass = 816,
+		physicsChassisShape = 0.9451 0.7253 2.3297,
+		centerOfMassOffset = 0.0000 0.3626 0.0000,
+		shadowExtents = 0.9451 2.3297,
+		shadowOffset = 0.0000 0.0000,
+		extentsOffset = 0.8 0.8,
+		engineForce = 4000,
+		engineQuality = 70,
+		engineLoudness = 100,
+		maxSpeed = 75f,
+		brakingForce = 70,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 1.0f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 40,
+		suspensionCompression = 3.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.2,
+		wheelFriction = 1.9f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+		isSmallVehicle = false,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.3736 -0.4121 0.8736,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.3736 -0.4121 0.8736,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.3736 -0.4121 -0.5385,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.3736 -0.4121 -0.5385,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.1923 -0.1044 0.4231,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.6044 -0.4725 0.4011,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.1923 -0.1044 0.4231,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.6044 -0.4725 0.4011,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 1.4011 0.9451 0.4725,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -1.4011 0.9451 0.4725,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 0.7088 0.4011 0.4725 0.4725,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -0.7088 0.4011 0.4725 0.4725,
+		}
+
+		area SeatMiddleLeft
+		{
+			xywh = 0.7088 -0.0659 0.4725 0.4725,
+		}
+
+		area SeatMiddleRight
+		{
+			xywh = -0.7088 -0.0659 0.4725 0.4725,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -0.2363 -1.4011 0.4725 0.4725,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 0.2363 -1.4011 0.4725 0.4725,
+		}
+
+		area GasTank
+		{
+			xywh = 0.7088 -0.7881 0.4725 0.4725,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.7088 0.8736 0.4725 0.4725,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.7088 0.8736 0.4725 0.4725,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 0.7088 -0.5385 0.4725 0.4725,
+		}
+
+		area TireRearRight
+		{
+			xywh = -0.7088 -0.5385 0.4725 0.4725,
+		}
+
+		template = Trunk/part/TruckBed,
+
+		part TruckBed
+		{
+			itemType = Base.BigTrunk,
+
+			container
+			{
+				capacity = 130,
+				test = Vehicles.ContainerAccess.TruckBedOpenInside,
+			}
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = GloveBox,
+		template = GasTank,
+
+		part GasTank
+		{
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Heater,
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+
+		part Windshield*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part WindshieldRear
+		{
+			table install
+			{
+				requireInstalled = DoorRear,
+			}
+		}
+
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+
+		part Window*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+		template = Door/part/DoorRear,
+
+		part Door*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part DoorRear
+		{
+			table uninstall
+			{
+				requireUninstalled = WindshieldRear,
+			}
+
+			hasLightsRear = true,
+		}
+
+		template = Tire,
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+		template! = SoundsVan,
+		template = VanCollision,
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.2747 -1.1703,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.2747 1.1703,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

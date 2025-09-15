@@ -1,0 +1,233 @@
+module Base
+{
+
+	model 84jeepXJWheelL
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Wheel,
+		texture = vehicles/Vehicles_84jeepXJ_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 84jeepXJWheelR
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Wheel,
+		texture = vehicles/Vehicles_84jeepXJ_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 92jeepYJWheel
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Wheels|wrangler_wheel,
+		texture = vehicles/Vehicles_92jeepYJ_Wheel,
+		shader = vehiclewheel,
+		scale = 0.095,
+	}
+
+	template vehicle JP84Tires
+	{
+		part TireFrontLeft
+		{
+            model 84jeepXJTireFL
+			{
+				file = 84jeepXJWheelL,
+			}
+
+            model wrangTireFL
+			{
+				file = 92jeepYJWheel,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+            table install
+			{
+				complete = JP84.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = JP84.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP84.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model 84jeepXJTireFR
+			{
+				file = 84jeepXJWheelR,
+			}
+
+            model wrangTireFR
+			{
+				file = 92jeepYJWheel,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+            table install
+			{
+				complete = JP84.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = JP84.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP84.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model 84jeepXJTireRL
+			{
+				file = 84jeepXJWheelL,
+			}
+
+            model wrangTireRL
+			{
+				file = 92jeepYJWheel,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+            table install
+			{
+				complete = JP84.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP84.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model 84jeepXJTireRR
+			{
+				file = 84jeepXJWheelR,
+			}
+
+            model wrangTireRR
+			{
+				file = 92jeepYJWheel,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+            table install
+			{
+				complete = JP84.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = JP84.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP84.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			itemType = Base.84jeepXJTire;Base.92jeepYJTire,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}
+

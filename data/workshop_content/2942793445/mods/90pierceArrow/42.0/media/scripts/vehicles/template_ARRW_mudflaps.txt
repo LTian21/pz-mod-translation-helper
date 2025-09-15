@@ -1,0 +1,81 @@
+module Base
+{
+	model 90pierceArrowmudflaps0
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_mudflaps,
+		texture = Vehicles/Vehicles_90pierceArrow_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle ARRWMudflaps
+		{
+		part DAMNMudflaps
+        	{
+
+			model Mudflaps0
+				{
+                		file = 90pierceArrowmudflaps0,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.90pierceArrowMudflaps,
+			mechanicRequireKey = false,
+			durability = 3,
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 750,
+			skills = Mechanics:1,
+			recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+			complete = ARRW.UninstallComplete.Mudflaps,
+
+            		}
+
+            		lua
+            		{
+			create = ARRW.Create.Mudflaps,
+			init = ARRW.Init.Mudflaps,
+			}
+		}
+	}
+
+		
+}

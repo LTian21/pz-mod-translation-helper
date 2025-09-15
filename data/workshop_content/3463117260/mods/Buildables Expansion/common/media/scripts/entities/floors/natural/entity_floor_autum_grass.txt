@@ -1,0 +1,52 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_AutumGrassFloor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Autum Grass Floor,
+			Icon		= blends_natural_01_48,
+		}
+	}
+
+    entity AutumGrassFloor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_AutumGrassFloor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+		    isThumpable     = false,
+		    OnIsValid = BuildRecipeCode.floor.OnIsValid,
+		    OnCreate = BuildRecipeCode.floor.OnCreate,
+			
+            face Single
+            {
+                layer
+                {
+                    row = blends_natural_01_48,
+                }
+            }
+        }
+		
+	    component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = EmptyBag,
+            time          = 100,
+            category      = Floors_Natural,
+            SkillRequired = Farming:1,
+            xpAward       = Farming:1,
+            ToolTip       = Tooltip_craft_dirtFloorDesc,
+            inputs
+            {
+                item 1 [Base.Dirtbag] flags[Prop1],
+            }
+        }
+    }
+}

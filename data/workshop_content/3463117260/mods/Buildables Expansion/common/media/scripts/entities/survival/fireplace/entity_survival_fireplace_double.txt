@@ -1,0 +1,58 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FireplaceDouble
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Fireplace Double,
+			Icon		= fixtures_fireplaces_01_2,
+		}
+	}
+
+    entity FireplaceDouble
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FireplaceDouble,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = fixtures_fireplaces_01_4,
+                    row = fixtures_fireplaces_01_3,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = fixtures_fireplaces_01_1 fixtures_fireplaces_01_2,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildCairn,
+            time          = 250,
+            category      = Masonry,
+            SkillRequired = Masonry:3,
+            xpAward       = Masonry:10,
+            ToolTip       = Tooltip_craft_cookingPitDesc,
+            inputs
+            {
+                item 1 [Base.MasonsTrowel] mode:keep flags[Prop1],
+                item 20 [Base.StoneBlock],
+                item 2 [Base.BucketConcreteFull] mode:use,
+            }
+        }
+    }
+}

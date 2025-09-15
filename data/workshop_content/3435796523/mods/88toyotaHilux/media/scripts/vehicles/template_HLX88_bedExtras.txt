@@ -1,0 +1,246 @@
+module Base
+{
+
+	model 88toyotaHiluxRollbar
+	{
+		mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_rollbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 88toyotaHiluxCap
+	{
+		mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_bedcap,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        static = FALSE,
+	}
+
+	template vehicle HLX88BedExtrasXC
+	{
+		part HLX88TruckBedExtras
+		{
+
+			model HLX88Rollbar
+				{
+                		file = 88toyotaHiluxRollbar,
+				}
+
+            model HLX88Cap
+				{
+                		file = 88toyotaHiluxCap,
+				}
+
+            anim Close
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					rate = 1.0,
+				}
+
+			anim Open
+				{
+					anim = trunk_opening,
+					rate = 0.5,
+				}
+
+			anim Closed
+				{
+					anim = trunk_opening,
+					animate = FALSE,
+				}
+
+			anim Opened
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+
+			door
+			{}
+
+			category = Other,
+			area = SeatRearLeft,
+			parent = TrunkDoor,
+			itemType = Base.88toyotaHiluxRollbar;Base.88toyotaHiluxBedCap,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+             
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.TruckBedExtras,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = HLX88.UninstallComplete.TruckBedExtras,
+                    requireUninstalled = HLX88Roofrack,
+					requireEmpty = true,
+
+            }
+
+            lua
+            	{
+					create = HLX88.Create.TruckBedExtras,
+					init = HLX88.Init.TruckBedExtras,
+				}
+		}
+	}
+
+    template vehicle HLX88BedExtrasSC
+	{
+        template! = HLX88BedExtrasXC,
+
+		part HLX88TruckBedExtras
+		{
+
+			model HLX88Rollbar
+				{
+                	file = 88toyotaHiluxRollbar,
+                    offset = 0.0000 0.0000 0.4047,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+            model HLX88Cap
+				{
+                	file = 88toyotaHiluxCap,
+                    offset = 0.0000 0.0000 0.4047,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+		}
+	}
+
+    template vehicle HLX88BedExtrasXCS
+	{
+		part HLX88TruckBedExtras
+		{
+
+			model HLX88Rollbar
+				{
+                		file = 88toyotaHiluxRollbar,
+				}
+
+            model HLX88Cap
+				{
+                		file = 88toyotaHiluxCap,
+				}
+
+            anim Close
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					rate = 1.0,
+				}
+
+			anim Open
+				{
+					anim = trunk_opening,
+					rate = 0.5,
+				}
+
+			anim Closed
+				{
+					anim = trunk_opening,
+					animate = FALSE,
+				}
+
+			anim Opened
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+
+			door
+			{}
+
+			category = Other,
+			area = SeatRearLeft,
+			parent = TrunkDoor,
+			itemType = Base.88toyotaHiluxRollbar;Base.88toyotaHiluxBedCap,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+             
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.TruckBedExtrasS,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = HLX88.UninstallComplete.TruckBedExtrasS,
+                    requireUninstalled = HLX88Roofrack,
+					requireEmpty = true,
+
+            }
+
+            lua
+            	{
+					create = HLX88.Create.TruckBedExtrasS,
+					init = HLX88.Init.TruckBedExtrasS,
+				}
+		}
+	}
+}

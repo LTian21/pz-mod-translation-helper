@@ -1,0 +1,113 @@
+module Base
+{
+    model ATAMustang66_Windshield
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Windshield,
+        shader = vehicle,
+        scale = 0.0041,
+    }
+    
+    model ATAMustang66_WindshieldRear
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|WindshieldRear,
+        shader = vehicle,
+        scale = 0.0041,
+    }
+    
+    model ATAMustang66_WindowFrontLeft_move
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|WindowFrontLeft_move,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.0041,
+        boneWeight = MovingWindowLeft 1.0,
+    }
+    
+    model ATAMustang66_WindowFrontRight_move
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|WindowFrontRight_move,
+        shader = vehicle,
+        static = FALSE,
+        scale = 0.0041,
+        boneWeight = MovingWindowRight 1.0,
+    }
+    
+    template vehicle ATAMustang66_windows
+    {
+        template = Window/part/WindowFrontLeft,
+        part WindowFrontLeft
+        {
+            parent = DoorFrontLeft,
+            model Default
+            {
+                file = ATAMustang66_WindowFrontLeft_move,
+            }
+            anim ClosedToOpen
+            {
+                anim = Anim_WindowFrontLeft_open,
+                animate = FALSE,
+            }
+        }
+        
+        template = Window/part/WindowFrontRight,
+        part WindowFrontRight
+        {
+            parent = DoorFrontRight,
+            model Default
+            {
+                file = ATAMustang66_WindowFrontRight_move,
+            }
+            anim ClosedToOpen
+            {
+                anim = Anim_WindowFrontRight_open,
+                animate = FALSE,
+            }
+        }
+        
+        part Window*
+        {
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+        
+        template = Windshield/part/Windshield,
+        part Windshield
+        {
+            model Default
+            {
+                file = ATAMustang66_Windshield,
+            }
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+        template = Windshield/part/WindshieldRear,
+        part WindshieldRear
+        {
+            area = TruckBed,
+            model Default
+            {
+                file = ATAMustang66_WindshieldRear,
+            }
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+    }
+}

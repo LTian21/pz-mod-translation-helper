@@ -1,0 +1,210 @@
+module Base
+{
+
+	model 69miniSeatfl
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_seat_f,
+		texture = Vehicles/Vehicles_69mini_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 69miniSeatfr
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_seat_f,
+		texture = Vehicles/Vehicles_69mini_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 69miniSeatrl
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_seat_r,
+		texture = Vehicles/Vehicles_69mini_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 69miniSeatrr
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_seat_r,
+		texture = Vehicles/Vehicles_69mini_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	
+	template vehicle MINI69Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 69miniSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 69miniSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 69miniSeatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 69miniSeatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.69miniSeatFront,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.69miniSeatRear,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+}
+

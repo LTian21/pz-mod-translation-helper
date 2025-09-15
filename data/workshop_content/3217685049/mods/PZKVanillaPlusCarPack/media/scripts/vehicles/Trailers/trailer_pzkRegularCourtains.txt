@@ -1,0 +1,289 @@
+module Base
+{
+	model pzkTrailerRegularCourtains
+    {
+        mesh = vehicles/trailer_pzkRegularCourtains,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.05,
+    }
+
+	vehicle pzkTrailerRegularCourtains
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 5,
+		engineRepairLevel = 5,
+		playerDamageProtection = 1.3,
+
+		model
+		{
+			file = pzkTrailerRegularCourtains,
+			scale = 0.6500,
+			offset = 0.0000 0.4769 1.5538,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicle_pzkFranklinTruckBoxshell,
+		}
+		skin
+		{
+			texture = Vehicles/Vehicle_pzkFranklinTruckBox2shell,
+		}
+		skin
+		{
+			texture = Vehicles/Vehicle_pzkFranklinTruckBox3shell,
+		}
+		skin
+		{
+			texture = Vehicles/Vehicle_pzkFranklinTruckBox4shell,
+		}
+		skin
+		{
+			texture = Vehicles/Vehicle_pzkFranklinTruckBox5shell,
+		}
+		skin
+		{
+			texture = Vehicles/Vehicle_pzkFranklinTruckBox6shell,
+		}
+
+		textureMask = Vehicles/Vehicle_pzkFranklinTruckBox_mask,
+		textureLights = Vehicles/Vehicle_pzkFranklinTruckBed_lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/pzkVeh_Damage1,
+		textureDamage2Shell = Vehicles/pzkVeh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		extents = 3.4154 3.4154 15.0769,
+		mass = 300,
+		physicsChassisShape = 3.4154 3.4154 15.0769,
+		centerOfMassOffset = 0.0000 2.7385 2.9538,
+		shadowExtents = 3.7385 16.4923,
+		shadowOffset = 0.0000 1.0308,
+		engineForce = 8500,
+		engineQuality = 80,
+		engineLoudness = 110,
+		maxSpeed = 70f,
+		brakingForce = 75,
+		stoppingMovementForce = 10.0f,
+		rollInfluence = 0.6f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 100,
+		suspensionCompression = 2.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 15,
+		suspensionRestLength = 0.4f,
+		wheelFriction = 2.5f,
+		frontEndHealth = 650,
+		rearEndHealth = 450,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.0000 -0.7692 4.1692,
+			radius = 0.5f,
+			width = 2.0f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = 0.0000 -0.5692 -0.6000,
+			radius = 0.7f,
+			width = 2.0f,
+		}
+
+		wheel RearLeft
+		{
+			front = true,
+			offset = 1.2462 -0.5692 -2.4923,
+			radius = 0.7f,
+			width = 0.5f,
+		}
+
+		wheel RearRight
+		{
+			front = true,
+			offset = -1.2462 -0.5692 -2.4923,
+			radius = 0.7f,
+			width = 0.5f,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -5.2154 3.4154 1.2000,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 2.3385 0.8769 1.2615 1.2615,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -2.3385 0.8769 1.2615 1.2615,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 2.3385 -1.0000 1.2615 1.2615,
+		}
+
+		area TireRearRight
+		{
+			xywh = -2.3385 -1.0000 1.2615 1.2615,
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			wheel = FrontRight,
+
+			model InflatedTirePlusWheel
+			{
+				file = Vehicles_pzkHMMVWheel,
+				offset = 1.3 0.0 0.0,
+				scale = 4.000,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Vehicles_pzkHMMVWheel,
+				offset = -1.3 0.0 0.0,
+				scale = 4.000,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Vehicles_pzkHMMVWheel,
+				scale = 4.000,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Vehicles_pzkHMMVWheel,
+				scale = 4.000,
+			}
+		}
+
+		template = Suspension,
+		template = Headlight/part/HeadlightRearLeft,
+		template = Headlight/part/HeadlightRearRight,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Brake/part/BrakeFrontLeft,
+		template = Brake/part/BrakeFrontRight,
+		template = Brake/part/BrakeRearLeft,
+		template = Brake/part/BrakeRearRight,
+		template = Trunk/part/TruckBed,
+
+		part TruckBed
+		{
+			container
+			{
+				capacity = 1000,
+			}
+		}
+
+		template = Door/part/DoorRear,
+
+		part DoorRear
+		{
+			mechanicRequireKey = false,
+
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 600,
+				skills = Mechanics:8,
+				recipes = Advanced Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 600,
+				skills = Mechanics:6,
+				recipes = Advanced Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+		}
+
+		physics box
+		{
+			offset = 0.0000 2.6769 10.8769,
+			extents = 1.1231 3.5538 1.0769,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.4923 1.2462,
+			extents = 3.2833 0.9833 11.7333,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.0769 7.2000,
+			extents = 1.2769 1.5538 0.3692,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment trailerTruck
+		{
+			offset = 0.0000 0.3231 8.5385,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+}

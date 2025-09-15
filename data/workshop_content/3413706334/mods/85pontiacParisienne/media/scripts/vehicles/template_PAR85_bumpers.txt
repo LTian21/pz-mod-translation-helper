@@ -1,0 +1,165 @@
+module Base
+{
+	model 85pontiacParisiennefrontBumper0
+	{
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85-parisienne_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85pontiacParisiennefrontBumperA
+	{
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85-parisienne_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 85pontiacParisiennefrontBullbarA
+	{
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_bullbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85pontiacParisiennerearBumper0
+	{
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85-parisienne_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle PAR85Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 85pontiacParisiennefrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 85pontiacParisiennefrontBumperA,
+				}
+
+            model FrontBullbarA
+				{
+                		file = 85pontiacParisiennefrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.85pontiacParisienneBumperFront0;Base.85pontiacParisienneBumperFrontA;Base.85gmBbodyBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PAR85.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PAR85.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = PAR85.Create.BumperFront,
+					init = PAR85.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 85pontiacParisiennerearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.85pontiacParisienneBumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PAR85.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PAR85.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = PAR85.Create.BumperRear,
+					init = PAR85.Init.BumperRear,
+					}
+		}
+	}
+}

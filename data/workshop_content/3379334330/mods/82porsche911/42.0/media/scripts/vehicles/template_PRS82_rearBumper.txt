@@ -1,0 +1,146 @@
+module Base
+{
+	model 82porsche911rearBumper0
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911_bumper_rear1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 82porsche911rearBumper1
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911rwb_bumper_rear2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle PRS82RearBumpers
+		{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 82porsche911rearBumper0,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82porsche911turboBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRS82.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PRS82.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = PRS82.Create.RearBumper,
+					init = PRS82.Init.RearBumper,
+					}
+		}
+	}
+
+    template vehicle PRS82RearBumpersRWB
+		{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 82porsche911rearBumper1,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82porsche911RWBBumperRear1,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRS82.InstallComplete.RearBumperRWB,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PRS82.UninstallComplete.RearBumperRWB,
+            		}
+
+            		lua
+            		{
+					create = PRS82.Create.RearBumperRWB,
+					init = PRS82.Init.RearBumperRWB,
+					}
+		}
+	}
+}

@@ -1,0 +1,77 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_ChurchPew
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Church Pew,
+			Icon		= location_community_church_small_01_53,
+		}
+	}
+
+    entity ChurchPew
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_ChurchPew,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = location_community_church_small_01_61,
+                    row = location_community_church_small_01_60,
+                    row = location_community_church_small_01_59,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_community_church_small_01_56 location_community_church_small_01_57 location_community_church_small_01_58,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_community_church_small_01_50,
+                    row = location_community_church_small_01_49,
+                    row = location_community_church_small_01_48,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_community_church_small_01_51 location_community_church_small_01_52 location_community_church_small_01_53,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 300,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:5,
+            category      = Furniture_Seating,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_tableDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

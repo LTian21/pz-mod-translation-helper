@@ -1,0 +1,227 @@
+module Base
+{
+	template vehicle TestFRTrunk
+	{
+		part TruckBed
+		{
+			area = TruckBed,
+			category = bodywork,
+			itemType = Base.NormalTrunk,
+			specificItem = false,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = true,
+				/* FIXME: This should be "ContainerAccess.Trunk" */
+				test = Vehicles.ContainerAccess.FR_FillerTrunk,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+	
+	template vehicle FRTrunk
+	{
+		part TruckBed
+		{
+			area = TruckBed,
+			category = bodywork,
+			itemType = Base.NormalTrunk,
+			specificItem = false,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = true,
+				/* FIXME: This should be "ContainerAccess.Trunk" */
+				test = Vehicles.ContainerAccess.FR_FillerTrunk,
+			}
+			lua
+			{
+				create = Vehicles.Create.FR_FillerTrunk,
+				init = Vehicles.Init.FR_FillerTrunk,
+				update = Vehicles.Update.FR_FillerTrunk,
+			}
+		}
+	}
+	
+	template vehicle FRTrunkMultiAccess
+	{
+		part TruckBed
+		{
+			area = TruckBed,
+			category = bodywork,
+			itemType = Base.NormalTrunk,
+			specificItem = false,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = true,
+				/* FIXME: This should be "ContainerAccess.Trunk" */
+				test = Vehicles.ContainerAccess.FR_FillerTrunkMultiAccess,
+			}
+			lua
+			{
+				create = Vehicles.Create.FR_FillerTrunk,
+				init = Vehicles.Init.FR_FillerTrunk,
+				update = Vehicles.Update.FR_FillerTrunk,
+			}
+		}
+	}
+	
+	template vehicle FRTruckBed
+	{
+		part TruckBed
+		{
+			area = TruckBedOpen,
+			category = bodywork,
+			itemType = Base.FRLargeBed,
+			specificItem = false,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = true,
+				/* FIXME: This should be "ContainerAccess.Trunk" */
+				test = Vehicles.ContainerAccess.FR_VisualTruckBedFiller,
+			}
+			lua
+			{
+				create = Vehicles.Create.FR_FillerTrunk,
+				init = Vehicles.Init.FR_FillerTrunk,
+				update = Vehicles.Update.FR_FillerTrunk,
+			}
+		}
+	}
+	
+	
+	template vehicle FRTruckBedRemovable
+	{
+		part TruckBed
+		{
+			area = TruckBedOpen,
+			category = bodywork,
+			itemType = Base.FRLargeBed,
+			specificItem = false,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = true,
+				test = Vehicles.ContainerAccess.FR_VisualTruckBedFiller,
+			}
+			
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualRemovableBed,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.FR_Default,
+				requireEmpty = true,
+				requireUninstalled = TrunkDoor;FRAttachmentBed,
+			}
+			
+			lua
+			{
+				create = Vehicles.Create.FR_VisualRemovableBed,
+				init = Vehicles.Init.FR_VisualRemovableBed,
+				update = Vehicles.Update.FR_FillerTrunk,
+			}
+		}
+	}
+
+
+	template vehicle FRSideContainer
+	{
+		part FRSideContainer
+		{
+			area = SideContainer,
+			category = bodywork,
+			itemType = Base.FRSideContainer,
+			specificItem = false,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = true,
+				/* FIXME: This should be "ContainerAccess.Trunk" */
+				test = Vehicles.ContainerAccess.FR_FillerTrunkSideContainer,
+			}
+			
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualRemovableBed,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				test = Vehicles.UninstallTest.FR_Default,
+				requireEmpty = true,
+				requireUninstalled = FRSideContainerDoor,
+			}
+			
+			lua
+			{
+				create = Vehicles.Create.FR_VisualRemovableBed,
+				init = Vehicles.Init.FR_VisualRemovableBed,
+				update = Vehicles.Update.FR_FillerTrunk,
+			}
+		}
+	}
+}

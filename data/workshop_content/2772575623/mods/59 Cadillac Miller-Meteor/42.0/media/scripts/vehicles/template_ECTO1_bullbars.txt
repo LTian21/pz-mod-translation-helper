@@ -1,0 +1,167 @@
+module Base
+{
+    model ECTO1Bumper1
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_bumper0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model ECTO1BumperA
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_bumperA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model ECTO1bullbar1
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_bullbar1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model ECTO1BumperRear1
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle ECTO1Bullbars
+	{
+		part DAMNBumperFront
+        	{
+
+            model bumper0
+				{
+                		file = ECTO1Bumper1,
+				}
+
+            model bumper1
+				{
+                		file = ECTO1BumperA,
+				}
+
+			model bullbarA
+				{
+                		file = ECTO1bullbar1,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.ECTO1Bumper1;Base.ECTO1BumperA;Base.ECTO1Bullbar1,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ECTO1.InstallComplete.Bullbar,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Wrench,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 1500,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = ECTO1.UninstallComplete.Bullbar,
+            		}
+
+            		lua
+            		{
+                    create = ECTO1.Create.Bullbar,
+                    init = ECTO1.Init.Bullbar,
+                    }
+		    }
+
+            part DAMNBumperRear
+        	{
+
+            model bumperRear0
+				{
+                		file = ECTO1BumperRear1,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.ECTO1BumperRear1,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ECTO1.InstallComplete.BullbarRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Wrench,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 1500,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = ECTO1.UninstallComplete.BullbarRear,
+            		}
+
+            		lua
+            		{
+                    create = ECTO1.Create.BullbarRear,
+                    init = ECTO1.Init.BullbarRear,
+                    }
+		    }
+	}	
+}

@@ -1,0 +1,82 @@
+module Base
+{
+
+	model 85gmBbodyRoofrack0
+	{
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_roofrack0,
+		texture = Vehicles/Items_85gmBbody_Roofrack,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle PAR85RoofrackSedan
+	{
+		part GM85Roofrack
+		{
+            model Roofrack0
+				{
+                		file = 85gmBbodyRoofrack0,
+                		offset = 0.0000 0.0000 0.0000,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.85gmBbodyRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = PAR85.InstallComplete.RoofrackSedan,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = PAR85.UninstallComplete.RoofrackSedan,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = PAR85.Create.RoofrackSedan,
+					init = PAR85.Init.RoofrackSedan,
+				}
+		}
+	}
+}

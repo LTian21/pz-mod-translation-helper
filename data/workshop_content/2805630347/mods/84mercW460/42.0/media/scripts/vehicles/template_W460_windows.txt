@@ -1,0 +1,566 @@
+module Base
+{
+
+	model W460Cwindowfl
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fl_bone 1.0,
+	}
+
+	model W460Cwindowfr
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fr_bone 1.0,
+	}
+
+	model W460Lwindowrl
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_window_rl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_rl_bone 1.0,
+	}
+
+	model W460Lwindowrr
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_rr_bone 1.0,
+	}
+
+    model W460Lwindowbl
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_window_bl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model W460Lwindowbr
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_window_br,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model W460Swindowrl
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_swb_window_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model W460Swindowrr
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_swb_window_rr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle W460L2Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFLlwb
+			{
+				file = W460Cwindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.W460SideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFRlwb
+			{
+				file = W460Cwindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.W460SideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+		}
+
+		part WindowFront*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			durability = 2,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+    template vehicle W460L4Windows
+	{
+        template! = W460L2Windows, 
+
+		part WindowRearLeft
+		{
+			model windowRLlwb
+			{
+				file = W460Lwindowrl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+				rotate = 60 0 0,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.W460SideWindow,
+			table install
+			{
+				requireInstalled = DoorRearLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRRlwb
+			{
+				file = W460Lwindowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.W460SideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNRearRightArmor,
+				}
+		}
+
+        part WindowBackLeft
+		{
+			model windowBLlwb
+			{
+				file = W460Lwindowbl,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.W460SideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNBackLeftArmor,
+				}
+		}
+
+		part WindowBackRight
+		{
+			model windowBRlwb
+			{
+				file = W460Lwindowbr,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.W460SideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNBackRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			durability = 2,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+    template vehicle W460SWindows
+	{
+		part WindowFrontLeft
+		{
+			model windowFLswb
+			{
+				file = W460Cwindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.W460SideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFRSwb
+			{
+				file = W460Cwindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.W460SideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRLSwb2
+			{
+				file = W460Swindowrl,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatFrontLeft,
+			itemType = Base.W460SideWindow,
+			table uninstall
+				{
+				requireUninstalled = DAMNRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRRSwb2
+			{
+				file = W460Swindowrr,
+			}
+
+			parent = DoorRearRight,
+			area = SeatFrontRight,
+			itemType = Base.W460SideWindow,
+			table uninstall
+				{
+				requireUninstalled = DAMNRearRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			durability = 2,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+    template vehicle W460L4WindowsM
+	{
+        template! = W460L2Windows, 
+
+		part WindowRearLeft
+		{
+			model windowRLlwb
+			{
+				file = W460Lwindowrl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+				rotate = 60 0 0,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.W460SideWindow,
+			table install
+			{
+				requireInstalled = DoorRearLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRRlwb
+			{
+				file = W460Lwindowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.W460SideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNRearRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			durability = 2,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}
+

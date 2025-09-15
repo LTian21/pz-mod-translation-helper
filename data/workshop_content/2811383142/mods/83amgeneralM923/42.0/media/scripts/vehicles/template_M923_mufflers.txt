@@ -1,0 +1,74 @@
+module Base
+{
+	
+	model 83amgeneralM923muffler1
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_exhaust,
+		texture = Vehicles/Vehicles_83amgeneralM923_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M923Mufflers
+		{
+		part Muffler
+       		{
+
+		      model M923Muffler1
+    			{
+                    	file = 83amgeneralM923muffler1,
+    			}
+
+            area = TireRearLeft,
+	       category = engine,
+	       specificItem = false,
+            itemType = Base.M923Muffler1,
+	       mechanicRequireKey = false,
+           durability = 3,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+		          complete = M923.InstallComplete.Muffler,
+                door = EngineDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+		      complete = M923.UninstallComplete.Muffler,
+            }
+            lua
+            {
+                create = M923.Create.Muffler,
+                init = M923.Init.Muffler,
+            }
+        }
+	}
+}
+

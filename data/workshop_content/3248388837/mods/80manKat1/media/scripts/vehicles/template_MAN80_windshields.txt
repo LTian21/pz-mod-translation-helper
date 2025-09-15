@@ -1,0 +1,71 @@
+module Base
+{
+
+    model 80manKat1Windshield
+    {
+        mesh = vehicles/Vehicles_80manKat1_Body|MAN_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle MAN80Windshields
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 80manKat1Windshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.80manKat1Windshield,
+            area = Front,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = MAN80WindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+}

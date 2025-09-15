@@ -1,0 +1,160 @@
+module Base
+{
+
+    model 93townCarWindshield
+    {
+        mesh = vehicles/Vehicles_93townCar_Body|lincoln_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 93townCarWindshieldRear
+    {
+        mesh = vehicles/Vehicles_93townCar_Body|lincoln_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 93townCarLimoWindshieldRear
+    {
+        mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle LIN93Windshields
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 93townCarWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.93townCarWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = DAMNWindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 93townCarWindshieldRear,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.93townCarRearWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+    template vehicle LIN93WindshieldsLimo
+    {
+        template! = LIN93Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 93townCarWindshieldRear,
+                offset = 0.0000 0.0000 -1.4673,
+				rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+    }
+}

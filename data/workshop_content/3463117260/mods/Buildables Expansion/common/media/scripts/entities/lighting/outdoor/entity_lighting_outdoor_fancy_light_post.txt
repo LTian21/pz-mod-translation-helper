@@ -1,0 +1,58 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FancyLightPost
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Fancy Light Post,
+			Icon		= lighting_outdoor_01_0,
+		}
+	}
+
+    entity FancyLightPost
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FancyLightPost,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = lighting_outdoor_01_0,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Lighting,
+            SkillRequired = MetalWelding:6;Electricity:4,
+            xpAward       = MetalWelding:7;Electricity:15,
+            ToolTip       = Tooltip_craft_lightPostDesc,
+            inputs
+            {
+		        item 4 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[Screwdriver] mode:keep flags[Prop2],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 2 [Base.SmallSheetMetal],
+                item 4 [Base.SheetMetal],
+                item 5 [Base.ScrapMetal],
+		        item 4 [Base.WeldingRods],
+                item 10 [Base.ElectronicsScrap],
+		        item 15 [Base.ElectricWire],
+		        item 1 [Base.LightBulb],
+            }
+        }
+    }
+}

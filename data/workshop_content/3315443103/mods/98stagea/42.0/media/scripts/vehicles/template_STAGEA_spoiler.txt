@@ -1,0 +1,75 @@
+module Base
+{
+	
+	model 98stageaspoiler0
+	{
+		mesh = vehicles/Vehicles_98stagea_Body|stagea_spoiler,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    template vehicle STAGEASpoilers
+        {
+        part DAMNSpoiler
+            {
+
+            model STAGEAspoiler
+            {
+                    file = 98stageaspoiler0,
+            }
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            itemType = Base.98stageaSpoiler,
+            mechanicRequireKey = false,
+            durability = 2,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = STAGEA.InstallComplete.Spoiler,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = STAGEA.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = STAGEA.Create.Spoiler,
+                init = STAGEA.Init.Spoiler,
+            }
+        }
+    }
+}

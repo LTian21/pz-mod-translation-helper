@@ -1,0 +1,78 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_MakeshiftTarget
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Makeshift Target,
+			Icon		= location_military_generic_01_66,
+		}
+	}
+
+    entity MakeshiftTarget
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_MakeshiftTarget,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_military_generic_01_67,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_military_generic_01_66,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = location_military_generic_01_64,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_military_generic_01_65,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:2;MetalWelding:3,
+            xpAward       = Woodwork:5;MetalWelding:7,
+            category      = Decorations_Outdoor,
+            tags          = Carpentry;Welding,
+            ToolTip       = Tooltip_craft_outdoorDecorationsDesc,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 7 [Base.Plank] flags[Prop2],
+                item 4 [Base.Nails],
+                item 2 [Base.SheetMetal],
+                item 2 [Base.MetalBar;Base.MetalPipe],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

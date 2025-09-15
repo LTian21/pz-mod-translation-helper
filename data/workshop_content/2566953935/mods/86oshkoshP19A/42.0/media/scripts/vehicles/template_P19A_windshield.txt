@@ -1,0 +1,76 @@
+module Base
+{
+
+    model 86oshkoshP19Awindshield
+    {
+        mesh = vehicles/Vehicles_86oshkoshP19A_Body|p19a_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle P19AWindshield
+	{
+
+        part Windshield
+        {
+            model windshieldFront24562135
+            {
+            file = 86oshkoshP19Awindshield,
+            }
+            window
+            {
+            openable = false,
+            }
+            table uninstall
+                {
+                    requireUninstalled = DAMNWindshieldArmor,
+                }
+                
+            itemType = Base.P19AWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 3,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        }
+}

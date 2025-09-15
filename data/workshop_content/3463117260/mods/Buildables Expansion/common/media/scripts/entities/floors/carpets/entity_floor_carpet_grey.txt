@@ -1,0 +1,55 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FloorGreyCarpet
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Floor Grey Carpet,
+			Icon		= floors_interior_carpet_01_14,
+		}
+	}
+
+    entity FloorGreyCarpet
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FloorGreyCarpet,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+		    isThumpable     = false,
+		    OnIsValid = BuildRecipeCode.floor.OnIsValid,
+		    OnCreate = BuildRecipeCode.floor.OnCreate,
+		    			
+            face W
+            {
+                layer
+                {
+                    row = floors_interior_carpet_01_14,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = SewingCloth,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Floors_Carpets,
+            SkillRequired = Tailoring:2,
+            xpAward       = Tailoring:4,
+            ToolTip       = Tooltip_craft_carpetFloorDesc,
+            inputs
+            {
+                item 1 tags[SewingNeedle] mode:keep flags[Prop1],
+                item 5 [Base.RippedSheets] mode:destroy flags[Prop2],
+                item 3 [Base.Thread],
+            }
+        }
+    }
+}

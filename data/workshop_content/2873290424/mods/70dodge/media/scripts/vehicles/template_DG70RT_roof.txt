@@ -1,0 +1,100 @@
+module Base
+{
+
+	model DG70RTroof
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challengerRT_roof0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	
+	template vehicle DG70RTRoofs
+	{
+		part DG70RTRoof
+        	{
+
+			model DGRTroof0
+				{
+                		file = DG70RTroof,
+				}
+
+			category = Other,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.DG70RTRoof0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1000,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+	            	requireUninstalled = WindshieldRear,
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				}
+		}
+	}
+
+	template vehicle DG70BGRoofs
+	{
+		part DG70RTRoof
+        	{
+
+			model DGRTroof0
+				{
+                		file = DG70RTroof,
+				}
+
+			category = nodisplay,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.DG70RTRoof0,
+			mechanicRequireKey = false,
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				}
+		}
+	}
+}
+

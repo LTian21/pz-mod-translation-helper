@@ -1,0 +1,57 @@
+module Base
+{
+	model 81deloreanDMC12Spare1
+	{
+		mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_spare0,
+		texture = vehicles/Vehicles_81deloreanDMC12_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle DMC12SpareTires
+	{
+		part DMC12SpareTire
+        	{
+        	model DMC12Spare0
+			{
+				file = 81deloreanDMC12Spare1,
+			}
+
+			category = tire,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.81deloreanDMC12Tire3,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DMC12.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = DMC12.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = DMC12.Create.SpareTire,
+				init = DMC12.Init.SpareTire,
+				}
+		}
+	}
+
+}
+

@@ -1,0 +1,567 @@
+module Base
+{
+	model 98stageaWindshielda
+    	{
+        mesh = vehicles/Vehicles_98stagea_Body|stagea_windshield_frontA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 98stageaWindowfla
+    	{
+        mesh = vehicles/Vehicles_98stagea_Body|stagea_window_flA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 98stageaWindowfra
+    	{
+        mesh = vehicles/Vehicles_98stagea_Body|stagea_window_frA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 98stageaWindowrla
+    	{
+        mesh = vehicles/Vehicles_98stagea_Body|stagea_window_rlA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 98stageaWindowrra
+    	{
+        mesh = vehicles/Vehicles_98stagea_Body|stagea_window_rrA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 98stageaWindowbla
+    	{
+        mesh = vehicles/Vehicles_98stagea_Body|stagea_window_blA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 98stageaWindowbra
+    	{
+        mesh = vehicles/Vehicles_98stagea_Body|stagea_window_brA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 98stageaWindshieldReara
+    	{
+        mesh = vehicles/Vehicles_98stagea_Body|stagea_windshield_rearA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle STAGEAArmor
+		{
+		part STAGEAWindshieldArmor
+        	{
+
+			model STAGEAwinda
+				{
+                		file = 98stageaWindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.98stageaWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STAGEA.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = STAGEA.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = STAGEA.Create.WindshieldArmor,
+					init = STAGEA.Init.WindshieldArmor,
+					}
+		}
+
+		part STAGEAFrontLeftArmor
+        {
+
+			model STAGEAleftWindowa
+				{
+                		file = 98stageaWindowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.98stageaFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STAGEA.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = STAGEA.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = STAGEA.Create.FrontLeftArmor,
+					init = STAGEA.Init.FrontLeftArmor,
+					}
+		}
+
+		part STAGEAFrontRightArmor
+        {
+
+			model STAGEArightWindowa
+				{
+                		file = 98stageaWindowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.98stageaFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STAGEA.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = STAGEA.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = STAGEA.Create.FrontRightArmor,
+					init = STAGEA.Init.FrontRightArmor,
+					}
+		}
+
+		part STAGEARearLeftArmor
+        {
+
+			model STAGEAleftWindowra
+				{
+                		file = 98stageaWindowrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = WindowRearLeft,
+			specificItem = false,
+			itemType = Base.98stageaRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STAGEA.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = STAGEA.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = STAGEA.Create.RearLeftArmor,
+					init = STAGEA.Init.RearLeftArmor,
+					}
+		}
+
+		part STAGEARearRightArmor
+        {
+
+			model STAGEArightWindowra
+				{
+                		file = 98stageaWindowrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = WindowRearRight,
+			specificItem = false,
+			itemType = Base.98stageaRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STAGEA.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = STAGEA.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = STAGEA.Create.RearRightArmor,
+					init = STAGEA.Init.RearRightArmor,
+					}
+		}
+
+		part STAGEABackLeftArmor
+        {
+
+			model STAGEAleftWindowba
+				{
+                		file = 98stageaWindowbla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.98stageaBackWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STAGEA.InstallComplete.BackLeftArmor,
+                	requireInstalled = WindowBackLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+					complete = STAGEA.UninstallComplete.BackLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = STAGEA.Create.BackLeftArmor,
+					init = STAGEA.Init.BackLeftArmor,
+					}
+		}
+
+		part STAGEABackRightArmor
+        {
+
+			model STAGEArightWindowba
+				{
+                		file = 98stageaWindowbra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.98stageaBackWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STAGEA.InstallComplete.BackRightArmor,
+                	requireInstalled = WindowBackRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = STAGEA.UninstallComplete.BackRightArmor,
+            		}
+
+            		lua
+            		{
+					create = STAGEA.Create.BackRightArmor,
+					init = STAGEA.Init.BackRightArmor,
+					}
+		}
+
+		part STAGEAWindshieldRearArmor
+        	{
+
+			model STAGEAwindra
+				{
+                		file = 98stageaWindshieldReara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.98stageaWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STAGEA.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = STAGEA.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = STAGEA.Create.WindshieldRearArmor,
+					init = STAGEA.Init.WindshieldRearArmor,
+					}
+		}
+	}
+}

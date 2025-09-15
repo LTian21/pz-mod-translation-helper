@@ -1,0 +1,76 @@
+module Base
+{
+	model 89fordBroncoRollbar
+	{
+		mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_rollbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BR89Rollbar
+		{
+		part BR89Rollbar
+        	{
+
+			model Rollbar47764
+				{
+                		file = 89fordBroncoRollbar,
+				}
+
+			area = TireRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.80sPickupRollbarB,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireUninstalled = BR89BedCover,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 2000,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+                	test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+            		create = DAMN.Create.Blank,
+					}
+		}
+	}
+
+		
+}

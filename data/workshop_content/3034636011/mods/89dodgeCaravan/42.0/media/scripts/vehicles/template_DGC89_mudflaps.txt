@@ -1,0 +1,78 @@
+module Base
+{
+	model 89dodgeCaravanMudflaps0
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_mudflaps,
+		texture = Vehicles/Vehicles_89dodgeCaravan_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DGC89Mudflaps
+		{
+		part DAMNMudflaps
+        	{
+
+			model DGC89Mudflaps0
+				{
+                	file = 89dodgeCaravanMudflaps0,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			specificItem = false,
+			itemType = Base.89dodgeCaravanMudflaps0,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.Mudflaps,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 750,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = DGC89.UninstallComplete.Mudflaps,
+
+            		}
+
+            	lua
+            		{
+					create = DGC89.Create.Mudflaps,
+					init = DGC89.Init.Mudflaps,
+					}
+		}
+	}
+
+		
+}

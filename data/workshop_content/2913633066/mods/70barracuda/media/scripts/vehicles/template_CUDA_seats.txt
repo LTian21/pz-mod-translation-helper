@@ -1,0 +1,147 @@
+module Base
+{
+
+	model 70barracudaseatfl
+	{
+		mesh = vehicles/Vehicles_70barracuda_Body|cuda_seat_f,
+		texture = vehicles/Vehicles_70barracuda_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 70barracudaseatfr
+	{
+		mesh = vehicles/Vehicles_70barracuda_Body|cuda_seat_f,
+		texture = vehicles/Vehicles_70barracuda_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 70barracudaseatrl
+	{
+		mesh = vehicles/Vehicles_70barracuda_Body|cuda_seat_r,
+		texture = vehicles/Vehicles_70barracuda_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 70barracudaseatrr
+	{
+		mesh = vehicles/Vehicles_70barracuda_Body|cuda_seat_r,
+		texture = vehicles/Vehicles_70barracuda_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	
+	template vehicle CUDASeats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 70barracudaseatfl,
+			}
+			itemType = Base.CUDAFrontSeat,
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 70barracudaseatfr,
+			}
+			itemType = Base.CUDAFrontSeat,
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 70barracudaseatrl,
+			}
+			itemType = Base.CUDARearSeat,
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 70barracudaseatrr,
+			}
+			itemType = Base.CUDARearSeat,
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

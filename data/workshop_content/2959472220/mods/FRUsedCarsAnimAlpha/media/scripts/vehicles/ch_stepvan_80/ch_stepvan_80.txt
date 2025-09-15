@@ -1,0 +1,808 @@
+module Base
+{
+	vehicle fr_ch_stepvan_80
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 0.8,
+		engineRepairLevel = 5,
+		playerDamageProtection = 1.2,
+		engineRPMType = van,
+
+		model
+		{
+			file = Vehicles_ch_stepvan_80,
+			scale = 1.8500,
+			offset = 0.0000 0.3892 -0.3568,
+		}
+
+		spawnOffsetY = 0.5649187,
+
+		skin
+		{
+			texture = Vehicles/vehicle_ch_stepvan_80_shell,
+		}
+
+		textureMask = Vehicles/vehicle_ch_stepvan_80_mask,
+		textureLights = Vehicles/vehicle_ch_stepvan_80_lights,
+		textureDamage1Overlay = Vehicles/fr_Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/fr_Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/fr_Veh_Damage1,
+		textureDamage2Shell = Vehicles/fr_Veh_Damage2,
+		textureRust = Vehicles/fr_Veh_Rust,
+		template = FR_CarSpawnInfo,
+
+		sound
+		{
+			backSignal = VehicleBackUpBeeper,
+			engine = VehicleEngineStepVan,
+			engineStart = VehicleEngineStepVan,
+			engineTurnOff = VehicleEngineStepVan,
+			horn = VehicleHornVan,
+			ignitionFail = VehiclegnitionFailStepVan,
+		}
+
+		extents = 1.0811 1.0162 2.9730,
+		mass = 800,
+		physicsChassisShape = 1.0811 1.0162 2.9730,
+		centerOfMassOffset = 0.0000 0.5676 -0.2432,
+		shadowExtents = 1.0811 3.0270,
+		shadowOffset = 0.0000 -0.2432,
+		extentsOffset = 1.0 1.0,
+		engineForce = 2600,
+		engineQuality = 50,
+		engineLoudness = 130,
+		maxSpeed = 70f,
+		brakingForce = 60,
+		stoppingMovementForce = 1.0f,
+		rollInfluence = 1.2f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 20,
+		suspensionCompression = 3.83,
+		suspensionDamping = 4.88,
+		maxSuspensionTravelCm = 20,
+		suspensionRestLength = 0.4,
+		wheelFriction = 1.5f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+		isSmallVehicle = false,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.4378 -0.3676 1.2324,
+			radius = 0.17f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.4378 -0.3676 1.2324,
+			radius = 0.17f,
+			width = 0.2f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.3243 -0.3676 -0.5189,
+			radius = 0.17f,
+			width = 0.45f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.3243 -0.3676 -0.5189,
+			radius = 0.17f,
+			width = 0.45f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+
+			position inside
+			{
+				offset = 0.2973 0.0649 0.7351,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.7297 -0.5297 0.7622,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+
+			position inside
+			{
+				offset = -0.2973 0.0649 0.7351,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.7297 -0.5297 0.7622,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 1.4649 0.8973 0.4757,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -1.9676 0.8973 0.4757,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 0.7784 0.4541 0.4757 0.4757,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -0.7784 0.4541 0.4757 0.4757,
+		}
+
+		area GasTank
+		{
+			xywh = 0.7784 -1.1135 0.4757 0.4757,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.7784 0.8757 0.4757 0.4757,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.7784 0.8757 0.4757 0.4757,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 0.7784 -0.8757 0.4757 0.4757,
+		}
+
+		area TireRearRight
+		{
+			xywh = -0.7784 -0.8757 0.4757 0.4757,
+		}
+
+		template = FRTrunk,
+
+		part TruckBed
+		{
+			itemType = Base.FRNormalCargoTrunk,
+
+			model TrunkFillerEmpty
+			{
+				file = FRTrunkfiller_Empty,
+				offset = 0.0 -0.165 -1.1,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			model TrunkFiller1
+			{
+				file = FRTrunkfiller_CardBoxSmall_1,
+				offset = -0.4 -0.165 -0.9,
+				rotate = 0.0000 95.0000 0.0000,
+			}
+
+			model TrunkFiller2
+			{
+				file = FRTrunkfiller_TarpBig_1,
+				offset = 0.35 -0.165 -1.05,
+				rotate = 0.0000 90.0000 0.0000,
+			}
+
+			model TrunkFiller3
+			{
+				file = FRTrunkfiller_CardBoxBig_1,
+				offset = -0.3 -0.165 -1.15,
+				rotate = 0.0000 -10.0000 0.0000,
+			}
+
+			model TrunkFiller4
+			{
+				file = FRTrunkfiller_TarpBig_2,
+				offset = -0.02 -0.165 -0.8,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			model TrunkFiller5
+			{
+				file = FRTrunkfiller_CardBoxBig_1,
+				offset = -0.02 0.05 -0.87,
+				rotate = 0.0000 20.0000 0.0000,
+			}
+		}
+
+		template = FRTrunkDoor,
+
+		part TrunkDoor
+		{
+			model TrunkDoor
+			{
+				file = Trunk_ch_stepvan_80,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+
+		part SeatFrontLeft
+		{
+			model SeatFL
+			{
+				file = SeatFL_ch_stepvan_80,
+			}
+		}
+
+		part SeatFrontRight
+		{
+			model SeatFR
+			{
+				file = SeatFR_ch_stepvan_80,
+			}
+		}
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = GloveBox,
+
+		part GloveBox
+		{
+			container
+			{
+				capacity = 7,
+			}
+		}
+
+		template = FRGasTank,
+
+		part GasTank
+		{
+			table install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+
+		part Battery
+		{
+			model Battery
+			{
+				file = FR_CarBatteryNormal,
+				offset = -0.38 0.05 1.33,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+		}
+
+		template = FRHardRoof,
+
+		part FRRoof
+		{
+			model FRRoofHard
+			{
+				file = RoofHardShort_ch_stepvan_80,
+			}
+		}
+
+		template = FRBumper/part/FRBumperFront,
+
+		part FRBumperFront
+		{
+			model FRStockFrontBumper
+			{
+				file = BumperFront_ch_stepvan_80,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = FRBumper/part/FRBumperRear,
+
+		part FRBumperRear
+		{
+			model FRStockRearBumper
+			{
+				file = BumperRear_ch_stepvan_80,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part FRBumper*
+		{
+			table install
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = FRBumperBar,
+
+		part FRBumperBar
+		{
+			model FROffroadBumperBar
+			{
+				file = FR_BullbarLarge1,
+				offset = 0.0 -0.2 01.62,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			model FRPoliceBumperBar
+			{
+				file = FR_Pushbar1,
+				offset = 0.0 -0.2 01.62,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		template = FRAttachmentRoof,
+
+		part FRAttachmentRoof
+		{
+			model FRTopLightsFog
+			{
+				file = FRTopLightsFog1,
+				offset = 0.0 0.70 1.06,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		template = Engine,
+		template = FRFuelSystem/part/FRCarburetor,
+		template = FRMuffler,
+
+		part Muffler
+		{
+			model OldCarMuffler
+			{
+				file = FR_OldMuffler_short1,
+				offset = -0.56 -0.37 0.5,
+				rotate = -25.0000 -75.0000 0.0000,
+				scale = 1.15,
+			}
+
+			model NormalCarMuffler
+			{
+				file = FR_NormalMuffler_short1,
+				offset = -0.55 -0.36 -0.86,
+				rotate = -15.0000 -75.0000 0.0000,
+				scale = 1.15,
+			}
+
+			model ModernCarMuffler
+			{
+				file = FR_Muffler_dual1,
+				offset = 0.0 -0.36 -1.44,
+				rotate = -5.0000 0.0000 0.0000,
+				scale = 1.15,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = FREngineDoor,
+
+		part EngineDoor
+		{
+			table FRPartInfo
+			{
+				oneModel = TRUE,
+			}
+
+			model EngineDoor
+			{
+				file = Hood_ch_stepvan_80,
+				rotate = 0 0 0,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Heater,
+		template = FRPassengerCompartmentTruck/part/PassengerCompartment,
+		template = FRWindshield/part/Windshield,
+
+		part Windshield
+		{
+			model Windshield
+			{
+				file = Windshield_ch_stepvan_80,
+			}
+		}
+
+		part Windshield*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = FRWindow/part/WindowFrontLeft,
+		template = FRWindow/part/WindowFrontRight,
+
+		part WindowFrontLeft
+		{
+			model Default
+			{
+				file = Window_ch_stepvan_80_FL,
+			}
+		}
+
+		part WindowFrontRight
+		{
+			model Default
+			{
+				file = Window_ch_stepvan_80_FR,
+			}
+		}
+
+		part Window*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = FRDoor/part/DoorFrontLeft,
+		template = FRDoor/part/DoorFrontRight,
+
+		part DoorFrontLeft
+		{
+			model FrontCarDoor
+			{
+				file = Door_ch_stepvan_80_FL,
+			}
+		}
+
+		part DoorFrontRight
+		{
+			model FrontCarDoor
+			{
+				file = Door_ch_stepvan_80_FR,
+			}
+		}
+
+		part Door*
+		{
+			anim Open
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				rate = 1,
+				sound = VehicleDoorOpenVan,
+			}
+
+			anim Close
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				rate = 1,
+				sound = VehicleDoorCloseVan,
+			}
+
+			anim Lock
+			{
+				sound = LockVehicleDoorVan,
+			}
+
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorVan,
+			}
+
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedVan,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = FRMediumDutyTire,
+		template = Brake,
+
+		part BrakeFrontLeft
+		{
+			model BrakeFrontLeft
+			{
+				file = BrakeFL_ch_stepvan_80,
+			}
+		}
+
+		part BrakeFrontRight
+		{
+			model BrakeFrontRight
+			{
+				file = BrakeFR_ch_stepvan_80,
+			}
+		}
+
+		part BrakeRearLeft
+		{
+			model BrakeRearLeft
+			{
+				file = BrakeRL_ch_stepvan_80,
+			}
+		}
+
+		part BrakeRearRight
+		{
+			model BrakeRearRight
+			{
+				file = BrakeRR_ch_stepvan_80,
+			}
+		}
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:5,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:5,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part SuspensionFrontLeft
+		{
+			model SuspensionFrontLeft
+			{
+				file = SuspensionFL_ch_stepvan_80,
+			}
+		}
+
+		part SuspensionFrontRight
+		{
+			model SuspensionFrontRight
+			{
+				file = SuspensionFR_ch_stepvan_80,
+			}
+		}
+
+		part SuspensionRearLeft
+		{
+			model SuspensionRearLeft
+			{
+				file = SuspensionRL_ch_stepvan_80,
+			}
+		}
+
+		part SuspensionRearRight
+		{
+			model SuspensionRearRight
+			{
+				file = SuspensionRR_ch_stepvan_80,
+			}
+		}
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = FRRadio,
+
+		part Radio
+		{
+			model RadioBlack
+			{
+				file = FR_RadioCiv_blk,
+				offset = 0.150 0.15 1.03,
+				rotate = 27.0000 0.0000 0.0000,
+			}
+
+			model RadioRed
+			{
+				file = FR_RadioCiv_red,
+				offset = 0.150 0.15 1.03,
+				rotate = 27.0000 0.0000 0.0000,
+			}
+
+			model RadioMakeShift
+			{
+				file = FR_RadioCiv_makeshift,
+				offset = 0.150 0.15 1.03,
+				rotate = 27.0000 0.0000 0.0000,
+			}
+
+			model HamRadio1
+			{
+				file = FR_RadioHam_civ,
+				offset = 0.150 0.15 1.03,
+				rotate = 27.0000 0.0000 0.0000,
+			}
+
+			model HamRadio2
+			{
+				file = FR_RadioHam_mil,
+				offset = 0.150 0.15 1.03,
+				rotate = 27.0000 0.0000 0.0000,
+			}
+
+			model HamRadioMakeShift
+			{
+				file = FR_RadioHam_makeshift,
+				offset = 0.150 0.15 1.03,
+				rotate = 27.0000 0.0000 0.0000,
+			}
+
+			model Antenna
+			{
+				file = FR_AntennaCiv_1,
+				offset = 0.48 0.085 1.45,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			model AntennaMake
+			{
+				file = FR_AntennaCivMakeshift_1,
+				offset = 0.48 0.085 1.45,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			model HamAntenna1
+			{
+				file = FR_AntennaHam_1,
+				offset = 0.48 0.085 1.45,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			model HamAntenna2
+			{
+				file = FR_AntennaHamMil_1,
+				offset = -0.51 0.055 -1.385,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			model HamAntennaMake
+			{
+				file = FR_AntennaHamMakeshift_1,
+				offset = 0.48 0.085 1.45,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+		}
+
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.3189 -1.4486,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.2757 1.6270,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

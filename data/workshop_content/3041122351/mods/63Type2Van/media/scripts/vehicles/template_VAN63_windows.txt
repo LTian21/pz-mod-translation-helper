@@ -1,0 +1,441 @@
+module Base
+{
+
+	model 63Type2VanWindowfl
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fl_bone 1.0,
+	}
+
+	model 63Type2VanWindowfr
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fr_bone 1.0,
+	}
+
+	model 63Type2VanWindowrl
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_window_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 63Type2VanWindowrlm
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_window_rl_m,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 63Type2VanWindowrr
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_rr_bone 1.0,
+	}
+
+	model 63Type2VanWindowrrm
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_window_rr_m,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_rr_bone 1.0,
+	}
+
+	model 63Type2VanWindowbl
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_window_bl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 63Type2VanWindowbr
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_window_br,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle VAN63Windows6
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 63Type2VanWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			window
+			{
+				openable = true,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.63Type2VanFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = VAN63FrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 63Type2VanWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			window
+			{
+				openable = true,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.63Type2VanFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = VAN63FrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 63Type2VanWindowrl,
+			}
+
+			window
+			{
+				openable = false,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.63Type2VanRearDoubleWindow,
+
+			table uninstall
+				{
+				requireUninstalled = VAN63RearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 63Type2VanWindowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			window
+			{
+				openable = false,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.63Type2VanRearDoubleWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = VAN63RearRightArmor,
+				}
+		}
+
+		part WindowBackLeft
+		{
+			model windowBL
+			{
+				file = 63Type2VanWindowbl,
+			}
+
+			window
+			{
+				openable = false,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.63Type2VanRearSideWindow,
+			table uninstall
+				{
+				requireUninstalled = VAN63BackLeftArmor,
+				}
+		}
+
+		part WindowBackRight
+		{
+			model windowBR
+			{
+				file = 63Type2VanWindowbr,
+			}
+
+			window
+			{
+				openable = false,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.63Type2VanRearSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = VAN63BackRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            durability = 2,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+	template vehicle VAN63Windows4
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 63Type2VanWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			window
+			{
+				openable = true,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.63Type2VanFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = VAN63FrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 63Type2VanWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			window
+			{
+				openable = true,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.63Type2VanFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = VAN63FrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 63Type2VanWindowrlm,
+			}
+
+			window
+			{
+				openable = false,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.63Type2VanRearSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = VAN63RearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 63Type2VanWindowrrm,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			window
+			{
+				openable = false,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.63Type2VanRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = VAN63RearRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            durability = 2,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}
+

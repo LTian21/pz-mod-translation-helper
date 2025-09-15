@@ -1,0 +1,76 @@
+module Base
+{
+
+    model 78amgeneralM35A2windshield
+    {
+        mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle M35A2Windshield
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 78amgeneralM35A2windshield,
+            }
+            window
+            {
+            openable = false,
+            }
+            table uninstall
+                {
+                    requireUninstalled = DAMNWindshieldArmor,
+                }
+                
+            itemType = Base.M35A2Windshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        }
+}

@@ -1,0 +1,86 @@
+module Base
+{
+    model Tatrapan_Windshield
+    {
+        mesh = vehicles/Tatrapan|Windshield,
+        shader = vehicle,
+        scale = 0.01,
+    }
+    model Tatrapan_WindshieldRear
+    {
+        mesh = vehicles/Tatrapan|Rear_Windshield,
+        shader = vehicle,
+        scale = 0.01,
+        
+    }
+
+    template vehicle Tatrapan_windshields
+    {
+        template = Windshield/part/Windshield,
+        template = Windshield/part/WindshieldRear,
+
+        part Windshield
+        {
+            model windshieldFront
+			{
+				file = Tatrapan_Windshield,
+			}
+
+            area = Engine,
+            
+            category = bodywork,
+            mechanicRequireKey = false,
+
+			window
+			{
+				openable = false,
+			}
+
+            table install
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                requireUninstalled = ATA2ProtectionWindshield,
+			}
+        }
+
+        part WindshieldRear
+        {
+            
+            
+            model windshieldRear
+			{
+				file = Tatrapan_WindshieldRear,
+			}
+
+            area = Engine,
+            
+            category = bodywork,
+            mechanicRequireKey = false,
+
+			window
+			{
+				openable = false,
+			}
+
+            table install
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                requireUninstalled = ATA2ProtectionWindshieldRear,
+			}
+        }
+    }
+}

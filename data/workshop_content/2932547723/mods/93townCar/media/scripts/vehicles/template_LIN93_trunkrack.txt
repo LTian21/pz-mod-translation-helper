@@ -1,0 +1,166 @@
+module Base
+{
+
+	model 93townCarTrunkrack0
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_trunkrack,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 93townCarLimoTrunkrack0
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_trunkrack,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle LIN93Trunkrack
+	{
+		part LIN93Trunkrack
+		{
+
+			model Trunkrack0
+				{
+                		file = 93townCarTrunkrack0,
+				}
+
+			category = Other,
+			area = Trunkrack,
+			itemType = Base.93townCarTrunkRack,
+			parent = TrunkDoor,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = LIN93.ContainerAccess.Trunkrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = TrunkDoor,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.Trunkrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = LIN93.Create.Trunkrack,
+					init = LIN93.Init.Trunkrack,
+				}
+		}
+	}
+
+	template vehicle LIN93TrunkrackLimo
+	{
+		part LIN93Trunkrack
+		{
+
+			model Trunkrack0
+				{
+                		file = 93townCarLimoTrunkrack0,
+				}
+
+			category = Other,
+			area = Trunkrack,
+			itemType = Base.93townCarTrunkRack,
+			parent = TrunkDoor,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = LIN93.ContainerAccess.Trunkrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = TrunkDoor,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.Trunkrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = LIN93.Create.Trunkrack,
+					init = LIN93.Init.Trunkrack,
+				}
+		}
+	}
+}
+

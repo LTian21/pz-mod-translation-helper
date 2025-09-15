@@ -1,0 +1,86 @@
+module Base
+{
+    model TatrapanApocalypto_Windshield
+    {
+        mesh = vehicles/TatrapanApocalypto|Windshield,
+        shader = vehicle,
+        scale = 0.01,
+    }
+    model TatrapanApocalypto_WindshieldRear
+    {
+        mesh = vehicles/TatrapanApocalypto|Rear_Windshield,
+        shader = vehicle,
+        scale = 0.01,
+        
+    }
+
+    template vehicle TatrapanApocalypto_windshields
+    {
+        template = Windshield/part/Windshield,
+        template = Windshield/part/WindshieldRear,
+
+        part Windshield
+        {
+            model windshieldFront
+			{
+				file = TatrapanApocalypto_Windshield,
+			}
+
+            area = Engine,
+            
+            category = bodywork,
+            mechanicRequireKey = false,
+
+			window
+			{
+				openable = false,
+			}
+
+            table install
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                requireUninstalled = ATA2ProtectionWindshield,
+			}
+        }
+
+        part WindshieldRear
+        {
+            
+            
+            model windshieldRear
+			{
+				file = TatrapanApocalypto_WindshieldRear,
+			}
+
+            area = Engine,
+            
+            category = bodywork,
+            mechanicRequireKey = false,
+
+			window
+			{
+				openable = false,
+			}
+
+            table install
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                requireUninstalled = ATA2ProtectionWindshieldRear,
+			}
+        }
+    }
+}

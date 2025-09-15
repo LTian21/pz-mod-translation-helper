@@ -1,0 +1,184 @@
+module Base
+{
+    model W460SBodykit1
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_swb_bodykit,
+		texture = Vehicles/Vehicles_84mercLWB4_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model W460LBodykit1
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_bodykit,
+		texture = Vehicles/Vehicles_84mercLWB4_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model W460LBodykitM
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_bodykitM,
+		texture = Vehicles/Vehicles_84merc_Wheels,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle W460LBodykit
+	{
+		part W460Bodykit
+		{
+
+			model Bodykit1
+				{
+                		file = W460LBodykit1,
+				}
+
+			category = bodywork,
+			area = Bodykit,
+			specificItem = false,
+			itemType = Base.W460Bodykit1_Item,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.Bodykit,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.Bodykit,
+					requireEmpty = true,
+
+            		}
+
+            		lua
+            		{
+					create = W460.Create.Bodykit,
+					init = W460.Init.Bodykit,
+					}
+		}
+	}
+
+    template vehicle W460SBodykit
+	{
+        template! = W460LBodykit,
+
+		part W460Bodykit
+		{
+			model Bodykit1
+				{
+                		file = W460SBodykit1,
+				}
+		}
+	}
+
+    template vehicle W460LBodykitM
+	{
+		part W460Bodykit
+		{
+            model BodykitM
+				{
+                		file = W460LBodykitM,
+				}
+
+			model Bodykit1
+				{
+                		file = W460LBodykit1,
+				}
+
+			category = bodywork,
+			area = Bodykit,
+			specificItem = false,
+			itemType = Base.W460BodykitM_Item;Base.W460Bodykit1_Item,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.BodykitM,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.BodykitM,
+					requireEmpty = true,
+
+            		}
+
+            		lua
+            		{
+					create = W460.Create.BodykitM,
+					init = W460.Init.BodykitM,
+					}
+		}
+	}
+}
+

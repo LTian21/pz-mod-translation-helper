@@ -1,0 +1,79 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_ParkBench
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Park Bench,
+			Icon		= furniture_seating_outdoor_01_1,
+		}
+	}
+
+    entity ParkBench
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_ParkBench,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = furniture_seating_outdoor_01_7,
+                    row = furniture_seating_outdoor_01_6,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = furniture_seating_outdoor_01_4 furniture_seating_outdoor_01_5,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = furniture_seating_outdoor_01_2,
+                    row = furniture_seating_outdoor_01_3,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_seating_outdoor_01_0 furniture_seating_outdoor_01_1,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 350,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:10,
+            category      = Furniture_Seating,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_benchesDesc,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[Hammer] mode:keep,
+                item 1 [Base.Saw] mode:keep,
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 8 [Base.Plank],
+                item 3 [Base.Nails],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

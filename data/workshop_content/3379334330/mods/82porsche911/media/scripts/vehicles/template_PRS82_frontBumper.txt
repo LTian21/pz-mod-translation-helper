@@ -1,0 +1,185 @@
+module Base
+{
+	model 82porsche911frontBumper0
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82porsche911frontBumperA
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 82porsche911rwbfrontBumper1
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911rwb_bumper_front2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82porsche911rwbfrontBumperA
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911rwb_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82porsche911frontBullbarA
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911_bullbar_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle PRS82FrontBumpers
+		{
+		part PRS82FrontBumper
+        	{
+
+			model FrontBumper0
+				{
+                		file = 82porsche911frontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 82porsche911frontBumperA,
+				}
+
+			model FrontBumper2
+				{
+                		file = 82porsche911frontBullbarA,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82porsche911turboBumperFront0;Base.82porsche911turboBumperFrontA;Base.82porsche911BullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRS82.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PRS82.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = PRS82.Create.FrontBumper,
+					init = PRS82.Init.FrontBumper,
+					}
+		}
+	}
+
+    template vehicle PRS82FrontBumpersRWB
+		{
+		part PRS82FrontBumper
+        	{
+
+			model FrontBumper0
+				{
+                		file = 82porsche911rwbfrontBumper1,
+				}
+
+			model FrontBumper1
+				{
+                		file = 82porsche911rwbfrontBumperA,
+				}
+
+			model FrontBumper2
+				{
+                		file = 82porsche911frontBullbarA,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82porsche911RWBBumperFront1;Base.82porsche911RWBBumperFrontA;Base.82porsche911BullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRS82.InstallComplete.FrontBumperRWB,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PRS82.UninstallComplete.FrontBumperRWB,
+            		}
+
+            		lua
+            		{
+					create = PRS82.Create.FrontBumperRWB,
+					init = PRS82.Init.FrontBumperRWB,
+					}
+		}
+	}
+}

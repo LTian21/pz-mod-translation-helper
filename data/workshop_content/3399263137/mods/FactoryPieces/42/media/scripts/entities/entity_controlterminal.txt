@@ -1,0 +1,76 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Control_Terminal
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Control Terminal,
+			Icon		= Build_ControlTerminal,
+		}
+	}
+
+    entity BuildControlTerminal
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Control_Terminal,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = security_01_3,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = security_01_2,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = security_01_1,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = security_01_0,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Electricity:2;MetalWelding:2,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPControlTerminal,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 5 [Base.SmallSheetMetal],
+                item 2 [Base.Screws],
+                item 2 [Base.ElectricWire],
+                item 20 [Base.ElectronicsScrap],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

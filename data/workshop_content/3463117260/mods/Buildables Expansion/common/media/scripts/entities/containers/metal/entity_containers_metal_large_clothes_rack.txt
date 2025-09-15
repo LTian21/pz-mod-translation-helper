@@ -1,0 +1,62 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LargeClothesRack
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Large Clothes Rack,
+			Icon		= location_shop_generic_01_39,
+		}
+	}
+
+    entity LargeClothesRack
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_LargeClothesRack,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_shop_generic_01_37,
+                    row = location_shop_generic_01_36,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_shop_generic_01_38 location_shop_generic_01_39,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 50,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:10,
+            category      = Containers_Metal,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_metalClothesStandDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SmallSheetMetal],
+                item 6 [Base.MetalBar;Base.MetalPipe],
+                item 10 [Base.ScrapMetal],
+                item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

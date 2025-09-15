@@ -1,0 +1,151 @@
+module Base
+{
+	template vehicle HLX88SpareTire
+	{
+
+        part DAMNSpareTire
+        {
+            specificItem = false,
+            itemType = Base.88toyotaHiluxTire2;damnCraft.SmallTire2,
+            area = TruckBed,
+            category = tire,
+            mechanicRequireKey = false,
+            durability = 3,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			             equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = HLX88.InstallComplete.SpareTire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = HLX88.UninstallComplete.SpareTire,
+            }
+            lua
+            {
+                create = HLX88.Create.SpareTire,
+				init = HLX88.Init.SpareTire,
+            }
+        }
+
+		part DAMNSpareTireBed
+        {
+
+			model SpareTire
+			{
+				file = 88toyotaHiluxWheel1FL,
+				offset = -0.1889 0.3793 -0.4333,
+				rotate = 0.0000 90.0000 0.0000,
+			}
+
+			model SpareTire2
+			{
+				file = 88toyotaHiluxWheelUNIL,
+				offset = -0.1889 0.3793 -0.4333,
+				rotate = 0.0000 90.0000 0.0000,
+			}
+
+			area = TruckBed,
+			category = tire,
+			specificItem = false,
+			itemType = Base.88toyotaHiluxTire2;damnCraft.SmallTire2,
+			mechanicRequireKey = false,
+            durability = 2,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 350,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.SpareTireBed,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 350,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = HLX88.UninstallComplete.SpareTireBed,
+            		}
+
+            		lua
+            		{
+                        init = HLX88.Init.SpareTireBed,
+			            create = HLX88.Create.SpareTireBed,
+			        }
+		}
+	}
+
+    template vehicle HLX88SpareTireXC
+	{
+        template! = HLX88SpareTire,
+
+		part DAMNSpareTireBed
+        {
+			model SpareTire
+			{
+				file = 88toyotaHiluxWheel1FL,
+				offset = -0.1889 0.3793 -0.8380,
+				rotate = 0.0000 90.0000 0.0000,
+			}
+
+			model SpareTire2
+			{
+				file = 88toyotaHiluxWheelUNIL,
+				offset = -0.1889 0.3793 -0.8380,
+				rotate = 0.0000 90.0000 0.0000,
+			}
+		}
+	}
+}

@@ -1,0 +1,327 @@
+module Base
+{
+	model 90bmwE30BumperFront0
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 90bmwE30BumperFrontA
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 90bmwE30BumperRear0
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 90bmwE30BumperFrontM
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_bumper_frontM,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 90bmwE30BumperFrontMA
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_bumper_frontMA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 90bmwE30BumperRearM
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_bumper_rearM,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 90bmwE30Bullbar
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BMWE30BumpersStock
+		{
+		part DAMNBumperFront
+        	{
+
+			model BumperFront0
+				{
+                		file = 90bmwE30BumperFront0,
+				}
+
+			model BumperFrontA
+				{
+                		file = 90bmwE30BumperFrontA,
+				}
+
+			model BullbarFrontA
+				{
+                		file = 90bmwE30Bullbar,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.90bmwE30BumperFront;Base.90bmwE30BumperFrontA;Base.90bmwE30Bullbar,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.BumperFront,
+					init = BMWE30.Init.BumperFront,
+					}
+			}
+
+
+		part DAMNBumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 90bmwE30BumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.90bmwE30BumperRear,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.BumperRear,
+					init = BMWE30.Init.BumperRear,
+					}
+		}
+	}
+
+	template vehicle BMWE30BumpersM
+		{
+		part DAMNBumperFront
+        	{
+
+			model BumperFrontM
+				{
+                		file = 90bmwE30BumperFrontM,
+				}
+
+			model BumperFrontMA
+				{
+                		file = 90bmwE30BumperFrontMA,
+				}
+
+			model BullbarFrontA
+				{
+                		file = 90bmwE30Bullbar,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.90bmwE30BumperFrontM;Base.90bmwE30BumperFrontMA;Base.90bmwE30Bullbar,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.BumperFrontM,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.BumperFrontM,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.BumperFrontM,
+					init = BMWE30.Init.BumperFrontM,
+					}
+			}
+
+
+		part DAMNBumperRear
+        	{
+
+			model BumperRearM
+				{
+                		file = 90bmwE30BumperRearM,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.90bmwE30BumperRearM,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.BumperRearM,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.BumperRearM,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.BumperRearM,
+					init = BMWE30.Init.BumperRearM,
+					}
+		}
+	}
+}

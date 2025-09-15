@@ -1,0 +1,57 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LogFence
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Log Fence,
+			Icon		= Build_FenceLogs,
+		}
+	}
+
+    entity LogFence
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_LogFence,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 200,
+			
+            face W
+            {
+                layer
+                {
+                    row = crafted_04_116,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = crafted_04_115,
+                }
+            }
+			corner = crafted_04_119,
+        }
+		
+        component CraftRecipe
+        {
+            timedAction   = BuildWallNoTool,
+            time          = 150,
+            category      = Carpentry,
+            tags          = Carpentry,
+            xpAward       = Woodwork:5,
+            ToolTip       = Tooltip_craft_stickFenceDesc,
+            inputs
+            {
+                item 1 [SWB.LogFenceKit],
+            }
+        }
+    }
+}

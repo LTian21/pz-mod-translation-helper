@@ -1,0 +1,79 @@
+module Base
+{
+	model 86oshkoshP19AWindshieldArmor1
+    {
+        mesh = vehicles/Vehicles_86oshkoshP19A_mk2_Body|p19a_windshield_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+    }
+
+	template vehicle P19AWindshieldArmors
+		{
+		part P19AWindshieldArmor
+        	{
+
+			model WindshieldArmor1
+				{
+                		file = 86oshkoshP19AWindshieldArmor1,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.P19AWindshieldArmor1_Item,
+			mechanicRequireKey = false,
+			table install
+					{
+						requireInstalled = Windshield,
+					}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = P19A.InstallComplete.WindshieldArmor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1100,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = P19A.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+			create = P19A.Create.WindshieldArmor,
+			init = P19A.Init.WindshieldArmor,
+			}
+		}
+	}
+
+		
+}

@@ -1,0 +1,78 @@
+module Base
+{
+
+	model 69miniMrBChair
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_chair,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle MINI69MrBean
+	{
+
+		part SeatChair
+		{
+
+			model seatChair
+			{
+				file = 69miniMrBChair,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = Chair,
+			container
+			{
+				seat = Chair,
+			}
+
+			category = seat,
+			itemType = Base.69miniMrBChair,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+
+			lua
+            	{
+            	create = Vehicles.Create.Default,
+				}
+		}
+
+		part FakeChairDoor
+		{
+				itemType = nil,
+				category = nodisplay,
+                durability = 3,
+				area = Chair,
+
+				lua
+				{
+					create = DAMN.Create.Blank,
+				}
+		}
+
+		part FakeChairWindow
+		{
+				itemType = nil,
+				category = nodisplay,
+				parent = FakeChairDoor,
+                durability = 3,
+				area = Chair,
+				window
+				{
+				openable = true,
+				}
+
+				lua
+				{
+					create = DAMN.Create.Blank,
+				}
+		}
+	}
+}
+

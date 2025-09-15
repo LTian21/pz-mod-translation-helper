@@ -1,0 +1,58 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FancyBlueRug
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Fancy Blue Rug,
+			Icon		= floors_rugs_01_34,
+		}
+	}
+
+    entity FancyBlueRug
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FancyBlueRug,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {	
+            face N
+            {
+                layer
+                {
+                    row = floors_rugs_01_35,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = floors_rugs_01_34,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = SewingCloth,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Decorations_Rugs,
+            SkillRequired = Tailoring:2,
+            xpAward       = Tailoring:4,
+            ToolTip       = Tooltip_craft_rugsDesc,
+            inputs
+            {
+                item 1 tags[SewingNeedle] mode:keep flags[Prop1],
+                item 5 [Base.RippedSheets] mode:destroy flags[Prop2],
+                item 3 [Base.Thread],
+            }
+        }
+    }
+}

@@ -1,0 +1,197 @@
+module Base
+{
+	model UH1BHuey_WindowFrontLeft
+	{
+		mesh = vehicles/UH1BHuey|UH1BHueyWindowFrontLeft,
+		shader = vehicle,
+		static = FALSE,
+		scale = 0.01,
+	}
+	model UH1BHuey_WindowFrontRight
+	{
+		mesh = vehicles/UH1BHuey|UH1BHueyWindowFrontRight,
+		shader = vehicle,
+		static = FALSE,
+		scale = 0.01,
+	}
+	model UH1BHuey_WindowRearLeft
+	{
+		mesh = vehicles/UH1BHuey|UH1BHueyWindowRearLeft,
+		shader = vehicle,
+		static = FALSE,
+		scale = 0.01,
+	}
+	model UH1BHuey_WindowRearRight
+	{
+		mesh = vehicles/UH1BHuey|UH1BHueyWindowRearRight,
+		shader = vehicle,
+		static = FALSE,
+		scale = 0.01,
+	}
+	
+	template vehicle UH1BHueyWindow
+	{
+		part WindowFrontLeft
+		{
+			model Default
+			{
+				file = UH1BHuey_WindowFrontLeft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.FrontWindow,
+
+			anim ClosedToOpen
+			{
+				anim = DoorFrontLeft,
+				animate = FALSE,
+			}
+
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+
+		}
+
+		part WindowFrontRight
+		{
+			model Default
+			{
+				file = UH1BHuey_WindowFrontRight,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}		
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.FrontWindow,
+			
+			anim ClosedToOpen
+			{
+				anim = DoorFrontRight,
+				animate = FALSE,
+			}
+
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+
+						
+		}
+		part WindowRearLeft
+		{
+			model Default
+			{
+				file = UH1BHuey_WindowRearLeft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.RearWindow,
+
+			anim ClosedToOpen
+			{
+				anim = DoorRearLeft,
+				animate = FALSE,
+			}
+
+			table install
+			{
+				requireInstalled = DoorRearLeft,
+			}
+
+		}
+
+		part WindowRearRight
+		{
+			model Default
+			{
+				file = UH1BHuey_WindowRearRight,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}		
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.RearWindow,
+
+			anim ClosedToOpen
+			{
+				anim = DoorRearRight,
+				animate = FALSE,
+			}
+
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+
+						
+		}
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			anim Open
+			{
+				sound = VehicleWindowHandleOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowHandleClose,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,			
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}
+

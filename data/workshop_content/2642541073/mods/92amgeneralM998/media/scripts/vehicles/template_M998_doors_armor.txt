@@ -1,0 +1,200 @@
+module Base
+{
+    model 92amgeneralM998doorfla
+    {
+        mesh = vehicles/Vehicles_92amgeneralM998_Body|door_fl_a,
+        shader = damn_vehicle_noreflect_shader,
+        static = FALSE,
+        scale = 0.1,
+        boneWeight = door_fl_bone 1.0,
+    }
+
+    model 92amgeneralM998doorfra
+    {
+        mesh = vehicles/Vehicles_92amgeneralM998_Body|door_fr_a,
+        shader = damn_vehicle_noreflect_shader,
+        static = FALSE,
+        scale = 0.1,
+        boneWeight = door_fr_bone 1.0,
+    }
+
+    model 92amgeneralM998doorrla
+    {
+        mesh = vehicles/Vehicles_92amgeneralM998_Body|door_rl_a,
+        shader = damn_vehicle_noreflect_shader,
+        static = FALSE,
+        scale = 0.1,
+        boneWeight = door_rl_bone 1.0,
+    }
+
+    model 92amgeneralM998doorrra
+    {
+        mesh = vehicles/Vehicles_92amgeneralM998_Body|door_rr_a,
+        shader = damn_vehicle_noreflect_shader,
+        static = FALSE,
+        scale = 0.1,
+        boneWeight = door_rr_bone 1.0,
+    }
+
+    template vehicle M998DoorArmors
+    {
+        part M998DoorFrontLeftArmor
+        {
+            model DoorFrontLeftArmor1
+            {
+                file = 92amgeneralM998doorfla,
+            }
+            parent = DoorFrontLeft,
+            itemType = Base.M998CarFrontDoorArmor1_Item,
+            specificItem = false,
+            area = SeatFrontLeft,
+            table install
+            {
+                requireInstalled = WindowFrontLeft,
+            }
+            lua
+            {
+                create = M998.Create.DoorFrontLeftArmor,
+                init = M998.Init.DoorFrontLeftArmor,
+            }
+        }
+
+        part M998DoorFrontRightArmor
+        {
+            model DoorFrontRightArmor1
+            {
+                file = 92amgeneralM998doorfra,
+            }
+            parent = DoorFrontRight,
+            itemType = Base.M998CarFrontDoorArmor1_Item,
+            specificItem = false,
+            area = SeatFrontRight,
+            table install
+            {
+                requireInstalled = WindowFrontRight,
+            }
+            lua
+            {
+                create = M998.Create.DoorFrontRightArmor,
+                init = M998.Init.DoorFrontRightArmor,
+            }
+        }
+
+        part M998DoorRearLeftArmor
+        {
+            model DoorRearLeftArmor1
+            {
+                file = 92amgeneralM998doorrla,
+            }
+            parent = DoorRearLeft,
+            itemType = Base.M998CarRearDoorArmor1_Item,
+            specificItem = false,
+            area = SeatRearLeft,
+            table install
+            {
+                requireInstalled = WindowRearLeft,
+            }
+            lua
+            {
+                create = M998.Create.DoorRearLeftArmor,
+                init = M998.Init.DoorRearLeftArmor,
+            }
+        }
+
+        part M998DoorRearRightArmor
+        {
+            model DoorRearRightArmor1
+            {
+                file = 92amgeneralM998doorrra,
+            }
+            parent = DoorRearRight,
+            itemType = Base.M998CarRearDoorArmor1_Item,
+            specificItem = false,
+            area = SeatRearRight,
+            table install
+            {
+                requireInstalled = WindowRearRight,
+            }
+            lua
+            {
+                create = M998.Create.DoorRearRightArmor,
+                init = M998.Init.DoorRearRightArmor,
+            }
+        }
+
+        part M998Door*
+        {
+            category = door,
+            door
+            {
+            }
+            anim Open
+            {
+                sound = VehicleDoorOpenStandard,
+            }
+            anim Close
+            {
+                sound = VehicleDoorCloseStandard,
+            }
+            anim Lock
+            {
+                sound = LockVehicleDoorStandard,
+            }
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorStandard,
+            }
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedStandard,
+            }
+            anim ActorOpen
+            {
+                anim = Attack_Shove,
+                rate = 0.3,
+            }
+            anim ActorClose
+            {
+                anim = Attack_Shove,
+                rate = 0.3,
+            }
+            mechanicRequireKey = true,
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1200,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Door,
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1200,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Door,
+            }
+        }
+    }
+}

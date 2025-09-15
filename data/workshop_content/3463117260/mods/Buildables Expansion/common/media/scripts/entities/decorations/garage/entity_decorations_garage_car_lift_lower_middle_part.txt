@@ -1,0 +1,62 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_CarLiftMiddleMiddlePart
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Car Lift Middle Middle Part,
+			Icon		= location_business_machinery_01_9,
+		}
+	}
+
+    entity CarLiftMiddleMiddlePart
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_CarLiftMiddleMiddlePart,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face E
+            {
+                layer
+                {
+                    row = location_business_machinery_01_4,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_business_machinery_01_9,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildLowMetal,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:4,
+            category      = Decorations_Garage,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_garageDecorationsDesc,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SmallSheetMetal],
+                item 1 [Base.SheetMetal],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

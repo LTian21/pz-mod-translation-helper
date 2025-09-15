@@ -1,0 +1,186 @@
+module Base
+{
+	model 87chevySuburbanFrontBumper0
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87chevySuburbanFrontBumper1
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87chevySuburbanFrontBullbarA
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87chevySuburbanRearBumper0
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SUB87BumperRear
+	{
+		part SUB87BumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 87chevySuburbanRearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.87chevySuburbanBumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SUB87.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = SUB87.Create.BumperRear,
+					init = SUB87.Init.BumperRear,
+					}
+		}
+	}
+
+	template vehicle SUB87Bumpers
+	{
+		part SUB87BumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 87chevySuburbanFrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 87chevySuburbanFrontBumper1,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 87chevySuburbanFrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.87chevySuburbanBumperFront0;Base.87chevySuburbanBumperFront1;Base.87chevySuburbanBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SUB87.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = SUB87.Create.BumperFront,
+					init = SUB87.Init.BumperFront,
+					}
+		}
+
+		template! = SUB87BumperRear,
+	}
+
+	template vehicle SUB87BumpersCUCV
+	{
+		
+		template! = SUB87Bumpers,
+
+		part SUB87BumperFront
+        	{
+
+            		lua
+            		{
+					create = SUB87.Create.BumperFrontCUCV,
+					init = SUB87.Init.BumperFrontCUCV,
+					}
+		}
+	}
+}

@@ -1,0 +1,648 @@
+module Base
+{
+	model 91fordLTDWindshielda0
+    	{
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 91fordLTDDoorfla
+    	{
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 91fordLTDDoorfra
+    	{
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 91fordLTDDoorrla
+    	{
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 91fordLTDDoorrra
+    	{
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 91fordLTDWindshieldreara
+    	{
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_windshield_rear_sedan_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 91fordLTDDoorbla
+    	{
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_window_bl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 91fordLTDDoorbra
+    	{
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_window_br_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 91fordLTDWindshieldrearaW
+    	{
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_windshield_rear_wagon_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle LTD91ArmorCommon
+		{
+		part LTD91WindshieldArmor
+        	{
+
+			model LTD91winda0
+				{
+                		file = 91fordLTDWindshielda0,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.fordCVPIWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = LTD91.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.WindshieldArmor,
+					init = LTD91.Init.WindshieldArmor,
+					}
+		}
+
+		part LTD91WindowFrontLeftArmor
+        {
+
+			model LTD91leftdoora
+				{
+                		file = 91fordLTDDoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.fordCVPIFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.WindowFrontLeftArmor,
+					init = LTD91.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part LTD91WindowFrontRightArmor
+        {
+
+			model LTD91rightdoora
+				{
+                		file = 91fordLTDDoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.fordCVPIFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.WindowFrontRightArmor,
+					init = LTD91.Init.WindowFrontRightArmor,
+					}
+		}
+
+		part LTD91WindowRearLeftArmor
+        {
+
+			model LTD91leftdoorra
+				{
+                		file = 91fordLTDDoorrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.fordCVPIRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.WindowRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.WindowRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.WindowRearLeftArmor,
+					init = LTD91.Init.WindowRearLeftArmor,
+					}
+		}
+
+		part LTD91WindowRearRightArmor
+        {
+
+			model LTD91rightdoorra
+				{
+                		file = 91fordLTDDoorrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.fordCVPIRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.WindowRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.WindowRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.WindowRearRightArmor,
+					init = LTD91.Init.WindowRearRightArmor,
+					}
+		}
+
+	}
+
+    template vehicle LTD91Armor
+		{
+		template! = LTD91ArmorCommon,
+
+		part LTD91WindshieldRearArmor
+        {
+
+				model LTD91windra
+				{
+                		file = 91fordLTDWindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.fordCVPIWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.WindshieldRearArmor,
+					init = LTD91.Init.WindshieldRearArmor,
+					}
+		}
+	}
+
+    template vehicle LTD91ArmorWagon
+		{
+		template! = LTD91ArmorCommon,
+
+        part LTD91WindowBackLeftArmor
+        {
+
+			model LTD91leftwinbla
+				{
+                		file = 91fordLTDDoorbla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.91fordLTDWagonBackWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.WindowBackLeftArmor,
+                	requireInstalled = WindowBackLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.WindowBackLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.WindowBackLeftArmor,
+					init = LTD91.Init.WindowBackLeftArmor,
+					}
+		}
+
+		part LTD91WindowBackRightArmor
+        {
+
+			model LTD91rightwinba
+				{
+                		file = 91fordLTDDoorbra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.91fordLTDWagonBackWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.WindowBackRightArmor,
+                	requireInstalled = WindowBackRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.WindowBackRightArmor,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.WindowBackRightArmor,
+					init = LTD91.Init.WindowBackRightArmor,
+					}
+		}
+
+		part LTD91WindshieldRearArmor
+        {
+
+				model LTD91windrab
+				{
+                		file = 91fordLTDWindshieldrearaW,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.91fordLTDWagonWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.WindshieldRearArmorW,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.WindshieldRearArmorW,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.WindshieldRearArmorW,
+					init = LTD91.Init.WindshieldRearArmorW,
+					}
+		}
+	}
+}

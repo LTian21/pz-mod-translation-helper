@@ -1,0 +1,61 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Wood_TableSmall_Lvl3
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Small Wood Table (Good),
+			Icon		= Build_TableSmallWood,
+
+			components
+			{
+				CraftLogic
+				{
+					LuaPanelClass	= ISCraftDefaultPanel,
+					DisplayName	= Wood Table,
+					Icon		= Build_TableSmallWood,
+				}
+			}
+		}
+	}
+
+    entity Wood_TableSmall_Lvl3
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Wood_TableSmall_Lvl3,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = carpentry_01_62,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = woodenTableLvl3Test,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 50,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:5,
+            category      = Furniture,
+            tags          = carpentry;Furniture,
+            ToolTip       = Tooltip_craft_tableDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1],
+                item 1 [SWB.PlankKit2x],
+                item 2 [Base.Nails],
+            }
+        }
+    }
+}

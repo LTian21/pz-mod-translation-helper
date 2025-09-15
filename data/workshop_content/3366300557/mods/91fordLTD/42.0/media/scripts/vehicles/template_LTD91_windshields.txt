@@ -1,0 +1,214 @@
+module Base
+{
+
+    model 91fordLTDWindshield
+    {
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 91fordLTDWindshieldRear
+    {
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_windshield_rear_sedan,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 91fordLTDWindshieldRearWagon
+    {
+        mesh = vehicles/Vehicles_91fordLTD_Body|vic91_windshield_rear_wagon,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+
+	template vehicle LTD91WindshieldsFront
+	{
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 91fordLTDWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.91fordLTDWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = DAMNWindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle LTD91Windshields
+	{
+        template! = LTD91WindshieldsFront,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 91fordLTDWindshieldRear,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.91fordLTDRearWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle LTD91WindshieldsWagon
+	{
+        template! = LTD91WindshieldsFront,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 91fordLTDWindshieldRearWagon,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.91fordLTDWagonRearWindshield,
+            area = TruckBed,
+            parent = TrunkDoor,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+}

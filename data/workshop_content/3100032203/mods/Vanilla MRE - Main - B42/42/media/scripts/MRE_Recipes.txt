@@ -1,0 +1,149 @@
+module Base
+{
+
+
+	/* MAIN */
+
+					craftRecipe MakeRation
+					{
+	Time = 120,
+	timedAction = UnPackSmallBag,
+	Tags = AnySurfaceCraft;Cooking,
+	category = Cooking,
+	xpAward = Cooking:25,
+
+	inputs
+	{
+		item 1 [Base.RationPackage;RationOldPackage] mappers[RationType],
+		item 1 [Base.DuctTape],
+
+		item 1 [Base.TinnedBeans;CannedCornedBeef;TinnedSoup],
+		item 1 [Base.Crackers;Base.GrahamCrackers;Base.Chocolate],
+
+	}
+
+	outputs
+	{
+		item 1 mapper:RationType,
+	}
+
+	itemMapper RationType
+	{
+		Base.RationDIY			= Base.RationPackage,
+		Base.RationOldDIY 		= Base.RationOldPackage,
+
+    	}
+
+	}
+
+					craftRecipe MakeRationPackage
+					{
+	Time = 160,
+	timedAction = Making,
+	Tags = AnySurfaceCraft,
+	category = Packing,
+
+	inputs
+	{
+		item 1 tags[Scissors] mode:keep flags[MayDegradeLight],
+		item 4 [Base.DuctTape],
+		item 1 [Base.Plasticbag;Base.GroceryBag1;Base.GroceryBag2;Base.GroceryBag3;Base.GroceryBag4;Base.GroceryBag5],
+		item 1 [Base.Tarp],
+	}
+
+	outputs
+	{
+		item 6 Base.RationPackage,
+	}
+
+	}
+
+					craftRecipe PrepareRation
+					{
+
+	Time = 25,
+	timedAction = UnPackSmallBag,
+	Tags = InHandCraft;Cooking;CanBeDoneInDark,
+	category = Cooking,
+	xpAward = Cooking:1,
+	OnCreate = Recipe.OnCreate.OnCreateRation,
+
+	inputs
+	{
+		item 1 [Base.RationMRE;Base.RationOld;Base.RationDIY;Base.RationOldDIY] mappers[RationType],
+	}
+
+	outputs
+	{
+		item 1 mapper:RationType,
+	}
+
+	itemMapper RationType
+	{
+		Base.RationMRE_Open 		= Base.RationMRE,
+		Base.RationOld_Open 		= Base.RationOld,
+
+		Base.RationDIY_Open		= Base.RationDIY,
+		Base.RationOldDIY_Open 		= Base.RationOldDIY,
+    }
+
+	}
+
+					craftRecipe PackBoxOfRations
+					{
+
+	Time 		= 100,
+	timedAction 	= PackingBox,
+	Tags 		= InHandCraft,
+	category 	= Packing,
+
+	inputs
+	{
+		item 10 [Base.RationMRE;Base.RationOld;] mappers[RationType],
+
+	}
+
+	outputs
+	{
+		item 1 mapper:RationType,
+	}
+
+	itemMapper RationType
+	{
+		Base.RationMRE_Box		= Base.RationMRE,
+		Base.RationOld_Box		= Base.RationOld,
+    
+	
+	}
+
+	}
+
+					craftRecipe OpenBoxOfRations
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [RationMRE_Box;RationOld_Box;] mappers[RationType],
+
+	}
+
+	outputs
+	{
+		item 10 mapper:RationType,
+	}
+
+	itemMapper RationType
+	{
+		Base.RationMRE			= Base.RationMRE_Box,
+		Base.RationOld 			= Base.RationOld_Box,
+
+    }
+
+	}						
+
+}

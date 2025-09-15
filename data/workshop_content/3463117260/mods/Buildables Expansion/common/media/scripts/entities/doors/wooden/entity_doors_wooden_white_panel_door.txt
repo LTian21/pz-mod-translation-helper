@@ -1,0 +1,77 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WhitePanelDoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= White Panel Door,
+			Icon		= fixtures_doors_02_21,
+		}
+	}
+
+    entity WhitePanelDoor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WhitePanelDoor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			breakSound      = BreakDoor,
+			
+            face W
+            {
+                layer
+                {
+                    row = fixtures_doors_02_20,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_doors_02_21,
+                }
+            }
+			face W_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_02_22,
+                }
+            }
+            face N_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_02_23,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallHammer,
+            time          = 300,
+            needToBeLearn = true,
+            category      = Doors_Wooden,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:6,
+            ToolTip       = Tooltip_craft_woodenDoorDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+				item 4 [Base.Plank],
+				item 4 [Base.Nails],
+				item 2 [Base.Hinge],
+				item 1 [Base.Doorknob],
+            }
+        }
+    }
+}

@@ -1,0 +1,293 @@
+module Base
+{
+
+	model 87chevySuburbanRoofrack0
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_roofrack,
+		texture = Vehicles/Vehicles_87chevySuburban_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 87chevySuburbanRoofrackLights0
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_roofrack_lights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87chevySuburbanGasCan0
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|TIS_GasCan0,
+		texture = Vehicles/Items_GasCan,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 87chevySuburbanGasCan1
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|TIS_GasCan1,
+		texture = Vehicles/Items_GasCan,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 87chevySuburbanGasCan2
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|TIS_GasCan2,
+		texture = Vehicles/Items_GasCan,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 87chevySuburbanGenerator
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|TIS_Generator,
+		texture = Vehicles/Items_Generator,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SUB87Roofrack
+	{
+		part SUB87Roofrack
+		{
+
+			model SUB87Roofrack0
+				{
+                		file = 87chevySuburbanRoofrack0,
+				}
+
+			model SUB87RoofrackLights0
+				{
+                		file = 87chevySuburbanRoofrackLights0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.87chevySuburbanRoofrack,
+			mechanicRequireKey = false,
+            durability = 3,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.Roofrack,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = DAMN.UninstallTest.Default,
+					complete = SUB87.UninstallComplete.Roofrack,
+					requireUninstalled = DAMNGasCanOne;DAMNGasCanTwo;DAMNGasCanThree;DAMNGenerator,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = SUB87.Create.Roofrack,
+					init = SUB87.Init.Roofrack,
+				}
+		}
+
+		part DAMNGasCanOne
+        	{
+				model gascan0
+				{
+                file = 87chevySuburbanGasCan0,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.PetrolCan,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = SUB87Roofrack,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part DAMNGasCanTwo
+        	{
+				model gascan1
+				{
+                file = 87chevySuburbanGasCan1,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.PetrolCan,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = SUB87Roofrack,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part DAMNGasCanThree
+        	{
+				model gascan2
+				{
+                file = 87chevySuburbanGasCan2,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.PetrolCan,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = SUB87Roofrack,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part DAMNGenerator
+        	{
+				model GenZ
+				{
+                file = 87chevySuburbanGenerator,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.Generator;Base.Generator_Old;Base.Generator_Yellow;Base.Generator_Blue,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = SUB87Roofrack,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+	}
+}
+

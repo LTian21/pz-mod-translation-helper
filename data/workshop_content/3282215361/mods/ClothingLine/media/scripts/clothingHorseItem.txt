@@ -1,0 +1,48 @@
+module CL_clothingHorse {
+	
+	item openClotheshorse
+	{ 
+	DisplayCategory = Furniture,
+	Weight 		= 5,
+	Type 		= Moveable,
+	DisplayName	=  Clothes Horse,
+	WorldObjectSprite =	clothesHorse_0,
+	Icon 		= CH,
+	}
+
+	item closedClotheshorse
+	{ 
+	DisplayCategory = Furniture,
+	Weight 		= 1,
+	Type 		= Normal,
+	DisplayName	=  Folded Clothes Horse,
+	WorldStaticModel = CL_CH,
+	Icon 		= CH_folded,
+	}
+
+	recipe fold clothes horse
+	{
+	openClotheshorse,
+	Time:1.0,
+	Result:closedClotheshorse,
+	}
+
+	recipe unfold clothes horse
+	{
+	closedClotheshorse,
+	Time:1.0,
+	Result:openClotheshorse,
+	}
+
+	recipe craft clothes horse
+	{
+	WoodenStick=3,Screws=8,
+	keep Saw,Screwdriver,
+	Time:5.0,
+	Prop1:Screwdriver,
+	Prop2:Saw,
+	Result:openClotheshorse,
+	Sound:Sawing,
+	}
+
+}

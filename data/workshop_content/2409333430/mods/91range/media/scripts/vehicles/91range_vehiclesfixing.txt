@@ -1,0 +1,103 @@
+module Base
+{
+	recipe Repair 91 Range Rover Tire
+    	{
+		91rangeTire2,
+		TireRepairTools,
+		TireRepairRubberSolution,
+		TireRepairStrips,
+
+		NoBrokenItems:false,
+		Result:TireRepairTools,
+		Time:250.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+	fixing Fix 91 Range Rover Seat
+	{
+	   Require : 91rangeSeatFront2;91rangeSeatRear2,
+	   ConditionModifier : 0.5,
+
+       Fixer : DuctTape=2;Mechanics=1,
+	}
+	
+	fixing Fix 91 Range Rover Trunk Welding
+	{
+	   Require : 91rangeTrunk2;91rangeRoofrack2,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=2,
+	}
+
+	fixing Fix 91 Range Rover Hood Welding
+	{
+	   Require : 91rangeEngineDoor2,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+	}
+
+   fixing Fix 91 Range Rover Hood
+	{
+	   Require : 91rangeEngineDoor2,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix 91 Range Rover Lid Welding
+    {
+       Require : 91rangeTrunkDoor2,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+    }
+
+   fixing Fix 91 Range Rover Lid
+	{
+      Require : 91rangeTrunkDoor2,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix 91 Range Rover Door Welding
+	{
+	   Require : 91rangeFrontDoor2;91rangeRearDoor2,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=3,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=3,
+	}
+
+	fixing Fix 91 Range Rover Armor Welding
+    {
+       Require : 91rangeFrontWindowArmor;91rangeRearWindowArmor;91rangeWindshieldArmor;91rangeWindshieldRearArmor;91rangeBullbarFrontA;91rangeBullbarRearA,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 0.75,
+
+       Fixer : SheetMetal; MetalWelding=4;Mechanics=4,
+       Fixer : SmallSheetMetal=2; MetalWelding=4;Mechanics=4,
+    }
+
+    fixing Fix 91 Range Rover Plastic Welding
+    {
+       Require : 91rangeBumperFront0;91rangeBumperFront1;91rangeBumperRear0;91rangeSideSteps2;91rangeSnorkel2,
+       GlobalItem : PlasticWeldingGun=250,
+       ConditionModifier : 0.85,
+
+       Fixer : PlasticWeldingStaples100Pack; Mechanics=4,
+    }
+
+}

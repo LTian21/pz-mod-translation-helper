@@ -1,0 +1,151 @@
+module Base
+{
+
+    model 92jeepYJWindshield
+    {
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 92jeepYJWindshieldRear
+    {
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+        boneWeight = trunk_bone_top,
+    }
+
+	template vehicle JP92Windshields2
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 92jeepYJWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.92jeepYJWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = JP92WindshieldFrame,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    test = DAMN.UninstallTest.Default,
+                    requireUninstalled = DAMNWindshieldArmor,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 92jeepYJWindshieldRear,
+            }
+                
+            itemType = Base.92jeepYJWindshieldRear,
+            area = TruckBed,
+            parent = TrunkDoor,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = DAMN.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = JP92HardTop,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle JP92Windshields1
+	{
+        template! = JP92Windshields2,
+
+        part WindshieldRear
+        {
+           lua
+            {
+                create = DAMN.Create.Blank,
+            } 
+        }
+    }
+}

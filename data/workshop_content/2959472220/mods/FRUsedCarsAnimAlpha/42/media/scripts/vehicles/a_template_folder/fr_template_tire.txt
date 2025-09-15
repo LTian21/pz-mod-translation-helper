@@ -1,0 +1,3042 @@
+module Base
+{
+	template vehicle FRTire
+	{
+		part TireFrontLeft
+		{
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				requireUninstalled = FRHubcapFrontLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				requireUninstalled = FRHubcapFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			table uninstall
+			{
+				requireUninstalled = FRHubcapRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				requireUninstalled = FRHubcapRearRight,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			itemType = Base.ClassicTire;Base.OldTire;Base.NormalTire;Base.ModernTire,
+			container
+			{
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+
+			table FRPartInfo
+			{
+				excludeItemType = Classic,
+			}
+			
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualTire,
+			}
+			
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.FR_Default,
+				complete = Vehicles.UninstallComplete.FR_VisualTire,
+			}
+			
+			lua
+			{
+				create = Vehicles.Create.FR_VisualTire,
+				init = Vehicles.Init.FR_VisualTire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.FR_Tire,
+			}
+		}
+	}
+	
+	template vehicle FROffroadTire
+	{
+		template = FRTire,
+		template = FRCenterCap,
+		part Tire*
+		{
+			itemType = Base.OldOffroadTire;Base.NormalOffroadTire;Base.PerformanceOffroadTire,
+			specificItem = false,
+			
+			model OldOffroadTire
+			{
+				file = FR_OldTireOffroad_1,
+			}
+			
+			model NormalOffroadTire
+			{
+				file = FR_NormalTireOffroad_1,
+			}
+			
+			model PerformanceOffroadTire
+			{
+				file = FR_PerformanceTireOffroad_1,
+			}
+		}
+		
+		part Tire*Right
+		{
+			model FR_Cap_A
+			{
+				file = FR_cap_1,
+			}
+			
+			model FR_Cap_B
+			{
+				file = FR_cap_2,
+			}
+			
+			model FR_Cap_C
+			{
+				file = FR_cap_3,
+			}
+		}
+		
+		part Tire*Left
+		{
+			model FR_Cap_A
+			{
+				file = FR_cap_1,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Cap_B
+			{
+				file = FR_cap_2,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Cap_C
+			{
+				file = FR_cap_3,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+		}
+	}
+	
+	template vehicle FROffroadSmallTire
+	{
+		template = FROffroadTire,
+		template = FRCenterCap,
+		part Tire*
+		{
+			itemType = Base.OldOffroadTire;Base.NormalOffroadTire;Base.PerformanceOffroadTire,
+			specificItem = false,
+			
+			model OldOffroadTire
+			{
+				file = FR_OldTireOffroad_2,
+			}
+			
+			model NormalOffroadTire
+			{
+				file = FR_NormalTireOffroad_2,
+			}
+			
+			model PerformanceOffroadTire
+			{
+				file = FR_PerformanceTireOffroad_2,
+			}
+		}
+		
+		part Tire*Right
+		{
+			model FR_Cap_A
+			{
+				file = FR_cap_1,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.9,
+			}
+			
+			model FR_Cap_B
+			{
+				file = FR_cap_2,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.9,
+			}
+			
+			model FR_Cap_C
+			{
+				file = FR_cap_3,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.9,
+			}
+		}
+		
+		part Tire*Left
+		{
+			model FR_Cap_A
+			{
+				file = FR_cap_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.9,
+			}
+			
+			model FR_Cap_B
+			{
+				file = FR_cap_2,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.9,
+			}
+			
+			model FR_Cap_C
+			{
+				file = FR_cap_3,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.9,
+			}
+		}
+	}
+	
+	template vehicle FROffroadTireMil
+	{
+		template = FRTire,
+		part Tire*
+		{
+			itemType = Base.OffroadTireHmmwv_mil;Base.RoadTireHmmwv_mil;Base.MakeshiftHmmwv_mil,
+			specificItem = false,
+			
+			table FRPartInfo
+			{
+				excludeItemType = Makeshift,
+				excludeChance = 100,
+			}
+			
+			model MakeshiftHmmwv_mil
+			{
+				file = FR_MakeshiftTireHmmwv,
+			}
+			
+			model OffroadTireHmmwv_mil
+			{
+				file = FR_OffroadTireHmmwv,
+			}
+			
+			model RoadTireHmmwv_mil
+			{
+				file = FR_RoadTireHmmwv,
+			}
+		}
+	}
+	
+	template vehicle FRHeavyDutyTire
+	{
+		part TireFrontLeft
+		{
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			
+			table uninstall
+			{
+				requireUninstalled = OuterTireRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			
+			table uninstall
+			{
+				requireUninstalled = OuterTireRearRight,
+			}
+		}
+		
+		part OuterTireRearLeft
+		{
+			area = TireRearLeft,
+			table install
+			{
+				requireInstalled = TireRearLeft,
+			}
+		}
+
+		part OuterTireRearRight
+		{
+			area = TireRearRight,
+			table install
+			{
+				requireInstalled = TireRearRight,
+			}
+		}
+		
+		part Tire*
+		{
+			category = tire,
+			itemType = Base.OldHeavyDutyTire;Base.NormalHeavyDutyTire;Base.ModernHeavyDutyTire,
+			specificItem = false,
+			container
+			{
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualTire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.FR_Default,
+				complete = Vehicles.UninstallComplete.FR_VisualTire,
+			}
+			lua
+			{
+				create = Vehicles.Create.FR_VisualTire,
+				init = Vehicles.Init.FR_VisualTire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+		
+		part OuterTire*
+		{
+			category = tire,
+			itemType = Base.OldHeavyDutyTire;Base.NormalHeavyDutyTire;Base.ModernHeavyDutyTire,
+			specificItem = false,
+			container
+			{
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualDualTire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.FR_Default,
+				complete = Vehicles.UninstallComplete.FR_VisualDualTire,
+			}
+			lua
+			{
+				create = Vehicles.Create.FR_VisualTire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.FR_VisualDualTire,
+			}
+		
+		}
+		
+		part TireRear*
+		{
+			table install
+			{
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualTire,
+			}
+			table uninstall
+			{
+				test = Vehicles.UninstallTest.FR_Default,
+				complete = Vehicles.UninstallComplete.FR_VisualTire,
+			}
+			lua
+			{
+				create = Vehicles.Create.FR_VisualDualTire,
+				init = Vehicles.Init.FR_VisualDualTire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.FR_VisualDualTire,
+			}
+		}
+		
+		part TireFront*
+		{
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+			}
+			
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+			}
+			
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+			}
+		}
+		
+		part TireRearLeft
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+		}
+		
+		part TireRearRight
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+		}
+	}
+	
+	template vehicle FRHeavyDutySixWheelSemiTire
+	{
+		template = FRHeavyDutyTire,
+
+		part TireFront*
+		{
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+			
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+			
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLargeFake_Dual_1,
+				offset = -0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLargeFake_Dual_1,
+				offset = -0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLargeFake_Dual_1,
+				offset = -0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLargeFake_1,
+				offset = -0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLargeFake_1,
+				offset = -0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLargeFake_1,
+				offset = -0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+		}
+
+		part TireRearRight
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLargeFake_Dual_1,
+				offset = 0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLargeFake_Dual_1,
+				offset = 0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLargeFake_Dual_1,
+				offset = 0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLargeFake_1,
+				offset = 0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLargeFake_1,
+				offset = 0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLargeFake_1,
+				offset = 0.3838 0.0 0.0,
+				scale = 1.05917,
+			}
+		}
+	}
+	
+	template vehicle FRMediumDutyTire
+	{
+		template = 	FRHeavyDutyTire,
+			part TireFront*
+		{
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyMed_1,
+			}
+			
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyMed_1,
+			}
+			
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyMed_1,
+			}
+		}
+		
+		part TireRearLeft
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyMed_Dual_1,
+				offset = 0.07 0.0 0.0,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyMed_Dual_1,
+				offset = 0.07 0.0 0.0,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyMed_Dual_1,
+				offset = 0.07 0.0 0.0,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyMed_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyMed_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyMed_1,
+				offset = 0.0 0.0 0.0,
+			}
+		}
+		
+		part TireRearRight
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyMed_Dual_1,
+				offset = -0.07 0.0 0.0,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyMed_Dual_1,
+				offset = -0.07 0.0 0.0,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyMed_Dual_1,
+				offset = -0.07 0.0 0.0,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyMed_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyMed_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyMed_1,
+				offset = 0.0 0.0 0.0,
+			}
+		}
+	}
+	
+	template vehicle FRSmallTire
+	{
+		template = FRTire,
+		template = FRHubcap,
+		
+		part FRHubcap*
+		{
+			table FRPartInfo
+			{
+				noPartsChance = 20,
+				allPartsChance = 30,
+			}
+		}
+		
+		part Tire*
+		{
+			table FRPartInfo
+			{
+				excludeItemType = Classic,
+			}
+			
+			model ClassicTire
+			{
+				file = FR_ClassicTireSmall_1,
+			}
+			
+			model OldTire
+			{
+				file = FR_OldTireSmall_1,
+			}
+			
+			model NormalTire
+			{
+				file = FR_NormalTireSmall_1,
+			}
+			
+			model ModernTire
+			{
+				file = FR_PerformanceTireSmall_1,
+			}
+		}
+		
+		part Tire*Right
+		{			
+			model FR_Hubcap_A
+			{
+				file = FR_hub_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_B
+			{
+				file = FR_hub_2,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_C
+			{
+				file = FR_hub_3,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_D
+			{
+				file = FR_hub_4,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_CA_Hubcap_A
+			{
+				file = FR_hub_ca_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_CH_Hubcap_A
+			{
+				file = FR_hub_ch_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_DA_Hubcap_A
+			{
+				file = FR_hub_da_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_FO_Hubcap_A
+			{
+				file = FR_hub_fo_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_A
+			{
+				file = FR_hub_modern_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_B
+			{
+				file = FR_hub_modern_2,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_B_Special
+			{
+				file = FR_hub_modern_2_jur,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_C
+			{
+				file = FR_hub_modern_3,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_C_Special
+			{
+				file = FR_hub_modern_3_jur,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_D
+			{
+				file = FR_hub_modern_4,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Mustang_Special
+			{
+				file = FR_hub_mustang_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Police_A
+			{
+				file = FR_hub_police_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Trans_Special
+			{
+				file = FR_hub_trans_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Bandit_Special
+			{
+				file = FR_hub_trans_bandit_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+		}
+		
+		part Tire*Left
+		{			
+			model FR_Hubcap_A
+			{
+				file = FR_hub_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_B
+			{
+				file = FR_hub_2,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_C
+			{
+				file = FR_hub_3,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_D
+			{
+				file = FR_hub_4,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_CA_Hubcap_A
+			{
+				file = FR_hub_ca_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_CH_Hubcap_A
+			{
+				file = FR_hub_ch_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_DA_Hubcap_A
+			{
+				file = FR_hub_da_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_FO_Hubcap_A
+			{
+				file = FR_hub_fo_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_A
+			{
+				file = FR_hub_modern_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_B
+			{
+				file = FR_hub_modern_2,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_B_Special
+			{
+				file = FR_hub_modern_2_jur,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_C
+			{
+				file = FR_hub_modern_3,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_C_Special
+			{
+				file = FR_hub_modern_3_jur,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Modern_D
+			{
+				file = FR_hub_modern_4,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Mustang_Special
+			{
+				file = FR_hub_mustang_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Police_A
+			{
+				file = FR_hub_police_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Trans_Special
+			{
+				file = FR_hub_trans_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+			
+			model FR_Hubcap_Bandit_Special
+			{
+				file = FR_hub_trans_bandit_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.91,
+			}
+		}
+	}
+	
+	template vehicle FRSmallerTire
+	{
+		template = FRTire,
+		template = FRHubcap,
+		
+		part FRHubcap*
+		{
+			table FRPartInfo
+			{
+				noPartsChance = 20,
+				allPartsChance = 30,
+			}
+		}
+		
+		part Tire*
+		{
+			table FRPartInfo
+			{
+				excludeItemType = Classic,
+			}
+			
+			model ClassicTire
+			{
+				file = FR_ClassicTireSmall_1,
+				scale = 0.95,
+			}
+			
+			model OldTire
+			{
+				file = FR_OldTireSmall_1,
+				scale = 0.95,
+			}
+			
+			model NormalTire
+			{
+				file = FR_NormalTireSmall_1,
+				scale = 0.95,
+			}
+			
+			model ModernTire
+			{
+				file = FR_PerformanceTireSmall_1,
+				scale = 0.95,
+			}
+		}
+		
+		part Tire*Right
+		{
+			model FR_Hubcap_A
+			{
+				file = FR_hub_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_B
+			{
+				file = FR_hub_2,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_C
+			{
+				file = FR_hub_3,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_D
+			{
+				file = FR_hub_4,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_CA_Hubcap_A
+			{
+				file = FR_hub_ca_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_CH_Hubcap_A
+			{
+				file = FR_hub_ch_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_DA_Hubcap_A
+			{
+				file = FR_hub_da_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_FO_Hubcap_A
+			{
+				file = FR_hub_fo_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_A
+			{
+				file = FR_hub_modern_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_B
+			{
+				file = FR_hub_modern_2,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_B_Special
+			{
+				file = FR_hub_modern_2_jur,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_C
+			{
+				file = FR_hub_modern_3,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_C_Special
+			{
+				file = FR_hub_modern_3_jur,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_D
+			{
+				file = FR_hub_modern_4,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Mustang_Special
+			{
+				file = FR_hub_mustang_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Police_A
+			{
+				file = FR_hub_police_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Trans_Special
+			{
+				file = FR_hub_trans_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Bandit_Special
+			{
+				file = FR_hub_trans_bandit_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+		}
+		
+		part Tire*Left
+		{
+			model FR_Hubcap_A
+			{
+				file = FR_hub_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_B
+			{
+				file = FR_hub_2,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_C
+			{
+				file = FR_hub_3,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_D
+			{
+				file = FR_hub_4,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_CA_Hubcap_A
+			{
+				file = FR_hub_ca_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_CH_Hubcap_A
+			{
+				file = FR_hub_ch_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_DA_Hubcap_A
+			{
+				file = FR_hub_da_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_FO_Hubcap_A
+			{
+				file = FR_hub_fo_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_A
+			{
+				file = FR_hub_modern_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_B
+			{
+				file = FR_hub_modern_2,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_B_Special
+			{
+				file = FR_hub_modern_2_jur,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_C
+			{
+				file = FR_hub_modern_3,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_C_Special
+			{
+				file = FR_hub_modern_3_jur,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Modern_D
+			{
+				file = FR_hub_modern_4,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Mustang_Special
+			{
+				file = FR_hub_mustang_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Police_A
+			{
+				file = FR_hub_police_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Trans_Special
+			{
+				file = FR_hub_trans_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+			
+			model FR_Hubcap_Bandit_Special
+			{
+				file = FR_hub_trans_bandit_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 0.86,
+			}
+		}
+	}
+	
+	template vehicle FRSedanTire
+	{
+		template = FRTire,
+		template = FRHubcap,
+		
+		part FRHubcap*
+		{
+			table FRPartInfo
+			{
+				noPartsChance = 20,
+				allPartsChance = 30,
+			}
+		}
+		
+		part Tire*
+		{
+			table FRPartInfo
+			{
+				excludeItemType = Classic,
+			}
+			
+			model ClassicTire
+			{
+				file = FR_ClassicTireSedan_1,
+			}
+			
+			model OldTire
+			{
+				file = FR_OldTireSedan_1,
+			}
+			
+			model NormalTire
+			{
+				file = FR_NormalTireSedan_1,
+			}
+			
+			model ModernTire
+			{
+				file = FR_PerformanceTireSedan_1,
+			}
+		}
+		
+		part Tire*Right
+		{			
+			model FR_Hubcap_A
+			{
+				file = FR_hub_1,
+			}
+			
+			model FR_Hubcap_B
+			{
+				file = FR_hub_2,
+			}
+			
+			model FR_Hubcap_C
+			{
+				file = FR_hub_3,
+			}
+			
+			model FR_Hubcap_D
+			{
+				file = FR_hub_4,
+			}
+			
+			model FR_CA_Hubcap_A
+			{
+				file = FR_hub_ca_1,
+			}
+			
+			model FR_CH_Hubcap_A
+			{
+				file = FR_hub_ch_1,
+			}
+			
+			model FR_DA_Hubcap_A
+			{
+				file = FR_hub_da_1,
+			}
+			
+			model FR_FO_Hubcap_A
+			{
+				file = FR_hub_fo_1,
+			}
+			
+			model FR_Hubcap_Modern_A
+			{
+				file = FR_hub_modern_1,
+			}
+			
+			model FR_Hubcap_Modern_B
+			{
+				file = FR_hub_modern_2,
+			}
+			
+			model FR_Hubcap_Modern_B_Special
+			{
+				file = FR_hub_modern_2_jur,
+			}
+			
+			model FR_Hubcap_Modern_C
+			{
+				file = FR_hub_modern_3,
+			}
+			
+			model FR_Hubcap_Modern_C_Special
+			{
+				file = FR_hub_modern_3_jur,
+			}
+			
+			model FR_Hubcap_Modern_D
+			{
+				file = FR_hub_modern_4,
+			}
+			
+			model FR_Hubcap_Mustang_Special
+			{
+				file = FR_hub_mustang_1,
+			}
+			
+			model FR_Hubcap_Police_A
+			{
+				file = FR_hub_police_1,
+			}
+			
+			model FR_Hubcap_Trans_Special
+			{
+				file = FR_hub_trans_1,
+			}
+			
+			model FR_Hubcap_Bandit_Special
+			{
+				file = FR_hub_trans_bandit_1,
+			}
+		}
+		
+		part Tire*Left
+		{			
+			model FR_Hubcap_A
+			{
+				file = FR_hub_1,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_B
+			{
+				file = FR_hub_2,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_C
+			{
+				file = FR_hub_3,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_D
+			{
+				file = FR_hub_4,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_CA_Hubcap_A
+			{
+				file = FR_hub_ca_1,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_CH_Hubcap_A
+			{
+				file = FR_hub_ch_1,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_DA_Hubcap_A
+			{
+				file = FR_hub_da_1,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_FO_Hubcap_A
+			{
+				file = FR_hub_fo_1,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_Modern_A
+			{
+				file = FR_hub_modern_1,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_Modern_B
+			{
+				file = FR_hub_modern_2,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_Modern_B_Special
+			{
+				file = FR_hub_modern_2_jur,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_Modern_C
+			{
+				file = FR_hub_modern_3,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_Modern_C_Special
+			{
+				file = FR_hub_modern_3_jur,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_Modern_D
+			{
+				file = FR_hub_modern_4,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_Mustang_Special
+			{
+				file = FR_hub_mustang_1,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_Police_A
+			{
+				file = FR_hub_police_1,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_Trans_Special
+			{
+				file = FR_hub_trans_1,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+			
+			model FR_Hubcap_Bandit_Special
+			{
+				file = FR_hub_trans_bandit_1,
+				rotate = 0.0000 180.0000 0.0000,
+			}
+		}
+	}
+	
+	template vehicle FRRacingTire
+	{
+		template = FRTire,
+		template = FRHubcap,
+		
+		part FRHubcap*
+		{
+			table FRPartInfo
+			{
+				noPartsChance = 20,
+				allPartsChance = 30,
+			}
+		}
+		
+		part Tire*
+		{
+			table FRPartInfo
+			{
+				excludeItemType = Classic,
+			}
+			
+			model ClassicTire
+			{
+				file = FR_ClassicTireRacing_1,
+			}
+			
+			model OldTire
+			{
+				file = FR_OldTireRacing_1,
+			}
+			
+			model NormalTire
+			{
+				file = FR_NormalTireRacing_1,
+			}
+			
+			model ModernTire
+			{
+				file = FR_PerformanceTireRacing_1,
+			}
+		}
+		
+		part Tire*Right
+		{			
+			model FR_Hubcap_A
+			{
+				file = FR_hub_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_B
+			{
+				file = FR_hub_2,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_C
+			{
+				file = FR_hub_3,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_D
+			{
+				file = FR_hub_4,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_CA_Hubcap_A
+			{
+				file = FR_hub_ca_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_CH_Hubcap_A
+			{
+				file = FR_hub_ch_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_DA_Hubcap_A
+			{
+				file = FR_hub_da_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_FO_Hubcap_A
+			{
+				file = FR_hub_fo_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_A
+			{
+				file = FR_hub_modern_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_B
+			{
+				file = FR_hub_modern_2,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_B_Special
+			{
+				file = FR_hub_modern_2_jur,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_C
+			{
+				file = FR_hub_modern_3,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_C_Special
+			{
+				file = FR_hub_modern_3_jur,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_D
+			{
+				file = FR_hub_modern_4,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Mustang_Special
+			{
+				file = FR_hub_mustang_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Police_A
+			{
+				file = FR_hub_police_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Trans_Special
+			{
+				file = FR_hub_trans_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Bandit_Special
+			{
+				file = FR_hub_trans_bandit_1,
+				offset = -0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+		}
+		
+		part Tire*Left
+		{			
+			model FR_Hubcap_A
+			{
+				file = FR_hub_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_B
+			{
+				file = FR_hub_2,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_C
+			{
+				file = FR_hub_3,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_D
+			{
+				file = FR_hub_4,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_CA_Hubcap_A
+			{
+				file = FR_hub_ca_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_CH_Hubcap_A
+			{
+				file = FR_hub_ch_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_DA_Hubcap_A
+			{
+				file = FR_hub_da_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_FO_Hubcap_A
+			{
+				file = FR_hub_fo_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_A
+			{
+				file = FR_hub_modern_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_B
+			{
+				file = FR_hub_modern_2,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_B_Special
+			{
+				file = FR_hub_modern_2_jur,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_C
+			{
+				file = FR_hub_modern_3,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_C_Special
+			{
+				file = FR_hub_modern_3_jur,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Modern_D
+			{
+				file = FR_hub_modern_4,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Mustang_Special
+			{
+				file = FR_hub_mustang_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Police_A
+			{
+				file = FR_hub_police_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Trans_Special
+			{
+				file = FR_hub_trans_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+			
+			model FR_Hubcap_Bandit_Special
+			{
+				file = FR_hub_trans_bandit_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+				scale = 1.12,
+			}
+		}
+	}
+	
+	template vehicle FRTruckTire
+	{
+		template = FRTire,
+		template = FRHubcap,
+		
+		part FRHubcap*
+		{
+			table FRPartInfo
+			{
+				noPartsChance = 40,
+				allPartsChance = 30,
+			}
+		}
+		
+		part Tire*
+		{
+			table FRPartInfo
+			{
+				excludeItemType = Classic,
+			}
+			
+			model ClassicTire
+			{
+				file = FR_ClassicTireTruck_1,
+			}
+			
+			model OldTire
+			{
+				file = FR_OldTireTruck_1,
+			}
+			
+			model NormalTire
+			{
+				file = FR_NormalTireTruck_1,
+			}
+			
+			model ModernTire
+			{
+				file = FR_PerformanceTireTruck_1,
+			}
+		}
+		
+		part Tire*Right
+		{
+			model FR_Hubcap_A
+			{
+				file = FR_hub_1,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_B
+			{
+				file = FR_hub_2,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_C
+			{
+				file = FR_hub_3,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_D
+			{
+				file = FR_hub_4,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_CA_Hubcap_A
+			{
+				file = FR_hub_ca_1,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_CH_Hubcap_A
+			{
+				file = FR_hub_ch_1,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_DA_Hubcap_A
+			{
+				file = FR_hub_da_1,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_FO_Hubcap_A
+			{
+				file = FR_hub_fo_1,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_A
+			{
+				file = FR_hub_modern_1,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_B
+			{
+				file = FR_hub_modern_2,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_B_Special
+			{
+				file = FR_hub_modern_2_jur,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_C
+			{
+				file = FR_hub_modern_3,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_C_Special
+			{
+				file = FR_hub_modern_3_jur,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_D
+			{
+				file = FR_hub_modern_4,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Mustang_Special
+			{
+				file = FR_hub_mustang_1,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Police_A
+			{
+				file = FR_hub_police_1,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Trans_Special
+			{
+				file = FR_hub_trans_1,
+				offset = -0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Bandit_Special
+			{
+				file = FR_hub_trans_bandit_1,
+				offset = -0.0045 0.0 0.0,
+			}
+		}
+		
+		part Tire*Left
+		{
+			model FR_Hubcap_A
+			{
+				file = FR_hub_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_B
+			{
+				file = FR_hub_2,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_C
+			{
+				file = FR_hub_3,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_D
+			{
+				file = FR_hub_4,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_CA_Hubcap_A
+			{
+				file = FR_hub_ca_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_CH_Hubcap_A
+			{
+				file = FR_hub_ch_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_DA_Hubcap_A
+			{
+				file = FR_hub_da_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_FO_Hubcap_A
+			{
+				file = FR_hub_fo_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_A
+			{
+				file = FR_hub_modern_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_B
+			{
+				file = FR_hub_modern_2,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_B_Special
+			{
+				file = FR_hub_modern_2_jur,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_C
+			{
+				file = FR_hub_modern_3,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_C_Special
+			{
+				file = FR_hub_modern_3_jur,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Modern_D
+			{
+				file = FR_hub_modern_4,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Mustang_Special
+			{
+				file = FR_hub_mustang_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Police_A
+			{
+				file = FR_hub_police_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Trans_Special
+			{
+				file = FR_hub_trans_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+			
+			model FR_Hubcap_Bandit_Special
+			{
+				file = FR_hub_trans_bandit_1,
+				rotate = 0.0000 180.0000 0.0000,
+				offset = 0.0045 0.0 0.0,
+			}
+		}
+	}
+	
+	template vehicle FRTrailerTire
+	{
+		template = FRTire,
+
+		part Tire*
+		{
+			itemType = Base.NormalEquipmentTireSmall,
+			specificItem = false,
+
+			model NormalEquipmentTireSmall
+			{
+				file = FR_OldTireTrailer_1,
+			}
+		}
+
+		part TireFrontLeft
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			table install
+			{
+				requireInstalled = SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			table install
+			{
+				requireInstalled = SuspensionRearRight,
+			}
+		}
+	}
+	
+	template vehicle FRDualTrailerTire
+	{
+		part TireFrontLeft
+		{
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			
+			table uninstall
+			{
+				requireUninstalled = OuterTireFrontLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			
+			table uninstall
+			{
+				requireUninstalled = OuterTireFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			
+			table uninstall
+			{
+				requireUninstalled = OuterTireRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			
+			table uninstall
+			{
+				requireUninstalled = OuterTireRearRight,
+			}
+		}
+		
+		part OuterTireRearLeft
+		{
+			area = TireRearLeft,
+			table install
+			{
+				requireInstalled = TireRearLeft,
+			}
+		}
+
+		part OuterTireRearRight
+		{
+			area = TireRearRight,
+			table install
+			{
+				requireInstalled = TireRearRight,
+			}
+		}
+		
+		part OuterTireFrontLeft
+		{
+			area = TireFrontLeft,
+			table install
+			{
+				requireInstalled = TireFrontLeft,
+			}
+		}
+
+		part OuterTireFrontRight
+		{
+			area = TireFrontRight,
+			table install
+			{
+				requireInstalled = TireFrontRight,
+			}
+		}
+		
+		part Tire*
+		{
+			category = tire,
+			itemType = Base.OldHeavyDutyTire;Base.NormalHeavyDutyTire;Base.ModernHeavyDutyTire,
+			specificItem = false,
+			container
+			{
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualTire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.FR_Default,
+				complete = Vehicles.UninstallComplete.FR_VisualTire,
+			}
+			
+			lua
+			{
+				create = Vehicles.Create.FR_VisualDualTire,
+				init = Vehicles.Init.FR_VisualDualTire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.FR_VisualDualTire,
+			}
+		}
+		
+		part OuterTire*
+		{
+			category = tire,
+			itemType = Base.OldHeavyDutyTire;Base.NormalHeavyDutyTire;Base.ModernHeavyDutyTire,
+			specificItem = false,
+			container
+			{
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualDualTire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.FR_Default,
+				complete = Vehicles.UninstallComplete.FR_VisualDualTire,
+			}
+			lua
+			{
+				create = Vehicles.Create.FR_VisualTire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.FR_VisualDualTire,
+			}
+		
+		}
+		
+		part TireFrontLeft
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+		}
+		
+		part TireRearLeft
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+		}
+		
+		part TireFrontRight
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+		}
+		
+		part TireRearRight
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+			}
+		}
+	}
+	
+	template vehicle FRDualSemiTrailerTire
+	{
+		template = FRDualTrailerTire,
+		part TireFrontLeft
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+		}
+		
+		part TireRearLeft
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_Dual_1,
+				offset = 0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+		}
+		
+		part TireFrontRight
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+		}
+		
+		part TireRearRight
+		{
+			model OuterOldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterNormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OuterModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_Dual_1,
+				offset = -0.083 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model OldHeavyDutyTire
+			{
+				file = FR_OldTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model NormalHeavyDutyTire
+			{
+				file = FR_NormalTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+
+			model ModernHeavyDutyTire
+			{
+				file = FR_PerformanceTireHeavyLarge_1,
+				offset = 0.0 0.0 0.0,
+				scale = 1.05917,
+			}
+		}
+	}
+	
+	template vehicle FRSpareTire
+	{
+		part FRSpareTire
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = Base.ClassicTire;Base.OldTire;Base.NormalTire;Base.ModernTire,
+			
+			container
+			{
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			
+			mechanicRequireKey = true,
+
+			table FRPartInfo
+			{
+				partChanceYearMulti = 0.9,
+				capacityYearMulti = 0.5,
+				selectItemType = Old,
+			}
+			
+            table install
+            {
+                time = 200,
+                test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualDefault,
+            }
+            table uninstall
+            {
+                
+                time = 200,
+                test = Vehicles.UninstallTest.FR_Default,
+				complete = Vehicles.UninstallComplete.FR_VisualDefault,
+            }
+			
+			lua
+            {
+                create = Vehicles.Create.FR_VisualTire,
+				init = Vehicles.Init.FR_VisualDefault,
+            }
+		}
+	}
+	
+	template vehicle FRSpareTireTrunk
+	{
+		template = FRSpareTire,
+		part FRSpareTire
+		{
+			table FRPartInfo
+			{
+				doorAccess = TrunkDoor,
+			}
+		}
+	}
+	
+	template vehicle FROffroadSpareTire
+	{
+		template = FRSpareTire,
+		part FRSpareTire
+		{
+			itemType = Base.OldOffroadTire;Base.NormalOffroadTire;Base.PerformanceOffroadTire,
+			specificItem = false,
+			table FRPartInfo
+			{
+				partChance = 0.5,
+				capacityYearMulti = 0.8,
+				selectItemType = Old,
+			}
+		}
+	}
+	
+	template vehicle FRHeavyDutySpareTire
+	{
+		template = FRSpareTire,
+		part FRSpareTire
+		{
+			itemType = Base.OldHeavyDutyTire;Base.NormalHeavyDutyTire;Base.ModernHeavyDutyTire,
+			specificItem = false,
+			table FRPartInfo
+			{
+				partChance = 0.5,
+				capacityYearMulti = 0.8,
+				selectItemType = Old,
+			}
+		}
+	}
+}
+

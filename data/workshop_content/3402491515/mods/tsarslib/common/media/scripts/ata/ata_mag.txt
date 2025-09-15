@@ -1,0 +1,69 @@
+/*
+Стандартные журналы механика используемые в игре:
+    MechanicMag1
+        DisplayName	=	Laines Auto Manual - Standard Models,
+        TeachedRecipes  =   Basic Mechanics,
+    MechanicMag2
+        DisplayName	=	Laines Auto Manual - Commercial Models,
+        TeachedRecipes  =   Intermediate Mechanics,
+    MechanicMag3
+        DisplayName	=	Laines Auto Manual - Performance Models,
+        TeachedRecipes  =   Advanced Mechanics,
+У всех журналов одинаковые места и шанс спавна.
+
+Варианты предметов используемых для установки запчастей:
+Base.Wrench - разводной ключ
+Base.LugWrench - крестовидный ключ
+Base.Screwdriver - отвертка
+Base.Jack - домкрат
+
+Вес:
+MetalPipe - 1.5
+SheetMetal - 1.5
+SmallSheetMetal - 0.4
+SheetMetal - 1.5
+ScrapMetal - 0.1
+Screws - 0.01
+
+Шаблон рецепта для изготовления запчастей:
+recipe Make ATABusKengur1Item
+{
+   MetalPipe=1,
+   SheetMetal=1,
+   SmallSheetMetal=1,
+   MetalBar=1,
+   ScrapMetal=1,
+   Screws=1,
+   BlowTorch=1, /* (MetalPipe + SheetMetal + SmallSheetMetal + MetalBar + ScrapMetal)*2 */
+   keep WeldingMask,
+   keep Screwdriver,
+   Result:ATABusKengur1Item,
+   Time:350.0,
+   Category:Tuning,
+   SkillRequired:MetalWelding=1,
+   OnCreate:Recipe.OnCreate.ATABusKengur1Item,
+   OnGiveXP:Recipe.OnGiveXP.MetalWelding25, /* 10 15 20 25 */
+   NeedToBeLearn:true,
+}
+*/
+
+module Autotsar
+{
+	imports
+	{
+		Base
+	}
+	
+	model ATATuningMagUniverse_Ground
+    {
+        mesh = other/ATATuningMagUniverseModel_Ground,
+        texture = other/ATATuningMagUniverseTexture,
+		scale = 0.8,
+	} 
+	model ATATuningMagUniverse_Reading
+    {
+        mesh = Magazine,
+        texture = other/ATATuningMagUniverseTextureHand,
+		scale = 1,
+	} 
+}

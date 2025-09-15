@@ -1,0 +1,171 @@
+module Base
+{
+
+	model 93mustangSSPWindowfl
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Body|ssp_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 93mustangSSPWindowfr
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Body|ssp_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 93mustangSSPWindowrl
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Body|ssp_window_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93mustangSSPWindowrr
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Body|ssp_window_rr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SSP93Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 93mustangSSPWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.93mustangSSPFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = SSP93WindowFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 93mustangSSPWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.93mustangSSPFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = SSP93WindowFrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 93mustangSSPWindowrl,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.93mustangSSPRearSideWindow,
+			table uninstall
+				{
+				requireUninstalled = SSP93WindowRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 93mustangSSPWindowrr,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.93mustangSSPRearSideWindow,
+			table uninstall
+				{
+				requireUninstalled = SSP93WindowRearRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+}
+

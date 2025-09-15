@@ -1,0 +1,153 @@
+module Base
+{
+
+    model ECTO1windshield
+    {
+        mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model ECTO1rearwindshield
+    {
+        mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_rear_windshield,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+        boneWeight = trunk_bone 1.0,
+    }
+
+    model ECTO1windowB
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_windows_back,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle ECTO1Windshields
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = ECTO1windshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.ECTO1Windshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                requireUninstalled = DAMNWindshieldArmor,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = ECTO1rearwindshield,
+            }
+
+            model windowsBack
+            {
+                file = ECTO1windowB,
+            }
+            parent = TrunkDoor,
+            
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.ECTO1RearWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                requireUninstalled = DAMNWindshieldRearArmor,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+}

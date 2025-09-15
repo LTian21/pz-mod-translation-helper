@@ -1,0 +1,56 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LowWoodenGreyFenceCorner
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Low Wooden Grey Fence Corner,
+			Icon		= walls_exterior_wooden_01_62,
+		}
+	}
+
+    entity LowWoodenGreyFenceCorner
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_LowWoodenGreyFenceCorner,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face W
+            {
+                layer
+                {
+                    row = walls_exterior_wooden_01_62,
+                }
+            }
+			
+            corner = walls_exterior_wooden_01_63,
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 150,
+            needToBeLearn = true,
+            category      = Fences_Low,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:6,
+            ToolTip       = Tooltip_craft_woodenFenceDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 4 [Base.Plank],
+                item 3 [Base.Nails],
+            }
+        }
+    }
+}

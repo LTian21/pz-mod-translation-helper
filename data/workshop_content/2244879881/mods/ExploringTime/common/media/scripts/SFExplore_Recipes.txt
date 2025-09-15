@@ -1,0 +1,51 @@
+module Base
+{
+   	craftRecipe LightTorch
+	{
+        timedAction = Making,
+	Time = 10,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Survival,
+		inputs
+		{
+			item 1 [TorchBranch;TorchChairLeg;TorchLongStick;TorchPlank;TorchTableLeg] flags[Prop2] mappers[torchType],
+			item 1 tags[StartFire],
+		}
+		outputs
+		{
+			item 1 mapper:torchType,
+		}
+		itemMapper torchType
+		{
+			Base.TorchBranchLit = Base.TorchBranch,
+			Base.TorchChairLegLit = Base.TorchChairLeg,
+			Base.TorchLongStickLit = Base.TorchLongStick,
+			Base.TorchPlankLit = Base.TorchPlank,
+			Base.TorchTableLegLit = Base.TorchTableLeg,
+		}
+	}
+
+   	craftRecipe MakeTorch
+	{
+        timedAction = Making,
+	Time = 50,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Survival,
+		inputs
+		{
+			item 1 [LongStick;TreeBranch2] flags[Prop2] mappers[branchType],
+			item 1 [RippedSheets;RippedSheetsDirty] mode:destroy,
+			item 1 [*],
+			-fluid 0.2 [Petrol],
+		}
+		outputs
+		{
+			item 1 mapper:branchType,
+		}
+		itemMapper branchType
+		{
+			Base.TorchLongStick = Base.LongStick,
+			Base.TorchBranch = Base.TreeBranch2,
+		}
+	}
+}

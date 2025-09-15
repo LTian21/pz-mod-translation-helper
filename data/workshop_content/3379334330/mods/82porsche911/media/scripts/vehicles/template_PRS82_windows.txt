@@ -1,0 +1,210 @@
+module Base
+{
+
+	model 82porsche911windowfl
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fl_bone 1.0,
+	}
+
+	model 82porsche911windowfr
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fr_bone 1.0,
+	}
+
+	model 82porsche911windowrl
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911_window_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82porsche911windowrr
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911_window_rr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 82porsche911RWBwindowrl
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911rwb_window_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82porsche911RWBwindowrr
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911rwb_window_rr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle PRS82Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 82porsche911windowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.82porsche911FrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = PRS82FrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 82porsche911windowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.82porsche911FrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = PRS82FrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 82porsche911windowrl,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.82porsche911RearSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = PRS82RearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 82porsche911windowrr,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.82porsche911RearSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = PRS82RearRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+    template vehicle PRS82WindowsRWB
+	{
+        template! = PRS82Windows,
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 82porsche911RWBwindowrl,
+			}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 82porsche911RWBwindowrr,
+			}
+		}
+	}
+}

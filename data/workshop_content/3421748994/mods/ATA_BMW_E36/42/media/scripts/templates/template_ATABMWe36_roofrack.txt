@@ -1,0 +1,123 @@
+module Base
+{
+    model ATABMWe36_Roofrack
+	{
+		mesh = vehicles/Vehicles_ATABMWe36|roof1_a,
+		texture = ATABMWe36/vehicle_items,
+
+		scale = 0.08,
+	}
+    model ATABMWe36_RoofBag1
+	{
+		mesh = vehicles/Vehicles_ATABMWe36|roof1_bag1,
+		texture = Clothes/Bag/DuffelBagBlue,
+
+		scale = 0.08,
+	}
+	model ATABMWe36_RoofBag2
+	{
+		mesh = vehicles/Vehicles_ATABMWe36|roof1_bag2,
+		texture = Clothes/Bag/DuffelBagGreen,
+
+		scale = 0.08,
+	}
+    model ATABMWe36_RoofWheel
+	{
+		mesh = vehicles/Vehicles_ATABMWe36|roof1_zapaska,
+		texture =  ATABMWe36/vehicle_wheel,
+
+		scale = 0.08,
+	}
+    
+    model ATABMWe36_WindowRack
+	{
+		mesh = vehicles/Vehicles_ATABMWe36|roof2_a,
+		texture = ATABMWe36/vehicle_items,
+
+		scale = 0.08,
+	}
+    model ATABMWe36_WindowRackBag1
+	{
+		mesh = vehicles/Vehicles_ATABMWe36|roof2_level1,
+		texture = ATABMWe36/vehicle_items2,
+		scale = 0.08,
+	}
+	model ATABMWe36_WindowRackBag2
+	{
+		mesh = vehicles/Vehicles_ATABMWe36|roof2_level2,
+		texture = ATABMWe36/vehicle_items2,
+		scale = 0.08,
+	}
+    model ATABMWe36_WindowRackBag3
+	{
+		mesh = vehicles/Vehicles_ATABMWe36|roof2_level3,
+		texture = ATABMWe36/vehicle_items2,
+
+		scale = 0.08,
+	}
+    
+    template vehicle ATABMWe36_RoofRack
+	{
+        template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkRoofRack,
+        part ATA2InteractiveTrunkRoofRack
+		{
+            area = ATARoof,
+            model Default
+            {
+                file = ATABMWe36_Roofrack,
+            }
+            model Filling1
+            {
+                file = ATABMWe36_RoofBag1,
+            }
+            model Filling2
+            {
+                file = ATABMWe36_RoofBag2,
+            }
+            model Item1
+            {
+                file = ATABMWe36_RoofWheel,
+            }
+        }
+    }
+    
+    template vehicle ATABMWe36_WindowRack
+	{
+        template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkWindowRearRack,
+        part ATA2InteractiveTrunkWindowRearRack
+		{
+            area = TruckBed,
+            model Default
+            {
+                file = ATABMWe36_WindowRack,
+            }
+            model FillingOnlyOne1
+            {
+                file = ATABMWe36_WindowRackBag1,
+            }
+            model FillingOnlyOne2
+            {
+                file = ATABMWe36_WindowRackBag2,
+            }
+            model FillingOnlyOne3
+            {
+                file = ATABMWe36_WindowRackBag3,
+            }
+        }
+        
+        template = Windshield/part/WindshieldRear,
+        part WindshieldRear
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+			}
+            table uninstall
+            {
+				recipes = Advanced Mechanics,
+                requireUninstalled = ATA2InteractiveTrunkWindowRearRack,
+			}
+		}
+    }
+}

@@ -1,0 +1,86 @@
+module Base
+{
+	model 89volvo200LipFrontA
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_lipA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89volvo200LipFrontB
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_lipB,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle VL200FrontLips
+		{
+		part VL200LipFront
+        	{
+
+			model LipFrontA
+				{
+                		file = 89volvo200LipFrontA,
+				}
+
+			model LipFrontB
+				{
+                		file = 89volvo200LipFrontB,
+				}
+
+				area = Engine,
+				category = bodywork,
+				itemType = Base.89volvo240LipFrontA;Base.89volvo240LipFrontB,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VL200.InstallComplete.LipFront,
+                    requireInstalled = DAMNBumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = VL200.UninstallComplete.LipFront,
+            		}
+
+            		lua
+            		{
+					create = VL200.Create.LipFront,
+					init = VL200.Init.LipFront,
+					}
+			}
+	}
+}

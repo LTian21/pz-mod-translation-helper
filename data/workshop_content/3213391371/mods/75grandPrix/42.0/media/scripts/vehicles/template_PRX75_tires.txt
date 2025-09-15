@@ -1,0 +1,287 @@
+module Base
+{
+
+	model 75grandPrixWheel1
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Wheels|75pontiac_tire1,
+		texture = vehicles/Vehicles_75grandPrix_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 75grandPrixWheel2
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Wheels|75pontiac_tire2,
+		texture = vehicles/Vehicles_75grandPrix_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 75grandPrixWheel3
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Wheels|75pontiac_tire3,
+		texture = vehicles/Vehicles_75grandPrix_Wheel2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 75grandPrixWheel4L
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.105,
+	}
+    model 75grandPrixWheel4R
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.105,
+        invertX = TRUE,
+	}
+
+	template vehicle PRX75Tires
+	{
+		part TireFrontLeft
+		{
+            model PRX75Tire1
+			{
+				file = 75grandPrixWheel1,
+			}
+
+			model PRX75Tire2
+			{
+				file = 75grandPrixWheel2,
+			}
+
+			model PRX75Tire3
+			{
+				file = 75grandPrixWheel3,
+			}
+
+            model PRX75Tire4
+			{
+				file = 75grandPrixWheel4L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = PRX75.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = PRX75.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = PRX75.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model PRX75Tire1
+			{
+				file = 75grandPrixWheel1,
+			}
+
+			model PRX75Tire2
+			{
+				file = 75grandPrixWheel2,
+			}
+
+			model PRX75Tire3
+			{
+				file = 75grandPrixWheel3,
+			}
+
+            model PRX75Tire4
+			{
+				file = 75grandPrixWheel4R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = PRX75.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = PRX75.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = PRX75.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model PRX75Tire1
+			{
+				file = 75grandPrixWheel1,
+			}
+
+			model PRX75Tire2
+			{
+				file = 75grandPrixWheel2,
+			}
+
+			model PRX75Tire3
+			{
+				file = 75grandPrixWheel3,
+			}
+
+            model PRX75Tire4
+			{
+				file = 75grandPrixWheel4L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = PRX75.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			table uninstall
+			{
+				complete = PRX75.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = PRX75.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model PRX75Tire1
+			{
+				file = 75grandPrixWheel1,
+			}
+
+			model PRX75Tire2
+			{
+				file = 75grandPrixWheel2,
+			}
+
+			model PRX75Tire3
+			{
+				file = 75grandPrixWheel3,
+			}
+
+            model PRX75Tire4
+			{
+				file = 75grandPrixWheel4R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = PRX75.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = PRX75.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = PRX75.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+            durability = 2,
+			itemType = Base.75grandPrixR215Tire1;Base.75grandPrixR217Tire3;Base.75grandPrixH17Tire3;damnCraft.SmallTire1,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+
+	template vehicle PRX75TiresSJ
+	{
+		template! = PRX75Tires,
+
+		part Tire*
+		{
+			itemType = Base.75grandPrixR215Tire1;damnCraft.SmallTire1,
+		}
+	}
+}

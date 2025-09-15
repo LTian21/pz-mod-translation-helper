@@ -1,0 +1,201 @@
+module Base
+{
+	
+	model 73fordFalconspoiler0
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_spoiler0,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    model 73fordFalconspoiler1
+    {
+        mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_spoiler_roof1,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    template vehicle FLC73SpoilerRoof
+		{
+
+        part DAMNSpoilerRoof
+       		{
+
+            model spoiler1
+			{
+                	file = 73fordFalconspoiler1,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            specificItem = false,
+            itemType = Base.73fordFalconSpoilerRoof1,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+	}
+
+	template vehicle FLC73Spoilers
+	{
+		part DAMNSpoiler
+       		{
+
+            model spoiler0
+			{
+                	file = 73fordFalconspoiler0,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            specificItem = false,
+            itemType = Base.73fordFalconSpoiler0,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = FLC73.InstallComplete.Spoiler,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = FLC73.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = FLC73.Create.Spoiler,
+                init = FLC73.Init.Spoiler,
+            }
+        }
+
+        part DAMNSpoilerRoof
+       		{
+
+            model spoiler1
+			{
+                	file = 73fordFalconspoiler1,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            specificItem = false,
+            itemType = Base.73fordFalconSpoilerRoof1,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = FLC73.InstallComplete.SpoilerRoof,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = FLC73.UninstallComplete.SpoilerRoof,
+            }
+            lua
+            {
+                create = FLC73.Create.SpoilerRoof,
+                init = FLC73.Init.SpoilerRoof,
+            }
+        }
+    }
+}

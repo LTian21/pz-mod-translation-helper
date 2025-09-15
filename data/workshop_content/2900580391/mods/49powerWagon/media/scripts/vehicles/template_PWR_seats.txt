@@ -1,0 +1,232 @@
+module Base
+{
+
+	model 49powerWagonseatfl
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_seat_f,
+		texture = Vehicles/Vehicles_49powerWagon_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 49powerWagonseatfr
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_seat_f,
+		texture = Vehicles/Vehicles_49powerWagon_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 49powerWagonseatrl
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_seat_r,
+		texture = Vehicles/Vehicles_49powerWagon_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 49powerWagonseatrr
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_seat_r,
+		texture = Vehicles/Vehicles_49powerWagon_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 49powerWagonseattb
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_seat_truckbed,
+		texture = Vehicles/Vehicles_49powerWagon_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	
+	template vehicle PWRSeats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 49powerWagonseatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 49powerWagonseatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 49powerWagonseatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 49powerWagonseatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part TruckBedSeat
+		{
+			
+			model SeatTB
+			{
+				file = 49powerWagonseattb,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = TruckBed,
+			category = seat,
+			itemType = Base.49powerWagonTruckBedSeat,
+			mechanicRequireKey = true,
+			container
+			{
+				seat = TruckBed,
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				door = TrunkDoor,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				requireUninstalled = PWRSpare,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			itemType = Base.49powerWagonSeat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

@@ -1,0 +1,77 @@
+module Base
+{
+
+	model 90fordF350ambulanceSidestep
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_sidesteps,
+		texture = Vehicles/Vehicles_90fordF350ambulance_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	
+	template vehicle F350Sidesteps
+	{
+		part F350Sidesteps
+        	{
+
+			model Sidesteps
+				{
+                		file = 90fordF350ambulanceSidestep,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.90fordF350Sidesteps,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F350.InstallComplete.Sidesteps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = F350.UninstallComplete.Sidesteps,
+
+            		}
+
+	            lua
+	            {
+				create = F350.Create.Sidesteps,
+				init = F350.Init.Sidesteps,
+				}
+		}
+	}
+}
+

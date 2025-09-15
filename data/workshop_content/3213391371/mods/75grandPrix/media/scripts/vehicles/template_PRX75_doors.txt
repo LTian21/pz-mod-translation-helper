@@ -1,0 +1,210 @@
+module Base
+{
+
+	model 75grandPrixDoorfl
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_door_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fl_bone 1.0,
+	}
+
+	model 75grandPrixDoorfr
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_door_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fr_bone 1.0,
+	}
+
+	template vehicle PRX75Doors
+	{
+
+		part DoorFrontLeft
+		{
+			model DoorFrontLeft
+				{
+				file = 75grandPrixDoorfl,
+				}
+				itemType = Base.75grandPrixFrontDoor,
+				table uninstall
+				{
+				requireUninstalled = WindowFrontLeft,
+				}
+				area = SeatFrontLeft,
+				anim ActorOpen
+				{
+					angle = 0.0 270.0 0.0,
+				}
+				anim ActorClose
+				{
+					angle = 0.0 270.0 0.0,
+				}
+
+				anim Close
+				{
+					anim = door_fl_opening,
+					reverse = TRUE,
+					rate = 1.5,
+				}
+
+				anim Open
+				{
+					anim = door_fl_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = door_fl_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = door_fl_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+				lua
+				{
+					create = Vehicles.Create.Door,
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.Door,
+				}
+		}
+
+		part DoorFrontRight
+		{
+			model DoorFrontRight
+				{
+				file = 75grandPrixDoorfr,
+				}
+				itemType = Base.75grandPrixFrontDoor,
+				table uninstall
+				{
+				requireUninstalled = WindowFrontRight,
+				}
+				area = SeatFrontRight,
+				anim ActorOpen
+				{
+					angle = 0.0 90.0 0.0,
+				}
+				anim ActorClose
+				{
+					angle = 0.0 90.0 0.0,
+				}
+
+				anim Close
+				{
+					anim = door_fr_opening,
+					reverse = TRUE,
+					rate = 1.5,
+				}
+
+				anim Open
+				{
+					anim = door_fr_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = door_fr_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = door_fr_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+				lua
+				{
+					create = Vehicles.Create.Door,
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.Door,
+				}
+		}
+
+		part Door*
+		{
+			category = door,
+			door
+			{
+				}
+				anim Open
+				{
+					sound = VehicleDoorOpenStandard,
+				}
+				anim Close
+				{
+					sound = VehicleDoorCloseStandard,
+				}
+				anim Lock
+				{
+					sound = LockVehicleDoorStandard,
+				}
+				anim Unlock
+				{
+					sound = UnlockVehicleDoorStandard,
+				}
+				anim IsLocked
+				{
+					sound = VehicleDoorIsLockedStandard,
+				}
+				anim ActorOpen
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				anim ActorClose
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				mechanicRequireKey = true,
+				table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 700,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+				}
+				table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 700,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+					}
+				}
+			}
+	}
+
+

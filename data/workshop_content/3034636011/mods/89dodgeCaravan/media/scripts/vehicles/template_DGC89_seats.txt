@@ -1,0 +1,456 @@
+module Base
+{
+
+	model 89dodgeCaravanseatfl
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_seat_fl,
+		texture = Vehicles/Vehicles_89dodgeCaravan_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 89dodgeCaravanseatfr
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_seat_fr,
+		texture = Vehicles/Vehicles_89dodgeCaravan_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 89dodgeCaravanseatml
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_seat_ml,
+		texture = Vehicles/Vehicles_89dodgeCaravan_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 89dodgeCaravanseatmr
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_seat_mr,
+		texture = Vehicles/Vehicles_89dodgeCaravan_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 89dodgeCaravanseatrl
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_seat_rl,
+		texture = Vehicles/Vehicles_89dodgeCaravan_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 89dodgeCaravanseatrr
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_seat_rr,
+		texture = Vehicles/Vehicles_89dodgeCaravan_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle DGC89Seats3
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 89dodgeCaravanseatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 89dodgeCaravanseatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 89dodgeCaravanseatml,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+	
+	template vehicle DGC89Seats4
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 89dodgeCaravanseatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 89dodgeCaravanseatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatML
+			{
+				file = 89dodgeCaravanseatml,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatMR
+			{
+				file = 89dodgeCaravanseatmr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+	template vehicle DGC89Seats6
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 89dodgeCaravanseatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 89dodgeCaravanseatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatMiddleLeft
+		{
+
+			model seatML
+			{
+				file = 89dodgeCaravanseatml,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = MiddleLeft,
+			}
+		}
+
+		part SeatMiddleRight
+		{
+
+			model seatMR
+			{
+				file = 89dodgeCaravanseatmr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = MiddleRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 89dodgeCaravanseatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 89dodgeCaravanseatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.89dodgeCaravanSeat,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

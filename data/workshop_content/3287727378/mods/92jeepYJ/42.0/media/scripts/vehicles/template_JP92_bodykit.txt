@@ -1,0 +1,113 @@
+module Base
+{
+    model 92jeepYJBodykitF1L
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_bodykit1,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+    model 92jeepYJBodykitF1R
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_bodykit1,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 92jeepYJBodykitF2L
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_bodykit2,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+    model 92jeepYJBodykitF2R
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_bodykit2,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle JP92Bodykit
+		{
+		part JP92Bodykit
+        	{
+
+			model Bodykit1L
+				{
+                		file = 92jeepYJBodykitF1L,
+				}
+
+            model Bodykit1R
+				{
+                		file = 92jeepYJBodykitF1R,
+				}
+
+            model Bodykit2L
+				{
+                		file = 92jeepYJBodykitF2L,
+				}
+
+            model Bodykit2R
+				{
+                		file = 92jeepYJBodykitF2R,
+				}
+
+			category = bodywork,
+			area = TireFrontRight,
+			specificItem = false,
+			itemType = Base.92jeepYJBodykitA2;Base.92jeepYJBodykitB2,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = JP92.InstallComplete.Bodykit,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 750,
+			skills = Mechanics:1,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = JP92.UninstallComplete.Bodykit,
+
+            		}
+
+            		lua
+            		{
+			create = JP92.Create.Bodykit,
+			init = JP92.Init.Bodykit,
+			}
+		}
+	}
+}

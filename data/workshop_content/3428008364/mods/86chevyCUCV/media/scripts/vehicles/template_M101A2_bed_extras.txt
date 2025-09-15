@@ -1,0 +1,87 @@
+module Base
+{
+
+	model M101A2BedTarp0
+	{
+		mesh = vehicles/Vehicles_TrailerM101A2cargo_Body|86m101a2_tarp_large,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+    model M101A2BedTarp1
+	{
+		mesh = vehicles/Vehicles_TrailerM101A2cargo_Body|86m101a2_tarp_small,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M101A2Tarps
+	{
+		part M101A2Tarp
+        	{
+
+			model BedTarp0
+				{
+                		file = M101A2BedTarp0,
+				}
+            model BedTarp1
+				{
+                		file = M101A2BedTarp1,
+				}
+
+			category = bodywork,
+			area = TireRearLeft,
+			itemType = Base.86chevyCUCVBedTarp;Base.KI5trailersTarp,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CUCV86.InstallComplete.TrailerTarps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = CUCV86.UninstallComplete.TrailerTarps,
+
+            		}
+
+	            lua
+	            {
+				create = CUCV86.Create.TrailerTarps,
+				init = CUCV86.Init.TrailerTarps,
+				}
+		}
+	}
+
+}
+

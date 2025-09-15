@@ -1,0 +1,93 @@
+module Base
+{
+	model 92amgeneralM998WindshieldArmor1
+    	{
+        mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_windshield_a,
+	texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+        shader = vehiclewheel,
+        scale = 0.1,
+    	}
+
+	model 92amgeneralM998WindshieldArmor2
+    	{
+        mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_windshield_aa,
+	texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+        shader = vehiclewheel,
+        scale = 0.1,
+    	}
+
+	template vehicle M998WindshieldArmors
+		{
+		part M998WindshieldArmor
+        	{
+
+			model WindshieldArmor1
+				{
+                		file = 92amgeneralM998WindshieldArmor1,
+				}
+
+			model WindshieldArmor2
+				{
+                		file = 92amgeneralM998WindshieldArmor2,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M998WindshieldArmor1_Item;Base.M998WindshieldArmor2_Item,
+			mechanicRequireKey = false,
+			table install
+					{
+						requireInstalled = Windshield,
+					}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M998.InstallComplete.WindshieldArmor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1100,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = M998.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+			create = M998.Create.WindshieldArmor,
+			init = M998.Init.WindshieldArmor,
+			}
+		}
+	}
+
+		
+}

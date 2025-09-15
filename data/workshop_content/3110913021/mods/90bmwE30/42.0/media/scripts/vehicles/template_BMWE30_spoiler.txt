@@ -1,0 +1,162 @@
+module Base
+{
+	
+	model 90bmwE30spoiler0
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_m3_spoiler0,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    model 90bmwE30spoiler1
+    {
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_sedan_spoiler0,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+    model 90bmwE30spoiler2
+    {
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_sedan_spoiler1,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle BMWE30SpoilerM3
+		{
+		part DAMNSpoiler
+       		{
+
+            model BMWE30spoiler0
+			{
+                	file = 90bmwE30spoiler0,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            itemType = Base.90bmwE30m3Spoiler,
+            mechanicRequireKey = false,
+            durability = 2,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = BMWE30.InstallComplete.SpoilerM,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = BMWE30.UninstallComplete.SpoilerM,
+            }
+            lua
+            {
+                create = BMWE30.Create.SpoilerM,
+                init = BMWE30.Init.SpoilerM,
+            }
+        }
+	}
+
+    template vehicle BMWE30Spoilers
+        {
+        part DAMNSpoiler
+            {
+
+            model BMWE30spoiler1
+            {
+                    file = 90bmwE30spoiler1,
+            }
+
+            model BMWE30spoiler2
+            {
+                    file = 90bmwE30spoiler2,
+            }
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            itemType = Base.90bmwE30sedanSpoilerLip;Base.90bmwE30sedanSpoilerMT,
+            mechanicRequireKey = false,
+            durability = 2,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = BMWE30.InstallComplete.Spoiler,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = BMWE30.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = BMWE30.Create.Spoiler,
+                init = BMWE30.Init.Spoiler,
+            }
+        }
+
+    }
+}
+

@@ -1,0 +1,88 @@
+module Base
+{
+
+	model 86chevyCUCVBedTarp0
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_tarp,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 86chevyCUCVBedPlanks0
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_planks,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CUCV86BedExtras
+	{
+		part CUCV86BedAddons
+        	{
+
+			model BedTarp0
+				{
+                		file = 86chevyCUCVBedTarp0,
+				}
+            model BedPlanks0
+				{
+                		file = 86chevyCUCVBedPlanks0,
+				}
+
+			category = bodywork,
+			area = TireRearLeft,
+			itemType = Base.86chevyCUCVBedTarp;Base.86chevyCUCVBedPlanks,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CUCV86.InstallComplete.BedExtras,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = CUCV86.UninstallComplete.BedExtras,
+
+            		}
+
+	            lua
+	            {
+				create = CUCV86.Create.BedExtras,
+				init = CUCV86.Init.BedExtras,
+				}
+		}
+	}
+
+}
+

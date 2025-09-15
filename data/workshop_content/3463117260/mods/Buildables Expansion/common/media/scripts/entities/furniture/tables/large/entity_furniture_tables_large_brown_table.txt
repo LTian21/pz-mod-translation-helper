@@ -1,0 +1,60 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_BrownLargeTable
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Brown Large Table,
+			Icon		= furniture_tables_high_01_9,
+		}
+	}
+
+    entity BrownLargeTable
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_BrownLargeTable,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = furniture_tables_high_01_11,
+                    row = furniture_tables_high_01_10,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_tables_high_01_8 furniture_tables_high_01_9,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 250,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:5,
+            category      = Furniture_Tables,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_tableDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

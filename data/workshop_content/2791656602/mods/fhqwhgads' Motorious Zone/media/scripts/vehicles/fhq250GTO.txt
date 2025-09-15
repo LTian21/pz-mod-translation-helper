@@ -1,0 +1,596 @@
+module Base
+{
+	model fhq250GTO
+	{
+		mesh = vehicles/vehicle_fhq250gto|fhq250GTO,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.39,
+	}
+	model fhq250GTOExhaust
+	{
+		mesh = vehicles/vehicle_fhq250gto|fhq250GTOExhaust,
+		shader = vehicle_multiuv,
+		invertX = TRUE,
+		scale = 0.39,
+	}
+	model fhq250GTWheelLeft
+	{
+		mesh = vehicles/vehicles_WheelfhqMZClassicKnockOff,
+		texture = vehicles/vehicles_Wheelfhq250GTO,
+		shader = vehiclewheel,
+		scale = 1,
+	}
+	model fhq250GTWheelRight
+	{
+		mesh = vehicles/vehicles_WheelfhqMZClassicKnockOff,
+		texture = vehicles/vehicles_Wheelfhq250GTO,
+		shader = vehiclewheel,
+		invertX = TRUE,
+		scale = 1,
+	}
+	model fhq250GTOLHeadCover
+	{
+		mesh = vehicles/vehicle_fhq250gto|fhq250GTOLHeadlightCover,
+		shader = basicEffect,
+		scale = 0.39,
+	}
+	model fhq250GTORHeadCover
+	{
+		mesh = vehicles/vehicle_fhq250gto|fhq250GTORHeadlightCover,
+		shader = basicEffect,
+		scale = 0.39,
+	}
+	model fhq250GTOHoodScoops
+	{
+		mesh = vehicles/vehicle_fhq250gto|fhq250GTOHoodScoops,
+		shader = basicEffect,
+		scale = 0.39,
+	}
+	model fhq250GTORearScoop
+	{
+		mesh = vehicles/vehicle_fhq250gto|fhq250GTORearScoop,
+		shader = vehicle_multiuv,
+		scale = 0.39,
+	}
+	model fhq250GTOWipers
+	{
+		mesh = vehicles/vehicle_fhq250gto|fhq250GTOWipers,
+		shader = vehicle_multiuv,
+		scale = 0.39,
+	}
+	model fhq250GTOLWinChrome
+	{
+		mesh = vehicles/vehicle_fhq250gto|fhq250GTOSideChrome,
+		shader = vehicle_multiuv,
+		scale = 0.39,
+	}
+	
+	template vehicle fhq250GTO
+	{
+		mechanicType = 3,
+		offRoadEfficiency = 0.7,
+		engineRepairLevel = 8,
+		playerDamageProtection = 0.8,
+		engineRPMType = firebird,
+
+		model
+		{
+			file = fhq250GTO,
+			scale = 1.8200,
+			offset = 0.0000 0.0549 -0.1813,
+		}
+
+		spawnOffsetY = 0.12999995,
+
+		textureMask = Vehicles/vehicle_fhq250GTO_mask,
+		textureLights = Vehicles/vehicle_fhq250GTO_lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/Veh_Damage1,
+		textureDamage2Shell = Vehicles/Veh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		sound
+		{
+			engine = VehicleEngineSportsCar,
+			engineStart = VehicleEngineSportsCar,
+			engineTurnOff = VehicleEngineSportsCar,
+			horn = VehicleHornSportsCar,
+			ignitionFail = VehicleIgnitionFailSportsCar,
+		}
+
+		extents = 0.7692 0.4835 2.0220,
+		mass = 765,
+		physicsChassisShape = 0.7692 0.4615 2.0220,
+		centerOfMassOffset = 0.0000 0.2308 0.0000,
+		shadowExtents = 0.8278 2.1049,
+		shadowOffset = 0.0000 0.0000,
+		engineForce = 4500,
+		engineLoudness = 95,
+		engineQuality = 70,
+		maxSpeed = 135f,
+		gearRatioCount = 4,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 0.7f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 30,
+		suspensionCompression = 3.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 15,
+		suspensionRestLength = 0.2f,
+		wheelFriction = 1.8f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.3077 -0.0330 0.7692,
+			radius = 0.14f,
+			width = 0.20f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.3077 -0.0330 0.7692,
+			radius = 0.14f,
+			width = 0.20f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.3077 -0.0330 -0.3077,
+			radius = 0.14f,
+			width = 0.20f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.3077 -0.0330 -0.3077,
+			radius = 0.14f,
+			width = 0.20f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.1484 0.0220 -0.0165,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.5055 -0.2033 0.0879,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.1484 0.0220 -0.0165,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.5055 -0.2033 0.0879,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 1.2253 0.7692 0.4286,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -1.2253 0.7692 0.4286,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 0.6319 -0.0989 0.4945 0.4945,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -0.6319 -0.0989 0.4945 0.4945,
+		}
+
+		area GasTank
+		{
+			xywh = 0.6099 -0.7363 0.4505 0.4505,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.6264 0.5879 0.4505 0.4505,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.6264 0.5879 0.4505 0.4505,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 0.6264 -0.4890 0.4505 0.4505,
+		}
+
+		area TireRearRight
+		{
+			xywh = -0.6264 -0.4890 0.4505 0.4505,
+		}
+
+		template = TrunkDoor,
+		template = Trunk/part/TruckBed,
+
+		part TruckBed
+		{
+			itemType = Base.SmallTrunk,
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = GloveBox,
+		template = GasTank,
+
+		part GasTank
+		{
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			model Defualt
+			{
+				file = fhq250GTOExhaust,
+			}
+		}
+
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			anim Open
+			{
+				sound = VehicleHoodOpenSportsCar,
+			}
+
+			anim Close
+			{
+				sound = VehicleHoodCloseSportsCar,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+
+		part Windshield
+		{
+			model Default
+			{
+				file = fhq250GTOWipers,
+			}
+		}
+
+		part Windshield*
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+		template = Window/part/WindowRearLeft,
+		template = Window/part/WindowRearRight,
+
+		part WindowRearLeft
+		{
+			area = TireRearLeft,
+			parent =,
+
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindowFrontLeft,
+			}
+		}
+
+		part WindowRearRight
+		{
+			area = TireRearRight,
+			parent =,
+
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindowFrontRight,
+			}
+		}
+
+		part Window*
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+
+		part DoorFrontLeft
+		{
+			table uninstall
+			{
+				requireUninstalled = WindowRearLeft,
+			}
+		}
+
+		part DoorFrontRight
+		{
+			table uninstall
+			{
+				requireUninstalled = WindowRearRight,
+			}
+		}
+
+		part Door*
+		{
+			anim Open
+			{
+				sound = VehicleDoorOpenSportsCar,
+			}
+
+			anim Close
+			{
+				sound = VehicleDoorCloseSportsCar,
+			}
+
+			anim Lock
+			{
+				sound = LockVehicleDoorSportsCar,
+			}
+
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorSportsCar,
+			}
+
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedSportsCar,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhq250GTWheelLeft,
+				scale = 0.42,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhq250GTWheelRight,
+				scale = 0.42,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhq250GTWheelLeft,
+				scale = 0.42,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhq250GTWheelRight,
+				scale = 0.42,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+
+		part HeadlightLeft
+		{
+			model Default
+			{
+				file = fhq250GTOLHeadCover,
+			}
+		}
+
+		part HeadlightRight
+		{
+			model Default
+			{
+				file = fhq250GTORHeadCover,
+			}
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 0.0440 -0.7747,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 0.0440 1.1923,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+	
+	vehicle fhq250GTO
+	{
+		template! = fhq250GTO,
+		
+		skin
+		{
+			texture = Vehicles/vehicle_fhq250GTO_shell,
+		}
+	}
+}

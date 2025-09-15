@@ -1,0 +1,84 @@
+module Base
+{
+
+	model 93chevySuburban0
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_roofrack,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SUB93Roofrack
+	{
+		part SUB93Roofrack
+		{
+
+			model SUB93Roofrack0
+				{
+                		file = 93chevySuburban0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.93chevySuburbanRoofrack,
+			mechanicRequireKey = false,
+			durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = SUB93.Create.Roofrack,
+					init = SUB93.Init.Roofrack,
+				}
+		}
+	}
+
+}
+

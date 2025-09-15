@@ -1,0 +1,157 @@
+module Base
+{
+	model 93mustangSSPfrontBumper0
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Body|ssp_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93mustangSSPfrontBumper1
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Body|ssp_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93mustangSSPrearBumper0
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Body|ssp_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SSP93Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper1
+				{
+                		file = 93mustangSSPfrontBumper1,
+				}
+
+			model FrontBumper0
+				{
+                		file = 93mustangSSPfrontBumper0,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93mustangSSPBumperFront1;Base.93mustangSSPBumperFront0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SSP93.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SSP93.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = SSP93.Create.BumperFront,
+					init = SSP93.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 93mustangSSPrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93mustangSSPBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SSP93.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SSP93.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = SSP93.Create.BumperRear,
+					init = SSP93.Init.BumperRear,
+					}
+		}
+	}
+
+		
+}

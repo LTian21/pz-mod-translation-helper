@@ -1,0 +1,165 @@
+module Base
+{
+	model 85buickLeSabrefrontBumper0
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85-lesabre_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85buickLeSabrefrontBumperA
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85-lesabre_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 85buickLeSabrefrontBullbarA
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_bullbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85buickLeSabrerearBumper0
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85-lesabre_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle LES85Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 85buickLeSabrefrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 85buickLeSabrefrontBumperA,
+				}
+
+            model FrontBullbarA
+				{
+                		file = 85buickLeSabrefrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.85buickLeSabreBumperFront0;Base.85buickLeSabreBumperFrontA;Base.85gmBbodyBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LES85.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = LES85.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = LES85.Create.BumperFront,
+					init = LES85.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 85buickLeSabrerearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.85buickLeSabreBumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LES85.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = LES85.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = LES85.Create.BumperRear,
+					init = LES85.Init.BumperRear,
+					}
+		}
+	}
+}

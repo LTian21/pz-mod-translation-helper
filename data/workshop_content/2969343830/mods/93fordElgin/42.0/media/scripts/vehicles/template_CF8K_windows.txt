@@ -1,0 +1,119 @@
+module Base
+{
+
+	model 93fordElginWindowfl
+	{
+		mesh = vehicles/Vehicles_93fordElgin_Body|cf8k_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 93fordElginWindowfr
+	{
+		mesh = vehicles/Vehicles_93fordElgin_Body|cf8k_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle CF8KWindows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 93fordElginWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.93fordCF8000SideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 93fordElginWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.93fordCF8000SideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            durability = 2,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}
+

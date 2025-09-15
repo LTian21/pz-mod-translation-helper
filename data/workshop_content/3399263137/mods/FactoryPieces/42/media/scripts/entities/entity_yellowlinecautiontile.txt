@@ -1,0 +1,71 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Yellow_Line_Caution_Tile
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Yellow Line Caution Tile,
+			Icon		= Build_YellowLineCautionTile,
+		}
+	}
+
+    entity BuildYellowLineCautionTile
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Yellow_Line_Caution_Tile,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_18,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_19,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_20,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_21,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = Making,
+            time          = 100,
+            needToBeLearn = false,
+            xpAward       = Maintenance:1,
+            category      = Factory Pieces,
+            ToolTip       = Tooltip_FPYellowLineCautionTile,
+            inputs
+            {
+		item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull;Prop1],
+                item 1 [Base.PaintYellow],
+                item 1 [Base.DuctTape],
+            }
+        }
+    }
+}

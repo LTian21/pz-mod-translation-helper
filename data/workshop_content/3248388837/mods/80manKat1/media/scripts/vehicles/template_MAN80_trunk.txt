@@ -1,0 +1,80 @@
+module Base
+{
+	template vehicle MAN80Trunk
+	{
+		part MAN80Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = Base.80manKat1Trunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+	}
+
+	template vehicle MAN80Storage
+	{
+
+		part MAN80LeftStorage
+		{
+			category = bodywork,
+			area = StorageLeft,
+			itemType = Base.80manKat1Storage,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				test = MAN80.ContainerAccess.StorageLeft,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part MAN80RightStorage
+		{
+			category = bodywork,
+			area = StorageRight,
+			itemType = Base.80manKat1Storage,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				test = MAN80.ContainerAccess.StorageRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

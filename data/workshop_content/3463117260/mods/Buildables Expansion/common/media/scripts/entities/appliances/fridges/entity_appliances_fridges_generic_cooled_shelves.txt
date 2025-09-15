@@ -1,0 +1,73 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_GenericCooledShelves
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Generic Cooled Shelves,
+			Icon		= location_shop_generic_01_66,
+		}
+	}
+
+    entity GenericCooledShelves
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_GenericCooledShelves,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_shop_generic_01_69,
+                    row = location_shop_generic_01_68,
+                    row = location_shop_generic_01_67,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_shop_generic_01_64 location_shop_generic_01_65 location_shop_generic_01_66,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 300,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:7;Electricity:5,
+            xpAward       = MetalWelding:10;Electricity:15,
+            category      = Appliances_Fridges,
+            ToolTip       = Tooltip_craft_fridgeDesc,
+            inputs
+            {
+                item 8 [Base.BlowTorch] mode:keep flags[Prop1],
+                item 1 tags[Screwdriver] mode:keep flags[Prop2],
+                item 1 tags[Pliers] mode:keep,
+                item 8 [Base.WeldingRods],
+                item 2 [Base.RefrigerantBottle],
+                item 4 [Base.SmallSheetMetal],
+                item 6 [Base.SheetMetal],
+                item 6 [Base.PlasticSheet],
+                item 6 [Base.InsulationFoam],
+                item 2 [Base.SmallRubberTube],
+                item 4 [Base.RubberSeal],
+                item 4 [Base.ThinCopperPipe],
+                item 10 [Base.ElectronicsScrap],
+                item 5 [Base.ElectricWire],
+			    item 1 [Base.RefrigeratorCompressor],
+			    item 2 [Base.LightBulb],
+            }
+        }
+    }
+}

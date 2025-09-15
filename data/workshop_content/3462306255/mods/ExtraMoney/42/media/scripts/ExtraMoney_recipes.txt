@@ -1,0 +1,758 @@
+
+module Base
+{
+
+/************* WEAPON *************/
+
+	craftRecipe Use_Ingot_as_a_Weapon
+	{
+		Time = 2,
+        tags            = InHandCraft,
+		category = Extra Money,
+		timedAction = MakingJewellery,
+		inputs
+		{
+			item 1 [Base.GoldBar;Base.SilverBar] mappers[ingotWeapon],
+
+		}
+		outputs
+		{
+			item 1 mapper:ingotWeapon,
+		}
+		itemMapper ingotWeapon
+		{
+			Base.GoldIngot_Weapon = Base.GoldBar,
+			Base.SilverIngot_Weapon = Base.SilverBar,
+		}
+	}
+	
+	craftRecipe Ingots_are_not_a_Weapon
+	{
+		Time = 2,
+        tags            = InHandCraft,
+		category = Extra Money,
+		timedAction = MakingJewellery,
+		inputs
+		{
+			item 1 [Base.GoldIngot_Weapon;Base.SilverIngot_Weapon] mappers[ingotWeapon],
+
+		}
+		outputs
+		{
+			item 1 mapper:ingotWeapon,
+		}
+		itemMapper ingotWeapon
+		{
+			Base.GoldBar = Base.GoldIngot_Weapon,
+			Base.SilverBar = Base.SilverIngot_Weapon,
+		}
+	}
+
+/************* EXTRACT JEWELS *************/
+
+
+
+	craftRecipe RemovePreciousStoneFromGoldJewelry
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = MakingJewellery,
+		inputs
+		{
+			item 1 [Base.BellyButton_RingGoldDiamond;Base.BellyButton_StudGoldDiamond;Base.NecklaceLong_GoldDiamond;Base.Necklace_GoldDiamond;Base.Ring_Left_RingFinger_GoldDiamond;Base.Ring_Left_MiddleFinger_GoldDiamond;Base.Ring_Right_RingFinger_GoldDiamond;Base.Ring_Right_MiddleFinger_GoldDiamond;Base.BellyButton_DangleGoldRuby;Base.BellyButton_RingGoldRuby;Base.Necklace_GoldRuby;Base.Ring_Left_RingFinger_GoldRuby;Base.Ring_Left_MiddleFinger_GoldRuby;Base.Ring_Right_RingFinger_GoldRuby;Base.Ring_Right_MiddleFinger_GoldRuby] mappers[stoneType],
+			item 1 tags[Pliers] mode:keep,
+			item 1 tags[Magnifier] mode:keep,
+		}
+		outputs
+		{
+			item 1 Base.TinyGoldScrap,
+			item 1 mapper:stoneType,
+		}
+		itemMapper stoneType
+		{
+			Base.Diamond = Base.BellyButton_RingGoldDiamond,
+			Base.Diamond = Base.BellyButton_StudGoldDiamond,
+			Base.Diamond = Base.NecklaceLong_GoldDiamond,
+			Base.Diamond = Base.Necklace_GoldDiamond,
+			Base.Diamond = Base.Ring_Left_RingFinger_GoldDiamond,
+			Base.Diamond = Base.Ring_Left_MiddleFinger_GoldDiamond,
+			Base.Diamond = Base.Ring_Right_RingFinger_GoldDiamond,
+			Base.Diamond = Base.Ring_Right_MiddleFinger_GoldDiamond,
+			Base.Ruby = Base.BellyButton_DangleGoldRuby,
+			Base.Ruby = Base.BellyButton_RingGoldRuby,
+			Base.Ruby = Base.Necklace_GoldRuby,
+			Base.Ruby = Base.Ring_Left_RingFinger_GoldRuby,
+			Base.Ruby = Base.Ring_Left_MiddleFinger_GoldRuby,
+			Base.Ruby = Base.Ring_Right_RingFinger_GoldRuby,
+			Base.Ruby = Base.Ring_Right_MiddleFinger_GoldRuby,
+		}
+	}
+
+	craftRecipe RemovePreciousStoneFromSilverJewelry
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = MakingJewellery,
+		inputs
+		{
+			item 1 [Base.BellyButton_DangleSilverDiamond;Base.BellyButton_RingSilverDiamond;Base.BellyButton_StudSilverDiamond;Base.NecklaceLong_SilverDiamond;Base.Necklace_SilverDiamond;Base.Ring_Left_RingFinger_SilverDiamond;Base.Ring_Left_MiddleFinger_SilverDiamond;Base.Ring_Right_RingFinger_SilverDiamond;Base.Ring_Right_MiddleFinger_SilverDiamond;Base.BellyButton_RingSilverRuby;Base.NecklaceLong_SilverSapphire;Base.Necklace_SilverSapphire;Base.NecklaceLong_SilverEmerald] mappers[stoneType],
+			item 1 tags[Pliers] mode:keep,
+			item 1 tags[Magnifier] mode:keep,
+		}
+		outputs
+		{
+			item 1 Base.TinySilverScrap,
+			item 1 mapper:stoneType,
+		}
+		itemMapper stoneType
+		{
+			Base.Diamond = Base.BellyButton_DangleSilverDiamond,
+			Base.Diamond = Base.BellyButton_RingSilverDiamond,
+			Base.Diamond = Base.BellyButton_StudSilverDiamond,
+			Base.Diamond = Base.NecklaceLong_SilverDiamond,
+			Base.Diamond = Base.Necklace_SilverDiamond,
+			Base.Diamond = Base.Ring_Left_RingFinger_SilverDiamond,
+			Base.Diamond = Base.Ring_Left_MiddleFinger_SilverDiamond,
+			Base.Diamond = Base.Ring_Right_RingFinger_SilverDiamond,
+			Base.Diamond = Base.Ring_Right_MiddleFinger_SilverDiamond,
+			Base.Ruby = Base.BellyButton_RingSilverRuby,
+			Base.Sapphire = Base.NecklaceLong_SilverSapphire,
+			Base.Sapphire = Base.Necklace_SilverSapphire,
+			Base.Emerald = Base.NecklaceLong_SilverEmerald,
+		}
+	}
+
+	craftRecipe RemovePreciousStonesFromEarrings
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = MakingJewellery,
+		inputs
+		{
+			item 1 [Base.Earring_Dangly_Diamond;Base.Earring_Dangly_Ruby;Base.Earring_Stone_Ruby;Base.Earring_Dangly_Sapphire;Base.Earring_Stone_Sapphire;Base.Earring_Dangly_Emerald;Base.Earring_Dangly_Pearl;Base.Earring_Pearl] mappers[stoneType],
+			item 1 tags[Pliers] mode:keep,
+			item 1 tags[Magnifier] mode:keep,
+		}
+		outputs
+		{
+			item 2 mapper:stoneType,
+		}
+		itemMapper stoneType
+		{
+			Base.Diamond = Base.Earring_Dangly_Diamond,			
+			Base.Ruby = Base.Earring_Dangly_Ruby,
+			Base.Ruby = Base.Earring_Stone_Ruby,
+			Base.Sapphire = Base.Earring_Dangly_Sapphire,
+			Base.Sapphire = Base.Earring_Stone_Sapphire,
+			Base.Emerald = Base.Earring_Dangly_Emerald,
+			Base.Emerald = Base.Earring_Stone_Emerald,
+			Base.Pearl = Base.Earring_Dangly_Pearl,
+			Base.Pearl = Base.Earring_Pearl,
+		}
+	}
+
+	craftRecipe RemovePreciousStonesFromChoker
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = MakingJewellery,
+		inputs
+		{
+			item 1 [Base.Necklace_Choker_Diamond;Base.Necklace_Choker_Sapphire] mappers[stoneType],
+			item 1 tags[Pliers] mode:keep,
+			item 1 tags[Magnifier] mode:keep,
+		}
+		outputs
+		{
+			item 1 mapper:stoneType,
+		}
+		itemMapper stoneType
+		{
+			Base.Diamond = Base.Necklace_Choker_Diamond,
+			Base.Sapphire = Base.Necklace_Choker_Sapphire,
+		}
+	}
+
+	craftRecipe RemovePearlsFromNecklace
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = MakingJewellery,
+		inputs
+		{
+			item 1 [Base.Necklace_Pearl],
+			item 1 tags[Pliers] mode:keep,
+			item 1 tags[Magnifier] mode:keep,
+		}
+		outputs
+		{
+			item 20 Base.Pearl,
+		}
+		
+	}
+
+/*******************    PACKING    ********************/
+
+	craftRecipe MakeaPileof10PreciousStones
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = PackingBox,
+		inputs
+		{
+			item 10 [Base.Diamond;Base.Ruby;Base.Emerald;Base.Sapphire;Base.Pearl] mappers:[pileStone] flags[IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:pileStone,
+		}
+		itemMapper pileStone
+		{
+			Base.Diamond10 = Base.Diamond,
+			Base.Ruby10 = Base.Ruby,
+			Base.Emerald10 = Base.Emerald,
+			Base.Sapphire10 = Base.Sapphire,
+			Base.Pearl10 = Base.Pearl,
+		}
+		
+	}
+
+	craftRecipe SeperatePileof10PreciousStones
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = UnPackBox,
+		inputs
+		{
+			item 1 [Base.Diamond10;Base.Ruby10;Base.Emerald10;Base.Sapphire10;Base.Pearl10] mappers:[pileStone],
+		}
+		outputs
+		{
+			item 10 mapper:pileStone,
+		}
+		itemMapper pileStone
+		{
+			Base.Diamond = Base.Diamond10,
+			Base.Ruby = Base.Ruby10,
+			Base.Emerald = Base.Emerald10,
+			Base.Sapphire = Base.Sapphire10,
+			Base.Pearl = Base.Pearl10,
+		}
+		
+	}
+
+	craftRecipe MakeaBagof100PreciousStones
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = PackingBox,
+		inputs
+		{
+			item 10 [Base.Diamond10;Base.Ruby10;Base.Emerald10;Base.Sapphire10;Base.Pearl10] mappers:[pileStone] flags[IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:pileStone,
+		}
+		itemMapper pileStone
+		{
+			Base.Diamond100 = Base.Diamond10,
+			Base.Ruby100 = Base.Ruby10,
+			Base.Emerald100 = Base.Emerald10,
+			Base.Sapphire100 = Base.Sapphire10,
+			Base.Pearl100 = Base.Pearl10,
+		}
+		
+	}
+
+	craftRecipe EmptyBagof100PreciousStones
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = UnPackBox,
+		inputs
+		{
+			item 1 [Base.Diamond100;Base.Ruby100;Base.Emerald100;Base.Sapphire100;Base.Pearl100] mappers:[pileStone],
+		}
+		outputs
+		{
+			item 10 mapper:pileStone,
+		}
+		itemMapper pileStone
+		{
+			Base.Diamond10 = Base.Diamond100,
+			Base.Ruby10 = Base.Ruby100,
+			Base.Emerald10 = Base.Emerald100,
+			Base.Sapphire10 = Base.Sapphire100,
+			Base.Pearl10 = Base.Pearl100,
+		}
+		
+	}
+
+	craftRecipe MakeaBriefcaseof1000PreciousStones
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = PackingBox,
+		inputs
+		{
+			item 10 [Base.Diamond100;Base.Ruby100;Base.Emerald100;Base.Sapphire100;Base.Pearl100] mappers:[pileStone] flags[IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:pileStone,
+		}
+		itemMapper pileStone
+		{
+			Base.Diamond1000 = Base.Diamond100,
+			Base.Ruby1000 = Base.Ruby100,
+			Base.Emerald1000 = Base.Emerald100,
+			Base.Sapphire1000 = Base.Sapphire100,
+			Base.Pearl1000 = Base.Pearl100,
+		}
+		
+	}
+
+	craftRecipe EmptyBriefcaseof1000PreciousStones
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = UnPackBox,
+		inputs
+		{
+			item 1 [Base.Diamond1000;Base.Ruby1000;Base.Emerald1000;Base.Sapphire1000;Base.Pearl1000] mappers:[pileStone],
+		}
+		outputs
+		{
+			item 10 mapper:pileStone,
+		}
+		itemMapper pileStone
+		{
+			Base.Diamond100 = Base.Diamond1000,
+			Base.Ruby100 = Base.Ruby1000,
+			Base.Emerald100 = Base.Emerald1000,
+			Base.Sapphire100 = Base.Sapphire1000,
+			Base.Pearl100 = Base.Pearl1000,
+		}
+		
+	}
+
+	craftRecipe UnstackMoney
+	{
+        	timedAction = UnPackBox,
+		Time = 80,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+        	category = Extra Money,
+		inputs
+		{
+			item 1 [Base.Money1000] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 10 Base.MoneyBundle,
+		}
+	}
+
+	craftRecipe MakeStackofMoney
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 10 [Base.MoneyBundle] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.Money1000,
+		}
+	}
+
+
+
+	craftRecipe EmptyMoneyBriefcase
+	{
+        	timedAction = UnPackBox,
+		Time = 80,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+        	category = Extra Money,
+		inputs
+		{
+			item 1 [Base.Money10000] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 100 Base.MoneyBundle,
+		}
+	}
+
+	craftRecipe MakeMoneyBriefcase
+	{
+        timedAction = Making,
+		Time = 80,
+		/* CanWalk = true, */
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 100 [Base.MoneyBundle] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.Money10000,
+		}
+	}
+
+	craftRecipe Make3SilverIngotStack
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 3 [Base.SilverBar] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Silver3Stack,
+		}
+	}
+
+	craftRecipe Seperate3SilverIngotStack
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 1 [Base.Silver3Stack] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 3 SilverBar,
+		}
+	}
+
+	craftRecipe Make3GoldIngotStack
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 3 [Base.GoldBar] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Gold3Stack,
+		}
+	}
+
+	craftRecipe Seperate3GoldIngotStack
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 1 [Base.Gold3Stack] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 3 GoldBar,
+		}
+	}
+
+	craftRecipe Make9SilverIngotStack
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 3 [Base.Silver3Stack] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Silver9Stack,
+		}
+	}
+
+	craftRecipe Breakdown9SilverIngotStack
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 1 [Base.Silver9Stack] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 3 Silver3Stack,
+		}
+	}
+
+	craftRecipe Make9GoldIngotStack
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 3 [Base.Gold3Stack] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Gold9Stack,
+		}
+	}
+
+	craftRecipe Breakdown9GoldIngotStack
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 1 [Base.Gold9Stack] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 3 Gold3Stack,
+		}
+	}
+
+	craftRecipe MakeSilverIngotPallet
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 5 [Base.Silver9Stack] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Mov_SilverPallet,
+		}
+	}
+
+	craftRecipe DeconstructSilverIngotPallet
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 1 [Base.Mov_SilverPallet] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 5 Silver9Stack,
+		}
+	}
+
+	craftRecipe MakeGoldIngotPallet
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 5 [Base.Gold9Stack] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Mov_GoldPallet,
+		}
+	}
+
+	craftRecipe DeconstructGoldIngotPallet
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 1 [Base.Mov_GoldPallet] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 5 Gold9Stack,
+		}
+	}
+
+	craftRecipe MakeCashStackPallet
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 10 [Base.Money10000] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Mov_CashPallet,
+		}
+	}
+
+	craftRecipe DeconstructCashStackPallet
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Packing,
+        	category = Extra Money,
+		inputs
+		{
+			item 1 [Base.Mov_CashPallet] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 10 Money10000,
+		}
+	}
+
+
+
+/************* INGOT CREATION *************/
+
+	craftRecipe Combine_Small_Fragments_into_Scrap
+	{
+		Time = 20,
+        tags            = AnySurfaceCraft,
+		category = Extra Money,
+		timedAction = PackingBox,
+		inputs
+		{
+			item 20 [Base.TinyGoldScrap;Base.TinySilverScrap] mappers:[pileMetal] flags[IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:pileMetal,
+		}
+		itemMapper pileMetal
+		{
+			Base.GoldScrap = Base.TinyGoldScrap,
+			Base.SilverScrap = Base.TinySilverScrap,
+		}
+		
+	}
+
+/*
+ craftRecipe PressIngotMold
+    {
+        time = 100,
+        timedAction = UseHandPress,
+	category = Extra Money,
+        Tags = HandPress,
+        xpAward = Pottery:5,
+		category = Pottery,
+        inputs
+        {
+            item 1 [Base.Clay],
+            item 1 [Base.WoodenIngotCastMold] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.ClayIngotMoldUnfired,
+        }
+    }
+
+craftRecipe FireClayIngotMold
+    {
+        time            = 20,
+	category = Extra Money,
+        Tags = KilnSmall;KilnLarge,
+		category = Pottery,
+
+        inputs
+        {
+            item 1 [Base.ClayIngotMoldUnfired],
+		    item 1 tags[StartFire],
+            item 1 tags[Log;Charcoal],
+        }
+        outputs
+        {
+            item 1 Base.ClayIngotMold,
+        }
+    }
+*/
+
+    craftRecipe Cast_Ingot_From_Frangments
+    {
+        time        = 100,
+	category = Extra Money,
+        tags = PrimitiveFurnace,
+        category = Blacksmithing,
+        inputs
+        {
+            item 1 [Base.CeramicCrucible] mode:keep flags[IsEmpty],
+            item 1 tags[CrudeTongs;Tongs] mode:keep flags[MayDegradeLight],
+            item 18 tags[Charcoal],
+            item 1 [Base.ClayIngotMold;Base.IronIngotMold;Base.SteelIngotMold] mode:keep,
+            item 320 [Base.GoldScrap;Base.SilverScrap] mappers:[ingotMetal] mode:destroy flags[ItemCount;AllowDestroyedItem;IsExclusive],
+        }
+        outputs
+        {
+            item 1 mapper:ingotMetal,
+        }
+	itemMapper ingotMetal
+		{
+			Base.GoldBar = Base.GoldScrap,
+			Base.SilverBar = Base.SilverScrap,
+		}
+    }
+
+    craftRecipe Cast_Ingot_From_Small_Bars
+    {
+        time        = 100,
+	category = Extra Money,
+        tags = PrimitiveFurnace,
+        category = Blacksmithing,
+        inputs
+        {
+            item 1 [Base.CeramicCrucible] mode:keep flags[IsEmpty],
+            item 1 tags[CrudeTongs;Tongs] mode:keep flags[MayDegradeLight],
+            item 18 tags[Charcoal],
+            item 1 [Base.ClayIngotMold;Base.IronIngotMold;Base.SteelIngotMold] mode:keep,
+            item 8 [Base.SmallGoldBar;Base.SmallSilverBar] mappers:[ingotMetal] mode:destroy flags[ItemCount;AllowDestroyedItem;IsExclusive],
+        }
+        outputs
+        {
+            item 1 mapper:ingotMetal,
+        }
+	itemMapper ingotMetal
+		{
+			Base.GoldBar = Base.SmallGoldBar,
+			Base.SilverBar = Base.SmallSilverBar,
+		}
+    }
+	
+}

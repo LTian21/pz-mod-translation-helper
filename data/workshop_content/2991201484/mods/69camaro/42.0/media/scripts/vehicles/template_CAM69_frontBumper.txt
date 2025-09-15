@@ -1,0 +1,192 @@
+module Base
+{
+	model 69camarofrontBumper0
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 69camarofrontBumper1
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 69camarofrontBumpera
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_bumper_front_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 69camarofrontBumperb
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_bumper_front_b,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CAM69FrontBumpersSS
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 69camarofrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 69camarofrontBumper1,
+				}
+
+			model FrontBumperA
+				{
+                		file = 69camarofrontBumpera,
+				}
+
+			model FrontBumperB
+				{
+                		file = 69camarofrontBumperb,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.69camaroFrontBumper0;Base.69camaroFrontBumper1;Base.69camaroFrontBumperA;Base.69camaroFrontBumperB,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CAM69.InstallComplete.FrontBumperSS,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CAM69.UninstallComplete.FrontBumperSS,
+            		}
+
+            		lua
+            		{
+					create = CAM69.Create.FrontBumperSS,
+					init = CAM69.Init.FrontBumperSS,
+					}
+		}
+	}
+
+	template vehicle CAM69FrontBumpersRS
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper1
+				{
+                		file = 69camarofrontBumper1,
+				}
+
+			model FrontBumper0
+				{
+                		file = 69camarofrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 69camarofrontBumpera,
+				}
+
+			model FrontBumperB
+				{
+                		file = 69camarofrontBumperb,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.69camaroFrontBumper1;Base.69camaroFrontBumper0;Base.69camaroFrontBumperA;Base.69camaroFrontBumperB,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CAM69.InstallComplete.FrontBumperRS,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CAM69.UninstallComplete.FrontBumperRS,
+            		}
+
+            		lua
+            		{
+					create = CAM69.Create.FrontBumperRS,
+					init = CAM69.Init.FrontBumperRS,
+					}
+		}
+	}
+
+		
+}

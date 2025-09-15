@@ -1,0 +1,309 @@
+module Base
+{
+	model pzkdefaultwheel
+	{
+		mesh = vehicles/spareWheel/wheel_pzkContinentalCruiser,
+		texture = Vehicles/vehicle_wheel_offroad,
+		scale = 0.1,
+
+	}
+
+	model pzkDashRancherSpareWModel
+	{
+		mesh = vehicles/spareWheel/wheel_pzkDashRancher,
+		texture = Vehicles/vehicle_wheel,
+		scale = 0.01,
+	}
+
+	model pzkDashVan70RiddleSpareWModel
+	{
+		mesh = vehicles/spareWheel/wheel_pzkDashVan70Riddle,
+		scale = 0.01,
+	}
+
+
+	
+	template vehicle pzkSpareWheel
+	{
+		part pzkSpareWheel
+        	{
+
+			model Default
+			{
+				file = pzkdefaultwheel,
+			}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.OldTire;Base.NormalTire;Base.ModernTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    		1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+				    test = Vehicles.InstallTest.Default,
+
+                	
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    		1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            		test = Vehicles.UninstallTest.Default,
+
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Default,
+				}
+		}
+	}
+
+	template vehicle pzkSpareWheelDashRancher
+	{
+		part pzkSpareWheelDashRancher
+        	{
+
+			model Default
+			{
+				file = pzkDashRancherSpareWModel,
+			}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.OldTire;Base.NormalTire;Base.ModernTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    		1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+
+                	
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    		1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            		test = Vehicles.UninstallTest.Default,
+
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.SpareW,
+				init = Vehicles.Init.SpareW,
+				}
+		}
+		
+	}
+	
+	template vehicle pzkSpareWheelHood
+	{
+		part pzkSpareWheelHood
+        	{
+
+			model Default
+			{
+				file = Vehicles_pzkContinentalGuardianSpareWheelHood,
+			}
+
+			category = Other,
+			area = Engine,
+			itemType = Base.OldTire2;Base.NormalTire2;Base.ModernTire2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+					requireInstalled = EngineDoor,
+                	items
+                	{
+                    		1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+				    test = Vehicles.InstallTest.Default,
+
+                	
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    		1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            		test = Vehicles.UninstallTest.Default,
+
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Default,
+				}
+		}
+		
+		part EngineDoor
+		{
+		table uninstall
+            		{
+					requireUninstalled = pzkSpareWheelHood,
+					}
+		}
+		
+	}
+	
+	template vehicle pzkSpareWheelHoodSVU
+	{
+		part pzkSpareWheelHood
+        	{
+
+			model Default
+			{
+				file = Vehicles_pzkContinentalGuardianSpareWheelHood,
+			}
+
+			category = Other,
+			area = Engine,
+			itemType = Base.OldTire2;Base.NormalTire2;Base.ModernTire2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+					requireInstalled = EngineDoor,
+					requireUninstalled = ATA2AirScoop;ATA2ProtectionHood,
+                	items
+                	{
+                    		1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+				    test = Vehicles.InstallTest.Default,
+
+                	
+            		}
+
+            		table uninstall
+            		{
+					
+					
+                	items
+                	{
+                    		1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            		test = Vehicles.UninstallTest.Default,
+
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Default,
+				}
+		}
+		
+
+	}
+
+
+
+
+
+
+}
+

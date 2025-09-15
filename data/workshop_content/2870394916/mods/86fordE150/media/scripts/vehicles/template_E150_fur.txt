@@ -1,0 +1,997 @@
+module Base
+{
+	model 86fordE150bodyFur
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_body_fur,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    	}
+
+    model 86fordE150bodyFurTwo
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_body_fur,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+        invertX = TRUE,
+    	}
+
+    model 86fordE150bodyFurTail
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_body_fur2,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    	} 
+
+    model 86fordE150bodyFurSigns
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_signs_fur,
+		texture = Vehicles/Vehicles_86fordE150_Interior,
+		shader = vehiclewheel,
+        scale = 0.1,
+    	} 
+
+    model 86fordE150doorflFur
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_door_fl_fur,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 86fordE150doorfrFur
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_door_fr_fur,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 86fordE150hoodFur
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_hood_fur,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 86fordE150trunkDoorFur
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_trunkDoor_fur,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 86fordE150legFur
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_leg_fur,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle E150FurOff
+		{
+		part E150FurHood
+        	{
+
+			model E150furhood
+				{
+                		file = 86fordE150hoodFur,
+				}
+
+			area = Engine,
+			category = furvan,
+			parent = EngineDoor,
+			specificItem = false,
+			itemType = Base.E150HoodFur,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = EngineDoor,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+                        create = DAMN.Create.Blank,
+					}
+		}
+
+		part E150FurTrunkDoor
+        	{
+
+			model E150furtrunkdoor
+				{
+                		file = 86fordE150trunkDoorFur,
+				}
+
+			area = TruckBed,
+			category = furvan,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.E150TrunkDoorFur,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = TrunkDoor,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+                        create = DAMN.Create.Blank,
+					}
+		}
+
+		part E150FurBody
+        	{
+
+			model E150furbodeehh
+				{
+                	file = 86fordE150bodyFur,
+				}
+
+            model E150furbodeehhh
+				{
+                	file = 86fordE150bodyFurTwo,
+				}
+
+            model E150furbodeehhhh
+                {
+                    file = 86fordE150bodyFurTail,
+                }
+
+            model E150furbodeehhhhh
+                {
+                    file = 86fordE150bodyFurSigns,
+                }
+
+			area = TireRearRight,
+			category = furvan,
+			specificItem = false,
+			itemType = Base.E150ChassisFur,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1200,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireUninstalled = E150FurRearLeg,
+
+            		}
+
+            		lua
+            		{
+                        create = DAMN.Create.Blank,
+					}
+		}
+
+		part E150FurLeftDoor
+        	{
+
+			model E150furleftdoor
+				{
+                		file = 86fordE150doorflFur,
+				}
+
+			area = SeatFrontLeft,
+			category = furvan,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.E150DoorFur,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = DoorFrontLeft,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+                        create = DAMN.Create.Blank,
+					}
+		}
+
+		part E150FurRightDoor
+        	{
+
+			model E150furrightdoor
+				{
+                		file = 86fordE150doorfrFur,
+				}
+
+			area = SeatFrontRight,
+			category = furvan,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.E150DoorFur,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = DoorFrontRight,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+                        create = DAMN.Create.Blank,
+					}
+		}
+
+		part E150FurRearLeg
+        	{
+
+			model E150furleg
+				{
+                		file = 86fordE150legFur,
+				}
+
+			area = GasTank,
+			category = furvan,
+			specificItem = false,
+			itemType = Base.E150LegFur,
+			mechanicRequireKey = false,
+
+			anim ActorOpen
+				{
+					angle = 0.0 90.0 0.0,
+				}
+				anim ActorClose
+				{
+					angle = 0.0 90.0 0.0,
+				}
+
+				anim Close
+				{
+					anim = leg_opening,
+					rate = 1.0,
+				}
+
+				anim Open
+				{
+					anim = leg_opening,
+					reverse = TRUE,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = leg_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = leg_opening,
+					animate = FALSE,
+				}
+
+				door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 -90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 -90.0 0.0,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 400,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = E150FurBody,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 450,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.TrunkDoor,
+                    create = DAMN.Create.Blank,
+					}
+		}
+
+	}
+
+    template vehicle E150Fur
+		{
+		part E150FurHood
+        	{
+
+			model E150furhood
+				{
+                		file = 86fordE150hoodFur,
+				}
+
+			area = Engine,
+			category = furvan,
+			parent = EngineDoor,
+			specificItem = false,
+			itemType = Base.E150HoodFur,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = EngineDoor,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+		part E150FurTrunkDoor
+        	{
+
+			model E150furtrunkdoor
+				{
+                		file = 86fordE150trunkDoorFur,
+				}
+
+			area = TruckBed,
+			category = furvan,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.E150TrunkDoorFur,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = TrunkDoor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+		part E150FurBody
+        	{
+
+			model E150furbodeehh
+				{
+                		file = 86fordE150bodyFur,
+				}
+
+            model E150furbodeehhh
+				{
+                		file = 86fordE150bodyFurTwo,
+				}
+
+            model E150furbodeehhhh
+                {
+                    file = 86fordE150bodyFurTail,
+                }
+
+            model E150furbodeehhhhh
+                {
+                    file = 86fordE150bodyFurSigns,
+                }
+
+			area = TireRearRight,
+			category = furvan,
+			specificItem = false,
+			itemType = Base.E150ChassisFur,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1200,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireUninstalled = E150FurRearLeg,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+		part E150FurLeftDoor
+        	{
+
+			model E150furleftdoor
+				{
+                		file = 86fordE150doorflFur,
+				}
+
+			area = SeatFrontLeft,
+			category = furvan,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.E150DoorFur,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = DoorFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+		part E150FurRightDoor
+        	{
+
+			model E150furrightdoor
+				{
+                		file = 86fordE150doorfrFur,
+				}
+
+			area = SeatFrontRight,
+			category = furvan,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.E150DoorFur,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = DoorFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+		part E150FurRearLeg
+        	{
+
+			model E150furleg
+				{
+                		file = 86fordE150legFur,
+				}
+
+			area = GasTank,
+			category = furvan,
+			specificItem = false,
+			itemType = Base.E150LegFur,
+			mechanicRequireKey = false,
+
+			anim ActorOpen
+				{
+					angle = 0.0 90.0 0.0,
+				}
+				anim ActorClose
+				{
+					angle = 0.0 90.0 0.0,
+				}
+
+				anim Close
+				{
+					anim = leg_opening,
+                    reverse = TRUE,
+					rate = 1.0,
+				}
+
+				anim Open
+				{
+					anim = leg_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = leg_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = leg_opening,
+                    reverse = TRUE,
+					animate = FALSE,
+				}
+
+				door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 -90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 -90.0 0.0,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 400,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = E150FurBody,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+					time = 450,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Door,
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.TrunkDoor,
+					}
+		}
+
+	}
+}

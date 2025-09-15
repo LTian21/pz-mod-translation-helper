@@ -1,0 +1,220 @@
+module Base
+{
+	model 89trooperWheel
+	{
+		mesh = vehicles/Vehicles_89trooper_Wheel|trooper_tire,
+		texture = vehicles/Vehicles_89trooper_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.098,
+	}
+
+    model 89trooperWheel2L
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel2,
+		shader = damn_wheel_shader,
+		scale = 0.115,
+	}
+    model 89trooperWheel2R
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel2,
+		shader = damn_wheel_shader,
+		scale = 0.115,
+        invertX = TRUE,
+	}
+
+	template vehicle ISZ89Tires
+	{
+		part TireFrontLeft
+		{
+            model Tire0
+			{
+				file = 89trooperWheel,
+			}
+
+            model Tire1
+			{
+				file = 89trooperWheel2L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+            table install
+			{
+				complete = ISZ89.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = ISZ89.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = ISZ89.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model Tire0
+			{
+				file = 89trooperWheel,
+			}
+
+            model Tire1
+			{
+				file = 89trooperWheel2R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+            table install
+			{
+				complete = ISZ89.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = ISZ89.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = ISZ89.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model Tire0
+			{
+				file = 89trooperWheel,
+			}
+
+            model Tire1
+			{
+				file = 89trooperWheel2L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+            table install
+			{
+				complete = ISZ89.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+            table uninstall
+			{
+				complete = ISZ89.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = ISZ89.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model Tire0
+			{
+				file = 89trooperWheel,
+			}
+
+            model Tire1
+			{
+				file = 89trooperWheel2R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+            table install
+			{
+				complete = ISZ89.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = ISZ89.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = ISZ89.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			itemType = Base.89trooperTire;damnCraft.SmallTire,
+            durability = 2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}
+

@@ -1,0 +1,60 @@
+module Base
+{
+	template vehicle SVU_Armor_pzkRegularFuelTanker
+	{
+        part Tire*
+        {
+            setAllModelsVisible = false,
+            table install
+            {
+                complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+            }
+            
+            table uninstall
+            {
+                complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+            }
+            
+            lua
+            {
+                create = ATATuning2.Create.TireNotAllModelsVisible,
+                init = ATATuning2.Init.TireNotAllModelsVisible,
+                checkOperate = Vehicles.CheckOperate.Tire,
+                update = Vehicles.Update.Tire,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWheels,
+        part TireFrontLeft
+        {
+            model ATAProtection
+            {
+                file = SVU_Chains_FL_pzkRegularFuelTanker,
+            }
+        }
+
+        part TireRearLeft
+        {
+            model ATAProtection
+            {
+                file = SVU_Chains_RL_pzkRegularFuelTanker,
+            }
+        }
+
+        part TireFrontRight
+        {
+            model ATAProtection
+            {
+                file = SVU_Chains_FR_pzkRegularFuelTanker,
+            }
+        }
+
+        part TireRearRight
+        {
+            model ATAProtection
+            {
+                file = SVU_Chains_RR_pzkRegularFuelTanker,
+            }
+        }
+	}
+}

@@ -1,0 +1,79 @@
+module Base
+{
+	model 78amgeneralM35A2windshieldArmor1
+    	{
+        mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_windshield_a,
+        shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle M35A2WindshieldArmors
+		{
+		part M35A2WindshieldArmor
+        	{
+
+			model M35WindshieldArmor1
+				{
+                		file = 78amgeneralM35A2windshieldArmor1,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M35A2WindshieldArmor1_Item,
+			mechanicRequireKey = false,
+			table install
+					{
+						requireInstalled = Windshield,
+					}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M35A2.InstallComplete.WindshieldArmor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1100,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = M35A2.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+			create = M35A2.Create.WindshieldArmor,
+			init = M35A2.Init.WindshieldArmor,
+			}
+		}
+	}
+
+		
+}

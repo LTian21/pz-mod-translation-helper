@@ -1,0 +1,254 @@
+module Base
+{
+	model 87fordB700Doorfr
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_door_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 87fordB700Doorr
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_door_r,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle B700Doors
+	{
+
+		part DoorFrontRight
+		{
+			model DoorFrontRight
+				{
+				file = 87fordB700Doorfr,
+				}
+				itemType = Base.87fordB700DoubleDoors,
+				table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+				area = SeatFrontRight,
+				category = door,
+				anim ActorOpen
+				{
+					angle = 0.0 90.0 0.0,
+				}
+				anim ActorClose
+				{
+					angle = 0.0 90.0 0.0,
+				}
+
+				anim Close
+				{
+					anim = door_fr_opening,
+					reverse = TRUE,
+					rate = 1.5,
+				}
+
+				anim Open
+				{
+					anim = door_fr_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = door_fr_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = door_fr_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+				lua
+				{
+					create = Vehicles.Create.Door,
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.Door,
+				}
+		}
+
+
+
+		part DoorRL
+		{
+			specificItem = false,
+			itemType = Base.Wrench,
+			area = SeatRearLeft,
+			category = nodisplay,
+			lua
+			{
+				create = Vehicles.Create.Door,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.Door,
+			}
+		}
+
+		part DoorMR
+		{
+			specificItem = false,
+			itemType = Base.Wrench,
+			area = SeatMiddleRight,
+			category = nodisplay,
+			lua
+			{
+				create = Vehicles.Create.Door,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.Door,
+			}
+		}
+
+		part DoorRR
+		{
+			specificItem = false,
+			itemType = Base.Wrench,
+			area = SeatRearRight,
+			category = nodisplay,
+			lua
+			{
+				create = Vehicles.Create.Door,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.Door,
+			}
+		}
+
+		part DoorRear
+		{
+			model DoorRear
+				{
+				file = 87fordB700Doorr,
+				}
+				itemType = Base.87fordB700RearDoor,
+				area = TruckBed,
+				category = door,
+				anim ActorOpen
+				{
+					angle = 0.0 0.0 0.0,
+				}
+				anim ActorClose
+				{
+					angle = 0.0 0.0 0.0,
+				}
+
+				anim Close
+				{
+					anim = door_r_opening,
+					reverse = TRUE,
+					rate = 1.5,
+				}
+
+				anim Open
+				{
+					anim = door_r_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = door_r_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = door_r_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+				lua
+				{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+				}
+
+				table uninstall
+				{
+					requireUninstalled = B700RearArmor,
+				}
+		}
+
+		part Door*
+		{
+			door
+			{
+				}
+				anim Open
+				{
+					sound = VehicleDoorOpenStandard,
+				}
+				anim Close
+				{
+					sound = VehicleDoorCloseStandard,
+				}
+				anim Lock
+				{
+					sound = LockVehicleDoorStandard,
+				}
+				anim Unlock
+				{
+					sound = UnlockVehicleDoorStandard,
+				}
+				anim IsLocked
+				{
+					sound = VehicleDoorIsLockedStandard,
+				}
+				anim ActorOpen
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				anim ActorClose
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				mechanicRequireKey = true,
+                durability = 5,
+				table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 700,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+				}
+				table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 700,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+					}
+				}
+			}
+	}
+
+

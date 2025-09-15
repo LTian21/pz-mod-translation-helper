@@ -1,0 +1,59 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_BrownLowTable
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Brown Low Table,
+			Icon		= furniture_tables_low_01_13,
+		}
+	}
+
+    entity BrownLowTable
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_BrownLowTable,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = furniture_tables_low_01_12,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_tables_low_01_13,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 150,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:5,
+            category      = Furniture_Tables,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_tableDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 2 [Base.Plank],
+                item 2 [Base.Nails],
+            }
+        }
+    }
+}

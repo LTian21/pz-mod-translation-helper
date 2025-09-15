@@ -1,0 +1,81 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_SpiffosDinnerChair
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Spiffos Dinner Chair,
+			Icon		= location_restaurant_spiffos_02_24,
+		}
+	}
+
+    entity SpiffosDinnerChair
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_SpiffosDinnerChair,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = location_restaurant_spiffos_02_27,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_restaurant_spiffos_02_26,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_restaurant_spiffos_02_25,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_restaurant_spiffos_02_24,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = Welding,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:4,
+            xpAward       = MetalWelding:15,
+            category      = Furniture_Seating,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_chairsDesc,
+            inputs
+            {
+		        item 2 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[Screwdriver] mode:keep flags[Prop2],
+                item 1 tags[Scissors] mode:keep,
+                item 1 tags[SewingNeedle] mode:keep,
+                item 1 [Base.MetalBar;Base.MetalPipe],
+                item 1 [Base.SmallSheetMetal],
+                item 5 [Base.ScrapMetal],
+                item 4 [Base.FabricRoll_Cotton],
+                item 4 [Base.Thread],
+		        item 2 [Base.WeldingRods],
+                item 50 [Base.ChickenFeather;Base.TurkeyFeather],
+            }
+        }
+    }
+}

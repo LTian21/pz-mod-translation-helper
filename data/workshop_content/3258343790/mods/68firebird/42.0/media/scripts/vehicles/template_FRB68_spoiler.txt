@@ -1,0 +1,90 @@
+module Base
+{
+	
+	model 68firebirdspoiler0
+	{
+		mesh = vehicles/Vehicles_68firebird_Body|brd_spoiler0,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    model 68firebirdspoiler1
+    {
+        mesh = vehicles/Vehicles_68firebird_Body|brd_spoiler1,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle FRB68Spoiler
+		{
+		part DAMNSpoiler
+       		{
+
+            model FRB68Spoiler0
+			{
+                	file = 68firebirdspoiler0,
+			}
+
+            model FRB68Spoiler1
+            {
+                    file = 68firebirdspoiler1,
+            }
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            itemType = Base.68firebirdSpoilerA;Base.68firebirdSpoilerB,
+            mechanicRequireKey = false,
+            durability = 2,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = FRB68.InstallComplete.Spoiler,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = FRB68.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = FRB68.Create.Spoiler,
+                init = FRB68.Init.Spoiler,
+            }
+        }
+	}
+
+}
+

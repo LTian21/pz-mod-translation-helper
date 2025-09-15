@@ -1,0 +1,84 @@
+module Base
+{
+
+	model ECTO1roofrack1
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_roofrack,
+		texture = Vehicles/Vehicles_ECTO1_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle 59meteorRoofrackCompartment
+	{
+		part ECTO1Roofrack
+		{
+
+			model Roofrack1
+				{
+                		file = ECTO1roofrack1,
+				}
+
+			category = bodywork,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.ECTO1Roofrack1,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = ECTO1.InstallComplete.Roofrack,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                    time = 1500,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+			        complete = ECTO1.UninstallComplete.Roofrack,
+                    requireUninstalled = ECTO1Equipment,
+            		}
+
+            		lua
+            		{
+                        create = DAMN.Create.Blank,
+					}
+		}
+	}
+}
+

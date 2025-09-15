@@ -1,0 +1,186 @@
+module Skittles
+{
+  imports
+  {
+    Base
+  }
+
+  craftRecipe MakeCuredMeat
+  {
+    timedAction = MixingBowl,
+    Time = 30,
+    onCreate = AdjustStates,
+    onTest = TryMeat,
+    ToolTip = Cure meat,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+    inputs
+		{
+			item 60 [Base.Pork;Base.Beef;Base.Venison;Base.FishFillet] flags[InheritFoodAge] mappers[meatType],
+      item 5 [Base.Salt],
+		}
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+		itemMapper meatType
+		{
+			Skittles.CuredPork = Base.Pork,
+			Skittles.CuredBeef = Base.Beef,
+      Skittles.CuredVenison = Base.Venison,
+      Skittles.CuredFish = Base.FishFillet,
+		}
+  }
+
+  craftRecipe MakePemmicanMeat
+  {
+    timedAction = MixingBowl,
+    Time = 30,
+    onCreate = AdjustStatesPemmican,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+    inputs
+    {
+      item 40 [Base.Pork;Base.Beef;Base.Venison],
+      item 20 [Base.Lard],
+      item 10 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue],
+    }
+    outputs
+    {
+      item 1 Skittles.Pemmican,
+    }
+    
+  }
+
+  craftRecipe ReduceMeatLard
+  {
+    timedAction = MixingBowl,
+    Time = 30,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+    inputs
+    {
+      item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
+      item 35 [Base.Pork],
+      item 1 [Base.Saucepan] mode:keep,
+    }
+    outputs
+    {
+      item 1 Base.Lard,
+    }
+  }
+
+
+  craftRecipe MakeJarredMeat
+  {
+    timedAction = MixingBowl,
+		Time = 100,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+    category = Cooking,
+    inputs
+    {
+      item 1 [Base.EmptyJar],
+      item 1 [Base.JarLid],
+      item 50 [Base.Pork;Base.Beef;Base.Venison;Base.FishFillet] mappers[meatType],
+			item 2.0 tags[Vinegar],
+			item 1.0 [Base.Salt],
+			item 1 [*],
+			-fluid 1.0 [Water],
+
+    }
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+    itemMapper meatType
+		{
+			Skittles.CannedPork = Base.Pork,
+			Skittles.CannedBeef = Base.Beef,
+      Skittles.CannedVenison = Base.Venison,
+      Skittles.CannedFish = Base.FishFillet,
+		}
+    
+  }
+
+  craftRecipe OpenJarOfFoodMeat
+	{
+    timedAction = Making,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+    category = Cooking,
+		inputs
+		{
+			item 1 [Skittles.CannedPork;Skittles.CannedBeef;Skittles.CannedVenison;Skittles.CannedFish] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+		}
+		outputs
+		{
+			item 1 mapper:foodType,
+		}
+		itemMapper foodType
+		{
+			Skittles.CannedPork_Open = Skittles.CannedPork,
+      Skittles.CannedBeef_Open = Skittles.CannedBeef,
+      Skittles.CannedVenison_Open = Skittles.CannedVenison,
+      Skittles.CannedFish_Open = Skittles.CannedFish,
+			
+		}
+	}
+
+  craftRecipe CrushSaltRock
+  {
+    timedAction = Making,
+    Time = 30,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+    inputs
+		{
+
+			item 1 tags[MortarPestle] mode:keep,
+			item 2 [Skittles.SaltRock],
+		}
+		outputs
+		{
+			item 1 Base.Salt,
+		}
+  }
+
+  craftRecipe MakeMashedBerry
+  {
+    timedAction = Making,
+    Time = 30,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+    inputs
+		{
+
+			item 1 tags[MortarPestle] mode:keep,
+			item 20 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue],
+		}
+		outputs
+		{
+			item 1 Skittles.MashedBerries,
+		}
+  }
+
+  craftRecipe MakeJam
+  {
+    timedAction = Making,
+    Time = 100,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+    inputs
+		{
+			item 1 [Base.Saucepan] mode:keep,
+      item 30 [Skittles.MashedBerries],
+      item 10 [Base.Sugar;Base.SugarBrown],
+		}
+		outputs
+		{
+			item 1 Base.JamFruit,
+		}
+  }
+
+  
+}

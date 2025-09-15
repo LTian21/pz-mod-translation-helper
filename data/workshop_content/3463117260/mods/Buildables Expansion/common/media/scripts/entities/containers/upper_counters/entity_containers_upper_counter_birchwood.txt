@@ -1,0 +1,61 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_BirchwoodFloatingCounter
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Birchwood Floating Counter,
+			Icon		= fixtures_counters_01_26,
+		}
+	}
+
+    entity BirchwoodFloatingCounter
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_BirchwoodFloatingCounter,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            needToBeAgainstWall = true,
+            face E
+            {
+                layer
+                {
+                    row = fixtures_counters_01_27,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = fixtures_counters_01_26,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallHammer,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:5,
+            category      = Containers_Residential,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_residentialCounterDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 6 [Base.Plank] flags[Prop2],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

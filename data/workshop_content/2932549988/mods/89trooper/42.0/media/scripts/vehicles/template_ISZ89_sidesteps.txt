@@ -1,0 +1,148 @@
+module Base
+{
+
+	model 89trooperSidestep
+	{
+		mesh = vehicles/Vehicles_89trooper_Body|trooper_sidestep,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89trooperRSSidestep
+	{
+		mesh = vehicles/Vehicles_89trooper_Body|trooperRS_sidestep,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle ISZ89SideSteps
+	{
+		part DAMNSideSteps
+        	{
+
+			model ISZ89SideSteps
+				{
+                		file = 89trooperSidestep,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.89trooperSideSteps,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ISZ89.InstallComplete.SideSteps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = ISZ89.UninstallComplete.SideSteps,
+
+            		}
+
+	            lua
+	            {
+				create = ISZ89.Create.SideSteps,
+				init = ISZ89.Init.SideSteps,
+				}
+		}
+	}
+
+	template vehicle ISZ89RSSideSteps
+	{
+		part DAMNSideSteps
+        	{
+
+			model ISZ89RSSideSteps
+				{
+                		file = 89trooperRSSidestep,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.89trooperSideSteps,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ISZ89.InstallComplete.SideSteps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = ISZ89.UninstallComplete.SideSteps,
+
+            		}
+
+	            lua
+	            {
+				create = ISZ89.Create.SideSteps,
+				init = ISZ89.Init.SideSteps,
+				}
+		}
+	}
+}
+

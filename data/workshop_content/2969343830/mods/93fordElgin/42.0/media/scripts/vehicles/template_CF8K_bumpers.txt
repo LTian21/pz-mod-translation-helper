@@ -1,0 +1,82 @@
+module Base
+{
+	model 93fordElginfrontBumper0
+	{
+		mesh = vehicles/Vehicles_93fordElgin_Body|cf8k_bumper,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CF8KBumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 93fordElginfrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 93fordElginfrontBumper0,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93fordCF8000Bumper0;Base.93fordCF8000BumperA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CF8K.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CF8K.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = CF8K.Create.BumperFront,
+					init = CF8K.Init.BumperFront,
+					}
+		}
+
+	}
+
+		
+}

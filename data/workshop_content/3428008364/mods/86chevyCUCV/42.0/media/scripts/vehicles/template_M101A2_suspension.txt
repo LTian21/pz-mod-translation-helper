@@ -1,0 +1,114 @@
+module Base
+{
+
+	model TrailerM101A2susleft
+	{
+		mesh = vehicles/Vehicles_TrailerM101A2cargo_Body|86m101a2_sus_left,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+	model TrailerM101A2susright
+	{
+		mesh = vehicles/Vehicles_TrailerM101A2cargo_Body|86m101a2_sus_left,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle M101A2Suspension
+	{
+		part SuspensionFrontLeft
+		{
+			model sl
+				{
+                		file = TrailerM101A2susleft,
+				}
+				
+			area = TireFrontLeft,
+			table install
+			{
+				requireUninstalled = TireFrontLeft,
+			}
+			table uninstall
+			{
+				requireUninstalled = TireFrontLeft,
+			}
+		}
+
+		part SuspensionFrontRight
+		{
+			model sr
+				{
+                		file = TrailerM101A2susright,
+				}
+
+			area = TireFrontRight,
+			table install
+			{
+				requireUninstalled = TireFrontRight,
+			}
+			table uninstall
+			{
+				requireUninstalled = TireFrontRight,
+			}
+		}
+
+		part Suspension*
+		{
+			category = suspension,
+			itemType = damnCraft.leafSuspension,
+            durability = 5,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 450,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 450,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				update = Vehicles.Update.Suspension,
+			}
+		}
+	}
+}

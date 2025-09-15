@@ -1,0 +1,70 @@
+module Base
+{	
+	imports
+	{
+		damnCraft
+	}
+
+    /************************ Rims ************************/
+
+	recipe Dismantle Steel Rim
+    	{
+    	BlowTorch=2,
+		SteelRimLarge/SteelRimMedium/SteelRimSmall,
+		keep [Recipe.GetItemTypes.WeldingMask],
+
+		NoBrokenItems:false,
+		Result:ScrapMetal=1,
+		Time:350.0,
+		Category:Recycling,
+		SkillRequired:MetalWelding=3,
+		OnCreate:DAMN.OnCreate.DismantleRim,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+    /************************ Rubber Mounts ************************/
+
+	recipe Dismantle Rubber Mounts
+    	{
+    	BlowTorch=3,
+		TireRubberMountSmall/TireRubberMountLarge,
+		keep [Recipe.GetItemTypes.WeldingMask],
+
+		NoBrokenItems:false,
+		Result:ScrapMetal=1,
+		Time:350.0,
+		Category:Recycling,
+		SkillRequired:MetalWelding=3,
+		OnCreate:DAMN.OnCreate.DismantleRim,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+    recipe Remove Large Tire Rubber from Mount
+    	{
+		TireRubberMountedLarge,
+
+		NoBrokenItems:true,
+		Result:TireRubberMountLarge,
+		Time:150.0,
+		Category:Mechanical,
+		OnCreate:DAMN.OnCreate.DismantleTireLarge,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+    recipe Remove Small Tire Rubber from Mount
+    	{
+		TireRubberMountedSmall,
+
+		NoBrokenItems:true,
+		Result:TireRubberMountSmall,
+		Time:150.0,
+		Category:Mechanical,
+		OnCreate:DAMN.OnCreate.DismantleTireSmall,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+    
+}

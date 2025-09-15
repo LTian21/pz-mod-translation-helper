@@ -1,0 +1,246 @@
+module Base
+{
+
+	model 87chevySuburbanWindowfl
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fl_bone 1.0,
+	}
+
+	model 87chevySuburbanWindowfr
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fr_bone 1.0,
+	}
+
+	model 87chevySuburbanWindowrl
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_rl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_rl_bone 1.0,
+	}
+
+	model 87chevySuburbanWindowrr
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_rr_bone 1.0,
+	}
+
+	model 87chevySuburbanWindowbl
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_bl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+		boneWeight = window_rl_bone 1.0,
+	}
+
+	model 87chevySuburbanWindowbr
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_br,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+		boneWeight = window_rr_bone 1.0,
+	}
+
+	template vehicle SUB87Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 87chevySuburbanWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.87chevySuburbanFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = SUB87WindowFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 87chevySuburbanWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.87chevySuburbanFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = SUB87WindowFrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 87chevySuburbanWindowrl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.87chevySuburbanRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = SUB87WindowRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 87chevySuburbanWindowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.87chevySuburbanRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = SUB87WindowRearRightArmor,
+				}
+		}
+
+		part WindowBackLeft
+		{
+			model windowBL
+			{
+				file = 87chevySuburbanWindowbl,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.87chevySuburbanBackSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = SUB87WindowBackLeftArmor,
+				}
+		}
+
+		part WindowBackRight
+		{
+			model windowBR
+			{
+				file = 87chevySuburbanWindowbr,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.87chevySuburbanBackSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = SUB87WindowBackRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}
+

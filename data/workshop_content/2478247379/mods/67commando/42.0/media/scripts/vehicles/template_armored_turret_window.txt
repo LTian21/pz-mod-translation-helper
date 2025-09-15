@@ -1,0 +1,64 @@
+module Base
+{
+
+	template vehicle TurretWindowV100
+	{
+		part WindowRearLeft
+		{
+			area = SeatRearRight,
+		}
+
+		part Window*
+		{
+			itemType = USMIL.SmallViewportPack0,
+            specificItem = false,
+			category = door,
+			mechanicRequireKey = true,
+			durability = 4,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+			}
+		}
+	
+	}
+}

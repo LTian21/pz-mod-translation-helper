@@ -1,0 +1,74 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_MotelCounterCorner
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= MotelCounterCorner,
+			Icon		= location_hospitality_sunstarmotel_02_22,
+		}
+	}
+
+    entity MotelCounterCorner
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_MotelCounterCorner,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = location_hospitality_sunstarmotel_02_23,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_hospitality_sunstarmotel_02_20,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_hospitality_sunstarmotel_02_21,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_hospitality_sunstarmotel_02_22,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:5,
+            category      = Containers_Residential,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_residentialCounterDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 6 [Base.Plank] flags[Prop2],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

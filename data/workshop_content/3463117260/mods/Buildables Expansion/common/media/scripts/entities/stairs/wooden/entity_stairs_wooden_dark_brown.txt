@@ -1,0 +1,64 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_DarkBrownWoodenStairs
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Dark Brown Wooden Stairs,
+			Icon		= fixtures_stairs_01_24,
+		}
+	}
+
+    entity DarkBrownWoodenStairs
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_DarkBrownWoodenStairs,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+        	OnCreate = BuildRecipeCode.stairs.OnCreate,
+        	OnIsValid = BuildRecipeCode.stairs.OnIsValid,
+
+            face S
+            {
+                layer
+                {
+                    row = fixtures_stairs_01_18 fixtures_stairs_01_17 fixtures_stairs_01_16,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = fixtures_stairs_01_26,
+                    row = fixtures_stairs_01_25,
+                    row = fixtures_stairs_01_24,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallHammer,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:10,
+            category      = Stairs_Wood,
+            ToolTip       = Tooltip_craft_stairsDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 13 [Base.Plank],
+                item 8 [Base.Nails],
+            }
+        }
+    }
+}

@@ -1,0 +1,201 @@
+module Base
+{
+	model Vehicles_pzkTrailerBoxPoliceDual
+	{
+		mesh = vehicles/trailer_pzkBoxTrailerDual,
+		shader = vehicle_norandom_multiuv,
+		invertX = FALSE,
+		scale = 0.01,
+	}
+	vehicle pzkTrailerBoxPoliceDual
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 0.8,
+		engineRepairLevel = 4,
+		playerDamageProtection = 0.8,
+
+		model
+		{
+			file = Vehicles_pzkTrailerBoxPoliceDual,
+			scale = 1.8200,
+			offset = 0.0000 0.1868 0.1374,
+		}
+
+		spawnOffsetY = 0.19392952,
+
+		skin
+		{
+			texture = Vehicles/vehicle_pzkTrailerBoxPoliceshell,
+		}
+
+		textureMask = Vehicles/vehicle_utilitytrailer_mask,
+		textureLights = Vehicles/vehicle_utilitytrailer_lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/Veh_Damage1,
+		textureDamage2Shell = Vehicles/Veh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+		extents = 0.6264 0.2198 0.9341,
+		mass = 300,
+		physicsChassisShape = 0.6264 0.2198 0.9341,
+		centerOfMassOffset = 0.0000 0.2198 -0.1813,
+		engineForce = 3600,
+		engineQuality = 60,
+		engineLoudness = 55,
+		maxSpeed = 70f,
+		brakingForce = 1,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 1.0f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 40,
+		suspensionCompression = 2.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.2,
+		wheelFriction = 4.0f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+
+		physics box
+		{
+			offset = 0.1099 0.2252 -0.7857,
+			extents = 0.0549 0.2087 0.5384,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.1099 0.0989 0.5385,
+			extents = 0.0549 0.0549 0.5385,
+			rotate = 0.0000 -20.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = -0.1099 0.0989 0.5385,
+			extents = 0.0549 0.0549 0.5385,
+			rotate = 0.0000 20.0000 0.0000,
+		}
+
+		physics sphere
+		{
+			offset = 0.0000 0.0989 0.7582,
+			radius = 0.0549,
+		}
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.3736 -0.1868 -0.3022,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.3736 -0.1868 -0.3022,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+		wheel RearLeft
+		{
+			front = true,
+			offset = 0.3736 -0.1868 -0.7142,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel RearRight
+		{
+			front = true,
+			offset = -0.3736 -0.1868 -0.7142,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+		template = Trunk/part/TruckBed,
+		area TruckBed
+		{
+			xywh = 0.0000 -0.3132 1.5055 1.7143,
+		}
+		part TruckBed
+		{
+			container
+			{
+				capacity = 170,
+			}
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.5330 -0.1703 0.4396 0.4725,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.5330 -0.1703 0.4396 0.4725,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 0.5330 -0.1703 0.4396 0.4725,
+		}
+
+		area TireRearRight
+		{
+			xywh = -0.5330 -0.1703 0.4396 0.4725,
+		}
+
+
+		template = Tire/part/TireFrontLeft,
+		template = Tire/part/TireFrontRight,
+		template = Tire/part/TireRearLeft,
+		template = Tire/part/TireRearRight,
+
+		part TireFrontLeft
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontRight,
+			}
+		}
+		part TireRearLeft
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontRight,
+			}
+		}
+
+		template = Suspension/part/SuspensionFrontLeft,
+		template = Suspension/part/SuspensionFrontRight,
+		template = Suspension/part/SuspensionRearLeft,
+		template = Suspension/part/SuspensionRearRight,
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.0879 0.7747,
+			rotate = 0.0000 0.0000 0.0000,
+			canAttach = trailer,
+			updateconstraint = false,
+		}
+	}
+}

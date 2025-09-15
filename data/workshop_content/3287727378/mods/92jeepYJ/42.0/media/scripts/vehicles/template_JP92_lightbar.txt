@@ -1,0 +1,76 @@
+module Base
+{
+    model 92jeepYJLightbar
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_lightbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP92Lightbar
+		{
+		part JP92Lightbar
+        	{
+
+			model Lightbar0
+				{
+                		file = 92jeepYJLightbar,
+				}
+
+			category = bodywork,
+			area = TireFrontRight,
+			specificItem = false,
+			itemType = Base.92jeepYJLightbar2,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = JP92.InstallComplete.Lightbar,
+                    requireInstalled = JP92WindshieldFrame,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 750,
+			skills = Mechanics:1,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = JP92.UninstallComplete.Lightbar,
+
+            		}
+
+            		lua
+            		{
+			create = JP92.Create.Lightbar,
+			init = JP92.Init.Lightbar,
+			}
+		}
+	}
+}

@@ -1,0 +1,73 @@
+module Base
+{
+	template vehicle M923SpareTire
+		{
+		part DAMNSpareTire
+        	{
+
+			model M923SpareTire1
+				{
+                		file = runFlatLargeTire,
+                        offset = 0.2629 0.7182 0.0666,
+				        rotate = 0.0000 90.0000 0.0000,
+				}
+
+			category = Other,
+			area = SpareTire,
+            specificItem = false,
+			itemType = runFlat.LargeTire,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M923.InstallComplete.SpareTire,
+                    requireInstalled = M923SpareMount,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1000,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = M923.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = M923.Create.SpareTire,
+				init = M923.Init.SpareTire,
+				}
+		}
+	}
+
+		
+}

@@ -1,0 +1,64 @@
+module Base
+{
+    item WristWatch_Right_DivisionWatch
+	{
+	    DisplayCategory = Accessory,
+		Type = AlarmClockClothing,
+		DisplayName = The Division Watch,
+		ClothingItem = DivisionWatch,
+		BodyLocation = RightWrist,
+		Icon = DivisionWatchIcon,
+		Weight = 0.1,
+        ClothingItemExtra = WristWatch_Left_DivisionWatch,
+        ClothingItemExtraOption = LeftWrist,
+        clothingExtraSubmenu = RightWrist,
+		Cosmetic = TRUE,
+		AlarmSound = WatchAlarmLoop,
+		SoundRadius = 7,
+		MetalValue = 3,
+		Tags = Digital,
+		WorldStaticModel = DigitalWatchBlack,
+	}
+
+    item WristWatch_Left_DivisionWatch
+	{
+	    DisplayCategory = Accessory,
+		Type = AlarmClockClothing,
+		DisplayName = The Division Watch,
+		ClothingItem = DivisionWatch,
+		BodyLocation = LeftWrist,
+		Icon = DivisionWatchIcon,
+		Weight = 0.1,
+        ClothingItemExtra = WristWatch_Right_DivisionWatch,
+        ClothingItemExtraOption = RightWrist,
+        clothingExtraSubmenu = LeftWrist,
+		Cosmetic = TRUE,
+		AlarmSound = WatchAlarmLoop,
+		SoundRadius = 7,
+		MetalValue = 3,
+		Tags = Digital,
+		WorldStaticModel = DigitalWatchBlack,
+	}
+
+      craftRecipe Make The Division Watch
+    {
+       time = 80,
+       category = Electrical,
+       SkillRequired = Electrical:0,
+       Tags = AnySurfaceCraft,
+       inputs
+       {
+         item 1 [Base.WristWatch_Right_DigitalBlack] [Base.WristWatch_Left_DigitalBlack] [Base.WristWatch_Right_DigitalRed] [Base.WristWatch_Left_DigitalRed] [Base.WristWatch_Right_DigitalDress] [Base.WristWatch_Left_DigitalDress],
+         item 5 [Base.ElectronicsScrap],
+         item 5 [Base.ElectricWire],
+         item 2 [Base.DuctTape],
+		 item 10 [Base.Screws],
+         item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;IsNotDull],
+       }
+       outputs
+       {
+         item 1 Base.WristWatch_Right_DivisionWatch,
+       }
+       /*AnimNode:RipSheets,*/
+    }
+}

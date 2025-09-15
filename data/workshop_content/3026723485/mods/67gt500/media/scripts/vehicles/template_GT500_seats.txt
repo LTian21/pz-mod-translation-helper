@@ -1,0 +1,149 @@
+module Base
+{
+
+	model 67gt500seatfl
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_seat_fl,
+		texture = vehicles/Vehicles_67gt500_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		static = TRUE,
+	}
+	model 67gt500seatfr
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_seat_fr,
+		texture = vehicles/Vehicles_67gt500_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		static = TRUE,
+	}
+	model 67gt500seatrl
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_seat_rl,
+		texture = vehicles/Vehicles_67gt500_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		static = TRUE,
+	}
+	model 67gt500seatrr
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_seat_rr,
+		texture = vehicles/Vehicles_67gt500_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		static = TRUE,
+	}
+	
+	template vehicle GT500Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 67gt500seatfl,
+			}
+			itemType = Base.67gt500FrontSeat,
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 67gt500seatfr,
+			}
+			itemType = Base.67gt500FrontSeat,
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 67gt500seatrl,
+			}
+			itemType = Base.67gt500RearSeat,
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 67gt500seatrr,
+			}
+			itemType = Base.67gt500RearSeat,
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

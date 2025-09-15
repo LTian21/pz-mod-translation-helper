@@ -1,0 +1,112 @@
+module Base
+{
+    model KI5trailersTarpL
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_large_tarp,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+	model KI5trailersTarpM
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_medium_tarp,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+    model KI5trailersTarpS
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_small_tarp,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle KI5TRTarpsLarge
+	{
+		part KI5TRTarp
+        	{
+
+			model Tarp1
+				{
+                	file = KI5trailersTarpL,
+				}
+
+			area = TireFrontLeft,
+			category = bodywork,
+			itemType = Base.KI5trailersTarp,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+				            type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+			        complete = KI5TR.InstallComplete.Tarp,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 700,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+                    complete = KI5TR.UninstallComplete.Tarp,
+            		}
+
+            		lua
+            		{
+                    create = KI5TR.Create.Tarp,
+                    init = KI5TR.Init.Tarp,
+                    }
+		}
+	}
+
+    template vehicle KI5TRTarpsMedium
+	{
+        template! = KI5TRTarpsLarge,
+
+		part KI5TRTarp
+        {
+
+			model Tarp1
+			{
+                file = KI5trailersTarpM,
+			}
+        }
+    }
+
+    template vehicle KI5TRTarpsSmall
+	{
+        template! = KI5TRTarpsLarge,
+
+		part KI5TRTarp
+        {
+
+			model Tarp1
+			{
+                file = KI5trailersTarpS,
+			}
+        }
+    }
+}

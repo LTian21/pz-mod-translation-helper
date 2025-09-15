@@ -1,0 +1,63 @@
+module Base
+{
+
+	template vehicle TOU04SpareTire
+		{
+		part DAMNSpareTire
+        	{
+
+				area = TruckBed,
+				category = tire,
+				specificItem = false,
+				itemType = Base.04vwTouranTire1,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:1,
+                    door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TOU04.InstallComplete.SpareTire,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+		            complete = TOU04.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+            			init = TOU04.Init.SpareTire,
+						create = TOU04.Create.SpareTire,
+					}
+			}
+	}		
+}

@@ -1,0 +1,113 @@
+module Base
+{
+	template vehicle SVU_Armor_pzkTrailerRegularCourtains
+	{
+        template = ATA2Protection/part/ATA2ProtectionDoorsRear,
+        part ATA2ProtectionDoorsRear
+        {
+            model Light
+            {
+                file = SVU_Trunk_pzkRegularFuelTanker_Light,
+            }
+            model Heavy
+            {
+                file = SVU_Trunk_pzkRegularFuelTanker_Heavy,
+            }
+            model LightSpiked
+            {
+                file = SVU_Trunk_pzkRegularFuelTanker_Light_Spiked,
+            }
+            model HeavySpiked
+            {
+                file = SVU_Trunk_pzkRegularFuelTanker_Heavy_Spiked,
+            }
+            model LightRusted
+            {
+                file = SVU_Trunk_pzkRegularFuelTanker_Light_Rusted,
+            }
+            model HeavyRusted
+            {
+                file = SVU_Trunk_pzkRegularFuelTanker_Heavy_Rusted,
+            }
+            model LightSpikedRusted
+            {
+                file = SVU_Trunk_pzkRegularFuelTanker_Light_Spiked_Rusted,
+            }
+            model HeavySpikedRusted
+            {
+                file = SVU_Trunk_pzkRegularFuelTanker_Heavy_Spiked_Rusted,
+            }
+			model Reinforced
+			{
+				file = SVU_Trunk_pzkRegularFuelTanker_Reinforced,
+			}
+			model ReinforcedRusted
+			{
+				file = SVU_Trunk_pzkRegularFuelTanker_Reinforced_Rusted,
+			}
+        }
+
+        part Tire*
+        {
+            setAllModelsVisible = false,
+            table install
+            {
+                complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+            }
+            
+            table uninstall
+            {
+                complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+            }
+            
+            lua
+            {
+                create = ATATuning2.Create.TireNotAllModelsVisible,
+                init = ATATuning2.Init.TireNotAllModelsVisible,
+                checkOperate = Vehicles.CheckOperate.Tire,
+                update = Vehicles.Update.Tire,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWheels,
+        part TireFrontLeft
+        {
+            model ATAProtection
+            {
+                file = SVU_Chains_FL_pzkRegularFuelTanker,
+            }
+        }
+
+        part TireRearLeft
+        {
+            model ATAProtection
+            {
+                file = SVU_Chains_RL_pzkRegularFuelTanker,
+            }
+        }
+
+        part TireFrontRight
+        {
+            model ATAProtection
+            {
+                file = SVU_Chains_FR_pzkRegularFuelTanker,
+            }
+        }
+
+        part TireRearRight
+        {
+            model ATAProtection
+            {
+                file = SVU_Chains_RR_pzkRegularFuelTanker,
+            }
+        }
+        template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkRoofRack,
+        part ATA2InteractiveTrunkRoofRack
+        {
+            model Default
+            {
+                file = SVU_Rack_pzkRegularFuelTanker,
+            }
+        }
+	}
+}

@@ -1,0 +1,96 @@
+module Base
+{
+
+	model 04vwTouranRoofrack0
+	{
+		mesh = vehicles/Vehicles_04vwTouran_Body|04touran_roofrack0,
+		texture = Vehicles/Items_damnRoofrackModern,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 04vwTouranRoofrack1
+	{
+		mesh = vehicles/Vehicles_04vwTouran_Body|04touran_roofrack1,
+		texture = Vehicles/Items_damnRoofrackModern,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle TOU04Roofracks
+	{
+		part TOU04Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 04vwTouranRoofrack0,
+				}
+
+            model Roofrack1
+				{
+                		file = 04vwTouranRoofrack1,
+				}
+
+			category = Other,
+			area = Roofrack,
+            specificItem = false,
+			itemType = Base.ModernSmallRoofrack3;Base.ModernLargeRoofrack3,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = TOU04.InstallComplete.Roofrack,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1300,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = TOU04.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = TOU04.Create.Roofrack,
+					init = TOU04.Init.Roofrack,
+				}
+		}
+	}
+}

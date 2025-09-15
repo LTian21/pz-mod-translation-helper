@@ -1,0 +1,55 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FencePalisadeRT
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Fence Palisade,
+			Icon		= Build_FencePalisade,
+		}
+	}
+
+    entity FencePalisadeRT
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FencePalisadeRT,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 200,
+			
+            face W
+            {
+                layer
+                {
+                    row = rt_tiles_01_3,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = rt_tiles_01_2,
+                }
+            }
+			corner = rt_tiles_01_5,
+        }
+		
+        component CraftRecipe
+        {
+            timedAction   = BuildWallNoTool,
+            time          = 100,
+            category      = RT Buildings,
+            xpAward       = Woodwork:5,
+            inputs
+            {
+                item 1 [SWB.LogFenceKit],
+            }
+        }
+    }
+}

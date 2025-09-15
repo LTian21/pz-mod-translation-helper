@@ -1,0 +1,163 @@
+module Base
+{
+	model 86oshkoshP19ASpareTire
+    {
+        mesh = vehicles/runFlat_models|runFlat_Large,
+		texture = vehicles/Wheels_runFlat_Large,
+		shader = damn_wheel_shader,
+    }
+
+    model 86oshkoshP19ASpareMountRearStrap
+    {
+        mesh = vehicles/Vehicles_86oshkoshP19A_Body|p19a_spare_tire_rear_strap,
+		texture = vehicles/Vehicles_86oshkoshP19A_Wheel_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+    }
+
+	template vehicle P19ASpareTires
+		{
+		part P19ASpareTireLeft
+        	{
+
+			model SpareTireLeft783783
+				{
+                		file = 86oshkoshP19ASpareTire,
+                        offset = 0.9805 0.7647 -2.8888,
+				}
+
+			area = TireRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = runFlat.LargeTire,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+					{
+						requireInstalled = P19ASpareMountLeft,
+					}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 1100,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			        complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+                    create = DAMN.Create.Blank,
+                    }
+		}
+
+		part P19ASpareTireRear
+        	{
+
+			model SpareTireRear78675783
+				{
+                		file = 86oshkoshP19ASpareTire,
+                        offset = -0.5473 1.4569 -0.7763,
+			            rotate = 0.0000 30.0000 90.0000,
+				}
+
+            model SpareTireRear78675783Strap
+				{
+                		file = 86oshkoshP19ASpareMountRearStrap,
+				}
+
+                    area = TruckBed,
+                    category = bodywork,
+                    specificItem = false,
+                    itemType = runFlat.LargeTire,
+                    mechanicRequireKey = false,
+                    durability = 3,
+
+                    table install
+					{
+						requireInstalled = P19ASpareMountRear,
+					}
+
+                    table install
+                    {
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 1100,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			        complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+                    create = DAMN.Create.Blank,
+
+                    }
+		}
+	}
+
+		
+}

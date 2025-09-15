@@ -1,0 +1,146 @@
+module Base
+{
+	template vehicle BR89SpareTires
+	{
+
+        part DAMNSpareTire
+        {
+            specificItem = false,
+            itemType = Base.80sOffroadTireA;Base.76chevyKseriesTire2;Base.80chevyCKseriesTire2;Base.80chevyCKseriesTire1;Base.90chevyCKseriesTire2;Base.90chevyCKseriesTire1,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 3,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			             equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                door = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part DAMNSpareTireRoof
+        {
+            model BR89Tire0
+			{
+				file = 80sOffroadWheelALB,
+                offset = 0.1000 1.3347 -1.0556,
+				rotate = -7.0000 0.0000 90.0000,
+			}
+            model BR89Tire1
+			{
+				file = 89fordBroncoWheel2L,
+                offset = 0.1000 1.3347 -1.1056,
+				rotate = -7.0000 0.0000 90.0000,
+			}
+            model BR89Tire2
+			{
+				file = 89fordBroncoWheel3L,
+                offset = 0.1000 1.3347 -1.1056,
+				rotate = -7.0000 0.0000 90.0000,
+			}
+            model BR89Tire3
+			{
+				file = 89fordBroncoWheel4L,
+                offset = 0.1000 1.3347 -1.1056,
+				rotate = -7.0000 0.0000 90.0000,
+			}
+            model BR89Tire4
+			{
+				file = 89fordBroncoWheel5L,
+                offset = 0.1000 1.3347 -1.1056,
+				rotate = -7.0000 0.0000 90.0000,
+			}
+            model BR89Tire5
+			{
+				file = 89fordBroncoWheel6L,
+                offset = 0.1000 1.3347 -1.1056,
+				rotate = -7.0000 0.0000 90.0000,
+			}
+        
+            specificItem = false,
+            itemType = Base.80sOffroadTireA;Base.76chevyKseriesTire2;Base.80chevyCKseriesTire2;Base.80chevyCKseriesTire1;Base.90chevyCKseriesTire2;Base.90chevyCKseriesTire1,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 3,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = BR89.InstallComplete.SpareTire,
+                requireInstalled = BR89Roofrack,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = BR89.UninstallComplete.SpareTire,
+            }
+            lua
+                {
+                    init = BR89.Init.SpareTire,
+                    create = BR89.Create.SpareTire,
+                }
+        }
+    }
+}

@@ -1,0 +1,165 @@
+module Base
+{
+    model ATAMustang66_Protection_WindowRearLeft
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Protection_WindowRearLeft,
+        texture = ATAMustang66/armor,
+
+        scale = 0.0041,
+    }
+    model ATAMustang66_Protection_WindowRearRight
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Protection_WindowRearRight,
+        texture = ATAMustang66/armor,
+
+        scale = 0.0041,
+    }
+    model ATAMustang66_Protection_Windshield
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Protection_Windshield,
+        texture = ATAMustang66/armor,
+
+        scale = 0.0041,
+    }
+    model ATAMustang66_Protection_WindshieldRear
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Protection_WindshieldRear,
+        texture = ATAMustang66/armor,
+
+        scale = 0.0041,
+    }
+    
+    model ATAMustang66_Protection_WindowFrontLeft
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Protection_WindowFrontLeft,
+        static = FALSE,
+        shader = vehicle,
+        scale = 0.0041,
+        boneWeight = LeftDoor 1.0,
+    }
+    model ATAMustang66_Protection_WindowFrontRight
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Protection_WindowFrontRight,
+        static = FALSE,
+        shader = vehicle,
+        scale = 0.0041,
+        boneWeight = RightDoor 1.0,
+    }
+    model ATAMustang66_Protection_WindowFrontLeft_move
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Protection_WindowFrontLeft_move,
+        static = FALSE,
+        shader = vehicle,
+        scale = 0.0041,
+        boneWeight = MovingArmorLeft 1.0,
+    }
+    model ATAMustang66_Protection_WindowFrontRight_move
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Protection_WindowFrontRight_move,
+        static = FALSE,
+        shader = vehicle,
+        scale = 0.0041,
+        boneWeight = MovingArmorRight 1.0,
+    }
+
+    template vehicle ATAMustang66_protectionwindows
+    {
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontLeft,
+        part ATA2ProtectionWindowFrontLeft
+        {
+            parent = DoorFrontLeft,
+            model StaticPart
+            {
+                file = ATAMustang66_Protection_WindowFrontLeft,
+            }
+            model StaticPart2
+            {
+                file = ATAMustang66_Protection_WindowRearLeft,
+            }
+            model Default
+            {
+                file = ATAMustang66_Protection_WindowFrontLeft_move,
+            }
+            anim Close
+            {
+                anim = Anim_Protection_WFL,
+                rate = 1,
+                reverse = TRUE,
+            }
+            anim Open
+            {
+                anim = Anim_Protection_WFL,
+                rate = 1,
+            }
+            anim Closed
+            {
+                anim = Anim_Protection_WFL,
+                animate = FALSE,
+            }
+            anim Opened
+            {
+                anim = Anim_Protection_WFL,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontRight,
+        part ATA2ProtectionWindowFrontRight
+        {
+            parent = DoorFrontRight,
+            model StaticPart
+            {
+                file = ATAMustang66_Protection_WindowFrontRight,
+            }
+            model StaticPart2
+            {
+                file = ATAMustang66_Protection_WindowRearRight,
+            }
+            model Default
+            {
+                file = ATAMustang66_Protection_WindowFrontRight_move,
+            }
+            anim Close
+            {
+                anim = Anim_Protection_WFR,
+                rate = 1,
+                reverse = TRUE,
+            }
+            anim Open
+            {
+                anim = Anim_Protection_WFR,
+                rate = 1,
+            }
+            anim Closed
+            {
+                anim = Anim_Protection_WFR,
+                animate = FALSE,
+            }
+            anim Opened
+            {
+                anim = Anim_Protection_WFR,
+                animate = FALSE,
+                reverse = TRUE,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindshield,
+        part ATA2ProtectionWindshield
+        {
+            model Default
+            {
+                file = ATAMustang66_Protection_Windshield,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindshieldRear,
+        part ATA2ProtectionWindshieldRear
+        {
+            model Default
+            {
+                file = ATAMustang66_Protection_WindshieldRear,
+            }
+        }
+    }
+}

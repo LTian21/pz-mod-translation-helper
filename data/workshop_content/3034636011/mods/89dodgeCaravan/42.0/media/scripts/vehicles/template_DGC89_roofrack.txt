@@ -1,0 +1,86 @@
+module Base
+{
+
+	model 89dodgeCaravanroofrack0
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|Caravan_roofrack0,
+		texture = Vehicles/Vehicles_89dodgeCaravan_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DGC89Roofrack
+	{
+		part DGC89Roofrack
+		{
+
+			model DGC89Roofrack0
+				{
+                		file = 89dodgeCaravanroofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.89dodgeCaravanRoofrack0,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.Roofrack,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = DAMN.UninstallTest.Default,
+					complete = DGC89.UninstallComplete.Roofrack,
+					requireUninstalled = DAMNGasCanOne;DAMNGasCanTwo;DAMNGasCanThree;DAMNGenerator,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+            		create = DGC89.Create.Roofrack,
+            		init = DGC89.Init.Roofrack,
+				}
+		}
+	}
+}
+

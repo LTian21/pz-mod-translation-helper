@@ -1,0 +1,209 @@
+module Base
+{
+
+    model 93fordTaurusWindshield
+    {
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurus_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 93fordTaurusSedanWindshieldRear
+    {
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurusSedan_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 93fordTaurusWagonWindshieldRear
+    {
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurusWagon_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+
+	template vehicle TAU93Windshield
+	{
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 93fordTaurusWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.93fordTaurusWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = TAU93WindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle TAU93WindshieldsSedan
+    {
+        template! = TAU93Windshield,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 93fordTaurusSedanWindshieldRear,
+            }
+
+                
+            itemType = Base.93fordTaurusSedanRearWindshield,
+            parent = TrunkDoor,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = TAU93WindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+    template vehicle TAU93WindshieldsWagon
+    {
+        template! = TAU93Windshield,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 93fordTaurusWagonWindshieldRear,
+            }
+
+                
+            itemType = Base.93fordTaurusWagonRearWindshield,
+            parent = TrunkDoor,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = TAU93WindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+}

@@ -1,0 +1,76 @@
+module Base
+{
+
+	model 91rangeSidesteps
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_sidesteps,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	
+	template vehicle RR91SideSteps
+	{
+		part RR91SideSteps
+        	{
+
+			model RR91SideSteps
+				{
+                		file = 91rangeSidesteps,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.91rangeSideSteps,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RR91.InstallComplete.SideSteps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = RR91.UninstallComplete.SideSteps,
+
+            		}
+
+	            lua
+	            {
+				create = RR91.Create.SideSteps,
+				init = RR91.Init.SideSteps,
+				}
+		}
+	}
+}
+

@@ -1,0 +1,38 @@
+module Base
+{
+	craftRecipe UseBeltAsWeapon
+	{
+		timedAction = CraftWeapon1H,
+		Time = 20,
+		OnCreate = Recipe.OnCreate.RestoreBeltWeaponConditionAndEquipToPrimaryHand,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Survival,
+		inputs
+		{
+			item 1 [Base.Belt2] flags[Prop1],
+		}
+		outputs
+		{
+			item 1 Base.BeltInHand,
+		}
+	}
+	
+	craftRecipe NotUseBeltAsWeapon
+	{
+		timedAction = CraftWeapon1H,
+		Time = 20,
+		OnCreate = Recipe.OnCreate.StoreBeltWeaponCondition,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Survival,
+		inputs
+		{
+			item 1 [Base.BeltInHand] flags[Prop1],
+		}
+		outputs
+		{
+			item 1 Base.Belt2,
+		}
+	}
+}

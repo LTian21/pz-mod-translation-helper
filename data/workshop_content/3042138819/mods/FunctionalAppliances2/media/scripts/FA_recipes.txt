@@ -1,0 +1,499 @@
+module FunctionalAppliances
+{
+	imports
+	{
+		Base,
+	}	
+
+	recipe Make Bucket of Popcorn
+	{
+		BucketEmpty/FAEmptyBucketPopcorn,
+		FATheaterPopcorn;30,
+		Result 			: FABucketofPopcorn,
+		Time 			: 200,
+		Category 		: Cooking,
+		OnGiveXP 		: Recipe.OnGiveXP.None,
+	}
+	recipe Take Popcorn from Bucket
+	{
+		FABucketofPopcorn;10,
+		Result 			: FATheaterPopcorn,
+		Time 			: 30.0,
+		NeedToBeLearn 		: false,
+		OnGiveXP 		: NoXP_OnGiveXP,
+		StopOnWalk 		: false,
+		CanBeDoneFromFloor 	: true,
+	}
+	recipe Make Bucket of Buttered Popcorn
+	{
+		BucketEmpty/FAEmptyBucketPopcorn,
+		FAButteredPopcorn;30,
+		Result 			: FABucketofButteredPopcorn,
+		Time 			: 200,
+		Category 		: Cooking,
+		OnGiveXP 		: Recipe.OnGiveXP.None,
+	}
+	recipe Take Buttered Popcorn from Bucket
+	{
+		FABucketofButteredPopcorn;10,
+		Result 			: FAButteredPopcorn,
+		Time 			: 30.0,
+		NeedToBeLearn 		: false,
+		OnGiveXP 		: NoXP_OnGiveXP,
+		StopOnWalk 		: false,
+		CanBeDoneFromFloor 	: true,
+	}
+	recipe Butter Popcorn
+	{
+		destroy FABucketofPopcorn,
+		Butter;3,
+		Result 			: FABucketofButteredPopcorn,
+		Time 			: 100,
+		Category 		: Cooking,
+		OnGiveXP 		: Recipe.OnGiveXP.None,
+	}
+	recipe Empty Bucket of Popcorn
+	{
+		FABucketofPopcorn/FABucketofButteredPopcorn,
+		Result 			: FAEmptyBucketPopcorn,
+		Time 			: 30.0,
+		NeedToBeLearn 		: false,
+		OnGiveXP 		: NoXP_OnGiveXP,
+		StopOnWalk 		: false,
+		CanBeDoneFromFloor 	: true,
+	}
+  	recipe Craft Empty Keg
+   	{
+		SheetMetal		= 1,
+		SmallSheetMetal		= 2,
+		MetalPipe		= 1,
+		Screws			= 4,
+      		BlowTorch		= 1,
+       		keep [Recipe.GetItemTypes.WeldingMask],
+
+        	noBrokenItems		: true,
+        	Result			: FAEmptyKeg,
+        	SkillRequired		: MetalWelding=2,
+        	Time			: 400.0,
+        	Category 		: Welding,
+      		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    	}
+  	recipe Convert Empty Beer Bottle From MoreBrews
+   	{
+		MoreBrews.BeerBottleEmptyAmericanLager/MoreBrews.BeerBottleEmptyAPA1/MoreBrews.BeerBottleEmptyAPA2/MoreBrews.BeerBottleEmptyIPA1/MoreBrews.BeerBottleEmptyIPA2/MoreBrews.BeerBottleEmptyLightLager/MoreBrews.BeerBottleEmptyPilsner/MoreBrews.BeerBottleEmptyPorter/MoreBrews.BeerBottleEmptyStout/MoreBrews.BeerBottleEmptySkunked,
+
+        	noBrokenItems		: true,
+        	Result			: BeerEmpty,
+		Time 			: 30.0,
+		NeedToBeLearn 		: false,
+		OnGiveXP 		: NoXP_OnGiveXP,
+		StopOnWalk 		: false,
+		CanBeDoneFromFloor 	: true,
+    	}
+  	recipe Craft Home Brew Keg
+   	{
+		destroy FAEmptyKeg,
+		Yeast;1,
+		Flour;5,
+		Water			= 20,
+       		[Recipe.GetItemTypes.Sugar],
+		
+        	noBrokenItems		: true,
+        	CanBeDoneFromFloor      : true,
+        	Result			: FAHomeBrewKeg,
+        	SkillRequired		: Cooking=3,
+        	Time			: 600.0,
+        	Category 		: Cooking,
+      		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    	}
+  	recipe Craft Empty CO2 Tank
+   	{
+		SheetMetal		= 1,
+		SmallSheetMetal		= 2,
+		MetalPipe		= 1,
+		Screws			= 4,
+      		BlowTorch		= 1,
+       		keep [Recipe.GetItemTypes.WeldingMask],
+
+        	noBrokenItems		: true,
+        	Result			: EmptyFACO2Tank,
+        	SkillRequired		: MetalWelding=2,
+        	Time			: 400.0,
+        	Category 		: Welding,
+      		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    	}
+  	recipe Refill CO2 Tank
+   	{
+		EmptyFACO2Tank,
+		Garbagebag,
+       		DuctTape;1,
+		BakingSoda;2,
+		Vinegar;2,
+		keep TirePump,
+		keep Pot,
+  		
+        	noBrokenItems		: true,
+        	CanBeDoneFromFloor      : true,
+        	Result			: FADIYCO2Tank,
+        	SkillRequired		: Cooking=2;Mechanics=1,
+        	Time			: 600.0,
+        	Category 		: Cooking,
+      		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    	}
+  	recipe Craft Empty Soda Syrup Box From Lunch Bags
+   	{
+		Lunchbag = 4,
+		Garbagebag		= 2,
+		DuctTape		= 1,
+  		
+        	noBrokenItems		: true,
+        	CanBeDoneFromFloor      : true,
+        	Result			: FAEmptySodaSyrupBox,
+        	SkillRequired		: Cooking=1,
+        	Time			: 600.0,
+        	Category 		: Cooking,
+      		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    	}
+  	recipe Craft Empty Soda Syrup Box From Jays Paper Bags
+   	{
+		Paperbag_Jays = 4,
+		Garbagebag		= 2,
+		DuctTape		= 1,
+  		
+        	noBrokenItems		: true,
+        	CanBeDoneFromFloor      : true,
+        	Result			: FAEmptySodaSyrupBox,
+        	SkillRequired		: Cooking=1,
+        	Time			: 600.0,
+        	Category 		: Cooking,
+      		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    	}
+  	recipe Craft Empty Soda Syrup Box From Spiffo Paper Bags
+   	{
+		Paperbag_Spiffos = 4,
+		Garbagebag		= 2,
+		DuctTape		= 1,
+  		
+        	noBrokenItems		: true,
+        	CanBeDoneFromFloor      : true,
+        	Result			: FAEmptySodaSyrupBox,
+        	SkillRequired		: Cooking=1,
+        	Time			: 600.0,
+        	Category 		: Cooking,
+      		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    	}
+  	recipe Craft Empty Soda Syrup Box From Paper Bags
+   	{
+		PaperBag = 4,
+		Garbagebag		= 2,
+		DuctTape		= 1,
+  		
+        	noBrokenItems		: true,
+        	CanBeDoneFromFloor      : true,
+        	Result			: FAEmptySodaSyrupBox,
+        	SkillRequired		: Cooking=1,
+        	Time			: 600.0,
+        	Category 		: Cooking,
+      		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    	}
+  	recipe Craft Mixed Berries Flavored Soda Syrup
+   	{
+		FAEmptySodaSyrupBox,
+		Water				= 20,
+		[Recipe.GetItemTypes.Sugar];5,
+		keep WaterPot/Pot,
+		BerryBlack/BerryBlue/BerryGeneric1/BerryGeneric2/BerryGeneric3/BerryGeneric4/BerryGeneric5/Cherry/Strewberrie/WinterBerry/BeautyBerry,
+		BerryBlack/BerryBlue/BerryGeneric1/BerryGeneric2/BerryGeneric3/BerryGeneric4/BerryGeneric5/Cherry/Strewberrie/WinterBerry/BeautyBerry,
+		BerryBlack/BerryBlue/BerryGeneric1/BerryGeneric2/BerryGeneric3/BerryGeneric4/BerryGeneric5/Cherry/Strewberrie/WinterBerry/BeautyBerry,
+		BerryBlack/BerryBlue/BerryGeneric1/BerryGeneric2/BerryGeneric3/BerryGeneric4/BerryGeneric5/Cherry/Strewberrie/WinterBerry/BeautyBerry,
+		BerryBlack/BerryBlue/BerryGeneric1/BerryGeneric2/BerryGeneric3/BerryGeneric4/BerryGeneric5/Cherry/Strewberrie/WinterBerry/BeautyBerry,		
+ 	       	noBrokenItems		: true,
+        	CanBeDoneFromFloor      : true,
+        	Result			: FAMixedBerriesSodaSyrupBox,
+        	SkillRequired		: Cooking=2,
+        	Time			: 600.0,
+        	Category 		: Cooking,
+      		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    	}
+  	recipe Craft Orange Soda Syrup
+   	{
+		FAEmptySodaSyrupBox,
+		Water				= 20,
+		[Recipe.GetItemTypes.Sugar];5,
+		keep WaterPot/Pot,
+		Orange,
+ 	       	noBrokenItems		: true,
+        	CanBeDoneFromFloor      : true,
+        	Result			: FAOrangeSodaSyrupBox,
+        	SkillRequired		: Cooking=2,
+        	NeedToBeLearn		: true,
+        	Time			: 600.0,
+        	Category 		: Cooking,
+      		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    	}
+  	recipe Craft Lemon Lime Soda Syrup
+   	{
+		FAEmptySodaSyrupBox,
+		Water				= 20,
+		[Recipe.GetItemTypes.Sugar];5,
+		keep WaterPot/Pot,
+		Lemon,
+		Lime,
+ 	       	noBrokenItems		: true,
+        	CanBeDoneFromFloor      : true,
+        	Result			: FALemonLimeSodaSyrupBox,
+        	SkillRequired		: Cooking=2,
+        	NeedToBeLearn		: true,
+        	Time			: 600.0,
+        	Category 		: Cooking,
+      		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    	}
+  	recipe Craft Root Beer Soda Syrup
+   	{
+		FAEmptySodaSyrupBox,
+		Water				= 20,
+		[Recipe.GetItemTypes.Sugar];5,
+		keep WaterPot/Pot,
+		Log,
+		GingerRoot,
+ 	       	noBrokenItems		: true,
+        	CanBeDoneFromFloor      : true,
+        	Result			: FARootBeerSodaSyrupBox,
+        	SkillRequired		: Cooking=2,
+        	NeedToBeLearn		: true,
+        	Time			: 600.0,
+        	Category 		: Cooking,
+      		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    	}
+  	recipe Craft KY Cola Soda Syrup
+   	{
+		FAEmptySodaSyrupBox,
+		Water				= 20,
+		[Recipe.GetItemTypes.Sugar];5,
+		keep WaterPot/Pot,
+		LicoriceBlack,
+		Orange,
+		Lemon,
+		Lime,
+		GingerRoot,
+ 	       	noBrokenItems		: true,
+        	CanBeDoneFromFloor      : true,
+        	Result			: FAColaSodaSyrupBox,
+        	SkillRequired		: Cooking=2,
+        	NeedToBeLearn		: true,
+        	Time			: 600.0,
+        	Category 		: Cooking,
+      		OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    	}
+	recipe Potato Skins
+	{
+		Potato,
+		keep [Recipe.GetItemTypes.SharpKnife]/MeatCleaver,
+		Result 			: FAPotatoSkins=2,
+		OnGiveXP		: Recipe.OnGiveXP.Cooking3,
+		Category 		: Cooking,
+		Time 			: 70,
+		CanBeDoneFromFloor      : true,
+		noBrokenItems		: true,
+	}
+	recipe Potato Wedges
+	{
+		Potato,
+		keep [Recipe.GetItemTypes.SharpKnife]/MeatCleaver,
+		Result 			: FAPotatoWedges,
+		OnGiveXP		: Recipe.OnGiveXP.Cooking3,
+		Category 		: Cooking,
+		Time 			: 70,
+		CanBeDoneFromFloor      : true,
+		noBrokenItems		: true,
+	}
+	recipe Blooming Onion
+	{
+		Onion,
+		keep [Recipe.GetItemTypes.SharpKnife]/MeatCleaver,
+		Result 			: FABloomingOnion,
+		OnGiveXP		: Recipe.OnGiveXP.Cooking3,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		Time 			: 70,
+		CanBeDoneFromFloor      : true,
+		noBrokenItems		: true,
+	}
+	recipe Batter Blooming Onion
+	{
+		FABloomingOnion,
+		Flour;2,
+		BakingSoda;1,
+		Water=1,
+		Result 			: FABatteredBloomingOnion,
+		OnGiveXP		: Recipe.OnGiveXP.Cooking3,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		Time 			: 70,
+		CanBeDoneFromFloor      : true,
+		noBrokenItems		: true,
+	}
+	recipe Batter Chicken
+	{
+		Chicken,
+		Flour;2,
+		BakingSoda;1,
+		Water=1,
+		Result 			: FABatteredChicken,
+		OnGiveXP		: Recipe.OnGiveXP.Cooking3,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		Time 			: 70,
+		CanBeDoneFromFloor      : true,
+		noBrokenItems		: true,
+	}
+	recipe Chicken Fillet
+	{
+		Chicken,
+		keep [Recipe.GetItemTypes.SharpKnife]/MeatCleaver,
+		Result 			: FAChickenFillet,
+		OnGiveXP		: Recipe.OnGiveXP.Cooking3,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		Time 			: 70,
+		CanBeDoneFromFloor      : true,
+		noBrokenItems		: true,
+	}
+	recipe Batter Chicken Fillet
+	{
+		FAChickenFillet,
+		Flour;2,
+		BakingSoda;1,
+		Water=1,
+		Result 			: FABatteredChickenFillet,
+		OnGiveXP		: Recipe.OnGiveXP.Cooking3,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		Time 			: 70,
+		CanBeDoneFromFloor      : true,
+		noBrokenItems		: true,
+	}
+	recipe Batter Cheese Sticks
+	{
+		[Recipe.GetItemTypes.Cheese];5,
+		Flour;2,
+		BakingSoda;1,
+		Water=1,
+		Result 			: FABatteredCheese,
+		OnGiveXP		: Recipe.OnGiveXP.Cooking3,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		Time 			: 70,
+		CanBeDoneFromFloor      : true,
+		noBrokenItems		: true,
+	}
+	recipe Fry Battered Cheese Sticks
+	{
+		keep KitchenTongs/Fork/Chopsticks,
+		keep Saucepan,
+		OilVegetable;1,
+		FABatteredCheese,
+		NearItem		: Campfire,
+		CanBeDoneFromFloor 	: true,
+		Result 			: FAFriedCheeseSticks,
+		Time 			: 250,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		OnGiveXP 		: Recipe.OnGiveXP.Cooking10,
+	}
+	recipe Fry Battered Chicken Fillet
+	{
+		keep KitchenTongs/Fork/Chopsticks,
+		keep Saucepan,
+		OilVegetable;1,
+		FABatteredChickenFillet,
+		NearItem		: Campfire,
+		CanBeDoneFromFloor 	: true,
+		Result 			: FAFriedChickenFillet,
+		Time 			: 250,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		OnGiveXP 		: Recipe.OnGiveXP.Cooking10,
+	}
+	recipe Fry Battered Chicken
+	{
+		keep KitchenTongs/Fork/Chopsticks,
+		keep Saucepan,
+		OilVegetable;1,
+		FABatteredChicken,
+		NearItem		: Campfire,
+		CanBeDoneFromFloor 	: true,
+		Result 			: Base.ChickenFried,
+		Time 			: 250,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		OnGiveXP 		: Recipe.OnGiveXP.Cooking10,
+	}
+	recipe Fry Battered Blooming Onion
+	{
+		keep KitchenTongs/Fork/Chopsticks,
+		keep Saucepan,
+		OilVegetable;1,
+		FABatteredBloomingOnion,
+		NearItem		: Campfire,
+		CanBeDoneFromFloor 	: true,
+		Result 			: FAFriedBloomingOnion,
+		Time 			: 250,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		OnGiveXP 		: Recipe.OnGiveXP.Cooking10,
+	}
+	recipe FluffnTough's Pan Fried Potato Skins
+	{
+		keep KitchenTongs/Fork/Chopsticks,
+		keep Pan,
+		OilVegetable;1,
+		FAPotatoSkins,
+		NearItem		: Campfire,
+		CanBeDoneFromFloor 	: true,
+		Result 			: FAFriedPotatoSkins,
+		Time 			: 250,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		OnGiveXP 		: Recipe.OnGiveXP.Cooking10,
+	}
+	recipe FluffnTough's Pan Fried Potato Wedges
+	{
+		keep KitchenTongs/Fork/Chopsticks,
+		keep Pan,
+		OilVegetable;1,
+		FAPotatoWedges,
+		NearItem		: Campfire,
+		CanBeDoneFromFloor 	: true,
+		Result 			: Base.Fries,
+		Time 			: 250,
+		Category 		: Cooking,
+		SkillRequired		: Cooking=1,
+		OnGiveXP 		: Recipe.OnGiveXP.Cooking10,
+	}
+  	recipe Convert Paper Napkins to Functional Appliances Paper Napkins
+   	{
+		Base.PaperNapkins,
+        	noBrokenItems		: true,
+        	Result			: FAPaperNapkins,
+		Time 			: 30.0,
+		NeedToBeLearn 		: false,
+		OnGiveXP 		: NoXP_OnGiveXP,
+		StopOnWalk 		: false,
+		CanBeDoneFromFloor 	: true,
+    	}
+  	recipe Wet Paper Napkins
+   	{
+		FAPaperNapkins,
+		Water			= 1,
+        	noBrokenItems		: true,
+        	Result			: FAPaperNapkinsWet,
+		Time 			: 30.0,
+		NeedToBeLearn 		: false,
+		OnGiveXP 		: NoXP_OnGiveXP,
+		StopOnWalk 		: false,
+		CanBeDoneFromFloor 	: true,
+    	}
+
+}
+	

@@ -1,0 +1,137 @@
+module Base
+{
+	model 87chevySuburbanRoofLights
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_roof_lights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SUB87RoofLights
+		{
+		part SUB87RoofLights
+        	{
+
+			model SUB87RoofLights0
+				{
+                	file = 87chevySuburbanRoofLights,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.87chevySuburbanRoofLights,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 400,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.RoofLights,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 450,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = SUB87.UninstallComplete.RoofLights,
+
+            		}
+
+            	lua
+            		{
+					create = SUB87.Create.RoofLights,
+					init = SUB87.Init.RoofLights,
+					}
+		}
+	}
+
+	template vehicle SUB87RoofLightsCUCV
+		{
+		part SUB87RoofLights
+        	{
+
+			model SUB87RoofLights0
+				{
+                	file = 87chevySuburbanRoofLights,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.87chevySuburbanRoofLights,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 400,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 450,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+            	lua
+            		{
+					create = DAMN.Create.Blank,
+					}
+		}
+	}
+		
+}

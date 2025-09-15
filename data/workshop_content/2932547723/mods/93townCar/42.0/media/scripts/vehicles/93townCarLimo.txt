@@ -1,0 +1,494 @@
+module Base
+{
+	model 93townCarLimoBase
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_body,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	model 93townCarLimoInterior
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_interior,
+		texture = Vehicles/Vehicles_93townCar_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	vehicle 93townCarLimo
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 1.5,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.1,
+
+		model
+		{
+			file = 93townCarLimoBase,
+			scale = 0.9000,
+			offset = 0.0000 0.7556 0.1556,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_93townCar_Shell_White,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_93townCar_Shell_Black,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_93townCar_Shell_Beige,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_93townCar_Shell_DarkBlue,
+		}
+
+		textureRust = Vehicles/Vehicles_93townCar_Rust,
+		textureMask = Vehicles/Vehicles_93townCar_Mask,
+		textureLights = Vehicles/Vehicles_93townCar_Lights,
+		textureDamage1Shell = Vehicles/Vehicles_93townCar_Damage1,
+		textureDamage2Shell = Vehicles/Vehicles_93townCar_Damage2,
+		textureDamage1Overlay = Vehicles/Vehicles_93townCar_Blood1,
+		textureDamage2Overlay = Vehicles/Vehicles_93townCar_Blood1,
+		textureShadow = Vehicles/Vehicles_93townCarLimo_Shadow,
+
+		sound
+		{
+			engine = VehicleEngineDefault,
+			engineStart = VehicleEngineDefault,
+			engineTurnOff = VehicleEngineDefault,
+			horn = VehicleHornStandard,
+			ignitionFail = VehicleIgnitionFailDefault,
+		}
+
+		extents = 2.0222 1.3111 7.2000,
+		mass = 950,
+		physicsChassisShape = 2.0222 1.3111 7.2000,
+		centerOfMassOffset = 0.0000 0.6556 -0.0222,
+		shadowExtents = 2.4429 6.9593,
+		shadowOffset = -0.0333 0.0131,
+		engineForce = 4255,
+		maxSpeed = 80f,
+		engineLoudness = 85,
+		engineQuality = 81,
+		brakingForce = 90,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 0.98f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 45,
+		suspensionCompression = 3.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.20f,
+		wheelFriction = 1.6f,
+		frontEndHealth = 165,
+		rearEndHealth = 150,
+		seats = 6,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.8222 -0.7444 2.2333,
+			radius = 0.35f,
+			width = 0.22f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.8222 -0.7444 2.2333,
+			radius = 0.35f,
+			width = 0.22f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.8222 -0.7444 -2.3333,
+			radius = 0.35f,
+			width = 0.22f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.8222 -0.7444 -2.3333,
+			radius = 0.35f,
+			width = 0.22f,
+		}
+
+		template = PassengerSeat6,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.4889 -0.3333 0.6667,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.3556 -1.0444 0.3556,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = -0.4889 -0.3333 0.6667,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.3222 -1.0444 0.3667,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		passenger MiddleLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+			area = SeatRearLeft,
+
+			position inside
+			{
+				offset = 0.4333 -0.3333 -0.0778,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.3556 -1.0444 -2.1000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		passenger MiddleRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = FakeDoor,
+			area = SeatRearRight,
+
+			position inside
+			{
+				offset = 0.2667 -0.3333 -0.9000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.3000 -1.0444 -2.1000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		passenger RearLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.4889 -0.3333 -1.8111,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.3556 -1.0444 -2.1000,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearLeft,
+			}
+		}
+
+		passenger RearRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = -0.4889 -0.3333 -1.8111,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.3000 -1.0444 -2.1000,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 3.9667 1.8000 0.7778,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -4.0111 1.8000 0.7778,
+		}
+
+		area Trunkrack
+		{
+			xywh = 0.0000 -3.5889 3.4222 1.6222,
+		}
+
+		area Sunroof
+		{
+			xywh = -0.4444 -0.7667 0.7778 0.7778,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.4000 1.0889 0.7778 1.1556,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.4000 1.0889 0.7778 1.1556,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -1.4000 -1.3444 0.7778 0.7556,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 1.4000 -1.3444 0.7778 0.7556,
+		}
+
+		area GasTank
+		{
+			xywh = 1.4111 -2.8511 0.4222 0.4222,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.4111 2.3889 0.4222 0.4222,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.4111 2.3889 0.4222 0.4222,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.4111 -2.2111 0.4222 0.4222,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.4111 -2.2111 0.4222 0.4222,
+		}
+
+		template = LIN93TrunkCompartment,
+		template = LIN93SeatsLimo,
+		template = LIN93BumpersLimo,
+		template = LIN93DoorsLimo,
+		template = LIN93EngineDoor,
+		template = LIN93TrunkDoorLimo,
+		template = LIN93ArmorLimo,
+		template = LIN93SpareTiresLimo,
+		template = LIN93FloorMinibar,
+		template = LIN93TrunkrackLimo,
+
+		part GloveBox
+		{
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			model intlin
+			{
+				file = 93townCarLimoInterior,
+				scale = 1.0,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			container
+			{
+				capacity = 7,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+
+		part Battery
+		{
+			model batlin
+			{
+				file = 93townCarTISBattery,
+				scale = 1.0,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = LIN93Tires,
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+		template = LIN93WindowsLimo,
+		template = LIN93WindowsMiddleLimo,
+		template = LIN93WindshieldsLimo,
+		useChassisPhysicsCollision = false,
+
+		physics box
+		{
+			offset = 0.0000 0.4000 -0.0225,
+			extents = 1.9556 0.7333 7.0889,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 1.0333 -0.5593,
+			extents = 1.6444 0.5333 3.2667,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.9333 -2.2900,
+			extents = 1.6444 0.6889 0.3333,
+			rotate = 40.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.7889 1.3508,
+			extents = 1.6444 0.5333 1.0222,
+			rotate = 34.0000 0.0000 0.0000,
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.4889 -3.8556,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.4889 3.7000,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

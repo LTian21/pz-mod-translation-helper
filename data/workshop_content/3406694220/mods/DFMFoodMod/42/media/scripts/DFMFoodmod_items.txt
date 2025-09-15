@@ -1,0 +1,857 @@
+module DFMFoodmod
+{
+	imports
+    {
+        Base
+    }
+	
+	item RawHotdogBun
+    {
+        DisplayName = Raw Hot dog Bun,
+        Type = Food,
+        Weight = 0.2,
+		Icon = RawHotdogBun,
+        HungerChange = -10,
+        UnhappyChange = 5,
+        Calories = 150,
+        Carbohydrates = 30,
+        Lipids = 2,
+        Proteins = 5,
+        DaysFresh = 3,
+        DaysTotallyRotten = 7,
+        Packaged = FALSE,
+        IsCookable = TRUE,
+        ReplaceOnCooked = Base.BunsHotdog_single,
+        MinutesToCook = 30,
+        MinutesToBurn = 60,
+    }
+	
+	item RawHamburgerBun
+    {
+        DisplayName = Raw Hamburger Bun,
+        Type = Food,
+        Weight = 0.2,
+        Icon = RawHamburgerBun,
+        HungerChange = -10,
+        UnhappyChange = 5,
+        Calories = 150,
+        Carbohydrates = 30,
+        Lipids = 2,
+        Proteins = 5,
+        DaysFresh = 3,
+        DaysTotallyRotten = 7,
+        Packaged = FALSE,
+        IsCookable = TRUE,
+        ReplaceOnCooked = Base.BunsHamburger_single,
+        MinutesToCook = 30,
+        MinutesToBurn = 60,
+    }
+	
+	item RawFruitJam
+	{
+		DisplayName = Raw Fruit Jam,
+		Type = Food,
+		Weight = 1.2,
+		Icon = SFruitJam,
+		HungerChange = -30,
+		UnhappyChange = -10,
+		Calories = 550,
+		Carbohydrates = 130,
+		Lipids = 0,
+		Proteins = 1,
+		DaysFresh = 7,
+		DaysTotallyRotten = 14,
+		Packaged = FALSE,
+		IsCookable = TRUE,
+		ReplaceOnCooked = DFMFoodmod.CookedFruitJam,
+		MinutesToCook = 40,
+		MinutesToBurn = 80,
+		StaticModel = SaucePanPasta,
+		WorldStaticModel = SaucePanPasta,
+		ReplaceOnUse = Saucepan,
+	}
+
+	item CookedFruitJam
+	{
+		DisplayName = Fruit Jam,
+		Type = Food,
+		Weight = 0.9,
+		Icon = SFruitJam,
+		HungerChange = -30,
+		UnhappyChange = -10,
+		Calories = 550,
+		Carbohydrates = 130,
+		Lipids = 0,
+		Proteins = 1,
+		DaysFresh = 30,
+		DaysTotallyRotten = 60,
+		Packaged = FALSE,
+		StaticModel = SaucePanPasta,
+		WorldStaticModel = SaucePanPasta,
+		ReplaceOnUse = Saucepan,
+		EvolvedRecipe = Sandwich:3;Pancakes:5;ConeIcecream:5;Cake:15;Toast:3;Bread:15;Oatmeal:3,
+	}
+
+	item CannedFruitJam
+	{
+		DisplayName = Jar of Fruit Jam,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.5,
+		Icon = FruitJamJar,
+		CantEat = TRUE,
+		DaysFresh = 365,
+		DaysTotallyRotten = 730,
+		IsCookable = FALSE,
+		HungerChange = -30,
+		UnhappyChange = -10,
+		Calories = 550,
+		Carbohydrates = 130,
+		Lipids = 0,
+		Proteins = 1,
+		Tags = HasMetal;HideHungerChange;SpawnCooked,
+		StaticModel = JamFruit_Ground,
+		WorldStaticModel = JamFruit_Ground,
+	}
+
+	item CannedFruitJam_Open
+	{
+		DisplayName = Opened Jar of Fruit Jam,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.4,
+		Icon = FruitJamJar,
+		DaysFresh = 60,
+		DaysTotallyRotten = 90,
+		HungerChange = -30,
+		UnhappyChange = -10,
+		Calories = 550,
+		Carbohydrates = 130,
+		Lipids = 0,
+		Proteins = 1,
+		IsCookable = FALSE,
+		ReplaceOnUse = EmptyJar,
+		EvolvedRecipe = Sandwich:3;Pancakes:5;ConeIcecream:5;Cake:15;Toast:3;Bread:15;Oatmeal:3,
+		FoodType = NoExplicit,
+		EvolvedRecipeName = FruitJam,
+		Tags = HasMetal,
+		EatType = candrink,
+		StaticModel = JamFruit_Ground,
+		WorldStaticModel = JamFruit_Ground,
+	}
+	
+	item RawCheeseMixture
+    {
+        DisplayName = Raw Cheese Mixture,
+        Type = Food,
+        Weight = 0.5,
+        Icon = SCheese,
+        HungerChange = -5,
+        UnhappyChange = 5,
+        Calories = 100,
+        Carbohydrates = 10,
+        Lipids = 5,
+        Proteins = 15,
+        DaysFresh = 7,
+        DaysTotallyRotten = 14,
+        Packaged = FALSE,
+        IsCookable = TRUE,
+		MinutesToCook = 40,
+		MinutesToBurn = 80,
+        ReplaceOnCooked = DFMFoodmod.CookedCheeseMixture,
+		ReplaceOnUse = Saucepan,
+		WorldStaticModel = SaucePanRice,
+		StaticModel = SaucePanRice,
+    }
+
+    item CookedCheeseMixture
+    {
+        DisplayName = Cooked Cheese Mixture,
+        Type = Food,
+        Weight = 0.5,
+        Icon = SCheese,
+        HungerChange = -10,
+        UnhappyChange = 0,
+        Calories = 200,
+        Carbohydrates = 20,
+        Lipids = 10,
+        Proteins = 30,
+        DaysFresh = 14,
+        DaysTotallyRotten = 28,
+        Packaged = FALSE,
+		ReplaceOnUse = Saucepan,
+		WorldStaticModel = SaucePanRice,
+		StaticModel = SaucePanRice,
+    }
+	
+	item RawTomatoPaste
+	{
+		DisplayName = Raw Tomato Paste,
+		Type = Food,
+		Weight = 0.8,
+		Icon = STomato,
+		HungerChange = -15,
+		UnhappyChange = 20,
+		Calories = 120,
+		Carbohydrates = 32,
+		Lipids = 8,
+		Proteins = 0,
+		DaysFresh = 7,
+		DaysTotallyRotten = 14,
+		Packaged = FALSE,
+		IsCookable = TRUE,
+		ReplaceOnCooked = DFMFoodmod.CookedTomatoPaste,
+		ReplaceOnUse = Saucepan,
+		MinutesToCook = 40,
+		MinutesToBurn = 80,
+		StaticModel = SaucePanPasta,
+		WorldStaticModel = SaucePanPasta,	
+	}
+
+	item CookedTomatoPaste
+	{
+		DisplayName = Cooked Tomato Paste,
+		Type = Food,
+		Weight = 0.8,
+		Icon = STomato,
+		Spice = true,
+		HungerChange = -15,
+		UnhappyChange = 20,
+		Calories = 120,
+		Carbohydrates = 32,
+		Lipids = 8,
+		Proteins = 0,
+		Packaged = FALSE,
+		ReplaceOnUse = Saucepan,
+		EvolvedRecipe = Pizza:3;Soup:3;Stew:3;Omelette:3;Rice:3;Pasta:3;Pie:3;Salad:3;Sandwich:3,
+		Tags = PizzaSauce,
+		StaticModel = SaucePanPasta,
+		WorldStaticModel = SaucePanPasta,
+	}
+	
+	item CannedTomatoPaste
+	{
+		DisplayName = Jar of Tomato Paste,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.8,
+		Icon = TomatoPasteJar,
+		CantEat = TRUE,
+		DaysFresh = 365,
+		DaysTotallyRotten = 730,
+		IsCookable = FALSE,
+		HungerChange = -15,
+		UnhappyChange = 20,
+		Calories = 120,
+		Carbohydrates = 32,
+		Lipids = 8,
+		Proteins = 0,
+		Tags = HasMetal;HideHungerChange;SpawnCooked,
+		StaticModel = JamFruit_Ground,
+		WorldStaticModel = JamFruit_Ground,
+	}
+
+	item CannedTomatoPaste_Open
+	{
+		DisplayName = Jar of Tomato Paste(Opened),
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.8,
+		Icon = TomatoPasteJar,
+		Spice = true,
+		DaysFresh = 60,
+		DaysTotallyRotten = 90,
+		HungerChange = -15,
+		UnhappyChange = 20,
+		Calories = 120,
+		Carbohydrates = 32,
+		Lipids = 8,
+		Proteins = 0,
+		IsCookable = FALSE,
+		ReplaceOnUse = EmptyJar,
+		EvolvedRecipe = Pizza:3;Soup:3;Stew:3;Omelette:3;Rice:3;Pasta:3;Pie:3;Salad:3;Sandwich:3,
+		FoodType = NoExplicit,
+		EvolvedRecipeName = TomatoPaste,
+		Tags = HasMetal;PizzaSauce,
+		EatType = candrink,
+		StaticModel = JamFruit_Ground,
+		WorldStaticModel = JamFruit_Ground,
+	}
+	
+	item RawMarinara
+	{
+		DisplayName = Raw Marinara,
+		Type = Food,
+		Weight = 0.8,
+		Icon = SMarinara,
+		HungerChange = -10,
+		Calories = 350,
+		Carbohydrates = 55,
+		Lipids = 7.5,
+		Proteins = 10,
+		DaysFresh = 7,
+		DaysTotallyRotten = 14,
+		Packaged = FALSE,
+		IsCookable = TRUE,
+		ReplaceOnCooked = DFMFoodmod.CookedMarinara,
+		MinutesToCook = 40,
+		MinutesToBurn = 80,
+		ReplaceOnUse = Saucepan,
+		StaticModel = SaucePanPasta,
+		WorldStaticModel = SaucePanPasta,
+	}
+
+	item CookedMarinara
+	{
+		DisplayName = Marinara Sauce,
+		Type = Food,
+		Weight = 0.8,
+		Icon = SMarinara,
+		Spice = true,
+		HungerChange = -10,
+		Calories = 350,
+		Carbohydrates = 55,
+		Lipids = 7.5,
+		Proteins = 10,
+		DaysFresh = 30,
+		DaysTotallyRotten = 60,
+		Packaged = FALSE,
+		ReplaceOnUse = Saucepan,
+		EvolvedRecipe = Pizza:5;Pasta:5;Stew:5;Soup:5;Rice:3;Pie:3;Sandwich:3,
+		StaticModel = SaucePanPasta,
+		WorldStaticModel = SaucePanPasta,
+	}
+
+	item CannedMarinara
+	{
+		DisplayName = Jar of Marinara Sauce,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.8,
+		Icon = MarinaraJar,
+		CantEat = TRUE,
+		DaysFresh = 365,
+		DaysTotallyRotten = 730,
+		IsCookable = FALSE,
+		HungerChange = -10,
+		Calories = 350,
+		Carbohydrates = 55,
+		Lipids = 7.5,
+		Proteins = 10,
+		Tags = HasMetal;HideHungerChange;SpawnCooked,
+		StaticModel = Marinara,
+		WorldStaticModel = Marinara,
+	}
+
+	item CannedMarinara_Open
+	{
+		DisplayName = Jar of Marinara Sauce(Opened),
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.8,
+		Icon = MarinaraJar,
+		Spice = true,
+		DaysFresh = 60,
+		DaysTotallyRotten = 90,
+		HungerChange = -10,
+		Calories = 350,
+		Carbohydrates = 55,
+		Lipids = 7.5,
+		Proteins = 10,
+		IsCookable = FALSE,
+		ReplaceOnUse = EmptyJar,
+		EvolvedRecipe = Pizza:5;Pasta:5;Stew:5;Soup:5;Rice:3;Pie:3;Sandwich:3,
+		FoodType = NoExplicit,
+		EvolvedRecipeName = Marinara,
+		Tags = HasMetal,
+		EatType = candrink,
+		StaticModel = Marinara,
+		WorldStaticModel = Marinara,
+	}
+	
+	item RawPotatoPancakes
+	{
+		DisplayName = Raw Potato Pancakes,
+		Type = Food,
+		Weight = 0.1,
+		Icon = PotatoPancakesRaw,
+		HungerChange = -5,
+		UnhappyChange = 10,
+		Calories = 120,
+		Carbohydrates = 20,
+		Lipids = 8,
+		Proteins = 3,
+		DaysFresh = 3,
+		DaysTotallyRotten = 7,
+		IsCookable = TRUE,
+		ReplaceOnCooked = Base.PotatoPancakes,
+		MinutesToCook = 30,
+		MinutesToBurn = 60,
+	}
+	
+	item RawTortilla
+	{
+		DisplayName = Raw Tortilla,
+		Type = Food,
+		Weight = 0.1,
+		Icon = RawTortilla,
+		HungerChange = -5,
+		UnhappyChange = 10,
+		Calories = 120,
+		Carbohydrates = 20,
+		Lipids = 3,
+		Proteins = 2,
+		DaysFresh = 3,
+		DaysTotallyRotten = 7,
+		IsCookable = TRUE,
+		ReplaceOnCooked = Base.Tortilla,
+		MinutesToCook = 20,
+		MinutesToBurn = 50,
+		StaticModel = Tortilla_Ground,
+		WorldStaticModel = Tortilla_Ground,
+	}
+	
+	item RawTacoShell
+	{
+		DisplayName = Raw Taco Shell,
+		Type = Food,
+		Weight = 0.1,
+		Icon = TacoShellRaw,
+		HungerChange = -3,
+		UnhappyChange = 8,
+		Calories = 100,
+		Carbohydrates = 18,
+		Lipids = 2,
+		Proteins = 1,
+		DaysFresh = 3,
+		DaysTotallyRotten = 7,
+		IsCookable = TRUE,
+		ReplaceOnCooked = Base.TacoShell,
+		MinutesToCook = 20,
+		MinutesToBurn = 50,
+		StaticModel = TacoShell_Ground,
+		WorldStaticModel = TacoShell_Ground,
+	}
+
+	item IntestineRaw
+	{
+		DisplayName = Raw Intestine,
+		Type = Food,
+		Weight = 0.3,
+		Icon = IntestineRaw,
+		HungerChange = -5,
+		UnhappyChange = 5,
+		Calories = 50,
+		Carbohydrates = 0,
+		Lipids = 2,
+		Proteins = 5,
+		DaysFresh = 5,
+		DaysTotallyRotten = 10,
+		WorldStaticModel = IntestineRaw_Ground,
+		StaticModel = IntestineRaw_Ground,
+		IsCookable = FALSE,
+		ReplaceOnCooked = nil,
+		DangerousUncooked = TRUE,
+	}
+
+	item IntestineDried
+	{
+		DisplayName = Dried Intestine,
+		Type = Food,
+		Weight = 0.2,
+		Icon = IntestineDried,
+		HungerChange = 10,
+		UnhappyChange = -5,
+		Calories = 200,
+		Carbohydrates = 0,
+		Lipids = 5,
+		Proteins = 20,
+		WorldStaticModel = IntestineDried_Ground,
+		StaticModel = IntestineDried_Ground,
+		IsCookable = FALSE,
+		ReplaceOnCooked = nil,
+	}
+
+	item SalamiRaw
+	{
+		DisplayName = Raw Salami,
+		Type = Food,
+		Weight = 0.3,
+		Icon = Salami,
+		HungerChange = -15,
+		UnhappyChange = 5,
+		Calories = 350,
+		Carbohydrates = 10,
+		Lipids = 25,
+		Proteins = 20,
+		DaysFresh = 7,
+		DaysTotallyRotten = 14,
+		Packaged = FALSE,
+		IsCookable = FALSE,
+		WorldStaticModel = Salami_Ground,
+		StaticModel = Salami_Ground,
+		DangerousUncooked = TRUE,
+	}
+	
+	item HamRaw
+	{
+		DisplayName = Raw Ham,
+		Type = Food,
+		Weight = 1.0,
+		Icon = HamRaw,
+		HungerChange = -20,
+		UnhappyChange = 10,
+		Calories = 250,
+		Carbohydrates = 10,
+		Lipids = 15,
+		Proteins = 30,
+		DaysFresh = 5,
+		DaysTotallyRotten = 10,
+		Packaged = FALSE,
+		IsCookable = TRUE,
+		ReplaceOnCooked = Base.Ham,
+		MinutesToCook = 60,
+		MinutesToBurn = 120,
+		WorldStaticModel = Ham,
+		StaticModel = Ham,
+		DangerousUncooked = TRUE,
+	}
+	
+	item SlicedPorkSausepan
+    {
+        DisplayName = Sliced Pork (Saucepan),
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 1,
+        Icon = SCheese,
+        HungerChange = -20,
+        Calories = 900,
+        Carbohydrates = 0,
+        Lipids = 100,
+        Proteins = 5,
+        DaysFresh = 10,
+        DaysTotallyRotten = 20,
+        Packaged = FALSE,
+        DangerousUncooked = TRUE,
+		IsCookable = TRUE,
+		ReplaceOnCooked = Base.Lard;Base.PorkRinds;Base.PorkRinds;Base.PorkRinds;Base.PorkRinds;Base.PorkRinds;Base.Saucepan,
+		MinutesToCook = 60,
+		MinutesToBurn = 120,
+        StaticModel = SaucePanRice,
+        WorldStaticModel = SaucePanRice,
+		ReplaceOnUse = Saucepan,
+	}
+	
+  /*---- Yeast Renew Items ----*/
+
+	item WildYeastBase
+	{
+		DisplayName = Wild Yeast Base,
+		HungerChange = -2,
+		UnhappyChange = 7,
+		Type = Food,
+		DisplayCategory = Food,
+		Icon = WildYeastBase,
+		Carbohydrates = 2.5,
+		Proteins = 0,
+		Lipids = 0,
+		Calories = 7,
+		Weight = 0.1,
+		WorldStaticModel = Yeast,
+	}
+	
+	item JarOfYeast
+	{
+		Type = Normal,
+		DisplayName	= Jar of Yeast,
+		Icon = JarOfYeast,
+		Weight = 0.5,
+		isFermentable = 1,
+		onFermentationFinish = ANL.RF.YeastFermented,
+		daysToFerment = 10,
+		StaticModel = CanClosed,
+		WorldStaticModel = JarFoodPotatoes_Ground,
+	}
+  
+	item DryJarOfYeast
+	{
+		Type = Normal,
+		DisplayName = Jar of Ready Yeast (READY),
+		Icon = JarOfYeast,
+		Weight = 0.5,
+		ReplaceOnUse = EmptyJar,
+		StaticModel = CanClosed,
+		WorldStaticModel = JarFoodPotatoes_Ground,
+	}
+
+	item SlicedSugarBeets
+	{
+	    DisplayCategory = Cooking,
+		Type = Food,
+		DisplayName	= Sliced Sugar Beets,
+		Icon = SlicedSugarBeets,
+		Weight = 0.5,
+		HungerChange = -15,
+		DaysFresh =	3,
+		DaysTotallyRotten =	7,
+        Carbohydrates = 0.15,
+        Proteins = 0,
+        Lipids = 0,
+        Calories = 15,
+		IsCookable = TRUE,
+		MinutesToCook =	50,
+		ReplaceOnCooked = DFMFoodmod.DriedSugarBeets,
+		EvolvedRecipe = Salad:15;FruitSalad:15;Pancakes:15,
+	}
+
+	item DriedSugarBeets
+	{
+		DisplayCategory = Cooking,
+		DisplayName	= Dried Sugar Beets,
+		Icon = DriedSugarBeets,
+		Weight = 0.2,
+		HungerChange = -2,
+		Carbohydrates = 0.01,
+        Proteins = 0,
+        Lipids = 0,
+        Calories = 1,
+	}
+
+    /*---- Misc stuff items ----*/
+
+    item GratedBerries
+	{
+        Type = Food,
+        DisplayCategory = Food,
+		HungerChange	=	-10,
+        DisplayName	= Mashed Berries,
+        DaysTotallyRotten = 10,
+        DaysFresh = 6,
+        EvolvedRecipe = Cake:10;FruitSalad:10;Pancakes:10;Waffles:10;Muffin:10,
+        FoodType = Fruits,
+        ThirstChange = -1,
+        Carbohydrates = 5,
+        Proteins = 4,
+        Lipids = 0,
+        Calories = 23,
+        CustomEatSound = EatingFruit,
+        Icon = GratedBerries,
+        Weight = 0.1,
+    }
+
+    item JarOfCrushedBerries
+	{
+      Type	=	Normal,
+      DisplayCategory = Food,
+      DisplayName	=	Jar Of Crushed Berries,
+      Icon	=	JarOfCrushedBerries ,
+      Weight	=	0.4,
+      isFermentable = 1,
+      onFermentationFinish= ANL.RF.BerriesFermented,
+      daysToFerment=14,
+      StaticModel = RedWineBottle,
+      WorldStaticModel = WineRedGround,
+    }
+	
+	item WildBerryWine
+	{
+		DisplayName = Bottle of Wild Berry Wine,
+		DisplayCategory = Food,
+		Type = Normal,
+		Weight = 1,
+		Icon = WildBerryWine,
+		IconFluidMask = Wine_Mask,
+		FillFromDispenserSound = GetWaterFromDispenserGlass,
+		FillFromLakeSound = GetWaterFromLakeBottle,
+		FillFromTapSound = GetWaterFromTapGlass,
+		FillFromToiletSound = GetWaterFromToilet,
+		StaticModel = RedWineBottle,
+		WorldStaticModel = WineRedGround,
+		Tags = Glass;GlassBottle,
+
+        	component FluidContainer
+        	{
+                ContainerName   = EmptyJar,
+                Opened	= false,
+                capacity        = 1.0,
+                CustomDrinkSound = DrinkingFromBottleGlass,
+
+                Fluids
+                {
+                    fluid           = Wine:1.0,
+                }
+        	}
+	}
+	
+	item WildBerryWineOpen
+	{
+		DisplayName = Open Wild Berry Wine,
+		DisplayCategory = Food,
+		Type = Normal,
+		Weight = 1,
+		Icon = WildBerryWine,
+		IconFluidMask = Wine_Mask,
+		FillFromDispenserSound = GetWaterFromDispenserGlass,
+		FillFromLakeSound = GetWaterFromLakeBottle,
+		FillFromTapSound = GetWaterFromTapGlass,
+		FillFromToiletSound = GetWaterFromToilet,
+		StaticModel = RedWineBottle,
+		WorldStaticModel = WineRedGround,
+		Tags = Glass;GlassBottle,
+		ReplaceOnDeplete = EmptyJar,
+		/*Tags = HideFresh,*/
+        	component FluidContainer
+        	{
+            	ContainerName   = EmptyJar,
+            	capacity        = 1.0,
+		InitialPercentMin = 1,
+		InitialPercentMax = 1,
+		CustomDrinkSound = DrinkingFromBottleGlass,
+
+            	Fluids
+            		{
+                	fluid           = Wine:1.0,
+            		}
+        	}
+	}
+
+    /*---- Vinegar renew items ----*/
+
+    item JarOfVinegarBase 
+	{
+	  Type = Normal,
+	  DisplayCategory = Food,
+	  DisplayName =	Jar Of Vinegar Base,
+	  Icon	= JarOfVinegarBase,
+	  Weight = 0.5,
+	  isFermentable = 1,
+	  onFermentationFinish = ANL.RF.VinegarFermented,
+	  daysToFerment = 20,
+	  StaticModel = CanOpen,
+	  WorldStaticModel = JarFoodCabbage_Ground,
+    }  
+	
+	item RawBeefJerky
+	{
+		DisplayName = Slice of Beef,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.4,
+		Icon = RawBeefJerky,
+		FoodType = Beef,
+		Packaged = TRUE,
+		DaysFresh = 3,
+        DaysTotallyRotten = 5,
+		DangerousUncooked = TRUE,
+		IsCookable = FALSE,
+		HungerChange = -20,
+		Calories = 410,
+		Carbohydrates = 11,
+		Lipids = 26,
+		Proteins = 33,
+		StaticModel = BeefJerky_Hand,
+		WorldStaticModel = BeefJerky,
+	}
+
+	item RawDehydratedMeatStick
+	{
+		DisplayName = Raw Meat Stick,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.2,
+		Icon = RawDehydratedMeatStick,
+		Packaged = TRUE,
+		DangerousUncooked = TRUE,
+		DaysFresh = 5,
+        DaysTotallyRotten = 10,
+		IsCookable = TRUE,
+		HungerChange = -10,
+		Calories = 100,
+		Carbohydrates = 5.3,
+		Lipids = 5.1,
+		Proteins = 21.63,
+		StaticModel = DehydratedMeatStick_Ground,
+		WorldStaticModel = DehydratedMeatStick_Ground,
+		MinutesToCook =	60,
+		ReplaceOnCooked = Base.DehydratedMeatStick,
+	}
+	
+	item PastaDough
+	{
+		DisplayName = Dough Pasta,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 3,
+		Icon = Dough,
+		DaysFresh = 3,
+		Packaged = TRUE,
+		DaysFresh = 5,
+        DaysTotallyRotten = 10,
+		HungerChange = -60,
+		ThirstChange = 60,
+		UnhappyChange = 40,
+		Calories = 3360,
+		Carbohydrates = 656,
+		Lipids = 16,
+		Proteins = 112,
+		StaticModel = Dough,
+		WorldStaticModel = Dough,		
+		DangerousUncooked = TRUE,
+	}
+	
+	item RawPasta
+	{
+		DisplayName = Raw Pasta,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 3,
+		Icon = PastaRaw,
+		DaysFresh = 3,
+        DaysTotallyRotten = 10,
+		Packaged = TRUE,
+		HungerChange = -60,
+		ThirstChange = 60,
+		UnhappyChange = 40,
+		Calories = 3360,
+		Carbohydrates = 656,
+		Lipids = 16,
+		Proteins = 112,
+		StaticModel = Pasta,
+		WorldStaticModel = Pasta,		
+		DangerousUncooked = TRUE,
+		MinutesToCook =	60,
+		ReplaceOnCooked = Base.Pasta,
+		IsCookable = TRUE,
+	}
+
+	item IceChunk
+	{
+		DisplayName = Ice Chunk,
+		DisplayCategory = Water,
+		EatType = candrink, 
+		Type = Food,
+		Weight = 0.2,
+		ThirstChange = -7,
+		Tags = GoodFrozen,
+		DaysFresh = 1,
+		Packaged = TRUE,
+		StaticModel = Ice,
+		Tooltip = You can suck it up and quench
+		your thirst or make ice cream,
+		WorldStaticModel = SaltRock,
+		ReplaceOnRotten = ,
+	}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+

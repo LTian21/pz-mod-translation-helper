@@ -1,0 +1,156 @@
+module Base
+{
+
+    model 93fordF350Windshield
+    {
+        mesh = vehicles/Vehicles_93fordF350_Body|f350_windshield_front,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 93fordF350WindshieldRear
+    {
+        mesh = vehicles/Vehicles_93fordF350_Body|f350_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 93fordF150WindshieldRear
+    {
+        mesh = vehicles/Vehicles_93fordF350_Body|f150_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle F3502Windshields
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 93fordF350Windshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.93fordF350Windshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Intermediate Mechanics,
+                    requireUninstalled = F3502WindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 93fordF350WindshieldRear,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.93fordF350RearWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = F3502WindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    requireUninstalled = F3502HeadacheRack,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle F1502Windshields
+	{
+        template! = F3502Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 93fordF150WindshieldRear,
+            }
+        }
+    }
+}

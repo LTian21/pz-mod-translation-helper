@@ -1,0 +1,504 @@
+module Base
+{
+	model 85pontiacParisienneWindshieldaW
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_windshield_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+    model 85pontiacParisienneWindshieldaM
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_windshield_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }    
+    model 85pontiacParisienneWindowflaW
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_window_fl_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85pontiacParisienneWindowflaM
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_window_fl_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85pontiacParisienneWindowfraW
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_window_fr_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85pontiacParisienneWindowfraM
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_window_fr_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85pontiacParisienneWindowrlaW
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_window_rl_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85pontiacParisienneWindowrlaM
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_window_rl_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85pontiacParisienneWindowrraW
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_window_rr_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85pontiacParisienneWindowrraM
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_window_rr_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85pontiacParisienneWindshieldRearaW
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_windshield_rear_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+    model 85pontiacParisienneWindshieldRearaM
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_windshield_rear_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle PAR85WindshieldArmor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model PAR85windaW
+				{
+                		file = 85pontiacParisienneWindshieldaW,
+				}
+            model PAR85windaM
+				{
+                		file = 85pontiacParisienneWindshieldaM,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.85gmBbodyWindshieldArmorW;Base.85gmBbodyWindshieldArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PAR85.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = PAR85.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = PAR85.Create.WindshieldArmor,
+					init = PAR85.Init.WindshieldArmor,
+					}
+		}
+
+    }
+
+	template vehicle PAR85SideArmor
+	{
+
+		part DAMNFrontLeftArmor
+        {
+
+			model PAR85leftWindowaW
+				{
+                		file = 85pontiacParisienneWindowflaW,
+				}
+            model PAR85leftWindowaM
+				{
+                		file = 85pontiacParisienneWindowflaM,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.85gmBbodyFrontWindowArmorW;Base.85gmBbodyFrontWindowArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PAR85.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PAR85.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = PAR85.Create.FrontLeftArmor,
+					init = PAR85.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model PAR85rightWindowaW
+				{
+                		file = 85pontiacParisienneWindowfraW,
+				}
+            model PAR85rightWindowaM
+				{
+                		file = 85pontiacParisienneWindowfraM,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.85gmBbodyFrontWindowArmorW;Base.85gmBbodyFrontWindowArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PAR85.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PAR85.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = PAR85.Create.FrontRightArmor,
+					init = PAR85.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model PAR85leftWindowraW
+				{
+                		file = 85pontiacParisienneWindowrlaW,
+				}
+            model PAR85leftWindowraM
+				{
+                		file = 85pontiacParisienneWindowrlaM,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = WindowRearLeft,
+			specificItem = false,
+			itemType = Base.85gmBbodyRearWindowArmorW;Base.85gmBbodyRearWindowArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PAR85.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PAR85.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = PAR85.Create.RearLeftArmor,
+					init = PAR85.Init.RearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model PAR85rightWindowraW
+				{
+                		file = 85pontiacParisienneWindowrraW,
+				}
+            model PAR85rightWindowraM
+				{
+                		file = 85pontiacParisienneWindowrraM,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = WindowRearRight,
+			specificItem = false,
+			itemType = Base.85gmBbodyRearWindowArmorW;Base.85gmBbodyRearWindowArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PAR85.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PAR85.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = PAR85.Create.RearRightArmor,
+					init = PAR85.Init.RearRightArmor,
+					}
+		}
+
+    }
+
+    template vehicle PAR85WindshieldRearArmorSedan
+	{
+
+		part DAMNWindshieldRearArmor
+        	{
+
+			model PAR85windraW
+				{
+                		file = 85pontiacParisienneWindshieldRearaW,
+				}
+            model PAR85windraM
+				{
+                		file = 85pontiacParisienneWindshieldRearaM,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.85gmBbodyWindshieldRearArmorW;Base.85gmBbodyWindshieldRearArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PAR85.InstallComplete.WindshieldRearArmorS,
+                	requireInstalled = WindshieldRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = PAR85.UninstallComplete.WindshieldRearArmorS,
+            		}
+
+            		lua
+            		{
+					create = PAR85.Create.WindshieldRearArmorS,
+					init = PAR85.Init.WindshieldRearArmorS,
+					}
+		}
+	}
+
+    template vehicle PAR85ArmorSedan
+	{
+        template! = PAR85WindshieldArmor,
+        template! = PAR85SideArmor,
+        template! = PAR85WindshieldRearArmorSedan,
+    }
+
+}

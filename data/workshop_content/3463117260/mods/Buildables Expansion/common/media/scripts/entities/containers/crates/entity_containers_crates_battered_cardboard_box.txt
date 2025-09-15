@@ -1,0 +1,58 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_BatteredCardboardBox
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Battered Cardboard Box,
+			Icon		= trashcontainers_01_26,
+		}
+	}
+
+    entity BatteredCardboardBox
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_BatteredCardboardBox,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = trashcontainers_01_27,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = trashcontainers_01_26,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 50,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:2,
+            xpAward       = Woodwork:2,
+            category      = Containers_Crates,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_cardboardCrateDesc,
+            inputs
+            {
+                item 2 [Base.Glue] flags[Prop1],
+                item 5 [Base.Newspaper_Recent;Base.Newspaper_New;Base.Newspaper_Dispatch_New;Base.Newspaper_Herald_New;Base.Newspaper_Knews_New;Base.Newspaper_Times_New;Base.Newspaper] flags[Prop2],
+            }
+        }
+    }
+}

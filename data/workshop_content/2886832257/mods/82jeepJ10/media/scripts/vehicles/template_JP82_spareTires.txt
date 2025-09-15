@@ -1,0 +1,144 @@
+module Base
+{
+	template vehicle JP82SpareTires
+	{
+
+        part JP82SpareTireRear
+        {
+            specificItem = false,
+            itemType = Base.80sOffroadTireA;Base.76chevyKseriesTire2;Base.80chevyCKseriesTire2;Base.80chevyCKseriesTire1;Base.90chevyCKseriesTire2;Base.90chevyCKseriesTire1,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			             equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                door = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part JP82SpareTireRoof
+        {
+            model JP82Tire0
+			{
+				file = 80sOffroadWheelAL,
+                offset = 0.1000 1.2347 -1.0556,
+				rotate = 7.0000 0.0000 90.0000,
+			}
+            model JP82Tire1
+			{
+				file = 82jeepJ10Wheel2L,
+                offset = 0.1000 1.2347 -1.0556,
+				rotate = 7.0000 0.0000 90.0000,
+			}
+            model JP82Tire2
+			{
+				file = 82jeepJ10Wheel3L,
+                offset = 0.1000 1.2347 -1.0556,
+				rotate = 7.0000 0.0000 90.0000,
+			}
+            model JP82Tire3
+			{
+				file = 82jeepJ10Wheel4L,
+                offset = 0.1000 1.2347 -1.0556,
+				rotate = 7.0000 0.0000 90.0000,
+			}
+            model JP82Tire4
+			{
+				file = 82jeepJ10Wheel5L,
+                offset = 0.1000 1.2347 -1.0556,
+				rotate = 7.0000 0.0000 90.0000,
+			}
+            model JP82Tire5
+			{
+				file = 82jeepJ10Wheel6L,
+                offset = 0.1000 1.2347 -1.0556,
+				rotate = 7.0000 0.0000 90.0000,
+			}
+        
+            specificItem = false,
+            itemType = Base.80sOffroadTireA;Base.76chevyKseriesTire2;Base.80chevyCKseriesTire2;Base.80chevyCKseriesTire1;Base.90chevyCKseriesTire2;Base.90chevyCKseriesTire1,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = JP82.InstallComplete.SpareTire,
+                requireInstalled = JP82Roofrack,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = JP82.UninstallComplete.SpareTire,
+            }
+            lua
+                {
+                    init = JP82.Init.SpareTire,
+                    create = JP82.Create.SpareTire,
+                }
+        }
+    }
+}

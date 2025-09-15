@@ -1,0 +1,85 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_PostBarrier
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Post Barrier,
+			Icon		= street_decoration_01_63,
+		}
+	}
+
+    entity PostBarrier
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_PostBarrier,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face N
+            {
+                layer
+                {
+                    row = street_decoration_01_59,
+                    row = street_decoration_01_58,
+                    row = street_decoration_01_57,
+                    row = street_decoration_01_56,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = street_decoration_01_64 street_decoration_01_65 street_decoration_01_66 street_decoration_01_67,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = street_decoration_01_71,
+                    row = street_decoration_01_70,
+                    row = street_decoration_01_69,
+                    row = street_decoration_01_68,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = street_decoration_01_60 street_decoration_01_61 street_decoration_01_62 street_decoration_01_63,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:3;MetalWelding:4,
+            xpAward       = Woodwork:5;MetalWelding:10,
+            category      = Decorations_Roadway,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_roadwayDecorationsDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[Hammer] mode:keep flags[Prop2],
+                item 1 [Base.Saw] mode:keep,
+                item 6 [Base.Plank],
+                item 4 [Base.SmallSheetMetal],
+                item 2 [Base.Nails],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

@@ -1,0 +1,144 @@
+module Base
+{
+
+	model ECTO1seatfl
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_seat_fl,
+		texture = Vehicles/Vehicles_ECTO1_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model ECTO1seatfr
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_seat_fr,
+		texture = Vehicles/Vehicles_ECTO1_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model ECTO1seatrl
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_seat_rl,
+		texture = Vehicles/Vehicles_ECTO1_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model ECTO1seatrr
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_seat_rr,
+		texture = Vehicles/Vehicles_ECTO1_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	
+	template vehicle ECTO1Seats
+	{
+		part SeatFrontLeft
+		{
+			model SeatFL
+			{
+				file = ECTO1seatfl,
+			}
+			itemType = Base.ECTO1CarSeatfl,
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = ECTO1seatfr,
+			}
+			itemType = Base.ECTO1CarSeatfr,
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = ECTO1seatrl,
+			}
+			itemType = Base.ECTO1CarSeatrl,
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = ECTO1seatrr,
+			}
+			itemType = Base.ECTO1CarSeatrr,
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

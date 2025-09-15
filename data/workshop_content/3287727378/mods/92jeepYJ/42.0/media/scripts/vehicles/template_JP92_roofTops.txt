@@ -1,0 +1,279 @@
+module Base
+{
+    model 92jeepYJsoftTop
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_soft_top,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 92jeepYJhardTop
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_hard_top,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP92RoofTops2
+		{
+		part JP92SoftTop
+        	{
+
+			model softTop0
+				{
+                		file = 92jeepYJsoftTop,
+				}
+
+			category = Other,
+			area = TireRearRight,
+			specificItem = false,
+			itemType = Base.92jeepYJSoftTop2,
+			mechanicRequireKey = false,
+            durability = 2,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = JP92.InstallComplete.SoftTop,
+                    requireUninstalled = JP92HardTop,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Wrench,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 750,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = JP92.UninstallComplete.SoftTop,
+
+            		}
+
+            		lua
+            		{
+                    create = JP92.Create.SoftTop,
+                    init = JP92.Init.SoftTop,
+                    }
+		}
+
+        part JP92HardTop
+        	{
+
+            model hardTop0
+				{
+                	file = 92jeepYJhardTop,
+				}
+
+			category = Other,
+			area = TireRearRight,
+			specificItem = false,
+			itemType = Base.92jeepYJHardTop2,
+			mechanicRequireKey = false,
+            durability = 4,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                                type = Base.Wrench,
+                                count = 1,
+                                keep = true,
+                                equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = Vehicles.InstallComplete.Default,
+                    requireUninstalled = JP92SoftTop,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                                type = Base.Wrench,
+                                count = 1,
+                                keep = true,
+                                equip = primary,
+                    		}
+                	}
+
+                        time = 750,
+                        skills = Mechanics:1,
+                        recipes = Intermediate Mechanics,
+                        test = DAMN.UninstallTest.Default,
+                        complete = Vehicles.UninstallComplete.Default,
+                        requireUninstalled = WindshieldRear;WindowRearLeft;WindowRearRight,
+
+            		}
+
+            		lua
+            		{
+                        create = DAMN.Create.Blank,
+
+                    }
+		}
+	}
+
+    template vehicle JP92RoofTops4
+	{
+		part JP92SoftTop
+        	{
+
+			model softTop0
+				{
+                		file = 92jeepYJsoftTop,
+				}
+
+			category = Other,
+			area = TireRearRight,
+			specificItem = false,
+			itemType = Base.92jeepYJSoftTop2,
+			mechanicRequireKey = false,
+            durability = 2,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = Vehicles.InstallComplete.Default,
+                    requireUninstalled = JP92HardTop,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Wrench,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 750,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+            		lua
+            		{
+                    create = DAMN.Create.Blank,
+                    }
+		}
+
+        part JP92HardTop
+        	{
+
+            model hardTop0
+				{
+                	file = 92jeepYJhardTop,
+				}
+
+			category = Other,
+			area = TireRearRight,
+			specificItem = false,
+			itemType = Base.92jeepYJHardTop2,
+			mechanicRequireKey = false,
+            durability = 4,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                                type = Base.Wrench,
+                                count = 1,
+                                keep = true,
+                                equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = Vehicles.InstallComplete.Default,
+                    requireUninstalled = JP92SoftTop,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                                type = Base.Wrench,
+                                count = 1,
+                                keep = true,
+                                equip = primary,
+                    		}
+                	}
+
+                        time = 750,
+                        skills = Mechanics:1,
+                        recipes = Intermediate Mechanics,
+                        test = DAMN.UninstallTest.Default,
+                        complete = Vehicles.UninstallComplete.Default,
+                        requireUninstalled = WindshieldRear;WindowRearLeft;WindowRearRight,
+
+            		}
+
+            		lua
+            		{
+                        create = Vehicles.Create.Default,
+
+                    }
+		}
+	}
+}

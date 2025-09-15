@@ -1,0 +1,99 @@
+module Base
+{
+	model 69camarorearBumper0
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 69camarorearBumpera
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_bumper_rear_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 69camarorearBumperb
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_bumper_rear_b,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CAM69RearBumpers
+		{
+		part CAM69RearBumper
+        	{
+
+			model RearBumper0
+				{
+                		file = 69camarorearBumper0,
+				}
+
+			model RearBumperA
+				{
+                		file = 69camarorearBumpera,
+				}
+
+			model RearBumperB
+				{
+                		file = 69camarorearBumperb,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.69camaroRearBumper0;Base.69camaroRearBumperA;Base.69camaroRearBumperB,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CAM69.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CAM69.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = CAM69.Create.RearBumper,
+					init = CAM69.Init.RearBumper,
+					}
+		}
+	}
+
+		
+}

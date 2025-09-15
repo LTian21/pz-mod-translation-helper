@@ -1,0 +1,408 @@
+module Base
+{
+	model 59ambulanceLightbar
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ambulance_stuff,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	vehicle 59ambulance
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 1.1,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.5,
+
+		model
+		{
+			file = 59meteorBase,
+			scale = 0.9000,
+			offset = 0.0000 0.4889 0.0889,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_59ambulance_Shell,
+			textureDamage1Shell = Vehicles/Vehicles_ECTO1_damage1,
+			textureDamage2Shell = Vehicles/Vehicles_ECTO1_damage2,
+		}
+
+		textureRust = Vehicles/Vehicles_ECTO1_rust,
+		textureMask = Vehicles/Vehicles_ECTO1_mask,
+		textureLights = Vehicles/Vehicles_59ambulance_lights,
+		textureDamage1Shell = Vehicles/Vehicles_ECTO1_damage1,
+		textureDamage2Shell = Vehicles/Vehicles_ECTO1_damage2,
+		textureDamage1Overlay = Vehicles/Vehicles_ECTO1_blood,
+		textureDamage2Overlay = Vehicles/Vehicles_ECTO1_blood,
+
+		lightbar
+		{
+			soundSiren = VehicleSiren,
+			leftCol = 1;0;0,
+			rightCol = 1;0;0,
+		}
+
+		sound
+		{
+			engine = VehicleEngineCarStationWagon,
+			engineStart = VehicleEngineCarStationWagon,
+			engineTurnOff = VehicleEngineCarStationWagon,
+			horn = VehicleHornVan,
+			ignitionFail = VehicleIgnitionFailCarStationWagon,
+		}
+
+		extents = 2.0000 1.4000 6.1333,
+		mass = 950,
+		physicsChassisShape = 2.0000 1.4000 6.1333,
+		centerOfMassOffset = 0.0000 0.6667 -0.0222,
+		shadowExtents = 1.7985 6.7037,
+		shadowOffset = -0.0032 -0.0254,
+		engineForce = 4201,
+		gearRatioCount = 4,
+		gearRatioR = 14.1,
+		gearRatio1 = 13.2,
+		gearRatio2 = 9.7,
+		gearRatio3 = 5.8,
+		gearRatio4 = 3.5,
+		maxSpeed = 85f,
+		engineLoudness = 87,
+		engineQuality = 81,
+		brakingForce = 51,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 0.99f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 25,
+		suspensionCompression = 4.83,
+		suspensionDamping = 3.88,
+		maxSuspensionTravelCm = 14f,
+		suspensionRestLength = 0.20f,
+		wheelFriction = 1.4f,
+		frontEndHealth = 1000,
+		rearEndHealth = 850,
+		seats = 4,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.7333 -0.5556 2.0556,
+			radius = 0.33f,
+			width = 0.25f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.7333 -0.5556 2.0556,
+			radius = 0.33f,
+			width = 0.25f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.7333 -0.5556 -1.7667,
+			radius = 0.33f,
+			width = 0.25f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.7333 -0.5556 -1.7667,
+			radius = 0.33f,
+			width = 0.25f,
+		}
+
+		template = PassengerSeat4,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.3889 -0.0667 0.2444,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.4222 -0.8222 -0.0667,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = -0.4444 -0.0667 0.2444,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.4667 -0.8222 -0.0556,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		passenger RearLeft
+		{
+			showPassenger = false,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.2889 0.0778 -0.9889,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.2889 -0.8222 -1.2667,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearLeft,
+			}
+		}
+
+		passenger RearRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = -0.3778 -0.0333 -1.2889,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.4222 -0.8222 0.1222,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 3.3778 1.5333 0.6667,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -3.3778 1.3778 0.6667,
+		}
+
+		area Roofrack
+		{
+			xywh = 0.0000 -1.8556 3.2222 3.7111,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.3889 0.6111 0.7778 1.2000,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.3889 0.6111 0.7778 1.2000,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -1.3889 -0.5444 0.7778 1.0667,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 1.3889 -0.5444 0.7778 1.0667,
+		}
+
+		area GasTank
+		{
+			xywh = 0.4889 -3.3000 0.4222 0.4222,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.4778 2.1444 0.4222 0.4222,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.4778 2.1444 0.4222 0.4222,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.4778 -1.6889 0.4222 0.4222,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.4778 -1.6889 0.4222 0.4222,
+		}
+
+		template = TireECTO1,
+        template = ECTO1Seats,
+        template = ECTO1EngineDoor,
+        template = ECTO1TrunkDoor,
+        template = ECTO1Windows,
+        template = ECTO1Doors,
+        template = ECTO1Bullbars,
+        template = ECTO1Windshields,
+        template = ECTO1Armor,
+		template = ECTO1TrunkCompartment,
+		template = 59meteorRoofrackCompartment,
+
+		part GloveBox
+		{
+			model InteriorECTO1
+			{
+				file = ECTO1interior,
+			}
+
+            model AmbulanceShizle
+            {
+                file = 59ambulanceLightbar,
+            }
+
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			container
+			{
+				capacity = 7,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+		template = Muffler,
+
+		part GasTank
+		{
+			container
+			{
+				conditionAffectsCapacity = false,
+				capacity = 51,
+			}
+
+			install
+			{
+				skills = Mechanics:5,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:5,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+
+		part Battery
+		{
+			model ECTO1BatteryTIS
+			{
+				file = ECTO1battery,
+			}
+		}
+
+		template = Engine,
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:5,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:5,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:5,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:5,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+
+		part Radio*
+		{
+			itemType = Radio.HamRadio1,
+		}
+
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.4000 -3.1889,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.4333 3.0333,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

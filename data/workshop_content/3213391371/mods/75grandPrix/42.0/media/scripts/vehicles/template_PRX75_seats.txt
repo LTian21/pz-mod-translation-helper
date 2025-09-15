@@ -1,0 +1,280 @@
+module Base
+{
+
+	model 75grandPrixSeatfl
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_seat_fl,
+		texture = Vehicles/Vehicles_75grandPrix_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 75grandPrixSeatfr
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_seat_fl,
+		texture = Vehicles/Vehicles_75grandPrix_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 75grandPrixSeatrl
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_seat_rl,
+		texture = Vehicles/Vehicles_75grandPrix_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 75grandPrixSeatrr
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_seat_rl,
+		texture = Vehicles/Vehicles_75grandPrix_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+	model 75grandPrixHurstSeatfl
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_seat_fl,
+		texture = Vehicles/Vehicles_75grandPrix_Interior_red,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 75grandPrixHurstSeatfr
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_seat_fl,
+		texture = Vehicles/Vehicles_75grandPrix_Interior_red,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 75grandPrixHurstSeatrl
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_seat_rl,
+		texture = Vehicles/Vehicles_75grandPrix_Interior_red,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 75grandPrixHurstSeatrr
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_seat_rl,
+		texture = Vehicles/Vehicles_75grandPrix_Interior_red,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	
+	template vehicle PRX75Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 75grandPrixSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 75grandPrixSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 75grandPrixSeatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 75grandPrixSeatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.75grandPrixSeatFront,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.75grandPrixSeatRear,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+	template vehicle PRX75SeatsHurst
+	{
+		template! = PRX75Seats,
+
+		part SeatFrontLeft
+		{
+			model SeatFL
+			{
+				file = 75grandPrixHurstSeatfl,
+			}
+		}
+
+		part SeatFrontRight
+		{
+			model seatFR
+			{
+				file = 75grandPrixHurstSeatfr,
+			}
+		}
+
+		part SeatRearLeft
+		{
+			model seatRL
+			{
+				file = 75grandPrixHurstSeatrl,
+			}
+		}
+
+		part SeatRearRight
+		{
+			model seatRR
+			{
+				file = 75grandPrixHurstSeatrr,
+			}
+		}
+	}
+}
+

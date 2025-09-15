@@ -1,0 +1,60 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_GreyMilitaryCrate
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Grey Military Crate,
+			Icon		= location_military_generic_01_9,
+		}
+	}
+
+    entity GreyMilitaryCrate
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_GreyMilitaryCrate,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_military_generic_01_8,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_military_generic_01_9,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 250,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:8,
+            xpAward       = Woodwork:20,
+            category      = Containers_Crates,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_militaryCrateDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 10 [Base.Plank] flags[Prop2],
+                item 6 [Base.Nails],
+            }
+        }
+    }
+}

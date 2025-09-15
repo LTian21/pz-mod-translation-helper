@@ -1,0 +1,585 @@
+module Base
+{
+    model Vehicles_ATADodge
+    {
+        mesh = vehicles/ATA_Dodge_base|body,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.01,
+    }
+    
+    model ATADodge_Wheel
+    {
+        mesh = vehicles/ATA_Dodge_wheel,
+        texture = Vehicles/ATA_Dodge_wheel,
+        shader = basicEffect,
+        invertX = FALSE,
+        scale = 0.01,
+    }
+    
+    model ATADodge_Wheel_L
+    {
+        mesh = vehicles/ATA_Dodge_wheel,
+        texture = Vehicles/ATA_Dodge_wheel,
+        shader = basicEffect,
+        invertX = TRUE,
+        scale = 0.01,
+    }
+    
+    template vehicle ATADodge
+    {
+        mechanicType = 3,
+        offRoadEfficiency = 0.8,
+        engineRepairLevel = 6,
+        playerDamageProtection = 0.8,
+        engineRPMType = firebird,
+
+        model
+        {
+            file = Vehicles_ATADodge,
+            scale = 2.1700,
+            offset = 0.0000 0.0000 0.0000,
+        }
+
+        spawnOffsetY = 0.0,
+        textureMask = Vehicles/ATA_Dodge_mask,
+        textureLights = Vehicles/ATA_Dodge_light,
+        textureDamage1Overlay = Vehicles/ATA_Dodge_blood,
+        textureDamage2Overlay = Vehicles/ATA_Dodge_blood,
+        textureDamage1Shell = Vehicles/ATA_Dodge_damage1,
+        textureDamage2Shell = Vehicles/ATA_Dodge_damage2,
+        textureRust = Vehicles/ATA_Dodge_rust,
+
+        sound
+        {
+            engine = VehicleEngineSportsCar,
+            engineStart = VehicleEngineSportsCar,
+            engineTurnOff = VehicleEngineSportsCar,
+            horn = VehicleHornSportsCar,
+            ignitionFail = VehicleIgnitionFailSportsCar,
+        }
+    
+    
+        extents = 0.7281 0.4700 1.8986,
+        physicsChassisShape = 0.7281 0.4700 1.8986,
+        centerOfMassOffset = 0.0000 0.2350 -0.0369,
+        shadowExtents = 0.7952 1.9899,
+        shadowOffset = 0.0000 0.0000,
+        
+        mass = 800,
+        engineLoudness = 90,
+        engineQuality = 90,
+        maxSpeed = 120f,
+        gearRatioCount = 5,
+        gearRatioR = 3.5,
+        gearRatio1 = 4.11,
+        gearRatio2 = 2.50,
+        gearRatio3 = 1.65,
+        gearRatio4 = 1.25,
+        gearRatio5 = 0.80,
+        gearRatio5 = 0.60,
+        stoppingMovementForce = 2.0f,
+        rollInfluence = 0.7f,
+        steeringIncrement = 0.04,
+        steeringClamp = 0.3,
+        suspensionStiffness = 50,
+        suspensionCompression = 4.1,
+        suspensionDamping = 3.4,
+        maxSuspensionTravelCm = 20,
+        suspensionRestLength = 0.2f,
+        wheelFriction = 1.8f,
+        frontEndHealth = 150,
+        rearEndHealth = 150,
+        seats = 4,
+
+        wheel FrontLeft
+        {
+            front = true,
+            offset = 0.3088 0.0461 0.4608,
+            radius = 0.13f,
+            width = 0.2f,
+        }
+
+        wheel FrontRight
+        {
+            front = true,
+            offset = -0.3088 0.0461 0.4608,
+            radius = 0.13f,
+            width = 0.2f,
+        }
+
+        wheel RearLeft
+        {
+            front = false,
+            offset = 0.3088 0.0461 -0.5622,
+            radius = 0.13f,
+            width = 0.2f,
+        }
+
+        wheel RearRight
+        {
+            front = false,
+            offset = -0.3088 0.0461 -0.5622,
+            radius = 0.13f,
+            width = 0.2f,
+        }
+
+        template = PassengerSeat4,
+
+        passenger FrontLeft
+        {
+            position inside
+            {
+                offset = 0.1152 0.1797 -0.1152,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = 0.5484 -0.3041 -0.1429,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontLeft,
+            }
+        }
+
+        passenger FrontRight
+        {
+            position inside
+            {
+                offset = -0.1152 0.1797 -0.1152,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = -0.5484 -0.3041 -0.1429,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontRight,
+            }
+        }
+
+        passenger RearLeft
+        {
+            position inside
+            {
+                offset = 0.1152 0.1797 -0.4654,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+            }
+        }
+
+        passenger RearRight
+        {
+            position inside
+            {
+                offset = -0.1152 0.1797 -0.4654,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+            }
+        }
+
+        area Engine
+        {
+            xywh = 0.0000 1.1935 0.8018 0.4885,
+        }
+
+        area TruckBed
+        {
+            xywh = 0.0000 -1.1935 0.8018 0.4885,
+        }
+
+        area SeatFrontLeft
+        {
+            xywh = 0.6083 -0.1429 0.4885 0.4885,
+        }
+
+        area SeatFrontRight
+        {
+            xywh = -0.6083 -0.1429 0.4885 0.4885,
+        }
+
+        area GasTank
+        {
+            xywh = 0.6083 -0.5622 0.4885 0.4885,
+        }
+
+        area TireFrontLeft
+        {
+            xywh = 0.6083 0.5991 0.4885 0.4885,
+        }
+
+        area TireFrontRight
+        {
+            xywh = -0.6083 0.5991 0.4885 0.4885,
+        }
+
+        area TireRearLeft
+        {
+            xywh = 0.6083 -0.5622 0.4885 0.4885,
+        }
+
+        area TireRearRight
+        {
+            xywh = -0.6083 -0.5622 0.4885 0.4885,
+        }
+
+        area ATARoof
+        {
+            xywh = 0.0000 -0.1889 1.7419 0.6083,
+        }
+
+        area InstallWindshield
+        {
+            xywh = -0.6083 0.3180 0.4885 0.4885,
+        }
+
+        template = TrunkDoor,
+
+        part TrunkDoor
+        {
+            anim Open
+            {
+                sound = VehicleTrunkOpenSportsCar,
+            }
+
+            anim Close
+            {
+                sound = VehicleTrunkCloseSportsCar,
+            }
+
+            anim Lock
+            {
+                sound = LockVehicleDoorSportsCar,
+            }
+
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorSportsCar,
+            }
+
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedSportsCar,
+            }
+
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+                requireUninstalled = WindshieldRear;ATAInteractiveTrunkWindowRack,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+        }
+
+        template = Trunk/part/TruckBed,
+
+        part TruckBed
+        {
+            itemType = Base.SmallTrunk,
+        }
+
+        template = Seat/part/SeatFrontLeft,
+        template = Seat/part/SeatFrontRight,
+        template = Seat/part/SeatRearLeft,
+
+        part SeatRearLeft
+        {
+            area = SeatFrontLeft,
+        }
+
+        template = Seat/part/SeatRearRight,
+
+        part SeatRearRight
+        {
+            area = SeatFrontRight,
+        }
+
+        part Seat*
+        {
+            table install
+            {
+                skills = Mechanics:2,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:2,
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        template = Battery,
+        template = Engine,
+        template = Muffler,
+        
+        template = GasTank,
+        part GasTank
+        {
+            table install
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        part Muffler
+        {
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        part Heater
+        {
+            category = engine,
+
+            lua
+            {
+                update = Vehicles.Update.Heater,
+            }
+        }
+
+        part PassengerCompartment
+        {
+            category = nodisplay,
+
+            lua
+            {
+                update = Vehicles.Update.PassengerCompartment,
+            }
+        }
+
+        template = Door/part/DoorFrontLeft,
+        template = Door/part/DoorFrontRight,
+
+        part Door*
+        {
+            anim Open
+            {
+                sound = VehicleDoorOpenSportsCar,
+            }
+
+            anim Close
+            {
+                sound = VehicleDoorCloseSportsCar,
+            }
+
+            anim Lock
+            {
+                sound = LockVehicleDoorSportsCar,
+            }
+
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorSportsCar,
+            }
+
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedSportsCar,
+            }
+
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        template = Tire,
+
+        part TireFrontLeft
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATADodge_Wheel_L,
+            }
+
+            model ATAProtection
+            {
+                file = ATADodge_WheelProtection_L,
+            }
+        }
+
+        part TireRearLeft
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATADodge_Wheel_L,
+            }
+
+            model ATAProtection
+            {
+                file = ATADodge_WheelProtection_L,
+            }
+        }
+
+        part TireFrontRight
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATADodge_Wheel,
+            }
+
+            model ATAProtection
+            {
+                file = ATADodge_WheelProtection,
+            }
+        }
+
+        part TireRearRight
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATADodge_Wheel,
+            }
+
+            model ATAProtection
+            {
+                file = ATADodge_WheelProtection,
+            }
+        }
+
+        part Tire*
+        {
+            setAllModelsVisible = false,
+            table install
+            {
+                complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+            }
+            table uninstall
+            {
+                requireUninstalled = ATA2ProtectionWheels,
+                complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+            }
+            lua
+            {
+                create = Vehicles.Create.Tire,
+                init = ATATuning2.Init.TireNotAllModelsVisible,
+                checkOperate = Vehicles.CheckOperate.Tire,
+                update = Vehicles.Update.Tire,
+            }
+        }
+        template = Brake,
+
+        part Brake*
+        {
+            table install
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        template = Suspension,
+
+        part Suspension*
+        {
+            table install
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWheels,
+        template! = ATADodge_EngineDoor,
+        template! = ATADodge_Bullbar,
+        template! = ATADodge_ProtectionWindows,
+        template! = ATADodge_Bags,
+        
+        template = Headlight,
+        template = ATAHeadlights/part/ATAHeadlightsPopUP,
+        
+        template = GloveBox,
+        template = Radio,
+
+        part ATAHeadlightsPopUP
+        {
+            model Default
+            {
+                file = ATADodge_Headlights,
+                rotate = -90 0 0,
+            }
+
+            anim Close
+            {
+                anim = Lights_closing,
+                rate = 0.5,
+            }
+
+            anim Open
+            {
+                anim = Lights_closing,
+                reverse = TRUE,
+                rate = 0.5,
+            }
+
+            anim Closed
+            {
+                anim = Lights_closing,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = Lights_closing,
+                animate = FALSE,
+            }
+        }
+        
+        attachment trailer
+        {
+            offset = 0.0000 0.0461 -1.0276,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = -1.0000,
+        }
+
+        attachment trailerfront
+        {
+            offset = 0.0000 0.0461 0.9585,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = 1.0000,
+        }
+    }
+}

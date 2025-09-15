@@ -1,0 +1,504 @@
+module Base
+{
+	model 85buickLeSabreWindshieldaW
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_windshield_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+    model 85buickLeSabreWindshieldaM
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_windshield_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }    
+    model 85buickLeSabreWindowflaW
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_fl_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85buickLeSabreWindowflaM
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_fl_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85buickLeSabreWindowfraW
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_fr_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85buickLeSabreWindowfraM
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_fr_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85buickLeSabreWindowrlaW
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_rl_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85buickLeSabreWindowrlaM
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_rl_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85buickLeSabreWindowrraW
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_rr_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85buickLeSabreWindowrraM
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_rr_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+    model 85buickLeSabreWindshieldRearaW
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_windshield_rear_aw,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+    model 85buickLeSabreWindshieldRearaM
+    {
+        mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_windshield_rear_am,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle LES85WindshieldArmor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model LES85windaW
+				{
+                		file = 85buickLeSabreWindshieldaW,
+				}
+            model LES85windaM
+				{
+                		file = 85buickLeSabreWindshieldaM,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.85gmBbodyWindshieldArmorW;Base.85gmBbodyWindshieldArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LES85.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = LES85.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = LES85.Create.WindshieldArmor,
+					init = LES85.Init.WindshieldArmor,
+					}
+		}
+
+    }
+
+	template vehicle LES85SideArmor
+	{
+
+		part DAMNFrontLeftArmor
+        {
+
+			model LES85leftWindowaW
+				{
+                		file = 85buickLeSabreWindowflaW,
+				}
+            model LES85leftWindowaM
+				{
+                		file = 85buickLeSabreWindowflaM,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.85gmBbodyFrontWindowArmorW;Base.85gmBbodyFrontWindowArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LES85.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LES85.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = LES85.Create.FrontLeftArmor,
+					init = LES85.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model LES85rightWindowaW
+				{
+                		file = 85buickLeSabreWindowfraW,
+				}
+            model LES85rightWindowaM
+				{
+                		file = 85buickLeSabreWindowfraM,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.85gmBbodyFrontWindowArmorW;Base.85gmBbodyFrontWindowArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LES85.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LES85.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = LES85.Create.FrontRightArmor,
+					init = LES85.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model LES85leftWindowraW
+				{
+                		file = 85buickLeSabreWindowrlaW,
+				}
+            model LES85leftWindowraM
+				{
+                		file = 85buickLeSabreWindowrlaM,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = WindowRearLeft,
+			specificItem = false,
+			itemType = Base.85gmBbodyRearWindowArmorW;Base.85gmBbodyRearWindowArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LES85.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LES85.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = LES85.Create.RearLeftArmor,
+					init = LES85.Init.RearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model LES85rightWindowraW
+				{
+                		file = 85buickLeSabreWindowrraW,
+				}
+            model LES85rightWindowraM
+				{
+                		file = 85buickLeSabreWindowrraM,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = WindowRearRight,
+			specificItem = false,
+			itemType = Base.85gmBbodyRearWindowArmorW;Base.85gmBbodyRearWindowArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LES85.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LES85.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = LES85.Create.RearRightArmor,
+					init = LES85.Init.RearRightArmor,
+					}
+		}
+
+    }
+
+    template vehicle LES85WindshieldRearArmorSedan
+	{
+
+		part DAMNWindshieldRearArmor
+        	{
+
+			model LES85windraW
+				{
+                		file = 85buickLeSabreWindshieldRearaW,
+				}
+            model LES85windraM
+				{
+                		file = 85buickLeSabreWindshieldRearaM,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.85gmBbodyWindshieldRearArmorW;Base.85gmBbodyWindshieldRearArmorM,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LES85.InstallComplete.WindshieldRearArmorS,
+                	requireInstalled = WindshieldRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = LES85.UninstallComplete.WindshieldRearArmorS,
+            		}
+
+            		lua
+            		{
+					create = LES85.Create.WindshieldRearArmorS,
+					init = LES85.Init.WindshieldRearArmorS,
+					}
+		}
+	}
+
+    template vehicle LES85ArmorSedan
+	{
+        template! = LES85WindshieldArmor,
+        template! = LES85SideArmor,
+        template! = LES85WindshieldRearArmorSedan,
+    }
+
+}

@@ -1,0 +1,64 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Milling_Machine_Tower_Extension
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Milling Machine Tower Extension,
+			Icon		= Build_MillingMachineTowerExtension,
+		}
+	}
+
+    entity BuildMillingMachineTowerExtension
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Milling_Machine_Tower_Extension,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = industry_02_63,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = industry_02_62,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Electricity:1;MetalWelding:3,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPMillingMachineTowerExtension,
+            inputs
+            {
+                item 3 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SheetMetal],
+                item 2 [Base.SmallSheetMetal],
+                item 2 [Base.MetalBar],
+                item 2 [Base.Screws],
+                item 1 [Base.ElectricWire],
+                item 5 [Base.ElectronicsScrap],
+                item 3 [Base.WeldingRods],
+            }
+        }
+    }
+}

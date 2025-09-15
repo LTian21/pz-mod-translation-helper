@@ -1,0 +1,993 @@
+module Base
+{
+    model 84jeepXJWindowfla
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 84jeepXJWindowfra
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 84jeepXJWindowrla
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 84jeepXJWindowrra
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+   model 84jeepXJWindowbla
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_bl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 84jeepXJWindowbra
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_br_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 84jeepXJWindshielda
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_windshield_front0_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 84jeepXJWindshieldreara
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_windshield_rear0_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 84jeepXJWindowfla2
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_2window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 84jeepXJWindowfra2
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_2window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 84jeepXJWindowrla2
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_2window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 84jeepXJWindowrra2
+    	{
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_2window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle JP84Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model winda
+				{
+                		file = 84jeepXJWindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.84jeepXJWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = JP84.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindshieldArmor,
+					init = JP84.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model leftWindowa
+				{
+                		file = 84jeepXJWindowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.84jeepXJFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindowFrontLeftArmor,
+					init = JP84.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model rightWindowa
+				{
+                		file = 84jeepXJWindowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.84jeepXJFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindowFrontRightArmor,
+					init = JP84.Init.WindowFrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model leftWindowra
+				{
+                		file = 84jeepXJWindowrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = WindowRearLeft,
+			specificItem = false,
+			itemType = Base.84jeepXJRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindowRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindowRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindowRearLeftArmor,
+					init = JP84.Init.WindowRearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model rightWindowra
+				{
+                		file = 84jeepXJWindowrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = WindowRearRight,
+			specificItem = false,
+			itemType = Base.84jeepXJRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindowRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindowRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindowRearRightArmor,
+					init = JP84.Init.WindowRearRightArmor,
+					}
+		}
+
+		part DAMNBackLeftArmor
+        {
+
+			model winbla
+				{
+                		file = 84jeepXJWindowbla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.84jeepXJBackWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindowBackLeftArmor,
+                	requireInstalled = WindowBackLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindowBackLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindowBackLeftArmor,
+					init = JP84.Init.WindowBackLeftArmor,
+					}
+		}
+
+		part DAMNBackRightArmor
+        {
+
+			model winbra
+				{
+                		file = 84jeepXJWindowbra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.84jeepXJBackWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindowBackRightArmor,
+                	requireInstalled = WindowBackRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindowBackRightArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindowBackRightArmor,
+					init = JP84.Init.WindowBackRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model windra
+				{
+                		file = 84jeepXJWindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.84jeepXJWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindshieldRearArmor,
+					requireUninstalled = JP84SpareTireRear,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindshieldRearArmor,
+					init = JP84.Init.WindshieldRearArmor,
+			}
+		}
+	}
+
+    template vehicle JP84Armor2
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model winda
+				{
+                		file = 84jeepXJWindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.84jeepXJWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = JP84.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindshieldArmor,
+					init = JP84.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model leftWindowa
+				{
+                		file = 84jeepXJWindowfla2,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.84jeepXJFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindowFrontLeftArmor,
+					init = JP84.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model rightWindowa
+				{
+                		file = 84jeepXJWindowfra2,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.84jeepXJFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindowFrontRightArmor,
+					init = JP84.Init.WindowFrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model leftWindowra
+				{
+                		file = 84jeepXJWindowrla2,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = WindowRearLeft,
+			specificItem = false,
+			itemType = Base.84jeepXJRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindowRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindowRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindowRearLeftArmor,
+					init = JP84.Init.WindowRearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model rightWindowra
+				{
+                		file = 84jeepXJWindowrra2,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = WindowRearRight,
+			specificItem = false,
+			itemType = Base.84jeepXJRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindowRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindowRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindowRearRightArmor,
+					init = JP84.Init.WindowRearRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model windra
+				{
+                		file = 84jeepXJWindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.84jeepXJWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.WindshieldRearArmor,
+					requireUninstalled = DAMNSpareTireRear,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.WindshieldRearArmor,
+					init = JP84.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

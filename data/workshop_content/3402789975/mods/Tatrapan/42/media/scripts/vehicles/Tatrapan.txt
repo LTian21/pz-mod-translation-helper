@@ -1,0 +1,729 @@
+module Base
+{
+	model TatrapanBase
+	{
+		mesh = vehicles/Tatrapan|Body,
+		shader = vehicle_noreflect,
+		invertX = FALSE,
+		scale = 0.01,
+	}
+	model Tatrapan_Interior
+	{
+		mesh = vehicles/Tatrapan|Interior,
+		texture = Vehicles/TatrapanInterior,
+		shader = basicEffect,
+		scale = 0.01,
+	}
+	model Tatrapansfrontwheelleft
+	{
+		mesh = vehicles/Tatrapan|Cylinder.004,
+		texture = vehicles/Tatrapantires,
+		shader = basicEffect,
+		invertX = false,
+                scale = 0.01,
+	}
+	model Tatrapansfrontwheelright
+	{
+		mesh = vehicles/Tatrapan|Cylinder.004,
+		texture = vehicles/Tatrapantires,
+		shader = basicEffect,
+		invertX = true,
+                scale = 0.01,
+	}
+	model Tatrapansbackwheelleft
+	{
+		mesh = vehicles/Tatrapan|Cylinder.004,
+		texture = vehicles/Tatrapantires,
+		shader = basicEffect,
+		invertX = false,
+                scale = 0.01,
+	}
+	model Tatrapansbackwheelright
+	{
+		mesh = vehicles/Tatrapan|Cylinder.004,
+		texture = vehicles/Tatrapantires,
+		shader = basicEffect,
+		invertX = true,
+                scale = 0.01,
+	}
+	model Tatrapan_Hood
+	{
+		mesh = vehicles/Tatrapan|Hood,
+		shader = vehicle_noreflect,
+		static = FALSE,
+		invertX = FALSE,
+		scale = 0.01,
+                boneWeight = HoodBone 1.0,
+
+	}
+	vehicle Tatrapan
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 2,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.4,
+		engineRPMType = van,
+
+		model
+		{
+			file = TatrapanBase,
+			scale = 1.4494,
+			offset = 0.0000 0.0000 0.1449,
+			rotate = 0 0 0,
+		}
+
+		part TCLConfig
+		{
+			category = nodisplay,
+
+			table TCLConfig
+			{
+				animType = vanilla,
+			}
+		}
+
+		spawnOffsetY = 0,
+
+		skin
+		{
+			texture = Vehicles/TATRAPANTEXTURE,
+		}
+
+		skin
+		{
+			texture = Vehicles/TATRAPANTEXTUREUN,
+		}
+
+		skin
+		{
+			texture = Vehicles/TATRAPANTEXTURECAMO1,
+		}
+
+		skin
+		{
+			texture = Vehicles/TATRAPANTEXTURECAMO2,
+		}
+
+		skin
+		{
+			texture = Vehicles/TATRAPANTEXTURECAMO3,
+		}
+
+		textureRust = Vehicles/null,
+		textureMask = Vehicles/TatrapanMask,
+		textureLights = Vehicles/TatrapanLights,
+		textureDamage1Shell = Vehicles/TatrapabDamage1,
+		textureDamage2Shell = Vehicles/TatrapabDamage2,
+		textureDamage1Overlay = Vehicles/TatrapabDamage1,
+		textureDamage2Overlay = Vehicles/TatrapabDamage2,
+
+		sound
+		{
+			engine = VehicleEngineSUV,
+			engineStart = VehicleEngineSUV,
+			engineTurnOff = VehicleEngineSUV,
+			horn = VehicleHornSportsCar,
+			ignitionFail = VehicleIgnitionFailSUV,
+		}
+
+		extents = 1.5179 1.1315 4.8296,
+		mass = 1050,
+		physicsChassisShape = 1.5179 1.1315 4.8296,
+		centerOfMassOffset = 0.0069 0.5796 0.2691,
+		shadowExtents = 1.5671 5.1020,
+		shadowOffset = 0.0000 0.2622,
+		engineForce = 5250,
+		maxSpeed = 55f,
+		gearRatioCount = 4,
+		gearRatioR = 3.56,
+		gearRatio1 = 3.45,
+		gearRatio2 = 2.45,
+		gearRatio3 = 1.45,
+		gearRatio4 = 0.80,
+		engineLoudness = 110,
+		engineQuality = 87,
+		brakingForce = 60,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 0.40f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 65,
+		suspensionCompression = 4.80,
+		suspensionDamping = 3.80,
+		maxSuspensionTravelCm = 20,
+		suspensionRestLength = 0.16,
+		wheelFriction = 1.7f,
+		frontEndHealth = 6050,
+		rearEndHealth = 6050,
+                isSmallVehicle = false,
+		seats = 6,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.6347 -0.1449 1.5386,
+			radius = 0.40f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.6002 -0.1449 1.5386,
+			radius = 0.40f,
+			width = 0.2f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.6416 -0.1449 -1.4627,
+			radius = 0.40f,
+			width = 0.2f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.6071 -0.1449 -1.4627,
+			radius = 0.40f,
+			width = 0.2f,
+		}
+
+		template = PassengerSeat6,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorFrontLeft,
+
+			position inside
+			{
+				offset = 0.4140 0.6071 1.7042,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.0625 -0.4968 1.9525,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+
+			switchSeat RearLeft
+			{
+			}
+
+			switchSeat MiddleRight
+			{
+			}
+
+			switchSeat RearRight
+			{
+			}
+
+			switchSeat MiddleLeft
+			{
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorFrontRight,
+
+			position inside
+			{
+				offset = -0.3519 0.6071 1.7042,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.0349 -0.4968 1.9525,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+
+			switchSeat RearLeft
+			{
+			}
+
+			switchSeat MiddleRight
+			{
+			}
+
+			switchSeat RearRight
+			{
+			}
+
+			switchSeat MiddleLeft
+			{
+			}
+		}
+
+		passenger RearLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+                          
+			position inside
+			{
+				offset = -0.3588 0.5106 -1.3592,
+				rotate = 0.0000 0.9640 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.1104 -0.4071 -2.5390,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearLeft,
+			}
+
+
+
+			switchSeat FrontLeft
+			{
+			}
+
+			switchSeat FrontRight
+			{
+			}
+
+
+		}
+
+		passenger RearRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.4692 0.5106 -1.3592,
+				rotate = 0.0000 0.9640 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.0142 -0.4968 -0.7865,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearRight,
+			}
+
+
+
+			switchSeat FrontLeft
+			{
+			}
+
+			switchSeat FrontRight
+			{
+			}
+
+		}
+
+		passenger MiddleLeft
+		{
+			door =,
+
+			position inside
+			{
+				offset = -0.4485 0.5106 -0.3036,
+				rotate = 0.0000 -0.9640 0.0000,
+			}
+
+			position outside
+			{
+			}
+
+
+
+			switchSeat FrontLeft
+			{
+			}
+
+			switchSeat FrontRight
+			{
+			}
+
+
+		}
+
+		passenger MiddleRight
+		{
+			door =,
+
+			position inside
+			{
+				offset = 0.4761 0.5106 -0.3105,
+				rotate = 0.0000 0.9640 0.0000,
+			}
+
+			position outside
+			{
+			}
+
+
+
+			switchSeat FrontLeft
+			{
+			}
+
+			switchSeat FrontRight
+			{
+			}
+
+
+		}
+
+		area Engine
+		{
+			xywh = 1.0556 0.9728 0.5796 0.5796,
+		}
+
+		area TruckBed
+		{
+			xywh = -0.0069 -2.3113 1.4213 0.4692,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.0832 1.9732 0.6485 0.7865,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.0832 1.9939 0.6485 0.7865,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -1.0832 -0.5658 0.6485 0.8279,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 0.0000 -2.3803 0.8693 0.4692,
+		}
+
+	       area SeatMiddleRight
+		{
+			xywh = -1.0832 -0.5658 0.6485 0.8279,
+		}
+
+		area SeatMiddleLeft
+		{
+			xywh = 0.0000 -2.3803 0.8693 0.4692,
+		}
+
+		area GasTank
+		{
+			xywh = -1.0280 0.9797 0.5520 0.5520,
+		}
+
+		area ATARoof
+		{
+			xywh = 0.0069 -1.0142 2.1802 2.2078,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.5520 1.0004 0.0000 0.3450,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.5520 1.0004 0.0000 0.3450,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 0.5589 -0.7796 0.0000 0.3450,
+		}
+
+		area TireRearRight
+		{
+			xywh = -0.5589 -0.7796 0.0000 0.3450,
+		}
+
+		part GloveBox
+		{
+			model TatrapanInterior
+			{
+				file = Tatrapan_Interior,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			container
+			{
+				capacity = 15,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			area = GasTank,
+			category = gastank,
+			mechanicRequireKey = true,
+
+
+			container
+			{
+				capacity = 90,
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline,
+				conditionAffectsCapacity = false,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+				update = Vehicles.Update.GasTank,
+				checkEngine = Vehicles.CheckEngine.GasTank,
+			}
+
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+		template = Window/part/WindowRearRight,
+		template = Window/part/WindowRearLeft,
+
+		part Window*
+		{
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template! = Tatrapan_doors,
+		template! = Tatrapan_windows,
+		template! = Tatrapan_bumpers,
+		template! = Tatrapan_armor,
+		template! = Tatrapan_trunks,
+		template! = Tatrapan_seats,
+		template = Tire,
+		template = EngineDoor,
+		template! = Tatrapan_accesories,
+		template! = Tatrapan_windshields,
+
+		part EngineDoor
+		{
+			model EngineDoor
+			{
+				file = Tatrapan_Hood,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			anim Open
+			{
+				sound = VehicleHoodOpenVan,
+				anim = Hood_closing,
+				reverse = TRUE,
+				rate = 2.0,
+			}
+
+			anim Close
+			{
+				sound = VehicleHoodCloseVan,
+				anim = Hood_closing,
+				reverse = FALSE,
+				rate = 2.0,
+			}
+
+			anim Closed
+			{
+				anim = Hood_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = Hood_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Tatrapansfrontwheelleft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Tatrapansfrontwheelright,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Tatrapansbackwheelleft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Tatrapansbackwheelright,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+
+		attachment trailerfront
+		{
+			offset = 0.0000 0.0000 2.6356,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.0276 -2.4700,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+}

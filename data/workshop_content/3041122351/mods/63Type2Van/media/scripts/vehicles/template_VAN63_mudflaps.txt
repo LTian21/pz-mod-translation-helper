@@ -1,0 +1,72 @@
+module Base
+{
+
+	model 63Type2Vanmudflaps
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_mudflaps,
+		texture = Vehicles/Vehicles_63Type2Van_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	
+	template vehicle VAN63Mudflaps
+	{
+		part VAN63Mudflaps
+		{
+			
+			model VAN63mud0
+			{
+				file = 63Type2Vanmudflaps,
+			}
+			
+			area = GasTank,
+			itemType = Base.63Type2VanMudflaps0,
+			specificItem = false,
+			category = Other,
+			mechanicRequireKey = true,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = VAN63.InstallComplete.Mudflaps,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = VAN63.UninstallComplete.Mudflaps,
+			}
+			lua
+			{
+				init = VAN63.Init.Mudflaps,
+				create = VAN63.Create.Mudflaps,
+			}
+		}
+	}
+}
+

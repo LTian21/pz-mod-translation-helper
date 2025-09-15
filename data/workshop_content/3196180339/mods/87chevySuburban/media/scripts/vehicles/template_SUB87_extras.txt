@@ -1,0 +1,190 @@
+module Base
+{
+
+	model 87chevySideStorage
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_extra_storage,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87chevySuburbanSideCan
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_gascan,
+		texture = Vehicles/Items_USMIL_gasCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 87chevySuburbanSideCanStrap
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_straps_gascan,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SUB87Extras
+	{
+		part SUB87SideStorage
+		{
+
+			model SUB87Sidestorage0
+				{
+                		file = 87chevySideStorage,
+				}
+
+			category = Other,
+			area = SideStorage,
+			itemType = Base.87chevySuburbanSideStorage,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = SUB87.ContainerAccess.SideStorage,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = SUB87WindowBackRightArmor,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+		}
+
+		part SUB87SideCan0
+        {
+				model sidecan0
+				{
+                	file = 87chevySuburbanSideCan,
+				}
+
+				model sidecanstrap0
+				{
+                	file = 87chevySuburbanSideCanStrap,
+				}
+
+				category = Other,
+				area = TireRearRight,
+				specificItem = false,
+				itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = SUB87WindowBackLeftArmor,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+		}
+
+		part SUB87SideCan1
+        {
+				model sidecan1
+				{
+                	file = 87chevySuburbanSideCan,
+                	offset = 0.0000 0.0000 -0.4000,
+				}
+
+				model sidecanstrap1
+				{
+                	file = 87chevySuburbanSideCanStrap,
+                	offset = 0.0000 0.0000 -0.4000,
+				}
+
+				category = Other,
+				area = TireRearRight,
+				specificItem = false,
+				itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = SUB87WindowBackLeftArmor,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+		}
+	}
+
+}
+

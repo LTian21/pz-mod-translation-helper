@@ -1,0 +1,83 @@
+module TLOU
+{
+	item InfectionScanner
+    {
+        DisplayName	=	Infection Scanner,
+        Tooltip = Tooltip_item_InfectionScanner,
+        Icon	=	InfectionScanner,
+        DisplayCategory = Electronics,
+        Weight	=	0.3,
+        Type	=	Drainable,
+        UseDelta	=	0.0003,
+        ActivatedItem	=	TRUE,
+        UseWhileEquipped	=	TRUE,
+        DisappearOnUse = FALSE,
+        MetalValue = 10,
+        cantBeConsolided = TRUE,
+        OnCreate = OnCreateInfectionScanner,
+        StaticModel = InfectionScanner_hands,
+            primaryAnimMask = HoldingUmbrellaRight,
+
+        WorldStaticModel = InfectionScanner,
+        AttachmentType = Walkie,
+    }
+
+	model InfectionScanner_hands
+	{
+		mesh = scanneroff_hands,
+		texture = scanner_Color,
+	}
+
+	model InfectionScanner
+	{
+		mesh = WorldItems/scanneroff,
+		texture = scanneroff_Color,
+    }
+
+    recipe Dismantle Infection Scanner
+    {
+       destroy InfectionScanner,
+       keep [Recipe.GetItemTypes.Screwdriver],
+
+       Result:ElectronicsScrap,
+       Time:150.0,
+       OnTest:Recipe.OnTest.DismantleElectronics,
+       OnCreate:Recipe.OnCreate.DismantleInfectionScanner,
+       OnGiveXP:Recipe.OnGiveXP.DismantleInfectionScanner,
+       Category:Electrical,
+       AnimNode:Disassemble,
+       Prop1:Screwdriver,
+       Prop2:InfectionScanner,
+       Sound:Dismantle,
+    }
+
+    sound InfectionScanner_start
+    {
+        category = InfectionScanner, loop = false, is3D = true,
+        clip { file = media/sound/InfectionScanner/InfectionScanner_start.ogg, distanceMax = 2, volume = 0.80, }
+    }
+
+    sound InfectionScanner_run
+    {
+        category = InfectionScanner, loop = false, is3D = true,
+        clip { file = media/sound/InfectionScanner/InfectionScanner_run.ogg, distanceMax = 2, volume = 0.80, }
+    }
+
+    sound InfectionScanner_modeSwitch
+    {
+        category = InfectionScanner, loop = false, is3D = true,
+        clip { file = media/sound/InfectionScanner/InfectionScanner_modeSwitch.ogg, distanceMax = 2, volume = 0.80, }
+    }
+
+    sound InfectionScanner_SporeZone1
+    {
+        category = InfectionScanner, loop = false, is3D = true,
+        clip { file = media/sound/InfectionScanner/InfectionScanner_SporeZone1.ogg, distanceMax = 2, volume = 0.80, }
+    }
+
+    sound InfectionScanner_SporeZone2
+    {
+        category = InfectionScanner, loop = false, is3D = true,
+        clip { file = media/sound/InfectionScanner/InfectionScanner_SporeZone2.ogg, distanceMax = 2, volume = 0.80, }
+    }
+}

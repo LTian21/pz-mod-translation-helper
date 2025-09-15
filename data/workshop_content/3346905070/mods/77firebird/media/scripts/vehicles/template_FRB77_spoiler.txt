@@ -1,0 +1,86 @@
+module Base
+{
+	
+	model 77firebirdSpoiler
+	{
+		mesh = vehicles/Vehicles_77firebird_Body|trans77_spoiler,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle FRB77Spoiler
+		{
+		part FRB77Spoiler
+       		{
+
+            model FRB77Spoiler0
+			{
+                	file = 77firebirdSpoiler,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            specificItem = false,
+            itemType = Base.77firebirdSpoiler,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+	}
+
+    template vehicle FRB77SpoilerOFF
+		{
+            template! = FRB77Spoiler,
+
+		part FRB77Spoiler
+       	{
+            lua
+            {
+                create = DAMN.Create.Blank,
+            }
+        }
+	}
+}

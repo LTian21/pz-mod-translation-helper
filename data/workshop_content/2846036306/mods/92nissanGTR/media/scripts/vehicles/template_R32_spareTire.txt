@@ -1,0 +1,45 @@
+module Base
+{
+
+	template vehicle R32SpareTires
+	{
+		part R32SpareTire
+        	{
+
+			category = tire,
+			area = TruckBed,
+            specificItem = false,
+			itemType = Base.R32Tire0;Base.R32Tire1;Base.R32Tire2;Base.R32TireA,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = R32.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = R32.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = R32.Create.SpareTire,
+				init = R32.Init.SpareTire,
+				}
+		}
+	}
+}
+

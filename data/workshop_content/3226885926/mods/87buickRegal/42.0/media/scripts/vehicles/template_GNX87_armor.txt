@@ -1,0 +1,424 @@
+module Base
+{
+	model 87buickRegalWindshieldA
+    	{
+        mesh = vehicles/Vehicles_87buickRegal_Body|gnx_windshield_frontA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 87buickRegalWindowflA
+    	{
+        mesh = vehicles/Vehicles_87buickRegal_Body|gnx_window_flA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 87buickRegalWindowfrA
+    	{
+        mesh = vehicles/Vehicles_87buickRegal_Body|gnx_window_frA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 87buickRegalWindowrlA
+    	{
+        mesh = vehicles/Vehicles_87buickRegal_Body|gnx_window_rlA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 87buickRegalWindowrrA
+    	{
+        mesh = vehicles/Vehicles_87buickRegal_Body|gnx_window_rrA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 87buickRegalWindshieldrearA
+    	{
+        mesh = vehicles/Vehicles_87buickRegal_Body|gnx_windshield_rearA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle GNX87Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model GNX87winda0
+				{
+                		file = 87buickRegalWindshieldA,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87buickRegalWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GNX87.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = GNX87.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = GNX87.Create.WindshieldArmor,
+					init = GNX87.Init.WindshieldArmor,
+					}
+			}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model GNX87leftdoora
+				{
+                		file = 87buickRegalWindowflA,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.87buickRegalFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GNX87.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = GNX87.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = GNX87.Create.FrontLeftArmor,
+					init = GNX87.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model GNX87rightdoora
+				{
+                		file = 87buickRegalWindowfrA,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.87buickRegalFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GNX87.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = GNX87.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = GNX87.Create.FrontRightArmor,
+					init = GNX87.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model GNX87leftdoorra
+				{
+                		file = 87buickRegalWindowrlA,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87buickRegalRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GNX87.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = GNX87.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = GNX87.Create.RearLeftArmor,
+					init = GNX87.Init.RearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model GNX87rightdoorra
+				{
+                		file = 87buickRegalWindowrrA,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87buickRegalRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GNX87.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = GNX87.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = GNX87.Create.RearRightArmor,
+					init = GNX87.Init.RearRightArmor,
+					}
+			}
+
+			part DAMNWindshieldRearArmor
+        {
+
+				model GNX87windra
+				{
+                		file = 87buickRegalWindshieldrearA,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87buickRegalWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GNX87.InstallComplete.WindshieldRearArmor,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = GNX87.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = GNX87.Create.WindshieldRearArmor,
+					init = GNX87.Init.WindshieldRearArmor,
+					}
+			}
+		}
+
+}

@@ -1,0 +1,198 @@
+module Base
+{
+
+	model 63Type2Vanroofrack0
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_roofrack0,
+		texture = Vehicles/Vehicles_63Type2VanMilitary_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 63Type2Vanroofrack1
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_roofrack1,
+		texture = Vehicles/Vehicles_63Type2VanMilitary_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle VAN63Roofrack
+	{
+		part VAN63Roofrack
+		{
+
+			model VAN63Roofrack0
+				{
+                		file = 63Type2Vanroofrack0,
+				}
+
+			model VAN63Roofrack1
+				{
+                		file = 63Type2Vanroofrack1,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.63Type2VanRoofrackSmall;Base.63Type2VanRoofrackLarge,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VAN63.InstallComplete.Roofrack,
+
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = VAN63.UninstallComplete.Roofrack,
+					requireEmpty = true,
+					requireUninstalled = DAMNSpareRoof,
+
+            		}
+
+            lua
+            	{
+            		create = VAN63.Create.Roofrack,
+            		init = VAN63.Init.Roofrack,
+				}
+		}
+	}
+
+	template vehicle VAN63RoofrackM
+	{
+		part VAN63Roofrack
+		{
+
+			model VAN63Roofrack0
+				{
+                		file = 63Type2Vanroofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.63Type2VanRoofrackSmall,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VAN63.InstallComplete.RoofrackM,
+
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = VAN63.UninstallComplete.RoofrackM,
+					requireEmpty = true,
+					requireUninstalled = DAMNSpareRoof,
+
+            		}
+
+            lua
+            	{
+            		create = VAN63.Create.RoofrackM,
+            		init = VAN63.Init.RoofrackM,
+				}
+		}
+	}
+
+	template vehicle VAN63WeldedRoofrack
+	{
+		part VAN63WeldedRoofrack
+		{
+
+			category = bodywork,
+			area = Roofrack,
+			itemType = Base.63Type2VanRoofrackLarge,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+            lua
+            	{
+            		create = Vehicles.Create.Default,
+				}
+		}
+	}
+
+}
+

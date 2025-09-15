@@ -1,0 +1,140 @@
+module Base
+{
+
+    model 90fordF350ambulancewindshield
+    {
+        mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 90fordF350ambulancewindshieldRear
+    {
+        mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_windows_rear,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle F350Windshield
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 90fordF350ambulancewindshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.90fordF350Windshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = F350WindshieldArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = 90fordF350ambulancewindshieldRear,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.90fordF350WindowsBack,
+            area = TruckBed,
+            parent = DoorRear,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                requireInstalled = DoorRear,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = F350WindshieldRearArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+}

@@ -1,0 +1,63 @@
+module Base
+{
+	template vehicle FRB77SpareTires
+	{
+		part DAMNSpareTire
+        	{
+            model Spare1
+			{
+				file = 77firebirdWheelL,
+                offset = -0.3889 0.2333 -1.3869,
+				rotate = 0.0000 0.0000 90.0000,
+			}
+
+			model Spare2
+			{
+				file = 77firebirdTAWheelL,
+                offset = -0.3889 0.2333 -1.3869,
+				rotate = 0.0000 0.0000 90.0000,
+			}
+            model Spare3
+			{
+				file = 77firebirdWheel1L,
+                offset = -0.3889 0.2333 -1.3869,
+				rotate = 0.0000 0.0000 90.0000,
+			}
+
+			category = tire,
+			area = TruckBed,
+            specificItem = false,
+			itemType = Base.77firebirdTire3;Base.77firebirdTATire3;damnCraft.SmallTire1,
+			mechanicRequireKey = false,
+            durability = 2,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB77.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = FRB77.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = FRB77.Create.SpareTire,
+                init = FRB77.Init.SpareTire,
+				}
+		}
+	}
+}

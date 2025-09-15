@@ -1,0 +1,234 @@
+module Base
+{
+
+	model 83amgeneralM923seatfl
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|USMIL_seatFL,
+		texture = Vehicles/Items_USMIL_seat0,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 83amgeneralM923seatfr
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|USMIL_seatFL,
+		texture = Vehicles/Items_USMIL_seat0,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	model 83amgeneralM923seatb
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|USMIL_seat2ML,
+		texture = Vehicles/Items_USMIL_seat123,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 83amgeneralM923seatbr
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|USMIL_seat2RL,
+		texture = Vehicles/Items_USMIL_seat123,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	model 83amgeneralM923seatbl
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|USMIL_seat2RL,
+		texture = Vehicles/Items_USMIL_seat123,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	template vehicle M923Seats
+	{
+		part SeatFrontLeft
+		{
+			model SeatFL
+			{
+				file = 83amgeneralM923seatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			specificItem = false,
+			itemType = USMIL.Seat0,
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 83amgeneralM923seatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			specificItem = false,
+			itemType = USMIL.Seat0,
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatMiddleLeft
+		{
+
+			model seatML
+			{
+				file = 83amgeneralM923seatfl,
+				offset = -0.5824 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			specificItem = false,
+			itemType = USMIL.Seat0,
+			area = SeatFrontRight,
+			container
+			{
+				seat = MiddleLeft,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatMiddleRight
+		{
+
+			model seatMR
+			{
+				file = 83amgeneralM923seatb,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+            specificItem = false,
+			itemType = USMIL.Seat2,
+			area = SeatMiddleRight,
+			container
+			{
+				seat = MiddleRight,
+			}
+
+			table install
+				{
+				requireInstalled = M923GuntruckArmor,
+				}
+		}
+
+		part SeatRearLeft
+		{
+			model seatRL
+			{
+				file = 83amgeneralM923seatbl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+            specificItem = false,
+			itemType = USMIL.Seat2,
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+
+			table install
+				{
+				requireInstalled = M923GuntruckArmor,
+				}
+		}
+
+		part SeatRearRight
+		{
+			model seatRR
+			{
+				file = 83amgeneralM923seatbR,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+            specificItem = false,
+			itemType = USMIL.Seat2,
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+
+			table install
+				{
+				requireInstalled = M923GuntruckArmor,
+				}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+		}
+	}
+}
+

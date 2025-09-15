@@ -1,0 +1,82 @@
+module Base
+{
+    template vehicle Freezers
+    {
+        part FreezerFrontLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part FreezerFrontRight
+        {
+            area = SeatFrontRight,
+        }
+        part FreezerMiddleLeft
+        {
+            area = SeatMiddleLeft,
+        }
+        part FreezerMiddleRight
+        {
+            area = SeatMiddleRight,
+        }
+        part FreezerRearLeft
+        {
+            area = SeatRearLeft,
+        }
+        part FreezerRearRight
+        {
+            area = SeatRearRight,
+        }
+        part Freezer*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.TransportFreezer,
+            container
+            {
+                capacity = 20,
+                test = CommonTemplates.ContainerAccess.ContainerByName,
+            }
+            table install
+            {
+                items
+                {
+                        1
+                        {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                        }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.InstallTest.multiRequire,
+            }
+            table uninstall
+            {
+                items
+                {
+                        1
+                        {
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                equip = primary,
+                        }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+            lua
+            {
+                create = CommonTemplates.Create.Freezer,
+                init = CommonTemplates.Init.Freezer,
+                update = CommonTemplates.Update.Freezer,
+            }
+        }
+    }
+}
+

@@ -1,0 +1,221 @@
+module Base
+{
+	model 82jeepJ10windshielda
+    	{
+        mesh = vehicles/Vehicles_82jeepJ10_Body|j10_armor_w,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 82jeepJ10windowfla
+    	{
+        mesh = vehicles/Vehicles_82jeepJ10_Body|j10_armor_wfl,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 82jeepJ10windowfra
+    	{
+        mesh = vehicles/Vehicles_82jeepJ10_Body|j10_armor_wfr,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle JP82Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model JP82winda
+				{
+                		file = 82jeepJ10windshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.80sPickupWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP82.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = JP82.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = JP82.Create.WindshieldArmor,
+					init = JP82.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        	{
+
+			model JP82leftwina
+				{
+                		file = 82jeepJ10windowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.80sPickupWindowFrontArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP82.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP82.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = JP82.Create.WindowFrontLeftArmor,
+					init = JP82.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        	{
+
+			model JP82rightwina
+				{
+                		file = 82jeepJ10windowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.80sPickupWindowFrontArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP82.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP82.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = JP82.Create.WindowFrontRightArmor,
+					init = JP82.Init.WindowFrontRightArmor,
+					}
+				}
+
+		}
+
+}

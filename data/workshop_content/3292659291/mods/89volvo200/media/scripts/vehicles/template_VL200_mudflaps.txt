@@ -1,0 +1,88 @@
+module Base
+{
+	model 89volvo240MudflapsL
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_mudflaps,
+		texture = Vehicles/Vehicles_89volvo200_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 89volvo240MudflapsR
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_mudflaps,
+		texture = Vehicles/Vehicles_89volvo200_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle VL200Mudflaps
+		{
+		part VL200Mudflaps
+        	{
+
+			model MudflapsL
+				{
+                		file = 89volvo240MudflapsL,
+				}
+
+            model MudflapsR
+				{
+                		file = 89volvo240MudflapsR,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.89volvo240Mudflaps1,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VL200.InstallComplete.Mudflaps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = VL200.UninstallComplete.Mudflaps,
+            		}
+
+            		lua
+            		{
+					create = VL200.Create.Mudflaps,
+					init = VL200.Init.Mudflaps,
+					}
+			}
+	}
+}

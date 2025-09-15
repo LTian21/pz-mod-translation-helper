@@ -1,0 +1,405 @@
+module Base
+{
+
+	model 93chevySuburbanSidesteps0
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_sidesteps,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model 93chevySuburbanSidesteps1
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_sidesteps1,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+    model 93chevySuburbanSidesteps1S
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_sidesteps1S,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+    model 93chevySuburbanSidesteps1M
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_sidesteps1M,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+    model 93chevySuburbanSidesteps1L
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_sidesteps1L,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+    model 93chevySuburbanSidesteps2S
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_sidesteps2S,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+    model 93chevySuburbanSidesteps2L
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_sidesteps2L,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle SUB93SideSteps
+	{
+		part SUB93SideSteps
+        	{
+
+			model SUB93SideSteps0
+				{
+                		file = 93chevySuburbanSidesteps0,
+				}
+            model SUB93SideSteps1
+				{
+                		file = 93chevySuburbanSidesteps1,
+				}
+            model SUB93SideSteps2
+				{
+                		file = 93chevySuburbanSidesteps2L,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.93chevySuburbanSideSteps;Base.93chevySuburbanSideStepsMetal;Base.93chevySuburbanSideStepsPipes,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.SideSteps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = SUB93.UninstallComplete.SideSteps,
+
+            		}
+
+	            lua
+	            {
+				create = SUB93.Create.SideSteps,
+				init = SUB93.Init.SideSteps,
+				}
+		}
+	}
+
+    template vehicle SUB93SideStepsOff
+	{
+		part SUB93SideSteps
+        	{
+
+			model SUB93SideSteps0
+				{
+                		file = 93chevySuburbanSidesteps0,
+				}
+            model SUB93SideSteps1
+				{
+                		file = 93chevySuburbanSidesteps1,
+				}
+            model SUB93SideSteps2
+				{
+                		file = 93chevySuburbanSidesteps2L,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.93chevySuburbanSideSteps;Base.93chevySuburbanSideStepsMetal;Base.93chevySuburbanSideStepsPipes,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.SideStepsNA,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = SUB93.UninstallComplete.SideStepsNA,
+
+            		}
+
+	            lua
+	            {
+				create = SUB93.Create.SideStepsNA,
+				init = SUB93.Init.SideStepsNA,
+				}
+		}
+	}
+
+    template vehicle SIL93SideStepsL
+	{
+		part SUB93SideSteps
+        	{
+
+            model SUB93SideSteps1
+				{
+                		file = 93chevySuburbanSidesteps1L,
+				}
+            model SUB93SideSteps2
+				{
+                		file = 93chevySuburbanSidesteps2L,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.93chevySuburbanSideStepsMetal;Base.93chevySuburbanSideStepsPipes,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.SideStepsS,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = SUB93.UninstallComplete.SideStepsS,
+
+            		}
+
+	            lua
+	            {
+				create = SUB93.Create.SideStepsS,
+				init = SUB93.Init.SideStepsS,
+				}
+		}
+	}
+
+    template vehicle SIL93SideStepsM
+	{
+        template! = SIL93SideStepsL,
+
+		part SUB93SideSteps
+        	{
+
+            model SUB93SideSteps1
+				{
+                		file = 93chevySuburbanSidesteps1M,
+				}
+            model SUB93SideSteps2
+				{
+                		file = 93chevySuburbanSidesteps2S,
+				}
+		}
+	}
+
+    template vehicle SIL93SideStepsS
+	{
+        template! = SIL93SideStepsL,
+
+		part SUB93SideSteps
+        	{
+
+            model SUB93SideSteps1
+				{
+                		file = 93chevySuburbanSidesteps1S,
+				}
+            model SUB93SideSteps2
+				{
+                		file = 93chevySuburbanSidesteps2S,
+				}
+		}
+	}
+
+    template vehicle SIL93SideStepsLOFF
+	{
+		part SUB93SideSteps
+        	{
+
+            model SUB93SideSteps1
+				{
+                		file = 93chevySuburbanSidesteps1L,
+				}
+            model SUB93SideSteps2
+				{
+                		file = 93chevySuburbanSidesteps2L,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.93chevySuburbanSideStepsMetal;Base.93chevySuburbanSideStepsPipes,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.SideStepsNA,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = SUB93.UninstallComplete.SideStepsNA,
+
+            		}
+
+	            lua
+	            {
+				create = SUB93.Create.SideStepsNA,
+				init = SUB93.Init.SideStepsNA,
+				}
+		}
+	}
+
+    template vehicle SIL93SideStepsMOFF
+	{
+        template! = SIL93SideStepsLOFF,
+
+		part SUB93SideSteps
+        	{
+
+            model SUB93SideSteps1
+				{
+                		file = 93chevySuburbanSidesteps1M,
+				}
+            model SUB93SideSteps2
+				{
+                		file = 93chevySuburbanSidesteps2S,
+				}
+		}
+	}
+
+    template vehicle SIL93SideStepsSOFF
+	{
+        template! = SIL93SideStepsLOFF,
+
+		part SUB93SideSteps
+        	{
+
+            model SUB93SideSteps1
+				{
+                		file = 93chevySuburbanSidesteps1S,
+				}
+            model SUB93SideSteps2
+				{
+                		file = 93chevySuburbanSidesteps2S,
+				}
+		}
+	}
+
+}

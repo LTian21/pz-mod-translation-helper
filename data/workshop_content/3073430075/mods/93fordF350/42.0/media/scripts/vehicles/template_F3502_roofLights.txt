@@ -1,0 +1,76 @@
+module Base
+{
+	model 93fordF350RoofLights
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_roof_lights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle F3502RoofLights
+		{
+		part DAMNRoofLights
+        	{
+
+			model DAMNRoofLights0
+				{
+                	file = 93fordF350RoofLights,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.93fordF350RoofLights,
+			mechanicRequireKey = false,
+            durability = 2,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.RoofLights,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 500,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = F3502.UninstallComplete.RoofLights,
+
+            		}
+
+            	lua
+            		{
+					create = F3502.Create.RoofLights,
+					init = F3502.Init.RoofLights,
+					}
+		}
+	}
+
+		
+}

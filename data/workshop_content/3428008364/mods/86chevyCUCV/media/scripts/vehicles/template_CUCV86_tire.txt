@@ -1,0 +1,415 @@
+module Base
+{
+
+	model 86chevyCUCVWheel1FL
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Wheels|86cucv_wheel1f,
+		texture = vehicles/Vehicles_86chevyCUCV_Wheel1,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 86chevyCUCVWheel1FR
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Wheels|86cucv_wheel1f,
+		texture = vehicles/Vehicles_86chevyCUCV_Wheel1,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 86chevyCUCVWheel1RL
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Wheels|86cucv_wheel1r,
+		texture = vehicles/Vehicles_86chevyCUCV_Wheel1,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 86chevyCUCVWheel1RR
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Wheels|86cucv_wheel1r,
+		texture = vehicles/Vehicles_86chevyCUCV_Wheel1,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 86chevyCUCVWheel2FL
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Wheels|86cucv_wheel2f,
+		texture = vehicles/Vehicles_86chevyCUCV_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 86chevyCUCVWheel2FR
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Wheels|86cucv_wheel2f,
+		texture = vehicles/Vehicles_86chevyCUCV_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 86chevyCUCVWheel2RL
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Wheels|86cucv_wheel2r,
+		texture = vehicles/Vehicles_86chevyCUCV_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 86chevyCUCVWheel2RR
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Wheels|86cucv_wheel2r,
+		texture = vehicles/Vehicles_86chevyCUCV_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 86chevyCUCVWheel2DRL
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Wheels|86cucv_wheel2rd,
+		texture = vehicles/Vehicles_86chevyCUCV_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 86chevyCUCVWheel2DRR
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Wheels|86cucv_wheel2rd,
+		texture = vehicles/Vehicles_86chevyCUCV_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle CUCV86Tires
+	{
+		part TireFrontLeft
+		{
+            model Tire1
+			{
+				file = 86chevyCUCVWheel1FL,
+			}
+            model Tire2
+			{
+				file = 86chevyCUCVWheel2FL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = CUCV86.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = CUCV86.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CUCV86.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model Tire1
+			{
+				file = 86chevyCUCVWheel1FR,
+			}
+            model Tire2
+			{
+				file = 86chevyCUCVWheel2FR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = CUCV86.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = CUCV86.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CUCV86.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model Tire1
+			{
+				file = 86chevyCUCVWheel1RL,
+			}
+            model Tire2
+			{
+				file = 86chevyCUCVWheel2RL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = CUCV86.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+
+            table uninstall
+			{
+				complete = CUCV86.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CUCV86.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model Tire1
+			{
+				file = 86chevyCUCVWheel1RR,
+			}
+            model Tire2
+			{
+				file = 86chevyCUCVWheel2RR,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = CUCV86.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = CUCV86.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CUCV86.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.86chevyCUCVTire1;Base.86chevyCUCVTire2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+
+    template vehicle M1028Tires
+	{
+		part TireFrontLeft
+		{
+            model Tire2
+			{
+				file = 86chevyCUCVWheel2FL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+            specificItem = false,
+            itemType = Base.86chevyCUCVTire2,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model Tire2
+			{
+				file = 86chevyCUCVWheel2FR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+            specificItem = false,
+            itemType = Base.86chevyCUCVTire2,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model Tire2D
+			{
+				file = 86chevyCUCVWheel2DRL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+            specificItem = false,
+            itemType = Base.86chevyCUCVDoubleTires2,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+            model Tire2D
+			{
+				file = 86chevyCUCVWheel2DRR,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+            specificItem = false,
+            itemType = Base.86chevyCUCVDoubleTires2,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+	}
+}

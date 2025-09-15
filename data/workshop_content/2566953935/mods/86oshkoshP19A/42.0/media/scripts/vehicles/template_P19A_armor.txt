@@ -1,0 +1,221 @@
+module Base
+{
+    model 86oshkoshP19AWindshielda
+    {
+        mesh = vehicles/Vehicles_86oshkoshP19A_Body|p19a_windshield_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+    }
+
+	model 86oshkoshP19Adoorfla
+	{
+		mesh = vehicles/Vehicles_86oshkoshP19A_Body|p19a_door_fl_a,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fl_bone 1.0,
+	}
+
+	model 86oshkoshP19Adoorfra
+	{
+		mesh = vehicles/Vehicles_86oshkoshP19A_Body|p19a_door_fr_a,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fr_bone 1.0,
+	}
+
+	template vehicle P19AArmor
+	{
+        part DAMNWindshieldArmor
+        	{
+
+			model winda
+				{
+                		file = 86oshkoshP19AWindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.P19AWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = P19A.InstallComplete.WindshieldArmor,
+                    requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 1100,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			        complete = P19A.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+                    create = P19A.Create.WindshieldArmor,
+                    init = P19A.Init.WindshieldArmor,
+                    }
+		}
+
+        part DAMNFrontLeftArmor
+        {
+
+			model leftWindowa
+				{
+                		file = 86oshkoshP19Adoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.P19ACarFrontDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = P19A.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = P19A.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = P19A.Create.FrontLeftArmor,
+					init = P19A.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model rightWindowa
+				{
+                		file = 86oshkoshP19Adoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.P19ACarFrontDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = P19A.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = P19A.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = P19A.Create.FrontRightArmor,
+					init = P19A.Init.FrontRightArmor,
+					}
+		}
+	}
+}

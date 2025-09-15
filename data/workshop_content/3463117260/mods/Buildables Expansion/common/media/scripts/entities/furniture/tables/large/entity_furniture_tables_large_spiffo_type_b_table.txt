@@ -1,0 +1,60 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_SpiffoTypeBLargeTable
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Spiffo Type B Large Table,
+			Icon		= location_restaurant_spiffos_02_33,
+		}
+	}
+
+    entity SpiffoTypeBLargeTable
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_SpiffoTypeBLargeTable,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_restaurant_spiffos_02_32 location_restaurant_spiffos_02_33,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_restaurant_spiffos_02_35,
+                    row = location_restaurant_spiffos_02_34,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 250,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:5,
+            category      = Furniture_Tables,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_tableDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

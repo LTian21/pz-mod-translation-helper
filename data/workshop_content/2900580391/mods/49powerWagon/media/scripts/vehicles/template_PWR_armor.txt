@@ -1,0 +1,428 @@
+module Base
+{
+    model 49powerWagondoorfla
+    	{
+        mesh = vehicles/Vehicles_49powerWagon_Body|power_armor_fl,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 49powerWagondoorfra
+    	{
+        mesh = vehicles/Vehicles_49powerWagon_Body|power_armor_fr,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 49powerWagondoorrla
+    	{
+        mesh = vehicles/Vehicles_49powerWagon_Body|power_armor_rl,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 49powerWagondoorrra
+    	{
+        mesh = vehicles/Vehicles_49powerWagon_Body|power_armor_rr,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 49powerWagonwindshielda
+    	{
+        mesh = vehicles/Vehicles_49powerWagon_Body|power_armor_w,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 49powerWagonwindshieldreara
+    	{
+        mesh = vehicles/Vehicles_49powerWagon_Body|power_armor_wr,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle PWRArmor
+		{
+		part PWRWindshieldArmor
+        	{
+
+			model PWRwinda
+				{
+                		file = 49powerWagonwindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.49powerWagonWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PWR.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = PWR.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = PWR.Create.WindshieldArmor,
+					init = PWR.Init.WindshieldArmor,
+					}
+		}
+
+		part PWRFrontLeftArmor
+        {
+
+			model PWRfla
+				{
+                		file = 49powerWagondoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.49powerWagonFrontDoorArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PWR.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PWR.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = PWR.Create.FrontLeftArmor,
+					init = PWR.Init.FrontLeftArmor,
+					}
+		}
+
+		part PWRFrontRightArmor
+        {
+
+			model PWRfra
+				{
+                		file = 49powerWagondoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.49powerWagonFrontDoorArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PWR.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PWR.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = PWR.Create.FrontRightArmor,
+					init = PWR.Init.FrontRightArmor,
+					}
+		}
+
+		part PWRRearLeftArmor
+        {
+
+			model PWRrla
+				{
+                		file = 49powerWagondoorrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.49powerWagonRearDoorArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PWR.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PWR.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = PWR.Create.RearLeftArmor,
+					init = PWR.Init.RearLeftArmor,
+					}
+		}
+
+		part PWRRearRightArmor
+        {
+
+			model PWRrra
+				{
+                		file = 49powerWagondoorrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.49powerWagonRearDoorArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PWR.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PWR.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = PWR.Create.RearRightArmor,
+					init = PWR.Init.RearRightArmor,
+					}
+		}
+
+		part PWRWindshieldRearArmor
+        {
+
+				model PWRwindra
+				{
+                		file = 49powerWagonwindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.49powerWagonWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PWR.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PWR.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = PWR.Create.WindshieldRearArmor,
+					init = PWR.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

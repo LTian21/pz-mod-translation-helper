@@ -1,0 +1,232 @@
+module Base
+{
+
+	model 84jeepXJSeatfl
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_seat_fl,
+		texture = Vehicles/Vehicles_84jeepXJ_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 84jeepXJSeatfr
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_seat_fl,
+		texture = Vehicles/Vehicles_84jeepXJ_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	model 84jeepXJSeatrl
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_seat_rl,
+		texture = Vehicles/Vehicles_84jeepXJ_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 84jeepXJSeatrr
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_seat_rl,
+		texture = Vehicles/Vehicles_84jeepXJ_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	
+	template vehicle JP84Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 84jeepXJSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+
+            table install
+			{
+				door = DoorFrontLeft;
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 84jeepXJSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+
+            table install
+			{
+				door = DoorFrontRight;
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 84jeepXJSeatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+
+            table install
+			{
+				door = DoorRearLeft;
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 84jeepXJSeatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+
+            table install
+			{
+				door = DoorRearRight;
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.84jeepXJSeatFront,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.84jeepXJSeatRear,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+}
+

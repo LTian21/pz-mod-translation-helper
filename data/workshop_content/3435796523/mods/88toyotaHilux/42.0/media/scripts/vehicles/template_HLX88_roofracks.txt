@@ -1,0 +1,171 @@
+module Base
+{
+
+	model 88toyotaHiluxRoofrack0
+	{
+		mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_roofrack,
+		texture = Vehicles/Vehicles_88toyotaHilux_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle HLX88Roofrack
+	{
+		part HLX88Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 88toyotaHiluxRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.88toyotaHiluxRoofrack,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = Vehicles.InstallComplete.Default,
+                	test = Vehicles.InstallTest.Default,
+                    requireInstalled = HLX88TruckBedExtras,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = DAMN.Create.Blank,
+				}
+		}
+	}
+
+    template vehicle HLX88RoofrackSC
+	{
+        template! = HLX88Roofrack,
+
+		part HLX88Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 88toyotaHiluxRoofrack0,
+                        offset = 0.0000 0.0000 0.4047,
+				}
+        }
+    }
+
+    template vehicle HLX88RoofrackS
+	{
+		part HLX88Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 88toyotaHiluxRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.88toyotaHiluxRoofrack,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = Vehicles.InstallComplete.Default,
+                	test = Vehicles.InstallTest.Default,
+                    requireInstalled = HLX88TruckBedExtras,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = Vehicles.Create.Default,
+				}
+		}
+	}
+}
+

@@ -1,0 +1,123 @@
+module Base
+{
+	
+	model 92nissanGTRspoiler0
+	{
+		mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_spoiler_0,
+		texture = Vehicles/Vehicles_92nissanGTR_Shell,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    model 92nissanGTRspoiler1
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_spoiler_1,
+        texture = Vehicles/Vehicles_92nissanGTR_Shell,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+    model 92nissanGTRspoiler2
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_spoiler_2,
+        texture = Vehicles/Vehicles_92nissanGTR_Shell,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+    model 92nissanGTRspoiler3
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_spoiler_3,
+        texture = Vehicles/Vehicles_92nissanGTR_Shell,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle R32Spoilers
+		{
+		part R32Spoiler
+       		{
+
+            model Spoiler0
+			{
+                	file = 92nissanGTRspoiler0,
+			}
+
+            model Spoiler1
+            {
+                    file = 92nissanGTRspoiler1,
+            }
+
+            model Spoiler2
+            {
+                    file = 92nissanGTRspoiler2,
+            }
+
+            model Spoiler3
+            {
+                    file = 92nissanGTRspoiler3,
+            }
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            door
+            {
+            }
+            
+            specificItem = false,
+            itemType = Base.R32Spoiler0;Base.R32Spoiler1;Base.R32Spoiler2;Base.R32Spoiler3;,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                door = TrunkDoor,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = R32.InstallComplete.Spoiler,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = R32.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = R32.Create.Spoiler,
+                init = R32.Init.Spoiler,
+            }
+        }
+	}
+}
+

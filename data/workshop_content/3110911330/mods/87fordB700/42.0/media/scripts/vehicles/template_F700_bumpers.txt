@@ -1,0 +1,255 @@
+module Base
+{
+    model 87fordF700BumperFront0
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_bumper,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87fordF700BullbarFrontA
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_bullbar,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 87fordF700BumperRear0
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 87fordF700BumperRear0B
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700b_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle F700Bumpers
+	{
+		part DAMNBumperFront
+        {
+            model BumperFrontASW
+				{
+                		file = 87fordF700BumperFront0,
+				}
+
+			model BullbarFrontASW
+				{
+                		file = 87fordF700BullbarFrontA,
+				}
+
+				area = Engine,
+				parent = EngineDoor,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.87fordF700BumperFront0;Base.87fordF700BullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 850,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.BumperFrontF,
+    				requireInstalled = EngineDoor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.BumperFrontF,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.BumperFrontF,
+                    init = B700.Init.BumperFrontF,
+					}
+		}
+
+	part DAMNBumperRear
+        	{
+
+			model BumperRear0SW
+				{
+                		file = 87fordF700BumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.87fordF700BumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 850,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+    template vehicle F700BumpersB
+	{
+		part DAMNBumperFront
+        {
+            model BumperFrontASW
+				{
+                		file = 87fordF700BumperFront0,
+				}
+
+			model BullbarFrontASW
+				{
+                		file = 87fordF700BullbarFrontA,
+				}
+
+				area = Engine,
+				parent = EngineDoor,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.87fordF700BumperFront0;Base.87fordF700BullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 850,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.BumperFrontF,
+                    requireInstalled = EngineDoor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.BumperFrontF,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.BumperFrontF,
+                    init = B700.Init.BumperFrontF,
+					}
+		}
+
+	part DAMNBumperRear
+        	{
+
+			model BumperRear0SB
+				{
+                		file = 87fordF700BumperRear0B,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.87fordF700BumperRear2,
+				mechanicRequireKey = false,
+                durability = 5,
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+}

@@ -1,0 +1,573 @@
+module Base
+{
+    model 89dodgeCaravandoorfla
+    	{
+        mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 89dodgeCaravandoorfra
+    	{
+        mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 89dodgeCaravandoorrla
+    	{
+        mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 89dodgeCaravandoorrra
+    	{
+        mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 89dodgeCaravandoorbla
+    	{
+        mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_window_bl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 89dodgeCaravandoorbra
+    	{
+        mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_window_br_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 89dodgeCaravanwindshielda
+    	{
+        mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 89dodgeCaravanwindshieldreara
+    	{
+        mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle DGC89Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model DGC89winda
+				{
+                		file = 89dodgeCaravanwindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.89dodgeCaravanWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = DGC89.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = DGC89.Create.WindshieldArmor,
+					init = DGC89.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model DGC89fla
+				{
+                		file = 89dodgeCaravandoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.89dodgeCaravanFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DGC89.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = DGC89.Create.FrontLeftArmor,
+					init = DGC89.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model DGC89fra
+				{
+                		file = 89dodgeCaravandoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.89dodgeCaravanFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DGC89.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = DGC89.Create.FrontRightArmor,
+					init = DGC89.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model DGC89rla
+				{
+                		file = 89dodgeCaravandoorrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.89dodgeCaravanRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DGC89.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = DGC89.Create.RearLeftArmor,
+					init = DGC89.Init.RearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model DGC89rra
+				{
+                		file = 89dodgeCaravandoorrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.89dodgeCaravanRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DGC89.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = DGC89.Create.RearRightArmor,
+					init = DGC89.Init.RearRightArmor,
+					}
+		}
+
+		part DAMNBackLeftArmor
+        {
+
+			model DGC89bla
+				{
+                		file = 89dodgeCaravandoorbla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.89dodgeCaravanBackWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.BackLeftArmor,
+                	requireInstalled = WindowBackLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DGC89.UninstallComplete.BackLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = DGC89.Create.BackLeftArmor,
+					init = DGC89.Init.BackLeftArmor,
+					}
+		}
+
+		part DAMNBackRightArmor
+        {
+
+			model DGC89bra
+				{
+                		file = 89dodgeCaravandoorbra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.89dodgeCaravanBackWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.BackRightArmor,
+                	requireInstalled = WindowBackRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DGC89.UninstallComplete.BackRightArmor,
+            		}
+
+            		lua
+            		{
+					create = DGC89.Create.BackRightArmor,
+					init = DGC89.Init.BackRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model DGC89windra
+				{
+                		file = 89dodgeCaravanwindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.89dodgeCaravanWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DGC89.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = DGC89.Create.WindshieldRearArmor,
+					init = DGC89.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

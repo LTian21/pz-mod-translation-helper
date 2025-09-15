@@ -1,0 +1,83 @@
+module Base
+{
+	template vehicle E150SpareTires
+		{
+		part E150SpareTire
+        	{
+
+			model E150SpareTire
+				{
+                		file = E150Wheel,
+                        offset = -0.7524 0.3556 -1.8444,
+				}
+
+			area = TruckBed,
+			category = Other,
+			itemType = Base.E150Tire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 350,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 350,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+			create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+    template vehicle E150SpareTiresLong
+	{
+        template! = E150SpareTires,
+
+		part DAMNSpareTire
+        	{
+
+			model E150SpareTire
+				{
+                		file = E150Wheel,
+                        offset = -0.7524 0.3556 -2.2170,
+				}
+            }
+    }
+
+		
+}

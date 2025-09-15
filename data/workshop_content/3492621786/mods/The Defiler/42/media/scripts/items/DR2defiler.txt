@@ -1,0 +1,111 @@
+module Base
+{
+model DR2defiler
+	{
+		mesh    = DR2defiler,
+		texture = DR2defiler,
+		scale   = 0.01,
+
+		attachment world
+		{
+			offset = -0.0290 0.2450 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+
+	item DR2defiler
+	{
+		DisplayName = The Defiler,
+		DisplayCategory = ToolWeapon,
+		Type = Weapon,
+		Weight = 10,
+		Icon = DR2defiler,
+		AlwaysKnockdown = TRUE,
+		AttachmentType = BigWeapon,
+		BaseSpeed = 0.9,
+		BreakSound = SledgehammerBreak,
+		CantAttackWithLowestEndurance = TRUE,
+		Categories = Axe,
+		ConditionLowerChanceOneIn = 40,
+		ConditionMax = 10,
+		CritDmgMultiplier = 4,
+		DoorDamage = 60,
+		DoorHitSound = SledgehammerHit,
+		EnduranceMod = 3,
+		HitFloorSound = SledgehammerHit,
+		HitSound = SledgehammerHit,
+		IdleAnim = Idle_Weapon2,
+		KnockBackOnNoDeath = TRUE,
+		KnockdownMod = 3,
+		MaxDamage = 5,
+		MaxHitCount = 4,
+		MaxRange = 1.35,
+		MetalValue = 360,
+		MinAngle = 0.8,
+		MinDamage =3,
+		MinRange = 0.7,
+		MinimumSwingTime = 4,
+		PushBackMod = 1,
+		RequiresEquippedBothHands = TRUE,
+		RunAnim = Run_Weapon2,
+		SplatBloodOnNoDeath = FALSE,
+		SplatNumber = 3,
+		SubCategory = Swinging,
+		SwingAmountBeforeImpact = 0.04,
+		SwingAnim = Heavy,
+		SwingSound = SledgehammerSwing,
+		SwingTime = 2,
+		TreeDamage = 20,
+		TwoHandWeapon = TRUE,
+		WeaponLength = 0.65,
+		WeaponSprite = DR2defiler,
+		Tags = Sledgehammer;ChopTree;CutPlant;RemoveBarricade;Sharpenable;KillAnimal;HasToolHead;RepairWithGlue;RepairWithTape,
+
+        HeadCondition = 15,
+        OnBreak = OnBreak.Defiler,
+        HeadConditionLowerChanceMultiplier = 0.2,
+	}
+
+    craftRecipe Make The Defiler
+    {
+        time        = 400,
+        category = Weaponry,
+        tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:20,
+        inputs
+        {
+            item 2 [Base.Axe],
+            item 1 [Base.Sledgehammer2;Base.Sledgehammer],
+            item 3 [Base.DuctTape],
+            item 1 tags[Saw] mode:keep flags[MayDegradeLight;Prop1],
+        }
+        outputs
+        {
+            item 1 Base.DR2defiler,
+        }
+    }
+
+    craftRecipe Dissasemble The Defiler
+    {
+        time        = 300,
+        category = Assemble,
+        tags = InHandCraft,
+        SkillRequired = Maintenance:0,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:0,
+        inputs
+        {
+            item 1 [Base.DR2defiler],
+            item 1 tags[SharpKnife] mode:keep flags[MayDegradeLight;Prop1],
+        }
+        outputs
+        {
+            item 1 Base.Sledgehammer2;Base.Sledgehammer,
+            item 2 Base.Handle,
+            item 2 Base.FireAxeHead,
+        }
+    }
+
+}

@@ -1,0 +1,204 @@
+module Base
+{
+
+    model 63Type2Vanwindshield
+    {
+        mesh = vehicles/Vehicles_63Type2Van_Body|type2_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 63Type2VanwindshieldRear
+    {
+        mesh = vehicles/Vehicles_63Type2Van_Body|type2_windshield_rear,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+
+    }
+
+	template vehicle VAN63Windshields
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 63Type2Vanwindshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.63Type2VanWindshield,
+            area = Front,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = VAN63WindshieldArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = 63Type2VanwindshieldRear,
+            }
+            window
+            {
+            openable = true,
+            }
+                
+            itemType = Base.63Type2VanWindshieldRear,
+            area = Engine,
+            category = bodywork,
+            parent = TrunkDoor,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = VAN63WindshieldRearArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+    template vehicle VAN63Windshield
+    {
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 63Type2Vanwindshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.63Type2VanWindshield,
+            area = Front,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = VAN63WindshieldArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+}

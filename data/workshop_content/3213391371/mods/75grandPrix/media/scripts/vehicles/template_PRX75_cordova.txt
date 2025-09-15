@@ -1,0 +1,85 @@
+module Base
+{
+	model 75grandPrixRoofLight
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_roof_light,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 75grandPrixRoofDark
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_roof_dark,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle PRX75Cordova
+	{
+		part PRX75CordovaTop
+        	{
+
+			model PRX75Cordova0
+				{
+                		file = 75grandPrixRoofLight,
+				}
+
+			model PRX75Cordova1
+				{
+                		file = 75grandPrixRoofDark,
+				}
+
+				area = Roofrack,
+				category = bodywork,
+				itemType = Base.75grandPrixCordovaTypeA;Base.75grandPrixCordovaTypeB,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRX75.InstallComplete.Cordova,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PRX75.UninstallComplete.Cordova,
+            		}
+
+            		lua
+            		{
+					create = PRX75.Create.Cordova,
+					init = PRX75.Init.Cordova,
+					}
+			}
+
+	}
+}

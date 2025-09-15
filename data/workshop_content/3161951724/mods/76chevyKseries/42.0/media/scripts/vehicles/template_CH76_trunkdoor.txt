@@ -1,0 +1,1449 @@
+module Base
+{
+	model 76chevyK10TrunkDoor
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK10_trunkLid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 76chevyDuallyTrunkDoor
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyDually_trunkLid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 76chevyutilityTrunkDoor
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK_utility_trunkLid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 76chevyutilityTrunkDoorLeft
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK_utility_left_storageLids,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 76chevyutilityTrunkDoorRight
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK_utility_right_storageLids,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 76chevyFDTrunkDoor
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK_fd_trunkLid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 76chevyFDTrunkDoorLeft
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK_fd_lids_l,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 76chevyFDTrunkDoorRight
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK_fd_lids_r,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 76chevyC30TrunkDoor
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76wrecker_trunkLid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 76chevyC30ToolboxLid
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76wrecker_lid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle CH76TrunkDoorK10
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfWhaaaat3245
+			{
+				file = 76chevyK10TrunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.76chevyKseriesTrunkDoor,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+	template vehicle CH76TrunkDoorK20
+	{
+		template! = CH76TrunkDoorK10,
+
+		part TrunkDoor
+		{
+			model SweetTrunkOfWhaaaat3245
+			{
+				file = 76chevyK10TrunkDoor,
+                offset = 0.0000 0.0000 -0.3128,
+			}
+		}
+	}
+
+    template vehicle CH76TrunkDoorK30
+	{
+		template! = CH76TrunkDoorK10,
+
+		part TrunkDoor
+		{
+			model SweetTrunkOfWhaaaat3245
+			{
+				file = 76chevyK10TrunkDoor,
+                offset = 0.0000 0.0000 -1.1123,
+			}
+		}
+	}
+
+    template vehicle CH76utilityTrunkDoor
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfWhaaaat13r2
+			{
+				file = 76chevyutilityTrunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.utilityBoxTrunkDoor,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+
+        part CH76TrunkDoorLeft
+		{
+
+			model SweetTrunkOfWhaaaatl
+			{
+				file = 76chevyutilityTrunkDoorLeft,
+			}
+
+			anim Close
+			{
+				anim = trunkl_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunkl_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunkl_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunkl_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageLeft,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 270.0 0.0,
+			}
+			itemType = Base.utilityBoxStorageLids,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+
+        part CH76TrunkDoorRight
+		{
+
+			model SweetTrunkOfWhaaaatr
+			{
+				file = 76chevyutilityTrunkDoorRight,
+			}
+
+			anim Close
+			{
+				anim = trunkr_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunkr_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunkr_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunkr_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageRight,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 90.0 0.0,
+			}
+			itemType = Base.utilityBoxStorageLids,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle CH76utilityTrunkDoorShort
+	{
+        template! = CH76utilityTrunkDoor,
+
+		part TrunkDoor
+		{
+			model SweetTrunkOfWhaaaat13r2
+			{
+				file = 76chevyutilityTrunkDoor,
+                offset = 0.0000 0.0000 0.7995,
+			}
+		}
+
+        part CH76TrunkDoorLeft
+        {
+                model SweetTrunkOfWhaaaatl
+                {
+                    file = 76chevyutilityTrunkDoorLeft,
+                    offset = 0.0000 0.0000 0.7995,
+                }
+        }
+
+        part CH76TrunkDoorRight
+        {
+                model SweetTrunkOfWhaaaatr
+                {
+                    file = 76chevyutilityTrunkDoorRight,
+                    offset = 0.0000 0.0000 0.7995,
+                }
+        }
+    }
+
+    template vehicle CH76TrunkDoorDually
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfWhaaaat3245
+			{
+				file = 76chevyDuallyTrunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.76chevyKseriesTrunkDoor,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+	template vehicle CH76TrunkDoorK20Dually
+	{
+		template! = CH76TrunkDoorDually,
+
+		part TrunkDoor
+		{
+			model SweetTrunkOfWhaaaat3245
+			{
+				file = 76chevyDuallyTrunkDoor,
+                offset = 0.0000 0.0000 -0.3128,
+			}
+		}
+	}
+
+    template vehicle CH76TrunkDoorK30Dually
+	{
+		template! = CH76TrunkDoorDually,
+
+		part TrunkDoor
+		{
+			model SweetTrunkOfWhaaaat3245
+			{
+				file = 76chevyDuallyTrunkDoor,
+                offset = 0.0000 0.0000 -1.1123,
+			}
+		}
+	}
+
+    template vehicle CH76FDTrunkDoor
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfWhaaaat1334t32
+			{
+				file = 76chevyFDTrunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.76chevyKseriesTrunkDoorFD,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+
+        part CH76TrunkDoorLeft
+		{
+
+			model SweetTrunkOfWhaaaatl4
+			{
+				file = 76chevyFDTrunkDoorLeft,
+			}
+
+			anim Close
+			{
+				anim = trunkl_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunkl_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunkl_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunkl_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageLeft,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 270.0 0.0,
+			}
+			itemType = Base.76chevyKseriesLidsFD,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+
+        part CH76TrunkDoorRight
+		{
+
+			model SweetTrunkOfWhaaaatr
+			{
+				file = 76chevyFDTrunkDoorRight,
+			}
+
+			anim Close
+			{
+				anim = trunkr_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunkr_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunkr_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunkr_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageRight,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 90.0 0.0,
+			}
+			itemType = Base.76chevyKseriesLidsFD,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle CH76FDTrunkDoorCC
+	{
+        template! = CH76FDTrunkDoor,
+
+		part TrunkDoor
+		{
+			model SweetTrunkOfWhaaaat1334t32
+			{
+				file = 76chevyFDTrunkDoor,
+                offset = 0.0000 0.0000 -0.7995,
+			}
+		}
+
+        part CH76TrunkDoorLeft
+        {
+                model SweetTrunkOfWhaaaatl4
+                {
+                    file = 76chevyFDTrunkDoorLeft,
+                    offset = 0.0000 0.0000 -0.7995,
+                }
+        }
+
+        part CH76TrunkDoorRight
+        {
+                model SweetTrunkOfWhaaaatr
+                {
+                    file = 76chevyFDTrunkDoorRight,
+                    offset = 0.0000 0.0000 -0.7995,
+                }
+        }
+    }
+
+    template vehicle CH76WreckerTrunkDoorShort
+	{
+		part TrunkDoor
+		{
+
+			model SweetTrunkOfWhaaaat324534
+			{
+				file = 76chevyC30TrunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.76chevyCseriesWreckerTrunkDoor,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle CH76WreckerTrunkDoorLong
+	{
+        template! = CH76WreckerTrunkDoorShort,
+
+		part TrunkDoor
+		{
+			model SweetTrunkOfWhaaaat324534
+			{
+				file = 76chevyC30TrunkDoor,
+                offset = 0.0000 0.0000 -0.7995,
+			}
+		}
+	}
+
+    template vehicle CH76SideLidWreckerShort
+	{
+        part CH76TrunkDoorLeft
+		{
+
+			model SweetTrunkOfWhaaaatl25532
+			{
+				file = 76chevyC30ToolboxLid,
+			}
+
+			anim Close
+			{
+				anim = trunkl_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunkl_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunkl_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunkl_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageLeft,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 270.0 0.0,
+			}
+			itemType = Base.76chevyCseriesWreckerLid,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle CH76SideLidWreckerLong
+	{
+        template! = CH76SideLidWreckerShort,
+
+        part CH76TrunkDoorLeft
+		{
+			model SweetTrunkOfWhaaaatl25532
+			{
+				file = 76chevyC30ToolboxLid,
+                offset = 0.0000 0.0000 -0.7995,
+			}
+        }
+    }
+}
+

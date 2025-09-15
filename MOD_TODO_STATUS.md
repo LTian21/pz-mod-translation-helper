@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-15 23:42:18 UTC+08:00`*
+*最后更新于：`2025-09-16 00:20:56 UTC+08:00`*
 
 ---
 
@@ -17,7 +17,7 @@
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
 | Buildables_Expansion | 3463117260 | 617 |
 | KATTAJ1_Military_Pack | 3470426196 | 561 |
-| AmmoMaker | 2788256295 | 464 |
+| AmmoMaker | 2788256295 | 465 |
 | Bandits | 3268487204 | 458 |
 | PompsItemsFood | 2792348686 | 394 |
 | Erikas_Furniture_Store | 3363546437 | 337 |
@@ -87,7 +87,6 @@
 | 87fordB700 | 3110911330 | 26 |
 | HDCP_ImmersiveVehiclePaint | 3464606086 | 26 |
 | ExploringTime | 2244879881 | 25 |
-| ModName | 3406392630 | 25 |
 | Tactical_Weapons | 2324223029 | 24 |
 | FancyLanterns | 3267733558 | 24 |
 | DFMFoodMod | 3406694220 | 24 |
@@ -132,6 +131,7 @@
 | ClothingLine | 3282215361 | 10 |
 | TLOUClothingConnected | 3348036710 | 10 |
 | HaloArmor | 3507919075 | 10 |
+| ModName | 3406392630 | 10 |
 | ExtraMoney | 3462306255 | 10 |
 | BasicVan | 3459200930 | 9 |
 | ImmersiveSolarArrays | 2969478819 | 9 |
@@ -158,7 +158,6 @@
 | P4PrismPower | 3235103558 | 5 |
 | TheBeginning_CDDA | 3461117277 | 5 |
 | CraftableMannequins | 3054341059 | 5 |
-| [J&G]_Caution_Uniform | 3369825662 | 5 |
 | StandaloneTowels | 3203159242 | 5 |
 | [B42]_Moodle_Descriptions_Expanded | 3389003300 | 5 |
 | Vehicle_Repair_Overhaul | 2757712197 | 5 |
@@ -177,7 +176,6 @@
 | P4PickingMeister | 3422220305 | 4 |
 | 92nissanGTR | 2846036306 | 4 |
 | Cerberus_Pack | 3470478700 | 4 |
-| [J&G]_Black_Multicam_Uniform | 3315302991 | 4 |
 | UH-1BHelicopter | 3409723807 | 4 |
 | P4ThiefExpansion | 2596620950 | 4 |
 | BetterFPS_B42 | 3423115544 | 4 |
@@ -223,6 +221,7 @@
 | The_Defiler | 3492621786 | 2 |
 | TrustyFireAxe | 3400045232 | 2 |
 | TheyKnew_[B42] | 3387110070 | 1 |
+| JokeCustomisation | 3415451174 | 1 |
 | P4Excalibolg | 3070446764 | 1 |
 | RechargeableBatteries | 3385623534 | 1 |
 | MiraAmmoMaker | 3441855577 | 1 |
@@ -240,6 +239,7 @@
 | BonusExp | 3413610665 | 1 |
 | Simple_Wall_Building | 3429904483 | 1 |
 | MyFavoriteJobs | 3508005481 | 1 |
+| AdaWongVoice | 3401470591 | 1 |
 | RedDays | 3516166810 | 1 |
 | ComidaBR | 3469279808 | 1 |
 | Nep_Survival_Rifle | 3491265315 | 1 |
@@ -255,12 +255,12 @@
 | 89fordBronco | 2886833398 | 1 |
 | zRe_FixFloor | 3403911096 | 1 |
 | Reaper's_Hair_&_Beard | 3450583954 | 1 |
-| [J&G]_Flecktarn_Uniform | 3206579556 | 1 |
 | SkateBoard | 3456675747 | 1 |
 | BoneScavenger | 3399292171 | 1 |
 | Outdoor_TIles | 3430305726 | 1 |
 | ATA_Mustang | 3405178154 | 1 |
 | LegendCraftAddon | 3397942493 | 1 |
+| VSMRSpongie | 3415572170 | 1 |
 | ATA_Samara | 3432014439 | 1 |
 | ATA_VanDeRumba | 3432015133 | 1 |
 | Infection_Scanner | 3332296598 | 1 |
@@ -268,7 +268,6 @@
 | P4MySoCalledBag | 2823166698 | 0 |
 | ExerciseWithCorpses | 3404074048 | 0 |
 | MyCustomFirearm | 3551139118 | 0 |
-| JokeCustomisation | 3415451174 | 0 |
 | 90bmwE30 | 3110913021 | 0 |
 | isoContainers | 2625625421 | 0 |
 | 69camaro | 2991201484 | 0 |
@@ -343,6 +342,7 @@
 | P4DriedFlower | 2949777636 | 0 |
 | [B42]_Wallet_Fix | 3400142576 | 0 |
 | 76chevyKseries | 3161951724 | 0 |
+| FWO_Fitness_Workout_Overhaul | 2940354599 | 0 |
 | Pokit_Paradigm | 3476595954 | 0 |
 | 87toyotaMR2 | 3052360250 | 0 |
 | 77firebird | 3346905070 | 0 |
@@ -375,6 +375,7 @@
 | 82porsche911 | 3379334330 | 0 |
 | 63beetle | 3005903549 | 0 |
 | ATA_Bus | 3402812859 | 0 |
+| [J&G]_Caution_Uniform | 3369825662 | 0 |
 | MakeBurlap | 3409478949 | 0 |
 | SpongieCharacterCustomisation | 3414634809 | 0 |
 | 70barracuda | 2913633066 | 0 |
@@ -389,7 +390,6 @@
 | FirstAidVHSTapes | 3153010942 | 0 |
 | 93chevySuburban | 3152529790 | 0 |
 | Bicycle | 3461415167 | 0 |
-| AdaWongVoice | 3401470591 | 0 |
 | Tomb's_Player_Body_-_Customisation | 3429790870 | 0 |
 | ManageContainers | 2650547917 | 0 |
 | P4VideoMeister | 2744797858 | 0 |
@@ -457,10 +457,12 @@
 | NodachiMod_B42.5.1 | 2166396868 | 0 |
 | 59_Cadillac_Miller-Meteor | 2772575623 | 0 |
 | P4SoundScouter | 3366600816 | 0 |
+| [J&G]_Black_Multicam_Uniform | 3315302991 | 0 |
 | DrinkSmart | 3447775367 | 0 |
 | 92fordCVPI | 2962175696 | 0 |
 | StarlitLibrary | 3378285185 | 0 |
 | B42PackMule | 3540903327 | 0 |
+| [J&G]_Flecktarn_Uniform | 3206579556 | 0 |
 | 04vwTouran | 3478633453 | 0 |
 | Vanilla_Gear_Expanded | 3401134276 | 0 |
 | NoMoreSicknessInsideVehicle | 3405033818 | 0 |
@@ -474,7 +476,6 @@
 | EasySpareMagazineReload | 2590662055 | 0 |
 | fhqwhgads'_Hot_Pursuit_Pack | 2841969842 | 0 |
 | 89trooper | 2932549988 | 0 |
-| VSMRSpongie | 3415572170 | 0 |
 | Lucille | 3436159263 | 0 |
 | starving-zombies | 3396867685 | 0 |
 | throw-your-bag-across | 3391902125 | 0 |

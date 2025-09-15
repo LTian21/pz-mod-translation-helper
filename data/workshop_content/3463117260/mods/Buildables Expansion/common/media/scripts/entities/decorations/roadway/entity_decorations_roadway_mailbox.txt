@@ -1,0 +1,79 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_MailBox
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Mail Box,
+			Icon		= street_decoration_01_19,
+		}
+	}
+
+    entity MailBox
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_MailBox,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face N
+            {
+                layer
+                {
+                    row = street_decoration_01_21,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = street_decoration_01_18,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = street_decoration_01_19,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = street_decoration_01_20,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:1;MetalWelding:2,
+            xpAward       = Woodwork:2;MetalWelding:4,
+            category      = Decorations_Roadway,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_roadwayDecorationsDesc,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[Hammer] mode:keep flags[Prop2],
+                item 1 [Base.Saw] mode:keep,
+                item 2 [Base.Plank],
+                item 2 [Base.SmallSheetMetal],
+                item 1 [Base.Nails],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

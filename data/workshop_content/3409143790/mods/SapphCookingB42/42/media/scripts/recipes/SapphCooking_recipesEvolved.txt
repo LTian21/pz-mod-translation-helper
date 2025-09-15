@@ -1,0 +1,614 @@
+module SapphCooking
+{
+	imports
+	{
+		Base,
+	}	
+		/****************************** recipes in here are evolved recipes preparations. ******************************/
+
+	craftRecipe Make Pan of Lasagna
+    {
+        timedAction = PackingRoastPan,
+        time            = 60,
+		NeedToBeLearn = True,
+        category = SapphCooking,
+        CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:3,
+        inputs
+        {
+            item 1 [Base.RoastingPan],
+			item 1 [SapphCooking.PastaSheets] flags[ItemCount],
+			item 1 [Base.MincedMeat;SapphCooking.MincedMeat_Chicken] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+        }
+       outputs
+        {
+           item 1 SapphCooking.RoastingpanwithUncookedLasagna,
+        }
+    }
+
+    craftRecipe Prepare Focaccia
+    {
+        timedAction = PackingRoastPan,
+        time            = 60,
+        SkillRequired = Cooking:3,
+        category = SapphCooking,
+        CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.RoastingPan],
+			item 3 [SapphCooking.SapphFlour],
+            item 1 [Base.Yeast] flags[ItemCount],
+            item 1 [*],
+            -fluid 0.2 [Water],
+            item 1 [*],
+            -fluid 0.05 [CookingOil],
+        }
+       outputs
+        {
+           item 1 SapphCooking.Roastingpan_FocacciaPrep,
+        }
+    }
+
+    craftRecipe Slice Focaccia
+    {
+        timedAction = SliceFood_Surface,
+        time            = 20,
+        OnCreate = Recipe.OnCreate.SapphDivideIntoFive,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.Roastingpan_FocacciaPrep] mode:destroy flags[IsCookedFoodItem;ItemCount],
+            item 1 tags[SharpKnife;Saw;MeatCleaver] mode:keep,
+        }
+       outputs
+        {
+           item 5 SapphCooking.Focaccia_Piece,
+        }
+    }
+
+    craftRecipe Prepare Cheesesteak
+    {
+        timedAction = SliceFood_Surface,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.Baguette;Base.Bread;Base.BunsHotdog_single] flags[ItemCount],
+			item 1 tags[Cheese] flags[ItemCount],
+            item 1 [SapphCooking.SlicedSteak] flags[ItemCount],
+        }
+       outputs
+        {
+           item 1 SapphCooking.Sandwich_CheesesteakPrep,
+        }
+    }
+
+    craftRecipe Prepare Pastel
+    {
+        timedAction = SliceFood_Surface,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.BreadDough] flags[ItemCount],
+            item 1 [SapphCooking.MincedMeat_Chicken;SapphCooking.MincedMeat_Turkey;SapphCooking.MincedMeat_Pork;Base.MincedMeat] flags[ItemCount],
+        }
+       outputs
+        {
+           item 1 SapphCooking.PastelPrep,
+        }
+    }
+
+    craftRecipe Prepare Coxinha
+    {
+        timedAction = SliceFood_Surface,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.BreadDough] flags[ItemCount],
+            item 1 [SapphCooking.MincedMeat_Chicken;SapphCooking.MincedMeat_Turkey;SapphCooking.MincedMeat_Pork;Base.MincedMeat] flags[ItemCount],
+        }
+       outputs
+        {
+           item 1 SapphCooking.CoxinhaPrep,
+        }
+    }
+
+    craftRecipe Make Roasting Pan of Confit Byaldi Ratattouile
+    {
+        timedAction = PackingRoastPan,
+        time            = 60,
+		NeedToBeLearn = True,
+        category = SapphCooking,
+        CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:4,
+		AutoLearnAny  = Cooking:4,
+        inputs
+        {
+            item 1 [Base.RoastingPan],
+			item 1 [SapphCooking.SlicedBellPepper;SapphCooking.SlicedCarrots] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [SapphCooking.SlicedTomato] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+        }
+       outputs
+        {
+           item 1 SapphCooking.RoastingpanwithRatatouilleUn,
+        }
+    }
+
+    craftRecipe PlaceRiceInSaucepan
+	{
+        timedAction = MixingSaucepan,
+		Time = 50,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+		Tags = InHandCraft;Cooking,
+		category = SapphCooking,
+		inputs
+		{
+			item 1 [Base.Saucepan] flags[InheritCondition],
+            -fluid 0.2 [Water],
+			item 1 [SapphCooking.ArborioRiceGrains;SapphCooking.BrownRiceGrains;SapphCooking.RiceGrains] mappers[panType] flags[ItemCount],
+		}
+		outputs
+		{
+			item 1 mapper:panType,
+		}
+        itemMapper panType
+		{
+			SapphCooking.WaterSaucepanArborioRice = SapphCooking.ArborioRice,
+            SapphCooking.WaterSaucepanBrownRice = SapphCooking.BrownRice,
+            Base.RicePan = SapphCooking.RiceGrains,
+		}
+	}
+
+    craftRecipe Cut Wonton Wrappers
+    {
+        timedAction = FryOilSaucepan,
+        time            = 10,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking,
+        NeedToBeLearn = True,
+        AutoLearnAny  = Cooking:1,
+        inputs
+        {
+			item 1 [*],
+            -fluid 0.2 [Water],
+            item 3 [SapphCooking.SapphFlour],
+            item 1 tags[SharpKnife;Saw;MeatCleaver;Fork;MixingUtensil;Spoon] mode:keep flags[Prop2],
+
+        }
+       outputs
+        {
+		   item 3 SapphCooking.WontonWrappers,
+        }
+    }
+
+    craftRecipe Prepare Yakisoba in Wok Pan
+    {
+        timedAction = CookingYakisobaWok,
+        time            = 60,
+		NeedToBeLearn = True,
+        category = SapphCooking,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:2,
+        inputs
+        {
+            item 1 [SapphCooking.WokPan] flags[ItemIsFluid;IsEmpty],
+            item 1 [Base.Pasta] flags[InheritFoodAge;ItemCount],
+            item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 SapphCooking.WokPan_Yakisoba,
+        }
+    }
+
+    craftRecipe Prepare Cacio e Pepe
+    {
+        timedAction = CookingYakisobaWok,
+        time            = 60,
+		NeedToBeLearn = True,
+        category = SapphCooking,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:2,
+        inputs
+        {
+            item 1 [SapphCooking.WokPan] flags[ItemIsFluid;IsEmpty],
+            item 1 [Base.Pasta] flags[InheritFoodAge;ItemCount],
+            item 1 tags[Cheese] flags[ItemCount],
+            item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 SapphCooking.WokPan_CacioPepePrep,
+        }
+    }
+
+    craftRecipe Prepare Ceviche
+    {
+        timedAction = MixingBowl,
+        time            = 80,
+        category = SapphCooking,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:1,
+        inputs
+        {
+            item 1 [Base.Bowl],
+            item 1 [Base.FishFillet] flags[InheritFoodAge;ItemCount],
+            item 1 [*],
+            -fluid 0.1 [JuiceLemon],
+            item 1 tags[Fork;MixingUtensil;Spoon] mode:keep,
+        }
+       outputs
+        {
+           item 1 SapphCooking.CevicheBowl,
+        }
+    }
+
+    craftRecipe PrepareCeviche
+    {
+        timedAction = MixingBowl,
+        time            = 80,
+        category = SapphCooking,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:1,
+        inputs
+        {
+            item 1 [Base.Bowl],
+            item 1 [Base.FishFillet] flags[InheritFoodAge;ItemCount],
+            item 5 [Base.Lemon;Base.Lime],
+            item 1 tags[Fork;MixingUtensil;Spoon] mode:keep,
+        }
+       outputs
+        {
+           item 1 SapphCooking.CevicheBowl,
+        }
+    }
+
+    craftRecipe PrepareCurry
+	{
+        timedAction = MixingSaucepan,
+		Time = 50,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+		Tags = InHandCraft;Cooking;CanBeDoneFromFloor,
+		category = SapphCooking,
+        CanWalk = true,
+        xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:1,
+		inputs
+		{
+			item 1 [Base.Saucepan] mode:destroy,
+            item 5 [SapphCooking.CurryPowder],
+            item 1 [*],
+            -fluid 0.2 [CowMilk;SheepMilk],
+            item 1 [Base.ChickenFillet;Base.ChickenWings;Base.TurkeyFillet;Base.TurkeyWings] flags[ItemCount],
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep,
+		}
+		outputs
+		{
+			item 1 SapphCooking.SaucepanwithJapaneseCurry,
+		}
+	}
+
+    craftRecipe Prepare Arroz con Leche
+	{
+        timedAction = MixingSaucepan,
+		Time = 50,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+		Tags = InHandCraft;Cooking,
+        CanWalk = true,
+		category = SapphCooking,
+        xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:1,
+		inputs
+		{
+			item 1 [Base.Saucepan] mode:destroy,
+            item 1 [SapphCooking.RiceGrains;SapphCooking.ArborioRiceGrains] flags[ItemCount], /****placeholder units********/
+            item 3 [SapphCooking.SugarPowder], /****placeholder units********/
+            item 1 [*],
+            -fluid 0.2 [CowMilk;SheepMilk],
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep,
+		}
+		outputs
+		{
+			item 1 SapphCooking.Saucepan_ArrozLeche,
+		}
+	}
+
+    craftRecipe Prepare French Toast
+	{
+        timedAction = MixingBowl,
+		Time = 50,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+		Tags = InHandCraft;Cooking,
+		category = SapphCooking,
+        xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:1,
+		inputs
+		{
+			item 1 [Base.BreadSlices] flags[ItemCount],
+            item 3 [SapphCooking.SugarPowder],
+            item 1 tags[Egg] flags[ItemCount],
+            item 1 [*],
+            -fluid 0.2 [CowMilk;SheepMilk],
+		}
+		outputs
+		{
+			item 1 SapphCooking.FrenchToast_Evolved,
+		}
+	}
+
+
+    craftRecipe Prepare Borscht
+	{
+        timedAction = MixingSaucepan,
+		Time = 50,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+		Tags = InHandCraft;Cooking,
+		category = SapphCooking,
+        xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:2,
+		inputs
+		{
+			item 1 [Base.Saucepan] mode:destroy,
+            item 1 [SapphCooking.ChickenBroth;SapphCooking.BeefBroth;SapphCooking.VegetableBroth] flags[ItemCount],
+            item 1 [Base.SugarBeet;SapphCooking.OpenCanofBeets;SapphCooking.WildBeets] flags[ItemCount],
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep,
+            item 1 tags[Cheese] flags[ItemCount],
+            item 6 [Base.CannedTomatoOpen;SapphCooking.Tomato_Sachet;Base.TomatoPaste;Base.Tomato;SapphCooking.SlicedTomato;SapphCooking.DicedTomato;Base.Ketchup],
+		}
+		outputs
+		{
+			item 1 SapphCooking.SaucepanwithBorschtPrep,
+		}
+	}
+
+    craftRecipe Prepare Risotto
+	{
+        timedAction = MixingSaucepan,
+		Time = 50,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+		Tags = InHandCraft;Cooking,
+		category = SapphCooking,
+        xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:2,
+		inputs
+		{
+			item 1 [Base.Saucepan] mode:destroy,
+            item 1 [SapphCooking.ChickenBroth;SapphCooking.BeefBroth;SapphCooking.VegetableBroth] flags[ItemCount],
+            item 1 [SapphCooking.ArborioRiceGrains] flags[ItemCount],
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep,
+		}
+		outputs
+		{
+			item 1 SapphCooking.SaucepanwithRisotto,
+		}
+	}
+
+    craftRecipe Prepare Paella
+	{
+        timedAction = MixingSaucepan,
+		Time = 50,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+		Tags = InHandCraft;Cooking,
+		category = SapphCooking,
+        xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:2,
+		inputs
+		{
+			item 1 [Base.Saucepan] mode:destroy,
+            item 1 [SapphCooking.ChickenBroth;SapphCooking.BeefBroth;SapphCooking.VegetableBroth] flags[ItemCount],
+            item 1 [SapphCooking.ArborioRiceGrains] flags[ItemCount],
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep,
+		}
+		outputs
+		{
+			item 1 SapphCooking.Saucepan_Paella,
+		}
+	}
+
+    craftRecipe Make Calzone
+	{
+        timedAction = MixingBowl,
+		Time = 100,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		NeedToBeLearn = True,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+		xpAward = Cooking:10,
+		AutoLearnAny  = Cooking:6,
+		inputs
+		{
+			item 1 tags[RollingPin] mode:keep flags[MayDegradeLight],
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 tags[Bowl] mode:keep,
+ 			item 1 tags[Flour],
+			item 1 [Base.Salt],
+			item 1 [Base.Cheese] flags[InheritFoodAge;ItemCount],
+			item 3 tags[PizzaSauce] flags[InheritFoodAge],
+			item 1 [Base.Yeast],
+			item 1 [*],
+			-fluid 0.5 [Water],
+		}
+		outputs
+		{
+			item 1 SapphCooking.CalzoneRecipe,
+		}
+	}
+
+    craftRecipe Prepare Stroganoff
+	{
+        timedAction = MixingSaucepan,
+		Time = 50,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+		Tags = InHandCraft;Cooking,
+		category = SapphCooking,
+        xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:2,
+		inputs
+		{
+			item 1 [Base.Saucepan],
+            item 6 [Base.CannedTomatoOpen;SapphCooking.Tomato_Sachet;Base.TomatoPaste;Base.Tomato;SapphCooking.SlicedTomato;SapphCooking.DicedTomato;Base.Ketchup;SapphCooking.HomemadeSauce_Evolved],
+            item 1 [SapphCooking.ChickenBroth;SapphCooking.BeefBroth;SapphCooking.VegetableBroth] flags[ItemCount],
+            item 1 [Base.MincedMeat;Base.TurkeyFillet;Base.TurkeyWings;Base.MuttonChop;Base.PorkChop;Base.Pork;Base.Venison;Base.Beef;Base.Steak;Base.Rabbitmeat;Base.Smallanimalmeat;Base.Chicken;Base.ChickenFillet;Base.ChickenWings;Base.Smallbirdmeat;SapphCooking.MincedMeat_Chicken;SapphCooking.SlicedChicken;SapphCooking.SlicedSteak] flags[ItemCount],
+            /*****item 1 tags[SapphCookingChicken], --tags arent being updated yet ***********/
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep,
+        }
+		outputs
+		{
+			item 1 SapphCooking.SaucepanwithStroganoff,
+		}
+	}
+
+    craftRecipe Prepare Fried Rice
+    {
+        timedAction = MixingBowl,
+        time            = 100,
+        category = SapphCooking,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 [SapphCooking.ArborioRiceBowl;SapphCooking.BrownRiceBowl;Base.RiceBowl] flags[ItemCount],
+            item 1 [Base.Pan;SapphCooking.WokPan] mappers[itemResult],
+            item 1 tags[SharpKnife;Saw;MeatCleaver;Fork;MixingUtensil;Spoon] mode:keep flags[Prop1],
+        }
+       outputs
+        {
+		   item 1 mapper:itemResult,
+        }
+       itemMapper itemResult
+	    {
+            SapphCooking.FryingPanwithFriedRice = Base.Pan,
+            SapphCooking.WokPanwithFriedRice = SapphCooking.WokPan,
+        }
+    }
+
+
+    craftRecipe Make Pan of Spaguetti
+	{
+        timedAction = MixingSaucepan,
+		Time = 100,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+		Tags = InHandCraft;Cooking,
+		category = SapphCooking,
+        xpAward = Cooking:3,
+		inputs
+		{
+			item 1 [Base.Saucepan] mode:destroy,
+            item 8 [Base.CannedTomatoOpen;SapphCooking.Tomato_Sachet;Base.TomatoPaste;Base.Tomato;SapphCooking.SlicedTomato;SapphCooking.DicedTomato;Base.Ketchup;SapphCooking.HomemadeSauce_Evolved],
+            item 1 [Base.Pasta] flags[ItemCount],
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep,
+        }
+		outputs
+		{
+			item 1 SapphCooking.SaucepanwithSpaguetti,
+		}
+	}
+
+    craftRecipe Prepare Mac and Cheese
+	{
+        timedAction = MixingSaucepan,
+		Time = 60,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        CanWalk = true,
+		Tags = InHandCraft;Cooking,
+		category = SapphCooking,
+        xpAward = Cooking:3,
+		inputs
+		{
+			item 1 [Base.Saucepan] mode:destroy,
+            item 1 tags[Pasta] flags[ItemCount],
+            item 1 tags[Cheese] flags[ItemCount],
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep,
+        }
+		outputs
+		{
+			item 1 SapphCooking.Saucepan_MacandCheese,
+		}
+	}
+
+    craftRecipe Make Onigiri
+	{
+        timedAction = MixingBowl,
+		Time = 30,
+		Tags = AnySurfaceCraft;Cooking,
+        CanWalk = true,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+		category = Cooking,
+		xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:4,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+			item 1 tags[FishMeat] flags[InheritFoodAge;ItemCount],
+			item 1 tags[RiceRecipe] flags[ItemCount],
+			item 1 [Base.Seaweed] flags[ItemCount],
+		}
+		outputs
+		{
+			item 1 Base.Onigiri,
+		}
+	}
+
+
+     craftRecipe Dip Churros in Chocolate
+    {
+        timedAction = UnPackBox_Small,
+        time            = 40,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.ChurrosPlain] flags[ItemCount],
+            item 4 [SapphCooking.Syrup_Chocolate;Base.ChocolateChips;Base.Chocolate_Butterchunkers;Base.Chocolate_Crackle;Base.Chocolate_Deux;Base.Chocolate_Smirkers;Base.Chocolate_RoysPBPucks;Base.Chocolate_GalacticDairy;Base.Chocolate_SnikSnak;Base.Chocolate;SapphCooking.WhiteChocolate;SapphCooking.Box_Bonbon;SapphCooking.Box_HeartChocolate;SapphCooking.Box_LiqueurBonbons;Base.Chocolate_HeartBox],
+        }
+       outputs
+        {
+           item 1 SapphCooking.ChurrosChocolate,
+        }
+    }
+    
+}
+	

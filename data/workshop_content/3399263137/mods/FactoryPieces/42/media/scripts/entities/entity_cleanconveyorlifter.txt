@@ -1,0 +1,64 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Clean_Conveyor_Lifter
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Clean Conveyor Lifter,
+			Icon		= Build_ConveyorLifter,
+		}
+	}
+
+    entity BuildCleanConveyorLifter
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Clean_Conveyor_Lifter,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = factory_pieces_conveyor_lifters_01_1,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = factory_pieces_conveyor_lifters_01_0,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 300,
+            needToBeLearn = true,
+            SkillRequired = Electricity:2;MetalWelding:5,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPConveyorLifter,
+            inputs
+            {
+                item 3 [Base.BlowTorch] flags[Prop1],
+                item 6 [Base.SmallSheetMetal],
+                item 1 [Base.MetalPipe],
+                item 2 [Base.MetalBar],
+                item 2 [Base.Screws],
+                item 1 [Base.ElectricWire],
+                item 10 [Base.ElectronicsScrap],
+                item 3 [Base.WeldingRods],
+            }
+        }
+    }
+}

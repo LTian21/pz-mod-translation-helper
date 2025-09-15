@@ -1,0 +1,84 @@
+module Base
+{
+    model TrailerM101A3sparemount
+	{
+		mesh = vehicles/Trailers_M101A3_Body|M101A3_frontsparetire,
+		texture = Vehicles/TrailerM101A3cargo_wheel_extra,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M101A3Spares
+		{
+		part DAMNSpareTire
+        	{
+
+			model SpareM101
+				{
+                		file = runFlatSmallTire,
+                        offset = 0.0000 0.1667 1.5091,
+				        rotate = 0.0000 -90.0000 0.0000,
+				}
+            model MountM101
+				{
+                		file = TrailerM101A3sparemount,
+				}
+
+			area = SpareTireFront,
+			category = bodywork,
+			specificItem = false,
+			itemType = runFlat.SmallTire,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+					complete = M101A3.InstallComplete.SpareTrailer,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Wrench,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 1200,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			        complete = M101A3.UninstallComplete.SpareTrailer,
+            		}
+
+            		lua
+            		{
+                create = M101A3.Create.SpareTrailer,
+                init = M101A3.Init.SpareTrailer,
+                }
+		}
+
+	}
+
+		
+}

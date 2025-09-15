@@ -1,0 +1,148 @@
+module Base
+{
+	template vehicle ECTO1PassengerPositions
+	{
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.2 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+			position outside
+			{
+				offset = 0.6 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.2 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+			position outside
+			{
+				offset = -0.6 0.0 0.4,
+				rotate = 0.0 0.0 0.0,
+			}
+		}
+
+		passenger RearRight
+		{
+			position inside
+			{
+				offset = -0.2 0.0 -0.3,
+				rotate = 0.0 0.0 0.0,
+			}
+			position outside
+			{
+				offset = -0.6 0.0 -0.3,
+				rotate = 0.0 0.0 0.0,
+			}
+		}
+
+		passenger *
+		{
+			hasRoof = true, /* Set to true if this passenger is protected from rain. */
+
+			anim enter
+			{
+				anim = Climb_WindowA,
+				rate = 0.33,
+			}
+
+			anim idle
+			{
+				anim = Idle,
+				rate = 1.0,
+			}
+
+			anim exit
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+			}
+
+			anim openDoor
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.3,
+			}
+
+			anim closeDoor
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+			}
+		}
+	}
+	
+	template vehicle ECTO1PassengerSeat3
+	{
+		template = ECTO1PassengerPositions,
+
+		passenger FrontLeft
+		{
+			switchSeat FrontRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = VehicleChangeSeat,
+			}
+			
+			switchSeat RearRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = VehicleChangeSeat,
+			}
+		}
+
+		passenger FrontRight
+		{
+			switchSeat FrontLeft
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = VehicleChangeSeat,
+			}
+			
+			switchSeat RearRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = VehicleChangeSeat,
+			}
+		}
+
+		passenger RearRight
+		{
+			door = DoorRearRight,
+			area = SeatRearRight,
+			
+			switchSeat FrontLeft
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = VehicleChangeSeat,
+			}
+			
+			switchSeat FrontRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = VehicleChangeSeat,
+			}
+
+            switchSeat Stretcher
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound = VehicleChangeSeat,
+			}
+		}
+	}
+}

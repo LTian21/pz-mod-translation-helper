@@ -1,0 +1,646 @@
+module Base
+{
+	model 93chevySuburbanWindshielda
+    	{
+        mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_windshied_front_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93chevySuburbanWindowfla
+    	{
+        mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93chevySuburbanWindowfra
+    	{
+        mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93chevySuburbanWindowrla
+    	{
+        mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93chevySuburbanWindowrra
+    	{
+        mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93chevySilveradoWindowrla
+    	{
+        mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93chevySilveradoWindowrra
+    	{
+        mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93chevySuburbanWindowbla
+    	{
+        mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_window_bl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93chevySuburbanWindowbra
+    	{
+        mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_window_br_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93chevySuburbanWindshieldReara
+    	{
+        mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93chevySuburbanWindshieldRearb
+    	{
+        mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_windshield_rear_b,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    template vehicle SUB93ArmorFront
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model SUB93winda
+				{
+                		file = 93chevySuburbanWindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93chevySuburbanWindshieldArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = SUB93.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.WindshieldArmor,
+					init = SUB93.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model SUB93leftWindowa
+				{
+                		file = 93chevySuburbanWindowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.93chevySuburbanFrontWindowArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.WindowFrontLeftArmor,
+					init = SUB93.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model SUB93rightWindowa
+				{
+                		file = 93chevySuburbanWindowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.93chevySuburbanFrontWindowArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.WindowFrontRightArmor,
+					init = SUB93.Init.WindowFrontRightArmor,
+					}
+		}
+    }
+
+    template vehicle SUB93ArmorRear
+		{
+
+		part DAMNRearLeftArmor
+        {
+
+			model SUB93leftWindowra
+				{
+                		file = 93chevySuburbanWindowrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = WindowRearLeft,
+			specificItem = false,
+			itemType = Base.93chevySuburbanRearWindowArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.WindowRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.WindowRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.WindowRearLeftArmor,
+					init = SUB93.Init.WindowRearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model SUB93rightWindowra
+				{
+                		file = 93chevySuburbanWindowrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = WindowRearRight,
+			specificItem = false,
+			itemType = Base.93chevySuburbanRearWindowArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.WindowRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.WindowRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.WindowRearRightArmor,
+					init = SUB93.Init.WindowRearRightArmor,
+					}
+		}
+    }
+
+    template vehicle SUB93ArmorRearXC
+	{
+        template! = SUB93ArmorRear, 
+
+		part DAMNRearLeftArmor
+        {
+
+			model SUB93leftWindowra
+				{
+                		file = 93chevySilveradoWindowrla,
+				}
+
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model SUB93rightWindowra
+				{
+                		file = 93chevySilveradoWindowrra,
+				}
+		}
+    }
+
+	template vehicle SUB93Armor
+	{
+		template! = SUB93ArmorFront,
+        template! = SUB93ArmorRear,
+
+		part DAMNBackLeftArmor
+        {
+
+			model SUB93leftWindowba
+				{
+                		file = 93chevySuburbanWindowbla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93chevySuburbanBackWindowArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.WindowBackLeftArmor,
+                	requireInstalled = WindowBackLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.WindowBackLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.WindowBackLeftArmor,
+					init = SUB93.Init.WindowBackLeftArmor,
+					}
+		}
+
+		part DAMNBackRightArmor
+        {
+
+			model SUB93rightWindowba
+				{
+                		file = 93chevySuburbanWindowbra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93chevySuburbanBackWindowArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.WindowBackRightArmor,
+                	requireInstalled = WindowBackRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.WindowBackRightArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.WindowBackRightArmor,
+					init = SUB93.Init.WindowBackRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        	{
+
+			model SUB93windrb
+				{
+                		file = 93chevySuburbanWindshieldRearb,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.93chevySuburbanWindshieldRearArmor,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = SUB93.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.WindshieldRearArmor,
+					init = SUB93.Init.WindshieldRearArmor,
+					}
+		}
+	}
+    
+
+	template vehicle SUB93ArmorAlt
+	{
+		template! = SUB93Armor,
+
+		part DAMNWindshieldRearArmor
+        	{
+
+			model SUB93windrb
+				{
+                		file = 93chevySuburbanWindshieldReara,
+				}
+			}
+	}
+}

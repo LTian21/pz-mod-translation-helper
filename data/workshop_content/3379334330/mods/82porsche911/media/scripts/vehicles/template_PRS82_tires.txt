@@ -1,0 +1,334 @@
+module Base
+{
+
+	model 82porsche911turboWheelFL
+	{
+		mesh = vehicles/Vehicles_82porsche911_Wheels|p911_tireN,
+		texture = vehicles/Vehicles_82porsche911turbo_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 82porsche911turboWheelFR
+	{
+		mesh = vehicles/Vehicles_82porsche911_Wheels|p911_tireN,
+		texture = vehicles/Vehicles_82porsche911turbo_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 82porsche911turboWheelRL
+	{
+		mesh = vehicles/Vehicles_82porsche911_Wheels|p911_tireW,
+		texture = vehicles/Vehicles_82porsche911turbo_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 82porsche911turboWheelRR
+	{
+		mesh = vehicles/Vehicles_82porsche911_Wheels|p911_tireW,
+		texture = vehicles/Vehicles_82porsche911turbo_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 82porsche911rwbWheelFL
+	{
+		mesh = vehicles/Vehicles_82porsche911_Wheels|p911rwb_tireN,
+		texture = vehicles/Vehicles_82porsche911rwb_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 82porsche911rwbWheelFR
+	{
+		mesh = vehicles/Vehicles_82porsche911_Wheels|p911rwb_tireN,
+		texture = vehicles/Vehicles_82porsche911rwb_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 82porsche911rwbWheelRL
+	{
+		mesh = vehicles/Vehicles_82porsche911_Wheels|p911rwb_tireW,
+		texture = vehicles/Vehicles_82porsche911rwb_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 82porsche911rwbWheelRR
+	{
+		mesh = vehicles/Vehicles_82porsche911_Wheels|p911rwb_tireW,
+		texture = vehicles/Vehicles_82porsche911rwb_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+
+	template vehicle PRS82TiresTurbo
+	{
+		part TireFrontLeft
+		{
+            model PRSTireFL
+			{
+				file = 82porsche911turboWheelFL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model PRSTireFR
+			{
+				file = 82porsche911turboWheelFR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model PRSTireRL
+			{
+				file = 82porsche911turboWheelRL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+            model PRSTireRR
+			{
+				file = 82porsche911turboWheelRR,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.82porsche911TurboTire,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+	}
+
+    template vehicle PRS82TiresRWB
+	{
+		part TireFrontLeft
+		{
+            model PRSTireFL
+			{
+				file = 82porsche911rwbWheelFL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model PRSTireFR
+			{
+				file = 82porsche911rwbWheelFR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model PRSTireRL
+			{
+				file = 82porsche911rwbWheelRL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+            model PRSTireRR
+			{
+				file = 82porsche911rwbWheelRR,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.82porsche911RWBTire,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+	}
+}

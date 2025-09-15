@@ -1,0 +1,65 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Trailer2Window
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Trailer 2 Window,
+			Icon		= fixtures_windows_01_51,
+		}
+	}
+
+    entity Trailer2Window
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Trailer2Window,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            needWindowFrame = true,
+            OnCreate = BuildablesExpansion.RecipeCode.doubleWindowGlass.OnCreate,
+
+            face W
+            {
+                layer
+                {
+                    row = fixtures_windows_01_49,
+                    row = fixtures_windows_01_48,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_windows_01_50 fixtures_windows_01_51,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 300,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:15,
+            category      = Windows,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_windowsDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 4 [Base.GlassPanel],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

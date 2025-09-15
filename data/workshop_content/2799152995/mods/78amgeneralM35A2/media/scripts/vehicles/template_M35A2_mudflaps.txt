@@ -1,0 +1,76 @@
+module Base
+{
+	model 78amgeneralM35A2mudflaps1
+	{
+		mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_mudflaps,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M35A2Mudflaps
+		{
+		part M35A2Mudflaps
+        	{
+
+			model M35Mudflaps1
+				{
+                		file = 78amgeneralM35A2mudflaps1,
+				}
+
+			category = bodywork,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.M35A2Mudflaps1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M35A2.InstallComplete.Mudflaps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = M35A2.UninstallComplete.Mudflaps,
+
+            		}
+
+            		lua
+            		{
+					create = M35A2.Create.Mudflaps,
+					init = M35A2.Init.Mudflaps,
+					}
+		}
+	}
+
+		
+}

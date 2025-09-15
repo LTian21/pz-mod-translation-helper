@@ -1,0 +1,84 @@
+module Base
+{
+
+	model 75grandPrixRoofrack0
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_roofrack,
+		texture = Vehicles/Vehicles_75grandPrix_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle PRX75Roofrack
+	{
+		part PRX75Roofrack
+		{
+
+			model PRX75Roofrack0
+				{
+                		file = 75grandPrixRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.75grandPrixRoofrack,
+			mechanicRequireKey = false,
+            durability = 3,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = PRX75.InstallComplete.Roofrack,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = PRX75.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = PRX75.Create.Roofrack,
+					init = PRX75.Init.Roofrack,
+				}
+		}
+	}
+}
+

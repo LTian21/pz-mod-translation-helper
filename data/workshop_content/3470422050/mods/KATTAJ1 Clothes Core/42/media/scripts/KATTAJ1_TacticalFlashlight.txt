@@ -1,0 +1,94 @@
+module Base
+{
+	item KATTAJ1_TacticalFlashlight
+    {
+		DisplayName		=	Tactical Flashlight,        	
+		DisplayCategory 	= 	LightSource,
+		Type			=	Drainable,
+	        Weight			=	0.1,
+		Icon			=	KATTAJ1_TacticalFlashlight,
+		ActivatedItem 		= 	TRUE,
+		DissapearOnUse		= 	FASLE,
+		KeepOnDeplete		= 	True,
+		LightDistance		=	28,
+		LightStrength		=	3,
+        	MetalValue 		= 	10,
+		TorchCone		=	TRUE,
+		TorchDot 		=	0.66,
+        	UseDelta		=	0.00002,
+        	cantBeConsolided 	= 	TRUE,
+          	primaryAnimMask 	= 	HoldingTorchRight,
+        	secondaryAnimMask 	= 	HoldingTorchLeft,      	
+        	StaticModel 		= 	KATTAJ1_TacticalFlashlight,
+        	WorldStaticModel 	= 	KATTAJ1_TacticalFlashlight_Ground,
+		Tags 			= 	Flashlight,
+		Tooltip 		= 	Tooltip_KATTAJ1_TacticalFlashlight,
+        	AttachmentType 		= 	FlashlightKATTAJ1,
+		SoundMap 		=	Activate FlashlightOn,
+		SoundMap 		=	Deactivate FlashlightOff,
+    }
+
+
+
+
+	model KATTAJ1_TacticalFlashlight
+	{
+        	mesh = KATTAJ1_TacticalFlashlight,
+        	texture = KATTAJ1_TacticalFlashlight,
+        	scale = 1,
+    	}
+	model KATTAJ1_TacticalFlashlight_Ground
+	{
+	        mesh = WorldItems/KATTAJ1_TacticalFlashlight_Ground,
+	        texture = KATTAJ1_TacticalFlashlight,
+        	scale = 1,
+    	}
+
+
+
+	
+	craftRecipe KATTAJ1 RemoveBattery
+	{
+		timedAction	= DismantleElectrical,
+		Time 		= 30,
+		AllowBatchCraft = False,
+		OnCreate	= Recipe.OnCreate.TorchBatteryRemoval,
+		Tags		= InHandCraft;CanBeDoneInDark,
+		category 	= Electrical,
+
+		inputs
+		{
+			item 1 [Base.KATTAJ1_TacticalFlashlight] mode:keep flags[NotEmpty;ItemCount],
+		}
+		outputs
+		{
+			item 1 Base.Battery,
+		}
+
+	}
+	
+	
+	craftRecipe KATTAJ1 InsertBattery
+	{
+		timedAction	= MakingElectrical,
+		Time 		= 30,
+		OnCreate	= Recipe.OnCreate.TorchBatteryInsert,
+		Tags		= InHandCraft;CanBeDoneInDark,
+		category 	= Electrical,
+
+		inputs
+		{
+			item 1 [Base.KATTAJ1_TacticalFlashlight] flags[IsEmpty] mode:destroy flags[ItemCount],
+			item 1 [Base.Battery] mode:destroy flags[ItemCount],
+		}
+
+		outputs
+		{
+			item 1 Base.KATTAJ1_TacticalFlashlight,
+		}
+
+	}
+	
+
+}
+

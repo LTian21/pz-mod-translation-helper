@@ -1,0 +1,154 @@
+module Base
+{
+	
+    model 87fordF700mudflaps1
+    {
+        mesh = vehicles/Vehicles_87fordB700_Body|f700_mudflaps,
+        texture = Vehicles/Vehicles_87fordB700_Interior3,
+		shader = vehiclewheel,
+        scale = 0.1,
+    }
+
+    model 87fordF700mudflaps2
+    {
+        mesh = vehicles/Vehicles_87fordB700_Body|f700x_mudflaps,
+        texture = Vehicles/Vehicles_87fordB700_Interior5,
+		shader = vehiclewheel,
+        scale = 0.1,
+    }
+
+	template vehicle F700Mudflaps
+		{
+		part B700Mudflaps
+       		{
+
+            model mudflaps1
+			{
+                	file = 87fordF700mudflaps1,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            itemType = Base.87fordF700MudflapsSmall,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+	}
+
+    template vehicle F700MudflapsB
+	{
+        template! = F700Mudflaps,
+
+		part B700Mudflaps
+       		{
+
+            model mudflaps1
+			{
+                	file = 87fordF700mudflaps1,
+                    offset = 0.0000 -0.0400 0.0000,
+			}
+        }
+	}
+
+    template vehicle F700MudflapsX
+		{
+		part B700Mudflaps
+       		{
+
+            model mudflaps1
+			{
+                	file = 87fordF700mudflaps2,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            itemType = Base.87fordF700MudflapsLarge,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+	}
+}

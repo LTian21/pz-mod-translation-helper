@@ -1,0 +1,205 @@
+module Base
+{
+	model 89volvo200BumperFront0
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_bumper0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 89volvo200BumperFrontA
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_bumperA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 89volvo200BullbarFrontA
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_bullbarA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89volvo200BumperFrontL
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_bumperL,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 89volvo200BumperFront0A
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_bumper0A,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89volvo200BumperFrontLA
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_bumperLA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89volvo200BumperRear0
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle VL200Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model BumperFront0
+				{
+                		file = 89volvo200BumperFront0,
+				}
+
+			model BumperFrontL
+				{
+                		file = 89volvo200BumperFrontL,
+				}
+
+            model BumperFront0A
+				{
+                		file = 89volvo200BumperFront0A,
+				}
+
+			model BumperFrontLA
+				{
+                		file = 89volvo200BumperFrontLA,
+				}
+
+            model BullbarFrontA
+				{
+                		file = 89volvo200BullbarFrontA,
+				}
+
+            model BumperFrontB
+				{
+                		file = 89volvo200BumperFrontA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.89volvo240BumperFront0;Base.89volvo240BumperFront0A;Base.89volvo240BumperFrontL;Base.89volvo240BumperFrontLA;Base.89volvo240BullbarFrontA;Base.89volvo240BumperFrontB,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VL200.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = VL200.UninstallComplete.BumperFront,
+                    requireUninstalled = VL200LipFront,
+            		}
+
+            		lua
+            		{
+					create = VL200.Create.BumperFront,
+					init = VL200.Init.BumperFront,
+					}
+			}
+
+
+		part DAMNBumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 89volvo200BumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.89volvo240BumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VL200.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = VL200.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = VL200.Create.BumperRear,
+					init = VL200.Init.BumperRear,
+					}
+		}
+	}
+}

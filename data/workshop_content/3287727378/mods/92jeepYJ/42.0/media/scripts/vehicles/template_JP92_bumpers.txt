@@ -1,0 +1,180 @@
+module Base
+{
+	model 92jeepYJBumperFront0
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_bumper0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 92jeepYJBumperFront1
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_bumper1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 92jeepYJBullbarFrontA
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_bullbarA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 92jeepYJBumperRear0
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 92jeepYJBumperRear1
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_bumper_rear1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP92Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model BumperFront0
+				{
+                		file = 92jeepYJBumperFront0,
+				}
+
+			model BumperFront1
+				{
+                		file = 92jeepYJBumperFront1,
+				}
+
+			model BullbarFrontA
+				{
+                		file = 92jeepYJBullbarFrontA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.92jeepYJBumperFront0;Base.92jeepYJBumperFront1;Base.92jeepYJBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP92.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = JP92.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = JP92.Create.BumperFront,
+					init = JP92.Init.BumperFront,
+					}
+			}
+
+
+		part DAMNBumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 92jeepYJBumperRear0,
+				}
+
+            model BumperRear1
+				{
+                		file = 92jeepYJBumperRear1,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.92jeepYJBumperRear0;Base.92jeepYJBumperRear1,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP92.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = JP92.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = JP92.Create.BumperRear,
+					init = JP92.Init.BumperRear,
+					}
+		}
+	}
+}

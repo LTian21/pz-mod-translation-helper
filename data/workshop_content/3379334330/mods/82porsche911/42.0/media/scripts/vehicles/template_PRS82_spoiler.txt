@@ -1,0 +1,77 @@
+module Base
+{
+	
+	model 82porsche911rwbspoiler0
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911rwb_spoiler,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle PRS82SpoilerRWB
+		{
+		part DAMNSpoiler
+       		{
+
+            model Spoiler0
+			{
+                	file = 82porsche911rwbspoiler0,
+			}
+
+            category = bodywork,
+            area = Engine,
+            parent = EngineDoor,
+        
+            specificItem = false,
+            itemType = Base.82porsche911RWBSpoiler0,
+            mechanicRequireKey = false,
+            durability = 2,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = EngineDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = PRS82.InstallComplete.SpoilerRWB,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = PRS82.UninstallComplete.SpoilerRWB,
+            }
+            lua
+            {
+                create = PRS82.Create.SpoilerRWB,
+                init = PRS82.Init.SpoilerRWB,
+            }
+        }
+	}
+}
+

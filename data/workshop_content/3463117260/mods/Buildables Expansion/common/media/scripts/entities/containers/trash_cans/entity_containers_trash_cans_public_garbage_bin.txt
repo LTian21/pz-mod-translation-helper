@@ -1,0 +1,56 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_PublicGarbageBin
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Public Garbage Bin,
+			Icon		= trashcontainers_01_21,
+		}
+	}
+
+    entity PublicGarbageBin
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_PublicGarbageBin,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = trashcontainers_01_21,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:15,
+            category      = Containers_Trashcans,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_trashCanDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SmallSheetMetal],
+                item 8 [Base.SheetMetal],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 2 [Base.Hinge],
+                item 1 [Base.Bag_TrashBag;Base.Garbagebag],
+                item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

@@ -1,0 +1,62 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_RoundedGlassDisplayCounter
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Rounded Glass Display Counter,
+			Icon		= location_shop_generic_01_35,
+		}
+	}
+
+    entity RoundedGlassDisplayCounter
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_RoundedGlassDisplayCounter,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = location_shop_generic_01_34 location_shop_generic_01_35,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_shop_generic_01_33,
+                    row = location_shop_generic_01_32,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:8,
+            xpAward       = Woodwork:5,
+            category      = Containers_Commercial,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_commercialCounterDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 8 [Base.Plank] flags[Prop2],
+                item 4 [Base.GlassPanel],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

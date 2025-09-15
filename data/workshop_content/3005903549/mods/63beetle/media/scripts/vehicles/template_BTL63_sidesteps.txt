@@ -1,0 +1,131 @@
+module Base
+{
+
+	model 63beetlesidesteps
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_sidesteps,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle BTL63Sidesteps
+	{
+		part BTL63Sidesteps
+		{
+			
+			model BTL63step0
+			{
+				file = 63beetlesidesteps,
+			}
+			
+			area = GasTank,
+			itemType = Base.63beetleSidesteps0,
+			specificItem = false,
+			category = bodywork,
+			mechanicRequireKey = true,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = BTL63.InstallComplete.Sidesteps,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = BTL63.UninstallComplete.Sidesteps,
+			}
+			lua
+			{
+				init = BTL63.Init.Sidesteps,
+				create = BTL63.Create.Sidesteps,
+			}
+		}
+	}
+
+	template vehicle BTL63SidestepsOFF
+	{
+		part BTL63Sidesteps
+		{
+			
+			model BTL63step0
+			{
+				file = 63beetlesidesteps,
+			}
+			
+			area = GasTank,
+			itemType = Base.63beetleSidesteps0,
+			specificItem = false,
+			category = bodywork,
+			mechanicRequireKey = true,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = BTL63.InstallComplete.SidestepsOFF,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = BTL63.UninstallComplete.SidestepsOFF,
+			}
+			lua
+			{
+				init = BTL63.Init.SidestepsOFF,
+				create = BTL63.Create.SidestepsOFF,
+			}
+		}
+	}
+}
+

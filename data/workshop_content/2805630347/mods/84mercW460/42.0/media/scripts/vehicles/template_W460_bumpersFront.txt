@@ -1,0 +1,190 @@
+module Base
+{
+	model W460bumper1
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model W460bullbar2
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_bumper_front2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model W460bullbar3
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_bumper_front3,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model W460bullbarM
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_bumper_frontM,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle W460CBumpersFront
+		{
+		part DAMNBumperFront
+        	{
+
+			model Bumper1
+				{
+                		file = W460bumper1,
+				}
+
+			model Bullbar2
+				{
+                		file = W460bullbar2,
+				}
+
+			model Bullbar3
+				{
+                		file = W460bullbar3,
+				}
+
+            model BullbarM
+				{
+                		file = W460bullbarM,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.W460Bumper1;Base.W460Bullbar2;Base.W460Bullbar3;Base.W460BullbarM,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Wrench,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 650,
+                    skills = Mechanics:3,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = W460.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+                    create = W460.Create.BumperFront,
+                    init = W460.Init.BumperFront,
+                    }
+		}
+	}
+
+    template vehicle W460BumpersFrontM
+		{
+		part DAMNBumperFront
+        	{
+
+            model BullbarM
+				{
+                		file = W460bullbarM,
+				}
+
+			model Bumper1
+				{
+                		file = W460bumper1,
+				}
+
+			model Bullbar2
+				{
+                		file = W460bullbar2,
+				}
+
+			model Bullbar3
+				{
+                		file = W460bullbar3,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.W460BullbarM;Base.W460Bumper1;Base.W460Bullbar2;Base.W460Bullbar3,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.BumperFrontM,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Wrench,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 650,
+                    skills = Mechanics:3,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = W460.UninstallComplete.BumperFrontM,
+            		}
+
+            		lua
+            		{
+                    create = W460.Create.BumperFrontM,
+                    init = W460.Init.BumperFrontM,
+                    }
+		}
+	}		
+}

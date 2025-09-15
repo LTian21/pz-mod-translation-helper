@@ -1,0 +1,154 @@
+module Base
+{
+	model 63beetlerearBumper0
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 63beetlerearBumper1
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_bumper_rear1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BTL63RearBumpers
+		{
+		part BTL63RearBumper
+        	{
+
+			model RearBumper0
+				{
+                		file = 63beetlerearBumper0,
+				}
+
+			model RearBumper1
+				{
+                		file = 63beetlerearBumper1,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.63beetleBumperRear0;Base.63beetleBumperRear1,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BTL63.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BTL63.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = BTL63.Create.RearBumper,
+					init = BTL63.Init.RearBumper,
+					}
+		}
+	}
+
+	template vehicle BTL63RearBumpersOFF
+		{
+		part BTL63RearBumper
+        	{
+
+			model RearBumper0
+				{
+                		file = 63beetlerearBumper0,
+				}
+
+			model RearBumper1
+				{
+                		file = 63beetlerearBumper1,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.63beetleBumperRear0;Base.63beetleBumperRear1,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BTL63.InstallComplete.RearBumperOFF,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BTL63.UninstallComplete.RearBumperOFF,
+            		}
+
+            		lua
+            		{
+					create = BTL63.Create.RearBumperOFF,
+					init = BTL63.Init.RearBumperOFF,
+					}
+		}
+	}
+}

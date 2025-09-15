@@ -1,0 +1,86 @@
+module Base
+{
+
+	model 69camarospare
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_tire_spare,
+		texture = vehicles/Vehicles_69camaro_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	
+	template vehicle CAM69SpareTires
+	{
+		part CAM69SpareTire
+        	{
+
+			model CAM69SpareTire0
+				{
+                		file = 69camarospare,
+				}
+			model CAM69SpareTire1
+				{
+                		file = 69camarospare,
+				}
+			model CAM69SpareTire2
+				{
+                		file = 69camarospare,
+				}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.CUDAtire;Base.DodgeRTtire;Base.CamaroSStire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CAM69.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = CAM69.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = CAM69.Create.SpareTire,
+				init = CAM69.Init.SpareTire,
+				}
+		}
+	}
+}
+

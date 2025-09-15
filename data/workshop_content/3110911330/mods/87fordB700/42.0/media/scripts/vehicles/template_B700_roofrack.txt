@@ -1,0 +1,97 @@
+module Base
+{
+
+	model 87fordB700Roofrack0
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_roofrack0,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 87fordB700RoofrackLights0
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_extra_lights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle B700Roofrack
+	{
+		part B700Roofrack
+		{
+
+			model B700Roofrack0
+				{
+                		file = 87fordB700Roofrack0,
+				}
+
+			model B700RoofrackLights0
+				{
+                		file = 87fordB700RoofrackLights0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.87fordB700Roofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+            durability = 4,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = B700.InstallComplete.Roofrack,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.Roofrack,
+					requireUninstalled = DAMNGasCanOne;DAMNGasCanTwo;DAMNGenerator;B700SpareTireOne;B700SpareTireTwo,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = B700.Create.Roofrack,
+					init = B700.Init.Roofrack,
+				}
+		}
+	}
+}
+

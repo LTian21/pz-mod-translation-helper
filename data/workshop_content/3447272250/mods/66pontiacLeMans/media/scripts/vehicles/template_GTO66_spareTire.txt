@@ -1,0 +1,60 @@
+module Base
+{
+	model 66pontiacLeMansSpare1
+	{
+		mesh = vehicles/Vehicles_66pontiacLeMans_Body|66lemans_spare,
+		texture = Vehicles/Vehicles_66pontiacLeMans_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle GTO66SpareTires
+	{
+		part DAMNSpareTire
+        	{
+        	model Spare1
+			{
+				file = 66pontiacLeMansSpare1,
+			}
+            model Spare2
+			{
+				file = 66pontiacLeMansSpare1,
+			}
+
+			category = tire,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.75grandPrixR215Tire1;Base.75grandPrixR217Tire3,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GTO66.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = GTO66.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = GTO66.Create.SpareTire,
+				init = GTO66.Init.SpareTire,
+				}
+		}
+	}
+}
+

@@ -1,0 +1,66 @@
+module Base
+{
+
+	template vehicle MAN80SpareTire
+	{
+
+        part DAMNSpareTire
+        {
+            model SpareTire0
+            {
+                file = runFlatLargeTire,
+                offset = -0.97 0.88 1.68,
+                rotate = 0 0 0,
+                scale = 1.0,
+            }
+
+            specificItem = false,
+            itemType = runFlat.LargeTire,
+            area = GasTank,
+            category = tire,
+            mechanicRequireKey = false,
+            durability = 5,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			             equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = MAN80.InstallComplete.SpareTire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = MAN80.UninstallComplete.SpareTire,
+            }
+            lua
+            {
+                init = MAN80.Init.SpareTire,
+                create = MAN80.Create.SpareTire,
+            }
+        }
+    }
+}

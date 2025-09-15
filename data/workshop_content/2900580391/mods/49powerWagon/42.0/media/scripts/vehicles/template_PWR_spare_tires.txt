@@ -1,0 +1,161 @@
+module Base
+{
+	model 49powerWagonSpareStock
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_tire_stock_spare,
+		texture = Vehicles/Vehicles_49powerWagon_Wheel_stock,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 49powerWagonSparePA
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_tire_pa_spare,
+		texture = Vehicles/Vehicles_49powerWagon_Wheel_pa,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle PWRSpareTireStock
+		{
+		part DAMNSpareTire
+        	{
+
+				model PWRspare0
+				{
+                	file = 49powerWagonSpareStock,
+				}
+                model PWRSpareUNIL
+			    {
+				file = 49powerWagonWheel2L,
+                offset = 0.0000 0.2111 -1.1777,
+				rotate = 180.0000 -90.0000 180.0000,
+			    }
+
+				area = TruckBed,
+				category = Other,
+				specificItem = false,
+				itemType = Base.49powerWagonTire;damnCraft.SmallTire2,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = PWR.InstallComplete.SpareTire,
+                	requireUninstalled = TruckBedSeat,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+		            complete = PWR.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+            			init = PWR.Init.SpareTire,
+						create = PWR.Create.SpareTire,
+					}
+
+			}
+	}
+
+	template vehicle PWRSpareTirePA
+		{
+		part DAMNSpareTire
+        	{
+
+				model PWRspare1
+				{
+                	file = 49powerWagonSparePA,
+				}
+				area = TruckBed,
+				category = Other,
+				specificItem = false,
+				itemType = Base.49powerWagonApocalypseTire,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 900,
+                	skills = Mechanics:1,
+                	door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PWR.InstallComplete.SpareTirePA,
+                	requireUninstalled = TruckBedSeat,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 850,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+		            complete = PWR.UninstallComplete.SpareTirePA,
+            		}
+
+            		lua
+            		{
+            			init = PWR.Init.SpareTirePA,
+						create = PWR.Create.SpareTirePA,
+					}
+
+			}
+	}
+
+		
+}

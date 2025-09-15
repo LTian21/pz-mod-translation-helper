@@ -1,0 +1,298 @@
+module Base
+{
+
+	model 91fordRangerRollbar
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_rollbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 91fordRangerCapShort
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_bedCap_short,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        static = FALSE,
+	}
+
+    model 91fordRangerCapLong
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_bedCap_long,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        static = FALSE,
+	}
+
+	template vehicle RNG91BedExtrasXC
+	{
+		part RNG91TruckBedExtras
+		{
+
+			model RNG91Rollbar
+				{
+                		file = 91fordRangerRollbar,
+				}
+
+            model RNG91Cap
+				{
+                		file = 91fordRangerCapShort,
+				}
+
+            anim Close
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					rate = 1.0,
+				}
+
+			anim Open
+				{
+					anim = trunk_opening,
+					rate = 0.5,
+				}
+
+			anim Closed
+				{
+					anim = trunk_opening,
+					animate = FALSE,
+				}
+
+			anim Opened
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+
+			category = Other,
+			area = TruckBed,
+			parent = TrunkDoor,
+			itemType = Base.91fordRangerRollbar;Base.91fordRangerBedCap,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+
+            container
+			{
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}             
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RNG91.InstallComplete.TruckBedExtras,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = RNG91.UninstallComplete.TruckBedExtras,
+					requireEmpty = true,
+
+            }
+
+            lua
+            	{
+					create = RNG91.Create.TruckBedExtras,
+					init = RNG91.Init.TruckBedExtras,
+				}
+		}
+	}
+
+    template vehicle RNG91BedExtrasXClong
+	{
+        template! = RNG91BedExtrasXC,
+
+		part RNG91TruckBedExtras
+		{
+
+			model RNG91Rollbar
+				{
+                	file = 91fordRangerRollbar,
+                    offset = 0.0000 0.0000 0.0000,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+            model RNG91Cap
+				{
+                	file = 91fordRangerCapLong,
+                    offset = 0.0000 0.0000 0.0000,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+		}
+	}
+
+    template vehicle RNG91BedExtrasSC
+	{
+        template! = RNG91BedExtrasXC,
+
+		part RNG91TruckBedExtras
+		{
+
+			model RNG91Rollbar
+				{
+                	file = 91fordRangerRollbar,
+                    offset = 0.0000 0.0000 0.4169,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+            model RNG91Cap
+				{
+                	file = 91fordRangerCapShort,
+                    offset = 0.0000 0.0000 0.4169,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+		}
+	}
+
+    template vehicle RNG91BedExtrasSClong
+	{
+        template! = RNG91BedExtrasXC,
+
+		part RNG91TruckBedExtras
+		{
+
+			model RNG91Rollbar
+				{
+                	file = 91fordRangerRollbar,
+                    offset = 0.0000 0.0000 0.4169,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+            model RNG91Cap
+				{
+                	file = 91fordRangerCapLong,
+                    offset = 0.0000 0.0000 0.4169,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+		}
+	}
+
+    template vehicle RNG91BedExtrasPD
+	{
+		part RNG91TruckBedExtras
+		{
+
+			model RNG91Rollbar
+				{
+                		file = 91fordRangerRollbar,
+				}
+
+            model RNG91Cap
+				{
+                		file = 91fordRangerCapShort,
+				}
+
+            anim Close
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					rate = 1.0,
+				}
+
+			anim Open
+				{
+					anim = trunk_opening,
+					rate = 0.5,
+				}
+
+			anim Closed
+				{
+					anim = trunk_opening,
+					animate = FALSE,
+				}
+
+			anim Opened
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+
+			door
+			{}
+
+			category = Other,
+			area = SeatRearLeft,
+			parent = TrunkDoor,
+			itemType = Base.91fordRangerRollbar;Base.91fordRangerBedCap,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+             
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RNG91.InstallComplete.TruckBedExtrasPD,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = RNG91.UninstallComplete.TruckBedExtrasPD,
+					requireEmpty = true,
+
+            }
+
+            lua
+            	{
+					create = RNG91.Create.TruckBedExtrasPD,
+					init = RNG91.Init.TruckBedExtrasPD,
+				}
+		}
+	}
+}

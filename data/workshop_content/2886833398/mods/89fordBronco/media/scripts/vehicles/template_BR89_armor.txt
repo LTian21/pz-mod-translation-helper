@@ -1,0 +1,356 @@
+module Base
+{
+	model 89fordBroncowindshielda
+    	{
+        mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_armor_w,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 89fordBroncowindowfla
+    	{
+        mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_armor_wfl,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 89fordBroncowindowfra
+    	{
+        mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_armor_wfr,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 89fordBroncowindowrla
+    	{
+        mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_armor_wrl,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 89fordBroncowindowrra
+    	{
+        mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_armor_wrr,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle BR89Armor
+		{
+		part BR89WindshieldArmor
+        	{
+
+			model BR89winda
+				{
+                		file = 89fordBroncowindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.80sPickupWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BR89.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = BR89.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = BR89.Create.WindshieldArmor,
+					init = BR89.Init.WindshieldArmor,
+					}
+		}
+
+		part BR89WindowFrontLeftArmor
+        	{
+
+			model BR89leftwina
+				{
+                		file = 89fordBroncowindowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.80sPickupWindowFrontArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BR89.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BR89.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = BR89.Create.WindowFrontLeftArmor,
+					init = BR89.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part BR89WindowFrontRightArmor
+        	{
+
+			model BR89rightwina
+				{
+                		file = 89fordBroncowindowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.80sPickupWindowFrontArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BR89.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BR89.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = BR89.Create.WindowFrontRightArmor,
+					init = BR89.Init.WindowFrontRightArmor,
+					}
+		}
+
+		part BR89WindowRearLeftArmor
+        	{
+
+			model BR89leftrearwina
+				{
+                		file = 89fordBroncowindowrla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.80sPickupWindowRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BR89.InstallComplete.WindowRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BR89.UninstallComplete.WindowRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = BR89.Create.WindowRearLeftArmor,
+					init = BR89.Init.WindowRearLeftArmor,
+					}
+		}
+
+		part BR89WindowRearRightArmor
+        	{
+
+			model BR89rightrearwina
+				{
+                		file = 89fordBroncowindowrra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.80sPickupWindowRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BR89.InstallComplete.WindowRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BR89.UninstallComplete.WindowRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = BR89.Create.WindowRearRightArmor,
+					init = BR89.Init.WindowRearRightArmor,
+					}
+		}
+
+		}
+
+}

@@ -1,0 +1,74 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_GravelCornerFloor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Gravel Corner Floor,
+			Icon		= blends_street_01_35,
+		}
+	}
+
+    entity GravelCornerFloor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_GravelCornerFloor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+		    isThumpable     = false,
+		    OnIsValid = BuildablesExpansionRecipeCode.floorOverlay.OnIsValid,
+		    OnCreate = BuildablesExpansionRecipeCode.floorOverlay.OnCreate,
+			
+            face W
+            {
+                layer
+                {
+                    row = blends_street_01_35,
+                }
+            }
+            
+            face N
+            {
+                layer
+                {
+                    row = blends_street_01_36,
+                }
+            }
+            
+            face E
+            {
+                layer
+                {
+                    row = blends_street_01_34,
+                }
+            }
+            
+            face S
+            {
+                layer
+                {
+                    row = blends_street_01_33,
+                }
+            }
+        }
+		
+	    component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildLowNoTool,
+            time          = 200,
+            category      = Floors_Natural,
+            ToolTip       = Tooltip_craft_gravelFloorDesc,
+            inputs
+            {
+                item 1 [Base.Gravelbag] flags[Prop1],
+            }
+        }
+    }
+}

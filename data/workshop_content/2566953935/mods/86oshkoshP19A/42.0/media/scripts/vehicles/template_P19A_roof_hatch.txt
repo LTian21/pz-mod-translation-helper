@@ -1,0 +1,122 @@
+module Base
+{
+	model 86oshkoshroofhatch
+	{
+		mesh = vehicles/Vehicles_86oshkoshP19A_Body|p19a_door_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle roofHatch
+	{
+
+		part P19Ahatch
+		{
+			model roofhatch15648764
+				{
+				file = 86oshkoshroofhatch,
+				}
+
+			itemType = Base.P19ARoofHatch,
+			category = bodywork,
+            durability = 5,
+			area = SeatFrontRight,
+
+			anim ActorOpen
+			{
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				angle = 0.0 270.0 0.0,
+			}
+
+			door{}
+
+			anim ActorOpen
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				anim ActorClose
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+
+			anim Close
+				{
+					sound = VehicleDoorClose,
+                    reverse = TRUE,
+					anim = top_door_opening,
+					rate = 1.0,
+				}
+
+				anim Open
+				{
+					sound = VehicleDoorOpen,
+					anim = top_door_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = top_door_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = top_door_opening,
+                    reverse = TRUE,
+					animate = FALSE,
+				}
+
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1500,
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1500,
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Door,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.Door,
+			}
+		}
+	}
+}

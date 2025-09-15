@@ -1,0 +1,245 @@
+module Base
+{
+
+	model 91fordRangerWheel1FL
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Wheel|91ranger_wheel,
+		texture = vehicles/Vehicles_91fordRanger_Wheel,
+		shader = vehiclewheel,
+		scale = 0.10,
+	}
+
+    model 91fordRangerWheel1FR
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Wheel|91ranger_wheel,
+		texture = vehicles/Vehicles_91fordRanger_Wheel,
+		shader = vehiclewheel,
+		scale = 0.10,
+        invertX = TRUE,
+	}
+
+    model 91fordRangerWheel1RL
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Wheel|91ranger_wheel,
+		texture = vehicles/Vehicles_91fordRanger_Wheel,
+		shader = vehiclewheel,
+		scale = 0.10,
+        
+	}
+
+    model 91fordRangerWheel1RR
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Wheel|91ranger_wheel,
+		texture = vehicles/Vehicles_91fordRanger_Wheel,
+		shader = vehiclewheel,
+		scale = 0.10,
+        invertX = TRUE,
+	}
+
+    model 91fordRangerWheelUNIL
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.11,
+	}
+    model 91fordRangerWheelUNIR
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.11,
+        invertX = TRUE,
+	}
+
+	template vehicle RNG91Tires
+	{
+		part TireFrontLeft
+		{
+            model RNG91Tire0
+			{
+				file = 91fordRangerWheel1FL,
+			}
+            model RNG91Tire5
+			{
+				file = 91fordRangerWheelUNIL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = RNG91.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = RNG91.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = RNG91.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model RNG91Tire0
+			{
+				file = 91fordRangerWheel1FR,
+			}
+            model RNG91Tire5
+			{
+				file = 91fordRangerWheelUNIR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = RNG91.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = RNG91.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = RNG91.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model RNG91Tire0
+			{
+				file = 91fordRangerWheel1RL,
+			}
+            model RNG91Tire5
+			{
+				file = 91fordRangerWheelUNIL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = RNG91.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+
+            table uninstall
+			{
+				complete = RNG91.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = RNG91.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model RNG91Tire0
+			{
+				file = 91fordRangerWheel1RR,
+			}
+            model RNG91Tire5
+			{
+				file = 91fordRangerWheelUNIR,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+            table install
+			{
+				complete = RNG91.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = RNG91.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = RNG91.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.91fordRangerTire2;damnCraft.SmallTire2,
+             
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}

@@ -1,0 +1,97 @@
+module Base
+{
+	model 89dodgeCaravanfrontBumper0
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89dodgeCaravanfrontBumper1
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89dodgeCaravanfrontBumperA
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DGC89FrontBumpers
+		{
+		part DGC89FrontBumper
+        	{
+
+			model FrontBumper0
+				{
+                		file = 89dodgeCaravanfrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 89dodgeCaravanfrontBumper1,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 89dodgeCaravanfrontBumperA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.89dodgeCaravanBumperFront0;Base.89dodgeCaravanBumperFrontA;Base.89dodgeCaravanBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DGC89.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = DGC89.Create.FrontBumper,
+					init = DGC89.Init.FrontBumper,
+					}
+		}
+	}
+}

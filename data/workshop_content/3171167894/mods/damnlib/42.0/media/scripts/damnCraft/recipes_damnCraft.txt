@@ -1,0 +1,622 @@
+module Base
+{	
+    /************************ Rims ************************/
+
+    craftRecipe damnCraft.MakeSmallSteelRim
+	{
+        timedAction = Welding,
+        time = 200,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:10,
+        SkillRequired = MetalWelding:4,
+
+        inputs
+        {
+            item 1 [Base.ScrapMetal],
+            item 3 [Base.SmallSheetMetal],
+			item 4 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.SteelRimSmall,
+        }
+	}
+
+    craftRecipe damnCraft.MakeMediumSteelRim
+	{
+        timedAction = Welding,
+        time = 300,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:10,
+        SkillRequired = MetalWelding:4,
+
+        inputs
+        {
+            item 2 [Base.ScrapMetal],
+            item 5 [Base.SmallSheetMetal],
+			item 5 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.SteelRimMedium,
+        }
+	}
+
+    craftRecipe damnCraft.MakeLargeSteelRim
+	{
+        timedAction = Welding,
+        time = 400,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:10,
+        SkillRequired = MetalWelding:4,
+
+        inputs
+        {
+            item 3 [Base.ScrapMetal],
+            item 7 [Base.SmallSheetMetal],
+			item 6 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.SteelRimLarge,
+        }
+	}
+
+    /************************ Universal Tires ************************/
+
+    craftRecipe damnCraft.MakeSmallTire1
+	{
+        timedAction = Making,
+        time = 150,
+        Tags = InHandCraft,
+        SkillRequired = Mechanics:2,
+        category = Mechanical,
+        xpAward = Mechanics:2,
+        OnCreate = DAMN.OnCreate.PassSecondCond,
+
+        inputs
+        {
+            item 1 [damnCraft.SteelRimSmall],
+            item 1 [damnCraft.TireRubberNewSmall;damnCraft.TireRubberUsedSmall;damnCraft.TireRubberDestroyedSmall] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.SmallTire1,
+        }
+	}
+
+    craftRecipe damnCraft.MakeSmallTire2
+	{
+        timedAction = Making,
+        time = 150,
+        Tags = InHandCraft,
+        SkillRequired = Mechanics:2,
+        category = Mechanical,
+        xpAward = Mechanics:2,
+        OnCreate = DAMN.OnCreate.PassSecondCond,
+
+        inputs
+        {
+            item 1 [damnCraft.SteelRimSmall],
+            item 1 [damnCraft.TireRubberNewSmall;damnCraft.TireRubberUsedSmall;damnCraft.TireRubberDestroyedSmall] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.SmallTire2,
+        }
+	}
+
+    /************************ Rubber Strips ************************/
+
+    craftRecipe damnCraft.MakeRubberStrips
+	{
+        timedAction = Making,
+        time = 200,
+        Tags = InHandCraft,
+        category = Mechanical,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.MakeRubberStrips,
+
+        inputs
+        {
+            item 1 [damnCraft.TireRubberNewSmall;damnCraft.TireRubberUsedSmall;damnCraft.TireRubberDestroyedSmall;damnCraft.TireRubberNewLarge;damnCraft.TireRubberUsedLarge;damnCraft.TireRubberDestroyedLarge] mode:destroy,
+            item 1 tags[SharpKnife] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 damnCraft.RubberStrip,
+        }
+	}
+
+    craftRecipe damnCraft.MakeTirePiece
+	{
+        timedAction = Making,
+        time = 200,
+        Tags = InHandCraft,
+        category = Mechanical,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+
+        inputs
+        {
+            item 1 [Base.Glue],
+            item 2 [damnCraft.RubberStrip] mode:destroy,
+            item 1 tags[SharpKnife] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+        }
+        outputs
+        {
+            item 2 Base.TirePiece,
+        }
+	}
+
+    /************************ Tire Repair Kit ************************/
+
+   craftRecipe damnCraft.OpenTireRepairKit
+	{
+        timedAction = Making,
+        time = 50,
+        Tags = InHandCraft;CanBeDoneInDark,
+
+        inputs
+        {
+            item 1 [damnCraft.TireRepairKit],
+        }
+        outputs
+        {
+            item 1 damnCraft.TireRepairTools,
+            item 1 damnCraft.TireRepairRubberSolution,
+            item 1 damnCraft.TireRepairStrips,
+        }
+	}
+
+    /************************ Plastic Welding Kit ************************/
+
+    craftRecipe damnCraft.OpenPlasticWeldingKit
+	{
+        timedAction = Making,
+        time = 50,
+        Tags = InHandCraft;CanBeDoneInDark,
+
+        inputs
+        {
+            item 1 [damnCraft.PlasticWeldingKit],
+        }
+        outputs
+        {
+            item 1 damnCraft.PlasticWeldingGun,
+            item 1 damnCraft.PlasticWeldingStaples100Pack,
+        }
+	}
+
+    craftRecipe damnCraft.RemoveBatteryFromPlasticWeldingGun
+	{
+        timedAction = MakingElectrical,
+        time = 40,
+        AllowBatchCraft = False,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Electrical,
+        OnCreate = DAMN.OnCreate.PlasticWeldingGunBatteryRemoval,
+
+        inputs
+        {
+            item 1 [damnCraft.PlasticWeldingGun] mode:keep flags[NotEmpty],
+        }
+        outputs
+        {
+            item 1 Base.Battery,
+        }
+	}
+
+    craftRecipe damnCraft.InsertBatteryIntoPlasticWeldingGun
+	{
+        timedAction = MakingElectrical,
+        time = 40,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Electrical,
+        OnCreate = DAMN.OnCreate.PlasticWeldingGunBatteryInsert,
+
+        inputs
+        {
+            item 1 [damnCraft.PlasticWeldingGun] mode:destroy flags[IsEmpty],
+            item 1 [Base.Battery] mode:destroy,
+        }
+        outputs
+        {
+            item 1 damnCraft.PlasticWeldingGun,
+        }
+	}
+
+    /************************ Rubber Mounts ************************/
+
+    craftRecipe damnCraft.MakeSmallTireRubberMount
+    {
+        timedAction = Welding,
+        time = 100,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:10,
+        SkillRequired = MetalWelding:3,
+
+        inputs
+        {
+            item 1 [Base.MetalBar],
+            item 4 [Base.ScrapMetal],
+			item 4 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.TireRubberMountSmall,
+        }
+    }
+
+    craftRecipe damnCraft.AddSmallTireRubberToMount
+    {
+        timedAction = Making,
+        time = 25,
+        Tags = InHandCraft,
+        OnCreate = DAMN.OnCreate.PassSecondCond,
+
+        inputs
+        {
+            item 1 [damnCraft.TireRubberMountSmall],
+            item 1 [damnCraft.TireRubberNewSmall;damnCraft.TireRubberUsedSmall;damnCraft.TireRubberDestroyedSmall] mode:destroy,
+        }
+        outputs
+        {
+            item 1 damnCraft.TireRubberMountedSmall,
+        }
+    }
+
+    craftRecipe damnCraft.MakeLargeTireRubberMount
+    {
+        timedAction = Welding,
+        time = 120,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:15,
+        SkillRequired = MetalWelding:3,
+
+        inputs
+        {
+            item 1 [Base.MetalBar],
+            item 6 [Base.ScrapMetal],
+			item 5 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.TireRubberMountLarge,
+        }
+    }
+
+    craftRecipe damnCraft.AddLargeTireRubberToMount
+    {
+        timedAction = Making,
+        time = 30,
+        Tags = InHandCraft,
+        OnCreate = DAMN.OnCreate.PassSecondCond,
+
+        inputs
+        {
+            item 1 [damnCraft.TireRubberMountLarge],
+            item 1 [damnCraft.TireRubberNewLarge;damnCraft.TireRubberUsedLarge;damnCraft.TireRubberDestroyedLarge] mode:destroy,
+        }
+        outputs
+        {
+            item 1 damnCraft.TireRubberMountedLarge,
+        }
+    }
+
+    /************************ Seats ************************/
+
+    craftRecipe damnCraft.MakeSmallSeatFrame
+    {
+        timedAction = Welding,
+        time = 150,
+        Tags = InHandCraft;Welding,
+        category = Mechanical,
+        xpAward = MetalWelding:10,
+        SkillRequired = MetalWelding:3,
+
+        inputs
+        {
+            item 1 [Base.SheetMetal],
+            item 2 [Base.ScrapMetal],
+			item 4 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.SeatFrameSmall,
+        }
+    }
+
+    craftRecipe damnCraft.MakeLargeSeatFrame
+    {
+        timedAction = Welding,
+        time = 250,
+        Tags = InHandCraft;Welding,
+        category = Mechanical,
+        xpAward = MetalWelding:15,
+        SkillRequired = MetalWelding:3,
+
+        inputs
+        {
+            item 2 [Base.SheetMetal],
+            item 4 [Base.ScrapMetal],
+			item 8 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.SeatFrameLarge,
+        }
+    }
+
+    /************************ Plastic Molds ************************/
+
+    craftRecipe damnCraft.MakeWoodenMoldBox
+    {
+        timedAction = Making,
+        time        = 200,
+        tags = AnySurfaceCraft;Carpentry,
+        category = Carpentry,
+        xpAward = Woodwork:5,
+        SkillRequired = Woodwork:3,
+
+        inputs
+        {
+            item 5 [Base.Plank],
+            item 2 [Base.Nails],
+            item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 damnCraft.woodenMoldBox,
+        }
+    }
+
+    craftRecipe damnCraft.MakePlasterMold
+	{
+        timedAction = MixingBucket,
+        time = 100,
+        Tags = InHandCraft,
+        category = Mechanical,
+        xpAward = Mechanics:10,
+        SkillRequired = Mechanics:3,
+        OnCreate = DAMN.OnCreate.MakePlasterMold,
+
+        inputs
+        {
+            item 1 tags[damnPlasticBumper;damnPlasticSitesteps;damnPlasticSidesteps;damnPlasticPart;damnSpoiler;damnSnorkel;damnBodykit] mode:destroy,
+            item 1 [damnCraft.woodenMoldBox],
+            item 1 [Base.Garbagebag],
+            item 10 [Base.BucketPlasterFull],
+        }
+        outputs
+        {
+            item 1 damnCraft.genericMold,
+        }
+	}
+
+    craftRecipe damnCraft.RemoveOldPartFromMold
+	{
+        timedAction = Making,
+        time = 100,
+        Tags = InHandCraft,
+        category = Mechanical,
+        xpAward = Mechanics:1,
+        OnCreate = DAMN.OnCreate.RemoveOldPartFromMold,
+
+        inputs
+        {
+            item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;NoBrokenItems],
+            item 1 [damnCraft.genericMold] mode:destroy flags[IsCookedFoodItem],
+        }
+        outputs
+        {
+            item 1 damnCraft.genericNegativeMold,
+            item 1 damnCraft.woodenMoldBox,
+        }
+	}
+
+    craftRecipe damnCraft.CrushStyrofoamSheet
+	{
+        timedAction = Making,
+        time = 50,
+        Tags = InHandCraft,
+        category = Mechanical,
+
+        inputs
+        {
+            item 1 [damnCraft.styrofoamSheet],
+        }
+        outputs
+        {
+            item 3 damnCraft.styrofoamScraps,
+        }
+	}
+
+    craftRecipe damnCraft.CrushStyrofoamPackage
+	{
+        timedAction = Making,
+        time = 50,
+        Tags = InHandCraft,
+        category = Mechanical,
+
+        inputs
+        {
+            item 1 [Base.TakeoutBox_Styrofoam],
+        }
+        outputs
+        {
+            item 1 damnCraft.styrofoamScraps,
+        }
+	}
+
+    craftRecipe damnCraft.MakeStyrofoamPaste
+	{
+        timedAction = MixingBucket,
+        time = 100,
+        Tags = InHandCraft,
+        category = Mechanical,
+        xpAward = Mechanics:3,
+        SkillRequired = Mechanics:1,
+
+        inputs
+        {
+            item 1 [damnCraft.acetoneCan;damnCraft.acetoneJug],
+            item 3 [damnCraft.styrofoamScraps],
+            item 1 [Base.Bucket;Base.BucketEmpty;Base.BucketWaterDebug] mode:destroy,
+        }
+        outputs
+        {
+            item 1 damnCraft.BucketStyrofoamPaste,
+        }
+	}
+
+    craftRecipe damnCraft.PourPasteInMold
+	{
+        timedAction = Making,
+        time = 100,
+        Tags = InHandCraft,
+        category = Mechanical,
+        xpAward = Mechanics:3,
+        SkillRequired = Mechanics:3,
+        OnCreate = DAMN.OnCreate.PourPasteInMold,
+
+        inputs
+        {
+            item 1 [damnCraft.genericNegativeMold] mode:destroy,
+            item 10 [damnCraft.BucketStyrofoamPaste],
+        }
+        outputs
+        {
+            item 1 damnCraft.genericFilledMold,
+        }
+	}
+
+    craftRecipe damnCraft.RemoveNewPartFromMold
+	{
+        timedAction = Making,
+        time = 100,
+        Tags = InHandCraft,
+        category = Mechanical,
+        xpAward = Mechanics:1,
+        OnCreate = DAMN.OnCreate.RemoveNewPartFromMold,
+
+        inputs
+        {
+            item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;NoBrokenItems],
+            item 1 [damnCraft.genericFilledMold] mode:destroy flags[IsCookedFoodItem],
+        }
+        outputs
+        {
+        }
+	}
+
+    /************************ Hinges ************************/
+
+    craftRecipe damnCraft.MakeSmallVehicleHinge
+    {
+        timedAction = Welding,
+        time = 150,
+        Tags = InHandCraft;Welding,
+        category = Mechanical,
+        xpAward = MetalWelding:10,
+        SkillRequired = MetalWelding:5,
+
+        inputs
+        {
+            item 1 [Base.SmallSheetMetal],
+            item 1 [Base.Screws],
+			item 2 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.HingeSmall,
+        }
+    }
+
+    craftRecipe damnCraft.MakeLargeVehicleHinge
+    {
+        timedAction = Welding,
+        time = 150,
+        Tags = InHandCraft;Welding,
+        category = Mechanical,
+        xpAward = MetalWelding:15,
+        SkillRequired = MetalWelding:5,
+
+        inputs
+        {
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.Screws],
+			item 3 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.HingeLarge,
+        }
+    }
+
+    /************************ Handle ************************/
+
+    craftRecipe damnCraft.MakeClassicVehicleHandle
+    {
+        timedAction = Welding,
+        time = 150,
+        Tags = InHandCraft;Welding,
+        category = Mechanical,
+        xpAward = MetalWelding:10,
+        SkillRequired = MetalWelding:5,
+
+        inputs
+        {
+            item 1 [Base.SmallSheetMetal],
+            item 1 [damnCraft.RubberStrip],
+            item 1 [Base.Screws],
+			item 2 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.HandleClassic,
+        }
+    }
+
+    craftRecipe damnCraft.MakeModernVehicleHandle
+    {
+        timedAction = Welding,
+        time = 150,
+        Tags = InHandCraft;Welding,
+        category = Mechanical,
+        xpAward = MetalWelding:15,
+        SkillRequired = MetalWelding:5,
+
+        inputs
+        {
+            item 1 [Base.SmallSheetMetal],
+            item 1 [damnCraft.RubberStrip],
+            item 2 [Base.Screws],
+			item 3 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.HandleModern,
+        }
+    }
+    
+}

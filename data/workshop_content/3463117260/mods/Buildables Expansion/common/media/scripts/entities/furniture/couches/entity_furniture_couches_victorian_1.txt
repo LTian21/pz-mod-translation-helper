@@ -1,0 +1,81 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Victorian1Couch
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Victorian 1 Couch,
+			Icon		= furniture_seating_indoor_03_75,
+		}
+	}
+
+    entity Victorian1Couch
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Victorian1Couch,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_03_79,
+                    row = furniture_seating_indoor_03_78,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_03_76 furniture_seating_indoor_03_77,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_03_73,
+                    row = furniture_seating_indoor_03_72,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_03_74 furniture_seating_indoor_03_75,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 350,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:10,
+            category      = Furniture_Seating,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_couchesDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 1 tags[Scissors] mode:keep,
+                item 1 tags[SewingNeedle] mode:keep,
+                item 10 [Base.Plank],
+                item 6 [Base.Nails],
+                item 6 [Base.FabricRoll_Cotton],
+                item 8 [Base.Thread],
+                item 300 [Base.ChickenFeather;Base.TurkeyFeather],
+            }
+        }
+    }
+}

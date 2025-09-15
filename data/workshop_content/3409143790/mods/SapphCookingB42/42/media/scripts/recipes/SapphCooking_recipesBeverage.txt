@@ -1,0 +1,580 @@
+module SapphCooking
+{
+	imports
+	{
+		Base,
+	}	
+		/****************************** beverage recipes will be here. ******************************/
+
+	/***********************************************************************************************/
+	/*********sapph: will wait before doing any big fluid recipes, as things are a bit buggy right now***********/
+	/***********************************************************************************************/
+
+	craftRecipe Juice
+    {
+        timedAction = MixBottle,
+        time            = 20,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [Base.WaterBottle;Base.PopBottle],
+			-fluid 0.2 [Water],
+            item 1 [SapphCooking.Drinkmix_Lemon;SapphCooking.Drinkmix_Orange;SapphCooking.Drinkmix_Apple;SapphCooking.Drinkmix_Watermelon;SapphCooking.Drinkmix_Peach;SapphCooking.Drinkmix_Pineapple;SapphCooking.Drinkmix_Grape;SapphCooking.Drinkmix_Strawberry] mappers[bottleType] flags[ItemCount],
+       	}
+       outputs
+       	{
+           item 1 mapper:bottleType,
+      	}
+
+	   itemMapper bottleType
+		{
+			SapphCooking.BottleofLemonJuice = SapphCooking.Drinkmix_Lemon,
+			SapphCooking.BottleofOrangeJuice = SapphCooking.Drinkmix_Orange,
+			SapphCooking.BottleofAppleJuice = SapphCooking.Drinkmix_Apple,
+			SapphCooking.BottleofWatermelonJuice = SapphCooking.Drinkmix_Watermelon,
+			SapphCooking.BottleofPeachJuice = SapphCooking.Drinkmix_Peach,
+			SapphCooking.BottleofPineappleJuice = SapphCooking.Drinkmix_Pineapple,
+			SapphCooking.BottleofGrapeJuice = SapphCooking.Drinkmix_Grape,
+			SapphCooking.BottleofStrawberryJuice = SapphCooking.Drinkmix_Strawberry,
+		}
+    }
+
+	craftRecipe Make Vegetable Broth
+    {
+        timedAction = EmptyPan,
+        time            = 20,
+        category = SapphCooking,
+		CanWalk = true,
+		ToolTip = Tooltip_WaterPan,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [SapphCooking.PotofVegetableStock] mode:destroy flags[InheritFoodAge;IsCookedFoodItem;ItemCount],
+			item 1 [Base.WaterBottle;Base.PopBottle] flags[IsEmpty],
+       	}
+       outputs
+       	{
+           item 1 SapphCooking.VegetableBroth,
+		   item 1 Base.Pot,
+      	}
+    }
+	/******maybe placeholders? not sure - liquids are iffy*********/
+
+	craftRecipe BlendContents
+    {
+        timedAction = BlendContents,
+        time            = 60,
+        category = SapphCooking,
+		CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [SapphCooking.Blender_Prep_Shake;SapphCooking.Blender_Prep_Juice;SapphCooking.Blender_Prep_Puree;SapphCooking.Blender_Prep_Smoothie] mappers[blenderContents] flags[Prop2;InheritFoodAge;ItemCount],
+       	}
+       outputs
+       	{
+           item 1 mapper:blenderContents,
+      	}
+		itemMapper blenderContents
+		{
+			SapphCooking.Blender_Milkshake = SapphCooking.Blender_Prep_Shake,
+			SapphCooking.Blender_Juice =SapphCooking.Blender_Prep_Juice,
+			SapphCooking.Blender_Puree =SapphCooking.Blender_Prep_Puree,
+			SapphCooking.Blender_Smoothie =SapphCooking.Blender_Prep_Smoothie,
+		}
+    }
+
+
+	craftRecipe Blend Pesto
+    {
+        timedAction = BlendContentsPesto,
+        time            = 60,
+        category = SapphCooking,
+		CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [SapphCooking.Blender] mode:keep,
+			item 1 [Base.Basil] flags[ItemCount],
+			item 1 tags[Cheese] flags[ItemCount],
+			item 1 [*],
+			-fluid 0.05 [CookingOil],
+       	}
+       outputs
+       	{
+           item 1 SapphCooking.Spice_PestoBowl,
+      	}
+    }
+
+	craftRecipe Blend Pesto2
+    {
+        timedAction = MixingMortarPestle,
+        time            = 60,
+        category = SapphCooking,
+		CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [Base.MortarPestle] mode:keep,
+			item 1 [Base.Basil] flags[ItemCount],
+			item 1 tags[Cheese] flags[ItemCount],
+			item 1 [*],
+			-fluid 0.05 [CookingOil],
+       	}
+       outputs
+       	{
+           item 1 SapphCooking.Spice_PestoBowl,
+      	}
+    }
+	
+	craftRecipe Blend Sorbet
+    {
+        timedAction = BlendContents,
+        time            = 60,
+        category = SapphCooking,
+		CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [SapphCooking.Blender_Juice] mode:destroy flags[Prop2],
+			item 3 [SapphCooking.IceCubes] flags[ItemCount],
+       	}
+       outputs
+       	{
+           item 1 SapphCooking.Blender_Sorbet,
+      	}
+    }
+
+	craftRecipe PourMilkshakeInto
+    {
+        timedAction = EmptyPan,
+        time            = 30,
+        category = SapphCooking,
+		CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [Base.PlasticCup;SapphCooking.LowballGlass;SapphCooking.CocktailGlass;Base.GlassTumbler;SapphCooking.Mug_Metal;Base.Mugl;Base.MugWhite;Base.MugSpiffo] mode:destroy mappers[mugType] flags[ItemCount],
+			item 1 [SapphCooking.Blender_Milkshake] flags[InheritFoodAge;ItemCount],
+       	}
+       outputs
+       	{
+		 	item 1 mapper:mugType,
+			item 1 SapphCooking.Blender,
+      	}
+		itemMapper mugType
+		{
+			SapphCooking.MugMetal_Milkshake = SapphCooking.Mug_Metal,
+			SapphCooking.CocktailGlassMilkshake = SapphCooking.CocktailGlass,
+			SapphCooking.LowBallMilkshake = SapphCooking.LowballGlass,
+			SapphCooking.Mug_Milkshake = Base.Mugl,
+			SapphCooking.MugWhite_Milkshake = Base.MugWhite,
+			SapphCooking.MugSpiffo_Milkshake = Base.MugSpiffo,
+			SapphCooking.BeverageMilkshake = Base.GlassTumbler,
+			SapphCooking.PlasticCup_Evolved = Base.PlasticCup,
+		}
+    }
+
+	craftRecipe PourSmoothieInto
+    {
+        timedAction = EmptyPan,
+        time            = 30,
+        category = SapphCooking,
+		CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [Base.PlasticCup;SapphCooking.LowballGlass;SapphCooking.CocktailGlass;Base.GlassTumbler;SapphCooking.Mug_Metal;Base.Mugl;Base.MugWhite;Base.MugSpiffo] mode:destroy mappers[mugType] flags[ItemCount],
+			item 1 [SapphCooking.Blender_Smoothie] flags[InheritFoodAge;ItemCount],
+       	}
+       outputs
+       	{
+		 	item 1 mapper:mugType,
+			item 1 SapphCooking.Blender,
+      	}
+		itemMapper mugType
+		{
+			SapphCooking.HotDrink_Metal = SapphCooking.Mug_Metal,
+			SapphCooking.CocktailGlassSmoothie = SapphCooking.CocktailGlass,
+			SapphCooking.LowBallSmoothie = SapphCooking.LowballGlass,
+			SapphCooking.Mug_Evolved = Base.Mugl,
+			SapphCooking.MugWhite_Evolved = Base.MugWhite,
+			SapphCooking.MugSpiffo_Evolved = Base.MugSpiffo,
+			SapphCooking.BeverageSmoothie = Base.GlassTumbler,
+			SapphCooking.PlasticCup_Evolved = Base.PlasticCup,
+		}
+    }
+
+	craftRecipe PourPureeInto
+    {
+        timedAction = EmptyPan,
+        time            = 30,
+        category = SapphCooking,
+		CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [Base.Bowl;SapphCooking.MessTray] mappers[bowlType] mode:destroy,
+			item 1 [SapphCooking.Blender_Puree] flags[InheritFoodAge;ItemCount],
+       	}
+       outputs
+       	{
+		 	item 1 mapper:bowlType,
+			item 1 SapphCooking.Blender,
+      	}
+		itemMapper bowlType
+		{
+			SapphCooking.Bowl_Puree = Base.Bowl,
+			SapphCooking.Tray_Soup = SapphCooking.MessTray,
+		}
+    }
+
+	craftRecipe PourJuiceInto
+    {
+        timedAction = EmptyPan,
+        time            = 30,
+        category = SapphCooking,
+		CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [Base.PopBottle;Base.WaterBottle;Base.PlasticCup;SapphCooking.LowballGlass;SapphCooking.CocktailGlass;Base.GlassTumbler;SapphCooking.Mug_Metal;Base.Mugl;Base.MugWhite;Base.MugSpiffo] mode:destroy mappers[mugType] flags[IsEmpty],
+			item 1 [SapphCooking.Blender_Juice] flags[InheritFoodAge;ItemCount],
+       	}
+       outputs
+       	{
+		 	item 1 mapper:mugType,
+			item 1 SapphCooking.Blender,
+      	}
+		itemMapper mugType
+		{
+			SapphCooking.BottleofJuice = Base.PopBottle,
+			SapphCooking.BottleofJuice = Base.WaterBottle,
+			SapphCooking.HotDrink_Metal = SapphCooking.Mug_Metal,
+			SapphCooking.CocktailGlassEvolved_Juice = SapphCooking.CocktailGlass,
+			SapphCooking.LowBallEvolved_Juice = SapphCooking.LowballGlass,
+			SapphCooking.Mug_Evolved = Base.Mugl,
+			SapphCooking.MugWhite_Evolved = Base.MugWhite,
+			SapphCooking.MugSpiffo_Evolved = Base.MugSpiffo,
+			SapphCooking.BeverageSmoothie = Base.GlassTumbler,
+			SapphCooking.PlasticCup_Evolved = Base.PlasticCup,
+		}
+    }
+
+	/*********Coffee machine*******/
+	/*********could add more things in the future!**********/
+
+	craftRecipe MakeCoffeeMugSapph
+	{
+        timedAction = Making,
+		Time = 20,
+		category = Cooking,
+		Tags = CoffeeMachine;Cooking,
+		inputs
+		{
+			item 1 [SapphCooking.GrindedCoffee] flags[ItemCount],
+			item 1 [*],
+			-fluid 0.2 [Water;TaintedWater],
+			item 1 tags[CoffeeMaker] flags[IsEmpty],
+			+fluid 0.2 BrewedCoffee,
+		}
+		outputs
+		{
+		}
+	}
+
+	craftRecipe MakeCappuccinoMugSapph
+	{
+        timedAction = CoffeBrew,
+		Time = 30,
+		category = SapphCooking,
+		Tags = InHandCraft;Cooking,
+		inputs
+		{
+			item 1 [*],
+			-fluid 0.2 [BrewedCoffee;Coffee],
+			item 1 [*],
+			-fluid 0.1 [CowMilk;SheepMilk],
+			item 1 tags[CoffeeMaker] flags[IsEmpty],
+			+fluid 0.3 CappuccinoCoffee,
+		}
+		outputs
+		{
+		}
+	}
+
+	craftRecipe MakeLatteMugSapph
+	{
+        timedAction = CoffeBrew,
+		Time = 30,
+		category = SapphCooking,
+		Tags = InHandCraft;Cooking,
+		inputs
+		{
+			item 1 [*],
+			-fluid 0.1 [BrewedCoffee;Coffee],
+			item 1 [*],
+			-fluid 0.2 [CowMilk;SheepMilk],
+			item 1 tags[CoffeeMaker] flags[IsEmpty],
+			+fluid 0.3 LatteCoffee,
+		}
+		outputs
+		{
+		}
+	}
+
+	craftRecipe MakeAmericanoMugSapph
+	{
+        timedAction = CoffeBrew,
+		Time = 30,
+		category = SapphCooking,
+		Tags = InHandCraft;Cooking,
+		inputs
+		{
+			item 1 [*],
+			-fluid 0.1 [BrewedCoffee;Coffee],
+			item 1 [*],
+			-fluid 0.2 [Water],
+			item 1 tags[CoffeeMaker] flags[IsEmpty],
+			+fluid 0.3 AmericanoCoffee,
+		}
+		outputs
+		{
+		}
+	}
+
+	craftRecipe MakeFrappeMugSapph
+	{
+        timedAction = CoffeBrew,
+		Time = 30,
+		category = SapphCooking,
+		Tags = InHandCraft;Cooking,
+		inputs
+		{
+			item 1 [SapphCooking.IceCubes] flags[ItemCount],
+			item 1 [*],
+			-fluid 0.1 [BrewedCoffee;Coffee],
+			item 1 [*],
+			-fluid 0.1 [CowMilk;SheepMilk],
+			item 1 tags[CoffeeMaker] flags[IsEmpty],
+			+fluid 0.3 FrappeCoffee,
+		}
+		outputs
+		{
+		}
+	}
+
+	craftRecipe MakeIrishCoffeeMugSapph
+	{
+        timedAction = CoffeBrew,
+		Time = 30,
+		category = SapphCooking,
+		Tags = InHandCraft;Cooking,
+		inputs
+		{
+			item 2 [SapphCooking.SugarPowder],
+			item 1 [Base.Icing],
+			item 1 [*],
+			-fluid 0.1 [BrewedCoffee;Coffee],
+			item 1 [*],
+			-fluid 0.1 [Whiskey],
+			item 1 tags[CoffeeMaker] flags[IsEmpty],
+			+fluid 0.3 IrishCoffee,
+		}
+		outputs
+		{
+		}
+	}
+
+	craftRecipe MakeMochaMugSapph
+	{
+        timedAction = CoffeBrew,
+		Time = 30,
+		category = SapphCooking,
+		Tags = InHandCraft;Cooking,
+		inputs
+		{
+			item 3 [SapphCooking.Syrup_Chocolate],
+			item 1 [*],
+			-fluid 0.1 [BrewedCoffee;Coffee],
+			item 1 [*],
+			-fluid 0.1 [CowMilk;SheepMilk],
+			item 1 tags[CoffeeMaker] flags[IsEmpty],
+			+fluid 0.3 MochaCoffee,
+		}
+		outputs
+		{
+		}
+	}
+
+
+
+
+
+	
+	/*************************************************/
+
+	craftRecipe Brew Coffee
+    {
+        timedAction = CoffeBrew,
+        time            = 60,
+        category = SapphCooking,
+		CanWalk = true,
+		ToolTip = Tooltip_HotWater,
+		OnTest = Recipe.OnTest.HotCoffeeFluidContainer,
+		OnCreate = Recipe.OnCreate.SapphBrewCoffee,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [*],
+			-fluid 0.2 [Water],
+			item 1 [SapphCooking.GrindedCoffee] mode:destroy flags[ItemCount],
+			item 1 [SapphCooking.CoffeeFilter;SapphCooking.ClothFilter;Base.CheeseCloth] mode:destroy,
+			item 1 [SapphCooking.PlasticFilterHolder;Base.Strainer;Base.Funnel] mode:keep,
+			item 1 [SapphCooking.EmptyThermos;SapphCooking.Mug_Metal;Base.Mugl;Base.MugWhite;Base.MugSpiffo],
+			+fluid 0.6 BrewedCoffee,
+       	}
+       outputs
+       	{
+
+      	}
+    }
+
+	craftRecipe Brew Coffee on French Press
+    {
+        timedAction = CoffeBrewFrenchPress,
+        time            = 60,
+        category = SapphCooking,
+		CanWalk = true,
+		ToolTip = Tooltip_HotWater,
+		OnTest = Recipe.OnTest.HotCoffeeFluidContainer,
+		OnCreate = Recipe.OnCreate.SapphBrewCoffee,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [*],
+			-fluid 0.5 [Water],
+			item 2 [SapphCooking.GrindedCoffee] flags[ItemCount],
+            item 1 [SapphCooking.Empty_FrenchPress],
+			+fluid 0.6 BrewedCoffee,
+       	}
+       outputs
+       	{
+      	}
+	}
+
+	craftRecipe PourInThermos
+    {
+        timedAction = EmptyPan,
+        time            = 30,
+        category = SapphCooking,
+		CanWalk = true,
+		OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [Base.PotOfSoup;Base.PotOfSoupRecipe;Base.PotOfStew;SapphCooking.SaucepanStew] mappers[potType] mode:destroy flags[ItemCount],
+            item 1 [SapphCooking.EmptyThermos] mode:destroy,
+       	}
+       outputs
+       	{
+		 	item 1 SapphCooking.ThermosSoup,
+			item 1 mapper:potType,
+      	}
+		itemMapper potType
+		{
+			Base.Saucepan = SapphCooking.SaucepanStew,
+           	Base.Pot = Base.PotOfStew,
+			Base.Pot = Base.PotOfSoupRecipe,
+			Base.Pot = Base.PotOfSoup,
+		}
+    }
+
+
+
+	craftRecipe Make Milk
+    {
+        timedAction = MixBottle,
+        time            = 20,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [*] mappers[resultType],
+			-fluid 0.1 [Water],
+			item 4 [SapphCooking.MilkPowder],
+			item 1 tags[CoffeeMaker],
+			+fluid 0.3 CowMilk,
+       	}
+       outputs
+       	{
+
+      	}
+    }
+
+	craftRecipe Make Protein Shake
+    {
+        timedAction = MixBottle,
+        time            = 20,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [*] mappers[resultType],
+			-fluid 0.1 [Water],
+			item 4 [SapphCooking.ProteinPowder],
+			item 1 tags[CoffeeMaker],
+			+fluid 0.3 ProteinShake,
+       	}
+       outputs
+       	{
+           
+      	}
+    }
+
+	craftRecipe Make a Mug of Hot Chocolate
+    {
+        timedAction = EmptyPan,
+        time            = 10,
+        category = SapphCooking,
+		CanWalk = true,
+		ToolTip = Tooltip_WaterPan,
+		OnCreate = Recipe.OnCreate.SapphMake2Result,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [SapphCooking.SaucepanHotChocolate] mode:destroy flags[IsCookedFoodItem] flags[ItemCount],
+            item 2 [SapphCooking.Mug_Metal;Base.Mugl;Base.MugWhite;Base.MugSpiffo] mode:destroy mappers[resultType],
+       	}
+       outputs
+       	{
+		 	item 2 mapper:resultType,
+			item 1 Base.Saucepan,
+      	}
+	   itemMapper resultType
+		{
+			
+			SapphCooking.HotChocolate = Base.Mugl,
+			SapphCooking.HotChocolate2 = Base.MugWhite,
+			SapphCooking.HotChocolate3 = SapphCooking.Mug_Metal,
+			SapphCooking.HotChocolate4 = Base.MugSpiffo,
+		}
+    }
+
+	
+
+
+}

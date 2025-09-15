@@ -1,0 +1,63 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Overhead_Track_Lifter
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Overhead Track Lifter,
+			Icon		= Build_OverheadTrackLifter,
+		}
+	}
+
+    entity BuildOverheadTrackLifter
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Overhead_Track_Lifter,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = industry_02_57,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = industry_02_58,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Electricity:2;MetalWelding:3,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPOverheadTrackLifter,
+            inputs
+            {
+                item 3 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SmallSheetMetal],
+                item 2 [Base.MetalBar],
+                item 1 [Base.Screws],
+                item 1 [Base.ElectricWire],
+                item 5 [Base.ElectronicsScrap],
+                item 3 [Base.WeldingRods],
+            }
+        }
+    }
+}

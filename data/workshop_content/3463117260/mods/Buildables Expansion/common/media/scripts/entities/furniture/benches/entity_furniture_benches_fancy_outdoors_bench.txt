@@ -1,0 +1,79 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FancyOutdoorsBench
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Fancy Outdoors Bench,
+			Icon		= furniture_seating_outdoor_01_10,
+		}
+	}
+
+    entity FancyOutdoorsBench
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FancyOutdoorsBench,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = furniture_seating_outdoor_01_15,
+                    row = furniture_seating_outdoor_01_14,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = furniture_seating_outdoor_01_12 furniture_seating_outdoor_01_13,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = furniture_seating_outdoor_01_9,
+                    row = furniture_seating_outdoor_01_8,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_seating_outdoor_01_11 furniture_seating_outdoor_01_10,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 350,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:10,
+            category      = Furniture_Seating,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_benchesDesc,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[Hammer] mode:keep,
+                item 1 [Base.Saw] mode:keep,
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 8 [Base.Plank],
+                item 3 [Base.Nails],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

@@ -1,0 +1,73 @@
+module Base
+{
+	
+	model 78amgeneralM35A2muffler1
+	{
+		mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_exhaust,
+		texture = Vehicles/Vehicles_78amgeneralM35A2_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle M35A2Mufflers
+		{
+		part M35A2Muffler
+       		{
+
+		      model M35Muffler1
+    			{
+                    	file = 78amgeneralM35A2muffler1,
+    			}
+
+            area = TireRearLeft,
+	       category = engine,
+	       specificItem = false,
+            itemType = Base.M35A2Muffler1_Item,
+	       mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+		          complete = M35A2.InstallComplete.Muffler,
+                door = EngineDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+		      complete = M35A2.UninstallComplete.Muffler,
+            }
+            lua
+            {
+                create = M35A2.Create.Muffler,
+                init = M35A2.Init.Muffler,
+            }
+        }
+	}
+}
+

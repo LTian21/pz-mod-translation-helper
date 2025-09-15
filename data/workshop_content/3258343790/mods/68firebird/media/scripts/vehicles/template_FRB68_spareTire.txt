@@ -1,0 +1,69 @@
+module Base
+{
+	model 68firebirdSpare1
+	{
+		mesh = vehicles/Vehicles_68firebird_Body|brd_spare1,
+		texture = vehicles/Vehicles_75grandPrix_Wheel1,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 68firebirdSpare2
+	{
+		mesh = vehicles/Vehicles_68firebird_Body|brd_spare2,
+		texture = vehicles/Vehicles_75grandPrix_Wheel1,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle FRB68SpareTires
+	{
+		part FRB68SpareTire
+        	{
+        	model FRB68Spare1
+			{
+				file = 68firebirdSpare1,
+			}
+
+			model FRB68Spare2
+			{
+				file = 68firebirdSpare2,
+			}
+
+			category = tire,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.75grandPrixR215Tire1;Base.75grandPrixR217Tire3,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB68.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = FRB68.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = FRB68.Create.SpareTire,
+				init = FRB68.Init.SpareTire,
+				}
+		}
+	}
+}
+

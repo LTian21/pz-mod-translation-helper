@@ -1,0 +1,343 @@
+module Base
+{	
+	imports
+	{
+		damnCraft
+	}
+
+	/************************ Schematics Box ************************/
+
+	recipe Open Schematics Box
+    	{
+		SchematicsBox,
+
+		NoBrokenItems:true,
+		Result:damnCraft.WindowSchematics,
+		Time:150.0,
+		OnCreate:DAMN.OnCreate.OpenSchematicsBox,
+		NeedToBeLearn:false,
+    }
+
+    /************************ Rims ************************/
+
+    recipe Make Steel Rim
+    	{
+    	BlowTorch=3,
+		ScrapMetal=3,
+		keep [Recipe.GetItemTypes.WeldingMask],
+
+		NoBrokenItems:false,
+		Result:SteelRimSmall,
+		Time:500.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=4,
+		NeedToBeLearn:true,
+		CanBeDoneFromFloor:true,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    }
+
+    recipe Make Steel Rim
+    	{
+    	BlowTorch=4,
+		ScrapMetal=5,
+		keep [Recipe.GetItemTypes.WeldingMask],
+
+		NoBrokenItems:false,
+		Result:SteelRimMedium,
+		Time:550.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=4,
+		NeedToBeLearn:true,
+		CanBeDoneFromFloor:true,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    }
+
+    recipe Make Steel Rim
+    	{
+    	BlowTorch=5,
+		ScrapMetal=7,
+		keep [Recipe.GetItemTypes.WeldingMask],
+
+		NoBrokenItems:false,
+		Result:SteelRimLarge,
+		Time:600.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=4,
+		NeedToBeLearn:true,
+		CanBeDoneFromFloor:true,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    }
+
+    /************************ Rubber Strips ************************/
+
+    recipe Make Rubber Strips
+    	{
+    	TireRubberNewSmall/TireRubberUsedSmall/TireRubberDestroyedSmall/TireRubberNewLarge/TireRubberUsedLarge/TireRubberDestroyedLarge,
+		keep [Recipe.GetItemTypes.SharpKnife]/[Recipe.GetItemTypes.DullKnife]/Scalpel/[Recipe.GetItemTypes.CanOpener],
+
+		NoBrokenItems:false,
+		Result:RubberStrip,
+		Time:600.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=4,
+		OnCreate:DAMN.OnCreate.MakeRubberStrips,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+    /************************ Tire Repair Kit ************************/
+
+    recipe Open Tire Repair Kit
+    	{
+    	TireRepairKit,
+
+		NoBrokenItems:true,
+		Result:TireRepairTools,
+		Time:150.0,
+		OnCreate:DAMN.OnCreate.OpenTireRepairKit,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+    /************************ Plastic Welding Kit ************************/
+
+    recipe Open Plastic Welding Kit
+    	{
+    	PlasticWeldingKit,
+
+		NoBrokenItems:true,
+		Result:PlasticWeldingGun,
+		Time:150.0,
+		OnCreate:DAMN.OnCreate.OpenPlasticWeldingKit,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+    recipe Insert Battery into Plastic Welding Gun
+	   {
+	     destroy PlasticWeldingGun,
+	     destroy Battery,
+
+	     Result:PlasticWeldingGun,
+	     Time:35,
+	     OnTest:DAMN.OnTest.PlasticWeldingGunBatteryInsert,
+	     OnCreate:DAMN.OnCreate.PlasticWeldingGunBatteryInsert,
+	     StopOnWalk:false,
+	   }
+
+	recipe Remove Battery from Plastic Welding Gun
+	   {
+	     keep PlasticWeldingGun,
+
+	     Result:Battery,
+	     Time:30,
+	     OnTest:DAMN.OnTest.PlasticWeldingGunBatteryRemoval,
+	     OnCreate:DAMN.OnCreate.PlasticWeldingGunBatteryRemoval,
+	     StopOnWalk:false,
+	   }
+
+    /************************ Rubber Mounts ************************/
+
+    recipe Make Small Tire Rubber Mount
+    	{
+    	BlowTorch=4,
+		keep [Recipe.GetItemTypes.WeldingMask],
+		MetalBar=1,
+		ScrapMetal=4,
+
+		NoBrokenItems:false,
+		Result:TireRubberMountSmall,
+		Time:800.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=3,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    }
+
+    recipe Add Small Tire Rubber To Mount
+    	{
+    	TireRubberMountSmall,
+    	TireRubberNewSmall/TireRubberUsedSmall/TireRubberDestroyedSmall,
+
+
+		NoBrokenItems:true,
+		Result:TireRubberMountedSmall,
+		Time:200.0,
+		Category:Mechanical,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+		OnCreate:DAMN.OnCreate.MountSmallTire,
+    }
+
+    recipe Make Large Tire Rubber Mount
+    	{
+    	BlowTorch=5,
+		keep [Recipe.GetItemTypes.WeldingMask],
+		MetalBar=1,
+		ScrapMetal=6,
+
+		NoBrokenItems:false,
+		Result:TireRubberMountLarge,
+		Time:1000.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=3,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding15,
+    }
+
+    recipe Add Large Tire Rubber To Mount
+    	{
+    	TireRubberMountLarge,
+    	TireRubberNewLarge/TireRubberUsedLarge/TireRubberDestroyedLarge,
+
+
+		NoBrokenItems:true,
+		Result:TireRubberMountedLarge,
+		Time:200.0,
+		Category:Mechanical,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+		OnCreate:DAMN.OnCreate.MountLargeTire,
+    }
+
+    /************************ Seats ************************/
+
+    recipe Make Seat Frame
+    	{
+    	BlowTorch=4,
+		keep [Recipe.GetItemTypes.WeldingMask],
+		ScrapMetal=2,
+		SheetMetal=1,
+
+		NoBrokenItems:false,
+		Result:SeatFrameSmall,
+		Time:700.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=3,
+		NeedToBeLearn:true,
+		CanBeDoneFromFloor:true,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    }
+
+    recipe Make Seat Frame
+    	{
+    	BlowTorch=4,
+		keep [Recipe.GetItemTypes.WeldingMask],
+		ScrapMetal=4,
+		SheetMetal=2,
+
+		NoBrokenItems:false,
+		Result:SeatFrameLarge,
+		Time:800.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=3,
+		NeedToBeLearn:true,
+		CanBeDoneFromFloor:true,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding15,
+    }
+
+    /************************ Glass Panes ************************/
+
+    recipe Make Large Glass Pane
+    	{
+    	Glue=5,
+    	damnCraft.GlassPaneSmall=2,
+		
+		NoBrokenItems:false,
+		Result:damnCraft.GlassPaneLarge,
+		Time:350.0,
+		Category:Mechanical,
+		SkillRequired:Mechanics=3,
+		OnCreate:DAMN.OnCreate.CombineSmallGlassPanes,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+    recipe Make Small Glass Panes
+    	{
+    	damnCraft.GlassPaneLarge,
+    	keep Scalpel,
+
+		NoBrokenItems:false,
+		Result:damnCraft.GlassPaneSmall,
+		Time:350.0,
+		Category:Mechanical,
+		SkillRequired:Mechanics=2,
+		OnCreate:DAMN.OnCreate.CutLargeGlassPane,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+    /************************ Hinges ************************/
+
+    recipe Make Small Vehicle Hinge
+    	{
+    	BlowTorch=2,
+		keep [Recipe.GetItemTypes.WeldingMask],
+		SmallSheetMetal,
+        Screws,
+
+		NoBrokenItems:false,
+		Result:HingeSmall,
+		Time:700.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=5,
+		NeedToBeLearn:false,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    }
+
+    recipe Make Large Vehicle Hinge
+    	{
+    	BlowTorch=3,
+		keep [Recipe.GetItemTypes.WeldingMask],
+		SmallSheetMetal,
+        Screws=2,
+
+		NoBrokenItems:false,
+		Result:HingeLarge,
+		Time:800.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=5,
+		NeedToBeLearn:false,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding15,
+    }
+
+    /************************ Handles ************************/
+
+    recipe Make Classic Vehicle Handle
+    	{
+    	BlowTorch=2,
+		keep [Recipe.GetItemTypes.WeldingMask],
+		SmallSheetMetal,
+        RubberStrip,
+        Screws,
+
+		NoBrokenItems:false,
+		Result:HandleClassic,
+		Time:700.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=5,
+		NeedToBeLearn:false,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    }
+
+    recipe Make Modern Vehicle Handle
+    	{
+    	BlowTorch=3,
+		keep [Recipe.GetItemTypes.WeldingMask],
+		SmallSheetMetal,
+        RubberStrip,
+        Screws=2,
+
+		NoBrokenItems:false,
+		Result:HandleModern,
+		Time:800.0,
+		Category:Mechanical,
+		SkillRequired:MetalWelding=5,
+		NeedToBeLearn:false,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding15,
+    }
+    
+}

@@ -1,0 +1,278 @@
+module Base
+{
+	model 93chevySilveradoK3500bedStakesShort
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_bed_planks_short,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 93chevySilveradoK3500bedStakesLong
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_bed_planks_long,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SIL93bedStakesShortCC
+		{
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesShort,
+				}
+
+			category = Other,
+			area = TireRearRight,
+			itemType = Base.93chevySilveradoStakes,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.BedStakes,
+                    requireUninstalled = SUB93Roofrack,
+            		}
+
+            table uninstall
+            		{
+
+						time = 750,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = SUB93.UninstallComplete.BedStakes,
+
+            		}
+
+            	lua
+            		{
+                        init = SUB93.Init.BedStakes,
+					    create = SUB93.Create.BedStakes,
+					}
+		}
+	}
+
+    template vehicle SIL93bedStakesLongCC
+	{
+        template! = SIL93bedStakesShortCC,
+
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesLong,
+				}
+            }
+    }
+
+    template vehicle SIL93bedStakesShortXC
+	{
+        template! = SIL93bedStakesShortCC,
+
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesShort,
+                    offset = 0.0000 0.0000 0.2800,
+				}
+            }
+    }
+
+    template vehicle SIL93bedStakesLongXC
+	{
+        template! = SIL93bedStakesLongCC,
+
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesLong,
+                    offset = 0.0000 0.0000 0.2800,
+				}
+            }
+    }
+
+    template vehicle SIL93bedStakesShortSC
+	{
+        template! = SIL93bedStakesShortCC,
+
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesShort,
+                    offset = 0.0000 0.0000 0.9100,
+				}
+            }
+    }
+
+    template vehicle SIL93bedStakesLongSC
+	{
+        template! = SIL93bedStakesLongCC,
+
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesLong,
+                    offset = 0.0000 0.0000 0.9100,
+				}
+            }
+    }
+
+    template vehicle SIL93bedStakesShortCCR
+		{
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesShort,
+				}
+
+			category = Other,
+			area = TireRearRight,
+			itemType = Base.93chevySilveradoStakes,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                    items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.BedStakesR,
+                    requireUninstalled = SUB93Roofrack,
+            		}
+
+            table uninstall
+            		{
+                        items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 750,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = SUB93.UninstallComplete.BedStakesR,
+
+            		}
+
+            	lua
+            		{
+                        init = SUB93.Init.BedStakesR,
+					    create = SUB93.Create.BedStakesR,
+					}
+		}
+	}
+
+    template vehicle SIL93bedStakesLongCCR
+	{
+        template! = SIL93bedStakesShortCCR,
+
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesLong,
+				}
+            }
+    }
+
+    template vehicle SIL93bedStakesShortXCR
+	{
+        template! = SIL93bedStakesShortCCR,
+
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesShort,
+                    offset = 0.0000 0.0000 0.2800,
+				}
+            }
+    }
+
+    template vehicle SIL93bedStakesLongXCR
+	{
+        template! = SIL93bedStakesLongCCR,
+
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesLong,
+                    offset = 0.0000 0.0000 0.2800,
+				}
+            }
+    }
+
+    template vehicle SIL93bedStakesShortSCR
+	{
+        template! = SIL93bedStakesShortCCR,
+
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesShort,
+                    offset = 0.0000 0.0000 0.9100,
+				}
+            }
+    }
+
+    template vehicle SIL93bedStakesLongSCR
+	{
+        template! = SIL93bedStakesLongCCR,
+
+		part SIL93BedStakes
+        	{
+
+			model bedStakes0
+				{
+                	file = 93chevySilveradoK3500bedStakesLong,
+                    offset = 0.0000 0.0000 0.9100,
+				}
+            }
+    }
+
+}

@@ -1,0 +1,494 @@
+module Base
+{
+	model fhq92EconolinePanel
+	{
+		mesh = vehicles/vehicles_fhq92EconolinePanel,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 1,
+	}
+	model fhqMZSteelieLeft
+	{
+		mesh = vehicles/vehicles_WheelfhqMZSteelie,
+		texture = vehicles/vehicles_WheelfhqMZSteelie,
+		shader = vehiclewheel,
+		invertX = FALSE,
+		scale = 1,
+	}
+	model fhqMZSteelieRight
+	{
+		mesh = vehicles/vehicles_WheelfhqMZSteelie,
+		texture = vehicles/vehicles_WheelfhqMZSteelie,
+		shader = vehiclewheel,
+		invertX = TRUE,
+		scale = 1,
+	}
+	vehicle fhq92EconolinePanel
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 0.8,
+		engineRepairLevel = 5,
+		playerDamageProtection = 0.8,
+		engineRPMType = van,
+
+		model
+		{
+			file = fhq92EconolinePanel,
+			scale = 0.7900,
+			offset = 0.0000 0.8625 0.0000,
+		}
+
+		spawnOffsetY = 0.12999995,
+
+		skin
+		{
+			texture = Vehicles/vehicle_fhq92EconolinePanel_shell,
+		}
+
+		textureMask = Vehicles/vehicle_fhq92EconolinePanel_mask,
+		textureLights = Vehicles/vehicle_fhq92Econoline_lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/Veh_Damage1,
+		textureDamage2Shell = Vehicles/Veh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		sound
+		{
+			engine = VehicleEngineVan,
+			engineStart = VehicleEngineVan,
+			engineTurnOff = VehicleEngineVan,
+			horn = VehicleHornVan,
+			ignitionFail = VehicleIgnitionFailVan,
+		}
+
+		extents = 2.1500 1.8750 5.7500,
+		mass = 815,
+		physicsChassisShape = 2.1500 1.8500 5.7500,
+		centerOfMassOffset = 0.0000 0.9125 0.0000,
+		shadowExtents = 2.2887 5.9140,
+		shadowOffset = 0.0000 0.0000,
+		engineForce = 3550,
+		engineLoudness = 90,
+		engineQuality = 80,
+		maxSpeed = 75f,
+		gearRatioCount = 4,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 0.7f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 30,
+		suspensionCompression = 3.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 18,
+		suspensionRestLength = 0.3f,
+		wheelFriction = 1.5f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.8250 -1.0375 2.0500,
+			radius = 0.35f,
+			width = 0.25f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.8250 -1.0375 2.0500,
+			radius = 0.35f,
+			width = 0.25f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.8500 -1.0375 -1.6500,
+			radius = 0.35f,
+			width = 0.25f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.8500 -1.0375 -1.6500,
+			radius = 0.35f,
+			width = 0.25f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.4250 -0.1375 0.8875,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.5500 -1.0000 1.6375,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.4250 -0.1375 0.8875,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.5500 -1.0000 1.6375,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 3.4500 2.1500 1.1750,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -3.4500 2.1500 1.1750,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.6125 1.1125 1.0750 1.1750,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.6125 1.1125 1.0750 1.1750,
+		}
+
+		area GasTank
+		{
+			xywh = 1.4000 -0.6375 0.6500 0.6500,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.4625 2.0625 0.7750 0.7750,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.4625 2.0625 0.7750 0.7750,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.4625 -1.6375 0.7750 0.7750,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.4625 -1.6375 0.7750 0.7750,
+		}
+
+		template = Trunk/part/TruckBed,
+
+		part TruckBed
+		{
+			itemType = Base.BigTrunk,
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = GloveBox,
+		template = GasTank,
+
+		part GasTank
+		{
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			anim Open
+			{
+				sound = VehicleHoodOpenVan,
+			}
+
+			anim Close
+			{
+				sound = VehicleHoodCloseVan,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+
+		part Windshield*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part WindshieldRear
+		{
+			table install
+			{
+				requireInstalled = DoorRear,
+			}
+		}
+
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+
+		part Window*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+		template = Door/part/DoorMiddleRight,
+		template = Door/part/DoorRear,
+
+		part Door*
+		{
+			anim Open
+			{
+				sound = VehicleDoorOpenVan,
+			}
+
+			anim Close
+			{
+				sound = VehicleDoorCloseVan,
+			}
+
+			anim Lock
+			{
+				sound = LockVehicleDoorVan,
+			}
+
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorVan,
+			}
+
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedVan,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part DoorRear
+		{
+			anim Open
+			{
+				sound = VehicleTrunkOpenVan,
+			}
+
+			anim Close
+			{
+				sound = VehicleTrunkCloseVan,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindshieldRear,
+			}
+
+			hasLightsRear = false,
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZSteelieMidLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZSteelieMidRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZSteelieMidLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZSteelieMidRight,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.6623 -2.8701,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.7273 2.8182,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

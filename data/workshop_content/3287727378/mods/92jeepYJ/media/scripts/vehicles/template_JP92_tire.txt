@@ -1,0 +1,225 @@
+module Base
+{
+
+	model 92jeepYJWheelOG
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Wheels|wrangler_wheel,
+		texture = vehicles/Vehicles_92jeepYJ_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 92jeepYJWheel1L
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Wheel,
+		texture = vehicles/Vehicles_84jeepXJ_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 92jeepYJWheel1R
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Wheel,
+		texture = vehicles/Vehicles_84jeepXJ_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle JP92Tires
+	{
+		part TireFrontLeft
+		{
+            model wrangTireFL
+			{
+				file = 92jeepYJWheelOG,
+			}
+
+            model wrangTire1FL
+			{
+				file = 92jeepYJWheel1L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+
+            table install
+			{
+				complete = JP92.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = JP92.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP92.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model wrangTireFR
+			{
+				file = 92jeepYJWheelOG,
+			}
+
+            model wrangTire1FR
+			{
+				file = 92jeepYJWheel1R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+
+            table install
+			{
+				complete = JP92.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = JP92.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP92.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model wrangTireFL
+			{
+				file = 92jeepYJWheelOG,
+			}
+
+            model wrangTire1FL
+			{
+				file = 92jeepYJWheel1L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+
+            table install
+			{
+				complete = JP92.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+            table uninstall
+			{
+				complete = JP92.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP92.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model wrangTireFR
+			{
+				file = 92jeepYJWheelOG,
+			}
+
+            model wrangTire1FR
+			{
+				file = 92jeepYJWheel1R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+
+            table install
+			{
+				complete = JP92.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = JP92.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP92.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			itemType = Base.92jeepYJTire;Base.84jeepXJTire,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}
+

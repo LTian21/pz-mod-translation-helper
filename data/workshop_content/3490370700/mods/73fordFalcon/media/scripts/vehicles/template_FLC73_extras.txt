@@ -1,0 +1,221 @@
+module Base
+{
+    model 73fordFalconPSStorage1
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_tanks,
+		texture = Vehicles/Vehicles_73fordFalcon_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 73fordFalconCanLeftP
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_gascan,
+		texture = Vehicles/Items_USMIL_gasCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 73fordFalconCanLeftW
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_gascan,
+		texture = Vehicles/Items_USMIL_waterCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 73fordFalconCanRightP
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_gascan,
+		texture = Vehicles/Items_USMIL_gasCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 73fordFalconCanRightW
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_gascan,
+		texture = Vehicles/Items_USMIL_waterCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    template vehicle FLC73StoragePS
+	{
+		part FLC73Storage
+		{
+
+			model Storage1
+				{
+                		file = 73fordFalconPSStorage1,
+				}
+
+			category = Other,
+			area = TruckBed,
+            specificItem = false,
+			itemType = Base.73fordFalconPSStorage,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                    requireUninstalled = TrunkDoor;WindshieldRear,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+                    requireUninstalled = DAMNGasCanOne;DAMNGasCanTwo;DAMNSpareTireRoof,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = Vehicles.Create.Default,
+				}
+		}
+
+		part DAMNGasCanOne
+        {
+				model canLP
+				{
+                	file = 73fordFalconCanLeftP,
+				}
+                model canLPE
+				{
+                	file = 73fordFalconCanLeftP,
+				}
+                model canLW
+				{
+                	file = 73fordFalconCanLeftW,
+				}
+                model canLWE
+				{
+                	file = 73fordFalconCanLeftW,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FLC73.InstallComplete.CanOne,
+                	requireInstalled = FLC73Storage,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+		            test = Vehicles.UninstallTest.Default,
+					complete = FLC73.UninstallComplete.CanOne,
+            	}
+
+            	lua
+            	{
+                    init = FLC73.Init.CanOne,
+				    create = FLC73.Create.CanOne,
+				}
+		}
+
+		part DAMNGasCanTwo
+        {
+				model canRP
+				{
+                	file = 73fordFalconCanRightP,
+				}
+                model canRPE
+				{
+                	file = 73fordFalconCanRightP,
+				}
+                model canRW
+				{
+                	file = 73fordFalconCanRightW,
+				}
+                model canRWE
+				{
+                	file = 73fordFalconCanRightW,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FLC73.InstallComplete.CanTwo,
+                	requireInstalled = FLC73Storage,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+		            test = Vehicles.UninstallTest.Default,
+					complete = FLC73.UninstallComplete.CanTwo,
+            	}
+
+            	lua
+            	{
+                    init = FLC73.Init.CanTwo,
+				    create = FLC73.Create.CanTwo,
+				}
+		}
+	}
+
+}
+

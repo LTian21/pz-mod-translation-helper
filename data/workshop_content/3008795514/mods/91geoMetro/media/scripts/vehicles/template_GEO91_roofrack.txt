@@ -1,0 +1,95 @@
+module Base
+{
+
+	model 91geoMetroroofrack0
+	{
+		mesh = vehicles/Vehicles_91geoMetro_Body|geo_roofrack0,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+	model 91geoMetroroofrack1
+	{
+		mesh = vehicles/Vehicles_91geoMetro_Body|geo_roofrack1,
+		texture = Vehicles/Vehicles_91geoMetro_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle GEO91Roofrack
+	{
+		part GEO91Roofrack
+		{
+
+			model GEO91Roofrack0
+				{
+                		file = 91geoMetroroofrack0,
+				}
+			model GEO91Roofrack1
+				{
+                		file = 91geoMetroroofrack1,
+				}
+
+			category = Other,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.91geoMetroRoofrack0;Base.91geoMetroRoofrack1,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GEO91.InstallComplete.Roofrack,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = GEO91.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+            		create = GEO91.Create.Roofrack,
+            		init = GEO91.Init.Roofrack,
+				}
+		}
+	}
+
+}
+

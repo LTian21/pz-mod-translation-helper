@@ -1,0 +1,121 @@
+module Base
+{
+    model W460Smudflaps1
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_swb_mudflaps,
+		texture = Vehicles/Vehicles_84mercLWB4_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model W460Lmudflaps1
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_mudflaps,
+		texture = Vehicles/Vehicles_84mercLWB4_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model W460LmudflapsM
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_mudflapsM,
+		texture = Vehicles/Vehicles_84merc_Wheels,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle W460SMudflaps
+		{
+		part W460Mudflaps
+        	{
+
+			model Mudflaps1
+				{
+                		file = W460Smudflaps1,
+				}
+
+			category = bodywork,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.W460Mudflaps1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = W460.InstallComplete.Mudflaps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 750,
+			skills = Mechanics:1,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = W460.UninstallComplete.Mudflaps,
+
+            		}
+
+            		lua
+            		{
+			create = W460.Create.Mudflaps,
+			init = W460.Init.Mudflaps,
+			}
+		}
+	}
+
+    template vehicle W460LMudflaps
+	{
+        template! = W460SMudflaps,
+
+		part W460Mudflaps
+        	{
+
+			model Mudflaps1
+				{
+                		file = W460Lmudflaps1,
+				}
+
+		}
+	}
+
+    template vehicle W460LMudflapsM
+	{
+        template! = W460SMudflaps,
+
+		part W460Mudflaps
+        	{
+
+            model Mudflaps1
+				{
+                		file = W460LmudflapsM,
+				}
+		}
+	}
+		
+}

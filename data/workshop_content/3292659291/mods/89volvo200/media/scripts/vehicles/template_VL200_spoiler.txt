@@ -1,0 +1,89 @@
+module Base
+{
+	
+	model 89volvo200spoiler0
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_sedan_spoiler0,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    model 89volvo200spoiler1
+    {
+        mesh = vehicles/Vehicles_89volvo200_Body|volvo_sedan_spoiler1,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+    template vehicle VL240Spoilers
+        {
+        part VL200Spoiler
+            {
+
+            model VL200spoiler1
+            {
+                    file = 89volvo200spoiler0,
+            }
+
+            model VL200spoiler2
+            {
+                    file = 89volvo200spoiler1,
+            }
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            itemType = Base.89volvo240SpoilerA;Base.89volvo240SpoilerB,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = VL200.InstallComplete.Spoiler,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = VL200.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = VL200.Create.Spoiler,
+                init = VL200.Init.Spoiler,
+            }
+        }
+
+    }
+}
+

@@ -1,0 +1,71 @@
+module Base
+{
+
+	model 89dodgeCaravanSidesteps
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_sidesteps,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle DGC89Sidesteps
+	{
+		part DGC89Sidesteps
+		{
+			
+			model DGC89step0
+			{
+				file = 89dodgeCaravanSidesteps,
+			}
+			
+			area = GasTank,
+			itemType = Base.89dodgeCaravanSidesteps0,
+			specificItem = false,
+			category = Other,
+			mechanicRequireKey = true,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = DGC89.InstallComplete.Sidesteps,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = DGC89.UninstallComplete.Sidesteps,
+			}
+			lua
+			{
+				init = DGC89.Init.Sidesteps,
+				create = DGC89.Create.Sidesteps,
+			}
+		}
+	}
+}
+

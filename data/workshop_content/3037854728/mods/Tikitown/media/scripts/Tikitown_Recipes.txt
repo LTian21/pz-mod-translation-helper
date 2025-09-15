@@ -1,0 +1,242 @@
+module Tikitown
+{
+	imports
+	{
+		Base
+	}
+	
+	recipe Dismantle Laser Tag Gun
+	{
+		LaserTag_Gun,
+		
+		keep [Recipe.GetItemTypes.Screwdriver],
+		
+		Result:ElectronicsScrap=3,
+		Time:30.0,
+		OnTest:Recipe.OnTest.DismantleElectronics,
+		OnGiveXP:Recipe.OnGiveXP.DismantleLaserTagGun,
+		OnCreate:Recipe.OnCreate.DismantleLaserTagGun,
+		Category:Electrical,
+		AnimNode:Disassemble,
+		Prop1:Screwdriver,
+		Prop2:Source=1,
+		IsHidden					:	true,
+	}
+	
+	recipe Convert for Laser Tag Gun
+	{
+		Battery=10000,
+		keep [Recipe.GetItemTypes.Screwdriver],
+		
+		Result						:	Tikitown.TikitownBattery=20,
+		Time						:	60,
+		OnCreate					:	Recipe.OnCreate.ConvertLaserTagBattery,
+		Category					:	Electrical,
+		AnimNode					:	Disassemble,
+		Prop1						:	Screwdriver,
+		Prop2						:	Source = 1,
+		IsHidden					:	true,
+		
+	}
+	
+	recipe Convert to Battery
+	{
+		Tikitown.TikitownBattery=200,
+		keep [Recipe.GetItemTypes.Screwdriver],
+		
+		Result						:	Battery=1,
+		Time						:	60,
+		OnCreate					:	Recipe.OnCreate.DismantleLaserTagBattery,
+		Category					:	Electrical,
+		AnimNode					:	Disassemble,
+		Prop1						:	Screwdriver,
+		Prop2						:	Source = 1,
+		IsHidden					:	true,
+		
+	}
+	
+	recipe Dismantle Laser Tag Cartridge
+	{
+		Tikitown.LaserTag_Cartridge=1,
+		
+		keep [Recipe.GetItemTypes.Screwdriver],
+		
+		Result						:	ElectronicsScrap=2,
+		Time						:	90,
+		OnTest						:	Recipe.OnTest.DismantleElectronics,
+		OnGiveXP					:	Recipe.OnGiveXP.DismantleLaserTagGun,
+		OnCreate					:	Recipe.OnCreate.DismantleLaserTagCartridge,
+		Category					:	Electrical,
+		AnimNode					:	Disassemble,
+		Prop1						:	Screwdriver,
+		Prop2						:	Source = 1,
+		IsHidden					:	true,
+	}
+	
+	recipe Dismantle Laser Tag Harness
+	{
+		Tikitown.Laser_Tag_Chest=1,
+		
+		keep [Recipe.GetItemTypes.Screwdriver],
+		
+		Result						:	ElectronicsScrap=4,
+		Time						:	100,
+		OnTest						:	Recipe.OnTest.DismantleElectronics,
+		OnGiveXP					:	Recipe.OnGiveXP.DismantleLaserTagGun,
+		OnCreate					:	Recipe.OnCreate.DismantleLaserLaserTagHarness,
+		Category					:	Electrical,
+		AnimNode					:	Disassemble,
+		Prop1						:	Screwdriver,
+		Prop2						:	Source = 1,
+		IsHidden					:	true,
+	}
+	
+	recipe Dismantle Laser Tag Helmet
+	{
+		Tikitown.Laser_Tag_Helmet=1,
+		
+		keep [Recipe.GetItemTypes.Screwdriver],
+		
+		Result						:	ElectronicsScrap=3,
+		Time						:	100,
+		OnTest						:	Recipe.OnTest.DismantleElectronics,
+		OnGiveXP					:	Recipe.OnGiveXP.DismantleLaserTagGun,
+		OnCreate					:	Recipe.OnCreate.DismantleLaserLaserTagHarness,
+		Category					:	Electrical,
+		AnimNode					:	Disassemble,
+		Prop1						:	Screwdriver,
+		Prop2						:	Source = 1,
+		IsHidden					:	true,
+	}
+	
+	recipe Add Cards to Box
+	{
+		Tikitown.Empty_Baseball_Card_Box=1,
+		Tikitown.Baseball_Card_01=1,
+		Tikitown.Baseball_Card_02=1,
+		Tikitown.Baseball_Card_03=1,
+		Tikitown.Baseball_Card_04=1,
+		Tikitown.Baseball_Card_05=1,
+		Tikitown.Baseball_Card_06=1,
+		Tikitown.Baseball_Card_07=1,
+		Tikitown.Baseball_Card_08=1,
+		Tikitown.Baseball_Card_09=1,
+		Tikitown.Baseball_Card_10=1,
+		Tikitown.Baseball_Card_11=1,
+		Tikitown.Baseball_Card_12=1,
+		Tikitown.Baseball_Card_13=1,
+		Tikitown.Baseball_Card_14=1,
+		Tikitown.Baseball_Card_15=1,
+		Tikitown.Baseball_Card_16=1,
+		Tikitown.Baseball_Card_17=1,
+		Tikitown.Baseball_Card_18=1,
+		Tikitown.Baseball_Card_19=1,
+		Tikitown.Baseball_Card_20=1,
+		Tikitown.Baseball_Card_21=1,
+		Tikitown.Baseball_Card_22=1,
+		Tikitown.Baseball_Card_23=1,
+		Tikitown.Baseball_Card_24=1,
+		Tikitown.Baseball_Card_25=1,
+		Tikitown.Baseball_Card_26=1,
+		Tikitown.Baseball_Card_27=1,
+		Tikitown.Baseball_Card_28=1,
+		Tikitown.Baseball_Card_29=1,
+		Tikitown.Baseball_Card_30=1,
+		Tikitown.Baseball_Card_31=1,
+		Tikitown.Baseball_Card_32=1,
+		Tikitown.Baseball_Card_33=1,
+		Tikitown.Baseball_Card_34=1,
+		Tikitown.Baseball_Card_35=1,
+		
+		Result						:	Tikitown.Unsorted_Full_Baseball_Card_Box=1,
+		Time						:	60,
+		Category					:	General,
+		AnimNode					: 	Disassemble,
+		Prop1						:  	Source = 1,
+		Prop2						:	Tikitown.Baseball_Card_35,
+	}
+	
+	recipe Sort Cards
+	{
+		Tikitown.Unsorted_Full_Baseball_Card_Box=1,
+		
+		Result 						: 	Tikitown.Sorted_Full_Baseball_Card_Box=1,
+		Time						:	900,
+		Category					:	General,
+		AnimNode					:	Disassemble,
+		Prop1						: 	Source = 1,
+		IsHidden					:	true,
+	}
+	
+	recipe Transcribe Map
+	{
+		Tikitown.Sorted_Full_Baseball_Card_Box=1,
+		SheetPaper2=1,
+		keep Crayons/BluePen/Pen/Pencil/RedPen,
+		
+		Result						:	Tikitown.Used_Sorted_Full_Baseball_Card_Box=1,
+		OnCreate					:	Recipe.OnCreate.GenerateStashLoot,
+		Time						:	900,
+		Category					:	General,
+		AnimNode					:	Disassemble,
+		Prop1						:	[Recipe.GetItemTypes.Pen],
+		Prop2						:	[Recipe.GetItemTypes.SheetPaper2],
+		IsHidden					:	true,
+	}
+	
+	recipe Dismantle VCR
+	{
+		Tikitown.Drazvision_VCR,
+		keep [Recipe.GetItemTypes.Screwdriver],
+		
+		Result						:	ElectronicsScrap=4,
+		Time						:	100,
+		OnTest						:	Recipe.OnTest.DismantleElectronics,
+		OnGiveXP					:	Recipe.OnGiveXP.DismantleLaserTagGun,
+		OnCreate					:	Recipe.OnCreate.DismantleDrazVCR,
+		Category					:	Electrical,
+		AnimNode					:	Disassemble,
+		Prop1						:	Screwdriver,
+		Prop2						:	Source = 1,
+		IsHidden					:	true,
+	}
+	
+	recipe Open Large Box
+	{
+		Tikitown.LargePostOfficeBox,
+		
+		Time						:	400,
+		Result						: 	SheetPaper2=0,
+		OnCreate					:	Recipe.OnCreate.OpenTTBoxLg,
+		Category					:	General,
+		AnimNode					:	Disassemble,
+		Prop2						:	Source=1,
+		IsHidden					:	true,
+	}
+	
+	recipe Open Medium Box
+	{
+		Tikitown.MedPostOfficeBox,
+		
+		Time						:	300,
+		Result						: 	SheetPaper2=0,
+		OnCreate					:	Recipe.OnCreate.OpenTTBoxMed,
+		Category					:	General,
+		AnimNode					:	Disassemble,
+		Prop2						:	Source=1,
+		IsHidden					:	true,
+	}
+	
+	recipe Open Small Box
+	{
+		Tikitown.SmPostOfficeBox,
+		
+		Time						:	100,
+		Result						: 	SheetPaper2=0,
+		OnCreate					:	Recipe.OnCreate.OpenTTBoxSm,
+		Category					:	General,
+		AnimNode					:	Disassemble,
+		Prop2						:	Source=1,
+		IsHidden					:	true,
+	}
+}

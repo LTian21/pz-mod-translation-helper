@@ -1,0 +1,155 @@
+module Base
+{
+    model Tatrapan_leftfrontwindow
+	{
+		mesh = vehicles/Tatrapan|LeftFrontWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = FrontLeftWindowBone 1.0,
+	}
+	model Tatrapan_rightfrontwindow
+	{
+		mesh = vehicles/Tatrapan|RightFrontWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = FrontRightWindowBone 1.0,
+	}
+	model Tatrapan_leftrearwindow
+	{
+		mesh = vehicles/Tatrapan|LeftRearWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = LeftRearWindowBone 1.0,
+	}
+	model Tatrapan_rightrearwindow
+	{
+		mesh = vehicles/Tatrapan|RightRearWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = RightRearWindowBone 1.0,
+	}
+
+
+
+
+    template vehicle Tatrapan_windows
+    {
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+                template = Window/part/WindowRearLeft,
+		template = Window/part/WindowRearRight,
+  
+
+
+		part WindowFrontLeft
+		{
+			area = SeatFrontLeft,
+			
+			parent = DoorFrontLeft,
+                       
+
+			model Default
+			{
+				file = Tatrapan_leftfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontLeft_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+
+		part WindowFrontRight
+		{
+			area = SeatFrontRight,
+			
+			parent = DoorFrontRight,
+                        
+
+			model Default
+			{
+				file = Tatrapan_rightfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontRight_open,
+				animate = FALSE,
+			}                        
+
+		}
+
+		part WindowRearLeft
+		{
+			area = SeatRearLeft,
+			
+			parent = DoorRearLeft,
+                       
+
+			model Default
+			{
+				file = Tatrapan_leftrearwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowRearLeft_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+
+  		part WindowRearRight
+		{
+			area = SeatRearRight,
+			
+			parent = DoorRearRight,
+                       
+
+			model Default
+			{
+				file = Tatrapan_rightrearwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowRearRight_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+              
+                             
+                
+
+
+
+           
+
+		
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			window
+			{
+				openable = true,
+			}
+		}
+    }
+}

@@ -1,0 +1,44 @@
+module Base
+{
+
+	template vehicle BMWE30SpareTires
+	{
+		part BMWE30SpareTire
+        	{
+
+			category = tire,
+			area = TruckBed,
+			itemType = Base.90bmwE30Tire;Base.90bmwE30mTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = BMWE30.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = BMWE30.Create.SpareTire,
+				init = BMWE30.Init.SpareTire,
+				}
+		}
+	}
+}
+

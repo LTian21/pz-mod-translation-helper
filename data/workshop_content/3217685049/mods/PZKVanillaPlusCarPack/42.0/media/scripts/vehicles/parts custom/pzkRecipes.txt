@@ -1,0 +1,143 @@
+module Base
+{
+
+	/************************ Tarp ************************/ 
+
+	model pzkTruckTarpWI
+	{
+		mesh = WorldItems/Tarp,
+		texture = WorldItems/pzkTruckTarp,
+		scale = 0.3,
+	}	
+
+	item pzkTruckTarp2
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	5.0,
+        Type	=	Normal,
+        VehicleType =   2,
+        DisplayName	=	Truck Tarp,
+        Icon	=	pzkTruckTarp0,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = pzkTruckTarpWI,
+
+    }
+	
+	item pzkTruckSideWoodboards2
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	5.0,
+        Type	=	Normal,
+        VehicleType =   2,
+        DisplayName	=	Truck Side Woodboards,
+        Icon	=	pzkTruckTarp0,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = pzkTruckTarpWI,
+
+    }
+
+	craftRecipe MakeTruckTarpBedCover
+	{
+		timedAction = SewingCloth,
+		Time = 180,
+		Tags = AnySurfaceCraft,
+		category = Vehicles,
+		SkillRequired = Tailoring:1,
+			xpAward = Tailoring:5,
+        needTobeLearn = false,
+		inputs
+		{
+			item 1 tags[SewingNeedle] mode:keep,
+			item 2 [Base.Thread],
+			item 2 [Base.Tarp],
+		}
+		outputs
+		{
+			item 1 Base.pzkTruckTarp2,
+		}
+	}
+	
+	craftRecipe MakeTruckSideWoodboards
+	{
+		timedAction = SawLogs,
+		Time = 230,
+		Tags = AnySurfaceCraft;Carpentry,
+		category = Vehicles,
+		SkillRequired = Woodwork:3,
+		xpAward = Woodwork:20,
+        needTobeLearn = false,
+		inputs
+		{
+			item 1 tags[Hammer] mode:keep flags[MayDegradeVeryLight],
+			item 1 tags[Saw;SmallSaw;CrudeSaw] mode:keep flags[MayDegradeLight;Prop1],
+			item 6 [Base.Plank] flags[Prop2],
+			item 6 [Base.Nails],
+		}
+		outputs
+		{
+			item 1 Base.pzkTruckSideWoodboards2,
+		}
+	}
+	
+	craftRecipe DestroyTruckSideWoodboards
+	{
+		timedAction = Making,
+		Time = 230,
+		Tags = AnySurfaceCraft;Carpentry,
+		category = Vehicles,
+		SkillRequired = Woodwork:1,
+		xpAward = Woodwork:20,
+        needTobeLearn = false,
+		inputs
+		{
+			item 1 tags[Hammer] mode:keep flags[MayDegradeVeryLight],
+			item 1 [Base.pzkTruckSideWoodboards2],		
+		}
+		outputs
+		{
+			item 4 Base.Plank,
+			item 6 Base.Nails,
+			item 4 Base.UnusableWood,
+		}
+	}
+	
+	
+	craftRecipe SplitTruckTarpBedCover
+	{
+		timedAction = CutClothing,
+		Time = 50,
+		Tags = AnySurfaceCraft,
+        category = Vehicles,
+			xpAward = Tailoring:1,
+			needTobeLearn = false,
+		inputs
+		{
+			item 1 tags[Scissors] mode:keep,
+			item 1 [Base.pzkTruckTarp2],
+
+		}
+		outputs
+		{
+			item 2 Base.Tarp,
+		}
+	}
+	
+
+/*	
+	
+	fixing Fix Vehicle Tarp
+	{
+	   Require : pzkTruckTarp2,
+	   GlobalItem : Thread=1,
+	   ConditionModifier : 0.5,
+
+       Fixer : RippedSheets; Tailoring=2,
+	   Fixer : DuctTape=2;Mechanics=1,
+	}
+
+*/
+}

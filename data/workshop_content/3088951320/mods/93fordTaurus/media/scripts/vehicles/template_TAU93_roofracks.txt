@@ -1,0 +1,167 @@
+module Base
+{
+
+	model 93fordTaurusRoofrack0
+	{
+		mesh = vehicles/Vehicles_93fordTaurus_Body|taurus_roofrack0,
+		texture = Vehicles/Vehicles_93fordTaurus_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 93fordTaurusRoofrack1
+	{
+		mesh = vehicles/Vehicles_93fordTaurus_Body|taurusWagon_roofrack1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle TAU93RoofrackWagon
+	{
+		part TAU93Roofrack
+		{
+
+			model TAU93Roofrack0
+				{
+                		file = 93fordTaurusRoofrack0,
+                		offset = 0.0000 0.0000 -0.6000,
+				}
+
+			model TAU93Roofrack1
+				{
+                		file = 93fordTaurusRoofrack1,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.93fordTaurusRoofrack;Base.93fordTaurusWagonRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = TAU93.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = TAU93.InstallComplete.RoofrackWagon,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.RoofrackWagon,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = TAU93.Create.RoofrackWagon,
+					init = TAU93.Init.RoofrackWagon,
+				}
+		}
+	}
+
+	template vehicle TAU93RoofrackSedan
+	{
+		part TAU93Roofrack
+		{
+
+			model TAU93Roofrack0
+				{
+                		file = 93fordTaurusRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.93fordTaurusRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = TAU93.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = TAU93.InstallComplete.RoofrackSedan,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.RoofrackSedan,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = TAU93.Create.RoofrackSedan,
+					init = TAU93.Init.RoofrackSedan,
+				}
+		}
+	}
+}
+

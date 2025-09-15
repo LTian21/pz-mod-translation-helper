@@ -1,0 +1,64 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Industrial_Conveyor_Oven
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Industrial Conveyor Oven,
+			Icon		= Build_IndustrialConveyorOven,
+		}
+	}
+
+    entity BuildIndustrialConveyorOven
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Industrial_Conveyor_Oven,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = factory_pieces_industrial_ovens_01_1,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = factory_pieces_industrial_ovens_01_0,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 300,
+            needToBeLearn = true,
+            SkillRequired = Electricity:3;MetalWelding:4,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPIndustrialConveyorOven,
+            inputs
+            {
+                item 3 [Base.BlowTorch] flags[Prop1],
+                item 1 [Base.Wire],
+                item 4 [Base.SmallSheetMetal],
+                item 2 [Base.MetalBar],
+                item 2 [Base.Screws],
+                item 1 [Base.ElectricWire],
+                item 10 [Base.ElectronicsScrap],
+                item 3 [Base.WeldingRods],
+            }
+        }
+    }
+}

@@ -1,0 +1,76 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_CarLiftPillar
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Car Lift Pillar,
+			Icon		= location_business_machinery_01_0,
+		}
+	}
+
+    entity CarLiftPillar
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_CarLiftPillar,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face W
+            {
+                layer
+                {
+                    row = location_business_machinery_01_11,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_business_machinery_01_2,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_business_machinery_01_13,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_business_machinery_01_0,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:4,
+            category      = Decorations_Garage,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_garageDecorationsDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SmallSheetMetal],
+                item 2 [Base.SheetMetal],
+                item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

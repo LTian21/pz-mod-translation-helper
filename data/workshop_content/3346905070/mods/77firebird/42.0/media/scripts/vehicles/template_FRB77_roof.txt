@@ -1,0 +1,55 @@
+module Base
+{
+	model 77firebirdRoofGlass
+	{
+		mesh = vehicles/Vehicles_77firebird_Body|trans77_roof_panels,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle FRB77RoofPanels
+	{
+		part FRB77RoofPanels
+        	{
+        	model FRB77Roof
+			{
+				file = 77firebirdRoofGlass,
+			}
+
+			category = Other,
+			area = SeatFrontLeft,
+			specificItem = false,
+			itemType = Base.77firebirdRoofPanels3,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB77.InstallComplete.Roof,
+                    requireUninstalled = FRB77Roofrack,
+            		}
+
+            table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = FRB77.UninstallComplete.Roof,
+                    requireUninstalled = FRB77Roofrack,
+            		}
+
+	            lua
+	            {
+				create = FRB77.Create.Roof,
+				init = FRB77.Init.Roof,
+				}
+		}
+	}
+}

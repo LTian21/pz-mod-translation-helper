@@ -1,0 +1,49 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity ES_SmallCeramicPath
+        {
+            LuaWindowClass      = ISEntityWindow,
+            DisplayName         = Create a path from small ceramic tiles,
+            Icon                = build_small_ceramic_floor,
+        }
+    }
+
+    entity SmallCeramicPath
+    {
+
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_SmallCeramicPath,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+		    isThumpable = false,
+			OnIsValid = BuildRecipeCode.floor.OnIsValid,
+		    OnCreate = BuildRecipeCode.floor.OnCreate,
+            face Single
+            {
+                layer
+                {
+                    row = ro_tiles_01_2,
+                }
+            }
+        }
+
+        component CraftRecipe
+        {
+		    timedAction   = BuildLowHammer,
+            time          = 100,
+            category      = Outdoors,
+            inputs
+            {
+		        item 1 tags[Hammer] mode:keep flags[Prop1],
+                item 1 [Base.ClayTile],		                       
+            }
+        }
+    }
+}

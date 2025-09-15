@@ -1,0 +1,414 @@
+module Base
+{
+
+	model 84jeepXJWindowfl
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_fl_bone 1.0,
+	}
+
+	model 84jeepXJWindowfr
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_fr_bone 1.0,
+	}
+
+	model 84jeepXJWindowrl
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_rl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_rl_bone 1.0,
+	}
+
+	model 84jeepXJWindowrr
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_rr_bone 1.0,
+	}
+
+	model 84jeepXJWindowbl
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_bl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 84jeepXJWindowbr
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_4window_br,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 84jeepXJWindowfl2
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_2window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_fl_bone 1.0,
+	}
+
+	model 84jeepXJWindowfr2
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_2window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_fr_bone 1.0,
+	}
+
+	model 84jeepXJWindowrl2
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_2window_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 84jeepXJWindowrr2
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_2window_rr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP84Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 84jeepXJWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.84jeepXJFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 84jeepXJWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.84jeepXJFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 84jeepXJWindowrl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.84jeepXJRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 84jeepXJWindowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.84jeepXJRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNRearRightArmor,
+				}
+		}
+
+		part WindowBackLeft
+		{
+			model windowBL
+			{
+				file = 84jeepXJWindowbl,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.84jeepXJRearSideWindow,
+			table uninstall
+				{
+				requireUninstalled = DAMNBackLeftArmor,
+				}
+		}
+
+		part WindowBackRight
+		{
+			model windowBR
+			{
+				file = 84jeepXJWindowbr,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.84jeepXJRearSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNBackRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            durability = 2,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+    template vehicle JP84Windows2
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 84jeepXJWindowfl2,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.84jeepXJFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 84jeepXJWindowfr2,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.84jeepXJFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 84jeepXJWindowrl2,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.84jeepXJRearSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 84jeepXJWindowrr2,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.84jeepXJRearSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNRearRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            durability = 2,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}

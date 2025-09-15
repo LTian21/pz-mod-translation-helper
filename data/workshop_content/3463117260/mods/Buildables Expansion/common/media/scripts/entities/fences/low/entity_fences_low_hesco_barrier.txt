@@ -1,0 +1,55 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_HescoBarrier
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Hesco Barrier,
+			Icon		= fencing_01_96,
+		}
+	}
+
+    entity HescoBarrier
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_HescoBarrier,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face W
+            {
+                layer
+                {
+                    row = fencing_01_96,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 500,
+            needToBeLearn = true,
+            category      = Fences_Low,
+            SkillRequired = MetalWelding:1,
+            xpAward       = MetalWelding:5,
+            ToolTip       = Tooltip_craft_woodenFenceDesc,
+            inputs
+            {
+                item 1 [Base.Shovel] mode:keep flags[Prop1],
+                item 1 [Base.Pliers] mode:keep,
+                item 1 [Base.Tarp],
+                item 4 [Base.Dirtbag],
+                item 5 [Base.Wire],
+            }
+        }
+    }
+}

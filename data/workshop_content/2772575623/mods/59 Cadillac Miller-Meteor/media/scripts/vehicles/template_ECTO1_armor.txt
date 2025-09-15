@@ -1,0 +1,343 @@
+module Base
+{
+	model ECTO1WindshieldArmor1
+    	{
+        mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_windshield_a,
+        shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    	}
+
+    model ECTO1doorfla
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_door_fl_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model ECTO1doorfra
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_door_fr_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model ECTO1doorrla
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_door_rl_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model ECTO1doorrra
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_door_rr_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model ECTO1WindshieldRearArmor1
+    	{
+        mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_trunk_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+        scale = 0.1,
+    	}
+
+	template vehicle ECTO1Armor
+	{
+		part ECTO1WindshieldArmor
+        {
+
+			model WindshieldArmor1
+				{
+                		file = ECTO1WindshieldArmor1,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.ECTO1WindshieldArmor1_Item,
+			mechanicRequireKey = false,
+			table install
+					{
+						
+					}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ECTO1.InstallComplete.WindshieldArmor,
+                    requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 1100,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			        complete = ECTO1.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+                    create = ECTO1.Create.WindshieldArmor,
+                    init = ECTO1.Init.WindshieldArmor,
+                    }
+		}
+
+        part ECTO1DoorFrontLeftArmor
+		{
+			model DoorFrontLeftArmor1
+				{
+				file = ECTO1doorfla,
+				}
+				parent = DoorFrontLeft,
+				itemType = Base.ECTO1CarFrontDoorArmor1_Item,
+				specificItem = false,
+				table install
+				{
+				requireInstalled = WindowFrontLeft,
+				}
+				area = SeatFrontLeft,
+				
+				lua
+				{
+					create = ECTO1.Create.DoorFrontLeftArmor,
+					init = ECTO1.Init.DoorFrontLeftArmor,
+				}
+		}
+
+		part ECTO1DoorFrontRightArmor
+		{
+			model DoorFrontRightArmor1
+				{
+				file = ECTO1doorfra,
+				}
+				parent = DoorFrontRight,
+				itemType = Base.ECTO1CarFrontDoorArmor1_Item,
+				specificItem = false,
+				table install
+				{
+				requireInstalled = WindowFrontRight,
+				}
+				area = SeatFrontRight,
+				
+				lua
+				{
+					create = ECTO1.Create.DoorFrontRightArmor,
+					init = ECTO1.Init.DoorFrontRightArmor,
+				}
+		}
+
+		part ECTO1DoorRearLeftArmor
+		{
+			model DoorRearLeftArmor1
+				{
+				file = ECTO1doorrla,
+				}
+				parent = DoorRearLeft,
+				itemType = Base.ECTO1CarRearDoorArmor1_Item,
+				specificItem = false,
+				table install
+				{
+				requireInstalled = WindowRearLeft,
+				}
+				area = SeatRearLeft,
+				
+				lua
+				{
+					create = ECTO1.Create.DoorRearLeftArmor,
+					init = ECTO1.Init.DoorRearLeftArmor,
+				}
+		}
+
+		part ECTO1DoorRearRightArmor
+		{
+			model DoorRearRightArmor1
+				{
+				file = ECTO1doorrra,
+				}
+				parent = DoorRearRight,
+				itemType = Base.ECTO1CarRearDoorArmor1_Item,
+				specificItem = false,
+				table install
+				{
+				requireInstalled = WindowRearRight,
+				}
+				area = SeatRearRight,
+				
+				lua
+				{
+					create = ECTO1.Create.DoorRearRightArmor,
+					init = ECTO1.Init.DoorRearRightArmor,
+				}
+		}
+
+		part ECTO1Door*
+		{
+			category = bodywork,
+			door
+			{
+				}
+				anim Open
+				{
+					sound = VehicleDoorOpenStandard,
+				}
+				anim Close
+				{
+					sound = VehicleDoorCloseStandard,
+				}
+				anim Lock
+				{
+					sound = LockVehicleDoorStandard,
+				}
+				anim Unlock
+				{
+					sound = UnlockVehicleDoorStandard,
+				}
+				anim IsLocked
+				{
+					sound = VehicleDoorIsLockedStandard,
+				}
+				anim ActorOpen
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				anim ActorClose
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				mechanicRequireKey = true,
+				table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 1200,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+				}
+				table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 1200,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+				}
+			}
+
+        part ECTO1WindshieldRearArmor
+        {
+
+			model WindshieldArmor1
+				{
+                		file = ECTO1WindshieldRearArmor1,
+				}
+
+			area = Engine,
+			parent = TrunkDoor,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.ECTO1WindshieldRearArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ECTO1.InstallComplete.WindshieldRearArmor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 1100,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			        complete = ECTO1.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+                    create = ECTO1.Create.WindshieldRearArmor,
+                    init = ECTO1.Init.WindshieldRearArmor,
+                    }
+		    }
+	}
+}

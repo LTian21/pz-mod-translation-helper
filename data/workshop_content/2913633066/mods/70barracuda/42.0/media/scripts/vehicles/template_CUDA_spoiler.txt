@@ -1,0 +1,124 @@
+module Base
+{
+	
+	model 70barracudaspoiler0
+	{
+		mesh = vehicles/Vehicles_70barracuda_Body|cuda_spoiler_rear0,
+		shader = damn_vehicle_noreflect_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    model 70barracudaspoiler1
+    {
+        mesh = vehicles/Vehicles_70barracuda_Body|cuda_spoiler_rear1,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle CUDASpoilers
+		{
+		part DAMNSpoiler
+       		{
+
+            model cudaspoiler0
+			{
+                	file = 70barracudaspoiler0,
+			}
+
+            model cudaspoiler1
+            {
+                    file = 70barracudaspoiler1,
+            }
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            door
+            {
+            }
+            anim Open
+            {
+                sound = VehicleTrunkOpenStandard,
+            }
+            anim Close
+            {
+                sound = VehicleTrunkCloseStandard,
+            }
+            anim Lock
+            {
+                sound = LockVehicleDoorStandard,
+            }
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorStandard,
+            }
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedStandard,
+            }
+            anim ActorOpen
+            {
+                anim = WindowOpenSuccess,
+                rate = 0.15,
+                angle = 0.0 0.0 0.0,
+            }
+            anim ActorClose
+            {
+                anim = Attack_Shove,
+                rate = 0.3,
+                angle = 0.0 0.0 0.0,
+            }
+            specificItem = false,
+            itemType = Base.CUDASpoiler0;Base.CUDASpoiler1,
+            mechanicRequireKey = false,
+            durability = 2,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = CUDA.InstallComplete.Spoiler,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = CUDA.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = CUDA.Create.Spoiler,
+                init = CUDA.Init.Spoiler,
+            }
+        }
+	}
+}
+

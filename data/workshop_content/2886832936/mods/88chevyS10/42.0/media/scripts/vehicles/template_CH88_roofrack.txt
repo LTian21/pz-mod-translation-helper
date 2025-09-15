@@ -1,0 +1,83 @@
+module Base
+{
+	model 88chevyS10Roofrack
+	{
+		mesh = vehicles/Vehicles_88chevyS10_Body|chevyS10_roofrack1,
+		texture = vehicles/Vehicles_88chevyS10_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CH88Roofrack
+		{
+		part CH88Roofrack
+        	{
+
+			model Roofrack87166
+				{
+                		file = 88chevyS10Roofrack,
+				}
+
+			area = Roofrack,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.80sPickupRoofrackA,
+			mechanicRequireKey = false,
+            durability = 3,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = CH88BedCover,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 2000,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireUninstalled = DAMNSpareTireRoof,
+            		}
+
+            		lua
+            		{
+            		create = DAMN.Create.Blank,
+					}
+		}
+	}
+
+		
+}

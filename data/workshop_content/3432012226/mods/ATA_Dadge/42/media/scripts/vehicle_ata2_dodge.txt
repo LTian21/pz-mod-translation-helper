@@ -1,0 +1,147 @@
+module Base
+{
+	model ATADodge_Headlights
+    {
+        mesh = vehicles/ATA_Dodge_base|lights,
+        static = FALSE,
+        shader = vehicle,
+        scale = 0.01,
+    }
+	model ATADodge_WheelProtection
+    {
+        mesh = vehicles/ATA_Dodge_wheelchain|wheel_chain,
+        texture = Vehicles/ATA_Dodge_items,
+        shader = basicEffect,
+        invertX = FALSE,
+        scale = 0.01,
+    }
+	model ATADodge_WheelProtection_L
+    {
+        mesh = vehicles/ATA_Dodge_wheelchain|wheel_chain,
+        texture = Vehicles/ATA_Dodge_items,
+        shader = basicEffect,
+        invertX = TRUE,
+        scale = 0.01,
+    }
+	model ATADodge_Lightbar
+    {
+        mesh = vehicles/ATA_Dodge_base|lightbar,
+        shader = vehicle,
+        scale = 0.01,
+    }
+	model ATADodge_WheelPpg
+    {
+        mesh = vehicles/ATA_Dodge_wheel,
+        texture = Vehicles/ATA_Dodge_wheel_ppg,
+        shader = basicEffect,
+        invertX = FALSE,
+        scale = 0.01,
+    }
+	model ATADodge_WheelPpg_L
+    {
+        mesh = vehicles/ATA_Dodge_wheel,
+        texture = Vehicles/ATA_Dodge_wheel_ppg,
+        shader = basicEffect,
+        invertX = TRUE,
+        scale = 0.01,
+    }
+	vehicle ATADodgePpg
+	{
+		template! = ATADodge,
+		engineForce = 6200,
+
+		skin
+		{
+			texture = Vehicles/ATA_Dodge_base_ppg,
+		}
+
+		template = ATALightBars/part/ATALightBar,
+
+		part ATALightBar
+		{
+			model Default
+			{
+				file = ATADodge_Lightbar,
+			}
+		}
+
+		lightbar
+		{
+			soundSiren = VehicleSiren,
+			leftCol = 0.91;0.51;0.05,
+			rightCol = 0.91;0.51;0.05,
+		}
+
+		template! = ATADodge_WindowRack,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = ATADodge_WheelPpg_L,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = ATADodge_WheelPpg_L,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = ATADodge_WheelPpg,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = ATADodge_WheelPpg,
+			}
+		}
+	}
+	vehicle ATADodge
+	{
+		template! = ATADodge,
+		engineForce = 5700,
+
+		skin
+		{
+			texture = Vehicles/ATA_Dodge_base_black,
+		}
+
+		skin
+		{
+			texture = Vehicles/ATA_Dodge_base_blue,
+		}
+
+		skin
+		{
+			texture = Vehicles/ATA_Dodge_base_green,
+		}
+
+		skin
+		{
+			texture = Vehicles/ATA_Dodge_base_red,
+		}
+
+		skin
+		{
+			texture = Vehicles/ATA_Dodge_base_turquoise,
+		}
+
+		skin
+		{
+			texture = Vehicles/ATA_Dodge_base_white,
+		}
+
+		template! = ATADodge_RoofRack,
+		template! = ATADodge_WindowRack,
+	}
+}

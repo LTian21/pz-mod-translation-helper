@@ -1,0 +1,45 @@
+module RedDays
+
+{
+    item Tampon
+    {
+        DisplayName = Tampon,
+        DisplayCategory = FeminineHygiene,
+        Type = Clothing,
+        Weight = 0.1,
+        ClothingItem = Tampon,
+        Icon = tampon_clean,
+		WorldStaticModel = Tampon,
+        BodyLocation = HygieneItem,
+		ConditionMax = 10,
+    }
+
+    item TamponBox
+	{
+		DisplayName = Box of Tampons,
+		DisplayCategory = FeminineHygiene,
+		Type = Normal,
+		Weight = 1,
+        Icon	=	GenericMedicalParcel2,
+		Medical = TRUE,
+		WorldStaticModel = TamponBox,
+		Tags = IgnoreZombieDensity;IsFireFuel,
+		FireFuelRatio = 0.25,
+	}
+
+	craftRecipe UnpackBoxOfTampons
+	{
+        timedAction = UnPackBox_Small,
+		Time = 30,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+		inputs
+		{
+			item 1 [RedDays.TamponBox] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 12 RedDays.Tampon,
+		}
+	}
+}

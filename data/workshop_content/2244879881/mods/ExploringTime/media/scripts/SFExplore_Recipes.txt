@@ -1,0 +1,142 @@
+module Base
+{
+
+    recipe Add Fuel to Gas Lantern
+    {
+       destroy GasLanternEmpty,
+       [Recipe.GetItemTypes.Petrol]=1,
+
+       Result:filcher.GasLantern,
+       Time:50.0,
+     OnTest:LanternFuel_TestIsValid,
+	OnCreate:LanternGeneral_Create,
+    }
+
+	recipe Extinguish Gas Lantern
+  	{
+   	   destroy filcher.GasLanternLit,
+
+   	   Result:filcher.GasLantern,
+	   Time:30.0,
+	   OnCreate:LanternExtinguish_Create,
+  	}
+
+	recipe Light Gas Lantern
+  	{
+   	   destroy filcher.GasLantern,
+   	   Matches/Lighter,
+
+   	   Result:filcher.GasLanternLit,
+	   Time:30.0,
+     	   OnTest:LanternLight_TestIsValid,
+	   OnCreate:LanternLight_Create,
+  	}
+
+	recipe Light Torch
+  	{
+   	   destroy TorchChairLeg,
+   	   Matches/Lighter,
+
+   	   Result:TorchChairLegLit,
+	   Time:30.0,
+  	}
+
+	recipe Light Torch
+  	{
+   	   destroy TorchBranch,
+   	   Matches/Lighter,
+
+   	   Result:TorchBranchLit,
+	   Time:30.0,
+  	}
+
+	recipe Light Torch
+  	{
+   	   destroy TorchPlank,
+   	   Matches/Lighter,
+
+   	   Result:TorchPlankLit,
+	   Time:30.0,
+  	}
+
+	recipe Light Torch
+  	{
+   	   destroy TorchTableLeg,
+   	   Matches/Lighter,
+
+   	   Result:TorchTableLegLit,
+	   Time:30.0,
+  	}
+
+	recipe Make Torch
+  	{
+   	   ChairLeg,
+        RippedSheets/RippedSheetsDirty,
+       [Recipe.GetItemTypes.Petrol]=1,
+
+   	   Result:TorchChairLeg,
+	   Time:50.0,
+        Category:Survivalist,
+        AnimNode:RipSheets,
+	   Prop1:ChairLeg,
+  	}
+
+	recipe Make Torch
+  	{
+   	   TreeBranch,
+        RippedSheets/RippedSheetsDirty,
+       [Recipe.GetItemTypes.Petrol]=1,
+
+   	   Result:TorchBranch,
+	   Time:50.0,
+        Category:Survivalist,
+        AnimNode:RipSheets,
+	   Prop1:TreeBranch,
+  	}
+
+	recipe Make Torch
+  	{
+   	   TableLeg,
+        RippedSheets/RippedSheetsDirty,
+       [Recipe.GetItemTypes.Petrol]=1,
+
+   	   Result:TorchTableLeg,
+	   Time:50.0,
+        Category:Survivalist,
+        AnimNode:RipSheets,
+	   Prop1:TableLeg,
+  	}
+
+  recipe Remove Battery
+   {
+     keep BatteryLamp/HeadTorch,
+
+     Result:Battery,
+     Time:30,
+     OnTest:Recipe.OnTest.TorchBatteryRemoval,
+     OnCreate:Recipe.OnCreate.LampBatteryRemoval,
+   }
+
+   recipe Insert Battery into Flahlight
+   {
+     destroy HeadTorch,
+     destroy Battery,
+
+     Result:filcher.HeadTorch,
+     Time:30,
+     OnTest:Recipe.OnTest.LampBatteryInsert,
+     OnCreate:Recipe.OnCreate.TorchBatteryInsert,
+   }
+
+   recipe Insert Battery into Lamp
+   {
+     destroy BatteryLamp,
+     destroy Battery,
+
+     Result:filcher.BatteryLamp,
+     Time:30,
+     OnTest:Recipe.OnTest.LampBatteryInsert,
+     OnCreate:Recipe.OnCreate.TorchBatteryInsert,
+   }
+
+}

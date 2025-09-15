@@ -1,0 +1,1004 @@
+module Base
+{
+	model W460Cwindshielda
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_windshield_a,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model W460Cwinfla
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_door_fl_a,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fl_bone 1.0,
+	}
+
+	model W460Cwinfra
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_door_fr_a,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fr_bone 1.0,
+	}
+
+    model W460Lwinrla
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_door_rl_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model W460Lwinrra
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_door_rr_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model W460Lwinbla
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_window_bl_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model W460Lwinbra
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_window_br_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model W460Swinrla
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_swb_door_rl_a,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model W460Swinrra
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_swb_door_rr_a,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model W460Lrearwindshielda
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_trunk_a,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+        scale = 0.1,
+        boneWeight = trunk_bone 1.0,
+    }
+
+    model W460Srearwindshielda
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_swb_windshield_rear_a,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+        scale = 0.1,
+        boneWeight = trunk_bone 1.0,
+    }
+
+    model W460Mrearwindshielda
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_lwb_trunk_aM,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle W460CArmor
+	{
+		part W460WindshieldArmor
+        	{
+
+			model W460winda
+				{
+                		file = W460Cwindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.W460WindshieldArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = W460.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.WindshieldArmor,
+					init = W460.Init.WindshieldArmor,
+					}
+		}
+
+		part W460DoorFrontLeftArmor
+        {
+
+			model W460leftdoora
+				{
+                		file = W460Cwinfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.W460CarFrontDoorArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.DoorFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.DoorFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.DoorFrontLeftArmor,
+					init = W460.Init.DoorFrontLeftArmor,
+					}
+		}
+
+		part W460DoorFrontRightArmor
+        {
+
+			model W460rightdoora
+				{
+                		file = W460Cwinfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.W460CarFrontDoorArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.DoorFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.DoorFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.DoorFrontRightArmor,
+					init = W460.Init.DoorFrontRightArmor,
+					}
+		}
+    }
+
+    template vehicle W460LWindshieldRearArmor
+    {
+        part W460WindshieldRearArmor
+        {
+
+				model W460windra
+				{
+                		file = W460Lrearwindshielda,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.W460WindshieldRearArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.WindshieldRearArmor,
+					init = W460.Init.WindshieldRearArmor,
+			}
+		}
+    }
+
+    template vehicle W460L4Armor
+	{
+        template! = W460CArmor,
+
+		part W460DoorRearLeftArmor
+        {
+
+			model W460leftdoorra
+				{
+                		file = W460Lwinrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.W460CarRearDoorArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.DoorRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.DoorRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.DoorRearLeftArmor,
+					init = W460.Init.DoorRearLeftArmor,
+					}
+		}
+
+		part W460DoorRearRightArmor
+        {
+
+			model W460rightdoorra
+				{
+                		file = W460Lwinrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.W460CarRearDoorArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.DoorRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.DoorRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.DoorRearRightArmor,
+					init = W460.Init.DoorRearRightArmor,
+					}
+		}
+
+		part W460WindowBackLeftArmor
+        {
+
+			model W460winbla
+				{
+                		file = W460Lwinbla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.W460CarBackWindowArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.WindowBackLeftArmor,
+                	requireInstalled = WindowBackLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.WindowBackLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.WindowBackLeftArmor,
+					init = W460.Init.WindowBackLeftArmor,
+					}
+		}
+
+		part W460WindowBackRightArmor
+        {
+
+			model W460winbra
+				{
+                		file = W460Lwinbra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.W460CarBackWindowArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.WindowBackRightArmor,
+                	requireInstalled = WindowBackRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.WindowBackRightArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.WindowBackRightArmor,
+					init = W460.Init.WindowBackRightArmor,
+					}
+		}
+
+        template! = W460LWindshieldRearArmor,
+
+    }
+
+    template vehicle W460L2Armor
+	{
+        template! = W460CArmor,
+        template! = W460LWindshieldRearArmor,
+
+    }
+
+    template vehicle W460SArmor
+	{
+        template! = W460CArmor,
+
+		part W460DoorRearLeftArmor
+        {
+
+			model W460leftdoorra
+				{
+                		file = W460Swinrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.W460CarRearDoorArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.DoorRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.DoorRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.DoorRearLeftArmor,
+					init = W460.Init.DoorRearLeftArmor,
+					}
+		}
+
+		part W460DoorRearRightArmor
+        {
+
+			model W460rightdoorra
+				{
+                		file = W460Swinrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.W460CarRearDoorArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.DoorRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.DoorRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.DoorRearRightArmor,
+					init = W460.Init.DoorRearRightArmor,
+					}
+		}
+
+        part W460WindshieldRearArmor
+        {
+
+				model W460windra
+				{
+                		file = W460Srearwindshielda,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.W460WindshieldRearArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.WindshieldRearArmor,
+					init = W460.Init.WindshieldRearArmor,
+			}
+		}
+    }
+
+    template vehicle W460L4ArmorM
+	{
+        template! = W460CArmor,
+
+		part W460DoorRearLeftArmor
+        {
+
+			model W460leftdoorra
+				{
+                		file = W460Lwinrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.W460CarRearDoorArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.DoorRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.DoorRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.DoorRearLeftArmor,
+					init = W460.Init.DoorRearLeftArmor,
+					}
+		}
+
+		part W460DoorRearRightArmor
+        {
+
+			model W460rightdoorra
+				{
+                		file = W460Lwinrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.W460CarRearDoorArmor1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.DoorRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.DoorRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.DoorRearRightArmor,
+					init = W460.Init.DoorRearRightArmor,
+					}
+		}
+
+        part W460WindshieldRearArmor
+        {
+
+				model W460windra
+				{
+                		file = W460Mrearwindshielda,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.W460WindshieldRearArmorM_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.WindshieldRearSplitArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.WindshieldRearSplitArmor,
+            		}
+
+            		lua
+            		{
+					create = W460.Create.WindshieldRearSplitArmor,
+					init = W460.Init.WindshieldRearSplitArmor,
+			}
+		}
+
+    }
+}

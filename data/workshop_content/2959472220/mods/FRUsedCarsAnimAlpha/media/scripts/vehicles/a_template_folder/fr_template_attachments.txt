@@ -1,0 +1,126 @@
+module Base
+{
+	template vehicle FRAttachmentBed
+	{
+		part FRAttachmentBed
+		{			
+			category = fr_attachments,
+			area = TruckBed,
+			itemType = Base.FRRollcage;Base.FRBedCapHard;Base.FRBedCapSoft;Base.FRBedSideBoards;Base.Tarp,
+			specificItem = false,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+
+			table FRPartInfo
+			{
+				partChance = 30,
+				selectItemType = FRBedCapHard,
+				selectChance = 30,
+				excludeItemType = FRBedCapSoft,
+				excludeChance = 80,
+				parentVisual = TruckBed,
+			}
+
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 400,
+                skills = Mechanics:3,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualBedAttachment,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 400,
+                skills = Mechanics:3,
+                test = Vehicles.UninstallTest.FR_Default,
+                complete = Vehicles.UninstallComplete.FR_VisualBedAttachment,
+            }
+
+			lua
+            {
+				create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualBedAttachment,
+            }
+		}
+	}
+	
+	template vehicle FRAttachmentRoof
+	{
+		part FRAttachmentRoof
+		{			
+			category = fr_attachments,
+			area = TruckBed,
+			itemType = Base.FRTopLightsFog,
+			specificItem = false,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+
+			table FRPartInfo
+			{
+				partChance = 0,
+				selectItemType = FRTopLightsFog,
+			}
+			
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 400,
+                skills = Mechanics:3,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualDefault,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 400,
+                skills = Mechanics:3,
+                test = Vehicles.UninstallTest.FR_Default,
+                complete = Vehicles.UninstallComplete.FR_VisualDefault,
+            }
+			
+			lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualDefault,
+            }
+		}
+	}
+}

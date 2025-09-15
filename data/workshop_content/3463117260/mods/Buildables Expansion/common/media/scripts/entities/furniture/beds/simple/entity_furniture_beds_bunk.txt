@@ -1,0 +1,66 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_BunkBed
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Bunk Bed,
+			Icon		= furniture_bedding_01_67,
+		}
+	}
+
+    entity BunkBed
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_BunkBed,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = furniture_bedding_01_86 furniture_bedding_01_87,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_bedding_01_85,
+                    row = furniture_bedding_01_84,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallHammer,
+            time          = 350,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:15,
+            category      = Furniture_Beds,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_bedDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 1 tags[Scissors] mode:keep,
+                item 1 tags[SewingNeedle] mode:keep,
+                item 8 [Base.Plank],
+                item 4 [Base.Nails],
+                item 2 [Base.FabricRoll_Cotton],
+                item 2 [Base.Thread],
+                item 1 [Base.Mattress],
+            }
+        }
+    }
+}

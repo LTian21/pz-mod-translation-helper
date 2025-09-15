@@ -1,0 +1,60 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Overhead_Track
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Overhead Track,
+			Icon		= Build_OverheadTrack,
+		}
+	}
+
+    entity BuildOverheadTrack
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Overhead_Track,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = industry_02_56,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = industry_02_59,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPOverheadTrack,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.MetalBar],
+                item 1 [Base.Screws],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

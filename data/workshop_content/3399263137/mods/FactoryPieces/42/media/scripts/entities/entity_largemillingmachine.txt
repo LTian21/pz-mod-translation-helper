@@ -1,0 +1,66 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Large_Milling_Machine
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Large Milling Machine,
+			Icon		= Build_LargeMillingMachine,
+		}
+	}
+
+    entity BuildLargeMillingMachine
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Large_Milling_Machine,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = industry_02_48 industry_02_49,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = industry_02_51,
+                    row = industry_02_50,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 500,
+            needToBeLearn = true,
+            SkillRequired = Electricity:5;MetalWelding:5,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPLargeMillingMachine,
+            inputs
+            {
+                item 5 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SheetMetal],
+                item 1 [Base.SmallSheetMetal],
+                item 2 [Base.MetalPipe],
+                item 4 [Base.MetalBar],
+                item 3 [Base.Screws],
+                item 6 [Base.ElectricWire],
+                item 25 [Base.ElectronicsScrap],
+                item 5 [Base.WeldingRods],
+            }
+        }
+    }
+}

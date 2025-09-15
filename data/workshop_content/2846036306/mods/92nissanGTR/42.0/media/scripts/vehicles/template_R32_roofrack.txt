@@ -1,0 +1,83 @@
+module Base
+{
+
+	model 92nissanGTRRoofrack0
+	{
+		mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_roofrack,
+		texture = Vehicles/Items_damnRoofrackModern,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle R32Roofrack
+	{
+		part R32Roofrack
+		{
+
+			model R32Roofrack0
+				{
+                		file = 92nissanGTRRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.ModernSmallRoofrack,
+			mechanicRequireKey = false,
+            durability = 3,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = DAMN.Create.Blank,
+				}
+		}
+	}
+}
+

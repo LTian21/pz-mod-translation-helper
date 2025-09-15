@@ -1,0 +1,71 @@
+module Base
+{
+
+    model W460Lwindshield
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle W460CWindshield
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = W460Lwindshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.W460Windshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                requireUninstalled = W460WindshieldArmor,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+}

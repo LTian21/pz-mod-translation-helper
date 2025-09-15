@@ -1,0 +1,73 @@
+module Base
+{
+
+	model 63Type2VantarpCover
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_tarp_m,
+		texture = Vehicles/Vehicles_63Type2VanMilitary_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle VAN63TarpCover
+	{
+		part VAN63Tarp
+		{
+			
+			model VAN63tarp0
+			{
+				file = 63Type2VantarpCover,
+			}
+			
+			area = GasTank,
+			itemType = Base.63Type2VanTarpCover0,
+			specificItem = false,
+			category = Other,
+			mechanicRequireKey = true,
+            durability = 2,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = VAN63.InstallComplete.TarpCover,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = VAN63.UninstallComplete.TarpCover,
+			}
+			lua
+			{
+				init = VAN63.Init.TarpCover,
+				create = VAN63.Create.TarpCover,
+			}
+		}
+	}
+}
+

@@ -1,0 +1,76 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LargeShopShelves
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Large Shop Shelves,
+			Icon		= location_shop_generic_01_73,
+		}
+	}
+
+    entity LargeShopShelves
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_LargeShopShelves,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = location_shop_generic_01_79,
+                    row = location_shop_generic_01_78,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_shop_generic_01_76 location_shop_generic_01_77,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_shop_generic_01_75,
+                    row = location_shop_generic_01_74,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_shop_generic_01_72 location_shop_generic_01_73,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:8,
+            xpAward       = Woodwork:5,
+            category      = Containers_Commercial,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_commercialCounterDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 12 [Base.Plank] flags[Prop2],
+                item 6 [Base.Nails],
+            }
+        }
+    }
+}

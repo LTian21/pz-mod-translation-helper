@@ -1,0 +1,53 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Barbecue
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Barbecue,
+			Icon		= appliances_cooking_01_35,
+		}
+	}
+
+    entity Barbecue
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Barbecue,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = appliances_cooking_01_35,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:4,
+            xpAward       = MetalWelding:7,
+            category      = Appliances_Cooking,
+            ToolTip       = Tooltip_craft_barbecueDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SmallSheetMetal],
+                item 4 [Base.SheetMetal],
+                item 2 [Base.ScrapMetal],
+                item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

@@ -1,0 +1,86 @@
+module Base
+{
+	model 76chevyKseriesRoofLights
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_roof_lights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CH76RoofLightsON
+	{
+		part CH76RoofLights
+        {
+
+			model RoofLights0
+				{
+                	file = 76chevyKseriesRoofLights,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.76chevyKseriesRoofLights,
+			mechanicRequireKey = false,
+            durability = 2,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+                    table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 750,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+            	lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+    template vehicle CH76RoofLightsOFF
+		{
+            template! = CH76RoofLightsON,
+
+		part CH76RoofLights
+        	{
+            	lua
+            		{
+					create = DAMN.Create.Blank,
+					}
+		}
+	}
+}

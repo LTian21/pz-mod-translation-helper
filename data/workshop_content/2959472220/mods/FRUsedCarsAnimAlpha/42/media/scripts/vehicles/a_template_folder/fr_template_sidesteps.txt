@@ -1,0 +1,54 @@
+module Base
+{
+	template vehicle FRSideStep
+	{
+		part FRSideStepLeft
+		{			
+			area = TireRearLeft,
+
+			table FRPartInfo
+			{
+				partChance = 50,
+			}
+		}
+		
+		part FRSideStepRight
+		{
+			area = TireRearRight,
+			
+			table FRPartInfo
+			{
+				parentPart = FRSideStepLeft,
+			}
+		}
+	
+		part FRSideStep*
+		{
+			category = fr_attachments,
+			itemType = Base.FROldSideStep;Base.FRNormalSideStep;Base.FRPerformanceSideStep,
+			mechanicRequireKey = false,
+			specificItem = false,
+			
+            table install
+            {
+                time = 200,
+                skills = Mechanics:2,
+                test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualDefault,
+            }
+            table uninstall
+            {
+                
+                time = 200,
+                  skills = Mechanics:2,
+                test = Vehicles.UninstallTest.FR_Default,
+            }
+			
+			lua
+			{
+				create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualDefault,
+			}
+		}
+	}
+}

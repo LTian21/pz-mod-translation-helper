@@ -1,0 +1,78 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Gas2GoRedWindowDoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Gas 2 Go Red Window Door,
+			Icon		= location_shop_gas2go_01_61,
+		}
+	}
+
+    entity Gas2GoRedWindowDoor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Gas2GoRedWindowDoor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			breakSound      = BreakDoor,
+			
+            face W
+            {
+                layer
+                {
+                    row = location_shop_gas2go_01_60,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_shop_gas2go_01_61,
+                }
+            }
+			face W_OPEN
+            {
+                layer
+                {
+					row = location_shop_gas2go_01_62,
+                }
+            }
+            face N_OPEN
+            {
+                layer
+                {
+					row = location_shop_gas2go_01_63,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallHammer,
+            time          = 300,
+            needToBeLearn = true,
+            category      = Doors_Wooden,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:6,
+            ToolTip       = Tooltip_craft_woodenDoorDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+				item 4 [Base.Plank],
+				item 4 [Base.Nails],
+				item 2 [Base.GlassPanel],
+				item 2 [Base.Hinge],
+				item 1 [Base.Doorknob],
+            }
+        }
+    }
+}

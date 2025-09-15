@@ -1,0 +1,219 @@
+module Base
+{
+	model 80manKat1Windshielda
+    	{
+        mesh = vehicles/Vehicles_80manKat1_Body|MAN_windshieldA,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    	}
+
+    model 80manKat1Windowfla
+    	{
+        mesh = vehicles/Vehicles_80manKat1_Body|MAN_door_flA,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 80manKat1Windowfra
+    	{
+        mesh = vehicles/Vehicles_80manKat1_Body|MAN_door_frA,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle MAN80Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model winda
+				{
+                		file = 80manKat1Windshielda,
+				}
+
+			area = Front,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.80manKat1WindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MAN80.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = MAN80.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = MAN80.Create.WindshieldArmor,
+					init = MAN80.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model leftWindowa
+				{
+                		file = 80manKat1Windowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.80manKat1FrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MAN80.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = MAN80.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = MAN80.Create.FrontLeftArmor,
+					init = MAN80.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model rightWindowa
+				{
+                		file = 80manKat1Windowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.80manKat1FrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MAN80.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = MAN80.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = MAN80.Create.FrontRightArmor,
+					init = MAN80.Init.FrontRightArmor,
+					}
+		}
+	}
+}

@@ -1,0 +1,77 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_RoundOutdoorLamp
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Round Outdoor Lamp,
+			Icon		= lighting_outdoor_01_24,
+		}
+	}
+
+    entity RoundOutdoorLamp
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_RoundOutdoorLamp,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face N
+            {
+                layer
+                {
+                    row = lighting_outdoor_01_28,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = lighting_outdoor_01_25,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = lighting_outdoor_01_24,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = lighting_outdoor_01_29,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Lighting,
+            SkillRequired = MetalWelding:6;Electricity:4,
+            xpAward       = MetalWelding:7;Electricity:15,
+            ToolTip       = Tooltip_craft_lampDesc,
+            inputs
+            {
+		        item 2 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[Screwdriver] mode:keep flags[Prop2],
+                item 1 [Base.MetalBar;Base.MetalPipe],
+                item 1 [Base.SmallSheetMetal],
+                item 5 [Base.ScrapMetal],
+		        item 2 [Base.WeldingRods],
+		        item 15 [Base.ElectricWire],
+		        item 1 [Base.LightBulb],
+            }
+        }
+    }
+}

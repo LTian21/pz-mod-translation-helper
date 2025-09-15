@@ -1,0 +1,182 @@
+module Base
+{	
+	template vehicle xPU_Armor_ChevalierRhino
+	{
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontLeft,
+		part ATA2ProtectionWindowFrontLeft
+		{
+			model Light
+			{
+				file = PU_FL_Window_ChevalierRhino_Light,
+			}
+			model Heavy
+			{
+				file = PU_FL_Window_ChevalierRhino_Heavy,
+			}
+			
+			parent = DoorFrontLeft,
+		}
+
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontRight,
+		part ATA2ProtectionWindowFrontRight
+		{
+			model Light
+			{
+				file = PU_FR_Window_ChevalierRhino_Light,
+			}
+			model Heavy
+			{
+				file = PU_FR_Window_ChevalierRhino_Heavy,
+			}
+			
+			parent = DoorFrontRight,			
+		}
+
+        template = ATA2Protection/part/ATA2ProtectionWindshield,
+        part ATA2ProtectionWindshield
+        {
+            model Light
+            {
+                file = PU_F_Window_ChevalierRhino_Light,
+            }
+            model Heavy
+            {
+                file = PU_F_Window_ChevalierRhino_Heavy,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindshieldRear,
+        part ATA2ProtectionWindshieldRear
+        {
+            model Light
+            {
+                file = PU_R_Window_ChevalierRhino_Light,
+            }
+            model Heavy
+            {
+                file = PU_R_Window_ChevalierRhino_Heavy,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionTrunk,
+        part ATA2ProtectionTrunk
+        {
+            model Light
+            {
+                file = PU_Trunk_ChevalierRhino_Light,
+            }
+            model Heavy
+            {
+                file = PU_Trunk_ChevalierRhino_Heavy,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionDoorFrontLeft,
+        part ATA2ProtectionDoorFrontLeft
+        {
+            model Light
+            {
+                file = PU_Door_FL_ChevalierRhino_Light,
+            }
+            model Heavy
+            {
+                file = PU_Door_FL_ChevalierRhino_Heavy,
+            }
+			
+			parent = DoorFrontLeft,		
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionDoorFrontRight,
+        part ATA2ProtectionDoorFrontRight
+        {
+            model Light
+            {
+                file = PU_Door_FR_ChevalierRhino_Light,
+            }
+            model Heavy
+            {
+                file = PU_Door_FR_ChevalierRhino_Heavy,
+            }
+			
+			parent = DoorFrontRight,			
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionHood,
+        part ATA2ProtectionHood
+        {
+            model Light
+            {
+                file = PU_Hood_ChevalierRhino_Light,
+            }
+            model Heavy
+            {
+                file = PU_Hood_ChevalierRhino_Heavy,
+            }
+			parent = EngineDoor,				
+        }
+
+        template = ATA2Bullbars/part/ATA2Bullbar,
+        part ATA2Bullbar
+        {
+            model Default
+            {
+                file = PU_Bullbar_ChevalierRhino,
+            }
+        }
+
+        part Tire*
+        {
+            setAllModelsVisible = false,
+            table install
+            {
+                complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+            }
+            
+            table uninstall
+            {
+                complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+            }
+            
+            lua
+            {
+                create = ATATuning2.Create.TireNotAllModelsVisible,
+                init = ATATuning2.Init.TireNotAllModelsVisible,
+                checkOperate = Vehicles.CheckOperate.Tire,
+                update = Vehicles.Update.Tire,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWheels,
+        part TireFrontLeft
+        {
+            model ATAProtection
+            {
+                file = PU_Chains_FL_ChevalierRhino,
+            }
+        }
+
+        part TireRearLeft
+        {
+            model ATAProtection
+            {
+                file = PU_Chains_RL_ChevalierRhino,
+            }
+        }
+
+        part TireFrontRight
+        {
+            model ATAProtection
+            {
+                file = PU_Chains_FR_ChevalierRhino,
+            }
+        }
+
+        part TireRearRight
+        {
+            model ATAProtection
+            {
+                file = PU_Chains_RR_ChevalierRhino,
+            }
+        }
+	}
+}

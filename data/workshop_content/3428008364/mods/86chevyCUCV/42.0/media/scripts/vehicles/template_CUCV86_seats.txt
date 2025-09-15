@@ -1,0 +1,327 @@
+module Base
+{
+
+	model 86chevyCUCVSeatfl
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_seat_f,
+		texture = Vehicles/Vehicles_86chevyCUCV_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 86chevyCUCVSeatfr
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_seat_f,
+		texture = Vehicles/Vehicles_86chevyCUCV_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 86chevyCUCVSeatrl
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_seat_r,
+		texture = Vehicles/Vehicles_86chevyCUCV_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 86chevyCUCVSeatrr
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_seat_r,
+		texture = Vehicles/Vehicles_86chevyCUCV_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+    model 86chevyCUCVStretcher
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86amb_stretcher,
+		texture = Vehicles/Vehicles_USMIL_Stretchers,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 86chevyCUCVStretcherciv
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|damnCraft_stretcher,
+		texture = Vehicles/Vehicles_USMIL_Stretchers,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle CUCV86SeatsFront
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 86chevyCUCVSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 86chevyCUCVSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.86chevyCUCVSeatFront,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+    template vehicle CUCV86SeatsRear
+	{
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 86chevyCUCVSeatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 86chevyCUCVSeatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.86chevyCUCVSeatRear,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+    template vehicle CUCV86Stretcher
+    {
+        part SeatRearLeft
+		{
+
+			area = TruckBed,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			area = TruckBed,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.86chevyCUCVSeatRear,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+
+        part DAMNStretcher
+		{
+
+			model StretcherMil
+			{
+				file = 86chevyCUCVStretcher,
+			}
+            model StretcherCiv
+			{
+				file = 86chevyCUCVStretcherciv,
+			}
+
+			area = TruckBed,
+			container
+			{
+				seat = Stretcher,
+			}
+
+			category = seat,
+            specificItem = false,
+			itemType = USMIL.Stretcher0;USMIL.Stretcher1,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				seat = Stretcher,
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+                complete = CUCV86.InstallComplete.Stretcher,
+			}
+			table uninstall
+			{
+
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+                complete = CUCV86.UninstallComplete.Stretcher,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = CUCV86.Create.Stretcher,
+                init = CUCV86.Init.Stretcher,
+			}
+		}
+    }
+
+}
+

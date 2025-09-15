@@ -1,0 +1,210 @@
+module Base
+{
+
+	model 85buickLeSabreSeatfl
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_seat_fl,
+		texture = Vehicles/Vehicles_85buickLeSabre_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 85buickLeSabreSeatfr
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_seat_fl,
+		texture = Vehicles/Vehicles_85buickLeSabre_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 85buickLeSabreSeatrl
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_seat_r,
+		texture = Vehicles/Vehicles_85buickLeSabre_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 85buickLeSabreSeatrr
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_seat_r,
+		texture = Vehicles/Vehicles_85buickLeSabre_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	
+	template vehicle LES85Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 85buickLeSabreSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 85buickLeSabreSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 85buickLeSabreSeatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 85buickLeSabreSeatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.85buickLeSabreSeatFront,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.85buickLeSabreSeatRear,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+}
+

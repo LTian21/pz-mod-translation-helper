@@ -1,0 +1,228 @@
+module Base
+{
+
+    model 90bmwE30Windshield
+    {
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 90bmwE30SedanWindshieldRear
+    {
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_sedan_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 90bmwE30WagonM3Rear
+    {
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_m3_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 90bmwE30TouringWindshieldRear
+    {
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_touring_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+
+	template vehicle BMWE30Windshield
+	{
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 90bmwE30Windshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.90bmwE30Windshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = BMWE30WindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle BMWE30WindshieldsSedan
+    {
+        template! = BMWE30Windshield,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 90bmwE30SedanWindshieldRear,
+            }
+
+                
+            itemType = Base.90bmwE30RearWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = BMWE30WindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle BMWE30WindshieldsM3
+    {
+        template! = BMWE30WindshieldsSedan,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 90bmwE30WagonM3Rear,
+            }
+        }
+
+    }
+
+    template vehicle BMWE30WindshieldsTouring
+    {
+        template! = BMWE30Windshield,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 90bmwE30TouringWindshieldRear,
+            }
+
+                
+            itemType = Base.90bmwE30RearWindshield,
+            parent = TrunkDoor,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = BMWE30WindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+}

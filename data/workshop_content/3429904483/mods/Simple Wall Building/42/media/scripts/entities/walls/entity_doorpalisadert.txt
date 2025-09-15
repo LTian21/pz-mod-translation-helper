@@ -1,0 +1,56 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_DoorPalisadeRT
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Door Palisade,
+			Icon		= Build_DoorPalisade,
+		}
+	}
+
+    entity DoorPalisadeRT
+    {
+        component UiConfig
+                {
+                    xuiSkin         = default,
+                    entityStyle     = ES_DoorPalisadeRT,
+                    uiEnabled       = false,
+                }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			isThumpable     = false,
+			
+            face W
+            {
+                layer
+                {
+                    row = rt_tiles_01_12,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = rt_tiles_01_13,
+                }
+            }
+			corner = rt_tiles_01_8,
+        }
+		
+		component CraftRecipe
+        {
+			timedAction   = BuildWallNoTool,
+            time          = 200,
+            category      = RT Buildings,
+			xpAward       = Woodwork:10,
+            inputs
+            {
+                item 1 [SWB.LogDoorFrameKit],
+            }
+        }
+    }
+}

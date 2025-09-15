@@ -1,0 +1,368 @@
+module Base
+{
+	model 93fordF350FrontBumper0
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 93fordF350FrontBumperB
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_bullbar_frontB,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 93fordF350FrontBumperC
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_bullbar_frontC,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93fordF350FrontBullbarA
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93fordF350RearBumper0
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 93fordF350utilityRearBumper1
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_utility_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle F3502BumperRear
+	{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 93fordF350RearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93fordF350BumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = F3502.Create.BumperRear,
+					init = F3502.Init.BumperRear,
+					}
+		}
+	}
+
+    template vehicle F3502utilityBumperRear
+	{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper1
+				{
+                		file = 93fordF350utilityRearBumper1,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.utilityBoxBumperRear2,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+	template vehicle F3502Bumpers
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 93fordF350FrontBumper0,
+				}
+
+            model FrontBumperB
+				{
+                		file = 93fordF350FrontBumperB,
+				}
+
+            model FrontBumperC
+				{
+                		file = 93fordF350FrontBumperC,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 93fordF350FrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93fordF350BumperFront0;Base.93fordF350BumperFrontB;Base.93fordF350BumperFrontC;Base.93fordF350BullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = F3502.Create.BumperFront,
+					init = F3502.Init.BumperFront,
+					}
+		}
+
+		template! = F3502BumperRear,
+
+	}
+
+	template vehicle F3502Bullbars
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBullbarA
+				{
+                		file = 93fordF350FrontBullbarA,
+				}
+
+            model FrontBumperB
+				{
+                		file = 93fordF350FrontBumperB,
+				}
+
+            model FrontBumperC
+				{
+                		file = 93fordF350FrontBumperC,
+				}
+
+			model FrontBumper0
+				{
+                		file = 93fordF350FrontBumper0,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93fordF350BullbarFrontA;Base.93fordF350BumperFrontB;Base.93fordF350BumperFrontC;Base.93fordF350BumperFront0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.BullbarFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.BullbarFront,
+            		}
+
+            		lua
+            		{
+					create = F3502.Create.BullbarFront,
+					init = F3502.Init.BullbarFront,
+					}
+			}
+
+			template! = F3502BumperRear,
+		}
+
+    template vehicle F2502Bumpers
+	{
+        template! = F3502Bumpers,
+
+		part DAMNBumperRear
+        {
+
+			model RearBumper0
+				{
+                		file = 93fordF350RearBumper0,
+                        offset = 0.0000 0.0000 0.8600,
+				}
+        }
+    }
+
+    template vehicle F1502Bumpers
+	{
+        template! = F3502Bumpers,
+
+		part DAMNBumperRear
+        {
+
+			model RearBumper0
+				{
+                		file = 93fordF350RearBumper0,
+                        offset = 0.0000 0.0000 1.2800,
+				}
+        }
+    }
+}

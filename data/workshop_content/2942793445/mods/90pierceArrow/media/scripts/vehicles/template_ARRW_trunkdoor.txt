@@ -1,0 +1,267 @@
+module Base
+{
+
+	model 90pierceArrowTrunkDoor
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_trunk_lid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 90pierceArrowTrunkDoorLeft
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_storage_lids_left,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 90pierceArrowTrunkDoorRight
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_storage_lids_right,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle ARRWTrunkDoors
+	{
+		part TrunkDoorRear
+		{
+
+			model SweetTrunkOfBack
+			{
+				file = 90pierceArrowTrunkDoor,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = TruckBed,
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.90pierceArrowTrunkDoor,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+
+		}
+
+		part TrunkDoorLeft
+		{
+
+			model SweetTrunkOfLeft
+			{
+				file = 90pierceArrowTrunkDoorLeft,
+			}
+
+			anim Close
+			{
+				anim = storage_left_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = storage_left_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage_left_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage_left_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = ARRWlefttrunk,
+			area = TruckBedLeft,
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 -90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 -90.0 0.0,
+			}
+			itemType = Base.90pierceArrowTrunkDoorsLeft,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+
+		}
+
+		part TrunkDoorRight
+		{
+
+			model KindaDrunkNeedAnotherBeer
+			{
+				file = 90pierceArrowTrunkDoorRight,
+			}
+
+			anim Close
+			{
+				anim = storage_right_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = storage_right_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage_right_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage_right_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = ARRWrighttrunk,
+			area = TruckBedRight,
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 90.0 0.0,
+			}
+			itemType = Base.90pierceArrowTrunkDoorsRight,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+
+		}
+
+		part Trunk*
+		{
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}
+

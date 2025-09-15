@@ -1,0 +1,588 @@
+module Base
+{
+	model Tatra815_Base
+	{
+		mesh = vehicles/Vehicles_Tatra815_Body|Body,
+		shader = vehicle,
+		invertX = FALSE,
+		scale = 1,
+	}
+	model Tatra8158X8_Interior
+	{
+		mesh = vehicles/Vehicles_Tatra815_Body|Interior,
+		texture = Vehicles/Tatra815_Interior,
+		shader = basicEffect,
+		scale = 1,
+	}
+	model Tatra815frontwheelleft
+	{
+		mesh = vehicles/Vehicles_Tatrafront_Wheel,
+		texture = vehicles/Tatra815tires,
+		shader = basicEffect,
+	}
+	model Tatra815frontwheelright
+	{
+		mesh = vehicles/Vehicles_Tatrafront_Wheel,
+		texture = vehicles/Tatra815tires,
+		shader = basicEffect,
+	}
+	model Tatra815backwheelleft
+	{
+		mesh = vehicles/Vehicles_Tatrarear_Wheel,
+		texture = vehicles/Tatra815tires,
+		shader = basicEffect,
+	}
+	model Tatra815backwheelright
+	{
+		mesh = vehicles/Vehicles_Tatrarear_Wheel,
+		texture = vehicles/Tatra815tires,
+		shader = basicEffect,
+	}
+
+	vehicle Tatra815
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 6.5,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.5,
+		engineRPMType = van,
+
+		model
+		{
+			file = Tatra815_Base,
+			scale = 0.9400,
+			offset = 0.0000 0.4681 1.1489,
+		}
+
+		part TCLConfig
+		{
+			category = nodisplay,
+
+			table TCLConfig
+			{
+				animType = vanilla,
+			}
+		}
+
+		spawnOffsetY = 0,
+
+		skin
+		{
+			texture = Vehicles/green_Tatra815,
+		}
+
+		skin
+		{
+			texture = Vehicles/UN_Tatra815,
+		}
+
+          
+
+		textureRust = Vehicles/null,
+		textureMask = Vehicles/Tatra8158X8Mask,
+		textureLights = Vehicles/Tatra815lights,
+		textureDamage1Shell = Vehicles/Tatra8158X8Damage1,
+		textureDamage2Shell = Vehicles/Tatra8158X8Damage2,
+		textureDamage1Overlay = Vehicles/Tatra8158X8Damage1,
+		textureDamage2Overlay = Vehicles/Tatra8158X8Damage2,
+
+		sound
+		{
+			engine = VehicleEngineSUV,
+			engineStart = VehicleEngineSUV,
+			engineTurnOff = VehicleEngineSUV,
+			horn = VehicleHornSportsCar,
+			ignitionFail = VehicleIgnitionFailSUV,
+		}
+
+		extents = 2.7447 2.4468 9.5745,
+		mass = 1000,
+		physicsChassisShape = 2.7447 1.8723 9.5957,
+		centerOfMassOffset = -0.0106 0.3121 0.4894,
+		shadowExtents = 2.9397 9.5885,
+		shadowOffset = -0.0078 0.5091,
+		engineForce = 8500,
+		maxSpeed = 55f,
+
+		engineLoudness = 115,
+		engineQuality = 70,
+		brakingForce = 50,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 0.30f,
+		steeringIncrement = 0.030,
+		steeringClamp = 0.25,
+		suspensionStiffness = 80,
+		suspensionCompression = 4.70,
+		suspensionDamping = 3.75,
+		maxSuspensionTravelCm = 15,
+		suspensionRestLength = 0.2,
+		wheelFriction = 2.5f,
+		frontEndHealth = 4250,
+		rearEndHealth = 2200,
+		seats = 6,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 1.0319 -0.5851 2.3723,
+			radius = 0.69f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -1.0745 -0.5851 2.3617,
+			radius = 0.69f,
+			width = 0.2f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = -0.0106 -0.5851 -4.1064,
+			radius = 0.69f,
+			width = 0.2f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.0106 -0.5851 -2.5000,
+			radius = 0.69f,
+			width = 0.2f,
+		}
+
+		template = PassengerSeat6,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorFrontLeft,
+
+			position inside
+			{
+				offset = 0.5957 0.7447 2.8404,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.5745 -0.4468 3.2128,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorFrontRight,
+
+			position inside
+			{
+				offset = -0.6170 0.7234 2.8191,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.6383 0.3191 3.2128,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		passenger RearRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorRearRight,
+
+			position inside
+			{
+				offset = -0.7447 0.7766 1.4043,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.6383 0.3191 1.5745,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearRight,
+			}
+		}
+
+		passenger RearLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorRearLeft,
+
+			position inside
+			{
+				offset = 0.7447 0.7766 1.4043,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.5745 0.3191 1.6064,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearLeft,
+			}
+		}
+
+		passenger MiddleLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorMiddleLeft,
+
+			position inside
+			{
+				offset = -0.0106 0.7979 2.8085,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.5745 0.3191 1.0106,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatMiddleLeft,
+			}
+		}
+
+		passenger MiddleRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorMiddleRight,
+
+			position inside
+			{
+				offset = -0.0106 1.0000 1.5532,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.6170 0.3191 1.0745,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatMiddleLeft,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 1.5319 1.7128 0.5532 0.9787,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -4.7021 2.5106 1.0426,
+		}
+
+		area LeftContainer
+		{
+			xywh = 1.5851 0.0319 0.8085 1.1915,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.5319 3.8936 0.7872 0.9787,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.5532 3.8936 0.7872 0.9787,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 1.5319 2.7128 0.7872 0.8723,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -1.5638 2.7128 0.7872 0.8511,
+		}
+
+		area SeatMiddleRight
+		{
+			xywh = 0.0000 2.7553 0.7872 0.8511,
+		}
+
+		area SeatMiddleLeft
+		{
+			xywh = -0.0000 4.0638 0.7872 0.8511,
+		}
+
+		area GasTank
+		{
+			xywh = -1.5532 -0.3298 0.4894 0.4894,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.5213 2.8617 0.4894 0.4894,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.4468 2.8830 0.4894 0.4894,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.5000 -2.6170 0.4894 0.4894,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.4681 -2.6170 0.4894 0.4894,
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+		template = Seat/part/SeatRearRight,
+		template = Seat/part/SeatRearLeft,
+		template = Seat/part/SeatMiddleRight,
+		template = Seat/part/SeatMiddleLeft,
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part GloveBox
+		{
+			model Tatra815Interior
+			{
+				file = Tatra8158X8_Interior,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			container
+			{
+				capacity = 17,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			area = GasTank,
+			category = gastank,
+			mechanicRequireKey = true,
+
+			container
+			{
+				capacity = 150,
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline,
+				conditionAffectsCapacity = false,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+				update = Vehicles.Update.GasTank,
+				checkEngine = Vehicles.CheckEngine.GasTank,
+			}
+
+			install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		
+
+		template = Battery,
+		template = Engine,
+		template! = Tatra815_seats,
+		template! = Tatra815_doors,
+		template! = Tatra815_windows,
+		template! = Tatra815_trunkdoor,
+		template! = Tatra815_trunks,
+		template! = Tatra815_TruckbedRoof,
+		template! = Tatra815_windshields,
+                template! = Tatra815_bumpers,
+                template! = Tatra815_armor,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		part Windshield*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Tatra815frontwheelleft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Tatra815frontwheelright,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Tatra815backwheelleft,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Tatra815backwheelright,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = -0.0213 -0.2128 -5.7234,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.3298 4.1702,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

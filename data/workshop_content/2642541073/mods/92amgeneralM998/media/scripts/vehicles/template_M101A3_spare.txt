@@ -1,0 +1,94 @@
+module Base
+{
+	model TrailerM101A3sparefront
+	{
+		mesh = vehicles/Trailers_M101A3_Body|M101A3_frontsparetire,
+		texture = Vehicles/TrailerM101A3cargo_wheel_extra,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle M101A3Spares
+		{
+		part M101A3Spare
+        	{
+
+			model SpareTire1
+				{
+                		file = runFlatSmallTire,
+                        offset = 0.0000 0.1667 1.5091,
+				        rotate = 0.0000 -90.0000 0.0000,
+				}
+            model SpareTire1Mount
+				{
+                		file = TrailerM101A3sparefront,
+				}
+
+            model SpareTire2
+				{
+                		file = runFlatSmallTire,
+                        offset = 0.0000 0.1667 1.5091,
+				        rotate = 0.0000 -90.0000 0.0000,
+				}
+            model SpareTire1Mount2
+				{
+                		file = TrailerM101A3sparefront,
+				}
+
+			area = SpareTireFront,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.V101Tire2;runFlat.SmallTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+					complete = M101A3.InstallComplete.Spare,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1200,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = M101A3.UninstallComplete.Spare,
+            		}
+
+            		lua
+            		{
+			create = M101A3.Create.Spare,
+			init = M101A3.Init.Spare,
+			}
+		}
+
+	}
+
+		
+}

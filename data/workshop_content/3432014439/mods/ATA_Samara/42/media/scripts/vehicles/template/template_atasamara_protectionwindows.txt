@@ -1,0 +1,144 @@
+module Base
+{
+    model ATASamaraProtectionWindowFrontLeft
+    {
+        mesh = vehicles/ATA_Samara_model|Window_Armor_left,
+        texture = Vehicles/ATA_Muscle_items,
+        shader = basicEffect,
+        scale = 0.02,
+    }
+    model ATASamaraProtectionWindowFrontRight
+    {
+        mesh = vehicles/ATA_Samara_model|Window_Armor_right,
+        texture = Vehicles/ATA_Muscle_items,
+        shader = basicEffect,
+        scale = 0.02,
+    }
+    model ATASamaraProtectionWindowFrontLeftMovablePart
+    {
+        mesh = vehicles/ATA_Samara_model|Window_ArmorDoor_left,
+        texture = Vehicles/ATA_Muscle_items,
+        static = FALSE,
+        shader = vehicle,
+        scale = 0.02,
+    }
+    model ATASamaraProtectionWindowFrontRightMovablePart
+    {
+        mesh = vehicles/ATA_Samara_model|Window_ArmorDoor_right,
+        texture = Vehicles/ATA_Muscle_items,
+        static = FALSE,
+        shader = vehicle,
+        scale = 0.02,
+    }
+    model ATASamaraProtectionWindowFront
+    {
+        mesh = vehicles/ATA_Samara_model|Window_Armor_front,
+        texture = Vehicles/ATA_Muscle_items,
+        shader = basicEffect,
+        scale = 0.02,
+    }
+    model ATASamaraProtectionWindowRear
+    {
+        mesh = vehicles/ATA_Samara_model|Window_Armor_rear,
+        texture = Vehicles/ATA_Muscle_items,
+        shader = basicEffect,
+        scale = 0.02,
+    }
+    
+    template vehicle ATASamara_ProtectionWindows
+    {
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontLeft,
+        part ATA2ProtectionWindowFrontLeft
+        {
+            model Default
+            {
+                file = ATASamaraProtectionWindowFrontLeftMovablePart,
+                rotate = -90 0 0,
+            }
+            model StaticPart
+            {
+                file = ATASamaraProtectionWindowFrontLeft,
+            }
+            
+            anim Close
+            {
+                anim = WprotectionL_closing,
+                rate = 1.5,
+            }
+            anim Open
+            {
+                anim = WprotectionL_closing,
+                reverse = TRUE,
+                rate = 1.5,
+            }
+            anim Closed
+            {
+                anim = WprotectionL_closing,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = WprotectionL_closing,
+                reverse = FALSE,
+                animate = FALSE,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontRight,
+        part ATA2ProtectionWindowFrontRight
+        {
+            model Default
+            {
+                file = ATASamaraProtectionWindowFrontRightMovablePart,
+                rotate = -90 0 0,
+            }
+            model StaticPart
+            {
+                file = ATASamaraProtectionWindowFrontRight,
+            }
+            
+            anim Close
+            {
+                anim = WprotectionR_closing,
+                rate = 1.5,
+            }
+            anim Open
+            {
+                anim = WprotectionR_closing,
+                reverse = TRUE,
+                rate = 1.5,
+            }
+            anim Closed
+            {
+                anim = WprotectionR_closing,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+            anim Opened
+            {
+                anim = WprotectionR_closing,
+                animate = FALSE,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindshield,
+        part ATA2ProtectionWindshield
+        {
+            model Default
+            {
+                file = ATASamaraProtectionWindowFront,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindshieldRear,
+        part ATA2ProtectionWindshieldRear
+        {
+            model Default
+            {
+                file = ATASamaraProtectionWindowRear,
+            }
+        }
+    }
+}

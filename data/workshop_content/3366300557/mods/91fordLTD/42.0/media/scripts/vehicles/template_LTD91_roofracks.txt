@@ -1,0 +1,169 @@
+module Base
+{
+
+	model 91fordLTDRoofrack0
+	{
+		mesh = vehicles/Vehicles_91fordLTD_Body|vic91_roofrack0,
+		texture = Vehicles/Vehicles_91fordLTD_Interior2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 91fordLTDRoofrack1
+	{
+		mesh = vehicles/Vehicles_91fordLTD_Body|vic91_roofrack0b,
+		texture = Vehicles/Vehicles_91fordLTD_Interior2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle LTD91RoofrackWagon
+	{
+		part LTD91Roofrack
+		{
+			model LTD91Roofrack0
+				{
+                		file = 91fordLTDRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.91fordLTDRoofrack,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = LTD91.InstallComplete.RoofrackWagon,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.RoofrackWagon,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = LTD91.Create.RoofrackWagon,
+					init = LTD91.Init.RoofrackWagon,
+				}
+		}
+	}
+
+	template vehicle LTD91RoofrackSedan
+	{
+		part LTD91Roofrack
+		{
+            model LTD91Roofrack0
+				{
+                		file = 91fordLTDRoofrack0,
+                		offset = 0.0000 0.0000 1.2000,
+				}
+
+			model LTD91Roofrack0b
+				{
+                		file = 91fordLTDRoofrack1,
+                        offset = 0.0000 0.0000 1.2000,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.91fordLTDRoofrack,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = LTD91.InstallComplete.RoofrackSedan,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.RoofrackSedan,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = LTD91.Create.RoofrackSedan,
+					init = LTD91.Init.RoofrackSedan,
+				}
+		}
+	}
+}
+

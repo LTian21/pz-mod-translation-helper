@@ -1,0 +1,75 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_BrownOfficeLargeDesk
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Brown Office Large Desk,
+			Icon		= location_business_office_generic_01_6,
+		}
+	}
+
+    entity BrownOfficeLargeDesk
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_BrownOfficeLargeDesk,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_business_office_generic_01_1,
+                    row = location_business_office_generic_01_0,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_business_office_generic_01_5 location_business_office_generic_01_6,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = location_business_office_generic_01_14,
+                    row = location_business_office_generic_01_13,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_business_office_generic_01_8 location_business_office_generic_01_10,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 250,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:5,
+            category      = Furniture_Tables,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_tableDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

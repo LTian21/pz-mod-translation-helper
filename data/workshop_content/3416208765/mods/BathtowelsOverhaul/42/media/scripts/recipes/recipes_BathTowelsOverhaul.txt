@@ -1,0 +1,113 @@
+module BTO_BathTowels
+{
+	imports
+	{
+		Base
+	}
+	craftRecipe Rip Towel
+	{
+		timedAction = RipClothing,
+		Time = 100,
+		Tags = InHandCraft;CanBeDoneInDark,
+		OnCreate = Recipe.OnCreate.RipClothing,
+		/* OnCanPerform = Recipe.OnCanPerform.RipClothing, */
+		Tooltip = Tooltip_Recipe_RipTowel,
+		/* CanWalk = true, */
+		inputs
+		{
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop1;IsNotDull],
+			item 1 tags[RipClothingTowel] flags[AllowDestroyedItem],
+		}
+		outputs
+		{
+			item 1 Base.RippedSheets,
+		}
+	}
+	
+	craftRecipe Sew Dust Cloth
+	{
+		timedAction = SewingCloth,
+		Time = 200,
+		SkillRequired = Tailoring:1,
+		xpAward = Tailoring:5,
+		AllowBatchCraft = False,
+		Tags = AnySurfaceCraft,
+		Tooltip = Tooltip_Recipe_SewDustCloth,
+		category = Tailoring,
+		inputs
+		{
+			item 1 tags[Scissors] mode:keep,
+			item 1 tags[SewingNeedle] mode:keep,
+			item 2 [Base.RippedSheets],
+			item 1 [Base.Thread],
+		}
+		outputs
+		{
+			item 1 Base.DustCloth,
+		}
+	}
+
+	craftRecipe Knit Bath Towel
+	{
+		timedAction = SewingCloth,
+		Time = 200,
+		SkillRequired = Tailoring:1,
+		xpAward = Tailoring:5,
+		AllowBatchCraft = False,
+		Tags = AnySurfaceCraft,
+		category = Tailoring,
+		OnCreate = BTO_Recipes.craftedBathTowel,
+		inputs
+		{
+			item 1 tags[Scissors] mode:keep,
+			item 1 tags[SewingNeedle] mode:keep,
+			item 1 [Base.Thread],
+			item 1 [Base.Sheet],
+
+			item 1 tags[KnittingNeedles] mode:keep,
+			item 1 [Yarn],
+		}
+		outputs
+		{
+			item 1 Base.BathTowel_Crafted,
+		}
+	}
+
+	craftRecipe Sew Dust Cloth Form Hand Towel
+	{
+		timedAction = SewingCloth,
+		Time = 200,
+		SkillRequired = Tailoring:1,
+		xpAward = Tailoring:2,
+		AllowBatchCraft = False,
+		Tags = AnySurfaceCraft,
+		Tooltip = Tooltip_Recipe_SewDustCloth,
+		category = Tailoring,
+		inputs
+		{
+			item 1 tags[SewingNeedle] mode:keep,
+			item 1 [Base.HandTowel],
+			item 1 [Base.Thread],
+		}
+		outputs
+		{
+			item 1 Base.DustCloth,
+		}
+	}
+	
+	craftRecipe Rip Dust Cloth
+	{
+		timedAction = RipClothing,
+		Time = 50,
+		Tags = InHandCraft;CanBeDoneInDark,
+		Tooltip = Tooltip_Recipe_RipDustCloth,
+		inputs
+		{
+			item 1 [Base.DishCloth;Base.DustCloth],
+		}
+		outputs
+		{
+			item 1 Base.RippedSheets,
+		}
+	}
+}

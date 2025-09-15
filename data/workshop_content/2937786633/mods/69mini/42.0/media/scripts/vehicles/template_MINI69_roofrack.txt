@@ -1,0 +1,82 @@
+module Base
+{
+
+	model 69miniroofrack0
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_roofrack,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle MINI69Roofrack
+	{
+		part MINI69Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 69miniroofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.69miniRoofrack,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 700,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = MINI69.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = MINI69.Create.Roofrack,
+					init = MINI69.Init.Roofrack,
+				}
+		}
+	}
+}
+

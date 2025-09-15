@@ -1,0 +1,68 @@
+module Base
+{
+	model W460GasCan
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_gascan,
+		texture = Vehicles/Items_USMIL_gasCan0,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+    }
+
+    model W460WaterCan
+    {
+        mesh = vehicles/Vehicles_84mercW460_Body|w460_gascan,
+		texture = Vehicles/Items_USMIL_waterCan0,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+    }
+
+	template vehicle W460GasCans
+	{
+		part DAMNGasCanOne
+        	{
+
+			model GasCan
+				{
+                		file = W460GasCan,
+				}
+
+			model WaterCan
+				{
+                		file = W460WaterCan,
+				}
+
+			area = TruckBed,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = W460.InstallComplete.GasCan,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.GasCan,
+            		}
+
+            		lua
+            		{
+						create = W460.Create.GasCan,
+						init = W460.Init.GasCan,
+					}
+		}
+	}
+}

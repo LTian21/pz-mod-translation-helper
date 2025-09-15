@@ -1,0 +1,304 @@
+module Base
+{
+	model 84jeepXJFrontBumper0
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 84jeepXJFrontBumperA
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 84jeepXJFrontBullbarA
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_bullbar_frontB,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 84jeepXJRearBumper0
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP84Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 84jeepXJFrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 84jeepXJFrontBumperA,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 84jeepXJFrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.84jeepXJBumperFront0;Base.84jeepXJBumperFrontA;Base.84jeepXJBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.BumperFront,
+					init = JP84.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 84jeepXJRearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.84jeepXJBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.BumperRear,
+					init = JP84.Init.BumperRear,
+					}
+		}
+	}	
+
+    template vehicle JP84BumpersPush
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumperA
+				{
+                		file = 84jeepXJFrontBumperA,
+				}
+
+			model FrontBumper0
+				{
+                		file = 84jeepXJFrontBumper0,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 84jeepXJFrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.84jeepXJBumperFrontA;Base.84jeepXJBumperFront0;Base.84jeepXJBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.BumperFrontPush,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.BumperFrontPush,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.BumperFrontPush,
+					init = JP84.Init.BumperFrontPush,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 84jeepXJRearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.84jeepXJBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP84.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = JP84.Create.BumperRear,
+					init = JP84.Init.BumperRear,
+					}
+		}
+	}	    
+}

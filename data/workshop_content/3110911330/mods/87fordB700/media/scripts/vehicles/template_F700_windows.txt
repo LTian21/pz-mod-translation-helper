@@ -1,0 +1,536 @@
+module Base
+{
+	model 87fordF700Windowfl
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_window_fl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        static = FALSE,
+	}
+
+    model 87fordF700WindowflB
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700b_window_fl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        static = FALSE,
+	}
+
+    model 87fordF700WindowflX
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700x_window_fl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        static = FALSE,
+	}
+
+	model 87fordF700Windowfr
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_window_fr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 87fordF700WindowfrB
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700b_window_fr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        static = FALSE,
+	}
+
+    model 87fordF700WindowfrX
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700x_window_fr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        static = FALSE,
+	}
+
+    model 87fordF700Windowml
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_window_ml,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 87fordF700WindowmlB
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700b_window_ml,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87fordF700Windowmr
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_window_mr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 87fordF700WindowmrB
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700b_window_mr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87fordF700Windowrl
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_window_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 87fordF700WindowrlB
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700b_window_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87fordF700Windowrr
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 87fordF700WindowrrB
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700b_window_rr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle F700Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 87fordF700Windowfl,
+			}
+
+            window
+            {
+                openable = false,
+            }
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.87fordF700ArmoredFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 87fordF700Windowfr,
+			}
+
+			window
+            {
+                openable = false,
+            }
+
+			area = SeatFrontRight,
+			itemType = Base.87fordF700ArmoredFrontSideWindow,
+		}
+
+        part WindowMiddleLeft
+		{
+			model windowBLLimo
+			{
+				file = 87fordF700Windowml,
+			}
+
+            window
+            {
+                openable = false,
+            }
+
+			area = SeatRearLeft,
+			itemType = Base.87fordF700ArmoredSmallWindow,
+
+		}
+
+		part WindowMiddleRight
+		{
+			model windowBRLimo
+			{
+				file = 87fordF700Windowmr,
+			}
+
+            window
+            {
+                openable = false,
+            }
+
+			area = SeatRearRight,
+			itemType = Base.87fordF700ArmoredSmallWindow,
+
+		}
+
+		part WindowRearLeft
+		{
+			model windowRLLimo
+			{
+				file = 87fordF700Windowrl,
+			}
+
+			window
+            {
+                openable = false,
+            }
+
+			area = SeatRearLeft,
+			itemType = Base.87fordF700ArmoredRearSideWindow,
+
+		}
+
+		part WindowRearRight
+		{
+			model windowRRLimo
+			{
+				file = 87fordF700Windowrr,
+			}
+
+			window
+            {
+                openable = false,
+            }
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.87fordF700ArmoredRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+    template vehicle F700WindowsB
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 87fordF700WindowflB,
+			}
+
+            window
+            {
+                openable = false,
+            }
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.87fordF700ArmoredFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 87fordF700WindowfrB,
+			}
+
+			window
+            {
+                openable = false,
+            }
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.87fordF700ArmoredFrontSideWindow,
+		}
+
+        part WindowMiddleLeft
+		{
+			model windowBLLimo
+			{
+				file = 87fordF700WindowmlB,
+			}
+
+            window
+            {
+                openable = false,
+            }
+
+			area = SeatRearLeft,
+			itemType = Base.87fordF700ArmoredSmallWindow,
+
+		}
+
+		part WindowMiddleRight
+		{
+			model windowBRLimo
+			{
+				file = 87fordF700WindowmrB,
+			}
+
+            window
+            {
+                openable = false,
+            }
+
+			area = SeatRearRight,
+			itemType = Base.87fordF700ArmoredSmallWindow,
+
+		}
+
+		part WindowRearLeft
+		{
+			model windowRLLimo
+			{
+				file = 87fordF700WindowrlB,
+			}
+
+			window
+            {
+                openable = false,
+            }
+
+			area = SeatRearLeft,
+			itemType = Base.87fordF700ArmoredRearSideWindow,
+
+		}
+
+		part WindowRearRight
+		{
+			model windowRRLimo
+			{
+				file = 87fordF700WindowrrB,
+			}
+
+			window
+            {
+                openable = false,
+            }
+
+			area = SeatRearRight,
+			itemType = Base.87fordF700ArmoredRearSideWindow,
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+    template vehicle F700WindowsX
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 87fordF700WindowflX,
+			}
+
+            anim ClosedToOpen
+			{
+				anim = windowx_fl_opening,
+				animate = FALSE,
+			}
+
+            window
+            {
+                openable = true,
+            }
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.87fordF700FrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+            table uninstall
+			{
+                requireUninstalled = B700FrontLeftArmor,
+            }
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 87fordF700WindowfrX,
+			}
+
+            anim ClosedToOpen
+			{
+				anim = windowx_fr_opening,
+				animate = FALSE,
+			}
+
+			window
+            {
+                openable = true,
+            }
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.87fordF700FrontSideWindow,
+
+            table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+            table uninstall
+			{
+                requireUninstalled = B700FrontRightArmor,
+            }
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}

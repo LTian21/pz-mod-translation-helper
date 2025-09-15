@@ -1,0 +1,438 @@
+module Base
+{
+	model 93fordF350Windshielda
+    	{
+        mesh = vehicles/Vehicles_93fordF350_Body|f350_windshield_front_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93fordF350Windowfla
+    	{
+        mesh = vehicles/Vehicles_93fordF350_Body|f350_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93fordF350Windowfra
+    	{
+        mesh = vehicles/Vehicles_93fordF350_Body|f350_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93fordF350Windowrla
+    	{
+        mesh = vehicles/Vehicles_93fordF350_Body|f350_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93fordF350Windowrra
+    	{
+        mesh = vehicles/Vehicles_93fordF350_Body|f350_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93fordF350WindshieldReara
+    	{
+        mesh = vehicles/Vehicles_93fordF350_Body|f350_utility_rear_windshield_armor,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle F1502Armor
+		{
+		part F3502WindshieldArmor
+        	{
+
+			model F3502winda
+				{
+                		file = 93fordF350Windshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93fordF350WindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = F3502.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = F3502.Create.WindshieldArmor,
+					init = F3502.Init.WindshieldArmor,
+					}
+		}
+
+		part F3502WindowFrontLeftArmor
+        {
+
+			model F3502leftWindowa
+				{
+                		file = 93fordF350Windowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.93fordF350FrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = F3502.Create.WindowFrontLeftArmor,
+					init = F3502.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part F3502WindowFrontRightArmor
+        {
+
+			model F3502rightWindowa
+				{
+                		file = 93fordF350Windowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.93fordF350FrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = F3502.Create.WindowFrontRightArmor,
+					init = F3502.Init.WindowFrontRightArmor,
+					}
+		}
+
+	}
+
+    template vehicle F3502Armor
+		{
+        template! = F1502Armor,
+
+		part F3502WindowRearLeftArmor
+        {
+
+			model F3502leftWindowra
+				{
+                		file = 93fordF350Windowrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = WindowRearLeft,
+			specificItem = false,
+			itemType = Base.93fordF350RearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.WindowRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.WindowRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = F3502.Create.WindowRearLeftArmor,
+					init = F3502.Init.WindowRearLeftArmor,
+					}
+		}
+
+		part F3502WindowRearRightArmor
+        {
+
+			model F3502rightWindowra
+				{
+                		file = 93fordF350Windowrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = WindowRearRight,
+			specificItem = false,
+			itemType = Base.93fordF350RearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.WindowRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.WindowRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = F3502.Create.WindowRearRightArmor,
+					init = F3502.Init.WindowRearRightArmor,
+					}
+		}
+	}
+
+    template vehicle F3502utilityArmor
+	{
+        template! = F3502Armor,
+
+		part F3502WindshieldRearArmor
+        	{
+
+			model F3502windra
+				{
+                		file = 93fordF350WindshieldReara,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93fordF350utilityWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = F3502.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = F3502.Create.WindshieldRearArmor,
+					init = F3502.Init.WindshieldRearArmor,
+					}
+		}
+    }
+}
