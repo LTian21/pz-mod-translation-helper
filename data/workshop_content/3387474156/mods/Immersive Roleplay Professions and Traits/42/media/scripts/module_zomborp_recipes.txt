@@ -1,0 +1,3449 @@
+module Base
+{
+
+    craftRecipe DismantleStapler
+    {
+        Time = 640,
+        tags = AnySurfaceCraft,
+        category = Assembly, 
+        timedAction = Making,
+        OnCreate = Recipe.OnCreate.dismantlestapler,
+
+        inputs
+        {
+		item 1 tags[Screwdriver] mode:keep,
+		item 1 [Base.Stapler;Base.Staples],
+        }
+        outputs
+        {
+            item 1 Base.ScrapMetal,
+        }		
+    }
+
+    craftRecipe MakeHarmonica
+    {
+        Time = 640,
+        tags = AnySurfaceCraft,
+        category = Instrument, 
+        NeedToBeLearn = True,
+        xpAward = MetalWelding:50;Maintenance:20,
+        SkillRequired = MetalWelding:2;Maintenance:2;Music:2,
+        timedAction = Making,
+
+        inputs
+        {
+		item 1 tags[Pliers] mode:keep flags[MayDegradeVeryLight],
+		item 1 tags[Screwdriver] mode:keep,
+		item 1 tags[File] mode:keep,
+		item 1 [Base.SmallSheetMetal],
+        item 1 tags[SheetMetalSnips] mode:keep,
+		item 8 [Base.Screws],
+		item 6 [Base.ScrapMetal],
+        item 2 [Base.BlowTorch],
+		item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.Harmonica,
+        }		
+    }
+
+	craftRecipe MakeFlutefromWood
+    {
+        Time = 640,
+        tags = AnySurfaceCraft,
+        category = Instrument,
+        NeedToBeLearn = True,
+        xpAward = Carving:20;Maintenance:10,
+        SkillRequired = Carving:2;Maintenance:2;Music:2,
+        timedAction = Making,
+
+        inputs
+        {
+        item 1 [Base.Branch_Broken],
+		item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull],
+        item 1 tags[Screwdriver] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.Flute,
+        }		
+    }
+
+    craftRecipe MakeFlutefromBone
+    {
+        Time = 640,
+        tags = AnySurfaceCraft,
+        category = Instrument,
+        NeedToBeLearn = True,
+        xpAward = Maintenance:10;FlintKnapping:10,
+        timedAction = Making,
+        SkillRequired = FlintKnapping:1;Maintenance:2;Music:2,
+        inputs
+        {
+        item 1 tags[SmallAnimalBone],
+		item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull],
+        item 1 tags[Screwdriver] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.Flute,
+        }		
+    }
+
+	craftRecipe MakeTrumpet
+    {
+        Time = 720,
+        tags = AnySurfaceCraft,
+        category = Instrument,
+        xpAward = MetalWelding:50;Maintenance:30,
+        timedAction = Welding_Surface,
+        NeedToBeLearn = True,
+		SkillRequired = MetalWelding:2;Maintenance:2;Music:2,
+
+        inputs
+        {
+		item 1 tags[File] mode:keep,
+        item 1 tags[Hammer] mode:keep,
+		item 1 tags[WeldingMask] mode:keep,
+		item 2 [Base.BlowTorch], 
+		item 1 tags[DrillMetal] mode:keep flags[MayDegradeLight],
+		item 1 [Base.MetalPipe] mode:destroy flags[ItemCount],
+		item 2 [Base.SheetMetal] mode:destroy flags[ItemCount],
+        item 4 [Base.ScrapMetal],
+        }
+        outputs
+        {
+            item 1 Base.Trumpet,
+        }		
+    }
+
+	craftRecipe MakeSaxophone
+    {
+        Time = 720,
+        tags = AnySurfaceCraft,
+        category = Instrument,
+        xpAward = MetalWelding:60;Maintenance:30,
+        timedAction = Welding_Surface,
+        NeedToBeLearn = True,
+		SkillRequired = MetalWelding:2;Maintenance:3;Music:2,
+
+        inputs
+        {
+		item 1 tags[File] mode:keep,
+        item 1 tags[Hammer] mode:keep,
+		item 1 tags[WeldingMask] mode:keep,
+		item 2 [Base.BlowTorch], 
+		item 1 tags[DrillMetal] mode:keep flags[MayDegradeLight],
+		item 1 [Base.MetalPipe] mode:destroy flags[ItemCount],
+		item 2 [Base.SheetMetal] mode:destroy flags[ItemCount],
+        item 8 [Base.ScrapMetal],
+        }
+        outputs
+        {
+            item 1 Base.Saxophone,
+        }		
+    }
+
+    craftRecipe MakeAcousticGuitar
+    {
+        Time = 720,
+        tags = AnySurfaceCraft,
+        category = Instrument, 
+        xpAward = Woodwork:50;Carving:20;Maintenance:10, 
+        timedAction = MakingHammer_Surface,
+		SkillRequired = Woodwork:2;Music:2;Maintenance:3;Carving:3,
+        NeedToBeLearn = True,
+
+        inputs
+        {
+		item 1 tags[CrudeSaw;Saw] mode:keep flags[MayDegradeLight;Prop1],
+		item 1 tags[Hammer] mode:keep flags[MayDegradeVeryLight],
+		item 1 tags[File] mode:keep,
+		item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull],
+		item 2 [Base.Plank] flags[Prop2],
+		item 1 tags[SmallAnimalBone],
+		item 16 [Base.Nails;Base.Paperclip],
+		item 4 [Base.LongStick],
+        item 6 [Base.ScrapMetal],
+		item 6 [Base.FishingLine;Base.PremiumFishingLine],	
+        }
+        outputs
+        {
+            item 1 Base.GuitarAcoustic,
+        }		
+    }
+	
+	craftRecipe MakeBanjo
+    {
+        Time = 720,
+        tags = AnySurfaceCraft,
+        category = Instrument, 
+        NeedToBeLearn = True,
+        xpAward = Woodwork:40;Carving:25;Maintenance:10,
+        timedAction = MakingHammer_Surface,
+		SkillRequired = Woodwork:2;Carving:3;Maintenance:2;Music:2,
+
+        inputs
+        {
+		item 1 tags[CrudeSaw;Saw] mode:keep flags[MayDegradeLight;Prop1],
+		item 1 tags[Hammer] mode:keep flags[MayDegradeVeryLight],
+		item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull],
+		item 1 tags[SmallAnimalBone],
+		item 2 [Base.Plank] flags[Prop2],
+		item 10 [Base.Nails;Base.Paperclip],
+		item 2 [Base.LongStick],
+		item 4 [Base.FishingLine;Base.PremiumFishingLine],	
+        }
+        outputs
+        {
+            item 1 Base.Banjo,
+        }		
+    }
+	
+	craftRecipe MakeViolin
+    {
+        Time = 720,
+        tags = AnySurfaceCraft,
+        category = Instrument, 
+        NeedToBeLearn = True,
+        xpAward = Woodwork:55;Carving:45;Maintenance:10,
+        timedAction = MakingHammer_Surface,
+		SkillRequired = Woodwork:2;Carving:3;Maintenance:2;Music:2,
+
+        inputs
+        {
+		item 1 tags[CrudeSaw;Saw] mode:keep flags[MayDegradeLight;Prop1],
+		item 1 tags[Hammer] mode:keep flags[MayDegradeVeryLight],
+		item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull],
+		item 1 tags[Pliers] mode:keep flags[MayDegradeVeryLight],
+		item 1 tags[File] mode:keep,
+		item 1 tags[SmallAnimalBone],
+		item 2 [Base.Plank] flags[Prop2],
+		item 8 [Base.Nails],
+		item 1 [Base.LongStick],
+		item 4 [Base.FishingLine;Base.PremiumFishingLine],	
+        }
+        outputs
+        {
+            item 1 Base.Violin,
+        }		
+    }
+
+    craftRecipe ObtainTissuesfromRag
+	{
+        time        = 60,
+        timedAction = Making,
+        tags = InHandCraft,
+        category = Assembly,
+        inputs	
+        {
+			item 1 [Base.RippedSheets],
+            item 1 tags[Scissors] mode:keep flags[MayDegradeLight;Prop2;IsNotDull],
+        }
+        outputs
+        {
+            item 5 Base.Tissue,
+        }
+    }
+
+    craftRecipe BrakeBranch
+    {
+        Time = 640,
+        tags = AnySurfaceCraft,
+        category = Carving,
+        timedAction = Making,
+        SkillRequired = Strength:4,
+        inputs
+        {
+        item 1 [Base.TreeBranch2],
+        }
+        outputs
+        {
+            item 1 Base.Branch_Broken,
+        }		
+    }
+
+    craftRecipe CarveRollinPin
+    {
+        Time = 640,
+        tags = AnySurfaceCraft,
+        category = Carving,
+        xpAward = Carving:20,
+        SkillRequired = Carving:3,
+        timedAction = Making,
+        OnCreate = Recipe.OnCreate.woodscrap,
+
+        inputs
+        {
+        item 1 tags[CrudeSaw;Saw] mode:keep flags[MayDegradeLight;Prop1],
+        item 1 [Base.Log],
+		item 1 tags[SharpKnife] mode:keep flags[IsNotDull],
+        }
+        outputs
+        {
+            item 1 Base.RollingPin,
+        }		
+    }
+
+    craftRecipe CarveCuttingBoard
+    {
+        Time = 640,
+        tags = AnySurfaceCraft,
+        category = Carving,
+        xpAward = Carving:10,
+        SkillRequired = Carving:2,
+        timedAction = Making,
+
+        inputs
+        {
+        item 1 tags[CrudeSaw;Saw] mode:keep flags[MayDegradeLight;Prop1],
+        item 1 [Base.Plank],
+		item 1 tags[SharpKnife] mode:keep flags[IsNotDull],
+        }
+        outputs
+        {
+            item 1 Base.CuttingBoardWooden,
+        }		
+    }
+
+    craftRecipe MakeMouseTrap
+    {
+	timedAction = Making,
+	Time = 250,
+	Tags = InHandCraft;CanBeDoneInDark,
+	xpAward = Trapping:5;Mechanics:5,
+	SkillRequired = Trapping:1;Mechanics:1,
+	category = Trapping,
+	inputs
+	{
+		item 1 [Base.ScrapMetal],
+		item 1 tags[BarStockQuarter],
+		item 1 [Base.Plank],
+		item 2 [Base.Screws],
+		item 1 tags[Saw] mode:keep flags[MayDegradeLight],
+		item 1 tags[Screwdriver] mode:keep,
+	}
+	outputs
+	{
+		item 1 Base.TrapMouse,
+	}
+    }
+
+    craftRecipe Brake It
+    {
+        time        = 50,
+        timedAction = Making,
+        category = Carpentry,
+        tags = InHandCraft,
+        OnCreate = Recipe.OnCreate.brakeit,
+        inputs
+        {
+		item 1 [Base.Mov_DegreeDoctor;Base.Mov_DegreeSurgeon],
+        }
+        outputs
+        {
+            item 1 Base.OfficialDocument,
+        }
+    }
+
+    craftRecipe Dismantle Shoes
+	{
+        time        = 260,
+        timedAction = Making,
+        tags = InHandCraft;AnySurfaceCraft,
+        category = Assembly,
+        SkillRequired = Tailoring:1,
+		xpAward = Tailoring:5,
+        OnCreate = Recipe.OnCreate.SmantellaScarpe,
+        inputs	
+        {
+	    item 1 [Base.Shoes_BlueTrainers;Base.Shoes_RedTrainers;Base.Shoes_CrudeLeatherFootwear;Base.Shoes_HideBoots;Base.Shoes_LeatherWrap;Base.Shoes_Sandals;Base.Shoes_Black;Base.Shoes_Brown;Base.Shoes_Random;Base.Shoes_Strapped;Base.Shoes_Bowling;Base.Shoes_Fancy;Base.Shoes_HikingBoots;Base.Shoes_BlackBoots;Base.Shoes_CowboyBoots_Black;Base.Shoes_CowboyBoots_Brown;Base.Shoes_CowboyBoots;Base.Shoes_RidingBoots;Base.Shoes_WorkBoots;Base.Shoes_Wellies;Base.Shoes_ArmyBootsDesert;Base.Shoes_ArmyBoots;Base.Shoes_CowboyBoots_SnakeSkin;Base.Shoes_CowboyBoots_Fancy] mode:destroy flags[AllowDestroyedItem],
+	    item 1 tags[Hammer;ClubHammer] mode:keep flags[MayDegradeLight],
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop2;IsNotDull],
+        }
+        outputs
+        {
+            item 2 Base.LeatherStripsDirty,
+        }
+    }
+
+    craftRecipe Reclaim Twine
+	{
+        time        = 60,
+        timedAction = Making,
+        tags = InHandCraft,
+        category = Assembly,
+        inputs	
+        {
+	    item 1 [Base.Shoes_Twine] mode:destroy flags[AllowDestroyedItem],
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop2;IsNotDull],
+        }
+        outputs
+        {
+            item 2 Base.Twine,
+        }
+    }
+
+    craftRecipe Reclaim Rags
+	{
+        time        = 60,
+        timedAction = Making,
+        tags = InHandCraft,
+        category = Assembly,
+        inputs	
+        {
+			item 1 [Base.Shoes_RagWrap] mode:destroy flags[AllowDestroyedItem],
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop2;IsNotDull],
+        }
+        outputs
+        {
+            item 4 Base.RippedSheets,
+        }
+    }
+
+    craftRecipe Reclaim Denim Strips
+	{
+        time        = 60,
+        timedAction = Making,
+        tags = InHandCraft,
+        category = Assembly,
+        inputs	
+        {
+			item 1 [Base.Shoes_DenimWrap] mode:destroy flags[AllowDestroyedItem],
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop2;IsNotDull],
+        }
+        outputs
+        {
+            item 4 Base.DenimStrips,
+        }
+    }
+
+    craftRecipe Reclaim Burlap
+	{
+        time        = 80,
+        timedAction = Making,
+        tags = InHandCraft,
+        category = Assembly,
+        inputs	
+        {
+	    item 1 [Base.Shoes_BurlapWrap;Base.Shoes_Slippers] mode:destroy flags[AllowDestroyedItem],
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop2;IsNotDull],
+        }
+        outputs
+        {
+            item 2 Base.BurlapPiece,
+        }
+    }
+
+    craftRecipe Make Bracelet
+	{
+        time        = 50,
+        timedAction = Making,
+        tags = InHandCraft,
+        category = Tailoring,
+		xpAward = Tailoring:2,
+        inputs	
+        {
+			item 1 [Base.Twine],
+        }
+        outputs
+        {
+            item 1 Base.Bracelet_RightFriendshipTINT,
+        }
+    }
+
+    craftRecipe Forge Small Gold Bar
+    {
+        time        = 500,
+        SkillRequired = Blacksmith:1,
+        timedAction = MakingHammer_Surface,
+        tags = PrimitiveForge,
+        category = Blacksmithing,
+        inputs
+        {
+            item 1 tags[Charcoal],
+	        item 4 [Base.GoldSheet],
+            item 1 tags[Hammer;ClubHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[MetalworkingChisel] mode:keep flags[MayDegradeLight],
+            item 1 tags[Tongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.SmallGoldBar,
+        }
+    }
+	
+    craftRecipe Forge Gold Bar
+    {
+        time        = 500,
+        SkillRequired = Blacksmith:1,
+        timedAction = MakingHammer_Surface,
+        tags = PrimitiveForge,
+        category = Blacksmithing,
+        inputs
+        {
+            item 1 tags[Charcoal],
+            item 8 [Base.SmallGoldBar],
+            item 1 tags[Hammer;ClubHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[MetalworkingChisel] mode:keep flags[MayDegradeLight],
+            item 1 tags[Tongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.GoldBar,
+        }
+    }
+	
+    craftRecipe Forge Small Silver Bar
+    {
+        time        = 500,
+        SkillRequired = Blacksmith:1,
+        timedAction = MakingHammer_Surface,
+        tags = PrimitiveForge,
+        category = Blacksmithing,
+        inputs
+        {
+            item 1 tags[Charcoal],
+	        item 4 [Base.SilverSheet],
+            item 1 tags[Hammer;ClubHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[MetalworkingChisel] mode:keep flags[MayDegradeLight],
+            item 1 tags[Tongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.SmallSilverBar,
+        }
+    }
+	
+    craftRecipe Forge Silver Bar
+    {
+        time        = 500,
+        SkillRequired = Blacksmith:1,
+        timedAction = MakingHammer_Surface,
+        tags = PrimitiveForge,
+        category = Blacksmithing,
+        inputs
+        {
+            item 1 tags[Charcoal],
+            item 8 [Base.SmallSilverBar],
+            item 1 tags[Hammer;ClubHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[MetalworkingChisel] mode:keep flags[MayDegradeLight],
+            item 1 tags[Tongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.SilverBar,
+        }
+    }
+
+    craftRecipe MakeItBurnable
+    {
+        time        = 100,
+        timedAction = Making,
+        tags = InHandCraft,
+        category = Carpentry,
+        inputs
+        {
+		item 1 [Base.Mov_CorkBoard;Base.Mov_CardboardBox],
+        }
+        outputs
+        {
+            item 1 Base.UnusableWood,
+        }
+    }
+
+	craftRecipe MakeCleaningLiquidFromPerfume
+	{
+        time        = 250,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        SkillRequired = Cleaning:3,
+	    xpAward = Cleaning:20,
+        category = Cleaning,
+        inputs	
+        {
+            item 1 [Base.Spoon;Base.Spatula] mode:keep,
+            item 1 [Base.Pot;Base.PotForged] mode:keep,
+			item 1 [Base.Perfume;Base.Cologne;Base.Toothpaste],
+					item 1 [*],
+					-fluid 0.5 [Water],
+			item 1 [Base.CharcoalCrafted;Base.Charcoal],
+        }
+        outputs
+        {
+            item 1 Base.CleaningLiquid2,
+        }
+    }
+
+	craftRecipe MakeNaturalCleaningLiquid
+	{
+        time        = 250,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        SkillRequired = Cleaning:3,
+	    xpAward = Cleaning:20,
+        category = Cleaning,
+        inputs	
+        {
+            item 1 [Base.Spoon;Base.Spatula] mode:keep,
+            item 1 [Base.Pot;Base.PotForged] mode:keep,
+			item 1 [Base.Pineapple;Base.Lemon;Base.Orange;Base.Lime],
+					item 1 [*],
+					-fluid 0.5 [Water],
+			item 1 [Base.CharcoalCrafted;Base.Charcoal],
+        }
+        outputs
+        {
+            item 1 Base.CleaningLiquid2,
+        }
+    }
+
+    	craftRecipe MakeOldCleaningLiquid
+	{
+        time        = 250,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        SkillRequired = Cleaning:3,
+	    xpAward = Cleaning:20,
+        category = Cleaning,
+        inputs	
+        {
+            item 1 [Base.Spoon;Base.Spatula] mode:keep,
+            item 1 [Base.Pot;Base.PotForged] mode:keep,
+			item 1 [Base.Soap2],
+					item 1 [*],
+					-fluid 0.5 [Water],
+			item 1 [Base.CharcoalCrafted;Base.Charcoal],
+        }
+        outputs
+        {
+            item 1 Base.CleaningLiquid2,
+        }
+    }
+
+        craftRecipe MakeHomemadeCleaningLiquid
+	{
+        time        = 250,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        SkillRequired = Cleaning:3,
+	    xpAward = Cleaning:20,
+        category = Cleaning,
+        inputs	
+        {
+            item 1 [Base.Spoon;Base.Spatula] mode:keep,
+            item 1 [Base.Pot;Base.PotForged] mode:keep,
+			item 1 [Base.RiceVinegar],
+					item 1 [*],
+					-fluid 0.5 [Water],
+			item 1 [Base.CharcoalCrafted;Base.Charcoal],
+        }
+        outputs
+        {
+            item 1 Base.CleaningLiquid2,
+        }
+    }
+
+    craftRecipe MakeSoapFromOil
+    {
+        time        = 350,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+	    SkillRequired = Cooking:3,
+        NeedToBeLearn = True,
+	    xpAward = Cooking:20,
+        category = Cooking,
+        inputs	
+        {
+            item 1 [Base.Spoon;Base.Spatula] mode:keep,
+            item 1 [Base.Pot;Base.PotForged] mode:keep,
+	    item 1 [Base.Lard;Base.OilOlive;Base.OilVegetable;Base.BakingSoda],
+					item 1 [*],
+					-fluid 0.5 [Water],
+	    item 1 [Base.CharcoalCrafted;Base.Charcoal],
+            item 1 tags[StartFire] mode:keep,
+        }
+        outputs
+        {
+            item 5 Base.Soap2,
+        }
+    }
+
+    craftRecipe MakeSoapFromFat
+    {
+        time        = 350,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+		SkillRequired = Cooking:3,
+        NeedToBeLearn = True,
+		xpAward = Cooking:20,
+        category = Cooking,
+        inputs	
+        {
+            item 1 [Base.Spoon;Base.Spatula] mode:keep,
+            item 1 [Base.Pot;Base.PotForged] mode:keep,
+	        item 1 [Base.DeadRabbit;Base.DeadSquirrel;Base.DeadMouse;Base.DeadRat],
+			item 1 [*],
+			-fluid 0.5 [Water],
+	        item 1 [Base.CharcoalCrafted;Base.Charcoal],
+            item 1 tags[StartFire] mode:keep,
+        }
+        outputs
+        {
+            item 5 Base.Soap2,
+        }
+    }
+
+    craftRecipe MakeDisinfectant
+	{
+        time        = 150,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        category = Medical,
+        NeedToBeLearn = True,
+        SkillRequired = Doctor:1,
+        inputs
+        {
+			item 1 [Base.Gloves_Surgical;Base.Gloves_Dish] mode:keep,
+			item 1 [Base.Hat_GasMask;Base.Hat_DustMask;Base.Hat_SurgicalMask;Base.SCBA;Base.Hat_BuildersRespirator;Base.Hat_ImprovisedGasMask] mode:keep,
+					item 1 [*],
+					-fluid 0.2 [Bleach],
+					item 1 [*],
+            		-fluid 0.8 [Water],
+        }
+        outputs
+        {
+            item 1 Base.Disinfectant,
+        }
+    }
+
+    craftRecipe MakeTarp
+    {
+        time        = 360,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:1,
+        category = Assembly,
+        inputs
+        {
+            item 1 tags[Sharpenable] mode:keep,
+			item 8 [Base.Garbagebag],
+			item 4 [Base.Glue;Base.Woodglue],
+            item 4 [Base.Paperclip],
+        }
+        outputs
+        {
+            item 1 Base.Tarp,
+        }
+    }
+
+    craftRecipe MakeGlue
+    {
+        time        = 500,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+		SkillRequired = Carpentry:1,
+        xpAward       = Carpentry:2,
+        NeedToBeLearn = True,
+        category = Carpentry,
+        inputs
+        {
+            item 1 [Base.Pot;Base.Saucepan;Base.SaucepanCopper] mode:keep,
+            item 1 [Base.Spoon] mode:keep,
+            		item 1 [*],
+            		-fluid 0.2 [Water;TaintedWater],
+			item 1 tags[StartFire] mode:keep flags[MayDegradeLight],
+			item 2 tags[Flour],
+            item 1 tags[Sugar],
+        }
+        outputs
+        {
+            item 1 Base.Glue,
+        }
+    }
+
+    craftRecipe MakeWoodGlue
+    {
+        time        = 500,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+		SkillRequired = Carpentry:2,
+        xpAward       = Carpentry:5,
+        NeedToBeLearn = True,
+        category = Carpentry,
+        inputs
+        {
+            item 1 [Base.Pot;Base.Saucepan;Base.SaucepanCopper] mode:keep,
+            item 1 [Base.Spoon] mode:keep,
+            		item 1 [*],
+            		-fluid 0.2 [Water;TaintedWater],
+			item 1 tags[StartFire] mode:keep flags[MayDegradeLight],
+			item 2 tags[Flour],
+            item 3 tags[Sugar],
+            item 1 [Base.RiceVinegar],
+        }
+        outputs
+        {
+            item 1 Base.Woodglue,
+        }
+    }
+
+
+    craftRecipe MakeWeldingRods
+	{
+        time        = 500,
+	    NeedToBeLearn = True,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+		SkillRequired = MetalWelding:1,
+		xpAward = MetalWelding:10,
+        category = Metalworking,
+        inputs
+        {
+			item 2 [Base.BlowTorch] mode:keep,
+			item 1 tags[WeldingMask] mode:keep,
+			item 1 [Base.MetalPipe;Base.UnusableMetal;Base.MetalPipe_Broken;Base.LeadPipe],
+			item 1 [Base.Charcoal;Base.CharcoalCrafted],
+			item 1 [Base.Fertilizer;Base.CompostBag],
+        }
+        outputs
+        {
+            item 2 Base.WeldingRods,
+        }
+    }
+
+    craftRecipe RipIt
+    {
+        time        = 60,
+        timedAction = Making,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Farming,
+        inputs
+        {
+            item 1 [Base.Notebook;Base.Diary1;Base.Diary2;Base.Journal;Base.Notepad] flags[Prop2],
+        }
+        outputs
+        {
+            item 30 Base.SheetPaper2,
+        }
+    }
+
+    craftRecipe RipLeatherItem
+	{
+        time        = 80,
+        timedAction = Making,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Assembly,
+		xpAward = Tailoring:2,
+        inputs	
+        {
+			item 1 [Base.HolsterSimple;Base.HolsterDouble;Base.Handbag;Base.Purse;Base.Football] mode:destroy flags[AllowDestroyedItem;IsNotWorn],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop2;IsNotDull],
+        }
+        outputs
+        {
+            item 2 Base.LeatherStrips,
+        }
+    }
+
+    craftRecipe DestroyLeatherItem
+	{
+        time        = 80,
+        timedAction = Making,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Assembly,
+		xpAward = Tailoring:2,
+        inputs	
+        {
+			item 1 [Base.Wallet;Base.Wallet_Male;Base.Wallet_Female;Base.Necklace_Choker;Base.Necklace_Choker_Sapphire;Base.Necklace_Choker_Amber;Base.Necklace_Choker_Diamond] mode:destroy flags[AllowDestroyedItem;IsNotWorn],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop2;IsNotDull],
+        }
+        outputs
+        {
+            item 1 Base.LeatherStrips,
+        }
+    }
+
+    craftRecipe MakePeanutButter
+	{
+        time        = 500,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+		SkillRequired = Cooking:3,
+		xpAward = Cooking:15,
+        category = Farming,
+        inputs
+        {
+			item 1 [Base.MortarPestle] mode:keep,
+			item 2 [Base.OilVegetable],
+			item 5 [Base.Peanuts],
+			item 1 [Base.TinCanEmpty],
+        }
+        outputs
+        {
+            item 1 Base.PeanutButter,
+        }
+    }
+
+    craftRecipe MakeGunPowder
+	{
+        time        = 500,
+	    NeedToBeLearn = True,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        category = Engineer,
+        inputs
+        {
+			item 1 [Base.MortarPestle] mode:keep,
+			item 3 [Base.Gravelbag],
+			item 4 [Base.Fertilizer;Base.CompostBag],
+			item 1 [Base.Charcoal;Base.CharcoalCrafted],
+        }
+        outputs
+        {
+            item 45 Base.GunPowder,
+        }
+    }	
+
+	craftRecipe ObtainUnusableMetal
+	{
+        time        = 100,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+		SkillRequired = MetalWelding:1,
+        category = Metalworking,
+        inputs
+        {
+			item 1 tags[Hammer;ClubHammer;Sledgehammer] mode:keep flags[MayDegradeLight],
+			item 1 [Base.MetalPipe;Base.UnusableMetal;Base.MetalPipe_Broken;Base.LeadPipe;Base.SheetMetal],
+        }
+        outputs
+        {
+            item 1 Base.UnusableMetal,
+        }
+    }
+
+    craftRecipe BreakMirror
+    {
+        time        = 15,
+        timedAction = Making,
+        tags = InHandCraft,
+        category = Assembly,
+        inputs
+        {
+			item 1 [Base.Mirror] flags[Prop2],
+        }
+        outputs
+        {
+            item 4 Base.BrokenGlass,
+        }
+    }
+
+    craftRecipe MakeGenerator
+    {
+        time        = 800,
+        timedAction = MakingElectrical,
+        tags = AnySurfaceCraft,
+        NeedToBeLearn = True,
+		SkillRequired = Electricity:6;Maintenance:5;Mechanics:7;MetalWelding:4,
+		xpAward = Electricity:100;Mechanics:100,
+        category = Engineer,
+        inputs
+        {
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+            item 1 tags[Wrench] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+			item 1 tags[MetalSaw] mode:keep flags[MayDegradeLight],
+			item 6 [Base.BlowTorch],
+			item 1 tags[WeldingMask] mode:keep,
+			item 5 [Base.WeldingRods],
+			item 10 [Base.EngineParts],
+			item 5 [Base.ElectronicsScrap],
+            item 5 [Base.IronScrap;Base.ScrapMetal;Base.BrassScrap;Base.CopperScrap;Base.AluminumScrap;Base.UnusableMetal;Base.SteelScrap],
+			item 1 [Base.ScannerModule],
+			item 8 [Base.ElectricWire],
+			item 4 [Base.MetalPipe;Base.LeadPipe],
+			item 4 [Base.SheetMetal],
+			item 10 [Base.Screws],
+            item 12 [Base.NutsBolts],
+            item 4 [Base.ScrapMetal],
+        }
+        outputs
+        {
+            item 1 Base.Generator,
+        }
+    }
+
+    craftRecipe MakeMotionSensor
+    {
+        time        = 700,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        NeedToBeLearn = True,
+		SkillRequired = Electricity:5,
+		xpAward = Electricity:5,
+        category = Electrical,
+        inputs
+        {
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;Prop1],
+			item 1 [Base.ScannerModule],
+			item 2 [Base.ElectronicsScrap],
+			item 2 [Base.ElectricWire],
+        }
+        outputs
+        {
+            item 1 Base.MotionSensor,
+        }
+    }
+
+	craftRecipe MakeEngineParts
+    {
+        time        = 600,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        NeedToBeLearn = True,
+		SkillRequired = Maintenance:4;Mechanics:6;MetalWelding:4,
+		xpAward = Mechanics:70,
+        category = Engineer,
+        inputs
+        {
+			item 3 [Base.BlowTorch],
+			item 1 tags[WeldingMask] mode:keep,
+			item 2 [Base.WeldingRods],
+            item 1 tags[Wrench] mode:keep flags[MayDegradeLight],
+            item 1 tags[MetalworkingPunch;DrillMetal] mode:keep flags[MayDegradeLight],
+            item 1 [Base.SmallSheetMetal],
+            item 4 [Base.NutsBolts],
+            item 1 [Base.LeadPipe],
+            item 3 [Base.ScrapMetal],
+        }
+        outputs
+        {
+            item 5 Base.EngineParts,
+        }
+    }
+
+    craftRecipe MakeCarBatteryCharger
+    {
+        time        = 700,
+        timedAction = MakingElectrical,
+        tags = AnySurfaceCraft,
+        NeedToBeLearn = True,
+		SkillRequired = MetalWelding:1;Electricity:5;Maintenance:2,
+		xpAward = Electricity:70,
+        category = Electrical,
+        inputs
+        {
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;Prop1],
+			item 6 [Base.SmallSheetMetal],
+			item 5 [Base.ElectronicsScrap],
+			item 5 [Base.ElectricWire],
+			item 1 [Base.EngineParts],
+			item 10 [Base.Screws],
+			item 8 [Base.ElectricWire],
+        }
+        outputs
+        {
+            item 1 Base.CarBatteryCharger,
+        }
+    }
+
+    craftRecipe MakeNeedle
+    {
+        time        = 180,
+        timedAction = Making,
+        tags = InHandCraft,
+		SkillRequired = Tailoring:3;SmallBlade:2,
+        xpAward       = Maintenance:2,
+        category = Tailoring,
+        inputs
+        {
+			item 1 tags[Sharpenable] mode:keep,
+			item 1 [Base.Paperclip],
+        }
+        outputs
+        {
+            item 1 Base.Needle,
+        }
+    }
+
+    craftRecipe DismantleToolBox
+    {
+        time        = 360,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+		xpAward = MetalWelding:5,
+        category = Assembly,
+        inputs
+        {
+			item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+			item 1 [Base.Toolbox;Base.Bag_JanitorToolbox],
+        }
+        outputs
+        {
+            item 3 Base.SteelScrap,
+        }
+    }
+
+    craftRecipe MakeTritiumSights
+    {
+        time        = 500,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        NeedToBeLearn = True,
+		SkillRequired = MetalWelding:2; Aiming:2; Reloading:2,
+        category = Assembly,
+        inputs
+        {
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 tags[Saw] mode:keep flags[MayDegradeLight],
+			item 1 [Base.MetalPipe;Base.LeadPipe],
+			item 4 [Base.Screws],
+        }
+        outputs
+        {
+            item 1 Base.TritiumSights,
+        }
+    }
+
+    craftRecipe MakeAmmoStraps
+    {
+        time        = 500,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        NeedToBeLearn = True,
+		SkillRequired = Tailoring:2,
+        category = Tailoring,
+        inputs
+        {
+			item 1 tags[SewingNeedle] mode:keep,
+			item 3 [Base.Thread],
+			item 2 [Base.Belt2],
+			item 8 [Base.LeatherStrips],
+        }
+        outputs
+        {
+            item 1 Base.AmmoStraps,
+        }
+    }
+
+    craftRecipe MakeBoundedMop
+    {
+        time        = 300,
+        timedAction = Making,
+        category = Cleaning,
+        tags = InHandCraft,
+        SkillRequired = Cleaning:1,
+        xpAward       = Cleaning:5,
+        inputs
+        {
+			item 2 [Base.Twine],
+			item 1 [Base.LongStick],
+			item 1 [Base.SheetRopeBundle],
+        }
+        outputs
+        {
+            item 1 Base.Mop,
+        }
+    }
+
+    craftRecipe MakeMop
+    {
+        time        = 300,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+        SkillRequired = Carpentry:1,
+        xpAward       = Carpentry:5,
+        category = Carpentry,
+        inputs
+        {
+			item 1 tags[Hammer] mode:keep,
+			item 1 [Base.LongStick],
+			item 2 [Base.Nails],
+			item 1 [Base.SheetRopeBundle],
+        }
+        outputs
+        {
+            item 1 Base.Mop,
+        }
+    }
+
+    craftRecipe MakeHay
+    {
+        time        = 300,
+        timedAction = Making,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Farming,
+        inputs
+        {
+            item 3 [Base.GrassTuft],
+        }
+        outputs
+        {
+            item 1 Base.HayTuft,
+        }
+    }
+
+    craftRecipe ObtainAluminum
+    {
+        timedAction = Making,
+        time            = 150,
+	tags = AnySurfaceCraft,
+        category      = Miscellaneous,
+        xpAward       = Maintenance:2,
+
+        inputs
+        {
+            item 1 [Base.TinCanEmpty;Base.BeerCanEmpty;Base.PopEmpty;Base.Pop2Empty;Base.Pop3Empty;Base.WaterRationCanEmpty;Base.SodaCan] flags[Prop2],
+			item 1 tags[Hammer;ClubHammer;Sledgehammer;StoneMaul] mode:keep flags[MayDegradeLight],
+        }
+       outputs
+       {
+           item 1 Base.Aluminum,
+       }
+    }
+
+    craftRecipe MakeConcretePowder
+    {
+        time        = 350,
+        timedAction = Making,
+        tags = InHandCraft;Masonry,
+        xpAward = Masonry:5,
+	category = Masonry,
+        inputs
+        {
+            item 1 [Base.Bag_DeadRats;Base.WheatSack;Base.WheatSeedSack;Base.EmptySandbag;Base.Bag_TreasureBag;Base.Bag_DeadRoaches;Base.Bag_DeadMice] mode:destroy,
+            item 2 [Base.Gravelbag],
+            item 2 [Base.Sandbag] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 Base.ConcretePowder,
+        }
+    }
+
+    craftRecipe CreateClay
+    {
+        time        = 350,
+        timedAction = Making,
+        Tags        = InHandCraft;Pottery,
+        xpAward     = Pottery:2,
+        SkillRequired = Pottery:1,
+	    category    = Pottery,
+        inputs
+        {
+ 			item 1 [Base.Bucket;Base.BucketEmpty;Base.BucketWaterDebug;Base.BucketCarved] mode:keep,
+                -fluid 3.0 [Water;TaintedWater],
+            item 1 [Base.Dirtbag],
+            item 1 [Base.Strainer] mode:keep,
+        }
+        outputs
+        {
+            item 2 Base.Clay,
+        }
+	}
+
+        craftRecipe UnstackHay
+    {
+        time        = 160,
+        timedAction = Making,
+        tags = InHandCraft,
+	category = Masonry,
+        inputs
+        {
+            item 1 [Base.Mov_HaystackDouble] flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 20 Base.HayTuft,
+        }
+    }
+
+        craftRecipe ObtainHay
+    {
+        time        = 15,
+        timedAction = Making,
+        tags = InHandCraft,
+	    category = Masonry,
+        inputs
+        {
+            item 1 [Base.Mov_HaystackSingle] flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 10 Base.HayTuft,
+        }
+    }
+
+    	craftRecipe ObtainPlanks
+    {
+        time        = 250,
+        timedAction = Making,
+        tags = InHandCraft,
+        category = Carpentry,
+        OnCreate = Recipe.OnCreate.brakeitbis,
+        inputs
+        {
+            item 1 tags[Hammer;ClubHammer;Sledgehammer;StoneMaul] mode:keep flags[MayDegradeLight],
+	    item 1 [Base.Mov_PalletEmpty],
+        }
+        outputs
+        {
+            item 2 Base.Plank,
+        }
+    }
+
+    	craftRecipe MakeCorkBoard
+    {
+        time        = 600,
+        timedAction = Making,
+        tags = AnySurfaceCraft,
+	SkillRequired = Carpentry:5,
+        xpAward       = Carpentry:10,
+        category = Carpentry,
+        inputs
+        {
+	    item 1 tags[Hammer] mode:keep flags[MayDegradeVeryLight],
+	    item 1 tags[Saw;SmallSaw;CrudeSaw] mode:keep flags[MayDegradeLight;Prop1],
+	    item 1 [Base.Plank] flags[Prop2],
+	    item 5 [Base.Nails],
+	    item 20 [Base.Cork],
+            item 1 [Base.Glue;Base.Woodglue],
+            item 2 [Base.WoodenStick2],
+        }
+        outputs
+        {
+            item 1 Base.Mov_CorkBoard,
+        }
+    }
+
+    	craftRecipe MakeFishingHook
+    {
+        time        = 150,
+        timedAction = Making,
+		SkillRequired = Fishing:1,
+		tags = InHandCraft;Fishing,
+        category = Fishing,
+        inputs
+        {
+	        item 1 [Base.FishingLine;Base.PremiumFishingLine] flags[MayDegradeLight],
+            item 3 [Base.Paperclip],
+        }
+        outputs
+        {
+            item 1 Base.FishingHook,
+        }
+    }
+
+    craftRecipe MakeWaffles
+	{
+        timedAction = MixingBowl,
+		Time = 350,
+		tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:10,
+        SkillRequired = Cooking:4,
+		inputs
+		{
+            item 1 [Base.CuttingBoardWooden;Base.CuttingBoardPlastic] mode:keep flags[MayDegradeLight],
+                    item 1 [*],
+            		-fluid 0.2 [Water;TaintedWater],
+            item 1 [Base.Spoon;Base.Spatula;Base.Fork] mode:keep,
+            item 1 [Base.RollingPin] mode:keep,
+			item 40 tags[Flour],
+            item 1 [Base.Yeast],
+			item 2 [Base.Butter;Base.Margarine],
+            item 4 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 2 [Base.Sugar;Base.SugarBrown],
+		}
+		outputs
+		{
+			item 4 Base.WafflesRecipe,
+		}
+	}
+
+    craftRecipe RipFlag
+    {
+        timedAction = Making,
+        time            = 150,
+		tags = AnySurfaceCraft,
+        category      = Tailoring,
+        xpAward       = Tailoring:2,
+
+        inputs
+        {
+            item 1 [Base.Mov_FlagUSALarge;Base.Mov_FlagAdmin;Base.Mov_FlagUSA] flags[Prop1],
+			item 1 tags[Scissors;Sharpenable] mode:keep flags[MayDegradeLight],
+        }
+       outputs
+       {
+           item 4 Base.RippedSheets,
+       }
+    }
+
+    craftRecipe UseAsRag
+    {
+        timedAction = Making,
+        time            = 15,
+		tags = AnySurfaceCraft,
+        category      = Tailoring,
+
+        inputs
+        {
+            item 1 [Base.AlcoholRippedSheets] flags[Prop1],
+        }
+       outputs
+       {
+           item 1 Base.RippedSheets,
+       }
+    }
+
+    craftRecipe WriteNote
+    {
+		timedAction = Making,
+		Time = 50,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.SheetPaper2],
+		}
+		outputs
+		{
+			item 1 Base.Note,
+		}
+	}
+
+    craftRecipe WriteLetter
+    {
+		timedAction = Making,
+		Time = 75,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 2 [Base.SheetPaper2],
+		}
+		outputs
+		{
+			item 1 Base.LetterHandwritten,
+		}
+	}
+
+    craftRecipe MakeChristmasCard
+    {
+		timedAction = Making,
+		Time = 75,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.SheetPaper2],
+		}
+		outputs
+		{
+			item 1 Base.Card_Christmas,
+		}
+	}
+
+    craftRecipe MakeBirthdayCard
+    {
+		timedAction = Making,
+		Time = 75,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.SheetPaper2],
+		}
+		outputs
+		{
+			item 1 Base.Card_Birthday,
+		}
+	}
+
+    craftRecipe MakeBoiledEgg
+    {
+		timedAction = Making,
+		Time = 100,
+        tags = AnySurfaceCraft,
+		category = Cooking,
+		OnTest = Recipe.OnTest.HotFluidContainer,
+		inputs
+		{
+			item 1 tags[Egg] flags[AllowFrozenItem;IsUncookedFoodItem] mode:destroy,
+			item 1 [*] mode:keep,
+			-fluid 0.1 categories[Water],
+		}
+		outputs
+		{
+			item 1 Base.EggBoiled,
+		}
+	}
+
+    craftRecipe WriteBook
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:20,
+        SkillRequired = Art:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 4 [Base.Journal],
+            item 1 [Base.Stapler;Base.Staples]  mode:keep,
+		}
+		outputs
+		{
+			item 1 Base.Book,
+		}
+	}
+
+    craftRecipe WriteNovel
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:20,
+        SkillRequired = Art:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 10 [Base.Notebook],
+            item 1 [Base.Stapler;Base.Staples]  mode:keep,
+		}
+		outputs
+		{
+			item 1 Base.Book,
+		}
+	}
+
+    craftRecipe DrawComic
+    {
+		timedAction = Making,
+		Time = 2000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo] flags[MayDegradeLight],
+            item 1 [Base.Eraser],
+			item 1 [Base.Notebook],
+		}
+		outputs
+		{
+			item 1 Base.ComicBook,
+		}
+	}
+
+    craftRecipe WriteCarpentryManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Woodwork:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookCarpentry1,
+		}
+	}
+
+        craftRecipe WriteCarpentryManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Woodwork:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookCarpentry2,
+		}
+    }
+
+    craftRecipe WriteCarpentryManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Woodwork:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookCarpentry3,
+		}
+	}
+
+    craftRecipe WriteCarpentryManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Woodwork:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookCarpentry4,
+		}
+	}
+
+    craftRecipe WriteCarpentryManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Woodwork:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookCarpentry5,
+		}
+	}
+
+        craftRecipe WriteTailoringManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Tailoring:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTailoring1,
+		}
+	}
+
+        craftRecipe WriteTailoringManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Tailoring:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTailoring2,
+		}
+    }
+
+    craftRecipe WriteTailoringManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Tailoring:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTailoring3,
+		}
+	}
+
+    craftRecipe WriteTailoringManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Tailoring:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTailoring4,
+		}
+	}
+
+    craftRecipe WriteTailoringManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Tailoring:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTailoring5,
+		}
+	}
+
+    craftRecipe WriteCookingManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Cooking:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookCooking1,
+		}
+	}
+
+    craftRecipe WriteCookingManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Cooking:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookCooking2,
+		}
+    }
+
+    craftRecipe WriteCookingManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Cooking:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookCooking3,
+		}
+	}
+
+    craftRecipe WriteCookingManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Cooking:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookCooking4,
+		}
+	}
+
+    craftRecipe WriteCookingManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Cooking:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookCooking5,
+		}
+	}
+
+    craftRecipe WriteElectricityManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Electricity:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookElectrician1,
+		}
+	}
+
+    craftRecipe WriteElectricityManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Electricity:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookElectrician2,
+		}
+    }
+
+    craftRecipe WriteElectricityManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Electricity:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookElectrician3,
+		}
+	}
+
+    craftRecipe WriteElectricityManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Electricity:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookElectrician4,
+		}
+	}
+
+    craftRecipe WriteElectricityManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Electricity:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookElectrician5,
+		}
+	}
+
+    craftRecipe WriteFarmingManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Farming:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFarming1,
+		}
+	}
+
+    craftRecipe WriteFarmingManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Farming:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFarming2,
+		}
+    }
+
+    craftRecipe WriteFarmingManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Farming:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFarming3,
+		}
+	}
+
+    craftRecipe WriteFarmingManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Farming:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFarming4,
+		}
+	}
+
+    craftRecipe WriteFarmingManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Farming:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFarming5,
+		}
+	}
+
+        craftRecipe WriteDoctorManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Doctor:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFirstAid1,
+		}
+	}
+
+        craftRecipe WriteDoctorManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Doctor:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFirstAid2,
+		}
+    }
+
+    craftRecipe WriteDoctorManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Doctor:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFirstAid3,
+		}
+	}
+
+    craftRecipe WriteDoctorManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Doctor:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFirstAid4,
+		}
+	}
+
+    craftRecipe WriteDoctorManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Doctor:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFirstAid5,
+		}
+	}
+
+        craftRecipe WriteFishingManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Fishing:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFishing1,
+		}
+	}
+
+        craftRecipe WriteFishingManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Fishing:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFishing2,
+		}
+    }
+
+    craftRecipe WriteFishingManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Fishing:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFishing3,
+		}
+	}
+
+    craftRecipe WriteFishingManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Fishing:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFishing4,
+		}
+	}
+
+    craftRecipe WriteFishingManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Fishing:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookFishing5,
+		}
+	}
+
+    craftRecipe WriteScavengingManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;PlantScavenging:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookForaging1,
+		}
+	}
+
+    craftRecipe WriteScavengingManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;PlantScavenging:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookForaging2,
+		}
+    }
+
+    craftRecipe WriteScavengingManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;PlantScavenging:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookForaging3,
+		}
+	}
+
+    craftRecipe WriteScavengingManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;PlantScavenging:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookForaging4,
+		}
+	}
+
+    craftRecipe WriteScavengingManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;PlantScavenging:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookForaging5,
+		}
+	}
+
+    craftRecipe WriteMechanicManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Mechanics:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMechanic1,
+		}
+	}
+
+    craftRecipe WriteMechanicManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Mechanics:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMechanic2,
+		}
+    }
+
+    craftRecipe WriteMechanicManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Mechanics:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMechanic3,
+		}
+	}
+
+    craftRecipe WriteMechanicManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Mechanics:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMechanic4,
+		}
+	}
+
+    craftRecipe WriteMechanicManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Mechanics:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMechanic5,
+		}
+	}
+
+        craftRecipe WriteMetalWorkingManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;MetalWelding:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMetalWelding1,
+		}
+	}
+
+        craftRecipe WriteMetalWeldingManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;MetalWelding:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMetalWelding2,
+		}
+    }
+
+    craftRecipe WriteMetalWeldingManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;MetalWelding:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMetalWelding3,
+		}
+	}
+
+    craftRecipe WriteMetalWeldingManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;MetalWelding:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMetalWelding4,
+		}
+	}
+
+    craftRecipe WriteMetalWeldingManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;MetalWelding:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMetalWelding5,
+		}
+	}
+
+        craftRecipe WriteTrappingManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Trapping:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTrapping1,
+		}
+	}
+
+        craftRecipe WriteTrappingManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Trapping:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTrapping2,
+		}
+    }
+
+    craftRecipe WriteTrappingManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Trapping:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTrapping3,
+		}
+	}
+
+    craftRecipe WriteTrappingManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Trapping:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTrapping4,
+		}
+	}
+
+    craftRecipe WriteTrappingManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Trapping:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTrapping5,
+		}
+	}
+
+        craftRecipe WriteButcheringManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Butchering:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookButchering1,
+		}
+	}
+
+        craftRecipe WriteButcheringManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Butchering:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookButchering2,
+		}
+    }
+
+    craftRecipe WriteButcheringManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Butchering:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookButchering3,
+		}
+	}
+
+    craftRecipe WriteButcheringManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Butchering:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookButchering4,
+		}
+	}
+
+    craftRecipe WriteButcheringManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Butchering:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookButchering5,
+		}
+	}
+
+        craftRecipe WriteHusbandryManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Husbandry:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookHusbandry1,
+		}
+	}
+
+        craftRecipe WriteHusbandryManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Husbandry:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookHusbandry2,
+		}
+    }
+
+    craftRecipe WriteHusbandryManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Husbandry:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookHusbandry3,
+		}
+	}
+
+    craftRecipe WriteHusbandryManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Husbandry:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookHusbandry4,
+		}
+	}
+
+    craftRecipe WriteHusbandryManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Husbandry:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookHusbandry5,
+		}
+	}
+
+        craftRecipe WriteGlassmakingManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Glassmaking:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookGlassmaking1,
+		}
+	}
+
+        craftRecipe WriteGlassmakingManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Glassmaking:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookGlassmaking2,
+		}
+    }
+
+    craftRecipe WriteGlassmakingManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Glassmaking:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookGlassmaking3,
+		}
+	}
+
+    craftRecipe WriteGlassmakingManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Glassmaking:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookGlassmaking4,
+		}
+	}
+
+    craftRecipe WriteGlassmakingManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Glassmaking:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookGlassmaking5,
+		}
+	}
+
+        craftRecipe WriteMaintenanceManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Maintenance:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMaintenance1,
+		}
+	}
+
+        craftRecipe WriteMaintenanceManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Maintenance:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMaintenance2,
+		}
+    }
+
+    craftRecipe WriteMaintenanceManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Maintenance:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMaintenance3,
+		}
+	}
+
+    craftRecipe WriteMaintenanceManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Maintenance:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMaintenance4,
+		}
+	}
+
+    craftRecipe WriteMaintenanceManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Maintenance:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMaintenance5,
+		}
+	}
+
+        craftRecipe WriteMasonryManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Masonry:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMasonry1,
+		}
+	}
+
+        craftRecipe WriteMasonryManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Masonry:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMasonry2,
+		}
+    }
+
+    craftRecipe WriteMasonryManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Masonry:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMasonry3,
+		}
+	}
+
+    craftRecipe WriteMasonryManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Masonry:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMasonry4,
+		}
+	}
+
+    craftRecipe WriteMasonryManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = InHandCraft;CanBeDoneFromFloor,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Masonry:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookMasonry5,
+		}
+	}
+
+        craftRecipe WriteBlacksmithManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Blacksmith:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookBlacksmith1,
+		}
+	}
+
+        craftRecipe WriteBlacksmithManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Blacksmith:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookBlacksmith2,
+		}
+    }
+
+    craftRecipe WriteBlacksmithManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Blacksmith:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookBlacksmith3,
+		}
+	}
+
+    craftRecipe WriteBlacksmithManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Blacksmith:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookBlacksmith4,
+		}
+	}
+
+    craftRecipe WriteBlacksmithManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Blacksmith:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookBlacksmith5,
+		}
+	}
+
+        craftRecipe WritePotteryManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Pottery:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookPottery1,
+		}
+	}
+
+        craftRecipe WritePotteryManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Pottery:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookPottery2,
+		}
+    }
+
+    craftRecipe WritePotteryManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Pottery:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookPottery3,
+		}
+	}
+
+    craftRecipe WritePotteryManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Pottery:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookPottery4,
+		}
+	}
+
+    craftRecipe WritePotteryManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Pottery:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookPottery5,
+		}
+	}
+
+        craftRecipe WriteReloadingManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Reloading:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookReloading1,
+		}
+	}
+
+        craftRecipe WriteReloadingManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Reloading:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookReloading2,
+		}
+    }
+
+    craftRecipe WriteReloadingManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Reloading:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookReloading3,
+		}
+	}
+
+    craftRecipe WriteReloadingManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Reloading:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookReloading4,
+		}
+	}
+
+    craftRecipe WriteReloadingManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Reloading:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookReloading5,
+		}
+	}
+
+        craftRecipe WriteTrackingManual1
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Tracking:2,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTracking1,
+		}
+	}
+
+        craftRecipe WriteTrackingManual2
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Tracking:4,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTracking2,
+		}
+    }
+
+    craftRecipe WriteTrackingManual3
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Tracking:6,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTracking3,
+		}
+	}
+
+    craftRecipe WriteTrackingManual4
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Tracking:8,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTracking4,
+		}
+	}
+
+    craftRecipe WriteTrackingManual5
+    {
+		timedAction = Making,
+		Time = 10000,
+        tags = AnySurfaceCraft,
+		category = Miscellaneous,
+        xpAward = Art:10,
+        SkillRequired = Art:3;Tracking:10,
+		inputs
+		{
+            item 1 [Base.Pencil;Base.PencilSpiffo;Base.PenSpiffo;Base.Pen;Base.BluePen;Base.RedPen;Base.GreenPen;Base.PenMultiColor;Base.PenFancy] flags[MayDegradeLight],
+			item 1 [Base.Diary1;Base.Diary2],
+		}
+		outputs
+		{
+			item 1 Base.BookTracking5,
+		}
+	}
+}
+

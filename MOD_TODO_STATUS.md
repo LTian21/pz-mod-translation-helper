@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-15 12:18:52 UTC+08:00`*
+*最后更新于：`2025-09-15 23:42:18 UTC+08:00`*
 
 ---
 
@@ -20,19 +20,18 @@
 | AmmoMaker | 2788256295 | 464 |
 | Bandits | 3268487204 | 458 |
 | PompsItemsFood | 2792348686 | 394 |
-| Immersive_Lore | 3000924731 | 380 |
 | Erikas_Furniture_Store | 3363546437 | 337 |
 | PZ_BodilyFunctions | 3396456841 | 335 |
 | BanditRelationship | 3431259170 | 309 |
 | Legend_Craft_Evolved | 3432470769 | 304 |
 | Escape_from_Kentucky | 3439877834 | 301 |
 | tsarslib | 3402491515 | 288 |
+| Immersive_Lore | 3000924731 | 271 |
 | Support_Corps | 3409836763 | 261 |
 | PZKVanillaPlusCarPack | 3217685049 | 255 |
-| organizedCategoriesCore | 3370707195 | 254 |
 | SpongieOpenJackets | 2812326159 | 243 |
 | Advanced_Trajectory's_Realistic_Overhaul | 3036878362 | 238 |
-| B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 227 |
+| B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 237 |
 | HydeCoBees | 3430224478 | 213 |
 | BetterSorting-42 | 3413005308 | 203 |
 | Spongie_Hair | 2463184726 | 185 |
@@ -127,7 +126,6 @@
 | DivisionBackpack | 3391306957 | 11 |
 | True_Crawl_B42 | 3410989950 | 11 |
 | MilitaryPonchosRELOADED | 3439247001 | 11 |
-| P4MySoCalledBag | 2823166698 | 10 |
 | Minimal_Display_Bars_Nutritions_B42 | 3388844542 | 10 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
 | 92jeepYJ | 3287727378 | 10 |
@@ -172,7 +170,6 @@
 | Expanded_Professions | 3440958051 | 5 |
 | pzhotbar42 | 3396010813 | 4 |
 | P4LoveAndPerfume | 2842359380 | 4 |
-| Perts_Party_Tiles | 2837923608 | 4 |
 | TetriZ | 3486780625 | 4 |
 | Sector-7_Breach | 3513107552 | 4 |
 | Ladders | 2737665235 | 4 |
@@ -185,7 +182,6 @@
 | P4ThiefExpansion | 2596620950 | 4 |
 | BetterFPS_B42 | 3423115544 | 4 |
 | FunctionalAppliances2 | 3042138819 | 3 |
-| Frockin_Wiseguys | 3538760023 | 3 |
 | ATA_Jeep | 3407042038 | 3 |
 | TKS42 | 3389805754 | 3 |
 | KI5trailers | 3330403100 | 3 |
@@ -259,7 +255,6 @@
 | 89fordBronco | 2886833398 | 1 |
 | zRe_FixFloor | 3403911096 | 1 |
 | Reaper's_Hair_&_Beard | 3450583954 | 1 |
-| NodachiMod_B42.5.1 | 2166396868 | 1 |
 | [J&G]_Flecktarn_Uniform | 3206579556 | 1 |
 | SkateBoard | 3456675747 | 1 |
 | BoneScavenger | 3399292171 | 1 |
@@ -270,6 +265,7 @@
 | ATA_VanDeRumba | 3432015133 | 1 |
 | Infection_Scanner | 3332296598 | 1 |
 | SafeWayHamlet | 3533315055 | 1 |
+| P4MySoCalledBag | 2823166698 | 0 |
 | ExerciseWithCorpses | 3404074048 | 0 |
 | MyCustomFirearm | 3551139118 | 0 |
 | JokeCustomisation | 3415451174 | 0 |
@@ -294,7 +290,9 @@
 | B42Mushroomjar | 3416833689 | 0 |
 | 49powerWagon | 2900580391 | 0 |
 | 87chevySuburban | 3196180339 | 0 |
+| Perts_Party_Tiles | 2837923608 | 0 |
 | Constown | 3480990544 | 0 |
+| organizedCategoriesCore | 3370707195 | 0 |
 | Louisville_Quarantine_Zone | 2934132344 | 0 |
 | SurvivingThroughSeasons | 2753086629 | 0 |
 | B42_Insect_Foraging | 3437552077 | 0 |
@@ -314,6 +312,7 @@
 | P4AddictedToWeight | 2604943386 | 0 |
 | P4HasBeenRead | 2544353492 | 0 |
 | INeedMoreStyle_CE | 2861393067 | 0 |
+| Frockin_Wiseguys | 3538760023 | 0 |
 | 78amgeneralM35A2 | 2799152995 | 0 |
 | Night_Vision | 3470491629 | 0 |
 | 85chevyCaprice | 3413704851 | 0 |
@@ -455,6 +454,7 @@
 | Energy_Drinks | 2674541310 | 0 |
 | EmergencyTVChannel | 3409272479 | 0 |
 | NoirRifleSlings | 3388107363 | 0 |
+| NodachiMod_B42.5.1 | 2166396868 | 0 |
 | 59_Cadillac_Miller-Meteor | 2772575623 | 0 |
 | P4SoundScouter | 3366600816 | 0 |
 | DrinkSmart | 3447775367 | 0 |
