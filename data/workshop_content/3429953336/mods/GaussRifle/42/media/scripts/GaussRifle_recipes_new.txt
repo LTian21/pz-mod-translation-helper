@@ -1,0 +1,359 @@
+module GaussRifle
+{
+	imports
+	{
+		Base,
+	}
+
+    craftRecipe MakeGaussBattery
+	{
+		timedAction = MakingElectrical,
+		Time = 120,
+		Tags = InHandCraft,
+		needTobeLearn = true,
+		AutoLearnAny = Electricity:1,
+		xpAward = Electricity:15,
+		category = Electrical,
+		inputs
+		{
+			item 1 tags[Pliers] mode:keep flags[MayDegradeLight],
+			item 1 tags[SheetMetalSnips;SmallSaw;LightMetalSnips] mode:keep flags[MayDegradeLight],
+			item 1 [Base.ElectronicsScrap],
+			item 1 [Base.ElectricWire],
+            item 1 tags[TinCan],
+            item 1 tags[Vinegar],
+            item 1 [Base.DuctTape],
+		}
+		outputs
+		{
+			item 1 GaussRifle.GaussRifleBattery,
+		}
+	}
+
+    craftRecipe MakeImprovisedCapacitor
+	{
+		timedAction = MakingElectrical,
+		Time = 120,
+		Tags = InHandCraft,
+		needTobeLearn = true,
+		AutoLearnAny = Electricity:2,
+		xpAward = Electricity:10,
+		SkillRequired = Electricity:1,
+		category = Electrical,
+		inputs
+		{
+			item 1 tags[Pliers] mode:keep flags[MayDegradeLight],
+			item 1 tags[SheetMetalSnips;SmallSaw;LightMetalSnips] mode:keep flags[MayDegradeLight],
+			item 2 [Base.ElectronicsScrap],
+			item 1 [Base.ElectricWire],
+            item 2 tags[TinCan],
+			item 1 tags[Vinegar],
+            item 2 [Base.DuctTape],
+		}
+		outputs
+		{
+			item 6 GaussRifle.ImprovisedCapacitor,
+		}
+	}
+
+    craftRecipe MakeManualBatteryChargerGauss
+    {
+        timedAction = MakingElectrical,
+		Time = 180,
+		Tags = AnySurfaceCraft,
+		needTobeLearn = true,
+		AutoLearnAny = Electricity:1,
+		xpAward = Electricity:20,
+		category = Electrical,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[Hammer;ClubHammer;Mallet] mode:keep flags[Prop2],
+			item 1 tags[DrillMetal] mode:keep flags[MayDegradeLight],
+            item 1 tags[Saw] mode:keep flags[MayDegradeLight],
+			item 3 [Base.ElectronicsScrap],
+            item 1 [Base.MetalBar;Base.MetalPipe],
+            item 1 [Base.Plank],
+            item 2 [Base.Screws],
+		}
+		outputs
+		{
+			item 1 GaussRifle.ManualGaussBatteryCharger,
+		}
+    }
+
+    craftRecipe MakeRoundMagnetizer
+    {
+        timedAction = MakingElectrical,
+		Time = 220,
+		Tags = AnySurfaceCraft,
+		needTobeLearn = true,
+		AutoLearnAny = Electricity:3,
+		xpAward = Electricity:30,
+		SkillRequired = Electricity:2,
+		category = Electrical,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[Hammer;ClubHammer;Mallet] mode:keep flags[Prop2],
+			item 1 tags[Pliers] mode:keep flags[MayDegradeLight],
+			item 1 tags[SheetMetalSnips;SmallSaw;LightMetalSnips] mode:keep flags[MayDegradeLight],
+			item 1 tags[DrillMetal] flags[MayDegradeLight] mode:keep,
+            item 1 tags[Saw] mode:keep flags[MayDegradeLight],
+			item 2 [Base.ElectricWire],
+            item 1 [Base.MetalBar;Base.MetalPipe],
+            item 1 [Base.SmallSheetMetal],
+            item 12 [GaussRifle.ImprovisedCapacitor],
+            item 1 [Base.Plank],
+            item 8 [Base.Screws],
+		}
+		outputs
+		{
+			item 1 GaussRifle.MagnetizerEmpty,
+		}
+    }
+
+    craftRecipe InsertBatteryMagnetizer
+    {
+        timedAction = MakingElectrical,
+		Time = 60,
+		Tags = InHandCraft,
+        OnCreate = Recipe.OnCreate.InsertBatteryMagnetizer,
+		inputs
+		{
+			item 1 [GaussRifle.MagnetizerEmpty],
+            item 1 tags[CarBattery] flags[ItemCount],
+		}
+    }
+
+    craftRecipe RemoveBatteryMagnetizer
+    {
+        timedAction = MakingElectrical,
+		Time = 60,
+		Tags = InHandCraft,
+        OnCreate = Recipe.OnCreate.RemoveBatteryMagnetizer,
+		inputs
+		{
+			item 1 [GaussRifle.Magnetizer] flags[ItemCount],
+		}
+        outputs
+		{
+			item 1 GaussRifle.MagnetizerEmpty,
+		}
+    }
+
+	craftRecipe MakeGaussRifle
+	{
+		timedAction = MakingElectrical,
+		Time = 300,
+		Tags = AnySurfaceCraft,
+		xpAward = Electricity:30,
+		SkillRequired = Electricity:2,
+		category = Electrical,
+		needTobeLearn = true,
+		AutoLearnAny = Electricity:3,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;IsNotDull],
+			item 1 tags[Hammer;ClubHammer;] mode:keep,
+			item 1 tags[Saw] flags[MayDegradeLight] mode:keep,
+			item 1 tags[DrillMetal] flags[MayDegradeLight] mode:keep,
+			item 3 [Base.ElectronicsScrap],
+			item 1 [Base.ElectricWire],
+			item 6 [GaussRifle.ImprovisedCapacitor],
+			item 6 [Base.Screws],
+			item 1 [Base.Plank],
+			item 1 [Base.MetalPipe],
+		}
+		outputs
+		{
+            item 1 GaussRifle.GaussRifle,
+        }
+    }
+	craftRecipe MakeGaussPistol
+	{
+		timedAction = MakingElectrical,
+		Time = 220,
+		Tags = AnySurfaceCraft,
+		xpAward = Electricity:30,
+		SkillRequired = Electricity:4,
+		category = Electrical,
+		needTobeLearn = true,
+		AutoLearnAny = Electricity:5,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;IsNotDull],
+			item 1 tags[Hammer;ClubHammer;] mode:keep,
+			item 1 tags[Saw] flags[MayDegradeLight] mode:keep,
+			item 1 tags[DrillMetal] flags[MayDegradeLight] mode:keep,
+			item 3 [Base.ElectronicsScrap],
+			item 1 [Base.ElectricWire],
+			item 4 [GaussRifle.ImprovisedCapacitor],
+			item 4 [Base.Screws],
+			item 1 [Base.Plank],
+			item 1 [Base.MetalPipe],
+		}
+		outputs
+		{
+            item 1 GaussRifle.GaussPistol,
+        }
+    }
+	craftRecipe MakeGaussPistolMag
+	{
+		timedAction = MakingElectrical,
+		Time = 120,
+		Tags = AnySurfaceCraft,
+		xpAward = Electricity:30,
+		SkillRequired = Electricity:4,
+		category = Electrical,
+		needTobeLearn = true,
+		AutoLearnAny = Electricity:5,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;IsNotDull],
+			item 1 tags[Hammer;ClubHammer;] mode:keep,
+			item 1 tags[Saw] flags[MayDegradeLight] mode:keep,
+			item 1 tags[SheetMetalSnips;SmallSaw;LightMetalSnips] flags[MayDegradeLight] mode:keep,
+			item 1 tags[DrillMetal] flags[MayDegradeLight] mode:keep,
+			item 1 [Base.ElectronicsScrap],
+			item 2 [Base.Screws],
+			item 1 [Base.SmallSheetMetal],
+		}
+		outputs
+		{
+            item 1 GaussRifle.GaussPistolMag,
+        }
+    }
+
+	craftRecipe MakeGaussSMG
+	{
+		timedAction = MakingElectrical,
+		Time = 280,
+		Tags = AnySurfaceCraft,
+		xpAward = Electricity:40,
+		SkillRequired = Electricity:5,
+		category = Electrical,
+		needTobeLearn = true,
+		AutoLearnAny = Electricity:6,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;IsNotDull],
+			item 1 tags[Hammer;ClubHammer;] mode:keep,
+			item 1 tags[Saw] flags[MayDegradeLight] mode:keep,
+			item 1 tags[SheetMetalSnips;SmallSaw;LightMetalSnips] flags[MayDegradeLight] mode:keep,
+			item 1 tags[DrillMetal] flags[MayDegradeLight] mode:keep,
+			item 4 [Base.ElectronicsScrap],
+			item 1 [Base.ElectricWire],
+			item 6 [GaussRifle.ImprovisedCapacitor],
+			item 8 [Base.Screws],
+			item 1 [Base.Plank],
+			item 1 [Base.MetalPipe],
+			item 1 [Base.SmallSheetMetal],
+		}
+		outputs
+		{
+            item 1 GaussRifle.GaussSMG,
+        }
+    }
+
+	craftRecipe MakeGaussSMGMag
+	{
+		timedAction = MakingElectrical,
+		Time = 120,
+		Tags = AnySurfaceCraft,
+		xpAward = Electricity:30,
+		SkillRequired = Electricity:5,
+		category = Electrical,
+		needTobeLearn = true,
+		AutoLearnAny = Electricity:6,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;IsNotDull],
+			item 1 tags[Hammer;ClubHammer;] mode:keep,
+			item 1 tags[Saw] flags[MayDegradeLight] mode:keep,
+			item 1 tags[SheetMetalSnips;SmallSaw;LightMetalSnips] flags[MayDegradeLight] mode:keep,
+			item 1 tags[DrillMetal] flags[MayDegradeLight] mode:keep,
+			item 1 [Base.ElectronicsScrap],
+			item 1 [Base.ElectricWire],
+			item 4 [Base.Screws],
+			item 1 [Base.SmallSheetMetal],
+		}
+		outputs
+		{
+            item 1 GaussRifle.GaussSMGMag,
+        }
+    }
+
+	craftRecipe MakeGaussSMGStock
+	{
+		timedAction = MakingElectrical,
+		Time = 120,
+		Tags = AnySurfaceCraft,
+		SkillRequired = Electricity:5,
+		category = Electrical,
+		needTobeLearn = true,
+		AutoLearnAny = Electricity:6,
+		inputs
+		{
+			item 1 tags[Hammer;ClubHammer;] mode:keep,
+			item 1 tags[Pliers] mode:keep flags[MayDegradeLight],
+			item 1 tags[Saw] flags[MayDegradeLight] mode:keep,
+			item 1 tags[DrillMetal] flags[MayDegradeLight] mode:keep,
+			item 1 [Base.MetalBar;Base.MetalPipe],
+			item 2 [Base.Screws],
+		}
+		outputs
+		{
+            item 1 GaussRifle.GaussSMGStock,
+        }
+    }
+
+	craftRecipe ConvertToGauss
+	{
+		timedAction = Making,
+		Time = 1,
+		category = Weaponry,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [Base.x2Scope;Base.x4Scope;Base.x8Scope;Base.RedDot] mappers[attachments],
+		}
+		outputs
+		{
+			item 1 mapper:attachments,
+		}
+        	itemMapper attachments
+        {
+			GaussRifle.Gaussx2Scope = Base.x2Scope,
+			GaussRifle.Gaussx4Scope = Base.x4Scope,
+			GaussRifle.Gaussx8Scope = Base.x8Scope,
+			GaussRifle.GaussRedDot = Base.RedDot,
+			
+			default = GaussRifle.Gaussx2Scope,
+		}
+	}
+
+	craftRecipe ConvertToBase
+	{
+		timedAction = Making,
+		Time = 1,
+		category = Weaponry,
+        Tags = InHandCraft,
+		inputs
+		{
+			item 1 [GaussRifle.Gaussx2Scope;GaussRifle.Gaussx4Scope;GaussRifle.Gaussx8Scope;GaussRifle.GaussRedDot] mappers[attachments],
+		}
+		outputs
+		{
+			item 1 mapper:attachments,
+		}
+        	itemMapper attachments
+        {
+			Base.x2Scope = GaussRifle.Gaussx2Scope,
+			Base.x4Scope = GaussRifle.Gaussx4Scope,
+			Base.x8Scope = GaussRifle.Gaussx8Scope,
+			Base.RedDot = GaussRifle.GaussRedDot,
+			default = Base.x2Scope,
+		}
+	}
+}

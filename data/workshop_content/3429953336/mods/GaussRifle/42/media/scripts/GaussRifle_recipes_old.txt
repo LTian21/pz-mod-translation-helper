@@ -1,0 +1,455 @@
+/*    ---------------B41 RECIPES---------------
+module GaussRifle
+{
+	imports
+	{
+		Base,
+	}
+
+	recipe Make Gauss Rifle
+    {
+        ElectronicsScrap=4,
+        ElectricWire=2,
+        MetalPipe,
+        SmallSheetMetal=2,
+        Screws=20,
+        Plank,
+        keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+        Result:GaussRifle,
+        SkillRequired:Electricity=3,
+        OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+        Time:3200.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+        NeedToBeLearn:true,
+    }
+    recipe Make Gauss Pistol
+    {
+        ElectronicsScrap=4,
+        ElectricWire=2,
+        MetalPipe,
+        SmallSheetMetal=1,
+        Screws=10,
+        Plank,
+        keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+        Result:GaussPistol,
+        SkillRequired:Electricity=4,
+        OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+        Time:3200.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+        NeedToBeLearn:true,
+    }
+    recipe Make Gauss Pistol Magazine
+	{
+		SmallSheetMetal=1,
+        ElectronicsScrap=2,
+		Screws=4,
+		keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+        SkillRequired:Electricity=4,
+		
+		Result:GaussPistolMag,
+		OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+		Category:Electrical,
+		Time:2200,
+		NeedToBeLearn:true,
+	}
+    	recipe Make Gauss Shotgun
+    {
+        ElectronicsScrap=8,
+        ElectricWire=4,
+        MetalPipe=4,
+        SmallSheetMetal=2,
+        Screws=20,
+        Plank,
+        keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+        Result:GaussShotgun,
+        SkillRequired:Electricity=4,
+        OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+        Time:3200.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+        NeedToBeLearn:true,
+    }
+
+	recipe Make Gauss SMG
+    {
+        ElectronicsScrap=6,
+        ElectricWire=4,
+        MetalPipe=1,
+        SmallSheetMetal=2,
+        Screws=16,
+        Plank,
+        keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+        Result:GaussSMG,
+        SkillRequired:Electricity=5,
+        OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+        Time:3200.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+        NeedToBeLearn:true,
+    }
+    recipe Make Gauss SMG Stock
+	{
+		MetalBar,
+		Screws=4,
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+        SkillRequired:MetalWelding=1,
+		
+		Result:GaussSMGStock,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+		Category:Electrical,
+		Time:1800,
+		NeedToBeLearn:true,
+	}
+    recipe Make Gauss SMG Magazine
+	{
+		SmallSheetMetal=1,
+        ElectronicsScrap=2,
+		Screws=6,
+		keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+        SkillRequired:Electricity=5,
+		
+		Result:GaussSMGMag,
+		OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+		Category:Electrical,
+		Time:2200,
+		NeedToBeLearn:true,
+	}
+    recipe Make Manual Battery Charger
+    {
+        ElectronicsScrap=4,
+        ElectricWire,
+        MetalBar,
+        Screws=5,
+        Nails=10,
+        Plank,
+        keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+        Result:ManualGaussBatteryCharger,
+        SkillRequired:Electricity=1,
+        OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+        Time:2000.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+        NeedToBeLearn:true,
+    }
+
+    recipe Dismantle Manual Battery Charger
+    {
+        ManualGaussBatteryCharger,
+        keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+        Result:ElectronicsScrap,
+        OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+        OnCreate:Recipe.OnCreate.DismantleManualBatteryCharger,
+        Time:800.0,
+        Category:Electrical,
+        RemoveResultItem:true,
+        AllowDestroyedItem:true,
+    }
+    
+    recipe Dismantle Round Magnetizer
+    {
+        MagnetizerEmpty,
+        keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+        Result:ElectronicsScrap,
+        OnGiveXP:Recipe.OnGiveXP.DismantleMagnetizer,
+        OnCreate:Recipe.OnCreate.DismantleMagnetizer,
+        Time:1400,
+        Category:Electrical,
+        RemoveResultItem:true,
+        AllowDestroyedItem:true,
+    }
+
+    recipe Make Gauss Battery
+    {
+        TinCanEmpty,
+        DuctTape,
+        ElectricWire,
+        Water=1,
+        Salt,
+        Aluminum,
+        ElectronicsScrap,
+        keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+        Result:GaussRifleBattery,
+        OnCreate:Recipe.OnCreate.MakeGaussRifleBattery,
+        OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+        SkillRequired:Electricity=1,
+        Time:1400.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+        NeedToBeLearn:true,
+    }
+
+    recipe Make Gauss Battery
+    {
+        TinCanEmpty,
+        DuctTape,
+        ElectricWire,
+        Vinegar=1,
+        Aluminum,
+        ElectronicsScrap,
+        keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+        Result:GaussRifleBattery,
+        OnCreate:Recipe.OnCreate.MakeGaussRifleBattery,
+        OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+        SkillRequired:Electricity=1,
+        Time:1400.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+        NeedToBeLearn:true,
+    }
+
+    recipe Make Round Magnetizer
+    {
+        SheetMetal,
+        SmallSheetMetal,
+        Plank,
+        DuctTape=8,
+        ElectricWire=4,
+        TinCanEmpty=8,
+        Water=6,
+        Salt,
+        Aluminum=8,
+        Screws=20,
+        ElectronicsScrap=10,
+        keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+        Result:MagnetizerEmpty,
+        OnGiveXP:Recipe.OnGiveXP.DismantleMagnetizer,
+        SkillRequired:Electricity=3,
+        Time:2400.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+        NeedToBeLearn:true,
+    }
+    recipe Make Round Magnetizer
+    {
+        SheetMetal,
+        SmallSheetMetal,
+        Plank,
+        DuctTape=8,
+        ElectricWire=4,
+        TinCanEmpty=8,
+        Water=5,
+        Vinegar=1,
+        Aluminum=8,
+        Screws=20,
+        ElectronicsScrap=10,
+        keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+        Result:MagnetizerEmpty,
+        OnGiveXP:Recipe.OnGiveXP.DismantleMagnetizer,
+        SkillRequired:Electricity=3,
+        Time:2400.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+        NeedToBeLearn:true,
+    }
+    recipe Make Magnetic Rounds
+	{
+		ScrapMetal=1,
+		Magnetizer=5,
+		keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		
+		Category:Electrical,
+		Result:MagneticRound,
+        OnCreate:Recipe.OnCreate.MakeMagneticRounds,
+        CanBeDoneFromFloor:true,
+        RemoveResultItem:true,
+		Time:600.0,
+        NeedToBeLearn:true,
+	}
+    recipe Make Magnetic Rounds
+	{
+		MetalBar,
+		Magnetizer=10,
+		keep [Recipe.GetItemTypes.Saw],
+		keep [Recipe.GetItemTypes.Hammer],
+		
+		Category:Electrical,
+		Result:MagneticRound,
+        OnCreate:Recipe.OnCreate.MakeMagneticRounds,
+        CanBeDoneFromFloor:true,
+        RemoveResultItem:true,
+		Time:600.0,
+        NeedToBeLearn:true,
+	}
+    recipe Insert Battery
+    {
+        MagnetizerEmpty,
+        CarBattery1/CarBattery2/CarBattery3,
+
+        Result:Magnetizer,
+        OnCreate:Recipe.OnCreate.InsertBatteryMagnetizer,
+        Time:800.0,
+        Category:Electrical,
+		RemoveResultItem:true,
+        AllowDestroyedItem:false,
+		IsHidden:true,
+    }
+    recipe Remove Battery
+    {
+        Magnetizer,
+
+        Result:MagnetizerEmpty,
+        OnCreate:Recipe.OnCreate.RemoveBatteryMagnetizer,
+        Time:800.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+		IsHidden:true,
+    }
+    recipe Convert to Gauss
+    {
+        x2Scope,
+
+        Result:Gaussx2Scope,
+        Time:6.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+		IsHidden:true,
+    }
+    recipe Convert to Gauss
+    {
+        RedDot,
+
+        Result:GaussRedDot,
+        Time:6.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+		IsHidden:true,
+    }
+    recipe Convert to Gauss
+    {
+        x4Scope,
+
+        Result:Gaussx4Scope,
+        Time:6.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+		IsHidden:true,
+    }
+    recipe Convert to Gauss
+    {
+        x8Scope,
+
+        Result:Gaussx8Scope,
+        Time:6.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+		IsHidden:true,
+    }
+    recipe Convert to Gauss
+    {
+        Sling,
+
+        Result:GaussSling,
+        Time:6.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+		IsHidden:true,
+    }
+    recipe Convert to Base
+    {
+        Gaussx2Scope,
+
+        Result:x2Scope,
+        Time:6.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+		IsHidden:true,
+    }
+    recipe Convert to Base
+    {
+        GaussRedDot,
+
+        Result:RedDot,
+        Time:6.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+		IsHidden:true,
+    }
+    recipe Convert to Base
+    {
+        Gaussx4Scope,
+
+        Result:x4Scope,
+        Time:6.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+		IsHidden:true,
+    }
+    recipe Convert to Base
+    {
+        Gaussx8Scope,
+
+        Result:x8Scope,
+        Time:6.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+		IsHidden:true,
+    }
+    recipe Convert to Base
+    {
+        GaussSling,
+
+        Result:Sling,
+        Time:6.0,
+        Category:Electrical,
+        AllowDestroyedItem:true,
+		IsHidden:true,
+    }
+    recipe Place Magnetic Rounds in Box
+    {
+        MagneticRound=50,
+
+        Result:MagneticRoundBox,
+        Sound:BoxOfRoundsOpenOne,
+        Time:15.0,
+    }
+    recipe Open Box of Magnetic Rounds
+    {
+        MagneticRoundBox,
+
+        Result:MagneticRound=50,
+        Sound:BoxOfRoundsOpenOne,
+        Time:15.0,
+    }
+}
+*/

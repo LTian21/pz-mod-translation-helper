@@ -1,0 +1,283 @@
+module Base
+{
+	model 65bansheeWindshieldA
+    	{
+        mesh = vehicles/Vehicles_65banshee_Body|banshee_windshield_front_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 65bansheeWindowflA
+    	{
+        mesh = vehicles/Vehicles_65banshee_Body|banshee_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 65bansheeWindowfrA
+    	{
+        mesh = vehicles/Vehicles_65banshee_Body|banshee_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 65bansheeWindshieldrearA
+    	{
+        mesh = vehicles/Vehicles_65banshee_Body|banshee_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle BAN65Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model winda0
+				{
+                		file = 65bansheeWindshieldA,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.65bansheeWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BAN65.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = BAN65.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = BAN65.Create.WindshieldArmor,
+					init = BAN65.Init.WindshieldArmor,
+					}
+			}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model leftdoora
+				{
+                		file = 65bansheeWindowflA,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.65bansheeFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BAN65.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BAN65.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = BAN65.Create.FrontLeftArmor,
+					init = BAN65.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model rightdoora
+				{
+                		file = 65bansheeWindowfrA,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.65bansheeFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BAN65.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BAN65.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = BAN65.Create.FrontRightArmor,
+					init = BAN65.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model windra
+				{
+                		file = 65bansheeWindshieldrearA,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.65bansheeWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BAN65.InstallComplete.WindshieldRearArmor,
+                    requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BAN65.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = BAN65.Create.WindshieldRearArmor,
+					init = BAN65.Init.WindshieldRearArmor,
+					}
+			}
+		}
+
+}

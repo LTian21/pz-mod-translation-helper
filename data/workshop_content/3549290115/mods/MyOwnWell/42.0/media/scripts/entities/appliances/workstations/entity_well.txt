@@ -1,0 +1,84 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity ES_Well
+        {
+            LuaWindowClass      = ISEntityTabWindow,
+            DisplayName         = WellsConstructionDisplay,
+            Description         = Entity_Desc_Default,
+            BuildDescription    = Entity_BuildDesc_Default,
+            Icon                = Build_WellsConstruction,
+        }
+    }
+
+    entity Well
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Well,
+            uiEnabled       = true,
+        }
+
+        component FluidContainer
+        {
+            ContainerName          = Well,
+            capacity               = 10000,
+            RainFactor	           = 0.15,
+            FillsWithCleanWater    = true,
+            HiddenAmount           = false,
+            InitialPercentMin      = 0.05,
+            InitialPercentMax      = 0.15,
+            Fluids
+            {
+                fluid = Water:1.0,
+            }
+            whitelist
+            {
+                fluid = Water,
+            }
+        }
+
+        component SpriteConfig
+        {
+			OnCreate = MyOwnWell.events.OnCreate,
+			skillBaseHealth = 1500,
+            face S
+            {
+                layer
+                {
+                    row = camping_01_16,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 5000,
+            category      = Masonry,
+            needToBeLearn = false,
+            SkillRequired = Woodwork:6;Masonry:8;MetalWelding:4;Blacksmith:2,
+            xpAward       = Woodwork:60;Masonry:80;MetalWelding:40;Blacksmith:20,
+            ToolTip       = Tooltip_WellsConstruction,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 tags[PickAxe] mode:keep flags[MayDegradeHeavy],
+                item 1 tags[DigGrave] mode:keep flags[MayDegradeHeavy],
+				item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[IsNotDull;SharpnessCheck;MayDegradeLight],
+                item 10 [Base.BlowTorch],
+			    item 1 tags[WeldingMask] mode:keep,
+                item 8 [Base.Log],
+                item 16 [Base.Plank],
+                item 64 [Base.Nails],
+                item 32 [Base.StoneBlock],
+                item 4 [Base.IronBar;Base.IronBarHalf;Base.SteelBarHalf;Base.SteelBar],
+                item 1 tags[Bucket],
+				item 2 [Base.SheetRope;Base.Rope], 
+            }
+        }
+    }
+
+}

@@ -1,0 +1,79 @@
+module Base
+{
+
+	model 65bansheeRollbar0
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_rollcage,
+		texture = Vehicles/Vehicles_65banshee_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	
+
+	template vehicle BAN65Rollbar
+	{
+		part BAN65Rollbar
+		{
+
+			model Rollbar0
+				{
+                		file = 65bansheeRollbar0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.65bansheeRollbar,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                    requireUninstalled = BAN65Roof,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+                    requireUninstalled = BAN65RoofrackRollbar;DAMNSpareTireRoof,
+            		}
+
+            lua
+            	{
+					create = DAMN.Create.Blank,
+				}
+		}
+	}
+
+}
+

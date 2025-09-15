@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-09-15 00:39:47 UTC+08:00`*
+*最后更新于：`2025-09-15 12:18:52 UTC+08:00`*
 
 ---
 
@@ -9,20 +9,20 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **当前待办总数** | ``20900`` 条 |
-| **已支持 Mod 数量** | ``507`` 个 |
+| **当前待办总数** | ``19933`` 条 |
+| **已支持 Mod 数量** | ``509`` 个 |
 
 ---
 
 ### ⚡ **最近一次更新摘要**
 
-*   **新增待办翻译**: `122` 条
-*   **内容变更的 Mod**: `13` 个
-    *   `PompsItemsFood (ID: 2792348686)`
-    *   `PompsItemsPlushies (ID: 2792387747)`
-    *   `damnlib (ID: 3171167894)`
-    *   `P4Decoholic (ID: 3197857648)`
-    *   `Immersive_Roleplay_Professions_and_Traits (ID: 3387474156)`
+*   **新增待办翻译**: `7` 条
+*   **内容变更的 Mod**: `20` 个
+    *   `Customizable_Containers (ID: 2719850086)`
+    *   `LazoloTraits (ID: 2855320431)`
+    *   `SixthSense (ID: 2863908612)`
+    *   `KeepPerkLevel (ID: 3314107094)`
+    *   `B42_Rain's_Firearms_&_Gun_Parts (ID: 3387222454)`
     *   ... *等*
 
 ---

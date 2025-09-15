@@ -1,0 +1,96 @@
+module Base
+{
+    model 65bansheeSpareStrap
+	{
+		mesh = vehicles/Vehicles_65banshee_Body|banshee_strap,
+		texture = Vehicles/Vehicles_65banshee_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle BAN65SpareTires
+	{
+		part DAMNSpareTireRoof
+        	{
+                model Spare1
+                {
+                    file = 65bansheeWheel1,
+                    offset = 0.0000 0.4901 -1.2308,
+				    rotate = -17.0000 0.0000 -90.0000,
+                }
+
+                model Spare2
+                {
+                    file = 65bansheeWheel2,
+                    offset = 0.0000 0.4901 -1.2308,
+				    rotate = -17.0000 0.0000 -90.0000,
+                }
+
+                model Spare3
+                {
+                    file = 65bansheeWheel3L,
+                    offset = 0.0000 0.4901 -1.2308,
+				    rotate = -17.0000 0.0000 -90.0000,
+                }
+
+                model Spare4
+                {
+                    file = 65bansheeWheel4L,
+                    offset = 0.0000 0.4901 -1.2308,
+				    rotate = -17.0000 0.0000 -90.0000,
+                }
+
+                model Spare5
+                {
+                    file = 65bansheeWheel5L,
+                    offset = 0.0000 0.4901 -1.2308,
+				    rotate = -17.0000 0.0000 -90.0000,
+                }
+
+                model Spare6
+                {
+                    file = 65bansheeWheel6L,
+                    offset = 0.0000 0.4901 -1.2308,
+				    rotate = -17.0000 0.0000 -90.0000,
+                }
+
+                model Strap0
+                {
+                    file = 65bansheeSpareStrap,
+                    offset = 0.0000 0.4901 -1.2308,
+				    rotate = -17.0000 0.0000 -90.0000,
+                }
+
+			category = tire,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.pontiacR115Tire1;Base.pontiacR117Tire3;Base.75grandPrixR215Tire1;Base.75grandPrixR217Tire3;Base.pontiac8L15Tire1;Base.pontiac8L17Tire3,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BAN65.InstallComplete.SpareTire,
+                    requireInstalled = BAN65Rollbar,
+            		}
+
+            table uninstall
+            		{
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = BAN65.UninstallComplete.SpareTire,
+            		}
+
+	            lua
+	            {
+				create = BAN65.Create.SpareTire,
+                init = BAN65.Init.SpareTire,
+				}
+		}
+	}
+}
