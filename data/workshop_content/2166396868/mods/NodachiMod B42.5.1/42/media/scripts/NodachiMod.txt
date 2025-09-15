@@ -1,0 +1,99 @@
+/* Made by SmokeAnDrink */
+
+/* Tested for BUILD 42.1.1 */
+
+module NodachiMod{
+
+	imports{
+		Base,
+	}
+	
+	item NodachiMod{
+		DisplayName = Nodachi,
+		DisplayCategory = Weapon,
+		Type = Weapon,
+		Weight = 3,
+		Icon = Katana,
+		AttachmentType = BigBlade,
+		BaseSpeed = 1,
+		BreakSound = KatanaBreak,
+		Categories = LongBlade,
+		ConditionLowerChanceOneIn = 15,
+		ConditionMax = 20,
+		CritDmgMultiplier = 6,
+		/* CritDmgMultiplier = 10,*/ /*commented out conflicting values */
+		CriticalChance = 50,
+		/*CriticalChance = 30,*/
+		DamageCategory = Slash,
+		DamageMakeHole = TRUE,
+		DoorDamage = 10,
+		DoorHitSound = KatanaHit,
+		DropSound = KatanaDrop,
+		HitAngleMod = -30,
+		HitFloorSound = KatanaHit,
+		HitSound = KatanaHit,
+		ImpactSound = KatanaHit,
+		KnockBackOnNoDeath = TRUE,
+		KnockdownMod = 0,
+		MaxDamage = 9,
+		MaxHitCount = 3,
+		MaxRange = 1.6,
+		MinAngle = 0.8,
+		MinDamage = 9,
+		MinRange = 0.61,
+		MinimumSwingTime = 4,
+		PushBackMod = 0.5,
+		RunAnim = Run_Weapon2,
+		SubCategory = Swinging,
+		SwingAmountBeforeImpact = 0.04,
+		SwingAnim = Bat,
+		SwingSound = KatanaSwing,
+		SwingTime = 4,
+		Tags = IgnoreZombieDensity;HasMetal;FullBlade;Sharpenable;KillAnimal;CutPlant;SmeltableIronLarge,
+		TreeDamage = 5,
+		TwoHandWeapon = TRUE,
+		WeaponLength = 0.6,
+		WeaponSprite = NodachiMod,
+        Sharpness = 1.0,
+        OnBreak = OnBreak.Katana,
+    }
+}
+
+module Base{
+	model NodachiMod{
+		mesh = weapons/2Handed/NodachiMod,
+		texture = weapons/2Handed/nodachi_diffuse,	
+		attachment world{
+			offset = -0.07 0.1 0.01,
+			rotate = 180.0000 0.0000 0.0000,
+		}
+	}
+}
+
+module NodachiMod{
+	
+	imports{
+		Base,
+	}
+	
+	craftRecipe Nodachi{
+		time = 250,
+		needTobeLearn = false,
+		timedAction = Making,
+		SkillRequired = Blacksmith:9,
+		xpAward = Blacksmith:200,
+		tags = AdvancedForge,
+		category = Blade,
+		inputs{
+			item 1 tags[Charcoal],
+			item 1 tags[BarStock],
+			item 1 tags[SmithingHammer] mode:keep flags[Prop1],
+			item 1 tags[Tongs] mode:keep flags[Prop2],
+			item 1 tags[Whetstone;File] mode:keep,
+		}
+		outputs{
+			item 1 NodachiMod.NodachiMod,
+		}
+	}
+
+}
