@@ -1,0 +1,228 @@
+module Base
+{
+
+	model 80manKat1Roofrack0
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|MAN_roofrack,
+		texture = Vehicles/Vehicles_80manKat1_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 80manKat1GasCan0
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|TIS_GasCan0,
+		texture = Vehicles/Items_GasCan,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 80manKat1Generator
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|TIS_Generator,
+		texture = Vehicles/Items_Generator,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 80manKat1Tent
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|MAN_tentTarp,
+		texture = Vehicles/Vehicles_80manKat1_Flatbed,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle MAN80Roofrack
+	{
+		part MAN80Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 80manKat1Roofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.80manKat1Roofrack,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MAN80.InstallComplete.Roofrack,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = DAMN.UninstallTest.Default,
+					complete = MAN80.UninstallComplete.Roofrack,
+					requireEmpty = true,
+					requireUninstalled = MAN80GasCan0;DAMNGenerator;DAMNTent,
+            		}
+
+            lua
+            	{
+					create = MAN80.Create.Roofrack,
+					init = MAN80.Init.Roofrack,
+				}
+		}
+
+		part MAN80GasCan0
+        	{
+				model gascan0
+				{
+                file = 80manKat1GasCan0,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = Base.PetrolCan,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = MAN80Roofrack,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part DAMNGenerator
+        	{
+				model GenX
+				{
+                file = 80manKat1Generator,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = Base.Generator;Base.Generator_Old;Base.Generator_Yellow;Base.Generator_Blue,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = MAN80Roofrack,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part DAMNTent
+        	{
+				model Tentyyy
+				{
+                file = 80manKat1Tent,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = Base.HideTent_Packed;Base.ImprovisedTentKit_Packed;Base.CampingTentKit2_Packed,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = MAN80Roofrack,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+	}
+}
+

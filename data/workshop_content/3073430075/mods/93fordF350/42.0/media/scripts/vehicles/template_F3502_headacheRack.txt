@@ -1,0 +1,199 @@
+module Base
+{
+	model 93fordF350Rack0
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_toolbox_body,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93fordF350Rack1
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_toolbox_interior,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle F3502TruckBedAddonsON
+	{
+		part F3502HeadacheRack
+		{
+			model F3502AckAckAck0
+			{
+				file = 93fordF350Rack0,
+			}
+
+			model F3502AckAckAck1
+			{
+				file = 93fordF350Rack1,
+			}
+		
+			category = bodywork,
+			area = Toolbox,
+			itemType = Base.93fordF350Toolbox,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+            durability = 5,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = F3502.ContainerAccess.Toolbox,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+				requireInstalled = WindshieldRear,
+                requireUninstalled = F3502TruckbedCover,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireEmpty = true,
+			}
+			lua
+            {
+                create = Vehicles.Create.Default,
+            }
+		}
+	}
+
+	template vehicle F3502TruckBedAddonsOFF
+	{
+		part F3502HeadacheRack
+		{
+			model F3502AckAckAck0
+			{
+				file = 93fordF350Rack0,
+			}
+
+			model F3502AckAckAck1
+			{
+				file = 93fordF350Rack1,
+			}
+		
+			category = bodywork,
+			area = Toolbox,
+			itemType = Base.93fordF350Toolbox,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+            durability = 5,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = F3502.ContainerAccess.Toolbox,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+				requireInstalled = WindshieldRear,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireEmpty = true,
+			}
+			lua
+            {
+                create = DAMN.Create.Blank,
+            }
+		}
+	}
+
+    template vehicle F2502TruckBedAddonsOFF
+	{
+        template! = F3502TruckBedAddonsOFF,
+
+		part F3502HeadacheRack
+		{
+			model F3502AckAckAck0
+			{
+				file = 93fordF350Rack0,
+                offset = 0.0000 0.0000 0.8500,
+			}
+
+			model F3502AckAckAck1
+			{
+				file = 93fordF350Rack1,
+                offset = 0.0000 0.0000 0.8500,
+			}
+        }
+    }
+
+    template vehicle F1502TruckBedAddonsOFF
+	{
+        template! = F3502TruckBedAddonsOFF,
+
+		part F3502HeadacheRack
+		{
+			model F3502AckAckAck0
+			{
+				file = 93fordF350Rack0,
+                offset = 0.0000 0.0000 0.8500,
+			}
+
+			model F3502AckAckAck1
+			{
+				file = 93fordF350Rack1,
+                offset = 0.0000 0.0000 0.8500,
+			}
+        }
+    }
+}
+

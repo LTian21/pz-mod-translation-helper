@@ -1,0 +1,172 @@
+module Base
+{
+
+	model 93chevySilveradoWheelL
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Wheels|sil93_tire,
+		texture = vehicles/Vehicles_93chevySilverado_Wheel3,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 93chevySilveradoWheelR
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Wheels|sil93_tire,
+		texture = vehicles/Vehicles_93chevySilverado_Wheel3,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 93chevySilveradoWheelsL
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Wheels|sil93_tires,
+		texture = vehicles/Vehicles_93chevySilverado_Wheel3,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 93chevySilveradoWheelsR
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Wheels|sil93_tires,
+		texture = vehicles/Vehicles_93chevySilverado_Wheel3,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle SIL93DuallyTires
+	{
+		part TireFrontLeft
+		{
+            model chevyDuallyTireFL
+			{
+				file = 93chevySilveradoWheelL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+            itemType = Base.93chevyK3500Tire2,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model chevyDuallyTireFR
+			{
+				file = 93chevySilveradoWheelR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+            itemType = Base.93chevyK3500Tire2,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model chevyDuallyTireRL
+			{
+				file = 93chevySilveradoWheelsL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+            itemType = Base.93chevyK3500DoubleTires2,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+            model chevyDuallyTireRR
+			{
+				file = 93chevySilveradoWheelsR,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+            itemType = Base.93chevyK3500DoubleTires2,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+	}
+}
+

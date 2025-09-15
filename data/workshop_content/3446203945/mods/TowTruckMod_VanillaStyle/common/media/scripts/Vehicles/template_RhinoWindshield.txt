@@ -1,0 +1,109 @@
+module Base
+{	
+	template vehicle RhinoWindshield
+	{
+		part Windshield
+        {
+            window
+            {
+                openable = false,
+            }		
+            area = Engine,
+            category = bodywork,
+            itemType = Base.Windshield,
+            mechanicRequireKey = true,			
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Basic Mechanics,
+				requireUninstalled = PU_F_Window_ChevalierRhino_Light; PU_F_Window_ChevalierRhino_Heavy,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+		part WindshieldRear
+		{
+			window
+			{
+				openable = false,
+			}			
+			area = TruckBed,
+            category = bodywork,
+            itemType = Base.RearWindshield,
+            mechanicRequireKey = true,			
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 500,
+                  skills = Mechanics:5,
+                  recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+ 						equip = primary,
+                   }
+                }
+                time = 500,
+                skills = Mechanics:5,
+                recipes = Basic Mechanics,
+				requireUninstalled = PU_R_Window_ChevalierRhino_Light; PU_R_Window_ChevalierRhino_Heavy,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+	    }
+	}
+}

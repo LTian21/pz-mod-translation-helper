@@ -1,0 +1,64 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WhiteWindow
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= White Window,
+			Icon		= fixtures_windows_01_25,
+		}
+	}
+
+    entity WhiteWindow
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WhiteWindow,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            needWindowFrame = true,
+            OnCreate = BuildRecipeCode.windowGlass.OnCreate,
+
+            face W
+            {
+                layer
+                {
+                    row = fixtures_windows_01_24,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_windows_01_25,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:15,
+            category      = Windows,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_windowsDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 2 [Base.GlassPanel],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

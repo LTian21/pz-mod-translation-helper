@@ -1,0 +1,129 @@
+module Base
+{
+
+	model 78amgeneralM35A2window_fl
+	{
+		mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_window_left,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_left_bone 1.0,
+	}
+
+	model 78amgeneralM35A2window_fr
+	{
+		mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_window_right,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_right_bone 1.0,
+	}
+
+	template vehicle M35A2Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 78amgeneralM35A2window_fl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			category = door,
+			area = SeatFrontLeft,
+			itemType = Base.M35A2SideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = M35A2DoorLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 78amgeneralM35A2window_fr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			category = door,
+			area = SeatFrontRight,
+			itemType = Base.M35A2SideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = M35A2DoorRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			mechanicRequireKey = true,
+            durability = 2,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 750,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 650,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}

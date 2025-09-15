@@ -1,0 +1,87 @@
+module Base
+{
+
+	model 70barracudaspare
+	{
+		mesh = vehicles/Vehicles_70barracuda_Body|cuda_tire_spare,
+		texture = vehicles/Vehicles_70barracuda_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	
+	template vehicle CUDASpareTires
+	{
+		part DAMNSpareTire
+        	{
+
+			model CUDASpareTire0
+				{
+                		file = 70barracudaspare,
+				}
+			model CUDASpareTire1
+				{
+                		file = 70barracudaspare,
+				}
+			model CUDASpareTire2
+				{
+                		file = 70barracudaspare,
+				}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.CUDAtire;Base.DodgeRTtire;Base.CamaroSStire,
+			mechanicRequireKey = true,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CUDA.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = CUDA.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = CUDA.Create.SpareTire,
+				init = CUDA.Init.SpareTire,
+				}
+		}
+	}
+}
+

@@ -1,0 +1,167 @@
+module Base
+{
+	model 04vwTouranfrontBumper0
+	{
+		mesh = vehicles/Vehicles_04vwTouran_Body|04touran_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 04vwTouranfrontBumperA
+	{
+		mesh = vehicles/Vehicles_04vwTouran_Body|04touran_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 04vwTouranfrontBullbarA
+	{
+		mesh = vehicles/Vehicles_04vwTouran_Body|04touran_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 04vwTouranrearBumper0
+	{
+		mesh = vehicles/Vehicles_04vwTouran_Body|04touran_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle TOU04Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 04vwTouranfrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 04vwTouranfrontBumperA,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 04vwTouranfrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.04vwTouranBumperFront0;Base.04vwTouranBumperFrontA;Base.04vwTouranBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TOU04.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = TOU04.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = TOU04.Create.FrontBumper,
+					init = TOU04.Init.FrontBumper,
+					}
+		}
+
+        part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 04vwTouranrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.04vwTouranBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TOU04.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = TOU04.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = TOU04.Create.RearBumper,
+					init = TOU04.Init.RearBumper,
+					}
+		}
+	}
+}

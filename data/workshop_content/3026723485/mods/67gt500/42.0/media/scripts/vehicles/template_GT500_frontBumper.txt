@@ -1,0 +1,208 @@
+module Base
+{
+	model 67gt500efrontBumper0
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500e_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 67gt500efrontBumper1
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500e_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 67gt500sfrontBumper0
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500s_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 67gt500sfrontBumper1
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500s_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 67gt500frontBumpera
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle GT500sFrontBumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0s
+				{
+                		file = 67gt500sfrontBumper0,
+				}
+
+			model FrontBumperAs
+				{
+                		file = 67gt500sfrontBumper1,
+				}
+
+			model FrontBumper0e
+				{
+                		file = 67gt500efrontBumper0,
+				}
+
+			model FrontBumperAe
+				{
+                		file = 67gt500efrontBumper1,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 67gt500frontBumpera,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.67gt500FrontBumper0;Base.67gt500FrontBumperA;Base.67gt500eFrontBumper0;Base.67gt500eFrontBumperA;Base.67gt500FrontBullbar,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GT500.InstallComplete.FrontBumperS,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = GT500.UninstallComplete.FrontBumperS,
+            		}
+
+            		lua
+            		{
+					create = GT500.Create.FrontBumperS,
+					init = GT500.Init.FrontBumperS,
+					}
+		}
+	}
+
+	template vehicle GT500eFrontBumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0e
+				{
+                		file = 67gt500efrontBumper0,
+				}
+
+			model FrontBumperAe
+				{
+                		file = 67gt500efrontBumper1,
+				}
+
+			model FrontBumper0s
+				{
+                		file = 67gt500sfrontBumper0,
+				}
+
+			model FrontBumperAs
+				{
+                		file = 67gt500sfrontBumper1,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 67gt500frontBumpera,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.67gt500eFrontBumper0;Base.67gt500eFrontBumperA;Base.67gt500FrontBumper0;Base.67gt500FrontBumperA;Base.67gt500FrontBullbar,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GT500.InstallComplete.FrontBumperE,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = GT500.UninstallComplete.FrontBumperE,
+            		}
+
+            		lua
+            		{
+					create = GT500.Create.FrontBumperE,
+					init = GT500.Init.FrontBumperE,
+					}
+		}
+	}
+		
+}

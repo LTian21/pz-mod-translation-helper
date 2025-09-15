@@ -1,0 +1,2097 @@
+module SupportCorps
+{
+
+    imports
+    {
+    Base,
+    }
+					
+	craftRecipe PrepareRation
+	{
+	Time = 25,
+	timedAction = UnPackSmallBag,
+	Tags = InHandCraft;Cooking;CanBeDoneInDark,
+	category = Cooking,
+	xpAward = Cooking:1,
+	OnCreate = Recipe.OnCreate.OnCreateRation,
+
+	inputs
+	{
+		item 1 [SupportCorps.RationMREMCW;SupportCorps.RationMRECIV;SupportCorps.RationMRECamping;SupportCorps.RationMRERelief;] mappers[RationType],
+	}
+
+	outputs
+	{
+		item 1 mapper:RationType,
+		item 1 SupportCorps.InstantJuicePacket_Ground,
+	}
+
+	itemMapper RationType
+	{
+		SupportCorps.RationMREMCW_Open 		= SupportCorps.RationMREMCW,
+		SupportCorps.RationMRECIV_Open		= SupportCorps.RationMRECIV,
+		SupportCorps.RationMRECamping_Open	= SupportCorps.RationMRECamping,
+		SupportCorps.RationMRERelief_Open	= SupportCorps.RationMRERelief,
+	}
+	}
+				
+	craftRecipe PrepareFirstStrikeRation
+	{
+	Time = 25,
+	timedAction = UnPackSmallBag,
+	Tags = InHandCraft;Cooking;CanBeDoneInDark,
+	category = Cooking,
+	xpAward = Cooking:1,
+	OnCreate = Recipe.OnCreate.OnCreateRation,
+
+	inputs
+	{
+		item 1 [SupportCorps.RationMREFSR;],
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.RationMREFSR_Open ,
+		item 1 SupportCorps.InstantJuicePacket_Ground,
+		item 1 SupportCorps.FirstStrikeBar,
+	}
+
+	}
+
+					craftRecipe PackBoxOfRations
+					{
+
+	Time 		= 100,
+	timedAction 	= PackingBox,
+	Tags 		= InHandCraft,
+	category 	= Packing,
+
+	inputs
+	{
+		item 10 [SupportCorps.RationMREMCW;SupportCorps.RationMREFSR;SupportCorps.RationMRECIV;SupportCorps.RationMRECamping;] mappers[RationType],
+
+	}
+
+	outputs
+	{
+		item 1 mapper:RationType,
+	}
+
+	itemMapper RationType
+	{
+		SupportCorps.RationMREMCW_Box = SupportCorps.RationMREMCW,
+		SupportCorps.RationMREFSR_Box = SupportCorps.RationMREFSR,
+		SupportCorps.RationMRECIV_Box = SupportCorps.RationMRECIV,
+		SupportCorps.RationMRECamping_Box = SupportCorps.RationMRECamping,	
+	}
+
+	}
+
+					craftRecipe OpenBoxOfRations
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.RationMREMCW_Box;SupportCorps.RationMREFSR_Box;SupportCorps.RationMRECIV_Box;SupportCorps.RationMRECamping_Box;] mappers[RationType],
+
+	}
+
+	outputs
+	{
+		item 10 mapper:RationType,
+	}
+
+	itemMapper RationType
+	{
+		SupportCorps.RationMREMCW			= SupportCorps.RationMREMCW_Box,
+		SupportCorps.RationMREFSR			= SupportCorps.RationMREFSR_Box,
+		SupportCorps.RationMRECIV 			= SupportCorps.RationMRECIV_Box,
+		SupportCorps.RationMRECamping 			= SupportCorps.RationMRECamping_Box,
+    	}
+
+	}				
+		
+	craftRecipe OpenFARRation
+	{
+	Time = 25,
+	timedAction = UnPackSmallBag,
+	Tags = InHandCraft;CanBeDoneInDark,
+	category = Medical,
+	xpAward = Doctor:1,
+
+	inputs
+	{
+		item 1 [SupportCorps.RationFAR;],
+	}
+
+	outputs
+	{
+		item 2 Base.AlcoholBandage,
+		item 4 Base.Bandaid,
+		item 1 Base.Antibiotics,
+		item 1 Base.Pills,
+		item 2 Base.SutureNeedle,
+		item 1 Base.Tweezers,
+		item 1 Base.Disinfectant,
+		item 2 Base.AlcoholWipes,
+		item 1 Base.AlcoholedCottonBalls,
+		item 1 Base.Splint,
+		item 1 Base.ScissorsBluntMedical,
+		item 1 SupportCorps.RationFARPackage,
+	}
+
+	}
+
+					craftRecipe PackBoxOfFARRations
+					{
+
+	Time 		= 100,
+	timedAction 	= PackingBox,
+	Tags 		= InHandCraft,
+	category 	= Packing,
+
+	inputs
+	{
+		item 6 [SupportCorps.RationFAR;],
+
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.RationFARBox_Ground,
+	}
+
+	}
+
+					craftRecipe OpenBoxOfFARRations
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.RationFARBox_Ground;],
+
+	}
+
+	outputs
+	{
+		item 6 SupportCorps.RationFAR,
+	}
+
+	}				
+
+					craftRecipe OpenBoxOfInstantJuice
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.InstantJuiceBox_Ground;],
+
+	}
+
+	outputs
+	{
+		item 20 SupportCorps.InstantJuicePacket_Ground,
+	}
+
+	}				
+
+					craftRecipe OpenEngineerBox
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.MilitaryEngineerBox_Ground;],
+
+	}
+
+	outputs
+	{
+		item 2 Base.BlowTorch,
+		item 4 Base.WeldingRods,
+		item 1 Base.Saw,
+		item 1 Base.BallPeenHammer,
+		item 1 Base.Hammer,
+		item 1 Base.PipeWrench,
+		item 1 Base.Wrench,
+		item 2 Base.Screwdriver,
+		item 1 SupportCorps.MilitaryWelderMask,
+		item 1 Base.Vest_HighViz,
+		item 1 Base.Hat_EarMuff_Protectors,
+		item 1 Base.Hat_HardHat,
+		item 4 Base.NailsBox,
+		item 1 Base.ScrewsBox,
+		item 1 Base.Sledgehammer,
+	}		
+		
+	}
+
+					craftRecipe OpenFishermanBox
+					{
+
+	Time 		= 80,
+	timedAction 	= OpenTinCan,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.FishermanBox_Ground;],
+
+	}
+
+	outputs
+	{
+		item 2 Base.FishingRod,
+		item 3 Base.PremiumFishingLine,
+		item 1 Base.FishingHookBox,
+		item 2 Base.FishingNet,
+		item 2 Base.JigLure,
+		item 2 Base.Bobber,
+		item 1 Base.KnifeFillet,
+		item 2 SupportCorps.CanOfWorms_Ground,
+	}
+
+	}				
+
+					craftRecipe OpenMessKit
+					{
+
+	Time 		= 80,
+	timedAction 	= OpenTinCan,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.MessKitBox_Ground;],
+
+	}
+
+	outputs
+	{
+		item 2 Base.Bowl,
+		item 2 Base.Plate,
+		item 1 Base.Mugl,
+		item 1 Base.Pot,
+		item 1 Base.MetalCup,
+		item 1 Base.RoastingPan,
+		item 1 Base.Kettle,
+		item 1 Base.MortarPestle,
+		item 1 Base.Pan,
+		item 1 Base.Saucepan,
+		item 1 Base.KitchenKnife,
+		item 1 Base.WoodenSpoon,
+		item 2 Base.PlasticFork,
+		item 2 Base.PlasticKnife,
+		item 2 Base.PlasticSpoon,
+		item 2 Base.DrinkingGlass,
+	}
+
+	}				
+
+					craftRecipe UnfoldChair
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackSmallBag,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.FoldedChair;],
+
+	}
+
+	outputs
+	{
+		item 1 Base.Mov_FoldingChair,
+	}
+
+	}				
+
+					craftRecipe InflateMattress
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackSack,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.InflateMattress;],
+
+	}
+
+	outputs
+	{
+		item 1 Base.Mattress,
+	}
+
+	}				
+
+					craftRecipe FoldChair
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackSmallBag,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [Base.Mov_FoldingChair;],
+
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.FoldedChair,
+	}
+
+	}				
+
+					craftRecipe DeflateMattress
+					{
+
+	Time 		= 80,
+	timedAction 	= PutInBag,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [Base.Mattress;],
+
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.InflateMattress,
+	}
+
+	}				
+
+
+					craftRecipe PackBoxOfSleepingPills
+					{
+
+	Time 		= 100,
+	timedAction 	= PackingBox,
+	Tags 		= InHandCraft,
+	category 	= Packing,
+
+	inputs
+	{
+		item 60 [Base.PillsSleepingTablets;],
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.SleepingPillsBox,
+	}
+
+	}
+
+
+					craftRecipe OpenBoxOfSleepingPills
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.SleepingPillsBox;],
+	}
+
+	outputs
+	{
+		item 6 Base.PillsSleepingTablets,
+	}
+
+	}				
+
+					craftRecipe PackBoxOfPainkillers
+					{
+
+	Time 		= 100,
+	timedAction 	= PackingBox,
+	Tags 		= InHandCraft,
+	category 	= Packing,
+
+	inputs
+	{
+		item 60 [Base.Pills;],
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.PainkillersBox,
+	}
+
+	}
+
+
+					craftRecipe OpenBoxOfPainkillers
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.PainkillersBox;],
+	}
+
+	outputs
+	{
+		item 6 Base.Pills,
+	}
+
+	}				
+
+					craftRecipe PackBoxOfColdaFluPills
+					{
+
+	Time 		= 100,
+	timedAction 	= PackingBox,
+	Tags 		= InHandCraft,
+	category 	= Packing,
+
+	inputs
+	{
+		item 60 [SupportCorps.ColdaFluPills;],
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.ColdaFluPillsBox,
+	}
+
+	}
+
+					craftRecipe OpenBoxOfColdaFluPills
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.ColdaFluPillsBox;],
+
+	}
+
+	outputs
+	{
+		item 6 SupportCorps.ColdaFluPills,
+	}
+
+	}				
+
+					craftRecipe OpenRoadsideKit
+					{
+
+	Time 		= 80,
+	timedAction 	= OpenTinCan,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.RoadsideKit;],
+
+	}
+
+	outputs
+	{
+		item 1 Base.Jack,
+		item 1 Base.LugWrench,
+		item 1 Base.TirePump,
+		item 1 Base.CarBatteryCharger,
+		item 1 Base.Screwdriver,
+		item 1 Base.PetrolCan,
+		item 2 Base.Mov_RoadCone,
+		item 1 Base.Vest_HighViz,
+		item 1 SupportCorps.RationFAR,
+		item 1 Base.Ratchet,
+		item 1 Base.Wrench,
+		item 1 Base.HandTorch,
+		item 2 Base.Battery,
+	}
+
+	}				
+
+					craftRecipe AssembleSurvivalGun
+					{
+
+	Time 		= 80,
+	timedAction 	= OpenTinCan,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.DismantledGunCase;],
+
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.SurvivalRifle,
+		item 1 Base.Bag_ProtectiveCase,
+	}
+
+	}				
+
+					craftRecipe DisassembleSurvivalGun
+					{
+
+	Time 		= 80,
+	timedAction 	= OpenTinCan,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.SurvivalRifle;],
+		item 1 [Base.Bag_ProtectiveCase;],
+
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.DismantledGunCase,
+	}
+
+	}				
+
+					craftRecipe OpenBBQCoalPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.BBQCoalPack;],
+
+	}
+
+	outputs
+	{
+		item 6 SupportCorps.BBQCoal,
+	}
+
+	}				
+
+					craftRecipe OpenCanOfWorms
+					{
+
+	Time 		= 80,
+	timedAction 	= OpenTinCan,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Survivalist,
+
+	inputs
+	{
+		item 1 [SupportCorps.CanOfWorms_Ground;],
+
+	}
+
+	outputs
+	{
+		item 6 Base.Worm,
+	}
+
+	}
+craftRecipe SewCamoTShirt
+{
+    Time = 50,
+    timedAction = SewingCloth,
+    Tags = InHandCraft;CanBeDoneInDark,
+    category = Tailoring,
+    xpAward = Tailoring:5,
+    SkillRequired = Tailoring:1,
+    inputs
+    {
+        item 1 [SupportCorps.FabricRoll_BlackCamo;SupportCorps.FabricRoll_DesertCamo;SupportCorps.FabricRoll_ForeignCamo;SupportCorps.FabricRoll_GreenCamo;SupportCorps.FabricRoll_HuntingCamo;SupportCorps.FabricRoll_MilGreen;SupportCorps.FabricRoll_SnowCamo;SupportCorps.FabricRoll_TigerStripeCamo;SupportCorps.FabricRoll_UrbanCamo;] mappers[CamoTShirtType],
+        item 1 [Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+        item 5 [Base.Thread;],
+        item 1 [SupportCorps.SewingMachine;] mode:keep,
+    }
+    outputs
+    {
+        item 1 mapper:CamoTShirtType,
+    }
+    itemMapper CamoTShirtType
+    {
+        SupportCorps.Tshirt_CamoBlack = SupportCorps.FabricRoll_BlackCamo,
+        Base.Tshirt_CamoDesert = SupportCorps.FabricRoll_DesertCamo,
+        Base.Tshirt_CamoMilius = SupportCorps.FabricRoll_ForeignCamo,
+        Base.Tshirt_CamoGreen = SupportCorps.FabricRoll_GreenCamo,
+        Base.Tshirt_HuntingCamo = SupportCorps.FabricRoll_HuntingCamo,
+        Base.Tshirt_ArmyGreen = SupportCorps.FabricRoll_MilGreen,
+        SupportCorps.Tshirt_CamoSnow = SupportCorps.FabricRoll_SnowCamo,
+        Base.Tshirt_CamoTigerStripe = SupportCorps.FabricRoll_TigerStripeCamo,
+        Base.Tshirt_CamoUrban = SupportCorps.FabricRoll_UrbanCamo,
+    }
+}
+craftRecipe SewCamoShorts
+{
+    Time = 50,
+    timedAction = SewingCloth,
+    Tags = InHandCraft;CanBeDoneInDark,
+    category = Tailoring,
+    xpAward = Tailoring:5,
+    SkillRequired = Tailoring:1,
+    inputs
+    {
+        item 1 [SupportCorps.FabricRoll_DesertCamo;SupportCorps.FabricRoll_ForeignCamo;SupportCorps.FabricRoll_GreenCamo;SupportCorps.FabricRoll_TigerStripeCamo;SupportCorps.FabricRoll_UrbanCamo;] mappers[CamoShortsType],
+        item 1 [Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+        item 3 [Base.Thread;],
+        item 1 [SupportCorps.SewingMachine;] mode:keep,
+    }
+    outputs
+    {
+        item 1 mapper:CamoShortsType,
+    }
+    itemMapper CamoShortsType
+    {
+        Base.Shorts_CamoDesertNewLong = SupportCorps.FabricRoll_DesertCamo,
+        Base.Shorts_CamoMiliusLong = SupportCorps.FabricRoll_ForeignCamo,
+        Base.Shorts_CamoGreenLong = SupportCorps.FabricRoll_GreenCamo,
+        Base.Shorts_CamoTigerStripeLong = SupportCorps.FabricRoll_TigerStripeCamo,
+        Base.Shorts_CamoUrbanLong = SupportCorps.FabricRoll_UrbanCamo,
+    }
+}
+craftRecipe SewCamoLongTShirt
+{
+    Time = 50,
+    timedAction = SewingCloth,
+    Tags = InHandCraft;CanBeDoneInDark,
+    category = Tailoring,
+    xpAward = Tailoring:5,
+    SkillRequired = Tailoring:1,
+    inputs
+    {
+        item 1 [SupportCorps.FabricRoll_BlackCamo;SupportCorps.FabricRoll_HuntingCamo;SupportCorps.FabricRoll_SnowCamo;] mappers[CamoLongType],
+        item 1 [Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+        item 5 [Base.Thread;],
+        item 1 [SupportCorps.SewingMachine;] mode:keep,
+    }
+    outputs
+    {
+        item 1 mapper:CamoLongType,
+    }
+    itemMapper CamoLongType
+    {
+        SupportCorps.Tshirt_LongSleeve_BlackCamo = SupportCorps.FabricRoll_BlackCamo,
+        Base.Tshirt_LongSleeve_HuntingCamo = SupportCorps.FabricRoll_HuntingCamo,
+        SupportCorps.Tshirt_LongSleeve_SnowCamo = SupportCorps.FabricRoll_SnowCamo,
+    }
+}
+craftRecipe SewCamoParka
+{
+    Time = 50,
+    timedAction = SewingCloth,
+    Tags = InHandCraft;CanBeDoneInDark,
+    category = Tailoring,
+    xpAward = Tailoring:15,
+    SkillRequired = Tailoring:4,
+    inputs
+    {
+        item 2 [SupportCorps.FabricRoll_BlackCamo;SupportCorps.FabricRoll_DesertCamo;SupportCorps.FabricRoll_ForeignCamo;SupportCorps.FabricRoll_GreenCamo;SupportCorps.FabricRoll_HuntingCamo;SupportCorps.FabricRoll_MilGreen;SupportCorps.FabricRoll_SnowCamo;SupportCorps.FabricRoll_TigerStripeCamo;SupportCorps.FabricRoll_UrbanCamo;] mappers[CamoParkaType],
+        item 1 [Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+        item 7 [Base.Thread;],
+        item 1 [SupportCorps.SewingMachine;] mode:keep,
+    }
+    outputs
+    {
+        item 1 mapper:CamoParkaType,
+    }
+    itemMapper CamoParkaType
+    {
+        SupportCorps.Parka_BlackCamoDOWN = SupportCorps.FabricRoll_BlackCamo,
+        SupportCorps.Parka_DesertCamoDOWN = SupportCorps.FabricRoll_DesertCamo,
+        SupportCorps.Parka_ForeignCamoDOWN = SupportCorps.FabricRoll_ForeignCamo,
+        SupportCorps.Parka_GreenCamoDOWN = SupportCorps.FabricRoll_GreenCamo,
+        SupportCorps.Parka_HuntingCamoDOWN = SupportCorps.FabricRoll_HuntingCamo,
+        SupportCorps.Parka_MilGreenDOWN = SupportCorps.FabricRoll_MilGreen,
+        SupportCorps.Parka_SnowCamoDOWN = SupportCorps.FabricRoll_SnowCamo,
+        SupportCorps.Parka_TigerStripeCamoDOWN = SupportCorps.FabricRoll_TigerStripeCamo,
+        SupportCorps.Parka_UrbanCamoDOWN = SupportCorps.FabricRoll_UrbanCamo,
+    }
+}
+craftRecipe SewCamoHoodie
+{
+    Time = 50,
+    timedAction = SewingCloth,
+    Tags = InHandCraft;CanBeDoneInDark,
+    category = Tailoring,
+    xpAward = Tailoring:10,
+    SkillRequired = Tailoring:3,
+    inputs
+    {
+        item 1 [SupportCorps.FabricRoll_BlackCamo;SupportCorps.FabricRoll_DesertCamo;SupportCorps.FabricRoll_ForeignCamo;SupportCorps.FabricRoll_GreenCamo;SupportCorps.FabricRoll_HuntingCamo;SupportCorps.FabricRoll_MilGreen;SupportCorps.FabricRoll_SnowCamo;SupportCorps.FabricRoll_TigerStripeCamo;SupportCorps.FabricRoll_UrbanCamo;] mappers[CamoHoodieType],
+        item 1 [Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+        item 7 [Base.Thread;],
+        item 1 [SupportCorps.SewingMachine;] mode:keep,
+    }
+    outputs
+    {
+        item 1 mapper:CamoHoodieType,
+    }
+    itemMapper CamoHoodieType
+    {
+        SupportCorps.Hoodie_BlackCamo_DOWN = SupportCorps.FabricRoll_BlackCamo,
+        SupportCorps.Hoodie_DesertCamo_DOWN = SupportCorps.FabricRoll_DesertCamo,
+        SupportCorps.Hoodie_ForeignCamo_DOWN = SupportCorps.FabricRoll_ForeignCamo,
+        SupportCorps.Hoodie_GreenCamo_DOWN = SupportCorps.FabricRoll_GreenCamo,
+        Base.Hoodie_HuntingCamo_DOWN = SupportCorps.FabricRoll_HuntingCamo,
+        SupportCorps.Hoodie_MilGreen_DOWN = SupportCorps.FabricRoll_MilGreen,
+        SupportCorps.Hoodie_SnowCamo_DOWN = SupportCorps.FabricRoll_SnowCamo,
+        SupportCorps.Hoodie_TigerStripeCamo_DOWN = SupportCorps.FabricRoll_TigerStripeCamo,
+        SupportCorps.Hoodie_UrbanCamo_DOWN = SupportCorps.FabricRoll_UrbanCamo,
+    }
+}
+craftRecipe SewCamoBeanie
+{
+    Time = 50,
+    timedAction = SewingCloth,
+    Tags = InHandCraft;CanBeDoneInDark,
+    category = Tailoring,
+    xpAward = Tailoring:5,
+    SkillRequired = Tailoring:1,
+    inputs
+    {
+        item 1 [SupportCorps.FabricRoll_BlackCamo;SupportCorps.FabricRoll_DesertCamo;SupportCorps.FabricRoll_ForeignCamo;SupportCorps.FabricRoll_GreenCamo;SupportCorps.FabricRoll_HuntingCamo;SupportCorps.FabricRoll_MilGreen;SupportCorps.FabricRoll_SnowCamo;SupportCorps.FabricRoll_TigerStripeCamo;SupportCorps.FabricRoll_UrbanCamo;] mappers[CamoBeanieType],
+        item 1 [Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+        item 2 [Base.Thread;],
+        item 1 [SupportCorps.SewingMachine;] mode:keep,
+    }
+    outputs
+    {
+        item 1 mapper:CamoBeanieType,
+    }
+    itemMapper CamoBeanieType
+    {
+        SupportCorps.Hat_BeanyBlackCamo = SupportCorps.FabricRoll_BlackCamo,
+        SupportCorps.Hat_BeanyDesertCamo = SupportCorps.FabricRoll_DesertCamo,
+        SupportCorps.Hat_BeanyForeignCamo = SupportCorps.FabricRoll_ForeignCamo,
+        SupportCorps.Hat_BeanyGreenCamo = SupportCorps.FabricRoll_GreenCamo,
+        SupportCorps.Hat_BeanyHuntingCamo = SupportCorps.FabricRoll_HuntingCamo,
+        SupportCorps.Hat_BeanyMilGreen = SupportCorps.FabricRoll_MilGreen,
+        SupportCorps.Hat_BeanySnowCamo = SupportCorps.FabricRoll_SnowCamo,
+        SupportCorps.Hat_BeanyTigerStripeCamo = SupportCorps.FabricRoll_TigerStripeCamo,
+        SupportCorps.Hat_BeanyUrbanCamo = SupportCorps.FabricRoll_UrbanCamo,
+    }
+}
+craftRecipe SewCamoGloves
+{
+    Time = 50,
+    timedAction = SewingCloth,
+    Tags = InHandCraft;CanBeDoneInDark,
+    category = Tailoring,
+    xpAward = Tailoring:5,
+    SkillRequired = Tailoring:1,
+    inputs
+    {
+        item 1 [SupportCorps.FabricRoll_BlackCamo;SupportCorps.FabricRoll_DesertCamo;SupportCorps.FabricRoll_ForeignCamo;SupportCorps.FabricRoll_GreenCamo;SupportCorps.FabricRoll_HuntingCamo;SupportCorps.FabricRoll_MilGreen;SupportCorps.FabricRoll_SnowCamo;SupportCorps.FabricRoll_TigerStripeCamo;SupportCorps.FabricRoll_UrbanCamo;] mappers[CamoGlovesType],
+        item 1 [Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+        item 2 [Base.Thread;],
+        item 1 [SupportCorps.SewingMachine;] mode:keep,
+    }
+    outputs
+    {
+        item 1 mapper:CamoGlovesType,
+    }
+    itemMapper CamoGlovesType
+    {
+        SupportCorps.Gloves_BlackCamo = SupportCorps.FabricRoll_BlackCamo,
+        SupportCorps.Gloves_DesertCamo = SupportCorps.FabricRoll_DesertCamo,
+        SupportCorps.Gloves_ForeignCamo = SupportCorps.FabricRoll_ForeignCamo,
+        SupportCorps.Gloves_GreenCamo = SupportCorps.FabricRoll_GreenCamo,
+        Base.Gloves_HuntingCamo = SupportCorps.FabricRoll_HuntingCamo,
+        SupportCorps.Gloves_MilGreen = SupportCorps.FabricRoll_MilGreen,
+        SupportCorps.Gloves_SnowCamo = SupportCorps.FabricRoll_SnowCamo,
+        SupportCorps.Gloves_TigerStripeCamo = SupportCorps.FabricRoll_TigerStripeCamo,
+        SupportCorps.Gloves_UrbanCamo = SupportCorps.FabricRoll_UrbanCamo,
+    }
+}
+craftRecipe SewCamoShirt
+{
+    Time = 50,
+    timedAction = SewingCloth,
+    Tags = InHandCraft;CanBeDoneInDark,
+    category = Tailoring,
+    xpAward = Tailoring:5,
+    SkillRequired = Tailoring:1,
+    inputs
+    {
+        item 1 [SupportCorps.FabricRoll_DesertCamo;SupportCorps.FabricRoll_ForeignCamo;SupportCorps.FabricRoll_GreenCamo;SupportCorps.FabricRoll_TigerStripeCamo;SupportCorps.FabricRoll_UrbanCamo;] mappers[CamoShirtType],
+        item 1 [Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+        item 4 [Base.Thread;],
+        item 1 [SupportCorps.SewingMachine;] mode:keep,
+    }
+    outputs
+    {
+        item 1 mapper:CamoShirtType,
+    }
+    itemMapper CamoShirtType
+    {
+        Base.Shirt_CamoDesertNew = SupportCorps.FabricRoll_DesertCamo,
+        Base.Shirt_CamoMilius = SupportCorps.FabricRoll_ForeignCamo,
+        Base.Shirt_CamoGreen = SupportCorps.FabricRoll_GreenCamo,
+        Base.Shirt_CamoTigerStripe = SupportCorps.FabricRoll_TigerStripeCamo,
+        Base.Shirt_CamoUrban = SupportCorps.FabricRoll_UrbanCamo,
+    }
+}
+craftRecipe SewCamoJacket
+{
+    Time = 50,
+    timedAction = SewingCloth,
+    Tags = InHandCraft;CanBeDoneInDark,
+    category = Tailoring,
+    xpAward = Tailoring:5,
+    SkillRequired = Tailoring:1,
+    inputs
+    {
+        item 1 [SupportCorps.FabricRoll_BlackCamo;SupportCorps.FabricRoll_DesertCamo;SupportCorps.FabricRoll_ForeignCamo;SupportCorps.FabricRoll_GreenCamo;SupportCorps.FabricRoll_HuntingCamo;SupportCorps.FabricRoll_MilGreen;SupportCorps.FabricRoll_SnowCamo;SupportCorps.FabricRoll_TigerStripeCamo;SupportCorps.FabricRoll_UrbanCamo;] mappers[CamoJacketType],
+        item 1 [Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+        item 5 [Base.Thread;],
+        item 1 [SupportCorps.SewingMachine;] mode:keep,
+    }
+    outputs
+    {
+        item 1 mapper:CamoJacketType,
+    }
+    itemMapper CamoJacketType
+    {
+        SupportCorps.Jacket_ArmyCamoBlack = SupportCorps.FabricRoll_BlackCamo,
+        Base.Jacket_ArmyCamoDesertNew = SupportCorps.FabricRoll_DesertCamo,
+        Base.Jacket_ArmyCamoMilius = SupportCorps.FabricRoll_ForeignCamo,
+        Base.Jacket_ArmyCamoGreen = SupportCorps.FabricRoll_GreenCamo,
+        Base.Jacket_HuntingCamo = SupportCorps.FabricRoll_HuntingCamo,
+        SupportCorps.Jacket_ArmyCamoSnow = SupportCorps.FabricRoll_SnowCamo,
+        Base.Jacket_ArmyCamoTigerStripe = SupportCorps.FabricRoll_TigerStripeCamo,
+        Base.Jacket_ArmyCamoUrban = SupportCorps.FabricRoll_UrbanCamo,
+    }
+}
+							craftRecipe SewMilitaryBoxer
+					{
+
+	Time 		= 50,
+	timedAction 	= SewingCloth,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Tailoring,
+    	xpAward = Tailoring:5,
+	inputs
+	{
+	item 1 [SupportCorps.FabricRoll_MilGreen;],
+		item 1 [Base.Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+			item 2 [Base.Thread;],
+			item 1 [SupportCorps.SewingMachine;] mode:keep,
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.MilitaryIssueBoxers,
+	}
+
+	}	
+	
+							craftRecipe SewMilitarySocks
+					{
+
+	Time 		= 50,
+	timedAction 	= SewingCloth,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Tailoring,
+    	xpAward = Tailoring:5,
+	inputs
+	{
+	item 1 [SupportCorps.FabricRoll_MilGreen;],
+		item 1 [Base.Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+			item 2 [Base.Thread;],
+			item 1 [SupportCorps.SewingMachine;] mode:keep,
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.MilitaryIssueSocks,
+	}
+
+	}	
+	
+							craftRecipe SewMilitaryUnderwear
+					{
+
+	Time 		= 50,
+	timedAction 	= SewingCloth,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Tailoring,
+    	xpAward = Tailoring:5,
+	inputs
+	{
+	item 1 [SupportCorps.FabricRoll_MilGreen;],
+		item 1 [Base.Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+			item 3 [Base.Thread;],
+			item 1 [SupportCorps.SewingMachine;] mode:keep,
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.MilitaryIssueBra,
+		item 1 SupportCorps.MilitaryIssueUnderpants,
+	}
+
+	}	
+
+craftRecipe SewVestCover
+{
+    Time = 50,
+    timedAction = SewingCloth,
+    Tags = InHandCraft;CanBeDoneInDark,
+    category = Tailoring,
+    xpAward = Tailoring:5,
+    inputs
+    {
+        item 1 [SupportCorps.FabricRoll_BlackCamo;SupportCorps.FabricRoll_DesertCamo;SupportCorps.FabricRoll_ForeignCamo;SupportCorps.FabricRoll_GreenCamo;SupportCorps.FabricRoll_HuntingCamo;SupportCorps.FabricRoll_MilGreen;SupportCorps.FabricRoll_SnowCamo;SupportCorps.FabricRoll_TigerStripeCamo;SupportCorps.FabricRoll_UrbanCamo;] mappers[CamoVestCoverType],
+        item 1 [Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+        item 1 [Base.Thread;],
+        item 1 [SupportCorps.SewingMachine;] mode:keep,
+    }
+    outputs
+    {
+        item 1 mapper:CamoVestCoverType,
+    }
+    itemMapper CamoVestCoverType
+    {
+        SupportCorps.BlackVestCover = SupportCorps.FabricRoll_BlackCamo,
+        SupportCorps.DesertVestCover = SupportCorps.FabricRoll_DesertCamo,
+        SupportCorps.ForeignVestCover = SupportCorps.FabricRoll_ForeignCamo,
+        SupportCorps.GreenVestCover = SupportCorps.FabricRoll_GreenCamo,
+        SupportCorps.HuntingVestCover = SupportCorps.FabricRoll_HuntingCamo,
+        SupportCorps.MilGreenVestCover = SupportCorps.FabricRoll_MilGreen,
+        SupportCorps.SnowVestCover = SupportCorps.FabricRoll_SnowCamo,
+        SupportCorps.TigerStripeVestCover = SupportCorps.FabricRoll_TigerStripeCamo,
+        SupportCorps.UrbanVestCover = SupportCorps.FabricRoll_UrbanCamo,
+    }
+}
+
+craftRecipe SewHelmetCover
+{
+    Time = 50,
+    timedAction = SewingCloth,
+    Tags = InHandCraft;CanBeDoneInDark,
+    category = Tailoring,
+    xpAward = Tailoring:5,
+    inputs
+    {
+        item 1 [SupportCorps.FabricRoll_BlackCamo;SupportCorps.FabricRoll_DesertCamo;SupportCorps.FabricRoll_ForeignCamo;SupportCorps.FabricRoll_GreenCamo;SupportCorps.FabricRoll_HuntingCamo;SupportCorps.FabricRoll_MilGreen;SupportCorps.FabricRoll_SnowCamo;SupportCorps.FabricRoll_TigerStripeCamo;SupportCorps.FabricRoll_UrbanCamo;] mappers[CamoHelmetCoverType],
+        item 1 [Base.ScissorsBluntMedical;Base.Scissors;] mode:keep,
+        item 1 [Base.Thread;],
+        item 1 [SupportCorps.SewingMachine;] mode:keep,
+    }
+    outputs
+    {
+        item 1 mapper:CamoHelmetCoverType,
+    }
+    itemMapper CamoHelmetCoverType
+    {
+        SupportCorps.BlackHelmetCover = SupportCorps.FabricRoll_BlackCamo,
+        SupportCorps.DesertHelmetCover = SupportCorps.FabricRoll_DesertCamo,
+        SupportCorps.ForeignHelmetCover = SupportCorps.FabricRoll_ForeignCamo,
+        SupportCorps.GreenHelmetCover = SupportCorps.FabricRoll_GreenCamo,
+        SupportCorps.HuntingHelmetCover = SupportCorps.FabricRoll_HuntingCamo,
+        SupportCorps.MilGreenHelmetCover = SupportCorps.FabricRoll_MilGreen,
+        SupportCorps.SnowHelmetCover = SupportCorps.FabricRoll_SnowCamo,
+        SupportCorps.TigerStripeHelmetCover = SupportCorps.FabricRoll_TigerStripeCamo,
+        SupportCorps.UrbanHelmetCover = SupportCorps.FabricRoll_UrbanCamo,
+    }
+}
+
+						craftRecipe OpenFirstStrikeBox
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.FirstStrikeBarBox_Ground;],
+
+	}
+
+	outputs
+	{
+		item 8 SupportCorps.FirstStrikeBar,
+	}
+
+	}				
+
+					craftRecipe PackFirstStrikeBox
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 8 [SupportCorps.FirstStrikeBar;],
+
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.FirstStrikeBarBox_Ground,
+	}
+
+	}				
+
+					craftRecipe OpenCanOfPeanuts
+					{
+
+	Time 		= 80,
+	timedAction 	= OpenTinCan,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Survivalist,
+
+	inputs
+	{
+		item 1 [SupportCorps.CanOfPeanuts_Ground;],
+
+	}
+
+	outputs
+	{
+		item 6 Base.Peanuts,
+	}
+
+	}				
+
+					craftRecipe OpenCanOfCarrots
+					{
+
+	Time 		= 80,
+	timedAction 	= OpenTinCan,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Survivalist,
+
+	inputs
+	{
+		item 1 [SupportCorps.CanOfCarrots_Ground;],
+
+	}
+
+	outputs
+	{
+		item 6 Base.Carrots,
+	}
+
+	}
+				
+					craftRecipe OrthopedicCast
+					{
+
+	Time 		= 80,
+	timedAction 	= OpenTinCan,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Survivalist,
+
+	inputs
+	{
+		item 1 [SupportCorps.OrthopedicCast;],
+
+	}
+
+	outputs
+	{
+		item 1 Base.Splint,
+	}
+
+	}				
+					craftRecipe OpenColaPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.ColaPack;],
+
+	}
+
+	outputs
+	{
+		item 6 Base.Pop2,
+	}
+
+	}				
+
+					craftRecipe OpenDietColaPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.DietColaPack;],
+
+	}
+
+	outputs
+	{
+		item 6 Base.Pop,
+	}
+
+	}				
+
+					craftRecipe OpenIcedCoffeePack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.IcedCoffeePack;],
+
+	}
+
+	outputs
+	{
+		item 6 SupportCorps.IcedCoffee,
+	}
+
+	}				
+
+					craftRecipe OpenSoapPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.SoapPack;],
+
+	}
+
+	outputs
+	{
+		item 3 Base.Soap2,
+	}
+
+	}				
+
+		
+					craftRecipe OpenToothpastePack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.ToothpastePack;],
+
+	}
+
+	outputs
+	{
+		item 3 Base.Toothpaste,
+		item 1 Base.Toothbrush,
+	}
+
+	}			
+
+					craftRecipe OpenSocksPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.SocksPack;],
+
+	}
+
+	outputs
+	{
+		item 2 Base.Socks_Ankle,
+		item 2 Base.Socks_Long,
+	}
+
+	}	
+
+					craftRecipe OpenBoxersPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.BoxersPack;],
+
+	}
+
+	outputs
+	{
+		item 1 Base.Boxers_Silk_Black,
+		item 1 Base.Boxers_Silk_Red,
+		item 1 Base.Boxers_White,
+	}
+
+	}		
+
+					craftRecipe OpenUnderwearPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.UnderwearPack;],
+
+	}
+
+	outputs
+	{
+		item 1 Base.Bra_Strapless_Black,
+		item 1 Base.Bra_Straps_White,
+		item 1 Base.Underpants_Black,
+		item 1 Base.Underpants_White,
+	}
+
+	}					
+			craftRecipe OpenMilkPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.MilkPack;],
+
+	}
+
+	outputs
+	{
+		item 4 Base.Milk,
+	}
+
+	}				
+
+					craftRecipe OpenWaterPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.WaterPack;],
+
+	}
+
+	outputs
+	{
+		item 6 Base.WaterBottle,
+	}
+
+	}				
+
+					craftRecipe OpenHunterBox
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.HunterBox;],
+
+	}
+
+	outputs
+	{
+		item 1 Base.HuntingKnife,
+		item 1 SupportCorps.DismantledGunCase,
+		item 2 Base.556Box,
+		item 2 Base.556Clip,
+		item 1 Base.Fleshing_Tool,
+		item 1 Base.Shoes_HikingBoots,
+		item 1 Base.Trousers_CamoGreen,
+		item 1 Base.Tshirt_CamoGreen,
+		item 1 SupportCorps.Hoodie_MilGreen_DOWN,
+		item 1 SupportCorps.Hat_BeanyGreenCamo,
+		item 2 SupportCorps.CanOfPeanuts_Ground,
+		item 2 SupportCorps.CanOfCarrots_Ground,
+	}
+
+	}				
+
+			craftRecipe OpenFlourPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.FlourPack;],
+
+	}
+
+	outputs
+	{
+		item 4 Base.Flour2,
+	}
+
+	}				
+
+			craftRecipe OpenCoffeePack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.CoffeePack;],
+
+	}
+
+	outputs
+	{
+		item 4 Base.Coffee2,
+	}
+
+	}			
+
+			craftRecipe UnrollThread
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.ThreadRoll;],
+
+	}
+
+	outputs
+	{
+		item 4 Base.Thread,
+	}
+
+	}				
+	
+			craftRecipe OpenThreadPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.ThreadPack;],
+
+	}
+
+	outputs
+	{
+		item 4 SupportCorps.ThreadRoll,
+	}
+
+	}				
+
+			craftRecipe TakeWeedBud
+					{
+
+	Time 		= 30,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+
+	inputs
+	{
+		item 1 [SupportCorps.StreetWeedBaggie;],
+
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.StreetWeed,
+	}
+
+	}				
+	
+	
+			craftRecipe RollStreetWeedJoint
+					{
+
+	Time 		= 30,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+
+	inputs
+	{
+		item 1 [SupportCorps.StreetWeed;],
+		item 1 [SupportCorps.MrSmoker;],
+		item 1 [SupportCorps.WeedGrinder;] mode:keep,
+
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.StreetJointRolled,
+	}
+
+	}				
+
+			craftRecipe OpenAirdrop
+					{
+
+	Time 		= 30,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+
+	inputs
+	{
+		item 1 [SupportCorps.ReliefAirdrop;],
+
+	}
+
+	outputs
+	{
+		item 2 SupportCorps.RationMRERelief,
+		item 1 SupportCorps.RationFAR,
+		item 1 Base.HandTorch,
+		item 2 Base.Battery,
+		item 1 Base.Matchbox,
+	}
+
+	}				
+							craftRecipe AddVestCover
+					{
+
+	Time 		= 50,
+	timedAction 	= SewingCloth,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Tailoring,
+	inputs
+	{
+		item 1 [SupportCorps.BlackVestCover;SupportCorps.DesertVestCover;SupportCorps.ForeignVestCover;SupportCorps.GreenVestCover;SupportCorps.HuntingVestCover;SupportCorps.MilGreenVestCover;SupportCorps.SnowVestCover;SupportCorps.TigerStripeVestCover;SupportCorps.UrbanVestCover;] mappers[AVestCoverType],
+		item 1 [SupportCorps.CarrierVestNone;] mode:destroy,
+	}
+
+	outputs
+	{
+
+		item 1 mapper:AVestCoverType,
+	}
+
+	itemMapper AVestCoverType
+	{
+	SupportCorps.CarrierVestBlack    = SupportCorps.BlackVestCover,
+	SupportCorps.CarrierVestDesert   = SupportCorps.DesertVestCover,
+	SupportCorps.CarrierVestForeign  = SupportCorps.ForeignVestCover,
+	SupportCorps.CarrierVestGreen    = SupportCorps.GreenVestCover,
+	SupportCorps.CarrierVestHunting  = SupportCorps.HuntingVestCover,
+	SupportCorps.CarrierVestMilGreen = SupportCorps.MilGreenVestCover,
+	SupportCorps.CarrierVestSnow     = SupportCorps.SnowVestCover,
+	SupportCorps.CarrierVestTigerStripe = SupportCorps.TigerStripeVestCover,
+	SupportCorps.CarrierVestUrban    = SupportCorps.UrbanVestCover,
+
+	}
+	}	
+
+					craftRecipe RemoveVestCover
+					{
+
+	Time 		= 50,
+	timedAction 	= SewingCloth,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Tailoring,
+	inputs
+	{
+		item 1 [SupportCorps.CarrierVestBlack;SupportCorps.CarrierVestDesert;SupportCorps.CarrierVestForeign;SupportCorps.CarrierVestGreen;SupportCorps.CarrierVestHunting;SupportCorps.CarrierVestMilGreen;SupportCorps.CarrierVestSnow;SupportCorps.CarrierVestTigerStripe;SupportCorps.CarrierVestUrban;] mappers[RVestCoverType],
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.CarrierVestNone,
+		item 1 mapper:RVestCoverType,
+	}
+
+	itemMapper RVestCoverType
+	{
+		SupportCorps.BlackVestCover 		= SupportCorps.CarrierVestBlack,
+		SupportCorps.DesertVestCover		= SupportCorps.CarrierVestDesert,
+		SupportCorps.ForeignVestCover		= SupportCorps.CarrierVestForeign,
+		SupportCorps.GreenVestCover		= SupportCorps.CarrierVestGreen,
+		SupportCorps.HuntingVestCover		= SupportCorps.CarrierVestHunting,
+		SupportCorps.MilGreenVestCover		= SupportCorps.CarrierVestMilGreen,
+		SupportCorps.SnowVestCover 		= SupportCorps.CarrierVestSnow,
+		SupportCorps.TigerStripeVestCover	= SupportCorps.CarrierVestTigerStripe,
+		SupportCorps.UrbanVestCover		= SupportCorps.CarrierVestUrban,
+	}
+	}	
+	craftRecipe AddHelmetCover
+{
+	Time 		= 50,
+	timedAction 	= SewingCloth,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Tailoring,
+	inputs
+	{
+		item 1 [SupportCorps.BlackHelmetCover;SupportCorps.DesertHelmetCover;SupportCorps.ForeignHelmetCover;SupportCorps.GreenHelmetCover;SupportCorps.HuntingHelmetCover;SupportCorps.MilGreenHelmetCover;SupportCorps.SnowHelmetCover;SupportCorps.TigerStripeHelmetCover;SupportCorps.UrbanHelmetCover;] mappers[AHelmetCoverType],
+		item 1 [SupportCorps.ArmyHelmet_None;] mode:destroy,
+	}
+
+	outputs
+	{
+		item 1 mapper:AHelmetCoverType,
+	}
+
+	itemMapper AHelmetCoverType
+	{
+		SupportCorps.ArmyHelmet_CamoBlack        = SupportCorps.BlackHelmetCover,
+		SupportCorps.ArmyHelmet_CamoDesert       = SupportCorps.DesertHelmetCover,
+		SupportCorps.ArmyHelmet_CamoForeign      = SupportCorps.ForeignHelmetCover,
+		SupportCorps.ArmyHelmet_CamoGreen        = SupportCorps.GreenHelmetCover,
+		SupportCorps.ArmyHelmet_CamoHunting      = SupportCorps.HuntingHelmetCover,
+		SupportCorps.ArmyHelmet_MilGreen         = SupportCorps.MilGreenHelmetCover,
+		SupportCorps.ArmyHelmet_CamoSnow         = SupportCorps.SnowHelmetCover,
+		SupportCorps.ArmyHelmet_CamoTigerStripe  = SupportCorps.TigerStripeHelmetCover,
+		SupportCorps.ArmyHelmet_CamoUrban        = SupportCorps.UrbanHelmetCover,
+	}
+}
+
+	craftRecipe RemoveHelmetCover
+{
+	Time 		= 50,
+	timedAction 	= SewingCloth,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Tailoring,
+	inputs
+	{
+		item 1 [SupportCorps.ArmyHelmet_CamoBlack;SupportCorps.ArmyHelmet_CamoDesert;SupportCorps.ArmyHelmet_CamoForeign;SupportCorps.ArmyHelmet_CamoGreen;SupportCorps.ArmyHelmet_CamoHunting;SupportCorps.ArmyHelmet_MilGreen;SupportCorps.ArmyHelmet_CamoSnow;SupportCorps.ArmyHelmet_CamoTigerStripe;SupportCorps.ArmyHelmet_CamoUrban;] mappers[RHelmetCoverType],
+	}
+
+	outputs
+	{
+		item 1 SupportCorps.ArmyHelmet_None,
+		item 1 mapper:RHelmetCoverType,
+	}
+
+	itemMapper RHelmetCoverType
+	{
+		SupportCorps.BlackHelmetCover        = SupportCorps.ArmyHelmet_CamoBlack,
+		SupportCorps.DesertHelmetCover       = SupportCorps.ArmyHelmet_CamoDesert,
+		SupportCorps.ForeignHelmetCover      = SupportCorps.ArmyHelmet_CamoForeign,
+		SupportCorps.GreenHelmetCover        = SupportCorps.ArmyHelmet_CamoGreen,
+		SupportCorps.HuntingHelmetCover      = SupportCorps.ArmyHelmet_CamoHunting,
+		SupportCorps.MilGreenHelmetCover     = SupportCorps.ArmyHelmet_MilGreen,
+		SupportCorps.SnowHelmetCover         = SupportCorps.ArmyHelmet_CamoSnow,
+		SupportCorps.TigerStripeHelmetCover  = SupportCorps.ArmyHelmet_CamoTigerStripe,
+		SupportCorps.UrbanHelmetCover        = SupportCorps.ArmyHelmet_CamoUrban,
+	}
+}			
+	craftRecipe ELRemoveBattery
+	{
+		Time = 30,
+        	timedAction = DismantleElectrical,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        	Category = Electrical,
+		inputs
+		{
+			item 1 [SupportCorps.LanternElectric;] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.Battery,
+			item 1 SupportCorps.LanternElectricEmpty,
+		}
+	}
+
+	craftRecipe ELInsertBattery
+	{
+		Time = 30,
+        	timedAction = MakingElectrical,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        	Category = Electrical,
+		inputs
+		{
+			item 1 [SupportCorps.LanternElectricEmpty;] mode:destroy,
+			item 1 [Base.Battery;] flags[ItemCount] mode:destroy,
+		}
+		outputs
+		{
+			item 1 SupportCorps.LanternElectric,
+		}
+	}
+		
+	craftRecipe FLRemoveCandle
+	{
+		Time = 30,
+        	timedAction = Making,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        	Category = Survivalist,
+		inputs
+		{
+			item 1 [SupportCorps.LanternFuel;] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.Candle,
+			item 1 SupportCorps.LanternFuelEmpty,
+		}
+	}
+
+	craftRecipe FLAddCandle
+	{
+		Time = 30,
+        	timedAction = Making,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        	Category = Survivalist,
+		inputs
+		{
+			item 1 [SupportCorps.LanternFuelEmpty;] mode:destroy,
+			item 1 [Base.Candle;] flags[ItemCount] mode:destroy,
+		}
+		outputs
+		{
+			item 1 SupportCorps.LanternFuel,
+		}
+	}														
+	craftRecipe ConvertToGround
+	{
+		Time = 30,
+        	timedAction = Making,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        	Category = Survivalist,
+		inputs
+		{
+			item 1 [SupportCorps.LanternFuelEmpty;] mode:destroy,
+		}
+		outputs
+		{
+			item 1 SupportCorps.Mov_FuelLantern,
+		}
+	}			
+
+	craftRecipe ConvertToHand
+	{
+		Time = 30,
+        	timedAction = Making,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        	Category = Survivalist,
+		inputs
+		{
+			item 1 [SupportCorps.Mov_FuelLantern;] mode:destroy,
+		}
+		outputs
+		{
+			item 1 SupportCorps.LanternFuel,
+		}
+	}			
+
+	craftRecipe ConvertToFuel
+	{
+		Time = 30,
+        	timedAction = Making,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        	Category = Survivalist,
+		inputs
+		{
+			item 1 [SupportCorps.LanternElectricEmpty;] mode:destroy,
+		}
+		outputs
+		{
+			item 1 SupportCorps.LanternFuelEmpty,
+			item 1 Base.LightBulb,
+		}
+	}		
+
+	craftRecipe ConvertToElectric
+	{
+		Time = 30,
+        	timedAction = Making,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        	Category = Survivalist,
+		inputs
+		{
+			item 1 [SupportCorps.LanternFuelEmpty;] mode:destroy,
+			item 1 [Base.LightBulb;] mode:destroy,
+		}
+		outputs
+		{
+			item 1 SupportCorps.LanternElectricEmpty,
+		}
+	}			
+
+	craftRecipe MakeScoopOfMilk
+	{
+        	timedAction = Making,
+		Time = 50,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		inputs
+		{
+			item 1 [SupportCorps.PowderedMilk;],
+			item 1 [*],
+			-fluid 0.25 [Water],
+		}
+		outputs
+		{
+			item 1 SupportCorps.ScoopOfMilk,
+		}
+	}
+
+					craftRecipe OpenWaterPurificationBox
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.WaterPurificationBox;],
+	}
+
+	outputs
+	{
+		item 4 Base.WaterPurificationTablets,
+	}
+
+	}				
+
+					craftRecipe OpenTeaBox
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.TeaBox;],
+
+	}
+
+	outputs
+	{
+		item 20 Base.Teabag2,
+	}
+
+	}				
+
+					craftRecipe OpenSaltPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.SaltPack;],
+	}
+
+	outputs
+	{
+		item 5 Base.Salt,
+	}
+
+	}				
+
+					craftRecipe OpenPepperPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.PepperPack;],
+	}
+
+	outputs
+	{
+		item 5 Base.Pepper,
+	}
+
+	}				
+
+					craftRecipe OpenYeastPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.YeastPack;],
+	}
+
+	outputs
+	{
+		item 5 Base.Yeast,
+	}
+
+	}				
+
+					craftRecipe OpenPropanePack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.PropanePack;],
+	}
+
+	outputs
+	{
+		item 3 Base.Propane_Refill,
+	}
+
+	}				
+
+		
+					craftRecipe OpenFertilizerPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.FertilizerPack;],
+
+	}
+
+	outputs
+	{
+		item 4 Base.Fertilizer,
+	}
+
+	}			
+				craftRecipe OpenSpringSeedPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.SpringSeedPack;],
+
+	}
+
+	outputs
+	{
+		item 2 Base.BroccoliBagSeed2,
+		item 2 Base.CabbageBagSeed2,
+		item 2 Base.CarrotBagSeed2,
+		item 2 Base.CauliflowerBagSeed,
+		item 2 Base.CornBagSeed,
+		item 2 Base.CucumberBagSeed,
+		item 2 Base.GreenpeasBagSeed,
+		item 2 Base.LemonGrassBagSeed,
+		item 2 Base.LettuceBagSeed,
+		item 2 Base.OnionBagSeed,
+		item 2 Base.PotatoBagSeed2,
+		item 2 Base.PumpkinBagSeed,
+		item 2 Base.RedRadishBagSeed2,
+		item 2 Base.TobaccoBagSeed,
+		item 2 Base.SpinachBagSeed,
+		item 2 Base.StrewberrieBagSeed2,
+		item 2 Base.WatermelonBagSeed,
+		item 2 Base.ZucchiniBagSeed,
+		item 2 Base.SoybeansBagSeed,
+	}
+
+	}			
+					craftRecipe OpenSummerSeedPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.SummerSeedPack;],
+
+	}
+
+	outputs
+	{
+		item 1 Base.SweetPotatoBagSeed,
+		item 1 Base.TurnipBagSeed,
+		item 1 Base.BellPepperBagSeed,
+		item 1 Base.GarlicBagSeed,
+		item 1 Base.HabaneroBagSeed,
+		item 1 Base.JalapenoBagSeed,
+		item 1 Base.TomatoBagSeed2,
+	}
+
+	}			
+					craftRecipe OpenFallSeedPack
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.FallSeedPack;],
+
+	}
+
+	outputs
+	{
+		item 4 Base.BarleyBagSeed,
+		item 4 Base.FlaxBagSeed,
+		item 4 Base.BellPepperSeed,
+		item 4 Base.HopsBagSeed,
+		item 4 Base.WheatBagSeed,
+	}
+
+	}			
+					craftRecipe OpenFarmKit
+					{
+
+	Time 		= 80,
+	timedAction 	= UnPackBox,
+	Tags 		= InHandCraft;CanBeDoneInDark,
+	category 	= Packing,
+
+	inputs
+	{
+		item 1 [SupportCorps.FarmKit;],
+
+	}
+
+	outputs
+	{
+		item 2 Base.HandShovel,
+		item 2 Base.GardeningSprayMilk,
+		item 2 Base.GardeningSprayAphids,
+		item 2 Base.GardeningSprayCigarettes,
+		item 1 Base.Shovel,
+		item 1 Base.KnapsackSprayer,
+		item 5 Base.EmptySandbag,
+		item 1 Base.AnimalFeedBag,
+		item 1 Base.Hat_BuildersRespirator,
+		item 1 Base.GardeningSprayEmpty,
+		item 1 Base.Gloves_Dish,
+	}
+
+	}			
+
+}

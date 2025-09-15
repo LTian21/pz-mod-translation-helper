@@ -1,0 +1,221 @@
+module Base
+{
+
+	model 78amgeneralM35A2door_fl
+	{
+		mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_door_left,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_left_bone 1.0,
+	}
+
+	model 78amgeneralM35A2door_fr
+	{
+		mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_door_right,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_right_bone 1.0,
+	}
+
+	template vehicle M35A2Doors
+	{
+
+		part DoorFrontLeft
+		{
+
+			model M35DoorFrontLeft
+			{
+				file = 78amgeneralM35A2door_fl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			anim Close
+			{
+				anim = door_fl_opening,
+                reverse = TRUE,
+				rate = 0.70,
+			}
+
+			anim Open
+			{
+				anim = door_fl_opening,
+				rate = 1.25,
+			}
+
+			anim Closed
+			{
+				anim = door_fl_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = door_fl_opening,
+                reverse = TRUE,
+				animate = FALSE,
+			}
+
+			area = SeatFrontLeft,
+			anim ActorOpen
+			{
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				angle = 0.0 270.0 0.0,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindowFrontLeft,
+			}
+
+			itemType = Base.M35A2Door,
+			category = door,
+
+		}
+
+		part DoorFrontRight
+		{
+
+			model M35DoorFrontRight
+			{
+				file = 78amgeneralM35A2door_fr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			anim Close
+			{
+				anim = door_fr_opening,
+                reverse = TRUE,
+				rate = 0.70,
+			}
+
+			anim Open
+			{
+				anim = door_fr_opening,
+				rate = 1.25,
+			}
+
+			anim Closed
+			{
+				anim = door_fr_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = door_fr_opening,
+                reverse = TRUE,
+				animate = FALSE,
+			}
+
+			area = SeatFrontRight,
+			anim ActorOpen
+			{
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				angle = 0.0 90.0 0.0,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindowFrontRight,
+			}
+
+			itemType = Base.M35A2Door,
+			category = door,
+
+		}
+		
+		part Door*
+		{
+			door
+			{
+				}
+				anim Open
+				{
+					sound = VehicleDoorOpenStandard,
+				}
+				anim Close
+				{
+					sound = VehicleDoorCloseStandard,
+				}
+				anim Lock
+				{
+					sound = LockVehicleDoorStandard,
+				}
+				anim Unlock
+				{
+					sound = UnlockVehicleDoorStandard,
+				}
+				anim IsLocked
+				{
+					sound = VehicleDoorIsLockedStandard,
+				}
+				anim ActorOpen
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				anim ActorClose
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				mechanicRequireKey = true,
+				table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 700,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+				}
+				table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 700,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+				}
+
+				lua
+				{
+					create = Vehicles.Create.Door,
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.Door,
+				}
+			}
+		}
+	}
+

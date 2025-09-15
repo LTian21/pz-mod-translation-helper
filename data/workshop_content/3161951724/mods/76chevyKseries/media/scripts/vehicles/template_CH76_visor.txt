@@ -1,0 +1,76 @@
+module Base
+{
+	model 76chevyCseriesSunVisor0
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76wrecker_visor,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CH76VisorWrecker
+	{
+		part DAMNSunVisor
+        	{
+
+			model SunVisor0
+				{
+                		file = 76chevyCseriesSunVisor0,
+				}
+
+			category = bodywork,
+			area = SeatFrontLeft,
+            specificItem = false,
+			itemType = Base.76chevyCseriesVisor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.Visor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = CH76.UninstallComplete.Visor,
+
+            		}
+
+	            lua
+	            {
+                    init = CH76.Init.Visor,
+				    create = CH76.Create.Visor,
+				}
+		}
+	}
+
+}
+

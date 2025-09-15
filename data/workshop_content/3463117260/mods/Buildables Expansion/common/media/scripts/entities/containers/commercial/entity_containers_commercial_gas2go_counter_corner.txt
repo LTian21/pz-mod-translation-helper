@@ -1,0 +1,74 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Gas2GoCounterCorner
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Gas2Go Counter Corner,
+			Icon		= location_shop_gas2go_01_18,
+		}
+	}
+
+    entity Gas2GoCounterCorner
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Gas2GoCounterCorner,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = location_shop_gas2go_01_22,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_shop_gas2go_01_16,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_shop_gas2go_01_18,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_shop_gas2go_01_20,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:5,
+            category      = Containers_Commercial,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_commercialCounterDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 6 [Base.Plank] flags[Prop2],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

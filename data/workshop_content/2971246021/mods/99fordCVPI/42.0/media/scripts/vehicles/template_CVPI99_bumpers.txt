@@ -1,0 +1,157 @@
+module Base
+{
+	model 99fordCVPIfrontBumper0
+	{
+		mesh = vehicles/Vehicles_99fordCVPI_Body|vic99_bumper0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 99fordCVPIfrontBumper1
+	{
+		mesh = vehicles/Vehicles_99fordCVPI_Body|vic99_bumper1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 99fordCVPIrearBumper0
+	{
+		mesh = vehicles/Vehicles_99fordCVPI_Body|vic99_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CVPI99Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper1
+				{
+                		file = 99fordCVPIfrontBumper1,
+				}
+
+			model FrontBumper0
+				{
+                		file = 99fordCVPIfrontBumper0,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.99fordCVPIBumperFront1;Base.99fordCVPIBumperFront0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CVPI99.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CVPI99.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = CVPI99.Create.BumperFront,
+					init = CVPI99.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 99fordCVPIrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.99fordCVPIBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CVPI99.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CVPI99.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = CVPI99.Create.BumperRear,
+					init = CVPI99.Init.BumperRear,
+					}
+		}
+	}
+
+		
+}

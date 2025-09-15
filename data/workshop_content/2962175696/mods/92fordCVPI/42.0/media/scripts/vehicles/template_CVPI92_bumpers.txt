@@ -1,0 +1,181 @@
+module Base
+{
+	model 92fordCVPIfrontBumper0
+	{
+		mesh = vehicles/Vehicles_92fordCVPI_Body|vic92_bumper0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 92fordCVPIfrontBumper1
+	{
+		mesh = vehicles/Vehicles_92fordCVPI_Body|vic92_bumper1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 92fordCVPIfrontBumper2
+	{
+		mesh = vehicles/Vehicles_92fordCVPI_Body|vic92_bumper2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 92fordCVPIfrontBumper3
+	{
+		mesh = vehicles/Vehicles_92fordCVPI_Body|vic92_bumper3,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 92fordCVPIrearBumper0
+	{
+		mesh = vehicles/Vehicles_92fordCVPI_Body|vic92_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CVPI92Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper1
+				{
+                		file = 92fordCVPIfrontBumper1,
+				}
+
+			model FrontBumper0
+				{
+                		file = 92fordCVPIfrontBumper0,
+				}
+
+			model FrontBumper2
+				{
+                		file = 92fordCVPIfrontBumper2,
+				}
+
+            model FrontBumper3
+				{
+                		file = 92fordCVPIfrontBumper3,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.92fordCVPIBumperFront1;Base.92fordCVPIBumperFront0;Base.92fordCVPIBumperFront2;Base.92fordCVPIBumperFront3,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CVPI92.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CVPI92.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = CVPI92.Create.BumperFront,
+					init = CVPI92.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 92fordCVPIrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.92fordCVPIBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CVPI92.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CVPI92.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = CVPI92.Create.BumperRear,
+					init = CVPI92.Init.BumperRear,
+					}
+		}
+	}
+
+		
+}

@@ -1,0 +1,459 @@
+module Base
+{
+
+/****** Bombs ******/
+
+	craftRecipe MakeNapalmBomb
+	{
+        timedAction = MakingElectrical,
+		Time = 100,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		inputs
+		{
+			
+			item 1 [Base.FlameTrap],
+			item 1 [Base.HomemadeNapalmMix],
+			item 1 [Base.DuctTape],
+			
+		}
+		outputs
+		{
+			item 1 Base.NapalmBomb,
+		}
+	}
+
+
+craftRecipe MakeLunchboxBomb
+	{
+        timedAction = MakingElectrical,
+		Time = 80,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft;Engineer,
+        category = Extra Bombs,
+		AutoLearnAny = Electricity:8,
+		inputs
+		{
+			item 1 [Base.Lunchbox;Base.Lunchbox2] mappers:[bobOmb_frag],
+			item 1 [Base.Aerosolbomb;Base.SmokeBomb],
+			item 2 [Base.ElectronicsScrap],
+			item 1 [Base.NutsBolts;Base.NailsBox;Base.ScrewsBox;Base.UnusableMetal;Base.Bricktoys],
+		}
+		outputs
+		{
+			item 1 mapper:bobOmb_frag,
+		}
+		itemMapper bobOmb_frag
+		{
+			
+			Base.BlueLunchboxBomb = Base.Lunchbox,
+			Base.PinkLunchboxBomb = Base.Lunchbox2,
+		}
+	}
+
+
+
+
+	craftRecipe MakeFragmentationPipeBomb
+	{
+        timedAction = MakingElectrical,
+		Time = 100,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		inputs
+		{
+			
+			item 1 [Base.PipeBomb],
+			item 1 [Base.NutsBolts;NailsBox;ScrewsBox;UnusableMetal;Bricktoys],
+			
+		}
+		outputs
+		{
+			item 1 Base.PipeBomb_frag,
+		}
+	}
+
+	
+craftRecipe MakeBigNoiseGenerator
+	{
+        timedAction = MakingElectrical,
+		Time = 100,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		inputs
+		{
+			
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 [Base.NoiseTrap],
+			item 1 [Base.CarBattery1;Base.CarBattery2;Base.CarBattery3] mode:destroy,
+			item 2 [Base.ElectronicsScrap],
+			
+		}
+		outputs
+		{
+			item 1 Base.NoiseTrap_Big,
+		}
+	}
+
+
+craftRecipe MakeLightbulbBomb
+	{
+        timedAction = MakingElectrical,
+		Time = 100,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		inputs
+		{
+			
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 [Base.LightBulb;Base.LightBulbBlue;Base.LightBulbCyan;Base.LightBulbGreen;Base.LightBulbMagenta;Base.LightBulbOrange;Base.LightBulbPink;Base.LightBulbPurple;Base.LightBulbRed;Base.LightBulbYellow],
+			item 2 [Base.ElectronicsScrap],
+			item 5 [Base.GunPowder],
+			item 1 [Base.Twine],
+			
+		}
+		outputs
+		{
+			item 1 Base.LightbulbBomb,
+		}
+	}
+
+craftRecipe MakePropaneBomb
+	{
+        timedAction = MakingElectrical,
+		Time = 100,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		inputs
+		{
+			
+
+			item 1 [Base.PipeBomb;Base.PipeBomb_frag],
+			item 1 [Base.PropaneTank] flags[ItemCount;NotEmpty] mode:destroy,
+			item 1 [Base.DuctTape],
+			
+		}
+		outputs
+		{
+			item 1 Base.PropaneBomb,
+		}
+	}
+
+craftRecipe MakeSmallPropaneBomb
+	{
+        timedAction = MakingElectrical,
+		Time = 100,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		inputs
+		{
+			
+
+			item 1 [Base.PipeBomb;Base.PipeBomb_frag],
+			item 1 [Base.Propane_Refill] flags[ItemCount;NotEmpty] mode:destroy,
+			item 1 [Base.DuctTape],
+			
+		}
+		outputs
+		{
+			item 1 Base.MiniPropaneBomb,
+		}
+	}
+
+/****** Timers ******/
+
+craftRecipe AddTimerToExtraBomb
+	{
+        timedAction = MakingElectrical,
+		Time = 80,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		AutoLearnAny = Electricity:8,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 [Base.PipeBomb_frag;Base.NoiseTrap_Big;Base.PropaneBomb;Base.MiniPropaneBomb;Base.BlueLunchboxBomb;Base.PinkLunchboxBomb] mappers:[bobOmb_frag],
+			item 1 [Base.TimerCrafted],
+			item 2 [Base.ElectronicsScrap],
+			item 1 [Base.DuctTape],
+		}
+		outputs
+		{
+			item 1 mapper:bobOmb_frag,
+		}
+		itemMapper bobOmb_frag
+		{
+			
+			Base.PipeBombTriggered_frag = Base.PipeBomb_frag,
+			Base.NoiseTrapTriggered_Big = Base.NoiseTrap_Big,
+			Base.PropaneBomb_Timer = Base.PropaneBomb,
+			Base.MiniPropaneBomb_Timer = Base.MiniPropaneBomb,
+			Base.BlueLunchboxBomb_Timer = Base.BlueLunchboxBomb,
+			Base.PinkLunchboxBomb_Timer = Base.BlueLunchboxBomb,
+		}
+	}
+
+
+
+/****** Motion Sensors ******/
+
+craftRecipe AddMotionSensorV1ToExtraBomb
+	{
+        timedAction = MakingElectrical,
+		Time = 80,
+		NeedToBeLearn = True,
+		SkillRequired = Electricity:2,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		AutoLearnAny = Electricity:8,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 [Base.PipeBomb_frag;Base.LightbulbBomb;Base.PropaneBomb;Base.MiniPropaneBomb;Base.BlueLunchboxBomb;Base.PinkLunchboxBomb] mappers:[bobOmb_frag],
+			item 1 [Base.MotionSensor],
+			item 2 [Base.ElectronicsScrap],
+			item 1 [Base.DuctTape],
+		}
+		outputs
+		{
+			item 1 mapper:bobOmb_frag,
+		}
+		itemMapper bobOmb_frag
+		{
+			
+			Base.PipeBombSensorV1_frag = Base.PipeBomb_frag,
+			Base.LightbulbBombSensor = Base.LightbulbBomb,
+			Base.PropaneBomb_V1 = Base.PropaneBomb,
+			Base.MiniPropaneBomb_V1 = Base.MiniPropaneBomb,
+			Base.BlueLunchboxBomb_V1 = Base.BlueLunchboxBomb,
+			Base.PinkLunchboxBomb_V1 = Base.BlueLunchboxBomb,
+
+		}
+	}
+
+	craftRecipe AddMotionSensorV2ToExtraBomb
+	{
+        timedAction = MakingElectrical,
+		Time = 80,
+		NeedToBeLearn = True,
+		SkillRequired = Electricity:4,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		AutoLearnAny = Electricity:9,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 [Base.PipeBomb_frag;Base.PropaneBomb;Base.MiniPropaneBomb;Base.BlueLunchboxBomb;Base.PinkLunchboxBomb] mappers:[bobOmb_frag],
+			item 1 [Base.MotionSensor],
+			item 3 [Base.ElectronicsScrap],
+			item 1 [Base.DuctTape],
+		}
+		outputs
+		{
+			item 1 mapper:bobOmb_frag,
+		}
+		itemMapper bobOmb_frag
+		{
+			
+			Base.PipeBombSensorV2_frag = Base.PipeBomb_frag,
+			Base.PropaneBomb_V2 = Base.PropaneBomb,
+			Base.MiniPropaneBomb_V2 = Base.MiniPropaneBomb,
+			Base.BlueLunchboxBomb_V2 = Base.BlueLunchboxBomb,
+			Base.PinkLunchboxBomb_V2 = Base.BlueLunchboxBomb,
+
+		
+		}
+	}
+
+	craftRecipe AddMotionSensorV3ToExtraBomb
+	{
+        timedAction = MakingElectrical,
+		Time = 80,
+		NeedToBeLearn = True,
+		SkillRequired = Electricity:6,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		AutoLearnAny = Electricity:10,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 [Base.PipeBomb_frag;Base.PropaneBomb;Base.MiniPropaneBomb;Base.BlueLunchboxBomb;Base.PinkLunchboxBomb] mappers:[bobOmb_frag],
+			item 1 [Base.MotionSensor],
+			item 4 [Base.ElectronicsScrap],
+			item 1 [Base.DuctTape],
+		}
+		outputs
+		{
+			item 1 mapper:bobOmb_frag,
+		}
+		itemMapper bobOmb_frag
+		{
+
+			Base.PipeBombSensorV3_frag = Base.PipeBomb_frag,
+			Base.PropaneBomb_V3 = Base.PropaneBomb,
+			Base.MiniPropaneBomb_V3 = Base.MiniPropaneBomb,
+			Base.BlueLunchboxBomb_V3 = Base.BlueLunchboxBomb,
+			Base.PinkLunchboxBomb_V3 = Base.BlueLunchboxBomb,
+
+		}
+	}
+
+/****** Remote ******/
+
+
+craftRecipe MakeRemoteControllerV4
+	{
+        timedAction = MakingElectrical,
+		Time = 50,
+		NeedToBeLearn = True,
+		SkillRequired = Electricity:8,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		AutoLearnAny = Electricity:10,
+		inputs
+		{
+			item 1 [Base.Remote;Base.CordlessPhone;Base.Pager;RemoteCraftedV3],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 [Base.WalkieTalkie1;Base.WalkieTalkie2;Base.WalkieTalkie3;Base.WalkieTalkie4;Base.WalkieTalkie5],
+			item 4 [Base.ElectronicsScrap],
+			item 2 [Base.Glue],
+		}
+		outputs
+		{
+			item 1 Base.RemoteCraftedV4,
+		}
+	}
+
+
+craftRecipe AddCraftedTriggerToExtraBomb
+	{
+        timedAction = MakingElectrical,
+		Time = 80,
+		NeedToBeLearn = True,
+		SkillRequired = Electricity:2,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		AutoLearnAny = Electricity:8,
+		inputs
+		{
+			item 1 [Base.PipeBomb_frag;Base.LightbulbBomb;Base.NoiseTrap_Big;Base.PropaneBomb;Base.MiniPropaneBomb;Base.BlueLunchboxBomb;Base.PinkLunchboxBomb] mappers:[bobOmb_frag],
+			item 1 [Base.TriggerCrafted],
+			item 2 [Base.ElectronicsScrap],
+			item 1 [Base.DuctTape],
+		}
+		outputs
+		{
+			item 1 mapper:bobOmb_frag,
+		}
+		itemMapper bobOmb_frag
+		{
+			
+			Base.PipeBombRemote_frag = Base.PipeBomb_frag,
+			Base.LightbulbBombRemote = Base.LightbulbBomb,
+			Base.NoiseTrapRemote_Big = Base.NoiseTrap_Big,
+			Base.PropaneBomb_Remote = Base.PropaneBomb,
+			Base.MiniPropaneBomb_Remote = Base.MiniPropaneBomb,
+			Base.BlueLunchboxBomb_Remote = Base.BlueLunchboxBomb,
+			Base.PinkLunchboxBomb_Remote = Base.BlueLunchboxBomb,
+
+		}
+	}
+
+/****** Recipe Extras ******/
+
+	craftRecipe MakeHomemadeSparklers
+	{
+        timedAction = MakingElectrical,
+		Time = 80,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		inputs
+		{
+			item 1 tags[Pliers] mode:keep,
+			item 1 [Base.Glue],
+			item 1 [Base.Wire;Base.ElectricWire] mode:destroy,
+			item 1 [Base.FluxPowder],
+
+		}
+		outputs
+		{
+			item 1 Base.Sparklers,
+		}
+	}
+
+	craftRecipe MakeFluxPowder
+	{
+        timedAction = MakingElectrical,
+		Time = 80,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		inputs
+		{
+			item 1 tags[Pliers] mode:keep,
+			item 1 tags[MortarPestle] mode:keep flags[MayDegradeLight],
+			item 1 [Base.Funnel] mode:keep,
+			item 20 [Base.WeldingRods],
+			item 1 [Base.EmptyJar] mode:destroy,
+			item 1 [Base.JarLid],
+
+		}
+		outputs
+		{
+			item 1 Base.FluxPowder,
+		}
+	}
+
+craftRecipe MakeHomemadeNapalmMix
+	{
+        timedAction = MakingElectrical,
+		Time = 80,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft,
+        category = Extra Bombs,
+		inputs
+		{
+            item 1 tags[SharpKnife;Scissors] mode:keep,			
+			item 1 [Base.Funnel] mode:keep,			
+			item 1 [Base.Pillow_Happyface;Base.Pillow_Heart;Base.Pillow_Star] mode:destroy,
+			item 1 [Base.EmptyJar] mode:destroy,
+			item 1 [Base.JarLid],			
+			item 1 [*],
+			-fluid 1.0 [Petrol],
+		}
+		outputs
+		{
+			item 1 Base.HomemadeNapalmMix,
+		}
+
+	}
+
+
+/****** Recipe Magazine ******/
+
+
+	item ExtraBombsMag
+	{
+		DisplayName = Extra Bomb Recipes,
+		DisplayCategory = SkillBook,
+		Type = Literature,
+		Weight = 0.5,
+		Icon = MagazineElectronics03,
+		BoredomChange = -20,
+        StressChange = -15,
+		TeachedRecipes = MakeFluxPowder;MakeHomemadeSparklers;MakeHomemadeNapalmMix;MakeRemoteControllerV4;MakeFragmentationPipeBomb;MakeNapalmBomb;MakeLunchboxBomb;MakeSmallPropaneBomb;MakePropaneBomb;MakeLightbulbBomb;MakeBigNoiseGenerator;AddTimerToExtraBomb;AddMotionSensorV1ToExtraBomb;AddMotionSensorV2ToExtraBomb;AddMotionSensorV3ToExtraBomb;AddCraftedTriggerToExtraBomb,
+		StaticModel = Magazine,
+		WorldStaticModel = MagazineElec2Ground,
+		Tags = Magazine,
+		
+	}
+
+}

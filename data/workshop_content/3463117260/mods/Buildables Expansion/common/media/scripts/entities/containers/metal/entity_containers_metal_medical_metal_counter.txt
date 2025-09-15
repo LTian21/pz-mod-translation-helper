@@ -1,0 +1,64 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_MedicalMetalCounter
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Medical Metal Counter,
+			Icon		= location_community_medical_01_155,
+		}
+	}
+
+    entity MedicalMetalCounter
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_MedicalMetalCounter,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_community_medical_01_153,
+                    row = location_community_medical_01_152,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_community_medical_01_154 location_community_medical_01_155,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:15,
+            category      = Containers_Metal,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_metalLockerDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SmallSheetMetal],
+                item 6 [Base.SheetMetal],
+                item 8 [Base.MetalBar;Base.MetalPipe],
+                item 4 [Base.GlassPanel],
+                item 4 [Base.Hinge],
+                item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

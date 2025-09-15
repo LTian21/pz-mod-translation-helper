@@ -1,0 +1,63 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WoodenHighFence
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Wooden High Fence,
+			Icon		= fencing_01_73,
+		}
+	}
+
+    entity WoodenHighFence
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WoodenHighFence,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face W
+            {
+                layer
+                {
+                    row = fencing_01_72,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fencing_01_73,
+                }
+            }
+			
+            corner = fencing_01_74,
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Fences_High,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:10,
+            ToolTip       = Tooltip_craft_woodenFenceDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 8 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

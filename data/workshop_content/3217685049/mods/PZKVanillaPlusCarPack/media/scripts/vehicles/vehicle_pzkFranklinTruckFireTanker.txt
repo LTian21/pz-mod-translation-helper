@@ -1,0 +1,501 @@
+module Base
+{
+	model Vehicle_pzkFranklinTruckFireTanker
+	{
+		mesh = vehicles/Vehicles_pzkFranklinTruckTanker1,
+		shader = vehicle_norandom_multiuv,
+		invertX = FALSE,
+		scale = 0.01,
+	}
+	vehicle pzkFranklinTruckFireTanker
+	{
+		template! = pzkFranklinTruckFireTanker,
+
+		model
+		{
+			file = Vehicle_pzkFranklinTruckFireTanker,
+			scale = 1.7000,
+			offset = 0.0000 0.2059 -0.1412,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicle_pzkFranklinTruckFireshell,
+		}
+
+
+		template = PassengerSeat2,
+
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.2000 0.1588 0.5941,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.6294 -0.5765 0.4235,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.2000 0.1588 0.5941,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.6294 -0.5765 0.4235,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+
+
+		area SeatFrontLeft
+		{
+			xywh = 0.6813 0.4231 0.4725 0.4725,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -0.6813 0.4231 0.4725 0.4725,
+		}
+
+
+
+		extents = 1.1765 0.9412 3.6235,
+		physicsChassisShape = 1.1765 0.9412 3.6235,
+		centerOfMassOffset = 0.0000 0.4176 -0.3176,
+		shadowExtents = 1.1725 3.6356,
+		shadowOffset = 0.0000 -0.3176,
+
+	}
+	template vehicle pzkFranklinTruckFireTanker
+	{
+		mechanicType = 2,
+		engineRepairLevel = 5,
+		playerDamageProtection = 1.1,
+		engineRPMType = van,
+
+		spawnOffsetY = 0.5649187,
+
+		textureMask = Vehicles/Vehicle_pzkFranklinTruckFire_mask,
+		textureLights = Vehicles/Vehicle_pzkFranklinTruckFire_lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/pzkVeh_Damage1,
+		textureDamage2Shell = Vehicles/pzkVeh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		lightbar
+		{
+			texture = Lights_Lightbar_PickUpTruck,
+			soundSiren = VehicleSiren,
+			leftCol = 1;0;0,
+			rightCol = 1;0;0,
+		}
+
+		sound
+		{
+			engine = VehicleEngineStepVan,
+			engineStart = VehicleEngineStepVan,
+			engineTurnOff = VehicleEngineStepVan,
+			horn = VehicleHornVan,
+			ignitionFail = VehicleIgnitionFailStepVan,
+		}
+
+		extents = 1.1428 0.9341 2.9450,
+		mass = 1360,
+		physicsChassisShape = 1.1428 0.9341 2.9450,
+		centerOfMassOffset = 0.0000 0.4725 0.0000,
+		extentsOffset = 1.0 1.0,
+		engineForce = 3700,
+		engineQuality = 70,
+		engineLoudness = 100,
+		maxSpeed = 60f,
+		brakingForce = 50,
+		gearRatioCount = 4,
+		gearRatioR = 4.7,
+		gearRatio1 = 4.6,
+		gearRatio2 = 3.2,
+		gearRatio3 = 1.3,
+		gearRatio4 = 1.0,
+		stoppingMovementForce = 1.1f,
+		rollInfluence = 0.1f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 40,
+		suspensionCompression = 3.83,
+		suspensionDamping = 4.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.2,
+		wheelFriction = 1.4f,
+		frontEndHealth = 300,
+		rearEndHealth = 300,
+		seats = 2,
+		isSmallVehicle = false,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.4560 -0.2747 1.2362,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.4560 -0.2747 1.2362,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.4560 -0.2747 -1.0529,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.4560 -0.2747 -1.0529,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+        area Engine
+        {
+            xywh = 0.0000 1.6412 0.8901 0.4725,
+        }
+
+        area TruckBed
+        {
+            xywh = 0.0000 -2.3176 0.8901 0.4725,
+        }
+
+		area GasTank
+		{
+			xywh = -0.6824 0.1647 0.4725 0.4725,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.6813 0.7527 0.4725 0.4725,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.6813 0.7527 0.4725 0.4725,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 0.6813 -0.5495 0.4725 0.4725,
+		}
+
+		area TireRearRight
+		{
+			xywh = -0.6813 -0.5495 0.4725 0.4725,
+		}
+
+		template = Trunk/part/TruckBed,
+		part TruckBed
+		{
+			itemType = Base.VanSeatsTrunk,
+		    container
+		    {
+		        capacity = 30,
+		    }
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = GloveBox,
+		template = GasTank,
+
+		part GasTank
+		{
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = 3000WaterTruckTankTainted,
+
+		area FuelStorage
+		{
+			xywh = 0.0000 -2.0757 1.0811 -0.5189,
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			anim Open
+			{
+				sound = VehicleHoodOpenVan,
+			}
+
+			anim Close
+			{
+				sound = VehicleHoodCloseVan,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+
+		part Windshield*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part WindshieldRear
+		{
+			table install
+			{
+				requireInstalled = DoorRear,
+			}
+		}
+
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+
+		part Window*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+		template = Door/part/DoorRear,
+
+		part Door*
+		{
+			anim Open
+			{
+				sound = VehicleDoorOpenVan,
+			}
+			
+			anim Close
+			{
+				sound = VehicleDoorCloseVan,
+			}
+
+			anim Lock
+			{
+				sound = LockVehicleDoorVan,
+			}
+			
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorVan,
+			}
+
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedVan,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part DoorRear
+		{
+			anim Open
+			{
+				sound = VehicleTrunkOpenVan,
+			}
+
+			anim Close
+			{
+				sound = VehicleTrunkCloseVan,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindshieldRear,
+			}
+
+			hasLightsRear = false,
+		}
+
+		template = Tire,
+
+		part Tire*
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Vehicles_pzkHMMVWheel,
+				scale = 1.2000,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio_HAM,
+		template = Headlight,
+
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.2747 -2.0235,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.2747 1.6824,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1,
+		}
+		attachment flipNode
+		{
+			offset = 0.0000 -0.2159 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+}

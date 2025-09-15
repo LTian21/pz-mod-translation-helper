@@ -1,0 +1,74 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_ModernCounter
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Modern Counter,
+			Icon		= fixtures_counters_01_5,
+		}
+	}
+
+    entity ModernCounter
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_ModernCounter,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = fixtures_counters_01_7,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_counters_01_1,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = fixtures_counters_01_3,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = fixtures_counters_01_5,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:5,
+            category      = Containers_Residential,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_residentialCounterDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 6 [Base.Plank] flags[Prop2],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

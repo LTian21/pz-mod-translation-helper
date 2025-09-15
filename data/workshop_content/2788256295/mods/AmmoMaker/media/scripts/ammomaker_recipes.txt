@@ -1,0 +1,257 @@
+/* Ammo Maker by STIMP_TM */
+
+module ammomaker {
+
+	imports
+	{
+		Base
+	}
+
+/* Recipes Core */
+
+	recipe Dissolve Bird Excrement
+	{
+		ammomaker_BirdExcrement=100,
+		destroy WaterPot,
+
+		Result:ammomaker_PotOfBirdExcrement=1,
+		Sound:AddItemInRecipe,
+		Time:100.0,
+		Category:AmmoMaker,
+		OnGiveXP:Recipe.OnGiveXP.Chemistry3,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Make Filter Paper
+	{
+		SheetPaper2/Notebook/Journal/Doodle,
+		keep Scissors,
+
+		Result:ammomaker_FilterPaper=1,
+		RemoveResultItem:true,
+		OnCreate:Recipe.OnCreate.MakeFilterPaper,
+		Sound:FixWithTape,
+		Time:30.0,
+        Category:AmmoMaker,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Extract Nitre
+	{
+		RippedSheets=2,
+		ammomaker_FilterPaper=2,
+		destroy ammomaker_PotOfBirdExcrement=1,
+
+		Result:ammomaker_Nitre=10,
+		RemoveResultItem:true,
+		OnCreate:Recipe.OnCreate.ExtractNitre,
+		Sound:EmptyPan,
+		Time:300.0,
+        Category:AmmoMaker,
+		OnGiveXP:Recipe.OnGiveXP.Chemistry3,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Extract Sulfur from Stones
+	{
+		Stone=6,
+		EmptySandbag/SackCabbages/SackPotatoes/SackOnions/SackCarrots,
+		keep Hammer/HammerStone/BallPeenHammer/Sledgehammer/Sledgehammer2/ClubHammer,
+
+		Result:ammomaker_Sulfur=10,
+		RemoveResultItem:true,
+		OnCreate:Recipe.OnCreate.ExtractSulfur,
+		Sound:Hammering,
+		Time:300.0,
+        Category:AmmoMaker,
+		OnGiveXP:Recipe.OnGiveXP.Chemistry3,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Extract Sulfur from Chipped Stones
+	{
+		SharpedStone=6,
+		EmptySandbag/SackCabbages/SackPotatoes/SackOnions/SackCarrots,
+		keep Hammer/HammerStone/BallPeenHammer/Sledgehammer/Sledgehammer2/ClubHammer,
+
+		Result:ammomaker_Sulfur=10,
+		RemoveResultItem:true,
+		OnCreate:Recipe.OnCreate.ExtractSulfur,
+		Sound:Hammering,
+		Time:300.0,
+        Category:AmmoMaker,
+		OnGiveXP:Recipe.OnGiveXP.Chemistry3,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Make Charcoal from Logs
+	{
+		OnTest:Recipe.OnTest.isActivated_Charcoal,
+
+		Log=2,
+
+		Result:Charcoal=1,
+		NearItem:Campfire,
+		Time:500.0,
+        Category:AmmoMaker,
+		CanBeDoneFromFloor:true,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Make Charcoal from Branches
+	{
+		OnTest:Recipe.OnTest.isActivated_Charcoal,
+
+		TreeBranch=18,
+
+		Result:Charcoal=1,
+		NearItem:Campfire,
+		Time:500.0,
+        Category:AmmoMaker,
+		CanBeDoneFromFloor:true,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Make Charcoal Powder
+	{
+		Charcoal;1,
+		keep MortarPestle,
+
+		Result:ammomaker_CharcoalPowder=10,
+		Time:100.0,
+        Category:AmmoMaker,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Make Gunpowder
+	{
+		ammomaker_Nitre=15,
+		ammomaker_CharcoalPowder=3,
+		ammomaker_Sulfur=2,
+		keep MortarPestle,
+
+		Result:GunPowder=2,
+		Time:500.0,
+        Category:AmmoMaker,
+		OnGiveXP:Recipe.OnGiveXP.Chemistry3,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Weigh Gunpowder Grains
+	{
+		GunPowder=2,
+		keep ammomaker_GunPowderScale,
+
+		Result:ammomaker_GunPowderGrains=3,
+		Time:200.0,
+        Category:AmmoMaker,
+		CanBeDoneFromFloor:true,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Weigh Gunpowder Unit
+	{
+		ammomaker_GunPowderGrains=150,
+		keep ammomaker_GunPowderScale,
+
+		Result:GunPowder=1,
+		RemoveResultItem:true,
+		OnCreate:Recipe.OnCreate.WeighGunpowderUnit,
+		Time:200.0,
+        Category:AmmoMaker,
+		CanBeDoneFromFloor:true,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Make Gunpowder Scale
+	{
+		Plank=1,
+        Nails=2,
+		ScrapMetal=2,
+		ammomaker_JewelryChain=6,
+		keep [Recipe.GetItemTypes.Saw],
+		keep Hammer/HammerStone/BallPeenHammer/Sledgehammer/Sledgehammer2/ClubHammer,
+
+		Result:ammomaker_GunPowderScale=1,
+		Sound:Sawing,
+		Time:500.0,
+        Category:AmmoMaker,
+		OnGiveXP:Recipe.OnGiveXP.SawLogs,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Recycle Jewelry Chain
+	{
+		Necklace_DogTag/Necklace_Gold/Necklace_GoldRuby/Necklace_GoldDiamond/Necklace_Silver/Necklace_SilverSapphire/Necklace_SilverCrucifix/Necklace_SilverDiamond/NecklaceLong_Gold/NecklaceLong_GoldDiamond/NecklaceLong_Silver/NecklaceLong_SilverEmerald/NecklaceLong_SilverSapphire/NecklaceLong_SilverDiamond/Bracelet_ChainRightGold/Bracelet_ChainLeftGold/Bracelet_ChainRightSilver/Bracelet_ChainLeftSilver,
+		keep Scissors,
+
+		Result:ammomaker_JewelryChain=1,
+		RemoveResultItem:true,
+		OnCreate:Recipe.OnCreate.RecycleJewelryChain,
+		Time:50.0,
+        Category:AmmoMaker,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Recycle Metal
+	{
+		TinCanEmpty/UnusableMetal,
+		BlowTorch=1,
+		keep Hammer/HammerStone/BallPeenHammer/Sledgehammer/Sledgehammer2/ClubHammer,
+
+		Result:ScrapMetal=1,
+		RemoveResultItem:true,
+		OnCreate:Recipe.OnCreate.RecycleMetal,
+		Sound:BlowTorch,
+		Time:50.0,
+        Category:AmmoMaker,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding5,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Recycle Plastic
+	{
+		WaterBottleEmpty/PopBottleEmpty/MayonnaiseEmpty/Garbagebag/Plasticbag/GroceryBag1/GroceryBag2/GroceryBag3/GroceryBag4/GroceryBag5/CatToy/Disc/Disc_Retail/Toothbrush/BleachEmpty/Cube/Razor/Lunchbox/Lunchbox2/Cooler/CreditCard/CuttingBoardPlastic/PlasticTray/Glasses_SafetyGoggles/Pen/BluePen/RedPen/GamePieceBlack/GamePieceRed/GamePieceWhite/Comb,
+		keep Scissors,
+
+		Result:ammomaker_RecPlastic=1,
+		RemoveResultItem:true,
+		OnCreate:Recipe.OnCreate.RecyclePlastic,
+		Sound:OpenCannedFood,
+		Time:50.0,
+        Category:AmmoMaker,
+		NeedToBeLearn:false,
+		IsHidden:false,
+	}
+
+	recipe Recycle Rubber
+	{
+		OnTest:Recipe.OnTest.isActivated_SP,
+
+		RubberBand/Rubberducky/OldTire1/OldTire2/OldTire3/NormalTire1/NormalTire2/NormalTire3/ModernTire1/ModernTire2/ModernTire3,
+		keep [Recipe.GetItemTypes.SharpKnife]/MeatCleaver,
+
+		Result:ammomaker_RecRubber=1,
+		OnCreate:Recipe.OnCreate.RecycleRubber,
+		Sound:OpenCannedFood,
+		Time:100.0,
+        Category:AmmoMaker,
+		NeedToBeLearn:false,
+		IsHidden:true,
+	}
+
+}

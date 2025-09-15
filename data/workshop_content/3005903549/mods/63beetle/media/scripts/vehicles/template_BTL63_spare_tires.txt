@@ -1,0 +1,326 @@
+module Base
+{
+	model 63beetleSpareStock
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_spare_stock,
+		texture = Vehicles/Vehicles_63beetle_Wheel_stock,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 63beetleSpareSlick
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_spare_slick,
+		texture = Vehicles/Vehicles_63beetle_Wheel_slick,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 63beetleSpareOffroad
+	{
+		mesh = vehicles/Vehicles_63beetle_Wheels|63beetle_tire_offroad,
+		texture = Vehicles/Vehicles_63beetle_Wheel_offroad,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle BTL63SpareTire
+		{
+		part BTL63Spare
+        	{
+
+				model BTL63spare0
+				{
+                	file = 63beetleSpareStock,
+				}
+
+				area = TruckBed,
+				category = Other,
+				specificItem = false,
+				itemType = Base.63beetleTire,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = BTL63.InstallComplete.SpareTire,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+		            complete = BTL63.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+            			init = BTL63.Init.SpareTire,
+						create = BTL63.Create.SpareTire,
+					}
+
+			}
+	}
+
+	template vehicle BTL63SpareTires
+		{
+		part BTL63Spare
+        	{
+
+				model BTL63spare0
+				{
+                	file = 63beetleSpareStock,
+				}
+				model BTL63spare1
+				{
+                	file = 63beetleSpareSlick,
+				}
+				area = TruckBed,
+				category = Other,
+				specificItem = false,
+				itemType = Base.63beetleTire;63beetleTireSlick,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = BTL63.InstallComplete.SpareTires,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+		            complete = BTL63.UninstallComplete.SpareTires,
+            		}
+
+            		lua
+            		{
+            			init = BTL63.Init.SpareTires,
+						create = BTL63.Create.SpareTires,
+					}
+
+			}
+	}
+
+	template vehicle BTL63SpareTireOffroad
+		{
+		part BTL63SpareA
+        	{
+
+				model BTL63spareA
+				{
+                	file = 63beetleSpareOffroad,
+                	offset = 0.3889 0.0111 -0.7111,
+				}
+				area = TireRearLeft,
+
+				table install
+					{
+                	complete = BTL63.InstallComplete.SpareTireOffroadA,
+            		}
+
+            	table uninstall
+            		{
+		            complete = BTL63.UninstallComplete.SpareTireOffroadA,
+            		}
+
+            	lua
+            		{
+            			init = BTL63.Init.SpareTireOffroadA,
+						create = BTL63.Create.SpareTireOffroadA,
+					}
+
+			}
+
+		part BTL63SpareB
+        	{
+
+				model BTL63spareB
+				{
+                	file = 63beetleSpareOffroad,
+                	offset = 0.1333 0.0111 -0.7111,
+				}
+				area = TireRearLeft,
+
+				table install
+					{
+                	complete = BTL63.InstallComplete.SpareTireOffroadB,
+            		}
+
+            	table uninstall
+            		{
+		            complete = BTL63.UninstallComplete.SpareTireOffroadB,
+            		}
+
+            	lua
+            		{
+            			init = BTL63.Init.SpareTireOffroadB,
+						create = BTL63.Create.SpareTireOffroadB,
+					}
+
+			}
+
+		part BTL63SpareC
+        	{
+
+				model BTL63spareC
+				{
+                	file = 63beetleSpareOffroad,
+                	offset = -0.1333 0.0111 -0.7111,
+				}
+				area = TireRearRight,
+
+				table install
+					{
+                	complete = BTL63.InstallComplete.SpareTireOffroadC,
+            		}
+
+            	table uninstall
+            		{
+		            complete = BTL63.UninstallComplete.SpareTireOffroadC,
+            		}
+
+            	lua
+            		{
+            			init = BTL63.Init.SpareTireOffroadC,
+						create = BTL63.Create.SpareTireOffroadC,
+					}
+
+			}
+
+		part BTL63SpareD
+        	{
+
+				model BTL63spareD
+				{
+                	file = 63beetleSpareOffroad,
+                	offset = -0.3889 0.0111 -0.7111,
+				}
+				area = TireRearRight,
+
+				table install
+					{
+                	complete = BTL63.InstallComplete.SpareTireOffroadD,
+            		}
+
+            	table uninstall
+            		{
+		            complete = BTL63.UninstallComplete.SpareTireOffroadD,
+            		}
+
+            	lua
+            		{
+            			init = BTL63.Init.SpareTireOffroadD,
+						create = BTL63.Create.SpareTireOffroadD,
+					}
+
+			}
+
+			part BTL63Spare*
+        	{
+
+				category = Other,
+				specificItem = false,
+				itemType = Base.63beetleTireOffroad,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 850,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+            		}
+
+			}
+	}
+
+		
+}

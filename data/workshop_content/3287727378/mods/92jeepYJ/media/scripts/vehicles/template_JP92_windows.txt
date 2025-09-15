@@ -1,0 +1,244 @@
+module Base
+{
+
+	model 92jeepYJWindowfl
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fl_bone 1.0,
+	}
+
+	model 92jeepYJWindowfr
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fr_bone 1.0,
+	}
+
+    model 92jeepYJWindowrl
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_window_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 92jeepYJWindowrr
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_window_rr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP92Windows4
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 92jeepYJWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.92jeepYJFrontSideWindow,
+			table install
+			{
+				requireInstalled = JP92WindowFrontLeftFrame,
+			}
+			table uninstall
+				{
+				requireUninstalled = JP92FrontLeftArmor,
+				}
+
+            lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 92jeepYJWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.92jeepYJFrontSideWindow,
+			table install
+			{
+				requireInstalled = JP92WindowFrontRightFrame,
+			}
+			table uninstall
+				{
+				requireUninstalled = JP92FrontRightArmor,
+				}
+
+            lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+
+        part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 92jeepYJWindowrl,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.92jeepYJRearSideWindow,
+			table install
+			{
+				requireInstalled = JP92HardTop,
+			}
+			table uninstall
+				{
+				requireUninstalled = JP92RearLeftArmor,
+				}
+
+            lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 92jeepYJWindowrr,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.92jeepYJRearSideWindow,
+			table install
+			{
+				requireInstalled = JP92HardTop,
+			}
+			table uninstall
+				{
+				requireUninstalled = JP92RearRightArmor,
+				}
+
+            lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+		}
+	}
+
+    template vehicle JP92Windows2
+	{
+        template! = JP92Windows4,
+
+        part WindowRearLeft
+		{
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+
+		part WindowRearRight
+		{
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+
+    }
+
+    template vehicle JP92WindowsOFF
+	{
+        template! = JP92Windows2,
+
+        part WindowFrontLeft
+		{
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+
+		part WindowFrontRight
+		{
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+
+    }
+}
+

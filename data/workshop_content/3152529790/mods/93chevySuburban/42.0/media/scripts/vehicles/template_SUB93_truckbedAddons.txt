@@ -1,0 +1,1278 @@
+module Base
+{
+	model 93chevySilveradoRollbarLights
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_rollbar_toolbox_lights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93chevySilveradoRollbar
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_rollbar_toolbox,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 93chevySilveradoRoofrack
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|fx50_roofrack,
+		texture = Vehicles/Items_damnRoofrackPickup,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 93chevySilveradoRoofrackLegs
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|fx50_roofrack_legs,
+		texture = Vehicles/Items_damnRoofrackPickup,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 93chevySilveradoGasCan
+    {
+        mesh = vehicles/Vehicles_93chevySuburban_Body|fx50_gascan,
+		texture = Vehicles/Items_USMIL_gasCan0,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+    }
+
+    model 93chevySilveradoWaterCan
+    {
+        mesh = vehicles/Vehicles_93chevySuburban_Body|fx50_gascan,
+		texture = Vehicles/Items_USMIL_waterCan0,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+    }
+
+	model 93chevySilveradoTent
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|fx50_tentTarp,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 93chevyK3500toolbox
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_bed_toolbox,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SUB93TruckBedAddonsCC
+	{
+		part SUB93RollbarToolbox
+		{
+			model 93chevySilveradoLight
+			{
+				file = 93chevySilveradoRollbarLights,
+			}
+
+			model 93chevySilveradoRoll
+			{
+				file = 93chevySilveradoRollbar,
+			}
+
+            model 93chevySilveradoToolbox
+			{
+				file = 93chevyK3500toolbox,
+			}
+		
+			category = bodywork,
+			area = Roofrack,
+			itemType = Base.93chevySilverdoRollbar;Base.93chevyK3500toolbox,
+			mechanicRequireKey = true,
+			durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = SUB93.InstallComplete.RollbarToolbox,
+				requireUninstalled = SUB93Roofrack,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = SUB93.UninstallComplete.RollbarToolbox,
+				requireEmpty = true,
+			}
+			lua
+            {
+                init = SUB93.Init.RollbarToolbox,
+                create = SUB93.Create.RollbarToolbox,
+            }
+		}
+
+        part SUB93Roofrack
+		{
+			model SUB93Roofrack
+			{
+				file = 93chevySilveradoRoofrack,
+			}
+
+			model SUB93RoofrackLegs
+			{
+				file = 93chevySilveradoRoofrackLegs,
+			}
+		
+			category = bodywork,
+			area = Roofrack,
+			itemType = Base.PickupLargeRoofrack,
+			mechanicRequireKey = true,
+			durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+                requireUninstalled = SUB93RollbarToolbox,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireUninstalled = DAMNGasCanOne;DAMNGasCanTwo;DAMNGasCanThree;DAMNTent,
+				requireEmpty = true,
+			}
+			lua
+            {
+                create = DAMN.Create.Blank,
+            }
+		}
+
+        part DAMNGasCanOne
+        	{
+
+			model GasCanOne
+				{
+                		file = 93chevySilveradoGasCan,
+				}
+
+			model WaterCanOne
+				{
+                		file = 93chevySilveradoWaterCan,
+				}
+
+			area = TireRearRight,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.GasCanOne,
+                    requireInstalled = SUB93Roofrack,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.GasCanOne,
+            		}
+
+            		lua
+            		{
+						create = SUB93.Create.GasCanOne,
+						init = SUB93.Init.GasCanOne,
+					}
+		}
+
+		part DAMNGasCanTwo
+        {
+
+			model GasCanTwo
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.3200 0.0000 -0.0200,
+				}
+
+			model WaterCanTwo
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.3200 0.0000 -0.0200,
+				}
+
+			area = TireRearRight,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.GasCanTwo,
+                    requireInstalled = SUB93Roofrack,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.GasCanTwo,
+            		}
+
+            		lua
+            		{
+						create = SUB93.Create.GasCanTwo,
+						init = SUB93.Init.GasCanTwo,
+					}
+		}
+
+		part DAMNGasCanThree
+        {
+
+			model GasCanThree
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.6400 0.0000 -0.0100,
+				}
+
+			model WaterCanThree
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.6400 0.0000 -0.0100,
+				}
+
+			area = TireRearLeft,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+			durability = 5,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.GasCanThree,
+                    requireInstalled = SUB93Roofrack,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.GasCanThree,
+            		}
+
+            		lua
+            		{
+						create = SUB93.Create.GasCanThree,
+						init = SUB93.Init.GasCanThree,
+					}
+		}
+
+        part SUB93Tent
+        	{
+				model TentyyyY
+				{
+                    file = 93chevySilveradoTent,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = Base.TentBrown_Packed;Base.TentGreen_Packed;Base.TentYellow_Packed;Base.TentBlue_Packed,
+				mechanicRequireKey = false,
+				durability = 5,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = SUB93Roofrack,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+	}
+
+    template vehicle SUB93TruckBedAddonsXC
+	{
+        template! = SUB93TruckBedAddonsCC,
+
+		part SUB93RollbarToolbox
+		{
+			model 93chevySilveradoLight
+			{
+				file = 93chevySilveradoRollbarLights,
+                offset = 0.0000 0.0000 0.2800,
+			}
+
+			model 93chevySilveradoRoll
+			{
+				file = 93chevySilveradoRollbar,
+                offset = 0.0000 0.0000 0.2800,
+			}
+
+            model 93chevySilveradoToolbox
+			{
+				file = 93chevyK3500toolbox,
+                offset = 0.0000 0.0000 0.2800,
+			}
+        }
+
+        part SUB93Roofrack
+		{
+			model SUB93Roofrack
+			{
+				file = 93chevySilveradoRoofrack,
+                offset = 0.0000 0.0000 0.2800,
+			}
+
+			model SUB93RoofrackLegs
+			{
+				file = 93chevySilveradoRoofrackLegs,
+                offset = 0.0000 0.0000 0.2800,
+			}
+        }
+
+        part DAMNGasCanOne
+        {
+
+            model GasCanOne
+				{
+                		file = 93chevySilveradoGasCan,
+                        offset = 0.0000 0.0000 0.2800,
+				}
+
+			model WaterCanOne
+				{
+                		file = 93chevySilveradoWaterCan,
+                        offset = 0.0000 0.0000 0.2800,
+				}
+
+        }
+
+        part DAMNGasCanTwo
+        {
+
+			model GasCanTwo
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.3200 0.0000 0.2600,
+				}
+
+			model WaterCanTwo
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.3200 0.0000 0.2600,
+				}
+
+        }
+
+        part DAMNGasCanThree
+        {
+
+			model GasCanThree
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.6400 0.0000 0.2700,
+				}
+
+			model WaterCanThree
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.6400 0.0000 0.2700,
+				}
+
+        }
+
+        part SUB93Tent
+        	{
+				model TentyyyY
+				{
+                    file = 93chevySilveradoTent,
+                    offset = 0.0000 0.0000 0.2800,
+				}
+            }
+    }
+
+    template vehicle SUB93TruckBedAddonsXCS
+	{
+        template! = SUB93TruckBedAddonsCC,
+
+		part SUB93RollbarToolbox
+		{
+			model 93chevySilveradoLight
+			{
+				file = 93chevySilveradoRollbarLights,
+                offset = 0.0000 0.0000 0.2800,
+			}
+
+			model 93chevySilveradoRoll
+			{
+				file = 93chevySilveradoRollbar,
+                offset = 0.0000 0.0000 0.2800,
+			}
+
+            model 93chevySilveradoToolbox
+			{
+				file = 93chevyK3500toolbox,
+                offset = 0.0000 0.0000 0.2800,
+			}
+        }
+
+        part SUB93Roofrack
+		{
+			model SUB93Roofrack
+			{
+				file = 93chevySilveradoRoofrack,
+                offset = 0.0000 0.0000 0.7478,
+			}
+
+			model SUB93RoofrackLegs
+			{
+				file = 93chevySilveradoRoofrackLegs,
+                offset = 0.0000 0.0000 0.2800,
+			}
+        }
+
+        part DAMNGasCanOne
+        {
+
+            model GasCanOne
+				{
+                		file = 93chevySilveradoGasCan,
+                        offset = 0.0000 0.0000 0.7478,
+				}
+
+			model WaterCanOne
+				{
+                		file = 93chevySilveradoWaterCan,
+                        offset = 0.0000 0.0000 0.7478,
+				}
+
+        }
+
+        part DAMNGasCanTwo
+        {
+
+			model GasCanTwo
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.3200 0.0000 0.7278,
+				}
+
+			model WaterCanTwo
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.3200 0.0000 0.7278,
+				}
+
+        }
+
+        part DAMNGasCanThree
+        {
+
+			model GasCanThree
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.6400 0.0000 0.7378,
+				}
+
+			model WaterCanThree
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.6400 0.0000 0.7378,
+				}
+
+        }
+
+        part SUB93Tent
+        	{
+				model TentyyyY
+				{
+                    file = 93chevySilveradoTent,
+                    offset = 0.0000 0.0000 0.7478,
+				}
+            }
+    }
+
+    template vehicle SUB93TruckBedAddonsSC
+	{
+        template! = SUB93TruckBedAddonsCC,
+
+		part SUB93RollbarToolbox
+		{
+			model 93chevySilveradoLight
+			{
+				file = 93chevySilveradoRollbarLights,
+                offset = 0.0000 0.0000 0.9100,
+			}
+
+			model 93chevySilveradoRoll
+			{
+				file = 93chevySilveradoRollbar,
+                offset = 0.0000 0.0000 0.9100,
+			}
+
+            model 93chevySilveradoToolbox
+			{
+				file = 93chevyK3500toolbox,
+                offset = 0.0000 0.0000 0.9100,
+			}
+        }
+
+        part SUB93Roofrack
+		{
+			model SUB93Roofrack
+			{
+				file = 93chevySilveradoRoofrack,
+                offset = 0.0000 0.0000 0.9100,
+			}
+
+			model SUB93RoofrackLegs
+			{
+				file = 93chevySilveradoRoofrackLegs,
+                offset = 0.0000 0.0000 0.9100,
+			}
+        }
+
+        part DAMNGasCanOne
+        {
+
+            model GasCanOne
+				{
+                		file = 93chevySilveradoGasCan,
+                        offset = 0.0000 0.0000 0.9100,
+				}
+
+			model WaterCanOne
+				{
+                		file = 93chevySilveradoWaterCan,
+                        offset = 0.0000 0.0000 0.9100,
+				}
+
+        }
+
+        part DAMNGasCanTwo
+        {
+
+			model GasCanTwo
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.3200 0.0000 0.8900,
+				}
+
+			model WaterCanTwo
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.3200 0.0000 0.8900,
+				}
+
+        }
+
+        part DAMNGasCanThree
+        {
+
+			model GasCanThree
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.6400 0.0000 0.9000,
+				}
+
+			model WaterCanThree
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.6400 0.0000 0.9000,
+				}
+
+        }
+
+        part SUB93Tent
+        	{
+				model TentyyyY
+				{
+                    file = 93chevySilveradoTent,
+                    offset = 0.0000 0.0000 0.9200,
+				}
+            }
+    }
+
+    template vehicle SUB93TruckBedAddonsSCS
+	{
+        template! = SUB93TruckBedAddonsCC,
+
+		part SUB93RollbarToolbox
+		{
+			model 93chevySilveradoLight
+			{
+				file = 93chevySilveradoRollbarLights,
+                offset = 0.0000 0.0000 0.9100,
+			}
+
+			model 93chevySilveradoRoll
+			{
+				file = 93chevySilveradoRollbar,
+                offset = 0.0000 0.0000 0.9100,
+			}
+
+            model 93chevySilveradoToolbox
+			{
+				file = 93chevyK3500toolbox,
+                offset = 0.0000 0.0000 0.9100,
+			}
+        }
+
+        part SUB93Roofrack
+		{
+			model SUB93Roofrack
+			{
+				file = 93chevySilveradoRoofrack,
+                offset = 0.0000 0.0000 1.3778,
+			}
+
+			model SUB93RoofrackLegs
+			{
+				file = 93chevySilveradoRoofrackLegs,
+                offset = 0.0000 0.0000 0.9100,
+			}
+        }
+
+        part DAMNGasCanOne
+        {
+
+            model GasCanOne
+				{
+                		file = 93chevySilveradoGasCan,
+                        offset = 0.0000 0.0000 1.3778,
+				}
+
+			model WaterCanOne
+				{
+                		file = 93chevySilveradoWaterCan,
+                        offset = 0.0000 0.0000 1.3778,
+				}
+
+        }
+
+        part DAMNGasCanTwo
+        {
+
+			model GasCanTwo
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.3200 0.0000 1.3578,
+				}
+
+			model WaterCanTwo
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.3200 0.0000 1.3578,
+				}
+
+        }
+
+        part DAMNGasCanThree
+        {
+
+			model GasCanThree
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.6400 0.0000 1.3678,
+				}
+
+			model WaterCanThree
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.6400 0.0000 1.3678,
+				}
+
+        }
+
+        part SUB93Tent
+        	{
+				model TentyyyY
+				{
+                    file = 93chevySilveradoTent,
+                    offset = 0.0000 0.0000 1.3778,
+				}
+            }
+    }
+
+
+    template vehicle SUB93TruckBedAddonsFSO
+	{
+        part SUB93RollbarToolbox
+		{
+			model 93chevySilveradoLight
+			{
+				file = 93chevySilveradoRollbarLights,
+                offset = 0.0000 0.0000 0.9100,
+			}
+
+			model 93chevySilveradoRoll
+			{
+				file = 93chevySilveradoRollbar,
+                offset = 0.0000 0.0000 0.9100,
+			}
+
+            model 93chevySilveradoToolbox
+			{
+				file = 93chevyK3500toolbox,
+                offset = 0.0000 0.0000 0.9100,
+			}
+		
+			category = bodywork,
+			area = Roofrack,
+			itemType = Base.93chevySilverdoRollbar;Base.93chevyK3500toolbox,
+			mechanicRequireKey = true,
+			durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = SUB93.InstallComplete.RollbarToolbox,
+				requireUninstalled = SUB93Roofrack,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = SUB93.UninstallComplete.RollbarToolbox,
+				requireEmpty = true,
+			}
+			lua
+            {
+                init = SUB93.Init.RollbarToolbox,
+                create = SUB93.Create.RollbarToolbox,
+            }
+		}
+    }
+
+    template vehicle SUB93TruckBedAddonsCCshort
+	{
+        template! = SUB93TruckBedAddonsCC,
+
+        part SUB93Roofrack
+		{
+			model SUB93Roofrack
+			{
+				file = 93chevySilveradoRoofrack,
+                offset = 0.0000 0.0000 0.4678,
+			}
+
+        }
+
+        part DAMNGasCanOne
+        {
+
+            model GasCanOne
+				{
+                		file = 93chevySilveradoGasCan,
+                        offset = 0.0000 0.0000 0.4678,
+				}
+
+			model WaterCanOne
+				{
+                		file = 93chevySilveradoWaterCan,
+                        offset = 0.0000 0.0000 0.4678,
+				}
+
+        }
+
+        part DAMNGasCanTwo
+        {
+
+			model GasCanTwo
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.3200 0.0000 0.4478,
+				}
+
+			model WaterCanTwo
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.3200 0.0000 0.4478,
+				}
+
+        }
+
+        part DAMNGasCanThree
+        {
+
+			model GasCanThree
+				{
+                		file = 93chevySilveradoGasCan,
+                		offset = -0.6400 0.0000 0.4578,
+				}
+
+			model WaterCanThree
+				{
+                		file = 93chevySilveradoWaterCan,
+                		offset = -0.6400 0.0000 0.4578,
+				}
+
+        }
+
+        part SUB93Tent
+        	{
+				model TentyyyY
+				{
+                    file = 93chevySilveradoTent,
+                    offset = 0.0000 0.0000 0.4678,
+				}
+            }
+    }
+
+    template vehicle SUB93TruckBedAddonsCCR
+	{
+        template! = SUB93TruckBedAddonsCC,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolboxR,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolboxR,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolboxR,
+                    create = SUB93.Create.RollbarToolboxR,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsXCR
+	{
+        template! = SUB93TruckBedAddonsXC,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolboxR,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolboxR,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolboxR,
+                    create = SUB93.Create.RollbarToolboxR,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsXCSR
+	{
+        template! = SUB93TruckBedAddonsXCS,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolboxR,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolboxR,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolboxR,
+                    create = SUB93.Create.RollbarToolboxR,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsSCR
+	{
+        template! = SUB93TruckBedAddonsSC,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolboxR,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolboxR,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolboxR,
+                    create = SUB93.Create.RollbarToolboxR,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsSCSR
+	{
+        template! = SUB93TruckBedAddonsSCS,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolboxR,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolboxR,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolboxR,
+                    create = SUB93.Create.RollbarToolboxR,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsFSOR
+	{
+        template! = SUB93TruckBedAddonsFSO,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolboxR,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolboxR,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolboxR,
+                    create = SUB93.Create.RollbarToolboxR,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsCCshortR
+	{
+        template! = SUB93TruckBedAddonsCCshort,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolboxR,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolboxR,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolboxR,
+                    create = SUB93.Create.RollbarToolboxR,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsCC2
+	{
+        template! = SUB93TruckBedAddonsCC,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolbox2,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolbox2,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolbox2,
+                    create = SUB93.Create.RollbarToolbox2,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsXC2
+	{
+        template! = SUB93TruckBedAddonsXC,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolbox2,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolbox2,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolbox2,
+                    create = SUB93.Create.RollbarToolbox2,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsXCS2
+	{
+        template! = SUB93TruckBedAddonsXCS,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolbox2,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolbox2,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolbox2,
+                    create = SUB93.Create.RollbarToolbox2,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsSC2
+	{
+        template! = SUB93TruckBedAddonsSC,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolbox2,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolbox2,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolbox2,
+                    create = SUB93.Create.RollbarToolbox2,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsSCS2
+	{
+        template! = SUB93TruckBedAddonsSCS,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolbox2,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolbox2,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolbox2,
+                    create = SUB93.Create.RollbarToolbox2,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsFSO2
+	{
+        template! = SUB93TruckBedAddonsFSO,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolbox2,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolbox2,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolbox2,
+                    create = SUB93.Create.RollbarToolbox2,
+                }
+        }
+    }
+
+    template vehicle SUB93TruckBedAddonsCCshort2
+	{
+        template! = SUB93TruckBedAddonsCCshort,
+
+        part SUB93RollbarToolbox
+		{
+
+            table install
+                {
+                    complete = SUB93.InstallComplete.RollbarToolbox2,
+                }
+                table uninstall
+                {
+                    complete = SUB93.UninstallComplete.RollbarToolbox2,
+                }
+                lua
+                {
+                    init = SUB93.Init.RollbarToolbox2,
+                    create = SUB93.Create.RollbarToolbox2,
+                }
+        }
+    }
+}

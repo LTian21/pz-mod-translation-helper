@@ -1,0 +1,113 @@
+module Base
+{
+	craftRecipe Minced Meat
+	{
+        timedAction = SliceMeat_Surface,
+		Time = 50,
+		OnCreate = Recipe.OnCreate.MincedMeat,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:5,
+		ToolTip = Cutting cutting cutting!,
+		inputs
+		{
+			item 1 tags[MeatCleaver] mode:keep flags[MayDegradeLight;SharpnessCheck],
+			item 40 [ChickenFillet;TurkeyFillet;MuttonChop;PorkChop;Pork;Chicken;Venison;Beef;Steak;FishFillet] flags[InheritFoodAge],
+		}
+		outputs
+		{
+			item 1 Base.MincedMeat,
+		}
+	}
+	
+	craftRecipe Pancakes Craft
+	{
+        timedAction = MixingBowl,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		ToolTip = Tooltip_Recipe_RequireWholeEggs
+		Normal pancakes for normal people.,
+		xpAward = Cooking:10,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon;] mode:keep flags[MayDegradeLight],
+			item 1 tags[Bowl] mode:keep,
+ 			item 3 tags[Flour],
+			item 2 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+			item 1 [*],
+			-fluid 1.0 [CowMilk;SheepMilk],
+		}
+		outputs
+		{
+			item 5 Base.PancakesCraft,
+		}
+	}
+	
+	craftRecipe Make Hot dog
+	{
+		timedAction = Making,
+		Time = 15,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		ToolTip = A hot dog with another sausage.,
+		inputs
+		{
+			item 1 [Base.Sausage] flags[InheritFoodAge;IsCookedFoodItem;ItemCount],
+			item 1 [Base.BunsHotdog_single] flags[InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 1 Base.Hotdog,
+		}
+	}
+	
+	craftRecipe Make Mayonnaise
+	{
+		timedAction = MixingBowl,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		ToolTip = Tooltip_Recipe_RequireWholeEggs,
+		xpAward = Cooking:15,
+		ToolTip = All means are good for a fat butt.,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon;] mode:keep flags[MayDegradeLight],
+			item 1 tags[Bowl] mode:keep,
+ 			item 1 [Base.OilOlive;Base.OilVegetable],
+			item 2 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+			item 1 [Base.WaterBottle;Base.PopBottleRare;Base.MayonnaiseEmpty],
+			item 1 [*],
+			-fluid 0.1 [JuiceLemon],
+		}
+		outputs
+		{
+			item 1 Base.MayonnaiseFull,
+		}
+	}
+	
+	craftRecipe Make Lemon Juice
+	{
+		timedAction = Making,
+		Time = 40,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:10,
+		ToolTip = For making cheese or mayonnaise.,
+		inputs
+		{
+			item 1 tags[MortarPestle] mode:keep,
+			item 1 [Base.Lemon] flags[InheritFoodAge;ItemCount],
+			item 1 [Base.WaterBottle;Base.PopBottleRare] mode:destroy,
+			item 1 [Base.Strainer] mode:keep,
+		}
+		outputs
+		{
+			item 1 Base.JuiceLemon,
+		}
+	}
+		
+	
+	
+}

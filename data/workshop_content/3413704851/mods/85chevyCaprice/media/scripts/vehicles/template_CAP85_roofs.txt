@@ -1,0 +1,134 @@
+module Base
+{
+
+	model 85gmBbodyRoof_black
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-platform_vinyl,
+		texture = Vehicles/Combo_85gmBbody_Vinyl_Black,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 85gmBbodyRoof_maroon
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-platform_vinyl,
+		texture = Vehicles/Combo_85gmBbody_Vinyl_Maroon,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 85gmBbodyRoof_white
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-platform_vinyl,
+		texture = Vehicles/Combo_85gmBbody_Vinyl_White,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 85gmBbodyRoof_brown
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_vinyl,
+		texture = Vehicles/Combo_85gmBbody_Vinyl_Brown,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 85gmBbodyRoof_blue
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_vinyl,
+		texture = Vehicles/Combo_85gmBbody_Vinyl_Blue,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle CAP85RoofSedan
+	{
+		part GM85VinylRoof
+		{
+            model Roofb
+				{
+                		file = 85gmBbodyRoof_black,
+                		offset = 0.0000 0.0000 0.0000,
+				}
+
+            model Roofm
+				{
+                		file = 85gmBbodyRoof_maroon,
+                		offset = 0.0000 0.0000 0.0000,
+				}
+
+            model Roofw
+				{
+                		file = 85gmBbodyRoof_white,
+                		offset = 0.0000 0.0000 0.0000,
+				}
+
+            model Roofbr
+				{
+                		file = 85gmBbodyRoof_brown,
+                		offset = 0.0000 0.0000 0.0000,
+				}
+
+            model Roofbl
+				{
+                		file = 85gmBbodyRoof_blue,
+                		offset = 0.0000 0.0000 0.0000,
+				}
+
+			category = Other,
+			area = Roofrack,
+            specificItem = false,
+			itemType = Base.85gmBbodyVinylRoofBlack;Base.85gmBbodyVinylRoofMaroon;Base.85gmBbodyVinylRoofWhite;Base.85gmBbodyVinylRoofBrown;Base.85gmBbodyVinylRoofBlue,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = CAP85.InstallComplete.RoofSedan,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = CAP85.UninstallComplete.RoofSedan,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = CAP85.Create.RoofSedan,
+					init = CAP85.Init.RoofSedan,
+				}
+		}
+	}
+}

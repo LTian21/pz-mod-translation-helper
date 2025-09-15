@@ -1,0 +1,220 @@
+module Base
+{
+
+	model 93fordF350Seatfl
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_seat_fl,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 93fordF350Seatfr
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_seat_fl,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 93fordF350Seatrl
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_seat_rl,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 93fordF350Seatrr
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_seat_rl,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	
+	template vehicle F3502SeatsFront
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 93fordF350Seatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 93fordF350Seatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.93fordF350SeatFront,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+    template vehicle F3502SeatsRear
+	{
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 93fordF350Seatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 93fordF350Seatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.93fordF350SeatRear,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+    template vehicle F3502Seats
+	{
+        template! = F3502SeatsFront,
+        template! = F3502SeatsRear,
+    }
+}

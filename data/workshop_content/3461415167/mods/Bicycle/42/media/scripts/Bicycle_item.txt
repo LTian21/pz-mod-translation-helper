@@ -1,0 +1,122 @@
+module Bicycle
+{
+    imports {
+	    Base
+	}
+    item Bicycle
+    {
+        Weight                      = 5,
+        Type                        = Weapon,
+        WeaponSprite                = Bicycle_Frame,
+        DisplayName                 = Bicycle,
+        Icon                        = Bicycle2Icon,
+		DisplayCategory	            = SportsWeapon,
+        RequiresEquippedBothHands   = true,
+        TwoHandWeapon               = TRUE,
+        OnCreate                    = BicycleMenu.onCreateBicycle,
+        ModelWeaponPart = Bicycle_WheelFrontItem Bicycle_WheelFrontModel1 FrontWheel FrontWheel,
+        ModelWeaponPart = Bicycle_WheelRearItem Bicycle_WheelRearModel1 RearWheel RearWheel,
+        ModelWeaponPart = Bicycle_Saddlebag Bicycle_SaddlebagModel1 Saddlebag Saddlebag,
+        ModelWeaponPart = Bicycle_Basket Bicycle_BasketModel1 Basket Basket,
+        ModelWeaponPart = Bicycle_Crate Bicycle_CrateModel1 Crate Crate,
+        ModelWeaponPart = Bicycle_Pedals Bicycle_PedalsModel1 Pedals Pedals,
+        ModelWeaponPart = Bicycle_Lamp Bicycle_LampModel1 Lamp Lamp,
+    }
+    item Bicycle_WheelFrontItem
+    {
+        DisplayCategory = WeaponPart,
+        Type = WeaponPart,
+        DisplayName = Front Wheel,
+        Icon = Bicycle2WheelIcon,
+        Weight = 0.2,
+        MountOn = Bicycle,
+        PartType = FrontWheel,
+    }
+    item Bicycle_WheelRearItem
+    {
+        DisplayCategory = WeaponPart,
+        Type = WeaponPart,
+        DisplayName = Rear Wheel,
+        Icon = Bicycle2WheelIcon,
+        Weight = 0.2,
+        MountOn = Bicycle,
+        PartType = RearWheel,
+    }
+    item Bicycle_Saddlebag
+    {
+        DisplayCategory = WeaponPart,
+        Type = WeaponPart,
+        DisplayName = Bicycle Saddlebags,
+        Icon = Bicycle2BagsIcon,
+        Weight = 0.2,
+        MountOn = Bicycle,
+        PartType = Saddlebag,
+    }
+    item Bicycle_Pedals
+    {
+        DisplayCategory = WeaponPart,
+        Type = WeaponPart,
+        DisplayName = Pedals,
+        Icon = Pedals,
+        Weight = 0.2,
+        MountOn = Bicycle,
+        PartType = Pedals,
+    }
+    item Bicycle_Lamp
+    {
+        DisplayCategory = WeaponPart,
+        Type = WeaponPart,
+        DisplayName = Bicycle Lamp,
+        Icon = Bicycle2LampIcon,
+        Weight = 0.2,
+        MountOn = Bicycle,
+        PartType = Lamp,
+        ActivatedItem = TRUE,
+		LightDistance = 20,
+		LightStrength = 1.3,
+        TorchCone = TRUE,
+		TorchDot = 0.16,
+		SoundMap = Activate FlashlightOn,
+		SoundMap = Deactivate FlashlightOff,
+        DisappearOnUse = False,
+        UseDelta = 0.001,
+        Tags = Flashlight;UsesBattery,
+    }
+    item Bicycle_Basket
+    {
+        DisplayCategory = WeaponPart,
+        Type = WeaponPart,
+        DisplayName = Bicycle Basket,
+        Icon = Bicycle2FrontBasketIcon,
+        Weight = 0.2,
+        MountOn = Bicycle,
+        PartType = Basket,
+    }
+    item Bicycle_Crate
+    {
+        DisplayCategory = WeaponPart,
+        Type = WeaponPart,
+        DisplayName = Bicycle Crate,
+        Icon = Bicycle2WoodenCrateIcon,
+        Weight = 0.2,
+        MountOn = Bicycle,
+        PartType = Crate,
+    }
+    sound Bicycle_Riding
+    {
+        category = Ambient, loop = true, is3D = true,
+        clip { file = media/sound/Bicycle/Bicycle_Riding.ogg, distanceMin = 7, distanceMax = 7, volume = 0.4, }
+    }
+
+    sound Bicycle_Stop
+    {
+        category = Ambient, loop = true, is3D = true,
+        clip { file = media/sound/Bicycle/Bicycle_Stop.ogg, distanceMin = 7, distanceMax = 7, volume = 0.3, }
+    }
+
+    sound Bicycle_Bell
+    {
+        category = Ambient, loop = false, is3D = true,
+        clip { file = media/sound/Bicycle/Bicycle_Bell.ogg, distanceMin = 7, distanceMax = 7, volume = 0.4, }
+    }
+}

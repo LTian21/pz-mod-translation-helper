@@ -1,0 +1,260 @@
+module Base
+{
+
+	model 93chevySuburbanLeftLid
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|k3500_wrecker_lid_left,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 93chevySuburbanRightLid
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|k3500_wrecker_lid_right,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle SUB93Toolboxes
+	{
+		part ToolboxLidLeft
+		{
+
+			model LiddyMcLid1
+			{
+				file = 93chevySuburbanLeftLid,
+			}
+
+			anim Close
+				{
+					anim = door_rl_opening,
+					reverse = TRUE,
+					rate = 1.5,
+				}
+
+				anim Open
+				{
+					anim = door_rl_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = door_rl_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = door_rl_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+
+			category = bodywork,
+			area = ToolboxLeft,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 270.0 0.0,
+			}
+			itemType = Base.93chevyK3500WreckerLid,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+
+        part ToolboxLidRight
+		{
+
+			model LiddyMcLid2
+			{
+				file = 93chevySuburbanRightLid,
+			}
+
+			anim Close
+				{
+					anim = door_rr_opening,
+					reverse = TRUE,
+					rate = 1.5,
+				}
+
+				anim Open
+				{
+					anim = door_rr_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = door_rr_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = door_rr_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+
+			category = bodywork,
+			area = ToolboxRight,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 90.0 0.0,
+			}
+			itemType = Base.93chevyK3500WreckerLid,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}

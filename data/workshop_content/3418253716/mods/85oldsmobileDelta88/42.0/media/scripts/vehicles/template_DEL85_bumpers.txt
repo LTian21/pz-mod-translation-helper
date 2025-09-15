@@ -1,0 +1,167 @@
+module Base
+{
+	model 85oldsmobileDelta88frontBumper0
+	{
+		mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85-delta_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85oldsmobileDelta88frontBumperA
+	{
+		mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85-delta_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 85oldsmobileDelta88frontBullbarA
+	{
+		mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_bullbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85oldsmobileDelta88rearBumper0
+	{
+		mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85-delta_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DEL85Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 85oldsmobileDelta88frontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 85oldsmobileDelta88frontBumperA,
+				}
+
+            model FrontBullbarA
+				{
+                		file = 85oldsmobileDelta88frontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.85oldsmobileDelta88BumperFront0;Base.85oldsmobileDelta88BumperFrontA;Base.85gmBbodyBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEL85.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DEL85.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = DEL85.Create.BumperFront,
+					init = DEL85.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 85oldsmobileDelta88rearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.85oldsmobileDelta88BumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEL85.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DEL85.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = DEL85.Create.BumperRear,
+					init = DEL85.Init.BumperRear,
+					}
+		}
+	}
+}

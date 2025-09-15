@@ -1,0 +1,80 @@
+module Base
+{
+    /* Wide Fenders */
+    model ATASamaraFenders_wide
+    {
+        mesh = vehicles/ATA_Samara_model|Fenders_wide,
+        shader = vehicle,
+        scale = 0.02,
+    }
+    
+    /* Skirts side*/
+    model ATASamaraSkirts_side
+    {
+        mesh = vehicles/ATA_Samara_model|Skirts_side,
+        texture = Vehicles/ATA_Muscle_items,
+        shader = basicEffect,
+        scale = 0.02,
+    }
+    
+    /* Spoilers */
+    model ATASamaraSpoiler_front
+    {
+        mesh = vehicles/ATA_Samara_model|Spoiler_front,
+        shader = basicEffect,
+        texture = Vehicles/ATA_Muscle_items,
+        scale = 0.02,
+    }
+    model ATASamaraSpoiler_rear1
+    {
+        mesh = vehicles/ATA_Samara_model|Spoiler_rear1,
+        shader = vehicle,
+        scale = 0.02,
+    }
+    model ATASamaraSpoiler_rear2
+    {
+        mesh = vehicles/ATA_Samara_model|Spoiler_rear2,
+        shader = vehicle,
+        scale = 0.02,
+    }
+    
+    template vehicle ATASamara_Other
+    {
+        template = ATA2Visual/part/ATA2VisualSpoilerFront,
+        part ATA2VisualSpoilerFront
+        {
+            model Default
+            {
+                file = ATASamaraSpoiler_front,
+            }
+        }
+        template = ATA2Visual/part/ATA2VisualSpoilerRear,
+        part ATA2VisualSpoilerRear
+        {
+            model ATASpoilerRear1
+            {
+                file = ATASamaraSpoiler_rear1,
+            }
+            model ATASpoilerRear2
+            {
+                file = ATASamaraSpoiler_rear2,
+            }
+        }
+        template = ATA2Visual/part/ATA2VisualSkirtsSide,
+        part ATA2VisualSkirtsSide
+        {
+            model Default
+            {
+                file = ATASamaraSkirts_side,
+            }
+        }
+        template = ATA2Visual/part/ATA2VisualFendersWide,
+        part ATA2VisualFendersWide
+        {
+            model Default
+            {
+                file = ATASamaraFenders_wide,
+            }
+        }
+    }
+}

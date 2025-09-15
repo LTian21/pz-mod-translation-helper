@@ -1,0 +1,464 @@
+module CasterPlus
+{
+	imports
+	{
+		Base,
+	}
+	craftRecipe Harvest Fish Materials
+	{
+        timedAction = SliceMeat,
+		Time = 120,
+		Tags = InHandCraft;Butchering,
+		category = CasterPlus,
+		xpAward = Butchering:20,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+			item 1 tags[ZitcasterUncutFish;UncutFish] flags[InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 1 CasterPlus.FishBones,
+			item 1 CasterPlus.FishBoneHead,
+			item 2 CasterPlus.FishEyes,
+		}
+	}
+	craftRecipe Throw Fish Back
+	{
+        timedAction = EmptyPan,
+		Time = 10,
+		Tags = InHandCraft,
+		category = CasterPlus,
+		OnCreate = Recipe.OnCreate.ThrowFishBack,
+		inputs
+		{
+			item 1 tags[UncutFish;ZitcasterUncutFish] mode:destroy,
+		}
+		outputs
+		{
+			
+		}
+	}
+	craftRecipe Bundle Fish Bones
+	{
+		timedAction = Making,
+		Time = 40,
+		Tags = InHandCraft;Packing,
+		category = CasterPlus,
+		inputs
+		{
+			item 10 [CasterPlus.FishBones] mode:destroy,
+		}
+		outputs
+		{
+			item 1 CasterPlus.FishBonesBundle,
+		}
+	}
+	craftRecipe Unbundle Fish Bones
+	{
+		timedAction = Making,
+		Time = 40,
+		Tags = InHandCraft;Packing,
+		category = CasterPlus,
+		inputs
+		{
+			item 1 [CasterPlus.FishBonesBundle] mode:destroy,
+		}
+		outputs
+		{
+			item 10 CasterPlus.FishBones,
+		}
+	}
+	craftRecipe Make Improved Fishing Line
+	{
+		Time = 100,
+		category = CasterPlus,
+        tags = InHandCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Fishing:5,
+        SkillRequired = Fishing:3,
+		AutoLearnAny = Fishing:3,
+		needToBeLearn = true,
+		inputs
+		{
+			item 1 [Base.Twine] mode:destroy,
+			item 1 [Base.PremiumFishingLine;Base.FishingLine] mode:destroy,
+		}
+        outputs
+        {
+            item 1 CasterPlus.ImprovedFishingLine,
+        }
+	}
+	craftRecipe Make Improved Insect Lure
+	{
+		Time = 60,
+		category = CasterPlus,
+        tags = InHandCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Fishing:5,
+        SkillRequired = Fishing:2,
+		AutoLearnAny = Fishing:2,
+		needToBeLearn = true,
+		inputs
+		{
+			item 1 tags[NoCookingXP] mode:destroy,
+			item 1 [CasterPlus.Pearl] mode:destroy,
+			item 1 tags[FishingHook] mode:destroy,
+		}
+        outputs
+        {
+            item 1 CasterPlus.ImprovedInsectLure,
+        }
+	}
+	craftRecipe Make Improved Jig Lure
+	{
+		Time = 60,
+		category = CasterPlus,
+        tags = InHandCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Fishing:5,
+        SkillRequired = Fishing:2,
+		AutoLearnAny = Fishing:2,
+		needToBeLearn = true,
+		inputs
+		{
+			item 1 [Base.JigLure] mode:destroy,
+			item 1 [CasterPlus.Pearl] mode:destroy,
+		}
+        outputs
+        {
+            item 1 CasterPlus.ImprovedJigLure,
+        }
+	}
+	craftRecipe Make Improved Minnow Lure
+	{
+		Time = 60,
+		category = CasterPlus,
+        tags = InHandCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Fishing:5,
+        SkillRequired = Fishing:2,
+		AutoLearnAny = Fishing:2,
+		needToBeLearn = true,
+		inputs
+		{
+			item 1 [Base.MinnowLure] mode:destroy,
+			item 1 [CasterPlus.Pearl] mode:destroy,
+		}
+        outputs
+        {
+            item 1 CasterPlus.ImprovedMinnowLure,
+        }
+	}
+	craftRecipe Make Improved Soft Lure
+	{
+		Time = 60,
+		category = CasterPlus,
+        tags = InHandCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Fishing:5,
+        SkillRequired = Fishing:4,
+		AutoLearnAny = Fishing:4,
+		needToBeLearn = true,
+		inputs
+		{
+			item 1 [CasterPlus.SoftLure] mode:destroy,
+			item 1 [CasterPlus.Pearl] mode:destroy,
+		}
+        outputs
+        {
+            item 1 CasterPlus.ImprovedSoftLure,
+        }
+	}
+	craftRecipe Make Improved Spoon Lure
+	{
+		Time = 60,
+		category = CasterPlus,
+        tags = InHandCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Fishing:5,
+        SkillRequired = Fishing:4,
+		AutoLearnAny = Fishing:4,
+		needToBeLearn = true,
+		inputs
+		{
+			item 1 [CasterPlus.SpoonLure] mode:destroy,
+			item 1 [CasterPlus.Pearl] mode:destroy,
+		}
+        outputs
+        {
+            item 1 CasterPlus.ImprovedSpoonLure,
+        }
+	}	
+	craftRecipe Open Clam Shell
+	{
+		Time = 60,
+		category = CasterPlus,
+        tags = InHandCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Fishing:2,
+		inputs
+		{
+			item 1 [CasterPlus.ClamShell] mode:destroy,
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;NoBrokenItems],
+		}
+        outputs
+        {
+            item 1 CasterPlus.Pearl,
+        }
+	}
+	craftRecipe Make Fish Trophy
+	{
+		Time = 200,
+		category = CasterPlus,
+        tags = AnySurfaceCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Fishing:15,
+        SkillRequired = Fishing:3,
+		AutoLearnAny = Fishing:3,
+		needToBeLearn = true,
+		inputs
+		{
+			item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+			item 1 tags[ZitcasterUncutFish;UncutFish] mappers[fishtype] mode:destroy,
+			item 3 [Base.Nails] mode:destroy,
+			item 1 [Base.Plank] mode:destroy,
+			item 1 [Base.Glue] mode:destroy,
+			item 1 [CasterPlus.FishBoneHead] mode:destroy,
+			item 1 [CasterPlus.FishBones] mode:destroy,
+		}
+        outputs
+        {
+            item 1 mapper:fishtype,
+        }
+		itemMapper fishtype
+		{
+			Base.bcarptrophy = Base.BigheadCarp,
+			Base.bcatfishtrophy = Base.BullheadCatfish,
+			Base.btrouttrophy = Base.BrownTrout,
+			Base.ccarptrophy = Base.CommonCarp,
+			Base.gcarptrophy = Base.GrassCarp,
+			Base.lampreytrophy = Base.Lamprey,
+			Base.rtrouttrophy = Base.RainbowTrout,
+			Base.agartrophy = Base.AligatorGar,
+			Base.bluecatfishtrophy = Base.BlueCatfish,
+			Base.ccatfishtrophy = Base.ChannelCatfish,
+			Base.fcatfishtrophy = Base.FlatheadCatfish,
+			Base.scarptrophy = Base.SilverCarp,
+			Base.spiffishtrophy = Base.Spiffish,
+			Base.fdrumtrophy = Base.FreshwaterDrum,
+			Base.bcrappietrophy = Base.BlackCrappie,
+			Base.bluegilltrophy = Base.Bluegill,
+			Base.gsunfishtrophy = Base.GreenSunfish,
+			Base.rsunfishtrophy = Base.RedearSunfish,
+			Base.saugertrophy = Base.Sauger,
+			Base.smallbasstrophy = Base.SmallmouthBass,
+			Base.spotbasstrophy = Base.SpottedBass,
+			Base.walleyetrophy = Base.Walleye,
+			Base.whitebasstrophy = Base.WhiteBass,
+			Base.wcrappietrophy = Base.WhiteCrappie,
+			Base.yperchtrophy = Base.YellowPerch,
+			Base.stripebasstrophy = Base.StripedBass,
+			Base.sgartrophy = Base.SpottedGar,
+			Base.largebasstrophy = Base.LargemouthBass,
+			Base.npiketrophy = Base.NorthernPike,
+			Base.lgartrophy = Base.LongnoseGar,
+			Base.paddlefishtrophy = Base.Paddlefish,
+			Base.lsturgeontrophy = Base.LakeSturgeon,
+			Base.zedfishtrophy = Base.ZedFish,
+			Base.musktrophy = Base.Muskellunge,
+		}
+	}
+	craftRecipe Fix Composite Rod
+	{
+        timedAction = Making,
+		Time = 80,
+		NeedToBeLearn = True,
+		OnCreate = Recipe.OnCreate.FixFishingRod,
+		Tags = InHandCraft;Fishing,
+        category = CasterPlus,
+		AutoLearnAny = Fishing:4,
+		inputs
+		{
+			item 1 [Base.CompositeFishingRodBreak],
+			item 1 tags[FishingLine],
+			item 1 [Base.Paperclip;Base.Nails;Base.FishingHook;Base.FishingHook_Forged;Base.FishingHook_Bone],
+		}
+		outputs
+		{
+			item 1 Base.CompositeFishingRod,
+		}
+	}
+	craftRecipe Fix Fiberglass Rod
+	{
+        timedAction = Making,
+		Time = 80,
+		NeedToBeLearn = True,
+		OnCreate = Recipe.OnCreate.FixFishingRod,
+		Tags = InHandCraft;Fishing,
+        category = CasterPlus,
+		AutoLearnAny = Fishing:4,
+		inputs
+		{
+			item 1 [Base.FiberglassFishingRodBreak],
+			item 1 tags[FishingLine],
+			item 1 [Base.Paperclip;Base.Nails;Base.FishingHook;Base.FishingHook_Forged;Base.FishingHook_Bone],
+		}
+		outputs
+		{
+			item 1 Base.FiberglassFishingRod,
+		}
+	}
+	craftRecipe Forge Fiberglass Rod
+    {
+        time        = 200,
+        tags = PrimitiveFurnace,
+        category = CasterPlus,
+
+        inputs
+        {
+            item 4 [Base.FiberglassTape],
+            item 2 [Base.Epoxy],
+			item 1 [CasterPlus.FishingRodMould],
+        }
+        outputs
+        {
+            item 1 Base.FiberglassFishingRodBreak,
+        }
+    }
+
+    craftRecipe Forge Composite Rod
+    {
+        time        = 200,
+        tags = PrimitiveFurnace,
+        category = CasterPlus,
+
+        inputs
+        {
+            item 8 tags[Charcoal],
+            item 2 [Base.Epoxy],
+			item 1 [CasterPlus.FishingRodMould],
+        }
+        outputs
+        {
+            item 1 Base.CompositeFishingRodBreak,
+        }
+    }
+	craftRecipe Carve Fishing Mould
+	{
+        timedAction = Making,
+        Time = 100,
+		SkillRequired = Carving:2,
+		Tags = InHandCraft,
+		xpAward = Carving:5,
+        category = CasterPlus,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegrade;IsNotDull],
+			item 1 [Base.Plank],
+		}
+		outputs
+		{
+			item 1 CasterPlus.FishingRodMould,
+		}
+	}
+	craftRecipe Refined Fish Oil Extraction
+	{
+		Time = 200,
+		category = CasterPlus,
+        tags = AnySurfaceCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Fishing:30,
+        SkillRequired = Fishing:4,
+		AutoLearnAny = Fishing:8,
+		needToBeLearn = true,
+		inputs
+		{
+			item 1 [Base.fishoilextractor] mode:keep,
+			item 1 tags[ZitcasterUncutFish;UncutFish] mappers[fishtype] mode:destroy,
+		}
+        outputs
+        {
+            item 2 mapper:fishtype,
+        }
+		itemMapper fishtype
+		{
+			CasterPlus.FishOil = Base.BigheadCarp,
+			CasterPlus.FishOil = Base.BullheadCatfish,
+			CasterPlus.FishOil = Base.BrownTrout,
+			CasterPlus.FishOil = Base.CommonCarp,
+			CasterPlus.FishOil = Base.GrassCarp,
+			CasterPlus.FishOil = Base.Lamprey,
+			CasterPlus.FishOil = Base.RainbowTrout,
+			CasterPlus.FishOil = Base.AligatorGar,
+			CasterPlus.FishOil = Base.BlueCatfish,
+			CasterPlus.FishOil = Base.ChannelCatfish,
+			CasterPlus.FishOil = Base.FlatheadCatfish,
+			CasterPlus.FishOil = Base.SilverCarp,
+			CasterPlus.FishOil = Base.Spiffish,
+			CasterPlus.FishOil = Base.FreshwaterDrum,
+			CasterPlus.FishOil = Base.BlackCrappie,
+			CasterPlus.FishOil = Base.Bluegill,
+			CasterPlus.FishOil = Base.GreenSunfish,
+			CasterPlus.FishOil = Base.RedearSunfish,
+			CasterPlus.FishOil = Base.Sauger,
+			CasterPlus.FishOil = Base.SmallmouthBass,
+			CasterPlus.FishOil = Base.SpottedBass,
+			CasterPlus.FishOil = Base.Walleye,
+			CasterPlus.FishOil = Base.WhiteBass,
+			CasterPlus.FishOil = Base.WhiteCrappie,
+			CasterPlus.FishOil = Base.YellowPerch,
+			CasterPlus.FishOil = Base.StripedBass,
+			CasterPlus.FishOil = Base.SpottedGar,
+			CasterPlus.FishOil = Base.LargemouthBass,
+			CasterPlus.FishOil = Base.NorthernPike,
+			CasterPlus.FishOil = Base.LongnoseGar,
+			CasterPlus.FishOil = Base.Paddlefish,
+			CasterPlus.FishOil = Base.LakeSturgeon,
+			CasterPlus.FishOil = Base.ZedFish,
+			CasterPlus.FishOil = Base.Muskellunge,
+		}
+	}
+	craftRecipe Make Wooden Pond
+	{
+        Time = 200,
+		category = CasterPlus,
+        tags = AnySurfaceCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Fishing:50,
+        SkillRequired = Fishing:5,
+		AutoLearnAny = Fishing:7,
+		needToBeLearn = true,
+		inputs
+		{
+			item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+			item 1 tags[Saw] mode:keep flags[MayDegradeLight],
+			item 1 [Base.NailsBox] mode:destroy,
+			item 12 [Base.Plank] mode:destroy,
+			item 2 tags[Glue] mode:destroy,
+			item 1 [Base.Dirtbag] mode:destroy,
+			item 8 [Base.Stone2],
+			item 1 [Base.Bucket] mode:keep,
+			-fluid 10 [Water;TaintedWater],
+		}
+		outputs
+		{
+			item 1 Base.woodpond2,
+		}
+	}
+	craftRecipe Take Manual
+	{
+        timedAction = Making,
+		Time = 10,
+		Tags = InHandCraft;
+		category = CasterPlus,
+		inputs
+		{
+			item 1 [Base.fishoilextractor] mode:keep,
+		}
+		outputs
+		{
+			item 1 CasterPlus.CasterMag4,
+		}
+	}
+}

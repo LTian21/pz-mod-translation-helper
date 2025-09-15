@@ -1,0 +1,90 @@
+module Base
+{
+    model TrailerM101A2mount
+	{
+		mesh = vehicles/Vehicles_TrailerM101A2cargo_Body|86m101a2_spare_mount,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M101A2Spares
+		{
+		part DAMNSpareTire
+        	{
+
+			model SpareM101A
+				{
+                		file = 86chevyCUCVWheel1RL,
+                        offset = 0.0000 0.0273 1.4778,
+				        rotate = 0.0000 -90.0000 0.0000,
+				}
+            model SpareM101Amount
+				{
+                		file = TrailerM101A2mount,
+				}
+            model SpareM101B
+				{
+                		file = 86chevyCUCVWheel2RL,
+                        offset = 0.0000 0.0273 1.4778,
+				        rotate = 0.0000 -90.0000 0.0000,
+				}
+            model SpareM101Bmount
+				{
+                		file = TrailerM101A2mount,
+				}
+
+			area = SpareTireFront,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.86chevyCUCVTire1;Base.86chevyCUCVTire2,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+					complete = CUCV86.InstallComplete.SpareTrailer,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 2000,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = CUCV86.UninstallComplete.SpareTrailer,
+            		}
+
+            		lua
+            		{
+			create = CUCV86.Create.SpareTrailer,
+			init = CUCV86.Init.SpareTrailer,
+			}
+		}
+	}
+}

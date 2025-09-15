@@ -1,0 +1,48 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity ES_CementFloor
+        {
+            LuaWindowClass      = ISEntityWindow,
+            DisplayName         = Create a floor from concrete,
+            Icon                = Cement_floor,
+        }
+    }
+
+    entity CementFloor
+    {
+
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_CementFloor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+		    isThumpable = false,
+			OnIsValid = BuildRecipeCode.floor.OnIsValid,
+		    OnCreate = BuildRecipeCode.floor.OnCreate,
+            face Single
+            {
+                layer
+                {
+                    row = ro_tiles_01_5,
+                }
+            }
+        }
+
+        component CraftRecipe
+        {
+		    timedAction   = EmptyBag,
+            time          = 100,
+            category      = Outdoors,
+            inputs
+            {
+		        item 1 [Base.BucketConcreteFull;Base.BucketCarvedConcreteFull] flags[Prop1],		                       
+            }
+        }
+    }
+}

@@ -1,0 +1,302 @@
+module Base
+{		
+	template vehicle TankTrack
+	{
+		part Track
+		{				
+			category = nodisplay,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			lua
+			{
+				create = Vehicles.Create.TRACK,
+				init = Vehicles.Init.TRACK,
+				update = Vehicles.Use.TRACK,
+			}
+		}
+	}
+	
+	template vehicle TankArmor
+	{
+		part Armor
+		{				
+			lua
+			{
+				create = Vehicles.Create.ARMOR,
+				init = Vehicles.Init.ARMOR,
+				update = Vehicles.Update.ARMOR,
+			}
+		}
+	}
+	
+	template vehicle TankArmorEngine
+	{
+		part Engine_Armor
+		{					
+			lua
+			{
+				create = Vehicles.Create.ENGINE_ARMOR,
+				init = Vehicles.Init.ENGINE_ARMOR,
+				update = Vehicles.Update.ENGINE_ARMOR,
+			}
+		}
+	}
+	
+	template vehicle TankBrake
+	{
+		part BrakeFrontLeft
+		{
+			area = TireFrontLeft,
+			
+		}
+
+		part BrakeFrontRight
+		{
+			area = TireFrontRight,
+			
+		}
+
+		part BrakeRearLeft
+		{
+			area = TireRearLeft,
+			
+		}
+
+		part BrakeRearRight
+		{
+			area = TireRearRight,
+			
+		}
+
+		part Brake*
+		{
+			category = brakes,
+			itemType = Base.OldBrake;Base.NormalBrake;Base.ModernBrake,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Brake,
+				update = Vehicles.Update.Brakes,
+			}
+		}
+	}
+	
+	template vehicle TankSuspension
+	{
+		part SuspensionFrontLeft
+		{
+			area = TireFrontLeft,			
+		}
+
+		part SuspensionFrontRight
+		{
+			area = TireFrontRight,			
+		}
+
+		part SuspensionRearLeft
+		{
+			area = TireRearLeft,			
+		}
+
+		part SuspensionRearRight
+		{
+			area = TireRearRight,			
+		}
+
+		part Suspension*
+		{
+			category = suspension,
+			itemType = Base.NormalSuspension;Base.ModernSuspension,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				update = Vehicles.Update.Suspension,
+			}
+		}
+	}
+	
+	template vehicle Antenna
+	
+		part Antenna*
+		{
+			category = addons,
+			itemType = Base.Military_Vehicle_Antenna,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+					}
+				}
+				time = 100,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+					}
+				}
+				time = 100,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+
+			model Default
+			{
+				file = M998_Humvee_Antenna,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+				scale = 1.0,
+			}
+
+			anim Static
+			{
+				anim = Antena_Back,
+				reverse = FALSE,
+				animate = FALSE,
+				rate = 0.001,
+			}
+
+			anim Front
+			{
+				anim = Antena_Back,
+				reverse = FALSE,
+				loop = FALSE,
+				rate = 1.0,
+			}
+
+			anim Front_Normal
+			{
+				anim = Antena_Back,
+				reverse = TRUE,
+				loop = FALSE,
+				rate = 1.0,
+			}
+
+			anim Back
+			{
+				anim = Antena_Front,
+				reverse = FALSE,
+				loop = FALSE,
+				rate = 1.0,
+			}
+
+			anim Back_Normal
+			{
+				anim = Antena_Front,
+				reverse = TRUE,
+				loop = FALSE,
+				rate = 1.0,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.ANTENNA,
+				init = Vehicles.Init.ANTENNA,
+				update = Vehicles.Update.ANTENNA,
+			}
+		}
+	}	
+}

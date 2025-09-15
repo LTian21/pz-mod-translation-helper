@@ -1,0 +1,204 @@
+module Base
+{
+
+	model W460seatfl
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_seat_f,
+		texture = Vehicles/Vehicles_84mercLWB4_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model W460seatfr
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_seat_f,
+		texture = Vehicles/Vehicles_84mercLWB4_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	model W460seatrl
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_seat_r,
+		texture = Vehicles/Vehicles_84mercLWB4_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model W460seatrr
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_seat_r,
+		texture = Vehicles/Vehicles_84mercLWB4_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	
+	template vehicle W460SeatsFront
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = W460seatfl,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = W460seatfr,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.W460CarSeatFront,
+			mechanicRequireKey = true,
+			durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+    template vehicle W460SeatsRear
+	{
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = W460seatrl,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = W460seatrr,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.W460CarSeatRear,
+			mechanicRequireKey = true,
+			durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

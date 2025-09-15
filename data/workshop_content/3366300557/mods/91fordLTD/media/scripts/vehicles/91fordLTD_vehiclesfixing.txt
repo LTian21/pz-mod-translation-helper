@@ -1,0 +1,128 @@
+module Base
+{
+	recipe Repair Ford CVPI Tire
+    	{
+		fordCVPITire1,
+		damnCraft.TireRepairTools,
+		damnCraft.TireRepairRubberSolution,
+		damnCraft.TireRepairStrips,
+
+		NoBrokenItems:false,
+		Result:damnCraft.TireRepairTools,
+		Time:250.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+    recipe Repair 91 Ford LTD Tire
+    	{
+		91fordLTDTire1,
+		damnCraft.TireRepairTools,
+		damnCraft.TireRepairRubberSolution,
+		damnCraft.TireRepairStrips,
+
+		NoBrokenItems:false,
+		Result:damnCraft.TireRepairTools,
+		Time:250.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+	fixing Fix 91 Ford LTD Seat
+	{
+	   Require : 91fordLTDSeatFront1;91fordLTDSeatRear1,
+	   ConditionModifier : 0.5,
+
+       Fixer : DuctTape=2;Mechanics=1,
+	}
+	
+	fixing Fix 91 Ford LTD Trunk Welding
+	{
+	   Require : 91fordLTDTrunk1;91fordLTDWagonTrunk1;91fordLTDRoofrack1,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=2,
+	}
+
+	fixing Fix 91 Ford LTD Hood Welding
+	{
+	   Require : 91fordLTDEngineDoor1,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+	}
+
+   fixing Fix 91 Ford LTD Hood
+	{
+	   Require : 91fordLTDEngineDoor1,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix 91 Ford LTD Trunk Lid Welding
+    {
+       Require : 91fordLTDTrunkDoor1;91fordLTDWagonTrunkDoor1,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+    }
+
+   fixing Fix 91 Ford LTD Trunk Lid
+	{
+      Require : 91fordLTDTrunkDoor1;91fordLTDWagonTrunkDoor1,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix 91 Ford LTD Door Welding
+	{
+	   Require : 91fordLTDFrontDoor1;91fordLTDRearDoor1,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=3,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=3,
+	}
+
+	fixing Fix Ford CVPI Armor Welding
+    {
+       Require : fordCVPIWindshieldArmor;fordCVPIFrontWindowArmor;fordCVPIRearWindowArmor;fordCVPIWindshieldRearArmor,
+       GlobalItem : BlowTorch=8,
+       ConditionModifier : 1.0,
+
+       Fixer : SheetMetal; MetalWelding=4;Mechanics=4,
+       Fixer : SmallSheetMetal=2; MetalWelding=4;Mechanics=4,
+    }
+
+	fixing Fix 91 Ford LTD Armor Welding
+    {
+       Require : 91fordLTDBumperFront1;91fordLTDWagonBackWindowArmor;91fordLTDWagonWindshieldRearArmor;91fordLTDCabBarrier1,
+       GlobalItem : BlowTorch=7,
+       ConditionModifier : 1.0,
+
+       Fixer : SheetMetal; MetalWelding=4;Mechanics=4,
+       Fixer : SmallSheetMetal=2; MetalWelding=4;Mechanics=4,
+    }
+
+    fixing Fix 91 Ford LTD Plastic Welding
+    {
+       Require : 91fordLTDBumperFront0;91fordLTDBumperRear0;91fordLTDWagonBumperRear1,
+       GlobalItem : PlasticWeldingGun=250,
+       ConditionModifier : 0.85,
+
+       Fixer : PlasticWeldingStaples100Pack; Mechanics=4,
+    }
+
+}

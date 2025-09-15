@@ -1,0 +1,152 @@
+module Base
+{
+
+    model 88toyotaHiluxWindshield
+    {
+        mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 88toyotaHiluxWindshieldRear
+    {
+        mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle HLX88WindshieldsXC
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 88toyotaHiluxWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.88toyotaHiluxWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = true,
+             
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = DAMNWindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 88toyotaHiluxWindshieldRear,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.88toyotaHiluxWindshieldRear,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+             
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle HLX88WindshieldsSC
+	{
+        template! = HLX88WindshieldsXC,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 88toyotaHiluxWindshieldRear,
+                offset = 0.0000 0.0000 0.4047,
+				rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+    }
+}

@@ -1,0 +1,84 @@
+module Base
+{
+
+	model 90bmwE30Roofrack0
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_roofrack,
+		texture = Vehicles/Vehicles_90bmwE30_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BMWE30Roofrack
+	{
+		part BMWE30Roofrack
+		{
+
+			model BMWE30Roofrack0
+				{
+                		file = 90bmwE30Roofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.90bmwE30Roofrack,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = BMWE30.InstallComplete.Roofrack,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = BMWE30.Create.Roofrack,
+					init = BMWE30.Init.Roofrack,
+				}
+		}
+	}
+}
+

@@ -1,0 +1,60 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_RightBarBrownWallBar
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Right Bar Brown Wall Bar,
+			Icon		= location_restaurant_bar_01_31,
+		}
+	}
+
+    entity RightBarBrownWallBar
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_RightBarBrownWallBar,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_restaurant_bar_01_39,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_restaurant_bar_01_31,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:8,
+            xpAward       = Woodwork:5,
+            category      = Containers_Commercial,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_commercialCounterDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 8 [Base.Plank] flags[Prop2],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

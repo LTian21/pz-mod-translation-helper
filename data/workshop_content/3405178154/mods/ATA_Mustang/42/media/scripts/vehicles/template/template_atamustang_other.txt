@@ -1,0 +1,121 @@
+module Base
+{
+    model ATAMustangZapaska
+    {
+        mesh = vehicles/ATA_Mustang_model|Zapaska,
+        texture = Vehicles/ATA_Mustang_wheel,
+        scale = 0.0199,
+    }
+    model ATAMustangZapaskaDark
+    {
+        mesh = vehicles/ATA_Mustang_model|Zapaska,
+        texture = Vehicles/ATA_Mustang_wheelDark,
+        scale = 0.02,
+    }
+    
+    /* Wide Fenders */
+    model ATAMustangFenders_wide
+    {
+        mesh = vehicles/ATA_Mustang_model|Fenders_wide,
+        shader = vehicle_norandom_multiuv,
+        scale = 0.02,
+    }
+    
+    /* Skirts side*/
+    model ATAMustangSkirts_side
+    {
+        mesh = vehicles/ATA_Mustang_model|Skirts_side,
+        texture = Vehicles/ATA_Mustang_items,
+        shader = vehiclewheel,
+        scale = 0.02,
+    }
+    
+    /* Spoilers */
+    model ATAMustangSpoiler_front
+    {
+        mesh = vehicles/ATA_Mustang_model|Spoiler_front,
+        shader = vehiclewheel,
+        texture = Vehicles/ATA_Mustang_items,
+        scale = 0.02,
+    }
+    model ATAMustangSpoiler_rear1
+    {
+        mesh = vehicles/ATA_Mustang_model|Spoiler_rear1,
+        shader = vehicle_norandom_multiuv,
+        scale = 0.02,
+    }
+    model ATAMustangSpoiler_rear2
+    {
+        mesh = vehicles/ATA_Mustang_model|Spoiler_rear2,
+        shader = vehicle_norandom_multiuv,
+        scale = 0.02,
+    }
+    
+    template vehicle ATAMustang_Other
+    {
+        template = ATASpareWheel/part/ATASpareWheel,
+        part ATASpareWheel
+        {
+            model LightTire
+            {
+                file = ATAMustangZapaska,
+            }
+            model DarkTire
+            {
+                file = ATAMustangZapaskaDark,
+            }
+            table ATA2ItemToModel 
+            {
+                OldTire3 = LightTire,
+                NormalTire3 = LightTire,
+                ModernTire3 = DarkTire,
+            }
+            table install
+            {
+                requireInstalled = ATA2ProtectionWindshieldRear,
+            }
+            lua
+            {
+                create = ATATuning2.Create.Chance0,
+                init = ATATuning2.Init.DefaultModel,
+            }
+        }
+        
+        template = ATA2Visual/part/ATA2VisualSpoilerFront,
+        part ATA2VisualSpoilerFront
+        {
+            model Default
+            {
+                file = ATAMustangSpoiler_front,
+            }
+        }
+        template = ATA2Visual/part/ATA2VisualSpoilerRear,
+        part ATA2VisualSpoilerRear
+        {
+            model ATASpoilerRear1
+            {
+                file = ATAMustangSpoiler_rear1,
+            }
+            model ATASpoilerRear2
+            {
+                file = ATAMustangSpoiler_rear2,
+            }
+        }
+        template = ATA2Visual/part/ATA2VisualSkirtsSide,
+        part ATA2VisualSkirtsSide
+        {
+            model Default
+            {
+                file = ATAMustangSkirts_side,
+            }
+        }
+        template = ATA2Visual/part/ATA2VisualFendersWide,
+        part ATA2VisualFendersWide
+        {
+            model Default
+            {
+                file = ATAMustangFenders_wide,
+            }
+        }
+    }
+}

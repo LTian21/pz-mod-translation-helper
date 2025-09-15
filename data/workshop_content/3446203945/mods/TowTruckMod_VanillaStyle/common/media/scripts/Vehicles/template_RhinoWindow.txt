@@ -1,0 +1,97 @@
+module Base
+{	
+	template vehicle RhinoWindow
+	{
+		part WindowFrontLeft
+		{
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.FrontWindow,
+			
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+			{
+			    requireUninstalled = PU_FL_Window_ChevalierRhino_Light; PU_FL_Window_ChevalierRhino_Heavy,
+			}
+		}
+
+		part WindowFrontRight
+		{		
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.FrontWindow,		
+			
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+			{
+			    requireUninstalled = PU_FR_Window_ChevalierRhino_Light; PU_FR_Window_ChevalierRhino_Heavy,
+			}			
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			anim Open
+			{
+				sound = VehicleWindowHandleOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowHandleClose,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,			
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}
+

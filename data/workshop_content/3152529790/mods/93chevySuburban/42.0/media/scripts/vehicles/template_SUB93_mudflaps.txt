@@ -1,0 +1,98 @@
+module Base
+{
+
+	model 93chevyK3500Mudflaps0
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|k3500_flatbed_mudflaps,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 93chevyK3500Mudflaps1
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|k3500_wrecker_mudflaps,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SUB93Mudflaps
+	{
+		part DAMNMudflaps
+        	{
+
+			model Mudflaps0
+				{
+                		file = 93chevyK3500Mudflaps0,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.93chevyK3500mudflaps,
+			mechanicRequireKey = false,
+			durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.Mudflaps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = SUB93.UninstallComplete.Mudflaps,
+
+            		}
+
+	            lua
+	            {
+				create = SUB93.Create.Mudflaps,
+				init = SUB93.Init.Mudflaps,
+				}
+		}
+	}
+
+    template vehicle SUB93MudflapsWrecker
+	{
+        template! = SUB93Mudflaps,
+
+		part DAMNMudflaps
+        	{
+
+			model Mudflaps0
+				{
+                		file = 93chevyK3500Mudflaps1,
+				}
+            }
+    }
+}

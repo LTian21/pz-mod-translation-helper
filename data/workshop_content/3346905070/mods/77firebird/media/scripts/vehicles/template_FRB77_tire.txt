@@ -1,0 +1,204 @@
+module Base
+{
+
+	model 77firebirdWheelL
+	{
+		mesh = vehicles/Vehicles_77firebird_Wheels|trans77_tire0,
+		texture = vehicles/Vehicles_77firebird_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 77firebirdWheelR
+	{
+		mesh = vehicles/Vehicles_77firebird_Wheels|trans77_tire0,
+		texture = vehicles/Vehicles_77firebird_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 77firebirdTAWheelL
+	{
+		mesh = vehicles/Vehicles_77firebird_Wheels|trans77_tire0,
+		texture = vehicles/Vehicles_77firebirdTA_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 77firebirdTAWheelR
+	{
+		mesh = vehicles/Vehicles_77firebird_Wheels|trans77_tire0,
+		texture = vehicles/Vehicles_77firebirdTA_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle FRB77Tires
+	{
+		part TireFrontLeft
+		{
+            model FRB77TireFL
+			{
+				file = 77firebirdWheelL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model FRB77TireFR
+			{
+				file = 77firebirdWheelR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model FRB77TireRL
+			{
+				file = 77firebirdWheelL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+            model FRB77TireRR
+			{
+				file = 77firebirdWheelR,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			itemType = Base.77firebirdTire,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+	}
+
+    template vehicle FRB77TiresTA
+	{
+        template! = FRB77Tires,
+
+		part TireFrontLeft
+		{
+            model FRB77TireFL
+			{
+				file = 77firebirdTAWheelL,
+			}
+		}
+
+		part TireFrontRight
+		{
+            model FRB77TireFR
+			{
+				file = 77firebirdTAWheelR,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model FRB77TireRL
+			{
+				file = 77firebirdTAWheelL,
+			}
+		}
+
+		part TireRearRight
+		{
+            model FRB77TireRR
+			{
+				file = 77firebirdTAWheelR,
+			}
+		}
+	}
+}

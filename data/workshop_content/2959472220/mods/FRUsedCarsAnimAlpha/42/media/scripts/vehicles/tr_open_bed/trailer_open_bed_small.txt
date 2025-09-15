@@ -1,0 +1,328 @@
+module Base
+{
+	vehicle Trailer_fr_open_bed_small
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 0.8,
+		engineRepairLevel = 4,
+		playerDamageProtection = 0.8,
+		spawnOffsetY = 0.19392952,
+
+		model
+		{
+			file = Trailer_open_bed_small,
+			scale = 1.8600,
+			offset = 0.0000 0.2097 -0.0269,
+		}
+
+		skin
+		{
+			texture = Vehicles/trailer_open_bed_1_shell,
+		}
+
+		skin
+		{
+			texture = Vehicles/trailer_open_bed_2_shell,
+		}
+
+		skin
+		{
+			texture = Vehicles/trailer_open_bed_3_shell,
+		}
+
+		textureMask = Vehicles/trailer_open_bed_mask,
+		textureLights = Vehicles/trailer_open_bed_lights,
+		textureDamage1Overlay = Vehicles/fr_Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/fr_Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/fr_Veh_Damage1,
+		textureDamage2Shell = Vehicles/fr_Veh_Damage2,
+		textureRust = Vehicles/fr_Veh_Rust,
+		template = FR_CarSpawnInfo,
+		extents = 0.5161 0.2688 0.9355,
+		mass = 300,
+		physicsChassisShape = 0.5161 0.2688 0.9355,
+		centerOfMassOffset = 0.0000 0.2312 -0.0269,
+		shadowExtents = 0.5161 0.9355,
+		shadowOffset = 0.0000 -0.0269,
+		engineForce = 3600,
+		engineQuality = 60,
+		engineLoudness = 55,
+		maxSpeed = 70f,
+		brakingForce = 1,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 1.3f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 100,
+		suspensionCompression = 2.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.2,
+		wheelFriction = 4.0f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+
+		physics box
+		{
+			offset = 0.1022 0.1290 0.5591,
+			extents = 0.0538 0.0538 0.5806,
+			rotate = 0.0000 -20.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = -0.1022 0.1290 0.5591,
+			extents = 0.0538 0.0538 0.5806,
+			rotate = 0.0000 20.0000 0.0000,
+		}
+
+		physics sphere
+		{
+			offset = 0.0000 0.1559 0.8548,
+			radius = 0.0549,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.2688 -0.0269,
+			extents = 0.7097 0.0538 0.3333,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 -0.0108 0.8118,
+			extents = 0.0538 0.0538 0.0538,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.3065 -0.1613 0.0000,
+			radius = 0.14f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.3065 -0.1613 0.0000,
+			radius = 0.14f,
+			width = 0.2f,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.4785 -0.0269 0.4409 0.4731,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.4785 -0.0269 0.4409 0.4731,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -0.7151 0.4731 0.4409,
+		}
+
+		area TruckBedOpen
+		{
+			xywh = 0.0000 -0.1720 1.2903 1.5269,
+		}
+
+		area FRSpareTire
+		{
+			xywh = 0.0000 0.5430 0.9570 0.6667,
+		}
+
+		template = FRTruckBed,
+
+		part TruckBed
+		{
+			itemType = Base.FRBigTrunk,
+
+			container
+			{
+				capacity = 90,
+			}
+
+			model TrunkFillerEmpty
+			{
+				file = FRTrunkfiller_Empty,
+				offset = 0.0 -0.05 -0.2,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			model TrunkFiller1
+			{
+				file = FRTrunkfiller_CardBoxSmall_1,
+				offset = 0.13 -0.05 -0.35,
+				rotate = 0.0000 -5.0000 0.0000,
+			}
+
+			model TrunkFiller2
+			{
+				file = FRTrunkfiller_CardBoxBig_1,
+				offset = -0.03 -0.05 -0.17,
+				rotate = 0.0000 10.0000 0.0000,
+			}
+
+			model TrunkFiller3
+			{
+				file = FRTrunkfiller_TarpBig_2,
+				offset = -0.0 -0.05 0.19,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		template = FRAttachmentRoof,
+
+		part FRAttachmentRoof
+		{
+			table FRPartInfo
+			{
+				partChance = 50,
+				selectItemType = MetalBar,
+				selectChance = 100,
+			}
+
+			itemType = Base.MetalBar,
+			category = nodisplay,
+
+			model MetalBar
+			{
+				file = Trailer_open_bed_small_backboard,
+			}
+
+			table install
+			{
+				requireInstalled =,
+			}
+		}
+
+		template = FRTrunkDoor,
+
+		part TrunkDoor
+		{
+			model TrunkDoor
+			{
+				file = Trunk_Trailer_open_bed_small,
+				offset = 0.0 -0.05 -0.468,
+			}
+
+			anim Open
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				rate = 0.625,
+				sound = VehicleTrunkOpen,
+			}
+
+			anim Close
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				rate = 0.65,
+				sound = VehicleTrunkCloseSportsCar,
+			}
+		}
+
+		template = FRAttachmentBed,
+
+		part FRAttachmentBed
+		{
+			itemType = Base.Tarp;Base.FRBedCapSoft;Base.FRBedSideBoards,
+
+			table FRPartInfo
+			{
+				partChance = 50,
+				selectItemType = Tarp,
+				selectChance = 40,
+				excludeItemType = FRBigBedFRBedCapSoft,
+				excludeChance = 70,
+				parentVisual =,
+			}
+
+			model FRBedCapSoft
+			{
+				file = FR_BedTrailerAttachCapSoft_Small1,
+				offset = 0.0000 0.155 0.47500,
+			}
+
+			model FRBedSideBoards
+			{
+				file = FR_BedTrailerAttachBoards_Small1,
+				offset = 0.0000 0.155 0.465000,
+			}
+
+			model Tarp
+			{
+				file = FR_BedTrailerAttachTarp_Small1,
+				offset = 0.0000 0.155 0.461,
+			}
+		}
+
+		template = FRTrailerTire/part/TireFrontLeft,
+		template = FRTrailerTire/part/TireFrontRight,
+		template = Suspension/part/SuspensionFrontLeft,
+		template = Suspension/part/SuspensionFrontRight,
+		template = FRSpareTire,
+
+		part SuspensionFrontLeft
+		{
+			model SuspensionFrontLeft
+			{
+				file = FR_ShockLeafspring,
+				offset = 0.185 -0.14 0.0000,
+			}
+		}
+
+		part SuspensionFrontRight
+		{
+			model SuspensionFrontRight
+			{
+				file = FR_ShockLeafspring,
+				offset = -0.185 -0.14 0.0000,
+			}
+		}
+
+		part FRSpareTire
+		{
+			itemType = Base.NormalEquipmentTireSmall,
+			specificItem = false,
+			area = FRSpareTire,
+
+			model NormalEquipmentTireSmall
+			{
+				file = FR_OldTireTrailer_1,
+				offset = 0.0 0.02 0.51,
+				rotate = 0.0000 90.0000 0.0000,
+			}
+
+			mechanicRequireKey = false,
+		}
+
+		template = FRTrailerJack,
+
+		part FRTrailerJack
+		{
+			model Default
+			{
+				file = Jack_Trailer_Moving_3,
+				offset = 0.085 0.0 0.78,
+				rotate = 0.0000 110.0000 0.0000,
+			}
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.0914 1.0000,
+			rotate = 0.0000 0.0000 0.0000,
+			canAttach = trailer,
+			updateconstraint = false,
+		}
+	}
+}

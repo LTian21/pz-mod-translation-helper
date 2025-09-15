@@ -1,0 +1,585 @@
+module Herbalist
+{
+        imports
+        {
+        Base
+        }
+		/*********************** Herbalist Medicine ***********************/
+
+	recipe Make Black Sage Poultice
+        {
+                keep [Recipe.GetItemTypes.MortarPestle],
+		
+                BlackSage=5,
+				Plantain=3,
+                
+                SkillRequired:PlantScavenging=1,
+		
+                Result:BlackSageCataplasm,
+                Time:200.0,
+				AnimNode:Craft,
+				Prop2:Mortar,
+				Sound:BloodSplatter,
+				Category:Herbalist,		
+        }
+
+	recipe Make Ginseng Poultice
+        {
+                keep [Recipe.GetItemTypes.MortarPestle],
+		
+				Ginseng=5,
+				LemonGrass=3,
+                
+				SkillRequired:PlantScavenging=2,
+		
+                Result:GinsengCataplasm,
+                Time:200.0,
+				AnimNode:Craft,
+				Prop2:Mortar,
+				Sound:BloodSplatter,
+		Category:Herbalist,		
+        }
+
+	recipe Make Common Mallow Poultice
+        {
+                keep [Recipe.GetItemTypes.MortarPestle],
+		
+                CommonMallow=5,
+				WildGarlic=3,
+                
+				SkillRequired:PlantScavenging=3,
+		
+                Result:CommonMallowCataplasm,
+                Time:200.0,
+				AnimNode:Craft,
+				Prop2:Mortar,
+				Sound:BloodSplatter,
+				Category:Herbalist,		
+        }
+
+	recipe Make Calming Poultice
+        {
+                keep [Recipe.GetItemTypes.MortarPestle],
+		
+                BlackSage=5,
+				Ginseng=3,
+                
+                SkillRequired:PlantScavenging=1,
+		
+                Result:CalmingCataplasm,
+                Time:200.0,
+				AnimNode:Craft,
+				Prop2:Mortar,
+				Sound:BloodSplatter,
+				Category:Herbalist,		
+        }
+
+	recipe Make Painkiller Compress
+        {
+                keep [Recipe.GetItemTypes.Hammer],
+		keep Gloves_Surgical/Soap2,
+		
+                Herbalist.CalmingCataplasm=2,
+		ScrapMetal,
+                
+		SkillRequired:Doctor=1,
+		
+                Result:Pills,
+                Time:200.0,
+		OnGiveXP: Recipe.OnGiveXP.Doctor5,
+		AnimNode: Craft,
+		Prop2:PillBottle,
+		Sound:HarvestCrops,
+		Category:Herbalist,		
+        }
+
+	recipe Make Betablocker Compress
+        {
+                keep [Recipe.GetItemTypes.Hammer],
+		keep Gloves_Surgical/Soap2,
+		
+                Herbalist.BlackSageCataplasm=2,
+		ScrapMetal,
+                
+		SkillRequired:Doctor=1,
+		
+                Result:PillsBeta,
+                Time:200.0,
+		OnGiveXP: Recipe.OnGiveXP.Doctor5,
+		AnimNode: Craft,
+		Prop2:PillBottle,
+		Sound:HarvestCrops,
+		Category:Herbalist,		
+        }
+
+	recipe Make Antidepressants Compress
+        {
+                keep [Recipe.GetItemTypes.Hammer],
+		keep Gloves_Surgical/Soap2,
+		
+                Herbalist.GinsengCataplasm=2,
+		ScrapMetal,
+                 
+		SkillRequired:Doctor=2,
+		
+                Result:PillsAntiDep,
+                Time:200.0,
+		OnGiveXP: Recipe.OnGiveXP.Doctor5,
+		AnimNode: Craft,
+		Prop2:PillBottle,
+		Sound:HarvestCrops,
+		Category:Herbalist,		
+        }
+
+	recipe Make Antibiotics Compress
+        {
+                keep [Recipe.GetItemTypes.Hammer],
+		keep Gloves_Surgical/Soap2,
+		
+                Herbalist.CommonMallowCataplasm,
+		ScrapMetal,
+                
+		SkillRequired:Doctor=4,
+		
+                Result:Antibiotics,
+                Time:200.0,
+		OnGiveXP: Recipe.OnGiveXP.Doctor5,
+		AnimNode: Craft,
+		Prop2:PillBottle,
+		Sound:HarvestCrops,
+		Category:Herbalist,		
+        }
+
+	recipe Make Lemongrass Remedy Uncooked
+        {
+            destroy WaterSaucepan,
+			keep [Recipe.GetItemTypes.SharpKnife],
+		Rosemary,
+		LemonGrass=5,
+		
+		CanBeDoneFromFloor:true,
+            SkillRequired:Cooking=1;Doctor=1,
+		
+                Result:Herbalist.LemongrassRemedyUncooked,
+                Time:150.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		AnimNode: Craft,
+		Prop1:LemonGrass,
+		Prop2:Cooking_SaucepanOil,
+		Sound:AddItemInRecipe,
+		Category:Herbalist,		
+        }
+
+	recipe Make Lemongrass Remedy Bottled
+        {
+            Herbalist.SaucepanLemongrassRemedy,
+		RippedSheets,
+		WaterBottleEmpty/PopBottleEmpty,
+		
+		Result:Herbalist.LemongrassRemedyBottle,
+                Time:150.0,
+
+		Prop1:WaterSaucepan,
+        Prop2:Hand_BottleLemongrass,
+		OnCreate:Recipe.OnCreate.GetSaucepan,
+		AnimNode:RefuelGasCan,
+		Sound:AddItemInBeverage,
+		Category:Herbalist,		
+        }
+
+	recipe Make Saucepan of Disinfectant
+        {
+            destroy WaterSaucepan,
+			keep [Recipe.GetItemTypes.SharpKnife],
+		Thyme=3,
+		Oregano=5,
+		
+        CanBeDoneFromFloor:true,        
+		SkillRequired:PlantScavenging=2;Doctor=1,
+		
+		
+                Result:Herbalist.SaucepanofDisinfectantUnboiled,
+                Time:150.0,
+		OnGiveXP: Recipe.OnGiveXP.Doctor5,
+		AnimNode: Craft,
+		Prop1:HerbOregano_Ground,
+		Prop2:Cooking_SaucepanOil,
+		Sound:AddItemInRecipe,
+		Category:Herbalist,		
+        }
+
+	recipe Make Bottle of Disinfectant
+        {
+            destroy Herbalist.SaucepanofDisinfectant,
+		RippedSheets,
+		WaterBottleEmpty/PopBottleEmpty=2,
+		Prop1:WaterSaucepan,
+            Prop2:WaterBottleEmpty,
+            OnCreate:Recipe.OnCreate.GetSaucepan,
+		
+                Result:Base.Disinfectant=2,
+                Time:200.0,
+		Prop1:WaterSaucepan,
+        Prop2:Disinfectant,		
+		AnimNode:RefuelGasCan,
+		Sound:AddItemInBeverage,
+		Category:Herbalist,		
+        }
+
+		/*********************** Herbalist Food ***********************/
+	
+	recipe Make Granola Bars
+        {
+            keep [Recipe.GetItemTypes.Spoon]/[Recipe.GetItemTypes.Fork],
+		keep Bowl,
+		destroy BakingTray,		
+
+            BerryBlack/BerryBlue/BerryGeneric1/BerryGeneric2/BerryGeneric3/BerryGeneric4/BerryGeneric5;50,
+		Honey,
+		OatsRaw;10,
+                
+		
+		SkillRequired:PlantScavenging=2;Cooking=3,
+		
+                Result:Herbalist.GranolaBarsTray,
+                Time:250.0,
+		Prop1:Spoon,
+		Prop2:BowlHand,
+		OnGiveXP: Recipe.OnGiveXP.Cooking10,
+		AnimNode: Craft,
+		Sound:AddItemInRecipe,
+		Category:Herbalist,		
+        }
+
+	recipe Make Honey
+        {
+                Herbalist.HoneyComb=3,
+		WaterBottleEmpty/PopBottleEmpty,
+		keep [Recipe.GetItemTypes.SharpKnife],
+		keep Pot/BucketEmpty,
+		WoodenStick/TreeBranch,
+                
+		SkillRequired:PlantScavenging=2;Cooking=1,
+		
+                Result:Base.Honey,
+                Time:800.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		AnimNode: Disassemble,
+		Category:Herbalist,		
+        }
+
+	recipe Make Pot of Sap
+        {
+            Herbalist.Sap=8,
+		destroy Pot,
+		keep WoodenStick/TreeBranch/Spoon,
+                
+		SkillRequired:PlantScavenging=4;Cooking=4,
+		Prop2:Pot,
+
+                Result:Herbalist.PotofSapUnboiled,
+                Time:200.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		AnimNode: Disassemble,
+		Category:Herbalist,		
+        }
+
+	recipe Make Maple Syrup Bottled
+        {
+            Herbalist.PotofMapleSyrup,
+		WaterBottleEmpty/PopBottleEmpty,
+		RippedSheets,
+		keep WoodenStick/TreeBranch/Spoon,
+                
+		
+                Result:Base.MapleSyrup,
+                Time:150.0,
+		OnCreate:Recipe.OnCreate.GetPot,
+		AnimNode: Disassemble,
+		Category:Herbalist,		
+        }
+
+	recipe Make Ginseng Infusion
+	{
+                WaterSaucepan=20,
+		RippedSheets,
+		Ginseng=2,
+		WaterBottleEmpty/PopBottleEmpty,
+                
+		SkillRequired:PlantScavenging=1;Cooking=1,
+		NearItem:Campfire,
+		
+                Result:Herbalist.GinsengInfusion,
+                Time:250.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		AnimNode: Disassemble,
+		Category:Herbalist,		
+        }
+
+	recipe Make Yeast
+	{
+		keep Bowl,
+		keep MortarPestle,
+		RippedSheets,
+		Flour/Cornflour=1,
+		Water=2,
+		MushroomGeneric1/MushroomGeneric2/MushroomGeneric3/MushroomGeneric4/MushroomGeneric5/MushroomGeneric6/MushroomGeneric7;20,
+                
+		SkillRequired:PlantScavenging=1;Cooking=3,
+		
+                Result:Yeast,
+                Time:500.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking10,
+		AnimNode: Disassemble,
+		Category:Herbalist,
+	}
+
+	recipe Make Corn Flour
+	{
+		keep MortarPestle,
+		keep [Recipe.GetItemTypes.SharpKnife],
+		RippedSheets,
+		Corn=3,
+                
+		SkillRequired:Cooking=2,
+		
+                Result:Cornflour,
+                Time:500.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		AnimNode: Disassemble,
+		Category:Herbalist,
+	}
+
+	recipe Make Tortilla Chips
+	{
+		keep Saucepan/Pan,
+		keep Bowl,
+		keep Spoon,
+		keep [Recipe.GetItemTypes.SharpKnife],
+		OilVegetable,
+		Cornflour,
+		[Recipe.GetItemTypes.SaltPacket];1,
+		Water=5,
+                
+		SkillRequired:Cooking=2,
+		NearItem:Campfire,
+		
+                Result:TortillaChips=10,
+                Time:600.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		OnCreate:Recipe.OnCreate.GetBottle,
+		AnimNode: Disassemble,
+		Category:Herbalist,
+	}
+
+	recipe Make Bowl of Chips
+	{
+		keep Saucepan,
+		destroy Bowl,
+		keep [Recipe.GetItemTypes.SharpKnife],
+		OilVegetable,
+		Potato,
+		[Recipe.GetItemTypes.SaltPacket];1,
+		
+                
+		SkillRequired:Cooking=2,
+		NearItem:Campfire,
+		
+                Result:Herbalist.BowlofChips,
+                Time:600.0,
+		OnCreate: Recipe.OnCreate.GetBottle,		
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		AnimNode: Disassemble,
+		Category:Herbalist,
+	}
+
+	recipe Make Tortilla
+	{
+		keep Saucepan/Pan,
+		keep Bowl,
+		keep Spoon,
+		keep [Recipe.GetItemTypes.SharpKnife],
+		OilVegetable,
+		Cornflour/Flour,
+		[Recipe.GetItemTypes.SaltPacket];1,
+		Water=10,
+                
+		SkillRequired:Cooking=3,
+		NearItem:Campfire,
+		
+                Result:Tortilla=4,
+                Time:600.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		OnCreate: Recipe.OnCreate.GetBottle,
+		AnimNode: Disassemble,
+		Category:Herbalist,
+	}
+
+	recipe Make Taco Shell
+	{
+		keep Saucepan/Pan,
+		keep Bowl,
+		keep Spoon,
+		keep [Recipe.GetItemTypes.SharpKnife],
+		OilVegetable,
+		Cornflour,
+		[Recipe.GetItemTypes.SaltPacket];1,
+		Water=10,
+                
+		SkillRequired:Cooking=3,
+		NearItem:Campfire,
+		
+                Result:TacoShell=4,
+                Time:600.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		OnCreate: Recipe.OnCreate.GetBottle,
+		AnimNode: Disassemble,
+		Category:Herbalist,
+	}
+
+	recipe Make Dried Mushrooms
+	{
+		
+		keep BakingTray/BakingPan/RoastingPan,
+		MushroomGeneric1/MushroomGeneric2/MushroomGeneric3/MushroomGeneric4/MushroomGeneric5/MushroomGeneric6/MushroomGeneric7;60,
+                
+		SkillRequired:PlantScavenging=1;Cooking=2,
+		
+                Result:Herbalist.DriedMushrooms,
+		    NearItem:Campfire,
+                Time:1000.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		AnimNode: Disassemble,
+		Category:Herbalist,
+	}
+
+	recipe Make Butter
+	{
+		keep Spoon,
+		keep WineEmpty2/WineEmpty,
+		keep BakingPan/BakingTray,
+		[Recipe.GetItemTypes.Milk],
+		Water=5,
+                
+		SkillRequired:Cooking=4,
+		
+                Result:Butter,
+                Time:1000.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking10,
+		AnimNode: Disassemble,
+		Category:Herbalist,
+	}
+
+	recipe Make Rice Milk
+	{
+		WaterSaucepanRice,
+		Sheet,
+		[Recipe.GetItemTypes.SaltPacket];1,
+		keep Spoon,
+                
+		SkillRequired:Cooking=4,
+		NearItem:Campfire,
+		
+                Result:Herbalist.RiceMilk,
+                Time:800.0,
+		OnCreate:Recipe.OnCreate.MakeBowlOfSoup4,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		AnimNode: Disassemble,
+		Category:Herbalist,		
+    }
+	
+	recipe Make Toasted Acorn
+	{
+		
+		keep BakingTray/BakingPan/RoastingPan,
+		Acorn;50,
+                
+		SkillRequired:Cooking=1,
+		
+                Result:Herbalist.ToastedAcorn,
+		    NearItem:Campfire,
+                Time:500.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		AnimNode: Disassemble,
+		Category:Herbalist,
+	}
+	
+	recipe Make Acorn Coffee
+	{
+		
+		keep Spoon,
+		keep MortarPestle,
+		ToastedAcorn,
+		
+                
+		SkillRequired:Cooking=1,
+		
+                Result:Herbalist.AcornCoffee,
+                Time:300.0,
+		AnimNode: Disassemble,
+		Category:Herbalist,
+	}
+
+
+		/*********************** Herbalist Misc ***********************/
+	
+	recipe Make Soap
+        {
+                WaterSaucepan=20,
+                Violets/GrapeLeaves/Rosehips=5,
+                BakingSoda=1,
+                OilVegetable=1,
+                TreeBranch/Spoon,
+		SkillRequired:PlantScavenging=2,
+		
+                Result:Soap2,
+                Time:500.0,
+		AnimNode: Disassemble,
+		Category:Herbalist,		
+        }
+
+	recipe Write Herbalist for Dummies
+        {
+                Pen/RedPen/BluePen/Pencil,
+                Notebook,
+		SkillRequired:PlantScavenging=5,
+		
+                Result:HerbalistMag,
+                Time:1000.0,
+		AnimNode: Disassemble,
+		Category:Herbalist,		
+        }
+
+	recipe Make Vegetable Oil
+	{	
+		keep WaterSaucepan=20,
+		keep [Recipe.GetItemTypes.SharpKnife],
+		WaterBottleEmpty/PopBottleEmpty/WhiskeyEmpty/BeerEmpty/WineEmpty2/WineEmpty,
+		Tomato/RedRadish/Carrots=25,
+
+		Result:OilVegetable,
+		Time:300.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		AnimNode: Disassemble,
+		Category:Herbalist,
+	}
+
+	recipe Make Sugar
+      {
+		keep Saucepan/Pan,
+		keep BakingPan/BakingTray,
+		keep MortarPestle,
+                Herbalist.HoneyComb=2,
+                TreeBranch/Spoon,
+		SkillRequired:Cooking=3,
+		NearItem:Campfire,
+		
+                Result:Sugar,
+                Time:400.0,
+		OnGiveXP: Recipe.OnGiveXP.Cooking3,
+		AnimNode: Disassemble,
+		Category:Herbalist,		
+      }
+	
+	
+}

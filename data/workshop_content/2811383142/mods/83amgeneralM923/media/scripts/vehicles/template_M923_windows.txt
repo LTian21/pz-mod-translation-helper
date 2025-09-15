@@ -1,0 +1,205 @@
+module Base
+{
+
+	model 83amgeneralM923window_fl
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_window_left,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_left_bone 1.0,
+	}
+
+	model 83amgeneralM923window_fr
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_window_right,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_right_bone 1.0,
+	}
+
+	model 83amgeneralM923gunport_rl
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_left_gunport,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = left_gunport_bone 1.0,
+	}
+
+	model 83amgeneralM923gunport_rr
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_right_gunport,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = right_gunport_bone 1.0,
+	}
+
+	template vehicle M923Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 83amgeneralM923window_fl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			category = door,
+			area = SeatFrontLeft,
+			itemType = Base.M923SideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = M923DoorLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 83amgeneralM923window_fr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			category = door,
+			area = SeatFrontRight,
+			itemType = Base.M923SideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = M923DoorRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 83amgeneralM923gunport_rl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = left_gunport_closing,
+				animate = FALSE,
+			}
+
+			parent = DoorRearLeft,
+			category = door,
+			area = SeatRearLeft,
+			itemType = Base.M923Gunport,
+			table install
+			{
+				requireInstalled = M923GuntruckArmor,
+			}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 83amgeneralM923gunport_rr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = right_gunport_closing,
+				animate = FALSE,
+			}
+
+			parent = DoorRearRight,
+			category = door,
+			area = SeatRearRight,
+			itemType = Base.M923Gunport,
+			table install
+			{
+				requireInstalled = M923GuntruckArmor,
+			}
+		}
+
+		part Window*
+		{
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 750,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 650,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			
+		}
+
+		part WindowFront*
+		{
+		lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+
+		part WindowRear*
+		{
+		lua
+			{
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}

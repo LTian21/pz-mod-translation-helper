@@ -1,0 +1,78 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_PizzaWhirledGreenMetalDoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Pizza Whirled Green Metal Door,
+			Icon		= location_restaurant_pizzawhirled_01_61,
+		}
+	}
+
+    entity PizzaWhirledGreenMetalDoor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_PizzaWhirledGreenMetalDoor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 600,
+			breakSound      = BreakDoor,
+			
+            face W
+            {
+                layer
+                {
+                    row = location_restaurant_pizzawhirled_01_60,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_restaurant_pizzawhirled_01_61,
+                }
+            }
+			face W_OPEN
+            {
+                layer
+                {
+					row = location_restaurant_pizzawhirled_01_62,
+                }
+            }
+            face N_OPEN
+            {
+                layer
+                {
+					row = location_restaurant_pizzawhirled_01_63,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 350,
+            needToBeLearn = true,
+            category      = Doors_Metal,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:10,
+            ToolTip       = Tooltip_craft_metalDoorDesc,
+            inputs
+            {
+		        item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 6 [Base.SheetMetal],
+				item 2 [Base.Hinge],
+				item 1 [Base.Doorknob],
+		        item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

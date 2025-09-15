@@ -1,0 +1,191 @@
+module Base
+{
+	model 82firebirdBumperFront0
+	{
+		mesh = vehicles/Vehicles_82firebird_Body|transam_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 82firebirdBumperFront1
+	{
+		mesh = vehicles/Vehicles_82firebird_Body|transam_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82firebirdBumperFrontA
+	{
+		mesh = vehicles/Vehicles_82firebird_Body|transam_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82firebirdBumperRear0
+	{
+		mesh = vehicles/Vehicles_82firebird_Body|transam_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle FRB82Bumpers
+		{
+		part FRB82BumperFront
+        	{
+
+			model BumperFront0
+				{
+                		file = 82firebirdBumperFront0,
+				}
+
+            model BumperFront1
+				{
+                		file = 82firebirdBumperFront1,
+				}
+
+			model BumperFrontA
+				{
+                		file = 82firebirdBumperFrontA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82firebirdBumperFront0;Base.82firebirdBumperFront1;Base.82firebirdBumperFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB82.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = FRB82.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = FRB82.Create.BumperFront,
+					init = FRB82.Init.BumperFront,
+					}
+			}
+
+
+		part FRB82BumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 82firebirdBumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82firebirdBumperRear,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB82.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = FRB82.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = FRB82.Create.BumperRear,
+					init = FRB82.Init.BumperRear,
+					}
+		}
+	}
+
+    template vehicle FRB82BumpersK
+		{
+            template! = FRB82Bumpers,
+
+		part FRB82BumperFront
+        {
+                itemType = Base.82firebirdBumperFront1;Base.82firebirdBumperFront0;Base.82firebirdBumperFrontA,
+				table install
+				{
+                    complete = FRB82.InstallComplete.BumperFrontK,
+            	}
+
+            	table uninstall
+            	{
+				    complete = FRB82.UninstallComplete.BumperFrontK,
+            	}
+
+            	lua
+            	{
+					create = FRB82.Create.BumperFrontK,
+					init = FRB82.Init.BumperFrontK,
+				}
+		}
+	}
+}

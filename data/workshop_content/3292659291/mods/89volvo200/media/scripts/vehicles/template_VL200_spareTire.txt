@@ -1,0 +1,72 @@
+module Base
+{
+    model 89volvo200Spare
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_spare,
+		texture = Vehicles/Vehicles_89volvo200_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle VL200SpareTires
+	{
+		part VL200SpareTire
+        	{
+
+                model Spare0
+				{
+                		file = 89volvo200Spare,
+				}
+                model Spare1
+				{
+                		file = 89volvo200Spare,
+				}
+                model Spare2
+				{
+                		file = 89volvo200Spare,
+				}
+                model Spare3
+				{
+                		file = 89volvo200Spare,
+				}
+                model Spare4
+				{
+                		file = 89volvo200Spare,
+				}
+
+			category = tire,
+			area = TruckBed,
+            specificItem = false,
+			itemType = damnCraft.SmallTire1;damnCraft.SmallTire2;Base.89volvo200Tire0;Base.89volvo200Tire1;Base.89volvo200Tire2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VL200.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = VL200.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = VL200.Create.SpareTire,
+				init = VL200.Init.SpareTire,
+				}
+		}
+	}
+}

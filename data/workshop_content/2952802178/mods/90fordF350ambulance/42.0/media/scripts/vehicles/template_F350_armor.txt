@@ -1,0 +1,367 @@
+module Base
+{
+	model 90fordF350ambulancewindshielda
+    	{
+        mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_windshielda,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 90fordF350ambulancewindowfla
+    	{
+        mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_door_fla,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 90fordF350ambulancewindowfra
+    	{
+        mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_door_fra,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 90fordF350ambulancewindowrra
+    	{
+        mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_windows_rra,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 90fordF350ambulancewindowra
+    	{
+        mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_windows_reara,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+
+
+	template vehicle F350Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model winda
+				{
+                		file = 90fordF350ambulancewindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.90fordF350ambWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F350.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = F350.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = F350.Create.WindshieldArmor,
+					init = F350.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        	{
+
+			model leftwina
+				{
+                		file = 90fordF350ambulancewindowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.90fordF350ambWindowFrontArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F350.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = F350.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = F350.Create.WindowFrontLeftArmor,
+					init = F350.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        	{
+
+			model rightwina
+				{
+                		file = 90fordF350ambulancewindowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.90fordF350ambWindowFrontArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F350.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = F350.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = F350.Create.WindowFrontRightArmor,
+					init = F350.Init.WindowFrontRightArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        	{
+
+			model rightrearwina
+				{
+                		file = 90fordF350ambulancewindowrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.90fordF350ambWindowRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F350.InstallComplete.WindowRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = F350.UninstallComplete.WindowRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = F350.Create.WindowRearRightArmor,
+					init = F350.Init.WindowRearRightArmor,
+					}
+			}
+
+		part DAMNWindshieldRearArmor
+        	{
+
+			model rearwina
+				{
+                		file = 90fordF350ambulancewindowra,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = DoorRear,
+			specificItem = false,
+			itemType = Base.90fordF350ambWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F350.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = F350.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = F350.Create.WindshieldRearArmor,
+					init = F350.Init.WindshieldRearArmor,
+					}
+		}
+
+		}
+
+}

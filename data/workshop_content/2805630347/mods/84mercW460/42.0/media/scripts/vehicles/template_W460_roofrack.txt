@@ -1,0 +1,114 @@
+module Base
+{
+
+	model W460Croofrack1
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_roofrack,
+		texture = Vehicles/Vehicles_84mercLWB4_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model W460CroofrackM
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_roofrackM,
+		texture = Vehicles/Vehicles_84merc_Wheels,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle W460CRoofracks
+	{
+		part W460Roofrack
+		{
+
+			model Roofrack1
+				{
+                		file = W460Croofrack1,
+				}
+
+            model RoofrackM
+				{
+                		file = W460CroofrackM,
+				}
+
+			category = Other,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.W460Roofrack1;Base.W460RoofrackM,
+			mechanicRequireKey = false,
+			durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = W460.InstallComplete.Roofrack,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = W460.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            		lua
+            		{
+					create = W460.Create.Roofrack,
+					init = W460.Init.Roofrack,
+					}
+		}
+	}
+
+    template vehicle W460SRoofracks
+	{
+        template! = W460CRoofracks,
+
+		part W460Roofrack
+		{
+
+            model RoofrackM
+				{
+                		file = W460CroofrackM,
+                        offset = 0.0000 0.0000 0.2600,
+				}
+
+        }
+    }
+}
+

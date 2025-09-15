@@ -1,0 +1,41 @@
+module Base
+{
+	template vehicle PWRTrunkCompartment
+	{
+		part PWRTrunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = Base.PWRTrunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = PWR.ContainerAccess.Trunk,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = PWR.ContainerAccess.Trunk,
+			}
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+	}
+}

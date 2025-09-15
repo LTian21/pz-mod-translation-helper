@@ -1,0 +1,95 @@
+module Base
+{
+	template vehicle LIN93SpareTires
+	{
+		part DAMNSpareTire
+        	{
+
+			model SpareTire0
+				{
+                		file = 93townCarWheel,
+                        offset = -0.3000 -0.1278 -1.2444,
+				        rotate = 0.0000 0.0000 90.0000,
+				}
+
+            model SpareTire1
+				{
+                		file = 93townCarLimoWheel,
+                        offset = -0.3000 -0.1278 -1.2444,
+				        rotate = 0.0000 0.0000 90.0000,
+				}
+
+            model SpareTire2
+				{
+                		file = 93townCarWheel2L,
+                        offset = -0.3000 -0.1278 -1.2444,
+				        rotate = 0.0000 0.0000 90.0000,
+				}
+
+			category = Other,
+			area = TruckBed,
+            specificItem = false,
+			itemType = Base.93townCarTire1;Base.93townCarLimoTire1;damnCraft.SmallTire1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = LIN93.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = LIN93.Create.SpareTire,
+				init = LIN93.Init.SpareTire,
+				}
+		}
+	}
+
+	template vehicle LIN93SpareTiresLimo
+	{
+        template! = LIN93SpareTires,
+
+		part DAMNSpareTire
+        {
+
+            model SpareTire0
+				{
+                		file = 93townCarWheel,
+                        offset = -0.3000 -0.1278 -2.7117,
+				        rotate = 0.0000 0.0000 90.0000,
+				}
+
+            model SpareTire1
+				{
+                		file = 93townCarLimoWheel,
+                        offset = -0.3000 -0.1278 -2.7117,
+				        rotate = 0.0000 0.0000 90.0000,
+				}
+
+            model SpareTire2
+				{
+                		file = 93townCarWheel2L,
+                        offset = -0.3000 -0.1278 -2.7117,
+				        rotate = 0.0000 0.0000 90.0000,
+				}
+		}
+	}
+}
+

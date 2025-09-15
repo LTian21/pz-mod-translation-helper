@@ -1,0 +1,56 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LogPalisadeRT
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Log Palisade,
+			Icon		= Build_LogPalisade,
+		}
+	}
+
+    entity LogPalisadeRT
+    {
+        component UiConfig
+                {
+                    xuiSkin         = default,
+                    entityStyle     = ES_LogPalisadeRT,
+                    uiEnabled       = false,
+                }
+
+        component SpriteConfig
+        {
+			LogicClass      = WoodenWall,
+			skillBaseHealth = 400,
+
+            face W
+            {
+                layer
+                {
+                    row = rt_tiles_01_7,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = rt_tiles_01_6,
+                }
+            }
+			corner = rt_tiles_01_8,
+        }
+		
+		component CraftRecipe
+        {
+			timedAction   = BuildWallNoTool,
+            time          = 200,
+            category      = RT Buildings,
+			xpAward       = Woodwork:10,
+            inputs
+            {
+                item 1 [SWB.LogWallKit],
+            }
+        }
+    }
+}

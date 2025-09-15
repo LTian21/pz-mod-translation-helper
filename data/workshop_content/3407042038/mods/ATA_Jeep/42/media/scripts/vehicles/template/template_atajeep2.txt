@@ -1,0 +1,568 @@
+module Base
+{
+    model Vehicles_ATAJeep
+    {
+        mesh = vehicles/ATA_Jeep_base|base_jeep,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.03,
+    }
+    model ATA_Jeep_Wheel
+    {
+        mesh = vehicles/ATA_Jeep_wheel,
+        texture = Vehicles/ATA_Jeep_wheel,
+
+        invertX = FALSE,
+        scale = 0.03,
+    }
+    model ATA_Jeep_Wheel_L
+    {
+        mesh = vehicles/ATA_Jeep_wheel,
+        texture = Vehicles/ATA_Jeep_wheel,
+
+        invertX = TRUE,
+        scale = 0.03,
+    }
+    model ATA_Jeep_WheelProtection
+    {
+        mesh = vehicles/ATA_wheelchain,
+        texture = Vehicles/ATA_wheelchain,
+
+        invertX = FALSE,
+        scale = 0.03,
+    }
+    model ATA_Jeep_WheelProtection_L
+    {
+        mesh = vehicles/ATA_wheelchain,
+        texture = Vehicles/ATA_wheelchain,
+
+        invertX = TRUE,
+        scale = 0.03,
+    }
+    
+    template vehicle ATAJeep
+    {
+        mechanicType = 1,
+        engineRepairLevel = 4,
+        playerDamageProtection = 0.8,
+        offRoadEfficiency = 1.3,
+        spawnOffsetY = 0.19402517,
+
+        textureMask = Vehicles/ATA_Jeep_mask,
+        textureLights = Vehicles/ATA_Jeep_lights,
+        textureDamage1Overlay = Vehicles/ATA_Jeep_blood,
+        textureDamage2Overlay = Vehicles/ATA_Jeep_blood,
+        textureDamage1Shell = Vehicles/ATA_Jeep_damage1,
+        textureDamage2Shell = Vehicles/ATA_Jeep_damage2,
+        textureRust = Vehicles/ATA_Jeep_rust,
+
+        sound
+        {
+            engine = VehicleEngineOffRoad,
+            engineStart = VehicleEngineOffRoad,
+            engineTurnOff = VehicleEngineOffRoad,
+            horn = VehicleHornJeep,
+            ignitionFail = VehicleIgnitionFailOffRoad,
+        }
+
+        mass = 900,
+        engineForce = 4400,
+        maxSpeed = 90f,
+        engineLoudness = 90,
+        engineQuality = 70,
+        brakingForce = 90,
+        stoppingMovementForce = 2.0f,
+        rollInfluence = 1.0f,
+        steeringIncrement = 0.03,
+        steeringClamp = 0.3,
+        suspensionStiffness = 30,
+        suspensionCompression = 2.83,
+        suspensionDamping = 2.88,
+        maxSuspensionTravelCm = 10,
+        suspensionRestLength = 0.2,
+        wheelFriction = 1.6f,
+        frontEndHealth = 150,
+        rearEndHealth = 150,
+        seats = 6,
+
+        extents = 1.0186 0.7329 2.2857,
+        physicsChassisShape = 1.0186 0.7329 2.2857,
+        centerOfMassOffset = 0.0000 0.3478 0.0373,
+        shadowExtents = 1.0111 2.2857,
+        shadowOffset = 0.0000 0.0385,
+
+        model
+        {
+            file = Vehicles_ATAJeep,
+            scale = 1.6100,
+            offset = 0.0000 0.0497 0.0000,
+        }
+
+        wheel FrontLeft
+        {
+            front = true,
+            offset = 0.4224 -0.0497 0.8634,
+            radius = 0.2f,
+            width = 0.2f,
+        }
+
+        wheel FrontRight
+        {
+            front = true,
+            offset = -0.4224 -0.0497 0.8634,
+            radius = 0.2f,
+            width = 0.2f,
+        }
+
+        wheel RearLeft
+        {
+            front = false,
+            offset = 0.4224 -0.0621 -0.6708,
+            radius = 0.2f,
+            width = 0.2f,
+        }
+
+        wheel RearRight
+        {
+            front = false,
+            offset = -0.4224 -0.0621 -0.6708,
+            radius = 0.2f,
+            width = 0.2f,
+        }
+
+        area Engine
+        {
+            xywh = 0.0000 1.4161 1.0186 0.4845,
+        }
+
+        area TruckBed
+        {
+            xywh = 0.0000 -1.3416 1.0186 0.4845,
+        }
+
+        area GasTank
+        {
+            xywh = 0.7516 -0.9317 0.4845 0.4845,
+        }
+
+        area TireFrontLeft
+        {
+            xywh = 0.7516 0.8634 0.4845 0.4845,
+        }
+
+        area TireFrontRight
+        {
+            xywh = -0.7516 0.8634 0.4845 0.4845,
+        }
+
+        area TireRearLeft
+        {
+            xywh = 0.7516 -0.6708 0.4845 0.4845,
+        }
+
+        area TireRearRight
+        {
+            xywh = -0.7516 -0.6708 0.4845 0.4845,
+        }
+
+        area SeatFrontLeft
+        {
+            xywh = 0.7516 0.1739 0.4845 0.4845,
+        }
+
+        area SeatFrontRight
+        {
+            xywh = -0.7516 0.1739 0.4845 0.4845,
+        }
+
+        area SeatMiddleLeft
+        {
+            xywh = 0.0000 0.0000 0.4845 0.4845,
+        }
+
+        area SeatMiddleRight
+        {
+            xywh = 0.0000 0.0000 0.4845 0.4845,
+        }
+
+        area SeatRearLeft
+        {
+            xywh = 0.7516 -0.2981 0.4845 0.4845,
+        }
+
+        area SeatRearRight
+        {
+            xywh = -0.7516 -0.2484 0.4845 0.4845,
+        }
+
+        area ATARoof
+        {
+            xywh = 0.0000 -0.3478 1.9627 1.5280,
+        }
+
+        passenger FrontLeft
+        {
+            position inside
+            {
+                offset = 0.1801 0.2236 0.2422,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = 0.5714 -0.2671 0.1677,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontLeft,
+            }
+        }
+
+        passenger FrontRight
+        {
+            position inside
+            {
+                offset = -0.1801 0.2236 0.2422,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = -0.5714 -0.2671 0.1677,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontRight,
+            }
+        }
+
+        passenger MiddleLeft
+        {
+            position inside
+            {
+                offset = 0.1553 0.7143 -0.8075,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = 0.1553 -0.2671 1.2609,
+                rotate = 0.0000 0.0000 0.0000,
+                area = Engine,
+            }
+        }
+
+        passenger MiddleRight
+        {
+            position inside
+            {
+                offset = -0.1553 0.7143 -0.8075,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = -0.1553 -0.2671 -1.2547,
+                rotate = 0.0000 0.0000 0.0000,
+                area = TruckBed,
+            }
+        }
+
+        passenger RearLeft
+        {
+            position inside
+            {
+                offset = 0.1801 0.2236 -0.2484,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = 0.5714 -0.2671 -0.2671,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatRearLeft,
+            }
+        }
+
+        passenger RearRight
+        {
+            position inside
+            {
+                offset = -0.1801 0.2236 -0.2484,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = -0.5714 -0.2671 -0.2671,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatRearRight,
+            }
+        }
+        
+		attachment trailer
+		{
+			offset = 0.0000 -0.01 -1.1063,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+        attachment trailerfront
+        {
+            offset = 0.0000 0.0000 1.2824,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = 1.0000,
+        }
+
+        template = PassengerSeat6,
+        template = Seat,
+        template = GasTank,
+        template = Battery,
+        template = Engine,
+        template = EngineDoor,
+        template = Muffler,
+
+        part EngineDoor
+        {
+            mechanicRequireKey = false,
+
+            anim Open
+            {
+                sound = VehicleHoodOpenJeep,
+            }
+
+            anim Close
+            {
+                sound = VehicleHoodCloseJeep,
+            }
+        }
+        template = Heater,
+        template = PassengerCompartment,
+        
+        part Seat*
+        {
+            container
+            {
+                capacity = 20,
+            }
+
+            table install
+            {
+                skills = Mechanics:2,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:2,
+            }
+        }
+
+        template = TrunkDoor,
+        part TrunkDoor
+        {
+            hasLightsRear = true,
+            anim Open
+            {
+                sound = VehicleTrunkOpenJeep,
+            }
+
+            anim Close
+            {
+                sound = VehicleTrunkCloseJeep,
+            }
+
+            anim Lock
+            {
+                sound = LockVehicleDoorJeep,
+            }
+
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorJeep,
+            }
+
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedJeep,
+            }
+
+            table uninstall
+            {
+                requireInstalled =,
+                requireUninstalled = ATASpareWheel;ATA2InteractiveTrunkWheelRack;WindshieldRear,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+        }
+
+        template = Trunk/part/TruckBed,
+
+        part TruckBed
+        {
+            itemType = Base.SmallTrunk,
+
+            container
+            {
+                capacity = 40,
+            }
+        }
+
+        template = GloveBox,
+
+        part GloveBox
+        {
+            container
+            {
+                capacity = 5,
+            }
+        }
+
+        template = Door/part/DoorFrontLeft,
+        template = Door/part/DoorFrontRight,
+        template = Door/part/DoorRearLeft,
+        template = Door/part/DoorRearRight,
+
+        part DoorFront*
+        {
+            anim Open
+            {
+                sound = VehicleDoorOpenJeep,
+            }
+
+            anim Close
+            {
+                sound = VehicleDoorCloseJeep,
+            }
+
+            anim Lock
+            {
+                sound = LockVehicleDoorJeep,
+            }
+
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorJeep,
+            }
+
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedJeep,
+            }
+        }
+
+        part DoorRear*
+        {
+            anim Open
+            {
+                sound = VehicleDoorOpenJeep,
+            }
+
+            anim Close
+            {
+                sound = VehicleDoorCloseJeep,
+            }
+
+            anim Lock
+            {
+                sound = LockVehicleDoorJeep,
+            }
+
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorJeep,
+            }
+
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedJeep,
+            }
+        }
+        
+        template = Window/part/WindowFrontLeft,
+        template = Window/part/WindowFrontRight,
+        template = Window/part/WindowRearLeft,
+        template = Window/part/WindowRearRight,
+        template = Windshield/part/Windshield,
+        template = Windshield/part/WindshieldRear,
+        
+        template = Headlight,
+        
+        template = Tire,
+        part Tire*
+        {
+            setAllModelsVisible = false,
+            table install
+            {
+                complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+            }
+            table uninstall
+            {
+                requireUninstalled = ATA2ProtectionWheels,
+                complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+            }
+            lua
+            {
+                create = Vehicles.Create.Tire,
+                init = ATATuning2.Init.TireNotAllModelsVisible,
+                checkOperate = Vehicles.CheckOperate.Tire,
+                update = Vehicles.Update.Tire,
+            }
+        }
+        
+        part TireFrontLeft
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATA_Jeep_Wheel_L,
+            }
+            model ATAProtection
+            {
+                file = ATA_Jeep_WheelProtection_L,
+            }
+        }
+
+        part TireRearLeft
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATA_Jeep_Wheel_L,
+            }
+            model ATAProtection
+            {
+                file = ATA_Jeep_WheelProtection_L,
+            }
+        }
+
+        part TireFrontRight
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATA_Jeep_Wheel,
+            }
+            model ATAProtection
+            {
+                file = ATA_Jeep_WheelProtection,
+            }
+        }
+
+        part TireRearRight
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATA_Jeep_Wheel,
+            }
+            model ATAProtection
+            {
+                file = ATA_Jeep_WheelProtection,
+            }
+        }
+
+        template = Brake,
+        template = Suspension,
+        template = Radio,
+        
+        template! = ATA_Jeep_Template_Other,
+        template! = ATA_Jeep_Template_Bumper,
+        template! = ATA_Jeep_Template_ProtectionWindows,
+        template! = ATA_Jeep_Template_RoofRack,
+        template! = ATA_Jeep_Template_WheelRack,
+        template! = ATA_Jeep_Template_RoofTent,
+        template = ATA2Protection/part/ATA2ProtectionWheels,
+    }
+}
+

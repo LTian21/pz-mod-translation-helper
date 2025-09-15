@@ -1,0 +1,63 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WhiteDisplayCounter
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= White Display Counter,
+			Icon		= location_shop_generic_01_82,
+		}
+	}
+
+    entity WhiteDisplayCounter
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WhiteDisplayCounter,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = location_shop_generic_01_80 location_shop_generic_01_81 location_shop_generic_01_82,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_shop_generic_01_85,
+                    row = location_shop_generic_01_84,
+                    row = location_shop_generic_01_83,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:8,
+            xpAward       = Woodwork:5,
+            category      = Containers_Commercial,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_commercialCounterDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 12 [Base.Plank] flags[Prop2],
+                item 6 [Base.GlassPanel],
+                item 6 [Base.Nails],
+            }
+        }
+    }
+}

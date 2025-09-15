@@ -1,0 +1,169 @@
+module Base
+{
+	model 87toyotaMR2frontBumper0
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87toyotaMR2frontBumperA
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87toyotaMR2frontBullbarA
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87toyotaMR2rearBumper0
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle MR2Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 87toyotaMR2frontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 87toyotaMR2frontBumperA,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 87toyotaMR2frontBullbarA,
+				}
+
+				area = Front,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.87toyotaMR2BumperFront0;Base.87toyotaMR2BumperFrontA;Base.87toyotaMR2BullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MR2.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = MR2.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = MR2.Create.BumperFront,
+					init = MR2.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 87toyotaMR2rearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.87toyotaMR2BumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MR2.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = MR2.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = MR2.Create.BumperRear,
+					init = MR2.Init.BumperRear,
+					}
+		}
+	}
+
+		
+}

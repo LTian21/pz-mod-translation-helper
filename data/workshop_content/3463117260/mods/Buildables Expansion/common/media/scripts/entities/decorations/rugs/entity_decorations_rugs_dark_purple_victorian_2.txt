@@ -1,0 +1,58 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_DarkPurpleVictorian2Rug
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Dark Purple Victorian 2 Rug,
+			Icon		= floors_rugs_01_85,
+		}
+	}
+
+    entity DarkPurpleVictorian2Rug
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_DarkPurpleVictorian2Rug,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {	
+            face W
+            {
+                layer
+                {
+                    row = floors_rugs_01_84,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = floors_rugs_01_85,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = SewingCloth,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Decorations_Rugs,
+            SkillRequired = Tailoring:2,
+            xpAward       = Tailoring:4,
+            ToolTip       = Tooltip_craft_rugsDesc,
+            inputs
+            {
+                item 1 tags[SewingNeedle] mode:keep flags[Prop1],
+                item 5 [Base.RippedSheets] mode:destroy flags[Prop2],
+                item 3 [Base.Thread],
+            }
+        }
+    }
+}

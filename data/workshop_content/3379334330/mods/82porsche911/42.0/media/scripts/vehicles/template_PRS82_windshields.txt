@@ -1,0 +1,138 @@
+module Base
+{
+
+    model 82porsche911windshield
+    {
+        mesh = vehicles/Vehicles_82porsche911_Body|p911_windshield_front0,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 82porsche911windshieldRear
+    {
+        mesh = vehicles/Vehicles_82porsche911_Body|p911_windshield_rear0,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle PRS82Windshields
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 82porsche911windshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.82porsche911Windshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = DAMNWindshieldArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = 82porsche911windshieldRear,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.82porsche911WindshieldRear,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = DAMNWindshieldRearArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+}

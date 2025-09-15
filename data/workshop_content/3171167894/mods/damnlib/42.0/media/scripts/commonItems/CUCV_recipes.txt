@@ -1,0 +1,114 @@
+module Base
+
+{
+    craftRecipe chevyCUCV.MakeTire1
+	{
+        timedAction = Making,
+        time = 200,
+        Tags = InHandCraft,
+        category = Mechanical,
+        xpAward = Mechanics:2,
+        SkillRequired = Mechanics:2,
+        OnCreate = DAMN.OnCreate.PassSecondCond,
+
+        inputs
+        {
+            item 1 [damnCraft.SteelRimSmall],
+            item 1 [damnCraft.TireRubberNewSmall;damnCraft.TireRubberUsedSmall;damnCraft.TireRubberDestroyedSmall] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.86chevyCUCVTire1,
+        }
+	}
+
+    craftRecipe chevyCUCV.MakeTire2
+	{
+        timedAction = Making,
+        time = 200,
+        Tags = InHandCraft,
+        category = Mechanical,
+        xpAward = Mechanics:2,
+        SkillRequired = Mechanics:2,
+        OnCreate = DAMN.OnCreate.PassSecondCond,
+
+        inputs
+        {
+            item 1 [damnCraft.SteelRimSmall],
+            item 1 [damnCraft.TireRubberNewSmall;damnCraft.TireRubberUsedSmall;damnCraft.TireRubberDestroyedSmall] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.86chevyCUCVTire2,
+        }
+	}
+
+    craftRecipe chevyCUCV.MakeDoubleTires
+	{
+        timedAction = Making,
+        time = 250,
+        Tags = InHandCraft,
+        category = Mechanical,
+        xpAward = Mechanics:2,
+        SkillRequired = Mechanics:2,
+        OnCreate = DAMN.OnCreate.CombineFirstTwo,
+
+        inputs
+        {
+            item 2 [Base.86chevyCUCVTire2],
+            item 2 [Base.Screws],
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.86chevyCUCVDoubleTires2,
+        }
+	}
+
+    craftRecipe chevyCUCV.DismantleDoubleTires
+	{
+        timedAction = Making,
+        time = 250,
+        Tags = InHandCraft,
+        category = Mechanical,
+        xpAward = Mechanics:2,
+        SkillRequired = Mechanics:2,
+        OnCreate = DAMN.OnCreate.UnpackStuff,
+
+        inputs
+        {
+            item 1 [Base.86chevyCUCVDoubleTires2],
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 2 Base.86chevyCUCVTire2,
+        }
+	}
+
+    craftRecipe chevyCUCV.MakeFrontBullbar
+	{
+        timedAction = Welding,
+        time = 200,
+        Tags = InHandCraft;Welding,
+        category = Armoring,
+        xpAward = MetalWelding:20,
+        SkillRequired = MetalWelding:5,
+
+        inputs
+        {
+            item 1 [Base.80chevyCKBumperFront0;Base.80chevyCKBumperFront1],
+            item 1 [Base.SheetMetal],
+            item 6 [Base.SmallSheetMetal],
+            item 2 [Base.Screws],
+			item 10 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.86chevyCUCVBullbarFrontA,
+        }
+	}
+}

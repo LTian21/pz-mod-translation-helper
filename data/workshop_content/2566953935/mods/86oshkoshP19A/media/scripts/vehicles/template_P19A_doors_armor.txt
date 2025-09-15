@@ -1,0 +1,113 @@
+module Base
+{
+
+	model 86oshkoshP19Adoorfla
+	{
+		mesh = vehicles/Vehicles_86oshkoshP19A_mk2_Body|p19a_door_fl_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fl_bone 1.0,
+	}
+
+	model 86oshkoshP19Adoorfra
+	{
+		mesh = vehicles/Vehicles_86oshkoshP19A_mk2_Body|p19a_door_fr_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fr_bone 1.0,
+	}
+
+	template vehicle P19ADoorArmors
+	{
+
+		part P19ADoorFrontLeftArmor
+		{
+			model DoorFrontLeftArmor1
+				{
+				file = 86oshkoshP19Adoorfla,
+				}
+				parent = DoorFrontLeft,
+				itemType = Base.P19ACarFrontDoorArmor1_Item,
+				specificItem = false,
+				area = SeatFrontLeft,
+				table install
+					{
+						requireInstalled = WindowFrontLeft,
+					}
+
+				lua
+				{
+					create = P19A.Create.DoorFrontLeftArmor,
+					init = P19A.Init.DoorFrontLeftArmor,
+				}
+		}
+
+		part P19ADoorFrontRightArmor
+		{
+			model DoorFrontRightArmor1
+				{
+				file = 86oshkoshP19Adoorfra,
+				}
+				parent = DoorFrontRight,
+				itemType = Base.P19ACarFrontDoorArmor1_Item,
+				specificItem = false,
+				area = SeatFrontRight,
+				table install
+					{
+						requireInstalled = WindowFrontRight,
+					}
+				lua
+				{
+					create = P19A.Create.DoorFrontRightArmor,
+					init = P19A.Init.DoorFrontRightArmor,
+				}
+		}
+
+		part P19ADoor*
+		{
+			category = door,
+			door
+			{
+				}
+				mechanicRequireKey = true,
+				table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 1200,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+				}
+				table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 1200,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+				}
+		}
+	}
+}

@@ -1,0 +1,124 @@
+module Base
+{
+    model 91fordRangerMudflapsRear
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_mudflaps,
+		texture = Vehicles/Vehicles_91fordRanger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle RNG91MudflapsXC
+		{
+		part DAMNMudflaps
+        	{
+
+            model DAMNMudflapsR
+				{
+                	file = 91fordRangerMudflapsRear,
+                    offset = 0.0000 0.0000 0.1832,
+				}
+
+			category = Other,
+			area = TireRearRight,
+			itemType = Base.91fordRangerMudflaps,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RNG91.InstallComplete.Mudflaps,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 750,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = RNG91.UninstallComplete.Mudflaps,
+
+            		}
+
+            	lua
+            		{
+					create = RNG91.Create.Mudflaps,
+					init = RNG91.Init.Mudflaps,
+					}
+		}
+	}
+
+    template vehicle RNG91MudflapsXClong
+	{
+        template! = RNG91MudflapsXC,
+
+		part DAMNMudflaps
+        {
+
+            model DAMNMudflapsR
+			{
+                file = 91fordRangerMudflapsRear,
+                offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+        }
+    }
+
+    template vehicle RNG91MudflapsSC
+	{
+        template! = RNG91MudflapsXC,
+
+		part DAMNMudflaps
+        {
+
+            model DAMNMudflapsR
+			{
+                file = 91fordRangerMudflapsRear,
+                offset = 0.0000 0.0000 0.6001,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+        }
+    }
+
+    template vehicle RNG91MudflapsSClong
+	{
+        template! = RNG91MudflapsXC,
+
+		part DAMNMudflaps
+        {
+
+            model DAMNMudflapsR
+			{
+                file = 91fordRangerMudflapsRear,
+                offset = 0.0000 0.0000 0.4169,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+        }
+    }
+}

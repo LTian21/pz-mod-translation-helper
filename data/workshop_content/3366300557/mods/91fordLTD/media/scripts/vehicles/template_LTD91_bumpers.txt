@@ -1,0 +1,368 @@
+module Base
+{
+	model 91fordLTDfrontBumper0
+	{
+		mesh = vehicles/Vehicles_91fordLTD_Body|vic91_bumper0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 91fordLTDfrontBumper1
+	{
+		mesh = vehicles/Vehicles_91fordLTD_Body|vic91_bumper1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 91fordLTDrearBumper0
+	{
+		mesh = vehicles/Vehicles_91fordLTD_Body|vic91_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 91fordLTDrearBumper1
+	{
+		mesh = vehicles/Vehicles_91fordLTD_Body|vic91_bumper_rear1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle LTD91BumperFront
+		{
+		part LTD91BumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 91fordLTDfrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 91fordLTDfrontBumper1,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91fordLTDBumperFront0;Base.91fordLTDBumperFront1,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.BumperFront,
+					init = LTD91.Init.BumperFront,
+					}
+		}
+
+	}
+
+    template vehicle LTD91BumperFrontPD
+		{
+		part LTD91BumperFront
+        	{
+
+			model FrontBumper1
+				{
+                		file = 91fordLTDfrontBumper1,
+				}
+
+			model FrontBumper0
+				{
+                		file = 91fordLTDfrontBumper0,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91fordLTDBumperFront1;Base.91fordLTDBumperFront0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.BumperFrontPD,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.BumperFrontPD,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.BumperFrontPD,
+					init = LTD91.Init.BumperFrontPD,
+					}
+		}
+
+	}
+
+	template vehicle LTD91Bumpers
+		{
+        template! = LTD91BumperFront,
+
+		part LTD91BumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 91fordLTDrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91fordLTDBumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.BumperRear,
+					init = LTD91.Init.BumperRear,
+					}
+		}
+	}
+
+    template vehicle LTD91BumpersWagon
+		{
+        template! = LTD91BumperFront,
+
+		part LTD91BumperRear
+        	{
+
+			model RearBumper1
+				{
+                		file = 91fordLTDrearBumper1,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91fordLTDWagonBumperRear1,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.BumperRearW,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.BumperRearW,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.BumperRearW,
+					init = LTD91.Init.BumperRearW,
+					}
+		}
+	}
+
+    template vehicle LTD91BumpersPD
+		{
+        template! = LTD91BumperFrontPD,
+
+		part LTD91BumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 91fordLTDrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91fordLTDBumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = LTD91.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = LTD91.Create.BumperRear,
+					init = LTD91.Init.BumperRear,
+					}
+		}
+	}
+}

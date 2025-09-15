@@ -1,0 +1,983 @@
+module Base
+{
+    model 93townCarDoorfla
+    	{
+        mesh = vehicles/Vehicles_93townCar_Body|lincoln_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93townCarDoorfra
+    	{
+        mesh = vehicles/Vehicles_93townCar_Body|lincoln_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93townCarDoorrla
+    	{
+        mesh = vehicles/Vehicles_93townCar_Body|lincoln_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93townCarDoorrra
+    	{
+        mesh = vehicles/Vehicles_93townCar_Body|lincoln_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93townCarWindshielda0
+    	{
+        mesh = vehicles/Vehicles_93townCar_Body|lincoln_windshield_a0,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93townCarWindshielda1
+    	{
+        mesh = vehicles/Vehicles_93townCar_Body|lincoln_windshield_a1,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93townCarWindshieldreara
+    	{
+        mesh = vehicles/Vehicles_93townCar_Body|lincoln_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+   model 93townCarLimoDoormla
+    	{
+        mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_window_ml_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93townCarLimoDoormra
+    	{
+        mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_window_mr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle LIN93Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model LIN93winda0
+				{
+                		file = 93townCarWindshielda0,
+				}
+
+			model LIN93winda1
+				{
+                		file = 93townCarWindshielda1,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93townCarWindshieldArmorA;Base.93townCarWindshieldArmorB,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = LIN93.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.WindshieldArmor,
+					init = LIN93.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model LIN93leftdoora
+				{
+                		file = 93townCarDoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.93townCarFrontDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.DoorFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.DoorFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.DoorFrontLeftArmor,
+					init = LIN93.Init.DoorFrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model LIN93rightdoora
+				{
+                		file = 93townCarDoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.93townCarFrontDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.DoorFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.DoorFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.DoorFrontRightArmor,
+					init = LIN93.Init.DoorFrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model LIN93leftdoorra
+				{
+                		file = 93townCarDoorrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.93townCarRearDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.DoorRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.DoorRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.DoorRearLeftArmor,
+					init = LIN93.Init.DoorRearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model LIN93rightdoorra
+				{
+                		file = 93townCarDoorrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.93townCarRearDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.DoorRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.DoorRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.DoorRearRightArmor,
+					init = LIN93.Init.DoorRearRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model LIN93windra
+				{
+                		file = 93townCarWindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.93townCarWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.WindshieldRearArmor,
+					init = LIN93.Init.WindshieldRearArmor,
+			}
+		}
+	}
+
+	template vehicle LIN93ArmorLimo
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model LIN93winda0
+				{
+                		file = 93townCarWindshielda0,
+				}
+
+			model LIN93winda1
+				{
+                		file = 93townCarWindshielda1,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93townCarWindshieldArmorA;Base.93townCarWindshieldArmorB,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = LIN93.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.WindshieldArmor,
+					init = LIN93.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model LIN93leftdoora
+				{
+                		file = 93townCarDoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.93townCarFrontDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.DoorFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.DoorFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.DoorFrontLeftArmor,
+					init = LIN93.Init.DoorFrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model LIN93rightdoora
+				{
+                		file = 93townCarDoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.93townCarFrontDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.DoorFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.DoorFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.DoorFrontRightArmor,
+					init = LIN93.Init.DoorFrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model LIN93leftdoorra
+				{
+                		file = 93townCarDoorrla,
+                        offset = 0.0000 0.0000 -1.4673,
+				        rotate = 0.0000 0.0000 0.0000,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.93townCarRearDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.DoorRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.DoorRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.DoorRearLeftArmor,
+					init = LIN93.Init.DoorRearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model LIN93rightdoorra
+				{
+                		file = 93townCarDoorrra,
+                        offset = 0.0000 0.0000 -1.4673,
+				        rotate = 0.0000 0.0000 0.0000,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.93townCarRearDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.DoorRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.DoorRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.DoorRearRightArmor,
+					init = LIN93.Init.DoorRearRightArmor,
+					}
+		}
+
+		part DAMNMiddleLeftArmor
+        {
+
+			model LIN93winmla
+				{
+                		file = 93townCarLimoDoormla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93townCarMiddleWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.MiddleLeftArmor,
+                	requireInstalled = WindowMiddleLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.MiddleLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.MiddleLeftArmor,
+					init = LIN93.Init.MiddleLeftArmor,
+					}
+		}
+
+		part DAMNMiddleRightArmor
+        {
+
+			model LIN93winmra
+				{
+                		file = 93townCarLimoDoormra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93townCarMiddleWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.MiddleRightArmor,
+                	requireInstalled = WindowMiddleRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.MiddleRightArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.MiddleRightArmor,
+					init = LIN93.Init.MiddleRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model LIN93windra
+				{
+                		file = 93townCarWindshieldreara,
+                        offset = 0.0000 0.0000 -1.4673,
+				        rotate = 0.0000 0.0000 0.0000,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.93townCarWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.WindshieldRearArmor,
+					init = LIN93.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

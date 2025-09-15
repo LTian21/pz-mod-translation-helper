@@ -1,0 +1,187 @@
+module Base
+{
+	model KI5trailersGasCanStrapL
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_gascanStrap,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model KI5trailersGasCanL
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_gascan,
+		texture = Vehicles/Items_USMIL_gasCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+    model KI5trailersWaterCanL
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_gascan,
+		texture = Vehicles/Items_USMIL_waterCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+    model KI5trailersGasCanStrapR
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_gascanStrap,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model KI5trailersGasCanR
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_gascan,
+		texture = Vehicles/Items_USMIL_gasCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+    model KI5trailersWaterCanR
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_gascan,
+		texture = Vehicles/Items_USMIL_waterCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle KI5TRGasCans
+		{
+		part KI5TRGasCanLeft
+        	{
+
+            model StrapGL
+				{
+                		file = KI5trailersGasCanStrapL,
+				}
+            model GasCanL
+				{
+                		file = KI5trailersGasCanL,
+				}
+            model StrapGLE
+				{
+                		file = KI5trailersGasCanStrapL,
+				}
+            model GasCanLE
+				{
+                		file = KI5trailersGasCanL,
+				}
+            model StrapWL
+				{
+                		file = KI5trailersGasCanStrapL,
+				}
+			model WaterCanL
+				{
+                		file = KI5trailersWaterCanL,
+				}
+            model StrapWLE
+				{
+                		file = KI5trailersGasCanStrapL,
+				}
+			model WaterCanLE
+				{
+                		file = KI5trailersWaterCanL,
+				}
+
+			area = TireFrontLeft,
+			category = bodywork,
+            specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	time = 700,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+					complete = KI5TR.InstallComplete.GasCanLeft,
+            		}
+
+            table uninstall
+            		{
+
+                    time = 600,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			        complete = KI5TR.UninstallComplete.GasCanLeft,
+            		}
+
+            lua
+            		{
+                    create = KI5TR.Create.GasCanLeft,
+                    init = KI5TR.Init.GasCanLeft,
+                    }
+		}
+
+        part KI5TRGasCanRight
+        	{
+
+            model StrapGR
+				{
+                		file = KI5trailersGasCanStrapR,
+				}
+            model GasCanR
+				{
+                		file = KI5trailersGasCanR,
+				}
+            model StrapGRE
+				{
+                		file = KI5trailersGasCanStrapR,
+				}
+            model GasCanRE
+				{
+                		file = KI5trailersGasCanR,
+				}
+            model StrapWR
+				{
+                		file = KI5trailersGasCanStrapR,
+				}
+			model WaterCanR
+				{
+                		file = KI5trailersWaterCanR,
+				}
+            model StrapWRE
+				{
+                		file = KI5trailersGasCanStrapR,
+				}
+			model WaterCanRE
+				{
+                		file = KI5trailersWaterCanR,
+				}
+
+			area = TireFrontRight,
+			category = bodywork,
+            specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	time = 700,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+					complete = KI5TR.InstallComplete.GasCanRight,
+            		}
+
+            table uninstall
+            		{
+
+                    time = 600,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			        complete = KI5TR.UninstallComplete.GasCanRight,
+            		}
+
+            lua
+            		{
+                    create = KI5TR.Create.GasCanRight,
+                    init = KI5TR.Init.GasCanRight,
+                    }
+		}
+	}
+}

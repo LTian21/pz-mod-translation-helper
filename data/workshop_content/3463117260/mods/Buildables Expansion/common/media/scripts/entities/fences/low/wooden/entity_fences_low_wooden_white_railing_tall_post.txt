@@ -1,0 +1,70 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LowWoodenWhiteRailingTallPost
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Low Wooden White Railing Tall Post,
+			Icon		= fixtures_railings_01_75,
+		}
+	}
+
+    entity LowWoodenWhiteRailingTallPost
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_LowWoodenWhiteRailingTallPost,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face W
+            {
+                layer
+                {
+                    row = fixtures_railings_01_75,
+                }
+            }
+
+            face N
+            {
+                layer
+                {
+                    row = fixtures_railings_01_76,
+                }
+            }
+
+            face E
+            {
+                layer
+                {
+                    row = fixtures_railings_01_73,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 150,
+            needToBeLearn = true,
+            category      = Fences_Low,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:6,
+            ToolTip       = Tooltip_craft_woodenFenceDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 3 [Base.Plank],
+                item 3 [Base.Nails],
+            }
+        }
+    }
+}

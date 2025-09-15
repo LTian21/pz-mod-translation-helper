@@ -1,0 +1,162 @@
+module Base
+{
+
+	model 92amgeneralM998seatfl
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_seat_fl,
+		texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 92amgeneralM998seatfr
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_seat_fl,
+		texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	model 92amgeneralM998seatrl
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_seat_rl,
+		texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 92amgeneralM998seatrr
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_seat_rl,
+		texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	
+	template vehicle M998Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 92amgeneralM998seatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 92amgeneralM998seatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 92amgeneralM998seatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 92amgeneralM998seatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+            specificItem = false,
+			itemType = USMIL.Seat0,
+			mechanicRequireKey = true,
+            durability = 4,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

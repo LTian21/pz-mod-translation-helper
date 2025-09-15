@@ -1,0 +1,381 @@
+module Base
+{
+
+	model 92amgeneralM998doorfla
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|door_fl_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fl_bone 1.0,
+	}
+
+	model 92amgeneralM998doorfra
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|door_fr_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fr_bone 1.0,
+	}
+
+	model 92amgeneralM998doorrla
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|door_rl_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_rl_bone 1.0,
+	}
+
+	model 92amgeneralM998doorrra
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|door_rr_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_rr_bone 1.0,
+	}
+
+    model 92amgeneralM998WindshieldArmor1
+    	{
+        mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_windshield_a,
+	    texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+        shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+	model 92amgeneralM998WindshieldArmor2
+    	{
+        mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_windshield_aa,
+	    texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+        shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle M998Armor
+	{
+        part DAMNWindshieldArmor
+        	{
+
+			model M998winda1
+				{
+                		file = 92amgeneralM998WindshieldArmor1,
+				}
+            model M998winda2
+				{
+                		file = 92amgeneralM998WindshieldArmor2,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.92amgeneralM998WindshieldArmor0;Base.92amgeneralM998WindshieldArmor1,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M998.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = M998.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = M998.Create.WindshieldArmor,
+					init = M998.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        	{
+
+			model M998leftwina
+				{
+                		file = 92amgeneralM998doorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.92amgeneralM998FrontArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M998.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = M998.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = M998.Create.FrontLeftArmor,
+					init = M998.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        	{
+
+			model M998rightwina
+				{
+                		file = 92amgeneralM998doorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.92amgeneralM998FrontArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M998.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = M998.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = M998.Create.FrontRightArmor,
+					init = M998.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        	{
+
+			model M998leftrearwina
+				{
+                		file = 92amgeneralM998doorrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+            parent = DoorRearLeft,
+			itemType = Base.92amgeneralM998RearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M998.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = M998.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = M998.Create.RearLeftArmor,
+					init = M998.Init.RearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        	{
+
+			model M998rightrearwina
+				{
+                		file = 92amgeneralM998doorrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+            parent = DoorRearRight,
+			itemType = Base.92amgeneralM998RearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M998.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = M998.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = M998.Create.RearRightArmor,
+					init = M998.Init.RearRightArmor,
+					}
+		}
+	}
+}

@@ -1,0 +1,74 @@
+module HaloMarine
+	{
+
+	item Bag_HaloMarineBackpack
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	100,
+        Weight	=	2.0,
+        Type	=	Container,
+        Capacity	=	50,
+        DisplayName	=	"Z Hunter" Backpack,
+        Icon	=	HaloMarineBackpack,
+        CanBeEquipped = Back,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        ClothingItem = Bag_HaloMarineBackpack,
+        BloodLocation = Bag,
+        RunSpeedModifier = 0.97,
+        ReplaceInSecondHand = Bag_HaloMarineBackpackLeftHand holdingbagleft,
+        ReplaceInPrimaryHand = Bag_HaloMarineBackpackRightHand holdingbagright,
+        WorldStaticModel = Bag_HaloMarineBackpack_Ground,
+		AttachmentsProvided = Weaponslot1;Weaponslot2;Flashlightslot1;Utilityslot1;WaterCanisterslot1,
+        AttachmentReplacement = Bag,
+    }
+	
+	 model Bag_HaloMarineBackpack_Ground
+	{
+		mesh = Static/Clothes/Bag_HaloMarineBackpack_Ground,
+	}
+
+	 model HaloWaterCanister
+	{
+		mesh = Static/Clothes/HaloWaterCanister,
+		texture = HaloWaterCanister,
+	}
+
+    item HaloWaterCanisterFull
+	{
+		DisplayName = Water Canister,
+		DisplayCategory = Water,
+		Type = Drainable,
+		Weight = 1.6,
+		Icon = HaloWaterCanister,
+		CanStoreWater = TRUE,
+		FillFromDispenserSound = GetWaterFromDispenserPlasticMedium,
+		FillFromTapSound = GetWaterFromTapPlasticMedium,
+		IsWaterSource = TRUE,
+		ReplaceOnDeplete = HaloWaterCanisterEmpty,
+		ReplaceOnUseOn = WaterSource-HaloWaterCanisterFull,
+		UseDelta = 0.05,
+		UseWhileEquipped = FALSE,
+		CustomEatSound = DrinkingFromBottlePlastic,
+		StaticModel = HaloWaterCanister,
+		WorldStaticModel = HaloWaterCanister,
+		Tooltip = Tooltip_item_OnlyPurifyMicrowave,
+		AttachmentType = HaloWaterCanister,
+	}
+	item HaloWaterCanisterEmpty
+	{
+	    DisplayCategory = WaterContainer,
+		Weight	=	0.3,
+		CanStoreWater	=	TRUE,
+		Type	=	Normal,
+		DisplayName	=	Water Canister (Empty),
+		ReplaceOnUseOn	=	WaterSource-HaloWaterCanisterFull,
+		Icon	=	HaloWaterCanister,
+		StaticModel = HaloWaterCanister,
+		WorldStaticModel = HaloWaterCanister,
+		ReplaceTypes = WaterSource HaloWaterCanisterFull,
+		ToolTip = Tooltip_item_OnlyPurifyMicrowave,
+		AttachmentType = HaloWaterCanister,
+	}
+}

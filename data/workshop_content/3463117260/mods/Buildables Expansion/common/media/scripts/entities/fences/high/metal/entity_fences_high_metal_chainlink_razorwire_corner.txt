@@ -1,0 +1,60 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_ChainlinkAndRazorWireHighFenceCorner
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Chainlink And Razor Wire High Fence Corner,
+			Icon		= fencing_01_52,
+		}
+	}
+
+    entity ChainlinkAndRazorWireHighFenceCorner
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_ChainlinkAndRazorWireHighFenceCorner,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face W
+            {
+                layer
+                {
+                    row = fencing_01_52,
+                }
+            }
+			
+            corner = fencing_01_53,
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWireFence,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Fences_High,
+            SkillRequired = MetalWelding:7;Masonry:4,
+            xpAward       = MetalWelding:15;Masonry:10,
+            ToolTip       = Tooltip_craft_BigWiredFenceDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[MasonsTrowel] mode:keep,
+                item 6 [Base.MetalBar;Base.MetalPipe],
+                item 5 [Base.ScrapMetal],
+                item 3 [Base.Wire],
+                item 1 [Base.BarbedWire],
+                item 4 [Base.WeldingRods],
+                item 2 [Base.BucketConcreteFull],
+            }
+        }
+    }
+}

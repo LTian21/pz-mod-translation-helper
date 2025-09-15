@@ -1,0 +1,268 @@
+module Base
+{
+
+    item ATAProtectionWheelsChain /* Spawn */ 
+    {
+        Weight    =    3.0,
+        Type    =    Normal,
+        DisplayName    =    ATAProtectionWheelsItem,
+        Icon    =    ATAProtectionWheelsItem,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        ataProtection = TireFrontLeft;TireFrontRight;TireRearLeft;TireRearRight,
+    }
+
+    template vehicle ATAProtection
+    {
+        /* ATAProtectionWheels - 3д-модели защиты отображается на самих колесах */
+        part ATAProtectionWheels
+        {
+            area = Engine,
+            table install
+            {
+                requireInstalled = TireFrontLeft;TireFrontRight;TireRearLeft;TireRearRight,
+            }
+        }
+        
+        part ATAProtectionWheelsFront
+        {
+            area = Engine,
+            table install
+            {
+                requireInstalled = TireFrontLeft;TireFrontRight,
+            }
+        }
+        
+        part ATAProtectionWheelsRear
+        {
+            area = Engine,
+            table install
+            {
+                requireInstalled = TireMiddleLeft;TireMiddleRight;TireRearLeft;TireRearRight,
+            }
+        }
+        /* ATAProtection****Wheels - 3д-модели защиты закреплена на кузове */
+        part ATAProtectionFrontWheels
+        {
+            area = Engine,
+            table install
+            {
+                requireInstalled = TireFrontLeft;TireFrontRight,
+            }
+        }
+        part ATAProtectionRearWheels
+        {
+            area = Engine,
+            table install
+            {
+                requireInstalled = TireMiddleLeft;TireMiddleRight;TireRearLeft;TireRearRight,
+            }
+        }
+
+        part ATAProtectionWindowFront
+        {
+            parent = Windshield,
+            area = Engine,
+            table install
+            {
+                requireInstalled = Windshield,
+            }
+        }
+        part ATAProtectionWindowRear
+        {
+            parent = WindshieldRear,
+            area = TruckBed,
+            table install
+            {
+                requireInstalled = WindshieldRear,
+            }
+        }        
+        part ATAProtectionWindowFrontLeft
+        {
+            door
+            {
+            }
+            parent = WindowFrontLeft,
+            area = SeatFrontLeft,
+            table install
+            {
+                requireInstalled = WindowFrontLeft,
+            }
+        }
+        part ATAProtectionWindowFrontRight
+        {
+            door
+            {
+            }
+            parent = WindowFrontRight,
+            area = SeatFrontRight,
+            table install
+            {
+                requireInstalled = WindowFrontRight,
+            }
+        }
+        part ATAProtectionWindowMiddleLeft
+        {
+            door
+            {
+            }
+            parent = WindowMiddleLeft,
+            area = SeatMiddleLeft,
+            table install
+            {
+                requireInstalled = WindowMiddleLeft,
+            }
+        }
+        part ATAProtectionWindowMiddleRight
+        {
+            door
+            {
+            }
+            parent = WindowMiddleRight,
+            area = SeatMiddleRight,
+            table install
+            {
+                requireInstalled = WindowMiddleRight,
+            }
+        }
+        part ATAProtectionWindowRearLeft
+        {
+            door
+            {
+            }
+            parent = WindowRearLeft,
+            area = SeatRearLeft,
+            table install
+            {
+                requireInstalled = WindowRearLeft,
+            }
+        }
+        part ATAProtectionWindowRearRight
+        {
+            door
+            {
+            }
+            parent = WindowRearRight,
+            area = SeatRearRight,
+            table install
+            {
+                requireInstalled = WindowRearRight,
+            }
+        }
+        
+        part ATAProtectionSideLeft
+        {
+            area = SeatFrontLeft,
+        }
+        part ATAProtectionSideRight
+        {
+            area = SeatFrontRight,
+        }
+        part ATAProtectionSideFront
+        {
+            area = Engine,
+        }
+        part ATAProtectionSideTop
+        {
+            area = Engine,
+        }
+        part ATAProtectionSleeper
+        {
+            area = SeatFrontRight,
+        }
+        part ATAProtectionGasTank
+        {
+            area = GasTank,
+            parent = GasTank,
+            table install
+            {
+                requireInstalled = GasTank,
+            }
+        }
+        
+        part ATAProtectionHood
+        {
+            area = Engine,
+            parent = EngineDoor,
+            table install
+            {
+                requireInstalled = EngineDoor,
+            }
+        }
+        
+        part ATAProtectionTrunk
+        {
+            area = TruckBed,
+        }
+        
+        part ATAProtection*
+        {
+            category = protection,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                skills = Mechanics:5,
+                time = 2000,
+                recipes = Advanced Mechanics;Basic Tuning,
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.CommonProtection,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                         equip = primary,
+                   }
+                }
+                skills = Mechanics:4,
+                time = 2000,
+                recipes = Advanced Mechanics;Basic Tuning,
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.CommonProtection,
+            }
+            lua
+            {
+                create = ATATuning.Create.Chance0,
+                init = ATATuning.Init.Default,
+                update = ATATuning.Update.CommonProtection,
+            }
+        }
+        
+        part ATAProtectionWheels*
+        {
+            itemType = Base.ATAProtectionWheelsChain,
+            table install
+            {
+                complete = ATATuning.InstallComplete.WheelsProtection,
+            }
+            table uninstall
+            {
+                complete = ATATuning.UninstallComplete.WheelsProtection,
+            }
+            lua
+            {
+                create = ATATuning.Create.Chance0,
+                init = ATATuning.Init.WheelsProtection,
+                update = ATATuning.Update.CommonProtection,
+            }
+        }
+    }
+}

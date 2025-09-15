@@ -1,0 +1,168 @@
+module Base
+{
+	model 77firebirdBumperFront0
+	{
+		mesh = vehicles/Vehicles_77firebird_Body|trans77_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 77firebirdBumperFrontA
+	{
+		mesh = vehicles/Vehicles_77firebird_Body|trans77_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 77firebirdBullbarFrontA
+	{
+		mesh = vehicles/Vehicles_77firebird_Body|trans77_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 77firebirdBumperRear0
+	{
+		mesh = vehicles/Vehicles_77firebird_Body|trans77_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle FRB77Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model BumperFront0
+				{
+                		file = 77firebirdBumperFront0,
+				}
+
+            model BumperFrontA
+				{
+                		file = 77firebirdBumperFrontA,
+				}
+
+			model BullbarFrontA
+				{
+                		file = 77firebirdBullbarFrontA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.77firebirdBumperFront0;Base.77firebirdBumperFrontA;Base.77firebirdBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB77.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = FRB77.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = FRB77.Create.BumperFront,
+					init = FRB77.Init.BumperFront,
+					}
+			}
+
+
+		part DAMNBumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 77firebirdBumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.77firebirdBumperRear,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB77.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = FRB77.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = FRB77.Create.BumperRear,
+					init = FRB77.Init.BumperRear,
+					}
+		}
+	}
+}

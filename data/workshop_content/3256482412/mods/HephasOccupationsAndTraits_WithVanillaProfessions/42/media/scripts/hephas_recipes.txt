@@ -1,0 +1,130 @@
+module Base
+{
+    craftRecipe Chefs Pan Cooking Time {
+        timedAction = Making,
+        Time:30,
+        NeedToBeLearn:true,
+        Tags = InHandCraft,
+        category = Cooking,
+        inputs
+		{
+           item 1 [Base.ChefsPan] mode:destroy flags[ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.ChefsPanHandle,
+            item 1 Base.Pan,
+
+        }        
+    }
+
+    craftRecipe Chefs Pan Fighting Time {
+        timedAction = Making,
+        Time:30,
+        NeedToBeLearn:true,
+        Tags = InHandCraft,
+        category = Cooking,
+
+        inputs
+		{
+           item 1 [Base.Pan] mode:destroy flags[ItemCount],
+           item 1 [Base.ChefsPanHandle] mode:destroy flags[ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.ChefsPan,
+        }        
+    }
+
+    craftRecipe Make Survivors Crunch {
+        timedAction = MixingBowl,
+        Time:80,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:3,
+        SkillRequired = Cooking:3,
+        NeedToBeLearn:true,
+
+        inputs {
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[ItemCount],
+            -fluid 0.3 [Water],
+            item 1 tags[MixingUtensil] mode:keep flags[ItemCount],
+            item 3 [Base.Potato],
+            item 2 [Base.Twigs],
+            item 1 [Base.Grasshopper;Base.Cricket],
+            item 2 [Base.Strewberrie;Base.Apple],
+            item 1 [Base.Basil;Base.LemonGrass;Base.CommonMallow;Base.GingerRoot;Base.Lime],
+
+        }
+        outputs{
+            item 1 Base.SurvivorsCrunch,
+        }
+    }
+
+    craftRecipe Tool Mode {
+        timedAction = CraftWeapon1H,
+        Time:30,
+        Tags = InHandCraft,
+        category = Assembly,
+        NeedToBeLearn:true,
+
+        inputs {
+            item 1 [Base.MechanicsWrench] mode:destroy flags[ItemCount],
+        }
+        outputs {
+            item 1 Base.Wrench,
+            item 1 Base.HeavyWormScrew,
+        }
+    }
+
+    craftRecipe Weapon Mode {
+        timedAction = CraftWeapon1H,
+        Time:30,
+        NeedToBeLearn:true,
+        Tags = InHandCraft,
+        category = Assembly,
+
+        inputs {
+            item 1 [Base.Wrench] mode:destroy flags[ItemCount],
+            item 1 [Base.HeavyWormScrew] mode:destroy flags[ItemCount],
+        }
+        outputs {
+            item 1 Base.MechanicsWrench,
+        }
+    }
+
+    craftRecipe Cut Flex Tape {
+        timedAction = Making,
+        Time:50,
+        NeedToBeLearn:false,
+        Tags = InHandCraft;Survivalist,
+        category = Survivor,
+
+        inputs {
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+            item 1 [Base.FlexTape],
+        }
+        outputs {
+            item 1 Base.DuctTape,
+        }      
+    }
+
+    craftRecipe Craft Flex Tape {
+        timedAction = Making,
+        Time:50,
+        NeedToBeLearn:true,
+        Tags = InHandCraft;Survivalist,
+        category = Survivor,
+        inputs {
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+            item 1 [Base.Glue] mode:destroy flags[ItemCount],
+            item 5 [Base.LeatherStrips] mode:destroy flags[ItemCount],
+            item 1 [*],
+                -fluid 0.2 [Water],
+
+        }
+        outputs {
+            item 1 Base.FlexTape,
+        }      
+    }
+}

@@ -1,0 +1,109 @@
+module Base
+{
+	recipe Repair 90 Pierce Arrow Tire
+   {
+		90pierceArrowTire2,
+		TireRepairTools,
+		TireRepairRubberSolution,
+		TireRepairStrips,
+
+		NoBrokenItems:false,
+		Result:TireRepairTools,
+		Time:250.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+   }
+
+   recipe Repair 90 Pierce Arrow Double Tire
+   {
+		90pierceArrowDoubleTires2,
+		damnCraft.TireRepairTools,
+		damnCraft.TireRepairRubberSolution=2,
+		damnCraft.TireRepairStrips=2,
+
+		NoBrokenItems:false,
+		Result:damnCraft.TireRepairTools,
+		Time:250.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+   }
+
+
+	fixing Fix 90 Pierce Arrow Seat
+	{
+	   Require : 90pierceArrowSeat2,
+	   ConditionModifier : 0.5,
+
+       Fixer : DuctTape=2;Mechanics=1,
+	}
+	
+	fixing Fix 90 Pierce Arrow Trunk Welding
+	{
+	   Require : 90pierceArrowTrunk2;90pierceArrowWaterTank2,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=2,
+	}
+
+	fixing Fix 90 Pierce Arrow Hood Welding
+	{
+	   Require : 90pierceArrowEngineDoor2,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+	}
+
+   fixing Fix 90 Pierce Arrow Hood
+	{
+	   Require : 90pierceArrowEngineDoor2,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix 90 Pierce Arrow Lid Welding
+    {
+       Require : 90pierceArrowTrunkDoor2;90pierceArrowTrunkDoorsLeft2;90pierceArrowTrunkDoorsRight2,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+    }
+
+   fixing Fix 90 Pierce Arrow Lid
+	{
+      Require : 90pierceArrowTrunkDoor2;90pierceArrowTrunkDoorsLeft2;90pierceArrowTrunkDoorsRight2,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix 90 Pierce Arrow Door Welding
+	{
+	   Require : 90pierceArrowFrontDoor2;90pierceArrowRearDoor2,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=3,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=3,
+	}
+
+	fixing Fix 90 Pierce Arrow Armor Welding
+    {
+       Require : 90pierceArrowSideWindowArmor;90pierceArrowWindshieldArmor;90pierceArrowWindshieldRearArmor;90pierceArrowBumper0;90pierceArrowReinforcedBumper1,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 0.75,
+
+       Fixer : SheetMetal; MetalWelding=4;Mechanics=4,
+       Fixer : SmallSheetMetal=2; MetalWelding=4;Mechanics=4,
+    }
+}

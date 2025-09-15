@@ -1,0 +1,141 @@
+module Base
+{
+
+	model 86chevyCUCVSunVisor0
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_visor,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CUCV86SunVisor
+	{
+		part DAMNSunVisor
+        	{
+
+			model SunVisor0
+				{
+                		file = 86chevyCUCVSunVisor0,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.3rdGenChevyCKseriesSunVisor,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+	            lua
+	            {
+				create = DAMN.Create.Blank,
+				}
+		}
+	}
+
+    template vehicle CUCV86SunVisorCiv
+	{
+		part DAMNSunVisor
+        	{
+
+			model SunVisor0
+				{
+                		file = 86chevyCUCVSunVisor0,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.3rdGenChevyCKseriesSunVisor,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CUCV86.InstallComplete.SunVisor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = CUCV86.UninstallComplete.SunVisor,
+
+            		}
+
+	            lua
+	            {
+				create = CUCV86.Create.SunVisor,
+				init = CUCV86.Init.SunVisor,
+				}
+		}
+	}
+
+}
+

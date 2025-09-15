@@ -1,0 +1,87 @@
+module Base
+{
+	model 88chevyS10rearBumper
+	{
+		mesh = vehicles/Vehicles_88chevyS10_Body|chevyS10_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 88chevyS10rearBullbar
+	{
+		mesh = vehicles/Vehicles_88chevyS10_Body|chevyS10_armor_br1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CH88RearBumper
+		{
+		part CH88RearBumper
+        	{
+
+			model RearBumper
+				{
+                		file = 88chevyS10rearBumper,
+				}
+
+			model RearBullbar
+				{
+                		file = 88chevyS10rearBullbar,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.88ChevyS10BumperRear;Base.80sPickupBullbarRear,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH88.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CH88.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = CH88.Create.RearBumper,
+					init = CH88.Init.RearBumper,
+					}
+		}
+	}
+
+		
+}

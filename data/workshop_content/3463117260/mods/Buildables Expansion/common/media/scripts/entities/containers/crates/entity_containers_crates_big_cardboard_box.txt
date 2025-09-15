@@ -1,0 +1,58 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_BigCardboardBox
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Big Cardboard Box,
+			Icon		= furniture_storage_02_16,
+		}
+	}
+
+    entity BigCardboardBox
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_BigCardboardBox,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = furniture_storage_02_17,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_storage_02_16,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 150,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:2,
+            xpAward       = Woodwork:2,
+            category      = Containers_Crates,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_cardboardCrateDesc,
+            inputs
+            {
+                item 4 [Base.Glue] flags[Prop1],
+                item 10 [Base.Newspaper_Recent;Base.Newspaper_New;Base.Newspaper_Dispatch_New;Base.Newspaper_Herald_New;Base.Newspaper_Knews_New;Base.Newspaper_Times_New;Base.Newspaper] flags[Prop2],
+            }
+        }
+    }
+}

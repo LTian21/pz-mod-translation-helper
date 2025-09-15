@@ -1,0 +1,86 @@
+module Base
+{
+	template vehicle EngineDoorSpareWheel
+	{
+		part EngineDoor
+		{
+		    mechanicArea = Engine,
+			category = bodywork,
+			area = Engine,
+			durability = 5,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleHoodOpen,
+			}
+			anim Close
+			{
+				sound = VehicleHoodClose,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 180.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 180.0 0.0,
+			}
+			itemType = Base.EngineDoor,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+			
+				items
+				{
+					1
+					{
+						tags = Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+			requireUninstalled = pzkSpareWheelHood,
+			
+				items
+				{
+					1
+					{
+						tags = Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+}
+

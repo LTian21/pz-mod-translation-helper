@@ -1,0 +1,155 @@
+module Base
+{
+    model TatrapanApocalypto_leftfrontwindow
+	{
+		mesh = vehicles/TatrapanApocalypto|LeftFrontWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = FrontLeftWindowBone 1.0,
+	}
+	model TatrapanApocalypto_rightfrontwindow
+	{
+		mesh = vehicles/TatrapanApocalypto|RightFrontWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = FrontRightWindowBone 1.0,
+	}
+	model TatrapanApocalypto_leftrearwindow
+	{
+		mesh = vehicles/TatrapanApocalypto|LeftRearWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = LeftRearWindowBone 1.0,
+	}
+	model TatrapanApocalypto_rightrearwindow
+	{
+		mesh = vehicles/TatrapanApocalypto|RightRearWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = RightRearWindowBone 1.0,
+	}
+
+
+
+
+    template vehicle TatrapanApocalypto_windows
+    {
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+                template = Window/part/WindowRearLeft,
+		template = Window/part/WindowRearRight,
+  
+
+
+		part WindowFrontLeft
+		{
+			area = SeatFrontLeft,
+			
+			parent = DoorFrontLeft,
+                       
+
+			model Default
+			{
+				file = TatrapanApocalypto_leftfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontLeft_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+
+		part WindowFrontRight
+		{
+			area = SeatFrontRight,
+			
+			parent = DoorFrontRight,
+                        
+
+			model Default
+			{
+				file = TatrapanApocalypto_rightfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontRight_open,
+				animate = FALSE,
+			}                        
+
+		}
+
+		part WindowRearLeft
+		{
+			area = SeatRearLeft,
+			
+			parent = DoorRearLeft,
+                       
+
+			model Default
+			{
+				file = TatrapanApocalypto_leftrearwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowRearLeft_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+
+  		part WindowRearRight
+		{
+			area = SeatRearRight,
+			
+			parent = DoorRearRight,
+                       
+
+			model Default
+			{
+				file = TatrapanApocalypto_rightrearwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowRearRight_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+              
+                             
+                
+
+
+
+           
+
+		
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			window
+			{
+				openable = true,
+			}
+		}
+    }
+}

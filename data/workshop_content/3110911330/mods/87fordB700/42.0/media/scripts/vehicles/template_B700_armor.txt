@@ -1,0 +1,1309 @@
+module Base
+{
+    model 87fordB700Windowfla
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_armor_fla,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordB700Windowfra
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_armor_fra,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordB700Windowfrap
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_armor_prison_fra,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordB700Windowrla
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_armor_rla,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordB700Windowrlap
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_armor_prison_rla,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordB700Windowrra
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_armor_rra,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordB700Windowrrap
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_armor_prison_rra,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+   model 87fordB700Sidela
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_armor_side_left,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordB700Sidelap
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_armor_prison_side_left,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordB700Sidera
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_armor_side_right,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordB700Siderap
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_armor_prison_side_right,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordB700Doora
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_door_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 87fordB700Windshielda
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_windshield_a,
+		texture = Vehicles/Vehicles_87fordB700_Interior2,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordB700reara
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|b700_door_r_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle B700Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model B700winda
+				{
+                		file = 87fordB700Windshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700WindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = B700.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.WindshieldArmor,
+					init = B700.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model B700doorfra
+				{
+                		file = 87fordB700Doora,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.87fordB700DoubleDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.DoorFrontRightArmor,
+                	requireInstalled = DoorFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.DoorFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.DoorFrontRightArmor,
+					init = B700.Init.DoorFrontRightArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model B700winfla
+				{
+                		file = 87fordB700Windowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700SideArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.FrontLeftArmor,
+					init = B700.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model B700winfra
+				{
+                		file = 87fordB700Windowfra,
+				}
+
+			model B700winfrap
+				{
+                		file = 87fordB700Windowfrap,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700SideArmor;Base.87fordB700SideArmorPrison,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.FrontRightArmor,
+					init = B700.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model B700winrla
+				{
+                		file = 87fordB700Windowrla,
+				}
+
+			model B700winrlap
+				{
+                		file = 87fordB700Windowrlap,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700SideArmor;Base.87fordB700SideArmorPrison,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.RearLeftArmor,
+					init = B700.Init.RearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model B700winrra
+				{
+                		file = 87fordB700Windowrra,
+				}
+
+			model B700winrrap
+				{
+                		file = 87fordB700Windowrrap,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700SideArmor;Base.87fordB700SideArmorPrison,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.RearRightArmor,
+					init = B700.Init.RearRightArmor,
+					}
+		}
+
+		part B700SideLeftArmor
+        {
+
+			model B700sidela
+				{
+                		file = 87fordB700Sidela,
+				}
+
+			model B700sidelap
+				{
+                		file = 87fordB700Sidelap,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700LargeSideArmor;Base.87fordB700LargeSideArmorPrison,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.SideLeftArmor,
+                	requireInstalled = Windows,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.SideLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.SideLeftArmor,
+					init = B700.Init.SideLeftArmor,
+					}
+		}
+
+		part B700SideRightArmor
+        {
+
+			model B700sidera
+				{
+                		file = 87fordB700Sidera,
+				}
+
+			model B700siderap
+				{
+                		file = 87fordB700Siderap,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700LargeSideArmor;Base.87fordB700LargeSideArmorPrison,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.SideRightArmor,
+                	requireInstalled = Windows,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.SideRightArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.SideRightArmor,
+					init = B700.Init.SideRightArmor,
+					}
+		}
+
+		part B700RearArmor
+        {
+
+				model B700ra
+				{
+                		file = 87fordB700reara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = DoorRear,
+			specificItem = false,
+			itemType = Base.87fordB700RearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.RearArmor,
+                	requireInstalled = DoorRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.RearArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.RearArmor,
+					init = B700.Init.RearArmor,
+			}
+		}
+	}
+
+	template vehicle B700ArmorPrison
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model B700winda
+				{
+                		file = 87fordB700Windshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700WindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = B700.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.WindshieldArmor,
+					init = B700.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model B700doorfra
+				{
+                		file = 87fordB700Doora,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.87fordB700DoubleDoorArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.DoorFrontRightArmor,
+                	requireInstalled = DoorFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.DoorFrontRightArmor,
+
+            		}
+
+            		lua
+            		{
+					create = B700.Create.DoorFrontRightArmor,
+					init = B700.Init.DoorFrontRightArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model B700winfla
+				{
+                		file = 87fordB700Windowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700SideArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.FrontLeftArmor,
+					init = B700.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model B700winfra
+				{
+                		file = 87fordB700Windowfra,
+				}
+
+			model B700winfrap
+				{
+                		file = 87fordB700Windowfrap,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700SideArmorPrison;Base.87fordB700SideArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.FrontRightArmorPrison,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.FrontRightArmorPrison,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.FrontRightArmorPrison,
+					init = B700.Init.FrontRightArmorPrison,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model B700winrla
+				{
+                		file = 87fordB700Windowrla,
+				}
+
+			model B700winrlap
+				{
+                		file = 87fordB700Windowrlap,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700SideArmorPrison;Base.87fordB700SideArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.RearLeftArmorPrison,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.RearLeftArmorPrison,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.RearLeftArmorPrison,
+					init = B700.Init.RearLeftArmorPrison,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model B700winrra
+				{
+                		file = 87fordB700Windowrra,
+				}
+
+			model B700winrrap
+				{
+                		file = 87fordB700Windowrrap,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700SideArmorPrison;Base.87fordB700SideArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.RearRightArmorPrison,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.RearRightArmorPrison,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.RearRightArmorPrison,
+					init = B700.Init.RearRightArmorPrison,
+					}
+		}
+
+		part B700SideLeftArmor
+        {
+
+			model B700sidela
+				{
+                		file = 87fordB700Sidela,
+				}
+
+			model B700sidelap
+				{
+                		file = 87fordB700Sidelap,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700LargeSideArmorPrison;Base.87fordB700LargeSideArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.SideLeftArmorPrison,
+                	requireInstalled = Windows,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.SideLeftArmorPrison,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.SideLeftArmorPrison,
+					init = B700.Init.SideLeftArmorPrison,
+					}
+		}
+
+		part B700SideRightArmor
+        {
+
+			model B700sidera
+				{
+                		file = 87fordB700Sidera,
+				}
+
+			model B700siderap
+				{
+                		file = 87fordB700Siderap,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordB700LargeSideArmorPrison;Base.87fordB700LargeSideArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.SideRightArmorPrison,
+                	requireInstalled = Windows,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.SideRightArmorPrison,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.SideRightArmorPrison,
+					init = B700.Init.SideRightArmorPrison,
+					}
+		}
+
+		part B700RearArmor
+        {
+
+				model B700ra
+				{
+                		file = 87fordB700reara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = DoorRear,
+			specificItem = false,
+			itemType = Base.87fordB700RearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.RearArmor,
+                	requireInstalled = DoorRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.RearArmor,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.RearArmor,
+					init = B700.Init.RearArmor,
+			}
+		}
+	}
+}

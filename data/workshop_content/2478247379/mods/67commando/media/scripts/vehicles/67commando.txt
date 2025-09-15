@@ -1,0 +1,531 @@
+module Base
+{
+	model 67commandoBase
+	{
+		mesh = vehicles/Vehicles_67commando_Body|body_mk2,
+		shader = damn_vehicle_noreflect_shader,
+		invertX = FALSE,
+		scale = 0.1,
+	}
+    model 67commandoHatches
+	{
+		mesh = vehicles/Vehicles_67commando_Body|body_mk2_hatch,
+		shader = damn_vehicle_noreflect_shader,
+		invertX = FALSE,
+		scale = 0.1,
+	}
+	model 67commandoInterior
+	{
+		mesh = vehicles/Vehicles_67commando_Body|v100_interior,
+		texture = vehicles/Vehicles_67commando_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 67commandoRadio
+	{
+		mesh = vehicles/Vehicles_67commando_Body|v100_radio,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+	vehicle 67commando
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 4,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.2,
+		engineRPMType = van,
+
+		model
+		{
+			file = 67commandoBase,
+			scale = 1.3300,
+			offset = 0.0000 0.5329 -0.1756,
+		}
+
+		spawnOffsetY = 0,
+
+		skin
+		{
+			texture = Vehicles/Vehicles_67commando_Shell,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_67commando_Shell_NatoGreen,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_67commando_Shell_NatoBlack,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_67commando_Shell_Ranger,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_67commando_Shell_Camo,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_67commando_Shell_desertTan,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_67commando_Shell_militaryPolice,
+		}
+
+		textureRust = Vehicles/Vehicles_67commando_Rust,
+		textureMask = Vehicles/Vehicles_67commando_Mask,
+		textureLights = Vehicles/Vehicles_67commando_Lights,
+		textureDamage1Shell = Vehicles/Vehicles_67commando_Shell_Damaged01,
+		textureDamage2Shell = Vehicles/Vehicles_67commando_Shell_Damaged02,
+		textureDamage1Overlay = Vehicles/Vehicles_67commando_Overlays_Damaged01,
+		textureDamage2Overlay = Vehicles/Vehicles_67commando_Overlays_Damaged02,
+
+		sound
+		{
+			engine = VehicleEngineSUV,
+			engineStart = VehicleEngineSUV,
+			engineTurnOff = VehicleEngineSUV,
+			horn = VehicleHornStandard,
+			ignitionFail = VehicleIgnitionFailSUV,
+		}
+
+		extents = 1.6992 0.9925 3.9248,
+		mass = 1150,
+		physicsChassisShape = 1.6992 0.9925 3.9248,
+		centerOfMassOffset = 0.0000 0.5549 -0.0028,
+		shadowExtents = 1.6992 3.9399,
+		shadowOffset = 0.0000 0.1203,
+		engineForce = 5500,
+		maxSpeed = 58f,
+		engineLoudness = 130,
+		engineQuality = 85,
+		gearRatioCount = 4,
+		gearRatioR = 4,
+		gearRatio1 = 4,
+		gearRatio2 = 3,
+		gearRatio3 = 2.5,
+		gearRatio4 = 1.0,
+		brakingForce = 50,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 0.50f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 35,
+		suspensionCompression = 3.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 12,
+		suspensionRestLength = 0.5,
+		wheelFriction = 1.8f,
+		frontEndHealth = 3500,
+		rearEndHealth = 3000,
+		seats = 6,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.6617 -0.4887 1.1429,
+			radius = 0.38f,
+			width = 0.40f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.6617 -0.4887 1.1429,
+			radius = 0.38f,
+			width = 0.40f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.6617 -0.5263 -0.8571,
+			radius = 0.38f,
+			width = 0.40f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.6617 -0.5263 -0.8571,
+			radius = 0.38f,
+			width = 0.40f,
+		}
+
+		template = PassengerSeat6,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.2556 -0.0977 0.8346,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.0602 -0.8872 -0.5188,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.2857 -0.0977 0.8120,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.0602 -0.8872 -0.5564,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		passenger MiddleLeft
+		{
+			door = DoorFrontLeft,
+			showPassenger = true,
+			hasRoof = true,
+			area = SeatFrontLeft,
+
+			position inside
+			{
+				offset = 0.4211 -0.0977 0.2105,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.0526 -0.8872 -0.5113,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger MiddleRight
+		{
+			door = DoorFrontRight,
+			showPassenger = true,
+			hasRoof = true,
+			area = SeatFrontRight,
+
+			position inside
+			{
+				offset = -0.4286 -0.0977 0.2030,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.0451 -0.8872 -0.5263,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		passenger RearLeft
+		{
+			door = DoorRear,
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.4511 -0.1053 -0.2857,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.3835 -0.8872 -2.3008,
+				rotate = 0.0000 0.0000 0.0000,
+				area = TruckBed,
+			}
+		}
+
+		passenger RearRight
+		{
+			door = DoorRear,
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.0526 -0.1128 -0.2932,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.3459 -0.8872 -2.2782,
+				rotate = 0.0000 0.0000 0.0000,
+				area = TruckBed,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 1.2406 -1.5074 0.7820 0.7970,
+		}
+
+		area Toolbox
+		{
+			xywh = -0.1053 2.3347 0.7519 0.7519,
+		}
+
+		area TruckBed
+		{
+			xywh = -0.4586 -2.3383 0.7519 0.7519,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.2256 -0.3646 0.7519 0.6015,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.2256 -0.3646 0.7519 0.6015,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -1.1504 -1.5826 0.6015 0.6015,
+		}
+
+		area GasTank
+		{
+			xywh = -1.0602 -1.5300 0.4211 0.4211,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.0602 0.9512 0.4211 0.4211,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.0602 0.9512 0.4211 0.4211,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.0602 -1.0413 0.4211 0.4211,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.0602 -1.0413 0.4211 0.4211,
+		}
+
+        template = runFlatTires,
+		template = centralTireInflation,
+
+		template = TrunkV100/part/TruckBed,
+
+		part TruckBed
+		{
+			container
+			{
+				conditionAffectsCapacity = false,
+				capacity = 125,
+			}
+		}
+
+		template = V100Seats,
+
+		part GloveBox
+		{
+			model V100Interior
+			{
+				file = 67commandoInterior,
+			}
+
+            model V100hatch
+            {
+                file = 67commandoHatches,
+            }
+
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			container
+			{
+				capacity = 10,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			container
+			{
+				conditionAffectsCapacity = false,
+				capacity = 150,
+			}
+
+			install
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = V100EngineDoor/part/EngineDoor,
+		template = V100ToolboxLid/part/V100ToolboxLid,
+		template = V100Toolbox/part/V100Toolbox,
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = WindowV100,
+		template = DoorV100,
+		template = runFlatsLargeFront,
+        template = runFlatsLargeRear,
+        template = TireV100,
+        template = V100LightGuards,
+
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+
+		part Radio
+		{
+			model V100Radio
+			{
+				file = 67commandoRadio,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+		}
+
+		part Radio*
+		{
+			itemType = Radio.HamRadio2,
+		}
+
+		template = Headlight,
+
+		physics box
+		{
+			offset = 0.0000 0.5181 -1.6466,
+			extents = 1.6692 0.5038 0.6692,
+			rotate = 52.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.2481 0.9107 -1.9699,
+			extents = 0.5263 0.4737 0.4737,
+			rotate = 52.0000 0.0000 0.0000,
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.3383 -1.9624,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.3383 2.2782,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

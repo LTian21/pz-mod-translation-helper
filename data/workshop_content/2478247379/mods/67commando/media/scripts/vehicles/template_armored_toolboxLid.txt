@@ -1,0 +1,128 @@
+module Base
+{
+
+	model V100_Toolbox
+	{
+		mesh = vehicles/Vehicles_67commando_Body|v100_toolbox,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle V100ToolboxLid
+	{
+		part V100ToolboxLid
+		{
+
+			model V100_Toolbox
+			{
+				file = V100_Toolbox,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			anim Close
+			{
+				anim = toolbox_opening,
+                reverse = TRUE,
+				rate = 0.70,
+			}
+
+			anim Open
+			{
+				anim = toolbox_opening,
+				rate = 1.25,
+			}
+
+			anim Closed
+			{
+				anim = toolbox_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = toolbox_opening,
+                reverse = TRUE,
+				animate = FALSE,
+			}
+		
+			category = bodywork,
+			area = Toolbox,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleHoodOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleHoodCloseStandard,
+			}
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 180.0 0.0,
+			}
+
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 180.0 0.0,
+			}
+
+			itemType = Base.V100ToolboxLid,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 750,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 750,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+}
+

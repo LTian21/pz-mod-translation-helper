@@ -1,0 +1,389 @@
+module Base
+{
+
+    item GunToolKit
+    {
+      Weight	=	1,
+      Type	=	Drainable,
+      UseDelta	=	0.05,
+      UseWhileEquipped	=	FALSE,
+      DisplayName	=	Gun Tool Kit,
+      Icon	=	GunToolKit,
+      Tooltip = Tooltip_ServiceFirearms,
+      SurvivalGear = TRUE,
+      WorldStaticModel = GunToolKit,
+    }
+
+    item ImprovisedGunToolKit
+    {
+      Weight	=	1,
+      Type	=	Drainable,
+      UseDelta	=	0.05,
+      UseWhileEquipped	=	FALSE,
+      DisplayName	=	Gun Tool Kit,
+      DisplayCategory = Material,
+      Icon	=	Improvised_GunToolKit,
+      Tooltip = Tooltip_ServiceFirearms,
+      SurvivalGear = TRUE,
+      WorldStaticModel = Improvised_GunToolKit,
+    }
+
+    item Solvent
+    {
+      Weight	=	1,
+      WeightEmpty = 0.1,
+      Type	=	Drainable,
+      UseDelta	=	0.05,
+      UseWhileEquipped	=	FALSE,
+      DisplayName	=	WD-40,
+      DisplayCategory = Material,
+      Icon	=	WD40,
+      Tooltip = Tooltip_ServiceFirearms,
+      cantBeConsolided = TRUE,
+      SurvivalGear = TRUE,
+      WorldStaticModel = WMD,
+      Tags = FirearmsSolvent;Solvent;HasMetal,
+    }
+
+    item Toothbrush
+  	{
+  		DisplayName = Toothbrush,
+  		DisplayCategory = Material,
+  		Type = Normal,
+  		Weight = 0.2,
+  		Icon = Toothbrush,
+  		WorldStaticModel = Toothbrush,
+  		Tags = FirearmsBrush,
+  	}
+
+    /*craftRecipe MakeImprovisedGunCleaningKit
+  	{
+      timedAction = Making,
+      xpAward = Maintenance:5,
+      SkillRequired = Maintenance:1,
+  		AutoLearnAll = Maintenance:1,
+  		Time = 20,
+  		AllowBatchCraft = False,
+  		Tags = InHandCraft,
+  		category = Weaponry,
+  		OnCreate = onImprovisedSilencer_OnCreate,
+  		Tooltip = Tooltip_Recipe_ImprovisedSilencer,
+  		OnTest = onImprovisedSilencer_OnTest,
+  		inputs
+  		{
+  			item 1 tags[CleanStains] flags[AllowDestroyedItem;IsWorn],
+  			item 1 tags[FirearmsBrush] flags[AllowDestroyedItem;IsWorn],
+  			item 1 tags[FirearmsSolvent] flags[AllowDestroyedItem;IsWorn],
+  		}
+  		outputs
+  		{
+  			item 1 Base.ImprovisedGunToolKit,
+  		}
+  	}*/
+
+  craftRecipe RepairFirearm
+	{
+		Time = 180,
+		AllowBatchCraft = False,
+    tags = AnySurfaceCraft,
+    category = Repair,
+    timedAction = CraftWeapon1H,
+		xpAward = Maintenance:5,
+    SkillRequired = Maintenance:2,
+    OnCreate = CraftRecipeCode.GenericEvenBetterFixing.OnCreate,
+		ToolTip = Tooltip_Recipe_CanFailAndDamage,
+		inputs
+		{
+			item 1 tags[Gun] mode:keep flags[Prop1;AllowDestroyedItem;IsDamaged],
+			item 2 [Base.GunToolKit] flags[Prop2],
+		}
+		outputs
+		{
+		}
+	}
+
+  craftRecipe RepairFirearmImprovised
+	{
+		Time = 180,
+		AllowBatchCraft = False,
+    tags = AnySurfaceCraft,
+    category = Repair,
+    timedAction = CraftWeapon1H,
+		xpAward = Maintenance:5,
+    SkillRequired = Maintenance:3,
+    AutoLearnAll = Maintenance:3,
+    OnCreate = CraftRecipeCode.GenericFixing.OnCreate,
+		ToolTip = Tooltip_Recipe_CanFailAndDamage,
+		inputs
+		{
+			item 1 tags[Gun] mode:keep flags[Prop1;IsDamaged],
+			item 2 tags[CleanStains] flags[Prop2],
+			item 1 tags[FirearmsBrush] mode:keep,
+			item 3 tags[FirearmsSolvent],
+			/*item 2 [Base.ImprovisedGunToolKit] flags[Prop2],*/
+		}
+		outputs
+		{
+		}
+	}
+
+  fixing Fix Glock 17
+  {
+    Require : Glock17,
+
+    Fixer : Glock17; Aiming=3,
+  }
+
+  fixing Fix Colt Ace
+  {
+    Require : ColtAce,
+
+    Fixer : ColtAce; Aiming=3,
+  }
+
+  fixing Fix ICA19
+  {
+    Require : ICA19,
+
+    Fixer : ICA19; Aiming=3,
+  }
+
+  fixing Fix ICA19 Gold
+  {
+    Require : ICA19_Gold,
+
+    Fixer : ICA19_Gold; Aiming=3,
+  }
+
+  fixing Fix Colt Python
+  {
+  Require : ColtPython,
+
+  Fixer : ColtPython; Aiming=3,
+  }
+
+  fixing Fix Colt Python Hunter
+  {
+  Require : ColtPythonHunter,
+
+  Fixer : ColtPythonHunter; Aiming=3,
+  }
+
+  fixing Fix Colt Anaconda
+  {
+  Require : ColtAnaconda,
+
+  Fixer : ColtAnaconda; Aiming=3,
+  }
+
+  fixing Fix Colt Peacemaker
+  {
+  Require : ColtPeacemaker,
+
+  Fixer : ColtPeacemaker; Aiming=3,
+  }
+
+  fixing Fix Colt Single Action Frontier
+  {
+  Require : ColtSingleAction22,
+
+  Fixer : ColtSingleAction22; Aiming=3,
+  }
+
+  fixing Fix MP5
+  {
+    Require : MP5,
+
+    Fixer : MP5; Aiming=3,
+  }
+
+  fixing Fix MP5SD
+  {
+    Require : MP5SD,
+
+    Fixer : MP5SD; Aiming=3,
+  }
+
+  fixing Fix MP510
+  {
+    Require : MP510,
+
+    Fixer : MP510; Aiming=3,
+  }
+
+  fixing Fix UZI
+  {
+    Require : UZI,
+
+    Fixer : UZI; Aiming=3,
+  }
+
+  fixing Fix MAC10
+  {
+    Require : MAC10,
+
+    Fixer : MAC10; Aiming=3,
+  }
+
+  fixing Fix M16A2
+  {
+    Require : M16A2,
+
+    Fixer : M16A2; Aiming=3,
+  }
+
+  fixing Fix Colt Commando
+  {
+    Require : M733,
+
+    Fixer : M733; Aiming=3,
+  }
+
+  fixing Fix AR15
+  {
+    Require : AR15,
+
+    Fixer : AR15; Aiming=3,
+  }
+
+  fixing Fix M60
+  {
+    Require : M60,
+
+    Fixer : M60; Aiming=3,
+  }
+
+  fixing Fix AK47
+  {
+    Require : AK47,
+
+    Fixer : AK47; Aiming=3,
+  }
+
+  fixing Fix FN FAL
+  {
+    Require : FN_FAL,
+
+    Fixer : FN_FAL; Aiming=3,
+  }
+
+  fixing Fix G3
+  {
+    Require : G3,
+
+    Fixer : G3; Aiming=3,
+  }
+
+  fixing Fix Sawn Hunting Rifle
+  {
+    Require : HuntingRifle_Sawn,
+
+    Fixer : HuntingRifle; Aiming=3,
+  }
+
+  fixing Fix Ruger M7722
+  {
+    Require : Rugerm7722,
+
+    Fixer : Rugerm7722; Aiming=3,
+  }
+
+  fixing Fix SKS
+  {
+    Require : SKS,
+
+    Fixer : SKS; Aiming=3,
+  }
+
+  fixing Fix M24Rifle
+  {
+    Require : M24Rifle,
+
+    Fixer : M24Rifle; Aiming=3,
+  }
+
+  fixing Fix M1Garand
+  {
+    Require : M1Garand,
+
+    Fixer : M1Garand; Aiming=3,
+  }
+
+  fixing Fix Winchester 94
+  {
+    Require : Winchester94,
+
+    Fixer : Winchester94; Aiming=3,
+  }
+
+  fixing Fix Winchester73
+  {
+    Require : Winchester73,
+
+    Fixer : Winchester73; Aiming=3,
+  }
+
+  fixing Fix Rossi92
+  {
+    Require : Rossi92,
+
+    Fixer : Rossi92; Aiming=3,
+  }
+
+  fixing Fix Mossberg500
+  {
+    Require : Mossberg500,
+
+    Fixer : Mossberg500; Aiming=3,
+  }
+
+  fixing Fix Mossberg500Tactical
+  {
+    Require : Mossberg500Tactical,
+
+    Fixer : Mossberg500Tactical; Aiming=3,
+  }
+
+  fixing Fix Remington870Wood
+  {
+    Require : Remington870Wood,
+
+    Fixer : Remington870Wood; Aiming=3,
+  }
+
+  fixing Fix Remington870Sawnoff
+  {
+    Require : Remington870Sawnoff,
+
+    Fixer : Remington870; Aiming=3,
+  }
+
+  fixing Fix M37
+  {
+    Require : M37,
+
+    Fixer : M37; Aiming=3,
+  }
+
+  fixing Fix M37Sawnoff
+  {
+    Require : M37Sawnoff,
+
+    Fixer : M37; Aiming=3,
+  }
+
+  fixing Fix SPAS12
+  {
+    Require : SPAS12,
+
+    Fixer : SPAS12; Aiming=3,
+  }
+
+  fixing Fix LAW12
+  {
+    Require : LAW12,
+
+    Fixer : SPAS12; Aiming=3,
+  }
+
+}

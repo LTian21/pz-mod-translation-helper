@@ -1,0 +1,95 @@
+module Base
+{
+
+	model 98stageaRoofrack0
+	{
+		mesh = vehicles/Vehicles_98stagea_Body|stagea_roofrack0,
+		texture = Vehicles/Items_damnRoofrackModern,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 98stageaRoofrack1
+	{
+		mesh = vehicles/Vehicles_98stagea_Body|stagea_roofrack1,
+		texture = Vehicles/Items_damnRoofrackModern,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle STAGEARoofracks
+	{
+		part STAGEARoofrack
+		{
+
+			model STAGEARoofrack0
+				{
+                		file = 98stageaRoofrack0,
+				}
+
+            model STAGEARoofrack1
+				{
+                		file = 98stageaRoofrack1,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.ModernSmallRoofrack;Base.ModernLargeRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = STAGEA.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = STAGEA.InstallComplete.Roofrack,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = STAGEA.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = STAGEA.Create.Roofrack,
+					init = STAGEA.Init.Roofrack,
+				}
+		}
+	}
+}

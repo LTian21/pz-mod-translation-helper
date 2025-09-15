@@ -1,0 +1,422 @@
+module Base
+{
+    model Vehicles_ATABMWe36
+    {
+        mesh = vehicles/Vehicles_ATABMWe36|Body,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.08,
+    }
+    model ATABMWe36_Headlights
+    {
+        mesh = vehicles/Vehicles_ATABMWe36|Headlights,
+        shader = atavehiclewindow0_7,
+        scale = 0.08,
+    }
+    model ATABMWe36_WindowDoorLeft
+    {
+        mesh = vehicles/Vehicles_ATABMWe36|WindowDoorLeft,
+        shader = vehicle_norandom_multiuv,
+        scale = 0.08,
+    }
+    model ATABMWe36_WindowDoorRight
+    {
+        mesh = vehicles/Vehicles_ATABMWe36|WindowDoorRight,
+        shader = vehicle_norandom_multiuv,
+        scale = 0.08,
+    }
+    model ATABMWe36_CarNumber
+    {
+        mesh = vehicles/Vehicles_ATABMWe36|NumberRear,
+
+        texture = Vehicles/CarPlates_Europe,
+        scale = 0.08,
+    }
+    model ATABMWe36_Spoiler1
+    {
+        mesh = vehicles/Vehicles_ATABMWe36|Spoiler1,
+        shader = vehicle_norandom_multiuv,
+        scale = 0.08,
+    }
+    model ATABMWe36_Spoiler2
+    {
+        mesh = vehicles/Vehicles_ATABMWe36|Spoiler2,
+        shader = vehicle_norandom_multiuv,
+        scale = 0.08,
+    }
+    model ATABMWe36_Spoiler3
+    {
+        mesh = vehicles/Vehicles_ATABMWe36|Spoiler3,
+        shader = vehicle_norandom_multiuv,
+        scale = 0.08,
+    }
+    model ATABMWe36_Muffler
+    {
+        mesh = vehicles/Vehicles_ATABMWe36|Muffler,
+        shader = vehicle_norandom_multiuv,
+        scale = 0.08,
+    }
+
+    template vehicle ATABMWe36
+    {
+        mechanicType = 3,
+        offRoadEfficiency = 0.8,
+        engineRepairLevel = 6,
+        playerDamageProtection = 0.8,
+        engineRPMType = firebird,
+        
+        model
+        {
+            file = Vehicles_ATABMWe36,
+            scale = 2.1700,
+            offset = 0.0000 0.0000 0.0000,
+        }
+
+        spawnOffsetY = 0.0,
+        textureMask = ATABMWe36/vehicle_mask,
+        textureLights = ATABMWe36/vehicle_lights,
+        textureDamage1Overlay = ATABMWe36/vehicle_blood,
+        textureDamage2Overlay = ATABMWe36/vehicle_blood,
+        textureDamage1Shell = ATABMWe36/vehicle_damage1,
+        textureDamage2Shell = ATABMWe36/vehicle_damage2,
+        textureRust = ATABMWe36/vehicle_rust,
+
+        sound
+        {
+            engine = VehicleEngineSportsCar,
+            engineStart = VehicleEngineSportsCar,
+            engineTurnOff = VehicleEngineSportsCar,
+            horn = VehicleHornSportsCar,
+            ignitionFail = VehicleIgnitionFailSportsCar,
+        }
+
+        extents = 0.7926 0.4700 1.9263,
+        mass = 800,
+        physicsChassisShape = 0.7926 0.4700 1.9263,
+        centerOfMassOffset = 0.0000 0.2350 -0.0369,
+        shadowExtents = 0.7952 1.9899,
+        shadowOffset = 0.0000 0.0000,
+        engineLoudness = 90,
+        engineQuality = 90,
+        maxSpeed = 120f,
+        gearRatioCount = 5,
+        gearRatioR = 3.5,
+        gearRatio1 = 4.11,
+        gearRatio2 = 2.50,
+        gearRatio3 = 1.65,
+        gearRatio4 = 1.25,
+        gearRatio5 = 0.80,
+        gearRatio5 = 0.60,
+        stoppingMovementForce = 2.0f,
+        rollInfluence = 0.7f,
+        steeringIncrement = 0.04,
+        steeringClamp = 0.3,
+        suspensionStiffness = 50,
+        suspensionCompression = 4.1,
+        suspensionDamping = 3.4,
+        maxSuspensionTravelCm = 20,
+        suspensionRestLength = 0.2f,
+        wheelFriction = 1.8f,
+        frontEndHealth = 150,
+        rearEndHealth = 150,
+        seats = 4,
+
+        template = TrunkDoor,
+
+        part TrunkDoor
+        {
+            model Default
+			{
+				file = ATABMWe36_CarNumber,
+			}
+            
+            anim Open
+            {
+                sound = VehicleTrunkOpenSportsCar,
+            }
+
+            anim Close
+            {
+                sound = VehicleTrunkCloseSportsCar,
+            }
+
+            anim Lock
+            {
+                sound = LockVehicleDoorSportsCar,
+            }
+
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorSportsCar,
+            }
+
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedSportsCar,
+            }
+
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+                requireUninstalled = ATA2VisualSpoilerRear,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+        }
+
+        template = Trunk/part/TruckBed,
+
+        part TruckBed
+        {
+            itemType = Base.SmallTrunk,
+        }
+
+        template = Seat/part/SeatFrontLeft,
+        template = Seat/part/SeatFrontRight,
+        template = Seat/part/SeatRearLeft,
+
+        part SeatRearLeft
+        {
+            area = SeatFrontLeft,
+        }
+
+        template = Seat/part/SeatRearRight,
+
+        part SeatRearRight
+        {
+            area = SeatFrontRight,
+        }
+
+        part Seat*
+        {
+            table install
+            {
+                skills = Mechanics:2,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:2,
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        template = Battery,
+        template = Engine,
+        template = Muffler,
+        
+        template = GasTank,
+        part GasTank
+        {
+            table install
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        part Muffler
+        {
+            model Default
+            {
+                file = ATABMWe36_Muffler,
+            }
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        part Heater
+        {
+            category = engine,
+
+            lua
+            {
+                update = Vehicles.Update.Heater,
+            }
+        }
+
+        part PassengerCompartment
+        {
+            category = nodisplay,
+
+            lua
+            {
+                update = Vehicles.Update.PassengerCompartment,
+            }
+        }
+
+        template = Door/part/DoorFrontLeft,
+        template = Door/part/DoorFrontRight,
+        
+        part DoorFrontLeft
+        {
+            model Default
+            {
+                file = ATABMWe36_WindowDoorLeft,
+            }
+        }
+        
+        part DoorFrontRight
+        {
+            model Default
+            {
+                file = ATABMWe36_WindowDoorRight,
+            }
+        }
+        
+        part Door*
+        {
+            anim Open
+            {
+                sound = VehicleDoorOpenSportsCar,
+            }
+
+            anim Close
+            {
+                sound = VehicleDoorCloseSportsCar,
+            }
+
+            anim Lock
+            {
+                sound = LockVehicleDoorSportsCar,
+            }
+
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorSportsCar,
+            }
+
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedSportsCar,
+            }
+
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+		template = PassengerSeat4,
+        template = Tire,
+
+        part Tire*
+        {
+            setAllModelsVisible = false,
+            table install
+            {
+                complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+            }
+            table uninstall
+            {
+                requireUninstalled = ATA2ProtectionWheels,
+                complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+            }
+            lua
+            {
+                create = Vehicles.Create.Tire,
+                init = ATATuning2.Init.TireNotAllModelsVisible,
+                checkOperate = Vehicles.CheckOperate.Tire,
+                update = Vehicles.Update.Tire,
+            }
+        }
+
+        template = Brake,
+
+        part Brake*
+        {
+            table install
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        template = Suspension,
+
+        part Suspension*
+        {
+            table install
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWheels,
+        template! = ATABMWe36_EngineDoor,
+        template! = ATABMWe36_Bullbar,
+        template! = ATABMWe36_ProtectionWindows,
+        template! = ATABMWe36_Bags,
+        template! = ATABMWe36_RoofRack,
+        template! = ATABMWe36_WindowRack,
+        template = ATA2Visual/part/ATA2VisualSpoilerRear,
+        part ATA2VisualSpoilerRear 
+        {
+            model Spoiler1
+            {
+                file = ATABMWe36_Spoiler1,
+            }
+            model Spoiler2
+            {
+                file = ATABMWe36_Spoiler2,
+            }
+            model Spoiler3
+            {
+                file = ATABMWe36_Spoiler3,
+            }
+        }
+        
+		part HeadlightGlass
+		{
+			setAllModelsVisible = true,
+            category = nodisplay,
+            model Default
+			{
+				file = ATABMWe36_Headlights,
+			}
+            lua
+            {
+                init = ATATuning.Init.Default,
+            }
+		}
+        
+        template = Headlight,
+        template = GloveBox,
+        template = Radio,
+    }
+}

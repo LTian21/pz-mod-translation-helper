@@ -1,0 +1,68 @@
+module Base
+{
+	model 85chevyCapricesearchlight
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-caprice_searchlight,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CAP85Searchlight
+		{
+		part DAMNSearchlight
+        	{
+
+			model searchlight0
+				{
+                		file = 85chevyCapricesearchlight,
+				}
+
+				area = TireFrontLeft,
+				category = bodywork,
+                specificItem = false,
+				itemType = Base.fordCVPIpoliceSearchlight,
+				mechanicRequireKey = false,
+
+                table install
+			    {
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				door = DoorFrontLeft,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			    }
+			    table uninstall
+			    {
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+			    }
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+}

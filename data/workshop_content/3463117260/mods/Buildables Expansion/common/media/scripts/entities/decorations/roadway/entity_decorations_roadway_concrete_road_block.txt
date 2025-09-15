@@ -1,0 +1,60 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_ConcreteRoadBlock
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Concrete Road Block,
+			Icon		= street_decoration_01_28,
+		}
+	}
+
+    entity ConcreteRoadBlock
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_ConcreteRoadBlock,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face E
+            {
+                layer
+                {
+                    row = street_decoration_01_29,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = street_decoration_01_28,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildLowNoTool,
+            time          = 300,
+            needToBeLearn = true,
+            SkillRequired = Masonry:5,
+            xpAward       = Masonry:10,
+            category      = Decorations_Roadway,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_roadwayDecorationsDesc,
+            inputs
+            {
+                item 1 tags[MasonsTrowel] mode:keep flags[Prop1],
+                item 3 [Base.BucketConcreteFull],
+            }
+        }
+    }
+}

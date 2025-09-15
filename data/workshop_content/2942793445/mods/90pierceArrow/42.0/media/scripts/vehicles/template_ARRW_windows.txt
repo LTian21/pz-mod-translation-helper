@@ -1,0 +1,244 @@
+module Base
+{
+
+	model 90pierceArrowWindowfl
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fl_bone 1.0,
+	}
+
+	model 90pierceArrowWindowfr
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fr_bone 1.0,
+	}
+
+	model 90pierceArrowWindowrl
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_window_rl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_rl_bone 1.0,
+	}
+
+	model 90pierceArrowWindowrr
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_rr_bone 1.0,
+	}
+
+	model 90pierceArrowWindowml
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_window_ml,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 90pierceArrowWindowmr
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_window_mr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle ARRWWindows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 90pierceArrowWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.90pierceArrowSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 90pierceArrowWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.90pierceArrowSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 90pierceArrowWindowrl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.90pierceArrowSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 90pierceArrowWindowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.90pierceArrowSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNRearRightArmor,
+				}
+		}
+
+		part WindowMiddleLeft
+		{
+			model windowBL
+			{
+				file = 90pierceArrowWindowml,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.90pierceArrowSideWindow,
+			table uninstall
+				{
+				requireUninstalled = DAMNWindowMiddleLeftArmor,
+				}
+		}
+
+		part WindowMiddleRight
+		{
+			model windowBR
+			{
+				file = 90pierceArrowWindowmr,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.90pierceArrowSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNWindowMiddleRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			durability = 2,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}
+

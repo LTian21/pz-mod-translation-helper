@@ -1,0 +1,72 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Wood_Chair_Lvl3
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Wood Chair (Good),
+			Icon		= Build_Chair,
+		}
+	}
+
+    entity Wood_Chair_Lvl3
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Wood_Chair_Lvl3,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = carpentry_01_44,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = carpentry_01_46,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = carpentry_01_45,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = carpentry_01_47,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = woodenChairLvl3Test,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 50,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:5,
+            category      = Furniture,
+            tags          = carpentry;Furniture,
+            ToolTip       = Tooltip_craft_chairDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1],
+                item 1 [SWB.PlankKit2x],
+                item 2 [Base.Nails],
+            }
+        }
+    }
+}

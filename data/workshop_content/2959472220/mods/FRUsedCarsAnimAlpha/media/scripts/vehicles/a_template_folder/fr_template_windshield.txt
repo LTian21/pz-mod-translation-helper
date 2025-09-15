@@ -1,0 +1,298 @@
+module Base
+{
+	template vehicle FRWindshield
+	{
+		part Windshield
+        {
+            area = Engine,
+            category = bodywork,
+            itemType = Base.Windshield,
+            mechanicRequireKey = true,
+            window
+            {
+                openable = false,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:5,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualWindow,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                  skills = Mechanics:5,
+                  recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.FR_Default,
+            }
+			
+			table FRPartInfo
+			{
+				oneModel = TRUE,
+			}
+			
+            lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+            }
+        }
+
+		part WindshieldRear
+		{
+			area = TruckBed,
+            category = bodywork,
+            itemType = Base.RearWindshield,
+            mechanicRequireKey = true,
+            window
+            {
+                openable = false,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:5,
+				requireInstalled = FRRoof,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualWindow,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+ 						equip = primary,
+                   }
+                }
+                time = 300,
+                  skills = Mechanics:5,
+                  recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.FR_Default,
+            }
+			
+			table FRPartInfo
+			{
+				oneModel = TRUE,
+			}
+			
+            lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+            }
+	    }
+	}
+
+	template vehicle FRWindshieldFrame
+	{
+		part FRFrameWindshield
+		{
+			category = bodywork,
+			area = Engine,
+			itemType = Base.FRWindshieldFrame,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			specificItem = false,
+			
+			table FRPartInfo
+			{
+				oneModel = TRUE,
+			}
+			
+			door
+			{
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualDefault,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.FR_Default,
+                complete = Vehicles.UninstallComplete.FR_VisualDefault,
+				requireUninstalled = Windshield,
+			}
+
+			anim Close
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				rate = 0.8,
+			}
+
+			anim Open
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				rate = 0.8,
+			}
+
+			anim Closed
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			lua
+			{
+                create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualDefault,
+			}
+		}
+		
+		template = FRWindshield/part/Windshield,
+		
+		part Windshield
+		{
+			parent = FRFrameWindshield,
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+				requireInstalled = FRFrameWindshield,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+	}
+
+	template vehicle FRWindshieldFrameFolding
+	{
+		part FRFrameWindshieldFolding
+		{
+			category = bodywork,
+			area = Engine,
+			itemType = Base.FRWindshieldFrame,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			specificItem = false,
+			
+			table FRPartInfo
+			{
+				oneModel = TRUE,
+			}
+			
+			door
+			{
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualDefault,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.FR_Default,
+                complete = Vehicles.UninstallComplete.FR_VisualDefault,
+				requireUninstalled = Windshield,
+			}
+
+			anim Close
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				rate = 0.8,
+			}
+
+			anim Open
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				rate = 0.8,
+			}
+
+			anim Closed
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			lua
+			{
+                create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualDefault,
+			}
+		}
+		
+		template = FRWindshield/part/Windshield,
+		
+		part Windshield
+		{
+			parent = FRFrameWindshieldFolding,
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+				requireInstalled = FRFrameWindshieldFolding,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+	}
+}

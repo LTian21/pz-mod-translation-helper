@@ -1,0 +1,87 @@
+module Base
+{
+
+	model 69minispare
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_spare,
+		texture = vehicles/Vehicles_69mini_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	
+	template vehicle MINI69SpareTires
+	{
+		part DAMNSpareTire
+        	{
+
+			model SpareTire
+				{
+                		file = 69minispare,
+				}
+
+            model SpareTireU
+				{
+                		file = 69miniWheel1L,
+                        offset = 0.0947 -0.2260 -1.1789,
+				        rotate = -90.0000 -90.0000 180.0000,
+				}
+
+			category = Other,
+			area = TruckBed,
+            specificItem = false,
+			itemType = Base.69miniTire1;damnCraft.SmallTire1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MINI69.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = MINI69.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = MINI69.Create.SpareTire,
+				init = MINI69.Init.SpareTire,
+				}
+		}
+	}
+}
+

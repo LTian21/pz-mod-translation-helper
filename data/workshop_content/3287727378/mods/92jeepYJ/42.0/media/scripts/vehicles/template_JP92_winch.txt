@@ -1,0 +1,75 @@
+module Base
+{
+    model 92jeepYJWinch
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_winch,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP92Winch
+		{
+		part JP92Winch
+        	{
+
+			model Winch0
+				{
+                		file = 92jeepYJWinch,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			specificItem = false,
+			itemType = Base.92jeepYJWinch2,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = JP92.InstallComplete.Winch,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 750,
+			skills = Mechanics:1,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = JP92.UninstallComplete.Winch,
+
+            		}
+
+            		lua
+            		{
+			create = JP92.Create.Winch,
+			init = JP92.Init.Winch,
+			}
+		}
+	}
+}

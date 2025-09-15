@@ -1,0 +1,432 @@
+module Base
+{
+	model 81deloreanDMC12WindshieldA
+    	{
+        mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_windshield_frontA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 81deloreanDMC12WindowflA
+    	{
+        mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_window_flA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 81deloreanDMC12WindowfrA
+    	{
+        mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_window_frA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 81deloreanDMC12WindowrlA
+    	{
+        mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_window_rlA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 81deloreanDMC12WindowrrA
+    	{
+        mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_window_rrA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 81deloreanDMC12WindshieldrearCoverA
+    	{
+        mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_hood_cover,
+		shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 81deloreanDMC12WindshieldrearA
+    	{
+        mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_windshield_rearA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    template vehicle DMC12ArmorBTTF
+		{
+			part DMC12WindshieldArmor
+        	{
+
+			model DMC12winda0
+				{
+                		file = 81deloreanDMC12WindshieldA,
+				}
+
+			area = Front,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.81deloreanDMC12WindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DMC12.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = DMC12.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = DMC12.Create.WindshieldArmor,
+					init = DMC12.Init.WindshieldArmor,
+					}
+			}
+
+		part DMC12FrontLeftArmor
+        {
+
+			model DMC12leftdoora
+				{
+                		file = 81deloreanDMC12WindowflA,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.81deloreanDMC12FrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DMC12.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DMC12.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = DMC12.Create.FrontLeftArmor,
+					init = DMC12.Init.FrontLeftArmor,
+					}
+		}
+
+		part DMC12FrontRightArmor
+        {
+
+			model DMC12rightdoora
+				{
+                		file = 81deloreanDMC12WindowfrA,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.81deloreanDMC12FrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DMC12.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DMC12.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = DMC12.Create.FrontRightArmor,
+					init = DMC12.Init.FrontRightArmor,
+					}
+			}
+		}
+
+	template vehicle DMC12Armor
+	{
+		template! = DMC12ArmorBTTF,
+
+		part DMC12RearLeftArmor
+        {
+
+			model DMC12leftdoorra
+				{
+                		file = 81deloreanDMC12WindowrlA,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.81deloreanDMC12RearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DMC12.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DMC12.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = DMC12.Create.RearLeftArmor,
+					init = DMC12.Init.RearLeftArmor,
+					}
+		}
+
+		part DMC12RearRightArmor
+        {
+
+			model DMC12rightdoorra
+				{
+                		file = 81deloreanDMC12WindowrrA,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.81deloreanDMC12RearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DMC12.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DMC12.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = DMC12.Create.RearRightArmor,
+					init = DMC12.Init.RearRightArmor,
+					}
+			}
+
+		part DMC12WindshieldRearArmor
+        {
+
+        		model DMC12windrca
+				{
+                		file = 81deloreanDMC12WindshieldrearCoverA,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.81deloreanDMC12RearCover,
+			parent = EngineDoor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DMC12.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = EngineDoor,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DMC12.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = DMC12.Create.WindshieldRearArmor,
+					init = DMC12.Init.WindshieldRearArmor,
+					}
+			}
+		}
+}

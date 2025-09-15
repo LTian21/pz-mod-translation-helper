@@ -1,0 +1,139 @@
+module Base
+{
+
+    model 81deloreanDMC12Windshield
+    {
+        mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_windshield_front,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 81deloreanDMC12WindshieldRear
+    {
+        mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    template vehicle DMC12WindshieldsBTTF
+    {
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 81deloreanDMC12Windshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.81deloreanDMC12Windshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = DAMNWindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+	template vehicle DMC12Windshields
+	{
+        template! = DMC12WindshieldsBTTF,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 81deloreanDMC12WindshieldRear,
+            }
+
+                
+            itemType = Base.81deloreanDMC12RearWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+}

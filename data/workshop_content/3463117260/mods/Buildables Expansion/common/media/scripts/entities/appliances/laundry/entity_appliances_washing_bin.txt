@@ -1,0 +1,58 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WashingBin
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Washing Bin,
+			Icon		= appliances_laundry_01_24,
+		}
+	}
+
+    entity WashingBin
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WashingBin,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face N
+            {
+                layer
+                {
+                    row = appliances_laundry_01_24,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = appliances_laundry_01_25,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            category      = Appliances_Laundry,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:7,
+            ToolTip       = Tooltip_craft_washingBinDesc,
+            inputs
+            {
+		        item 2 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 4 [Base.Sheet],
+		        item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

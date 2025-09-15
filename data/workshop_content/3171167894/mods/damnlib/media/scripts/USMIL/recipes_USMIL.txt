@@ -1,0 +1,279 @@
+module Base
+{	
+	imports
+	{
+		USMIL
+	}
+
+    /************************ Seats ************************/
+
+    recipe Make Military Vehicle Seat
+    	{
+		SeatFabric,
+		SeatFoam=2,
+		SeatFrameLarge,
+		Screws=1,
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+		NoBrokenItems:false,
+		Result:Seat0,
+		Time:400.0,
+		Category:Mechanical,
+		NeedToBeLearn:true,
+		CanBeDoneFromFloor:true,
+		OnGiveXP:DAMN.OnGiveXP.Mechanics10,
+    }
+
+    recipe Make Military Vehicle Seat
+    	{
+		SeatFabric,
+		SeatFoam=2,
+		SeatFrameLarge,
+		Screws=1,
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+		NoBrokenItems:false,
+		Result:Seat1front,
+		Time:350.0,
+		Category:Mechanical,
+		NeedToBeLearn:true,
+		CanBeDoneFromFloor:true,
+		OnGiveXP:DAMN.OnGiveXP.Mechanics10,
+    }
+
+    recipe Make Military Vehicle Seat
+    	{
+		SeatFabric,
+		SeatFoam=2,
+		SeatFrameLarge,
+		Screws=1,
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+		NoBrokenItems:false,
+		Result:Seat1rear,
+		Time:350.0,
+		Category:Mechanical,
+		NeedToBeLearn:true,
+		CanBeDoneFromFloor:true,
+		OnGiveXP:DAMN.OnGiveXP.Mechanics10,
+    }
+
+    recipe Make Military Vehicle Seat
+    	{
+		SeatFabric,
+		SeatFoam,
+		SeatFrameSmall,
+		Screws=1,
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+		NoBrokenItems:false,
+		Result:Seat2,
+		Time:300.0,
+		Category:Mechanical,
+		NeedToBeLearn:true,
+		CanBeDoneFromFloor:true,
+		OnGiveXP:DAMN.OnGiveXP.Mechanics5,
+    }
+
+    /************************ Crates ************************/
+
+	recipe Make Wooden Crate
+    	{
+		Plank=4,
+		Nails=8,
+       	keep [Recipe.GetItemTypes.Hammer],
+
+		NoBrokenItems:false,
+		Result:Crate0,
+		Time:500.0,
+		Category:Carpentry,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+		SkillRequired:Woodwork=3,
+		Prop1:Hammer,
+		Sound:Hammering,
+		OnGiveXP:Recipe.OnGiveXP.WoodWork5,
+    }
+
+    recipe Make Military Wooden Crate
+    	{
+		Crate0,
+		PaintGreen=2,
+       	keep Paintbrush,
+
+		NoBrokenItems:true,
+		Result:Crate0military,
+		Time:200.0,
+		Category:Carpentry,
+		NeedToBeLearn:false,
+		Prop1:Paintbrush,
+		CanBeDoneFromFloor:true,
+    }
+
+    recipe Make Open Military Wooden Crate
+    	{
+		Crate0Open,
+		PaintGreen=2,
+       	keep Paintbrush,
+
+		NoBrokenItems:true,
+		Result:Crate0militaryOpen,
+		Time:200.0,
+		Category:Carpentry,
+		NeedToBeLearn:false,
+		Prop1:Paintbrush,
+		CanBeDoneFromFloor:true,
+    }
+
+    recipe Pry Open Wooden Crate
+    	{
+		Crate0,
+		keep Crowbar,
+
+		NoBrokenItems:false,
+		Result:Crate0Open,
+		Time:150.0,
+		NeedToBeLearn:false,
+		Prop1:Crowbar,
+		CanBeDoneFromFloor:true,
+    }
+
+    recipe Pry Open Military Wooden Crate
+    	{
+		Crate0military,
+		keep Crowbar,
+
+		NoBrokenItems:false,
+		Result:Crate0militaryOpen,
+		Time:150.0,
+		NeedToBeLearn:false,
+		Prop1:Crowbar,
+		CanBeDoneFromFloor:true,
+    }
+
+    /************************ Gas Cans ************************/
+
+    recipe Make Military Gas Can
+    	{
+		keep [Recipe.GetItemTypes.WeldingMask],
+		BlowTorch=5,
+		SheetMetal=3,
+		SmallSheetMetal=2,
+
+		NoBrokenItems:false,
+		Result:emptyGasCan0,
+		Time:500.0,
+		Category:Mechanical,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+		SkillRequired:MetalWelding=5,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    }
+
+    recipe Make Military Water Can
+    	{
+		keep [Recipe.GetItemTypes.WeldingMask],
+		BlowTorch=5,
+		SheetMetal=3,
+		SmallSheetMetal=2,
+
+		NoBrokenItems:false,
+		Result:emptyWaterCan0,
+		Time:500.0,
+		Category:Mechanical,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+		SkillRequired:MetalWelding=5,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    }
+
+    /************************ Viewports ************************/
+
+    recipe Make Vehicle Viewport
+    	{
+		keep [Recipe.GetItemTypes.WeldingMask],
+		BlowTorch,
+		SmallSheetMetal,
+		GlassPaneSmall,
+
+		NoBrokenItems:false,
+		Result:SmallViewport0,
+		Time:300.0,
+		Category:Mechanical,
+		NeedToBeLearn:true,
+		CanBeDoneFromFloor:true,
+		SkillRequired:MetalWelding=5,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    }
+
+    recipe Pack Small Viewports
+    	{
+		ScrapMetal,
+		SmallViewport0=4,
+
+		NoBrokenItems:true,
+		Result:SmallViewportPack0,
+		Time:100.0,
+		Category:Mechanical,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+		OnCreate:DAMN.OnCreate.PackViewports,
+    }
+
+    recipe Unpack Small Viewports
+    	{
+		SmallViewportPack0,
+
+		NoBrokenItems:true,
+		Result:ScrapMetal,
+		Time:100.0,
+		Category:Mechanical,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+		OnCreate:DAMN.OnCreate.UnpackSmallViewports,
+    }
+
+    recipe Make Vehicle Viewport
+    	{
+		keep [Recipe.GetItemTypes.WeldingMask],
+		BlowTorch,
+		SmallSheetMetal=2,
+		GlassPaneSmall,
+
+		NoBrokenItems:false,
+		Result:LargeViewport0,
+		Time:400.0,
+		Category:Mechanical,
+		NeedToBeLearn:true,
+		CanBeDoneFromFloor:true,
+		SkillRequired:MetalWelding=5,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding10,
+    }
+
+    recipe Pack Large Viewports
+    	{
+		ScrapMetal,
+		LargeViewport0=4,
+
+		NoBrokenItems:true,
+		Result:LargeViewportPack0,
+		Time:100.0,
+		Category:Mechanical,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+		OnCreate:DAMN.OnCreate.PackViewports,
+    }
+
+    recipe Unpack Large Viewports
+    	{
+		LargeViewportPack0,
+
+		NoBrokenItems:true,
+		Result:ScrapMetal,
+		Time:100.0,
+		Category:Mechanical,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+		OnCreate:DAMN.OnCreate.UnpackLargeViewports,
+    }
+}

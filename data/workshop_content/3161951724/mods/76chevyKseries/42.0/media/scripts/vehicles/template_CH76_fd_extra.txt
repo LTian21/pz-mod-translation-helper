@@ -1,0 +1,70 @@
+module Base
+{
+	model 76chevyKseriesHoses
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK_fd_hoses,
+		texture = vehicles/Vehicles_90pierceArrow_Extra,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CH76FDExtra
+	{
+		part CH76Hoses
+        	{
+
+			model Hoses0
+				{
+                		file = 76chevyKseriesHoses,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.FireDeptHosesMedium,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+
+                	time = 1200,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            	table uninstall
+            		{
+
+					time = 900,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+	}
+
+    template vehicle CH76FDExtraCC
+	{
+            template! = CH76FDExtra,
+
+		part CH76Hoses
+        {
+
+			model Hoses0
+				{
+                		file = 76chevyKseriesHoses,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+        }
+    }
+}

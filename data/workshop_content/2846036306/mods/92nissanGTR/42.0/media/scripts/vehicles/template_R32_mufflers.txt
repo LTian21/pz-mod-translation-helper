@@ -1,0 +1,86 @@
+module Base
+{
+	
+	model 92nissanGTRmuffler0
+	{
+		mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_exhaust_0,
+		texture = Vehicles/Vehicles_92nissanGTR_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 92nissanGTRmuffler1
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_exhaust_1,
+        texture = Vehicles/Vehicles_92nissanGTR_Interior,
+        shader = damn_wheel_shader,
+        scale = 0.1,
+    }
+
+	template vehicle R32Mufflers
+		{
+		part R32Muffler
+       		{
+
+            model Muffler0
+			{
+                	file = 92nissanGTRmuffler0,
+			}
+
+            model Muffler1
+            {
+                    file = 92nissanGTRmuffler1,
+            }
+
+            area = TireRearLeft,
+            category = engine,
+            specificItem = false,
+            itemType = Base.R32muffler0;Base.R32muffler1,
+            mechanicRequireKey = false,
+            durability = 3,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = R32.InstallComplete.Muffler,
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = R32.UninstallComplete.Muffler,
+            }
+            lua
+            {
+                create = R32.Create.Muffler,
+                init = R32.Init.Muffler,
+            }
+        }
+	}
+}
+

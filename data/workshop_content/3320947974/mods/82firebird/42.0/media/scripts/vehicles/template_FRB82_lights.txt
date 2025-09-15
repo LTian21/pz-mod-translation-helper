@@ -1,0 +1,332 @@
+module Base
+{
+
+	model 82firebirdHeadlights
+	{
+		mesh = vehicles/Vehicles_82firebird_Body|transam_lights,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = light_bone 1.0,
+	}
+
+    model 82firebirdKITTa
+	{
+		mesh = vehicles/Vehicles_82firebird_Body|transam_kitt,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        static = FALSE,
+	}
+
+    model 82firebirdKARRna
+	{
+		mesh = vehicles/Vehicles_82firebird_Body|transam_karr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        static = FALSE,
+	}
+
+	template vehicle FRB82PopupLights
+	{
+		part FRB82PopupLights
+		{
+			model lights579847
+			{
+				file = 82firebirdHeadlights,
+			}
+
+			anim Close
+			{
+				anim = lights_opening,
+				reverse = TRUE,
+				rate = 1.00,
+			}
+
+			anim Open
+			{
+				anim = lights_opening,
+				
+				rate = 1.00,
+			}
+
+			anim Closed
+			{
+				anim = lights_opening,
+				
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = lights_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		
+			category = lights,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			itemType = Base.82firebirdPopupLights,
+			area = Engine,
+			mechanicRequireKey = true,
+            durability = 3,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = HeadlightLeft;HeadlightRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+
+    template vehicle FRB82KITTLights
+	{
+		part FRB82KITTLights
+		{
+			model lights579876
+			{
+				file = 82firebirdKITTa,
+			}
+
+			anim Close
+			{
+				anim = lights_scan,
+				reverse = TRUE,
+				rate = 0.25,
+			}
+
+			anim Open
+			{
+				anim = lights_scan,
+				
+				rate = 0.25,
+			}
+
+			anim Closed
+			{
+				anim = lights_scan,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = lights_scan,
+				reverse = TRUE,
+				animate = TRUE,
+                rate = 0.50,
+			}
+		
+			category = nodisplay,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			itemType = Base.82firebirdPopupLights,
+			area = Front,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = HeadlightLeft;HeadlightRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+
+    template vehicle FRB82KARRLights
+	{
+		part FRB82KITTLights
+		{
+			model lights5798766
+			{
+				file = 82firebirdKARRna,
+			}
+
+			anim Close
+			{
+				anim = lights_scan,
+				reverse = TRUE,
+				rate = 0.25,
+			}
+
+			anim Open
+			{
+				anim = lights_scan,
+				
+				rate = 0.25,
+			}
+
+			anim Closed
+			{
+				anim = lights_scan,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = lights_scan,
+				reverse = TRUE,
+				animate = TRUE,
+                rate = 0.50,
+			}
+		
+			category = nodisplay,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			itemType = Base.82firebirdPopupLights,
+			area = Front,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = HeadlightLeft;HeadlightRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+}

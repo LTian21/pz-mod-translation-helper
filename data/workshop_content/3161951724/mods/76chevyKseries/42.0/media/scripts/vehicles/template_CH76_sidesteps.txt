@@ -1,0 +1,151 @@
+module Base
+{
+	model 76chevyKseriesSidesteps0
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76wrecker_sidesteps0,
+		texture = vehicles/Vehicles_76chevyKseries_Interior3,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 76chevyKseriesSidesteps1
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76wrecker_sidesteps1,
+		texture = vehicles/Vehicles_76chevyKseries_Interior3,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CH76SideStepsShort
+	{
+		part DAMNSideSteps
+        	{
+
+			model SideSteps0
+				{
+                		file = 76chevyKseriesSidesteps0,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+            specificItem = false,
+			itemType = Base.76chevyCseriesSidesteps0,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.Sidesteps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = CH76.UninstallComplete.Sidesteps,
+
+            		}
+
+	            lua
+	            {
+				init = CH76.Init.Sidesteps,
+                create = CH76.Create.Sidesteps,
+				}
+		}
+	}
+
+    template vehicle CH76SideStepsLong
+	{
+		part DAMNSideSteps
+        	{
+
+			model SideSteps1
+				{
+                		file = 76chevyKseriesSidesteps1,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+            specificItem = false,
+			itemType = Base.76chevyCseriesSidesteps1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.SidestepsL,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = CH76.UninstallComplete.SidestepsL,
+
+            		}
+
+	            lua
+	            {
+				init = CH76.Init.SidestepsL,
+                create = CH76.Create.SidestepsL,
+				}
+		}
+	}
+}
+

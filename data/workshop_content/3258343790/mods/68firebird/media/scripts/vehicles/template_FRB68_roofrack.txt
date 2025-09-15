@@ -1,0 +1,82 @@
+module Base
+{
+
+	model 68firebirdRoofrack0
+	{
+		mesh = vehicles/Vehicles_68firebird_Body|small_roofrack,
+		texture = Vehicles/Vehicles_70dodgeTA_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle FRB68Roofrack
+	{
+		part FRB68Roofrack
+		{
+
+			model FRB68Roofrack0
+				{
+                		file = 68firebirdRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.OldSmallRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = FRB68.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = DAMN.Create.Blank,
+				}
+		}
+	}
+}
+

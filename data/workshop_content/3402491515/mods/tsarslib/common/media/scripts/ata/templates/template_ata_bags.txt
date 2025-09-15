@@ -1,0 +1,132 @@
+module Base
+{
+    
+    template vehicle ATABags
+    {
+        part ATABagOnProtectionWindowFrontLeft
+        {
+            area = SeatFrontLeft,
+            table install
+            {
+                requireInstalled = ATAProtectionWindowFrontLeft,
+            }
+        }
+        part ATABagOnProtectionWindowFrontRight
+        {
+            area = SeatFrontRight,
+            table install
+            {
+                requireInstalled = ATAProtectionWindowFrontRight,
+            }
+        }
+        part ATABagOnProtection*
+        {
+            category = protection,
+        }
+        
+        part ATABagMotoLeft
+        {
+            
+        }
+        part ATABagMotoRight
+        {
+            
+        }
+        part ATABagMotoHolsterLeft
+        {
+            
+        }
+        part ATABagMotoHolsterRight
+        {
+            
+        }
+                
+        part ATABagOn*
+        {
+            itemType = Base.Bag_ShotgunDblSawnoffBag;Base.Bag_ShotgunDblBag;Base.Bag_ShotgunBag;Base.Bag_ShotgunSawnoffBag;Base.Bag_SurvivorBag;Base.Bag_ALICEpack_Army;Base.Bag_ALICEpack;Base.Bag_BigHikingBag;Base.Bag_NormalHikingBag;Base.Bag_DuffelBagTINT;Base.Bag_InmateEscapedBag;Base.Bag_WorkerBag;Base.Bag_WeaponBag;Base.Bag_DuffelBag;Base.Bag_MoneyBag;Base.Bag_GolfBag;Base.Bag_Schoolbag,
+            
+            table ataModels 
+            {
+                Bag_ShotgunDblSawnoffBag = DuffelBagWhite,
+                Bag_ShotgunDblBag = DuffelBagWhite,
+                Bag_ShotgunBag = DuffelBagWhite,
+                Bag_ShotgunSawnoffBag = DuffelBagWhite,
+                Bag_SurvivorBag = ALICEpack,
+                Bag_ALICEpack = ALICEpack,
+                Bag_ALICEpack_Army = ALICEpack_Army,
+                Bag_BigHikingBag = BigHikingBag,
+                Bag_NormalHikingBag = NormalHikingBag,
+                Bag_DuffelBagTINT = DuffelBagGrey,
+                Bag_InmateEscapedBag = DuffelBagGreen,
+                Bag_WorkerBag = DuffelBagBlue,
+                Bag_WeaponBag = DuffelBagGreen,
+                Bag_DuffelBag = DuffelBagGrey,
+                Bag_MoneyBag = DuffelBagBlue,
+                Bag_GolfBag = GolfBag,
+                Bag_Schoolbag = Schoolbag,
+            }
+        }
+        
+        part ATABag*
+        {
+            area = TruckBed,
+            specificItem = false,
+            mechanicRequireKey = false,
+            repairMechanic = true,
+            container
+            {
+                conditionAffectsCapacity = false,
+                test = Vehicles.ContainerAccess.TruckBedOpen,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 400,
+                skills = ,
+                recipes = ,
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                         equip = primary,
+                   }
+                }
+                time = 400,
+                skills = ,
+                recipes = ,
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+            lua
+            {
+                create = ATATuning.Create.Chance0,
+                init = ATATuning.Init.Default,
+            }
+        }
+        part ATABagMoto*
+        {
+            container
+            {
+                conditionAffectsCapacity = false,
+                test = ATATuning.ContainerAccess.MotoBags,
+            }
+        }
+    }
+}

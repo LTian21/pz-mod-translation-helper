@@ -1,0 +1,211 @@
+module Tikitown
+{
+	imports
+	{
+		Base
+	}
+	
+	craftRecipe Dismantle Laser Tag Gun
+	{
+        timedAction = DismantleElectrical,
+		Time = 30,
+		AllowBatchCraft = True,
+		OnCreate = Recipe.OnCreate.DismantleLaserTagGun,
+		Tags = AnySurfaceCraft,
+        category = Electrical,
+		xpAward = Electricity:5,
+		inputs
+		{
+			item 1 [Tikitown.LaserTag_Gun] mode:destroy flags[Prop1],
+			item 1 tags[Screwdriver;SharpKnife] mode:keep flags[MayDegradeLight;IsNotDull;Prop2],
+		}
+		outputs
+		{
+			item 1 Base.ElectronicsScrap,
+			item 1 Base.ElectricWire,
+			item 5 Base.Screws,
+		}
+	}
+	
+	craftRecipe Dismantle VCR
+	{
+		timedAction = Tikitown.DisassembleVCR,
+		Time = 30,
+		AllowBatchCraft = True,
+		Tags = AnySurfaceCraft,
+        category = Electrical,
+		xpAward = Electricity:5,
+		inputs
+		{
+			item 1 [Tikitown.Drazvision_VCR] mode:destroy flags[Prop1],
+			item 1 tags[Screwdriver;SharpKnife] mode:keep flags[MayDegradeLight;IsNotDull;Prop2],
+		}
+		outputs
+		{
+			item 1 Base.ElectronicsScrap,
+			item 1 Base.ElectricWire,
+			item 5 Base.Screws,
+		}
+	}
+	craftRecipe Sort Cards
+	{
+		timedAction = Tikitown.AddCardsToBox,
+		Time = 120,
+		AllowBatchCraft = False,
+		Tags = AnySurfaceCraft,
+		category = Collections,
+		inputs 
+		{
+			item 1 [Tikitown.Unsorted_Full_Baseball_Card_Box] mode:destroy flags[Prop1],
+		}
+		outputs
+		{
+			item 1 Tikitown.Sorted_Full_Baseball_Card_Box,
+		}
+	}
+	
+	craftRecipe Create Baseball Card Box
+	{
+		Time = 60,
+		category = Collections,
+		AllowBatchCraft = False,
+		Tags = AnySurfaceCraft,
+		inputs 
+		{
+			item 1 [Base.Shoebox;Base.Mov_CardboardBox;ProduceBox_ExtraSmall;ProduceBox_Small;ProduceBox_Medium;ProduceBox_Large;ProduceBox_ExtraLarge] flags[Prop1],
+			item 1 tags[SharpKnife;Scissors] mode:keep flags[IsNotDull;MayDegradeLight;Prop2],
+			item 1 tags[Write;Pencil] mode:keep,
+		}
+		outputs
+		{
+			item 1 Tikitown.Empty_Baseball_Card_Box,
+		}
+	
+	}
+	
+	craftRecipe Trace Cards Picture
+	{
+		Time = 60,
+		AllowBatchCraft = False,
+		Tags = AnySurfaceCraft,
+		category = Collections,
+		OnCreate = CraftRecipeCode.GenerateTreasure.TraceCardsOnBox,
+		inputs 
+		{
+			item 1 [Tikitown.Sorted_Full_Baseball_Card_Box] mode:destroy flags[Prop1],
+			item 1 tags[Write;Pencil] mode:keep flags[Prop2],
+		}
+		outputs
+		{
+			item 1 Tikitown.Used_Sorted_Full_Baseball_Card_Box,
+			item 1 Tikitown.Tikitown_quest1_map3
+		}
+	}
+	
+	craftRecipe Open Large Box
+	{
+		Time = 400,
+		AllowBatchCraft = True,
+		Tags = AnySurfaceCraft,
+		category = Collections,
+		OnCreate = CraftRecipeCode.GenerateTreasure.GenerateLgBoxLoot,
+		inputs 
+		{
+			item 1 [Tikitown.LargePostOfficeBox] mode:destroy flags[Prop1],
+			item 1 tags[SharpKnife;Scissors] mode:keep flags[IsNotDull;MayDegradeLight;Prop2],
+		}
+		outputs
+		{
+			item 1 Mov_CardboardBox,
+		}	
+	}
+	
+	craftRecipe Open Medium Box
+	{
+		Time = 400,
+		AllowBatchCraft = True,
+		Tags = AnySurfaceCraft,
+		category = Collections,
+		OnCreate = CraftRecipeCode.GenerateTreasure.GenerateMdBoxLoot,
+		inputs 
+		{
+			item 1 [Tikitown.MedPostOfficeBox] mode:destroy flags[Prop1],
+			item 1 tags[SharpKnife;Scissors] mode:keep flags[IsNotDull;MayDegradeLight;Prop2],
+		}
+		outputs
+		{
+			item 1 Mov_CardboardBox,
+		}
+	}
+
+	craftRecipe Open Small Box
+	{
+		Time = 400,
+		AllowBatchCraft = True,
+		Tags = AnySurfaceCraft,
+		category = Collections,
+		OnCreate = CraftRecipeCode.GenerateTreasure.GenerateSmBoxLoot,
+		inputs 
+		{
+			item 1 [Tikitown.SmPostOfficeBox] mode:destroy flags[Prop1],
+			item 1 tags[SharpKnife;Scissors] mode:keep flags[IsNotDull;MayDegradeLight;Prop2],
+		}
+		outputs
+		{
+			item 1 Mov_CardboardBox,
+		}		
+	}
+		
+	
+	craftRecipe Add Cards to Box
+	{
+		timedAction = Tikitown.AddCardsToBox,
+		Time = 45,
+		AllowBatchCraft = False,
+		Tags = AnySurfaceCraft,
+		category = Collections,
+		inputs
+		{
+			item 1 [Tikitown.Empty_Baseball_Card_Box] mode:destroy flags[Prop1],
+			item 1 [Tikitown.Tikitown.Baseball_Card_01] mode:destroy flags[Prop2],
+			item 1 [Tikitown.Tikitown.Baseball_Card_02] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_03] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_04] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_05] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_06] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_07] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_08] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_09] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_10] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_11] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_12] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_13] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_14] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_15] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_16] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_17] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_18] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_19] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_20] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_21] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_22] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_23] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_24] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_25] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_26] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_27] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_28] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_29] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_30] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_31] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_32] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_33] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_34] mode:destroy,
+			item 1 [Tikitown.Tikitown.Baseball_Card_35] mode:destroy,		
+		}
+		outputs
+		{
+			item 1 Tikitown.Unsorted_Full_Baseball_Card_Box,
+		}
+	}
+}

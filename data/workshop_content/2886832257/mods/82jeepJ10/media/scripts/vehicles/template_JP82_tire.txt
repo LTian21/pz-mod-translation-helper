@@ -1,0 +1,367 @@
+module Base
+{
+
+	model 80sOffroadWheelAL
+	{
+		mesh = vehicles/Vehicles_80s_offroad_tires|80s_offroad_wheel_a,
+		texture = vehicles/Vehicles_88chevyS10_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.95,
+	}
+
+    model 80sOffroadWheelAR
+	{
+		mesh = vehicles/Vehicles_80s_offroad_tires|80s_offroad_wheel_a,
+		texture = vehicles/Vehicles_88chevyS10_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.95,
+	}
+
+    model 80sOffroadWheelB
+	{
+		mesh = vehicles/Vehicles_j10_offroad_tires|80s_offroad_wheel_b,
+		texture = vehicles/Vehicles_82jeepJ10_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 82jeepJ10Wheel2L
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Wheels|76chevy_wheel,
+		texture = vehicles/Vehicles_76chevyKseries_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 82jeepJ10Wheel2R
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Wheels|76chevy_wheel,
+		texture = vehicles/Vehicles_76chevyKseries_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 82jeepJ10Wheel3L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel01,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 82jeepJ10Wheel3R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel01,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 82jeepJ10Wheel4L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel02,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 82jeepJ10Wheel4R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel02,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 82jeepJ10Wheel5L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel03,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 82jeepJ10Wheel5R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel03,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 82jeepJ10Wheel6L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel04,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 82jeepJ10Wheel6R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel04,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+
+	template vehicle JP82Tires
+	{
+		part TireFrontLeft
+		{
+            model JP82Tire0
+			{
+				file = 80sOffroadWheelAL,
+			}
+            model JP82Tire1
+			{
+				file = 82jeepJ10Wheel2L,
+			}
+            model JP82Tire2
+			{
+				file = 82jeepJ10Wheel3L,
+			}
+            model JP82Tire3
+			{
+				file = 82jeepJ10Wheel4L,
+			}
+            model JP82Tire4
+			{
+				file = 82jeepJ10Wheel5L,
+			}
+            model JP82Tire5
+			{
+				file = 82jeepJ10Wheel6L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = JP82.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = JP82.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP82.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model JP82Tire0
+			{
+				file = 80sOffroadWheelAR,
+			}
+            model JP82Tire1
+			{
+				file = 82jeepJ10Wheel2R,
+			}
+            model JP82Tire2
+			{
+				file = 82jeepJ10Wheel3R,
+			}
+            model JP82Tire3
+			{
+				file = 82jeepJ10Wheel4R,
+			}
+            model JP82Tire4
+			{
+				file = 82jeepJ10Wheel5R,
+			}
+            model JP82Tire5
+			{
+				file = 82jeepJ10Wheel6R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = JP82.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = JP82.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP82.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model JP82Tire0
+			{
+				file = 80sOffroadWheelAL,
+			}
+            model JP82Tire1
+			{
+				file = 82jeepJ10Wheel2L,
+			}
+            model JP82Tire2
+			{
+				file = 82jeepJ10Wheel3L,
+			}
+            model JP82Tire3
+			{
+				file = 82jeepJ10Wheel4L,
+			}
+            model JP82Tire4
+			{
+				file = 82jeepJ10Wheel5L,
+			}
+            model JP82Tire5
+			{
+				file = 82jeepJ10Wheel6L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = JP82.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+
+            table uninstall
+			{
+				complete = JP82.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP82.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model JP82Tire0
+			{
+				file = 80sOffroadWheelAR,
+			}
+            model JP82Tire1
+			{
+				file = 82jeepJ10Wheel2R,
+			}
+            model JP82Tire2
+			{
+				file = 82jeepJ10Wheel3R,
+			}
+            model JP82Tire3
+			{
+				file = 82jeepJ10Wheel4R,
+			}
+            model JP82Tire4
+			{
+				file = 82jeepJ10Wheel5R,
+			}
+            model JP82Tire5
+			{
+				file = 82jeepJ10Wheel6R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+            table install
+			{
+				complete = JP82.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = JP82.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = JP82.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.80sOffroadTireA;Base.76chevyKseriesTire2;Base.80chevyCKseriesTire2;Base.80chevyCKseriesTire1;Base.90chevyCKseriesTire2;Base.90chevyCKseriesTire1,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}

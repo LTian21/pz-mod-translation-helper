@@ -1,0 +1,85 @@
+module Base
+{
+	model TrailerM101A3tarp
+	{
+		mesh = vehicles/Trailers_M101A3_Body|M101A3_tarp,
+		texture = vehicles/TrailerM101A3cargo_wheel_extra,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle M101A3Tarps
+		{
+
+		part M101A3Tarp
+        	{
+
+			model Tarp1
+				{
+                		file = TrailerM101A3tarp,
+				}
+
+            model Tarp2
+				{
+                		file = TrailerM101A3tarp,
+				}
+
+			area = TireFrontLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M101A3Tarp1_Item;Base.KI5trailersTarp2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+				type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+			complete = M101A3.InstallComplete.Tarp,
+			requireUninstalled = M101A3Cover,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 700,
+			skills = Mechanics:1,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = M101A3.UninstallComplete.Tarp,
+			requireUninstalled = TrunkDoorTwo,
+            		}
+
+            		lua
+            		{
+			create = M101A3.Create.Tarp,
+			init = M101A3.Init.Tarp,
+			}
+		}
+
+	}
+
+		
+}

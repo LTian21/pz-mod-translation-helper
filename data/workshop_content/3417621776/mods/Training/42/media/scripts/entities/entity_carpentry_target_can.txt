@@ -1,0 +1,69 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_TraingTarget_Can
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Training Target Can,
+			Icon		= item_CanTarget,
+
+			components
+			{
+				CraftLogic
+				{
+					LuaPanelClass	= ISCraftDefaultPanel,
+					DisplayName	= Training Target Can,
+					Icon		= item_CanTarget,
+				}
+			}
+		}
+	}
+
+    entity TraingTarget_Can
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_TraingTarget_Can,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            // OnCreate = TargetAcceptItemFunction.CreateTargetCan,
+
+            face E
+            {
+                layer
+                {
+                    row = training_targets_can_0_16,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = training_targets_can_0_0,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 50,
+            SkillRequired = Woodwork:1,
+            xpAward       = Woodwork:5,
+            tags          = carpentry;Furniture,
+            category      = Furniture,
+            ToolTip       = Tooltip_craft_traingTargetCan,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

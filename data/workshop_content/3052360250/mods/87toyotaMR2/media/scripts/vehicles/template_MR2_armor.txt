@@ -1,0 +1,287 @@
+module Base
+{
+	model 87toyotaMR2Windshielda0
+    	{
+        mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_windshield_front_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 87toyotaMR2Doorfla
+    	{
+        mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 87toyotaMR2Doorfra
+    	{
+        mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 87toyotaMR2Windshieldreara
+    	{
+        mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle MR2Armor
+		{
+		part MR2WindshieldArmor
+        	{
+
+			model MR2winda0
+				{
+                		file = 87toyotaMR2Windshielda0,
+				}
+
+			area = Front,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87toyotaMR2WindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MR2.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = MR2.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = MR2.Create.WindshieldArmor,
+					init = MR2.Init.WindshieldArmor,
+					}
+		}
+
+		part MR2WindowLeftArmor
+        {
+
+			model MR2leftdoora
+				{
+                		file = 87toyotaMR2Doorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.87toyotaMR2WindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MR2.InstallComplete.WindowLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = MR2.UninstallComplete.WindowLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = MR2.Create.WindowLeftArmor,
+					init = MR2.Init.WindowLeftArmor,
+					}
+		}
+
+		part MR2WindowRightArmor
+        {
+
+			model MR2rightdoora
+				{
+                		file = 87toyotaMR2Doorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.87toyotaMR2WindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MR2.InstallComplete.WindowRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = MR2.UninstallComplete.WindowRightArmor,
+            		}
+
+            		lua
+            		{
+					create = MR2.Create.WindowRightArmor,
+					init = MR2.Init.WindowRightArmor,
+					}
+		}
+
+		part MR2WindshieldRearArmor
+        {
+
+				model MR2windra
+				{
+                		file = 87toyotaMR2Windshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.87toyotaMR2WindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MR2.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = MR2.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = MR2.Create.WindshieldRearArmor,
+					init = MR2.Init.WindshieldRearArmor,
+					}
+		}
+	}
+
+}

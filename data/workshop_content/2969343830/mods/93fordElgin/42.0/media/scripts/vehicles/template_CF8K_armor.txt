@@ -1,0 +1,295 @@
+module Base
+{
+	model 93fordElginWindshielda
+    	{
+        mesh = vehicles/Vehicles_93fordElgin_Body|cf8k_windshieldA,
+		texture = Vehicles/Vehicles_93fordElgin_Interior,
+        shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 93fordElginWindowfla
+    	{
+        mesh = vehicles/Vehicles_93fordElgin_Body|cf8k_window_flA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93fordElginWindowfra
+    	{
+        mesh = vehicles/Vehicles_93fordElgin_Body|cf8k_window_frA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93fordElginWindshieldreara
+    	{
+        mesh = vehicles/Vehicles_93fordElgin_Body|cf8k_windshield_rearA,
+		texture = Vehicles/Vehicles_93fordElgin_Interior,
+        shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle CF8KArmor
+	{
+		part DAMNWindshieldArmor
+        	{
+
+			model CF8Kwinda
+				{
+                		file = 93fordElginWindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93fordCF8000WindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CF8K.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = CF8K.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = CF8K.Create.WindshieldArmor,
+					init = CF8K.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model CF8Kleftwina
+				{
+                		file = 93fordElginWindowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.93fordCF8000FrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CF8K.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = CF8K.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = CF8K.Create.WindowFrontLeftArmor,
+					init = CF8K.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model CF8Krightwina
+				{
+                		file = 93fordElginWindowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.93fordCF8000FrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CF8K.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = CF8K.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = CF8K.Create.WindowFrontRightArmor,
+					init = CF8K.Init.WindowFrontRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model CF8Kwindra
+				{
+                		file = 93fordElginWindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93fordCF8000WindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CF8K.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = CF8K.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = CF8K.Create.WindshieldRearArmor,
+					init = CF8K.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

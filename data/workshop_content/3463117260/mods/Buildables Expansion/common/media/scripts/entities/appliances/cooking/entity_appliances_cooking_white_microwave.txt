@@ -1,0 +1,78 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WhiteMicrowave
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= White Microwave,
+			Icon		= appliances_cooking_01_25,
+		}
+	}
+
+    entity WhiteMicrowave
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WhiteMicrowave,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face N
+            {
+                layer
+                {
+                    row = appliances_cooking_01_27,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = appliances_cooking_01_24,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = appliances_cooking_01_25,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = appliances_cooking_01_26,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:4;Electricity:4,
+            xpAward       = MetalWelding:10;Electricity:10,
+            category      = Appliances_Cooking,
+            ToolTip       = Tooltip_craft_microwaveOvenDesc,
+            inputs
+            {
+                item 2 [Base.BlowTorch] mode:keep flags[Prop1],
+                item 1 tags[Screwdriver] mode:keep flags[Prop2],
+                item 1 tags[Pliers] mode:keep,
+                item 2 [Base.WeldingRods],
+                item 2 [Base.SmallSheetMetal],
+                item 2 [Base.SheetMetal],
+                item 5 [Base.ElectronicsScrap],
+                item 2 [Base.ElectricWire],
+			    item 1 [Base.LightBulb],
+            }
+        }
+    }
+}

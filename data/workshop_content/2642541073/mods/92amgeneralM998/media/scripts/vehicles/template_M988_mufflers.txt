@@ -1,0 +1,86 @@
+module Base
+{
+	
+	model 92amgeneralM998muffler1
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_smallmuffler,
+		texture = Vehicles/Vehicles_92amgeneralM998_Shell_USMCgreen,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 92amgeneralM998muffler2
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_bigmuffler,
+		texture = Vehicles/Vehicles_92amgeneralM998_Shell_USMCgreen,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle M998Mufflers
+		{
+		part M998Muffler
+       		{
+
+		model Muffler1
+			{
+                	file = 92amgeneralM998muffler1,
+			}
+
+		model Muffler2
+			{
+                	file = 92amgeneralM998muffler2,
+			}
+
+            area = TireRearLeft,
+	    category = engine,
+	    specificItem = false,
+            itemType = Base.M998Muffler1_Item;Base.M998Muffler2_Item,
+	    mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+		complete = M998.InstallComplete.Muffler,
+                door = EngineDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+		complete = M998.UninstallComplete.Muffler,
+            }
+            lua
+            {
+                create = M998.Create.Muffler,
+                init = M998.Init.Muffler,
+            }
+        }
+	}
+}
+

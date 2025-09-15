@@ -1,0 +1,95 @@
+module Base
+{
+
+	model 68firebirdSeal0
+	{
+		mesh = vehicles/Vehicles_68firebird_Body|brd_seal0,
+		texture = Vehicles/Vehicles_68firebird_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 68firebirdSeal1
+	{
+		mesh = vehicles/Vehicles_68firebird_Body|brd_seal1,
+		texture = Vehicles/Vehicles_68firebird_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+	template vehicle FRB68FoamSealBasic
+	{
+		part FRB68FoamSeal
+        {
+            model FRB68FoamSeal0
+            {
+                file = 68firebirdSeal0,
+            }
+                
+            itemType = Base.68firebirdFoamSeal1,
+            specificItem = false,
+            area = Engine,
+            category = engine,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+	   }
+
+    }
+
+	template vehicle FRB68FoamSealPerformance
+	{
+		template! = FRB68FoamSealBasic,
+
+		part FRB68FoamSeal
+        {
+            model FRB68FoamSeal0
+            {
+                file = 68firebirdSeal1,
+            }
+                
+            itemType = Base.68firebirdFoamSeal3,
+            specificItem = false,
+        }
+    }
+}
+

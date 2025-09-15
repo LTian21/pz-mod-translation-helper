@@ -1,0 +1,76 @@
+module Base
+{
+
+	model 87chevySuburbanSidesteps0
+	{
+		mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_sidesteps,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SUB87SideSteps
+	{
+		part SUB87SideSteps
+        	{
+
+			model SUB87SideSteps0
+				{
+                		file = 87chevySuburbanSidesteps0,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.87chevySuburbanSideSteps,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.SideSteps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = SUB87.UninstallComplete.SideSteps,
+
+            		}
+
+	            lua
+	            {
+				create = SUB87.Create.SideSteps,
+				init = SUB87.Init.SideSteps,
+				}
+		}
+	}
+
+}
+

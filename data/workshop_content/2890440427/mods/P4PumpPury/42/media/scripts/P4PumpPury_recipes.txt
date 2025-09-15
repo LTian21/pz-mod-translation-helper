@@ -1,0 +1,210 @@
+module P4PumpPury
+{
+	imports
+	{
+		Base
+	}
+
+	craftRecipe P4OpenSneakerBox
+	{
+		timedAction = P4PumpPury.P4OpenSneakerBox,
+		time = 20,
+		onCreate = P4PumpPuryRecipes.OnCreate.OpenSneakerBox,
+		tags = InHandCraft;Packing;CanBeDoneInDark,
+		category = Packing,
+		inputs
+		{
+			item 1 [P4PumpPury.P4SneakerBox],
+		}
+		outputs
+		{
+			item 1 P4PumpPury.P4SneakerBox1,
+		}
+	}
+
+	craftRecipe P4Stack2SneakerBoxes
+	{
+		timedAction = P4PumpPury.P4StackSneakerBoxes,
+		time = 20,
+		tags = InHandCraft;Packing;CanBeDoneInDark,
+		category = Packing,
+		inputs
+		{
+			item 2 [P4PumpPury.P4SneakerBox1] flags[IsEmptyContainer],
+		}
+		outputs
+		{
+			item 1 P4PumpPury.P4SneakerBox2,
+		}
+	}
+
+	craftRecipe P4Stack3SneakerBoxes
+	{
+		timedAction = P4PumpPury.P4StackSneakerBoxes,
+		time = 40,
+		tags = InHandCraft;Packing;CanBeDoneInDark,
+		category = Packing,
+		inputs
+		{
+			item 3 [P4PumpPury.P4SneakerBox1] flags[IsEmptyContainer],
+		}
+		outputs
+		{
+			item 1 P4PumpPury.P4SneakerBox3,
+		}
+	}
+
+	craftRecipe P4Stack4SneakerBoxes
+	{
+		timedAction = P4PumpPury.P4StackSneakerBoxes,
+		time = 60,
+		tags = InHandCraft;Packing;CanBeDoneInDark,
+		category = Packing,
+		inputs
+		{
+			item 4 [P4PumpPury.P4SneakerBox1] flags[IsEmptyContainer],
+		}
+		outputs
+		{
+			item 1 P4PumpPury.P4SneakerBox4,
+		}
+	}
+
+	craftRecipe P4Stack5SneakerBoxes
+	{
+		timedAction = P4PumpPury.P4StackSneakerBoxes,
+		time = 80,
+		tags = InHandCraft;Packing;CanBeDoneInDark,
+		category = Packing,
+		inputs
+		{
+			item 5 [P4PumpPury.P4SneakerBox1] flags[IsEmptyContainer],
+		}
+		outputs
+		{
+			item 1 P4PumpPury.P4SneakerBox5,
+		}
+	}
+
+	craftRecipe P4Unstack2SneakerBoxes
+	{
+		timedAction = P4PumpPury.P4UnstackSneakerBoxes,
+		time = 20,
+		tags = InHandCraft;Packing;CanBeDoneInDark,
+		category = Packing,
+		inputs
+		{
+			item 1 [P4PumpPury.P4SneakerBox2] flags[IsEmptyContainer],
+		}
+		outputs
+		{
+			item 2 P4PumpPury.P4SneakerBox1,
+		}
+	}
+
+	craftRecipe P4Unstack3SneakerBoxes
+	{
+		timedAction = P4PumpPury.P4UnstackSneakerBoxes,
+		time = 40,
+		tags = InHandCraft;Packing;CanBeDoneInDark,
+		category = Packing,
+		inputs
+		{
+			item 1 [P4PumpPury.P4SneakerBox3] flags[IsEmptyContainer],
+		}
+		outputs
+		{
+			item 3 P4PumpPury.P4SneakerBox1,
+		}
+	}
+
+	craftRecipe P4Unstack4SneakerBoxes
+	{
+		timedAction = P4PumpPury.P4UnstackSneakerBoxes,
+		time = 60,
+		tags = InHandCraft;Packing;CanBeDoneInDark,
+		category = Packing,
+		inputs
+		{
+			item 1 [P4PumpPury.P4SneakerBox4] flags[IsEmptyContainer],
+		}
+		outputs
+		{
+			item 4 P4PumpPury.P4SneakerBox1,
+		}
+	}
+
+	craftRecipe P4Unstack5SneakerBoxes
+	{
+		timedAction = P4PumpPury.P4UnstackSneakerBoxes,
+		time = 80,
+		tags = InHandCraft;Packing;CanBeDoneInDark,
+		category = Packing,
+		inputs
+		{
+			item 1 [P4PumpPury.P4SneakerBox5] flags[IsEmptyContainer],
+		}
+		outputs
+		{
+			item 5 P4PumpPury.P4SneakerBox1,
+		}
+	}
+
+	craftRecipe P4UpgradePumpPuryBackpack
+	{
+		timedAction = P4PumpPury.P4UpgradePumpPuryBackpack,
+		time = 100,
+		tags = AnySurfaceCraft,
+		category = Tailoring,
+		skillRequired = Tailoring:6,
+		needToBeLearn = true,
+		toolTip = Tooltip_Recipe_P4UpgradePumpPuryBackpack,
+		inputs
+		{
+			item 6 [P4PumpPury.P4PumpPuryBackpack_Normal;P4PumpPury.P4PumpPuryBackpack_Rare] mappers[grade] flags[IsEmptyContainer],
+			item 12 [Base.Thread],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+			item 1 tags[SewingNeedle] mode:keep flags[MayDegradeLight],
+			item 1 tags[Awl] mode:keep flags[MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 mapper:grade,
+		}
+		itemMapper grade
+		{
+			P4PumpPury.P4PumpPuryBackpackPlus_Normal = P4PumpPury.P4PumpPuryBackpack_Normal,
+			P4PumpPury.P4PumpPuryBackpackPlus_Rare = P4PumpPury.P4PumpPuryBackpack_Rare,
+		}
+	}
+
+	craftRecipe P4UpgradePumpPuryFannyPack
+	{
+		timedAction = P4PumpPury.P4UpgradePumpPuryFannyPack,
+		time = 80,
+		tags = AnySurfaceCraft,
+		category = Tailoring,
+		skillRequired = Tailoring:6,
+		needToBeLearn = true,
+		toolTip = Tooltip_Recipe_P4UpgradePumpPuryFannyPack,
+		inputs
+		{
+			item 6 tags[PumpPuryFannyPack] mappers[grade] flags[IsEmptyContainer],
+			item 12 [Base.Thread],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+			item 1 tags[SewingNeedle] mode:keep flags[MayDegradeLight],
+			item 1 tags[Awl] mode:keep flags[MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 mapper:grade,
+		}
+		itemMapper grade
+		{
+			P4PumpPury.P4PumpPuryFannyPackPlus_Normal_Back = P4PumpPury.P4PumpPuryFannyPack_Normal_Back,
+			P4PumpPury.P4PumpPuryFannyPackPlus_Normal_Front = P4PumpPury.P4PumpPuryFannyPack_Normal_Front,
+			P4PumpPury.P4PumpPuryFannyPackPlus_Rare_Back = P4PumpPury.P4PumpPuryFannyPack_Rare_Back,
+			P4PumpPury.P4PumpPuryFannyPackPlus_Rare_Front = P4PumpPury.P4PumpPuryFannyPack_Rare_Front,
+		}
+	}
+}

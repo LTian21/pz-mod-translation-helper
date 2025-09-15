@@ -1,0 +1,578 @@
+module Base
+{
+	model 87chevySuburbanWindshielda
+    	{
+        mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_windshield_frontA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 87chevySuburbanWindowfla
+    	{
+        mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_flA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 87chevySuburbanWindowfra
+    	{
+        mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_frA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 87chevySuburbanWindowrla
+    	{
+        mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_rlA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 87chevySuburbanWindowrra
+    	{
+        mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_rrA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 87chevySuburbanWindowbla
+    	{
+        mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_blA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 87chevySuburbanWindowbra
+    	{
+        mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_window_brA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 87chevySuburbanWindshieldReara
+    	{
+        mesh = vehicles/Vehicles_87chevySuburban_Body|87sub_windshield_rearA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle SUB87Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model SUB87winda
+				{
+                		file = 87chevySuburbanWindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87chevySuburbanWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = SUB87.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB87.Create.WindshieldArmor,
+					init = SUB87.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model SUB87leftWindowa
+				{
+                		file = 87chevySuburbanWindowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.87chevySuburbanFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SUB87.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB87.Create.WindowFrontLeftArmor,
+					init = SUB87.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model SUB87rightWindowa
+				{
+                		file = 87chevySuburbanWindowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = WindowFrontRight,
+			specificItem = false,
+			itemType = Base.87chevySuburbanFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SUB87.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB87.Create.WindowFrontRightArmor,
+					init = SUB87.Init.WindowFrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model SUB87leftWindowra
+				{
+                		file = 87chevySuburbanWindowrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = WindowRearLeft,
+			specificItem = false,
+			itemType = Base.87chevySuburbanRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.WindowRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SUB87.UninstallComplete.WindowRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB87.Create.WindowRearLeftArmor,
+					init = SUB87.Init.WindowRearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model SUB87rightWindowra
+				{
+                		file = 87chevySuburbanWindowrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = WindowRearRight,
+			specificItem = false,
+			itemType = Base.87chevySuburbanRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.WindowRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SUB87.UninstallComplete.WindowRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB87.Create.WindowRearRightArmor,
+					init = SUB87.Init.WindowRearRightArmor,
+					}
+		}
+
+		part DAMNBackLeftArmor
+        {
+
+			model SUB87leftWindowba
+				{
+                		file = 87chevySuburbanWindowbla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87chevySuburbanBackWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.WindowBackLeftArmor,
+                	requireInstalled = WindowBackLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+					complete = SUB87.UninstallComplete.WindowBackLeftArmor,
+					requireUninstalled = SUB87SideCan0;SUB87SideCan1,
+            		}
+
+            		lua
+            		{
+					create = SUB87.Create.WindowBackLeftArmor,
+					init = SUB87.Init.WindowBackLeftArmor,
+					}
+		}
+
+		part DAMNBackRightArmor
+        {
+
+			model SUB87rightWindowba
+				{
+                		file = 87chevySuburbanWindowbra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87chevySuburbanBackWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.WindowBackRightArmor,
+                	requireInstalled = WindowBackRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SUB87.UninstallComplete.WindowBackRightArmor,
+					requireUninstalled = SUB87SideStorage,
+            		}
+
+            		lua
+            		{
+					create = SUB87.Create.WindowBackRightArmor,
+					init = SUB87.Init.WindowBackRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        	{
+
+			model SUB87windra
+				{
+                		file = 87chevySuburbanWindshieldReara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.87chevySuburbanWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB87.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = SUB87.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = SUB87.Create.WindshieldRearArmor,
+					init = SUB87.Init.WindshieldRearArmor,
+					}
+		}
+	}
+
+}

@@ -1,0 +1,459 @@
+module Base
+{
+	model 86chevyM1031Base
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86con_body,
+		shader = damn_vehicle_shader,
+		invertX = FALSE,
+		scale = 0.1,
+	}
+	model 86chevyM1031Interior
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86con_interior,
+		texture = vehicles/Vehicles_86chevyCUCV_Interior2,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 86chevyM1031Radio
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86con_radio,
+		texture = vehicles/Vehicles_86chevyCUCV_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 86chevyM1031GasTank
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_gastank,
+		texture = vehicles/Vehicles_86chevyCUCV_Interior2,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	vehicle 86chevyM1031
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 1.5,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.3,
+
+		model
+		{
+			file = 86chevyCUCVBase,
+			scale = 0.9000,
+			offset = 0.0000 0.6556 -0.0111,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_86chevyM1031_Shell_green,
+		}
+
+        skin
+		{
+			texture = Vehicles/Vehicles_86chevyM1031_Shell_desertTan,
+		}
+
+        skin
+		{
+			texture = Vehicles/Vehicles_86chevyM1031_Shell_black,
+		}
+
+        skin
+		{
+			texture = Vehicles/Vehicles_86chevyM1031_Shell_woodland,
+		}
+
+		textureRust = Vehicles/Vehicles_86chevyM1031_Rust,
+		textureMask = Vehicles/Vehicles_86chevyM1031_Mask,
+		textureLights = Vehicles/Vehicles_86chevyCUCV_Lights,
+		textureDamage1Shell = Vehicles/Vehicles_86chevyM1031_Damage1,
+		textureDamage2Shell = Vehicles/Vehicles_86chevyM1031_Damage2,
+		textureDamage1Overlay = Vehicles/Vehicles_86chevyCUCV_Blood3,
+		textureDamage2Overlay = Vehicles/Vehicles_86chevyCUCV_Blood3,
+
+		sound
+		{
+			engine = VehicleEngineOffRoad,
+			engineStart = VehicleEngineOffRoad,
+			engineTurnOff = VehicleEngineOffRoad,
+			horn = VehicleHornJeep,
+			ignitionFail = VehicleIgnitionFailOffRoad,
+		}
+
+		extents = 1.9556 1.3556 5.0667,
+		mass = 810,
+		physicsChassisShape = 1.9556 1.3556 5.0667,
+		centerOfMassOffset = 0.0000 0.9444 -0.0111,
+		shadowExtents = 1.9654 5.7151,
+		shadowOffset = 0.0000 -0.1033,
+		engineForce = 4250,
+		maxSpeed = 78f,
+		engineLoudness = 85,
+		engineQuality = 77,
+		brakingForce = 64,
+		stoppingMovementForce = 3.2f,
+		rollInfluence = 0.97f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 37,
+		suspensionCompression = 3.80,
+		suspensionDamping = 2.84,
+		maxSuspensionTravelCm = 15,
+		suspensionRestLength = 0.20f,
+		wheelFriction = 1.9f,
+		frontEndHealth = 650,
+		rearEndHealth = 450,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.8333 -0.5667 1.7444,
+			radius = 0.39f,
+			width = 0.23f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.8333 -0.5667 1.7444,
+			radius = 0.39f,
+			width = 0.23f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.8333 -0.5667 -1.3667,
+			radius = 0.39f,
+			width = 0.23f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.8333 -0.5667 -1.3667,
+			radius = 0.39f,
+			width = 0.23f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.4667 0.0333 0.4111,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.2444 -0.9556 0.0778,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = -0.4667 0.0333 0.4111,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.2556 -0.9556 0.1222,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 2.9111 1.7556 0.7778,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -2.9333 1.7556 0.7778,
+		}
+
+		area Roofrack
+		{
+			xywh = 0.0000 -1.3889 3.2000 3.4889,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.3667 0.5333 0.7778 1.0889,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.3667 0.5333 0.7778 1.0889,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -1.3667 -0.8111 0.7778 0.8222,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 1.3667 -0.8111 0.7778 0.8222,
+		}
+
+		area StorageFL
+		{
+			xywh = 1.3667 -0.5000 0.7778 0.8222,
+		}
+
+		area StorageFR
+		{
+			xywh = -1.3667 -0.5000 0.7778 0.8222,
+		}
+
+		area StorageRL
+		{
+			xywh = 1.3667 -1.6556 0.7778 1.3778,
+		}
+
+		area StorageRR
+		{
+			xywh = -1.3667 -1.6556 0.7778 1.3778,
+		}
+
+		area GasTank
+		{
+			xywh = 1.5444 -0.5889 0.4222 0.4222,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.5444 1.7556 0.4222 0.4222,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.5444 1.7556 0.4222 0.4222,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.5444 -1.3778 0.4222 0.4222,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.5444 -1.3778 0.4222 0.4222,
+		}
+
+		template = centralTireInflation,
+		template = CUCV86SeatsFront,
+		template = M1031TrunkCompartment,
+		template = M1031TrunkDoor,
+		template = CUCV86EngineDoor,
+		template = CUCV86WindshieldFront,
+		template = M1008WindshieldRear,
+		template = CUCV86Windows,
+		template = CUCV86Doors,
+		template = CUCV86ArmorFront,
+		template = CUCV86BumpersFront,
+		template = M1028BumpersRear,
+		template = CUCV86SideSteps,
+		template = CUCV86SunVisor,
+		template = CUCV86Tires,
+		template = CUCV86SpareTire,
+		template = DAMNGunrack,
+
+		part GloveBox
+		{
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			model cucv86grille
+			{
+				file = 86chevyCUCVGrille,
+			}
+
+			model cucv86cab
+			{
+				file = 86chevyCabBase,
+			}
+
+			model cucv86intCab
+			{
+				file = 86chevyCabInterior,
+			}
+
+			model cucv86conass
+			{
+				file = 86chevyM1031Base,
+			}
+
+			model cucv86intCom
+			{
+				file = 86chevyCUCVInterior,
+			}
+
+			model cucv86intcon
+			{
+				file = 86chevyM1031Interior,
+			}
+
+			container
+			{
+				capacity = 7,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			model 68cucvtank
+			{
+				file = 86chevyM1031GasTank,
+			}
+
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+
+		part Battery
+		{
+			model cucv86Bat
+			{
+				file = 86chevyCUCVTISbattery,
+			}
+		}
+
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			model cucv86Muff
+			{
+				file = 86chevyM1008Muff,
+				offset = 0.0000 0.0000 -0.1500,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio_HAM,
+
+		part Radio
+		{
+			model 86cucvcon
+			{
+				file = 86chevyM1031Radio,
+			}
+		}
+
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.3222 -2.5444,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.3222 2.6333,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

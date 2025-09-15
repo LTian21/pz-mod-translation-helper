@@ -1,0 +1,67 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Robotic_Saw_Arm
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Robotic Saw Arm,
+			Icon		= Build_RoboticSawArm,
+		}
+	}
+
+    entity BuildRoboticSawArm
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Robotic_Saw_Arm,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_6 factory_pieces_claw_02_7,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_5,
+                    row = factory_pieces_claw_02_4,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 400,
+            needToBeLearn = true,
+            SkillRequired = Electricity:5;MetalWelding:5,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPRoboticSawArm,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SheetMetal],
+                item 2 [Base.SmallSheetMetal],
+                item 2 [Base.MetalPipe],
+                item 2 [Base.MetalBar],
+                item 2 [Base.Screws],
+                item 4 [Base.ElectricWire],
+                item 10 [Base.ElectronicsScrap],
+                item 4 [Base.WeldingRods],
+                item 1 [Base.CircularSawblade],
+            }
+        }
+    }
+}

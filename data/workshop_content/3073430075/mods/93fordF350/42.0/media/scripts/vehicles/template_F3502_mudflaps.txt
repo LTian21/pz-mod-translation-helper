@@ -1,0 +1,194 @@
+module Base
+{
+	model 93fordF350Mudflaps0
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_mudflaps0,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 93fordF350Mudflaps1
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_mudflaps1,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 93fordF150Mudflaps2
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f150_mudflaps,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 93fordF250Mudflaps3
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f250_mudflaps,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle F3502MudflapsStock
+		{
+		part DAMNMudflaps
+        	{
+
+			model DAMNMudflaps
+				{
+                	file = 93fordF350Mudflaps0,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.93fordF350Mudflaps,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.Mudflaps,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 750,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = F3502.UninstallComplete.Mudflaps,
+
+            		}
+
+            	lua
+            		{
+					create = F3502.Create.Mudflaps,
+					init = F3502.Init.Mudflaps,
+					}
+		}
+	}
+
+	template vehicle F3502MudflapsDually
+		{
+		part DAMNMudflaps
+        	{
+
+			model DAMNMudflaps
+				{
+                	file = 93fordF350Mudflaps1,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.93fordF350Mudflaps,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.Mudflaps,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 750,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = F3502.UninstallComplete.Mudflaps,
+
+            		}
+
+            	lua
+            		{
+					create = F3502.Create.Mudflaps,
+					init = F3502.Init.Mudflaps,
+					}
+		}
+	}
+
+    template vehicle F2502MudflapsStock
+		{
+            template! = F3502MudflapsStock,
+
+            part DAMNMudflaps
+                {
+
+                model DAMNMudflaps
+                    {
+                        file = 93fordF250Mudflaps3,
+                    }
+
+            }
+	}
+
+    template vehicle F1502MudflapsStock
+		{
+            template! = F3502MudflapsStock,
+
+            part DAMNMudflaps
+                {
+
+                model DAMNMudflaps
+                    {
+                        file = 93fordF150Mudflaps2,
+                    }
+
+            }
+	}
+}

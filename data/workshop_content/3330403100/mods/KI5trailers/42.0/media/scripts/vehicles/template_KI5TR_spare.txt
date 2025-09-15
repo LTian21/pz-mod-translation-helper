@@ -1,0 +1,137 @@
+module Base
+{
+	model KI5trailersSpareStrap
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_spareStrap,
+		texture = Vehicles/TrailerKI5TRcargo_wheel_extra,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+        model KI5trailersSpare1R
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model KI5trailersSpare2R
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle KI5TRSparesMedium
+		{
+		part KI5TRSpareTire
+        	{
+
+            model Strap0
+				{
+                		file = KI5trailersSpareStrap,
+				}
+            model Strap1
+				{
+                		file = KI5trailersSpareStrap,
+				}
+			model Spare0
+				{
+                		file = KI5trailersSpare1R,
+                        offset = -0.7740 -0.0949 0.6354,
+				}
+            model Spare1
+				{
+                		file = KI5trailersSpare2R,
+                        offset = -0.7740 -0.0949 0.6354,
+				}
+
+			area = SpareTire,
+			category = bodywork,
+            specificItem = false,
+			itemType = damnCraft.SmallTire1;damnCraft.SmallTire2,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 600,
+                	skills = Mechanics:4,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+					complete = KI5TR.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Wrench,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 600,
+                    skills = Mechanics:4,
+                    recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			        complete = KI5TR.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+                    create = KI5TR.Create.SpareTire,
+                    init = KI5TR.Init.SpareTire,
+                    }
+		}
+	}
+
+    template vehicle KI5TRSparesLarge
+		{
+            template! = KI5TRSparesMedium,
+
+		part KI5TRSpareTire
+        	{
+
+            model Strap0
+				{
+                		file = KI5trailersSpareStrap,
+                        offset = 0.0000 0.0000 0.5056,
+				}
+            model Strap1
+				{
+                		file = KI5trailersSpareStrap,
+                        offset = 0.0000 0.0000 0.5056,
+				}
+			model Spare0
+				{
+                		file = KI5trailersSpare1R,
+                        offset = -0.7740 -0.0949 1.1410,
+				}
+            model Spare1
+				{
+                		file = KI5trailersSpare2R,
+                        offset = -0.7740 -0.0949 1.1410,
+				}
+            }
+        }
+}

@@ -1,0 +1,70 @@
+module Base
+{
+    template vehicle ATABumpers
+    {
+        part ATABumper
+        {
+            area = Engine,
+            category = tuning,
+            specificItem = false,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                    2
+                    {
+                        type = Base.PipeWrench,
+                        count = 1,
+                        keep = true,
+                        equip = secondary,
+                    }
+                }
+                skills = Mechanics:3,
+                time = 2000,
+                recipes = Advanced Mechanics;Basic Tuning,
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.CommonProtection,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                    2
+                    {
+                        type = Base.PipeWrench,
+                        count = 1,
+                        keep = true,
+                        equip = secondary,
+                    }
+                }
+                skills = Mechanics:2,
+                time = 2000,
+                recipes = Advanced Mechanics;Basic Tuning,
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.CommonProtection,
+            }
+            lua
+            {
+                create = ATATuning.Create.DefaultModel,
+                init = ATATuning.Init.Default,
+                update = ATATuning.Update.CommonProtection,
+            }
+        }
+    }
+}

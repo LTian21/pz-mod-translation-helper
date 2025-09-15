@@ -1,0 +1,64 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_ModernStairs
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Modern Stairs,
+			Icon		= fixtures_stairs_01_8,
+		}
+	}
+
+    entity ModernStairs
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_ModernStairs,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+        	OnCreate = BuildRecipeCode.stairs.OnCreate,
+        	OnIsValid = BuildRecipeCode.stairs.OnIsValid,
+
+            face S
+            {
+                layer
+                {
+                    row = fixtures_stairs_01_2 fixtures_stairs_01_1 fixtures_stairs_01_0,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = fixtures_stairs_01_10,
+                    row = fixtures_stairs_01_9,
+                    row = fixtures_stairs_01_8,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 300,
+            needToBeLearn = true,
+            category      = Stairs_Metal,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:10,
+            ToolTip       = Tooltip_craft_stairsDesc,
+            inputs
+            {
+		        item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 6 [Base.SheetMetal],
+		        item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

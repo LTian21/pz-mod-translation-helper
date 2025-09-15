@@ -1,0 +1,148 @@
+module Base
+{
+	model 63Type2VanHeadlightGuardfl
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_headlight_fl_a,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	model 63Type2VanHeadlightGuardfr
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_headlight_fr_a,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle VAN63HeadlightGuards
+		{
+		part VAN63HeadlightGuardLeft
+        	{
+
+			model lightgl
+				{
+                		file = 63Type2VanHeadlightGuardfl,
+				}
+
+			area = Front,
+			category = lights,
+			specificItem = false,
+			itemType = Base.63Type2VanHeadlightGuard0,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 350,
+                	skills = Mechanics:2,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = HeadlightLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 350,
+			skills = Mechanics:2,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+			
+            		}
+
+            		lua
+            		{
+			create = DAMN.Create.Blank,
+
+			}
+		}
+
+		part VAN63HeadlightGuardRight
+        	{
+
+			model lightgr
+				{
+                		file = 63Type2VanHeadlightGuardfr,
+				}
+
+			area = Front,
+			category = lights,
+			specificItem = false,
+			itemType = Base.63Type2VanHeadlightGuard0,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 350,
+                	skills = Mechanics:2,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = HeadlightRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 350,
+			skills = Mechanics:2,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+            		lua
+            		{
+			create = DAMN.Create.Blank,
+			}
+		}
+	}
+
+		
+}

@@ -1,0 +1,106 @@
+module Base
+{
+	template vehicle E150TrunkSpace
+	{
+		part E150Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				capacity = 120,
+				test = DAMN.ContainerAccess.TrunkInner,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				test = DAMN.ContainerAccess.TrunkInner,
+			}
+			lua
+			{
+                create = DAMN.Create.Blank,
+			}
+		}
+
+	}
+
+    template vehicle E150TrunkSpacePayday
+	{
+		part E150Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				capacity = 120,
+				test = E150.ContainerAccess.PaydayTrunk,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part E150RearCabinet
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+                capacity = 55,
+				test = E150.ContainerAccess.PaydayTrunk,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = E150.ContainerAccess.PaydayTrunk,
+			}
+			lua
+			{
+                create = DAMN.Create.Blank,
+			}
+		}
+
+	}
+
+}
+

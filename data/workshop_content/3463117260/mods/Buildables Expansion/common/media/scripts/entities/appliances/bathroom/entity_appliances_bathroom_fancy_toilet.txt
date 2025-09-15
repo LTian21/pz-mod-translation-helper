@@ -1,0 +1,75 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FancyToilet
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Fancy Toilet,
+			Icon		= fixtures_bathroom_01_0,
+		}
+	}
+
+    entity FancyToilet
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FancyToilet,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face N
+            {
+                layer
+                {
+                    row = fixtures_bathroom_01_3,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = fixtures_bathroom_01_1,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = fixtures_bathroom_01_0,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = fixtures_bathroom_01_2,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Appliances_Bathroom,
+            SkillRequired = MetalWelding:4;Masonry:6,
+            xpAward       = MetalWelding:5;Masonry:10,
+            ToolTip       = Tooltip_craft_toiletDesc,
+            inputs
+            {
+		        item 1 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[MasonsTrowel] mode:keep,
+		        item 1 [Base.WeldingRods],
+                item 1 [Base.BucketConcreteFull],
+                item 4 [Base.ClayTile],
+                item 1 [Base.LeadPipe],
+            }
+        }
+    }
+}

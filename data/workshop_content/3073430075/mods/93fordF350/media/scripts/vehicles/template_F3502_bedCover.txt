@@ -1,0 +1,121 @@
+module Base
+{
+	model 93fordF350TruckbedTarpLong
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|fx50_longbed_cover,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 93fordF350TruckbedTarpShort
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|fx50_shortbed_cover,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle F3502TruckBedCover
+	{
+		part F3502TruckbedCover
+		{
+			model F3502BedCover
+			{
+				file = 93fordF350TruckbedTarpLong,
+			}
+
+			model F3502BedCover2
+			{
+				file = 93fordF350TruckbedTarpLong,
+			}
+		
+			category = bodywork,
+			area = Roofrack,
+			itemType = Base.93fordF350BedCover,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+                requireUninstalled = F3502HeadacheRack,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireEmpty = true,
+			}
+			lua
+            {
+                create = DAMN.Create.Blank,
+            }
+		}
+
+	}
+
+	template vehicle F2502TruckBedCover
+	{
+		template! = F3502TruckBedCover,
+
+		part F3502TruckbedCover
+		{
+			model F3502BedCover
+			{
+				file = 93fordF350TruckbedTarpLong,
+				offset = 0.0000 0.0000 0.8600,
+			}
+
+			model F3502BedCover2
+			{
+				file = 93fordF350TruckbedTarpLong,
+				offset = 0.0000 0.0000 0.8600,
+			}
+		}
+	}
+
+	template vehicle F1502TruckBedCover
+	{
+		template! = F3502TruckBedCover,
+
+		part F3502TruckbedCover
+		{
+			model F3502BedCover
+			{
+				file = 93fordF350TruckbedTarpShort,
+			}
+
+			model F3502BedCover2
+			{
+				file = 93fordF350TruckbedTarpShort,
+			}
+        }
+	}
+}

@@ -1,0 +1,769 @@
+module Base
+{
+    model 85gmBbodyWheel0L
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire0,
+		texture = vehicles/Vehicles_85gmBbody_Wheel0,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+	}
+
+    model 85gmBbodyWheel0R
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire0,
+		texture = vehicles/Vehicles_85gmBbody_Wheel0,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+        invertX = TRUE,
+	}
+
+    model 85gmBbodyWheel1L
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire1,
+		texture = vehicles/Vehicles_85gmBbody_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+	}
+
+    model 85gmBbodyWheel1R
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire1,
+		texture = vehicles/Vehicles_85gmBbody_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+        invertX = TRUE,
+	}
+
+    model 85gmBbodyWheel2L
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire2,
+		texture = vehicles/Vehicles_85gmBbody_Wheel2,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+	}
+
+    model 85gmBbodyWheel2R
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire2,
+		texture = vehicles/Vehicles_85gmBbody_Wheel2,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+        invertX = TRUE,
+	}
+
+    model 85gmBbodyWheel3L
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire3,
+		texture = vehicles/Vehicles_85gmBbody_Wheel3,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+	}
+
+    model 85gmBbodyWheel3R
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire3,
+		texture = vehicles/Vehicles_85gmBbody_Wheel3,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+        invertX = TRUE,
+	}
+
+    model 85gmBbodyWheel4L
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire3,
+		texture = vehicles/Vehicles_85gmBbody_Wheel4,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+	}
+
+    model 85gmBbodyWheel4R
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire3,
+		texture = vehicles/Vehicles_85gmBbody_Wheel4,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+        invertX = TRUE,
+	}
+
+    model 85gmBbodyWheel5L
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire4,
+		texture = vehicles/Vehicles_85gmBbody_Wheel5,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+	}
+
+    model 85gmBbodyWheel5R
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire4,
+		texture = vehicles/Vehicles_85gmBbody_Wheel5,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+        invertX = TRUE,
+	}
+
+    model 85gmBbodyWheel6L
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire2,
+		texture = vehicles/Vehicles_85gmBbody_Wheel6,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+	}
+
+    model 85gmBbodyWheel6R
+	{
+		mesh = vehicles/Vehicles_85gmBbody_Wheels|gm_tire2,
+		texture = vehicles/Vehicles_85gmBbody_Wheel6,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+        invertX = TRUE,
+	}
+
+    model 85gmBbodyWheel7L
+	{
+		mesh = vehicles/Vehicles_STEEL_Wheels|vic91_tire,
+		texture = vehicles/Vehicles_STEEL01_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+	}
+
+    model 85gmBbodyWheel7R
+	{
+		mesh = vehicles/Vehicles_STEEL_Wheels|vic91_tire,
+		texture = vehicles/Vehicles_STEEL01_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.090,
+        invertX = TRUE,
+	}
+
+	template vehicle CAP85Tires
+	{
+		part TireFrontLeft
+		{
+			model GM85Tire0L
+			{
+				file = 85gmBbodyWheel0L,
+			}
+
+            model GM85Tire1L
+			{
+				file = 85gmBbodyWheel1L,
+			}
+
+            model GM85Tire2L
+			{
+				file = 85gmBbodyWheel2L,
+			}
+
+            model GM85Tire3L
+			{
+				file = 85gmBbodyWheel3L,
+			}
+
+            model GM85Tire4L
+			{
+				file = 85gmBbodyWheel4L,
+			}
+
+            model GM85Tire5L
+			{
+				file = 85gmBbodyWheel5L,
+			}
+
+            model GM85Tire6L
+			{
+				file = 85gmBbodyWheel6L,
+			}
+
+            model GM85Tire7L
+			{
+				file = 85gmBbodyWheel7L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = CAP85.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = CAP85.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CAP85.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+			model GM85Tire0R
+			{
+				file = 85gmBbodyWheel0R,
+			}
+
+            model GM85Tire1R
+			{
+				file = 85gmBbodyWheel1R,
+			}
+
+            model GM85Tire2R
+			{
+				file = 85gmBbodyWheel2R,
+			}
+
+            model GM85Tire3R
+			{
+				file = 85gmBbodyWheel3R,
+			}
+
+            model GM85Tire4R
+			{
+				file = 85gmBbodyWheel4R,
+			}
+
+            model GM85Tire5R
+			{
+				file = 85gmBbodyWheel5R,
+			}
+
+            model GM85Tire6R
+			{
+				file = 85gmBbodyWheel6R,
+			}
+
+            model GM85Tire7R
+			{
+				file = 85gmBbodyWheel7R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = CAP85.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = CAP85.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CAP85.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model GM85Tire0L
+			{
+				file = 85gmBbodyWheel0L,
+			}
+
+            model GM85Tire1L
+			{
+				file = 85gmBbodyWheel1L,
+			}
+
+            model GM85Tire2L
+			{
+				file = 85gmBbodyWheel2L,
+			}
+
+            model GM85Tire3L
+			{
+				file = 85gmBbodyWheel3L,
+			}
+
+            model GM85Tire4L
+			{
+				file = 85gmBbodyWheel4L,
+			}
+
+            model GM85Tire5L
+			{
+				file = 85gmBbodyWheel5L,
+			}
+
+            model GM85Tire6L
+			{
+				file = 85gmBbodyWheel6L,
+			}
+
+            model GM85Tire7L
+			{
+				file = 85gmBbodyWheel7L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = CAP85.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			table uninstall
+			{
+				complete = CAP85.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CAP85.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+			model GM85Tire0R
+			{
+				file = 85gmBbodyWheel0R,
+			}
+
+            model GM85Tire1R
+			{
+				file = 85gmBbodyWheel1R,
+			}
+
+            model GM85Tire2R
+			{
+				file = 85gmBbodyWheel2R,
+			}
+
+            model GM85Tire3R
+			{
+				file = 85gmBbodyWheel3R,
+			}
+
+            model GM85Tire4R
+			{
+				file = 85gmBbodyWheel4R,
+			}
+
+            model GM85Tire5R
+			{
+				file = 85gmBbodyWheel5R,
+			}
+
+            model GM85Tire6R
+			{
+				file = 85gmBbodyWheel6R,
+			}
+
+            model GM85Tire7R
+			{
+				file = 85gmBbodyWheel7R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = CAP85.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = CAP85.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CAP85.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+            specificItem = false,
+			itemType = Base.85gmBbodyTire0;Base.85gmBbodyTire1;Base.85gmBbodyTire2;Base.85gmBbodyTire3;Base.85gmBbodyTire4;Base.85gmBbodyTire5;Base.85gmBbodyTire6;damnCraft.SteelTire1,
+            durability = 2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+
+		}
+	}
+
+    template vehicle CAP85TiresS
+	{
+		part TireFrontLeft
+		{
+			model GM85Tire0L
+			{
+				file = 85gmBbodyWheel0L,
+			}
+
+            model GM85Tire1L
+			{
+				file = 85gmBbodyWheel1L,
+			}
+
+            model GM85Tire2L
+			{
+				file = 85gmBbodyWheel2L,
+			}
+
+            model GM85Tire3L
+			{
+				file = 85gmBbodyWheel3L,
+			}
+
+            model GM85Tire4L
+			{
+				file = 85gmBbodyWheel4L,
+			}
+
+            model GM85Tire5L
+			{
+				file = 85gmBbodyWheel5L,
+			}
+
+            model GM85Tire6L
+			{
+				file = 85gmBbodyWheel6L,
+			}
+
+            model GM85Tire7L
+			{
+				file = 85gmBbodyWheel7L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = CAP85.InstallComplete.TireFrontLeftS,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = CAP85.UninstallComplete.TireFrontLeftS,
+			}
+
+			lua
+			{
+				create = CAP85.Create.TireFrontLeftS,
+				init = CAP85.Init.TireFrontLeftS,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+			model GM85Tire0R
+			{
+				file = 85gmBbodyWheel0R,
+			}
+
+            model GM85Tire1R
+			{
+				file = 85gmBbodyWheel1R,
+			}
+
+            model GM85Tire2R
+			{
+				file = 85gmBbodyWheel2R,
+			}
+
+            model GM85Tire3R
+			{
+				file = 85gmBbodyWheel3R,
+			}
+
+            model GM85Tire4R
+			{
+				file = 85gmBbodyWheel4R,
+			}
+
+            model GM85Tire5R
+			{
+				file = 85gmBbodyWheel5R,
+			}
+
+            model GM85Tire6R
+			{
+				file = 85gmBbodyWheel6R,
+			}
+
+            model GM85Tire7R
+			{
+				file = 85gmBbodyWheel7R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = CAP85.InstallComplete.TireFrontRightS,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = CAP85.UninstallComplete.TireFrontRightS,
+			}
+
+			lua
+			{
+				create = CAP85.Create.TireFrontRightS,
+				init = CAP85.Init.TireFrontRightS,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model GM85Tire0L
+			{
+				file = 85gmBbodyWheel0L,
+			}
+
+            model GM85Tire1L
+			{
+				file = 85gmBbodyWheel1L,
+			}
+
+            model GM85Tire2L
+			{
+				file = 85gmBbodyWheel2L,
+			}
+
+            model GM85Tire3L
+			{
+				file = 85gmBbodyWheel3L,
+			}
+
+            model GM85Tire4L
+			{
+				file = 85gmBbodyWheel4L,
+			}
+
+            model GM85Tire5L
+			{
+				file = 85gmBbodyWheel5L,
+			}
+
+            model GM85Tire6L
+			{
+				file = 85gmBbodyWheel6L,
+			}
+
+            model GM85Tire7L
+			{
+				file = 85gmBbodyWheel7L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = CAP85.InstallComplete.TireRearLeftS,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			table uninstall
+			{
+				complete = CAP85.UninstallComplete.TireRearLeftS,
+			}
+
+			lua
+			{
+				create = CAP85.Create.TireRearLeftS,
+				init = CAP85.Init.TireRearLeftS,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+			model GM85Tire0R
+			{
+				file = 85gmBbodyWheel0R,
+			}
+
+            model GM85Tire1R
+			{
+				file = 85gmBbodyWheel1R,
+			}
+
+            model GM85Tire2R
+			{
+				file = 85gmBbodyWheel2R,
+			}
+
+            model GM85Tire3R
+			{
+				file = 85gmBbodyWheel3R,
+			}
+
+            model GM85Tire4R
+			{
+				file = 85gmBbodyWheel4R,
+			}
+
+            model GM85Tire5R
+			{
+				file = 85gmBbodyWheel5R,
+			}
+
+            model GM85Tire6R
+			{
+				file = 85gmBbodyWheel6R,
+			}
+
+            model GM85Tire7R
+			{
+				file = 85gmBbodyWheel7R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = CAP85.InstallComplete.TireRearRightS,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = CAP85.UninstallComplete.TireRearRightS,
+			}
+
+			lua
+			{
+				create = CAP85.Create.TireRearRightS,
+				init = CAP85.Init.TireRearRightS,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+            specificItem = false,
+			itemType = damnCraft.SteelTire1;Base.85gmBbodyTire0;Base.85gmBbodyTire1;Base.85gmBbodyTire2;Base.85gmBbodyTire3;Base.85gmBbodyTire4;Base.85gmBbodyTire5;Base.85gmBbodyTire6,
+            durability = 2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+
+		}
+	}
+}
+

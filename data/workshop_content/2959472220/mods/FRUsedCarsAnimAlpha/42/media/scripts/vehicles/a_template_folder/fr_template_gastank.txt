@@ -1,0 +1,83 @@
+module Base
+{
+	template vehicle FRGasTank
+	{
+		part GasTank
+		{
+			table FRPartInfo
+			{
+				oneModel = TRUE,
+			}
+			area = GasTank,
+			category = gastank,
+			itemType = Base.SmallGasTank;Base.NormalGasTank;Base.BigGasTank;,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline,
+				conditionAffectsCapacity = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+				init = Vehicles.Init.FR_VisualDefault,
+				update = Vehicles.Update.GasTank,
+				checkEngine = Vehicles.CheckEngine.GasTank,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = secondary,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:5,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualDefault,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = secondary,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:5,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.FR_VisualDefault,
+				requireEmpty = true,
+			}
+		}
+	}
+}
+
+

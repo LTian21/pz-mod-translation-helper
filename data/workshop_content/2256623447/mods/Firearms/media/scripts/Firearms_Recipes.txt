@@ -1,0 +1,542 @@
+module Base
+{
+
+
+	/************************Guns************************/
+	recipe Saw Off Rifle
+	{
+	   HuntingRifle,
+	   keep [Recipe.GetItemTypes.Saw],
+
+	   Result:HuntingRifle_Sawn,
+	   Sound:Sawing,
+	   Time:200.0,
+	   OnCreate:onSawnOff_OnCreate,
+	}
+
+	recipe Make Improvised Flashlight Silencer
+	{
+	   destroy HandTorch/ImprovisedSilencer_Broken,
+		 ScrapMetal,
+	   DuctTape=1,
+
+	   Result:ImprovisedSilencer,
+	   Time:300.0,
+		 Category:Welding,
+		 SkillRequired:MetalWelding=1,
+	 	 OnGiveXP:Recipe.OnGiveXP.MetalWelding15,
+	   OnCreate:onImprovisedSilencer_OnCreate,
+		 OnTest:onImprovisedSilencer_OnTest,
+	}
+
+	recipe Make Improvised Bottle Silencer
+	{
+	   destroy PopBottleEmpty/WaterBottleEmpty,
+	   DuctTape=2,
+
+	   Result:Silencer_PopBottle,
+		 OnTest:onImprovisedSilencer_OnTest,
+	   Time:300.0,
+	}
+
+	recipe Saw Off Shotgun
+	{
+		 Shotgun,
+		 keep [Recipe.GetItemTypes.Saw],
+
+		 Result:ShotgunSawnoff,
+		 Sound:Sawing,
+		 Time:200.0,
+		 OnCreate:onSawnOff_OnCreate,
+		 Override:true,
+	}
+
+	recipe Saw Off Shotgun
+	{
+		 M37,
+		 keep [Recipe.GetItemTypes.Saw],
+
+		 Result:M37Sawnoff,
+		 Sound:Sawing,
+		 Time:200.0,
+		 OnCreate:onSawnOff_OnCreate,
+	}
+
+	recipe Saw Off Shotgun
+	{
+		Remington870Wood,
+		keep [Recipe.GetItemTypes.Saw],
+
+		Result:Remington870Sawnoff,
+		Sound:Sawing,
+		Time:200.0,
+		OnCreate:onSawnOff_OnCreate,
+	}
+
+	recipe Extend Stock
+   {
+     MP5,
+
+     Result:MP5,
+     Time:15,
+     OnTest:onExtendStock_OnTest,
+     OnCreate:onExtendStock_OnCreate,
+	 IsHidden:true,
+   }
+
+ 		recipe Detract Stock
+    {
+      MP5,
+
+      Result:MP5,
+      Time:30,
+      OnTest:onDetractStock_OnTest,
+      OnCreate:onDetractStock_OnCreate,
+	  IsHidden:true,
+    }
+
+			recipe Extend Stock
+		   {
+		     UZI,
+
+		     Result:UZI,
+		     Time:15,
+		     OnTest:onExtendStock_OnTest,
+		     OnCreate:onExtendStock_OnCreate,
+			 IsHidden:true,
+		   }
+
+ 		recipe Detract Stock
+    {
+      UZI,
+
+      Result:UZI,
+      Time:30,
+      OnTest:onDetractStock_OnTest,
+      OnCreate:onDetractStock_OnCreate,
+	  IsHidden:true,
+    }
+
+			recipe Extend Stock
+		   {
+		     Mac10,
+
+		     Result:Mac10,
+		     Time:15,
+		     OnTest:onExtendStock_OnTest,
+		     OnCreate:onExtendStock_OnCreate,
+			 IsHidden:true,
+		   }
+
+ 		recipe Detract Stock
+    {
+      Mac10,
+
+      Result:Mac10,
+      Time:30,
+      OnTest:onDetractStock_OnTest,
+      OnCreate:onDetractStock_OnCreate,
+	  IsHidden:true,
+    }
+
+			recipe Extend Stock
+		   {
+		     SPAS12,
+
+		     Result:SPAS12,
+		     Time:15,
+		     OnTest:onExtendStock_OnTest,
+		     OnCreate:onExtendStock_OnCreate,
+			 IsHidden:true,
+		   }
+
+ 		recipe Detract Stock
+    {
+      SPAS12,
+
+      Result:SPAS12,
+      Time:30,
+      OnTest:onDetractStock_OnTest,
+      OnCreate:onDetractStock_OnCreate,
+	  IsHidden:true,
+    }
+
+		recipe Convert to 5.56x45mm
+		{
+      223Bullets,
+
+      Result:556Bullets=1,
+      Time:0,
+		}
+
+		recipe Convert to .223
+		{
+      556Bullets,
+
+      Result:223Bullets=1,
+      Time:0,
+		}
+
+		recipe Convert to 7.62x51mm
+		{
+      308Bullets,
+
+      Result:762x51Bullets=1,
+      Time:0,
+		}
+
+		recipe Convert to .308
+		{
+      762x51Bullets,
+
+      Result:308Bullets=1,
+      Time:0,
+		}
+
+		recipe Convert to .357
+		{
+      Bullets38,
+
+      Result:Bullets357=1,
+      Time:0,
+		}
+
+
+		/* Boxes */
+			recipe Open Box of 9mm Bullets
+			{
+					Bullets9mmBox,
+
+					Result:Bullets9mm=10,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Open Box of .45 Auto Bullets
+			{
+					Bullets45Box,
+
+					Result:Bullets45=10,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Open Box of .38 Special Bullets
+			{
+					Bullets38Box,
+
+					Result:Bullets38=10,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Open Box of .44 Magnum Bullets
+			{
+					Bullets44Box,
+
+					Result:Bullets44=10,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Open Box of Shotgun Shells
+			{
+					ShotgunShellsBox,
+
+					Result:ShotgunShells=5,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Open Box of .556 Ammo
+			{
+					556Box,
+
+					Result:556Bullets=4,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Place .556 Ammo in Box
+			{
+					556Bullets=20,
+
+					Result:556Box,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Open Box of .223 Ammo
+			{
+					223Box,
+
+					Result:223Bullets=4,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Place .223 Ammo in Box
+			{
+					223Bullets=20,
+
+					Result:223Box,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Open Box of .308 Ammo
+			{
+					308Box,
+
+					Result:308Bullets=4,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Place .308 Ammo in Box
+			{
+					308Bullets=20,
+
+					Result:308Box,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Place 9mm Bullets in Box
+			{
+					Bullets9mm=50,
+
+					Result:Bullets9mmBox,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Place .45 Auto Bullets in Box
+			{
+					Bullets45=50,
+
+					Result:Bullets45Box,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Place .38 Speciam Bullets in Box
+			{
+					Bullets38=50,
+
+					Result:Bullets38Box,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+					Override:true,
+			}
+
+			recipe Place .44 Magnum Bullets in Box
+			{
+					Bullets44=50,
+
+					Result:Bullets44Box,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+			 		Override:true,
+			}
+
+			recipe Place Shotgun Shells in Box
+			{
+					ShotgunShells=25,
+
+					Result:ShotgunShellsBox,
+					Sound:OpenAmmoBox,
+					Time:30.0,
+					Prop1:Bullet_Casing,
+					Prop2:Ammobox,
+			 		Override:true,
+			}
+
+		recipe Open Box of 7.62x51mm Ammo
+		{
+				762x51Box,
+
+				Result:762x51Bullets=4,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+		recipe Place 7.62x51mm in Box
+		{
+				762x51Bullets=20,
+
+				Result:762x51Box,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+		recipe Open Box of 7.62x39mm Ammo
+		{
+				762x39Box,
+
+				Result:762x39Bullets=4,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+		recipe Place 7.62x39mm in Box
+		{
+				762x39Bullets=20,
+
+				Result:762x39Box,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+		recipe Open Box of .44-40 WCF Ammo
+		{
+				Bullets4440Box,
+
+				Result:Bullets4440=10,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+		recipe Place .44-40 WCF in Box
+		{
+				Bullets4440=50,
+
+				Result:Bullets4440Box,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+		recipe Open Box of .22 LR Ammo
+		{
+				Bullets22Box,
+
+				Result:Bullets22=10,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+		recipe Place .22 LR Ammo in Box
+		{
+				Bullets22=50,
+
+				Result:Bullets22Box,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+		recipe Open Box of .357 Ammo
+		{
+				Bullets357Box,
+
+				Result:Bullets357=10,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+		recipe Place .357 Ammo in Box
+		{
+				Bullets357=50,
+
+				Result:Bullets357Box,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+		recipe Open Box of .30-06 Ammo
+		{
+				Bullets3006Box,
+
+				Result:Bullets3006=4,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+		recipe Place .30-06 Ammo in Box
+		{
+				Bullets3006=20,
+
+				Result:Bullets3006Box,
+				Sound:OpenAmmoBox,
+				Time:30.0,
+				Prop1:Bullet_Casing,
+				Prop2:Ammobox,
+				Override:true,
+		}
+
+}

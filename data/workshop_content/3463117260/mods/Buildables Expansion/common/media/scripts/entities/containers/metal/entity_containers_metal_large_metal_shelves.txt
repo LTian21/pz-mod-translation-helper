@@ -1,0 +1,62 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LargeMetalShelves
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Large Metal Shelves,
+			Icon		= furniture_shelving_01_27,
+		}
+	}
+
+    entity LargeMetalShelves
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_LargeMetalShelves,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = furniture_shelving_01_25,
+                    row = furniture_shelving_01_24,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_shelving_01_26 furniture_shelving_01_27,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:15,
+            category      = Containers_Metal,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_metalLockerDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SmallSheetMetal],
+                item 6 [Base.SheetMetal],
+                item 8 [Base.MetalBar;Base.MetalPipe],
+                item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

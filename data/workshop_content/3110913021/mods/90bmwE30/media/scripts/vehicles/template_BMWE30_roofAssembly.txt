@@ -1,0 +1,224 @@
+module Base
+{
+
+    model 90bmwE30roof
+    {
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_cabrio_roof,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 90bmwE30roofFolded
+    {
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_cabrio_roof_folded,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+	
+	model 90bmwE30roofLid
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_cabrio_roofLid,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    template vehicle BMWE30RoofAssembly
+        {
+        part BMWE30Roof
+            {
+
+            model BMWE30roof0
+            {
+                    file = 90bmwE30roof,
+            }
+
+            category = bodywork,
+            area = RoofLid,
+            itemType = Base.90bmwE30CabrioRoof,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                time = 500,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+                
+            }
+            table uninstall
+            {
+                time = 500,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part BMWE30RoofStorage
+            {
+
+            model BMWE30roofFolded0
+            {
+                    file = 90bmwE30roofFolded,
+            }
+
+            category = bodywork,
+            area = RoofLid,
+            itemType = Base.90bmwE30CabrioRoof,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                time = 400,
+                skills = Mechanics:1,
+                door = BMWE30RoofLid,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+                
+            }
+            table uninstall
+            {
+                time = 400,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+            {
+                create = DAMN.Create.Blank,
+            }
+        }
+
+		part BMWE30RoofLid
+       		{
+
+            model BMWE30roofLid0
+			{
+                	file = 90bmwE30roofLid,
+			}
+
+            anim Close
+            {
+                anim = roof_trunk_opening,
+                reverse = TRUE,
+                rate = 1.0,
+            }
+
+            anim Open
+            {
+                anim = roof_trunk_opening,
+                rate = 1.0,
+            }
+
+            anim Closed
+            {
+                anim = roof_trunk_opening,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = roof_trunk_opening,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+
+            category = bodywork,
+            area = RoofLid,
+
+            door
+            {
+            }
+            anim Open
+            {
+                sound = VehicleTrunkOpenStandard,
+            }
+            anim Close
+            {
+                sound = VehicleTrunkCloseStandard,
+            }
+            anim Lock
+            {
+                sound = LockVehicleDoorStandard,
+            }
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorStandard,
+            }
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedStandard,
+            }
+            anim ActorOpen
+            {
+                anim = WindowOpenSuccess,
+                rate = 0.15,
+                angle = 0.0 270.0 0.0,
+            }
+            anim ActorClose
+            {
+                anim = Attack_Shove,
+                rate = 0.3,
+                angle = 0.0 270.0 0.0,
+            }
+
+            itemType = Base.90bmwE30CabrioRoofLid,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 500,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Door,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 500,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Door,
+            }
+            lua
+            {
+                create = Vehicles.Create.TrunkDoor,
+                init = Vehicles.Init.Door,
+                use = Vehicles.Use.TrunkDoor,
+            }
+        }
+
+	}
+}
+

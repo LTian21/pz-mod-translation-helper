@@ -1,0 +1,72 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FancyBrownRugCorner
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Fancy Brown Rug Corner,
+			Icon		= floors_rugs_01_45,
+		}
+	}
+
+    entity FancyBrownRugCorner
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FancyBrownRugCorner,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {	
+            face N
+            {
+                layer
+                {
+                    row = floors_rugs_01_28,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = floors_rugs_01_29,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = floors_rugs_01_45,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = floors_rugs_01_44,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = SewingCloth,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Decorations_Rugs,
+            SkillRequired = Tailoring:2,
+            xpAward       = Tailoring:4,
+            ToolTip       = Tooltip_craft_rugsDesc,
+            inputs
+            {
+                item 1 tags[SewingNeedle] mode:keep flags[Prop1],
+                item 5 [Base.RippedSheets] mode:destroy flags[Prop2],
+                item 3 [Base.Thread],
+            }
+        }
+    }
+}

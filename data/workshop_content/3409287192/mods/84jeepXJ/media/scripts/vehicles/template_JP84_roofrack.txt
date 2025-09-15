@@ -1,0 +1,83 @@
+module Base
+{
+
+	model 84jeepXJRoofrack0
+	{
+		mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_roofrack,
+		texture = Vehicles/Vehicles_84jeepXJ_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle JP84Roofrack
+	{
+		part JP84Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 84jeepXJRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.84jeepXJRoofrack2,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = JP84.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = JP84.Create.Roofrack,
+					init = JP84.Init.Roofrack,
+				}
+		}
+	}
+}
+

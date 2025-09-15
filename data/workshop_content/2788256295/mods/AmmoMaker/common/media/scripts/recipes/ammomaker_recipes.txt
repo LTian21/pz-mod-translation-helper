@@ -1,0 +1,558 @@
+/* Ammo Maker by STIMP_TM */
+
+module ammomaker {
+
+	imports
+	{
+		Base
+	}
+
+/* CORE RECIPES */
+
+	craftRecipe DissolveBirdExcrement
+	{
+		timedAction = MixingBowl,
+		Time = 100,
+		Tags = AnySurfaceCraft;Cooking,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		xpAward = Pottery:1,
+		ToolTip = Tooltip_Recipe_DissolveBirdExcrement,
+		inputs
+		{
+			item 1 [Base.Pot;Base.PotForged] flags[InheritCondition] mappers[potType] mode:destroy,
+			-fluid 1.5 categories[Water] mode:mixture,
+			item 100 [ammomaker.ammomaker_BirdExcrement;Base.Dung_Chicken;Base.Dung_Turkey],
+		}
+		outputs
+		{
+			item 1 mapper:potType,
+		}
+		itemMapper potType
+		{
+			ammomaker.ammomaker_PotOfBirdExcrement = Base.Pot,
+			ammomaker.ammomaker_PotForgedOfBirdExcrement = Base.PotForged,
+		}
+	}
+
+	craftRecipe ExtractNitre
+	{
+		timedAction = MixingBowl,
+		Time = 300,
+		Tags = AnySurfaceCraft;Cooking,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		OnCreate = Recipe.OnCreate.ExtractNitre,
+		xpAward = Pottery:1,
+		ToolTip = Tooltip_Recipe_ExtractNitre,
+		inputs {}
+		outputs {}
+	}
+
+	craftRecipe MakeFilterPaper
+	{
+		timedAction = Making,
+		Time = 30,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		OnCreate = Recipe.OnCreate.MakeFilterPaper,
+		ToolTip = Tooltip_Recipe_MakeFilterPaper,
+		inputs
+		{
+			item 1 [Base.SheetPaper2;Base.Notebook;Base.Journal;Base.IndexCard;Base.Note;Base.Notepad;Base.Paperwork;Base.LetterHandwritten;Base.Doodle;Base.DoodleKids;Base.StockCertificate],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;IsNotDull],
+		}
+		outputs
+		{
+			item 1 ammomaker.ammomaker_FilterPaper,
+			/* add more filter paper depending on input via recipeCode */
+		}
+	}
+
+	craftRecipe ExtractSulfurFromStones
+	{
+		timedAction = ChoppingBlock_Hammer,
+		Time = 300,
+		Tags = AnySurfaceCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		xpAward = Masonry:5,
+		ToolTip = Tooltip_Recipe_ExtractSulfurFromStones,
+		inputs
+		{
+			item 6 [Base.Stone2],
+			item 1 [Base.EmptySandbag],
+			item 1 tags[ClubHammer;Hammer] mode:keep flags[MayDegradeLight],
+		}
+		outputs
+		{
+			item 10 ammomaker.ammomaker_Sulfur,
+			item 1 Base.Gravelbag,
+		}
+	}
+
+	craftRecipe MakeCharcoalPowder
+	{
+		timedAction = Making,
+		Time = 100,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		xpAward = Cooking:1,
+		ToolTip = Tooltip_Recipe_MakeCharcoalPowder,
+		inputs
+		{
+			item 1 tags[Charcoal],
+			item 1 tags[MortarPestle] mode:keep flags[MayDegradeLight],
+		}
+		outputs
+		{
+			item 80 ammomaker.ammomaker_CharcoalPowder,
+		}
+	}
+
+	craftRecipe MakeGunpowder
+	{
+		timedAction = Making,
+		Time = 500,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		xpAward = Cooking:1,
+		ToolTip = Tooltip_Recipe_MakeGunpowder,
+		inputs
+		{
+			item 15 [ammomaker.ammomaker_Nitre],
+			item 3 [ammomaker.ammomaker_CharcoalPowder],
+			item 2 [ammomaker.ammomaker_Sulfur],
+			item 1 tags[MortarPestle] mode:keep flags[MayDegradeLight],
+		}
+		outputs
+		{
+			item 4 Base.GunPowder flags[HasOneUse],
+		}
+	}
+
+	craftRecipe WeighGunpowderGrains
+	{
+		timedAction = Making,
+		Time = 200,
+		Tags = AnySurfaceCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		xpAward = Cooking:1,
+		ToolTip = Tooltip_Recipe_WeighGunpowderGrains,
+		inputs
+		{
+			item 1 [Base.GunPowder],
+			item 1 [ammomaker.ammomaker_GunPowderScale] mode:keep,
+		}
+		outputs
+		{
+			item 7 ammomaker.ammomaker_GunPowderGrains,
+		}
+	}
+
+	craftRecipe WeighGunpowderUnit
+	{
+		timedAction = Making,
+		Time = 200,
+		Tags = AnySurfaceCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		xpAward = Cooking:1,
+		ToolTip = Tooltip_Recipe_WeighGunpowderUnit,
+		inputs
+		{
+			item 700 [ammomaker.ammomaker_GunPowderGrains],
+			item 1 [ammomaker.ammomaker_GunPowderScale] mode:keep,
+		}
+		outputs
+		{
+			item 1 Base.GunPowder flags[HasOneUse],
+		}
+	}
+
+	craftRecipe MakeGunpowderScale
+	{
+		timedAction = Making,
+		Time = 500,
+		Tags = AnySurfaceCraft;Carpentry,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		xpAward = Woodwork:5,
+		ToolTip = Tooltip_Recipe_MakeGunpowderScale,
+		inputs
+		{
+			item 1 [Base.Plank],
+			item 2 [Base.Nails],
+			item 2 [Base.ScrapMetal],
+			item 6 [ammomaker.ammomaker_JewelryChain],
+			item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+			item 1 tags[Saw] mode:keep flags[MayDegradeLight;Prop1],
+		}
+		outputs
+		{
+			item 1 ammomaker.ammomaker_GunPowderScale,
+		}
+	}
+
+	craftRecipe MakeReloadingPress
+	{
+		timedAction = Making,
+		Time = 500,
+		Tags = AnySurfaceCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		ToolTip = Tooltip_Recipe_MakeReloadingPress,
+		inputs
+		{
+			item 10 [Base.Screws],
+			item 1 [Base.PaintBlack;Base.PaintBlue;Base.PaintBrown;Base.PaintCyan;Base.PaintGreen;Base.PaintGrey;Base.PaintLightBlue;Base.PaintLightBrown;Base.PaintOrange;Base.PaintPink;Base.PaintPurple;Base.PaintRed;Base.PaintTurquoise;Base.PaintWhite;Base.PaintYellow] mappers[reloadingPressColor],
+			item 1 [ammomaker.ammomaker_ReloadingPressBase],
+			item 1 [ammomaker.ammomaker_ReloadingPressDiePlate],
+			item 1 [ammomaker.ammomaker_ReloadingPressDieSet],
+			item 1 [ammomaker.ammomaker_ReloadingPressLinkage],
+			item 1 [ammomaker.ammomaker_ReloadingPressHandle],
+			item 1 tags[Screwdriver] mode:keep flags[Prop1],
+			item 1 tags[Pliers;ViseGrips] mode:keep,
+			item 1 tags[Paintbrush] mode:keep,
+		}
+		outputs
+		{
+			item 1 mapper:reloadingPressColor,
+		}
+		itemMapper reloadingPressColor
+		{
+			ammomaker.ammomaker_ReloadingPressBlue = Base.PaintBlue,
+			ammomaker.ammomaker_ReloadingPressBlack = Base.PaintBlack,
+			ammomaker.ammomaker_ReloadingPressBrown = Base.PaintBrown,
+			ammomaker.ammomaker_ReloadingPressCyan = Base.PaintCyan,
+			ammomaker.ammomaker_ReloadingPressGreen = Base.PaintGreen,
+			ammomaker.ammomaker_ReloadingPressGrey = Base.PaintGrey,
+			ammomaker.ammomaker_ReloadingPressLightBlue = Base.PaintLightBlue,
+			ammomaker.ammomaker_ReloadingPressLightBrown = Base.PaintLightBrown,
+			ammomaker.ammomaker_ReloadingPressOrange = Base.PaintOrange,
+			ammomaker.ammomaker_ReloadingPressPink = Base.PaintPink,
+			ammomaker.ammomaker_ReloadingPressPurple = Base.PaintPurple,
+			ammomaker.ammomaker_ReloadingPressRed = Base.PaintRed,
+			ammomaker.ammomaker_ReloadingPressTurquoise = Base.PaintTurquoise,
+			ammomaker.ammomaker_ReloadingPressWhite = Base.PaintWhite,
+			ammomaker.ammomaker_ReloadingPressYellow = Base.PaintYellow,
+		}
+	}
+
+	craftRecipe RepaintReloadingPress
+	{
+		timedAction = Making,
+		Time = 100,
+		Tags = AnySurfaceCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		ToolTip = Tooltip_Recipe_RepaintReloadingPress,
+		inputs
+		{
+			item 1 [Base.PaintBlack;Base.PaintBlue;Base.PaintBrown;Base.PaintCyan;Base.PaintGreen;Base.PaintGrey;Base.PaintLightBlue;Base.PaintLightBrown;Base.PaintOrange;Base.PaintPink;Base.PaintPurple;Base.PaintRed;Base.PaintTurquoise;Base.PaintWhite;Base.PaintYellow] mappers[reloadingPressColor],
+			item 1 tags[ammomaker_ReloadingPress],
+			item 1 tags[Paintbrush] mode:keep flags[Prop1],
+		}
+		outputs
+		{
+			item 1 mapper:reloadingPressColor,
+		}
+		itemMapper reloadingPressColor
+		{
+			ammomaker.ammomaker_ReloadingPressBlue = Base.PaintBlue,
+			ammomaker.ammomaker_ReloadingPressBlack = Base.PaintBlack,
+			ammomaker.ammomaker_ReloadingPressBrown = Base.PaintBrown,
+			ammomaker.ammomaker_ReloadingPressCyan = Base.PaintCyan,
+			ammomaker.ammomaker_ReloadingPressGreen = Base.PaintGreen,
+			ammomaker.ammomaker_ReloadingPressGrey = Base.PaintGrey,
+			ammomaker.ammomaker_ReloadingPressLightBlue = Base.PaintLightBlue,
+			ammomaker.ammomaker_ReloadingPressLightBrown = Base.PaintLightBrown,
+			ammomaker.ammomaker_ReloadingPressOrange = Base.PaintOrange,
+			ammomaker.ammomaker_ReloadingPressPink = Base.PaintPink,
+			ammomaker.ammomaker_ReloadingPressPurple = Base.PaintPurple,
+			ammomaker.ammomaker_ReloadingPressRed = Base.PaintRed,
+			ammomaker.ammomaker_ReloadingPressTurquoise = Base.PaintTurquoise,
+			ammomaker.ammomaker_ReloadingPressWhite = Base.PaintWhite,
+			ammomaker.ammomaker_ReloadingPressYellow = Base.PaintYellow,
+		}
+	}
+
+	craftRecipe MakeBrassCatcherImprovised
+	{
+		timedAction = SewingCloth,
+		Time = 100,
+		Tags = AnySurfaceCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		xpAward = Tailoring:5,
+		ToolTip = Tooltip_Recipe_MakeBrassCatcherImprovised,
+		inputs
+		{
+			item 1 [Base.BurlapPiece] flags[Prop2],
+			item 2 [Base.DuctTape] flags[Prop1],
+			item 1 [Base.Wire],
+			item 1 tags[Scissors;SharpKnife] mode:keep,
+			item 1 tags[Pliers;ViseGrips] mode:keep,
+		}
+		outputs
+		{
+			item 1 ammomaker.ammomaker_BrassCatcherImprovised,
+		}
+	}
+
+	craftRecipe MakeBrassCatcherAdvanced
+	{
+		timedAction = SewingCloth,
+		Time = 300,
+		Tags = AnySurfaceCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		SkillRequired = MetalWelding:4,
+		xpAward = MetalWelding:25,
+		ToolTip = Tooltip_Recipe_MakeBrassCatcherAdvanced,
+		inputs
+		{
+			item 1 [ammomaker.ammomaker_BrassCatcherImprovised],
+			item 2 [Base.SmallSheetMetal],
+			item 4 [Base.Screws],
+			item 1 [Base.BlowTorch],
+			item 1 tags[Pliers;ViseGrips] mode:keep,
+		}
+		outputs
+		{
+			item 1 ammomaker.ammomaker_BrassCatcherAdvanced,
+		}
+	}
+
+	craftRecipe MakeMold
+	{
+		timedAction = Making,
+		Time = 100,
+		Tags = AnySurfaceCraft;Carpentry,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		xpAward = Woodwork:5,
+		ToolTip = Tooltip_Recipe_MakeMold,
+		inputs
+		{
+			item 4 [Base.Sandbag],
+			item 1 [Base.Plank],
+			item 2 [Base.Nails],
+			item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+			item 1 tags[Saw] mode:keep flags[MayDegradeLight;Prop1],
+		}
+		outputs
+		{
+			item 1 ammomaker.ammomaker_Mold,
+		}
+	}
+
+	craftRecipe MakeMoldBullets
+	{
+		timedAction = Making,
+		Time = 200,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		OnCreate = Recipe.OnCreate.MakeMoldBullets,
+		xpAward = Pottery:10,
+		ToolTip = Tooltip_Recipe_MakeMoldBullets,
+		inputs {}
+		outputs {}
+	}
+
+	craftRecipe DisassembleAmmo
+	{
+		timedAction = Making,
+		Time = 30,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		OnCreate = Recipe.OnCreate.DisassembleAmmo,
+		ToolTip = Tooltip_Recipe_DisassembleAmmo,
+		inputs {}
+		outputs {}
+	}
+
+	craftRecipe PackAmmoParts
+	{
+		timedAction = OpenAmmoBox,
+		Time = 15,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		ToolTip = Tooltip_Recipe_PackAmmoParts,
+		inputs {}
+		outputs {}
+	}
+
+	craftRecipe UnpackAmmoParts
+	{
+		timedAction = PlaceAmmoInBox,
+		Time = 15,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		ToolTip = Tooltip_Recipe_UnpackAmmoParts,
+		inputs {}
+		outputs {}
+	}
+
+	craftRecipe PolishCasing
+	{
+		timedAction = Making,
+		Time = 10,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		ToolTip = Tooltip_Recipe_PolishCasing,
+		inputs {}
+		outputs {}
+	}
+
+	craftRecipe MakePolishingCompound
+	{
+		timedAction = MixingBowl,
+		Time = 50,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		xpAward = Pottery:1,
+		ToolTip = Tooltip_Recipe_MakePolishingCompound,
+		inputs
+		{
+			item 1 [Base.Toothpaste;Base.Clay],
+			item 1 [Base.Sandbag],
+			item 1 [Base.TinCanEmpty] mode:destroy,
+			item 1 [*],
+			-fluid 0.2 categories[Water] mode:mixture,
+		}
+		outputs
+		{
+			item 1 ammomaker.ammomaker_PolishingCompound,
+		}
+	}
+
+	craftRecipe RecycleJewelryChain
+	{
+		timedAction = Making,
+		Time = 50,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		OnCreate = Recipe.OnCreate.RecycleJewelryChain,
+		ToolTip = Tooltip_Recipe_RecycleJewelryChain,
+		inputs
+		{
+			item 1 [Base.Necklace_DogTag;Base.Necklace_Gold;Base.Necklace_GoldRuby;Base.Necklace_GoldDiamond;Base.Necklace_Silver;Base.Necklace_SilverSapphire;Base.Necklace_SilverCrucifix;Base.Necklace_SilverDiamond;Base.NecklaceLong_Gold;Base.NecklaceLong_GoldDiamond;Base.NecklaceLong_Silver;Base.NecklaceLong_SilverEmerald;Base.NecklaceLong_SilverSapphire;Base.NecklaceLong_SilverDiamond;Base.Bracelet_ChainRightGold;Base.Bracelet_ChainLeftGold;Base.Bracelet_ChainRightSilver;Base.Bracelet_ChainLeftSilver],
+			item 1 tags[Scissors;Pliers] mode:keep flags[MayDegradeLight;IsNotDull],
+		}
+		outputs
+		{
+			item 1 ammomaker.ammomaker_JewelryChain,
+			/* add more jewelry chains depending on input via recipeCode */
+		}
+	}
+
+	craftRecipe RecyclePlastic
+	{
+		timedAction = Making,
+		Time = 50,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		OnCreate = Recipe.OnCreate.RecyclePlastic,
+		ToolTip = Tooltip_Recipe_RecyclePlastic,
+		inputs
+		{
+			item 1 [Base.Dice_10;Base.Dice_12;Base.Dice_20;Base.Dice_4;Base.Dice_6;Base.Dice_8;Base.Dice_00;Base.Bleach;Base.Bricktoys;Base.CreditCard;Base.CreditCard_Stolen;Base.Garbagebag;Base.Hat_DustMask;Base.Bag_TrashBag;Base.GuitarPick;Base.MayonnaiseEmpty;Base.GroceryBag1;Base.GroceryBag2;Base.GroceryBag3;Base.GroceryBag4;Base.GroceryBag5;Base.Plasticbag;Base.Plasticbag_Clothing;Base.Plasticbag_Bags;Base.GroceryBagGourmet;Base.PlasticCup;Base.PlasticFork;Base.PlasticKnife;Base.PlasticSpoon;Base.Spork;Base.PressID;Base.Sportsbottle;Base.Dice;Base.CatToy;Base.PokerChips;Base.Toothbrush;Base.Razor;Base.Disc_Retail;Base.Funnel;Base.TakeoutBox_Styrofoam;Base.Cube;Base.Lunchbox;Base.Lunchbox2;Base.Pipe;Base.PlasticTray;Base.Bag_ProtectiveCase;Base.Bag_ProtectiveCase_Survivalist;Base.Bag_ProtectiveCase_Tools;Base.Bag_ProtectiveCaseMilitary;Base.Bag_ProtectiveCaseMilitary_Medical;Base.Bag_ProtectiveCaseMilitary_Tools;Base.Bag_ProtectiveCaseSmall;Base.Bag_ProtectiveCaseSmall_Armorer;Base.Bag_ProtectiveCaseSmall_Electronics;Base.Bag_ProtectiveCaseSmall_Survivalist;Base.Bag_ProtectiveCaseSmall_WalkieTalkie;Base.Bag_ProtectiveCaseSmall_WalkieTalkiePolice;Base.Bag_ProtectiveCaseSmall_FirstAid;Base.Bag_ProtectiveCaseSmall_Pistol1;Base.Bag_ProtectiveCaseSmall_Pistol2;Base.Bag_ProtectiveCaseSmall_Pistol3;Base.Bag_ProtectiveCaseSmall_Revolver1;Base.Bag_ProtectiveCaseSmall_Revolver2;Base.Bag_ProtectiveCaseSmall_Revolver3;Base.Bag_ProtectiveCaseSmallMilitary;Base.Bag_ProtectiveCaseSmallMilitary_WalkieTalkie;Base.Bag_ProtectiveCaseSmallMilitary_FirstAid;Base.Bag_ProtectiveCaseSmallMilitary_Pistol1;Base.Bag_ProtectiveCaseBulky;Base.Bag_ProtectiveCaseBulky_SCBA;Base.Bag_ProtectiveCaseBulky_Audio;Base.Bag_ProtectiveCaseBulky_HAMRadio1;Base.Bag_ProtectiveCaseBulkyAmmo;Base.Bag_ProtectiveCaseBulkyAmmo_556;Base.Bag_ProtectiveCaseBulkyAmmo_223;Base.Bag_ProtectiveCaseBulkyAmmo_308;Base.Bag_ProtectiveCaseBulkyAmmo_ShotgunShells;Base.Bag_ProtectiveCaseBulkyAmmo_9mm;Base.Bag_ProtectiveCaseBulkyAmmo_38;Base.Bag_ProtectiveCaseBulkyAmmo_44;Base.Bag_ProtectiveCaseBulkyAmmo_45;Base.Bag_ProtectiveCaseBulkyAmmo_Hunting;Base.Bag_ProtectiveCaseBulkyMilitary;Base.Bag_ProtectiveCaseBulky_Survivalist;Base.Bag_ProtectiveCaseBulkyMilitary_HAMRadio2;Base.Bag_ProtectiveCaseBulkyHazard;Base.Bag_ProtectiveCaseSmall_KeyCutting;Base.RifleCase1;Base.RifleCase2;Base.RifleCase3;Base.RifleCase4;Base.ShotgunCase1;Base.ShotgunCase2;Base.Bag_RifleCase;Base.Bag_RifleCase_Police;Base.Bag_RifleCase_Police2;Base.Bag_RifleCase_Police3;Base.Bag_ShotgunCase_Police;Base.Bag_RifleCaseGreen;Base.Bag_RifleCaseGreen2;Base.Bag_ShotgunCaseGreen;Base.Bag_FluteCase;Base.Bag_ViolinCase;Base.Bag_TrumpetCase;Base.Bag_SaxophoneCase;Base.Cooler;Base.Cooler_Meat;Base.Cooler_Soda;Base.Cooler_Seafood;Base.Cooler_Beer;Base.Tacklebox;Base.PetrolCan;Base.ShinKneeGuard_L;Base.ShinKneeGuard_R;Base.ShinKneeGuard_L_Protective;Base.ShinKneeGuard_R_Protective;Base.ShinKneeGuard_L_TINT;Base.ShinKneeGuard_R_TINT;Base.ShinKneeGuard_L_Baseball;Base.ShinKneeGuard_R_Baseball;Base.ShinKneeGuard_L_IceHockey;Base.ShinKneeGuard_R_IceHockey;Base.ShinKneeGuard_L_Baseball;Base.ShinKneeGuard_R_Baseball;Base.Glasses_SafetyGoggles;Base.Pen;Base.BluePen;Base.GreenPen;Base.PenMultiColor;Base.RedPen;Base.MayonnaiseEmpty;Base.GamePieceBlack;Base.GamePieceRed;Base.GamePieceWhite;Base.Comb;Base.IDcard;Base.IDcard_Stolen;Base.IDcard_Female;Base.IDcard_Male;Base.ToiletBrush;Base.DogChew;Base.MeasuringTape;Base.VHS_Retail;Base.VHS_Home;Base.LighterDisposable;Base.Zipties;Base.Straw2;Base.Yoyo;Base.PonchoGarbageBag;Base.Apron_Garbage;Base.Vest_Garbage;Base.Hat_HeadSack_Garbage;Base.Dress_SmallGarbageStrapless;Base.Skirt_Normal_Garbage;Base.Skirt_Knees_Garbage;Base.Skirt_Long_Garbage;Base.Skirt_Short_Garbage;Base.Bandeau_Garbage;Base.Briefs_Garbage;Base.CuttingBoardPlastic;Base.FountainCup;Base.MarkerBlack;Base.MarkerBlue;Base.MarkerGreen;Base.MarkerRed] flags[IsEmpty;ItemCount] mode:destroy,
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;IsNotDull],
+		}
+		outputs
+		{
+			item 1 ammomaker.ammomaker_RecPlastic,
+			/* add more recycled plastic depending on input via recipeCode */
+		}
+	}
+
+	craftRecipe RepairHullsFiredShotgunS
+	{
+		timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		ToolTip = Tooltip_Recipe_RepairHullsFiredShotgunS,
+		inputs
+		{
+			item 1 [ammomaker.ammomaker_RecPlastic],
+			item 20 [ammomaker.ammomaker_HullFiredShotgunS],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;IsNotDull],
+		}
+		outputs
+		{
+			item 20 ammomaker.ammomaker_HullShotgunS,
+		}
+	}
+
+	craftRecipe RepairHullsFiredShotgunL
+	{
+		timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		ToolTip = Tooltip_Recipe_RepairHullsFiredShotgunL,
+		inputs
+		{
+			item 1 [ammomaker.ammomaker_RecPlastic],
+			item 10 [ammomaker.ammomaker_HullFiredShotgunL],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;IsNotDull],
+		}
+		outputs
+		{
+			item 10 ammomaker.ammomaker_HullShotgunL,
+		}
+	}
+
+	craftRecipe Convert1Ball00ToBalls00
+	{
+		timedAction = Making,
+		Time = 5,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		ToolTip = Tooltip_Recipe_Convert1Ball00ToBalls00,
+		inputs
+		{
+			item 1 [ammomaker.ammomaker_Ball00],
+		}
+		outputs
+		{
+			item 1 ammomaker.ammomaker_Balls00 flags[HasOneUse],
+		}
+	}
+
+	craftRecipe Convert100Ball00ToBalls00
+	{
+		timedAction = Making,
+		Time = 5,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		ToolTip = Tooltip_Recipe_Convert100Ball00ToBalls00,
+		inputs
+		{
+			item 100 [ammomaker.ammomaker_Ball00],
+		}
+		outputs
+		{
+			item 1 ammomaker.ammomaker_Balls00,
+		}
+	}
+
+}

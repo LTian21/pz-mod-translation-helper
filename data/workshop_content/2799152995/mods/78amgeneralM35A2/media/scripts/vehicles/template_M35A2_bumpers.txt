@@ -1,0 +1,91 @@
+module Base
+{
+	model 78amgeneralM35A2bumper1
+	{
+		mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_bumper1,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M35A2Bumpers
+		{
+		part M35A2Bumper
+        	{
+
+			model M35Bumper1
+				{
+                		file = 78amgeneralM35A2bumper1,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M35A2Bumper1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M35A2.InstallComplete.Bumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 650,
+			skills = Mechanics:3,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = M35A2.UninstallComplete.Bumper,
+            		}
+
+            		lua
+            		{
+			create = M35A2.Create.Bumper,
+			init = M35A2.Init.Bumper,
+			}
+		}
+
+        part M35A2BumperRear
+        	{
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.M35A2BumperRear1_Item,
+                repairMechanic = true,
+				mechanicRequireKey = false,
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+		
+}

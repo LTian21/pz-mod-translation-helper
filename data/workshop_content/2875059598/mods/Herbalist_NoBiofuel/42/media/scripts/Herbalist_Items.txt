@@ -1,0 +1,583 @@
+module Herbalist
+{
+        imports
+        {
+        Base
+        }
+
+		item BlackSageCataplasm
+	{
+		DisplayCategory = FirstAid,
+		Weight		= 0.2,
+		Type		= Normal,
+		DisplayName	= Black Sage Poultice,
+		Icon		= MashedHerbs,
+		Tooltip 	= Tooltip_Painkillers,
+		WorldStaticModel= Poultice,
+	}
+
+		item GinsengCataplasm
+	{
+		DisplayCategory = FirstAid,
+		Weight		= 0.2,
+		Type		= Normal,
+		DisplayName	= Ginseng Poultice,
+		Icon		= MashedHerbs,
+		Tooltip 	= Tooltip_Antidepressants,
+		WorldStaticModel= Poultice,
+	}
+
+		item CommonMallowCataplasm
+	{
+		DisplayCategory = FirstAid,
+		Weight		= 0.2,
+		Type		= Normal,
+		DisplayName	= Common Mallow Poultice,
+		Icon		= MashedHerbs,
+		Tooltip 	= Tooltip_Antibiotics,
+		WorldStaticModel= Poultice,
+	}
+
+		item GranolaBarsTray
+	{
+		DisplayName = Granola Bars Baking Tray,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 1.7,
+		Icon = BakingTray_CookiesBaked,
+		CantBeFrozen = TRUE,
+		IsCookable = true,
+		ReplaceOnUse = BakingTray,
+		MinutesToCook = 30,
+		MinutesToBurn = 60,
+		DaysFresh = 7,
+		DaysTotallyRotten = 30,
+		CantEat 	= true,
+		ReplaceOnCooked 	= Base.GranolaBar;Base.GranolaBar;Base.GranolaBar;Base.GranolaBar;Base.GranolaBar;Base.GranolaBar;Base.BakingTray,
+		WorldStaticModel = BakingTray_Cookies,
+	}
+
+		item HoneyComb
+	{
+		DisplayCategory = Food,
+		Weight		= 1,
+		Type		= Normal,
+		DisplayName	= Honey Comb,
+		Icon		= HoneycombIcon,
+		Tooltip 	= Tooltip_Honey,
+	}
+
+		item Sap
+	{
+		DisplayCategory = Food,
+		Weight		= 0.3,
+		Type		= Normal,
+		DisplayName	= Tree Sap,
+		Icon		= SapIcon,
+		Tooltip 	= Tooltip_Sap,
+	}
+
+		item DriedMushrooms
+	{
+		DisplayName = Dried Mushrooms,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.6,
+		Icon = DriedMushroomsIcon,
+		FoodType = Mushroom,
+		HerbalistType = Mushroom,
+		OnEat = OnEat_WildFoodGeneric,
+		DaysFresh = 90,
+		DaysTotallyRotten = 120,
+		HungerChange = -30,
+		ThirstChange = -1,
+		Calories = 60,
+		Carbohydrates = 6.24,
+		Lipids = 0.24,
+		Proteins = 6.04,
+		Tags = DriedFood,
+		WorldStaticModel = MushroomGeneric1,
+	}
+	
+		item RiceMilkBottle
+	{
+		DisplayName = Bottle of Rice Milk,
+		DisplayCategory = Food,
+		Type = Normal,
+		Weight = 0.5,
+		Icon = RiceMilkIcon,
+		CustomContextMenu = Drink,
+		CustomEatSound = DrinkingFromCarton,
+		StaticModel = MilkCarton,
+		WorldStaticModel = Milk_Ground,
+
+        	component FluidContainer
+        	{
+            	ContainerName   = Carton,
+            	capacity        = 1.0,
+		CustomDrinkSound = DrinkingFromCarton,
+
+            	Fluids
+            		{
+                	fluid           = RiceMilk:1.0,
+            		}
+        	}
+	}
+
+		item BowlofChips
+	{
+		DisplayName = Bowl of Chips,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.7,
+		Icon = BowlofChipsIcon,
+		ReplaceOnUse = Bowl,
+		DaysFresh = 30,
+		DaysTotallyRotten = 50,
+		CantBeFrozen = TRUE,
+		HungerChange = -15,
+		Calories = 720,
+		Carbohydrates = 72,
+		Lipids = 45,
+		Proteins = 4.5,
+		CustomEatSound = EatingCrispy,
+		WorldStaticModel = BowlChips_Ground,
+	}
+	
+		item TortillaDough
+	{
+		DisplayName = Tortilla Dough,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.3,
+		Icon = Dough,
+		EatType = 2handforced,
+		IsCookable = TRUE,
+		EvolvedRecipe = AddBaitToChum:10,
+		RemoveNegativeEffectOnCooked = TRUE,
+		MinutesToCook = 20,
+		MinutesToBurn = 50,
+		DaysFresh = 3,
+		DaysTotallyRotten = 6,
+		HungerChange = -24,
+		ThirstChange = 15,
+		UnhappyChange = 10,
+		Calories = 532,
+		Carbohydrates = 99,
+		Lipids = 6.66,
+		Proteins = 17.7,
+		FishingLure = true,
+		StaticModel = BreadDough,
+		WorldStaticModel = BreadDough,
+	}
+	
+		item AcornCoffee
+	{
+		DisplayName = Acorn Coffee,
+		DisplayCategory = Food,
+		EatType = candrink,
+		Type = Food,
+		Weight = 1,
+		Icon = AcornCoffeeIcon,
+		EvolvedRecipe = HotDrink:5,
+		FoodType = Coffee,
+		Packaged = TRUE,
+		FatigueChange = -50,
+		HungerChange = -30,
+		ThirstChange = 60,
+		UnhappyChange = 20,
+		Calories = 2,
+		Carbohydrates = 0,
+		Lipids = 0,
+		Proteins = 1,
+		StaticModel = Coffee,
+		WorldStaticModel = Coffee,
+	}
+	
+		item ToastedAcorn
+	{
+		DisplayName = Toasted Acorn,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.3,
+		Icon = ChocolateChips,
+		FoodType = Chocolate,
+		HungerChange = -6,
+		UnhappyChange = 10,
+		ThirstChange = 10,
+		Calories = 50,
+		Carbohydrates = 17,
+		Lipids = 8,
+		Proteins = 1,
+		CustomEatSound = EatingCrispy,
+		WorldStaticModel = ChocolateChips_Ground,
+	}
+	
+/******* INFUSI E BOLLITI *******/
+
+		item GinsengInfusionUnboiled
+	{
+		DisplayName = Ginseng Infusion Unboiled,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 1.3,
+		Icon = SaucepanFilled,
+		BadInMicrowave = true,
+		CookingSound = BoilingFood,
+		IsCookable = true,
+		CantEat 	= true,
+		ReplaceOnCooked 	= Herbalist.GinsengInfusion,
+		MinutesToCook = 30,
+		MinutesToBurn = 60,
+		StaticModel = SaucePan,
+		WorldStaticModel = WaterSaucepan,
+		Tags = HasMetal,
+	}
+	
+		item GinsengInfusion
+	{
+		DisplayName = Saucepan,
+		DisplayCategory = CookingWeapon,
+		Type = Weapon,
+		Weight = 0.7,
+		Icon = SaucepanEmpty,
+		IconFluidMask = Saucepan_Mask,
+		AttachmentType = Saucepan,
+		BaseSpeed = 1,
+		BreakSound = SaucepanBreak,
+		CanStoreWater = TRUE,
+		Categories = Improvised;SmallBlunt,
+		ConditionLowerChanceOneIn = 10,
+		ConditionMax = 5,
+		CritDmgMultiplier = 2,
+		CriticalChance = 30,
+		DoorDamage = 1,
+		DoorHitSound = SaucepanHit,
+		DropSound = SaucepanDrop,
+		HitFloorSound = SaucepanHit,
+		HitSound = SaucepanHit,
+		KnockBackOnNoDeath = FALSE,
+		KnockdownMod = 0,
+		MaxDamage = 0.7,
+		MaxHitCount = 2,
+		MaxRange = 1,
+		MetalValue = 30,
+		MinAngle = 0.65,
+		MinDamage = 0.2,
+		MinRange = 0.61,
+		MinimumSwingTime = 2,
+		PushBackMod = 0.3,
+		RainFactor = 0.8,
+		ReplaceOnUse = Saucepan,
+		SplatBloodOnNoDeath = FALSE,
+		SplatNumber = 1,
+		SubCategory = Swinging,
+		SwingAmountBeforeImpact = 0.02,
+		SwingAnim = Bat,
+		SwingSound = SaucepanSwing,
+		SwingTime = 2,
+		Tooltip = Tooltip_DisinfectantPan,
+		TreeDamage = 0,
+		WeaponLength = 0.2,
+		WeaponSprite = SaucePan,
+		StaticModel = SaucePan,
+		Tags = HasMetal;NoMaintenanceXp;SmeltableIronSmall,
+
+        component FluidContainer
+        {
+			ContainerName   = Saucepan,
+			RainFactor	= 0.5,
+			capacity        = 0.6,
+			Fluids
+            		{
+                		fluid           = GinsengFluid:0.6,
+            		}
+		}
+	}
+
+		item LemongrassRemedyUnboiled
+	{
+		DisplayName = Lemongrass Remedy Unboiled,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 1.3,
+		Icon = SaucepanFilled,
+		BadInMicrowave = true,
+		CookingSound = BoilingFood,
+		IsCookable = true,
+		CantEat 	= true,
+		ReplaceOnCooked 	= Herbalist.LemongrassRemedy,
+		MinutesToCook = 30,
+		MinutesToBurn = 50,
+		StaticModel = SaucePan,
+		WorldStaticModel = WaterSaucepan,
+		Tags = HasMetal,
+	}
+
+		item LemongrassRemedy
+	{
+		DisplayName = Saucepan,
+		DisplayCategory = CookingWeapon,
+		Type = Weapon,
+		Weight = 0.7,
+		Icon = SaucepanEmpty,
+		IconFluidMask = Saucepan_Mask,
+		AttachmentType = Saucepan,
+		BaseSpeed = 1,
+		BreakSound = SaucepanBreak,
+		CanStoreWater = TRUE,
+		Categories = Improvised;SmallBlunt,
+		ConditionLowerChanceOneIn = 10,
+		ConditionMax = 5,
+		CritDmgMultiplier = 2,
+		CriticalChance = 30,
+		DoorDamage = 1,
+		DoorHitSound = SaucepanHit,
+		DropSound = SaucepanDrop,
+		HitFloorSound = SaucepanHit,
+		HitSound = SaucepanHit,
+		KnockBackOnNoDeath = FALSE,
+		KnockdownMod = 0,
+		MaxDamage = 0.7,
+		MaxHitCount = 2,
+		MaxRange = 1,
+		MetalValue = 30,
+		MinAngle = 0.65,
+		MinDamage = 0.2,
+		MinRange = 0.61,
+		MinimumSwingTime = 2,
+		PushBackMod = 0.3,
+		RainFactor = 0.8,
+		ReplaceOnUse = Saucepan,
+		SplatBloodOnNoDeath = FALSE,
+		SplatNumber = 1,
+		SubCategory = Swinging,
+		SwingAmountBeforeImpact = 0.02,
+		SwingAnim = Bat,
+		SwingSound = SaucepanSwing,
+		SwingTime = 2,
+		Tooltip = Tooltip_DisinfectantPan,
+		TreeDamage = 0,
+		WeaponLength = 0.2,
+		WeaponSprite = SaucePan,
+		StaticModel = SaucePan,
+		Tags = HasMetal;NoMaintenanceXp;SmeltableIronSmall,
+
+        component FluidContainer
+        {
+			ContainerName   = Saucepan,
+			RainFactor	= 0.5,
+			capacity        = 0.6,
+			Fluids
+            		{
+                		fluid           = LemongrassFluid:0.6,
+            		}
+		}
+	}
+
+		item MallowHerbalTeaUnboiled
+	{
+		DisplayName = Mallow Herbal Tea Unboiled,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 1.3,
+		Icon = SaucepanFilled,
+		BadInMicrowave = true,
+		CookingSound = BoilingFood,
+		IsCookable = true,
+		CantEat 	= true,
+		ReplaceOnCooked 	= Herbalist.MallowHerbalTea,
+		MinutesToCook = 30,
+		MinutesToBurn = 50,
+		StaticModel = SaucePan,
+		WorldStaticModel = WaterSaucepan,
+		Tags = HasMetal,
+	}
+
+		item MallowHerbalTea
+	{
+		DisplayName = Saucepan,
+		DisplayCategory = CookingWeapon,
+		Type = Weapon,
+		Weight = 0.7,
+		Icon = SaucepanEmpty,
+		IconFluidMask = Saucepan_Mask,
+		AttachmentType = Saucepan,
+		BaseSpeed = 1,
+		BreakSound = SaucepanBreak,
+		CanStoreWater = TRUE,
+		Categories = Improvised;SmallBlunt,
+		ConditionLowerChanceOneIn = 10,
+		ConditionMax = 5,
+		CritDmgMultiplier = 2,
+		CriticalChance = 30,
+		DoorDamage = 1,
+		DoorHitSound = SaucepanHit,
+		DropSound = SaucepanDrop,
+		HitFloorSound = SaucepanHit,
+		HitSound = SaucepanHit,
+		KnockBackOnNoDeath = FALSE,
+		KnockdownMod = 0,
+		MaxDamage = 0.7,
+		MaxHitCount = 2,
+		MaxRange = 1,
+		MetalValue = 30,
+		MinAngle = 0.65,
+		MinDamage = 0.2,
+		MinRange = 0.61,
+		MinimumSwingTime = 2,
+		PushBackMod = 0.3,
+		RainFactor = 0.8,
+		ReplaceOnUse = Saucepan,
+		SplatBloodOnNoDeath = FALSE,
+		SplatNumber = 1,
+		SubCategory = Swinging,
+		SwingAmountBeforeImpact = 0.02,
+		SwingAnim = Bat,
+		SwingSound = SaucepanSwing,
+		SwingTime = 2,
+		Tooltip = Tooltip_DisinfectantPan,
+		TreeDamage = 0,
+		WeaponLength = 0.2,
+		WeaponSprite = SaucePan,
+		StaticModel = SaucePan,
+		Tags = HasMetal;NoMaintenanceXp;SmeltableIronSmall,
+
+        component FluidContainer
+        {
+			ContainerName   = Saucepan,
+			RainFactor	= 0.5,
+			capacity        = 0.6,
+			Fluids
+            		{
+                		fluid           = MallowFluid:0.6,
+            		}
+		}
+	}
+
+		item DisinfectantUnboiled
+	{
+		DisplayName = Disinfectant Unboiled,
+		DisplayCategory = FirstAid,
+		Type = Food,
+		Weight = 1.4,
+		Icon = SaucepanFilled,
+		BadInMicrowave = true,
+		CookingSound = BoilingFood,
+		IsCookable = true,
+		CantEat 	= true,
+		ReplaceOnCooked 	= Herbalist.Disinfectant,
+		MinutesToCook = 30,
+		MinutesToBurn = 60,
+		StaticModel = SaucePan,
+		WorldStaticModel = WaterSaucepan,
+		Tags = HasMetal,
+	}
+
+		item Disinfectant
+	{
+		DisplayName = Saucepan with Disinfectant,
+		DisplayCategory = CookingWeapon,
+		Type = Weapon,
+		Weight = 0.7,
+		Icon = SaucepanEmpty,
+		IconFluidMask = Saucepan_Mask,
+		AttachmentType = Saucepan,
+		BaseSpeed = 1,
+		BreakSound = SaucepanBreak,
+		CanStoreWater = TRUE,
+		Categories = Improvised;SmallBlunt,
+		ConditionLowerChanceOneIn = 10,
+		ConditionMax = 5,
+		CritDmgMultiplier = 2,
+		CriticalChance = 30,
+		DoorDamage = 1,
+		DoorHitSound = SaucepanHit,
+		DropSound = SaucepanDrop,
+		HitFloorSound = SaucepanHit,
+		HitSound = SaucepanHit,
+		KnockBackOnNoDeath = FALSE,
+		KnockdownMod = 0,
+		MaxDamage = 0.7,
+		MaxHitCount = 2,
+		MaxRange = 1,
+		MetalValue = 30,
+		MinAngle = 0.65,
+		MinDamage = 0.2,
+		MinRange = 0.61,
+		MinimumSwingTime = 2,
+		PushBackMod = 0.3,
+		RainFactor = 0.8,
+		ReplaceOnUse = Base.Saucepan,
+		SplatBloodOnNoDeath = FALSE,
+		SplatNumber = 1,
+		SubCategory = Swinging,
+		SwingAmountBeforeImpact = 0.02,
+		SwingAnim = Bat,
+		SwingSound = SaucepanSwing,
+		SwingTime = 2,
+		Tooltip = Tooltip_DisinfectantPan,
+		TreeDamage = 0,
+		WeaponLength = 0.2,
+		WeaponSprite = SaucePan,
+		StaticModel = SaucePan,
+		Tags = HasMetal;NoMaintenanceXp;SmeltableIronSmall,
+
+        component FluidContainer
+        {
+			ContainerName   = Saucepan,
+			RainFactor	= 0.5,
+			capacity        = 0.6,
+			Fluids
+            		{
+                		fluid           = Alcohol:0.6,
+            		}
+		}
+	}
+	
+		item PotofSapUnboiled
+	{
+		DisplayName = Pot of Sap Unboiled,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 3,
+		Icon = PotFull,
+		CantBeFrozen = TRUE,
+		BadInMicrowave = true,
+		CookingSound = BoilingFood,
+		CantEat 	= true,
+		IsCookable = TRUE,
+		MinutesToCook = 70,
+		MinutesToBurn = 100,
+		DaysFresh = 6,
+		DaysTotallyRotten = 12,
+		ReplaceOnCooked 	= Herbalist.PotofMapleSyrup,
+		StaticModel = CookingPot,
+		WorldStaticModel = CookingPotSoup_Ground,
+		Tags = HasMetal,
+	}
+
+	item PotofMapleSyrup
+	{
+		DisplayName = Pot of Maple Syrup,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 1.4,
+		Icon = PotFull,
+		CantBeFrozen = TRUE,
+		BadInMicrowave = true,
+		ReplaceOnUse = Base.Pot,
+		EatType = Pot,
+		HungerChange = -45,
+		UnhappyChange = +10,
+		Calories = 1100,
+		Carbohydrates = 270,
+		Lipids = 0,
+		Proteins = 0,
+		StaticModel = CookingPot,
+		WorldStaticModel = CookingPotSoup_Ground,
+		Tags = HasMetal,
+	}
+
+/******* OVERRIDE TEST *******/
+}/*FINE CODICE*/

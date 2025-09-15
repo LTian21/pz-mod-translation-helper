@@ -1,0 +1,479 @@
+module Base
+{
+	model 63beetleHPBase
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_body_hp,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	model 63beetleHPInterior
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_interior_hp,
+		texture = Vehicles/Vehicles_63beetleHP_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 63beetleHPExhaust
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_exhaust2,
+		texture = Vehicles/Vehicles_63beetle_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	vehicle 63beetleHP
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 1.0,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.2,
+
+		model
+		{
+			file = 63beetleHPBase,
+			scale = 0.9000,
+			offset = 0.0000 0.6222 0.0000,
+		}
+
+		spawnOffsetY = 0,
+
+		skin
+		{
+			texture = Vehicles/Vehicles_63beetleHP_Shell_deep_ocean_blue,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_63beetleHP_Shell_yellow,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_63beetleHP_Shell_green,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_63beetleHP_Shell_purple_green,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_63beetleHP_Shell_shark_gray,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_63beetleHP_Shell_urban_camo,
+		}
+
+		textureRust = Vehicles/Vehicles_63beetle_Rust,
+		textureMask = Vehicles/Vehicles_63beetle_Mask,
+		textureLights = Vehicles/Vehicles_63beetle_Lights,
+		textureDamage1Shell = Vehicles/Vehicles_63beetle_Damage1,
+		textureDamage2Shell = Vehicles/Vehicles_63beetle_Damage2,
+		textureDamage1Overlay = Vehicles/Vehicles_63beetle_Blood,
+		textureDamage2Overlay = Vehicles/Vehicles_63beetle_Blood,
+		textureShadow = Vehicles/Vehicles_63beetle_Shadow,
+
+		sound
+		{
+			engine = VehicleEngineCarNormal,
+			engineStart = VehicleEngineCarNormal,
+			engineTurnOff = VehicleEngineCarNormal,
+			horn = VehicleHornStandard,
+			ignitionFail = VehicleIgnitionFailCarNormal,
+		}
+
+		extents = 1.7556 1.2222 3.9111,
+		mass = 850,
+		physicsChassisShape = 1.7333 1.2222 3.9111,
+		centerOfMassOffset = 0.0000 0.6333 0.0000,
+		shadowExtents = 1.9688 3.9015,
+		shadowOffset = -0.0001 0.0103,
+		engineForce = 7500,
+		maxSpeed = 120f,
+		engineLoudness = 89,
+		engineQuality = 83,
+		brakingForce = 85,
+		stoppingMovementForce = 3.5f,
+		rollInfluence = 0.95f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 45,
+		suspensionCompression = 3.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 12,
+		suspensionRestLength = 0.3,
+		wheelFriction = 2.20f,
+		frontEndHealth = 450,
+		rearEndHealth = 450,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.7333 -0.5333 1.2778,
+			radius = 0.30f,
+			width = 0.18f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.7333 -0.5333 1.2778,
+			radius = 0.30f,
+			width = 0.18f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.7333 -0.5333 -1.0667,
+			radius = 0.30f,
+			width = 0.18f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.7333 -0.5333 -1.0667,
+			radius = 0.30f,
+			width = 0.18f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.3111 -0.2444 0.0222,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.1111 -0.8333 -0.3444,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = -0.3111 -0.2444 0.0222,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.0889 -0.8333 -0.3778,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 -2.3444 1.0667 0.7778,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 2.3444 1.3333 0.7778,
+		}
+
+		area Roofrack
+		{
+			xywh = 0.0000 -0.1000 3.0889 1.6222,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.2667 0.2222 0.7778 0.8889,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.2667 0.2222 0.7778 0.8889,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -1.2667 -0.4000 0.7778 0.3556,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 1.2667 -0.4000 0.7778 0.3556,
+		}
+
+		area GasTank
+		{
+			xywh = 1.2667 1.5667 0.7778 0.7778,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.3222 1.2556 0.4222 0.4222,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.3222 1.2556 0.4222 0.4222,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.3222 -1.1000 0.4222 0.4222,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.3222 -1.1000 0.4222 0.4222,
+		}
+
+		template = BTL63TiresSlick,
+		template = BTL63Seats2,
+		template = BTL63FrontBumpersOFF,
+		template = BTL63RearBumpersOFF,
+		template = BTL63EngineDoor,
+		template = BTL63TrunkDoors,
+		template = BTL63TrunkCompartment,
+		template = BTL63Doors,
+		template = BTL63Windows4hp,
+		template = BTL63Windshieldshp,
+		template = BTL63SidestepsOFF,
+		template = BTL63SmallSpoiler,
+		template = BTL63Bodykit,
+		template = BTL63Armor,
+		template = BTL63SpareTires,
+		template = BTL63Roof,
+		template = BTL63Roofrackhp,
+
+		part GloveBox
+		{
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			model BTL63HPint
+			{
+				file = 63beetleHPInterior,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			container
+			{
+				capacity = 7,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			model BTL63gas
+			{
+				file = 63beetleGastank,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			table install
+			{
+				door = TrunkDoor,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+
+		part Battery
+		{
+			model BTL63tisbat
+			{
+				file = 63beetleTISBattery,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			model gigaMuffHP3000
+			{
+				file = 63beetleHPExhaust,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			area = Engine,
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+
+		part Radio
+		{
+			model MrRadio
+			{
+				file = 63beetleRadio,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		template = Headlight,
+
+		part HeadlightLeft
+		{
+			area = TruckBed,
+		}
+
+		part HeadlightRight
+		{
+			area = TruckBed,
+		}
+
+		part HeadlightRearLeft
+		{
+			area = Engine,
+		}
+
+		part HeadlightRearRight
+		{
+			area = Engine,
+		}
+
+		useChassisPhysicsCollision = false,
+
+		physics box
+		{
+			offset = 0.0000 0.3444 -0.0296,
+			extents = 1.7333 0.6444 3.9333,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.9444 -0.2295,
+			extents = 1.2889 0.5556 1.3111,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.9013 0.5000,
+			extents = 1.2889 0.6222 0.2222,
+			rotate = -33.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.6778 -1.1444,
+			extents = 1.2889 1.1111 0.4444,
+			rotate = 47.0000 0.0000 0.0000,
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.5111 -2.1000,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.5111 2.0778,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

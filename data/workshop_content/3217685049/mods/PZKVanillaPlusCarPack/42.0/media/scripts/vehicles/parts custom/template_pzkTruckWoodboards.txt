@@ -1,0 +1,83 @@
+module Base
+{
+	model pzkFranklinTruckF150Woodboards
+	{
+		mesh = vehicles/Vehicles_pzkFranklin150FFlatbed|Vehicle_F350FlatbedWoodboards,
+		texture = Vehicles/utilityPickup/vehicle_pzkFranklinF150-1UtilityWhiteColorshell,
+		scale = 0.01,
+
+	}
+	
+	
+	template vehicle pzkPickupWoodboards
+	{
+		part pzkPickupWoodboards
+        	{
+
+			model Default
+			{
+				file = pzkFranklinTruckF150Woodboards
+			}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.pzkTruckSideWoodboards,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    		1
+                    		{
+                            tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+				professions = ,
+				skills = ,
+				traits = ,
+				recipes = ,
+				test = Vehicles.InstallTest.Default,
+
+
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    		1
+                    		{
+                            tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+				professions = ,
+				skills = ,
+				traits = ,
+				recipes = ,
+				
+	            		test = Vehicles.UninstallTest.Default,
+
+
+            		}
+
+	            lua
+	            {
+
+				init = Vehicles.Init.Default,
+				}
+		}
+	}
+
+}
+

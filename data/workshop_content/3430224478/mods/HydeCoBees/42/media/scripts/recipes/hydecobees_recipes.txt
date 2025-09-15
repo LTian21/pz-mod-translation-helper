@@ -1,0 +1,841 @@
+module HydeCoBees
+{
+    imports
+    {
+        Base
+    }
+
+    craftRecipe MakeCheeseCurds
+    {
+        timedAction = Making,
+        time = 60,
+        tags = AnySurfaceCraft;Cooking,
+        category = BeeKeeping,
+        skillRequired = Cooking:2,
+        xpAward = Cooking:5,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_MakeCheeseCurds,
+        inputs
+        {
+            item 1 [Base.CheeseCloth] mode:keep flags[Prop2],
+            item 2 [Base.Salt;Base.SeasoningSalt] mode:destroy,
+            item 2 [Base.Vinegar2;Base.Lemon] mode:destroy,
+            item 1 [Base.Bowl;Base.Pot] mode:keep,
+            -fluid 0.5 [CowMilk],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.CheeseCurds,
+        }
+    }
+
+    craftRecipe MakeCheeseWheel
+    {
+        timedAction = Making,
+        time = 90,
+        tags = AnySurfaceCraft;Cooking,
+        category = BeeKeeping,
+        skillRequired = Cooking:3,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:3,
+        ToolTip = HydeCoBees_MakeCheeseWheel,
+        inputs
+        {
+            item 9 [Base.Cheese] mode:destroy flags[Prop2;AllowRottenItem;InheritFoodAge],
+            item 1 [Base.Pot] mode:keep,
+        }
+        outputs
+        {
+            item 1 HydeCoBees.CheeseWheel,
+        }
+    }
+
+    craftRecipe UnwaxCheeseSlice
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Cooking,
+        category = BeeKeeping,
+        skillRequired = Cooking:1,
+        ToolTip = HydeCoBees_UnwaxCheeseSlice,
+        needToBeLearn = false,
+        inputs
+        {
+            item 1 [HydeCoBees.WaxCoatedCheeseSlice] mode:destroy flags[AllowRottenItem;InheritFoodAge],
+        }
+        outputs
+        {
+            item 1 Base.Cheese,
+            item 1 HydeCoBees.WaxBits,
+        }
+    }
+
+    craftRecipe UnwaxCheeseWheel
+    {
+        timedAction = Making,
+        time = 90,
+        tags = AnySurfaceCraft;Cooking,
+        category = BeeKeeping,
+        skillRequired = Cooking:1,
+        ToolTip = HydeCoBees_UnwaxCheeseWheel,
+        xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [HydeCoBees.WaxCoatedCheeseWheel] mode:destroy flags[AllowRottenItem;InheritFoodAge],
+        }
+        outputs
+        {
+            item 9 Base.Cheese,
+            item 3 HydeCoBees.WaxBits,
+        }
+    }
+
+    craftRecipe WaxCheeseSlice
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Cooking,
+        category = BeeKeeping,
+        skillRequired = Cooking:1,
+        ToolTip = HydeCoBees_WaxCheeseSlice,
+        inputs
+        {
+            item 1 [Base.Cheese] mode:destroy flags[Prop2;AllowRottenItem;InheritFoodAge],
+            item 1 [HydeCoBees.WaxBits] mode:destroy,
+        }
+        outputs
+        {
+            item 1 HydeCoBees.WaxCoatedCheeseSlice,
+        }
+    }
+
+    craftRecipe SliceCheeseWheel
+    {
+        timedAction = Making,
+        time = 60,
+        tags = AnySurfaceCraft;Cooking,
+        category = BeeKeeping,
+        skillRequired = Cooking:1,
+        ToolTip = HydeCoBees_SliceCheeseWheel,
+        needToBeLearn = false,
+        inputs
+        {
+            item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+            item 1 [HydeCoBees.CheeseWheel] mode:destroy flags[Prop2;AllowRottenItem;InheritFoodAge],
+        }
+        outputs
+        {
+            item 9 Base.Cheese,
+        }
+    }
+
+    craftRecipe WaxCheeseWheel
+
+    {
+        timedAction = Making,
+        time = 90,
+        tags = AnySurfaceCraft;Cooking,
+        category = BeeKeeping,
+        skillRequired = Cooking:2,
+        ToolTip = HydeCoBees_WaxCheeseWheel,
+        inputs
+        {
+            item 1 [HydeCoBees.CheeseWheel] mode:destroy flags[Prop2;InheritFoodAge;AllowRottenItem],
+            item 3 [HydeCoBees.WaxBits] mode:destroy,
+        }
+        outputs
+        {
+            item 1 HydeCoBees.WaxCoatedCheeseWheel,
+        }
+    }
+
+    craftRecipe CraftBeesWaxCandle
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        xpAward = Foraging:3,
+        ToolTip = HydeCoBees_CraftBeesWaxCandle,
+        inputs
+        {
+            item 3 [HydeCoBees.WaxBits] mode:destroy flags[Prop2],
+            item 1 [Base.Twine],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BeesWaxCandle,
+        }
+    }
+
+    craftRecipe LightBeeswaxCandle
+    {
+        timedAction = Making,
+        Time = 30,
+        OnCreate = LightCandle_OnCreate,
+        ToolTip = HydeCoBees_LightBeeswaxCandle,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = BeeKeeping,
+        inputs
+        {
+            item 1 [HydeCoBees.BeesWaxCandle] mode:destroy flags[InheritUses;ItemCount],
+            item 1 tags[StartFire],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BeesWaxCandle_Lit,
+        }
+    }
+
+    craftRecipe ExtinguishBeeswaxCandle
+    {
+        timedAction = Making,
+        Time = 30,
+        OnCreate = ExtinguishCandle_OnCreate,
+        ToolTip = HydeCoBees_ExtinguishBeeswaxCandle,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = BeeKeeping,
+        inputs
+        {
+            item 1 [HydeCoBees.BeesWaxCandle_Lit] mode:destroy flags[InheritUses;ItemCount],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BeesWaxCandle,
+        }
+    }
+
+    craftRecipe CraftPaper
+    {
+        timedAction = Making,
+        time = 40,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_CraftPaper,
+        inputs
+        {
+            item 3 [HydeCoBees.PaperyHiveScraps] mode:destroy flags[Prop2],
+            item 1 [*],
+            -fluid 0.2 [Water],
+        }
+        outputs
+        {
+            item 1 Base.SheetPaper2,
+        }
+    }
+
+    craftRecipe MakeBallOfBeesWax
+    {
+        timedAction = Making,
+        time = 40,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_MakeBallOfBeesWax,
+        inputs
+        {
+            item 10 [HydeCoBees.WaxBits] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BallOfBeesWax,
+        }
+    }
+
+    craftRecipe BreakBallOfBeesWax
+    {
+        timedAction = Making,
+        time = 20,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_BreakBallOfBeesWax,
+        inputs
+        {
+            item 1 [HydeCoBees.BallOfBeesWax] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 10 HydeCoBees.WaxBits,
+        }
+    }
+
+    craftRecipe MakeBlackBeesWax
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_MakeBlackBeesWax,
+        inputs
+        {
+            item 1 [HydeCoBees.BallOfBeesWax] mode:destroy flags[Prop2],
+            item 1 [HydeCoBees.DyeBlack],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BeesWaxBlack,
+        }
+    }
+
+    craftRecipe MakeBlueBeesWax
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_MakeBlueBeesWax,
+        inputs
+        {
+            item 1 [HydeCoBees.BallOfBeesWax] mode:destroy flags[Prop2],
+            item 1 [HydeCoBees.DyeBlue],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BeesWaxBlue,
+        }
+    }
+
+    craftRecipe MakeGreenBeesWax
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_MakeGreenBeesWax,
+        inputs
+        {
+            item 1 [HydeCoBees.BallOfBeesWax] mode:destroy flags[Prop2],
+            item 1 [HydeCoBees.DyeGreen],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BeesWaxGreen,
+        }
+    }
+
+    craftRecipe MakeRedBeesWax
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_MakeRedBeesWax,
+        inputs
+        {
+            item 1 [HydeCoBees.BallOfBeesWax] mode:destroy flags[Prop2],
+            item 1 [HydeCoBees.DyeRed],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BeesWaxRed,
+        }
+    }
+
+    craftRecipe MakeBlackBeesWaxCrayon
+    {
+        timedAction = Making,
+        time = 20,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_MakeBlackBeesWaxCrayon,
+        inputs
+        {
+            item 1 [HydeCoBees.BeesWaxBlack] mode:destroy flags[Prop2],
+            item 1 [HydeCoBees.CrayonMold] mode:keep,
+        }
+        outputs
+        {
+            item 2 HydeCoBees.BeesWaxCrayonBlack,
+        }
+    }
+
+    craftRecipe MakeBlueBeesWaxCrayon
+    {
+        timedAction = Making,
+        time = 20,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_MakeBlueBeesWaxCrayon,
+        inputs
+        {
+            item 1 [HydeCoBees.BeesWaxBlue] mode:destroy flags[Prop2],
+            item 1 [HydeCoBees.CrayonMold] mode:keep,
+        }
+        outputs
+        {
+            item 2 HydeCoBees.BeesWaxCrayonBlue,
+        }
+    }
+
+    craftRecipe MakeGreenBeesWaxCrayon
+    {
+        timedAction = Making,
+        time = 20,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_MakeGreenBeesWaxCrayon,
+        inputs
+        {
+            item 1 [HydeCoBees.BeesWaxGreen] mode:destroy flags[Prop2],
+            item 1 [HydeCoBees.CrayonMold] mode:keep,
+        }
+        outputs
+        {
+            item 2 HydeCoBees.BeesWaxCrayonGreen,
+        }
+    }
+
+    craftRecipe MakeRedBeesWaxCrayon
+    {
+        timedAction = Making,
+        time = 20,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_MakeRedBeesWaxCrayon,
+        inputs
+        {
+            item 1 [HydeCoBees.BeesWaxRed] mode:destroy flags[Prop2],
+            item 1 [HydeCoBees.CrayonMold] mode:keep,
+        }
+        outputs
+        {
+            item 2 HydeCoBees.BeesWaxCrayonRed,
+        }
+    }
+
+    craftRecipe CarveCrayonMold
+    {
+        timedAction = SharpenStake,
+        time = 120,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Carving:3,
+        needToBeLearn = false,
+        xpAward = Carving:30,
+        ToolTip = HydeCoBees_CarveCrayonMold,
+        inputs
+        {
+            item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+            item 1 [Base.Log] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.CrayonMold,
+        }
+    }
+
+    craftRecipe PressResin
+    {
+        timedAction = UseHandPress,
+        time = 50,
+        tags = HandPress,
+        category = BeeKeeping,
+        skillRequired = Foraging:2,
+        ToolTip = HydeCoBees_PressResin,
+        inputs
+        {
+            item 5 [Base.Pinecone;HydeCoBees.PineNeedles] mode:destroy,
+            item 1 [Base.CheeseCloth] mode:keep,
+            item 1 [Base.StoneBlock] mode:keep,
+            item 1 [Base.OilPress] mode:keep flags[Prop2],
+            item 1 [Base.EmptyJar] mode:destroy,
+            item 1 [Base.JarLid] mode:destroy,
+        }
+        outputs
+        {
+            item 1 HydeCoBees.RawResin,
+        }
+    }
+
+    craftRecipe MixBeeswaxStickyResin
+    {
+        timedAction = Making,
+        time = 60,
+        tags = Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:2,
+        ToolTip = HydeCoBees_MixBeeswaxStickyResin,
+        inputs
+        {
+            item 1 [HydeCoBees.RawResin] mode:destroy,
+            item 1 [HydeCoBees.BallOfBeesWax] mode:destroy,
+            item 1 [Base.Pot;Base.PotForged] mode:keep flags[Prop2],
+             -fluid 0.5 [Water]
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BeeswaxStickyResin,
+        }
+    }
+
+    craftRecipe ExtractHoneyAndWax
+    {
+        timedAction = Making,
+        time = 50,
+        tags = InHandCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        xpAward = Foraging:3,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_ExtractHoneyAndWax,
+        inputs
+        {
+            item 1 [HydeCoBees.Honeycomb] mode:destroy flags[Prop2],
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop1],
+        }
+        outputs
+        {
+            item 1 Base.Honey,
+            item 2 HydeCoBees.WaxBits,
+        }
+    }
+
+    craftRecipe MakeHoneyPoultice
+    {
+        timedAction = MixingMortarPestle,
+        time = 60,
+        tags = AnySurfaceCraft;Health,
+        category = BeeKeeping,
+        skillRequired = FirstAid:1,
+        xpAward = FirstAid:5,
+        ToolTip = HydeCoBees_MakeHoneyPoultice,
+        inputs
+        {
+            item 1 tags[MortarPestle] mode:keep flags[Prop2],
+            item 1 [HydeCoBees.Honeycomb],
+            item 1 [HydeCoBees.PaperyHiveScraps;Base.RippedSheets],
+            item 1 [*],
+            -fluid 0.2 [Water],
+            item 1 [Base.JarLid],
+            item 1 [Base.EmptyJar],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.HoneyPoultice,
+        }
+    }
+
+    craftRecipe CrackOpenHive
+    {
+        timedAction = Making,
+        time = 50,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        xpAward = Foraging:5,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_CrackOpenHive,
+        inputs
+        {
+            item 1 [HydeCoBees.Beehive] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 2 HydeCoBees.Honeycomb,
+            item 6 HydeCoBees.Honeybee,
+            item 3 HydeCoBees.PaperyHiveScraps,
+            item 4 HydeCoBees.HoneyBeeLarvae,
+        }
+    }
+
+    craftRecipe MakeCultivatedBeehive
+    {
+        timedAction = Making,
+        time = 90,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:3,
+        xpAward = Foraging:10,
+        needToBeLearn = true,
+        ToolTip = HydeCoBees_MakeCultivatedBeehive,
+        inputs
+        {
+            item 2 [HydeCoBees.BallOfBeesWax] mode:destroy,
+            item 5 [Base.Plank] mode:destroy,
+            item 20 [Base.Nails] mode:destroy,
+            item 1 [Base.Hammer] mode:keep flags[Prop2],
+            item 1 [HydeCoBees.QueenBee] mode:destroy,
+            item 6 [HydeCoBees.Honeybee] mode:destroy,
+        }
+        outputs
+        {
+            item 1 HydeCoBees.CultivatedBeehive,
+        }
+    }
+
+    craftRecipe CrackOpenWaspNest
+    {
+        timedAction = Making,
+        time = 60,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:2,
+        needToBeLearn = false,
+        ToolTip = HydeCoBees_CrackOpenWaspNest,
+        inputs
+        {
+            item 1 [HydeCoBees.WaspNest] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 8 HydeCoBees.Wasp,
+            item 4 HydeCoBees.PaperyHiveScraps,
+            item 4 HydeCoBees.WaspLarvae,
+        }
+    }
+
+    craftRecipe CreateMeadMixture
+    {
+        timedAction = MixingBucket,
+        time = 120,
+        tags = AnySurfaceCraft;Cooking,
+        category = BeeKeeping,
+        skillRequired = Cooking:2,
+        xpAward = Cooking:10,
+        ToolTip = HydeCoBees_CreateMeadMixture,
+        inputs
+        {
+            item 3 [Base.Honey] mode:destroy,
+            item 1 [Base.BottleCrafted] mode:destroy flags[Prop2],
+            item 1 [*],
+            -fluid 0.4 [Water],
+            item 1 [Yeast] mode:destroy,
+        }
+        outputs
+        {
+            item 1 HydeCoBees.MeadMixture,
+        }
+    }
+
+    craftRecipe MakeStickyTapeRoll
+    {
+        timedAction = Making,
+        time = 60,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:2,
+        xpAward = Foraging:5,
+        ToolTip = HydeCoBees_MakeStickyTapeRoll,
+        inputs
+        {
+            item 1 [HydeCoBees.RefinedResin] mode:destroy,
+            item 5 [Base.SheetPaper2] mode:destroy flags[Prop2],
+            item 1 [HydeCoBees.PineNeedlePaintbrush] mode:keep,
+        }
+        outputs
+        {
+            item 1 HydeCoBees.StickyTapeRoll,
+        }
+    }
+
+    craftRecipe MakeFibrousHiveTape
+    {
+        timedAction = Making,
+        time = 60,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:3,
+        xpAward = Foraging:10,
+        ToolTip = HydeCoBees_MakeFibrousHiveTape,
+        inputs
+        {
+            item 5 [HydeCoBees.PaperyHiveScraps] mode:destroy flags[Prop2],
+            item 1 [HydeCoBees.BeeswaxStickyResin] mode:destroy,
+            item 1 [HydeCoBees.PineNeedlePaintbrush;Base.Paintbrush] mode:keep,
+        }
+        outputs
+        {
+            item 1 HydeCoBees.FibrousHiveTape,
+        }
+    }
+
+    craftRecipe MakePineNeedlePaintbrush
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        xpAward = Foraging:5,
+        ToolTip = HydeCoBees_MakePineNeedlePaintbrush,
+        inputs
+        {
+            item 1 [Base.Twigs;Base.TreeBranch2;Base.LargeBranch;Base.Sapling] mode:destroy flags[Prop2],
+            item 5 [HydeCoBees.PineNeedles] mode:destroy,
+            item 1 [Base.Twine;Base.Rope] mode:destroy,
+            item 1 [HydeCoBees.RawResin] mode:destroy,
+            item 1 tags[SharpKnife;Scissors] mode:keep flags[MayDegradeLight;Prop1],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.PineNeedlePaintbrush,
+        }
+    }
+
+     craftRecipe LightBeeSmoker
+    {
+        timedAction = Making,
+        Time = 30,
+        OnCreate = LightCandle_OnCreate,
+        ToolTip = HydeCoBees_LightBeeSmoker,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = BeeKeeping,
+        inputs
+        {
+            item 1 [Base.Twigs;Base.Pinecone;HydeCoBees.PineNeedles] mode:destroy,
+            item 1 [HydeCoBees.BeeSmoker] mode:destroy flags[InheritUses;ItemCount],
+            item 1 tags[StartFire],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BeeSmoker_Lit,
+        }
+    }
+
+    craftRecipe ExtinguishBeeSmoker
+    {
+        timedAction = Making,
+        Time = 30,
+        OnCreate = ExtinguishCandle_OnCreate,
+        ToolTip = HydeCoBees_ExtinguishBeeSmoker,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = BeeKeeping,
+        inputs
+        {
+            item 1 [HydeCoBees.BeeSmoker_Lit] mode:destroy flags[InheritUses;ItemCount],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BeeSmoker,
+        }
+    }
+
+    craftRecipe MakeBeeSmoker
+    {
+        timedAction = Making,
+        time = 60,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        xpAward = Foraging:5,
+        ToolTip = HydeCoBees_MakeBeeSmoker,
+        inputs
+        {
+            item 1 [Base.MetalworkingPliers] mode:keep flags[Prop1],
+            item 1 [Base.Hinge] mode:destroy,
+            item 1 [HydeCoBees.PineNeedlePaintbrush;Base.Paintbrush] mode:keep,
+            item 1 [HydeCoBees.RefinedResin] mode:destroy,
+            item 1 [Base.Bellows] mode:destroy,
+            item 1 [Base.SheetMetal] mode:destroy,
+            item 1 [Base.SmallSheetMetal] mode:destroy,
+            item 1 [Base.SheetMetalSnips] mode:keep,
+        }
+        outputs
+        {
+            item 1 HydeCoBees.BeeSmoker,
+        }
+    }
+
+    craftRecipe GrindBlackDye
+    {
+        timedAction = MixingMortarPestle,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        ToolTip = HydeCoBees_GrindBlackDye,
+        inputs
+        {
+            item 1 [Base.Charcoal] mode:destroy,
+            item 1 [*],
+            -fluid 0.2 [Water],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.DyeBlack,
+        }
+    }
+
+    craftRecipe MashBlueDye
+    {
+        timedAction = MixingMortarPestle,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        ToolTip = HydeCoBees_MashBlueDye,
+        inputs
+        {
+            item 5 [Base.BerryBlue] mode:destroy,
+            item 1 [*],
+            -fluid 0.2 [Water],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.DyeBlue,
+        }
+    }
+
+    craftRecipe GrindGreenDye
+    {
+        timedAction = MixingMortarPestle,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        ToolTip = HydeCoBees_GrindGreenDye,
+        inputs
+        {
+            item 5 [Base.Basil;Base.BasilDried;Base.Chamomile;Base.ChamomileDried;Base.Chives;Base.ChivesDried;Base.Cilantro;Base.CilantroDried;Base.Oregano;Base.OreganoDried;Base.Parsley;Base.ParsleyDried;Base.Rosemary;Base.RosemaryDried;Base.Sage;Base.SageDried;Base.Thyme;Base.ThymeDried] mode:destroy,
+            item 1 [*],
+            -fluid 0.2 [Water],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.DyeGreen,
+        }
+    }
+
+    craftRecipe MashRedDye
+    {
+        timedAction = MixingMortarPestle,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = BeeKeeping,
+        skillRequired = Foraging:1,
+        ToolTip = HydeCoBees_MashRedDye,
+        inputs
+        {
+            item 5 [Base.Rosehips;Base.HollyBerry] mode:destroy,
+            item 1 [*],
+            -fluid 0.2 [Water],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.DyeRed,
+        }
+    }
+
+}

@@ -1,0 +1,345 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Metal_GutterPipe_Drain
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Metal Gutter Pipe - Drain,
+			Icon		= FG_Build_Pipe_Drain,
+		}
+
+        entity ES_Metal_GutterPipe_Vertical
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Metal Gutter Pipe - Vertical,
+			Icon		= FG_Build_Pipe_Vertical,
+		}
+
+        entity ES_Metal_GutterPipe
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Metal Gutter Pipe,
+			Icon		= FG_Build_Pipe_Gutter,
+		}
+
+        entity ES_Metal_GutterPipe_Corner
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Metal Gutter Pipe - Corner,
+			Icon		= FG_Build_Pipe_Corner,
+		}
+
+        entity ES_Metal_GutterPipe_Corner_Small
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Metal Gutter Pipe - Corner Small,
+			Icon		= FG_Build_Pipe_Corner_Small,
+		}
+	}
+
+    entity Metal_GutterPipe_Drain
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Metal_GutterPipe_Drain,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            OnCreate = FG_BuildRecipeCode.pipe.drain.OnCreate,
+            OnIsValid = FG_BuildRecipeCode.pipe.drain.OnIsValid,
+
+            /* nw corner */
+            face N
+            {
+                layer
+                {
+                    row = industry_02_261,
+                }
+
+            }
+
+            /* nw corner */
+            face W
+            {
+                layer
+                {
+                    row = industry_02_260,
+                }
+            }
+
+            /* ne corner */
+            face E
+            {
+                layer
+                {
+                    row = industry_02_262,
+                }
+            }
+
+            /* sw corner */
+            face S
+            {
+                layer
+                {
+                    row = industry_02_263,
+                }
+            }
+    
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 250,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:20,
+            category      = Welding,
+            tags          = Welding;Outdoors,
+            ToolTip       = UI_craft_FunctionalGutters_MetalPipeDrain_tooltip,
+            inputs
+            {
+                item 1 tags[WeldingMask] mode:keep,
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 3 [Base.SheetMetal],
+                item 1 [Base.SmallSheetMetal],
+                item 3 [Base.IronBandSmall],
+                item 3 [Base.WeldingRods],
+            }
+        }
+    }
+
+    entity Metal_GutterPipe_Vertical
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Metal_GutterPipe_Vertical,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            OnCreate = FG_BuildRecipeCode.pipe.vertical.OnCreate,
+            OnIsValid = FG_BuildRecipeCode.pipe.vertical.OnIsValid,
+
+            /* nw corner */
+            face N
+            {
+                layer
+                {
+                    row = industry_02_238,
+                }
+            }
+
+            /* sw corner */
+            face W
+            {
+                layer
+                {
+                    row = industry_02_247,
+                }
+            }
+
+            /* ne corner */
+            face E
+            {
+                layer
+                {
+                    row = industry_02_243,
+                }
+            }
+            
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 250,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:20,
+            category      = Welding,
+            tags          = Welding;Outdoors,
+            ToolTip       = UI_craft_FunctionalGutters_MetalPipeVertical_tooltip,
+            inputs
+            {
+                item 1 tags[WeldingMask] mode:keep,
+                item 3 [Base.BlowTorch] flags[Prop1],
+                item 3 [Base.SheetMetal],
+                item 3 [Base.IronBandSmall],
+                item 3 [Base.WeldingRods],
+            }
+        }
+    }
+
+    entity Metal_GutterPipe
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Metal_GutterPipe,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            OnCreate = FG_BuildRecipeCode.pipe.gutter.OnCreate,
+            OnIsValid = FG_BuildRecipeCode.pipe.gutter.OnIsValid,
+
+            face N
+            {
+                layer
+                {
+                    row = gutter_01_6,
+                }
+            }
+
+            face W
+            {
+                layer
+                {
+                    row = gutter_01_5,
+                }
+            }
+
+            face E
+            {
+                layer
+                {
+                    row = gutter_01_9,
+                }
+            }
+
+            face S
+            {
+                layer
+                {
+                    row = gutter_01_7,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 100,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:5,
+            category      = Welding,
+            tags          = Welding;Outdoors,
+            ToolTip       = UI_craft_FunctionalGutters_MetalPipeGutter_tooltip,
+            inputs
+            {
+                item 1 tags[WeldingMask] mode:keep,
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SmallSheetMetal],
+                item 1 [Base.WeldingRods],
+            }
+        }
+    }
+
+    entity Metal_GutterPipe_Corner
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Metal_GutterPipe_Corner,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            OnCreate = FG_BuildRecipeCode.pipe.gutter.OnCreate,
+            OnIsValid = FG_BuildRecipeCode.pipe.gutter.OnIsValid,
+
+            face W
+            {
+                layer
+                {
+                    row = gutter_01_8,
+                }
+            }
+
+            face S
+            {
+                layer
+                {
+                    row = gutter_01_10,
+                }
+            }
+
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 100,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:10,
+            category      = Welding,
+            tags          = Welding;Outdoors,
+            ToolTip       = UI_craft_FunctionalGutters_MetalPipeCorner_tooltip,
+            inputs
+            {
+                item 1 tags[WeldingMask] mode:keep,
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SmallSheetMetal],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+
+    entity Metal_GutterPipe_Corner_Small
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Metal_GutterPipe_Corner_Small,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            OnCreate = FG_BuildRecipeCode.pipe.gutter.OnCreate,
+            OnIsValid = FG_BuildRecipeCode.pipe.gutter.OnIsValid,
+
+            face N
+            {
+                layer
+                {
+                    row = gutter_01_4,
+                }
+            }
+
+            face S
+            {
+                layer
+                {
+                    row = gutter_01_11,
+                }
+            }
+
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 100,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:5,
+            category      = Welding,
+            tags          = Welding;Outdoors,
+            ToolTip       = UI_craft_FunctionalGutters_MetalPipeCornerSmall_tooltip,
+            inputs
+            {
+                item 1 tags[WeldingMask] mode:keep,
+                item 1 [Base.BlowTorch] flags[Prop1],
+                item 1 [Base.SmallSheetMetal],
+                item 1 [Base.WeldingRods],
+            }
+        }
+    }
+}

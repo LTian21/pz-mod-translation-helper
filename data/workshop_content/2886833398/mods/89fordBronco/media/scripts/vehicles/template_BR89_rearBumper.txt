@@ -1,0 +1,87 @@
+module Base
+{
+	model 89fordBroncorearBumper
+	{
+		mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89fordBroncorearBullbar
+	{
+		mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_armor_br1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BR89RearBumper
+		{
+		part BR89RearBumper
+        	{
+
+			model RearBumper
+				{
+                		file = 89fordBroncorearBumper,
+				}
+
+			model RearBullbar
+				{
+                		file = 89fordBroncorearBullbar,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.89BroncoBumperRear;Base.80sPickupBullbarRear,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BR89.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BR89.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = BR89.Create.RearBumper,
+					init = BR89.Init.RearBumper,
+					}
+		}
+	}
+
+		
+}

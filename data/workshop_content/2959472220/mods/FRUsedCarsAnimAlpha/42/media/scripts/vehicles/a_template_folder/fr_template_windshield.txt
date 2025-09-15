@@ -1,0 +1,120 @@
+module Base
+{
+	template vehicle FRWindshield
+	{
+		part Windshield
+        {
+            area = Engine,
+            category = bodywork,
+            itemType = Base.Windshield,
+            mechanicRequireKey = true,
+            window
+            {
+                openable = false,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:5,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualWindow,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                  skills = Mechanics:5,
+                  recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.FR_Default,
+            }
+			
+			table FRPartInfo
+			{
+				oneModel = TRUE,
+			}
+			
+            lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+            }
+        }
+
+		part WindshieldRear
+		{
+			area = TruckBed,
+            category = bodywork,
+            itemType = Base.RearWindshield,
+            mechanicRequireKey = true,
+            window
+            {
+                openable = false,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:5,
+				requireInstalled = FRRoof,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualWindow,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+ 						equip = primary,
+                   }
+                }
+                time = 300,
+                  skills = Mechanics:5,
+                  recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.FR_Default,
+            }
+			
+			table FRPartInfo
+			{
+				oneModel = TRUE,
+			}
+			
+            lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+            }
+	    }
+	}
+}

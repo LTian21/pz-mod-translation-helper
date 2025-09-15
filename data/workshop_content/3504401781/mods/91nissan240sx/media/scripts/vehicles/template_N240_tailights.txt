@@ -1,0 +1,71 @@
+module Base
+{
+	
+	model 91nissan240sxtaillights1
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_tailights_x,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle N240TaillightsMod
+		{
+		part N240TaillightsMod
+       		{
+
+            model taillights1
+			{
+                	file = 91nissan240sxtaillights1,
+			}
+
+            category = lights,
+            area = TruckBed,
+            specificItem = false,
+            itemType = Base.91nissan240sxTaillightsMod3,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = N240.InstallComplete.Taillights,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = N240.UninstallComplete.Taillights,
+            }
+            lua
+            {
+                create = N240.Create.Taillights,
+                init = N240.Init.Taillights,
+            }
+        }
+	}
+}

@@ -1,0 +1,77 @@
+module Base
+{
+
+	model 88toyotaHiluxSidesteps0
+	{
+		mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_sidesteps,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle HLX88SideSteps
+	{
+		part DAMNSideSteps
+        	{
+
+			model SideSteps0
+				{
+                		file = 88toyotaHiluxSidesteps0,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.88toyotaHiluxSideSteps,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.SideSteps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = HLX88.UninstallComplete.SideSteps,
+
+            		}
+
+	            lua
+	            {
+				create = HLX88.Create.SideSteps,
+				init = HLX88.Init.SideSteps,
+				}
+		}
+	}
+
+}
+

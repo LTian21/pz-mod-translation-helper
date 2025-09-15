@@ -1,0 +1,166 @@
+module Base
+{
+	model 75grandPrixBumperFront0
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 75grandPrixBumperFrontA
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 75grandPrixBullbarFrontA
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 75grandPrixBumperRear0
+	{
+		mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle PRX75Bumpers
+		{
+		part PRX75BumperFront
+        	{
+
+			model BumperFront0
+				{
+                		file = 75grandPrixBumperFront0,
+				}
+
+			model BumperFrontA
+				{
+                		file = 75grandPrixBumperFrontA,
+				}
+
+			model BullbarFrontA
+				{
+                		file = 75grandPrixBullbarFrontA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.75grandPrixBumperFront;Base.75grandPrixBumperFrontA;Base.75grandPrixBullbar,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRX75.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PRX75.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = PRX75.Create.BumperFront,
+					init = PRX75.Init.BumperFront,
+					}
+			}
+
+
+		part PRX75BumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 75grandPrixBumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.75grandPrixBumperRear,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRX75.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PRX75.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = PRX75.Create.BumperRear,
+					init = PRX75.Init.BumperRear,
+					}
+		}
+	}
+}

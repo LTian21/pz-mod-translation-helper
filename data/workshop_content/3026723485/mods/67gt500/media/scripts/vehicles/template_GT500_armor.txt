@@ -1,0 +1,286 @@
+module Base
+{
+    model 67gt500windowfla
+    	{
+        mesh = vehicles/Vehicles_67gt500_Body|gt500_window_flA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 67gt500windowfra
+    	{
+        mesh = vehicles/Vehicles_67gt500_Body|gt500_window_frA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 67gt500windshielda
+    	{
+        mesh = vehicles/Vehicles_67gt500_Body|gt500_windshield_frontA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 67gt500windshieldreara
+    	{
+        mesh = vehicles/Vehicles_67gt500_Body|gt500_windshield_rearA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle GT500Armor
+		{
+		part GT500WindshieldArmor
+        	{
+
+			model GT500winda
+				{
+                		file = 67gt500windshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.67gt500WindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GT500.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = GT500.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = GT500.Create.WindshieldArmor,
+					init = GT500.Init.WindshieldArmor,
+					}
+		}
+
+		part GT500WindowLeftArmor
+        {
+
+			model GT500leftwindowa
+				{
+                		file = 67gt500windowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.67gt500WindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GT500.InstallComplete.WindowLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = GT500.UninstallComplete.WindowLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = GT500.Create.WindowLeftArmor,
+					init = GT500.Init.WindowLeftArmor,
+					}
+		}
+
+		part GT500WindowRightArmor
+        {
+
+			model GT500rightwindowa
+				{
+                		file = 67gt500windowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.67gt500WindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GT500.InstallComplete.WindowRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = GT500.UninstallComplete.WindowRightArmor,
+            		}
+
+            		lua
+            		{
+					create = GT500.Create.WindowRightArmor,
+					init = GT500.Init.WindowRightArmor,
+					}
+		}
+
+		part GT500WindshieldRearArmor
+        {
+
+				model GT500windra
+				{
+                		file = 67gt500windshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.67gt500WindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GT500.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = GT500.UninstallComplete.WindshieldRearArmor,
+					requireUninstalled = GT500SpareTire,
+            		}
+
+            		lua
+            		{
+					create = GT500.Create.WindshieldRearArmor,
+					init = GT500.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

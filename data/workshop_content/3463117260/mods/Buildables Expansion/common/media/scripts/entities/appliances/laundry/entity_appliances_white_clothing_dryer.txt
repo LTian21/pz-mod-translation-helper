@@ -1,0 +1,78 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WhiteClothingDryer
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= White Clothing Dryer,
+			Icon		= appliances_laundry_01_12,
+		}
+	}
+
+    entity WhiteClothingDryer
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WhiteClothingDryer,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face N
+            {
+                layer
+                {
+                    row = appliances_laundry_01_14,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = appliances_laundry_01_13,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = appliances_laundry_01_12,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = appliances_laundry_01_15,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:6;Electricity:4,
+            xpAward       = MetalWelding:15;Electricity:10,
+            category      = Appliances_Laundry,
+            ToolTip       = Tooltip_craft_laundryMachinesDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] mode:keep flags[Prop1],
+                item 1 tags[Screwdriver] mode:keep flags[Prop2],
+                item 1 tags[Pliers] mode:keep,
+                item 4 [Base.WeldingRods],
+                item 2 [Base.GlassPanel],
+                item 4 [Base.SmallSheetMetal],
+                item 6 [Base.SheetMetal],
+                item 10 [Base.ElectronicsScrap],
+                item 5 [Base.ElectricWire],
+            }
+        }
+    }
+}

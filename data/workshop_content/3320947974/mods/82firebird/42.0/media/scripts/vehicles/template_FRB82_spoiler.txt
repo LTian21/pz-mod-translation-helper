@@ -1,0 +1,113 @@
+module Base
+{
+	
+	model 82firebirdspoiler0
+	{
+		mesh = vehicles/Vehicles_82firebird_Body|transam_spoiler0,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    model 82firebirdspoiler1
+    {
+        mesh = vehicles/Vehicles_82firebird_Body|transam_spoiler1,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle FRB82Spoiler
+		{
+		part DAMNSpoiler
+       		{
+
+            model FRB82Spoiler0
+			{
+                	file = 82firebirdspoiler0,
+			}
+
+            model FRB82Spoiler1
+            {
+                    file = 82firebirdspoiler1,
+            }
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            specificItem = false,
+            itemType = Base.82firebirdSpoilerA;Base.82firebirdSpoilerB,
+            mechanicRequireKey = false,
+            durability = 3,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = FRB82.InstallComplete.Spoiler,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = FRB82.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = FRB82.Create.Spoiler,
+                init = FRB82.Init.Spoiler,
+            }
+        }
+	}
+
+    template vehicle FRB82SpoilerK
+	{
+        template! = FRB82Spoiler,
+
+		part DAMNSpoiler
+       	{
+             itemType = Base.82firebirdSpoilerB;Base.82firebirdSpoilerA,
+            table install
+            {
+                complete = FRB82.InstallComplete.SpoilerK,
+                
+            }
+            table uninstall
+            {
+                complete = FRB82.UninstallComplete.SpoilerK,
+            }
+            lua
+            {
+                create = FRB82.Create.SpoilerK,
+                init = FRB82.Init.SpoilerK,
+            }
+        }
+	}
+}

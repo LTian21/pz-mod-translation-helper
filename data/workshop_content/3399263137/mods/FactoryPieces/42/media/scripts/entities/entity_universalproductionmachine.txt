@@ -1,0 +1,63 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Universal_Production_Machine
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Universal Production Machine,
+			Icon		= Build_UniversalProductionMachine,
+		}
+	}
+
+    entity BuildUniversalProductionMachine
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Universal_Production_Machine,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = industry_02_47,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = industry_02_46,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 300,
+            needToBeLearn = true,
+            SkillRequired = Electricity:5;MetalWelding:5,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPUniversalProductionMachine,
+            inputs
+            {
+                item 3 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SheetMetal],
+                item 4 [Base.MetalBar],
+                item 2 [Base.Screws],
+                item 5 [Base.ElectricWire],
+                item 20 [Base.ElectronicsScrap],
+                item 3 [Base.WeldingRods],
+            }
+        }
+    }
+}

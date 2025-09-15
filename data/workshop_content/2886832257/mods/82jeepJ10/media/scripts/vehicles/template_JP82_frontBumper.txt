@@ -1,0 +1,172 @@
+module Base
+{
+	model 82jeepJ10frontBumper0
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82jeepJ10frontBullbar1
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_armor_b1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82jeepJ10frontBullbar2
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_bullbar_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP82FrontBumper
+		{
+		part JP82FrontBumper
+        	{
+
+			model FrontBumper
+				{
+                		file = 82jeepJ10frontBumper0,
+				}
+
+			model FrontBullbar1
+				{
+                		file = 82jeepJ10frontBullbar1,
+				}
+
+			model FrontBullbar2
+				{
+                		file = 82jeepJ10frontBullbar2,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82JeepJ10BumperFront;Base.80sPickupBullbarFront;Base.82JeepJ10BullbarFront,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP82.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = JP82.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = JP82.Create.FrontBumper,
+					init = JP82.Init.FrontBumper,
+					}
+		}
+	}
+
+	template vehicle JP82FrontBumperD
+		{
+		part JP82FrontBumper
+        	{
+
+			model FrontBullbar1
+				{
+                		file = 82jeepJ10frontBullbar1,
+				}
+
+			model FrontBullbar2
+				{
+                		file = 82jeepJ10frontBullbar2,
+				}
+
+			model FrontBumper
+				{
+                		file = 82jeepJ10frontBumper0,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82JeepJ10BullbarFront;Base.82JeepJ10BumperFront;Base.80sPickupBullbarFront,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP82.InstallComplete.FrontBumperD,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = JP82.UninstallComplete.FrontBumperD,
+            		}
+
+            		lua
+            		{
+					create = JP82.Create.FrontBumperD,
+					init = JP82.Init.FrontBumperD,
+					}
+		}
+	}
+		
+}

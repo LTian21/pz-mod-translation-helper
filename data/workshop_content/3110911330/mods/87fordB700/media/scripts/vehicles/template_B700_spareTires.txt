@@ -1,0 +1,230 @@
+module Base
+{
+
+	model 87fordB700spare0
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_tire_spare1,
+		texture = vehicles/Vehicles_87fordB700_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 87fordB700spare1
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_tire_spare2,
+		texture = vehicles/Vehicles_87fordB700_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 87fordF700spare2
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_tire_spare3,
+		texture = vehicles/Vehicles_87fordB700_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 87fordB700straps1
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_tire_spare2_strap,
+		texture = vehicles/Vehicles_87fordB700_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	
+	template vehicle B700SpareTires
+	{
+		part B700SpareTireOne
+        	{
+
+			model B700Spare
+				{
+                		file = 87fordB700spare0,
+				}
+
+			category = tire,
+			area = Roofrack,
+			itemType = Base.87fordB700Tire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.SpareTireOne,
+                	requireInstalled = B700Roofrack,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = B700.UninstallComplete.SpareTireOne,
+
+            		}
+
+	            lua
+	            {
+				create = B700.Create.SpareTireOne,
+				init = B700.Init.SpareTireOne,
+				}
+		}
+
+		part B700SpareTireTwo
+        	{
+
+			model B700Spare
+				{
+                		file = 87fordB700spare1,
+				}
+			model B700Straps
+				{
+                		file = 87fordB700straps1,
+				}
+
+			category = tire,
+			area = Roofrack,
+			itemType = Base.87fordB700Tire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.SpareTireTwo,
+                	requireInstalled = B700Roofrack,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = B700.UninstallComplete.SpareTireTwo,
+
+            		}
+
+	            lua
+	            {
+				create = B700.Create.SpareTireTwo,
+				init = B700.Init.SpareTireTwo,
+				}
+		}
+	}
+
+    template vehicle B700SpareTiresX
+	{
+		part B700SpareTireOne
+        	{
+
+			model B700Spare
+				{
+                		file = 87fordF700spare2,
+				}
+
+			category = tire,
+			area = Spare,
+			itemType = Base.87fordB700Tire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.SpareTireOne,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = B700.UninstallComplete.SpareTireOne,
+
+            		}
+
+	            lua
+	            {
+				create = B700.Create.SpareTireOne,
+				init = B700.Init.SpareTireOne,
+				}
+		}
+	}
+}

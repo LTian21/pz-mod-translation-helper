@@ -1,0 +1,347 @@
+module Base
+{
+
+	model 87toyotaMR2Windowfl
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fl_bone 1.0,
+	}
+
+	model 87toyotaMR2Windowfr
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fr_bone 1.0,
+	}
+
+	model 87toyotaMR2Windowrl
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_window_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87toyotaMR2Windowrr
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_window_rr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87toyotaMR2Sunroof
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_sunroof,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = sunroof_bone 1.0,
+	}
+
+	model 87toyotaMR2RemovableRoof
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_body_roof1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle MR2Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 87toyotaMR2Windowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.87toyotaMR2FrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = MR2WindowLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 87toyotaMR2Windowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.87toyotaMR2FrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = MR2WindowRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 87toyotaMR2Windowrl,
+			}
+
+			area = SeatFrontLeft,
+			itemType = Base.87toyotaMR2RearSideWindow,
+			table uninstall
+				{
+				requireUninstalled = MR2WindowLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 87toyotaMR2Windowrr,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.87toyotaMR2RearSideWindow,
+			table uninstall
+				{
+				requireUninstalled = MR2WindowRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+	template vehicle MR2WindowsWithSunroof
+	{
+		template! = MR2Windows,
+
+		part MR2Sunroof
+		{
+			model windowSR
+			{
+				file = 87toyotaMR2Sunroof,
+			}
+
+			anim Close
+			{
+				anim = sunroof_opening,
+				reverse = TRUE,
+				rate = 1.00,
+			}
+
+			anim Open
+			{
+				anim = sunroof_opening,
+				
+				rate = 1.00,
+			}
+
+			anim Closed
+			{
+				anim = sunroof_opening,
+				
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = sunroof_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			area = SeatFrontLeft,
+			itemType = Base.87toyotaMR2Sunroof,
+			category = door,
+			mechanicRequireKey = true,
+			door
+			{
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.Door,
+				init = Vehicles.Init.Door,
+			}
+		}
+	}
+
+	template vehicle MR2WindowsWithRemovableRoof
+	{
+		template! = MR2Windows,
+
+		part WindowRemovableRoof
+		{
+			model roofrem
+			{
+				file = 87toyotaMR2RemovableRoof,
+			}
+
+			area = SeatFrontLeft,
+			itemType = Base.87toyotaMR2RemovableRoof,
+
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+}
+

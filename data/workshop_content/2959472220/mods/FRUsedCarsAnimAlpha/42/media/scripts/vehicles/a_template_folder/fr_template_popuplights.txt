@@ -1,0 +1,34 @@
+module Base
+{
+	template vehicle FRLightsDoor
+	{
+		part FRPopUpLightsDoor
+		{		
+			category = lights,
+			
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			itemType = Base.GloveBox,
+			area = Engine,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.FR_PopUpLights,
+				update = Vehicles.Update.FR_PopUpLights,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+}

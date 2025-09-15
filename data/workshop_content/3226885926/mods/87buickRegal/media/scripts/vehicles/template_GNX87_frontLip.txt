@@ -1,0 +1,84 @@
+module Base
+{
+	model 87buickRegalFrontLip0
+	{
+		mesh = vehicles/Vehicles_87buickRegal_Body|gnx_bumper_front_lip0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87buickRegalFrontLip1
+	{
+		mesh = vehicles/Vehicles_87buickRegal_Body|gnx_bumper_front_lip1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle GNX87FrontLip
+		{
+		part GNX87FrontLip
+        	{
+
+			model GNX87Lip0
+				{
+                		file = 87buickRegalFrontLip0,
+				}
+
+			model GNX87Lip1
+				{
+                		file = 87buickRegalFrontLip1,
+				}
+
+				area = Engine,
+				category = bodywork,
+				itemType = Base.87buickRegalFrontLip;Base.87buickRegalFrontSplitLip,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GNX87.InstallComplete.FrontLip,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = GNX87.UninstallComplete.FrontLip,
+            		}
+
+            		lua
+            		{
+					create = GNX87.Create.FrontLip,
+					init = GNX87.Init.FrontLip,
+					}
+			}
+	}
+}

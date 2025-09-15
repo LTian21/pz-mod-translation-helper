@@ -1,0 +1,282 @@
+module Base
+{
+	model 68firebirdWindshieldA
+    	{
+        mesh = vehicles/Vehicles_68firebird_Body|brd_windshield_frontA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 68firebirdWindowflA
+    	{
+        mesh = vehicles/Vehicles_68firebird_Body|brd_window_flA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 68firebirdWindowfrA
+    	{
+        mesh = vehicles/Vehicles_68firebird_Body|brd_window_frA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 68firebirdWindshieldrearA
+    	{
+        mesh = vehicles/Vehicles_68firebird_Body|brd_windshield_rearA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle FRB68Armor
+		{
+		part FRB68WindshieldArmor
+        	{
+
+			model FRB68winda0
+				{
+                		file = 68firebirdWindshieldA,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.68firebirdWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB68.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = FRB68.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = FRB68.Create.WindshieldArmor,
+					init = FRB68.Init.WindshieldArmor,
+					}
+			}
+
+		part FRB68FrontLeftArmor
+        {
+
+			model FRB68leftdoora
+				{
+                		file = 68firebirdWindowflA,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.68firebirdFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB68.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = FRB68.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = FRB68.Create.FrontLeftArmor,
+					init = FRB68.Init.FrontLeftArmor,
+					}
+		}
+
+		part FRB68FrontRightArmor
+        {
+
+			model FRB68rightdoora
+				{
+                		file = 68firebirdWindowfrA,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.68firebirdFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB68.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = FRB68.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = FRB68.Create.FrontRightArmor,
+					init = FRB68.Init.FrontRightArmor,
+					}
+		}
+
+			part FRB68WindshieldRearArmor
+        {
+
+				model FRB68windra
+				{
+                		file = 68firebirdWindshieldrearA,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.68firebirdWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB68.InstallComplete.WindshieldRearArmor,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = FRB68.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = FRB68.Create.WindshieldRearArmor,
+					init = FRB68.Init.WindshieldRearArmor,
+					}
+			}
+		}
+
+}

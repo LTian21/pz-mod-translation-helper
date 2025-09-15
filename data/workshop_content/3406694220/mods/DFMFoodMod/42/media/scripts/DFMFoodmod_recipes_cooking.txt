@@ -1,0 +1,906 @@
+module DFMFoodmod
+{	
+	imports
+    {
+        Base
+    }
+	
+	craftRecipe Make Raw Hot dog Bun
+	{
+		timedAction = Making,
+		Time = 50,
+		NeedToBeLearn = false,
+		ToolTip = Tooltip_Recipe_RequireWholeEggs
+		Put your sausage in there after baking.,
+		category = Cooking,
+		Tags = AnySurfaceCraft;Cooking,
+		xpAward = Cooking:10,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 10 tags[Flour],
+			item 2 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+			item 1 [Base.Yeast],
+			item 1 [*],
+			-fluid 1.0 [CowMilk;SheepMilk],
+		}
+			outputs
+			{
+				item 5 DFMFoodmod.RawHotdogBun,
+			}
+	}
+	
+	craftRecipe Make Raw Hamburger Bun
+    {
+		timedAction = Making,
+		Time = 50,
+		NeedToBeLearn = false,
+		ToolTip = Tooltip_Recipe_RequireWholeEggs
+		Burgers even after many years of survival.. oh yeah..,
+		category = Cooking,
+		Tags = AnySurfaceCraft;Cooking,
+		xpAward = Cooking:10,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 10 tags[Flour],
+			item 2 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+			item 1 [Base.Yeast],
+			item 1 [*],
+			-fluid 1.0 [CowMilk;SheepMilk],
+		}
+			outputs
+			{
+				item 5 DFMFoodmod.RawHamburgerBun,
+			}
+	}	
+	
+	craftRecipe Make Fruit Jam
+	{
+		timedAction = SliceFood_Surface,
+		Time = 50,
+		NeedToBeLearn = false,
+		category = Cooking,
+		Tags = AnySurfaceCraft;Cooking,
+		xpAward = Cooking:10,
+		ToolTip = Won't your butt stick together?,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
+			item 1 tags[SharpKnife;DullKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [3:Base.Apple;3:Base.Banana;6:Base.Cherry;6:Base.DriedApricots;1:Base.Grapefruit;2:Base.Grapes;2:Base.Lemon;2:Base.Lime;1:Base.Mango;2:Base.Orange;2:Base.Peach;2:Base.Pear;1:Base.Pineapple;3:Base.WatermelonSliced;6:Base.BerryBlack;6:Base.BerryBlue;6:Base.BerryGeneric1;6:Base.BerryGeneric2;6:Base.BerryGeneric3;6:Base.BerryGeneric4;6:Base.BerryGeneric5] flags[InheritFoodAge;ItemCount] mode:destroy,
+		}
+			outputs
+			{
+				item 1 DFMFoodmod.RawFruitJam,
+			}
+	}
+	
+	craftRecipe Fruit Jam Jar
+	{
+		timedAction = Making,
+		Time = 60,
+		NeedToBeLearn = false,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+        category = Cooking,
+		xpAward = Cooking:10,
+		ToolTip = It is stored longer.,
+		inputs
+		{
+			item 1 [Base.EmptyJar] mode:destroy flags[ItemCount],
+			item 1 [Base.JarLid],
+			item 1 [DFMFoodmod.CookedFruitJam] flags[InheritFoodAge;ItemCount],
+		}
+			outputs
+			{
+				item 1 DFMFoodmod.CannedFruitJam,
+				item 1 Base.Saucepan,
+			}
+	}
+	
+	craftRecipe Open Fruit Jam Jar
+	{
+		timedAction = Making,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+		inputs
+		{
+			item 1 [DFMFoodmod.CannedFruitJam] flags[AllowRottenItem;InheritFoodAge;ItemCount],
+		}
+			outputs
+			{
+				item 1 DFMFoodmod.CannedFruitJam_Open,
+			}
+	}
+	
+	craftRecipe Make Raw Cheese Mixture(Vinegar)
+	{
+		timedAction = MixingBowl,
+		Time = 120,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:18,
+		ToolTip = Heat it up to get the cheese.,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
+			item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mode:destroy,
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 [Base.Salt;Base.SeasoningSalt],
+			item 1.0 tags[Vinegar],
+			item 1 [*],
+			-fluid 1.0 [CowMilk;SheepMilk],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.RawCheeseMixture,
+		}
+	}
+	
+	craftRecipe Make Raw Cheese Mixture(Lemon Juice)
+	{
+		timedAction = MixingBowl,
+		Time = 120,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:18,
+		ToolTip = Heat it up to get the cheese.,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
+			item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mode:destroy,
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 [Base.Salt;Base.SeasoningSalt],
+			item 1 [*],
+			-fluid 1.0 [CowMilk;SheepMilk],
+			item 1 [*],
+			-fluid 0.1 [JuiceLemon],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.RawCheeseMixture,
+		}
+	}
+	
+	craftRecipe Cheese
+	{
+		timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:15,
+		ToolTip = Strain the prepared mixture through a cheese cloth.
+		Ta-da! Cheese for pizza or maybe pasta?,
+		inputs
+		{
+			item 1 [DFMFoodmod.CookedCheeseMixture] flags[InheritFoodAge;ItemCount],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 [Base.CheeseCloth] mode:keep,
+		}
+		outputs
+		{
+			item 1 Base.Cheese,
+			item 1 Base.Saucepan,
+		}
+	}
+	
+	craftRecipe Make Tomato Paste
+	{
+		timedAction = MixingBowl,
+        Time = 60,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:8,
+		ToolTip = Pizzaaaaa sauce!,
+        inputs
+        {
+            item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+            item 1 tags[Bowl] mode:keep,
+			item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mode:destroy,
+            item 12 [Base.Tomato;Base.CannedTomato_Open;Base.CannedTomatoOpen] flags[InheritFoodAge],
+            item 1 [Base.Salt;Base.SeasoningSalt],
+			item 1 tags[Sugar],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.RawTomatoPaste,
+		}
+	}
+	
+	craftRecipe Tomato Paste Jar
+	{
+		timedAction = Making,
+		Time = 60,
+		NeedToBeLearn = false,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:10,
+		ToolTip = It is stored for a whole year.,
+		inputs
+		{
+		  item 1 [Base.EmptyJar] mode:destroy flags[ItemCount],
+		  item 1 [Base.JarLid],
+		  item 1 [DFMFoodmod.CookedTomatoPaste] flags[InheritFoodAge;ItemCount],
+		  item 1.0 tags[Vinegar],
+		}
+		outputs
+		{
+		  item 1 DFMFoodmod.CannedTomatoPaste,
+		  item 1 Base.Saucepan,
+		}
+	}
+
+	craftRecipe Open Tomato Paste Jar
+	{
+		timedAction = Making,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+		category = Cooking,
+		ToolTip = It is stored for a whole year.,
+		inputs
+		{
+		  item 1 [DFMFoodmod.CannedTomatoPaste] flags[AllowRottenItem;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+		  item 1 DFMFoodmod.CannedTomatoPaste_Open,
+		}
+	}
+	
+	craftRecipe Make Marinara
+	{
+		timedAction = MixingBowl,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:10,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+			item 1 tags[Bowl] mode:keep,
+			item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mode:destroy,
+			item 12 [Base.Tomato;Base.CannedTomato_Open;Base.CannedTomatoOpen] flags[InheritFoodAge],
+			item 5 [Base.Onion;Base.PowderedOnion] flags[InheritFoodAge],
+			item 1 [Base.Garlic;Base.PowderedGarlic;Base.WildGarlicDried;Base.WildGarlic2] flags[InheritFoodAge],
+			item 1 [Base.Basil;Base.Oregano;Base.Seasoning_Basil;Base.Seasoning_Oregano;Base.BasilDried;Base.OreganoDried] flags[InheritFoodAge],
+			item 1 [Base.Salt;Base.SeasoningSalt],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.RawMarinara,
+		}
+	}
+
+	craftRecipe Marinara Jar
+	{
+		timedAction = Making,
+		Time = 60,
+		NeedToBeLearn = false,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:10,
+		ToolTip = It is stored for a whole year.,
+		inputs
+		{
+			item 1 [Base.EmptyJar] mode:destroy flags[ItemCount],
+			item 1 [Base.JarLid],
+			item 1 [DFMFoodmod.CookedMarinara] flags[InheritFoodAge;ItemCount],
+			item 1.0 tags[Vinegar],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.CannedMarinara,
+			item 1 Base.Saucepan,
+		}
+	}
+
+	craftRecipe Open Marinara Jar
+	{
+		timedAction = Making,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+		category = Cooking,
+		inputs
+		{
+			item 1 [DFMFoodmod.CannedMarinara] flags[AllowRottenItem;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.CannedMarinara_Open,
+		}
+	}
+	
+	craftRecipe MakeCabbageRolls
+	{
+		timedAction = Making,
+		Time = 60,
+		NeedToBeLearn = false,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		inputs
+		{
+			item 1 [Base.Cabbage] flags[InheritFoodAge;ItemCount],
+			item 1 [Base.MincedMeat] flags[InheritFoodAge;IsCookedFoodItem;ItemCount],
+			item 10 tags[RiceRecipe] flags[InheritFoodAge],
+			item 1 [Base.Onion] flags[InheritFoodAge;ItemCount],
+			item 10 [Base.Marinara;DFMFoodmod.CannedMarinara_Open;DFMFoodmod.CookedMarinara] flags[InheritFoodAge],
+		}
+		outputs
+		{
+			item 5 Base.CabbageRoll,
+		}
+	}
+	
+	craftRecipe Make 5 Raw Potato Pancakes
+	{
+		timedAction = MixingBowl,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		ToolTip = Tooltip_Recipe_RequireWholeEggs,
+		xpAward = Cooking:10,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon;] mode:keep flags[MayDegradeLight],
+			item 1 tags[Bowl] mode:keep,
+			item 1 tags[Grater] mode:keep,
+			item 3 [Base.Potato] flags[InheritFoodAge;ItemCount],
+			item 1 tags[Flour],
+			item 1 tags[BakingFat],
+			item 2 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 5 DFMFoodmod.RawPotatoPancakes,
+		}
+	}
+	
+	craftRecipe Make 5 Raw Tortillas
+	{
+		timedAction = MixingBowl,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:10,
+		ToolTip = The shawarma? Doner? A kebab? It doesn't matter.,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon;] mode:keep flags[MayDegradeLight],
+			item 1 tags[Bowl] mode:keep,
+			item 1 tags[RollingPin] mode:keep flags[MayDegrade],
+			item 5 tags[Flour],
+			item 1 [*],
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 5 DFMFoodmod.RawTortilla,
+		}
+	}	
+	
+	craftRecipe Make 5 Raw Taco Shell
+	{
+		timedAction = MixingBowl,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:10,
+		ToolTip = A delicious taco after a few years of your life.,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon;] mode:keep flags[MayDegradeLight],
+			item 1 tags[Bowl] mode:keep,
+			item 1 tags[RollingPin] mode:keep flags[MayDegrade],
+			item 5 tags[Flour],
+			item 1 [*],
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 5 DFMFoodmod.RawTacoShell,
+		}
+	}
+
+	 craftRecipe Dry the Intestine
+    {
+        time = 86400,
+        tags = DryingRackGrain;DryLeatherLarge;DryLeatherMedium;DryLeatherSmall;DryingRackHerb,
+        category = Food,
+		ToolTip = After drying you can stuff the minced meat in there.,
+        inputs
+        {
+            item 1 [DFMFoodmod.IntestineRaw] mode:destroy,
+        }
+		outputs
+		{
+            item 1 DFMFoodmod.IntestineDried,
+        }
+    }
+	
+	craftRecipe Make 2 Sausage
+	{
+		timedAction = Making,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:10,
+		ToolTip = 2 sausages for your buns.,
+		inputs
+		{
+			item 1 tags[Bowl] mode:keep,
+			item 1 [Base.Salt;Base.SeasoningSalt],
+			item 1 [Base.Pepper],
+			item 40 [Base.MincedMeat] flags[InheritFoodAge],
+			item 1 [DFMFoodmod.IntestineDried],
+			item 1 [Base.Lard],
+		}
+		outputs
+		{
+			item 2 Base.Sausage,
+		}
+	}
+	
+	craftRecipe Make Salami(Raw)
+	{
+		timedAction = Making,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:15,
+		ToolTip = Be sure to dry it on any dryer!,
+		inputs
+		{
+			item 1 tags[Bowl] mode:keep,
+			item 1 [Base.Salt;Base.SeasoningSalt],
+			item 1 [Base.Pepper],
+			item 20 [Base.MincedMeat] flags[InheritFoodAge],
+			item 1 [DFMFoodmod.IntestineDried],
+			item 1 [Base.Lard],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.SalamiRaw,
+		}
+	}
+	
+	craftRecipe Dry the Salami
+	{
+		time = 259200,
+        tags = DryingRackGrain;DryLeatherLarge;DryLeatherMedium;DryLeatherSmall;DryingRackHerb,
+        category = Food,
+		ToolTip = After drying it can be eaten.,
+        inputs
+        {
+            item 1 [DFMFoodmod.SalamiRaw] mode:destroy,
+        }
+		outputs
+		{
+            item 1 Base.Salami,
+        }
+	}
+	
+	craftRecipe Make Baloney
+	{
+		timedAction = Making,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:15,
+		ToolTip = Yum yum.,
+		inputs
+		{
+			item 1 tags[Bowl] mode:keep,
+			item 1 [Base.Salt;Base.SeasoningSalt],
+			item 1 [Base.Pepper],
+			item 20 [Base.MincedMeat] flags[InheritFoodAge],
+			item 1 [DFMFoodmod.IntestineDried],
+			item 1 [Base.Garlic;Base.PowderedGarlic;Base.WildGarlicDried;Base.WildGarlic2] flags[InheritFoodAge],
+			item 1 [*],
+			-fluid 1.0 [CowMilk;SheepMilk],
+		}
+		outputs
+		{
+			item 1 Base.Baloney,
+		}
+	}
+	
+	craftRecipe Make Ham(Raw)
+	{
+		timedAction = MixingBowl,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:15,
+		ToolTip = Bake it in the oven. Necessarily.,
+		inputs
+		{
+			item 1 tags[Bowl] mode:keep,
+			item 1 [Base.Salt;Base.SeasoningSalt],
+			item 1 [Base.Pepper],
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
+			item 15 [Base.Pork;Base.PorkChop] flags[InheritFoodAge],
+			item 1 [Base.Garlic;Base.PowderedGarlic;Base.WildGarlicDried;Base.WildGarlic2] flags[InheritFoodAge],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.HamRaw,
+		}
+	}
+	
+	craftRecipe Sliced Pork
+	{
+		timedAction = SliceMeat_Surface,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:15,
+		ToolTip = Put it in the oven and get lard with pork rinds.,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+			item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mode:destroy,
+			item 15 [Base.Pork] flags[InheritFoodAge],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.SlicedPorkSausepan,
+		}
+	}
+	
+	craftRecipe Grind Mushrooms To Yeast Base [step1]
+	{
+		timedAction = SliceMeat_Surface,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:3,
+		ToolTip = Destroy the mushrooms to make yeast.,
+		inputs
+		{
+			item 1 tags[MortarPestle] mode:keep,
+			item 3 [Base.MushroomGeneric1;Base.MushroomGeneric2;Base.MushroomGeneric3;Base.MushroomGeneric4;Base.MushroomGeneric5;Base.MushroomGeneric6;Base.MushroomGeneric7] flags[InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 3 DFMFoodmod.WildYeastBase,
+		}
+	}
+
+	craftRecipe Make Yeast [step2]
+	{
+		timedAction = Making,
+		Time = 30,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:15,
+		ToolTip = A little water some crushed mushrooms.. a little time on the floor..,
+		inputs
+		{
+			item 3 [DFMFoodmod.WildYeastBase],
+			item 1 [Base.EmptyJar] mode:destroy flags[ItemCount],
+			item 1 [Base.JarLid],
+			item 1 [*],
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.JarOfYeast,
+		}
+	}
+	
+	craftRecipe Open Yeast Jar
+	{
+		timedAction = Making,
+		Time = 30,
+		OnCreate: Recipe.OnCreate.ANLOpenJar,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+		ToolTip = What are you waiting for? Get out the yeast!,
+        category = Cooking,
+		inputs
+		{
+			item 1 [DFMFoodmod.DryJarOfYeast],
+		}
+		outputs
+		{
+			item 3 Base.Yeast,
+		}
+	}
+
+	craftRecipe Make Mashed Berries [step1]
+	{
+		timedAction = Making,
+		Time = 30,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		ToolTip = Crush and destroy these berries! And get the wine!
+		Just like Jesus. Sorry.,
+		inputs
+		{
+			item 1 tags[MortarPestle] mode:keep,
+			item 3 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue] flags[InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.GratedBerries,
+		}
+	}
+	
+	craftRecipe Make Berry Wine [step2]
+	{
+		timedAction = Making,
+		Time = 30,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		ToolTip = There's not much left before the wine..
+		Leave it on the floor and wait a long, long time..,
+		inputs
+		{
+			item 1 [Base.EmptyJar] mode:destroy flags[ItemCount],
+			item 1 [Base.JarLid],
+			item 3 [DFMFoodmod.GratedBerries] flags[InheritFoodAge;ItemCount],
+			item 1 tags[Sugar],
+			item 1 [*],
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.JarOfCrushedBerries,
+		}
+	}
+	
+	craftRecipe Vinegar Base
+	{
+		timedAction = Making,
+		Time = 30,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		ToolTip = A liter of light alcohol and a jar with a lid on the floor
+		will make a little vinegar. You just have to wait! A lot of time..,
+		inputs
+		{
+			item 1 [Base.EmptyJar] mode:destroy flags[ItemCount],
+			item 1 [Base.JarLid],
+			item 1 [*],
+			-fluid 1.0 [Beer;Champagne;Cider;Mead;Wine],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.JarOfVinegarBase,
+		}
+	}
+	
+	craftRecipe Sliced Sugar Beets [step1]
+	{
+		timedAction = SliceMeat_Surface,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:15,
+		ToolTip = Chop it up and put it in the oven, bro.
+		For making sugar.,
+		inputs
+		{
+			item 3 [Base.SugarBeet] flags[InheritFoodAge;ItemCount],
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.SlicedSugarBeets,
+		}
+	}
+	
+	craftRecipe Make Sugar [step2]
+	{
+		timedAction = Making,
+		Time = 30,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		ToolTip = Grind it up and get sugar!,
+		inputs
+		{
+			item 1 tags[MortarPestle] mode:keep,
+			item 1 [DFMFoodmod.DriedSugarBeets],
+		}
+		outputs
+		{
+			item 3 Base.SugarCubes,
+		}
+	}
+			
+	craftRecipe Make Bacon
+	{
+		timedAction = SliceMeat_Surface,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:10,
+		ToolTip = Just bacon.,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+			item 3 [Base.Pork;Base.PorkChop] flags[InheritFoodAge],
+		}
+		outputs
+		{
+			item 1 Base.Bacon,
+		}
+	}
+			
+	craftRecipe Sliced Beef
+	{
+		timedAction = SliceMeat_Surface,
+		Time = 15,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:5,
+		ToolTip = You need to dry it on any dryer.,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+			item 20 [Base.Beef;Base.Steak] flags[InheritFoodAge],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.RawBeefJerky,
+		}
+	}
+	
+	craftRecipe Beef Jerky
+	{
+		time = 86400,
+        tags = DryingRackGrain;DryLeatherLarge;DryLeatherMedium;DryLeatherSmall;DryingRackHerb,
+        category = Food,
+		ToolTip = The shelf life is unlimited.,
+        inputs
+        {
+            item 1 [DFMFoodmod.RawBeefJerky] mode:destroy,
+        }
+		outputs
+		{
+            item 1 Base.BeefJerky,
+        }
+	}
+
+	craftRecipe Open Bottle Of Wild Berry Wine
+	{
+		timedAction = UncorkBottle,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenBeer,
+		OnTest = Recipe.OnTest.BottleNotOpened,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+		inputs
+		{
+			item 1 [DFMFoodmod.WildBerryWine] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.JarLid,
+			item 1 DFMFoodmod.WildBerryWineOpen,
+		}
+	}
+	
+	craftRecipe Return the Jar of Berry Wine
+	{
+		timedAction = Making,
+		Tags = AnySurfaceCraft;Cooking,
+		Time = 5,
+		category = Cooking,
+		xpAward = Cooking:1,
+		ToolTip = Return the jar! Just be careful 
+		otherwise you will lose the wine.,
+		inputs
+		{
+			item 1 [DFMFoodmod.WildBerryWineOpen] mode:destroy,
+		}
+		outputs
+		{
+			item 1 EmptyJar,
+		}
+	}
+
+	craftRecipe Make Meat Stick
+	{
+		timedAction = Making,
+		Time = 15,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:5,
+		ToolTip = Put it in the oven and it will dry out.,
+		inputs
+		{
+			item 10 [Base.MincedMeat] flags[InheritFoodAge;IsCookedFoodItem],
+		}
+		outputs
+		{
+			item 1 DFMFoodmod.RawDehydratedMeatStick,
+		}
+	}
+	
+	craftRecipe Make Pasta Dough
+	{
+		timedAction = Making,
+		Time = 60,
+		NeedToBeLearn = false,
+		ToolTip = Tooltip_Recipe_RequireWholeEggs
+		Make pasta from this dough.,
+		category = Cooking,
+		Tags = AnySurfaceCraft;Cooking,
+		xpAward = Cooking:10,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 [Base.RollingPin] mode:keep,
+			item 20 tags[Flour],
+			item 5 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+			item 1 [*],
+			-fluid 0.3 [Water],
+		}
+			outputs
+			{
+				item 1 DFMFoodmod.PastaDough,
+			}
+	}
+	
+	craftRecipe Make Raw Pasta
+	{
+		timedAction = SliceFood_Surface,
+		Time = 60,
+		NeedToBeLearn = false,
+		ToolTip = Tooltip_Recipe_RequireWholeEggs,
+		category = Cooking,
+		Tags = AnySurfaceCraft;Cooking,
+		xpAward = Cooking:10,
+		ToolTip = Put your pasta in the oven and it will dry out!,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+			item 1 [Base.RollingPin] mode:keep,
+			item 1 [DFMFoodmod.PastaDough] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+		}
+			outputs
+			{
+				item 1 DFMFoodmod.RawPasta,
+			}
+	}
+	
+	craftRecipe Make Ice Cream
+	{
+		timedAction = MixingBowl,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:15,
+		ToolTip = someday someday..,
+		inputs
+		{
+			item 1 tags[Bowl] mode:keep,
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
+			item 5 [DFMFoodmod.IceChunk] flags[InheritFoodAge;ItemCount],
+			item 5 tags[Sugar],
+			item 1 [*],
+			-fluid 0.5 [CowMilk;SheepMilk],
+		}
+			outputs
+			{
+				item 1 Base.Icecream,
+			}
+		
+	}
+}

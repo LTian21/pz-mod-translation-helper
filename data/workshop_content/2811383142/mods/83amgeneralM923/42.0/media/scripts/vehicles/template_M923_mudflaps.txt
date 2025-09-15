@@ -1,0 +1,78 @@
+module Base
+{
+	model 83amgeneralM923mudflaps1
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_mudflaps1,
+		texture = Vehicles/Vehicles_83amgeneralM923_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M923Mudflaps
+		{
+		part DAMNMudflaps
+        	{
+
+			model M923Mudflaps1
+				{
+                		file = 83amgeneralM923mudflaps1,
+				}
+
+			category = bodywork,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.M923Mudflaps1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M923.InstallComplete.Mudflaps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = M923.UninstallComplete.Mudflaps,
+
+            		}
+
+            		lua
+            		{
+					create = M923.Create.Mudflaps,
+					init = M923.Init.Mudflaps,
+					}
+		}
+	}
+
+		
+}

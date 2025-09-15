@@ -1,0 +1,79 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_SecurityDoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Security Door,
+			Icon		= fixtures_doors_01_33,
+		}
+	}
+
+    entity SecurityDoor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_SecurityDoor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 1000,
+			breakSound      = BreakDoor,
+			
+            face W
+            {
+                layer
+                {
+                    row = fixtures_doors_01_32,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_doors_01_33,
+                }
+            }
+			face W_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_01_34,
+                }
+            }
+            face N_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_01_35,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 350,
+            needToBeLearn = true,
+            category      = Doors_Metal,
+            SkillRequired = MetalWelding:9,
+            xpAward       = MetalWelding:15,
+            ToolTip       = Tooltip_craft_metalDoorDesc,
+            inputs
+            {
+		        item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 6 [Base.SheetMetal],
+				item 2 [Base.Hinge],
+				item 1 [Base.Doorknob],
+				item 2 [Base.GlassPanel],
+		        item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

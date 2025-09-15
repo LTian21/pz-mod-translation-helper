@@ -1,0 +1,74 @@
+module Base
+{
+	model 86fordE150Divider
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_divider,
+		texture = Vehicles/Vehicles_86fordE150_Interior,
+		shader = vehiclewheel,
+        scale = 0.1,
+    	}
+
+	template vehicle E150Divider
+		{
+		part E150Divider
+        	{
+
+			model E150Div
+				{
+                		file = 86fordE150Divider,
+				}
+
+			area = RearRightDoor,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.E150Divider,
+			mechanicRequireKey = true,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 600,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 600,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					}
+		}
+	}
+
+		
+}

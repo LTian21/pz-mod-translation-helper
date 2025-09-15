@@ -1,0 +1,55 @@
+module Base
+{
+	model 82firebirdRoofGlass
+	{
+		mesh = vehicles/Vehicles_82firebird_Body|transam_roof,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle FRB82RoofPanels
+	{
+		part FRB82RoofPanels
+        	{
+        	model FRB82Roof
+			{
+				file = 82firebirdRoofGlass,
+			}
+
+			category = Other,
+			area = SeatFrontLeft,
+			specificItem = false,
+			itemType = Base.82firebirdRearRoofPanels3,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB82.InstallComplete.Roof,
+                    requireUninstalled = FRB82Roofrack,
+            		}
+
+            table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = FRB82.UninstallComplete.Roof,
+                    requireUninstalled = FRB82Roofrack,
+            		}
+
+	            lua
+	            {
+				create = FRB82.Create.Roof,
+				init = FRB82.Init.Roof,
+				}
+		}
+	}
+}

@@ -1,0 +1,62 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_RoadBlock
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Road Block,
+			Icon		= construction_01_8,
+		}
+	}
+
+    entity RoadBlock
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_RoadBlock,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face E
+            {
+                layer
+                {
+                    row = construction_01_9,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = construction_01_8,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:2,
+            xpAward       = Woodwork:10,
+            category      = Decorations_Roadway,
+            tags          = Carpentry,
+            ToolTip       = Tooltip_craft_roadwayDecorationsDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 6 [Base.Plank] flags[Prop2],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

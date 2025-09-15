@@ -1,0 +1,61 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_StretcherBed
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Stretcher Bed,
+			Icon		= furniture_bedding_01_59,
+		}
+	}
+
+    entity StretcherBed
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_StretcherBed,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = furniture_bedding_01_58 furniture_bedding_01_59,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_bedding_01_57,
+                    row = furniture_bedding_01_56,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallHammer,
+            time          = 350,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:7,
+            category      = Furniture_Beds,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_bedDesc,
+            inputs
+            {
+		        item 2 [Base.BlowTorch] flags[Prop1],
+                item 6 [Base.MetalBar;Base.MetalPipe],
+                item 4 [Base.Sheet],
+		        item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

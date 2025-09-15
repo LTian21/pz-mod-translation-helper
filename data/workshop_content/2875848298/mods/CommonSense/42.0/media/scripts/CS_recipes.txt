@@ -1,0 +1,46 @@
+module Base
+{
+	craftRecipe CleanBandageWithAlcohol
+	{
+        timedAction = ScrubClothWithSoap,
+		Time = 40,
+		Tags = InHandCraft;Health,
+        category = Medical,
+        MetaRecipe = CleanBandage,
+		inputs
+		{
+			item 1 [Base.BandageDirty;Base.DenimStripsDirty;Base.LeatherStripsDirty;Base.RippedSheetsDirty] mode:destroy mappers[ragType],
+			item 1 [*],
+			-fluid 0.1 [Alcohol],
+		}
+		outputs
+		{
+			item 1 mapper:ragType,
+		}
+        	itemMapper ragType
+        	{
+			Base.Bandage = Base.BandageDirty,
+			Base.DenimStrips = Base.DenimStripsDirty,
+			Base.LeatherStrips = Base.LeatherStripsDirty,
+			Base.RippedSheets = Base.RippedSheetsDirty,
+		}
+	}
+
+	craftRecipe CutSheetWithClothes
+	{
+		timedAction = SewingCloth,
+		Time = 60,
+		Tags = AnySurfaceCraft,
+        category = Tailoring,
+        MetaRecipe = CutSheet,
+		inputs
+		{
+            item 1 tags[Scissors] mode:keep flags[MayDegradeLight],
+			item 1 tags[RipClothingCotton],
+		}
+		outputs
+		{
+			item 1 Base.Sheet,
+		}
+	}
+}

@@ -1,0 +1,56 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Overhead_Exhaust_Fan
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Overhead Exhaust Fan,
+			Icon		= Build_OverheadExhaustFan,
+		}
+	}
+
+    entity BuildOverheadExhaustFan
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Overhead_Exhaust_Fan,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face single
+            {
+                layer
+                {
+                    row = industry_02_6,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Electricity:1;MetalWelding:2,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPOverheadExhaustFan,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SheetMetal],
+                item 4 [Base.SmallSheetMetal],
+                item 2 [Base.Screws],
+                item 1 [Base.ElectricWire],
+                item 5 [Base.ElectronicsScrap],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

@@ -1,0 +1,63 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Small_Milling_Machine
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Small Milling Machine,
+			Icon		= Build_SmallMillingMachine,
+		}
+	}
+
+    entity BuildSmallMillingMachine
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Small_Milling_Machine,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = industry_02_54,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = industry_02_55,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 400,
+            needToBeLearn = true,
+            SkillRequired = Electricity:5;MetalWelding:5,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPSmallMillingMachine,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SheetMetal],
+                item 4 [Base.MetalBar],
+                item 2 [Base.Screws],
+                item 5 [Base.ElectricWire],
+                item 20 [Base.ElectronicsScrap],
+                item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

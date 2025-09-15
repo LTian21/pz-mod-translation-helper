@@ -1,0 +1,140 @@
+module Base
+{
+
+    model 88chevyS10windshield
+    {
+        mesh = vehicles/Vehicles_88chevyS10_Body|chevyS10_windshield_front,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 88chevyS10windshieldRear
+    {
+        mesh = vehicles/Vehicles_88chevyS10_Body|chevyS10_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle CH88Windshields
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 88chevyS10windshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.88ChevyS10Windshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 3,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = DAMNWindshieldArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = 88chevyS10windshieldRear,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.88ChevyS10WindshieldRear,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 3,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireUninstalled = CH88Rollbar,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+}

@@ -1,0 +1,51 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Wood_Crate_Lvl2
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Wood Crate,
+			Icon		= Build_CrateWood,
+		}
+	}
+
+    entity Wood_Crate_Lvl2
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Wood_Crate_Lvl2,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = carpentry_01_16,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = woodenCrateLvl2Test,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 50,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:5,
+            category      = Furniture,
+            tags          = carpentry,
+            ToolTip       = Tooltip_craft_crateDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1],
+                item 1 [SWB.PlankKit4x],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

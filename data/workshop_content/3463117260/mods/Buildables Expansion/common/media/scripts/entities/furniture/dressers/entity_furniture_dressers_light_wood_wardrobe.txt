@@ -1,0 +1,75 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LightWoodWardrobe
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Light Wood Wardrobe,
+			Icon		= furniture_storage_01_59,
+		}
+	}
+
+    entity LightWoodWardrobe
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_LightWoodWardrobe,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = furniture_storage_01_61,
+                    row = furniture_storage_01_60,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = furniture_storage_01_62 furniture_storage_01_63,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = furniture_storage_01_57,
+                    row = furniture_storage_01_56,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_storage_01_58 furniture_storage_01_59,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 350,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:7,
+            category      = Furniture_Dressers,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_dressersDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 8 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

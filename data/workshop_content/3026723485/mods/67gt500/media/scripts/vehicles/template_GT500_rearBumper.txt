@@ -1,0 +1,99 @@
+module Base
+{
+	model 67gt500rearBumper0
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 67gt500rearBumperA
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_bumper_rearA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 67gt500rearBullbarA
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_bullbar_rearA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle GT500RearBumpers
+		{
+		part GT500RearBumper
+        	{
+
+			model RearBumper0
+				{
+                		file = 67gt500rearBumper0,
+				}
+
+			model RearBumperA
+				{
+                		file = 67gt500rearBumperA,
+				}
+
+			model RearBullbarA
+				{
+                		file = 67gt500rearBullbarA,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.67gt500RearBumper0;Base.67gt500RearBumperA;Base.67gt500RearBullbar,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GT500.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = GT500.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = GT500.Create.RearBumper,
+					init = GT500.Init.RearBumper,
+					}
+		}
+	}
+
+		
+}

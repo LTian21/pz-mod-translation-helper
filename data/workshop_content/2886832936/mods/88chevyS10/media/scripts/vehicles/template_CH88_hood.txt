@@ -1,0 +1,128 @@
+module Base
+{
+
+	model 88chevyS10hood
+	{
+		mesh = vehicles/Vehicles_88chevyS10_Body|chevyS10_hood,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle CH88EngineDoor
+	{
+		part EngineDoor
+		{
+
+			model hood84666621
+			{
+				file = 88chevyS10hood,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			anim Close
+			{
+				anim = hood_opening,
+				reverse = TRUE,
+				rate = 0.65,
+			}
+
+			anim Open
+			{
+				anim = hood_opening,
+				rate = 0.65,
+			}
+
+			anim Closed
+			{
+				anim = hood_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = hood_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		
+			category = bodywork,
+			area = Engine,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleHoodOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleHoodCloseStandard,
+			}
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 180.0 0.0,
+			}
+
+			itemType = Base.88ChevyS10EngineDoor,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 550,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+}
+

@@ -1,0 +1,42 @@
+module Base
+{
+	template vehicle SUB87TrunkCompartment
+	{
+		part SUB87Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = Base.87chevySuburbanTrunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = SUB87.ContainerAccess.Trunk,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = SUB87.ContainerAccess.Trunk,
+			}
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+	}
+}
+

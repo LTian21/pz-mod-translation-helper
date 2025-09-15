@@ -1,0 +1,418 @@
+module Base
+{
+	model 75grandPrixWindshieldA
+    	{
+        mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_windshieldA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 75grandPrixWindowflA
+    	{
+        mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_window_flA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 75grandPrixWindowfrA
+    	{
+        mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_window_frA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 75grandPrixWindowrlA
+    	{
+        mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_window_rlA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 75grandPrixWindowrrA
+    	{
+        mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_window_rrA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 75grandPrixWindshieldrearA
+    	{
+        mesh = vehicles/Vehicles_75grandPrix_Body|75pontiac_windshield_rearA,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle PRX75Armor
+		{
+		part PRX75WindshieldArmor
+        	{
+
+			model PRX75winda0
+				{
+                		file = 75grandPrixWindshieldA,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.75grandPrixWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRX75.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = PRX75.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = PRX75.Create.WindshieldArmor,
+					init = PRX75.Init.WindshieldArmor,
+					}
+			}
+
+		part PRX75FrontLeftArmor
+        {
+
+			model PRX75leftdoora
+				{
+                		file = 75grandPrixWindowflA,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.75grandPrixFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRX75.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PRX75.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = PRX75.Create.FrontLeftArmor,
+					init = PRX75.Init.FrontLeftArmor,
+					}
+		}
+
+		part PRX75FrontRightArmor
+        {
+
+			model PRX75rightdoora
+				{
+                		file = 75grandPrixWindowfrA,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.75grandPrixFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRX75.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PRX75.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = PRX75.Create.FrontRightArmor,
+					init = PRX75.Init.FrontRightArmor,
+					}
+		}
+
+		part PRX75RearLeftArmor
+        {
+
+			model PRX75leftdoorra
+				{
+                		file = 75grandPrixWindowrlA,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.75grandPrixRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRX75.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PRX75.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = PRX75.Create.RearLeftArmor,
+					init = PRX75.Init.RearLeftArmor,
+					}
+		}
+
+		part PRX75RearRightArmor
+        {
+
+			model PRX75rightdoorra
+				{
+                		file = 75grandPrixWindowrrA,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.75grandPrixRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRX75.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PRX75.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = PRX75.Create.RearRightArmor,
+					init = PRX75.Init.RearRightArmor,
+					}
+			}
+
+			part PRX75WindshieldRearArmor
+        {
+
+				model PRX75windra
+				{
+                		file = 75grandPrixWindshieldrearA,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.75grandPrixWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRX75.InstallComplete.WindshieldRearArmor,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = PRX75.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = PRX75.Create.WindshieldRearArmor,
+					init = PRX75.Init.WindshieldRearArmor,
+					}
+			}
+		}
+
+}

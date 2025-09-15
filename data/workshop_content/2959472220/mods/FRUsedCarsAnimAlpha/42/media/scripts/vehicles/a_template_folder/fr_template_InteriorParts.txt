@@ -1,0 +1,231 @@
+module Base
+{
+	template vehicle FR_ArmoryMil
+	{
+		part FR_VehicleArmoryMil1
+		{
+			category = nodisplay,
+			area = SeatRearRight,
+			itemType = Base.FR_VehicleArmory,
+			specificItem = false,
+
+			model Default
+			{
+				file = FR_ArmoryMilitary,
+			}
+
+			container
+			{
+				test = Vehicles.ContainerAccess.FR_VehicleArmory,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+	template vehicle FR_ArmoryMilDouble
+	{
+		part FR_VehicleArmoryMil1
+		{
+		}
+
+		part FR_VehicleArmoryMil2
+		{
+		}
+
+		part FR_VehicleArmoryMil*
+		{
+			category = nodisplay,
+			area = SeatRearRight,
+			itemType = Base.FR_VehicleArmory,
+			specificItem = false,
+
+			model Default
+			{
+				file = FR_ArmoryMilitary,
+			}
+
+			container
+			{
+				test = Vehicles.ContainerAccess.FR_VehicleArmory,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+	
+	template vehicle FR_RV_Interior
+	{
+		part FR_KitchenCabinet
+		{
+			category = nodisplay,
+			area = SeatRearRight,
+			itemType = Base.FR_KitchenCabinet,
+			specificItem = false,
+			
+			table FRPartInfo
+			{
+				interiorAccess = TRUE,
+			}
+
+			container
+			{
+				test = Vehicles.ContainerAccess.FR_InteriorContainer,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+		
+		part FR_Wardrobe
+		{
+			category = nodisplay,
+			area = SeatRearRight,
+			itemType = Base.FR_Wardrobe,
+			specificItem = false,
+			
+			table FRPartInfo
+			{
+				interiorAccess = TRUE,
+			}
+
+			container
+			{
+				test = Vehicles.ContainerAccess.FR_InteriorContainer,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part FR_Fridge
+		{
+			category = nodisplay,
+			area = SeatRearRight,
+			itemType = Base.FR_Fridge,
+			specificItem = false,
+			
+			table FRPartInfo
+			{
+				interiorAccess = TRUE,
+			}
+			
+			container
+			{
+				capacity = 20,
+				test = Vehicles.ContainerAccess.FR_InteriorContainer,
+			}
+		    	table install
+      		{
+          		items
+          		{
+              			1
+              			{
+                  		type = Base.Screwdriver,
+                  		count = 1,
+                  		keep = true,
+											equip = primary,
+              			}
+          		}
+          	time = 300,
+          	skills = Mechanics:1,
+          	recipes = Basic Mechanics,
+          	test = Vehicles.InstallTest.Default,
+      		}
+      		table uninstall
+      		{
+          		items
+          		{
+              			1
+              			{
+                  			type = Base.Screwdriver,
+                  			count = 1,
+                  			keep = true,
+							equip = primary,
+              			}
+          		}
+          		time = 300,
+          		skills = Mechanics:1,
+          		recipes = Basic Mechanics,
+          		test = Vehicles.UninstallTest.Default,
+      		}
+			lua
+			{
+				create = Vehicles.Create.FR_Fridge,
+				init = Vehicles.Init.FR_Fridge,
+				update = Vehicles.Update.FR_Fridge,
+			}
+		}
+
+		part FR_Oven
+		{
+			category = nodisplay,
+			area = SeatRearRight,
+			itemType = Base.FR_Oven,
+			specificItem = false,
+			
+			table FRPartInfo
+			{
+				interiorAccess = TRUE,
+			}
+			
+			container
+			{
+				capacity = 10,
+				test = Vehicles.ContainerAccess.FR_InteriorContainer,
+			}
+		    	table install
+      		{
+          		items
+          		{
+              			1
+              			{
+                  		type = Base.Screwdriver,
+                  		count = 1,
+                  		keep = true,
+						equip = primary,
+              			}
+          		}
+          	time = 300,
+          	skills = Mechanics:1,
+          	recipes = Basic Mechanics,
+          	test = Vehicles.InstallTest.Default,
+      		}
+      		table uninstall
+      		{
+          		items
+          		{
+              			1
+              			{
+                  			type = Base.Screwdriver,
+                  			count = 1,
+                  			keep = true,
+							equip = primary,
+              			}
+          		}
+          		time = 300,
+          		skills = Mechanics:1,
+          		recipes = Basic Mechanics,
+          		test = Vehicles.UninstallTest.Default,
+      		}
+			lua
+			{
+				create = Vehicles.Create.FR_Oven,
+				init = Vehicles.Init.FR_Oven,
+				update = Vehicles.Update.FR_Oven,
+			}
+		}
+	}
+}
+
+

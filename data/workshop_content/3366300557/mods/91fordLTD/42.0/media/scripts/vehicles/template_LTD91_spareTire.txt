@@ -1,0 +1,97 @@
+module Base
+{
+
+	model 91fordLTDSpare
+	{
+		mesh = vehicles/Vehicles_91fordLTD_Body|vic91_spare_sedan,
+		texture = Vehicles/Vehicles_91fordLTD_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	
+	template vehicle LTD91SpareTiresWagon
+	{
+		part DAMNSpareTire
+        	{
+
+			category = Other,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.fordCVPITire1;Base.91fordLTDTire1;damnCraft.SmallTire1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LTD91.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = LTD91.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = LTD91.Create.SpareTire,
+				init = LTD91.Init.SpareTire,
+				}
+		}
+	}
+
+    template vehicle LTD91SpareTires
+	{
+        template! = LTD91SpareTiresWagon,
+
+		part DAMNSpareTire
+        {
+
+			model LTD91SpareTire0
+				{
+                		file = 91fordLTDSpare,
+				}
+            model LTD91SpareTire1
+				{
+                		file = 91fordLTDSpare,
+				}
+            model LTD91SpareTire2
+				{
+                		file = 91fordLTDSpare,
+				}
+		}
+	}
+}
+

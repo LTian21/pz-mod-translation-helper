@@ -1,0 +1,88 @@
+module Base
+{
+    model Tatra8156X6Civil_Windshield_Armor
+    {
+        mesh = vehicles/Vehicles_Civil6X6Tatra815_Body|windshieldarmor,
+        
+		shader = vehicle,
+		scale = 1,
+    }
+    model Tatra8156X6Civil_WindshieldRear_Armor
+    {
+        mesh = vehicles/Vehicles_Civil6X6Tatra815_Body|rearwindshieldarmor1,
+        
+		shader = vehicle,
+                invertX = FALSE,
+                static = TRUE,
+		scale = 1,
+    }
+	model Tatra8156X6Civil_ProtectionWindowLeft
+    {
+        mesh = vehicles/Vehicles_Civil6X6Tatra815_Body|leftfrontwindowarmor1,
+        texture = Vehicles/YellowCivil_Tatra815,
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1.0,
+        boneWeight = FrontLeftWindowArmorBone 1.0,
+        
+    }
+	model Tatra8156X6Civil_ProtectionWindowRight
+    {
+        mesh = vehicles/Vehicles_Civil6X6Tatra815_Body|rightfrontwindowarmor1,
+	texture = Vehicles/YellowCivil_Tatra815,
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1.0,
+        boneWeight = FrontRightWindowArmorBone 1.0,
+    }
+
+	
+
+    template vehicle Tatra8156X6Civil_armor
+    {
+        template = ATA2Protection/part/ATA2ProtectionWindshield,
+        part ATA2ProtectionWindshield
+        {
+            model Default
+            {
+                file = Tatra8156X6Civil_Windshield_Armor,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindshieldRear,
+        part ATA2ProtectionWindshieldRear
+        {
+            
+
+            model Default
+            {
+                file = Tatra8156X6Civil_WindshieldRear_Armor,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontLeft,
+        part ATA2ProtectionWindowFrontLeft
+        {
+                        parent = DoorFrontLeft,
+
+			model Default
+            {
+                file = Tatra8156X6Civil_ProtectionWindowLeft,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontRight,
+        part ATA2ProtectionWindowFrontRight
+        {
+                        parent = DoorFrontRight, 
+                       
+			model Default
+            {
+                file = Tatra8156X6Civil_ProtectionWindowRight,
+            }
+        }       
+
+    }
+}

@@ -1,0 +1,82 @@
+module Base
+{
+
+	model 89trooperroofrack0
+	{
+		mesh = vehicles/Vehicles_89trooper_Body|trooper_roofrack,
+		texture = Vehicles/Vehicles_89trooper_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle ISZ89Roofrack
+	{
+		part ISZ89Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 89trooperroofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.89trooperRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = ISZ89.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = ISZ89.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = ISZ89.Create.Roofrack,
+					init = ISZ89.Init.Roofrack,
+				}
+		}
+	}
+}
+

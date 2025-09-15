@@ -1,0 +1,121 @@
+module Base
+{
+
+    model 92nissanGTRbumperRear0
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_bumperRear_0,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+	
+	model 92nissanGTRbumperRear1
+	{
+		mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_bumperRear_1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 92nissanGTRbumperRear2
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_bumperRear_2,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 92nissanGTRbumperRear3
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_bumperRear_3,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 92nissanGTRbumperRearA
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_bumperRear_A,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle R32BumpersRear
+		{
+		part DAMNBumperRear
+       		{
+
+            model BumperRear0
+            {
+                    file = 92nissanGTRbumperRear0,
+            }
+
+            model BumperRear1
+			{
+                	file = 92nissanGTRbumperRear1,
+			}
+
+            model BumperRear2
+            {
+                    file = 92nissanGTRbumperRear2,
+            }
+
+            model BumperRear3
+            {
+                    file = 92nissanGTRbumperRear3,
+            }
+
+            model BumperRearA
+            {
+                    file = 92nissanGTRbumperRearA,
+            }
+
+            area = TruckBed,
+            category = bodywork,
+            specificItem = false,
+            itemType = Base.R32BumperRear0;Base.R32BumperRear1;Base.R32BumperRear2;Base.R32BumperRear3;Base.R32BumperRearA,
+            mechanicRequireKey = false,
+            durability = 5,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 500,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = R32.InstallComplete.BumperRear,
+                door = EngineDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 500,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = R32.UninstallComplete.BumperRear,
+            }
+            lua
+            {
+                create = R32.Create.BumperRear,
+                init = R32.Init.BumperRear,
+            }
+        }
+	}
+}
+

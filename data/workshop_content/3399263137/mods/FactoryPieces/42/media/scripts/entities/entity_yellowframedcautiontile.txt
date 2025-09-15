@@ -1,0 +1,50 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Yellow_Framed_Caution_Tile
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Yellow Framed Caution Tile,
+			Icon		= Build_YellowFramedCautionTile,
+		}
+	}
+
+    entity BuildYellowFramedCautionTile
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Yellow_Framed_Caution_Tile,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_17,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = Making,
+            time          = 125,
+            needToBeLearn = false,
+            xpAward       = Maintenance:4,
+            category      = Factory Pieces,
+            ToolTip       = Tooltip_FPYellowFramedCautionTile,
+            inputs
+            {
+		item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull;Prop1],
+                item 1 [Base.PaintYellow],
+                item 2 [Base.DuctTape],
+            }
+        }
+    }
+}

@@ -1,0 +1,127 @@
+module Base
+{
+	template vehicle FRTrailerHitch
+	{
+		part FRTrailerHitch
+		{
+			category = fr_attachments,
+			area = TruckBed,
+			itemType = Base.FRTrailerHitch,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			table FRPartInfo
+			{
+				partChance = 80,
+				oneModel = TRUE,
+			}
+			
+            table install
+            {
+                time = 200,
+                skills = Mechanics:1,
+                test = Vehicles.InstallTest.Default,
+            }
+            table uninstall
+            {
+                
+                time = 200,
+                  skills = Mechanics:1,
+                test = Vehicles.UninstallTest.FR_TrailerHitch,
+            }
+			
+            lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+            }
+		}
+	}
+	
+	template vehicle FRFifthWheelHitch
+	{
+		part FRFifthWheelHitch
+		{
+			category = fr_attachments,
+			area = TireRearLeft,
+			itemType = Base.FRFifthWheelHitch,
+			specificItem = false,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			table FRPartInfo
+			{
+				partChance = 100,
+				oneModel = TRUE,
+			}
+			
+            table install
+            {
+                time = 200,
+                skills = Mechanics:1,
+                test = Vehicles.InstallTest.Default,
+            }
+            table uninstall
+            {
+                
+                time = 200,
+                  skills = Mechanics:1,
+                test = Vehicles.UninstallTest.FR_TrailerHitch,
+            }
+			
+            lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+            }
+		}
+	}
+	
+	template vehicle FRTrailerJack
+	{
+		part FRTrailerJack
+		{		
+			category = nodisplay,
+			itemType = Base.GloveBox,
+			area = Engine,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			
+			door
+			{
+			}
+
+			anim Close
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				rate = 0.8,
+			}
+
+			anim Open
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				rate = 0.8,
+			}
+
+			anim Closed
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			lua
+			{
+                create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+}

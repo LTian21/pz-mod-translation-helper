@@ -1,0 +1,362 @@
+module Base
+{
+	model Vehicles_pzkFranklinTriumphTWDFire
+	{
+		mesh = vehicles/Vehicles_CarNormalLights,
+		shader = vehicle_norandom_multiuv,
+		invertX = FALSE,
+		scale = 0.008,
+	}
+
+	template vehicle pzkFranklinTriumphTWDFireTemplate
+	{
+		mechanicType = 1,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.2,
+
+		model
+		{
+			file = Vehicles_pzkFranklinTriumphTWDFire,
+			scale = 1.8200,
+			offset = 0.0000 0.2692 0.0000,
+		}
+
+		spawnOffsetY = 0.24529703,
+
+		textureMask = Vehicles/Vehicle_pzkFranklinTriumphTWD_mask,
+		textureLights = Vehicles/Vehicle_pzkFranklinTriumphTWDFire_lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/pzkVeh_Damage1,
+		textureDamage2Shell = Vehicles/pzkVeh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		sound
+		{
+			engine = VehicleEngineCarNormal,
+			engineStart = VehicleEngineCarNormal,
+			engineTurnOff = VehicleEngineCarNormal,
+			horn = VehicleHornStandard,
+			ignitionFail = VehicleIgnitionFailCarNormal,
+		}
+
+		lightbar
+		{
+			soundSiren = VehicleSiren,
+			leftCol = 1;0;0,
+			rightCol = 1;0;0,
+		}
+
+		extents = 0.8901 0.6484 2.6044,
+		mass = 800,
+		physicsChassisShape = 0.8901 0.6484 2.6044,
+		centerOfMassOffset = 0.0000 0.2692 0.0000,
+		engineForce = 4800,
+		maxSpeed = 100f,
+		engineLoudness = 80,
+		engineQuality = 70,
+		brakingForce = 90,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 1.0f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 30,
+		suspensionCompression = 1.83,
+		suspensionDamping = 1.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.2,
+		wheelFriction = 1.5f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 4,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.3626 -0.3022 0.8516,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.3626 -0.3022 0.8516,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.3626 -0.3022 -0.6099,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.3626 -0.3022 -0.6099,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		template = PassengerSeat4,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.1813 -0.1264 0.0824,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.5714 -0.4341 0.1374,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+
+			switchSeat RearLeft
+			{
+			}
+
+			switchSeat RearRight
+			{
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.1813 -0.1264 0.0824,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.5714 -0.4341 0.1374,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+
+			switchSeat RearLeft
+			{
+			}
+
+			switchSeat RearRight
+			{
+			}
+		}
+
+		passenger RearLeft
+		{
+			position inside
+			{
+				offset = 0.1813 -0.1264 -0.3187,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.5714 -0.4341 -0.3187,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearLeft,
+			}
+
+			switchSeat FrontLeft
+			{
+			}
+
+			switchSeat FrontRight
+			{
+			}
+		}
+
+		passenger RearRight
+		{
+			position inside
+			{
+				offset = -0.1813 -0.1264 -0.3187,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.5714 -0.4341 -0.3187,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearRight,
+			}
+
+			switchSeat FrontLeft
+			{
+			}
+
+			switchSeat FrontRight
+			{
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 1.4945 0.8681 0.4725,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -1.4945 0.8681 0.4725,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 0.6703 0.1538 0.4725 0.4725,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -0.6703 0.1538 0.4725 0.4725,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 0.6703 -0.3187 0.4725 0.4725,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -0.6703 -0.3187 0.4725 0.4725,
+		}
+
+		area GasTank
+		{
+			xywh = 0.6703 -0.6099 0.4725 0.4725,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.6703 0.8516 0.4725 0.4725,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.6703 0.8516 0.4725 0.4725,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 0.6703 -0.6099 0.4725 0.4725,
+		}
+
+		area TireRearRight
+		{
+			xywh = -0.6703 -0.6099 0.4725 0.4725,
+		}
+
+		template = TrunkDoor,
+		template = Trunk/part/TruckBed,
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+		template = Seat/part/SeatRearLeft,
+		template = Seat/part/SeatRearRight,
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+			}
+		}
+
+		template = GloveBox,
+		part GloveBox
+        {
+            container
+            {
+                capacity = 5,
+            }
+        }
+
+		template = GasTank,
+		part GasTank
+		{
+			install
+			{
+				skills = Mechanics:6,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:6,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+		template = EngineDoor,
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+		template = Window/part/WindowRearLeft,
+		template = Window/part/WindowRearRight,
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+		template = Door/part/DoorRearLeft,
+		template = Door/part/DoorRearRight,
+		template = Tire,
+		template = Brake,
+		template = Suspension,
+		template = Radio_HAM,
+
+		/*part Radio*
+		{
+			itemType = Radio.HamRadio2,
+		}*/
+
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.2747 -1.3462,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.2747 1.3297,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1,
+		}
+	}
+}

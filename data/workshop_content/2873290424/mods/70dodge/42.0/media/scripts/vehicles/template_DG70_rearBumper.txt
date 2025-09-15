@@ -1,0 +1,112 @@
+module Base
+{
+	model 70dodgerearBumper0
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 70dodgerearBumpera
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_bumper_rear_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 70dodgerearBumperb
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_bumper_rear_b,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 70dodgerearBumperc
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_bumper_rear_c,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DG70RearBumpers
+		{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 70dodgerearBumper0,
+				}
+
+			model RearBumperA
+				{
+                		file = 70dodgerearBumpera,
+				}
+
+			model RearBumperB
+				{
+                		file = 70dodgerearBumperb,
+				}
+
+			model RearBumperC
+				{
+                		file = 70dodgerearBumperc,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.DG70RearBumper0;Base.DG70RearBumperA;Base.DG70RearBumperB;Base.DG70RearBumperC,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DG70.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DG70.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = DG70.Create.RearBumper,
+					init = DG70.Init.RearBumper,
+					}
+		}
+	}
+
+		
+}

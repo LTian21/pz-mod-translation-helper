@@ -1,0 +1,75 @@
+module Base
+{
+
+    model 89fordBroncowindshield
+    {
+        mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle BR89Windshield
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 89fordBroncowindshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.89BroncoWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = BR89WindshieldArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        
+
+    }
+
+}

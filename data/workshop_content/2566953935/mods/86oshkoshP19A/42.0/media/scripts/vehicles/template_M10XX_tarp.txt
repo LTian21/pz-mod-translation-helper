@@ -1,0 +1,103 @@
+module Base
+{
+	
+    model trailerM1082tarp
+    {
+        mesh = vehicles/Trailers_m10xx_body|M1082tarp,
+        shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    }
+    model trailerM1095tarp
+    {
+        mesh = vehicles/Trailers_m10xx_body|M1095tarp,
+        shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    }
+    model trailerM10xxflap
+    {
+        mesh = vehicles/Trailers_m10xx_body|MXtrailers_tailgate_tarp,
+        shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    }
+
+	template vehicle M1082Tarp
+		{
+		part M10XXTarp
+       		{
+
+            model tarp0
+			{
+                	file = trailerM1082tarp,
+			}
+
+            model tarp1
+			{
+                	file = trailerM10xxflap,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            itemType = Base.M1082Tarp,
+            mechanicRequireKey = false,
+            durability = 3,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = M10XX.InstallComplete.Tarp,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = M10XX.UninstallComplete.Tarp,
+            }
+            lua
+            {
+                create = M10XX.Create.Tarp,
+                init = M10XX.Init.Tarp,
+            }
+        }
+	}
+
+    template vehicle M1095Tarp
+	{
+        template! =  M1082Tarp,
+
+		part M10XXTarp
+       		{
+
+            model tarp0
+			{
+                	file = trailerM1095tarp,
+			}
+        }
+    }
+}
+

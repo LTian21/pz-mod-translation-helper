@@ -1,0 +1,76 @@
+module Base
+{
+	model 88chevyS10Rollbar
+	{
+		mesh = vehicles/Vehicles_88chevyS10_Body|chevyS10_rollbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CH88Rollbar
+		{
+		part CH88Rollbar
+        	{
+
+			model Rollbar436578
+				{
+                		file = 88chevyS10Rollbar,
+				}
+
+			area = TireRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.80sPickupRollbarA,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireUninstalled = CH88BedCover,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 2000,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+                	test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+            		create = DAMN.Create.Blank,
+					}
+		}
+	}
+
+		
+}

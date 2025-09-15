@@ -1,0 +1,79 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_DoubleMetalBlackGlassRightDoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Double Metal Black Glass Right Door,
+			Icon		= fixtures_doors_02_45,
+		}
+	}
+
+    entity DoubleMetalBlackGlassRightDoor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_DoubleMetalBlackGlassRightDoor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 600,
+			breakSound      = BreakDoor,
+			
+            face W
+            {
+                layer
+                {
+                    row = fixtures_doors_02_40,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_doors_02_45,
+                }
+            }
+			face W_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_02_42,
+                }
+            }
+            face N_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_02_47,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 350,
+            needToBeLearn = true,
+            category      = Doors_Metal,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:10,
+            ToolTip       = Tooltip_craft_DoubleMetalBlackGlassRightDoorDesc,
+            inputs
+            {
+		        item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 6 [Base.SheetMetal],
+				item 2 [Base.GlassPanel],
+				item 2 [Base.Hinge],
+				item 1 [Base.Doorknob],
+		        item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

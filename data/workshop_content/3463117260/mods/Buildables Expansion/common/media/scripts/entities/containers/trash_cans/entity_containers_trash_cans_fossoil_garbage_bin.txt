@@ -1,0 +1,63 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FossoilGarbageBin
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Fossoil Garbage Bin,
+			Icon		= location_shop_fossoil_01_32,
+		}
+	}
+
+    entity FossoilGarbageBin
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FossoilGarbageBin,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_shop_fossoil_01_33,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_shop_fossoil_01_32,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:15,
+            category      = Containers_Trashcans,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_trashCanDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SmallSheetMetal],
+                item 8 [Base.SheetMetal],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 2 [Base.Hinge],
+                item 1 [Base.Bag_TrashBag;Base.Garbagebag],
+                item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

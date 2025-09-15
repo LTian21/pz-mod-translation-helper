@@ -1,0 +1,404 @@
+module Base
+{
+
+	model 49powerWagonfenderfl
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_fender_fl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 49powerWagonfenderfr
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_fender_fr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 49powerWagonfenderrl
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_fender_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 49powerWagonfenderrr
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_fender_rr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 49powerWagonfenderapocfl
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_fender_apoc_fl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 49powerWagonfenderapocfr
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_fender_apoc_fr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 49powerWagonfenderapocrl
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_fender_apoc_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 49powerWagonfenderapocrr
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_fender_apoc_rr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	
+	template vehicle PWRFenders
+	{
+		part DAMNFenderFrontLeft
+		{
+			
+			model fenderFL
+			{
+				file = 49powerWagonfenderfl,
+			}
+
+			model fenderapocFL
+			{
+				file = 49powerWagonfenderapocfl,
+			}
+			
+			area = TireFrontLeft,
+			itemType = Base.49powerWagonFrontFender;Base.49powerWagonFrontFenderMakeshift,
+
+			table install
+			{
+				complete = PWR.InstallComplete.FenderFrontLeft,
+			}
+			table uninstall
+			{
+				complete = PWR.UninstallComplete.FenderFrontLeft,
+				requireUninstalled = HeadlightLeft,
+			}
+			lua
+			{
+				init = PWR.Init.FenderFrontLeft,
+				create = PWR.Create.FenderFrontLeft,
+			}
+		}
+
+		part DAMNFenderFrontRight
+		{
+
+			model fenderFR
+			{
+				file = 49powerWagonfenderfr,
+			}
+
+			model fenderapocFR
+			{
+				file = 49powerWagonfenderapocfr,
+			}
+
+			area = TireFrontRight,
+			itemType = Base.49powerWagonFrontFender;Base.49powerWagonFrontFenderMakeshift,
+
+			table install
+			{
+				complete = PWR.InstallComplete.FenderFrontRight,
+			}
+			table uninstall
+			{
+				complete = PWR.UninstallComplete.FenderFrontRight,
+				requireUninstalled = HeadlightRight,
+			}
+			lua
+			{
+				init = PWR.Init.FenderFrontRight,
+				create = PWR.Create.FenderFrontRight,
+			}
+		}
+
+		part DAMNFenderRearLeft
+		{
+
+			model fenderRL
+			{
+				file = 49powerWagonfenderrl,
+			}
+
+			model fenderapocRL
+			{
+				file = 49powerWagonfenderapocrl,
+			}
+
+			area = TireRearLeft,
+			itemType = Base.49powerWagonRearFender;Base.49powerWagonRearFenderMakeshift,
+
+			table install
+			{
+				complete = PWR.InstallComplete.FenderRearLeft,
+			}
+			table uninstall
+			{
+				complete = PWR.UninstallComplete.FenderRearLeft,
+			}
+			lua
+			{
+				init = PWR.Init.FenderRearLeft,
+				create = PWR.Create.FenderRearLeft,
+			}
+		}
+
+		part DAMNFenderRearRight
+		{
+
+			model fenderRR
+			{
+				file = 49powerWagonfenderrr,
+			}
+
+			model fenderapocRR
+			{
+				file = 49powerWagonfenderapocrr,
+			}
+
+			area = TireRearRight,
+			itemType = Base.49powerWagonRearFender;Base.49powerWagonRearFenderMakeshift,
+
+			table install
+			{
+				complete = PWR.InstallComplete.FenderRearRight,
+			}
+			table uninstall
+			{
+				complete = PWR.UninstallComplete.FenderRearRight,
+			}
+			lua
+			{
+				init = PWR.Init.FenderRearRight,
+				create = PWR.Create.FenderRearRight,
+			}
+		}
+
+		part DAMNFender*
+		{
+			specificItem = false,
+			category = bodywork,
+			mechanicRequireKey = true,
+            durability = 4,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+
+			}
+		}
+	}
+
+	template vehicle PWRFendersPA
+	{
+		part DAMNFenderFrontLeft
+		{
+			model fenderapocFL
+			{
+				file = 49powerWagonfenderapocfl,
+			}
+			
+			model fenderFL
+			{
+				file = 49powerWagonfenderfl,
+			}
+			
+			area = TireFrontLeft,
+			itemType = Base.49powerWagonFrontFenderMakeshift;Base.49powerWagonFrontFender,
+
+			table install
+			{
+				complete = PWR.InstallComplete.FenderFrontLeftPA,
+			}
+			table uninstall
+			{
+				complete = PWR.UninstallComplete.FenderFrontLeftPA,
+			}
+			lua
+			{
+				init = PWR.Init.FenderFrontLeftPA,
+				create = PWR.Create.FenderFrontLeftPA,
+			}
+		}
+
+		part DAMNFenderFrontRight
+		{
+
+			model fenderapocFR
+			{
+				file = 49powerWagonfenderapocfr,
+			}
+
+			model fenderFR
+			{
+				file = 49powerWagonfenderfr,
+			}
+
+			area = TireFrontRight,
+			itemType = Base.49powerWagonFrontFenderMakeshift;Base.49powerWagonFrontFender,
+
+			table install
+			{
+				complete = PWR.InstallComplete.FenderFrontRightPA,
+			}
+			table uninstall
+			{
+				complete = PWR.UninstallComplete.FenderFrontRightPA,
+			}
+			lua
+			{
+				init = PWR.Init.FenderFrontRightPA,
+				create = PWR.Create.FenderFrontRightPA,
+			}
+		}
+
+		part DAMNFenderRearLeft
+		{
+
+			model fenderapocRL
+			{
+				file = 49powerWagonfenderapocrl,
+			}
+
+			model fenderRL
+			{
+				file = 49powerWagonfenderrl,
+			}
+
+			area = TireRearLeft,
+			itemType = Base.49powerWagonRearFenderMakeshift;Base.49powerWagonRearFender,
+
+			table install
+			{
+				complete = PWR.InstallComplete.FenderRearLeftPA,
+			}
+			table uninstall
+			{
+				complete = PWR.UninstallComplete.FenderRearLeftPA,
+			}
+			lua
+			{
+				init = PWR.Init.FenderRearLeftPA,
+				create = PWR.Create.FenderRearLeftPA,
+			}
+		}
+
+		part DAMNFenderRearRight
+		{
+
+			model fenderapocRR
+			{
+				file = 49powerWagonfenderapocrr,
+			}
+
+			model fenderRR
+			{
+				file = 49powerWagonfenderrr,
+			}
+
+			area = TireRearRight,
+			itemType = Base.49powerWagonRearFenderMakeshift;Base.49powerWagonRearFender,
+
+			table install
+			{
+				complete = PWR.InstallComplete.FenderRearRightPA,
+			}
+			table uninstall
+			{
+				complete = PWR.UninstallComplete.FenderRearRightPA,
+			}
+			lua
+			{
+				init = PWR.Init.FenderRearRightPA,
+				create = PWR.Create.FenderRearRightPA,
+			}
+		}
+
+		part DAMNFender*
+		{
+			specificItem = false,
+			category = bodywork,
+			mechanicRequireKey = true,
+            durability = 5,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+
+			}
+		}
+	}
+}
+

@@ -1,0 +1,75 @@
+module Base
+{
+	model TrailerM101A3backcover
+	{
+		mesh = vehicles/Trailers_M101A3_Body|M101A3_cover,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M101A3Covers
+		{
+		part M101A3Cover
+        	{
+
+			model Cover1
+				{
+                		file = TrailerM101A3backcover,
+				}
+
+			area = TireFrontRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M101A3Cover1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = M101A3.InstallComplete.Cover,
+                    requireUninstalled = M101A3Tarp,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Wrench,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 2000,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+                    complete = M101A3.UninstallComplete.Cover,
+                    requireUninstalled = TrunkDoorTwo,
+            		}
+
+            		lua
+            		{
+                    create = M101A3.Create.Cover,
+                    init = M101A3.Init.Cover,
+                    }
+		}
+	}
+}

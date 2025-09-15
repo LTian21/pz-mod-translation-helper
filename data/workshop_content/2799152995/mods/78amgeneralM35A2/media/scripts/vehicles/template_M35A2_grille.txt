@@ -1,0 +1,75 @@
+module Base
+{
+	model 78amgeneralM35A2grille1
+	{
+		mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_grille1,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M35A2Grilles
+		{
+		part M35A2Grille
+        	{
+
+			model M35Grille1
+				{
+                		file = 78amgeneralM35A2grille1,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M35A2Grille1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M35A2.InstallComplete.Grille,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 650,
+			skills = Mechanics:3,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = M35A2.UninstallComplete.Grille,
+            		}
+
+            		lua
+            		{
+			create = M35A2.Create.Grille,
+			init = M35A2.Init.Grille,
+			}
+		}
+	}
+
+		
+}

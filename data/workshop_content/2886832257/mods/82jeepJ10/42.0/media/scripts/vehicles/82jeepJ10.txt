@@ -1,0 +1,432 @@
+module Base
+{
+	model 82jeepJ10Base
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_body,
+		shader = damn_vehicle_shader,
+		invertX = FALSE,
+		scale = 0.1,
+	}
+	model 82jeepJ10Interior
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_interior,
+		texture = Vehicles/Vehicles_82jeepJ10_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 82jeepJ10TISBattery
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|TIS_CarBattery,
+		texture = Vehicles/Vehicles_82jeepJ10_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	vehicle 82jeepJ10
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 1.1,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.2,
+
+		model
+		{
+			file = 82jeepJ10Base,
+			scale = 0.9000,
+			offset = 0.0000 0.5333 0.1222,
+		}
+
+		spawnOffsetY = 0,
+
+		skin
+		{
+			texture = Vehicles/Vehicles_82jeepJ10_Shell_white,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_82jeepJ10_Shell_red,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_82jeepJ10_Shell_blue,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_82jeepJ10_Shell_gray,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_82jeepJ10_Shell_brown,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_82jeepJ10_Shell_black,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_82jeepJ10_Shell_army_green,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_82jeepJ10_Shell,
+		}
+
+		textureRust = Vehicles/Vehicles_82jeepJ10_Rust,
+		textureMask = Vehicles/Vehicles_82jeepJ10_Mask,
+		textureLights = Vehicles/Vehicles_82jeepJ10_Lights,
+		textureDamage1Shell = Vehicles/Vehicles_82jeepJ10_Damage1,
+		textureDamage2Shell = Vehicles/Vehicles_82jeepJ10_Damage2,
+		textureDamage1Overlay = Vehicles/Vehicles_82jeepJ10_Blood,
+		textureDamage2Overlay = Vehicles/Vehicles_82jeepJ10_Blood,
+
+		sound
+		{
+			engine = VehicleEngineCarNormal,
+			engineStart = VehicleEngineCarNormal,
+			engineTurnOff = VehicleEngineCarNormal,
+			horn = VehicleHornStandard,
+			ignitionFail = VehicleIgnitionFailCarNormal,
+		}
+
+		extents = 1.8444 1.3556 5.0222,
+		mass = 860,
+		physicsChassisShape = 1.8444 1.3556 5.0222,
+		centerOfMassOffset = 0.0000 0.7222 -0.0111,
+		shadowExtents = 1.9466 5.4905,
+		shadowOffset = 0.0000 -0.0454,
+		engineForce = 3999,
+		maxSpeed = 80f,
+		engineLoudness = 75,
+		engineQuality = 88,
+		brakingForce = 85,
+		stoppingMovementForce = 3.5f,
+		rollInfluence = 0.96f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 38,
+		suspensionCompression = 3.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 14,
+		suspensionRestLength = 0.40,
+		wheelFriction = 1.9f,
+		frontEndHealth = 650,
+		rearEndHealth = 450,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.8333 -0.6000 1.5889,
+			radius = 0.40f,
+			width = 0.27f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.8333 -0.6000 1.5889,
+			radius = 0.40f,
+			width = 0.27f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.8333 -0.6444 -1.3667,
+			radius = 0.40f,
+			width = 0.27f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.8333 -0.6444 -1.3667,
+			radius = 0.40f,
+			width = 0.27f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.4667 -0.0556 0.1000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.2000 -0.9889 -0.1889,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = -0.4667 -0.0556 0.1000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.2111 -0.9889 -0.1778,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 2.8889 1.7333 0.7778,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -2.9111 1.5556 0.7778,
+		}
+
+		area TruckBed2
+		{
+			xywh = 1.3333 -2.9111 1.1111 0.7778,
+		}
+
+		area Roofrack
+		{
+			xywh = 0.0000 -1.4111 2.8889 3.1333,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.3111 0.4000 0.7778 0.9556,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.3111 0.4000 0.7778 0.9556,
+		}
+
+		area GasTank
+		{
+			xywh = 1.3444 -0.4333 0.8444 0.8444,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.4444 1.7111 0.4222 0.4222,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.4444 1.7111 0.4222 0.4222,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.4444 -1.2667 0.4222 0.4222,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.4444 -1.2667 0.4222 0.4222,
+		}
+
+		template = JP82Armor,
+		template = JP82Tires,
+		template = JP82Seats,
+		template = JP82Doors,
+		template = JP82FrontBumper,
+		template = JP82RearBumper,
+		template = JP82EngineDoor,
+		template = JP82TrunkDoors,
+		template = JP82BedCover,
+		template = JP82Rollbar,
+		template = JP82Roofrack,
+		template = JP82SpareTires,
+		template = JP82TrunkCompartment,
+
+		part GloveBox
+		{
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			model JP82int
+			{
+				file = 82jeepJ10Interior,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			container
+			{
+				capacity = 7,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+
+		part Battery
+		{
+			model JP82tisbat
+			{
+				file = 82jeepJ10TISBattery,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+		template = JP82Windshields,
+		template = JP82Windows,
+		useChassisPhysicsCollision = false,
+
+		physics box
+		{
+			offset = 0.0000 0.4399 -0.0556,
+			extents = 1.9111 0.7778 4.8889,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 1.1111 0.2333,
+			extents = 1.6000 0.5556 0.8000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.9741 0.7111,
+			extents = 1.6000 0.7333 0.4222,
+			rotate = -40.0000 0.0000 0.0000,
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.4889 -2.7000,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.4889 2.4778,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+
+		attachment flipNode
+		{
+			offset = 0.0000 -0.4889 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+}

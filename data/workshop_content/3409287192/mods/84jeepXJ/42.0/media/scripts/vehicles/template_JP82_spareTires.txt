@@ -1,0 +1,145 @@
+module Base
+{
+
+    model 84jeepXJspareTrunk
+    {
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_sparetire0,
+        texture = Vehicles/Vehicles_84jeepXJ_Wheel,
+        shader = damn_wheel_shader,
+        scale = 0.1,
+    }
+
+    model 84jeepXJspareRear
+    {
+        mesh = vehicles/Vehicles_84jeepXJ_Body|84jeep_sparetire1_mount,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+
+	template vehicle JP84SpareTires
+	{
+
+        part DAMNSpareTireTrunk
+        {
+            model spareTrunk0
+            {
+                file = 84jeepXJspareTrunk,
+            }
+            model spareTrunk1
+            {
+                file = 84jeepXJspareTrunk,
+            }
+            model spareTrunk2
+            {
+                file = 84jeepXJspareTrunk,
+            }
+                
+            specificItem = false,
+            itemType = Base.84jeepXJTire2;Base.92jeepYJTire2;damnCraft.SmallTire2,
+            area = TruckBed,
+            category = tire,
+            mechanicRequireKey = false,
+            durability = 3,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			             equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                door = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = JP84.InstallComplete.SpareTire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = JP84.UninstallComplete.SpareTire,
+            }
+            lua
+            {
+                create = JP84.Create.SpareTire,
+            }
+        }
+
+        part DAMNSpareTire
+        {
+            model spareRear
+            {
+            file = 84jeepXJspareRear,
+            }
+        
+            specificItem = false,
+            itemType = Base.84jeepXJTire2;Base.92jeepYJTire2;damnCraft.SmallTire2,
+            area = TruckBed,
+            parent = TrunkDoor,
+            category = tire,
+            mechanicRequireKey = false,
+            durability = 3,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+                {
+                create = DAMN.Create.Blank,
+                }
+
+        }
+    }
+}

@@ -1,0 +1,42 @@
+module Base
+{
+	template vehicle JP92TrunkCompartment
+	{
+		part JP92Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = Base.92jeepYJTrunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = JP92.ContainerAccess.Trunk,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = JP92.ContainerAccess.Trunk,
+			}
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+	}
+}
+

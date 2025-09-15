@@ -1,0 +1,64 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WroughtIronHighFence
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Wrought Iron High Fence,
+			Icon		= fencing_01_65,
+		}
+	}
+
+    entity WroughtIronHighFence
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WroughtIronHighFence,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face W
+            {
+                layer
+                {
+                    row = fencing_01_67,
+                    row = fencing_01_66,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fencing_01_64 fencing_01_65,
+                }
+            }
+			
+            corner = fencing_01_69,
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildPoleFence,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Fences_High,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:15,
+            ToolTip       = Tooltip_craft_bigWroughtFenceDesc,
+            inputs
+            {
+                item 5 [Base.BlowTorch] flags[Prop1],
+                item 8 [Base.MetalBar;Base.MetalPipe],
+                item 6 [Base.ScrapMetal],
+                item 5 [Base.WeldingRods],
+            }
+        }
+    }
+}

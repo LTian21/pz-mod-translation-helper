@@ -1,0 +1,75 @@
+module Base
+{
+	model 73fordFalconPSscoop
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_front_ps,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle FLCSPScoop
+	{
+		part FLCSPScoop
+		{
+
+			model rockinbACKandforthonXaxis
+			{
+				file = 73fordFalconPSscoop,
+			}
+
+			anim Close
+			{
+				anim = pursuit_rock,
+                reverse = TRUE,
+				rate = 0.75,
+			}
+
+			anim Open
+			{
+				anim = pursuit_rock,
+				rate = 0.75,
+			}
+
+			anim Closed
+			{
+				anim = pursuit_rock,
+				animate = FALSE,
+				rate = 2.0,
+			}
+
+			anim Opened
+			{
+				anim = pursuit_rock,
+                reverse = TRUE,
+				animate = FALSE,
+				rate = 2.0,
+			}
+		
+			door
+			{
+			}
+			anim Open
+			{
+				sound = ,
+			}
+			anim Close
+			{
+				sound = ,
+			}
+
+			area = Engine,
+			category = nodisplay,
+            specificItem = false,
+			itemType = farming.Potato,
+			mechanicRequireKey = false,
+			repairMechanic = false,
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.Door,
+			}
+		}
+	}
+}

@@ -1,0 +1,75 @@
+module Base
+{
+	model 82jeepJ10RollbarPD
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_rollbarPD,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP82RollbarPD
+		{
+		part JP82Rollbar
+        	{
+
+			model Rollbar410118
+				{
+                		file = 82jeepJ10RollbarPD,
+				}
+
+			area = TireRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.80sPickupRollbarA,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireUninstalled = JP82BedCover,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 2000,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+                	test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+            		create = DAMN.Create.Blank,
+					}
+		}
+	}
+		
+}

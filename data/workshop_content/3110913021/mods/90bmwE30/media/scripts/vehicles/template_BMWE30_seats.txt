@@ -1,0 +1,247 @@
+module Base
+{
+
+	model 90bmwE30Seatfl
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_seat_f,
+		texture = Vehicles/Vehicles_90bmwE30_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 90bmwE30Seatfr
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_seat_f,
+		texture = Vehicles/Vehicles_90bmwE30_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 90bmwE30Seatrl
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_seat_r,
+		texture = Vehicles/Vehicles_90bmwE30_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 90bmwE30Seatrr
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_seat_r,
+		texture = Vehicles/Vehicles_90bmwE30_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+	model 90bmwE30CabrioSeatrl
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_cabrio_seat_r,
+		texture = Vehicles/Vehicles_90bmwE30_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 90bmwE30CabrioSeatrr
+	{
+		mesh = vehicles/Vehicles_90bmwE30_Body|e30_cabrio_seat_r,
+		texture = Vehicles/Vehicles_90bmwE30_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	
+	template vehicle BMWE30Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 90bmwE30Seatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 90bmwE30Seatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 90bmwE30Seatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 90bmwE30Seatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.90bmwE30SeatFront,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.90bmwE30SeatRear,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+	template vehicle BMWE30CabrioSeats
+	{
+		template! = BMWE30Seats,
+
+		part SeatRearLeft
+		{
+			model seatRL
+			{
+				file = 90bmwE30CabrioSeatrl,
+			}
+		}
+
+		part SeatRearRight
+		{
+			model seatRR
+			{
+				file = 90bmwE30CabrioSeatrr,
+			}
+		}
+	}
+}
+

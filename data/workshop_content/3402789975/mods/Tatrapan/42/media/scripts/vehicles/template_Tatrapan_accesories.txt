@@ -1,0 +1,111 @@
+module Base
+{
+
+    model Tatrapan_Shovel
+	{
+		mesh = vehicles/Tatrapan|Axe,
+		shader = basicEffect,
+		scale = 0.01,      
+	}
+
+    model Tatrapan_Axe
+	{
+		mesh = vehicles/Tatrapan|Shovel,
+        texture = Vehicles/Vehicles_Tatrapan_armor,
+		shader = basicEffect,
+		scale = 0.01,
+	}
+
+  model Tatrapan_Spare1
+	{
+		mesh = vehicles/Tatrapan|SpareTire1,
+        texture = Vehicles/TATRAPANTEXTURE,
+		shader = basicEffect,
+		scale = 0.01,
+	}
+
+  model Tatrapan_Spare2
+	{
+		mesh = vehicles/Tatrapan|SpareTire2,
+        texture = Vehicles/TATRAPANTEXTURE,
+		shader = basicEffect,
+		scale = 0.01,
+	}
+
+    template vehicle Tatrapan_accesories
+    {
+        template = ATA2Visual/part/ATA2VisualSpoilerRear,
+        part ATA2VisualSpoilerRear 
+        {
+
+           area = TireRearRight,
+            
+            model Default
+            {
+                file = Tatrapan_Axe,
+            }
+        }
+
+        template = ATA2Visual/part/ATA2VisualSkirtsSide,
+        part ATA2VisualSkirtsSide
+        {
+            area = TireRearLeft,
+
+
+            model Default
+            {
+                file = Tatrapan_Shovel,
+            }
+        }
+
+        template = ATA2Visual/part/ATA2VisualSnorkel,
+        part ATA2VisualSnorkel
+        {
+            area = TireRearLeft,
+
+
+            model Default
+            {
+                file = Tatrapan_Spare1,
+            }
+        }
+
+        template = ATA2Visual/part/ATA2VisualWires,
+        part ATA2VisualWires
+        {
+            area = TireRearLeft,
+
+
+            model Default
+            {
+                file = Tatrapan_Spare2,
+            }
+        }
+        part ATAVisual*
+        {
+            category = tuning,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+
+            table install
+            {
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+
+            table uninstall
+            {
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+
+            lua
+            {
+                create = ATATuning.Create.Chance15,
+                init = ATATuning.Init.Default,
+            }
+        }
+    }
+}

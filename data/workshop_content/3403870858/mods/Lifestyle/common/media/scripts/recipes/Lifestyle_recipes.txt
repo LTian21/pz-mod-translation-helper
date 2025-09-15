@@ -1,0 +1,295 @@
+module Lifestyle
+{
+
+    imports
+        {
+             Base,
+        }
+
+	/* ---------------------------------- General -------------------------------- */
+
+    craftRecipe Fill Empty Palette with Paint
+    {
+      Tags = InHandCraft,
+      time = 150,
+      Sound:MakePlaster,
+	  timedAction = Making,
+      inputs
+      {
+         item 1 [Lifestyle.paintPaletteEmpty] flags[Prop1],
+         item 3 [Lifestyle.paintTubs] flags[Prop2],
+      }
+      outputs
+      {
+         item 1 Lifestyle.paintPalette,
+      }
+    }
+
+	/* -------------------------------- Carpentry -- Carving -------------------------------- */
+
+    craftRecipe Carve Art Paintbrush
+    {
+      Tags = AnySurfaceCraft,
+      needToBeLearn = true,
+      SkillRequired = Carving:2,
+      timedAction = SharpenStake,
+      time = 200,
+      category = Carving,
+      xpAward = Carving:8,
+      inputs
+      {
+         item 1 tags[SharpKnife] mode:keep flags[MayDegradeLight;IsNotDull],
+         item 1 [Base.WoodenStick2;Base.LongHandle;Base.LongStick] flags[Prop2],
+		 item 2 [Base.Twine],
+		 item 2 [Base.Glue],
+      }
+      outputs
+      {
+         item 1 Lifestyle.oldPaintBrush,
+      }
+    }
+
+    craftRecipe Carve Art Palette
+    {
+      Tags = AnySurfaceCraft,
+      needToBeLearn = true,
+      SkillRequired = Carving:2,
+      timedAction = CraftWeapon1H,
+      time = 200,
+      category = Carving,
+      xpAward = Carving:8,
+      inputs
+      {
+         item 1 tags[SharpKnife] mode:keep flags[Prop1;MayDegradeLight;IsNotDull],
+         item 1 [Base.Plank] flags[Prop2],
+      }
+      outputs
+      {
+         item 1 Lifestyle.paintPaletteEmpty,
+      }
+    }
+
+    craftRecipe Create Broom
+    {
+      Tags = AnySurfaceCraft,
+      SkillRequired = Carving:2,
+      timedAction = SharpenStake,
+      time = 300,
+      category = Carving,
+      xpAward = Carving:12,
+      inputs
+      {
+         item 1 tags[SharpKnife] mode:keep flags[Prop1;MayDegradeLight;IsNotDull],
+         item 2 [Base.WoodenStick2;Base.LongHandle;Base.LongStick] flags[Prop2],
+		 item 10 [Base.Twigs],
+      }
+      outputs
+      {
+         item 1 Base.Broom,
+      }
+    }
+
+    craftRecipe Create Mop
+    {
+      Tags = AnySurfaceCraft,
+      SkillRequired = Carving:2,
+      timedAction = SharpenStake,
+      time = 300,
+      category = Carving,
+      xpAward = Carving:12,
+      inputs
+      {
+         item 1 tags[SharpKnife] mode:keep flags[Prop1;MayDegradeLight;IsNotDull],
+         item 1 [Base.WoodenStick2;Base.LongHandle;Base.LongStick] flags[Prop2],
+		 item 4 [Base.RippedSheets],
+		 item 1 [Base.Rope],
+      }
+      outputs
+      {
+         item 1 Base.Mop,
+      }
+    }
+
+	/* -------------------------------- Literature -------------------------------- */
+
+    craftRecipe Create Music Sheet Book
+    {
+      Tags = AnySurfaceCraft,
+      SkillRequired = Music:2,
+      timedAction = Making,
+      time = 600,
+      category = Tailoring,
+      xpAward = Tailoring:20,
+      inputs
+      {
+         item 1 tags[Scissors] mode:keep flags[Prop1],
+		 item 1 tags[SewingNeedle] mode:keep,
+		 item 1 [Base.Notebook] flags[Prop2],
+         item 2 [Base.LeatherStrips],
+		 item 4 [Base.Glue],
+		 item 1 [Base.Thread],
+      }
+      outputs
+      {
+         item 1 Lifestyle.SheetMusicBook,
+      }
+    }
+
+	/* -------------------------------- Furniture -------------------------------- */
+
+	/* -------------------------------- Carpentry -------------------------------- */
+
+    craftRecipe Craft Art Easel
+    {
+      Tags = InHandCraft;Carpentry,
+      needToBeLearn = true,
+      SkillRequired = Woodwork:2,
+      timedAction = BuildLowHammer,
+      time = 800,
+      category = Carpentry,
+      xpAward = Woodwork:30,
+      inputs
+      {
+         item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+		 item 6 [Base.Plank],
+         item 4 [Base.Woodglue],
+		 item 30 [Base.Nails],
+      }
+      outputs
+      {
+         item 1 Lifestyle.Mov_ArtEasel,
+      }
+    }
+
+	/* -------------------------------- Electronics -------------------------------- */
+
+    craftRecipe Assemble DJ Booth
+    {
+      Tags = InHandCraft;Electrical,
+      needToBeLearn = true,
+      SkillRequired = Electricity:4,
+      timedAction = MakingElectrical,
+      time = 800,
+      category = Electrical,
+      xpAward = Electricity:50,
+      inputs
+      {
+         item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+		 item 1 tags[Screwdriver] mode:keep flags[NoBrokenItems],
+		 item 4 [Base.Plank],
+         item 40 [Base.ElectronicsScrap],
+		 item 10 [Base.Aluminum],
+		 item 4 [Base.Amplifier],
+		 item 6 [Base.ElectricWire],
+      }
+      outputs
+      {
+         item 1 Lifestyle.LS_DJBooth01,
+      }
+    }
+
+    craftRecipe Craft Disco Floor
+    {
+      Tags = InHandCraft;Electrical,
+      needToBeLearn = true,
+      SkillRequired = Electricity:3,
+      timedAction = MakingElectrical,
+      time = 600,
+      category = Electrical,
+      xpAward = Electricity:30,
+      inputs
+      {
+         item 1 tags[Screwdriver] mode:keep flags[Prop1;NoBrokenItems],
+		 item 2 [Base.Mirror],
+         item 30 [Base.ElectronicsScrap],
+		 item 5 [Base.Aluminum],
+		 item 2 [Base.ElectricWire],
+		 item 3 [Base.LightBulb],
+		 item 3 [Base.LightBulbGreen],
+		 item 3 [Base.LightBulbRed],
+      }
+      outputs
+      {
+         item 1 Lifestyle.Mov_DiscoFloor,
+      }
+    }
+
+    craftRecipe Craft Standing Disco Ball
+    {
+      Tags = InHandCraft;Electrical,
+      needToBeLearn = true,
+      SkillRequired = Electricity:3,
+      timedAction = MakingElectrical,
+      time = 600,
+      category = Electrical,
+      xpAward = Electricity:30,
+      inputs
+      {
+         item 1 tags[Screwdriver] mode:keep flags[Prop1;NoBrokenItems],
+		 item 1 [Base.Mirror],
+         item 20 [Base.ElectronicsScrap],
+		 item 5 [Base.Aluminum],
+		 item 4 [Base.ElectricWire],
+		 item 1 [Base.LightBulb],
+		 item 1 [Base.LightBulbGreen],
+		 item 1 [Base.LightBulbRed],
+      }
+      outputs
+      {
+         item 1 Lifestyle.LS_Discoball,
+      }
+    }
+
+    craftRecipe Craft Standing Microphone
+    {
+      Tags = InHandCraft;Electrical,
+      needToBeLearn = true,
+      SkillRequired = Electricity:3,
+      timedAction = MakingElectrical,
+      time = 600,
+      category = Electrical,
+      xpAward = Electricity:20,
+      inputs
+      {
+         item 1 tags[Screwdriver] mode:keep flags[Prop1;NoBrokenItems],
+         item 25 [Base.ElectronicsScrap],
+		 item 5 [Base.Aluminum],
+		 item 1 [Base.Amplifier],
+		 item 1 [Base.ElectricWire],
+      }
+      outputs
+      {
+         item 1 Lifestyle.Mov_Microphone,
+      }
+    }
+
+	/* -------------------------------- MetalWorking -------------------------------- */
+
+    craftRecipe Assemble Sculpting Station
+    {
+      Tags = AnySurfaceCraft,
+      needToBeLearn = true,
+      SkillRequired = MetalWelding:4,
+      timedAction = BuildLowMetal,
+      time = 600,
+      category = Metalworking,
+      xpAward = MetalWelding:40,
+      inputs
+      {
+         item 2 [Base.BlowTorch] flags[Prop1],
+		 item 1 tags[WeldingMask] mode:keep,
+		 item 1 tags[Pliers] mode:keep flags[MayDegradeLight],
+		 item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+         item 6 [Base.MetalPipe],
+		 item 4 [Base.MetalBar],
+		 item 3 [Base.SheetMetal],
+		 item 3 [Base.SmallSheetMetal],
+		 item 20 [Base.Screws],
+      }
+      outputs
+      {
+         item 1 Lifestyle.Mov_SculptingStation,
+      }
+    }
+
+}

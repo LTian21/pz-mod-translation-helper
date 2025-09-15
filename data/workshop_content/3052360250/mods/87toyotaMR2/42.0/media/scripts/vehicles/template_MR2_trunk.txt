@@ -1,0 +1,89 @@
+module Base
+{
+	template vehicle MR2Trunk
+	{
+		part MR2Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				capacity = 36,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			lua
+			{
+			}
+		}
+
+	}
+
+
+	template vehicle MR2FrontTrunk
+	{
+		part MR2FrontTrunk
+		{
+			category = bodywork,
+			area = Front,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				capacity = 24,
+				test = MR2.ContainerAccess.FrontTrunk,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+	template vehicle MR2CenterConsole
+	{
+		part MR2CenterConsole
+		{
+			category = bodywork,
+			area = SeatFrontLeft,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.TrunkInner,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+}
+

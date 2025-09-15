@@ -1,0 +1,291 @@
+module Base
+{
+	model 86fordE150frontBumper
+	{
+		mesh = vehicles/Vehicles_86fordE150_Body|e150_bumper,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 86fordE150frontBumperWithBullbar
+	{
+		mesh = vehicles/Vehicles_86fordE150_Body|e150_bumper1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 86fordE150frontBullbar
+	{
+		mesh = vehicles/Vehicles_86fordE150_Body|e150_bumper2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 86fordE150rearBumper
+	{
+		mesh = vehicles/Vehicles_86fordE150_Body|e150_bumperRear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle E150FrontBumper
+		{
+		part E150Bumper
+        	{
+
+			model FrontBumper1
+				{
+                		file = 86fordE150frontBumper,
+				}
+
+			model FrontBumper2
+				{
+                		file = 86fordE150frontBumperWithBullbar,
+				}
+
+			model FrontBullbar3
+				{
+                		file = 86fordE150frontBullbar,
+				}
+
+				area = Engine,
+				category = bodywork,
+				itemType = Base.E150FrontBumper;Base.E150FrontBumperWithBullbar;Base.E150FrontBullbar,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = E150.InstallComplete.Bumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = E150.UninstallComplete.Bumper,
+            		}
+
+            		lua
+            		{
+					create = E150.Create.Bumper,
+					init = E150.Init.Bumper,
+					}
+		}
+	}
+
+	template vehicle E150FrontBumperMM
+		{
+		part E150Bumper
+        	{
+
+			model FrontBumper1
+				{
+                		file = 86fordE150frontBumper,
+				}
+
+				area = Engine,
+				category = bodywork,
+				itemType = Base.E150FrontBumper,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = E150.InstallComplete.Bumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = E150.UninstallComplete.Bumper,
+            		}
+
+            		lua
+            		{
+					create = E150.Create.Bumper,
+					init = E150.Init.Bumper,
+					}
+		}
+	}
+
+    template vehicle E150RearBumper
+		{
+		part E150RearBumper
+        	{
+
+			model RearBumper1
+				{
+                		file = 86fordE150rearBumper,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				itemType = Base.E150RearBumper,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+    template vehicle E150RearBumperLong
+		{
+		part E150RearBumper
+        	{
+
+			model RearBumper546844
+				{
+                		file = 86fordE150rearBumper,
+                        offset = 0.0000 0.0000 -0.3726,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				itemType = Base.E150RearBumper,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+}

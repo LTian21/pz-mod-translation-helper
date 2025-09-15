@@ -1,0 +1,176 @@
+module Base
+{
+	model 81deloreanDMC12BumperFront0
+	{
+		mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 81deloreanDMC12BumperFrontA
+	{
+		mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 81deloreanDMC12BullbarFrontA
+	{
+		mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 81deloreanDMC12BumperRear0
+	{
+		mesh = vehicles/Vehicles_81deloreanDMC12_Body|dmc_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DMC12Bumpers
+		{
+		part DMC12BumperFront
+        	{
+
+			model BumperFront0
+				{
+                		file = 81deloreanDMC12BumperFront0,
+				}
+
+			model BumperFrontA
+				{
+                		file = 81deloreanDMC12BumperFrontA,
+				}
+
+			model BullbarFrontA
+				{
+                		file = 81deloreanDMC12BullbarFrontA,
+				}
+
+				area = Front,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.81deloreanDMC12BumperFront;Base.81deloreanDMC12BumperFrontA;Base.81deloreanDMC12Bullbar,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DMC12.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DMC12.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = DMC12.Create.BumperFront,
+					init = DMC12.Init.BumperFront,
+					}
+			}
+
+
+		part DMC12BumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 81deloreanDMC12BumperRear0,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.81deloreanDMC12BumperRear,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DMC12.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DMC12.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = DMC12.Create.BumperRear,
+					init = DMC12.Init.BumperRear,
+					}
+		}
+	}
+
+	template vehicle DMC12BumpersBTTF
+		{
+		template! = DMC12Bumpers,
+
+		part DMC12BumperFront
+			{
+				itemType = Base.81deloreanDMC12BumperFront,
+			}
+		}
+}

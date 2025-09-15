@@ -1,0 +1,56 @@
+module Base
+{
+	template vehicle FRMuffler
+	{
+		part Muffler
+        {
+            area = TruckBed,
+            itemType = Base.OldCarMuffler;Base.NormalCarMuffler;Base.ModernCarMuffler,
+            category = engine,
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 500,
+                skills = Mechanics:5,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualDefault,
+                door = EngineDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 500,
+                skills = Mechanics:5,
+                recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.FR_VisualDefault,
+            }
+            lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualDefault,
+                update = Vehicles.Update.FR_Muffler,
+            }
+        }
+	}
+}
+

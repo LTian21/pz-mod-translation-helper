@@ -1,0 +1,100 @@
+module Base
+{
+	model 91nissan240sxSunroof
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_sunroof,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+		static = FALSE,
+		boneWeight = roof_bone 1.0,
+	}
+
+	template vehicle N240Sunroof
+	{
+		part N240Sunroof
+		{
+			model windowSR
+			{
+				file = 91nissan240sxSunroof,
+			}
+
+			itemType = Base.91nissan240sxSunroof,
+			category = door,
+			mechanicRequireKey = true,
+			area = SeatFrontLeft,
+			door
+			{
+				}
+
+				anim Close
+				{
+					anim = roof_opening,
+					reverse = TRUE,
+					rate = 0.35,
+				}
+
+				anim Open
+				{
+					anim = roof_opening,
+					rate = 0.35,
+				}
+
+				anim Closed
+				{
+					anim = roof_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = roof_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+			
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+}

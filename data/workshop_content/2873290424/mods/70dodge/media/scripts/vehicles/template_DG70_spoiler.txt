@@ -1,0 +1,124 @@
+module Base
+{
+	
+	model 70dodgespoiler0
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_spoiler0,
+		shader = damn_vehicle_noreflect_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    model 70dodgespoiler1
+    {
+        mesh = vehicles/Vehicles_70dodge_Body|challenger_spoiler1,
+        shader = damn_vehicle_noreflect_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle DG70Spoilers
+		{
+		part DG70Spoiler
+       		{
+
+            model dgspoiler0
+			{
+                	file = 70dodgespoiler0,
+			}
+
+            model dgspoiler1
+            {
+                    file = 70dodgespoiler1,
+            }
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            door
+            {
+            }
+            anim Open
+            {
+                sound = VehicleTrunkOpenStandard,
+            }
+            anim Close
+            {
+                sound = VehicleTrunkCloseStandard,
+            }
+            anim Lock
+            {
+                sound = LockVehicleDoorStandard,
+            }
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorStandard,
+            }
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedStandard,
+            }
+            anim ActorOpen
+            {
+                anim = WindowOpenSuccess,
+                rate = 0.15,
+                angle = 0.0 0.0 0.0,
+            }
+            anim ActorClose
+            {
+                anim = Attack_Shove,
+                rate = 0.3,
+                angle = 0.0 0.0 0.0,
+            }
+            specificItem = false,
+            itemType = Base.DG70Spoiler0;Base.DG70Spoiler1,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                door = TrunkDoor,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = DG70.InstallComplete.Spoiler,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = DG70.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = DG70.Create.Spoiler,
+                init = DG70.Init.Spoiler,
+            }
+        }
+	}
+}
+

@@ -1,0 +1,78 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_SpiffoOrangeWindowDoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Spiffo Orange Window Door,
+			Icon		= location_restaurant_spiffos_01_49,
+		}
+	}
+
+    entity SpiffoOrangeWindowDoor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_SpiffoOrangeWindowDoor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			breakSound      = BreakDoor,
+			
+            face W
+            {
+                layer
+                {
+                    row = location_restaurant_spiffos_01_48,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_restaurant_spiffos_01_49,
+                }
+            }
+			face W_OPEN
+            {
+                layer
+                {
+					row = location_restaurant_spiffos_01_50,
+                }
+            }
+            face N_OPEN
+            {
+                layer
+                {
+					row = location_restaurant_spiffos_01_51,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallHammer,
+            time          = 300,
+            needToBeLearn = true,
+            category      = Doors_Wooden,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:6,
+            ToolTip       = Tooltip_craft_woodenDoorDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+				item 4 [Base.Plank],
+				item 4 [Base.Nails],
+				item 2 [Base.GlassPanel],
+				item 2 [Base.Hinge],
+				item 1 [Base.Doorknob],
+            }
+        }
+    }
+}

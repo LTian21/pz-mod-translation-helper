@@ -1,0 +1,62 @@
+module Base
+{
+
+	template vehicle DGC89SpareTire
+		{
+		part DGC89Spare
+        	{
+
+				area = TruckBed,
+				category = tire,
+				specificItem = false,
+				itemType = Base.89dodgeCaravanTire;Base.89dodgeCaravanTireOffroad,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = DGC89.InstallComplete.SpareTire,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+		            complete = DGC89.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+            			init = DGC89.Init.SpareTire,
+						create = DGC89.Create.SpareTire,
+					}
+			}
+	}		
+}

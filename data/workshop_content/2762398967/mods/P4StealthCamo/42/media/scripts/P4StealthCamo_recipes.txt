@@ -1,0 +1,157 @@
+module P4StealthCamo
+{
+	imports
+	{
+		Base
+	}
+
+	craftRecipe P4InsertBatteryStealthCamo
+	{
+		timedAction = P4StealthCamo.P4InsertBatteryStealthCamo,
+		time = 30,
+		onCreate = P4StealthCamoRecipes.OnCreate.StealthCamoInsertBattery,
+		tags = InHandCraft;CanBeDoneInDark,
+		category = Electrical,
+		inputs
+		{
+			item 1 [P4StealthCamo.P4StealthCamoL1;P4StealthCamo.P4StealthCamoL2;P4StealthCamo.P4StealthCamoL3] mode:keep flags[IsEmpty;AllowFavorite;ItemCount],
+			item 1 [Base.Battery] flags[ItemCount],
+		}
+		outputs
+		{
+		}
+	}
+
+	craftRecipe P4RemoveBatteryStealthCamo
+	{
+		timedAction = P4StealthCamo.P4RemoveBatteryStealthCamo,
+		time = 30,
+		allowBatchCraft = false,
+		onCreate = P4StealthCamoRecipes.OnCreate.StealthCamoRemoveBattery,
+		tags = InHandCraft;CanBeDoneInDark,
+		category = Electrical,
+		inputs
+		{
+			item 1 [P4StealthCamo.P4StealthCamoL1;P4StealthCamo.P4StealthCamoL2;P4StealthCamo.P4StealthCamoL3] mode:keep flags[NotEmpty;AllowFavorite;ItemCount],
+		}
+		outputs
+		{
+			item 1 Base.Battery,
+		}
+	}
+
+	craftRecipe P4UpgradeStealthCamo1
+	{
+		timedAction = P4StealthCamo.P4UpgradeStealthCamo1,
+		time = 600,
+		tags = AnySurfaceCraft;Electrical,
+		category = Electrical,
+		needTobeLearn = true,
+		skillRequired = Electricity:6,
+		xpAward = Electricity:60,
+		inputs
+		{
+			item 1 [P4StealthCamo.P4StealthCamoBlueprint1;P4StealthCamo.P4StealthCamoBlueprint2] mode:keep,
+			item 1 [P4StealthCamo.P4StealthCamoL1] mode:destroy flags[AllowFavorite;ItemCount],
+			item 1 [Base.Generator_Blue;Base.Generator;Base.Generator_Yellow],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;NoBrokenItems],
+		}
+		outputs
+		{
+			item 1 P4StealthCamo.P4StealthCamoL2,
+		}
+	}
+
+	craftRecipe P4UpgradeStealthCamo2
+	{
+		timedAction = P4StealthCamo.P4UpgradeStealthCamo1,
+		time = 800,
+		tags = AnySurfaceCraft;Electrical,
+		category = Electrical,
+		needTobeLearn = true,
+		skillRequired = Electricity:8,
+		xpAward = Electricity:80,
+		inputs
+		{
+			item 1 [P4StealthCamo.P4StealthCamoBlueprint1;P4StealthCamo.P4StealthCamoBlueprint2] mode:keep,
+			item 1 [P4StealthCamo.P4StealthCamoL2] mode:destroy flags[AllowFavorite;ItemCount],
+			item 1 [Base.Generator;Base.Generator_Yellow],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;NoBrokenItems],
+		}
+		outputs
+		{
+			item 1 P4StealthCamo.P4StealthCamoL3,
+		}
+	}
+
+	craftRecipe P4UpgradeStealthCamo3
+	{
+		timedAction = P4StealthCamo.P4UpgradeStealthCamo2,
+		time = 1000,
+		tags = AnySurfaceCraft;Electrical,
+		category = Electrical,
+		needTobeLearn = true,
+		skillRequired = Electricity:10,
+		xpAward = Electricity:100,
+		inputs
+		{
+			item 1 [P4StealthCamo.P4StealthCamoBlueprint2] mode:keep,
+			item 2 [P4StealthCamo.P4StealthCamoL3] mode:destroy flags[AllowFavorite;ItemCount],
+			item 1 [Base.Generator_Yellow],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;NoBrokenItems],
+		}
+		outputs
+		{
+			item 1 P4StealthCamo.P4StealthCamoL4,
+		}
+	}
+
+	craftRecipe P4ResearchStealthCamo
+	{
+		timedAction = P4StealthCamo.P4UpgradeStealthCamo1,
+		time = 900,
+		tags = AnySurfaceCraft;Electrical,
+		category = Electrical,
+		needTobeLearn = true,
+		skillRequired = Electricity:9,
+		xpAward = Electricity:90,
+		inputs
+		{
+			item 1 [P4StealthCamo.P4StealthCamoBlueprint1],
+			item 1 [P4StealthCamo.P4StealthCamoL3] mode:destroy flags[AllowFavorite;ItemCount],
+			item 1 [Base.Notebook],
+			item 1 tags[Write] mode:keep flags[MayDegradeHeavy;NoBrokenItems],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;NoBrokenItems],
+		}
+		outputs
+		{
+			item 1 P4StealthCamo.P4StealthCamoBlueprint2,
+		}
+	}
+
+	craftRecipe P4MakeStealthCamo
+	{
+		timedAction = P4StealthCamo.P4UpgradeStealthCamo2,
+		time = 900,
+		tags = AnySurfaceCraft;Electrical,
+		category = Electrical,
+		needTobeLearn = true,
+		skillRequired = Electricity:9,
+		xpAward = Electricity:90,
+		inputs
+		{
+			item 1 [P4StealthCamo.P4StealthCamoBlueprint2] mode:keep,
+			item 1 [Base.WalkieTalkie5],
+			item 1 [Base.Laser],
+			item 1 [Base.ScannerModule],
+			item 1 [Base.NoiseTrap],
+			item 1 [Base.Generator_Blue;Base.Generator;Base.Generator_Yellow],
+			item 1 [Base.ScrewsBox],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;NoBrokenItems],
+		}
+		outputs
+		{
+			item 1 P4StealthCamo.P4StealthCamoL1,
+		}
+	}
+}

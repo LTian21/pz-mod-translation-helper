@@ -1,0 +1,160 @@
+module Base
+{
+	model pzkdefaultwheel
+	{
+		mesh = vehicles/spareWheel/wheel_pzkContinentalCruiser,
+		shader = vehiclewheel,
+		texture = Vehicles/vehicle_wheel_offroad,
+		scale = 0.1,
+
+	}
+
+	model pzkDashRancherSpareWModel
+	{
+		mesh = vehicles/spareWheel/wheel_pzkDashRancher,
+		shader = vehiclewheel,
+		texture = Vehicles/vehicle_wheel,
+		scale = 0.01,
+	}
+
+
+
+
+	
+	template vehicle pzkSpareWheel
+	{
+		part pzkSpareWheel
+        	{
+
+			model Default
+			{
+				file = pzkdefaultwheel,
+			}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.OldTire;Base.NormalTire;Base.ModernTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    		1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+
+                	requireInstalled = TrunkDoor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    		1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            		test = Vehicles.UninstallTest.Default,
+
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.SpareW,
+				init = Vehicles.Init.SpareW,
+				}
+		}
+	}
+
+	template vehicle pzkSpareWheelDashRancher
+	{
+		part pzkSpareWheelDashRancher
+        	{
+
+			model Default
+			{
+				file = pzkDashRancherSpareWModel,
+			}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.OldTire;Base.NormalTire;Base.ModernTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    		1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+
+                	requireInstalled = TrunkDoor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    		1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            		test = Vehicles.UninstallTest.Default,
+
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.SpareW,
+				init = Vehicles.Init.SpareW,
+				}
+		}
+	}
+
+
+
+
+
+
+}
+

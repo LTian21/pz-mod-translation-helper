@@ -1,0 +1,692 @@
+module Base
+{
+    model Vehicles_ATASamara
+    {
+        mesh = vehicles/ATA_Samara_model|Body,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.02,
+        static = TRUE,
+    }
+    model ATASamara_wheel
+    {
+        mesh = vehicles/ATA_Samara_wheel|Wheel1,
+        texture = Vehicles/ATA_Samara_wheel,
+        shader = basicEffect,
+        invertX = TRUE,
+        scale = 0.027,
+    }
+    model ATASamara_wheel_L
+    {
+        mesh = vehicles/ATA_Samara_wheel|Wheel1,
+        texture = Vehicles/ATA_Samara_wheel,
+        shader = basicEffect,
+        invertX = FALSE,
+        scale = 0.027,
+    }
+    model ATASamara_wheel2
+    {
+        mesh = vehicles/ATA_Samara_wheel|Wheel2,
+        texture = Vehicles/ATA_Samara_wheel2,
+        shader = basicEffect,
+        invertX = TRUE,
+        scale = 0.027,
+    }
+    model ATASamara_wheel2_L
+    {
+        mesh = vehicles/ATA_Samara_wheel|Wheel2,
+        texture = Vehicles/ATA_Samara_wheel2,
+        shader = basicEffect,
+        invertX = FALSE,
+        scale = 0.027,
+    }
+    model ATASamara_wheel3
+    {
+        mesh = vehicles/ATA_Samara_wheel|Wheel3,
+        texture = Vehicles/ATA_Samara_wheel3,
+        shader = basicEffect,
+        invertX = TRUE,
+        scale = 0.027,
+    }
+    model ATASamara_wheel3_L
+    {
+        mesh = vehicles/ATA_Samara_wheel|Wheel3,
+        texture = Vehicles/ATA_Samara_wheel3,
+        shader = basicEffect,
+        invertX = FALSE,
+        scale = 0.027,
+    }
+    model ATASamara_wheelProtection
+    {
+        mesh = vehicles/ATA_Samara_wheel|wheel_chain,
+        texture = Vehicles/ATA_wheelchain,
+        shader = basicEffect,
+        invertX = FALSE,
+        scale = 0.027,
+    }
+    model ATASamara_wheelProtection_L
+    {
+        mesh = vehicles/ATA_Samara_wheel|wheel_chain,
+        texture = Vehicles/ATA_wheelchain,
+        shader = basicEffect,
+        invertX = TRUE,
+        scale = 0.027,
+    }
+    model ATASamara_LightBar
+    {
+        mesh = vehicles/ATA_Samara_model|PoliceLight,
+        shader = vehicle,
+        scale = 0.02,
+    }
+    model ATASamara_Zapaska1
+    {
+        mesh = vehicles/ATA_Samara_model|Zapaska1,
+        texture = Vehicles/ATA_Samara_wheel,
+        shader = basicEffect,
+        scale = 0.02,
+    }
+    model ATASamara_Zapaska2
+    {
+        mesh = vehicles/ATA_Samara_model|Zapaska2,
+        texture = Vehicles/ATA_Samara_wheel2,
+        shader = basicEffect,
+        scale = 0.02,
+    }
+    model ATASamara_Zapaska3
+    {
+        mesh = vehicles/ATA_Samara_model|Zapaska3,
+        texture = Vehicles/ATA_Samara_wheel3,
+        shader = basicEffect,
+        scale = 0.02,
+    }
+    
+    template vehicle ATASamara
+    {
+        mechanicType = 3,
+        offRoadEfficiency = 0.8,
+        engineRepairLevel = 6,
+        playerDamageProtection = 0.8,
+        engineRPMType = firebird,
+
+        model
+        {
+            file = Vehicles_ATASamara,
+            scale = 1.0000,
+            offset = 0.0000 0.0000 0.0000,
+        }
+        
+        textureMask = Vehicles/ATA_Samara_mask,
+        textureLights = Vehicles/ATA_Samara_lights,
+        textureDamage1Shell = Vehicles/ATA_Samara_damage1,
+        textureDamage2Shell = Vehicles/ATA_Samara_damage2,
+        textureDamage1Overlay = Vehicles/ATA_Samara_blood,
+        textureDamage2Overlay = Vehicles/ATA_Samara_blood,
+        textureRust = Vehicles/ATA_Samara_rust,
+
+        sound
+        {
+            engine = VehicleEngineSportsCar,
+            engineStart = VehicleEngineSportsCar,
+            engineTurnOff = VehicleEngineSportsCar,
+            horn = VehicleHornSportsCar,
+            ignitionFail = VehicleIgnitionFailSportsCar,
+        }
+
+        mass = 1000,
+        engineLoudness = 90,
+        engineQuality = 90,
+        maxSpeed = 120f,
+        gearRatioCount = 5,
+        gearRatioR = 3.5,
+        gearRatio1 = 4.11,
+        gearRatio2 = 2.50,
+        gearRatio3 = 1.65,
+        gearRatio4 = 1.25,
+        gearRatio5 = 0.80,
+        gearRatio5 = 0.60,
+        stoppingMovementForce = 4.0f,
+        rollInfluence = 0.7f,
+        steeringIncrement = 0.04,
+        steeringClamp = 0.3,
+        suspensionStiffness = 50,
+        suspensionCompression = 4.1,
+        suspensionDamping = 3.4,
+        maxSuspensionTravelCm = 20,
+        suspensionRestLength = 0.2f,
+        wheelFriction = 2.0f,
+        frontEndHealth = 150,
+        rearEndHealth = 150,
+        seats = 4,
+        
+        template = PassengerSeat4,
+        
+        extents = 1.6200 0.9800 4.1200,
+        physicsChassisShape = 1.6200 0.9800 4.1200,
+        centerOfMassOffset = 0.0000 0.6100 -0.1500,
+        shadowExtents = 1.6911 4.1657,
+        shadowOffset = 0.0000 -0.1515,
+
+        area SeatFrontLeft
+        {
+            xywh = 1.2300 -0.2800 0.7400 0.7400,
+        }
+
+        area SeatFrontRight
+        {
+            xywh = -1.2300 -0.2800 0.7400 0.7400,
+        }
+
+        area ATARoof
+        {
+            xywh = 0.0000 -0.4200 3.1400 1.5600,
+        }
+
+        area Engine
+        {
+            xywh = 0.0000 2.5000 1.6600 0.7400,
+        }
+
+        area TruckBed
+        {
+            xywh = 0.0000 -2.5000 1.6600 0.7400,
+        }
+
+        area GasTank
+        {
+            xywh = 1.2300 -1.6200 0.7400 0.7400,
+        }
+
+        area TireFrontLeft
+        {
+            xywh = 1.2300 1.1800 0.7400 0.7400,
+        }
+
+        area TireFrontRight
+        {
+            xywh = -1.2300 1.1800 0.7400 0.7400,
+        }
+
+        area TireRearLeft
+        {
+            xywh = 1.2300 -1.2500 0.7400 0.7400,
+        }
+
+        area TireRearRight
+        {
+            xywh = -1.2300 -1.2500 0.7400 0.7400,
+        }
+        
+        passenger FrontLeft
+        {
+            position inside
+            {
+                offset = 0.3400 0.4400 -0.2400,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = 1.1400 -0.1900 -0.2400,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontLeft,
+            }
+        }
+
+        passenger FrontRight
+        {
+            position inside
+            {
+                offset = -0.3400 0.4400 -0.2400,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = -1.1400 -0.1900 -0.2400,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontRight,
+            }
+        }
+
+        passenger RearLeft
+        {
+            position inside
+            {
+                offset = 0.3400 0.4400 -0.9600,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+            }
+        }
+
+        passenger RearRight
+        {
+            position inside
+            {
+                offset = -0.3400 0.4400 -0.9600,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+            }
+        }
+        
+        attachment trailer
+        {
+            offset = 0.0000 0.1700 -2.3100,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = -1.0000,
+        }
+
+        attachment trailerfront
+        {
+            offset = 0.0000 0.1000 2.1200,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = 1.0000,
+        }
+
+        wheel FrontLeft
+        {
+            front = true,
+            offset = 0.7600 0.1900 1.2600,
+            radius = 0.33f,
+            width = 0.26f,
+        }
+
+        wheel FrontRight
+        {
+            front = true,
+            offset = -0.7600 0.1900 1.2600,
+            radius = 0.33f,
+            width = 0.26f,
+        }
+
+        wheel RearLeft
+        {
+            front = false,
+            offset = 0.7600 0.1900 -1.2600,
+            radius = 0.33f,
+            width = 0.26f,
+        }
+
+        wheel RearRight
+        {
+            front = false,
+            offset = -0.7600 0.1900 -1.2600,
+            radius = 0.33f,
+            width = 0.26f,
+        }
+
+        template = Seat/part/SeatFrontLeft,
+        template = Seat/part/SeatFrontRight,
+        template = Seat/part/SeatRearLeft,
+        part SeatRearLeft
+        {
+            area = SeatFrontLeft,
+        }
+        
+        template = Seat/part/SeatRearRight,
+        part SeatRearRight
+        {
+            area = SeatFrontRight,
+        }
+        
+        template = PassengerCompartment,
+
+        part Seat*
+        {
+            container
+            {
+                capacity = 20,
+            }
+
+            table install
+            {
+                skills = Mechanics:2,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:2,
+            }
+        }
+
+        template = TrunkDoor,
+
+        part TrunkDoor
+        {
+            anim Open
+            {
+                sound = VehicleTrunkOpenSportsCar,
+            }
+
+            anim Close
+            {
+                sound = VehicleTrunkCloseSportsCar,
+            }
+
+            anim Lock
+            {
+                sound = LockVehicleDoorSportsCar,
+            }
+
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorSportsCar,
+            }
+
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedSportsCar,
+            }
+
+            table uninstall
+            {
+                requireInstalled =,
+                requireUninstalled = ATA2VisualSpoilerRear,
+                test = ATATuning2.UninstallTest.multiRequire,
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        template = Headlight,
+        template = Trunk/part/TruckBed,
+
+        part TruckBed
+        {
+            itemType = Base.SmallTrunk,
+
+            container
+            {
+                capacity = 40,
+            }
+        }
+
+        template = GloveBox,
+
+        part GloveBox
+        {
+            container
+            {
+                capacity = 5,
+            }
+        }
+
+        template = GasTank,
+        part GasTank
+        {
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+        template = Battery,
+        template = Engine,
+        template = Muffler,
+        part Muffler
+        {
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+        template! = ATASamara_EngineDoor,
+        template! = ATASamara_Bullbar,
+        template! = ATASamara_ProtectionWindows,
+        template! = ATASamara_Other,
+
+        part Heater
+        {
+            category = engine,
+
+            lua
+            {
+                update = Vehicles.Update.Heater,
+            }
+        }
+
+        template = Door/part/DoorFrontLeft,
+        template = Door/part/DoorFrontRight,
+
+        part Door*
+        {
+            anim Open
+            {
+                sound = VehicleDoorOpenSportsCar,
+            }
+
+            anim Close
+            {
+                sound = VehicleDoorCloseSportsCar,
+            }
+
+            anim Lock
+            {
+                sound = LockVehicleDoorSportsCar,
+            }
+
+            anim Unlock
+            {
+                sound = UnlockVehicleDoorSportsCar,
+            }
+
+            anim IsLocked
+            {
+                sound = VehicleDoorIsLockedSportsCar,
+            }
+
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+        
+        template = Window/part/WindowFrontLeft,
+        template = Window/part/WindowFrontRight,
+        template = Windshield/part/Windshield,
+        template = Windshield/part/WindshieldRear,
+
+        template = ATA2Protection/part/ATA2ProtectionWheels,
+        template = Tire,
+
+        part Tire*
+        {
+            setAllModelsVisible = false,
+            table ATA2ItemToModel
+            {
+                OldTire3 = Tire1,
+                NormalTire3 = Tire2,
+                ModernTire3 = Tire3,
+            }
+
+            table install
+            {
+                complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+                recipes = Advanced Mechanics,
+            }
+            
+            table uninstall
+            {
+                complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+                recipes = Advanced Mechanics,
+            }
+            
+            lua
+            {
+                create = ATATuning2.Create.TireNotAllModelsVisible,
+                init = ATATuning2.Init.TireNotAllModelsVisible,
+                checkOperate = Vehicles.CheckOperate.Tire,
+                update = Vehicles.Update.Tire,
+            }
+        }
+
+        part TireFrontLeft
+        {
+            model Tire1
+            {
+                file = ATASamara_wheel_L,
+            }
+            model Tire2
+            {
+                file = ATASamara_wheel2_L,
+            }
+            model Tire3
+            {
+                file = ATASamara_wheel3_L,
+            }
+
+            model ATAProtection
+            {
+                file = ATASamara_wheelProtection_L,
+            }
+        }
+
+        part TireRearLeft
+        {
+            model Tire1
+            {
+                file = ATASamara_wheel_L,
+            }
+            model Tire2
+            {
+                file = ATASamara_wheel2_L,
+            }
+            model Tire3
+            {
+                file = ATASamara_wheel3_L,
+            }
+            model ATAProtection
+            {
+                file = ATASamara_wheelProtection_L,
+            }
+        }
+
+        part TireFrontRight
+        {
+            model Tire1
+            {
+                file = ATASamara_wheel,
+            }
+            model Tire2
+            {
+                file = ATASamara_wheel2,
+            }
+            model Tire3
+            {
+                file = ATASamara_wheel3,
+            }
+
+            model ATAProtection
+            {
+                file = ATASamara_wheelProtection,
+            }
+        }
+
+        part TireRearRight
+        {
+            model Tire1
+            {
+                file = ATASamara_wheel,
+            }
+            model Tire2
+            {
+                file = ATASamara_wheel2,
+            }
+            model Tire3
+            {
+                file = ATASamara_wheel3,
+            }
+
+            model ATAProtection
+            {
+                file = ATASamara_wheelProtection,
+            }
+        }
+        
+        template = ATASpareWheel/part/ATASpareWheel,
+        part ATASpareWheel
+        {
+            model Tire1
+            {
+                file = ATASamara_Zapaska1,
+            }
+            model Tire2
+            {
+                file = ATASamara_Zapaska2,
+            }
+            model Tire3
+            {
+                file = ATASamara_Zapaska3,
+            }
+            
+            table ATA2ItemToModel
+            {
+                OldTire3 = Tire1,
+                NormalTire3 = Tire2,
+                ModernTire3 = Tire3,
+            }
+            table install
+            {
+                requireInstalled = ATA2ProtectionWindshieldRear,
+            }
+            lua
+            {
+                create = ATATuning2.Create.Chance0,
+                init = ATATuning2.Init.DefaultModel,
+            }
+        }
+        
+        template = Brake,
+        template = Suspension,
+
+        part Suspension*
+        {
+            table install
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        template = Radio,
+
+        attachment trailer
+        {
+            offset = 0.0000 0.1700 -2.3100,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = -1.0000,
+        }
+
+        attachment trailerfront
+        {
+            offset = 0.0000 0.1000 2.0000,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = 1.0000,
+        }
+    }
+}
+

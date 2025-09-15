@@ -1,0 +1,77 @@
+module Base
+{
+	model 89fordBroncoBedCover
+	{
+		mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_cover_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BR89BedCover
+		{
+		part BR89BedCover
+        	{
+
+			model BackCover48764
+				{
+                		file = 89fordBroncoBedCover,
+				}
+
+			area = TireRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.89BroncoBedCover,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireUninstalled = BR89Rollbar,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 2000,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+                	test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireUninstalled = WindshieldRear;WindowRearLeft;WindowRearRight;BR89Roofrack,
+            		}
+
+            		lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+		
+}

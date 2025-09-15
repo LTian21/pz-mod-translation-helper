@@ -1,0 +1,172 @@
+module Base
+{
+
+	model 87fordB700WheelFL
+	{
+		mesh = vehicles/Vehicles_87fordB700_Wheels|b700_tire,
+		texture = vehicles/Vehicles_87fordB700_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 87fordB700WheelFR
+	{
+		mesh = vehicles/Vehicles_87fordB700_Wheels|b700_tire,
+		texture = vehicles/Vehicles_87fordB700_Wheel,
+		shader = damn_wheel_shader,
+		invertX = TRUE,
+		scale = 0.1,
+	}
+
+	model 87fordB700WheelRL
+	{
+		mesh = vehicles/Vehicles_87fordB700_Wheels|b700_tires,
+		texture = vehicles/Vehicles_87fordB700_Wheels,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 87fordB700WheelRR
+	{
+		mesh = vehicles/Vehicles_87fordB700_Wheels|b700_tires,
+		texture = vehicles/Vehicles_87fordB700_Wheels,
+		shader = damn_wheel_shader,
+		invertX = TRUE,
+		scale = 0.1,
+	}
+
+	template vehicle B700Tires
+	{
+		part TireFrontLeft
+		{
+			model 87fordB700TireFL
+			{
+				file = 87fordB700WheelFL,
+			}
+
+			area = TireFrontLeft,
+			itemType = Base.87fordB700Tire,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+			model 87fordB700TireFR
+			{
+				file = 87fordB700WheelFR,
+			}
+
+			area = TireFrontRight,
+			itemType = Base.87fordB700Tire,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model 87fordB700TireRL
+			{
+				file = 87fordB700WheelRL,
+			}
+
+			area = TireRearLeft,
+			itemType = Base.87fordB700DoubleTires,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			model 87fordB700TireRR
+			{
+				file = 87fordB700WheelRR,
+			}
+
+			area = TireRearRight,
+			itemType = Base.87fordB700DoubleTires,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+            durability = 2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+	}
+}
+

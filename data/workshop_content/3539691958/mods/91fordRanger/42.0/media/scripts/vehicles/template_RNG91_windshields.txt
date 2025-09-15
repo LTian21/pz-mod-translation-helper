@@ -1,0 +1,154 @@
+module Base
+{
+
+    model 91fordRangerWindshield
+    {
+        mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_windshield_front,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 91fordRangerWindshieldRear
+    {
+        mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle RNG91WindshieldsXC
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 91fordRangerWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.91fordRangerWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+             
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = DAMNWindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 91fordRangerWindshieldRear,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.91fordRangerWindshieldRear,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+             
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    requireUninstalled = RNG91TruckBedExtras,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle RNG91WindshieldsSC
+	{
+        template! = RNG91WindshieldsXC,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 91fordRangerWindshieldRear,
+                offset = 0.0000 0.0000 0.4169,
+				rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+    }
+}

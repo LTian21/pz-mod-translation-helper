@@ -1,0 +1,60 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LargeWardrobe
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Large Wardrobe,
+			Icon		= furniture_storage_01_39,
+		}
+	}
+
+    entity LargeWardrobe
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_LargeWardrobe,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = furniture_storage_01_37,
+                    row = furniture_storage_01_36,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_storage_01_38 furniture_storage_01_39,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 350,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:7,
+            category      = Furniture_Dressers,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_dressersDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 8 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

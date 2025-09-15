@@ -1,0 +1,83 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Dumbledoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Double Door,
+			Icon		= Build_DoubleWoodGate,
+		}
+	}
+
+    entity DoubleDoor
+    {
+        component UiConfig
+                {
+                    xuiSkin         = default,
+                    entityStyle     = ES_Dumbledoor,
+                    uiEnabled       = false,
+                }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			dontNeedFrame	= true,
+			breakSound      = BreakDoor,
+			
+            face W
+            {
+                layer
+                {
+                    row = fixtures_doors_fences_01_97,
+                    row = fixtures_doors_fences_01_96,
+                    row = fixtures_doors_fences_01_105,
+                    row = fixtures_doors_fences_01_104,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_doors_fences_01_98 fixtures_doors_fences_01_99 fixtures_doors_fences_01_106 fixtures_doors_fences_01_107,
+                }
+            }
+			/*face W_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_fences_01_108 fixtures_doors_fences_01_109 fixtures_doors_fences_01_100 fixtures_doors_fences_01_101,
+
+                }
+            }
+            face N_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_fences_01_103,
+					row = fixtures_doors_fences_01_102,
+					row = fixtures_doors_fences_01_111,
+					row = fixtures_doors_fences_01_110,
+                }
+            }*/
+        }
+		
+		component CraftRecipe
+        {
+		timedAction   = BuildWallHammer,
+            	time          = 200,
+            	category      = Carpentry,
+		SkillRequired = Woodwork:4,
+		xpAward       = Woodwork:12,
+		ToolTip       = Tooltip_craft_doubleWoodenDoorDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1],
+		        item 2 [SWB.PlankKit4x],
+		        item 8 [Base.Nails],
+		        item 4 [Base.Hinge],
+		        item 2 [Base.Doorknob],
+            }
+        }
+    }
+}

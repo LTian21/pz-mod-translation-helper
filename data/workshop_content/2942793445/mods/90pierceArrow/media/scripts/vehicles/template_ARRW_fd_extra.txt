@@ -1,0 +1,104 @@
+module Base
+{
+	model 90pierceArrowLadders
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_ladders,
+		texture = vehicles/Vehicles_90pierceArrow_Extra,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 90pierceArrowHoses
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_hoses,
+		texture = vehicles/Vehicles_90pierceArrow_Extra,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle ARRWFDExtra
+		{
+		part ARRWLadders
+        	{
+
+			model arrwLadders0
+				{
+                		file = 90pierceArrowLadders,
+				}
+
+				area = TireRearRight,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.90pierceArrowLadders,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 650,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            	table uninstall
+            		{
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+		part ARRWHoses
+        	{
+
+			model arrwHoses0
+				{
+                		file = 90pierceArrowHoses,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.90pierceArrowHoses,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 1200,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            	table uninstall
+            		{
+
+					time = 900,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+	}
+
+		
+}

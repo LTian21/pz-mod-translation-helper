@@ -1,0 +1,70 @@
+module Base
+{
+	model 87buickRegalSpare1
+	{
+		mesh = vehicles/Vehicles_87buickRegal_Body|gnx_tire_spare1,
+		texture = vehicles/Vehicles_87buickRegal_Wheel1,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 87buickRegalSpare2
+	{
+		mesh = vehicles/Vehicles_87buickRegal_Body|gnx_tire_spare2,
+		texture = vehicles/Vehicles_87buickRegal_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle GNX87SpareTires
+	{
+		part GNX87SpareTire
+        	{
+        	model GNX87Spare1
+			{
+				file = 87buickRegalSpare1,
+			}
+
+			model GNX87Spare2
+			{
+				file = 87buickRegalSpare2,
+			}
+
+			category = tire,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.87buickRegalTire1;Base.87buickRegalGNXTire3,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GNX87.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = GNX87.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = GNX87.Create.SpareTire,
+				init = GNX87.Init.SpareTire,
+				}
+		}
+	}
+
+}
+

@@ -1,0 +1,620 @@
+module Base
+{
+	model 93chevySuburbanFrontBumper0
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93chevySuburbanFrontBumper1
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93chevySuburbanFrontBullbarA
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93chevySuburbanFrontBullbarB
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_bumper_frontB,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 93chevySuburbanFrontBullbarB2
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_bumper_frontB2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93chevySuburbanFrontBullbarC
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_bumper_frontC,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 93chevySuburbanFrontBullbarD
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|k3500_bumper_frontD,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93chevySuburbanRearBumper0
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sub93_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 93chevySuburbanRearBumper1
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SUB93BumperRear
+	{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93chevySuburbanBumperRear0,
+				mechanicRequireKey = false,
+				durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.BumperRear,
+					init = SUB93.Init.BumperRear,
+					}
+		}
+	}
+
+	template vehicle SUB93Bumpers
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 93chevySuburbanFrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 93chevySuburbanFrontBumper1,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 93chevySuburbanFrontBullbarA,
+				}
+
+			model FrontBullbarB
+				{
+                		file = 93chevySuburbanFrontBullbarB,
+				}
+
+            model FrontBullbarB2
+				{
+                		file = 93chevySuburbanFrontBullbarB2,
+				}
+
+			model FrontBullbarC
+				{
+                		file = 93chevySuburbanFrontBullbarC,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93chevySuburbanBumperFront0;Base.93chevySuburbanBumperFront1;Base.93chevySuburbanBullbarFrontA;Base.93chevySuburbanBullbarFrontB;Base.93chevySuburbanBullbarFrontB2;Base.93chevySuburbanBullbarFrontC,
+				mechanicRequireKey = false,
+				durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.BumperFront,
+					init = SUB93.Init.BumperFront,
+					}
+		}
+
+		template! = SUB93BumperRear,
+	}
+
+	template vehicle SUB93BumpersPD
+	{
+		template! = SUB93Bumpers,
+
+		part DAMNBumperFront
+        	{
+
+				table install
+				{
+                	complete = SUB93.InstallComplete.BumperFrontPD,
+            	}
+
+            	table uninstall
+            	{
+					complete = SUB93.UninstallComplete.BumperFrontPD,
+            	}
+
+            	lua
+            	{
+					create = SUB93.Create.BumperFrontPD,
+					init = SUB93.Init.BumperFrontPD,
+				}
+		}
+
+	}
+
+	template vehicle SUB93BumpersFD
+	{
+		template! = SUB93Bumpers,
+
+		part DAMNBumperFront
+        	{
+
+				table install
+				{
+                	complete = SUB93.InstallComplete.BumperFrontFD,
+            	}
+
+            	table uninstall
+            	{
+					complete = SUB93.UninstallComplete.BumperFrontFD,
+            	}
+
+            	lua
+            	{
+					create = SUB93.Create.BumperFrontFD,
+					init = SUB93.Init.BumperFrontFD,
+				}
+		}
+
+	}
+
+    template vehicle SUB93BumpersCC
+	{
+		template! = SUB93Bumpers,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumpersCCFD
+	{
+		template! = SUB93BumpersFD,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumpersXC
+	{
+		template! = SUB93Bumpers,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+                        offset = 0.0000 0.0000 0.2800,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumpersSC
+	{
+		template! = SUB93Bumpers,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+                        offset = 0.0000 0.0000 0.9100,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumpersXCS
+	{
+		template! = SUB93Bumpers,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+                        offset = 0.0000 0.0000 0.7478,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumpersSCS
+	{
+		template! = SUB93Bumpers,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+                        offset = 0.0000 0.0000 1.3778,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumpersCCshort
+	{
+		template! = SUB93Bumpers,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+                        offset = 0.0000 0.0000 0.4678,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumperFront
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 93chevySuburbanFrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 93chevySuburbanFrontBumper1,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 93chevySuburbanFrontBullbarA,
+				}
+
+			model FrontBullbarB
+				{
+                		file = 93chevySuburbanFrontBullbarB,
+				}
+
+            model FrontBullbarB2
+				{
+                		file = 93chevySuburbanFrontBullbarB2,
+				}
+
+			model FrontBullbarC
+				{
+                		file = 93chevySuburbanFrontBullbarC,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93chevySuburbanBumperFront0;Base.93chevySuburbanBumperFront1;Base.93chevySuburbanBullbarFrontA;Base.93chevySuburbanBullbarFrontB;Base.93chevySuburbanBullbarFrontB2;Base.93chevySuburbanBullbarFrontC,
+				mechanicRequireKey = false,
+				durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.BumperFront,
+					init = SUB93.Init.BumperFront,
+					}
+		}
+	}
+
+    template vehicle K3500BumperRear
+	{
+		part DAMNBumperRear
+        	{
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93chevySuburbanBumperRear0,
+				mechanicRequireKey = false,
+				durability = 5,
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+    template vehicle SUB93BumperFrontWrecker
+	{
+        part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 93chevySuburbanFrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 93chevySuburbanFrontBumper1,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 93chevySuburbanFrontBullbarA,
+				}
+
+			model FrontBullbarB
+				{
+                		file = 93chevySuburbanFrontBullbarB,
+				}
+
+            model FrontBullbarB2
+				{
+                		file = 93chevySuburbanFrontBullbarB2,
+				}
+
+			model FrontBullbarC
+				{
+                		file = 93chevySuburbanFrontBullbarC,
+				}
+
+            model FrontBullbarD
+				{
+                		file = 93chevySuburbanFrontBullbarD,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93chevySuburbanBumperFront0;Base.93chevySuburbanBumperFront1;Base.93chevySuburbanBullbarFrontA;Base.93chevySuburbanBullbarFrontB;Base.93chevySuburbanBullbarFrontB2;Base.93chevySuburbanBullbarFrontC;Base.93chevySuburbanBullbarFrontD,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.BumperFrontW,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.BumperFrontW,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.BumperFrontW,
+					init = SUB93.Init.BumperFrontW,
+					}
+		}
+	}
+
+    template vehicle SUB93BumpersCCPD
+	{
+		template! = SUB93BumpersCC,
+
+        part DAMNBumperFront
+        	{
+
+				table install
+				{
+                	complete = SUB93.InstallComplete.BumperFrontPD,
+            	}
+
+            	table uninstall
+            	{
+					complete = SUB93.UninstallComplete.BumperFrontPD,
+            	}
+
+            	lua
+            	{
+					create = SUB93.Create.BumperFrontPD,
+					init = SUB93.Init.BumperFrontPD,
+				}
+		}
+	}
+}

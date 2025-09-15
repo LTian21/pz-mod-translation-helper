@@ -1,0 +1,86 @@
+module Base
+{
+    model Tatra8156X6_Windshield
+    {
+        mesh = vehicles/Vehicles_6X6Tatra815_Body|Windshield,
+        shader = vehicle,
+        scale = 1,
+    }
+    model Tatra8156X6_WindshieldRear
+    {
+        mesh = vehicles/Vehicles_6X6Tatra815_Body|Rear_Windshield,
+        shader = vehicle,
+        scale = 1,
+        
+    }
+
+    template vehicle Tatra8156X6_windshields
+    {
+        template = Windshield/part/Windshield,
+        template = Windshield/part/WindshieldRear,
+
+        part Windshield
+        {
+            model windshieldFront
+			{
+				file = Tatra8156X6_Windshield,
+			}
+
+            area = Engine,
+            
+            category = bodywork,
+            mechanicRequireKey = false,
+
+			window
+			{
+				openable = false,
+			}
+
+            table install
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                requireUninstalled = ATA2ProtectionWindshield,
+			}
+        }
+
+        part WindshieldRear
+        {
+            
+            
+            model windshieldRear
+			{
+				file = Tatra8156X6_WindshieldRear,
+			}
+
+            area = Engine,
+            
+            category = bodywork,
+            mechanicRequireKey = false,
+
+			window
+			{
+				openable = false,
+			}
+
+            table install
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                requireUninstalled = ATA2ProtectionWindshieldRear,
+			}
+        }
+    }
+}

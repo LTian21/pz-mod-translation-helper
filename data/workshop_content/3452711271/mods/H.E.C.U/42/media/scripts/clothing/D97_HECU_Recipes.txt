@@ -1,0 +1,45 @@
+module Base
+{
+  /************************ H.E.C.U. ************************/
+  
+	craftRecipe PutFilterOnHECUGasMask
+	{
+		timedAction = Making,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.GasmaskFilterInsert,
+		OnTest = Recipe.OnTest.GasmaskFilterInsert,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Survival,
+		inputs
+		{
+			item 1 [D_HECU.HECU_GasMask_Nofilter] mappers[maskMapper] flags[IsNotWorn;AllowFavorite;InheritFavorite;CopyClothing],
+			item 1 tags[GasmaskFilter] flags[ItemCount] mode:destroy,
+		}
+		outputs
+		{
+			item 1 D_HECU.HECU_GasMask,
+		}
+	}
+	craftRecipe PutFilterOnWornHECUGasMask
+	{
+		timedAction = Making,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.WornGasmaskFilterInsert,
+		OnTest = Recipe.OnTest.WornGasmaskFilterInsert,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Survival,
+		inputs
+		{
+			item 1 [D_HECU.HECU_GasMask_Nofilter] mappers[maskMapper] flags[IsWorn;AllowFavorite;InheritFavorite;CopyClothing],
+			item 1 tags[GasmaskFilter] flags[ItemCount] mode:destroy,
+		}
+		outputs
+		{
+			item 1 D_HECU.HECU_GasMask,
+		}
+	}
+}
+
+  /************************ d97 ************************/

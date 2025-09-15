@@ -1,0 +1,55 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_RoadConeSmall
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Road Cone Small,
+			Icon		= street_decoration_01_26,
+		}
+	}
+
+    entity RoadConeSmall
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_RoadConeSmall,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face E
+            {
+                layer
+                {
+                    row = street_decoration_01_26,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:2,
+            xpAward       = Woodwork:5,
+            category      = Decorations_Roadway,
+            tags          = Carpentry,
+            ToolTip       = Tooltip_craft_roadwayDecorationsDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 3 [Base.Plank] flags[Prop2],
+                item 1 [Base.Nails],
+            }
+        }
+    }
+}

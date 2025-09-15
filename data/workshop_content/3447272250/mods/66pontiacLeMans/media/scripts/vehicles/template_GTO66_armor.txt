@@ -1,0 +1,288 @@
+module Base
+{
+	model 66pontiacLeMansWindshieldA
+    	{
+        mesh = vehicles/Vehicles_66pontiacLeMans_Body|66lemans_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 66pontiacLeMansWindowflA
+    	{
+        mesh = vehicles/Vehicles_66pontiacLeMans_Body|66lemans_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 66pontiacLeMansWindowfrA
+    	{
+        mesh = vehicles/Vehicles_66pontiacLeMans_Body|66lemans_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 66pontiacLeMansWindshieldrearA
+    	{
+        mesh = vehicles/Vehicles_66pontiacLeMans_Body|66lemans_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle GTO66Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model GTO66winda0
+				{
+                		file = 66pontiacLeMansWindshieldA,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.66pontiacLeMansWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GTO66.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = GTO66.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = GTO66.Create.WindshieldArmor,
+					init = GTO66.Init.WindshieldArmor,
+					}
+			}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model GTO66leftdoora
+				{
+                		file = 66pontiacLeMansWindowflA,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.66pontiacLeMansFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GTO66.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = GTO66.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = GTO66.Create.FrontLeftArmor,
+					init = GTO66.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model GTO66rightdoora
+				{
+                		file = 66pontiacLeMansWindowfrA,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.66pontiacLeMansFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GTO66.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = GTO66.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = GTO66.Create.FrontRightArmor,
+					init = GTO66.Init.FrontRightArmor,
+					}
+		}
+
+	}
+
+    template vehicle GTO66ArmorFull
+		{
+        template! = GTO66Armor,
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model GTO66windra
+				{
+                		file = 66pontiacLeMansWindshieldrearA,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.66pontiacLeMansWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GTO66.InstallComplete.WindshieldRearArmor,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = GTO66.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = GTO66.Create.WindshieldRearArmor,
+					init = GTO66.Init.WindshieldRearArmor,
+					}
+			}
+		}
+
+}

@@ -1,0 +1,40 @@
+module Base
+{
+
+	template vehicle Biochemical_RooftrackTemplate
+	{
+		part Biochemical_PickupTruck_RooftrackPart
+		{
+			model Default
+			{
+				file = Biochemical_PickupTruck_Rooftrack,
+			}
+			
+			area = RoofRack,
+			category = bodywork,
+			itemType = Base.Biochemical_RoofRack,
+			mechanicRequireKey = true,
+			specificItem = false,
+			
+			container
+			{
+				ConditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBedOpen,
+			}
+			
+			table install
+			{
+				time = 1500,
+				skills = Mechanics:6,
+				test = Vehicles.InstallTest.Default,
+			}
+			
+			table uninstall
+			{
+				time = 1500,
+				skills = Mechanics:6,
+				test = Vehicles.UninstallTest.Default,	
+			}
+		}
+	}
+}

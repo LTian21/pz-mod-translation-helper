@@ -1,0 +1,221 @@
+module Base
+{
+	model 87fordF700windshielda
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|f700x_windshielda,
+        texture = Vehicles/Vehicles_87fordB700_Interior5,
+		shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+    model 87fordF700windowfla
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|f700x_window_fla,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 87fordF700windowfra
+    	{
+        mesh = vehicles/Vehicles_87fordB700_Body|f700x_window_fra,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle F700ArmorX
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model B700winda
+				{
+                		file = 87fordF700windshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.87fordF700WindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.WindshieldArmorX,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = B700.UninstallComplete.WindshieldArmorX,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.WindshieldArmorX,
+					init = B700.Init.WindshieldArmorX,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        	{
+
+			model B700leftwina
+				{
+                		file = 87fordF700windowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.87fordF700WindowFrontArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.FrontLeftArmorX,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.FrontLeftArmorX,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.FrontLeftArmorX,
+					init = B700.Init.FrontLeftArmorX,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        	{
+
+			model B700rightwina
+				{
+                		file = 87fordF700windowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.87fordF700WindowFrontArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = B700.InstallComplete.FrontRightArmorX,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = B700.UninstallComplete.FrontRightArmorX,
+            		}
+
+            		lua
+            		{
+					create = B700.Create.FrontRightArmorX,
+					init = B700.Init.FrontRightArmorX,
+					}
+		}
+
+	}
+}

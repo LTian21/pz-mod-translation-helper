@@ -1,0 +1,321 @@
+module Base
+{
+
+	model ECTO1seatfl
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_seat_fl,
+		texture = Vehicles/Vehicles_ECTO1_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model ECTO1seatfr
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_seat_fr,
+		texture = Vehicles/Vehicles_ECTO1_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+    model ECTO1seatrl2
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_seat_rl2,
+		texture = Vehicles/Vehicles_ECTO1_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model ECTO1seatrr2
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_seat_rr2,
+		texture = Vehicles/Vehicles_ECTO1_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model ECTO1seatrr
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_seat_rr,
+		texture = Vehicles/Vehicles_ECTO1_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model ECTO1ambulanceseatstr1
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|damnCraft_stretcher,
+		texture = Vehicles/Vehicles_USMIL_Stretchers,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model ECTO1ambulanceseatstr0
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|86amb_stretcher,
+		texture = Vehicles/Vehicles_USMIL_Stretchers,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle ECTO1Seats3
+	{
+		part SeatFrontLeft
+		{
+			model SeatFL
+			{
+				file = ECTO1seatfl,
+			}
+			itemType = Base.ECTO1CarSeatfl,
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = ECTO1seatfr,
+			}
+			itemType = Base.ECTO1CarSeatfr,
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = ECTO1seatrr,
+			}
+			itemType = Base.ECTO1CarSeatrr,
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+    template vehicle ECTO1Stretcher
+    {
+        part DAMNStretcher
+		{
+            model StretcherMil
+			{
+				file = ECTO1ambulanceseatstr0,
+			}
+
+            model StretcherCiv
+			{
+				file = ECTO1ambulanceseatstr1,
+			}
+
+			area = TruckBed,
+			container
+			{
+				seat = Stretcher,
+			}
+
+			category = seat,
+            specificItem = false,
+			itemType = USMIL.Stretcher0;USMIL.Stretcher1,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				seat = Stretcher,
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+                complete = ECTO1.InstallComplete.Stretcher,
+			}
+			table uninstall
+			{
+
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = ECTO1.UninstallComplete.Stretcher,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = ECTO1.Create.Stretcher,
+                init = ECTO1.Init.Stretcher,
+			}
+		}
+	}
+
+    template vehicle ECTO1Seats
+	{
+		part SeatFrontLeft
+		{
+			model SeatFL
+			{
+				file = ECTO1seatfl,
+			}
+			itemType = Base.ECTO1CarSeatfl,
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = ECTO1seatfr,
+			}
+			itemType = Base.ECTO1CarSeatfr,
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = ECTO1seatrl2,
+			}
+			itemType = Base.ECTO1CarSeatfl,
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = ECTO1seatrr2,
+			}
+			itemType = Base.ECTO1CarSeatfr,
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}

@@ -1,0 +1,207 @@
+module Base
+{
+	model 85chevyCapricefrontBumper0
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-caprice_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85chevyCapricefrontBumperA
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-caprice_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 85chevyCapricefrontBullbarA
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-platform_bullbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 85chevyCapricefrontBumperB
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-caprice_bumper_frontB,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85chevyCapricerearBumper0
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-caprice_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 85chevyCapricerearBumperB
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-caprice_bumper_rearB,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CAP85Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 85chevyCapricefrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 85chevyCapricefrontBumperA,
+				}
+
+            model FrontBullbarA
+				{
+                		file = 85chevyCapricefrontBullbarA,
+				}
+
+            model FrontBumperB
+				{
+                		file = 85chevyCapricefrontBumperB,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.85chevyCapriceBumperFront0;Base.85chevyCapriceBumperFrontA;Base.85gmBbodyBullbarFrontA;Base.85chevyCapriceBumperFrontB,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CAP85.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CAP85.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = CAP85.Create.BumperFront,
+					init = CAP85.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 85chevyCapricerearBumper0,
+				}
+
+            model RearBumperB
+				{
+                		file = 85chevyCapricerearBumperB,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.85chevyCapriceBumperRear0;Base.85chevyCapriceBumperRearB,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CAP85.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CAP85.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = CAP85.Create.BumperRear,
+					init = CAP85.Init.BumperRear,
+					}
+		}
+	}
+
+    template vehicle CAP85BumpersPUSH
+		{
+            template! = CAP85Bumpers,
+
+		part DAMNBumperFront
+        {
+			itemType = Base.85chevyCapriceBumperFrontB;Base.85chevyCapriceBumperFront0;Base.85chevyCapriceBumperFrontA;Base.85gmBbodyBullbarFrontA,
+		}
+
+		part DAMNBumperRear
+        {
+			itemType = Base.85chevyCapriceBumperRearB;Base.85chevyCapriceBumperRear0,
+
+		}
+	}
+}

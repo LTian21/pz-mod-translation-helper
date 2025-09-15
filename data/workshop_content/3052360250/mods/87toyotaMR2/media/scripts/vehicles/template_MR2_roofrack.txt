@@ -1,0 +1,82 @@
+module Base
+{
+
+	model 87toyotaMR2roofrack0
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Body|mr2_roofrack,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle MR2Roofrack
+	{
+		part MR2Roofrack
+		{
+
+			model MR2Roofrack0
+				{
+                		file = 87toyotaMR2roofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.87toyotaMR2Roofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = MR2.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MR2.InstallComplete.Roofrack,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = MR2.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+            		create = MR2.Create.Roofrack,
+            		init = MR2.Init.Roofrack,
+				}
+		}
+	}
+}
+

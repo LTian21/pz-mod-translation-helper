@@ -1,0 +1,142 @@
+module MATILDA
+{
+	imports
+	{
+		Base
+	}
+    item Matilda
+	{
+		MaxRange				=	15,
+		WeaponSprite				=	Matilda,
+		AimingTime 				=	25,
+		DisplayCategory 			= 	Weapon,
+		StopPower 				= 	5,
+		SoundVolume				=	27,
+		MinAngle				=	0.95,
+		BringToBearSound 			= 	M1911BringToBear,
+		Type					=	Weapon,
+		MinimumSwingTime			=	0.5,
+		ToHitModifier				=	1.5,
+		NPCSoundBoost				=	1.5,
+		KnockBackOnNoDeath			=	TRUE,
+		Ranged					=	TRUE,
+		SwingAmountBeforeImpact			=	0,
+		ProjectileCount				=	1,
+		ConditionLowerChanceOneIn		=	200,
+		Weight					=	1.3,
+		SplatNumber				=	3,
+		PushBackMod				=	0.3,
+		SubCategory				=	Firearm,
+		ConditionMax				=	12,
+		ShareDamage				=	FALSE,
+		MaxHitCount				=	1,
+		IsAimedFirearm				=	TRUE,
+		DoorDamage				=	4,
+		UseEndurance				=	FALSE,
+		SwingAnim				=	Handgun,
+		DisplayName				=	VP70 Pistol,
+		MinRange				=	0.61,
+		SwingTime				=	0.5,
+		MultipleHitConditionAffected		=	FALSE,
+		SwingSound				=	matilda,
+		SoundRadius				=	35,
+		MinDamage				=	0.6,
+		MaxDamage				=	1,
+		SplatSize				=	3,
+		KnockdownMod				=	2,
+		SplatBloodOnNoDeath			=	TRUE,
+		Icon					=	Matilda,
+		RunAnim					=	Run_Weapon2,
+		CriticalChance				=	20,
+		CritDmgMultiplier 			= 	4,
+		AimingPerkCritModifier 			= 	10,
+		AimingPerkRangeModifier 		= 	1.5,
+		HitChance 				= 	50,
+		AimingPerkHitChanceModifier 		= 	8,
+		AimingPerkMinAngleModifier 		= 	0.05,
+		RecoilDelay 				= 	18,
+		SoundGain 				= 	1.5,
+		ClipSize 				= 	18,
+		ReloadTime 				= 	30,
+		AimingTime 				= 	25,
+		BreakSound  				= 	BreakMetalItem,
+		MetalValue 				= 	12,
+		AmmoBox 				= 	Bullets9mmBox,
+		MaxAmmo 				= 	18,
+		DropSound 				= 	M9Drop,
+		BreakSound 				= 	M9Break,
+		EjectAmmoSound 				= 	M9EjectAmmo,
+		EjectAmmoStartSound 			= 	M9EjectAmmoStart,
+		EjectAmmoStopSound 			= 	M9EjectAmmoStop,
+		InsertAmmoSound 			= 	M9InsertAmmo,
+		InsertAmmoStartSound 			= 	M9InsertAmmoStart,
+		InsertAmmoStopSound 			= 	M9InsertAmmoStop,
+		ShellFallSound 				= 	M9CartridgeFall,
+		EquipSound 				= 	M9Equip,
+		UnequipSound 				= 	M1911UnEquip,
+		MagazineType 				= 	MatildaClip,
+		ClickSound 				= 	M9Jam,
+		HitSound 				= 	BulletImpact,
+		AmmoType 				= 	Base.Bullets9mm,
+		WeaponReloadType 			= 	handgun,
+		JamGunChance 				= 	2,
+		MinSightRange = 2,
+		MaxSightRange = 6,
+		ModelWeaponPart 			= 	MatildaStock matilda_MatildaStock,
+		AttachmentType 				= 	Holster,
+	}
+
+    item MatildaClip
+    {
+		CanStack	= FALSE,
+		Weight		= 0.2,
+		Type		= Normal,
+		DisplayCategory = Ammo,
+		DisplayName	= VP70 Magazine,
+		Icon		= BerettaClip,
+		MaxAmmo 	= 18,
+		AmmoType 	= Base.Bullets9mm,
+		WorldStaticModel = Gun_Pistol_Magazine,
+    }
+
+	item MatildaStock
+    {
+        Type 				= WeaponPart,
+        DisplayName 		= VP70 Stock,
+	DisplayCategory 		= WeaponPart,
+        Icon 				= MatildaStock,
+        Weight 				= 0.35,
+		HitChanceModifier 	= 2,
+		MaxRangeModifier 	= 3,
+		RecoilDelayModifier	= -10,
+        WeightModifier 		= 0.35,
+        MountOn 			= Matilda,
+        PartType 			= Stock,
+        Tooltip 			= Tooltip_matildastock,
+        MetalValue 			= 15,
+	WorldStaticModel		= matilda_MatildaStock,
+    }
+	
+	item MatildaCase
+    {
+        WeightReduction	=	5,
+        Weight			=	0.5,
+        Type			=	Container,
+	DisplayCategory 	= 	Container,
+        Capacity		=	7,
+        DisplayName		=	Gun Case,
+        Icon			=	PistolCase,
+        MetalValue 		= 	15,
+        ReplaceInSecondHand = Bag_PistolCase_LHand holdingbagleft,
+        ReplaceInPrimaryHand = Bag_PistolCase_RHand holdingbagright,
+	WorldStaticModel = GunCase_Ground,	
+    }
+
+    fixing Fix Matilda
+    {
+       Require : Matilda,
+
+       Fixer : Matilda; Aiming=3,
+    }
+}
+	

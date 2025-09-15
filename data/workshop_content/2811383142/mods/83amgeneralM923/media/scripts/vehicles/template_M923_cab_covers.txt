@@ -1,0 +1,75 @@
+module Base
+{
+	model 83amgeneralM923hard1
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_cab1,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M923CabCovers
+		{
+		part M923CabCovers
+        	{
+
+			model M923HardCover1
+				{
+                		file = 83amgeneralM923hard1,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M923HardCover1_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M923.InstallComplete.CabCover,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 650,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = M923.UninstallComplete.CabCover,
+            		}
+
+            		lua
+            		{
+					create = M923.Create.CabCover,
+					init = M923.Init.CabCover,
+					}
+		}
+	}
+
+		
+}

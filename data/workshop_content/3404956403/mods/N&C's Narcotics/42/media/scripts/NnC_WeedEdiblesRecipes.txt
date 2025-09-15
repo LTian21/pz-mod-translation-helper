@@ -1,0 +1,211 @@
+module NnC
+{
+
+imports
+	{
+		Base
+	}
+
+	craftRecipe MakeCannaButter
+	{
+        timedAction = MixingBowl,
+		Time = 300,
+		Tags = InHandCraft;Cooking,
+		xpAward = Cooking:10,
+		NeedToBeLearn = True,
+        category = Drugs,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 16 [NnC.WeedBaggieAK;NnC.WeedBaggieNorthernLights;NnC.WeedBaggieSourDiesel],
+			item 1 tags[MixingUtensil] mode:keep,
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 [Base.Butter;Base.Lard;Base.Margarine],
+		}
+		outputs
+		{
+			item 2 NnC.CannaButter,
+		}
+	}
+	craftRecipe MakeWeedChocolateBar
+	{
+        timedAction = MixingBowl,
+		Time = 300,
+		Tags = InHandCraft;Cooking,
+		xpAward = Cooking:10,
+		NeedToBeLearn = True,
+        category = Drugs,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep,
+			item 1 tags[RollingPin] mode:keep flags[MayDegrade],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 tags[CannaButter],
+			item 1 tags[Sugar],
+			item 1 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge],
+			item 1 [Base.CocoaPowder],
+			item 1 tags[Flour],
+			item 1 [*],
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 NnC.WeedChocolateBar,
+		}
+	}
+	craftRecipe MakeWeedBrowniePan
+	{
+        timedAction = MixingBowl,
+		Time = 250,
+		Tags = InHandCraft;Cooking,
+		xpAward = Cooking:10,
+		NeedToBeLearn = True,
+        category = Drugs,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep,
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 [Base.BakingTray] mode:destroy,
+			item 1 tags[CannaButter],
+			item 1 tags[Sugar],
+			item 1 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge],
+			item 1 [Base.BakingSoda],
+			item 1 [Base.CocoaPowder],
+			item 1 tags[Flour],
+			item 1 [*],
+			-fluid 1.0 [CowMilk],
+		}
+		outputs
+		{
+			item 1 NnC.WeedBrowniePan,
+		}
+	}
+	craftRecipe CutWeedBrownies
+	{
+        timedAction = SliceFood_Surface,
+		Time = 150,
+		OnCreate = Recipe.OnCreate.GetCookies,
+		Tags = InHandCraft;Cooking,
+		xpAward = Cooking:10,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.WeedBrowniePan] flags[IsCookedFoodItem;InheritFoodAge],
+			item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
+		}
+		outputs
+		{
+			item 12 NnC.WeedBrownie,
+			item 1 Base.BakingTray,
+		}
+	}
+	craftRecipe MakeWeedChocolateChipCookieDough
+	{
+        timedAction = MixingBowl,
+		Time = 200,
+		Tags = InHandCraft;Cooking,
+		xpAward = Cooking:10,
+		NeedToBeLearn = True,
+        category = Drugs,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep,
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 [Base.BakingTray] mode:destroy,
+			item 1 [Base.RollingPin] mode:keep flags[MayDegradeLight],
+			item 1 tags[CannaButter],
+			item 1 tags[Sugar],
+			item 1 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge],
+			item 1 [Base.BakingSoda],
+			item 1 [Base.ChocolateChips],
+			item 1 tags[Flour],
+			item 1 [*],
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 NnC.WeedChocolateChipCookieDough,
+		}
+	}
+	craftRecipe MakeWeedSugarCookieDough
+	{
+        timedAction = MixingBowl,
+		Time = 200,
+		Tags = InHandCraft;Cooking,
+		xpAward = Cooking:10,
+		NeedToBeLearn = True,
+        category = Drugs,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep,
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 [Base.BakingTray] mode:destroy,
+			item 1 [Base.RollingPin] mode:keep flags[MayDegradeLight],
+			item 1 tags[CannaButter],
+			item 1 tags[Sugar],
+			item 1 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge],
+			item 1 [Base.BakingSoda],
+			item 1 tags[Flour],
+			item 1 [*],
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 NnC.WeedSugarCookieDough,
+		}
+	}
+	craftRecipe Get12WeedCookies
+	{
+        timedAction = Making,
+		Time = 50,
+		OnCreate = Recipe.OnCreate.GetCookies,
+		Tags = InHandCraft;Cooking,
+		xpAward = Cooking:10,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [NnC.WeedChocolateChipCookieDough;NnC.WeedSugarCookieDough] mappers[WeedCookies] flags[IsCookedFoodItem;InheritFoodAge],
+		}
+		outputs
+		{
+			item 12 mapper:WeedCookies,
+			item 1 Base.BakingTray,
+		}
+        itemMapper WeedCookies
+        {
+			NnC.WeedChocolateChipCookie = NnC.WeedChocolateChipCookieDough,
+			NnC.WeedSugarCookie = NnC.WeedSugarCookieDough,
+		}
+	}
+	craftRecipe MakeWeedGummies
+	{
+        timedAction = MixingBowl,
+		Time = 200,
+		Tags = InHandCraft;Cooking,
+		xpAward = Cooking:10,
+		NeedToBeLearn = True,
+        category = Drugs,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep,
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 tags[CannaButter],
+			item 1 tags[Sugar],
+			item 1 [Base.BakingSoda],
+			item 1 [*],
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 12 NnC.WeedGummies,
+		}
+	}
+
+}

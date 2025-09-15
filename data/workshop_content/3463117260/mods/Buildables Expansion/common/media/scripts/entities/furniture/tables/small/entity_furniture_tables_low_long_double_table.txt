@@ -1,0 +1,60 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LongLowDoubleTable
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Long Low Double Table,
+			Icon		= furniture_tables_low_01_15,
+		}
+	}
+
+    entity LongLowDoubleTable
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_LongLowDoubleTable,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = furniture_tables_low_01_1,
+                    row = furniture_tables_low_01_0,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_tables_low_01_14 furniture_tables_low_01_15,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 150,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:5,
+            category      = Furniture_Tables,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_tableDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 4 [Base.Plank],
+                item 3 [Base.Nails],
+            }
+        }
+    }
+}

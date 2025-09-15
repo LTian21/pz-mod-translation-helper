@@ -1,0 +1,569 @@
+module Base
+{
+	model 76chevyKseriesFrontBumper0
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 76chevyKseriesFrontBullbarA
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 76chevyKseriesFrontBullbarB
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_bullbar_frontB,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 76chevyKseriesFrontBullbarC
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76wrecker_bullbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 76chevyK20RearBumper0
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK20_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 76chevyK10RearBumper0
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK10_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 76chevyutilityRearBumper1
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK_utility_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CH76BumpersK10
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 76chevyKseriesFrontBumper0,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 76chevyKseriesFrontBullbarA,
+				}
+
+            model FrontBullbarB
+				{
+                		file = 76chevyKseriesFrontBullbarB,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.3rdGenChevyCKseriesBumperFront0;Base.76chevyKseriesBullbarFrontA;Base.76chevyKseriesBullbarFrontB,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = CH76.Create.BumperFront,
+					init = CH76.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 76chevyK10RearBumper0,
+				}
+
+			model RearBumper1
+				{
+                		file = 76chevyK10RearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.3rdGenChevyCKseriesBumperRear0;Base.76chevyKseriesBumperRearA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = CH76.Create.BumperRear,
+					init = CH76.Init.BumperRear,
+					}
+		}
+	}
+
+	template vehicle CH76BumpersK20
+	{
+		template! = CH76BumpersK10,
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 76chevyK10RearBumper0,
+                        offset = 0.0000 0.0000 -0.3128,
+				}
+			model RearBumper1
+				{
+                		file = 76chevyK10RearBumper0,
+                        offset = 0.0000 0.0000 -0.3128,
+				}	
+			}
+	}
+
+    template vehicle CH76BumpersK30
+	{
+		template! = CH76BumpersK10,
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 76chevyK10RearBumper0,
+                        offset = 0.0000 0.0000 -1.1123,
+				}
+			model RearBumper1
+				{
+                		file = 76chevyK10RearBumper0,
+                        offset = 0.0000 0.0000 -1.1123,
+				}	
+			}
+	}
+
+    template vehicle CH76BumpersUtility
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 76chevyKseriesFrontBumper0,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 76chevyKseriesFrontBullbarA,
+				}
+
+            model FrontBullbarB
+				{
+                		file = 76chevyKseriesFrontBullbarB,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.3rdGenChevyCKseriesBumperFront0;Base.76chevyKseriesBullbarFrontA;Base.76chevyKseriesBullbarFrontB,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = CH76.Create.BumperFront,
+					init = CH76.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 76chevyutilityRearBumper1,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.utilityBoxBumperRear2,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+    
+    template vehicle CH76BumpersUtilityShort
+	{
+        template! = CH76BumpersUtility,
+
+		part DAMNBumperRear
+        {
+
+			model RearBumper0
+				{
+                		file = 76chevyutilityRearBumper1,
+                        offset = 0.0000 0.0000 0.7995,
+				}
+		}
+	}
+
+    template vehicle CH76BumpersFD
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 76chevyKseriesFrontBumper0,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 76chevyKseriesFrontBullbarA,
+				}
+
+            model FrontBullbarB
+				{
+                		file = 76chevyKseriesFrontBullbarB,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.3rdGenChevyCKseriesBumperFront0;Base.76chevyKseriesBullbarFrontA;Base.76chevyKseriesBullbarFrontB,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = CH76.Create.BumperFront,
+					init = CH76.Init.BumperFront,
+					}
+		}
+
+        part DAMNBumperRear
+        	{
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.utilityBoxBumperRear2,
+				mechanicRequireKey = false,
+                durability = 5,
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+    }
+
+    template vehicle CH76BumpersWrecker
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 76chevyKseriesFrontBumper0,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 76chevyKseriesFrontBullbarA,
+				}
+
+            model FrontBullbarB
+				{
+                		file = 76chevyKseriesFrontBullbarB,
+				}
+
+            model FrontBullbarC
+				{
+                		file = 76chevyKseriesFrontBullbarC,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.3rdGenChevyCKseriesBumperFront0;Base.76chevyKseriesBullbarFrontA;Base.76chevyKseriesBullbarFrontB;Base.76chevyCseriesBullbarFrontC,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.BumperFrontW,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.BumperFrontW,
+            		}
+
+            		lua
+            		{
+					create = CH76.Create.BumperFrontW,
+					init = CH76.Init.BumperFrontW,
+					}
+		}
+
+        part DAMNBumperRear
+        	{
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.utilityBoxBumperRear2,
+				mechanicRequireKey = false,
+                durability = 5,
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+    }
+}

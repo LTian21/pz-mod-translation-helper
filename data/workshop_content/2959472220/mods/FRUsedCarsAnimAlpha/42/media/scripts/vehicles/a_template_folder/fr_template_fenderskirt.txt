@@ -1,0 +1,55 @@
+module Base
+{
+	template vehicle FRFenderSkirt
+	{
+		part FRFenderSkirtRearLeft
+		{
+			table FRPartInfo
+			{
+				partChanceYearMulti = .8,
+				oneModel = TRUE,
+			}
+			
+			area = TireRearLeft,
+		}
+		
+		part FRFenderSkirtRearRight
+		{
+			table FRPartInfo
+			{
+				parentPart = FRFenderSkirtRearLeft,
+				oneModel = TRUE,
+			}
+			
+			area = TireRearRight,
+		}
+	
+		part FRFenderSkirt*
+		{
+			category = fr_attachments,
+			itemType = Base.FRFenderSkirt,
+			mechanicRequireKey = false,
+			
+            table install
+            {
+                time = 200,
+                skills = Mechanics:1,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualDefault,
+            }
+            table uninstall
+            {
+                
+                time = 200,
+                  skills = Mechanics:1,
+                test = Vehicles.UninstallTest.FR_Default,
+            }
+			
+			lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+                init = Vehicles.Init.FR_VisualDefault,
+            }
+		}
+	}
+}

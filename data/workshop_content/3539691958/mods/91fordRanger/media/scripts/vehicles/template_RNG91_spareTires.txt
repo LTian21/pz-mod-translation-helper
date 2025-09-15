@@ -1,0 +1,57 @@
+module Base
+{
+	template vehicle RNG91SpareTire
+	{
+
+        part DAMNSpareTire
+        {
+            specificItem = false,
+            itemType = Base.91fordRangerTire2;damnCraft.SmallTire2,
+            area = TruckBed,
+            category = tire,
+            mechanicRequireKey = false,
+             
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			             equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = RNG91.InstallComplete.SpareTire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = RNG91.UninstallComplete.SpareTire,
+            }
+            lua
+            {
+                create = RNG91.Create.SpareTire,
+				init = RNG91.Init.SpareTire,
+            }
+        }
+    }
+}

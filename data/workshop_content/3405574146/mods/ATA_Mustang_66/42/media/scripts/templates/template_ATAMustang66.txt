@@ -1,0 +1,463 @@
+module Base
+{
+    template vehicle ATAMustang66
+    {
+        mechanicType = 3,
+        offRoadEfficiency = 0.8,
+        engineRepairLevel = 6,
+        playerDamageProtection = 1.1,
+        engineRPMType = firebird,
+        model
+        {
+            file = Vehicles_ATAMustang66,
+            scale = 2.1700,
+            offset = 0.0000 0.0000 0.0000,
+        }
+        
+        part TCLConfig
+        {
+            category = nodisplay,
+            table TCLConfig
+            {
+                animType = vanilla,
+            }
+        }
+        
+        part InnerBody
+        {
+            category = nodisplay,
+            model Body_Inner1
+            {
+                file = ATAMustang66_Body_inner1,
+            }
+            model Body_Inner2
+            {
+                file = ATAMustang66_Body_inner2,
+            }
+            model Body_Inner3
+            {
+                file = ATAMustang66_Body_inner3,
+            }
+            lua
+            {
+                init = ATATuning2.Init.setAllModelsVisible,
+            }
+        }
+        
+        spawnOffsetY = 0.0,
+        textureMask = ATAMustang66/vehicle_mask,
+        textureLights = ATAMustang66/vehicle_lights,
+        textureDamage1Shell = ATAMustang66/vehicle_damage1,
+        textureDamage2Shell = ATAMustang66/vehicle_damage2,
+        textureDamage1Overlay = ATAMustang66/vehicle_blood,
+        textureDamage2Overlay = ATAMustang66/vehicle_blood,
+        textureRust = ATAMustang66/vehicle_rust,
+
+        sound
+        {
+            engine = VehicleEngineSportsCar,
+            engineStart = VehicleEngineSportsCar,
+            engineTurnOff = VehicleEngineSportsCar,
+            horn = VehicleHornSportsCar,
+            ignitionFail = VehicleIgnitionFailSportsCar,
+        }
+        
+        mass = 800,
+        extents = 0.7281 0.4885 1.8894,
+        physicsChassisShape = 0.7281 0.4885 1.8894,
+        centerOfMassOffset = 0.0000 0.2442 -0.0507,
+        shadowExtents = 0.6985 1.8931,
+        shadowOffset = 0.0000 -0.0507,
+
+        engineLoudness = 90,
+        engineQuality = 90,
+        engineForce = 5000,
+        maxSpeed = 120f,
+        stoppingMovementForce = 2.0f,
+        rollInfluence = 0.7f,
+        steeringIncrement = 0.04,
+        steeringClamp = 0.3,
+        suspensionStiffness = 50,
+        suspensionCompression = 4.1,
+        suspensionDamping = 3.4,
+        maxSuspensionTravelCm = 20,
+        suspensionRestLength = 0.2f,
+        wheelFriction = 1.4f,
+        frontEndHealth = 150,
+        rearEndHealth = 150,
+        seats = 2,
+        
+        template = Seat/part/SeatFrontLeft,
+        template = Seat/part/SeatFrontRight,
+        part Seat*
+        {
+            table install
+            {
+                skills = Mechanics:2,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:2,
+                recipes = Advanced Mechanics,
+            }
+        }
+        
+        part MirrorLeft
+        {
+            category = nodisplay,
+            parent = DoorFrontLeft,
+
+            model ATAMustang66_Mirror_Left
+            {
+                file = ATAMustang66_Mirror_Left,
+            }
+
+            lua
+            {
+                init = ATATuning2.Init.setAllModelsVisible,
+            }
+        }
+
+        part MirrorRight
+        {
+            category = nodisplay,
+            parent = DoorFrontRight,
+
+            model ATAMustang66_Mirror_Right
+            {
+                file = ATAMustang66_Mirror_Right,
+            }
+
+            lua
+            {
+                init = ATATuning2.Init.setAllModelsVisible,
+            }
+        }
+                
+        wheel FrontLeft
+        {
+            front = true,
+            offset = 0.2995 0.0000 0.5622,
+            radius = 0.13f,
+            width = 0.2f,
+        }
+
+        wheel FrontRight
+        {
+            front = true,
+            offset = -0.2995 0.0000 0.5622,
+            radius = 0.13f,
+            width = 0.2f,
+        }
+
+        wheel RearLeft
+        {
+            front = false,
+            offset = 0.2995 0.0000 -0.5806,
+            radius = 0.13f,
+            width = 0.2f,
+        }
+
+        wheel RearRight
+        {
+            front = false,
+            offset = -0.2995 0.0000 -0.5806,
+            radius = 0.13f,
+            width = 0.2f,
+        }        
+        area Engine
+        {
+            xywh = 0.0000 1.1889 0.7926 0.4885,
+        }
+
+        area TruckBed
+        {
+            xywh = 0.0000 -1.1889 0.7926 0.4885,
+        }
+
+        area ATARoof
+        {
+            xywh = 0.0000 -0.2212 1.7696 0.4885,
+        }
+
+        area SeatFrontLeft
+        {
+            xywh = 0.6083 -0.1429 0.4885 0.4885,
+        }
+
+        area SeatFrontRight
+        {
+            xywh = -0.6083 -0.1429 0.4885 0.4885,
+        }
+
+        area GasTank
+        {
+            xywh = 0.0000 -1.1889 0.7926 0.4885,
+        }
+
+        area TireFrontLeft
+        {
+            xywh = 0.6083 0.5622 0.4885 0.4885,
+        }
+
+        area TireFrontRight
+        {
+            xywh = -0.6083 0.5622 0.4885 0.4885,
+        }
+
+        area TireRearLeft
+        {
+            xywh = 0.6083 -0.5806 0.4885 0.4885,
+        }
+
+        area TireRearRight
+        {
+            xywh = -0.6083 -0.5806 0.4885 0.4885,
+        }
+
+        template = Battery,
+        template = Engine,
+        template = Muffler,
+        
+        template = GasTank,
+        part GasTank
+        {
+            table install
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        part Muffler
+        {
+            area = Engine,
+            table install
+            {
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Advanced Mechanics,
+            }
+        }
+        
+        template = Heater,
+        template = PassengerCompartment,
+        
+        template! = ATAMustang66_doors,
+        template! = ATAMustang66_windows,
+        
+        template = PassengerSeat2,
+        
+        
+        passenger FrontLeft
+        {
+            showPassenger = true,
+
+            position inside
+            {
+                offset = 0.1475 0.1106 -0.1613,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = 0.5484 -0.1382 -0.3226,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontLeft,
+            }
+        }
+
+        passenger FrontRight
+        {
+            showPassenger = true,
+
+            position inside
+            {
+                offset = -0.1751 0.1106 -0.1613,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = -0.5484 -0.1336 -0.3226,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontRight,
+            }
+        }
+        
+        part SeatFrontLeft
+        {
+            model Default
+            {
+                file = ATAMustang66_SeatFrontLeft,
+            }
+        }
+        
+        part SeatFrontRight
+        {
+            model Default
+            {
+                file = ATAMustang66_SeatFrontRight,
+            }
+        }
+        
+        template = Tire,
+
+        part Tire*
+        {
+            setAllModelsVisible = false,
+            table install
+            {
+                complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+            }
+            table uninstall
+            {
+                requireUninstalled = ATA2ProtectionWheels,
+                complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+            }
+            lua
+            {
+                create = Vehicles.Create.Tire,
+                init = ATATuning2.Init.TireNotAllModelsVisible,
+                checkOperate = Vehicles.CheckOperate.Tire,
+                update = Vehicles.Update.Tire,
+            }
+        }
+        
+        part TireFrontLeft
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATAMustang66_Wheel1_L,
+            }
+
+            model ATAProtection
+            {
+                file = ATAMustang66_Wheel1_chain,
+            }
+        }
+
+        part TireFrontRight
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATAMustang66_Wheel1_R,
+            }
+
+            model ATAProtection
+            {
+                file = ATAMustang66_Wheel1_chain_R,
+            }
+        }
+
+        part TireRearLeft
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATAMustang66_Wheel1_L,
+            }
+
+            model ATAProtection
+            {
+                file = ATAMustang66_Wheel1_chain,
+            }
+        }
+
+        part TireRearRight
+        {
+            model InflatedTirePlusWheel
+            {
+                file = ATAMustang66_Wheel1_R,
+            }
+
+            model ATAProtection
+            {
+                file = ATAMustang66_Wheel1_chain_R,
+            }
+        }
+                
+        part Panel_Rear
+        {
+            category = nodisplay,
+            model ATAMustang66_Panel_Rear
+            {
+                file = ATAMustang66_Panel_Rear1,
+            }
+            lua
+            {
+                init = ATATuning2.Init.setAllModelsVisible,
+            }
+        }
+        
+        template = Brake,
+
+        part Brake*
+        {
+            table install
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+        }
+
+        template = Suspension,
+
+        part Suspension*
+        {
+            table install
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:7,
+                recipes = Advanced Mechanics,
+            }
+        }
+        
+        template = Headlight,
+        template = GloveBox,
+        template = Radio,
+        
+        template! = ATAMustang66_protectionwindows,
+        template! = ATAMustang66_bumpers,
+        template! = ATAMustang66_trunks,
+        template! = ATAMustang66_other,
+        
+        template = ATA2Protection/part/ATA2ProtectionWheels,
+        template = ATA2SkinControl/part/ATA2NoSpawnEvenTextures,
+        
+        attachment trailer
+        {
+            offset = 0.0000 0.0415 -1.0369,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = -1.0000,
+        }
+
+        attachment trailerfront
+        {
+            offset = 0.0000 0.0415 0.9447,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = 1.0000,
+        }
+    }
+}

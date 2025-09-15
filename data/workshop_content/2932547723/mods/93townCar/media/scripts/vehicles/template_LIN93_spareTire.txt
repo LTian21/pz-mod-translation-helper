@@ -1,0 +1,151 @@
+module Base
+{
+
+	model 93townCarSpare
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_spare,
+		texture = vehicles/Vehicles_93townCar_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 93townCarSpareLimo
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_spare,
+		texture = vehicles/Vehicles_93townCarLimo_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	
+	template vehicle LIN93SpareTires
+	{
+		part LIN93SpareTire
+        	{
+
+			model LIN93SpareTire
+				{
+                		file = 93townCarSpare,
+				}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.93townCarTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = LIN93.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = LIN93.Create.SpareTire,
+				init = LIN93.Init.SpareTire,
+				}
+		}
+	}
+
+	template vehicle LIN93SpareTiresLimo
+	{
+		part LIN93SpareTire
+        	{
+
+			model LIN93SpareTireLimo
+				{
+                		file = 93townCarSpareLimo,
+				}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.93townCarTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = LIN93.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = LIN93.Create.SpareTire,
+				init = LIN93.Init.SpareTire,
+				}
+		}
+	}
+}
+

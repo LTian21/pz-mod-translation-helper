@@ -1,0 +1,177 @@
+module Base
+{
+	template vehicle FRBumper
+	{
+		part FRBumperFront
+		{
+			category = bodywork,
+			area = Engine,
+			itemType = Base.FRStockFrontBumper,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:4,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualDefault,
+            }
+			
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:4,
+                recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.FR_Default,
+                complete = Vehicles.UninstallComplete.FR_VisualDefault,
+            }
+			
+			
+            lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualDefault,
+				update = Vehicles.Update.FR_FrontBumper,
+            }
+		}
+		
+		part FRBumperRear
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = Base.FRStockRearBumper,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:4,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualDefault,
+            }
+			
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:4,
+                recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.FR_Default,
+                complete = Vehicles.UninstallComplete.FR_VisualDefault,
+            }
+			
+            lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualDefault,
+				update = Vehicles.Update.FR_RearBumper,
+            }
+		}
+	}
+	
+	template vehicle FRBumperBar
+	{
+		part FRBumperBar
+		{
+			category = bodywork,
+			area = Engine,
+			itemType = Base.FROffroadBumperBar;Base.FRPoliceBumperBar,
+			specificItem = false,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+	
+			table FRPartInfo
+			{
+				partChance = 0,
+				selectItemType = FROffroadBumperBar,
+			}
+			
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualDefault,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.FR_Default,
+                complete = Vehicles.UninstallComplete.FR_VisualDefault,
+            }
+
+			lua
+			{
+				create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualDefault,
+				update = Vehicles.Update.FR_FrontBumper,
+			}
+		}
+	}
+}

@@ -1,0 +1,314 @@
+module Base
+{
+	model fhqSuzCap
+	{
+		mesh = vehicles/vehicle_fhqsuzcap,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.95,
+	}
+	model fhqMZStandard1955SpokeWheelLeft
+	{
+		mesh = vehicles/vehicles_WheelfhqMZStandard195,
+		texture = vehicles/vehicles_WheelMZ5Spoke,
+		shader = vehiclewheel,
+		scale = 1,
+	}
+	model fhqMZStandard1955SpokeWheelRight
+	{
+		mesh = vehicles/vehicles_WheelfhqMZStandard195,
+		texture = vehicles/vehicles_WheelMZ5Spoke,
+		shader = vehiclewheel,
+		invertX = TRUE,
+		scale = 1,
+	}
+	vehicle fhqCappuccino
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 0.7,
+		engineRepairLevel = 4,
+		playerDamageProtection = 0.8,
+
+		model
+		{
+			file = fhqSuzCap,
+			scale = 0.6000,
+			offset = 0.0000 0.1000 -0.1333,
+		}
+
+		spawnOffsetY = 0.12999995,
+
+		skin
+		{
+			texture = Vehicles/vehicle_fhqSuzCap_shell,
+		}
+
+		textureMask = Vehicles/vehicle_fhqSuzCap_mask,
+		textureLights = Vehicles/vehicle_fhqSuzCap_lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/Veh_Damage1,
+		textureDamage2Shell = Vehicles/Veh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		sound
+		{
+			engine = VehicleEngineSmallCar,
+			engineStart = VehicleEngineSmallCar,
+			engineTurnOff = VehicleEngineSmallCar,
+			horn = VehicleHornStandard,
+			ignitionFail = VehicleIgnitionFailSmallCar,
+		}
+
+		extents = 1.9333 1.5667 4.7667,
+		mass = 480,
+		physicsChassisShape = 1.9000 1.5667 4.8000,
+		centerOfMassOffset = 0.0000 0.7500 0.0000,
+		shadowExtents = 2.0806 4.8721,
+		shadowOffset = 0.0000 0.0000,
+		engineForce = 2000,
+		engineLoudness = 40,
+		engineQuality = 80,
+		maxSpeed = 60f,
+		gearRatioCount = 4,
+		stoppingMovementForce = 3.0f,
+		rollInfluence = 0.7f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 50,
+		suspensionCompression = 4.1,
+		suspensionDamping = 3.4,
+		maxSuspensionTravelCm = 20,
+		suspensionRestLength = 0.3f,
+		wheelFriction = 1.8f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.8333 -0.1333 1.6000,
+			radius = 0.40f,
+			width = 0.20f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.8333 -0.1333 1.6000,
+			radius = 0.40f,
+			width = 0.20f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.8333 -0.1333 -1.3500,
+			radius = 0.40f,
+			width = 0.20f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.8333 -0.1333 -1.3500,
+			radius = 0.40f,
+			width = 0.20f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.4667 0.1833 -0.4000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.5167 -0.5000 0.0833,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.4667 0.1833 -0.4000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.5500 -0.5000 0.0833,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 2.9833 1.9333 1.2000,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -2.9667 1.9333 1.1667,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.5333 -0.2167 1.1333 1.1000,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.5333 -0.2167 1.1333 1.1000,
+		}
+
+		area GasTank
+		{
+			xywh = 1.2833 -1.6500 0.6333 0.6333,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.2833 1.4500 0.6333 0.6333,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.2833 1.4500 0.6333 0.6333,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.2833 -1.5000 0.6333 0.6333,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.2833 -1.5000 0.6333 0.6333,
+		}
+
+		template = TrunkDoor,
+		template = Trunk/part/TruckBed,
+
+		part TruckBed
+		{
+			itemType = Base.SmallTrunk,
+
+			container
+			{
+				capacity = 30,
+			}
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+		template = GloveBox,
+		template = GasTank,
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+		template = EngineDoor,
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+		
+		part Window*
+		{
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+		}
+		
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZStandard1955SpokeWheelLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZStandard1955SpokeWheelRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZStandard1955SpokeWheelLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZStandard1955SpokeWheelRight,
+			}
+		}
+
+		template = Brake,
+		template = Suspension,
+		template = Radio,
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 0.1500 -2.2333,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 0.0645 2.4677,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

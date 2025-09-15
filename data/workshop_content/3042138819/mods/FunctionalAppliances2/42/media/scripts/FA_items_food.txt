@@ -1,0 +1,687 @@
+module FunctionalAppliances
+{
+	imports
+	{
+		Base,
+	}	
+
+	item FATheaterPopcorn
+	{
+		DisplayCategory 	= Food,
+		HungerChange 		= -10,
+		Weight 			= 0.2,
+		Type 			= Food,
+		ThirstChange 		= 8,
+		DisplayName 		= Theater Popcorn,
+		Icon 			= PopcornCooked,
+		Carbohydrates 		= 23,
+		Proteins 		= 4,
+		Lipids 			= 2.69,
+		Calories 		= 150,
+		CantBeFrozen 		= TRUE,
+		UnhappyChange 		= -10,
+		StressChange 		= -10,
+		DaysFresh 		= 1,
+		DaysTotallyRotten 	= 7,
+	}
+	item FAButteredPopcorn
+	{
+		DisplayCategory 	= Food,
+		HungerChange 		= -10,
+		Weight 			= 0.2,
+		Type 			= Food,
+		ThirstChange 		= 10,
+		DisplayName 		= Buttered Theater Popcorn,
+		Icon 			= PopcornCooked,
+		Carbohydrates 		= 25,
+		Proteins 		= 4,
+		Lipids 			= 3,
+		Calories 		= 200,
+		UnhappyChange 		= -15,
+		StressChange 		= -15,
+		CantBeFrozen 		= TRUE,
+		DaysFresh 		= 1,
+		DaysTotallyRotten 	= 7,
+	}
+	item FABucketofButteredPopcorn
+	{
+		DisplayName 		= Bucket of Buttered Theater Popcorn,
+		HungerChange 		= -30,
+		ThirstChange 		= 25,
+		UnhappyChange 		= -45,
+		StressChange 		= -45,
+		Carbohydrates 		= 65,
+		Proteins 		= 12,
+		Lipids 			= 9,
+		Calories 		= 600,
+		Type 			= Food,
+		Icon 			= FABucketofPopcornIcon,
+		--StaticModel 		= FABucketPopcorn,
+		WorldStaticModel 	= FABucketPopcorn,
+		Weight 			= 0.6,
+		ReplaceOnUse 		= FAEmptyBucketPopcorn,
+		DaysFresh 		= 1,
+		DaysTotallyRotten 	= 30,
+	}
+	item FABucketofPopcorn
+	{
+		DisplayName 		= Bucket of Theater Popcorn,
+		Type 			= Food,
+		HungerChange 		= -30,
+		ThirstChange 		= 20,
+		UnhappyChange 		= -30,
+		StressChange 		= -30,
+		Carbohydrates 		= 60,
+		Proteins 		= 12,
+		Lipids 			= 7,
+		Calories 		= 450,
+		Icon 			= FABucketofPopcornIcon,
+		--StaticModel 		= FABucketPopcorn,
+		WorldStaticModel 	= FABucketPopcorn,
+		Weight 			= 0.6,
+		ReplaceOnUse 		= FAEmptyBucketPopcorn,
+		DaysFresh 		= 1,
+		DaysTotallyRotten 	= 30,
+	}
+    	item FAEmptyBucketPopcorn
+    	{
+        	DisplayCategory 	= Junk,
+        	Type 			= Normal,
+        	DisplayName 		= Empty Popcorn Bucket,
+        	Icon 			= FAEmptyBucketofPopcornIcon,
+        	Weight 			= 0.1,
+        	--StaticModel 		= FAEmptyBucketPopcorn,
+        	WorldStaticModel 	= FAEmptyBucketPopcorn,
+    	}
+
+    	item FABeerMug
+	{
+		DisplayName		= Empty Beer Mug,
+		DisplayCategory 	= Cooking,
+		Type			= Normal,
+		PourType 		= Mug,
+		Weight			= 0.2,
+		Icon			= FABeerMugIcon,
+		Tooltip 		= Tooltip_item_RainFromGround,
+		StaticModel 		= FABeerMug,
+		WorldStaticModel 	= FABeerMug,
+		FillFromDispenserSound 	= GetWaterFromDispenserCeramic,
+		FillFromLakeSound 	= GetWaterFromLakeSmall,
+		FillFromTapSound 	= GetWaterFromTapCeramic,
+		FillFromToiletSound 	= GetWaterFromToilet,
+		Tags 			= CookableMicrowave;CoffeeMaker,
+
+        	component FluidContainer
+        	{
+                	ContainerName   = BeerMug,
+			RainFactor 	= 0.2,
+                	capacity        = 0.2,
+                	CustomDrinkSound = DrinkingFromMug,
+		}
+		ReplaceOnUseOn		= WaterSource-FABeerMugWater,
+        	ReplaceTypes 		= WaterSource FABeerMugWater,
+
+		RainFactor 		= 0.2,
+		Tooltip 		= Tooltip_item_RainFromGround,
+
+	}
+
+    	item FAEmptyKeg
+    	{
+        	DisplayCategory 	= Junk,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Empty Keg,
+        	Icon 			= FAKegIcon,
+        	Weight 			= 2,
+        	--StaticModel 		= FAEmptyKeg,
+        	WorldStaticModel 	= FAEmptyKeg,
+    	}
+    	item FABubKeg
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Keg of Bub Beer,
+		cantBeConsolided 	= TRUE,
+		Alcoholic 		= TRUE,
+		FoodType 		= Beer,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptyKeg,
+        	ReplaceOnUseOn 		= FABubKeg,
+        	Icon 			= FAKegIcon,
+        	Weight 			= 20,
+		WeightEmpty 		= 2,
+        	--StaticModel 		= FAKeg,
+        	WorldStaticModel 	= FAKeg,
+    	}
+    	item FABubLiteKeg
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Keg of Bub Lite Beer,
+		cantBeConsolided 	= TRUE,
+		Alcoholic 		= TRUE,
+		FoodType 		= Beer,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptyKeg,
+        	ReplaceOnUseOn 		= FABubLiteKeg,
+        	Icon 			= FAKegIcon,
+        	Weight 			= 20,
+		WeightEmpty 		= 2,
+        	--StaticModel 		= FAKeg,
+        	WorldStaticModel 	= FAKeg,
+    	}
+    	item FASwillerKeg
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Keg of Swiller Beer,
+		cantBeConsolided 	= TRUE,
+		Alcoholic 		= TRUE,
+		FoodType 		= Beer,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptyKeg,
+        	ReplaceOnUseOn 		= FASwillerKeg,
+        	Icon 			= FAKegIcon,
+        	Weight 			= 20,
+		WeightEmpty 		= 2,
+        	--StaticModel 		= FAKeg,
+        	WorldStaticModel 	= FAKeg,
+    	}
+    	item FASwillerLiteKeg
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Keg of Swiller Lite Beer,
+		cantBeConsolided 	= TRUE,
+		Alcoholic 		= TRUE,
+		FoodType 		= Beer,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptyKeg,
+        	ReplaceOnUseOn 		= FASwillerLiteKeg,
+        	Icon 			= FAKegIcon,
+        	Weight 			= 20,
+		WeightEmpty 		= 2,
+        	--StaticModel 		= FAKeg,
+        	WorldStaticModel 	= FAKeg,
+    	}
+    	item FAHomeBrewKeg
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Keg of Home Brew Beer,
+		cantBeConsolided 	= TRUE,
+		Alcoholic 		= TRUE,
+		FoodType 		= Beer,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.04166667,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptyKeg,
+        	ReplaceOnUseOn 		= FAHomeBrewKeg,
+        	Icon 			= FAKegIcon,
+        	Weight 			= 11,
+		WeightEmpty 		= 2,
+        	--StaticModel 		= FAKeg,
+        	WorldStaticModel 	= FAKeg,
+    	}
+
+	item EmptyFACO2Tank
+	{
+	    	DisplayCategory 	= Material,
+		Weight			= 10.0,
+		UseWhileEquipped	= FALSE,
+		DisplayName		= Empty CO2 Tank,
+		Icon			= FACO2TankIcon,
+        	ReplaceOnUseOn 		= EmptyFACO2Tank,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+		ScaleWorldIcon 		= 2.0,
+		WeightEmpty 		= 5.0,
+		WorldStaticModel 	= FACO2Tank,
+		cantBeConsolided	= TRUE,
+	}
+	item FACO2Tank
+	{
+	    	DisplayCategory 	= Material,
+		Weight			= 10.0,
+		Type			= Drainable,
+		UseWhileEquipped	= FALSE,
+		UseDelta		= 0.01,
+		DisplayName		= CO2 Tank,
+		Icon			= FACO2TankIcon,
+		ReplaceOnDeplete 	= EmptyFACO2Tank,
+        	ReplaceOnUseOn 		= FACO2Tank,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+		ScaleWorldIcon 		= 2.0,
+		WeightEmpty 		= 5.0,
+		WorldStaticModel 	= FACO2Tank,
+		cantBeConsolided	= TRUE,
+	}
+
+    	item FAEmptySodaSyrupBox
+    	{
+        	DisplayCategory 	= Junk,
+        	DisplayName 		= Empty Box of Soda Syrup,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FAMixedBerriesSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Berry Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.04166667,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FAMixedBerriesSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 5.5,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FAOrangeSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Orange Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FAOrangeSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FALemonLimeSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Lemon Lime Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FALemonLimeSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FARootBeerSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Root Beer Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FARootBeerSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FAKYColaSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of KY Cola Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FAKYColaSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FAColaSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Cola Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FAColaSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FADietColaSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Diet Cola Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FADietColaSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FAGingerAleSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Ginger Ale Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FAGingerAleSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FABlueberrySodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Blueberry Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FABlueberrySodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FABubblegumSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Bubblegum Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FABubblegumSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FALimeSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Lime Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FALimeSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FAGrapeSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Grape Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FAGrapeSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FAPineappleSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Pineapple Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FAPineappleSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FAStrawberrySodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Strawberry Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FAStrawberrySodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+    	item FADrPeppaSodaSyrupBox
+    	{
+        	DisplayCategory 	= Food,
+        	Type 			= Drainable,
+		DisappearOnUse		= FALSE,
+        	DisplayName 		= Box of Dr Peppa Soda Syrup,
+		cantBeConsolided 	= TRUE,
+		CantBeFrozen 		= TRUE,
+		useDelta		= 0.02083333,
+		UseWorldItem 		= TRUE,
+		UseWhileEquipped	= FALSE,
+        	ReplaceOnDeplete 	= FAEmptySodaSyrupBox,
+        	ReplaceOnUseOn 		= FADrPeppaSodaSyrupBox,
+        	Icon 			= FASodaSyrupBoxIcon,
+        	Weight 			= 10,
+		WeightEmpty 		= 1,
+        	--StaticModel 		= FASodaSyrupBox,
+        	WorldStaticModel 	= FASodaSyrupBox,
+    	}
+
+	item PopBottleFA
+	{
+		DisplayName = Bottle,
+		DisplayCategory = Food,
+		Type = Normal,
+		Weight = 0.1,
+        	Icon     = PopBottle,
+        	IconColorMask       = WaterBottle_Mask2,
+        	IconFluidMask       = PopBottle_Mask,
+		EatType = bottle,
+		Packaged = TRUE,
+		CustomContextMenu = Drink,
+		CustomEatSound = DrinkingFromBottlePlastic,
+		FillFromDispenserSound = GetWaterFromDispenserPlastic,
+		FillFromLakeSound = GetWaterFromLakeBottle,
+		FillFromTapSound = GetWaterFromTapPlasticBig,
+		FillFromToiletSound = GetWaterFromToilet,
+		StaticModel = PopBottle,
+		WorldStaticModel = PopBottleWorld,
+		OnCreate	= SpecialLootSpawns.OnCreatePopBottleFA,
+		Tags = CookableMicrowave,
+
+        	component FluidContainer
+        	{
+			ContainerName   = BottlePlastic,
+			PickRandomFluid	= true,
+			capacity        = 2.0,
+			CustomDrinkSound = DrinkingFromBottlePlastic,
+            		Fluids
+            		{
+                		fluid           = FAMixedBerries:1.0,
+                		fluid           = FALemonLime:1.0,
+                		fluid           = FARootBeer:1.0,
+                		fluid           = FAKYCola:1.0,
+                		fluid           = FADrPeppa:1.0,
+            		}
+       		}
+	}
+	item SodaCanFA
+	{
+		DisplayName = Can of Soda,
+		DisplayCategory = Food,
+		Type = Normal,
+		Weight = 0.3,
+		Icon = PopCan_Generic,
+		EatType = popcan,
+		IconColorMask = PopCan_Generic_Mask,
+		StaticModel = PopCanGeneric,
+		WorldStaticModel = PopCanGeneric,
+		OnCreate = SpecialLootSpawns.OnCreateSodaCan,
+		Tags = Cookable;HasMetal;SealedBeverageCan,
+
+        	component FluidContainer
+        	{
+            		ContainerName   = CanPop,
+			PickRandomFluid	= true,
+			Opened	= false,
+            		capacity        = 0.3,
+			CustomDrinkSound = DrinkingFromCan,
+            		Fluids
+            		{
+                		fluid           = FAMixedBerries:1.0,
+                		fluid           = FALemonLime:1.0,
+                		fluid           = FARootBeer:1.0,
+                		fluid           = FAKYCola:1.0,
+                		fluid           = FADrPeppa:1.0,
+            		}
+        	}
+	}
+
+    	item FAPaperNapkins
+	{
+		DisplayName = Paper Napkins,
+	    	DisplayCategory = Household,
+		Type = Drainable,
+		Weight = 0.1,
+        	Icon = PaperNapkins,
+		UseDelta = 0.25,
+		UseWhileEquipped = FALSE,
+		cantBeConsolided = TRUE,
+        	ItemWhenWet= FunctionalAppliances.FAPaperNapkinsWet,
+        	WorldStaticModel = PaperNapkins_Ground,
+	}
+    	item FAPaperNapkinsWet
+	{
+		DisplayName = Paper Napkins (Wet),
+	    	DisplayCategory = Household,
+		Type = Drainable,
+		Weight = 0.1,
+        	Icon = PaperNapkins,
+		UseDelta = 0.25,
+        	Wet = TRUE,
+        	WetCooldown = 8000,
+        	ItemWhenDry = FunctionalAppliances.FAPaperNapkins,
+        	WorldStaticModel = PaperNapkins_Ground,
+	}
+
+    	item FASodaJerkMagazine
+    	{
+	        DisplayName = Soda Jerk Magazine,
+        	DisplayCategory = SkillBook,
+        	Type = Literature,
+	        Weight = 0.05,
+	        Icon = FASodaJerkMagazineIcon,
+		BoredomChange = -20,
+        	StressChange = -15,
+        	TeachedRecipes = CraftMixedBerriesSodaSyrup;CraftOrangeSodaSyrup;CraftLemonLimeSodaSyrup;CraftRootBeerSodaSyrup;CraftKYColaSodaSyrup;CraftColaSodaSyrup;CraftDietColaSodaSyrup;CraftGingerAleSodaSyrup;CraftBlueberrySodaSyrup;CraftBubblegumSodaSyrup;CraftLimeSodaSyrup;CraftGrapeSodaSyrup;CraftPineappleSodaSyrup;CraftStrawberrySodaSyrup;CraftDrPeppaSodaSyrup,
+	        ReplaceOnUse = FASodaJerkMagazine,
+        	Tooltip = Tooltip_FASodaJerkMagazine,
+        	StaticModel = FASodaJerkMagazineOpen,
+	        WorldStaticModel = FASodaJerkMagazineClosed,
+		Tags = Magazine,
+    	}
+}

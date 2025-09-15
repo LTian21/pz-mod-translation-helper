@@ -1,0 +1,61 @@
+module Base
+{
+    model ATABMWe36_Hood
+	{
+		mesh = vehicles/Vehicles_ATABMWe36|Hood,
+		shader = vehicle,
+		static = FALSE,
+		scale = 0.08,
+	}
+    template vehicle ATABMWe36_EngineDoor
+	{
+        template = EngineDoor,
+        part EngineDoor
+		{
+            setAllModelsVisible = true,
+            model Default
+			{
+				file = ATABMWe36_Hood,
+			}
+            
+            anim Open
+			{
+				anim = HoodOpen,
+                sound = VehicleHoodOpenSportsCar,
+                reverse = FALSE,
+                rate = 2.0,
+			}
+            anim Opened
+			{
+				anim = HoodOpen,
+				animate = FALSE,
+                reverse = TRUE,
+			}
+            
+			anim Close
+			{
+				anim = HoodOpen,
+                sound = VehicleHoodCloseSportsCar,
+                rate = 2.5,
+                reverse = TRUE,
+			}
+            anim Closed
+			{
+				sound = VehicleHoodCloseSportsCar,
+				anim = HoodOpen,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+            
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+        }
+    }
+}

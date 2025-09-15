@@ -1,0 +1,59 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity ES_Light_Green_Barrel
+        {
+            LuaWindowClass      = ISEntityTabWindow,
+            DisplayName         = Light Green Barrel,
+            Icon                = Build_LightGreenBarrel,
+        }
+    }
+
+    entity BuildLightGreenBarrel
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Light_Green_Barrel,
+            uiEnabled       = false,
+        }
+
+        component FluidContainer
+        {
+            ContainerName   	= Barrel,
+            capacity        	= 500,
+        }
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_military_generic_01_6,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_military_generic_01_7,
+                }
+            }
+        }
+                        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 50,
+            category      = Factory Pieces,
+            ToolTip       = Tooltip_FPBarrel,
+
+            inputs
+            {
+                item 1 [Base.Mov_LightGreenBarrel],
+            }
+
+        }
+    }
+}

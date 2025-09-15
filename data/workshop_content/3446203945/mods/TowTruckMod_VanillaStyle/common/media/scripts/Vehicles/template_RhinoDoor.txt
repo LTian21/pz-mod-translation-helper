@@ -1,0 +1,128 @@
+module Base
+{	
+	template vehicle RhinoDoor
+	{
+		part DoorFrontLeft
+		{			
+			itemType = Base.FrontCarDoor,
+			area = SeatFrontLeft,
+							
+			anim ActorOpen
+			{
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				angle = 0.0 270.0 0.0,
+			}
+			
+			table uninstall
+			{
+				requireUninstalled = WindowFrontLeft; PU_Door_FL_ChevalierRhino_Light; PU_Door_FL_ChevalierRhino_Heavy,
+			}
+		}
+
+		part DoorFrontRight
+		{			
+			itemType = Base.FrontCarDoor,
+			area = SeatFrontRight,				
+			
+			anim ActorOpen
+			{
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				angle = 0.0 90.0 0.0,
+			}
+			
+			table uninstall
+			{
+				requireUninstalled = WindowFrontRight; PU_Door_FR_ChevalierRhino_Light; PU_Door_FR_ChevalierRhino_Heavy,
+			}
+		}
+		
+		part Door*
+		{
+			category = door,
+			door
+			{
+				/* TODO: rear police-car doors won't open from inside */
+			}
+			anim Open
+			{
+				sound = VehicleDoorOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleDoorCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+			}
+			mechanicRequireKey = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:4,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:4,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.Door,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.Door,
+			}
+		}
+	}
+}
+

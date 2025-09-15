@@ -1,0 +1,100 @@
+module Base
+{
+    model W460SnorkelM
+	{
+		mesh = vehicles/Vehicles_84mercW460_Body|w460_snorkelM,
+		texture = Vehicles/Vehicles_84merc_Wheels,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle W460SnorkelM
+		{
+		part W460Snorkel
+        	{
+
+			model SnorkelM
+				{
+                		file = W460SnorkelM,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			specificItem = false,
+			itemType = Base.W460SnorkelM_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = W460.InstallComplete.SnorkelM,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 750,
+			skills = Mechanics:1,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = W460.UninstallComplete.SnorkelM,
+
+            		}
+
+            		lua
+            		{
+			create = W460.Create.SnorkelM,
+			init = W460.Init.SnorkelM,
+			}
+		}
+	}
+
+    template vehicle W460CSnorkel
+	{
+        template! = W460SnorkelM,
+
+        part W460Snorkel
+        {
+
+            table install
+                {
+                complete = W460.InstallComplete.Snorkel,
+                }
+
+            table uninstall
+                {
+                complete = W460.UninstallComplete.Snorkel,
+                }
+
+            lua
+                {
+                create = W460.Create.Snorkel,
+                init = W460.Init.Snorkel,
+                }
+        }
+	}
+}

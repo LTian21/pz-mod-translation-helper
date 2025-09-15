@@ -1,0 +1,206 @@
+module Base
+{
+	model 86fordE150MMSpareTire
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_mm_spareTire,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 86fordE150MMRoofrack
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_mm_roofrack,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 86fordE150MMSurfboards
+    	{
+        mesh = vehicles/Vehicles_86fordE150_Body|e150_mm_surfboards,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle E150MysteryMachine
+		{
+		part E150MMSpareTire
+        	{
+
+			model E150MMSpareTire
+				{
+                		file = 86fordE150MMSpareTire,
+				}
+
+			area = Engine,
+			category = mysterymachine,
+			itemType = Base.E150Tire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 350,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 350,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+			create = Vehicles.Create.Default,
+			}
+		}
+
+		part E150MMRoofrack
+        	{
+
+			model E150MMRoofrack
+				{
+                		file = 86fordE150MMRoofrack,
+				}
+
+			area = TireRearRight,
+			category = mysterymachine,
+			itemType = Base.E150MysteryMachineRoofrack,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 350,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 350,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+			requireUninstalled = E150MMSurfboards,
+            		}
+
+            		lua
+            		{
+			create = Vehicles.Create.Default,
+			}
+		}
+
+		part E150MMSurfboards
+        	{
+
+			model E150MMSurfboards
+				{
+                		file = 86fordE150MMSurfboards,
+				}
+
+			area = TireRearRight,
+			category = mysterymachine,
+			itemType = Base.E150MysteryMachineSurfboards,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 350,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = E150MMRoofrack,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 350,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+			create = Vehicles.Create.Default,
+			}
+		}
+
+	}
+}

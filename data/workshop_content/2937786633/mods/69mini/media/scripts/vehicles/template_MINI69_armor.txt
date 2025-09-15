@@ -1,0 +1,423 @@
+module Base
+{
+	model 69miniWindshielda
+    	{
+        mesh = vehicles/Vehicles_69mini_Body|mini_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 69miniDoorfla
+    	{
+        mesh = vehicles/Vehicles_69mini_Body|mini_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 69miniDoorfra
+    	{
+        mesh = vehicles/Vehicles_69mini_Body|mini_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 69miniWindowrla
+    	{
+        mesh = vehicles/Vehicles_69mini_Body|mini_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 69miniWindowrra
+    	{
+        mesh = vehicles/Vehicles_69mini_Body|mini_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 69miniWindshieldreara
+    	{
+        mesh = vehicles/Vehicles_69mini_Body|mini_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle MINI69Armor
+		{
+		part MINI69WindshieldArmor
+        	{
+
+			model MINI69winda
+				{
+                		file = 69miniWindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.69miniWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MINI69.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = MINI69.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = MINI69.Create.WindshieldArmor,
+					init = MINI69.Init.WindshieldArmor,
+					}
+		}
+
+		part MINI69DoorFrontLeftArmor
+        {
+
+			model MINI69leftdoora
+				{
+                		file = 69miniDoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.69miniFrontDoorArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MINI69.InstallComplete.DoorFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = MINI69.UninstallComplete.DoorFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = MINI69.Create.DoorFrontLeftArmor,
+					init = MINI69.Init.DoorFrontLeftArmor,
+					}
+		}
+
+		part MINI69DoorFrontRightArmor
+        {
+
+			model MINI69rightdoora
+				{
+                		file = 69miniDoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.69miniFrontDoorArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MINI69.InstallComplete.DoorFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = MINI69.UninstallComplete.DoorFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = MINI69.Create.DoorFrontRightArmor,
+					init = MINI69.Init.DoorFrontRightArmor,
+					}
+		}
+
+		part MINI69WindowRearLeftArmor
+        {
+
+			model MINI69leftwinra
+				{
+                		file = 69miniWindowrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.69miniRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MINI69.InstallComplete.WindowRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = MINI69.UninstallComplete.WindowRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = MINI69.Create.WindowRearLeftArmor,
+					init = MINI69.Init.WindowRearLeftArmor,
+					}
+		}
+
+		part MINI69WindowRearRightArmor
+        {
+
+			model MINI69rightwinra
+				{
+                		file = 69miniWindowrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.69miniRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MINI69.InstallComplete.WindowRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = MINI69.UninstallComplete.WindowRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = MINI69.Create.WindowRearRightArmor,
+					init = MINI69.Init.WindowRearRightArmor,
+					}
+		}
+
+		part MINI69WindshieldRearArmor
+        {
+
+				model MINI69windra
+				{
+                		file = 69miniWindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.69miniWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MINI69.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = MINI69.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = MINI69.Create.WindshieldRearArmor,
+					init = MINI69.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

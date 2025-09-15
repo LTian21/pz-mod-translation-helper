@@ -1,0 +1,78 @@
+module Base
+{
+	craftRecipe OpenJarOfFood_Trex
+	{
+        timedAction = Making,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+		inputs
+		{
+			item 1 [Base.CannedPear_Trex;Base.CannedApple_Trex;Base.CannedBanana_Trex;Base.CannedCherry_Trex;Base.CannedLemon_Trex;Base.CannedLime_Trex;Base.CannedMango_Trex;Base.CannedOrange_Trex;Base.CannedPeach_Trex;Base.CannedPineapple_Trex;Base.CannedWatermelon_Trex;Base.CannedBerry_Trex] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+		}
+		outputs
+		{
+			item 1 mapper:foodType,
+		}
+		itemMapper foodType
+		{
+			Base.CannedPear_Open_Trex       = Base.CannedPear_Trex,
+			Base.CannedApple_Open_Trex      = Base.CannedApple_Trex,
+			Base.CannedBanana_Open_Trex     = Base.CannedBanana_Trex,
+			Base.CannedCherry_Open_Trex     = Base.CannedCherry_Trex,
+			Base.CannedLemon_Open_Trex      = Base.CannedLemon_Trex,
+			Base.CannedLime_Open_Trex       = Base.CannedLime_Trex,
+			Base.CannedMango_Open_Trex      = Base.CannedMango_Trex,
+			Base.CannedOrange_Open_Trex     = Base.CannedOrange_Trex,
+			Base.CannedPeach_Open_Trex      = Base.CannedPeach_Trex,
+			Base.CannedPineapple_Open_Trex  = Base.CannedPineapple_Trex,			
+			Base.CannedWatermelon_Open_Trex = Base.CannedWatermelon_Trex,			
+			Base.CannedBerry_Open_Trex      = Base.CannedBerry_Trex,
+		}
+	}
+
+	craftRecipe MakeJar_Trex
+	{
+        timedAction = MixingBowl,
+		Time = 100,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+        category = Cooking,
+		xpAward = Cooking:10,
+		inputs
+		{
+			item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
+			item 1 [Base.EmptyJar] mode:destroy flags[ItemCount],
+			item 1 [Base.JarLid],
+			item 1 [2:Base.Pear;2:Base.Apple;3:Base.Banana;5:Base.Cherry;3:Base.Lemon;3:Base.Lime;1:Base.Mango;3:Base.Orange;3:Base.Peach;1:Base.Pineapple;1:Base.Watermelon;4:Base.BerryBlack;4:Base.BerryGeneric1;4:Base.BerryGeneric2;4:Base.BerryGeneric3;4:Base.BerryGeneric5] mappers[veggieType] flags[InheritFoodAge;ItemCount] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [*],
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 mapper:veggieType,
+		}
+		itemMapper veggieType
+		{
+			Base.CannedPear_Trex       = Base.Pear,
+			Base.CannedApple_Trex      = Base.Apple,
+			Base.CannedBanana_Trex     = Base.Banana,
+			Base.CannedCherry_Trex     = Base.Cherry,
+			Base.CannedLemon_Trex      = Base.Lemon,
+			Base.CannedLime_Trex       = Base.Lime,
+			Base.CannedMango_Trex      = Base.Mango,
+			Base.CannedOrange_Trex     = Base.Orange,
+			Base.CannedPeach_Trex      = Base.Peach,
+			Base.CannedPineapple_Trex  = Base.Pineapple,
+			Base.CannedWatermelon_Trex = Base.Watermelon,
+			Base.CannedBerry_Trex      = Base.BerryBlack,
+			Base.CannedBerry_Trex      = Base.BerryGeneric1,
+			Base.CannedBerry_Trex      = Base.BerryGeneric2,
+			Base.CannedBerry_Trex      = Base.BerryGeneric3,
+			Base.CannedBerry_Trex      = Base.BerryGeneric5,			
+		}
+	}
+
+}

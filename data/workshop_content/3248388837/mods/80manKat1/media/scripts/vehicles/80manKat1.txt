@@ -1,0 +1,509 @@
+module Base
+{
+	model 80manKat1Base
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|MAN_body,
+		shader = damn_vehicle_noreflect_shader,
+		invertX = FALSE,
+		scale = 0.1,
+	}
+	model 80manKat1Interior
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|MAN_interior,
+		texture = vehicles/Vehicles_80manKat1_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 80manKat1Flatbed
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|MAN_flatbed,
+		texture = vehicles/Vehicles_80manKat1_Flatbed,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 80manKat1susFL
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|MAN_sus_f,
+		texture = Vehicles/Vehicles_80manKat1_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 80manKat1susFR
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|MAN_sus_f,
+		texture = Vehicles/Vehicles_80manKat1_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 80manKat1susRL
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|MAN_sus_r,
+		texture = Vehicles/Vehicles_80manKat1_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 80manKat1susRR
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|MAN_sus_r,
+		texture = Vehicles/Vehicles_80manKat1_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	vehicle 80manKat1
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 4,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.3,
+		engineRPMType = van,
+
+		model
+		{
+			file = 80manKat1Base,
+			scale = 0.9000,
+			offset = 0.0000 1.2556 0.0000,
+		}
+
+		spawnOffsetY = 0,
+
+		skin
+		{
+			texture = Vehicles/Vehicles_80manKat1_Shell_white,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_80manKat1_Shell_green,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_80manKat1_Shell_black,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_80manKat1_Shell_ral7021,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicles_80manKat1_Shell_camo1,
+		}
+
+		textureRust = Vehicles/Vehicles_80manKat1_Rust,
+		textureMask = Vehicles/Vehicles_80manKat1_Mask,
+		textureLights = Vehicles/Vehicles_80manKat1_Lights,
+		textureDamage1Shell = Vehicles/Vehicles_80manKat1_Damage1,
+		textureDamage2Shell = Vehicles/Vehicles_80manKat1_Damage2,
+		textureDamage1Overlay = Vehicles/Vehicles_80manKat1_Blood,
+		textureDamage2Overlay = Vehicles/Vehicles_80manKat1_Blood,
+
+		sound
+		{
+			engine = VehicleEngineSUV,
+			engineStart = VehicleEngineSUV,
+			engineTurnOff = VehicleEngineSUV,
+			horn = VehicleHornStandard,
+			ignitionFail = VehicleIgnitionFailSUV,
+		}
+
+		extents = 2.5111 2.2667 7.8444,
+		mass = 820,
+		physicsChassisShape = 2.5111 2.2667 7.8444,
+		centerOfMassOffset = 0.0000 1.6667 -0.2556,
+		shadowExtents = 2.5890 8.5223,
+		shadowOffset = 0.0000 -0.2556,
+		engineForce = 5080,
+		maxSpeed = 60f,
+		engineLoudness = 111,
+		engineQuality = 88,
+		gearRatioCount = 4,
+		gearRatioR = 4,
+		gearRatio1 = 4,
+		gearRatio2 = 3,
+		gearRatio3 = 2.5,
+		gearRatio4 = 1.0,
+		brakingForce = 50,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 0.65f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.26,
+		suspensionStiffness = 41,
+		suspensionCompression = 4.83,
+		suspensionDamping = 3.88,
+		maxSuspensionTravelCm = 14,
+		suspensionRestLength = 0.15f,
+		wheelFriction = 2.0f,
+		frontEndHealth = 2000,
+		rearEndHealth = 2100,
+		seats = 3,
+		isSmallVehicle = false,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 1.0667 -0.8222 2.2444,
+			radius = 0.58f,
+			width = 0.34f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -1.0667 -0.8222 2.2444,
+			radius = 0.58f,
+			width = 0.34f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 1.0667 -0.8222 -2.2889,
+			radius = 0.58f,
+			width = 0.34f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -1.0667 -0.8222 -2.2889,
+			radius = 0.58f,
+			width = 0.34f,
+		}
+
+		template = MAN80PassengerSeat3,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.8000 0.1778 2.7889,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.6556 -1.3778 2.6111,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = -0.8000 0.1778 2.7889,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.7222 -1.3778 2.5778,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		passenger RearLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorFrontRight,
+
+			position inside
+			{
+				offset = -0.1333 0.1778 2.7889,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.7222 -1.3778 2.5778,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearLeft,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 1.6556 1.4222 0.8000 0.9333,
+		}
+
+		area Front
+		{
+			xywh = 0.0000 4.1778 2.5111 1.0222,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -4.7333 2.3778 1.1111,
+		}
+
+		area Roofrack
+		{
+			xywh = 1.7778 2.0667 0.8000 2.1333,
+		}
+
+		area StorageLeft
+		{
+			xywh = 1.6556 -0.1778 0.8000 1.1778,
+		}
+
+		area StorageRight
+		{
+			xywh = -1.6556 -0.1778 0.8000 1.1778,
+		}
+
+		area Roofrack
+		{
+			xywh = 1.7778 2.0667 0.8000 2.1333,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.6556 3.1000 0.8000 0.8889,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.6556 3.1000 0.8000 0.8889,
+		}
+
+		area SeatRearRight
+		{
+			xywh = 1.0333 -3.4000 0.6444 0.6444,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = -1.6556 2.6667 0.8000 0.8889,
+		}
+
+		area GasTank
+		{
+			xywh = -1.6000 1.0111 0.4222 0.4222,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.8444 2.2444 0.4222 0.4222,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.8444 2.2444 0.4222 0.4222,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.8444 -2.2778 0.4222 0.4222,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.8444 -2.2778 0.4222 0.4222,
+		}
+
+		template = runFlatTires,
+		template = centralTireInflation,
+        template = airBrake,
+		template = MAN80Trunk,
+		template = MAN80Storage,
+		template = MAN80Windows,
+		template = MAN80Windshields,
+		template = MAN80Seats,
+		template = MAN80Bumpers,
+		template = MAN80Doors,
+		template = MAN80EngineDoor,
+		template = MAN80TrunkDoors,
+		template = MAN80Armor,
+		template = MAN80SpareTire,
+		template = MAN80Mudflaps,
+		template = MAN80LightGuards,
+		template = MAN80Muffler,
+		template = MAN80GasCans,
+		template = MAN80Tarp,
+		template = MAN80Roofrack,
+        template = DAMNGunrack,
+
+		part GloveBox
+		{
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			model MAN80int
+			{
+				file = 80manKat1Interior,
+			}
+
+			model MAN80flat
+			{
+				file = 80manKat1Flatbed,
+			}
+
+			container
+			{
+				capacity = 15,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			container
+			{
+				conditionAffectsCapacity = false,
+				capacity = 200,
+			}
+
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = runFlatsLargeFront,
+		template = runFlatsLargeRear,
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part SuspensionFrontLeft
+		{
+			model susFL
+			{
+				file = 80manKat1susFL,
+			}
+		}
+
+		part SuspensionFrontRight
+		{
+			model susFR
+			{
+				file = 80manKat1susFR,
+			}
+		}
+
+		part SuspensionRearLeft
+		{
+			model susRL
+			{
+				file = 80manKat1susRL,
+			}
+		}
+
+		part SuspensionRearRight
+		{
+			model susRR
+			{
+				file = 80manKat1susRR,
+			}
+		}
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio_HAM,
+		template = Headlight,
+
+		part HeadlightLeft
+		{
+			area = Front,
+			requireUninstalled = MAN80LightGuards,
+		}
+
+		part HeadlightRight
+		{
+			area = Front,
+			requireUninstalled = MAN80LightGuards,
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.5778 -4.3444,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.5778 3.8667,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

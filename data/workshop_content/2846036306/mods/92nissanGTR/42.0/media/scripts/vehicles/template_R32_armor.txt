@@ -1,0 +1,423 @@
+module Base
+{
+	model 92nissanGTRwindshielda
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_windshield_a,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 92nissanGTRdoorfla
+	{
+		mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_door_fl_a,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fl_bone 1.0,
+	}
+
+	model 92nissanGTRdoorfra
+	{
+		mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_door_fr_a,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fr_bone 1.0,
+	}
+
+	model 92nissanGTRBwindowrla
+	{
+		mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_window_rl_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 92nissanGTRwindowrra
+	{
+		mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_window_rr_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 92nissanGTRrearwindshielda
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_windshieldRear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle R32Armor
+	{
+		part DAMNWindshieldArmor
+        {
+
+			model WindshieldArmor
+				{
+                		file = 92nissanGTRwindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.R32WindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	requireInstalled = Windshield,
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Advanced Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = R32.InstallComplete.WindshieldArmor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Advanced Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = R32.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = R32.Create.WindshieldArmor,
+					init = R32.Init.WindshieldArmor,
+					}
+		}
+
+        part DAMNFrontLeftArmor
+		{
+			model R32DoorFrontLeftArmor
+				{
+				file = 92nissanGTRdoorfla,
+				}
+				parent = DoorFrontLeft,
+				itemType = Base.R32DoorArmor,
+				specificItem = false,
+                category = door,
+                door
+                {
+                    }
+				area = SeatFrontLeft,
+
+                mechanicRequireKey = true,
+                durability = 5,
+				table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 500,
+					skills = Mechanics:4,
+					recipes = Advanced Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+                    requireInstalled = WindowFrontLeft,
+				}
+				table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 500,
+					skills = Mechanics:4,
+					recipes = Advanced Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+				}
+				
+				lua
+				{
+					create = R32.Create.DoorFrontLeftArmor,
+					init = R32.Init.DoorFrontLeftArmor,
+				}
+		}
+
+		part DAMNFrontRightArmor
+		{
+			model R32DoorFrontRightArmor
+				{
+				file = 92nissanGTRdoorfra,
+				}
+				parent = DoorFrontRight,
+				itemType = Base.R32DoorArmor,
+				specificItem = false,
+                category = door,
+                area = SeatFrontRight,
+                door
+                {
+                    }
+
+                mechanicRequireKey = true,
+                durability = 5,
+				table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 500,
+					skills = Mechanics:4,
+					recipes = Advanced Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+                    requireInstalled = WindowFrontRight,
+				}
+				table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 500,
+					skills = Mechanics:4,
+					recipes = Advanced Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+				}
+				
+				lua
+				{
+					create = R32.Create.DoorFrontRightArmor,
+					init = R32.Init.DoorFrontRightArmor,
+				}
+		}
+
+		part DAMNRearLeftArmor
+		{
+			model R32WindowRearLeftArmor
+				{
+				file = 92nissanGTRBwindowrla,
+				}
+				itemType = Base.R32RearWindowArmor,
+				specificItem = false,
+                category = door,
+                area = SeatFrontLeft,
+                door
+                {
+                    }
+
+                mechanicRequireKey = true,
+                durability = 5,
+				table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 500,
+					skills = Mechanics:4,
+					recipes = Advanced Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+                    requireInstalled = WindowRearLeft,
+				}
+				table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 500,
+					skills = Mechanics:4,
+					recipes = Advanced Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+				}
+
+				lua
+				{
+					create = R32.Create.WindowRearLeftArmor,
+					init = R32.Init.WindowRearLeftArmor,
+				}
+		}
+
+		part DAMNRearRightArmor
+		{
+			model R32WindowRearRightArmor
+				{
+				file = 92nissanGTRwindowrra,
+				}
+				itemType = Base.R32RearWindowArmor,
+				specificItem = false,
+                category = door,
+                area = SeatFrontRight,
+                door
+                {
+                    }
+
+                mechanicRequireKey = true,
+                durability = 5,
+				table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 500,
+					skills = Mechanics:4,
+					recipes = Advanced Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+                    requireInstalled = WindowRearRight,
+				}
+				table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 500,
+					skills = Mechanics:4,
+					recipes = Advanced Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+				}
+
+				lua
+				{
+					create = R32.Create.WindowRearRightArmor,
+					init = R32.Init.WindowRearRightArmor,
+				}
+		}
+
+        part DAMNWindshieldRearArmor
+        {
+
+			model RearWindshieldArmor
+			{
+                file = 92nissanGTRrearwindshielda,
+			}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.R32WindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+            	items
+            	{
+                	1
+                	{
+                    type = Base.Screwdriver,
+                    count = 1,
+                    keep = true,
+					equip = primary,
+                	}
+            	}
+
+            	requireInstalled = WindshieldRear,
+            	time = 500,
+            	skills = Mechanics:4,
+            	recipes = Advanced Mechanics,
+            	test = Vehicles.InstallTest.Default,
+            	complete = R32.InstallComplete.RearWindshieldArmor,
+            }
+
+            table uninstall
+            {
+            	items
+            	{
+                	1
+                	{
+		  			type = Base.Screwdriver,
+					count = 1,
+					keep = true,
+					equip = primary,
+                	}
+            	}
+
+				time = 550,
+				skills = Mechanics:4,
+				recipes = Advanced Mechanics,
+            	test = Vehicles.UninstallTest.Default,
+				complete = R32.UninstallComplete.RearWindshieldArmor,
+        		}
+
+        		lua
+        		{
+				create = R32.Create.RearWindshieldArmor,
+				init = R32.Init.RearWindshieldArmor,
+				}
+		}	
+	}
+}

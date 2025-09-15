@@ -1,0 +1,76 @@
+module Base
+{
+
+	model 86chevyCUCVSidesteps0
+	{
+		mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_sidesteps,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CUCV86SideSteps
+	{
+		part DAMNSideSteps
+        	{
+
+			model SideSteps0
+				{
+                		file = 86chevyCUCVSidesteps0,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.80chevyCKSideSteps,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CUCV86.InstallComplete.SideSteps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = CUCV86.UninstallComplete.SideSteps,
+
+            		}
+
+	            lua
+	            {
+				create = CUCV86.Create.SideSteps,
+				init = CUCV86.Init.SideSteps,
+				}
+		}
+	}
+
+}
+

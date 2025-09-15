@@ -1,0 +1,140 @@
+module Base
+{
+	
+	model 87buickRegalspoiler0
+	{
+		mesh = vehicles/Vehicles_87buickRegal_Body|gnx_spoiler,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle GNX87Spoiler
+		{
+		part DAMNSpoiler
+       		{
+
+            model GNX87Spoiler0
+			{
+                	file = 87buickRegalspoiler0,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            itemType = Base.87buickRegalGNXSpoiler,
+            mechanicRequireKey = false,
+            durability = 2,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = GNX87.InstallComplete.Spoiler,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = GNX87.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = GNX87.Create.Spoiler,
+                init = GNX87.Init.Spoiler,
+            }
+        }
+	}
+
+    template vehicle GNX87SpoilerOFF
+        {
+        part DAMNSpoiler
+            {
+
+            model GNX87Spoiler0
+            {
+                    file = 87buickRegalspoiler0,
+            }
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            itemType = Base.87buickRegalGNXSpoiler,
+            mechanicRequireKey = false,
+            durability = 2,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = GNX87.InstallComplete.SpoilerO,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = GNX87.UninstallComplete.SpoilerO,
+            }
+            lua
+            {
+                create = GNX87.Create.SpoilerO,
+                init = GNX87.Init.SpoilerO,
+            }
+        }
+    }
+}
+

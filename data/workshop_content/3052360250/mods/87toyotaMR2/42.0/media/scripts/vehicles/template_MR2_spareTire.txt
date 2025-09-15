@@ -1,0 +1,86 @@
+module Base
+{
+	template vehicle MR2SpareTires
+	{
+		part DAMNSpareTire
+        	{
+
+        		model MR2spare1
+				{
+                		file = 87toyotaMR2Wheel0,
+                        offset = -0.0111 0.0000 1.2852,
+				        rotate = 27.0000 0.0000 -90.0000,
+				}
+
+				model MR2spare2
+				{
+                		file = 87toyotaMR2Wheel1,
+                        offset = -0.0111 0.0000 1.2852,
+				        rotate = 27.0000 0.0000 -90.0000,
+				}
+
+                model MR2spare3
+				{
+                		file = 87toyotaMR2UNIL,
+                        offset = -0.0111 0.0000 1.2852,
+				        rotate = 27.0000 0.0000 -90.0000,
+				}
+
+			category = tire,
+			area = Front,
+            specificItem = false,
+			itemType = Base.87toyotaMR2TireT13;Base.87toyotaMR2TireT23;damnCraft.SmallTire1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = MR2TrunkDoorFront,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MR2.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = MR2.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+	            init = MR2.Init.SpareTire,
+				create = MR2.Create.SpareTire,
+				}
+		}
+	}
+}
+

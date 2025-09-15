@@ -1,0 +1,75 @@
+module Base
+{
+	model 90pierceArrowfrontBumper0
+	{
+		mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_bumper_front,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle ARRWBumpers
+		{
+		part ARRWBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 90pierceArrowfrontBumper0,
+				}
+
+				area = Front,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.90pierceArrowBumper0;Base.90pierceArrowReinforcedBumper1,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+	}
+
+		
+}

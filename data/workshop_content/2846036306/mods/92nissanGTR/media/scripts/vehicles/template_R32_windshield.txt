@@ -1,0 +1,173 @@
+module Base
+{
+
+    model 92nissanGTRwindshield
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 92nissanGTRwindshieldRef
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        invertX = TRUE,
+    }
+
+    model 92nissanGTRrearWindshield
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_windshieldRear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 92nissanGTRrearWindshieldRef
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_windshieldRear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        invertX = TRUE,
+    }
+
+	template vehicle R32Windshields
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 92nissanGTRwindshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.R32Windshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = R32WindshieldArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = 92nissanGTRrearWindshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.R32WindshieldRear,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  requireUninstalled = R32RearWindshieldArmor,
+                  recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+    template vehicle R32WindshieldsRef
+	{
+        template! = R32Windshields,
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 92nissanGTRwindshieldRef,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = 92nissanGTRrearWindshieldRef,
+            }
+        }
+    }
+}

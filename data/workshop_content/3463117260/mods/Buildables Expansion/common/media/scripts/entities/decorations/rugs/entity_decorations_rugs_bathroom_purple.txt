@@ -1,0 +1,59 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_BathroomPurpleRug
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Bathroom Purple Rug,
+			Icon		= floors_rugs_01_53,
+		}
+	}
+
+    entity BathroomPurpleRug
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_BathroomPurpleRug,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {	
+            face W
+            {
+                layer
+                {
+                    row = floors_rugs_01_55,
+                    row = floors_rugs_01_54,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = floors_rugs_01_52 floors_rugs_01_53,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = SewingCloth,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Decorations_Rugs,
+            SkillRequired = Tailoring:2,
+            xpAward       = Tailoring:4,
+            ToolTip       = Tooltip_craft_rugsDesc,
+            inputs
+            {
+                item 1 tags[SewingNeedle] mode:keep flags[Prop1],
+                item 5 [Base.RippedSheets] mode:destroy flags[Prop2],
+                item 3 [Base.Thread],
+            }
+        }
+    }
+}

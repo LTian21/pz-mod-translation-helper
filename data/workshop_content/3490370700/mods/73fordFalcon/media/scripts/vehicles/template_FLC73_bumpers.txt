@@ -1,0 +1,277 @@
+module Base
+{
+	model 73fordFalconBumperFront0
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 73fordFalconBumperFrontA
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 73fordFalconBullbarFrontA
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 73fordFalconPSBumperFront0
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_bumper_front_ps1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 73fordFalconPSBumperFront1
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_bumper_front_ps2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 73fordFalconBullbarFrontA1
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_bullbar_frontA1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 73fordFalconBumperRear0
+	{
+		mesh = vehicles/Vehicles_73fordFalcon_Body|falcon_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle FLC73BumperRear
+		{
+		part DAMNBumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 73fordFalconBumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.73fordFalconBumperRear,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FLC73.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = FLC73.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = FLC73.Create.BumperRear,
+					init = FLC73.Init.BumperRear,
+					}
+		}
+	}
+
+    template vehicle FLC73BumpersStock
+	{
+            template! = FLC73BumperRear,
+
+		part DAMNBumperFront
+        {
+
+			model BumperFront0
+				{
+                		file = 73fordFalconBumperFront0,
+				}
+
+			model BumperFrontA
+				{
+                		file = 73fordFalconBumperFrontA,
+				}
+
+            model BullbarFrontA
+				{
+                		file = 73fordFalconBullbarFrontA,
+				}
+
+            model BumperFront0PS
+				{
+                		file = 73fordFalconPSBumperFront0,
+				}
+
+			model BumperFront1PS
+				{
+                		file = 73fordFalconPSBumperFront1,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.73fordFalconBumperFront0;Base.73fordFalconBumperFrontA;Base.73fordFalconBullbarFrontA;Base.73fordFalconPSBumperFront0;Base.73fordFalconPSBumperFront1,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FLC73.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = FLC73.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = FLC73.Create.BumperFront,
+					init = FLC73.Init.BumperFront,
+					}
+		}
+	}
+
+    template vehicle FLC73BumpersPS
+	{
+            template! = FLC73BumperRear,
+
+		part DAMNBumperFront
+        {
+
+			model BumperFront0
+				{
+                		file = 73fordFalconPSBumperFront0,
+				}
+
+			model BumperFront1
+				{
+                		file = 73fordFalconPSBumperFront1,
+				}
+
+            model BullbarFrontA
+				{
+                		file = 73fordFalconBullbarFrontA1,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.73fordFalconPSBumperFront0;Base.73fordFalconPSBumperFront1;Base.73fordFalconBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FLC73.InstallComplete.BumperFrontPS,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = FLC73.UninstallComplete.BumperFrontPS,
+            		}
+
+            		lua
+            		{
+					create = FLC73.Create.BumperFrontPS,
+					init = FLC73.Init.BumperFrontPS,
+					}
+		}
+	}
+}

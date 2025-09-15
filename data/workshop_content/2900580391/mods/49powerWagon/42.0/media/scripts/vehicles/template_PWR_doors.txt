@@ -1,0 +1,368 @@
+module Base
+{
+
+	model 49powerWagondoorfl
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_door_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fl_bone 1.0,
+	}
+
+	model 49powerWagondoorfr
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_door_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_fr_bone 1.0,
+	}
+
+	model 49powerWagondoorrl
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_door_rl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_rl_bone 1.0,
+	}
+
+	model 49powerWagondoorrr
+	{
+		mesh = vehicles/Vehicles_49powerWagon_Body|power_door_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_rr_bone 1.0,
+	}
+
+	template vehicle PWRDoors
+	{
+
+		part DoorFrontLeft
+		{
+			model DoorFrontLeft
+				{
+				file = 49powerWagondoorfl,
+				}
+				itemType = Base.49powerWagonFrontDoor,
+				table uninstall
+				{
+				requireUninstalled = WindowFrontLeft,
+				}
+				area = SeatFrontLeft,
+				anim ActorOpen
+				{
+					angle = 0.0 270.0 0.0,
+				}
+				anim ActorClose
+				{
+					angle = 0.0 270.0 0.0,
+				}
+
+				anim Close
+				{
+					anim = door_fl_opening,
+					reverse = TRUE,
+					rate = 1.5,
+				}
+
+				anim Open
+				{
+					anim = door_fl_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = door_fl_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = door_fl_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+				lua
+				{
+					create = Vehicles.Create.Door,
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.Door,
+				}
+		}
+
+		part DoorFrontRight
+		{
+			model DoorFrontRight
+				{
+				file = 49powerWagondoorfr,
+				}
+				itemType = Base.49powerWagonFrontDoor,
+				table uninstall
+				{
+				requireUninstalled = WindowFrontRight,
+				}
+				area = SeatFrontRight,
+				anim ActorOpen
+				{
+					angle = 0.0 90.0 0.0,
+				}
+				anim ActorClose
+				{
+					angle = 0.0 90.0 0.0,
+				}
+
+				anim Close
+				{
+					anim = door_fr_opening,
+					reverse = TRUE,
+					rate = 1.5,
+				}
+
+				anim Open
+				{
+					anim = door_fr_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = door_fr_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = door_fr_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+				lua
+				{
+					create = Vehicles.Create.Door,
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.Door,
+				}
+		}
+
+		part DoorRearLeft
+		{
+			model DoorRearLeft
+				{
+				file = 49powerWagondoorrl,
+				}
+				itemType = Base.49powerWagonRearDoor,
+				table uninstall
+				{
+				requireUninstalled = WindowRearLeft,
+				}
+				area = SeatRearLeft,
+				anim ActorOpen
+				{
+					angle = 0.0 270.0 0.0,
+				}
+				anim ActorClose
+				{
+					angle = 0.0 270.0 0.0,
+				}
+
+				anim Close
+				{
+					anim = door_rl_opening,
+					reverse = TRUE,
+					rate = 1.5,
+				}
+
+				anim Open
+				{
+					anim = door_rl_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = door_rl_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = door_rl_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+				lua
+				{
+					create = Vehicles.Create.Door,
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.Door,
+				}
+		}
+
+		part DoorRearRight
+		{
+			model DoorRearRight
+				{
+				file = 49powerWagondoorrr,
+				}
+				itemType = Base.49powerWagonRearDoor,
+				table uninstall
+				{
+				requireUninstalled = WindowRearRight,
+				}
+				area = SeatRearRight,
+				anim ActorOpen
+				{
+					angle = 0.0 90.0 0.0,
+				}
+				anim ActorClose
+				{
+					angle = 0.0 90.0 0.0,
+				}
+
+				anim Close
+				{
+					anim = door_rr_opening,
+					reverse = TRUE,
+					rate = 1.5,
+				}
+
+				anim Open
+				{
+					anim = door_rr_opening,
+					rate = 1.0,
+				}
+
+				anim Closed
+				{
+					anim = door_rr_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = door_rr_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+				lua
+				{
+					create = Vehicles.Create.Door,
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.Door,
+				}
+		}
+
+		part FakeDoor
+		{
+			itemType = nil,
+			area = StealThis,
+			category = nodisplay,
+
+			lua
+				{
+                    create = DAMN.Create.Blank,
+				}
+		}
+
+		part FakeWindow
+		{
+			window
+			{
+				openable = true,
+			}
+
+			parent = FakeDoor,
+			itemType = nil,
+			area = StealThis,
+			category = nodisplay,
+
+			lua
+				{
+                    create = DAMN.Create.Blank,
+				}
+
+		}
+
+		part Door*
+		{
+			category = door,
+			door
+			{
+				}
+				anim Open
+				{
+					sound = VehicleDoorOpenStandard,
+				}
+				anim Close
+				{
+					sound = VehicleDoorCloseStandard,
+				}
+				anim Lock
+				{
+					sound = LockVehicleDoorStandard,
+				}
+				anim Unlock
+				{
+					sound = UnlockVehicleDoorStandard,
+				}
+				anim IsLocked
+				{
+					sound = VehicleDoorIsLockedStandard,
+				}
+				anim ActorOpen
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				anim ActorClose
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				mechanicRequireKey = true,
+                durability = 5,
+				table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 700,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+				}
+				table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 700,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+				}
+			}
+		}
+	}
+
+

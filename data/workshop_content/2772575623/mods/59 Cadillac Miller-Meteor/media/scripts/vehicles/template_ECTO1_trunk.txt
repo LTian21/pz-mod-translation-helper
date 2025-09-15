@@ -1,0 +1,43 @@
+module Base
+{
+	template vehicle ECTO1TrunkCompartment
+	{
+		part ECTO1Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = Base.ECTO1Trunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = ECTO1.ContainerAccess.Trunk,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = ECTO1.ContainerAccess.Trunk,
+			}
+			lua
+			{
+                create = DAMN.Create.Blank,
+			}
+		}
+
+	}
+
+}

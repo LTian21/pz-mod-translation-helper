@@ -1,0 +1,495 @@
+module Base
+{
+
+	model 93townCarWindowfl
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 93townCarWindowfr
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 93townCarWindowrl
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_window_rl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 93townCarWindowrr
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 93townCarLimoWindowrl
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_window_rl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 93townCarLimoWindowrr
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 93townCarLimoWindowml
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_window_ml,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93townCarLimoWindowmr
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_window_mr,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93townCarLimoSunroof
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincolnLimo_roofWindow,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle LIN93Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 93townCarWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.93townCarFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = LIN93DoorFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 93townCarWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.93townCarFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = LIN93DoorFrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 93townCarWindowrl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.93townCarRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = LIN93DoorRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 93townCarWindowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.93townCarRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = LIN93DoorRearRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+	template vehicle LIN93WindowsLimo
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 93townCarWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.93townCarFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = LIN93DoorFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 93townCarWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.93townCarFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = LIN93DoorFrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRLLimo
+			{
+				file = 93townCarLimoWindowrl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.93townCarRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = LIN93DoorRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRRLimo
+			{
+				file = 93townCarLimoWindowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.93townCarRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = LIN93DoorRearRightArmor,
+				}
+		}
+
+		part WindowSunroof
+		{
+			model windowSunroofLimo
+			{
+				file = 93townCarLimoSunroof,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = roof_opening,
+				animate = FALSE,
+			}
+
+			parent = FakeDoor,
+			area = Sunroof,
+			itemType = Base.93townCarSunRoof,
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+	template vehicle LIN93WindowsMiddleLimo
+	{
+
+		part WindowMiddleLeft
+		{
+			model windowBLLimo
+			{
+				file = 93townCarLimoWindowml,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.93townCarMiddleSideWindow,
+			table uninstall
+				{
+				requireUninstalled = LIN93WindowMiddleLeftArmor,
+				}
+		}
+
+		part WindowMiddleRight
+		{
+			model windowBRLimo
+			{
+				file = 93townCarLimoWindowmr,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.93townCarMiddleSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = LIN93WindowMiddleRightArmor,
+				}
+		}
+
+		part WindowMiddle*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = false,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+}
+

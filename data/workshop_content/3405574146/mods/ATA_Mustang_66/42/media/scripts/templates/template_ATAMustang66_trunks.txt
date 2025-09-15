@@ -1,0 +1,230 @@
+module Base
+{
+    model ATAMustang66_Roof_trunk
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_trunk,
+        texture = ATAMustang66/roof,
+        scale = 0.0041,
+    }
+    model ATAMustang66_RoofBag1
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_bag1,
+        texture = clothes/bag/DuffelBagBlue,
+        scale = 0.0041,
+    }
+    model ATAMustang66_RoofBag2
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_bag2,
+        texture = clothes/bag/DuffelBagGreen,
+        scale = 0.0041,
+    }
+    model ATAMustang66_RoofBag3
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_bag3,
+        texture = clothes/bag/DuffelBagWhite,
+        scale = 0.0041,
+    }
+    model ATAMustang66_RoofBag4
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_Cooler,
+        texture = clothes/bag/Cooler,
+        scale = 0.0041,
+    }
+    model ATAMustang66_RoofBag5
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_bag5,
+        texture = clothes/bag/DuffelBagWhite,
+        scale = 0.0041,
+    }
+    model ATAMustang66_RoofCase1
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_case1,
+        texture = clothes/bag/Suitcase,
+        scale = 0.0041,
+    }
+    model ATAMustang66_RoofCase2
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_case2,
+        texture = clothes/bag/Suitcase,
+        scale = 0.0041,
+    }
+    model ATAMustang66_Cooler
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_Cooler,
+        texture = clothes/bag/Cooler,
+        scale = 0.0041,
+    }
+    model ATAMustang66_GasCan1
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_GasCan1,
+        texture = GasCan,
+        scale = 0.0041,
+    }
+    model ATAMustang66_GasCan2
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_GasCan2,
+        texture = GasCan,
+        scale = 0.0041,
+    }
+    model ATAMustang66_GasCan3
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_GasCan3,
+        texture = GasCan,
+        scale = 0.0041,
+    }
+    model ATAMustang66_BigHikingBagBlue
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_backpack1,
+        texture = clothes/bag/BigHikingBagBlue,
+        scale = 0.0041,
+    }
+    model ATAMustang66_BigHikingBagGreen
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Roof_backpack2,
+        texture = clothes/bag/BigHikingBagGreen,
+        scale = 0.0041,
+    }
+    
+    model ATAMustang66_Trunk_bag1
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Trunk_bag1,
+        texture = clothes/bag/DuffelBagBlue,
+        scale = 0.0041,
+    }
+    model ATAMustang66_Trunk_bag2
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Trunk_bag2,
+        texture = clothes/bag/DuffelBagGreen,
+        scale = 0.0041,
+    }
+    model ATAMustang66_Trunk_bag3
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Trunk_bag3,
+        texture = clothes/bag/DuffelBagWhite,
+        scale = 0.0041,
+    }
+    model ATAMustang66_Trunk_bag4
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Trunk_bag4,
+        texture = clothes/bag/DuffelBagGreen,
+        scale = 0.0041,
+    }
+    model ATAMustang66_Trunk_bag5
+    {
+        mesh = vehicles/Vehicles_ATAMustang66|Trunk_bag5,
+        texture = clothes/bag/DuffelBagBlue,
+        scale = 0.0041,
+    }
+    
+    template vehicle ATAMustang66_trunks
+    {
+        template = Trunk/part/TruckBed,
+        part TruckBed
+        {
+            itemType = Base.SmallTrunk,
+            container
+            {
+                conditionAffectsCapacity = true,
+                test = ATATuning.ContainerAccess.ATAInteractiveTruckBed,
+            }
+            lua
+            {
+                create = ATATuning.Create.DefaultATAInteractiveTrunk,
+                init = ATATuning.Init.ATAInteractiveTrunk,
+            }
+            model Bag1
+            {
+                file = ATAMustang66_Trunk_bag1,
+            }
+            model Bag2
+            {
+                file = ATAMustang66_Trunk_bag2,
+            }
+            model Bag3
+            {
+                file = ATAMustang66_Trunk_bag3,
+            }
+            model Bag4
+            {
+                file = ATAMustang66_Trunk_bag4,
+            }
+            model Bag5
+            {
+                file = ATAMustang66_Trunk_bag5,
+            }
+            table interactiveItems 
+            {
+                fullness
+                {
+                    1 = Bag1,
+                    2 = Bag2,
+                    3 = Bag3,
+                    4 = Bag4,
+                    5 = Bag5,
+                }
+            }
+        }
+        
+        template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkRoofRack,
+        part ATA2InteractiveTrunkRoofRack
+        {
+            area = ATARoof,
+            model ATARoofrack
+            {
+                file = ATAMustang66_Roof_trunk,
+            }
+            model ATARoofBag1
+            {
+                file = ATAMustang66_RoofBag1,
+            }
+            model ATARoofBag2
+            {
+                file = ATAMustang66_RoofCase2,
+            }
+            model ATARoofBag3
+            {
+                file = ATAMustang66_GasCan1,
+            }
+            model ATARoofBag4
+            {
+                file = ATAMustang66_Cooler,
+            }
+            model ATARoofBag5
+            {
+                file = ATAMustang66_BigHikingBagBlue,
+            }
+            model ATARoofCase1
+            {
+                file = ATAMustang66_RoofCase1,
+            }
+            model ATARoofCase2
+            {
+                file = ATAMustang66_RoofCase2,
+            }
+            model ATACooler
+            {
+                file = ATAMustang66_Cooler,
+            }
+            model ATAGasCan1
+            {
+                file = ATAMustang66_GasCan1,
+            }
+            model ATAGasCan2
+            {
+                file = ATAMustang66_GasCan2,
+            }
+            model ATAGasCan3
+            {
+                file = ATAMustang66_GasCan3,
+            }
+            model BigHikingBagBlue
+            {
+                file = ATAMustang66_BigHikingBagBlue,
+            }
+            model BigHikingBagGreen
+            {
+                file = ATAMustang66_BigHikingBagGreen,
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+module Base
+{
+	model 67commandolightguards_f
+	{
+		mesh = vehicles/Vehicles_67commando_Body|body_mk2_lightguards,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle V100LightGuards
+		{
+		part V100LightGuards
+        	{
+
+			model V100LG0
+				{
+                		file = 67commandolightguards_f,
+				}
+
+			area = Engine,
+			category = lights,
+			itemType = Base.V100LightGuards,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = V100.InstallComplete.LightGuards,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 650,
+			skills = Mechanics:3,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = V100.UninstallComplete.LightGuards,
+            		}
+
+            		lua
+            		{
+			create = V100.Create.LightGuards,
+			init = V100.Init.LightGuards,
+			}
+		}
+	}
+}

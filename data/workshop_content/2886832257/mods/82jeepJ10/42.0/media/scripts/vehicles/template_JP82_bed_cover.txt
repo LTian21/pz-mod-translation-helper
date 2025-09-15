@@ -1,0 +1,77 @@
+module Base
+{
+	model 82jeepJ10BedCover
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_cover_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP82BedCover
+		{
+		part JP82BedCover
+        	{
+
+			model BackCover32434
+				{
+                		file = 82jeepJ10BedCover,
+				}
+
+			area = TireRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.82JeepJ10BedCover,
+			mechanicRequireKey = false,
+            durability = 2,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireUninstalled = JP82Rollbar,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 2000,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+                	test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireUninstalled = JP82Roofrack;JP82TrunkDoorTop,
+            		}
+
+            		lua
+            		{
+            		create = DAMN.Create.Blank,
+					}
+		
+			}
+
+	}
+}

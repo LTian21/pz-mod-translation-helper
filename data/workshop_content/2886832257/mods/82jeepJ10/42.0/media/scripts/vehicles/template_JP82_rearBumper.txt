@@ -1,0 +1,157 @@
+module Base
+{
+	model 82jeepJ10rearBumper
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82jeepJ10rearBullbar
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_armor_br1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP82RearBumper
+		{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper
+				{
+                		file = 82jeepJ10rearBumper,
+				}
+
+			model RearBullbar
+				{
+                		file = 82jeepJ10rearBullbar,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82JeepJ10BumperRear;Base.80sPickupBullbarRear,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP82.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = JP82.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = JP82.Create.RearBumper,
+					init = JP82.Init.RearBumper,
+					}
+		}
+	}
+
+	template vehicle JP82RearBumperD
+		{
+		part DAMNBumperRear
+        	{
+
+        	model RearBullbar
+				{
+                		file = 82jeepJ10rearBullbar,
+				}
+
+			model RearBumper
+				{
+                		file = 82jeepJ10rearBumper,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.80sPickupBullbarRear;Base.82JeepJ10BumperRear,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP82.InstallComplete.RearBumperD,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = JP82.UninstallComplete.RearBumperD,
+            		}
+
+            		lua
+            		{
+					create = JP82.Create.RearBumperD,
+					init = JP82.Init.RearBumperD,
+					}
+		}
+	}
+		
+}

@@ -1,0 +1,174 @@
+module Base
+{
+
+	model 93fordF350SideSteps0
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_SideSteps0,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 93fordF350SideSteps1
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f350_SideSteps1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 93fordF150SideSteps0
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f150_SideSteps0,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 93fordF150SideSteps1
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|f150_SideSteps1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	
+	template vehicle F3502SideSteps
+	{
+		part DAMNSideSteps
+        	{
+
+			model DAMNSideSteps0
+				{
+                		file = 93fordF350SideSteps0,
+				}
+
+			model DAMNSideSteps1
+				{
+                		file = 93fordF350SideSteps1,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.93fordF350SideSteps;Base.93fordF350SideStepsLong,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.SideSteps,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = F3502.UninstallComplete.SideSteps,
+
+            		}
+
+	            lua
+	            {
+				create = F3502.Create.SideSteps,
+				init = F3502.Init.SideSteps,
+				}
+		}
+	}
+
+    template vehicle F1502SideSteps
+	{
+		part DAMNSideSteps
+        	{
+
+			model F1502SideSteps0
+				{
+                		file = 93fordF150SideSteps0,
+				}
+
+			model F1502SideSteps1
+				{
+                		file = 93fordF150SideSteps1,
+				}
+
+			category = bodywork,
+			area = TireFrontLeft,
+			itemType = Base.93fordF150SideSteps;Base.93fordF150SideStepsLong,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.SideStepsShort,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = F3502.UninstallComplete.SideStepsShort,
+
+            		}
+
+	            lua
+	            {
+				create = F3502.Create.SideStepsShort,
+				init = F3502.Init.SideStepsShort,
+				}
+		}
+	}
+}

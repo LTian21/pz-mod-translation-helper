@@ -1,0 +1,87 @@
+module Base
+{
+    model 92jeepYJrollBar0
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_rollbar_family,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+    model 92jeepYJrollBar1
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_rollbar_sport,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP92RollBars
+		{
+		part JP92RollBar
+        	{
+
+			model rollbar0
+				{
+                		file = 92jeepYJrollBar0,
+				}
+
+            model rollbar1
+				{
+                		file = 92jeepYJrollBar1,
+				}
+
+			category = bodywork,
+			area = TireRearRight,
+			specificItem = false,
+			itemType = Base.92jeepYJFamilyRollbar2;Base.92jeepYJSportRollbar2,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = JP92.InstallComplete.Rollbar,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 750,
+			skills = Mechanics:1,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = JP92.UninstallComplete.Rollbar,
+
+            		}
+
+            		lua
+            		{
+			create = JP92.Create.Rollbar,
+			init = JP92.Init.Rollbar,
+			}
+		}
+	}
+}

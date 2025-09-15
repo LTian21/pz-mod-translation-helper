@@ -1,0 +1,179 @@
+module Base
+{
+	model 69minifrontBumper0
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_fender_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 69minifrontBumper1
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_fender_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 69minifrontBumper2
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_fender_front2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 69minirearBumper0
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_fender_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 69minirearBumper1
+	{
+		mesh = vehicles/Vehicles_69mini_Body|mini_fender_rear1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle MINI69Bumpers
+		{
+		part MINI69BumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 69minifrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 69minifrontBumper1,
+				}
+
+			model FrontBumper2
+				{
+                		file = 69minifrontBumper2,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.69miniBumperFront0;Base.69miniBumperFront1;Base.69miniBumperFront2,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MINI69.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = MINI69.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = MINI69.Create.BumperFront,
+					init = MINI69.Init.BumperFront,
+					}
+		}
+
+		part MINI69BumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 69minirearBumper0,
+				}
+
+			model RearBumper1
+				{
+                		file = 69minirearBumper1,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.69miniBumperRear0;Base.69miniBumperRear1,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MINI69.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = MINI69.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = MINI69.Create.BumperRear,
+					init = MINI69.Init.BumperRear,
+					}
+		}
+	}
+
+		
+}

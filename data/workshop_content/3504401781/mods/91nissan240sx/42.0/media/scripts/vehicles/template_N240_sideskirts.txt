@@ -1,0 +1,84 @@
+module Base
+{
+	
+	model 91nissan240sxsideskirt0
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_sideskirts0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 91nissan240sxsideskirt1
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_sideskirts1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle N240Sideskirts
+		{
+		part DAMNSideskirts
+       		{
+
+            model sideskirts0
+			{
+                	file = 91nissan240sxsideskirt0,
+			}
+
+            model sideskirts1
+			{
+                	file = 91nissan240sxsideskirt1,
+			}
+
+            category = bodywork,
+            area = SeatFrontLeft,
+            specificItem = false,
+            itemType = Base.91nissan240sxSideskirts0;Base.91nissan240sxSideskirts1,
+            mechanicRequireKey = false,
+            durability = 3,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = N240.InstallComplete.Sideskirts,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = N240.UninstallComplete.Sideskirts,
+            }
+            lua
+            {
+                create = N240.Create.Sideskirts,
+                init = N240.Init.Sideskirts,
+            }
+        }
+	}
+}

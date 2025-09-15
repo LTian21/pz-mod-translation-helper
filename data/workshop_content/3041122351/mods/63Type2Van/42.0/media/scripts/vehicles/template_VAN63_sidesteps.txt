@@ -1,0 +1,72 @@
+module Base
+{
+
+	model 63Type2Vansidesteps
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_sidestep,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle VAN63Sidesteps
+	{
+		part DAMNSideSteps
+		{
+			
+			model VAN63step0
+			{
+				file = 63Type2Vansidesteps,
+			}
+			
+			area = GasTank,
+			itemType = Base.63Type2VanSidesteps0,
+			specificItem = false,
+			category = Other,
+			mechanicRequireKey = true,
+            durability = 5,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = VAN63.InstallComplete.Sidesteps,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = VAN63.UninstallComplete.Sidesteps,
+			}
+			lua
+			{
+				init = VAN63.Init.Sidesteps,
+				create = VAN63.Create.Sidesteps,
+			}
+		}
+	}
+}
+

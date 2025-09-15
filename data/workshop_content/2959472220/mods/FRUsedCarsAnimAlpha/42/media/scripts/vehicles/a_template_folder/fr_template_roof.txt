@@ -1,0 +1,175 @@
+module Base
+{
+	template vehicle FRHardRoof
+	{
+		part FRRoof
+		{
+			category = bodywork,
+			area = Engine,
+			itemType = Base.FRRoofHard,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			
+			table FRPartInfo
+			{
+				oneModel = true,
+			}
+			
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.BlowTorch,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                    2
+                    {
+                        type = Base.WeldingRods,
+                        count = 1,
+                    }
+                }
+                time = 2000,
+                skills = MetalWelding:5,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualDefault,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.BlowTorch,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 2000,
+                skills = MetalWelding:5,
+                test = Vehicles.UninstallTest.FR_Default,
+                complete = Vehicles.UninstallComplete.FR_VisualDefault,
+				requireUninstalled = WindshieldRear,
+            }
+			
+			
+            lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+            }
+		}
+	}
+	
+	template vehicle FRRemovableRoof
+	{
+		part FRRoof
+		{
+			category = bodywork,
+			area = Engine,
+			itemType = Base.FRRoofConHard;Base.FRRoofConSoft,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			
+            table install
+            {
+                
+                time = 300,
+                skills = Mechanics:1,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualDefault,
+            }
+            table uninstall
+            {
+                time = 300,
+                skills = Mechanics:1,
+                test = Vehicles.UninstallTest.FR_Default,
+				complete = Vehicles.UninstallComplete.FR_VisualDefault,
+				requireUninstalled = WindshieldRear,
+            }
+			
+            lua
+			{
+				create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualDefault,
+			}
+		}
+	}
+	
+	template vehicle FRConRoof
+	{
+		part FRConRoof
+		{
+			category = bodywork,
+			area = Engine,
+			itemType = Base.FRRoofConSoft,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			
+			table FRPartInfo
+			{
+				openChance = 50,
+			}
+			
+			door
+			{
+			}
+			
+            table install
+            {
+                time = 300,
+                skills = Mechanics:4,
+				recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.FR_VisualDefault,
+            }
+			
+            table uninstall
+            {
+                time = 300,
+                skills = Mechanics:4,
+				recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.FR_Default,
+				complete = Vehicles.UninstallComplete.FR_VisualDefault,
+				requireUninstalled = WindshieldRear,
+            }
+			
+            lua
+            {
+                create = Vehicles.Create.FR_VisualDefault,
+				init = Vehicles.Init.FR_VisualDefault,
+            }
+
+			anim Close
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				rate = 0.2,
+			}
+
+			anim Open
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				rate = 0.2,
+			}
+
+			anim Closed
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		}
+	}
+}

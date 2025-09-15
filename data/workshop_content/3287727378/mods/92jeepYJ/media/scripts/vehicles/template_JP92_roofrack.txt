@@ -1,0 +1,82 @@
+module Base
+{
+
+	model 92jeepYJroofrack
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_roofrack0,
+		texture = Vehicles/Vehicles_92jeepYJ_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle JP92Roofrack
+	{
+		part JP92Roofrack
+		{
+			model Roofrack0
+				{
+                	file = 92jeepYJroofrack,
+				}
+
+			category = Other,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.92jeepYJRoofrack2,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = JP92.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = JP92.InstallComplete.Roofrack,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = JP92.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            		lua
+            		{
+					create = JP92.Create.Roofrack,
+					init = JP92.Init.Roofrack,
+					}
+		}
+	}
+}

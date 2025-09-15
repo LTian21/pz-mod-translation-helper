@@ -1,0 +1,158 @@
+module Base
+{
+    model Tatra815Mil_leftfrontwindow
+	{
+		mesh = vehicles/Vehicles_Mil6X6Tatra815_Body|leftfrontwindow,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+		boneWeight = FrontLeftWindowBone 1.0,
+	}
+	model Tatra815Mil_rightfrontwindow
+	{
+		mesh = vehicles/Vehicles_Mil6X6Tatra815_Body|rightfrontwindow,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+		boneWeight = FrontRightWindowBone 1.0,
+	}
+
+
+        model Tatra815Mil_leftrearwindow
+	{
+		mesh = vehicles/Vehicles_Mil6X6Tatra815_Body|rearleftwindow,
+		shader = vehicle,
+		scale = 1,
+		static = TRUE,
+		
+	}
+        model Tatra815Mil_rightrearwindow
+	{
+		mesh = vehicles/Vehicles_Mil6X6Tatra815_Body|rearrightwindow,
+		shader = vehicle,
+		scale = 1,
+		static = TRUE,
+		
+	}
+
+
+
+    template vehicle Tatra8156X6Mil_windows
+    {
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+                template = Window/part/WindowRearRight,
+                template = Window/part/WindowRearLeft,
+  
+
+
+		part WindowFrontLeft
+		{
+			area = SeatFrontLeft,
+			
+			parent = DoorFrontLeft,
+                       
+
+			model Default
+			{
+				file = Tatra815Mil_leftfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontLeft_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+
+		part WindowFrontRight
+		{
+			area = SeatFrontRight,
+			
+			parent = DoorFrontRight,
+                        
+
+			model Default
+			{
+				file = Tatra815Mil_rightfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontRight_open,
+				animate = FALSE,
+			}                        
+
+		}
+
+  
+               part WindowRearRight
+		{
+			area = SeatFrontRight,
+			
+			
+                        
+
+			model Default
+			{
+				file = Tatra815Mil_rightrearwindow,
+			}
+
+                            table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DoorFrontRight,
+				}          
+
+		}
+
+                part WindowRearLeft
+		{
+			area = SeatFrontLeft,
+			
+			
+                        
+
+			model Default
+			{
+				file = Tatra815Mil_leftrearwindow,
+			}
+
+                      table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DoorFrontRight,
+				}
+
+		}    
+                             
+                
+
+
+
+           
+
+		
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			window
+			{
+				openable = true,
+			}
+		}
+    }
+}

@@ -1,0 +1,77 @@
+module Base
+{
+	model 89fordBroncoBarrier
+	{
+		mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_barrier,
+		texture = vehicles/Vehicles_89fordBronco_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle BR89Barrier
+		{
+		part BR89Barrier
+        	{
+
+			model Barrier874658
+				{
+                		file = 89fordBroncoBarrier,
+				}
+
+			area = TireRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.89BroncoBarrier,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireUninstalled = SeatRearRight;SeatRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 2000,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+                	test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireUninstalled = BR89Rollbar,
+            		}
+
+            		lua
+            		{
+            		create = DAMN.Create.Blank,
+					}
+		}
+	}
+
+		
+}

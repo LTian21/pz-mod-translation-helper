@@ -1,0 +1,914 @@
+module SapphCooking
+{
+	imports
+	{
+		Base,
+	}	
+		/****************************** bowl, plates, messtrays and buckets recipes will be here. ******************************/
+
+  
+
+    craftRecipe Make Fry Batter
+    {
+        timedAction = MixingBowl,
+        time            = 60,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Bowl] mode:destroy,
+            item 1 tags[Fork;MixingUtensil;Spoon] mode:keep,
+            item 2 [SapphCooking.SapphFlour],
+            item 1 [*],
+            -fluid 0.3 [Water],
+        }
+        outputs
+        {
+           item 1 SapphCooking.FryBatter,
+        }
+    }
+
+    craftRecipe Make Homemade Ketchup
+    {
+        timedAction = MixingBowl,
+        time            = 60,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Bowl] mode:destroy,
+            item 1 [Base.MortarPestle] mode:keep,
+            item 1 [Base.Vinegar2;Base.Vinegar_Jug],
+            /***********item 1 tags[Sugar]***********/
+            item 1 [2:Base.Tomato;1:CannedTomatoOpen] flags[InheritFoodAge;ItemCount],
+        }
+        outputs
+        {
+           item 1 SapphCooking.HomemadeKetchup,
+        }
+    }
+
+    craftRecipe Make Bowl of Poutine
+    {
+        timedAction = MixingBowl,
+        time            = 60,
+        category = SapphCooking,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Bowl] mode:destroy,
+            item 2 [Base.FrenchFries] flags[ItemCount],
+            item 1 tags[Cheese] flags[ItemCount],
+        }
+        outputs
+        {
+           item 1 SapphCooking.PoutineBowl,
+        }
+    }
+
+    craftRecipe Make Bowl of Shaved Ice
+    {
+        timedAction = MixingBowl,
+        time            = 60,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Bowl] mode:destroy,
+            item 3 [SapphCooking.IceCubes] flags[ItemCount],
+            item 1 tags[SharpKnife;Saw;MeatCleaver;Fork;MixingUtensil;Spoon] mode:keep flags[Prop2],
+        }
+        outputs
+        {
+           item 1 SapphCooking.BowlShavedIce,
+        }
+    }
+
+    craftRecipe Pour Sorbet in Bowl
+    {
+        timedAction = MixingBowl,
+        time            = 60,
+        category = SapphCooking,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Bowl] mode:destroy,
+            item 1 [SapphCooking.Blender_Sorbet] mode:destroy flags[ItemCount],
+        }
+        outputs
+        {
+           item 1 SapphCooking.Bowl_Sorbet,
+           item 1 SapphCooking.Blender,
+        }
+    }
+
+
+
+
+    craftRecipe Make Two-Bowl Stack
+    {
+        timedAction = PackingBox_Small,
+        time            = 20,
+        category = SapphCooking,
+        OnCreate = Recipe.onCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 2 [Base.Bowl] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.StackBowl2,
+        }
+    }
+
+    craftRecipe Make Three-Bowl Stack
+    {
+        timedAction = PackingBox_Small,
+        time            = 20,
+        category = SapphCooking,
+        OnCreate = Recipe.onCreate.SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [SapphCooking.StackBowl2] mode:destroy,
+            item 1 [Base.Bowl] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.StackBowl3,
+        }
+    }
+
+
+	craftRecipe Remove Bowl from Stack
+    {
+        timedAction = UnPackBox_Small,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [SapphCooking.StackBowl2;SapphCooking.StackBowl3] mappers[bowlStackTypes] mode:destroy,
+
+        }
+        outputs
+        {
+           item 1 mapper:bowlStackTypes,
+           item 1 Base.Bowl,
+        }
+
+	   itemMapper bowlStackTypes
+		{
+			SapphCooking.StackBowl2 = SapphCooking.StackBowl3,
+			Base.Bowl = SapphCooking.StackBowl2,
+		}
+    }
+
+    craftRecipe Make2BowlsFood
+    {
+        timedAction = MixingBowl,
+        time            = 100,
+        OnCreate = Recipe.OnCreate.SapphMake2Result,
+		ToolTip = Tooltip_Recipe_CookedPortion,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 2 [Base.Bowl] mode:destroy,
+			item 1 [SapphCooking.Saucepan_MacandCheese;SapphCooking.Saucepan_Paella;SapphCooking.SaucepanwithRisotto;SapphCooking.WokPan_CacioPepePrep;SapphCooking.Saucepan_InstantNoodles;SapphCooking.Saucepan_ArrozLeche;SapphCooking.SaucepanwithSpaguettiandMeatballs;SapphCooking.SaucepanwithCheese;SapphCooking.SaucepanwithNoodleSoup;SapphCooking.SaucepanwithMashedPotatoes;SapphCooking.SaucepanwithSpaguetti;SapphCooking.SaucepanStew;SapphCooking.WokPanwithFriedRice;SapphCooking.FryingPanwithFriedRice;SapphCooking.SaucepanwithRavioli;SapphCooking.SaucepanwithStroganoff;SapphCooking.SaucepanwithBorschtPrep;SapphCooking.SaucepanwithJapaneseCurry;SapphCooking.WokPan_Yakisoba;SapphCooking.WokPan_KungPaoChicken;SapphCooking.Saucepan_ShuiZhuYuUn;SapphCooking.SaucepanwithArborioRice;SapphCooking.SaucepanwithBrownRice] mappers[bowlType;potType] flags[InheritCondition;InheritFoodAge;IsCookedFoodItem;ItemCount],
+        }
+        outputs
+		{
+			item 2 mapper:bowlType,
+			item 1 mapper:potType,
+		}
+		itemMapper bowlType
+		{
+            SapphCooking.BowlofJapaneseCurry = SapphCooking.SaucepanwithJapaneseCurry,
+			SapphCooking.BowlofKungPaoChicken = SapphCooking.WokPan_KungPaoChicken,
+            SapphCooking.BowlofShuiZhuYu = SapphCooking.Saucepan_ShuiZhuYuUn,
+            SapphCooking.ArborioRiceBowl = SapphCooking.SaucepanwithArborioRice,
+            SapphCooking.BrownRiceBowl = SapphCooking.SaucepanwithBrownRice,
+            SapphCooking.BowlofYakisoba = SapphCooking.WokPan_Yakisoba,
+            SapphCooking.BowlofBorscht = SapphCooking.SaucepanwithBorschtPrep,
+            SapphCooking.BowlofChickenStroganoff = SapphCooking.SaucepanwithStroganoff,
+            SapphCooking.BowlofRavioli = SapphCooking.SaucepanwithRavioli,
+            SapphCooking.BowlofFriedRice = SapphCooking.FryingPanwithFriedRice,
+            SapphCooking.BowlofFriedRice = SapphCooking.WokPanwithFriedRice,
+            SapphCooking.BowlofSpaguetti = SapphCooking.SaucepanwithSpaguetti,
+            SapphCooking.BowlofMashedPotatoes = SapphCooking.SaucepanwithMashedPotatoes,
+            SapphCooking.SapphNoodleSoup = SapphCooking.SaucepanwithNoodleSoup,
+            SapphCooking.BowlofSpaguettiandMeatballs = SapphCooking.SaucepanwithSpaguettiandMeatballs,
+            SapphCooking.BowlofQueso = SapphCooking.SaucepanwithCheese,
+            SapphCooking.ArrozConLecheBowl = SapphCooking.Saucepan_ArrozLeche,
+            SapphCooking.BowlofInstantNoodles = SapphCooking.Saucepan_InstantNoodles,
+            SapphCooking.BowlofRisotto = SapphCooking.SaucepanwithRisotto,
+            SapphCooking.Bowl_Paella = SapphCooking.Saucepan_Paella,
+            SapphCooking.Bowl_MacCheese = SapphCooking.Saucepan_MacandCheese,
+            Base.StewBowl = SapphCooking.SaucepanStew,
+            Base.PastaBowl = SapphCooking.WokPan_CacioPepePrep,
+		}
+		itemMapper potType
+		{
+			SapphCooking.WokPan = SapphCooking.WokPan_KungPaoChicken,
+            SapphCooking.WokPan = SapphCooking.WokPan_Yakisoba,
+            SapphCooking.WokPan = SapphCooking.WokPanwithFriedRice,
+            SapphCooking.WokPan = SapphCooking.WokPan_CacioPepePrep,
+            Base.Saucepan = SapphCooking.SaucepanwithRisotto,
+            Base.Saucepan = SapphCooking.Saucepan_ShuiZhuYuUn,
+            Base.Saucepan = SapphCooking.SaucepanwithArborioRice,
+            Base.Saucepan = SapphCooking.SaucepanwithBrownRice, 
+            Base.Saucepan = SapphCooking.SaucepanwithJapaneseCurry,
+            Base.Saucepan = SapphCooking.SaucepanwithBorschtPrep,
+            Base.Saucepan = SapphCooking.SaucepanwithStroganoff,
+            Base.Saucepan = SapphCooking.SaucepanwithRavioli,
+            Base.Saucepan = SapphCooking.SaucepanStew,
+            Base.Saucepan = SapphCooking.SaucepanwithSpaguetti,
+            Base.Saucepan = SapphCooking.SaucepanwithMashedPotatoes,
+            Base.Saucepan = SapphCooking.SaucepanwithNoodleSoup,
+            Base.Saucepan = SapphCooking.SaucepanwithSpaguettiandMeatballs,
+            Base.Saucepan = SapphCooking.SaucepanwithCheese,
+            Base.Saucepan = SapphCooking.Saucepan_ArrozLeche,
+            Base.Saucepan = SapphCooking.Saucepan_InstantNoodles,
+            Base.Saucepan = SapphCooking.Saucepan_Paella,
+            Base.Saucepan = SapphCooking.Saucepan_MacandCheese,
+            Base.Pan = SapphCooking.FryingPanwithFriedRice,
+		}
+    }
+
+    craftRecipe Make4BowlsFood
+    {
+        timedAction = MixingBowl,
+        time            = 100,
+        OnCreate = Recipe.OnCreate.SapphDivideFour,
+		ToolTip = Tooltip_Recipe_CookedPortion,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.Bowl] mode:destroy,
+			item 1 [SapphCooking.Saucepan_MacandCheese;SapphCooking.Saucepan_Paella;SapphCooking.SaucepanwithRisotto;SapphCooking.WokPan_CacioPepePrep;SapphCooking.Saucepan_InstantNoodles;SapphCooking.Saucepan_ArrozLeche;SapphCooking.SaucepanwithSpaguettiandMeatballs;SapphCooking.SaucepanwithCheese;SapphCooking.SaucepanwithNoodleSoup;SapphCooking.SaucepanwithMashedPotatoes;SapphCooking.SaucepanwithSpaguetti;SapphCooking.SaucepanStew;SapphCooking.WokPanwithFriedRice;SapphCooking.FryingPanwithFriedRice;SapphCooking.SaucepanwithRavioli;SapphCooking.SaucepanwithStroganoff;SapphCooking.SaucepanwithBorschtPrep;SapphCooking.SaucepanwithJapaneseCurry;SapphCooking.WokPan_Yakisoba;SapphCooking.WokPan_KungPaoChicken;SapphCooking.Saucepan_ShuiZhuYuUn;SapphCooking.SaucepanwithArborioRice;SapphCooking.SaucepanwithBrownRice] mappers[bowlType;potType] flags[InheritCondition;InheritFoodAge;IsCookedFoodItem;ItemCount],
+        }
+        outputs
+		{
+			item 4 mapper:bowlType,
+			item 1 mapper:potType,
+		}
+		itemMapper bowlType
+		{
+            SapphCooking.BowlofJapaneseCurry = SapphCooking.SaucepanwithJapaneseCurry,
+			SapphCooking.BowlofKungPaoChicken = SapphCooking.WokPan_KungPaoChicken,
+            SapphCooking.BowlofShuiZhuYu = SapphCooking.Saucepan_ShuiZhuYuUn,
+            SapphCooking.ArborioRiceBowl = SapphCooking.SaucepanwithArborioRice,
+            SapphCooking.BrownRiceBowl = SapphCooking.SaucepanwithBrownRice,
+            SapphCooking.BowlofYakisoba = SapphCooking.WokPan_Yakisoba,
+            SapphCooking.BowlofBorscht = SapphCooking.SaucepanwithBorschtPrep,
+            SapphCooking.BowlofChickenStroganoff = SapphCooking.SaucepanwithStroganoff,
+            SapphCooking.BowlofRavioli = SapphCooking.SaucepanwithRavioli,
+            SapphCooking.BowlofFriedRice = SapphCooking.FryingPanwithFriedRice,
+            SapphCooking.BowlofFriedRice = SapphCooking.WokPanwithFriedRice,
+            SapphCooking.BowlofSpaguetti = SapphCooking.SaucepanwithSpaguetti,
+            SapphCooking.BowlofMashedPotatoes = SapphCooking.SaucepanwithMashedPotatoes,
+            SapphCooking.BowlofSpaguettiandMeatballs = SapphCooking.SaucepanwithSpaguettiandMeatballs,
+            SapphCooking.SapphNoodleSoup = SapphCooking.SaucepanwithNoodleSoup,
+            SapphCooking.BowlofQueso = SapphCooking.SaucepanwithCheese,
+            SapphCooking.ArrozConLecheBowl = SapphCooking.Saucepan_ArrozLeche,
+            SapphCooking.BowlofInstantNoodles = SapphCooking.Saucepan_InstantNoodles,
+            SapphCooking.BowlofRisotto = SapphCooking.SaucepanwithRisotto,
+            SapphCooking.Bowl_Paella = SapphCooking.Saucepan_Paella,
+            SapphCooking.Bowl_MacCheese = SapphCooking.Saucepan_MacandCheese,
+            Base.StewBowl = SapphCooking.SaucepanStew,
+            Base.PastaBowl = SapphCooking.WokPan_CacioPepePrep,
+            
+            
+            
+		}
+		itemMapper potType
+		{
+			SapphCooking.WokPan = SapphCooking.WokPan_KungPaoChicken,
+            SapphCooking.WokPan = SapphCooking.WokPan_Yakisoba,
+            SapphCooking.WokPan = SapphCooking.WokPanwithFriedRice,
+            SapphCooking.WokPan = SapphCooking.WokPan_CacioPepePrep,
+            Base.Saucepan = SapphCooking.Saucepan_ShuiZhuYuUn,
+            Base.Saucepan = SapphCooking.SaucepanwithArborioRice,
+            Base.Saucepan = SapphCooking.SaucepanwithBrownRice, 
+            Base.Saucepan = SapphCooking.SaucepanwithJapaneseCurry,
+            Base.Saucepan = SapphCooking.SaucepanwithBorschtPrep,
+            Base.Saucepan = SapphCooking.SaucepanwithStroganoff,
+            Base.Saucepan = SapphCooking.SaucepanwithRavioli,
+            Base.Saucepan = SapphCooking.SaucepanStew,
+            Base.Saucepan = SapphCooking.SaucepanwithSpaguetti,
+            Base.Saucepan = SapphCooking.SaucepanwithMashedPotatoes,
+            Base.Saucepan = SapphCooking.SaucepanwithNoodleSoup,
+            Base.Saucepan = SapphCooking.SaucepanwithSpaguettiandMeatballs,
+            Base.Saucepan = SapphCooking.SaucepanwithCheese,
+            Base.Saucepan = SapphCooking.Saucepan_ArrozLeche,
+            Base.Saucepan = SapphCooking.Saucepan_InstantNoodles,
+            Base.Saucepan = SapphCooking.SaucepanwithRisotto,
+            Base.Saucepan = SapphCooking.Saucepan_Paella,
+            Base.Saucepan = SapphCooking.Saucepan_MacandCheese,
+            Base.Pan = SapphCooking.FryingPanwithFriedRice,
+            
+		}
+    }
+
+    /**********************TAKEOUT BOXES***************************/
+
+    craftRecipe Put Food in Takeout Boxes1
+    {
+        timedAction = MixingBowl,
+        time            = 100,
+        OnCreate = Recipe.OnCreate.SapphMake2Result,
+		ToolTip = Tooltip_Recipe_CookedPortion,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 2 [SapphCooking.TakeoutBox] mode:destroy,
+			item 1 [SapphCooking.Saucepan_MacandCheese;SapphCooking.Saucepan_Paella;SapphCooking.SaucepanwithRisotto;Base.GriddlePanFriedVegetables;Base.PanFriedVegetables2;SapphCooking.WokPan_CacioPepePrep;Base.PotOfStew;Base.PotOfSoupRecipe;Base.PanFriedVegetables;Base.PastaPot;SapphCooking.Saucepan_InstantNoodles;SapphCooking.Saucepan_ArrozLeche;SapphCooking.SaucepanwithSpaguettiandMeatballs;SapphCooking.SaucepanwithCheese;SapphCooking.SaucepanwithNoodleSoup;SapphCooking.SaucepanwithMashedPotatoes;SapphCooking.SaucepanwithSpaguetti;SapphCooking.SaucepanStew;SapphCooking.WokPanwithFriedRice;SapphCooking.FryingPanwithFriedRice;SapphCooking.SaucepanwithRavioli;SapphCooking.SaucepanwithStroganoff;SapphCooking.SaucepanwithBorschtPrep;SapphCooking.SaucepanwithJapaneseCurry;SapphCooking.WokPan_Yakisoba;SapphCooking.WokPan_KungPaoChicken;SapphCooking.Saucepan_ShuiZhuYuUn;SapphCooking.SaucepanwithArborioRice;SapphCooking.SaucepanwithBrownRice] mappers[bowlType;potType] flags[InheritCondition;InheritFoodAge;IsCookedFoodItem;ItemCount],
+        }
+        outputs
+		{
+			item 2 mapper:bowlType,
+			item 1 mapper:potType,
+		}
+		itemMapper bowlType
+		{
+            SapphCooking.TakeoutBoxFood = Base.GriddlePanFriedVegetables,
+            SapphCooking.TakeoutBoxFood = Base.PanFriedVegetables2,
+            SapphCooking.TakeoutBoxFood = SapphCooking.SaucepanwithJapaneseCurry,
+			SapphCooking.TakeoutBoxFood = SapphCooking.WokPan_KungPaoChicken,
+            SapphCooking.TakeoutBoxFood = SapphCooking.Saucepan_ShuiZhuYuUn,
+            SapphCooking.TakeoutBoxFood = SapphCooking.SaucepanwithArborioRice,
+            SapphCooking.TakeoutBoxFood = SapphCooking.SaucepanwithBrownRice,
+            SapphCooking.TakeoutBoxFood = SapphCooking.SaucepanwithBorschtPrep,
+            SapphCooking.TakeoutBoxFood = SapphCooking.SaucepanwithStroganoff, 
+            SapphCooking.TakeoutBoxFood = SapphCooking.FryingPanwithFriedRice,
+            SapphCooking.TakeoutBoxFood = SapphCooking.WokPanwithFriedRice,
+            SapphCooking.TakeoutBoxFood = SapphCooking.Saucepan_ArrozLeche,
+            SapphCooking.TakeoutBoxFood = Base.PanFriedVegetables,
+            SapphCooking.TakeoutBoxFood = SapphCooking.SaucepanwithRisotto,
+            SapphCooking.TakeoutBoxFood = SapphCooking.Saucepan_Paella,
+            SapphCooking.TakeoutBoxFood_Soup = SapphCooking.SaucepanStew,
+            SapphCooking.TakeoutBoxFood_Soup = Base.PotOfStew,
+            SapphCooking.TakeoutBoxFood_Soup =  Base.PotOfSoupRecipe,
+            SapphCooking.TakeoutBoxFood_Noodle = SapphCooking.Saucepan_MacandCheese,
+            SapphCooking.TakeoutBoxFood_Noodle = SapphCooking.WokPan_CacioPepePrep,
+            SapphCooking.TakeoutBoxFood_Noodle = Base.PastaPot,
+            SapphCooking.TakeoutBoxFood_Noodle = SapphCooking.SaucepanwithCheese,
+            SapphCooking.TakeoutBoxFood_Noodle = SapphCooking.SaucepanwithNoodleSoup,
+            SapphCooking.TakeoutBoxFood_Noodle = SapphCooking.SaucepanwithMashedPotatoes,
+            SapphCooking.TakeoutBoxFood_Noodle = SapphCooking.SaucepanwithRavioli,
+            SapphCooking.TakeoutBoxFood_Noodle = SapphCooking.WokPan_Yakisoba,
+            SapphCooking.TakeoutBoxFood_Noodle = SapphCooking.SaucepanwithSpaguetti,
+            SapphCooking.TakeoutBoxFood_Noodle = SapphCooking.SaucepanwithSpaguettiandMeatballs,
+            SapphCooking.TakeoutBoxFood_Noodle = SapphCooking.Saucepan_InstantNoodles,
+		}
+		itemMapper potType
+		{
+			SapphCooking.WokPan = SapphCooking.WokPan_KungPaoChicken,
+            SapphCooking.WokPan = SapphCooking.WokPan_Yakisoba,
+            SapphCooking.WokPan = SapphCooking.WokPanwithFriedRice,
+            SapphCooking.WokPan = SapphCooking.WokPan_CacioPepePrep,
+            Base.Saucepan = SapphCooking.Saucepan_MacandCheese,
+            Base.Saucepan = SapphCooking.SaucepanwithRisotto,
+            Base.Saucepan = SapphCooking.Saucepan_ShuiZhuYuUn,
+            Base.Saucepan = SapphCooking.SaucepanwithArborioRice,
+            Base.Saucepan = SapphCooking.SaucepanwithBrownRice, 
+            Base.Saucepan = SapphCooking.SaucepanwithJapaneseCurry,
+            Base.Saucepan = SapphCooking.SaucepanwithBorschtPrep,
+            Base.Saucepan = SapphCooking.SaucepanwithStroganoff,
+            Base.Saucepan = SapphCooking.SaucepanwithRavioli,
+            Base.Saucepan = SapphCooking.SaucepanStew,
+            Base.Saucepan = SapphCooking.SaucepanwithSpaguetti,
+            Base.Saucepan = SapphCooking.SaucepanwithMashedPotatoes,
+            Base.Saucepan = SapphCooking.SaucepanwithNoodleSoup,
+            Base.Saucepan = SapphCooking.SaucepanwithSpaguettiandMeatballs,
+            Base.Saucepan = SapphCooking.SaucepanwithCheese,
+            Base.Saucepan = SapphCooking.Saucepan_ArrozLeche,
+            Base.Saucepan = SapphCooking.Saucepan_InstantNoodles,
+            Base.Saucepan = SapphCooking.Saucepan_Paella,
+            Base.Pot = Base.PotOfStew,
+            Base.Pot = Base.PotOfSoupRecipe,
+            Base.Pot = Base.PastaPot,
+            Base.Pan = Base.PanFriedVegetables,
+            Base.Pan = SapphCooking.FryingPanwithFriedRice,  
+            Base.Pan = Base.PanFriedVegetables2,
+            Base.GridlePan = Base.GriddlePanFriedVegetables,
+		}
+    }
+
+    craftRecipe MakeTrayofFood
+    {
+        timedAction = MixingBowl,
+        time            = 100,
+        OnCreate = Recipe.OnCreate.SapphMake2Result,
+		ToolTip = Tooltip_Recipe_CookedPortion,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [SapphCooking.MessTray],
+			item 1 [SapphCooking.Saucepan_MacandCheese;SapphCooking.Saucepan_Paella;SapphCooking.SaucepanwithRisotto;Base.GriddlePanFriedVegetables;Base.PanFriedVegetables2;SapphCooking.WokPan_CacioPepePrep;Base.PotOfStew;Base.PotOfSoupRecipe;Base.PanFriedVegetables;Base.PastaPot;SapphCooking.Saucepan_InstantNoodles;SapphCooking.Saucepan_ArrozLeche;SapphCooking.SaucepanwithSpaguettiandMeatballs;SapphCooking.SaucepanwithCheese;SapphCooking.SaucepanwithNoodleSoup;SapphCooking.SaucepanwithMashedPotatoes;SapphCooking.SaucepanwithSpaguetti;SapphCooking.SaucepanStew;SapphCooking.WokPanwithFriedRice;SapphCooking.FryingPanwithFriedRice;SapphCooking.SaucepanwithRavioli;SapphCooking.SaucepanwithStroganoff;SapphCooking.SaucepanwithBorschtPrep;SapphCooking.SaucepanwithJapaneseCurry;SapphCooking.WokPan_Yakisoba;SapphCooking.WokPan_KungPaoChicken;SapphCooking.Saucepan_ShuiZhuYuUn;SapphCooking.SaucepanwithArborioRice;SapphCooking.SaucepanwithBrownRice] mappers[bowlType;potType] flags[InheritCondition;InheritFoodAge;IsCookedFoodItem;ItemCount],
+        }
+        outputs
+		{
+			item 1 mapper:bowlType,
+			item 1 mapper:potType,
+		}
+		itemMapper bowlType
+		{
+            SapphCooking.Tray_Rice = Base.GriddlePanFriedVegetables,
+            SapphCooking.Tray_Rice = Base.PanFriedVegetables2,
+            SapphCooking.Tray_Rice = SapphCooking.SaucepanwithJapaneseCurry,
+			SapphCooking.Tray_Rice = SapphCooking.WokPan_KungPaoChicken,
+            SapphCooking.Tray_Rice = SapphCooking.Saucepan_ShuiZhuYuUn,
+            SapphCooking.Tray_Rice = SapphCooking.SaucepanwithArborioRice,
+            SapphCooking.Tray_Rice = SapphCooking.SaucepanwithBrownRice,
+            SapphCooking.Tray_Rice = SapphCooking.SaucepanwithBorschtPrep,
+            SapphCooking.Tray_Rice = SapphCooking.SaucepanwithStroganoff, 
+            SapphCooking.Tray_Rice = SapphCooking.FryingPanwithFriedRice,
+            SapphCooking.Tray_Rice = SapphCooking.WokPanwithFriedRice,
+            SapphCooking.Tray_Rice = SapphCooking.Saucepan_ArrozLeche,
+            SapphCooking.Tray_Rice = Base.PanFriedVegetables,
+            SapphCooking.Tray_Rice = SapphCooking.SaucepanwithRisotto,
+            SapphCooking.Tray_Rice = SapphCooking.Saucepan_Paella,
+            SapphCooking.Tray_Soup = SapphCooking.SaucepanStew,
+            SapphCooking.Tray_Soup = Base.PotOfStew,
+            SapphCooking.Tray_Soup =  Base.PotOfSoupRecipe,
+            SapphCooking.Tray_Pasta = SapphCooking.Saucepan_MacandCheese,
+            SapphCooking.Tray_Pasta = SapphCooking.WokPan_CacioPepePrep,
+            SapphCooking.Tray_Pasta = Base.PastaPot,
+            SapphCooking.Tray_Pasta = SapphCooking.SaucepanwithCheese,
+            SapphCooking.Tray_Pasta = SapphCooking.SaucepanwithNoodleSoup,
+            SapphCooking.Tray_Pasta = SapphCooking.SaucepanwithMashedPotatoes,
+            SapphCooking.Tray_Pasta = SapphCooking.SaucepanwithRavioli,
+            SapphCooking.Tray_Pasta = SapphCooking.WokPan_Yakisoba,
+            SapphCooking.Tray_Pasta = SapphCooking.SaucepanwithSpaguetti,
+            SapphCooking.Tray_Pasta = SapphCooking.SaucepanwithSpaguettiandMeatballs,
+            SapphCooking.Tray_Pasta = SapphCooking.Saucepan_InstantNoodles,
+		}
+		itemMapper potType
+		{
+			SapphCooking.WokPan = SapphCooking.WokPan_KungPaoChicken,
+            SapphCooking.WokPan = SapphCooking.WokPan_Yakisoba,
+            SapphCooking.WokPan = SapphCooking.WokPanwithFriedRice,
+            SapphCooking.WokPan = SapphCooking.WokPan_CacioPepePrep,
+            Base.Saucepan = SapphCooking.Saucepan_MacandCheese,
+            Base.Saucepan = SapphCooking.SaucepanwithRisotto,
+            Base.Saucepan = SapphCooking.Saucepan_ShuiZhuYuUn,
+            Base.Saucepan = SapphCooking.SaucepanwithArborioRice,
+            Base.Saucepan = SapphCooking.SaucepanwithBrownRice, 
+            Base.Saucepan = SapphCooking.SaucepanwithJapaneseCurry,
+            Base.Saucepan = SapphCooking.SaucepanwithBorschtPrep,
+            Base.Saucepan = SapphCooking.SaucepanwithStroganoff,
+            Base.Saucepan = SapphCooking.SaucepanwithRavioli,
+            Base.Saucepan = SapphCooking.SaucepanStew,
+            Base.Saucepan = SapphCooking.SaucepanwithSpaguetti,
+            Base.Saucepan = SapphCooking.SaucepanwithMashedPotatoes,
+            Base.Saucepan = SapphCooking.SaucepanwithNoodleSoup,
+            Base.Saucepan = SapphCooking.SaucepanwithSpaguettiandMeatballs,
+            Base.Saucepan = SapphCooking.SaucepanwithCheese,
+            Base.Saucepan = SapphCooking.Saucepan_ArrozLeche,
+            Base.Saucepan = SapphCooking.Saucepan_InstantNoodles,
+            Base.Saucepan = SapphCooking.Saucepan_Paella,
+            Base.Pot = Base.PotOfStew,
+            Base.Pot = Base.PotOfSoupRecipe,
+            Base.Pot = Base.PastaPot,
+            Base.Pan = Base.PanFriedVegetables,
+            Base.Pan = SapphCooking.FryingPanwithFriedRice,  
+            Base.Pan = Base.PanFriedVegetables2,
+            Base.GridlePan = Base.GriddlePanFriedVegetables,
+		}
+    }
+
+
+
+
+
+    craftRecipe MakeBowlofJello
+    {
+        timedAction = MixingBowl,
+        time            = 250,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [*],
+            -fluid 0.2 [Water],
+            item 1 [Base.Bowl],
+			item 1 [SapphCooking.Jello_Grape;SapphCooking.Jello_Lime;SapphCooking.Jello_Orange;SapphCooking.Jello_Pineapple;SapphCooking.Jello_Strawberry] mappers[bowlType] flags[InheritCondition;InheritFoodAge;ItemCount],
+        }
+        outputs
+		{
+			item 1 mapper:bowlType,
+		}
+		itemMapper bowlType
+		{
+            SapphCooking.BowlJello_Grape = SapphCooking.Jello_Grape,
+            SapphCooking.BowlJello_Lime = SapphCooking.Jello_Lime,
+            SapphCooking.BowlJello_Orange = SapphCooking.Jello_Orange,
+            SapphCooking.BowlJello_Pineapple = SapphCooking.Jello_Pineapple,
+            SapphCooking.BowlJello_Strawberry = SapphCooking.Jello_Strawberry,
+		}
+    }
+
+    craftRecipe Make Bowl of Nachos
+    {
+        timedAction = PackingBox_Small,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 5 [Base.TortillaChips] flags[ItemCount],
+            item 1 [Base.Bowl] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.BowlofNachos,
+        }
+    }
+
+    craftRecipe Make Bowl of Candy
+    {
+        timedAction = PackingBox_Small,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 5 [Base.MintCandy] flags[ItemCount],
+            item 1 [Base.Bowl] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.BowlofCandy,
+        }
+    }
+
+    craftRecipe Make Bowl of Marshmallow
+    {
+        timedAction = PackingRoastPan,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 5 [Base.Marshmallows] flags[ItemCount],
+            item 1 [Base.Bowl] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.BowlofMarshmallows,
+        }
+    }
+
+    craftRecipe Take Candy from Bowl
+    {
+        timedAction = UnPackBox_Small,
+        time            = 10,
+        category = SapphCooking,
+        CanWalk = true,
+        OnCreate = Recipe.OnCreate.SapphDivideIntoFive,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [SapphCooking.BowlofCandy] flags[ItemCount],
+        }
+       outputs
+        {
+		   item 5 Base.MintCandy,
+        }
+    }
+
+    craftRecipe Take Marshmallow from Bowl
+    {
+        timedAction = UnPackBox_Small,
+        time            = 10,
+        category = SapphCooking,
+        CanWalk = true,
+        OnCreate = Recipe.OnCreate.SapphDivideIntoFive,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [SapphCooking.BowlofMarshmallows] flags[ItemCount],
+        }
+       outputs
+        {
+		   item 5 Base.Marshmallows,
+        }
+    }
+
+    craftRecipe Make a Bowl of Spaguetti
+    {
+        timedAction = MixingBowl,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.MRE_Spaguetti] flags[ItemCount],
+            item 1 [Base.Bowl] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.BowlofSpaguetti,
+        }
+    }
+
+    craftRecipe Make Bowl of Chili
+    {
+        timedAction = MixingBowl,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 1 [Base.CannedChiliOpen] flags[ItemCount],
+            item 1 [Base.Bowl] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.BowlofChili,
+        }
+    }
+
+    craftRecipe Put Rice in Bowl of Chicken Stroganoff
+    {
+        timedAction = MixingBowl,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.BowlofChickenStroganoff] flags[ItemCount],
+            item 1 [Base.RiceBowl;SapphCooking.ArborioRiceBowl] flags[ItemCount],
+        }
+        outputs
+        {
+           item 1 SapphCooking.BowlofRiceChickenStroganoff,
+           item 1 Base.Bowl,
+        }
+    }
+
+    craftRecipe Put Rice in Bowl of Beans
+    {
+        timedAction = MixingBowl,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 1 [Base.Bowl] mode:destroy,
+            item 1 [Base.BeanBowl] flags[ItemCount],
+            item 1 [Base.RiceBowl;SapphCooking.ArborioRiceBowl] flags[ItemCount],
+        }
+        outputs
+        {
+           item 1 SapphCooking.RiceBeanBowl,
+           item 1 Base.Bowl,
+        }
+    }
+
+    craftRecipe Make a Bowl of Beef Stew
+    {
+        timedAction = MixingBowl,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.MRE_BeefStew] flags[ItemCount],
+            item 1 [Base.Bowl] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.BowlofBeefStew,
+        }
+    }
+
+    craftRecipe Make a Bowl of Beef Stew
+    {
+        timedAction = MixingBowl,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.MRE_BeefStew] flags[ItemCount],
+            item 1 [Base.Bowl] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.BowlofBeefStew,
+        }
+    }
+
+
+    craftRecipe Make Sour Cream
+    {
+        timedAction = MixingBowl,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Vinegar2;Base.Vinegar_Jug],
+            item 1 [Base.Bowl] mode:destroy,
+            item 1 [*],
+            -fluid 0.2 [CowMilk;SheepMilk],
+        }
+        outputs
+        {
+           item 1 SapphCooking.HomemadeSourCream,
+        }
+    }
+
+
+    
+
+    craftRecipe Put Meatballs in Bowl of Mashed Potatoes
+    {
+        timedAction = MixingBowl,
+        time            = 100,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.Meatballs] flags[ItemCount],
+            item 1 [SapphCooking.BowlofMashedPotatoes] mode:destroy flags[ItemCount],
+        }
+        outputs
+        {
+           item 1 SapphCooking.BowlofMashedPotatoes_Meatballs,
+        }
+    }
+
+
+
+
+
+    /****************** BUCKETS - not bowls but eh- could be bowls... right?*****************/
+    craftRecipe Make Bucket of Fried Bird
+    {
+        timedAction = PackingRoastPan,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 1 [Base.Bucket],
+            item 5 [SapphCooking.FriedBirdMeat] flags[ItemCount],
+        }
+        outputs
+        {
+           item 1 SapphCooking.BucketofFriedBird,
+        }
+    }
+
+    craftRecipe Take Fried Chicken from Bucket
+    {
+        timedAction = PackingRoastPan,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphDivideIntoFive,
+        inputs
+        {
+            item 1 [SapphCooking.BucketofFriedBird] flags[ItemCount],
+
+        }
+        outputs
+        {
+            item 5 SapphCooking.FriedBirdMeat,
+        }
+    }
+
+
+    craftRecipe Make Bucket of Popcorn
+    {
+        timedAction = PackingBox_Small,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphCreatePrep,
+        inputs
+        {
+            item 1 [Base.Bucket],
+            item 5 [SapphCooking.HomemadePopcorn;SapphCooking.CandyPopcorn] mappers[popcornType] flags[ItemCount],
+        }
+        outputs
+        {
+           item 1 mapper:popcornType,
+        }
+        itemMapper popcornType
+        {
+            SapphCooking.BucketofPopcorn = SapphCooking.CandyPopcorn,
+            SapphCooking.BucketofCandyPopcorn = SapphCooking.HomemadePopcorn,
+        }
+    }
+
+    craftRecipe Take Popcorn from Bucket
+    {
+        timedAction = PackingBox_Small,
+        time            = 30,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = Recipe.OnCreate.SapphDivideIntoFive,
+        inputs
+        {
+            item 1 [SapphCooking.BucketofPopcorn;SapphCooking.BucketofCandyPopcorn] mappers[popcornType] flags[ItemCount],
+
+        }
+        outputs
+        {
+            item 5 SapphCooking.HomemadePopcorn,
+            item 1 Base.Bucket,
+        }
+       itemMapper popcornType
+        {
+            SapphCooking.CandyPopcorn = SapphCooking.BucketofPopcorn,
+            SapphCooking.HomemadePopcorn = SapphCooking.BucketofCandyPopcorn,
+        }
+    }
+    /**************************plates******************************/
+
+    craftRecipe Make Plate of Bacon and Eggs
+    {
+        timedAction = MixingBowl,
+        time            = 100,
+        category = SapphCooking,
+        OnCreate = Recipe.OnCreate.FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Plate;Base.ClayPlate] mode:destroy mappers[bowlType],
+			item 1 [SapphCooking.FryingPan_BaconandEggs;SapphCooking.Wokpan_BaconandEggs]  mappers[panType] flags[InheritCondition;InheritFoodAge;ItemCount],
+        }
+        outputs
+		{
+			item 1 mapper:bowlType,
+		}
+		itemMapper bowlType
+		{
+            SapphCooking.Plate_BaconandEggs = Base.Plate,
+            SapphCooking.PlateOrange_BaconandEggs = Base.ClayPlate, /***using the orange, as it already has translations***/
+
+
+            /*********apparently these plates have been removed from the game************/
+            /******SapphCooking.PlateFancy_BaconandEggs = Base.PlateFancy,
+            SapphCooking.PlateOrange_BaconandEggs = Base.PlateOrange,
+            SapphCooking.PlateBlue_BaconandEggs = Base.PlateBlue,   ***********/
+		}
+        itemMapper panType
+        {
+            Base.Pan = SapphCooking.FryingPan_BaconandEggs,
+            SapphCooking.WokPan = SapphCooking.Wokpan_BaconandEggs,
+        }
+    }
+
+    craftRecipe Make Plate of Huevos Rancheros
+    {
+        timedAction = MixingBowl,
+        time            = 100,
+        category = SapphCooking,
+        OnCreate = Recipe.OnCreate.FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Plate;Base.ClayPlate] mode:destroy mappers[bowlType],
+			item 2 [SapphCooking.FriedEgg] flags[InheritCondition;InheritFoodAge;ItemCount],
+            item 4 [Base.CannedTomatoOpen;SapphCooking.Tomato_Sachet;Base.TomatoPaste;Base.Tomato;SapphCooking.SlicedTomato;SapphCooking.DicedTomato;Base.Ketchup;SapphCooking.HomemadeSauce_Evolved] flags[InheritFoodAge],
+        }
+        outputs
+		{
+			item 1 mapper:bowlType,
+		}
+		itemMapper bowlType
+		{
+            SapphCooking.Plate_HuevosRancheros = Base.Plate,
+            SapphCooking.PlateOrange_HuevosRancheros = Base.ClayPlate,
+            /*********apparently these plates have been removed from the game************/
+            /*****SapphCooking.PlateFancy_HuevosRancheros = Base.PlateFancy,
+            SapphCooking.PlateOrange_HuevosRancheros = Base.PlateOrange,
+            SapphCooking.PlateBlue_HuevosRancheros = Base.PlateBlue,   *******/
+		}
+    }
+
+}
+	

@@ -1,0 +1,109 @@
+module Base
+{
+	template vehicle FRHubcap
+	{
+		part FRHubcapFrontLeft
+		{
+			area = TireFrontLeft,
+			
+			table install
+			{
+				requireInstalled = TireFrontLeft,
+			}
+		}
+		
+		part FRHubcapFrontRight
+		{
+			area = TireFrontRight,
+			
+			table install
+			{
+				requireInstalled = TireFrontRight,
+			}
+		}
+		
+		part FRHubcapRearLeft
+		{
+			area = TireRearLeft,
+			
+			table install
+			{
+				requireInstalled = TireRearLeft,
+			}
+		}
+		
+		part FRHubcapRearRight
+		{
+			area = TireRearRight,
+			
+			table install
+			{
+				requireInstalled = TireRearRight,
+			}
+		}
+	
+		part FRHubcap*
+		{
+			category = tire,
+			itemType = Base.FR_Hubcap_A;Base.FR_Hubcap_B;Base.FR_Hubcap_C;Base.FR_Hubcap_D;Base.FR_CA_Hubcap_A;Base.FR_CH_Hubcap_A;Base.FR_DA_Hubcap_A;Base.FR_FO_Hubcap_A;Base.FR_Hubcap_Modern_A;Base.FR_Hubcap_Modern_B;Base.FR_Hubcap_Modern_B_Special;Base.FR_Hubcap_Modern_C;Base.FR_Hubcap_Modern_C_Special;Base.FR_Hubcap_Modern_D;Base.FR_Hubcap_Mustang_Special;Base.FR_Hubcap_Police_A;Base.FR_Hubcap_Trans_Special;Base.FR_Hubcap_Bandit_Special,
+			specificItem = false,
+			mechanicRequireKey = false,
+			
+			table FRPartInfo
+			{
+				noPartsChance = 20,
+				allPartsChance = 30,
+				partChanceYearMulti = 1.1,
+				selectMakeType = TRUE,
+				selectMakeChance = 100,
+				selectGenericType = TRUE,
+				selectGenericChance = 20,
+				excludeItemType = Special,
+			}
+			
+            table install
+            {
+				time = 200,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualHubcap,
+            }
+            table uninstall
+            {
+				time = 200,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.FR_Default,
+				complete = Vehicles.UninstallComplete.FR_VisualHubcap,
+            }
+
+			lua
+            {
+                create = Vehicles.Create.FR_VisualHubcap,
+				init = Vehicles.Init.FR_VisualHubcap,
+				update = Vehicles.Update.FR_VisualHubcap,
+            }
+		}
+	}
+	template vehicle FRCenterCap
+	{
+		template = FRHubcap,
+		
+		part FRHubcap*
+		{
+			category = tire,
+			itemType = Base.FR_Cap_A;Base.FR_Cap_B;Base.FR_Cap_C,
+			specificItem = false,
+			mechanicRequireKey = false,
+			
+			table FRPartInfo
+			{
+				partChanceYearMulti = 1.1,
+				selectMakeType = FALSE,
+				selectMakeChance = 100,
+				selectGenericType = TRUE,
+				selectGenericChance = 100,
+				excludeItemType = Special,
+			}
+		}
+	}
+}

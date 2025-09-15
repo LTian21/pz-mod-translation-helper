@@ -1,0 +1,47 @@
+module Base
+{
+	template vehicle FRFuelTank
+	{
+		part FRFuelTank
+		{
+			area = FuelStorage,
+			category = gastank,
+			itemType = Base.FRNormalFuelStorageTank,
+			specificItem = false,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline Storage,
+				conditionAffectsCapacity = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+			}
+		}
+	}
+	
+	template vehicle FRFuelTankTrailer
+	{
+		template = FRFuelTank,
+		
+		part GasTank
+		{
+			area = FuelStorage,
+			category = nodisplay,
+			container
+			{
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType =,
+				conditionAffectsCapacity = true,
+			}
+			lua
+			{
+			}
+		}
+	}
+}
+
+

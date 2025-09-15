@@ -1,0 +1,354 @@
+module Base
+{
+	model 91fordRangerFrontBumper0
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 91fordRangerFrontBumperA
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 91fordRangerFrontBullbarA
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_bullbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 91fordRangerRearBumper0
+	{
+		mesh = vehicles/Vehicles_91fordRanger_Body|91ranger_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle RNG91BumpersXC
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 91fordRangerFrontBumper0,
+				}
+
+            model FrontBumperA
+				{
+                		file = 91fordRangerFrontBumperA,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 91fordRangerFrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91fordRangerBumperFront0;Base.91fordRangerBumperFrontA;Base.91fordRangerBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RNG91.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = RNG91.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = RNG91.Create.BumperFront,
+					init = RNG91.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 91fordRangerRearBumper0,
+                        offset = 0.0000 0.0000 0.3062,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91fordRangerBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RNG91.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = RNG91.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = RNG91.Create.BumperRear,
+					init = RNG91.Init.BumperRear,
+					}
+		}
+	}
+
+    template vehicle RNG91BumpersXClong
+	{
+        template! = RNG91BumpersXC,
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                	file = 91fordRangerRearBumper0,
+                    offset = 0.0000 0.0000 0.0000,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+            }
+    }
+
+    template vehicle RNG91BumpersSC
+	{
+        template! = RNG91BumpersXC,
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                	file = 91fordRangerRearBumper0,
+                    offset = 0.0000 0.0000 0.7231,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+            }
+    }
+
+    template vehicle RNG91BumpersSClong
+	{
+        template! = RNG91BumpersXC,
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                	file = 91fordRangerRearBumper0,
+                    offset = 0.0000 0.0000 0.4169,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+            }
+    }
+
+    template vehicle RNG91BumpersPD
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 91fordRangerFrontBumper0,
+				}
+
+            model FrontBumperA
+				{
+                		file = 91fordRangerFrontBumperA,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 91fordRangerFrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91fordRangerBumperFront0;Base.91fordRangerBumperFrontA;Base.91fordRangerBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RNG91.InstallComplete.BumperFrontPD,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = RNG91.UninstallComplete.BumperFrontPD,
+            		}
+
+            		lua
+            		{
+					create = RNG91.Create.BumperFrontPD,
+					init = RNG91.Init.BumperFrontPD,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 91fordRangerRearBumper0,
+                        offset = 0.0000 0.0000 0.3062,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91fordRangerBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RNG91.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = RNG91.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = RNG91.Create.BumperRear,
+					init = RNG91.Init.BumperRear,
+					}
+		}
+	}
+}

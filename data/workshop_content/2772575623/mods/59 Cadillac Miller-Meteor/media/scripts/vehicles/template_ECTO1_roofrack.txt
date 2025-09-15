@@ -1,0 +1,82 @@
+module Base
+{
+
+	model ECTO1roofrack1
+	{
+		mesh = vehicles/Vehicles_ECTO1_Body|ECTO1_roofrack,
+		texture = Vehicles/Vehicles_ECTO1_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle ECTO1RoofrackCompartment
+	{
+		part ECTO1Roofrack
+		{
+
+			model Roofrack1
+				{
+                		file = ECTO1roofrack1,
+				}
+
+			category = bodywork,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.ECTO1Roofrack1_Item,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = ECTO1.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Wrench,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 1500,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+                    complete = ECTO1.UninstallComplete.Roofrack,
+                    requireUninstalled = ECTO1Equipment,
+            		}
+
+            		lua
+            		{
+                    create = ECTO1.Create.Roofrack,
+                    init = ECTO1.Init.Roofrack,
+                    }
+		}
+	}
+}

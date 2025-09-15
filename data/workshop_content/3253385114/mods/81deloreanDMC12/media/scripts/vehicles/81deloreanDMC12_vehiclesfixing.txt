@@ -1,0 +1,103 @@
+module Base
+{
+	recipe Repair Tire
+    	{
+		81deloreanDMC12Tire3,
+		TireRepairTools,
+		TireRepairRubberSolution,
+		TireRepairStrips,
+
+		NoBrokenItems:false,
+		Result:TireRepairTools,
+		Time:250.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+	fixing Fix DMC12 Seat
+	{
+	   Require : 81deloreanDMC12SeatFront3,
+	   ConditionModifier : 0.5,
+
+       Fixer : DuctTape=2;Mechanics=1,
+	}
+	
+	fixing Fix DMC12 Trunk Welding
+	{
+	   Require : 81deloreanDMC12Trunk3,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=2,
+	}
+
+	fixing Fix DMC12 Hood Welding
+	{
+	   Require : 81deloreanDMC12EngineDoor3,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+	}
+
+   fixing Fix DMC12 Hood
+	{
+	   Require : 81deloreanDMC12EngineDoor3,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix DMC12 Lid Welding
+    {
+       Require : 81deloreanDMC12TrunkDoor3,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+    }
+
+   fixing Fix DMC12 Lid
+	{
+      Require : 81deloreanDMC12TrunkDoor3,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix DMC12 Door Welding
+	{
+	   Require : 81deloreanDMC12FrontDoor3,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=3,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=3,
+	}
+
+	fixing Fix DMC12 Armor Welding
+    {
+       Require : 81deloreanDMC12WindshieldArmor;81deloreanDMC12FrontWindowArmor;81deloreanDMC12RearWindowArmor;81deloreanDMC12WindshieldRearArmor;81deloreanDMC12BumperFrontA;81deloreanDMC12Bullbar,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 0.75,
+
+       Fixer : SheetMetal; MetalWelding=4;Mechanics=4,
+       Fixer : SmallSheetMetal=2; MetalWelding=4;Mechanics=4,
+    }
+
+    fixing Fix DMC12 Plastic Welding
+    {
+       Require : 81deloreanDMC12RearCover;81deloreanDMC12BumperFront;81deloreanDMC12BumperRear,
+       GlobalItem : PlasticWeldingGun=250,
+       ConditionModifier : 0.85,
+
+       Fixer : PlasticWeldingStaples100Pack; Mechanics=4,
+    }
+
+}

@@ -1,0 +1,30 @@
+module TrustyFireAxe
+{
+
+    craftRecipe Assemble Trusty Fire Axe
+    {
+        time        = 180,
+        category = Assembly,
+        tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:1,
+        timedAction = ChoppingBlock_Hammer,
+        xpAward = Maintenance:1,
+        inputs
+        {
+            item 1 tags[Hammer;ClubHammer;Mallet] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull],
+            item 1 [TrustyFireAxe.TrustyAxeHead] flags[IsHeadPart;InheritSharpness]  mappers[ThingMapper],
+            item 1 [TrustyFireAxe.TrustyLongHandle] flags[Prop2;InheritCondition],
+        }
+        outputs
+        {
+            item 1 mapper:ThingMapper,
+        }
+        itemMapper ThingMapper
+        {
+            TrustyFireAxe.Trusty_Firefighter_Axe = TrustyFireAxe.TrustyAxeHead,
+            TrustyFireAxe.TrustyLongHandle = TrustyFireAxe.Trusty_Firefighter_Axe,
+            default = TrustyFireAxe.Trusty_Firefighter_Axe,
+        }
+    }
+}

@@ -1,0 +1,70 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_3TileRedWindowGarageDoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= 3 Tile Red Window Garage Door,
+			Icon		= walls_garage_02_37,
+		}
+	}
+
+    entity 3TileRedWindowGarageDoor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_3TileRedWindowGarageDoor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			DontNeedFrame	= true,
+			breakSound      = BreakDoor,
+		    OnCreate = BuildablesExpansion.RecipeCode.garageDoors.OnCreate,
+			
+            face W
+            {
+                layer
+                {
+                    row = walls_garage_02_34,
+                    row = walls_garage_02_33,
+                    row = walls_garage_02_32,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_garage_02_35 walls_garage_02_36 walls_garage_02_37,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 450,
+            needToBeLearn = true,
+            category      = Doors_Garage,
+            SkillRequired = MetalWelding:8,
+            xpAward       = MetalWelding:15,
+            ToolTip       = Tooltip_craft_metalDoorDesc,
+            inputs
+            {
+                item 10 [Base.BlowTorch] flags[Prop1],
+                item 10 [Base.SheetMetal],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 10 [Base.ScrapMetal],
+                item 3 [Base.GlassPanel],
+                item 1 [Base.Doorknob],
+                item 4 [Base.Hinge],
+                item 5 [Base.WeldingRods],
+            }
+        }
+    }
+}

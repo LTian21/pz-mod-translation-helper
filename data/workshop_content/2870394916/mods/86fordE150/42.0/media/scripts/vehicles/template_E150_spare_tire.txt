@@ -1,0 +1,98 @@
+module Base
+{
+	template vehicle E150SpareTires
+		{
+		part DAMNSpareTire
+        	{
+
+			model E150SpareTire
+				{
+                		file = E150Wheel,
+                        offset = -0.7524 0.3556 -1.8444,
+				}
+
+            model E150SpareTire2
+                {
+                    file = E150Wheel1L,
+                    offset = -0.7524 0.3556 -1.8444,
+                }
+
+			area = TruckBed,
+			category = Other,
+			specificItem = false,
+			itemType = Base.E150Tire2;damnCraft.SmallTire1,
+			mechanicRequireKey = false,
+            durability = 2,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 350,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = E150.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 350,
+                    skills = Mechanics:4,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = E150.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+                        init = E150.Init.SpareTire,
+			            create = E150.Create.SpareTire,
+			        }
+		}
+	}
+
+    template vehicle E150SpareTiresLong
+	{
+        template! = E150SpareTires,
+
+		part DAMNSpareTire
+        	{
+
+			model E150SpareTire
+				{
+                		file = E150Wheel,
+                        offset = -0.7524 0.3556 -2.2170,
+				}
+
+            model E150SpareTire2
+                {
+                    file = E150Wheel1L,
+                    offset = -0.7524 0.3556 -2.2170,
+                }
+            }
+    }
+
+		
+}

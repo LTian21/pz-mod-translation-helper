@@ -1,0 +1,101 @@
+module Base
+{
+	recipe Repair 91 Geo Metro Tire
+    	{
+		91geoMetroTire1,
+		TireRepairTools,
+		TireRepairRubberSolution,
+		TireRepairStrips,
+
+		NoBrokenItems:false,
+		Result:TireRepairTools,
+		Time:250.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+	fixing Fix 91 Geo Metro Seat
+	{
+	   Require : 91geoMetroSeatFront1;91geoMetroSeatRear1,
+	   ConditionModifier : 0.5,
+
+       Fixer : DuctTape=2;Mechanics=1,
+	}
+	
+	fixing Fix 91 Geo Metro Trunk Welding
+	{
+	   Require : 91geoMetroTrunk1,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=2,
+	}
+
+	fixing Fix 91 Geo Metro Hood Welding
+	{
+	   Require : 91geoMetroEngineDoor1,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+	}
+
+   fixing Fix 91 Geo Metro Hood
+	{
+	   Require : 91geoMetroEngineDoor1,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix 91 Geo Metro Lid Welding
+    {
+       Require : 91geoMetroTrunkDoor1,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+    }
+
+   fixing Fix 91 Geo Metro Lid
+	{
+      Require : 91geoMetroTrunkDoor1,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix 91 Geo Metro Door Welding
+	{
+	   Require : 91geoMetroFrontDoor1,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=3,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=3,
+	}
+
+	fixing Fix 91 Geo Metro Armor
+    {
+       Require : 91geoMetroWindshieldArmor;91geoMetroFrontWindowArmor;91geoMetroRearWindowArmor;91geoMetroWindshieldRearArmor;91geoMetroReinforcedBumperFront1,
+       ConditionModifier : 0.5,
+
+       Fixer : DuctTape=2;Mechanics=1,
+    }
+
+   fixing Fix 91 Geo Metro Plastic Welding
+    {
+       Require : 91geoMetroBumperFront0;91geoMetroBumperRear0,
+       GlobalItem : PlasticWeldingGun=250,
+       ConditionModifier : 0.85,
+
+       Fixer : PlasticWeldingStaples100Pack; Mechanics=4,
+    }
+
+}

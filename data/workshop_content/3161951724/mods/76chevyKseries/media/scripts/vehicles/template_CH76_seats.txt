@@ -1,0 +1,254 @@
+module Base
+{
+
+	model 76chevyKseriesSeatfl
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_seat_fl,
+		texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 76chevyKseriesSeatfr
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_seat_fl,
+		texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+    model 76chevyKseriesSeatrl
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_seat_rl,
+		texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 76chevyKseriesSeatrr
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_seat_rl,
+		texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+	model 76chevyKseriesSeatflRed
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_seat_fl_red,
+		texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 76chevyKseriesSeatfrRed
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_seat_fl_red,
+		texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	
+	template vehicle CH76Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 76chevyKseriesSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 76chevyKseriesSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.76chevyKseriesSeatFront,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+    template vehicle CH76SeatsK30
+	{
+        template! = CH76Seats,
+
+		part SeatRearLeft
+		{
+			
+			model SeatRL
+			{
+				file = 76chevyKseriesSeatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 76chevyKseriesSeatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.76chevyKseriesSeatRear,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+	template vehicle CH76SeatsRed
+	{
+		template! = CH76Seats,
+
+		part SeatFrontLeft
+		{
+			model SeatFL
+			{
+				file = 76chevyKseriesSeatflRed,
+			}
+			
+		}
+
+		part SeatFrontRight
+		{
+			model seatFR
+			{
+				file = 76chevyKseriesSeatfrRed,
+			}
+		}
+	}
+}
+

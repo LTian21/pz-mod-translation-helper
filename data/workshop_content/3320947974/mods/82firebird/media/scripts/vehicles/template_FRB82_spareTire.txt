@@ -1,0 +1,40 @@
+module Base
+{
+	template vehicle FRB82SpareTires
+	{
+		part FRB82SpareTire
+        	{
+			category = tire,
+			area = TruckBed,
+			itemType = Base.82firebirdTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				}
+		}
+	}
+}

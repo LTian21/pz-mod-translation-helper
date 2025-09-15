@@ -1,0 +1,49 @@
+module Base
+{
+
+
+	/************************Sawed-off Firearms************************/
+	craftRecipe Saw Off Rifle
+	{
+		timedAction = SawOffShotgun,
+		Time = 200,
+		OnCreate = onSawnOff_OnCreate,
+		ToolTip = Tooltip_Recipe_NeedSawMetal,
+		Tags = InHandCraft,
+		category = Weaponry,
+		inputs
+ 		{
+ 			item 1 tags[MetalSaw;SmallSaw] mode:keep flags[Prop1;MayDegrade],
+ 			item 1 [HuntingRifle] flags[Prop2;InheritCondition;InheritAmmunition],
+ 		}
+ 		outputs
+ 		{
+ 			item 1 Base.HuntingRifle_Sawn,
+ 		}
+	}
+
+	craftRecipe firearmsSawOffShotgun
+	{
+    timedAction = SawOffShotgun,
+		Time = 200,
+		OnCreate = Recipe.OnCreate.ShotgunSawnoff,
+		ToolTip = Tooltip_Recipe_NeedSawMetal,
+		Tags = InHandCraft,
+    category = Weaponry,
+		inputs
+		{
+			item 1 tags[MetalSaw;SmallSaw] mode:keep flags[Prop1;MayDegrade],
+			item 1 [Base.M37;Base.Remington870Wood] flags[Prop2;InheritCondition;InheritAmmunition] mappers[shotgunType],
+		}
+		outputs
+		{
+			item 1 mapper:shotgunType,
+		}
+		itemMapper shotgunType
+		{
+			Base.M37Sawnoff = Base.M37,
+			Base.Remington870Sawnoff = Base.Remington870Wood,
+		}
+	}
+
+}

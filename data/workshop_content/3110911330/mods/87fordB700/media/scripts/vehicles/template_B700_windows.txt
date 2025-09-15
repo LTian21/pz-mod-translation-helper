@@ -1,0 +1,201 @@
+module Base
+{
+
+	model 87fordB700Windowfl
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 87fordB700Windowfr
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 87fordB700Windowrl
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_window_rl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 87fordB700Windowrr
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 87fordB700Windows
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_windows,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle B700Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 87fordB700Windowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.87fordB700SideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = B700FrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 87fordB700Windowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorMR,
+			area = SeatMiddleRight,
+			itemType = Base.87fordB700SideWindow,
+			table uninstall
+				{
+				requireUninstalled = B700FrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 87fordB700Windowrl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRL,
+			area = SeatRearLeft,
+			itemType = Base.87fordB700SideWindow,
+			table uninstall
+				{
+				requireUninstalled = B700RearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 87fordB700Windowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRR,
+			area = SeatRearRight,
+			itemType = Base.87fordB700SideWindow,
+			table uninstall
+				{
+				requireUninstalled = B700RearRightArmor,
+				}
+		}
+
+		part Windows
+		{
+			model windowsXP
+			{
+				file = 87fordB700Windows,
+			}
+
+			area = StorageRight,
+			itemType = Base.87fordB700SideWindows,
+			table uninstall
+				{
+				requireUninstalled = B700SideLeftArmor;B700SideRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}
+

@@ -1,0 +1,401 @@
+module Base
+{
+	model 93fordTaurusBumperFront0
+	{
+		mesh = vehicles/Vehicles_93fordTaurus_Body|taurus_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93fordTaurusBumperFrontA
+	{
+		mesh = vehicles/Vehicles_93fordTaurus_Body|taurus_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93fordTaurusSHOBumperFront0
+	{
+		mesh = vehicles/Vehicles_93fordTaurus_Body|taurusSHO_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93fordTaurusSHOBumperFrontA
+	{
+		mesh = vehicles/Vehicles_93fordTaurus_Body|taurusSHO_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93fordTaurusBullbarFrontA
+	{
+		mesh = vehicles/Vehicles_93fordTaurus_Body|taurus_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93fordTaurusSedanBumperRear0
+	{
+		mesh = vehicles/Vehicles_93fordTaurus_Body|taurusSedan_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93fordTaurusSHOBumperRear0
+	{
+		mesh = vehicles/Vehicles_93fordTaurus_Body|taurusSHO_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93fordTaurusWagonBumperRear0
+	{
+		mesh = vehicles/Vehicles_93fordTaurus_Body|taurusWagon_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle TAU93BumperFrontStock
+		{
+		part DAMNBumperFront
+        	{
+
+			model BumperFront0
+				{
+                		file = 93fordTaurusBumperFront0,
+				}
+
+			model BumperFrontA
+				{
+                		file = 93fordTaurusBumperFrontA,
+				}
+
+			model BullbarFrontA
+				{
+                		file = 93fordTaurusBullbarFrontA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93fordTaurusBumperFront1;Base.93fordTaurusBumperFrontA;Base.93fordTaurusBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.BumperFront,
+					init = TAU93.Init.BumperFront,
+					}
+			}
+		}
+
+	template vehicle TAU93BumpersSedan
+		{
+		template! = TAU93BumperFrontStock,
+
+		part DAMNBumperRear
+        	{
+
+			model BumperRearSedan0
+				{
+                		file = 93fordTaurusSedanBumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				itemType = Base.93fordTaurusSedanBumperRear,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.BumperRearSedan,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.BumperRearSedan,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.BumperRearSedan,
+					init = TAU93.Init.BumperRearSedan,
+					}
+		}
+	}
+
+	template vehicle TAU93BumpersWagon
+		{
+		template! = TAU93BumperFrontStock,
+
+		part DAMNBumperRear
+        	{
+
+			model BumperRearWagon0
+				{
+                		file = 93fordTaurusWagonBumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				itemType = Base.93fordTaurusWagonBumperRear,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.BumperRearWagon,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.BumperRearWagon,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.BumperRearWagon,
+					init = TAU93.Init.BumperRearWagon,
+					}
+		}
+	}
+
+	template vehicle TAU93BumpersSHO
+		{
+		part DAMNBumperFront
+        	{
+
+			model BumperFrontSHO0
+				{
+                		file = 93fordTaurusSHOBumperFront0,
+				}
+
+			model BumperFrontSHOA
+				{
+                		file = 93fordTaurusSHOBumperFrontA,
+				}
+
+			model BullbarFrontSHOA
+				{
+                		file = 93fordTaurusBullbarFrontA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93fordTaurusSHOBumperFront1;Base.93fordTaurusSHOBumperFrontA;Base.93fordTaurusBullbarFrontA,,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.BumperFrontSHO,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.BumperFrontSHO,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.BumperFrontSHO,
+					init = TAU93.Init.BumperFrontSHO,
+					}
+			}
+
+		part DAMNBumperRear
+        	{
+
+			model BumperRearSHO0
+				{
+                		file = 93fordTaurusSHOBumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				itemType = Base.93fordTaurusSHOBumperRear,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.BumperRearSHO,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.BumperRearSHO,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.BumperRearSHO,
+					init = TAU93.Init.BumperRearSHO,
+					}
+		}
+	}
+}

@@ -1,0 +1,342 @@
+module Base
+{
+	model fhqHQSandmanUte
+	{
+		mesh = vehicles/vehicle_fhqHQUte|fhqHQUte,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.37,
+	}
+	model fhqHQSandmanUteRMirror
+	{
+		mesh = vehicles/vehicle_fhqHQUte|fhqHQSandmanMirrorR,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.37,
+	}
+	model fhqHQSandmanUteLMirror
+	{
+		mesh = vehicles/vehicle_fhqHQUte|fhqHQSandmanMirrorL,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.37,
+	}
+	model fhqHQSandmanUteExhaust
+	{
+		mesh = vehicles/vehicle_fhqHQUte|fhqHQSandmanExhaust,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.37,
+	}
+	vehicle fhqHQSandmanUte
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 0.8,
+		engineRepairLevel = 5,
+		playerDamageProtection = 0.8,
+		engineRPMType = firebird,
+
+		model
+		{
+			file = fhqHQSandmanUte,
+			scale = 1.8200,
+			offset = 0.0000 0.1099 -0.0055,
+		}
+
+		spawnOffsetY = 0.12999995,
+
+		skin
+		{
+			texture = Vehicles/vehicle_fhqHQSandmanUte_shell,
+		}
+
+		skin
+		{
+			texture = Vehicles/vehicle_fhqHQSandmanUteStripes_shell,
+		}
+
+		textureMask = Vehicles/vehicle_fhqHQUte_mask,
+		textureLights = Vehicles/vehicle_fhqHQSandman_Lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/Veh_Damage1,
+		textureDamage2Shell = Vehicles/Veh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		sound
+		{
+			engine = VehicleEngineSportsCar,
+			engineStart = VehicleEngineSportsCar,
+			engineTurnOff = VehicleEngineSportsCar,
+			horn = VehicleHornSportsCar,
+			ignitionFail = VehicleIgnitionFailSportsCar,
+		}
+
+		extents = 0.8681 0.6593 2.2637,
+		mass = 935,
+		physicsChassisShape = 0.8681 0.6593 2.2637,
+		centerOfMassOffset = 0.0000 0.3462 -0.0110,
+		shadowExtents = 0.9116 2.4176,
+		shadowOffset = 0.0000 -0.0440,
+		engineForce = 4750,
+		engineLoudness = 80,
+		engineQuality = 60,
+		maxSpeed = 100f,
+		gearRatioCount = 4,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 0.7f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 30,
+		suspensionCompression = 3.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 15,
+		suspensionRestLength = 0.2f,
+		wheelFriction = 1.8f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.3626 -0.1044 0.7363,
+			radius = 0.14f,
+			width = 0.29f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.3626 -0.1044 0.7363,
+			radius = 0.14f,
+			width = 0.29f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.3626 -0.1044 -0.6154,
+			radius = 0.14f,
+			width = 0.29f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.3626 -0.1044 -0.6154,
+			radius = 0.14f,
+			width = 0.29f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.2418 0.0440 0.0604,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.6099 -0.2692 0.1978,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.2418 0.0440 0.0604,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.6099 -0.2692 0.1978,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 1.3407 0.8681 0.4396,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -0.8407 1.4176 1.1978,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 0.6923 0.2088 0.5165 0.5165,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -0.6923 0.2088 0.5165 0.5165,
+		}
+
+		area GasTank
+		{
+			xywh = -0.6868 -0.2033 0.5055 0.5055,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.6923 0.7253 0.5165 0.5165,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.6923 0.7253 0.5165 0.5165,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 0.6923 -0.6264 0.5165 0.5165,
+		}
+
+		area TireRearRight
+		{
+			xywh = -0.6923 -0.6264 0.5165 0.5165,
+		}
+
+		template = Trunk/part/TruckBedOpen,
+
+		part TruckBedOpen
+		{
+			container
+			{
+				capacity = 100,
+			}
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+		template = GloveBox,
+		template = GasTank,
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			model Default
+			{
+				file = fhqHQSandmanUteExhaust,
+			}
+		}
+
+		template = EngineDoor,
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+
+		part WindshieldRear
+		{
+			requireInstalled = TrunkDoor,
+		}
+
+		template = Door/part/DoorFrontLeft,
+
+		part DoorFrontLeft
+		{
+			model Default
+			{
+				file = fhqHQSandmanUteLMirror,
+			}
+		}
+
+		template = Door/part/DoorFrontRight,
+
+		part DoorFrontRight
+		{
+			model Default
+			{
+				file = fhqHQSandmanUteRMirror,
+			}
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZMusSptWhlLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZMusSptWhlRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZMusSptWhlLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqMZMusSptWhlRight,
+			}
+		}
+
+		template = Brake,
+		template = Suspension,
+		template = Radio,
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 0.0330 -1.1374,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 0.0000 1.1209,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

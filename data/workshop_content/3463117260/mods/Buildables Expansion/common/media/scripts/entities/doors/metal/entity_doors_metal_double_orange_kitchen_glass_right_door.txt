@@ -1,0 +1,79 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_DoubleMetalOrangeKitchenGlassRightDoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Double Metal Orange Kitchen Glass Right Door,
+			Icon		= fixtures_doors_02_61,
+		}
+	}
+
+    entity DoubleMetalOrangeKitchenGlassRightDoor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_DoubleMetalOrangeKitchenGlassRightDoor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 600,
+			breakSound      = BreakDoor,
+			
+            face W
+            {
+                layer
+                {
+                    row = fixtures_doors_02_56,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_doors_02_61,
+                }
+            }
+			face W_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_02_58,
+                }
+            }
+            face N_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_02_63,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 350,
+            needToBeLearn = true,
+            category      = Doors_Metal,
+            SkillRequired = MetalWelding:7,
+            xpAward       = MetalWelding:10,
+            ToolTip       = Tooltip_craft_DoubleMetalOrangeKitchenGlassRightDoorDesc,
+            inputs
+            {
+		        item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 6 [Base.SheetMetal],
+				item 1 [Base.GlassPanel],
+				item 2 [Base.Hinge],
+				item 1 [Base.Doorknob],
+		        item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

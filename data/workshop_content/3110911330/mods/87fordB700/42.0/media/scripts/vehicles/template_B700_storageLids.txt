@@ -1,0 +1,339 @@
+module Base
+{
+
+	model 87fordB700StorageLidLeft
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_left_storage,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 87fordB700StorageLidRight
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|b700_right_storage,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 87fordF700StorageLidLeft
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700x_storageLid,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle B700StorageLids
+	{
+		part StorageLidLeft
+		{
+
+			model Burrp
+			{
+				file = 87fordB700StorageLidLeft,
+			}
+
+			anim Close
+			{
+				anim = storage_l_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = storage_l_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage_l_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage_l_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageLeft,
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 -90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 -90.0 0.0,
+			}
+			itemType = Base.87fordB700StorageLid,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+            durability = 5,
+
+		}
+
+		part StorageLidRight
+		{
+
+			model Burp
+			{
+				file = 87fordB700StorageLidRight,
+			}
+
+			anim Close
+			{
+				anim = storage_r_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = storage_r_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage_r_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage_r_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageRight,
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 90.0 0.0,
+			}
+			itemType = Base.87fordB700StorageLid,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+            durability = 5,
+
+		}
+
+		part StorageLid*
+		{
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 250,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+
+    template vehicle F700StorageLid
+	{
+		part StorageLidLeft
+		{
+
+			model Burrp
+			{
+				file = 87fordF700StorageLidLeft,
+			}
+
+			anim Close
+			{
+				anim = storage_l_opening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = storage_l_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage_l_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage_l_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageLeft,
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 -90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 -90.0 0.0,
+			}
+			itemType = Base.87fordF700StorageLid,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+            durability = 5,
+
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 250,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}

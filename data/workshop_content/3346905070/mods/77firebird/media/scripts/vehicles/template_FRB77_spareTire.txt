@@ -1,0 +1,55 @@
+module Base
+{
+    model 77firebirdSpare
+	{
+		mesh = vehicles/Vehicles_77firebird_Body|trans77_spare,
+		texture = vehicles/Vehicles_77firebird_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+
+	template vehicle FRB77SpareTires
+	{
+		part FRB77SpareTire
+        	{
+            model FRB77Spare
+			{
+				file = 77firebirdSpare,
+			}
+
+			category = tire,
+			area = TruckBed,
+			itemType = Base.77firebirdTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB77.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = FRB77.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = FRB77.Create.SpareTire,
+                init = FRB77.Init.SpareTire,
+				}
+		}
+	}
+}

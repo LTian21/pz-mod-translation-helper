@@ -1,0 +1,147 @@
+module Base
+{
+
+	model 69camaroseatfl
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_seat_fl,
+		texture = vehicles/Vehicles_69camaro_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 69camaroseatfr
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_seat_fl,
+		texture = vehicles/Vehicles_69camaro_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	model 69camaroseatrl
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_seat_rl,
+		texture = vehicles/Vehicles_69camaro_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 69camaroseatrr
+	{
+		mesh = vehicles/Vehicles_69camaro_Body|69camaro_seat_rl,
+		texture = vehicles/Vehicles_69camaro_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+	
+	template vehicle CAM69Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 69camaroseatfl,
+			}
+			itemType = Base.69camaroFrontSeat,
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 69camaroseatfr,
+			}
+			itemType = Base.69camaroFrontSeat,
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 69camaroseatrl,
+			}
+			itemType = Base.69camaroRearSeat,
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 69camaroseatrr,
+			}
+			itemType = Base.69camaroRearSeat,
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

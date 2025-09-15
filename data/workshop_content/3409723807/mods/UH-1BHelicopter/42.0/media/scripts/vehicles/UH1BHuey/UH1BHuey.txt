@@ -1,0 +1,678 @@
+module Base
+{
+	model UH1BHuey_Body
+	{
+		mesh = vehicles/UH1BHuey|UH1BHuey,
+		shader = vehicle,
+		static = TRUE,
+		scale = 0.01,
+	}
+	model UH1BHueyInterior
+	{
+		mesh = vehicles/UH1BHuey|UH1BHueyInterior,
+		texture = Vehicles/Vehicle_UH1BHuey_Interior,
+		scale = 0.01,
+	}
+	model UH1BHuey_Hood
+	{
+		mesh = vehicles/UH1BHuey|UH1BHueyHood,
+		shader = vehicle,
+		static = FALSE,
+		scale = 0.01,
+	}
+	model UH1BHuey_DoorFrontLeft
+	{
+		mesh = vehicles/UH1BHuey|UH1BHueyDoorFrontLeft,
+		shader = vehicle,
+		static = FALSE,
+		scale = 0.01,
+	}
+	model UH1BHuey_DoorFrontRight
+	{
+		mesh = vehicles/UH1BHuey|UH1BHueyDoorFrontRight,
+		shader = vehicle,
+		static = FALSE,
+		scale = 0.01,
+	}
+	model UH1BHuey_DoorRearLeft
+	{
+		mesh = vehicles/UH1BHuey|UH1BHueyDoorRearLeft,
+		shader = vehicle,
+		static = FALSE,
+		scale = 0.01,
+	}
+	model UH1BHuey_DoorRearRight
+	{
+		mesh = vehicles/UH1BHuey|UH1BHueyDoorRearRight,
+		shader = vehicle,
+		static = FALSE,
+		scale = 0.01,
+	}
+	vehicle UH1BHuey
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 10.2,
+		engineRepairLevel = 8,
+		playerDamageProtection = 1.2,
+
+		model
+		{
+			file = UH1BHuey_Body,
+			scale = 0.2300,
+			offset = 0.0000 -1.8696 -0.0435,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicle_UH1BMain,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicle_UH1B_Black,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicle_UH1B_Army,
+		}
+
+		textureRust = Vehicles/Vehicle_UH1BHuey_Rust,
+		textureLights = Vehicles/Vehicle_UH1BHuey_Lights,
+		textureShadow = Shadows/ShadowUH1BHuey,
+		textureMask = Vehicles/Vehicle_UH1BHuey_Mask,
+		spawnOffsetY = 0.24999994,
+
+		sound
+		{
+			horn = VehicleHorn,
+			engine = HeliSilence,
+			engineStart = WZ_10_Engine_Start,
+			engineTurnOff = WZ_10_Engine_Off,
+		}
+
+		extents = 9.3043 8.1739 40.9565,
+		mass = 1040,
+		centerOfMassOffset = 0.0000 2.3478 -6.9565,
+		shadowExtents = 20.1007 45.5810,
+		shadowOffset = -4.5275 -9.0306,
+		physicsChassisShape = 8.7826 8.0870 41.3913,
+		engineForce = 15500,
+		maxSpeed = 120f,
+		engineLoudness = 100,
+		engineQuality = 70,
+		brakingForce = 50,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 1.0f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 50,
+		suspensionCompression = 3.93,
+		suspensionDamping = 2.98,
+		maxSuspensionTravelCm = 8,
+		suspensionRestLength = 0.15,
+		wheelFriction = 1.4f,
+		frontEndHealth = 165,
+		rearEndHealth = 130,
+		seats = 4,
+		template = PassengerSeat4,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 2.0435 4.2174 7.9565,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 6.2174 0.0000 6.7391,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -2.1304 3.9130 7.9565,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -6.3043 0.0000 6.5217,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		passenger RearLeft
+		{
+			position inside
+			{
+				offset = 2.0000 4.5217 0.6957,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 6.3043 -0.4348 1.9565,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearLeft,
+			}
+		}
+
+		passenger RearRight
+		{
+			position inside
+			{
+				offset = -2.0000 4.2609 0.7391,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -6.3478 -0.4348 1.6957,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 -5.8261 14.6087 6.6087,
+		}
+
+		area TruckBed
+		{
+			xywh = 5.9130 -2.4348 2.6087 5.3913,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 7.0000 6.8696 4.7826 5.0435,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -7.0000 6.8261 4.7826 5.0435,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 7.1739 2.9130 5.1304 5.2174,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -7.3913 2.9130 5.5652 5.1304,
+		}
+
+		area GasTank
+		{
+			xywh = 7.2609 -1.4783 5.3043 6.6957,
+		}
+
+		template = Trunk/part/TruckBedOpen,
+
+		part TruckBedOpen
+		{
+			itemType = Base.BigTrunk,
+
+			container
+			{
+				capacity = 230,
+				conditionAffectsCapacity = false,
+				test = UH1BHuey.ContainerAccess.TrunkFromAllSeats,
+			}
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+		template = Seat/part/SeatRearLeft,
+		template = Seat/part/SeatRearRight,
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part GloveBox
+		{
+			model UH1BHueyInterior
+			{
+				file = UH1BHueyInterior,
+				texture = Vehicles/Vehicle_UH1BHuey_Interior,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = false,
+
+			container
+			{
+				capacity = 7,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			container
+			{
+				conditionAffectsCapacity = false,
+				capacity = 500,
+			}
+
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			model Default
+			{
+				file = UH1BHuey_Hood,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}
+
+			anim Close
+			{
+				anim = Hood,
+				reverse = TRUE,
+				rate = 1.5,
+			}
+
+			anim Open
+			{
+				anim = Hood,
+				rate = 1.25,
+			}
+
+			anim Closed
+			{
+				anim = Hood,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = Hood,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Brake/part/BrakeRearRight,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Motorcycle Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Motorcycle Mechanics,
+			}
+		}
+
+		template = UH1BHueyWindow/part/WindowFrontLeft,
+		template = UH1BHueyWindow/part/WindowFrontRight,
+		template = UH1BHueyWindow/part/WindowRearLeft,
+		template = UH1BHueyWindow/part/WindowRearRight,
+
+		part Window*
+		{
+			mechanicRequireKey = true,
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+		template = Door/part/DoorRearLeft,
+		template = Door/part/DoorRearRight,
+
+		part DoorFrontLeft
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			model Default
+			{
+				file = UH1BHuey_DoorFrontLeft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}
+
+			anim Close
+			{
+				anim = DoorFrontLeft,
+				reverse = TRUE,
+				rate = 2.5,
+			}
+
+			anim Open
+			{
+				anim = DoorFrontLeft,
+				rate = 2.0,
+			}
+
+			anim Closed
+			{
+				anim = DoorFrontLeft,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorFrontLeft,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		}
+
+		part DoorFrontRight
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			model Default
+			{
+				file = UH1BHuey_DoorFrontRight,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}
+
+			anim Close
+			{
+				anim = DoorFrontRight,
+				reverse = TRUE,
+				rate = 2.5,
+			}
+
+			anim Open
+			{
+				anim = DoorFrontRight,
+				rate = 2.0,
+			}
+
+			anim Closed
+			{
+				anim = DoorFrontRight,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorFrontRight,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		}
+
+		part DoorRearLeft
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			model Default
+			{
+				file = UH1BHuey_DoorRearLeft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}
+
+			anim Close
+			{
+				anim = DoorRearLeft,
+				reverse = TRUE,
+				rate = 2.5,
+			}
+
+			anim Open
+			{
+				anim = DoorRearLeft,
+				rate = 2.0,
+			}
+
+			anim Closed
+			{
+				anim = DoorRearLeft,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorRearLeft,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		}
+
+		part DoorRearRight
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			model Default
+			{
+				file = UH1BHuey_DoorRearRight,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}
+
+			anim Close
+			{
+				anim = DoorRearRight,
+				reverse = TRUE,
+				rate = 2.5,
+			}
+
+			anim Open
+			{
+				anim = DoorRearRight,
+				rate = 2.0,
+			}
+
+			anim Closed
+			{
+				anim = DoorRearRight,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorRearRight,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+
+		part Radio*
+		{
+			itemType = Base.HamRadio2,
+		}
+
+		template = Headlight,
+		template = UH1BHuey_bladeSmall,
+		template = UH1BHuey_blade,
+		template = UH1BHuey_blade2,
+
+		attachment flipNode
+		{
+			offset = 0.0000 -2.2727 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 -2.2727 -21.1363,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -2.2727 21.1363,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+
+		attachment towbar
+		{
+			offset = 0.0000 -2.2727 -21.1363,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+			updateconstraint = false,
+		}
+
+		attachment towbarfront
+		{
+			offset = 0.0000 -2.2727 21.1363,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+			updateconstraint = false,
+		}
+	}
+}

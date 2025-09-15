@@ -1,0 +1,88 @@
+module Base
+{
+	model 78amgeneralM35A2hard1
+	{
+		mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_cab_hard1,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	model 78amgeneralM35A2soft2
+	{
+		mesh = vehicles/Vehicles_78amgeneralM35A2_Body|m35_cab_soft2,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M35A2CabCovers
+		{
+		part M35A2CabCovers
+        	{
+
+			model M35HardCover1
+				{
+                		file = 78amgeneralM35A2hard1,
+				}
+
+			model M35SoftCover2
+				{
+                		file = 78amgeneralM35A2soft2,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M35A2HardCover1;Base.M35A2SoftCover2,
+			mechanicRequireKey = false,
+            durability = 4,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M35A2.InstallComplete.CabCover,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 650,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = M35A2.UninstallComplete.CabCover,
+            		}
+
+            		lua
+            		{
+					create = M35A2.Create.CabCover,
+					init = M35A2.Init.CabCover,
+					}
+		}
+	}
+
+		
+}

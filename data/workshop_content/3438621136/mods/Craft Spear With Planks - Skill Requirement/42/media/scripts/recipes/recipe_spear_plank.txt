@@ -1,0 +1,23 @@
+module Base
+{
+	craftRecipe Carve Spear
+	{
+        Time = 100,
+        SkillRequired = Carving:6,
+        OnCreate = Recipe.OnCreate.CarvePlankSpear,
+        Tags = InHandCraft,
+        timedAction = CraftKnifeSpear,
+        xpAward = Carving:5,
+        category = Carving,
+		OnCreate = Recipe.OnCreate.MinorCarving,
+		inputs
+		{
+			item 1 [Base.Plank;Base.TreeBranch2] flags[Prop2;InheritCondition],
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 Base.SpearCrafted,
+		}
+	}
+}

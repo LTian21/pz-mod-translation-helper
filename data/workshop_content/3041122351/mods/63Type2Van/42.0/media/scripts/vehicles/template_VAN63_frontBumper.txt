@@ -1,0 +1,248 @@
+module Base
+{
+	model 63Type2VanfrontBumper0
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 63Type2VanfrontBumper1
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 63Type2VanfrontBullbarA
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_bullbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle VAN63FrontBumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 63Type2VanfrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 63Type2VanfrontBumper1,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 63Type2VanfrontBullbarA,
+				}
+
+				area = Front,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.63Type2VanBumperFront0;Base.63Type2VanBumperFront1;Base.63Type2VanBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VAN63.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = VAN63.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = VAN63.Create.FrontBumper,
+					init = VAN63.Init.FrontBumper,
+					}
+		}
+	}
+
+	template vehicle VAN63FrontBumpersM
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper1
+				{
+                		file = 63Type2VanfrontBumper1,
+				}
+
+			model FrontBumper0
+				{
+                		file = 63Type2VanfrontBumper0,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 63Type2VanfrontBullbarA,
+				}
+
+				area = Front,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.63Type2VanBumperFront1;Base.63Type2VanBumperFront0;Base.63Type2VanBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VAN63.InstallComplete.FrontBumperM,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = VAN63.UninstallComplete.FrontBumperM,
+            		}
+
+            		lua
+            		{
+					create = VAN63.Create.FrontBumperM,
+					init = VAN63.Init.FrontBumperM,
+					}
+		}
+	}
+
+	template vehicle VAN63FrontBumpersA
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBullbarA
+				{
+                		file = 63Type2VanfrontBullbarA,
+				}
+
+			model FrontBumper0
+				{
+                		file = 63Type2VanfrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 63Type2VanfrontBumper1,
+				}
+
+				area = Front,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.63Type2VanBullbarFrontA;Base.63Type2VanBumperFront0;Base.63Type2VanBumperFront1,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VAN63.InstallComplete.FrontBumperA,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = VAN63.UninstallComplete.FrontBumperA,
+            		}
+
+            		lua
+            		{
+					create = VAN63.Create.FrontBumperA,
+					init = VAN63.Init.FrontBumperA,
+					}
+		}
+	}
+}

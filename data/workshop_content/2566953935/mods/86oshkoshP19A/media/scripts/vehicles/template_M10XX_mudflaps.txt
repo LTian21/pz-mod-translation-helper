@@ -1,0 +1,71 @@
+module Base
+{
+	
+    model trailerM1082mudflaps0
+    {
+        mesh = vehicles/Trailers_m10xx_body|MXtrailers_mudflaps,
+        shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    }
+
+	template vehicle M10XXMudflaps
+		{
+		part M10XXMudflaps
+       		{
+
+            model mudflaps0
+			{
+                	file = trailerM1082mudflaps0,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            itemType = Base.M1082Mudflaps,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = M10XX.InstallComplete.Mudflaps,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = M10XX.UninstallComplete.Mudflaps,
+            }
+            lua
+            {
+                create = M10XX.Create.Mudflaps,
+                init = M10XX.Init.Mudflaps,
+            }
+        }
+	}
+}
+

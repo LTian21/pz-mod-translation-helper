@@ -1,0 +1,82 @@
+module Base
+{
+
+	model 82porsche911Roofrack0
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|small_roofrack,
+		texture = Vehicles/Vehicles_70dodgeTA_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle PRS82Roofrack
+	{
+		part PRS82Roofrack
+		{
+
+			model PRS82Roofrack0
+				{
+                		file = 82porsche911Roofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.OldSmallRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = PRS82.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = DAMN.Create.Blank,
+				}
+		}
+	}
+}
+

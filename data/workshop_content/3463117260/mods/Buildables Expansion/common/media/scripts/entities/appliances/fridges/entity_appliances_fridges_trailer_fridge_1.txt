@@ -1,0 +1,71 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_TrailerFridgeA
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= TrailerFridgeA,
+			Icon		= location_trailer_02_16,
+		}
+	}
+
+    entity TrailerFridgeA
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_TrailerFridgeA,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_trailer_02_17,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_trailer_02_16,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 300,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:6;Electricity:4,
+            xpAward       = MetalWelding:15;Electricity:10,
+            category      = Appliances_Fridges,
+            ToolTip       = Tooltip_craft_fridgeDesc,
+            inputs
+            {
+                item 2 [Base.BlowTorch] mode:keep flags[Prop1],
+                item 1 tags[Screwdriver] mode:keep flags[Prop2],
+                item 1 tags[Pliers] mode:keep,
+                item 2 [Base.WeldingRods],
+                item 1 [Base.RefrigerantBottle],
+                item 2 [Base.SmallSheetMetal],
+                item 4 [Base.SheetMetal],
+                item 1 [Base.PlasticSheet],
+                item 1 [Base.InsulationFoam],
+                item 1 [Base.SmallRubberTube],
+                item 1 [Base.RubberSeal],
+                item 2 [Base.ThinCopperPipe],
+                item 5 [Base.ElectronicsScrap],
+                item 3 [Base.ElectricWire],
+			    item 1 [Base.RefrigeratorCompressor],
+			    item 1 [Base.LightBulb],
+            }
+        }
+    }
+}

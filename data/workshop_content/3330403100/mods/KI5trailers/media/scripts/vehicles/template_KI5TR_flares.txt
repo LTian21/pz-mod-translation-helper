@@ -1,0 +1,242 @@
+module Base
+{
+    model KI5trailersFlaresL
+	{
+		mesh = vehicles/Trailers_KI5cargo_Body|damnTrailer_cargo_large_flares,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model KI5trailersFlaresLX
+	{
+		mesh = vehicles/Trailers_KI5cargo_Body|damnTrailer_cargo_large_flares,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+    model KI5trailersFlaresM
+	{
+		mesh = vehicles/Trailers_KI5cargo_Body|damnTrailer_cargo_medium_flares,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model KI5trailersFlaresMX
+	{
+		mesh = vehicles/Trailers_KI5cargo_Body|damnTrailer_cargo_medium_flares,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+    model KI5trailersFlaresS
+	{
+		mesh = vehicles/Trailers_KI5cargo_Body|damnTrailer_cargo_small_flares,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model KI5trailersFlaresSX
+	{
+		mesh = vehicles/Trailers_KI5cargo_Body|damnTrailer_cargo_small_flares,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle KI5TRFlaresL
+	{
+		part KI5TRCFlares
+        	{
+
+			model Flares0
+				{
+                	file = KI5trailersFlaresL,
+				}
+            model Flares0X
+				{
+                	file = KI5trailersFlaresLX,
+				}
+
+			area = TireFrontLeft,
+			category = bodywork,
+			itemType = Base.KI5trailersSideFlaresLarge,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+				            type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+			        complete = KI5TR.InstallComplete.FlaresL,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 700,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+                    complete = KI5TR.UninstallComplete.FlaresL,
+            		}
+
+            		lua
+            		{
+                    create = KI5TR.Create.FlaresL,
+                    init = KI5TR.Init.FlaresL,
+                    }
+		}
+	}
+
+    template vehicle KI5TRFlaresM
+	{
+		part KI5TRCFlares
+        	{
+
+			model Flares0
+				{
+                	file = KI5trailersFlaresM,
+				}
+            model Flares0X
+				{
+                	file = KI5trailersFlaresMX,
+				}
+
+			area = TireFrontLeft,
+			category = bodywork,
+			itemType = Base.KI5trailersSideFlaresMedium,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+				            type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+			        complete = KI5TR.InstallComplete.FlaresM,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 700,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+                    complete = KI5TR.UninstallComplete.FlaresM,
+            		}
+
+            		lua
+            		{
+                    create = KI5TR.Create.FlaresM,
+                    init = KI5TR.Init.FlaresM,
+                    }
+		}
+	}
+    template vehicle KI5TRFlaresS
+	{
+		part KI5TRCFlares
+        	{
+
+			model Flares0
+				{
+                	file = KI5trailersFlaresS,
+				}
+            model Flares0X
+				{
+                	file = KI5trailersFlaresSX,
+				}
+
+			area = TireFrontLeft,
+			category = bodywork,
+			itemType = Base.KI5trailersSideFlaresSmall,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+				            type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				            equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+			        complete = KI5TR.InstallComplete.FlaresS,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                            equip = primary,
+                    		}
+                	}
+
+                    time = 700,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+                    complete = KI5TR.UninstallComplete.FlaresS,
+            		}
+
+            		lua
+            		{
+                    create = KI5TR.Create.FlaresS,
+                    init = KI5TR.Init.FlaresS,
+                    }
+		}
+	}
+}

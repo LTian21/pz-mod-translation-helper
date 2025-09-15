@@ -1,0 +1,602 @@
+module Base
+{
+	model fhqLexusLS400
+	{
+		mesh = vehicles/vehicle_fhqlexusls400|fhqLexusLS,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.405,
+	}
+	model fhqLexusLS400Exhaust
+	{
+		mesh = vehicles/vehicle_fhqlexusls400|fhqLexusLSExhaust,
+		texture = vehicles/vehicle_fhqLS400_shell,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.405,
+	}
+	model fhqLexusLS400LMirror
+	{
+		mesh = vehicles/vehicle_fhqlexusls400|fhqLexusLSLMirror,
+		texture = vehicles/vehicle_fhqLS400_shell,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.405,
+	}
+	model fhqLexusLS400RMirror
+	{
+		mesh = vehicles/vehicle_fhqlexusls400|fhqLexusLSRMirror,
+		texture = vehicles/vehicle_fhqLS400_shell,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.405,
+	}
+	model fhqLexusLS400WheelLeft
+	{
+		mesh = vehicles/vehicles_WheelfhqMZStandard,
+		texture = vehicles/vehicles_WheelfhqMZLS400,
+		scale = 0.405,
+	}
+	model fhqLexusLS400WheelRight
+	{
+		mesh = vehicles/vehicles_WheelfhqMZStandard,
+		texture = vehicles/vehicles_WheelfhqMZLS400,
+		invertX = TRUE,
+		scale = 0.405,
+	}
+	vehicle fhqLexusLS400
+	{
+		mechanicType = 3,
+		offRoadEfficiency = 0.8,
+		engineRepairLevel = 6,
+		playerDamageProtection = 0.7,
+
+		model
+		{
+			file = fhqLexusLS400,
+			scale = 1.8200,
+			offset = 0.0000 0.0604 -0.0275,
+		}
+
+		spawnOffsetY = 0.12999995,
+
+		skin
+		{
+			texture = Vehicles/vehicle_fhqLS400_shell,
+		}
+		
+		skin
+		{
+			texture = Vehicles/vehicle_fhqLS400_2_shell,
+		}
+
+		textureMask = Vehicles/vehicle_fhqLS400_mask,
+		textureLights = Vehicles/vehicle_fhqLS400_lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/Veh_Damage1,
+		textureDamage2Shell = Vehicles/Veh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		sound
+		{
+			engine = VehicleEngineSportsCar,
+			engineStart = VehicleEngineSportsCar,
+			engineTurnOff = VehicleEngineSportsCar,
+			horn = VehicleHornSportsCar,
+			ignitionFail = VehicleIgnitionFailSportsCar,
+		}
+
+		extents = 0.9121 0.5824 2.3956,
+		mass = 820,
+		physicsChassisShape = 0.9121 0.5824 2.3956,
+		centerOfMassOffset = 0.0000 0.2967 0.0000,
+		shadowExtents = 0.8992 2.5058,
+		shadowOffset = 0.0000 0.0000,
+		engineForce = 5000,
+		engineLoudness = 80,
+		engineQuality = 70,
+		maxSpeed = 100f,
+		gearRatioCount = 5,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 0.7f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 30,
+		suspensionCompression = 2.0,
+		suspensionDamping = 2.2,
+		maxSuspensionTravelCm = 15,
+		suspensionRestLength = 0.3f,
+		wheelFriction = 1.8f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 4,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.3791 -0.0495 0.7747,
+			radius = 0.17f,
+			width = 0.30f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.3791 -0.0495 0.7747,
+			radius = 0.17f,
+			width = 0.30f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.3791 -0.0495 -0.5714,
+			radius = 0.17f,
+			width = 0.30f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.3791 -0.0495 -0.5714,
+			radius = 0.17f,
+			width = 0.30f,
+		}
+
+		template = PassengerSeat4,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.2198 0.1264 0.1154,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.5769 -0.2088 0.2033,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.2198 0.1209 0.1154,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.5769 -0.2088 0.2033,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		passenger RearLeft
+		{
+			position inside
+			{
+				offset = 0.2198 0.1264 -0.3187,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.5769 -0.2088 -0.2033,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearLeft,
+			}
+		}
+
+		passenger RearRight
+		{
+			position inside
+			{
+				offset = -0.2198 0.1264 -0.3187,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.5769 -0.2088 -0.2033,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 1.4121 0.9121 0.4286,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -1.4121 0.9121 0.4286,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 0.7033 0.2143 0.4945 0.4945,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -0.7033 0.2143 0.4945 0.4945,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 0.7033 -0.2802 0.4945 0.4945,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -0.7033 -0.2802 0.4945 0.4945,
+		}
+
+		area GasTank
+		{
+			xywh = -0.6813 -0.7033 0.4505 0.4505,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.6813 0.7473 0.4505 0.4505,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.6813 0.7473 0.4505 0.4505,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 0.6813 -0.6044 0.4505 0.4505,
+		}
+
+		area TireRearRight
+		{
+			xywh = -0.6813 -0.6044 0.4505 0.4505,
+		}
+
+		template = TrunkDoor,
+
+		part TrunkDoor
+		{
+			anim Open
+			{
+				sound = VehicleTrunkOpenSportsCar,
+			}
+
+			anim Close
+			{
+				sound = VehicleTrunkCloseSportsCar,
+			}
+
+			anim Lock
+			{
+				sound = LockVehicleDoorSportsCar,
+			}
+
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorSportsCar,
+			}
+
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedSportsCar,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Trunk/part/TruckBed,
+
+		part TruckBed
+		{
+			itemType = Base.BigTrunk,
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+		template = Seat/part/SeatRearLeft,
+		template = Seat/part/SeatRearRight,
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = GloveBox,
+		template = GasTank,
+
+		part GasTank
+		{
+			install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			model Default
+			{
+				file = fhqLexusLS400Exhaust,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			anim Open
+			{
+				sound = VehicleHoodOpenSportsCar,
+			}
+
+			anim Close
+			{
+				sound = VehicleHoodCloseSportsCar,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+
+		part Windshield*
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+		template = Window/part/WindowRearLeft,
+		template = Window/part/WindowRearRight,
+
+		part Window*
+		{
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+		template = Door/part/DoorRearLeft,
+		template = Door/part/DoorRearRight,
+
+		part Door*
+		{
+			anim Open
+			{
+				sound = VehicleDoorOpenSportsCar,
+			}
+
+			anim Close
+			{
+				sound = VehicleDoorCloseSportsCar,
+			}
+
+			anim Lock
+			{
+				sound = LockVehicleDoorSportsCar,
+			}
+
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorSportsCar,
+			}
+
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedSportsCar,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		part DoorFrontLeft
+		{
+			model Default
+			{
+				file = fhqLexusLS400LMirror,
+			}
+		}
+
+		part DoorFrontRight
+		{
+			model Default
+			{
+				file = fhqLexusLS400RMirror,
+			}
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqLexusLS400WheelLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqLexusLS400WheelRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqLexusLS400WheelLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqLexusLS400WheelRight,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 0.0659 -1.1703,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 0.0495 1.2253,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

@@ -1,0 +1,58 @@
+module Base
+{
+	template vehicle CUCV86SpareTire
+	{
+
+        part DAMNSpareTire
+        {
+            specificItem = false,
+            itemType = Base.86chevyCUCVTire1;Base.86chevyCUCVTire2,
+            area = TruckBed,
+            category = tire,
+            mechanicRequireKey = false,
+            durability = 3,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			             equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                door = TrunkDoor,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = CUCV86.InstallComplete.SpareTire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = CUCV86.UninstallComplete.SpareTire,
+            }
+            lua
+            {
+                create = CUCV86.Create.SpareTire,
+                init = CUCV86.Init.SpareTire,
+            }
+        }
+    }
+}

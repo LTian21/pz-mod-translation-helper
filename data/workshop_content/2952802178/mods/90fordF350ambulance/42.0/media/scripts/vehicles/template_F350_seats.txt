@@ -1,0 +1,217 @@
+module Base
+{
+
+	model 90fordF350ambulanceseatfl
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_seat_f,
+		texture = Vehicles/Vehicles_90fordF350ambulance_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 90fordF350ambulanceseatfr
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|f350_seat_f,
+		texture = Vehicles/Vehicles_90fordF350ambulance_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+	model 90fordF350ambulanceseatstr1
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|damnCraft_stretcher,
+		texture = Vehicles/Vehicles_USMIL_Stretchers,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 90fordF350ambulanceseatstr0
+	{
+		mesh = vehicles/Vehicles_90fordF350ambulance_Body|86amb_stretcher,
+		texture = Vehicles/Vehicles_USMIL_Stretchers,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle F350Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 90fordF350ambulanceseatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 90fordF350ambulanceseatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.8thGenFordFseriesSeatFront,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.90fordF350ambSeatRear,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+
+		part DAMNStretcher
+		{
+            model StretcherMil
+			{
+				file = 90fordF350ambulanceseatstr0,
+			}
+
+            model StretcherCiv
+			{
+				file = 90fordF350ambulanceseatstr1,
+			}
+
+			area = TruckBed,
+			container
+			{
+				seat = Stretcher,
+			}
+
+			category = seat,
+            specificItem = false,
+			itemType = USMIL.Stretcher0;USMIL.Stretcher1,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				seat = Stretcher,
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+                complete = F350.InstallComplete.Stretcher,
+			}
+			table uninstall
+			{
+
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = F350.UninstallComplete.Stretcher,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = F350.Create.Stretcher,
+                init = F350.Init.Stretcher,
+			}
+		}
+	}
+}
+

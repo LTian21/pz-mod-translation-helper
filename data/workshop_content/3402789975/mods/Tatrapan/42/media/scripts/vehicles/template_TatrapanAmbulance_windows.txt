@@ -1,0 +1,155 @@
+module Base
+{
+    model TatrapanAmbulance_leftfrontwindow
+	{
+		mesh = vehicles/TatrapanAmbulance|LeftFrontWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = FrontLeftWindowBone 1.0,
+	}
+	model TatrapanAmbulance_rightfrontwindow
+	{
+		mesh = vehicles/TatrapanAmbulance|RightFrontWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = FrontRightWindowBone 1.0,
+	}
+	model TatrapanAmbulance_leftrearwindow
+	{
+		mesh = vehicles/TatrapanAmbulance|LeftRearWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = LeftRearWindowBone 1.0,
+	}
+	model TatrapanAmbulance_rightrearwindow
+	{
+		mesh = vehicles/TatrapanAmbulance|RightRearWindow,
+		shader = vehicle,
+		scale = 0.01,
+		static = FALSE,
+		boneWeight = RightRearWindowBone 1.0,
+	}
+
+
+
+
+    template vehicle TatrapanAmbulance_windows
+    {
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+                template = Window/part/WindowRearLeft,
+		template = Window/part/WindowRearRight,
+  
+
+
+		part WindowFrontLeft
+		{
+			area = SeatFrontLeft,
+			
+			parent = DoorFrontLeft,
+                       
+
+			model Default
+			{
+				file = TatrapanAmbulance_leftfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontLeft_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+
+		part WindowFrontRight
+		{
+			area = SeatFrontRight,
+			
+			parent = DoorFrontRight,
+                        
+
+			model Default
+			{
+				file = TatrapanAmbulance_rightfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontRight_open,
+				animate = FALSE,
+			}                        
+
+		}
+
+		part WindowRearLeft
+		{
+			area = SeatRearLeft,
+			
+			parent = DoorRearLeft,
+                       
+
+			model Default
+			{
+				file = TatrapanAmbulance_leftrearwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowRearLeft_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+
+  		part WindowRearRight
+		{
+			area = SeatRearRight,
+			
+			parent = DoorRearRight,
+                       
+
+			model Default
+			{
+				file = TatrapanAmbulance_rightrearwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowRearRight_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+              
+                             
+                
+
+
+
+           
+
+		
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			window
+			{
+				openable = true,
+			}
+		}
+    }
+}

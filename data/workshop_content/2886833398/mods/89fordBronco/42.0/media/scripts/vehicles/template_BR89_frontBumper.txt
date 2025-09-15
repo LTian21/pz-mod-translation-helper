@@ -1,0 +1,100 @@
+module Base
+{
+	model 89fordBroncofrontBumper0
+	{
+		mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89fordBroncofrontBullbar1
+	{
+		mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_armor_b1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89fordBroncofrontBullbar2
+	{
+		mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BR89FrontBumper
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper
+				{
+                		file = 89fordBroncofrontBumper0,
+				}
+
+			model FrontBullbar1
+				{
+                		file = 89fordBroncofrontBullbar1,
+				}
+
+			model FrontBullbar2
+				{
+                		file = 89fordBroncofrontBullbar2,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.89BroncoBumperFront;Base.80sPickupBullbarFront;Base.89BroncoBullbarFront,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BR89.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BR89.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = BR89.Create.FrontBumper,
+					init = BR89.Init.FrontBumper,
+					}
+		}
+	}
+
+		
+}

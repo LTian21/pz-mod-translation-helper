@@ -1,0 +1,79 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_OrangeModernArmchair
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Orange Modern Armchair,
+			Icon		= furniture_seating_indoor_01_12,
+		}
+	}
+
+    entity OrangeModernArmchair
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_OrangeModernArmchair,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_01_14,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_01_15,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_01_13,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_01_12,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 250,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:10,
+            category      = Furniture_Seating,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_armchairDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 1 tags[Scissors] mode:keep,
+                item 1 tags[SewingNeedle] mode:keep,
+                item 4 [Base.Plank],
+                item 3 [Base.Nails],
+                item 4 [Base.FabricRoll_Cotton],
+                item 4 [Base.Thread],
+                item 200 [Base.ChickenFeather;Base.TurkeyFeather],
+            }
+        }
+    }
+}

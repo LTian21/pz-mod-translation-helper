@@ -1,0 +1,78 @@
+module Base
+{
+	model 83amgeneralM923sparemount
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_spare_mount,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M923SpareMounts
+		{
+		part M923SpareMount
+        	{
+
+			model M923SpareMount1
+				{
+                		file = 83amgeneralM923sparemount,
+				}
+
+			category = Other,
+			area = SpareTire,
+			specificItem = false,
+			itemType = Base.M923SpareMount1,
+			mechanicRequireKey = false,
+            durability = 4,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M923.InstallComplete.SpareMount,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1000,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = M923.UninstallComplete.SpareMount,
+                    requireUninstalled = DAMNSpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = M923.Create.SpareMount,
+				init = M923.Init.SpareMount,
+				}
+		}
+	}
+
+		
+}

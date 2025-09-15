@@ -1,0 +1,426 @@
+module Base
+{
+	model 92jeepYJwindshielda
+    	{
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 92jeepYJwindowfla
+    	{
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 92jeepYJwindowfra
+    	{
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 92jeepYJwindowrla
+    	{
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 92jeepYJwindowrra
+    	{
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 92jeepYJwindshieldra
+    	{
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+	template vehicle JP92Armor
+		{
+		part JP92WindshieldArmor
+        	{
+
+			model JP92winda
+				{
+                		file = 92jeepYJwindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.92jeepYJWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP92.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = JP92.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = JP92.Create.WindshieldArmor,
+					init = JP92.Init.WindshieldArmor,
+					}
+		}
+
+		part JP92FrontLeftArmor
+        	{
+
+			model JP92leftwina
+				{
+                		file = 92jeepYJwindowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.92jeepYJFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP92.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP92.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = JP92.Create.FrontLeftArmor,
+					init = JP92.Init.FrontLeftArmor,
+					}
+		}
+
+		part JP92FrontRightArmor
+        	{
+
+			model JP92rightwina
+				{
+                		file = 92jeepYJwindowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.92jeepYJFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP92.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP92.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = JP92.Create.FrontRightArmor,
+					init = JP92.Init.FrontRightArmor,
+					}
+		}
+
+		part JP92RearLeftArmor
+        	{
+
+			model JP92leftrearwina
+				{
+                		file = 92jeepYJwindowrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.92jeepYJRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP92.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+                    requireUninstalled = JP92SoftTop,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP92.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = JP92.Create.RearLeftArmor,
+					init = JP92.Init.RearLeftArmor,
+					}
+		}
+
+		part JP92RearRightArmor
+        	{
+
+			model JP92rightrearwina
+				{
+                		file = 92jeepYJwindowrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.92jeepYJRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP92.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+                    requireUninstalled = JP92SoftTop,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = JP92.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = JP92.Create.RearRightArmor,
+					init = JP92.Init.RearRightArmor,
+					}
+		}
+
+        part JP92WindshieldRearArmor
+        	{
+
+			model JP92windra
+				{
+                		file = 92jeepYJwindshieldra,
+				}
+
+			area = TruckBed,
+            parent = TrunkDoor,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.92jeepYJWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = JP92.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+                    requireUninstalled = JP92SoftTop,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = JP92.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = JP92.Create.WindshieldRearArmor,
+					init = JP92.Init.WindshieldRearArmor,
+					}
+		}
+	}
+}

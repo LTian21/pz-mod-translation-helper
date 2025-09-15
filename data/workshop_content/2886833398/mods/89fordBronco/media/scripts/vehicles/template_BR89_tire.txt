@@ -1,0 +1,359 @@
+module Base
+{
+
+	model 80sOffroadWheelAL
+	{
+		mesh = vehicles/Vehicles_80s_offroad_tires|80s_offroad_wheel_a,
+		texture = vehicles/Vehicles_89fordBronco_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.95,
+	}
+
+    model 80sOffroadWheelAR
+	{
+		mesh = vehicles/Vehicles_80s_offroad_tires|80s_offroad_wheel_a,
+		texture = vehicles/Vehicles_89fordBronco_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.95,
+	}
+
+    model 89fordBroncoWheel2L
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Wheels|76chevy_wheel,
+		texture = vehicles/Vehicles_76chevyKseries_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 89fordBroncoWheel2R
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Wheels|76chevy_wheel,
+		texture = vehicles/Vehicles_76chevyKseries_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 89fordBroncoWheel3L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel01,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 89fordBroncoWheel3R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel01,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 89fordBroncoWheel4L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel02,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 89fordBroncoWheel4R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel02,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 89fordBroncoWheel5L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel03,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 89fordBroncoWheel5R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel03,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 89fordBroncoWheel6L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel04,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 89fordBroncoWheel6R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel04,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+
+	template vehicle BR89Tires
+	{
+		part TireFrontLeft
+		{
+            model BR89Tire0
+			{
+				file = 80sOffroadWheelAL,
+			}
+            model BR89Tire1
+			{
+				file = 89fordBroncoWheel2L,
+			}
+            model BR89Tire2
+			{
+				file = 89fordBroncoWheel3L,
+			}
+            model BR89Tire3
+			{
+				file = 89fordBroncoWheel4L,
+			}
+            model BR89Tire4
+			{
+				file = 89fordBroncoWheel5L,
+			}
+            model BR89Tire5
+			{
+				file = 89fordBroncoWheel6L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = BR89.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = BR89.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = BR89.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model BR89Tire0
+			{
+				file = 80sOffroadWheelAR,
+			}
+            model BR89Tire1
+			{
+				file = 89fordBroncoWheel2R,
+			}
+            model BR89Tire2
+			{
+				file = 89fordBroncoWheel3R,
+			}
+            model BR89Tire3
+			{
+				file = 89fordBroncoWheel4R,
+			}
+            model BR89Tire4
+			{
+				file = 89fordBroncoWheel5R,
+			}
+            model BR89Tire5
+			{
+				file = 89fordBroncoWheel6R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = BR89.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = BR89.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = BR89.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{  
+            model BR89Tire0
+			{
+				file = 80sOffroadWheelAL,
+			}
+            model BR89Tire1
+			{
+				file = 89fordBroncoWheel2L,
+			}
+            model BR89Tire2
+			{
+				file = 89fordBroncoWheel3L,
+			}
+            model BR89Tire3
+			{
+				file = 89fordBroncoWheel4L,
+			}
+            model BR89Tire4
+			{
+				file = 89fordBroncoWheel5L,
+			}
+            model BR89Tire5
+			{
+				file = 89fordBroncoWheel6L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = BR89.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+
+            table uninstall
+			{
+				complete = BR89.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = BR89.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model BR89Tire0
+			{
+				file = 80sOffroadWheelAR,
+			}
+            model BR89Tire1
+			{
+				file = 89fordBroncoWheel2R,
+			}
+            model BR89Tire2
+			{
+				file = 89fordBroncoWheel3R,
+			}
+            model BR89Tire3
+			{
+				file = 89fordBroncoWheel4R,
+			}
+            model BR89Tire4
+			{
+				file = 89fordBroncoWheel5R,
+			}
+            model BR89Tire5
+			{
+				file = 89fordBroncoWheel6R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+            table install
+			{
+				complete = BR89.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = BR89.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = BR89.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.80sOffroadTireA;Base.76chevyKseriesTire2;Base.80chevyCKseriesTire2;Base.80chevyCKseriesTire1;Base.90chevyCKseriesTire2;Base.90chevyCKseriesTire1,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}

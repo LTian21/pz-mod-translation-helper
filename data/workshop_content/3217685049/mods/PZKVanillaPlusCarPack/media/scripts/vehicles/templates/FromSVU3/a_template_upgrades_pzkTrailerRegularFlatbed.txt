@@ -1,0 +1,76 @@
+module Base
+{
+	template vehicle PU_Armor_Car_pzkTrailerRegularFlatbed
+	{
+        template = ATA2Protection/part/ATA2ProtectionTrunk,
+        part ATA2ProtectionTrunk
+        {
+     
+            model Light
+            {
+                file = PU_Trunk_Car_pzkTrailerRegularCourtains_Light,
+            }
+            model Heavy
+            {
+                file = PU_Trunk_Car_pzkTrailerRegularCourtains_Heavy,
+            }
+			
+        }
+
+
+        part Tire*
+        {
+            setAllModelsVisible = false,
+            table install
+            {
+                complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+            }
+            
+            table uninstall
+            {
+                complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+            }
+            
+            lua
+            {
+                create = ATATuning2.Create.TireNotAllModelsVisible,
+                init = ATATuning2.Init.TireNotAllModelsVisible,
+                checkOperate = Vehicles.CheckOperate.Tire,
+                update = Vehicles.Update.Tire,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWheels,
+        part TireFrontLeft
+        {
+            model ATAProtection
+            {
+                file = PU_Chains_FL_Car_pzkTrailerRegularCourtains,
+            }
+        }
+
+        part TireRearLeft
+        {
+            model ATAProtection
+            {
+                file = PU_Chains_RL_Car_pzkTrailerRegularCourtains,
+            }
+        }
+
+        part TireFrontRight
+        {
+            model ATAProtection
+            {
+                file = PU_Chains_FR_Car_pzkTrailerRegularCourtains,
+            }
+        }
+
+        part TireRearRight
+        {
+            model ATAProtection
+            {
+                file = PU_Chains_RR_Car_pzkTrailerRegularCourtains,
+            }
+        }
+	}
+}

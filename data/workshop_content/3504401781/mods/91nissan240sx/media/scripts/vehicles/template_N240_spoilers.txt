@@ -1,0 +1,114 @@
+module Base
+{
+	
+	model 91nissan240sxspoiler0
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_spoiler0,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    model 91nissan240sxspoiler1
+    {
+        mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_spoiler1,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+    model 91nissan240sxspoiler2
+    {
+        mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_spoiler2,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+    model 91nissan240sxspoiler3
+    {
+        mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_spoiler3,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle N240Spoiler
+		{
+		part DAMNSpoiler
+       		{
+
+            model spoiler0
+			{
+                	file = 91nissan240sxspoiler0,
+			}
+
+            model spoiler1
+			{
+                	file = 91nissan240sxspoiler1,
+			}
+
+            model spoiler2
+			{
+                	file = 91nissan240sxspoiler2,
+			}
+
+            model spoiler3
+			{
+                	file = 91nissan240sxspoiler3,
+			}
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            specificItem = false,
+            itemType = Base.91nissan240sxSpoiler0;Base.91nissan240sxSpoiler1;Base.91nissan240sxSpoiler2;Base.91nissan240sxSpoiler3,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = N240.InstallComplete.Spoiler,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = N240.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = N240.Create.Spoiler,
+                init = N240.Init.Spoiler,
+            }
+        }
+	}
+}

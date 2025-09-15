@@ -1,0 +1,120 @@
+module Base
+{
+
+    model 92nissanGTRbumper0
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_bumper_0,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+	
+	model 92nissanGTRbumper1
+	{
+		mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_bumper_1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 92nissanGTRbumper2
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_bumper_2,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 92nissanGTRbumper3
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_bumper_3,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 92nissanGTRbumperA
+    {
+        mesh = vehicles/Vehicles_92nissanGTR_Body|gtr_bumper_a,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle R32BumpersFront
+		{
+		part R32Bumper
+       		{
+
+            model Bumper0
+            {
+                    file = 92nissanGTRbumper0,
+            }
+
+            model Bumper1
+			{
+                	file = 92nissanGTRbumper1,
+			}
+
+            model Bumper2
+            {
+                    file = 92nissanGTRbumper2,
+            }
+
+            model Bumper3
+            {
+                    file = 92nissanGTRbumper3,
+            }
+
+            model BumperA
+            {
+                    file = 92nissanGTRbumperA,
+            }
+
+            area = Engine,
+            category = bodywork,
+            specificItem = false,
+            itemType = Base.R32Bumper0;Base.R32Bumper1;Base.R32Bumper2;Base.R32Bumper3;Base.R32BumperA,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = R32.InstallComplete.Bumper,
+                door = EngineDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = R32.UninstallComplete.Bumper,
+            }
+            lua
+            {
+                create = R32.Create.Bumper,
+                init = R32.Init.Bumper,
+            }
+        }
+	}
+}
+

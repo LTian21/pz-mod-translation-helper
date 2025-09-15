@@ -1,0 +1,78 @@
+module Base
+{
+	model 83amgeneralM923stakes
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_stakes,
+		texture = Vehicles/Vehicles_83amgeneralM923_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle M923Stakes
+		{
+		part M923Stakes
+        	{
+
+			model M923Stakes1
+				{
+                		file = 83amgeneralM923stakes,
+				}
+
+			category = bodywork,
+			area = SpareTire,
+			specificItem = false,
+			itemType = Base.M923FlatbedStakes1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M923.InstallComplete.Stakes,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1000,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = M923.UninstallComplete.Stakes,
+
+            		}
+
+	            lua
+	            {
+				create = M923.Create.Stakes,
+				init = M923.Init.Stakes,
+				}
+		}
+	}
+
+		
+}

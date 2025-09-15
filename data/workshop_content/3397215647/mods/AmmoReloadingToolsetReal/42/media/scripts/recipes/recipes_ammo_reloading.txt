@@ -1,0 +1,359 @@
+module Base
+{
+	craftRecipe MakeAmmoReloadingToolset
+	{
+        timedAction = Making,
+		Time = 30,
+		category = Metalworking,
+		Tags = AnySurfaceCraft,
+        SkillRequired = Blacksmith:5,
+        needTobeLearn = true,
+        AutoLearn = Blacksmith:5,
+        xpAward = Blacksmith:45,
+		inputs
+		{
+            item 1 tags[Hammer;ClubHammer;Mallet] mode:keep flags[Prop1],
+			item 1 [Base.Saw] mode:keep,
+            item 1 tags[MetalworkingPliers],
+            item 1 tags[MetalworkingPunch;SmallPunch],
+			item 1 [Base.HandDrill],
+            item 1 [Base.SheetMetal],
+		}
+		outputs
+		{
+			item 1 Base.Mov_AmmoReloadingToolset,
+		}
+	}
+	
+/* Empty ammo casings */
+
+	craftRecipe MakeEmptyCasings
+	{
+        timedAction = Making,
+		Time = 30,
+		category = Press casings,
+		Tags = AmmoReloadingToolset;Cooking,
+		inputs
+		{
+			item 1 [Base.BrassScrap;Base.ScrapMetal;Base.UnusableMetal],
+		}
+		outputs
+		{
+			item 10 Base.EmptyCasing,
+		}
+	}
+
+/* 9MM BULLETS */
+	
+	craftRecipe DisassembleBullets9mm_1
+	{
+        timedAction = Making,
+		Time = 10,
+		category = 9mm ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		OnCreate = Recipe.OnCreate.GatherGunpowder,
+		inputs
+		{
+			item 1 [Base.Bullets9mm],
+		}
+		outputs
+		{
+			item 1 Base.GunPowder,
+			item 1 Base.Bullets9mmTip,
+			item 1 Base.EmptyCasing,
+		}
+	}
+	
+	
+	craftRecipe Reload_Bullets9mm_1
+	{
+        timedAction = Making,
+		Time = 20,
+		category = 9mm ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		inputs
+		{
+			item 1 [Base.Bullets9mmTip],
+			item 1 [Base.EmptyCasing],
+			item 1 [Base.GunPowder],
+		}
+		outputs
+		{
+			item 1 Base.Bullets9mm,
+		}
+	}
+	
+/* .38 BULLETS */
+
+	craftRecipe DisassembleBullets38_1
+	{
+        timedAction = Making,
+		Time = 10,
+		category = .38 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		OnCreate = Recipe.OnCreate.GatherGunpowder,
+		inputs
+		{
+			item 1 [Base.Bullets38],
+		}
+		outputs
+		{
+			item 1 Base.GunPowder,
+			item 1 Base.Bullets38Tip,
+			item 1 Base.EmptyCasing,
+		}
+	}
+	
+	craftRecipe Reload_Bullets38_1
+	{
+        timedAction = Making,
+		Time = 5,
+		category = .38 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		inputs
+		{
+			item 1 [Base.Bullets38Tip],
+			item 1 [Base.EmptyCasing],
+			item 1 [Base.GunPowder],
+		}
+		outputs
+		{
+			item 1 Base.Bullets38,
+		}
+	}
+	
+/* .44 BULLETS */
+
+	craftRecipe DisassembleBullets44_1
+	{
+        timedAction = Making,
+		Time = 10,
+		category = .44 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		OnCreate = Recipe.OnCreate.GatherGunpowder,
+		inputs
+		{
+			item 1 [Base.Bullets44],
+		}
+		outputs
+		{
+			item 1 Base.GunPowder,
+			item 1 Base.Bullets44Tip,
+			item 1 Base.EmptyCasing,
+		}
+	}
+	
+	
+	craftRecipe Reload_Bullets44_1
+	{
+        timedAction = Making,
+		Time = 5,
+		category = .44 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		inputs
+		{
+			item 1 [Base.Bullets44Tip],
+			item 1 [Base.EmptyCasing],
+			item 1 [Base.GunPowder],
+		}
+		outputs
+		{
+			item 1 Base.Bullets44,
+		}
+	}
+	
+
+/* .45 BULLETS */
+
+	craftRecipe DisassembleBullets45_1
+	{
+        timedAction = Making,
+		Time = 10,
+		category = .45 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		OnCreate = Recipe.OnCreate.GatherGunpowder,
+		inputs
+		{
+			item 1 [Base.Bullets45],
+		}
+		outputs
+		{
+			item 1 Base.GunPowder,
+			item 1 Base.Bullets45Tip,
+			item 1 Base.EmptyCasing,
+		}
+	}
+	
+	craftRecipe Reload_Bullets45_1
+	{
+        timedAction = Making,
+		Time = 5,
+		category = .45 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		inputs
+		{
+			item 1 [Base.Bullets45Tip],
+			item 1 [Base.EmptyCasing],
+			item 1 [Base.GunPowder],
+		}
+		outputs
+		{
+			item 1 Base.Bullets45,
+		}
+	}
+
+/* .223 BULLETS */
+	
+	craftRecipe Disassemble223Bullets_1
+	{
+        timedAction = Making,
+		Time = 10,
+		category = .223 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		OnCreate = Recipe.OnCreate.GatherGunpowder,
+		inputs
+		{
+			item 1 [Base.223Bullets],
+		}
+		outputs
+		{
+			item 1 Base.GunPowder,
+			item 1 Base.223BulletsTip,
+			item 1 Base.EmptyCasing,
+		}
+	}
+	
+	craftRecipe Reload_223Bullets_1
+	{
+        timedAction = Making,
+		Time = 5,
+		category = .223 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		inputs
+		{
+			item 1 [Base.223BulletsTip],
+			item 1 [Base.EmptyCasing],
+			item 1 [Base.GunPowder],
+		}
+		outputs
+		{
+			item 1 Base.223Bullets,
+		}
+	}
+/* .308 BULLETS */
+
+	craftRecipe Disassemble308Bullets_1
+	{
+        timedAction = Making,
+		Time = 10,
+		category = .308 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		OnCreate = Recipe.OnCreate.GatherGunpowder,
+		inputs
+		{
+			item 1 [Base.308Bullets],
+		}
+		outputs
+		{
+			item 1 Base.GunPowder,
+			item 1 Base.308BulletsTip,
+			item 1 Base.EmptyCasing,
+		}
+	}
+	
+	craftRecipe Reload_308Bullets_1
+	{
+        timedAction = Making,
+		Time = 5,
+		category = .308 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		inputs
+		{
+			item 1 [Base.308BulletsTip],
+			item 1 [Base.EmptyCasing],
+			item 1 [Base.GunPowder],
+		}
+		outputs
+		{
+			item 1 Base.308Bullets,
+		}
+	}
+/* 5.56 BULLETS */
+
+	craftRecipe Disassemble556Bullets_1
+	{
+        timedAction = Making,
+		Time = 10,
+		category = 5.56 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		OnCreate = Recipe.OnCreate.GatherGunpowder,
+		inputs
+		{
+			item 1 [Base.556Bullets],
+		}
+		outputs
+		{
+			item 1 Base.GunPowder,
+			item 1 Base.556BulletsTip,
+			item 1 Base.EmptyCasing,
+		}
+	}
+
+	craftRecipe Reload_556Bullets_1
+	{
+        timedAction = Making,
+		Time = 5,
+		category = 5.56 ammo,
+		Tags = AmmoReloadingToolset;Cooking,
+		inputs
+		{
+			item 1 [Base.556BulletsTip],
+			item 1 [Base.EmptyCasing],
+			item 1 [Base.GunPowder],
+		}
+		outputs
+		{
+			item 1 Base.556Bullets,
+		}
+	}
+/* Shotgun shells */
+	
+	
+	craftRecipe DisassembleShotgunShells_1
+	{
+        timedAction = Making,
+		Time = 10,
+		category = Shells,
+		Tags = AmmoReloadingToolset;Cooking,
+		OnCreate = Recipe.OnCreate.GatherGunpowder,
+		inputs
+		{
+			item 1 [Base.ShotgunShells],
+		}
+		outputs
+		{
+			item 1 Base.GunPowder,
+			item 1 Base.ShotgunShellsTip,
+			item 1 Base.EmptyCasing,
+		}
+	}
+	
+	
+	craftRecipe Reload_ShotgunShell_1
+	{
+        timedAction = Making,
+		Time = 5,
+		category = Shells,
+		Tags = AmmoReloadingToolset;Cooking,
+		inputs
+		{
+			item 1 [Base.ShotgunShellsTip],
+			item 1 [Base.EmptyCasing],
+			item 1 [Base.GunPowder],
+		}
+		outputs
+		{
+			item 1 Base.ShotgunShells,
+		}
+	}
+}

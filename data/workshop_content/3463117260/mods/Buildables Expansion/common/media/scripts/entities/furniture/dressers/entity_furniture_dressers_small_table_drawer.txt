@@ -1,0 +1,73 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_SmallTableWithDrawer
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Small Table With Drawer,
+			Icon		= furniture_storage_01_52,
+		}
+	}
+
+    entity SmallTableWithDrawer
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_SmallTableWithDrawer,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = furniture_storage_01_54,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = furniture_storage_01_55,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = furniture_storage_01_53,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_storage_01_52,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 150,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:5,
+            category      = Furniture_Dressers,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_dressersDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

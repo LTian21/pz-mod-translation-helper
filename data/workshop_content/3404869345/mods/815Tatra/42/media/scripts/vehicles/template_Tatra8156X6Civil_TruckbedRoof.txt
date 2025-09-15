@@ -1,0 +1,59 @@
+module Base
+{
+
+
+
+ model Tatra8156X6Civil_FlatbedRoof
+	{
+		mesh = vehicles/Vehicles_Civil6X6Tatra815_Body|FlatbedRoof,
+		shader = basicEffect,
+                texture = Vehicles/TatraFlatbedRoofCivil,
+		scale = 1,
+        
+        
+	}
+
+
+  template vehicle Tatra8156X6Civil_TruckbedRoof
+    {
+        template = ATA2Visual/part/ATA2VisualSpoilerRear,
+        part ATA2VisualSpoilerRear 
+        {
+            
+            
+            
+            model Default
+            {
+                file = Tatra8156X6Civil_FlatbedRoof,
+            }
+          area = TruckBed,
+        }
+
+        part ATAVisual*
+        {
+            category = tuning,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+
+            table install
+            {
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+
+            table uninstall
+            {
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+
+            lua
+            {
+                create = ATATuning.Create.Chance15,
+                init = ATATuning.Init.Default,
+            }
+        }
+    }
+}

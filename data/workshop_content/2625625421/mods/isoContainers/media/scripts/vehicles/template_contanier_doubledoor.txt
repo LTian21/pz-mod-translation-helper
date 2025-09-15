@@ -1,0 +1,170 @@
+module Base
+{
+	model isoContainer4_TrunkdoorFront
+	{
+		mesh = vehicles/Containers_ISO_body|Trunk_mesh_front,
+		shader = vehicle_noreflect,
+		static = FALSE,
+		scale = 0.1,
+	}
+	model isoContainer4_TrunkdoorRear
+	{
+		mesh = vehicles/Containers_ISO_body|Trunk_mesh_rear,
+		shader = vehicle_noreflect,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle ContainerDoubleDoor
+	{
+		part TrunkDoor
+		{
+			model mofothatmoves1
+			{
+				file = isoContainer4_TrunkdoorRear,
+			}
+
+			area = TruckBed,
+
+			anim Close
+			{
+				anim = rear_closing,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = rear_closing,
+				reverse = TRUE,
+				rate = 0.40,
+			}
+
+			anim Closed
+			{
+				anim = rear_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = rear_closing,
+				animate = FALSE,
+			}
+		}
+
+		part TrunkDoor2
+		{
+			model elbastardo2
+			{
+				file = isoContainer4_TrunkdoorFront,
+			}
+
+			area = TruckBed2,
+
+			anim Close
+			{
+				anim = front_closing,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				anim = front_closing,
+				reverse = TRUE,
+				rate = 0.40,
+			}
+
+			anim Closed
+			{
+				anim = front_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = front_closing,
+				animate = FALSE,
+			}
+		}
+
+		part TrunkDoor*
+		{
+			category = bodywork,
+			
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			
+
+			itemType = Base.IsoContainerDoubleTrunkDoor,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.TrunkDoor,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}
+

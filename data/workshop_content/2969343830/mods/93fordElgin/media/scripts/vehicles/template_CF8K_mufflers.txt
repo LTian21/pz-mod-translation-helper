@@ -1,0 +1,69 @@
+module Base
+{
+	model 93fordElginMuffler
+    {
+        mesh = vehicles/Vehicles_93fordElgin_Body|cf8k_muff,
+        texture = Vehicles/Vehicles_93fordElgin_Interior,
+        shader = vehiclewheel,
+        scale = 0.1,
+    }
+
+	template vehicle CF8KMufflers
+	{
+		part Muffler
+       	{
+            model Muffler0
+			{
+                file = 93fordElginMuffler,
+			}
+
+            area = TireFrontRight,
+            category = engine,
+            specificItem = false,
+            itemType = Base.93fordCF8000Muffler0,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 800,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+		        complete = Vehicles.InstallComplete.Default,
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+	}
+}
+

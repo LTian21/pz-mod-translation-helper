@@ -1,0 +1,111 @@
+module Base
+{
+	template vehicle FRSeat
+	{
+		part SeatBackLeft
+		{
+			area = SeatRearLeft,
+			container
+			{
+				seat = BackLeft,
+			}
+		}
+
+		part SeatBackRight
+		{
+			area = SeatRearRight,
+			container
+			{
+				seat = BackRight,
+			}
+		}
+		
+		part SeatBack1Left
+		{
+			area = SeatRearLeft,
+			container
+			{
+				seat = Back1Left,
+			}
+		}
+
+		part SeatBack1Right
+		{
+			area = SeatRearRight,
+			container
+			{
+				seat = Back1Right,
+			}
+		}
+
+		part SeatBack2Left
+		{
+			area = SeatRearLeft,
+			container
+			{
+				seat = Back2Left,
+			}
+		}
+
+		part SeatBack2Right
+		{
+			area = SeatRearRight,
+			container
+			{
+				seat = Back2Right,
+			}
+		}
+		
+		part SeatBack*
+		{
+			category = seat,
+			itemType = Base.NormalCarSeat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.FR_Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+	}
+	
+}

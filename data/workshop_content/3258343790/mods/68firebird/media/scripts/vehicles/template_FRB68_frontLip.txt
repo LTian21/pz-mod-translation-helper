@@ -1,0 +1,84 @@
+module Base
+{
+	model 68firebirdFrontLip0
+	{
+		mesh = vehicles/Vehicles_68firebird_Body|brd_lip0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 68firebirdFrontLip1
+	{
+		mesh = vehicles/Vehicles_68firebird_Body|brd_lip1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle FRB68FrontLip
+		{
+		part FRB68FrontLip
+        	{
+
+			model FRB68Lip0
+				{
+                		file = 68firebirdFrontLip0,
+				}
+
+			model FRB68Lip1
+				{
+                		file = 68firebirdFrontLip1,
+				}
+
+				area = Engine,
+				category = bodywork,
+				itemType = Base.68firebirdFrontLip;Base.68firebirdFrontSplitLip,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = FRB68.InstallComplete.FrontLip,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = FRB68.UninstallComplete.FrontLip,
+            		}
+
+            		lua
+            		{
+					create = FRB68.Create.FrontLip,
+					init = FRB68.Init.FrontLip,
+					}
+			}
+	}
+}

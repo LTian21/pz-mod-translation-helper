@@ -1,0 +1,54 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WroughtIronLowFenceCorner
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Wrought Iron Low Fence Corner,
+			Icon		= fencing_01_3,
+		}
+	}
+
+    entity WroughtIronLowFenceCorner
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WroughtIronLowFenceCorner,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face W
+            {
+                layer
+                {
+                    row = fencing_01_3,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildPoleFenceSmall,
+            time          = 150,
+            needToBeLearn = true,
+            category      = Fences_Low,
+            SkillRequired = MetalWelding:5,
+            xpAward       = MetalWelding:5,
+            ToolTip       = Tooltip_craft_bigWroughtFenceDesc,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.MetalBar;Base.MetalPipe],
+                item 2 [Base.ScrapMetal],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

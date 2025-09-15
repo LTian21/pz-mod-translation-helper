@@ -1,0 +1,155 @@
+module Base
+{
+
+    model 98stageaWheelL
+	{
+		mesh = vehicles/Vehicles_98stagea_Wheels|stagea_tire0,
+		texture = vehicles/Vehicles_98stagea_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 98stageaWheelR
+	{
+		mesh = vehicles/Vehicles_98stagea_Wheels|stagea_tire0,
+		texture = vehicles/Vehicles_98stagea_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle STAGEATires
+	{
+		part TireFrontLeft
+		{
+            model STAGEATire0
+			{
+				file = 98stageaWheelL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model STAGEATire0
+			{
+				file = 98stageaWheelR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+            table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+
+		}
+
+		part TireRearLeft
+		{
+            model STAGEATire0
+			{
+				file = 98stageaWheelL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+
+		}
+
+		part TireRearRight
+		{
+            model STAGEATire0
+			{
+				file = 98stageaWheelR,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+
+		}
+
+		part Tire*
+		{
+			category = tire,
+            specificItem = false,
+			itemType = Base.98stageaTire3,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Tire,
+			}
+
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+	}
+}

@@ -1,0 +1,110 @@
+module Base
+{
+
+	model 67gt500espare
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500e_tire_spare,
+		texture = vehicles/Vehicles_67gt500e_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 67gt500spare
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_tire_spare,
+		texture = vehicles/Vehicles_67gt500_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 67gt500straps
+	{
+		mesh = vehicles/Vehicles_67gt500_Body|gt500_tire_straps,
+		texture = vehicles/Vehicles_67gt500_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	
+	template vehicle GT500SpareTire
+	{
+		part DAMNSpareTire
+        	{
+
+			model GT500sSpare
+				{
+                		file = 67gt500spare,
+				}
+			model GT500eSpare
+				{
+                		file = 67gt500espare,
+				}
+            model GT500uSpare
+				{
+                		file = 67gt500WheelUNIL,
+                        offset = -0.2473 0.7742 -1.2257,
+				        rotate = 0.0000 0.0000 -90.0000,
+				}
+			model GT500Straps
+				{
+                		file = 67gt500straps,
+				}
+
+			category = tire,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.67gt500Tire3;Base.67gt500eTire3;damnCraft.SmallTire1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GT500.InstallComplete.SpareTire,
+                	requireInstalled = DAMNWindshieldRearArmor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = GT500.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = GT500.Create.SpareTire,
+				init = GT500.Init.SpareTire,
+				}
+		}
+	}
+}
+

@@ -1,0 +1,49 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity ES_StonePath
+        {
+            LuaWindowClass      = ISEntityWindow,
+            DisplayName         = Create a path from small stones,
+            Icon                = build_stone_floor,
+        }
+    }
+
+    entity StonePath
+    {
+
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_StonePath,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+		    isThumpable = false,
+			OnIsValid = BuildRecipeCode.floor.OnIsValid,
+		    OnCreate = BuildRecipeCode.floor.OnCreate,
+            face Single
+            {
+                layer
+                {
+                    row = ro_tiles_01_0,
+                }
+            }
+        }
+
+        component CraftRecipe
+        {
+		    timedAction   = BuildLowHammer,
+            time          = 50,
+            category      = Outdoors,
+            inputs
+            {
+		        item 1 tags[Hammer] mode:keep flags[Prop1],
+                item 2 [Base.Stone2],		                       
+            }
+        }
+    }
+}

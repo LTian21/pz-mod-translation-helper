@@ -1,0 +1,293 @@
+module Base
+{
+	model 63type2VanSpareStock0
+	{
+		mesh = vehicles/Vehicles_63type2Van_Body|type2_tire_stock_cab,
+		texture = Vehicles/Vehicles_63beetle_Wheel_stock,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 63type2VanSpareStock1
+	{
+		mesh = vehicles/Vehicles_63type2Van_Body|type2_tire_stock_roof,
+		texture = Vehicles/Vehicles_63beetle_Wheel_stock,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 63type2VanSpareOffroad0
+	{
+		mesh = vehicles/Vehicles_63type2Van_Body|type2_tire_offroad_cage,
+		texture = Vehicles/Vehicles_63type2Van_Wheel_offroad,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 63type2VanSpareOffroad1
+	{
+		mesh = vehicles/Vehicles_63type2Van_Body|type2_tire_offroad_roof,
+		texture = Vehicles/Vehicles_63type2Van_Wheel_offroad,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle VAN63SpareTireStock
+		{
+		part VAN63SpareCab
+        	{
+
+				model VAN63spare0
+				{
+                	file = 63type2VanSpareStock0,
+				}
+
+				area = TruckBed,
+				category = Other,
+				specificItem = false,
+				itemType = Base.63beetleTire,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VAN63.InstallComplete.SpareTireStockCab,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+		            complete = VAN63.UninstallComplete.SpareTireStockCab,
+            		}
+
+            		lua
+            		{
+            			init = VAN63.Init.SpareTireStockCab,
+						create = VAN63.Create.SpareTireStockCab,
+					}
+
+			}
+
+			part VAN63SpareRoof
+        	{
+
+				model VAN63spare1
+				{
+                	file = 63type2VanSpareStock1,
+				}
+
+				area = TruckBed,
+				category = Other,
+				specificItem = false,
+				itemType = Base.63beetleTire,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = VAN63Roofrack,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+		            complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+						create = DAMN.Create.Blank,
+					}
+
+			}
+	}
+
+	template vehicle VAN63SpareTireOffroad
+		{
+			part VAN63ApocSpareCage
+        	{
+
+				model VAN63spareCage0
+				{
+                	file = 63type2VanSpareOffroad0,
+				}
+
+				area = TruckBed,
+				category = Other,
+				specificItem = false,
+				itemType = Base.63Type2VanTireOffroad,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+		            complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+						create = DAMN.Create.Blank,
+					}
+
+			}
+
+			part VAN63ApocSpareRoof
+        	{
+
+				model VAN63ApocspareRoof1
+				{
+                	file = 63type2VanSpareOffroad1,
+				}
+
+				area = TruckBed,
+				category = Other,
+				specificItem = false,
+				itemType = Base.63Type2VanTireOffroad,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = VAN63.InstallComplete.SpareTireOffroadRoof,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+		            complete = VAN63.UninstallComplete.SpareTireOffroadRoof,
+            		}
+
+            		lua
+            		{
+            			init = VAN63.Init.SpareTireOffroadRoof,
+						create = VAN63.Create.SpareTireOffroadRoof,
+					}
+
+			}
+		}
+
+		
+}

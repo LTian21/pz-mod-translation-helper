@@ -1,0 +1,74 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_GreenCounter
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Green Counter,
+			Icon		= fixtures_counters_01_69,
+		}
+	}
+
+    entity GreenCounter
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_GreenCounter,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = fixtures_counters_01_71,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_counters_01_65,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = fixtures_counters_01_67,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = fixtures_counters_01_69,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:5,
+            category      = Containers_Residential,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_residentialCounterDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 6 [Base.Plank] flags[Prop2],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

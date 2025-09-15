@@ -1,0 +1,508 @@
+module AuthenticZRecipes {
+  imports {
+      Base
+  }
+
+recipe Attach Cigarette to Cigarette Holder
+  	{
+   	   AuthenticCigaretteHolder,
+   	   Cigarettes=1,
+
+   	   Result:AuthenticCigaretteHolder_Cig,
+	   Time:30.0,
+       Prop1:Cigarette,
+       Prop2:AuthenticCigaretteHolder,	
+  	}
+
+recipe Convert into Wearable
+  	{
+   	   Headphones,
+
+   	   Result:Authentic_Headphones,
+	   Time:30.0,
+  	}
+
+recipe Convert into Wearable
+  	{
+   	   Bandage,
+
+   	   Result:Authentic_Bandages,
+	   Time:30.0,
+  	}
+
+recipe Convert into Item
+  	{
+   	   Authentic_Bandages,
+
+   	   Result:Bandage,
+	   Time:30.0,
+  	}
+
+recipe Convert into Wearable
+  	{
+   	   Cigarettes=1,
+
+   	   Result:Cigarette,
+	   Time:30.0,
+  	}
+
+recipe Convert into Item
+  	{
+   	   Cigarette,
+
+   	   Result:Cigarettes=1,
+	   Time:30.0,
+	   OnGiveXP:Recipe.OnGiveXP.None,	   
+  	}
+
+recipe Convert into Item
+  	{
+   	   CigarAZ,
+
+   	   Result:CigarAZ2,
+	   Time:30.0,
+	   OnGiveXP:Recipe.OnGiveXP.None,	   
+  	}
+
+recipe Convert into Wearable
+  	{
+   	   CigarAZ2,
+
+   	   Result:CigarAZ,
+	   Time:30.0,
+	   OnGiveXP:Recipe.OnGiveXP.None,	   
+  	}
+
+recipe Make a Stack of Money
+  	{
+   	   Money,
+
+   	   Result:Authentic_MoneyStack,
+	   Time:30.0,
+  	}
+
+recipe Convert into Item
+  	{
+   	   Authentic_MoneyStack,
+
+   	   Result:Money,
+	   Time:30.0,
+  	}
+
+recipe Convert into Wearable
+  	{
+   	   Pills=10,
+
+   	   Result:Authentic_Pills,
+	   Time:30.0,
+  	}
+recipe Convert into Item   
+  	{
+   	   Authentic_Pills,
+
+   	   Result:Pills,
+	   Time:30.0,
+  	}
+
+recipe Convert into Wearable
+  	{
+   	   AuthenticCrutch,
+
+   	   Result:CrutchLEFT,
+	   Time:20.0,
+  	}
+	
+recipe Convert into Melee
+  	{
+   	   CrutchLEFT/CrutchRIGHT,
+
+   	   Result:AuthenticCrutch,
+	   Time:20.0,
+  	}
+	
+recipe Convert into Wearable
+  	{
+   	   Camera,
+
+   	   Result:CameraAZ,
+	   Time:20.0,
+  	}
+recipe Convert into Wearable
+  	{
+   	   CameraDisposable,
+
+   	   Result:CameraDisposableAZ,
+	   Time:20.0,
+  	}	
+	
+recipe Convert into Wearable
+  	{
+   	   CameraExpensive,
+
+   	   Result:CameraExpensiveAZ,
+	   Time:20.0,
+  	}	
+
+recipe Convert into Wearable
+  	{
+   	   OvenMitt=2,
+
+   	   Result:Gloves_OvenMitts,
+	   Time:30.0,
+  	}	
+
+    recipe Dismantle Headphones
+    {
+       Authentic_Headphones,
+       keep [Recipe.GetItemTypes.Screwdriver],
+
+       Result:ElectronicsScrap,
+       Time:100.0,
+       OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+       Category:Electrical,
+       AnimNode:Disassemble,
+       Prop1:Screwdriver,
+       Prop2:Headphones,
+    }
+    recipe Dismantle Headphones
+    {
+       Authentic_Headphones2,
+       keep [Recipe.GetItemTypes.Screwdriver],
+
+       Result:ElectronicsScrap,
+       Time:100.0,
+       OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+       Category:Electrical,
+       AnimNode:Disassemble,
+       Prop1:Screwdriver,
+       Prop2:WorldItem_HeadPhones,
+    }	
+
+    recipe Dismantle Ghostbuster Trap
+    {
+       AuthenticGhostbusterTrap,
+       keep [Recipe.GetItemTypes.Screwdriver],
+
+       Result:ElectronicsScrap,
+	   Time:100.0,
+       OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+       Category:Electrical,
+       AnimNode:Disassemble,
+       Prop1:Screwdriver,
+       Prop2:AuthenticGhostbusterTrap,
+    }
+
+    recipe Dismantle Broadcast Video Camera
+    {
+       BroadcastCamera,
+       keep [Recipe.GetItemTypes.Screwdriver],
+
+       Result:ElectronicsScrap,
+	   Time:100.0,
+       OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+       Category:Electrical,
+       AnimNode:Disassemble,
+       Prop1:Screwdriver,
+    }
+
+    recipe Install Light Mechanism
+    {
+       Hat_HardHat_Miner,
+	   ElectronicsScrap,
+       keep [Recipe.GetItemTypes.Screwdriver],
+
+       Result:Hat_HardHat_Miner2,
+       Time:150.0,
+       OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+       Category:Electrical,
+       AnimNode:Disassemble,
+       Prop1:Screwdriver,
+       Prop2:Hat_HardHat_Miner,
+    }
+	
+	recipe Remove Battery
+   {
+     keep AuthenticZLite.Authentic_MilitaryFlashlightGrey,
+
+     Result:Battery,
+     Time:50,
+     OnTest:Recipe.OnTest.TorchBatteryRemoval,
+     OnCreate:AuthenticTorchBatteryRemoval_OnCreate,
+     Prop2:Authentic_MilitaryFlashlightGrey,
+   }
+
+  	 recipe Insert Battery into Military Flashlight
+   {
+     destroy AuthenticZLite.Authentic_MilitaryFlashlightGrey,
+     destroy Battery,
+
+     Result:AuthenticZLite.Authentic_MilitaryFlashlightGrey,
+     Time:50,
+     OnTest:AuthenticTorchBatteryInsert_TestIsValid,
+     OnCreate:Recipe.OnCreate.TorchBatteryInsert,
+     Prop2:Authentic_MilitaryFlashlightGrey,
+   }
+
+	recipe Remove Battery
+   {
+     keep Authentic_MilitaryFlashlightGreen,
+
+     Result:Battery,
+     Time:30,
+     OnTest:Recipe.OnTest.TorchBatteryRemoval,
+     OnCreate:AuthenticTorchBatteryRemoval_OnCreate,
+     Prop2:Authentic_MilitaryFlashlightGreen,
+   }
+
+  	 recipe Insert Battery into Military Flashlight
+   {
+     destroy AuthenticZLite.Authentic_MilitaryFlashlightGreen,
+     destroy Battery,
+
+     Result:AuthenticZLite.Authentic_MilitaryFlashlightGreen,
+     Time:30,
+     OnTest:AuthenticTorchBatteryInsert_TestIsValid,
+     OnCreate:Recipe.OnCreate.TorchBatteryInsert,
+     Prop2:Authentic_MilitaryFlashlightGreen,
+   }
+   
+	recipe Remove Battery
+   {
+     keep AuthenticZLite.Torch2,
+
+     Result:Battery,
+     Time:30,
+     OnTest:Recipe.OnTest.TorchBatteryRemoval,
+     OnCreate:AuthenticTorchBatteryRemoval_OnCreate,
+     StopOnWalk:false,
+     Prop2:FlashLightBlue,
+   }
+
+  	 recipe Insert Battery into Flashlight
+   {
+     destroy AuthenticZLite.Torch2,
+     destroy Battery,
+
+     Result:AuthenticZLite.Torch2,
+     Time:30,
+     OnTest:AuthenticTorchBatteryInsert_TestIsValid,
+     OnCreate:Recipe.OnCreate.TorchBatteryInsert,
+     StopOnWalk:false,
+     Prop2:FlashLightBlue,
+   }
+
+	recipe Remove Battery
+   {
+     keep AuthenticZLite.HandTorch2,
+
+     Result:Battery,
+     Time:30,
+     OnTest:Recipe.OnTest.TorchBatteryRemoval,
+     OnCreate:AuthenticTorchBatteryRemoval_OnCreate,
+     StopOnWalk:false,
+     Prop2:HandTorch,
+   }
+
+  	 recipe Insert Battery into Flashlight
+   {
+     destroy AuthenticZLite.HandTorch2,
+     destroy Battery,
+
+     Result:AuthenticZLite.HandTorch2,
+     Time:30,
+     OnTest:AuthenticTorchBatteryInsert_TestIsValid,
+     OnCreate:Recipe.OnCreate.TorchBatteryInsert,
+     StopOnWalk:false,
+     Prop2:HandTorch,
+   }
+   
+  	 recipe Insert Battery into Miner Hat
+   {
+     destroy AuthenticZLite.Authentic_MinerLightbulb,
+     destroy Battery,
+
+     Result:AuthenticZLite.Authentic_MinerLightbulb,
+     Time:50,
+     OnTest:AuthenticTorchBatteryInsert_TestIsValid,
+     OnCreate:Recipe.OnCreate.TorchBatteryInsert,
+     Prop1:Hat_HardHat_Miner2,	 
+     Prop2:Authentic_MinerLightbulb,
+   }
+
+	recipe Remove Battery
+   {
+     keep AuthenticZLite.Authentic_MinerLightbulb,
+
+     Result:Battery,
+     Time:50,
+     OnTest:Recipe.OnTest.TorchBatteryRemoval,
+     OnCreate:AuthenticTorchBatteryRemoval_OnCreate,
+     Prop2:Authentic_MinerLightbulb,
+   }  
+
+
+	
+recipe Draw Hitlist 1
+  	{
+	   keep Scissors,
+   	   keep Crayons,
+	   Magazine,
+	   ComicBook,
+	   SheetPaper2,
+
+   	   Result:PZAZ_HitList,
+	   Time:80.0,
+  	}
+
+recipe Draw Hitlist 2
+  	{
+	   keep Scissors,
+   	   keep Crayons,
+	   Magazine,
+	   ComicBook,
+	   SheetPaper2,
+
+   	   Result:PZAZ_HitList2,
+	   Time:80.0,
+  	}
+	
+recipe Draw Hitlist 3
+  	{
+	   keep Scissors,
+   	   keep Crayons,
+	   Magazine,
+	   ComicBook,
+	   SheetPaper2,
+
+   	   Result:PZAZ_HitList3,
+	   Time:80.0,
+  	}
+recipe Open Medical Coat
+  	{
+   	   Base.JacketLong_Doctor,
+
+   	   Result:AuthenticZLite.Jacket_Doctor2,
+	   Time:30.0,
+	   Tooltip:Tooltip_OpenJacket,	   
+  	}
+recipe Tie Apron Around Dress
+  	{
+   	   Dress_BallroomDress_Striped,
+	   OnTest:KoniTestAZ_OnTest_ConvertClothing,
+	   OnCreate:KoniTestAZ_OnCreate_ConvertClothing,
+   	   Result:Dress_BallroomDress_StripedApron,
+	   Time:50.0,
+  	}	
+recipe Tie Apron Around Dress
+  	{
+   	   Dress_BallroomDress_LongSleevedButtoned,
+	   OnTest:KoniTestAZ_OnTest_ConvertClothing,
+	   OnCreate:KoniTestAZ_OnCreate_ConvertClothing,
+   	   Result:Dress_BallroomDress_LongSleevedButtonedApron,
+	   Time:50.0,
+  	}		
+recipe Tie Hoodie Around Waist
+  	{
+   	   HoodieUP_WhiteTINT,
+	   OnTest:KoniTestAZ_OnTest_ConvertClothing,
+	   OnCreate:KoniTestAZ_OnCreate_ConvertClothing,
+   	   Result:HoodieTied_WhiteTINT,
+	   Time:30.0,	   
+  	}	
+recipe Tie Hoodie Around Waist
+  	{
+   	   HoodieDOWN_WhiteTINT,
+	   OnTest:KoniTestAZ_OnTest_ConvertClothing,
+	   OnCreate:KoniTestAZ_OnCreate_ConvertClothing,
+   	   Result:HoodieTied_WhiteTINT,
+	   Time:30.0,
+  	}
+	
+recipe Open Pack of Glowsticks
+   {
+     AuthenticGlowstick_Pack,
+
+     Result:AuthenticGlowstick_Blank=3,
+     RemoveResultItem:true,	 
+     Time:120,
+     OnCreate:OpenGlowStickPackage,
+     StopOnWalk:false,
+	 AnimNode:RipSheets,
+	 Tooltip:Tooltip_GlowStickPack,	   
+   }	
+
+recipe Open Sealed Medkit
+   {
+     PZAZ_SealedMedkit,
+
+     Result:AuthenticGlowstick_Blank=3,
+     RemoveResultItem:true,	 
+     Time:120,
+     OnCreate:OpenSealedMedkit,
+     StopOnWalk:false,
+	 AnimNode:RipSheets,
+   }
+
+recipe Wear on Neck
+  	{
+   	   Hat_EarMuffs,
+	   OnTest:KoniTestAZ_OnTest_ConvertClothing,
+	   OnCreate:KoniTestAZ_OnCreate_ConvertClothing,
+   	   Result:Hat_EarMuffs_AZ,
+	   Time:30.0,
+  	}
+	
+recipe Wear on Neck
+  	{
+   	   Hat_EarMuff_Protectors,
+
+   	   Result:Hat_EarMuff_Protectors_AZ,
+	   Time:30.0,
+  	}	
+
+recipe Put Goblin in Carriage
+  	{
+   	   GroguAZ,
+   	   GroguCarriageEmpty,
+
+   	   Result:GroguCarriage,
+	   Time:30.0,
+  	}
+
+recipe Take Goblin Out
+  	{
+   	   GroguCarriage,
+
+   	   Result:GroguCarriageEmpty,
+	   OnCreate:GetGroguBack,	   
+	   Time:30.0,
+  	}
+
+recipe Put Goblin in Bag
+  	{
+   	   GroguAZ,
+   	   Bag_LS_GroguBagEmpty,
+
+   	   Result:Bag_LS_GroguBag,
+	   Time:30.0,
+  	}
+
+recipe Take Goblin Out
+  	{
+   	   Bag_LS_GroguBag,
+
+   	   Result:Bag_LS_GroguBagEmpty,
+	   OnCreate:GetGroguBack,
+	   Time:30.0,
+  	}
+	
+	/* Modded - recipe */
+recipe Convert into Wearable
+  	{
+   	   BobiAdds.CigarettesOne,
+
+   	   Result:Cigarette,
+	   Time:30.0,
+  	}
+	
+}		

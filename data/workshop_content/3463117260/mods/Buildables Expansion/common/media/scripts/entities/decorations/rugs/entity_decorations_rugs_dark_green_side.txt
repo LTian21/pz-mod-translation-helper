@@ -1,0 +1,72 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_DarkGreenSideRug
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Dark Green Side Rug,
+			Icon		= floors_rugs_01_5,
+		}
+	}
+
+    entity DarkGreenSideRug
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_DarkGreenSideRug,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {	
+            face W
+            {
+                layer
+                {
+                    row = floors_rugs_01_3,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = floors_rugs_01_4,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = floors_rugs_01_2,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = floors_rugs_01_5,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = SewingCloth,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Decorations_Rugs,
+            SkillRequired = Tailoring:2,
+            xpAward       = Tailoring:4,
+            ToolTip       = Tooltip_craft_rugsDesc,
+            inputs
+            {
+                item 1 tags[SewingNeedle] mode:keep flags[Prop1],
+                item 5 [Base.RippedSheets] mode:destroy flags[Prop2],
+                item 3 [Base.Thread],
+            }
+        }
+    }
+}

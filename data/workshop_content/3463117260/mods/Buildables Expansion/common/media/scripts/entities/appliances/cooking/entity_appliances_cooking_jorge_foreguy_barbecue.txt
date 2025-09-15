@@ -1,0 +1,74 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_JorgeForeguyBarbecue
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Jorge Foreguy Barbecue,
+			Icon		= appliances_cooking_01_44,
+		}
+	}
+
+    entity JorgeForeguyBarbecue
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_JorgeForeguyBarbecue,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face N
+            {
+                layer
+                {
+                    row = appliances_cooking_01_46,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = appliances_cooking_01_45,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = appliances_cooking_01_44,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = appliances_cooking_01_47,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:5,
+            xpAward       = MetalWelding:10,
+            category      = Appliances_Cooking,
+            ToolTip       = Tooltip_craft_barbecueDesc,
+            inputs
+            {
+                item 5 [Base.BlowTorch] flags[Prop1],
+                item 6 [Base.SmallSheetMetal],
+                item 6 [Base.SheetMetal],
+                item 5 [Base.ScrapMetal],
+                item 5 [Base.WeldingRods],
+            }
+        }
+    }
+}

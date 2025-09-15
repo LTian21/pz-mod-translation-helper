@@ -1,0 +1,221 @@
+module Base
+{
+	model 91nissan240sxBumperFront0
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model 91nissan240sxBumperFrontA
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model 91nissan240sxBumperFront1
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model 91nissan240sxBumperFrontB
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_bumper_frontB,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model 91nissan240sxBumperFront2
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_bumper_front2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model 91nissan240sxBumperFront3
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_bumper_front3,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	model 91nissan240sxBumperRear0
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model 91nissan240sxBumperRear1
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_bumper_rear1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model 91nissan240sxBumperRear2
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_bumper_rear2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model 91nissan240sxBullbarFrontA
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle N240Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model BumperFront0
+				{
+                		file = 91nissan240sxBumperFront0,
+				}
+            model BumperFrontA
+				{
+                		file = 91nissan240sxBumperFrontA,
+				}
+            model BumperFront1
+				{
+                		file = 91nissan240sxBumperFront1,
+				}
+            model BumperFrontB
+				{
+                		file = 91nissan240sxBumperFrontB,
+				}
+            model BumperFront2
+				{
+                		file = 91nissan240sxBumperFront2,
+				}
+            model BumperFront3
+				{
+                		file = 91nissan240sxBumperFront3,
+				}
+            model BullbarFrontA
+				{
+                		file = 91nissan240sxBullbarFrontA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91nissan240sxBumperFront0;Base.91nissan240sxBumperFrontA;Base.91nissan240sxBumperFront1;Base.91nissan240sxBumperFrontB;Base.91nissan240sxBumperFront2;Base.91nissan240sxBumperFront3;Base.91nissan240sxBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = N240.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = N240.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = N240.Create.BumperFront,
+					init = N240.Init.BumperFront,
+					}
+			}
+
+
+		part DAMNBumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 91nissan240sxBumperRear0,
+				}
+            model BumperRear1
+				{
+                		file = 91nissan240sxBumperRear1,
+				}
+            model BumperRear2
+				{
+                		file = 91nissan240sxBumperRear2,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.91nissan240sxBumperRear0;Base.91nissan240sxBumperRear1;Base.91nissan240sxBumperRear2,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = N240.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = N240.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = N240.Create.BumperRear,
+					init = N240.Init.BumperRear,
+					}
+		}
+	}
+}

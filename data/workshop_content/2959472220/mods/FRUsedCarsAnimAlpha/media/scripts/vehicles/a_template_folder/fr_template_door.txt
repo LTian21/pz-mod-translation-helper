@@ -1,0 +1,252 @@
+module Base
+{
+	template vehicle FRDoor
+	{
+		part DoorFrontLeft
+		{
+			area = SeatFrontLeft,
+			anim ActorOpen
+			{
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				angle = 0.0 270.0 0.0,
+			}
+			itemType = Base.FrontCarDoor,
+			table uninstall
+			{
+				requireUninstalled = WindowFrontLeft,
+			}
+		}
+
+		part DoorFrontRight
+		{
+			area = SeatFrontRight,
+			anim ActorOpen
+			{
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				angle = 0.0 90.0 0.0,
+			}
+			itemType = Base.FrontCarDoor,
+			table uninstall
+			{
+				requireUninstalled = WindowFrontRight,
+			}
+		}
+
+		part DoorMiddleLeft
+		{
+			area = SeatMiddleLeft,
+			anim ActorOpen
+			{
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				angle = 0.0 270.0 0.0,
+			}
+			itemType = Base.RearCarDoor,
+			table uninstall
+			{
+				requireUninstalled = WindowMiddleLeft,
+			}
+		}
+
+		part DoorMiddleRight
+		{
+			area = SeatMiddleRight,
+			anim ActorOpen
+			{
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				angle = 0.0 90.0 0.0,
+			}
+			itemType = Base.RearCarDoor,
+			table uninstall
+			{
+				requireUninstalled = WindowMiddleRight,
+			}
+		}
+
+		part DoorRearLeft
+		{
+			area = SeatRearLeft,
+			anim ActorOpen
+			{
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				angle = 0.0 270.0 0.0,
+			}
+			itemType = Base.RearCarDoor,
+			table uninstall
+			{
+				requireUninstalled = WindowRearLeft,
+			}
+		}
+
+		part DoorRearRight
+		{
+			area = SeatRearRight,
+			anim ActorOpen
+			{
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				angle = 0.0 90.0 0.0,
+			}
+			itemType = Base.RearCarDoor,
+			table uninstall
+			{
+				requireUninstalled = WindowRearRight,
+			}
+		}
+
+		/* Double-rear doors for vans. These access the trunk when used. */
+		part DoorRear
+		{
+			area = TruckBed,
+			anim ActorOpen
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			itemType = Base.RearCarDoorDouble,
+		}
+		
+		part Door*
+		{
+			category = door,
+			door
+			{
+				/* TODO: rear police-car doors won't open from inside */
+			}
+			anim Open
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				rate = 1,
+				sound = VehicleDoorOpenStandard,
+			}
+			anim Close
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				rate = 2,
+				sound = VehicleDoorCloseStandard,
+			}
+
+			anim Opened
+			{
+				anim = ArmatureAction,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Closed
+			{
+				anim = ArmatureAction,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+			
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+			}
+			mechanicRequireKey = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:4,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.FR_VisualDoor,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:4,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.FR_VisualDoor,
+			}
+			table FRPartInfo
+			{
+				parentPart = DoorFrontLeft,
+				oneModel = TRUE,
+			}
+			lua
+			{
+				create = Vehicles.Create.FR_VisualDoor,
+				init = Vehicles.Init.FR_VisualDefault,
+				use = Vehicles.Use.Door,
+			}
+		}
+
+		part DoorRear
+		{
+			lua
+			{
+				create = Vehicles.Create.FR_VisualTrunkDoor,
+				init = Vehicles.Init.FR_VisualDefault,
+				update = Vehicles.Update.TrunkDoor,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}
+

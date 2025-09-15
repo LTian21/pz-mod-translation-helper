@@ -1,0 +1,382 @@
+module Base
+{
+
+	model 93chevySuburbanWheel1
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Wheels|sub93_wheel1,
+		texture = vehicles/Vehicles_93chevySuburban_Wheel1,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 93chevySuburbanWheel2
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Wheels|sub93_wheel2,
+		texture = vehicles/Vehicles_93chevySuburban_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 93chevySuburbanWheel2L
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Wheels|76chevy_wheel,
+		texture = vehicles/Vehicles_76chevyKseries_Wheel,
+		shader = vehiclewheel,
+		scale = 0.104,
+	}
+
+    model 93chevySuburbanWheel2R
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Wheels|76chevy_wheel,
+		texture = vehicles/Vehicles_76chevyKseries_Wheel,
+		shader = vehiclewheel,
+		scale = 0.104,
+        invertX = TRUE,
+	}
+
+    model 93chevySuburbanWheel3L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel01,
+		shader = vehiclewheel,
+		scale = 0.104,
+        invertX = TRUE,
+	}
+
+    model 93chevySuburbanWheel3R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel01,
+		shader = vehiclewheel,
+		scale = 0.104,
+	}
+
+    model 93chevySuburbanWheel4L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel02,
+		shader = vehiclewheel,
+		scale = 0.104,
+	}
+
+    model 93chevySuburbanWheel4R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire01_02,
+		texture = vehicles/Vehicles_damnCommon_Wheel02,
+		shader = vehiclewheel,
+		scale = 0.104,
+        invertX = TRUE,
+	}
+
+    model 93chevySuburbanWheel5L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel03,
+		shader = vehiclewheel,
+		scale = 0.104,
+	}
+
+    model 93chevySuburbanWheel5R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel03,
+		shader = vehiclewheel,
+		scale = 0.104,
+        invertX = TRUE,
+	}
+
+    model 93chevySuburbanWheel6L
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel04,
+		shader = vehiclewheel,
+		scale = 0.104,
+	}
+
+    model 93chevySuburbanWheel6R
+	{
+		mesh = vehicles/Vehicles_damnCommon_tires|damn_common_tire03_04,
+		texture = vehicles/Vehicles_damnCommon_Wheel04,
+		shader = vehiclewheel,
+		scale = 0.104,
+        invertX = TRUE,
+	}
+
+	template vehicle SUB93Tires
+	{
+		part TireFrontLeft
+		{
+            model SUB93Tire0
+			{
+				file = 93chevySuburbanWheel1,
+			}
+
+			model SUB93Tire1
+			{
+				file = 93chevySuburbanWheel2,
+			}
+
+            model SUB93Tire2
+			{
+				file = 93chevySuburbanWheel2L,
+			}
+            model SUB93Tire3
+			{
+				file = 93chevySuburbanWheel3L,
+			}
+            model SUB93Tire4
+			{
+				file = 93chevySuburbanWheel4L,
+			}
+            model SUB93Tire5
+			{
+				file = 93chevySuburbanWheel5L,
+			}
+            model SUB93Tire6
+			{
+				file = 93chevySuburbanWheel6L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = SUB93.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = SUB93.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = SUB93.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model SUB93Tire0
+			{
+				file = 93chevySuburbanWheel1,
+			}
+
+			model SUB93Tire1
+			{
+				file = 93chevySuburbanWheel2,
+			}
+
+            model SUB93Tire2
+			{
+				file = 93chevySuburbanWheel2R,
+			}
+            model SUB93Tire3
+			{
+				file = 93chevySuburbanWheel3R,
+			}
+            model SUB93Tire4
+			{
+				file = 93chevySuburbanWheel4R,
+			}
+            model SUB93Tire5
+			{
+				file = 93chevySuburbanWheel5R,
+			}
+            model SUB93Tire6
+			{
+				file = 93chevySuburbanWheel6R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = SUB93.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = SUB93.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = SUB93.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model SUB93Tire0
+			{
+				file = 93chevySuburbanWheel1,
+			}
+
+			model SUB93Tire1
+			{
+				file = 93chevySuburbanWheel2,
+			}
+
+            model SUB93Tire2
+			{
+				file = 93chevySuburbanWheel2L,
+			}
+            model SUB93Tire3
+			{
+				file = 93chevySuburbanWheel3L,
+			}
+            model SUB93Tire4
+			{
+				file = 93chevySuburbanWheel4L,
+			}
+            model SUB93Tire5
+			{
+				file = 93chevySuburbanWheel5L,
+			}
+            model SUB93Tire6
+			{
+				file = 93chevySuburbanWheel6L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = SUB93.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			table uninstall
+			{
+				complete = SUB93.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = SUB93.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model SUB93Tire0
+			{
+				file = 93chevySuburbanWheel1,
+			}
+
+			model SUB93Tire1
+			{
+				file = 93chevySuburbanWheel2,
+			}
+
+            model SUB93Tire2
+			{
+				file = 93chevySuburbanWheel2R,
+			}
+            model SUB93Tire3
+			{
+				file = 93chevySuburbanWheel3R,
+			}
+            model SUB93Tire4
+			{
+				file = 93chevySuburbanWheel4R,
+			}
+            model SUB93Tire5
+			{
+				file = 93chevySuburbanWheel5R,
+			}
+            model SUB93Tire6
+			{
+				file = 93chevySuburbanWheel6R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = SUB93.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = SUB93.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = SUB93.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.93chevySuburbanTire1;Base.93chevySuburbanTire2;Base.76chevyKseriesTire2;Base.80chevyCKseriesTire2;Base.80chevyCKseriesTire1;Base.90chevyCKseriesTire2;Base.90chevyCKseriesTire1,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}
+

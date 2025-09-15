@@ -1,0 +1,77 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LargeDeluxeBath
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Large Deluxe Bath,
+			Icon		= fixtures_bathroom_01_55,
+		}
+	}
+
+    entity LargeDeluxeBath
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_LargeDeluxeBath,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = fixtures_bathroom_01_54 fixtures_bathroom_01_55,
+                }
+            }
+            face N
+            {
+                layer
+                { 
+                    row = fixtures_bathroom_01_53,
+                    row = fixtures_bathroom_01_52,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = fixtures_bathroom_01_26 fixtures_bathroom_01_27,
+                }
+            }
+            face S
+            {
+                layer
+                { 
+                    row = fixtures_bathroom_01_25,
+                    row = fixtures_bathroom_01_24,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Appliances_Bathroom,
+            SkillRequired = MetalWelding:4;Masonry:6,
+            xpAward       = MetalWelding:5;Masonry:10,
+            ToolTip       = Tooltip_craft_showerDesc,
+            inputs
+            {
+		        item 2 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[MasonsTrowel] mode:keep,
+		        item 2 [Base.WeldingRods],
+                item 1 [Base.BucketConcreteFull],
+                item 8 [Base.ClayTile],
+                item 1 [Base.LeadPipe],
+            }
+        }
+    }
+}

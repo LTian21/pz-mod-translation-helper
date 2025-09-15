@@ -1,0 +1,646 @@
+module Base
+{
+	model 93fordTaurusWindshielda
+    	{
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurus_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93fordTaurusDoorfla
+    	{
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurus_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93fordTaurusDoorfra
+    	{
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurus_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93fordTaurusDoorrla
+    	{
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurus_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93fordTaurusDoorrra
+    	{
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurus_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 93fordTaurusDoorbla
+    	{
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurusWagon_window_bl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93fordTaurusDoorbra
+    	{
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurusWagon_window_br_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93fordTaurusSedanWindshieldreara
+    	{
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurusSedan_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93fordTaurusWagonWindshieldreara
+    	{
+        mesh = vehicles/Vehicles_93fordTaurus_Body|taurusWagon_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle TAU93ArmorCommon
+		{
+		part TAU93WindshieldArmor
+        	{
+
+			model TAU93winda0
+				{
+                		file = 93fordTaurusWindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93fordTaurusWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = TAU93.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.WindshieldArmor,
+					init = TAU93.Init.WindshieldArmor,
+					}
+		}
+
+		part TAU93FrontLeftArmor
+        {
+
+			model TAU93leftdoora
+				{
+                		file = 93fordTaurusDoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.93fordTaurusFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.FrontLeftArmor,
+					init = TAU93.Init.FrontLeftArmor,
+					}
+		}
+
+		part TAU93FrontRightArmor
+        {
+
+			model TAU93rightdoora
+				{
+                		file = 93fordTaurusDoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.93fordTaurusFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.FrontRightArmor,
+					init = TAU93.Init.FrontRightArmor,
+					}
+		}
+
+		part TAU93RearLeftArmor
+        {
+
+			model TAU93leftdoorra
+				{
+                		file = 93fordTaurusDoorrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.93fordTaurusRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.RearLeftArmor,
+					init = TAU93.Init.RearLeftArmor,
+					}
+		}
+
+		part TAU93RearRightArmor
+        {
+
+			model TAU93rightdoorra
+				{
+                		file = 93fordTaurusDoorrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.93fordTaurusRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.RearRightArmor,
+					init = TAU93.Init.RearRightArmor,
+					}
+		}
+	}
+
+	template vehicle TAU93ArmorSedan
+		{
+		template! = TAU93ArmorCommon,
+
+		part TAU93WindshieldRearArmor
+        {
+
+				model TAU93windra
+				{
+                		file = 93fordTaurusSedanWindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93fordTaurusSedanWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.WindshieldRearSedanArmor,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.WindshieldRearSedanArmor,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.WindshieldRearSedanArmor,
+					init = TAU93.Init.WindshieldRearSedanArmor,
+					}
+		}
+	}
+
+	template vehicle TAU93ArmorWagon
+		{
+		template! = TAU93ArmorCommon,
+
+		part TAU93BackLeftArmor
+        {
+
+			model TAU93leftdoorbla
+				{
+                		file = 93fordTaurusDoorbla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93fordTaurusWagonBackWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.BackLeftArmor,
+                	requireInstalled = WindowBackLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.BackLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.BackLeftArmor,
+					init = TAU93.Init.BackLeftArmor,
+					}
+		}
+
+		part TAU93BackRightArmor
+        {
+
+			model TAU93rightdoorbra
+				{
+                		file = 93fordTaurusDoorbra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93fordTaurusWagonBackWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.BackRightArmor,
+                	requireInstalled = WindowBackRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.BackRightArmor,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.BackRightArmor,
+					init = TAU93.Init.BackRightArmor,
+					}
+		}
+
+		part TAU93WindshieldRearArmor
+        {
+
+				model TAU93windra
+				{
+                		file = 93fordTaurusWagonWindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.93fordTaurusWagonWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = TAU93.InstallComplete.WindshieldRearWagonArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = TAU93.UninstallComplete.WindshieldRearWagonArmor,
+            		}
+
+            		lua
+            		{
+					create = TAU93.Create.WindshieldRearWagonArmor,
+					init = TAU93.Init.WindshieldRearWagonArmor,
+					}
+		}
+	}
+
+}

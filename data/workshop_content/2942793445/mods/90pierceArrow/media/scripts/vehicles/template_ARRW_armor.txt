@@ -1,0 +1,566 @@
+module Base
+{
+    model 90pierceArrowWindowfla
+    	{
+        mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_door_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 90pierceArrowWindowfra
+    	{
+        mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_door_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 90pierceArrowWindowrla
+    	{
+        mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_door_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 90pierceArrowWindowrra
+    	{
+        mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_door_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+   model 90pierceArrowWindowmla
+    	{
+        mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_door_ml_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 90pierceArrowWindowmra
+    	{
+        mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_door_mr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 90pierceArrowWindshielda
+    	{
+        mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 90pierceArrowWindshieldreara
+    	{
+        mesh = vehicles/Vehicles_90pierceArrow_Body|pierce_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle ARRWArmor
+		{
+		part ARRWWindshieldArmor
+        	{
+
+			model ARRWwinda
+				{
+                		file = 90pierceArrowWindshielda,
+				}
+
+			area = Front,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.90pierceArrowWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ARRW.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = ARRW.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = ARRW.Create.WindshieldArmor,
+					init = ARRW.Init.WindshieldArmor,
+					}
+		}
+
+		part ARRWWindowFrontLeftArmor
+        {
+
+			model ARRWwinfla
+				{
+                		file = 90pierceArrowWindowfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.90pierceArrowSideWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ARRW.InstallComplete.WindowFrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = ARRW.UninstallComplete.WindowFrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = ARRW.Create.WindowFrontLeftArmor,
+					init = ARRW.Init.WindowFrontLeftArmor,
+					}
+		}
+
+		part ARRWWindowFrontRightArmor
+        {
+
+			model ARRWwinfra
+				{
+                		file = 90pierceArrowWindowfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.90pierceArrowSideWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ARRW.InstallComplete.WindowFrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = ARRW.UninstallComplete.WindowFrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = ARRW.Create.WindowFrontRightArmor,
+					init = ARRW.Init.WindowFrontRightArmor,
+					}
+		}
+
+		part ARRWWindowRearLeftArmor
+        {
+
+			model ARRWwinrla
+				{
+                		file = 90pierceArrowWindowrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.90pierceArrowSideWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ARRW.InstallComplete.WindowRearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = ARRW.UninstallComplete.WindowRearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = ARRW.Create.WindowRearLeftArmor,
+					init = ARRW.Init.WindowRearLeftArmor,
+					}
+		}
+
+		part ARRWWindowRearRightArmor
+        {
+
+			model ARRWwinrra
+				{
+                		file = 90pierceArrowWindowrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.90pierceArrowSideWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ARRW.InstallComplete.WindowRearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = ARRW.UninstallComplete.WindowRearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = ARRW.Create.WindowRearRightArmor,
+					init = ARRW.Init.WindowRearRightArmor,
+					}
+		}
+
+		part ARRWWindowMiddleLeftArmor
+        {
+
+			model ARRWwinmla
+				{
+                		file = 90pierceArrowWindowmla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.90pierceArrowSideWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ARRW.InstallComplete.WindowMiddleLeftArmor,
+                	requireInstalled = WindowMiddleLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = ARRW.UninstallComplete.WindowMiddleLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = ARRW.Create.WindowMiddleLeftArmor,
+					init = ARRW.Init.WindowMiddleLeftArmor,
+					}
+		}
+
+		part ARRWWindowMiddleRightArmor
+        {
+
+			model ARRWwinmra
+				{
+                		file = 90pierceArrowWindowmra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.90pierceArrowSideWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ARRW.InstallComplete.WindowMiddleRightArmor,
+                	requireInstalled = WindowMiddleRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = ARRW.UninstallComplete.WindowMiddleRightArmor,
+            		}
+
+            		lua
+            		{
+					create = ARRW.Create.WindowMiddleRightArmor,
+					init = ARRW.Init.WindowMiddleRightArmor,
+					}
+		}
+
+		part ARRWWindshieldRearArmor
+        {
+
+				model ARRWwindra
+				{
+                		file = 90pierceArrowWindshieldreara,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.90pierceArrowWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ARRW.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = ARRW.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = ARRW.Create.WindshieldRearArmor,
+					init = ARRW.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

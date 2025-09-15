@@ -1,0 +1,47 @@
+module Base
+{
+    model Tatra8156X6Mil_BumperFront
+	{
+		mesh = vehicles/Vehicles_Mil6X6Tatra815_Body|frontprotection,
+		shader = vehicle,
+		scale = 1,
+	}
+
+
+    template vehicle Tatra8156X6Mil_bumpers
+    {
+	template = ATA2Bumpers/part/ATA2Bumper,
+        part ATA2Bumper
+        {
+            area = Engine,
+            
+            model Bumper1
+            {
+                file = Tatra8156X6Mil_BumperFront,
+            }
+        }
+
+
+        part ATA2Bumper*
+        {
+            table install
+            {
+                test = ATATuning2.InstallTest.Tuning,
+                complete = ATATuning2.InstallComplete.Tuning,
+            }
+
+            table uninstall
+            {
+                test = ATATuning2.UninstallTest.Tuning,
+                complete = ATATuning2.UninstallComplete.Tuning,
+            }
+
+            lua
+            {
+                create = ATATuning2.Create.Tuning,
+                init = ATATuning2.Init.Tuning,
+                update = ATATuning2.Update.Protection,
+            }
+        }
+    }
+}

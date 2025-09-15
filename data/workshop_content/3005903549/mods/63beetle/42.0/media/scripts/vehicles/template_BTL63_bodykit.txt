@@ -1,0 +1,72 @@
+module Base
+{
+
+	model 63beetleBodykit
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_bodykit,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle BTL63Bodykit
+	{
+		part BTL63Bodykit
+		{
+			
+			model BTL63kit0
+			{
+				file = 63beetleBodykit,
+			}
+			
+			area = GasTank,
+			itemType = Base.63beetleBodykit0,
+			specificItem = false,
+			category = bodywork,
+			mechanicRequireKey = true,
+            durability = 2,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = BTL63.InstallComplete.Bodykit,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = BTL63.UninstallComplete.Bodykit,
+			}
+			lua
+			{
+				init = BTL63.Init.Bodykit,
+				create = BTL63.Create.Bodykit,
+			}
+		}
+	}
+}
+

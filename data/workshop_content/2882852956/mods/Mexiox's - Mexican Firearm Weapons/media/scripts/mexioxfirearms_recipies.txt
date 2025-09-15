@@ -1,0 +1,91 @@
+module mexioxfirearms
+{
+    imports
+    {
+        Base,
+    }
+
+    craftRecipe OpenBoxOf15AmmoBoxes
+    {
+        timedAction = OpenAmmoBox,
+            Time = 15,
+            category = Ammunition,
+            Tags = InHandCraft;CanBeDoneInDark,
+            inputs
+            {
+                item 1 [mexioxfirearms.Caja22Grande;mexioxfirearms.Caja757Grande] mappers[ammoTypes],
+            }
+            outputs
+            {
+                item 15 mapper:ammoTypes,
+            }
+        itemMapper ammoTypes
+        {
+            mexioxfirearms.Cal22Box = mexioxfirearms.Caja22Grande,
+            mexioxfirearms.Cal757Box = mexioxfirearms.Caja757Grande,
+        }
+    }
+
+    craftRecipe OpenBoxOf25Bullets
+    {
+        timedAction = OpenAmmoBox,
+            Time = 15,
+            category = Ammunition,
+            Tags = InHandCraft;CanBeDoneInDark,
+            inputs
+            {
+                item 1 [mexioxfirearms.Cal22Box;mexioxfirearms.Cal757Box] mappers[ammoTypes],
+            }
+            outputs
+            {
+                item 25 mapper:ammoTypes,
+            }
+        itemMapper ammoTypes
+        {
+            mexioxfirearms.Cal22Bullet = mexioxfirearms.Cal22Box,
+            mexioxfirearms.Cal757Bullet = mexioxfirearms.Cal757Box,
+        }
+    }
+
+    craftRecipe RebundleBoxesOfAmmo
+    {
+        timedAction = OpenAmmoBox,
+            Time = 15,
+            category = Ammunition,
+            Tags = InHandCraft,
+            inputs
+            {
+                item 25 [mexioxfirearms.Cal22Bullet;mexioxfirearms.Cal757Bullet] mappers[ammoTypes],
+            }
+            outputs
+            {
+                item 1 mapper:ammoTypes,
+            }
+        itemMapper ammoTypes
+        {
+            mexioxfirearms.Cal22Box = mexioxfirearms.Cal22Bullet,
+            mexioxfirearms.Cal757Box = mexioxfirearms.Cal757Bullet,
+        }
+    }
+
+    craftRecipe RebundleBigBoxesOfAmmo
+    {
+        timedAction = OpenAmmoBox,
+            Time = 15,
+            category = Ammunition,
+            Tags = InHandCraft,
+            inputs
+            {
+                item 15 [mexioxfirearms.Cal22Box;mexioxfirearms.Cal757Box] mappers[ammoTypes],
+            }
+            outputs
+            {
+                item 1 mapper:ammoTypes,
+            }
+        itemMapper ammoTypes
+        {
+            mexioxfirearms.Caja22Grande = mexioxfirearms.Cal22Box,
+            mexioxfirearms.Caja757Grande = mexioxfirearms.Cal757Box,
+        }
+    }
+}

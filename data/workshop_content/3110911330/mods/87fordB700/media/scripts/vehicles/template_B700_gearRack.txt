@@ -1,0 +1,146 @@
+module Base
+{
+	model 87fordB700GasCan0
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|TIS_GasCan0,
+		texture = Vehicles/Objects_GasCan,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 87fordB700GasCan1
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|TIS_GasCan1,
+		texture = Vehicles/Objects_GasCan,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 87fordB700Generator
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|TIS_Generator,
+		texture = Vehicles/Objects_Generator,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle B700NomadGear
+	{
+			part B700GasCan0
+        	{
+				model gascan0
+				{
+                file = 87fordB700GasCan0,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = Base.EmptyPetrolCan;Base.PetrolCan,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = B700Roofrack,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part B700GasCan1
+        	{
+				model gascan1
+				{
+                file = 87fordB700GasCan1,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = Base.EmptyPetrolCan;Base.PetrolCan,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = B700Roofrack,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part B700Generator
+        	{
+				model AHX
+				{
+                file = 87fordB700Generator,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = Base.Generator,
+				mechanicRequireKey = false,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = B700Roofrack,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+	}	
+}

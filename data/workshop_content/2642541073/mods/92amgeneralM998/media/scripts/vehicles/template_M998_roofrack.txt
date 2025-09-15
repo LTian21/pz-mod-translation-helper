@@ -1,0 +1,83 @@
+module Base
+{
+
+	model 92amgeneralM998roofrack1
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_roofrack,
+		texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle M998RoofrackCompartment
+	{
+		part M998Roofrack
+		{
+
+			model Roofrack1
+				{
+                		file = 92amgeneralM998roofrack1,
+				}
+
+			category = bodywork,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.M998Roofrack1_Item,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = M998.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            		lua
+            		{
+					create = M998.Create.Roofrack,
+					init = M998.Init.Roofrack,
+					}
+		}
+	}
+}
+

@@ -1,0 +1,53 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_SmallWoodenCrate
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Small Wooden Crate,
+			Icon		= location_shop_greenes_01_35,
+		}
+	}
+
+    entity SmallWoodenCrate
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_SmallWoodenCrate,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = location_shop_greenes_01_35,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 150,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:4,
+            xpAward       = Woodwork:10,
+            category      = Containers_Crates,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_militaryCrateDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 3 [Base.Plank] flags[Prop2],
+                item 3 [Base.Nails],
+            }
+        }
+    }
+}

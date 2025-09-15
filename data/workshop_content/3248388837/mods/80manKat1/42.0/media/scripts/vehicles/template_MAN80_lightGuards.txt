@@ -1,0 +1,73 @@
+module Base
+{
+	model 80manKat1lightguards
+	{
+		mesh = vehicles/Vehicles_80manKat1_Body|MAN_guards,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle MAN80LightGuards
+		{
+		part MAN80LightGuards
+        	{
+
+			model LightGuards0
+				{
+                		file = 80manKat1lightguards,
+				}
+
+			area = Front,
+			category = lights,
+			itemType = Base.80manKat1LightGuards,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = MAN80.InstallComplete.LightGuards,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 650,
+			skills = Mechanics:3,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = MAN80.UninstallComplete.LightGuards,
+            		}
+
+            		lua
+            		{
+			create = MAN80.Create.LightGuards,
+			init = MAN80.Init.LightGuards,
+			}
+		}
+	}
+}

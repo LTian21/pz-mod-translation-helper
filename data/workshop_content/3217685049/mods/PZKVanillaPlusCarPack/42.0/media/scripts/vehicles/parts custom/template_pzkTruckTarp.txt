@@ -1,0 +1,84 @@
+module Base
+{
+	model pzkFranklinTruckMil_Tarp
+	{
+		mesh = vehicles/customParts/pzkFranklinTruckMil_Tarp,
+		texture = Vehicles/Tarp_TruckMil,
+		scale = 0.01,
+
+	}
+	
+
+	
+	template vehicle pzkFranklinTruckMil_Tarp
+	{
+		part pzkFranklinTruckMil_Tarp
+        	{
+
+			model Default
+			{
+				file = pzkFranklinTruckMil_Tarp,
+			}
+
+			category = Other,
+			area = TruckBed,
+			itemType = Base.pzkTruckTarp,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    		1
+                    		{
+                            tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+				professions = ,
+				skills = ,
+				traits = ,
+				recipes = ,
+				test = Vehicles.InstallTest.Default,
+
+
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    		1
+                    		{
+                            tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+				professions = ,
+				skills = ,
+				traits = ,
+				recipes = ,
+				
+	            		test = Vehicles.UninstallTest.Default,
+
+
+            		}
+
+	            lua
+	            {
+
+				init = Vehicles.Init.Default,
+				}
+		}
+	}
+
+}
+

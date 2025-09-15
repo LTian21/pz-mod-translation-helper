@@ -1,0 +1,112 @@
+module Base
+{
+	model 70dodgefrontBumper0
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_bumper_front,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 70dodgefrontBumpera
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_bumper_front_a,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 70dodgefrontBumperb
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_bumper_front_b,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 70dodgefrontBumperc
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_bumper_front_c,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DG70FrontBumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 70dodgefrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 70dodgefrontBumpera,
+				}
+
+			model FrontBumperB
+				{
+                		file = 70dodgefrontBumperb,
+				}
+
+			model FrontBumperC
+				{
+                		file = 70dodgefrontBumperc,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.DG70FrontBumper0;Base.DG70FrontBumperA;Base.DG70FrontBumperB;Base.DG70FrontBumperC,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DG70.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DG70.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = DG70.Create.FrontBumper,
+					init = DG70.Init.FrontBumper,
+					}
+		}
+	}
+
+		
+}

@@ -1,0 +1,289 @@
+module Base
+{
+
+	model 83amgeneralM923doorfla
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_door_left_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 83amgeneralM923doorfra
+	{
+		mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_door_right_a,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 83amgeneralM923windshieldArmor1
+    	{
+        mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_windshield_a,
+        shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    	}
+
+    	model 83amgeneralM923GuntruckArmor1
+    	{
+        mesh = vehicles/Vehicles_83amgeneralM923_Body|m923_guntrack_armor,
+        texture = vehicles/Vehicles_83amgeneralM923_Wheel,
+        shader = damn_wheel_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle M923Armor
+	{
+        part DAMNWindshieldArmor
+        	{
+
+			model M923WindshieldArmor1
+				{
+                		file = 83amgeneralM923windshieldArmor1,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M923WindshieldArmor1,
+			mechanicRequireKey = false,
+            durability = 5,
+			table install
+					{
+						requireInstalled = Windshield,
+					}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M923.InstallComplete.WindshieldArmor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1100,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = M923.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+			create = M923.Create.WindshieldArmor,
+			init = M923.Init.WindshieldArmor,
+			}
+		}
+
+		part DAMNFrontLeftArmor
+		{
+			model M923DoorLeftArmor1
+				{
+				file = 83amgeneralM923doorfla,
+				}
+				parent = DoorFrontLeft,
+				itemType = Base.M923DoorArmor1,
+				specificItem = false,
+				area = SeatFrontLeft,
+				table install
+					{
+						requireInstalled = WindowFrontLeft,
+					}
+				lua
+				{
+					create = M923.Create.DoorLeftArmor,
+					init = M923.Init.DoorLeftArmor,
+				}
+		}
+
+		part DAMNFrontRightArmor
+		{
+			model M923DoorRightArmor1
+				{
+				file = 83amgeneralM923doorfra,
+				}
+				parent = DoorFrontRight,
+				itemType = Base.M923DoorArmor1,
+				specificItem = false,
+				area = SeatFrontRight,
+				table install
+					{
+						requireInstalled = WindowFrontRight,
+					}
+				
+				lua
+				{
+					create = M923.Create.DoorRightArmor,
+					init = M923.Init.DoorRightArmor,
+				}
+		}
+
+		part DAMNFront*
+		{
+			category = bodywork,
+			door
+			{
+			}
+				anim Open
+				{
+					sound = VehicleDoorOpenStandard,
+				}
+				anim Close
+				{
+					sound = VehicleDoorCloseStandard,
+				}
+				anim Lock
+				{
+					sound = LockVehicleDoorStandard,
+				}
+				anim Unlock
+				{
+					sound = UnlockVehicleDoorStandard,
+				}
+				anim IsLocked
+				{
+					sound = VehicleDoorIsLockedStandard,
+				}
+				anim ActorOpen
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				anim ActorClose
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				mechanicRequireKey = true,
+                durability = 5,
+				table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 1200,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+				}
+				table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 1200,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+				}
+		}
+
+        part M923GuntruckArmor
+        	{
+
+			model M923GuntruckArmor1
+				{
+                		file = 83amgeneralM923GuntruckArmor1,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M923GuntruckArmor1,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table uninstall
+				{
+				requireUninstalled = WindowRearLeft;WindowRearRight,
+				}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M923.InstallComplete.GuntruckArmor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1100,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = M923.UninstallComplete.GuntruckArmor
+            		}
+
+            		lua
+            		{
+			create = M923.Create.GuntruckArmor,
+			init = M923.Init.GuntruckArmor,
+			}
+		}
+	}
+}

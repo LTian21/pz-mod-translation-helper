@@ -1,0 +1,338 @@
+module Base
+{
+
+    model 86chevyCUCVWindshield
+    {
+        mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 80chevyM1008WindshieldRear
+    {
+        mesh = vehicles/Vehicles_86chevyCUCV_Body|86cucv_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 80chevyM1009WindshieldRear
+    {
+        mesh = vehicles/Vehicles_86chevyCUCV_Body|86blazer_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+
+    model 80chevyM1010WindshieldRear
+    {
+        mesh = vehicles/Vehicles_86chevyCUCV_Body|86amb_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+
+	template vehicle CUCV86WindshieldFront
+	{
+
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 86chevyCUCVWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.3rdGenChevyCKseriesWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = DAMNWindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle M1008WindshieldRear
+    {
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 80chevyM1008WindshieldRear,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.3rdGenChevyCKseriesRearWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle M1009WindshieldRear
+    {
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 80chevyM1009WindshieldRear,
+            }
+            window
+            {
+                openable = true,
+            }
+
+            anim Close
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                rate = 0.5,
+            }
+
+            anim Open
+            {
+                anim = trunk_opening,
+                rate = 0.5,
+            }
+
+            anim Closed
+            {
+                anim = trunk_opening,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+                
+            itemType = Base.3rdGenChevyCKseriesRearWindshield,
+            area = TruckBed,
+            parent = TrunkDoor,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle M1010WindshieldRear
+    {
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 80chevyM1010WindshieldRear,
+            }
+            window
+            {
+                openable = true,
+            }
+
+            anim Close
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                rate = 0.5,
+            }
+
+            anim Open
+            {
+                anim = trunk_opening,
+                rate = 0.5,
+            }
+
+            anim Closed
+            {
+                anim = trunk_opening,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = trunk_opening,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+                
+            itemType = Base.3rdGenChevyCKseriesRearWindshield,
+            area = TruckBed,
+            parent = TrunkDoor,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+}

@@ -1,0 +1,80 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_BrickWallBench
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Brick Wall Bench,
+			Icon		= location_shop_mall_01_35,
+		}
+	}
+
+    entity BrickWallBench
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_BrickWallBench,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = location_shop_mall_01_37,
+                    row = location_shop_mall_01_36,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_shop_mall_01_38 location_shop_mall_01_39,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_shop_mall_01_33,
+                    row = location_shop_mall_01_32,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_shop_mall_01_34 location_shop_mall_01_35,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 350,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:10,
+            category      = Furniture_Seating,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_benchesDesc,
+            inputs
+            {
+                item 1 tags[MasonsTrowel] mode:keep flags[Prop1],
+                item 1 tags[Scissors] mode:keep,
+                item 1 tags[SewingNeedle] mode:keep,
+                item 2 [Base.BucketConcreteFull],
+                item 4 [Base.ClayBrick],
+                item 4 [Base.Leather_Crude_Large_Tan],
+                item 4 [Base.Thread],
+                item 200 [Base.ChickenFeather;Base.TurkeyFeather],
+            }
+        }
+    }
+}

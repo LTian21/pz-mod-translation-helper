@@ -1,0 +1,111 @@
+module Base
+{
+	model 91nissan240sxHeadlights
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_lights,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = lights_bone 1.0,
+	}
+
+	template vehicle N240PopupLights
+	{
+		part N240PopupLights
+		{
+			model lights57984
+			{
+				file = 91nissan240sxHeadlights,
+			}
+
+			anim Close
+			{
+				anim = lights_closing,
+                reverse = TRUE,
+				rate = 1.00,
+			}
+
+			anim Open
+			{
+				anim = lights_closing,
+				rate = 1.00,
+			}
+
+            anim Closed
+			{
+				anim = lights_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = lights_closing,
+				animate = FALSE,
+			}
+		
+			category = lights,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			itemType = Base.91nissan240sxPopupLights,
+			area = Engine,
+			mechanicRequireKey = true,
+			durability = 3,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = HeadlightLeft;HeadlightRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+}

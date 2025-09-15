@@ -1,0 +1,452 @@
+module Base
+{
+
+		/** Timed Actions **/
+
+	timedAction TorchCraft
+	{
+		metabolics = HeavyDomestic,
+		actionAnim = SharpenStake,
+		sound = rope10s,
+	}
+
+	timedAction TorchLight
+	{
+		actionAnim = SharpenStake,
+		sound = UseMatch,
+	}
+
+	timedAction TorchExtinguish
+	{
+		actionAnim = SharpenStake,
+		sound = wave1s,
+	}
+
+	timedAction CandleCraft
+	{
+        	metabolics      = LightDomestic,
+        	actionAnim      = MixingBowl,
+        	sound		= FirstAidApplyAlcohol,
+	}
+
+		/** Torch Recipes **/
+
+	craftRecipe SurvivalMakeTorch
+	{
+	timedAction = TorchCraft,
+		Time = 80,
+		Tags = InHandCraft;CanBeDoneInDark;Survivalist,
+	category = Miscellaneous,
+		xpAward = Maintenance:5,
+		inputs
+		{
+			item 1 [Base.TreeBranch2;Base.WoodenStick2;Base.LongHandle;Base.Survival_TorchBurnt] mode:destroy flags[Prop2;ItemCount;AllowFavorite;InheritFavorite],
+			item 5 [Base.RippedSheets;Base.RippedSheetsDirty;Base.DenimStrips;Base.DenimStripsDirty;Base.Twigs;Base.DishCloth] flags[ItemCount],
+			item 2 [Base.LeatherStrips;Base.LeatherStripsDirty;Base.Zipties;Base.Twine],
+		}
+		outputs
+		{
+			item 1 Base.Survival_TorchFresh,
+		}
+	}
+
+	craftRecipe SurvivalMakeTorchWire
+	{
+	timedAction = TorchCraft,
+		Time = 80,
+		Tags = InHandCraft;CanBeDoneInDark;Survivalist,
+	category = Miscellaneous,
+        SkillRequired = Maintenance:1,
+		xpAward = Maintenance:10,
+		inputs
+		{
+            		item 1 tags[Pliers] mode:keep flags[Prop1],
+			item 1 [Base.TreeBranch2;Base.WoodenStick2;Base.LongHandle;Base.Survival_TorchBurnt] mode:destroy flags[Prop2;ItemCount;AllowFavorite;InheritFavorite],
+			item 5 [Base.RippedSheets;Base.RippedSheetsDirty;Base.DenimStrips;Base.DenimStripsDirty;Base.Twigs;Base.DishCloth] flags[ItemCount],
+			item 2 [Base.Wire;Base.ElectricWire],
+		}
+		outputs
+		{
+			item 1 Base.Survival_TorchFresh,
+		}
+	}
+
+	craftRecipe SurvivalLightTorch
+	{
+	timedAction = TorchLight,
+		Time = 10,
+		Tags = InHandCraft;CanBeDoneInDark;Survivalist,
+	category = Miscellaneous,
+	OnCreate = LightTorch_OnCreate,
+		inputs
+		{
+			item 1 [Base.Survival_TorchFresh;Base.Survival_TorchBurnt] mode:destroy flags[Prop2;InheritUses;ItemCount;AllowFavorite;InheritFavorite],
+			item 1 tags[StartFire;FireSource],
+		}
+		outputs
+		{
+			item 1 Base.Survival_TorchBurning,
+		}
+	}
+
+	craftRecipe SurvivalLightTorchFire
+	{
+	timedAction = TorchLight,
+		Time = 10,
+		Tags = InHandCraft;Survivalist;RightClickOnly,
+	category = Miscellaneous,
+	OnCreate = LightTorch_OnCreate,
+        OnTest = Recipe.OnCanPerform.OpenFire,
+		inputs
+		{
+			item 1 [Base.Survival_TorchFresh;Base.Survival_TorchBurnt] mode:destroy flags[Prop2;InheritUses;ItemCount;AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.Survival_TorchBurning,
+		}
+	}
+
+	craftRecipe SurvivalExtinguishTorch
+	{
+	timedAction = TorchExtinguish,
+		Time = 10,
+		Tags = InHandCraft;CanBeDoneInDark;Survivalist,
+	category = Miscellaneous,
+	OnCreate = ExtinguishTorch_OnCreate,
+		/* CanWalk = true, */
+		inputs
+		{
+			item 1 [Base.Survival_TorchBurning] mode:destroy flags[Prop2;InheritUses;ItemCount;AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.Survival_TorchBurnt,
+		}
+	}
+
+	craftRecipe SurvivalMakeCandle
+	{
+	timedAction = CandleCraft,
+		time = 60,
+		Tags = InHandCraft;Survivalist,
+	category = Miscellaneous,
+        OnTest = Recipe.OnCanPerform.OpenFire,
+        ToolTip = Tooltip_Recipe_OpenFire,
+		inputs
+		{
+			item 1 [Base.EmptyJar;Base.GlassTumbler;Base.DrinkingGlass] mode:keep flags[Prop2],
+			item 1 tags[DullKnife;SharpKnife] mode:keep flags[Prop1],
+			item 6 [Base.Lard],
+			item 1 [Base.Twine],
+		}
+		outputs
+		{
+			item 1 Base.Candle,
+		}
+	}
+
+		/** Survival Recipes **/
+
+	craftRecipe SurvivalFileScrewsintoNails
+	{
+	TimedAction = SharpenBlade,
+		Time = 180,
+		Tags = InHandCraft,
+	category = Metalworking,
+	xpAward = Maintenance:1,
+		inputs
+		{
+			item 1 [Base.Screws] flags[Prop2],
+			item 1 tags[File;Whetstone] mode:keep flags[Prop1;MayDegradeHeavy],
+		}
+		outputs
+		{
+			item 1 Base.Nails,
+		}
+	}
+
+	craftRecipe SurvivalGrindScrewsintoNails
+	{
+	TimedAction = UseGrindingStone,
+		Time = 130,
+		Tags = Grindstone,
+	category = Metalworking,
+	xpAward = Maintenance:1,
+		inputs
+		{
+			item 1 [Base.Screws] flags[Prop2],
+		}
+		outputs
+		{
+			item 1 Base.Nails,
+		}
+	}
+
+	craftRecipe SurvivalMakeFlintFirestarter
+	{
+	timedAction = MakingHammer_Surface,
+	time = 230,
+	Tags = AnySurfaceCraft,
+        needTobeLearn = true,
+        SkillRequired = FlintKnapping:1,
+        AutoLearnAny = FlintKnapping:2,
+	xpAward = FlintKnapping:40,
+	category = Knapping,
+		OnCreate = Recipe.OnCreate.KnappFlake,
+		inputs
+		{
+            		item 1 tags[HammerStone;Mallet;KnappingTool] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 [Base.FlintNodule] flags[Prop2],
+			item 1 [Base.SteelChunk;Base.PiercedSteelChunk;Base.SteelBarQuarter;Base.SteelRodQuarter],
+			item 2 [Base.Twine],
+		}
+		outputs
+		{
+			item 1 Base.Survival_FlintFirestarter,
+		}
+	}
+
+	craftRecipe SurvivalCrushStone
+	{
+        timedAction = MakingHammer_Surface,
+        time            = 140,
+        Tags = AnySurfaceCraft,
+        category      = Masonry,
+        xpAward       = Masonry:10,
+		inputs
+		{
+			item 1 tags[Hammer;ClubHammer;Sledgehammer] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 [Base.Stone2;Base.SharpedStone] flags[Prop2;AllowDestroyedItem],
+		}
+		outputs
+		{
+			item 1 Base.Survival_CrushedStone,
+		}
+	}
+
+	craftRecipe SurvivalKnapStoneintoStonePieces
+	{
+	timedAction = MakingHammer_Surface,
+	time = 230,
+	Tags = AnySurfaceCraft,
+	xpAward = FlintKnapping:10,
+	category = Knapping,
+		inputs
+		{
+            		item 1 [Base.HammerStone;Base.KnappingTool;Base.WoodenMallet;Base.ShortBat] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 [Base.Stone2;Base.SharpedStone] flags[Prop2;AllowDestroyedItem],
+		}
+		outputs
+		{
+			item 1 Base.Survival_CrushedStone,
+		}
+	}
+
+	craftRecipe SurvivalCrushStonePiecesintoGravel
+	{
+        timedAction = CrushLimestone,
+        time            = 300,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category      = Masonry,
+        xpAward       = Masonry:20,
+         SkillRequired = Strength:4,
+		inputs
+		{
+			item 1 tags[Hammer;Sledgehammer;ClubHammer;HammerStone] mode:keep flags[Prop1;MayDegradeLight],
+			item 4 [Base.Survival_CrushedStone;Base.CrushedLimestone] flags[Prop2],
+			item 1 tags[HoldDirt],
+		}
+        	outputs
+		{
+            		item 1 Base.Gravelbag,
+		}
+	}
+
+	craftRecipe SurvivalBreakSmoothFlatStoneintoStones
+	{
+        timedAction = Chisel_Surface,
+        time            = 100,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category      = Masonry,
+        xpAward       = Masonry:10,
+		inputs
+		{
+            		item 1 tags[ClubHammer;Sledgehammer;StoneMaul] mode:keep flags[MayDegradeLight;Prop1],
+           	 	item 1 tags[CrudeChisel;MasonsChisel] mode:keep flags[MayDegradeLight;Prop2],
+			item 1 [Base.FlatStone],
+		}
+        	outputs
+		{
+            		item 3 Base.Stone2,
+		}
+	}
+
+	craftRecipe SurvivalKnapSmoothFlatStoneintoStones
+	{
+        timedAction = MakingHammer_Surface,
+        time            = 230,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+	xpAward = FlintKnapping:10,
+        category = Knapping,
+		inputs
+		{
+            		item 1 tags[HammerStone;Mallet;KnappingTool] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 [Base.FlatStone],
+		}
+        	outputs
+		{
+            		item 3 Base.Stone2,
+		}
+	}
+
+	craftRecipe SurvivalKneadClay
+	{
+	timedAction = Craft_PotteryBench,
+        time = 300,
+        tags = AnySurfaceCraft;Pottery;CanBeDoneFromFloor,
+        xpAward = Pottery:10,
+        category = Pottery,
+        	inputs
+        	{
+         		item 1 [Base.Clay],
+			item 1 [Base.Dirtbag;Base.Sandbag] flags[ItemCount],
+			item 1 tags[Bucket] mode:keep,
+            		-fluid 5.0 [Water;TaintedWater],
+			item 1 [Base.Strainer] mode:keep,
+        	}
+        	outputs
+        	{
+			item 8 Base.Clay,
+        	}
+	}
+
+	craftRecipe SurvivalPutClayinSack
+	{
+	timedAction = UnPackSack,
+		Time = 30,
+		Tags = InHandCraft,
+	category = Packing,
+		inputs
+		{
+			item 8 [Base.Clay],
+			item 1 tags[HoldDirt],
+		}
+		outputs
+		{
+			item 1 Base.Claybag,
+		}
+	}
+
+	craftRecipe SurvivalUnravelRopeforTwine
+	{
+	timedAction = Making,
+	time = 100,
+	Tags = InHandCraft,
+	category = Miscellaneous,
+		inputs
+		{
+			item 1 tags[SharpKnife;Scissors] mode:keep flags[IsNotDull;MayDegradeLight],
+			item 1 [Base.Rope] flags[Prop2],
+		}
+		outputs
+		{
+			item 1 Base.Twine,
+		}
+	}
+
+	craftRecipe SurvivalTwistRopefromTwine
+	{
+	timedAction = Making,
+	time = 500,
+	Tags = AnySurfaceCraft,
+	category = Miscellaneous,
+		inputs
+		{
+			item 2 [Base.Twine] flags[ItemCount],
+            		item 1 [Base.WoodenStick2] mode:keep,
+			item 1 tags[SharpKnife;Scissors] mode:keep flags[IsNotDull;MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 Base.Rope,
+		}
+	}
+
+	craftRecipe SurvivalSewSheet
+	{
+	timedAction = SewingCloth,
+		Time = 200,
+	xpAward = Tailoring:5,
+	Tags = AnySurfaceCraft,
+	category = Tailoring,
+		inputs
+		{
+			item 1 tags[SewingNeedle] mode:keep,
+			item 1 [Base.Thread],
+			item 5 [Base.RippedSheets] flags[InheritColor],
+		}
+		outputs
+		{
+			item 1 Base.Sheet,
+		}
+	}
+
+	craftRecipe SurvivalSewFabricRoll
+	{
+	timedAction = SewingCloth,
+		Time = 300,
+	xpAward = Tailoring:25,
+	SkillRequired = Tailoring:1,
+	Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+	category = Tailoring,
+		inputs
+		{
+			item 1 tags[SewingNeedle] mode:keep,
+			item 5 [Base.Thread],
+			item 20 [Base.Sheet] flags[InheritColor],
+		}
+		outputs
+		{
+			item 1 Base.FabricRoll_Cotton,
+		}
+	}	
+
+	craftRecipe SurvivalDryGrass
+	{
+	Time = 86400,
+		Tags = DryingRackHerb,
+		category = Farming,
+        	overlayStyle = Herb,
+		inputs
+		{
+			item 7 [Base.GrassTuft] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.HayTuft,
+		}
+	}
+
+		/** Carving Recipes **/
+
+	craftRecipe SurvivalCarveLongStickfromPlank
+	{
+	Time = 100,
+		OnCreate = Recipe.OnCreate.MinorCarving,
+		Tags = InHandCraft,
+        category = Carving,
+        timedAction = SharpenStake,
+        SkillRequired = Carving:1,
+		xpAward = Carving:5,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+			item 1 [Base.Plank] flags[Prop2],
+		}
+		outputs
+		{
+			item 1 Base.LongStick,
+		}
+	}	
+}

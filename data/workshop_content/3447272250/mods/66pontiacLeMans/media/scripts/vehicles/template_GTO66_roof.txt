@@ -1,0 +1,164 @@
+module Base
+{
+
+	model 66pontiacLeMansroUP
+	{
+		mesh = vehicles/Vehicles_66pontiacLeMans_Body|66lemans_roof_convertible,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+    model 66pontiacLeMansroDOWN
+	{
+		mesh = vehicles/Vehicles_66pontiacLeMans_Body|66lemans_cover_convertible,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	
+	template vehicle GTO66RoofUP
+	{
+		part GTO66Roof
+        	{
+
+			model roof
+				{
+                		file = 66pontiacLeMansroUP,
+				}
+
+			category = Other,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.66pontiacLeMansRoof0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1000,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+                    requireUninstalled = GTO66RoofStorage,
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				}
+		}
+
+        part GTO66RoofStorage
+        	{
+
+			model roofDown
+				{
+                		file = 66pontiacLeMansroDOWN,
+				}
+
+			category = Other,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.66pontiacLeMansRoof0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1000,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+                    requireUninstalled = GTO66Roof,
+            		}
+
+	            lua
+	            {
+				create = DAMN.Create.Blank,
+				}
+		}
+	}
+
+    template vehicle GTO66RoofDOWN
+	{
+        template! = GTO66RoofUP,
+
+		part GTO66Roof
+        {
+	        lua
+	        {
+				create = DAMN.Create.Blank,
+			}
+		}
+
+        part GTO66RoofStorage
+        {
+	        lua
+	        {
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}

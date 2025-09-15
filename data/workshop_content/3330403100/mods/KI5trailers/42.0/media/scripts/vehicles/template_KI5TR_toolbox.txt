@@ -1,0 +1,97 @@
+module Base
+{
+	model KI5trailersToolbox
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_toolBox,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle KI5TRToolBoxMedium
+	{
+		part KI5TRToolBox
+		{
+
+			model Toolbox0
+				{
+                		file = KI5trailersToolbox,
+				}
+
+			category = Other,
+			area = ToolBox,
+			itemType = Base.KI5trailersToolBox,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+            durability = 2,
+
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = KI5TR.ContainerAccess.Toolbox,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = KI5TR.InstallComplete.ToolBox,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = KI5TR.UninstallComplete.ToolBox,
+					requireEmpty = true,
+
+            }
+
+            lua
+            	{
+					create = KI5TR.Create.ToolBox,
+					init = KI5TR.Init.ToolBox,
+				}
+		}
+	}
+
+    template vehicle KI5TRToolBoxLarge
+	{
+        template! = KI5TRToolBoxMedium,
+
+		part KI5TRToolBox
+		{
+
+			model Toolbox0
+				{
+                		file = KI5trailersToolbox,
+                        offset = 0.0000 0.0000 0.5056,
+				}
+        }
+    }
+}

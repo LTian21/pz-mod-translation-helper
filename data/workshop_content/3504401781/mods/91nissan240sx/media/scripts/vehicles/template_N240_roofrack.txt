@@ -1,0 +1,80 @@
+module Base
+{
+	model 91nissan240sxRoofrack0
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Body|240sx_roofrack0,
+		texture = Vehicles/Items_damnRoofrackModern,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle N240Roofrack
+	{
+		part N240Roofrack
+		{
+			model Roofrack0
+				{
+                	file = 91nissan240sxRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+            specificItem = false,
+			itemType = Base.ModernSmallRoofrack3,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                    test = Vehicles.InstallTest.Default,
+                	complete = N240.InstallComplete.Roofrack,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1300,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = N240.UninstallComplete.Roofrack,
+					requireEmpty = true,
+            		}
+
+            lua
+            	{
+                    init = N240.Init.Roofrack,
+					create = N240.Create.Roofrack,
+				}
+		}
+	}
+}

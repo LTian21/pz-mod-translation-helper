@@ -1,0 +1,275 @@
+module Base
+{
+	model 63type2VanGasCan0
+	{
+		mesh = vehicles/Vehicles_63type2Van_Body|TIS_GasCan0,
+		texture = Vehicles/Items_GasCan,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 63type2VanGasCan1
+	{
+		mesh = vehicles/Vehicles_63type2Van_Body|TIS_GasCan1,
+		texture = Vehicles/Items_GasCan,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 63type2VanGasCan2
+	{
+		mesh = vehicles/Vehicles_63type2Van_Body|TIS_GasCan2,
+		texture = Vehicles/Items_GasCan,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 63type2VanGenerator
+	{
+		mesh = vehicles/Vehicles_63type2Van_Body|TIS_Generator,
+		texture = Vehicles/Items_Generator,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 63type2VanTent
+	{
+		mesh = vehicles/Vehicles_63type2Van_Body|type2_tentTarp,
+		texture = Vehicles/Vehicles_63Type2Van_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle VAN63ApocGear
+	{
+			part VAN63GasCan0
+        	{
+				model gascan0
+				{
+                file = 63type2VanGasCan0,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.EmptyPetrolCan;Base.PetrolCan,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part VAN63GasCan1
+        	{
+				model gascan1
+				{
+                file = 63type2VanGasCan1,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.EmptyPetrolCan;Base.PetrolCan,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part VAN63GasCan2
+        	{
+				model gascan2
+				{
+                file = 63type2VanGasCan2,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.EmptyPetrolCan;Base.PetrolCan,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part VAN63Generator
+        	{
+				model GenX
+				{
+                file = 63type2VanGenerator,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.Generator,
+				mechanicRequireKey = false,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part VAN63Tent
+        	{
+				model Tentyy
+				{
+                file = 63type2VanTent,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = camping.CampingTentKit,
+				mechanicRequireKey = false,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+		part VAN63ToolBoxLeft
+		{
+
+			category = bodywork,
+			area = ToolboxLeft,
+			itemType = Base.63Type2VanToolbox,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = VAN63.ContainerAccess.CustomArea,
+			}
+
+            lua
+            	{
+            		create = Vehicles.Create.Default,
+				}
+		}
+
+		part VAN63ToolBoxRight
+		{
+
+			category = bodywork,
+			area = ToolboxRight,
+			itemType = Base.63Type2VanToolbox,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = VAN63.ContainerAccess.CustomArea,
+			}
+
+            lua
+            	{
+            		create = Vehicles.Create.Default,
+				}
+		}
+	}	
+}

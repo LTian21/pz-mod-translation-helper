@@ -1,0 +1,56 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LogWallLvl1
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Log Wall,
+			Icon		= Build_WallLogs,
+		}
+	}
+
+    entity LogWall
+    {
+        component UiConfig
+                {
+                    xuiSkin         = default,
+                    entityStyle     = ES_LogWallLvl1,
+                    uiEnabled       = false,
+                }
+
+        component SpriteConfig
+        {
+			LogicClass      = WoodenWall,
+			skillBaseHealth = 400,
+
+            face W
+            {
+                layer
+                {
+                    row = carpentry_02_80,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = carpentry_02_81,
+                }
+            }
+        }
+		
+	component CraftRecipe
+        {
+		timedAction   = BuildWallNoTool,
+            	time          = 200,
+            	category      = Carpentry,
+		xpAward       = Woodwork:10,
+		ToolTip       = Tooltip_craft_wallLogDesc,
+            inputs
+            {
+                item 1 [SWB.LogWallKit],
+            }
+        }
+    }
+}

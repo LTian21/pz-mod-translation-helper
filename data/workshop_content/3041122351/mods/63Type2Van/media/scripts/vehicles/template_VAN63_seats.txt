@@ -1,0 +1,345 @@
+module Base
+{
+
+	model 63Type2Vanseatfl
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_seat_fl,
+		texture = Vehicles/Vehicles_63Type2Van_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 63Type2Vanseatfr
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_seat_fr,
+		texture = Vehicles/Vehicles_63Type2Van_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 63Type2Vanseatml
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_seat_ml,
+		texture = Vehicles/Vehicles_63Type2Van_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 63Type2Vanseatmr
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_seat_mr,
+		texture = Vehicles/Vehicles_63Type2Van_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 63Type2Vanseatrl
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_seat_rl,
+		texture = Vehicles/Vehicles_63Type2Van_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 63Type2Vanseatrr
+	{
+		mesh = vehicles/Vehicles_63Type2Van_Body|type2_seat_rr,
+		texture = Vehicles/Vehicles_63Type2Van_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	
+	template vehicle VAN63Seats4
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 63Type2Vanseatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			itemType = Base.63beetleFrontSeat,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 63Type2Vanseatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.63beetleFrontSeat,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatML
+			{
+				file = 63Type2Vanseatml,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.63beetleRearSeat,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatMR
+			{
+				file = 63Type2Vanseatmr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.63beetleRearSeat,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+	template vehicle VAN63Seats6
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 63Type2Vanseatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			itemType = Base.63beetleFrontSeat,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 63Type2Vanseatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.63beetleFrontSeat,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatMiddleLeft
+		{
+
+			model seatML
+			{
+				file = 63Type2Vanseatml,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.63beetleRearSeat,
+			container
+			{
+				seat = MiddleLeft,
+			}
+		}
+
+		part SeatMiddleRight
+		{
+
+			model seatMR
+			{
+				file = 63Type2Vanseatmr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.63beetleRearSeat,
+			container
+			{
+				seat = MiddleRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 63Type2Vanseatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.63beetleRearSeat,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 63Type2Vanseatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.63beetleRearSeat,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

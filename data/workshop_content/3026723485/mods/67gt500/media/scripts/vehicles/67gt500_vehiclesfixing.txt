@@ -1,0 +1,103 @@
+module Base
+{
+	recipe Repair 67 GT500 Tire
+    	{
+		67gt500Tire3/67gt500eTire3,
+		TireRepairTools,
+		TireRepairRubberSolution,
+		TireRepairStrips,
+
+		NoBrokenItems:false,
+		Result:TireRepairTools,
+		Time:250.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+	fixing Fix 67 GT500 Seat
+	{
+	   Require : 67gt500FrontSeat3;67gt500RearSeat3,
+	   ConditionModifier : 0.5,
+
+       Fixer : DuctTape=2;Mechanics=1,
+	}
+	
+	fixing Fix 67 GT500 Trunk Welding
+	{
+	   Require : 67gt500Trunk3;67gt500eTrunk3;67gt500Roofrack3,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=2,
+	}
+
+	fixing Fix 67 GT500 Hood Welding
+	{
+	   Require : 67gt500EngineDoor3;67gt500eEngineDoor3,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+	}
+
+   fixing Fix 67 GT500 Hood
+	{
+	   Require : 67gt500EngineDoor3;67gt500eEngineDoor3,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix 67 GT500 Lid Welding
+    {
+       Require : 67gt500TrunkDoor3,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+    }
+
+   fixing Fix 67 GT500 Lid
+	{
+      Require : 67gt500TrunkDoor3,
+	   GlobalItem : Screws=8,
+	   ConditionModifier : 0.5,
+
+       Fixer : SheetMetal; Mechanics=2,
+	}
+
+	fixing Fix 67 GT500 Door Welding
+	{
+	   Require : 67gt500Door3,
+	   GlobalItem : BlowTorch=5,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=3,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=3,
+	}
+
+	fixing Fix 67 GT500 Armor Welding
+    {
+       Require : 67gt500FrontBumper0;67gt500FrontBumperA;67gt500eFrontBumperA;67gt500RearBumper0;67gt500RearBumperA;67gt500FrontBullbar;67gt500RearBullbar;67gt500WindshieldArmor;67gt500WindshieldRearArmor;67gt500WindowArmor,
+       GlobalItem : BlowTorch=5,
+       ConditionModifier : 0.75,
+
+       Fixer : SheetMetal; MetalWelding=4;Mechanics=4,
+       Fixer : SmallSheetMetal=2; MetalWelding=4;Mechanics=4,
+    }
+
+    fixing Fix 67 GT500 Plastic Welding
+    {
+       Require : 67gt500eFrontBumper0,
+       GlobalItem : PlasticWeldingGun=250,
+       ConditionModifier : 0.85,
+
+       Fixer : PlasticWeldingStaples100Pack; Mechanics=4,
+    }
+
+}

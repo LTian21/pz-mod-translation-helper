@@ -1,0 +1,81 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_BlueSeat
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Blue Seat,
+			Icon		= location_restaurant_pileocrepe_01_29,
+		}
+	}
+
+    entity BlueSeat
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_BlueSeat,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = location_restaurant_pileocrepe_01_27,
+                    row = location_restaurant_pileocrepe_01_26,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_restaurant_pileocrepe_01_30 location_restaurant_pileocrepe_01_31,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_restaurant_pileocrepe_01_25,
+                    row = location_restaurant_pileocrepe_01_24,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_restaurant_pileocrepe_01_28 location_restaurant_pileocrepe_01_29,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 350,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:10,
+            category      = Furniture_Seating,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_benchesDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 1 tags[Scissors] mode:keep,
+                item 1 tags[SewingNeedle] mode:keep,
+                item 8 [Base.Plank],
+                item 3 [Base.Nails],
+                item 4 [Base.Leather_Crude_Large_Tan],
+                item 4 [Base.Thread],
+                item 200 [Base.ChickenFeather;Base.TurkeyFeather],
+            }
+        }
+    }
+}

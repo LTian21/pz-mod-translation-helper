@@ -1,0 +1,83 @@
+module Base
+{
+	model 89fordBroncoRoofrack
+	{
+		mesh = vehicles/Vehicles_89fordBronco_Body|89bronco_roofrack1,
+		texture = vehicles/Vehicles_89fordBronco_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle BR89RoofrackPD
+		{
+		part BR89Roofrack
+        	{
+
+			model Roofrack87158pd
+				{
+                		file = 89fordBroncoRoofrack,
+                		offset = 0.0000 0.000 -0.3000,
+				}
+
+			area = Roofrack,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.80sPickupRoofrackA,
+			mechanicRequireKey = false,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = BR89.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = BR89BedCover,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 2000,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+                	test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireUninstalled = BR89SpareTireRoof,
+            		}
+
+            		lua
+            		{
+            		create = DAMN.Create.Blank,
+					}
+		}
+	}
+
+		
+}

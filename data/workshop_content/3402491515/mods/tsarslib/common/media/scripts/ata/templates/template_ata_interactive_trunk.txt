@@ -1,0 +1,193 @@
+module Base
+{
+    template vehicle ATAInteractiveTrunk
+    {
+        part ATARoofBase
+        {
+            area = TruckBed,
+            category = tuning,
+            specificItem = false,
+            mechanicRequireKey = false,
+            repairMechanic = true,
+            model Default
+            {
+                file = Vehicles_Wheel,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 400,
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+            table uninstall
+            {
+                requireUninstalled = ATAInteractiveTrunkRoofRack;ATARoofTent;ATARoofLightFront;ATARoofLightLeft;ATARoofLightRight;ATARoofLightRear,
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 400,
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+            lua
+            {
+                create = ATATuning.Create.Chance15,
+                init = ATATuning.Init.Default,
+            }
+        }
+        
+        part ATAInteractiveTrunkRoofRack
+        {
+            
+        }
+        
+        part ATAInteractiveTrunkWindowRearRack
+        {
+            
+        }
+        
+        part ATAInteractiveTrunkWheelRack
+        {
+            
+        }
+        
+        part ATAInteractiveTrunkFront
+        {
+            
+        }
+        part ATAInteractiveTrunkRear
+        {
+            
+        }
+        
+        part ATAInteractiveTrunk*
+        {
+            area = TruckBed,
+            category = tuning,
+            specificItem = false,
+            
+            mechanicRequireKey = false,
+            repairMechanic = true,
+            container
+            {
+                conditionAffectsCapacity = true,
+                test = ATATuning.ContainerAccess.ATAInteractiveTrunk,
+            }
+            table install
+            {
+                requireInstalled =,
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                skills = Mechanics:3,
+                time = 2000,
+                recipes = Advanced Mechanics;Basic Tuning,
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.ATAInteractiveTrunk,
+            }
+            table uninstall
+            {
+                requireUninstalled =,
+                requireEmpty = true,
+                items
+                {
+                    1
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                         equip = primary,
+                   }
+                }
+                skills = Mechanics:2,
+                time = 2000,
+                recipes = Intermediate Mechanics;Basic Tuning,
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.ATAInteractiveTrunk,
+            }
+            lua
+            {
+                create = ATATuning.Create.ATAInteractiveTrunk,
+                init = ATATuning.Init.ATAInteractiveTrunk,
+            }
+        }
+        part ATARoofRackToolbox
+        {
+            area = TruckBed,
+            category = tuning,
+            specificItem = false,
+            mechanicRequireKey = false,
+            repairMechanic = true,
+            container
+            {
+                conditionAffectsCapacity = false,
+                test = Vehicles.ContainerAccess.TruckBedOpen,
+            }
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                recipes = Basic Tuning,
+                requireInstalled = ATAInteractiveTrunkRoofRack,
+                test = Vehicles.InstallTest.Default,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+            table uninstall
+            {
+                requireEmpty = true,
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                         equip = primary,
+                   }
+                }
+                time = 1000,
+                recipes = Basic Tuning,
+                test = Vehicles.UninstallTest.Default,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+            lua
+            {
+                create = ATATuning.Create.Chance0,
+                init = ATATuning.Init.DefaultModel,
+            }
+        }
+    }
+}

@@ -1,0 +1,190 @@
+module Base
+{
+	model 88toyotaHiluxFrontBumper0
+	{
+		mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 88toyotaHiluxFrontBullbarA
+	{
+		mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 88toyotaHiluxRearBumper0
+	{
+		mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 88toyotaHiluxRearBullbarA
+	{
+		mesh = vehicles/Vehicles_88toyotaHilux_Body|88hilux_bumper_rearA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle HLX88BumpersXC
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 88toyotaHiluxFrontBumper0,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 88toyotaHiluxFrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.88toyotaHiluxBumperFront0;Base.88toyotaHiluxBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = HLX88.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = HLX88.Create.BumperFront,
+					init = HLX88.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 88toyotaHiluxRearBumper0,
+				}
+
+			model RearBullbarA
+				{
+                		file = 88toyotaHiluxRearBullbarA,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.88toyotaHiluxBumperRear0;Base.88toyotaHiluxBullbarRearA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = HLX88.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = HLX88.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = HLX88.Create.BumperRear,
+					init = HLX88.Init.BumperRear,
+					}
+		}
+	}
+
+    template vehicle HLX88BumpersSC
+	{
+        template! = HLX88BumpersXC,
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                	file = 88toyotaHiluxRearBumper0,
+                    offset = 0.0000 0.0000 0.4047,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+
+			model RearBullbarA
+				{
+                	file = 88toyotaHiluxRearBullbarA,
+                    offset = 0.0000 0.0000 0.4047,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+            }
+    }
+}

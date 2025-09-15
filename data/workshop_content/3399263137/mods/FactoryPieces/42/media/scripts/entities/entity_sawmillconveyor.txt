@@ -1,0 +1,63 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Sawmill_Conveyor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Sawmill Conveyor,
+			Icon		= Build_SawmillConveyor,
+		}
+	}
+
+    entity BuildSawmillConveyor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Sawmill_Conveyor,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = industry_02_153,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = industry_02_152,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Electricity:1;MetalWelding:4,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPSawmillConveyor,
+            inputs
+            {
+                item 3 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SmallSheetMetal],
+                item 2 [Base.MetalBar],
+                item 2 [Base.Screws],
+                item 1 [Base.ElectricWire],
+                item 10 [Base.ElectronicsScrap],
+                item 3 [Base.WeldingRods],
+            }
+        }
+    }
+}

@@ -1,0 +1,136 @@
+module Base
+{
+	model 93chevySilveradoK3500bedTarpShort
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_bed_tarp_short,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 93chevySilveradoK3500bedTarpLong
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_bed_tarp_long,
+		texture = Vehicles/Vehicles_93chevySuburban_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SIL93bedTarpShortCC
+		{
+		part SIL93Tarp
+        	{
+
+			model bedTarp0
+				{
+                	file = 93chevySilveradoK3500bedTarpShort,
+				}
+
+			category = Other,
+			area = TireRearRight,
+			itemType = Base.93chevySilveradoBedTarp,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.BedTarp,
+            		}
+
+            table uninstall
+            		{
+
+						time = 750,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = SUB93.UninstallComplete.BedTarp,
+
+            		}
+
+            	lua
+            		{
+                        init = SUB93.Init.BedTarp,
+					    create = SUB93.Create.BedTarp,
+					}
+		}
+	}
+
+    template vehicle SIL93bedTarpLongCC
+	{
+        template! = SIL93bedTarpShortCC,
+
+		part SIL93Tarp
+        	{
+
+			model bedTarp0
+				{
+                	file = 93chevySilveradoK3500bedTarpLong,
+				}
+            }
+    }
+
+    template vehicle SIL93bedTarpShortXC
+	{
+        template! = SIL93bedTarpShortCC,
+
+		part SIL93Tarp
+        	{
+
+			model bedTarp0
+				{
+                	file = 93chevySilveradoK3500bedTarpShort,
+                    offset = 0.0000 0.0000 0.2800,
+				}
+            }
+    }
+
+    template vehicle SIL93bedTarpLongXC
+	{
+        template! = SIL93bedTarpLongCC,
+
+		part SIL93Tarp
+        	{
+
+			model bedTarp0
+				{
+                	file = 93chevySilveradoK3500bedTarpLong,
+                    offset = 0.0000 0.0000 0.2800,
+				}
+            }
+    }
+
+    template vehicle SIL93bedTarpShortSC
+	{
+        template! = SIL93bedTarpShortCC,
+
+		part SIL93Tarp
+        	{
+
+			model bedTarp0
+				{
+                	file = 93chevySilveradoK3500bedTarpShort,
+                    offset = 0.0000 0.0000 0.9100,
+				}
+            }
+    }
+
+    template vehicle SIL93bedTarpLongSC
+	{
+        template! = SIL93bedTarpLongCC,
+
+		part SIL93Tarp
+        	{
+
+			model bedTarp0
+				{
+                	file = 93chevySilveradoK3500bedTarpLong,
+                    offset = 0.0000 0.0000 0.9100,
+				}
+            }
+    }
+}

@@ -1,0 +1,84 @@
+module Base
+{
+
+	model 91rangeRoofrack0
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_roofrack,
+		texture = Vehicles/Vehicles_91range_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle RR91Roofrack
+	{
+		part RR91Roofrack
+		{
+
+			model RR91Roofrack0
+				{
+                		file = 91rangeRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.91rangeRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+            durability = 5,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = RR91.UninstallComplete.Roofrack,
+					requireUninstalled = DAMNSpareTireRoof,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = RR91.Create.Roofrack,
+					init = RR91.Init.Roofrack,
+				}
+		}
+	}
+}
+

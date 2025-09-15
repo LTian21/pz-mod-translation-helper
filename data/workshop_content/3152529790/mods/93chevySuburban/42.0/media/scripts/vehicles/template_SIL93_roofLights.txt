@@ -1,0 +1,86 @@
+module Base
+{
+	model 93chevySilveradoK3500RoofLights
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|k3500_roof_lights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SIL93RoofLights
+		{
+		part DAMNRoofLights
+        	{
+
+			model RoofLights0
+				{
+                	file = 93chevySilveradoK3500RoofLights,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.93chevyK3500rooflights,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 750,
+						skills = Mechanics:1,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+            	lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+    template vehicle SIL93RoofLightsOFF
+    {
+        template! = SIL93RoofLights,
+
+		part DAMNRoofLights
+        {
+            lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+		}
+	}
+}

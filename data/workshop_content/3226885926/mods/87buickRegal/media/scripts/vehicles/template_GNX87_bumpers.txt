@@ -1,0 +1,166 @@
+module Base
+{
+	model 87buickRegalBumperFront0
+	{
+		mesh = vehicles/Vehicles_87buickRegal_Body|gnx_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87buickRegalBumperFrontA
+	{
+		mesh = vehicles/Vehicles_87buickRegal_Body|gnx_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87buickRegalBullbarFrontA
+	{
+		mesh = vehicles/Vehicles_87buickRegal_Body|gnx_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 87buickRegalBumperRear0
+	{
+		mesh = vehicles/Vehicles_87buickRegal_Body|gnx_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle GNX87Bumpers
+		{
+		part GNX87BumperFront
+        	{
+
+			model BumperFront0
+				{
+                		file = 87buickRegalBumperFront0,
+				}
+
+			model BumperFrontA
+				{
+                		file = 87buickRegalBumperFrontA,
+				}
+
+			model BullbarFrontA
+				{
+                		file = 87buickRegalBullbarFrontA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.87buickRegalBumperFront;Base.87buickRegalBumperFrontA;Base.87buickRegalBullbar,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GNX87.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = GNX87.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = GNX87.Create.BumperFront,
+					init = GNX87.Init.BumperFront,
+					}
+			}
+
+
+		part GNX87BumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 87buickRegalBumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.87buickRegalBumperRear,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = GNX87.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = GNX87.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = GNX87.Create.BumperRear,
+					init = GNX87.Init.BumperRear,
+					}
+		}
+	}
+}

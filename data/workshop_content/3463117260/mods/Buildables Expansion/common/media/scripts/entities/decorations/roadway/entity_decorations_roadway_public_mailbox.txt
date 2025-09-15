@@ -1,0 +1,77 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_PublicMailBox
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Public Mail Box,
+			Icon		= street_decoration_01_8,
+		}
+	}
+
+    entity PublicMailBox
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_PublicMailBox,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 500,
+
+            face N
+            {
+                layer
+                {
+                    row = street_decoration_01_10,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = street_decoration_01_9,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = street_decoration_01_8,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = street_decoration_01_11,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:4,
+            xpAward       = MetalWelding:10,
+            category      = Decorations_Roadway,
+            tags          = Welding,
+            ToolTip       = Tooltip_craft_roadwayDecorationsDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SmallSheetMetal],
+                item 4 [Base.SheetMetal],
+                item 2 [Base.MetalBar;Base.MetalPipe],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

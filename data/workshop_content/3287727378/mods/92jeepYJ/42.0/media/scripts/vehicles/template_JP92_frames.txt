@@ -1,0 +1,219 @@
+module Base
+{
+
+    model 92jeepYJWindshieldFrame
+    {
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_windshield_frame,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 92jeepYJWindowFLframe
+    {
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_window_frame_fl,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+
+    model 92jeepYJWindowFRframe
+    {
+        mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_window_frame_fr,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+
+	template vehicle JP92Frames
+	{
+        part JP92WindshieldFrame
+        {
+            model windshieldFrame
+            {
+                file = 92jeepYJWindshieldFrame,
+            }
+                
+            itemType = Base.92jeepYJWindshieldFrame,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 5,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    test = DAMN.UninstallTest.Default,
+                    complete = Vehicles.UninstallComplete.Default,
+                    requireUninstalled = Windshield;JP92Lightbar,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part JP92WindowFrontLeftFrame
+        {
+            model windownflFrame
+            {
+                file = 92jeepYJWindowFLframe,
+            }
+                
+            itemType = Base.92jeepYJFrontSideWindowFrame,
+            area = SeatFrontLeft,
+            category = door,
+            parent = DoorFrontLeft,
+            mechanicRequireKey = false,
+            durability = 5,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+                requireInstalled = DoorFrontLeft,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = Vehicles.UninstallComplete.Default,
+                    requireUninstalled = WindowFrontLeft,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part JP92WindowFrontRightFrame
+        {
+            model windownfrFrame
+            {
+                file = 92jeepYJWindowFRframe,
+            }
+                
+            itemType = Base.92jeepYJFrontSideWindowFrame,
+            area = SeatFrontRight,
+            category = door,
+            parent = DoorFrontRight,
+            mechanicRequireKey = false,
+            durability = 5,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+                requireInstalled = DoorFrontRight,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = Vehicles.UninstallComplete.Default,
+                    requireUninstalled = WindowFrontRight,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle JP92FramesOFF
+	{
+        template! = JP92Frames,
+
+        part JP92WindowFrontLeftFrame
+        {
+            lua
+            {
+                create = DAMN.Create.Blank,
+            }
+        }
+
+        part JP92WindowFrontRightFrame
+        {
+            lua
+            {
+                create = DAMN.Create.Blank,
+            }
+        }
+    }
+}

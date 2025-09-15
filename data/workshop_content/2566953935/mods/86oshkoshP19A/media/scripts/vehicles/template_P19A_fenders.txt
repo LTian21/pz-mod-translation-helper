@@ -1,0 +1,172 @@
+module Base
+{
+	model 86oshkoshP19AFenderLeft1
+    {
+        mesh = vehicles/Vehicles_86oshkoshP19A_mk2_Body|p19a_rear_left_fender1,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+    }
+    model 86oshkoshP19AFenderLeft2
+    {
+        mesh = vehicles/Vehicles_86oshkoshP19A_mk2_Body|p19a_rear_left_fender2,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+    }
+    model 86oshkoshP19AFenderRight1
+    {
+        mesh = vehicles/Vehicles_86oshkoshP19A_mk2_Body|p19a_rear_right_fender1,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+    }
+    model 86oshkoshP19AFenderRight2
+    {
+        mesh = vehicles/Vehicles_86oshkoshP19A_mk2_Body|p19a_rear_right_fender2,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+    }
+    model 86oshkoshP19AFenderRight3
+    {
+        mesh = vehicles/Vehicles_86oshkoshP19A_mk2_Body|p19a_rear_right_fender3,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+    }
+
+	template vehicle P19AFenders
+		{
+		part P19AFenderLeft
+        	{
+
+			model FenderLeft1
+				{
+                		file = 86oshkoshP19AFenderLeft1,
+				}
+			model FenderLeft2
+				{
+                		file = 86oshkoshP19AFenderLeft2,
+				}
+
+			area = TireRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.P19AFenderLeft1_Item;Base.P19AFenderLeft2_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = P19A.InstallComplete.FenderLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1100,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = P19A.UninstallComplete.FenderLeft,
+            		}
+
+            		lua
+            		{
+			create = P19A.Create.FenderLeft,
+			init = P19A.Init.FenderLeft,
+			}
+		}
+
+		part P19AFenderRight
+        	{
+
+			model FenderRight1
+				{
+                		file = 86oshkoshP19AFenderRight1,
+				}
+			model FenderRight2
+				{
+                		file = 86oshkoshP19AFenderRight2,
+				}
+			model FenderRight3
+				{
+                		file = 86oshkoshP19AFenderRight3,
+				}
+
+			area = TireRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.P19AFenderRight1_Item;Base.P19AFenderRight2_Item;Base.P19AFenderRight3_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = P19A.InstallComplete.FenderRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1100,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = P19A.UninstallComplete.FenderRight,
+            		}
+
+            		lua
+            		{
+			create = P19A.Create.FenderRight,
+			init = P19A.Init.FenderRight,
+			}
+		}
+	}
+
+		
+}

@@ -1,0 +1,47 @@
+module Base
+{
+	template vehicle M998TrunkCompartment
+	{
+		part M998Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+            durability = 5,
+			container
+			{
+				capacity = 110,
+                conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.TrunkInner,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+                conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.TrunkInner,
+			}
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+
+	}
+
+}
+

@@ -1,0 +1,77 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Wood_FenceGate
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Wood Fence Gate,
+			Icon		= Build_DoorWood,
+		}
+	}
+
+    entity WoodFenceGate
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Wood_FenceGate,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			dontNeedFrame	= true,
+			breakSound      = BreakDoor,
+			
+            face W
+            {
+                layer
+                {
+                    row = fixtures_doors_fences_01_4,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_doors_fences_01_5,
+                }
+            }
+			face W_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_fences_01_6,
+                }
+            }
+            face N_OPEN
+            {
+                layer
+                {
+					row = fixtures_doors_fences_01_7,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            timedAction   = BuildWallHammer,
+            time          = 200,
+            category      = Carpentry,
+            tags          = Carpentry,
+            SkillRequired = Woodwork:3,
+            xpAward       = Woodwork:6,
+            ToolTip       = Tooltip_craft_woodFenceGateDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1],
+				item 1 [SWB.PlankKit4x],
+				item 4 [Base.Nails],
+				item 2 [Base.Hinge],
+				item 1 [Base.Doorknob],
+            }
+        }
+    }
+}

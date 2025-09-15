@@ -1,0 +1,94 @@
+module Base
+{
+	model 92amgeneralM998sparemount
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_sparetire,
+		texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle M998SpareTire
+		{
+		part M998SpareTire
+        	{
+
+			model SpareTire1
+				{
+                		file = runFlatSmallTire,
+                        offset = -0.2667 0.2111 -2.3939,
+				        rotate = 0.0000 -90.0000 0.0000,
+				}
+            model SpareTire1Mount
+				{
+                		file = 92amgeneralM998sparemount,
+				}
+
+            model SpareTire2
+				{
+                		file = runFlatSmallTire,
+                        offset = -0.2667 0.2111 -2.3939,
+				        rotate = 0.0000 -90.0000 0.0000,
+				}
+            model SpareTire1Mount2
+				{
+                		file = 92amgeneralM998sparemount,
+				}
+
+			category = bodywork,
+			area = SpareTire,
+			specificItem = false,
+			itemType = Base.V101Tire2;runFlat.SmallTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            }
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1000,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+            		complete = M998.UninstallComplete.SpareTire,
+
+
+            		}
+
+            lua
+            {
+			create = M998.Create.SpareTire,
+			init = M998.Init.SpareTire,
+			}
+		}
+	}
+
+		
+}

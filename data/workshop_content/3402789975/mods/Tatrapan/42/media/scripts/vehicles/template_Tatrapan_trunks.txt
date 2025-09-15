@@ -1,0 +1,54 @@
+module Base
+{
+	model Tatrapan_RoofRack
+	{
+		mesh = vehicles/Tatrapan|roofstorage,
+		texture = Vehicles/TATRAPANTEXTURE,
+        shader = basicEffect,
+        scale = 0.01,
+	}
+
+    /******************** TRUNK ********************/
+
+	
+
+	/******************** ROOFRACK ********************/
+
+	
+
+    template vehicle Tatrapan_trunks
+	{
+		template = Trunk/part/TruckBed,
+		part TruckBed
+		{
+			itemType = Base.VanSeatsTrunk,
+
+			container
+			{
+                capacity = 300,
+                conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBedOpenInside,
+			}
+
+			lua
+            {
+                create = ATATuning.Create.DefaultATAInteractiveTrunk,
+                init = ATATuning.Init.ATAInteractiveTrunk,
+            }
+
+            
+            
+		}
+
+		template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkRoofRack,
+        part ATA2InteractiveTrunkRoofRack
+        {
+            area = ATARoof,
+            model ATARoofrack
+            {
+                file = Tatrapan_RoofRack,
+            }
+           
+        }
+	}
+}

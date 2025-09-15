@@ -1,0 +1,82 @@
+module Base
+{
+	model 82jeepJ10Roofrack
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_roofrack1,
+		texture = vehicles/Vehicles_82jeepJ10_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle JP82Roofrack
+		{
+		part JP82Roofrack
+        	{
+
+			model Roofrack8696966
+				{
+                		file = 82jeepJ10Roofrack,
+				}
+
+			area = Roofrack,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.80sPickupRoofrackA,
+			mechanicRequireKey = false,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = JP82.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 2000,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = JP82BedCover,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 2000,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireUninstalled = JP82SpareTireRoof,
+            		}
+
+            		lua
+            		{
+            		create = DAMN.Create.Blank,
+					}
+		}
+	}
+
+		
+}

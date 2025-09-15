@@ -1,0 +1,88 @@
+module Base
+{
+    model 92jeepYJSnorkel
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_snorkel,
+		texture = Vehicles/Vehicles_92jeepYJ_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle JP92Snorkel
+	{
+		part JP92Snorkel
+        	{
+
+			model Snorkel0
+				{
+                		file = 92jeepYJSnorkel,
+				}
+
+			category = Other,
+			area = TireFrontRight,
+			specificItem = false,
+			itemType = Base.92jeepYJSnorkel2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = JP92.InstallComplete.Snorkel,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 750,
+			skills = Mechanics:1,
+			recipes = Intermediate Mechanics,
+            test = Vehicles.UninstallTest.Default,
+			complete = JP92.UninstallComplete.Snorkel,
+
+            		}
+
+            		lua
+            		{
+			create = JP92.Create.Snorkel,
+			init = JP92.Init.Snorkel,
+			}
+		}
+	}
+
+    template vehicle JP92SnorkelOFF
+	{
+        template! = JP92Snorkel,
+
+        part JP92Snorkel
+            {
+                lua
+                {
+                create = DAMN.Create.Blank,
+                }
+            }
+    }
+}

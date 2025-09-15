@@ -1,0 +1,481 @@
+module Base
+{
+	model 93fordF350Roofrack
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|fx50_roofrack,
+		texture = Vehicles/Items_damnRoofrackPickup,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 93fordF350RoofrackLegs
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|fx50_roofrack_legs,
+		texture = Vehicles/Items_damnRoofrackPickup,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 93fordF350GasCan
+    {
+        mesh = vehicles/Vehicles_93fordF350_Body|fx50_gascan,
+		texture = Vehicles/Items_USMIL_gasCan0,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+    }
+
+    model 93fordF350WaterCan
+    {
+        mesh = vehicles/Vehicles_93fordF350_Body|fx50_gascan,
+		texture = Vehicles/Items_USMIL_waterCan0,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+    }
+
+	model 93fordF350Tent
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|fx50_tentTarp,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle F3502TruckBedAddons
+	{
+		part F3502Roofrack
+		{
+			model F3502Roofrack
+			{
+				file = 93fordF350Roofrack,
+			}
+
+			model F3502RoofrackLegs
+			{
+				file = 93fordF350RoofrackLegs,
+			}
+		
+			category = bodywork,
+			area = Roofrack,
+			itemType = Base.PickupLargeRoofrack,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+            durability = 5,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+                requireUninstalled = DAMNGasCanOne;DAMNGasCanTwo;DAMNGasCanThree;DAMNTent,
+				requireEmpty = true,
+			}
+			lua
+            {
+                create = DAMN.Create.Blank,
+            }
+		}
+
+        part DAMNGasCanOne
+        	{
+
+			model GasCanOne
+				{
+                		file = 93fordF350GasCan,
+				}
+
+			model WaterCanOne
+				{
+                		file = 93fordF350WaterCan,
+				}
+
+			area = TireRearRight,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.GasCanOne,
+                    requireInstalled = F3502Roofrack,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.GasCanOne,
+            		}
+
+            		lua
+            		{
+						create = F3502.Create.GasCanOne,
+						init = F3502.Init.GasCanOne,
+					}
+		}
+
+		part DAMNGasCanTwo
+        {
+
+			model GasCanTwo
+				{
+                		file = 93fordF350GasCan,
+                		offset = -0.3200 0.0000 -0.0200,
+				}
+
+			model WaterCanTwo
+				{
+                		file = 93fordF350WaterCan,
+                		offset = -0.3200 0.0000 -0.0200,
+				}
+
+			area = TireRearRight,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.GasCanTwo,
+                    requireInstalled = F3502Roofrack,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.GasCanTwo,
+            		}
+
+            		lua
+            		{
+						create = F3502.Create.GasCanTwo,
+						init = F3502.Init.GasCanTwo,
+					}
+		}
+
+		part DAMNGasCanThree
+        {
+
+			model GasCanThree
+				{
+                		file = 93fordF350GasCan,
+                		offset = -0.6400 0.0000 -0.0100,
+				}
+
+			model WaterCanThree
+				{
+                		file = 93fordF350WaterCan,
+                		offset = -0.6400 0.0000 -0.0100,
+				}
+
+			area = TireRearLeft,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.GasCanThree,
+                    requireInstalled = F3502Roofrack,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.GasCanThree,
+            		}
+
+            		lua
+            		{
+						create = F3502.Create.GasCanThree,
+						init = F3502.Init.GasCanThree,
+					}
+		}
+
+        part DAMNTent
+        	{
+				model TentyyyY
+				{
+                    file = 93fordF350Tent,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = Base.TentBrown_Packed;Base.TentGreen_Packed;Base.TentYellow_Packed;Base.TentBlue_Packed,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+ 
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = F3502Roofrack,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 150,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+	}
+
+	template vehicle F2502TruckBedAddons
+	{
+		template! = F3502TruckBedAddons,
+
+		part F3502Roofrack
+		{
+			model F3502Roofrack
+			{
+				file = 93fordF350Roofrack,
+				offset = 0.0000 0.0000 0.8600,
+			}
+
+			model F3502RoofrackLegs
+			{
+				file = 93fordF350RoofrackLegs,
+				offset = 0.0000 0.0000 0.8600,
+			}
+
+			model F3502Roofrack2
+			{
+				file = 93fordF350Roofrack,
+				offset = 0.0000 0.0000 0.8600,
+			}
+
+			model F3502RoofrackLegs2
+			{
+				file = 93fordF350RoofrackLegs,
+				offset = 0.0000 0.0000 0.8600,
+			}
+
+		}
+        part DAMNGasCanOne
+        {
+            model GasCanOne
+				{
+                		file = 93fordF350GasCan,
+                		offset = 0.0000 0.0000 0.8600,
+				}
+
+			model WaterCanOne
+				{
+                		file = 93fordF350WaterCan,
+                		offset = 0.0000 0.0000 0.8600,
+				}
+
+        }
+
+        part DAMNGasCanTwo
+        {
+            model GasCanTwo
+				{
+                		file = 93fordF350GasCan,
+                		offset = -0.3200 0.0000 0.8400,
+				}
+
+			model WaterCanTwo
+				{
+                		file = 93fordF350WaterCan,
+                		offset = -0.3200 0.0000 0.8400,
+				}
+
+        }
+
+        part DAMNGasCanThree
+        {
+
+            model GasCanThree
+				{
+                		file = 93fordF350GasCan,
+                		offset = -0.6400 0.0000 0.8500,
+				}
+
+			model WaterCanThree
+				{
+                		file = 93fordF350WaterCan,
+                		offset = -0.6400 0.0000 0.8500,
+				}
+
+        }
+
+        part DAMNTent
+        	{
+				model TentyyyY
+				{
+                    file = 93fordF350Tent,
+                    offset = 0.0000 0.0000 0.8600,
+				}
+            }
+	}
+
+	template vehicle F1502TruckBedAddons
+	{
+		template! = F3502TruckBedAddons,
+
+		part F3502Roofrack
+		{
+			model F3502Roofrack
+			{
+				file = 93fordF350Roofrack,
+				offset = 0.0000 0.0000 1.2800,
+			}
+
+			model F3502RoofrackLegs
+			{
+				file = 93fordF350RoofrackLegs,
+				offset = 0.0000 0.0000 0.8600,
+			}
+
+			model F3502Roofrack2
+			{
+				file = 93fordF350Roofrack,
+				offset = 0.0000 0.0000 1.2800,
+			}
+
+			model F3502RoofrackLegs2
+			{
+				file = 93fordF350RoofrackLegs,
+				offset = 0.0000 0.0000 0.8600,
+			}
+
+        }
+
+        part DAMNGasCanOne
+        {
+            model GasCanOne
+				{
+                		file = 93fordF350GasCan,
+                		offset = 0.0000 0.0000 1.2600,
+				}
+
+			model WaterCanOne
+				{
+                		file = 93fordF350WaterCan,
+                		offset = 0.0000 0.0000 1.2600,
+				}
+
+        }
+
+        part DAMNGasCanTwo
+        {
+            model GasCanTwo
+				{
+                		file = 93fordF350GasCan,
+                		offset = -0.3200 0.0000 1.2600,
+				}
+
+			model WaterCanTwo
+				{
+                		file = 93fordF350WaterCan,
+                		offset = -0.3200 0.0000 1.2600,
+				}
+
+        }
+
+        part DAMNGasCanThree
+        {
+
+            model GasCanThree
+				{
+                		file = 93fordF350GasCan,
+                		offset = -0.6400 0.0000 1.2700,
+				}
+
+			model WaterCanThree
+				{
+                		file = 93fordF350WaterCan,
+                		offset = -0.6400 0.0000 1.2700,
+				}
+
+        }
+
+        part DAMNTent
+        	{
+				model TentyyyY
+				{
+                    file = 93fordF350Tent,
+                    offset = 0.0000 0.0000 1.2800,
+				}
+            }
+	}
+}

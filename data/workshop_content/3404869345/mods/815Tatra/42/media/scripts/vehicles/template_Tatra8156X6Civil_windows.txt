@@ -1,0 +1,97 @@
+module Base
+{
+    model Tatra815Civil_leftfrontwindow
+	{
+		mesh = vehicles/Vehicles_Civil6X6Tatra815_Body|leftfrontwindow,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+		boneWeight = FrontLeftWindowBone 1.0,
+	}
+	model Tatra815Civil_rightfrontwindow
+	{
+		mesh = vehicles/Vehicles_Civil6X6Tatra815_Body|rightfrontwindow,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+		boneWeight = FrontRightWindowBone 1.0,
+	}
+
+
+
+
+
+
+    template vehicle Tatra8156X6Civil_windows
+    {
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+             
+  
+
+
+		part WindowFrontLeft
+		{
+			area = SeatFrontLeft,
+			
+			parent = DoorFrontLeft,
+                       
+
+			model Default
+			{
+				file = Tatra815Civil_leftfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontLeft_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+
+		part WindowFrontRight
+		{
+			area = SeatFrontRight,
+			
+			parent = DoorFrontRight,
+                        
+
+			model Default
+			{
+				file = Tatra815Civil_rightfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontRight_open,
+				animate = FALSE,
+			}                        
+
+		}
+
+  
+                   
+                
+
+
+
+           
+
+		
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			window
+			{
+				openable = true,
+			}
+		}
+    }
+}

@@ -1,0 +1,180 @@
+module Base
+{
+
+	model 89volvo240Roofrack0
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_sedan_roofrack,
+		texture = Vehicles/Vehicles_89volvo200_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 89volvo245Roofrack1
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_wagon_roofrack,
+		texture = Vehicles/Vehicles_89volvo200_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 89volvo245Roofrack2
+	{
+		mesh = vehicles/Vehicles_89volvo200_Body|volvo_wagon_roofracke,
+		texture = Vehicles/Vehicles_89volvo200_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle VL240Roofrack
+	{
+		part VL200Roofrack
+		{
+
+			model VL200Roofrack0
+				{
+                		file = 89volvo240Roofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.89volvo240Roofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = VL200.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = VL200.InstallComplete.Roofrack,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = VL200.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = VL200.Create.Roofrack,
+					init = VL200.Init.Roofrack,
+				}
+		}
+	}
+
+    template vehicle VL245RoofracksWagon
+	{
+		part VL200Roofrack
+		{
+
+			model VL200Roofrack0
+				{
+                		file = 89volvo240Roofrack0,
+				}
+
+            model VL200Roofrack1
+				{
+                		file = 89volvo245Roofrack1,
+				}
+            
+            model VL200Roofrack2
+				{
+                		file = 89volvo245Roofrack2,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.89volvo240Roofrack;Base.89volvo245WagonRoofrack;Base.89volvo245WagonRoofRails,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = VL200.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = VL200.InstallComplete.RoofrackWagon,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = VL200.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = VL200.Create.RoofrackWagon,
+					init = VL200.Init.RoofrackWagon,
+				}
+		}
+	}
+}
+

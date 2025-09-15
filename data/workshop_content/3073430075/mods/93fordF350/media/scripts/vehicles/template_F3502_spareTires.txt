@@ -1,0 +1,57 @@
+module Base
+{
+
+	template vehicle F3502SpareTires
+	{
+
+        part F3502SpareTire
+        {
+                
+            itemType = Base.93fordF350Tire,
+            area = TruckBed,
+            category = tire,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			             equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = F3502.InstallComplete.SpareTire,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = F3502.UninstallComplete.SpareTire,
+            }
+            lua
+            {
+                init = F3502.Init.SpareTire,
+                create = F3502.Create.SpareTire,
+            }
+        }
+    }
+}

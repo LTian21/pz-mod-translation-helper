@@ -1,0 +1,262 @@
+module Base
+{
+	model 67gt500eWheel
+	{
+		mesh = vehicles/Vehicles_67gt500_Wheel|gt500e_tire,
+		texture = vehicles/Vehicles_67gt500e_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 67gt500sWheel
+	{
+		mesh = vehicles/Vehicles_67gt500_Wheel|gt500_tire,
+		texture = vehicles/Vehicles_67gt500_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 67gt500WheelUNIL
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.105,
+	}
+    model 67gt500WheelUNIR
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.105,
+        invertX = TRUE,
+	}
+
+	template vehicle GT500Tires
+	{
+
+		part TireFrontLeft
+		{
+            model GT500Tire
+                {
+                    file = 67gt500sWheel,
+                }
+
+			model EleanorTire
+                {
+                    file = 67gt500eWheel,
+                }
+
+            model uniTireL
+                {
+                    file = 67gt500WheelUNIL,
+                }
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = GT500.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = GT500.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = GT500.Create.TireFrontLeft,
+				init = GT500.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model GT500Tire
+                {
+                    file = 67gt500sWheel,
+                }
+
+			model EleanorTire
+                {
+                    file = 67gt500eWheel,
+                }
+
+            model uniTireR
+                {
+                    file = 67gt500WheelUNIR,
+                }
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = GT500.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = GT500.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = GT500.Create.TireFrontRight,
+				init = GT500.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model GT500Tire
+                {
+                    file = 67gt500sWheel,
+                }
+
+			model EleanorTire
+                {
+                    file = 67gt500eWheel,
+                }
+
+            model uniTireL
+                {
+                    file = 67gt500WheelUNIL,
+                }
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = GT500.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			table uninstall
+			{
+				complete = GT500.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = GT500.Create.TireRearLeft,
+				init = GT500.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model GT500Tire
+                {
+                    file = 67gt500sWheel,
+                }
+
+			model EleanorTire
+                {
+                    file = 67gt500eWheel,
+                }
+
+            model uniTireR
+                {
+                    file = 67gt500WheelUNIR,
+                }
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = GT500.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = GT500.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = GT500.Create.TireRearRight,
+				init = GT500.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+
+		part Tire*
+		{
+			category = tire,
+            specificItem = false,
+			itemType = Base.67gt500Tire3;Base.67gt500eTire3;damnCraft.SmallTire1,
+            durability = 2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+
+    template vehicle GT500TiresE
+	{
+        template! = GT500Tires,
+
+		part Tire*
+		{
+			itemType = Base.67gt500eTire3;Base.67gt500Tire3;damnCraft.SmallTire1,
+            
+		}
+	}
+}
+

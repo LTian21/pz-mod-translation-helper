@@ -1,0 +1,78 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_GreenOven
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Green Oven,
+			Icon		= appliances_cooking_01_1,
+		}
+	}
+
+    entity GreenOven
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_GreenOven,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face N
+            {
+                layer
+                {
+                    row = appliances_cooking_01_3,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = appliances_cooking_01_0,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = appliances_cooking_01_1,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = appliances_cooking_01_2,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildMetalStructureMedium,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = MetalWelding:6;Electricity:6,
+            xpAward       = MetalWelding:15;Electricity:15,
+            category      = Appliances_Cooking,
+            ToolTip       = Tooltip_craft_electricOvenDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] mode:keep flags[Prop1],
+                item 1 tags[Screwdriver] mode:keep flags[Prop2],
+                item 1 tags[Pliers] mode:keep,
+                item 4 [Base.WeldingRods],
+                item 4 [Base.SmallSheetMetal],
+                item 6 [Base.SheetMetal],
+                item 7 [Base.ElectronicsScrap],
+                item 3 [Base.ElectricWire],
+			    item 1 [Base.LightBulb],
+            }
+        }
+    }
+}

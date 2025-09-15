@@ -1,0 +1,60 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_BleachedLargeTable
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Bleached Large Table,
+			Icon		= location_restaurant_pileocrepe_01_33,
+		}
+	}
+
+    entity BleachedLargeTable
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_BleachedLargeTable,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_restaurant_pileocrepe_01_35,
+                    row = location_restaurant_pileocrepe_01_34,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_restaurant_pileocrepe_01_32 location_restaurant_pileocrepe_01_33,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 250,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:5,
+            category      = Furniture_Tables,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_tableDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

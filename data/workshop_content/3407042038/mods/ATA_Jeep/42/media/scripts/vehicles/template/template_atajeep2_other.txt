@@ -1,0 +1,116 @@
+module Base
+{
+    model ATA_Jeep_zapaska
+    {
+        mesh = vehicles/ATA_Jeep_base|zapaska,
+        texture = Vehicles/ATA_Jeep_wheel,
+
+        scale = 0.03,
+    }
+    
+    model ATA_Jeep_Snorkel
+    {
+        mesh = vehicles/ATA_Jeep_base|air_tube,
+        texture = Vehicles/ATA_Jeep_items,
+
+        scale = 0.03,
+    }
+    
+    model ATA_Jeep_rooflights_front
+    {
+        mesh = vehicles/ATA_Jeep_base|rooflights_front,
+        texture = Vehicles/ATA_Jeep_items,
+
+        scale = 0.03,
+    }
+    model ATA_Jeep_rooflights_left
+    {
+        mesh = vehicles/ATA_Jeep_base|rooflights_left,
+        texture = Vehicles/ATA_Jeep_items,
+
+        scale = 0.03,
+    }
+    model ATA_Jeep_rooflights_right
+    {
+        mesh = vehicles/ATA_Jeep_base|rooflights_right,
+        texture = Vehicles/ATA_Jeep_items,
+
+        scale = 0.03,
+    }
+    model ATA_Jeep_rooflights_rear
+    {
+        mesh = vehicles/ATA_Jeep_base|rooflights_rear,
+        texture = Vehicles/ATA_Jeep_items,
+
+        scale = 0.03,
+    }
+    
+    template vehicle ATA_Jeep_Template_Other
+    {
+        template = ATASpareWheel/part/ATASpareWheel,
+        part ATASpareWheel
+        {
+            model Default
+            {
+                file = ATA_Jeep_zapaska,
+            }
+            table uninstall
+            {
+                requireUninstalled = ATA2InteractiveTrunkWheelRack,
+            }
+        }
+        template = ATA2Visual/part/ATA2VisualSnorkel,
+        part ATA2VisualSnorkel
+        {
+            model Default
+            {
+                file = ATA_Jeep_Snorkel,
+            }
+        }
+        template = ATARoofLights,
+        part ATARoofLightLeft
+        {
+            model Default
+            {
+                file = ATA_Jeep_rooflights_left,
+            }
+            table install
+            {
+                requireInstalled = ATA2RoofBase,
+            }
+        }
+        part ATARoofLightRight
+        {
+            model Default
+            {
+                file = ATA_Jeep_rooflights_right,
+            }
+            table install
+            {
+                requireInstalled = ATA2RoofBase,
+            }
+        }
+        part ATARoofLightFront
+        {
+            model Default
+            {
+                file = ATA_Jeep_rooflights_front,
+            }
+            table install
+            {
+                requireInstalled = ATA2RoofBase,
+            }
+        }
+        part ATARoofLightRear
+        {
+            model Default
+            {
+                file = ATA_Jeep_rooflights_rear,
+            }
+            table install
+            {
+                requireInstalled = ATA2RoofBase,
+            }
+        }
+    }
+}

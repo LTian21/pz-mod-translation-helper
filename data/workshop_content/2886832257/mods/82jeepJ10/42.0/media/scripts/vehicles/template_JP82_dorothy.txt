@@ -1,0 +1,170 @@
+module Base
+{
+	model 82jeepJ10Dorothy
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_dorothy,
+		texture = Vehicles/Vehicles_82jeepJ10t_Interior_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 82jeepJ10DorothyLights
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_dorothy_lights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82jeepJ10DorothyWindy
+	{
+		mesh = vehicles/Vehicles_82jeepJ10_Body|j10_dorothy_windy,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle JP82Dorothy
+		{
+		part JP82Dorothy
+        	{
+
+			model Dorothy45718
+				{
+                		file = 82jeepJ10Dorothy,
+				}
+
+			area = TruckBed,
+			category = Other,
+			specificItem = false,
+			itemType = Base.82JeepJ10Dorothy,
+			mechanicRequireKey = false,
+            durability = 5,
+
+            		lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+
+		part JP82DorothyLights
+        	{
+
+			model DorothyLights57168
+				{
+                		file = 82jeepJ10DorothyLights,
+				}
+
+			area = TruckBed,
+			category = nodisplay,
+			specificItem = false,
+			itemType = Base.LightBulb,
+			mechanicRequireKey = false,
+            durability = 5,
+
+            		lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+
+		part JP82Windy
+		{
+
+			model windythewindrotatingthing
+			{
+				file = 82jeepJ10DorothyWindy,
+			}
+
+			anim Close
+			{
+				anim = windy_spin,
+				rate = 0.75,
+			}
+
+			anim Open
+			{
+				anim = windy_spin,
+				reverse = FALSE,
+				rate = 0.75,
+			}
+
+			anim Closed
+			{
+				anim = windy_spin,
+				reverse = TRUE,
+				animate = FALSE,
+				rate = 2.0,
+			}
+
+			anim Opened
+			{
+				anim = windy_spin,
+				animate = TRUE,
+				rate = 2.0,
+			}
+		
+			category = bodywork,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleWindowHandleOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowHandleClose,
+			}
+
+			area = TruckBed,
+			category = Other,
+			specificItem = false,
+			itemType = Base.82JeepJ10DorothyAnemometer,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 250,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.Door,
+			}
+		}
+	}
+}

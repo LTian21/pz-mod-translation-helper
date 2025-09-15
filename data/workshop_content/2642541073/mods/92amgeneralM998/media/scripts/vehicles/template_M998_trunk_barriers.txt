@@ -1,0 +1,88 @@
+module Base
+{
+	model 92amgeneralM998metalbarrier
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_barrier1,
+		texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 92amgeneralM998netbarrier
+	{
+		mesh = vehicles/Vehicles_92amgeneralM998_Body|HMMWV_barrier2,
+		texture = Vehicles/Vehicles_92amgeneralM998_Interior_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle M998TrunkBarriers
+		{
+		part M998TrunkBarrier
+        	{
+
+			model TrunkBarrier1
+				{
+                		file = 92amgeneralM998metalbarrier,
+				}
+			model TrunkBarrier2
+				{
+                		file = 92amgeneralM998netbarrier,
+				}
+
+			area = TireRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.M998TrunkBarrier1_Item;Base.M998TrunkBarrier2_Item,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1200,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = M998.InstallComplete.TrunkBarrier,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1200,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = M998.UninstallComplete.TrunkBarrier,
+            		}
+
+            		lua
+            		{
+			create = M998.Create.TrunkBarrier,
+			init = M998.Init.TrunkBarrier,
+			}
+		}
+	}
+
+		
+}

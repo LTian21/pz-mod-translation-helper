@@ -1,0 +1,58 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Log_WindowframeLvl1
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Log Window Frame (Poor),
+			Icon		= Build_WindowframeLogs,
+		}
+	}
+
+    entity LogWindowFrameLvl1
+    {
+        component UiConfig
+                {
+                    xuiSkin         = default,
+                    entityStyle     = ES_Log_WindowframeLvl1,
+                    uiEnabled       = false,
+                }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			bonusHealth     = 400,
+			
+            face W
+            {
+                layer
+                {
+                    row = walls_logs_48,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_logs_49,
+                }
+            }
+			
+			corner = walls_exterior_wooden_01_27,
+        }
+		
+		component CraftRecipe
+        {
+		timedAction   = BuildWallNoTool,
+            	time          = 200,
+            	category      = Carpentry,
+		xpAward       = Woodwork:10,
+		ToolTip       = Tooltip_craft_woodenFrameDesc,
+            inputs
+            {
+                item 1 [SWB.LogWallKit],
+            }
+        }
+    }
+}

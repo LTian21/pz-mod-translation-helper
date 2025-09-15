@@ -1,0 +1,98 @@
+module Base
+{
+    model Tatra815_Hood
+    {
+        mesh = vehicles/Vehicles_Tatra815_Body|hood,
+        shader = vehicle,
+	static = FALSE,
+        scale = 1,
+	boneWeight = HoodBone 1.0,
+    }
+
+    template vehicle C4CorvetteGS_hood
+    {
+        template = EngineDoor,
+
+        part EngineDoor
+        {
+            model Default
+			{
+				file = C4CorvetteGS_Hood,
+			}
+
+			category = bodywork,
+           
+            area = Engine,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			
+			anim Open
+			{
+				sound = VehicleHoodOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleHoodCloseStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				
+			}
+
+			anim Close
+			{
+				anim = Hood_closing,
+				reverse = FALSE,
+				rate = 1.0,
+			}
+			anim Open
+			{
+				anim = Hood_closing,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+			anim Closed
+			{
+				anim = Hood_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+			anim Opened
+			{
+				anim = Hood_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = ATATuning2.InstallComplete.Door,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = ATATuning2.UninstallComplete.Door,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.DefaultModel,
+                init = ATATuning2.Init.Door,
+                update = Vehicles.Update.EngineDoor,
+                use = Vehicles.Use.EngineDoor,
+			}
+        }
+    }
+}

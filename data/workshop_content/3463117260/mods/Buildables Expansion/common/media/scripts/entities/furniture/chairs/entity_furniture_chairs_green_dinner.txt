@@ -1,0 +1,74 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_GreenDinnerChair
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Green Dinner Chair,
+			Icon		= furniture_seating_indoor_01_57,
+		}
+	}
+
+    entity GreenDinnerChair
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_GreenDinnerChair,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_01_58,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_01_59,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_01_56,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_seating_indoor_01_57,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 200,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:5,
+            category      = Furniture_Seating,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_chairsDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 [Base.Saw] mode:keep,
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

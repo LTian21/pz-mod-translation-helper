@@ -1,0 +1,166 @@
+module Base
+{
+	model 98stageaBumperFront0
+	{
+		mesh = vehicles/Vehicles_98stagea_Body|stagea_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 98stageaBumperFrontA
+	{
+		mesh = vehicles/Vehicles_98stagea_Body|stagea_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 98stageaBullbarFrontA
+	{
+		mesh = vehicles/Vehicles_98stagea_Body|stagea_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 98stageaBumperRear0
+	{
+		mesh = vehicles/Vehicles_98stagea_Body|stagea_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle STAGEABumpers
+		{
+		part STAGEABumperFront
+        	{
+
+			model BumperFront0
+				{
+                		file = 98stageaBumperFront0,
+				}
+
+			model BumperFrontA
+				{
+                		file = 98stageaBumperFrontA,
+				}
+
+            model BullbarFrontA
+				{
+                		file = 98stageaBullbarFrontA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.98stageaBumperFront0;Base.98stageaBumperFrontA;Base.98stageaBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STAGEA.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = STAGEA.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = STAGEA.Create.BumperFront,
+					init = STAGEA.Init.BumperFront,
+					}
+			}
+
+
+		part STAGEABumperRear
+        	{
+
+			model BumperRear0
+				{
+                		file = 98stageaBumperRear0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.98stageaBumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STAGEA.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = STAGEA.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = STAGEA.Create.BumperRear,
+					init = STAGEA.Init.BumperRear,
+					}
+		}
+	}
+}

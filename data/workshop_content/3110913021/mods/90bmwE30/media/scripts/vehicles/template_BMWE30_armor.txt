@@ -1,0 +1,1208 @@
+module Base
+{
+	model 90bmwE30WindshieldA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_windshield_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 90bmwE30SedanWindshieldrearA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_sedan_windshied_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 90bmwE30m3WindshieldrearA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_m3_windshied_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 90bmwE30TouringWindshieldrearA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_touring_windshied_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 90bmwE302DoorflA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_2door_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 90bmwE302DoorfrA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_2door_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 90bmwE302DoorrlA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_2door_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 90bmwE302DoorrrA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_2door_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 90bmwE304DoorflA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_4door_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 90bmwE304DoorfrA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_4door_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 90bmwE304DoorrlA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_4door_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 90bmwE304DoorrrA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_4door_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 90bmwE30CabrioflA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_cabrio_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 90bmwE30CabriofrA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_cabrio_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 90bmwE30TouringrlA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_touring_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 90bmwE30TouringrrA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_touring_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 90bmwE30TouringblA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_touring_bl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 90bmwE30TouringbrA
+    	{
+        mesh = vehicles/Vehicles_90bmwE30_Body|e30_touring_br_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle BMWE30WindshieldArmor
+		{
+		part BMWE30WindshieldArmor
+        	{
+
+			model BMWE30winda0
+				{
+                		file = 90bmwE30WindshieldA,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.90bmwE30WindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = BMWE30.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.WindshieldArmor,
+					init = BMWE30.Init.WindshieldArmor,
+					}
+			}
+		}
+
+	template vehicle BMWE30WindshieldRearArmorSedan
+		{
+		part BMWE30WindshieldRearArmor
+        {
+
+				model BMWE30windra
+				{
+                		file = 90bmwE30SedanWindshieldrearA,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.90bmwE30WindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.WindshieldRearArmor,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.WindshieldRearArmor,
+					init = BMWE30.Init.WindshieldRearArmor,
+					}
+			}
+		}
+
+	template vehicle BMWE30WindshieldRearArmorM3
+		{
+		part BMWE30WindshieldRearArmor
+        {
+
+				model BMWE30windra
+				{
+                		file = 90bmwE30m3WindshieldrearA,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.90bmwE30WindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.WindshieldRearArmor,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.WindshieldRearArmor,
+					init = BMWE30.Init.WindshieldRearArmor,
+					}
+			}
+		}
+
+	template vehicle BMWE30WindshieldRearArmorTouring
+		{
+		part BMWE30WindshieldRearArmor
+        {
+
+				model BMWE30windra
+				{
+                		file = 90bmwE30TouringWindshieldrearA,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.90bmwE30WindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.WindshieldRearArmor,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.WindshieldRearArmor,
+					init = BMWE30.Init.WindshieldRearArmor,
+					}
+			}
+		}
+
+	template vehicle BMWE30FrontDoorArmor
+		{
+		part BMWE30FrontLeftArmor
+        {
+
+			model BMWE30leftdoora
+				{
+                		file = 90bmwE302DoorflA,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.90bmwE30FrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.FrontLeftArmor,
+					init = BMWE30.Init.FrontLeftArmor,
+					}
+		}
+
+		part BMWE30FrontRightArmor
+        {
+
+			model BMWE30rightdoora
+				{
+                		file = 90bmwE302DoorfrA,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.90bmwE30FrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.FrontRightArmor,
+					init = BMWE30.Init.FrontRightArmor,
+					}
+		}
+	}
+
+	template vehicle BMWE302DoorSideArmor
+		{
+		template! = BMWE30FrontDoorArmor,
+
+		part BMWE30RearLeftArmor
+        {
+
+			model BMWE30leftdoorra
+				{
+                		file = 90bmwE302DoorrlA,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.90bmwE30SedanRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.RearLeftArmor,
+					init = BMWE30.Init.RearLeftArmor,
+					}
+		}
+
+		part BMWE30RearRightArmor
+        {
+
+			model BMWE30rightdoorra
+				{
+                		file = 90bmwE302DoorrrA,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.90bmwE30SedanRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.RearRightArmor,
+					init = BMWE30.Init.RearRightArmor,
+					}
+			}
+		}
+
+	template vehicle BMWE304DoorSideArmor
+		{
+		template! = BMWE30FrontDoorArmor,
+
+		part BMWE30FrontLeftArmor
+        {
+
+			model BMWE30leftdoora
+				{
+                		file = 90bmwE304DoorflA,
+				}
+
+		}
+
+		part BMWE30FrontRightArmor
+        {
+
+			model BMWE30rightdoora
+				{
+                		file = 90bmwE304DoorfrA,
+				}
+
+		}
+
+		part BMWE30RearLeftArmor
+        {
+
+			model BMWE30leftdoorra
+				{
+                		file = 90bmwE304DoorrlA,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.90bmwE30SedanRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.RearLeftArmor,
+					init = BMWE30.Init.RearLeftArmor,
+					}
+		}
+
+		part BMWE30RearRightArmor
+        {
+
+			model BMWE30rightdoorra
+				{
+                		file = 90bmwE304DoorrrA,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.90bmwE30SedanRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.RearRightArmor,
+					init = BMWE30.Init.RearRightArmor,
+					}
+			}
+		}
+
+	template vehicle BMWE30CabrioSideArmor
+		{
+		part BMWE30FrontLeftArmor
+        {
+
+			model BMWE30leftdoora
+				{
+                		file = 90bmwE30CabrioflA,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.90bmwE30CabrioWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.FrontLeftArmorCabrio,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.FrontLeftArmorCabrio,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.FrontLeftArmorCabrio,
+					init = BMWE30.Init.FrontLeftArmorCabrio,
+					}
+		}
+
+		part BMWE30FrontRightArmor
+        {
+
+			model BMWE30rightdoora
+				{
+                		file = 90bmwE30CabriofrA,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.90bmwE30CabrioWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.FrontRightArmorCabrio,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.FrontRightArmorCabrio,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.FrontRightArmorCabrio,
+					init = BMWE30.Init.FrontRightArmorCabrio,
+					}
+		}
+	}
+
+	template vehicle BMWE30TouringSideArmor
+		{
+			template! = BMWE304DoorSideArmor,
+
+		part BMWE30RearLeftArmor
+        {
+
+			model BMWE30leftdoorra
+				{
+                		file = 90bmwE30TouringrlA,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.90bmwE30TouringRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.RearLeftArmorTouring,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.RearLeftArmorTouring,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.RearLeftArmorTouring,
+					init = BMWE30.Init.RearLeftArmorTouring,
+					}
+		}
+
+		part BMWE30RearRightArmor
+        {
+
+			model BMWE30rightdoorra
+				{
+                		file = 90bmwE30TouringrrA,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.90bmwE30TouringRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.RearRightArmorTouring,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.RearRightArmorTouring,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.RearRightArmorTouring,
+					init = BMWE30.Init.RearRightArmorTouring,
+					}
+			}
+
+		part BMWE30BackLeftArmor
+        {
+
+			model BMWE30leftdoorba
+				{
+                		file = 90bmwE30TouringblA,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.90bmwE30TouringBackWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.BackLeftArmorTouring,
+                	requireInstalled = WindowBackLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.BackLeftArmorTouring,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.BackLeftArmorTouring,
+					init = BMWE30.Init.BackLeftArmorTouring,
+					}
+		}
+
+		part BMWE30BackRightArmor
+        {
+
+			model BMWE30rightdoorba
+				{
+                		file = 90bmwE30TouringbrA,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.90bmwE30TouringBackWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BMWE30.InstallComplete.BackRightArmorTouring,
+                	requireInstalled = WindowBackRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BMWE30.UninstallComplete.BackRightArmorTouring,
+            		}
+
+            		lua
+            		{
+					create = BMWE30.Create.BackRightArmorTouring,
+					init = BMWE30.Init.BackRightArmorTouring,
+					}
+			}
+		}
+
+		template vehicle BMWE30ArmorSedan2
+		{
+			template! = BMWE30WindshieldArmor,
+			template! = BMWE30WindshieldRearArmorSedan,
+			template! = BMWE302DoorSideArmor,
+		}
+
+		template vehicle BMWE30ArmorM3
+		{
+			template! = BMWE30WindshieldArmor,
+			template! = BMWE30WindshieldRearArmorM3,
+			template! = BMWE302DoorSideArmor,
+		}
+
+		template vehicle BMWE30ArmorSedan4
+		{
+			template! = BMWE30WindshieldArmor,
+			template! = BMWE30WindshieldRearArmorSedan,
+			template! = BMWE304DoorSideArmor,
+		}
+
+		template vehicle BMWE30ArmorCabrio
+		{
+			template! = BMWE30WindshieldArmor,
+			template! = BMWE30CabrioSideArmor,
+		}
+
+		template vehicle BMWE30ArmorTouring
+		{
+			template! = BMWE30WindshieldArmor,
+			template! = BMWE30WindshieldRearArmorTouring,
+			template! = BMWE30TouringSideArmor,
+		}
+
+}

@@ -1,0 +1,174 @@
+module Base
+{
+	model 67commandoSeatMiddleLeft
+	{
+		mesh = vehicles/Vehicles_67commando_Body|v100_seat_ml,
+		texture = vehicles/Vehicles_67commando_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 67commandoSeatMiddleRight
+	{
+		mesh = vehicles/Vehicles_67commando_Body|v100_seat_mr,
+		texture = vehicles/Vehicles_67commando_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 67commandoSeatRearLeft
+	{
+		mesh = vehicles/Vehicles_67commando_Body|v100_seat_rl,
+		texture = vehicles/Vehicles_67commando_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 67commandoSeatRearRight
+	{
+		mesh = vehicles/Vehicles_67commando_Body|v100_seat_rr,
+		texture = vehicles/Vehicles_67commando_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle V100Seats
+	{
+		part SeatFrontLeft
+		{
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatMiddleLeft
+		{
+			model V100sml
+			{
+				file = 67commandoSeatMiddleLeft,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontLeft,
+			container
+			{
+				seat = MiddleLeft,
+			}
+		}
+
+		part SeatMiddleRight
+		{
+			model V100smr
+			{
+				file = 67commandoSeatMiddleRight,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = MiddleRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+			model V100srl
+			{
+				file = 67commandoSeatRearLeft,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+			model V100srr
+			{
+				file = 67commandoSeatRearRight,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			specificItem = false,
+			itemType = USMIL.Seat0,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}

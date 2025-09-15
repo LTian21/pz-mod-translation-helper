@@ -1,0 +1,87 @@
+module Base
+{
+	model 89dodgeCaravanrearBumper0
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89dodgeCaravanrearBumperA
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_bumper_rearA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89dodgeCaravanrearBullbarA
+	{
+		mesh = vehicles/Vehicles_89dodgeCaravan_Body|caravan_bullbar_rearA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DGC89RearBumpers
+		{
+		part DGC89RearBumper
+        	{
+
+			model RearBumper0
+				{
+                		file = 89dodgeCaravanrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.89dodgeCaravanBumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DGC89.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DGC89.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = DGC89.Create.RearBumper,
+					init = DGC89.Init.RearBumper,
+					}
+		}
+	}
+}

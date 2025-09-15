@@ -1,0 +1,75 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_FancyOakWardrobe
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Fancy Oak Wardrobe,
+			Icon		= furniture_storage_01_19,
+		}
+	}
+
+    entity FancyOakWardrobe
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_FancyOakWardrobe,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = furniture_storage_01_21,
+                    row = furniture_storage_01_20,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = furniture_storage_01_22 furniture_storage_01_23,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = furniture_storage_01_17,
+                    row = furniture_storage_01_16,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_storage_01_18 furniture_storage_01_19,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWoodenStructureSmall,
+            time          = 350,
+            needToBeLearn = true,
+            SkillRequired = Woodwork:7,
+            xpAward       = Woodwork:7,
+            category      = Furniture_Dressers,
+            tags          = Carpentry;Furniture,
+            ToolTip       = Tooltip_craft_dressersDesc,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 8 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

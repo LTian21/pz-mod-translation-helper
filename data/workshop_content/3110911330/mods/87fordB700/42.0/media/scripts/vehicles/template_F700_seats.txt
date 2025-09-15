@@ -1,0 +1,380 @@
+module Base
+{
+
+	model 87fordF700Seatfl
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_seat,
+		texture = Vehicles/Items_USMIL_seat0,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 87fordF700Seatfr
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700_seat,
+		texture = Vehicles/Items_USMIL_seat0,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 87fordF700SeatflX
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700x_seat_fl,
+		texture = Vehicles/Vehicles_87fordB700_Interior5,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 87fordF700SeatfrX
+	{
+		mesh = vehicles/Vehicles_87fordB700_Body|f700x_seat_fl,
+		texture = Vehicles/Vehicles_87fordB700_Interior5,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle F700SeatsFront
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 87fordF700Seatfl,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+
+			category = seat,
+            specificItem = false,
+			itemType = USMIL.Seat0,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part SeatFrontRight
+		{
+			
+			model SeatFR
+			{
+				file = 87fordF700Seatfr,
+			}
+			
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+
+			category = seat,
+            specificItem = false,
+			itemType = USMIL.Seat0,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+	template vehicle F700SeatsRear
+	{
+		part SeatP2
+		{
+
+			area = TruckBed,
+			container
+			{
+				seat = P2,
+			}
+		}
+
+		part SeatP3
+		{
+
+			area = TruckBed,
+			container
+			{
+				seat = P3,
+			}
+		}
+
+		part SeatP4
+		{
+
+			area = TruckBed,
+			container
+			{
+				seat = P4,
+			}
+		}
+
+		part SeatP5
+		{
+
+			area = TruckBed,
+			container
+			{
+				seat = P5,
+			}
+		}
+
+		part SeatP6
+		{
+
+			area = TruckBed,
+			container
+			{
+				seat = P6,
+			}
+		}
+
+		part SeatP7
+		{
+
+			area = TruckBed,
+			container
+			{
+				seat = P7,
+			}
+		}
+
+		part SeatP*
+		{
+			itemType = Base.87fordB700RearSeat,
+			category = nodisplay,
+			mechanicRequireKey = true,
+            durability = 3,
+
+            container
+			{
+				test = B700.ContainerAccess.Blank,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+
+    template vehicle F700SeatsX
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 87fordF700SeatflX,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+
+			category = seat,
+            specificItem = false,
+			itemType = Base.87fordF700Seat2,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part SeatFrontRight
+		{
+			
+			model SeatFR
+			{
+				file = 87fordF700SeatfrX,
+			}
+			
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+
+			category = seat,
+            specificItem = false,
+			itemType = Base.87fordF700Seat2,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}

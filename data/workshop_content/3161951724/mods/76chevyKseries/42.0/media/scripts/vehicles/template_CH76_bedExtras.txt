@@ -1,0 +1,425 @@
+module Base
+{
+
+	model 76chevyKseriesRollbar
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_rollbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 76chevyK10Rollbar2
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK10_rollbar2,
+        texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 76chevyK20Rollbar2
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK20_rollbar2,
+        texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 76chevyKseriesRollbarLights2
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_rollbar_lights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 76chevyKseriesToolbox
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_toolbox,
+		texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 76chevyK20Cap
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK20_bedcap,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+		static = FALSE,
+		boneWeight = trunk_bone_top20 1.0,
+	}
+
+	model 76chevyK10Cap
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK10_bedcap,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+		static = FALSE,
+		boneWeight = trunk_bone_top10 1.0,
+	}
+
+    model 76chevyK20OpenCap
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK20_openCap,
+        texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 76chevyK10OpenCap
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK10_openCap,
+        texture = Vehicles/Vehicles_76chevyKseries_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CH76BedExtras
+	{
+		part CH76TruckBedExtras
+		{
+
+			model CH76Rollbar
+				{
+                		file = 76chevyKseriesRollbar,
+				}
+
+			model CH76Toolbox
+				{
+                		file = 76chevyKseriesToolbox,
+				}
+
+            model CH76Rollbar2
+				{
+                		file = 76chevyK10Rollbar2,
+				}
+
+            model CH76RollbarLights2
+				{
+                		file = 76chevyKseriesRollbarLights2,
+				}
+
+			category = Other,
+			area = Toolbox,
+			parent = TrunkDoor,
+			itemType = Base.76chevyKseriesRollbar;Base.76chevyKseriesToolbox;Base.76chevyKseriesRollbarSpec,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = CH76.ContainerAccess.Toolbox,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.BedExtras20,
+                	requireUninstalled = CH76TruckBedCover,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.BedExtras20,
+					requireEmpty = true,
+
+            }
+
+            lua
+            	{
+					create = CH76.Create.BedExtras20,
+					init = CH76.Init.BedExtras20,
+				}
+		}
+	}
+
+    template vehicle CH76BedExtrasK30
+	{
+        template! = CH76BedExtras,
+
+		part CH76TruckBedExtras
+		{
+
+			model CH76Rollbar
+				{
+                		file = 76chevyKseriesRollbar,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+
+			model CH76Toolbox
+				{
+                		file = 76chevyKseriesToolbox,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+
+            model CH76Rollbar2
+				{
+                		file = 76chevyK20Rollbar2,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+
+            model CH76RollbarLights2
+				{
+                		file = 76chevyKseriesRollbarLights2,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+        }
+	}
+
+	template vehicle CH76BedCoverK20
+	{
+		part CH76TruckBedCover
+		{
+
+			model CH76Cap
+				{
+                		file = 76chevyK20Cap,
+				}
+
+            model CH76OpenCap
+				{
+                		file = 76chevyK20OpenCap,
+				}
+
+			anim Close
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					rate = 1.0,
+				}
+
+			anim Open
+				{
+					anim = trunk_opening,
+					rate = 0.5,
+				}
+
+			anim Closed
+				{
+					anim = trunk_opening,
+					animate = FALSE,
+				}
+
+			anim Opened
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+
+			door
+			{}
+
+			category = Other,
+			area = Toolbox,
+			parent = TrunkDoor,
+			itemType = Base.76chevyK20BedCap;Base.76chevyK20OpenBedCap,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.TruckBedCover20,
+                	requireUninstalled = CH76TruckBedExtras,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.TruckBedCover20,
+					requireUninstalled = CH76Roofrack,
+
+            }
+
+            lua
+            	{
+					init = CH76.Init.TruckBedCover20,
+                    create = CH76.Create.TruckBedCover20,
+				}
+		}
+	}
+
+	template vehicle CH76BedCoverK10
+	{
+		part CH76TruckBedCover
+		{
+
+			model CH76Cap
+				{
+                		file = 76chevyK10Cap,
+				}
+
+            model CH76OpenCap
+				{
+                		file = 76chevyK10OpenCap,
+				}
+
+            anim Close
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					rate = 1.0,
+				}
+
+			anim Open
+				{
+					anim = trunk_opening,
+					rate = 0.5,
+				}
+
+			anim Closed
+				{
+					anim = trunk_opening,
+					animate = FALSE,
+				}
+
+			anim Opened
+				{
+					anim = trunk_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+
+			door
+			{}
+
+			category = Other,
+			area = Toolbox,
+			parent = TrunkDoor,
+			itemType = Base.76chevyK10BedCap;Base.76chevyK10OpenBedCap,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.TruckBedCover10,
+                	requireUninstalled = CH76TruckBedExtras,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 900,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.TruckBedCover10,
+					requireUninstalled = CH76Roofrack,
+
+            }
+
+            lua
+            	{
+					init = CH76.Init.TruckBedCover10,
+                    create = CH76.Create.TruckBedCover10,
+				}
+		}
+	}
+
+    template vehicle CH76BedCoverK30
+	{
+		template! = CH76BedCoverK20,
+
+		part CH76TruckBedCover
+		{
+
+			model CH76Cap
+				{
+                		file = 76chevyK20Cap,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+
+            model CH76OpenCap
+				{
+                		file = 76chevyK20OpenCap,
+                        offset = 0.0000 0.0000 -0.7995,
+				}
+		}
+	}
+}

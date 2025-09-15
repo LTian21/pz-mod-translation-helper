@@ -1,0 +1,78 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_LightSwitchLeftSide
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Light Switch Left Side,
+			Icon		= lighting_indoor_01_4,
+		}
+	}
+
+    entity LightSwitchLeftSide
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_LightSwitchLeftSide,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+		    isThumpable     = false,
+		    OnIsValid = BuildablesExpansion.RecipeCode.lightSwitch.OnIsValid,
+		    OnCreate = BuildablesExpansion.RecipeCode.lightSwitch.OnCreate,
+			
+            face N
+            {
+                layer
+                {
+                    row = lighting_indoor_01_6,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = lighting_indoor_01_1,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = lighting_indoor_01_4,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = lighting_indoor_01_2,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            OnAddToMenu   = genericOnAddToMenu,
+            timedAction   = BuildWallMetal,
+            time          = 200,
+            needToBeLearn = true,
+            category      = Lighting,
+            SkillRequired = Electricity:4,
+            xpAward       = Electricity:15,
+            ToolTip       = Tooltip_craft_lightSwitchDesc,
+            inputs
+            {
+                item 1 tags[Screwdriver] mode:keep flags[Prop1],
+                item 10 [Base.ElectronicsScrap],
+		        item 15 [Base.ElectricWire],
+		        item 1 [Base.LightBulb],
+		        item 1 [Base.PlasticSheetSmall],
+            }
+        }
+    }
+}

@@ -1,0 +1,147 @@
+module Base
+{
+
+	model DG70seatfl
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_seat_fl,
+		texture = vehicles/Vehicles_70dodgeRT_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model DG70seatfr
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_seat_fl,
+		texture = vehicles/Vehicles_70dodgeRT_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	model DG70seatrl
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_seat_rl,
+		texture = vehicles/Vehicles_70dodgeRT_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model DG70seatrr
+	{
+		mesh = vehicles/Vehicles_70dodge_Body|challenger_seat_rl,
+		texture = vehicles/Vehicles_70dodgeRT_Wheel_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	
+	template vehicle DG70Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = DG70seatfl,
+			}
+			itemType = Base.DodgeFrontSeat,
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = DG70seatfr,
+			}
+			itemType = Base.DodgeFrontSeat,
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = DG70seatrl,
+			}
+			itemType = Base.DodgeRearSeat,
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = DG70seatrr,
+			}
+			itemType = Base.DodgeRearSeat,
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+

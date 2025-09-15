@@ -1,0 +1,47 @@
+module Base
+{
+    model TatrapanAmbulance_BumperFront
+	{
+		mesh = vehicles/TatrapanAmbulance|frontprotection,
+		shader = vehicle,
+		scale = 0.01,
+	}
+
+
+    template vehicle TatrapanAmbulance_bumpers
+    {
+	template = ATA2Bumpers/part/ATA2Bumper,
+        part ATA2Bumper
+        {
+            area = Engine,
+            
+            model Bumper1
+            {
+                file = TatrapanAmbulance_BumperFront,
+            }
+        }
+
+
+        part ATA2Bumper*
+        {
+            table install
+            {
+                test = ATATuning2.InstallTest.Tuning,
+                complete = ATATuning2.InstallComplete.Tuning,
+            }
+
+            table uninstall
+            {
+                test = ATATuning2.UninstallTest.Tuning,
+                complete = ATATuning2.UninstallComplete.Tuning,
+            }
+
+            lua
+            {
+                create = ATATuning2.Create.Tuning,
+                init = ATATuning2.Init.Tuning,
+                update = ATATuning2.Update.Protection,
+            }
+        }
+    }
+}

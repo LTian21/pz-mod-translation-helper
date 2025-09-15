@@ -1,0 +1,290 @@
+module Base
+{
+
+	model 91nissan240sxWheelL1
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Wheels|240sx_tire12,
+		texture = vehicles/Vehicles_91nissan240sx_Wheel1,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 91nissan240sxWheelR1
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Wheels|240sx_tire12,
+		texture = vehicles/Vehicles_91nissan240sx_Wheel1,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+	model 91nissan240sxWheelL2
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Wheels|240sx_tire12,
+		texture = vehicles/Vehicles_91nissan240sx_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 91nissan240sxWheelR2
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Wheels|240sx_tire12,
+		texture = vehicles/Vehicles_91nissan240sx_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+	model 91nissan240sxWheelL3
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Wheels|240sx_tire3,
+		texture = vehicles/Vehicles_91nissan240sx_Wheel3,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 91nissan240sxWheelR3
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Wheels|240sx_tire3,
+		texture = vehicles/Vehicles_91nissan240sx_Wheel3,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+	model 91nissan240sxWheelL4
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Wheels|240sx_tire4,
+		texture = vehicles/Vehicles_91nissan240sx_Wheel4,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+	model 91nissan240sxWheelR4
+	{
+		mesh = vehicles/Vehicles_91nissan240sx_Wheels|240sx_tire4,
+		texture = vehicles/Vehicles_91nissan240sx_Wheel4,
+		shader = vehiclewheel,
+		scale = 0.1,
+		invertX = TRUE,
+	}
+
+	template vehicle N240Tires
+	{
+		part TireFrontLeft
+		{
+            model Tire1
+			{
+				file = 91nissan240sxWheelL1,
+			}
+			model Tire2
+			{
+				file = 91nissan240sxWheelL2,
+			}
+			model Tire3
+			{
+				file = 91nissan240sxWheelL3,
+			}
+			model Tire4
+			{
+				file = 91nissan240sxWheelL4,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = N240.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = N240.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = N240.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+			model Tire1
+			{
+				file = 91nissan240sxWheelR1,
+			}
+			model Tire2
+			{
+				file = 91nissan240sxWheelR2,
+			}
+			model Tire3
+			{
+				file = 91nissan240sxWheelR3,
+			}
+			model Tire4
+			{
+				file = 91nissan240sxWheelR4,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = N240.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = N240.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = N240.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model Tire1
+			{
+				file = 91nissan240sxWheelL1,
+			}
+			model Tire2
+			{
+				file = 91nissan240sxWheelL2,
+			}
+			model Tire3
+			{
+				file = 91nissan240sxWheelL3,
+			}
+			model Tire4
+			{
+				file = 91nissan240sxWheelL4,
+			}
+
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = N240.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			table uninstall
+			{
+				complete = N240.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = N240.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+			model Tire1
+			{
+				file = 91nissan240sxWheelR1,
+			}
+			model Tire2
+			{
+				file = 91nissan240sxWheelR2,
+			}
+			model Tire3
+			{
+				file = 91nissan240sxWheelR3,
+			}
+			model Tire4
+			{
+				file = 91nissan240sxWheelR4,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = N240.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = N240.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = N240.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.91nissan240sxOEM13;Base.91nissan240sxOEM23;Base.91nissan240sxG73;Base.91nissan240sxGT3,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}
+

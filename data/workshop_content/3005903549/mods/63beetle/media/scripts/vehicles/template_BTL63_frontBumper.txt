@@ -1,0 +1,171 @@
+module Base
+{
+	model 63beetlefrontBumper0
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 63beetlefrontBumper1
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 63beetlefrontBumper2
+	{
+		mesh = vehicles/Vehicles_63beetle_Body|63beetle_bumper_front2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BTL63FrontBumpers
+		{
+		part BTL63FrontBumper
+        	{
+
+			model FrontBumper0
+				{
+                		file = 63beetlefrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 63beetlefrontBumper1,
+				}
+
+			model FrontBumper2
+				{
+                		file = 63beetlefrontBumper2,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.63beetleBumperFront0;Base.63beetleBumperFront1;Base.63beetleBumperFront2,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BTL63.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BTL63.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = BTL63.Create.FrontBumper,
+					init = BTL63.Init.FrontBumper,
+					}
+		}
+	}
+
+	template vehicle BTL63FrontBumpersOFF
+		{
+		part BTL63FrontBumper
+        	{
+
+			model FrontBumper0
+				{
+                		file = 63beetlefrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 63beetlefrontBumper1,
+				}
+
+			model FrontBumper2
+				{
+                		file = 63beetlefrontBumper2,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.63beetleBumperFront0;Base.63beetleBumperFront1;Base.63beetleBumperFront2,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BTL63.InstallComplete.FrontBumperOFF,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = BTL63.UninstallComplete.FrontBumperOFF,
+            		}
+
+            		lua
+            		{
+					create = BTL63.Create.FrontBumperOFF,
+					init = BTL63.Init.FrontBumperOFF,
+					}
+		}
+	}
+}

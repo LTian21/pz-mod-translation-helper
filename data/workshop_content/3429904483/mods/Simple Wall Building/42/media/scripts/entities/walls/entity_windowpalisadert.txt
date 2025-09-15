@@ -1,0 +1,56 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WindowPalisadeRT
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Window Palisade,
+			Icon		= Build_WindowPalisade,
+		}
+	}
+
+    entity WindowPalisadeRT
+    {
+        component UiConfig
+                {
+                    xuiSkin         = default,
+                    entityStyle     = ES_WindowPalisadeRT,
+                    uiEnabled       = false,
+                }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			bonusHealth     = 400,
+			
+            face W
+            {
+                layer
+                {
+                    row = rt_tiles_01_10,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = rt_tiles_01_11,
+                }
+            }
+			corner = rt_tiles_01_8,
+        }
+		
+		component CraftRecipe
+        {
+			timedAction   = BuildWallNoTool,
+            time          = 200,
+            category      = RT Buildings,
+			xpAward       = Woodwork:10,
+            inputs
+            {
+                item 1 [SWB.LogWallKit],
+            }
+        }
+    }
+}

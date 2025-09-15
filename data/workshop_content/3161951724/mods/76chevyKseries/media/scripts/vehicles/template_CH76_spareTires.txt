@@ -1,0 +1,208 @@
+module Base
+{
+    model 76chevyKseriesspareStrap
+    {
+        mesh = vehicles/Vehicles_76chevyKseries_Body|76chevy_spareStrap,
+        texture = Vehicles/Vehicles_76chevyKseries_Wheel,
+        shader = vehiclewheel,
+        scale = 0.1,
+    }
+
+
+	template vehicle CH76SpareTireBed
+	{
+
+        part CH76SpareTireBed
+        {
+            specificItem = false,
+            itemType = Base.76chevyKseriesTire2;Base.80chevyCKseriesTire2;Base.80chevyCKseriesTire1;Base.90chevyCKseriesTire2;Base.90chevyCKseriesTire1,
+            area = TruckBed,
+            category = tire,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			             equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Default,
+            }
+            lua
+            {
+                create = DAMN.Create.Blank,
+            }
+        }
+    }
+
+    template vehicle CH76SpareTireRoof
+    {
+
+        part CH76SpareTireRoof
+        {
+            model SpareTire1
+            {
+                file = 76chevyKseriesWheel1L,
+                offset = 0.1222 1.1000 -2.1741,
+				rotate = 0.0000 0.0000 90.0000,
+            }
+
+            model SpareTire2
+            {
+                file = 76chevyKseriesWheel2L,
+                offset = 0.1222 1.1000 -2.1741,
+				rotate = 0.0000 0.0000 90.0000,
+            }
+
+            model SpareTire3
+            {
+                file = 76chevyKseriesWheel3L,
+                offset = 0.1222 1.1000 -2.1741,
+				rotate = 0.0000 0.0000 90.0000,
+            }
+
+            model SpareTire4
+            {
+                file = 76chevyKseriesWheel4L,
+                offset = 0.1222 1.1000 -2.1741,
+				rotate = 0.0000 0.0000 90.0000,
+            }
+
+            model SpareTire5
+            {
+                file = 76chevyKseriesWheel5L,
+                offset = 0.1222 1.1000 -2.1741,
+				rotate = 0.0000 0.0000 90.0000,
+            }
+
+            model SpareTireStrap
+            {
+                file = 76chevyKseriesspareStrap,
+            }
+
+            specificItem = false,
+            itemType = Base.76chevyKseriesTire2;Base.80chevyCKseriesTire2;Base.80chevyCKseriesTire1;Base.90chevyCKseriesTire2;Base.90chevyCKseriesTire1,
+            area = Roofrack,
+            category = tire,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                         equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = CH76.InstallComplete.SpareTireRoof,
+                requireInstalled = CH76Roofrack,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = CH76.UninstallComplete.SpareTireRoof,
+            }
+            lua
+            {
+                init = CH76.Init.SpareTireRoof,
+                create = CH76.Create.SpareTireRoof,
+            }
+        }
+    }
+
+    template vehicle CH76SpareTireRoofCC
+    {
+        template! =  CH76SpareTireRoof,
+
+        part CH76SpareTireRoof
+        {
+            model SpareTire1
+            {
+                file = 76chevyKseriesWheel1L,
+                offset = 0.1222 1.1000 -2.9736,
+				rotate = 0.0000 0.0000 90.0000,
+            }
+
+            model SpareTire2
+            {
+                file = 76chevyKseriesWheel2L,
+                offset = 0.1222 1.1000 -2.9736,
+				rotate = 0.0000 0.0000 90.0000,
+            }
+
+            model SpareTire3
+            {
+                file = 76chevyKseriesWheel3L,
+                offset = 0.1222 1.1000 -2.9736,
+				rotate = 0.0000 0.0000 90.0000,
+            }
+
+            model SpareTire4
+            {
+                file = 76chevyKseriesWheel4L,
+                offset = 0.1222 1.1000 -2.9736,
+				rotate = 0.0000 0.0000 90.0000,
+            }
+
+            model SpareTire5
+            {
+                file = 76chevyKseriesWheel5L,
+                offset = 0.1222 1.1000 -2.9736,
+				rotate = 0.0000 0.0000 90.0000,
+            }
+
+            model SpareTireStrap
+            {
+                file = 76chevyKseriesspareStrap,
+                offset = 0.0000 0.0000 -0.7995,
+            }
+        }
+    }
+}

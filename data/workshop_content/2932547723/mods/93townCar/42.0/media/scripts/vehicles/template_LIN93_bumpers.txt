@@ -1,0 +1,200 @@
+module Base
+{
+	model 93townCarfrontBumper0
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_bumper_front,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93townCarfrontBullbarA
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93townCarfrontBullbarB
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_bullbar_frontB,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93townCarfrontBullbarC
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_bullbar_frontC,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 93townCarrearBumper0
+	{
+		mesh = vehicles/Vehicles_93townCar_Body|lincoln_bumper_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle LIN93Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 93townCarfrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 93townCarfrontBumper0,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 93townCarfrontBullbarA,
+				}
+
+			model FrontBullbarB
+				{
+                		file = 93townCarfrontBullbarB,
+				}
+
+			model FrontBullbarC
+				{
+                		file = 93townCarfrontBullbarC,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93townCarBumperFront0;Base.93townCarBumperFront1;Base.93townCarBullbarFrontA;Base.93townCarBullbarFrontB;Base.93townCarBullbarFrontC,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.BumperFront,
+					init = LIN93.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 93townCarrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93townCarBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = LIN93.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = LIN93.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = LIN93.Create.BumperRear,
+					init = LIN93.Init.BumperRear,
+					}
+		}
+	}
+
+	template vehicle LIN93BumpersLimo
+		{
+        template! = LIN93Bumpers,
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 93townCarrearBumper0,
+                        offset = 0.0000 0.0000 -1.4673,
+				        rotate = 0.0000 0.0000 0.0000,
+				}
+		}
+	}	
+}
