@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-16 00:20:56 UTC+08:00`*
+*最后更新于：`2025-09-16 12:18:13 UTC+08:00`*
 
 ---
 
@@ -51,7 +51,7 @@
 | Caster_Plus | 3457003463 | 99 |
 | BanditsAddOptions | 3412682512 | 94 |
 | Firearms | 2256623447 | 93 |
-| StandardizedVehicleUpgrades3Core | 3403490889 | 89 |
+| StandardizedVehicleUpgrades3Core | 3403490889 | 90 |
 | B42_Rain's_Pack_Your_Loot | 3490159683 | 88 |
 | H.E.C.U | 3452711271 | 87 |
 | PWPNXB | 3400528439 | 85 |
