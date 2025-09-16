@@ -2,17 +2,17 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-16 12:18:13 UTC+08:00`*
+*最后更新于：`2025-09-16 14:50:54 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
-| Lifestyle | 3403870858 | 2398 |
 | Authentic_Z_-_Backpacks+ | 2335368829 | 1383 |
 | Support_Corps | 3434464110 | 1022 |
 | BWardrobe | 3140453034 | 977 |
 | BanditsWeekOne | 3403180543 | 821 |
+| Lifestyle | 3403870858 | 754 |
 | PompsItemsPlushies | 2792387747 | 719 |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
 | Buildables_Expansion | 3463117260 | 617 |
