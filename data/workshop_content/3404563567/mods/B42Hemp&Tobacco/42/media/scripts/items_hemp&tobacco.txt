@@ -1,0 +1,427 @@
+module Base
+{
+	imports
+	{
+		Base
+	}
+
+	item HempPulp
+	{
+        DisplayCategory = Material,
+        Type		= Normal,
+        DisplayName	= Hemp Pulp,
+        Icon		= Flax_PasteBowl,
+        Weight		= 1.0,
+	WorldStaticModel = FlaxBowlPaste,
+	}
+
+	item Bag_BurlapTote
+	{
+	DisplayName = Burlap Tote,
+	DisplayCategory = Bag,
+	Type = Container,
+	Weight = 1,
+	Icon = BurlapTote,
+	CanBeEquipped = Back,
+	CanHaveHoles = False,
+	Capacity = 8,
+	CloseSound = CloseLeatherBag,
+	ClothingItem = Bag_BurlapTote,
+	OpenSound = OpenLeatherBag,
+	PutInSound = StoreItemLeatherBag,
+	ReplaceInPrimaryHand = Bag_BurlapTote_RHand holdingbagright,
+	ReplaceInSecondHand = Bag_BurlapTote_LHand holdingbagleft,
+	RunSpeedModifier = 0.99,
+	WeightReduction = 60,
+	StaticModel = BurlapTote,
+	WorldStaticModel = BurlapTote,
+	Tags = BagsFillException;IsFireFuel;IsFireTinder,
+	}
+
+	item HempBuds
+	{
+	DisplayName = Hemp Buds (Dried),
+	DisplayCategory = Food,
+	Type = Normal,
+	Icon = HempBuds,
+	Weight = 0.01,
+	WorldStaticModel = HempBuds,
+	Tags = HempBuds,
+	}
+
+	item HempLoose
+	{
+	DisplayName = Pouch of Hemp,
+	DisplayCategory = Junk,
+	Type = Drainable,
+	Weight = 0.2,
+	Icon = HempLoose,
+	UseDelta = 0.02,
+	UseWhileEquipped = FALSE,
+	WorldStaticModel = HempLoose,
+	Tags = Hemp;LessFull,
+	}
+
+	item HempLeavesDried
+	{
+	DisplayName = Hemp Leaves (Dried),
+	DisplayCategory = Food,
+	EatType = EatSmall,
+	Type = Food,
+	Weight = 0.1,
+	Icon = HempLeavesDried,
+	EvolvedRecipe = Pizza:1;Omelette:1;Soup:1;Stew:1;Pie:1;Stir fry:1;Sandwich:1;Burger:1;Hotdog:1;HotDrink:1;Salad:1;Rice:1;Pasta:1;Taco:1;Burrito:1;Salad:1,
+        EvolvedRecipeName = Hemp ,
+	Spice = TRUE,
+	FoodType = Herb,
+	HungerChange = -1,
+	Calories = 0.1,
+	Carbohydrates = 0,
+	Lipids = 0,
+	Proteins = 0,
+	WorldStaticModel = HempLeavesDried,
+	Tags = FitsWallet;isCutting;HerbalTea,
+	ReduceFoodSickness = 12,
+	Tooltip = Tooltip_Hemp_Leaves,
+	}
+
+	item SeasoningHemp
+	{
+	DisplayName = Powdered Hemp,
+	DisplayCategory = Food,
+	EatType = glugFood,
+	Type = Food,
+	Weight = 0.2,
+	Icon = SeasoningHemp,
+	CantBeFrozen = TRUE,
+	EvolvedRecipe = Pizza:1;Omelette:1;Soup:1;Stew:1;Pie:1;Stir fry:1;Sandwich:1;Burger:1;Hotdog:1;HotDrink:1;Salad:1;Rice:1;Pasta:1;Taco:1;Burrito:1;Salad:1;Toast:1,
+	Spice = TRUE,
+        HungerChange = -10,
+	ThirstChange = 20,
+	UnhappyChange = 20,
+	StaticModel = SeasoningHemp,
+	WorldStaticModel = SeasoningHemp,
+	FoodType = NoExplicit,
+	Tags = MinorIngredient;DriedFood,
+        EvolvedRecipeName = Hemp ,
+	}
+
+	item HempCiggyPack
+	{
+	DisplayName = Hemp Joint Pack,
+	DisplayCategory = Junk,
+	Weight = 0.2,
+        UseDelta = 0.05,
+	Type = Drainable,
+	UseWhileEquipped = FALSE,
+	KeepOnDeplete = FALSE,
+	Icon = HempCiggyPack,
+	WorldStaticModel = HempCiggyPack,
+	Tags = Packed;LessFull,
+	}
+
+	item HempCigarette
+	{
+	DisplayName = Hemp Joint,
+	DisplayCategory = Junk,
+	Type = Food,
+	Weight = 0.01,
+	Icon = HempCigarette,
+	CantBeFrozen = TRUE,
+	CustomContextMenu = Smoke,
+	EatType = Cigarettes,
+	OnEat = OnEat_HempJoint,
+	CustomEatSound = Cigarette,
+	RequireInHandOrInventory = CandleLit/Matches/Matchbox/LighterDisposable/Lighter/LighterBBQ,
+		HungerChange = 0,
+		FatigueChange = 1,
+		StressChange = -3,
+		UnhappyChange = -5,
+		PainReduction = 5,
+	StaticModel = HempCigarette_Lit,
+	WorldStaticModel = HempCigarette,
+	Tags = UseAll;Smokable,
+	EatTime = 460,
+	Tooltip = Tooltip_Hemp_Smoking,
+	}
+
+	item HempCigarillo
+	{
+	DisplayName = Hemp Cheroot,
+	DisplayCategory = Junk,
+	Type = Food,
+	Weight = 0.02,
+	Icon = Cigarillo,
+	CantBeFrozen = TRUE,
+	CustomContextMenu = Smoke,
+	EatType = Cigarettes,
+	OnEat = OnEat_HempCigarillo,
+	RequireInHandOrInventory = CandleLit/Matches/Matchbox/LighterDisposable/Lighter/LighterBBQ,
+		HungerChange = 0,
+		FatigueChange = 3,
+		StressChange = -10,
+		UnhappyChange = -10,
+		PainReduction = 10,
+	StaticModel = Cigarillo_Lit,
+	WorldStaticModel = Cigarillo,
+	CustomEatSound = ,
+	Tags = UseAll;Smokable,
+	EatTime = 920,
+	Tooltip = Tooltip_Hemp_Smoking,
+	}
+
+	item HempCigar
+	{
+	DisplayName = Hemp Cigar,
+	DisplayCategory = Junk,
+	Type = Food,
+	Weight = 0.2,
+	Icon = Cigar,
+	CantBeFrozen = TRUE,
+	CustomContextMenu = Smoke,
+	EatType = Cigarettes,
+	OnEat = OnEat_HempCigar,
+	RequireInHandOrInventory = CandleLit/Matches/Matchbox/LighterDisposable/Lighter/LighterBBQ,
+		HungerChange = 0,
+		FatigueChange = 5,
+		StressChange = -20,
+		UnhappyChange =	-50,
+		BoredomChange = -20,
+		PainReduction = 20,
+	StaticModel = Cigar_Lit,
+	WorldStaticModel = Cigar,
+	CustomEatSound = ,
+	Tags = UseAll;Smokable,
+	EatTime = 920,
+	Tooltip = Tooltip_Hemp_Smoking,
+	}
+
+	item SmokingPipe_Hemp
+	{
+	Displaycategory = Junk,
+	Weight = 0.3,
+	Type = Food,
+	DisplayName = Smoking Pipe with Hemp,
+	Icon = Ceramic_SmokingPipe_Unfired,
+	CantBeFrozen = TRUE,
+	CustomContextMenu = Smoke,
+	EatType = pipe,
+	CustomEatSound = ,
+	OnEat = OnEat_HempCigarillo,
+	RequireInHandOrInventory = CandleLit/Matches/Matchbox/LighterDisposable/Lighter/LighterBBQ,
+		HungerChange = 0,
+		FatigueChange = 3,
+		StressChange = -10,
+		UnhappyChange = -10,
+		PainReduction = 10,
+	StaticModel = SmokingPipe_Hemp,
+	WorldStaticModel = SmokingPipe_Hemp,
+	ReplaceOnUse = SmokingPipe,
+	EatTime = 920,
+	Tooltip = Tooltip_Hemp_Smoking,
+	}
+
+	item CanPipe_Hemp
+	{
+	DisplayCategory = Junk,
+	Weight              = 0.3,
+	Type = Food,
+	DisplayName         = Can Pipe with Hemp,
+	Icon                = Pipe_BeerCan,
+	CantBeFrozen = TRUE,
+	CustomContextMenu = Smoke,
+	EatType = pipe,
+	CustomEatSound = ,
+	OnEat = OnEat_HempCigarillo,
+	RequireInHandOrInventory = CandleLit/Matches/Matchbox/LighterDisposable/Lighter/LighterBBQ,
+		HungerChange = 0,
+		FatigueChange = 3,
+		StressChange = -10,
+		UnhappyChange = -10,
+		PainReduction = 10,
+	StaticModel         = CanPipe,
+	WorldStaticModel    = CanPipe,
+	ReplaceOnUse = CanPipe,
+	EatTime = 920,
+	Tooltip = Tooltip_Hemp_Smoking,
+	}
+
+	item HempChewing
+	{
+	DisplayCategory = Junk,
+        /*StressChange = -5,*/
+	Weight	= 0.3,
+        UseDelta = 0.05,
+	Type = Drainable,
+	UseWhileEquipped = FALSE,
+	DisplayName = Chew - Hemp Leaf,
+	Icon = HempChewing,
+	StaticModel = HempChewing_Hand,
+	WorldStaticModel = HempChewing,
+	Tags = IgnoreZombieDensity;Consumable;ChewingTobacco;LessFull,
+	CustomContextMenu = Chew,
+	OnEat = OnEat_HempChew,
+	EatType = eatBox,
+	Tooltip = Tooltip_Hemp_Chew,
+	}
+
+	item GlassSmokingPipe_Hemp
+	{
+	Displaycategory = Junk,
+	Weight = 0.3,
+	Type = Food,
+	DisplayName = Glass Smoking Pipe with Hemp,
+	Icon = GlassSmokingPipe,
+	CantBeFrozen = TRUE,
+	CustomContextMenu = Smoke,
+	EatType = pipe,
+	CustomEatSound = ,
+	OnEat = OnEat_HempCigarillo,
+	RequireInHandOrInventory = CandleLit/Matches/Matchbox/LighterDisposable/Lighter/LighterBBQ,
+		HungerChange = 0,
+		FatigueChange = 3,
+		StressChange = -10,
+		UnhappyChange = -10,
+		PainReduction = 10,
+	StaticModel = GlassSmokingPipe_Hemp,
+	WorldStaticModel = GlassSmokingPipe_Hemp,
+	ReplaceOnUse = GlassSmokingPipe,
+	EatTime = 920,
+	Tooltip = Tooltip_Hemp_Smoking,
+	}
+
+	item GlassSmokingPipe
+	{
+	DisplayCategory = Material,
+	Weight = 0.3,
+	Type = Normal,
+	DisplayName = Glass Smoking Pipe,
+	Icon = GlassSmokingPipe,
+	StaticModel = GlassSmokingPipe,
+	WorldStaticModel = GlassSmokingPipe,
+	}
+
+	item GlassSmokingPipe_Tobacco
+	{
+	DisplayCategory = Junk,
+	Weight = 0.3,
+	Type = Food,
+	DisplayName = Glass Smoking Pipe with Tobacco,
+	Icon = GlassSmokingPipe,
+	CantBeFrozen = TRUE,
+	CustomContextMenu = Smoke,
+	EatType = pipe,
+	CustomEatSound = ,
+	OnEat = OnEat_Cigarillo,
+	RequireInHandOrInventory = CandleLit/Matches/Matchbox/LighterDisposable/Lighter/LighterBBQ,
+	HungerChange = 0,
+	StressChange = -10,
+	StaticModel = GlassSmokingPipe_Tobacco,
+	WorldStaticModel = GlassSmokingPipe_Tobacco,
+	ReplaceOnUse = GlassSmokingPipe,
+	EatTime = 920,
+	}
+
+	item HempMag2
+	{
+	DisplayCategory = SkillBook,
+        Weight = 0.5,
+        Type = Literature,
+        DisplayName = Magazine: Paraphernalia!,
+        Icon = Magazine_Hemp2,
+        BoredomChange = -20,
+        StressChange = -15,
+        TeachedRecipes = Make Glass Smoking Pipe;CarveHerbGrinder,
+       	WorldStaticModel = HempMag2,
+        Tags = Magazine,
+	}
+
+	item CiggyPack
+	{
+	    DisplayCategory = Junk,
+		Weight	=	0.2,
+        UseDelta	=	0.05,
+		Type	=	Drainable,
+		UseWhileEquipped	=	FALSE,
+		KeepOnDeplete = FALSE,
+		DisplayName	=	Cigarette Pack (Rolled),
+		Icon	=	CiggyPack,
+		WorldStaticModel = CiggyPack,
+		Tags = Packed;LessFull,
+	}
+	
+	item HempPaper
+	{
+		DisplayName = Hemp Paper,
+		DisplayCategory = Literature,
+		Type = Literature,
+		Weight = 0.1,
+		Icon = HempPaper,
+		CanBeWrite = true,
+		PageToWrite = 1,
+		StaticModel = HempPaper,
+		WorldStaticModel = HempPaper,
+		ReadType = newspaper,
+	}
+
+	item HempRollingPapers
+	{
+		DisplayName = Hemp Rolling Papers,
+		DisplayCategory = Junk,
+		Type = Drainable,
+		Weight = 0.1,
+		Icon = HempRollingPapers,
+		UseDelta = 0.02,
+		UseWhileEquipped = FALSE,
+		WorldStaticModel = HempRollingPapers,
+		Tags = RollingPaper;LessFull;FitsWallet,
+	}
+
+	item CigarWrap
+	{
+		DisplayName = Cigar Wrap,
+		DisplayCategory = Junk,
+		Type = Normal,
+		Weight = 0.1,
+		Icon = CigarWrap,
+		WorldStaticModel = CigarWrap,
+		Tags = FitsWallet,
+	Tooltip = Tooltip_CigarWrap,
+	}
+
+	item CigarilloWrap
+	{
+		DisplayName = Cheroot Wrap,
+		DisplayCategory = Junk,
+		Type = Normal,
+		Weight = 0.01,
+		Icon = CigarilloWrap,
+		WorldStaticModel = Cigarillo,
+		Tags = FitsWallet,
+	Tooltip = Tooltip_CigarilloWrap,
+	}
+
+	item HerbGrinder
+	{
+	DisplayName = Herb Grinder,
+	DisplayCategory = FirstAid,
+	Type = Normal,
+	Weight = 0.4,
+	Icon = HerbGrinder,
+	StaticModel = HerbGrinder,
+	WorldStaticModel = HerbGrinder,
+	Tags = Grinder,
+	Tooltip = Tooltip_HerbGrinder,
+	}
+
+	item WoodenRollingPapersMold
+	{
+	    DisplayCategory     = Material,
+		Weight              = 0.3,
+		Type                = Normal,
+		DisplayName         = Wooden Rolling Papers Mold,
+		Icon                = WoodenRollingPapersMold,
+		StaticModel         = WoodenRollingPapersMold,
+		WorldStaticModel    = WoodenRollingPapersMold,
+	}
+}
