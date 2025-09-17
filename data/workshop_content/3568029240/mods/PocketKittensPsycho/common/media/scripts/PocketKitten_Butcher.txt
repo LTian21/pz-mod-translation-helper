@@ -1,0 +1,84 @@
+module PocketKitten {
+    imports {
+        Base,
+    }
+
+    recipe ButcherStrayKitten {
+        keep KitchenKnife/HuntingKnife/MeatCleaver/StoneKnife,
+        PocketKitten.KittenBlack/PocketKitten.KittenCalico/PocketKitten.KittenGray/PocketKitten.KittenGrayStriped/PocketKitten.KittenOrange/PocketKitten.KittenTuxedo/PocketKitten.KittenWhite,
+        Result: StrayCatMeat,
+        Sound: catscream1,
+        Time: 120.0,
+        Category:Cooking,
+        OnCreate:Recipe.OnCreate.CutAnimal,
+        OnGiveXP:Recipe.OnGiveXP.Cooking10,
+    }
+
+    recipe ButcherZombieKitten {
+        keep KitchenKnife/HuntingKnife/MeatCleaver/StoneKnife,
+        PocketKitten.KittenZombie,
+        Result: ZombieCatMeat,
+        Sound: catscream1,
+        Time: 120.0,
+        Category:Cooking,
+        OnCreate:Recipe.OnCreate.CutAnimal,
+        OnGiveXP:Recipe.OnGiveXP.Cooking10,
+        AllowRottenItem:true,
+    }
+
+    item StrayCatMeat {
+		DisplayName = CatMeat,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.3,
+		Icon = Smallanimalmeat,
+		BadCold = true,
+		BadInMicrowave = true,
+		DangerousUncooked = TRUE,
+		EvolvedRecipe = Soup:22;Stew:22;Pie:22;Stir fry Griddle Pan:22;Stir fry:22;Sandwich:12|Cooked;Sandwich Baguette:12|Cooked;Burger:22|Cooked;Salad:15|Cooked;Roasted Vegetables:22;RicePot:22;RicePan:22;PastaPot:22;PastaPan:22,
+		FoodType = Game,
+		GoodHot = true,
+		IsCookable = TRUE,
+		MinutesToCook = 20,
+		MinutesToBurn = 70,
+		DaysFresh = 1,
+		DaysTotallyRotten = 4,
+		HungerChange = -10,
+		Calories = 340,
+		Carbohydrates = 0,
+		Lipids = 15,
+		Proteins = 45,
+        UnhappyChange = 65,
+		WorldStaticModel = SmallAnimalMeat_Ground,
+        Tooltip = Tooltip_PocketKittenMonster,
+	}
+
+    item ZombieCatMeat {
+		DisplayName = ZombieMeat,
+		DisplayCategory = Food,
+		Type = Food,
+		Weight = 0.3,
+		Icon = Smallanimalmeat,
+		BadCold = true,
+		BadInMicrowave = true,
+		DangerousUncooked = TRUE,
+		EvolvedRecipe = Soup:22;Stew:22;Pie:22;Stir fry Griddle Pan:22;Stir fry:22;Sandwich:12|Cooked;Sandwich Baguette:12|Cooked;Burger:22|Cooked;Salad:15|Cooked;Roasted Vegetables:22;RicePot:22;RicePan:22;PastaPot:22;PastaPan:22,
+		FoodType = Game,
+		GoodHot = true,
+		IsCookable = TRUE,
+		MinutesToCook = 20,
+		MinutesToBurn = 70,
+		DaysFresh = 0,
+		DaysTotallyRotten = 4,
+		HungerChange = -5,
+		Calories = 100,
+		Carbohydrates = 0,
+		Lipids = 6,
+		Proteins = 22,
+        UnhappyChange = 120,
+		WorldStaticModel = SmallAnimalMeat_Ground,
+        Poison = True,
+		PoisonDetectionLevel = 7,
+		PoisonPower = 120,
+	}
+}
