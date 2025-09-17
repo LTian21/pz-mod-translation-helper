@@ -1,0 +1,677 @@
+module Base
+{
+
+
+		/** Timed Actions **/
+
+
+	timedAction GrindHemp
+	{
+		actionAnim = MixingMortarPestle,
+		sound = grindhemp,
+        	prop1 = Base.Pestle,
+		}
+
+	timedAction ShredTobacco
+	{
+		sound = shredtobacco,
+		actionAnim = Making,
+		}
+
+	timedAction UseGrinder
+	{
+		actionAnim = Making,
+		sound = grindhemp,
+		}		
+
+
+
+		/** Common Recipes **/
+
+
+
+	craftRecipe SewBurlapTote
+	{
+	Time = 200,
+		timedAction = SewingCloth,
+		Tags = AnySurfaceCraft,
+		category = Tailoring,
+		xpAward = Tailoring:10,
+		NeedToBeLearn = True,
+		AutoLearnAny = Tailoring:2,
+		SkillRequired = Tailoring:1,
+		AllowBatchCraft = False,
+		inputs
+		{
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight],
+			item 1 tags[SewingNeedle] mode:keep,
+			item 1 [Base.Thread],
+			item 1 [Base.Belt2],
+			item 1 [Base.LeatherStrips],
+			item 1 [Base.BurlapPiece],
+		}
+		outputs
+		{
+			item 1 Base.Bag_BurlapTote,
+		}
+	}
+
+	craftRecipe WeaveBurlapwithTwine
+	{
+	Time = 200,
+		timedAction = UseLoom,
+		tags = Weaving,
+		category = Farming,
+		inputs
+		{
+			item 15 [Base.Twine],
+		}
+		outputs
+		{
+			item 1 Base.BurlapPiece,
+		}
+	}
+
+	craftRecipe MakeFliesCurefromLooseHemp
+	{
+	timedAction = Making,
+		Time = 40,
+		NeedToBeLearn = True,
+		Tags = InHandCraft;Farming,
+	category = Farming,
+		AutoLearnAny = Farming:6,
+		inputs
+		{
+			item 1 [Base.GardeningSprayEmpty],
+			item 1 [*],
+			-fluid 1.0 [Water],
+			item 6 tags[Hemp],
+		}
+		outputs
+		{
+			item 1 Base.GardeningSprayCigarettes,
+		}
+	}
+		
+	craftRecipe PressHempPaper
+	{
+	Time = 300,
+		timedAction = UseHandPress,
+		Tags = HandPress,
+	category = Farming,
+		inputs
+		{
+			item 1 [Base.WoodenTileMold] mode:keep,
+            		item 4 [Base.StoneBlock] mode:keep,
+            		item 1 [Base.CheeseCloth] mode:keep,
+			item 1 [Base.HempPulp],
+		}
+		outputs
+		{
+			item 5 Base.HempPaper,
+			item 1 Base.Bowl,
+		}
+	}
+		
+	craftRecipe PressHempRollingPaper
+	{
+	Time = 300,
+		timedAction = UseHandPress,
+		Tags = HandPress,
+	category = Farming,
+		inputs
+		{
+			item 1 [Base.WoodenRollingPapersMold] mode:keep,
+            		item 2 [Base.StoneBlock] mode:keep,
+            		item 1 [Base.CheeseCloth] mode:keep,
+			item 1 [Base.HempPulp],
+		}
+		outputs
+		{
+			item 1 Base.HempRollingPapers,
+			item 1 Base.Bowl,
+		}
+	}
+
+	craftRecipe MakeGlassPipe
+	{
+	timedAction = Craft_Glassmaking,
+	time = 120,
+	Tags = AnySurfaceCraft;Glassmaking,
+	category = Glassmaking,
+	NeedToBeLearn = True,
+	AutoLearnAny = Glassmaking:9,
+	SkillRequired = Glassmaking:8,
+	xpAward = Glassmaking:75,
+		inputs
+		{
+			item 1 tags[Pliers] mode:keep,
+			item 1 [Base.GlassBlowingPipe] mode:keep,
+			item 1 [Base.CeramicCrucibleWithGlass],
+		}
+		outputs
+		{
+			item 1 Base.GlassSmokingPipe,
+		}
+	}
+
+	craftRecipe CarveHerbGrinder
+	{
+	Time = 200,
+		timedAction = SharpenStake,
+		Tags = InHandCraft,
+	Category = Carving,
+	NeedToBeLearn = True,
+	AutoLearnAny = Carving:7,
+	SkillRequired = Carving:6,
+	xpAward = Carving:80,
+		inputs
+		{
+			item 1 tags[SharpKnife] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+            		item 1 tags[DrillWood;DrillMetal;DrillWoodPoor] mode:keep flags[MayDegradeLight],
+			item 1 [Base.Log] flags[Prop2],
+			item 1 [Base.Nails],
+		}
+		outputs
+		{
+			item 1 Base.HerbGrinder,
+		}
+	}
+
+    	craftRecipe MakeWoodenRollingPapersMold
+	{
+        timedAction = Making,
+		Time = 150,
+        category = Carpentry,
+        tags = AnySurfaceCraft;Carpentry,
+		xpAward = Woodwork:10,
+        SkillRequired = Woodwork:1,
+		inputs
+		{
+			item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+			item 1 tags[Saw;SmallSaw;CrudeSaw] mode:keep flags[MayDegradeLight;Prop1],
+			item 1 [Base.Plank] flags[Prop2],
+			item 1 [Base.Nails],
+		}
+		outputs
+		{
+			item 1 Base.WoodenRollingPapersMold,
+		}
+	}
+
+
+		/** Hemp Recipes **/
+
+
+	craftRecipe CutHemp
+	{
+	Time = 200,
+		timedAction = Making,
+		Tags = InHandCraft,
+	category = Farming,
+		inputs
+		{
+			item 1 [Base.HempBundleDried] mode:destroy flags[Prop2;ItemCount],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[Prop1;MayDegradeLight],
+		}
+		outputs
+		{
+			item 3 Base.HempBuds,
+			item 3 Base.HempLeavesDried,
+			item 1 Base.HempSeed,
+		}
+	}
+
+	craftRecipe GrindHempBuds
+	{
+	Time = 100,
+		timedAction = UseGrinder,
+		Tags = InHandCraft;RightClickOnly,
+	category = Farming,
+	OnCreate = Recipe.OnCreate.GrindHemp,
+		inputs
+		{
+			item 1 tags[Grinder] mode:keep flags[Prop2],
+			item 1 tags[HempBuds],
+		}
+		outputs
+		{
+			item 1 Base.HempLoose,
+		}
+	}
+
+	craftRecipe GrindUpHempBuds
+	{
+	Time = 100,
+		timedAction = GrindHemp,
+		Tags = AnySurfaceCraft,
+	category = Farming,
+	OnCreate = Recipe.OnCreate.GrindHemp,
+		inputs
+		{
+			item 1 tags[MortarPestle;Grinder] mode:keep flags[Prop2],
+			item 1 tags[HempBuds],
+		}
+		outputs
+		{
+			item 1 Base.HempLoose,
+		}
+	}	
+
+	craftRecipe MakeHempLeafChew
+	{
+	Time = 100,
+		timedAction = MixingMortarPestle,
+		Tags = AnySurfaceCraft;Cooking,
+	category = Cooking,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:5,
+		xpAward = Cooking:60,
+		inputs
+		{
+			item 1 tags[MortarPestle] mode:keep flags[Prop2],
+			item 3 [Base.HempLeavesDried] flags[ItemCount],
+			item 3 tags[Tobacco],
+			item 5 [Base.MapleSyrup;Base.Honey],
+		}
+		outputs
+		{
+			item 1 Base.HempChewing,
+		}
+	}	
+
+	craftRecipe MakeHempLeafSeasoning
+	{
+	Time = 100,
+		timedAction = GrindHemp,
+		Tags = AnySurfaceCraft,
+	category = Cooking,
+		xpAward = Cooking:10,
+		inputs
+		{
+			item 1 tags[MortarPestle;Grinder] mode:keep flags[Prop2],
+			item 5 [Base.HempLeavesDried] mode:destroy flags[ItemCount],
+		}
+		outputs
+		{
+			item 1 Base.SeasoningHemp,
+		}
+	}
+
+	craftRecipe MixHempPulp
+	{
+	Time = 100,
+		timedAction = MixingMortarPestle,
+		Tags = AnySurfaceCraft,
+	category = Farming,
+		inputs
+		{
+			item 1 tags[MortarPestle] mode:keep flags[MayDegradeLight],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:destroy,
+            		-fluid 0.3 [Water;TaintedWater],
+			item 3 [Base.HempLeavesDried] flags[ItemCount],
+		}
+		outputs
+		{
+			item 1 Base.HempPulp,
+		}
+	}
+
+
+		/** Smokables **/
+
+
+	craftRecipe DismantleHemp
+	{
+	timedAction = ShredTobacco,
+		Time = 10,
+		Tags = InHandCraft,
+	category = Miscellaneous,
+		OnCreate = Recipe.OnCreate.ShredSmokes,
+		inputs
+		{
+			item 1 [Base.HempCigarette;Base.HempCigarillo;Base.HempCigar],
+		}
+		outputs
+		{
+			item 1 Base.HempLoose,
+		}
+	}
+
+	craftRecipe RollCigarettewithHemp
+	{
+	timedAction = Making,
+		Time = 60,
+		Tags = InHandCraft,
+	Category = Miscellaneous,
+		inputs
+		{
+			item 1 tags[Hemp],
+			item 1 tags[RollingPaper],
+		}
+		outputs
+		{
+			item 1 Base.HempCigarette,
+		}
+	}
+
+	craftRecipe RollCherootwithHemp
+	{
+	timedAction = Making,
+		Time = 60,
+		Tags = InHandCraft,
+	category = Miscellaneous,
+		inputs
+		{
+			item 3 tags[Hemp],
+			item 1 [Base.CigarilloWrap],
+		}
+		outputs
+		{
+			item 1 Base.HempCigarillo,
+		}
+	}
+
+	craftRecipe RollCigarwithHemp
+	{
+	timedAction = Making,
+		Time = 120,
+		Tags = InHandCraft,
+	category = Miscellaneous,
+		inputs
+		{
+			item 10 tags[Hemp],
+			item 1 [Base.CigarWrap],
+		}
+		outputs
+		{
+			item 1 Base.HempCigar,
+		}
+	}
+
+	craftRecipe FillPipewithHemp
+	{
+        timedAction = Making,
+        Time = 60,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+		{
+			item 3 tags[Hemp],
+			item 1 [Base.SmokingPipe;Base.CanPipe;Base.GlassSmokingPipe] mappers[PipeMapper],
+		}
+		outputs
+		{
+            item 1 mapper:PipeMapper,
+		}
+       	itemMapper PipeMapper
+       	{
+            Base.CanPipe_Hemp = Base.CanPipe,
+            Base.SmokingPipe_Hemp = Base.Base.SmokingPipe,
+	    Base.GlassSmokingPipe_Hemp = Base.GlassSmokingPipe,
+
+            default = Base.SmokingPipe_Hemp,
+        }
+	}
+	
+	craftRecipe UnpackHempCigarettes
+	{
+        timedAction = Making,
+		Time = 25,
+        OnTest = Recipe.OnTest.IsFull,
+		/* CanWalk = true, */
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.HempCiggyPack] mode:destroy flags[IsFull;AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 20 Base.HempCigarette,
+		}
+	}
+	
+	craftRecipe Pack20HempCigarettes
+	{
+        timedAction = Making,
+		Time = 25,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 20 [Base.HempCigarette] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.HempCiggyPack,
+		}
+	}
+
+	craftRecipe TakeHempCigarette
+	{
+        timedAction = Making,
+		Time = 15,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.HempCiggyPack] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.HempCigarette,
+		}
+	}
+
+	craftRecipe AddHempCigarettetoPack
+	{
+        timedAction = Making,
+		Time = 25,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.HempCigarette] flags[AllowFavorite;InheritFavorite],
+			item 1 [Base.HempCiggyPack] mode:keep flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+		}
+	}
+
+
+		/** Tobacco Recipes **/
+
+
+	craftRecipe FillGlassPipe
+	{
+	timedAction = Making,
+	Time = 60,
+	Tags = InHandCraft;CanBeDoneInDark,
+	category = Miscellaneous,
+		inputs
+		{
+			item 3 tags[Tobacco],
+			item 1 [Base.GlassSmokingPipe],
+		}
+		outputs
+		{
+			item 1 Base.GlassSmokingPipe_Tobacco,
+		}
+	}
+
+	craftRecipe DismantleTobacco
+	{
+	timedAction = ShredTobacco,
+		Time = 10,
+		Tags = InHandCraft,
+	category = Miscellaneous,
+		OnCreate = Recipe.OnCreate.ShredSmokes,
+		inputs
+		{
+			item 1 [Base.CigaretteSingle;Base.CigaretteRolled;Base.Cigarillo;Base.Cigar],
+		}
+		outputs
+		{
+			item 1 Base.TobaccoLoose,
+		}
+	}
+
+	craftRecipe CutCherootWraps
+	{
+	timedAction = Making,
+		Time = 300,
+		Tags = AnySurfaceCraft,
+	category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.TobaccoDried] mode:destroy flags[Prop2],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop1;IsNotDull],
+		}
+		outputs
+		{
+			item 10 Base.CigarilloWrap,
+		}
+	}
+
+	craftRecipe CutCigarWraps
+	{
+	timedAction = Making,
+		Time = 300,
+		Tags = AnySurfaceCraft,
+	category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.TobaccoDried] mode:destroy flags[Prop2],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop1;IsNotDull],
+		}
+		outputs
+		{
+			item 5 Base.CigarWrap,
+		}
+	}
+
+	craftRecipe CutCigarWrapintoCherootWraps
+	{
+	timedAction = Making,
+		Time = 30,
+		Tags = AnySurfaceCraft,
+	category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.CigarWrap] mode:destroy flags[Prop2],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight;Prop1;IsNotDull],
+		}
+		outputs
+		{
+			item 2 Base.CigarilloWrap,
+		}
+	}
+
+	craftRecipe RollCheroot
+	{
+	timedAction = Making,
+		Time = 60,
+		Tags = InHandCraft,
+	category = Miscellaneous,
+		inputs
+		{
+			item 3 tags[Tobacco],
+			item 1 [Base.CigarilloWrap],
+		}
+		outputs
+		{
+			item 1 Base.Cigarillo,
+		}
+	}
+
+	craftRecipe RollCigar
+	{
+	timedAction = Making,
+		Time = 120,
+		Tags = InHandCraft,
+	category = Miscellaneous,
+		inputs
+		{
+			item 10 tags[Tobacco],
+			item 1 [Base.CigarWrap],
+		}
+		outputs
+		{
+			item 1 Base.Cigar,
+		}
+	}
+
+	craftRecipe UnpackRolledCigarettes
+	{
+        timedAction = Making,
+		Time = 25,
+        OnTest = Recipe.OnTest.IsFull,
+		/* CanWalk = true, */
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.CiggyPack] mode:destroy flags[IsFull;AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 20 Base.CigaretteRolled,
+		}
+	}
+	
+	craftRecipe Pack20RolledCigarettes
+	{
+        timedAction = Making,
+		Time = 25,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 20 [Base.CigaretteRolled] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.CiggyPack,
+		}
+	}
+
+	craftRecipe TakeRolledCigarette
+	{
+        timedAction = Making,
+		Time = 15,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.CiggyPack] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.CigaretteRolled,
+		}
+	}
+
+	craftRecipe AddRolledCigarettetoPack
+	{
+        timedAction = Making,
+		Time = 25,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.CigaretteRolled] flags[AllowFavorite;InheritFavorite],
+			item 1 [Base.CiggyPack] mode:keep flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+		}
+	}
+    }
+		
+}
