@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-17 12:19:23 UTC+08:00`*
+*最后更新于：`2025-09-17 17:22:17 UTC+08:00`*
 
 ---
 
@@ -31,14 +31,16 @@
 | Spongie_Hair | 2463184726 | 185 |
 | ATA_Petyarbuilt | 3403314193 | 155 |
 | SapphCookingB42 | 3409143790 | 149 |
+| Authentic_Z_-_Backpacks+ | 2335368829 | 147 |
 | SimpleSkillBooks | 3291799176 | 143 |
 | MeleeWeaponUpgrade_Easy | 3394923321 | 143 |
 | Yaki's_Hair_Salon_-_BASE | 2761200458 | 137 |
 | Dynamic-Traits-main | 2459400130 | 129 |
 | Tikitown | 3037854728 | 124 |
-| Authentic_Z_-_Backpacks+ | 2335368829 | 122 |
+| BanditsCreator | 3469292499 | 123 |
 | LWBetterElectronics | 2999183635 | 118 |
 | Chinesecuisine | 3412969115 | 118 |
+| Project_Summer_Car | 3564950449 | 118 |
 | Wallpapers | 2999595757 | 114 |
 | Vanilla_Clothing_Expansion | 3421271152 | 112 |
 | Tomb's_Goth_Hair | 3531765630 | 111 |
@@ -91,6 +93,7 @@
 | RandomClothing | 3397182976 | 20 |
 | RestoreUtilities | 3409422147 | 17 |
 | [B42]_Bag_Upgrade_Ultra | 3407793320 | 16 |
+| PocketKittens | 3568029240 | 16 |
 | HephasOccupationsAndTraits | 3256482412 | 15 |
 | B42PackMule | 3418366421 | 15 |
 | Farming_Wiki | 3473886171 | 14 |
@@ -153,6 +156,7 @@
 | damnlib | 3171167894 | 4 |
 | P4PickingMeister | 3422220305 | 4 |
 | OpenAllContainers | 3465040406 | 4 |
+| TrueSmoking | 3423984426 | 4 |
 | 92nissanGTR | 2846036306 | 4 |
 | Cerberus_Pack | 3470478700 | 4 |
 | UH-1BHelicopter | 3409723807 | 4 |
@@ -179,6 +183,7 @@
 | collapsibleladder | 3438123707 | 2 |
 | RepairableWindows | 3378304610 | 2 |
 | CombatMasteringSkill | 3435985650 | 2 |
+| TrapManager | 3566766862 | 2 |
 | CommonSense | 2875848298 | 2 |
 | Vanvival | 3547444619 | 2 |
 | HandCrankFlashlights | 2897115343 | 2 |
@@ -447,6 +452,7 @@
 | [J&G]_Black_Multicam_Uniform | 3315302991 | 0 |
 | DrinkSmart | 3447775367 | 0 |
 | 92fordCVPI | 2962175696 | 0 |
+| MilkThemAll | 3568280195 | 0 |
 | StarlitLibrary | 3378285185 | 0 |
 | B42PackMule | 3540903327 | 0 |
 | [J&G]_Flecktarn_Uniform | 3206579556 | 0 |
