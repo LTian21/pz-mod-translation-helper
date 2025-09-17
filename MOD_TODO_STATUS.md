@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-17 00:29:43 UTC+08:00`*
+*最后更新于：`2025-09-17 12:19:23 UTC+08:00`*
 
 ---
 
@@ -11,13 +11,11 @@
 | Support_Corps | 3434464110 | 1022 |
 | BWardrobe | 3140453034 | 977 |
 | BanditsWeekOne | 3403180543 | 821 |
-| Lifestyle | 3403870858 | 754 |
 | PompsItemsPlushies | 2792387747 | 719 |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
 | Buildables_Expansion | 3463117260 | 617 |
 | AmmoMaker | 2788256295 | 465 |
 | Bandits | 3268487204 | 458 |
-| Authentic_Z_-_Backpacks+ | 2335368829 | 450 |
 | PompsItemsFood | 2792348686 | 394 |
 | PZ_BodilyFunctions | 3396456841 | 335 |
 | BanditRelationship | 3431259170 | 309 |
@@ -38,6 +36,7 @@
 | Yaki's_Hair_Salon_-_BASE | 2761200458 | 137 |
 | Dynamic-Traits-main | 2459400130 | 129 |
 | Tikitown | 3037854728 | 124 |
+| Authentic_Z_-_Backpacks+ | 2335368829 | 122 |
 | LWBetterElectronics | 2999183635 | 118 |
 | Chinesecuisine | 3412969115 | 118 |
 | Wallpapers | 2999595757 | 114 |
@@ -56,7 +55,6 @@
 | KnoxEventExpanded | 3397396843 | 65 |
 | CustomWeight | 3391228479 | 58 |
 | Boots_Expanded | 2850935956 | 57 |
-| KATTAJ1_Military_Pack | 3470426196 | 57 |
 | Lynx_Pack | 3470485566 | 55 |
 | ARTR_RFGP | 3397215647 | 51 |
 | LastPushTrait | 3028253067 | 46 |
@@ -130,7 +128,6 @@
 | cdda_zombie | 2749928925 | 7 |
 | RollBack_Rain_Collector_Barrel | 3392186516 | 6 |
 | Detailed_Descriptions_for_Occupations_and_Traits | 3387957272 | 6 |
-| Dreams | 1945359259 | 6 |
 | ExtendedSpices | 3522142755 | 6 |
 | WhatCanICraftAddon | 3392356751 | 5 |
 | Military_Tool_Kit | 2705406713 | 5 |
@@ -153,7 +150,9 @@
 | Sector-7_Breach | 3513107552 | 4 |
 | Ladders | 2737665235 | 4 |
 | Check_Around | 3300688173 | 4 |
+| damnlib | 3171167894 | 4 |
 | P4PickingMeister | 3422220305 | 4 |
+| OpenAllContainers | 3465040406 | 4 |
 | 92nissanGTR | 2846036306 | 4 |
 | Cerberus_Pack | 3470478700 | 4 |
 | UH-1BHelicopter | 3409723807 | 4 |
@@ -223,7 +222,6 @@
 | RedDays | 3516166810 | 1 |
 | ComidaBR | 3469279808 | 1 |
 | Nep_Survival_Rifle | 3491265315 | 1 |
-| OpenAllContainers | 3465040406 | 1 |
 | USMilitaryPack | 612100872 | 1 |
 | No_Stress_Chopping | 3460704724 | 1 |
 | U.S._M998_Humvee_by_Papa_Chad | 3554424111 | 1 |
@@ -336,6 +334,7 @@
 | AmmoConverterB42 | 3388844065 | 0 |
 | More_Traits | 1299328280 | 0 |
 | Frockin_Splendor! | 3307376332 | 0 |
+| Lifestyle | 3403870858 | 0 |
 | Voice_Joel_Miller | 3496043022 | 0 |
 | 70dodge | 2873290424 | 0 |
 | BathtowelsOverhaul | 3416208765 | 0 |
@@ -389,7 +388,6 @@
 | B42Makedriedvegetable | 3418061837 | 0 |
 | ATA_BMW_E36 | 3421748994 | 0 |
 | Excavation | 3392001801 | 0 |
-| damnlib | 3171167894 | 0 |
 | WildFruits | 2618566294 | 0 |
 | 93fordF350 | 3073430075 | 0 |
 | 67gt500 | 3026723485 | 0 |
@@ -405,6 +403,7 @@
 | Simple_Show_XP | 2891170430 | 0 |
 | ArcherLib | 3408337281 | 0 |
 | Improved_Farming_Info_Window | 3470852353 | 0 |
+| KATTAJ1_Military_Pack | 3470426196 | 0 |
 | AutoCook | 3388721641 | 0 |
 | ChairBarricade | 3404288341 | 0 |
 | CarHeaterSoundSystem | 3543941897 | 0 |
@@ -415,6 +414,7 @@
 | 73fordFalcon | 3490370700 | 0 |
 | [J&G]_Alpine_Multicam_Uniform | 3303746488 | 0 |
 | 93mustangSSP | 3001592312 | 0 |
+| Dreams | 1945359259 | 0 |
 | KATTAJ1_Clothes_Core | 3470422050 | 0 |
 | ProteinsMoodle | 2859304462 | 0 |
 | 93fordTaurus | 3088951320 | 0 |
