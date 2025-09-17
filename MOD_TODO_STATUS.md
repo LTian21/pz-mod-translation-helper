@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-17 17:22:17 UTC+08:00`*
+*最后更新于：`2025-09-17 17:35:21 UTC+08:00`*
 
 ---
 
@@ -31,13 +31,11 @@
 | Spongie_Hair | 2463184726 | 185 |
 | ATA_Petyarbuilt | 3403314193 | 155 |
 | SapphCookingB42 | 3409143790 | 149 |
-| Authentic_Z_-_Backpacks+ | 2335368829 | 147 |
 | SimpleSkillBooks | 3291799176 | 143 |
 | MeleeWeaponUpgrade_Easy | 3394923321 | 143 |
 | Yaki's_Hair_Salon_-_BASE | 2761200458 | 137 |
 | Dynamic-Traits-main | 2459400130 | 129 |
 | Tikitown | 3037854728 | 124 |
-| BanditsCreator | 3469292499 | 123 |
 | LWBetterElectronics | 2999183635 | 118 |
 | Chinesecuisine | 3412969115 | 118 |
 | Project_Summer_Car | 3564950449 | 118 |
@@ -156,7 +154,6 @@
 | damnlib | 3171167894 | 4 |
 | P4PickingMeister | 3422220305 | 4 |
 | OpenAllContainers | 3465040406 | 4 |
-| TrueSmoking | 3423984426 | 4 |
 | 92nissanGTR | 2846036306 | 4 |
 | Cerberus_Pack | 3470478700 | 4 |
 | UH-1BHelicopter | 3409723807 | 4 |
@@ -307,6 +304,7 @@
 | DragBodiesFaster_50% | 3393821407 | 0 |
 | Ducks | 3409153536 | 0 |
 | BirgetHeads | 3439783176 | 0 |
+| Authentic_Z_-_Backpacks+ | 2335368829 | 0 |
 | LockInteriors | 3435709471 | 0 |
 | MoreWoodcharcoalBurnables | 3425726710 | 0 |
 | Skill_Recovery_Journal | 2503622437 | 0 |
@@ -343,6 +341,7 @@
 | Voice_Joel_Miller | 3496043022 | 0 |
 | 70dodge | 2873290424 | 0 |
 | BathtowelsOverhaul | 3416208765 | 0 |
+| BanditsCreator | 3469292499 | 0 |
 | Random_Airdrops | 3282789883 | 0 |
 | IndustrialRevolutionGenericAddOn | 3359867059 | 0 |
 | 98stagea | 3315443103 | 0 |
@@ -409,6 +408,7 @@
 | ArcherLib | 3408337281 | 0 |
 | Improved_Farming_Info_Window | 3470852353 | 0 |
 | KATTAJ1_Military_Pack | 3470426196 | 0 |
+| TrueSmoking | 3423984426 | 0 |
 | AutoCook | 3388721641 | 0 |
 | ChairBarricade | 3404288341 | 0 |
 | CarHeaterSoundSystem | 3543941897 | 0 |
