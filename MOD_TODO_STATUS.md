@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-17 19:07:16 UTC+08:00`*
+*最后更新于：`2025-09-18 12:17:29 UTC+08:00`*
 
 ---
 
@@ -15,13 +15,11 @@
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
 | Buildables_Expansion | 3463117260 | 617 |
 | AmmoMaker | 2788256295 | 465 |
-| Bandits | 3268487204 | 458 |
 | PompsItemsFood | 2792348686 | 394 |
 | PZ_BodilyFunctions | 3396456841 | 335 |
 | BanditRelationship | 3431259170 | 309 |
 | Legend_Craft_Evolved | 3432470769 | 304 |
 | Escape_from_Kentucky | 3439877834 | 301 |
-| tsarslib | 3402491515 | 288 |
 | Immersive_Lore | 3000924731 | 271 |
 | PZKVanillaPlusCarPack | 3217685049 | 255 |
 | B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 245 |
@@ -45,6 +43,7 @@
 | Caster_Plus | 3457003463 | 99 |
 | BanditsAddOptions | 3412682512 | 94 |
 | Firearms | 2256623447 | 93 |
+| tsarslib | 3402491515 | 90 |
 | StandardizedVehicleUpgrades3Core | 3403490889 | 90 |
 | PWPNXB | 3400528439 | 85 |
 | Modern_&_Historical_Firearms_Bundle | 3383901556 | 84 |
@@ -202,6 +201,7 @@
 | Farming_Wiki | 3473886171 | 0 |
 | P4MySoCalledBag | 2823166698 | 0 |
 | ExerciseWithCorpses | 3404074048 | 0 |
+| Bandits | 3268487204 | 0 |
 | MyCustomFirearm | 3551139118 | 0 |
 | 90bmwE30 | 3110913021 | 0 |
 | pzhotbar42 | 3396010813 | 0 |
@@ -518,6 +518,7 @@
 | [B42]_Intuitive_Crafting | 3486217110 | 0 |
 | 91fordRanger | 3539691958 | 0 |
 | AnthroTraits | 3025679944 | 0 |
+| CytU1550L | 2843855721 | 0 |
 | AutoExercise2 | 3435613327 | 0 |
 | InspectWeapon | 2948824747 | 0 |
 | lgd_antibodies | 2392676812 | 0 |

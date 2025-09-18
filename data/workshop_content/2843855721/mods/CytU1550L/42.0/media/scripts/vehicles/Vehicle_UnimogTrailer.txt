@@ -1,0 +1,426 @@
+module Base
+{
+	model U1550LTrailer
+	{
+		mesh = vehicles/Vehicle_UnimogTrailer|body_mesh,
+		shader = vehicle_norandom_multiuv,
+		invertX = FALSE,
+		scale = 1,
+	}
+	model U1550LTFRW
+	{
+		mesh = vehicles/Vehicle_UnimogTrailer|FrontRightWindow_obj,
+		shader = vehicle,
+		scale = 1,
+	}
+	model U1550LTFLW
+	{
+		mesh = vehicles/Vehicle_UnimogTrailer|FrontLeftWindow_obj,
+		shader = vehicle,
+		static = FALSE,
+		scale = 1,
+		boneWeight = FrontLeftDoorBone 1.0,
+	}
+	model U1550LTrailerFrontLeftDoor
+	{
+		mesh = vehicles/Vehicle_UnimogTrailer|FrontLeftDoor_obj,
+		shader = vehicle,
+		static = FALSE,
+		scale = 1,
+		boneWeight = FrontLeftDoorBone 1.0,
+	}
+	vehicle UnimogTrailer
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 1.1,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.3,
+
+		model
+		{
+			file = U1550LTrailer,
+			scale = 0.5700,
+			offset = 0.0702 -0.2807 0.9649,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicle_UNCATrailer,
+		}
+
+		skin
+		{
+			texture = Vehicles/Vehicle_UNODTrailer,
+		}
+
+		textureRust = Vehicles/Vehicle_U1550LTrailer_blood,
+		textureMask = Vehicles/Vehicle_U1550LTrailer_mask,
+		textureLights = Vehicles/Vehicle_U1550LTrailer_blood,
+		textureDamage1Shell = Vehicles/Vehicle_U1550LTrailer_blood,
+		textureDamage2Shell = Vehicles/Vehicle_U1550LTrailer_blood,
+		textureDamage1Overlay = Vehicles/Vehicle_U1550LTrailer_blood,
+		textureDamage2Overlay = Vehicles/Vehicle_U1550LTrailer_blood,
+
+		sound
+		{
+			engine = VehicleEngineSUV,
+			engineStart = VehicleEngineSUV,
+			engineTurnOff = VehicleEngineSUV,
+			horn = VehicleHornVan,
+			ignitionFail = VehicleIgnitionFailSUV,
+		}
+
+		extents = 3.6842 4.1404 10.0351,
+		mass = 100,
+		physicsChassisShape = 3.6491 4.0702 9.4386,
+		centerOfMassOffset = 0.0702 2.2456 0.2456,
+		shadowExtents = 3.7228 9.7043,
+		shadowOffset = 0.0635 -0.0289,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 0.50f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 300,
+		suspensionCompression = 4.83,
+		suspensionDamping = 3.88,
+		maxSuspensionTravelCm = 12,
+		suspensionRestLength = 0.20f,
+		wheelFriction = 1.4f,
+		frontEndHealth = 4500,
+		rearEndHealth = 3500,
+		seats = 4,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 1.4386 0.1930 2.4737,
+			radius = 0.80f,
+			width = 0.30f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -1.4386 0.1930 2.4737,
+			radius = 0.80f,
+			width = 0.30f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 1.4386 0.1930 -3.3158,
+			radius = 0.80f,
+			width = 0.30f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -1.4386 0.1930 -3.3158,
+			radius = 0.80f,
+			width = 0.30f,
+		}
+
+		template = PassengerSeat4,
+
+		passenger FrontLeft
+		{
+			showPassenger = false,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.8596 1.8596 1.1228,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 2.4035 -0.7018 -0.7895,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = false,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = -0.8596 1.8596 1.1228,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+			}
+		}
+
+		passenger RearLeft
+		{
+			showPassenger = false,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.8596 1.8947 -3.5088,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+			}
+		}
+
+		passenger RearRight
+		{
+			showPassenger = false,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = -0.7895 1.8947 -3.5088,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 5.6842 3.3333 1.3684,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 2.8947 0.7719 2.0000 2.0000,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.2281 3.0351 0.0000 0.0000,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.1579 3.0351 0.0000 0.0000,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.4211 -3.1754 0.0000 0.0000,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.2632 -3.1579 0.0000 0.0000,
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+		template = Seat/part/SeatRearLeft,
+		template = Seat/part/SeatRearRight,
+		template = Battery,
+		template = Door/part/DoorFrontLeft,
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+
+		part WindowFrontRight
+		{
+			mechanicRequireKey = false,
+
+			model windowFR
+			{
+				file = U1550LTFRW,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			area = SeatFrontRight,
+		}
+
+		part WindowFrontLeft
+		{
+			mechanicRequireKey = false,
+
+			model windowFL
+			{
+				file = U1550LTFLW,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+		}
+
+		part DoorFrontLeft
+		{
+			mechanicRequireKey = false,
+			category = bodywork,
+
+			model Default
+			{
+				file = U1550LTrailerFrontLeftDoor,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			anim Close
+			{
+				anim = FrontLeftDoorClosing,
+				reverse = TRUE,
+				rate = 2.0,
+			}
+
+			anim Open
+			{
+				anim = FrontLeftDoorClosing,
+				reverse = FALSE,
+				rate = 1.0,
+			}
+
+			anim Closed
+			{
+				anim = FrontLeftDoorClosing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = FrontLeftDoorClosing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			itemType = Base.U1550LTrailerDoor,
+		}
+
+		part U1550LTrailerStorage
+		{
+			category = nodisplay,
+			area = SeatMiddleLeft,
+			itemType = Base.U1550LTrailerStorage,
+			specificItem = false,
+
+			container
+			{
+				test = Vehicles.ContainerAccess.U1550LTrailerStorage,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = Tire,
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = U1550LWheelfrontwheelleft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			itemType = Base.U1550LWheel,
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = U1550LWheelfrontwheelright,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			itemType = Base.U1550LWheel,
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = U1550LWheelbackwheelleft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			itemType = Base.U1550LWheel,
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = U1550LWheelbackwheelright,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			itemType = Base.U1550LWheel,
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+
+		attachment trailerfront
+		{
+			offset = -0.0175 -0.1397 5.5439,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}
