@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-18 12:17:29 UTC+08:00`*
+*最后更新于：`2025-09-18 13:47:13 UTC+08:00`*
 
 ---
 
@@ -22,12 +22,10 @@
 | Escape_from_Kentucky | 3439877834 | 301 |
 | Immersive_Lore | 3000924731 | 271 |
 | PZKVanillaPlusCarPack | 3217685049 | 255 |
-| B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 245 |
 | SpongieOpenJackets | 2812326159 | 243 |
 | Advanced_Trajectory's_Realistic_Overhaul | 3036878362 | 238 |
 | HydeCoBees | 3430224478 | 213 |
 | Spongie_Hair | 2463184726 | 185 |
-| ATA_Petyarbuilt | 3403314193 | 155 |
 | SapphCookingB42 | 3409143790 | 149 |
 | SimpleSkillBooks | 3291799176 | 143 |
 | MeleeWeaponUpgrade_Easy | 3394923321 | 143 |
@@ -43,7 +41,6 @@
 | Caster_Plus | 3457003463 | 99 |
 | BanditsAddOptions | 3412682512 | 94 |
 | Firearms | 2256623447 | 93 |
-| tsarslib | 3402491515 | 90 |
 | StandardizedVehicleUpgrades3Core | 3403490889 | 90 |
 | PWPNXB | 3400528439 | 85 |
 | Modern_&_Historical_Firearms_Bundle | 3383901556 | 84 |
@@ -147,7 +144,6 @@
 | UH-1BHelicopter | 3409723807 | 4 |
 | BetterFPS_B42 | 3423115544 | 4 |
 | FunctionalAppliances2 | 3042138819 | 3 |
-| ATA_Jeep | 3407042038 | 3 |
 | TKS42 | 3389805754 | 3 |
 | KI5trailers | 3330403100 | 3 |
 | Vanilla_MRE_-_Crafting_Recipe_-_B41 | 3100032203 | 3 |
@@ -187,6 +183,7 @@
 | TrustyFireAxe | 3400045232 | 2 |
 | TheyKnew_[B42] | 3387110070 | 1 |
 | JokeCustomisation | 3415451174 | 1 |
+| tsarslib | 3402491515 | 1 |
 | P4Excalibolg | 3070446764 | 1 |
 | RechargeableBatteries | 3385623534 | 1 |
 | MiraAmmoMaker | 3441855577 | 1 |
@@ -324,6 +321,7 @@
 | Voice_Joel_Miller | 3496043022 | 0 |
 | 70dodge | 2873290424 | 0 |
 | BathtowelsOverhaul | 3416208765 | 0 |
+| ATA_Jeep | 3407042038 | 0 |
 | BanditsCreator | 3469292499 | 0 |
 | Random_Airdrops | 3282789883 | 0 |
 | IndustrialRevolutionGenericAddOn | 3359867059 | 0 |
@@ -441,6 +439,7 @@
 | Reaper's_Hair_&_Beard | 3450583954 | 0 |
 | P4Decoholic | 3197857648 | 0 |
 | Energy_Drinks | 2674541310 | 0 |
+| B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 0 |
 | EmergencyTVChannel | 3409272479 | 0 |
 | NoirRifleSlings | 3388107363 | 0 |
 | NodachiMod_B42.5.1 | 2166396868 | 0 |
@@ -485,6 +484,7 @@
 | TMRRemoveMumble | 3100475013 | 0 |
 | 93townCar | 2932547723 | 0 |
 | B42PackMule | 3418366421 | 0 |
+| ATA_Petyarbuilt | 3403314193 | 0 |
 | Different_number_of_fillets_based_on_weight | 3415021115 | 0 |
 | Sit_On_The_Key_Mod | 3468159865 | 0 |
 | LSMC | 3199474685 | 0 |
