@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-18 13:47:13 UTC+08:00`*
+*最后更新于：`2025-09-19 12:18:23 UTC+08:00`*
 
 ---
 
@@ -14,9 +14,8 @@
 | PompsItemsPlushies | 2792387747 | 719 |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
 | Buildables_Expansion | 3463117260 | 617 |
-| AmmoMaker | 2788256295 | 465 |
+| AmmoMaker | 2788256295 | 460 |
 | PompsItemsFood | 2792348686 | 394 |
-| PZ_BodilyFunctions | 3396456841 | 335 |
 | BanditRelationship | 3431259170 | 309 |
 | Legend_Craft_Evolved | 3432470769 | 304 |
 | Escape_from_Kentucky | 3439877834 | 301 |
@@ -52,7 +51,6 @@
 | B42Hemp&Tobacco | 3404563567 | 64 |
 | cf_home | 3522009163 | 63 |
 | CustomWeight | 3391228479 | 58 |
-| Boots_Expanded | 2850935956 | 57 |
 | Lynx_Pack | 3470485566 | 55 |
 | ARTR_RFGP | 3397215647 | 51 |
 | LastPushTrait | 3028253067 | 46 |
@@ -70,18 +68,14 @@
 | HDCP_ImmersiveVehiclePaint | 3464606086 | 26 |
 | ExploringTime | 2244879881 | 25 |
 | Tactical_Weapons | 2324223029 | 24 |
-| FancyLanterns | 3267733558 | 24 |
 | DFMFoodMod | 3406694220 | 24 |
 | TheDivisionStuff | 3479867929 | 22 |
-| aliceSvanillaDuffelBag | 2959854619 | 22 |
 | UniversalGunRepair | 2899457928 | 22 |
 | 86fordE150 | 2870394916 | 22 |
 | IndustrialRevolution | 3400131934 | 21 |
-| P4MySoCalledSnack | 2877535263 | 20 |
 | [B42]_Post_Apocalyptic_Weapons | 3472334215 | 20 |
 | RandomClothing | 3397182976 | 20 |
 | RestoreUtilities | 3409422147 | 17 |
-| [B42]_Bag_Upgrade_Ultra | 3407793320 | 16 |
 | HephasOccupationsAndTraits | 3256482412 | 15 |
 | ShowSowingSeasonInSeedTooltip | 3404461962 | 14 |
 | EFTBackpacks | 3432928943 | 13 |
@@ -97,10 +91,7 @@
 | ClothingLine | 3282215361 | 10 |
 | TLOUClothingConnected | 3348036710 | 10 |
 | HaloArmor | 3507919075 | 10 |
-| ModName | 3406392630 | 10 |
-| ExtraMoney | 3462306255 | 10 |
 | TrueMusic_b42 | 3397198968 | 9 |
-| MoreMaps | 3390897023 | 9 |
 | BasicVan | 3459200930 | 9 |
 | ImmersiveSolarArrays | 2969478819 | 9 |
 | FunctionalGutters | 3439305933 | 9 |
@@ -112,17 +103,14 @@
 | FactoryPieces | 3399263137 | 7 |
 | EatSmart | 3456212729 | 7 |
 | fhqwhgads'_Motorious_Zone | 2791656602 | 7 |
-| P4Excalibar | 2868777243 | 7 |
 | cdda_zombie | 2749928925 | 7 |
 | RollBack_Rain_Collector_Barrel | 3392186516 | 6 |
 | Detailed_Descriptions_for_Occupations_and_Traits | 3387957272 | 6 |
 | ExtendedSpices | 3522142755 | 6 |
-| WhatCanICraftAddon | 3392356751 | 5 |
 | Military_Tool_Kit | 2705406713 | 5 |
 | AllinOneBackpackingShelter | 3417917173 | 5 |
 | P4PrismPower | 3235103558 | 5 |
 | TheBeginning_CDDA | 3461117277 | 5 |
-| CraftableMannequins | 3054341059 | 5 |
 | [B42]_Moodle_Descriptions_Expanded | 3389003300 | 5 |
 | Vehicle_Repair_Overhaul | 2757712197 | 5 |
 | TheyAreWatching | 3559704439 | 5 |
@@ -131,7 +119,6 @@
 | WoodcuttingSkill_[B42] | 3434440605 | 5 |
 | GWH_(B42) | 3410972667 | 5 |
 | Expanded_Professions | 3440958051 | 5 |
-| P4LoveAndPerfume | 2842359380 | 4 |
 | TetriZ | 3486780625 | 4 |
 | Sector-7_Breach | 3513107552 | 4 |
 | Ladders | 2737665235 | 4 |
@@ -147,12 +134,11 @@
 | TKS42 | 3389805754 | 3 |
 | KI5trailers | 3330403100 | 3 |
 | Vanilla_MRE_-_Crafting_Recipe_-_B41 | 3100032203 | 3 |
-| Just_Some_Hair | 3116631797 | 3 |
 | LethalStealth | 3531611692 | 3 |
 | UseBeltAsWeapon | 3339423397 | 3 |
 | BM_Super_Speed_Settings | 3440221534 | 3 |
 | RiskyUnarmed | 3434796669 | 3 |
-| B42Makedriedfruit | 3417502641 | 3 |
+| 91fordLTD | 3366300557 | 3 |
 | Willowbrook_Bastion!_(items_part) | 3479667649 | 3 |
 | H.E.C.U | 3452711271 | 2 |
 | ExtraBombs | 3425787685 | 2 |
@@ -161,7 +147,6 @@
 | ShieldModeSecondaryHandEquip | 3383001527 | 2 |
 | collapsibleladder | 3438123707 | 2 |
 | CombatMasteringSkill | 3435985650 | 2 |
-| TrapManager | 3566766862 | 2 |
 | Vanvival | 3547444619 | 2 |
 | HandCrankFlashlights | 2897115343 | 2 |
 | DivisionWatch42 | 3391186580 | 2 |
@@ -174,7 +159,6 @@
 | CombatTraits | 3427091746 | 2 |
 | MakeGunpowder | 3392188086 | 2 |
 | WeldingTorchBalanced | 3429392198 | 2 |
-| Map_Mod_Manager | 3360392628 | 2 |
 | HydeCoUnlimitedCars | 3438759949 | 2 |
 | GydeTraitMagazines | 3342191739 | 2 |
 | SafeLogin | 2876897619 | 2 |
@@ -183,16 +167,14 @@
 | TrustyFireAxe | 3400045232 | 2 |
 | TheyKnew_[B42] | 3387110070 | 1 |
 | JokeCustomisation | 3415451174 | 1 |
-| tsarslib | 3402491515 | 1 |
-| P4Excalibolg | 3070446764 | 1 |
 | RechargeableBatteries | 3385623534 | 1 |
 | MiraAmmoMaker | 3441855577 | 1 |
 | BloodlustTrait | 3027121498 | 1 |
 | toppling-zombies | 3425038705 | 1 |
 | PFO_Caravan_Shotgun | 3400681835 | 1 |
 | BravensAchievements | 3051277957 | 1 |
-| Nep_Slower_Discomfort | 3403721633 | 1 |
 | AdaWongVoice | 3401470591 | 1 |
+| [B42]_Bag_Upgrade_Ultra | 3407793320 | 1 |
 | 80manKat1 | 3248388837 | 1 |
 | MarOccupations | 3139034529 | 1 |
 | Farming_Wiki | 3473886171 | 0 |
@@ -200,9 +182,11 @@
 | ExerciseWithCorpses | 3404074048 | 0 |
 | Bandits | 3268487204 | 0 |
 | MyCustomFirearm | 3551139118 | 0 |
+| tsarslib | 3402491515 | 0 |
 | 90bmwE30 | 3110913021 | 0 |
 | pzhotbar42 | 3396010813 | 0 |
 | isoContainers | 2625625421 | 0 |
+| P4Excalibolg | 3070446764 | 0 |
 | 69camaro | 2991201484 | 0 |
 | MoodleFramework | 2859296947 | 0 |
 | WhatCanICraft | 3390169945 | 0 |
@@ -213,6 +197,7 @@
 | Farming_Expansion | 3444499190 | 0 |
 | 90pierceArrow | 2942793445 | 0 |
 | EasyLaundry | 2925034918 | 0 |
+| P4LoveAndPerfume | 2842359380 | 0 |
 | ChainToChain | 3413713793 | 0 |
 | pogoclothing_mod | 3058134369 | 0 |
 | AutoMechanics | 3387539308 | 0 |
@@ -245,8 +230,10 @@
 | ReplaceBandage | 2944344655 | 0 |
 | ProximityInventory | 2847184718 | 0 |
 | 84mercW460 | 2805630347 | 0 |
+| WhatCanICraftAddon | 3392356751 | 0 |
 | P4AddictedToWeight | 2604943386 | 0 |
 | P4HasBeenRead | 2544353492 | 0 |
+| aliceSvanillaDuffelBag | 2959854619 | 0 |
 | INeedMoreStyle_CE | 2861393067 | 0 |
 | ATA_Mustang_66 | 3405574146 | 0 |
 | Frockin_Wiseguys | 3538760023 | 0 |
@@ -261,6 +248,7 @@
 | MetalSpears | 2927603127 | 0 |
 | 89dodgeCaravan | 3034636011 | 0 |
 | 82jeepJ10 | 2886832257 | 0 |
+| Boots_Expanded | 2850935956 | 0 |
 | [B42]_Mod_Manager | 3567084868 | 0 |
 | RestoreEngineQuality | 3543612325 | 0 |
 | Nep_P10 | 3489603739 | 0 |
@@ -272,6 +260,7 @@
 | Tatrapan | 3402789975 | 0 |
 | extendedBatteryLife | 3387462212 | 0 |
 | KeepPerkLevel | 3314107094 | 0 |
+| TrapManager | 3566766862 | 0 |
 | [B42]_ZuperCarts_-_Carts_&_Trolleys_(forked) | 3433203442 | 0 |
 | 73Winnebago | 3488174689 | 0 |
 | DragBodiesFaster_50% | 3393821407 | 0 |
@@ -292,6 +281,7 @@
 | FWO_Fitness_Workout_Overhaul | 2940354599 | 0 |
 | Pokit_Paradigm | 3476595954 | 0 |
 | Support_Corps | 3409836763 | 0 |
+| FancyLanterns | 3267733558 | 0 |
 | 87toyotaMR2 | 3052360250 | 0 |
 | 77firebird | 3346905070 | 0 |
 | Customizable_Containers | 2719850086 | 0 |
@@ -308,6 +298,7 @@
 | U.S._M548_Cargo_Carrier_by_Papa_Chad | 3424497614 | 0 |
 | SimpleOverhaulTraitsAndOccupations | 2840805724 | 0 |
 | KitsuneLib | 3390453390 | 0 |
+| Nep_Slower_Discomfort | 3403721633 | 0 |
 | 85pontiacParisienne | 3413706334 | 0 |
 | BringOutYourDead | 3415416226 | 0 |
 | Evolving_Traits_World | 2914075159 | 0 |
@@ -319,6 +310,7 @@
 | Frockin_Splendor! | 3307376332 | 0 |
 | Lifestyle | 3403870858 | 0 |
 | Voice_Joel_Miller | 3496043022 | 0 |
+| CraftableMannequins | 3054341059 | 0 |
 | 70dodge | 2873290424 | 0 |
 | BathtowelsOverhaul | 3416208765 | 0 |
 | ATA_Jeep | 3407042038 | 0 |
@@ -356,6 +348,7 @@
 | Bicycle | 3461415167 | 0 |
 | Tomb's_Player_Body_-_Customisation | 3429790870 | 0 |
 | ManageContainers | 2650547917 | 0 |
+| Just_Some_Hair | 3116631797 | 0 |
 | P4VideoMeister | 2744797858 | 0 |
 | 87buickRegal | 3226885926 | 0 |
 | P4TidyUpMeister | 2769706949 | 0 |
@@ -374,6 +367,7 @@
 | TrueMusicJukebox | 3398874593 | 0 |
 | 69mini | 2937786633 | 0 |
 | ReactiveSoundEvents | 2969551071 | 0 |
+| MoreMaps | 3390897023 | 0 |
 | Plumb_Helper+ | 3386961288 | 0 |
 | B42Makedriedvegetable | 3418061837 | 0 |
 | ATA_BMW_E36 | 3421748994 | 0 |
@@ -415,6 +409,7 @@
 | KATTAJ1_Clothes_Core | 3470422050 | 0 |
 | ProteinsMoodle | 2859304462 | 0 |
 | PocketKittens | 3568029240 | 0 |
+| PZ_BodilyFunctions | 3396456841 | 0 |
 | Zombies_Congelados_TWD_B42 | 3426132882 | 0 |
 | 93fordTaurus | 3088951320 | 0 |
 | BetterSorting-42 | 3413005308 | 0 |
@@ -427,13 +422,14 @@
 | 88toyotaHilux | 3435796523 | 0 |
 | [J&G]_Desert_Multicam_Uniform | 3299457564 | 0 |
 | StandardizedVehicleUpgrades3Vanilla | 3304582091 | 0 |
+| ModName | 3406392630 | 0 |
 | [B42]_Bag_Upgrade_Plus | 3403697073 | 0 |
 | ToughnessSkill | 3545533939 | 0 |
 | 85oldsmobileDelta88 | 3418253716 | 0 |
 | TraitsPurchaseSystem | 3211693903 | 0 |
+| B42Makedriedfruit | 3417502641 | 0 |
 | 89fordBronco | 2886833398 | 0 |
 | TheStar | 3412262177 | 0 |
-| 91fordLTD | 3366300557 | 0 |
 | zRe_FixFloor | 3403911096 | 0 |
 | 81deloreanDMC12 | 3253385114 | 0 |
 | Reaper's_Hair_&_Beard | 3450583954 | 0 |
@@ -472,6 +468,7 @@
 | Map_Symbol_Size_Slider | 2734705913 | 0 |
 | EasySpareMagazineReload | 2590662055 | 0 |
 | fhqwhgads'_Hot_Pursuit_Pack | 2841969842 | 0 |
+| P4Excalibar | 2868777243 | 0 |
 | 89trooper | 2932549988 | 0 |
 | VSMRSpongie | 3415572170 | 0 |
 | Lucille | 3436159263 | 0 |
@@ -484,11 +481,14 @@
 | TMRRemoveMumble | 3100475013 | 0 |
 | 93townCar | 2932547723 | 0 |
 | B42PackMule | 3418366421 | 0 |
+| ExtraMoney | 3462306255 | 0 |
+| Map_Mod_Manager | 3360392628 | 0 |
 | ATA_Petyarbuilt | 3403314193 | 0 |
 | Different_number_of_fillets_based_on_weight | 3415021115 | 0 |
 | Sit_On_The_Key_Mod | 3468159865 | 0 |
 | LSMC | 3199474685 | 0 |
 | 91geoMetro | 3008795514 | 0 |
+| P4MySoCalledSnack | 2877535263 | 0 |
 | TLOAWolfCut | 3477669563 | 0 |
 | KillCount | 2553809727 | 0 |
 | 75grandPrix | 3213391371 | 0 |
