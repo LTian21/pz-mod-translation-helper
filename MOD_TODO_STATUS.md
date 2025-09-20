@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-19 12:18:23 UTC+08:00`*
+*最后更新于：`2025-09-20 12:17:27 UTC+08:00`*
 
 ---
 
@@ -13,7 +13,6 @@
 | BanditsWeekOne | 3403180543 | 821 |
 | PompsItemsPlushies | 2792387747 | 719 |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
-| Buildables_Expansion | 3463117260 | 617 |
 | AmmoMaker | 2788256295 | 460 |
 | PompsItemsFood | 2792348686 | 394 |
 | BanditRelationship | 3431259170 | 309 |
@@ -37,6 +36,7 @@
 | Wallpapers | 2999595757 | 114 |
 | Vanilla_Clothing_Expansion | 3421271152 | 112 |
 | Tomb's_Goth_Hair | 3531765630 | 111 |
+| KnoxEventExpanded | 3397396843 | 101 |
 | Caster_Plus | 3457003463 | 99 |
 | BanditsAddOptions | 3412682512 | 94 |
 | Firearms | 2256623447 | 93 |
@@ -47,7 +47,6 @@
 | EssentialRecipes | 3401825906 | 72 |
 | ScavengingSkill_[B42] | 3407792640 | 69 |
 | WeatherMoodles | 3565697910 | 68 |
-| KnoxEventExpanded | 3397396843 | 65 |
 | B42Hemp&Tobacco | 3404563567 | 64 |
 | cf_home | 3522009163 | 63 |
 | CustomWeight | 3391228479 | 58 |
@@ -91,7 +90,6 @@
 | ClothingLine | 3282215361 | 10 |
 | TLOUClothingConnected | 3348036710 | 10 |
 | HaloArmor | 3507919075 | 10 |
-| TrueMusic_b42 | 3397198968 | 9 |
 | BasicVan | 3459200930 | 9 |
 | ImmersiveSolarArrays | 2969478819 | 9 |
 | FunctionalGutters | 3439305933 | 9 |
@@ -128,7 +126,6 @@
 | OpenAllContainers | 3465040406 | 4 |
 | 92nissanGTR | 2846036306 | 4 |
 | Cerberus_Pack | 3470478700 | 4 |
-| UH-1BHelicopter | 3409723807 | 4 |
 | BetterFPS_B42 | 3423115544 | 4 |
 | FunctionalAppliances2 | 3042138819 | 3 |
 | TKS42 | 3389805754 | 3 |
@@ -140,6 +137,7 @@
 | RiskyUnarmed | 3434796669 | 3 |
 | 91fordLTD | 3366300557 | 3 |
 | Willowbrook_Bastion!_(items_part) | 3479667649 | 3 |
+| Buildables_Expansion | 3463117260 | 3 |
 | H.E.C.U | 3452711271 | 2 |
 | ExtraBombs | 3425787685 | 2 |
 | PFO_GUNRUNNER | 3434691822 | 2 |
@@ -157,7 +155,6 @@
 | ImmersiveSuicide | 3426448380 | 2 |
 | TableSaw | 3540297822 | 2 |
 | CombatTraits | 3427091746 | 2 |
-| MakeGunpowder | 3392188086 | 2 |
 | WeldingTorchBalanced | 3429392198 | 2 |
 | HydeCoUnlimitedCars | 3438759949 | 2 |
 | GydeTraitMagazines | 3342191739 | 2 |
@@ -213,6 +210,7 @@
 | organizedCategoriesCore | 3370707195 | 0 |
 | Louisville_Quarantine_Zone | 2934132344 | 0 |
 | SurvivingThroughSeasons | 2753086629 | 0 |
+| TrueMusic_b42 | 3397198968 | 0 |
 | B42_Insect_Foraging | 3437552077 | 0 |
 | ATA_Dadge | 3432012226 | 0 |
 | ExtraGunSlot | 3120702374 | 0 |
@@ -243,6 +241,7 @@
 | 85chevyCaprice | 3413704851 | 0 |
 | 89volvo200 | 3292659291 | 0 |
 | MakeCharcoal | 3392674521 | 0 |
+| BecomeBrave | 3388028737 | 0 |
 | LazoloTraits | 2855320431 | 0 |
 | BarricadesHurtZombies | 3402208866 | 0 |
 | MetalSpears | 2927603127 | 0 |
@@ -426,6 +425,7 @@
 | [B42]_Bag_Upgrade_Plus | 3403697073 | 0 |
 | ToughnessSkill | 3545533939 | 0 |
 | 85oldsmobileDelta88 | 3418253716 | 0 |
+| MakeGunpowder | 3392188086 | 0 |
 | TraitsPurchaseSystem | 3211693903 | 0 |
 | B42Makedriedfruit | 3417502641 | 0 |
 | 89fordBronco | 2886833398 | 0 |
@@ -496,6 +496,7 @@
 | [B42]_JunkFoodsPH | 3390901679 | 0 |
 | MWPWeapons | 2732407704 | 0 |
 | S4EcoPack | 3480405054 | 0 |
+| UH-1BHelicopter | 3409723807 | 0 |
 | P4ThiefExpansion | 2596620950 | 0 |
 | P4MySoCalledToy | 3540268758 | 0 |
 | ATA_Samara | 3432014439 | 0 |
@@ -512,6 +513,7 @@
 | Adrenaline | 2807001835 | 0 |
 | 67commando | 2478247379 | 0 |
 | [B42]_FlipVehiclePlusTrailer | 3430172149 | 0 |
+| EggonsWorthwileCars2.0 | 3569430257 | 0 |
 | UsefulBarrels | 3436537035 | 0 |
 | PaniqeurTrait | 3393305357 | 0 |
 | P4MedicalMeister | 3173649443 | 0 |
