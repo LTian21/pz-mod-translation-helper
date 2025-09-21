@@ -1,0 +1,58 @@
+module MoneyFromCreditCard
+{
+	imports {
+		Base
+	}
+
+	craftRecipe GetMoneyFromCard
+	{
+        timedAction = Making,
+		Time = 20,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Miscellaneous,
+		OnCreate = MoneyFromCreditCard.OnCreate.GetMoneyFromCard,
+		OnTest = MoneyFromCreditCard.OnTest.CheckBankTile,
+		inputs
+		{
+			item 1 [Base.CreditCard] mode:keep,
+		}
+		outputs
+		{
+		}
+	}
+
+	craftRecipe ChargeCreditCard
+	{
+        timedAction = Making,
+		Time = 20,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Miscellaneous,
+		OnCreate = MoneyFromCreditCard.OnCreate.ChargeCreditCard,
+		OnTest = MoneyFromCreditCard.OnTest.InventoryHasMoney,
+		inputs
+		{
+			item 1 [Base.CreditCard] mode:keep,
+		}
+		outputs
+		{
+		}
+	}
+
+	craftRecipe GetMoneyFromPaper
+	{
+		timedAction = Making,
+		Time = 20,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Miscellaneous,
+		OnCreate = MoneyFromCreditCard.OnCreate.GetMoneyFromCard,
+		OnTest = MoneyFromCreditCard.OnTest.CheckBankTile,
+		inputs
+		{
+			item 1 [Base.StockCertificate;Base.ScratchTicket_Winner],
+		}
+		outputs
+		{
+		}
+	}
+
+}
