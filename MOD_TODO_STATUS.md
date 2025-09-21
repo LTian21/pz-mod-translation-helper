@@ -2,32 +2,28 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-21 23:49:46 UTC+08:00`*
+*最后更新于：`2025-09-22 02:33:43 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
-| Support_Corps | 3512993822 | 2959 |
 | BWardrobe | 3140453034 | 977 |
+| Support_Corps | 3512993822 | 849 |
 | PompsItemsPlushies | 2792387747 | 719 |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
 | AmmoMaker | 2788256295 | 460 |
 | PompsItemsFood | 2792348686 | 394 |
 | Dummy_Fluid_Mod | 3405131820 | 358 |
-| BanditRelationship | 3431259170 | 309 |
-| Legend_Craft_Evolved | 3432470769 | 304 |
 | Immersive_Lore | 3000924731 | 271 |
 | PZKVanillaPlusCarPack | 3217685049 | 255 |
 | SpongieOpenJackets | 2812326159 | 243 |
-| Advanced_Trajectory's_Realistic_Overhaul | 3036878362 | 238 |
 | HydeCoBees | 3430224478 | 213 |
 | MeleeWeaponUpgrade_Easy | 3394923321 | 143 |
 | Dynamic-Traits-main | 2459400130 | 129 |
 | Wallpapers | 2999595757 | 114 |
 | Vanilla_Clothing_Expansion | 3421271152 | 112 |
 | Caster_Plus | 3457003463 | 99 |
-| BanditsAddOptions | 3412682512 | 94 |
 | Firearms | 2256623447 | 93 |
 | StandardizedVehicleUpgrades3Core | 3403490889 | 90 |
 | PWPNXB | 3400528439 | 85 |
@@ -57,10 +53,8 @@
 | Tactical_Weapons | 2324223029 | 24 |
 | DFMFoodMod | 3406694220 | 24 |
 | MoneyFromCreditCard | 3428650803 | 24 |
-| TheDivisionStuff | 3479867929 | 22 |
 | IndustrialRevolution | 3400131934 | 21 |
 | [B42]_Post_Apocalyptic_Weapons | 3472334215 | 20 |
-| RandomClothing | 3397182976 | 20 |
 | RestoreUtilities | 3409422147 | 17 |
 | HephasOccupationsAndTraits | 3256482412 | 15 |
 | ShowSowingSeasonInSeedTooltip | 3404461962 | 14 |
@@ -69,12 +63,12 @@
 | ModTemplate | 3026307069 | 11 |
 | Gunpoint_Redemption | 3078291265 | 11 |
 | Herbalist | 2875059598 | 11 |
-| LegendaryKatana | 3418366499 | 11 |
 | DivisionBackpack | 3391306957 | 11 |
 | MilitaryPonchosRELOADED | 3439247001 | 11 |
 | Minimal_Display_Bars_Nutritions_B42 | 3388844542 | 10 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
 | ClothingLine | 3282215361 | 10 |
+| BanditsAddOptions | 3412682512 | 10 |
 | TLOUClothingConnected | 3348036710 | 10 |
 | HaloArmor | 3507919075 | 10 |
 | BasicVan | 3459200930 | 9 |
@@ -82,7 +76,6 @@
 | FunctionalGutters | 3439305933 | 9 |
 | KickScooter | 3453879909 | 8 |
 | Zombaroid | 3519916139 | 8 |
-| ProcessScrapMetal | 3392186364 | 8 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | Draw_On_Map | 2804531012 | 7 |
 | FactoryPieces | 3399263137 | 7 |
@@ -96,12 +89,14 @@
 | AllinOneBackpackingShelter | 3417917173 | 5 |
 | P4PrismPower | 3235103558 | 5 |
 | TheBeginning_CDDA | 3461117277 | 5 |
+| LegendaryDuffelbag | 3558839307 | 5 |
 | [B42]_Moodle_Descriptions_Expanded | 3389003300 | 5 |
 | Vehicle_Repair_Overhaul | 2757712197 | 5 |
 | TheyAreWatching | 3559704439 | 5 |
 | SpearFishing | 3539114542 | 5 |
 | AxesRecrafting | 2211423190 | 5 |
 | WoodcuttingSkill_[B42] | 3434440605 | 5 |
+| TowTruckMod | 3446203945 | 5 |
 | GWH_(B42) | 3410972667 | 5 |
 | Expanded_Professions | 3440958051 | 5 |
 | TetriZ | 3486780625 | 4 |
@@ -111,7 +106,6 @@
 | OpenAllContainers | 3465040406 | 4 |
 | 92nissanGTR | 2846036306 | 4 |
 | Cerberus_Pack | 3470478700 | 4 |
-| BetterFPS_B42 | 3423115544 | 4 |
 | FunctionalAppliances2 | 3042138819 | 3 |
 | LWBetterElectronics | 2999183635 | 3 |
 | TKS42 | 3389805754 | 3 |
@@ -183,6 +177,7 @@
 | organizedCategoriesCore | 3370707195 | 0 |
 | Louisville_Quarantine_Zone | 2934132344 | 0 |
 | SurvivingThroughSeasons | 2753086629 | 0 |
+| TheDivisionStuff | 3479867929 | 0 |
 | TrueMusic_b42 | 3397198968 | 0 |
 | toppling-zombies | 3425038705 | 0 |
 | B42_Insect_Foraging | 3437552077 | 0 |
@@ -253,6 +248,7 @@
 | Skill_Recovery_Journal | 2503622437 | 0 |
 | 65banshee | 3566868353 | 0 |
 | P4DriedFlower | 2949777636 | 0 |
+| LegendarySatchel | 3560352772 | 0 |
 | [B42]_Wallet_Fix | 3400142576 | 0 |
 | 76chevyKseries | 3161951724 | 0 |
 | FWO_Fitness_Workout_Overhaul | 2940354599 | 0 |
@@ -282,6 +278,7 @@
 | Detailed_Descriptions_for_Occupations_and_Traits | 3387957272 | 0 |
 | [J&G]_Forest_Multicam_Uniform | 3309971624 | 0 |
 | The_Last_Of_AVA_Clothing | 3477685382 | 0 |
+| LegendaryKatana | 3418366499 | 0 |
 | B42Makefruitinjar | 3432006285 | 0 |
 | AmmoConverterB42 | 3388844065 | 0 |
 | More_Traits | 1299328280 | 0 |
@@ -291,6 +288,7 @@
 | CraftableMannequins | 3054341059 | 0 |
 | 70dodge | 2873290424 | 0 |
 | BathtowelsOverhaul | 3416208765 | 0 |
+| [B42]_Briefing | 3565244378 | 0 |
 | ATA_Jeep | 3407042038 | 0 |
 | BanditsCreator | 3469292499 | 0 |
 | Random_Airdrops | 3282789883 | 0 |
@@ -356,6 +354,7 @@
 | Excavation | 3392001801 | 0 |
 | damnlib | 3171167894 | 0 |
 | WildFruits | 2618566294 | 0 |
+| BanditRelationship | 3431259170 | 0 |
 | ComidaBR | 3469279808 | 0 |
 | 93fordF350 | 3073430075 | 0 |
 | 67gt500 | 3026723485 | 0 |
@@ -383,6 +382,7 @@
 | 99fordCVPI | 2971246021 | 0 |
 | No_Stress_Chopping | 3460704724 | 0 |
 | Night_Vision | 3383603346 | 0 |
+| ProcessScrapMetal | 3392186364 | 0 |
 | SixthSense | 2863908612 | 0 |
 | U.S._M998_Humvee_by_Papa_Chad | 3554424111 | 0 |
 | 73fordFalcon | 3490370700 | 0 |
@@ -460,6 +460,7 @@
 | EasySpareMagazineReload | 2590662055 | 0 |
 | fhqwhgads'_Hot_Pursuit_Pack | 2841969842 | 0 |
 | P4Excalibar | 2868777243 | 0 |
+| Legend_Craft_Evolved | 3432470769 | 0 |
 | 89trooper | 2932549988 | 0 |
 | VSMRSpongie | 3415572170 | 0 |
 | Lucille | 3436159263 | 0 |
@@ -488,6 +489,7 @@
 | VehicleClassOverhaul | 3407507873 | 0 |
 | [B42]_JunkFoodsPH | 3390901679 | 0 |
 | HydeCoUnlimitedCars | 3438759949 | 0 |
+| Advanced_Trajectory's_Realistic_Overhaul | 3036878362 | 0 |
 | MWPWeapons | 2732407704 | 0 |
 | S4EcoPack | 3480405054 | 0 |
 | UH-1BHelicopter | 3409723807 | 0 |
@@ -498,7 +500,6 @@
 | B42Eggjar | 3444384263 | 0 |
 | GydeTraitMagazines | 3342191739 | 0 |
 | 86chevyCUCV | 3428008364 | 0 |
-| TowTruckMod | 3446203945 | 0 |
 | Erikas_Furniture_Store | 3363546437 | 0 |
 | AmmoLootDropB42 | 3389050623 | 0 |
 | 90fordF350ambulance | 2952802178 | 0 |
@@ -518,11 +519,13 @@
 | PaniqeurTrait | 3393305357 | 0 |
 | P4MedicalMeister | 3173649443 | 0 |
 | [B42]_Intuitive_Crafting | 3486217110 | 0 |
+| RandomClothing | 3397182976 | 0 |
 | 91fordRanger | 3539691958 | 0 |
 | AnthroTraits | 3025679944 | 0 |
 | CytU1550L | 2843855721 | 0 |
 | AutoExercise2 | 3435613327 | 0 |
 | InspectWeapon | 2948824747 | 0 |
+| BetterFPS_B42 | 3423115544 | 0 |
 | lgd_antibodies | 2392676812 | 0 |
 | 82firebird | 3320947974 | 0 |
 | LastOfUsHair | 3025593219 | 0 |

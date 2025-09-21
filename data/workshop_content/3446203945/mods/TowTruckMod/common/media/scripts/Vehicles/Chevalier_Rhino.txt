@@ -2,24 +2,17 @@ module Base
 {
 	model Vehicles_Chevalier_Rhino
 	{
-		mesh = vehicles/Vehicles_Chevalier_Rhino_E|TowTruck,
+		mesh = vehicles/Vehicles_Chevalier_Rhino_F|TowTruck,
 		shader = vehicle_multiuv_noreflect,
-		invertX = FALSE,
-		scale = .4,
-	}
-	model Vehicles_Chevalier_Rhino_NoRandom
-	{
-		mesh = vehicles/Vehicles_Chevalier_Rhino_E|TowTruck,
-		shader = vehicle_norandom,
 		invertX = FALSE,
 		scale = .4,
 	}
 	model Chevalier_Rhino_Interior
 	{
-		mesh = vehicles/Vehicles_Chevalier_Rhino_E|Interior,
+		mesh = vehicles/Vehicles_Chevalier_Rhino_F|Interior,
 		shader = vehicle_multiuv_noreflect,
 		scale = .4,
-	}		
+	}
 	model Chevalier_Rhino_Tire_FL
 	{
 		mesh = vehicles/Chevalier_Rhino_Tire_FL,
@@ -69,7 +62,12 @@ module Base
 		{
 			texture = Vehicles/Vehicle_ChevalierRhino_Shell_HT_Red,
 		}
-		
+
+		skin
+		{
+			texture = Vehicles/Vehicle_ChevalierRhino_Shell_KCR,
+		}
+
 		skin
 		{
 			texture = Vehicles/Vehicle_ChevalierRhino_Shell_Lennys,
@@ -79,12 +77,6 @@ module Base
 		{
 			texture = Vehicles/Vehicle_ChevalierRhino_Shell_Muldraugh,
 		}
-
-		skin
-		{
-			texture = Vehicles/Vehicle_ChevalierRhino_Shell_KCR,
-		}			
-
 
 		textureMask = Vehicles/Vehicle_ChevalierRhino_Mask,
 		textureLights = Vehicles/Vehicle_ChevalierRhino_Lights,
@@ -103,42 +95,43 @@ module Base
 
 		sound
 		{
-			engine = VehicleEnginePickUpVan,
-			engineStart = VehicleEnginePickUpVan,
-			engineTurnOff = VehicleEnginePickUpVan,
+			engine = VehicleEnginePickUpTruck,
+			engineStart = VehicleEnginePickUpTruck,
+			engineTurnOff = VehicleEnginePickUpTruck,
 			horn = VehicleHornStandard,
-			ignitionFail = VehicleIgnitionFailPickUpVan,
+			ignitionFail = VehicleIgnitionFailPickUpTruck,
 		}
 
-		engineRPMType = Rhino,
 		extents = 0.8681 0.6593 2.3187,
-		mass = 1030,
-		physicsChassisShape = 0.8681 0.6593 2.3187,
-		centerOfMassOffset = 0.0000 0.3033 0.0000,
-		engineForce = 4500,
+		mass = 890,
+		physicsChassisShape = 0.8681 0.6703 2.3187,
+		centerOfMassOffset = 0.0000 0.2967 0.0000,
+		shadowExtents = 0.8681 2.3187,
+		shadowOffset = 0.0000 0.0000,
+		engineForce = 4850,
 		engineQuality = 80,
 		engineLoudness = 115,
-		maxSpeed = 70f,
-		brakingForce = 80,
+		maxSpeed = 80f,
+		brakingForce = 70,
+		stoppingMovementForce = 3.0f,
 		rollInfluence = 0.8f,
 		steeringIncrement = 0.04,
 		steeringClamp = 0.3,
-		suspensionStiffness = 50,
-		suspensionCompression = 3.93,
-		suspensionDamping = 2.98,
-		maxSuspensionTravelCm = 8,
-		suspensionRestLength = 0.15,
+		suspensionStiffness = 30,
+		suspensionCompression = 4.83,
+		suspensionDamping = 3.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.2,
 		wheelFriction = 1.5f,
 		frontEndHealth = 150,
 		rearEndHealth = 260,
 		seats = 2,
 		isSmallVehicle = false,
-		vanillaStyle = false,
 
 		wheel FrontLeft
 		{
 			front = true,
-			offset = 0.3862 -0.3956 0.7582,
+			offset = 0.3846 -0.3956 0.7857,
 			radius = 0.15f,
 			width = 0.2f,
 		}
@@ -146,7 +139,7 @@ module Base
 		wheel FrontRight
 		{
 			front = true,
-			offset = -0.3862 -0.3956 0.7582,
+			offset = -0.3846 -0.3956 0.7857,
 			radius = 0.15f,
 			width = 0.2f,
 		}
@@ -219,12 +212,12 @@ module Base
 
 		area SeatFrontLeft
 		{
-			xywh = 0.6703 0.1484 0.4725 0.4725,
+			xywh = 0.6374 0.1484 0.4725 0.4725,
 		}
 
 		area SeatFrontRight
 		{
-			xywh = -0.6703 0.1484 0.4725 0.4725,
+			xywh = -0.6374 0.1484 0.4725 0.4725,
 		}
 
 		area GasTank
@@ -285,10 +278,14 @@ module Base
 			area = SeatFrontRight,
 			itemType = Base.GloveBox,
 			mechanicRequireKey = true,
+
 			model Default
 			{
 				file = Chevalier_Rhino_Interior,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
 			}
+
 			container
 			{
 				capacity = 12,
@@ -338,7 +335,7 @@ module Base
 		template = RhinoHood,
 
 		part EngineDoor
-		{					
+		{
 			anim Close
 			{
 				anim = anim_hood,
@@ -389,6 +386,7 @@ module Base
 		part PassengerCompartment
 		{
 			category = nodisplay,
+
 			lua
 			{
 				update = Vehicles.Update.PassengerCompartment,
@@ -405,7 +403,7 @@ module Base
 				recipes = Intermediate Mechanics,
 			}
 
-			table uninstall			
+			table uninstall
 			{
 				recipes = Intermediate Mechanics,
 			}
@@ -417,6 +415,7 @@ module Base
 		part Window*
 		{
 			mechanicRequireKey = true,
+
 			table install
 			{
 				recipes = Intermediate Mechanics,
@@ -427,7 +426,7 @@ module Base
 				recipes = Intermediate Mechanics,
 			}
 		}
-		
+
 		template = RhinoDoor/part/DoorFrontLeft,
 		template = RhinoDoor/part/DoorFrontRight,
 
@@ -441,7 +440,7 @@ module Base
 			table uninstall
 			{
 				recipes = Intermediate Mechanics,
-			}			
+			}
 		}
 
 		template = Tire,
@@ -451,6 +450,8 @@ module Base
 			model InflatedTirePlusWheel
 			{
 				file = Chevalier_Rhino_Tire_FL,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
 			}
 		}
 
@@ -459,6 +460,8 @@ module Base
 			model InflatedTirePlusWheel
 			{
 				file = Chevalier_Rhino_Tire_FR,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
 			}
 		}
 
@@ -467,6 +470,8 @@ module Base
 			model InflatedTirePlusWheel
 			{
 				file = Chevalier_Rhino_Tire_RL,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
 			}
 		}
 
@@ -475,6 +480,8 @@ module Base
 			model InflatedTirePlusWheel
 			{
 				file = Chevalier_Rhino_Tire_RR,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
 			}
 		}
 
@@ -517,6 +524,76 @@ module Base
 		template = Headlight,
 		template = PickupTruckCollision,
 
+		physics box
+		{
+			offset = 0.0000 0.1801 -0.0055,
+			extents = 0.8242 0.3956 2.2088,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.4121 0.3870,
+			extents = 0.6923 0.1758 0.4066,
+			rotate = 53.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.4341 -0.0298,
+			extents = 0.6923 0.3626 0.1758,
+			rotate = 9.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.4908 0.1264,
+			extents = 0.6923 0.2747 0.4176,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.1801 -0.0055,
+			extents = 0.8242 0.3956 2.2088,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.4121 0.3870,
+			extents = 0.6923 0.1758 0.4066,
+			rotate = 53.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.4341 -0.0298,
+			extents = 0.6923 0.3626 0.1758,
+			rotate = 9.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.4908 0.1264,
+			extents = 0.6923 0.2747 0.4176,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.1801 -0.0055,
+			extents = 0.8242 0.3956 2.2088,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.4121 0.3870,
+			extents = 0.6923 0.1758 0.4066,
+			rotate = 53.0000 0.0000 0.0000,
+		}
+
 		attachment trailer
 		{
 			offset = 0.0000 -0.2747 -1.2253,
@@ -533,9 +610,15 @@ module Base
 
 		attachment hook
 		{
-			offset = 0.0000 -0.2500 -1.6319,
+			offset = 0.0000 -0.2744 -1.5586,
 			rotate = 0.0000 0.0000 0.0000,
 			zoffset = -1.0000,
+		}
+
+		attachment flipNode
+		{
+			offset = 0.0000 -0.3407 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
 		}
 	}
 }
