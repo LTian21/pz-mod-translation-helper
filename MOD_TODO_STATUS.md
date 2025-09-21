@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-21 12:17:23 UTC+08:00`*
+*最后更新于：`2025-09-21 16:49:08 UTC+08:00`*
 
 ---
 
@@ -30,8 +30,8 @@
 | Dynamic-Traits-main | 2459400130 | 129 |
 | Tikitown | 3037854728 | 124 |
 | LWBetterElectronics | 2999183635 | 118 |
-| Chinesecuisine | 3412969115 | 118 |
 | Project_Summer_Car | 3564950449 | 118 |
+| Chinesecuisine | 3412969115 | 116 |
 | Wallpapers | 2999595757 | 114 |
 | Vanilla_Clothing_Expansion | 3421271152 | 112 |
 | Tomb's_Goth_Hair | 3531765630 | 111 |
