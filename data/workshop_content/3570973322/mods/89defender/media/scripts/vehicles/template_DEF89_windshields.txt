@@ -1,0 +1,226 @@
+module Base
+{
+
+    model 89defenderwindshield
+    {
+        mesh = vehicles/Vehicles_89defender_Body|defender_windshield,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 89defender110windshieldRear
+    {
+        mesh = vehicles/Vehicles_89defender_Body|defender_110_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+        boneWeight = trunk110_bone 1.0,
+    }
+
+    model 89defender130windshieldRear
+    {
+        mesh = vehicles/Vehicles_89defender_Body|defender_130_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    template vehicle DEF89Windshield
+    {
+        part Windshield
+        {
+            model windshieldFront
+            {
+            file = 89defenderwindshield,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.89defenderWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = DAMNWindshieldArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle DEF89Windshields110
+    {
+        template! = DEF89Windshield,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = 89defender110windshieldRear,
+            }
+            window
+            {
+            openable = true,
+            }
+                
+            itemType = Base.89defenderWindshieldRear,
+            area = TruckBed,
+            parent = TrunkDoor,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = DAMNWindshieldRearArmor,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle DEF89Windshields90
+	{
+        template! = DEF89Windshields110,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 89defender110windshieldRear,
+                offset = 0 0 0.7021,
+            }
+        }
+    }
+
+    template vehicle DEF89Windshields130
+    {
+        template! = DEF89Windshield,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+            file = 89defender130windshieldRear,
+            }
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.89defender130WindshieldRear,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                  skills = Mechanics:5,
+                  recipes = Advanced Mechanics,
+                  requireUninstalled = DEF89TruckBedAddon,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+}

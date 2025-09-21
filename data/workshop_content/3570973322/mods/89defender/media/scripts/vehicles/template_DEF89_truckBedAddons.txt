@@ -1,0 +1,156 @@
+module Base
+{
+	model 89defenderTarpCoverLid
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_130_tarp_lid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 89defenderTarpCover
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_130_tarp,
+		texture = Vehicles/Vehicles_89defender_extra,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 89defenderHardCoverLid
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_130_hardCover_lid,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	model 89defenderHardCover
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_130_hardCover,
+		texture = Vehicles/Vehicles_89defender_extra,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 89defenderRollbar
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_130_rollbar,
+		texture = Vehicles/Vehicles_89defender_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle DEF89TruckBedAddons
+	{
+		part DEF89TruckBedAddon
+		{
+			model DEF89TarpCoverLid
+			{
+				file = 89defenderTarpCoverLid,
+			}
+
+			model DEF89TarpCover
+			{
+				file = 89defenderTarpCover,
+			}
+
+			model DEF89HardCoverLid
+			{
+				file = 89defenderHardCoverLid,
+			}
+
+			model DEF89HardCover
+			{
+				file = 89defenderHardCover,
+			}
+
+			model DEF89Rollbar
+			{
+				file = 89defenderRollbar,
+			}
+
+			anim Close
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				rate = 1.00,
+			}
+
+			anim Open
+			{
+				anim = trunk_opening,
+				
+				rate = 1.00,
+			}
+
+			anim Closed
+			{
+				anim = trunk_opening,
+				
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = trunk_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		
+			category = bodywork,
+			door
+			{}
+			area = TruckBed,
+			itemType = Base.89defenderTarpCover;Base.89defenderHardCover;Base.89defenderRollbarWithToolbox,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+            container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = DEF89.InstallComplete.TruckBedAddons130,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = DEF89.UninstallComplete.TruckBedAddons130,
+			}
+			lua
+			{
+				create = DEF89.Create.TruckBedAddons130,
+				init = DEF89.Init.TruckBedAddons130,
+				update = Vehicles.Update.EngineDoor,
+			}
+		}
+	}
+}

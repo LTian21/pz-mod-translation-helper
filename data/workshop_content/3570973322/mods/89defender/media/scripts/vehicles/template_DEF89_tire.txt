@@ -1,0 +1,211 @@
+module Base
+{
+
+	model 89defenderWheel
+	{
+		mesh = vehicles/Vehicles_89defender_Wheels|defender_wheel0,
+		texture = vehicles/Vehicles_89defender_Wheel0,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 89defenderWheel1
+	{
+		mesh = vehicles/Vehicles_89defender_Wheels|defender_wheel1,
+		texture = vehicles/Vehicles_89defender_Wheel1,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle DEF89Tires
+	{
+		part TireFrontLeft
+		{
+            model Tire0
+			{
+				file = 89defenderWheel,
+			}
+            model Tire1
+			{
+				file = 89defenderWheel1,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = DEF89.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = DEF89.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = DEF89.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model Tire0
+			{
+				file = 89defenderWheel,
+			}
+            model Tire1
+			{
+				file = 89defenderWheel1,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = DEF89.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = DEF89.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = DEF89.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model Tire0
+			{
+				file = 89defenderWheel,
+			}
+            model Tire1
+			{
+				file = 89defenderWheel1,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = DEF89.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+
+            table uninstall
+			{
+				complete = DEF89.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = DEF89.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model Tire0
+			{
+				file = 89defenderWheel,
+			}
+            model Tire1
+			{
+				file = 89defenderWheel1,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+            table install
+			{
+				complete = DEF89.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = DEF89.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = DEF89.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.89defenderTire2;Base.89defenderDakarTire2,
+             
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}
+

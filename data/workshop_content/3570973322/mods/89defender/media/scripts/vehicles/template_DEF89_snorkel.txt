@@ -1,0 +1,72 @@
+module Base
+{
+	model 89defenderSnorkel
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_snorkel,
+		texture = Vehicles/Vehicles_89defender_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle DEF89Snorkel
+	{
+		part DAMNSnorkel
+        {
+        	model DEF89Snorkel
+			{
+                file = 89defenderSnorkel,
+			}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.89defenderSnorkel,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                items
+                {
+                	1
+	            		{
+	                	type = Base.Wrench,
+	                	count = 1,
+	                	keep = true,
+						equip = primary,
+	            		}
+                	}
+
+                time = 150,
+                skills = Mechanics:1,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = DEF89.InstallComplete.Snorkel,
+            }
+
+            table uninstall
+            {
+                items
+                {
+                    1
+                    	{
+			  			type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+                    	}
+                	}
+
+				time = 150,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+			    test = Vehicles.UninstallTest.Default,
+			    complete = DEF89.UninstallComplete.Snorkel,
+            }
+
+            lua
+            {
+				create = DEF89.Create.Snorkel,
+				init = DEF89.Init.Snorkel,
+			}
+		}
+	}
+}

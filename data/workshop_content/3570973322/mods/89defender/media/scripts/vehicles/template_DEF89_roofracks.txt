@@ -1,0 +1,139 @@
+module Base
+{
+
+	model 89defenderRoofrackM
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_roofrackM,
+		texture = Vehicles/Vehicles_89defender_extra,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 89defenderRoofrackMx
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_roofrackMextra,
+		texture = Vehicles/Vehicles_89defender_extra,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle DEF89RoofrackM90
+	{
+		part DEF89Roofrack
+		{
+
+			model DEF89RoofrackM
+				{
+                		file = 89defenderRoofrackM,
+				}
+			model DEF89RoofrackMx
+				{
+                		file = 89defenderRoofrackMx,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.89defenderRoofrackM,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = DEF89.InstallComplete.RoofrackM,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.RoofrackM,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = DEF89.Create.RoofrackM,
+					init = DEF89.Init.RoofrackM,
+				}
+		}
+	}
+
+	template vehicle DEF89RoofrackM110
+	{
+			template! = DEF89RoofrackM90,
+
+			part DEF89Roofrack
+	        {
+
+				model DEF89RoofrackM
+				{
+                	file = 89defenderRoofrackM,
+	                offset = 0.0000 0.0000 -0.3317,
+				}
+
+				model DEF89RoofrackMx
+				{
+                	file = 89defenderRoofrackMx,
+                	offset = 0.0000 0.0000 -0.3317,
+				}
+			}
+
+	}
+
+	template vehicle DEF89RoofrackM130
+	{
+			template! = DEF89RoofrackM90,
+
+			part DEF89Roofrack
+	        {
+
+				model DEF89RoofrackM
+				{
+                	file = 89defenderRoofrackM,
+	                offset = 0.0000 0.0000 0.1568,
+				}
+
+				model DEF89RoofrackMx
+				{
+                	file = ,
+				}
+
+			}
+
+	}
+}
+
