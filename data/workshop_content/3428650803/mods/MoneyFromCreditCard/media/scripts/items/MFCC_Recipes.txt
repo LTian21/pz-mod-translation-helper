@@ -1,0 +1,62 @@
+module MoneyFromCreditCard
+{
+	imports {
+		Base
+	}
+
+	recipe GetMoneyFromCard
+    {
+		keep CreditCard,
+		Result: Money,
+		RemoveResultItem:true,
+		Time: 20,
+		Category: Miscellaneous,
+		OnCreate: MoneyFromCreditCard.OnCreate.GetMoneyFromCard,
+		OnTest: MoneyFromCreditCard.OnTest.CheckBankTile,
+    }
+
+    recipe ChargeCreditCard
+    {
+		keep CreditCard,
+		Result: Money,
+		RemoveResultItem:true,
+		Time: 20,
+		Category: Miscellaneous,
+		OnCreate: MoneyFromCreditCard.OnCreate.ChargeCreditCard,
+		OnTest: MoneyFromCreditCard.OnTest.InventoryHasMoney,
+    }
+
+    model MoneyBundle
+	{
+		mesh = WorldItems/MoneyBundle,
+		texture = WorldItems/MoneyBundle,
+		Scale = 0.15,
+    }
+
+    item MoneyBundle
+	{
+		DisplayName = Money Bundle,
+		DisplayCategory = Junk,
+		Type = Normal,
+		Weight = 0.5,
+		Icon = MoneyBundle,
+		WorldStaticModel = MoneyBundle,
+	}
+
+	recipe BundleMoney
+    {
+		Money=100,
+		Result: MoneyBundle,
+		Time: 20,
+		Category: Miscellaneous,
+    }
+
+    recipe UnbundleMoney
+    {
+		MoneyBundle=1,
+		Result: Money=100,
+		Time: 20,
+		Category: Miscellaneous,
+    }
+
+}
