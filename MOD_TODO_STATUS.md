@@ -2,13 +2,13 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-21 20:21:17 UTC+08:00`*
+*最后更新于：`2025-09-21 23:49:46 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
-| Support_Corps | 3434464110 | 1022 |
+| Support_Corps | 3512993822 | 2959 |
 | BWardrobe | 3140453034 | 977 |
 | PompsItemsPlushies | 2792387747 | 719 |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
@@ -39,13 +39,13 @@
 | B42Hemp&Tobacco | 3404563567 | 64 |
 | cf_home | 3522009163 | 63 |
 | CustomWeight | 3391228479 | 58 |
+| KnoxEventExpanded | 3397396843 | 58 |
 | Lynx_Pack | 3470485566 | 55 |
 | ARTR_RFGP | 3397215647 | 51 |
 | LastPushTrait | 3028253067 | 46 |
 | GaussRifle | 3429953336 | 45 |
 | Operator | 3452171674 | 42 |
 | SoulFilchersBeautifyngTime | 2425267353 | 39 |
-| KnoxEventExpanded | 3397396843 | 36 |
 | RaccoonCityB42 | 3388468313 | 33 |
 | NCR_-_Trooper_Pack | 3508243687 | 31 |
 | ART_RFGP | 3396542795 | 30 |
