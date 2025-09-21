@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-20 12:17:27 UTC+08:00`*
+*最后更新于：`2025-09-21 12:17:23 UTC+08:00`*
 
 ---
 
@@ -10,7 +10,6 @@
 | :--- | :--- | :--- |
 | Support_Corps | 3434464110 | 1022 |
 | BWardrobe | 3140453034 | 977 |
-| BanditsWeekOne | 3403180543 | 821 |
 | PompsItemsPlushies | 2792387747 | 719 |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
 | AmmoMaker | 2788256295 | 460 |
@@ -36,7 +35,6 @@
 | Wallpapers | 2999595757 | 114 |
 | Vanilla_Clothing_Expansion | 3421271152 | 112 |
 | Tomb's_Goth_Hair | 3531765630 | 111 |
-| KnoxEventExpanded | 3397396843 | 101 |
 | Caster_Plus | 3457003463 | 99 |
 | BanditsAddOptions | 3412682512 | 94 |
 | Firearms | 2256623447 | 93 |
@@ -44,6 +42,7 @@
 | PWPNXB | 3400528439 | 85 |
 | Modern_&_Historical_Firearms_Bundle | 3383901556 | 84 |
 | N&C's_Narcotics | 3404956403 | 79 |
+| 89defender | 3570973322 | 75 |
 | EssentialRecipes | 3401825906 | 72 |
 | ScavengingSkill_[B42] | 3407792640 | 69 |
 | WeatherMoodles | 3565697910 | 68 |
@@ -54,10 +53,10 @@
 | ARTR_RFGP | 3397215647 | 51 |
 | LastPushTrait | 3028253067 | 46 |
 | GaussRifle | 3429953336 | 45 |
-| wandering-zombies | 2983905789 | 45 |
 | Operator | 3452171674 | 42 |
 | SoulFilchersBeautifyngTime | 2425267353 | 39 |
 | WarThunderVehicleLibrary | 3399660368 | 37 |
+| KnoxEventExpanded | 3397396843 | 36 |
 | RaccoonCityB42 | 3388468313 | 33 |
 | NCR_-_Trooper_Pack | 3508243687 | 31 |
 | ART_RFGP | 3396542795 | 30 |
@@ -69,7 +68,6 @@
 | Tactical_Weapons | 2324223029 | 24 |
 | DFMFoodMod | 3406694220 | 24 |
 | TheDivisionStuff | 3479867929 | 22 |
-| UniversalGunRepair | 2899457928 | 22 |
 | 86fordE150 | 2870394916 | 22 |
 | IndustrialRevolution | 3400131934 | 21 |
 | [B42]_Post_Apocalyptic_Weapons | 3472334215 | 20 |
@@ -99,6 +97,7 @@
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | Draw_On_Map | 2804531012 | 7 |
 | FactoryPieces | 3399263137 | 7 |
+| P4PickingMeister | 3422220305 | 7 |
 | EatSmart | 3456212729 | 7 |
 | fhqwhgads'_Motorious_Zone | 2791656602 | 7 |
 | cdda_zombie | 2749928925 | 7 |
@@ -122,7 +121,6 @@
 | Ladders | 2737665235 | 4 |
 | Check_Around | 3300688173 | 4 |
 | damnlib | 3171167894 | 4 |
-| P4PickingMeister | 3422220305 | 4 |
 | OpenAllContainers | 3465040406 | 4 |
 | 92nissanGTR | 2846036306 | 4 |
 | Cerberus_Pack | 3470478700 | 4 |
@@ -130,7 +128,6 @@
 | FunctionalAppliances2 | 3042138819 | 3 |
 | TKS42 | 3389805754 | 3 |
 | KI5trailers | 3330403100 | 3 |
-| Vanilla_MRE_-_Crafting_Recipe_-_B41 | 3100032203 | 3 |
 | LethalStealth | 3531611692 | 3 |
 | UseBeltAsWeapon | 3339423397 | 3 |
 | BM_Super_Speed_Settings | 3440221534 | 3 |
@@ -158,13 +155,11 @@
 | WeldingTorchBalanced | 3429392198 | 2 |
 | HydeCoUnlimitedCars | 3438759949 | 2 |
 | GydeTraitMagazines | 3342191739 | 2 |
-| SafeLogin | 2876897619 | 2 |
 | P4PumpPury | 2890440427 | 2 |
 | The_Defiler | 3492621786 | 2 |
 | TrustyFireAxe | 3400045232 | 2 |
 | TheyKnew_[B42] | 3387110070 | 1 |
 | JokeCustomisation | 3415451174 | 1 |
-| RechargeableBatteries | 3385623534 | 1 |
 | MiraAmmoMaker | 3441855577 | 1 |
 | BloodlustTrait | 3027121498 | 1 |
 | toppling-zombies | 3425038705 | 1 |
@@ -173,7 +168,6 @@
 | AdaWongVoice | 3401470591 | 1 |
 | [B42]_Bag_Upgrade_Ultra | 3407793320 | 1 |
 | 80manKat1 | 3248388837 | 1 |
-| MarOccupations | 3139034529 | 1 |
 | Farming_Wiki | 3473886171 | 0 |
 | P4MySoCalledBag | 2823166698 | 0 |
 | ExerciseWithCorpses | 3404074048 | 0 |
@@ -185,6 +179,7 @@
 | isoContainers | 2625625421 | 0 |
 | P4Excalibolg | 3070446764 | 0 |
 | 69camaro | 2991201484 | 0 |
+| RechargeableBatteries | 3385623534 | 0 |
 | MoodleFramework | 2859296947 | 0 |
 | WhatCanICraft | 3390169945 | 0 |
 | B42SandboxOptions | 3386906181 | 0 |
@@ -337,6 +332,7 @@
 | Frockin_Splendor!_Vol.2 | 3411888105 | 0 |
 | Voice_Ellie_Williams | 3464700263 | 0 |
 | doorsHaveAChance | 3041602364 | 0 |
+| Vanilla_MRE_-_Crafting_Recipe_-_B41 | 3100032203 | 0 |
 | Nep_PR57 | 3487312468 | 0 |
 | MyOwnWell | 3549290115 | 0 |
 | MoodleFramework | 3396446795 | 0 |
@@ -402,6 +398,7 @@
 | SixthSense | 2863908612 | 0 |
 | U.S._M998_Humvee_by_Papa_Chad | 3554424111 | 0 |
 | 73fordFalcon | 3490370700 | 0 |
+| wandering-zombies | 2983905789 | 0 |
 | [J&G]_Alpine_Multicam_Uniform | 3303746488 | 0 |
 | 93mustangSSP | 3001592312 | 0 |
 | Dreams | 1945359259 | 0 |
@@ -414,6 +411,7 @@
 | BetterSorting-42 | 3413005308 | 0 |
 | Brandernburg | 3386447602 | 0 |
 | [J&G]_SWAT_Uniform | 3457969588 | 0 |
+| MarOccupations | 3139034529 | 0 |
 | fastrip | 3414409419 | 0 |
 | P4OnTheDoor | 3056481712 | 0 |
 | 66pontiacLeMans | 3447272250 | 0 |
@@ -435,6 +433,7 @@
 | Reaper's_Hair_&_Beard | 3450583954 | 0 |
 | P4Decoholic | 3197857648 | 0 |
 | Energy_Drinks | 2674541310 | 0 |
+| UniversalGunRepair | 2899457928 | 0 |
 | B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 0 |
 | EmergencyTVChannel | 3409272479 | 0 |
 | NoirRifleSlings | 3388107363 | 0 |
@@ -480,6 +479,7 @@
 | 815Tatra | 3404869345 | 0 |
 | TMRRemoveMumble | 3100475013 | 0 |
 | 93townCar | 2932547723 | 0 |
+| BanditsWeekOne | 3403180543 | 0 |
 | B42PackMule | 3418366421 | 0 |
 | ExtraMoney | 3462306255 | 0 |
 | Map_Mod_Manager | 3360392628 | 0 |
@@ -508,6 +508,7 @@
 | 90fordF350ambulance | 2952802178 | 0 |
 | KnowYourCalories | 3257953004 | 0 |
 | AutoTailoring | 3388183573 | 0 |
+| SafeLogin | 2876897619 | 0 |
 | Read_Book_Bypassing_Level_Restrictions | 3319538177 | 0 |
 | ATA_VanDeRumba | 3432015133 | 0 |
 | Adrenaline | 2807001835 | 0 |

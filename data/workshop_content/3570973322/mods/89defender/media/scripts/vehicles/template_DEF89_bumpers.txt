@@ -1,0 +1,242 @@
+module Base
+{
+	model 89defenderFrontBumper0
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89defenderFrontBullbarA
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89defenderRearBumper110
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_110_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 89defenderRearBumper130
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_130_bumperettes,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DEF89BumpersFront
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 89defenderFrontBumper0,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 89defenderFrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.89defenderBumperFront0;Base.89defenderBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.BumperFront,
+					init = DEF89.Init.BumperFront,
+					}
+		}
+	}
+
+	template vehicle DEF89BumpersRear110
+	{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper110
+				{
+                		file = 89defenderRearBumper110,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.89defenderBumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.BumperRear110,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.BumperRear110,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.BumperRear110,
+					init = DEF89.Init.BumperRear110,
+					}
+		}
+	}
+
+    template vehicle DEF89BumpersRear130
+	{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper130
+				{
+                		file = 89defenderRearBumper130,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.89defender130Bumperettes0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.BumperRear130,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.BumperRear130,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.BumperRear130,
+					init = DEF89.Init.BumperRear130,
+					}
+		}
+	}
+
+    template vehicle DEF89BumpersRear90
+		{
+            template! = DEF89BumpersRear110,
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper110
+				{
+                		file = 89defenderRearBumper110,
+                        offset = 0 0 0.7021,
+				}
+		}
+	}
+}

@@ -1,0 +1,181 @@
+module Base
+{
+	model 89defenderMudflapsFront
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_mudflaps_front,
+		texture = Vehicles/Vehicles_89defender_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 89defenderMudflapsRear
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_mudflaps_rear,
+		texture = Vehicles/Vehicles_89defender_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DEF89Mudflaps110
+	{
+		part DAMNMudflaps
+        {
+        	model DEF89MudflapsFront
+			{
+                file = 89defenderMudflapsFront,
+			}
+
+			model DEF89MudflapsRear
+			{
+                file = 89defenderMudflapsRear,
+                offset = 0.0000 0.0000 0.0000,
+
+			}
+
+			category = Other,
+			area = TireRearRight,
+			itemType = Base.89defenderMudflaps,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                items
+                {
+                	1
+	            		{
+	                	type = Base.Wrench,
+	                	count = 1,
+	                	keep = true,
+						equip = primary,
+	            		}
+                	}
+
+                time = 150,
+                skills = Mechanics:1,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = DEF89.InstallComplete.Mudflaps,
+            }
+
+            table uninstall
+            {
+                items
+                {
+                    1
+                    	{
+			  			type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+                    	}
+                	}
+
+				time = 150,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+			    test = Vehicles.UninstallTest.Default,
+			    complete = DEF89.UninstallComplete.Mudflaps,
+            }
+
+            lua
+            {
+				create = DEF89.Create.Mudflaps,
+				init = DEF89.Init.Mudflaps,
+			}
+		}
+	}
+
+    template vehicle DEF89Mudflaps90
+	{
+        template! = DEF89Mudflaps110,
+
+		part DAMNMudflaps
+        {
+			model DEF89MudflapsRear
+			{
+                file = 89defenderMudflapsRear,
+                offset = 0.0000 0.0000 0.5500,
+            }
+        }
+	}
+
+    template vehicle DEF89Mudflaps130
+	{
+        template! = DEF89Mudflaps110,
+
+		part DAMNMudflaps
+        {
+			model DEF89MudflapsRear
+			{
+                file = 89defenderMudflapsRear,
+                offset = 0.0000 0.0000 -0.5000,
+            }
+        }
+	}
+
+    template vehicle DEF89MudflapsTrailer
+	{
+		part DAMNMudflaps
+        {
+			model DEF89MudflapsRear
+			{
+                file = 89defenderMudflapsRear,
+                offset = 0.0000 0.0000 -0.5000,
+			}
+
+			category = Other,
+			area = TireRearRight,
+			itemType = Base.89defenderMudflaps,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                items
+                {
+                	1
+	            		{
+	                	type = Base.Wrench,
+	                	count = 1,
+	                	keep = true,
+						equip = primary,
+	            		}
+                	}
+
+                time = 150,
+                skills = Mechanics:1,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = DEF89.InstallComplete.Mudflaps,
+            }
+
+            table uninstall
+            {
+                items
+                {
+                    1
+                    	{
+			  			type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+                    	}
+                	}
+
+				time = 150,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+			    test = Vehicles.UninstallTest.Default,
+			    complete = DEF89.UninstallComplete.Mudflaps,
+            }
+
+            lua
+            {
+				create = DEF89.Create.Mudflaps,
+				init = DEF89.Init.Mudflaps,
+			}
+		}
+	}
+
+}

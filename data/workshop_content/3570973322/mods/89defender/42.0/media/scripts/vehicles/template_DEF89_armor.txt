@@ -1,0 +1,662 @@
+module Base
+{
+	model 89defenderWindshieldA
+    	{
+        mesh = vehicles/Vehicles_89defender_Body|defender_windshield_A,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 89defenderWindshieldRearA
+    	{
+        mesh = vehicles/Vehicles_89defender_Body|defender_windshield_rear_A,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+		static = FALSE,
+    	}
+    model 89defenderWindowflA
+    	{
+        mesh = vehicles/Vehicles_89defender_Body|defender_window_fl_A,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 89defenderWindowfrA
+    	{
+        mesh = vehicles/Vehicles_89defender_Body|defender_window_fr_A,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 89defenderWindowrlA
+    	{
+        mesh = vehicles/Vehicles_89defender_Body|defender_window_rl_A,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 89defenderWindowrrA
+    	{
+        mesh = vehicles/Vehicles_89defender_Body|defender_window_rr_A,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+    model 89defenderWindowblA
+    	{
+        mesh = vehicles/Vehicles_89defender_Body|defender_window_bl_A,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+    model 89defenderWindowbrA
+    	{
+        mesh = vehicles/Vehicles_89defender_Body|defender_window_br_A,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle DEF89WindshieldArmor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model DEF89winda0
+				{
+                		file = 89defenderWindshieldA,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.89defenderWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = DEF89.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.WindshieldArmor,
+					init = DEF89.Init.WindshieldArmor,
+					}
+			}
+		}
+
+	template vehicle DEF89WindshieldRearArmor110
+		{
+		part DAMNWindshieldRearArmor
+        {
+
+				model DEF89windra
+				{
+                		file = 89defenderWindshieldRearA,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.89defenderWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.WindshieldRearArmor,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 600,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.WindshieldRearArmor,
+                    requireInstalled = WindshieldRear,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.WindshieldRearArmor,
+					init = DEF89.Init.WindshieldRearArmor,
+					}
+			}
+		}
+
+    template vehicle DEF89WindshieldRearArmor90
+		{
+            template! = DEF89WindshieldRearArmor110,
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model DEF89windra
+				{
+                		file = 89defenderWindshieldRearA,
+                        offset = 0 0 0.7021,
+				}
+			}
+		}
+
+	template vehicle DEF89FrontArmor
+		{
+		part DAMNFrontLeftArmor
+        {
+
+			model DEF89leftdoora
+				{
+                		file = 89defenderWindowflA,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.89defenderFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.FrontLeftArmor,
+					init = DEF89.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model DEF89rightdoora
+				{
+                		file = 89defenderWindowfrA,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.89defenderFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.FrontRightArmor,
+					init = DEF89.Init.FrontRightArmor,
+					}
+		}
+	}
+
+	template vehicle DEF89RearArmor
+		{
+
+		part DAMNRearLeftArmor
+        {
+
+			model DEF89leftdoorra
+				{
+                		file = 89defenderWindowrlA,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.89defenderRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.RearLeftArmor,
+					init = DEF89.Init.RearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model DEF89rightdoorra
+				{
+                		file = 89defenderWindowrrA,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.89defenderRearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.RearRightArmor,
+					init = DEF89.Init.RearRightArmor,
+					}
+			}
+		}
+
+	template vehicle DEF89BackArmor110
+		{
+
+		part DAMNBackLeftArmor
+        {
+
+			model DEF89leftwindowba
+				{
+                		file = 89defenderWindowblA,
+				}
+
+			area = StorageLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.89defenderBackWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+             container
+			    {
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			    }
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.BackLeftArmor,
+                	requireInstalled = WindowBackLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.BackLeftArmor,
+                    requireEmpty = true,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.BackLeftArmor,
+					init = DEF89.Init.BackLeftArmor,
+					}
+		}
+
+		part DAMNBackRightArmor
+        {
+
+			model DEF89rightwindowba
+				{
+                		file = 89defenderWindowbrA,
+				}
+
+			area = StorageRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.89defenderBackWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+            container
+			    {
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			    }
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.BackRightArmor,
+                	requireInstalled = WindowBackRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.BackRightArmor,
+                    requireEmpty = true,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.BackRightArmor,
+					init = DEF89.Init.BackRightArmor,
+					}
+			}
+		}
+
+		template vehicle DEF89BackArmor90
+		{
+			template! = DEF89BackArmor110,
+
+			part DAMNBackLeftArmor
+	        {
+
+				model DEF89leftwindowba
+					{
+	                		file = 89defenderWindowblA,
+	                		offset = 0.0000 0.0000 0.7019,
+					}
+			}
+
+			part DAMNBackRightArmor
+	        {
+
+				model DEF89rightwindowba
+					{
+	                		file = 89defenderWindowbrA,
+	                		offset = 0.0000 0.0000 0.7019,
+					}
+			}
+
+		}
+
+		template vehicle DEF89Armor90
+		{
+			template! = DEF89WindshieldArmor,
+			template! = DEF89FrontArmor,
+			template! = DEF89BackArmor90,
+			template! = DEF89WindshieldRearArmor90,
+		}
+
+		template vehicle DEF89Armor110
+		{
+			template! = DEF89WindshieldArmor,
+			template! = DEF89FrontArmor,
+			template! = DEF89RearArmor,
+			template! = DEF89BackArmor110,
+			template! = DEF89WindshieldRearArmor110,
+		}
+
+		template vehicle DEF89Armor130
+		{
+			template! = DEF89WindshieldArmor,
+			template! = DEF89FrontArmor,
+			template! = DEF89RearArmor,
+		}
+
+}

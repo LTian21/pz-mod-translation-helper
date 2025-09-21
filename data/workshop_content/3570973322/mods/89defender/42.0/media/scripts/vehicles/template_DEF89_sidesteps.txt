@@ -1,0 +1,138 @@
+module Base
+{
+
+	model 89defenderSidestepsLong
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_sidesteps1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 89defenderSidestepsShort
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_sidesteps0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	
+	template vehicle DEF89SidestepsLong
+	{
+		part DAMNSideSteps
+		{
+			
+			model DEF89step1
+			{
+				file = 89defenderSidestepsLong,
+			}
+			
+			area = GasTank,
+			itemType = Base.89defenderSidestepsLong,
+			category = Other,
+			mechanicRequireKey = true,
+            durability = 3,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = DEF89.InstallComplete.SidestepsLong,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = DEF89.UninstallComplete.SidestepsLong,
+			}
+			lua
+			{
+				init = DEF89.Init.SidestepsLong,
+				create = DEF89.Create.SidestepsLong,
+			}
+		}
+	}
+
+	template vehicle DEF89SidestepsShort
+	{
+		part DAMNSideSteps
+		{
+			
+			model DEF89step0
+			{
+				file = 89defenderSidestepsShort,
+			}
+			
+			area = GasTank,
+			itemType = Base.89defenderSidestepsShort,
+			category = Other,
+			mechanicRequireKey = true,
+            durability = 3,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = DEF89.InstallComplete.SidestepsShort,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 600,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = DEF89.UninstallComplete.SidestepsShort,
+			}
+			lua
+			{
+				init = DEF89.Init.SidestepsShort,
+				create = DEF89.Create.SidestepsShort,
+			}
+		}
+	}
+}
+

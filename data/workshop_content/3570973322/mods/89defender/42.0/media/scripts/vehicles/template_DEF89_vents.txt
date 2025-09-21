@@ -1,0 +1,75 @@
+module Base
+{
+
+	model 89defenderVentsFront
+	{
+		mesh = vehicles/Vehicles_89defender_Body|defender_vents,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle DEF89Vents
+	{
+		part DEF89Vents
+		{
+
+			model vent61181524t5
+			{
+				file = 89defenderVentsFront,
+			}
+
+			anim Close
+			{
+				anim = vents_opening,
+				reverse = TRUE,
+				rate = 0.35,
+			}
+
+			anim Open
+			{
+				anim = vents_opening,
+				rate = 0.35,
+			}
+
+			anim Closed
+			{
+				anim = vents_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = vents_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		
+			category = nodisplay,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = ,
+			}
+			anim Close
+			{
+				sound = ,
+			}
+
+            specificItem = false,
+			itemType = Base.Wrench,
+			mechanicRequireKey = true,
+            durability = 10,
+			repairMechanic = true,
+			area = Engine,
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+			}
+		}
+	}
+}
