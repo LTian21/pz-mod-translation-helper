@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-21 16:56:56 UTC+08:00`*
+*最后更新于：`2025-09-21 20:21:17 UTC+08:00`*
 
 ---
 
@@ -17,20 +17,15 @@
 | Dummy_Fluid_Mod | 3405131820 | 358 |
 | BanditRelationship | 3431259170 | 309 |
 | Legend_Craft_Evolved | 3432470769 | 304 |
-| Escape_from_Kentucky | 3439877834 | 301 |
 | Immersive_Lore | 3000924731 | 271 |
 | PZKVanillaPlusCarPack | 3217685049 | 255 |
 | SpongieOpenJackets | 2812326159 | 243 |
 | Advanced_Trajectory's_Realistic_Overhaul | 3036878362 | 238 |
 | HydeCoBees | 3430224478 | 213 |
-| Spongie_Hair | 2463184726 | 185 |
 | MeleeWeaponUpgrade_Easy | 3394923321 | 143 |
-| Yaki's_Hair_Salon_-_BASE | 2761200458 | 137 |
 | Dynamic-Traits-main | 2459400130 | 129 |
-| LWBetterElectronics | 2999183635 | 118 |
 | Wallpapers | 2999595757 | 114 |
 | Vanilla_Clothing_Expansion | 3421271152 | 112 |
-| Tomb's_Goth_Hair | 3531765630 | 111 |
 | Caster_Plus | 3457003463 | 99 |
 | BanditsAddOptions | 3412682512 | 94 |
 | Firearms | 2256623447 | 93 |
@@ -50,7 +45,6 @@
 | GaussRifle | 3429953336 | 45 |
 | Operator | 3452171674 | 42 |
 | SoulFilchersBeautifyngTime | 2425267353 | 39 |
-| WarThunderVehicleLibrary | 3399660368 | 37 |
 | KnoxEventExpanded | 3397396843 | 36 |
 | RaccoonCityB42 | 3388468313 | 33 |
 | NCR_-_Trooper_Pack | 3508243687 | 31 |
@@ -97,7 +91,6 @@
 | fhqwhgads'_Motorious_Zone | 2791656602 | 7 |
 | cdda_zombie | 2749928925 | 7 |
 | RollBack_Rain_Collector_Barrel | 3392186516 | 6 |
-| Detailed_Descriptions_for_Occupations_and_Traits | 3387957272 | 6 |
 | ExtendedSpices | 3522142755 | 6 |
 | Military_Tool_Kit | 2705406713 | 5 |
 | AllinOneBackpackingShelter | 3417917173 | 5 |
@@ -120,13 +113,13 @@
 | Cerberus_Pack | 3470478700 | 4 |
 | BetterFPS_B42 | 3423115544 | 4 |
 | FunctionalAppliances2 | 3042138819 | 3 |
+| LWBetterElectronics | 2999183635 | 3 |
 | TKS42 | 3389805754 | 3 |
 | KI5trailers | 3330403100 | 3 |
 | LethalStealth | 3531611692 | 3 |
 | UseBeltAsWeapon | 3339423397 | 3 |
 | BM_Super_Speed_Settings | 3440221534 | 3 |
 | RiskyUnarmed | 3434796669 | 3 |
-| Willowbrook_Bastion!_(items_part) | 3479667649 | 3 |
 | Buildables_Expansion | 3463117260 | 3 |
 | H.E.C.U | 3452711271 | 2 |
 | ExtraBombs | 3425787685 | 2 |
@@ -146,9 +139,6 @@
 | TableSaw | 3540297822 | 2 |
 | CombatTraits | 3427091746 | 2 |
 | WeldingTorchBalanced | 3429392198 | 2 |
-| HydeCoUnlimitedCars | 3438759949 | 2 |
-| GydeTraitMagazines | 3342191739 | 2 |
-| P4PumpPury | 2890440427 | 2 |
 | Farming_Wiki | 3473886171 | 0 |
 | P4MySoCalledBag | 2823166698 | 0 |
 | ExerciseWithCorpses | 3404074048 | 0 |
@@ -233,6 +223,7 @@
 | 89dodgeCaravan | 3034636011 | 0 |
 | 82jeepJ10 | 2886832257 | 0 |
 | Boots_Expanded | 2850935956 | 0 |
+| Tomb's_Goth_Hair | 3531765630 | 0 |
 | [B42]_Mod_Manager | 3567084868 | 0 |
 | RestoreEngineQuality | 3543612325 | 0 |
 | Nep_P10 | 3489603739 | 0 |
@@ -288,6 +279,7 @@
 | 85pontiacParisienne | 3413706334 | 0 |
 | BringOutYourDead | 3415416226 | 0 |
 | Evolving_Traits_World | 2914075159 | 0 |
+| Detailed_Descriptions_for_Occupations_and_Traits | 3387957272 | 0 |
 | [J&G]_Forest_Multicam_Uniform | 3309971624 | 0 |
 | The_Last_Of_AVA_Clothing | 3477685382 | 0 |
 | B42Makefruitinjar | 3432006285 | 0 |
@@ -315,6 +307,7 @@
 | 82porsche911 | 3379334330 | 0 |
 | Simple_Wall_Building | 3429904483 | 0 |
 | 63beetle | 3005903549 | 0 |
+| Spongie_Hair | 2463184726 | 0 |
 | ATA_Bus | 3402812859 | 0 |
 | [J&G]_Caution_Uniform | 3369825662 | 0 |
 | MakeBurlap | 3409478949 | 0 |
@@ -450,6 +443,7 @@
 | BoneScavenger | 3399292171 | 0 |
 | 04vwTouran | 3478633453 | 0 |
 | Vanilla_Gear_Expanded | 3401134276 | 0 |
+| WarThunderVehicleLibrary | 3399660368 | 0 |
 | Outdoor_TIles | 3430305726 | 0 |
 | NoMoreSicknessInsideVehicle | 3405033818 | 0 |
 | EfficiencySkillMod | 3374408921 | 0 |
@@ -478,6 +472,7 @@
 | TMRRemoveMumble | 3100475013 | 0 |
 | 93townCar | 2932547723 | 0 |
 | BanditsWeekOne | 3403180543 | 0 |
+| Yaki's_Hair_Salon_-_BASE | 2761200458 | 0 |
 | B42PackMule | 3418366421 | 0 |
 | ExtraMoney | 3462306255 | 0 |
 | Map_Mod_Manager | 3360392628 | 0 |
@@ -492,6 +487,7 @@
 | 75grandPrix | 3213391371 | 0 |
 | VehicleClassOverhaul | 3407507873 | 0 |
 | [B42]_JunkFoodsPH | 3390901679 | 0 |
+| HydeCoUnlimitedCars | 3438759949 | 0 |
 | MWPWeapons | 2732407704 | 0 |
 | S4EcoPack | 3480405054 | 0 |
 | UH-1BHelicopter | 3409723807 | 0 |
@@ -500,17 +496,20 @@
 | ATA_Samara | 3432014439 | 0 |
 | Project_Summer_Car | 3564950449 | 0 |
 | B42Eggjar | 3444384263 | 0 |
+| GydeTraitMagazines | 3342191739 | 0 |
 | 86chevyCUCV | 3428008364 | 0 |
 | TowTruckMod | 3446203945 | 0 |
 | Erikas_Furniture_Store | 3363546437 | 0 |
 | AmmoLootDropB42 | 3389050623 | 0 |
 | 90fordF350ambulance | 2952802178 | 0 |
+| Willowbrook_Bastion!_(items_part) | 3479667649 | 0 |
 | KnowYourCalories | 3257953004 | 0 |
 | AutoTailoring | 3388183573 | 0 |
 | 86fordE150 | 2870394916 | 0 |
 | SafeLogin | 2876897619 | 0 |
 | Read_Book_Bypassing_Level_Restrictions | 3319538177 | 0 |
 | ATA_VanDeRumba | 3432015133 | 0 |
+| P4PumpPury | 2890440427 | 0 |
 | Adrenaline | 2807001835 | 0 |
 | 67commando | 2478247379 | 0 |
 | [B42]_FlipVehiclePlusTrailer | 3430172149 | 0 |
