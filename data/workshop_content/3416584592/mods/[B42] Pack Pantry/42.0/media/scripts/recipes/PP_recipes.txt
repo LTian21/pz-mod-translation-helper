@@ -1,0 +1,392 @@
+module Base
+{
+    imports { ExtraCraft }
+/***** BASE *****/	
+    craftRecipe PP-OpenCannedFood {
+        timedAction = OpenTinCan,
+        time = 100,
+        tags = InHandCraft;CanBeDoneInDark,
+		category = Canning,
+        inputs
+        {
+            item 1 tags[CanOpener] mode:keep flags[MayDegradeLight],
+            item 1 [ExtraCraft.CannedCarrots;ExtraCraft.CannedTomatos;ExtraCraft.CannedPotatos;ExtraCraft.CannedPeaches;ExtraCraft.CannedPineapples;ExtraCraft.CannedFishFillet;ExtraCraft.CannedBass;ExtraCraft.CannedBluegill;ExtraCraft.CannedCatfish;ExtraCraft.CannedPerch;ExtraCraft.CannedSauger;ExtraCraft.CannedSunfish;ExtraCraft.CannedWalleye] mappers[canSorts] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 mapper:canSorts,
+        }
+        itemMapper canSorts
+        {
+            ExtraCraft.CannedCarrotsOpen    = ExtraCraft.CannedCarrots,
+            ExtraCraft.CannedTomatosOpen    = ExtraCraft.CannedTomatos,
+            ExtraCraft.CannedPotatosOpen    = ExtraCraft.CannedPotatos,
+            ExtraCraft.CannedPeachesOpen    = ExtraCraft.CannedPeaches,
+            ExtraCraft.CannedPineapplesOpen = ExtraCraft.CannedPineapples,
+            
+            ExtraCraft.CannedFishFilletOpen = ExtraCraft.CannedFishFillet, 
+            ExtraCraft.CannedBassOpen       = ExtraCraft.CannedBass,
+            ExtraCraft.CannedBluegillOpen   = ExtraCraft.CannedBluegill,
+            ExtraCraft.CannedCatfishOpen    = ExtraCraft.CannedCatfish,
+            ExtraCraft.CannedPerchOpen      = ExtraCraft.CannedPerch, 
+            ExtraCraft.CannedSaugerOpen     = ExtraCraft.CannedSauger, 
+            ExtraCraft.CannedSunfishOpen    = ExtraCraft.CannedSunfish, 
+            ExtraCraft.CannedWalleyeOpen    = ExtraCraft.CannedWalleye,             
+        } }
+    
+    craftRecipe PP-OpenCannedFoodWithKnifeOrSharpStoneFlake{
+		Time = 80,
+		timedAction = OpenTinCanWithKnife,
+		OnCreate = Recipe.OnCreate.OpenCan,
+		ToolTip = Tooltip_Recipe_OpenCanWithKnife,
+		Tags = InHandCraft;Cooking,
+		category = Canning,
+		inputs
+		{
+			item 1 tags[SharpKnife] mode:keep flags[Prop1;MayDegrade;IsNotDull],
+            item 1 [ExtraCraft.CannedCarrots;ExtraCraft.CannedTomatos;ExtraCraft.CannedPotatos;ExtraCraft.CannedPeaches;ExtraCraft.CannedPineapples;ExtraCraft.CannedFishFillet;ExtraCraft.CannedBass;ExtraCraft.CannedBluegill;ExtraCraft.CannedCatfish;ExtraCraft.CannedPerch;ExtraCraft.CannedSauger;ExtraCraft.CannedSunfish;ExtraCraft.CannedWalleye] mappers[foodType] flags[Prop2],
+		}
+		outputs
+		{
+			item 1 mapper:foodType,
+		}
+		itemMapper foodType
+		{
+            ExtraCraft.CannedCarrotsOpen    = ExtraCraft.CannedCarrots,
+            ExtraCraft.CannedTomatosOpen    = ExtraCraft.CannedTomatos,
+            ExtraCraft.CannedPotatosOpen    = ExtraCraft.CannedPotatos,
+            ExtraCraft.CannedPeachesOpen    = ExtraCraft.CannedPeaches,
+            ExtraCraft.CannedPineapplesOpen = ExtraCraft.CannedPineapples,
+            
+            ExtraCraft.CannedFishFilletOpen = ExtraCraft.CannedFishFillet, 
+            ExtraCraft.CannedBassOpen       = ExtraCraft.CannedBass,
+            ExtraCraft.CannedBluegillOpen   = ExtraCraft.CannedBluegill,
+            ExtraCraft.CannedCatfishOpen    = ExtraCraft.CannedCatfish, 
+            ExtraCraft.CannedPerchOpen      = ExtraCraft.CannedPerch,
+            ExtraCraft.CannedSaugerOpen     = ExtraCraft.CannedSauger, 
+            ExtraCraft.CannedSunfishOpen    = ExtraCraft.CannedSunfish, 
+            ExtraCraft.CannedWalleyeOpen    = ExtraCraft.CannedWalleye, 
+		} }
+    
+    craftRecipe PP-SealCannedFood {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        tags 		= InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+		category 	= Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.OpenBeans;Base.CannedBologneseOpen;Base.CannedCarrotsOpen;Base.CannedChiliOpen;Base.CannedCornedBeefOpen;Base.CannedCornOpen;Base.CannedFruitCocktailOpen;Base.CannedFruitBeverageOpen;Base.CannedMilkOpen;Base.CannedMushroomSoupOpen;Base.CannedPeachesOpen;Base.CannedPeasOpen;Base.CannedPineappleOpen;Base.CannedPotatoOpen;Base.CannedSardinesOpen;Base.TinnedSoupOpen;Base.CannedTomatoOpen;Base.TunaTinOpen;Base.DogfoodOpen;ExtraCraft.CannedCarrotsOpen;ExtraCraft.CannedTomatosOpen;ExtraCraft.CannedPotatosOpen;ExtraCraft.CannedPeachesOpen;ExtraCraft.CannedPineapplesOpen] mappers[canSorts] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 mapper:canSorts,
+        }
+        itemMapper canSorts
+        {
+            Base.TinnedBeans 			= Base.OpenBeans,
+            Base.CannedBolognese 		= Base.CannedBologneseOpen,
+            Base.CannedCarrots2 		= Base.CannedCarrotsOpen,
+            Base.CannedChili			= Base.CannedChiliOpen,
+            Base.CannedCornedBeef		= Base.CannedCornedBeefOpen,
+            Base.CannedCorn				= Base.CannedCornOpen,
+            Base.CannedFruitCocktail	= Base.CannedFruitCocktailOpen,
+            Base.CannedFruitBeverage	= Base.CannedFruitBeverageOpen,
+            Base.CannedMilk				= Base.CannedMilkOpen,
+            Base.CannedMushroomSoup		= Base.CannedMushroomSoupOpen,
+            Base.CannedPeaches			= Base.CannedPeachesOpen,
+            Base.CannedPeas				= Base.CannedPeasOpen,
+            Base.CannedPineapple		= Base.CannedPineappleOpen,
+            Base.CannedPotato2			= Base.CannedPotatoOpen,
+            Base.CannedSardines			= Base.CannedSardinesOpen,
+            Base.TinnedSoup				= Base.TinnedSoupOpen,
+            Base.CannedTomato2			= Base.CannedTomatoOpen,
+            Base.TunaTin				= Base.TunaTinOpen,
+            Base.Dogfood				= Base.DogfoodOpen,
+
+            ExtraCraft.CannedCarrots    = ExtraCraft.CannedCarrotsOpen,
+            ExtraCraft.CannedTomatos    = ExtraCraft.CannedTomatosOpen,
+            ExtraCraft.CannedPotatos    = ExtraCraft.CannedPotatosOpen,
+            ExtraCraft.CannedPeaches    = ExtraCraft.CannedPeachesOpen,
+            ExtraCraft.CannedPineapples = ExtraCraft.CannedPineapplesOpen,
+
+            ExtraCraft.CannedFishFillet     = ExtraCraft.CannedFishFilletOpen, 
+            ExtraCraft.CannedBass           = ExtraCraft.CannedBassOpen,
+            ExtraCraft.CannedBluegill       = ExtraCraft.CannedBluegillOpen,
+            ExtraCraft.CannedCatfish        = ExtraCraft.CannedCatfishOpen, 
+            ExtraCraft.CannedPerch          = ExtraCraft.CannedPerchOpen,
+            ExtraCraft.CannedSauger         = ExtraCraft.CannedSaugerOpen, 
+            ExtraCraft.CannedSunfish        = ExtraCraft.CannedSunfishOpen, 
+            ExtraCraft.CannedWalleye        = ExtraCraft.CannedWalleyeOpen, 
+        } }
+
+/***** VEGETABLES *****/    
+    craftRecipe PP-PreserveCarrots {
+        timedAction     = OpenTinCan,
+        time 	    = 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Carrots] mappers[foodSorts] mode:destroy,
+            item 1 tags[Vinegar],
+			item 1 [Base.Salt],
+			item 1 [*],
+			-fluid 0.3 [Water],
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedCarrots,
+        } }
+
+    craftRecipe PP-PreserveTomatos {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [farming.Tomato] mode:destroy,
+            item 1 tags[Vinegar],
+			item 1 [Base.Salt],
+			item 1 [*],
+			-fluid 0.3 [Water],
+        }
+        outputs
+        {
+            item 1 Base.CannedTomato2,
+        } }
+
+    craftRecipe PP-PreservePotatos {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [farming.Potato] mode:destroy,
+            item 1 tags[Vinegar],
+			item 1 [Base.Salt],
+			item 1 [*],
+			-fluid 0.3 [Water],
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedPotatos,
+        } }
+    
+    craftRecipe PP-PreservePeaches {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Peach] mappers[foodSorts] mode:destroy,
+            item 1 tags[Vinegar],
+			item 1 [Base.Salt],
+			item 1 [*],
+			-fluid 0.3 [Water],
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedPeaches,
+        } }
+
+    craftRecipe PP-PreservePineapples {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Pineapple] mappers[foodSorts] mode:destroy,
+            item 1 tags[Vinegar],
+			item 1 [Base.Salt],
+			item 1 [*],
+			-fluid 0.3 [Water],
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedPineapples,
+        } }
+
+/**** FISH ****/
+    craftRecipe PP-PreserveFishFillet {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.FishFillet] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedFishFillet,
+        } }
+
+    craftRecipe PP-PreserveBass {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.WhiteBass;Base.LargemouthBass;Base.SmallmouthBass;Base.SpottedBass;Base.StripedBass] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedBass,
+        } }
+
+    craftRecipe PP-PreserveBluegill {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Bluegill] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedBluegill,
+        } }
+
+    craftRecipe PP-PreserveCatfish {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.BlueCatfish;Base.ChannelCatfish;Base.FlatheadCatfish] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedCatfish,
+        } }
+    
+    craftRecipe PP-PreserveCrappie {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.BlackCrappie;Base.WhiteCrappie] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedCrappie,
+        } }
+
+    craftRecipe PP-PreservePerch {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.YellowPerch] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedPerch,
+        } }
+
+    craftRecipe PP-PreserveSauger {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Sauger] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedSauger,
+        } }
+
+    craftRecipe PP-PreserveSunfish {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.RedearSunfish;Base.GreenSunfish] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedSunfish,
+        } }
+
+    craftRecipe PP-PreserveWalleye {
+        timedAction = OpenTinCan,
+        time 		= 150,
+        Tags        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward     = Cooking:3,
+        category    = Canning,
+        inputs
+        {
+            item 1 [ExtraCraft.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Walleye] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 ExtraCraft.CannedWalleye,
+        } }
+}
