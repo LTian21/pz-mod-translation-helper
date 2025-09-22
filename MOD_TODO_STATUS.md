@@ -2,14 +2,13 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-22 02:33:43 UTC+08:00`*
+*最后更新于：`2025-09-22 12:18:25 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
 | BWardrobe | 3140453034 | 977 |
-| Support_Corps | 3512993822 | 849 |
 | PompsItemsPlushies | 2792387747 | 719 |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
 | AmmoMaker | 2788256295 | 460 |
@@ -202,6 +201,7 @@
 | P4AddictedToWeight | 2604943386 | 0 |
 | P4HasBeenRead | 2544353492 | 0 |
 | aliceSvanillaDuffelBag | 2959854619 | 0 |
+| Support_Corps | 3512993822 | 0 |
 | INeedMoreStyle_CE | 2861393067 | 0 |
 | ATA_Mustang_66 | 3405574146 | 0 |
 | Frockin_Wiseguys | 3538760023 | 0 |
