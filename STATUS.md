@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-09-22 15:35:43 UTC+08:00`*
+*最后更新于：`2025-09-22 19:54:22 UTC+08:00`*
 
 ---
 
@@ -9,20 +9,21 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **当前待办总数** | ``7050`` 条 |
-| **已支持 Mod 数量** | ``530`` 个 |
+| **当前待办总数** | ``6540`` 条 |
+| **已支持 Mod 数量** | ``532`` 个 |
 
 ---
 
 ### ⚡ **最近一次更新摘要**
 
-*   **新增待办翻译**: `8` 条
-*   **内容变更的 Mod**: `5` 个
-    *   `RaccoonCityB42 (ID: 3388468313)`
-    *   `ART_RFGP (ID: 3396542795)`
-    *   `Vanilla_Clothing_Expansion (ID: 3421271152)`
-    *   `Support_Corps (ID: 3512993822)`
-    *   `LegendaryDuffelbag (ID: 3558839307)`
+*   **新增待办翻译**: `63` 条
+*   **内容变更的 Mod**: `42` 个
+    *   `AxesRecrafting (ID: 2211423190)`
+    *   `Ladders (ID: 2737665235)`
+    *   `Vehicle_Repair_Overhaul (ID: 2757712197)`
+    *   `Draw_On_Map (ID: 2804531012)`
+    *   `HandCrankFlashlights (ID: 2897115343)`
+    *   ... *等*
 
 ---
 

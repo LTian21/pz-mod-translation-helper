@@ -1,0 +1,139 @@
+module WQS_recipe_list
+{
+
+  imports {
+      Base
+  }
+
+/*
+
+ recipe Craft Advanced Antenna
+    {
+        ElectronicsScrap=6,
+        Radio.RadioReceiver,
+        Radio.RadioTransmitter,
+        Radio.ElectricWire=4,
+        Aluminum=6,
+        Screws=25,
+
+        MetalBar=8,
+        MetalPipe=3,
+        SheetMetal=4,
+        SmallSheetMetal=4,
+        BlowTorch=2,
+        keep [Recipe.GetItemTypes.WeldingMask],
+
+        keep [Recipe.GetItemTypes.Screwdriver],
+        NoBrokenItems:true,
+        Result:WQS_item_list.wqs_radioantenna,
+        SkillRequired:Electricity=3;MetalWelding=2,   
+        Time:150.0,
+       
+        OnGiveXP:Recipe.OnGiveXP.RadioCraft,
+        Category:Electrical,
+    }
+
+
+    recipe Draw Extraction Zone Map
+    {      
+        SheetPaper2/Notebook/Journal,    
+        keep [Recipe.GetItemTypes.Write],
+
+        Result:wqs_map_dynamic,
+        Sound:MapAddSymbol,
+        Time:100.0
+    }
+
+
+
+   recipe Assemble & update repeater map
+       {     
+        WQS_item_list.wqs_repeater_location_fragment=4,
+        keep [Recipe.GetItemTypes.Write],
+
+        Result:WQS_item_list.wqs_repeater_map_dynamic,
+        RemoveResultItem:true,
+        OnCreate:WQS_Recipe.GenerateTargetRepeater,
+        Sound:MapAddSymbol,
+        Time:100.0
+    }
+*/
+
+
+
+craftRecipe CraftAdvancedRadioAntenna
+	{
+        timedAction = DismantleElectrical,
+		Time = 150,	
+		SkillRequired = Electricity:3;MetalWelding:2,		
+		Tags = AnySurfaceCraft;Extraction,
+        category = Extraction,    
+		xpAward = Electricity:10;MetalWelding:10,
+		inputs
+		{
+			item 6 [Base.ElectronicsScrap] flags[NoBrokenItems],
+			item 1 [Base.RadioReceiver] flags[NoBrokenItems],
+			item 1 [Base.RadioTransmitter] flags[NoBrokenItems],
+			item 4 [Base.ElectricWire] flags[NoBrokenItems],
+			item 2 [Base.Aluminum] flags[NoBrokenItems],		
+			item 25 [Base.Screws] flags[NoBrokenItems],
+
+			item 8 [Base.MetalBar] flags[NoBrokenItems],
+			item 3 [Base.MetalPipe] flags[NoBrokenItems],
+			item 4 [Base.SheetMetal] flags[NoBrokenItems],
+			item 4 [Base.SmallSheetMetal] flags[NoBrokenItems],
+			item 2 [Base.BlowTorch] flags[NoBrokenItems],   
+					
+			item 1 tags[WeldingMask] mode:keep flags[MayDegradeLight;NoBrokenItems],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight;NoBrokenItems],
+            
+		}
+		outputs
+		{
+			item 1 WQS_item_list.wqs_radioantenna,
+		}
+	}
+
+   craftRecipe DrawExtractionZoneMap
+    {      
+        timedAction = Making,
+		Time = 100,
+        Tags = AnySurfaceCraft;Extraction,
+        category = Extraction,
+		inputs
+		{
+			item 1 [Base.SheetPaper2;Base.Notebook;Base.Journal],       
+			/* item 1 [Base.Pencil;Base.Pen] mode:keep flags[IsNotDull] flags[MayDegradeLight],   */
+            item 1 tags[Write] mode:keep,
+		}
+		outputs
+		{
+			item 1 WQS_item_list.wqs_map_dynamic,
+		}        
+    }
+
+  
+	craftRecipe AssembleAndUpdateRepeaterMap
+	{
+        timedAction = Making,
+		Time = 100,
+		OnCreate = WQS_Recipe.GenerateTargetRepeater,      
+		Tags = AnySurfaceCraft;Extraction,
+        category = Extraction,
+		inputs
+		{
+			item 4 [WQS_item_list.wqs_repeater_location_fragment],
+            item 1 [Base.DuctTape],
+            /*item 1 [Recipe.GetItemTypes.Write] mode:keep,*/
+		}
+		outputs
+		{
+			item 1 WQS_item_list.wqs_repeater_map_dynamic,
+		}
+	}
+
+
+
+
+
+}		

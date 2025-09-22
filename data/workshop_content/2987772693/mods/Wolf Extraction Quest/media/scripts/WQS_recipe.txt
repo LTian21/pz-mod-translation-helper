@@ -1,0 +1,77 @@
+module WQS_recipe_list{
+
+  imports {
+      Base
+  }
+
+
+ recipe Craft Advanced Antenna
+    {
+        ElectronicsScrap=6,
+        Radio.RadioReceiver,
+        Radio.RadioTransmitter,
+        Radio.ElectricWire=4,
+        Aluminum=6,
+        Screws=25,
+
+        MetalBar=8,
+        MetalPipe=3,
+        SheetMetal=4,
+        SmallSheetMetal=4,
+        BlowTorch=2,
+        keep [Recipe.GetItemTypes.WeldingMask],
+
+        keep [Recipe.GetItemTypes.Screwdriver],
+        NoBrokenItems:true,
+        Result:WQS_item_list.wqs_radioantenna,
+        SkillRequired:Electricity=3;MetalWelding=2,   
+        Time:150.0,
+       
+        OnGiveXP:Recipe.OnGiveXP.RadioCraft,
+        Category:Electrical,
+    }
+
+
+    recipe Draw Extraction Zone Map
+    {      
+        SheetPaper2/Notebook/Journal,
+         /* keep Pencil/BluePen/Pen/RedPen/Crayons/BicPen,  */
+        keep [Recipe.GetItemTypes.Write],
+
+        Result:wqs_map_dynamic,
+        Sound:MapAddSymbol,
+        Time:100.0
+    }
+
+
+
+   recipe Assemble & update repeater map
+       {     
+        WQS_item_list.wqs_repeater_location_fragment=4,
+        keep [Recipe.GetItemTypes.Write],
+
+        Result:WQS_item_list.wqs_repeater_map_dynamic,
+        RemoveResultItem:true,
+        OnCreate:WQS_Recipe.GenerateTargetRepeater,
+        Sound:MapAddSymbol,
+        Time:100.0
+    }
+    
+
+
+/*
+    recipe Draw Extraction Zone Map OLD
+    {      
+        SheetPaper2/Notebook/Journal,
+         /* keep Pencil/BluePen/Pen/RedPen/Crayons/BicPen,  */
+        keep [Recipe.GetItemTypes.Write],
+
+        Result:Paperclip,
+        RemoveResultItem:true,
+        Sound:MapAddSymbol,
+        Time:100.0,
+        OnCreate:WQS_Recipe.DrawExtractionMap
+    }
+*/
+
+}		
