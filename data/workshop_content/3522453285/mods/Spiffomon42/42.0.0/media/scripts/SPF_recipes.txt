@@ -1,0 +1,40 @@
+module SPF
+{
+	imports
+	{
+		Base
+	}
+	craftRecipe OpenSpiffoBox
+	{
+        timedAction = OpenAmmoBox,
+		Time = 15,
+        category = Packing,
+        Tags = InHandCraft;CanBeDoneInDark,
+		OnCreate = Recipe.OnCreate.GetSpiffoChance,
+		inputs
+		{
+			item 1 [SPF.SpiffoBox],
+		}
+		outputs
+		{
+			item 1 SPF.SpiffoBoxEmpty,
+		}
+	}
+	craftRecipe RepairSpiffo
+	{
+		timedAction = Sew,
+		Time = 30,
+		category = Tailoring,
+		Tags = InHandCraft,
+		inputs
+		{
+			item 1 tags[SewingNeedle] mode:keep,
+			item 2 tags[Thread],
+			item 1 [SPF.RippedSpiffo],
+		}
+		outputs
+		{
+			item 1 Base.Spiffo,
+		}
+	}
+}
