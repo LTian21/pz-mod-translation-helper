@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-22 19:54:22 UTC+08:00`*
+*最后更新于：`2025-09-23 01:31:06 UTC+08:00`*
 
 ---
 
@@ -15,27 +15,21 @@
 | PompsItemsFood | 2792348686 | 394 |
 | Immersive_Lore | 3000924731 | 271 |
 | PZKVanillaPlusCarPack | 3217685049 | 255 |
-| SpongieOpenJackets | 2812326159 | 243 |
-| HydeCoBees | 3430224478 | 213 |
 | MeleeWeaponUpgrade_Easy | 3394923321 | 143 |
-| Dynamic-Traits-main | 2459400130 | 129 |
 | Wolf_Extraction_Quest | 2987772693 | 126 |
 | Caster_Plus | 3457003463 | 99 |
 | Firearms | 2256623447 | 93 |
 | StandardizedVehicleUpgrades3Core | 3403490889 | 90 |
 | PWPNXB | 3400528439 | 85 |
 | Modern_&_Historical_Firearms_Bundle | 3383901556 | 84 |
-| N&C's_Narcotics | 3404956403 | 79 |
+| N&C's_Narcotics | 3404956403 | 84 |
 | EssentialRecipes | 3401825906 | 72 |
-| ScavengingSkill_[B42] | 3407792640 | 69 |
 | WeatherMoodles | 3565697910 | 68 |
 | B42Hemp&Tobacco | 3404563567 | 64 |
 | [B42]_Pack_Pantry | 3416584592 | 63 |
 | cf_home | 3522009163 | 63 |
 | KnoxEventExpanded | 3397396843 | 58 |
-| Lynx_Pack | 3470485566 | 55 |
 | ZevonMedievalArmory | 3540834058 | 50 |
-| LastPushTrait | 3028253067 | 46 |
 | GaussRifle | 3429953336 | 45 |
 | Operator | 3452171674 | 42 |
 | SoulFilchersBeautifyngTime | 2425267353 | 39 |
@@ -57,7 +51,6 @@
 | EFTBackpacks | 3432928943 | 13 |
 | MinimapStyleOptions | 3526517370 | 13 |
 | ModTemplate | 3026307069 | 11 |
-| Gunpoint_Redemption | 3078291265 | 11 |
 | Herbalist | 2875059598 | 11 |
 | DivisionBackpack | 3391306957 | 11 |
 | MilitaryPonchosRELOADED | 3439247001 | 11 |
@@ -69,8 +62,6 @@
 | HaloArmor | 3507919075 | 10 |
 | BasicVan | 3459200930 | 9 |
 | ImmersiveSolarArrays | 2969478819 | 9 |
-| FunctionalGutters | 3439305933 | 9 |
-| KickScooter | 3453879909 | 8 |
 | Zombaroid | 3519916139 | 8 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | Support_Corps | 3512993822 | 7 |
@@ -90,10 +81,10 @@
 | FunctionalAppliances2 | 3042138819 | 3 |
 | LWBetterElectronics | 2999183635 | 3 |
 | TKS42 | 3389805754 | 3 |
-| KI5trailers | 3330403100 | 3 |
 | LethalStealth | 3531611692 | 3 |
-| Check_Around | 3300688173 | 2 |
 | CustomWeight | 3391228479 | 1 |
+| SpongieOpenJackets | 2812326159 | 1 |
+| HydeCoBees | 3430224478 | 1 |
 | Farming_Wiki | 3473886171 | 0 |
 | P4MySoCalledBag | 2823166698 | 0 |
 | ExerciseWithCorpses | 3404074048 | 0 |
@@ -123,6 +114,7 @@
 | SimpleSkillBooks | 3291799176 | 0 |
 | EasyLaundry | 2925034918 | 0 |
 | P4LoveAndPerfume | 2842359380 | 0 |
+| Gunpoint_Redemption | 3078291265 | 0 |
 | ChainToChain | 3413713793 | 0 |
 | pogoclothing_mod | 3058134369 | 0 |
 | AutoMechanics | 3387539308 | 0 |
@@ -194,6 +186,7 @@
 | Nep_P10 | 3489603739 | 0 |
 | RepairableWindows | 3378304610 | 0 |
 | PFO_Caravan_Shotgun | 3400681835 | 0 |
+| InjuryIndicator | 3565698092 | 0 |
 | Mad_Crafter | 3418701509 | 0 |
 | WaterPipes | 3546314080 | 0 |
 | MiniHealthPanel | 2866258937 | 0 |
@@ -281,6 +274,7 @@
 | [J&G]_XKU_Uniform | 3276134387 | 0 |
 | SmartHutch | 3556857572 | 0 |
 | Spongie_Character_Retexture_-_Customisation | 3340255334 | 0 |
+| KI5trailers | 3330403100 | 0 |
 | 82porsche911 | 3379334330 | 0 |
 | Simple_Wall_Building | 3429904483 | 0 |
 | 63beetle | 3005903549 | 0 |
@@ -295,6 +289,7 @@
 | Frockin_Splendor!_Vol.2 | 3411888105 | 0 |
 | Voice_Ellie_Williams | 3464700263 | 0 |
 | doorsHaveAChance | 3041602364 | 0 |
+| Lynx_Pack | 3470485566 | 0 |
 | Vanilla_MRE_-_Crafting_Recipe_-_B41 | 3100032203 | 0 |
 | Nep_PR57 | 3487312468 | 0 |
 | MyOwnWell | 3549290115 | 0 |
@@ -319,12 +314,14 @@
 | PartySystem | 3395761583 | 0 |
 | [B42]_Bag_Upgrade_Ultra | 3407793320 | 0 |
 | B42_Rain's_Axes_&_Blades | 3388380529 | 0 |
+| KickScooter | 3453879909 | 0 |
 | StairsAlert | 3044807092 | 0 |
 | Mexiox's_-_Mexican_Firearm_Weapons | 2882852956 | 0 |
 | PlaidSherryDress | 3419265871 | 0 |
 | Automatic_Stove_Shutoff | 3526968739 | 0 |
 | DrivingSkill_[B42] | 3407791878 | 0 |
 | TrueMusicJukebox | 3398874593 | 0 |
+| Check_Around | 3300688173 | 0 |
 | 69mini | 2937786633 | 0 |
 | ReactiveSoundEvents | 2969551071 | 0 |
 | MoreMaps | 3390897023 | 0 |
@@ -345,6 +342,7 @@
 | FireTCMusic8090 | 3444726475 | 0 |
 | LivBaireBaseballCap | 3477662795 | 0 |
 | H&K_VP70 | 2470321383 | 0 |
+| ScavengingSkill_[B42] | 3407792640 | 0 |
 | A&M_New_Frontier | 3387569160 | 0 |
 | eris_food_expiry | 3392259028 | 0 |
 | PipBoy3000_-_Main | 3461031530 | 0 |
@@ -387,6 +385,7 @@
 | Brandernburg | 3386447602 | 0 |
 | [J&G]_SWAT_Uniform | 3457969588 | 0 |
 | BM_Super_Speed_Settings | 3440221534 | 0 |
+| Dynamic-Traits-main | 2459400130 | 0 |
 | MarOccupations | 3139034529 | 0 |
 | ImmersiveSuicide | 3426448380 | 0 |
 | TableSaw | 3540297822 | 0 |
@@ -416,6 +415,7 @@
 | Reaper's_Hair_&_Beard | 3450583954 | 0 |
 | P4Decoholic | 3197857648 | 0 |
 | Energy_Drinks | 2674541310 | 0 |
+| Spiffomon42 | 3522453285 | 0 |
 | UniversalGunRepair | 2899457928 | 0 |
 | B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 0 |
 | Tikitown | 3037854728 | 0 |
@@ -482,6 +482,7 @@
 | 91geoMetro | 3008795514 | 0 |
 | P4MySoCalledSnack | 2877535263 | 0 |
 | TLOAWolfCut | 3477669563 | 0 |
+| LastPushTrait | 3028253067 | 0 |
 | KillCount | 2553809727 | 0 |
 | 75grandPrix | 3213391371 | 0 |
 | VehicleClassOverhaul | 3407507873 | 0 |
@@ -539,3 +540,4 @@
 | TrustyFireAxe | 3400045232 | 0 |
 | P4SeesawGame | 3515515643 | 0 |
 | SafeWayHamlet | 3533315055 | 0 |
+| FunctionalGutters | 3439305933 | 0 |
