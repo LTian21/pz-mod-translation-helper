@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-22 12:18:25 UTC+08:00`*
+*最后更新于：`2025-09-22 15:35:43 UTC+08:00`*
 
 ---
 
@@ -21,7 +21,6 @@
 | MeleeWeaponUpgrade_Easy | 3394923321 | 143 |
 | Dynamic-Traits-main | 2459400130 | 129 |
 | Wallpapers | 2999595757 | 114 |
-| Vanilla_Clothing_Expansion | 3421271152 | 112 |
 | Caster_Plus | 3457003463 | 99 |
 | Firearms | 2256623447 | 93 |
 | StandardizedVehicleUpgrades3Core | 3403490889 | 90 |
@@ -37,13 +36,13 @@
 | KnoxEventExpanded | 3397396843 | 58 |
 | Lynx_Pack | 3470485566 | 55 |
 | ARTR_RFGP | 3397215647 | 51 |
+| ZevonMedievalArmory | 3540834058 | 50 |
 | LastPushTrait | 3028253067 | 46 |
 | GaussRifle | 3429953336 | 45 |
 | Operator | 3452171674 | 42 |
 | SoulFilchersBeautifyngTime | 2425267353 | 39 |
-| RaccoonCityB42 | 3388468313 | 33 |
+| RaccoonCityB42 | 3388468313 | 34 |
 | NCR_-_Trooper_Pack | 3508243687 | 31 |
-| ART_RFGP | 3396542795 | 30 |
 | B42Survival | 3402516345 | 29 |
 | Training | 3417621776 | 29 |
 | FRUsedCarsAnimAlpha | 2959472220 | 28 |
@@ -77,6 +76,7 @@
 | Zombaroid | 3519916139 | 8 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | Draw_On_Map | 2804531012 | 7 |
+| Support_Corps | 3512993822 | 7 |
 | FactoryPieces | 3399263137 | 7 |
 | P4PickingMeister | 3422220305 | 7 |
 | EatSmart | 3456212729 | 7 |
@@ -88,7 +88,6 @@
 | AllinOneBackpackingShelter | 3417917173 | 5 |
 | P4PrismPower | 3235103558 | 5 |
 | TheBeginning_CDDA | 3461117277 | 5 |
-| LegendaryDuffelbag | 3558839307 | 5 |
 | [B42]_Moodle_Descriptions_Expanded | 3389003300 | 5 |
 | Vehicle_Repair_Overhaul | 2757712197 | 5 |
 | TheyAreWatching | 3559704439 | 5 |
@@ -201,7 +200,6 @@
 | P4AddictedToWeight | 2604943386 | 0 |
 | P4HasBeenRead | 2544353492 | 0 |
 | aliceSvanillaDuffelBag | 2959854619 | 0 |
-| Support_Corps | 3512993822 | 0 |
 | INeedMoreStyle_CE | 2861393067 | 0 |
 | ATA_Mustang_66 | 3405574146 | 0 |
 | Frockin_Wiseguys | 3538760023 | 0 |
@@ -386,6 +384,7 @@
 | SixthSense | 2863908612 | 0 |
 | U.S._M998_Humvee_by_Papa_Chad | 3554424111 | 0 |
 | 73fordFalcon | 3490370700 | 0 |
+| LegendaryDuffelbag | 3558839307 | 0 |
 | wandering-zombies | 2983905789 | 0 |
 | [J&G]_Alpine_Multicam_Uniform | 3303746488 | 0 |
 | 93mustangSSP | 3001592312 | 0 |
@@ -396,6 +395,7 @@
 | PZ_BodilyFunctions | 3396456841 | 0 |
 | Zombies_Congelados_TWD_B42 | 3426132882 | 0 |
 | 80manKat1 | 3248388837 | 0 |
+| Vanilla_Clothing_Expansion | 3421271152 | 0 |
 | 93fordTaurus | 3088951320 | 0 |
 | BetterSorting-42 | 3413005308 | 0 |
 | Brandernburg | 3386447602 | 0 |
@@ -472,6 +472,7 @@
 | 815Tatra | 3404869345 | 0 |
 | TMRRemoveMumble | 3100475013 | 0 |
 | 93townCar | 2932547723 | 0 |
+| ART_RFGP | 3396542795 | 0 |
 | BanditsWeekOne | 3403180543 | 0 |
 | Yaki's_Hair_Salon_-_BASE | 2761200458 | 0 |
 | B42PackMule | 3418366421 | 0 |
