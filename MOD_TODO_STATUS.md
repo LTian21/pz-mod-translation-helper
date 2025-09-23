@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-23 23:32:48 UTC+08:00`*
+*最后更新于：`2025-09-23 23:40:20 UTC+08:00`*
 
 ---
 
@@ -27,18 +27,6 @@
 | B42Survival | 3402516345 | 29 |
 | Training | 3417621776 | 29 |
 | FRUsedCarsAnimAlpha | 2959472220 | 28 |
-| HDCP_ImmersiveVehiclePaint | 3464606086 | 26 |
-| ExploringTime | 2244879881 | 25 |
-| Tactical_Weapons | 2324223029 | 24 |
-| DFMFoodMod | 3406694220 | 24 |
-| MoneyFromCreditCard | 3428650803 | 24 |
-| IndustrialRevolution | 3400131934 | 21 |
-| [B42]_Post_Apocalyptic_Weapons | 3472334215 | 20 |
-| RestoreUtilities | 3409422147 | 17 |
-| HephasOccupationsAndTraits | 3256482412 | 15 |
-| ShowSowingSeasonInSeedTooltip | 3404461962 | 14 |
-| EFTBackpacks | 3432928943 | 13 |
-| MinimapStyleOptions | 3526517370 | 13 |
 | Herbalist | 2875059598 | 11 |
 | DivisionBackpack | 3391306957 | 11 |
 | MilitaryPonchosRELOADED | 3439247001 | 11 |
@@ -100,6 +88,7 @@
 | Spongie_Clothing | 2684285534 | 0 |
 | MoreDamagedObjects | 3413150945 | 0 |
 | Farming_Expansion | 3444499190 | 0 |
+| Tactical_Weapons | 2324223029 | 0 |
 | 90pierceArrow | 2942793445 | 0 |
 | SimpleSkillBooks | 3291799176 | 0 |
 | EasyLaundry | 2925034918 | 0 |
@@ -139,8 +128,10 @@
 | Nep_Capped_Stress | 3460381012 | 0 |
 | Taylorsville | 3134394569 | 0 |
 | TetriZ | 3486780625 | 0 |
+| IndustrialRevolution | 3400131934 | 0 |
 | Chinesecuisine | 3412969115 | 0 |
 | B42_Rain's_Pack_Your_Loot | 3490159683 | 0 |
+| HephasOccupationsAndTraits | 3256482412 | 0 |
 | MoreItemInformation | 3494474677 | 0 |
 | shortbladeoverhaul | 3433660118 | 0 |
 | MysticForSpongie | 3415470189 | 0 |
@@ -171,6 +162,7 @@
 | BarricadesHurtZombies | 3402208866 | 0 |
 | MetalSpears | 2927603127 | 0 |
 | 89dodgeCaravan | 3034636011 | 0 |
+| ExploringTime | 2244879881 | 0 |
 | 82jeepJ10 | 2886832257 | 0 |
 | Boots_Expanded | 2850935956 | 0 |
 | Tomb's_Goth_Hair | 3531765630 | 0 |
@@ -322,6 +314,7 @@
 | 69mini | 2937786633 | 0 |
 | ReactiveSoundEvents | 2969551071 | 0 |
 | MoreMaps | 3390897023 | 0 |
+| ShowSowingSeasonInSeedTooltip | 3404461962 | 0 |
 | Plumb_Helper+ | 3386961288 | 0 |
 | B42Makedriedvegetable | 3418061837 | 0 |
 | ATA_BMW_E36 | 3421748994 | 0 |
@@ -363,6 +356,7 @@
 | SixthSense | 2863908612 | 0 |
 | U.S._M998_Humvee_by_Papa_Chad | 3554424111 | 0 |
 | 73fordFalcon | 3490370700 | 0 |
+| HDCP_ImmersiveVehiclePaint | 3464606086 | 0 |
 | LegendaryDuffelbag | 3558839307 | 0 |
 | wandering-zombies | 2983905789 | 0 |
 | [B42]_Moodle_Descriptions_Expanded | 3389003300 | 0 |
@@ -390,6 +384,7 @@
 | RiskyUnarmed | 3434796669 | 0 |
 | CombatTraits | 3427091746 | 0 |
 | fastrip | 3414409419 | 0 |
+| EFTBackpacks | 3432928943 | 0 |
 | Vehicle_Repair_Overhaul | 2757712197 | 0 |
 | P4OnTheDoor | 3056481712 | 0 |
 | 66pontiacLeMans | 3447272250 | 0 |
@@ -432,6 +427,7 @@
 | WeldingTorchBalanced | 3429392198 | 0 |
 | [J&G]_Flecktarn_Uniform | 3206579556 | 0 |
 | SkateBoard | 3456675747 | 0 |
+| MinimapStyleOptions | 3526517370 | 0 |
 | BoneScavenger | 3399292171 | 0 |
 | 04vwTouran | 3478633453 | 0 |
 | KnoxEventExpanded | 3397396843 | 0 |
@@ -444,6 +440,7 @@
 | FWO_Treadmill_&_BenchPress | 2940354599 | 0 |
 | TchernoLib | 3389605231 | 0 |
 | 86oshkoshP19A | 2566953935 | 0 |
+| RestoreUtilities | 3409422147 | 0 |
 | ClothesBOX | 2847911733 | 0 |
 | True_Crawl_B42 | 3410989950 | 0 |
 | ATA_Mustang | 3405178154 | 0 |
@@ -468,6 +465,7 @@
 | 93townCar | 2932547723 | 0 |
 | ART_RFGP | 3396542795 | 0 |
 | BanditsWeekOne | 3403180543 | 0 |
+| DFMFoodMod | 3406694220 | 0 |
 | Dummy_Fluid_Mod | 3405131820 | 0 |
 | Yaki's_Hair_Salon_-_BASE | 2761200458 | 0 |
 | B42PackMule | 3418366421 | 0 |
@@ -480,6 +478,7 @@
 | AxesRecrafting | 2211423190 | 0 |
 | 91geoMetro | 3008795514 | 0 |
 | P4MySoCalledSnack | 2877535263 | 0 |
+| MoneyFromCreditCard | 3428650803 | 0 |
 | TLOAWolfCut | 3477669563 | 0 |
 | LastPushTrait | 3028253067 | 0 |
 | KillCount | 2553809727 | 0 |
@@ -504,6 +503,7 @@
 | GWH_(B42) | 3410972667 | 0 |
 | AmmoLootDropB42 | 3389050623 | 0 |
 | 90fordF350ambulance | 2952802178 | 0 |
+| [B42]_Post_Apocalyptic_Weapons | 3472334215 | 0 |
 | Willowbrook_Bastion!_(items_part) | 3479667649 | 0 |
 | KnowYourCalories | 3257953004 | 0 |
 | Buildables_Expansion | 3463117260 | 0 |
