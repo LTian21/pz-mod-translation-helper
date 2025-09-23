@@ -2,15 +2,14 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-23 22:48:43 UTC+08:00`*
+*最后更新于：`2025-09-23 23:32:48 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
-| BWardrobe | 3140453034 | 977 |
-| PompsItemsPlushies | 2792387747 | 719 |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
+| BWardrobe | 3140453034 | 522 |
 | AmmoMaker | 2788256295 | 460 |
 | PompsItemsFood | 2792348686 | 394 |
 | Immersive_Lore | 3000924731 | 271 |
@@ -20,17 +19,10 @@
 | Firearms | 2256623447 | 93 |
 | StandardizedVehicleUpgrades3Core | 3403490889 | 90 |
 | PWPNXB | 3400528439 | 85 |
-| Modern_&_Historical_Firearms_Bundle | 3383901556 | 84 |
-| EssentialRecipes | 3401825906 | 72 |
 | WeatherMoodles | 3565697910 | 68 |
-| B42Hemp&Tobacco | 3404563567 | 64 |
-| [B42]_Pack_Pantry | 3416584592 | 63 |
-| cf_home | 3522009163 | 63 |
-| ZevonMedievalArmory | 3540834058 | 50 |
 | GaussRifle | 3429953336 | 45 |
 | Operator | 3452171674 | 42 |
 | SoulFilchersBeautifyngTime | 2425267353 | 39 |
-| RaccoonCityB42 | 3388468313 | 34 |
 | NCR_-_Trooper_Pack | 3508243687 | 31 |
 | B42Survival | 3402516345 | 29 |
 | Training | 3417621776 | 29 |
@@ -73,9 +65,11 @@
 | P4PrismPower | 3235103558 | 5 |
 | OpenAllContainers | 3465040406 | 4 |
 | 92nissanGTR | 2846036306 | 4 |
+| PompsItemsPlushies | 2792387747 | 4 |
 | Cerberus_Pack | 3470478700 | 4 |
 | FunctionalAppliances2 | 3042138819 | 3 |
 | LWBetterElectronics | 2999183635 | 3 |
+| B42Hemp&Tobacco | 3404563567 | 3 |
 | TKS42 | 3389805754 | 3 |
 | LethalStealth | 3531611692 | 3 |
 | CustomWeight | 3391228479 | 1 |
@@ -165,10 +159,13 @@
 | ShieldModeSecondaryHandEquip | 3383001527 | 0 |
 | WashingMenusImproved | 3460812542 | 0 |
 | Night_Vision | 3470491629 | 0 |
+| EssentialRecipes | 3401825906 | 0 |
 | 85chevyCaprice | 3413704851 | 0 |
 | 89volvo200 | 3292659291 | 0 |
 | MakeCharcoal | 3392674521 | 0 |
+| B42_[K]_Show_Wall_Health | 3386498516 | 0 |
 | BecomeBrave | 3388028737 | 0 |
+| [B42]_Pack_Pantry | 3416584592 | 0 |
 | LazoloTraits | 2855320431 | 0 |
 | collapsibleladder | 3438123707 | 0 |
 | BarricadesHurtZombies | 3402208866 | 0 |
@@ -216,6 +213,7 @@
 | 76chevyKseries | 3161951724 | 0 |
 | FWO_Fitness_Workout_Overhaul | 2940354599 | 0 |
 | Pokit_Paradigm | 3476595954 | 0 |
+| cf_home | 3522009163 | 0 |
 | Support_Corps | 3409836763 | 0 |
 | FancyLanterns | 3267733558 | 0 |
 | 87toyotaMR2 | 3052360250 | 0 |
@@ -245,6 +243,7 @@
 | The_Last_Of_AVA_Clothing | 3477685382 | 0 |
 | LegendaryKatana | 3418366499 | 0 |
 | B42Makefruitinjar | 3432006285 | 0 |
+| RaccoonCityB42 | 3388468313 | 0 |
 | AmmoConverterB42 | 3388844065 | 0 |
 | TheBeginning_CDDA | 3461117277 | 0 |
 | More_Traits | 1299328280 | 0 |
@@ -313,6 +312,7 @@
 | B42_Rain's_Axes_&_Blades | 3388380529 | 0 |
 | KickScooter | 3453879909 | 0 |
 | StairsAlert | 3044807092 | 0 |
+| Modern_&_Historical_Firearms_Bundle | 3383901556 | 0 |
 | Mexiox's_-_Mexican_Firearm_Weapons | 2882852956 | 0 |
 | PlaidSherryDress | 3419265871 | 0 |
 | Automatic_Stove_Shutoff | 3526968739 | 0 |
@@ -371,6 +371,7 @@
 | Dreams | 1945359259 | 0 |
 | KATTAJ1_Clothes_Core | 3470422050 | 0 |
 | ProteinsMoodle | 2859304462 | 0 |
+| ZevonMedievalArmory | 3540834058 | 0 |
 | PocketKittens | 3568029240 | 0 |
 | Frockin_Shirts_n_Ties | 3453676250 | 0 |
 | PZ_BodilyFunctions | 3396456841 | 0 |
