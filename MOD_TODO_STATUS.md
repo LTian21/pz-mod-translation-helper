@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-23 12:17:12 UTC+08:00`*
+*最后更新于：`2025-09-23 22:48:43 UTC+08:00`*
 
 ---
 
@@ -14,7 +14,6 @@
 | AmmoMaker | 2788256295 | 460 |
 | PompsItemsFood | 2792348686 | 394 |
 | Immersive_Lore | 3000924731 | 271 |
-| PZKVanillaPlusCarPack | 3217685049 | 255 |
 | MeleeWeaponUpgrade_Easy | 3394923321 | 143 |
 | Wolf_Extraction_Quest | 2987772693 | 126 |
 | Caster_Plus | 3457003463 | 99 |
@@ -22,13 +21,11 @@
 | StandardizedVehicleUpgrades3Core | 3403490889 | 90 |
 | PWPNXB | 3400528439 | 85 |
 | Modern_&_Historical_Firearms_Bundle | 3383901556 | 84 |
-| N&C's_Narcotics | 3404956403 | 84 |
 | EssentialRecipes | 3401825906 | 72 |
 | WeatherMoodles | 3565697910 | 68 |
 | B42Hemp&Tobacco | 3404563567 | 64 |
 | [B42]_Pack_Pantry | 3416584592 | 63 |
 | cf_home | 3522009163 | 63 |
-| KnoxEventExpanded | 3397396843 | 58 |
 | ZevonMedievalArmory | 3540834058 | 50 |
 | GaussRifle | 3429953336 | 45 |
 | Operator | 3452171674 | 42 |
@@ -50,7 +47,6 @@
 | ShowSowingSeasonInSeedTooltip | 3404461962 | 14 |
 | EFTBackpacks | 3432928943 | 13 |
 | MinimapStyleOptions | 3526517370 | 13 |
-| ModTemplate | 3026307069 | 11 |
 | Herbalist | 2875059598 | 11 |
 | DivisionBackpack | 3391306957 | 11 |
 | MilitaryPonchosRELOADED | 3439247001 | 11 |
@@ -245,6 +241,7 @@
 | Evolving_Traits_World | 2914075159 | 0 |
 | Detailed_Descriptions_for_Occupations_and_Traits | 3387957272 | 0 |
 | [J&G]_Forest_Multicam_Uniform | 3309971624 | 0 |
+| PZKVanillaPlusCarPack | 3217685049 | 0 |
 | The_Last_Of_AVA_Clothing | 3477685382 | 0 |
 | LegendaryKatana | 3418366499 | 0 |
 | B42Makefruitinjar | 3432006285 | 0 |
@@ -436,6 +433,7 @@
 | SkateBoard | 3456675747 | 0 |
 | BoneScavenger | 3399292171 | 0 |
 | 04vwTouran | 3478633453 | 0 |
+| KnoxEventExpanded | 3397396843 | 0 |
 | Vanilla_Gear_Expanded | 3401134276 | 0 |
 | WarThunderVehicleLibrary | 3399660368 | 0 |
 | Outdoor_TIles | 3430305726 | 0 |
