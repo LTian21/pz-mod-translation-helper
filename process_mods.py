@@ -12,12 +12,10 @@ from typing import Final
 CONFIG_FILE: Final[Path] = Path('config.ini')
 ID_LIST_FILE: Final[Path] = Path('id_list.txt')
 STATUS_FILE: Final[Path] = Path('data/.cache/.last_run_status.json')
-
 VERSION_DIR_PATTERN: Final[re.compile] = re.compile(r'^\d+(\.\d+)*$')
 MODULE_PATTERN: Final[re.compile] = re.compile(r"^\s*module\s+([\w.-]+)", re.IGNORECASE | re.MULTILINE)
-TABLE_CONTENT_PATTERN: Final[re.compile] = re.compile(r"=\s*\{(?P<content>[\s\S]*)\}")
-TRANSLATION_LINE_PATTERN: Final[re.compile] = re.compile(r"^\s*([\w.\[\]()-]+)\s*=\s*.+,?\s*$", re.MULTILINE)
 TRANSLATION_VALUE_PATTERN: Final[re.compile] = re.compile(r"=\s*\"((?:[^\"\\]|\\.)*)\"", re.DOTALL)
+KEY_VALUE_START_PATTERN: Final[re.compile] = re.compile(r"^\s*([\w.\[\]()-]+)\s*=\s*(.*)")
 ITEM_PATTERN: Final[re.compile] = re.compile(r"item\s+([\w-]+)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
 RECIPE_PATTERN: Final[re.compile] = re.compile(r"(?:recipe|craftRecipe)\s+([\w\s().-]+?)\s*(?:\/\*.*?\*\/|\{)", re.MULTILINE | re.IGNORECASE)
 DISPLAY_NAME_PATTERN: Final[re.compile] = re.compile(r"DisplayName\s*=\s*(.*?)(?:,|\n|$)")
@@ -171,23 +169,61 @@ def get_translations_as_dict(file_path_or_dir, config):
             file_path_or_dir.parent.mkdir(parents=True, exist_ok=True)
             file_path_or_dir.write_text("", encoding='utf-8')
         except Exception as e:
-            logging.error(f"  -> 错误：自动创建文件 '{file_path_or_dir}' 失败: {e}")        
+            logging.error(f"  -> 错误：自动创建文件 '{file_path_or_dir}' 失败: {e}")
         return translations_dict
-    
-    keys_found_in_file = 0
+
     try:
         content = file_path_or_dir.read_text(encoding='utf-8')
-        table_content_match = TABLE_CONTENT_PATTERN.search(content)
-        content_to_parse = table_content_match.group('content') if table_content_match else content
-        for match in TRANSLATION_LINE_PATTERN.finditer(content_to_parse):
-            key, line = match.group(1).strip(), match.group(0).strip()
-            if line.endswith("= {"): continue
-            if not line.endswith(','): line += ","
-            translations_dict[key] = line
-            keys_found_in_file += 1
+        current_key = None
+        current_value_parts = []
+
+        def save_current_entry():
+            nonlocal current_key, current_value_parts, translations_dict
+            if not current_key or not current_value_parts:
+                return
+
+            full_expression = " ".join(part.strip() for part in current_value_parts)
+            
+            final_line = f'{current_key} = {full_expression}'
+            if not final_line.endswith(','):
+                final_line += ','
+            
+            translations_dict[current_key] = final_line 
+            current_key = None
+            current_value_parts = []
+
+        for line in content.splitlines():
+            line_stripped = line.strip()
+
+            if not line_stripped or line_stripped.startswith('--') or line_stripped in ["{", "}", "return {"]:
+                continue
+
+            key_match = KEY_VALUE_START_PATTERN.match(line)
+            
+            if key_match and key_match.group(2).strip().startswith('{'):
+                logging.info(f"    -> 正在进入 Table: '{key_match.group(1).strip()}'")
+                continue
+
+            if key_match and not line_stripped.startswith('..'):
+                save_current_entry()
+                current_key = key_match.group(1).strip()
+                value_part = key_match.group(2).strip()
+                current_value_parts.append(value_part)
+
+                if not value_part.endswith('..'):
+                    save_current_entry()
+            
+            elif current_key:
+                current_value_parts.append(line_stripped)
+                if not line_stripped.endswith('..'):
+                    save_current_entry()
+        
+        save_current_entry()
+
     except Exception as e:
         logging.error(f"    处理文件 {file_path_or_dir.name} 时发生错误: {e}")
-    logging.info(f"     -> 在 '{file_path_or_dir.name}' 中找到 {keys_found_in_file} 个键。")
+    
+    logging.info(f"     -> 在 '{file_path_or_dir.name}' 中找到 {len(translations_dict)} 个键。")
     return translations_dict
 
 def extract_value_from_line(line):
@@ -262,7 +298,6 @@ def get_file_last_commit_sha(file_path: Path) -> str | None:
     except (subprocess.CalledProcessError, FileNotFoundError):
         return None
 
-# (修复2 - 步骤A) 重构函数，使其在内存中更新状态字典，而不是直接写入文件
 def record_completed_sha_in_memory(status_data: dict, mod_id: str, completed_file_path: Path) -> dict:
     """
     在内存中的状态字典里，记录指定Mod的已完成文件的最新Commit SHA。
