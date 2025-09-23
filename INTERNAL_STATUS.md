@@ -3,7 +3,7 @@
 *此报告仅供内部使用，包含详细的调试和跟踪信息。*
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-09-23 23:32:48 UTC+08:00`*
+*最后更新于：`2025-09-23 23:40:20 UTC+08:00`*
 
 ---
 
@@ -11,22 +11,25 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **当前待办总数** | ``3754`` 条 |
+| **当前待办总数** | ``3518`` 条 |
 | **已支持 Mod 数量** | ``533`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20250923_233248``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20250923_234020``)**
 
-*   **PompsItemsPlushies (ID: 2792387747)**: 新增 `0` 条, 移除 `715` 条。
-*   **BWardrobe (ID: 3140453034)**: 新增 `0` 条, 移除 `302` 条。
-*   **Modern_&_Historical_Firearms_Bundle (ID: 3383901556)**: 新增 `0` 条, 移除 `84` 条。
-*   **RaccoonCityB42 (ID: 3388468313)**: 新增 `0` 条, 移除 `34` 条。
-*   **EssentialRecipes (ID: 3401825906)**: 新增 `0` 条, 移除 `72` 条。
-*   **B42Hemp&Tobacco (ID: 3404563567)**: 新增 `3` 条, 移除 `64` 条。
-*   **[B42]_Pack_Pantry (ID: 3416584592)**: 新增 `0` 条, 移除 `63` 条。
-*   **cf_home (ID: 3522009163)**: 新增 `0` 条, 移除 `63` 条。
-*   **ZevonMedievalArmory (ID: 3540834058)**: 新增 `0` 条, 移除 `50` 条。
+*   **ExploringTime (ID: 2244879881)**: 新增 `0` 条, 移除 `25` 条。
+*   **Tactical_Weapons (ID: 2324223029)**: 新增 `0` 条, 移除 `24` 条。
+*   **HephasOccupationsAndTraits (ID: 3256482412)**: 新增 `0` 条, 移除 `15` 条。
+*   **IndustrialRevolution (ID: 3400131934)**: 新增 `0` 条, 移除 `21` 条。
+*   **ShowSowingSeasonInSeedTooltip (ID: 3404461962)**: 新增 `0` 条, 移除 `14` 条。
+*   **DFMFoodMod (ID: 3406694220)**: 新增 `0` 条, 移除 `24` 条。
+*   **RestoreUtilities (ID: 3409422147)**: 新增 `0` 条, 移除 `17` 条。
+*   **MoneyFromCreditCard (ID: 3428650803)**: 新增 `0` 条, 移除 `24` 条。
+*   **EFTBackpacks (ID: 3432928943)**: 新增 `0` 条, 移除 `13` 条。
+*   **HDCP_ImmersiveVehiclePaint (ID: 3464606086)**: 新增 `0` 条, 移除 `26` 条。
+*   **[B42]_Post_Apocalyptic_Weapons (ID: 3472334215)**: 新增 `0` 条, 移除 `20` 条。
+*   **MinimapStyleOptions (ID: 3526517370)**: 新增 `0` 条, 移除 `13` 条。
 
 ---
 
