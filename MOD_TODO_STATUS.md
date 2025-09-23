@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-23 23:40:20 UTC+08:00`*
+*最后更新于：`2025-09-24 00:08:24 UTC+08:00`*
 
 ---
 
@@ -10,7 +10,7 @@
 | :--- | :--- | :--- |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
 | BWardrobe | 3140453034 | 522 |
-| AmmoMaker | 2788256295 | 460 |
+| AmmoMaker | 2788256295 | 465 |
 | PompsItemsFood | 2792348686 | 394 |
 | Immersive_Lore | 3000924731 | 271 |
 | MeleeWeaponUpgrade_Easy | 3394923321 | 143 |
