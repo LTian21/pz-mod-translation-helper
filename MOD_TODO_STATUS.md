@@ -2,67 +2,75 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-24 00:08:24 UTC+08:00`*
+*最后更新于：`2025-09-24 00:49:07 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
-| BWardrobe | 3140453034 | 522 |
-| AmmoMaker | 2788256295 | 465 |
-| PompsItemsFood | 2792348686 | 394 |
-| Immersive_Lore | 3000924731 | 271 |
+| AmmoMaker | 2788256295 | 520 |
+| BWardrobe | 3140453034 | 513 |
+| PompsItemsFood | 2792348686 | 393 |
+| Immersive_Lore | 3000924731 | 273 |
 | MeleeWeaponUpgrade_Easy | 3394923321 | 143 |
 | Wolf_Extraction_Quest | 2987772693 | 126 |
 | Caster_Plus | 3457003463 | 99 |
 | Firearms | 2256623447 | 93 |
 | StandardizedVehicleUpgrades3Core | 3403490889 | 90 |
 | PWPNXB | 3400528439 | 85 |
+| OpenAllContainers | 3465040406 | 79 |
 | WeatherMoodles | 3565697910 | 68 |
 | GaussRifle | 3429953336 | 45 |
 | Operator | 3452171674 | 42 |
-| SoulFilchersBeautifyngTime | 2425267353 | 39 |
+| TLOUClothingConnected | 3348036710 | 38 |
 | NCR_-_Trooper_Pack | 3508243687 | 31 |
 | B42Survival | 3402516345 | 29 |
-| Training | 3417621776 | 29 |
+| Training | 3417621776 | 28 |
 | FRUsedCarsAnimAlpha | 2959472220 | 28 |
+| BirgetHeads | 3439783176 | 20 |
+| SoulFilchersBeautifyngTime | 2425267353 | 18 |
+| ExploringTime | 2244879881 | 15 |
+| Minimal_Display_Bars_Nutritions_B42 | 3388844542 | 11 |
 | Herbalist | 2875059598 | 11 |
 | DivisionBackpack | 3391306957 | 11 |
 | MilitaryPonchosRELOADED | 3439247001 | 11 |
-| Minimal_Display_Bars_Nutritions_B42 | 3388844542 | 10 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
-| ClothingLine | 3282215361 | 10 |
 | BanditsAddOptions | 3412682512 | 10 |
-| TLOUClothingConnected | 3348036710 | 10 |
-| HaloArmor | 3507919075 | 10 |
+| ClothingLine | 3282215361 | 9 |
 | BasicVan | 3459200930 | 9 |
 | ImmersiveSolarArrays | 2969478819 | 9 |
 | Zombaroid | 3519916139 | 8 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | Support_Corps | 3512993822 | 7 |
-| FactoryPieces | 3399263137 | 7 |
 | P4PickingMeister | 3422220305 | 7 |
 | EatSmart | 3456212729 | 7 |
 | fhqwhgads'_Motorious_Zone | 2791656602 | 7 |
+| HaloArmor | 3507919075 | 7 |
 | cdda_zombie | 2749928925 | 7 |
+| FactoryPieces | 3399263137 | 6 |
 | RollBack_Rain_Collector_Barrel | 3392186516 | 6 |
+| Evolving_Traits_World | 2914075159 | 6 |
 | ExtendedSpices | 3522142755 | 6 |
 | Military_Tool_Kit | 2705406713 | 5 |
 | AllinOneBackpackingShelter | 3417917173 | 5 |
 | P4PrismPower | 3235103558 | 5 |
-| OpenAllContainers | 3465040406 | 4 |
 | 92nissanGTR | 2846036306 | 4 |
+| ClearingTime | 1926311864 | 4 |
 | PompsItemsPlushies | 2792387747 | 4 |
 | Cerberus_Pack | 3470478700 | 4 |
 | FunctionalAppliances2 | 3042138819 | 3 |
 | LWBetterElectronics | 2999183635 | 3 |
-| B42Hemp&Tobacco | 3404563567 | 3 |
 | TKS42 | 3389805754 | 3 |
 | LethalStealth | 3531611692 | 3 |
+| RandomClothing | 3397182976 | 3 |
+| StandaloneTowels | 3203159242 | 2 |
+| Tactical_Weapons | 2324223029 | 1 |
 | CustomWeight | 3391228479 | 1 |
 | SpongieOpenJackets | 2812326159 | 1 |
 | HydeCoBees | 3430224478 | 1 |
+| MarOccupations | 3139034529 | 1 |
+| MoneyFromCreditCard | 3428650803 | 1 |
 | Farming_Wiki | 3473886171 | 0 |
 | P4MySoCalledBag | 2823166698 | 0 |
 | ExerciseWithCorpses | 3404074048 | 0 |
@@ -88,7 +96,6 @@
 | Spongie_Clothing | 2684285534 | 0 |
 | MoreDamagedObjects | 3413150945 | 0 |
 | Farming_Expansion | 3444499190 | 0 |
-| Tactical_Weapons | 2324223029 | 0 |
 | 90pierceArrow | 2942793445 | 0 |
 | SimpleSkillBooks | 3291799176 | 0 |
 | EasyLaundry | 2925034918 | 0 |
@@ -162,7 +169,6 @@
 | BarricadesHurtZombies | 3402208866 | 0 |
 | MetalSpears | 2927603127 | 0 |
 | 89dodgeCaravan | 3034636011 | 0 |
-| ExploringTime | 2244879881 | 0 |
 | 82jeepJ10 | 2886832257 | 0 |
 | Boots_Expanded | 2850935956 | 0 |
 | Tomb's_Goth_Hair | 3531765630 | 0 |
@@ -186,8 +192,8 @@
 | [B42]_ZuperCarts_-_Carts_&_Trolleys_(forked) | 3433203442 | 0 |
 | 73Winnebago | 3488174689 | 0 |
 | DragBodiesFaster_50% | 3393821407 | 0 |
+| B42Hemp&Tobacco | 3404563567 | 0 |
 | Ducks | 3409153536 | 0 |
-| BirgetHeads | 3439783176 | 0 |
 | P4StealthCamo | 2762398967 | 0 |
 | Authentic_Z_-_Backpacks+ | 2335368829 | 0 |
 | CommonSense | 2875848298 | 0 |
@@ -228,7 +234,6 @@
 | Nep_Slower_Discomfort | 3403721633 | 0 |
 | 85pontiacParisienne | 3413706334 | 0 |
 | BringOutYourDead | 3415416226 | 0 |
-| Evolving_Traits_World | 2914075159 | 0 |
 | Detailed_Descriptions_for_Occupations_and_Traits | 3387957272 | 0 |
 | [J&G]_Forest_Multicam_Uniform | 3309971624 | 0 |
 | PZKVanillaPlusCarPack | 3217685049 | 0 |
@@ -342,13 +347,11 @@
 | Light_Switch_Plus | 3418843205 | 0 |
 | KATTAJ1_Military_Pack | 3470426196 | 0 |
 | TrueSmoking | 3423984426 | 0 |
-| StandaloneTowels | 3203159242 | 0 |
 | AutoCook | 3388721641 | 0 |
 | UseBeltAsWeapon | 3339423397 | 0 |
 | ChairBarricade | 3404288341 | 0 |
 | USMilitaryPack | 612100872 | 0 |
 | CarHeaterSoundSystem | 3543941897 | 0 |
-| ClearingTime | 1926311864 | 0 |
 | 99fordCVPI | 2971246021 | 0 |
 | No_Stress_Chopping | 3460704724 | 0 |
 | Night_Vision | 3383603346 | 0 |
@@ -378,7 +381,6 @@
 | [J&G]_SWAT_Uniform | 3457969588 | 0 |
 | BM_Super_Speed_Settings | 3440221534 | 0 |
 | Dynamic-Traits-main | 2459400130 | 0 |
-| MarOccupations | 3139034529 | 0 |
 | ImmersiveSuicide | 3426448380 | 0 |
 | TableSaw | 3540297822 | 0 |
 | RiskyUnarmed | 3434796669 | 0 |
@@ -478,7 +480,6 @@
 | AxesRecrafting | 2211423190 | 0 |
 | 91geoMetro | 3008795514 | 0 |
 | P4MySoCalledSnack | 2877535263 | 0 |
-| MoneyFromCreditCard | 3428650803 | 0 |
 | TLOAWolfCut | 3477669563 | 0 |
 | LastPushTrait | 3028253067 | 0 |
 | KillCount | 2553809727 | 0 |
@@ -522,7 +523,6 @@
 | PaniqeurTrait | 3393305357 | 0 |
 | P4MedicalMeister | 3173649443 | 0 |
 | [B42]_Intuitive_Crafting | 3486217110 | 0 |
-| RandomClothing | 3397182976 | 0 |
 | 91fordRanger | 3539691958 | 0 |
 | AnthroTraits | 3025679944 | 0 |
 | CytU1550L | 2843855721 | 0 |
