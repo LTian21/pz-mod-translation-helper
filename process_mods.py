@@ -102,8 +102,8 @@ def find_active_media_path(mod_root_path):
 
     potential_media_paths = [
         find_case_insensitive_dir(version_dir, 'media') if version_dir else None,
-        find_case_insensitive_dir(mod_root_path, 'media'),
-        find_case_insensitive_dir(common_dir, 'media') if common_dir else None
+        find_case_insensitive_dir(common_dir, 'media') if common_dir else None,
+        find_case_insensitive_dir(mod_root_path, 'media')
     ]
 
     for media_path in potential_media_paths:
@@ -146,6 +146,8 @@ def extract_recipe_names(text_content, config):
     results = {}
     for recipe_match in RECIPE_PATTERN.finditer(text_content):
         original_name = recipe_match.group(1).strip()
+        if not original_name:
+            continue
         friendly_name = format_recipe_name(original_name)
         modified_name = original_name.replace(' ', '_')
         key = f"{config.RECIPE_PREFIX}_{modified_name}"; line = f'{key} = "{friendly_name}",'
@@ -179,16 +181,12 @@ def get_translations_as_dict(file_path_or_dir, config):
 
         def save_current_entry():
             nonlocal current_key, current_value_parts, translations_dict
-            if not current_key or not current_value_parts:
-                return
+            if not current_key or not current_value_parts: return
 
             full_expression = " ".join(part.strip() for part in current_value_parts)
-            
             final_line = f'{current_key} = {full_expression}'
-            if not final_line.endswith(','):
-                final_line += ','
-            
-            translations_dict[current_key] = final_line 
+            if not final_line.endswith(','): final_line += ','
+            translations_dict[current_key] = final_line
             current_key = None
             current_value_parts = []
 
@@ -200,14 +198,13 @@ def get_translations_as_dict(file_path_or_dir, config):
 
             key_match = KEY_VALUE_START_PATTERN.match(line)
             
-            if key_match and key_match.group(2).strip().startswith('{'):
-                logging.info(f"    -> 正在进入 Table: '{key_match.group(1).strip()}'")
-                continue
-
-            if key_match and not line_stripped.startswith('..'):
-                save_current_entry()
-                current_key = key_match.group(1).strip()
+            if key_match:
+                key_part = key_match.group(1).strip()
                 value_part = key_match.group(2).strip()
+                if value_part == "" or value_part.startswith('{') or value_part == ",":
+                    continue
+                save_current_entry()
+                current_key = key_part
                 current_value_parts.append(value_part)
 
                 if not value_part.endswith('..'):
