@@ -1,0 +1,87 @@
+name: Deploy to Public Repository
+
+on:
+  pull_request:
+    types: [closed]
+
+  workflow_dispatch:
+
+jobs:
+  publish:
+    if: github.event_name == 'workflow_dispatch' || (github.event.pull_request.merged == true && github.event.sender.login == 'Laotian21-bot')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout main branch of Private Repo (Source)
+        uses: actions/checkout@v4
+        with:
+          ref: 'main'
+
+      - name: Determine Commit Message
+        id: commit_message_step
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            # 自动触发时，引用 PR 号
+            echo "message=Chore(自动化): 同步翻译数据 [Private PR #${{ github.event.pull_request.number }}]" >> $GITHUB_OUTPUT
+          else
+            # 手动触发时，使用通用信息
+            echo "message=Chore(自动化): 手动同步翻译数据" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup SSH for Public Repository Access
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY_PUBLIC_REPO }}
+
+      - name: Configure Git for Public Repository
+        run: |
+          set -e
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions-bot@github.com"
+          echo "Adding GitHub to known_hosts..."
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      - name: Clone Public Repository (Destination)
+        run: |
+          set -e
+          echo "Cloning public repository with --depth 1..."
+          git clone --depth 1 git@github.com:Laotian21/PZ-Mod-Translation-Hub.git public_repo_clone
+          
+      - name: Sync Data and Report Files
+        working-directory: public_repo_clone
+        run: |
+          set -e
+          echo "PR已合并，开始同步数据到公开仓库..."
+          
+          echo "正在清理旧的 'data' 文件夹..."
+          rm -rf ./data || true
+          echo "正在从私有仓库复制最新的 'data' 文件夹..."
+          cp -r ../data .
+          echo "正在复制报告文件..."
+          cp ../STATUS.md .
+          cp ../MOD_TODO_STATUS.md .
+
+      - name: Commit and Push Changes to Public Repository
+        id: commit_push
+        working-directory: public_repo_clone
+        run: |
+          set -e
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "没有检测到文件变更，无需推送。"
+            echo "pushed=false" >> $GITHUB_OUTPUT
+          else
+            echo "检测到文件变更，正在提交并推送..."
+            git add data/ STATUS.md MOD_TODO_STATUS.md
+            
+            PR_NUMBER="${{ github.event.pull_request.number }}"
+            COMMIT_MESSAGE="${{ steps.commit_message_step.outputs.message }}"
+            COMMIT_DETAILS="同步时间: $(date -u)"
+            git commit -m "$COMMIT_MESSAGE" -m "$COMMIT_DETAILS"
+            
+            git push origin HEAD:main --force
+            echo "成功推送到公开仓库！"
+            # 使用 $GITHUB_OUTPUT 写入输出变量
+            echo "pushed=true" >> $GITHUB_OUTPUT
+          fi
