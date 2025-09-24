@@ -1,0 +1,42 @@
+name: PreProcessing + PostProcessing CI
+
+on:
+  schedule:
+    - cron: "10 0 * * *" # 每天 UTC 0:10
+  workflow_dispatch:      # 手动触发
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main  # merge 到 main 执行
+
+jobs:
+  run-ci:
+    if: >
+      !contains(github.event.head_commit.message, '[skip ci]')
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Setup .NET 9.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Run PreProcessing
+        working-directory: ./translation_utils
+        run: dotnet PreProcessing.dll
+
+      - name: Run PostProcessing
+        working-directory: ./translation_utils
+        run: dotnet PostProcessing.dll
+
+      - name: Commit changes
+        if: github.event_name != 'pull_request'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Update translation files" || echo "No changes to commit"
+          git push
