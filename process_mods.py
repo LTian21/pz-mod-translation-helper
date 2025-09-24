@@ -44,6 +44,7 @@ class Config:
             self.EN_OUTPUT_FILENAME = parser.get('Output', 'en_output_filename')
             self.LOG_FILENAME_TPL = parser.get('Output', 'log_filename_tpl')
             self.UPDATE_LOG_FILENAME = parser.get('Output', 'update_log_filename')
+            self.KEY_SOURCE_MAP_FILENAME = parser.get('Output', 'key_source_map_filename')
             self.ITEM_PREFIX_TPL = parser.get('Prefixes', 'item_prefix_tpl')
             self.RECIPE_PREFIX = parser.get('Prefixes', 'recipe_prefix')
         except (configparser.NoSectionError, configparser.NoOptionError) as e:
@@ -122,8 +123,9 @@ def find_active_media_path(mod_root_path):
     logging.warning("  --> 未能在任何优先路径中找到 'media' 文件夹。")
     return None
 
-def extract_item_display_names(text_content, prefix):
+def extract_item_display_names(text_content, prefix, source_filename: str):
     results = {}
+    key_map = {}
     for item_match in ITEM_PATTERN.finditer(text_content):
         item_name, item_content = item_match.groups()
         display_name_match = DISPLAY_NAME_PATTERN.search(item_content)
@@ -132,7 +134,8 @@ def extract_item_display_names(text_content, prefix):
             display_name_escaped = display_name_raw.replace('"', '\\"')
             key = f'{prefix}.{item_name}'; line = f'{key} = "{display_name_escaped}",'
             results[key] = line
-    return results
+            key_map[key] = "ItemName"
+    return results, key_map
 
 def format_recipe_name(name):
     parts = name.split('.'); formatted_parts = []
@@ -142,8 +145,9 @@ def format_recipe_name(name):
         formatted_parts.append(s2)
     return ". ".join(formatted_parts)
 
-def extract_recipe_names(text_content, config):
+def extract_recipe_names(text_content, config, source_filename: str):
     results = {}
+    key_map = {}
     for recipe_match in RECIPE_PATTERN.finditer(text_content):
         original_name = recipe_match.group(1).strip()
         if not original_name:
@@ -152,32 +156,40 @@ def extract_recipe_names(text_content, config):
         modified_name = original_name.replace(' ', '_')
         key = f"{config.RECIPE_PREFIX}_{modified_name}"; line = f'{key} = "{friendly_name}",'
         results[key] = line
-    return results
+        key_map[key] = "Recipe"
+    return results, key_map
 
 def get_translations_as_dict(file_path_or_dir, config):
+    key_source_map = {}
+
     if isinstance(file_path_or_dir, Path) and file_path_or_dir.is_dir():
         all_translations = {}
         logging.info(f"  -> 扫描目录: {file_path_or_dir}")
         for file_path in sorted(file_path_or_dir.glob(f"*{config.TRANSLATION_FILE_EXT}")):
-            all_translations.update(get_translations_as_dict(file_path, config))
-        return all_translations
+            translations, key_map = get_translations_as_dict(file_path, config)
+            all_translations.update(translations)
+            key_source_map.update(key_map)
+        return all_translations, key_source_map
+
     translations_dict = {}
     if not file_path_or_dir:
-        return translations_dict
+        return translations_dict, key_source_map
 
-    if not file_path_or_dir.is_file():
+    if isinstance(file_path_or_dir, Path) and not file_path_or_dir.is_file():
         logging.info(f"  -> 文件 '{file_path_or_dir.name}' 在目标位置不存在，将自动创建。")
         try:
             file_path_or_dir.parent.mkdir(parents=True, exist_ok=True)
             file_path_or_dir.write_text("", encoding='utf-8')
         except Exception as e:
             logging.error(f"  -> 错误：自动创建文件 '{file_path_or_dir}' 失败: {e}")
-        return translations_dict
+        return translations_dict, key_source_map
 
     try:
         content = file_path_or_dir.read_text(encoding='utf-8')
         current_key = None
         current_value_parts = []
+        base_filename = file_path_or_dir.stem
+        source_filename = re.sub(r'_(?:' + re.escape(config.BASE_LANGUAGE) + r'|' + re.escape(config.PRIORITY_LANGUAGE) + r')$', '', base_filename, flags=re.IGNORECASE)
 
         def save_current_entry():
             nonlocal current_key, current_value_parts, translations_dict
@@ -187,6 +199,7 @@ def get_translations_as_dict(file_path_or_dir, config):
             final_line = f'{current_key} = {full_expression}'
             if not final_line.endswith(','): final_line += ','
             translations_dict[current_key] = final_line
+            key_source_map[current_key] = source_filename
             current_key = None
             current_value_parts = []
 
@@ -221,7 +234,7 @@ def get_translations_as_dict(file_path_or_dir, config):
         logging.error(f"    处理文件 {file_path_or_dir.name} 时发生错误: {e}")
     
     logging.info(f"     -> 在 '{file_path_or_dir.name}' 中找到 {len(translations_dict)} 个键。")
-    return translations_dict
+    return translations_dict, key_source_map 
 
 def extract_value_from_line(line):
     match = TRANSLATION_VALUE_PATTERN.search(line)
@@ -230,14 +243,18 @@ def extract_value_from_line(line):
 def process_single_mod(mod_root_path, config):
     active_media_path = find_active_media_path(mod_root_path)
     if not active_media_path:
-        return {}, {}
+        return {}, {}, {}
+        
     scripts_dir = find_case_insensitive_dir(active_media_path, "scripts")
     translate_root_dir = find_case_insensitive_dir(active_media_path / "lua" / "shared", "Translate")
     base_lang_dir = find_case_insensitive_dir(translate_root_dir, config.BASE_LANGUAGE)
     priority_lang_dir = find_case_insensitive_dir(translate_root_dir, config.PRIORITY_LANGUAGE)
+    key_source_map = {}
 
     logging.info(f"\n--- 预加载 {config.BASE_LANGUAGE} (L1) 数据 ---")
-    en_data_raw = get_translations_as_dict(base_lang_dir, config)
+    en_data_raw, en_map = get_translations_as_dict(base_lang_dir, config)
+    key_source_map.update(en_map)
+
     local_known_en_keys = set(en_data_raw.keys())
     logging.info(f"预加载完成: 找到 {len(local_known_en_keys)} 个本地 {config.BASE_LANGUAGE} 键。")
 
@@ -252,10 +269,18 @@ def process_single_mod(mod_root_path, config):
                 module_match = MODULE_PATTERN.search(content)
                 module_name = module_match.group(1).strip() if module_match else "Base"
                 item_prefix = config.ITEM_PREFIX_TPL.format(module_name=module_name)
-                for key, line in extract_item_display_names(content, item_prefix).items():
+                
+                source_filename = file_path.name
+                items_data, items_map = extract_item_display_names(content, item_prefix, source_filename)
+                recipes_data, recipes_map = extract_recipe_names(content, config, source_filename)
+                key_source_map.update(items_map)
+                key_source_map.update(recipes_map)
+                
+                for key, line in items_data.items():
                     if key not in local_known_en_keys: generated_data[key] = line; new_items += 1
-                for key, line in extract_recipe_names(content, config).items():
+                for key, line in recipes_data.items():
                     if key not in local_known_en_keys: generated_data[key] = line; new_recipes += 1
+
             except Exception as e: logging.error(f"    处理文件 {file_path.name} 时发生错误: {e}")
             if new_items or new_recipes:
                 log_parts = []
@@ -268,10 +293,11 @@ def process_single_mod(mod_root_path, config):
     en_base_data = {**generated_data, **en_data_raw}
     logging.info(f"\n--- 阶段 2: 合并 L0 与 L1 后，纯净英文基准总计: {len(en_base_data)} 条数据。---")
 
-    cn_base_data = get_translations_as_dict(priority_lang_dir, config)
+    cn_base_data, cn_map = get_translations_as_dict(priority_lang_dir, config)
+    key_source_map.update(cn_map)
     logging.info(f"\n--- 阶段 3: 从 {config.PRIORITY_LANGUAGE} 目录加载了 {len(cn_base_data)} 条数据。---")
     
-    return en_base_data, cn_base_data
+    return en_base_data, cn_base_data, key_source_map
 
 def setup_logger(log_file_path):
     for handler in logging.root.handlers[:]:
@@ -341,6 +367,15 @@ def main():
     run_status = load_status()
     update_log_entries = []
 
+    key_source_map_path = Path('translation_utils') / cfg.KEY_SOURCE_MAP_FILENAME
+    global_key_source_map = {}
+    if key_source_map_path.is_file():
+        try:
+            global_key_source_map = json.loads(key_source_map_path.read_text(encoding='utf-8'))
+        except json.JSONDecodeError:
+            logging.warning(f"警告：无法解析 {key_source_map_path}，将创建一个新的。")
+    key_source_map_path.parent.mkdir(parents=True, exist_ok=True)
+
     completed_path = cfg.COMPLETED_PATH
     completed_path.mkdir(exist_ok=True)
     
@@ -409,21 +444,25 @@ def main():
         completed_mod_path.mkdir(exist_ok=True) 
         completed_todo_file = completed_mod_path / cfg.COMPLETED_FILENAME
         logging.info(f"\n--- 正在检查已完成的翻译于: {completed_todo_file} ---")
-        completed_todo_data = get_translations_as_dict(completed_todo_file, cfg)
+        completed_todo_data, _ = get_translations_as_dict(completed_todo_file, cfg)
         completed_keys = set(completed_todo_data.keys())
 
         workshop_en_base, workshop_cn_base = {}, {}
         global_known_keys_en, global_known_keys_cn = set(), set()
+        workshop_key_source_map = {}
 
         for sub_mod_path in sub_mods:
             logging.info(f"\n-------------------- 处理子模组: {sub_mod_path.name} --------------------")
-            en_raw, cn_raw = process_single_mod(sub_mod_path, cfg)
+            en_raw, cn_raw, key_map = process_single_mod(sub_mod_path, cfg)
             for key, val in en_raw.items():
                 if key not in global_known_keys_en: workshop_en_base[key] = val
             for key, val in cn_raw.items():
                 if key not in global_known_keys_cn: workshop_cn_base[key] = val
             global_known_keys_en.update(en_raw.keys())
             global_known_keys_cn.update(cn_raw.keys())
+            workshop_key_source_map.update(key_map)
+            global_key_source_map[mod_id] = workshop_key_source_map
+            logging.info(f"\n--- 已为 Mod ID {mod_id} 更新 {len(workshop_key_source_map)} 条键来源映射 ---")
         
         final_output = {**workshop_en_base, **workshop_cn_base}
         en_todo_list, cn_only_list = {}, {}
@@ -496,7 +535,7 @@ def main():
                         def parent(self): return Path('.')
 
                     old_todo_stream_obj = StringPath(old_todo_content, f"{cfg.EN_TODO_FILENAME} (旧版本)")
-                    old_todo_data = get_translations_as_dict(old_todo_stream_obj, cfg)
+                    old_todo_data, _ = get_translations_as_dict(old_todo_stream_obj, cfg)
                     old_keys = set(old_todo_data.keys())
                 except Exception as e:
                     logging.warning(f"解析旧版 todo 文件内容时出错: {e}。将视为全新文件处理。")
@@ -529,6 +568,13 @@ def main():
 
     logging.info("\n--- 所有模组处理循环结束，正在保存最终运行状态 ---")
     save_status(run_status)
+
+    try:
+        with open(key_source_map_path, 'w', encoding='utf-8') as f:
+            json.dump(global_key_source_map, f, ensure_ascii=False, indent=2)
+        logging.info(f"全局键来源映射已成功保存到: {key_source_map_path}")
+    except Exception as e:
+        logging.error(f"错误：保存全局键来源映射失败: {e}")
     
     if update_log_entries:
         log_dir = Path('data/logs')
