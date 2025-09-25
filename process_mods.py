@@ -189,8 +189,10 @@ def get_translations_as_dict(file_path_or_dir, config):
         content = file_path_or_dir.read_text(encoding='utf-8')
         current_key = None
         current_value_parts = []
-        base_filename = file_path_or_dir.stem
-        source_filename = re.sub(r'_(?:' + re.escape(config.BASE_LANGUAGE) + r'|' + re.escape(config.PRIORITY_LANGUAGE) + r')$', '', base_filename, flags=re.IGNORECASE)
+        source_filename = ""
+        if isinstance(file_path_or_dir, Path):
+            base_filename = file_path_or_dir.stem
+            source_filename = re.sub(r'_(?:' + re.escape(config.BASE_LANGUAGE) + r'|' + re.escape(config.PRIORITY_LANGUAGE) + r')$', '', base_filename, flags=re.IGNORECASE)
 
         def save_current_entry():
             nonlocal current_key, current_value_parts, translations_dict
@@ -330,7 +332,14 @@ def load_exclusion_keys(file_path: Path) -> set:
     
     try:
         lines = file_path.read_text(encoding='utf-8').splitlines()
-        keys = {line.strip() for line in lines if line.strip()}
+        keys = set()
+        for line in lines:
+            line_stripped = line.strip()
+            if not line_stripped:
+                continue
+            key_part = line_stripped.split('=', 1)[0].strip()
+            keys.add(key_part)
+            
         logging.info(f"  -> 成功从 '{file_path.name}' 加载 {len(keys)} 个待排除的键。")
         return keys
     except Exception as e:
@@ -604,6 +613,66 @@ def main():
 
     logging.info("\n--- 所有模组处理循环结束，正在保存最终运行状态 ---")
     save_status(run_status)
+
+    logging.info("\n--- 应用正则表达式来源覆盖规则 ---")
+    regex_overrides_path = Path('translation_utils') / 'key_source_regex_overrides.json'
+    if regex_overrides_path.is_file():
+        try:
+            with open(regex_overrides_path, 'r', encoding='utf-8') as f:
+                rules = json.load(f)
+            if not isinstance(rules, list):
+                raise ValueError("规则文件必须是一个JSON列表。")
+
+            logging.info(f"成功加载 {len(rules)} 条正则表达式规则。")
+            total_updates = 0
+            
+            for i, rule in enumerate(rules):
+                pattern_str = rule.get("pattern")
+                new_source = rule.get("new_source")
+                if not pattern_str or not new_source:
+                    logging.warning(f"  -> 警告: 规则 #{i+1} 缺少 'pattern' 或 'new_source'，已跳过。")
+                    continue
+                
+                try:
+                    pattern = re.compile(pattern_str)
+                    rule_updates = 0
+                    for mod_path in mods_to_process:
+                        mod_id = mod_path.name
+
+                        if mod_id not in global_key_source_map:
+                            continue
+                        
+                        key_map = global_key_source_map[mod_id]
+                        for key, current_source in list(key_map.items()):
+                            # 规则可以匹配 键(key) 或 当前来源(current_source)
+                            match_target = rule.get("match_target", "key")
+                            target_string = key if match_target == "key" else current_source
+                            if pattern.match(target_string):
+                                condition = rule.get("if_source_is")
+                                if condition and current_source != condition:
+                                    continue
+                                if key_map[key] != new_source:
+                                    key_map[key] = new_source
+                                    rule_updates += 1
+                    
+                    if rule_updates > 0:
+                        logging.info(f"  -> 规则 #{i+1} ('{pattern_str[:30]}...') 匹配并更新了 {rule_updates} 个键。")
+                        total_updates += rule_updates
+
+                except re.error as e:
+                    logging.error(f"  -> 错误: 规则 #{i+1} 中的正则表达式无效: {e}，已跳过。")
+            
+            if total_updates > 0:
+                logging.info(f"成功通过正则表达式规则更新了 {total_updates} 个键的来源。")
+            else:
+                logging.info("未发现需要应用的正则表达式规则。")
+
+        except json.JSONDecodeError:
+            logging.error(f"错误：正则表达式覆盖文件 '{regex_overrides_path.name}' 格式无效，已跳过。")
+        except Exception as e:
+            logging.error(f"读取或应用正则表达式覆盖文件时发生错误: {e}")
+    else:
+        logging.info(f"未找到正则表达式覆盖文件 '{regex_overrides_path.name}'，跳过。")
 
     try:
         with open(key_source_map_path, 'w', encoding='utf-8') as f:
