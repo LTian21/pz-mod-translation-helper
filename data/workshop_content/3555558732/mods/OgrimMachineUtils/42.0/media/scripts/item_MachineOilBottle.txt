@@ -1,0 +1,43 @@
+module Base
+{
+
+	model MachineOil
+	{
+		mesh = WorldItems/CleaningLiquid,
+		texture = WorldItems/MachineOil,
+		scale = 0.4,
+
+		attachment Bip01_Prop2
+		{
+			offset = 0.0115 -0.0534 -0.0341,
+			rotate = -158.4006 -74.3619 -170.5248,
+			scale = 0.8700,
+		}
+	}
+
+	item MachineOilBottle
+	{
+		DisplayName = Machine Oil,
+		DisplayCategory = Household,
+		Type = Normal,
+		Weight = 0.3,
+		Icon = MachineOil,
+		CustomContextMenu = Drink,
+		FillFromDispenserSound = GetWaterFromDispenserPlastic,
+		FillFromLakeSound = GetWaterFromLakeBottle,
+		FillFromTapSound = GetWaterFromTapPlasticMedium,
+		StaticModel = MachineOil,
+		WorldStaticModel = MachineOil,
+        component FluidContainer
+        {
+            ContainerName   = BottleMachineOil,
+            capacity        = 0.5,
+            CustomDrinkSound = DrinkingFromBottlePlastic,
+            Fluids
+            {
+                fluid           = MachineOil:1.0,
+            }
+        }
+	}
+	
+}

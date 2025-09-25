@@ -1,0 +1,3951 @@
+module MyAlcohol
+{
+    imports
+    {
+    Base,
+    }
+
+item PillCapsule
+{
+    DisplayName         = Pill Capsule (Empty),
+    DisplayCategory     = Material,
+    Type                = Normal,
+    Weight              = 0.01,
+    Icon                = Antibiotics,
+    WorldStaticModel    = PillCapsule,
+    Tags                = IgnoreZombieDensity,
+}
+
+item PillCapsuleBag
+{
+    DisplayName         = Pill Capsule Bag,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 1,
+    Icon                = PillCapsuleBag,
+    WorldStaticModel    = PillCapsuleBag,
+    Tags                = IgnoreZombieDensity,
+}
+
+item Cheesecloth
+{
+    DisplayName         = Cheesecloth,
+    DisplayCategory     = Material,
+    Type                = Normal,
+    Weight              = 0.3,
+    Icon                = Cheesecloth,
+    WorldStaticModel    = Cheesecloth,
+    Tags                = IgnoreZombieDensity,
+}
+	
+item BottleCapper
+{
+    DisplayName         = Bottle Capper,
+    DisplayCategory     = Tools,
+    Type                = Normal,
+    Weight              = 0.1,
+    Icon                = BottleCapper,
+    WorldStaticModel    = BottleCapper,
+    Tags                = IgnoreZombieDensity,
+}
+
+item HomemadeNutrientBrothNoMold
+{
+    DisplayName         = Bowl of Homemade Nutrient Broth (No Mold),
+    DisplayCategory     = Food,
+        Type = Food,
+        Weight = 0.3,
+	DaysFresh = 7,
+	CantEat = TRUE,
+	DaysTotallyRotten = 14,
+    Icon                = BowlFull,
+    WorldStaticModel    = BowlOfHomemadeNutrientBroth,
+    Tags                = IgnoreZombieDensity,
+    ReplaceOnRotten = HomemadeNutrientBrothMoldy,
+}
+
+item HomemadeNutrientBrothMoldy
+{
+    DisplayName         = Bowl of Homemade Nutrient Broth (Moldy),
+    DisplayCategory     = Food,
+    Type 		= Food,
+    DaysFresh 		= 7,
+    CantEat 		= TRUE,
+    DaysTotallyRotten 	= 14,
+    Weight              = 0.25,
+    Icon                = BowlFull,
+    WorldStaticModel    = BowlOfHomemadeNutrientBrothMoldy,
+    Tags                = IgnoreZombieDensity,
+}
+
+item PenicillinPowder
+{
+    DisplayName         = Penicillin Powder,
+    DisplayCategory     = Medical,
+    Type                = Normal,
+    Weight              = 0.3,
+    Icon                = PenicillinPowder,
+    WorldStaticModel    = AntibioticsPowder,
+    Tags                = IgnoreZombieDensity,
+}
+
+item TreeBarkAndSapNoYeast
+{
+    DisplayName         = Bowl of Tree Bark & Sap (No Yeast),
+    DisplayCategory     = Food,
+        Type = Food,
+        Weight = 0.3,
+	DaysFresh = 7,
+	CantEat = TRUE,
+	DaysTotallyRotten = 14,
+    Icon                = BowlFull,
+    WorldStaticModel    = BowlOfTreeBarkAndSap,
+    Tags                = IgnoreZombieDensity,
+    ReplaceOnRotten = TreeBarkAndSapYeastInfested,
+}
+
+item TreeBarkAndSapYeastInfested
+{
+    DisplayName         = Bowl of Tree Bark & Sap (Yeast Infested),
+    DisplayCategory     = Food,
+    Type 		= Food,
+    DaysFresh 		= 7,
+    CantEat 		= TRUE,
+    DaysTotallyRotten 	= 14,
+    Weight              = 0.5,
+    Icon                = BowlFull,
+    WorldStaticModel    = BowlOfTreeBarkAndSapYeast,
+    Tags                = IgnoreZombieDensity,
+}
+
+item BowlOfFruitSkinsNoYeast
+{
+    DisplayName         = Bowl of Fruit Skins (No Yeast),
+    DisplayCategory     = Food,
+        Type = Food,
+        Weight = 0.5,
+	DaysFresh = 7,
+	CantEat = TRUE,
+	DaysTotallyRotten = 14,
+    Icon                = BowlFull,
+    WorldStaticModel    = BowlOfFruitSkins,
+    Tags                = IgnoreZombieDensity,
+    ReplaceOnRotten = BowlOfFruitSkinsYeastInfested,
+}
+
+item BowlOfFruitSkinsYeastInfested
+{
+    DisplayName         = Bowl of Fruit Skins (Yeast Infested),
+    DisplayCategory     = Food,
+    Type 		= Food,
+    DaysFresh 		= 7,
+    CantEat 		= TRUE,
+    DaysTotallyRotten 	= 14,
+    Weight              = 0.5,
+    Icon                = BowlFull,
+    WorldStaticModel    = BowlOfFruitSkinsYeast,
+    Tags                = IgnoreZombieDensity,
+}
+	
+    item AlcoholBottle
+    {
+        DisplayName = Bottle,
+        DisplayCategory = WaterContainer,
+        Type = Normal,
+        Weight = 1,
+        Icon = AlcoholBottle,
+        StaticModel = AlcoholBottle,
+	WorldStaticModel = AlcoholBottle_Ground,
+	FillFromDispenserSound = GetWaterFromDispenserGlass,
+	FillFromLakeSound = GetWaterFromLakeBottle,
+	FillFromTapSound = GetWaterFromTapGlass,
+	FillFromToiletSound = GetWaterFromToilet,
+	Tags = Glass,
+
+        component FluidContainer
+        {
+            ContainerName   = Bottle,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+        }
+    }
+
+    item GreenAlcoholBottle
+    {
+        DisplayName = Bottle,
+        DisplayCategory = WaterContainer,
+        Type = Normal,
+        Weight = 1,
+        Icon = GreenAlcoholBottle,
+        StaticModel = GreenAlcoholBottle,
+	WorldStaticModel = GreenAlcoholBottle_Ground,
+	FillFromDispenserSound = GetWaterFromDispenserGlass,
+	FillFromLakeSound = GetWaterFromLakeBottle,
+	FillFromTapSound = GetWaterFromTapGlass,
+	FillFromToiletSound = GetWaterFromToilet,
+	Tags = Glass,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+        }
+    }    
+    item Airlock
+    {
+        DisplayName = Airlock,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 0.1,
+        Icon = Airlock,
+	WorldStaticModel = Airlock,
+    }
+    
+    item GlassFermenter
+    {
+        DisplayName = Glass Fermenter,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 5,
+        Icon = GlassFermenter,
+	WorldStaticModel = GlassJug_Ground,
+    }
+    
+    item GlassFermenterWithAirlock
+    {
+        DisplayName = Glass Fermenter with Airlock,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 5.1,
+        Icon = GlassFermenter,
+	WorldStaticModel = GlassFermenter_Ground,
+    }
+    
+    item GlassFermenterWithFBeer
+    {
+        DisplayName = Glass Fermenter with Fermenting Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithLQBeer,
+    }
+     
+    item GlassFermenterWithLQBeer
+    {
+        DisplayName = Glass Fermenter with Low-quality Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithBeer,
+    }
+     
+    item GlassFermenterWithBeer
+    {
+        DisplayName = Glass Fermenter with Normal Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithHQBeer,
+    }
+     
+    item GlassFermenterWithHQBeer
+    {
+        DisplayName = Glass Fermenter with High-quality Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+        Icon = GlassFermenter,
+    }
+    
+    item GlassFermenterWithFMead
+    {
+        DisplayName = Glass Fermenter with Fermenting Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithLQMead,
+    }
+          
+    item GlassFermenterWithLQMead
+    {
+        DisplayName = Glass Fermenter with Low-quality Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithMead,
+    }
+     
+    item GlassFermenterWithMead
+    {
+        DisplayName = Glass Fermenter with Normal Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithHQMead,
+    }
+     
+    item GlassFermenterWithHQMead
+    {
+        DisplayName = Glass Fermenter with High-quality Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+        Icon = GlassFermenter,
+    }
+    
+    item GlassFermenterWithFBerrywine
+    {
+        DisplayName = Glass Fermenter with Fermenting Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithLQBerrywine,
+    }
+          
+    item GlassFermenterWithLQBerrywine
+    {
+        DisplayName = Glass Fermenter with Low-quality Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithBerrywine,
+    }
+     
+    item GlassFermenterWithBerrywine
+    {
+        DisplayName = Glass Fermenter with Normal Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithHQBerrywine,
+    }
+     
+    item GlassFermenterWithHQBerrywine
+    {
+        DisplayName = Glass Fermenter with High-quality Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+        Icon = GlassFermenter,
+    }
+    
+    item GlassFermenterWithFWhiskey
+    {
+        DisplayName = Glass Fermenter with Fermenting Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithLQWhiskey,
+    }
+              
+    item GlassFermenterWithLQWhiskey
+    {
+        DisplayName = Glass Fermenter with Low-quality Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithWhiskey,
+    }
+     
+    item GlassFermenterWithWhiskey
+    {
+        DisplayName = Glass Fermenter with Normal Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithHQWhiskey,
+    }
+     
+    item GlassFermenterWithHQWhiskey
+    {
+        DisplayName = Glass Fermenter with High-quality Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+        Icon = GlassFermenter,
+    }
+    
+    item GlassFermenterWithFVodka
+    {
+        DisplayName = Glass Fermenter with Fermenting Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithLQVodka,
+    }
+                
+    item GlassFermenterWithLQVodka
+    {
+        DisplayName = Glass Fermenter with Low-quality Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithVodka,
+    }
+     
+    item GlassFermenterWithVodka
+    {
+        DisplayName = Glass Fermenter with Normal Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithHQVodka,
+    }
+     
+    item GlassFermenterWithHQVodka
+    {
+        DisplayName = Glass Fermenter with High-quality Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+        Icon = GlassFermenter,
+    }
+    
+    item GlassFermenterWithFRedWine
+    {
+        DisplayName = Glass Fermenter with Fermenting Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithLQRedWine,
+    }
+                    
+    item GlassFermenterWithLQRedWine
+    {
+        DisplayName = Glass Fermenter with Low-quality Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithRedWine,
+    }
+     
+    item GlassFermenterWithRedWine
+    {
+        DisplayName = Glass Fermenter with Normal Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithHQRedWine,
+    }
+     
+    item GlassFermenterWithHQRedWine
+    {
+        DisplayName = Glass Fermenter with High-quality Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+        Icon = GlassFermenter,
+    }
+    
+    item GlassFermenterWithFWhiteWine
+    {
+        DisplayName = Glass Fermenter with Fermenting White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithLQWhiteWine,
+    }
+                    
+    item GlassFermenterWithLQWhiteWine
+    {
+        DisplayName = Glass Fermenter with Low-quality White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithWhiteWine,
+    }
+     
+    item GlassFermenterWithWhiteWine
+    {
+        DisplayName = Glass Fermenter with Normal White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithHQWhiteWine,
+    }
+     
+    item GlassFermenterWithHQWhiteWine
+    {
+        DisplayName = Glass Fermenter with High-quality White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+        Icon = GlassFermenter,
+    }
+     
+    item GlassFermenterWithFGin
+    {
+        DisplayName = Glass Fermenter with Fermenting Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithLQGin,
+    }
+                
+    item GlassFermenterWithLQGin
+    {
+        DisplayName = Glass Fermenter with Low-quality Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithGin,
+    }
+     
+    item GlassFermenterWithGin
+    {
+        DisplayName = Glass Fermenter with Normal Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+	ReplaceOnRotten = GlassFermenterWithHQGin,
+    }
+     
+    item GlassFermenterWithHQGin
+    {
+        DisplayName = Glass Fermenter with High-quality Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassFermenter_Ground,
+        Icon = GlassFermenter,
+    }
+       
+    item DirtyGlassFermenter
+    {
+        DisplayName = Dirty Glass Fermenter,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 5,
+        Icon = GlassFermenter,
+	StaticModel = GlassFermenter_Ground,
+	WorldStaticModel = GlassJug_Ground,
+    }
+    
+    item SteelKeg
+    {
+        DisplayName = Steel Keg,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 5,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+    }
+    
+    item SteelKegWithAirlock
+    {
+        DisplayName = Steel Keg with Airlock,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 5.1,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+    }
+    
+    item SteelKegWithFBeer
+    {
+        DisplayName = Steel Keg with Fermenting Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithLQBeer,
+    }
+     
+    item SteelKegWithLQBeer
+    {
+        DisplayName = Steel Keg with Low-quality Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithBeer,
+    }
+     
+    item SteelKegWithBeer
+    {
+        DisplayName = Steel Keg with Normal Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithHQBeer,
+    }
+     
+    item SteelKegWithHQBeer
+    {
+        DisplayName = Steel Keg with High-quality Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+        Icon = SteelKeg,
+    }
+    
+    item SteelKegWithFMead
+    {
+        DisplayName = Steel Keg with Fermenting Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithLQMead,
+    }
+          
+    item SteelKegWithLQMead
+    {
+        DisplayName = Steel Keg with Low-quality Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithMead,
+    }
+     
+    item SteelKegWithMead
+    {
+        DisplayName = Steel Keg with Normal Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithHQMead,
+    }
+     
+    item SteelKegWithHQMead
+    {
+        DisplayName = Steel Keg with High-quality Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+        Icon = SteelKeg,
+    }
+    
+    item SteelKegWithFBerrywine
+    {
+        DisplayName = Steel Keg with Fermenting Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithLQBerrywine,
+    }
+          
+    item SteelKegWithLQBerrywine
+    {
+        DisplayName = Steel Keg with Low-quality Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithBerrywine,
+    }
+     
+    item SteelKegWithBerrywine
+    {
+        DisplayName = Steel Keg with Normal Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithHQBerrywine,
+    }
+     
+    item SteelKegWithHQBerrywine
+    {
+        DisplayName = Steel Keg with High-quality Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+        Icon = SteelKeg,
+    }
+    
+    item SteelKegWithFWhiskey
+    {
+        DisplayName = Steel Keg with Fermenting Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithLQWhiskey,
+    }
+              
+    item SteelKegWithLQWhiskey
+    {
+        DisplayName = Steel Keg with Low-quality Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithWhiskey,
+    }
+     
+    item SteelKegWithWhiskey
+    {
+        DisplayName = Steel Keg with Normal Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithHQWhiskey,
+    }
+     
+    item SteelKegWithHQWhiskey
+    {
+        DisplayName = Steel Keg with High-quality Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+        Icon = SteelKeg,
+    }
+    
+    item SteelKegWithFVodka
+    {
+        DisplayName = Steel Keg with Fermenting Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithLQVodka,
+    }
+                
+    item SteelKegWithLQVodka
+    {
+        DisplayName = Steel Keg with Low-quality Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithVodka,
+    }
+     
+    item SteelKegWithVodka
+    {
+        DisplayName = Steel Keg with Normal Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithHQVodka,
+    }
+     
+    item SteelKegWithHQVodka
+    {
+        DisplayName = Steel Keg with High-quality Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+        Icon = SteelKeg,
+    }
+    
+    item SteelKegWithFRedWine
+    {
+        DisplayName = Steel Keg with Fermenting Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithLQRedWine,
+    }
+                    
+    item SteelKegWithLQRedWine
+    {
+        DisplayName = Steel Keg with Low-quality Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithRedWine,
+    }
+     
+    item SteelKegWithRedWine
+    {
+        DisplayName = Steel Keg with Normal Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithHQRedWine,
+    }
+     
+    item SteelKegWithHQRedWine
+    {
+        DisplayName = Steel Keg with High-quality Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+        Icon = SteelKeg,
+    }
+    
+    item SteelKegWithFWhiteWine
+    {
+        DisplayName = Steel Keg with Fermenting White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithLQWhiteWine,
+    }
+                    
+    item SteelKegWithLQWhiteWine
+    {
+        DisplayName = Steel Keg with Low-quality White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithWhiteWine,
+    }
+     
+    item SteelKegWithWhiteWine
+    {
+        DisplayName = Steel Keg with Normal White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithHQWhiteWine,
+    }
+     
+    item SteelKegWithHQWhiteWine
+    {
+        DisplayName = Steel Keg with High-quality White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+        Icon = SteelKeg,
+    }
+      
+    item SteelKegWithFGin
+    {
+        DisplayName = Steel Keg with Fermenting Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithLQGin,
+    }
+                
+    item SteelKegWithLQGin
+    {
+        DisplayName = Steel Keg with Low-quality Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithGin,
+    }
+     
+    item SteelKegWithGin
+    {
+        DisplayName = Steel Keg with Normal Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	ReplaceOnRotten = SteelKegWithHQGin,
+    }
+     
+    item SteelKegWithHQGin
+    {
+        DisplayName = Steel Keg with High-quality Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+        Icon = SteelKeg,
+    }
+       
+    item DirtySteelKeg
+    {
+        DisplayName = Dirty Steel Keg,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 5,
+        Icon = SteelKeg,
+	StaticModel = SteelKeg_Ground,
+	WorldStaticModel = SteelKeg_Ground,
+	}
+  
+    item WoodenKeg
+    {
+        DisplayName = Wooden Keg,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 5,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+    }
+    
+    item WoodenKegWithAirlock
+    {
+        DisplayName = Wooden Keg with Airlock,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 5.1,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+    }
+    
+    item WoodenKegWithFBeer
+    {
+        DisplayName = Wooden Keg with Fermenting Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithLQBeer,
+    }
+     
+    item WoodenKegWithLQBeer
+    {
+        DisplayName = Wooden Keg with Low-quality Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithBeer,
+    }
+     
+    item WoodenKegWithBeer
+    {
+        DisplayName = Wooden Keg with Normal Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithHQBeer,
+    }
+     
+    item WoodenKegWithHQBeer
+    {
+        DisplayName = Wooden Keg with High-quality Beer,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+        Icon = WoodenKeg,
+    }
+    
+    item WoodenKegWithFMead
+    {
+        DisplayName = Wooden Keg with Fermenting Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithLQMead,
+    }
+          
+    item WoodenKegWithLQMead
+    {
+        DisplayName = Wooden Keg with Low-quality Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithMead,
+    }
+     
+    item WoodenKegWithMead
+    {
+        DisplayName = Wooden Keg with Normal Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithHQMead,
+    }
+     
+    item WoodenKegWithHQMead
+    {
+        DisplayName = Wooden Keg with High-quality Mead,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+        Icon = WoodenKeg,
+    }
+    
+    item WoodenKegWithFBerrywine
+    {
+        DisplayName = Wooden Keg with Fermenting Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithLQBerrywine,
+    }
+          
+    item WoodenKegWithLQBerrywine
+    {
+        DisplayName = Wooden Keg with Low-quality Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithBerrywine,
+    }
+     
+    item WoodenKegWithBerrywine
+    {
+        DisplayName = Wooden Keg with Normal Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithHQBerrywine,
+    }
+     
+    item WoodenKegWithHQBerrywine
+    {
+        DisplayName = Wooden Keg with High-quality Berrywine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+        Icon = WoodenKeg,
+    }
+    
+    item WoodenKegWithFWhiskey
+    {
+        DisplayName = Wooden Keg with Fermenting Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithLQWhiskey,
+    }
+              
+    item WoodenKegWithLQWhiskey
+    {
+        DisplayName = Wooden Keg with Low-quality Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithWhiskey,
+    }
+     
+    item WoodenKegWithWhiskey
+    {
+        DisplayName = Wooden Keg with Normal Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithHQWhiskey,
+    }
+     
+    item WoodenKegWithHQWhiskey
+    {
+        DisplayName = Wooden Keg with High-quality Whiskey,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+        Icon = WoodenKeg,
+    }
+    
+    item WoodenKegWithFVodka
+    {
+        DisplayName = Wooden Keg with Fermenting Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithLQVodka,
+    }
+                
+    item WoodenKegWithLQVodka
+    {
+        DisplayName = Wooden Keg with Low-quality Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithVodka,
+    }
+     
+    item WoodenKegWithVodka
+    {
+        DisplayName = Wooden Keg with Normal Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithHQVodka,
+    }
+     
+    item WoodenKegWithHQVodka
+    {
+        DisplayName = Wooden Keg with High-quality Vodka,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+        Icon = WoodenKeg,
+    }
+    
+    item WoodenKegWithFRedWine
+    {
+        DisplayName = Wooden Keg with Fermenting Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithLQRedWine,
+    }
+                    
+    item WoodenKegWithLQRedWine
+    {
+        DisplayName = Wooden Keg with Low-quality Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithRedWine,
+    }
+     
+    item WoodenKegWithRedWine
+    {
+        DisplayName = Wooden Keg with Normal Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithHQRedWine,
+    }
+     
+    item WoodenKegWithHQRedWine
+    {
+        DisplayName = Wooden Keg with High-quality Red Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+        Icon = WoodenKeg,
+    }
+    
+    item WoodenKegWithFWhiteWine
+    {
+        DisplayName = Wooden Keg with Fermenting White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithLQWhiteWine,
+    }
+                    
+    item WoodenKegWithLQWhiteWine
+    {
+        DisplayName = Wooden Keg with Low-quality White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithWhiteWine,
+    }
+     
+    item WoodenKegWithWhiteWine
+    {
+        DisplayName = Wooden Keg with Normal White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithHQWhiteWine,
+    }
+     
+    item WoodenKegWithHQWhiteWine
+    {
+        DisplayName = Wooden Keg with High-quality White Wine,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+        Icon = WoodenKeg,
+    }
+      
+    item WoodenKegWithFGin
+    {
+        DisplayName = Wooden Keg with Fermenting Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 14,
+	CantEat = TRUE,
+	DaysTotallyRotten = 15,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithLQGin,
+    }
+                
+    item WoodenKegWithLQGin
+    {
+        DisplayName = Wooden Keg with Low-quality Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithGin,
+    }
+     
+    item WoodenKegWithGin
+    {
+        DisplayName = Wooden Keg with Normal Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	DaysFresh = 59,
+	CantEat = TRUE,
+	DaysTotallyRotten = 60,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	ReplaceOnRotten = WoodenKegWithHQGin,
+    }
+     
+    item WoodenKegWithHQGin
+    {
+        DisplayName = Wooden Keg with High-quality Gin,
+        DisplayCategory = Food,
+        Type = Food,
+        Weight = 12,
+	CantEat = TRUE,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+        Icon = WoodenKeg,
+    }
+       
+    item DirtyWoodenKeg
+    {
+        DisplayName = Dirty Wooden Keg,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 5,
+        Icon = WoodenKeg,
+	StaticModel = WoodenKeg_Ground,
+	WorldStaticModel = WoodenKeg_Ground,
+	}
+
+item GlassFermenterWithFMaltVinegar
+{
+    DisplayName = Glass Fermenter with Fermenting Malt Vinegar,
+    DisplayCategory = Food,
+    Type = Food,
+    Weight = 12,
+    DaysFresh = 7,
+    CantEat = TRUE,
+    DaysTotallyRotten = 14,
+    Icon = GlassFermenter,
+    StaticModel = GlassFermenter_Ground,
+    WorldStaticModel = GlassFermenter_Ground,
+    ReplaceOnRotten = GlassFermenterWithLQMaltVinegar,
+}
+
+item GlassFermenterWithMaltVinegar
+{
+    DisplayName = Glass Fermenter with Malt Vinegar,
+    DisplayCategory = Food,
+    Type = Food,
+    Weight = 12,
+    DaysFresh = 7,
+    CantEat = TRUE,
+    DaysTotallyRotten = 14,
+    Icon = GlassFermenter,
+    StaticModel = GlassFermenter_Ground,
+    WorldStaticModel = GlassFermenter_Ground,
+    ReplaceOnRotten = GlassFermenterWithMaltVinegar,
+}
+
+item WoodenKegWithFMaltVinegar
+{
+    DisplayName = Wooden Keg with Fermenting Malt Vinegar,
+    DisplayCategory = Food,
+    Type = Food,
+    Weight = 12,
+    DaysFresh = 7,
+    CantEat = TRUE,
+    DaysTotallyRotten = 14,
+    Icon = WoodenKeg,
+    StaticModel = WoodenKeg_Ground,
+    WorldStaticModel = WoodenKeg_Ground,
+    ReplaceOnRotten = WoodenKegWithMaltVinegar,
+}
+
+item WoodenKegWithMaltVinegar
+{
+    DisplayName = Wooden Keg with Malt Vinegar,
+    DisplayCategory = Food,
+    Type = Food,
+    Weight = 12,
+    DaysFresh = 7,
+    CantEat = TRUE,
+    DaysTotallyRotten = 14,
+    Icon = WoodenKeg,
+    StaticModel = WoodenKeg_Ground,
+    WorldStaticModel = WoodenKeg_Ground,
+}
+
+item SteelKegWithFMaltVinegar
+{
+    DisplayName = Steel Keg with Fermenting Malt Vinegar,
+    DisplayCategory = Food,
+    Type = Food,
+    Weight = 12,
+    DaysFresh = 7,
+    CantEat = TRUE,
+    DaysTotallyRotten = 14,
+    Icon = SteelKeg,
+    StaticModel = SteelKeg_Ground,
+    WorldStaticModel = SteelKeg_Ground,
+    ReplaceOnRotten = SteelFermenterWithMaltVinegar,
+}
+
+item SteelKegWithMaltVinegar
+{
+    DisplayName = Steel Keg with Malt Vinegar,
+    DisplayCategory = Food,
+    Type = Food,
+    Weight = 12,
+    DaysFresh = 7,
+    CantEat = TRUE,
+    DaysTotallyRotten = 14,
+    Icon = SteelKeg,
+    StaticModel = SteelKeg_Ground,
+    WorldStaticModel = SteelKeg_Ground,
+}
+
+    item CookingPotWithWort
+    {
+        DisplayName = Cooking Pot with Wort,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 2,
+        Icon = WortCookingPot,
+	WorldStaticModel = CookingPotWort,
+    }
+    
+    item CookingPotWithMeadWort
+    {
+        DisplayName = Cooking Pot with Mead Wort,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 2,
+        Icon = WortCookingPot,
+	WorldStaticModel = CookingPotMeadWort,
+    }
+    
+    item CookingPotWithBerryMust
+    {
+        DisplayName = Cooking Pot with Berry Must,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 2,
+        Icon = GrapeWortCookingPot,
+	WorldStaticModel = CookingPotBerryMust,
+    }
+        
+    item CookingPotWithGrapeMust
+    {
+        DisplayName = Cooking Pot with Grape Must,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 2,
+        Icon = GrapeWortCookingPot,
+	WorldStaticModel = CookingPotGrapeMust,
+    }
+        
+    item CookingPotWithWhiteGrapeMust
+    {
+        DisplayName = Cooking Pot with White Grape Must,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 2,
+        Icon = GrapeWortCookingPot,
+	WorldStaticModel = CookingPotWhiteGrapeMust,
+    }
+        
+    item CookingPotWithPotatoMash
+    {
+        DisplayName = Cooking Pot with Potato Mash,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 2,
+        Icon = WortCookingPot,
+	WorldStaticModel = CookingPotPotatoMash,
+    }
+     
+    item CookingPotWithGrainMash
+    {
+        DisplayName = Cooking Pot with Grain Mash,
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 2,
+        Icon = WortCookingPot,
+	WorldStaticModel = CookingPotGrainMash,
+    }
+
+
+item HoneyPack
+{
+    DisplayName         = Pack of Honey,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 1.5,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = HoneyPack,
+    Tags                = IgnoreZombieDensity,
+}
+
+item GlassBottlesBox
+{
+    DisplayName         = Box of Glass Bottles,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 2.5,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = GlassBottlesBox,
+    Tags                = IgnoreZombieDensity,
+}
+
+item StrawberriesBox
+{
+    DisplayName         = Sealed Box of Strawberries,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 4.0,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = StrawberriesBox,
+    Tags                = IgnoreZombieDensity,
+}
+
+item HopsBox
+{
+    DisplayName         = Sealed Box of Hops,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 4.0,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = HopsBox,
+    Tags                = IgnoreZombieDensity,
+}
+
+item GrapesBox
+{
+    DisplayName         = Sealed Box of Grapes,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 4.0,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = GrapesBox,
+    Tags                = IgnoreZombieDensity,
+}
+
+item WhiteGrapesBox
+{
+    DisplayName         = Sealed Box of White Grapes,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 4.0,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = WhiteGrapesBox,
+    Tags                = IgnoreZombieDensity,
+}
+
+item BarleySeedsBox
+{
+    DisplayName         = Sealed Box of Barley Seeds,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 3.0,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = BarleySeedsBox,
+    Tags                = IgnoreZombieDensity,
+}
+
+item WheatSeedsBox
+{
+    DisplayName         = Sealed Box of Wheat Seeds,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 3.0,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = WheatSeedsBox,
+    Tags                = IgnoreZombieDensity,
+}
+
+item RyeSeedsBox
+{
+    DisplayName         = Sealed Box of Rye Seeds,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 3.0,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = RyeSeedsBox,
+    Tags                = IgnoreZombieDensity,
+}
+
+item PotatoesBox
+{
+    DisplayName         = Sealed Box of Potatoes,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 5.0,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = PotatoesBox,
+    Tags                = IgnoreZombieDensity,
+}
+
+item HomemadeBeerPack
+{
+    DisplayName         = Pack of Homemade Beer,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 4.5,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = HomemadeBeerPack,
+    Tags                = IgnoreZombieDensity,
+}
+
+item HomemadeMeadPack
+{
+    DisplayName         = Pack of Homemade Mead,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 4.5,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = HomemadeMeadPack,
+    Tags                = IgnoreZombieDensity,
+}
+
+item HomemadeBerrywinePack
+{
+    DisplayName         = Pack of Homemade Berrywine,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 4.5,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = HomemadeBerrywinePack,
+    Tags                = IgnoreZombieDensity,
+}
+
+item HomemadeWhiskeyPack
+{
+    DisplayName         = Pack of Homemade Whiskey,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 4.5,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = HomemadeWhiskeyPack,
+    Tags                = IgnoreZombieDensity,
+}
+
+item HomemadeVodkaPack
+{
+    DisplayName         = Pack of Homemade Vodka,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 4.5,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = HomemadeVodkaPack,
+    Tags                = IgnoreZombieDensity,
+}
+
+item HomemadeRedWinePack
+{
+    DisplayName         = Pack of Homemade Red Wine,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 4.5,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = HomemadeRedWinePack,
+    Tags                = IgnoreZombieDensity,
+}
+
+item HomemadeGinPack
+{
+    DisplayName         = Pack of Homemade Gin,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 4.5,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = HomemadeGinPack,
+    Tags                = IgnoreZombieDensity,
+}
+
+item CorksBox
+{
+    DisplayName         = Box of Corks,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 1.4,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = CorksBox,
+    Tags                = IgnoreZombieDensity,
+}
+
+item BottleCapsBox
+{
+    DisplayName         = Box of Bottle Caps,
+    DisplayCategory     = Food,
+    Type                = Normal,
+    Weight              = 1.3,
+    Icon                = Parcel_Medium_Food,
+    WorldStaticModel    = BottleCapsBox,
+    Tags                = IgnoreZombieDensity,
+}
+
+item BottleCap
+{
+    DisplayName         = Bottle Cap,
+    DisplayCategory     = Material,
+    Type                = Normal,
+    Weight              = 0.01,
+    Icon                = BottleCap,
+    WorldStaticModel    = BottleCap,
+    Tags                = IgnoreZombieDensity,
+}
+
+    item SealedBeerLQ
+    {
+        DisplayName = Bottle of Beer - Low Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = LQBeer:1.0,
+            }
+        }
+    }
+
+    item SealedBeer
+    {
+        DisplayName = Bottle of Beer,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = Beer:1.0,
+            }
+        }
+    }
+
+    item SealedBeerHQ
+    {
+        DisplayName = Bottle of Beer - High Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+	ReplaceOnRotten = SealedBeerWA,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = HQBeer:1.0,
+            }
+        }
+    }
+
+    item SealedMeadLQ
+    {
+        DisplayName = Bottle of Mead - Low Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = LQMead:1.0,
+            }
+        }
+    }
+
+    item SealedMead
+    {
+        DisplayName = Bottle of Mead,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = Mead:1.0,
+            }
+        }
+    }
+
+    item SealedMeadHQ
+    {
+        DisplayName = Bottle of Mead - High Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+	ReplaceOnRotten = SealedMeadWA,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = HQMead:1.0,
+            }
+        }
+    }
+    item SealedBerrywineLQ
+    {
+        DisplayName = Bottle of Berrywine - Low Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = LQBerrywine:1.0,
+            }
+        }
+    }
+
+    item SealedBerrywine
+    {
+        DisplayName = Bottle of Berrywine,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = Berrywine:1.0,
+            }
+        }
+    }
+
+    item SealedBerrywineHQ
+    {
+        DisplayName = Bottle of Berrywine - High Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+	ReplaceOnRotten = SealedBerryWineWA,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = HQBerrywine:1.0,
+            }
+        }
+    }
+
+    item SealedWhiskeyLQ
+    {
+        DisplayName = Bottle of Whiskey - Low Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = LQWhiskey:1.0,
+            }
+        }
+    }
+
+    item SealedWhiskey
+    {
+        DisplayName = Bottle of Whiskey,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = Whiskey:1.0,
+            }
+        }
+    }
+
+    item SealedWhiskeyHQ
+    {
+        DisplayName = Bottle of Whiskey - High Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+	ReplaceOnRotten = SealedWhiskeyWA,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = HQWhiskey:1.0,
+            }
+        }
+    }
+
+    item SealedVodkaLQ
+    {
+        DisplayName = Bottle of Vodka - Low Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = LQVodka:1.0,
+            }
+        }
+    }
+
+    item SealedVodka
+    {
+        DisplayName = Bottle of Vodka,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = Vodka:1.0,
+            }
+        }
+    }
+
+    item SealedVodkaHQ
+    {
+        DisplayName = Bottle of Vodka - High Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+	ReplaceOnRotten = SealedVodkaWA,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = HQVodka:1.0,
+            }
+        }
+    }
+    item SealedGinLQ
+    {
+        DisplayName = Bottle of Gin - Low Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = LQGin:1.0,
+            }
+        }
+    }
+
+    item SealedGin
+    {
+        DisplayName = Bottle of Gin,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = Gin:1.0,
+            }
+        }
+    }
+
+    item SealedGinHQ
+    {
+        DisplayName = Bottle of Gin - High Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+	ReplaceOnRotten = SealedGinWA,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = HQGin:1.0,
+            }
+        }
+    }
+
+    item SealedWineLQ
+    {
+        DisplayName = Bottle of Wine - Low Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = LQWine:1.0,
+            }
+        }
+    }
+
+    item SealedWine
+    {
+        DisplayName = Bottle of Wine,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = Wine:1.0,
+            }
+        }
+    }
+
+    item SealedWineHQ
+    {
+        DisplayName = Bottle of Wine - High Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+	ReplaceOnRotten = SealedRedWineWA,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = HQWine:1.0,
+            }
+        }
+    }
+
+    item SealedWhiteWineLQ
+    {
+        DisplayName = Bottle of White Wine - Low Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = LQWine:1.0:0.65:0.8:0.65,
+            }
+        }
+    }
+
+    item SealedWhiteWine
+    {
+        DisplayName = Bottle of White Wine,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = Wine:1.0:0.65:0.8:0.65,
+            }
+        }
+    }
+
+    item SealedWhiteWineHQ
+    {
+        DisplayName = Bottle of White Wine - High Quality,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+	EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+	DaysFresh = 29,
+	CantEat = TRUE,
+	DaysTotallyRotten = 30,
+	ReplaceOnRotten = SealedWhiteWineWA,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = AlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = HQWine:1.0:0.65:0.8:0.65,
+            }
+        }
+    }
+
+item OpenedBeerLQ
+{
+    DisplayName = Bottle of Beer - Low Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = LQBeer:1.0,
+    }
+    }
+}
+item OpenedBeer
+{
+    DisplayName = Bottle of Beer (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = Beer:1.0,
+    }
+    }
+}
+item OpenedBeerHQ
+{
+    DisplayName = Bottle of Beer - High Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = HQBeer:1.0,
+    }
+    }
+}
+item OpenedMeadLQ
+{
+    DisplayName = Bottle of Mead - Low Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = LQMead:1.0,
+    }
+    }
+}
+item OpenedMead
+{
+    DisplayName = Bottle of Mead (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = Mead:1.0,
+    }
+    }
+}
+item OpenedMeadHQ
+{
+    DisplayName = Bottle of Mead - High Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = HQMead:1.0,
+    }
+    }
+}
+item OpenedBerrywineLQ
+{
+    DisplayName = Bottle of Berrywine - Low Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = LQBerrywine:1.0,
+    }
+    }
+}
+item OpenedBerrywine
+{
+    DisplayName = Bottle of Berrywine (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = Berrywine:1.0,
+    }
+    }
+}
+item OpenedBerrywineHQ
+{
+    DisplayName = Bottle of Berrywine - High Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = HQBerrywine:1.0,
+    }
+    }
+}
+item OpenedWhiskeyLQ
+{
+    DisplayName = Bottle of Whiskey - Low Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = LQWhiskey:1.0,
+    }
+    }
+}
+item OpenedWhiskey
+{
+    DisplayName = Bottle of Whiskey (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = Whiskey:1.0,
+    }
+    }
+}
+item OpenedWhiskeyHQ
+{
+    DisplayName = Bottle of Whiskey - High Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = HQWhiskey:1.0,
+    }
+    }
+}
+item OpenedVodkaLQ
+{
+    DisplayName = Bottle of Vodka - Low Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = LQVodka:1.0,
+    }
+    }
+}
+item OpenedVodka
+{
+    DisplayName = Bottle of Vodka (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = Vodka:1.0,
+    }
+    }
+}
+item OpenedVodkaHQ
+{
+    DisplayName = Bottle of Vodka - High Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = HQVodka:1.0,
+    }
+    }
+}
+item OpenedGinLQ
+{
+    DisplayName = Bottle of Gin - Low Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = LQGin:1.0,
+    }
+    }
+}
+item OpenedGin
+{
+    DisplayName = Bottle of Gin (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = Gin:1.0,
+    }
+    }
+}
+item OpenedGinHQ
+{
+    DisplayName = Bottle of Gin - High Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = HQGin:1.0,
+    }
+    }
+}
+item OpenedWineLQ
+{
+    DisplayName = Bottle of Wine - Low Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = LQWine:1.0,
+    }
+    }
+}
+item OpenedWine
+{
+    DisplayName = Bottle of Wine (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = Wine:1.0,
+    }
+    }
+}
+item OpenedWineHQ
+{
+    DisplayName = Bottle of Wine - High Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = HQWine:1.0,
+    }
+    }
+}
+item OpenedWhiteWineLQ
+{
+    DisplayName = Bottle of White Wine - Low Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = LQWine:1.0:0.65:0.8:0.65,
+    }
+    }
+}
+item OpenedWhiteWine
+{
+    DisplayName = Bottle of White Wine (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = Wine:1.0:0.65:0.8:0.65,
+    }
+    }
+}
+item OpenedWhiteWineHQ
+{
+    DisplayName = Bottle of White Wine - High Quality (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity	= 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = HQWine:1.0:0.65:0.8:0.65,
+    }
+    }
+}
+
+item SealedBeerWA
+    {
+        DisplayName = Bottle of Beer - Well Aged,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+    EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = DirtyAlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = WABeer:1.0,
+            }
+        }
+    }
+item OpenedBeerWA
+{
+    DisplayName = Bottle of Beer - Well Aged (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity    = 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = WABeer:1.0,
+    }
+    }
+}
+
+item SealedMeadWA
+    {
+        DisplayName = Bottle of Mead - Well Aged,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+    EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = DirtyAlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = WAMead:1.0,
+            }
+        }
+    }
+item OpenedMeadWA
+{
+    DisplayName = Bottle of Mead - Well Aged (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity    = 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = WAMead:1.0,
+    }
+    }
+}
+
+item SealedWhiskeyWA
+    {
+        DisplayName = Bottle of Whiskey - Well Aged,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+    EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = DirtyAlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = WAWhiskey:1.0,
+            }
+        }
+    }
+item OpenedWhiskeyWA
+{
+    DisplayName = Bottle of Whiskey - Well Aged (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity    = 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = WAWhiskey:1.0,
+    }
+    }
+}
+
+item SealedVodkaWA
+    {
+        DisplayName = Bottle of Vodka - Well Aged,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+    EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = DirtyAlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = WAVodka:1.0,
+            }
+        }
+    }
+item OpenedVodkaWA
+{
+    DisplayName = Bottle of Vodka - Well Aged (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity    = 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = WAVodka:1.0,
+    }
+    }
+}
+
+item SealedGinWA
+    {
+        DisplayName = Bottle of Gin - Well Aged,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+    EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CapAlcoholBottle,
+        WorldStaticModel = CapAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = DirtyAlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = WAGin:1.0,
+            }
+        }
+    }
+item OpenedGinWA
+{
+    DisplayName = Bottle of Gin - Well Aged (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity    = 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = WAGin:1.0,
+    }
+    }
+}
+
+item SealedBerryWineWA
+    {
+        DisplayName = Bottle of Berry Wine - Well Aged,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+    EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = DirtyAlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = WABerryWine:1.0,
+            }
+        }
+    }
+item OpenedBerryWineWA
+{
+    DisplayName = Bottle of Berry Wine - Well Aged (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity    = 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = WABerryWine:1.0,
+    }
+    }
+}
+
+item SealedWhiteWineWA
+    {
+        DisplayName = Bottle of White Wine - Well Aged,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+    EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = DirtyAlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = WAWine:1.0:0.65:0.8:0.65,
+            }
+        }
+    }
+item OpenedWhiteWineWA
+{
+    DisplayName = Bottle of White Wine - Well Aged (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity    = 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+                fluid = WAWine:1.0:0.65:0.8:0.65,
+    }
+    }
+}
+
+item SealedRedWineWA
+    {
+        DisplayName = Bottle of Red Wine - Well Aged,
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 1.0,
+        Icon = SealedAlcoholBottle, 
+    EatType = Bourbon,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        StaticModel = CorkAlcoholBottle,
+        WorldStaticModel = CorkAlcoholBottle,
+        Tags = Glass;GlassBottle,
+
+        component FluidContainer
+        {
+            ContainerName   = DirtyAlcoholBottle,
+            Opened    = false,
+            capacity        = 1.0,
+            CustomDrinkSound = DrinkingFromBottle,
+
+            Fluids
+            {
+                fluid = WAWine:1.0,
+            }
+        }
+    }
+item OpenedRedWineWA
+{
+    DisplayName = Bottle of Red Wine - Well Aged (Opened),
+    DisplayCategory = Food,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    EatType = Bourbon,
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = DirtyAlcoholBottle,
+    Opened    = true,
+    capacity    = 1.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = WAWine:1.0,
+    }
+    }
+}
+item OpenedEthanolBottle
+{
+    DisplayName = Bottle of Ethanol,
+    DisplayCategory = FluidContainer,
+    Type = Normal,
+    Weight = 1.0,
+    Icon = GreenAlcoholBottle, 
+    FillFromDispenserSound = GetWaterFromDispenserGlass,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapGlass,
+    FillFromToiletSound = GetWaterFromToilet,
+    StaticModel = GreenAlcoholBottle,
+    WorldStaticModel = GreenAlcoholBottle,
+    Tags = Glass;GlassBottle,
+    component FluidContainer
+    {
+    ContainerName   = AlcoholBottle,
+    Opened    = true,
+    capacity    = 5.0,
+    CustomDrinkSound = DrinkingFromBottle,
+    Fluids
+    {
+    fluid = Ethanol:1.0,
+    }
+    }
+}
+item WhiteGrapes
+{
+DisplayName = White Grapes,
+DisplayCategory = Food,
+Type = Food,
+Weight = 0.2,
+Icon = WhiteGrapes,
+FoodType = Fruits,
+DaysFresh = 6,
+DaysTotallyRotten = 9,
+HungerChange = -12,
+ThirstChange = -10,
+Calories = 85,
+Carbohydrates = 15.78,
+Lipids = 0.32,
+Proteins = 0.58,
+CustomEatSound = EatingFruit,
+StaticModel = WhiteGrapes,
+WorldStaticModel = WhiteGrapes,
+}
+
+}	

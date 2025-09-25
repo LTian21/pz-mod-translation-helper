@@ -2,21 +2,31 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-25 15:56:06 UTC+08:00`*
+*最后更新于：`2025-09-25 16:18:24 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
+| Guns93Test | 3183820077 | 804 |
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
+| Support_Goods_-_MyAlcohol | 3510863962 | 622 |
+| FRAcceptableGunsDemo | 3554570236 | 607 |
 | AmmoMaker | 2788256295 | 520 |
 | Immersive_Lore | 3000924731 | 273 |
 | Lifestyle | 3403870858 | 253 |
+| SewingWorkbranch | 3555588616 | 231 |
+| HybridGunRepair | 3562222835 | 101 |
 | Caster_Plus | 3457003463 | 99 |
 | Firearms | 2256623447 | 93 |
 | StandardizedVehicleUpgrades3Core | 3403490889 | 90 |
 | PWPNXB | 3400528439 | 85 |
+| Realistic_Recipes | 3540757743 | 81 |
+| HydeCoClay | 3551124480 | 69 |
+| OgrimMachineUtils | 3555558732 | 58 |
 | ZevonMedievalArmory | 3540834058 | 45 |
+| HybridMeleeRepair | 3569031613 | 32 |
+| Serving_plates_Build42 | 3399320470 | 14 |
 | DivisionBackpack | 3391306957 | 11 |
 | MilitaryPonchosRELOADED | 3439247001 | 11 |
 | Nep_Local_Knowledge | 3511535258 | 10 |

@@ -1,0 +1,233 @@
+module Base
+{
+
+    /* Tailoring 0 */
+
+    craftRecipe AS_DestroyRagsForThread
+    {
+        timedAction = Making,
+        time            = 140,
+        xpAward = Tailoring:1,
+        inputs
+        {
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight;SharpnessCheck;IsNotDull],
+			item 1 tags[Tweezers] mode:keep flags[MayDegradeLight],
+            item 4 [Base.RippedSheets;Base.RippedSheetsDirty;Base.AlcoholRippedSheets],
+        }
+       outputs
+       {
+           item 1 Base.Thread,
+       }
+    }
+
+    craftRecipe AS_DestroyRagsForCottonBalls
+    {
+        timedAction = Making,
+        time            = 140,
+        xpAward = Tailoring:1,
+        inputs
+        {
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight;SharpnessCheck;IsNotDull],
+			item 1 tags[Tweezers] mode:keep flags[MayDegradeLight],
+            item 2 [Base.RippedSheets;Base.AlcoholRippedSheets],
+        }
+       outputs
+       {
+           item 1 Base.CottonBalls,
+       }
+    }
+
+    craftRecipe AS_TieTwineFromThread
+    {
+        timedAction = Making,
+        time            = 140,
+        xpAward = Tailoring:1,
+        inputs
+        {
+            item 2 [Base.Thread] flags[ItemCount],
+        }
+       outputs
+       {
+           item 1 Base.Twine,
+       }
+    }
+	
+    craftRecipe AS_TieRopeFromTwine
+    {
+        timedAction = Making,
+        time            = 140,
+        xpAward = Tailoring:1,
+        inputs
+        {
+            item 2 [Base.Twine] flags[ItemCount],
+        }
+       outputs
+       {
+           item 1 Base.Rope,
+       }
+    }
+	
+    craftRecipe AS_TieYarnFromTwineAndThread
+    {
+        timedAction = Making,
+        time            = 140,
+        xpAward = Tailoring:1,
+        inputs
+        {
+            item 1 [Base.Twine] flags[ItemCount],
+            item 1 [Base.Thread] flags[ItemCount],
+        }
+       outputs
+       {
+           item 1 Base.Yarn,
+       }
+    }
+	
+    craftRecipe AS_UntieRope
+    {
+        timedAction = Making,
+        time            = 140,
+        xpAward = Tailoring:1,
+        inputs
+        {
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight;SharpnessCheck;IsNotDull],
+            item 1 [Base.Rope],
+        }
+       outputs
+       {
+           item 1.5 Base.Twine,
+       }
+    }
+	
+    craftRecipe AS_UntieTwine
+    {
+        timedAction = Making,
+        time            = 140,
+        xpAward = Tailoring:1,
+        inputs
+        {
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight;SharpnessCheck;IsNotDull],
+            item 1 [Base.Twine] flags[ItemCount],
+        }
+       outputs
+       {
+           item 1.5 Base.Thread,
+       }
+    }
+	
+    craftRecipe AS_UntieYarn
+    {
+        timedAction = Making,
+        time            = 140,
+        xpAward = Tailoring:1,
+        inputs
+        {
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight;SharpnessCheck;IsNotDull],
+            item 1 [Base.Yarn] flags[ItemCount],
+        }
+       outputs
+       {
+           item 0.5 Base.Twine,
+           item 0.5 Base.Thread,
+       }
+    }
+	
+    /* Tailoring 1 */
+
+	craftRecipe AS_SewSheetFromRags
+	{
+	    timedAction = SewingCloth,
+		Time = 280,
+        xpAward = Tailoring:5,
+        SkillRequired = Tailoring:1,
+		inputs
+		{
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight;SharpnessCheck;IsNotDull],
+			item 8 [Base.Thread],
+			item 16 [Base.RippedSheets],
+		}
+		outputs
+		{
+			item 1 Base.Sheet,
+		}
+	}
+
+	craftRecipe AS_SewPillow
+	{
+		timedAction = SewingCloth,
+		Time = 200,
+        SkillRequired = Tailoring:1,
+        xpAward = Tailoring:10,
+		AllowBatchCraft = False,
+		inputs
+		{
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight;SharpnessCheck;IsNotDull],
+			item 1 [Base.Sheet],
+			item 5 tags[Thread],
+			item 100 [Base.ChickenFeather;Base.TurkeyFeather;10:Base.CottonBalls;10:Base.HayTuft;5:Base.WoolRaw] flags[IsExclusive;ItemCount],
+		}
+		outputs
+		{
+			item 1 Base.Pillow_Crafted,
+		}
+	}
+
+	craftRecipe AS_SewBurlapPiece
+	{
+	    timedAction = SewingCloth,
+		Time = 200,
+		SkillRequired = Tailoring:1,
+		xpAward = Tailoring:5,
+		inputs
+		{
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight;SharpnessCheck;IsNotDull],
+			item 10 [Base.Thread],
+			item 5 [Base.Twine],
+			item 10 [Base.HayTuft] flags[ItemCount],
+
+		}
+		outputs
+		{
+			item 1 Base.BurlapPiece,
+		}
+	}
+
+    /* Tailoring 2 */
+
+	craftRecipe AS_SewFabricRollFromRags
+	{
+	    timedAction = SewingCloth,
+		Time = 280,
+        xpAward = Tailoring:10,
+        SkillRequired = Tailoring:2,
+		inputs
+		{
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight;SharpnessCheck;IsNotDull],
+			item 12 [Base.Thread],
+			item 24 [Base.RippedSheets],
+		}
+		outputs
+		{
+			item 1 Base.FabricRoll_Cotton,
+		}
+	}	
+
+    craftRecipe AS_SewTarpFromDenimStrips
+    {
+	    timedAction = SewingCloth,
+		Time = 280,
+        xpAward = Tailoring:1,
+		SkillRequired = Tailoring:2,
+        inputs
+        {
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight;SharpnessCheck;IsNotDull],
+            item 6 [Base.Twine],
+            item 12 [Base.DenimStrips],
+        }
+       outputs
+       {
+           item 1 Base.Tarp,
+       }
+    }
+	
+}
