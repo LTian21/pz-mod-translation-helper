@@ -157,7 +157,7 @@ def extract_recipe_names(text_content, config, source_filename: str):
         modified_name = original_name.replace(' ', '_')
         key = f"{config.RECIPE_PREFIX}_{modified_name}"; line = f'{key} = "{friendly_name}",'
         results[key] = line
-        key_map[key] = "Recipe"
+        key_map[key] = "Recipes"
     return results, key_map
 
 def get_translations_as_dict(file_path_or_dir, config):
