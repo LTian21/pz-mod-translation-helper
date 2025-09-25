@@ -1,4 +1,4 @@
-name: CI(pre_and_post_processing)
+name: CI (Pre/Post Processing)
 
 on:
   schedule:
@@ -10,10 +10,12 @@ on:
   push:
     branches:
       - main  # merge 到 main 执行
+  repository_dispatch:
+    types: [trigger-ci]
 
 jobs:
   run-ci:
-    if: ${{ github.repository == 'Laotian21/pz-mod-translation-helper' && !contains(github.event.head_commit.message, '[skip ci]') }}
+    if: ${{ github.repository == 'Laotian21/pz-mod-translation-helper' && (github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip ci]') || github.event_name == 'repository_dispatch') }}
 
     runs-on: windows-latest
     steps:
