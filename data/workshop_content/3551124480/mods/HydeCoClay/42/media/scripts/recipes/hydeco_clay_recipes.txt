@@ -1,0 +1,674 @@
+module HydeCoClay
+{
+    imports
+    {
+        Base
+    }
+
+    craftRecipe KnappCeramicShiv
+    {
+        timedAction = MakingHammer_Surface,
+        time = 230,
+        tags = AnySurfaceCraft;Knapping,
+        category = Knapping,
+        xpAward = FlintKnapping:10,
+        AutoLearnAny = FlintKnapping:2,
+        inputs
+        {
+            item 1 [HydeCoClay.CeramicShards] flags[Prop1],
+            item 1 tags[Hammer] mode:keep flags[MayDegradeLight;Prop2],
+        }
+        outputs
+        {
+            item 1 HydeCoClay.CeramicShiv,
+        }
+    }
+
+    /* Knapping: make a proper ceramic spear head */
+    craftRecipe KnappCeramicSpearHead
+    {
+        timedAction = MakingHammer_Surface,
+        time = 260,
+        tags = AnySurfaceCraft;Knapping,
+        category = Knapping,
+        xpAward = FlintKnapping:10,
+        AutoLearnAny = FlintKnapping:3,
+        inputs
+        {
+            item 2 [HydeCoClay.CeramicShards] mode:destroy,
+            item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 HydeCoClay.CeramicSpearHead,
+        }
+    }
+
+    /* Assembly: bind ceramic spear head to a stick for a ceramic spear */
+    craftRecipe BindSpear_Ceramic
+    {
+        time = 300,
+        tags = InHandCraft;Survivalist,
+        category = Weaponry,
+        timedAction = CraftKnifeSpear,
+        xpAward = Maintenance:10,
+        SkillRequired = Maintenance:1,
+        AutoLearnAny = Maintenance:3,
+        OnCreate = Recipe.OnCreate.SlightlyMoreDurable,
+        inputs
+        {
+            item 1 [HydeCoClay.CeramicSpearHead] mappers[SpearMapper] flags[Prop1;IsHeadPart],
+            item 1 [Base.LongStick;Base.Sapling] flags[Prop2;InheritCondition],
+            item 2 [Base.Zipties;Base.LeatherStrips;Base.Twine;Base.DuctTape] flags[DontReplace],
+        }
+        outputs
+        {
+            item 1 mapper:SpearMapper,
+        }
+        itemMapper SpearMapper
+        {
+            HydeCoClay.SpearCeramic = HydeCoClay.CeramicSpearHead,
+            default = HydeCoClay.SpearCeramic,
+        }
+    }
+    
+    craftRecipe SmashClayBowl
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        ToolTip = HydeCoClay_SmashCeramics,
+        inputs
+        {
+            item 1 [Base.ClayBowl] mode:destroy,
+        }
+        outputs
+        {
+            item 4 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClayIngotMold
+    {
+        timedAction = Making,
+        time = 25,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        ToolTip = HydeCoClay_SmashCeramics,
+        inputs
+        {
+            item 1 [Base.ClayIngotMold] mode:destroy flags[AllowDestroyedItem],
+        }
+        outputs
+        {
+            item 3 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClayJar
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClayJar] mode:destroy,
+        }
+        outputs
+        {
+            item 3 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashGlazedClayJar
+    {
+        timedAction = Making,
+        time = 35,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClayJarGlazed] mode:destroy,
+        }
+        outputs
+        {
+            item 3 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClayMug
+    {
+        timedAction = Making,
+        time = 20,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClayMug] mode:destroy,
+        }
+        outputs
+        {
+            item 2 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClayPipeSegment
+    {
+        timedAction = Making,
+        time = 25,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClayPipeSegment] mode:destroy,
+        }
+        outputs
+        {
+            item 3 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClayPlate
+    {
+        timedAction = Making,
+        time = 20,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClayPlate] mode:destroy,
+        }
+        outputs
+        {
+            item 2 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClayPot
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClayPot] mode:destroy,
+        }
+        outputs
+        {
+            item 3 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClaySheetMold
+    {
+        timedAction = Making,
+        time = 25,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClaySheetMold] mode:destroy,
+        }
+        outputs
+        {
+            item 4 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClayBarMold
+    {
+        timedAction = Making,
+        time = 25,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClayBarMold] mode:destroy,
+        }
+        outputs
+        {
+            item 4 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashCeramicIngotCast
+    {
+        timedAction = Making,
+        time = 25,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.CeramicIngotCast] mode:destroy flags[AllowDestroyedItem],
+        }
+        outputs
+        {
+            item 3 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClayBlacksmithAnvilMold
+    {
+        timedAction = Making,
+        time = 60,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClayBlacksmithAnvilMold]  mode:destroy,
+        }
+        outputs
+        {
+            item 5 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashCeramicCrucible
+    {
+        timedAction = Making,
+        time = 45,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.CeramicCrucible] mode:destroy,
+        }
+        outputs
+        {
+            item 4 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashCeramicCrucibleSmall
+    {
+        timedAction = Making,
+        time = 25,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.CeramicCrucibleSmall] mode:destroy,
+        }
+        outputs
+        {
+            item 2 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashCeramicMortarAndPestle
+    {
+        timedAction = Making,
+        time = 40,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.CeramicMortarandPestle] mode:destroy,
+        }
+        outputs
+        {
+            item 5 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashCeramicTeacup
+    {
+        timedAction = Making,
+        time = 20,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.CeramicTeacup] mode:destroy,
+        }
+        outputs
+        {
+            item 2 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashGlassBlowingPipe
+    {
+        timedAction = Making,
+        time = 25,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.GlassBlowingPipe] mode:destroy,
+        }
+        outputs
+        {
+            item 3 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashSmokingPipe
+    {
+        timedAction = Making,
+        time = 25,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.SmokingPipe] mode:destroy,
+        }
+        outputs
+        {
+            item 3 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClayBrick
+    {
+        timedAction = Making,
+        time = 20,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClayBrick] mode:destroy,
+            item 1 [Base.LargeStone] mode:keep,
+        }
+        outputs
+        {
+            item 4 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClayShingle
+    {
+        timedAction = Making,
+        time = 20,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClayShingle] mode:destroy,
+        }
+        outputs
+        {
+            item 3 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe SmashClayTile
+    {
+        timedAction = Making,
+        time = 20,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 [Base.ClayTile] mode:destroy,
+        }
+        outputs
+        {
+            item 3 HydeCoClay.CeramicShards,
+        }
+    }
+
+    craftRecipe GrindCeramicPowder
+    {
+        timedAction = MixingMortarPestle,
+        time = 40,
+        tags = AnySurfaceCraft;Crafting,
+        category = Pottery,
+        inputs
+        {
+            item 1 tags[MortarPestle] mode:keep flags[Prop2],
+            item 6 [HydeCoClay.CeramicShards] mode:destroy,
+        }
+        outputs
+        {
+            item 1 HydeCoClay.CeramicPowder,
+        }
+    }
+
+    craftRecipe MakeModelingClay
+    {
+        timedAction = MixingMortarPestle,
+        time = 20,
+        tags = AnySurfaceCraft;Pottery;CanBeDoneInDark,
+        category = Pottery,
+        xpAward = Pottery:3,
+        SkillRequired = Pottery:2,
+        inputs
+        {
+                item 1 [HydeCoBees.BallOfBeesWax] mode:destroy,
+                item 1 [*] mode:keep flags[ItemIsFluid],
+                -fluid 1.0 [GroggedSlip],
+        }
+        outputs
+        {
+                item 1 HydeCoClay.ModelingClay,
+        }
+    }
+
+    /* Salvage: knead multiple modeling clay lumps back into raw Clay (lossy) */
+    craftRecipe KneadModelingClayToClay
+    {
+        timedAction = Making,
+        time = 40,
+        tags = AnySurfaceCraft;Pottery;CanBeDoneInDark,
+        category = Pottery,
+        xpAward = Pottery:1,
+        AutoLearnAny = Pottery:1,
+        inputs
+        {
+            item 2 [HydeCoClay.ModelingClay] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.Clay,
+        }
+    }
+
+    craftRecipe ShapeClayGnome
+    {
+        timedAction = Craft_PotteryBench,
+        time = 120,
+        tags = AnySurfaceCraft;Pottery,
+        category = Pottery,
+        xpAward = Pottery:8,
+        SkillRequired = Pottery:2,
+        inputs
+        {
+            item 2 [HydeCoClay.ModelingClay] mode:destroy,
+            item 1 tags[ClayTool] mode:keep,
+        }
+        outputs
+        {
+            item 1 HydeCoClay.CeramicGnomeUnfired,
+        }
+    }
+
+    craftRecipe FireModelingClayGnome
+    {
+        timedAction = Making,
+        time = 30,
+        tags = KilnSmall;KilnLarge,
+        category = Pottery,
+        xpAward = Pottery:5,
+        inputs
+        {
+            item 1 [HydeCoClay.CeramicGnomeUnfired] mode:destroy,
+        }
+        outputs
+        {
+            item 1 HydeCoClay.CeramicGnome,
+        }
+    }
+
+    craftRecipe MakeCastFrame
+    {
+        timedAction = Making,
+        time = 60,
+        tags = AnySurfaceCraft;Pottery,
+        category = Pottery,
+        xpAward = Pottery:3,
+        inputs
+        {
+            item 2 [Base.Plank] mode:destroy,
+            item 4 [Base.Nails] mode:destroy,
+            item 1 tags[Hammer] mode:keep flags[Prop2;MayDegradeLight],
+            item 1 tags[Saw] mode:keep flags[Prop1;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 HydeCoClay.CastFrame,
+        }
+    }
+
+    craftRecipe MakeGnomePlasterMold
+    {
+        timedAction = Making,
+        time = 120,
+        tags = AnySurfaceCraft;Pottery,
+        category = Pottery,
+        xpAward = Pottery:8,
+        SkillRequired = Pottery:2,
+        inputs
+        {
+            item 1 [HydeCoClay.CastFrame] mode:keep flags[Prop1],
+            item 1 [HydeCoClay.CeramicGnome] mode:keep,
+            item 1 [Base.BucketPlasterFull] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 1 HydeCoClay.GnomePlasterMold,
+            item 1 Base.Bucket,
+        }
+    }
+
+    craftRecipe CastGnome
+    {
+        timedAction = MixingBowl,
+        time = 120,
+        tags = AnySurfaceCraft;Pottery,
+        category = Pottery,
+        xpAward = Pottery:8,
+        SkillRequired = Pottery:2,
+        inputs
+        {
+            item 2 [HydeCoClay.GnomePlasterMold] mode:keep flags[Prop1],
+            item 1 [*] mode:keep flags[ItemIsFluid],
+                -fluid 5.0 [GroggedSlip],
+        }
+        outputs
+        {
+            item 1 HydeCoClay.CeramicGnomeUnfired,
+        }
+    }
+
+    craftRecipe CreateSlip
+    {
+        timedAction = MixingBowl,
+        time = 60,
+        tags = AnySurfaceCraft;Pottery,
+        category = Pottery,
+        xpAward = Pottery:4,
+        SkillRequired = Pottery:1,
+        inputs
+        {
+            item 2 [Base.Clay] mode:destroy,
+            item 1 [Base.Bucket] mode:destroy flags[ItemIsFluid],
+            -fluid 8.0 [Water],
+        }
+         outputs
+        {
+            item 1 Base.Bucket,
+            +fluid 10.0 Slip flags[ForceEmpty;AlwaysFill],
+        }
+    }
+
+    craftRecipe CreateGrogSlurry
+    {
+        timedAction = MixingBowl,
+        time = 60,
+        tags = AnySurfaceCraft;Pottery,
+        category = Pottery,
+        xpAward = Pottery:4,
+        SkillRequired = Pottery:1,
+        inputs
+        {
+            item 5 [HydeCoClay.CeramicPowder] mode:destroy,
+            item 1 [Base.Bucket] mode:destroy flags[ItemIsFluid],
+            -fluid 10.0 [Water],
+        }
+         outputs
+        {
+            item 1 Base.Bucket,
+            +fluid 10.0 GrogSlurry flags[ForceEmpty;AlwaysFill],
+        }
+    }
+
+    craftRecipe CreateGroggedSlip
+    {
+        timedAction = MixingBowl,
+        time = 60,
+        tags = AnySurfaceCraft;Pottery,
+        category = Pottery,
+        xpAward = Pottery:4,
+        SkillRequired = Pottery:1,
+        inputs
+        {
+            item 1 [Base.Bucket] mode:destroy flags[ItemIsFluid],
+            item 1 [*] mode:keep flags[ItemIsFluid],
+                -fluid 3.0 [Slip],
+            item 1 [*] mode:keep flags[ItemIsFluid],
+                -fluid 5.0 [GrogSlurry],
+
+        }
+         outputs
+        {
+            item 1 Base.Bucket,
+                +fluid 8.0 GroggedSlip flags[ForceEmpty;AlwaysFill],
+        }
+    }
+
+    craftRecipe RemoveMoldFromFrame
+    {
+        timedAction = Making,
+        time = 30,
+        tags = AnySurfaceCraft;Pottery,
+        category = Pottery,
+        xpAward = Pottery:2,
+        inputs
+        {
+            item 1 [HydeCoClay.GnomePlasterMold_InCastingFrame] mode:keep flags[Prop1],
+        }
+        outputs
+        {
+            item 1 HydeCoClay.GnomePlasterMold,
+            item 1 HydeCoClay.CastFrame,
+        }
+    }
+
+    /* Paint a fired ceramic gnome into a decorative painted variant */
+    craftRecipe PaintCeramicGnome
+    {
+        timedAction = Making,
+        time = 90,
+        tags = AnySurfaceCraft;Crafting;Painting,
+        category = Pottery,
+        xpAward = Pottery:2,
+        AutoLearnAny = Pottery:1,
+        inputs
+        {
+            item 1 [HydeCoClay.CeramicGnome] mode:destroy,
+            item 1 [Base.Paintbrush] mode:keep flags[MayDegradeLight],
+            item 1 [Base.PaintBlack] mode:destroy,
+            item 1 [Base.PaintBlue] mode:destroy,
+            item 1 [Base.PaintRed] mode:destroy,
+            item 1 [Base.PaintWhite] mode:destroy,
+        }
+        outputs
+        {
+            item 1 HydeCoClay.CeramicGnomePainted,
+        }
+    }
+}

@@ -1,0 +1,46 @@
+module Base
+{
+
+	craftRecipe UnbundleKevlarStrips
+	{
+        timedAction = Making,
+		Time = 50,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+		inputs
+		{
+			item 1 [Base.KevlarStripsBundle;Base.KevlarStripsDirtyBundle] mappers[stripType] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 12 mapper:stripType,
+		}
+		itemMapper stripType
+		{
+			Base.KevlarStrips = Base.KevlarStripsBundle,
+			Base.KevlarStripsDirty = Base.KevlarStripsDirtyBundle,
+		}
+	}
+
+	craftRecipe BundleKevlarStrips
+	{
+        timedAction = Making,
+		Time = 50,
+		Tags = InHandCraft;Packing,
+        category = Packing,
+		inputs
+		{
+			item 12 [Base.KevlarStrips;Base.KevlarStripsDirty] mappers[stripType] mode:destroy flags[AllowFavorite;InheritFavorite;IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:stripType,
+		}
+		itemMapper stripType
+		{
+			Base.KevlarStripsBundle = Base.KevlarStrips,
+			Base.KevlarStripsDirtyBundle = Base.KevlarStripsDirty,
+		}
+	}
+
+}
