@@ -196,8 +196,25 @@ def get_translations_as_dict(file_path_or_dir, config):
             if not current_key or not current_value_parts: return
 
             full_expression = " ".join(part.strip() for part in current_value_parts)
-            final_line = f'{current_key} = {full_expression}'
-            if not final_line.endswith(','): final_line += ','
+            if ".." in full_expression:
+                final_line = f'{current_key} = {full_expression}'
+                if not final_line.endswith(','):
+                    final_line += ','
+            else:
+                value_part = full_expression.strip()
+                if value_part.endswith(','):
+                    value_part = value_part[:-1].strip()
+
+                if value_part.startswith('"'):
+                    value_part = value_part[1:]
+
+                if value_part.endswith('"'):
+                    value_part = value_part[:-1]
+
+                escaped_value = value_part.replace('"', '\\"')
+
+                final_line = f'{current_key} = "{escaped_value}",'
+                    
             translations_dict[current_key] = final_line
             key_source_map[current_key] = source_filename
             current_key = None
@@ -209,7 +226,7 @@ def get_translations_as_dict(file_path_or_dir, config):
             if not line_stripped or line_stripped.startswith('--') or line_stripped in ["{", "}", "return {"]:
                 continue
 
-            key_match = KEY_VALUE_START_PATTERN.match(line)
+            key_match = KEY_VALUE_START_PATTERN.match(line_stripped)
             
             if key_match:
                 key_part = key_match.group(1).strip()
