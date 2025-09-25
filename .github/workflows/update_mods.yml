@@ -473,7 +473,7 @@ jobs:
       
       - name: Trigger CI workflow From Mod Update Workflow
         uses: peter-evans/repository-dispatch@v2
-        if: success()  # 仅在整个 job 成功时触发
+        if: ${{ false && success() }}  # 仅在整个 job 成功时触发
         with:
           token: ${{ secrets.GITHUB_TOKEN }}  # 或使用 PAT，如果需要跨仓库
           event-type: trigger-ci
