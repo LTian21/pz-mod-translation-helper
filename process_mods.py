@@ -189,8 +189,10 @@ def get_translations_as_dict(file_path_or_dir, config):
         content = file_path_or_dir.read_text(encoding='utf-8')
         current_key = None
         current_value_parts = []
-        base_filename = file_path_or_dir.stem
-        source_filename = re.sub(r'_(?:' + re.escape(config.BASE_LANGUAGE) + r'|' + re.escape(config.PRIORITY_LANGUAGE) + r')$', '', base_filename, flags=re.IGNORECASE)
+        source_filename = ""
+        if isinstance(file_path_or_dir, Path):
+            base_filename = file_path_or_dir.stem
+            source_filename = re.sub(r'_(?:' + re.escape(config.BASE_LANGUAGE) + r'|' + re.escape(config.PRIORITY_LANGUAGE) + r')$', '', base_filename, flags=re.IGNORECASE)
 
         def save_current_entry():
             nonlocal current_key, current_value_parts, translations_dict
@@ -330,7 +332,14 @@ def load_exclusion_keys(file_path: Path) -> set:
     
     try:
         lines = file_path.read_text(encoding='utf-8').splitlines()
-        keys = {line.strip() for line in lines if line.strip()}
+        keys = set()
+        for line in lines:
+            line_stripped = line.strip()
+            if not line_stripped:
+                continue
+            key_part = line_stripped.split('=', 1)[0].strip()
+            keys.add(key_part)
+            
         logging.info(f"  -> 成功从 '{file_path.name}' 加载 {len(keys)} 个待排除的键。")
         return keys
     except Exception as e:
@@ -627,7 +636,13 @@ def main():
                 try:
                     pattern = re.compile(pattern_str)
                     rule_updates = 0
-                    for mod_id, key_map in global_key_source_map.items():
+                    for mod_path in mods_to_process:
+                        mod_id = mod_path.name
+
+                        if mod_id not in global_key_source_map:
+                            continue
+                        
+                        key_map = global_key_source_map[mod_id]
                         for key, current_source in list(key_map.items()):
                             # 规则可以匹配 键(key) 或 当前来源(current_source)
                             match_target = rule.get("match_target", "key")
