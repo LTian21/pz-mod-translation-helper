@@ -45,6 +45,7 @@ class Config:
             self.LOG_FILENAME_TPL = parser.get('Output', 'log_filename_tpl')
             self.UPDATE_LOG_FILENAME = parser.get('Output', 'update_log_filename')
             self.KEY_SOURCE_MAP_FILENAME = parser.get('Output', 'key_source_map_filename')
+            self.EXCLUSION_FILENAME = parser.get('Output', 'exclusion_filename')
             self.ITEM_PREFIX_TPL = parser.get('Prefixes', 'item_prefix_tpl')
             self.RECIPE_PREFIX = parser.get('Prefixes', 'recipe_prefix')
         except (configparser.NoSectionError, configparser.NoOptionError) as e:
@@ -322,6 +323,20 @@ def setup_logger(log_file_path):
     logging.basicConfig(level=logging.INFO, format='%(message)s',
         handlers=[logging.FileHandler(log_file_path, mode='w', encoding='utf-8'), logging.StreamHandler()])
 
+def load_exclusion_keys(file_path: Path) -> set:
+    if not file_path.is_file():
+        logging.info(f"  -> 排除列表文件 '{file_path.name}' 不存在，跳过。")
+        return set()
+    
+    try:
+        lines = file_path.read_text(encoding='utf-8').splitlines()
+        keys = {line.strip() for line in lines if line.strip()}
+        logging.info(f"  -> 成功从 '{file_path.name}' 加载 {len(keys)} 个待排除的键。")
+        return keys
+    except Exception as e:
+        logging.error(f"  -> 读取排除列表文件 '{file_path.name}' 时发生错误: {e}")
+        return set()
+
 def write_output_file(path, data):
     path.write_text("\n".join(data[k] for k in sorted(data.keys())), encoding='utf-8')
 
@@ -464,6 +479,10 @@ def main():
         completed_todo_data, _ = get_translations_as_dict(completed_todo_file, cfg)
         completed_keys = set(completed_todo_data.keys())
 
+        exclusion_file = completed_mod_path / cfg.EXCLUSION_FILENAME
+        logging.info(f"\n--- 正在检查待排除的键于: {exclusion_file} ---")
+        exclusion_keys = load_exclusion_keys(exclusion_file)
+
         workshop_en_base, workshop_cn_base = {}, {}
         global_known_keys_en, global_known_keys_cn = set(), set()
         workshop_key_source_map = {}
@@ -494,7 +513,7 @@ def main():
             else:
                 current_todo_list[key] = en_line
         for key, line in current_todo_list.items():
-            if key not in completed_keys:
+            if key not in completed_keys and key not in exclusion_keys:
                 en_todo_list[key] = line
         for key, cn_line in workshop_cn_base.items():
             if key not in en_keys:
