@@ -1,0 +1,280 @@
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Text.Json;
+using System.Data;
+
+namespace PostProcessing
+{
+    class Program
+    {
+        //翻译条目
+        struct TranslationEntry
+        {
+            public string OriginalText; // 原文
+            public string SChiinese; // 简体中文
+        }
+        //存储翻译条目
+        static Dictionary<string, Dictionary<string, TranslationEntry>> ModTranslations = new Dictionary<string, Dictionary<string, TranslationEntry>>();
+
+        static HashSet<string> FILENAMES = new HashSet<string>();
+
+        static int Main(string[] args)
+        {
+            int errorCount = 0;  // 添加错误计数器
+
+            // 获取可执行文件的完整路径
+            string exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName ?? string.Empty;
+            Console.WriteLine($"Exe path: {exePath}");
+
+            // 获取可执行文件所在目录
+            string? currentDir = Path.GetDirectoryName(exePath);
+
+            // 向上查找 translation_utils 目录
+            string? repoDIr = null;
+            var searchDir = currentDir;
+            while (!string.IsNullOrEmpty(searchDir))
+            {
+                string candidate = Path.Combine(searchDir, "translation_utils");
+                if (Directory.Exists(candidate))
+                {
+                    repoDIr = searchDir;
+                    break;
+                }
+                searchDir = Path.GetDirectoryName(searchDir);
+            }
+
+            //如果无法通过exe路径获取repo目录，则尝试通过工作目录获取repo目录
+            //如果无法通过exe路径获取repo目录，则尝试通过工作目录获取repo目录
+            if (repoDIr == null)
+            {
+                // 获取当前工作目录
+                string workingDir = Directory.GetCurrentDirectory();
+                Console.WriteLine($"Working directory: {workingDir}");
+
+                // 从工作目录开始向上查找 translation_utils 目录
+                searchDir = workingDir;
+                while (!string.IsNullOrEmpty(searchDir))
+                {
+                    string candidate = Path.Combine(searchDir, "translation_utils");
+                    if (Directory.Exists(candidate))
+                    {
+                        repoDIr = searchDir;
+                        break;
+                    }
+                    searchDir = Path.GetDirectoryName(searchDir);
+                }
+            }
+
+            if (repoDIr == null)
+            {
+                throw new DirectoryNotFoundException($"Error: repo not found");
+            }
+
+            // 拼接  translation 文件路径
+            string translationFilePath = Path.Combine(repoDIr, "data", "translations_CN.txt");
+            //检查repoDir\data\translations_CN.txt是否存在，不存在则爬出异常并退出
+            if (!File.Exists(translationFilePath))
+            {
+                throw new FileNotFoundException($"Error: file not found: {translationFilePath}");
+            }
+            //打开repoDir\data\translations_CN.txt，读取内容
+            var linesInFile = File.ReadAllLines(translationFilePath);
+            foreach (var line in linesInFile)
+            {
+                //忽略空行和注释行
+                if (IsNullOrCommentLine(line))
+                {
+                    continue;
+                }
+                //是否是原文行，格式为 <modId>::EN::<key> = "<originalText>",
+                var originalMatch = Regex.Match(line, @"^(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*");
+                if (originalMatch.Success)
+                {
+                    string currentModId = originalMatch.Groups["modId"].Value.Trim();
+                    string key = originalMatch.Groups["key"].Value.Trim();
+                    string originalText = originalMatch.Groups["text"].Value;
+
+                    if (!ModTranslations.ContainsKey(currentModId))
+                    {
+                        ModTranslations[currentModId] = new Dictionary<string, TranslationEntry>();
+                    }
+                    ModTranslations[currentModId][key] = new TranslationEntry
+                    {
+                        OriginalText = originalText,
+                        SChiinese = originalText.Equals("======Original Text Missing====") ? "" : originalText,
+                    };
+
+                    continue;
+                }
+                //是否是翻译文本行，格式为 <modId>::CN::<key> = "<originalText>",
+                var translationMatch = Regex.Match(line, @"^(?<modId>[^:]+)::CN::(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*");
+                if (translationMatch.Success)
+                {
+                    string currentModId = translationMatch.Groups["modId"].Value.Trim();
+                    string key = translationMatch.Groups["key"].Value.Trim();
+                    string originalText = translationMatch.Groups["text"].Value;
+
+                    //存储到对应的条目中
+                    var entry = ModTranslations[currentModId][key];
+                    if (!originalText.Equals(""))
+                    {
+                        entry.SChiinese = originalText;
+                    }
+                    ModTranslations[currentModId][key] = entry;
+                }
+
+            }
+
+            // 读取 key_source_map.json 文件
+            string keySourceMapPath = Path.Combine(repoDIr, "translation_utils", "key_source_map.json");
+            Dictionary<string, Dictionary<string, string>>? keySourceMap = null;
+            
+            if (File.Exists(keySourceMapPath))
+            {
+                try
+                {
+                    string jsonContent = File.ReadAllText(keySourceMapPath);
+                    keySourceMap = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(jsonContent);
+                    Console.WriteLine($"Loaded key_source_map.json");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"::error:: Error reading key_source_map.json: {ex.Message}");
+                    keySourceMap = null;
+                    return 1;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"::error:: Can not find key_source_map.json: {keySourceMapPath}");
+                return 1;
+            }
+
+            // 将keySourceMap的所有文件名放入FILENAMES
+            foreach (var entry in keySourceMap.Values)
+            {
+                foreach (var filename in entry.Values)
+                {
+                    FILENAMES.Add(filename);
+                }
+            }
+            FILENAMES.Add("Item");
+            FILENAMES.Add("DisplayName"); 
+            FILENAMES.Add("Fluid");
+
+            // 创建输出目录，如果存在则清理
+            string outputDir = Path.Combine(repoDIr, "data", "PZ-Mod-Translation");
+            try
+            {
+                if (Directory.Exists(outputDir))
+                {
+                    Console.WriteLine($"Cleaning output directory: {outputDir}");
+                    Directory.Delete(outputDir, true);
+                }
+                Directory.CreateDirectory(outputDir);
+                Console.WriteLine($"Cleaned output directory: {outputDir}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"::error:: Error creating or cleaning directory: {ex.Message}");
+                return 1;
+            }
+
+            // 按文件名组织翻译条目
+            var fileContent = new Dictionary<string, List<(string modId, string key, TranslationEntry entry)>>();
+
+            foreach (var modId in ModTranslations.Keys)
+            {
+                foreach (var key in ModTranslations[modId].Keys)
+                {
+                    var entry = ModTranslations[modId][key];
+                    string fileName = "unknown"; // 默认文件名
+
+                    // 检查是否有映射信息
+                    if (keySourceMap != null &&
+                        keySourceMap.ContainsKey(modId) &&
+                        keySourceMap[modId].ContainsKey(key))
+                    {
+                        fileName = keySourceMap[modId][key];
+                    }
+                    else // 尝试通过key中的信息推断文件名
+                    {
+                        foreach (var fname in FILENAMES)
+                        {
+                            if (key.StartsWith(fname + "_"))
+                            {
+                                fileName = fname;
+                                break;
+                            }
+                        }
+                    }
+                    if (!Path.HasExtension(fileName))
+                    {
+                        fileName += "_CN.txt";
+                    }
+
+                    // 添加到对应文件的内容列表
+                    if (!fileContent.ContainsKey(fileName))
+                    {
+                        fileContent[fileName] = new List<(string, string, TranslationEntry)>();
+                    }
+                    fileContent[fileName].Add((modId, key, entry));
+                }
+            }
+
+            // 写入文件
+            foreach (var kvp in fileContent)
+            {
+                string fileName = kvp.Key;
+                var entries = kvp.Value;
+                string filePath = Path.Combine(outputDir, fileName);
+                
+                Console.WriteLine($"Writting file: {fileName}");
+                
+                try
+                {
+                    using (var writer = new StreamWriter(filePath, false))
+                    {
+                        string? currentModId = null;
+                        
+                        foreach (var (modId, key, entry) in entries)
+                        {
+                            // 当遇到新的 modId 时，添加分隔符
+                            if (currentModId != modId)
+                            {
+                                if (currentModId != null)
+                                {
+                                    writer.WriteLine(); // 添加空行分隔不同的mod
+                                }
+                                writer.WriteLine($"------ {modId} ------");
+                                writer.WriteLine();
+                                currentModId = modId;
+                            }
+                            
+                            writer.WriteLine($"{key} = \"{entry.SChiinese}\",");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"::error:: Error Writting file {fileName}: {ex.Message}");
+                    errorCount++;
+                }
+            }
+
+            if (errorCount > 0)
+            {
+                Console.WriteLine($"::error:: Total errors {errorCount}.");
+            }
+
+            return errorCount > 0 ? 1 : 0;
+        }
+
+        static bool IsNullOrCommentLine(string line)
+        {
+            return string.IsNullOrWhiteSpace(line) || line.Trim().StartsWith("//") || line.Trim().StartsWith("#") || line.Trim().StartsWith("/*") || line.Trim().StartsWith("*") || line.Trim().StartsWith("*/") || line.Trim().StartsWith("--");
+        }
+    }
+}
