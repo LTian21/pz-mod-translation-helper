@@ -429,7 +429,7 @@ jobs:
             - 更新了增量日志 (data/logs/update_log.json)。
             - 存档了新的基线日志 (如果适用)。
           branch: bot/auto-update-${{ github.run_id }}
-          title: '🤖 自动化Mod更新与报告 [${{ env.TODAY }}][skip ci]'
+          title: '🤖 自动化Mod更新与报告 [${{ env.TODAY }}]'
           body-path: "pr_body.md"
           labels: "automated-update, bot"
           reviewers: ${{ github.actor }}
@@ -473,7 +473,7 @@ jobs:
       
       - name: Trigger CI workflow From Mod Update Workflow
         uses: peter-evans/repository-dispatch@v2
-        if: ${{ false && success() }}  # 仅在整个 job 成功时触发
+        if: ${{ false && success() }}  # 该workflow会自动生成一次提交并被CI捕获，此处无需触发CI
         with:
           token: ${{ secrets.GITHUB_TOKEN }}  # 或使用 PAT，如果需要跨仓库
           event-type: trigger-ci
