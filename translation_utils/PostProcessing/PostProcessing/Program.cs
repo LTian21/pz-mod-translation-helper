@@ -160,9 +160,35 @@ namespace PostProcessing
                     FILENAMES.Add(filename);
                 }
             }
-            FILENAMES.Add("Item");
-            FILENAMES.Add("DisplayName"); 
-            FILENAMES.Add("Fluid");
+            // 读取 key_source_map.json 文件
+            string keySourceMapManualPath = Path.Combine(repoDIr, "translation_utils", "key_source_map_manual.json");
+            Dictionary<string, Dictionary<string, string>>? keySourceMapManual = null;
+            if (File.Exists(keySourceMapManualPath))
+            {
+                try
+                {
+                    string jsonContent = File.ReadAllText(keySourceMapManualPath);
+                    keySourceMapManual = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(jsonContent);
+                    Console.WriteLine($"Loaded key_source_map_manual.json");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"::warning:: Error reading key_source_map_manual.json: {ex.Message}");
+                    keySourceMapManual = null;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"::warning:: Can not find key_source_map_manual.json: {keySourceMapManualPath}");
+            }
+
+            if (keySourceMapManual != null && keySourceMapManual.ContainsKey("KeyPrefix"))
+            {
+                foreach (var filename in keySourceMapManual["KeyPrefix"].Values)
+                {
+                    FILENAMES.Add(filename);
+                }
+            }
 
             // 创建输出目录，如果存在则清理
             string outputDir = Path.Combine(repoDIr, "data", "PZ-Mod-Translation");
@@ -210,6 +236,12 @@ namespace PostProcessing
                             }
                         }
                     }
+                    //处理文件名重映射
+                    if (keySourceMapManual != null && keySourceMapManual.ContainsKey("FileNameReplace") && keySourceMapManual["FileNameReplace"].ContainsKey(fileName))
+                    {
+                        fileName = keySourceMapManual["FileNameReplace"][fileName];
+                    }
+                    //补全文件名后缀
                     if (!Path.HasExtension(fileName))
                     {
                         fileName += "_CN.txt";
