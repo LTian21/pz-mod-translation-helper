@@ -418,6 +418,7 @@ jobs:
       - name: Create Pull Request
         if: steps.prep_pr.outputs.should_create_pr == 'true'
         uses: peter-evans/create-pull-request@v6
+        id: cpr
         with:
           token: ${{ secrets.AUTOMERGE_PAT }}
           commit-message: |
@@ -433,6 +434,26 @@ jobs:
           body-path: "pr_body.md"
           labels: "automated-update, bot"
           reviewers: ${{ github.actor }}
+
+      - name: Approve the auto-generated PR
+        if: steps.cpr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "自动批准由本工作流创建的 PR #${PR_NUMBER}..."
+          gh pr review --approve "$PR_NUMBER"
+          echo "批准成功。"
+
+      - name: Enable auto-merge for the PR
+        if: steps.cpr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMERGE_PAT }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "为 PR #${PR_NUMBER} 启用自动合并..."
+          gh pr merge --auto --squash "$PR_NUMBER"
+          echo "自动合并已成功启用。当所有检查通过后，GitHub将会自动合并此PR。"
 
       - name: Prepare Issue Body on Failure
         if: failure()
