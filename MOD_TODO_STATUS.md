@@ -2,42 +2,27 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-25 18:41:47 UTC+08:00`*
+*最后更新于：`2025-09-25 22:46:25 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
 | Guns93Test | 3183820077 | 804 |
-| Immersive_Roleplay_Professions_and_Traits | 3387474156 | 694 |
 | Support_Goods_-_MyAlcohol | 3510863962 | 622 |
 | FRAcceptableGunsDemo | 3554570236 | 607 |
-| AmmoMaker | 2788256295 | 520 |
 | Immersive_Lore | 3000924731 | 273 |
-| Lifestyle | 3403870858 | 253 |
 | SewingWorkbranch | 3555588616 | 231 |
 | HybridGunRepair | 3562222835 | 101 |
-| Caster_Plus | 3457003463 | 99 |
-| Firearms | 2256623447 | 93 |
-| StandardizedVehicleUpgrades3Core | 3403490889 | 90 |
-| PWPNXB | 3400528439 | 85 |
 | Realistic_Recipes | 3540757743 | 81 |
 | HydeCoClay | 3551124480 | 69 |
+| Firearms | 2256623447 | 60 |
 | OgrimMachineUtils | 3555558732 | 58 |
 | ZevonMedievalArmory | 3540834058 | 45 |
 | HybridMeleeRepair | 3569031613 | 32 |
 | Serving_plates_Build42 | 3399320470 | 14 |
-| DivisionBackpack | 3391306957 | 11 |
-| MilitaryPonchosRELOADED | 3439247001 | 11 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
-| Zombaroid | 3519916139 | 8 |
-| EatSmart | 3456212729 | 7 |
-| HaloArmor | 3507919075 | 7 |
-| P4PickingMeister | 3422220305 | 7 |
-| FactoryPieces | 3399263137 | 6 |
-| ExtendedSpices | 3522142755 | 6 |
-| Cerberus_Pack | 3470478700 | 4 |
 | LWBetterElectronics | 2999183635 | 3 |
 | Militek_Clothing | 3269061047 | 0 |
 | Perts_Party_Tiles | 2837923608 | 0 |
@@ -50,6 +35,7 @@
 | 84mercW460 | 2805630347 | 0 |
 | fhqwhgads'_Motorious_Zone | 2791656602 | 0 |
 | HF_PointBlankMod | 2990322197 | 0 |
+| AmmoMaker | 2788256295 | 0 |
 | [B42]_Mod_Manager | 3567084868 | 0 |
 | Draw_On_Map | 2804531012 | 0 |
 | 99fordCVPI | 2971246021 | 0 |
@@ -79,6 +65,7 @@
 | ATA_Dadge | 3432012226 | 0 |
 | toppling-zombies | 3425038705 | 0 |
 | DrinkSmart | 3447775367 | 0 |
+| DivisionBackpack | 3391306957 | 0 |
 | MoreDescriptionForTraits4166 | 2685168362 | 0 |
 | Tatrapan | 3402789975 | 0 |
 | aliceSvanillaDuffelBag | 2959854619 | 0 |
@@ -118,6 +105,7 @@
 | KnoxEventExpanded | 3397396843 | 0 |
 | 87chevySuburban | 3196180339 | 0 |
 | PipBoy3000_-_Main | 3461031530 | 0 |
+| MilitaryPonchosRELOADED | 3439247001 | 0 |
 | lgd_antibodies | 2392676812 | 0 |
 | Ducks | 3409153536 | 0 |
 | GydeTraitMagazines | 3342191739 | 0 |
@@ -128,6 +116,7 @@
 | DivisionWatch42 | 3391186580 | 0 |
 | Improved_Farming_Info_Window | 3470852353 | 0 |
 | InspectWeapon | 2948824747 | 0 |
+| FactoryPieces | 3399263137 | 0 |
 | RechargeableBatteries | 3385623534 | 0 |
 | 93fordTaurus | 3088951320 | 0 |
 | [J&G]_Desert_Multicam_Uniform | 3299457564 | 0 |
@@ -196,6 +185,7 @@
 | ATA_Jeep | 3407042038 | 0 |
 | AmmoConverterB42 | 3388844065 | 0 |
 | TrapManager | 3566766862 | 0 |
+| Caster_Plus | 3457003463 | 0 |
 | 90pierceArrow | 2942793445 | 0 |
 | 70dodge | 2873290424 | 0 |
 | Spongie_Hair | 2463184726 | 0 |
@@ -226,6 +216,7 @@
 | Nep_Slower_Discomfort | 3403721633 | 0 |
 | P4Decoholic | 3197857648 | 0 |
 | RandomClothing | 3397182976 | 0 |
+| Cerberus_Pack | 3470478700 | 0 |
 | SurvivingThroughSeasons | 2753086629 | 0 |
 | LegendaryKatana | 3418366499 | 0 |
 | WhatCanICraftAddon | 3392356751 | 0 |
@@ -285,6 +276,7 @@
 | 76chevyKseries | 3161951724 | 0 |
 | FWO_Treadmill_&_BenchPress | 2940354599 | 0 |
 | P4PumpPury | 2890440427 | 0 |
+| StandardizedVehicleUpgrades3Core | 3403490889 | 0 |
 | BoneScavenger | 3399292171 | 0 |
 | NCR_-_Trooper_Pack | 3508243687 | 0 |
 | ExploringTime | 2244879881 | 0 |
@@ -343,6 +335,7 @@
 | TchernoLib | 3389605231 | 0 |
 | P4OnTheDoor | 3056481712 | 0 |
 | ATA_VanDeRumba | 3432015133 | 0 |
+| Zombaroid | 3519916139 | 0 |
 | MyOwnWell | 3549290115 | 0 |
 | B42_[K]_Show_Wall_Health | 3386498516 | 0 |
 | 93chevySuburban | 3152529790 | 0 |
@@ -350,6 +343,7 @@
 | S4EcoPack | 3480405054 | 0 |
 | 81deloreanDMC12 | 3253385114 | 0 |
 | 89defender | 3570973322 | 0 |
+| EatSmart | 3456212729 | 0 |
 | SpongieOpenJackets | 2812326159 | 0 |
 | [B42]_Pack_Pantry | 3416584592 | 0 |
 | [B42]_ZuperCarts_-_Carts_&_Trolleys_(forked) | 3433203442 | 0 |
@@ -373,6 +367,7 @@
 | TheDivisionStuff | 3479867929 | 0 |
 | MetalSpears | 2927603127 | 0 |
 | B42_Rain's_Pack_Your_Loot | 3490159683 | 0 |
+| Immersive_Roleplay_Professions_and_Traits | 3387474156 | 0 |
 | 89volvo200 | 3292659291 | 0 |
 | eris_food_expiry | 3392259028 | 0 |
 | Unimogdede | 3399870407 | 0 |
@@ -413,6 +408,7 @@
 | 85oldsmobileDelta88 | 3418253716 | 0 |
 | [B42]_Briefing | 3565244378 | 0 |
 | Wolf_Extraction_Quest | 2987772693 | 0 |
+| HaloArmor | 3507919075 | 0 |
 | ArcherLib | 3408337281 | 0 |
 | BirgetHeads | 3439783176 | 0 |
 | Sector-7_Breach | 3513107552 | 0 |
@@ -432,10 +428,12 @@
 | StandardizedVehicleUpgrades3Vanilla | 3304582091 | 0 |
 | Authentic_Z_-_Backpacks+ | 2335368829 | 0 |
 | BarricadedTrait | 3031475005 | 0 |
+| Lifestyle | 3403870858 | 0 |
 | [J&G]_Forest_Multicam_Uniform | 3309971624 | 0 |
 | WeeezFarmAnimals | 3434810293 | 0 |
 | Detailed_Descriptions_for_Occupations_and_Traits | 3387957272 | 0 |
 | EasySpareMagazineReload | 2590662055 | 0 |
+| PWPNXB | 3400528439 | 0 |
 | 88chevyS10 | 2886832936 | 0 |
 | KATTAJ1_Military_Pack | 3470426196 | 0 |
 | Water_Filter_Straw | 3418513380 | 0 |
@@ -484,6 +482,7 @@
 | ClothesBOX | 2847911733 | 0 |
 | P4MySoCalledSnack | 2877535263 | 0 |
 | P4DriedFlower | 2949777636 | 0 |
+| P4PickingMeister | 3422220305 | 0 |
 | PFO_GUNRUNNER | 3434691822 | 0 |
 | Chinesecuisine | 3412969115 | 0 |
 | 78amgeneralM35A2 | 2799152995 | 0 |
@@ -508,6 +507,7 @@
 | PFO_Caravan_Shotgun | 3400681835 | 0 |
 | KI5trailers | 3330403100 | 0 |
 | 92jeepYJ | 3287727378 | 0 |
+| ExtendedSpices | 3522142755 | 0 |
 | MoreDamagedObjects | 3413150945 | 0 |
 | Bandits | 3268487204 | 0 |
 | NodachiMod_B42.5.1 | 2166396868 | 0 |
