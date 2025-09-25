@@ -1,0 +1,63 @@
+module Base
+{
+
+    craftRecipe CutUpRubberStrips
+    {
+        time            = 300,
+        tags            = AnySurfaceCraft,
+        timedAction = Making,
+        category =      Farming,
+        inputs
+        {
+            item 1 [Base.Rubberducky;Base.RubberHose;Base.RubberSpider;Base.Gloves_Dish;Base.Shoes_Wellies],
+            item 1 tags[SharpKnife;Scissors] mode:keep flags[IsNotDull;MayDegradeLight],
+        }
+        outputs
+        {
+            item 4 Base.RubberStrips,
+        }
+    }
+
+	craftRecipe UnbundleRubberStrips
+	{
+        timedAction = Making,
+		Time = 50,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+		inputs
+		{
+			item 1 [Base.RubberStripsBundle;Base.RubberStripsDirtyBundle] mappers[stripType] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 12 mapper:stripType,
+		}
+		itemMapper stripType
+		{
+			Base.RubberStrips = Base.RubberStripsBundle,
+			Base.RubberStripsDirty = Base.RubberStripsDirtyBundle,
+		}
+	}
+
+	craftRecipe BundleRubberStrips
+	{
+        timedAction = Making,
+		Time = 50,
+		Tags = InHandCraft;Packing,
+        category = Packing,
+		inputs
+		{
+			item 12 [Base.RubberStrips;Base.RubberStripsDirty] mappers[stripType] mode:destroy flags[AllowFavorite;InheritFavorite;IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:stripType,
+		}
+		itemMapper stripType
+		{
+			Base.RubberStripsBundle = Base.RubberStrips,
+			Base.RubberStripsDirtyBundle = Base.RubberStripsDirty,
+		}
+	}
+
+}

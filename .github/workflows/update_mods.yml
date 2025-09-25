@@ -186,7 +186,7 @@ jobs:
 
       - name: Prune and Prepare Mods for Artifact Upload
         run: |
-          echo "开始修剪已下载的Mod，仅保留翻译相关文件..."
+          echo "开始修剪已下载的Mod，仅保留 EN/CN 相关翻译文件..."
           mkdir -p pruned_mods
           find ./temp_workshop_full -mindepth 1 -maxdepth 1 -type d | while read MOD_DIR; do
             MOD_ID=$(basename "$MOD_DIR")
@@ -196,8 +196,9 @@ jobs:
             rsync -a --prune-empty-dirs \
               --include='*/' \
               --include='**/media/scripts/***' \
-              --include='**/media/lua/shared/Translate/***' \
-              --include='**/media/lua/shared/translate/***' \
+              --include='**/[Tt]ranslate/*[Ee][Nn]*/***' \
+              --include='**/[Tt]ranslate/*[Cc][Nn]*/***' \
+              --exclude='**/[Tt]ranslate/*' \
               --exclude='*' \
               "$MOD_DIR/" "$STAGING_DIR/"
 
@@ -469,3 +470,15 @@ jobs:
           content-filepath: ${{ steps.prep_issue.outputs.filename }}
           labels: "bug, CI/CD, automated report"
           assignees: 'Laotian21'
+      
+      - name: Trigger CI workflow
+        uses: peter-evans/repository-dispatch@v2
+        if: success()  # 仅在整个 job 成功时触发
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # 或使用 PAT，如果需要跨仓库
+          event-type: trigger-ci
+          client-payload: |
+            {
+              "source_workflow": "auto_update_mods",
+              "run_id": "${{ github.run_id }}"
+            }

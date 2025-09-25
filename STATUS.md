@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-09-24 12:19:28 UTC+08:00`*
+*最后更新于：`2025-09-25 17:33:21 UTC+08:00`*
 
 ---
 
@@ -9,20 +9,20 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **当前待办总数** | ``3937`` 条 |
-| **已支持 Mod 数量** | ``533`` 个 |
+| **当前待办总数** | ``4859`` 条 |
+| **已支持 Mod 数量** | ``543`` 个 |
 
 ---
 
 ### ⚡ **最近一次更新摘要**
 
-*   **新增待办翻译**: `555` 条
-*   **内容变更的 Mod**: `27` 个
-    *   `ClearingTime (ID: 1926311864)`
-    *   `ExploringTime (ID: 2244879881)`
-    *   `Tactical_Weapons (ID: 2324223029)`
-    *   `SoulFilchersBeautifyngTime (ID: 2425267353)`
-    *   `cdda_zombie (ID: 2749928925)`
+*   **新增待办翻译**: `2619` 条
+*   **内容变更的 Mod**: `10` 个
+    *   `Guns93Test (ID: 3183820077)`
+    *   `Serving_plates_Build42 (ID: 3399320470)`
+    *   `Support_Goods_-_MyAlcohol (ID: 3510863962)`
+    *   `Realistic_Recipes (ID: 3540757743)`
+    *   `HydeCoClay (ID: 3551124480)`
     *   ... *等*
 
 ---
