@@ -12,6 +12,7 @@ namespace PostProcessing
         //翻译条目
         struct TranslationEntry
         {
+            public string ModId;
             public string OriginalText; // 原文
             public string SChiinese; // 简体中文
         }
@@ -81,6 +82,7 @@ namespace PostProcessing
             }
             //打开repoDir\data\translations_CN.txt，读取内容
             var linesInFile = File.ReadAllLines(translationFilePath);
+            var conflictKeys = new Dictionary<string,List<TranslationEntry>>();
             foreach (var line in linesInFile)
             {
                 //忽略空行和注释行
@@ -102,6 +104,7 @@ namespace PostProcessing
                     }
                     ModTranslations[currentModId][key] = new TranslationEntry
                     {
+                        ModId = currentModId,
                         OriginalText = originalText,
                         SChiinese = originalText.Equals("======Original Text Missing====") ? "" : originalText,
                     };
@@ -122,9 +125,35 @@ namespace PostProcessing
                     {
                         entry.SChiinese = originalText;
                     }
+                    if(!conflictKeys.ContainsKey(key))
+                    {
+                        conflictKeys[key] = new List<TranslationEntry>();
+                    }
+                    conflictKeys[key].Add(entry);
                     ModTranslations[currentModId][key] = entry;
                 }
+            }
 
+            //输出有冲突的key到文件，同时向控制台输出警告信息
+            string conflictFilePath = Path.Combine(repoDIr, "data", "conflict_keys.txt");
+            using (var writer = new StreamWriter(conflictFilePath, false))
+            {
+                foreach (var kvp in conflictKeys)
+                {
+                    if (kvp.Value.Count > 1)
+                    {
+                        string conflictKeyInfo = "";
+                        writer.WriteLine($"Conflict key: {kvp.Key}");
+                        foreach (var entry in kvp.Value)
+                        {
+                            conflictKeyInfo += entry.ModId + "; ";
+                            writer.WriteLine($"{entry.ModId}:\"{entry.OriginalText}\"");
+                            writer.WriteLine($"{entry.ModId}:\"{entry.SChiinese}\"");
+                        }
+                        Console.WriteLine($"::warning:: Conflict key found: {kvp.Key}, mod ID: {conflictKeyInfo}");
+                        writer.WriteLine();
+                    }
+                }
             }
 
             // 读取 key_source_map.json 文件
