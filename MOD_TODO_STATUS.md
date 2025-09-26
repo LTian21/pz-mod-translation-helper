@@ -2,13 +2,13 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-25 22:46:25 UTC+08:00`*
+*最后更新于：`2025-09-26 12:18:23 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
-| Guns93Test | 3183820077 | 804 |
+| Guns93Test | 3183820077 | 861 |
 | Support_Goods_-_MyAlcohol | 3510863962 | 622 |
 | FRAcceptableGunsDemo | 3554570236 | 607 |
 | Immersive_Lore | 3000924731 | 273 |
@@ -16,7 +16,6 @@
 | HybridGunRepair | 3562222835 | 101 |
 | Realistic_Recipes | 3540757743 | 81 |
 | HydeCoClay | 3551124480 | 69 |
-| Firearms | 2256623447 | 60 |
 | OgrimMachineUtils | 3555558732 | 58 |
 | ZevonMedievalArmory | 3540834058 | 45 |
 | HybridMeleeRepair | 3569031613 | 32 |
@@ -24,6 +23,7 @@
 | Nep_Local_Knowledge | 3511535258 | 10 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | LWBetterElectronics | 2999183635 | 3 |
+| Read_Book_Bypassing_Level_Restrictions | 3319538177 | 2 |
 | Militek_Clothing | 3269061047 | 0 |
 | Perts_Party_Tiles | 2837923608 | 0 |
 | Frockin_Wiseguys | 3538760023 | 0 |
@@ -350,7 +350,6 @@
 | More_immersive_vehicles | 3162566044 | 0 |
 | RestoreUtilities | 3409422147 | 0 |
 | Voice_Ellie_Williams | 3464700263 | 0 |
-| Read_Book_Bypassing_Level_Restrictions | 3319538177 | 0 |
 | Mexiox's_-_Mexican_Firearm_Weapons | 2882852956 | 0 |
 | AutoMechanics | 3387539308 | 0 |
 | [B42]_Intuitive_Crafting | 3486217110 | 0 |
@@ -481,6 +480,7 @@
 | AdaWongVoice | 3401470591 | 0 |
 | ClothesBOX | 2847911733 | 0 |
 | P4MySoCalledSnack | 2877535263 | 0 |
+| Firearms | 2256623447 | 0 |
 | P4DriedFlower | 2949777636 | 0 |
 | P4PickingMeister | 3422220305 | 0 |
 | PFO_GUNRUNNER | 3434691822 | 0 |
