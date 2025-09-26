@@ -2,18 +2,18 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-26 12:18:23 UTC+08:00`*
+*最后更新于：`2025-09-26 14:36:51 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
-| Guns93Test | 3183820077 | 861 |
 | Support_Goods_-_MyAlcohol | 3510863962 | 622 |
 | FRAcceptableGunsDemo | 3554570236 | 607 |
 | Immersive_Lore | 3000924731 | 273 |
 | SewingWorkbranch | 3555588616 | 231 |
 | HybridGunRepair | 3562222835 | 101 |
+| Guns93Test | 3183820077 | 87 |
 | Realistic_Recipes | 3540757743 | 81 |
 | HydeCoClay | 3551124480 | 69 |
 | OgrimMachineUtils | 3555558732 | 58 |
