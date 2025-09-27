@@ -1,0 +1,96 @@
+module Base
+{
+	model Chevalier_Rhino_Hood
+	{
+		mesh = vehicles/Vehicles_Chevalier_Rhino_F|Hood,
+		shader = vehicle_multiuv_noreflect,
+		static = FALSE,
+		scale = .4,
+		boneWeight = HoodBone 1.0,
+	}
+	
+	template vehicle RhinoHood
+	{
+		part EngineDoor
+		{
+			category = bodywork,
+			area = Engine,
+			durability = 5,
+			door
+			{
+			}		
+			model Default
+			{
+				file = Chevalier_Rhino_Hood,
+			}
+			anim Open
+			{
+				sound = VehicleHoodOpen,
+			}
+			anim Close
+			{
+				sound = VehicleHoodClose,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 180.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 180.0 0.0,
+			}
+			itemType = Base.RhinoEngineDoor,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:3,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Door,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:3,
+                recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = ATA2ProtectionHood,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+                init = Vehicles.Init.Door,
+                update = Vehicles.Update.EngineDoor,
+                use = Vehicles.Use.EngineDoor,
+            }
+		}
+	}
+}
+

@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-26 14:36:51 UTC+08:00`*
+*最后更新于：`2025-09-27 12:17:42 UTC+08:00`*
 
 ---
 
@@ -24,6 +24,7 @@
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | LWBetterElectronics | 2999183635 | 3 |
 | Read_Book_Bypassing_Level_Restrictions | 3319538177 | 2 |
+| B42_Rain's_Axes_&_Blades | 3388380529 | 2 |
 | Militek_Clothing | 3269061047 | 0 |
 | Perts_Party_Tiles | 2837923608 | 0 |
 | Frockin_Wiseguys | 3538760023 | 0 |
@@ -355,7 +356,6 @@
 | [B42]_Intuitive_Crafting | 3486217110 | 0 |
 | [B42]_Bag_Upgrade_Ultra | 3407793320 | 0 |
 | P4PrismPower | 3235103558 | 0 |
-| B42_Rain's_Axes_&_Blades | 3388380529 | 0 |
 | DragBodiesFaster_50% | 3393821407 | 0 |
 | MiraAmmoMaker | 3441855577 | 0 |
 | fhqwhgads'_Hot_Pursuit_Pack | 2841969842 | 0 |
