@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-27 12:17:42 UTC+08:00`*
+*最后更新于：`2025-09-28 12:17:38 UTC+08:00`*
 
 ---
 
@@ -12,9 +12,10 @@
 | FRAcceptableGunsDemo | 3554570236 | 607 |
 | Immersive_Lore | 3000924731 | 273 |
 | SewingWorkbranch | 3555588616 | 231 |
-| HybridGunRepair | 3562222835 | 101 |
+| HybridGunRepair | 3562222835 | 106 |
 | Guns93Test | 3183820077 | 87 |
 | Realistic_Recipes | 3540757743 | 81 |
+| Bandits | 3268487204 | 80 |
 | HydeCoClay | 3551124480 | 69 |
 | OgrimMachineUtils | 3555558732 | 58 |
 | ZevonMedievalArmory | 3540834058 | 45 |
@@ -22,12 +23,15 @@
 | Serving_plates_Build42 | 3399320470 | 14 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
+| RedDays | 3516166810 | 4 |
 | LWBetterElectronics | 2999183635 | 3 |
 | Read_Book_Bypassing_Level_Restrictions | 3319538177 | 2 |
 | B42_Rain's_Axes_&_Blades | 3388380529 | 2 |
+| PZKVanillaPlusCarPack | 3217685049 | 2 |
+| Frockin_Wiseguys | 3538760023 | 1 |
+| [J&G]_Alpine_Multicam_Uniform | 3303746488 | 1 |
 | Militek_Clothing | 3269061047 | 0 |
 | Perts_Party_Tiles | 2837923608 | 0 |
-| Frockin_Wiseguys | 3538760023 | 0 |
 | ATA_Mustang | 3405178154 | 0 |
 | Louisville_Quarantine_Zone | 2934132344 | 0 |
 | KickScooter | 3453879909 | 0 |
@@ -156,7 +160,6 @@
 | TheStar | 3412262177 | 0 |
 | P4Excalibolg | 3070446764 | 0 |
 | [J&G]_Trauma_Responder_Uniform | 3443982326 | 0 |
-| RedDays | 3516166810 | 0 |
 | doorsHaveAChance | 3041602364 | 0 |
 | IndustrialRevolution | 3400131934 | 0 |
 | MoreWoodcharcoalBurnables | 3425726710 | 0 |
@@ -288,7 +291,6 @@
 | Buildables_Expansion | 3463117260 | 0 |
 | 73fordFalcon | 3490370700 | 0 |
 | Support_Corps | 3409836763 | 0 |
-| [J&G]_Alpine_Multicam_Uniform | 3303746488 | 0 |
 | pzhotbar42 | 3396010813 | 0 |
 | SafeLogin | 2876897619 | 0 |
 | WashingMenusImproved | 3460812542 | 0 |
@@ -420,7 +422,6 @@
 | 85buickLeSabre | 3418252689 | 0 |
 | AxesRecrafting | 2211423190 | 0 |
 | P4Excalibar | 2868777243 | 0 |
-| PZKVanillaPlusCarPack | 3217685049 | 0 |
 | HydeCoBees | 3430224478 | 0 |
 | [J&G]_Black_Multicam_Uniform | 3315302991 | 0 |
 | TMRRemoveMumble | 3100475013 | 0 |
@@ -509,7 +510,6 @@
 | 92jeepYJ | 3287727378 | 0 |
 | ExtendedSpices | 3522142755 | 0 |
 | MoreDamagedObjects | 3413150945 | 0 |
-| Bandits | 3268487204 | 0 |
 | NodachiMod_B42.5.1 | 2166396868 | 0 |
 | StandaloneTowels | 3203159242 | 0 |
 | [B42]_FlipVehiclePlusTrailer | 3430172149 | 0 |
