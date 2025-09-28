@@ -373,7 +373,7 @@ jobs:
           echo "所有Mod的时间戳已通过一次性调用更新成功。"
 
           echo "正在生成 Mod ID 到 Mod 名称的映射文件..."
-          jq '.response.publishedfiledetails | map({(.publishedfileid): .title}) | add' api_response.json > translation_utils/mod_id_name_map.json
+          jq '.response.publishedfiledetails | map(if .title and .result == 1 then {(.publishedfileid): .title} else {(.publishedfileid): "API访问失败"} end) | add' api_response.json > translation_utils/mod_id_name_map.json
           echo "Mod ID-名称映射文件 (translation_utils/mod_id_name_map.json) 已成功生成。"
 
       - name: Run Main Translation Extractor Script
