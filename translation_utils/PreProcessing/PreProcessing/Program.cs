@@ -148,60 +148,64 @@ namespace PreProcessing
                     tempComments.Add(line);
                     continue;
                 }
-                //是否是原文行，格式为 <modId>::EN::<key> = "<originalText>",
-                var originalMatch1 = Regex.Match(line, @"^\t\t(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*");
+                //是否是未翻译的原文行，格式为 <modId>::EN::<matchKey> = "<matchText>",
+                var originalMatch1 = Regex.Match(line, @"^\t\t(?<modId>[^:]+)::EN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
                 if (originalMatch1.Success)
                 {
                     string currentModId = originalMatch1.Groups["modId"].Value.Trim();
-                    string key = originalMatch1.Groups["key"].Value.Trim();
-                    string originalText = originalMatch1.Groups["text"].Value;
+                    string matchKey = originalMatch1.Groups["matchKey"].Value.Trim();
+                    string matchText = originalMatch1.Groups["matchText"].Value;
 
                     //存储comments到对应的条目中
-                    if (currentModId != null && modTranslationsCopy.ContainsKey(currentModId) && modTranslationsCopy[currentModId].ContainsKey(key))
+                    if (currentModId != null && modTranslationsCopy.ContainsKey(currentModId) && modTranslationsCopy[currentModId].ContainsKey(matchKey))
                     {
-                        var entry = modTranslationsCopy[currentModId][key];
+                        var entry = modTranslationsCopy[currentModId][matchKey];
                         entry.Comment.AddRange(tempComments);
                         tempComments.Clear();
-                        modTranslationsCopy[currentModId][key] = entry;
+                        entry.IsSChineseTranslated = false;
+                        modTranslationsCopy[currentModId][matchKey] = entry;
                     }
                     continue;
                 }
-                //是否是翻译文本行，格式为 <modId>::CN::<key> = "<originalText>",
-                var translationMatch1 = Regex.Match(line, @"^\t\t(?<modId>[^:]+)::CN::(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*");
+                //是否是未翻译的译文行，格式为 <modId>::CN::<matchKey> = "<matchText>",
+                var translationMatch1 = Regex.Match(line, @"^\t\t(?<modId>[^:]+)::CN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
                 if (translationMatch1.Success)
                 {
-                    string currentModId = originalMatch1.Groups["modId"].Value.Trim();
+                    string currentModId = translationMatch1.Groups["modId"].Value.Trim();
+                    string matchKey = translationMatch1.Groups["matchKey"].Value.Trim();
+                    string matchText = translationMatch1.Groups["matchText"].Value;
+
                     //存储comments到对应的条目中
                     if (currentModId != null && modTranslationsCopy.ContainsKey(currentModId))
                     {
-                        string key = originalMatch1.Groups["key"].Value.Trim();
-                        if (modTranslationsCopy[currentModId].ContainsKey(key))
+                        if (modTranslationsCopy[currentModId].ContainsKey(matchKey))
                         {
-                            var entry = modTranslationsCopy[currentModId][key];
+                            var entry = modTranslationsCopy[currentModId][matchKey];
                             entry.Comment.AddRange(tempComments);
                             tempComments.Clear();
-                            modTranslationsCopy[currentModId][key] = entry;
+                            entry.SChiinese = matchText;
+                            modTranslationsCopy[currentModId][matchKey] = entry;
                         }
                     }
                     continue;
                 }
 
-                //是否是已翻译的原文行，格式为 <modId>::EN::<key> = "<originalText>",
-                var originalMatch2 = Regex.Match(line, @"^(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*");
+                //是否是已翻译的原文行，格式为 <modId>::EN::<matchKey> = "<matchText>",
+                var originalMatch2 = Regex.Match(line, @"^(?<modId>[^:]+)::EN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
                 if (originalMatch2.Success)
                 {
                     string currentModId = originalMatch2.Groups["modId"].Value.Trim();
-                    string key = originalMatch2.Groups["key"].Value.Trim();
-                    string originalText = originalMatch2.Groups["text"].Value;
+                    string matchKey = originalMatch2.Groups["matchKey"].Value.Trim();
+                    string matchText = originalMatch2.Groups["matchText"].Value;
 
                     //存储到对应的条目中，并检查原文是否已经改变
-                    if (currentModId != null && modTranslationsCopy.ContainsKey(currentModId) && modTranslationsCopy[currentModId].ContainsKey(key))
+                    if (currentModId != null && modTranslationsCopy.ContainsKey(currentModId) && modTranslationsCopy[currentModId].ContainsKey(matchKey))
                     {
-                        var entry = modTranslationsCopy[currentModId][key];
+                        var entry = modTranslationsCopy[currentModId][matchKey];
                         entry.Comment.AddRange(tempComments);
                         tempComments.Clear();
 
-                        if (entry.OriginalText.Equals(originalText))//原文没有改变
+                        if (entry.OriginalText.Equals(matchText))//原文没有改变
                         {
                             entry.IsSChineseTranslated = true;
                         }
@@ -210,33 +214,33 @@ namespace PreProcessing
                             //如果翻译文本为空
                             if (entry.OriginalText.Equals(""))
                             {
-                                entry.OriginalText = originalText;
+                                entry.OriginalText = matchText;
                             }
 
                             //标记为未翻译
                             entry.IsSChineseTranslated = false;
                         }
-                        modTranslationsCopy[currentModId][key] = entry;
+                        modTranslationsCopy[currentModId][matchKey] = entry;
                     }
                     continue;
                 }
-                //是否是已翻翻译文本行，格式为 <modId>::CN::<key> = "<originalText>",
-                var translationMatch2 = Regex.Match(line, @"^(?<modId>[^:]+)::CN::(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*");
+                //是否是已翻译的译文行，格式为 <modId>::CN::<matchKey> = "<matchText>",
+                var translationMatch2 = Regex.Match(line, @"^(?<modId>[^:]+)::CN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
                 if (translationMatch2.Success)
                 {
                     string currentModId = translationMatch2.Groups["modId"].Value.Trim();
-                    string key = translationMatch2.Groups["key"].Value.Trim();
-                    string originalText = translationMatch2.Groups["text"].Value;
+                    string matchKey = translationMatch2.Groups["matchKey"].Value.Trim();
+                    string matchText = translationMatch2.Groups["matchText"].Value;
 
                     //存储到对应的条目中
-                    if (currentModId != null && modTranslationsCopy.ContainsKey(currentModId) && modTranslationsCopy[currentModId].ContainsKey(key))
+                    if (currentModId != null && modTranslationsCopy.ContainsKey(currentModId) && modTranslationsCopy[currentModId].ContainsKey(matchKey))
                     {
-                        var entry = modTranslationsCopy[currentModId][key];
+                        var entry = modTranslationsCopy[currentModId][matchKey];
                         entry.Comment.AddRange(tempComments);
                         tempComments.Clear();
-                        entry.SChiinese = originalText;
+                        entry.SChiinese = matchText;
 
-                        modTranslationsCopy[currentModId][key] = entry;
+                        modTranslationsCopy[currentModId][matchKey] = entry;
                     }
                 }
             }
@@ -360,7 +364,7 @@ namespace PreProcessing
             {
                 if (outputContent.Contains(fix.Find))
                 {
-                    // 构建正确的格式：key = "replace",
+                    // 构建正确的格式：matchKey = "replace",
                     string correctFormat = $"{fix.Key} = \"{fix.Replace}\",";
                     outputContent = outputContent.Replace(fix.Find, correctFormat);
                     Console.WriteLine($"Applying formatting correction rules for file {outputFilePath}: {fix.Key}");
@@ -375,12 +379,12 @@ namespace PreProcessing
             {
                 var match = Regex.Match(
                     line,
-                    @"^(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*"
+                    @"^(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*"
                 );
                 if (match.Success)
                 {
-                    string key = match.Groups["key"].Value.Trim();
-                    string originalText = match.Groups["text"].Value;
+                    string key = match.Groups["matchKey"].Value.Trim();
+                    string originalText = match.Groups["matchText"].Value;
                     translationEntries[key] = new TranslationEntry
                     {
                         OriginalText = originalText,
@@ -421,12 +425,12 @@ namespace PreProcessing
             {
                 var match = Regex.Match(
                     line,
-                    @"^(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*"
+                    @"^(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*"
                 );
                 if (match.Success)
                 {
-                    string key = match.Groups["key"].Value.Trim();
-                    string originalText = match.Groups["text"].Value;
+                    string key = match.Groups["matchKey"].Value.Trim();
+                    string originalText = match.Groups["matchText"].Value;
 
                     //检测ModTranslations[modId]是否包含key，如果包含则更新SChiinese，否则新增一条记录，保持IsSChineseTranslated为false，此时还没有进行核对
                     if (!ModTranslations.ContainsKey(modId))
@@ -437,7 +441,7 @@ namespace PreProcessing
                     {
                         var entry = new TranslationEntry
                         {
-                            OriginalText = "originalText",
+                            OriginalText = "matchText",
                             SChiinese = "",
                             IsSChineseTranslated = false,
                             Comment = new List<string>()
@@ -485,12 +489,12 @@ namespace PreProcessing
             {
                 var match = Regex.Match(
                     line,
-                    @"^(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*"
+                    @"^(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*"
                 );
                 if (match.Success)
                 {
-                    string key = match.Groups["key"].Value.Trim();
-                    string originalText = match.Groups["text"].Value;
+                    string key = match.Groups["matchKey"].Value.Trim();
+                    string originalText = match.Groups["matchText"].Value;
 
                     //检测ModTranslations[modId]是否包含key，如果包含则更新SChiinese，否则新增一条记录，保持IsSChineseTranslated为false，此时还没有进行核对
                     if (!ModTranslations.ContainsKey(modId))
@@ -547,12 +551,12 @@ namespace PreProcessing
             {
                 var match = Regex.Match(
                     line,
-                    @"^(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*"
+                    @"^(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*"
                 );
                 if (match.Success)
                 {
-                    string key = match.Groups["key"].Value.Trim();
-                    string originalText = match.Groups["text"].Value;
+                    string key = match.Groups["matchKey"].Value.Trim();
+                    string originalText = match.Groups["matchText"].Value;
 
                     //检测ModTranslations[modId]是否包含key，如果包含则更新SChiinese，否则新增一条记录，保持IsSChineseTranslated为false，此时还没有进行核对
                     if (!ModTranslations.ContainsKey(modId))
