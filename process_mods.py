@@ -391,6 +391,69 @@ def save_status(status_data):
     STATUS_FILE.parent.mkdir(parents=True, exist_ok=True)
     STATUS_FILE.write_text(json.dumps(status_data, indent=2), encoding='utf-8')
 
+def update_map_from_mod_info(config: Config, mods_to_process_ids: list[str]):
+
+    map_file_path = Path('translation_utils') / 'mod_id_name_map.json'
+    if not map_file_path.is_file():
+        logging.warning(f"  -> 警告: Mod ID映射文件 '{map_file_path}' 不存在，跳过信息补全。")
+        return
+
+    logging.info(f"\n--- 正在尝试从 mod.info 文件中补全 API 访问失败的 Mod 名称 ---")
+    
+    try:
+        with open(map_file_path, 'r', encoding='utf-8') as f:
+            id_name_map = json.load(f)
+    except json.JSONDecodeError:
+        logging.error(f"  -> 错误: 解析 '{map_file_path}' 失败。")
+        return
+
+    # 找出本次运行中那些 API 访问失败的 Mod ID
+    failed_ids_in_current_run = [
+        mod_id for mod_id in mods_to_process_ids
+        if id_name_map.get(mod_id) is None
+    ]
+
+    if not failed_ids_in_current_run:
+        logging.info("  -> 本次运行没有需要从 mod.info 补全的 Mod。")
+        return
+
+    update_count = 0
+    for mod_id in failed_ids_in_current_run:
+        mod_content_path = config.TARGET_PATH / mod_id
+        if not mod_content_path.is_dir():
+            logging.warning(f"    -> [ID: {mod_id}] 找不到对应的Mod内容目录，跳过。")
+            continue
+
+        try:
+            mod_info_files = list(mod_content_path.rglob('mod.info'))
+            if not mod_info_files:
+                logging.warning(f"    -> [ID: {mod_id}] 未能找到 mod.info 文件。")
+                continue
+
+            mod_info_file = mod_info_files[0]
+            
+            with open(mod_info_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    if line.strip().lower().startswith('name='):
+                        mod_name = line.split('=', 1)[1].strip()
+                        if mod_name:
+                            logging.info(f"    -> [ID: {mod_id}] 成功从 mod.info 中提取名称: '{mod_name}'")
+                            id_name_map[mod_id] = mod_name
+                            update_count += 1
+                            break
+        except Exception as e:
+            logging.error(f"    -> [ID: {mod_id}] 处理 mod.info 文件时发生错误: {e}")
+
+    if update_count > 0:
+        logging.info(f"  -> 成功补全了 {update_count} 个 Mod 的名称。正在写回映射文件...")
+        try:
+            with open(map_file_path, 'w', encoding='utf-8') as f:
+                json.dump(id_name_map, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            logging.error(f"  -> 错误: 写回 '{map_file_path}' 失败: {e}")
+    else:
+        logging.info("  -> 本次运行未能从任何 mod.info 文件中补全信息。")
+
 def main():
     try:
         cfg = Config()
@@ -458,6 +521,9 @@ def main():
             except FileNotFoundError:
                 logging.error(f"错误：未找到 {ID_LIST_FILE} 文件。请在列表模式下提供此文件。")
                 return
+
+    current_run_mod_ids = [path.name for path in mods_to_process]
+    update_map_from_mod_info(cfg, current_run_mod_ids)
 
     for mod_id_path in mods_to_process:
         mods_parent_path = mod_id_path / "mods"

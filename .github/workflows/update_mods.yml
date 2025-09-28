@@ -195,6 +195,7 @@ jobs:
             
             rsync -a --prune-empty-dirs \
               --include='*/' \
+              --include='**/mod.info' \
               --include='**/media/scripts/***' \
               --include='**/[Tt]ranslate/*[Ee][Nn]*/***' \
               --include='**/[Tt]ranslate/*[Cc][Nn]*/***' \
@@ -341,40 +342,36 @@ jobs:
           MODS_TO_DOWNLOAD_JSON_FOR_TIMESTAMP: ${{ needs.setup_jobs.outputs.mods_to_download }}
         run: |
           MODS_DOWNLOADED="$MODS_TO_DOWNLOAD_JSON_FOR_TIMESTAMP"
-          TIMESTAMP_FILE="data/mod_timestamps.json"
+          MAP_FILE="translation_utils/mod_id_name_map.json"
+
           if [ -z "$MODS_DOWNLOADED" ] || [ "$MODS_DOWNLOADED" = "[]" ] || [ "$MODS_DOWNLOADED" = "null" ]; then
-            echo "没有需要更新时间戳或生成映射的Mod。"
+            echo "没有需要更新映射的Mod。"
             exit 0
           fi
           
-          if [ ! -f "$TIMESTAMP_FILE" ]; then echo "{}" > "$TIMESTAMP_FILE"; fi
-          
+          # API调用以获取当前批次Mod的详情
           POST_DATA=$(echo "$MODS_DOWNLOADED" | jq -r 'to_entries[] | "publishedfileids[\(.key)]=\(.value)"' | paste -sd '&')
           ITEM_COUNT=$(echo "$MODS_DOWNLOADED" | jq 'length')
-          
-          echo "正在单次API调用中获取 $ITEM_COUNT 个Mod的详情..."
-          API_RESPONSE_BATCH=$(curl --retry 5 --retry-delay 5 --retry-all-errors -s \
-            -X POST "https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/" \
-            -d "itemcount=$ITEM_COUNT" \
-            -d "$POST_DATA")
+          API_RESPONSE_BATCH=$(curl --retry 5 --retry-delay 5 --retry-all-errors -s -X POST "https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/" -d "itemcount=$ITEM_COUNT" -d "$POST_DATA")
           if ! echo "$API_RESPONSE_BATCH" | jq -e '.response.publishedfiledetails' > /dev/null; then
-             echo "::error::Steam API调用失败或返回无效数据。响应内容如下:"
-             echo "$API_RESPONSE_BATCH"
+             echo "::error::Steam API调用失败或返回无效数据。"
              exit 1
           fi
           echo "$API_RESPONSE_BATCH" > api_response.json
-
-          jq -s '
-            .[0] as $api_data | .[1] as $current_timestamps |
-            ($api_data.response.publishedfiledetails | map({(.publishedfileid): .time_updated}) | add) as $new_timestamps |
-            $current_timestamps + $new_timestamps
-          ' <(echo "$API_RESPONSE_BATCH") "$TIMESTAMP_FILE" > tmp.$$.json && mv tmp.$$.json "$TIMESTAMP_FILE"
-    
-          echo "所有Mod的时间戳已通过一次性调用更新成功。"
-
-          echo "正在生成 Mod ID 到 Mod 名称的映射文件..."
-          jq '.response.publishedfiledetails | map(if .title and .result == 1 then {(.publishedfileid): .title} else {(.publishedfileid): "API访问失败"} end) | add' api_response.json > translation_utils/mod_id_name_map.json
-          echo "Mod ID-名称映射文件 (translation_utils/mod_id_name_map.json) 已成功生成。"
+          
+          echo "正在对 Mod ID-名称映射文件进行增量更新"
+          if [ ! -f "$MAP_FILE" ]; then
+            echo "未找到现有映射文件，将创建一个新的。"
+            echo "{}" > "$MAP_FILE"
+          fi
+          
+          # 为当前批次的Mod生成一个新的映射片段
+          NEW_MAP_CHUNK=$(jq '.response.publishedfiledetails | map(if .title and .result == 1 then {(.publishedfileid): .title} else {(.publishedfileid): null} end) | add' api_response.json)
+          
+          # 合并新旧数据。如果ID已存在，新值会覆盖旧值。
+          jq -s '.[0] * .[1] | to_entries | sort_by(.key | tonumber) | from_entries' "$MAP_FILE" <(echo "$NEW_MAP_CHUNK") > tmp_map.json && mv tmp_map.json "$MAP_FILE"
+          
+          echo "Mod ID-名称映射文件 ($MAP_FILE) 已成功增量更新。"
 
       - name: Run Main Translation Extractor Script
         env:
