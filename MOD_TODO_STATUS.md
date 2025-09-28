@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-28 17:11:20 UTC+08:00`*
+*最后更新于：`2025-09-28 18:02:43 UTC+08:00`*
 
 ---
 
@@ -17,6 +17,7 @@
 | Realistic_Recipes | 3540757743 | 81 |
 | Bandits | 3268487204 | 80 |
 | Detailed_Skill_Tooltips | 3572846242 | 76 |
+| beaniebabie | 3575855907 | 72 |
 | HydeCoClay | 3551124480 | 69 |
 | OgrimMachineUtils | 3555558732 | 58 |
 | ZevonMedievalArmory | 3540834058 | 45 |
