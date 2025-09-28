@@ -343,7 +343,7 @@ jobs:
           MODS_DOWNLOADED="$MODS_TO_DOWNLOAD_JSON_FOR_TIMESTAMP"
           TIMESTAMP_FILE="data/mod_timestamps.json"
           if [ -z "$MODS_DOWNLOADED" ] || [ "$MODS_DOWNLOADED" = "[]" ] || [ "$MODS_DOWNLOADED" = "null" ]; then
-            echo "没有需要更新时间戳的Mod。"
+            echo "没有需要更新时间戳或生成映射的Mod。"
             exit 0
           fi
           
@@ -363,6 +363,7 @@ jobs:
              exit 1
           fi
           echo "$API_RESPONSE_BATCH" > api_response.json
+
           jq -s '
             .[0] as $api_data | .[1] as $current_timestamps |
             ($api_data.response.publishedfiledetails | map({(.publishedfileid): .time_updated}) | add) as $new_timestamps |
@@ -370,7 +371,10 @@ jobs:
           ' <(echo "$API_RESPONSE_BATCH") "$TIMESTAMP_FILE" > tmp.$$.json && mv tmp.$$.json "$TIMESTAMP_FILE"
     
           echo "所有Mod的时间戳已通过一次性调用更新成功。"
- 
+
+          echo "正在生成 Mod ID 到 Mod 名称的映射文件..."
+          jq '.response.publishedfiledetails | map({(.publishedfileid): .title}) | add' api_response.json > translation_utils/mod_id_name_map.json
+          echo "Mod ID-名称映射文件 (translation_utils/mod_id_name_map.json) 已成功生成。"
 
       - name: Run Main Translation Extractor Script
         env:
