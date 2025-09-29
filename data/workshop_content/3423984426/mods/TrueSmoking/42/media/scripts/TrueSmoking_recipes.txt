@@ -1,0 +1,37 @@
+module Base
+{
+   craftRecipe AddACigarette
+    {
+        timedAction = Making,
+        time = 15,
+        OnCreate = TrueSmoking.addToPack,
+        OnTest = TrueSmoking.canAddToPack,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.CigaretteSingle] flags[AllowFavorite;InheritFavorite],
+            item 1 [Base.CigarettePack] mode:keep flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+        }
+    }
+
+        craftRecipe TakeACigarette
+    {
+        timedAction = Making,
+        time = 15,
+        OnCreate = TrueSmoking.takeACigarette,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.CigarettePack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.CigaretteSingle,
+        }
+    }
+}
