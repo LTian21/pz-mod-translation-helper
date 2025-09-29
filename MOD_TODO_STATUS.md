@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-28 18:39:48 UTC+08:00`*
+*最后更新于：`2025-09-29 12:18:57 UTC+08:00`*
 
 ---
 
@@ -11,22 +11,25 @@
 | Support_Goods_-_MyAlcohol | 3510863962 | 622 |
 | FRAcceptableGunsDemo | 3554570236 | 607 |
 | Immersive_Lore | 3000924731 | 273 |
+| Customizable_Containers | 2719850086 | 272 |
 | SewingWorkbranch | 3555588616 | 231 |
 | HybridGunRepair | 3562222835 | 106 |
 | Guns93Test | 3183820077 | 87 |
 | Realistic_Recipes | 3540757743 | 81 |
-| Bandits | 3268487204 | 80 |
+| Bandits | 3268487204 | 77 |
 | Detailed_Skill_Tooltips | 3572846242 | 76 |
 | beaniebabie | 3575855907 | 72 |
 | HydeCoClay | 3551124480 | 69 |
 | OgrimMachineUtils | 3555558732 | 58 |
 | ZevonMedievalArmory | 3540834058 | 45 |
+| Project_Summer_Car | 3564950449 | 37 |
 | HybridMeleeRepair | 3569031613 | 32 |
 | Serving_plates_Build42 | 3399320470 | 14 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | RedDays | 3516166810 | 4 |
 | LWBetterElectronics | 2999183635 | 3 |
+| TrueSmoking | 3423984426 | 2 |
 | Read_Book_Bypassing_Level_Restrictions | 3319538177 | 2 |
 | B42_Rain's_Axes_&_Blades | 3388380529 | 2 |
 | PZKVanillaPlusCarPack | 3217685049 | 2 |
@@ -55,7 +58,6 @@
 | ChainToChain | 3413713793 | 0 |
 | FWO_Fitness_Workout_Overhaul | 2940354599 | 0 |
 | B42Eggjar | 3444384263 | 0 |
-| TrueSmoking | 3423984426 | 0 |
 | throw-your-bag-across | 3391902125 | 0 |
 | P4StealthCamo | 2762398967 | 0 |
 | [J&G]_XKU_Uniform | 3276134387 | 0 |
@@ -198,7 +200,6 @@
 | TrustyFireAxe | 3400045232 | 0 |
 | Brandernburg | 3386447602 | 0 |
 | pogoclothing_mod | 3058134369 | 0 |
-| Project_Summer_Car | 3564950449 | 0 |
 | RollBack_Rain_Collector_Barrel | 3392186516 | 0 |
 | 86oshkoshP19A | 2566953935 | 0 |
 | 815Tatra | 3404869345 | 0 |
@@ -306,7 +307,6 @@
 | [B42]_Moodle_Descriptions_Expanded | 3389003300 | 0 |
 | CytU1550L | 2843855721 | 0 |
 | BarricadesHurtZombies | 3402208866 | 0 |
-| Customizable_Containers | 2719850086 | 0 |
 | ImmersiveSolarArrays | 2969478819 | 0 |
 | BetterFPS_B42 | 3423115544 | 0 |
 | Skill_Recovery_Journal | 2503622437 | 0 |
@@ -531,6 +531,7 @@
 | ChairBarricade | 3404288341 | 0 |
 | P4VideoMeister | 2744797858 | 0 |
 | SimpleOverhaulTraitsAndOccupations | 2840805724 | 0 |
+| Asakusa_lake_town | 3482962418 | 0 |
 | H&K_VP70 | 2470321383 | 0 |
 | 91fordLTD | 3366300557 | 0 |
 | P4MySoCalledToy | 3540268758 | 0 |
