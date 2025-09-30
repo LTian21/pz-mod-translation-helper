@@ -33,14 +33,14 @@ namespace PostProcessing
             string? currentDir = Path.GetDirectoryName(exePath);
 
             // 向上查找 translation_utils 目录
-            string? repoDIr = null;
+            string? repoDir = null;
             var searchDir = currentDir;
             while (!string.IsNullOrEmpty(searchDir))
             {
                 string candidate = Path.Combine(searchDir, "translation_utils");
                 if (Directory.Exists(candidate))
                 {
-                    repoDIr = searchDir;
+                    repoDir = searchDir;
                     break;
                 }
                 searchDir = Path.GetDirectoryName(searchDir);
@@ -48,7 +48,7 @@ namespace PostProcessing
 
             //如果无法通过exe路径获取repo目录，则尝试通过工作目录获取repo目录
             //如果无法通过exe路径获取repo目录，则尝试通过工作目录获取repo目录
-            if (repoDIr == null)
+            if (repoDir == null)
             {
                 // 获取当前工作目录
                 string workingDir = Directory.GetCurrentDirectory();
@@ -61,20 +61,20 @@ namespace PostProcessing
                     string candidate = Path.Combine(searchDir, "translation_utils");
                     if (Directory.Exists(candidate))
                     {
-                        repoDIr = searchDir;
+                        repoDir = searchDir;
                         break;
                     }
                     searchDir = Path.GetDirectoryName(searchDir);
                 }
             }
 
-            if (repoDIr == null)
+            if (repoDir == null)
             {
                 throw new DirectoryNotFoundException($"Error: repo not found");
             }
 
             // 拼接  translation 文件路径
-            string translationFilePath = Path.Combine(repoDIr, "data", "translations_CN.txt");
+            string translationFilePath = Path.Combine(repoDir, "data", "translations_CN.txt");
             //检查repoDir\data\translations_CN.txt是否存在，不存在则爬出异常并退出
             if (!File.Exists(translationFilePath))
             {
@@ -134,8 +134,14 @@ namespace PostProcessing
                 }
             }
 
+            //如果warnings目录不存在则创建
+            string warningsDir = Path.Combine(repoDir, "warnings");
+            if (!Directory.Exists(warningsDir))
+            {
+                Directory.CreateDirectory(warningsDir);
+            }
             //输出有冲突的key到文件，同时向控制台输出警告信息
-            string conflictFilePath = Path.Combine(repoDIr, "data", "conflict_keys.txt");
+            string conflictFilePath = Path.Combine(repoDir, "warnings", "conflict_keys.txt");
             using (var writer = new StreamWriter(conflictFilePath, false))
             {
                 foreach (var kvp in conflictKeys)
@@ -157,7 +163,7 @@ namespace PostProcessing
             }
 
             // 读取 key_source_map.json 文件
-            string keySourceMapPath = Path.Combine(repoDIr, "translation_utils", "key_source_map.json");
+            string keySourceMapPath = Path.Combine(repoDir, "translation_utils", "key_source_map.json");
             Dictionary<string, Dictionary<string, string>>? keySourceMap = null;
             
             if (File.Exists(keySourceMapPath))
@@ -190,7 +196,7 @@ namespace PostProcessing
                 }
             }
             // 读取 key_source_map.json 文件
-            string keySourceMapManualPath = Path.Combine(repoDIr, "translation_utils", "key_source_map_manual.json");
+            string keySourceMapManualPath = Path.Combine(repoDir, "translation_utils", "key_source_map_manual.json");
             Dictionary<string, Dictionary<string, string>>? keySourceMapManual = null;
             if (File.Exists(keySourceMapManualPath))
             {
@@ -220,7 +226,7 @@ namespace PostProcessing
             }
 
             // 创建输出目录，如果存在则清理
-            string outputDir = Path.Combine(repoDIr, "data", "PZ-Mod-Translation");
+            string outputDir = Path.Combine(repoDir, "data", "PZ-Mod-Translation");
             try
             {
                 if (Directory.Exists(outputDir))
