@@ -245,6 +245,122 @@ namespace PreProcessing
                 }
             }
 
+            // 统一文本格式
+            //如果warnings目录不存在则创建
+            string warningsDir = Path.Combine(repoDir, "warnings");
+            if (!Directory.Exists(warningsDir))
+            {
+                Directory.CreateDirectory(warningsDir);
+            }
+            //存储中英文括号及其中内容的HashSet
+            HashSet<string> braketsStrings1 = new HashSet<string>();
+            HashSet<string> braketsStrings2 = new HashSet<string>();
+            //存储括号可能不匹配的行
+            string warningLines = "";
+            foreach (var modID in modTranslationsCopy.Keys)
+            {
+                foreach (var key in modTranslationsCopy[modID].Keys)
+                {
+                    var entry = modTranslationsCopy[modID][key];
+
+                    //将中文的全角括号替换为英文括号，方便匹配
+                    entry.SChiinese = entry.SChiinese.Replace('（', '(').Replace('）', ')').Replace('【', '[').Replace('】', ']').Replace("：)", ":)").Replace("：(", ":(");
+
+                    //去掉括号之前和之后的空格，并在"("前面加上空格
+                    entry.SChiinese = Regex.Replace(entry.SChiinese, @"\s+\(", "(");
+                    entry.SChiinese = Regex.Replace(entry.SChiinese, @"\(\s+", "(");
+                    entry.SChiinese = Regex.Replace(entry.SChiinese, @"\s+\)", ")");
+                    entry.SChiinese = Regex.Replace(entry.SChiinese, @"\s+\)", ")");
+
+                    entry.SChiinese = entry.SChiinese.Replace("(", " (").Replace(": (", ":(");
+                    //检查英文小括号、中括号是否前后匹配
+                    int openParenCount = entry.SChiinese.Split('(').Length - 1;
+                    int closeParenCount = entry.SChiinese.Split(')').Length - 1;
+                    int smileCount = entry.SChiinese.Split(":)").Length - 1;
+                    int cryCCount = entry.SChiinese.Split(":(").Length - 1;
+                    int openBracketCount = entry.SChiinese.Split('[').Length - 1;
+                    int closeBracketCount = entry.SChiinese.Split(']').Length - 1;
+                    if (openParenCount - cryCCount != closeParenCount - smileCount || openBracketCount != closeBracketCount)
+                    {
+                        string str = modID + "::CN::" + key + " = \"" + entry.SChiinese + "\",";
+                        Console.WriteLine($"::warning:: Warning: Possible unmatched parentheses or brakets in line: {str}");
+                        warningLines += str + "\n";
+                    }
+
+                    //提取括号及其中内容，存储到HashSet中
+                    var matches1 = Regex.Matches(entry.SChiinese, @"\([^\(\)]*\)");
+                    foreach (Match match in matches1)
+                    {
+                        braketsStrings1.Add(match.Value);
+                    }
+                    var matches2 = Regex.Matches(entry.SChiinese, @"\[[^\[\]]*\]");
+                    foreach (Match match in matches2)
+                    {
+                        braketsStrings2.Add(match.Value);
+                    }
+                    modTranslationsCopy[modID][key] = entry;
+                }
+            }
+
+            //将警告信息写入文件
+            string warningFilePath = Path.Combine(repoDir, "warnings", "warnings_unmatched_brakets.txt");
+            using (var writer = new StreamWriter(warningFilePath, false))
+            {
+                writer.WriteLine("// 自动生成文件");
+                writer.WriteLine("// 这个文件包含从 translations_CN.txt 中提取的可能不匹配的括号或方括号的警告。(\":)\"和\":(\"这两个表情可能会影响匹配结果，导致误判)");
+                writer.WriteLine();
+                writer.WriteLine(warningLines);
+            }
+
+            //将括号内容写入文件
+            string braketsFilePath = Path.Combine(repoDir, "warnings", "brakets_contents.txt");
+            using (var writer = new StreamWriter(braketsFilePath, false))
+            {
+                writer.WriteLine("// 自动生成文件");
+                writer.WriteLine("// This file contains unique bracketed contents extracted from translations_CN.txt.");
+                writer.WriteLine("// 这个文件包含从 translations_CN.txt 中提取的括号内的内容。供手动查找替换使用");
+                writer.WriteLine();
+                writer.WriteLine($"// Parentheses (Total {braketsStrings1.Count}) contents:");
+                foreach (var str in braketsStrings1)
+                {
+                    writer.WriteLine(str);
+                }
+                writer.WriteLine();
+                writer.WriteLine();
+                writer.WriteLine($"// Brackets (Total {braketsStrings2.Count}) contents:");
+                foreach (var str in braketsStrings2)
+                {
+                    writer.WriteLine(str);
+                }
+            }
+
+            //将括号内包含"色"的内容写入文件
+            string colorsFilePath = Path.Combine(repoDir, "warnings", "colors_contents.txt");
+            using (var writer = new StreamWriter(colorsFilePath, false))
+            {
+                writer.WriteLine("// 自动生成文件");
+                writer.WriteLine("// 这个文件包含从 translations_CN.txt 中提取的括号内包含'色'字符的内容。供手动查找替换使用");
+                writer.WriteLine();
+                writer.WriteLine($"// Parentheses (Total {braketsStrings1.Count}) contents with '色':");
+                foreach (var str in braketsStrings1)
+                {
+                    if (str.Contains("色"))
+                    {
+                        writer.WriteLine(str);
+                    }
+                }
+                writer.WriteLine();
+                writer.WriteLine();
+                writer.WriteLine($"// Brackets (Total {braketsStrings2.Count}) contents with '色':");
+                foreach (var str in braketsStrings2)
+                {
+                    if (str.Contains("色"))
+                    {
+                        writer.WriteLine(str);
+                    }
+                }
+            }
+
             //打开repoDir\data\translations_CN.txt，清空文件，写入新内容
             using (var writer = new StreamWriter(outputTranslationFilePath, false))
             {
