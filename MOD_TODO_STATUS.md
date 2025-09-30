@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-29 12:18:57 UTC+08:00`*
+*最后更新于：`2025-09-30 12:18:29 UTC+08:00`*
 
 ---
 
@@ -14,10 +14,10 @@
 | Customizable_Containers | 2719850086 | 272 |
 | SewingWorkbranch | 3555588616 | 231 |
 | HybridGunRepair | 3562222835 | 106 |
-| Guns93Test | 3183820077 | 87 |
+| Guns93Test | 3183820077 | 96 |
 | Realistic_Recipes | 3540757743 | 81 |
+| Detailed_Skill_Tooltips | 3572846242 | 79 |
 | Bandits | 3268487204 | 77 |
-| Detailed_Skill_Tooltips | 3572846242 | 76 |
 | beaniebabie | 3575855907 | 72 |
 | HydeCoClay | 3551124480 | 69 |
 | OgrimMachineUtils | 3555558732 | 58 |
@@ -26,6 +26,7 @@
 | HybridMeleeRepair | 3569031613 | 32 |
 | Serving_plates_Build42 | 3399320470 | 14 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
+| BanditsWeekOne | 3403180543 | 9 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | RedDays | 3516166810 | 4 |
 | LWBetterElectronics | 2999183635 | 3 |
@@ -87,7 +88,6 @@
 | ReactiveSoundEvents | 2969551071 | 0 |
 | Operator | 3452171674 | 0 |
 | USMilitaryPack | 612100872 | 0 |
-| BanditsWeekOne | 3403180543 | 0 |
 | Tactical_Weapons | 2324223029 | 0 |
 | BM_Super_Speed_Settings | 3440221534 | 0 |
 | Night_Vision | 3470491629 | 0 |
