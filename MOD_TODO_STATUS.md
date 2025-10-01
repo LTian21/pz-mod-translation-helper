@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-09-30 17:40:54 UTC+08:00`*
+*最后更新于：`2025-10-01 12:18:26 UTC+08:00`*
 
 ---
 
@@ -27,6 +27,7 @@
 | Serving_plates_Build42 | 3399320470 | 14 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
 | BanditsWeekOne | 3403180543 | 9 |
+| damnlib | 3171167894 | 9 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | RedDays | 3516166810 | 4 |
 | LWBetterElectronics | 2999183635 | 3 |
@@ -139,7 +140,6 @@
 | B42PackMule | 3540903327 | 0 |
 | MakeCharcoal | 3392674521 | 0 |
 | SapphCookingB42 | 3409143790 | 0 |
-| damnlib | 3171167894 | 0 |
 | P4SoundScouter | 3366600816 | 0 |
 | ShowSowingSeasonInSeedTooltip | 3404461962 | 0 |
 | WhatCanICraft | 3390169945 | 0 |
