@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-10-02 12:17:49 UTC+08:00`*
+*最后更新于：`2025-10-03 12:18:02 UTC+08:00`*
 
 ---
 
@@ -25,12 +25,15 @@
 | ZevonMedievalArmory | 3540834058 | 45 |
 | HybridMeleeRepair | 3569031613 | 32 |
 | Serving_plates_Build42 | 3399320470 | 14 |
+| Tikitown | 3037854728 | 13 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
 | BanditsWeekOne | 3403180543 | 9 |
 | damnlib | 3171167894 | 9 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | RedDays | 3516166810 | 4 |
+| fhqwhgads'_Motorious_Zone | 2791656602 | 3 |
 | LWBetterElectronics | 2999183635 | 3 |
+| [B42]_Mod_Manager | 3567084868 | 2 |
 | TrueSmoking | 3423984426 | 2 |
 | Read_Book_Bypassing_Level_Restrictions | 3319538177 | 2 |
 | B42_Rain's_Axes_&_Blades | 3388380529 | 2 |
@@ -45,10 +48,8 @@
 | Moats | 3550032314 | 0 |
 | Minimal_Display_Bars_Nutritions_B42 | 3388844542 | 0 |
 | 84mercW460 | 2805630347 | 0 |
-| fhqwhgads'_Motorious_Zone | 2791656602 | 0 |
 | HF_PointBlankMod | 2990322197 | 0 |
 | AmmoMaker | 2788256295 | 0 |
-| [B42]_Mod_Manager | 3567084868 | 0 |
 | Draw_On_Map | 2804531012 | 0 |
 | 99fordCVPI | 2971246021 | 0 |
 | FunctionalGutters | 3439305933 | 0 |
@@ -324,7 +325,6 @@
 | starving-zombies | 3396867685 | 0 |
 | ProximityInventory | 2847184718 | 0 |
 | PartySystem | 3395761583 | 0 |
-| Tikitown | 3037854728 | 0 |
 | Simple_Wall_Building | 3429904483 | 0 |
 | Frockin_Splendor!_Vol.4 | 3475347500 | 0 |
 | RiskyUnarmed | 3434796669 | 0 |
