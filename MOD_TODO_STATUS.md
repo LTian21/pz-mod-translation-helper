@@ -2,12 +2,13 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-10-03 12:18:02 UTC+08:00`*
+*最后更新于：`2025-10-04 12:17:15 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待办条目数量 |
 | :--- | :--- | :--- |
+| Authentic_Z_-_Backpacks+ | 2335368829 | 703 |
 | Support_Goods_-_MyAlcohol | 3510863962 | 622 |
 | FRAcceptableGunsDemo | 3554570236 | 607 |
 | Immersive_Lore | 3000924731 | 273 |
@@ -21,9 +22,11 @@
 | beaniebabie | 3575855907 | 72 |
 | HydeCoClay | 3551124480 | 69 |
 | OgrimMachineUtils | 3555558732 | 58 |
+| Chinesecuisine | 3412969115 | 47 |
 | Project_Summer_Car | 3564950449 | 45 |
 | ZevonMedievalArmory | 3540834058 | 45 |
 | HybridMeleeRepair | 3569031613 | 32 |
+| CustomWeight | 3391228479 | 24 |
 | Serving_plates_Build42 | 3399320470 | 14 |
 | Tikitown | 3037854728 | 13 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
@@ -31,6 +34,7 @@
 | damnlib | 3171167894 | 9 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | RedDays | 3516166810 | 4 |
+| PZKExtendedzones | 3217685049 | 4 |
 | fhqwhgads'_Motorious_Zone | 2791656602 | 3 |
 | LWBetterElectronics | 2999183635 | 3 |
 | [B42]_Mod_Manager | 3567084868 | 2 |
@@ -83,7 +87,6 @@
 | aliceSvanillaDuffelBag | 2959854619 | 0 |
 | 80manKat1 | 3248388837 | 0 |
 | Willowbrook_Bastion!_(items_part) | 3479667649 | 0 |
-| CustomWeight | 3391228479 | 0 |
 | Navigation | 3416036048 | 0 |
 | No_Stress_Chopping | 3460704724 | 0 |
 | True_Crawl_B42 | 3410989950 | 0 |
@@ -428,7 +431,6 @@
 | [J&G]_Black_Multicam_Uniform | 3315302991 | 0 |
 | TMRRemoveMumble | 3100475013 | 0 |
 | StandardizedVehicleUpgrades3Vanilla | 3304582091 | 0 |
-| Authentic_Z_-_Backpacks+ | 2335368829 | 0 |
 | BarricadedTrait | 3031475005 | 0 |
 | Lifestyle | 3403870858 | 0 |
 | [J&G]_Forest_Multicam_Uniform | 3309971624 | 0 |
@@ -487,7 +489,6 @@
 | P4DriedFlower | 2949777636 | 0 |
 | P4PickingMeister | 3422220305 | 0 |
 | PFO_GUNRUNNER | 3434691822 | 0 |
-| Chinesecuisine | 3412969115 | 0 |
 | 78amgeneralM35A2 | 2799152995 | 0 |
 | Herbalist | 2875059598 | 0 |
 | LastOfUsHair | 3025593219 | 0 |
