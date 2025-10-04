@@ -1,0 +1,450 @@
+module Base
+{
+
+    craftRecipe pack BrewingBook	/* 打包酿酒技能书套装 */
+    {
+        time        = 15,
+        timedAction = Making,
+		Tags = InHandCraft,
+        category = ChinaBrewing,
+
+        inputs
+        {
+                item 1 [Chinesecuisine.BrewingBook12],
+                item 1 [Chinesecuisine.BrewingBook34],
+                item 1 [Chinesecuisine.BrewingBook56],
+                item 1 [Chinesecuisine.BrewingBook78],
+                item 1 [Chinesecuisine.BrewingBook910],
+        }
+        outputs
+        {
+            item 1 Chinesecuisine.BrewingBookPack,
+        }
+    }
+
+    craftRecipe Open BrewingBook	/* 打开酿酒技能书套装 */
+    {
+        time        = 30,
+        timedAction = Making,
+		Tags = InHandCraft,
+        category = ChinaBrewing,
+
+        inputs
+        {
+                item 1 [Chinesecuisine.BrewingBookPack],
+        }
+        outputs
+        {
+                item 1 Chinesecuisine.BrewingBook12,
+                item 1 Chinesecuisine.BrewingBook34,
+                item 1 Chinesecuisine.BrewingBook56,
+                item 1 Chinesecuisine.BrewingBook78,
+                item 1 Chinesecuisine.BrewingBook910,
+        }
+    }
+
+
+    craftRecipe Brewing Fermentation Furnace	/* 制作酿酒发酵炉 */
+    {
+        time        = 120,
+        timedAction = Making,
+		Tags = InHandCraft;Cooking,
+        category = ChinaBrewing,
+        xpAward = ChinaBrewing:30,
+
+        inputs
+        {
+                item 8 [Base.Plank],
+                item 4 [Base.Wire],
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 1 tags[CrudeSaw;Saw] mode:keep flags[MayDegradeLight],
+                item 10 [Base.Nails],
+                item 10 [Base.ClayBrick],
+        }
+        outputs
+        {
+            item 1 Chinesecuisine.Mov_fermentation,
+        }
+    }
+
+    craftRecipe Burning large wine barrels	/* 烧制大型酒缸 */
+    {
+        time = 20,
+        Tags = KilnSmall;KilnLarge,
+		category = Pottery,
+
+        inputs
+        {
+            item 1 [Base.ClayJarUnfired],
+            item 1 tags[StartFire],
+            item 1 tags[Log;Charcoal],
+        }
+        outputs
+        {
+            item 1 Chinesecuisine.Large_Winevat_empty,
+        }
+    }
+
+    craftRecipe Weave Linencotton cloth	/* 编织粗棉麻布 */
+    {
+        time        = 60,
+        timedAction = UseLoom,
+        tags = Weaving,
+        /* needTobeLearn = true,*/
+        category = Farming,
+         inputs
+         {
+            item 20 [Base.Thread],
+         }
+         outputs
+         {
+             item 1 Chinesecuisine.Linencotton_cloth,
+         }
+    }
+
+    craftRecipe Making Canesugar	/* 制作蔗糖 */
+    {
+        time        = 30,
+        timedAction = Making,
+		Tags = InHandCraft;CanBeDoneInDark;Cooking,
+        category = ChinaBrewing,
+        xpAward = Cooking:8,
+         inputs
+         {
+            item 1 [Base.MortarPestle;Base.CeramicMortarandPestle],
+            item 1 [Chinesecuisine.Sucrosecrystals],
+            item 1 [Base.EmptyJar;Base.JarCrafted],
+         }
+         outputs
+         {
+             item 1 Base.Sugar,
+         }
+    }
+
+    craftRecipe Making Salt	/* 制作盐 */
+    {
+        time        = 30,
+        timedAction = Making,
+		Tags = InHandCraft;CanBeDoneInDark;Cooking,
+        category = ChinaBrewing,
+        xpAward = Cooking:8,
+         inputs
+         {
+            item 1 [Base.MortarPestle;Base.CeramicMortarandPestle],
+            item 1 [Chinesecuisine.saltblock],
+            item 1 [Base.EmptyJar;Base.JarCrafted],
+         }
+         outputs
+         {
+             item 1 Base.Salt,
+         }
+    }
+
+    craftRecipe Preparing soakrice	/* 准备浸泡大米 */
+    {
+        time        = 30,
+        timedAction = Making,
+		Tags = InHandCraft;CanBeDoneInDark;Cooking,
+        category = ChinaBrewing,
+         inputs
+         {
+            item 1 [Chinesecuisine.Wooden_basin],
+            item 1 [Base.Rice],
+			item 1 [*],
+			-fluid 2.5 [Water],
+
+         }
+         outputs
+         {
+             item 1 Chinesecuisine.Prepare_glutinousrice,
+         }
+    }
+
+	craftRecipe Open large brewing tank	/* 打开一缸大型酿酒 */
+	{
+        timedAction = OpenBeerBottle,
+		Time = 60,
+        OnCreate = RecipeCodeOnCreate.openBeer,
+        AllowBatchCraft = false,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+		Tags = InHandCraft;Winevat,
+        category = ChinaBrewing,
+		xpAward = ChinaBrewing:15,
+		inputs
+		{
+			item 1 tags[Finishedwine] mode:keep flags[DontPutBack;Prop2],
+		}
+		outputs
+		{
+		}
+	}
+
+    craftRecipe Drying dried yangmei 	/* 晾晒杨梅干 */
+    {
+        time = 86400,
+        Tags = DryingRackGrain,
+        category = Farming,
+        overlayStyle = Wheat,
+        inputs
+        {
+            item variable[1:20] [Chinesecuisine.bayberry] flags[ItemCount] mode:destroy,
+        }
+        outputs
+        {
+            item variable[1:20] Chinesecuisine.Dried_waxberry,
+        }
+    }
+
+    craftRecipe Brew bayberry wine	/* 酿造杨梅果酒 */
+    {
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Cooking,
+		category =ChinaBrewing,
+		SkillRequired = ChinaBrewing:2,
+		xpAward = ChinaBrewing:20,
+		inputs
+		{
+			item 50 [Chinesecuisine.Dried_waxberry],
+			item 1 [Chinesecuisine.Large_Winevat_empty],
+			item 1 [Chinesecuisine.Linencotton_cloth],
+			item 1 [Base.SheetRope],
+			item 1 [Base.Yeast],
+			item 2 [Base.Salt;Base.SeasoningSalt],
+			item 1 [*],
+			-fluid 10 [Water],
+			item 1 [*],
+			-fluid 0.5 [Jiannanchun;RedStarErguotou;Countrycellar;Moutai;Wuliangye],
+		}
+		outputs
+		{
+			item 1 Chinesecuisine.Arbutus_wine_fermentation,
+		}
+    }
+
+    craftRecipe Brew Blueberry wine	/* 酿造蓝莓果酒 */
+    {
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Cooking,
+		category =ChinaBrewing,
+		xpAward = ChinaBrewing:10,
+		inputs
+		{
+			item 1 [Chinesecuisine.Large_Winevat_empty],
+			item 1 [Chinesecuisine.Linencotton_cloth],
+			item 1 [Base.SheetRope],
+			item 1 [Base.Yeast],
+			item 3 [Base.Sugar],
+			item 1 [*],
+			-fluid 6.0 [Water],
+			item 1 [*],
+			-fluid 10.0 [Blueberry_juice],
+		}
+		outputs
+		{
+			item 1 Chinesecuisine.Blueberry_wine_fermentation,
+		}
+    }
+
+    craftRecipe Brew Pitaya wine	/* 酿造火龙果果酒 */
+    {
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Cooking,
+		category =ChinaBrewing,
+		xpAward = ChinaBrewing:10,
+		inputs
+		{
+			item 1 [Chinesecuisine.Large_Winevat_empty],
+			item 1 [Chinesecuisine.Linencotton_cloth],
+			item 1 [Base.SheetRope],
+			item 1 [Base.Yeast],
+			item 3 [Base.Sugar],
+			item 1 [*],
+			-fluid 6.0 [Water],
+			item 1 [*],
+			-fluid 10.0 [Pitaya_juice],
+		}
+		outputs
+		{
+			item 1 Chinesecuisine.Pitaya_wine_fermentation,
+		}
+    }
+
+     craftRecipe Brew lychee wine	/* 酿造荔枝果酒 */
+    {
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Cooking,
+		category =ChinaBrewing,
+		xpAward = ChinaBrewing:10,
+		inputs
+		{
+			item 1 [Chinesecuisine.Large_Winevat_empty],
+			item 1 [Chinesecuisine.Linencotton_cloth],
+			item 1 [Base.SheetRope],
+			item 1 [Base.Yeast],
+			item 3 [Base.Sugar],
+			item 1 [*],
+			-fluid 6.0 [Water],
+			item 1 [*],
+			-fluid 10.0 [lychee_juice],
+		}
+		outputs
+		{
+			item 1 Chinesecuisine.lychee_wine_fermentation,
+		}
+    }
+
+     craftRecipe Brew Navelorange wine	/* 酿造脐橙果酒 */
+    {
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Cooking,
+		category =ChinaBrewing,
+		xpAward = ChinaBrewing:10,
+		inputs
+		{
+			item 1 [Chinesecuisine.Large_Winevat_empty],
+			item 1 [Chinesecuisine.Linencotton_cloth],
+			item 1 [Base.SheetRope],
+			item 1 [Base.Yeast],
+			item 3 [Base.Sugar],
+			item 1 [*],
+			-fluid 6.0 [Water],
+			item 1 [*],
+			-fluid 10.0 [Navelorange_juice],
+		}
+		outputs
+		{
+			item 1 Chinesecuisine.Navelorange_wine_fermentation,
+		}
+    }
+
+     craftRecipe Brew Cyanjujube wine	/* 酿造青枣果酒 */
+    {
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Cooking,
+		category =ChinaBrewing,
+		xpAward = ChinaBrewing:10,
+		inputs
+		{
+			item 1 [Chinesecuisine.Large_Winevat_empty],
+			item 1 [Chinesecuisine.Linencotton_cloth],
+			item 1 [Base.SheetRope],
+			item 1 [Base.Yeast],
+			item 3 [Base.Sugar],
+			item 1 [*],
+			-fluid 6.0 [Water],
+			item 1 [*],
+			-fluid 10.0 [Cyanjujube_juice],
+		}
+		outputs
+		{
+			item 1 Chinesecuisine.Cyanjujube_wine_fermentation,
+		}
+    }
+
+     craftRecipe Brew Sanhuaplum wine	/* 酿造三华李果酒 */
+    {
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Cooking,
+		category =ChinaBrewing,
+		xpAward = ChinaBrewing:10,
+		inputs
+		{
+			item 1 [Chinesecuisine.Large_Winevat_empty],
+			item 1 [Chinesecuisine.Linencotton_cloth],
+			item 1 [Base.SheetRope],
+			item 1 [Base.Yeast],
+			item 3 [Base.Sugar],
+			item 1 [*],
+			-fluid 6.0 [Water],
+			item 1 [*],
+			-fluid 10.0 [Sanhuaplum_juice],
+		}
+		outputs
+		{
+			item 1 Chinesecuisine.Sanhuaplum_wine_fermentation,
+		}
+    }
+
+     craftRecipe Brew Honeypeach wine	/* 酿造水蜜桃果酒 */
+    {
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Cooking,
+		category =ChinaBrewing,
+		xpAward = ChinaBrewing:10,
+		inputs
+		{
+			item 1 [Chinesecuisine.Large_Winevat_empty],
+			item 1 [Chinesecuisine.Linencotton_cloth],
+			item 1 [Base.SheetRope],
+			item 1 [Base.Yeast],
+			item 3 [Base.Sugar],
+			item 1 [*],
+			-fluid 6.0 [Water],
+			item 1 [*],
+			-fluid 10.0 [Honeypeach_juice],
+		}
+		outputs
+		{
+			item 1 Chinesecuisine.Honeypeach_wine_fermentation,
+		}
+    }
+
+     craftRecipe Brew Nectarine wine	/* 酿造油桃果酒 */
+    {
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Cooking,
+		category =ChinaBrewing,
+		xpAward = ChinaBrewing:10,
+		inputs
+		{
+			item 1 [Chinesecuisine.Large_Winevat_empty],
+			item 1 [Chinesecuisine.Linencotton_cloth],
+			item 1 [Base.SheetRope],
+			item 1 [Base.Yeast],
+			item 3 [Base.Sugar],
+			item 1 [*],
+			-fluid 6.0 [Water],
+			item 1 [*],
+			-fluid 10.0 [Nectarine_juice],
+		}
+		outputs
+		{
+			item 1 Chinesecuisine.Nectarine_wine_fermentation,
+		}
+    }
+
+     craftRecipe Brew Pomelo wine	/* 酿造柚子果酒 */
+    {
+        timedAction = Making,
+		Time = 80,
+		Tags = AnySurfaceCraft;Cooking,
+		category =ChinaBrewing,
+		xpAward = ChinaBrewing:10,
+		inputs
+		{
+			item 1 [Chinesecuisine.Large_Winevat_empty],
+			item 1 [Chinesecuisine.Linencotton_cloth],
+			item 1 [Base.SheetRope],
+			item 1 [Base.Yeast],
+			item 3 [Base.Sugar],
+			item 1 [*],
+			-fluid 6.0 [Water],
+			item 1 [*],
+			-fluid 10.0 [Pomelo_juice],
+		}
+		outputs
+		{
+			item 1 Chinesecuisine.Pomelo_wine_fermentation,
+		}
+    }
+
+}

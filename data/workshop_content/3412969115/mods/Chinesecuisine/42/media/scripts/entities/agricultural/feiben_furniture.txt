@@ -1,0 +1,81 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity ES_Ricemachine
+        {
+            LuaWindowClass      = ISEntityWindow,
+            DisplayName         = Ricemachine,
+			Icon		        = Build_fengche,
+        }
+    }
+
+    entity Ricemachine
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Ricemachine,
+            uiEnabled       = true,
+        }
+
+        component CraftBench
+        {
+           Recipes         = Ricemachine,
+        }
+
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = FBjiaju_6 FBjiaju_7,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = FBjiaju_5,
+                    row = FBjiaju_4,
+                }
+            }
+        }
+
+        component CraftRecipe
+        {
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 150,
+            category      = Chinesecuisine,
+		    SkillRequired = Woodwork:4,
+		    xpAward       = Woodwork:40,
+            ToolTip       = Tooltip_craft_paddy,
+            inputs
+            {
+			    item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 8 [Base.Plank],
+                item 10 [Base.Nails],
+                item 1 [Base.Handle],
+            }
+        }
+    }
+
+	craftRecipe Separate paddy	/* 分离稻谷获得大米 */
+    {
+        time        = 100,
+        timedAction = UseStoneQuern,
+        tags = Ricemachine,
+		xpAward = Cooking:15,
+        category = Rice_machinery,
+		inputs
+		{
+			item 60 [Chinesecuisine.Paddy],
+		}
+		outputs
+		{
+			item 1 Base.Rice,
+		}
+    }
+
+}
