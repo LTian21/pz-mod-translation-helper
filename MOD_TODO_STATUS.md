@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-10-04 12:17:15 UTC+08:00`*
+*最后更新于：`2025-10-05 12:18:00 UTC+08:00`*
 
 ---
 
@@ -26,7 +26,7 @@
 | Project_Summer_Car | 3564950449 | 45 |
 | ZevonMedievalArmory | 3540834058 | 45 |
 | HybridMeleeRepair | 3569031613 | 32 |
-| CustomWeight | 3391228479 | 24 |
+| CustomWeight | 3391228479 | 26 |
 | Serving_plates_Build42 | 3399320470 | 14 |
 | Tikitown | 3037854728 | 13 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
@@ -37,10 +37,12 @@
 | PZKExtendedzones | 3217685049 | 4 |
 | fhqwhgads'_Motorious_Zone | 2791656602 | 3 |
 | LWBetterElectronics | 2999183635 | 3 |
+| Moats | 3550032314 | 2 |
 | [B42]_Mod_Manager | 3567084868 | 2 |
 | TrueSmoking | 3423984426 | 2 |
 | Read_Book_Bypassing_Level_Restrictions | 3319538177 | 2 |
 | B42_Rain's_Axes_&_Blades | 3388380529 | 2 |
+| Immersive_Roleplay_Professions_and_Traits | 3387474156 | 2 |
 | PZKVanillaPlusCarPack | 3217685049 | 2 |
 | Frockin_Wiseguys | 3538760023 | 1 |
 | [J&G]_Alpine_Multicam_Uniform | 3303746488 | 1 |
@@ -49,7 +51,6 @@
 | ATA_Mustang | 3405178154 | 0 |
 | Louisville_Quarantine_Zone | 2934132344 | 0 |
 | KickScooter | 3453879909 | 0 |
-| Moats | 3550032314 | 0 |
 | Minimal_Display_Bars_Nutritions_B42 | 3388844542 | 0 |
 | 84mercW460 | 2805630347 | 0 |
 | HF_PointBlankMod | 2990322197 | 0 |
@@ -174,6 +175,7 @@
 | 86fordE150 | 2870394916 | 0 |
 | Ladders | 2737665235 | 0 |
 | U.S._M113_APC_by_Papa_Chad | 2705655822 | 0 |
+| Willowbrook_Bastion! | 3479667649 | 0 |
 | 90bmwE30 | 3110913021 | 0 |
 | Yaki's_Hair_Salon_-_BASE | 2761200458 | 0 |
 | 92amgeneralM998 | 2642541073 | 0 |
@@ -373,7 +375,6 @@
 | TheDivisionStuff | 3479867929 | 0 |
 | MetalSpears | 2927603127 | 0 |
 | B42_Rain's_Pack_Your_Loot | 3490159683 | 0 |
-| Immersive_Roleplay_Professions_and_Traits | 3387474156 | 0 |
 | 89volvo200 | 3292659291 | 0 |
 | eris_food_expiry | 3392259028 | 0 |
 | Unimogdede | 3399870407 | 0 |
