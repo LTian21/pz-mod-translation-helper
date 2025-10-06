@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-10-05 12:18:00 UTC+08:00`*
+*最后更新于：`2025-10-06 12:18:33 UTC+08:00`*
 
 ---
 
@@ -22,21 +22,24 @@
 | beaniebabie | 3575855907 | 72 |
 | HydeCoClay | 3551124480 | 69 |
 | OgrimMachineUtils | 3555558732 | 58 |
-| Chinesecuisine | 3412969115 | 47 |
+| Chinesecuisine | 3412969115 | 53 |
 | Project_Summer_Car | 3564950449 | 45 |
 | ZevonMedievalArmory | 3540834058 | 45 |
 | HybridMeleeRepair | 3569031613 | 32 |
 | CustomWeight | 3391228479 | 26 |
+| STA_PryOpen | 3579640010 | 14 |
 | Serving_plates_Build42 | 3399320470 | 14 |
 | Tikitown | 3037854728 | 13 |
+| CrowbarUnlock | 3555407625 | 11 |
+| BanditsWeekOne | 3403180543 | 10 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
-| BanditsWeekOne | 3403180543 | 9 |
 | damnlib | 3171167894 | 9 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | RedDays | 3516166810 | 4 |
 | PZKExtendedzones | 3217685049 | 4 |
 | fhqwhgads'_Motorious_Zone | 2791656602 | 3 |
 | LWBetterElectronics | 2999183635 | 3 |
+| Military_Tool_Kit | 2705406713 | 3 |
 | Moats | 3550032314 | 2 |
 | [B42]_Mod_Manager | 3567084868 | 2 |
 | TrueSmoking | 3423984426 | 2 |
@@ -45,7 +48,9 @@
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 2 |
 | PZKVanillaPlusCarPack | 3217685049 | 2 |
 | Frockin_Wiseguys | 3538760023 | 1 |
+| Buildables_Expansion | 3463117260 | 1 |
 | [J&G]_Alpine_Multicam_Uniform | 3303746488 | 1 |
+| B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 1 |
 | Militek_Clothing | 3269061047 | 0 |
 | Perts_Party_Tiles | 2837923608 | 0 |
 | ATA_Mustang | 3405178154 | 0 |
@@ -82,6 +87,7 @@
 | ATA_Dadge | 3432012226 | 0 |
 | toppling-zombies | 3425038705 | 0 |
 | DrinkSmart | 3447775367 | 0 |
+| B42_Sledgehammers_in_Tool_Stores | 3418793133 | 0 |
 | DivisionBackpack | 3391306957 | 0 |
 | MoreDescriptionForTraits4166 | 2685168362 | 0 |
 | Tatrapan | 3402789975 | 0 |
@@ -275,6 +281,7 @@
 | A&M_New_Frontier | 3387569160 | 0 |
 | StarlitLibrary | 3378285185 | 0 |
 | SpongieCharacterCustomisation | 3414634809 | 0 |
+| More_Car_Features_+_Spawn_Zones_Expansion | 3520758551 | 0 |
 | extendedBatteryLife | 3387462212 | 0 |
 | Vanilla_MRE_-_Crafting_Recipe_-_B41 | 3100032203 | 0 |
 | B42Makedriedvegetable | 3418061837 | 0 |
@@ -297,7 +304,6 @@
 | FirstAidVHSTapes | 3153010942 | 0 |
 | ATA_BMW_E36 | 3421748994 | 0 |
 | Night_Vision | 3383603346 | 0 |
-| Buildables_Expansion | 3463117260 | 0 |
 | 73fordFalcon | 3490370700 | 0 |
 | Support_Corps | 3409836763 | 0 |
 | pzhotbar42 | 3396010813 | 0 |
@@ -423,8 +429,6 @@
 | Check_Around | 3300688173 | 0 |
 | BarefootMoodle | 3435936144 | 0 |
 | GaussRifle | 3429953336 | 0 |
-| B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 0 |
-| Military_Tool_Kit | 2705406713 | 0 |
 | 85buickLeSabre | 3418252689 | 0 |
 | AxesRecrafting | 2211423190 | 0 |
 | P4Excalibar | 2868777243 | 0 |
