@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-10-06 12:18:33 UTC+08:00`*
+*最后更新于：`2025-10-07 12:19:11 UTC+08:00`*
 
 ---
 
@@ -27,7 +27,7 @@
 | ZevonMedievalArmory | 3540834058 | 45 |
 | HybridMeleeRepair | 3569031613 | 32 |
 | CustomWeight | 3391228479 | 26 |
-| STA_PryOpen | 3579640010 | 14 |
+| STA_PryOpen | 3579640010 | 17 |
 | Serving_plates_Build42 | 3399320470 | 14 |
 | Tikitown | 3037854728 | 13 |
 | CrowbarUnlock | 3555407625 | 11 |
@@ -48,6 +48,7 @@
 | Immersive_Roleplay_Professions_and_Traits | 3387474156 | 2 |
 | PZKVanillaPlusCarPack | 3217685049 | 2 |
 | Frockin_Wiseguys | 3538760023 | 1 |
+| KnoxEventExpanded | 3397396843 | 1 |
 | Buildables_Expansion | 3463117260 | 1 |
 | [J&G]_Alpine_Multicam_Uniform | 3303746488 | 1 |
 | B42_Rain's_Firearms_&_Gun_Parts | 3387222454 | 1 |
@@ -123,7 +124,6 @@
 | WarThunderVehicleLibrary | 3399660368 | 0 |
 | MinimapStyleOptions | 3526517370 | 0 |
 | FunctionalAppliances2 | 3042138819 | 0 |
-| KnoxEventExpanded | 3397396843 | 0 |
 | 87chevySuburban | 3196180339 | 0 |
 | PipBoy3000_-_Main | 3461031530 | 0 |
 | MilitaryPonchosRELOADED | 3439247001 | 0 |
