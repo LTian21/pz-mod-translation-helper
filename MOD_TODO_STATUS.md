@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-10-07 12:19:11 UTC+08:00`*
+*最后更新于：`2025-10-08 12:18:46 UTC+08:00`*
 
 ---
 
@@ -26,6 +26,7 @@
 | Project_Summer_Car | 3564950449 | 45 |
 | ZevonMedievalArmory | 3540834058 | 45 |
 | HybridMeleeRepair | 3569031613 | 32 |
+| damnlib | 3171167894 | 27 |
 | CustomWeight | 3391228479 | 26 |
 | STA_PryOpen | 3579640010 | 17 |
 | Serving_plates_Build42 | 3399320470 | 14 |
@@ -33,7 +34,6 @@
 | CrowbarUnlock | 3555407625 | 11 |
 | BanditsWeekOne | 3403180543 | 10 |
 | Nep_Local_Knowledge | 3511535258 | 10 |
-| damnlib | 3171167894 | 9 |
 | [B42]_Malwart_Plain_Moodles | 3394582336 | 8 |
 | RedDays | 3516166810 | 4 |
 | PZKExtendedzones | 3217685049 | 4 |
