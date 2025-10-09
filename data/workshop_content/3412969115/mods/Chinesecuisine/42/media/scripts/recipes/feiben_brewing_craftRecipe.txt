@@ -142,14 +142,14 @@ module Base
 
     craftRecipe Preparing soakrice	/* 准备浸泡大米 */
     {
-        time        = 30,
+        time        = 35,
         timedAction = Making,
 		Tags = InHandCraft;CanBeDoneInDark;Cooking,
         category = ChinaBrewing,
          inputs
          {
             item 1 [Chinesecuisine.Wooden_basin],
-            item 1 [Base.Rice],
+            item 60 [Base.Rice],
 			item 1 [*],
 			-fluid 2.5 [Water],
 
@@ -193,6 +193,31 @@ module Base
         {
             item variable[1:20] Chinesecuisine.Dried_waxberry,
         }
+    }
+
+    craftRecipe Brew stickyrice wine	/* 酿造糯米酒 */
+    {
+        timedAction = Making,
+		Time = 100,
+		Tags = AnySurfaceCraft;Cooking,
+		category = ChinaBrewing,
+		SkillRequired = ChinaBrewing:1,
+		xpAward = ChinaBrewing:10,
+		inputs
+		{
+			item 1 [Chinesecuisine.glutinousrice],
+			item 1 [Chinesecuisine.Large_Winevat_empty],
+			item 1 [Chinesecuisine.Linencotton_cloth],
+			item 1 [Base.SheetRope],
+			item 1 [Base.Yeast],
+			item 3 [Base.Sugar],
+			item 1 [*],
+			-fluid 5 [Water],
+		}
+		outputs
+		{
+			item 1 Chinesecuisine.stickyrice_wine_fermentation,
+		}
     }
 
     craftRecipe Brew bayberry wine	/* 酿造杨梅果酒 */
