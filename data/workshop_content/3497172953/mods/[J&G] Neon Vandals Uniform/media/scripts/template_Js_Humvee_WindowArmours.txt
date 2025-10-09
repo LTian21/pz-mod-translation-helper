@@ -1,0 +1,337 @@
+module Base
+{
+
+	model Js_Humvee_WindscreenProtection
+	{
+         mesh = Vehicles/Js_Humvee_BodyBase|HumveeWindscreen_Protection,
+         scale = 1.0,
+	}
+
+	model Js_Humvee_SideWindow_Protection_FL
+	{
+         mesh = Vehicles/Js_Humvee_BodyBase|HumveeSideWindows_Protection_FL,
+         scale = 1.0,
+	}
+
+	model Js_Humvee_SideWindow_Protection_FR
+	{
+         mesh = Vehicles/Js_Humvee_BodyBase|HumveeSideWindows_Protection_FR,
+         scale = 1.0,
+	}
+
+	model Js_Humvee_SideWindow_Protection_RL
+	{
+         mesh = Vehicles/Js_Humvee_BodyBase|HumveeSideWindows_Protection_RL,
+         scale = 1.0,
+	}
+
+	model Js_Humvee_SideWindow_Protection_RR
+	{
+         mesh = Vehicles/Js_Humvee_BodyBase|HumveeSideWindows_Protection_RR,
+         scale = 1.0,
+	}
+
+	template vehicle Js_Humvee_WindowArmour
+	{
+		part WindscreenProtection
+		{
+			model WindshieldProtection
+				{
+                		file = Js_Humvee_WindscreenProtection,
+				}
+			area = engine,
+			category = bodywork,
+			parent = Windshield,
+			specificItem = false,
+			itemType = Base.JandG_Humvee_WindshieldArmour,
+			mechanicRequireKey = false,
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 600,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+			create = Base.Create.JandG_Humvee_WindshieldArmour,
+			init = Base.Init.JandG_Humvee_WindshieldArmour,
+			}
+		}
+
+		part SideWindowProtection_FL
+		{
+			model SideWindow_Protection_FL
+				{
+                		file = Js_Humvee_SideWindow_Protection_FL,
+				}
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.JandG_Humvee_SideWindowProtection,
+			mechanicRequireKey = false,
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 600,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Base.InstallComplete.SideWindowProtection_FL,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+			create = Base.Create.SideWindowProtection_FL,
+			init = Base.Init.SideWindowProtection_FL,
+			}
+		}
+
+		part SideWindowProtection_FR
+                {
+			model SideWindow_Protection_FR
+				{
+                		file = Js_Humvee_SideWindow_Protection_FR,
+				}
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.JandG_Humvee_SideWindowProtection,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 600,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Base.InstallComplete.Default,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			type = Base.Screwdriver,
+			count = 1,
+			keep = true,
+			equip = primary,
+                    		}
+                	}
+
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+                        lua
+                        {
+			create = Base.Create.SideWindowProtection_FR,
+			init = Base.Init.SideWindowProtection_FR,
+			}
+		        }
+	}     
+
+	template vehicle Js_Humvee_RearSideWindowArmour
+	{
+		part SideWindowProtection_RL
+		        {
+			model SideWindow_Protection_RL
+				{
+                		file = Js_Humvee_SideWindow_Protection_RL,
+				}
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.JandG_Humvee_SideWindowProtection,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+                	time = 600,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Base.InstallComplete.SideWindowProtection_RL,
+                	requireInstalled = DoorRearLeft;WindowRearLeft,
+            		}
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  	type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+			create = Base.Create.SideWindowProtection_RL,
+			init = Base.Init.SideWindowProtection_RL,
+			}
+		        }
+
+		part SideWindowProtection_RR
+		        {
+			model SideWindow_Protection_RR
+				{
+                		file = Js_Humvee_SideWindow_Protection_RR,
+				}
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.JandG_Humvee_SideWindowProtection,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+                	time = 600,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Base.InstallComplete.SideWindowProtection_RR,
+                	requireInstalled = DoorRearRight;WindowRearRight,
+            		}
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  	type = Base.Screwdriver,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+
+                        lua
+                        {
+			create = Base.Create.SideWindowProtection_RR,
+			init = Base.Init.SideWindowProtection_RR,
+			}
+		        }
+
+		
+		}
+	    }
+
+
