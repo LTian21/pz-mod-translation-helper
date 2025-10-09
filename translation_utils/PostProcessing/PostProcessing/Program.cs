@@ -153,8 +153,8 @@ namespace PostProcessing
                         foreach (var entry in kvp.Value)
                         {
                             conflictKeyInfo += entry.ModId + "; ";
-                            writer.WriteLine($"{entry.ModId}:\"{entry.OriginalText}\"");
-                            writer.WriteLine($"{entry.ModId}:\"{entry.SChiinese}\"");
+                            writer.WriteLine($"{entry.ModId}::EN : \"{entry.OriginalText}\"");
+                            writer.WriteLine($"{entry.ModId}::CN : \"{entry.SChiinese}\"");
                         }
                         Console.WriteLine($"::warning:: Conflict key found: {kvp.Key}, mod ID: {conflictKeyInfo}");
                         writer.WriteLine();
@@ -195,7 +195,7 @@ namespace PostProcessing
                     FILENAMES.Add(filename);
                 }
             }
-            // 读取 key_source_map.json 文件
+            // 读取 key_source_map_manual.json 文件
             string keySourceMapManualPath = Path.Combine(repoDir, "translation_utils", "key_source_map_manual.json");
             Dictionary<string, Dictionary<string, string>>? keySourceMapManual = null;
             if (File.Exists(keySourceMapManualPath))
@@ -262,12 +262,31 @@ namespace PostProcessing
                     }
                     else // 尝试通过key中的信息推断文件名
                     {
-                        foreach (var fname in FILENAMES)
+                        bool prefixFound = false;
+                        if (keySourceMapManual != null &&
+                             keySourceMapManual.ContainsKey("KeyPrefix"))
                         {
-                            if (key.StartsWith(fname + "_"))
+                            // 尝试通过key前缀推断文件名
+                            foreach (var prefix in keySourceMapManual["KeyPrefix"].Keys)
                             {
-                                fileName = fname;
-                                break;
+                                if (key.StartsWith(prefix + "_"))
+                                {
+                                    fileName = keySourceMapManual["KeyPrefix"][prefix];
+                                    prefixFound = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (!prefixFound)
+                        {
+                            // 如果没有手动前缀匹配，则尝试通过文件名列表中的名称进行匹配
+                            foreach (var fname in FILENAMES)
+                            {
+                                if (key.StartsWith(fname + "_"))
+                                {
+                                    fileName = fname;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -338,10 +357,15 @@ namespace PostProcessing
 
             return errorCount > 0 ? 1 : 0;
         }
-
         static bool IsNullOrCommentLine(string line)
         {
-            return string.IsNullOrWhiteSpace(line) || line.Trim().StartsWith("//") || line.Trim().StartsWith("#") || line.Trim().StartsWith("/*") || line.Trim().StartsWith("*") || line.Trim().StartsWith("*/") || line.Trim().StartsWith("--");
+            // 使用正则匹配注释行，支持 //, #, /*, */, * 和 -- 注释风格，并忽略空白行以及前后空白字符
+
+            // 忽略空白行
+            if (string.IsNullOrWhiteSpace(line))
+                return true;
+            // 匹配以 //, #, /*, */, * 或 -- 开头的注释行（忽略前导空格和\t等空白字符）
+            return Regex.IsMatch(line, @"^\s*(//|#|/\*|\*/|\*|--)");
         }
     }
 }

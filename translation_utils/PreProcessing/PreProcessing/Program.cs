@@ -557,7 +557,7 @@ namespace PreProcessing
                     {
                         var entry = new TranslationEntry
                         {
-                            OriginalText = "matchText",
+                            OriginalText = "======Original Text Missing====",
                             SChiinese = "",
                             IsSChineseTranslated = false,
                             Comment = new List<string>()
