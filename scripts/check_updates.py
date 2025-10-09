@@ -3,30 +3,33 @@ import json
 import requests
 from pathlib import Path
 
+# --- 配置 ---
+ID_LIST_FILE = Path("id_list.txt")
+TIMESTAMP_FILE = Path("translation_utils/mod_timestamps.json")
+
 def main():
+    # 确保目录存在
+    TIMESTAMP_FILE.parent.mkdir(parents=True, exist_ok=True)
+
     api_key = os.environ.get("STEAM_API_KEY")
     if not api_key:
         print("错误: 环境变量 STEAM_API_KEY 未设置！")
         exit(1)
 
-    id_list_file = Path("id_list.txt")
-    if not id_list_file.exists():
-        print(f"错误: 文件 {id_list_file} 不存在！")
+    if not ID_LIST_FILE.exists():
+        print(f"错误: 文件 {ID_LIST_FILE} 不存在！")
         exit(1)
 
-    data_dir = Path("data")
-    data_dir.mkdir(exist_ok=True)
-    timestamp_file = data_dir / "mod_timestamps.json"
-    if timestamp_file.exists():
+    if TIMESTAMP_FILE.exists():
         try:
-            old_stamps = json.loads(timestamp_file.read_text(encoding='utf-8'))
+            old_stamps = json.loads(TIMESTAMP_FILE.read_text(encoding='utf-8'))
         except json.JSONDecodeError:
-            print(f"警告: 文件 {timestamp_file} 内容不是有效的JSON，将使用空数据。")
+            print(f"警告: 文件 {TIMESTAMP_FILE} 内容不是有效的JSON，将使用空数据。")
             old_stamps = {}
     else:
         old_stamps = {}
 
-    raw_mod_ids = [line.strip() for line in id_list_file.read_text(encoding='utf-8').splitlines() if line.strip().isdigit()]
+    raw_mod_ids = [line.strip() for line in ID_LIST_FILE.read_text(encoding='utf-8').splitlines() if line.strip().isdigit()]
     
     seen_ids = set()
     unique_mod_ids = []
@@ -105,10 +108,10 @@ def main():
                 print("  -> 无需更新。")
     
     try:
-        timestamp_file.write_text(json.dumps(updated_stamps, indent=4), encoding='utf-8')
-        print(f"时间戳文件 {timestamp_file} 已更新。")
+        TIMESTAMP_FILE.write_text(json.dumps(updated_stamps, indent=4), encoding='utf-8')
+        print(f"时间戳文件 {TIMESTAMP_FILE} 已更新。")
     except IOError as e:
-        print(f"错误: 无法写入时间戳文件 {timestamp_file}: {e}")
+        print(f"错误: 无法写入时间戳文件 {TIMESTAMP_FILE}: {e}")
 
 
     output_to_github(mods_to_download)

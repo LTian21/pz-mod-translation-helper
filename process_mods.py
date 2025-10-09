@@ -17,7 +17,8 @@ MODULE_PATTERN: Final[re.compile] = re.compile(r"^\s*module\s+([\w.-]+)", re.IGN
 TRANSLATION_VALUE_PATTERN: Final[re.compile] = re.compile(r"=\s*\"((?:[^\"\\]|\\.)*)\"", re.DOTALL)
 KEY_VALUE_START_PATTERN: Final[re.compile] = re.compile(r"^\s*([\w.\[\]()-]+)\s*=\s*(.*)")
 ITEM_PATTERN: Final[re.compile] = re.compile(r"item\s+([\w-]+)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
-RECIPE_PATTERN: Final[re.compile] = re.compile(r"(?:recipe|craftRecipe)\s+([\w\s().-]+?)\s*(?:\/\*.*?\*\/|\{)", re.MULTILINE | re.IGNORECASE)
+RECIPE_PATTERN: Final[re.compile] = re.compile(r"(?:recipe|craftRecipe)\s+([\w\s().-]+?)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
+CATEGORY_PATTERN: Final[re.compile] = re.compile(r"^\s*category\s*=\s*([^,]+)", re.MULTILINE | re.IGNORECASE)
 DISPLAY_NAME_PATTERN: Final[re.compile] = re.compile(r"DisplayName\s*=\s*(.*?)(?:,|\n|$)")
 RECIPE_FORMAT_PATTERN_1: Final[re.compile] = re.compile(r'([a-z\d])([A-Z])')
 RECIPE_FORMAT_PATTERN_2: Final[re.compile] = re.compile(r'([A-Z]+)([A-Z][a-z])')
@@ -32,6 +33,7 @@ class Config:
             self.TARGET_PATH = Path(parser.get('Paths', 'target_path'))
             self.COMPLETED_PATH = Path(parser.get('Paths', 'completed_path'))
             self.OUTPUT_PARENT_PATH = Path(parser.get('Paths', 'output_parent_path'))
+            self.VANILLA_KEYS_PATH = Path(parser.get('Paths', 'vanilla_keys_path'))
             self.PRIORITY_LANGUAGE = parser.get('Settings', 'priority_language')
             self.BASE_LANGUAGE = parser.get('Settings', 'base_language')
             self.TRANSLATION_FILE_EXT = parser.get('Settings', 'translation_file_ext')
@@ -40,6 +42,7 @@ class Config:
             self.EN_TODO_FILENAME = parser.get('Output', 'en_todo_filename')
             self.COMPLETED_FILENAME = parser.get('Output', 'completed_filename')
             self.CN_ONLY_FILENAME = parser.get('Output', 'cn_only_filename')
+            self.CONFLICT_KEYS_FILENAME = parser.get('Output', 'conflict_keys_filename')
             self.CN_OUTPUT_FILENAME = parser.get('Output', 'cn_output_filename')
             self.EN_OUTPUT_FILENAME = parser.get('Output', 'en_output_filename')
             self.LOG_FILENAME_TPL = parser.get('Output', 'log_filename_tpl')
@@ -151,13 +154,29 @@ def extract_recipe_names(text_content, config, source_filename: str):
     key_map = {}
     for recipe_match in RECIPE_PATTERN.finditer(text_content):
         original_name = recipe_match.group(1).strip()
+        recipe_content = recipe_match.group(2)
+
         if not original_name:
             continue
+        
+        # 提取配方名称
         friendly_name = format_recipe_name(original_name)
         modified_name = original_name.replace(' ', '_')
-        key = f"{config.RECIPE_PREFIX}_{modified_name}"; line = f'{key} = "{friendly_name}",'
+        key = f"{config.RECIPE_PREFIX}_{modified_name}"
+        line = f'{key} = "{friendly_name}",'
         results[key] = line
         key_map[key] = "Recipes"
+
+        # 提取 category
+        if recipe_content:
+            category_match = CATEGORY_PATTERN.search(recipe_content)
+            if category_match:
+                category_name = category_match.group(1).strip()
+                category_key = f"UI_CraftCat_{category_name}"
+                category_line = f'{category_key} = "{category_name}",'
+                results[category_key] = category_line
+                key_map[category_key] = "UI"
+                
     return results, key_map
 
 def get_translations_as_dict(file_path_or_dir, config):
@@ -233,6 +252,8 @@ def get_translations_as_dict(file_path_or_dir, config):
             
             if key_match:
                 key_part = key_match.group(1).strip()
+                if key_part.startswith("DisplayName_"):
+                    continue
                 value_part = key_match.group(2).strip()
                 if value_part == "" or value_part.startswith('{') or value_part == ",":
                     continue
@@ -260,10 +281,10 @@ def extract_value_from_line(line):
     match = TRANSLATION_VALUE_PATTERN.search(line)
     return match.group(1) if match else None
 
-def process_single_mod(mod_root_path, config):
+def process_single_mod(mod_root_path, config, vanilla_keys):
     active_media_path = find_active_media_path(mod_root_path)
     if not active_media_path:
-        return {}, {}, {}
+        return {}, {}, {}, {}
         
     scripts_dir = find_case_insensitive_dir(active_media_path, "scripts")
     translate_root_dir = find_case_insensitive_dir(active_media_path / "lua" / "shared", "Translate")
@@ -317,7 +338,19 @@ def process_single_mod(mod_root_path, config):
     key_source_map.update(cn_map)
     logging.info(f"\n--- 阶段 3: 从 {config.PRIORITY_LANGUAGE} 目录加载了 {len(cn_base_data)} 条数据。---")
     
-    return en_base_data, cn_base_data, key_source_map
+    conflict_keys = (set(en_base_data.keys()) | set(cn_base_data.keys())) & vanilla_keys
+    conflict_data = {key: en_base_data.get(key) or cn_base_data.get(key) for key in conflict_keys}
+
+    filtered_en_base_data = {k: v for k, v in en_base_data.items() if k not in vanilla_keys}
+    filtered_cn_base_data = {k: v for k, v in cn_base_data.items() if k not in vanilla_keys}
+    filtered_key_source_map = {k: v for k, v in key_source_map.items() if k not in vanilla_keys}
+    
+    en_removed_count = len(en_base_data) - len(filtered_en_base_data)
+    cn_removed_count = len(cn_base_data) - len(filtered_cn_base_data)
+    if en_removed_count > 0 or cn_removed_count > 0:
+        logging.info(f"\n--- 阶段 4: 移除了 {en_removed_count} 个 EN 键和 {cn_removed_count} 个 CN 键 (与官方重复)。---")
+    
+    return filtered_en_base_data, filtered_cn_base_data, filtered_key_source_map, conflict_data
 
 def setup_logger(log_file_path):
     for handler in logging.root.handlers[:]:
@@ -461,6 +494,19 @@ def main():
         logging.error(e)
         return
 
+    vanilla_keys = set()
+    if cfg.VANILLA_KEYS_PATH.is_file():
+        try:
+            with open(cfg.VANILLA_KEYS_PATH, 'r', encoding='utf-8') as f:
+                vanilla_data = json.load(f)
+                vanilla_keys = set(vanilla_data.keys())
+            logging.info(f"成功加载 {len(vanilla_keys)} 个官方翻译键用于排除。")
+        except (json.JSONDecodeError, Exception) as e:
+            logging.error(f"错误: 加载或解析 '{cfg.VANILLA_KEYS_PATH}' 时失败: {e}")
+            return
+    else:
+        logging.warning(f"警告: 未找到官方翻译键文件 '{cfg.VANILLA_KEYS_PATH}'，提取将包含所有键。")
+
     if not cfg.TARGET_PATH.is_dir():
         logging.error(f"错误：指定的目标路径不存在: {cfg.TARGET_PATH}")
         return
@@ -561,10 +607,12 @@ def main():
         workshop_en_base, workshop_cn_base = {}, {}
         global_known_keys_en, global_known_keys_cn = set(), set()
         workshop_key_source_map = {}
+        workshop_conflict_data = {}
 
         for sub_mod_path in sub_mods:
             logging.info(f"\n-------------------- 处理子模组: {sub_mod_path.name} --------------------")
-            en_raw, cn_raw, key_map = process_single_mod(sub_mod_path, cfg)
+            en_raw, cn_raw, key_map, conflict_data = process_single_mod(sub_mod_path, cfg, vanilla_keys)
+            workshop_conflict_data.update(conflict_data)
             for key, val in en_raw.items():
                 if key not in global_known_keys_en: workshop_en_base[key] = val
             for key, val in cn_raw.items():
@@ -600,6 +648,7 @@ def main():
         logging.info(f"    - 纯净中文 (CN_output.txt): {len(workshop_cn_base)} 条")
         logging.info(f"    - 英文待办 (en_todo.txt): {len(en_todo_list)} 条 (增量)")
         logging.info(f"    - 中文独有 (cn_only.txt): {len(cn_only_list)} 条 (增量)")
+        logging.info(f"    - 冲突键 (conflict_keys.txt): {len(workshop_conflict_data)} 条")
         
         try:
             write_output_file(output_dir / cfg.OUTPUT_FILENAME, final_output)
@@ -607,6 +656,7 @@ def main():
             write_output_file(output_dir / cfg.CN_OUTPUT_FILENAME, workshop_cn_base)
             write_output_file(output_dir / cfg.EN_TODO_FILENAME, en_todo_list)
             write_output_file(output_dir / cfg.CN_ONLY_FILENAME, cn_only_list)
+            write_output_file(output_dir / cfg.CONFLICT_KEYS_FILENAME, workshop_conflict_data)
             write_output_file(completed_mod_path / cfg.EN_TODO_FILENAME, en_todo_list)
             
             new_todo_file_path = output_dir / cfg.EN_TODO_FILENAME
