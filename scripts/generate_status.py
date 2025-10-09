@@ -7,6 +7,7 @@ from pathlib import Path
 # --- 配置 ---
 COMPLETED_FILES_DIR = Path('data/output_files')
 LOG_DIR = Path('data/logs')
+MOD_ID_NAME_MAP = Path('translation_utils/mod_id_name_map.json')
 UPDATE_LOG_JSON = LOG_DIR / 'update_log.json'
 
 # --- 模板 ---
@@ -91,7 +92,7 @@ def get_total_todo_lines(directory):
                         lines = sum(1 for line in f if line.strip())
                         total_lines += lines
                 except Exception as e:
-                    print(f"Error reading {todo_file}: {e}")
+                    print(f"读取 {todo_file} 时出错: {e}")
     return total_lines
 
 def get_supported_mod_count(directory):
@@ -100,13 +101,26 @@ def get_supported_mod_count(directory):
         return 0
     return len([name for name in directory.iterdir() if name.is_dir()])
 
-def get_mod_todo_list(directory):
+def get_mod_todo_list(directory, mod_id_name_map):
     """获取每个 Mod 的待办条目数量列表。"""
     mod_list = []
     if not directory.is_dir():
         return []
     for mod_dir in directory.iterdir():
         if mod_dir.is_dir():
+            mod_id = None
+            # 从目录名中提取 Mod ID
+            match = re.search(r'(\d+)$', mod_dir.name)
+            if match:
+                mod_id = match.group(1)
+
+            # 如果成功提取 ID，则在 map 中查找名称，否则使用目录名作为备用 ID
+            if mod_id:
+                mod_name = mod_id_name_map.get(mod_id, f"未知 Mod ({mod_id})")
+            else:
+                mod_id = mod_dir.name # 如果未找到ID，则回退到完整的目录名
+                mod_name = f"未知 Mod ({mod_id})"
+
             todo_file = mod_dir / 'EN_todo.txt'
             line_count = 0
             if todo_file.is_file():
@@ -114,12 +128,9 @@ def get_mod_todo_list(directory):
                     with open(todo_file, 'r', encoding='utf-8') as f:
                         line_count = sum(1 for line in f if line.strip())
                 except Exception as e:
-                    print(f"Error reading {todo_file}: {e}")
+                    print(f"读取 {todo_file} 时出错: {e}")
             
-            match = re.match(r'^(.*?)_(\d+)$', mod_dir.name)
-            if match:
-                mod_name, mod_id = match.groups()
-                mod_list.append({'name': mod_name, 'id': mod_id, 'todos': line_count})
+            mod_list.append({'name': mod_name, 'id': mod_id, 'todos': line_count})
     
     # 按待办数量降序排序
     return sorted(mod_list, key=lambda x: x['todos'], reverse=True)
@@ -173,18 +184,26 @@ def main():
     """主函数，生成所有报告。"""
     print("--- 开始生成状态报告 ---")
     
-    # 1. 收集通用数据
+    # 1. 加载 Mod 名称映射
+    if MOD_ID_NAME_MAP.is_file():
+        with open(MOD_ID_NAME_MAP, 'r', encoding='utf-8') as f:
+            mod_id_name_map = json.load(f)
+    else:
+        mod_id_name_map = {}
+        print(f"警告: 在 {MOD_ID_NAME_MAP} 未找到 Mod ID 名称映射文件")
+
+    # 2. 收集通用数据
     beijing_time = datetime.now(timezone(timedelta(hours=8)))
     update_time_str = beijing_time.strftime('%Y-%m-%d %H:%M:%S %Z')
     
     total_todos = get_total_todo_lines(COMPLETED_FILES_DIR)
     mod_count = get_supported_mod_count(COMPLETED_FILES_DIR)
-    mod_todo_list = get_mod_todo_list(COMPLETED_FILES_DIR)
+    mod_todo_list = get_mod_todo_list(COMPLETED_FILES_DIR, mod_id_name_map)
 
-    # 2. 从日志文件获取摘要
+    # 3. 从日志文件获取摘要
     run_id, summary, detailed_summary = get_latest_run_summary(UPDATE_LOG_JSON)
 
-    # 3. 生成 STATUS.md
+    # 4. 生成 STATUS.md
     status_md_content = STATUS_TEMPLATE.format(
         update_time=f"`{update_time_str}`",
         total_todos=f"`{total_todos}`",
@@ -195,7 +214,7 @@ def main():
         f.write(status_md_content)
     print("  -> STATUS.md 已生成。")
 
-    # 4. 生成 INTERNAL_STATUS.md
+    # 5. 生成 INTERNAL_STATUS.md
     internal_status_md_content = INTERNAL_STATUS_TEMPLATE.format(
         update_time=f"`{update_time_str}`",
         total_todos=f"`{total_todos}`",
@@ -207,7 +226,7 @@ def main():
         f.write(internal_status_md_content)
     print("  -> INTERNAL_STATUS.md 已生成。")
 
-    # 5. 生成 MOD_TODO_STATUS.md
+    # 6. 生成 MOD_TODO_STATUS.md
     mod_todo_table_rows = [
         f"| {mod['name']} | {mod['id']} | {mod['todos']} |"
         for mod in mod_todo_list
