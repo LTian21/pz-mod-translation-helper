@@ -1,0 +1,446 @@
+module Base
+{
+	model ChevroletSuburban_PushBar
+	{
+		mesh = Vehicles/ChevroletSuburban_BodyBase|Js_Chevy_Pushbar,
+                texture = vehicles/Js_Chevy_ArmourTex,
+		scale = 1,
+	}
+	model ChevroletSuburban_WindshieldArmour
+	{
+		mesh = Vehicles/ChevroletSuburban_BodyBase|Js_Chevy_WindshieldArmour,
+                texture = vehicles/Js_Chevy_ArmourTex,
+		scale = 1,
+	}
+	model ChevroletSuburban_RearWindowArmour
+	{
+		mesh = Vehicles/ChevroletSuburban_BodyBase|Js_Chevy_RearWindowArmour,
+                texture = vehicles/Js_Chevy_ArmourTex,
+		scale = 1,
+	}
+	model ChevroletSuburban_FrontRightWindowArmour
+	{
+		mesh = Vehicles/ChevroletSuburban_BodyBase|Js_Chevy_FrontRightWindowArmour,
+                texture = vehicles/Js_Chevy_ArmourTex,
+		scale = 1,
+	}
+	model ChevroletSuburban_FrontLeftWindowArmour
+	{
+		mesh = Vehicles/ChevroletSuburban_BodyBase|Js_Chevy_FrontLeftWindowArmour,
+                texture = vehicles/Js_Chevy_ArmourTex,
+		scale = 1,
+	}
+	model ChevroletSuburban_RearRightWindowArmour
+	{
+		mesh = Vehicles/ChevroletSuburban_BodyBase|Js_Chevy_RearRightWindowArmour,
+                texture = vehicles/Js_Chevy_ArmourTex,
+		scale = 1,
+	}
+	model ChevroletSuburban_RearLeftWindowArmour
+	{
+		mesh = Vehicles/ChevroletSuburban_BodyBase|Js_Chevy_RearLeftWindowArmour,
+                texture = vehicles/Js_Chevy_ArmourTex,
+		scale = 1,
+	}
+
+
+	template vehicle ChevroletSuburban_Armour
+	{
+		part Chevy_Pushbar
+		{
+			model Chevrolet_Pushbar
+				{
+                		file = ChevroletSuburban_PushBar,
+				}
+			area = engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.JandG_Chevy_Pushbar,
+			mechanicRequireKey = false,
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+                	time = 600,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  	type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+            		lua
+            		{
+			create = Base.Create.JandG_Chevy_Pushbar,
+			init = Base.Init.JandG_Chevy_Pushbar,
+			}
+		 }
+          } 
+
+	template vehicle ChevroletSuburban_WindowArmour
+	{
+		part Chevy_WindshieldArmour
+		{
+			model Chevrolet_WindshieldArmour
+				{
+                		file = ChevroletSuburban_WindshieldArmour,
+				}
+			area = engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.JandG_Chevy_WindshieldArmour,
+			mechanicRequireKey = false,
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+                	time = 800,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  	type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+            		lua
+            		{
+			create = Base.Create.JandG_Chevy_WindshieldArmour,
+			init = Base.Init.JandG_Chevy_WindshieldArmour,
+			}
+		 }
+
+		part Chevy_FrontRightWindowArmour
+		{
+			model Chevy_FrontRightWindowArmour
+				{
+                		file = ChevroletSuburban_FrontRightWindowArmour,
+				}
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.JandG_Chevy_FrontSideWindowArmour,
+			mechanicRequireKey = false,
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+                	time = 700,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  	type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+            		lua
+            		{
+			create = Base.Create.JandG_Chevy_FrontRightWindowArmour,
+			init = Base.Init.JandG_Chevy_FrontRightWindowArmour,
+			}
+		 }
+
+		part Chevy_FrontLeftWindowArmour
+		{
+			model Chevy_FrontLeftWindowArmour
+				{
+                		file = ChevroletSuburban_FrontLeftWindowArmour,
+				}
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.JandG_Chevy_FrontSideWindowArmour,
+			mechanicRequireKey = false,
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+                	time = 700,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  	type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+            		lua
+            		{
+			create = Base.Create.JandG_Chevy_FrontLeftWindowArmour,
+			init = Base.Init.JandG_Chevy_FrontLeftWindowArmour,
+			}
+		 }
+
+		part Chevy_RearRightWindowArmour
+		{
+			model Chevy_RearRightWindowArmour
+				{
+                		file = ChevroletSuburban_RearRightWindowArmour,
+				}
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.JandG_Chevy_RearSideWindowArmour,
+			mechanicRequireKey = false,
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+                	time = 700,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  	type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+            		lua
+            		{
+			create = Base.Create.JandG_Chevy_RearRightWindowArmour,
+			init = Base.Init.JandG_Chevy_RearRightWindowArmour,
+			}
+		 }
+
+		part Chevy_RearLeftWindowArmour
+		{
+			model Chevy_RearLeftWindowArmour
+				{
+                		file = ChevroletSuburban_RearLeftWindowArmour,
+				}
+			area = SeatRearLeft,
+			category = bodywork,
+			parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.JandG_Chevy_RearSideWindowArmour,
+			mechanicRequireKey = false,
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+                	time = 700,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  	type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+            		lua
+            		{
+			create = Base.Create.JandG_Chevy_RearLeftWindowArmour,
+			init = Base.Init.JandG_Chevy_RearLeftWindowArmour,
+			}
+		 }
+
+		part Chevy_RearWindowArmour
+		{
+			model Chevy_RearWindowArmour
+				{
+                		file = ChevroletSuburban_RearWindowArmour,
+				}
+			area = trunk,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.JandG_Chevy_RearWindowArmour,
+			mechanicRequireKey = false,
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+                	time = 700,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  	type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+            		lua
+            		{
+			create = Base.Create.JandG_Chevy_RearWindowArmour,
+			init = Base.Init.JandG_Chevy_RearWindowArmour,
+			}
+		 }
+          }
+
+
+
+
+
+}

@@ -1,0 +1,376 @@
+module Base
+{
+	model 88electrawagonBase
+	{
+		mesh = vehicles/88electrawagon,
+		shader = vehicle,
+		invertX = FALSE,
+		scale = 1,
+	}
+	model 88electrawagonfrontwheelleft
+	{
+		mesh = vehicles/Wheel_chevypolicerim,
+		texture = vehicles/wheel_88electrawagon,
+		shader = vehiclewheel,
+	}
+	model 88electrawagonfrontwheelright
+	{
+		mesh = vehicles/Wheel_chevypolicerim,
+		texture = vehicles/wheel_88electrawagon,
+	}
+	model 88electrawagonbackwheelleft
+	{
+		mesh = vehicles/Wheel_chevypolicerim,
+		texture = vehicles/wheel_88electrawagon,
+	}
+	model 88electrawagonbackwheelright
+	{
+		mesh = vehicles/Wheel_chevypolicerim,
+		texture = vehicles/wheel_88electrawagon,
+	}
+	vehicle 88electrawagon
+	{
+		mechanicType = 1,
+		engineRepairLevel = 3,
+		playerDamageProtection = 1.0,
+
+		model
+		{
+			file = 88electrawagonBase,
+			scale = 0.8500,
+			offset = 0.0000 0.6941 0.0000,
+		}
+
+		skin
+		{
+			texture = Vehicles/vehicles_88electrawagon_shell,
+		}
+
+		sound
+		{
+			engine = VehicleEngineCarNormal,
+			engineStart = VehicleEngineCarNormal,
+			engineTurnOff = VehicleEngineCarNormal,
+			horn = VehicleHornStandard,
+			ignitionFail = VehicleIgnitionFailCarNormal,
+		}
+
+		textureMask = Vehicles/vehicles_88electrawagon_mask,
+		textureLights = Vehicles/vehicles_89lesabrewagon_lights,
+		textureDamage1Overlay = Vehicles/vehicles_89lesabrewagon_Overlays_shell_damage01,
+		textureDamage2Overlay = Vehicles/vehicles_89lesabrewagon_Overlays_shell_damage02,
+		textureDamage1Shell = Vehicles/vehicles_89lesabrewagon_shell_damage01,
+		textureDamage2Shell = Vehicles/vehicles_89lesabrewagon_shell_damage02,
+		textureRust = Vehicles/vehicles_89lesabrewagon_rust,
+
+		extents = 2.0235 1.1059 5.6941,
+		mass = 800,
+		physicsChassisShape = 2.0235 1.1059 5.6941,
+		centerOfMassOffset = 0.0000 0.5647 -0.0588,
+		shadowExtents = 2.2173 6.4580,
+		shadowOffset = 0.0000 -0.0054,
+		engineForce = 4000,
+		maxSpeed = 110f,
+		engineLoudness = 40,
+		engineQuality = 95,
+		brakingForce = 90,
+		gearRatioCount = 4,
+		gearRatioR = 4.7,
+		gearRatio1 = 3.6,
+		gearRatio2 = 2.2,
+		gearRatio3 = 1.3,
+		gearRatio4 = 1.0,
+		extentsOffset = 0.5 0.5,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 1.0f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 40,
+		suspensionCompression = 3.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.20f,
+		wheelFriction = 1.4f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 4,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.8353 -0.6824 1.6824,
+			radius = 0.17f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.8353 -0.6824 1.6824,
+			radius = 0.17f,
+			width = 0.2f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.8471 -0.6824 -1.3647,
+			radius = 0.17f,
+			width = 0.2f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.8471 -0.6824 -1.3647,
+			radius = 0.17f,
+			width = 0.2f,
+		}
+
+		template = PassengerSeat4,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.4353 -0.2471 0.1176,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.3529 -1.0353 0.1176,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.4353 -0.2471 0.1176,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.3529 -1.0353 0.1176,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		passenger RearLeft
+		{
+			position inside
+			{
+				offset = 0.4353 -0.2471 -0.8118,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.3529 -1.0353 -0.6588,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearLeft,
+			}
+		}
+
+		passenger RearRight
+		{
+			position inside
+			{
+				offset = -0.4353 -0.2471 -0.8118,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.3529 -1.0353 -0.6588,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 3.4353 2.0235 1.0353,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -3.4353 2.0000 1.0353,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.4353 0.5294 0.7294 0.9647,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.4471 0.5412 0.7294 0.9412,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 1.4353 -0.5882 0.7294 0.9412,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -1.4588 -0.4941 0.7294 0.9412,
+		}
+
+		area GasTank
+		{
+			xywh = 1.4353 -2.4000 0.7294 0.9412,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.4353 1.8471 0.7294 0.9412,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.4588 1.8471 0.7294 0.9412,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.4353 -1.5059 0.7059 0.7294,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.4706 -1.4353 0.7059 0.8941,
+		}
+
+		template = Trunk/part/TruckBed,
+		template = TrunkDoor,
+
+		part TruckBed
+		{
+			itemType = Base.SmallTrunk,
+
+			container
+			{
+				capacity = 95,
+			}
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+		template = Seat/part/SeatRearLeft,
+		template = Seat/part/SeatRearRight,
+
+		part GloveBox
+		{
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			container
+			{
+				capacity = 5,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+		template = EngineDoor,
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+		template = Window/part/WindowRearLeft,
+		template = Window/part/WindowRearRight,
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+		template = Door/part/DoorRearLeft,
+		template = Door/part/DoorRearRight,
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = 88electrawagonfrontwheelleft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = 88electrawagonfrontwheelright,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = 88electrawagonbackwheelleft,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = 88electrawagonbackwheelright,
+			}
+		}
+
+		template = Brake,
+		template = Suspension,
+		template = Radio,
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.4588 -2.7765,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.4588 2.7176,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

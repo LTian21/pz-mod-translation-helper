@@ -1,0 +1,129 @@
+module Base
+{
+
+	model Js_Humvee_FrontBumper
+	{
+		mesh = Vehicles/Js_Humvee_BodyBase|HumveeFrontBumper_Protection,
+		scale = 1,
+	}
+
+	model Js_Humvee_RearBumper
+	{
+		mesh = Vehicles/Js_Humvee_BodyBase|HumveeRearBumper_Protection,
+		scale = 1,
+	}
+
+	template vehicle Js_Humvee_BumperArmour
+	{
+		part Humvee_FrontBumper
+		{
+			model StandardHumvee_FrontBumper
+				{
+                		file = Js_Humvee_FrontBumper,
+				}
+			area = engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.JandG_Humvee_FrontBumper,
+			mechanicRequireKey = false,
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+                	time = 600,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  	type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+            		lua
+            		{
+			create = Base.Create.JandG_Humvee_FrontBumper,
+			init = Base.Init.JandG_Humvee_FrontBumper,
+			}
+		 }
+
+                part Humvee_RearBumper
+		{
+			model StandardHumvee_RearBumper
+				{
+                		file = Js_Humvee_RearBumper,
+				}
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.JandG_Humvee_RearBumper,
+			mechanicRequireKey = false,
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+                	time = 600,
+                	skills = Mechanics:6,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  	type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+			time = 600,
+			skills = Mechanics:6,
+			recipes = Intermediate Mechanics,
+		        test = Vehicles.UninstallTest.Default,
+			complete = Vehicles.UninstallComplete.Default,
+            		}
+            		lua
+            		{
+			create = Base.Create.JandG_Humvee_RearBumper,
+			init = Base.Init.JandG_Humvee_RearBumper,
+			}
+		 }
+          } 
+
+}

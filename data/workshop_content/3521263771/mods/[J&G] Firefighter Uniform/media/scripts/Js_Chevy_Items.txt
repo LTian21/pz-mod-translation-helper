@@ -1,0 +1,185 @@
+module Base
+{
+
+    item JandG_Chevy_Pushbar
+        {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	8.0,
+        Type	=	Normal,
+        DisplayName	= [J&G] Chevrolet Suburban Pushbar,
+        Icon	=	JsChevy_PushBar,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = JandG_Chevy_Pushbar_Ground,
+        VehicleType =   2,
+        }
+
+	model JandG_Chevy_Pushbar_Ground
+	{
+		mesh    = Vehicles/ChevroletSuburban_ItemsGround|Js_Chevy_Pushbar_Ground,
+		texture = Vehicles/Js_Chevy_ArmourTex,
+		scale   = 1,
+	}
+
+    item JandG_Chevy_WindshieldArmour
+        {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	8.0,
+        Type	=	Normal,
+        DisplayName	= [J&G] Chevrolet Suburban Windshield Armour,
+        Icon	=	JsChevy_WindshieldArmour,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = JandG_Chevy_WindshieldArmour_Ground,
+        VehicleType =   2,
+        }
+
+	model JandG_Chevy_WindshieldArmour_Ground
+	{
+		mesh    = Vehicles/ChevroletSuburban_ItemsGround|Js_Chevy_WindshieldArmour_Ground,
+		texture = Vehicles/Js_Chevy_ArmourTex,
+		scale   = 1,
+	}
+
+    item JandG_Chevy_FrontSideWindowArmour
+        {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	8.0,
+        Type	=	Normal,
+        DisplayName	= [J&G] Chevrolet Suburban Front Side Window Armour,
+        Icon	=	JsChevy_FrontWindowArmour,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = JandG_Chevy_FrontSideWindow_Ground,
+        VehicleType =   2,
+        }
+
+	model JandG_Chevy_FrontSideWindow_Ground
+	{
+		mesh    = Vehicles/ChevroletSuburban_ItemsGround|Js_Chevy_FrontWindowArmour_Ground,
+		texture = Vehicles/Js_Chevy_ArmourTex,
+		scale   = 1,
+	}
+
+    item JandG_Chevy_RearSideWindowArmour
+        {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	8.0,
+        Type	=	Normal,
+        DisplayName	= [J&G] Chevrolet Suburban Rear Side Window Armour,
+        Icon	=	JsChevy_RearWindowArmour,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = JandG_Chevy_RearSideWindowArmour_Ground,
+        VehicleType =   2,
+        }
+
+	model JandG_Chevy_RearSideWindowArmour_Ground
+	{
+		mesh    = Vehicles/ChevroletSuburban_ItemsGround|Js_Chevy_RearPassengerSideWindowArmour_Ground,
+		texture = Vehicles/Js_Chevy_ArmourTex,
+		scale   = 1,
+	}
+
+    item JandG_Chevy_RearWindowArmour
+        {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	8.0,
+        Type	=	Normal,
+        DisplayName	= [J&G] Chevrolet Suburban Rear Window Armour,
+        Icon	=	JsChevy_BackWindowArmour,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = JandG_Chevy_RearWindowArmour_Ground,
+        VehicleType =   2,
+        }
+
+	model JandG_Chevy_RearWindowArmour_Ground
+	{
+		mesh    = Vehicles/ChevroletSuburban_ItemsGround|Js_Chevy_RearWindowArmour_Ground,
+		texture = Vehicles/Js_Chevy_ArmourTex,
+		scale   = 1,
+	}
+
+    recipe Weld Chevy Pushbar
+	        {
+		BlowTorch=5,
+       	        keep WeldingMask,
+                MetalBar=6,
+		SmallSheetMetal=2,
+		SheetMetal=2,
+		Screws=20,
+		Result:JandG_Chevy_Pushbar,
+		Time:1000.0,
+                Category:Welding,
+		SkillRequired:MetalWelding=6;Mechanics=8,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding20,
+		NeedToBeLearn:False,
+	        }
+
+    recipe Weld Chevy Windshield Protection
+	        {
+		BlowTorch=10,
+        	keep WeldingMask,
+                MetalBar=6,
+		SmallSheetMetal=2,
+		Screws=6,
+		Result:JandG_Chevy_WindshieldArmour,
+		Time:1000.0,
+                Category:Welding,
+		SkillRequired:MetalWelding=6;Mechanics=8,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding20,
+		NeedToBeLearn:False,
+	        }
+
+    recipe Weld Chevy Front Side Window Protection
+	        {
+		BlowTorch=6,
+       	        keep WeldingMask,
+                MetalBar=1,
+		SheetMetal=2,
+		Screws=6,
+		Result:JandG_Chevy_FrontSideWindowArmour,
+		Time:1000.0,
+                Category:Welding,
+		SkillRequired:MetalWelding=6;Mechanics=8,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding20,
+		NeedToBeLearn:False,	
+	        }
+
+    recipe Weld Chevy Rear Side Window Protection
+	        {
+		BlowTorch=6,
+       	        keep WeldingMask,
+                MetalBar=3,
+		SheetMetal=1,
+		Screws=6,
+		Result:JandG_Chevy_RearSideWindowArmour,
+		Time:1000.0,
+                Category:Welding,
+		SkillRequired:MetalWelding=6;Mechanics=8,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding20,
+		NeedToBeLearn:False,	
+	        }
+
+    recipe Weld Chevy Rear Window Protection
+	        {
+		BlowTorch=10,
+        	keep WeldingMask,
+                MetalBar=6,
+		SmallSheetMetal=2,
+		Screws=6,
+		Result:JandG_Chevy_RearWindowArmour,
+		Time:1000.0,
+                Category:Welding,
+		SkillRequired:MetalWelding=6;Mechanics=8,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding20,
+		NeedToBeLearn:False,
+	        }
+
+}
