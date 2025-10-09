@@ -1,0 +1,47 @@
+module Base
+{
+
+	model Js_Humvee_Roofrack
+	{
+		mesh = vehicles/Js_Humvee_BodyBase|HumveeRoofrack_MilitaryCrates,
+                scale = 1.0,
+	}
+
+	template vehicle Js_Humvee_Roofrack
+	{
+		part Humvee_Roofrack_MiliCrates
+		{       
+                        model HumveeRoofrack
+                        {
+                        file = Js_Humvee_Roofrack,
+                        }
+			area = RoofRack,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.JandG_Humvee_RoofRack,
+			mechanicRequireKey = true,
+                        container
+	                {
+			capacity = 100,
+		        ConditionAffectsCapacity = false,
+		        test = Vehicles.ContainerAccess.TruckBedOpen,
+	                }
+	                table install
+	                {
+		        time = 1200,
+		        test = Vehicles.InstallTest.Default,
+	                }
+	                table uninstall
+                        {
+		        time = 1200,
+		        test = Vehicles.UninstallTest.Default,	
+	                }
+			lua
+			{
+			create = Vehicles.Create.Default,
+			}
+		}
+         }
+
+
+}

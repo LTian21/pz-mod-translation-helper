@@ -1,0 +1,187 @@
+module Base
+{
+
+    item JandG_Humvee_WindshieldArmour
+        {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	10.0,
+        Type	=	Normal,
+        DisplayName	= [J&G] Humvee Windshield Armour,
+        Icon	=	Js_Humvee_WindScreenArmour,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = JandG_Humvee_Windshield_Armour_Ground,
+        VehicleType =   2,
+        }
+
+	model JandG_Humvee_Windshield_Armour_Ground
+	{
+		mesh    = Vehicles/Js_Humvee_GroundItems|JandG_Humvee_Windshield_Armour_Ground,
+		texture = Vehicles/Vehicles_humveeBaseTex_Grey-Aged,
+		scale   = 0.6,
+	}
+
+    item JandG_Humvee_SideWindowProtection
+        {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	12.0,
+        Type	=	Normal,
+        DisplayName	= [J&G] Humvee Side Window Armour,
+        Icon	=	Js_Humvee_SideWindowArmour,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = JandG_Humvee_SideWindow_Armour_Ground,
+        VehicleType =   2,
+        }
+
+	model JandG_Humvee_SideWindow_Armour_Ground
+	{
+		mesh    = Vehicles/Js_Humvee_GroundItems|JandG_Humvee_SideWindow_Armour_Ground,
+		texture = Vehicles/Vehicles_humveeBaseTex_Grey-Aged,
+		scale   = 0.6,
+	}
+
+    item JandG_Humvee_FrontBumper
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	8.0,
+        Type	=	Normal,
+        DisplayName	= [J&G] Humvee Front Bumper,
+        Icon	=	Js_Humvee_FrontBumper,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = JandG_Humvee_FrontBumper_Ground,
+        VehicleType =   2,
+    }
+
+	model JandG_Humvee_FrontBumper_Ground
+	{
+		mesh    = Vehicles/Js_Humvee_GroundItems|JandG_Humvee_FrontBumper_Ground,
+		texture = Vehicles/Vehicles_humveeBaseTex_Grey-Aged,
+		scale   = 0.6,
+	}
+
+    item JandG_Humvee_RearBumper
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	8.0,
+        Type	=	Normal,
+        DisplayName	= [J&G] Humvee Rear Bumper,
+        Icon	=	Js_Humvee_RearBumper,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = JandG_Humvee_RearBumper_Ground,
+        VehicleType =   2,
+    }
+
+	model JandG_Humvee_RearBumper_Ground
+	{
+		mesh    = Vehicles/Js_Humvee_GroundItems|JandG_Humvee_RearBumper_Ground,
+		texture = Vehicles/Vehicles_humveeBaseTex_Grey-Aged,
+		scale   = 0.6,
+	}
+
+    item JandG_Humvee_RoofRack
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	10.0,
+        Type	=	Normal,
+        DisplayName	= [J&G] Humvee Roof Containers,
+        Icon	=	Js_Humvee_RoofRack,
+        MaxCapacity = 100,
+        ConditionAffectsCapacity = false,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = JandG_Humvee_RoofRack_Ground,
+        VehicleType =   2,
+    }
+
+	model JandG_Humvee_RoofRack_Ground
+	{
+		mesh    = Vehicles/Js_Humvee_GroundItems|JandG_Humvee_RoofRack_Ground,
+		texture = Vehicles/Vehicles_humveeBaseTex_Grey-Aged,
+		scale   = 0.6,
+	}
+
+    recipe Weld Humvee Windshield Protection
+	        {
+		BlowTorch=10,
+        	keep WeldingMask,
+                MetalBar=6,
+		SmallSheetMetal=2,
+		Screws=6,
+		Result:JandG_Humvee_WindshieldArmour,
+		Time:1000.0,
+                Category:Welding,
+		SkillRequired:MetalWelding=6;Mechanics=8,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding20,
+		NeedToBeLearn:False,
+	        }
+
+    recipe Weld Humvee Side Window Protection
+	        {
+		BlowTorch=6,
+       	        keep WeldingMask,
+                MetalBar=1,
+		SheetMetal=2,
+		Screws=6,
+		Result:JandG_Humvee_SideWindowProtection,
+		Time:1000.0,
+                Category:Welding,
+		SkillRequired:MetalWelding=6;Mechanics=8,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding20,
+		NeedToBeLearn:False,	
+	        }
+
+    recipe Weld Humvee Front Bumper
+	        {
+		BlowTorch=5,
+       	        keep WeldingMask,
+                MetalBar=6,
+		SmallSheetMetal=2,
+		SheetMetal=2,
+		Screws=20,
+		Result:JandG_Humvee_FrontBumper,
+		Time:1000.0,
+                Category:Welding,
+		SkillRequired:MetalWelding=6;Mechanics=8,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding20,
+		NeedToBeLearn:False,
+	        }
+
+    recipe Weld Humvee Rear Bumper
+	        {
+		BlowTorch=5,
+       	        keep WeldingMask,
+		SmallSheetMetal=2,
+		SheetMetal=4,
+		Screws=12,
+		Result:JandG_Humvee_RearBumper,
+		Time:1000.0,
+                Category:Welding,
+		SkillRequired:MetalWelding=6;Mechanics=8,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding20,
+		NeedToBeLearn:False,
+	        }
+
+    recipe Weld Humvee Roof Containers
+                {
+		BlowTorch=4,
+       	        keep WeldingMask,
+		SmallSheetMetal=8,
+		Screws=18,
+		Result:JandG_Humvee_RoofRack,
+		Time:500.0,
+                Category:Welding,
+		SkillRequired:MetalWelding=4;Mechanics=6,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding20,
+		NeedToBeLearn:False,	
+	        }
+
+
+}

@@ -1,0 +1,105 @@
+module Base
+{  
+
+item Tanto_Knife-Short
+    {
+    DisplayCategory = Weapon,
+    MaxRange    =    0.9,
+    WeaponSprite    =    Tanto_Knife-Short,
+    MinAngle    =    0.65,
+    Type    =    Weapon,
+    MinimumSwingTime    =    2,
+    KnockBackOnNoDeath    =    FALSE,
+    SwingAmountBeforeImpact    =    0.02,
+    Categories    =    SmallBlade,
+    ConditionLowerChanceOneIn    =    15,
+    Weight    =    0.5,
+    SplatNumber    =    4,
+    PushBackMod    =    0.3,
+    SubCategory    =    Stab,
+    AimingMod    =    0.8,
+    ConditionMax    =    10,
+    MaxHitCount    =    1,
+    IsAimedHandWeapon    =    TRUE,
+    DoorDamage    =    1,
+    SwingAnim    =    Stab,
+    DisplayName    =    Tanto Knife [Short],
+    MinRange    =    0.61,
+    CloseKillMove = Jaw_Stab,
+    SwingTime    =    2,
+    KnockdownMod    =    0,
+    SplatBloodOnNoDeath    =    TRUE,
+    Icon    =    HuntingKnife,
+    RunAnim    =    Run_Weapon2,
+    IdleAnim    =    Idle_Weapon2,
+    TreeDamage  =   2,
+    EnduranceMod = 0.5,
+    BreakSound  =   HuntingKnifeBreak,
+    MetalValue = 30,
+    CriticalChance    =    50,
+    CritDmgMultiplier = 3,
+    MinDamage    =    0.8,
+    MaxDamage    =    1.7,
+    WeaponLength = 0.25,
+    DamageCategory = Slash,
+    DamageMakeHole = TRUE,
+    HitFloorSound    =    HuntingKnifeHit,
+    ImpactSound    =    HuntingKnifeHit,
+    DoorHitSound = HuntingKnifeHit,
+    HitSound    =    HuntingKnifeHit,
+    SwingSound = HuntingKnifeSwing,
+    AttachmentType = Knife,
+    Tags = CutPlant;SharpKnife,
+    }
+
+  /**************************MODELING**************************/
+
+
+    model Tanto_Knife-Short
+    {
+        mesh = Weapons/1handed/Tanto_Knife-Short,
+                texture = weapons/1handed/Tanto-Knife-Short,
+
+                attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+    }
+
+
+
+   /**************************FIXING**************************/
+
+    fixing Fix Tanto Knife [Short]
+    {
+       Require : Tanto_Knife-Short,
+       
+                       Fixer : Woodglue=2; Woodwork=2,
+                       Fixer : DuctTape=2,
+                       Fixer : Glue=2,
+                       Fixer : Scotchtape=4,
+    }
+
+ /**************************RECIPES**************************/
+
+    recipe Craft Tanto Knife [Short]
+        {
+        BlowTorch = 1,
+        RippedSheets = 2,
+        SmallSheetMetal = 1,
+        Plank,
+        Screws = 4,
+        keep [Recipe.GetItemTypes.WeldingMask],
+        keep [Recipe.GetItemTypes.Screwdriver],
+        keep [Recipe.GetItemTypes.Hammer],
+        Result:Tanto_Knife-Short,
+        CanBeDoneFromFloor:true,
+        Time:800.0,
+        Category:Welding,
+        SkillRequired:MetalWelding=4,
+        OnGiveXP:Recipe.OnGiveXP.MetalWelding25,
+        }
+
+}
