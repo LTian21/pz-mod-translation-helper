@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-10-08 12:18:46 UTC+08:00`*
+*最后更新于：`2025-10-09 12:18:56 UTC+08:00`*
 
 ---
 
@@ -22,7 +22,7 @@
 | beaniebabie | 3575855907 | 72 |
 | HydeCoClay | 3551124480 | 69 |
 | OgrimMachineUtils | 3555558732 | 58 |
-| Chinesecuisine | 3412969115 | 53 |
+| Chinesecuisine | 3412969115 | 54 |
 | Project_Summer_Car | 3564950449 | 45 |
 | ZevonMedievalArmory | 3540834058 | 45 |
 | HybridMeleeRepair | 3569031613 | 32 |
