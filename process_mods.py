@@ -341,14 +341,14 @@ def process_single_mod(mod_root_path, config, vanilla_keys):
     conflict_keys = (set(en_base_data.keys()) | set(cn_base_data.keys())) & vanilla_keys
     conflict_data = {key: en_base_data.get(key) or cn_base_data.get(key) for key in conflict_keys}
 
-    filtered_en_base_data = {k: v for k, v in en_base_data.items() if k not in vanilla_keys}
-    filtered_cn_base_data = {k: v for k, v in cn_base_data.items() if k not in vanilla_keys}
-    filtered_key_source_map = {k: v for k, v in key_source_map.items() if k not in vanilla_keys}
+    filtered_en_base_data = en_base_data
+    filtered_cn_base_data = cn_base_data
+    filtered_key_source_map = key_source_map
     
     en_removed_count = len(en_base_data) - len(filtered_en_base_data)
     cn_removed_count = len(cn_base_data) - len(filtered_cn_base_data)
-    if en_removed_count > 0 or cn_removed_count > 0:
-        logging.info(f"\n--- 阶段 4: 移除了 {en_removed_count} 个 EN 键和 {cn_removed_count} 个 CN 键 (与官方重复)。---")
+    if conflict_keys:
+        logging.info(f"\n--- 阶段 4: 检测到 {len(conflict_keys)} 个与官方重复的键。---")
     
     return filtered_en_base_data, filtered_cn_base_data, filtered_key_source_map, conflict_data
 
