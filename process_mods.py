@@ -656,7 +656,8 @@ def main():
             write_output_file(output_dir / cfg.CN_OUTPUT_FILENAME, workshop_cn_base)
             write_output_file(output_dir / cfg.EN_TODO_FILENAME, en_todo_list)
             write_output_file(output_dir / cfg.CN_ONLY_FILENAME, cn_only_list)
-            write_output_file(output_dir / cfg.CONFLICT_KEYS_FILENAME, workshop_conflict_data)
+            if workshop_conflict_data:
+                write_output_file(output_dir / cfg.CONFLICT_KEYS_FILENAME, workshop_conflict_data)
             write_output_file(completed_mod_path / cfg.EN_TODO_FILENAME, en_todo_list)
             
             new_todo_file_path = output_dir / cfg.EN_TODO_FILENAME
