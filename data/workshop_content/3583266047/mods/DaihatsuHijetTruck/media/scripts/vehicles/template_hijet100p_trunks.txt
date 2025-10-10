@@ -1,0 +1,99 @@
+module Base
+{
+	model hijet100p_RoofRack
+	{
+		mesh = vehicles/Vehicles_hijet100|RoofRack,
+        texture = Vehicles/hijets100White,
+        shader = vehiclewheel,
+        scale = 1,
+	}
+
+   model TrunkSideModel
+    {
+        mesh = vehicles/Vehicles_hijet100|SideBox,
+		shader = vehiclewheel,
+        static = FALSE,
+		scale = 1,
+    }
+
+    /******************** TRUNK ********************/
+
+	
+
+	/******************** ROOFRACK ********************/
+
+	
+
+    template vehicle hijet100p_trunks
+	{
+		template = Trunk/part/TruckBed,
+		part TruckBed
+		{
+			itemType = Base.NormalTrunk,
+
+			container
+			{
+                capacity = 220,
+                conditionAffectsCapacity = false,
+				test = ATATuning.ContainerAccess.ATAInteractiveTruckBed,
+			}
+
+			lua
+            {
+                create = ATATuning.Create.DefaultATAInteractiveTrunk,
+                init = ATATuning.Init.ATAInteractiveTrunk,
+            }
+
+            
+            
+		}
+
+		template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkRoofRack,
+        part ATA2InteractiveTrunkRoofRack
+        {
+            area = ATARoof,
+            model ATARoofrack
+            {
+                file = hijet100p_RoofRack,
+            }
+           
+        }
+
+
+template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkFront,
+		
+		part ATA2InteractiveTrunkFront
+		{
+			model TrunkSide
+            {
+                file = TrunkSideModel,
+				rotate = 0 0 0,
+            }
+			area = RightContainer,
+			container
+			{
+                capacity = 25,
+				conditionAffectsCapacity = false,
+                test = Vehicles.ContainerAccess.TruckBedOpen,
+			}
+
+            table install
+            {
+                test = ATATuning2.InstallTest.Tuning,
+                complete = ATATuning2.InstallComplete.Tuning,
+            }
+            table uninstall
+            {
+                test = ATATuning2.UninstallTest.Tuning,
+                complete = ATATuning2.UninstallComplete.Tuning,
+            }
+            lua
+            {
+                create = ATATuning2.Create.Tuning,
+                init = ATATuning2.Init.Tuning,
+            }
+		}
+
+
+	}
+}

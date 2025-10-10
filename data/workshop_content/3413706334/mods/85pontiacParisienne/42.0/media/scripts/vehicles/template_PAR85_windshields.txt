@@ -15,6 +15,22 @@ module Base
         scale = 0.1,
     }
 
+    model 85pontiacParisienneWindshieldRearWL
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_windshield_rear_wl,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+    model 85pontiacParisienneWindshieldRearWR
+    {
+        mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_windshield_rear_wr,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
 	template vehicle PAR85Windshields
 	{
         part Windshield
@@ -108,6 +124,138 @@ module Base
                 recipes = Intermediate Mechanics,
                 test = Vehicles.InstallTest.Default,
                 complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle PAR85WindshieldsWagonSide
+	{
+        template! = PAR85Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 85pontiacParisienneWindshieldRearWL,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            
+            itemType = Base.85gmBbodyWagonRearWindshield,
+            parent = TrunkDoor,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle PAR85WindshieldsWagon
+	{
+        template! = PAR85Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 85pontiacParisienneWindshieldRearWR,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            
+            itemType = Base.85gmBbodyWagonRearWindshield,
+            parent = TrunkDoor,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
             }
             table uninstall
             {

@@ -2,14 +2,14 @@ module Base
 {
 	model 85pontiacParisiennefrontBumper0
 	{
-		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85-parisienne_bumper_front0,
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-parisienne_bumper_front0,
 		shader = damn_vehicle_shader,
 		scale = 0.1,
 	}
 
 	model 85pontiacParisiennefrontBumperA
 	{
-		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85-parisienne_bumper_frontA,
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-parisienne_bumper_frontA,
 		shader = damn_vehicle_shader,
 		scale = 0.1,
 	}
@@ -23,7 +23,21 @@ module Base
 
 	model 85pontiacParisiennerearBumper0
 	{
-		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85-parisienne_bumper_rear0,
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-parisienne_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 85pontiacParisiennerearBumper1
+	{
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_bumper_rear_w1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 85pontiacParisiennerearBumper2
+	{
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_bumper_rear_w2,
 		shader = damn_vehicle_shader,
 		scale = 0.1,
 	}
@@ -160,6 +174,27 @@ module Base
 					create = PAR85.Create.BumperRear,
 					init = PAR85.Init.BumperRear,
 					}
+		}
+	}
+
+    template vehicle PAR85BumpersWagon
+		{
+            template! = PAR85Bumpers,
+
+		part DAMNBumperRear
+        {
+            model RearBumper1
+				{
+                		file = 85pontiacParisiennerearBumper1,
+				}
+
+            model RearBumper2
+				{
+                		file = 85pontiacParisiennerearBumper2,
+				}
+
+			itemType = Base.85gmBbodyWagonBumperRear1;Base.85gmBbodyWagonBumperRear2,
+
 		}
 	}
 }

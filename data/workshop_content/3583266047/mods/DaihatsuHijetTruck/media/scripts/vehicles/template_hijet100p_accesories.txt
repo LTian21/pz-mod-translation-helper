@@ -1,0 +1,218 @@
+module Base
+{
+
+
+  model hijet100p_Spare1
+	{
+		mesh = vehicles/Vehicles_hijet100|SpareTire,
+        texture = Vehicles/Hijet100TIRE1,
+		shader = vehiclewheel,
+		scale = 1.0,
+	}
+
+  model hijet100p_Spare2
+	{
+		mesh = vehicles/Vehicles_hijet100|SpareTire2,
+        texture = Vehicles/Hijet100TIRE1,
+		shader = vehiclewheel,
+		scale = 1.0,
+	}
+
+
+  model hijet100p_Mudflaps
+	{
+		mesh = vehicles/Vehicles_hijet100|Mudflaps,
+        texture = Vehicles/hijets100White,
+		shader = vehiclewheel,
+		scale = 1.0,
+	}
+
+
+  model hijet100p_FlatbedRoof
+	{
+		mesh = vehicles/Vehicles_hijet100|TarpCover,
+		shader = vehiclewheel,
+        texture = Vehicles/hijet100pTarpCover,
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+ model hijet100p_LightBar
+	{
+		mesh = vehicles/Vehicles_hijet100|LightBar,
+		shader = vehicle,
+		 static = TRUE,
+		 scale = 1.0,
+
+	}
+
+
+ model hijet100p_BatteryCover
+	{
+		mesh = vehicles/Vehicles_hijet100|BatteryCover,
+		shader = vehicle,
+		 static = TRUE,
+		 scale = 1.0,
+
+	}
+
+ model hijet100p_Generator
+	{
+		mesh = vehicles/Vehicles_hijet100|Generator,
+		shader = vehiclewheel,
+                texture = Vehicles/GeneratorTexture,
+		 static = TRUE,
+		 scale = 1.0,
+
+	}
+
+
+    template vehicle hijet100p_accesories
+    {
+        template = ATA2Visual/part/ATA2VisualSpoilerRear,
+        part ATA2VisualSpoilerRear 
+        {
+
+           area = TruckBed,
+
+
+            model Default
+            {
+                file = hijet100p_FlatbedRoof,
+            }
+        }
+
+        template = ATA2Visual/part/ATA2VisualSkirtsSide,
+        part ATA2VisualSkirtsSide
+        {
+            area = TireRearLeft,
+
+
+            model Default
+            {
+                file = hijet100p_Spare1,
+            }
+        }
+
+        
+        template = ATA2Visual/part/ATA2VisualSnorkel,
+        part ATA2VisualSnorkel
+        {
+            area = TireFrontLeft,
+
+
+            model Default
+            {
+                file = hijet100p_LightBar,
+            }
+        }  
+
+        template = ATA2Visual/part/ATA2VisualWires,
+        part ATA2VisualWires
+        {
+            area = TireRearLeft,
+
+
+            model Default
+            {
+                file = hijet100p_Spare2,
+            }
+        }
+
+
+        template = ATAVisual/part/ATAVisualLadder,
+        part ATAVisualLadder
+        {
+            area = TireRearLeft,
+
+
+            model Default
+            {
+                file = hijet100p_Mudflaps,
+            }
+        }
+       
+
+        template = ATA2Visual/part/ATA2VisualSpoilerFront,
+        part ATA2VisualSpoilerFront
+        {
+            area = TireRearLeft,
+
+
+            model Default
+            {
+                file = hijet100p_BatteryCover,
+            }
+        }
+
+
+  
+        part HijetGenerator
+        {
+            area = TireFrontLeft,
+
+
+            model HijetGenerator
+            {
+                file = hijet100p_Generator,
+            }
+
+          category = equipment,
+			area = ATARoof,
+			specificItem = false,
+			itemType = Base.Generator,
+			mechanicRequireKey = false,
+
+            table install
+			{
+                time = 500,
+                test = Vehicles.InstallTest.Default,
+                requireInstalled = ATA2InteractiveTrunkRoofRack,
+            }
+
+            table uninstall
+            {
+				time = 500,
+		        test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+            }
+
+            lua
+            {
+				create = ATATuning2.Create.Tuning,
+			}
+        }
+
+
+        
+
+ 
+        part ATAVisual*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+
+            table install
+            {
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+
+            table uninstall
+            {
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+
+            lua
+            {
+                create = ATATuning.Create.Chance15,
+                init = ATATuning.Init.Default,
+            }
+        }
+    }
+}

@@ -1,0 +1,165 @@
+module Base
+{
+
+    model 97bushmasterwindshield
+    {
+        mesh = vehicles/Vehicles_97bushmaster_Body|bush_windshield,
+        shader = damn_vehicle_noreflect_shader,
+        scale = 0.1,
+    }
+
+    model 97bushmasterwindshieldRear
+    {
+        mesh = vehicles/Vehicles_97bushmaster_Body|bush_windshield_rear,
+        shader = damn_vehicle_noreflect_shader,
+        static = FALSE,
+        scale = 0.1,
+        boneWeight = door_bone 1.0,
+    }
+
+	template vehicle BUSHWindshields
+	{
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 97bushmasterwindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.97BushWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 4,
+        table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+        table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 97bushmasterwindshieldRear,
+            }
+            parent = TrunkDoor,
+            window
+            {
+            openable = false,
+            }
+                
+            itemType = Base.97BushWindshieldRear,
+            area = RearDoor,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 4,
+
+            anim Close
+                {
+                    anim = door_opening,
+                    reverse = TRUE,
+                    rate = 1.5,
+                }
+
+                anim Open
+                {
+                    anim = door_opening,
+                    rate = 1.0,
+                }
+                anim Closed
+                {
+                    anim = door_opening,
+                    animate = FALSE,
+                }
+                anim Opened
+                {
+                    anim = door_opening,
+                    reverse = TRUE,
+                    animate = FALSE,
+                }
+
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                  
+                test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+    }
+
+}

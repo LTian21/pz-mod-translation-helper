@@ -2,13 +2,26 @@ module Base
 {
 	model 85pontiacParisienneBase
 	{
-		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85-parisienne_body,
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-parisienne_body,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model 85pontiacParisienneBaseS
+	{
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-parisienne_body_s,
 		shader = damn_vehicle_shader,
 		scale = 0.1,
 	}
 	model 85pontiacParisienneInterior
 	{
-		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85-parisienne_interior,
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-parisienne_interior,
+		texture = Vehicles/Vehicles_85pontiacParisienne_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+    model 85pontiacParisienneInteriorS
+	{
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-parisienne_interior_s,
 		texture = Vehicles/Vehicles_85pontiacParisienne_Interior,
 		shader = damn_wheel_shader,
 		scale = 0.1,
@@ -37,7 +50,7 @@ module Base
 	vehicle 85pontiacParisienneSedan
 	{
 		mechanicType = 1,
-		offRoadEfficiency = 1.5,
+		offRoadEfficiency = 0.82,
 		engineRepairLevel = 4,
 		playerDamageProtection = 1.1,
 
@@ -331,6 +344,18 @@ module Base
 				scale = 1.0,
 			}
 
+            model intsedanPAR85backs
+			{
+				file = 85pontiacParisienneInteriorS,
+				scale = 1.0,
+			}
+
+            model bodsedanPAR85backs
+			{
+				file = 85pontiacParisienneBaseS,
+				scale = 1.0,
+			}
+
 			container
 			{
 				capacity = 7,
@@ -459,7 +484,8 @@ module Base
 		}
 
 		template = Headlight,
-
+        template = DAMNglobal,
+		template = DAMN85pontiacParisienneSedan,
         useChassisPhysicsCollision = false,
 
 		physics box

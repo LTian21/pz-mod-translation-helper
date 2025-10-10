@@ -1,0 +1,73 @@
+module Base
+{
+	model 97bushmasterstorageleft0
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_left_storage0,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	model 97bushmasterstorageleftG
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_left_storage_g,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BUSHLeftSideStorage
+		{
+		part BUSHStorageLeft
+        	{
+
+			model Bushstorageleft0
+				{
+                		file = 97bushmasterstorageleft0,
+				}
+			model BushstorageleftG
+				{
+                		file = 97bushmasterstorageleftG,
+				}
+
+			area = Storage4,
+			specificItem = false,
+			itemType = Base.97BushLeftStorage0;Base.Generator,
+			category = bodywork,
+			mechanicRequireKey = false,
+
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = BUSH.ContainerAccess.SL,
+			}
+
+			table install
+			{
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BUSH.InstallComplete.LeftStorage,
+            		}
+
+            table uninstall
+            		{
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BUSH.UninstallComplete.LeftStorage,
+
+            		}
+
+            		lua
+            		{
+					create = BUSH.Create.LeftStorage,
+					init = BUSH.Init.LeftStorage,
+					}
+		}
+	}
+
+		
+}

@@ -15,6 +15,29 @@ module Base
         scale = 0.1,
     }
 
+    model 85chevyCapriceWindshieldRearC
+    {
+        mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-platform_windshield_rear_c,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 85chevyCapriceWindshieldRearWL
+    {
+        mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-platform_windshield_rear_wl,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+    model 85chevyCapriceWindshieldRearWR
+    {
+        mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-platform_windshield_rear_wr,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
 	template vehicle CAP85Windshields
 	{
         part Windshield
@@ -108,6 +131,151 @@ module Base
                 recipes = Intermediate Mechanics,
                 test = Vehicles.InstallTest.Default,
                 complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle CAP85WindshieldsCoupe
+	{
+        template! = CAP85Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 85chevyCapriceWindshieldRearC,
+            }
+        }
+    }
+
+    template vehicle CAP85WindshieldsWagonSide
+	{
+        template! = CAP85Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 85chevyCapriceWindshieldRearWL,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            
+            itemType = Base.85gmBbodyWagonRearWindshield,
+            parent = TrunkDoor,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle CAP85WindshieldsWagon
+	{
+        template! = CAP85Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 85chevyCapriceWindshieldRearWR,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            
+            itemType = Base.85gmBbodyWagonRearWindshield,
+            parent = TrunkDoor,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
             }
             table uninstall
             {

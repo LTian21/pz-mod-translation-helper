@@ -1,0 +1,96 @@
+module Base
+{
+    model hijet100pJDM_TrunkDoor
+    {
+        mesh = vehicles/Vehicles_hijet100|DoorTrunk,
+        shader = vehicle,
+		static = FALSE,
+		boneWeight = TrunkDoor1Bone 1.0,boneWeight = TrunkDoor2Bone 1.0,boneWeight = TrunkDoor3Bone 1.0,
+        scale = 1,
+
+
+		
+    }
+
+	template vehicle hijet100pJDM_trunkdoor
+	{
+        template = TrunkDoor,
+
+		part TrunkDoor
+		{
+            model Default
+			{
+				file = hijet100pJDM_TrunkDoor,
+			}
+
+			category = bodywork,
+            
+			area = TruckBed,
+            mechanicRequireKey = true,
+			repairMechanic = true,
+
+			anim Close
+			{                        
+                                sound = VehicleTrunkCloseVan,       
+				anim = TrunkDoor_Closing,
+				reverse = FALSE,
+				rate = 2.0,
+			}
+			anim Open
+			{
+                                sound = VehicleTrunkOpenVan,
+				anim = TrunkDoor_Closing,
+				reverse = TRUE,
+				rate = 2.0,
+			}
+			anim Closed
+			{
+				anim = TrunkDoor_Closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+			anim Opened
+			{
+				anim = TrunkDoor_Closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = ATATuning2.InstallComplete.Door,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = ATATuning2.UninstallComplete.Door,
+				requireUninstalled = ATA2VisualSpoilerRear,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.DefaultModel,
+                init = ATATuning2.Init.Door,
+                update = Vehicles.Update.TrunkDoor,
+                use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}

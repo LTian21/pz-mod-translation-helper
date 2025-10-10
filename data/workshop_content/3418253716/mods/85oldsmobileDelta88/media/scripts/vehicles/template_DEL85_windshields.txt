@@ -15,6 +15,29 @@ module Base
         scale = 0.1,
     }
 
+    model 85oldsmobileDelta88WindshieldRearC
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_windshield_rear_c,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 85oldsmobileDelta88WindshieldRearWL
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_windshield_rear_wl,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+    model 85oldsmobileDelta88WindshieldRearWR
+    {
+        mesh = vehicles/Vehicles_85oldsmobileDelta88_Body|85b-platform_windshield_rear_wr,
+        shader = damn_vehicle_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
 	template vehicle DEL85Windshields
 	{
         part Windshield
@@ -106,6 +129,149 @@ module Base
                 recipes = Intermediate Mechanics,
                 test = Vehicles.InstallTest.Default,
                 complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle DEL85WindshieldsCoupe
+	{
+        template! = DEL85Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 85oldsmobileDelta88WindshieldRearC,
+            }
+        }
+    }
+
+    template vehicle DEL85WindshieldsWagonSide
+	{
+        template! = DEL85Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 85oldsmobileDelta88WindshieldRearWL,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            
+            itemType = Base.85gmBbodyWagonRearWindshield,
+            parent = TrunkDoor,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle DEL85WindshieldsWagon
+	{
+        template! = DEL85Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 85oldsmobileDelta88WindshieldRearWR,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            
+            itemType = Base.85gmBbodyWagonRearWindshield,
+            parent = TrunkDoor,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+                requireInstalled = TrunkDoor,
             }
             table uninstall
             {

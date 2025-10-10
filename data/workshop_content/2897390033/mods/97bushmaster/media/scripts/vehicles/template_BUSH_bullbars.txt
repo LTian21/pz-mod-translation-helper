@@ -1,0 +1,76 @@
+module Base
+{
+	model 97bushmasterbullbar0
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_bullbar_sas,
+		texture = vehicles/Vehicles_97bushmaster_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle BUSHBullbars
+		{
+		part BUSHBullbar
+        	{
+
+			model Bullbar0
+				{
+                		file = 97bushmasterbullbar0,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.97BushBullbarSAS,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+				equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BUSH.InstallComplete.Bullbar,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+  				type = Base.Wrench,
+				count = 1,
+				keep = true,
+				equip = primary,
+                    		}
+                	}
+
+			time = 1500,
+			skills = Mechanics:4,
+			recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+			complete = BUSH.UninstallComplete.Bullbar,
+            		}
+
+            		lua
+            		{
+			create = BUSH.Create.Bullbar,
+			init = BUSH.Init.Bullbar,
+			}
+		}
+	}
+
+		
+}

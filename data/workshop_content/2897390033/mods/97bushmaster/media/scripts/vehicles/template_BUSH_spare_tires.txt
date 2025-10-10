@@ -1,0 +1,189 @@
+module Base
+{
+	model 97bushmasterspareFloor1
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_spare_bottom1,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BUSHSpareTires
+		{
+		part BUSHSpareRight
+        	{
+
+			model Bushspare1
+				{
+                	file = runFlatModernTire,
+                    offset = -1.0819 0.8533 -2.9982,
+				    rotate = 0.0000 0.0000 0.0000,
+				}
+				area = TireRearRight,
+
+				table install
+					{
+                	complete = BUSH.InstallComplete.SpareTire,
+            		}
+
+            	table uninstall
+            		{
+					complete = BUSH.UninstallComplete.SpareTire,
+
+            		}
+
+            		lua
+            		{
+            			init = BUSH.Init.SpareTire,
+						create = BUSH.Create.SpareTire,
+					}
+			}
+
+		part BUSHSpareRoof
+        	{
+
+			model Bushspare2
+				{
+                	file = runFlatModernTire,
+                    offset = 0.2723 1.6384 -1.4434,
+				    rotate = 0.0000 0.0000 95.0000,
+				}
+
+				area = RearDoor,
+
+				table install
+					{
+                	complete = BUSH.InstallComplete.SpareTireRoof,
+            		}
+
+            	table uninstall
+            		{
+					complete = BUSH.UninstallComplete.SpareTireRoof,
+            		}
+
+            		lua
+            		{
+            			init = BUSH.Init.SpareTireRoof,
+						create = BUSH.Create.SpareTireRoof,
+					}
+			}
+
+			part BUSHSpare*
+        	{
+
+				category = bodywork,
+				specificItem = false,
+				itemType = runFlat.ModernTire,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+
+            		}
+
+			}
+
+		part BUSHStorageSpare
+        	{
+
+			model Bushstorageright1
+				{
+                		file = runFlatModernTire,
+                        offset = -0.7741 -0.0975 0.2219,
+				        rotate = 0.0000 0.0000 -40.0000,
+				}
+			model Bushstorageright1b
+				{
+                		file = 97bushmasterspareFloor1,
+				}
+
+			area = Storage3,
+			specificItem = false,
+			itemType = runFlat.ModernTire,
+			category = bodywork,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireUninstalled = BUSHStorageRight,
+
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+
+				}
+
+				lua
+            		{
+					create = DAMN.Create.Blank,
+					}
+			}
+	}
+	
+}
