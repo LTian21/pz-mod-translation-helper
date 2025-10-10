@@ -1,0 +1,586 @@
+module Base
+{
+	model hijet100pJDM_Base
+	{
+		mesh = vehicles/Vehicles_hijet100|Cube.001,
+		shader = vehicle_norandom_multiuv,
+		invertX = FALSE,
+		scale = 1,
+	}
+	model hijet100pJDM_Interior
+	{
+		mesh = vehicles/Vehicles_hijet100|Interior2,
+		texture = vehicles/JMDHijetInterior,
+		shader = vehiclewheel,
+		scale = 1,
+	}
+	model hijet100pJDMfrontwheelleft
+	{
+		mesh = vehicles/Vehicles_hijet100|Cylinder,
+		texture = vehicles/Hijet100TIRE1,
+		shader = vehiclewheel,
+                scale = 1.00,
+	}
+	model hijet100pJDMfrontwheelright
+	{
+		mesh = vehicles/Vehicles_hijet100|Cylinder,
+		texture = vehicles/Hijet100TIRE1,
+		shader = vehiclewheel,
+                scale = 1.00,
+	}
+	model hijet100pJDMbackwheelleft
+	{
+		mesh = vehicles/Vehicles_hijet100|Cylinder,
+		texture = vehicles/Hijet100TIRE1,
+		shader = vehiclewheel,
+                scale = 1.00,
+	}
+	model hijet100pJDMbackwheelright
+	{
+		mesh = vehicles/Vehicles_hijet100|Cylinder,
+		texture = vehicles/Hijet100TIRE1,
+		shader = vehiclewheel,
+                scale = 1.00,
+	}
+	model hijet100pJDM_Battery
+    {
+        mesh = vehicles/Vehicles_hijet100|Battery,
+		texture = vehicles/HijetInterior,
+        shader = vehiclewheel,
+        scale = 1,
+    }
+	vehicle hijet100pJDM
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 1.2,
+		engineRepairLevel = 3,
+		playerDamageProtection = 1.1,
+
+		model
+		{
+			file = hijet100pJDM_Base,
+			scale = 0.9300,
+			offset = 0.0000 0.3226 0.0000,
+		}
+
+		part TCLConfig
+		{
+			category = nodisplay,
+
+			table TCLConfig
+			{
+				animType = vanilla,
+			}
+		}
+
+		spawnOffsetY = 0,
+
+		skin
+		{
+			texture = Vehicles/JMDhijets100White,
+		}
+
+		skin
+		{
+			texture = Vehicles/JMDMhijets100Black,
+		}
+
+		skin
+		{
+			texture = Vehicles/JMDhijets100Mint,
+		}
+
+
+		skin
+		{
+			texture = Vehicles/JMDhijets100MistBlue,
+		}
+
+		skin
+		{
+			texture = Vehicles/JMDhijets100Rose,
+		}
+
+		skin
+		{
+			texture = Vehicles/JMDhijets100Silver,
+		}
+
+		skin
+		{
+			texture = Vehicles/JMDhijets100Orange,
+		}
+
+		skin
+		{
+			texture = Vehicles/JMDhijets100Green,
+		}
+
+		textureRust = Vehicles/hijet_rust,
+		textureMask = Vehicles/Hijets100Mask,
+		textureLights = Vehicles/hijet100plights,
+		textureDamage1Shell = Vehicles/hijet_damage1,
+		textureDamage2Shell = Vehicles/hijet_damage2,
+		textureDamage1Overlay = Vehicles/HijetBlood,
+		textureDamage2Overlay = Vehicles/HijetBlood,
+		textureShadow = Vehicles/Hijet100shadows,
+
+		sound
+		{
+			engine = VehicleEngineOffRoad,
+			engineStart = VehicleEngineOffRoad,
+			engineTurnOff = VehicleEngineOffRoad,
+			horn = VehicleHornJeep,
+			ignitionFail = VehicleIgnitionFailOffRoad,
+		}
+
+		extents = 1.5269 1.4624 3.6129,
+		mass = 565,
+		physicsChassisShape = 1.5269 1.4624 3.5914,
+		centerOfMassOffset = 0.0000 0.9677 -0.0430,
+		shadowExtents = 3.7591 3.8419,
+		shadowOffset = 0.0025 -0.1116,
+		engineForce = 3000,
+		engineLoudness = 65,
+		engineQuality = 70,
+		maxSpeed = 65f,
+		gearRatioCount = 5,
+		stoppingMovementForce = 3.0f,
+		brakingForce = 65,
+		rollInfluence = 0.96f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.40,
+		suspensionStiffness = 37,
+		suspensionCompression = 3.85,
+		suspensionDamping = 2.85,
+		maxSuspensionTravelCm = 14,
+		suspensionRestLength = 0.20f,
+		wheelFriction = 1.75f,
+		frontEndHealth = 350,
+		rearEndHealth = 200,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.6667 -0.3548 0.8925,
+			radius = 0.27f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.6667 -0.3548 0.8925,
+			radius = 0.27f,
+			width = 0.2f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.6667 -0.3548 -1.0538,
+			radius = 0.27f,
+			width = 0.2f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.6667 -0.3548 -1.0538,
+			radius = 0.27f,
+			width = 0.2f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorFrontRight,
+			area = SeatFrontRight,
+
+			position inside
+			{
+				offset = -0.3441 0.3226 0.6237,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.0323 -0.6237 0.7742,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorFrontLeft,
+			area = SeatFrontLeft,
+
+			position inside
+			{
+				offset = 0.3333 0.3226 0.6237,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.0430 -0.6237 0.6989,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 1.1183 -0.1613 0.7312 0.9677,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -1.1613 2.3226 2.0860,
+		}
+
+		area ATARoof
+		{
+			xywh = 0.0000 -0.9247 2.4731 2.5376,
+		}
+
+		area RightContainer
+		{
+			xywh = -1.0753 -0.1935 0.6237 0.8817,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.1183 0.8280 0.7097 1.0108,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.1183 0.8280 0.7097 1.0108,
+		}
+
+		area GasTank
+		{
+			xywh = 0.9892 0.0538 0.4516 0.4516,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.9892 1.0108 0.4516 0.4516,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.9892 1.0108 0.4516 0.4516,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 0.9892 -1.0538 0.4516 0.4516,
+		}
+
+		area TireRearRight
+		{
+			xywh = -0.9892 -1.0538 0.4516 0.4516,
+		}
+
+		part GloveBox
+		{
+			model hijet100pJDMInterior
+			{
+				file = hijet100pJDM_Interior,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			container
+			{
+				capacity = 8,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			area = GasTank,
+			category = gastank,
+			mechanicRequireKey = true,
+
+			container
+			{
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline,
+				conditionAffectsCapacity = false,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+				update = Vehicles.Update.GasTank,
+				checkEngine = Vehicles.CheckEngine.GasTank,
+			}
+
+			install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+
+		part Battery
+		{
+			model C6Batt
+			{
+				file = hijet100pJDM_Battery,
+			}
+		}
+
+		template = Engine,
+		template! = hijet100pJDM_seats,
+		template! = hijet100pJDM_doors,
+		template! = hijet100pJDM_windows,
+		template! = hijet100pJDM_windshields,
+		template! = hijet100pJDM_accesories,
+		template! = hijet100pJDM_trunkdoor,
+		template! = hijet100pJDM_armor,
+		template! = hijet100pJDM_trunks,
+		template! = hijet100pJDM_bumpers,
+		template! = hijet100pJDM_hood,
+		template = Muffler,
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		template = PassengerCompartment,
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = hijet100pJDMfrontwheelleft,
+				rotate = 0 0 0,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = hijet100pJDMfrontwheelright,
+				rotate = 0 180 0,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = hijet100pJDMbackwheelleft,
+				rotate = 0 0 0,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = hijet100pJDMbackwheelright,
+				rotate = 0 180 0,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.1398 -1.8387,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.0645 1.7419,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}

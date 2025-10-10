@@ -1,0 +1,160 @@
+module Base
+{
+	model 97bushmasterfenderleft0
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_left_fender,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+	model 97bushmasterfenderright0
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_right_fender,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BUSHFenders
+		{
+		part BUSHFenderLeft
+        	{
+
+			model Bushfenderleft0
+				{
+                		file = 97bushmasterfenderleft0,
+				}
+
+			area = Storage1,
+			specificItem = false,
+			itemType = Base.97BushLeftFender0,
+
+			container
+			{
+                capacity = 45,
+				conditionAffectsCapacity = false,
+				test = BUSH.ContainerAccess.FL,
+			}
+
+		    category = bodywork,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                    complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+                    requireUninstalled = StorageLid1;BUSHCanOne;BUSHCanTwo;BUSHCanThree;BUSHCanFour;BUSHCanFive,
+                    requireEmpty = true,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+		part BUSHFenderRight
+        	{
+
+			model Bushfenderright0
+				{
+                		file = 97bushmasterfenderright0,
+				}
+
+			area = Storage2,
+			specificItem = false,
+			itemType = Base.97BushRightFender0,
+
+			container
+			{
+                capacity = 35,
+				conditionAffectsCapacity = false,
+				test = BUSH.ContainerAccess.FR,
+			}
+
+			category = bodywork,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                    complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+                    requireUninstalled = StorageLid2,
+                    requireEmpty = true,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+}

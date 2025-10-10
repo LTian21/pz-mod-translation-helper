@@ -1,0 +1,239 @@
+module Base
+{
+	model 97bushmasterDoor
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_door_rear,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = door_bone 1.0,
+	}
+
+	model 97bushmasterHatch
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_hatch,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = hatch_bone 1.0,
+	}
+
+	template vehicle BUSHDoors
+	{
+		part TrunkDoor
+		{
+			model bushDoor
+			{
+				file = 97bushmasterDoor,
+			}
+
+			category = door,
+			door
+			{
+				}
+			itemType = Base.97BushDoor,
+			area = RearDoor,
+			mechanicRequireKey = true,
+            durability = 5,
+				
+				anim Close
+				{
+					anim = door_opening,
+					reverse = TRUE,
+					rate = 1.5,
+				}
+
+				anim Open
+				{
+					anim = door_opening,
+					rate = 1.0,
+				}
+				anim Closed
+				{
+					anim = door_opening,
+					animate = FALSE,
+				}
+				anim Opened
+				{
+					anim = door_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+			table uninstall
+				{
+					requireUninstalled = WindshieldRear,
+				}
+
+				anim Close
+				{
+					sound = VehicleDoorCloseStandard,
+				}
+
+				anim Open
+				{
+					sound = VehicleDoorOpenStandard,
+				}
+				anim Lock
+				{
+					sound = LockVehicleDoorStandard,
+				}
+				anim Unlock
+				{
+					sound = UnlockVehicleDoorStandard,
+				}
+				anim IsLocked
+				{
+					sound = VehicleDoorIsLockedStandard,
+				}
+				anim ActorOpen
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+				anim ActorClose
+				{
+					anim = Attack_Shove,
+					rate = 0.3,
+				}
+			table install
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 700,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.InstallTest.Default,
+					complete = Vehicles.InstallComplete.Door,
+				}
+			table uninstall
+				{
+					items
+					{
+						item
+						{
+							type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+						}
+					}
+					time = 700,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+					test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Door,
+					}
+
+			lua
+				{
+					create = Vehicles.Create.Door,
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.Door,
+				}
+		}
+
+		part DoorFake
+		{
+				itemType = Base.97BushHatch,
+                door
+			    {
+				}
+				area = Hatch,
+				category = nodisplay,
+                durability = 5,
+
+				lua
+				{
+					create = Vehicles.Create.Door,
+					init = Vehicles.Init.Door,
+					use = Vehicles.Use.Door,
+				}
+		}
+
+		part TrunkHatch
+		{
+			model bushHatch
+			{
+				file = 97bushmasterHatch,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = hatch_opening,
+				animate = FALSE,
+			}
+
+			window
+			{
+				openable = true,
+			}
+
+			category = door,
+			itemType = Base.97BushHatch,
+			parent = DoorFake,
+			area = Hatch,
+			mechanicRequireKey = true,
+            durability = 5,
+
+			anim Open
+			{
+				sound = VehicleWindowHandleOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowHandleClose,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+
+	}
+
+}

@@ -2,14 +2,14 @@ module Base
 {
 	model 85buickLeSabrefrontBumper0
 	{
-		mesh = vehicles/Vehicles_85buickLeSabre_Body|85-lesabre_bumper_front0,
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-lesabre_bumper_front0,
 		shader = damn_vehicle_shader,
 		scale = 0.1,
 	}
 
 	model 85buickLeSabrefrontBumperA
 	{
-		mesh = vehicles/Vehicles_85buickLeSabre_Body|85-lesabre_bumper_frontA,
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-lesabre_bumper_frontA,
 		shader = damn_vehicle_shader,
 		scale = 0.1,
 	}
@@ -23,7 +23,21 @@ module Base
 
 	model 85buickLeSabrerearBumper0
 	{
-		mesh = vehicles/Vehicles_85buickLeSabre_Body|85-lesabre_bumper_rear0,
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-lesabre_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 85buickLeSabrerearBumper1
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_bumper_rear_w1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 85buickLeSabrerearBumper2
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_bumper_rear_w2,
 		shader = damn_vehicle_shader,
 		scale = 0.1,
 	}
@@ -162,6 +176,27 @@ module Base
 					create = LES85.Create.BumperRear,
 					init = LES85.Init.BumperRear,
 					}
+		}
+	}
+
+    template vehicle LES85BumpersWagon
+		{
+            template! = LES85Bumpers,
+
+		part DAMNBumperRear
+        {
+            model RearBumper1
+				{
+                		file = 85buickLeSabrerearBumper1,
+				}
+
+            model RearBumper2
+				{
+                		file = 85buickLeSabrerearBumper2,
+				}
+
+			itemType = Base.85gmBbodyWagonBumperRear2;Base.85gmBbodyWagonBumperRear1,
+
 		}
 	}
 }

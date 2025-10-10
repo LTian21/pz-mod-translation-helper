@@ -1,0 +1,63 @@
+module Base
+{
+	model 97bushmasterroofstorage0
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_roof_storage,
+		texture = vehicles/Vehicles_97bushmaster_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BUSHRoofStorage
+		{
+		part BUSHRoofCrates
+        	{
+
+			model Bushroof0
+				{
+                		file = 97bushmasterroofstorage0,
+				}
+
+			area = RearDoor,
+			specificItem = false,
+			itemType = Base.97BushRoofStorage0,
+			category = bodywork,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			container
+			{
+                capacity = 85,
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = BUSH.InstallComplete.RoofStorage,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = BUSH.UninstallComplete.RoofStorage,
+                    requireEmpty = true,
+            		}
+
+            		lua
+            		{
+            		init = BUSH.Init.RoofStorage,
+					create = BUSH.Create.RoofStorage,
+					}
+		}
+	}
+}

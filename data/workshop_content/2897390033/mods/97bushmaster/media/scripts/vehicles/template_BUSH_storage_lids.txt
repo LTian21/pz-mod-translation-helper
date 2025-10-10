@@ -1,0 +1,298 @@
+module Base
+{
+
+	model 97bushmasterStorageLid1
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_storageDoor1,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+	model 97bushmasterStorageLid2
+    {
+        mesh = vehicles/Vehicles_97bushmaster_Body|bush_storageDoor2,
+        shader = damn_vehicle_noreflect_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+    model 97bushmasterStorageLid3
+    {
+        mesh = vehicles/Vehicles_97bushmaster_Body|bush_storageDoor3,
+        shader = damn_vehicle_noreflect_shader,
+        static = FALSE,
+        scale = 0.1,
+    }
+
+	template vehicle BUSHStorageLids
+	{
+		part StorageLid1
+		{
+
+			model SoHuge111
+			{
+				file = 97bushmasterStorageLid1,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			anim Close
+			{
+				anim = storage1_opening,
+				reverse = TRUE,
+				rate = 1,
+			}
+
+			anim Open
+			{
+				anim = storage1_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage1_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage1_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = Storage1,
+			door
+			{
+			}
+			
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 270.0 0.0,
+			}
+			specificItem = false,
+			itemType = Base.97BushStorageLidSmall,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+
+			table install
+			{
+			requireInstalled = BUSHFenderLeft,
+			}
+			
+		}
+
+		part StorageLid2
+		{
+
+			model SoHuge112
+			{
+				file = 97bushmasterStorageLid2,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			anim Close
+			{
+				anim = storage2_opening,
+				reverse = TRUE,
+				rate = 1,
+			}
+
+			anim Open
+			{
+				anim = storage2_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage2_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage2_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = Storage2,
+			door
+			{
+			}
+			
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 90.0 0.0,
+			}
+			specificItem = false,
+			itemType = Base.97BushStorageLidLarge,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+
+			table install
+			{
+			requireInstalled = BUSHFenderRight,
+			}
+			
+		}
+
+		part StorageLid3
+		{
+
+			model SoHuge113
+			{
+				file = 97bushmasterStorageLid3,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			anim Close
+			{
+				anim = storage3_opening,
+				reverse = TRUE,
+				rate = 1,
+			}
+
+			anim Open
+			{
+				anim = storage3_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage3_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage3_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = Storage3,
+			door
+			{
+			}
+			
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 90.0 0.0,
+			}
+			specificItem = false,
+			itemType = Base.97BushStorageLidSmall,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+
+			table install
+			{
+			requireInstalled = BUSHStorageRight,
+			}
+			
+		}
+
+		part StorageLid*
+		{
+
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}
+

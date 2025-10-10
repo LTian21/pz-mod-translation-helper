@@ -1,0 +1,55 @@
+module Base
+{
+    model hijet100pJDM_SeatFL
+	{
+		mesh = vehicles/Vehicles_hijet100|SeatFrontLeft,
+        texture = Vehicles/JMDHijetInterior,
+		shader = vehiclewheel,
+		scale = 1,
+	}
+	model hijet100pJDM_SeatFR
+	{
+		mesh = vehicles/Vehicles_hijet100|SeatFrontRight,
+        texture = Vehicles/JMDHijetInterior,
+		shader = vehiclewheel,
+		scale = 1,
+	}
+
+
+    template vehicle hijet100pJDM_seats
+    {
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+
+		
+		part SeatFrontLeft
+		{
+			model SeatFL
+			{
+				file = hijet100pJDM_SeatFL,
+			}
+
+			area = SeatFrontLeft,
+			
+		}
+
+		part SeatFrontRight
+		{
+			model SeatFR
+			{
+				file = hijet100pJDM_SeatFR,
+			}
+
+			area = SeatFrontRight,
+			
+		}
+
+		
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+		}
+    }
+}

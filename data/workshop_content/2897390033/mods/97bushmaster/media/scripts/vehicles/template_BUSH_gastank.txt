@@ -1,0 +1,88 @@
+module Base
+{
+	model 97bushmasterGastank
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_gastank,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BUSHGasTank
+	{
+		part GasTank
+		{
+			model bushGas
+			{
+				file = 97bushmasterGastank,
+			}
+
+			area = GasTank,
+			category = gastank,
+			itemType = Base.97BushGasTank,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline,
+				conditionAffectsCapacity = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+				update = Vehicles.Update.GasTank,
+				checkEngine = Vehicles.CheckEngine.GasTank,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = secondary,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = secondary,
+					}
+					2
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+		}
+	}
+}
+
+

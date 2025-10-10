@@ -1,0 +1,83 @@
+module Base
+{
+	model 97bushmasterstorageright0
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_right_storage,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+
+	template vehicle BUSHRightSideStorage
+	{
+		part BUSHStorageRight
+        {
+
+			model Bushstorageright0
+				{
+                		file = 97bushmasterstorageright0,
+				}
+
+			area = Storage3,
+			specificItem = false,
+			itemType = Base.97BushRightStorage0,
+			category = bodywork,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = BUSH.ContainerAccess.SR,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = DAMN.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                	requireUninstalled = BUSHStorageSpare,
+            }
+
+            table uninstall
+            	{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireUninstalled = StorageLid3,
+
+				}
+
+				lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+
+}

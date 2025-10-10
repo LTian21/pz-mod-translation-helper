@@ -7,6 +7,7 @@ module Base
 		shader = damn_vehicle_shader,
 		static = FALSE,
 		scale = 0.1,
+        boneWeight = window_fl_bone 1.0,
 	}
 
 	model 85buickLeSabreWindowfr
@@ -15,6 +16,7 @@ module Base
 		shader = damn_vehicle_shader,
 		static = FALSE,
 		scale = 0.1,
+        boneWeight = window_fr_bone 1.0,
 	}
 
 	model 85buickLeSabreWindowrl
@@ -23,6 +25,7 @@ module Base
 		shader = damn_vehicle_shader,
 		static = FALSE,
 		scale = 0.1,
+        boneWeight = window_rl_bone 1.0,
 	}
 
 	model 85buickLeSabreWindowrr
@@ -31,9 +34,56 @@ module Base
 		shader = damn_vehicle_shader,
 		static = FALSE,
 		scale = 0.1,
+        boneWeight = window_rr_bone 1.0,
 	}
 
-	template vehicle LES85Windows
+    model 85buickLeSabreWindowflC
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_fl_c,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_fl_bone 1.0,
+	}
+
+	model 85buickLeSabreWindowfrC
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_fr_c,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_fr_bone 1.0,
+	}
+
+	model 85buickLeSabreWindowrlC
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_rl_c,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85buickLeSabreWindowrrC
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_rr_c,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 85buickLeSabreWindowblW
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_bl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85buickLeSabreWindowbrW
+	{
+		mesh = vehicles/Vehicles_85buickLeSabre_Body|85b-platform_window_br,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    
+    template vehicle LES85Windows
 	{
 		part WindowFrontLeft
 		{
@@ -147,6 +197,229 @@ module Base
 			{
 				openable = true,
 			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+    template vehicle LES85WindowsCoupe
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 85buickLeSabreWindowflC,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.85gmBbodyFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 85buickLeSabreWindowfrC,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.85gmBbodyFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 85buickLeSabreWindowrlC,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.85gmBbodyCoupeRearSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 85buickLeSabreWindowrrC,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.85gmBbodyCoupeRearSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNRearRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+    template vehicle LES85WindowsWagon
+	{
+		template! = LES85Windows,
+
+		part WindowBackLeft
+		{
+			model windowBL
+			{
+				file = 85buickLeSabreWindowblW,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.85gmBbodyWagonBackSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNBackLeftArmor,
+				}
+		}
+
+		part WindowBackRight
+		{
+			model windowBR
+			{
+				file = 85buickLeSabreWindowbrW,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.85gmBbodyWagonBackSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNBackRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
 			table install
 			{
 				items

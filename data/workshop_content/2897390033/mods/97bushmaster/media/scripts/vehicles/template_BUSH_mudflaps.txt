@@ -1,0 +1,76 @@
+module Base
+{
+	model 97bushmastermudflaps1
+	{
+		mesh = vehicles/Vehicles_97bushmaster_Body|bush_mudflaps,
+		texture = vehicles/Vehicles_97bushmaster_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle BUSHMudflaps
+		{
+		part BUSHMudflaps
+        	{
+
+			model BushMudflaps1
+				{
+                	file = 97bushmastermudflaps1,
+				}
+
+				category = bodywork,
+				area = TireRearLeft,
+				specificItem = false,
+				itemType = Base.97BushMudflaps,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+            		lua
+            		{
+						create = Vehicles.Create.Default,
+					}
+			}
+	}
+
+		
+}

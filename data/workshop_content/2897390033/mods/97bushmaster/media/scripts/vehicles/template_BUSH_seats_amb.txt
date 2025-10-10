@@ -1,0 +1,242 @@
+module Base
+{
+
+	template vehicle BUSHambSeats
+	{
+		part SeatDriver
+		{
+			
+			model SeatDriver
+			{
+				file = 97bushmasterDriver,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = RearDoor,
+			container
+			{
+				seat = Driver,
+			}
+		}
+
+		part SeatSupport
+		{
+
+			model seatSupport
+			{
+				file = 97bushmasterSupport,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = RearDoor,
+			container
+			{
+				seat = Support,
+			}
+		}
+
+		part SeatCrew1
+		{
+
+			model seatCrewSeat1
+			{
+				file = 97bushmasterCrew1,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = RearDoor,
+			container
+			{
+				seat = Crew1,
+			}
+		}
+
+		part SeatCrew2
+		{
+
+			model seatCrewSeat3
+			{
+				file = 97bushmasterCrew3,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = RearDoor,
+			container
+			{
+				seat = Crew2,
+			}
+		}
+
+		part SeatCrew3
+		{
+
+			model seatCrewSeat5
+			{
+				file = 97bushmasterCrew5,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = RearDoor,
+			container
+			{
+				seat = Crew3,
+			}
+		}
+
+
+		part SeatCrew4
+		{
+
+			model seatCrewSeat7
+			{
+				file = 97bushmasterCrew7,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = RearDoor,
+			container
+			{
+				seat = Crew4,
+			}
+		}
+
+		part SeatStretcher
+		{
+
+			area = RearDoor,
+			container
+			{
+				seat = Stretcher,
+			}
+		}
+
+		part Gunner
+		{
+
+			model seatGunner
+			{
+				file = 97bushmasterGunner,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = RearDoor,
+
+			category = seat,
+			specificItem = false,
+			itemType = Base.97BushmasterGunnerSeat,
+			mechanicRequireKey = true,
+			container
+			{
+				seat = Gunner,
+				test = BUSH.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			specificItem = false,
+			itemType = Base.97BushmasterSeat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = BUSH.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+			
+		}
+	}
+}
+

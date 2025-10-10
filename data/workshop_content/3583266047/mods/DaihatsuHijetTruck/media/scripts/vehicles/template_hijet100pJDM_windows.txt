@@ -1,0 +1,94 @@
+module Base
+{
+    model hijet100pJDM_WindowFL
+	{
+		mesh = vehicles/Vehicles_hijet100|FrontLeftWindow,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+		boneWeight = FrontLeftWindowBone 1.0,
+	}
+	model hijet100pJDM_WindowFR
+	{
+		mesh = vehicles/Vehicles_hijet100|FrontRightWindow,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+		boneWeight = FrontRightWindowBone 1.0,
+	}
+
+
+    template vehicle hijet100pJDM_windows
+    {
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+
+
+		part WindowFrontLeft
+		{
+			area = SeatFrontLeft,
+			
+			parent = DoorFrontLeft,
+                       
+
+			model WindowFrontLeft
+			{
+				file = hijet100pJDM_WindowFL,
+			}
+
+                        anim ClosedToOpen
+			{
+                                sound = VehicleWindowElectricOpen,
+				anim = WindowFrontLeft_open,
+				animate = FALSE,
+			}                        
+
+
+
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}		
+		}
+
+		part WindowFrontRight
+		{
+			area = SeatFrontRight,
+			
+			parent = DoorFrontRight,
+                        
+
+			model WindowFrontRight
+			{
+				file = hijet100pJDM_WindowFR,
+			}
+
+                        anim ClosedToOpen
+			{
+                                sound = VehicleWindowElectricOpen,
+				anim = WindowFrontRight_open,
+				animate = FALSE,
+			}                        
+
+
+
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+		}
+
+		
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			window
+			{
+				openable = true,
+			}
+		}
+    }
+}

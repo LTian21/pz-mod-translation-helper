@@ -1,0 +1,147 @@
+module Base
+{
+    model hijet100pJDM_DoorFrontLeft
+	{
+		mesh = vehicles/Vehicles_hijet100|FrontLeftDoor,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+        boneWeight = FrontLeftDoorBone 1.0,
+	}
+	model hijet100pJDM_DoorFrontRight
+	{
+		mesh = vehicles/Vehicles_hijet100|FrontRightDoor,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+        boneWeight = FrontRightDoorBone 1.0,
+	}
+	
+
+	template vehicle hijet100pJDM_doors
+	{
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+
+		
+		part DoorFrontLeft
+		{
+			model Default
+			{
+				file = hijet100pJDM_DoorFrontLeft,
+			}
+
+			area = SeatFrontLeft,
+			
+            
+						
+
+			anim Close
+			{
+                                sound = VehicleDoorCloseSportsCar,
+				anim = DoorFrontLeft_closing,
+				reverse = FALSE,
+				rate = 4.0,
+			}
+
+			anim Open
+			{
+                                sound = VehicleDoorOpenSportsCar,
+				anim = DoorFrontLeft_closing,
+				reverse = TRUE,
+				rate = 4.0,
+			}
+
+			anim Closed
+			{
+				anim = DoorFrontLeft_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorFrontLeft_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindowFrontLeft,
+			}
+		}
+
+		part DoorFrontRight
+		{
+			model Default
+			{
+				file = hijet100pJDM_DoorFrontRight,
+			}
+
+			area = SeatFrontRight,
+			
+
+			anim Close
+			{
+                                sound = VehicleDoorCloseSportsCar,
+				anim = DoorFrontRight_closing,
+				reverse = FALSE,
+				rate = 4.0,
+			}
+
+			anim Open
+			{
+                                sound = VehicleDoorOpenSportsCar,
+				anim = DoorFrontRight_closing,
+				reverse = TRUE,
+				rate = 4.0,
+			}
+
+			anim Closed
+			{
+				anim = DoorFrontRight_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorFrontRight_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindowFrontRight,
+			}
+		}
+
+		
+		part Door*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			table install
+			{
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+
+			table uninstall
+			{
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Door,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.Door,
+			}
+		}
+	}
+}

@@ -33,6 +33,20 @@ module Base
 		scale = 0.1,
 	}
 
+    model 85pontiacParisienneWindowblW
+	{
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_window_bl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85pontiacParisienneWindowbrW
+	{
+		mesh = vehicles/Vehicles_85pontiacParisienne_Body|85b-platform_window_br,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
 	template vehicle PAR85Windows
 	{
 		part WindowFrontLeft
@@ -147,6 +161,91 @@ module Base
 			{
 				openable = true,
 			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+
+    template vehicle PAR85WindowsWagon
+	{
+		template! = PAR85Windows,
+
+		part WindowBackLeft
+		{
+			model windowBL
+			{
+				file = 85pontiacParisienneWindowblW,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.85gmBbodyWagonBackSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNBackLeftArmor,
+				}
+		}
+
+		part WindowBackRight
+		{
+			model windowBR
+			{
+				file = 85pontiacParisienneWindowbrW,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.85gmBbodyWagonBackSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNBackRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
 			table install
 			{
 				items

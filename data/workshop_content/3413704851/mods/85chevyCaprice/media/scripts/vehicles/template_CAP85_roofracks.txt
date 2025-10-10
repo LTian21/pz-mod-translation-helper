@@ -9,6 +9,22 @@ module Base
 		scale = 0.1,
 	}
 
+    model 85gmBbodyRoofrack1
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-platform_roofrack_w,
+		texture = Vehicles/Items_85gmBbody_Roofrack,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 85gmBbodyRoofrails
+	{
+		mesh = vehicles/Vehicles_85chevyCaprice_Body|85b-platform_roof_rails_w,
+		texture = Vehicles/Items_85gmBbody_Roofrack,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
 	template vehicle CAP85RoofrackSedan
 	{
 		part GM85Roofrack
@@ -76,6 +92,89 @@ module Base
             	{
 					create = CAP85.Create.RoofrackSedan,
 					init = CAP85.Init.RoofrackSedan,
+				}
+		}
+	}
+
+    template vehicle CAP85RoofrackWagon
+	{
+		part GM85Roofrack
+		{
+            model Roofrack1
+				{
+                		file = 85gmBbodyRoofrack0,
+                		offset = 0.0000 0.0000 0.0000,
+				}
+
+            model Roofrack2
+				{
+                		file = 85gmBbodyRoofrack1,
+                		offset = 0.0000 0.0000 0.0000,
+				}
+            
+            model Roofrails3
+				{
+                		file = 85gmBbodyRoofrails,
+                		offset = 0.0000 0.0000 0.0000,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.85gmBbodyRoofrack;Base.85gmBbodyWagonRoofrack;Base.85gmBbodyWagonRoofRails,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = CAP85.InstallComplete.RoofrackWagon,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = CAP85.UninstallComplete.RoofrackWagon,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = CAP85.Create.RoofrackWagon,
+					init = CAP85.Init.RoofrackWagon,
 				}
 		}
 	}

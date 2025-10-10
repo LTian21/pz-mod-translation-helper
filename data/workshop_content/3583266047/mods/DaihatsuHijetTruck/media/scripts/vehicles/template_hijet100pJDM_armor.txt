@@ -1,0 +1,96 @@
+module Base
+{
+    model hijet100pJDM_Windshield_Armor
+    {
+        mesh = vehicles/Vehicles_hijet100|WindshieldArmor,
+        
+		shader = vehicle,
+		scale = 1,
+    }
+    model hijet100pJDM_WindshieldRear_Armor
+    {
+        mesh = vehicles/Vehicles_hijet100|RearWindshieldArmor,
+        
+		shader = vehicle,
+                invertX = FALSE,
+                static = TRUE,
+		scale = 1,
+    }
+	model hijet100pJDM_ProtectionWindowLeft
+    {
+        mesh = vehicles/Vehicles_hijet100|FrontLeftWindowArmor,
+        
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1,
+
+        
+    }
+	model hijet100pJDM_ProtectionWindowRight
+    {
+        mesh = vehicles/Vehicles_hijet100|FrontRightWindowArmor,
+	
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1,
+
+        
+    }
+
+
+ 
+
+
+    template vehicle hijet100pJDM_armor
+    {
+        template = ATA2Protection/part/ATA2ProtectionWindshield,
+        part ATA2ProtectionWindshield
+        {
+            model Default
+            {
+                file = hijet100pJDM_Windshield_Armor,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindshieldRear,
+        part ATA2ProtectionWindshieldRear
+        {
+            
+            
+
+            model Default
+            {
+                file = hijet100pJDM_WindshieldRear_Armor,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontLeft,
+        part ATA2ProtectionWindowFrontLeft
+        {
+                        parent = DoorFrontLeft,
+
+			model Default
+            {
+                file = hijet100pJDM_ProtectionWindowLeft,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontRight,
+        part ATA2ProtectionWindowFrontRight
+        {
+                        parent = DoorFrontRight, 
+                       
+			model Default
+            {
+                file = hijet100pJDM_ProtectionWindowRight,
+            }
+        }       
+
+
+ 
+
+
+    }
+}
