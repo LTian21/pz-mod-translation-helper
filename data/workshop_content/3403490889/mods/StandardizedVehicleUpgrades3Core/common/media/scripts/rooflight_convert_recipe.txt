@@ -7,7 +7,7 @@ module Base
         Tags = AnySurfaceCraft;Welding,
         category = Metalworking,
         SkillRequired = MetalWelding:2,
-            xpAward = MetalWelding:10,
+        xpAward = MetalWelding:10,
         needTobeLearn = false,
         inputs
         {
@@ -28,7 +28,7 @@ module Base
         Tags = AnySurfaceCraft;Welding,
         category = Metalworking,
         SkillRequired = MetalWelding:2,
-            xpAward = MetalWelding:10,
+        xpAward = MetalWelding:10,
         needTobeLearn = false,
         inputs
         {
@@ -41,4 +41,42 @@ module Base
             item 1 ATA2.ATAFrontRoofLightItem,
         }
     }
+
+	craftRecipe CutHeavyChain
+	{
+       	timedAction = CutWire,
+		time = 270,
+		SkillRequired = MetalWelding:2,
+		tags = InHandCraft;CanBeDoneFromFloor,
+		OnGiveXP:Recipe.OnGiveXP.MetalWelding25,
+       	category = Metalworking,
+		xpAward = MetalWelding:25,
+		inputs
+		{
+			item 1 tags[BoltCutters] mode:keep flags[MayDegradeLight;Prop1],
+			item 1 [Base.HeavyChain],
+		}
+		outputs
+		{
+			item 2 Base.ATAProtectionWheelsChain,
+		}
+	}
+
+	craftRecipe RemoveHeavyChain
+	{
+       	timedAction = CutWire,
+		time = 200,
+		tags = InHandCraft;CanBeDoneFromFloor,
+       	category = Metalworking,
+		inputs
+		{
+			item 1 tags[ViseGrips] mode:keep,
+			item 1 [Base.HeavyChain_Hook],
+		}
+		outputs
+		{
+			item 1 Base.HeavyChain,
+			item 1 Base.LargeHook,
+		}
+	}
 }
