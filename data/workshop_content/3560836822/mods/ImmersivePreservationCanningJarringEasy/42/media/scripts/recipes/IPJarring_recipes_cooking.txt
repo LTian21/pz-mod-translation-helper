@@ -1,0 +1,176 @@
+module Base
+{
+
+	craftRecipe IPJarringMakeJar
+	{
+        timedAction = MixingBowl,
+		Time = 80,
+		NeedToBeLearn = True,
+		OnCreate = Recipe.OnCreate.IPJarringCannedFoodOne,
+		ToolTip = Tooltip_Recipe_CookedPortion,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:10,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy flags[ItemCount],
+			item 1 [Base.JarLid],
+			item 1 [Base.WaterSaucepanPasta;Base.WaterPotPasta;Base.PastaPan;Base.PastaPanCopper;Base.WaterPotRice;Base.WaterSaucepanRice;Base.WaterSaucepanRiceCopper;Base.RicePot;Base.RicePan;Base.PotOfSoup;Base.PotOfSoupRecipe;Base.PotForgedSoupRecipe;Base.PotOfStew;Base.PotForgedStew;Base.PastaPotForged;Base.WaterPotForgedPasta;Base.RicePotForged;Base.WaterPotForgedRice] mappers[jarType;potType] flags[IsCookedFoodItem;InheritCondition;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 1 mapper:jarType flags[DontInheritCondition],
+			item 1 mapper:potType,
+		}
+		itemMapper jarType
+		{
+			Base.IPJarringPastaJar = Base.PastaPan,
+			Base.IPJarringPastaJar = Base.PastaPanCopper,
+			Base.IPJarringPastaJar = Base.PastaPot,
+			Base.IPJarringPastaJar = Base.PastaPotForged,
+			Base.IPJarringPastaJar = Base.WaterPotPasta,
+			Base.IPJarringPastaJar = Base.WaterPotForgedPasta,
+			Base.IPJarringPastaJar = Base.WaterSaucepanPasta,
+			Base.IPJarringPastaJar = Base.WaterSaucepanPastaCopper,
+			Base.IPJarringRiceJar = Base.RicePan,
+			Base.IPJarringRiceJar = Base.RicePot,
+			Base.IPJarringRiceJar = Base.RicePotForged,
+			Base.IPJarringRiceJar = Base.WaterPotRice,
+			Base.IPJarringRiceJar = Base.WaterPotForgedRice,
+			Base.IPJarringRiceJar = Base.WaterSaucepanRice,
+			Base.IPJarringRiceJar = Base.WaterSaucepanRiceCopper,
+			Base.IPJarringSoupJar = Base.PotOfSoup,
+			Base.IPJarringSoupJar = Base.PotOfSoupRecipe,
+			Base.IPJarringSoupJar = Base.PotForgedSoupRecipe,
+			Base.IPJarringStewJar = Base.PotOfStew,
+			Base.IPJarringStewJar = Base.PotForgedStew,
+		}
+		itemMapper potType
+		{
+			Base.Pot = Base.PastaPot,
+			Base.Pot = Base.PotOfSoup,
+			Base.Pot = Base.PotOfSoupRecipe,
+			Base.Pot = Base.PotOfStew,
+			Base.Pot = Base.RicePot,
+			Base.Pot = Base.WaterPotPasta,
+			Base.Pot = Base.WaterPotRice,
+			Base.Saucepan = Base.PastaPan,
+			Base.Saucepan = Base.RicePan,
+			Base.Saucepan = Base.WaterSaucepanPasta,
+			Base.Saucepan = Base.WaterSaucepanRice,
+			Base.SaucepanCopper = Base.WaterSaucepanPastaCopper,
+			Base.SaucepanCopper = Base.WaterSaucepanRiceCopper,
+			Base.PotForged = Base.PastaPotForged,
+			Base.PotForged = Base.RicePotForged,
+			Base.PotForged = Base.WaterPotForgedPasta,
+			Base.PotForged = Base.WaterPotForgedRice,
+			Base.PotForged = Base.PotForgedSoupRecipe,
+			Base.PotForged = Base.PotForgedStew,
+		}
+	}
+	
+	
+			craftRecipe IPJarringOpenJarOfFood
+	{
+        timedAction = Making,
+		Time = 15,
+		OnCreate = Recipe.OnCreate.IPJarringOpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+		inputs
+		{
+			item 1 [Base.IPJarringSoupJar;Base.IPJarringStewJar;Base.IPJarringPastaJar;Base.IPJarringRiceJar] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+		}
+		outputs
+		{
+			item 1 mapper:foodType,
+		}
+		itemMapper foodType
+		{
+			Base.IPJarringPastaJar_Open = Base.IPJarringPastaJar,
+			Base.IPJarringSoupJar_Open =  Base.IPJarringSoupJar,
+			Base.IPJarringStewJar_Open = Base.IPJarringStewJar,
+			Base.IPJarringRiceJar_Open = Base.IPJarringRiceJar,
+		}
+	}
+	
+	
+		craftRecipe IPJarringMake2BowlsOfJars
+	{
+        timedAction = MixingBowl,
+		Time = 40,
+		OnCreate = Recipe.OnCreate.Make2Bowls,
+		ToolTip = Tooltip_Recipe_CookedPortion,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		inputs
+		{
+			item 2 [Base.Bowl;Base.ClayBowl] mode:destroy flags[ItemCount],
+			item 1 [Base.IPJarringSoupJar_Open;Base.IPJarringStewJar_Open;Base.IPJarringPastaJar_Open;Base.IPJarringRiceJar_Open] mappers[bowlType;jarType] flags[InheritCondition;InheritCooked;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 2 mapper:bowlType flags[DontInheritCondition],
+			item 1 mapper:jarType,
+		}
+		itemMapper bowlType
+		{
+			Base.PastaBowl = Base.IPJarringPastaJar_Open,
+			Base.PastaBowlClay = Base.IPJarringPastaJar_Open,
+			Base.RiceBowl = Base.IPJarringRiceJar_Open,
+			Base.RiceBowlClay = Base.IPJarringRiceJar_Open,
+			Base.SoupBowl = Base.IPJarringSoupJar_Open,
+			Base.SoupBowlClay = Base.IPJarringSoupJar_Open,
+			Base.StewBowl = Base.IPJarringStewJar_Open,
+			Base.StewBowlClay = Base.IPJarringStewJar_Open,
+		}
+		itemMapper jarType
+		{
+			Base.EmptyJar = Base.IPJarringPastaJar_Open,
+			Base.EmptyJar = Base.IPJarringSoupJar_Open,
+			Base.EmptyJar = Base.IPJarringStewJar_Open,
+			Base.EmptyJar = Base.IPJarringRiceJar_Open,
+		}
+	}
+	
+	
+			craftRecipe IPJarringMake4BowlsOfJars
+	{
+        timedAction = MixingBowl,
+		Time = 80,
+		OnCreate = Recipe.OnCreate.Make4Bowls,
+		ToolTip = Tooltip_Recipe_CookedPortion,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		inputs
+		{
+			item 4 [Base.Bowl;Base.ClayBowl] mode:destroy flags[ItemCount],
+			item 1 [Base.IPJarringSoupJar_Open;Base.IPJarringStewJar_Open;Base.IPJarringPastaJar_Open;Base.IPJarringRiceJar_Open] mappers[bowlType;jarType] flags[InheritCondition;InheritCooked;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 4 mapper:bowlType flags[DontInheritCondition],
+			item 1 mapper:jarType,
+		}
+		itemMapper bowlType
+		{
+			Base.PastaBowl = Base.IPJarringPastaJar_Open,
+			Base.PastaBowlClay = Base.IPJarringPastaJar_Open,
+			Base.RiceBowl = Base.IPJarringRiceJar_Open,
+			Base.RiceBowlClay = Base.IPJarringRiceJar_Open,
+			Base.SoupBowl = Base.IPJarringSoupJar_Open,
+			Base.SoupBowlClay = Base.IPJarringSoupJar_Open,
+			Base.StewBowl = Base.IPJarringStewJar_Open,
+			Base.StewBowlClay = Base.IPJarringStewJar_Open,
+		}
+		itemMapper jarType
+		{
+			Base.EmptyJar = Base.IPJarringPastaJar_Open,
+			Base.EmptyJar = Base.IPJarringSoupJar_Open,
+			Base.EmptyJar = Base.IPJarringStewJar_Open,
+			Base.EmptyJar = Base.IPJarringRiceJar_Open,
+		}
+	}
+
+}
