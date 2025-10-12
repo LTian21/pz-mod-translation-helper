@@ -32,7 +32,7 @@ def load_config():
         raise ValueError(f"错误：配置文件 '{CONFIG_FILE}' 中缺少必要的配置项: {e}")
 
 def load_json_cache(path: Path) -> dict:
-    """安全地加载JSON缓存文件，并处理旧格式。"""
+    """加载JSON缓存文件，并处理旧格式。"""
     if not path.is_file():
         return {}
     try:
@@ -238,10 +238,8 @@ def main():
         if not removal_map:
             logging.info("全局分析未发现任何重复项，无需清理。")
         else:
-            # 在文件清理前，先根据清理计划更新内存中的索引
             logging.info("\n--- 正在根据清理计划同步更新内存中的全局索引 ---")
             cleaned_count = 0
-            # 只对本次运行中实际处理的Mod ID进行索引清理
             for mod_id in mod_ids_to_process:
                 if mod_id in removal_map:
                     pairs_to_remove = removal_map[mod_id]
@@ -249,7 +247,6 @@ def main():
                         if pair in pair_locations and mod_id in pair_locations[pair]:
                             pair_locations[pair].remove(mod_id)
                             cleaned_count += 1
-                            # 如果移除后列表为空，则删除该键
                             if not pair_locations[pair]:
                                 del pair_locations[pair]
             
@@ -269,8 +266,6 @@ def main():
                     if mod_id in removal_map:
                         logging.info(f"-> 正在清理 output_files 中的目录: {mod_dir.name}")
                         filter_files_in_directory(mod_dir, files_to_filter, removal_map[mod_id])
-                        
-                        # 同步清理 completed_files 目录
                         completed_mod_dir = config["completed_path"] / mod_id
                         if completed_mod_dir.is_dir():
                             logging.info(f"-> 正在同步清理 completed_files 中的目录: {completed_mod_dir.name}")
