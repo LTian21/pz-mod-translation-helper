@@ -252,7 +252,7 @@ def get_translations_as_dict(file_path_or_dir, config):
             
             if key_match:
                 key_part = key_match.group(1).strip()
-                if key_part.startswith("DisplayName_"):
+                if key_part.startswith("DisplayName"):
                     continue
                 value_part = key_match.group(2).strip()
                 if value_part == "" or value_part.startswith('{') or value_part == ",":
@@ -817,7 +817,33 @@ def main():
             json.dump(existing_logs, f, ensure_ascii=False, indent=2)
         logging.info(f"\n增量更新日志已记录到: {update_log_json_path}")
 
-    logging.info("\n--- 所有模组处理完毕，开始生成状态报告 ---")
+    logging.info("\n--- 所有模组处理完毕，开始执行后处理脚本 ---")
+    try:
+        post_process_script_path = Path('scripts/post_process_filter.py')
+        if post_process_script_path.is_file():
+            if current_run_mod_ids:
+                ids_json = json.dumps(current_run_mod_ids)
+                result = subprocess.run(
+                    ['python', str(post_process_script_path), ids_json],
+                    capture_output=True, text=True, check=False, encoding='utf-8'
+                )
+                logging.info("后处理脚本输出:\n" + result.stdout)
+                if result.stderr:
+                    logging.warning("后处理脚本错误输出:\n" + result.stderr)
+            else:
+                logging.info("本次运行没有需要处理的Mod，跳过后处理脚本。")
+        else:
+            logging.warning(f"未找到后处理脚本: {post_process_script_path}")
+    except FileNotFoundError:
+        logging.error("错误: 'python' 命令未找到。无法执行后处理脚本。")
+    except subprocess.CalledProcessError as e:
+        logging.error(f"执行后处理脚本失败: {e}")
+        logging.error("脚本输出:\n" + e.stdout)
+        logging.error("脚本错误输出:\n" + e.stderr)
+    except Exception as e:
+        logging.error(f"执行后处理时发生未知错误: {e}")
+
+    logging.info("\n--- 开始生成状态报告 ---")
     try:
         report_script_path = Path('scripts/generate_status.py')
         if report_script_path.is_file():
