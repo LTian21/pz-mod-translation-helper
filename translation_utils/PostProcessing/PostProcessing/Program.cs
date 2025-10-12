@@ -321,7 +321,7 @@ namespace PostProcessing
                 
                 try
                 {
-                    using (var writer = new StreamWriter(filePath, false))
+                    using (var writer = new StreamWriter(filePath, true))
                     {
                         string? currentModId = null;
                         
