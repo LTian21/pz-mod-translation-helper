@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-10-11 12:19:24 UTC+08:00`*
+*最后更新于：`2025-10-12 12:19:06 UTC+08:00`*
 
 ---
 
@@ -46,6 +46,7 @@
 | ST Additions - Pry Open | 3579640010 | 7 |
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 7 |
 | [B42] School's Out: Anime-Style Student Uniforms | 3404301631 | 7 |
+| Realistic Car Physics [B42] | 3559765660 | 6 |
 | '85 Oldsmobile Delta 88 | 3418253716 | 6 |
 | '85 Buick LeSabre | 3418252689 | 6 |
 | '85 Chevrolet Caprice / Impala | 3413704851 | 6 |
@@ -149,7 +150,7 @@
 | Willowbrook Bastion! | 3479667649 | 0 |
 | Navigation | 3416036048 | 0 |
 | Faster Tree Chopping (was: No Stress From Tree Chopping) | 3460704724 | 0 |
-| True Crawl B42 | 3410989950 | 0 |
+| True Crawl 3.0 - Fixed [B42] | 3410989950 | 0 |
 | [B42/41] Reactive Sound Events | 2969551071 | 0 |
 | Ranger Operator | 3452171674 | 0 |
 | US Military Pack [BUILD 41/42] | 612100872 | 0 |
@@ -336,7 +337,6 @@
 | [A&M] New Frontier: Hair Salon | 3387569160 | 0 |
 | Starlit Library | 3378285185 | 0 |
 | Fridges Off! | 2853974107 | 0 |
-| Realistic Car Physics [B42] | 3559765660 | 0 |
 | Spongie's Character Customisation | 3414634809 | 0 |
 | More Car Features + Spawn Zones Expansion | 3520758551 | 0 |
 | [B42] Extended Battery Life | 3387462212 | 0 |
