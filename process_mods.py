@@ -252,7 +252,7 @@ def get_translations_as_dict(file_path_or_dir, config):
             
             if key_match:
                 key_part = key_match.group(1).strip()
-                if key_part.startswith("DisplayName_"):
+                if key_part.startswith("DisplayName"):
                     continue
                 value_part = key_match.group(2).strip()
                 if value_part == "" or value_part.startswith('{') or value_part == ",":
