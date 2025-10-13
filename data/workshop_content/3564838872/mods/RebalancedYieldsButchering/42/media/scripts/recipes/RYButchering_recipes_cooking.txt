@@ -1,0 +1,37 @@
+module Base
+{
+
+    craftRecipe RYButcheringHalveCut
+    {
+        timedAction = SliceMeat_Surface,
+        time = 50,
+        OnTest = Recipe.OnTest.RYButcheringCutFillet,
+		OnCreate = Recipe.OnCreate.RYButcheringHalveCutFix,
+        Tags = InHandCraft;CanBeDoneFromFloor;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[IsNotDull;SharpnessCheck],
+            item 1 [Base.Steak;Base.Beef;Base.PorkChop;Base.Pork;Base.MuttonChop;Base.Venison;Base.Rabbitmeat;Base.Smallanimalmeat] mappers[meatType] flags[InheritCooked;InheritFood;ItemCount;InheritWeight],
+        }
+
+        outputs
+        {
+            item 2 mapper:meatType,
+        }
+
+        itemMapper meatType
+        {
+            Base.Steak = Base.Steak,
+            Base.Beef = Base.Beef,
+            Base.PorkChop = Base.PorkChop,
+            Base.Pork = Base.Pork,
+            Base.MuttonChop = Base.MuttonChop,
+            Base.Venison = Base.Venison,
+            Base.Rabbitmeat = Base.Rabbitmeat,
+            Base.Smallanimalmeat = Base.Smallanimalmeat,
+        }
+    }
+
+}
