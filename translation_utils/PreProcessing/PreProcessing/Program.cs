@@ -9,12 +9,12 @@ namespace PreProcessing
     class Program
     {
         //翻译条目
-        struct TranslationEntry
+        class TranslationEntry
         {
-            public string OriginalText; // 原文
-            public string SChiinese; // 简体中文
-            public bool IsSChineseTranslated; // 是否已翻译
-            public List<string> Comment; // 注释
+            public string OriginalText { get; set; } = "";
+            public string SChiinese { get; set; } = "";
+            public bool IsSChineseTranslated { get; set; } = false;
+            public List<string> Comment { get; set; } = new();
         }
 
         //存储ModInfo的map，key为ModId value为ModName
@@ -183,7 +183,10 @@ namespace PreProcessing
                             var entry = modTranslationsCopy[currentModId][matchKey];
                             entry.Comment.AddRange(tempComments);
                             tempComments.Clear();
-                            entry.SChiinese = matchText;
+                            if (!string.IsNullOrEmpty(matchText))
+                            {
+                                entry.SChiinese = matchText;
+                            }
                             modTranslationsCopy[currentModId][matchKey] = entry;
                         }
                     }
@@ -238,7 +241,10 @@ namespace PreProcessing
                         var entry = modTranslationsCopy[currentModId][matchKey];
                         entry.Comment.AddRange(tempComments);
                         tempComments.Clear();
-                        entry.SChiinese = matchText;
+                        if (!string.IsNullOrEmpty(matchText))
+                        {
+                            entry.SChiinese = matchText;
+                        }
 
                         modTranslationsCopy[currentModId][matchKey] = entry;
                     }
@@ -360,6 +366,33 @@ namespace PreProcessing
                     }
                 }
             }
+
+            // 尝试清理modTranslationsCopy中具有相同key以及英文原文的条目，只保留一个
+            HashSet<string> uniqueEntries = new HashSet<string>();
+            var modTranslationsUnique = new Dictionary<string, Dictionary<string, TranslationEntry>>();
+            const string SEPARATOR = @"|^Wq7$~d@Zx\\R#pF!8&Jk1N*G2u%_Vm?|"; //定义一个不可能出现在key或文本中的分隔符
+            foreach (var modId in modTranslationsCopy.Keys)
+            {
+                foreach (var entry in modTranslationsCopy[modId])
+                {
+                    //增加分隔符，虽然运算量增大，但能够做到保证唯一性的同时还可以反向拆分成key和文本，暂时用不到，可能后续会有用处，即便永远用不到也无妨
+                    string uniqueKey = entry.Key + SEPARATOR + entry.Value.OriginalText;
+                    if (!uniqueEntries.Contains(uniqueKey))
+                    {
+                        uniqueEntries.Add(uniqueKey);
+                        if (!modTranslationsUnique.ContainsKey(modId))
+                        {
+                            modTranslationsUnique[modId] = new Dictionary<string, TranslationEntry>();
+                        }
+                        modTranslationsUnique[modId][entry.Key] = entry.Value;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"::warning:: Duplicate entry found and removed for mod {modId}, key: {entry.Key}, original text: {entry.Value.OriginalText}");
+                    }
+                }
+            }
+            modTranslationsCopy = modTranslationsUnique;
 
             //打开repoDir\data\translations_CN.txt，清空文件，写入新内容
             using (var writer = new StreamWriter(outputTranslationFilePath, false))

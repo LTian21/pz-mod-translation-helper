@@ -142,16 +142,20 @@ namespace PostProcessing
             }
             //输出有冲突的key到文件，同时向控制台输出警告信息
             string conflictFilePath = Path.Combine(repoDir, "warnings", "conflict_keys.txt");
+            int conflictCount = 0;
+            HashSet<string> conflictModIds = new HashSet<string>();
             using (var writer = new StreamWriter(conflictFilePath, false))
             {
                 foreach (var kvp in conflictKeys)
                 {
                     if (kvp.Value.Count > 1)
                     {
+                        conflictCount++;
                         string conflictKeyInfo = "";
                         writer.WriteLine($"Conflict key: {kvp.Key}");
                         foreach (var entry in kvp.Value)
                         {
+                            conflictModIds.Add(entry.ModId);
                             conflictKeyInfo += entry.ModId + "; ";
                             writer.WriteLine($"{entry.ModId}::EN : \"{entry.OriginalText}\"");
                             writer.WriteLine($"{entry.ModId}::CN : \"{entry.SChiinese}\"");
@@ -160,6 +164,15 @@ namespace PostProcessing
                         writer.WriteLine();
                     }
                 }
+                writer.WriteLine();
+                writer.WriteLine($"Total conflict keys Count: {conflictCount}");
+                writer.WriteLine();
+                writer.WriteLine($"Total conflict mod IDs (Total count {conflictModIds.Count}):");
+                foreach (var modId in conflictModIds)
+                {
+                    writer.WriteLine(modId);
+                }
+                writer.WriteLine();
             }
 
             // 读取 key_source_map.json 文件
