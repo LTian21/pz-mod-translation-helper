@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-10-15 21:57:32 UTC+08:00`*
+*最后更新于：`2025-10-15 22:53:43 UTC+08:00`*
 
 ---
 
@@ -14,6 +14,7 @@
 | Customizable Containers [B42/41] | 2719850086 | 274 |
 | Immersive Lore | 3000924731 | 273 |
 | [B42] Ogrim Mod's - Sewing Workbranch | 3555588616 | 233 |
+| Somewhat Traits [B42 Compatible] | 3498347699 | 171 |
 | (B42) Immersive Roleplay Professions and Traits | 3387474156 | 114 |
 | Hybrid Gun Repair | 3562222835 | 106 |
 | Guns of 93: B42 Test Build (Unstable) | 3183820077 | 102 |
