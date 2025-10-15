@@ -54,7 +54,7 @@ jobs:
           fi
 
       - name: Create, Approve, and Merge CI PR
-        if: steps.prep_ci_pr.outputs.should_create_pr == 'true'
+        if: github.event_name != 'pull_request' && steps.prep_ci_pr.outputs.should_create_pr == 'true'
         uses: ./.github/actions/create-approve-merge-pr
         with:
           branch-name: ci/auto-update-${{ github.run_id }}
