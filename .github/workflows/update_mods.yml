@@ -450,7 +450,16 @@ jobs:
           title: '🤖 自动化Mod更新与报告 [${{ env.TODAY }}]'
           body-path: "pr_body.md"
           labels: "automated-update, bot"
-          reviewers: ${{ github.actor }}
+
+      - name: Approve PR with Approver Bot
+        if: steps.cpr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.APPROVER_BOT_PAT }} 
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "正在批准 PR #${PR_NUMBER} ..."
+          gh pr review --approve "$PR_NUMBER"
+          echo "✅ 已批准 PR #${PR_NUMBER}。"
 
       - name: Enable auto-merge for the PR
         if: steps.cpr.outputs.pull-request-number != ''
