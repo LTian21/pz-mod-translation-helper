@@ -10,11 +10,11 @@ namespace PostProcessing
     class Program
     {
         //翻译条目
-        struct TranslationEntry
+        class TranslationEntry
         {
-            public string ModId;
-            public string OriginalText; // 原文
-            public string SChiinese; // 简体中文
+            public string ModId { get; set; } = "";
+            public string OriginalText { get; set; } = "";
+            public string SChiinese { get; set; } = "";
         }
         //存储翻译条目
         static Dictionary<string, Dictionary<string, TranslationEntry>> ModTranslations = new Dictionary<string, Dictionary<string, TranslationEntry>>();
@@ -73,6 +73,47 @@ namespace PostProcessing
                 throw new DirectoryNotFoundException($"Error: repo not found");
             }
 
+            // 记录冲突的键
+            var conflictKeys = new Dictionary<string, List<TranslationEntry>>();
+            //读取 repoDir\translation_utils\key_source_vanilla.json
+            string vanillaSourcePath = Path.Combine(repoDir, "translation_utils", "key_source_vanilla.json");
+            if (File.Exists(vanillaSourcePath))
+            {
+                try
+                {
+                    string jsonContent = File.ReadAllText(vanillaSourcePath);
+                    var vanillaTranslations = JsonSerializer.Deserialize<Dictionary<string, VanillaTranslation>>(jsonContent, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    }) ?? new Dictionary<string, VanillaTranslation>();
+
+                    Console.WriteLine($"Loaded vanilla translation source with {vanillaTranslations.Count} entries.");
+
+                    // 将 vanilla 翻译存入冲突列表，使用 "0000000000" 作为 modId
+                    const string VANILLA_MOD_ID = "0000000000";
+                    foreach (var vanillaEntry in vanillaTranslations)
+                    {
+                        if (!conflictKeys.ContainsKey(vanillaEntry.Key))
+                        {
+                            conflictKeys[vanillaEntry.Key] = new List<TranslationEntry>();
+                        }
+                        conflictKeys[vanillaEntry.Key].Add(new TranslationEntry(){ 
+                            ModId = VANILLA_MOD_ID,
+                            OriginalText = vanillaEntry.Value.EN,
+                            SChiinese = vanillaEntry.Value.CN
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"::warning:: Unable to load vanilla translation source file {vanillaSourcePath}: {ex.Message}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"::warning:: Vanilla translation source file does not exist: {vanillaSourcePath}");
+            }
+
             // 拼接  translation 文件路径
             string translationFilePath = Path.Combine(repoDir, "data", "translations_CN.txt");
             //检查repoDir\data\translations_CN.txt是否存在，不存在则爬出异常并退出
@@ -82,7 +123,6 @@ namespace PostProcessing
             }
             //打开repoDir\data\translations_CN.txt，读取内容
             var linesInFile = File.ReadAllLines(translationFilePath);
-            var conflictKeys = new Dictionary<string,List<TranslationEntry>>();
             foreach (var line in linesInFile)
             {
                 //忽略空行和注释行
@@ -140,7 +180,66 @@ namespace PostProcessing
             {
                 Directory.CreateDirectory(warningsDir);
             }
-            //输出有冲突的key到文件，同时向控制台输出警告信息
+
+            //移除所有不存在冲突的key
+            var keysToRemove = new List<string>();
+            foreach (var kvp in conflictKeys)
+            {
+                if (kvp.Value.Count <= 1)
+                {
+                    keysToRemove.Add(kvp.Key);
+                }
+            }
+            foreach (var key in keysToRemove)
+            {
+                conflictKeys.Remove(key);
+            }
+            keysToRemove.Clear();
+
+            //检测冲突的key，如果同一个key在不同mod中有相同的译文，则不视为冲突，将这个key输出到\repoDir\warnings\conflict_keys_with_same_translations_CN.txt文件，并从冲突列表中移除
+            string sameTranslationFilePath = Path.Combine(repoDir, "warnings", "conflict_keys_with_same_translations_CN.txt");
+            using (var writer = new StreamWriter(sameTranslationFilePath, false))
+            {
+                foreach (var kvp in conflictKeys)
+                {
+                    if (kvp.Value.Count > 1)
+                    {
+                        // 检查所有译文是否相同（忽略空译文）
+                        bool allSame = true;
+                        for (int i = 0; i < kvp.Value.Count - 1; i++)
+                        {
+                            if (!kvp.Value[i].SChiinese.Equals(kvp.Value[i + 1].SChiinese))
+                            {
+                                allSame = false;
+                                break;
+                            }
+                        }
+
+                        if (allSame)
+                        {
+                            keysToRemove.Add(kvp.Key);
+                            writer.WriteLine($"Same translation keys: {kvp.Key}");
+                            foreach (var entry in kvp.Value)
+                            {
+                                writer.WriteLine($"\t{entry.ModId}::EN : \"{entry.OriginalText}\"");
+                                writer.WriteLine($"\t{entry.ModId}::CN : \"{entry.SChiinese}\"");
+                            }
+                            writer.WriteLine();
+                        }
+                    }
+                }
+                writer.WriteLine($"Total keys with same translations: {keysToRemove.Count}");
+            }
+            
+            // 从冲突列表中移除这些键
+            foreach (var key in keysToRemove)
+            {
+                conflictKeys.Remove(key);
+            }
+            
+            Console.WriteLine($"Removed {keysToRemove.Count} keys with identical translations from conflict list.");
+
+            // 输出剩余有冲突的key到文件，同时向控制台输出警告信息
             string conflictFilePath = Path.Combine(repoDir, "warnings", "conflict_keys.txt");
             int conflictCount = 0;
             HashSet<string> conflictModIds = new HashSet<string>();
@@ -157,8 +256,8 @@ namespace PostProcessing
                         {
                             conflictModIds.Add(entry.ModId);
                             conflictKeyInfo += entry.ModId + "; ";
-                            writer.WriteLine($"{entry.ModId}::EN : \"{entry.OriginalText}\"");
-                            writer.WriteLine($"{entry.ModId}::CN : \"{entry.SChiinese}\"");
+                            writer.WriteLine($"\t{entry.ModId}::EN : \"{entry.OriginalText}\"");
+                            writer.WriteLine($"\t{entry.ModId}::CN : \"{entry.SChiinese}\"");
                         }
                         Console.WriteLine($"::warning:: Conflict key found: {kvp.Key}, mod ID: {conflictKeyInfo}");
                         writer.WriteLine();
@@ -380,5 +479,10 @@ namespace PostProcessing
             // 匹配以 //, #, /*, */, * 或 -- 开头的注释行（忽略前导空格和\t等空白字符）
             return Regex.IsMatch(line, @"^\s*(//|#|/\*|\*/|\*|--)");
         }
+    }
+    public class VanillaTranslation
+    {
+        public string EN { get; set; } = "";
+        public string CN { get; set; } = "";
     }
 }

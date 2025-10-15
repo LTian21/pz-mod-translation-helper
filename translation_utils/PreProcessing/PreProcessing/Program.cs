@@ -371,6 +371,52 @@ namespace PreProcessing
             HashSet<string> uniqueEntries = new HashSet<string>();
             var modTranslationsUnique = new Dictionary<string, Dictionary<string, TranslationEntry>>();
             const string SEPARATOR = @"|^Wq7$~d@Zx\\R#pF!8&Jk1N*G2u%_Vm?|"; //定义一个不可能出现在key或文本中的分隔符
+
+            //读取 repoDir\translation_utils\key_source_vanilla.json
+            string vanillaSourcePath = Path.Combine(repoDir, "translation_utils", "key_source_vanilla.json");
+            if (File.Exists(vanillaSourcePath))
+            {
+                try
+                {
+                    string jsonContent = File.ReadAllText(vanillaSourcePath);
+                    var vanillaTranslations = JsonSerializer.Deserialize<Dictionary<string, VanillaTranslation>>(jsonContent, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    }) ?? new Dictionary<string, VanillaTranslation>();
+                    
+                    Console.WriteLine($"Loaded vanilla translation source with {vanillaTranslations.Count} entries.");
+
+                    // 将 vanilla 翻译存入冲突列表，使用 "0000000000" 作为 modId
+                    const string VANILLA_MOD_ID = "0000000000";
+                    if (!modInfos.ContainsKey(VANILLA_MOD_ID))
+                    {
+                        modInfos[VANILLA_MOD_ID] = "Vanilla Game";
+                    }
+                    
+                    foreach (var vanillaEntry in vanillaTranslations)
+                    {
+                        string uniqueKey = vanillaEntry.Key + SEPARATOR + vanillaEntry.Value.EN;
+
+                        if (!uniqueEntries.Contains(uniqueKey))
+                        {
+                            uniqueEntries.Add(uniqueKey);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"::warning:: Duplicate vanilla entry found and removed for mod {VANILLA_MOD_ID}, key: {vanillaEntry.Key}, original text: {vanillaEntry.Value.EN}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"::warning:: Unable to load vanilla translation source file {vanillaSourcePath}: {ex.Message}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"::warning:: Vanilla translation source file does not exist: {vanillaSourcePath}");
+            }
+
             foreach (var modId in modTranslationsCopy.Keys)
             {
                 foreach (var entry in modTranslationsCopy[modId])
@@ -764,5 +810,11 @@ namespace PreProcessing
         public string Key { get; set; } = "";
         public string Find { get; set; } = "";
         public string Replace { get; set; } = "";
+    }
+
+    public class VanillaTranslation
+    {
+        public string EN { get; set; } = "";
+        public string CN { get; set; } = "";
     }
 }
