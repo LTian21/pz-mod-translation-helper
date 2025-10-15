@@ -17,7 +17,7 @@ CLASSIFICATION_MAP_FILE = BASE_DIR / 'translation_utils' / 'unknown_classificati
 # 匹配 '-- 1234567890 --' 格式的 Mod ID 行
 MOD_ID_PATTERN = re.compile(r"^-+\s*(\d+)\s*-+")
 # 匹配 'key = "value"' 行，并提取 key
-KEY_PATTERN = re.compile(r"^\s*([\w\s.\[\]()-]+?)\s*=")
+KEY_PATTERN = re.compile(r"^\s*([\w\s.\[\]()#-]+?)\s*=")
 
 def classify_unknown_translations():
     """
