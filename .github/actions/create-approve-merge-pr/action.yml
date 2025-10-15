@@ -1,0 +1,86 @@
+# .github/actions/create-approve-merge-pr/action.yml
+
+name: '创建、批准并自动合并PR'
+description: '一个用于创建PR、批准它并启用自动合并的复合Action。'
+
+inputs:
+  branch-name:
+    description: '用于创建PR的分支名称。'
+    required: true
+  pr-title:
+    description: 'PR的标题。'
+    required: true
+  pr-body-path:
+    description: 'PR正文内容的文件路径。'
+    required: true
+  commit-message:
+    description: '变更的提交信息。'
+    required: true
+  labels:
+    description: '要添加到PR的标签列表（逗号分隔）。'
+    required: false
+  # 从Secrets传入的认证信息
+  app-id:
+    description: 'GitHub App的ID。'
+    required: true
+  installation-id:
+    description: 'GitHub App的安装ID。'
+    required: true
+  private-key:
+    description: 'GitHub App的私钥。'
+    required: true
+  approver-token:
+    description: '用于批准PR的机器人PAT。'
+    required: true
+
+outputs:
+  pull-request-number:
+    description: "已创建的拉取请求编号。"
+    value: ${{ steps.cpr.outputs.pull-request-number }}
+  pull-request-url:
+    description: "已创建的拉取请求URL。"
+    value: ${{ steps.cpr.outputs.pull-request-url }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Generate a token from GitHub App
+      id: generate_app_token
+      uses: tibdex/github-app-token@v1
+      with:
+        app_id: ${{ inputs.app-id }}
+        installation_id: ${{ inputs.installation-id }}
+        private_key: ${{ inputs.private-key }}
+
+    - name: Create Pull Request
+      id: cpr
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ steps.generate_app_token.outputs.token }}
+        commit-message: ${{ inputs.commit-message }}
+        branch: ${{ inputs.branch-name }}
+        title: ${{ inputs.pr-title }}
+        body-path: ${{ inputs.pr-body-path }}
+        labels: ${{ inputs.labels }}
+
+    - name: Approve PR with Approver Bot
+      if: steps.cpr.outputs.pull-request-number != ''
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.approver-token }}
+        PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+      run: |
+        echo "正在批准 PR #${PR_NUMBER} ..."
+        gh pr review --approve "$PR_NUMBER"
+        echo "✅ 已批准 PR #${PR_NUMBER}。"
+
+    - name: Enable auto-merge for the PR
+      if: steps.cpr.outputs.pull-request-number != ''
+      shell: bash
+      env:
+        GH_TOKEN: ${{ steps.generate_app_token.outputs.token }}
+        PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+      run: |
+        echo "为 PR #${PR_NUMBER} 启用自动合并..."
+        gh pr merge --auto --squash "$PR_NUMBER"
+        echo "自动合并已成功启用。当所有检查通过后，GitHub将会自动合并此PR。"

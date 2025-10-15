@@ -38,9 +38,6 @@ jobs:
         with:
           install-jq: 'true'
 
-      - name: Setup SteamCMD
-        uses: CyberAndrii/setup-steamcmd@v1
-
       - name: Handle Manual Trigger Override
         id: manual_check
         if: github.event.inputs.mod_id_override != ''
@@ -422,22 +419,13 @@ jobs:
         id: set_date
         run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV    
       
-      - name: Generate a token from GitHub App
+      - name: Create, Approve, and Merge PR
         if: steps.prep_pr.outputs.should_create_pr == 'true'
-        id: generate_app_token
-        uses: tibdex/github-app-token@v1
+        uses: ./.github/actions/create-approve-merge-pr/action.yml
         with:
-          app_id: ${{ secrets.AUTO_MERGE_BOT_APP_ID }}
-          installation_id: ${{ secrets.AUTO_MERGE_BOT_INSTALLATION_ID }}
-          private_key: ${{ secrets.AUTO_MERGE_BOT_APP_PRIVATE_KEY }}
-
-      - name: Create Pull Request
-        if: steps.prep_pr.outputs.should_create_pr == 'true'
-        uses: peter-evans/create-pull-request@v6
-        id: cpr
-        with:
-          # token: ${{ secrets.AUTOMERGE_PAT }}
-          token: ${{ steps.generate_app_token.outputs.token }}
+          branch-name: bot/auto-update-${{ github.run_id }}
+          pr-title: '🤖 自动化Mod更新与报告 [${{ env.TODAY }}]'
+          pr-body-path: "pr_body.md"
           commit-message: |
             Chore(自动化): 更新Mod并生成报告
             
@@ -446,30 +434,11 @@ jobs:
             - 生成了新的状态报告 (STATUS.md, INTERNAL_STATUS.md, MOD_TODO_STATUS.md)。
             - 更新了增量日志 (data/logs/update_log.json)。
             - 存档了新的基线日志 (如果适用)。
-          branch: bot/auto-update-${{ github.run_id }}
-          title: '🤖 自动化Mod更新与报告 [${{ env.TODAY }}]'
-          body-path: "pr_body.md"
           labels: "automated-update, bot"
-
-      - name: Approve PR with Approver Bot
-        if: steps.cpr.outputs.pull-request-number != ''
-        env:
-          GH_TOKEN: ${{ secrets.APPROVER_BOT_PAT }} 
-          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
-        run: |
-          echo "正在批准 PR #${PR_NUMBER} ..."
-          gh pr review --approve "$PR_NUMBER"
-          echo "✅ 已批准 PR #${PR_NUMBER}。"
-
-      - name: Enable auto-merge for the PR
-        if: steps.cpr.outputs.pull-request-number != ''
-        env:
-          GH_TOKEN: ${{ steps.generate_app_token.outputs.token }}
-          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
-        run: |
-          echo "为 PR #${PR_NUMBER} 启用自动合并..."
-          gh pr merge --auto --squash "$PR_NUMBER"
-          echo "自动合并已成功启用。当所有检查通过后，GitHub将会自动合并此PR。"
+          app-id: ${{ secrets.AUTO_MERGE_BOT_APP_ID }}
+          installation-id: ${{ secrets.AUTO_MERGE_BOT_INSTALLATION_ID }}
+          private-key: ${{ secrets.AUTO_MERGE_BOT_APP_PRIVATE_KEY }}
+          approver-token: ${{ secrets.APPROVER_BOT_PAT }}
 
       # - name: Approve the auto-generated PR
       #   if: steps.cpr.outputs.pull-request-number != ''
