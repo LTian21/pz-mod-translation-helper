@@ -421,13 +421,23 @@ jobs:
       - name: Set Today's Date
         id: set_date
         run: echo "TODAY=$(date +'%Y-%m-%d')" >> $GITHUB_ENV    
+      
+      - name: Generate a token from GitHub App
+        if: steps.prep_pr.outputs.should_create_pr == 'true'
+        id: generate_app_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.AUTO_MERGE_BOT_APP_ID }}
+          installation_id: ${{ secrets.AUTO_MERGE_BOT_INSTALLATION_ID }}
+          private_key: ${{ secrets.AUTO_MERGE_BOT_APP_PRIVATE_KEY }}
 
       - name: Create Pull Request
         if: steps.prep_pr.outputs.should_create_pr == 'true'
         uses: peter-evans/create-pull-request@v6
         id: cpr
         with:
-          token: ${{ secrets.AUTOMERGE_PAT }}
+          # token: ${{ secrets.AUTOMERGE_PAT }}
+          token: ${{ steps.generate_app_token.outputs.token }}
           commit-message: |
             Chore(自动化): 更新Mod并生成报告
             
@@ -442,25 +452,35 @@ jobs:
           labels: "automated-update, bot"
           reviewers: ${{ github.actor }}
 
-      - name: Approve the auto-generated PR
-        if: steps.cpr.outputs.pull-request-number != ''
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
-        run: |
-          echo "自动批准由本工作流创建的 PR #${PR_NUMBER}..."
-          gh pr review --approve "$PR_NUMBER"
-          echo "批准成功。"
-
       - name: Enable auto-merge for the PR
         if: steps.cpr.outputs.pull-request-number != ''
         env:
-          GH_TOKEN: ${{ secrets.AUTOMERGE_PAT }}
+          GH_TOKEN: ${{ steps.generate_app_token.outputs.token }}
           PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
         run: |
           echo "为 PR #${PR_NUMBER} 启用自动合并..."
           gh pr merge --auto --squash "$PR_NUMBER"
           echo "自动合并已成功启用。当所有检查通过后，GitHub将会自动合并此PR。"
+
+      # - name: Approve the auto-generated PR
+      #   if: steps.cpr.outputs.pull-request-number != ''
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+      #   run: |
+      #     echo "自动批准由本工作流创建的 PR #${PR_NUMBER}..."
+      #     gh pr review --approve "$PR_NUMBER"
+      #     echo "批准成功。"
+
+      # - name: Enable auto-merge for the PR
+      #   if: steps.cpr.outputs.pull-request-number != ''
+      #   env:
+      #     GH_TOKEN: ${{ secrets.AUTOMERGE_PAT }}
+      #     PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+      #   run: |
+      #     echo "为 PR #${PR_NUMBER} 启用自动合并..."
+      #     gh pr merge --auto --squash "$PR_NUMBER"
+      #     echo "自动合并已成功启用。当所有检查通过后，GitHub将会自动合并此PR。"
 
       - name: Prepare Issue Body on Failure
         if: failure()
