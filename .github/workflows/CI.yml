@@ -46,6 +46,7 @@ jobs:
           git diff --cached --quiet || git commit -m "Update translation files [skip ci]"
 
       - name: Create Pull Request
+        id: cpr
         if: github.event_name != 'pull_request'
         uses: peter-evans/create-pull-request@v6
         with:
@@ -62,4 +63,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pull-request: ${{ steps.cpr.outputs.pull-request-number }}
-          method: rebase   # 可以用 squash 或 rebase，rebase最干净
+          method: rebase
