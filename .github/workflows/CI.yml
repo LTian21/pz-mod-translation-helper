@@ -45,28 +45,40 @@ jobs:
           git add -A
           git diff --cached --quiet || git commit -m "Update translation files [skip ci]"
 
+      - name: Generate a token from GitHub App
+        if: steps.prep_pr.outputs.should_create_pr == 'true'
+        id: generate_app_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.AUTO_MERGE_BOT_APP_ID }}
+          installation_id: ${{ secrets.AUTO_MERGE_BOT_INSTALLATION_ID }}
+          private_key: ${{ secrets.AUTO_MERGE_BOT_APP_PRIVATE_KEY }}
+
       - name: Create Pull Request
         id: cpr
         if: github.event_name != 'pull_request'
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_app_token.outputs.token }}
           branch: ci/auto-update
           commit-message: "Update translation files [skip ci]"
           title: "CI Auto Update"
           body: "This PR was created automatically by the CI workflow."
           delete-branch: true
 
-      - name: Auto approve
+      - name: Auto Approve PR
         if: github.event_name != 'pull_request' && steps.cpr.outputs.pull-request-operation == 'created'
-        run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.APPROVER_BOT_PAT }} 
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+        run: gh pr review --approve "$PR_NUMBER"
 
       - name: Enable Pull Request Automerge
         if: github.event_name != 'pull_request' && steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_app_token.outputs.token }}
           pull-request-number: ${{ steps.cpr.outputs['pull-request-number'] }}
           merge-method: rebase
+          merge-commit-message: "Update translation files [skip ci]"
