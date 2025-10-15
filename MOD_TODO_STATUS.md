@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-10-14 15:01:17 UTC+08:00`*
+*最后更新于：`2025-10-15 12:20:30 UTC+08:00`*
 
 ---
 
@@ -27,6 +27,7 @@
 | Project Summer Car [B42] | 3564950449 | 46 |
 | [B42]Zevon's Medieval Armory | 3540834058 | 46 |
 | Authentic Z | 2335368829 | 42 |
+| Red Days | 3516166810 | 40 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 40 |
 | that DAMN Library | 3171167894 | 37 |
 | [B42] Better Sorting | 3413005308 | 32 |
@@ -53,7 +54,6 @@
 | [OUTDATED] Support Corps [B42] Sweet-release Update | 3409836763 | 7 |
 | [B42] School's Out: Anime-Style Student Uniforms | 3404301631 | 7 |
 | darlak's H.E.C.U. | 3452711271 | 7 |
-| Red Days | 3516166810 | 6 |
 | Realistic Car Physics [B42] | 3559765660 | 6 |
 | '85 Oldsmobile Delta 88 | 3418253716 | 6 |
 | '85 Buick LeSabre | 3418252689 | 6 |
