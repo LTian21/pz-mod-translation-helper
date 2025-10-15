@@ -791,6 +791,38 @@ def main():
     else:
         logging.info(f"未找到正则表达式覆盖文件 '{regex_overrides_path.name}'，跳过。")
 
+    logging.info("\n--- 正在合并手动分类的键来源 ---")
+    manual_classification_path = Path('translation_utils') / 'unknown_classification_map.json'
+    if manual_classification_path.is_file():
+        try:
+            with open(manual_classification_path, 'r', encoding='utf-8') as f:
+                manual_map = json.load(f)
+            
+            update_count = 0
+            for mod_id, keys_map in manual_map.items():
+                if mod_id not in global_key_source_map:
+                    global_key_source_map[mod_id] = {}
+                
+                for key, source in keys_map.items():
+                    # 只合并那些不是占位符的值
+                    if source and not source.startswith("CLASSIFY_UNKNOWN_"):
+                        # 如果手动分类的值与自动生成的值不同，则进行覆盖并计数
+                        if global_key_source_map[mod_id].get(key) != source:
+                            global_key_source_map[mod_id][key] = source
+                            update_count += 1
+            
+            if update_count > 0:
+                logging.info(f"  -> 成功合并/更新了 {update_count} 个来自手动分类的键来源。")
+            else:
+                logging.info("  -> 未发现需要合并的手动分类条目。")
+
+        except json.JSONDecodeError:
+            logging.error(f"错误：手动分类文件 '{manual_classification_path.name}' 格式无效，已跳过合并。")
+        except Exception as e:
+            logging.error(f"读取或应用手动分类文件时发生错误: {e}")
+    else:
+        logging.info(f"未找到手动分类文件 '{manual_classification_path.name}'，跳过合并。")
+
     try:
         with open(key_source_map_path, 'w', encoding='utf-8') as f:
             json.dump(global_key_source_map, f, ensure_ascii=False, indent=2)
