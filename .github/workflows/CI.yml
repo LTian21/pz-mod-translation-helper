@@ -58,9 +58,10 @@ jobs:
           delete-branch: true
 
       - name: Auto Merge PR
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && steps.cpr.outputs.pull-request-number
         uses: peter-evans/merge-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pull-request: ${{ steps.cpr.outputs.pull-request-number }}
-          method: rebase
+          method: rebase       # 使用 rebase，保留原 commit
+          merge-commit-message: commit-message   # 保留原 commit 信息
