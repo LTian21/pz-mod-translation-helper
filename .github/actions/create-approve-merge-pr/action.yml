@@ -19,7 +19,6 @@ inputs:
   labels:
     description: '要添加到PR的标签列表（逗号分隔）。'
     required: false
-  # 从Secrets传入的认证信息
   app-id:
     description: 'GitHub App的ID。'
     required: true
@@ -63,24 +62,50 @@ runs:
         body-path: ${{ inputs.pr-body-path }}
         labels: ${{ inputs.labels }}
 
-    - name: Approve PR with Approver Bot
+    - name: Wait for Github sync
+      run: sleep 3
+
+    - name: Approve PR with retry
       if: steps.cpr.outputs.pull-request-number != ''
       shell: bash
       env:
         GH_TOKEN: ${{ inputs.approver-token }}
         PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
       run: |
-        echo "正在批准 PR #${PR_NUMBER} ..."
-        gh pr review --approve "$PR_NUMBER"
-        echo "✅ 已批准 PR #${PR_NUMBER}。"
+        max_retries=10
+        delay=3
+        for i in $(seq 1 $max_retries); do
+          echo "批准 PR #${PR_NUMBER}（第 $i/${max_retries} 次尝试）..."
+          if gh pr review --approve "$PR_NUMBER"; then
+            echo "✅ 已批准 PR #${PR_NUMBER}。"
+            exit 0
+          fi
+          echo "❌ 批准失败，${delay} 秒后重试..."
+          sleep $delay
+        done
+        echo "多次尝试后仍无法批准 PR #${PR_NUMBER}。"
+        exit 1
 
-    - name: Enable auto-merge for the PR
+    - name: Wait for Github sync
+      run: sleep 3
+
+    - name: Enable auto-merge with retry
       if: steps.cpr.outputs.pull-request-number != ''
       shell: bash
       env:
         GH_TOKEN: ${{ steps.generate_app_token.outputs.token }}
         PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
       run: |
-        echo "为 PR #${PR_NUMBER} 启用自动合并..."
-        gh pr merge --auto --squash "$PR_NUMBER"
-        echo "自动合并已成功启用。当所有检查通过后，GitHub将会自动合并此PR。"
+        max_retries=10
+        delay=3
+        for i in $(seq 1 $max_retries); do
+          echo "为 PR #${PR_NUMBER} 启用自动合并（第 $i/${max_retries} 次尝试）..."
+          if gh pr merge --auto --squash "$PR_NUMBER"; then
+            echo "✅ 自动合并已成功启用。当所有检查通过后，GitHub 将自动合并此 PR。"
+            exit 0
+          fi
+          echo "❌ 启用自动合并失败，${delay} 秒后重试..."
+          sleep $delay
+        done
+        echo "多次尝试后仍无法启用自动合并 PR #${PR_NUMBER}。"
+        exit 1
