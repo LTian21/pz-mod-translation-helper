@@ -3,9 +3,10 @@ import os
 import re
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from collections import defaultdict
 
 # --- 配置 ---
-COMPLETED_FILES_DIR = Path('data/output_files')
+TRANSLATIONS_FILE = Path('data/translations_CN.txt')
 LOG_DIR = Path('data/logs')
 MOD_ID_NAME_MAP = Path('translation_utils/mod_id_name_map.json')
 UPDATE_LOG_JSON = LOG_DIR / 'update_log.json'
@@ -27,147 +28,101 @@ STATUS_TEMPLATE = """# 汉化中心状态仪表盘
 
 ---
 
-### ⚡ **最近一次更新摘要**
-
-{summary_section}
-
----
-
-> 详细的各 Mod 待办数量，请查看 [**Mod 待办状态**](MOD_TODO_STATUS.md)。
-"""
-
-INTERNAL_STATUS_TEMPLATE = """# 内部状态仪表盘
-
-*此报告仅供内部使用，包含详细的调试和跟踪信息。*
-
-![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：{update_time}*
-
----
-
-### 📈 **核心指标**
-
-| 指标 | 状态 |
-| :--- | :--- |
-| **当前待办总数** | `{total_todos}` 条 |
-| **已支持 Mod 数量** | `{mod_count}` 个 |
-
----
-
 ### ⚡ **最近一次运行详情 (Run ID: `{run_id}`)**
 
 {detailed_summary_section}
 
 ---
 
-> **日志文件**:
-> *   [增量更新日志 (update_log.json)](../data/logs/update_log.json)
-> *   [基线日志存档](../data/logs/archive/)
+> 详细的各 Mod 待办数量，请查看 [**Mod 待办状态**](MOD_TODO_STATUS.md)。
 """
 
 MOD_TODO_STATUS_TEMPLATE = """# Mod 待办状态
 
-*此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
+*此页面展示了当前所有已支持 Mod 的翻译状态。*
 
 *最后更新于：{update_time}*
 
 ---
 
-| Mod 名称 | Mod ID | 待办条目数量 |
-| :--- | :--- | :--- |
+| Mod 名称 | Mod ID | 待办条目数量 | 缺失EN原文数量 | 模组总条目 |
+| :--- | :--- | :--- | :--- | :--- |
 {mod_todo_table}
 """
 
-def get_total_todo_lines(directory):
-    """计算目录中所有 EN_todo.txt 文件的总行数。"""
-    total_lines = 0
-    if not directory.is_dir():
-        return 0
-    for mod_dir in directory.iterdir():
-        if mod_dir.is_dir():
-            todo_file = mod_dir / 'EN_todo.txt'
-            if todo_file.is_file():
-                try:
-                    with open(todo_file, 'r', encoding='utf-8') as f:
-                        lines = sum(1 for line in f if line.strip())
-                        total_lines += lines
-                except Exception as e:
-                    print(f"读取 {todo_file} 时出错: {e}")
-    return total_lines
-
-def get_supported_mod_count(directory):
-    """计算已支持的 Mod 数量。"""
-    if not directory.is_dir():
-        return 0
-    return len([name for name in directory.iterdir() if name.is_dir()])
-
-def get_mod_todo_list(directory, mod_id_name_map):
-    """获取每个 Mod 的待办条目数量列表。"""
-    mod_list = []
-    if not directory.is_dir():
-        return []
-    for mod_dir in directory.iterdir():
-        if mod_dir.is_dir():
-            mod_id = None
-            # 从目录名中提取 Mod ID
-            match = re.search(r'(\d+)$', mod_dir.name)
-            if match:
-                mod_id = match.group(1)
-
-            # 如果成功提取 ID，则在 map 中查找名称，否则使用目录名作为备用 ID
-            if mod_id:
-                mod_name = mod_id_name_map.get(mod_id, f"未知 Mod ({mod_id})")
-            else:
-                mod_id = mod_dir.name # 如果未找到ID，则回退到完整的目录名
-                mod_name = f"未知 Mod ({mod_id})"
-
-            todo_file = mod_dir / 'EN_todo.txt'
-            line_count = 0
-            if todo_file.is_file():
-                try:
-                    with open(todo_file, 'r', encoding='utf-8') as f:
-                        line_count = sum(1 for line in f if line.strip())
-                except Exception as e:
-                    print(f"读取 {todo_file} 时出错: {e}")
-            
-            mod_list.append({'name': mod_name, 'id': mod_id, 'todos': line_count})
+def parse_translation_file_stats(file_path, mod_id_name_map):
+    """
+    一次性遍历 translations_CN.txt 文件，计算所有需要的统计数据。
+    """
+    mod_stats = defaultdict(lambda: {'total_entries': 0, 'missing_en': 0, 'todo_keys': set()})
     
+    if not file_path.is_file():
+        print(f"错误: 翻译文件 '{file_path}' 未找到。")
+        return {}, 0, 0
+
+    with open(file_path, 'r', encoding='utf-8') as f:
+        for line in f:
+            # 提取 Mod ID 和 Key
+            match = re.search(r'(\d+)::(?:EN|CN)::([\w\.\-]+)', line)
+            if not match:
+                continue
+            
+            mod_id, key = match.groups()
+            stats = mod_stats[mod_id]
+
+            # 统计总条目 (仅计算 EN 行)
+            if '::EN::' in line:
+                stats['total_entries'] += 1
+            
+            if re.match(r'^\t\t', line):
+                stats['todo_keys'].add(key)
+            elif re.match(r'^\t(?!\t)', line):
+                stats['missing_en'] += 1
+
+    # --- 后处理和格式化 ---
+    
+    # 计算全局指标
+    total_todos = sum(len(s['todo_keys']) for s in mod_stats.values())
+    mod_count = len(mod_stats)
+
+    # 格式化为用于表格的列表
+    mod_list = []
+    for mod_id, stats in mod_stats.items():
+        mod_name = mod_id_name_map.get(mod_id, f"未知 Mod ({mod_id})")
+        mod_list.append({
+            'name': mod_name,
+            'id': mod_id,
+            'todos': len(stats['todo_keys']),
+            'missing_en': stats['missing_en'],
+            'total_entries': stats['total_entries']
+        })
+        
     # 按待办数量降序排序
-    return sorted(mod_list, key=lambda x: x['todos'], reverse=True)
+    sorted_mod_list = sorted(mod_list, key=lambda x: x['todos'], reverse=True)
+    
+    return sorted_mod_list, total_todos, mod_count
+
 
 def get_latest_run_summary(log_file):
     """从 JSON 日志文件中获取最新一次运行的摘要。"""
     if not log_file.is_file():
-        return "no_run_id", "*   *未找到更新日志。*", "*   *未找到更新日志。*"
+        return "no_run_id", "*   *未找到更新日志。*"
 
     try:
         with open(log_file, 'r', encoding='utf-8') as f:
             logs = json.load(f)
     except (json.JSONDecodeError, FileNotFoundError):
-        return "error", "*   *无法解析更新日志。*", "*   *无法解析更新日志。*"
+        return "error", "*   *无法解析更新日志。*"
 
     if not logs:
-        return "no_logs", "*   *日志为空。*", "*   *日志为空。*"
+        return "no_logs", "*   *日志为空。*"
 
     latest_run_id = logs[-1].get('run_id')
     
     run_logs = [log for log in logs if log.get('run_id') == latest_run_id]
 
     if not run_logs:
-        return latest_run_id, "*   *最近一次运行没有内容变更。*", "*   *最近一次运行没有内容变更。*"
-
-    # 生成公共摘要
-    total_added = sum(log.get('added_count', 0) for log in run_logs)
-    changed_mods_count = len(run_logs)
-    
-    summary_lines = [
-        f"*   **新增待办翻译**: `{total_added}` 条",
-        f"*   **内容变更的 Mod**: `{changed_mods_count}` 个"
-    ]
-    for i, log in enumerate(run_logs[:5]):
-        summary_lines.append(f"    *   `{log['mod_name']} (ID: {log['mod_id']})`")
-    if changed_mods_count > 5:
-        summary_lines.append("    *   ... *等*")
+        return latest_run_id, "*   *最近一次运行没有内容变更。*"
 
     # 生成内部详细摘要
     detailed_summary_lines = []
@@ -177,7 +132,7 @@ def get_latest_run_summary(log_file):
         details += f"移除 `{log.get('removed_count', 0)}` 条。"
         detailed_summary_lines.append(f"*   {details}")
 
-    return latest_run_id, "\n".join(summary_lines), "\n".join(detailed_summary_lines)
+    return latest_run_id, "\n".join(detailed_summary_lines)
 
 
 def main():
@@ -196,39 +151,26 @@ def main():
     beijing_time = datetime.now(timezone(timedelta(hours=8)))
     update_time_str = beijing_time.strftime('%Y-%m-%d %H:%M:%S %Z')
     
-    total_todos = get_total_todo_lines(COMPLETED_FILES_DIR)
-    mod_count = get_supported_mod_count(COMPLETED_FILES_DIR)
-    mod_todo_list = get_mod_todo_list(COMPLETED_FILES_DIR, mod_id_name_map)
+    mod_todo_list, total_todos, mod_count = parse_translation_file_stats(TRANSLATIONS_FILE, mod_id_name_map)
 
     # 3. 从日志文件获取摘要
-    run_id, summary, detailed_summary = get_latest_run_summary(UPDATE_LOG_JSON)
+    run_id, detailed_summary = get_latest_run_summary(UPDATE_LOG_JSON)
 
     # 4. 生成 STATUS.md
     status_md_content = STATUS_TEMPLATE.format(
         update_time=f"`{update_time_str}`",
         total_todos=f"`{total_todos}`",
         mod_count=f"`{mod_count}`",
-        summary_section=summary
+        run_id=f"`{run_id}`",
+        detailed_summary_section=detailed_summary
     )
     with open('STATUS.md', 'w', encoding='utf-8') as f:
         f.write(status_md_content)
     print("  -> STATUS.md 已生成。")
 
-    # 5. 生成 INTERNAL_STATUS.md
-    internal_status_md_content = INTERNAL_STATUS_TEMPLATE.format(
-        update_time=f"`{update_time_str}`",
-        total_todos=f"`{total_todos}`",
-        mod_count=f"`{mod_count}`",
-        run_id=f"`{run_id}`",
-        detailed_summary_section=detailed_summary
-    )
-    with open('INTERNAL_STATUS.md', 'w', encoding='utf-8') as f:
-        f.write(internal_status_md_content)
-    print("  -> INTERNAL_STATUS.md 已生成。")
-
-    # 6. 生成 MOD_TODO_STATUS.md
+    # 5. 生成 MOD_TODO_STATUS.md
     mod_todo_table_rows = [
-        f"| {mod['name']} | {mod['id']} | {mod['todos']} |"
+        f"| {mod['name']} | {mod['id']} | {mod['todos']} | {mod['missing_en']} | {mod['total_entries']} |"
         for mod in mod_todo_list
     ]
     mod_todo_status_content = MOD_TODO_STATUS_TEMPLATE.format(
