@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的待办翻译条目数量。*
 
-*最后更新于：`2025-10-15 23:12:47 UTC+08:00`*
+*最后更新于：`2025-10-16 12:19:16 UTC+08:00`*
 
 ---
 
@@ -27,8 +27,8 @@
 | [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 47 |
 | Project Summer Car [B42] | 3564950449 | 46 |
 | [B42]Zevon's Medieval Armory | 3540834058 | 46 |
+| Red Days | 3516166810 | 44 |
 | Authentic Z | 2335368829 | 42 |
-| Red Days | 3516166810 | 40 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 40 |
 | that DAMN Library | 3171167894 | 37 |
 | [B42] Better Sorting | 3413005308 | 32 |
