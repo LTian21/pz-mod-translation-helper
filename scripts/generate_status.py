@@ -23,7 +23,10 @@ STATUS_TEMPLATE = """# 汉化中心状态仪表盘
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **当前待办总数** | `{total_todos}` 条 |
+| **模组总条目** | `{total_entries}` 条 |
+| **待翻译条目** | `{total_todos}` 条 |
+| **已翻译条目** | `{total_translated}` 条 |
+| **待校对条目** | `{total_to_proofread}` 条 |
 | **已支持 Mod 数量** | `{mod_count}` 个 |
 
 ---
@@ -45,8 +48,8 @@ MOD_TODO_STATUS_TEMPLATE = """# Mod 待办状态
 
 ---
 
-| Mod 名称 | Mod ID | 待办条目数量 | 缺失EN原文数量 | 模组总条目 |
-| :--- | :--- | :--- | :--- | :--- |
+| Mod 名称 | Mod ID | 待翻译条目 | 待校对条目 | 缺少原文条目 | 模组总条目 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
 {mod_todo_table}
 """
 
@@ -54,15 +57,19 @@ def parse_translation_file_stats(file_path, mod_id_name_map):
     """
     一次性遍历 translations_CN.txt 文件，计算所有需要的统计数据。
     """
-    mod_stats = defaultdict(lambda: {'total_entries': 0, 'missing_en': 0, 'todo_keys': set()})
+    mod_stats = defaultdict(lambda: {
+        'total_entries': 0, 
+        'missing_en': 0, 
+        'todo_keys': set(), 
+        'to_proofread_keys': set()
+    })
     
     if not file_path.is_file():
         print(f"错误: 翻译文件 '{file_path}' 未找到。")
-        return {}, 0, 0
+        return {}, {}, 0
 
     with open(file_path, 'r', encoding='utf-8') as f:
         for line in f:
-            # 提取 Mod ID 和 Key
             match = re.search(r'(\d+)::(?:EN|CN)::([\w\.\-]+)', line)
             if not match:
                 continue
@@ -70,19 +77,28 @@ def parse_translation_file_stats(file_path, mod_id_name_map):
             mod_id, key = match.groups()
             stats = mod_stats[mod_id]
 
-            # 统计总条目 (仅计算 EN 行)
+            # 统计总条目和缺失原文 (仅计算 EN 行)
             if '::EN::' in line:
                 stats['total_entries'] += 1
+                if "======Original Text Missing====" in line:
+                    stats['missing_en'] += 1
             
+            # 统计待翻译和待校对
             if re.match(r'^\t\t', line):
                 stats['todo_keys'].add(key)
             elif re.match(r'^\t(?!\t)', line):
-                stats['missing_en'] += 1
+                stats['to_proofread_keys'].add(key)
 
     # --- 后处理和格式化 ---
     
     # 计算全局指标
-    total_todos = sum(len(s['todo_keys']) for s in mod_stats.values())
+    global_stats = {
+        'total_entries': sum(s['total_entries'] for s in mod_stats.values()),
+        'total_todos': sum(len(s['todo_keys']) for s in mod_stats.values()),
+        'total_to_proofread': sum(len(s['to_proofread_keys']) for s in mod_stats.values())
+    }
+    global_stats['total_translated'] = global_stats['total_entries'] - global_stats['total_todos']
+    
     mod_count = len(mod_stats)
 
     # 格式化为用于表格的列表
@@ -93,6 +109,7 @@ def parse_translation_file_stats(file_path, mod_id_name_map):
             'name': mod_name,
             'id': mod_id,
             'todos': len(stats['todo_keys']),
+            'to_proofread': len(stats['to_proofread_keys']),
             'missing_en': stats['missing_en'],
             'total_entries': stats['total_entries']
         })
@@ -100,7 +117,7 @@ def parse_translation_file_stats(file_path, mod_id_name_map):
     # 按待办数量降序排序
     sorted_mod_list = sorted(mod_list, key=lambda x: x['todos'], reverse=True)
     
-    return sorted_mod_list, total_todos, mod_count
+    return sorted_mod_list, global_stats, mod_count
 
 
 def get_latest_run_summary(log_file):
@@ -151,7 +168,7 @@ def main():
     beijing_time = datetime.now(timezone(timedelta(hours=8)))
     update_time_str = beijing_time.strftime('%Y-%m-%d %H:%M:%S %Z')
     
-    mod_todo_list, total_todos, mod_count = parse_translation_file_stats(TRANSLATIONS_FILE, mod_id_name_map)
+    mod_todo_list, global_stats, mod_count = parse_translation_file_stats(TRANSLATIONS_FILE, mod_id_name_map)
 
     # 3. 从日志文件获取摘要
     run_id, detailed_summary = get_latest_run_summary(UPDATE_LOG_JSON)
@@ -159,7 +176,10 @@ def main():
     # 4. 生成 STATUS.md
     status_md_content = STATUS_TEMPLATE.format(
         update_time=f"`{update_time_str}`",
-        total_todos=f"`{total_todos}`",
+        total_entries=f"`{global_stats['total_entries']}`",
+        total_todos=f"`{global_stats['total_todos']}`",
+        total_translated=f"`{global_stats['total_translated']}`",
+        total_to_proofread=f"`{global_stats['total_to_proofread']}`",
         mod_count=f"`{mod_count}`",
         run_id=f"`{run_id}`",
         detailed_summary_section=detailed_summary
@@ -170,7 +190,7 @@ def main():
 
     # 5. 生成 MOD_TODO_STATUS.md
     mod_todo_table_rows = [
-        f"| {mod['name']} | {mod['id']} | {mod['todos']} | {mod['missing_en']} | {mod['total_entries']} |"
+        f"| {mod['name']} | {mod['id']} | {mod['todos']} | {mod['to_proofread']} | {mod['missing_en']} | {mod['total_entries']} |"
         for mod in mod_todo_list
     ]
     mod_todo_status_content = MOD_TODO_STATUS_TEMPLATE.format(
