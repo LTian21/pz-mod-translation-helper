@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-16 22:16:03 UTC+08:00`*
+*最后更新于：`2025-10-17 12:19:38 UTC+08:00`*
 
 ---
 
@@ -43,11 +43,9 @@
 | [B42] Useful Barrels | 3436537035 | 77 | 0 | 78 |
 | Braven's Achievements | 3051277957 | 76 | 0 | 77 |
 | Weather Moodles [B42] | 3565697910 | 76 | 4 | 146 |
-| Pomp's Items | 2752664795 | 75 | 20 | 85 |
 | Beanie Babies (B42) | 3575855907 | 73 | 0 | 73 |
 | Mad Crafter [electric weapon and more] v0.2 | 3418701509 | 72 | 0 | 73 |
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 69 |
-| Skyler DrugMod [B41 & B42] | 2900366269 | 68 | 12 | 74 |
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 63 |
 | Realistic Car Physics [B42] | 3559765660 | 62 | 0 | 62 |
@@ -398,6 +396,7 @@
 | HydeCo Unlimited Cars | 3438759949 | 0 | 24 | 132 |
 | Imperial Chops! (More Beards!) | 3465865657 | 0 | 0 | 7 |
 | [B42/41] Improved Farming Info Window | 3470852353 | 0 | 0 | 8 |
+| Improvised Backpack! | 3586145865 | 0 | 0 | 60 |
 | Industrial Revolution Generic Add On | 3359867059 | 0 | 0 | 2 |
 | Industrial Revolution Vehicle Parts | 3404745035 | 0 | 0 | 16 |
 | Industrial Revolution B42 | 3400131934 | 0 | 0 | 205 |
@@ -574,7 +573,7 @@
 | Use Belt as Weapon [B42/41] | 3339423397 | 0 | 0 | 5 |
 | US Military Pack [BUILD 41/42] | 612100872 | 0 | 0 | 106 |
 | Vanilla Clothing Expansion | 3421271152 | 0 | 0 | 33 |
-| Vanilla Gear Expanded | 3401134276 | 0 | 0 | 42 |
+| Vanilla Gear Expanded | 3401134276 | 0 | 8 | 46 |
 | Vanilla MRE [B41/B42] | 3100032203 | 0 | 0 | 23 |
 | [B42] Vanvival - Build's 42 Nomadic Experience | 3547444619 | 0 | 2 | 20 |
 | Vehicle Class Overhaul [B42 Compatible] | 3407507873 | 0 | 30 | 15 |
