@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-17 18:40:41 UTC+08:00`*
+*最后更新于：`2025-10-18 12:20:33 UTC+08:00`*
 
 ---
 
@@ -31,7 +31,7 @@
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
 | Pocket Kittens (B42) | 3568029240 | 118 | 16 | 7 | 134 |
-| Sapph's Cooking [B42+] | 3409143790 | 109 | 1878 | 17 | 1991 |
+| Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
@@ -80,7 +80,7 @@
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 26 | 10 | 0 | 36 |
 | Headwear Won't Fall | 3400293227 | 23 | 0 | 0 | 23 |
-| Better Generator Info | 3576056135 | 22 | 0 | 0 | 22 |
+| Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
 | Random Zombies | 2818577583 | 21 | 0 | 0 | 21 |
 | Fancy Lanterns [B42 Compatible] | 3267733558 | 21 | 47 | 0 | 68 |
 | Milk Them All [B42] | 3568280195 | 21 | 0 | 0 | 21 |
@@ -89,16 +89,16 @@
 | Legendary DuffelBag | 3558839307 | 18 | 11 | 0 | 29 |
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
-| [B42] Bag Upgrade Plus | 3403697073 | 18 | 34 | 1 | 52 |
 | [B42]Project RV Interior | 3543229299 | 17 | 0 | 0 | 17 |
 | [B42] Mod Manager | 3567084868 | 16 | 0 | 0 | 16 |
+| [B42] Bag Upgrade Plus | 3403697073 | 15 | 37 | 1 | 52 |
 | [B42] Week One NPC | 3403180543 | 14 | 817 | 0 | 831 |
 | Gyde's Trait Magazines | 3342191739 | 14 | 58 | 0 | 72 |
 | Minimap Style Options | 3526517370 | 14 | 27 | 12 | 41 |
-| Tikitown (B41/B42) | 3037854728 | 14 | 139 | 9 | 153 |
 | [B41/42] Known And Collected | 2881764317 | 13 | 0 | 0 | 13 |
-| Willowbrook Bastion! | 3479667649 | 13 | 14 | 1 | 27 |
+| Tikitown (B41/B42) | 3037854728 | 13 | 139 | 9 | 153 |
 | [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 12 | 0 | 0 | 12 |
+| Willowbrook Bastion! | 3479667649 | 12 | 15 | 1 | 27 |
 | Bianca Wardrobe [42. Out now] | 3140453034 | 11 | 803 | 0 | 814 |
 | [B41\B42] DBG Crowbar Unlock | 3555407625 | 11 | 225 | 46 | 236 |
 | Item Stories [b42] (All in One) | 3569303590 | 11 | 0 | 0 | 11 |
@@ -137,11 +137,9 @@
 | '85 Oldsmobile Delta 88 | 3418253716 | 4 | 17 | 0 | 21 |
 | [B42] Survival | 3402516345 | 4 | 29 | 0 | 33 |
 | Fridges Off! | 2853974107 | 4 | 0 | 0 | 4 |
-| [B42]Sector-7 Breach | 3513107552 | 4 | 8 | 3 | 12 |
 | [B42] Moodle Descriptions Expanded | 3389003300 | 4 | 102 | 9 | 106 |
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 4 | 50 | 8 | 55 |
 | '85 Pontiac Parisienne | 3413706334 | 3 | 17 | 0 | 20 |
-| Axe's Recrafting [B42] | 2211423190 | 3 | 12 | 0 | 15 |
 | [B42] Hemp & Tobacco | 3404563567 | 3 | 64 | 0 | 67 |
 | B42 Rain's Axes & Blades | 3388380529 | 3 | 47 | 0 | 50 |
 | [B42] Home Inventory Improved | 3522009163 | 3 | 60 | 0 | 63 |
@@ -150,14 +148,18 @@
 | [B42/B41] The Motorious Zone Vehicle Pack | 2791656602 | 3 | 220 | 0 | 223 |
 | Gunpoint Redemption [B.41/B.42] | 3078291265 | 3 | 11 | 0 | 14 |
 | Military Tool Kit | 2705406713 | 3 | 28 | 9 | 31 |
-| '04 Volkswagen Touran | 3478633453 | 2 | 46 | 0 | 48 |
+| [B42]Sector-7 Breach | 3513107552 | 3 | 9 | 3 | 12 |
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 2 | 252 | 16 | 254 |
+| Axe's Recrafting [B42] | 2211423190 | 2 | 13 | 0 | 15 |
 | [B42] Sandbox Options | 3386906181 | 2 | 3 | 0 | 5 |
 | Bushcraft Gear - Rare Weapons [B41 & B42] | 2432621382 | 2 | 0 | 0 | 2 |
 | Boots Expanded 11 for B41 and B42 | 2850935956 | 2 | 28 | 0 | 30 |
 | Daihatsu Hijet S83P/S110P | 3583266047 | 2 | 10 | 0 | 12 |
 | [B41/42] Doors Have A Chance | 3041602364 | 2 | 17 | 0 | 19 |
-| [B42] Knox Event Expanded NPC mod [alpha v0.3.11-1] | 3397396843 | 2 | 583 | 42 | 585 |
+| Mixology | 3405131820 | 2 | 356 | 0 | 358 |
+| [B42] Functional Gutters | 3439305933 | 2 | 46 | 0 | 48 |
+| [B41/B42] Infection Scanner | 3332296598 | 2 | 33 | 9 | 35 |
+| [B42] Knox Event Expanded NPC mod [alpha v0.3.12-1] | 3397396843 | 2 | 583 | 42 | 585 |
 | [B42] Vanilla-Like Traits and Occupations | 3139034529 | 2 | 414 | 245 | 416 |
 | Moats | 3550032314 | 2 | 4 | 0 | 6 |
 | Thief Expansion | 2596620950 | 2 | 68 | 0 | 70 |
@@ -166,12 +168,10 @@
 | [B41 / B42] Load All Magazines | 2920899878 | 2 | 0 | 0 | 2 |
 | Vehicle Military Zone | 3436499337 | 2 | 9 | 0 | 11 |
 | Water Goes Bad | 2849467715 | 2 | 17 | 17 | 19 |
-| '69 Mini Mk2 | 2937786633 | 1 | 63 | 0 | 64 |
 | '87 Ford B700/F700 Trucks | 3110911330 | 1 | 147 | 0 | 148 |
 | '91 Ford Ranger | 3539691958 | 1 | 49 | 0 | 50 |
 | '92 AM General M998 + M101A3 Cargo trailer | 2642541073 | 1 | 58 | 0 | 59 |
 | All-in-One Backpacking Shelter | 3417917173 | 1 | 14 | 0 | 15 |
-| Ammo Converter B42 | 3388844065 | 1 | 16 | 0 | 17 |
 | Anthro Traits | 3025679944 | 1 | 145 | 0 | 146 |
 | Autotsar Tuning Atelier - Jaap Wrungel [B42] | 3407042038 | 1 | 3 | 0 | 4 |
 | Autotsar Tuning Atelier - Fjord Mustard [B42] | 3405178154 | 1 | 1 | 0 | 2 |
@@ -186,6 +186,7 @@
 | ExtraMoney | 3462306255 | 1 | 65 | 0 | 66 |
 | Farming Expansion B42 | 3444499190 | 1 | 86 | 4 | 87 |
 | [B42/1] Frockin Wiseguys! | 3538760023 | 1 | 40 | 33 | 41 |
+| [42] Frogtown (BETA) by TwinCrows | 3449473111 | 1 | 3 | 0 | 4 |
 | Guitar Wall Hanger [b42] | 3410972667 | 1 | 48 | 2 | 49 |
 | darlak's H.E.C.U. | 3452711271 | 1 | 102 | 12 | 108 |
 | Point Blank | 2990322197 | 1 | 16 | 0 | 17 |
@@ -204,14 +205,12 @@
 | [B42] Rebalanced Yields: Butchering | 3564838872 | 1 | 0 | 0 | 1 |
 | Risky Unarmed | 3434796669 | 1 | 94 | 0 | 95 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 1 | 20 | 2 | 21 |
-| Skill Recovery Journal | 2503622437 | 1 | 65 | 63 | 66 |
 |  Wearable Towels [B41/B42] | 3203159242 | 1 | 37 | 30 | 40 |
 | [OUTDATED] Support Corps [B42] Sweet-release Update | 3409836763 | 1 | 603 | 5 | 604 |
 | Support Goods Mega Mod [B42.10] - PREDATOR | 3512993822 | 1 | 2390 | 30 | 2391 |
 | [B42] The Defiler from DR2 | 3492621786 | 1 | 3 | 0 | 4 |
 | The Last of Us: Factions & Gear [B41/B42] | 3348036710 | 1 | 106 | 18 | 107 |
 | Traits Purchase System | 3211693903 | 1 | 14 | 1 | 15 |
-| Vehicle Repair Overhaul | 2757712197 | 1 | 51 | 0 | 52 |
 | Wallpapers and More Paint Options | 2999595757 | 1 | 262 | 0 | 263 |
 | Livestock zones expanded | 3434810293 | 1 | 37 | 0 | 38 |
 | [Deprecated] What can I craft? | 3390169945 | 1 | 0 | 0 | 1 |
@@ -220,6 +219,7 @@
 | [B42] Bag Upgrade Ultra | 3407793320 | 1 | 40 | 2 | 41 |
 | [B42][ABANDONED] Malwart Plain Moodles | 3394582336 | 1 | 0 | 0 | 1 |
 | [B42] Pack Pantry | 3416584592 | 1 | 62 | 0 | 63 |
+| '04 Volkswagen Touran | 3478633453 | 0 | 48 | 0 | 48 |
 | '49 Dodge Power Wagon Crew Cab | 2900580391 | 0 | 57 | 0 | 57 |
 | '59 Cadillac Miller-Meteor + ECTO-1 | 2772575623 | 0 | 51 | 0 | 51 |
 | '63 Volkswagen 1300 Beetle | 3005903549 | 0 | 62 | 0 | 62 |
@@ -230,6 +230,7 @@
 | '67 Shelby GT500 + Eleanor | 3026723485 | 0 | 49 | 0 | 49 |
 | '68 Pontiac Firebird | 3258343790 | 0 | 67 | 0 | 67 |
 | '69 Chevrolet Camaro | 2991201484 | 0 | 46 | 0 | 46 |
+| '69 Mini Mk2 | 2937786633 | 0 | 63 | 0 | 64 |
 | '70 Plymouth Barracuda | 2913633066 | 0 | 48 | 0 | 48 |
 | '70 Dodge Challenger | 2873290424 | 0 | 59 | 0 | 59 |
 | '73 Ford Falcon | 3490370700 | 0 | 59 | 0 | 59 |
@@ -284,6 +285,7 @@
 | [B42/41] Adrenaline - Panic Counters Tiredness | 2807001835 | 0 | 4 | 0 | 4 |
 | ahz clothing b42 | 3388910383 | 0 | 30 | 10 | 30 |
 | Vanilla DuffelBag Tweak [Unsupported] | 2959854619 | 0 | 24 | 0 | 24 |
+| Ammo Converter B42 | 3388844065 | 0 | 17 | 0 | 17 |
 | Ammo Loot Drop · Zombies Drop Ammo & Ammo Box B42 | 3389050623 | 0 | 9 | 0 | 9 |
 | [B42] Ammo Crafting (Simple) | 3396542795 | 0 | 23 | 0 | 23 |
 | Asakusa lake town | 3482962418 | 0 | 19 | 19 | 19 |
@@ -350,7 +352,6 @@
 | The Division Watch | 3391186580 | 0 | 6 | 0 | 6 |
 | [B42] Drag Bodies Faster | 3393821407 | 0 | 3 | 0 | 3 |
 | Drink Smart | 3447775367 | 0 | 1 | 0 | 1 |
-| Mixology | 3405131820 | 0 | 358 | 0 | 358 |
 | Dynamic Traits and Expanded Moodles [B41 & B42] | 2459400130 | 0 | 129 | 0 | 129 |
 | Easy Laundry | 2925034918 | 0 | 6 | 0 | 6 |
 | Easy Spare Magazine Reload | 3390014923 | 0 | 1 | 2 | 2 |
@@ -381,10 +382,8 @@
 | [B42/1] Frockin Splendor! Vol.2 | 3411888105 | 0 | 132 | 104 | 132 |
 | [B42] Frockin Splendor! Vol.3 | 3431256608 | 0 | 113 | 108 | 113 |
 | [B42] Frockin Splendor! Vol.4 | 3475347500 | 0 | 135 | 127 | 135 |
-| [42] Frogtown (BETA) by TwinCrows | 3449473111 | 0 | 4 | 0 | 4 |
 | Filibuster Rhymes' Used Cars! - Animation Alpha | 2959472220 | 0 | 405 | 0 | 405 |
 | Functional Appliances 2 | 3042138819 | 0 | 173 | 0 | 173 |
-| [B42] Functional Gutters | 3439305933 | 0 | 48 | 0 | 48 |
 | Fitness & Workout Overhaul | 2940354599 | 0 | 43 | 29 | 43 |
 | [B42]Gauss Firearms | 3429953336 | 0 | 105 | 0 | 105 |
 | H&K VP70 | 2470321383 | 0 | 5 | 0 | 5 |
@@ -401,7 +400,6 @@
 | Industrial Revolution Vehicle Parts | 3404745035 | 0 | 16 | 0 | 16 |
 | Industrial Revolution B42 | 3400131934 | 0 | 205 | 0 | 205 |
 | [B41/B42] I Need More Style: Clothing Edition | 2861393067 | 0 | 99 | 0 | 99 |
-| [B41/B42] Infection Scanner | 3332296598 | 0 | 35 | 9 | 35 |
 | Injury Indicator [B42] | 3565698092 | 0 | 33 | 0 | 33 |
 | The Survivalist's Gear | 3404876149 | 0 | 6 | 1 | 6 |
 | Inspect Weapon | 2948824747 | 0 | 25 | 0 | 25 |
@@ -527,6 +525,7 @@
 | Sit on the key | 3468159865 | 0 | 3 | 0 | 3 |
 | SixthSense | 2863908612 | 0 | 25 | 1 | 25 |
 | [B42] Skateboard! | 3456675747 | 0 | 1 | 0 | 1 |
+| Skill Recovery Journal | 2503622437 | 0 | 66 | 63 | 66 |
 | Smart Hutch | 3556857572 | 0 | 41 | 0 | 41 |
 | Soul Filcher's Beautifying Time | 2425267353 | 0 | 39 | 21 | 39 |
 | Spear fishing | Рыбалка копьём | 3539114542 | 0 | 59 | 0 | 59 |
@@ -577,6 +576,7 @@
 | Vanilla MRE [B41/B42] | 3100032203 | 0 | 23 | 0 | 23 |
 | [B42] Vanvival - Build's 42 Nomadic Experience | 3547444619 | 0 | 20 | 1 | 20 |
 | Vehicle Class Overhaul [B42 Compatible] | 3407507873 | 0 | 15 | 15 | 15 |
+| Vehicle Repair Overhaul | 2757712197 | 0 | 52 | 0 | 52 |
 | Ellie Voice Pack [TLOU2] [B42] | 3464700263 | 0 | 1 | 0 | 1 |
 | Joel Voice Pack [TLOU2] [B42] | 3496043022 | 0 | 1 | 0 | 1 |
 | VSMR Face for Spongie's Character Customisation | 3415572170 | 0 | 2 | 0 | 2 |
