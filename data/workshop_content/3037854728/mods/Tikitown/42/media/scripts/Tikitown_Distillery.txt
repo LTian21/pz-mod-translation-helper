@@ -1,0 +1,267 @@
+module Tikitown
+{
+	imports
+	{
+		Base
+	}
+	
+	fluid GhulsBrandy
+    {
+        ColorReference = Peru,
+        DisplayName = Ghul King's Reserve Brandy,
+        Categories
+        {
+            Beverage,
+            Alcoholic,
+        }
+        Properties
+        {
+            fatigueChange = 0.0,
+            HungerChange = -20.0,
+            StressChange = -10.0,
+            ThirstChange = -20.0,
+            UnhappyChange = -15.0,
+            Calories = 2400.0,
+            Carbohydrates = 0.0,
+            Lipids = 0.0,
+            Proteins = 0.0,
+            alcohol = 0.45,
+            fluReduction = 0.0,
+            painReduction = 0.0,
+            enduranceChange = 0.0,
+            foodSicknessReduction = 0.0,
+        }
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+                Beverage,
+            }
+        }
+    }
+	
+	fluid JaxonBrandy
+    {
+        ColorReference = Peru,
+        DisplayName = Jaxon No. 7,
+        Categories
+        {
+            Beverage,
+            Alcoholic,
+        }
+        Properties
+        {
+            fatigueChange = 0.0,
+            HungerChange = -25.0,
+            StressChange = -15.0,
+            ThirstChange = -25.0,
+            UnhappyChange = -20.0,
+            Calories = 2250.0,
+            Carbohydrates = 0.0,
+            Lipids = 0.0,
+            Proteins = 0.0,
+            alcohol = 0.55,
+            fluReduction = 0.0,
+            painReduction = 0.0,
+            enduranceChange = 0.0,
+            foodSicknessReduction = 0.0,
+        }
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+                Beverage,
+            }
+        }
+    }
+	
+	fluid XenoBrandy
+    {
+        ColorReference = Peru,
+        DisplayName = Xeno Covenant Select,
+        Categories
+        {
+            Beverage,
+            Alcoholic,
+        }
+        Properties
+        {
+            fatigueChange = 0.0,
+            HungerChange = -15.0,
+            StressChange = -5.0,
+            ThirstChange = -20.0,
+            UnhappyChange = -25.0,
+            Calories = 2350.0,
+            Carbohydrates = 0.0,
+            Lipids = 0.0,
+            Proteins = 0.0,
+            alcohol = 0.35,
+            fluReduction = 0.0,
+            painReduction = 0.0,
+            enduranceChange = 0.0,
+            foodSicknessReduction = 0.0,
+        }
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+                Beverage,
+            }
+        }
+    }
+	
+	fluid HardtackWheat
+    {
+        ColorReference = Gold,
+        DisplayName = Hardtack Wheat,
+        Categories
+        {
+            Beverage,
+            Alcoholic,
+        }
+        Properties
+        {
+            fatigueChange = -5.0,
+            HungerChange = -10.0,
+            StressChange = 0.0,
+            ThirstChange = -20.0,
+            UnhappyChange = -15.0,
+            Calories = 500.0,
+            Carbohydrates = 36.0,
+            Lipids = 0.0,
+            Proteins = 4.0,
+            alcohol = 0.05,
+            fluReduction = 0.0,
+            painReduction = 0.0,
+            enduranceChange = 0.0,
+            foodSicknessReduction = 0.0,
+        }
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+                Beverage,
+            }
+        }
+    }
+	
+	item HardtackWheatCan
+    {
+        DisplayCategory = Food,
+        Type = Normal,
+        Weight = 0.3,
+        Icon = HardTackWheat,
+        EatType = Popcan,
+        Packaged = true,
+        StaticModel = Hardtack_Wheat,
+        WorldStaticModel = Hardtack_Wheat,
+        FillFromDispenserSound = GetWaterFromDispenserMetalMedium,
+        FillFromLakeSound = GetWaterFromLakeSmall,
+        FillFromTapSound = GetWaterFromTapMetalMedium,
+        FillFromToiletSound = GetWaterFromToilet,
+        Tags = Cookable;LowAlcohol;HasMetal;EmptyCan;SealedBeverageCan,
+        OpeningRecipe = OpenCanOfBeverage,
+        Eattime = 160,
+        component FluidContainer
+        {
+            ContainerName = CanBeer,
+            Opened = false,
+            Capacity = 0.3,
+            CustomDrinkSound = DrinkingFromCan,
+            Fluids
+            {
+                fluid = HardtackWheat:1.0,
+            }
+        }
+        component Durability
+        {
+            Material = Metal_Light,
+            MaxHitPoints = 1.0,
+        }
+    }
+	
+	item Jaxon_Ghul
+    {
+        DisplayCategory = Food,
+        EatType = Bourbon,
+        Type = Normal,
+        Weight = 0.5,
+        Icon = GhulsBrandy,
+        
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        Tags = Glass;GlassBottle,
+        component FluidContainer
+        {
+            ContainerName = BottleGlass,
+            Capacity = 1.4,
+            CustomDrinkSound = DrinkingFromBottleGlass,
+            Fluids
+            {
+                fluid = GhulsBrandy:1.4,
+            }
+        }
+		StaticModel = Tikitown.Jaxon_Brandy_Ghul,
+        WorldStaticModel = Tikitown.Jaxon_Brandy_Ghul,
+    }
+	
+	item Jaxon_No_Seven
+    {
+        DisplayCategory = Food,
+        EatType = Bourbon,
+        Type = Normal,
+        Weight = 0.5,
+        Icon = JaxonBrandy,
+        
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        Tags = Glass;GlassBottle,
+        component FluidContainer
+        {
+            ContainerName = BottleGlass,
+            Capacity = 1.4,
+            CustomDrinkSound = DrinkingFromBottleGlass,
+            Fluids
+            {
+                fluid = JaxonBrandy:1.4,
+            }
+        }
+		StaticModel = Tikitown.Jaxon_No_Seven,
+        WorldStaticModel = Tikitown.Jaxon_No_Seven,
+    }
+	
+	item Jaxon_Xeno
+    {
+        DisplayCategory = Food,
+        EatType = Bourbon,
+        Type = Normal,
+        Weight = 0.5,
+        Icon = XenoBrandy,
+        
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+        Tags = Glass;GlassBottle,
+        component FluidContainer
+        {
+            ContainerName = BottleGlass,
+            Capacity = 1.4,
+            CustomDrinkSound = DrinkingFromBottleGlass,
+            Fluids
+            {
+                fluid = XenoBrandy:1.4,
+            }
+        }
+		StaticModel = Tikitown.Xeno_Select,
+        WorldStaticModel = Tikitown.Xeno_Select,
+    }
+}

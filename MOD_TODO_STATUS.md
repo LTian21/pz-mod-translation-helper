@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-18 12:20:33 UTC+08:00`*
+*最后更新于：`2025-10-19 12:21:17 UTC+08:00`*
 
 ---
 
@@ -117,6 +117,7 @@
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
 | '85 Buick LeSabre | 3418252689 | 6 | 17 | 0 | 23 |
 | ArcherLib | 3408337281 | 6 | 48 | 0 | 54 |
+| [B42] Knox Event Expanded NPC mod [alpha v0.3.12-1] | 3397396843 | 6 | 583 | 42 | 589 |
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 6 | 369 | 0 | 375 |
 | TwisTonFire - Dude, Where Is My Car? | 3576268735 | 6 | 0 | 0 | 6 |
 | Yaki's BarberShop | 2810471370 | 6 | 0 | 0 | 6 |
@@ -159,7 +160,6 @@
 | Mixology | 3405131820 | 2 | 356 | 0 | 358 |
 | [B42] Functional Gutters | 3439305933 | 2 | 46 | 0 | 48 |
 | [B41/B42] Infection Scanner | 3332296598 | 2 | 33 | 9 | 35 |
-| [B42] Knox Event Expanded NPC mod [alpha v0.3.12-1] | 3397396843 | 2 | 583 | 42 | 585 |
 | [B42] Vanilla-Like Traits and Occupations | 3139034529 | 2 | 414 | 245 | 416 |
 | Moats | 3550032314 | 2 | 4 | 0 | 6 |
 | Thief Expansion | 2596620950 | 2 | 68 | 0 | 70 |
@@ -581,7 +581,7 @@
 | Joel Voice Pack [TLOU2] [B42] | 3496043022 | 0 | 1 | 0 | 1 |
 | VSMR Face for Spongie's Character Customisation | 3415572170 | 0 | 2 | 0 | 2 |
 | Wandering Zombies | 2983905789 | 0 | 406 | 1 | 406 |
-| Washing Menus Improved | 3460812542 | 0 | 4 | 0 | 4 |
+| Washing Menus Improved | 3460812542 | 0 | 5 | 0 | 5 |
 | [B42] Water Pipes (aka Plumbing) | 3546314080 | 0 | 49 | 1 | 49 |
 | [B42] Water Filter Straw | 3418513380 | 0 | 8 | 0 | 8 |
 | WeldingTorchBalanced [B42] | 3429392198 | 0 | 6 | 2 | 6 |
