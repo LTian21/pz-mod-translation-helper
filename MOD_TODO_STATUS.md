@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-19 12:21:17 UTC+08:00`*
+*最后更新于：`2025-10-19 13:19:26 UTC+08:00`*
 
 ---
 
@@ -35,6 +35,7 @@
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
+| Lifestyle: Hobbies | 3403870858 | 84 | 4082 | 27 | 4166 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
 | Christmas Time [b41/42 demo] | 2903870217 | 81 | 53 | 53 | 134 |
 | Detailed Skill Tooltips | 3572846242 | 79 | 0 | 0 | 79 |
@@ -78,6 +79,7 @@
 | [B42] Alternative Inventory Rendering | 3394402683 | 30 | 0 | 0 | 30 |
 | [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 4 | 4 | 33 |
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
+| Tikitown (B41/B42) | 3037854728 | 29 | 138 | 10 | 168 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 26 | 10 | 0 | 36 |
 | Headwear Won't Fall | 3400293227 | 23 | 0 | 0 | 23 |
 | Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
@@ -96,7 +98,6 @@
 | Gyde's Trait Magazines | 3342191739 | 14 | 58 | 0 | 72 |
 | Minimap Style Options | 3526517370 | 14 | 27 | 12 | 41 |
 | [B41/42] Known And Collected | 2881764317 | 13 | 0 | 0 | 13 |
-| Tikitown (B41/B42) | 3037854728 | 13 | 139 | 9 | 153 |
 | [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 12 | 0 | 0 | 12 |
 | Willowbrook Bastion! | 3479667649 | 12 | 15 | 1 | 27 |
 | Bianca Wardrobe [42. Out now] | 3140453034 | 11 | 803 | 0 | 814 |
@@ -419,7 +420,6 @@
 | Legend Craft Evolved | 3432470769 | 0 | 304 | 0 | 304 |
 | Lethal Stealth | 3531611692 | 0 | 34 | 0 | 34 |
 | Antibodies (v1.93) [B41 + B42] | 2392676812 | 0 | 230 | 0 | 230 |
-| Lifestyle: Hobbies | 3403870858 | 0 | 4115 | 25 | 4115 |
 | Liv's Trusty Baseball Cap | 3477662795 | 0 | 1 | 0 | 1 |
 | Lock Interiors | 3435709471 | 0 | 3 | 0 | 3 |
 | Long-standing Metal Constructions | 3199474685 | 0 | 37 | 0 | 37 |
