@@ -18,6 +18,7 @@ TRANSLATION_VALUE_PATTERN: Final[re.compile] = re.compile(r"=\s*\"((?:[^\"\\]|\\
 KEY_VALUE_START_PATTERN: Final[re.compile] = re.compile(r"^\s*([\w\s.\[\]()#-]+?)\s*=\s*(.*)")
 ITEM_PATTERN: Final[re.compile] = re.compile(r"item\s+([\w-]+)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
 RECIPE_PATTERN: Final[re.compile] = re.compile(r"(?:recipe|craftRecipe)\s+([\w\s().-]+?)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
+ENTITY_RECIPE_PATTERN: Final[re.compile] = re.compile(r"^\s*entity\s+([\w-]+)\s*\{(?:(?!^\s*entity).)*?component\s+\w+\s*\{.*?category\s*=\s*([^,]+)", re.MULTILINE | re.IGNORECASE | re.DOTALL)
 CATEGORY_PATTERN: Final[re.compile] = re.compile(r"^\s*category\s*=\s*([^,]+)", re.MULTILINE | re.IGNORECASE)
 DISPLAY_NAME_PATTERN: Final[re.compile] = re.compile(r"DisplayName\s*=\s*(.*?)(?:,|\n|$)")
 RECIPE_FORMAT_PATTERN_1: Final[re.compile] = re.compile(r'([a-z\d])([A-Z])')
@@ -152,6 +153,8 @@ def format_recipe_name(name):
 def extract_recipe_names(text_content, config, source_filename: str):
     results = {}
     key_map = {}
+
+    # 处理 recipe 格式
     for recipe_match in RECIPE_PATTERN.finditer(text_content):
         original_name = recipe_match.group(1).strip()
         recipe_content = recipe_match.group(2)
@@ -159,7 +162,6 @@ def extract_recipe_names(text_content, config, source_filename: str):
         if not original_name:
             continue
         
-        # 提取配方名称
         friendly_name = format_recipe_name(original_name)
         modified_name = original_name.replace(' ', '_')
         key = f"{config.RECIPE_PREFIX}_{modified_name}"
@@ -167,7 +169,6 @@ def extract_recipe_names(text_content, config, source_filename: str):
         results[key] = line
         key_map[key] = "Recipes"
 
-        # 提取 category
         if recipe_content:
             category_match = CATEGORY_PATTERN.search(recipe_content)
             if category_match:
@@ -176,6 +177,26 @@ def extract_recipe_names(text_content, config, source_filename: str):
                 category_line = f'{category_key} = "{category_name}",'
                 results[category_key] = category_line
                 key_map[category_key] = "UI"
+
+    # 处理 entity 格式
+    for entity_match in ENTITY_RECIPE_PATTERN.finditer(text_content):
+        entity_name, category_name = entity_match.groups()
+        entity_name = entity_name.strip()
+        category_name = category_name.strip()
+
+        if not entity_name:
+            continue
+
+        key = f"Recipe_{entity_name}"
+        line = f'{key} = "{entity_name}",'
+        results[key] = line
+        key_map[key] = "Recipes"
+
+        if category_name:
+            category_key = f"UI_CraftCat_{category_name}"
+            category_line = f'{category_key} = "{category_name}",'
+            results[category_key] = category_line
+            key_map[category_key] = "UI"
                 
     return results, key_map
 

@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-19 13:19:26 UTC+08:00`*
+*最后更新于：`2025-10-19 17:20:51 UTC+08:00`*
 
 ---
 
@@ -29,9 +29,11 @@
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
 | Trap Manager | 3566766862 | 159 | 3 | 1 | 162 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
+| MRE XIII (1993) - Meal Ready to Eat MOD Real version for build 42 | 3406930410 | 123 | 25 | 13 | 148 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
 | Pocket Kittens (B42) | 3568029240 | 118 | 16 | 7 | 134 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
+| Lillie's Meal Combat Individual Ration Mod | 3557845788 | 106 | 0 | 0 | 106 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
@@ -47,6 +49,7 @@
 | Beanie Babies (B42) | 3575855907 | 73 | 0 | 0 | 73 |
 | Mad Crafter [electric weapon and more] v0.2 | 3418701509 | 72 | 1 | 0 | 73 |
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 0 | 69 |
+| SCP - Foundation pack | 3580511016 | 66 | 0 | 0 | 66 |
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | Realistic Car Physics [B42] | 3559765660 | 62 | 0 | 0 | 62 |
@@ -336,7 +339,7 @@
 | [B42/B41] Car Parts Repair | 3281301960 | 0 | 17 | 0 | 17 |
 | Cerberus Pack [B41/B42] | 3470478700 | 0 | 86 | 3 | 86 |
 | [B42] Cut Heavy Chains | 3413713793 | 0 | 2 | 0 | 2 |
-| [41|42] ChairBarricade | 3404288341 | 0 | 3 | 0 | 3 |
+| [41\|42] ChairBarricade | 3404288341 | 0 | 3 | 0 | 3 |
 | Character Save | 2673317083 | 0 | 2 | 0 | 2 |
 | [B41/B42] Check Around | 3300688173 | 0 | 157 | 1 | 157 |
 | Functional Clothesline | 3282215361 | 0 | 18 | 0 | 18 |
@@ -528,7 +531,7 @@
 | Skill Recovery Journal | 2503622437 | 0 | 66 | 63 | 66 |
 | Smart Hutch | 3556857572 | 0 | 41 | 0 | 41 |
 | Soul Filcher's Beautifying Time | 2425267353 | 0 | 39 | 21 | 39 |
-| Spear fishing | Рыбалка копьём | 3539114542 | 0 | 59 | 0 | 59 |
+| Spear fishing \| Рыбалка копьём | 3539114542 | 0 | 59 | 0 | 59 |
 | Spear Traps | 2640351732 | 0 | 4 | 0 | 4 |
 | Spiffomon 3D [B42] | 3522453285 | 0 | 34 | 0 | 34 |
 | Spongie's Character Customisation | 3414634809 | 0 | 44 | 42 | 44 |
