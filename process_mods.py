@@ -117,7 +117,9 @@ def find_active_media_path(mod_root_path):
             logging.info(f"  -> 正在检查路径的有效性: {media_path}")
 
             has_scripts = find_case_insensitive_dir(media_path, "scripts")
-            has_translate = find_case_insensitive_dir(media_path / "lua" / "shared", "Translate")
+            lua_dir = find_case_insensitive_dir(media_path, "lua")
+            shared_dir = find_case_insensitive_dir(lua_dir, "shared")
+            has_translate = find_case_insensitive_dir(shared_dir, "Translate")
 
             if has_scripts or has_translate:
                 logging.info(f"  --> 路径有效！将使用此路径进行处理: {media_path}")
@@ -308,7 +310,10 @@ def process_single_mod(mod_root_path, config, vanilla_keys):
         return {}, {}, {}, {}
         
     scripts_dir = find_case_insensitive_dir(active_media_path, "scripts")
-    translate_root_dir = find_case_insensitive_dir(active_media_path / "lua" / "shared", "Translate")
+    lua_dir = find_case_insensitive_dir(active_media_path, "lua")
+    shared_dir = find_case_insensitive_dir(lua_dir, "shared")
+    translate_root_dir = find_case_insensitive_dir(shared_dir, "Translate")
+
     base_lang_dir = find_case_insensitive_dir(translate_root_dir, config.BASE_LANGUAGE)
     priority_lang_dir = find_case_insensitive_dir(translate_root_dir, config.PRIORITY_LANGUAGE)
     key_source_map = {}
