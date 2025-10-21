@@ -190,7 +190,7 @@ def main():
 
     # 5. 生成 MOD_TODO_STATUS.md
     mod_todo_table_rows = [
-        f"| {mod['name'].replace('|', '\|')} | {mod['id']} | {mod['todos']} | {mod['to_proofread']} | {mod['missing_en']} | {mod['total_entries']} |"
+        f"| {mod['name'].replace('|', '&#124;')} | {mod['id']} | {mod['todos']} | {mod['to_proofread']} | {mod['missing_en']} | {mod['total_entries']} |"
         for mod in mod_todo_list
     ]
     mod_todo_status_content = MOD_TODO_STATUS_TEMPLATE.format(
