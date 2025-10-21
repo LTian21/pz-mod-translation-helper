@@ -2,14 +2,14 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-21 15:19:47 UTC+08:00`*
+*最后更新于：`2025-10-21 15:43:59 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待翻译条目 | 待校对条目 | 缺少原文条目 | 模组总条目 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Authentic Z | 2335368829 | 2274 | 1407 | 308 | 3777 |
-| Even More Traits | 2855320431 | 606 | 62 | 2 | 668 |
+| Even More Traits | 2855320431 | 606 | 12 | 2 | 618 |
 | Guns of 93: B42 Test Build (Unstable) | 3183820077 | 565 | 1802 | 1044 | 2381 |
 | [B42] Buildables Expansion | 3463117260 | 525 | 622 | 7 | 1147 |
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
@@ -54,12 +54,12 @@
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | Realistic Car Physics [B42] | 3559765660 | 62 | 0 | 0 | 62 |
+| ST Additions - Pry Open | 3579640010 | 60 | 93 | 23 | 153 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 59 | 20 | 2 | 79 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 57 | 363 | 0 | 421 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 56 | 52 | 0 | 108 |
 | [B42] Ogrim Mod's - Machine Utils | 3555558732 | 56 | 0 | 0 | 56 |
 | Legendary Katana | 3418366499 | 53 | 75 | 1 | 128 |
-| ST Additions - Pry Open | 3579640010 | 50 | 93 | 15 | 143 |
 | Time Decreases Vehicle Condition [B42] | 3448375286 | 50 | 0 | 0 | 50 |
 | [J&G] Firefighter Uniform [B42/41] | 3521263771 | 49 | 5 | 5 | 55 |
 | [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 47 | 4 | 4 | 52 |
@@ -87,7 +87,7 @@
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 26 | 10 | 0 | 36 |
-| Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
+| Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 20 | 50 |
 | Headwear Won't Fall | 3400293227 | 23 | 0 | 0 | 23 |
 | Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
 | Random Zombies | 2818577583 | 21 | 0 | 0 | 21 |
@@ -114,7 +114,7 @@
 | Low Condition Guns [B41/B42] | 3579180724 | 11 | 0 | 0 | 11 |
 | Has Been Read | 2544353492 | 11 | 45 | 0 | 56 |
 | Stairs Alert | 3044807092 | 11 | 3 | 0 | 14 |
-| [J&G] Trauma Responder Uniform [B42/41] | 3443982326 | 11 | 46 | 0 | 63 |
+| [J&G] Trauma Responder Uniform [B42/41] | 3443982326 | 11 | 46 | 6 | 63 |
 | [B41/B42] I Don't Need A Lighter | 2714198296 | 10 | 0 | 0 | 10 |
 | Street Smarts | 3511535258 | 10 | 11 | 2 | 21 |
 | Undying Zombies (Immersive Respawn Replacement) | 3555199477 | 10 | 0 | 0 | 10 |
@@ -124,7 +124,7 @@
 | [B41 & B42] Throw your bag across | 3391902125 | 9 | 0 | 0 | 9 |
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 9 | 45 | 2 | 55 |
 | Legendary Satchel | 3560352772 | 8 | 17 | 1 | 25 |
-| Military Tool Kit | 2705406713 | 8 | 23 | 1 | 31 |
+| Military Tool Kit | 2705406713 | 8 | 23 | 9 | 31 |
 | Mod Load Order Sorter [b42] | 3423660713 | 8 | 34 | 23 | 42 |
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
@@ -135,10 +135,10 @@
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 6 | 369 | 0 | 375 |
 | TwisTonFire - Dude, Where Is My Car? | 3576268735 | 6 | 0 | 0 | 6 |
 | Yaki's BarberShop | 2810471370 | 6 | 0 | 0 | 6 |
-| [J&G] Black Multicam Uniform [B42/41] | 3315302991 | 6 | 39 | 0 | 47 |
-| [J&G] Desert Uniform [B42/41] | 3299457564 | 6 | 37 | 0 | 44 |
-| [J&G] Forest Multicam Uniform [B42/41] | 3309971624 | 6 | 37 | 0 | 44 |
-| [J&G] XKU Uniform [B42/41] | 3276134387 | 6 | 25 | 0 | 31 |
+| [J&G] Black Multicam Uniform [B42/41] | 3315302991 | 6 | 39 | 4 | 47 |
+| [J&G] Desert Uniform [B42/41] | 3299457564 | 6 | 37 | 4 | 44 |
+| [J&G] Forest Multicam Uniform [B42/41] | 3309971624 | 6 | 37 | 4 | 44 |
+| [J&G] XKU Uniform [B42/41] | 3276134387 | 6 | 25 | 4 | 31 |
 | [B42] Bicscalibur BIC Pen Weapon | 3400983311 | 5 | 2 | 2 | 7 |
 | ArcherLib | 3408337281 | 5 | 48 | 0 | 54 |
 | [B42] Attach Bags To Sheet Rope | 3504700167 | 5 | 0 | 0 | 5 |
@@ -149,7 +149,7 @@
 |  Hephas Occupations and Traits | 3256482412 | 5 | 341 | 0 | 346 |
 | Herbalist | 2875059598 | 5 | 68 | 0 | 73 |
 | Scavenger Skill [B42] | 3407792640 | 5 | 64 | 0 | 69 |
-| [J&G] Flecktarn Gear [B42/41] | 3206579556 | 5 | 26 | 0 | 31 |
+| [J&G] Flecktarn Gear [B42/41] | 3206579556 | 5 | 26 | 4 | 31 |
 | '85 Chevrolet Caprice / Impala | 3413704851 | 4 | 37 | 0 | 41 |
 | '85 Oldsmobile Delta 88 | 3418253716 | 4 | 17 | 0 | 21 |
 | Fridges Off! | 2853974107 | 4 | 0 | 0 | 4 |
