@@ -17,7 +17,7 @@ MODULE_PATTERN: Final[re.compile] = re.compile(r"^\s*module\s+([\w.-]+)", re.IGN
 TRANSLATION_VALUE_PATTERN: Final[re.compile] = re.compile(r"=\s*\"((?:[^\"\\]|\\.)*)\"", re.DOTALL)
 KEY_VALUE_START_PATTERN: Final[re.compile] = re.compile(r"^\s*([\w\s.\[\]()#-]+?)\s*=\s*(.*)")
 ITEM_PATTERN: Final[re.compile] = re.compile(r"item\s+([\w-]+)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
-RECIPE_PATTERN: Final[re.compile] = re.compile(r"(?:recipe|craftRecipe)\s+([\w\s().-]+?)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
+RECIPE_PATTERN: Final[re.compile] = re.compile(r"(?:recipe|craftRecipe)\s+([\w\s().\[\]-]+?)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
 ENTITY_RECIPE_PATTERN: Final[re.compile] = re.compile(r"^\s*entity\s+([\w-]+)\s*\{(?:(?!^\s*entity).)*?component\s+\w+\s*\{.*?category\s*=\s*([^,]+)", re.MULTILINE | re.IGNORECASE | re.DOTALL)
 CATEGORY_PATTERN: Final[re.compile] = re.compile(r"^\s*category\s*=\s*([^,]+)", re.MULTILINE | re.IGNORECASE)
 DISPLAY_NAME_PATTERN: Final[re.compile] = re.compile(r"DisplayName\s*=\s*(.*?)(?:,|\n|$)")
