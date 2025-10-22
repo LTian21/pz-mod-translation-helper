@@ -97,7 +97,7 @@ def main():
         if detail.get("result") == 1:
             mod_id = detail["publishedfileid"]
             new_time = detail["time_updated"]
-            old_time = int(old_stamps.get(mod_id, 0))
+            old_time = int(old_stamps.get(mod_id) or 0)
 
             print(f"检查 [ID: {mod_id}]: 最新时间戳={new_time}, 已记录时间戳={old_time}")
             if new_time > old_time:
