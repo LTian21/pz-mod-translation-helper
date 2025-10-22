@@ -68,6 +68,14 @@ jobs:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
         run: python scripts/check_updates.py
 
+      - name: Upload Timestamp Artifact
+        if: steps.scheduled_check.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: mod-timestamps-artifact
+          path: translation_utils/mod_timestamps.json
+          retention-days: 1
+
       - name: Check for Local Completion File Updates
         id: local_check
         if: github.event.inputs.mod_id_override == '' && github.event.inputs.full_refresh != 'true'
@@ -239,6 +247,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Download Timestamp Artifact to Correct Path
+        uses: actions/download-artifact@v4
+        with:
+          name: mod-timestamps-artifact
+          path: translation_utils/
+          if-no-files-found: ignore
 
       - name: Setup Reusable Environment
         uses: ./.github/actions/setup-environment

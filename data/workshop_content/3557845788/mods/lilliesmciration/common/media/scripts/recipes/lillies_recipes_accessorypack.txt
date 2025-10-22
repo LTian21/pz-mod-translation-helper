@@ -1,0 +1,42 @@
+module MCI
+
+{
+	craftRecipe OpenAccessoryPacket
+	{
+        timedAction = Making,
+        time            = 10,
+		Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 1 [MCI.MCIAccessoryPack],
+		}
+		outputs
+		{
+			item 1 MCI.MCISugarPacket,
+			item 1 MCI.MCISalt,
+			item 1 MCI.MCICoffee,
+			item 1 MCI.MCIGum,
+			item 1 MCI.MCICreamerPacket,
+			item 1 Base.Matches,
+			item 1 MCI.MCICigarettePack,
+		}
+	}
+
+	craftRecipe UnpackMCICigarettes
+	{
+        timedAction = Making,
+		Time = 20,
+        OnTest = Recipe.OnTest.IsFull,
+		/* CanWalk = true, */
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [MCI.MCICigarettePack] mode:destroy flags[IsFull;AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 4 Base.CigaretteSingle,
+		}
+	}
+}
