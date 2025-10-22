@@ -17,6 +17,10 @@ class Program
 
     static async Task<int> Main(string[] args)
     {
+        // 强制控制台输入/输出使用 UTF-8 编码
+        Console.OutputEncoding = Encoding.UTF8;
+        Console.InputEncoding = Encoding.UTF8;
+
         // 检测是否为测试模式
         bool isTestMode = args.Length < 5;
 
@@ -42,6 +46,9 @@ class Program
                 Console.WriteLine($"仓库地址: {config.RepoUrl}");
                 Console.WriteLine($"本地路径: {config.LocalPath}");
                 Console.WriteLine($"翻译者: {config.UserName}");
+                // 输出 PAT 的后十位（如果不足十位则全部输出）
+                string lastTen = GetLastChars(config.Key, 10);
+                Console.WriteLine($"PAT 后十位: {lastTen}");
                 Console.WriteLine("-----------------------------------");
 
                 // =========================
@@ -305,7 +312,7 @@ class Program
             return false;
 
         // 允许空格，但不允许其他 Git 分支名非法字符
-        // 不能包含: ~, ^, :, ?, *, [, \, 连续的点(..), 以 / 结尾等
+        // 不能包含: ~, ^, :, ?, *, [, \\, 连续的点(..), 以 / 结尾等
         var invalidChars = new[] { '~', '^', ':', '?', '*', '[', '\\', '\0' };
         if (name.Any(c => invalidChars.Contains(c)))
             return false;
@@ -328,7 +335,7 @@ class Program
             return false;
 
         // Git 分支名规则
-        // 不能包含: 空格, ~, ^, :, ?, *, [, \, 连续的点(..), 以 / 结尾等
+        // 不能包含: 空格, ~, ^, :, ?, *, [, \\, 连续的点(..), 以 / 结尾等
         var invalidChars = new[] { ' ', '~', '^', ':', '?', '*', '[', '\\', '\0' };
         if (name.Any(c => invalidChars.Contains(c)))
             return false;
@@ -398,11 +405,12 @@ class Program
                 try
                 {
                     var cloneOptions = new CloneOptions();
+                    // 使用 token 作为密码，以提升兼容性
                     cloneOptions.FetchOptions.CredentialsProvider = (url, user, cred) =>
                         new UsernamePasswordCredentials
                         {
-                            Username = config.Key,
-                            Password = string.Empty
+                            Username = "x-access-token",
+                            Password = config.Key
                         };
 
                     // 添加进度显示
@@ -475,23 +483,78 @@ class Program
 
                     Commands.Checkout(repo, defaultLocalBranch);
 
-                    // 创建新分支
-                    var newBranch = repo.CreateBranch(translatorBranch);
-                    Commands.Checkout(repo, newBranch);
-
-                    // 推送新分支到远程
-                    var remote = repo.Network.Remotes["origin"];
-                    var pushOptions = new PushOptions
+                    // 如果本地已存在分支则直接切换，否则创建新分支
+                    var existingLocal = repo.Branches[translatorBranch];
+                    if (existingLocal != null)
                     {
-                        CredentialsProvider = (url, user, cred) => new UsernamePasswordCredentials
-                        {
-                            Username = config.Key,
-                            Password = string.Empty
-                        }
-                    };
+                        Console.WriteLine($"[提示] 本地分支 {translatorBranch} 已存在，直接切换到该分支");
+                        Commands.Checkout(repo, existingLocal);
 
-                    repo.Network.Push(remote, $"refs/heads/{translatorBranch}", pushOptions);
-                    Console.WriteLine($"[成功] 创建并推送分支 {translatorBranch}");
+                        // 远端分支不存在的情况下，需要将本地分支推送到远端并设置上游
+                        var remote = repo.Network.Remotes["origin"];
+                        var pushOptions = new PushOptions
+                        {
+                            // 使用 token 作为密码以兼容 GitHub
+                            CredentialsProvider = (url, user, cred) => new UsernamePasswordCredentials
+                            {
+                                Username = "x-access-token",
+                                Password = config.Key
+                            }
+                        };
+
+                        try
+                        {
+                            Console.WriteLine($"[提示] 远程分支 origin/{translatorBranch} 不存在，正在推送本地分支到远端以创建...");
+                            repo.Network.Push(remote, $"refs/heads/{translatorBranch}", pushOptions);
+
+                            // 更新本地分支的上游信息
+                            var pushedRemoteBranch = repo.Branches[$"origin/{translatorBranch}"];
+                            if (pushedRemoteBranch != null)
+                            {
+                                repo.Branches.Update(existingLocal,
+                                    b => b.Remote = "origin",
+                                    b => b.UpstreamBranch = pushedRemoteBranch.CanonicalName);
+                            }
+
+                            Console.WriteLine($"[成功] 已将本地分支 {translatorBranch} 推送到远程并设置为上游分支");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"[错误] 将本地分支推送到远端失败: {ex.Message}");
+                            Console.WriteLine("[提示] 请确保 PAT 有推送权限，并检查网络或仓库权限设置");
+                            return 1;
+                        }
+                    }
+                    else
+                    {
+                        // 创建新分支
+                        var newBranch = repo.CreateBranch(translatorBranch);
+                        Commands.Checkout(repo, newBranch);
+
+                        // 推送新分支到远程
+                        var remote = repo.Network.Remotes["origin"];
+                        var pushOptions = new PushOptions
+                        {
+                            // 使用 token 作为密码以兼容 GitHub
+                            CredentialsProvider = (url, user, cred) => new UsernamePasswordCredentials
+                            {
+                                Username = "x-access-token",
+                                Password = config.Key
+                            }
+                        };
+
+                        try
+                        {
+                            repo.Network.Push(remote, $"refs/heads/{translatorBranch}", pushOptions);
+                            Console.WriteLine($"[成功] 创建并推送分支 {translatorBranch}");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"[错误] 推送分支失败: {ex.Message}");
+                            Console.WriteLine("[提示] 请确保 PAT 有推送权限，并检查网络或仓库权限设置");
+                            return 1;
+                        }
+                    }
                 }
                 else
                 {
@@ -608,8 +671,8 @@ class Program
                     {
                         CredentialsProvider = (url, user, cred) => new UsernamePasswordCredentials
                         {
-                            Username = config.Key,
-                            Password = string.Empty
+                            Username = "x-access-token",
+                            Password = config.Key
                         }
                     };
 
@@ -704,8 +767,8 @@ class Program
                 {
                     CredentialsProvider = (url, user, cred) => new UsernamePasswordCredentials
                     {
-                        Username = config.Key,
-                        Password = string.Empty
+                        Username = "x-access-token",
+                        Password = config.Key
                     }
                 };
 
@@ -737,7 +800,7 @@ class Program
             {
                 // 已存在 PR
                 Console.WriteLine($"[成功] PR 已存在: #{existingPR.Number}");
-                Console.WriteLine($"  标题: {existingPR.Title}");
+                Console.WriteLine($"  标題: {existingPR.Title}");
                 Console.WriteLine($"  链接: {existingPR.HtmlUrl}");
                 Console.WriteLine("[成功] 修改已自动更新到现有 PR");
             }
@@ -789,8 +852,8 @@ class Program
             {
                 CredentialsProvider = (url, user, cred) => new UsernamePasswordCredentials
                 {
-                    Username = config.Key,
-                    Password = string.Empty
+                    Username = "x-access-token",
+                    Password = config.Key
                 }
             };
 
@@ -821,7 +884,7 @@ class Program
             }
             else
             {
-                Console.WriteLine("⚠ 当前分支未跟踪远程分支");
+                Console.WriteLine("当前分支未跟踪远程分支");
             }
 
             return true;
@@ -914,6 +977,14 @@ class Program
         Console.WriteLine($"加密后Token: {encrypted}");
         Console.WriteLine($"验证解密: {DecryptString(encrypted)}");
         return encrypted;
+    }
+
+    // Helper: 返回字符串的最后 n 个字符（如果长度不足则返回原串）
+    static string GetLastChars(string s, int n)
+    {
+        if (string.IsNullOrEmpty(s) || n <= 0)
+            return string.Empty;
+        return s.Length <= n ? s : s.Substring(s.Length - n);
     }
 }
 
