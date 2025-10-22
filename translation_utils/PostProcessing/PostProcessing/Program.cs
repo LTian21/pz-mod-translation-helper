@@ -75,6 +75,8 @@ namespace PostProcessing
 
             // 记录冲突的键
             var conflictKeys = new Dictionary<string, List<TranslationEntry>>();
+            var vanillaKeys = new HashSet<string>();
+            const string VANILLA_MOD_ID = "0000000000";
             //读取 repoDir\translation_utils\key_source_vanilla.json
             string vanillaSourcePath = Path.Combine(repoDir, "translation_utils", "key_source_vanilla.json");
             if (File.Exists(vanillaSourcePath))
@@ -90,7 +92,6 @@ namespace PostProcessing
                     Console.WriteLine($"Loaded vanilla translation source with {vanillaTranslations.Count} entries.");
 
                     // 将 vanilla 翻译存入冲突列表，使用 "0000000000" 作为 modId
-                    const string VANILLA_MOD_ID = "0000000000";
                     foreach (var vanillaEntry in vanillaTranslations)
                     {
                         if (!conflictKeys.ContainsKey(vanillaEntry.Key))
@@ -102,6 +103,7 @@ namespace PostProcessing
                             OriginalText = vanillaEntry.Value.EN,
                             SChiinese = vanillaEntry.Value.CN
                         });
+                        vanillaKeys.Add(vanillaEntry.Key);
                     }
                 }
                 catch (Exception ex)
@@ -138,6 +140,12 @@ namespace PostProcessing
                     string key = originalMatch.Groups["key"].Value.Trim();
                     string originalText = originalMatch.Groups["text"].Value;
 
+                    // 如果是原版游戏的key则跳过
+                    if (vanillaKeys.Contains(key))
+                    {
+                        continue;
+                    }
+
                     if (!ModTranslations.ContainsKey(currentModId))
                     {
                         ModTranslations[currentModId] = new Dictionary<string, TranslationEntry>();
@@ -146,7 +154,7 @@ namespace PostProcessing
                     {
                         ModId = currentModId,
                         OriginalText = originalText,
-                        SChiinese = originalText.Equals("======Original Text Missing====") ? "" : originalText,
+                        SChiinese = "",
                     };
 
                     continue;
@@ -159,12 +167,15 @@ namespace PostProcessing
                     string key = translationMatch.Groups["key"].Value.Trim();
                     string originalText = translationMatch.Groups["text"].Value;
 
+                    // 如果是原版游戏的key则跳过
+                    if (vanillaKeys.Contains(key))
+                    {
+                        continue;
+                    }
+
                     //存储到对应的条目中
                     var entry = ModTranslations[currentModId][key];
-                    if (!originalText.Equals(""))
-                    {
-                        entry.SChiinese = originalText;
-                    }
+                    entry.SChiinese = originalText;
                     if(!conflictKeys.ContainsKey(key))
                     {
                         conflictKeys[key] = new List<TranslationEntry>();
@@ -230,7 +241,7 @@ namespace PostProcessing
                 }
                 writer.WriteLine($"Total keys with same translations: {keysToRemove.Count}");
             }
-            
+
             // 从冲突列表中移除这些键
             foreach (var key in keysToRemove)
             {
@@ -450,8 +461,11 @@ namespace PostProcessing
                                 writer.WriteLine();
                                 currentModId = modId;
                             }
-                            
-                            writer.WriteLine($"{key} = \"{entry.SChiinese}\",");
+
+                            if (!entry.SChiinese.Equals(""))
+                            {
+                                writer.WriteLine($"{key} = \"{entry.SChiinese}\",");
+                            }
                         }
                     }
                 }

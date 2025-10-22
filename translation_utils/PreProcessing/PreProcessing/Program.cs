@@ -202,11 +202,7 @@ namespace PreProcessing
                         }
                         else//原文改变
                         {
-                            //如果翻译文本为空
-                            if (entry.OriginalText.Equals(""))
-                            {
-                                entry.OriginalText = matchText;
-                            }
+                            entry.OriginalText = matchText;
 
                             //标记为未翻译
                             entry.SChineseStatus = TranslationStatus.Untranslated;
@@ -260,11 +256,7 @@ namespace PreProcessing
                         }
                         else//原文改变
                         {
-                            //如果翻译文本为空
-                            if (entry.OriginalText.Equals(""))
-                            {
-                                entry.OriginalText = matchText;
-                            }
+                            entry.OriginalText = matchText;
 
                             //标记为未翻译
                             entry.SChineseStatus = TranslationStatus.Untranslated;
