@@ -2,15 +2,15 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-24 12:18:22 UTC+08:00`*
+*最后更新于：`2025-10-24 19:41:10 UTC+08:00`*
 
 ---
 
 | Mod 名称 | Mod ID | 待翻译条目 | 待校对条目 | 缺少原文条目 | 模组总条目 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Authentic Z | 2335368829 | 2274 | 1407 | 308 | 3777 |
+| Guns of 93: B42 Test Build (Unstable) | 3183820077 | 665 | 1779 | 1062 | 2458 |
 | Even More Traits | 2855320431 | 606 | 62 | 2 | 668 |
-| Guns of 93: B42 Test Build (Unstable) | 3183820077 | 568 | 1799 | 1044 | 2381 |
 | [B42] Buildables Expansion | 3463117260 | 525 | 622 | 7 | 1147 |
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
@@ -51,7 +51,7 @@
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 0 | 69 |
 | SCP - Foundation pack | 3580511016 | 66 | 0 | 0 | 66 |
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
-| that DAMN Library | 3171167894 | 63 | 382 | 0 | 445 |
+| that DAMN Library | 3171167894 | 63 | 383 | 0 | 446 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | Realistic Car Physics [B42] | 3559765660 | 62 | 0 | 0 | 62 |
 | ST Additions - Pry Open | 3579640010 | 60 | 93 | 23 | 153 |
@@ -69,6 +69,7 @@
 | Red Days | 3516166810 | 43 | 61 | 15 | 104 |
 | Inventory Tetris - Grid Based Inventory Overhaul [B42] | 3397561666 | 42 | 0 | 0 | 42 |
 | Factory Pieces | 3399263137 | 40 | 101 | 0 | 141 |
+| My So-Called Snack | 2877535263 | 40 | 184 | 0 | 224 |
 | Tsar's Common Library B42 | 3402491515 | 40 | 339 | 122 | 379 |
 | [B42] Intuitive Crafting | 3486217110 | 39 | 3 | 3 | 42 |
 | Minimal Display Bars + Nutritions + Discomfort [B41/B42] | 3388844542 | 38 | 11 | 0 | 49 |
@@ -80,7 +81,6 @@
 | Firearms | 2256623447 | 35 | 417 | 66 | 452 |
 | Better Flashlights [B42] | 3420478458 | 34 | 0 | 0 | 34 |
 | Logic Missing Recipes | 3540757743 | 33 | 0 | 0 | 33 |
-| My So-Called Snack | 2877535263 | 31 | 184 | 0 | 215 |
 | [B42] Alternative Inventory Rendering | 3394402683 | 30 | 0 | 0 | 30 |
 | [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 4 | 4 | 33 |
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
@@ -100,6 +100,7 @@
 | Legendary DuffelBag | 3558839307 | 18 | 11 | 0 | 29 |
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
+| [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 17 | 0 | 0 | 17 |
 | [B42] Knox Event Expanded NPC mod [alpha v0.3.14-1] | 3397396843 | 17 | 577 | 42 | 594 |
 | [B42]Project RV Interior | 3543229299 | 17 | 0 | 0 | 17 |
 | All In One Tool! | 3589758717 | 16 | 15 | 0 | 31 |
@@ -108,7 +109,6 @@
 | [B42] Bag Upgrade Plus | 3403697073 | 15 | 37 | 1 | 52 |
 | Gyde's Trait Magazines | 3342191739 | 14 | 58 | 0 | 72 |
 | [B41/42] Known And Collected | 2881764317 | 13 | 0 | 0 | 13 |
-| [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 12 | 0 | 0 | 12 |
 | Willowbrook Bastion! | 3479667649 | 12 | 15 | 1 | 27 |
 | Bianca Wardrobe [42. Out now] | 3140453034 | 11 | 803 | 0 | 814 |
 | [B41\B42] DBG Crowbar Unlock | 3555407625 | 11 | 225 | 46 | 236 |
@@ -152,6 +152,7 @@
 | Hephas Occupations and Traits | 3256482412 | 5 | 341 | 0 | 346 |
 | Herbalist | 2875059598 | 5 | 68 | 0 | 73 |
 | Scavenger Skill [B42] | 3407792640 | 5 | 64 | 0 | 69 |
+| Vehicle Repair Overhaul | 2757712197 | 5 | 50 | 3 | 55 |
 | [B42] Water Pipes (aka Plumbing) | 3546314080 | 5 | 49 | 0 | 54 |
 | [J&G] Flecktarn Gear [B42/41] | 3206579556 | 5 | 26 | 0 | 31 |
 | '85 Chevrolet Caprice / Impala | 3413704851 | 4 | 37 | 0 | 41 |
@@ -167,6 +168,7 @@
 | Gunpoint Redemption [B.41/B.42] | 3078291265 | 3 | 11 | 0 | 14 |
 | [B42]Sector-7 Breach | 3513107552 | 3 | 9 | 3 | 12 |
 | [J&G] Caution Uniform [B42/41] | 3369825662 | 3 | 39 | 0 | 44 |
+| '93 Chevrolet Suburban / Silverado | 3152529790 | 2 | 150 | 0 | 152 |
 | Axe's Recrafting [B42] | 2211423190 | 2 | 13 | 0 | 15 |
 | [B42] Sandbox Options | 3386906181 | 2 | 3 | 0 | 5 |
 | B42 Rain's Axes & Blades | 3388380529 | 2 | 47 | 0 | 50 |
@@ -187,6 +189,7 @@
 | [B41 / B42] Load All Magazines | 2920899878 | 2 | 0 | 0 | 2 |
 | Vehicle Military Zone | 3436499337 | 2 | 9 | 0 | 11 |
 | Water Goes Bad | 2849467715 | 2 | 17 | 17 | 19 |
+| '86 Chevrolet CUCVs + M101A2 Trailer | 3428008364 | 1 | 82 | 1 | 83 |
 | '91 Ford Ranger | 3539691958 | 1 | 49 | 0 | 50 |
 | Anthro Traits | 3025679944 | 1 | 145 | 0 | 146 |
 | Autotsar Tuning Atelier - Fjord Mustard [B42] | 3405178154 | 1 | 1 | 0 | 2 |
@@ -262,7 +265,6 @@
 | '83 AM General M923 | 2811383142 | 0 | 42 | 0 | 42 |
 | '84 Jeep XJ Cherokee | 3409287192 | 0 | 51 | 0 | 51 |
 | '84 Mercedes Benz W460 | 2805630347 | 0 | 71 | 0 | 71 |
-| '86 Chevrolet CUCVs + M101A2 Trailer | 3428008364 | 0 | 83 | 0 | 83 |
 | '86 Ford Econoline E-150 + Pop Culture vans | 2870394916 | 0 | 155 | 0 | 155 |
 | '86 Oshkosh P19A + Military Trailers | 2566953935 | 0 | 68 | 0 | 68 |
 | '87 Buick Regal | 3226885926 | 0 | 48 | 0 | 48 |
@@ -287,7 +289,6 @@
 | '92 Ford Crown Victoria | 2962175696 | 0 | 54 | 0 | 54 |
 | '92 Jeep YJ Wrangler | 3287727378 | 0 | 86 | 0 | 86 |
 | '92 NISSAN Skyline GT-R (R32) | 2846036306 | 0 | 77 | 0 | 77 |
-| '93 Chevrolet Suburban / Silverado | 3152529790 | 0 | 150 | 0 | 150 |
 | '93 Ford CF8000 Elgin Street Sweeper | 2969343830 | 0 | 49 | 0 | 49 |
 | '93 Ford F-Series | 3073430075 | 0 | 91 | 0 | 91 |
 | '93 Ford Taurus | 3088951320 | 0 | 65 | 0 | 65 |
@@ -587,7 +588,6 @@
 | Vanilla MRE [B41/B42] | 3100032203 | 0 | 23 | 0 | 23 |
 | [B42] Vanvival - Build's 42 Nomadic Experience | 3547444619 | 0 | 20 | 1 | 20 |
 | Vehicle Class Overhaul [B42 Compatible] | 3407507873 | 0 | 15 | 15 | 15 |
-| Vehicle Repair Overhaul | 2757712197 | 0 | 52 | 0 | 52 |
 | Ellie Voice Pack [TLOU2] [B42] | 3464700263 | 0 | 1 | 0 | 1 |
 | Joel Voice Pack [TLOU2] [B42] | 3496043022 | 0 | 1 | 0 | 1 |
 | VSMR Face for Spongie's Character Customisation | 3415572170 | 0 | 2 | 0 | 2 |
