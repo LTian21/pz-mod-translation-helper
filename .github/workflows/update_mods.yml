@@ -63,7 +63,7 @@ jobs:
 
       - name: Smart Check for Mod Updates (Scheduled/Default)
         id: scheduled_check
-        if: github.event.inputs.full_refresh == 'false'
+        if: github.event.inputs.full_refresh != 'true'
         env:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
         run: python scripts/check_updates.py
