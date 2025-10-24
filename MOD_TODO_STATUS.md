@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-23 12:18:35 UTC+08:00`*
+*最后更新于：`2025-10-24 12:18:22 UTC+08:00`*
 
 ---
 
@@ -30,7 +30,6 @@
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
 | Trap Manager | 3566766862 | 159 | 3 | 1 | 162 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
-| MRE XIII (1993) - Meal Ready to Eat MOD Real version for build 42 | 3406930410 | 123 | 25 | 13 | 148 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
 | Pocket Kittens (B42) | 3568029240 | 118 | 16 | 7 | 134 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
@@ -101,9 +100,9 @@
 | Legendary DuffelBag | 3558839307 | 18 | 11 | 0 | 29 |
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
-| [B42] Knox Event Expanded NPC mod [alpha v0.3.13-1] | 3397396843 | 17 | 577 | 42 | 594 |
+| [B42] Knox Event Expanded NPC mod [alpha v0.3.14-1] | 3397396843 | 17 | 577 | 42 | 594 |
 | [B42]Project RV Interior | 3543229299 | 17 | 0 | 0 | 17 |
-| All In One Tool! | 3589758717 | 16 | 23 | 8 | 39 |
+| All In One Tool! | 3589758717 | 16 | 15 | 0 | 31 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
 | [B42] Mod Manager | 3567084868 | 16 | 0 | 0 | 16 |
 | [B42] Bag Upgrade Plus | 3403697073 | 15 | 37 | 1 | 52 |
@@ -463,6 +462,7 @@
 | More Wood To Charcoal | 3425726710 | 0 | 6 | 0 | 6 |
 | More Car Features + Spawn Zones Expansion | 3520758551 | 0 | 20 | 0 | 20 |
 | [B41/B42] More Immersive Vehicles | 3162566044 | 0 | 13 | 0 | 13 |
+| MRE XIII (1993) - Meal Ready to Eat MOD Real version for build 42 | 3406930410 | 0 | 0 | 13 | 148 |
 | [Reworked] Madax Weapon Pack - B42 | 2732407704 | 0 | 73 | 0 | 73 |
 | [B42] Ogrim Mod's - Universal Custom Firearm | 3551139118 | 0 | 55 | 0 | 55 |
 | My Favorite Jobs - v2 | 3508005481 | 0 | 9 | 0 | 9 |

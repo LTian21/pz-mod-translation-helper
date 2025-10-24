@@ -63,6 +63,13 @@ module Base
 		scale = 0.1,
 	}
 
+    model 93chevySilveradoFrontPlow
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_plow_frame,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
 	template vehicle SUB93BumperRear
 	{
 		part DAMNBumperRear
@@ -86,7 +93,7 @@ module Base
                 	{
                     	1
                     		{
-                        	type = Base.Wrench,
+                        	tags = Wrench,
                         	count = 1,
                         	keep = true,
 							equip = primary,
@@ -106,7 +113,7 @@ module Base
                 	{
                     	1
                     		{
-			  				type = Base.Wrench,
+			  				tags = Wrench,
 							count = 1,
 							keep = true,
 							equip = primary,
@@ -176,7 +183,7 @@ module Base
                 	{
                     	1
                     		{
-                        	type = Base.Wrench,
+                        	tags = Wrench,
                         	count = 1,
                         	keep = true,
 							equip = primary,
@@ -196,7 +203,7 @@ module Base
                 	{
                     	1
                     		{
-			  				type = Base.Wrench,
+			  				tags = Wrench,
 							count = 1,
 							keep = true,
 							equip = primary,
@@ -437,7 +444,7 @@ module Base
                 	{
                     	1
                     		{
-                        	type = Base.Wrench,
+                        	tags = Wrench,
                         	count = 1,
                         	keep = true,
 							equip = primary,
@@ -457,7 +464,7 @@ module Base
                 	{
                     	1
                     		{
-			  				type = Base.Wrench,
+			  				tags = Wrench,
 							count = 1,
 							keep = true,
 							equip = primary,
@@ -551,7 +558,7 @@ module Base
                 	{
                     	1
                     		{
-                        	type = Base.Wrench,
+                        	tags = Wrench,
                         	count = 1,
                         	keep = true,
 							equip = primary,
@@ -571,7 +578,7 @@ module Base
                 	{
                     	1
                     		{
-			  				type = Base.Wrench,
+			  				tags = Wrench,
 							count = 1,
 							keep = true,
 							equip = primary,
@@ -616,5 +623,203 @@ module Base
 					init = SUB93.Init.BumperFrontPD,
 				}
 		}
+	}
+
+    template vehicle SUB93BumpersP
+	{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 93chevySuburbanFrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 93chevySuburbanFrontBumper1,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 93chevySuburbanFrontBullbarA,
+				}
+
+			model FrontBullbarB
+				{
+                		file = 93chevySuburbanFrontBullbarB,
+				}
+
+            model FrontBullbarB2
+				{
+                		file = 93chevySuburbanFrontBullbarB2,
+				}
+
+			model FrontBullbarC
+				{
+                		file = 93chevySuburbanFrontBullbarC,
+				}
+
+            model FrontBullbarP
+				{
+                		file = 93chevySilveradoFrontPlow,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93chevySuburbanBumperFront0;Base.93chevySuburbanBumperFront1;Base.93chevySuburbanBullbarFrontA;Base.93chevySuburbanBullbarFrontB;Base.93chevySuburbanBullbarFrontB2;Base.93chevySuburbanBullbarFrontC;Base.93chevySilveradoPlowFrame,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SUB93.InstallComplete.BumperFrontP,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = SUB93.UninstallComplete.BumperFrontP,
+            		}
+
+            		lua
+            		{
+					create = SUB93.Create.BumperFrontP,
+					init = SUB93.Init.BumperFrontP,
+					}
+		}
+
+		template! = SUB93BumperRear,
+	}
+
+    template vehicle SUB93BumpersCCP
+	{
+		template! = SUB93BumpersP,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumpersXCP
+	{
+		template! = SUB93BumpersP,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+                        offset = 0.0000 0.0000 0.2800,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumpersSCP
+	{
+		template! = SUB93BumpersP,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+                        offset = 0.0000 0.0000 0.9100,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumpersXCSP
+	{
+		template! = SUB93BumpersP,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+                        offset = 0.0000 0.0000 0.7478,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumpersSCSP
+	{
+		template! = SUB93BumpersP,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+                        offset = 0.0000 0.0000 1.3778,
+				}
+
+		}
+
+	}
+
+    template vehicle SUB93BumpersCCshortP
+	{
+		template! = SUB93BumpersP,
+
+		part DAMNBumperRear
+        {
+
+                model RearBumper0
+				{
+                		file = 93chevySuburbanRearBumper1,
+                        offset = 0.0000 0.0000 0.4678,
+				}
+
+		}
+
 	}
 }
