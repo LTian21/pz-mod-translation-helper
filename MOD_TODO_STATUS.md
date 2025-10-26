@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-25 12:18:00 UTC+08:00`*
+*最后更新于：`2025-10-26 12:17:19 UTC+08:00`*
 
 ---
 
@@ -58,8 +58,8 @@
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 59 | 20 | 2 | 79 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 57 | 363 | 0 | 421 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 56 | 52 | 0 | 108 |
+| Legendary Katana | 3418366499 | 56 | 72 | 1 | 128 |
 | [B42] Ogrim Mod's - Machine Utils | 3555558732 | 56 | 0 | 0 | 56 |
-| Legendary Katana | 3418366499 | 53 | 75 | 1 | 128 |
 | Time Decreases Vehicle Condition [B42] | 3448375286 | 50 | 0 | 0 | 50 |
 | [J&G] Firefighter Uniform [B42/41] | 3521263771 | 49 | 5 | 5 | 55 |
 | [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 47 | 4 | 4 | 52 |
