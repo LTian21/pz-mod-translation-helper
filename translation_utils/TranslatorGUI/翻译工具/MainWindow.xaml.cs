@@ -1,14 +1,20 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows; // 用于 RoutedEventArgs
-using System.Security.Cryptography;
-using System.Collections.Concurrent;
-using System.Windows.Threading;
+using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Threading;
+using TranslationSystem; // 引入语言枚举与工具
 
 namespace 翻译工具
 {
@@ -27,6 +33,9 @@ namespace 翻译工具
         private readonly StringBuilder _pendingWhileSelecting = new StringBuilder();
         private readonly DispatcherTimer _outputTimer;
 
+        // 新增：用于任务列表的数据源
+        private readonly ObservableCollection<ModItemView> _modItems = new();
+
         // MainWindow 构造函数
         public MainWindow()
         {
@@ -35,6 +44,9 @@ namespace 翻译工具
 
             InitializeComponent();
             LoadConfig();
+
+            // 绑定列表数据源
+            try { dgMods.ItemsSource = _modItems; } catch { }
 
             // 主窗口默认从屏幕中心启动
             this.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -68,13 +80,16 @@ namespace 翻译工具
                 AppendOutput($"PAT 加解密失败: {ex.Message}");
             }
 
-            // 在主窗口中显示当前翻译文件路径（用户以前选择的或默认路径）
+            // 在主窗口中显示当前翻译文件路径和语言（用户以前选择的或默认）
             try
             {
                 var displayPath = string.IsNullOrWhiteSpace(_config.LocalPath)
                     ? Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
                     : _config.LocalPath;
                 if (txtPath != null) txtPath.Text = displayPath;
+
+                // 显示当前语言
+                UpdateLanguageDisplay();
             }
             catch { }
 
@@ -104,7 +119,8 @@ namespace 翻译工具
                 {
                     _config = new Config
                     {
-                        LocalPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                        LocalPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                        LanguageSuffix = "CN"
                     };
                 }
             }
@@ -112,7 +128,8 @@ namespace 翻译工具
             {
                 _config = new Config
                 {
-                    LocalPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+                    LocalPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                    LanguageSuffix = "CN"
                 };
             }
         }
@@ -143,7 +160,7 @@ namespace 翻译工具
             {
                 Title = "确认用户信息",
                 Width = 400,
-                Height = 200,
+                Height = 260,
                 WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner,
                 ResizeMode = System.Windows.ResizeMode.NoResize,
                 Owner = this,
@@ -159,6 +176,33 @@ namespace 翻译工具
             panel.Children.Add(new System.Windows.Controls.TextBlock { Text = "邮箱:" });
             var txtEmail = new System.Windows.Controls.TextBox { Text = _config.UserEmail ?? string.Empty, Margin = new System.Windows.Thickness(0, 4, 0, 8) };
             panel.Children.Add(txtEmail);
+
+            // 新增：语言选择
+            panel.Children.Add(new System.Windows.Controls.TextBlock { Text = "翻译语言:" });
+            var cbLang = new System.Windows.Controls.ComboBox { Margin = new System.Windows.Thickness(0, 4, 0, 8) };
+            // 填充语言列表（来自 TranslatorHelper Program.cs - TranslationSystem.LanguageHelper.All）
+            foreach (var lang in LanguageHelper.All)
+            {
+                var suffix = lang.ToSuffix();
+                var item = new System.Windows.Controls.ComboBoxItem
+                {
+                    Content = $"{lang} ({suffix})",
+                    Tag = suffix
+                };
+                cbLang.Items.Add(item);
+            }
+            // 选择当前配置语言（默认 CN）
+            string currentSuffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+            cbLang.SelectedIndex = 0;
+            for (int i = 0; i < cbLang.Items.Count; i++)
+            {
+                if (cbLang.Items[i] is System.Windows.Controls.ComboBoxItem cbi && string.Equals(cbi.Tag?.ToString(), currentSuffix, StringComparison.OrdinalIgnoreCase))
+                {
+                    cbLang.SelectedIndex = i;
+                    break;
+                }
+            }
+            panel.Children.Add(cbLang);
 
             var btnPanel = new System.Windows.Controls.StackPanel { Orientation = System.Windows.Controls.Orientation.Horizontal, HorizontalAlignment = System.Windows.HorizontalAlignment.Right };
             var btnOk = new System.Windows.Controls.Button { Content = "确认", Width = 80, Margin = new System.Windows.Thickness(4) };
@@ -187,9 +231,19 @@ namespace 翻译工具
                     return;
                 }
 
+                string selectedSuffix = "CN";
+                if (cbLang.SelectedItem is System.Windows.Controls.ComboBoxItem sel && sel.Tag is string tagStr && !string.IsNullOrWhiteSpace(tagStr))
+                {
+                    selectedSuffix = tagStr;
+                }
+
                 _config.UserName = name;
                 _config.UserEmail = email;
+                _config.LanguageSuffix = selectedSuffix;
                 SaveConfig(); // 立即存储
+
+                // 更新主界面语言显示
+                UpdateLanguageDisplay();
 
                 dlg.DialogResult = true;
                 dlg.Close();
@@ -215,12 +269,112 @@ namespace 翻译工具
 
         private async void btnInit_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            // "更新翻译文件"：按顺序执行 init、sync、listpr
             await RunHelperAsync("init", null);
+            await RunHelperAsync("sync", null);
+            await RunHelperAsync("listpr", null);
         }
 
         private async void btnSync_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             await RunHelperAsync("sync", null);
+        }
+
+        private async void btnLockMod_Click(object sender, RoutedEventArgs e)
+        {
+            // 1. 自动触发刷新翻译文件（调用 listpr 生成 translation_info_*.json）
+            await RunHelperAsync("listpr", null);
+
+            // 2. 读取 <程序目录>\\bin 下的 translation_info_{suffix}.json
+            await LoadTranslationInfoAsync();
+        }
+
+        private async void btnConfirmLock_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var selected = _modItems.Where(m => m.IsSelected).ToList();
+                if (selected.Count == 0)
+                {
+                    AppendOutput("未选择任何 Mod。");
+                    return;
+                }
+
+                // 组装 modid 字符串: "123","456"
+                var ids = string.Join(",", selected.Select(m => "\"" + m.ModId + "\""));
+
+                // 4.2 调用 cli 执行领取
+                await RunHelperAsync("lockmod", ids);
+
+                // 4.3 刷新列表
+                await RunHelperAsync("listpr", null);
+                await LoadTranslationInfoAsync();
+            }
+            catch (Exception ex)
+            {
+                AppendOutput($"领取失败: {ex.Message}");
+            }
+        }
+
+        private void btnCancelSelection_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in _modItems) item.IsSelected = false;
+        }
+
+        private async Task LoadTranslationInfoAsync()
+        {
+            try
+            {
+                var suffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+                var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                var jsonPath = Path.Combine(baseDir, "bin", $"translation_info_{suffix}.json");
+
+                if (!File.Exists(jsonPath))
+                {
+                    AppendOutput($"未找到统计文件: {jsonPath}");
+                    return;
+                }
+
+                var json = await File.ReadAllTextAsync(jsonPath, Encoding.UTF8);
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var info = JsonSerializer.Deserialize<TranslationInfoFile>(json, options);
+                if (info?.Translations == null)
+                {
+                    AppendOutput("统计文件格式无效或为空。");
+                    return;
+                }
+
+                _modItems.Clear();
+                foreach (var t in info.Translations)
+                {
+                    _modItems.Add(new ModItemView(t, _config.UserName ?? string.Empty));
+                }
+
+                // 默认按 ModId 升序排序
+                ApplyDefaultSort();
+
+                AppendOutput($"已加载 { _modItems.Count } 个 Mod 状态。");
+            }
+            catch (Exception ex)
+            {
+                AppendOutput($"读取统计文件失败: {ex.Message}");
+            }
+        }
+
+        private void ApplyDefaultSort()
+        {
+            try
+            {
+                var view = CollectionViewSource.GetDefaultView(dgMods.ItemsSource);
+                if (view == null) return;
+                view.SortDescriptions.Clear();
+                view.SortDescriptions.Add(new SortDescription(nameof(ModItemView.ModId), ListSortDirection.Ascending));
+                view.Refresh();
+            }
+            catch { }
         }
 
         private void btnStart_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -231,7 +385,8 @@ namespace 翻译工具
             _config.LocalPath = basePath;
             SaveConfig();
 
-            var file = Path.Combine(basePath, "pz-mod-translation-helper", "data", "translations_CN.txt");
+            var suffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+            var file = Path.Combine(basePath, "pz-mod-translation-helper", "data", $"translations_{suffix}.txt");
             var guideImage = Path.Combine(basePath, "pz-mod-translation-helper", "简体中文翻译格式说明.png");
 
             if (File.Exists(file))
@@ -346,12 +501,15 @@ namespace 翻译工具
             argsBuilder.Append(' ').Append(EscapeArg(PatToken));
             argsBuilder.Append(' ').Append(EscapeArg(_config.UserName ?? string.Empty));
             argsBuilder.Append(' ').Append(EscapeArg(_config.UserEmail ?? string.Empty));
+            // 语言后缀，来自配置，默认简体中文 CN
+            var langSuffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+            argsBuilder.Append(' ').Append(EscapeArg(langSuffix));
+            // 操作
             argsBuilder.Append(' ').Append(EscapeArg(operation));
-            if (operation == "commit")
-            {
-                argsBuilder.Append(' ').Append(EscapeArg(commitMessage ?? string.Empty));
-            }
-            // pass repository root path as last argument
+            // 始终附带占位的提交说明，便于传递本地路径
+            var commitArg = commitMessage ?? string.Empty;
+            argsBuilder.Append(' ').Append(EscapeArg(commitArg));
+            // 传递仓库根目录作为最后一个参数（本地路径）
             argsBuilder.Append(' ').Append(EscapeArg(repoRoot));
 
             // Determine encoding for child process output. Prefer GBK (code page 936) on Chinese Windows,
@@ -487,11 +645,25 @@ namespace 翻译工具
             }
         }
 
+        private void UpdateLanguageDisplay()
+        {
+            try
+            {
+                if (txtLanguage == null) return;
+                var suffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+                // 反向解析枚举名（若不可用则仅显示后缀）
+                var lang = LanguageHelper.FromSuffix(suffix);
+                txtLanguage.Text = $"{lang} ({suffix})";
+            }
+            catch { }
+        }
+
         private class Config
         {
             public string? UserName { get; set; }
             public string? UserEmail { get; set; }
             public string? LocalPath { get; set; }
+            public string? LanguageSuffix { get; set; }
         }
 
         // Simple input box window for commit message
@@ -577,5 +749,226 @@ namespace 翻译工具
             var plainBytes = ms.ToArray();
             return Encoding.UTF8.GetString(plainBytes);
         }
+
+        // ====== 任务列表数据模型 ======
+        private class TranslationInfoFile
+        {
+            public string? ExportTime { get; set; }
+            public int TotalMods { get; set; }
+            public List<TranslationInfoRecord>? Translations { get; set; }
+        }
+
+        private class TranslationInfoRecord
+        {
+            public string ModId { get; set; } = string.Empty;
+            public string ModTitle { get; set; } = string.Empty;
+            public string Language { get; set; } = string.Empty;
+            public int TotalEntries { get; set; }
+            public int UntranslatedEntries { get; set; }
+            public int TranslatedEntries { get; set; }
+            public int ApprovedEntries { get; set; }
+            public bool IsLocked { get; set; }
+            public string LockedBy { get; set; } = string.Empty;
+            public DateTime LockTime { get; set; }
+            public DateTime ExpireTime { get; set; }
+            public bool IsCIPassed { get; set; }
+            public int ApprovalCount { get; set; }
+            public DateTime RefreshTime { get; set; }
+        }
+
+        private class ModItemView : INotifyPropertyChanged
+        {
+            public event PropertyChangedEventHandler? PropertyChanged;
+            private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+            private static readonly DispatcherTimer _refreshTimer = new();
+
+            static ModItemView()
+            {
+                // 全局定时器：每秒刷新一次所有 ModItemView 实例的过期状态
+                _refreshTimer.Interval = TimeSpan.FromSeconds(1);
+                _refreshTimer.Tick += (s, e) =>
+                {
+                    foreach (var item in _allInstances)
+                    {
+                        item.UpdateExpiredStatus();
+                    }
+                };
+                _refreshTimer.Start();
+            }
+
+            private static readonly List<ModItemView> _allInstances = new();
+
+            public ModItemView(TranslationInfoRecord r, string currentUser)
+            {
+                ModId = r.ModId;
+                ModTitle = r.ModTitle;
+                Language = r.Language;
+                TotalEntries = r.TotalEntries;
+                UntranslatedEntries = r.UntranslatedEntries;
+                TranslatedEntries = r.TranslatedEntries;
+                ApprovedEntries = r.ApprovedEntries;
+                IsLocked = r.IsLocked;
+                LockedBy = r.LockedBy ?? string.Empty;
+                LockTime = r.LockTime;
+                ExpireTime = r.ExpireTime;
+                IsCIPassed = r.IsCIPassed;
+                ApprovalCount = r.ApprovalCount;
+                RefreshTime = r.RefreshTime;
+                _currentUser = currentUser ?? string.Empty;
+
+                // 初始化过期状态
+                UpdateExpiredStatus();
+
+                // 注册到全局实例列表
+                _allInstances.Add(this);
+            }
+
+            private void UpdateExpiredStatus()
+            {
+                var newExpiredStatus = IsLocked && ExpireTime != default && ExpireTime < DateTime.Now;
+                if (newExpiredStatus != _isExpired)
+                {
+                    _isExpired = newExpiredStatus;
+                    OnPropertyChanged(nameof(IsExpired));
+                }
+            }
+
+            private readonly string _currentUser;
+
+            public bool IsSelected { get => _isSelected; set { _isSelected = value; OnPropertyChanged(nameof(IsSelected)); } }
+            private bool _isSelected;
+
+            public string ModId { get; }
+            public string ModTitle { get; }
+            public string Language { get; }
+            public int TotalEntries { get; }
+            public int UntranslatedEntries { get; }
+            public int TranslatedEntries { get; }
+            public int ApprovedEntries { get; }
+            public bool IsLocked { get; }
+            public string LockedBy { get; }
+            public DateTime LockTime { get; }
+            public DateTime ExpireTime { get; }
+            public bool IsCIPassed { get; }
+            public int ApprovalCount { get; }
+            public DateTime RefreshTime { get; }
+
+            // 过期状态（可观察属性）
+            public bool IsExpired => _isExpired;
+            private bool _isExpired;
+
+            // 派生属性用于行样式
+            public bool IsLockedByMe => IsLocked && !string.IsNullOrWhiteSpace(_currentUser) && string.Equals(LockedBy, _currentUser, StringComparison.OrdinalIgnoreCase);
+            public bool IsLockedByOthers => IsLocked && !IsLockedByMe;
+        }
+    }
+}
+
+namespace TranslationSystem
+{
+    /// <summary>
+    /// 支持的语言枚举。
+    /// </summary>
+    public enum Language
+    {
+        English,
+        SChinese,
+        TChinese,
+        French,
+        German,
+        Spanish,
+        Latam,
+        Italian,
+        Japanese,
+        Koreana,
+        Russian,
+        Brazilian,
+        Czech,
+        Danish,
+        Dutch,
+        Finnish,
+        Hungarian,
+        Indonesian,
+        Norwegian,
+        Polish,
+        Portuguese,
+        Romanian,
+        Swedish,
+        Thai,
+        Turkish,
+        Ukrainian,
+        Vietnamese
+    }
+
+    /// <summary>
+    /// Language 枚举的扩展方法与实用工具。
+    /// </summary>
+    public static class LanguageHelper
+    {
+        // 双向映射表
+        private static readonly Dictionary<Language, string> _toSuffix = new()
+        {
+            { Language.English, "EN" },
+            { Language.SChinese, "CN" },
+            { Language.TChinese, "TW" },
+            { Language.French, "FR" },
+            { Language.German, "DE" },
+            { Language.Spanish, "ES" },
+            { Language.Latam, "LATAM" },
+            { Language.Italian, "IT" },
+            { Language.Japanese, "JP" },
+            { Language.Koreana, "KO" },
+            { Language.Russian, "RU" },
+            { Language.Brazilian, "BR" },
+            { Language.Czech, "CZ" },
+            { Language.Danish, "DA" },
+            { Language.Dutch, "NL" },
+            { Language.Finnish, "FI" },
+            { Language.Hungarian, "HU" },
+            { Language.Indonesian, "ID" },
+            { Language.Norwegian, "NO" },
+            { Language.Polish, "PL" },
+            { Language.Portuguese, "PT" },
+            { Language.Romanian, "RO" },
+            { Language.Swedish, "SE" },
+            { Language.Thai, "TH" },
+            { Language.Turkish, "TR" },
+            { Language.Ukrainian, "UA" },
+            { Language.Vietnamese, "VN" },
+        };
+
+        private static readonly Dictionary<string, Language> _fromSuffix = new(StringComparer.OrdinalIgnoreCase);
+
+        static LanguageHelper()
+        {
+            // 反向映射初始化
+            foreach (var kv in _toSuffix)
+                _fromSuffix[kv.Value] = kv.Key;
+        }
+
+        /// <summary>
+        /// 获取语言对应的翻译文件后缀。
+        /// </summary>
+        public static string ToSuffix(this Language lang)
+        {
+            return _toSuffix.TryGetValue(lang, out var code) ? code : "EN";
+        }
+
+        /// <summary>
+        /// 从后缀字符串获取语言枚举，默认为 English。
+        /// </summary>
+        public static Language FromSuffix(string suffix)
+        {
+            if (string.IsNullOrWhiteSpace(suffix))
+                return Language.English;
+            return _fromSuffix.TryGetValue(suffix.Trim(), out var lang) ? lang : Language.English;
+        }
+
+        /// <summary>
+        /// 获取所有支持的语言列表。
+        /// </summary>
+        public static IReadOnlyList<Language> All => _all;
+        private static readonly List<Language> _all = new(Enum.GetValues<Language>());
     }
 }

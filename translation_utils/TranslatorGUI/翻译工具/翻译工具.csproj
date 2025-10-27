@@ -1,17 +1,28 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net9.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>disable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
-    
-    <!-- 设置输出路径到 ..\..\可视化翻译工具\翻译\，不区分 Debug/Release 和平台 -->
-    <OutputPath>..\..\可视化翻译工具\翻译\</OutputPath>
+    <Nullable>enable</Nullable>
+
+    <!-- 不追加 Debug/Release、平台、或目标框架子目录 -->
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <AppendPlatformToOutputPath>false</AppendPlatformToOutputPath>
+
+    <!-- 固定输出目录到 <项目目录>\..\..\可视化翻译工具\翻译 -->
+    <OutputPath>..\..\可视化翻译工具\翻译\</OutputPath>
+    <!-- 固定中间输出目录，避免按配置/平台分目录（可选） -->
+    <IntermediateOutputPath>obj\</IntermediateOutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\TranslatorHelper\TranslatorHelper\TranslatorHelper.csproj">
+      <!-- 不复制引用项目的输出到本项目输出目录 -->
+      <Private>false</Private>
+    </ProjectReference>
+  </ItemGroup>
 
 </Project>
