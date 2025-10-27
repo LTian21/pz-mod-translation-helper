@@ -22,6 +22,34 @@ module Base
 		scale = 0.0065,
 	}
 	
+	item M61_Vulcan2
+    {	
+		DisplayCategory = VehicleMaintenance,
+        Weight	=	30.0,
+        Type	=	Normal,
+        DisplayName	=	M61 Vulcan,
+        Icon	=	M61_Vulcan,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = Browning_M2_Item,
+		
+    }
+	
+	/******* TURRET *******/
+	
+	item TankTurret2
+    {
+        Type	=	Normal,
+        DisplayName	=	TankTurret,
+		DisplayCategory = Hidden,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Icon	=	PC_ammunitionCOAX,
+        WorldStaticModel = PC_ammunitionCOAX,
+    }
+	
 	/******* AMMO *******/
 	
 	item 127x99mm
@@ -34,9 +62,15 @@ module Base
 		AlwaysWelcomeGift = TRUE,
 		Count = 10,
 		MetalValue = 1,
-		WorldStaticModel = RifleAmmo,
+		WorldStaticModel = 127x99mm_Item,
 		Tags = Ammo,
 	}
+	 model 127x99mm_Item
+    {
+        mesh = WorldItems/RifleAmmo,
+        texture = WorldItems/BulletRound,
+        scale = 1.0,
+    }
 	
 	item 127x99mmHE
 	{
@@ -48,7 +82,7 @@ module Base
 		AlwaysWelcomeGift = TRUE,
 		Count = 10,
 		MetalValue = 1,
-		WorldStaticModel = RifleAmmo,
+		WorldStaticModel = 127x99mm_Item,
 		Tags = Ammo,
 	}
 	
@@ -57,29 +91,42 @@ module Base
 		DisplayName = 20mm Round,
 		DisplayCategory = Ammo,
 		Type = Normal,
-		Weight = 0.100,
-		Icon = 20mmAmmo,
+		Weight = 0.200,
+		Icon = 20mmAmmoAP,
 		AlwaysWelcomeGift = TRUE,
 		Count = 10,
 		MetalValue = 1,
-		WorldStaticModel = RifleAmmo,
+		WorldStaticModel = 20x102mm_Item,
 		Tags = Ammo,
 	}
 	
+	model 20x102mm_Item
+    {
+        mesh = WorldItems/RifleAmmo,
+        texture = 20mmAmmo,
+        scale = 1.7,
+    }
+	
 	item 20x102mmHE
 	{
-		DisplayName = (NOT USED)20mm HE Round,
+		DisplayName = 20mm HE Round,
 		DisplayCategory = Ammo,
 		Type = Normal,
-		Weight = 0.100,
+		Weight = 0.200,
 		Icon = 20mmAmmoHE,
 		AlwaysWelcomeGift = TRUE,
 		Count = 10,
 		MetalValue = 1,
-		WorldStaticModel = RifleAmmo,
+		WorldStaticModel = 20x102mmHE_Item,
 		Tags = Ammo,
 	}
 	
+	model 20x102mmHE_Item
+    {
+        mesh = WorldItems/RifleAmmo,
+        texture = 20mmAmmoHe,
+        scale = 1.7,
+    }
 	/******* AMMO-CLIP*******/
 	
 	item 127x99mmClip
@@ -158,6 +205,123 @@ module Base
 		mesh = PC_ammunitionCOAX,
 	    texture = PC_ammunition_texture,
 	}
+	
+	/****** ARMOR ******/
+		
+	item TankArmor2
+    {
+        Type	=	Normal,
+        DisplayName	=	TankArmor,
+		DisplayCategory = Hidden,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Icon	=	PC_ammunitionCOAX,
+        WorldStaticModel = PC_ammunitionCOAX,
+    }
+	
+	item SheetHighHardnessSteel
+    {
+        DisplayCategory = Material,
+        Type = Normal,
+        Weight = 5.0,
+		DisplayName	= High Hardness Steel Sheet,
+        Icon = SheetHighHardnessSteel,
+        MetalValue = 150.0,
+        WorldStaticModel = MetalSheet,
+        Tags = SmeltableSteelLarge;HasMetal,
+        Researchablerecipes = SheetMetalWeapon,
+    }
+	
+	/****** TRACK ******/
+	
+	item TankTrack2
+    {
+        Type	=	Normal,
+        DisplayName	=	TankTrack,
+		DisplayCategory = Hidden,
+		ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Icon	=	PC_ammunitionCOAX,
+        WorldStaticModel = TankTrackShoe_Item,
+    }
+	
+	item Track_Shoe
+    {	
+		DisplayCategory = VehicleMaintenance,
+        Weight	=	3.0,
+        Type	=	Normal,
+        DisplayName	=	Tank Track Shoe,
+        Icon	=	Track_Shoe,
+        MechanicsItem = TRUE,
+        WorldStaticModel = TankTrackShoe_Item,
+		
+    }
+	
+	item TankTrackShoeNoTire
+    {	
+		DisplayCategory = Material,
+        Weight	=	2.0,
+        Type	=	Normal,
+        DisplayName	=	Tank Track Shoe No Rubber,
+        Icon	=	Track_Shoe_No_Tire,
+        MechanicsItem = TRUE,
+        WorldStaticModel = TankTrackShoe_Item,
+		
+    }
+	
+	model TankTrackShoe_Item
+	{
+		mesh = Vehicles/Tank_Track_Shoe,
+	    texture = Vehicles/Tank_Track_Shoe,
+		scale = 0.0065,
+	}
+	
+	item Track_Connection_Tool
+    {	
+		DisplayCategory = Tool,
+		Type = Drainable,
+        Weight	=	5.0,
+		WeightEmpty = 5.0,
+		MetalValue = 20.0,
+        DisplayName	=	Tank Track Connection Tool,
+        Icon	=	Track_Connection_Tool,
+        MechanicsItem = TRUE,
+		KeepOnDeplete = TRUE,
+		UseDelta = 0.0,
+        WorldStaticModel = Track_Connection_Tool_Item,
+		
+    }
+	model Track_Connection_Tool_Item
+	{
+		mesh = Vehicles/Tank_Track_Tool,
+	    texture = Vehicles/track_repair,
+		scale = 0.0065,
+	}
+		
+	item ClayTrackShoeMold
+    {
+        DisplayCategory = Material,
+        Weight = 0.3,
+        Type = Normal,
+		DisplayName	=	Clay Track Shoe Mold,
+        Icon = ClayTrackShoeMold,
+        StaticModel = ClayBlockAnvilMold,
+        WorldStaticModel = ClayBlockAnvilMold,
+    }
+
+    item ClayTrackShoeMoldUnfired
+    {
+        DisplayCategory = Material,
+        Weight = 0.3,
+        Type = Normal,
+		DisplayName	=	Clay Track Shoe Mold Unfired,
+        Icon = ClayTrackShoeMoldUnfired,
+        StaticModel = ClayBlockAnvilMoldUnfired,
+        WorldStaticModel = ClayBlockAnvilMoldUnfired,
+    }
+
 	
 	/***** VEHICLE PARTS*****/
 	/********* TIRES ********/

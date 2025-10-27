@@ -74,17 +74,54 @@ module Base
 		{
 			itemType = Base.M113_Seat,
 			Icon	=	M113_Seat,
-			category = nodisplay,
+			category = seat,
 			mechanicRequireKey = true,
+			durability = 3,
 			container
 			{
 				test = Vehicles.ContainerAccess.Seat,
 				capacity = 15,
 			}
-			lua
-			{
-				create = Vehicles.Create.Default,
-			}
+			            
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                requireEmpty = true,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
 		}
 	}
 	
@@ -704,17 +741,54 @@ module Base
 		{
 			itemType = Base.M113_Seat,
 			Icon	=	M113_Seat,
-			category = nodisplay,
+			category = seat,
 			mechanicRequireKey = true,
+			durability = 3,
 			container
 			{
 				test = Vehicles.ContainerAccess.Seat,
 				capacity = 20,
 			}
-			lua
-			{
-				create = Vehicles.Create.Default,
-			}
+			            
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                requireEmpty = true,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
 		}
 	}
 	
@@ -857,6 +931,104 @@ module Base
 		}
 	}
 	
+	template vehicle SeatM163
+	{
+		part SeatFrontLeft
+		{
+			model M163_Seat
+			{
+				file = M163_Seat,
+				scale = 1.000,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+				
+		part SeatGunner
+		{
+			area = SeatFrontRight,
+			container
+			{
+				seat = Gunner,
+			}
+		}
+		
+		part SeatRearLeft
+		{
+			model M163_Seat
+			{
+				file = M163_Seat,				
+				scale = 1.000,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+			
+
+		part Seat*
+		{
+			itemType = Base.M113_Seat,
+			Icon	=	M113_Seat,
+			category = seat,
+			mechanicRequireKey = true,
+			durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+				capacity = 20,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+	
 	template vehicle PassengerM163
 	{
 				
@@ -885,7 +1057,7 @@ module Base
 				sound =,
 			}
 
-			switchSeat RearRight
+			switchSeat RearLeft
 			{
 				anim = Climb_WindowB,
 				rate = 0.23,
@@ -897,7 +1069,7 @@ module Base
 		{
 			position inside
 			{
-				offset = 0.0 0.98 -0.255,
+				offset = 0.0 0.93 -0.255,
 				rotate = 0.0000 0.0000 0.0000,
 			}
 
@@ -917,7 +1089,7 @@ module Base
 				rate = 0.23,
 				sound =,
 			}
-			switchSeat RearRight
+			switchSeat RearLeft
 			{
 				anim = Climb_WindowB,
 				rate = 0.23,
@@ -925,11 +1097,11 @@ module Base
 			}
 		}
 		
-		passenger RearRight
+		passenger RearLeft
 		{
 			position inside
 			{
-				offset = 0.62 0.975 -1.6,
+				offset = -0.4 0.93 -1.6,
 				rotate = 0.0000 0.0000 0.0000,
 			}
 

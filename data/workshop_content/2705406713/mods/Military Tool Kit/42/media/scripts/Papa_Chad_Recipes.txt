@@ -64,4 +64,140 @@ module Base
 			item 1 Base.127x99mmCartonBig,
 		}
 	}
+	
+	
+	/***** VEHICLE PARTS*****/	
+
+    craftRecipe SheetHighHardnessSteel
+    {
+        time = 300,
+        SkillRequired = Blacksmith:6,
+        needTobeLearn = false,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:50,
+        AutoLearnAll = Blacksmith:6,
+        Tags = Forge,
+        category = Forge,
+        inputs
+        {
+            item 1 tags[Charcoal],
+            item 1 [Base.SteelIngot],
+            item 1 tags[BallPeenHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[Tongs] mode:keep flags[Prop2;MayDegradeLight],
+            item 1 tags[MetalworkingChisel] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.SheetHighHardnessSteel,
+        }
+    }
+	
+	craftRecipe MakeTrackShoe
+    {
+        time = 200,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:5,
+        needTobeLearn = true,
+        timedAction = Making,
+        xpAward = Maintenance:20,
+        AutoLearnAll = Maintenance:4,
+        MetaRecipe = MakeTrackShoe,
+        category = Weaponry,
+        inputs
+        {
+            item 5 [Base.TirePiece] flags[Prop2],
+            item 1 [Base.Wrench;Base.Ratchet] mode:keep,
+            item 1 [Base.TankTrackShoeNoTire],
+			item 4 [Base.Screws],
+        }
+        outputs
+        {
+            item 1 Base.Track_Shoe,
+        }
+    }
+    
+	craftRecipe MakeTrackShoeNoTire
+    {
+        time = 200,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:5,
+        needTobeLearn = true,
+        timedAction = Making,
+        xpAward = Maintenance:20,
+        AutoLearnAll = Maintenance:4,
+        MetaRecipe = MakeTrackShoe,
+        category = Blacksmithing,
+        inputs
+        {
+            item 1 [Base.Wrench;Base.Ratchet] mode:keep,
+			item 1 [Base.Track_Shoe],
+			
+        }
+        outputs
+        {
+            item 1 Base.TankTrackShoeNoTire,
+			item 4 Base.TirePiece,			
+			item 4 Base.Screws,			
+        }
+    }	
+	
+	craftRecipe Furnace_TrackShoeNoTire
+    {
+        time = 300,
+        Tags = furnace,
+        SkillRequired = Blacksmith:5,
+        needTobeLearn = true,
+        timedAction = Making,
+        xpAward = Blacksmith:20,
+        AutoLearnAll = Blacksmith:6,
+        MetaRecipe = MakeTrackShoe,
+        category = Blacksmithing,
+        inputs
+        {            
+			item 3 tags[Charcoal],
+			item 1 [Base.ClayTrackShoeMold],
+			item 3 [Base.CeramicCrucible_Iron;Base.CeramicCrucibleSmall_Iron],
+			
+        }
+        outputs
+        {
+			item 1 Base.TankTrackShoeNoTire,			
+        }
+    }
+	
+	craftRecipe PressTrackShoeMold
+    {
+        time = 100,
+        category = Pottery,
+        xpAward = Pottery:20,
+        Tags = HandPress,
+        inputs
+        {
+            item 4 [Base.Clay],
+			item 1 [Base.TankTrackShoeNoTire] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.ClayTrackShoeMoldUnfired,
+        }
+    }
+	
+	craftRecipe FireClayTrackShoeMold
+    {
+        time = 20,
+        category = Pottery,
+        Tags = KilnSmall;KilnLarge,
+        inputs
+        {
+            item 1 [Base.ClayTrackShoeMoldUnfired],
+            item 1 tags[StartFire],
+            item 1 tags[Log;Charcoal],
+        }
+        outputs
+        {
+            item 1 Base.ClayTrackShoeMold,
+        }
+    }
 }
+
+

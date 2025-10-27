@@ -1,10 +1,192 @@
 module Base
 {
+	template vehicle TankMachinegun
+	{
+		part Browning_M2
+		{
+			itemType = Base.Browning_M2,
+			mechanicRequireKey = true,
+			category = Turrent,
+			area = SeatFrontRight,
+			mechanicArea = SeatFrontRight,
+			repairMechanic = true,			
+			parent = Turrent,
+
+			anim Static
+			{
+				anim = Shooting,
+				reverse = TRUE,
+				animate = FALSE,
+				rate = 0.001,
+			}
+
+			anim Shooting
+			{
+				anim = Shooting,
+				reverse = FALSE,
+				loop = FALSE,
+				rate = 1.0,
+			}
+
+			container
+			{
+				test = Vehicles.ContainerAccess.AMMOSTOR,
+				capacity = 12,
+				conditionAffectsCapacity = false,
+			}
+
+			table install
+			{
+				time = 600,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.MACHINEGUN,
+			}
+
+			table uninstall
+			{
+				time = 600,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.MACHINEGUN,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.MACHINEGUN,
+				init = Vehicles.Init.MACHINEGUN,
+				update = Vehicles.Update.MACHINEGUN,
+			}
+		}
+
+		part MachinegunAmmoBox
+		{
+			category = nodisplay,
+
+			anim Static
+			{
+				anim = Shooting,
+				reverse = TRUE,
+				animate = FALSE,
+				rate = 0.001,
+			}
+
+			anim Shooting
+			{
+				anim = Shooting,
+				reverse = TRUE,
+				loop = TRUE,
+				rate = 1.0,
+			}
+
+			parent = Turrent,
+
+			lua
+			{
+				create = Vehicles.Create.MACHINEGUN,
+				init = Vehicles.Init.MACHINEGUN,
+				update = Vehicles.Update.MACHINEGUN,
+			}
+		}
+
+		part MachinegunAmmo
+		{
+			category = nodisplay,
+
+			anim Static
+			{
+				anim = Shooting,
+				reverse = TRUE,
+				animate = FALSE,
+				rate = 0.001,
+			}
+
+			anim Shooting
+			{
+				anim = Shooting,
+				reverse = TRUE,
+				loop = TRUE,
+				rate = 1.0,
+			}
+
+			parent = Turrent,
+
+			lua
+			{
+				create = Vehicles.Create.MACHINEGUN,
+				init = Vehicles.Init.MACHINEGUN,
+				update = Vehicles.Update.MACHINEGUN,
+			}
+		}
+		part Vulcan_M61
+		{
+			category = Turrent,
+			area = SeatFrontRight,
+			itemType = Base.M61_Vulcan,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			parent = Turrent,
+
+			model Default
+			{
+				file = M163_Cannon,
+				offset = 0.0000 0.0000 -0.2700,
+				rotate = 0.0000 0.0000 0.0000,
+				scale = 1.0,
+			}
+
+			model Muzzle
+			{
+				file = M163_Muzzle,
+				offset = 0.0000 0.0000 -0.2700,
+				rotate = 0.0000 0.0000 0.0000,
+				scale = 1.0,
+			}
+
+			anim Static
+			{
+				anim = Shooting,
+				reverse = FALSE,
+				animate = FALSE,
+				rate = 0.001,
+			}
+
+			anim Shooting
+			{
+				anim = Shooting,
+				reverse = FALSE,
+				loop = FALSE,
+				rate = 1.5,
+			}
+
+			container
+			{
+				test = Vehicles.ContainerAccess.AMMOSTOR,
+				capacity = 100,
+				conditionAffectsCapacity = false,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.MACHINEGUNTANK,
+				init = Vehicles.Init.MACHINEGUN,
+				update = Vehicles.Update.MACHINEGUN,
+			}
+		}
+	}
+	
 	template vehicle Turrent
 	{	
 		part Turrent
 		{
 			category = Turrent,
+			itemType = Base.TankTurret,
+			repairMechanic = true,
+			area = SeatFrontRight,
+			mechanicArea = SeatFrontRight,
+			mechanicRequireKey = true,
+			durability = 10,
+			
 			anim 360
 			{
 				anim = Turrent_360,

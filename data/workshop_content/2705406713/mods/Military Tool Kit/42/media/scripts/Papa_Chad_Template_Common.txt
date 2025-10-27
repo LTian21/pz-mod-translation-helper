@@ -2,24 +2,234 @@ module Base
 {		
 	template vehicle TankTrack
 	{
-		part Track
+		part Track_1
 		{				
-			category = nodisplay,
-			mechanicRequireKey = false,
+			category = tire,
+			itemType = Base.TankTrack,
 			repairMechanic = true,
+			mechanicArea = Engine,
+			mechanicRequireKey = true,
+			durability = 10,			
+
+			anim Static
+			{
+				anim = Armature_TrackAction,
+				reverse = TRUE,
+				animate = FALSE,
+				rate = 0.001,
+			}
+
+			anim Front_Slow
+			{
+				anim = Armature_TrackAction,
+				reverse = TRUE,
+				loop = TRUE,
+				rate = 0.5,
+			}
+
+			anim Front_Normal
+			{
+				anim = Armature_TrackAction,
+				reverse = TRUE,
+				loop = TRUE,
+				rate = 0.75,
+			}
+
+			anim Front_Fast
+			{
+				anim = Armature_TrackAction,
+				reverse = TRUE,
+				loop = TRUE,
+				rate = 1.25,
+			}
+
+			anim Back_Slow
+			{
+				anim = Armature_TrackAction,
+				reverse = FALSE,
+				loop = TRUE,
+				rate = 0.5,
+			}
+
+			anim Back_Normal
+			{
+				anim = Armature_TrackAction,
+				reverse = FALSE,
+				loop = TRUE,
+				rate = 0.75,
+			}
+
+			anim Back_Fast
+			{
+				anim = Armature_TrackAction,
+				reverse = FALSE,
+				loop = TRUE,
+				rate = 1.25,
+			}
+
 			lua
 			{
 				create = Vehicles.Create.TRACK,
 				init = Vehicles.Init.TRACK,
-				update = Vehicles.Use.TRACK,
+				update = Vehicles.Update.TRACK,
+			}
+		}
+		
+		part Track_2
+		{				
+			category = tire,
+			itemType = Base.TankTrack,
+			repairMechanic = true,
+			mechanicArea = Engine,
+			mechanicRequireKey = true,
+			durability = 10,			
+
+			anim Static
+			{
+				anim = Track_Animation,
+				reverse = TRUE,
+				animate = FALSE,
+				rate = 0.001,
+			}
+
+			anim Front_Slow
+			{
+				anim = Track_Animation,
+				reverse = TRUE,
+				loop = TRUE,
+				rate = 0.5,
+			}
+
+			anim Front_Normal
+			{
+				anim = Track_Animation,
+				reverse = TRUE,
+				loop = TRUE,
+				rate = 0.75,
+			}
+
+			anim Front_Fast
+			{
+				anim = Track_Animation,
+				reverse = TRUE,
+				loop = TRUE,
+				rate = 1.25,
+			}
+
+			anim Back_Slow
+			{
+				anim = Track_Animation,
+				reverse = FALSE,
+				loop = TRUE,
+				rate = 0.5,
+			}
+
+			anim Back_Normal
+			{
+				anim = Track_Animation,
+				reverse = FALSE,
+				loop = TRUE,
+				rate = 0.75,
+			}
+
+			anim Back_Fast
+			{
+				anim = Track_Animation,
+				reverse = FALSE,
+				loop = TRUE,
+				rate = 1.25,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.TRACK,
+				init = Vehicles.Init.TRACK,
+				update = Vehicles.Update.TRACK,
+			}
+		}
+		part Tire
+		{
+			category = nodisplay,
+
+			anim Static
+			{
+				anim = Armature_TrackAction,
+				reverse = TRUE,
+				animate = FALSE,
+				rate = 0.001,
+			}
+
+			anim Front_Slow
+			{
+				anim = Armature_TrackAction,
+				reverse = TRUE,
+				loop = TRUE,
+				rate = 0.5,
+			}
+
+			anim Front_Normal
+			{
+				anim = Armature_TrackAction,
+				reverse = TRUE,
+				loop = TRUE,
+				rate = 0.75,
+			}
+
+			anim Front_Fast
+			{
+				anim = Armature_TrackAction,
+				reverse = TRUE,
+				loop = TRUE,
+				rate = 1.25,
+			}
+
+			anim Back_Slow
+			{
+				anim = Armature_TrackAction,
+				reverse = FALSE,
+				loop = TRUE,
+				rate = 0.5,
+			}
+
+			anim Back_Normal
+			{
+				anim = Armature_TrackAction,
+				reverse = FALSE,
+				loop = TRUE,
+				rate = 0.75,
+			}
+
+			anim Back_Fast
+			{
+				anim = Armature_TrackAction,
+				reverse = FALSE,
+				loop = TRUE,
+				rate = 1.25,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.TRACK,
+				init = Vehicles.Init.TRACK,
+				update = Vehicles.Update.TRACK,
 			}
 		}
 	}
 	
+	
 	template vehicle TankArmor
 	{
+
 		part Armor
-		{				
+		{		
+			itemType = Base.TankArmor,
+			repairMechanic = true,
+			mechanicArea = Engine,
+			mechanicRequireKey = true,
+			durability = 10,
+			category = Armor,	
+			area = Engine,
+			
 			lua
 			{
 				create = Vehicles.Create.ARMOR,
@@ -32,7 +242,15 @@ module Base
 	template vehicle TankArmorEngine
 	{
 		part Engine_Armor
-		{					
+		{				
+			itemType = Base.TankArmor,
+			repairMechanic = true,
+			mechanicArea = Engine,
+			mechanicRequireKey = true,
+			durability = 10,
+			category = Armor,	
+			area = Engine,
+			
 			lua
 			{
 				create = Vehicles.Create.ENGINE_ARMOR,

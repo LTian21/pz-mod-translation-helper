@@ -73,7 +73,7 @@ module DFMFoodmod
 			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
 			item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mode:destroy,
 			item 1 tags[Sugar],
-			item 1 [3:Base.Apple;3:Base.Banana;6:Base.Cherry;6:Base.DriedApricots;1:Base.Grapefruit;2:Base.Grapes;2:Base.Lemon;2:Base.Lime;1:Base.Mango;2:Base.Orange;2:Base.Peach;2:Base.Pear;1:Base.Pineapple;3:Base.WatermelonSliced;6:Base.BerryBlack;6:Base.BerryBlue;6:Base.BerryGeneric1;6:Base.BerryGeneric2;6:Base.BerryGeneric3;6:Base.BerryGeneric4;6:Base.BerryGeneric5] flags[InheritFoodAge;ItemCount] mode:destroy,
+			item 1 [3:Base.Apple;3:Base.Banana;6:Base.Cherry;6:Base.DriedApricots;1:Base.Grapefruit;2:Base.Grapes;2:Base.Lemon;2:Base.Lime;1:Base.Mango;2:Base.Orange;2:Base.Peach;2:Base.Pear;1:Base.Pineapple;3:Base.WatermelonSliced;6:Base.BerryBlack;6:Base.BerryBlue;6:Base.BerryGeneric1;6:Base.BerryGeneric2;6:Base.BerryGeneric3;6:Base.BerryGeneric4;6:Base.BerryGeneric5;6:Base.Strewberrie] flags[InheritFoodAge;ItemCount] mode:destroy,
 		}
 			outputs
 			{
@@ -631,7 +631,7 @@ module DFMFoodmod
 		inputs
 		{
 			item 1 tags[MortarPestle] mode:keep,
-			item 3 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue] flags[InheritFoodAge;ItemCount],
+			item 3 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue;Base.Strewberrie] flags[InheritFoodAge;ItemCount],
 		}
 		outputs
 		{
@@ -903,4 +903,46 @@ module DFMFoodmod
 			}
 		
 	}
+	
+	craftRecipe Make Granola Bar
+	{
+		timedAction = Making,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:15,
+		ToolTip = Delicious and healthy cereal bar.,
+		inputs
+		{
+			item 1 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+			item 1 [Base.SunflowerSeeds;Base.Peanuts] flags[ItemCount],
+			item 1 [Base.BarleySeed;Base.RyeSeed;Base.PumpkinSeed;Base.CornSeed;Base.WheatSeed] flags[ItemCount],
+		}
+			outputs
+			{
+				item 1 DFMFoodmod.RawGranolaBar,
+			}
+	}
+	
+	craftRecipe Make Peanut Butter
+	{
+		timedAction = MixingBowl,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:15,
+		ToolTip = The butt will stick together and enlarge!,
+		inputs
+		{
+			item 3 [Base.Peanuts] flags[ItemCount],
+			item 1 tags[Sugar],
+			item 1 [Base.Salt;Base.SeasoningSalt],
+			item 1 [Base.MortarPestle] mode:keep,
+		}
+			outputs
+			{
+				item 1 Base.PeanutButter,
+			}
+	}
+	
 }

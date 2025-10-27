@@ -174,7 +174,8 @@ module Base
 		part TrunkDoor
 		{
 			itemType = Base.M998_Trunk_Lid_Green;Base.M998_Trunk_Lid_Camo;Base.M998_Trunk_Lid_Desert,
-
+			mechanicArea = Back,
+			area = TruckBed,
 			model M998_Trunk_Lid_Green
 			{
 				file = M998_Humvee_TrunkDoor_Green,
@@ -591,16 +592,12 @@ module Base
 			}
 		}
 
-		template = TankMachinegun,
+		template = TankMachinegun/part/Browning_M2,
+		template = TankMachinegun/part/MachinegunAmmoBox,
+		template = TankMachinegun/part/MachinegunAmmo,
 
 		part Browning_M2
 		{
-			itemType = Base.Browning_M2,
-			mechanicRequireKey = false,
-			category = Turrent,
-			area = SeatFrontRight,
-			parent = Turrent,
-
 			model Default
 			{
 				file = M998_Humvee_Machinegun,
@@ -616,58 +613,10 @@ module Base
 				rotate = 0.0000 0.0000 0.0000,
 				scale = 1.0,
 			}
-
-			anim Static
-			{
-				anim = Shooting,
-				reverse = TRUE,
-				animate = FALSE,
-				rate = 0.001,
-			}
-
-			anim Shooting
-			{
-				anim = Shooting,
-				reverse = FALSE,
-				loop = FALSE,
-				rate = 1.0,
-			}
-
-			container
-			{
-				test = Vehicles.ContainerAccess.AMMOSTOR,
-				capacity = 12,
-				conditionAffectsCapacity = false,
-			}
-
-			table install
-			{
-				time = 400,
-				skills = Mechanics:1,
-				test = Vehicles.InstallTest.Default,
-				complete = Vehicles.InstallComplete.MACHINEGUN,
-			}
-
-			table uninstall
-			{
-				time = 400,
-				skills = Mechanics:1,
-				test = Vehicles.UninstallTest.MACHINEGUN,
-				complete = Vehicles.UninstallComplete.Default,
-			}
-
-			lua
-			{
-				create = Vehicles.Create.MACHINEGUN,
-				init = Vehicles.Init.MACHINEGUN,
-				update = Vehicles.Update.MACHINEGUN,
-			}
 		}
 
 		part MachinegunAmmoBox
 		{
-			category = nodisplay,
-
 			model Default
 			{
 				file = M998_Humvee_Turrent_Ammo_Box,
@@ -675,68 +624,16 @@ module Base
 				rotate = 0.0000 0.0000 0.0000,
 				scale = 1.0,
 			}
-
-			anim Static
-			{
-				anim = Shooting,
-				reverse = TRUE,
-				animate = FALSE,
-				rate = 0.001,
-			}
-
-			anim Shooting
-			{
-				anim = Shooting,
-				reverse = TRUE,
-				loop = TRUE,
-				rate = 1.0,
-			}
-
-			parent = Turrent,
-
-			lua
-			{
-				create = Vehicles.Create.MACHINEGUN,
-				init = Vehicles.Init.MACHINEGUN,
-				update = Vehicles.Update.MACHINEGUN,
-			}
 		}
 
 		part MachinegunAmmo
 		{
-			category = nodisplay,
-
 			model Default
 			{
 				file = M998_Humvee_Turrent_Ammo,
 				offset = 0.0000 0.0000 0.0000,
 				rotate = 0.0000 0.0000 0.0000,
 				scale = 1.0,
-			}
-
-			anim Static
-			{
-				anim = Shooting,
-				reverse = TRUE,
-				animate = FALSE,
-				rate = 0.001,
-			}
-
-			anim Shooting
-			{
-				anim = Shooting,
-				reverse = TRUE,
-				loop = TRUE,
-				rate = 1.0,
-			}
-
-			parent = Turrent,
-
-			lua
-			{
-				create = Vehicles.Create.MACHINEGUN,
-				init = Vehicles.Init.MACHINEGUN,
-				update = Vehicles.Update.MACHINEGUN,
 			}
 		}
 
@@ -763,6 +660,7 @@ module Base
 		part Turret_Armor
 		{
 			itemType = Base.M998_Turret_Armor_Green;Base.M998_Turret_Armor_Camo;Base.M998_Turret_Armor_Desert,
+			repairMechanic = true,
 			category = Turrent,
 			area = SeatFrontRight,
 			parent = Turrent,
@@ -1575,6 +1473,7 @@ module Base
 			itemType = Base.M998_Front_Door_Green;Base.M998_Front_Door_Camo;Base.M998_Front_Door_Desert,
 			area = SeatFrontLeft,
 			mechanicRequireKey = false,
+			repairMechanic = true,
 
 			model M998_Front_Door_Green
 			{
@@ -1693,6 +1592,7 @@ module Base
 			itemType = Base.M998_Front_Door_Green;Base.M998_Front_Door_Camo;Base.M998_Front_Door_Desert,
 			area = SeatFrontRight,
 			mechanicRequireKey = false,
+			repairMechanic = true,
 
 			model M998_Front_Door_Green
 			{
@@ -1808,6 +1708,7 @@ module Base
 			itemType = Base.M998_Rear_Door_Green;Base.M998_Rear_Door_Camo;Base.M998_Rear_Door_Desert,
 			area = SeatRearLeft,
 			mechanicRequireKey = false,
+			repairMechanic = true,
 
 			model M998_Rear_Door_Green
 			{
@@ -1926,6 +1827,7 @@ module Base
 			itemType = Base.M998_Rear_Door_Green;Base.M998_Rear_Door_Camo;Base.M998_Rear_Door_Desert,
 			area = SeatRearRight,
 			mechanicRequireKey = false,
+			repairMechanic = true,
 
 			model M998_Rear_Door_Green
 			{

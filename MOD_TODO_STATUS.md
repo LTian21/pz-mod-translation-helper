@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-26 12:17:19 UTC+08:00`*
+*最后更新于：`2025-10-27 12:26:11 UTC+08:00`*
 
 ---
 
@@ -36,11 +36,11 @@
 | Lillie's Meal Combat Individual Ration Mod | 3557845788 | 106 | 0 | 0 | 106 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
+| Detailed Skill Tooltips | 3572846242 | 97 | 0 | 0 | 97 |
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
 | Lifestyle: Hobbies | 3403870858 | 84 | 4083 | 28 | 4167 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
 | Christmas Time [b41/42 demo] | 2903870217 | 81 | 53 | 53 | 134 |
-| Detailed Skill Tooltips | 3572846242 | 79 | 0 | 0 | 79 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
 | The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 77 | 1 | 1 | 78 |
 | [B42] Useful Barrels | 3436537035 | 77 | 1 | 0 | 78 |
