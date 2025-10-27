@@ -1218,6 +1218,17 @@ class Program
                 Console.WriteLine($"  链接: {existingPR.HtmlUrl}");
                 Console.WriteLine("[提示] 已存在开放的PR，跳过锁定MOD和创建PR操作");
                 Console.WriteLine("[提示] 如需重新锁定MOD，请先关闭或合并现有PR");
+
+                // 等待5秒后自动执行 ListPullRequests
+                Console.WriteLine("\n[提示] 5秒后将自动刷新PR列表...");
+                await Task.Delay(5000);
+                Console.WriteLine("\n" + "=".PadRight(80, '='));
+                Console.WriteLine("自动刷新PR列表");
+                Console.WriteLine("=".PadRight(80, '=') + "\n");
+
+                // 自动执行 ListPullRequests
+                await ListPullRequests(config, github, owner, repoName);
+
                 return 0;
             }
 
@@ -1309,7 +1320,18 @@ class Program
             }
 
             Console.WriteLine("[成功] 锁定MOD并创建PR完成!");
-            return 0;
+            
+            // 等待5秒后自动执行 ListPullRequests
+            Console.WriteLine("\n[提示] 5秒后将自动刷新PR列表...");
+            await Task.Delay(5000);
+            Console.WriteLine("\n" + "=".PadRight(80, '='));
+            Console.WriteLine("自动刷新PR列表");
+            Console.WriteLine("=".PadRight(80, '=') + "\n");
+            
+            // 自动执行 ListPullRequests
+            int listPrResult = await ListPullRequests(config, github, owner, repoName);
+            
+            return listPrResult == 0 ? 0 : 1;
         }
         catch (Exception ex)
         {
