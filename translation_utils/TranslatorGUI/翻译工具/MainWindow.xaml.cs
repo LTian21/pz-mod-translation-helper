@@ -36,6 +36,9 @@ namespace 翻译工具
         // 新增：用于任务列表的数据源
         private readonly ObservableCollection<ModItemView> _modItems = new();
 
+        // 新增：标记 CLI 操作是否进行中
+        private bool _isRunning = false;
+
         // MainWindow 构造函数
         public MainWindow()
         {
@@ -159,8 +162,8 @@ namespace 翻译工具
             var dlg = new System.Windows.Window
             {
                 Title = "确认用户信息",
-                Width = 400,
-                Height = 260,
+                Width = 550,
+                Height = 360,
                 WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner,
                 ResizeMode = System.Windows.ResizeMode.NoResize,
                 Owner = this,
@@ -176,6 +179,33 @@ namespace 翻译工具
             panel.Children.Add(new System.Windows.Controls.TextBlock { Text = "邮箱:" });
             var txtEmail = new System.Windows.Controls.TextBox { Text = _config.UserEmail ?? string.Empty, Margin = new System.Windows.Thickness(0, 4, 0, 8) };
             panel.Children.Add(txtEmail);
+
+            // 翻译文件路径选择
+            panel.Children.Add(new System.Windows.Controls.TextBlock { Text = "翻译文件路径:", Margin = new System.Windows.Thickness(0, 4, 0, 4) });
+            var pathPanel = new System.Windows.Controls.DockPanel { Margin = new System.Windows.Thickness(0, 0, 0, 8) };
+            var btnBrowsePath = new System.Windows.Controls.Button { Content = "浏览", Width = 60, Margin = new System.Windows.Thickness(6, 0, 0, 0) };
+            System.Windows.Controls.DockPanel.SetDock(btnBrowsePath, System.Windows.Controls.Dock.Right);
+            var txtPath = new System.Windows.Controls.TextBox
+            {
+                Text = _config.LocalPath ?? Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                IsReadOnly = true
+            };
+            pathPanel.Children.Add(btnBrowsePath);
+            pathPanel.Children.Add(txtPath);
+            panel.Children.Add(pathPanel);
+
+            // 文件夹浏览逻辑
+            btnBrowsePath.Click += (s, e) =>
+            {
+                using var fbd = new System.Windows.Forms.FolderBrowserDialog();
+                fbd.Description = "选择翻译文件存储路径";
+                fbd.SelectedPath = txtPath.Text;
+                var res = fbd.ShowDialog();
+                if (res == System.Windows.Forms.DialogResult.OK)
+                {
+                    txtPath.Text = fbd.SelectedPath;
+                }
+            };
 
             // 新增：语言选择
             panel.Children.Add(new System.Windows.Controls.TextBlock { Text = "翻译语言:" });
@@ -204,16 +234,17 @@ namespace 翻译工具
             }
             panel.Children.Add(cbLang);
 
-            var btnPanel = new System.Windows.Controls.StackPanel { Orientation = System.Windows.Controls.Orientation.Horizontal, HorizontalAlignment = System.Windows.HorizontalAlignment.Right };
+            var btnPanel = new System.Windows.Controls.StackPanel { Orientation = System.Windows.Controls.Orientation.Horizontal, HorizontalAlignment = System.Windows.HorizontalAlignment.Right, Margin = new System.Windows.Thickness(0, 12, 0, 0) };
             var btnOk = new System.Windows.Controls.Button { Content = "确认", Width = 80, Margin = new System.Windows.Thickness(4) };
             btnPanel.Children.Add(btnOk);
             panel.Children.Add(btnPanel);
 
             // 验证用户名：仅允许字母、数字和下划线；验证邮箱：使用 MailAddress 简单验证
-            btnOk.Click += (s, e) =>
+            btnOk.Click += async (s, e) =>
             {
                 var name = txtName.Text?.Trim() ?? string.Empty;
                 var email = txtEmail.Text?.Trim() ?? string.Empty;
+                var path = txtPath.Text?.Trim() ?? string.Empty;
 
                 if (string.IsNullOrEmpty(name) || !System.Text.RegularExpressions.Regex.IsMatch(name, "^[A-Za-z0-9_]+$"))
                 {
@@ -231,6 +262,12 @@ namespace 翻译工具
                     return;
                 }
 
+                if (string.IsNullOrEmpty(path) || !Directory.Exists(path))
+                {
+                    System.Windows.MessageBox.Show(dlg, "请选择有效的文件夹路径。", "无效路径", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Warning);
+                    return;
+                }
+
                 string selectedSuffix = "CN";
                 if (cbLang.SelectedItem is System.Windows.Controls.ComboBoxItem sel && sel.Tag is string tagStr && !string.IsNullOrWhiteSpace(tagStr))
                 {
@@ -239,32 +276,43 @@ namespace 翻译工具
 
                 _config.UserName = name;
                 _config.UserEmail = email;
+                _config.LocalPath = path;
                 _config.LanguageSuffix = selectedSuffix;
                 SaveConfig(); // 立即存储
 
-                // 更新主界面语言显示
+                // 更新主界面路径和语言显示
+                if (txtPath != null) this.txtPath.Text = path;
                 UpdateLanguageDisplay();
 
                 dlg.DialogResult = true;
                 dlg.Close();
+
+                // 关闭对话框后，自动执行初始化流程
+                AppendOutput("════════════════════════════════════════");
+                AppendOutput("正在初始化翻译任务列表...");
+                AppendOutput("════════════════════════════════════════");
+                await RunHelperAsync("init", null);
+                await RunHelperAsync("sync", null);
+                await RunHelperAsync("listpr", null);
+                await LoadTranslationInfoAsync();
+                AppendOutput("\n════════════════════════════════════════");
+                AppendOutput("✓ 初始化完成！");
+                AppendOutput("════════════════════════════════════════");
+            };
+
+            // 处理对话框关闭事件：如果用户点击关闭按钮（X 按钮）或取消，则退出程序
+            dlg.Closing += (s, e) =>
+            {
+                // 如果对话框没有设置 DialogResult 为 true，说明用户点击了关闭按钮而非"确认"按钮
+                if (dlg.DialogResult != true)
+                {
+                    // 关闭主窗口，退出程序
+                    this.Close();
+                }
             };
 
             dlg.Content = panel;
             dlg.ShowDialog();
-        }
-
-        private void btnBrowse_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            using var fbd = new System.Windows.Forms.FolderBrowserDialog();
-            fbd.Description = "选择翻译文件存储路径";
-            fbd.SelectedPath = string.IsNullOrWhiteSpace(_config.LocalPath) ? Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) : _config.LocalPath;
-            var res = fbd.ShowDialog();
-            if (res == System.Windows.Forms.DialogResult.OK)
-            {
-                _config.LocalPath = fbd.SelectedPath;
-                txtPath.Text = _config.LocalPath;
-                SaveConfig();
-            }
         }
 
         private async void btnInit_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -282,7 +330,10 @@ namespace 翻译工具
 
         private async void btnLockMod_Click(object sender, RoutedEventArgs e)
         {
-            // 1. 自动触发刷新翻译文件（调用 listpr 生成 translation_info_*.json）
+            // 1. 先执行"更新翻译文件"的三个步骤：init、sync、listpr
+            AppendOutput("开始更新翻译文件...");
+            await RunHelperAsync("init", null);
+            await RunHelperAsync("sync", null);
             await RunHelperAsync("listpr", null);
 
             // 2. 读取 <程序目录>\\bin 下的 translation_info_{suffix}.json
@@ -293,32 +344,64 @@ namespace 翻译工具
         {
             try
             {
+                // 如果列表为空，先进行第一轮更新来加载任务
+                if (_modItems.Count == 0)
+                {
+                    AppendOutput("任务列表为空，开始更新翻译文件...");
+                    await RunHelperAsync("init", null);
+                    await RunHelperAsync("sync", null);
+                    await RunHelperAsync("listpr", null);
+                    await LoadTranslationInfoAsync();
+                }
+
                 var selected = _modItems.Where(m => m.IsSelected).ToList();
                 if (selected.Count == 0)
                 {
-                    AppendOutput("未选择任何 Mod。");
+                    AppendOutput("════════════════════════════════════════");
+                    AppendOutput("提示：未选择任何 Mod，这可能是由于程序刚启动，没有加载任何信息导致的");
+                    AppendOutput("────────────────────────────────────────");
+                    AppendOutput("请按以下步骤操作：");
+                    AppendOutput("1. 在列表中勾选你要领取的 Mod（支持多选）");
+                    AppendOutput("2. 再次点击\"刷新/领取/追加任务\"按钮");
+                    AppendOutput("════════════════════════════════════════");
                     return;
                 }
+
+                AppendOutput("════════════════════════════════════════");
+                AppendOutput($"开始领取 {selected.Count} 个 Mod...");
+                AppendOutput("════════════════════════════════════════");
+
+                // 第一轮：初始化、同步、列出PR
+                AppendOutput("\n[第1阶段] 第一轮更新翻译文件...");
+                await RunHelperAsync("init", null);
+                await RunHelperAsync("sync", null);
+                await RunHelperAsync("listpr", null);
 
                 // 组装 modid 字符串: "123","456"
                 var ids = string.Join(",", selected.Select(m => "\"" + m.ModId + "\""));
 
-                // 4.2 调用 cli 执行领取
+                // 尝试锁定
+                AppendOutput("\n[第2阶段] 尝试锁定所选 Mod...");
                 await RunHelperAsync("lockmod", ids);
 
-                // 4.3 刷新列表
+                // 第二轮：再次初始化、同步、列出PR
+                AppendOutput("\n[第3阶段] 第二轮更新翻译文件...");
+                await RunHelperAsync("init", null);
+                await RunHelperAsync("sync", null);
                 await RunHelperAsync("listpr", null);
+
+                // 刷新列表
                 await LoadTranslationInfoAsync();
+
+                AppendOutput("\n════════════════════════════════════════");
+                AppendOutput("✓ 领取流程完成！");
+                AppendOutput("════════════════════════════════════════");
             }
             catch (Exception ex)
             {
-                AppendOutput($"领取失败: {ex.Message}");
+                AppendOutput($"\n✗ 领取失败: {ex.Message}");
+                AppendOutput("════════════════════════════════════════");
             }
-        }
-
-        private void btnCancelSelection_Click(object sender, RoutedEventArgs e)
-        {
-            foreach (var item in _modItems) item.IsSelected = false;
         }
 
         private async Task LoadTranslationInfoAsync()
@@ -480,86 +563,105 @@ namespace 翻译工具
 
         private async Task RunHelperAsync(string operation, string? commitMessage)
         {
-            var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
-            if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
-            _config.LocalPath = basePath;
-            SaveConfig();
-
-            // Ensure we pass the repository root folder to the helper (basePath/pz-mod-translation-helper)
-            var repoRoot = Path.Combine(basePath, "pz-mod-translation-helper");
-
-            var exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "TranslatorHelper.exe");
-            if (!File.Exists(exePath))
+            // 禁用按钮，防止并发操作
+            if (_isRunning)
             {
-                AppendOutput($"无法找到 TranslatorHelper.exe: {exePath}");
+                AppendOutput("已有 CLI 操作进行中，请等待完成。");
                 return;
             }
 
-            var argsBuilder = new StringBuilder();
-            argsBuilder.Append(EscapeArg(RepoUrl));
-            argsBuilder.Append(' ').Append(EscapeArg(PatToken));
-            argsBuilder.Append(' ').Append(EscapeArg(_config.UserName ?? string.Empty));
-            argsBuilder.Append(' ').Append(EscapeArg(_config.UserEmail ?? string.Empty));
-            // 语言后缀，来自配置，默认简体中文 CN
-            var langSuffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
-            argsBuilder.Append(' ').Append(EscapeArg(langSuffix));
-            // 操作
-            argsBuilder.Append(' ').Append(EscapeArg(operation));
-            // 始终附带占位的提交说明，便于传递本地路径
-            var commitArg = commitMessage ?? string.Empty;
-            argsBuilder.Append(' ').Append(EscapeArg(commitArg));
-            // 传递仓库根目录作为最后一个参数（本地路径）
-            argsBuilder.Append(' ').Append(EscapeArg(repoRoot));
-
-            // Determine encoding for child process output. Prefer GBK (code page 936) on Chinese Windows,
-            // fall back to Encoding.Default if unavailable.
-            Encoding childEncoding;
-            try
-            {
-                childEncoding = Encoding.GetEncoding(936);
-            }
-            catch
-            {
-                childEncoding = Encoding.Default;
-            }
-
-            var psi = new ProcessStartInfo(exePath, argsBuilder.ToString())
-            {
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                StandardOutputEncoding = childEncoding,
-                StandardErrorEncoding = childEncoding
-            };
-
-            AppendOutput($"运行: {exePath} {argsBuilder}");
+            _isRunning = true;
+            DisableAllButtons();
 
             try
             {
-                using var proc = new Process { StartInfo = psi, EnableRaisingEvents = true };
+                var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
+                if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
-                proc.OutputDataReceived += (s, e) =>
+                _config.LocalPath = basePath;
+                SaveConfig();
+
+                // Ensure we pass the repository root folder to the helper (basePath/pz-mod-translation-helper)
+                var repoRoot = Path.Combine(basePath, "pz-mod-translation-helper");
+
+                var exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "TranslatorHelper.exe");
+                if (!File.Exists(exePath))
                 {
-                    if (e.Data != null) AppendOutput(e.Data);
-                };
-                proc.ErrorDataReceived += (s, e) =>
+                    AppendOutput($"无法找到 TranslatorHelper.exe: {exePath}");
+                    return;
+                }
+
+                var argsBuilder = new StringBuilder();
+                argsBuilder.Append(EscapeArg(RepoUrl));
+                argsBuilder.Append(' ').Append(EscapeArg(PatToken));
+                argsBuilder.Append(' ').Append(EscapeArg(_config.UserName ?? string.Empty));
+                argsBuilder.Append(' ').Append(EscapeArg(_config.UserEmail ?? string.Empty));
+                // 语言后缀，来自配置，默认简体中文 CN
+                var langSuffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+                argsBuilder.Append(' ').Append(EscapeArg(langSuffix));
+                // 操作
+                argsBuilder.Append(' ').Append(EscapeArg(operation));
+                // 始终附带占位的提交说明，便于传递本地路径
+                var commitArg = commitMessage ?? string.Empty;
+                argsBuilder.Append(' ').Append(EscapeArg(commitArg));
+                // 传递仓库根目录作为最后一个参数（本地路径）
+                argsBuilder.Append(' ').Append(EscapeArg(repoRoot));
+
+                // Determine encoding for child process output. Prefer GBK (code page 936) on Chinese Windows,
+                // fall back to Encoding.Default if unavailable.
+                Encoding childEncoding;
+                try
                 {
-                    if (e.Data != null) AppendOutput(e.Data);
+                    childEncoding = Encoding.GetEncoding(936);
+                }
+                catch
+                {
+                    childEncoding = Encoding.Default;
+                }
+
+                var psi = new ProcessStartInfo(exePath, argsBuilder.ToString())
+                {
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    StandardOutputEncoding = childEncoding,
+                    StandardErrorEncoding = childEncoding
                 };
 
-                proc.Start();
-                proc.BeginOutputReadLine();
-                proc.BeginErrorReadLine();
+                AppendOutput($"运行: {exePath} {argsBuilder}");
 
-                await Task.Run(() => proc.WaitForExit());
+                try
+                {
+                    using var proc = new Process { StartInfo = psi, EnableRaisingEvents = true };
 
-                //AppendOutput($"进程退出，代码: {proc.ExitCode}");
+                    proc.OutputDataReceived += (s, e) =>
+                    {
+                        if (e.Data != null) AppendOutput(e.Data);
+                    };
+                    proc.ErrorDataReceived += (s, e) =>
+                    {
+                        if (e.Data != null) AppendOutput(e.Data);
+                    };
+
+                    proc.Start();
+                    proc.BeginOutputReadLine();
+                    proc.BeginErrorReadLine();
+
+                    await Task.Run(() => proc.WaitForExit());
+
+                    //AppendOutput($"进程退出，代码: {proc.ExitCode}");
+                }
+                catch (Exception ex)
+                {
+                    AppendOutput($"执行失败: {ex.Message}");
+                }
             }
-            catch (Exception ex)
+            finally
             {
-                AppendOutput($"执行失败: {ex.Message}");
+                // 确保无论如何都启用按钮
+                _isRunning = false;
+                EnableAllButtons();
             }
         }
 
@@ -654,6 +756,36 @@ namespace 翻译工具
                 // 反向解析枚举名（若不可用则仅显示后缀）
                 var lang = LanguageHelper.FromSuffix(suffix);
                 txtLanguage.Text = $"{lang} ({suffix})";
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// 禁用所有主要操作按钮，防止在 CLI 执行期间进行其他操作。
+        /// </summary>
+        private void DisableAllButtons()
+        {
+            try
+            {
+                btnStart.IsEnabled = false;
+                btnCommit.IsEnabled = false;
+                btnConfirmLock.IsEnabled = false;
+                txtPath.IsEnabled = false;
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// 启用所有主要操作按钮。
+        /// </summary>
+        private void EnableAllButtons()
+        {
+            try
+            {
+                btnStart.IsEnabled = true;
+                btnCommit.IsEnabled = true;
+                btnConfirmLock.IsEnabled = true;
+                txtPath.IsEnabled = true;
             }
             catch { }
         }
