@@ -39,6 +39,9 @@ namespace 翻译工具
         // 新增：标记 CLI 操作是否进行中
         private bool _isRunning = false;
 
+        // 新增：进度窗口实例
+        private ProgressWindow? _progressWindow = null;
+
         // MainWindow 构造函数
         public MainWindow()
         {
@@ -519,7 +522,7 @@ namespace 翻译工具
 
         private async void btnCommit_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            var input = new InputBox("请输入提交说明:");
+            var input = new InputBox("请输入提交说明:", this); // 传递父窗口
             if (input.ShowDialog() == true)
             {
                 var message = input.Value ?? string.Empty;
@@ -543,6 +546,10 @@ namespace 翻译工具
 
             _isRunning = true;
             DisableAllButtons();
+
+            // 显示进度窗口
+            _progressWindow = new ProgressWindow(this);
+            _progressWindow.Show();
 
             try
             {
@@ -630,6 +637,17 @@ namespace 翻译工具
             }
             finally
             {
+                // 关闭并销毁进度窗口
+                try
+                {
+                    if (_progressWindow != null)
+                    {
+                        _progressWindow.Close();
+                        _progressWindow = null;
+                    }
+                }
+                catch { }
+
                 // 确保无论如何都启用按钮
                 _isRunning = false;
                 EnableAllButtons();
@@ -757,6 +775,7 @@ namespace 翻译工具
                 btnCommit.IsEnabled = false;
                 btnConfirmLock.IsEnabled = false;
                 txtPath.IsEnabled = false;
+                dgMods.IsEnabled = false; // 禁用列表操作
             }
             catch { }
         }
@@ -772,6 +791,7 @@ namespace 翻译工具
                 btnCommit.IsEnabled = true;
                 btnConfirmLock.IsEnabled = true;
                 txtPath.IsEnabled = true;
+                dgMods.IsEnabled = true; // 启用列表操作
             }
             catch { }
         }
@@ -789,13 +809,20 @@ namespace 翻译工具
         {
             public string? Value { get; private set; }
 
-            public InputBox(string prompt)
+            public InputBox(string prompt, System.Windows.Window? owner = null)
             {
                 Title = "输入";
                 Width = 400;
                 Height = 180;
                 WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
                 ResizeMode = System.Windows.ResizeMode.NoResize;
+                ShowInTaskbar = false;
+                
+                // 设置父窗口
+                if (owner != null)
+                {
+                    Owner = owner;
+                }
 
                 var panel = new System.Windows.Controls.StackPanel { Margin = new System.Windows.Thickness(10) };
                 panel.Children.Add(new System.Windows.Controls.TextBlock { Text = prompt });
@@ -813,6 +840,58 @@ namespace 翻译工具
                 cancel.Click += (s, e) => { DialogResult = false; Close(); };
 
                 Content = panel;
+            }
+        }
+
+        // Progress window for CLI operations
+        private class ProgressWindow : System.Windows.Window
+        {
+            public ProgressWindow(System.Windows.Window? owner = null)
+            {
+                Title = "处理中";
+                Width = 300;
+                Height = 120;
+                WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+                ResizeMode = System.Windows.ResizeMode.NoResize;
+                ShowInTaskbar = false;
+                WindowStyle = System.Windows.WindowStyle.None; // 移除标题栏和关闭按钮
+                
+                // 设置父窗口
+                if (owner != null)
+                {
+                    Owner = owner;
+                }
+
+                var panel = new System.Windows.Controls.StackPanel 
+                { 
+                    Margin = new System.Windows.Thickness(20),
+                    VerticalAlignment = System.Windows.VerticalAlignment.Center
+                };
+
+                var textBlock = new System.Windows.Controls.TextBlock 
+                { 
+                    Text = "正在处理，请稍候...",
+                    FontSize = 14,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+                    Margin = new System.Windows.Thickness(0, 0, 0, 15)
+                };
+                panel.Children.Add(textBlock);
+
+                var progressBar = new System.Windows.Controls.ProgressBar 
+                { 
+                    Height = 20,
+                    IsIndeterminate = true // 不确定进度的滚动进度条
+                };
+                panel.Children.Add(progressBar);
+
+                // 添加边框并设置为内容（只设置一次）
+                var border = new System.Windows.Controls.Border
+                {
+                    BorderBrush = System.Windows.Media.Brushes.Gray,
+                    BorderThickness = new System.Windows.Thickness(1),
+                    Child = panel
+                };
+                Content = border;
             }
         }
 

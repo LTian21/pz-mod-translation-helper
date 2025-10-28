@@ -799,6 +799,66 @@ class Program
                 return 0;
             }
 
+            // 清理 .lock 文件（如果存在）
+            // .lock 文件只用于创建PR，在实际的翻译工作中不需要提交
+            string lockFilePath = Path.Combine(config.LocalPath, ".github", ".lock");
+            bool lockFileDeleted = false;
+            
+            if (File.Exists(lockFilePath))
+            {
+                try
+                {
+                    // 检查 .lock 文件是否在仓库中被跟踪
+                    var lockFileStatus = repo.RetrieveStatus(lockFilePath);
+                    
+                    if (lockFileStatus != FileStatus.Unaltered && 
+                        lockFileStatus != FileStatus.Ignored && 
+                        lockFileStatus != FileStatus.Nonexistent)
+                    {
+                        // 如果文件已被暂存，先取消暂存
+                        if ((lockFileStatus & FileStatus.NewInIndex) == FileStatus.NewInIndex ||
+                            (lockFileStatus & FileStatus.ModifiedInIndex) == FileStatus.ModifiedInIndex ||
+                            (lockFileStatus & FileStatus.DeletedFromIndex) == FileStatus.DeletedFromIndex)
+                        {
+                            Commands.Unstage(repo, ".github/.lock");
+                            Console.WriteLine("[提示] 已从暂存区移除 .lock 文件");
+                        }
+                        
+                        // 删除本地文件
+                        File.Delete(lockFilePath);
+                        lockFileDeleted = true;
+                        Console.WriteLine("[提示] 已删除 .lock 文件（该文件仅用于创建PR，不需要在翻译提交中保留）");
+                        
+                        // 如果文件原本在仓库中被跟踪，需要暂存删除操作
+                        if ((lockFileStatus & FileStatus.DeletedFromWorkdir) == FileStatus.DeletedFromWorkdir ||
+                            repo.Index[".github/.lock"] != null)
+                        {
+                            Commands.Stage(repo, ".github/.lock");
+                            Console.WriteLine("[提示] 已暂存 .lock 文件的删除操作");
+                        }
+                    }
+                    else
+                    {
+                        // 文件未被跟踪，直接删除
+                        File.Delete(lockFilePath);
+                        lockFileDeleted = true;
+                        Console.WriteLine("[提示] 已删除未跟踪的 .lock 文件");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[警告] 删除 .lock 文件失败: {ex.Message}");
+                }
+            }
+
+            // 重新检查状态，看是否还有其他修改
+            status = repo.RetrieveStatus();
+            if (!status.IsDirty)
+            {
+                Console.WriteLine("[成功] 删除 .lock 文件后没有其他修改，无需提交");
+                return 0;
+            }
+
             Console.WriteLine($"检测到 {status.Modified.Count()} 个修改, {status.Added.Count()} 个新增, {status.Removed.Count()} 个删除");
 
             // 4.2 添加所有修改
