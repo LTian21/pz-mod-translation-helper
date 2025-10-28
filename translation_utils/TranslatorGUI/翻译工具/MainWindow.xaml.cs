@@ -291,6 +291,7 @@ namespace 翻译工具
                 dlg.Close();
 
                 // 关闭对话框后，自动执行初始化流程
+                ClearOutput();
                 AppendOutput("════════════════════════════════════════");
                 AppendOutput("正在初始化翻译任务列表...");
                 AppendOutput("════════════════════════════════════════");
@@ -318,48 +319,21 @@ namespace 翻译工具
             dlg.ShowDialog();
         }
 
-        private async void btnInit_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            // "更新翻译文件"：按顺序执行 init、sync、listpr
-            await RunHelperAsync("init", null);
-            await RunHelperAsync("sync", null);
-            await RunHelperAsync("listpr", null);
-        }
-
-        private async void btnSync_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            await RunHelperAsync("sync", null);
-        }
-
-        private async void btnLockMod_Click(object sender, RoutedEventArgs e)
-        {
-            // 1. 先执行"更新翻译文件"的三个步骤：init、sync、listpr
-            AppendOutput("开始更新翻译文件...");
-            await RunHelperAsync("init", null);
-            await RunHelperAsync("sync", null);
-            await RunHelperAsync("listpr", null);
-
-            // 2. 读取 <程序目录>\\bin 下的 translation_info_{suffix}.json
-            await LoadTranslationInfoAsync();
-        }
-
         private async void btnConfirmLock_Click(object sender, RoutedEventArgs e)
         {
+            ClearOutput();
             try
             {
-                // 如果列表为空，先进行第一轮更新来加载任务
-                if (_modItems.Count == 0)
-                {
-                    AppendOutput("任务列表为空，开始更新翻译文件...");
-                    await RunHelperAsync("init", null);
-                    await RunHelperAsync("sync", null);
-                    await RunHelperAsync("listpr", null);
-                    await LoadTranslationInfoAsync();
-                }
+                // 先进行第一轮更新来刷新最新的任务状态
+                AppendOutput("[第1阶段] 尝试更新翻译文件...");
+                await RunHelperAsync("init", null);
+                await RunHelperAsync("sync", null);
+                await RunHelperAsync("listpr", null);
 
                 var selected = _modItems.Where(m => m.IsSelected).ToList();
                 if (selected.Count == 0)
                 {
+                    await LoadTranslationInfoAsync();
                     AppendOutput("════════════════════════════════════════");
                     AppendOutput("提示：未选择任何 Mod，这可能是由于程序刚启动，没有加载任何信息导致的");
                     AppendOutput("────────────────────────────────────────");
@@ -374,12 +348,6 @@ namespace 翻译工具
                 AppendOutput($"开始领取 {selected.Count} 个 Mod...");
                 AppendOutput("════════════════════════════════════════");
 
-                // 第一轮：初始化、同步、列出PR
-                AppendOutput("\n[第1阶段] 第一轮更新翻译文件...");
-                await RunHelperAsync("init", null);
-                await RunHelperAsync("sync", null);
-                await RunHelperAsync("listpr", null);
-
                 // 组装 modid 字符串: "123","456"
                 var ids = string.Join(",", selected.Select(m => "\"" + m.ModId + "\""));
 
@@ -387,13 +355,11 @@ namespace 翻译工具
                 AppendOutput("\n[第2阶段] 尝试锁定所选 Mod...");
                 await RunHelperAsync("lockmod", ids);
 
-                // 第二轮：再次初始化、同步、列出PR
-                AppendOutput("\n[第3阶段] 第二轮更新翻译文件...");
+                // 再次初始化、同步、列出PR
+                AppendOutput("\n[第3阶段] 尝试刷新锁定结果...");
                 await RunHelperAsync("init", null);
                 await RunHelperAsync("sync", null);
                 await RunHelperAsync("listpr", null);
-
-                // 刷新列表
                 await LoadTranslationInfoAsync();
 
                 AppendOutput("\n════════════════════════════════════════");
@@ -465,6 +431,7 @@ namespace 翻译工具
 
         private void btnStart_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            ClearOutput();
             var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
             if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
@@ -556,6 +523,7 @@ namespace 翻译工具
             if (input.ShowDialog() == true)
             {
                 var message = input.Value ?? string.Empty;
+                ClearOutput();
                 await RunHelperAsync("commit", message);
             }
             else
@@ -688,6 +656,21 @@ namespace 翻译工具
                 // try to dequeue some items
                 for (int i = 0; i < 1000 && _outputQueue.TryDequeue(out _); i++) { }
             }
+        }
+
+        // 新增：清空日志输出与缓冲
+        private void ClearOutput()
+        {
+            try
+            {
+                // 清空 UI
+                txtOutput.Clear();
+                // 清空选择期间缓冲
+                _pendingWhileSelecting.Clear();
+                // 清空队列
+                while (_outputQueue.TryDequeue(out _)) { }
+            }
+            catch { }
         }
 
         private void OutputTimer_Tick(object? sender, EventArgs e)
@@ -908,6 +891,7 @@ namespace 翻译工具
             public DateTime ExpireTime { get; set; }
             public bool IsCIPassed { get; set; }
             public int ApprovalCount { get; set; }
+            public string PRReviewState { get; set; } = string.Empty; // 新增：PR 状态
             public DateTime RefreshTime { get; set; }
         }
 
@@ -917,6 +901,7 @@ namespace 翻译工具
             private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
             private static readonly DispatcherTimer _refreshTimer = new();
+            private static readonly List<ModItemView> _allInstances = new();
 
             static ModItemView()
             {
@@ -931,8 +916,6 @@ namespace 翻译工具
                 };
                 _refreshTimer.Start();
             }
-
-            private static readonly List<ModItemView> _allInstances = new();
 
             public ModItemView(TranslationInfoRecord r, string currentUser)
             {
@@ -949,6 +932,7 @@ namespace 翻译工具
                 ExpireTime = r.ExpireTime;
                 IsCIPassed = r.IsCIPassed;
                 ApprovalCount = r.ApprovalCount;
+                PRReviewState = r.PRReviewState ?? string.Empty; // 新增：保存 PR 状态
                 RefreshTime = r.RefreshTime;
                 _currentUser = currentUser ?? string.Empty;
 
@@ -987,6 +971,7 @@ namespace 翻译工具
             public DateTime ExpireTime { get; }
             public bool IsCIPassed { get; }
             public int ApprovalCount { get; }
+            public string PRReviewState { get; } // 新增：公开给绑定使用
             public DateTime RefreshTime { get; }
 
             // 过期状态（可观察属性）
@@ -996,6 +981,35 @@ namespace 翻译工具
             // 派生属性用于行样式
             public bool IsLockedByMe => IsLocked && !string.IsNullOrWhiteSpace(_currentUser) && string.Equals(LockedBy, _currentUser, StringComparison.OrdinalIgnoreCase);
             public bool IsLockedByOthers => IsLocked && !IsLockedByMe;
+
+            // 新增：任务状态（根据 PRReviewState 决定）。没有 PR 则为空字符串。
+            public string TaskStatus
+            {
+                get
+                {
+                    if (string.IsNullOrWhiteSpace(PRReviewState)) return string.Empty; // 没有 PR
+                    var norm = NormalizePrState(PRReviewState);
+                    if (norm == "draft") return "翻译中";
+                    if (norm == "readyforreview")
+                    {
+                        return ApprovalCount > 0 ? "已批准" : "已提交";
+                    }
+                    if (norm == "approved") return "已批准";
+                    // 其他状态一律视为已提交
+                    return "已提交";
+                }
+            }
+
+            private static string NormalizePrState(string s)
+            {
+                if (string.IsNullOrEmpty(s)) return string.Empty;
+                var sb = new StringBuilder();
+                foreach (var ch in s)
+                {
+                    if (ch != ' ' && ch != '_' && ch != '-') sb.Append(ch);
+                }
+                return sb.ToString().ToLowerInvariant();
+            }
         }
     }
 }

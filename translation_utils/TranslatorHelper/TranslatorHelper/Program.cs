@@ -364,7 +364,7 @@ class Program
             return false;
 
         // 允许空格，但不允许其他 Git 分支名非法字符
-        // 不能包含: ~, ^, :, ?, *, [, \\, 连续的点(..), 以 / 结尾等
+        // 不能包含: ~, ^, :, ?, *, [, \\, 连续的点(..), 以 / 或 . 结尾等
         var invalidChars = new[] { '~', '^', ':', '?', '*', '[', '\\', '\0' };
         if (name.Any(c => invalidChars.Contains(c)))
             return false;
@@ -941,6 +941,7 @@ class Program
                     ExpireTime = DateTime.MinValue,
                     IsCIPassed = false,
                     ApprovalCount = 0,
+                    PRReviewState = "",
                     RefreshTime = DateTime.Now
                 };
 
@@ -948,6 +949,36 @@ class Program
             }
 
             Console.WriteLine($"[成功] 已统计 {translationInfoList.Count} 个MOD的翻译信息");
+
+            // 新增：即使翻译文件中没有该 MOD，只要 PR 中出现了，也要写入 JSON
+            TranslationInfo GetOrCreateModInfo(string modId)
+            {
+                var mod = translationInfoList.FirstOrDefault(m => m.ModId == modId);
+                if (mod == null)
+                {
+                    string modTitle = ModNameMapping.TryGetValue(modId, out var name) ? name : "";
+                    mod = new TranslationInfo
+                    {
+                        ModId = modId,
+                        ModTitle = modTitle,
+                        Language = config.Language.ToString(),
+                        TotalEntries = 0,
+                        UntranslatedEntries = 0,
+                        TranslatedEntries = 0,
+                        ApprovedEntries = 0,
+                        IsLocked = false,
+                        LockedBy = "",
+                        LockTime = DateTime.MinValue,
+                        ExpireTime = DateTime.MinValue,
+                        IsCIPassed = false,
+                        ApprovalCount = 0,
+                        PRReviewState = "",
+                        RefreshTime = DateTime.Now
+                    };
+                    translationInfoList.Add(mod);
+                }
+                return mod;
+            }
 
             // 获取所有开放的PR
             var allPRs = await github.PullRequest.GetAllForRepository(owner, repoName, new PullRequestRequest
@@ -970,6 +1001,8 @@ class Program
                     Console.WriteLine($"\nPR #{pr.Number}: {pr.Title}");
                     Console.WriteLine($"作者: {pr.User.Login}");
                     Console.WriteLine($"分支: {pr.Head.Ref} -> {pr.Base.Ref}");
+                    var prStateText = pr.Draft ? "草稿 (Draft)" : "就绪审核 (Ready for Review)";
+                    Console.WriteLine($"  状态: {prStateText}");
 
                     if (string.IsNullOrWhiteSpace(pr.Body))
                     {
@@ -1004,24 +1037,25 @@ class Program
                                     Console.WriteLine($"    备注: {lockInfo.notes}");
                                 }
 
-                                // 更新对应MOD的锁定状态
+                                // 确定PR审核状态
+                                string prReviewState = pr.Draft ? "draft" : "readyforreview";
+
+                                // 更新对应MOD的锁定状态（若翻译文件中不存在则创建条目）
                                 foreach (var modId in lockInfo.modIds)
                                 {
-                                    var modInfo = translationInfoList.FirstOrDefault(m => m.ModId == modId);
-                                    if (modInfo != null)
+                                    var modInfo = GetOrCreateModInfo(modId);
+                                    modInfo.IsLocked = true;
+                                    modInfo.LockedBy = lockInfo.lockedBy ?? "";
+                                    modInfo.PRReviewState = prReviewState;
+
+                                    if (DateTime.TryParse(lockInfo.lockedAt, out DateTime lockTime))
                                     {
-                                        modInfo.IsLocked = true;
-                                        modInfo.LockedBy = lockInfo.lockedBy ?? "";
-                                        
-                                        if (DateTime.TryParse(lockInfo.lockedAt, out DateTime lockTime))
-                                        {
-                                            modInfo.LockTime = lockTime;
-                                        }
-                                        
-                                        if (DateTime.TryParse(lockInfo.expiresAt, out DateTime expireTime))
-                                        {
-                                            modInfo.ExpireTime = expireTime;
-                                        }
+                                        modInfo.LockTime = lockTime;
+                                    }
+
+                                    if (DateTime.TryParse(lockInfo.expiresAt, out DateTime expireTime))
+                                    {
+                                        modInfo.ExpireTime = expireTime;
                                     }
                                 }
                             }
@@ -1050,8 +1084,11 @@ class Program
                         Console.WriteLine($"  审查批准数: {approvedCount}");
                         Console.WriteLine($"  CI状态: {(ciPassed ? "通过" : "未通过或进行中")}");
 
-                        // 更新对应MOD的审查状态 (从PR Body解析的modIds)
-                        var jsonMatch = Regex.Match(pr.Body, @"\{[^}]*""lockedBy""[^}]*\}", RegexOptions.Singleline);
+                        // 确定PR审核状态
+                        string prReviewState = pr.Draft ? "draft" : "readyforreview";
+
+                        // 更新对应MOD的审查状态 (从PR Body解析的modIds)，如果不存在则创建
+                        var jsonMatch = Regex.Match(pr.Body ?? string.Empty, @"\{[^}]*""lockedBy""[^}]*\}", RegexOptions.Singleline);
                         if (jsonMatch.Success)
                         {
                             string jsonContent = jsonMatch.Value;
@@ -1066,12 +1103,10 @@ class Program
                             {
                                 foreach (var modId in lockInfo.modIds)
                                 {
-                                    var modInfo = translationInfoList.FirstOrDefault(m => m.ModId == modId);
-                                    if (modInfo != null)
-                                    {
-                                        modInfo.ApprovalCount = approvedCount;
-                                        modInfo.IsCIPassed = ciPassed;
-                                    }
+                                    var modInfo = GetOrCreateModInfo(modId);
+                                    modInfo.ApprovalCount = approvedCount;
+                                    modInfo.IsCIPassed = ciPassed;
+                                    modInfo.PRReviewState = prReviewState;
                                 }
                             }
                         }
@@ -1538,7 +1573,7 @@ class Program
     // =========================
     static async Task MarkPrAsDraft(string token, string owner, string repo, int number)
     {
-        // 直接使用 GraphQL，避免 REST 404 问题；失败时回退到 REST
+        // 直接使用 GraphQL，避免 REST 404 问题；失败回退到 REST
         try
         {
             await GraphQlToggleDraft(token, owner, repo, number, toDraft: true);
@@ -1553,7 +1588,7 @@ class Program
 
     static async Task MarkPrAsReadyForReview(string token, string owner, string repo, int number)
     {
-        // 直接使用 GraphQL，避免 REST 404 问题；失败时回退到 REST
+        // 直接使用 GraphQL，避免 REST 404 问题；失败回退到 REST
         try
         {
             await GraphQlToggleDraft(token, owner, repo, number, toDraft: false);
@@ -1857,7 +1892,7 @@ class Program
                 Console.WriteLine("[警告] MOD名称文件解析结果为空");
             }
         }
-        catch (Exception ex)
+        catch ( Exception ex)
         {
             Console.WriteLine($"[警告] 读取MOD名称文件失败: {ex.Message}");
         }
@@ -2063,6 +2098,7 @@ class Program
         public DateTime ExpireTime { get; set; } = DateTime.MinValue;
         public bool IsCIPassed { get; set; } = false;
         public int ApprovalCount { get; set; } = 0;
+        public string PRReviewState { get; set; } = "";
         public DateTime RefreshTime { get; set; } = DateTime.MinValue;
     }
 
