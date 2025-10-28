@@ -340,14 +340,39 @@ namespace 翻译工具
                 var selected = _modItems.Where(m => m.IsSelected).ToList();
                 if (selected.Count == 0)
                 {
+                    // 刷新本地任务状态
                     await LoadTranslationInfoAsync();
-                    AppendOutput("════════════════════════════════════════");
-                    AppendOutput("提示：未选择任何 Mod，这可能是由于程序刚启动，没有加载任何信息导致的");
-                    AppendOutput("────────────────────────────────────────");
-                    AppendOutput("请按以下步骤操作：");
-                    AppendOutput("1. 在列表中勾选你要领取的 Mod（支持多选）");
-                    AppendOutput("2. 再次点击\"刷新/领取/追加任务\"按钮");
-                    AppendOutput("════════════════════════════════════════");
+
+                    // 在无选择的情况下，如果用户已有开放 PR（即有自己锁定的任务），也尝试生成翻译文件
+                    var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
+                    if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                    var suffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+                    var lockedMods = _modItems.Where(m => m.IsLockedByMe).Select(m => m.ModId).ToHashSet();
+
+                    if (lockedMods.Count > 0)
+                    {
+                        // 保存配置（仍在 UI 线程）
+                        _config.LocalPath = basePath;
+                        SaveConfig();
+
+                        AppendOutput("════════════════════════════════════════");
+                        AppendOutput("检测到你有开放 PR，正在生成最新翻译文件...");
+                        AppendOutput("════════════════════════════════════════");
+
+                        await RunWithProgressAsync(() => GenerateTranslationFileCore(basePath!, suffix!, lockedMods, openAfter: false));
+                        AppendOutput("✓ 翻译文件已生成");
+                    }
+                    else
+                    {
+                        AppendOutput("════════════════════════════════════════");
+                        AppendOutput("提示：未选择任何 Mod，这可能是由于程序刚启动，没有加载任何信息导致的");
+                        AppendOutput("────────────────────────────────────────");
+                        AppendOutput("请按以下步骤操作：");
+                        AppendOutput("1. 在列表中勾选你要领取的 Mod（支持多选）");
+                        AppendOutput("2. 再次点击\"刷新/领取/追加任务\"按钮");
+                        AppendOutput("════════════════════════════════════════");
+                    }
+
                     return;
                 }
 
@@ -372,11 +397,158 @@ namespace 翻译工具
                 AppendOutput("\n════════════════════════════════════════");
                 AppendOutput("✓ 领取流程完成！");
                 AppendOutput("════════════════════════════════════════");
+
+                // 自动生成翻译文件（但不打开），并在生成期间锁定 UI、显示进度条
+                AppendOutput("\n[第4阶段] 自动生成翻译文件...");
+
+                // 捕获 UI 线程中的所需数据，避免在后台线程访问 ObservableCollection
+                var basePathAfter = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
+                if (string.IsNullOrWhiteSpace(basePathAfter)) basePathAfter = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                var suffixAfter = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+                var lockedModsAfter = _modItems.Where(m => m.IsLockedByMe).Select(m => m.ModId).ToHashSet();
+
+                // 保存配置（仍在 UI 线程）
+                _config.LocalPath = basePathAfter;
+                SaveConfig();
+
+                await RunWithProgressAsync(() => GenerateTranslationFileCore(basePathAfter!, suffixAfter!, lockedModsAfter, openAfter: false));
+                AppendOutput("✓ 翻译文件已生成");
             }
             catch (Exception ex)
             {
                 AppendOutput($"\n✗ 领取失败: {ex.Message}");
                 AppendOutput("════════════════════════════════════════");
+            }
+        }
+
+        // 新增：通用的进度窗口封装，期间禁用按钮和列表
+        private async Task RunWithProgressAsync(Action work)
+        {
+            if (_isRunning)
+            {
+                AppendOutput("已有 CLI 操作进行中，请等待完成。");
+                return;
+            }
+
+            _isRunning = true;
+            DisableAllButtons();
+
+            // 显示进度窗口
+            _progressWindow = new ProgressWindow(this);
+            _progressWindow.Show();
+
+            try
+            {
+                await Task.Run(work);
+            }
+            finally
+            {
+                // 关闭并销毁进度窗口
+                try
+                {
+                    if (_progressWindow != null)
+                    {
+                        _progressWindow.Close();
+                        _progressWindow = null;
+                    }
+                }
+                catch { }
+
+                // 恢复按钮状态
+                _isRunning = false;
+                EnableAllButtons();
+            }
+        }
+
+        // 生成翻译文件（核心逻辑），可选择是否在完成后打开
+        private void GenerateTranslationFileCore(string basePath, string suffix, HashSet<string> lockedMods, bool openAfter)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+                string repoDir = Path.Combine(basePath, "pz-mod-translation-helper");
+                string programDir = AppDomain.CurrentDomain.BaseDirectory;
+
+                // 1. 复制翻译格式说明图片
+                string guideImageSource = Path.Combine(repoDir, "简体中文翻译格式说明.png");
+                string guideImageDest = Path.Combine(programDir, "简体中文翻译格式说明.png");
+
+                if (File.Exists(guideImageSource))
+                {
+                    try
+                    {
+                        File.Copy(guideImageSource, guideImageDest, true);
+                        AppendOutput($"  ✓ 已复制翻译格式说明图片到程序目录");
+                    }
+                    catch (Exception ex)
+                    {
+                        AppendOutput($"  ! 复制翻译格式说明图片失败: {ex.Message}");
+                    }
+                }
+
+                // 2. 读取仓库中的翻译文件
+                string repoTranslationFile = Path.Combine(repoDir, "data", $"translations_{suffix}.txt");
+                if (!File.Exists(repoTranslationFile))
+                {
+                    AppendOutput($"  ! 未找到仓库翻译文件: {repoTranslationFile}");
+                    return;
+                }
+
+                var repoTranslations = LoadTranslationsFromFile(repoTranslationFile, suffix);
+
+                // 3. 校验领取的任务
+                if (lockedMods == null || lockedMods.Count == 0)
+                {
+                    AppendOutput("  ! 未找到您领取的任务");
+                    return;
+                }
+
+                // 4. 从仓库数据筛选
+                var filteredTranslations = new Dictionary<string, Dictionary<string, UserTranslationEntry>>();
+
+                foreach (var modId in lockedMods)
+                {
+                    if (!repoTranslations.ContainsKey(modId))
+                    {
+                        continue;
+                    }
+
+                    filteredTranslations[modId] = new Dictionary<string, UserTranslationEntry>();
+
+                    var repoModData = repoTranslations[modId];
+                    foreach (var kvp in repoModData)
+                    {
+                        string key = kvp.Key;
+                        var repoEntry = kvp.Value;
+
+                        filteredTranslations[modId][key] = new UserTranslationEntry
+                        {
+                            OriginalText = repoEntry.OriginalText,
+                            Translation = repoEntry.Translation,
+                            Status = repoEntry.Status,
+                            Comment = repoEntry.Comment
+                        };
+                    }
+                }
+
+                // 5. 获取MOD名称映射
+                var modNames = LoadModNameMapping(repoDir);
+
+                // 6. 写入用户翻译文件（完全覆盖）
+                string userTranslationFile = Path.Combine(programDir, $"translation_{_config.UserName}_{suffix}.txt");
+                WriteUserTranslationFile(userTranslationFile, filteredTranslations, modNames, suffix);
+                AppendOutput($"  ✓ 已保存翻译文件: {userTranslationFile}");
+
+                // 7. 可选：打开文件
+                if (openAfter)
+                {
+                    OpenFilesWithVSCode(userTranslationFile, guideImageDest);
+                }
+            }
+            catch (Exception ex)
+            {
+                AppendOutput($"  ✗ 生成翻译文件失败: {ex.Message}");
             }
         }
 
@@ -439,13 +611,14 @@ namespace 翻译工具
             catch { }
         }
 
-        private void btnStart_Click(object sender, System.Windows.RoutedEventArgs e)
+        private async void btnStart_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             ClearOutput();
             AppendOutput("开始翻译流程...");
 
             try
             {
+                // 捕获 UI 线程中的所需数据
                 var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
                 if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 
@@ -453,104 +626,75 @@ namespace 翻译工具
                 SaveConfig();
 
                 var suffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
-                string repoDir = Path.Combine(basePath, "pz-mod-translation-helper");
-                string programDir = AppDomain.CurrentDomain.BaseDirectory;
-
-                // 1. 复制翻译格式说明图片
-                string guideImageSource = Path.Combine(repoDir, "简体中文翻译格式说明.png");
-                string guideImageDest = Path.Combine(programDir, "简体中文翻译格式说明.png");
-                
-                if (File.Exists(guideImageSource))
-                {
-                    try
-                    {
-                        File.Copy(guideImageSource, guideImageDest, true);
-                        AppendOutput($"✓ 已复制翻译格式说明图片到程序目录");
-                    }
-                    catch (Exception ex)
-                    {
-                        AppendOutput($"✗ 复制翻译格式说明图片失败: {ex.Message}");
-                    }
-                }
-                else
-                {
-                    AppendOutput($"! 未找到翻译格式说明图片: {guideImageSource}");
-                }
-
-                // 2. 读取仓库中的翻译文件
-                string repoTranslationFile = Path.Combine(repoDir, "data", $"translations_{suffix}.txt");
-                if (!File.Exists(repoTranslationFile))
-                {
-                    AppendOutput($"✗ 未找到仓库翻译文件: {repoTranslationFile}");
-                    return;
-                }
-
-                AppendOutput($"正在读取仓库翻译文件...");
-                var repoTranslations = LoadTranslationsFromFile(repoTranslationFile, suffix);
-                AppendOutput($"✓ 已读取 {repoTranslations.Count} 个MOD的翻译数据");
-
-                // 3. 获取用户领取的任务中的模组ID
                 var lockedMods = _modItems.Where(m => m.IsLockedByMe).Select(m => m.ModId).ToHashSet();
-                if (lockedMods.Count == 0)
-                {
-                    AppendOutput("! 未找到您领取的任务，请先领取任务");
-                    return;
-                }
-                AppendOutput($"您领取的MOD: {string.Join(", ", lockedMods)}");
 
-                // 4. 检查并处理用户的翻译文件
-                string userTranslationFile = Path.Combine(programDir, $"translation_{_config.UserName}_{suffix}.txt");
-                Dictionary<string, Dictionary<string, UserTranslationEntry>> userTranslations;
+                await RunWithProgressAsync(() =>
+                {
+                    string repoDir = Path.Combine(basePath!, "pz-mod-translation-helper");
+                    string programDir = AppDomain.CurrentDomain.BaseDirectory;
 
-                if (File.Exists(userTranslationFile))
-                {
-                    AppendOutput($"正在加载现有的翻译文件...");
-                    userTranslations = LoadUserTranslationsFromFile(userTranslationFile, suffix);
-                    AppendOutput($"✓ 已加载 {userTranslations.Sum(m => m.Value.Count)} 条现有翻译");
-                }
-                else
-                {
-                    AppendOutput($"未找到现有翻译文件，将创建新文件");
-                    userTranslations = new Dictionary<string, Dictionary<string, UserTranslationEntry>>();
-                }
+                    // 1. 复制翻译格式说明图片
+                    string guideImageSource = Path.Combine(repoDir, "简体中文翻译格式说明.png");
+                    string guideImageDest = Path.Combine(programDir, "简体中文翻译格式说明.png");
 
-                // 5. 筛选并合并数据
-                AppendOutput($"正在筛选并合并翻译数据...");
-                
-                // 创建新的字典，只包含用户领取的MOD
-                var filteredTranslations = new Dictionary<string, Dictionary<string, UserTranslationEntry>>();
-                
-                foreach (var modId in lockedMods)
-                {
-                    if (!repoTranslations.ContainsKey(modId))
+                    if (File.Exists(guideImageSource))
                     {
-                        AppendOutput($"! MOD {modId} 在仓库中没有翻译数据");
-                        continue;
+                        try
+                        {
+                            File.Copy(guideImageSource, guideImageDest, true);
+                            AppendOutput($"✓ 已复制翻译格式说明图片到程序目录");
+                        }
+                        catch (Exception ex)
+                        {
+                            AppendOutput($"✗ 复制翻译格式说明图片失败: {ex.Message}");
+                        }
+                    }
+                    else
+                    {
+                        AppendOutput($"! 未找到翻译格式说明图片: {guideImageSource}");
                     }
 
-                    filteredTranslations[modId] = new Dictionary<string, UserTranslationEntry>();
-
-                    var repoModData = repoTranslations[modId];
-                    foreach (var kvp in repoModData)
+                    // 2. 读取仓库中的翻译文件
+                    string repoTranslationFile = Path.Combine(repoDir, "data", $"translations_{suffix}.txt");
+                    if (!File.Exists(repoTranslationFile))
                     {
-                        string key = kvp.Key;
-                        var repoEntry = kvp.Value;
+                        AppendOutput($"✗ 未找到仓库翻译文件: {repoTranslationFile}");
+                        return; // 直接结束
+                    }
 
-                        // 如果用户翻译中已存在该条目，保留用户的译文
-                        if (userTranslations.ContainsKey(modId) && userTranslations[modId].ContainsKey(key))
+                    AppendOutput($"正在读取仓库翻译文件...");
+                    var repoTranslations = LoadTranslationsFromFile(repoTranslationFile, suffix!);
+                    AppendOutput($"✓ 已读取 {repoTranslations.Count} 个MOD的翻译数据");
+
+                    // 3. 获取用户领取的任务中的模组ID
+                    if (lockedMods.Count == 0)
+                    {
+                        AppendOutput("! 未找到您领取的任务，请先领取任务");
+                        return;
+                    }
+                    AppendOutput($"您领取的MOD: {string.Join(", ", lockedMods)}");
+
+                    // 4. 直接从仓库数据筛选
+                    AppendOutput($"正在筛选翻译数据...");
+
+                    var filteredTranslations = new Dictionary<string, Dictionary<string, UserTranslationEntry>>();
+
+                    foreach (var modId in lockedMods)
+                    {
+                        if (!repoTranslations.ContainsKey(modId))
                         {
-                            var userEntry = userTranslations[modId][key];
-                            filteredTranslations[modId][key] = new UserTranslationEntry
-                            {
-                                OriginalText = repoEntry.OriginalText,  // 使用最新的原文
-                                Translation = userEntry.Translation,      // 保留用户的译文
-                                Status = repoEntry.Status,                // 使用最新的状态
-                                Comment = repoEntry.Comment               // 使用最新的注释
-                            };
+                            AppendOutput($"! MOD {modId} 在仓库中没有翻译数据");
+                            continue;
                         }
-                        else
+
+                        filteredTranslations[modId] = new Dictionary<string, UserTranslationEntry>();
+
+                        var repoModData = repoTranslations[modId];
+                        foreach (var kvp in repoModData)
                         {
-                            // 新条目，直接添加
+                            string key = kvp.Key;
+                            var repoEntry = kvp.Value;
+
                             filteredTranslations[modId][key] = new UserTranslationEntry
                             {
                                 OriginalText = repoEntry.OriginalText,
@@ -560,21 +704,22 @@ namespace 翻译工具
                             };
                         }
                     }
-                }
 
-                AppendOutput($"✓ 已筛选 {filteredTranslations.Sum(m => m.Value.Count)} 条翻译条目");
+                    AppendOutput($"✓ 已筛选 {filteredTranslations.Sum(m => m.Value.Count)} 条翻译条目");
 
-                // 6. 获取MOD名称映射
-                var modNames = LoadModNameMapping(repoDir);
+                    // 5. 获取MOD名称映射
+                    var modNames = LoadModNameMapping(repoDir);
 
-                // 7. 写入用户翻译文件（完全覆盖）
-                AppendOutput($"正在保存翻译文件（覆盖模式）...");
-                WriteUserTranslationFile(userTranslationFile, filteredTranslations, modNames, suffix);
-                AppendOutput($"✓ 已保存翻译文件: {userTranslationFile}");
+                    // 6. 写入用户翻译文件（完全覆盖）
+                    AppendOutput($"正在保存翻译文件（覆盖模式）...");
+                    string userTranslationFile = Path.Combine(programDir, $"translation_{_config.UserName}_{suffix}.txt");
+                    WriteUserTranslationFile(userTranslationFile, filteredTranslations, modNames, suffix!);
+                    AppendOutput($"✓ 已保存翻译文件: {userTranslationFile}");
 
-                // 8. 使用VS Code打开文件
-                AppendOutput($"正在打开翻译文件...");
-                OpenFilesWithVSCode(userTranslationFile, guideImageDest);
+                    // 7. 使用VS Code打开文件
+                    AppendOutput($"正在打开翻译文件...");
+                    OpenFilesWithVSCode(userTranslationFile, guideImageDest);
+                });
             }
             catch (Exception ex)
             {
@@ -879,47 +1024,34 @@ namespace 翻译工具
             }
         }
 
-        // 使用VS Code打开文件
+        // 使用VS Code打开文件（优先 VS Code，不可用时回退系统默认程序）
         private void OpenFilesWithVSCode(string translationFile, string guideImage)
         {
             try
             {
-                // 构建文件列表参数
-                var args = new StringBuilder();
-                args.Append(EscapeArg(translationFile));
-                
-                if (File.Exists(guideImage))
-                {
-                    args.Append(' ').Append(EscapeArg(guideImage));
-                }
+                var files = new List<string> { translationFile };
+                if (File.Exists(guideImage)) files.Add(guideImage);
 
-                // 尝试使用VS Code打开
-                try
+                bool vsCodeSuccess = TryLaunchVSCode(files);
+
+                // 如果 VS Code 启动失败，回退到默认程序
+                if (!vsCodeSuccess)
                 {
-                    var codePsi = new ProcessStartInfo("code", args.ToString())
+                    AppendOutput($"尝试使用系统默认程序打开...");
+
+                    try
                     {
-                        UseShellExecute = false,  // 修改为 false 以支持 CreateNoWindow
-                        CreateNoWindow = true     // 隐藏命令行窗口
-                    };
-                    Process.Start(codePsi);
-                    AppendOutput($"✓ 已使用 VS Code 打开翻译文件");
-                    if (File.Exists(guideImage))
-                    {
-                        AppendOutput($"✓ 已使用 VS Code 打开格式说明图片");
+                        var psi = new ProcessStartInfo(translationFile)
+                        {
+                            UseShellExecute = true
+                        };
+                        Process.Start(psi);
+                        AppendOutput($"✓ 已使用默认程序打开翻译文件");
                     }
-                }
-                catch (Exception exCode)
-                {
-                    // 回退到默认程序
-                    AppendOutput($"! 无法使用 VS Code: {exCode.Message}");
-                    AppendOutput($"尝试使用默认程序打开...");
-
-                    var psi = new ProcessStartInfo(translationFile)
+                    catch (Exception exDefault)
                     {
-                        UseShellExecute = true
-                    };
-                    Process.Start(psi);
-                    AppendOutput($"✓ 已打开翻译文件");
+                        AppendOutput($"✗ 使用默认程序打开失败: {exDefault.Message}");
+                    }
 
                     if (File.Exists(guideImage))
                     {
@@ -927,7 +1059,7 @@ namespace 翻译工具
                         {
                             var psi2 = new ProcessStartInfo(guideImage) { UseShellExecute = true };
                             Process.Start(psi2);
-                            AppendOutput($"✓ 已打开格式说明圖片");
+                            AppendOutput($"✓ 已使用默认程序打开格式说明图片");
                         }
                         catch (Exception exImg)
                         {
@@ -940,6 +1072,82 @@ namespace 翻译工具
             {
                 AppendOutput($"✗ 打开文件失败: {ex.Message}");
             }
+        }
+
+        // 强化：优先寻找 VS Code 可执行文件进行启动；若不存在再尝试 PATH 中的 code
+        private bool TryLaunchVSCode(IEnumerable<string> files)
+        {
+            string args = string.Join(" ", files.Select(EscapeArg));
+
+            // 常见安装位置（User、x64、x86、Insiders）
+            var candidates = new List<string>();
+            var localApp = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            if (!string.IsNullOrWhiteSpace(localApp))
+            {
+                candidates.Add(Path.Combine(localApp, "Programs", "Microsoft VS Code", "Code.exe"));
+                candidates.Add(Path.Combine(localApp, "Programs", "Microsoft VS Code Insiders", "Code - Insiders.exe"));
+            }
+            candidates.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Microsoft VS Code", "Code.exe"));
+            var pf86 = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+            if (!string.IsNullOrWhiteSpace(pf86))
+            {
+                candidates.Add(Path.Combine(pf86, "Microsoft VS Code", "Code.exe"));
+            }
+
+            foreach (var exe in candidates.Distinct().Where(File.Exists))
+            {
+                if (StartVSCodeProcess(exe, args))
+                {
+                    AppendOutput($"✓ 已使用 VS Code 打开翻译文件");
+                    if (files.Count() > 1) AppendOutput($"✓ 已使用 VS Code 打开格式说明图片");
+                    return true;
+                }
+            }
+
+            // 回退到 PATH 中的 code 命令
+            if (StartVSCodeProcess("code", args))
+            {
+                AppendOutput($"✓ 已使用 VS Code 打开翻译文件");
+                if (files.Count() > 1) AppendOutput($"✓ 已使用 VS Code 打开格式说明图片");
+                return true;
+            }
+
+            AppendOutput("! 未检测到 VS Code 或启动失败");
+            return false;
+        }
+
+        private bool StartVSCodeProcess(string fileName, string args)
+        {
+            try
+            {
+                var psi = new ProcessStartInfo
+                {
+                    FileName = fileName,
+                    Arguments = args,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardError = true,
+                    RedirectStandardOutput = true
+                };
+
+                using var process = Process.Start(psi);
+                if (process != null)
+                {
+                    if (!process.WaitForExit(2000))
+                    {
+                        return true; // 仍在运行，视为成功
+                    }
+                    else if (process.ExitCode == 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                AppendOutput($"! 无法使用 VS Code: {ex.Message}");
+            }
+            return false;
         }
 
         private async void btnCommit_Click(object sender, System.Windows.RoutedEventArgs e)
