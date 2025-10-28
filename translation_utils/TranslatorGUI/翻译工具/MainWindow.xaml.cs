@@ -898,7 +898,8 @@ namespace 翻译工具
                 {
                     var codePsi = new ProcessStartInfo("code", args.ToString())
                     {
-                        UseShellExecute = true
+                        UseShellExecute = false,  // 修改为 false 以支持 CreateNoWindow
+                        CreateNoWindow = true     // 隐藏命令行窗口
                     };
                     Process.Start(codePsi);
                     AppendOutput($"✓ 已使用 VS Code 打开翻译文件");
@@ -1483,7 +1484,7 @@ namespace 翻译工具
                 WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
                 ResizeMode = System.Windows.ResizeMode.NoResize;
                 ShowInTaskbar = false;
-                WindowStyle = System.Windows.WindowStyle.None; // 移除标题栏和关闭按钮
+                WindowStyle = System.Windows.WindowStyle.None; // 秼除标题栏和关闭按钮
                 
                 // 设置父窗口
                 if (owner != null)
