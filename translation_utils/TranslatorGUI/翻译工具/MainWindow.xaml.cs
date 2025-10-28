@@ -210,10 +210,13 @@ namespace 翻译工具
             // 新增：语言选择
             panel.Children.Add(new System.Windows.Controls.TextBlock { Text = "翻译语言:" });
             var cbLang = new System.Windows.Controls.ComboBox { Margin = new System.Windows.Thickness(0, 4, 0, 8) };
-            // 填充语言列表（来自 TranslatorHelper Program.cs - TranslationSystem.LanguageHelper.All）
+            // 仅显示简体中文（CN），临时隐藏其他语言
             foreach (var lang in LanguageHelper.All)
             {
                 var suffix = lang.ToSuffix();
+                if (!string.Equals(suffix, "CN", StringComparison.OrdinalIgnoreCase))
+                    continue;
+
                 var item = new System.Windows.Controls.ComboBoxItem
                 {
                     Content = $"{lang} ({suffix})",

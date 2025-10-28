@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Credentials = Octokit.Credentials;
 using TranslationSystem;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 class Program
 {
@@ -64,7 +66,7 @@ class Program
                 // =========================
                 // 初始化 GitHub 客户端
                 // =========================
-                var github = new GitHubClient(new ProductHeaderValue("TranslationHelper"));
+                var github = new GitHubClient(new Octokit.ProductHeaderValue("TranslationHelper"));
                 github.Credentials = new Credentials(config.Key);
 
                 // 验证 GitHub 连接和获取仓库信息
@@ -110,6 +112,12 @@ class Program
                         break;
                     case "lockmod":
                         res = await LockModAndCreatePR(config, github, owner, repoName);
+                        break;
+                    case "submit":
+                        res = await SubmitPR(config, github, owner, repoName);
+                        break;
+                    case "withdraw":
+                        res = await WithdrawPR(config, github, owner, repoName);
                         break;
                     default:
                         Console.WriteLine($"[错误] 未知操作: {config.Operation}");
@@ -163,7 +171,7 @@ class Program
         {
             Console.WriteLine("[提示] 参数不足，进入测试模式");
             Console.WriteLine("[提示] 用法: <仓库URL> <PAT Token> <翻译者名字> <翻译者邮箱> <语言后缀> <操作> [提交说明] [本地路径]");
-            Console.WriteLine("[提示] 操作: init (初始化) | sync (同步) | commit (提交修改) | listpr (列出PR) | lockmod (锁定MOD并创建PR)");
+            Console.WriteLine("[提示] 操作: init (初始化) | sync (同步) | commit (提交修改) | listpr (列出PR) | lockmod (锁定MOD并创建PR) | submit (提交审核) | withdraw (撤回为草稿)");
             Console.WriteLine("[提示] 语言后缀: CN (简体中文) | TW (繁体中文) | EN (英文) | FR (法文) 等");
             Console.WriteLine("[提示] 如果参数包含空格，请使用引号包裹，例如: \"Zhang San\" 或 \"C:\\My Folder\\repo\"");
             Console.WriteLine("[提示] 示例: TranslatorHelper \"https://github.com/owner/repo\" mytoken \"Zhang San\" \"zhangsan@email.com\" CN init");
@@ -197,11 +205,13 @@ class Program
             Console.WriteLine();
             Console.WriteLine("请选择你的操作:");
             Console.WriteLine("1. 初始化翻译数据");
-            Console.WriteLine("2. 同步最新主仓库翻译进度(放弃所有更改)");
-            Console.WriteLine("3. 提交翻译修改、创建PR并等待审核");
+            Console.WriteLine("2. 同步最新主仓库翻译进度");
+            Console.WriteLine("3. 提交翻译修改");
             Console.WriteLine("4. 列出所有开放的PR");
             Console.WriteLine("5. 锁定MOD并创建PR");
-            Console.WriteLine("6. 退出程序");
+            Console.WriteLine("6. 提交审核");
+            Console.WriteLine("7. 撤回为草稿");
+            Console.WriteLine("8. 退出程序");
             Console.Write("输入数字选择操作 (默认选择1): ");
 
             var choice = Console.ReadLine();
@@ -224,6 +234,12 @@ class Program
                     operation = "lockmod";
                     break;
                 case "6":
+                    operation = "submit";
+                    break;
+                case "7":
+                    operation = "withdraw";
+                    break;
+                case "8":
                     //退出程序
                     Environment.Exit(0);
                     return null;
@@ -296,10 +312,10 @@ class Program
             return null;
         }
 
-        if (operation != "init" && operation != "sync" && operation != "commit" && operation != "listpr" && operation != "lockmod")
+        if (operation != "init" && operation != "sync" && operation != "commit" && operation != "listpr" && operation != "lockmod" && operation != "submit" && operation != "withdraw")
         {
             Console.WriteLine($"[错误] 操作类型不合法: {operation}");
-            Console.WriteLine("[提示] 有效操作: init | sync | commit | listpr | lockmod");
+            Console.WriteLine("[提示] 有效操作: init | sync | commit | listpr | lockmod | submit | withdraw");
             return null;
         }
 
@@ -452,8 +468,8 @@ class Program
                     // 添加进度显示
                     cloneOptions.FetchOptions.OnTransferProgress = (progress) =>
                     {
-                        Console.Write($"\r正在克 clones仓库: 接收对象 {progress.ReceivedObjects}/{progress.TotalObjects}, " +
-                                      $"解析 {progress.IndexedObjects}/{progress.TotalObjects}, " +
+                        Console.Write($"\r正在克隆仓库: 接收对象 {progress.ReceivedObjects}/{progress.TotalObjects}, " +
+                                      $"解析对象 {progress.IndexedObjects}/{progress.TotalObjects}, " +
                                       $"{progress.ReceivedBytes / 1024}KB     ");
                         return true;
                     };
@@ -477,7 +493,7 @@ class Program
                 {
                     Console.WriteLine(); // 换行，避免进度条残留
                     Console.WriteLine($"[错误] 克隆失败: {ex.Message}");
-                    Console.WriteLine("[提示] 检查网络连接、使用梯子或稍后重试");
+                    Console.WriteLine("[提示] 检查网络连接、使用代理或稍后重试");
                     return 1;
                 }
             }
@@ -489,7 +505,7 @@ class Program
                 if (!PullLatestChanges(repo, config))
                 {
                     Console.WriteLine($"[错误] 拉取失败");
-                    Console.WriteLine("[提示] 检查网络连接、使用梯子或稍后重试");
+                    Console.WriteLine("[提示] 检查网络连接、使用代理或稍后重试");
                     return 1;
                 }
 
@@ -526,7 +542,7 @@ class Program
                         Console.WriteLine($"[提示] 本地分支 {translatorBranch} 已存在，直接切换到该分支");
                         Commands.Checkout(repo, existingLocal);
 
-                        // 远端分支不存在的情况下，需要将本地分支推送到远端并设置上游
+                        // 远程分支不存在的情况下，需要将本地分支推送到远端并设置上游
                         var remote = repo.Network.Remotes["origin"];
                         var pushOptions = new PushOptions
                         {
@@ -681,13 +697,13 @@ class Program
 
             if (existingPR == null)
             {
-                // 3.2 不存在 PR，强制与 main 分支同步
-                Console.WriteLine("未发现开放的 PR，将强制同步到主分支...");
+                // 3.2 不存在 PR，强制与默认分支同步
+                Console.WriteLine("未发现开放的 PR，将强制同步到默认分支...");
 
                 var githubRepo = await github.Repository.Get(owner, repoName);
                 string defaultBranch = githubRepo.DefaultBranch;
 
-                // 获取远程主分支最新提交
+                // 获取远程默认分支最新提交
                 var remoteBranch = repo.Branches[$"origin/{defaultBranch}"];
                 if (remoteBranch == null)
                 {
@@ -695,7 +711,7 @@ class Program
                     return 1;
                 }
 
-                // 强制重置到主分支
+                // 强制重置到默认分支
                 repo.Reset(ResetMode.Hard, remoteBranch.Tip);
                 Console.WriteLine($"[成功] 已强制同步到 {defaultBranch} 分支，所有本地更改已放弃");
 
@@ -717,7 +733,7 @@ class Program
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"⚠ 推送失败: {ex.Message}");
+                    Console.WriteLine($"[警告] 推送失败: {ex.Message}");
                     Console.WriteLine("[提示] 稍后重试");
                 }
             }
@@ -725,7 +741,7 @@ class Program
             {
                 // 3.3 存在 PR，不进行操作
                 Console.WriteLine($"[成功] 发现开放的 PR: {existingPR.Title}");
-                Console.WriteLine($"  PR #${existingPR.Number}: {existingPR.HtmlUrl}");
+                Console.WriteLine($"  PR #{existingPR.Number}: {existingPR.HtmlUrl}");
                 Console.WriteLine("[成功] 保留当前修改，不进行强制同步");
                 Console.WriteLine("  (可能存在的冲突将在 PR 合并时由技术人员处理)");
             }
@@ -792,7 +808,7 @@ class Program
             // 提交
             var signature = new LibGit2Sharp.Signature(config.UserName, config.UserEmail, DateTimeOffset.Now);
             var commit = repo.Commit(config.CommitMessage, signature, signature);
-            Console.WriteLine($"[成功] 提交成功: {commit.Sha.Substring(0, 7)} - {config.CommitMessage}");
+            Console.WriteLine($"[成功] 提交成功: {commit.Sha.Substring(0, 7)} - {commit.Message}");
 
             // 推送到远程仓库
             try
@@ -850,7 +866,8 @@ class Program
 
                     var newPR = new NewPullRequest(prTitle, translatorBranch, githubRepo.DefaultBranch)
                     {
-                        Body = config.CommitMessage
+                        Body = config.CommitMessage,
+                        Draft = true // 提交修改走草稿PR，标记为正在翻译
                     };
 
                     var createdPR = await github.PullRequest.Create(owner, repoName, newPR);
@@ -872,7 +889,7 @@ class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[错误] 提交失败: {ex.Message}");
+            Console.WriteLine($"{ex.Message}");
             return 1;
         }
     }
@@ -895,8 +912,8 @@ class Program
             string fileName = $"translations_{config.Language.ToSuffix()}.txt";
             Console.WriteLine($"读取翻译文件: {fileName}");
 
-            // 读取翻译文件
-            ReadTranslationFile(config.LocalPath, fileName);
+            // 读取翻译文件（按传入语言解析）
+            ReadTranslationFile(config.LocalPath, fileName, config.Language);
             Console.WriteLine($"[成功] 已读取 {ModTranslations.Count} 个MOD的翻译数据");
 
             // 统计所有MOD的翻译信息
@@ -1031,7 +1048,7 @@ class Program
                                                                     c.Status.Value != CheckStatus.Completed);
 
                         Console.WriteLine($"  审查批准数: {approvedCount}");
-                        Console.WriteLine($"  CI状态: {(ciPassed ? "通过 ✓" : "未通过或进行中")}");
+                        Console.WriteLine($"  CI状态: {(ciPassed ? "通过" : "未通过或进行中")}");
 
                         // 更新对应MOD的审查状态 (从PR Body解析的modIds)
                         var jsonMatch = Regex.Match(pr.Body, @"\{[^}]*""lockedBy""[^}]*\}", RegexOptions.Singleline);
@@ -1167,6 +1184,122 @@ class Program
     }
 
     // =========================
+    // 解析并合并 PR Body 的锁定 MOD 列表并更新 PR Body
+    // =========================
+    static async Task<bool> TryMergeModsIntoPrBody(AppConfig config, GitHubClient github, string owner, string repoName, PullRequest existingPR)
+    {
+        try
+        {
+            var newModIds = ParseModIds(config.CommitMessage);
+            if (newModIds.Count == 0)
+            {
+                Console.WriteLine("[提示] 未提供任何可解析的MOD ID，跳过合并");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(existingPR.Body))
+            {
+                Console.WriteLine("[提示] 现有PR没有Body，无法解析锁定信息，跳过合并");
+                return false;
+            }
+
+            var jsonMatch = Regex.Match(existingPR.Body, @"\{[^}]*""lockedBy""[^}]*\}", RegexOptions.Singleline);
+            if (!jsonMatch.Success)
+            {
+                Console.WriteLine("[提示] 现有PR Body未找到锁定信息JSON，跳过合并");
+                return false;
+            }
+
+            var jsonContent = jsonMatch.Value;
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                TypeInfoResolver = new System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver()
+            };
+            PRLockInfo? lockInfo = null;
+            try
+            {
+                lockInfo = JsonSerializer.Deserialize<PRLockInfo>(jsonContent, options);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[提示] 现有PR Body锁定信息解析失败: {ex.Message}");
+                return false;
+            }
+
+            var merged = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            if (lockInfo?.modIds != null)
+            {
+                foreach (var id in lockInfo.modIds)
+                {
+                    var trimmed = id?.Trim();
+                    if (!string.IsNullOrEmpty(trimmed)) merged.Add(trimmed);
+                }
+            }
+            foreach (var id in newModIds)
+            {
+                if (!string.IsNullOrWhiteSpace(id)) merged.Add(id);
+            }
+
+            // 如果没有变化则直接返回
+            var existingSet = new HashSet<string>(lockInfo?.modIds ?? Enumerable.Empty<string>(), StringComparer.OrdinalIgnoreCase);
+            if (merged.SetEquals(existingSet))
+            {
+                Console.WriteLine("[提示] 新增的MOD与现有PR一致，无需更新PR Body");
+                return false;
+            }
+
+            // 构造新的JSON块（保留原来的lockedAt/expiredAt/notes，更新language为当前语言以保持格式一致）
+            string lockedBy = lockInfo?.lockedBy ?? config.UserName;
+            string lockedAt = lockInfo?.lockedAt ?? DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            string expiresAt = lockInfo?.expiresAt ?? DateTime.Now.AddDays(7).ToString("yyyy-MM-dd HH:mm:ss");
+            string? notes = lockInfo?.notes;
+            string language = config.Language.ToSuffix();
+
+            var modIdArray = merged.ToList();
+            modIdArray.Sort(StringComparer.Ordinal);
+            string idsJson = string.Join(", ", modIdArray.Select(x => $"\"{x}\""));
+
+            string newJson = "{\r\n" +
+                             $"  \"lockedBy\": \"{EscapeJson(lockedBy)}\",\r\n" +
+                             $"  \"lockedAt\": \"{EscapeJson(lockedAt)}\",\r\n" +
+                             $"  \"language\": \"{EscapeJson(language)}\",\r\n" +
+                             $"  \"modIds\": [{idsJson}],\r\n" +
+                             $"  \"expiresAt\": \"{EscapeJson(expiresAt)}\"" +
+                             (notes != null ? ",\r\n  \"notes\": \"" + EscapeJson(notes) + "\"\r\n}" : "\r\n}");
+
+            // 替换PR Body中的原JSON
+            string newBody = existingPR.Body!.Substring(0, jsonMatch.Index) + newJson + existingPR.Body!.Substring(jsonMatch.Index + jsonMatch.Length);
+
+            // 更新PR Body
+            var update = new PullRequestUpdate { Body = newBody };
+            var updated = await github.PullRequest.Update(owner, repoName, existingPR.Number, update);
+
+            Console.WriteLine("[成功] 已更新PR Body中的锁定模组列表");
+            Console.WriteLine($"  PR: #{existingPR.Number} -> {updated.HtmlUrl}");
+            Console.WriteLine($"  新增并合并后的MOD: {string.Join(", ", modIdArray)}");
+
+            // 修改真正增加锁定模组后，将PR重新标记为草稿
+            try
+            {
+                await MarkPrAsDraft(config.Key, owner, repoName, existingPR.Number);
+                Console.WriteLine("[成功] 已将PR重新标记为草稿 (Draft)");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[警告] 标记 PR 为草稿失败: {ex.Message}");
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[错误] 更新PR Body失败: {ex.Message}");
+            return false;
+        }
+    }
+
+    // =========================
     // 6. 锁定MOD并创建PR
     // =========================
     static async Task<int> LockModAndCreatePR(AppConfig config, GitHubClient github, string owner, string repoName)
@@ -1216,8 +1349,13 @@ class Program
                 Console.WriteLine($"[提示] 检测到已存在开放的 PR: #{existingPR.Number}");
                 Console.WriteLine($"  标题: {existingPR.Title}");
                 Console.WriteLine($"  链接: {existingPR.HtmlUrl}");
-                Console.WriteLine("[提示] 已存在开放的PR，跳过锁定MOD和创建PR操作");
-                Console.WriteLine("[提示] 如需重新锁定MOD，请先关闭或合并现有PR");
+
+                // 新增逻辑：解析并合并PR Body中的modIds
+                var mergedOk = await TryMergeModsIntoPrBody(config, github, owner, repoName, existingPR);
+                if (!mergedOk)
+                {
+                    Console.WriteLine("[提示] 未能合并新MOD到现有PR的Body，保持原状");
+                }
 
                 // 等待5秒后自动执行 ListPullRequests
                 Console.WriteLine("\n[提示] 5秒后将自动刷新PR列表...");
@@ -1295,7 +1433,7 @@ class Program
                 return 1;
             }
 
-            // 创建新的PR
+            // 创建新的PR (草稿，表示正在翻译中)
             try
             {
                 Console.WriteLine("创建新的 PR...");
@@ -1304,7 +1442,8 @@ class Program
 
                 var newPR = new NewPullRequest(prTitle, translatorBranch, githubRepo.DefaultBranch)
                 {
-                    Body = $"{{\r\n  \"lockedBy\": \"{config.UserName}\",\r\n  \"lockedAt\": \"{DateTime.Now:yyyy-MM-dd HH:mm:ss}\",\r\n  \"language\": \"{config.Language.ToSuffix()}\",\r\n  \"modIds\": [{config.CommitMessage}],\r\n  \"expiresAt\": \"{DateTime.Now.Add(new TimeSpan(24*7,0,0)):yyyy-MM-dd HH:mm:ss}\"\r\n}}"
+                    Body = $"{{\r\n  \"lockedBy\": \"{config.UserName}\",\r\n  \"lockedAt\": \"{DateTime.Now:yyyy-MM-dd HH:mm:ss}\",\r\n  \"language\": \"{config.Language.ToSuffix()}\",\r\n  \"modIds\": [{config.CommitMessage}],\r\n  \"expiresAt\": \"{DateTime.Now.AddDays(7):yyyy-MM-dd HH:mm:ss}\"\r\n}}",
+                    Draft = true
                 };
 
                 var createdPR = await github.PullRequest.Create(owner, repoName, newPR);
@@ -1340,6 +1479,193 @@ class Program
         }
     }
 
+    // =========================
+    // 新增：提交审核 (Ready for review)
+    // =========================
+    static async Task<int> SubmitPR(AppConfig config, GitHubClient github, string owner, string repoName)
+    {
+        try
+        {
+            string translatorBranch = $"translation-{ConvertToValidBranchName(config.UserName)}";
+            var allPRs = await github.PullRequest.GetAllForRepository(owner, repoName, new PullRequestRequest { State = ItemStateFilter.Open });
+            var pr = allPRs.FirstOrDefault(p => p.Head.Ref == translatorBranch);
+            if (pr == null)
+            {
+                Console.WriteLine("[提示] 未找到属于你分支的开放 PR");
+                return 0;
+            }
+
+            await MarkPrAsReadyForReview(config.Key, owner, repoName, pr.Number);
+            Console.WriteLine($"[成功] 已将 PR #{pr.Number} 标记为 Ready for review");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[错误] 提交审核失败: {ex.Message}");
+            return 1;
+        }
+    }
+
+    // =========================
+    // 新增：撤回为草稿 (Convert to draft)
+    // =========================
+    static async Task<int> WithdrawPR(AppConfig config, GitHubClient github, string owner, string repoName)
+    {
+        try
+        {
+            string translatorBranch = $"translation-{ConvertToValidBranchName(config.UserName)}";
+            var allPRs = await github.PullRequest.GetAllForRepository(owner, repoName, new PullRequestRequest { State = ItemStateFilter.Open });
+            var pr = allPRs.FirstOrDefault(p => p.Head.Ref == translatorBranch);
+            if (pr == null)
+            {
+                Console.WriteLine("[提示] 未找到属于你分支的开放 PR");
+                return 0;
+            }
+
+            await MarkPrAsDraft(config.Key, owner, repoName, pr.Number);
+            Console.WriteLine($"[成功] 已将 PR #{pr.Number} 撤回为 Draft");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[错误] 撤回为草稿失败: {ex.Message}");
+            return 1;
+        }
+    }
+
+    // =========================
+    // GitHub PR 草稿/提交 切换封装（优先使用 GraphQL，失败回退到 REST）
+    // =========================
+    static async Task MarkPrAsDraft(string token, string owner, string repo, int number)
+    {
+        // 直接使用 GraphQL，避免 REST 404 问题；失败时回退到 REST
+        try
+        {
+            await GraphQlToggleDraft(token, owner, repo, number, toDraft: true);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[提示] GraphQL convert_to_draft 失败: {ex.Message}，尝试使用 REST...");
+            var url = $"https://api.github.com/repos/{owner}/{repo}/pulls/{number}/convert_to_draft";
+            await PostGitHubApi(token, url);
+        }
+    }
+
+    static async Task MarkPrAsReadyForReview(string token, string owner, string repo, int number)
+    {
+        // 直接使用 GraphQL，避免 REST 404 问题；失败时回退到 REST
+        try
+        {
+            await GraphQlToggleDraft(token, owner, repo, number, toDraft: false);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[提示] GraphQL ready_for_review 失败: {ex.Message}，尝试使用 REST...");
+            var url = $"https://api.github.com/repos/{owner}/{repo}/pulls/{number}/ready_for_review";
+            await PostGitHubApi(token, url);
+        }
+    }
+
+    static async Task PostGitHubApi(string token, string url)
+    {
+        using var http = new HttpClient();
+        http.DefaultRequestHeaders.UserAgent.Clear();
+        http.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("TranslationHelper", "1.0"));
+        // 兼容老的预览头
+        http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github+json"));
+        http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.shadow-cat-preview+json"));
+        http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        http.DefaultRequestHeaders.Add("X-GitHub-Api-Version", "2022-11-28");
+
+        var content = new StringContent("{}", Encoding.UTF8, "application/json");
+        var resp = await http.PostAsync(url, content);
+        if (!resp.IsSuccessStatusCode)
+        {
+            var body = await resp.Content.ReadAsStringAsync();
+            throw new Exception($"GitHub API 调用失败: {(int)resp.StatusCode} {resp.ReasonPhrase}. Body: {body}");
+        }
+    }
+
+    static async Task GraphQlToggleDraft(string token, string owner, string repo, int number, bool toDraft)
+    {
+        // 先获取 PR 的 node_id
+        string nodeId = await GetPrNodeId(token, owner, repo, number);
+        if (string.IsNullOrEmpty(nodeId))
+            throw new Exception("无法获取 PR 的 node_id，GraphQL 调用失败");
+
+        // 构造 GraphQL 变更
+        string mutation = toDraft
+            ? "mutation($id:ID!){ convertPullRequestToDraft(input:{pullRequestId:$id}){ pullRequest{ id isDraft } } }"
+            : "mutation($id:ID!){ markPullRequestReadyForReview(input:{pullRequestId:$id}){ pullRequest{ id isDraft } } }";
+
+        // 为避免 AOT/裁剪环境下的反射序列化问题，这里手动构造 JSON 字符串
+        string mutationEscaped = mutation.Replace("\\", "\\\\").Replace("\"", "\\\"");
+        string nodeIdEscaped = EscapeJson(nodeId);
+        string json = $"{{\"query\":\"{mutationEscaped}\",\"variables\":{{\"id\":\"{nodeIdEscaped}\"}}}}";
+
+        using var http = new HttpClient();
+        http.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("TranslationHelper", "1.0"));
+        http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        http.DefaultRequestHeaders.Add("X-GitHub-Api-Version", "2022-11-28");
+
+        var resp = await http.PostAsync("https://api.github.com/graphql", new StringContent(json, Encoding.UTF8, "application/json"));
+        var respBody = await resp.Content.ReadAsStringAsync();
+        if (!resp.IsSuccessStatusCode || respBody.Contains("\"errors\""))
+        {
+            throw new Exception($"GraphQL 切换 PR Draft 状态失败: {(int)resp.StatusCode} {resp.ReasonPhrase}. Body: {respBody}");
+        }
+    }
+
+    static async Task<string> GetPrNodeId(string token, string owner, string repo, int number)
+    {
+        using var http = new HttpClient();
+        http.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("TranslationHelper", "1.0"));
+        http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        http.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github+json"));
+        http.DefaultRequestHeaders.Add("X-GitHub-Api-Version", "2022-11-28");
+
+        var url = $"https://api.github.com/repos/{owner}/{repo}/pulls/{number}";
+        var resp = await http.GetAsync(url);
+        var body = await resp.Content.ReadAsStringAsync();
+        if (!resp.IsSuccessStatusCode)
+            throw new Exception($"获取 PR 信息失败: {(int)resp.StatusCode} {resp.ReasonPhrase}. Body: {body}");
+
+        using var doc = JsonDocument.Parse(body);
+        if (doc.RootElement.TryGetProperty("node_id", out var nodeIdProp))
+        {
+            return nodeIdProp.GetString() ?? string.Empty;
+        }
+        return string.Empty;
+    }
+
+    static string EscapeJson(string s)
+    {
+        if (string.IsNullOrEmpty(s)) return s;
+        return s.Replace("\\", "\\\\").Replace("\"", "\\\"");
+    }
+
+    static List<string> ParseModIds(string raw)
+    {
+        var result = new List<string>();
+        if (string.IsNullOrWhiteSpace(raw)) return result;
+        foreach (var part in raw.Split(',', StringSplitOptions.RemoveEmptyEntries))
+        {
+            var token = part.Trim();
+            if (token.Length == 0) continue;
+            // 去除首尾引号
+            if ((token.StartsWith("\"") && token.EndsWith("\"")) || (token.StartsWith("\'") && token.EndsWith("\'")))
+            {
+                token = token.Substring(1, token.Length - 2);
+            }
+            token = token.Trim();
+            // 只保留数字和字母（以防ID含非数字字符，若只需数字可限制为数字）
+            token = Regex.Replace(token, @"[^0-9A-Za-z]", "");
+            if (!string.IsNullOrWhiteSpace(token))
+                result.Add(token);
+        }
+        return result;
+    }
     // =========================
     // 辅助方法：拉取最新代码
     // =========================
@@ -1538,9 +1864,9 @@ class Program
     }
 
     // =========================
-    // 读取翻译文件
+    // 读取翻译文件（适配传入语言）
     // =========================
-    static void ReadTranslationFile(string repoDir, string fileName)
+    static void ReadTranslationFile(string repoDir, string fileName, TranslationSystem.Language language)
     {
         // 检查是否提供了文件名
         if(string.IsNullOrEmpty(fileName))
@@ -1558,13 +1884,17 @@ class Program
             return;
         }
         
-        //打开文件，读取内容
+        // 打开文件，读取内容
         var linesInFile = File.ReadAllLines(filePath);
-        //清空并重新构建ModTranslations
+        // 清空并重新构建ModTranslations
         ModTranslations = new Dictionary<string, Dictionary<string, TranslationEntry>>();
         List<string> tempComments = new List<string>();
         string? currentModId = null;
         string? lastProcessedKey = null;
+
+        // 使用传入语言的后缀解析对应译文（例如 CN/TW/JP 等）
+        string langSuffix = language.ToSuffix();
+        string langSuffixEscaped = Regex.Escape(langSuffix);
         
         foreach (var line in linesInFile)
         {
@@ -1573,14 +1903,14 @@ class Program
             {
                 continue;
             }
-            //是否是注释行
+            // 是否是注释行
             if (IsNullOrCommentLine(line))
             {
                 tempComments.Add(line);
                 continue;
             }
             
-            //是否是未翻译的原文行，格式为 \t\t<modId>::EN::<matchKey> = "<matchText>",
+            // 未翻译的原文行，格式为 \t\t<modId>::EN::<matchKey> = "<matchText>",
             var originalMatch1 = Regex.Match(line, @"^\t\t(?<modId>[^:]+)::EN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (originalMatch1.Success)
             {
@@ -1607,8 +1937,8 @@ class Program
                 continue;
             }
             
-            //是否是未翻译的译文行，格式为 \t\t<modId>::CN::<matchKey> = "<matchText>",
-            var translationMatch1 = Regex.Match(line, @"^\t\t(?<modId>[^:]+)::CN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+            // 对应译文行，格式为 \t\t<modId>::<LANG>::<matchKey> = "<matchText>",
+            var translationMatch1 = Regex.Match(line, $@"^\t\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (translationMatch1.Success)
             {
                 string modId = translationMatch1.Groups["modId"].Value.Trim();
@@ -1619,13 +1949,14 @@ class Program
                 {
                     if (!string.IsNullOrEmpty(matchText))
                     {
+                        // 复用 SChinese 字段存储当前选择语言的译文文本
                         ModTranslations[modId][matchKey].SChinese = matchText;
                     }
                 }
                 continue;
             }
 
-            //是否是已翻译未批准的原文行，格式为 \t<modId>::EN::<matchKey> = "<matchText>",
+            // 已翻译未批准的原文行，格式为 \t<modId>::EN::<matchKey> = "<matchText>",
             var originalMatch2 = Regex.Match(line, @"^\t(?<modId>[^:]+)::EN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (originalMatch2.Success)
             {
@@ -1652,8 +1983,8 @@ class Program
                 continue;
             }
             
-            //是否是已翻译未批准的译文行，格式为 \t<modId>::CN::<matchKey> = "<matchText>",
-            var translationMatch2 = Regex.Match(line, @"^\t(?<modId>[^:]+)::CN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+            // 对应译文行，格式为 \t<modId>::<LANG>::<matchKey> = "<matchText>",
+            var translationMatch2 = Regex.Match(line, $@"^\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (translationMatch2.Success)
             {
                 string modId = translationMatch2.Groups["modId"].Value.Trim();
@@ -1670,7 +2001,7 @@ class Program
                 continue;
             }
 
-            //是否是已批准的原文行，格式为 <modId>::EN::<matchKey> = "<matchText>",
+            // 已批准的原文行，格式为 <modId>::EN::<matchKey> = "<matchText>",
             var originalMatch3 = Regex.Match(line, @"^(?<modId>[^:]+)::EN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (originalMatch3.Success)
             {
@@ -1697,8 +2028,8 @@ class Program
                 continue;
             }
             
-            //是否是已批准的译文行，格式为 <modId>::CN::<matchKey> = "<matchText>",
-            var translationMatch3 = Regex.Match(line, @"^(?<modId>[^:]+)::CN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+            // 对应译文行，格式为 <modId>::<LANG>::<matchKey> = "<matchText>",
+            var translationMatch3 = Regex.Match(line, $@"^(?<modId>[^:]+)::({langSuffixEscaped})::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (translationMatch3.Success)
             {
                 string modId = translationMatch3.Groups["modId"].Value.Trim();
