@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-28 12:18:24 UTC+08:00`*
+*最后更新于：`2025-10-29 12:22:14 UTC+08:00`*
 
 ---
 
@@ -32,10 +32,10 @@
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
 | Pocket Kittens (B42) | 3568029240 | 118 | 16 | 7 | 134 |
+| Detailed Skill Tooltips | 3572846242 | 114 | 0 | 0 | 114 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
 | Lillie's Meal Combat Individual Ration Mod | 3557845788 | 106 | 0 | 0 | 106 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
-| Detailed Skill Tooltips | 3572846242 | 101 | 0 | 0 | 101 |
 | PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
 | Lifestyle: Hobbies | 3403870858 | 84 | 4083 | 28 | 4167 |
@@ -91,6 +91,7 @@
 | [B42] Week One NPC | 3403180543 | 23 | 808 | 0 | 831 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
 | Headwear Won't Fall | 3400293227 | 23 | 0 | 0 | 23 |
+| Legendary DuffelBag | 3558839307 | 23 | 26 | 0 | 49 |
 | Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
 | Random Zombies | 2818577583 | 21 | 0 | 0 | 21 |
 | Fancy Lanterns [B42 Compatible] | 3267733558 | 21 | 47 | 0 | 68 |
@@ -98,7 +99,6 @@
 | Easy Drop'n'Loot | 2871469707 | 20 | 0 | 0 | 20 |
 | Common Sense | 2875848298 | 18 | 29 | 0 | 48 |
 | Equipment UI - Paper Doll Equipment Interface [B42/41] | 2950902979 | 18 | 0 | 0 | 18 |
-| Legendary DuffelBag | 3558839307 | 18 | 11 | 0 | 29 |
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
 | [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 17 | 0 | 0 | 17 |
