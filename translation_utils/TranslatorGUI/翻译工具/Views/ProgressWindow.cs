@@ -2,7 +2,7 @@ using System.Windows;
 
 namespace 翻译工具.Views
 {
-    // Progress window for CLI operations
+    // CLI 操作期间显示的简单进度窗口
     public class ProgressWindow : Window
     {
         public ProgressWindow(Window? owner = null)
@@ -13,7 +13,7 @@ namespace 翻译工具.Views
             WindowStartupLocation = WindowStartupLocation.CenterOwner;
             ResizeMode = ResizeMode.NoResize;
             ShowInTaskbar = false;
-            WindowStyle = WindowStyle.None; // 移除标题栏和关闭按钮
+            WindowStyle = WindowStyle.None; // 去除标题栏与关闭按钮
 
             if (owner != null)
                 Owner = owner;
@@ -26,7 +26,7 @@ namespace 翻译工具.Views
 
             var textBlock = new System.Windows.Controls.TextBlock
             {
-                Text = "正在处理，请稍候...",
+                Text = "正在执行，请稍候...",
                 FontSize = 14,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 Margin = new Thickness(0, 0, 0, 15)
@@ -36,7 +36,7 @@ namespace 翻译工具.Views
             var progressBar = new System.Windows.Controls.ProgressBar
             {
                 Height = 20,
-                IsIndeterminate = true // 不确定进度的滚动进度条
+                IsIndeterminate = true // 不确定进度的进度条
             };
             panel.Children.Add(progressBar);
 

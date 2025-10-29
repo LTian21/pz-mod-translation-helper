@@ -15,10 +15,15 @@ namespace 翻译工具
     {
         private async void btnConfirmLock_Click(object sender, RoutedEventArgs e)
         {
+            if (!ConfirmDiscardProceed())
+            {
+                return;
+            }
+
             ClearOutput();
             try
             {
-                // 先进行第一轮更新来刷新最新的任务状态
+                // 第一轮更新：刷新最新任务状态
                 AppendOutput("[第1阶段] 尝试更新翻译文件...");
                 await RunHelperAsync("init", null);
                 await RunHelperAsync("sync", null);
@@ -30,7 +35,7 @@ namespace 翻译工具
                     // 刷新本地任务状态
                     await LoadTranslationInfoAsync();
 
-                    // 在无选择的情况下，如果用户已有开放 PR（即有自己锁定的任务），也尝试生成翻译文件
+                    // 如果已有开放 PR，则尝试生成翻译文件
                     var lockedMods = _modItems.Where(m => m.IsLockedByMe).Select(m => m.ModId).ToHashSet();
 
                     if (lockedMods.Count > 0)
@@ -39,10 +44,8 @@ namespace 翻译工具
                         AppendOutput("检测到你有开放 PR，正在生成最新翻译文件...");
                         AppendOutput("════════════════════════════════════════");
 
-                        // 调用 CLI 的 write 接口生成翻译文件
                         var modIds = string.Join(",", lockedMods.Select(m => "\"" + m + "\""));
                         await RunHelperAsync("write", modIds);
-                        
                         AppendOutput(" 翻译文件已生成");
                     }
                     else
@@ -63,14 +66,13 @@ namespace 翻译工具
                 AppendOutput($"开始领取 {selected.Count} 个 Mod...");
                 AppendOutput("════════════════════════════════════════");
 
-                // 组装 modid 字符串: "123","456"
                 var ids = string.Join(",", selected.Select(m => "\"" + m.ModId + "\""));
 
                 // 尝试锁定
                 AppendOutput("\n[第2阶段] 尝试锁定所选 Mod...");
                 await RunHelperAsync("lockmod", ids);
 
-                // 再次初始化、同步、列出PR
+                // 刷新状态
                 AppendOutput("\n[第3阶段] 尝试刷新锁定结果...");
                 await RunHelperAsync("init", null);
                 await RunHelperAsync("sync", null);
@@ -81,7 +83,7 @@ namespace 翻译工具
                 AppendOutput(" 领取流程完成！");
                 AppendOutput("════════════════════════════════════════");
 
-                // 自动生成翻译文件，调用 CLI 的 write 接口
+                // 自动生成翻译文件
                 AppendOutput("\n[第4阶段] 自动生成翻译文件...");
                 var lockedModsAfter = _modItems.Where(m => m.IsLockedByMe).Select(m => m.ModId).ToHashSet();
                 var lockedIds = string.Join(",", lockedModsAfter.Select(m => "\"" + m + "\""));
@@ -95,88 +97,45 @@ namespace 翻译工具
             }
         }
 
-        // 新增：通用的进度窗口封装，期间禁用按钮和列表
-        private async Task RunWithProgressAsync(Action work)
+        private async void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            if (_isRunning)
+            if (!ConfirmDiscardProceed())
             {
-                AppendOutput("已有 CLI 操作进行中，请等待完成。");
                 return;
             }
 
-            _isRunning = true;
-            DisableAllButtons();
-
-            // 显示进度窗口
-            _progressWindow = new ProgressWindow(this);
-            _progressWindow.Show();
-
-            try
-            {
-                await Task.Run(work);
-            }
-            finally
-            {
-                // 关闭并销毁进度窗口
-                try
-                {
-                    if (_progressWindow != null)
-                    {
-                        _progressWindow.Close();
-                        _progressWindow = null;
-                    }
-                }
-                catch { }
-
-                // 恢复按钮状态
-                _isRunning = false;
-                EnableAllButtons();
-            }
-        }
-
-        private async void btnStart_Click(object sender, RoutedEventArgs e)
-        {
             ClearOutput();
             AppendOutput("开始翻译流程...");
 
             try
             {
-                // 获取用户领取的任务中的模组ID
                 var lockedMods = _modItems.Where(m => m.IsLockedByMe).Select(m => m.ModId).ToHashSet();
-                
                 if (lockedMods.Count == 0)
                 {
                     AppendOutput("! 未找到您领取的任务，请先领取任务");
                     return;
                 }
-                
+
                 AppendOutput($"您领取的MOD: {string.Join(", ", lockedMods)}");
-                
-                // 调用 CLI 的 write 接口生成翻译文件
+
                 AppendOutput($"正在生成翻译文件...");
                 var ids = string.Join(",", lockedMods.Select(m => "\"" + m + "\""));
                 await RunHelperAsync("write", ids);
 
-                // 打开翻译文件和格式说明图片
                 var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
                 if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
                 var suffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
-                
+
                 string programDir = AppDomain.CurrentDomain.BaseDirectory;
                 string userTranslationFile = Path.Combine(programDir, $"translations_{_config.UserName}_{suffix}.txt");
                 string guideImageSource = Path.Combine(basePath, "pz-mod-translation-helper", "简体中文翻译格式说明.png");
                 string guideImageDest = Path.Combine(programDir, "简体中文翻译格式说明.png");
-                
-                // 复制格式说明图片
+
                 if (File.Exists(guideImageSource))
                 {
-                    try
-                    {
-                        File.Copy(guideImageSource, guideImageDest, true);
-                    }
-                    catch { }
+                    try { File.Copy(guideImageSource, guideImageDest, true); } catch { }
                 }
-                
+
                 AppendOutput($"正在打开翻译文件...");
                 OpenFilesWithVSCode(userTranslationFile, guideImageDest);
             }
@@ -189,7 +148,7 @@ namespace 翻译工具
 
         private async void btnCommit_Click(object sender, RoutedEventArgs e)
         {
-            var input = new InputBox("请输入提交说明:", this); // 传递父窗口
+            var input = new InputBox("请输入提交说明:", this);
             if (input.ShowDialog() != true)
             {
                 AppendOutput("已取消提交。");
@@ -198,22 +157,19 @@ namespace 翻译工具
 
             var message = input.Value ?? string.Empty;
             ClearOutput();
-            
+
             try
             {
                 AppendOutput("════════════════════════════════════════");
                 AppendOutput("开始保存进度流程...");
                 AppendOutput("════════════════════════════════════════");
 
-                // 调用 CLI 的 merge 接口合并用户翻译文件到仓库翻译文件
                 AppendOutput("\n[合并阶段] 正在合并用户翻译到仓库翻译文件...");
                 await RunHelperAsync("merge", null);
 
-                // 继续执行原有保存进度按钮逻辑
                 AppendOutput("\n[提交阶段] 正在提交修改到远程仓库...");
                 await RunHelperAsync("commit", message);
 
-                // 保存后自动调用刷新按钮的逻辑
                 AppendOutput("\n[刷新阶段] 正在刷新任务状态...");
                 await RunHelperAsync("init", null);
                 await RunHelperAsync("sync", null);
@@ -236,15 +192,12 @@ namespace 翻译工具
             ClearOutput();
             try
             {
-                // 检查当前按钮状态
                 if (btnSubmitReview.Content.ToString() == "提交审核")
                 {
-                    // 提交审核流程
                     AppendOutput("════════════════════════════════════════");
                     AppendOutput("开始提交审核流程...");
                     AppendOutput("════════════════════════════════════════");
 
-                    // 1. 先尝试保存进度（提交最新修改）
                     var input = new InputBox("请输入提交说明（用于保存进度）:", this);
                     if (input.ShowDialog() != true)
                     {
@@ -252,25 +205,22 @@ namespace 翻译工具
                         return;
                     }
                     var commitMessage = input.Value ?? "提交审核前保存";
-                    
+
                     AppendOutput("\n[第1阶段] 合并用户翻译...");
                     await RunHelperAsync("merge", null);
-                    
+
                     AppendOutput("\n[第2阶段] 保存进度...");
                     await RunHelperAsync("commit", commitMessage);
 
-                    // 2. 调用 CLI 将 PR 状态改为 ready for review
                     AppendOutput("\n[第3阶段] 将 PR 状态改为 Ready for Review...");
                     await RunHelperAsync("submit", null);
 
-                    // 3. 刷新状态
                     AppendOutput("\n[第4阶段] 刷新任务状态...");
                     await RunHelperAsync("init", null);
                     await RunHelperAsync("sync", null);
                     await RunHelperAsync("listpr", null);
                     await LoadTranslationInfoAsync();
 
-                    // 4. 更新按钮状态
                     UpdateButtonStates();
 
                     AppendOutput("\n════════════════════════════════════════");
@@ -279,7 +229,6 @@ namespace 翻译工具
                 }
                 else // 撤回修改
                 {
-                    // 撤回修改流程
                     var result = System.Windows.MessageBox.Show(
                         "确定要撤回修改并将 PR 改为草稿状态吗？",
                         "确认撤回",
@@ -296,18 +245,15 @@ namespace 翻译工具
                     AppendOutput("开始撤回修改流程...");
                     AppendOutput("════════════════════════════════════════");
 
-                    // 1. 调用 CLI 将 PR 状态改为 draft
                     AppendOutput("\n[第1阶段] 将 PR 状态改为 Draft...");
                     await RunHelperAsync("withdraw", null);
 
-                    // 2. 刷新状态
                     AppendOutput("\n[第2阶段] 尝试刷新任务状态...");
                     await RunHelperAsync("init", null);
                     await RunHelperAsync("sync", null);
                     await RunHelperAsync("listpr", null);
                     await LoadTranslationInfoAsync();
 
-                    // 3. 更新按钮状态
                     UpdateButtonStates();
 
                     AppendOutput("\n════════════════════════════════════════");
@@ -319,6 +265,54 @@ namespace 翻译工具
             {
                 AppendOutput($"\n✗ 操作失败: {ex.Message}");
                 AppendOutput("════════════════════════════════════════");
+            }
+        }
+
+        // Show discard warning dialog with "Don't ask again" option. Returns true to proceed, false to cancel.
+        private bool ConfirmDiscardProceed()
+        {
+            try
+            {
+                var settings = ConfirmDiscardSettings.LoadOrDefault();
+                var currentUser = _config?.UserName?.Trim() ?? string.Empty;
+
+                bool userMatches = !string.IsNullOrWhiteSpace(settings.UserName)
+                                   && !string.IsNullOrWhiteSpace(currentUser)
+                                   && string.Equals(settings.UserName, currentUser, StringComparison.OrdinalIgnoreCase);
+
+                if (settings.SkipDiscardPrompt && userMatches)
+                {
+                    if (settings.SkipDiscardPromptProceed)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        AppendOutput("已取消操作。");
+                        return false;
+                    }
+                }
+
+                bool initialChecked = settings.SkipDiscardPrompt && userMatches;
+                var dlg = new 翻译工具.Views.ConfirmDiscardDialog(this, initialChecked);
+                var result = dlg.ShowDialog();
+                bool proceed = result == true;
+
+                if (dlg.DontAskAgain)
+                {
+                    ConfirmDiscardSettings.Save(new ConfirmDiscardSettings
+                    {
+                        UserName = currentUser,
+                        SkipDiscardPrompt = true,
+                        SkipDiscardPromptProceed = proceed
+                    });
+                }
+
+                return proceed;
+            }
+            catch
+            {
+                return false;
             }
         }
     }
