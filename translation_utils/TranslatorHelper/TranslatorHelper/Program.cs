@@ -119,6 +119,12 @@ class Program
                     case "withdraw":
                         res = await WithdrawPR(config, github, owner, repoName);
                         break;
+                    case "write":
+                        res = await WriteTranslationFile(config);
+                        break;
+                    case "merge":
+                        res = await MergeTranslationFile(config);
+                        break;
                     default:
                         Console.WriteLine($"[错误] 未知操作: {config.Operation}");
                         res = 1;
@@ -171,7 +177,7 @@ class Program
         {
             Console.WriteLine("[提示] 参数不足，进入测试模式");
             Console.WriteLine("[提示] 用法: <仓库URL> <PAT Token> <翻译者名字> <翻译者邮箱> <语言后缀> <操作> [提交说明] [本地路径]");
-            Console.WriteLine("[提示] 操作: init (初始化) | sync (同步) | commit (提交修改) | listpr (列出PR) | lockmod (锁定MOD并创建PR) | submit (提交审核) | withdraw (撤回为草稿)");
+            Console.WriteLine("[提示] 操作: init (初始化) | sync (同步) | commit (提交修改) | listpr (列出PR) | lockmod (锁定MOD并创建PR) | submit (提交审核) | withdraw (撤回为草稿) | write (写入翻译文件) | merge (合并翻译文件)");
             Console.WriteLine("[提示] 语言后缀: CN (简体中文) | TW (繁体中文) | EN (英文) | FR (法文) 等");
             Console.WriteLine("[提示] 如果参数包含空格，请使用引号包裹，例如: \"Zhang San\" 或 \"C:\\My Folder\\repo\"");
             Console.WriteLine("[提示] 示例: TranslatorHelper \"https://github.com/owner/repo\" mytoken \"Zhang San\" \"zhangsan@email.com\" CN init");
@@ -211,7 +217,9 @@ class Program
             Console.WriteLine("5. 锁定MOD并创建PR");
             Console.WriteLine("6. 提交审核");
             Console.WriteLine("7. 撤回为草稿");
-            Console.WriteLine("8. 退出程序");
+            Console.WriteLine("8. 写入翻译文件");
+            Console.WriteLine("9. 合并翻译文件");
+            Console.WriteLine("10. 退出程序");
             Console.Write("输入数字选择操作 (默认选择1): ");
 
             var choice = Console.ReadLine();
@@ -240,6 +248,12 @@ class Program
                     operation = "withdraw";
                     break;
                 case "8":
+                    operation = "write";
+                    break;
+                case "9":
+                    operation = "merge";
+                    break;
+                case "10":
                     //退出程序
                     Environment.Exit(0);
                     return null;
@@ -312,10 +326,10 @@ class Program
             return null;
         }
 
-        if (operation != "init" && operation != "sync" && operation != "commit" && operation != "listpr" && operation != "lockmod" && operation != "submit" && operation != "withdraw")
+        if (operation != "init" && operation != "sync" && operation != "commit" && operation != "listpr" && operation != "lockmod" && operation != "submit" && operation != "withdraw" && operation != "write" && operation != "merge")
         {
             Console.WriteLine($"[错误] 操作类型不合法: {operation}");
-            Console.WriteLine("[提示] 有效操作: init | sync | commit | listpr | lockmod | submit | withdraw");
+            Console.WriteLine("[提示] 有效操作: init | sync | commit | listpr | lockmod | submit | withdraw | write | merge");
             return null;
         }
 
@@ -568,7 +582,7 @@ class Program
                                     b => b.UpstreamBranch = pushedRemoteBranch.CanonicalName);
                             }
 
-                            Console.WriteLine($"[成功] 已将本地分支 {translatorBranch} 推送到远程并设置为上游分支");
+                            Console.WriteLine($"[成功] 已将本地分支 {translatorBranch} 推送到远远程并设置为上游分支");
                         }
                         catch (Exception ex)
                         {
@@ -1629,6 +1643,444 @@ class Program
     }
 
     // =========================
+    // 7. 写入翻译文件
+    // =========================
+    static async Task<int> WriteTranslationFile(AppConfig config)
+    {
+        if (isTestMode)
+        {
+            config.CommitMessage = "\"1926311864\",\"1945359259\",\"2211423190\"";
+        }
+        try
+        {
+            Console.WriteLine("开始写入翻译文件...");
+
+            // 1. 读取并解析仓库中的翻译文件
+            string sourceFileName = $"translations_{config.Language.ToSuffix()}.txt";
+            string sourceFilePath = Path.Combine(config.LocalPath, "data", sourceFileName);
+
+            if (!File.Exists(sourceFilePath))
+            {
+                Console.WriteLine($"[错误] 源翻译文件不存在: {sourceFilePath}");
+                return 1;
+            }
+
+            // 读取MOD名称映射文件
+            Console.WriteLine("读取MOD名称映射文件...");
+            ReadModNameFile(config.LocalPath);
+
+            Console.WriteLine($"读取源翻译文件: {sourceFilePath}");
+            ReadTranslationFile(config.LocalPath, sourceFileName, config.Language);
+            Console.WriteLine($"[成功] 已读取 {ModTranslations.Count} 个MOD的翻译数据");
+
+            // 2. 确定输出文件路径
+            string exeDirectory = AppContext.BaseDirectory;
+            string outputFileName = $"translations_{config.UserName}_{config.Language.ToSuffix()}.txt";
+            string outputFilePath = Path.Combine(exeDirectory, "..", outputFileName);
+            outputFilePath = Path.GetFullPath(outputFilePath);
+
+            Console.WriteLine($"输出翻译文件: {outputFilePath}");
+
+            // 3. 解析模组列表
+            var modIds = ParseModIds(config.CommitMessage);
+            if (modIds.Count == 0)
+            {
+                Console.WriteLine("[错误] 未提供任何可解析的MOD ID");
+                Console.WriteLine("[提示] 请在 CommitMessage 参数中提供模组ID列表，例如: \"1234565\",\"2345678\"");
+                return 1;
+            }
+
+            Console.WriteLine($"要写入的MOD列表: {string.Join(", ", modIds)}");
+
+            // 4. 写入翻译文件
+            using (var writer = new StreamWriter(outputFilePath, false, Encoding.UTF8))
+            {
+                int entryCount = 0;
+                int modCount = 0;
+
+                foreach (var modId in modIds)
+                {
+                    if (!ModTranslations.ContainsKey(modId))
+                    {
+                        Console.WriteLine($"[警告] 翻译文件中未找到MOD: {modId}，跳过");
+                        continue;
+                    }
+
+                    modCount++;
+                    var entries = ModTranslations[modId];
+
+                    // 获取MOD名称
+                    string modName = ModNameMapping.TryGetValue(modId, out var name) ? name : "";
+
+                    // 写入MOD分隔符，格式：------ {modid} :: {modname} ------
+                    writer.WriteLine();
+                    writer.WriteLine($"------ {modId} :: {modName} ------");
+                    writer.WriteLine();
+
+                    foreach (var entry in entries)
+                    {
+                        string matchKey = entry.Key;
+                        var translationEntry = entry.Value;
+
+                        // 写入注释
+                        foreach (var comment in translationEntry.Comment)
+                        {
+                            writer.WriteLine(comment);
+                        }
+
+                        // 根据翻译状态确定缩进
+                        string indent = translationEntry.SChineseStatus switch
+                        {
+                            TranslationStatus.Approved => "",
+                            TranslationStatus.Translated => "\t",
+                            TranslationStatus.Untranslated => "\t\t",
+                            _ => "\t\t"
+                        };
+
+                        // 写入英文原文
+                        writer.WriteLine($"{indent}{modId}::EN::{matchKey} = \"{translationEntry.OriginalText}\",");
+                        // 写入译文
+                        writer.WriteLine($"{indent}{modId}::{config.Language.ToSuffix()}::{matchKey} = \"{translationEntry.SChinese}\",");
+                        entryCount++;
+                    }
+                    writer.WriteLine();
+                }
+
+                Console.WriteLine($"[成功] 已写入 {modCount} 个MOD，共 {entryCount} 条翻译记录");
+            }
+
+            Console.WriteLine($"[成功] 翻译文件已保存到: {outputFilePath}");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[错误] 写入翻译文件失败: {ex.Message}");
+            Console.WriteLine($"[提示] {ex.StackTrace}");
+            return 1;
+        }
+    }
+
+    // =========================
+    // 合并翻译文件
+    // =========================
+    static async Task<int> MergeTranslationFile(AppConfig config)
+    {
+        try
+        {
+            Console.WriteLine("开始合并翻译文件...");
+
+            // 1. 读取并解析仓库中的翻译文件
+            string sourceFileName = $"translations_{config.Language.ToSuffix()}.txt";
+            string sourceFilePath = Path.Combine(config.LocalPath, "data", sourceFileName);
+
+            if (!File.Exists(sourceFilePath))
+            {
+                Console.WriteLine($"[错误] 源翻译文件不存在: {sourceFilePath}");
+                return 1;
+            }
+
+            // 读取MOD名称映射文件
+            Console.WriteLine("读取MOD名称映射文件...");
+            ReadModNameFile(config.LocalPath);
+
+            Console.WriteLine($"读取源翻译文件: {sourceFilePath}");
+            ReadTranslationFile(config.LocalPath, sourceFileName, config.Language);
+            Console.WriteLine($"[成功] 已读取 {ModTranslations.Count} 个MOD的翻译数据");
+
+            // 保存原始翻译数据
+            var originalTranslations = new Dictionary<string, Dictionary<string, TranslationEntry>>();
+            foreach (var modEntry in ModTranslations)
+            {
+                originalTranslations[modEntry.Key] = new Dictionary<string, TranslationEntry>();
+                foreach (var entry in modEntry.Value)
+                {
+                    originalTranslations[modEntry.Key][entry.Key] = new TranslationEntry
+                    {
+                        OriginalText = entry.Value.OriginalText,
+                        SChinese = entry.Value.SChinese,
+                        SChineseStatus = entry.Value.SChineseStatus,
+                        Comment = new List<string>(entry.Value.Comment)
+                    };
+                }
+            }
+
+            // 2. 读取用户翻译文件
+            string exeDirectory = AppContext.BaseDirectory;
+            string userFileName = $"translations_{config.UserName}_{config.Language.ToSuffix()}.txt";
+            string userFilePath = Path.Combine(exeDirectory, "..", userFileName);
+            userFilePath = Path.GetFullPath(userFilePath);
+
+            if (!File.Exists(userFilePath))
+            {
+                Console.WriteLine($"[错误] 用户翻译文件不存在: {userFilePath}");
+                Console.WriteLine("[提示] 请先使用 write 操作创建翻译文件");
+                return 1;
+            }
+
+            Console.WriteLine($"读取用户翻译文件: {userFilePath}");
+
+            // 清空并重新构建ModTranslations用于读取用户文件
+            var userTranslations = new Dictionary<string, Dictionary<string, TranslationEntry>>();
+            
+            var linesInFile = File.ReadAllLines(userFilePath, Encoding.UTF8);
+            List<string> tempComments = new List<string>();
+            string? currentModId = null;
+            string? lastProcessedKey = null;
+
+            // 使用传入语言的后缀解析对应译文（例如 CN/TW/JP 等）
+            string langSuffix = config.Language.ToSuffix();
+            string langSuffixEscaped = Regex.Escape(langSuffix);
+            
+            foreach (var line in linesInFile)
+            {
+                //忽略空行和------开头的行
+                if (string.IsNullOrWhiteSpace(line) || line.StartsWith("------"))
+                {
+                    continue;
+                }
+                // 是否是注释行
+                if (IsNullOrCommentLine(line))
+                {
+                    tempComments.Add(line);
+                    continue;
+                }
+            
+                // 未翻译的原文行，格式为 \t\t<modId>::EN::<key> = "<matchText>",
+                var originalMatch1 = Regex.Match(line, @"^\t\t(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+                if (originalMatch1.Success)
+                {
+                    currentModId = originalMatch1.Groups["modId"].Value.Trim();
+                    string matchKey = originalMatch1.Groups["key"].Value.Trim();
+                    string matchText = originalMatch1.Groups["matchText"].Value;
+
+                    if (!userTranslations.ContainsKey(currentModId))
+                    {
+                        userTranslations[currentModId] = new Dictionary<string, TranslationEntry>();
+                    }
+                
+                    if (!userTranslations[currentModId].ContainsKey(matchKey))
+                    {
+                        userTranslations[currentModId][matchKey] = new TranslationEntry
+                        {
+                            OriginalText = matchText,
+                            SChineseStatus = TranslationStatus.Untranslated,
+                            Comment = new List<string>(tempComments)
+                        };
+                    }
+                    tempComments.Clear();
+                    lastProcessedKey = matchKey;
+                    continue;
+                }
+            
+                // 对应译文行，格式为 \t\t<modId>::<LANG>::<key> = "<matchText>",
+                var translationMatch1 = Regex.Match(line, $@"^\t\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+                if (translationMatch1.Success)
+                {
+                    string modId = translationMatch1.Groups["modId"].Value.Trim();
+                    string matchKey = translationMatch1.Groups["key"].Value.Trim();
+                    string matchText = translationMatch1.Groups["matchText"].Value;
+
+                    if (userTranslations.ContainsKey(modId) && userTranslations[modId].ContainsKey(matchKey))
+                    {
+                        if (!string.IsNullOrEmpty(matchText))
+                        {
+                            // 复用 SChinese 字段存储当前选择语言的译文文本
+                            userTranslations[modId][matchKey].SChinese = matchText;
+                        }
+                    }
+                    continue;
+                }
+
+                // 已翻译未批准的原文行，格式为 \t<modId>::EN::<key> = "<matchText>",
+                var originalMatch2 = Regex.Match(line, @"^\t(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+                if (originalMatch2.Success)
+                {
+                    currentModId = originalMatch2.Groups["modId"].Value.Trim();
+                    string matchKey = originalMatch2.Groups["key"].Value.Trim();
+                    string matchText = originalMatch2.Groups["matchText"].Value;
+
+                    if (!userTranslations.ContainsKey(currentModId))
+                    {
+                        userTranslations[currentModId] = new Dictionary<string, TranslationEntry>();
+                    }
+                
+                    if (!userTranslations[currentModId].ContainsKey(matchKey))
+                    {
+                        userTranslations[currentModId][matchKey] = new TranslationEntry
+                        {
+                            OriginalText = matchText,
+                            SChineseStatus = TranslationStatus.Translated,
+                            Comment = new List<string>(tempComments)
+                        };
+                    }
+                    tempComments.Clear();
+                    lastProcessedKey = matchKey;
+                    continue;
+                }
+            
+                // 对应译文行，格式为 \t<modId>::<LANG>::<key> = "<matchText>",
+                var translationMatch2 = Regex.Match(line, $@"^\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+                if (translationMatch2.Success)
+                {
+                    string modId = translationMatch2.Groups["modId"].Value.Trim();
+                    string matchKey = translationMatch2.Groups["key"].Value.Trim();
+                    string matchText = translationMatch2.Groups["matchText"].Value;
+
+                    if (userTranslations.ContainsKey(modId) && userTranslations[modId].ContainsKey(matchKey))
+                    {
+                        if (!string.IsNullOrEmpty(matchText))
+                        {
+                            userTranslations[modId][matchKey].SChinese = matchText;
+                        }
+                    }
+                    continue;
+                }
+
+                // 已批准的原文行，格式为 <modId>::EN::<key> = "<matchText>",
+                var originalMatch3 = Regex.Match(line, @"^(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+                if (originalMatch3.Success)
+                {
+                    currentModId = originalMatch3.Groups["modId"].Value.Trim();
+                    string matchKey = originalMatch3.Groups["key"].Value.Trim();
+                    string matchText = originalMatch3.Groups["matchText"].Value;
+
+                    if (!userTranslations.ContainsKey(currentModId))
+                    {
+                        userTranslations[currentModId] = new Dictionary<string, TranslationEntry>();
+                    }
+                
+                    if (!userTranslations[currentModId].ContainsKey(matchKey))
+                    {
+                        userTranslations[currentModId][matchKey] = new TranslationEntry
+                        {
+                            OriginalText = matchText,
+                            SChineseStatus = TranslationStatus.Approved,
+                            Comment = new List<string>(tempComments)
+                        };
+                    }
+                    tempComments.Clear();
+                    lastProcessedKey = matchKey;
+                    continue;
+                }
+            
+                // 对应译文行，格式为 <modId>::<LANG>::<key> = "<matchText>",
+                var translationMatch3 = Regex.Match(line, $@"^(?<modId>[^:]+)::({langSuffixEscaped})::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+                if (translationMatch3.Success)
+                {
+                    string modId = translationMatch3.Groups["modId"].Value.Trim();
+                    string matchKey = translationMatch3.Groups["key"].Value.Trim();
+                    string matchText = translationMatch3.Groups["matchText"].Value;
+
+                    if (userTranslations.ContainsKey(modId) && userTranslations[modId].ContainsKey(matchKey))
+                    {
+                        if (!string.IsNullOrEmpty(matchText))
+                        {
+                            userTranslations[modId][matchKey].SChinese = matchText;
+                        }
+                    }
+                    continue;
+                }
+            }
+
+            Console.WriteLine($"[成功] 已读取用户翻译文件，包含 {userTranslations.Count} 个MOD的翻译数据");
+
+            // 3. 合并翻译数据
+            int mergedCount = 0;
+            int ignoredCount = 0;
+
+            foreach (var modEntry in userTranslations)
+            {
+                string modId = modEntry.Key;
+
+                if (!originalTranslations.ContainsKey(modId))
+                {
+                    Console.WriteLine($"[提示] 源文件中不存在MOD: {modId}，跳过该MOD的所有条目");
+                    ignoredCount += modEntry.Value.Count;
+                    continue;
+                }
+
+                foreach (var entry in modEntry.Value)
+                {
+                    string matchKey = entry.Key;
+                    var userEntry = entry.Value;
+
+                    if (!originalTranslations[modId].ContainsKey(matchKey))
+                    {
+                        Console.WriteLine($"[提示] 源文件中不存在条目: {modId}::{matchKey}，跳过");
+                        ignoredCount++;
+                        continue;
+                    }
+
+                    // 合并翻译数据（保留原文，覆盖译文、状态和注释）
+                    originalTranslations[modId][matchKey].SChinese = userEntry.SChinese;
+                    originalTranslations[modId][matchKey].SChineseStatus = userEntry.SChineseStatus;
+                    originalTranslations[modId][matchKey].Comment = userEntry.Comment;
+                    mergedCount++;
+                }
+            }
+
+            Console.WriteLine($"[成功] 已合并 {mergedCount} 条翻译记录，忽略 {ignoredCount} 条不存在的记录");
+
+            // 4. 写回到源文件
+            Console.WriteLine($"写回翻译文件: {sourceFilePath}");
+
+            using (var writer = new StreamWriter(sourceFilePath, false, Encoding.UTF8))
+            {
+                // 按MOD ID排序写入
+                foreach (var modId in originalTranslations.Keys)
+                {
+                    var entries = originalTranslations[modId];
+
+                    // 获取MOD名称
+                    string modName = ModNameMapping.TryGetValue(modId, out var name) ? name : "";
+                    
+                    // 写入MOD分隔符，格式：------ {modid} :: {modname} ------
+                    writer.WriteLine();
+                    writer.WriteLine($"------ {modId} :: {modName} ------");
+                    writer.WriteLine();
+
+                    foreach (var entry in entries)
+                    {
+                        string key = entry.Key;
+                        var translationEntry = entry.Value;
+
+                        // 写入注释
+                        foreach (var comment in translationEntry.Comment)
+                        {
+                            writer.WriteLine(comment);
+                        }
+
+                        // 根据翻译状态确定缩进
+                        string indent = translationEntry.SChineseStatus switch
+                        {
+                            TranslationStatus.Approved => "",
+                            TranslationStatus.Translated => "\t",
+                            TranslationStatus.Untranslated => "\t\t",
+                            _ => "\t\t"
+                        };
+
+                        // 写入英文原文
+                        writer.WriteLine($"{indent}{modId}::EN::{key} = \"{translationEntry.OriginalText}\",");
+                        // 写入译文
+                        writer.WriteLine($"{indent}{modId}::{config.Language.ToSuffix()}::{key} = \"{translationEntry.SChinese}\",");
+                    }
+                    writer.WriteLine();
+                }
+            }
+
+            Console.WriteLine($"[成功] 翻译文件已更新: {sourceFilePath}");
+            Console.WriteLine("[成功] 合并完成!");
+            return 0;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[错误] 合并翻译文件失败: {ex.Message}");
+            Console.WriteLine($"[提示] {ex.StackTrace}");
+            return 1;
+        }
+    }
+
+    // =========================
     // GitHub PR 草稿/提交 切换封装（优先使用 GraphQL，失败回退到 REST）
     // =========================
     static async Task MarkPrAsDraft(string token, string owner, string repo, int number)
@@ -2005,12 +2457,12 @@ class Program
                 continue;
             }
             
-            // 未翻译的原文行，格式为 \t\t<modId>::EN::<matchKey> = "<matchText>",
-            var originalMatch1 = Regex.Match(line, @"^\t\t(?<modId>[^:]+)::EN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+            // 未翻译的原文行，格式为 \t\t<modId>::EN::<key> = "<matchText>",
+            var originalMatch1 = Regex.Match(line, @"^\t\t(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (originalMatch1.Success)
             {
                 currentModId = originalMatch1.Groups["modId"].Value.Trim();
-                string matchKey = originalMatch1.Groups["matchKey"].Value.Trim();
+                string matchKey = originalMatch1.Groups["key"].Value.Trim();
                 string matchText = originalMatch1.Groups["matchText"].Value;
 
                 if (!ModTranslations.ContainsKey(currentModId))
@@ -2032,12 +2484,12 @@ class Program
                 continue;
             }
             
-            // 对应译文行，格式为 \t\t<modId>::<LANG>::<matchKey> = "<matchText>",
-            var translationMatch1 = Regex.Match(line, $@"^\t\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+            // 对应译文行，格式为 \t\t<modId>::<LANG>::<key> = "<matchText>",
+            var translationMatch1 = Regex.Match(line, $@"^\t\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (translationMatch1.Success)
             {
                 string modId = translationMatch1.Groups["modId"].Value.Trim();
-                string matchKey = translationMatch1.Groups["matchKey"].Value.Trim();
+                string matchKey = translationMatch1.Groups["key"].Value.Trim();
                 string matchText = translationMatch1.Groups["matchText"].Value;
 
                 if (ModTranslations.ContainsKey(modId) && ModTranslations[modId].ContainsKey(matchKey))
@@ -2051,12 +2503,12 @@ class Program
                 continue;
             }
 
-            // 已翻译未批准的原文行，格式为 \t<modId>::EN::<matchKey> = "<matchText>",
-            var originalMatch2 = Regex.Match(line, @"^\t(?<modId>[^:]+)::EN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+            // 已翻译未批准的原文行，格式为 \t<modId>::EN::<key> = "<matchText>",
+            var originalMatch2 = Regex.Match(line, @"^\t(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (originalMatch2.Success)
             {
                 currentModId = originalMatch2.Groups["modId"].Value.Trim();
-                string matchKey = originalMatch2.Groups["matchKey"].Value.Trim();
+                string matchKey = originalMatch2.Groups["key"].Value.Trim();
                 string matchText = originalMatch2.Groups["matchText"].Value;
 
                 if (!ModTranslations.ContainsKey(currentModId))
@@ -2078,12 +2530,12 @@ class Program
                 continue;
             }
             
-            // 对应译文行，格式为 \t<modId>::<LANG>::<matchKey> = "<matchText>",
-            var translationMatch2 = Regex.Match(line, $@"^\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+            // 对应译文行，格式为 \t<modId>::<LANG>::<key> = "<matchText>",
+            var translationMatch2 = Regex.Match(line, $@"^\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (translationMatch2.Success)
             {
                 string modId = translationMatch2.Groups["modId"].Value.Trim();
-                string matchKey = translationMatch2.Groups["matchKey"].Value.Trim();
+                string matchKey = translationMatch2.Groups["key"].Value.Trim();
                 string matchText = translationMatch2.Groups["matchText"].Value;
 
                 if (ModTranslations.ContainsKey(modId) && ModTranslations[modId].ContainsKey(matchKey))
@@ -2096,12 +2548,12 @@ class Program
                 continue;
             }
 
-            // 已批准的原文行，格式为 <modId>::EN::<matchKey> = "<matchText>",
-            var originalMatch3 = Regex.Match(line, @"^(?<modId>[^:]+)::EN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+            // 已批准的原文行，格式为 <modId>::EN::<key> = "<matchText>",
+            var originalMatch3 = Regex.Match(line, @"^(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (originalMatch3.Success)
             {
                 currentModId = originalMatch3.Groups["modId"].Value.Trim();
-                string matchKey = originalMatch3.Groups["matchKey"].Value.Trim();
+                string matchKey = originalMatch3.Groups["key"].Value.Trim();
                 string matchText = originalMatch3.Groups["matchText"].Value;
 
                 if (!ModTranslations.ContainsKey(currentModId))
@@ -2123,12 +2575,12 @@ class Program
                 continue;
             }
             
-            // 对应译文行，格式为 <modId>::<LANG>::<matchKey> = "<matchText>",
-            var translationMatch3 = Regex.Match(line, $@"^(?<modId>[^:]+)::({langSuffixEscaped})::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
+            // 对应译文行，格式为 <modId>::<LANG>::<key> = "<matchText>",
+            var translationMatch3 = Regex.Match(line, $@"^(?<modId>[^:]+)::({langSuffixEscaped})::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
             if (translationMatch3.Success)
             {
                 string modId = translationMatch3.Groups["modId"].Value.Trim();
-                string matchKey = translationMatch3.Groups["matchKey"].Value.Trim();
+                string matchKey = translationMatch3.Groups["key"].Value.Trim();
                 string matchText = translationMatch3.Groups["matchText"].Value;
 
                 if (ModTranslations.ContainsKey(modId) && ModTranslations[modId].ContainsKey(matchKey))

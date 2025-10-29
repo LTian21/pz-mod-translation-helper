@@ -1,16 +1,16 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using ·­Òë¹¤¾ß.Models; // ·ÃÎÊ UserTranslationEntry
-using ·­Òë¹¤¾ß.Views;  // ·ÃÎÊ ProgressWindow¡¢InputBox
+using ç¿»è¯‘å·¥å…·.Models; // è®¿é—® TranslationEntry
+using ç¿»è¯‘å·¥å…·.Views;  // è®¿é—® ProgressWindowã€InputBox
 
-namespace ·­Òë¹¤¾ß
+namespace ç¿»è¯‘å·¥å…·
 {
-    // ½«°´Å¥µã»÷ÊÂ¼şÓëÖ±½ÓÏà¹ØµÄ¹¤×÷Á÷³Ì·½·¨²ğ·Öµ½¶ÀÁ¢µÄ²¿·ÖÀàÎÄ¼ş
+    // å°†æŒ‰é’®ç‚¹å‡»äº‹ä»¶ä¸ç›´æ¥ç›¸å…³çš„å·¥ä½œæµç¨‹æ–¹æ³•æ‹†åˆ†åˆ°ç‹¬ç«‹çš„éƒ¨åˆ†ç±»æ–‡ä»¶
     public partial class MainWindow
     {
         private async void btnConfirmLock_Click(object sender, RoutedEventArgs e)
@@ -18,8 +18,8 @@ namespace ·­Òë¹¤¾ß
             ClearOutput();
             try
             {
-                // ÏÈ½øĞĞµÚÒ»ÂÖ¸üĞÂÀ´Ë¢ĞÂ×îĞÂµÄÈÎÎñ×´Ì¬
-                AppendOutput("[µÚ1½×¶Î] ³¢ÊÔ¸üĞÂ·­ÒëÎÄ¼ş...");
+                // å…ˆè¿›è¡Œç¬¬ä¸€è½®æ›´æ–°æ¥åˆ·æ–°æœ€æ–°çš„ä»»åŠ¡çŠ¶æ€
+                AppendOutput("[ç¬¬1é˜¶æ®µ] å°è¯•æ›´æ–°ç¿»è¯‘æ–‡ä»¶...");
                 await RunHelperAsync("init", null);
                 await RunHelperAsync("sync", null);
                 await RunHelperAsync("listpr", null);
@@ -27,100 +27,87 @@ namespace ·­Òë¹¤¾ß
                 var selected = _modItems.Where(m => m.IsSelected).ToList();
                 if (selected.Count == 0)
                 {
-                    // Ë¢ĞÂ±¾µØÈÎÎñ×´Ì¬
+                    // åˆ·æ–°æœ¬åœ°ä»»åŠ¡çŠ¶æ€
                     await LoadTranslationInfoAsync();
 
-                    // ÔÚÎŞÑ¡ÔñµÄÇé¿öÏÂ£¬Èç¹ûÓÃ»§ÒÑÓĞ¿ª·Å PR£¨¼´ÓĞ×Ô¼ºËø¶¨µÄÈÎÎñ£©£¬Ò²³¢ÊÔÉú³É·­ÒëÎÄ¼ş
-                    var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
-                    if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                    var suffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+                    // åœ¨æ— é€‰æ‹©çš„æƒ…å†µä¸‹ï¼Œå¦‚æœç”¨æˆ·å·²æœ‰å¼€æ”¾ PRï¼ˆå³æœ‰è‡ªå·±é”å®šçš„ä»»åŠ¡ï¼‰ï¼Œä¹Ÿå°è¯•ç”Ÿæˆç¿»è¯‘æ–‡ä»¶
                     var lockedMods = _modItems.Where(m => m.IsLockedByMe).Select(m => m.ModId).ToHashSet();
 
                     if (lockedMods.Count > 0)
                     {
-                        // ±£´æÅäÖÃ£¨ÈÔÔÚ UI Ïß³Ì£©
-                        _config.LocalPath = basePath;
-                        SaveConfig();
+                        AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+                        AppendOutput("æ£€æµ‹åˆ°ä½ æœ‰å¼€æ”¾ PRï¼Œæ­£åœ¨ç”Ÿæˆæœ€æ–°ç¿»è¯‘æ–‡ä»¶...");
+                        AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
 
-                        AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
-                        AppendOutput("¼ì²âµ½ÄãÓĞ¿ª·Å PR£¬ÕıÔÚÉú³É×îĞÂ·­ÒëÎÄ¼ş...");
-                        AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
-
-                        await RunWithProgressAsync(() => GenerateTranslationFileCore(basePath!, suffix!, lockedMods, openAfter: false));
-                        AppendOutput("? ·­ÒëÎÄ¼şÒÑÉú³É");
+                        // è°ƒç”¨ CLI çš„ write æ¥å£ç”Ÿæˆç¿»è¯‘æ–‡ä»¶
+                        var modIds = string.Join(",", lockedMods.Select(m => "\"" + m + "\""));
+                        await RunHelperAsync("write", modIds);
+                        
+                        AppendOutput(" ç¿»è¯‘æ–‡ä»¶å·²ç”Ÿæˆ");
                     }
                     else
                     {
-                        AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
-                        AppendOutput("ÌáÊ¾£ºÎ´Ñ¡ÔñÈÎºÎ Mod£¬Õâ¿ÉÄÜÊÇÓÉÓÚ³ÌĞò¸ÕÆô¶¯£¬Ã»ÓĞ¼ÓÔØÈÎºÎĞÅÏ¢µ¼ÖÂµÄ");
-                        AppendOutput("©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤©¤");
-                        AppendOutput("Çë°´ÒÔÏÂ²½Öè²Ù×÷£º");
-                        AppendOutput("1. ÔÚÁĞ±íÖĞ¹´Ñ¡ÄãÒªÁìÈ¡µÄ Mod£¨Ö§³Ö¶àÑ¡£©");
-                        AppendOutput("2. ÔÙ´Îµã»÷\"Ë¢ĞÂ/ÁìÈ¡/×·¼ÓÈÎÎñ\"°´Å¥");
-                        AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
+                        AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+                        AppendOutput("æç¤ºï¼šæœªé€‰æ‹©ä»»ä½• Modï¼Œè¿™å¯èƒ½æ˜¯ç”±äºç¨‹åºåˆšå¯åŠ¨ï¼Œæ²¡æœ‰åŠ è½½ä»»ä½•ä¿¡æ¯å¯¼è‡´çš„");
+                        AppendOutput("â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
+                        AppendOutput("è¯·æŒ‰ä»¥ä¸‹æ­¥éª¤æ“ä½œï¼š");
+                        AppendOutput("1. åœ¨åˆ—è¡¨ä¸­å‹¾é€‰ä½ è¦é¢†å–çš„ Modï¼ˆæ”¯æŒå¤šé€‰ï¼‰");
+                        AppendOutput("2. å†æ¬¡ç‚¹å‡»\"åˆ·æ–°/é¢†å–/è¿½åŠ ä»»åŠ¡\"æŒ‰é’®");
+                        AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
                     }
 
                     return;
                 }
 
-                AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
-                AppendOutput($"¿ªÊ¼ÁìÈ¡ {selected.Count} ¸ö Mod...");
-                AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
+                AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+                AppendOutput($"å¼€å§‹é¢†å– {selected.Count} ä¸ª Mod...");
+                AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
 
-                // ×é×° modid ×Ö·û´®: "123","456"
+                // ç»„è£… modid å­—ç¬¦ä¸²: "123","456"
                 var ids = string.Join(",", selected.Select(m => "\"" + m.ModId + "\""));
 
-                // ³¢ÊÔËø¶¨
-                AppendOutput("\n[µÚ2½×¶Î] ³¢ÊÔËø¶¨ËùÑ¡ Mod...");
+                // å°è¯•é”å®š
+                AppendOutput("\n[ç¬¬2é˜¶æ®µ] å°è¯•é”å®šæ‰€é€‰ Mod...");
                 await RunHelperAsync("lockmod", ids);
 
-                // ÔÙ´Î³õÊ¼»¯¡¢Í¬²½¡¢ÁĞ³öPR
-                AppendOutput("\n[µÚ3½×¶Î] ³¢ÊÔË¢ĞÂËø¶¨½á¹û...");
+                // å†æ¬¡åˆå§‹åŒ–ã€åŒæ­¥ã€åˆ—å‡ºPR
+                AppendOutput("\n[ç¬¬3é˜¶æ®µ] å°è¯•åˆ·æ–°é”å®šç»“æœ...");
                 await RunHelperAsync("init", null);
                 await RunHelperAsync("sync", null);
                 await RunHelperAsync("listpr", null);
                 await LoadTranslationInfoAsync();
 
-                AppendOutput("\n¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
-                AppendOutput("? ÁìÈ¡Á÷³ÌÍê³É£¡");
-                AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
+                AppendOutput("\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+                AppendOutput(" é¢†å–æµç¨‹å®Œæˆï¼");
+                AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
 
-                // ×Ô¶¯Éú³É·­ÒëÎÄ¼ş£¨µ«²»´ò¿ª£©£¬²¢ÔÚÉú³ÉÆÚ¼äËø¶¨ UI¡¢ÏÔÊ¾½ø¶ÈÌõ
-                AppendOutput("\n[µÚ4½×¶Î] ×Ô¶¯Éú³É·­ÒëÎÄ¼ş...");
-
-                // ²¶»ñ UI Ïß³ÌÖĞµÄËùĞèÊı¾İ£¬±ÜÃâÔÚºóÌ¨Ïß³Ì·ÃÎÊ ObservableCollection
-                var basePathAfter = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
-                if (string.IsNullOrWhiteSpace(basePathAfter)) basePathAfter = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                var suffixAfter = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+                // è‡ªåŠ¨ç”Ÿæˆç¿»è¯‘æ–‡ä»¶ï¼Œè°ƒç”¨ CLI çš„ write æ¥å£
+                AppendOutput("\n[ç¬¬4é˜¶æ®µ] è‡ªåŠ¨ç”Ÿæˆç¿»è¯‘æ–‡ä»¶...");
                 var lockedModsAfter = _modItems.Where(m => m.IsLockedByMe).Select(m => m.ModId).ToHashSet();
-
-                // ±£´æÅäÖÃ£¨ÈÔÔÚ UI Ïß³Ì£©
-                _config.LocalPath = basePathAfter;
-                SaveConfig();
-
-                await RunWithProgressAsync(() => GenerateTranslationFileCore(basePathAfter!, suffixAfter!, lockedModsAfter, openAfter: false));
-                AppendOutput("? ·­ÒëÎÄ¼şÒÑÉú³É");
+                var lockedIds = string.Join(",", lockedModsAfter.Select(m => "\"" + m + "\""));
+                await RunHelperAsync("write", lockedIds);
+                AppendOutput(" ç¿»è¯‘æ–‡ä»¶å·²ç”Ÿæˆ");
             }
             catch (Exception ex)
             {
-                AppendOutput($"\n? ÁìÈ¡Ê§°Ü: {ex.Message}");
-                AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
+                AppendOutput($"\nâœ— é¢†å–å¤±è´¥: {ex.Message}");
+                AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
             }
         }
 
-        // ĞÂÔö£ºÍ¨ÓÃµÄ½ø¶È´°¿Ú·â×°£¬ÆÚ¼ä½ûÓÃ°´Å¥ºÍÁĞ±í
+        // æ–°å¢ï¼šé€šç”¨çš„è¿›åº¦çª—å£å°è£…ï¼ŒæœŸé—´ç¦ç”¨æŒ‰é’®å’Œåˆ—è¡¨
         private async Task RunWithProgressAsync(Action work)
         {
             if (_isRunning)
             {
-                AppendOutput("ÒÑÓĞ CLI ²Ù×÷½øĞĞÖĞ£¬ÇëµÈ´ıÍê³É¡£");
+                AppendOutput("å·²æœ‰ CLI æ“ä½œè¿›è¡Œä¸­ï¼Œè¯·ç­‰å¾…å®Œæˆã€‚");
                 return;
             }
 
             _isRunning = true;
             DisableAllButtons();
 
-            // ÏÔÊ¾½ø¶È´°¿Ú
+            // æ˜¾ç¤ºè¿›åº¦çª—å£
             _progressWindow = new ProgressWindow(this);
             _progressWindow.Show();
 
@@ -130,7 +117,7 @@ namespace ·­Òë¹¤¾ß
             }
             finally
             {
-                // ¹Ø±Õ²¢Ïú»Ù½ø¶È´°¿Ú
+                // å…³é—­å¹¶é”€æ¯è¿›åº¦çª—å£
                 try
                 {
                     if (_progressWindow != null)
@@ -141,233 +128,106 @@ namespace ·­Òë¹¤¾ß
                 }
                 catch { }
 
-                // »Ö¸´°´Å¥×´Ì¬
+                // æ¢å¤æŒ‰é’®çŠ¶æ€
                 _isRunning = false;
                 EnableAllButtons();
-            }
-        }
-
-        // Éú³É·­ÒëÎÄ¼ş£¨ºËĞÄÂß¼­£©£¬¿ÉÑ¡ÔñÊÇ·ñÔÚÍê³Éºó´ò¿ª
-        private void GenerateTranslationFileCore(string basePath, string suffix, HashSet<string> lockedMods, bool openAfter)
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
-                string repoDir = Path.Combine(basePath, "pz-mod-translation-helper");
-                string programDir = AppDomain.CurrentDomain.BaseDirectory;
-
-                // 1. ¸´ÖÆ·­Òë¸ñÊ½ËµÃ÷Í¼Æ¬
-                string guideImageSource = Path.Combine(repoDir, "¼òÌåÖĞÎÄ·­Òë¸ñÊ½ËµÃ÷.png");
-                string guideImageDest = Path.Combine(programDir, "¼òÌåÖĞÎÄ·­Òë¸ñÊ½ËµÃ÷.png");
-
-                if (File.Exists(guideImageSource))
-                {
-                    try
-                    {
-                        File.Copy(guideImageSource, guideImageDest, true);
-                        AppendOutput($"  ? ÒÑ¸´ÖÆ·­Òë¸ñÊ½ËµÃ÷Í¼Æ¬µ½³ÌĞòÄ¿Â¼");
-                    }
-                    catch (Exception ex)
-                    {
-                        AppendOutput($"  ! ¸´ÖÆ·­Òë¸ñÊ½ËµÃ÷Í¼Æ¬Ê§°Ü: {ex.Message}");
-                    }
-                }
-
-                // 2. ¶ÁÈ¡²Ö¿âÖĞµÄ·­ÒëÎÄ¼ş
-                string repoTranslationFile = Path.Combine(repoDir, "data", $"translations_{suffix}.txt");
-                if (!File.Exists(repoTranslationFile))
-                {
-                    AppendOutput($"  ! Î´ÕÒµ½²Ö¿â·­ÒëÎÄ¼ş: {repoTranslationFile}");
-                    return;
-                }
-
-                var repoTranslations = LoadTranslationsFromFile(repoTranslationFile, suffix);
-
-                // 3. Ğ£ÑéÁìÈ¡µÄÈÎÎñ
-                if (lockedMods == null || lockedMods.Count == 0)
-                {
-                    AppendOutput("  ! Î´ÕÒµ½ÄúÁìÈ¡µÄÈÎÎñ");
-                    return;
-                }
-
-                // 4. ´Ó²Ö¿âÊı¾İÉ¸Ñ¡
-                var filteredTranslations = new Dictionary<string, Dictionary<string, UserTranslationEntry>>();
-
-                foreach (var modId in lockedMods)
-                {
-                    if (!repoTranslations.ContainsKey(modId))
-                    {
-                        continue;
-                    }
-
-                    filteredTranslations[modId] = new Dictionary<string, UserTranslationEntry>();
-
-                    var repoModData = repoTranslations[modId];
-                    foreach (var kvp in repoModData)
-                    {
-                        string key = kvp.Key;
-                        var repoEntry = kvp.Value;
-
-                        filteredTranslations[modId][key] = new UserTranslationEntry
-                        {
-                            OriginalText = repoEntry.OriginalText,
-                            Translation = repoEntry.Translation,
-                            Status = repoEntry.Status,
-                            Comment = repoEntry.Comment
-                        };
-                    }
-                }
-
-                // 5. »ñÈ¡MODÃû³ÆÓ³Éä
-                var modNames = LoadModNameMapping(repoDir);
-
-                // 6. Ğ´ÈëÓÃ»§·­ÒëÎÄ¼ş£¨ÍêÈ«¸²¸Ç£©
-                string userTranslationFile = Path.Combine(programDir, $"translation_{_config.UserName}_{suffix}.txt");
-                WriteUserTranslationFile(userTranslationFile, filteredTranslations, modNames, suffix);
-                AppendOutput($"  ? ÒÑ±£´æ·­ÒëÎÄ¼ş: {userTranslationFile}");
-
-                // 7. ¿ÉÑ¡£º´ò¿ªÎÄ¼ş
-                if (openAfter)
-                {
-                    OpenFilesWithVSCode(userTranslationFile, guideImageDest);
-                }
-            }
-            catch (Exception ex)
-            {
-                AppendOutput($"  ? Éú³É·­ÒëÎÄ¼şÊ§°Ü: {ex.Message}");
             }
         }
 
         private async void btnStart_Click(object sender, RoutedEventArgs e)
         {
             ClearOutput();
-            AppendOutput("¿ªÊ¼·­ÒëÁ÷³Ì...");
+            AppendOutput("å¼€å§‹ç¿»è¯‘æµç¨‹...");
 
             try
             {
-                // ²¶»ñ UI Ïß³ÌÖĞµÄËùĞèÊı¾İ
+                // è·å–ç”¨æˆ·é¢†å–çš„ä»»åŠ¡ä¸­çš„æ¨¡ç»„ID
+                var lockedMods = _modItems.Where(m => m.IsLockedByMe).Select(m => m.ModId).ToHashSet();
+                
+                if (lockedMods.Count == 0)
+                {
+                    AppendOutput("! æœªæ‰¾åˆ°æ‚¨é¢†å–çš„ä»»åŠ¡ï¼Œè¯·å…ˆé¢†å–ä»»åŠ¡");
+                    return;
+                }
+                
+                AppendOutput($"æ‚¨é¢†å–çš„MOD: {string.Join(", ", lockedMods)}");
+                
+                // è°ƒç”¨ CLI çš„ write æ¥å£ç”Ÿæˆç¿»è¯‘æ–‡ä»¶
+                AppendOutput($"æ­£åœ¨ç”Ÿæˆç¿»è¯‘æ–‡ä»¶...");
+                var ids = string.Join(",", lockedMods.Select(m => "\"" + m + "\""));
+                await RunHelperAsync("write", ids);
+
+                // æ‰“å¼€ç¿»è¯‘æ–‡ä»¶å’Œæ ¼å¼è¯´æ˜å›¾ç‰‡
                 var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
                 if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
-                _config.LocalPath = basePath;
-                SaveConfig();
-
                 var suffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
-                var lockedMods = _modItems.Where(m => m.IsLockedByMe).Select(m => m.ModId).ToHashSet();
-
-                await RunWithProgressAsync(() =>
+                
+                string programDir = AppDomain.CurrentDomain.BaseDirectory;
+                string userTranslationFile = Path.Combine(programDir, $"translations_{_config.UserName}_{suffix}.txt");
+                string guideImageSource = Path.Combine(basePath, "pz-mod-translation-helper", "ç®€ä½“ä¸­æ–‡ç¿»è¯‘æ ¼å¼è¯´æ˜.png");
+                string guideImageDest = Path.Combine(programDir, "ç®€ä½“ä¸­æ–‡ç¿»è¯‘æ ¼å¼è¯´æ˜.png");
+                
+                // å¤åˆ¶æ ¼å¼è¯´æ˜å›¾ç‰‡
+                if (File.Exists(guideImageSource))
                 {
-                    string repoDir = Path.Combine(basePath!, "pz-mod-translation-helper");
-                    string programDir = AppDomain.CurrentDomain.BaseDirectory;
-
-                    // 1. ¸´ÖÆ·­Òë¸ñÊ½ËµÃ÷Í¼Æ¬
-                    string guideImageSource = Path.Combine(repoDir, "¼òÌåÖĞÎÄ·­Òë¸ñÊ½ËµÃ÷.png");
-                    string guideImageDest = Path.Combine(programDir, "¼òÌåÖĞÎÄ·­Òë¸ñÊ½ËµÃ÷.png");
-
-                    if (File.Exists(guideImageSource))
+                    try
                     {
-                        try
-                        {
-                            File.Copy(guideImageSource, guideImageDest, true);
-                            AppendOutput($"? ÒÑ¸´ÖÆ·­Òë¸ñÊ½ËµÃ÷Í¼Æ¬µ½³ÌĞòÄ¿Â¼");
-                        }
-                        catch (Exception ex)
-                        {
-                            AppendOutput($"? ¸´ÖÆ·­Òë¸ñÊ½ËµÃ÷Í¼Æ¬Ê§°Ü: {ex.Message}");
-                        }
+                        File.Copy(guideImageSource, guideImageDest, true);
                     }
-                    else
-                    {
-                        AppendOutput($"! Î´ÕÒµ½·­Òë¸ñÊ½ËµÃ÷Í¼Æ¬: {guideImageSource}");
-                    }
-
-                    // 2. ¶ÁÈ¡²Ö¿âÖĞµÄ·­ÒëÎÄ¼ş
-                    string repoTranslationFile = Path.Combine(repoDir, "data", $"translations_{suffix}.txt");
-                    if (!File.Exists(repoTranslationFile))
-                    {
-                        AppendOutput($"? Î´ÕÒµ½²Ö¿â·­ÒëÎÄ¼ş: {repoTranslationFile}");
-                        return; // Ö±½Ó½áÊø
-                    }
-
-                    AppendOutput($"ÕıÔÚ¶ÁÈ¡²Ö¿â·­ÒëÎÄ¼ş...");
-                    var repoTranslations = LoadTranslationsFromFile(repoTranslationFile, suffix!);
-                    AppendOutput($"? ÒÑ¶ÁÈ¡ {repoTranslations.Count} ¸öMODµÄ·­ÒëÊı¾İ");
-
-                    // 3. »ñÈ¡ÓÃ»§ÁìÈ¡µÄÈÎÎñÖĞµÄÄ£×éID
-                    if (lockedMods.Count == 0)
-                    {
-                        AppendOutput("! Î´ÕÒµ½ÄúÁìÈ¡µÄÈÎÎñ£¬ÇëÏÈÁìÈ¡ÈÎÎñ");
-                        return;
-                    }
-                    AppendOutput($"ÄúÁìÈ¡µÄMOD: {string.Join(", ", lockedMods)}");
-
-                    // 4. Ö±½Ó´Ó²Ö¿âÊı¾İÉ¸Ñ¡
-                    AppendOutput($"ÕıÔÚÉ¸Ñ¡·­ÒëÊı¾İ...");
-
-                    var filteredTranslations = new Dictionary<string, Dictionary<string, UserTranslationEntry>>();
-
-                    foreach (var modId in lockedMods)
-                    {
-                        if (!repoTranslations.ContainsKey(modId))
-                        {
-                            AppendOutput($"! MOD {modId} ÔÚ²Ö¿âÖĞÃ»ÓĞ·­ÒëÊı¾İ");
-                            continue;
-                        }
-
-                        filteredTranslations[modId] = new Dictionary<string, UserTranslationEntry>();
-
-                        var repoModData = repoTranslations[modId];
-                        foreach (var kvp in repoModData)
-                        {
-                            string key = kvp.Key;
-                            var repoEntry = kvp.Value;
-
-                            filteredTranslations[modId][key] = new UserTranslationEntry
-                            {
-                                OriginalText = repoEntry.OriginalText,
-                                Translation = repoEntry.Translation,
-                                Status = repoEntry.Status,
-                                Comment = repoEntry.Comment
-                            };
-                        }
-                    }
-
-                    AppendOutput($"? ÒÑÉ¸Ñ¡ {filteredTranslations.Sum(m => m.Value.Count)} Ìõ·­ÒëÌõÄ¿");
-
-                    // 5. »ñÈ¡MODÃû³ÆÓ³Éä
-                    var modNames = LoadModNameMapping(repoDir);
-
-                    // 6. Ğ´ÈëÓÃ»§·­ÒëÎÄ¼ş£¨ÍêÈ«¸²¸Ç£©
-                    AppendOutput($"ÕıÔÚ±£´æ·­ÒëÎÄ¼ş£¨¸²¸ÇÄ£Ê½£©...");
-                    string userTranslationFile = Path.Combine(programDir, $"translation_{_config.UserName}_{suffix}.txt");
-                    WriteUserTranslationFile(userTranslationFile, filteredTranslations, modNames, suffix!);
-                    AppendOutput($"? ÒÑ±£´æ·­ÒëÎÄ¼ş: {userTranslationFile}");
-
-                    // 7. Ê¹ÓÃVS Code´ò¿ªÎÄ¼ş
-                    AppendOutput($"ÕıÔÚ´ò¿ª·­ÒëÎÄ¼ş...");
-                    OpenFilesWithVSCode(userTranslationFile, guideImageDest);
-                });
+                    catch { }
+                }
+                
+                AppendOutput($"æ­£åœ¨æ‰“å¼€ç¿»è¯‘æ–‡ä»¶...");
+                OpenFilesWithVSCode(userTranslationFile, guideImageDest);
             }
             catch (Exception ex)
             {
-                AppendOutput($"? ¿ªÊ¼·­ÒëÊ§°Ü: {ex.Message}");
-                AppendOutput($"ÏêÏ¸ĞÅÏ¢: {ex.StackTrace}");
+                AppendOutput($"âœ— å¼€å§‹ç¿»è¯‘å¤±è´¥: {ex.Message}");
+                AppendOutput($"è¯¦ç»†ä¿¡æ¯: {ex.StackTrace}");
             }
         }
 
         private async void btnCommit_Click(object sender, RoutedEventArgs e)
         {
-            var input = new InputBox("ÇëÊäÈëÌá½»ËµÃ÷:", this); // ´«µİ¸¸´°¿Ú
-            if (input.ShowDialog() == true)
+            var input = new InputBox("è¯·è¾“å…¥æäº¤è¯´æ˜:", this); // ä¼ é€’çˆ¶çª—å£
+            if (input.ShowDialog() != true)
             {
-                var message = input.Value ?? string.Empty;
-                ClearOutput();
-                await RunHelperAsync("commit", message);
+                AppendOutput("å·²å–æ¶ˆæäº¤ã€‚");
+                return;
             }
-            else
+
+            var message = input.Value ?? string.Empty;
+            ClearOutput();
+            
+            try
             {
-                AppendOutput("ÒÑÈ¡ÏûÌá½»¡£");
+                AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+                AppendOutput("å¼€å§‹ä¿å­˜è¿›åº¦æµç¨‹...");
+                AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+
+                // è°ƒç”¨ CLI çš„ merge æ¥å£åˆå¹¶ç”¨æˆ·ç¿»è¯‘æ–‡ä»¶åˆ°ä»“åº“ç¿»è¯‘æ–‡ä»¶
+                AppendOutput("\n[åˆå¹¶é˜¶æ®µ] æ­£åœ¨åˆå¹¶ç”¨æˆ·ç¿»è¯‘åˆ°ä»“åº“ç¿»è¯‘æ–‡ä»¶...");
+                await RunHelperAsync("merge", null);
+
+                // ç»§ç»­æ‰§è¡ŒåŸæœ‰ä¿å­˜è¿›åº¦æŒ‰é’®é€»è¾‘
+                AppendOutput("\n[æäº¤é˜¶æ®µ] æ­£åœ¨æäº¤ä¿®æ”¹åˆ°è¿œç¨‹ä»“åº“...");
+                await RunHelperAsync("commit", message);
+
+                // ä¿å­˜åè‡ªåŠ¨è°ƒç”¨åˆ·æ–°æŒ‰é’®çš„é€»è¾‘
+                AppendOutput("\n[åˆ·æ–°é˜¶æ®µ] æ­£åœ¨åˆ·æ–°ä»»åŠ¡çŠ¶æ€...");
+                await RunHelperAsync("init", null);
+                await RunHelperAsync("sync", null);
+                await RunHelperAsync("listpr", null);
+                await LoadTranslationInfoAsync();
+
+                AppendOutput("\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+                AppendOutput(" ä¿å­˜è¿›åº¦å®Œæˆï¼");
+                AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+            }
+            catch (Exception ex)
+            {
+                AppendOutput($"\nâœ— ä¿å­˜è¿›åº¦å¤±è´¥: {ex.Message}");
+                AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
             }
         }
 
@@ -376,86 +236,89 @@ namespace ·­Òë¹¤¾ß
             ClearOutput();
             try
             {
-                // ¼ì²éµ±Ç°°´Å¥×´Ì¬
-                if (btnSubmitReview.Content.ToString() == "Ìá½»ÉóºË")
+                // æ£€æŸ¥å½“å‰æŒ‰é’®çŠ¶æ€
+                if (btnSubmitReview.Content.ToString() == "æäº¤å®¡æ ¸")
                 {
-                    // Ìá½»ÉóºËÁ÷³Ì
-                    AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
-                    AppendOutput("¿ªÊ¼Ìá½»ÉóºËÁ÷³Ì...");
-                    AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
+                    // æäº¤å®¡æ ¸æµç¨‹
+                    AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+                    AppendOutput("å¼€å§‹æäº¤å®¡æ ¸æµç¨‹...");
+                    AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
 
-                    // 1. ÏÈ³¢ÊÔ±£´æ½ø¶È£¨Ìá½»×îĞÂĞŞ¸Ä£©
-                    var input = new InputBox("ÇëÊäÈëÌá½»ËµÃ÷£¨ÓÃÓÚ±£´æ½ø¶È£©:", this);
+                    // 1. å…ˆå°è¯•ä¿å­˜è¿›åº¦ï¼ˆæäº¤æœ€æ–°ä¿®æ”¹ï¼‰
+                    var input = new InputBox("è¯·è¾“å…¥æäº¤è¯´æ˜ï¼ˆç”¨äºä¿å­˜è¿›åº¦ï¼‰:", this);
                     if (input.ShowDialog() != true)
                     {
-                        AppendOutput("ÒÑÈ¡ÏûÌá½»ÉóºË¡£");
+                        AppendOutput("å·²å–æ¶ˆæäº¤å®¡æ ¸ã€‚");
                         return;
                     }
-                    var commitMessage = input.Value ?? "Ìá½»ÉóºËÇ°±£´æ";
+                    var commitMessage = input.Value ?? "æäº¤å®¡æ ¸å‰ä¿å­˜";
                     
-                    AppendOutput("\n[µÚ1½×¶Î] ±£´æ½ø¶È...");
+                    AppendOutput("\n[ç¬¬1é˜¶æ®µ] åˆå¹¶ç”¨æˆ·ç¿»è¯‘...");
+                    await RunHelperAsync("merge", null);
+                    
+                    AppendOutput("\n[ç¬¬2é˜¶æ®µ] ä¿å­˜è¿›åº¦...");
                     await RunHelperAsync("commit", commitMessage);
 
-                    // 2. µ÷ÓÃ CLI ½« PR ×´Ì¬¸ÄÎª ready for review
-                    AppendOutput("\n[µÚ2½×¶Î] ½« PR ×´Ì¬¸ÄÎª Ready for Review...");
+                    // 2. è°ƒç”¨ CLI å°† PR çŠ¶æ€æ”¹ä¸º ready for review
+                    AppendOutput("\n[ç¬¬3é˜¶æ®µ] å°† PR çŠ¶æ€æ”¹ä¸º Ready for Review...");
                     await RunHelperAsync("submit", null);
 
-                    // 3. Ë¢ĞÂ×´Ì¬
-                    AppendOutput("\n[µÚ3½×¶Î] Ë¢ĞÂÈÎÎñ×´Ì¬...");
+                    // 3. åˆ·æ–°çŠ¶æ€
+                    AppendOutput("\n[ç¬¬4é˜¶æ®µ] åˆ·æ–°ä»»åŠ¡çŠ¶æ€...");
                     await RunHelperAsync("init", null);
                     await RunHelperAsync("sync", null);
                     await RunHelperAsync("listpr", null);
                     await LoadTranslationInfoAsync();
 
-                    // 4. ¸üĞÂ°´Å¥×´Ì¬
+                    // 4. æ›´æ–°æŒ‰é’®çŠ¶æ€
                     UpdateButtonStates();
 
-                    AppendOutput("\n¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
-                    AppendOutput("? ÒÑÌá½»ÉóºË£¡");
-                    AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
+                    AppendOutput("\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+                    AppendOutput(" å·²æäº¤å®¡æ ¸ï¼");
+                    AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
                 }
-                else // ³·»ØĞŞ¸Ä
+                else // æ’¤å›ä¿®æ”¹
                 {
-                    // ³·»ØĞŞ¸ÄÁ÷³Ì
+                    // æ’¤å›ä¿®æ”¹æµç¨‹
                     var result = System.Windows.MessageBox.Show(
-                        "È·¶¨Òª³·»ØĞŞ¸Ä²¢½« PR ¸ÄÎª²İ¸å×´Ì¬Âğ£¿",
-                        "È·ÈÏ³·»Ø",
+                        "ç¡®å®šè¦æ’¤å›ä¿®æ”¹å¹¶å°† PR æ”¹ä¸ºè‰ç¨¿çŠ¶æ€å—ï¼Ÿ",
+                        "ç¡®è®¤æ’¤å›",
                         System.Windows.MessageBoxButton.YesNo,
                         System.Windows.MessageBoxImage.Question);
 
                     if (result != System.Windows.MessageBoxResult.Yes)
                     {
-                        AppendOutput("ÒÑÈ¡Ïû³·»Ø¡£");
+                        AppendOutput("å·²å–æ¶ˆæ’¤å›ã€‚");
                         return;
                     }
 
-                    AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
-                    AppendOutput("¿ªÊ¼³·»ØĞŞ¸ÄÁ÷³Ì...");
-                    AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
+                    AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+                    AppendOutput("å¼€å§‹æ’¤å›ä¿®æ”¹æµç¨‹...");
+                    AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
 
-                    // 1. µ÷ÓÃ CLI ½« PR ×´Ì¬¸ÄÎª draft
-                    AppendOutput("\n[µÚ1½×¶Î] ½« PR ×´Ì¬¸ÄÎª Draft...");
+                    // 1. è°ƒç”¨ CLI å°† PR çŠ¶æ€æ”¹ä¸º draft
+                    AppendOutput("\n[ç¬¬1é˜¶æ®µ] å°† PR çŠ¶æ€æ”¹ä¸º Draft...");
                     await RunHelperAsync("withdraw", null);
 
-                    // 2. Ë¢ĞÂ×´Ì¬
-                    AppendOutput("\n[µÚ2½×¶Î] ³¢ÊÔË¢ĞÂÈÎÎñ×´Ì¬...");
+                    // 2. åˆ·æ–°çŠ¶æ€
+                    AppendOutput("\n[ç¬¬2é˜¶æ®µ] å°è¯•åˆ·æ–°ä»»åŠ¡çŠ¶æ€...");
                     await RunHelperAsync("init", null);
                     await RunHelperAsync("sync", null);
                     await RunHelperAsync("listpr", null);
                     await LoadTranslationInfoAsync();
 
-                    // 3. ¸üĞÂ°´Å¥×´Ì¬
+                    // 3. æ›´æ–°æŒ‰é’®çŠ¶æ€
                     UpdateButtonStates();
 
-                    AppendOutput("\n¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
-                    AppendOutput("? ÒÑ³·»ØĞŞ¸Ä£¡");
-                    AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
+                    AppendOutput("\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+                    AppendOutput(" å·²æ’¤å›ä¿®æ”¹ï¼");
+                    AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
                 }
             }
             catch (Exception ex)
             {
-                AppendOutput($"\n? ²Ù×÷Ê§°Ü: {ex.Message}");
-                AppendOutput("¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T¨T");
+                AppendOutput($"\nâœ— æ“ä½œå¤±è´¥: {ex.Message}");
+                AppendOutput("â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
             }
         }
     }

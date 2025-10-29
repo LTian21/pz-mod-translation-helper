@@ -15,15 +15,7 @@ namespace ∑≠“Îπ§æﬂ.Models
         Approved
     }
 
-    public class RepoTranslationEntry
-    {
-        public string OriginalText { get; set; } = "";
-        public string Translation { get; set; } = "";
-        public TranslationItemStatus Status { get; set; } = TranslationItemStatus.Untranslated;
-        public List<string> Comment { get; set; } = new();
-    }
-
-    public class UserTranslationEntry
+    public class TranslationEntry
     {
         public string OriginalText { get; set; } = "";
         public string Translation { get; set; } = "";

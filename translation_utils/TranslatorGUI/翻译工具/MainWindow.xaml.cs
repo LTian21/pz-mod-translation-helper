@@ -387,302 +387,6 @@ namespace 翻译工具
             catch { }
         }
 
-        // 从仓库翻译文件加载翻译数据
-        private Dictionary<string, Dictionary<string, RepoTranslationEntry>> LoadTranslationsFromFile(string filePath, string languageSuffix)
-        {
-            var result = new Dictionary<string, Dictionary<string, RepoTranslationEntry>>();
-            var lines = File.ReadAllLines(filePath, Encoding.UTF8);
-            List<string> tempComments = new List<string>();
-            
-            string langSuffixEscaped = Regex.Escape(languageSuffix);
-
-            foreach (var line in lines)
-            {
-                // 忽略空行和分隔线
-                if (string.IsNullOrWhiteSpace(line) || line.StartsWith("------"))
-                {
-                    continue;
-                }
-
-                // 检查注释行
-                if (IsNullOrCommentLine(line))
-                {
-                    tempComments.Add(line);
-                    continue;
-                }
-
-                // 未翻译的原文行 \t\t<modId>::EN::<matchKey> = "<matchText>",
-                var originalMatch1 = Regex.Match(line, @"^\t\t(?<modId>[^:]+)::EN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-                if (originalMatch1.Success)
-                {
-                    string modId = originalMatch1.Groups["modId"].Value.Trim();
-                    string matchKey = originalMatch1.Groups["matchKey"].Value.Trim();
-                    string matchText = originalMatch1.Groups["matchText"].Value;
-
-                    if (!result.ContainsKey(modId))
-                    {
-                        result[modId] = new Dictionary<string, RepoTranslationEntry>();
-                    }
-
-                    if (!result[modId].ContainsKey(matchKey))
-                    {
-                        result[modId][matchKey] = new RepoTranslationEntry
-                        {
-                            OriginalText = matchText,
-                            Translation = "",
-                            Status = TranslationItemStatus.Untranslated,
-                            Comment = new List<string>(tempComments)
-                        };
-                    }
-                    tempComments.Clear();
-                    continue;
-                }
-
-                // 未翻译的译文行 \t\t<modId>::<LANG>::<matchKey> = "<matchText>",
-                var translationMatch1 = Regex.Match(line, $@"^\t\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-                if (translationMatch1.Success)
-                {
-                    string modId = translationMatch1.Groups["modId"].Value.Trim();
-                    string matchKey = translationMatch1.Groups["matchKey"].Value.Trim();
-                    string matchText = translationMatch1.Groups["matchText"].Value;
-
-                    if (result.ContainsKey(modId) && result[modId].ContainsKey(matchKey))
-                    {
-                        if (!string.IsNullOrEmpty(matchText))
-                        {
-                            result[modId][matchKey].Translation = matchText;
-                        }
-                    }
-                    continue;
-                }
-
-                // 已翻译未批准的原文行 \t<modId>::EN::<matchKey> = "<matchText>",
-                var originalMatch2 = Regex.Match(line, @"^\t(?<modId>[^:]+)::EN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-                if (originalMatch2.Success)
-                {
-                    string modId = originalMatch2.Groups["modId"].Value.Trim();
-                    string matchKey = originalMatch2.Groups["matchKey"].Value.Trim();
-                    string matchText = originalMatch2.Groups["matchText"].Value;
-
-                    if (!result.ContainsKey(modId))
-                    {
-                        result[modId] = new Dictionary<string, RepoTranslationEntry>();
-                    }
-
-                    if (!result[modId].ContainsKey(matchKey))
-                    {
-                        result[modId][matchKey] = new RepoTranslationEntry
-                        {
-                            OriginalText = matchText,
-                            Translation = "",
-                            Status = TranslationItemStatus.Translated,
-                            Comment = new List<string>(tempComments)
-                        };
-                    }
-                    tempComments.Clear();
-                    continue;
-                }
-
-                // 已翻译未批准的译文行 \t<modId>::<LANG>::<matchKey> = "<matchText>",
-                var translationMatch2 = Regex.Match(line, $@"^\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-                if (translationMatch2.Success)
-                {
-                    string modId = translationMatch2.Groups["modId"].Value.Trim();
-                    string matchKey = translationMatch2.Groups["matchKey"].Value.Trim();
-                    string matchText = translationMatch2.Groups["matchText"].Value;
-
-                    if (result.ContainsKey(modId) && result[modId].ContainsKey(matchKey))
-                    {
-                        if (!string.IsNullOrEmpty(matchText))
-                        {
-                            result[modId][matchKey].Translation = matchText;
-                        }
-                    }
-                    continue;
-                }
-
-                // 已批准的原文行 <modId>::EN::<matchKey> = "<matchText>",
-                var originalMatch3 = Regex.Match(line, @"^(?<modId>[^:]+)::EN::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-                if (originalMatch3.Success)
-                {
-                    string modId = originalMatch3.Groups["modId"].Value.Trim();
-                    string matchKey = originalMatch3.Groups["matchKey"].Value.Trim();
-                    string matchText = originalMatch3.Groups["matchText"].Value;
-
-                    if (!result.ContainsKey(modId))
-                    {
-                        result[modId] = new Dictionary<string, RepoTranslationEntry>();
-                    }
-
-                    if (!result[modId].ContainsKey(matchKey))
-                    {
-                        result[modId][matchKey] = new RepoTranslationEntry
-                        {
-                            OriginalText = matchText,
-                            Translation = "",
-                            Status = TranslationItemStatus.Approved,
-                            Comment = new List<string>(tempComments)
-                        };
-                    }
-                    tempComments.Clear();
-                    continue;
-                }
-
-                // 已批准的译文行 <modId>::<LANG>::<matchKey> = "<matchText>",
-                var translationMatch3 = Regex.Match(line, $@"^(?<modId>[^:]+)::({langSuffixEscaped})::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-                if (translationMatch3.Success)
-                {
-                    string modId = translationMatch3.Groups["modId"].Value.Trim();
-                    string matchKey = translationMatch3.Groups["matchKey"].Value.Trim();
-                    string matchText = translationMatch3.Groups["matchText"].Value;
-
-                    if (result.ContainsKey(modId) && result[modId].ContainsKey(matchKey))
-                    {
-                        if (!string.IsNullOrEmpty(matchText))
-                        {
-                            result[modId][matchKey].Translation = matchText;
-                        }
-                    }
-                    continue;
-                }
-            }
-
-            return result;
-        }
-
-        // 从用户翻译文件加载数据（只读取译文，忽略原文）
-        private Dictionary<string, Dictionary<string, UserTranslationEntry>> LoadUserTranslationsFromFile(string filePath, string languageSuffix)
-        {
-            var result = new Dictionary<string, Dictionary<string, UserTranslationEntry>>();
-            var lines = File.ReadAllLines(filePath, Encoding.UTF8);
-            
-            string langSuffixEscaped = Regex.Escape(languageSuffix);
-
-            foreach (var line in lines)
-            {
-                // 忽略空行、分隔线和注释
-                if (string.IsNullOrWhiteSpace(line) || line.StartsWith("------") || IsNullOrCommentLine(line))
-                {
-                    continue;
-                }
-
-                // 只匹配译文行，任何前缀的译文行都匹配
-                var translationMatch = Regex.Match(line, $@"^\s*(?<modId>[^:]+)::({langSuffixEscaped})::(?<matchKey>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-                if (translationMatch.Success)
-                {
-                    string modId = translationMatch.Groups["modId"].Value.Trim();
-                    string matchKey = translationMatch.Groups["matchKey"].Value.Trim();
-                    string matchText = translationMatch.Groups["matchText"].Value;
-
-                    if (!result.ContainsKey(modId))
-                    {
-                        result[modId] = new Dictionary<string, UserTranslationEntry>();
-                    }
-
-                    // 创建或更新译文
-                    if (!result[modId].ContainsKey(matchKey))
-                    {
-                        result[modId][matchKey] = new UserTranslationEntry
-                        {
-                            OriginalText = "", // 稍后从repo数据更新
-                            Translation = matchText,
-                            Status = TranslationItemStatus.Untranslated,
-                            Comment = new List<string>()
-                        };
-                    }
-                    else
-                    {
-                        result[modId][matchKey].Translation = matchText;
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        // 加载MOD名称映射
-        private Dictionary<string, string> LoadModNameMapping(string repoDir)
-        {
-            var result = new Dictionary<string, string>();
-            string filePath = Path.Combine(repoDir, "translation_utils", "mod_id_name_map.json");
-
-            if (!File.Exists(filePath))
-            {
-                AppendOutput($"! 未找到MOD名称映射文件: {filePath}");
-                return result;
-            }
-
-            try
-            {
-                string jsonContent = File.ReadAllText(filePath, Encoding.UTF8);
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-                result = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonContent, options) ?? new Dictionary<string, string>();
-            }
-            catch (Exception ex)
-            {
-                AppendOutput($"! 读取MOD名称映射失败: {ex.Message}");
-            }
-
-            return result;
-        }
-
-        // 写入用户翻译文件
-        private void WriteUserTranslationFile(string filePath, Dictionary<string, Dictionary<string, UserTranslationEntry>> translations, 
-            Dictionary<string, string> modNames, string languageSuffix)
-        {
-            using (var writer = new StreamWriter(filePath, false, Encoding.UTF8))
-            {
-                foreach (var modKvp in translations.OrderBy(m => m.Key))
-                {
-                    string modId = modKvp.Key;
-                    string modName = modNames.ContainsKey(modId) ? modNames[modId] : "Unknown";
-
-                    writer.WriteLine();
-                    writer.WriteLine($"------ {modId} :: {modName} ------");
-                    writer.WriteLine();
-
-                    foreach (var entryKvp in modKvp.Value)
-                    {
-                        string key = entryKvp.Key;
-                        var entry = entryKvp.Value;
-
-                        // 根据状态确定前缀
-                        string prefix;
-                        switch (entry.Status)
-                        {
-                            case TranslationItemStatus.Untranslated:
-                                prefix = "\t\t";
-                                break;
-                            case TranslationItemStatus.Translated:
-                                prefix = "\t";
-                                break;
-                            case TranslationItemStatus.Approved:
-                                prefix = "";
-                                break;
-                            default:
-                                prefix = "\t\t";
-                                break;
-                        }
-
-                        // 写入注释
-                        foreach (var comment in entry.Comment)
-                        {
-                            writer.WriteLine(prefix + comment.Trim());
-                        }
-
-                        // 写入原文和译文
-                        writer.WriteLine($"{prefix}{modId}::EN::{key} = \"{entry.OriginalText}\",");
-                        writer.WriteLine($"{prefix}{modId}::{languageSuffix}::{key} = \"{entry.Translation}\",");
-                    }
-
-                    writer.WriteLine();
-                }
-            }
-        }
-
         // 使用VS Code打开文件（优先 VS Code，不可用时回退系统默认程序）
         private void OpenFilesWithVSCode(string translationFile, string guideImage)
         {
@@ -881,7 +585,19 @@ namespace 翻译工具
                     StandardErrorEncoding = childEncoding
                 };
 
-                AppendOutput($"运行: {exePath} {argsBuilder}");
+                // 构建用于日志输出的脱敏参数字符串
+                var maskedToken = MaskPatToken(PatToken);
+                var maskedArgsBuilder = new StringBuilder();
+                maskedArgsBuilder.Append(EscapeArg(RepoUrl));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(maskedToken));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(_config.UserName ?? string.Empty));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(_config.UserEmail ?? string.Empty));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(langSuffix));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(operation));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(commitArg));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(repoRoot));
+
+                AppendOutput($"运行: {exePath} {maskedArgsBuilder}");
 
                 try
                 {
@@ -926,6 +642,19 @@ namespace 翻译工具
                 _isRunning = false;
                 EnableAllButtons();
             }
+        }
+
+        // 新增：将PAT token脱敏，只显示前缀和后10位
+        private static string MaskPatToken(string token)
+        {
+            if (string.IsNullOrEmpty(token))
+                return "\"\"";
+            
+            if (token.Length <= 10)
+                return "github_pat_***";
+            
+            string lastTen = token.Substring(token.Length - 10);
+            return $"github_pat_***{lastTen}";
         }
 
         private static string EscapeArg(string s)
