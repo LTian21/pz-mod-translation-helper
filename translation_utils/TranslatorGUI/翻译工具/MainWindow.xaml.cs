@@ -31,27 +31,26 @@ namespace 翻译工具
         private readonly string _configPath;
         private Config _config;
         private const int MaxOutputChars = 200_000; // 防止输出无限增长
-        private readonly object _outputLock = new object();
         private readonly ConcurrentQueue<string> _outputQueue = new ConcurrentQueue<string>();
         private readonly StringBuilder _pendingWhileSelecting = new StringBuilder();
         private readonly DispatcherTimer _outputTimer;
 
-        // 新增：用于任务列表的数据源
+        // 任务列表数据源
         private readonly ObservableCollection<ModItemView> _modItems = new();
 
-        // 新增：标记 CLI 操作是否进行中
+        // CLI 操作进行中标记
         private bool _isRunning = false;
 
-        // 新增：进度窗口实例
+        // 进度窗口实例
         private ProgressWindow? _progressWindow = null;
 
-        // 新增：当前用户的 PR 状态（用于按钮显示和启用逻辑）
+        // 当前用户的 PR 状态（用于按钮显示和启用逻辑）
         private string _currentUserPRState = string.Empty;
 
         // MainWindow 构造函数
         public MainWindow()
         {
-            // 初始化配置路径到用户应用数据目录，避免 _configPath 为 null 导致写入失败
+            // 初始化配置路径到用户应用数据目录
             _configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "pz-mod-translation-helper", "config.json");
 
             InitializeComponent();
@@ -63,7 +62,7 @@ namespace 翻译工具
             // 主窗口默认从屏幕中心启动
             this.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
-            // 设置输出窗口为黑底白字，等控件初始化后应用
+            // 设置输出窗口为黑底白字
             try
             {
                 if (txtOutput != null)
@@ -77,14 +76,13 @@ namespace 翻译工具
             catch { }
 
             // AES 加密/解密 PAT：使用 EncryptionKey 的 SHA-256 作为 AES-256 密钥
-            bool IsMatch = false;
             try
             {
                 using var sha = SHA256.Create();
                 var keyHash = sha.ComputeHash(EncryptionKey);
                 //PatTokenEncrypted = EncryptAes(PatTokenOriginal, keyHash);
                 PatToken = DecryptAes(PatTokenEncrypted, keyHash);
-                IsMatch = (PatToken == PatTokenOriginal);
+                _ = (PatToken == PatTokenOriginal);
             }
             catch (Exception ex)
             {
@@ -92,7 +90,7 @@ namespace 翻译工具
                 AppendOutput($"PAT 加解密失败: {ex.Message}");
             }
 
-            // 在主窗口中显示当前翻译文件路径和语言（用户以前选择的或默认）
+            // 显示当前翻译文件路径和语言
             try
             {
                 var displayPath = string.IsNullOrWhiteSpace(_config.LocalPath)
@@ -100,7 +98,6 @@ namespace 翻译工具
                     : _config.LocalPath;
                 if (txtPath != null) txtPath.Text = displayPath;
 
-                // 显示当前语言
                 UpdateLanguageDisplay();
             }
             catch { }
@@ -110,12 +107,6 @@ namespace 翻译工具
             // Start timer to flush queued output to the UI periodically.
             _outputTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(100), DispatcherPriority.Background, OutputTimer_Tick, Dispatcher);
             _outputTimer.Start();
-        }
-
-        private void MainWindow_Loaded(object? sender, RoutedEventArgs e)
-        {
-            this.Loaded -= MainWindow_Loaded;
-            ShowUserDialog();
         }
 
         private void LoadConfig()
@@ -179,18 +170,40 @@ namespace 翻译工具
                 ShowInTaskbar = false
             };
 
-            var panel = new System.Windows.Controls.StackPanel { Margin = new System.Windows.Thickness(10) };
+            // 根容器 DockPanel：底部按钮，顶部表单内容
+            var root = new System.Windows.Controls.DockPanel();
 
-            panel.Children.Add(new System.Windows.Controls.TextBlock { Text = "用户名:" });
+            // 按钮区域（固定在底部）
+            var btnPanel = new System.Windows.Controls.StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Horizontal,
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
+                Margin = new System.Windows.Thickness(10)
+            };
+            System.Windows.Controls.DockPanel.SetDock(btnPanel, System.Windows.Controls.Dock.Bottom);
+            var btnOk = new System.Windows.Controls.Button { Content = "确认", Width = 80, Margin = new System.Windows.Thickness(4) };
+            btnPanel.Children.Add(btnOk);
+
+            // 可滚动内容区域
+            var contentStack = new System.Windows.Controls.StackPanel { Margin = new System.Windows.Thickness(10) };
+            var scroll = new System.Windows.Controls.ScrollViewer
+            {
+                VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Auto,
+                Content = contentStack
+            };
+            System.Windows.Controls.DockPanel.SetDock(scroll, System.Windows.Controls.Dock.Top);
+
+            // 表单内容
+            contentStack.Children.Add(new System.Windows.Controls.TextBlock { Text = "用户名:" });
             var txtName = new System.Windows.Controls.TextBox { Text = _config.UserName ?? string.Empty, Margin = new System.Windows.Thickness(0, 4, 0, 8) };
-            panel.Children.Add(txtName);
+            contentStack.Children.Add(txtName);
 
-            panel.Children.Add(new System.Windows.Controls.TextBlock { Text = "邮箱:" });
+            contentStack.Children.Add(new System.Windows.Controls.TextBlock { Text = "邮箱:" });
             var txtEmail = new System.Windows.Controls.TextBox { Text = _config.UserEmail ?? string.Empty, Margin = new System.Windows.Thickness(0, 4, 0, 8) };
-            panel.Children.Add(txtEmail);
+            contentStack.Children.Add(txtEmail);
 
             // 翻译文件路径选择
-            panel.Children.Add(new System.Windows.Controls.TextBlock { Text = "翻译文件路径:", Margin = new System.Windows.Thickness(0, 4, 0, 4) });
+            contentStack.Children.Add(new System.Windows.Controls.TextBlock { Text = "翻译文件路径:", Margin = new System.Windows.Thickness(0, 4, 0, 4) });
             var pathPanel = new System.Windows.Controls.DockPanel { Margin = new System.Windows.Thickness(0, 0, 0, 8) };
             var btnBrowsePath = new System.Windows.Controls.Button { Content = "浏览", Width = 60, Margin = new System.Windows.Thickness(6, 0, 0, 0) };
             System.Windows.Controls.DockPanel.SetDock(btnBrowsePath, System.Windows.Controls.Dock.Right);
@@ -201,7 +214,7 @@ namespace 翻译工具
             };
             pathPanel.Children.Add(btnBrowsePath);
             pathPanel.Children.Add(txtPath);
-            panel.Children.Add(pathPanel);
+            contentStack.Children.Add(pathPanel);
 
             // 文件夹浏览逻辑
             btnBrowsePath.Click += (s, e) =>
@@ -216,10 +229,10 @@ namespace 翻译工具
                 }
             };
 
-            // 新增：语言选择
-            panel.Children.Add(new System.Windows.Controls.TextBlock { Text = "翻译语言:" });
+            // 语言选择
+            contentStack.Children.Add(new System.Windows.Controls.TextBlock { Text = "翻译语言:" });
             var cbLang = new System.Windows.Controls.ComboBox { Margin = new System.Windows.Thickness(0, 4, 0, 8) };
-            // 仅显示简体中文（CN），临时隐藏其他语言
+            // 仅显示简体中文（CN）
             foreach (var lang in LanguageHelper.All)
             {
                 var suffix = lang.ToSuffix();
@@ -244,14 +257,13 @@ namespace 翻译工具
                     break;
                 }
             }
-            panel.Children.Add(cbLang);
+            contentStack.Children.Add(cbLang);
 
-            var btnPanel = new System.Windows.Controls.StackPanel { Orientation = System.Windows.Controls.Orientation.Horizontal, HorizontalAlignment = System.Windows.HorizontalAlignment.Right, Margin = new System.Windows.Thickness(0, 12, 0, 0) };
-            var btnOk = new System.Windows.Controls.Button { Content = "确认", Width = 80, Margin = new System.Windows.Thickness(4) };
-            btnPanel.Children.Add(btnOk);
-            panel.Children.Add(btnPanel);
+            // 装配内容
+            root.Children.Add(btnPanel);
+            root.Children.Add(scroll);
 
-            // 验证用户名：仅允许字母、数字和下划线；验证邮箱：使用 MailAddress 简单验证
+            // 验证+保存
             btnOk.Click += async (s, e) =>
             {
                 var name = txtName.Text?.Trim() ?? string.Empty;
@@ -290,7 +302,7 @@ namespace 翻译工具
                 _config.UserEmail = email;
                 _config.LocalPath = path;
                 _config.LanguageSuffix = selectedSuffix;
-                SaveConfig(); // 立即存储
+                SaveConfig();
 
                 // 更新主界面路径和语言显示
                 if (txtPath != null) this.txtPath.Text = path;
@@ -299,7 +311,7 @@ namespace 翻译工具
                 dlg.DialogResult = true;
                 dlg.Close();
 
-                // 关闭对话框后，自动执行初始化流程
+                // 自动执行初始化流程
                 ClearOutput();
                 AppendOutput("════════════════════════════════════════");
                 AppendOutput("正在初始化翻译任务列表...");
@@ -313,18 +325,16 @@ namespace 翻译工具
                 AppendOutput("════════════════════════════════════════");
             };
 
-            // 处理对话框关闭事件：如果用户点击关闭按钮（X 按钮）或取消，则退出程序
+            // 用户关闭对话框则退出程序
             dlg.Closing += (s, e) =>
             {
-                // 如果对话框没有设置 DialogResult 为 true，说明用户点击了关闭按钮而非"确认"按钮
                 if (dlg.DialogResult != true)
                 {
-                    // 关闭主窗口，退出程序
                     this.Close();
                 }
             };
 
-            dlg.Content = panel;
+            dlg.Content = root;
             dlg.ShowDialog();
         }
 
@@ -343,10 +353,7 @@ namespace 翻译工具
                 }
 
                 var json = await File.ReadAllTextAsync(jsonPath, Encoding.UTF8);
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 var info = JsonSerializer.Deserialize<TranslationInfoFile>(json, options);
                 if (info?.Translations == null)
                 {
@@ -365,7 +372,7 @@ namespace 翻译工具
 
                 AppendOutput($"已加载 { _modItems.Count } 个 Mod 状态。");
 
-                // 新增：更新按钮状态
+                // 更新按钮状态
                 UpdateButtonStates();
             }
             catch (Exception ex)
@@ -437,7 +444,7 @@ namespace 翻译工具
             }
         }
 
-        // 强化：优先寻找 VS Code 可执行文件进行启动；若不存在再尝试 PATH 中的 code
+        // 优先寻找 VS Code 可执行文件；否则回退 PATH 中的 code
         private bool TryLaunchVSCode(IEnumerable<string> files)
         {
             string args = string.Join(" ", files.Select(EscapeArg));
@@ -585,7 +592,7 @@ namespace 翻译工具
                     StandardErrorEncoding = childEncoding
                 };
 
-                // 构建用于日志输出的脱敏参数字符串
+                // 脱敏参数日志
                 var maskedToken = MaskPatToken(PatToken);
                 var maskedArgsBuilder = new StringBuilder();
                 maskedArgsBuilder.Append(EscapeArg(RepoUrl));
@@ -603,22 +610,14 @@ namespace 翻译工具
                 {
                     using var proc = new Process { StartInfo = psi, EnableRaisingEvents = true };
 
-                    proc.OutputDataReceived += (s, e) =>
-                    {
-                        if (e.Data != null) AppendOutput(e.Data);
-                    };
-                    proc.ErrorDataReceived += (s, e) =>
-                    {
-                        if (e.Data != null) AppendOutput(e.Data);
-                    };
+                    proc.OutputDataReceived += (s, e) => { if (e.Data != null) AppendOutput(e.Data); };
+                    proc.ErrorDataReceived += (s, e) => { if (e.Data != null) AppendOutput(e.Data); };
 
                     proc.Start();
                     proc.BeginOutputReadLine();
                     proc.BeginErrorReadLine();
 
                     await Task.Run(() => proc.WaitForExit());
-
-                    //AppendOutput($"进程退出，代码: {proc.ExitCode}");
                 }
                 catch (Exception ex)
                 {
@@ -638,21 +637,20 @@ namespace 翻译工具
                 }
                 catch { }
 
-                // 确保无论如何都启用按钮
                 _isRunning = false;
                 EnableAllButtons();
             }
         }
 
-        // 新增：将PAT token脱敏，只显示前缀和后10位
+        // 将PAT token脱敏，只显示前缀和后10位
         private static string MaskPatToken(string token)
         {
             if (string.IsNullOrEmpty(token))
                 return "\"\"";
-            
+
             if (token.Length <= 10)
                 return "github_pat_***";
-            
+
             string lastTen = token.Substring(token.Length - 10);
             return $"github_pat_***{lastTen}";
         }
@@ -666,29 +664,22 @@ namespace 翻译工具
 
         private void AppendOutput(string line)
         {
-            // Enqueue the line quickly and return. The timer will flush to UI to avoid flooding dispatcher queue
             if (line == null) return;
-            // Keep lines bounded in queue to avoid unbounded memory growth
             _outputQueue.Enqueue(line + Environment.NewLine);
-            // If queue grows too large, drop oldest entries
             const int maxQueue = 50_000;
             if (_outputQueue.Count > maxQueue)
             {
-                // try to dequeue some items
                 for (int i = 0; i < 1000 && _outputQueue.TryDequeue(out _); i++) { }
             }
         }
 
-        // 新增：清空日志输出与缓冲
+        // 清空日志输出与缓冲
         private void ClearOutput()
         {
             try
             {
-                // 清空 UI
                 txtOutput.Clear();
-                // 清空选择期间缓冲
                 _pendingWhileSelecting.Clear();
-                // 清空队列
                 while (_outputQueue.TryDequeue(out _)) { }
             }
             catch { }
@@ -701,7 +692,6 @@ namespace 翻译工具
                 if (_outputQueue.IsEmpty) return;
 
                 var sb = new StringBuilder();
-                // Dequeue up to a batch
                 for (int i = 0; i < 2048 && _outputQueue.TryDequeue(out var l); i++)
                 {
                     sb.Append(l);
@@ -709,12 +699,10 @@ namespace 翻译工具
 
                 if (sb.Length == 0) return;
 
-                // If user is selecting, buffer pending and do not update UI to avoid fighting selection
                 var userSelecting = txtOutput.IsFocused && txtOutput.SelectionLength > 0;
                 if (userSelecting)
                 {
                     _pendingWhileSelecting.Append(sb.ToString());
-                    // If pending grows too big, truncate oldest
                     if (_pendingWhileSelecting.Length > MaxOutputChars)
                     {
                         _pendingWhileSelecting.Remove(0, _pendingWhileSelecting.Length - MaxOutputChars / 2);
@@ -722,27 +710,22 @@ namespace 翻译工具
                     return;
                 }
 
-                // Append pending buffer first
                 if (_pendingWhileSelecting.Length > 0)
                 {
                     sb.Insert(0, _pendingWhileSelecting.ToString());
                     _pendingWhileSelecting.Clear();
                 }
 
-                // Append to textbox
                 txtOutput.AppendText(sb.ToString());
 
-                // Trim if exceeds maximum
                 if (txtOutput.Text.Length > MaxOutputChars)
                 {
                     var keep = MaxOutputChars / 2;
-                    // keep last 'keep' characters
                     var newText = txtOutput.Text.Substring(txtOutput.Text.Length - keep);
                     txtOutput.Text = newText;
                     txtOutput.CaretIndex = txtOutput.Text.Length;
                 }
 
-                // Auto-scroll if not selecting
                 if (!(txtOutput.IsFocused && txtOutput.SelectionLength > 0))
                 {
                     txtOutput.ScrollToEnd();
@@ -750,7 +733,7 @@ namespace 翻译工具
             }
             catch
             {
-                // swallow
+                // ignore
             }
         }
 
@@ -779,19 +762,18 @@ namespace 翻译工具
                 btnConfirmLock.IsEnabled = false;
                 btnSubmitReview.IsEnabled = false;
                 txtPath.IsEnabled = false;
-                dgMods.IsEnabled = false; // 禁用列表操作
+                dgMods.IsEnabled = false;
             }
             catch { }
         }
 
         /// <summary>
-        /// 启用所有主要操作按钮。
+        /// 启用所有主要操作按钮（根据当前状态智能更新）。
         /// </summary>
         private void EnableAllButtons()
         {
             try
             {
-                // 不再直接启用所有按钮，而是根据当前 PR 状态智能更新
                 UpdateButtonStates();
             }
             catch { }
@@ -804,75 +786,51 @@ namespace 翻译工具
         {
             try
             {
-                // 查找当前用户锁定的 Mod
                 var myLockedMod = _modItems.FirstOrDefault(m => m.IsLockedByMe);
-                
-                // 检查是否有勾选的项
                 var hasSelectedItems = _modItems.Any(m => m.IsSelected && !m.IsLocked);
-                
+
                 if (myLockedMod == null)
                 {
-                    // 没有锁定的任务（不存在自身的开放PR）
-                    btnStart.IsEnabled = false; // 禁用开始翻译
-                    btnCommit.IsEnabled = false; // 禁用保存进度
+                    btnStart.IsEnabled = false;
+                    btnCommit.IsEnabled = false;
                     btnConfirmLock.IsEnabled = true;
-                    btnSubmitReview.IsEnabled = false; // 禁用提交审核
+                    btnSubmitReview.IsEnabled = false;
                     btnSubmitReview.Visibility = System.Windows.Visibility.Collapsed;
-                    dgMods.IsEnabled = true; // 启用列表
-                    SetCheckBoxesEnabled(true); // 启用复选框
+                    dgMods.IsEnabled = true;
+                    SetCheckBoxesEnabled(true);
                     _currentUserPRState = string.Empty;
-                    
-                    // 动态修改刷新按钮文本
-                    if (hasSelectedItems)
-                    {
-                        btnConfirmLock.Content = "领取任务";
-                    }
-                    else
-                    {
-                        btnConfirmLock.Content = "刷新任务";
-                    }
+
+                    btnConfirmLock.Content = hasSelectedItems ? "领取任务" : "刷新任务";
                     return;
                 }
 
-                // 获取当前用户的 PR 状态
                 _currentUserPRState = myLockedMod.PRReviewState ?? string.Empty;
                 var normalizedState = NormalizePrState(_currentUserPRState);
 
                 if (normalizedState == "draft" || string.IsNullOrWhiteSpace(normalizedState))
                 {
-                    // Draft 状态：所有按钮可用，显示"提交审核"
                     btnStart.IsEnabled = true;
                     btnCommit.IsEnabled = true;
                     btnConfirmLock.IsEnabled = true;
                     btnSubmitReview.IsEnabled = true;
                     btnSubmitReview.Visibility = System.Windows.Visibility.Visible;
                     btnSubmitReview.Content = "提交审核";
-                    dgMods.IsEnabled = true; // 启用列表
-                    SetCheckBoxesEnabled(true); // 启用复选框
-                    
-                    // 动态修改刷新按钮文本
-                    if (hasSelectedItems)
-                    {
-                        btnConfirmLock.Content = "追加任务";
-                    }
-                    else
-                    {
-                        btnConfirmLock.Content = "刷新任务";
-                    }
+                    dgMods.IsEnabled = true;
+                    SetCheckBoxesEnabled(true);
+
+                    btnConfirmLock.Content = hasSelectedItems ? "追加任务" : "刷新任务";
                 }
-                else // Ready for Review 或其他状态
+                else
                 {
-                    // Ready for Review 状态：只有刷新和撤回修改按钮可用
                     btnStart.IsEnabled = false;
                     btnCommit.IsEnabled = false;
-                    btnConfirmLock.IsEnabled = true; // 刷新按钮始终可用
+                    btnConfirmLock.IsEnabled = true;
                     btnSubmitReview.IsEnabled = true;
                     btnSubmitReview.Visibility = System.Windows.Visibility.Visible;
                     btnSubmitReview.Content = "撤回修改";
-                    dgMods.IsEnabled = true; // 保持列表可用（可排序、浏览）
-                    SetCheckBoxesEnabled(false); // 仅禁用复选框
-                    
-                    // Ready for Review 状态下，刷新按钮只显示"刷新任务"
+                    dgMods.IsEnabled = true;
+                    SetCheckBoxesEnabled(false);
+
                     btnConfirmLock.Content = "刷新任务";
                 }
             }
@@ -919,18 +877,6 @@ namespace 翻译工具
             return sb.ToString().ToLowerInvariant();
         }
 
-        // 判断是否为空行或注释行
-        private static bool IsNullOrCommentLine(string line)
-        {
-            return string.IsNullOrWhiteSpace(line) || 
-                   line.TrimStart().StartsWith("//") || 
-                   line.TrimStart().StartsWith("#") || 
-                   line.TrimStart().StartsWith("/*") || 
-                   line.TrimStart().StartsWith("*") || 
-                   line.TrimStart().StartsWith("*/") || 
-                   line.TrimStart().StartsWith("--");
-        }
-
         // AES-256-CBC 加密，返回 Base64( IV + ciphertext )
         private static string EncryptAes(string plainText, byte[] key)
         {
@@ -964,7 +910,7 @@ namespace 翻译工具
             aes.Mode = CipherMode.CBC;
             aes.Padding = PaddingMode.PKCS7;
 
-            var ivLength = aes.BlockSize / 8; // usually 16
+            var ivLength = aes.BlockSize / 8;
             if (combined.Length < ivLength) throw new ArgumentException("Invalid cipher text");
             var iv = new byte[ivLength];
             Array.Copy(combined, 0, iv, 0, ivLength);

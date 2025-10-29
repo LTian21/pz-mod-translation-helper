@@ -7,7 +7,7 @@ using System.Windows.Threading;
 
 namespace 翻译工具.Models
 {
-    // ====== 翻译数据模型 ======
+    // 翻译条目状态
     public enum TranslationItemStatus
     {
         Untranslated,
@@ -23,7 +23,7 @@ namespace 翻译工具.Models
         public List<string> Comment { get; set; } = new();
     }
 
-    // ====== 任务列表数据模型 ======
+    // 任务列表数据文件结构
     public class TranslationInfoFile
     {
         public string? ExportTime { get; set; }
@@ -46,7 +46,7 @@ namespace 翻译工具.Models
         public DateTime ExpireTime { get; set; }
         public bool IsCIPassed { get; set; }
         public int ApprovalCount { get; set; }
-        public string PRReviewState { get; set; } = string.Empty; // 新增：PR 状态
+        public string PRReviewState { get; set; } = string.Empty; // PR 状态
         public DateTime RefreshTime { get; set; }
     }
 
@@ -60,7 +60,7 @@ namespace 翻译工具.Models
 
         static ModItemView()
         {
-            // 全局定时器：每秒刷新一次所有 ModItemView 实例的过期状态
+            // 全局定时器：每秒刷新一次各行的过期状态
             _refreshTimer.Interval = TimeSpan.FromSeconds(1);
             _refreshTimer.Tick += (s, e) =>
             {
@@ -87,15 +87,12 @@ namespace 翻译工具.Models
             ExpireTime = r.ExpireTime;
             IsCIPassed = r.IsCIPassed;
             ApprovalCount = r.ApprovalCount;
-            PRReviewState = r.PRReviewState ?? string.Empty; // 新增：保存 PR 状态
+            PRReviewState = r.PRReviewState ?? string.Empty;
             RefreshTime = r.RefreshTime;
             _currentUser = currentUser ?? string.Empty;
-            _isCheckBoxEnabled = true; // 默认启用复选框
+            _isCheckBoxEnabled = true; // 默认允许复选
 
-            // 初始化过期状态
             UpdateExpiredStatus();
-
-            // 注册到全局实例列表
             _allInstances.Add(this);
         }
 
@@ -116,7 +113,7 @@ namespace 翻译工具.Models
 
         private void OnSelectionChanged()
         {
-            // 通知主窗口选择状态已改变
+            // 通知主窗口更新按钮状态
             System.Windows.Application.Current?.Dispatcher.BeginInvoke(new Action(() =>
             {
                 if (System.Windows.Application.Current?.MainWindow is MainWindow mainWindow)
@@ -142,32 +139,30 @@ namespace 翻译工具.Models
         public DateTime ExpireTime { get; }
         public bool IsCIPassed { get; }
         public int ApprovalCount { get; }
-        public string PRReviewState { get; } // 新增：公开给绑定使用
+        public string PRReviewState { get; }
         public DateTime RefreshTime { get; }
 
-        // 过期状态（可观察属性）
+        // 计算属性
         public bool IsExpired => _isExpired;
         private bool _isExpired;
 
-        // 派生属性用于行样式
         public bool IsLockedByMe => IsLocked && !string.IsNullOrWhiteSpace(_currentUser) && string.Equals(LockedBy, _currentUser, StringComparison.OrdinalIgnoreCase);
         public bool IsLockedByOthers => IsLocked && !IsLockedByMe;
 
-        // 新增：任务状态（根据 PRReviewState 决定）。没有 PR 则为空字符串。
+        // 任务状态（基于 PRReviewState 与审批数）
         public string TaskStatus
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(PRReviewState)) return string.Empty; // 没有 PR
+                if (string.IsNullOrWhiteSpace(PRReviewState)) return string.Empty;
                 var norm = NormalizePrState(PRReviewState);
-                if (norm == "draft") return "翻译中";
+                if (norm == "draft") return "草稿中";
                 if (norm == "readyforreview")
                 {
-                    return ApprovalCount > 0 ? "已批准" : "已提交";
+                    return ApprovalCount > 0 ? "已批准" : "待审核";
                 }
                 if (norm == "approved") return "已批准";
-                // 其他状态一律视为已提交
-                return "已提交";
+                return "待审核";
             }
         }
 

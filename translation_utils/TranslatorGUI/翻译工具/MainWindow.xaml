@@ -10,7 +10,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <!-- 上半部分（列表） -->
+            <RowDefinition Height="*" />
+            <!-- 可拖拽分隔条 -->
             <RowDefinition Height="Auto" />
+            <!-- 下半部分（输出框） -->
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -34,130 +38,145 @@
             <Button x:Name="btnSubmitReview" Content="提交审核" Width="100" Click="btnSubmitReview_Click" />
         </StackPanel>
 
-        <!-- 任务列表与操作按钮 -->
-        <DockPanel Grid.Row="2" LastChildFill="True" Margin="0,0,0,8">
-            <DataGrid x:Name="dgMods"
-                      AutoGenerateColumns="False"
-                      CanUserSortColumns="True"
-                      IsReadOnly="False"
-                      SelectionMode="Extended"
-                      SelectionUnit="FullRow"
-                      HeadersVisibility="Column"
-                      GridLinesVisibility="Horizontal"
-                      MinHeight="220" Height="399">
-                <!-- 保持选中和悬停时也显示行背景色 -->
-                <DataGrid.Resources>
-                    <SolidColorBrush x:Key="RowSelectionBrush" Color="#66000000"/>
-                </DataGrid.Resources>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="SnapsToDevicePixels" Value="True"/>
-                        <Setter Property="ValidationErrorTemplate" Value="{x:Null}"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="DataGridRow">
-                                    <Border x:Name="DGR_Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
-                                        <SelectiveScrollingGrid>
-                                            <SelectiveScrollingGrid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </SelectiveScrollingGrid.ColumnDefinitions>
-                                            <SelectiveScrollingGrid.RowDefinitions>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </SelectiveScrollingGrid.RowDefinitions>
-                                            <DataGridCellsPresenter Grid.Column="1" ItemsPanel="{TemplateBinding ItemsPanel}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                            <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1" Visibility="{TemplateBinding DetailsVisibility}"/>
-                                            <DataGridRowHeader Grid.RowSpan="2" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Visibility="Hidden"/>
-                                        </SelectiveScrollingGrid>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <!-- 不改变背景以保留自定义颜色 -->
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter TargetName="DGR_Border" Property="BorderBrush" Value="{StaticResource RowSelectionBrush}"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <!-- 超时优先：深红色 -->
-                            <DataTrigger Binding="{Binding IsExpired}" Value="True">
-                                <Setter Property="Background" Value="#FFE57373"/>
-                            </DataTrigger>
-                            <!-- 自己锁定但未超时：深绿色 -->
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsExpired}" Value="False"/>
-                                    <Condition Binding="{Binding IsLockedByMe}" Value="True"/>
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Background" Value="#FF81C784"/>
-                            </MultiDataTrigger>
-                            <!-- 他人锁定但未超时：深黄色 -->
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsExpired}" Value="False"/>
-                                    <Condition Binding="{Binding IsLockedByOthers}" Value="True"/>
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Background" Value="#FFFFD54F"/>
-                            </MultiDataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </DataGrid.RowStyle>
-                <DataGrid.Columns>
-                    <!-- 选择：已锁定则不显示选择框 -->
-                    <DataGridTemplateColumn Header="选择" Width="40">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                          IsEnabled="{Binding IsCheckBoxEnabled}">
-                                    <CheckBox.Style>
-                                        <Style TargetType="CheckBox">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsLocked}" Value="True">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </CheckBox.Style>
-                                </CheckBox>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+        <!-- 任务列表（可伸缩上半区域） -->
+        <DataGrid x:Name="dgMods"
+                  Grid.Row="2"
+                  Margin="0,0,0,0"
+                  AutoGenerateColumns="False"
+                  CanUserSortColumns="True"
+                  IsReadOnly="False"
+                  SelectionMode="Extended"
+                  SelectionUnit="FullRow"
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="Horizontal"
+                  MinHeight="120">
+            <!-- 保持选中和悬停时也显示行背景色 -->
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="RowSelectionBrush" Color="#66000000"/>
+            </DataGrid.Resources>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="SnapsToDevicePixels" Value="True"/>
+                    <Setter Property="ValidationErrorTemplate" Value="{x:Null}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="DataGridRow">
+                                <Border x:Name="DGR_Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                    <SelectiveScrollingGrid>
+                                        <SelectiveScrollingGrid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </SelectiveScrollingGrid.ColumnDefinitions>
+                                        <SelectiveScrollingGrid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </SelectiveScrollingGrid.RowDefinitions>
+                                        <DataGridCellsPresenter Grid.Column="1" ItemsPanel="{TemplateBinding ItemsPanel}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        <DataGridDetailsPresenter Grid.Column="1" Grid.Row="1" Visibility="{TemplateBinding DetailsVisibility}"/>
+                                        <DataGridRowHeader Grid.RowSpan="2" SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" Visibility="Hidden"/>
+                                    </SelectiveScrollingGrid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <!-- 不改变背景以保留自定义颜色 -->
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="DGR_Border" Property="BorderBrush" Value="{StaticResource RowSelectionBrush}"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <!-- 超时优先：深红色 -->
+                        <DataTrigger Binding="{Binding IsExpired}" Value="True">
+                            <Setter Property="Background" Value="#FFE57373"/>
+                        </DataTrigger>
+                        <!-- 自己锁定但未超时：深绿色 -->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsExpired}" Value="False"/>
+                                <Condition Binding="{Binding IsLockedByMe}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Background" Value="#FF81C784"/>
+                        </MultiDataTrigger>
+                        <!-- 他人锁定但未超时：深黄色 -->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsExpired}" Value="False"/>
+                                <Condition Binding="{Binding IsLockedByOthers}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Background" Value="#FFFFD54F"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <!-- 选择：已锁定则不显示选择框 -->
+                <DataGridTemplateColumn Header="选择" Width="40">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      IsEnabled="{Binding IsCheckBoxEnabled}">
+                                <CheckBox.Style>
+                                    <Style TargetType="CheckBox">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsLocked}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </CheckBox.Style>
+                            </CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <DataGridTextColumn Binding="{Binding ModId, Mode=OneWay}" Header="MOD ID" Width="80" IsReadOnly="True" Foreground="Black"/>
-                    <DataGridTextColumn Binding="{Binding ModTitle, Mode=OneWay}" Header="MOD 名称" Width="160" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding Language, Mode=OneWay}" Header="语言" Width="30" IsReadOnly="True" Visibility="Hidden"/>
-                    <DataGridTextColumn Binding="{Binding TotalEntries, Mode=OneWay}" Header="总条目" Width="50" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding UntranslatedEntries, Mode=OneWay}" Header="待翻译" Width="50" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding TranslatedEntries, Mode=OneWay}" Header="待校对" Width="50" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding ApprovedEntries, Mode=OneWay}" Header="已校对" Width="50" IsReadOnly="True" Visibility="Hidden"/>
-                    <DataGridTextColumn Binding="{Binding TaskStatus, Mode=OneWay}" Header="任务状态" Width="80" IsReadOnly="True"/>
-                    <DataGridTextColumn Binding="{Binding LockedBy, Mode=OneWay}" Header="领取人" Width="80" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="锁定时间" Width="300" IsReadOnly="True" Visibility="Hidden">
-                        <DataGridTextColumn.Binding>
-                            <Binding Path="LockTime" Mode="OneWay" Converter="{StaticResource DateTimeDisplayConverter}"/>
-                        </DataGridTextColumn.Binding>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="过期时间" Width="200" IsReadOnly="True">
-                        <DataGridTextColumn.Binding>
-                            <Binding Path="ExpireTime" Mode="OneWay" Converter="{StaticResource DateTimeDisplayConverter}"/>
-                        </DataGridTextColumn.Binding>
-                    </DataGridTextColumn>
-                    <DataGridCheckBoxColumn Binding="{Binding IsCIPassed, Mode=OneWay}" Header="自动检查" Width="70" IsReadOnly="True" HeaderStringFormat="80"/>
-                    <DataGridTextColumn Binding="{Binding ApprovalCount, Mode=OneWay}" Header="校对人数" Width="80" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="最后刷新时间" Width="180" IsReadOnly="True">
-                        <DataGridTextColumn.Binding>
-                            <Binding Path="RefreshTime" Mode="OneWay" Converter="{StaticResource DateTimeDisplayConverter}"/>
-                        </DataGridTextColumn.Binding>
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </DockPanel>
+                <DataGridTextColumn Binding="{Binding ModId, Mode=OneWay}" Header="MOD ID" Width="80" IsReadOnly="True" Foreground="Black"/>
+                <DataGridTextColumn Binding="{Binding ModTitle, Mode=OneWay}" Header="MOD 名称" Width="160" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Language, Mode=OneWay}" Header="语言" Width="30" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding TotalEntries, Mode=OneWay}" Header="总条目" Width="50" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding UntranslatedEntries, Mode=OneWay}" Header="待翻译" Width="50" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TranslatedEntries, Mode=OneWay}" Header="待校对" Width="50" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ApprovedEntries, Mode=OneWay}" Header="已校对" Width="50" IsReadOnly="True" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding TaskStatus, Mode=OneWay}" Header="任务状态" Width="80" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding LockedBy, Mode=OneWay}" Header="领取人" Width="80" IsReadOnly="True"/>
+                <DataGridTextColumn Header="锁定时间" Width="300" IsReadOnly="True" Visibility="Hidden">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="LockTime" Mode="OneWay" Converter="{StaticResource DateTimeDisplayConverter}"/>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="过期时间" Width="200" IsReadOnly="True">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="ExpireTime" Mode="OneWay" Converter="{StaticResource DateTimeDisplayConverter}"/>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridCheckBoxColumn Binding="{Binding IsCIPassed, Mode=OneWay}" Header="自动检查" Width="70" IsReadOnly="True" HeaderStringFormat="80"/>
+                <DataGridTextColumn Binding="{Binding ApprovalCount, Mode=OneWay}" Header="校对人数" Width="80" IsReadOnly="True"/>
+                <DataGridTextColumn Header="最后刷新时间" Width="180" IsReadOnly="True">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="RefreshTime" Mode="OneWay" Converter="{StaticResource DateTimeDisplayConverter}"/>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
-        <TextBox x:Name="txtOutput" Grid.Row="3" Margin="0,6,0,0" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True" />
+        <!-- 分隔条：允许拖动调整上下区域高度 -->
+        <GridSplitter Grid.Row="3"
+                      Height="6"
+                      HorizontalAlignment="Stretch"
+                      Background="#FFE0E0E0"
+                      ShowsPreview="True"
+                      Cursor="SizeNS"/>
+
+        <TextBox x:Name="txtOutput"
+                 Grid.Row="4"
+                 Margin="0,6,0,0"
+                 VerticalScrollBarVisibility="Auto"
+                 AcceptsReturn="True"
+                 TextWrapping="Wrap"
+                 IsReadOnly="True"
+                 MinHeight="100" />
 
     </Grid>
 </Window>
