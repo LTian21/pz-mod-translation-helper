@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-29 12:22:14 UTC+08:00`*
+*最后更新于：`2025-10-30 12:18:03 UTC+08:00`*
 
 ---
 
@@ -30,9 +30,9 @@
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
 | Trap Manager | 3566766862 | 159 | 3 | 1 | 162 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
+| Detailed Skill Tooltips | 3572846242 | 125 | 0 | 0 | 125 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
 | Pocket Kittens (B42) | 3568029240 | 118 | 16 | 7 | 134 |
-| Detailed Skill Tooltips | 3572846242 | 114 | 0 | 0 | 114 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
 | Lillie's Meal Combat Individual Ration Mod | 3557845788 | 106 | 0 | 0 | 106 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
@@ -42,6 +42,7 @@
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
 | Christmas Time [b41/42 demo] | 2903870217 | 81 | 53 | 53 | 134 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
+| that DAMN Library | 3171167894 | 77 | 383 | 0 | 460 |
 | The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 77 | 1 | 1 | 78 |
 | [B42] Useful Barrels | 3436537035 | 77 | 1 | 0 | 78 |
 | Braven's Achievements | 3051277957 | 76 | 1 | 0 | 77 |
@@ -51,7 +52,6 @@
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 0 | 69 |
 | SCP - Foundation pack | 3580511016 | 66 | 0 | 0 | 66 |
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
-| that DAMN Library | 3171167894 | 63 | 383 | 0 | 446 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | Realistic Car Physics [B42] | 3559765660 | 62 | 0 | 0 | 62 |
 | ST Additions - Pry Open | 3579640010 | 60 | 93 | 23 | 153 |
@@ -212,7 +212,6 @@
 | Know Your Calories! | 3257953004 | 1 | 22 | 0 | 23 |
 | Light Switch Plus(B42) | 3418843205 | 1 | 28 | 0 | 29 |
 | Manage Containers | 2650547917 | 1 | 6 | 0 | 7 |
-| Map Symbol Size Slider | 2734705913 | 1 | 0 | 0 | 1 |
 | Melee Weapon Upgrade | 3394923321 | 1 | 1075 | 0 | 1076 |
 | [B42] Ogrim Mod's - My Own Well | 3549290115 | 1 | 14 | 0 | 15 |
 | Reduced sickness inside the vehicle | 3405033818 | 1 | 8 | 0 | 9 |
@@ -451,6 +450,7 @@
 | [B42] Make Gunpowder from Fertilizer | 3392188086 | 0 | 2 | 0 | 2 |
 | Mandarin's Bedding | 3431960478 | 0 | 6 | 0 | 6 |
 | Map Mod Manager (41 and 42) | 3360392628 | 0 | 55 | 0 | 55 |
+| Map Symbol Size Slider | 2734705913 | 0 | 0 | 0 | 1 |
 | Metal Spears | 2927603127 | 0 | 8 | 1 | 8 |
 | Mexiox's - Mexican Firearm Weapons | 2882852956 | 0 | 70 | 22 | 70 |
 | Military Ponchos: Reloaded | 3439247001 | 0 | 65 | 11 | 65 |
