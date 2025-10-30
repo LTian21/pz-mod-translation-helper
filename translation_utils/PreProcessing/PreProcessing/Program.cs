@@ -1,8 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.IO;
+using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace PreProcessing
 {
@@ -43,6 +44,14 @@ namespace PreProcessing
                 Console.WriteLine($"::warning:: Formatting error correction file does not exist or corrupted: {fixConfigPath}");
             }
 
+            // Load mod name mappings from JSON file
+            var modNameMapping = ReadModNameFile(repoDir);
+            if (modNameMapping == null)
+            {
+                Console.WriteLine($"::warning:: Failed to load mod name mappings, will use folder names as fallback");
+                modNameMapping = new Dictionary<string, string>();
+            }
+
             // 拼接 data\output_files 路径
             string outputFilesPath = Path.Combine(repoDir, "data", "output_files");
 
@@ -66,9 +75,15 @@ namespace PreProcessing
                     Console.WriteLine($"::warning:: file={subDir}. Wrong directory format.");
                     continue;
                 }
-                string modName = dirName.Substring(0, lastUnderscoreIndex);
+                
                 string modId = dirName.Substring(lastUnderscoreIndex + 1);
-                modInfos[modId] = modName;
+                modInfos[modId] = modNameMapping.TryGetValue(modId, out var name) ? name : "";
+                
+                // Use mod name from mapping file if available, otherwise use folder name
+                if (string.IsNullOrEmpty(modInfos[modId]))
+                {
+                    Console.WriteLine($"::warning:: Mod ID {modId} not found in mapping file.");
+                }
 
                 //读取En_output.txt文件
                 string enFilePath = Path.Combine(subDir, "EN_output.txt");
@@ -460,7 +475,7 @@ namespace PreProcessing
             {
                 foreach (var entry in modTranslationsCopy[modId])
                 {
-                    //增加分隔符，虽然运算量增大，但能够做到保证唯一性的同时还可以反向拆分成key和文本，暂时用不到，可能后续会有用处，即便永远用不到也无妨
+                    //增加分隔符，虽然运算量增大，但能够做到保证唯一性的同時還可以反向拆分成key和文本，暫時用不到，可能後續會有用處，即便永遠用不到也無妨
                     string uniqueKey = entry.Key + SEPARATOR + entry.Value.OriginalText;
                     if (!uniqueEntries.Contains(uniqueKey))
                     {
@@ -836,6 +851,51 @@ namespace PreProcessing
         static bool IsNullOrCommentLine(string line)
         {
             return string.IsNullOrWhiteSpace(line) || line.TrimStart().StartsWith("//") || line.TrimStart().StartsWith("#") || line.TrimStart().StartsWith("/*") || line.TrimStart().StartsWith("*") || line.TrimStart().StartsWith("*/") || line.TrimStart().StartsWith("--");
+        }
+
+        // =========================
+        // 读取MOD名称映射文件
+        // =========================
+        static Dictionary<string, string>? ReadModNameFile(string repoDir)
+        {
+            Dictionary<string, string>? mapping = null;
+            string filePath = Path.Combine(repoDir, "translation_utils", "mod_id_name_map.json");
+            //检查文件是否存在，不存在则报错
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine($"[警告] MOD名称文件不存在: {filePath}");
+                return mapping;
+            }
+
+            try
+            {
+                // 读取 JSON 文件内容
+                string jsonContent = File.ReadAllText(filePath, Encoding.UTF8);
+
+                // 反序列化为字典
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    TypeInfoResolver = new System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver()
+                };
+
+                mapping = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonContent, options);
+
+                if (mapping != null)
+                {
+                    Console.WriteLine($"[成功] 已读取 {mapping.Count} 个MOD名称映射");
+                }
+                else
+                {
+                    Console.WriteLine("[警告] MOD名称文件解析结果为空");
+                }
+                return mapping;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[警告] 读取MOD名称文件失败: {ex.Message}");
+                return mapping;
+            }
         }
     }
 

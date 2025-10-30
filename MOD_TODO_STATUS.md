@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-27 12:26:11 UTC+08:00`*
+*最后更新于：`2025-10-30 12:18:03 UTC+08:00`*
 
 ---
 
@@ -30,18 +30,19 @@
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
 | Trap Manager | 3566766862 | 159 | 3 | 1 | 162 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
+| Detailed Skill Tooltips | 3572846242 | 125 | 0 | 0 | 125 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
 | Pocket Kittens (B42) | 3568029240 | 118 | 16 | 7 | 134 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
 | Lillie's Meal Combat Individual Ration Mod | 3557845788 | 106 | 0 | 0 | 106 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
-| Detailed Skill Tooltips | 3572846242 | 97 | 0 | 0 | 97 |
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
 | Lifestyle: Hobbies | 3403870858 | 84 | 4083 | 28 | 4167 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
 | Christmas Time [b41/42 demo] | 2903870217 | 81 | 53 | 53 | 134 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
+| that DAMN Library | 3171167894 | 77 | 383 | 0 | 460 |
 | The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 77 | 1 | 1 | 78 |
 | [B42] Useful Barrels | 3436537035 | 77 | 1 | 0 | 78 |
 | Braven's Achievements | 3051277957 | 76 | 1 | 0 | 77 |
@@ -51,7 +52,6 @@
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 0 | 69 |
 | SCP - Foundation pack | 3580511016 | 66 | 0 | 0 | 66 |
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
-| that DAMN Library | 3171167894 | 63 | 383 | 0 | 446 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | Realistic Car Physics [B42] | 3559765660 | 62 | 0 | 0 | 62 |
 | ST Additions - Pry Open | 3579640010 | 60 | 93 | 23 | 153 |
@@ -74,7 +74,7 @@
 | [B42] Intuitive Crafting | 3486217110 | 39 | 3 | 3 | 42 |
 | Minimal Display Bars + Nutritions + Discomfort [B41/B42] | 3388844542 | 38 | 11 | 0 | 49 |
 | Custom Weight | 3391228479 | 37 | 51 | 8 | 88 |
-| Smart Radial Menu | 3494108029 | 37 | 0 | 0 | 37 |
+| Smart Radial Menu | 3494108029 | 37 | 1 | 0 | 38 |
 | Caster Plus Fishing Mod | 3457003463 | 36 | 209 | 0 | 245 |
 | Evolving Traits World (ETW) [B41/B42] - alternative to "Dynamic Traits" | 2914075159 | 36 | 340 | 1 | 376 |
 | Table Saw[B42] | 3540297822 | 36 | 3 | 1 | 39 |
@@ -85,11 +85,13 @@
 | [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 4 | 4 | 33 |
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
+| Military Tool Kit | 2705406713 | 26 | 22 | 1 | 48 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 26 | 10 | 0 | 36 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
 | [B42] Week One NPC | 3403180543 | 23 | 808 | 0 | 831 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
 | Headwear Won't Fall | 3400293227 | 23 | 0 | 0 | 23 |
+| Legendary DuffelBag | 3558839307 | 23 | 26 | 0 | 49 |
 | Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
 | Random Zombies | 2818577583 | 21 | 0 | 0 | 21 |
 | Fancy Lanterns [B42 Compatible] | 3267733558 | 21 | 47 | 0 | 68 |
@@ -97,12 +99,12 @@
 | Easy Drop'n'Loot | 2871469707 | 20 | 0 | 0 | 20 |
 | Common Sense | 2875848298 | 18 | 29 | 0 | 48 |
 | Equipment UI - Paper Doll Equipment Interface [B42/41] | 2950902979 | 18 | 0 | 0 | 18 |
-| Legendary DuffelBag | 3558839307 | 18 | 11 | 0 | 29 |
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
 | [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 17 | 0 | 0 | 17 |
 | [B42] Knox Event Expanded NPC mod [alpha v0.3.14-1] | 3397396843 | 17 | 577 | 42 | 594 |
 | [B42]Project RV Interior | 3543229299 | 17 | 0 | 0 | 17 |
+| U.S. M113 APC by Papa_Chad | 2705655822 | 17 | 8 | 2 | 25 |
 | All In One Tool! | 3589758717 | 16 | 15 | 0 | 31 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
 | [B42] Mod Manager | 3567084868 | 16 | 0 | 0 | 16 |
@@ -116,7 +118,9 @@
 | Low Condition Guns [B41/B42] | 3579180724 | 11 | 0 | 0 | 11 |
 | Has Been Read | 2544353492 | 11 | 45 | 0 | 56 |
 | Stairs Alert | 3044807092 | 11 | 3 | 0 | 14 |
+| U.S. M998 Humvee by Papa_Chad | 3554424111 | 11 | 28 | 0 | 39 |
 | [J&G] Trauma Responder Uniform [B42/41] | 3443982326 | 11 | 46 | 0 | 63 |
+| DFMFoodMod | 3406694220 | 10 | 83 | 4 | 94 |
 | [B41/B42] I Don't Need A Lighter | 2714198296 | 10 | 0 | 0 | 10 |
 | Street Smarts | 3511535258 | 10 | 11 | 2 | 21 |
 | Undying Zombies (Immersive Respawn Replacement) | 3555199477 | 10 | 0 | 0 | 10 |
@@ -126,12 +130,11 @@
 | [B41 & B42] Throw your bag across | 3391902125 | 9 | 0 | 0 | 9 |
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 9 | 45 | 2 | 55 |
 | Legendary Satchel | 3560352772 | 8 | 17 | 1 | 25 |
-| Military Tool Kit | 2705406713 | 8 | 23 | 1 | 31 |
 | Mod Load Order Sorter [b42] | 3423660713 | 8 | 34 | 23 | 42 |
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
-| DFMFoodMod | 3406694220 | 7 | 83 | 4 | 91 |
 | [B42] Functional Gutters | 3439305933 | 7 | 46 | 0 | 53 |
+| U.S. M548 Cargo Carrier by Papa_Chad | 3424497614 | 7 | 10 | 0 | 17 |
 | '85 Buick LeSabre | 3418252689 | 6 | 17 | 0 | 23 |
 | Ammo Maker | 2788256295 | 6 | 673 | 31 | 679 |
 | Project Fallout: GunRunner | 3434691822 | 6 | 29 | 0 | 35 |
@@ -209,7 +212,6 @@
 | Know Your Calories! | 3257953004 | 1 | 22 | 0 | 23 |
 | Light Switch Plus(B42) | 3418843205 | 1 | 28 | 0 | 29 |
 | Manage Containers | 2650547917 | 1 | 6 | 0 | 7 |
-| Map Symbol Size Slider | 2734705913 | 1 | 0 | 0 | 1 |
 | Melee Weapon Upgrade | 3394923321 | 1 | 1075 | 0 | 1076 |
 | [B42] Ogrim Mod's - My Own Well | 3549290115 | 1 | 14 | 0 | 15 |
 | Reduced sickness inside the vehicle | 3405033818 | 1 | 8 | 0 | 9 |
@@ -225,6 +227,7 @@
 | [Project Fallout] The Beginning | 3461117277 | 1 | 27 | 3 | 28 |
 | [B42] The Defiler from DR2 | 3492621786 | 1 | 3 | 0 | 4 |
 | The Last of Us: Factions & Gear [B41/B42] | 3348036710 | 1 | 106 | 18 | 107 |
+| [B41/B42] Toughness Skill | 3545533939 | 1 | 20 | 0 | 21 |
 | Training Target | 3417621776 | 1 | 28 | 0 | 29 |
 | Traits Purchase System | 3211693903 | 1 | 13 | 0 | 14 |
 | True Crawl 3.0 - Fixed [B42] | 3410989950 | 1 | 10 | 6 | 11 |
@@ -447,6 +450,7 @@
 | [B42] Make Gunpowder from Fertilizer | 3392188086 | 0 | 2 | 0 | 2 |
 | Mandarin's Bedding | 3431960478 | 0 | 6 | 0 | 6 |
 | Map Mod Manager (41 and 42) | 3360392628 | 0 | 55 | 0 | 55 |
+| Map Symbol Size Slider | 2734705913 | 0 | 0 | 0 | 1 |
 | Metal Spears | 2927603127 | 0 | 8 | 1 | 8 |
 | Mexiox's - Mexican Firearm Weapons | 2882852956 | 0 | 70 | 22 | 70 |
 | Military Ponchos: Reloaded | 3439247001 | 0 | 65 | 11 | 65 |
@@ -571,13 +575,9 @@
 | Tomb's Player Body - Goth Skin | 3531765630 | 0 | 145 | 0 | 145 |
 | Tomb's Player Body Overhaul | 3429790870 | 0 | 17 | 0 | 17 |
 | Toppling Zombies [B42] | 3425038705 | 0 | 13 | 0 | 13 |
-| [B41/B42] Toughness Skill | 3545533939 | 0 | 21 | 0 | 21 |
 | Tow Truck [B42] | 3446203945 | 0 | 24 | 10 | 24 |
 | True Music B42 | 3397198968 | 0 | 8 | 0 | 8 |
 | Ash's MK8 Trusty FireFighter Axe | 3400045232 | 0 | 5 | 0 | 5 |
-| U.S. M113 APC by Papa_Chad | 2705655822 | 0 | 13 | 3 | 13 |
-| U.S. M548 Cargo Carrier by Papa_Chad | 3424497614 | 0 | 16 | 6 | 16 |
-| U.S. M998 Humvee by Papa_Chad | 3554424111 | 0 | 40 | 12 | 40 |
 | [B42] UH-1B Helicopter | 3409723807 | 0 | 4 | 0 | 4 |
 | Unimogs B42 | 3399870407 | 0 | 1 | 0 | 1 |
 | Universal Gun Repair | 2899457928 | 0 | 70 | 0 | 70 |
