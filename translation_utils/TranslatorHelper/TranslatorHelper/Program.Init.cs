@@ -27,15 +27,25 @@ partial class Program
                 Console.WriteLine("克隆仓库中...");
                 try
                 {
+                    // 获取代理配置
+                    var proxyOptions = ProxyHelper.GetLibGit2ProxyOptions();
+                    
                     var cloneOptions = new CloneOptions();
                     cloneOptions.FetchOptions.CredentialsProvider = (url, user, cred) => new UsernamePasswordCredentials
                     {
                         Username = "x-access-token",
                         Password = config.Key
                     };
+                    
+                    // 如果有代理URL，则设置
+                    if (!string.IsNullOrEmpty(proxyOptions.Url))
+                    {
+                        cloneOptions.FetchOptions.ProxyOptions.Url = proxyOptions.Url;
+                    }
+                    
                     cloneOptions.FetchOptions.OnTransferProgress = progress =>
                     {
-                        Console.Write($"\r正在克隆仓库: 接收对象 {progress.ReceivedObjects}/{progress.TotalObjects}, 解析对象 {progress.IndexedObjects}/{progress.TotalObjects}, {progress.ReceivedBytes / 1024}KB     ");
+                        Console.Write($"\r正在克隆仓库: 接收对象 {progress.ReceivedObjects}/{progress.TotalObjects}, 索引对象 {progress.IndexedObjects}/{progress.TotalObjects}, {progress.ReceivedBytes / 1024}KB     ");
                         return true;
                     };
                     cloneOptions.OnCheckoutProgress = (path, completedSteps, totalSteps) =>
@@ -59,7 +69,7 @@ partial class Program
                 {
                     Console.WriteLine();
                     Console.WriteLine($"[错误] 克隆失败: {ex.Message}");
-                    Console.WriteLine("[提示] 检查网络连接、使用代理或稍后重试");
+                    Console.WriteLine("[提示] 请检查网络连接、使用代理或稍后重试");
                     return 1;
                 }
             }
@@ -70,7 +80,7 @@ partial class Program
                 if (!PullLatestChanges(repo, config))
                 {
                     Console.WriteLine("[错误] 拉取失败");
-                    Console.WriteLine("[提示] 检查网络连接、使用代理或稍后重试");
+                    Console.WriteLine("[提示] 请检查网络连接、使用代理或稍后重试");
                     return 1;
                 }
 
@@ -102,6 +112,9 @@ partial class Program
                         Console.WriteLine($"[提示] 本地分支 {translatorBranch} 已存在，直接切换到该分支");
                         Commands.Checkout(repo, existingLocal);
 
+                        // 获取代理配置
+                        var proxyOptions = ProxyHelper.GetLibGit2ProxyOptions();
+                        
                         var remote = repo.Network.Remotes["origin"];
                         var pushOptions = new PushOptions
                         {
@@ -111,9 +124,16 @@ partial class Program
                                 Password = config.Key
                             }
                         };
+                        
+                        // 如果有代理URL，则设置
+                        if (!string.IsNullOrEmpty(proxyOptions.Url))
+                        {
+                            pushOptions.ProxyOptions.Url = proxyOptions.Url;
+                        }
+                        
                         try
                         {
-                            Console.WriteLine($"[提示] 远程分支 origin/{translatorBranch} 不存在，正在推送本地分支到远端以创建...");
+                            Console.WriteLine($"[提示] 远程分支 origin/{translatorBranch} 不存在，正在推送本地分支到远程仓库创建...");
                             repo.Network.Push(remote, $"refs/heads/{translatorBranch}", pushOptions);
                             var pushedRemoteBranch = repo.Branches[$"origin/{translatorBranch}"];
                             if (pushedRemoteBranch != null)
@@ -122,12 +142,12 @@ partial class Program
                                     b => b.Remote = "origin",
                                     b => b.UpstreamBranch = pushedRemoteBranch.CanonicalName);
                             }
-                            Console.WriteLine($"[成功] 已将本地分支 {translatorBranch} 推送到远远程并设置为上游分支");
+                            Console.WriteLine($"[成功] 已将本地分支 {translatorBranch} 推送到远程并设置为跟踪分支");
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine($"[错误] 将本地分支推送到远端失败: {ex.Message}");
-                            Console.WriteLine("[提示] 请确保 PAT 有推送权限，并检查网络或仓库权限设置");
+                            Console.WriteLine($"[错误] 推送本地分支到远程失败: {ex.Message}");
+                            Console.WriteLine("[提示] 请确认 PAT 具有写权限，或检查网络、仓库权限设置");
                             return 1;
                         }
                     }
@@ -135,6 +155,10 @@ partial class Program
                     {
                         var newBranch = repo.CreateBranch(translatorBranch);
                         Commands.Checkout(repo, newBranch);
+                        
+                        // 获取代理配置
+                        var proxyOptions = ProxyHelper.GetLibGit2ProxyOptions();
+                        
                         var remote = repo.Network.Remotes["origin"];
                         var pushOptions = new PushOptions
                         {
@@ -144,6 +168,13 @@ partial class Program
                                 Password = config.Key
                             }
                         };
+                        
+                        // 如果有代理URL，则设置
+                        if (!string.IsNullOrEmpty(proxyOptions.Url))
+                        {
+                            pushOptions.ProxyOptions.Url = proxyOptions.Url;
+                        }
+                        
                         try
                         {
                             repo.Network.Push(remote, $"refs/heads/{translatorBranch}", pushOptions);
@@ -152,7 +183,7 @@ partial class Program
                         catch (Exception ex)
                         {
                             Console.WriteLine($"[错误] 推送分支失败: {ex.Message}");
-                            Console.WriteLine("[提示] 请确保 PAT 有推送权限，并检查网络或仓库权限设置");
+                            Console.WriteLine("[提示] 请确认 PAT 具有写权限，或检查网络、仓库权限设置");
                             return 1;
                         }
                     }

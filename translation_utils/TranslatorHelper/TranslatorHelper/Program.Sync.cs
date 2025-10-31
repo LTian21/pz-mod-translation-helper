@@ -17,7 +17,7 @@ partial class Program
 
             if (!Directory.Exists(config.LocalPath) || !LibGit2Sharp.Repository.IsValid(config.LocalPath))
             {
-                Console.WriteLine("[错误] 本地仓库不存在，请先执行 init 操作");
+                Console.WriteLine("[错误] 本地仓库不存在，请先执行 init 命令");
                 return 1;
             }
 
@@ -27,9 +27,12 @@ partial class Program
             var githubRepo = await github.Repository.Get(owner, repoName);
             string defaultBranch = githubRepo.DefaultBranch;
 
-            Console.WriteLine("获取远程仓库最新信息...");
+            Console.WriteLine("拉取远程仓库最新信息...");
             try
             {
+                // 获取代理配置
+                var proxyOptions = ProxyHelper.GetLibGit2ProxyOptions();
+                
                 var fetchOptions = new FetchOptions
                 {
                     CredentialsProvider = (url, user, cred) => new UsernamePasswordCredentials
@@ -38,6 +41,12 @@ partial class Program
                         Password = config.Key
                     }
                 };
+                
+                // 如果有代理URL，则设置
+                if (!string.IsNullOrEmpty(proxyOptions.Url))
+                {
+                    fetchOptions.ProxyOptions.Url = proxyOptions.Url;
+                }
 
                 var remote = repo.Network.Remotes["origin"];
                 var refSpecs = remote.FetchRefSpecs.Select(x => x.Specification);
@@ -46,8 +55,8 @@ partial class Program
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[错误] 获取远程信息失败: {ex.Message}");
-                Console.WriteLine("[提示] 检查网络连接或稍后重试");
+                Console.WriteLine($"[错误] 拉取远程信息失败: {ex.Message}");
+                Console.WriteLine("[提示] 请检查网络连接或稍后重试");
                 return 1;
             }
 
@@ -100,12 +109,12 @@ partial class Program
             }
             else
             {
-                Console.WriteLine("未发现开放的 PR，将重置用户分支到默认分支最新提交...");
+                Console.WriteLine("未发现开放的 PR，将以用户分支与默认分支最新提交...");
 
                 var remoteDefaultBranch = repo.Branches[$"origin/{defaultBranch}"];
                 if (remoteDefaultBranch == null)
                 {
-                    Console.WriteLine($"[错误] 找不到远程默认分支 origin/{defaultBranch}");
+                    Console.WriteLine($"[错误] 找不到远端默认分支 origin/{defaultBranch}");
                     return 1;
                 }
 
@@ -120,6 +129,9 @@ partial class Program
                     Console.WriteLine($"检测到远程分支 origin/{translatorBranch}，正在删除...");
                     try
                     {
+                        // 获取代理配置
+                        var proxyOptionsForDelete = ProxyHelper.GetLibGit2ProxyOptions();
+                        
                         var remote = repo.Network.Remotes["origin"];
                         var pushOptions = new PushOptions
                         {
@@ -129,13 +141,20 @@ partial class Program
                                 Password = config.Key
                             }
                         };
+                        
+                        // 如果有代理URL，则设置
+                        if (!string.IsNullOrEmpty(proxyOptionsForDelete.Url))
+                        {
+                            pushOptions.ProxyOptions.Url = proxyOptionsForDelete.Url;
+                        }
+                        
                         repo.Network.Push(remote, $":refs/heads/{translatorBranch}", pushOptions);
                         Console.WriteLine($"[成功] 已删除远程分支 origin/{translatorBranch}");
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"[警告] 删除远程分支失败: {ex.Message}");
-                        Console.WriteLine("[提示] 如果分支不存在则忽略此警告");
+                        Console.WriteLine("[提示] 该分支可能已被管理员删除");
                     }
                 }
 
@@ -158,7 +177,7 @@ partial class Program
                     Console.WriteLine($"[成功] 已删除本地分支 {translatorBranch}");
                 }
 
-                Console.WriteLine($"在 {defaultBranch} 最新提交上重新创建分支 {translatorBranch}...");
+                Console.WriteLine($"从 {defaultBranch} 最新提交创建新分支 {translatorBranch}...");
                 var newBranch = repo.CreateBranch(translatorBranch, remoteDefaultBranch.Tip);
                 Commands.Checkout(repo, newBranch, checkoutOptions);
                 Console.WriteLine($"[成功] 已创建并切换到新分支 {translatorBranch}");
@@ -166,6 +185,9 @@ partial class Program
                 Console.WriteLine("推送新分支到远程仓库...");
                 try
                 {
+                    // 获取代理配置
+                    var proxyOptionsForPush = ProxyHelper.GetLibGit2ProxyOptions();
+                    
                     var remote = repo.Network.Remotes["origin"];
                     var pushOptions = new PushOptions
                     {
@@ -175,6 +197,12 @@ partial class Program
                             Password = config.Key
                         }
                     };
+                    
+                    // 如果有代理URL，则设置
+                    if (!string.IsNullOrEmpty(proxyOptionsForPush.Url))
+                    {
+                        pushOptions.ProxyOptions.Url = proxyOptionsForPush.Url;
+                    }
 
                     repo.Network.Push(remote, $"refs/heads/{translatorBranch}", pushOptions);
                     var pushedRemoteBranch = repo.Branches[$"origin/{translatorBranch}"];
@@ -189,11 +217,11 @@ partial class Program
                 catch (Exception ex)
                 {
                     Console.WriteLine($"[错误] 推送分支失败: {ex.Message}");
-                    Console.WriteLine("[提示] 检查网络连接或稍后重试");
+                    Console.WriteLine("[提示] 请检查网络连接或稍后重试");
                     return 1;
                 }
 
-                Console.WriteLine($"[成功] 用户分支已重置为 {defaultBranch} 的最新状态");
+                Console.WriteLine($"[成功] 用户分支已重置为 {defaultBranch} 最新状态");
             }
 
             Console.WriteLine("[成功] 同步完成!");

@@ -1,0 +1,154 @@
+module Base
+{
+
+    model 84cadillacDeVilleWindshield
+    {
+        mesh = vehicles/Vehicles_84cadillacDeVille_Body|deville_sedan_windshield_f,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 84cadillacDeVilleWindshieldRear
+    {
+        mesh = vehicles/Vehicles_84cadillacDeVille_Body|84c-platform_sedan_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 84cadillacDeVilleWindshieldRearC
+    {
+        mesh = vehicles/Vehicles_84cadillacDeVille_Body|84c-platform_coupe_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle DEV84Windshields
+	{
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 84cadillacDeVilleWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.84gmCbodyWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = true,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = DAMNWindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 84cadillacDeVilleWindshieldRear,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.84gmCbodyRearWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle DEV84WindshieldsCoupe
+	{
+        template! = DEV84Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 84cadillacDeVilleWindshieldRearC,
+            }
+        }
+    }
+}

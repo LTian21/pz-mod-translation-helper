@@ -138,6 +138,10 @@ partial class Program
             {
                 Console.WriteLine("推送到远程仓库...");
                 var remote = repo.Network.Remotes["origin"];
+                
+                // 获取代理配置
+                var proxyOptions = ProxyHelper.GetLibGit2ProxyOptions();
+                
                 var pushOptions = new PushOptions
                 {
                     CredentialsProvider = (url, user, cred) => new UsernamePasswordCredentials
@@ -146,10 +150,22 @@ partial class Program
                         Password = config.Key
                     }
                 };
+                
+                // 如果有代理URL，则设置
+                if (!string.IsNullOrEmpty(proxyOptions.Url))
+                {
+                    pushOptions.ProxyOptions.Url = proxyOptions.Url;
+                }
+                
                 repo.Network.Push(remote, $"refs/heads/{translatorBranch}", pushOptions);
                 Console.WriteLine("[成功] 推送成功");
             }
-            catch (Exception ex) { Console.WriteLine($"[错误] 推送失败: {ex.Message}"); Console.WriteLine("[提示] 检查网络连接或稍后重试"); return 1; }
+            catch (Exception ex) 
+            { 
+                Console.WriteLine($"[错误] 推送失败: {ex.Message}"); 
+                Console.WriteLine("[提示] 请检查网络连接或稍后重试"); 
+                return 1; 
+            }
 
             try
             {

@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-30 12:18:03 UTC+08:00`*
+*最后更新于：`2025-10-31 12:19:41 UTC+08:00`*
 
 ---
 
@@ -43,7 +43,7 @@
 | Christmas Time [b41/42 demo] | 2903870217 | 81 | 53 | 53 | 134 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
 | that DAMN Library | 3171167894 | 77 | 383 | 0 | 460 |
-| The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 77 | 1 | 1 | 78 |
+| The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 77 | 0 | 0 | 77 |
 | [B42] Useful Barrels | 3436537035 | 77 | 1 | 0 | 78 |
 | Braven's Achievements | 3051277957 | 76 | 1 | 0 | 77 |
 | Weather Moodles [B42] | 3565697910 | 76 | 70 | 2 | 146 |
@@ -54,15 +54,15 @@
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | Realistic Car Physics [B42] | 3559765660 | 62 | 0 | 0 | 62 |
-| ST Additions - Pry Open | 3579640010 | 60 | 93 | 23 | 153 |
+| ST Additions - Pry Open | 3579640010 | 60 | 102 | 32 | 162 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 59 | 20 | 2 | 79 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 57 | 363 | 0 | 421 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 56 | 52 | 0 | 108 |
 | Legendary Katana | 3418366499 | 56 | 72 | 1 | 128 |
 | [B42] Ogrim Mod's - Machine Utils | 3555558732 | 56 | 0 | 0 | 56 |
+| [J&G] Firefighter Uniform [B42/41] | 3521263771 | 51 | 2 | 2 | 54 |
+| [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 51 | 0 | 0 | 52 |
 | Time Decreases Vehicle Condition [B42] | 3448375286 | 50 | 0 | 0 | 50 |
-| [J&G] Firefighter Uniform [B42/41] | 3521263771 | 49 | 5 | 5 | 55 |
-| [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 47 | 4 | 4 | 52 |
 | Project Summer Car [B42] | 3564950449 | 45 | 118 | 0 | 163 |
 | [B42]Zevon's Medieval Armory | 3540834058 | 45 | 67 | 2 | 112 |
 | Functional Clipboard [B41/B42] | 3387382165 | 44 | 0 | 0 | 44 |
@@ -82,7 +82,7 @@
 | Better Flashlights [B42] | 3420478458 | 34 | 0 | 0 | 34 |
 | Logic Missing Recipes | 3540757743 | 33 | 0 | 0 | 33 |
 | [B42] Alternative Inventory Rendering | 3394402683 | 30 | 0 | 0 | 30 |
-| [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 4 | 4 | 33 |
+| [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 0 | 0 | 29 |
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Military Tool Kit | 2705406713 | 26 | 22 | 1 | 48 |
@@ -134,6 +134,7 @@
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
 | [B42] Functional Gutters | 3439305933 | 7 | 46 | 0 | 53 |
+| Swap It | 2366717227 | 7 | 0 | 0 | 7 |
 | U.S. M548 Cargo Carrier by Papa_Chad | 3424497614 | 7 | 10 | 0 | 17 |
 | '85 Buick LeSabre | 3418252689 | 6 | 17 | 0 | 23 |
 | Ammo Maker | 2788256295 | 6 | 673 | 31 | 679 |
@@ -176,7 +177,6 @@
 | [B42] Sandbox Options | 3386906181 | 2 | 3 | 0 | 5 |
 | B42 Rain's Axes & Blades | 3388380529 | 2 | 47 | 0 | 50 |
 | [B42/B41] Bandits Creator | 3469292499 | 2 | 121 | 0 | 123 |
-| Bushcraft Gear - Rare Weapons [B41 & B42] | 2432621382 | 2 | 0 | 0 | 2 |
 | Boots Expanded 11 for B41 and B42 | 2850935956 | 2 | 28 | 0 | 30 |
 | Functional Clothesline | 3282215361 | 2 | 18 | 0 | 20 |
 | Daihatsu Hijet S83P/S110P | 3583266047 | 2 | 10 | 0 | 12 |
@@ -345,6 +345,7 @@
 | Barricades, Doors, Windows, and Vehicles Hurt Zombies [B42] | 3402208866 | 0 | 36 | 0 | 36 |
 | '77 Hayosiko Pace [B41/B42] | 3459200930 | 0 | 13 | 0 | 13 |
 | Bath Towels Overhaul | 3416208765 | 0 | 84 | 1 | 84 |
+| Bushcraft Gear - Rare Weapons [B41 & B42] | 2432621382 | 0 | 0 | 0 | 2 |
 | 未知 Mod (3388028737) | 3388028737 | 0 | 11 | 0 | 11 |
 | BetterFPS_B42 | 3423115544 | 0 | 4 | 0 | 4 |
 | [B42] Bicycle! | 3461415167 | 0 | 22 | 3 | 23 |
@@ -376,7 +377,6 @@
 | Drink Smart | 3447775367 | 0 | 1 | 0 | 1 |
 | Dynamic Traits and Expanded Moodles [B41 & B42] | 2459400130 | 0 | 129 | 0 | 129 |
 | Easy Laundry | 2925034918 | 0 | 6 | 0 | 6 |
-| Easy Spare Magazine Reload | 3390014923 | 0 | 1 | 2 | 2 |
 | Eat Smart | 3456212729 | 0 | 30 | 4 | 30 |
 | [b42]Efficiency Skill Mod | 3374408921 | 0 | 31 | 0 | 31 |
 | Escape From Tarkov Backpacks [B42] | 3432928943 | 0 | 42 | 0 | 42 |
@@ -559,7 +559,6 @@
 | Starlit Library | 3378285185 | 0 | 1 | 1 | 1 |
 | Starving Zombies [B42] | 3396867685 | 0 | 36 | 0 | 36 |
 | [B42/B41]Surviving Through Seasons | 2753086629 | 0 | 9 | 0 | 9 |
-| Swap It | 2366717227 | 0 | 7 | 7 | 7 |
 | [B42 & 41] Tactical Weapons | 2324223029 | 0 | 46 | 23 | 46 |
 | [B42] Tatrapan | 3402789975 | 0 | 10 | 7 | 10 |
 | TchernoLib | 3389605231 | 0 | 35 | 0 | 35 |

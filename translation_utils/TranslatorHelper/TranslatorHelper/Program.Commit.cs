@@ -95,6 +95,10 @@ partial class Program
             {
                 Console.WriteLine("推送到远程仓库...");
                 var remote = repo.Network.Remotes["origin"];
+                
+                // 获取代理配置
+                var proxyOptions = ProxyHelper.GetLibGit2ProxyOptions();
+                
                 var pushOptions = new PushOptions
                 {
                     CredentialsProvider = (url, user, cred) => new UsernamePasswordCredentials
@@ -103,6 +107,13 @@ partial class Program
                         Password = config.Key
                     }
                 };
+                
+                // 如果有代理URL，则设置
+                if (!string.IsNullOrEmpty(proxyOptions.Url))
+                {
+                    pushOptions.ProxyOptions.Url = proxyOptions.Url;
+                }
+                
                 repo.Network.Push(remote, $"refs/heads/{translatorBranch}", pushOptions);
                 Console.WriteLine("[成功] 推送成功");
             }

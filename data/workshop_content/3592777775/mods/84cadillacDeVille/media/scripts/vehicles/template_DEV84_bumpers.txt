@@ -1,0 +1,165 @@
+module Base
+{
+	model 84cadillacDeVillefrontBumper0
+	{
+		mesh = vehicles/Vehicles_84cadillacDeVille_Body|deville_sedan_bumpf0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 84cadillacDeVillefrontBumperA
+	{
+		mesh = vehicles/Vehicles_84cadillacDeVille_Body|deville_sedan_bumpfA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 84cadillacDeVillefrontBullbarA
+	{
+		mesh = vehicles/Vehicles_84cadillacDeVille_Body|84c-platform_bullbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 84cadillacDeVillerearBumper0
+	{
+		mesh = vehicles/Vehicles_84cadillacDeVille_Body|deville_sedan_bumpr0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DEV84Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 84cadillacDeVillefrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 84cadillacDeVillefrontBumperA,
+				}
+
+            model FrontBullbarA
+				{
+                		file = 84cadillacDeVillefrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.84cadillacDeVilleBumperFront0;Base.84cadillacDeVilleBumperFrontA;Base.85gmBbodyBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEV84.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DEV84.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = DEV84.Create.BumperFront,
+					init = DEV84.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 84cadillacDeVillerearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.84cadillacDeVilleBumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEV84.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = DEV84.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = DEV84.Create.BumperRear,
+					init = DEV84.Init.BumperRear,
+					}
+		}
+	}
+}

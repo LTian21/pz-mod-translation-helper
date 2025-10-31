@@ -13,6 +13,7 @@ using Credentials = Octokit.Credentials;
 using TranslationSystem;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Octokit.Internal;
 
 partial class Program
 {
@@ -31,6 +32,13 @@ partial class Program
     {
         Console.OutputEncoding = Encoding.UTF8;
         Console.InputEncoding = Encoding.UTF8;
+
+        // ===============================
+        // 自动检测并配置系统代理
+        // ===============================
+        Console.WriteLine("正在检测系统代理配置...");
+        ProxyHelper.DetectSystemProxy();
+        Console.WriteLine();
 
         // 少于 6 个参数进入测试模式
         isTestMode = args.Length < 6;
@@ -57,10 +65,16 @@ partial class Program
                 Console.WriteLine("-----------------------------------");
 
                 // =========================
-                // 初始化 GitHub 客户端
+                // 初始化 GitHub 客户端（使用代理）
                 // =========================
-                var github = new GitHubClient(new Octokit.ProductHeaderValue("TranslationHelper"));
-                github.Credentials = new Credentials(config.Key);
+                var httpHandler = ProxyHelper.CreateHttpClientHandlerWithProxy();
+                var httpClientAdapter = new HttpClientAdapter(() => httpHandler);
+                var productInfo = new Octokit.ProductHeaderValue("TranslationHelper");
+                var baseAddress = new Uri("https://api.github.com");
+                var credentialStore = new InMemoryCredentialStore(new Credentials(config.Key));
+                var serializer = new SimpleJsonSerializer();
+                var connection = new Connection(productInfo, baseAddress, credentialStore, httpClientAdapter, serializer);
+                var github = new GitHubClient(connection);
 
                 // 验证 GitHub 连接和获取仓库信息
                 var (owner, repoName) = ExtractRepoInfo(config.RepoUrl);

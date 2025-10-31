@@ -6,11 +6,14 @@ using LibGit2Sharp;
 
 partial class Program
 {
-    // Git 与加解密辅助
+    // Git 和加密辅助
     static bool PullLatestChanges(LibGit2Sharp.Repository repo, AppConfig config)
     {
         try
         {
+            // 获取代理配置
+            var proxyOptions = ProxyHelper.GetLibGit2ProxyOptions();
+            
             var fetchOptions = new FetchOptions
             {
                 CredentialsProvider = (url, user, cred) => new UsernamePasswordCredentials
@@ -19,6 +22,13 @@ partial class Program
                     Password = config.Key
                 }
             };
+            
+            // 如果有代理URL，则设置
+            if (!string.IsNullOrEmpty(proxyOptions.Url))
+            {
+                fetchOptions.ProxyOptions.Url = proxyOptions.Url;
+            }
+            
             var remote = repo.Network.Remotes["origin"];
             var refSpecs = remote.FetchRefSpecs.Select(x => x.Specification);
             Commands.Fetch(repo, remote.Name, refSpecs, fetchOptions, "Fetching latest changes");
