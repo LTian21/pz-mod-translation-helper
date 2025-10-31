@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Diagnostics;
 
 /// <summary>
 /// 代理检测和配置辅助类
@@ -10,6 +11,7 @@ public static class ProxyHelper
 {
     private static IWebProxy? _detectedProxy;
     private static bool _proxyDetected = false;
+    private static string? _proxyUrlForGit;
 
     /// <summary>
     /// 检测系统代理配置
@@ -25,7 +27,26 @@ public static class ProxyHelper
 
         try
         {
-            // 方法1: 使用 WebRequest.DefaultWebProxy (推荐，支持 PAC)
+            // 方法1: 从 Git 全局配置读取代理
+            string? gitProxy = TryGetGitGlobalProxy();
+            if (!string.IsNullOrEmpty(gitProxy))
+            {
+                try
+                {
+                    var proxy = new WebProxy(gitProxy);
+                    Console.WriteLine($"[代理] 从 Git 全局配置检测到代理: {gitProxy}");
+                    _detectedProxy = proxy;
+                    _proxyUrlForGit = gitProxy;
+                    _proxyDetected = true;
+                    return proxy;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[代理] Git 代理格式无效: {ex.Message}");
+                }
+            }
+
+            // 方法2: 使用 WebRequest.DefaultWebProxy (推荐，支持 PAC)
             var defaultProxy = WebRequest.DefaultWebProxy;
             if (defaultProxy != null)
             {
@@ -38,12 +59,13 @@ public static class ProxyHelper
                 {
                     Console.WriteLine($"[代理] 检测到系统代理: {proxyUri}");
                     _detectedProxy = defaultProxy;
+                    _proxyUrlForGit = proxyUri.ToString();
                     _proxyDetected = true;
                     return defaultProxy;
                 }
             }
 
-            // 方法2: 从环境变量检测代理
+            // 方法3: 从环境变量检测代理
             string? httpProxy = Environment.GetEnvironmentVariable("HTTP_PROXY") 
                               ?? Environment.GetEnvironmentVariable("http_proxy");
             string? httpsProxy = Environment.GetEnvironmentVariable("HTTPS_PROXY") 
@@ -58,6 +80,7 @@ public static class ProxyHelper
                     var proxy = new WebProxy(proxyUrl);
                     Console.WriteLine($"[代理] 从环境变量检测到代理: {proxyUrl}");
                     _detectedProxy = proxy;
+                    _proxyUrlForGit = proxyUrl;
                     _proxyDetected = true;
                     return proxy;
                 }
@@ -67,7 +90,7 @@ public static class ProxyHelper
                 }
             }
 
-            // 方法3: 从 IE/Windows 系统设置检测（WebRequest.DefaultWebProxy 已包含此逻辑）
+            // 方法4: 从 IE/Windows 系统设置检测（WebRequest.DefaultWebProxy 已包含此逻辑）
             // 这里主要作为备用方案
             var systemProxy = WebRequest.GetSystemWebProxy();
             if (systemProxy != null)
@@ -79,6 +102,7 @@ public static class ProxyHelper
                 {
                     Console.WriteLine($"[代理] 检测到 Windows 系统代理: {proxyUri}");
                     _detectedProxy = systemProxy;
+                    _proxyUrlForGit = proxyUri.ToString();
                     _proxyDetected = true;
                     return systemProxy;
                 }
@@ -94,6 +118,73 @@ public static class ProxyHelper
             _proxyDetected = true;
             return null;
         }
+    }
+
+    /// <summary>
+    /// 尝试从 Git 全局配置读取 https.proxy 设置
+    /// </summary>
+    private static string? TryGetGitGlobalProxy()
+    {
+        try
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = "git",
+                Arguments = "config --global --get https.proxy",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using var process = Process.Start(psi);
+            if (process != null)
+            {
+                string output = process.StandardOutput.ReadToEnd().Trim();
+                process.WaitForExit();
+                
+                if (process.ExitCode == 0 && !string.IsNullOrEmpty(output))
+                {
+                    return output;
+                }
+            }
+        }
+        catch
+        {
+            // Git 未安装或配置读取失败，静默失败
+        }
+
+        // 尝试读取 http.proxy 作为备选
+        try
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = "git",
+                Arguments = "config --global --get http.proxy",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using var process = Process.Start(psi);
+            if (process != null)
+            {
+                string output = process.StandardOutput.ReadToEnd().Trim();
+                process.WaitForExit();
+                
+                if (process.ExitCode == 0 && !string.IsNullOrEmpty(output))
+                {
+                    return output;
+                }
+            }
+        }
+        catch
+        {
+            // Git 未安装或配置读取失败，静默失败
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -116,6 +207,32 @@ public static class ProxyHelper
     }
 
     /// <summary>
+    /// 设置 LibGit2Sharp 需要的环境变量代理配置
+    /// LibGit2Sharp 底层的 libgit2 会读取这些环境变量
+    /// </summary>
+    public static void ConfigureLibGit2EnvironmentProxy()
+    {
+        try
+        {
+            var systemProxy = DetectSystemProxy();
+            
+            if (systemProxy != null && !string.IsNullOrEmpty(_proxyUrlForGit))
+            {
+                // 设置 HTTPS_PROXY 和 HTTP_PROXY 环境变量
+                // libgit2 会读取这些环境变量来配置代理
+                Environment.SetEnvironmentVariable("HTTPS_PROXY", _proxyUrlForGit);
+                Environment.SetEnvironmentVariable("HTTP_PROXY", _proxyUrlForGit);
+                
+                Console.WriteLine($"[代理] 已为 LibGit2Sharp 设置环境变量代理: {_proxyUrlForGit}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[代理] 设置 LibGit2Sharp 环境变量时出错: {ex.Message}");
+        }
+    }
+
+    /// <summary>
     /// 获取 LibGit2Sharp 的代理配置选项
     /// LibGit2Sharp 使用 libgit2 native library，代理配置通过 ProxyOptions 设置
     /// </summary>
@@ -129,26 +246,35 @@ public static class ProxyHelper
             
             if (systemProxy != null)
             {
-                // 测试 GitHub API 地址的代理
-                var testUri = new Uri("https://api.github.com");
-                var proxyUri = systemProxy.GetProxy(testUri);
+                // 优先使用缓存的代理 URL
+                string? proxyUrl = _proxyUrlForGit;
                 
-                if (proxyUri != null && proxyUri != testUri)
+                // 如果没有缓存的代理 URL，尝试从系统代理获取
+                if (string.IsNullOrEmpty(proxyUrl))
                 {
-                    // LibGit2Sharp 期望的代理 URL 格式
-                    string proxyUrl = proxyUri.ToString();
+                    var testUri = new Uri("https://api.github.com");
+                    var proxyUri = systemProxy.GetProxy(testUri);
                     
+                    if (proxyUri != null && proxyUri != testUri)
+                    {
+                        proxyUrl = proxyUri.ToString();
+                    }
+                }
+                
+                if (!string.IsNullOrEmpty(proxyUrl))
+                {
                     // 检查是否需要认证
+                    var testUri = new Uri("https://api.github.com");
                     var credentials = systemProxy.Credentials?.GetCredential(testUri, "Basic");
                     
                     if (credentials != null && !string.IsNullOrEmpty(credentials.UserName))
                     {
                         // 带认证的代理 URL 格式: http://username:password@host:port
-                        var uriBuilder = new UriBuilder(proxyUri);
+                        var uriBuilder = new UriBuilder(proxyUrl);
                         uriBuilder.UserName = credentials.UserName;
                         uriBuilder.Password = credentials.Password;
                         proxyUrl = uriBuilder.ToString();
-                        Console.WriteLine($"[代理] LibGit2Sharp 使用带认证的代理: {proxyUri.Host}:{proxyUri.Port}");
+                        Console.WriteLine($"[代理] LibGit2Sharp 使用带认证的代理: {new Uri(proxyUrl).Host}:{new Uri(proxyUrl).Port}");
                     }
                     else
                     {
@@ -156,6 +282,9 @@ public static class ProxyHelper
                     }
                     
                     proxyOptions.Url = proxyUrl;
+                    
+                    // 同时设置环境变量，确保 libgit2 能够使用代理
+                    ConfigureLibGit2EnvironmentProxy();
                 }
                 else
                 {
@@ -222,6 +351,13 @@ public static class ProxyHelper
             {
                 Console.WriteLine($"{envVar}={value}");
             }
+        }
+
+        // 显示 Git 配置
+        string? gitProxy = TryGetGitGlobalProxy();
+        if (!string.IsNullOrEmpty(gitProxy))
+        {
+            Console.WriteLine($"Git Global Proxy: {gitProxy}");
         }
 
         Console.WriteLine("=================================");

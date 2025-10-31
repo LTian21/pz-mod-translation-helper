@@ -38,6 +38,8 @@ partial class Program
         // ===============================
         Console.WriteLine("正在检测系统代理配置...");
         ProxyHelper.DetectSystemProxy();
+        // 为 LibGit2Sharp 配置环境变量代理
+        ProxyHelper.ConfigureLibGit2EnvironmentProxy();
         Console.WriteLine();
 
         // 少于 6 个参数进入测试模式
