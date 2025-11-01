@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-10-31 12:19:41 UTC+08:00`*
+*最后更新于：`2025-11-01 12:16:47 UTC+08:00`*
 
 ---
 
@@ -34,7 +34,6 @@
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
 | Pocket Kittens (B42) | 3568029240 | 118 | 16 | 7 | 134 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
-| Lillie's Meal Combat Individual Ration Mod | 3557845788 | 106 | 0 | 0 | 106 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
@@ -97,13 +96,13 @@
 | Fancy Lanterns [B42 Compatible] | 3267733558 | 21 | 47 | 0 | 68 |
 | Milk Them All [B42] | 3568280195 | 21 | 0 | 0 | 21 |
 | Easy Drop'n'Loot | 2871469707 | 20 | 0 | 0 | 20 |
+| '84 Cadillac DeVille | 3592777775 | 18 | 0 | 0 | 18 |
 | Common Sense | 2875848298 | 18 | 29 | 0 | 48 |
 | Equipment UI - Paper Doll Equipment Interface [B42/41] | 2950902979 | 18 | 0 | 0 | 18 |
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
 | [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 17 | 0 | 0 | 17 |
 | [B42] Knox Event Expanded NPC mod [alpha v0.3.14-1] | 3397396843 | 17 | 577 | 42 | 594 |
-| [B42]Project RV Interior | 3543229299 | 17 | 0 | 0 | 17 |
 | U.S. M113 APC by Papa_Chad | 2705655822 | 17 | 8 | 2 | 25 |
 | All In One Tool! | 3589758717 | 16 | 15 | 0 | 31 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
@@ -134,7 +133,6 @@
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
 | [B42] Functional Gutters | 3439305933 | 7 | 46 | 0 | 53 |
-| Swap It | 2366717227 | 7 | 0 | 0 | 7 |
 | U.S. M548 Cargo Carrier by Papa_Chad | 3424497614 | 7 | 10 | 0 | 17 |
 | '85 Buick LeSabre | 3418252689 | 6 | 17 | 0 | 23 |
 | Ammo Maker | 2788256295 | 6 | 673 | 31 | 679 |
@@ -196,7 +194,6 @@
 | '91 Ford Ranger | 3539691958 | 1 | 49 | 0 | 50 |
 | Anthro Traits | 3025679944 | 1 | 145 | 0 | 146 |
 | Autotsar Tuning Atelier - Fjord Mustard [B42] | 3405178154 | 1 | 1 | 0 | 2 |
-| Soul Filcher's Clearing Time | 1926311864 | 1 | 4 | 0 | 5 |
 | Draw On The Map - Free Hand Drawing [B42/41] | 2804531012 | 1 | 7 | 0 | 8 |
 | Easy Spare Magazine Reload | 2590662055 | 1 | 0 | 0 | 2 |
 | Energy Drinks [B42] | 2674541310 | 1 | 8 | 0 | 9 |
@@ -362,6 +359,7 @@
 | [41&#124;42] ChairBarricade | 3404288341 | 0 | 3 | 0 | 3 |
 | Character Save | 2673317083 | 0 | 2 | 0 | 2 |
 | [B41/B42] Check Around | 3300688173 | 0 | 157 | 1 | 157 |
+| Soul Filcher's Clearing Time | 1926311864 | 0 | 0 | 0 | 5 |
 | [B42][B41] Collapsible Ladder | 3438123707 | 0 | 5 | 0 | 5 |
 | Combat Mastering Skill | 3435985650 | 0 | 28 | 0 | 28 |
 | Combat Traits [B42 Compatible] | 3427091746 | 0 | 49 | 9 | 49 |
@@ -439,6 +437,7 @@
 | Legend Craft Evolved | 3432470769 | 0 | 304 | 0 | 304 |
 | Lethal Stealth | 3531611692 | 0 | 34 | 0 | 34 |
 | Antibodies (v1.93) [B41 + B42] | 2392676812 | 0 | 230 | 0 | 230 |
+| Lillie's Meal Combat Individual Ration Mod | 3557845788 | 0 | 106 | 0 | 106 |
 | Liv's Trusty Baseball Cap | 3477662795 | 0 | 1 | 0 | 1 |
 | Lock Interiors | 3435709471 | 0 | 3 | 0 | 3 |
 | Long-standing Metal Constructions | 3199474685 | 0 | 37 | 0 | 37 |
@@ -458,6 +457,7 @@
 | [B41/B42] Mini Health Panel | 2866258937 | 0 | 2 | 0 | 2 |
 | Industrial Revolution = Addon = Mira's Ammo Maker | 3441855577 | 0 | 1 | 0 | 1 |
 | [B41] Modern & Historical Firearms Bundle | 3383901556 | 0 | 143 | 0 | 143 |
+| [B42]Project RV Interior | 3543229299 | 0 | 0 | 0 | 17 |
 | Money From Credit Cards | 3428650803 | 0 | 25 | 3 | 25 |
 | Moodle Framework B41 | 2859296947 | 0 | 13 | 4 | 13 |
 | More Damaged Objects [B42/41] | 3413150945 | 0 | 1 | 0 | 1 |
@@ -484,7 +484,7 @@
 | Night Vision [B.41/B.42] | 3383603346 | 0 | 26 | 0 | 26 |
 | Night Vision Googles [B41/B42] | 3470491629 | 0 | 21 | 0 | 21 |
 | [B41/B42] Nik's Hairstyles | 3401996053 | 0 | 31 | 0 | 31 |
-| Nodachi Mod B42.5.1 | 2166396868 | 0 | 2 | 0 | 3 |
+| Nodachi Mod B42.5.1 | 2166396868 | 0 | 0 | 0 | 3 |
 | [B42] Noir's Rifle Slings | 3388107363 | 0 | 10 | 0 | 10 |
 | Faster Tree Chopping (was: No Stress From Tree Chopping) | 3460704724 | 0 | 6 | 0 | 6 |
 | Open All Containers [B42/41] | 3465040406 | 0 | 84 | 0 | 84 |
@@ -559,6 +559,7 @@
 | Starlit Library | 3378285185 | 0 | 1 | 1 | 1 |
 | Starving Zombies [B42] | 3396867685 | 0 | 36 | 0 | 36 |
 | [B42/B41]Surviving Through Seasons | 2753086629 | 0 | 9 | 0 | 9 |
+| Swap It | 2366717227 | 0 | 0 | 0 | 7 |
 | [B42 & 41] Tactical Weapons | 2324223029 | 0 | 46 | 23 | 46 |
 | [B42] Tatrapan | 3402789975 | 0 | 10 | 7 | 10 |
 | TchernoLib | 3389605231 | 0 | 35 | 0 | 35 |
