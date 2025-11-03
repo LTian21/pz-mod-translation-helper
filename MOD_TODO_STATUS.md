@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-11-02 12:18:47 UTC+08:00`*
+*最后更新于：`2025-11-03 12:24:33 UTC+08:00`*
 
 ---
 
@@ -91,6 +91,7 @@
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
 | Headwear Won't Fall | 3400293227 | 23 | 0 | 0 | 23 |
 | Legendary DuffelBag | 3558839307 | 23 | 26 | 0 | 49 |
+| Random Clothing [B41/B42] | 3397182976 | 23 | 109 | 7 | 132 |
 | Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
 | Random Zombies | 2818577583 | 21 | 0 | 0 | 21 |
 | Fancy Lanterns [B42 Compatible] | 3267733558 | 21 | 47 | 0 | 68 |
@@ -518,7 +519,6 @@
 | Proximity Inventory [B41/42] | 2847184718 | 0 | 21 | 2 | 21 |
 | [B42]Pallontras Crossbows | 3400528439 | 0 | 117 | 0 | 117 |
 | [B42] Bodily Functions [v0.12.3] | 3396456841 | 0 | 335 | 0 | 335 |
-| Random Clothing [B41/B42] | 3397182976 | 0 | 114 | 2 | 114 |
 | Random Airdrops [B41/B42] | 3282789883 | 0 | 74 | 0 | 74 |
 | [B42/41] Reactive Sound Events | 2969551071 | 0 | 39 | 0 | 39 |
 | Reaper's Hair & Beard | 3450583954 | 0 | 28 | 0 | 28 |
