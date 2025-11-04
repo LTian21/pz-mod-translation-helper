@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-11-03 12:24:33 UTC+08:00`*
+*最后更新于：`2025-11-04 12:18:10 UTC+08:00`*
 
 ---
 
@@ -41,6 +41,7 @@
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
 | Christmas Time [b41/42 demo] | 2903870217 | 81 | 53 | 53 | 134 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
+| Realistic Car Physics [B42] | 3559765660 | 78 | 0 | 0 | 78 |
 | that DAMN Library | 3171167894 | 77 | 383 | 0 | 460 |
 | The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 77 | 0 | 0 | 77 |
 | [B42] Useful Barrels | 3436537035 | 77 | 1 | 0 | 78 |
@@ -52,7 +53,6 @@
 | SCP - Foundation pack | 3580511016 | 66 | 0 | 0 | 66 |
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
-| Realistic Car Physics [B42] | 3559765660 | 62 | 0 | 0 | 62 |
 | ST Additions - Pry Open | 3579640010 | 60 | 102 | 32 | 162 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 59 | 20 | 2 | 79 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 57 | 363 | 0 | 421 |
@@ -80,11 +80,11 @@
 | Firearms | 2256623447 | 35 | 417 | 66 | 452 |
 | Better Flashlights [B42] | 3420478458 | 34 | 0 | 0 | 34 |
 | Logic Missing Recipes | 3540757743 | 33 | 0 | 0 | 33 |
+| Military Tool Kit | 2705406713 | 32 | 22 | 1 | 54 |
 | [B42] Alternative Inventory Rendering | 3394402683 | 30 | 0 | 0 | 30 |
 | [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 0 | 0 | 29 |
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
-| Military Tool Kit | 2705406713 | 26 | 22 | 1 | 48 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 26 | 10 | 0 | 36 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
 | [B42] Week One NPC | 3403180543 | 23 | 808 | 0 | 831 |
