@@ -1,0 +1,167 @@
+module Base
+{
+	model 84buickElectrafrontBumper0
+	{
+		mesh = vehicles/Vehicles_84buickElectra_Body|electra_sedan_bumpf0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 84buickElectrafrontBumperA
+	{
+		mesh = vehicles/Vehicles_84buickElectra_Body|electra_sedan_bumpfA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 84buickElectrafrontBullbarA
+	{
+		mesh = vehicles/Vehicles_84buickElectra_Body|84c-platform_bullbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 84buickElectrarearBumper0
+	{
+		mesh = vehicles/Vehicles_84buickElectra_Body|electra_sedan_bumpr0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle ELE84Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 84buickElectrafrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 84buickElectrafrontBumperA,
+				}
+
+            model FrontBullbarA
+				{
+                		file = 84buickElectrafrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.84buickElectraBumperFront0;Base.84buickElectraBumperFrontA;Base.85gmBbodyBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ELE84.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = ELE84.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = ELE84.Create.BumperFront,
+					init = ELE84.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 84buickElectrarearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.84buickElectraBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = ELE84.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = ELE84.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = ELE84.Create.BumperRear,
+					init = ELE84.Init.BumperRear,
+					}
+		}
+	}
+}
