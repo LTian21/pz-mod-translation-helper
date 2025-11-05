@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-11-05 22:42:10 UTC+08:00`*
+*最后更新于：`2025-11-06 00:25:04 UTC+08:00`*
 
 ---
 
@@ -47,7 +47,6 @@
 | [B42] Useful Barrels | 3436537035 | 77 | 1 | 0 | 78 |
 | Braven's Achievements | 3051277957 | 76 | 1 | 0 | 77 |
 | Weather Moodles [B42] | 3565697910 | 76 | 70 | 2 | 146 |
-| Beanie Babies (B42) | 3575855907 | 73 | 0 | 0 | 73 |
 | Mad Crafter [electric weapon and more] v0.2 | 3418701509 | 72 | 1 | 0 | 73 |
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 0 | 69 |
 | SCP - Foundation pack | 3580511016 | 66 | 0 | 0 | 66 |
@@ -97,6 +96,7 @@
 | Fancy Lanterns [B42 Compatible] | 3267733558 | 21 | 47 | 0 | 68 |
 | Milk Them All [B42] | 3568280195 | 21 | 0 | 0 | 21 |
 | Easy Drop'n'Loot | 2871469707 | 20 | 0 | 0 | 20 |
+| '84 Buick Electra | 3596903773 | 18 | 0 | 0 | 18 |
 | '84 Cadillac DeVille | 3592777775 | 18 | 0 | 0 | 18 |
 | Common Sense | 2875848298 | 18 | 29 | 0 | 48 |
 | Equipment UI - Paper Doll Equipment Interface [B42/41] | 2950902979 | 18 | 0 | 0 | 18 |
@@ -111,6 +111,7 @@
 | [B42] Bag Upgrade Plus | 3403697073 | 15 | 37 | 1 | 52 |
 | Gyde's Trait Magazines | 3342191739 | 14 | 58 | 0 | 72 |
 | [B41/42] Known And Collected | 2881764317 | 13 | 0 | 0 | 13 |
+| The Calm Before The Storm | 2953621037 | 12 | 0 | 0 | 61 |
 | Willowbrook Bastion! | 3479667649 | 12 | 15 | 1 | 27 |
 | Bianca Wardrobe [42. Out now] | 3140453034 | 11 | 803 | 0 | 814 |
 | [B41\B42] DBG Crowbar Unlock | 3555407625 | 11 | 225 | 46 | 236 |
@@ -340,6 +341,7 @@
 | '77 Hayosiko Pace [B41/B42] | 3459200930 | 0 | 13 | 0 | 13 |
 | Bath Towels Overhaul | 3416208765 | 0 | 84 | 1 | 84 |
 | Bushcraft Gear - Rare Weapons [B41 & B42] | 2432621382 | 0 | 0 | 0 | 2 |
+| Beanie Babies (B42) | 3575855907 | 0 | 0 | 0 | 73 |
 | 未知 Mod (3388028737) | 3388028737 | 0 | 11 | 0 | 11 |
 | BetterFPS_B42 | 3423115544 | 0 | 4 | 0 | 4 |
 | [B42] Bicycle! | 3461415167 | 0 | 22 | 3 | 23 |
@@ -357,6 +359,7 @@
 | Character Save | 2673317083 | 0 | 0 | 0 | 2 |
 | [B41/B42] Check Around | 3300688173 | 0 | 157 | 1 | 157 |
 | Soul Filcher's Clearing Time | 1926311864 | 0 | 0 | 0 | 5 |
+| Cold Winters | 3577100076 | 0 | 0 | 0 | 3 |
 | [B42][B41] Collapsible Ladder | 3438123707 | 0 | 5 | 0 | 5 |
 | Combat Mastering Skill | 3435985650 | 0 | 28 | 0 | 28 |
 | Combat Traits [B42 Compatible] | 3427091746 | 0 | 49 | 9 | 49 |
@@ -417,6 +420,7 @@
 | Industrial Revolution Vehicle Parts | 3404745035 | 0 | 16 | 0 | 16 |
 | Industrial Revolution B42 | 3400131934 | 0 | 205 | 0 | 205 |
 | [B41/B42] I Need More Style: Clothing Edition | 2861393067 | 0 | 99 | 0 | 99 |
+| [B41/B42] Injectors | 3437429771 | 0 | 0 | 0 | 49 |
 | Injury Indicator [B42] | 3565698092 | 0 | 33 | 0 | 33 |
 | The Survivalist's Gear | 3404876149 | 0 | 6 | 1 | 6 |
 | Inspect Weapon | 2948824747 | 0 | 25 | 0 | 25 |
