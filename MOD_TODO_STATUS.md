@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-11-05 12:19:02 UTC+08:00`*
+*最后更新于：`2025-11-05 22:42:10 UTC+08:00`*
 
 ---
 
@@ -39,9 +39,9 @@
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
 | Lifestyle: Hobbies | 3403870858 | 84 | 4083 | 28 | 4167 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
+| Realistic Car Physics [B42] | 3559765660 | 82 | 0 | 0 | 82 |
 | Christmas Time [b41/42 demo] | 2903870217 | 81 | 53 | 53 | 134 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
-| Realistic Car Physics [B42] | 3559765660 | 78 | 0 | 0 | 78 |
 | that DAMN Library | 3171167894 | 77 | 383 | 0 | 460 |
 | The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 77 | 0 | 0 | 77 |
 | [B42] Useful Barrels | 3436537035 | 77 | 1 | 0 | 78 |
