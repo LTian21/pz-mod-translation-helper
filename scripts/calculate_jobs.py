@@ -20,7 +20,7 @@ def main():
             return
 
         config = configparser.ConfigParser()
-        config.read('config.ini')
+        config.read('scripts/config.ini')
         
         # 从config.ini读取max_jobs，如果找不到则默认为20
         max_jobs = config.getint('Workflow', 'max_jobs', fallback=16)

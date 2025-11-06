@@ -420,7 +420,7 @@ namespace 翻译工具
                     }
                     catch (Exception exDefault)
                     {
-                        AppendOutput($"✗ 使用默认程序打开失败: {exDefault.Message}");
+                        AppendOutput($"✗ 使用默认程序打开翻译文件失败: {exDefault.Message}");
                     }
 
                     if (File.Exists(guideImage))
@@ -441,6 +441,71 @@ namespace 翻译工具
             catch (Exception ex)
             {
                 AppendOutput($"✗ 打开文件失败: {ex.Message}");
+            }
+        }
+
+        // 打开翻译文件：用 VS Code 打开文本文件，用浏览器打开 HTML 格式说明
+        private void OpenTranslationFiles(string translationFile, string guideHtml)
+        {
+            try
+            {
+                // 使用 VS Code 打开翻译文本文件
+                bool vsCodeSuccess = TryLaunchVSCode(new[] { translationFile });
+                
+                if (!vsCodeSuccess)
+                {
+                    AppendOutput($"尝试使用系统默认程序打开翻译文件...");
+                    try
+                    {
+                        var psi = new ProcessStartInfo(translationFile)
+                        {
+                            UseShellExecute = true
+                        };
+                        Process.Start(psi);
+                        AppendOutput($"✓ 已使用默认程序打开翻译文件");
+                    }
+                    catch (Exception exDefault)
+                    {
+                        AppendOutput($"✗ 使用默认程序打开翻译文件失败: {exDefault.Message}");
+                    }
+                }
+
+                // 使用浏览器打开 HTML 格式说明文件
+                if (File.Exists(guideHtml))
+                {
+                    AppendOutput($"正在打开格式说明文件: {guideHtml}");
+                    try
+                    {
+                        var psi = new ProcessStartInfo
+                        {
+                            FileName = guideHtml,
+                            UseShellExecute = true
+                        };
+                        var process = Process.Start(psi);
+                        if (process != null)
+                        {
+                            AppendOutput($"✓ 已使用浏览器打开格式说明文件");
+                        }
+                        else
+                        {
+                            AppendOutput($"✗ 无法启动浏览器打开格式说明文件");
+                        }
+                    }
+                    catch (Exception exHtml)
+                    {
+                        AppendOutput($"✗ 打开格式说明文件失败: {exHtml.Message}");
+                        AppendOutput($"详细错误: {exHtml.ToString()}");
+                    }
+                }
+                else
+                {
+                    AppendOutput($"! 格式说明文件不存在: {guideHtml}");
+                }
+            }
+            catch (Exception ex)
+            {
+                AppendOutput($"✗ 打开文件失败: {ex.Message}");
+                AppendOutput($"详细错误: {ex.ToString()}");
             }
         }
 

@@ -9,7 +9,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Final
 
-CONFIG_FILE: Final[Path] = Path('config.ini')
+CONFIG_FILE: Final[Path] = Path('scripts/config.ini')
 ID_LIST_FILE: Final[Path] = Path('id_list.txt')
 STATUS_FILE: Final[Path] = Path('data/.cache/.last_run_status.json')
 VERSION_DIR_PATTERN: Final[re.compile] = re.compile(r'^\d+(\.\d+)*$')

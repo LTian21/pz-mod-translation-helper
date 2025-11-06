@@ -1,0 +1,478 @@
+module Base
+{
+	model AgrotractorModel
+    {
+        mesh = vehicles/AGROTractor|Tractor,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.009,
+    }
+	model Agrotractor_Wheel_front_left
+    {
+        mesh = vehicles/AGROTractor|Tractor_frontwheel,
+        shader = basicEffect,
+        texture = vehicles/Tractor_wheel,
+        invertX = TRUE,
+        scale = 0.008,
+    }
+	model Agrotractor_Wheel_front_right
+    {
+        mesh = vehicles/AGROTractor|Tractor_frontwheel,
+        shader = basicEffect,
+        texture = vehicles/Tractor_wheel,
+        invertX = FALSE,
+        scale = 0.008,
+    }
+	model Agrotractor_Wheel_rear_left
+    {
+        mesh = vehicles/AGROTractor|Tractor_rearwheel,
+        shader = basicEffect,
+        texture = vehicles/Tractor_wheel,
+        invertX = TRUE,
+        scale = 0.009,
+    }
+	model Agrotractor_Wheel_rear_right
+    {
+        mesh = vehicles/AGROTractor|Tractor_rearwheel,
+        shader = basicEffect,
+        texture = vehicles/Tractor_wheel,
+        invertX = FALSE,
+        scale = 0.009,
+    }
+	vehicle Agrotractor
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 2,
+		engineRepairLevel = 5,
+		playerDamageProtection = 1.8,
+
+		model
+		{
+			file = AgrotractorModel,
+			scale = 1.0000,
+			offset = 0.0000 0.0000 0.0000,
+		}
+
+		skin
+		{
+			texture = Vehicles/AGROTractor_base1,
+		}
+
+		skin
+		{
+			texture = Vehicles/AGROTractor_base2,
+		}
+
+		skin
+		{
+			texture = Vehicles/AGROTractor_base2,
+		}
+
+		skin
+		{
+			texture = Vehicles/AGROTractor_base3,
+		}
+
+		skin
+		{
+			texture = Vehicles/AGROTractor_base3,
+		}
+
+		skin
+		{
+			texture = Vehicles/AGROTractor_base4,
+		}
+
+		skin
+		{
+			texture = Vehicles/AGROTractor_base4,
+		}
+
+		textureShadow = vehicles/AGROTractor_shadow,
+		textureMask = vehicles/AGROTractor_mask,
+		textureLights = vehicles/AGROTractor_light,
+		textureDamage1Overlay = vehicles/AGROTractor_blood,
+		textureDamage2Overlay = Vehicles/AGROTractor_blood,
+		textureDamage1Shell = Vehicles/AGROTractor_damage1,
+		textureDamage2Shell = Vehicles/AGROTractor_damage2,
+		textureRust = Vehicles/AGROTractor_rust,
+
+		sound
+		{
+			engine = VehicleEnginePickUpVan,
+			engineStart = VehicleEnginePickUpVan,
+			engineTurnOff = VehicleEnginePickUpVan,
+			horn = VehicleHornStandard,
+			ignitionFail = VehicleIgnitionFailPickUpVan,
+		}
+
+		extents = 1.7600 0.7800 3.1000,
+		mass = 900,
+		physicsChassisShape = 1.9200 1.4400 3.1000,
+		centerOfMassOffset = 0.0000 1.1300 0.0800,
+		shadowExtents = 2.0900 3.8100,
+		shadowOffset = 0.0000 -0.2300,
+		engineForce = 2000,
+		engineQuality = 80,
+		engineLoudness = 10,
+		maxSpeed = 25f,
+		brakingForce = 80,
+		rollInfluence = 0.8f,
+		steeringIncrement = 0.05,
+		steeringClamp = 0.5,
+		suspensionStiffness = 100,
+		suspensionCompression = 3.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 5,
+		suspensionRestLength = 0.20f,
+		wheelFriction = 1.5f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 1,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.5500 0.1200 1.1900,
+			radius = 0.45f,
+			width = 0.25f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.5500 0.1200 1.1900,
+			radius = 0.45f,
+			width = 0.25f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 1.0000 0.3800 -0.9900,
+			radius = 0.75f,
+			width = 0.5f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -1.0000 0.3800 -0.9900,
+			radius = 0.75f,
+			width = 0.5f,
+		}
+
+		passenger FrontLeft
+		{
+			door = DoorFrontLeft,
+			area = SeatFrontLeft,
+
+			position inside
+			{
+				offset = 0.0000 0.7800 -0.9000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.6800 -0.5500 -0.1400,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		template! = PassengerCommon,
+
+		area Engine
+		{
+			xywh = -1.0000 0.3200 0.8800 0.7000,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 0.9100 0.3200 0.7000 0.9800,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.9100 1.2100 0.7000 0.7000,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.9100 1.2100 0.7000 0.7000,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.6500 -1.0300 0.7000 0.7000,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.6700 -1.0300 0.7000 0.7000,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.4200 -1.8800 0.7000 0.7000,
+		}
+
+		template = Seat/part/SeatFrontLeft,
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = GloveBox,
+
+		part GloveBox
+		{
+			area = SeatFrontLeft,
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			area = Engine,
+
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Heater,
+		template = PassengerCompartment,
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+
+		part Windshield*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+
+		part Door*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+		template = Window/part/WindowRearLeft,
+		template = Window/part/WindowRearRight,
+
+		part WindowFrontRight
+		{
+			area = Engine,
+
+			table install
+			{
+				requireInstalled =,
+			}
+		}
+
+		part WindowRearLeft
+		{
+			area = TireRearLeft,
+
+			table install
+			{
+				requireInstalled =,
+			}
+		}
+
+		part WindowRearRight
+		{
+			area = TireRearRight,
+
+			table install
+			{
+				requireInstalled =,
+			}
+		}
+
+		part Window*
+		{
+			window
+			{
+				openable = false,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			anim Open
+			{
+				sound =,
+			}
+
+			anim Close
+			{
+				sound =,
+			}
+
+			anim ActorOpen
+			{
+			}
+
+			anim ActorClose
+			{
+			}
+
+			mechanicRequireKey = false,
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Agrotractor_Wheel_front_left,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Agrotractor_Wheel_front_right,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Agrotractor_Wheel_rear_left,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Agrotractor_Wheel_rear_right,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0200 0.0200 -2.1000,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0200 0.0200 1.9100,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+	}
+}

@@ -7,7 +7,7 @@ from pathlib import Path
 import logging
 from collections import defaultdict
 
-CONFIG_FILE = Path('config.ini')
+CONFIG_FILE = Path('scripts/config.ini')
 KEY_VALUE_PATTERN = re.compile(r"^\s*([\w\s.\[\]()-]+?)\s*=\s*(.*?),?\s*$")
 INDEX_CACHE_FILE = Path('translation_utils/key_source_mod.json')
 HASH_CACHE_FILE = Path('data/.cache/mod_content_hashes.json')
