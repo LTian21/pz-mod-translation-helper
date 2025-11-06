@@ -1,0 +1,39 @@
+module RicksMLC
+{
+    craftRecipe RicksMLCGunLightPatchRemoveBattery
+    {
+        timedAction = DismantleElectrical,
+        time = 30,
+        OnCreate = RicksMLC_GunLightPatch.GunLightBatteryRemove_OnCreate,
+        OnTest = RicksMLC_GunLightPatch.GunLightBattery_OnTest,
+        AllowBatchCraft = false,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Electrical,
+        inputs
+        {
+            item 1 tags[Flashlight;UsesBattery] mode:keep flags[NotEmpty;ItemCount;InheritUsesAndEmpty],
+        }
+        outputs
+        {
+            item 1 Base.Battery,
+        }
+    }
+
+    craftRecipe RicksMLCGunLightPatchInsertBattery
+    {
+        timedAction = MakingElectrical,
+        time = 30,
+        OnCreate = RicksMLC_GunLightPatch.GunLightBatteryInsert_OnCreate,
+        OnTest = RicksMLC_GunLightPatch.GunLightBattery_OnTest,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Electrical,
+        inputs
+        {
+            item 1 tags[Flashlight;UsesBattery] flags[IsEmpty;AllowFavorite;ItemCount] mode:keep,
+            item 1 [Base.Battery] flags[ItemCount] mode:destroy,
+        }
+        outputs
+        {
+        }
+    }
+}

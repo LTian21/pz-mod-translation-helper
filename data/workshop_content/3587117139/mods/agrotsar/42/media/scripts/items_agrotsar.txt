@@ -1,0 +1,122 @@
+module Agrotsar
+{
+	imports
+	{
+		Base
+	}
+    
+    model ASeederTank_Model
+    {
+        mesh = WorldItems/ASeederTank,
+        texture = WorldItems/ASeederTank,
+		scale = 0.01,
+	}
+    
+    item ASeederTankSmall
+    {
+        DisplayCategory = Gardening,
+        Weight	=	6.0,
+        Type = Container,
+        DisplayName	=	Seeder Tank Small,
+        Icon	=	ASeederTank,
+        VehicleType =   1,
+        MaxCapacity = 3,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = Agrotsar.ASeederTank_Model,
+    }
+	
+	item ASeederTankMedium
+    {
+        DisplayCategory = Gardening,
+        Weight	=	7.0,
+        Type = Container,
+        DisplayName	=	Seeder Tank Medium,
+        Icon	=	ASeederTank,
+        VehicleType =   1,
+        MaxCapacity = 6,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = Agrotsar.ASeederTank_Model,
+    }
+	
+	item ASeederTankLarge
+    {
+        DisplayCategory = Gardening,
+        Weight	=	8.0,
+        Type = Container,
+        DisplayName	=	Seeder Tank Large,
+        Icon	=	ASeederTank,
+        VehicleType =   1,
+        MaxCapacity = 9,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = Agrotsar.ASeederTank_Model,
+    }
+    
+	model ASeederPlate_Ground
+    {
+        mesh = WorldItems/ASeederPlate,
+        texture = WorldItems/ASeederPlate,
+        scale = 0.005,
+    }
+    
+	item ASeederPlate
+    {
+        DisplayCategory = Gardening,
+        Weight	=	1.0,
+        Type = Container,
+        DisplayName	=	Seeder Flap,
+        Icon	=	ASeederPlate,
+        VehicleType =   1,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = Agrotsar.ASeederPlate_Ground,
+    }
+    
+    model APlowshare_Ground
+    {
+        mesh = WorldItems/APlowshare,
+        texture = vehicles/AGROTrailers_base,
+        scale = 0.02,
+    }
+    
+	item APlowshare
+    {
+        DisplayCategory = Gardening,
+        Weight	=	1.0,
+        Type = Container,
+        DisplayName	=	Plowshare,
+        Icon	=	APlowshare,
+        VehicleType =   1,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = Agrotsar.APlowshare_Ground,
+        Tags = DigPlow;Shovel,
+    }
+    
+    model AgrotsarMag_Ground
+    {
+        mesh = WorldItems/AgroMagazine,
+        texture = WorldItems/AGRO_Magazine,
+		scale = 0.5,
+	}
+	model AgrotsarMag_Reading
+    {
+        mesh = Magazine,
+        texture = WorldItems/AGRO_Magazine,
+		scale = 1,
+	}
+	item AgrotsarMag /* Спавн */ 
+    {
+        Weight	=	0.1,
+        Type	=	Literature,
+        DisplayName	=	Agrotsar Farming Company,
+        Icon	=	AGROMagazineIcon,
+        TeachedRecipes  =   Make ASeederTankSmall;Make ASeederTankMedium;Make ASeederTankLarge;Make ASeederPlate;Make APlowshare,
+        ReplaceOnUse    =   AgrotsarMag,
+        Tooltip = Tooltip_item_AgrotsarMag,
+        StaticModel = Agrotsar.AgrotsarMag_Reading,
+        WorldStaticModel = Agrotsar.AgrotsarMag_Ground,
+    }
+}

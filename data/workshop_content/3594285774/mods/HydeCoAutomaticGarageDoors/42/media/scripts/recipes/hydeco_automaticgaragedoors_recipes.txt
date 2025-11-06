@@ -1,0 +1,48 @@
+module HydeCoAutomaticGarageDoors
+{
+    imports
+    {
+        Base
+    }
+
+    craftRecipe AssembleHydeCoGarageDoorRemote
+    {
+        timedAction = Making,
+        time = 45,
+        tags = AnySurfaceCraft;Crafting,
+        category = Electronics,
+        ToolTip = HydeCoAutomaticGarageDoors_AssembleRemote,
+        inputs
+        {
+            item 1 [Base.ElectricWire] mode:destroy,
+            item 1 [Base.Receiver] mode:destroy,
+            item 1 [Base.RadioTransmitter] mode:destroy,
+            item 2 [Base.ElectronicsScrap] mode:destroy,
+            item 2 [Base.Screws] mode:destroy,
+            item 1 tags[MiscElectronic] mode:destroy,
+            item 1 [Base.Screwdriver] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.HydeCoGarageDoorRemote,
+        }
+    }
+
+    craftRecipe DisassembleHydeCoGarageDoorRemote
+    {
+        timedAction = Dismantle,
+        time = 30,
+        tags = AnySurfaceCraft;Crafting,
+        category = Electronics,
+        ToolTip = HydeCoAutomaticGarageDoors_DisassembleRemote,
+        inputs
+        {
+            item 1 [Base.HydeCoGarageDoorRemote] mode:destroy,
+            item 1 [Base.Screwdriver] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.ElectronicsScrap,
+        }
+    }
+}

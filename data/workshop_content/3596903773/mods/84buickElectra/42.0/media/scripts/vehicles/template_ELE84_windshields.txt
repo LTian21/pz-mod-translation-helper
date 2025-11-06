@@ -1,0 +1,156 @@
+module Base
+{
+
+    model 84buickElectraWindshield
+    {
+        mesh = vehicles/Vehicles_84buickElectra_Body|electra_sedan_windshield_f,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 84buickElectraWindshieldRear
+    {
+        mesh = vehicles/Vehicles_84buickElectra_Body|84c-platform_sedan_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+    model 84buickElectraWindshieldRearC
+    {
+        mesh = vehicles/Vehicles_84buickElectra_Body|84c-platform_coupe_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+    }
+
+	template vehicle ELE84Windshields
+	{
+        part Windshield
+        {
+            model windshieldFront
+            {
+                file = 84buickElectraWindshield,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.84gmCbodyWindshield,
+            area = Engine,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+			            equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    recipes = Advanced Mechanics,
+                    requireUninstalled = DAMNWindshieldArmor,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 84buickElectraWindshieldRear,
+            }
+            window
+            {
+                openable = false,
+            }
+                
+            itemType = Base.84gmCbodyRearWindshield,
+            area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = true,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = DAMNWindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle ELE84WindshieldsCoupe
+	{
+        template! = ELE84Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 84buickElectraWindshieldRearC,
+            }
+        }
+    }
+}

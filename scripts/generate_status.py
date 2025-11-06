@@ -37,16 +37,7 @@ STATUS_TEMPLATE = """# 汉化中心状态仪表盘
 
 ---
 
-> 详细的各 Mod 待办数量，请查看 [**Mod 待办状态**](MOD_TODO_STATUS.md)。
-"""
-
-MOD_TODO_STATUS_TEMPLATE = """# Mod 待办状态
-
-*此页面展示了当前所有已支持 Mod 的翻译状态。*
-
-*最后更新于：{update_time}*
-
----
+### 📊 **各 Mod 翻译状态**
 
 | Mod 名称 | Mod ID | 待翻译条目 | 待校对条目 | 缺少原文条目 | 模组总条目 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -174,6 +165,11 @@ def main():
     run_id, detailed_summary = get_latest_run_summary(UPDATE_LOG_JSON)
 
     # 4. 生成 STATUS.md
+    mod_todo_table_rows = [
+        f"| {mod['name'].replace('|', '&#124;')} | {mod['id']} | {mod['todos']} | {mod['to_proofread']} | {mod['missing_en']} | {mod['total_entries']} |"
+        for mod in mod_todo_list
+    ]
+    
     status_md_content = STATUS_TEMPLATE.format(
         update_time=f"`{update_time_str}`",
         total_entries=f"`{global_stats['total_entries']}`",
@@ -182,24 +178,12 @@ def main():
         total_to_proofread=f"`{global_stats['total_to_proofread']}`",
         mod_count=f"`{mod_count}`",
         run_id=f"`{run_id}`",
-        detailed_summary_section=detailed_summary
+        detailed_summary_section=detailed_summary,
+        mod_todo_table="\n".join(mod_todo_table_rows)
     )
     with open('STATUS.md', 'w', encoding='utf-8') as f:
         f.write(status_md_content)
     print("  -> STATUS.md 已生成。")
-
-    # 5. 生成 MOD_TODO_STATUS.md
-    mod_todo_table_rows = [
-        f"| {mod['name'].replace('|', '&#124;')} | {mod['id']} | {mod['todos']} | {mod['to_proofread']} | {mod['missing_en']} | {mod['total_entries']} |"
-        for mod in mod_todo_list
-    ]
-    mod_todo_status_content = MOD_TODO_STATUS_TEMPLATE.format(
-        update_time=f"`{update_time_str}`",
-        mod_todo_table="\n".join(mod_todo_table_rows)
-    )
-    with open('MOD_TODO_STATUS.md', 'w', encoding='utf-8') as f:
-        f.write(mod_todo_status_content)
-    print("  -> MOD_TODO_STATUS.md 已生成。")
     
     print("--- 所有报告生成完毕 ---")
 

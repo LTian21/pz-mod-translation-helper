@@ -1,0 +1,801 @@
+module Base
+{
+    craftRecipe OpenPackOfBeer
+    {
+        timedAction = Making,
+        time = 80,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.BeerPack;Base.BeerCanPack] mappers[itemType] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 6 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            Base.BeerBottle = Base.BeerPack,
+            Base.BeerCan = Base.BeerCanPack,
+        }
+    }
+
+    craftRecipe PackBeerBottles
+    {
+        timedAction = PackingBox,
+        time = 80,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 6 [Base.BeerBottle] mode:destroy flags[AllowFavorite;InheritFavorite;IsSealed;ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.BeerPack,
+        }
+    }
+
+    craftRecipe OpenBoxOfCannedFood
+    {
+        timedAction = UnPackBox,
+        time = 100,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.Macandcheese_Box;Base.TinnedBeans_Box;Base.CannedBolognese_Box;Base.CannedCarrots_Box;Base.CannedChili_Box;Base.CannedCornedBeef_Box;Base.CannedCorn_Box;Base.CannedFruitCocktail_Box;Base.CannedFruitBeverage_Box;Base.CannedMilk_Box;Base.CannedMushroomSoup_Box;Base.CannedPeaches_Box;Base.CannedPeas_Box;Base.CannedPineapple_Box;Base.CannedPotato_Box;Base.CannedSardines_Box;Base.TinnedSoup_Box;Base.CannedTomato_Box;Base.TunaTin_Box;Base.Dogfood_Box;Base.MysteryCan_Box;Base.DentedCan_Box;Base.WaterRationCan_Box] mappers[canSorts] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 6 mapper:canSorts,
+        }
+        itemMapper canSorts
+        {
+            Base.TinnedBeans = Base.TinnedBeans_Box,
+            Base.CannedBolognese = Base.CannedBolognese_Box,
+            Base.CannedCarrots2 = Base.CannedCarrots_Box,
+            Base.CannedChili = Base.CannedChili_Box,
+            Base.CannedCornedBeef = Base.CannedCornedBeef_Box,
+            Base.CannedCorn = Base.CannedCorn_Box,
+            Base.CannedFruitCocktail = Base.CannedFruitCocktail_Box,
+            Base.CannedFruitBeverage = Base.CannedFruitBeverage_Box,
+            Base.CannedMilk = Base.CannedMilk_Box,
+            Base.CannedMushroomSoup = Base.CannedMushroomSoup_Box,
+            Base.CannedPeaches = Base.CannedPeaches_Box,
+            Base.CannedPeas = Base.CannedPeas_Box,
+            Base.CannedPineapple = Base.CannedPineapple_Box,
+            Base.CannedPotato2 = Base.CannedPotato_Box,
+            Base.CannedSardines = Base.CannedSardines_Box,
+            Base.TinnedSoup = Base.TinnedSoup_Box,
+            Base.CannedTomato2 = Base.CannedTomato_Box,
+            Base.TunaTin = Base.TunaTin_Box,
+            Base.Dogfood = Base.Dogfood_Box,
+            Base.MysteryCan = Base.MysteryCan_Box,
+            Base.DentedCan = Base.DentedCan_Box,
+            Base.WaterRationCan = Base.WaterRationCan_Box,
+            Base.Macandcheese = Base.Macandcheese_Box,
+        }
+    }
+
+    craftRecipe PackCannedFood
+    {
+        timedAction = PackingBox,
+        time = 100,
+        Tags = InHandCraft,
+        category = Packing,
+        inputs
+        {
+            item 6 [Base.Macandcheese;Base.TinnedBeans;Base.CannedBolognese;Base.CannedCarrots2;Base.CannedChili;Base.CannedCornedBeef;Base.CannedCorn;Base.CannedFruitCocktail;Base.CannedFruitBeverage;Base.CannedMilk;Base.CannedMushroomSoup;Base.CannedPeaches;Base.CannedPeas;Base.CannedPineapple;Base.CannedPotato2;Base.CannedSardines;Base.TinnedSoup;Base.CannedTomato2;Base.TunaTin;Base.Dogfood;Base.MysteryCan;Base.DentedCan;Base.WaterRationCan] mappers[canSorts] flags[AllowFavorite;InheritFavorite;IsExclusive],
+        }
+        outputs
+        {
+            item 1 mapper:canSorts,
+        }
+        itemMapper canSorts
+        {
+            Base.TinnedBeans_Box = Base.TinnedBeans,
+            Base.CannedBolognese_Box = Base.CannedBolognese,
+            Base.CannedCarrots_Box = Base.CannedCarrots2,
+            Base.CannedChili_Box = Base.CannedChili,
+            Base.CannedCornedBeef_Box = Base.CannedCornedBeef,
+            Base.CannedCorn_Box = Base.CannedCorn,
+            Base.CannedFruitCocktail_Box = Base.CannedFruitCocktail,
+            Base.CannedFruitBeverage_Box = Base.CannedFruitBeverage,
+            Base.CannedMilk_Box = Base.CannedMilk,
+            Base.CannedMushroomSoup_Box = Base.CannedMushroomSoup,
+            Base.CannedPeaches_Box = Base.CannedPeaches,
+            Base.CannedPeas_Box = Base.CannedPeas,
+            Base.CannedPineapple_Box = Base.CannedPineapple,
+            Base.CannedPotato_Box = Base.CannedPotato2,
+            Base.CannedSardines_Box = Base.CannedSardines,
+            Base.TinnedSoup_Box = Base.TinnedSoup,
+            Base.CannedTomato_Box = Base.CannedTomato2,
+            Base.TunaTin_Box = Base.TunaTin,
+            Base.Dogfood_Box = Base.Dogfood,
+            Base.MysteryCan_Box = Base.MysteryCan,
+            Base.DentedCan_Box = Base.DentedCan,
+            Base.WaterRationCan_Box = Base.WaterRationCan,
+            Base.Macandcheese_Box = Base.Macandcheese,
+        }
+    }
+
+    craftRecipe OpenBoxOfWine
+    {
+        timedAction = UnPackBox,
+        time = 80,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.WineWhite_Boxed;Base.WineRed_Boxed] mappers[wineType] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 6 mapper:wineType,
+        }
+        itemMapper wineType
+        {
+            Base.Wine = Base.WineWhite_Boxed,
+            Base.Wine2 = Base.WineRed_Boxed,
+        }
+    }
+
+    craftRecipe PackBoxOfWine
+    {
+        timedAction = PackingBox,
+        time = 80,
+        Tags = InHandCraft;Cooking,
+        category = Packing,
+        inputs
+        {
+            item 6 [Base.Wine;Base.Wine2] mappers[wineType] flags[AllowFavorite;InheritFavorite;IsExclusive;ItemCount;IsSealed],
+        }
+        outputs
+        {
+            item 1 mapper:wineType,
+        }
+        itemMapper wineType
+        {
+            Base.WineWhite_Boxed = Base.Wine,
+            Base.WineRed_Boxed = Base.Wine2,
+        }
+    }
+
+    craftRecipe UnbundleMoney
+    {
+        timedAction = Making,
+        time = 80,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.MoneyBundle] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 100 Base.Money,
+        }
+    }
+
+    craftRecipe OpenBoxOfJars
+    {
+        timedAction = UnPackBox,
+        time = 15,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.BoxOfJars] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 6 Base.EmptyJar,
+            item 6 Base.JarLid,
+        }
+    }
+
+    craftRecipe PutJarsInBox
+    {
+        timedAction = PackingBox,
+        time = 15,
+        Tags = InHandCraft;Packing,
+        category = Packing,
+        inputs
+        {
+            item 6 [Base.EmptyJar] flags[AllowFavorite;InheritFavorite;ItemCount],
+            item 6 [Base.JarLid] flags[IsUndamaged;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.BoxOfJars,
+        }
+    }
+
+    craftRecipe OpenBox100
+    {
+        timedAction = UnPackBox_Small,
+        time = 5,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.NailsBox;Base.ScrewsBox;Base.CapGunCapBox] mappers[itemType] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 100 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            Base.CapGunCap = Base.CapGunCapBox,
+            Base.Nails = Base.NailsBox,
+            Base.Screws = Base.ScrewsBox,
+        }
+    }
+
+    craftRecipe OpenCarton12
+    {
+        timedAction = UnPackBox,
+        time = 50,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.NailsCarton;Base.ScrewsCarton] mappers[boxType] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 12 mapper:boxType,
+        }
+        itemMapper boxType
+        {
+            Base.NailsBox = Base.NailsCarton,
+            Base.ScrewsBox = Base.ScrewsCarton,
+        }
+    }
+
+    craftRecipe OpenBoxOfPaperclip
+    {
+        timedAction = UnPackBox_Small,
+        time = 5,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.PaperclipBox] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 40 Base.Paperclip,
+        }
+    }
+
+    craftRecipe PlaceInBox
+    {
+        timedAction = PackingBox_Small,
+        time = 25,
+        OnTest = RecipeCodeOnTest.genericPacking,
+        OnCreate = RecipeCodeOnCreate.placeInBox,
+        Tags = InHandCraft;Packing,
+        category = Packing,
+        inputs
+        {
+            item 6 [Base.Candle;Base.Coldpack;Base.LightBulb;10:Base.FishingHook;12:Base.Scotchtape;12:Base.Antibiotics;12:Base.Bandage;12:Base.Battery;12:Base.CottonBalls;12:Base.DuctTape;12:Base.SutureNeedle;20:Base.TongueDepressor;24:Base.Bandaid;40:Base.Paperclip;100:Base.Nails;100:Base.Screws;100:Base.CapGunCap] mappers[itemType] flags[AllowFavorite;InheritFavorite;IsExclusive;ItemCount],
+        }
+        outputs
+        {
+            item 1 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            Base.FishingHookBox = Base.FishingHook,
+            Base.CapGunCapBox = Base.CapGunCap,
+            Base.NailsBox = Base.Nails,
+            Base.ScrewsBox = Base.Screws,
+            Base.AdhesiveBandageBox = Base.Bandaid,
+            Base.AdhesiveTapeBox = Base.Scotchtape,
+            Base.AntibioticsBox = Base.Antibiotics,
+            Base.BandageBox = Base.Bandage,
+            Base.BatteryBox = Base.Battery,
+            Base.CandleBox = Base.Candle,
+            Base.ColdpackBox = Base.Coldpack,
+            Base.CottonBallsBox = Base.CottonBalls,
+            Base.DuctTapeBox = Base.DuctTape,
+            Base.FishingHookBox = Base.FishingHook,
+            Base.LightBulbBox = Base.LightBulb,
+            Base.NailsBox = Base.Nails,
+            Base.PaperclipBox = Base.Paperclip,
+            Base.ScrewsBox = Base.Screws,
+            Base.SutureNeedleBox = Base.SutureNeedle,
+            Base.TongueDepressorBox = Base.TongueDepressor,
+        }
+    }
+
+    craftRecipe Place12BoxesInCarton
+    {
+        timedAction = PackingBox,
+        time = 50,
+        Tags = InHandCraft;Packing,
+        category = Packing,
+        inputs
+        {
+            item 12 [Base.NailsBox;Base.ScrewsBox] mappers[itemType] flags[AllowFavorite;InheritFavorite;IsExclusive],
+        }
+        outputs
+        {
+            item 1 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            Base.NailsCarton = Base.NailsBox,
+            Base.ScrewsCarton = Base.ScrewsBox,
+        }
+    }
+
+    craftRecipe OpenBoxOfFishingHooks
+    {
+        timedAction = UnPackBox_Small,
+        time = 5,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.FishingHookBox] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 10 Base.FishingHook,
+        }
+    }
+
+    craftRecipe UnpackSetOfBooks
+    {
+        timedAction = UnPackBox,
+        time = 80,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.BookAimingSet;Base.BookHusbandrySet;Base.BookButcheringSet;Base.BookCarpentrySet;Base.BookCarvingSet;Base.BookCookingSet;Base.BookElectricianSet;Base.BookFarmingSet;Base.BookFirstAidSet;Base.BookFishingSet;Base.BookForagingSet;Base.BookGlassmakingSet;Base.BookLongBladeSet;Base.BookMasonrySet;Base.BookMechanicsSet;Base.BookBlacksmithSet;Base.BookMetalWeldingSet;Base.BookReloadingSet;Base.BookTailoringSet;Base.BookTrackingSet;Base.BookTrappingSet;Base.BookFlintKnappingSet;Base.BookMaintenanceSet;Base.BookPotterySet] mappers[book1;book2;book3;book4;book5] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 mapper:book1,
+            item 1 mapper:book2,
+            item 1 mapper:book3,
+            item 1 mapper:book4,
+            item 1 mapper:book5,
+        }
+        itemMapper book1
+        {
+            Base.BookAiming1 = Base.BookAimingSet,
+            Base.BookHusbandry1 = Base.BookHusbandrySet,
+            Base.BookButchering1 = Base.BookButcheringSet,
+            Base.BookCarpentry1 = Base.BookCarpentrySet,
+            Base.BookCarving1 = Base.BookCarvingSet,
+            Base.BookCooking1 = Base.BookCookingSet,
+            Base.BookElectrician1 = Base.BookElectricianSet,
+            Base.BookFarming1 = Base.BookFarmingSet,
+            Base.BookFirstAid1 = Base.BookFirstAidSet,
+            Base.BookFishing1 = Base.BookFishingSet,
+            Base.BookForaging1 = Base.BookForagingSet,
+            Base.BookGlassmaking1 = Base.BookGlassmakingSet,
+            Base.BookLongBlade1 = Base.BookLongBladeSet,
+            Base.BookFlintKnapping1 = Base.BookFlintKnappingSet,
+            Base.BookMasonry1 = Base.BookMasonrySet,
+            Base.BookMechanic1 = Base.BookMechanicsSet,
+            Base.BookMaintenance1 = Base.BookMaintenanceSet,
+            Base.BookBlacksmith1 = Base.BookBlacksmithSet,
+            Base.BookMetalWelding1 = Base.BookMetalWeldingSet,
+            Base.BookReloading1 = Base.BookReloadingSet,
+            Base.BookTailoring1 = Base.BookTailoringSet,
+            Base.BookTrapping1 = Base.BookTrappingSet,
+            Base.BookTracking1 = Base.BookTrackingSet,
+            Base.BookPottery1 = Base.BookPotterySet,
+        }
+        itemMapper book2
+        {
+            Base.BookAiming2 = Base.BookAimingSet,
+            Base.BookHusbandry2 = Base.BookHusbandrySet,
+            Base.BookButchering2 = Base.BookButcheringSet,
+            Base.BookCarpentry2 = Base.BookCarpentrySet,
+            Base.BookCarving2 = Base.BookCarvingSet,
+            Base.BookCooking2 = Base.BookCookingSet,
+            Base.BookElectrician2 = Base.BookElectricianSet,
+            Base.BookFarming2 = Base.BookFarmingSet,
+            Base.BookFirstAid2 = Base.BookFirstAidSet,
+            Base.BookFishing2 = Base.BookFishingSet,
+            Base.BookForaging2 = Base.BookForagingSet,
+            Base.BookGlassmaking2 = Base.BookGlassmakingSet,
+            Base.BookLongBlade2 = Base.BookLongBladeSet,
+            Base.BookFlintKnapping2 = Base.BookFlintKnappingSet,
+            Base.BookMasonry2 = Base.BookMasonrySet,
+            Base.BookMechanic2 = Base.BookMechanicsSet,
+            Base.BookMaintenance2 = Base.BookMaintenanceSet,
+            Base.BookBlacksmith2 = Base.BookBlacksmithSet,
+            Base.BookMetalWelding2 = Base.BookMetalWeldingSet,
+            Base.BookReloading2 = Base.BookReloadingSet,
+            Base.BookTailoring2 = Base.BookTailoringSet,
+            Base.BookTrapping2 = Base.BookTrappingSet,
+            Base.BookTracking2 = Base.BookTrackingSet,
+            Base.BookPottery2 = Base.BookPotterySet,
+        }
+        itemMapper book3
+        {
+            Base.BookAiming3 = Base.BookAimingSet,
+            Base.BookHusbandry3 = Base.BookHusbandrySet,
+            Base.BookButchering3 = Base.BookButcheringSet,
+            Base.BookCarpentry3 = Base.BookCarpentrySet,
+            Base.BookCarving3 = Base.BookCarvingSet,
+            Base.BookCooking3 = Base.BookCookingSet,
+            Base.BookElectrician3 = Base.BookElectricianSet,
+            Base.BookFarming3 = Base.BookFarmingSet,
+            Base.BookFirstAid3 = Base.BookFirstAidSet,
+            Base.BookFishing3 = Base.BookFishingSet,
+            Base.BookForaging3 = Base.BookForagingSet,
+            Base.BookGlassmaking3 = Base.BookGlassmakingSet,
+            Base.BookLongBlade3 = Base.BookLongBladeSet,
+            Base.BookFlintKnapping3 = Base.BookFlintKnappingSet,
+            Base.BookMasonry3 = Base.BookMasonrySet,
+            Base.BookMechanic3 = Base.BookMechanicsSet,
+            Base.BookMaintenance3 = Base.BookMaintenanceSet,
+            Base.BookBlacksmith3 = Base.BookBlacksmithSet,
+            Base.BookMetalWelding3 = Base.BookMetalWeldingSet,
+            Base.BookReloading3 = Base.BookReloadingSet,
+            Base.BookTailoring3 = Base.BookTailoringSet,
+            Base.BookTrapping3 = Base.BookTrappingSet,
+            Base.BookTracking3 = Base.BookTrackingSet,
+            Base.BookPottery3 = Base.BookPotterySet,
+        }
+        itemMapper book4
+        {
+            Base.BookAiming4 = Base.BookAimingSet,
+            Base.BookHusbandry4 = Base.BookHusbandrySet,
+            Base.BookButchering4 = Base.BookButcheringSet,
+            Base.BookCarpentry4 = Base.BookCarpentrySet,
+            Base.BookCarving4 = Base.BookCarvingSet,
+            Base.BookCooking4 = Base.BookCookingSet,
+            Base.BookElectrician4 = Base.BookElectricianSet,
+            Base.BookFarming4 = Base.BookFarmingSet,
+            Base.BookFirstAid4 = Base.BookFirstAidSet,
+            Base.BookFishing4 = Base.BookFishingSet,
+            Base.BookForaging4 = Base.BookForagingSet,
+            Base.BookGlassmaking4 = Base.BookGlassmakingSet,
+            Base.BookLongBlade4 = Base.BookLongBladeSet,
+            Base.BookFlintKnapping4 = Base.BookFlintKnappingSet,
+            Base.BookMasonry4 = Base.BookMasonrySet,
+            Base.BookMechanic4 = Base.BookMechanicsSet,
+            Base.BookMaintenance4 = Base.BookMaintenanceSet,
+            Base.BookBlacksmith4 = Base.BookBlacksmithSet,
+            Base.BookMetalWelding4 = Base.BookMetalWeldingSet,
+            Base.BookReloading4 = Base.BookReloadingSet,
+            Base.BookTailoring4 = Base.BookTailoringSet,
+            Base.BookTrapping4 = Base.BookTrappingSet,
+            Base.BookTracking4 = Base.BookTrackingSet,
+            Base.BookPottery4 = Base.BookPotterySet,
+        }
+        itemMapper book5
+        {
+            Base.BookAiming5 = Base.BookAimingSet,
+            Base.BookHusbandry5 = Base.BookHusbandrySet,
+            Base.BookButchering5 = Base.BookButcheringSet,
+            Base.BookCarpentry5 = Base.BookCarpentrySet,
+            Base.BookCarving5 = Base.BookCarvingSet,
+            Base.BookCooking5 = Base.BookCookingSet,
+            Base.BookElectrician5 = Base.BookElectricianSet,
+            Base.BookFarming5 = Base.BookFarmingSet,
+            Base.BookFirstAid5 = Base.BookFirstAidSet,
+            Base.BookFishing5 = Base.BookFishingSet,
+            Base.BookForaging5 = Base.BookForagingSet,
+            Base.BookGlassmaking5 = Base.BookGlassmakingSet,
+            Base.BookLongBlade5 = Base.BookLongBladeSet,
+            Base.BookFlintKnapping5 = Base.BookFlintKnappingSet,
+            Base.BookMasonry5 = Base.BookMasonrySet,
+            Base.BookMechanic5 = Base.BookMechanicsSet,
+            Base.BookMaintenance5 = Base.BookMaintenanceSet,
+            Base.BookBlacksmith5 = Base.BookBlacksmithSet,
+            Base.BookMetalWelding5 = Base.BookMetalWeldingSet,
+            Base.BookReloading5 = Base.BookReloadingSet,
+            Base.BookTailoring5 = Base.BookTailoringSet,
+            Base.BookTrapping5 = Base.BookTrappingSet,
+            Base.BookTracking5 = Base.BookTrackingSet,
+            Base.BookPottery5 = Base.BookPotterySet,
+        }
+    }
+
+    craftRecipe PackSetOfBooks
+    {
+        timedAction = PackingBox,
+        time = 80,
+        Tags = InHandCraft;Packing,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.BookAiming1;Base.BookHusbandry1;Base.BookCarpentry1;Base.BookCooking1;Base.BookElectrician1;Base.BookFarming1;Base.BookFirstAid1;Base.BookFishing1;Base.BookForaging1;Base.BookGlassmaking1;Base.BookLongBlade1;Base.BookMasonry1;Base.BookMechanic1;Base.BookBlacksmith1;Base.BookMetalWelding1;Base.BookPottery1;Base.BookReloading1;Base.BookTailoring1;Base.BookTrapping1;Base.BookCarving1;Base.BookFlintKnapping1;Base.BookButchering1;Base.BookTracking1;Base.BookMaintenance1] mappers[bookType] flags[AllowFavorite;InheritFavorite],
+            item 1 [Base.BookAiming2;Base.BookHusbandry2;Base.BookCarpentry2;Base.BookCooking2;Base.BookElectrician2;Base.BookFarming2;Base.BookFirstAid2;Base.BookFishing2;Base.BookForaging2;Base.BookGlassmaking2;Base.BookLongBlade2;Base.BookMasonry2;Base.BookMechanic2;Base.BookBlacksmith2;Base.BookMetalWelding2;Base.BookPottery2;Base.BookReloading2;Base.BookTailoring2;Base.BookTrapping2;Base.BookCarving2;Base.BookFlintKnapping2;Base.BookButchering2;Base.BookTracking2;Base.BookMaintenance2] mappers[bookType] flags[AllowFavorite;InheritFavorite],
+            item 1 [Base.BookAiming3;Base.BookHusbandry3;Base.BookCarpentry3;Base.BookCooking3;Base.BookElectrician3;Base.BookFarming3;Base.BookFirstAid3;Base.BookFishing3;Base.BookForaging3;Base.BookGlassmaking3;Base.BookLongBlade3;Base.BookMasonry3;Base.BookMechanic3;Base.BookBlacksmith3;Base.BookMetalWelding3;Base.BookPottery3;Base.BookReloading3;Base.BookTailoring3;Base.BookTrapping3;Base.BookCarving3;Base.BookFlintKnapping3;Base.BookButchering3;Base.BookTracking3;Base.BookMaintenance3] mappers[bookType] flags[AllowFavorite;InheritFavorite],
+            item 1 [Base.BookAiming4;Base.BookHusbandry4;Base.BookCarpentry4;Base.BookCooking4;Base.BookElectrician4;Base.BookFarming4;Base.BookFirstAid4;Base.BookFishing4;Base.BookForaging4;Base.BookGlassmaking4;Base.BookLongBlade4;Base.BookMasonry4;Base.BookMechanic4;Base.BookBlacksmith4;Base.BookMetalWelding4;Base.BookPottery4;Base.BookReloading4;Base.BookTailoring4;Base.BookTrapping4;Base.BookCarving4;Base.BookFlintKnapping4;Base.BookButchering4;Base.BookTracking4;Base.BookMaintenance4] mappers[bookType] flags[AllowFavorite;InheritFavorite],
+            item 1 [Base.BookAiming5;Base.BookHusbandry5;Base.BookCarpentry5;Base.BookCooking5;Base.BookElectrician5;Base.BookFarming5;Base.BookFirstAid5;Base.BookFishing5;Base.BookForaging5;Base.BookGlassmaking5;Base.BookLongBlade5;Base.BookMasonry5;Base.BookMechanic5;Base.BookBlacksmith5;Base.BookMetalWelding5;Base.BookPottery5;Base.BookReloading5;Base.BookTailoring5;Base.BookTrapping5;Base.BookCarving5;Base.BookFlintKnapping5;Base.BookButchering5;Base.BookTracking5;Base.BookMaintenance5] mappers[bookType] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 mapper:bookType,
+        }
+        itemMapper bookType
+        {
+            Base.BookAimingSet = Base.BookAiming1;Base.BookAiming2;Base.BookAiming3;Base.BookAiming4;Base.BookAiming5,
+            Base.BookButcheringSet = Base.BookButchering1;Base.BookButchering2;Base.BookButchering3;Base.BookButchering4;Base.BookButchering5,
+            Base.BookHusbandrySet = Base.BookHusbandry1;Base.BookHusbandry2;Base.BookHusbandry3;Base.BookHusbandry4;Base.BookHusbandry5,
+            Base.BookCarpentrySet = Base.BookCarpentry1;Base.BookCarpentry2;Base.BookCarpentry3;Base.BookCarpentry4;Base.BookCarpentry5,
+            Base.BookCarvingSet = Base.BookCarving1;Base.BookCarving2;Base.BookCarving3;Base.BookCarving4;Base.BookCarving5,
+            Base.BookCookingSet = Base.BookCooking1;Base.BookCooking2;Base.BookCooking3;Base.BookCooking4;Base.BookCooking5,
+            Base.BookElectricianSet = Base.BookElectrician1;Base.BookElectrician2;Base.BookElectrician3;Base.BookElectrician4;Base.BookElectrician5,
+            Base.BookFarmingSet = Base.BookFarming1;Base.BookFarming2;Base.BookFarming3;Base.BookFarming4;Base.BookFarming5,
+            Base.BookFirstAidSet = Base.BookFirstAid1;Base.BookFirstAid2;Base.BookFirstAid3;Base.BookFirstAid4;Base.BookFirstAid5,
+            Base.BookFishingSet = Base.BookFishing1;Base.BookFishing2;Base.BookFishing3;Base.BookFishing4;Base.BookFishing5,
+            Base.BookForagingSet = Base.BookForaging1;Base.BookForaging2;Base.BookForaging3;Base.BookForaging4;Base.BookForaging5,
+            Base.BookGlassmakingSet = Base.BookGlassmaking1;Base.BookGlassmaking2;Base.BookGlassmaking3;Base.BookGlassmaking4;Base.BookGlassmaking5,
+            Base.BookFlintKnappingSet = Base.BookFlintKnapping1;Base.BookFlintKnapping2;Base.BookFlintKnapping3;Base.BookFlintKnapping4;Base.BookFlintKnapping5,
+            Base.BookLongBladeSet = Base.BookLongBlade1;Base.BookLongBlade2;Base.BookLongBlade3;Base.BookLongBlade4;Base.BookLongBlade5,
+            Base.BookMasonrySet = Base.BookMasonry1;Base.BookMasonry2;Base.BookMasonry3;Base.BookMasonry4;Base.BookMasonry5,
+            Base.BookMechanicsSet = Base.BookMechanic1;Base.BookMechanic2;Base.BookMechanic3;Base.BookMechanic4;Base.BookMechanic5,
+            Base.BookMaintenanceSet = Base.BookMaintenance1;Base.BookMaintenance2;Base.BookMaintenance3;Base.BookMaintenance4;Base.BookMaintenance5,
+            Base.BookBlacksmithSet = Base.BookBlacksmith1;Base.BookBlacksmith2;Base.BookBlacksmith3;Base.BookBlacksmith4;Base.BookBlacksmith5,
+            Base.BookMetalWeldingSet = Base.BookMetalWelding1;Base.BookMetalWelding2;Base.BookMetalWelding3;Base.BookMetalWelding4;Base.BookMetalWelding5,
+            Base.BookPotterySet = Base.BookPottery1;Base.BookPottery2;Base.BookPottery3;Base.BookPottery4;Base.BookPottery5,
+            Base.BookReloadingSet = Base.BookReloading1;Base.BookReloading2;Base.BookReloading3;Base.BookReloading4;Base.BookReloading5,
+            Base.BookTailoringSet = Base.BookTailoring1;Base.BookTailoring2;Base.BookTailoring3;Base.BookTailoring4;Base.BookTailoring5,
+            Base.BookTrackingSet = Base.BookTracking1;Base.BookTracking2;Base.BookTracking3;Base.BookTracking4;Base.BookTracking5,
+            Base.BookTrappingSet = Base.BookTrapping1;Base.BookTrapping2;Base.BookTrapping3;Base.BookTrapping4;Base.BookTrapping5,
+        }
+    }
+
+    craftRecipe UnpackBox12
+    {
+        timedAction = UnPackBox,
+        time = 5,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        OnCreate = RecipeCodeOnCreate.unpackBox,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.AdhesiveTapeBox;Base.AntibioticsBox;Base.BandageBox;Base.BatteryBox;Base.CottonBallsBox;Base.DuctTapeBox;Base.SutureNeedleBox] mappers[itemType] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 12 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            Base.Scotchtape = Base.AdhesiveTapeBox,
+            Base.Antibiotics = Base.AntibioticsBox,
+            Base.Bandage = Base.BandageBox,
+            Base.Battery = Base.BatteryBox,
+            Base.CottonBalls = Base.CottonBallsBox,
+            Base.DuctTape = Base.DuctTapeBox,
+            Base.SutureNeedle = Base.SutureNeedleBox,
+        }
+    }
+
+    craftRecipe UnpackBoxOfAdhesiveBandages
+    {
+        timedAction = UnPackBox_Small,
+        time = 50,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.AdhesiveBandageBox] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 24 Base.Bandaid,
+        }
+    }
+
+    craftRecipe UnpackTongueDepressors
+    {
+        timedAction = UnPackBox_Small,
+        time = 5,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.TongueDepressorBox] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 20 Base.TongueDepressor,
+        }
+    }
+
+    craftRecipe UnpackBox6
+    {
+        timedAction = UnPackBox,
+        time = 5,
+        OnCreate = RecipeCodeOnCreate.unpackBox,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.CandleBox;Base.ColdpackBox;Base.LightBulbBox] mappers[itemType] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 6 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            Base.Candle = Base.CandleBox,
+            Base.Coldpack = Base.ColdpackBox,
+            Base.LightBulb = Base.LightBulbBox,
+        }
+    }
+
+    craftRecipe UnpackCigarettes
+    {
+        timedAction = Making,
+        time = 25,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.CigarettePack] mode:destroy flags[IsFull;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 20 Base.CigaretteSingle,
+        }
+    }
+
+    craftRecipe PackCigarettes
+    {
+        timedAction = Making,
+        time = 25,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 20 [Base.CigaretteSingle] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.CigarettePack,
+        }
+    }
+
+    craftRecipe TakeACigarette
+    {
+        timedAction = Making,
+        time = 15,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.CigarettePack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.CigaretteSingle,
+        }
+    }
+
+    craftRecipe AddACigarette
+    {
+        timedAction = Making,
+        time = 25,
+        OnCreate = RecipeCodeOnCreate.addToPack,
+        OnTest = RecipeCodeOnTest.canAddToPack,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.CigaretteSingle] flags[AllowFavorite;InheritFavorite],
+            item 1 [Base.CigarettePack] mode:keep flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+        }
+    }
+
+    craftRecipe UnpackCigaretteCarton
+    {
+        timedAction = UnPackBox_Small,
+        time = 5,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.CigaretteCarton] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 10 Base.CigarettePack,
+        }
+    }
+
+    craftRecipe PackCigaretteCarton
+    {
+        timedAction = PackingBox_Small,
+        time = 5,
+        OnTest = RecipeCodeOnTest.genericPacking,
+        Tags = InHandCraft;Packing,
+        category = Packing,
+        inputs
+        {
+            item 10 [Base.CigarettePack] flags[IsFull;AllowFavorite;InheritFavorite;ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.CigaretteCarton,
+        }
+    }
+
+    craftRecipe unstack_items
+    {
+        timedAction = Making,
+        time = 100,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.RippedSheetsBundle;Base.RippedSheetsDirtyBundle;Base.RippedSheetsSterilizedBundle;Base.DenimStripsBundle;Base.DenimStripsDirtyBundle;Base.LeatherStripsBundle;Base.LeatherStripsDirtyBundle;Base.TwigsBundle;Base.BranchesBundle;Base.RopeStack;Base.SheetRopeBundle;Base.BarbedWireStack;Base.WireStack] mappers[itemType] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 12 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            Base.RippedSheets = Base.RippedSheetsBundle,
+            Base.RippedSheetsDirty = Base.RippedSheetsDirtyBundle,
+            Base.AlcoholRippedSheets = Base.RippedSheetsSterilizedBundle,
+            Base.DenimStrips = Base.DenimStripsBundle,
+            Base.DenimStripsDirty = Base.DenimStripsDirtyBundle,
+            Base.LeatherStrips = Base.LeatherStripsBundle,
+            Base.LeatherStripsDirty = Base.LeatherStripsDirtyBundle,
+            Base.Twigs = Base.TwigsBundle,
+			Base.TreeBranch2 = Base.BranchesBundle,
+            Base.SheetRope = Base.SheetRopeBundle,
+            Base.Rope = Base.RopeStack,
+            Base.BarbedWire = Base.BarbedWireStack,
+            Base.Wire = Base.WireStack,
+        }
+    }
+
+    craftRecipe stack_items
+    {
+        timedAction = Making,
+        time = 100,
+        OnTest = RecipeCodeOnTest.genericPacking,
+        Tags = InHandCraft;Packing,
+        category = Packing,
+        inputs
+        {
+            item 12 [Base.RippedSheets;Base.RippedSheetsDirty;Base.AlcoholRippedSheets;Base.DenimStrips;Base.DenimStripsDirty;Base.LeatherStrips;Base.LeatherStripsDirty;Base.Twigs;Base.TreeBranch2;Base.SheetRope;Base.Rope;Base.BarbedWire;Base.Wire;100:Base.Money] mode:destroy mappers[itemType] flags[IsFull;AllowFavorite;InheritFavorite;ItemCount;IsExclusive],
+        }
+        outputs
+        {
+            item 1 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            Base.RippedSheetsBundle = Base.RippedSheets,
+            Base.RippedSheetsDirtyBundle = Base.RippedSheetsDirty,
+            Base.RippedSheetsSterilizedBundle = Base.AlcoholRippedSheets,
+            Base.DenimStripsBundle = Base.DenimStrips,
+            Base.DenimStripsDirtyBundle = Base.DenimStripsDirty,
+            Base.LeatherStripsBundle = Base.LeatherStrips,
+            Base.LeatherStripsDirtyBundle = Base.LeatherStripsDirty,
+            Base.TwigsBundle = Base.Twigs,
+			Base.BranchesBundle = Base.TreeBranch2,
+            Base.SheetRopeBundle = Base.SheetRope,
+            Base.RopeStack = Base.Rope,
+            Base.BarbedWireStack = Base.BarbedWire,
+            Base.WireStack = Base.Wire,
+            Base.MoneyBundle = Base.Money,
+        }
+    }
+}

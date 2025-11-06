@@ -6,7 +6,7 @@ from pathlib import Path
 
 # 配置
 logging.basicConfig(level=logging.INFO, format='%(message)s')
-CONFIG_FILE = Path('config.ini')
+CONFIG_FILE = Path('scripts/config.ini')
 STATUS_FILE = Path('data/.cache/.last_run_status.json')
 
 def get_config():

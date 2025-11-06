@@ -128,16 +128,29 @@ namespace 翻译工具
 
                 string programDir = AppDomain.CurrentDomain.BaseDirectory;
                 string userTranslationFile = Path.Combine(programDir, $"translations_{_config.UserName}_{suffix}.txt");
-                string guideImageSource = Path.Combine(basePath, "pz-mod-translation-helper", "简体中文翻译格式说明.png");
-                string guideImageDest = Path.Combine(programDir, "简体中文翻译格式说明.png");
+                string guideHtmlSource = Path.Combine(basePath, "pz-mod-translation-helper", "简体中文翻译格式说明.html");
+                string guideHtmlDest = Path.Combine(programDir, "简体中文翻译格式说明.html");
 
-                if (File.Exists(guideImageSource))
+                // 复制 HTML 格式说明文件
+                if (File.Exists(guideHtmlSource))
                 {
-                    try { File.Copy(guideImageSource, guideImageDest, true); } catch { }
+                    try 
+                    { 
+                        File.Copy(guideHtmlSource, guideHtmlDest, true);
+                        AppendOutput($"✓ 已复制格式说明文件");
+                    } 
+                    catch (Exception ex)
+                    {
+                        AppendOutput($"! 复制格式说明文件失败: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    AppendOutput($"! 未找到格式说明文件: {guideHtmlSource}");
                 }
 
                 AppendOutput($"正在打开翻译文件...");
-                OpenFilesWithVSCode(userTranslationFile, guideImageDest);
+                OpenTranslationFiles(userTranslationFile, guideHtmlDest);
             }
             catch (Exception ex)
             {
