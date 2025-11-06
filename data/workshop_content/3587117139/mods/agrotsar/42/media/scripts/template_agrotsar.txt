@@ -1,0 +1,214 @@
+module Base
+{
+	template vehicle Agrotsar
+	{
+		part AgroSeederTankLeft
+        {
+		    model Default
+            {
+                file = Agroseeder_Left_Tank,
+            }
+            table uninstall
+            {
+                requireUninstalled = AgroSeederPlateLeft,
+            }
+		}
+		part AgroSeederTankRight
+        {
+            model Default
+            {
+                file = Agroseeder_Right_Tank,
+            }
+            table uninstall
+            {
+                requireUninstalled = AgroSeederPlateRight,
+            }
+		}
+		part AgroSeederTank*
+        {
+			area = TruckBed,
+			itemType = Agrotsar.ASeederTankSmall;Agrotsar.ASeederTankMedium;Agrotsar.ASeederTankLarge,
+			mechanicRequireKey = false,
+			specificItem = yes,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 100,
+                professions = ,
+                skills = ,
+                traits = ,
+                recipes = ,
+                test = Vehicles.InstallTest.Default,
+            }
+            table uninstall
+            {
+                requireEmpty = true,
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 100,
+                test = Vehicles.UninstallTest.Default,
+            }
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+		part AgroSeederPlateLeft
+        {
+            table install
+            {
+                requireInstalled = AgroSeederTankLeft,
+            }
+		}
+		part AgroSeederPlateRight
+        {
+			table install
+            {
+                requireInstalled = AgroSeederTankRight,
+            }
+		}
+		part AgroSeederPlate*
+        {
+			area = TruckBed,
+			itemType = Agrotsar.ASeederPlate,
+			mechanicRequireKey = false,
+			specificItem = false,
+			table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 100,
+                professions = ,
+                skills = ,
+                traits = ,
+                recipes = ,
+                test = Vehicles.InstallTest.Default,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 100,
+                test = Vehicles.UninstallTest.Default,
+            }
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+		
+		part AgroPlowshareLeft
+        {
+			area = AgroLeft,
+
+			model Up
+			{
+				file = AgroploughPlowshareLeftUpModel,
+			}
+			model Down
+			{
+				file = AgroploughPlowshareLeftDownModel,
+			}
+		}
+		part AgroPlowshareRight
+        {
+			area = AgroRight,
+
+			model Up
+			{
+				file = AgroploughPlowshareRightUpModel,
+			}
+			model Down
+			{
+				file = AgroploughPlowshareRightDownModel,
+			}
+		}
+		
+		part AgroPlowshare*
+        {
+			itemType = Agrotsar.APlowshare,
+			mechanicRequireKey = false,
+			specificItem = false,
+			table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 100,
+                professions = ,
+                skills = ,
+                traits = ,
+                recipes = ,
+                test = Vehicles.InstallTest.Default,
+				complete = AGROVehicles.InstallComplete.AgroPlowshare,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+						equip = primary,
+                    }
+                }
+                time = 100,
+                test = Vehicles.UninstallTest.Default,
+				complete = AGROVehicles.UninstallComplete.AgroPlowshare,
+            }
+			lua
+			{
+				create = AGROVehicles.Create.AgroPlowshare,
+				init = AGROVehicles.Init.AgroPlowshare,
+				update = AGROVehicles.Update.AgroPlowshare,
+			}
+		}
+	}
+}

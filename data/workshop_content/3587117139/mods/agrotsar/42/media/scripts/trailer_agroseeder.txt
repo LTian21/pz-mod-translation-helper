@@ -1,0 +1,246 @@
+module Base
+{
+	model AgroseederModel
+    {
+        mesh = vehicles/AGROTractor|Seeder,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.004,
+    }
+	model Agroseeder_Wheel_rear_left
+    {
+        mesh = vehicles/AGROTractor|Seeder_rearwheel,
+        shader = basicEffect,
+		texture = vehicles/AGROTrailers_base,
+        invertX = FALSE,
+        scale = 0.004,
+    }
+	model Agroseeder_Wheel_rear_right
+    {
+        mesh = vehicles/AGROTractor|Seeder_rearwheel,
+        shader = basicEffect,
+		texture = vehicles/AGROTrailers_base,
+        invertX = TRUE,
+        scale = 0.004,
+    }
+	model Agroseeder_Wheel_front_left
+    {
+        mesh = vehicles/AGROTractor|Seeder_frontwheel,
+        shader = basicEffect,
+		texture = vehicles/AGROTrailers_base,
+        invertX = FALSE,
+        scale = 0.004,
+    }
+	model Agroseeder_Wheel_front_right
+    {
+        mesh = vehicles/AGROTractor|Seeder_frontwheel,
+        shader = basicEffect,
+		texture = vehicles/AGROTrailers_base,
+        invertX = TRUE,
+        scale = 0.004,
+    }
+    
+    model Agroseeder_Left_Tank
+    {
+        mesh = vehicles/AGROTractor|Seeder_left_tank,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.004,
+    }
+    model Agroseeder_Right_Tank
+    {
+        mesh = vehicles/AGROTractor|Seeder_right_tank,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.004,
+    }
+	
+	vehicle TrailerAgroseeder
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 2.0,
+		engineRepairLevel = 4,
+		playerDamageProtection = 0.8,
+
+		model
+		{
+			file = AgroseederModel,
+			scale = 1.8200,
+			offset = 0.0000 0.1868 0.0000,
+		}
+
+		skin
+		{
+			texture = Vehicles/AGROTrailers_base1,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base2,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base2,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base3,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base3,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base4,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base4,
+		}
+
+		textureShadow = vehicles/AGROSeeder_shadow,
+		textureRust = Vehicles/AGROTrailers_rust,
+		extents = 1.0769 0.5824 0.4725,
+		mass = 200,
+		physicsChassisShape = 1.0769 0.5824 0.4725,
+		centerOfMassOffset = 0.0000 0.3956 0.0000,
+		shadowExtents = 1.1209 0.8736,
+		shadowOffset = 0.0000 0.1868,
+		engineForce = 3600,
+		engineQuality = 60,
+		engineLoudness = 55,
+		maxSpeed = 70f,
+		brakingForce = 1,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 1.0f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 30,
+		suspensionCompression = 2.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.2,
+		wheelFriction = 4.0f,
+		frontEndHealth = 200,
+		rearEndHealth = 200,
+		seats = 2,
+
+		physics box
+		{
+			offset = 0.0000 0.2582 0.3571,
+			extents = 0.0549 0.0549 0.5385,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics sphere
+		{
+			offset = 0.0000 0.2582 0.6154,
+			radius = 0.0549,
+		}
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.5000 -0.1429 0.0934,
+			radius = 0.09f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.4945 -0.1429 0.0934,
+			radius = 0.09f,
+			width = 0.2f,
+		}
+
+		wheel RearLeft
+		{
+			front = true,
+			offset = 0.4670 -0.1648 -0.1484,
+			radius = 0.04f,
+			width = 0.2f,
+		}
+
+		wheel RearRight
+		{
+			front = true,
+			offset = -0.4725 -0.1648 -0.1484,
+			radius = 0.04f,
+			width = 0.2f,
+		}
+
+		area AgroLeft
+		{
+			xywh = 0.2747 -0.4121 0.5495 0.5495,
+		}
+
+		area AgroRight
+		{
+			xywh = -0.2747 -0.4121 0.5495 0.5495,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -0.5495 1.3407 0.6264,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.5330 -0.1703 0.4396 0.4725,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.5330 -0.1703 0.4396 0.4725,
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Agroseeder_Wheel_front_left,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Agroseeder_Wheel_front_right,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Agroseeder_Wheel_rear_left,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Agroseeder_Wheel_rear_right,
+			}
+		}
+
+		template = Suspension,
+		template = Agrotsar/part/AgroSeederTankLeft,
+		template = Agrotsar/part/AgroSeederTankRight,
+		template = Agrotsar/part/AgroSeederPlateLeft,
+		template = Agrotsar/part/AgroSeederPlateRight,
+
+		attachment trailer
+		{
+			offset = 0.0055 -0.0330 0.6044,
+			rotate = 0.0000 0.0000 0.0000,
+			canAttach = trailer,
+			updateconstraint = false,
+		}
+	}
+}

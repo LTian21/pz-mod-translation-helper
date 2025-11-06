@@ -1,0 +1,227 @@
+module Base
+{
+	model AgroploughModel
+    {
+        mesh = vehicles/AGROTractor|Plough,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.004,
+    }
+	model Agrotractor_Wheel_left
+    {
+        mesh = vehicles/AGROTractor|Plough_wheel,
+        shader = basicEffect,
+		texture = vehicles/Tractor_wheel,
+        invertX = TRUE,
+        scale = 0.004,
+    }
+	model Agrotractor_Wheel_right
+    {
+        mesh = vehicles/AGROTractor|Plough_wheel,
+        shader = basicEffect,
+		texture = vehicles/Tractor_wheel,
+        invertX = FALSE,
+        scale = 0.004,
+    }
+	model AgroploughPlowshareLeftUpModel
+    {
+        mesh = vehicles/AGROTractor|PlowshareLeftUp,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.004,
+    }
+	model AgroploughPlowshareLeftDownModel
+    {
+        mesh = vehicles/AGROTractor|PlowshareLeftDown,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.004,
+    }
+	model AgroploughPlowshareRightUpModel
+    {
+        mesh = vehicles/AGROTractor|PlowshareRightUp,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.004,
+    }
+	model AgroploughPlowshareRightDownModel
+    {
+        mesh = vehicles/AGROTractor|PlowshareRightDown,
+        shader = vehicle_norandom_multiuv,
+        invertX = FALSE,
+        scale = 0.004,
+    }
+	model Agroploug_Wheel
+	{
+		mesh = Vehicles_Wheel,
+		texture = Vehicles/vehicle_wheel,
+		shader = vehiclewheel,
+        scale = 0.8,
+	}
+	vehicle TrailerAgroplough
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 0.8,
+		engineRepairLevel = 4,
+		playerDamageProtection = 0.8,
+
+		model
+		{
+			file = AgroploughModel,
+			scale = 1.8200,
+			offset = 0.0000 0.1868 0.0000,
+		}
+
+		skin
+		{
+			texture = Vehicles/AGROTrailers_base1,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base2,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base2,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base3,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base3,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base4,
+		}
+        skin
+		{
+			texture = Vehicles/AGROTrailers_base4,
+		}
+
+		textureShadow = vehicles/AGROPlouge_shadow,
+		textureRust = Vehicles/AGROTrailers_rust,
+		extents = 1.0769 0.2198 0.4725,
+		mass = 200,
+		physicsChassisShape = 1.0769 0.5824 0.4176,
+		centerOfMassOffset = 0.0000 0.3956 0.0000,
+		shadowExtents = 1.0989 0.9505,
+		shadowOffset = 0.0000 0.2198,
+		engineForce = 3600,
+		engineQuality = 60,
+		engineLoudness = 55,
+		maxSpeed = 70f,
+		brakingForce = 1,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 1.0f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 40,
+		suspensionCompression = 2.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.2,
+		wheelFriction = 4.0f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+
+		physics box
+		{
+			offset = 0.0000 0.2582 0.3571,
+			extents = 0.0549 0.0549 0.5385,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics sphere
+		{
+			offset = 0.0000 0.2582 0.6154,
+			radius = 0.0549,
+		}
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.3571 -0.1868 0.0000,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.3571 -0.1868 0.0000,
+			radius = 0.15f,
+			width = 0.2f,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -0.5000 1.5055 0.5275,
+		}
+
+		area AgroLeft
+		{
+			xywh = 0.2747 -0.1099 0.5495 0.5495,
+		}
+
+		area AgroRight
+		{
+			xywh = -0.2747 -0.1099 0.5495 0.5495,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.5330 -0.1703 0.4396 0.4725,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.5330 -0.1703 0.4396 0.4725,
+		}
+
+		template = Tire/part/TireFrontLeft,
+		template = Tire/part/TireFrontRight,
+
+		part TireFrontLeft
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontLeft,
+			}
+
+			model InflatedTirePlusWheel
+			{
+				file = Agroploug_Wheel,
+			}
+		}
+
+		part TireFrontRight
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontRight,
+			}
+
+			model InflatedTirePlusWheel
+			{
+				file = Agroploug_Wheel,
+			}
+		}
+
+		template = Suspension/part/SuspensionFrontLeft,
+		template = Suspension/part/SuspensionFrontRight,
+		template = Agrotsar/part/AgroPlowshareLeft,
+		template = Agrotsar/part/AgroPlowshareRight,
+
+		attachment trailer
+		{
+			offset = 0.0000 0.0000 0.6099,
+			rotate = 0.0000 0.0000 0.0000,
+			canAttach = trailer,
+			updateconstraint = false,
+		}
+	}
+}
