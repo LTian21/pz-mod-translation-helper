@@ -2,7 +2,7 @@
 
 *此页面展示了当前所有已支持 Mod 的翻译状态。*
 
-*最后更新于：`2025-11-06 00:25:04 UTC+08:00`*
+*最后更新于：`2025-11-06 12:22:16 UTC+08:00`*
 
 ---
 
@@ -17,6 +17,7 @@
 | 1993 American Vehicle Pack (BUILD .41/.42) | 2809058492 | 376 | 5 | 5 | 381 |
 | Customizable Containers [B42/41] | 2719850086 | 352 | 1353 | 0 | 1705 |
 | Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 339 | 155 | 0 | 494 |
+| [B42] Take A Bath And Shower | 3592172476 | 296 | 0 | 0 | 296 |
 | [B42] School's Out: Anime-Style Student Uniforms | 3404301631 | 285 | 1 | 1 | 286 |
 | Immersive Lore | 3000924731 | 273 | 109 | 0 | 382 |
 | [B42] WarThunderVehicleLibrary | 3399660368 | 241 | 44 | 7 | 285 |
@@ -24,11 +25,13 @@
 | organizedCategories: Core | 3370707195 | 230 | 253 | 1 | 483 |
 | Support Goods [B42.9] - MyAlcohol! | 3510863962 | 218 | 0 | 0 | 218 |
 | (B42) Immersive Roleplay Professions and Traits | 3387474156 | 200 | 667 | 0 | 869 |
-| True Smoking [B42] | 3423984426 | 175 | 26 | 1 | 201 |
+| True Smoking [B42] | 3423984426 | 173 | 26 | 1 | 199 |
 | Somewhat Traits [B42 Compatible] | 3498347699 | 171 | 0 | 0 | 171 |
 | RaccoonCityB42 | 3388468313 | 169 | 36 | 2 | 205 |
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
 | Trap Manager | 3566766862 | 159 | 3 | 1 | 162 |
+| Airdrops | 3590950467 | 156 | 0 | 0 | 156 |
+| Bundle Branches [B42] | 3595072546 | 148 | 0 | 0 | 148 |
 | Detailed Skill Tooltips | 3572846242 | 141 | 0 | 0 | 141 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
@@ -47,6 +50,7 @@
 | [B42] Useful Barrels | 3436537035 | 77 | 1 | 0 | 78 |
 | Braven's Achievements | 3051277957 | 76 | 1 | 0 | 77 |
 | Weather Moodles [B42] | 3565697910 | 76 | 70 | 2 | 146 |
+| HydeCo. Automatic Garage Doors! | 3594285774 | 73 | 0 | 0 | 73 |
 | Mad Crafter [electric weapon and more] v0.2 | 3418701509 | 72 | 1 | 0 | 73 |
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 0 | 69 |
 | SCP - Foundation pack | 3580511016 | 66 | 0 | 0 | 66 |
@@ -86,12 +90,14 @@
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 26 | 10 | 0 | 36 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
+| Trunk Organizer | 3590632059 | 24 | 0 | 0 | 24 |
 | [B42] Week One NPC | 3403180543 | 23 | 808 | 0 | 831 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
 | Headwear Won't Fall | 3400293227 | 23 | 0 | 0 | 23 |
 | Legendary DuffelBag | 3558839307 | 23 | 26 | 0 | 49 |
 | Random Clothing [B41/B42] | 3397182976 | 23 | 109 | 7 | 132 |
 | Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
+| [B42] Rip More Clothing | 3596259242 | 22 | 0 | 0 | 22 |
 | Random Zombies | 2818577583 | 21 | 0 | 0 | 21 |
 | Fancy Lanterns [B42 Compatible] | 3267733558 | 21 | 47 | 0 | 68 |
 | Milk Them All [B42] | 3568280195 | 21 | 0 | 0 | 21 |
@@ -115,13 +121,16 @@
 | Willowbrook Bastion! | 3479667649 | 12 | 15 | 1 | 27 |
 | Bianca Wardrobe [42. Out now] | 3140453034 | 11 | 803 | 0 | 814 |
 | [B41\B42] DBG Crowbar Unlock | 3555407625 | 11 | 225 | 46 | 236 |
+| Encajar Piezas con Botin | 3591398623 | 11 | 0 | 0 | 11 |
 | Item Stories [b42] (All in One) | 3569303590 | 11 | 0 | 0 | 11 |
+| JB's Fireflies [B42] | 3591708775 | 11 | 0 | 0 | 11 |
 | Low Condition Guns [B41/B42] | 3579180724 | 11 | 0 | 0 | 11 |
 | Has Been Read | 2544353492 | 11 | 45 | 0 | 56 |
 | Stairs Alert | 3044807092 | 11 | 3 | 0 | 14 |
 | U.S. M998 Humvee by Papa_Chad | 3554424111 | 11 | 28 | 0 | 39 |
 | [J&G] Trauma Responder Uniform [B42/41] | 3443982326 | 11 | 46 | 0 | 63 |
 | DFMFoodMod | 3406694220 | 10 | 83 | 4 | 94 |
+| Generator Powered Buildings | 3597471949 | 10 | 51 | 0 | 61 |
 | [B41/B42] I Don't Need A Lighter | 2714198296 | 10 | 0 | 0 | 10 |
 | Street Smarts | 3511535258 | 10 | 11 | 2 | 21 |
 | Undying Zombies (Immersive Respawn Replacement) | 3555199477 | 10 | 0 | 0 | 10 |
@@ -142,6 +151,7 @@
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 6 | 369 | 0 | 375 |
 | TwisTonFire - Dude, Where Is My Car? | 3576268735 | 6 | 0 | 0 | 6 |
 | Yaki's BarberShop | 2810471370 | 6 | 0 | 0 | 6 |
+| [B42] How Much Fuel Left | 3594286689 | 6 | 1 | 0 | 7 |
 | [J&G] Black Multicam Uniform [B42/41] | 3315302991 | 6 | 39 | 0 | 47 |
 | [J&G] Desert Uniform [B42/41] | 3299457564 | 6 | 37 | 0 | 44 |
 | [J&G] Forest Multicam Uniform [B42/41] | 3309971624 | 6 | 37 | 0 | 44 |
@@ -170,7 +180,9 @@
 | Ducks+ | 3409153536 | 3 | 89 | 0 | 92 |
 | [B42/B41] The Motorious Zone Vehicle Pack | 2791656602 | 3 | 220 | 0 | 223 |
 | Gunpoint Redemption [B.41/B.42] | 3078291265 | 3 | 11 | 0 | 14 |
+| [B42/41] Safe Indoor Campfire | 3591562181 | 3 | 0 | 0 | 3 |
 | [B42]Sector-7 Breach | 3513107552 | 3 | 9 | 3 | 12 |
+| Watch Your Trunk [B42 Compatible] | 3591049094 | 3 | 0 | 0 | 3 |
 | [J&G] Caution Uniform [B42/41] | 3369825662 | 3 | 39 | 0 | 44 |
 | '93 Chevrolet Suburban / Silverado | 3152529790 | 2 | 150 | 0 | 152 |
 | [B42] Sandbox Options | 3386906181 | 2 | 3 | 0 | 5 |
@@ -188,6 +200,8 @@
 | Thief Expansion | 2596620950 | 2 | 68 | 0 | 70 |
 | PZK VLC (Vanilla look-like car pack) | 3217685049 | 2 | 693 | 6 | 695 |
 | [B42/41] Read Book Bypassing Level Restrictions | 3319538177 | 2 | 9 | 0 | 11 |
+| Rick's MLC GunLight Patch [B42] | 3595628283 | 2 | 2 | 0 | 4 |
+| U.S. M163 VADS by Papa_Chad | 3598575779 | 2 | 0 | 0 | 2 |
 | Vehicle Military Zone | 3436499337 | 2 | 9 | 0 | 11 |
 | Water Goes Bad | 2849467715 | 2 | 17 | 17 | 19 |
 | '86 Chevrolet CUCVs + M101A2 Trailer | 3428008364 | 1 | 82 | 1 | 83 |
@@ -214,7 +228,7 @@
 | Seesaw Game | 3515515643 | 1 | 9 | 0 | 10 |
 | Pomp's Items - My Little Pony | 2792387747 | 1 | 938 | 32 | 939 |
 | Risky Unarmed | 3434796669 | 1 | 94 | 0 | 95 |
-| Simple Skill Books | 3291799176 | 1 | 124 | 0 | 125 |
+| Simple Skill Books | 3291799176 | 1 | 31 | 0 | 32 |
 |  Wearable Towels [B41/B42] | 3203159242 | 1 | 37 | 30 | 40 |
 | [OUTDATED] Support Corps [B42] Sweet-release Update | 3409836763 | 1 | 603 | 5 | 604 |
 | Support Goods Mega Mod [B42.10] - PREDATOR | 3512993822 | 1 | 2390 | 30 | 2391 |
@@ -491,6 +505,7 @@
 | Faster Tree Chopping (was: No Stress From Tree Chopping) | 3460704724 | 0 | 6 | 0 | 6 |
 | Open All Containers [B42/41] | 3465040406 | 0 | 84 | 0 | 84 |
 | Ranger Operator | 3452171674 | 0 | 142 | 59 | 142 |
+| Organized Plunderer | 3594804663 | 0 | 14 | 0 | 14 |
 | Addicted To Weight | 2604943386 | 0 | 18 | 2 | 18 |
 | Alarm Syndrome | 3409527910 | 0 | 8 | 0 | 8 |
 | Decoholic | 3197857648 | 0 | 10 | 3 | 10 |
@@ -523,7 +538,7 @@
 | Proximity Inventory [B41/42] | 2847184718 | 0 | 21 | 2 | 21 |
 | [B42]Pallontras Crossbows | 3400528439 | 0 | 117 | 0 | 117 |
 | [B42] Bodily Functions [v0.12.3] | 3396456841 | 0 | 335 | 0 | 335 |
-| Random Airdrops [B41/B42] | 3282789883 | 0 | 74 | 0 | 74 |
+| Random Airdrops [B41/B42] | 3282789883 | 0 | 5 | 0 | 5 |
 | [B42/41] Reactive Sound Events | 2969551071 | 0 | 39 | 0 | 39 |
 | Reaper's Hair & Beard | 3450583954 | 0 | 28 | 0 | 28 |
 | [B42] Rebalanced Yields: Butchering | 3564838872 | 0 | 0 | 0 | 1 |
