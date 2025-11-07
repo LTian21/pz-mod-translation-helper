@@ -1,0 +1,207 @@
+module Skittles
+{
+  imports
+  {
+    Base
+  }
+
+  craftRecipe Make Cured Meat
+  {
+    timedAction = MixingBowl,
+    Time = 30,
+    onCreate = AdjustStates,
+    onTest = TryMeat,
+    ToolTip = Cure meat,
+    Tags = InHandCraft;Cooking,
+	category = Cooking,
+	xpAward = Cooking:10,
+    inputs
+		{
+		item 1 [Base.Beef;Base.Smallbirdmeat;Base.ChickenFillet;Base.Chicken;Base.ChickenWings;Base.FishFillet;Base.FrogMeat;Base.Pork;Base.PorkChop;Base.MuttonChop;Base.Rabbitmeat;Base.Smallanimalmeat;Base.Steak;Base.TurkeyFillet;Base.TurkeyLegs;Base.TurkeyWings;Base.Venison] mode:destroy flags[InheritFoodAge;ItemCount] mappers[meatType],
+		item 5 tags[Salt],
+		}
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+		itemMapper meatType
+		{
+			Skittles.CuredBeef = Base.Beef,
+			Skittles.CuredBird = Base.Smallbirdmeat,
+			Skittles.CuredChickenFillet = Base.ChickenFillet,
+			Skittles.CuredChickenLeg = Base.Chicken,
+			Skittles.CuredChickenWing = Base.ChickenWings,
+			Skittles.CuredFish = Base.FishFillet,
+			Skittles.CuredFrog = Base.FrogMeat,	
+			Skittles.CuredMutton = Base.MuttonChop,
+			Skittles.CuredPork = Base.Pork,
+			Skittles.CuredPorkChop = Base.PorkChop,
+			Skittles.CuredRabbit = Base.Rabbitmeat,
+			Skittles.CuredRodent = Base.Smallanimalmeat,
+			Skittles.CuredSteak = Base.Steak,
+			Skittles.CuredTurkey = Base.TurkeyFillet,
+			Skittles.CuredTurkeyLeg = Base.TurkeyLegs,
+			Skittles.CuredTurkeyWing = Base.TurkeyWings,
+			Skittles.CuredVenison = Base.Venison,
+		}
+  }
+
+  craftRecipe Make Pemmican Meat
+  {
+    timedAction = MixingBowl,
+    Time = 30,
+    onCreate = AdjustStatesPemmican,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+	xpAward = Cooking:10,
+    inputs
+    {
+      item 1 [Base.Pork;Base.Beef;Base.Venison] flags[ItemCount] mode:destroy,
+      item 5 [Base.Lard],
+      item 3 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue;Base.BeautyBerry;Base.HollyBerry;Base.WinterBerry] flags[ItemCount] mode:destroy,
+    }
+    outputs
+    {
+      item 1 Skittles.Pemmican,
+    }  
+  }
+
+  craftRecipe Reduce Meat Lard
+  {
+    timedAction = MixingBowl,
+    Time = 30,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+	xpAward = Cooking:5;Butchering:5,
+    inputs
+    {
+      item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
+      item 4 [Base.Pork] flags[ItemCount],
+      item 1 [Base.Saucepan] mode:keep,
+    }
+    outputs
+    {
+      item 1 Base.Lard,
+    }
+  }
+
+  craftRecipe Make Jarred Meat
+  {
+    timedAction = MixingBowl,
+		Time = 100,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+    category = Cooking,
+	xpAward = Cooking:10,
+    inputs
+    {
+		item 1 [Base.EmptyJar] mode:destroy,
+		item 1 [Base.JarLid] mode:destroy,
+		item 5 [Base.Pork;Base.Beef;Base.Venison;Base.FishFillet] flags[ItemCount] mappers[meatType] mode:destroy,
+		item 2.0 tags[Vinegar],
+		item 1.0 tags[Salt],
+		item 1 [*],
+		-fluid 1.0 [Water],
+
+    }
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+    itemMapper meatType
+		{
+	Skittles.CannedPork = Base.Pork,
+	Skittles.CannedBeef = Base.Beef,
+	Skittles.CannedVenison = Base.Venison,
+	Skittles.CannedFish = Base.FishFillet,
+		}
+    
+  }
+
+  craftRecipe Open Jar Of Meat
+	{
+    timedAction = Making,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+    category = Cooking,
+	xpAward = Cooking:10,
+		inputs
+		{
+			item 1 [Skittles.CannedPork;Skittles.CannedBeef;Skittles.CannedVenison;Skittles.CannedFish] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+		}
+		outputs
+		{
+			item 1 mapper:foodType,
+			item 1 Base.JarLid,
+			item 1 Base.EmptyJar,
+		}
+		itemMapper foodType
+		{
+	Skittles.CannedPork_Open = Skittles.CannedPork,
+	Skittles.CannedBeef_Open = Skittles.CannedBeef,
+	Skittles.CannedVenison_Open = Skittles.CannedVenison,
+	Skittles.CannedFish_Open = Skittles.CannedFish,
+			
+		}
+	}
+
+  craftRecipe Crush Salt Rock
+  {
+    timedAction = Making,
+    Time = 30,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+	xpAward = Cooking:10,
+    inputs
+		{
+
+			item 1 tags[MortarPestle] mode:keep,
+			item 2 [Skittles.SaltRock],
+		}
+		outputs
+		{
+			item 1 Base.Salt,
+		}
+  }
+
+  craftRecipe Make Mashed Berry
+  {
+    timedAction = Making,
+    Time = 30,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+	xpAward = Cooking:10,
+    inputs
+		{
+
+			item 1 tags[MortarPestle] mode:keep,
+			item 5 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue] flags[ItemCount] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Skittles.MashedBerries,
+		}
+  }
+
+  craftRecipe Make Jam
+  {
+    timedAction = Making,
+    Time = 100,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+	xpAward = Cooking:10,
+    inputs
+		{
+			item 1 [Base.Saucepan] mode:keep,
+			item 30 [Skittles.MashedBerries],
+			item 10 [Base.Sugar;Base.SugarBrown],
+		}
+		outputs
+		{
+			item 1 Base.JamFruit,
+		}
+  }
+
+  
+}
