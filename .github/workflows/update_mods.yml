@@ -44,7 +44,7 @@ jobs:
         run: |
           response=$(curl -s -w "%{http_code}" -X POST \
             -H "Authorization: Bearer ${{ secrets.ACTION_SECRET_KEY }}" \
-            "${{ secrets.SERVER_URL }}")
+            "${{ secrets.SERVER_URL }}/get-pending-ids")
           http_code=$(echo "$response" | tail -n1)
           body=$(echo "$response" | sed '$d')
           if [ "$http_code" -ne 200 ]; then
@@ -527,6 +527,30 @@ jobs:
       #     echo "为 PR #${PR_NUMBER} 启用自动合并..."
       #     gh pr merge --auto --squash "$PR_NUMBER"
       #     echo "自动合并已成功启用。当所有检查通过后，GitHub将会自动合并此PR。"
+
+      - name: Report Processing Status Back to Server
+        # 无论成功与否，都尝试运行此步骤以报告状态
+        if: always() && needs.setup_jobs.outputs.mods_to_download != '[]'
+        env:
+          # 成功处理的 Mod ID 列表
+          SUCCESSFUL_IDS_JSON: ${{ needs.setup_jobs.outputs.mods_to_download }}
+          # 失败的 ID 列表 (当前版本为空，未来可扩展)
+          FAILED_IDS_JSON: "[]" 
+          API_URL: ${{ secrets.SERVER_URL }}
+          API_KEY: ${{ secrets.ACTION_SECRET_KEY }}
+        run: |
+          echo "向服务器报告处理结果..."
+          echo "成功处理的 Mod ID: $SUCCESSFUL_IDS_JSON"
+          echo "失败处理的 Mod ID: $FAILED_IDS_JSON"
+
+          # 发送 POST 请求到我们创建的 /api/update-status 接口
+          curl -X POST "${API_URL}/update-status" \
+            -H "Authorization: Bearer ${API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d '{
+                  "successful_ids": '"$SUCCESSFUL_IDS_JSON"',
+                  "failed_ids": '"$FAILED_IDS_JSON"'
+                }'
 
       - name: Prepare Issue Body on Failure
         if: failure()
