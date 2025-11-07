@@ -78,11 +78,11 @@
 
 **© 2025 如一汉化组 (As1).**
 
-本项目采用 **知识共享-署名-非商业性使用-相同方式共享 4.0 国际 (Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International)** 许可协议进行授权。
+本项目采用 **知识共享-署名-相同方式共享 4.0 国际 (Creative Commons Attribution-ShareAlike 4.0 International)** 许可协议进行授权。
 
-简称: **CC BY-NC-SA 4.0**
+简称: **CC BY-SA 4.0**
 
-![CC BY-NC-SA 4.0](https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png)
+![CC BY-SA 4.0](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)
 
 这意味着，您可以自由地：
 
@@ -94,8 +94,7 @@
 -   **署名 (BY)** — 您必须给出适当的署名，提供指向本作品原始发布页面的链接，并指出是否对内容进行了更改。您可以用任何合理的方式来署名，但不得以任何方式暗示许可人为您或您的使用背书。
     > 我们要求的署名方式为：在您的作品描述中明确标注“本汉化基于‘如一汉化组 (As1)’的工作成果进行修改”，并附上我们的 Steam 创意工坊链接：`https://steamcommunity.com/sharedfiles/filedetails/?id=3556540080`
 
--   **非商业性使用 (NC)** — 您不得将本作品用于商业目的。
 
 -   **相同方式共享 (SA)** — 如果您再混合、转换、或者基于本作品进行创作，您必须基于与原先许可协议相同的许可协议分发您的贡献。
 
-有关协议的更多信息，请查阅： https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-Hans
+有关协议的更多信息，请查阅： https://creativecommons.org/licenses/by-sa/4.0/deed.zh-Hans
