@@ -1,4 +1,4 @@
-module Base
+module LK
 {
 /******Parts and Legendary Katana ******/
 
@@ -618,4 +618,51 @@ module Base
 			item 1 LK.KatanaSheathOrange,
 		}
 	}
+    
+/****** Repair Katanas ******/	
+craftRecipe RepairKatanaSheet
+    {
+        time = 180,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        category = Repair,
+        timedAction = CraftWeapon1H,
+        SkillRequired = Maintenance:3;MetalWelding:8,
+        xpAward = Maintenance:15,
+        OnCreate = CraftRecipeCode.GenericFixing.OnCreate,
+        Tooltip = Tooltip_Recipe_CanFailAndDamage,
+        inputs
+        {
+            item 1 tags[RepairKatanaSheet] mode:keep flags[Prop2;IsDamaged],
+            item 5 [Base.BlowTorch] flags[Prop1],
+            item 1 [Base.SheetMetal] mode:destroy,
+        }
+        outputs
+        {
+        }
+		Icon = KatanaRepair,
+    }
+    
+    craftRecipe RepairKatanaScrap
+    {
+        time = 180,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        category = Repair,
+        timedAction = CraftWeapon1H,
+        SkillRequired = Maintenance:3;MetalWelding:8,
+        xpAward = Maintenance:5,
+        OnCreate = CraftRecipeCode.GenericFixing.OnCreate,
+        Tooltip = Tooltip_Recipe_CanFailAndDamage,
+        inputs
+        {
+            item 1 tags[RepairKatanaScrap] mode:keep flags[Prop2;IsDamaged],
+            item 5 [Base.BlowTorch] flags[Prop1],
+            item 3 [Base.ScrapMetal] mode:destroy,
+        }
+        outputs
+        {
+        }
+		Icon = KatanaRepair,
+    }
 }

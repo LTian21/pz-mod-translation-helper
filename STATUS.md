@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-06 23:24:51 UTC+08:00`*
+*最后更新于：`2025-11-07 12:18:39 UTC+08:00`*
 
 ---
 
@@ -9,17 +9,19 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``66156`` 条 |
-| **待翻译条目** | ``13718`` 条 |
-| **已翻译条目** | ``52438`` 条 |
-| **待校对条目** | ``51756`` 条 |
-| **已支持 Mod 数量** | ``618`` 个 |
+| **模组总条目** | ``66221`` 条 |
+| **待翻译条目** | ``13787`` 条 |
+| **已翻译条目** | ``52434`` 条 |
+| **待校对条目** | ``51753`` 条 |
+| **已支持 Mod 数量** | ``620`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251106_122215``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251107_121839``)**
 
-*   **H.E.C.U (ID: 3452711271)**: 新增 `0` 条, 移除 `1` 条。
+*   **Firearms (ID: 2256623447)**: 新增 `3` 条, 移除 `0` 条。
+*   **Immersive_Roleplay_Professions_and_Traits (ID: 3387474156)**: 新增 `1` 条, 移除 `0` 条。
+*   **LegendaryKatana (ID: 3418366499)**: 新增 `3` 条, 移除 `0` 条。
 
 ---
 
@@ -89,6 +91,7 @@
 | Functional Clipboard [B41/B42] | 3387382165 | 44 | 0 | 0 | 44 |
 | Red Days | 3516166810 | 43 | 61 | 15 | 104 |
 | Inventory Tetris - Grid Based Inventory Overhaul [B42] | 3397561666 | 42 | 0 | 0 | 42 |
+| [B42] Tactical Sheaths Reborn | 3569158406 | 41 | 24 | 0 | 65 |
 | Factory Pieces | 3399263137 | 40 | 101 | 0 | 141 |
 | My So-Called Snack | 2877535263 | 40 | 184 | 0 | 224 |
 | Tsar's Common Library B42 | 3402491515 | 40 | 339 | 122 | 379 |
@@ -107,6 +110,7 @@
 | [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 0 | 0 | 29 |
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
+| Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 26 | 10 | 0 | 36 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
 | Trunk Organizer | 3590632059 | 24 | 0 | 0 | 24 |
@@ -351,7 +355,7 @@
 | Auto Tailoring | 3388183573 | 0 | 4 | 0 | 4 |
 | Axe's Recrafting [B42] | 2211423190 | 0 | 0 | 0 | 15 |
 | [B42] Make egg jar | 3444384263 | 0 | 10 | 0 | 10 |
-| [B42] Hemp & Tobacco | 3404563567 | 0 | 64 | 0 | 67 |
+| [B42] Hemp & Tobacco | 3404563567 | 0 | 64 | 0 | 66 |
 | [B42] Make Dried Fruit | 3417502641 | 0 | 34 | 3 | 34 |
 | [B42] Make Dried Vegetables | 3418061837 | 0 | 36 | 0 | 36 |
 | [B42] Fruits in jars | 3432006285 | 0 | 26 | 0 | 26 |
@@ -606,7 +610,7 @@
 | [B42] They Are Watching - Schizophrenia Mod | 3559704439 | 0 | 181 | 0 | 181 |
 | They Knew [B42] | 3387110070 | 0 | 26 | 0 | 26 |
 | The Last Of AVA: Ellie's Clothing Pack | 3477685382 | 0 | 4 | 3 | 4 |
-| [B42][ABANDONED] Tactical Sheaths | 3389805754 | 0 | 60 | 1 | 60 |
+| [B42][ABANDONED] Tactical Sheaths | 3389805754 | 0 | 33 | 1 | 33 |
 | The Last Of AVA: WolfCut Hair | 3477669563 | 0 | 0 | 0 | 1 |
 | True Music Radio | 3100475013 | 0 | 65 | 0 | 65 |
 | Tomb's Player Body - Goth Skin | 3531765630 | 0 | 145 | 0 | 145 |
