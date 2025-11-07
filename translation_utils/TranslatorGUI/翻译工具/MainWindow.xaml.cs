@@ -993,5 +993,36 @@ namespace 翻译工具
             var plainBytes = ms.ToArray();
             return Encoding.UTF8.GetString(plainBytes);
         }
+
+        /// <summary>
+        /// 搜索框文本变化事件处理程序，用于实时筛选 MOD 列表。
+        /// </summary>
+        /// <param name="sender">事件发送者。</param>
+        /// <param name="e">事件参数。</param>
+        private void txtSearch_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            var view = CollectionViewSource.GetDefaultView(dgMods.ItemsSource);
+            if (view == null) return;
+
+            var searchText = txtSearch.Text;
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                // 如果搜索框为空，则清除过滤器，显示所有项目
+                view.Filter = null;
+            }
+            else
+            {
+                // 如果搜索框不为空，则设置过滤器
+                view.Filter = item =>
+                {
+                    if (item is ModItemView mod)
+                    {
+                        // 根据 ModId 进行不区分大小写的包含搜索
+                        return mod.ModId.Contains(searchText, StringComparison.OrdinalIgnoreCase);
+                    }
+                    return false;
+                };
+            }
+        }
     }
 }
