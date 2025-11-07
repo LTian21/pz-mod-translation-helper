@@ -95,7 +95,7 @@ module Guns93
 		inputs
 		{
 			item 1 tags[MetalSaw;SmallSaw] mode:keep flags[Prop1;MayDegrade],
-			item 1 [Base.870StockWoodDark;Base.870StockWoodLight;Base.500StockWoodDark;Base.500StockWoodLight] flags[Prop2] mappers[stocktype],
+			item 1 [Base.870StockWoodDark;Base.870StockWoodLight;Base.500StockWoodDark;Base.500StockWoodLight;Base.UplanderStock;Base.UplanderStraightStock;Base.UplanderStockDark;Base.UplanderStraightStockDark;Base.UplanderStockCheck;Base.UplanderStockDarkCheck;Base.SavageFoxStock;Base.SavageFoxCapStock;Base.SavageFoxStockDark;Base.SavageFoxCapStockDark;Base.SavageFoxStockBeech] flags[Prop2] mappers[stocktype],
 		}
 		outputs
 		{
@@ -107,6 +107,17 @@ module Guns93
 			Base.870CutStockLight = Base.870StockWoodLight,
 			Base.500CutStockDark = Base.500StockWoodDark,
 			Base.500CutStockLight = Base.500StockWoodLight,
+			Base.UplanderCutStock = Base.UplanderStock,
+			Base.UplanderCutStraightStock = Base.UplanderStraightStock,
+			Base.UplanderCutStockDark = Base.UplanderStockDark,
+			Base.UplanderCutStraightStockDark = Base.UplanderStraightStockDark,
+			Base.UplanderCutStockCheck = Base.UplanderStockCheck,
+			Base.UplanderCutStockDarkCheck = Base.UplanderStockDarkCheck,
+			Base.SavageFoxCutStock = Base.SavageFoxStock,
+    		Base.SavageFoxCutCapStock = Base.SavageFoxCapStock,
+   	 		Base.SavageFoxCutStockDark = Base.SavageFoxStockDark,
+    		Base.SavageFoxCutCapStockDark = Base.SavageFoxCapStockDark,
+    		Base.SavageFoxCutStockBeech = Base.SavageFoxStockBeech,
 		}
 	}
 
@@ -311,7 +322,7 @@ module Guns93
 			item 20 mapper:ammoTypes,
 		}
         	itemMapper ammoTypes
-        	{
+        {
 			Base.3006Bullets = Base.3006Box,
 			Base.792Bullets = Base.792Box,
 			Base.30CarBullets = Base.30CarBox,
@@ -355,7 +366,7 @@ module Guns93
 			item 200 mapper:ammoTypes,
 		}
         	itemMapper ammoTypes
-        	{
+        {
 			Base.556BeltLink = Base.556LinkBox,
 			Base.308BeltLink = Base.308LinkBox,
 		}
@@ -408,7 +419,7 @@ module Guns93
 			item 12 mapper:ammoTypes,
 		}
         	itemMapper ammoTypes
-        	{
+        {
 			Base.22Box = Base.22Carton,
 			Base.25Box = Base.25Carton,
 			Base.40Box = Base.40Carton,
@@ -856,7 +867,7 @@ module Guns93
 			item 1 mapper:ammoTypes,
 		}
         	itemMapper ammoTypes
-        	{
+        {
 			Base.223Bullets = Base.556Bullets,
 		}
 	}
@@ -876,7 +887,7 @@ module Guns93
 			item 20 mapper:ammoTypes,
 		}
         	itemMapper ammoTypes
-        	{
+        {
 			Base.223Bullets = Base.556Bullets,
 		}
 	}
@@ -896,7 +907,7 @@ module Guns93
 			item 1 mapper:ammoTypes,
 		}
         	itemMapper ammoTypes
-        	{
+        {
 			Base.223Box = Base.556Box,
 		}
 	}
@@ -906,15 +917,43 @@ module Guns93
         timedAction = Making,
 		Time = 80,
 		Tags = InHandCraft,
+		OnCreate = Recipe.OnCreate.CleanKitCreate,
         category = Aiming,
 		inputs
 		{
-			item 1 [Base.RippedSheets;Base.RippedSheetsDirty;Base.Toothbrush],
-			item 1 [Base.MotorOil;Base.OilVegetable],
+			item 1 tags[GunOil] mode:keep,
+			item 1 [Base.RippedSheets;Base.RippedSheetsDirty;Base.AlcoholRippedSheets;Base.Toothbrush;Base.BathTowel;Base.DishCloth] mappers[cleanKits] mode:destroy,
 		}
 		outputs
 		{
-			item 1 Base.GunCleaningKit,
+			item 1 mapper:cleanKits,
+		}
+        	itemMapper cleanKits
+        {
+			Base.RippedSheetsCleanKit = Base.RippedSheets,
+			Base.RippedSheetsCleanKit = Base.RippedSheetsDirty,
+			Base.RippedSheetsCleanKit = Base.AlcoholRippedSheets,
+			Base.ToothbrushCleanKit = Base.Toothbrush,
+			Base.BathTowelCleanKit = Base.BathTowel,
+			Base.DishClothCleanKit = Base.DishCloth,
+		}
+	}
+
+	craftRecipe FillGunCleaningKit
+	{
+        timedAction = Making,
+		Time = 80,
+		Tags = InHandCraft,
+		OnTest = Recipe.OnTest.CleanKitTest,
+		OnCreate = Recipe.OnCreate.CleanKitFill,
+        category = Aiming,
+		inputs
+		{
+			item 1 tags[GunOil] mode:keep,
+			item 1 tags[GunCleaningKit] mode:keep,
+		}
+		outputs
+		{
 		}
 	}
 
