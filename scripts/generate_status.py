@@ -4,12 +4,14 @@ import re
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from collections import defaultdict
+import urllib.parse
 
 # --- 配置 ---
 TRANSLATIONS_FILE = Path('data/translations_CN.txt')
 LOG_DIR = Path('data/logs')
 MOD_ID_NAME_MAP = Path('translation_utils/mod_id_name_map.json')
 UPDATE_LOG_JSON = LOG_DIR / 'update_log.json'
+README_FILE = Path('README.md')
 
 # --- 模板 ---
 STATUS_TEMPLATE = """# 汉化中心状态仪表盘
@@ -142,6 +144,68 @@ def get_latest_run_summary(log_file):
 
     return latest_run_id, "\n".join(detailed_summary_lines)
 
+def generate_badges(global_stats, mod_count):
+    """根据全局统计数据生成 shields.io 徽章的 Markdown。"""
+    total = global_stats['total_entries']
+    translated = global_stats['total_translated']
+    
+    if total == 0:
+        percentage = 0
+    else:
+        percentage = round((translated / total) * 100, 2)
+    
+    color = "red"
+    if percentage > 70:
+        color = "yellow"
+    if percentage > 90:
+        color = "green"
+    if percentage > 99:
+        color = "brightgreen"
+
+    # URL 编码
+    progress_text = urllib.parse.quote(f"翻译进度-{translated} / {total} ({percentage}%)")
+    mods_text = urllib.parse.quote(f"支持模组-{mod_count} 个")
+    
+    badges_md = [
+        f"![翻译进度](https://img.shields.io/badge/{progress_text}-{color})",
+        f"![支持模组](https://img.shields.io/badge/{mods_text}-blue)"
+    ]
+    
+    return "\n".join(badges_md)
+
+def update_readme_badges(badges_md):
+    """读取 README.md，找到占位符并插入徽章。"""
+    if not README_FILE.is_file():
+        print(f"警告: 未找到 {README_FILE}，跳过徽章更新。")
+        return
+
+    try:
+        with open(README_FILE, 'r', encoding='utf-8') as f:
+            readme_content = f.read()
+
+        start_marker = "<!--START_STATUS_BADGES-->"
+        end_marker = "<!--END_STATUS_BADGES-->"
+
+        if start_marker in readme_content and end_marker in readme_content:
+            # 构建新的内容块
+            new_block = f"{start_marker}\n{badges_md}\n{end_marker}"
+            
+            # 使用正则表达式替换旧块
+            pattern = re.compile(f"{re.escape(start_marker)}.*?{re.escape(end_marker)}", re.DOTALL)
+            new_readme_content = pattern.sub(new_block, readme_content)
+
+            if new_readme_content != readme_content:
+                with open(README_FILE, 'w', encoding='utf-8') as f:
+                    f.write(new_readme_content)
+                print("  -> README.md 中的徽章已更新。")
+            else:
+                print("  -> README.md 中的徽章无需更新。")
+        else:
+            print("警告: 在 README.md 中未找到徽章占位符。")
+
+    except Exception as e:
+        print(f"错误: 更新 README.md 时出错: {e}")
+
 
 def main():
     """主函数，生成所有报告。"""
@@ -184,6 +248,10 @@ def main():
     with open('STATUS.md', 'w', encoding='utf-8') as f:
         f.write(status_md_content)
     print("  -> STATUS.md 已生成。")
+    
+    # 5. 生成并更新 README.md 中的徽章
+    badges_md = generate_badges(global_stats, mod_count)
+    update_readme_badges(badges_md)
     
     print("--- 所有报告生成完毕 ---")
 
