@@ -16,7 +16,7 @@
 ## ✨ 项目状态
 
 <!--START_STATUS_BADGES-->
-![翻译进度](https://img.shields.io/badge/%E7%BF%BB%E8%AF%91%E8%BF%9B%E5%BA%A6-52636%20/%2067042%20%2878.51%25%29-yellow)
+![翻译进度](https://img.shields.io/badge/%E7%BF%BB%E8%AF%91%E8%BF%9B%E5%BA%A6-51564%20/%2067551%20%2876.33%25%29-yellow)
 ![支持模组](https://img.shields.io/badge/%E6%94%AF%E6%8C%81%E6%A8%A1%E7%BB%84-626%20%E4%B8%AA-blue)
 <!--END_STATUS_BADGES-->
 
