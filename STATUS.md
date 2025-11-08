@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-08 05:49:58 UTC+08:00`*
+*最后更新于：`2025-11-08 16:19:02 UTC+08:00`*
 
 ---
 
@@ -9,19 +9,17 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``66227`` 条 |
-| **待翻译条目** | ``13643`` 条 |
-| **已翻译条目** | ``52584`` 条 |
-| **待校对条目** | ``51660`` 条 |
-| **已支持 Mod 数量** | ``620`` 个 |
+| **模组总条目** | ``66520`` 条 |
+| **待翻译条目** | ``13930`` 条 |
+| **已翻译条目** | ``52590`` 条 |
+| **待校对条目** | ``51640`` 条 |
+| **已支持 Mod 数量** | ``623`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251108_054957``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251108_161902``)**
 
-*   **Guns93Test (ID: 3183820077)**: 新增 `94` 条, 移除 `1` 条。
-*   **Cold_Winters (ID: 3577100076)**: 新增 `2` 条, 移除 `0` 条。
-*   **GeneratorPlus (ID: 3597471949)**: 新增 `1` 条, 移除 `11` 条。
+*   **GeneratorPlus (ID: 3597471949)**: 新增 `0` 条, 移除 `1` 条。
 
 ---
 
@@ -30,7 +28,7 @@
 | Mod 名称 | Mod ID | 待翻译条目 | 待校对条目 | 缺少原文条目 | 模组总条目 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Authentic Z | 2335368829 | 2274 | 1407 | 308 | 3777 |
-| Guns of 93: B42 Test Build (Unstable) | 3183820077 | 665 | 1779 | 1062 | 2458 |
+| Guns of 93: B42 Test Build (Unstable) | 3183820077 | 741 | 1762 | 1129 | 2553 |
 | Even More Traits | 2855320431 | 606 | 62 | 2 | 668 |
 | [B42] Buildables Expansion | 3463117260 | 525 | 622 | 7 | 1147 |
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
@@ -54,6 +52,7 @@
 | Airdrops | 3590950467 | 156 | 0 | 0 | 156 |
 | Bundle Branches [B42] | 3595072546 | 148 | 0 | 0 | 148 |
 | Detailed Skill Tooltips | 3572846242 | 141 | 0 | 0 | 141 |
+| SnackTime 89 - Junk Revival | 3589560764 | 138 | 0 | 0 | 138 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
 | Pocket Kittens (B42) | 3568029240 | 118 | 16 | 7 | 134 |
@@ -85,6 +84,7 @@
 | [B42] Ogrim Mod's - Machine Utils | 3555558732 | 56 | 0 | 0 | 56 |
 | [J&G] Firefighter Uniform [B42/41] | 3521263771 | 51 | 2 | 2 | 54 |
 | [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 51 | 0 | 0 | 52 |
+| Long Term Preservation Extended | 3597673472 | 50 | 0 | 0 | 50 |
 | Time Decreases Vehicle Condition [B42] | 3448375286 | 50 | 0 | 0 | 50 |
 | Project Summer Car [B42] | 3564950449 | 45 | 118 | 0 | 163 |
 | [B42]Zevon's Medieval Armory | 3540834058 | 45 | 67 | 2 | 112 |
@@ -96,6 +96,7 @@
 | Tsar's Common Library B42 | 3402491515 | 40 | 339 | 122 | 379 |
 | [B42] Intuitive Crafting | 3486217110 | 39 | 3 | 3 | 42 |
 | Firearms | 2256623447 | 38 | 417 | 66 | 455 |
+| [B41/B42] I WANT TO EAT ICECREAM FOREVER | 2754525193 | 38 | 0 | 0 | 38 |
 | Minimal Display Bars + Nutritions + Discomfort [B41/B42] | 3388844542 | 38 | 11 | 0 | 49 |
 | Custom Weight | 3391228479 | 37 | 51 | 8 | 88 |
 | Smart Radial Menu | 3494108029 | 37 | 1 | 0 | 38 |
@@ -110,7 +111,6 @@
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
-| Long Term Preservation [FIXED] [B42] | 3406392630 | 26 | 10 | 0 | 36 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
 | [B42] Week One NPC | 3403180543 | 23 | 808 | 0 | 831 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
@@ -157,6 +157,7 @@
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 9 | 45 | 2 | 55 |
 | Legendary Satchel | 3560352772 | 8 | 17 | 1 | 25 |
 | Mod Load Order Sorter [b42] | 3423660713 | 8 | 34 | 23 | 42 |
+| Long Term Preservation [FIXED] [B42] | 3406392630 | 8 | 7 | 0 | 15 |
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
 | [B42] Functional Gutters | 3439305933 | 7 | 46 | 0 | 53 |
@@ -204,6 +205,7 @@
 | [B42/B41] Bandits Creator | 3469292499 | 2 | 121 | 0 | 123 |
 | Boots Expanded 11 for B41 and B42 | 2850935956 | 2 | 28 | 0 | 30 |
 | Functional Clothesline | 3282215361 | 2 | 18 | 0 | 20 |
+| Cold Winters | 3577100076 | 2 | 0 | 0 | 5 |
 | Daihatsu Hijet S83P/S110P | 3583266047 | 2 | 10 | 0 | 12 |
 | [B41/42] Doors Have A Chance | 3041602364 | 2 | 17 | 0 | 19 |
 | Mixology | 3405131820 | 2 | 356 | 0 | 358 |
@@ -226,6 +228,7 @@
 | ExtraMoney | 3462306255 | 1 | 65 | 0 | 66 |
 | [B42/1] Frockin Wiseguys! | 3538760023 | 1 | 40 | 33 | 41 |
 | [42] Frogtown (BETA) by TwinCrows | 3449473111 | 1 | 3 | 0 | 4 |
+| Generator Powered Buildings | 3597471949 | 1 | 0 | 0 | 52 |
 | Point Blank | 2990322197 | 1 | 16 | 0 | 17 |
 | HydeCo. Bees! | 3430224478 | 1 | 419 | 1 | 420 |
 | [B42/41] Keep Skill Level | 3314107094 | 1 | 48 | 0 | 49 |
@@ -386,7 +389,6 @@
 | Character Save | 2673317083 | 0 | 0 | 0 | 2 |
 | [B41/B42] Check Around | 3300688173 | 0 | 157 | 1 | 157 |
 | Soul Filcher's Clearing Time | 1926311864 | 0 | 0 | 0 | 5 |
-| Cold Winters | 3577100076 | 0 | 0 | 0 | 3 |
 | [B42][B41] Collapsible Ladder | 3438123707 | 0 | 5 | 0 | 5 |
 | Combat Mastering Skill | 3435985650 | 0 | 28 | 0 | 28 |
 | Combat Traits [B42 Compatible] | 3427091746 | 0 | 49 | 9 | 49 |
@@ -433,7 +435,6 @@
 | Functional Appliances 2 | 3042138819 | 0 | 173 | 0 | 173 |
 | Fitness & Workout Overhaul | 2940354599 | 0 | 43 | 29 | 43 |
 | [B42]Gauss Firearms | 3429953336 | 0 | 105 | 0 | 105 |
-| Generator Powered Buildings | 3597471949 | 0 | 0 | 0 | 61 |
 | Guitar Wall Hanger [b42] | 3410972667 | 0 | 48 | 2 | 48 |
 | H&K VP70 | 2470321383 | 0 | 5 | 0 | 5 |
 | Halo Marine Armor [B41/B42] | 3507919075 | 0 | 25 | 0 | 25 |

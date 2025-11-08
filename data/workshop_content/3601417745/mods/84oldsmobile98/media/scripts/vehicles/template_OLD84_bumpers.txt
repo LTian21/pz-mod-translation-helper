@@ -1,0 +1,165 @@
+module Base
+{
+	model 84oldsmobile98frontBumper0
+	{
+		mesh = vehicles/Vehicles_84oldsmobile98_Body|olds98_sedan_bumpf0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 84oldsmobile98frontBumperA
+	{
+		mesh = vehicles/Vehicles_84oldsmobile98_Body|olds98_sedan_bumpfA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 84oldsmobile98frontBullbarA
+	{
+		mesh = vehicles/Vehicles_84oldsmobile98_Body|84c-platform_bullbar,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 84oldsmobile98rearBumper0
+	{
+		mesh = vehicles/Vehicles_84oldsmobile98_Body|olds98_sedan_bumpr0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle OLD84Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 84oldsmobile98frontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 84oldsmobile98frontBumperA,
+				}
+
+            model FrontBullbarA
+				{
+                		file = 84oldsmobile98frontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.84oldsmobile98BumperFront0;Base.84oldsmobile98BumperFrontA;Base.85gmBbodyBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = OLD84.InstallComplete.BumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = OLD84.UninstallComplete.BumperFront,
+            		}
+
+            		lua
+            		{
+					create = OLD84.Create.BumperFront,
+					init = OLD84.Init.BumperFront,
+					}
+		}
+
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 84oldsmobile98rearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.84oldsmobile98BumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = OLD84.InstallComplete.BumperRear,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = OLD84.UninstallComplete.BumperRear,
+            		}
+
+            		lua
+            		{
+					create = OLD84.Create.BumperRear,
+					init = OLD84.Init.BumperRear,
+					}
+		}
+	}
+}
