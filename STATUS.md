@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-08 19:16:08 UTC+08:00`*
+*最后更新于：`2025-11-08 19:29:34 UTC+08:00`*
 
 ---
 
@@ -9,10 +9,10 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``67551`` 条 |
-| **待翻译条目** | ``15987`` 条 |
-| **已翻译条目** | ``51564`` 条 |
-| **待校对条目** | ``50161`` 条 |
+| **模组总条目** | ``67590`` 条 |
+| **待翻译条目** | ``15986`` 条 |
+| **已翻译条目** | ``51604`` 条 |
+| **待校对条目** | ``50201`` 条 |
 | **已支持 Mod 数量** | ``626`` 个 |
 
 ---
@@ -48,7 +48,7 @@
 | Conditional-Speech | 2398253681 | 493 | 0 | 0 | 493 |
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
-| Pomp's Items - My Little Pony | 2792387747 | 377 | 588 | 32 | 965 |
+| Pomp's Items - My Little Pony | 2792387747 | 377 | 586 | 1 | 963 |
 | 1993 American Vehicle Pack (BUILD .41/.42) | 2809058492 | 376 | 5 | 5 | 381 |
 | Customizable Containers [B42/41] | 2719850086 | 352 | 1353 | 0 | 1705 |
 | Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 339 | 155 | 0 | 494 |
@@ -56,7 +56,7 @@
 | [B42] School's Out: Anime-Style Student Uniforms | 3404301631 | 285 | 1 | 1 | 286 |
 | Immersive Lore | 3000924731 | 273 | 109 | 0 | 382 |
 | Project Summer Car [B42] | 3564950449 | 271 | 93 | 0 | 364 |
-| Pomp's Items - Just the Food | 2792348686 | 267 | 397 | 207 | 664 |
+| Pomp's Items - Just the Food | 2792348686 | 267 | 397 | 3 | 664 |
 | [B42] WarThunderVehicleLibrary | 3399660368 | 241 | 44 | 7 | 285 |
 | UNOFFICIAL Fools New Containers for B42 | 3535295548 | 237 | 91 | 91 | 328 |
 | organizedCategories: Core | 3370707195 | 230 | 253 | 1 | 483 |
@@ -93,7 +93,7 @@
 | HydeCo. Automatic Garage Doors! | 3594285774 | 73 | 0 | 0 | 73 |
 | Mad Crafter [electric weapon and more] v0.2 | 3418701509 | 72 | 1 | 0 | 73 |
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 0 | 69 |
-| Skill Recovery Journal | 2503622437 | 68 | 11 | 71 | 79 |
+| Skill Recovery Journal | 2503622437 | 68 | 11 | 8 | 79 |
 | SCP - Foundation pack | 3580511016 | 66 | 0 | 0 | 66 |
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
@@ -103,7 +103,7 @@
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 57 | 363 | 0 | 421 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 56 | 52 | 0 | 108 |
 | [B42] Ogrim Mod's - Machine Utils | 3555558732 | 56 | 0 | 0 | 56 |
-| Spongie's Character Customisation | 3414634809 | 53 | 16 | 42 | 69 |
+| Spongie's Character Customisation | 3414634809 | 53 | 16 | 0 | 69 |
 | [J&G] Firefighter Uniform [B42/41] | 3521263771 | 51 | 2 | 2 | 54 |
 | [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 51 | 0 | 0 | 52 |
 | Long Term Preservation Extended | 3597673472 | 50 | 0 | 0 | 50 |
@@ -132,20 +132,20 @@
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
-| Random Clothing [B41/B42] | 3397182976 | 25 | 107 | 7 | 132 |
+| Random Clothing [B41/B42] | 3397182976 | 25 | 107 | 5 | 132 |
 | [B42] Week One NPC | 3403180543 | 23 | 808 | 0 | 831 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
 | Headwear Won't Fall | 3400293227 | 23 | 0 | 0 | 23 |
 | Legendary DuffelBag | 3558839307 | 23 | 26 | 0 | 49 |
 | Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
-| The Last of Us: Factions & Gear [B41/B42] | 3348036710 | 22 | 89 | 18 | 113 |
+| The Last of Us: Factions & Gear [B41/B42] | 3348036710 | 22 | 89 | 1 | 113 |
 | Random Zombies | 2818577583 | 21 | 0 | 0 | 21 |
 | Fancy Lanterns [B42 Compatible] | 3267733558 | 21 | 47 | 0 | 68 |
 | Milk Them All [B42] | 3568280195 | 21 | 0 | 0 | 21 |
-| Soul Filcher's Beautifying Time | 2425267353 | 21 | 18 | 21 | 39 |
+| Soul Filcher's Beautifying Time | 2425267353 | 21 | 18 | 0 | 39 |
 | Bianca Wardrobe [42. Out now] | 3140453034 | 20 | 803 | 0 | 823 |
 | Easy Drop'n'Loot | 2871469707 | 20 | 0 | 0 | 20 |
-| Water Goes Bad | 2849467715 | 19 | 0 | 17 | 19 |
+| Water Goes Bad | 2849467715 | 19 | 0 | 0 | 19 |
 | '84 Buick Electra | 3596903773 | 18 | 0 | 0 | 18 |
 | '84 Cadillac DeVille | 3592777775 | 18 | 0 | 0 | 18 |
 | '84 Oldsmobile 98 Regency | 3601417745 | 18 | 0 | 0 | 18 |
@@ -160,7 +160,7 @@
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
 | [B42] Mod Manager | 3567084868 | 16 | 0 | 0 | 16 |
 | [B42/B41] Motorious Zone - Hot Pursuit Add-on | 2841969842 | 15 | 0 | 0 | 15 |
-| [B42/41] Repairable Windows | 3378304610 | 15 | 2 | 11 | 17 |
+| [B42/41] Repairable Windows | 3378304610 | 15 | 2 | 0 | 17 |
 | [B42] Bag Upgrade Plus | 3403697073 | 15 | 37 | 1 | 52 |
 | Gyde's Trait Magazines | 3342191739 | 14 | 58 | 0 | 72 |
 | [B41/42] Known And Collected | 2881764317 | 13 | 0 | 0 | 13 |
@@ -172,7 +172,7 @@
 | Has Been Read | 2544353492 | 11 | 45 | 0 | 56 |
 | Stairs Alert | 3044807092 | 11 | 3 | 0 | 14 |
 | U.S. M998 Humvee by Papa_Chad | 3554424111 | 11 | 28 | 0 | 39 |
-| Vehicle Class Overhaul [B42 Compatible] | 3407507873 | 11 | 4 | 15 | 15 |
+| Vehicle Class Overhaul [B42 Compatible] | 3407507873 | 11 | 4 | 4 | 15 |
 | [J&G] Trauma Responder Uniform [B42/41] | 3443982326 | 11 | 46 | 0 | 63 |
 | DFMFoodMod | 3406694220 | 10 | 83 | 4 | 94 |
 | [B41/B42] I Don't Need A Lighter | 2714198296 | 10 | 0 | 0 | 10 |
@@ -210,15 +210,14 @@
 | [B42] Harder Hotwire | 3391549481 | 5 | 0 | 0 | 5 |
 | Herbalist | 2875059598 | 5 | 68 | 0 | 73 |
 | Scavenger Skill [B42] | 3407792640 | 5 | 64 | 0 | 69 |
-| Tetriz - Arcade Minigame | 3486780625 | 5 | 6 | 3 | 11 |
+| Tetriz - Arcade Minigame | 3486780625 | 5 | 6 | 0 | 11 |
 | Vehicle Repair Overhaul | 2757712197 | 5 | 50 | 3 | 55 |
 | Wandering Zombies | 2983905789 | 5 | 401 | 1 | 406 |
-| [B42] Water Pipes (aka Plumbing) | 3546314080 | 5 | 49 | 0 | 54 |
+| [B42] Water Pipes (aka Plumbing) | 3546314080 | 5 | 56 | 7 | 61 |
 | [J&G] Flecktarn Gear [B42/41] | 3206579556 | 5 | 26 | 0 | 31 |
 | '85 Chevrolet Caprice / Impala | 3413704851 | 4 | 37 | 0 | 41 |
 | '85 Oldsmobile Delta 88 | 3418253716 | 4 | 17 | 0 | 21 |
 | Fridges Off! | 2853974107 | 4 | 0 | 0 | 4 |
-| Money From Credit Cards | 3428650803 | 4 | 21 | 3 | 25 |
 | Ratchat's Outdoor Tiles | 3430305726 | 4 | 1 | 1 | 5 |
 | [Project Fallout] The Beginning | 3461117277 | 4 | 24 | 3 | 28 |
 | [B42] Moodle Descriptions Expanded | 3389003300 | 4 | 102 | 9 | 106 |
@@ -229,6 +228,7 @@
 | Gunpoint Redemption [B.41/B.42] | 3078291265 | 3 | 11 | 0 | 14 |
 | darlak's H.E.C.U. | 3452711271 | 3 | 100 | 14 | 108 |
 | Halo Marine Armor [B41/B42] | 3507919075 | 3 | 25 | 0 | 28 |
+| Money From Credit Cards | 3428650803 | 3 | 21 | 0 | 24 |
 | [B42]Sector-7 Breach | 3513107552 | 3 | 9 | 3 | 12 |
 | Vehicle Military Zone | 3436499337 | 3 | 8 | 0 | 11 |
 | [J&G] Caution Uniform [B42/41] | 3369825662 | 3 | 39 | 0 | 44 |
@@ -247,11 +247,11 @@
 | [B42] Vanilla-Like Traits and Occupations | 3139034529 | 2 | 405 | 236 | 407 |
 | Moats | 3550032314 | 2 | 4 | 0 | 6 |
 | Thief Expansion | 2596620950 | 2 | 68 | 0 | 70 |
-| Proximity Inventory [B41/42] | 2847184718 | 2 | 19 | 2 | 21 |
+| Proximity Inventory [B41/42] | 2847184718 | 2 | 19 | 0 | 21 |
 | PZK VLC (Vanilla look-like car pack) | 3217685049 | 2 | 693 | 6 | 695 |
 | [B42/41] Read Book Bypassing Level Restrictions | 3319538177 | 2 | 9 | 0 | 11 |
 | Shield Mode (Secondary Hand Equip) (B41/B42) | 3383001527 | 2 | 7 | 1 | 9 |
-| Starlit Library | 3378285185 | 2 | 0 | 1 | 2 |
+| Starlit Library | 3378285185 | 2 | 0 | 0 | 2 |
 | '86 Chevrolet CUCVs + M101A2 Trailer | 3428008364 | 1 | 82 | 1 | 83 |
 | '91 Ford Ranger | 3539691958 | 1 | 49 | 0 | 50 |
 | Anthro Traits | 3025679944 | 1 | 145 | 0 | 146 |
@@ -630,7 +630,7 @@
 | The Last Of AVA: WolfCut Hair | 3477669563 | 0 | 0 | 0 | 1 |
 | True Music Radio | 3100475013 | 0 | 65 | 0 | 65 |
 | Tomb's Player Body - Goth Skin | 3531765630 | 0 | 145 | 0 | 145 |
-| Tomb's Player Body Overhaul | 3429790870 | 0 | 17 | 0 | 17 |
+| Tomb's Player Body Overhaul | 3429790870 | 0 | 27 | 10 | 27 |
 | Toppling Zombies [B42] | 3425038705 | 0 | 13 | 0 | 13 |
 | Tow Truck [B42] | 3446203945 | 0 | 24 | 10 | 24 |
 | True Music B42 | 3397198968 | 0 | 8 | 0 | 8 |
@@ -644,7 +644,7 @@
 | Vanilla Clothing Expansion | 3421271152 | 0 | 33 | 0 | 33 |
 | Vanilla Gear Expanded | 3401134276 | 0 | 46 | 4 | 46 |
 | Vanilla MRE [B41/B42] | 3100032203 | 0 | 23 | 0 | 23 |
-| [B42] Vanvival - Build's 42 Nomadic Experience | 3547444619 | 0 | 20 | 1 | 20 |
+| [B42] Vanvival - Build's 42 Nomadic Experience | 3547444619 | 0 | 45 | 26 | 45 |
 | Ellie Voice Pack [TLOU2] [B42] | 3464700263 | 0 | 0 | 0 | 1 |
 | Joel Voice Pack [TLOU2] [B42] | 3496043022 | 0 | 0 | 0 | 1 |
 | VSMR Face for Spongie's Character Customisation | 3415572170 | 0 | 0 | 0 | 2 |
