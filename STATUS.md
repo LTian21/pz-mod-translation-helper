@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-08 19:29:34 UTC+08:00`*
+*最后更新于：`2025-11-09 04:03:57 UTC+08:00`*
 
 ---
 
@@ -17,23 +17,10 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251108_185303``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251109_040357``)**
 
-*   **Skill_Recovery_Journal (ID: 2503622437)**: 新增 `5` 条, 移除 `0` 条。
-*   **PompsItemsFood (ID: 2792348686)**: 新增 `3` 条, 移除 `0` 条。
-*   **PompsItemsPlushies (ID: 2792387747)**: 新增 `24` 条, 移除 `0` 条。
-*   **Advanced_Trajectory's_Realistic_Overhaul (ID: 3036878362)**: 新增 `14` 条, 移除 `0` 条。
-*   **BWardrobe (ID: 3140453034)**: 新增 `9` 条, 移除 `0` 条。
-*   **TLOUClothingConnected (ID: 3348036710)**: 新增 `6` 条, 移除 `0` 条。
-*   **StarlitLibrary (ID: 3378285185)**: 新增 `1` 条, 移除 `0` 条。
-*   **ShieldModeSecondaryHandEquip (ID: 3383001527)**: 新增 `2` 条, 移除 `0` 条。
-*   **DivisionBackpack (ID: 3391306957)**: 新增 `1` 条, 移除 `0` 条。
-*   **SpongieCharacterCustomisation (ID: 3414634809)**: 新增 `9` 条, 移除 `0` 条。
-*   **PFO_GUNRUNNER (ID: 3434691822)**: 新增 `224` 条, 移除 `0` 条。
-*   **TetriZ (ID: 3486780625)**: 新增 `2` 条, 移除 `0` 条。
-*   **HaloArmor (ID: 3507919075)**: 新增 `3` 条, 移除 `0` 条。
-*   **Project_Summer_Car (ID: 3564950449)**: 新增 `201` 条, 移除 `0` 条。
-*   **SnackTime89 (ID: 3589560764)**: 新增 `1` 条, 移除 `1` 条。
+*   **ImperialChops (ID: 3465865657)**: 新增 `4` 条, 移除 `0` 条。
+*   **Detailed_Skill_Tooltips (ID: 3572846242)**: 新增 `10` 条, 移除 `1` 条。
 
 ---
 
@@ -472,7 +459,7 @@
 | Hybrid Gun Repair | 3562222835 | 0 | 106 | 0 | 106 |
 | Hybrid Melee Repair | 3569031613 | 0 | 32 | 0 | 32 |
 | HydeCo Unlimited Cars | 3438759949 | 0 | 132 | 12 | 132 |
-| Imperial Chops! (More Beards!) | 3465865657 | 0 | 7 | 0 | 7 |
+| Imperial Chops! (Extra Beard Option) | 3465865657 | 0 | 7 | 0 | 7 |
 | [B42/41] Improved Farming Info Window | 3470852353 | 0 | 8 | 0 | 8 |
 | Improvised Backpack! | 3586145865 | 0 | 60 | 0 | 60 |
 | Industrial Revolution Generic Add On | 3359867059 | 0 | 0 | 0 | 2 |
@@ -645,7 +632,7 @@
 | Vanilla Gear Expanded | 3401134276 | 0 | 46 | 4 | 46 |
 | Vanilla MRE [B41/B42] | 3100032203 | 0 | 23 | 0 | 23 |
 | [B42] Vanvival - Build's 42 Nomadic Experience | 3547444619 | 0 | 45 | 26 | 45 |
-| Ellie Voice Pack [TLOU2] [B42] | 3464700263 | 0 | 0 | 0 | 1 |
+| [UPDATED] Ellie Voice Mod [B42] | 3464700263 | 0 | 0 | 0 | 1 |
 | Joel Voice Pack [TLOU2] [B42] | 3496043022 | 0 | 0 | 0 | 1 |
 | VSMR Face for Spongie's Character Customisation | 3415572170 | 0 | 0 | 0 | 2 |
 | Washing Menus Improved | 3460812542 | 0 | 5 | 0 | 5 |
