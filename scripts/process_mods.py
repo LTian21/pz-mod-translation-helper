@@ -95,24 +95,29 @@ def find_versioned_dir(parent_path):
     if not parent_path or not parent_path.is_dir(): return None
     version_dirs = [d for d in parent_path.iterdir() if d.is_dir() and VERSION_DIR_PATTERN.match(d.name)]
     if not version_dirs: return None
-    highest_version_dir = sorted(version_dirs, key=lambda v: tuple(map(int, v.name.split('.'))), reverse=True)[0]
-    return highest_version_dir
+    highest_version_dir = sorted(version_dirs, key=lambda v: tuple(map(int, v.name.split('.'))), reverse=True)
+    return highest_version_dir[0]
 
-def find_active_media_path(mod_root_path):
+def find_active_media_paths(mod_root_path):
     logging.info(f"\n--- 正在为 '{mod_root_path.name}' 动态查找 'media' 文件夹 ---")
+    
     version_dir = find_versioned_dir(mod_root_path)
     if version_dir:
         logging.info(f"  -> 发现版本目录: {version_dir.name}")
 
     common_dir = find_case_insensitive_dir(mod_root_path, 'common')
+    
+    # 按优先级排序（common -> versioned -> root）
+    potential_sources = []
+    if common_dir:
+        potential_sources.append(find_case_insensitive_dir(common_dir, 'media'))
+    if version_dir:
+        potential_sources.append(find_case_insensitive_dir(version_dir, 'media'))
+    if not version_dir:
+        potential_sources.append(find_case_insensitive_dir(mod_root_path, 'media'))
 
-    potential_media_paths = [
-        find_case_insensitive_dir(version_dir, 'media') if version_dir else None,
-        find_case_insensitive_dir(common_dir, 'media') if common_dir else None,
-        find_case_insensitive_dir(mod_root_path, 'media')
-    ]
-
-    for media_path in potential_media_paths:
+    active_media_paths = []
+    for media_path in potential_sources:
         if media_path and media_path.is_dir():
             logging.info(f"  -> 正在检查路径的有效性: {media_path}")
 
@@ -122,13 +127,15 @@ def find_active_media_path(mod_root_path):
             has_translate = find_case_insensitive_dir(shared_dir, "Translate")
 
             if has_scripts or has_translate:
-                logging.info(f"  --> 路径有效！将使用此路径进行处理: {media_path}")
-                return media_path
+                logging.info(f"  --> 路径有效！已将其加入待处理列表。")
+                active_media_paths.append(media_path)
             else:
-                logging.info(f"  --> 路径无效 (缺少 scripts 或 Translate)，继续查找...")
+                logging.info(f"  --> 路径无效 (缺少 scripts 或 Translate)，已跳过。")
 
-    logging.warning("  --> 未能在任何优先路径中找到 'media' 文件夹。")
-    return None
+    if not active_media_paths:
+        logging.warning("  --> 未能在任何优先路径中找到有效的 'media' 文件夹。")
+    
+    return active_media_paths
 
 def extract_item_display_names(text_content, prefix, source_filename: str):
     results = {}
@@ -305,31 +312,43 @@ def extract_value_from_line(line):
     return match.group(1) if match else None
 
 def process_single_mod(mod_root_path, config, vanilla_keys):
-    active_media_path = find_active_media_path(mod_root_path)
-    if not active_media_path:
+    active_media_paths = find_active_media_paths(mod_root_path)
+    if not active_media_paths:
         return {}, {}, {}, {}
-        
-    scripts_dir = find_case_insensitive_dir(active_media_path, "scripts")
-    lua_dir = find_case_insensitive_dir(active_media_path, "lua")
-    shared_dir = find_case_insensitive_dir(lua_dir, "shared")
-    translate_root_dir = find_case_insensitive_dir(shared_dir, "Translate")
 
-    base_lang_dir = find_case_insensitive_dir(translate_root_dir, config.BASE_LANGUAGE)
-    priority_lang_dir = find_case_insensitive_dir(translate_root_dir, config.PRIORITY_LANGUAGE)
-    key_source_map = {}
+    en_data_raw, cn_data_raw, key_source_map = {}, {}, {}
 
-    logging.info(f"\n--- 预加载 {config.BASE_LANGUAGE} (L1) 数据 ---")
-    en_data_raw, en_map = get_translations_as_dict(base_lang_dir, config)
-    key_source_map.update(en_map)
+    logging.info(f"\n--- 阶段 1: 扫描所有 media 路径下的翻译文件 (L1) ---")
+    for media_path in active_media_paths:
+        logging.info(f"  -> 正在处理 media 路径: {media_path}")
+        lua_dir = find_case_insensitive_dir(media_path, "lua")
+        shared_dir = find_case_insensitive_dir(lua_dir, "shared")
+        translate_root_dir = find_case_insensitive_dir(shared_dir, "Translate")
 
-    local_known_en_keys = set(en_data_raw.keys())
-    logging.info(f"预加载完成: 找到 {len(local_known_en_keys)} 个本地 {config.BASE_LANGUAGE} 键。")
+        base_lang_dir = find_case_insensitive_dir(translate_root_dir, config.BASE_LANGUAGE)
+        priority_lang_dir = find_case_insensitive_dir(translate_root_dir, config.PRIORITY_LANGUAGE)
 
-    logging.info(f"\n--- 阶段 1: 扫描 Scripts (L0) ---")
+        temp_en_data, temp_en_map = get_translations_as_dict(base_lang_dir, config)
+        en_data_raw.update(temp_en_data)
+        key_source_map.update(temp_en_map)
+
+        temp_cn_data, temp_cn_map = get_translations_as_dict(priority_lang_dir, config)
+        cn_data_raw.update(temp_cn_data)
+        key_source_map.update(temp_cn_map)
+    logging.info(f"阶段 1 完成: 从 {config.BASE_LANGUAGE} 加载了 {len(en_data_raw)} 条数据, 从 {config.PRIORITY_LANGUAGE} 加载了 {len(cn_data_raw)} 条数据。")
+
+    logging.info(f"\n--- 阶段 2: 扫描所有 Media 路径下的 Scripts (L0) ---")
     generated_data = {}
-    if scripts_dir and scripts_dir.is_dir():
+    local_known_en_keys = set(en_data_raw.keys())
+
+    for media_path in active_media_paths:
+        scripts_dir = find_case_insensitive_dir(media_path, "scripts")
+        if not scripts_dir or not scripts_dir.is_dir():
+            continue
+        
+        logging.info(f"  -> 正在处理 Scripts 路径: {scripts_dir}")
         for file_path in sorted(scripts_dir.rglob(f"*{config.SCRIPTS_FILE_EXT}")):
-            logging.info(f"  -> 处理: {file_path.relative_to(scripts_dir)}")
+            logging.info(f"    -> 处理: {file_path.relative_to(scripts_dir)}")
             new_items, new_recipes = 0, 0
             try:
                 content = file_path.read_text(encoding='utf-8')
@@ -343,10 +362,13 @@ def process_single_mod(mod_root_path, config, vanilla_keys):
                 key_source_map.update(items_map)
                 key_source_map.update(recipes_map)
                 
-                for key, line in items_data.items():
-                    if key not in local_known_en_keys: generated_data[key] = line; new_items += 1
-                for key, line in recipes_data.items():
-                    if key not in local_known_en_keys: generated_data[key] = line; new_recipes += 1
+                current_generated = {**items_data, **recipes_data}
+                for key, line in current_generated.items():
+                    if key not in local_known_en_keys:
+                        if key not in generated_data:
+                            if key in items_data: new_items += 1
+                            if key in recipes_data: new_recipes += 1
+                        generated_data[key] = line
 
             except Exception as e: logging.error(f"    处理文件 {file_path.name} 时发生错误: {e}")
             if new_items or new_recipes:
@@ -354,16 +376,12 @@ def process_single_mod(mod_root_path, config, vanilla_keys):
                 if new_items: log_parts.append(f"{new_items} 个 Item")
                 if new_recipes: log_parts.append(f"{new_recipes} 个 Recipe")
                 logging.info(f"     -> 新增: " + ", ".join(log_parts))
-    else: logging.warning(f"  -> 警告：未找到 Scripts 目录，跳过。")
-    logging.info(f"阶段 1 完成: 从 scripts 新生成了 {len(generated_data)} 条数据。")
+    logging.info(f"阶段 2 完成: 从 scripts 新生成了 {len(generated_data)} 条数据。")
     
     en_base_data = {**generated_data, **en_data_raw}
-    logging.info(f"\n--- 阶段 2: 合并 L0 与 L1 后，纯净英文基准总计: {len(en_base_data)} 条数据。---")
+    cn_base_data = cn_data_raw
+    logging.info(f"\n--- 阶段 3: 合并 L0 与 L1 后，纯净英文基准总计: {len(en_base_data)} 条数据。---")
 
-    cn_base_data, cn_map = get_translations_as_dict(priority_lang_dir, config)
-    key_source_map.update(cn_map)
-    logging.info(f"\n--- 阶段 3: 从 {config.PRIORITY_LANGUAGE} 目录加载了 {len(cn_base_data)} 条数据。---")
-    
     conflict_keys = (set(en_base_data.keys()) | set(cn_base_data.keys())) & vanilla_keys
     conflict_data = {key: en_base_data.get(key) or cn_base_data.get(key) for key in conflict_keys}
 
@@ -638,16 +656,12 @@ def main():
         for sub_mod_path in sub_mods:
             logging.info(f"\n-------------------- 处理子模组: {sub_mod_path.name} --------------------")
             en_raw, cn_raw, key_map, conflict_data = process_single_mod(sub_mod_path, cfg, vanilla_keys)
-            workshop_conflict_data.update(conflict_data)
-            for key, val in en_raw.items():
-                if key not in global_known_keys_en: workshop_en_base[key] = val
-            for key, val in cn_raw.items():
-                if key not in global_known_keys_cn: workshop_cn_base[key] = val
-            global_known_keys_en.update(en_raw.keys())
-            global_known_keys_cn.update(cn_raw.keys())
+            workshop_en_base.update(en_raw)
+            workshop_cn_base.update(cn_raw)
             workshop_key_source_map.update(key_map)
-            global_key_source_map[mod_id] = workshop_key_source_map
-            logging.info(f"\n--- 已为 Mod ID {mod_id} 更新 {len(workshop_key_source_map)} 条键来源映射 ---")
+            workshop_conflict_data.update(conflict_data)
+        global_key_source_map[mod_id] = workshop_key_source_map
+        logging.info(f"\n--- 已为 Mod ID {mod_id} 更新 {len(workshop_key_source_map)} 条键来源映射 ---")
         
         final_output = {**workshop_en_base, **workshop_cn_base}
         en_todo_list, cn_only_list = {}, {}
