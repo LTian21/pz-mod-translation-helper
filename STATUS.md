@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-08 17:43:48 UTC+08:00`*
+*最后更新于：`2025-11-08 18:55:09 UTC+08:00`*
 
 ---
 
@@ -17,9 +17,23 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251108_161902``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251108_185303``)**
 
-*   **GeneratorPlus (ID: 3597471949)**: 新增 `0` 条, 移除 `1` 条。
+*   **Skill_Recovery_Journal (ID: 2503622437)**: 新增 `5` 条, 移除 `0` 条。
+*   **PompsItemsFood (ID: 2792348686)**: 新增 `3` 条, 移除 `0` 条。
+*   **PompsItemsPlushies (ID: 2792387747)**: 新增 `24` 条, 移除 `0` 条。
+*   **Advanced_Trajectory's_Realistic_Overhaul (ID: 3036878362)**: 新增 `14` 条, 移除 `0` 条。
+*   **BWardrobe (ID: 3140453034)**: 新增 `9` 条, 移除 `0` 条。
+*   **TLOUClothingConnected (ID: 3348036710)**: 新增 `6` 条, 移除 `0` 条。
+*   **StarlitLibrary (ID: 3378285185)**: 新增 `1` 条, 移除 `0` 条。
+*   **ShieldModeSecondaryHandEquip (ID: 3383001527)**: 新增 `2` 条, 移除 `0` 条。
+*   **DivisionBackpack (ID: 3391306957)**: 新增 `1` 条, 移除 `0` 条。
+*   **SpongieCharacterCustomisation (ID: 3414634809)**: 新增 `9` 条, 移除 `0` 条。
+*   **PFO_GUNRUNNER (ID: 3434691822)**: 新增 `224` 条, 移除 `0` 条。
+*   **TetriZ (ID: 3486780625)**: 新增 `2` 条, 移除 `0` 条。
+*   **HaloArmor (ID: 3507919075)**: 新增 `3` 条, 移除 `0` 条。
+*   **Project_Summer_Car (ID: 3564950449)**: 新增 `201` 条, 移除 `0` 条。
+*   **SnackTime89 (ID: 3589560764)**: 新增 `1` 条, 移除 `1` 条。
 
 ---
 
