@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-09 04:03:57 UTC+08:00`*
+*最后更新于：`2025-11-09 04:05:08 UTC+08:00`*
 
 ---
 
@@ -9,10 +9,10 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``67590`` 条 |
-| **待翻译条目** | ``15986`` 条 |
-| **已翻译条目** | ``51604`` 条 |
-| **待校对条目** | ``50201`` 条 |
+| **模组总条目** | ``67601`` 条 |
+| **待翻译条目** | ``15998`` 条 |
+| **已翻译条目** | ``51603`` 条 |
+| **待校对条目** | ``50200`` 条 |
 | **已支持 Mod 数量** | ``626`` 个 |
 
 ---
@@ -57,8 +57,8 @@
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
 | Trap Manager | 3566766862 | 159 | 3 | 1 | 162 |
 | Airdrops | 3590950467 | 156 | 0 | 0 | 156 |
+| Detailed Skill Tooltips | 3572846242 | 150 | 0 | 0 | 150 |
 | Bundle Branches [B42] | 3595072546 | 148 | 0 | 0 | 148 |
-| Detailed Skill Tooltips | 3572846242 | 141 | 0 | 0 | 141 |
 | SnackTime 89 - Junk Revival | 3589560764 | 138 | 0 | 0 | 138 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
@@ -183,7 +183,6 @@
 | Ammo Maker | 2788256295 | 6 | 673 | 31 | 679 |
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 6 | 369 | 0 | 375 |
 | TwisTonFire - Dude, Where Is My Car? | 3576268735 | 6 | 0 | 0 | 6 |
-| Yaki's BarberShop | 2810471370 | 6 | 0 | 0 | 6 |
 | [J&G] Black Multicam Uniform [B42/41] | 3315302991 | 6 | 39 | 0 | 47 |
 | [J&G] Desert Uniform [B42/41] | 3299457564 | 6 | 37 | 0 | 44 |
 | [J&G] Forest Multicam Uniform [B42/41] | 3309971624 | 6 | 37 | 0 | 44 |
@@ -201,10 +200,12 @@
 | Vehicle Repair Overhaul | 2757712197 | 5 | 50 | 3 | 55 |
 | Wandering Zombies | 2983905789 | 5 | 401 | 1 | 406 |
 | [B42] Water Pipes (aka Plumbing) | 3546314080 | 5 | 56 | 7 | 61 |
+| Yaki's BarberShop | 2810471370 | 5 | 0 | 0 | 5 |
 | [J&G] Flecktarn Gear [B42/41] | 3206579556 | 5 | 26 | 0 | 31 |
 | '85 Chevrolet Caprice / Impala | 3413704851 | 4 | 37 | 0 | 41 |
 | '85 Oldsmobile Delta 88 | 3418253716 | 4 | 17 | 0 | 21 |
 | Fridges Off! | 2853974107 | 4 | 0 | 0 | 4 |
+| Imperial Chops! (Extra Beard Option) | 3465865657 | 4 | 7 | 0 | 11 |
 | Ratchat's Outdoor Tiles | 3430305726 | 4 | 1 | 1 | 5 |
 | [Project Fallout] The Beginning | 3461117277 | 4 | 24 | 3 | 28 |
 | [B42] Moodle Descriptions Expanded | 3389003300 | 4 | 102 | 9 | 106 |
@@ -459,7 +460,6 @@
 | Hybrid Gun Repair | 3562222835 | 0 | 106 | 0 | 106 |
 | Hybrid Melee Repair | 3569031613 | 0 | 32 | 0 | 32 |
 | HydeCo Unlimited Cars | 3438759949 | 0 | 132 | 12 | 132 |
-| Imperial Chops! (Extra Beard Option) | 3465865657 | 0 | 7 | 0 | 7 |
 | [B42/41] Improved Farming Info Window | 3470852353 | 0 | 8 | 0 | 8 |
 | Improvised Backpack! | 3586145865 | 0 | 60 | 0 | 60 |
 | Industrial Revolution Generic Add On | 3359867059 | 0 | 0 | 0 | 2 |
@@ -570,7 +570,7 @@
 | [B42]Pallontras Crossbows | 3400528439 | 0 | 117 | 0 | 117 |
 | Random Airdrops [B41/B42] | 3282789883 | 0 | 5 | 0 | 5 |
 | [B42/41] Reactive Sound Events | 2969551071 | 0 | 39 | 0 | 39 |
-| Reaper's Hair & Beard | 3450583954 | 0 | 28 | 0 | 28 |
+| Reaper's Hair & Beard | 3450583954 | 0 | 27 | 0 | 27 |
 | [B42] Rebalanced Yields: Butchering | 3564838872 | 0 | 0 | 0 | 1 |
 | [B42/41] Rechargeable Batteries | 3385623534 | 0 | 26 | 0 | 26 |
 | [B41 / B42] Load All Magazines | 2920899878 | 0 | 0 | 0 | 2 |
