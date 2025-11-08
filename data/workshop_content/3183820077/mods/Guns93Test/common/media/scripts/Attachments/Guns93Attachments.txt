@@ -350,7 +350,7 @@ module Base
         PartType = Irons,
         Tooltip = Tooltip_SightNotch,
         MetalValue = 15,
-        Tags = UseDriver; NoShield; ShotgunSights,
+        Tags = UseDriver; NoShield; ShotgunSights; BeadSight,
         StaticModel = SightBoxTarget,
         WorldStaticModel = SightBoxTarget,
         CanAttach = Recipe.WeaponParts.MountSights,
@@ -647,10 +647,10 @@ module Base
         PartType = Receiver,
         MetalValue = 10,
         Tooltip = Tooltip_ScopeMount,
-        StaticModel = M16RailWorld,
-        WorldStaticModel = M16RailWorld,
+        StaticModel = M16RailPart,
+        WorldStaticModel = M16RailPart,
         Tags = NoScrewdriver; ScopeRail,
-        CanAttach = Recipe.WeaponParts.ToolCheck,
+        CanAttach = Recipe.WeaponParts.MountRail,
         CanDetach = Recipe.WeaponParts.ToolCheck,
     }
 
@@ -661,14 +661,14 @@ module Base
         Type	=	WeaponPart,
         DisplayName	=	Scope Rail for M14,
         Icon	=	M14Mount,
-        MountOn = AssaultRifle2; M1A,
+        MountOn = AssaultRifle2; M1A; M1ABush,
         PartType = Receiver,
         MetalValue = 10,
         Tooltip = Tooltip_ScopeMount,
         StaticModel = M14MountPart,
         WorldStaticModel = M14MountPart,
         Tags = NoScrewdriver; ScopeRail,
-        CanAttach = Recipe.WeaponParts.ToolCheck,
+        CanAttach = Recipe.WeaponParts.MountRail,
         CanDetach = Recipe.WeaponParts.ToolCheck,
     }
 
@@ -686,7 +686,7 @@ module Base
         StaticModel = HKClawWorld,
         WorldStaticModel = HKClawWorld,
         Tags = NoScrewdriver; ScopeRail,
-        CanAttach = Recipe.WeaponParts.ToolCheck,
+        CanAttach = Recipe.WeaponParts.MountRail,
         CanDetach = Recipe.WeaponParts.ToolCheck,
     }
 
@@ -704,7 +704,7 @@ module Base
         StaticModel = Mini14RailWorld,
         WorldStaticModel = Mini14RailWorld,
         Tags = UseDriver; ScopeRail,
-        CanAttach = Recipe.WeaponParts.ToolCheck,
+        CanAttach = Recipe.WeaponParts.MountRail,
         CanDetach = Recipe.WeaponParts.ToolCheck,
     }
 
@@ -716,13 +716,16 @@ module Base
         DisplayName	=	Scope Rail For 1911 Pistols,
         Icon	=	1911Rail,
         MetalValue = 10,
-        MountOn = Pistol2; Gov1911; DeltaElite; Longslide; Javelina; Command1911,,
+        AimingTimeModifier = -4,
+        RecoilDelayModifier = -4,
+        HitChanceModifier = 4,
+        MountOn = Pistol2; Gov1911; DeltaElite; Longslide; Javelina; Command1911,
         PartType = Grip,
         Tooltip = Tooltip_ScopeMountScrew,
         StaticModel = 1911RailPart,
         WorldStaticModel = 1911RailPart,
         Tags = UseDriver; PistolRail,
-        CanAttach = Recipe.WeaponParts.ToolCheck,
+        CanAttach = Recipe.WeaponParts.MountRail,
         CanDetach = Recipe.WeaponParts.ToolCheck,
     }
 
@@ -734,13 +737,16 @@ module Base
         DisplayName	=	Scope Rail For 1911 Pistols,
         Icon	=	1911RailSS,
         MetalValue = 10,
-        MountOn = Pistol2; Gov1911; DeltaElite; Longslide; Javelina; Command1911,,
+        AimingTimeModifier = -4,
+        RecoilDelayModifier = -4,
+        HitChanceModifier = 4,
+        MountOn = Pistol2; Gov1911; DeltaElite; Longslide; Javelina; Command1911,
         PartType = Grip,
         Tooltip = Tooltip_ScopeMountScrew,
         StaticModel = 1911RailPartSS,
         WorldStaticModel = 1911RailPartSS,
         Tags = UseDriver; PistolRail,
-        CanAttach = Recipe.WeaponParts.ToolCheck,
+        CanAttach = Recipe.WeaponParts.MountRail,
         CanDetach = Recipe.WeaponParts.ToolCheck,
     }
 
@@ -758,7 +764,7 @@ module Base
         StaticModel = RevolverRail,
         WorldStaticModel = RevolverRail,
         Tags = UseDriver; PistolRail,
-        CanAttach = Recipe.WeaponParts.ToolCheck,
+        CanAttach = Recipe.WeaponParts.MountRail,
         CanDetach = Recipe.WeaponParts.ToolCheck,
     }
 
@@ -1326,8 +1332,8 @@ module Base
         MaxRangeModifier = 11,
         AimingTimeModifier = 30,
         CriticalChanceModifier = 8,
-        MountOn = AssaultRifle2; M1A,
-        PartType = Receiver,
+        MountOn = AssaultRifle2; M1A; M1ABush,
+        PartType = Scope,
         MaxSightRange = 20,
         MinSightRange = 4,
         Tooltip = Tooltip_NewScope,
@@ -1339,6 +1345,30 @@ module Base
         CanDetach = Recipe.WeaponParts.ToolCheck,
     }
 
+    item x4ACOG
+    {
+        DisplayCategory = WeaponPart,
+        Type = WeaponPart,
+        DisplayName = x4 ACOG Scope,
+        Icon = ACOG,
+        Weight = 0.30,
+        WeightModifier = 0.30,
+        MaxRangeModifier = 5,
+        AimingTimeModifier = 17,
+        CriticalChanceModifier = 5,
+        MountOn = ,
+        PartType = Scope,
+        MaxSightRange = 16,
+        MinSightRange = 4,
+        Tooltip = Tooltip_NewScope,
+        StaticModel = ACOGMount,
+        MetalValue = 22,
+        WorldStaticModel = ACOGMount,
+        Tags = NoScrewdriver; ScopeRail,
+        CanAttach = Recipe.WeaponParts.MountACOG,
+        CanDetach = Recipe.WeaponParts.ToolCheck,
+    }
+
     item x4Handle
     {
         DisplayCategory = WeaponPart,
@@ -1346,12 +1376,12 @@ module Base
         DisplayName = x4 Scope for M16/AR15,
         Icon = 4xHandle,
         Weight = 0.35,
-        WeightModifier = 0.45,
+        WeightModifier = 0.35,
         MaxRangeModifier = 5,
         AimingTimeModifier = 20,
         CriticalChanceModifier = 5,
         MountOn = AR15;CAR15;HBAR;Dissy;AssaultRifle;M727;M723;M733;M635,
-        PartType = Receiver,
+        PartType = Scope,
         MaxSightRange = 16,
         MinSightRange = 4,
         Tooltip = Tooltip_NewScope,
@@ -1370,12 +1400,12 @@ module Base
         DisplayName = x3 Scope for M16/AR15,
         Icon = 4xHandle,
         Weight = 0.35,
-        WeightModifier = 0.45,
+        WeightModifier = 0.35,
         MaxRangeModifier = 4,
         AimingTimeModifier = 14,
         CriticalChanceModifier = 5,
         MountOn = AR15;CAR15;HBAR;Dissy;AssaultRifle;M727;M723;M733;M635,
-        PartType = Receiver,
+        PartType = Scope,
         MaxSightRange = 12,
         MinSightRange = 3,
         Tooltip = Tooltip_NewScope,
@@ -1394,12 +1424,12 @@ module Base
         DisplayName = x4 Scope for AR-180,
         Icon = 4xAR180,
         Weight = 0.35,
-        WeightModifier = 0.45,
+        WeightModifier = 0.35,
         MaxRangeModifier = 5,
         AimingTimeModifier = 20,
         CriticalChanceModifier = 5,
         MountOn = AR180Scopes,
-        PartType = Receiver,
+        PartType = Scope,
         MaxSightRange = 16,
         MinSightRange = 4,
         Tooltip = Tooltip_NewScope,
@@ -1409,50 +1439,5 @@ module Base
         Tags = NoScrewdriver,
         CanAttach = Recipe.WeaponParts.ToolCheck,
         CanDetach = Recipe.WeaponParts.ToolCheck,
-    }
-
-    item LargeGunCleaningKit
-    {
-        DisplayCategory = Material,
-        Weight	=	0.05,
-        Type	=	Drainable,
-        DisplayName	=	Large Gun Cleaning Kit,
-        Icon	=	CleaningKit,
-        StaticModel = CleaningKitWorld,
-        UseDelta = 0.1,
-        Tooltip = Tooltip_CleaningKit,
-        WorldStaticModel = CleaningKitWorld,
-        KeepOnDeplete = true,
-        Tags = GunCleaningKit,
-    }
-
-    item GunCleaningKit
-    {
-        DisplayCategory = Material,
-        Weight	=	0.05,
-        Type	=	Drainable,
-        DisplayName	=	Gun Cleaning Kit,
-        Icon	=	CleaningKit,
-        StaticModel = CleaningKitWorld,
-        UseDelta = 0.1,
-        Tooltip = Tooltip_CleaningKit,
-        WorldStaticModel = CleaningKitWorld,
-        KeepOnDeplete = true,
-        Tags = GunCleaningKit,
-    }
-
-    item SmallGunCleaningKit
-    {
-        DisplayCategory = Material,
-        Weight	=	0.05,
-        Type	=	Drainable,
-        DisplayName	=	Small Gun Cleaning Kit,
-        Icon	=	CleaningKit,
-        StaticModel = CleaningKitWorld,
-        UseDelta = 0.1,
-        Tooltip = Tooltip_CleaningKit,
-        WorldStaticModel = CleaningKitWorld,
-        KeepOnDeplete = true,
-        Tags = GunCleaningKit,
     }
 }

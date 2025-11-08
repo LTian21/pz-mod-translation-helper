@@ -10,6 +10,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <!-- 搜索框 -->
+            <RowDefinition Height="Auto" />
             <!-- 上半部分（列表） -->
             <RowDefinition Height="*" />
             <!-- 可拖拽分隔条 -->
@@ -38,9 +40,15 @@
             <Button x:Name="btnSubmitReview" Content="提交审核" Width="100" Click="btnSubmitReview_Click" />
         </StackPanel>
 
+        <!-- 搜索框 -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,5">
+            <Label Content="搜索 MOD ID:" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtSearch" Width="200" TextChanged="txtSearch_TextChanged" VerticalAlignment="Center"/>
+        </StackPanel>
+
         <!-- 任务列表（可伸缩上半区域） -->
         <DataGrid x:Name="dgMods"
-                  Grid.Row="2"
+                  Grid.Row="3"
                   Margin="0,0,0,0"
                   AutoGenerateColumns="False"
                   CanUserSortColumns="True"
@@ -162,7 +170,7 @@
         </DataGrid>
 
         <!-- 分隔条：允许拖动调整上下区域高度 -->
-        <GridSplitter Grid.Row="3"
+        <GridSplitter Grid.Row="4"
                       Height="6"
                       HorizontalAlignment="Stretch"
                       Background="#FFE0E0E0"
@@ -170,7 +178,7 @@
                       Cursor="SizeNS"/>
 
         <TextBox x:Name="txtOutput"
-                 Grid.Row="4"
+                 Grid.Row="5"
                  Margin="0,6,0,0"
                  VerticalScrollBarVisibility="Auto"
                  AcceptsReturn="True"

@@ -17,7 +17,7 @@ on:
         type: boolean
         default: false
   schedule:
-    - cron: '0 4 * * *' # 每天UTC时间凌晨4点运行 (北京时间中午12点)
+    - cron: '0 20 * * *' # 每天UTC时间20点运行 (北京时间凌晨4点)
 
 jobs:
   setup_jobs:
@@ -37,6 +37,31 @@ jobs:
         uses: ./.github/actions/setup-environment
         with:
           install-jq: 'true'
+
+      - name: Fetch pending Mod IDs from server
+        id: fetch_new_ids
+        if: github.event.inputs.full_refresh != 'true'
+        run: |
+          response=$(curl -s -w "%{http_code}" -X POST \
+            -H "Authorization: Bearer ${{ secrets.ACTION_SECRET_KEY }}" \
+            "${{ secrets.SERVER_URL }}/get-pending-ids")
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          if [ "$http_code" -ne 200 ]; then
+            echo "::warning::Failed to fetch new IDs from server. HTTP status: $http_code. Body: $body. Proceeding without them."
+            echo "mods_to_download=[]" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          echo "Successfully fetched data from server."
+          MOD_IDS=$(echo "$body" | jq -r '.mod_ids | select(. != null) | .[]')
+          if [ -z "$MOD_IDS" ]; then
+            echo "No new Mod IDs from server."
+            JSON_ARRAY="[]"
+          else
+            JSON_ARRAY=$(echo "$MOD_IDS" | jq -Rsc 'split("\n") | map(select(. != ""))')
+          fi
+          echo "Fetched Mod IDs: $JSON_ARRAY"
+          echo "mods_to_download=$JSON_ARRAY" >> $GITHUB_OUTPUT
 
       - name: Handle Manual Trigger Override
         id: manual_check
@@ -90,38 +115,46 @@ jobs:
         env:
           MANUAL_LIST_INPUT: ${{ steps.manual_check.outputs.mods_to_download }}
           FULL_REFRESH_LIST_INPUT: ${{ steps.full_refresh_check.outputs.mods_to_download }}
+          FETCHED_LIST_INPUT: ${{ steps.fetch_new_ids.outputs.mods_to_download }}
           SCHEDULED_LIST_INPUT: ${{ steps.scheduled_check.outputs.mods_to_download }}
           LOCAL_CHANGES_LIST_INPUT: ${{ steps.local_check.outputs.mods_to_download }}
 
         run: |
           MANUAL_LIST="$MANUAL_LIST_INPUT"
           FULL_REFRESH_LIST="$FULL_REFRESH_LIST_INPUT"
+          FETCHED_LIST="$FETCHED_LIST_INPUT"
           SCHEDULED_LIST="$SCHEDULED_LIST_INPUT"
           LOCAL_CHANGES_LIST="$LOCAL_CHANGES_LIST_INPUT"
 
           if [ -z "$MANUAL_LIST" ] || [ "$MANUAL_LIST" = "null" ]; then MANUAL_LIST='[]'; fi
           if [ -z "$FULL_REFRESH_LIST" ] || [ "$FULL_REFRESH_LIST" = "null" ]; then FULL_REFRESH_LIST='[]'; fi
+          if [ -z "$FETCHED_LIST" ] || [ "$FETCHED_LIST" = "null" ]; then FETCHED_LIST='[]'; fi
           if [ -z "$SCHEDULED_LIST" ] || [ "$SCHEDULED_LIST" = "null" ]; then SCHEDULED_LIST='[]'; fi
           if [ -z "$LOCAL_CHANGES_LIST" ] || [ "$LOCAL_CHANGES_LIST" = "null" ]; then LOCAL_CHANGES_LIST='[]'; fi
           COMBINED_LIST='[]'
           
-          if [ "$MANUAL_LIST" != "[]" ]; then
-            echo "检测到手动Mod ID覆盖，将使用此列表进行处理 (优先级最高)。"
-            COMBINED_LIST=$(echo "$MANUAL_LIST" | jq -c '.')
-          elif [ "$FULL_REFRESH_LIST" != "[]" ]; then
+          if [ "$FULL_REFRESH_LIST" != "[]" ]; then
             echo "检测到强制刷新模式，将使用 id_list.txt 中的所有Mod ID进行处理。"
             COMBINED_LIST=$(echo "$FULL_REFRESH_LIST" | jq -c '.')
           else
-            echo "未检测到手动覆盖或强制刷新。将使用自动检查的Mod列表。"
-            
+            echo "合并所有来源的Mod ID..."
+            echo " - 手动输入的ID列表: $MANUAL_LIST"
+            echo " - 从服务器获取的新ID列表: $FETCHED_LIST"
             echo " - Steam更新列表: $SCHEDULED_LIST"
             echo " - 本地变更列表: $LOCAL_CHANGES_LIST"
             
-            COMBINED_LIST=$(jq -n --argjson a "$SCHEDULED_LIST" --argjson b "$LOCAL_CHANGES_LIST" '($a + $b) | unique' | jq -c '.')
+            COMBINED_LIST=$(jq -n \
+              --argjson a "$MANUAL_LIST" \
+              --argjson b "$FETCHED_LIST" \
+              --argjson c "$SCHEDULED_LIST" \
+              --argjson d "$LOCAL_CHANGES_LIST" \
+              '($a + $b + $c + $d) | unique' | jq -c '.')
           fi
           
           echo "最终待处理的Mod列表: $COMBINED_LIST"
           echo "mods_to_download=$COMBINED_LIST" >> $GITHUB_OUTPUT
+          # 将从服务器获取的ID列表单独传递，用于后续写入 id_list.txt
+          echo "fetched_ids=$FETCHED_LIST" >> $GITHUB_OUTPUT
 
       - name: Calculate Mods per Job
         if: steps.combine_lists.outputs.mods_to_download != '[]' && steps.combine_lists.outputs.mods_to_download != ''
@@ -335,24 +368,44 @@ jobs:
       - name: Clean up temporary artifacts
         run: rm -rf temp_artifacts    
 
-      - name: Dynamically Add New Mod IDs to id_list.txt
-        if: needs.setup_jobs.outputs.manual_ids_raw != ''
+      - name: Add Fetched and Manual Mod IDs to id_list.txt
         env:
-          MODS_TO_ADD_JSON: ${{ needs.setup_jobs.outputs.mods_to_download }}
+          FETCHED_IDS_JSON: ${{ needs.setup_jobs.outputs.fetched_ids }}
+          MANUAL_IDS_JSON: ${{ needs.setup_jobs.outputs.mods_to_download }}
+          IS_MANUAL_RUN: ${{ needs.setup_jobs.outputs.manual_ids_raw != '' }}
         run: |
-          CLEANED_MODS_JSON="$MODS_TO_ADD_JSON"
+          if [ "$IS_MANUAL_RUN" = "true" ]; then
+            echo "手动运行模式：将手动输入的ID添加到 id_list.txt"
+            MODS_TO_PROCESS_JSON="$MANUAL_IDS_JSON"
+          else
+            echo "自动运行模式：将从服务器获取的ID添加到 id_list.txt"
+            MODS_TO_PROCESS_JSON="$FETCHED_IDS_JSON"
+          fi
+
+          if [ -z "$MODS_TO_PROCESS_JSON" ] || [ "$MODS_TO_PROCESS_JSON" = "[]" ] || [ "$MODS_TO_PROCESS_JSON" = "null" ]; then
+            echo "没有新的Mod ID需要添加到 id_list.txt。"
+            exit 0
+          fi
           
+          # 确保文件末尾有换行符
           [ -n "$(tail -c1 id_list.txt)" ] && echo >> id_list.txt
           
-          for ID in $(echo "$CLEANED_MODS_JSON" | jq -r '.[]'); do
+          NEW_IDS_ADDED=0
+          for ID in $(echo "$MODS_TO_PROCESS_JSON" | jq -r '.[]'); do
             if grep -q -w -x "$ID" id_list.txt; then
               echo "  -> ID: $ID 已存在于 id_list.txt 中，无需添加。"
             else
               echo "  -> ID: $ID 是新ID，正在添加到 id_list.txt..."
               echo "$ID" >> id_list.txt
+              NEW_IDS_ADDED=$((NEW_IDS_ADDED + 1))
             fi
           done
-          echo "id_list.txt 更新完成。"
+          
+          if [ "$NEW_IDS_ADDED" -gt 0 ]; then
+            echo "id_list.txt 更新完成，共添加了 $NEW_IDS_ADDED 个新ID。"
+          else
+            echo "id_list.txt 无需更新。"
+          fi
 
       - name: Update Timestamps After Successful Download
         env:
@@ -474,6 +527,30 @@ jobs:
       #     echo "为 PR #${PR_NUMBER} 启用自动合并..."
       #     gh pr merge --auto --squash "$PR_NUMBER"
       #     echo "自动合并已成功启用。当所有检查通过后，GitHub将会自动合并此PR。"
+
+      - name: Report Processing Status Back to Server
+        # 无论成功与否，都尝试运行此步骤以报告状态
+        if: always() && needs.setup_jobs.outputs.mods_to_download != '[]'
+        env:
+          # 成功处理的 Mod ID 列表
+          SUCCESSFUL_IDS_JSON: ${{ needs.setup_jobs.outputs.mods_to_download }}
+          # 失败的 ID 列表 (当前版本为空，未来可扩展)
+          FAILED_IDS_JSON: "[]" 
+          API_URL: ${{ secrets.SERVER_URL }}
+          API_KEY: ${{ secrets.ACTION_SECRET_KEY }}
+        run: |
+          echo "向服务器报告处理结果..."
+          echo "成功处理的 Mod ID: $SUCCESSFUL_IDS_JSON"
+          echo "失败处理的 Mod ID: $FAILED_IDS_JSON"
+
+          # 发送 POST 请求到我们创建的 /api/update-status 接口
+          curl -X POST "${API_URL}/update-status" \
+            -H "Authorization: Bearer ${API_KEY}" \
+            -H "Content-Type: application/json" \
+            -d '{
+                  "successful_ids": '"$SUCCESSFUL_IDS_JSON"',
+                  "failed_ids": '"$FAILED_IDS_JSON"'
+                }'
 
       - name: Prepare Issue Body on Failure
         if: failure()
