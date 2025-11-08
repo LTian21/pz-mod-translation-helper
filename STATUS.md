@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-08 16:19:02 UTC+08:00`*
+*最后更新于：`2025-11-08 16:55:19 UTC+08:00`*
 
 ---
 
@@ -9,11 +9,11 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``66520`` 条 |
-| **待翻译条目** | ``13930`` 条 |
-| **已翻译条目** | ``52590`` 条 |
-| **待校对条目** | ``51640`` 条 |
-| **已支持 Mod 数量** | ``623`` 个 |
+| **模组总条目** | ``67042`` 条 |
+| **待翻译条目** | ``14441`` 条 |
+| **已翻译条目** | ``52601`` 条 |
+| **待校对条目** | ``51651`` 条 |
+| **已支持 Mod 数量** | ``626`` 个 |
 
 ---
 
@@ -31,6 +31,7 @@
 | Guns of 93: B42 Test Build (Unstable) | 3183820077 | 741 | 1762 | 1129 | 2553 |
 | Even More Traits | 2855320431 | 606 | 62 | 2 | 668 |
 | [B42] Buildables Expansion | 3463117260 | 525 | 622 | 7 | 1147 |
+| Conditional-Speech | 2398253681 | 493 | 0 | 0 | 493 |
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
 | 1993 American Vehicle Pack (BUILD .41/.42) | 2809058492 | 376 | 5 | 5 | 381 |
@@ -124,6 +125,7 @@
 | Easy Drop'n'Loot | 2871469707 | 20 | 0 | 0 | 20 |
 | '84 Buick Electra | 3596903773 | 18 | 0 | 0 | 18 |
 | '84 Cadillac DeVille | 3592777775 | 18 | 0 | 0 | 18 |
+| '84 Oldsmobile 98 Regency | 3601417745 | 18 | 0 | 0 | 18 |
 | Common Sense | 2875848298 | 18 | 29 | 0 | 48 |
 | Equipment UI - Paper Doll Equipment Interface [B42/41] | 2950902979 | 18 | 0 | 0 | 18 |
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
@@ -228,7 +230,7 @@
 | ExtraMoney | 3462306255 | 1 | 65 | 0 | 66 |
 | [B42/1] Frockin Wiseguys! | 3538760023 | 1 | 40 | 33 | 41 |
 | [42] Frogtown (BETA) by TwinCrows | 3449473111 | 1 | 3 | 0 | 4 |
-| Generator Powered Buildings | 3597471949 | 1 | 0 | 0 | 52 |
+| Generator Powered Buildings | 3597471949 | 1 | 9 | 0 | 61 |
 | Point Blank | 2990322197 | 1 | 16 | 0 | 17 |
 | HydeCo. Bees! | 3430224478 | 1 | 419 | 1 | 420 |
 | [B42/41] Keep Skill Level | 3314107094 | 1 | 48 | 0 | 49 |
@@ -540,6 +542,7 @@
 | Stealth Camo | 2762398967 | 0 | 87 | 25 | 87 |
 | Tidy Up Meister | 2769706949 | 0 | 30 | 0 | 30 |
 | Video Meister | 2744797858 | 0 | 7 | 0 | 7 |
+| Pain Sense - Injury Feedback System | 3599368309 | 0 | 2 | 0 | 2 |
 | Paniqeur Trait [B42 Compatible] | 3393305357 | 0 | 0 | 0 | 2 |
 | Party System | 3395761583 | 0 | 7 | 0 | 7 |
 | PertsPartyTiles | 2837923608 | 0 | 22 | 0 | 22 |
