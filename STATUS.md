@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-10 00:50:19 UTC+08:00`*
+*最后更新于：`2025-11-10 01:00:03 UTC+08:00`*
 
 ---
 
@@ -10,9 +10,9 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``67601`` 条 |
-| **待翻译条目** | ``15359`` 条 |
-| **已翻译条目** | ``52242`` 条 |
-| **待校对条目** | ``49996`` 条 |
+| **待翻译条目** | ``15300`` 条 |
+| **已翻译条目** | ``52301`` 条 |
+| **待校对条目** | ``49827`` 条 |
 | **已支持 Mod 数量** | ``626`` 个 |
 
 ---
@@ -99,7 +99,6 @@
 | Factory Pieces | 3399263137 | 40 | 101 | 0 | 141 |
 | My So-Called Snack | 2877535263 | 40 | 184 | 0 | 224 |
 | Tsar's Common Library B42 | 3402491515 | 40 | 339 | 122 | 379 |
-| [B42] Intuitive Crafting | 3486217110 | 39 | 3 | 3 | 42 |
 | Minimal Display Bars + Nutritions + Discomfort [B41/B42] | 3388844542 | 38 | 11 | 0 | 49 |
 | Custom Weight | 3391228479 | 37 | 51 | 8 | 88 |
 | Smart Radial Menu | 3494108029 | 37 | 1 | 0 | 38 |
@@ -133,7 +132,6 @@
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
-| [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 17 | 0 | 0 | 17 |
 | [B42] Knox Event Expanded NPC mod [alpha v0.3.14-1] | 3397396843 | 17 | 577 | 42 | 594 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
 | [B42] Mod Manager | 3567084868 | 16 | 0 | 0 | 16 |
@@ -196,7 +194,6 @@
 | [Project Fallout] The Beginning | 3461117277 | 4 | 24 | 3 | 28 |
 | [B42] Moodle Descriptions Expanded | 3389003300 | 4 | 102 | 9 | 106 |
 | '85 Pontiac Parisienne | 3413706334 | 3 | 17 | 0 | 20 |
-| [B42] Home Inventory Improved | 3522009163 | 3 | 60 | 0 | 63 |
 | Ducks+ | 3409153536 | 3 | 89 | 0 | 92 |
 | Gunpoint Redemption [B.41/B.42] | 3078291265 | 3 | 11 | 0 | 14 |
 | darlak's H.E.C.U. | 3452711271 | 3 | 100 | 14 | 108 |
@@ -345,11 +342,11 @@
 | Auto Tailoring | 3388183573 | 0 | 4 | 0 | 4 |
 | Axe's Recrafting [B42] | 2211423190 | 0 | 0 | 0 | 15 |
 | [B42] Make egg jar | 3444384263 | 0 | 10 | 0 | 10 |
-| [B42] Hemp & Tobacco | 3404563567 | 0 | 64 | 0 | 66 |
+| [B42] Hemp & Tobacco | 3404563567 | 0 | 0 | 0 | 66 |
 | [B42] Make Dried Fruit | 3417502641 | 0 | 34 | 3 | 34 |
 | [B42] Make Dried Vegetables | 3418061837 | 0 | 36 | 0 | 36 |
 | [B42] Fruits in jars | 3432006285 | 0 | 26 | 0 | 26 |
-| [B42] Jarred and dried mushroom | 3416833689 | 0 | 13 | 1 | 13 |
+| [B42] Jarred and dried mushroom | 3416833689 | 0 | 0 | 1 | 13 |
 | [B42] Pack Mule (Old Version) | 3418366421 | 0 | 16 | 0 | 16 |
 | [B42] Pack Mule v2 | 3540903327 | 0 | 50 | 0 | 50 |
 | [B42] Sandbox Options | 3386906181 | 0 | 0 | 0 | 5 |
@@ -383,6 +380,7 @@
 | Vehicle Heater Sound System [B42] + Cabin Muffling | 3543941897 | 0 | 43 | 0 | 43 |
 | [B42/B41] Car Parts Repair | 3281301960 | 0 | 17 | 0 | 17 |
 | Cerberus Pack [B41/B42] | 3470478700 | 0 | 86 | 3 | 86 |
+| [B42] Home Inventory Improved | 3522009163 | 0 | 0 | 0 | 63 |
 | [B42] Cut Heavy Chains | 3413713793 | 0 | 0 | 0 | 2 |
 | [41&#124;42] ChairBarricade | 3404288341 | 0 | 0 | 0 | 3 |
 | Character Save | 2673317083 | 0 | 0 | 0 | 2 |
@@ -447,6 +445,7 @@
 | Hybrid Melee Repair | 3569031613 | 0 | 32 | 0 | 32 |
 | HydeCo Unlimited Cars | 3438759949 | 0 | 132 | 12 | 132 |
 | [B41/B42] I WANT TO EAT ICECREAM FOREVER | 2754525193 | 0 | 0 | 0 | 38 |
+| [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 0 | 0 | 0 | 17 |
 | [B42/41] Improved Farming Info Window | 3470852353 | 0 | 8 | 0 | 8 |
 | Improvised Backpack! | 3586145865 | 0 | 60 | 0 | 60 |
 | Industrial Revolution Generic Add On | 3359867059 | 0 | 0 | 0 | 2 |
@@ -464,7 +463,7 @@
 | KATTAJ1 Clothes Core [B41/B42] | 3470422050 | 0 | 44 | 0 | 44 |
 | KATTAJ1 Military Pack [B41/B42] | 3470426196 | 0 | 761 | 117 | 761 |
 | Trailers! | 3330403100 | 0 | 40 | 0 | 40 |
-| [B42] Kick Scooter! | 3453879909 | 0 | 8 | 0 | 8 |
+| [B42] Kick Scooter! | 3453879909 | 0 | 0 | 0 | 8 |
 | KillCount | 2553809727 | 0 | 18 | 0 | 18 |
 | Ladders!? | 2737665235 | 0 | 7 | 0 | 7 |
 | Last Of Us Hair | 3025593219 | 0 | 6 | 0 | 6 |
@@ -520,7 +519,7 @@
 | Nepenthe's Slower Discomfort | 3403721633 | 0 | 9 | 0 | 9 |
 | Foldable Survival Rifle | 3491265315 | 0 | 24 | 22 | 24 |
 | Night Vision [B.41/B.42] | 3383603346 | 0 | 26 | 0 | 26 |
-| Night Vision Googles [B41/B42] | 3470491629 | 0 | 21 | 0 | 21 |
+| Night Vision Googles [B41/B42] | 3470491629 | 0 | 0 | 0 | 21 |
 | [B41/B42] Nik's Hairstyles | 3401996053 | 0 | 31 | 0 | 31 |
 | Nodachi Mod B42.5.1 | 2166396868 | 0 | 0 | 0 | 3 |
 | [B42] Noir's Rifle Slings | 3388107363 | 0 | 10 | 0 | 10 |
@@ -648,6 +647,7 @@
 | [B42] Briefing | 3565244378 | 0 | 13 | 0 | 13 |
 | [B42][ABANDONED] FlipVehiclePlusTrailer | 3430172149 | 0 | 93 | 0 | 93 |
 | [B42] How Much Fuel Left | 3594286689 | 0 | 0 | 0 | 7 |
+| [B42] Intuitive Crafting | 3486217110 | 0 | 0 | 3 | 42 |
 | [B42][ABANDONED] JunkFoodsPH | 3390901679 | 0 | 24 | 0 | 24 |
 | [B42][ABANDONED] Malwart Plain Moodles | 3394582336 | 0 | 0 | 0 | 1 |
 | [B42] Post Apocalyptic Weapons | 3472334215 | 0 | 40 | 0 | 40 |
