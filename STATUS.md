@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-09 10:11:52 UTC+08:00`*
+*最后更新于：`2025-11-09 23:08:02 UTC+08:00`*
 
 ---
 
@@ -10,9 +10,9 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``67601`` 条 |
-| **待翻译条目** | ``15998`` 条 |
-| **已翻译条目** | ``51603`` 条 |
-| **待校对条目** | ``50200`` 条 |
+| **待翻译条目** | ``15997`` 条 |
+| **已翻译条目** | ``51604`` 条 |
+| **待校对条目** | ``50194`` 条 |
 | **已支持 Mod 数量** | ``626`` 个 |
 
 ---
@@ -258,7 +258,6 @@
 | [B42/41] Keep Skill Level | 3314107094 | 1 | 48 | 0 | 49 |
 | Know Your Calories! | 3257953004 | 1 | 22 | 0 | 23 |
 | Light Switch Plus(B42) | 3418843205 | 1 | 28 | 0 | 29 |
-| Manage Containers | 2650547917 | 1 | 6 | 0 | 7 |
 | Melee Weapon Upgrade | 3394923321 | 1 | 1075 | 0 | 1076 |
 | [B42] Ogrim Mod's - My Own Well | 3549290115 | 1 | 14 | 0 | 15 |
 | Reduced sickness inside the vehicle | 3405033818 | 1 | 8 | 0 | 9 |
@@ -496,6 +495,7 @@
 | Make Burlap | 3409478949 | 0 | 0 | 0 | 1 |
 | [B42] Make Charcoal in kilns | 3392674521 | 0 | 4 | 0 | 4 |
 | [B42] Make Gunpowder from Fertilizer | 3392188086 | 0 | 0 | 0 | 2 |
+| Manage Containers | 2650547917 | 0 | 0 | 0 | 7 |
 | Mandarin's Bedding | 3431960478 | 0 | 6 | 0 | 6 |
 | Map Mod Manager (41 and 42) | 3360392628 | 0 | 55 | 0 | 55 |
 | Map Symbol Size Slider | 2734705913 | 0 | 0 | 0 | 1 |
