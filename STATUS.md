@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-10 04:04:12 UTC+08:00`*
+*最后更新于：`2025-11-10 04:05:18 UTC+08:00`*
 
 ---
 
@@ -9,11 +9,11 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``67601`` 条 |
-| **待翻译条目** | ``14888`` 条 |
-| **已翻译条目** | ``52713`` 条 |
-| **待校对条目** | ``49464`` 条 |
-| **已支持 Mod 数量** | ``626`` 个 |
+| **模组总条目** | ``70543`` 条 |
+| **待翻译条目** | ``15862`` 条 |
+| **已翻译条目** | ``54681`` 条 |
+| **待校对条目** | ``51431`` 条 |
+| **已支持 Mod 数量** | ``636`` 个 |
 
 ---
 
@@ -43,13 +43,16 @@
 | [B42] Take A Bath And Shower | 3592172476 | 296 | 0 | 0 | 296 |
 | [B42] School's Out: Anime-Style Student Uniforms | 3404301631 | 285 | 1 | 1 | 286 |
 | Immersive Lore | 3000924731 | 273 | 109 | 0 | 382 |
+| Vanilla Foods Expanded | 3577903007 | 271 | 1865 | 9 | 2136 |
 | Pomp's Items - Just the Food | 2792348686 | 267 | 397 | 3 | 664 |
 | [B42] WarThunderVehicleLibrary | 3399660368 | 241 | 44 | 7 | 285 |
+| Lost Media | 3572808153 | 237 | 0 | 0 | 237 |
 | UNOFFICIAL Fools New Containers for B42 | 3535295548 | 237 | 91 | 91 | 328 |
 | organizedCategories: Core | 3370707195 | 230 | 253 | 1 | 483 |
 | [B42/B41] The Motorious Zone Vehicle Pack | 2791656602 | 218 | 5 | 0 | 223 |
 | Support Goods [B42.9] - MyAlcohol! | 3510863962 | 218 | 0 | 0 | 218 |
 | Project Fallout: GunRunner | 3434691822 | 217 | 29 | 0 | 246 |
+| [B42]Kill Cell - Armory | 3569050120 | 208 | 0 | 0 | 208 |
 | (B42) Immersive Roleplay Professions and Traits | 3387474156 | 201 | 667 | 0 | 870 |
 | True Smoking [B42] | 3423984426 | 173 | 26 | 1 | 199 |
 | Somewhat Traits [B42 Compatible] | 3498347699 | 171 | 0 | 0 | 171 |
@@ -62,6 +65,7 @@
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
 | Pocket Kittens (B42) | 3568029240 | 120 | 14 | 7 | 134 |
+| Video Game Consoles | 2831786301 | 120 | 0 | 0 | 120 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
@@ -81,6 +85,7 @@
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 0 | 69 |
 | Skill Recovery Journal | 2503622437 | 68 | 11 | 8 | 79 |
 | SCP - Foundation pack | 3580511016 | 66 | 0 | 0 | 66 |
+| [B42] The Only Cure | 3580276809 | 65 | 0 | 0 | 66 |
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | ST Additions - Pry Open | 3579640010 | 60 | 102 | 32 | 162 |
@@ -101,6 +106,7 @@
 | My So-Called Snack | 2877535263 | 40 | 184 | 0 | 224 |
 | Tsar's Common Library B42 | 3402491515 | 40 | 339 | 122 | 379 |
 | Minimal Display Bars + Nutritions + Discomfort [B41/B42] | 3388844542 | 38 | 11 | 0 | 49 |
+| Custom Gamepad UI [B42 Compatible] | 3001154607 | 37 | 0 | 0 | 37 |
 | Custom Weight | 3391228479 | 37 | 51 | 8 | 88 |
 | Smart Radial Menu | 3494108029 | 37 | 1 | 0 | 38 |
 | Caster Plus Fishing Mod | 3457003463 | 36 | 209 | 0 | 245 |
@@ -114,6 +120,7 @@
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
+| [B42] Knox Event Expanded NPC mod [alpha v0.3.15-1] | 3397396843 | 25 | 575 | 42 | 600 |
 | Random Clothing [B41/B42] | 3397182976 | 25 | 107 | 5 | 132 |
 | [B42] Week One NPC | 3403180543 | 23 | 808 | 0 | 831 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
@@ -132,12 +139,12 @@
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
-| [B42] Knox Event Expanded NPC mod [alpha v0.3.15-1] | 3397396843 | 17 | 577 | 42 | 594 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
 | [B42] Mod Manager | 3567084868 | 16 | 0 | 0 | 16 |
 | [B42/B41] Motorious Zone - Hot Pursuit Add-on | 2841969842 | 15 | 0 | 0 | 15 |
 | [B42/41] Repairable Windows | 3378304610 | 15 | 2 | 0 | 17 |
 | [B42] Bag Upgrade Plus | 3403697073 | 15 | 37 | 1 | 52 |
+| Functional Car Lift | 3464551542 | 14 | 0 | 0 | 14 |
 | Gyde's Trait Magazines | 3342191739 | 14 | 58 | 0 | 72 |
 | [B41/42] Known And Collected | 2881764317 | 13 | 0 | 0 | 13 |
 | The Calm Before The Storm | 2953621037 | 12 | 0 | 0 | 61 |
@@ -159,6 +166,7 @@
 | Show Key Origin | 3501701205 | 9 | 0 | 0 | 9 |
 | [B41 & B42] Throw your bag across | 3391902125 | 9 | 0 | 0 | 9 |
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 9 | 45 | 2 | 55 |
+| Functional Escalators | 3462962143 | 8 | 0 | 0 | 8 |
 | Legendary Satchel | 3560352772 | 8 | 17 | 1 | 25 |
 | Mod Load Order Sorter [b42] | 3423660713 | 8 | 34 | 23 | 42 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 8 | 7 | 0 | 15 |
@@ -180,6 +188,7 @@
 | Driving Skill [B42] | 3407791878 | 5 | 110 | 0 | 115 |
 | Herbalist | 2875059598 | 5 | 68 | 0 | 73 |
 | Scavenger Skill [B42] | 3407792640 | 5 | 64 | 0 | 69 |
+| [B42]ShelterHold : Beehive | 3596827035 | 5 | 98 | 0 | 103 |
 | Tetriz - Arcade Minigame | 3486780625 | 5 | 6 | 0 | 11 |
 | Vehicle Repair Overhaul | 2757712197 | 5 | 50 | 3 | 55 |
 | Wandering Zombies | 2983905789 | 5 | 401 | 1 | 406 |
@@ -229,6 +238,7 @@
 | [B42/41] Keep Skill Level | 3314107094 | 1 | 48 | 0 | 49 |
 | Know Your Calories! | 3257953004 | 1 | 22 | 0 | 23 |
 | Light Switch Plus(B42) | 3418843205 | 1 | 28 | 0 | 29 |
+| Long Term Preservation Extended | 3597673472 | 1 | 0 | 0 | 51 |
 | Melee Weapon Upgrade | 3394923321 | 1 | 1075 | 0 | 1076 |
 | [B42] Ogrim Mod's - My Own Well | 3549290115 | 1 | 14 | 0 | 15 |
 | Reduced sickness inside the vehicle | 3405033818 | 1 | 8 | 0 | 9 |
@@ -476,7 +486,6 @@
 | Lillie's Meal Combat Individual Ration Mod | 3557845788 | 0 | 106 | 0 | 106 |
 | Liv's Trusty Baseball Cap | 3477662795 | 0 | 0 | 0 | 1 |
 | Lock Interiors | 3435709471 | 0 | 0 | 0 | 3 |
-| Long Term Preservation Extended | 3597673472 | 0 | 0 | 0 | 50 |
 | Long-standing Metal Constructions | 3199474685 | 0 | 37 | 0 | 37 |
 | Lucille Vampire Bat | 3436159263 | 0 | 6 | 0 | 7 |
 |  Better Electronics | 2999183635 | 0 | 115 | 0 | 118 |
@@ -569,6 +578,7 @@
 | Replace Bandage [B41, B42] | 2944344655 | 0 | 0 | 1 | 3 |
 | Restore Engine Quality [B42] | 3543612325 | 0 | 6 | 0 | 6 |
 | Restore Utilities | 3409422147 | 0 | 148 | 0 | 148 |
+| RE Interface [B42] | 3598501350 | 0 | 6 | 0 | 6 |
 | Rick's MLC GunLight Patch [B42] | 3595628283 | 0 | 0 | 0 | 4 |
 | [OBSOLETE] RollBack Rain Collector Barrel | 3392186516 | 0 | 6 | 0 | 6 |
 | S4 Economy[Shop] | 3480405054 | 0 | 503 | 2 | 503 |
