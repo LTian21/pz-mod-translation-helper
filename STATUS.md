@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-10 01:00:03 UTC+08:00`*
+*最后更新于：`2025-11-10 02:39:20 UTC+08:00`*
 
 ---
 
@@ -10,9 +10,9 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``67601`` 条 |
-| **待翻译条目** | ``15300`` 条 |
-| **已翻译条目** | ``52301`` 条 |
-| **待校对条目** | ``49827`` 条 |
+| **待翻译条目** | ``14889`` 条 |
+| **已翻译条目** | ``52712`` 条 |
+| **待校对条目** | ``49463`` 条 |
 | **已支持 Mod 数量** | ``626`` 个 |
 
 ---
@@ -36,7 +36,6 @@
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
 | Pomp's Items - My Little Pony | 2792387747 | 377 | 586 | 1 | 963 |
-| 1993 American Vehicle Pack (BUILD .41/.42) | 2809058492 | 376 | 5 | 5 | 381 |
 | Customizable Containers [B42/41] | 2719850086 | 352 | 1353 | 0 | 1705 |
 | Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 339 | 155 | 0 | 494 |
 | [B42] Take A Bath And Shower | 3592172476 | 296 | 0 | 0 | 296 |
@@ -108,7 +107,6 @@
 | Better Flashlights [B42] | 3420478458 | 34 | 0 | 0 | 34 |
 | Logic Missing Recipes | 3540757743 | 33 | 0 | 0 | 33 |
 | Military Tool Kit | 2705406713 | 32 | 22 | 1 | 54 |
-| [B42] Alternative Inventory Rendering | 3394402683 | 30 | 0 | 0 | 30 |
 | [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 0 | 0 | 29 |
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
@@ -175,7 +173,6 @@
 | [J&G] Desert Uniform [B42/41] | 3299457564 | 6 | 37 | 0 | 44 |
 | [J&G] Forest Multicam Uniform [B42/41] | 3309971624 | 6 | 37 | 0 | 44 |
 | [J&G] XKU Uniform [B42/41] | 3276134387 | 6 | 25 | 0 | 31 |
-| [B42] Bicscalibur BIC Pen Weapon | 3400983311 | 5 | 2 | 2 | 7 |
 | ArcherLib | 3408337281 | 5 | 48 | 0 | 54 |
 | Change Sandbox Options (by Star) | 2894296454 | 5 | 1 | 1 | 6 |
 | Driving Skill [B42] | 3407791878 | 5 | 110 | 0 | 115 |
@@ -251,12 +248,15 @@
 | Zombaroid | 3519916139 | 1 | 41 | 1 | 42 |
 | [B42] Bag Upgrade Ultra | 3407793320 | 1 | 40 | 2 | 41 |
 | [B42] Pack Pantry | 3416584592 | 1 | 62 | 0 | 63 |
-| '04 Volkswagen Touran | 3478633453 | 0 | 48 | 0 | 48 |
-| '49 Dodge Power Wagon Crew Cab | 2900580391 | 0 | 57 | 0 | 57 |
-| '59 Cadillac Miller-Meteor + ECTO-1 | 2772575623 | 0 | 51 | 0 | 51 |
-| '63 Volkswagen 1300 Beetle | 3005903549 | 0 | 62 | 0 | 62 |
-| '63 Volkswagen Type 2 Van | 3041122351 | 0 | 84 | 0 | 84 |
-| '65 Pontiac Banshee | 3566868353 | 0 | 55 | 0 | 55 |
+| [B42] Alternative Inventory Rendering | 3394402683 | 0 | 0 | 0 | 30 |
+| '04 Volkswagen Touran | 3478633453 | 0 | 0 | 0 | 48 |
+| 1993 American Vehicle Pack (BUILD .41/.42) | 2809058492 | 0 | 0 | 5 | 381 |
+| '49 Dodge Power Wagon Crew Cab | 2900580391 | 0 | 0 | 0 | 57 |
+| [B42] Bicscalibur BIC Pen Weapon | 3400983311 | 0 | 0 | 2 | 7 |
+| '59 Cadillac Miller-Meteor + ECTO-1 | 2772575623 | 0 | 0 | 0 | 51 |
+| '63 Volkswagen 1300 Beetle | 3005903549 | 0 | 0 | 0 | 62 |
+| '63 Volkswagen Type 2 Van | 3041122351 | 0 | 0 | 0 | 84 |
+| '65 Pontiac Banshee | 3566868353 | 0 | 0 | 0 | 55 |
 | '66 Pontiac LeMans / GTO | 3447272250 | 0 | 45 | 0 | 45 |
 | '67 Cadillac Gage Commando | 2478247379 | 0 | 19 | 0 | 19 |
 | '67 Shelby GT500 + Eleanor | 3026723485 | 0 | 49 | 0 | 49 |
