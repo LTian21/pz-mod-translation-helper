@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-10 02:39:20 UTC+08:00`*
+*最后更新于：`2025-11-10 02:41:21 UTC+08:00`*
 
 ---
 
@@ -10,9 +10,9 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``67601`` 条 |
-| **待翻译条目** | ``14889`` 条 |
-| **已翻译条目** | ``52712`` 条 |
-| **待校对条目** | ``49463`` 条 |
+| **待翻译条目** | ``14888`` 条 |
+| **已翻译条目** | ``52713`` 条 |
+| **待校对条目** | ``49464`` 条 |
 | **已支持 Mod 数量** | ``626`` 个 |
 
 ---
@@ -242,7 +242,6 @@
 | Training Target | 3417621776 | 1 | 28 | 0 | 29 |
 | Traits Purchase System | 3211693903 | 1 | 13 | 0 | 14 |
 | True Crawl 3.0 - Fixed [B42] | 3410989950 | 1 | 10 | 6 | 11 |
-| Wallpapers and More Paint Options | 2999595757 | 1 | 262 | 0 | 263 |
 | Livestock zones expanded | 3434810293 | 1 | 37 | 0 | 38 |
 | Wolf Extraction Quest | 2987772693 | 1 | 126 | 0 | 127 |
 | Zombaroid | 3519916139 | 1 | 41 | 1 | 42 |
@@ -632,6 +631,7 @@
 | [UPDATED] Ellie Voice Mod [B42] | 3464700263 | 0 | 0 | 0 | 1 |
 | Joel Voice Pack [TLOU2] [B42] | 3496043022 | 0 | 0 | 0 | 1 |
 | VSMR Face for Spongie's Character Customisation | 3415572170 | 0 | 0 | 0 | 2 |
+| Wallpapers and More Paint Options | 2999595757 | 0 | 263 | 0 | 263 |
 | Washing Menus Improved | 3460812542 | 0 | 5 | 0 | 5 |
 | Watch Your Trunk [B42 Compatible] | 3591049094 | 0 | 0 | 0 | 3 |
 | Water Goes Bad | 2849467715 | 0 | 0 | 0 | 19 |
