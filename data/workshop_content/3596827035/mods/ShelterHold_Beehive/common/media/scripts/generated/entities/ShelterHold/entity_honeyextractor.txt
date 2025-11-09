@@ -1,0 +1,77 @@
+module Base
+{
+    entity Hold_HoneyExtractor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Hold_HoneyExtractor,
+            uiEnabled       = true,
+        }
+
+        component CraftBenchSounds
+        {
+            AddInput = DryingRackPlantsInsert,
+            RemoveInput = DryingRackPlantsRemove,
+            StartCraft = DryingRackPlantsCraft,
+        }
+
+        component Resources
+        {
+            group input_slot
+            {
+                Item@Any@1,
+                Item@Any@1,
+                Item@Any@1,
+                Item@Any@1,
+            }
+        }
+
+        component FluidContainer
+        {
+            ContainerName = HoneyExtractor,
+            Capacity = 20.0,
+        }
+
+        component SpriteConfig
+        {
+        	health          = 150,
+        	skillBaseHealth = 50,
+            OnCreate = Hold_BuildRecipeCode.honeyExtractor.OnCreate,
+
+            face W
+            {
+                layer
+                {
+                    row = Hold_HoneyExtractor_0,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = Hold_HoneyExtractor_1,
+                }
+            }
+        }
+        
+        component CraftRecipe 
+        {
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 250,
+            category      = Farming,
+            SkillRequired = MetalWelding:3;Woodwork:3,
+            xpAward       = MetalWelding:30;Woodwork:30,
+            ToolTip       = Tooltip_Beehive_HoneyExtractor,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 1 [Base.MetalDrum;Base.Mov_OrangeBarrel;Base.Mov_DarkGreenBarrel;Base.Mov_LightGreenBarrel],
+                item 8 [Base.Plank],
+                item 8 [Base.Nails],
+		        item 2 [Base.IronBand],
+                item 2 [Base.HeavyChain],
+            }
+        }
+    }
+}

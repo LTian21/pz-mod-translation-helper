@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-10 02:41:21 UTC+08:00`*
+*最后更新于：`2025-11-10 04:04:12 UTC+08:00`*
 
 ---
 
@@ -17,10 +17,12 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251109_040357``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251110_040411``)**
 
-*   **ImperialChops (ID: 3465865657)**: 新增 `4` 条, 移除 `0` 条。
-*   **Detailed_Skill_Tooltips (ID: 3572846242)**: 新增 `10` 条, 移除 `1` 条。
+*   **KnoxEventExpanded (ID: 3397396843)**: 新增 `7` 条, 移除 `1` 条。
+*   **[B42]Kill_Cell_-_Armory (ID: 3569050120)**: 新增 `211` 条, 移除 `0` 条。
+*   **LongTermPreservationExtended (ID: 3597673472)**: 新增 `1` 条, 移除 `0` 条。
+*   **RE_Equipment_UI_[B42] (ID: 3598501350)**: 新增 `31` 条, 移除 `0` 条。
 
 ---
 
@@ -130,7 +132,7 @@
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
-| [B42] Knox Event Expanded NPC mod [alpha v0.3.14-1] | 3397396843 | 17 | 577 | 42 | 594 |
+| [B42] Knox Event Expanded NPC mod [alpha v0.3.15-1] | 3397396843 | 17 | 577 | 42 | 594 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
 | [B42] Mod Manager | 3567084868 | 16 | 0 | 0 | 16 |
 | [B42/B41] Motorious Zone - Hot Pursuit Add-on | 2841969842 | 15 | 0 | 0 | 15 |
@@ -456,7 +458,7 @@
 | The Survivalist's Gear | 3404876149 | 0 | 6 | 1 | 6 |
 | Inspect Weapon | 2948824747 | 0 | 25 | 0 | 25 |
 | Containers! | 2625625421 | 0 | 14 | 0 | 14 |
-| JB's Fireflies [B42] | 3591708775 | 0 | 0 | 0 | 11 |
+| JB's Fireflies - B41 and B42 | 3591708775 | 0 | 0 | 0 | 11 |
 | Joke Customisation Pack | 3415451174 | 0 | 7 | 0 | 7 |
 | Just Some Hair Styles [B41/B42] | 3116631797 | 0 | 21 | 0 | 21 |
 | KATTAJ1 Clothes Core [B41/B42] | 3470422050 | 0 | 44 | 0 | 44 |

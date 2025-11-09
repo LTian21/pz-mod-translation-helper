@@ -1,0 +1,191 @@
+module Hold
+{
+    imports
+    {
+        Base
+    }
+
+    /* --- Dessert ------------------------------------------------------------------------------------- */
+    craftRecipe PrepareHoneyCake /* Check */
+    {
+        timedAction = MixingBowl,
+        time = 30,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.BakingPan],
+            item 1 [Base.CakeBatter] flags[InheritFoodAge],
+            item 1 [*] mode:keep,
+            -fluid 0.5 [RawHoney],
+        }
+        outputs
+        {
+            item 1 Hold.HoneyCakePrep,
+            item 1 Base.Bowl,
+        }
+    }
+
+    craftRecipe SliceHoneyCake /* Check */
+    {
+        timedAction = SliceFood_Surface,
+        time = 20,
+        OnCreate = RecipeCodeOnCreate.inheritFoodDisplayName,
+        Tooltip = Tooltip_Recipe_MustCookedSlice,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        inputs
+        {
+            item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Hold.HoneyCakeRaw] flags[InheritCooked;IsCookedFoodItem;InheritFood;ItemCount],
+        }
+        outputs
+        {
+            item 5 Hold.HoneyCakeSlice,
+            item 1 Base.BakingPan,
+        }
+    }
+
+    craftRecipe PrepareHoneyMuffins /* Check */
+    {
+        timedAction = MixingBowl,
+        time = 60,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        OnCreate = Hold_CraftRecipeCode.OnCreate.Add2HoneytoFood,
+        inputs
+        {
+            item 1 [Base.BakingTray_Muffin] flags[InheritCooked;ItemCount;InheritFoodAge],
+            item 1 [*],
+            -fluid 0.2 [RawHoney],
+        }
+        outputs
+        {
+            item 1 Hold.HoneyMuffintray,
+        }
+    }
+
+    craftRecipe Get6HoneyMuffins /* Check */
+    {
+        timedAction = SliceFood_Surface,
+        time = 60,
+        Tooltip = Tooltip_Recipe_MustCookedGet,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Hold.HoneyMuffintray] flags[IsCookedFoodItem;InheritFood;InheritName;ItemCount],
+        }
+        outputs
+        {
+            item 6 Hold.HoneyMuffin,
+            item 1 Base.MuffinTray,
+        }
+    }
+
+    craftRecipe MakeHoneyLollipop /* Check */
+    {
+        timedAction = MixingBowl,
+        time = 120,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        SkillRequired = Cooking:3
+        xpAward = Cooking:15,
+        inputs
+        {
+            item 1 [Base.Twigs],
+            item 1 [*] mode:keep,
+            -fluid 0.1 [RawHoney],
+        }
+        outputs
+        {
+            item 1 Hold.HoneyLollipop,
+        }
+    }
+
+    craftRecipe MakeHoneyIcecreamCone /* Check */
+    {
+        timedAction = MixingBowl,
+        time = 30,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:3,
+        OnCreate = Hold_CraftRecipeCode.OnCreate.Add2HoneytoFood,
+        inputs
+        {
+            item 1 [Base.ConeIcecream] flags[AllowFrozenItem;InheritFoodAge;InheritFood;InheritFreezingTime;ItemCount],
+            item 1 [*] mode:keep,
+            -fluid 0.2 [RawHoney],
+        }
+        outputs
+        {
+            item 1 Hold.HoneyConeIcecream,
+        }
+    }
+
+    craftRecipe MakeBrownSugar /* Check */
+    {
+        timedAction = MixingBowl,
+        time = 30,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+        SkillRequired = Cooking:3
+        xpAward = Cooking:15,
+        inputs
+        {
+            item 1 tags[MortarPestle] mode:keep,
+            item 1 tags[StartFire],
+            item 1 [*] mode:keep,
+            -fluid 0.2 [RawHoney],
+        }
+        outputs
+        {
+            item 1 Base.SugarBrown,
+        }
+    }
+
+    /* --- Animal Meat ------------------------------------------------------------------------------------- */
+    craftRecipe AddHoneyToMeat /* Check */
+    {
+        timedAction = MixingBowl,
+        time = 30,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:3,
+        OnCreate = Hold_CraftRecipeCode.OnCreate.Add2HoneytoFood,
+        inputs
+        {
+            item 1 [Base.ChickenWings;Base.Chicken;Base.ChickenFillet;Base.TurkeyLegs;Base.TurkeyFillet;Base.TurkeyWings;Base.MuttonChop;Base.PorkChop;Base.Pork;Base.Venison;Base.Beef;Base.Steak;Base.FrogMeat;Base.Rabbitmeat;Base.Smallanimalmeat;Base.Smallbirdmeat;Base.ChickenWhole;Base.TurkeyWhole] flags[InheritCooked;InheritFoodAge;InheritFreezingTime] mappers[HoneyAnimalMeat] mode:destroy,
+            item 1 [*] mode:keep,
+            -fluid 0.2 [RawHoney],
+        }
+        outputs
+        {
+            item 1 mapper:HoneyAnimalMeat,
+        }
+        itemMapper HoneyAnimalMeat
+        {
+            Hold.HoneyChickenWings = Base.ChickenWings,
+            Hold.HoneyChickenLeg = Base.Chicken,
+            Hold.HoneyChickenFillet = Base.ChickenFillet,
+            Hold.HoneyTurkeyLegs = Base.TurkeyLegs,
+            Hold.HoneyTurkeyFillet = Base.TurkeyFillet,
+            Hold.HoneyTurkeyWings = Base.TurkeyWings,
+            Hold.HoneyMuttonChop = Base.MuttonChop,
+            Hold.HoneyPorkChop = Base.PorkChop,
+            Hold.HoneyPork = Base.Pork,
+            Hold.HoneyVenison = Base.Venison,
+            Hold.HoneyBeef = Base.Beef,
+            Hold.HoneySteak = Base.Steak,
+            Hold.HoneyFrogMeat = Base.FrogMeat,
+            Hold.HoneyRabbitmeat = Base.Rabbitmeat,
+            Hold.HoneySmallanimalmeat = Base.Smallanimalmeat,
+            Hold.HoneySmallbirdmeat = Base.Smallbirdmeat,
+            Hold.HoneyChickenWhole = Base.ChickenWhole,
+            Hold.HoneyTurkeyWhole = Base.TurkeyWhole,
+        }
+    }
+}

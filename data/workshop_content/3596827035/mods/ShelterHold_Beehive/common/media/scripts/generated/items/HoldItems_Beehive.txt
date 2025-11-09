@@ -1,0 +1,188 @@
+module Hold
+{
+    imports
+    {
+        Base
+    }
+
+    /* Bees */
+
+    item Zombee
+    {
+        DisplayName  = Zombee,
+        DisplayCategory = Bug,
+        Type  = Food,
+        Icon  = ZomBee,
+        Weight  = 0.05,
+        HungerChange = -1.0,
+        UnhappyChange = 20,
+        Calories = 50.0,
+        Carbohydrates = 0.0,
+        Lipids = 0.1,
+        Proteins = 0.5,
+	    Tags = QueenBee,
+        FoodType = Insect,
+        Tooltip = Tooltip_Beehive_Zombee,
+	    WorldStaticModel = WorkerBee,
+    }
+
+    item Honeybee
+    {
+        DisplayName  = Honey bee,
+        DisplayCategory = Bug,
+        Type  = Food,
+        Icon  = QueenBee,
+        Weight  = 0.05,
+        HungerChange = -1.0,
+        UnhappyChange = 20,
+        Calories = 50.0,
+        Carbohydrates = 0.0,
+        Lipids = 0.1,
+        Proteins = 0.5,
+        Tags = QueenBee,
+        FoodType = Insect,
+        Tooltip = Tooltip_Beehive_Honeybee,
+	    WorldStaticModel = WorkerBee,
+    }
+
+    item Bumblebee
+    {
+        DisplayName  = Bumble bee,
+        DisplayCategory = Bug,
+        Type = Food,
+        Icon  = BumbleBee,
+        Weight  = 0.05,
+        HungerChange = -1.0,
+        UnhappyChange = 20,
+        Calories = 50.0,
+        Carbohydrates = 0.0,
+        Lipids = 0.1,
+        Proteins = 0.5,
+        Tags = QueenBee,
+        FoodType = Insect,
+        Tooltip = Tooltip_Beehive_Bumblebee,
+        WorldStaticModel = WorkerBee,
+    }
+
+    item BaitHive
+    {
+        DisplayCategory = Trapping,
+        Type = Normal,
+        Weight = 5.0,
+        Icon = BaitHive,
+	    WorldStaticModel 	= Hold_BaitHive_0,
+        Tooltip = Tooltip_Beehive_BaitHive,
+        Trap = true,
+    }
+
+    /* Beehive Frame */
+
+	item HiveFrame_Basic
+	{
+		Type 				= Drainable,
+		Icon 				= HiveFrameEmpty,
+		Weight 				= 3,
+		WeightEmpty 		= 1,
+		DisplayName 		= BasicHiveFrame,
+		displayCategory 	= Gardening,
+		UseDelta 			= 0.001,
+		UseWhileEquipped 	= FALSE,
+		cantBeConsolided 	= TRUE,
+		KeepOnDeplete 		= TRUE,
+		WorldStaticModel 	= HiveFrameEmpty,
+        Tags 				= HiveFrame;isEmptyHiveFrame,
+        Tooltip = Tooltip_Beehive_HiveFrame,
+	}
+
+	item HiveFrame_Wax
+	{
+		Type 				= Drainable,
+		Icon 				= HiveFrameWax,
+		Weight 				= 3,
+		WeightEmpty 		= 1,
+		DisplayName 		= HiveFrameWithWax,
+		displayCategory 	= Gardening,
+		UseDelta 			= 0.001,
+		UseWhileEquipped 	= FALSE,
+		cantBeConsolided 	= TRUE,
+		KeepOnDeplete 		= TRUE,
+		WorldStaticModel 	= HiveFrameWax,
+        Tags 				= HiveFrame;isWaxHiveFrame,
+
+	}
+
+	item HiveFrame_Full
+	{
+		Type 				= Drainable,
+		Icon 				= HiveFrameFull,
+		Weight 				= 3,
+		WeightEmpty 		= 1,
+		DisplayName 		= HiveFrameFull,
+		displayCategory 	= Gardening,
+		UseDelta 			= 0.001,
+		UseWhileEquipped 	= FALSE,
+		cantBeConsolided 	= TRUE,
+		KeepOnDeplete 		= TRUE,
+		WorldStaticModel 	= HiveFrameFull,
+        Tags				= HiveFrame;isFullHiveFrame,
+
+	}
+
+    /* Product */
+
+	item Beeswax
+	{
+		DisplayCategory  = Material,
+		Type  = Normal,
+		Icon  = BeeWax,
+		Weight  = 0.3,
+		WorldStaticModel = Beeswax,
+	}
+
+	item WildHoneyComb
+	{
+		DisplayCategory  = Material,
+		Type  = Normal,
+		Icon  = WildHoneyComb,
+		Weight  = 1.0,
+        Tooltip = Tooltip_Beehive_WildHoneyComb,
+		WorldStaticModel = WildHoneyComb,
+	}
+
+    fluid RawHoney
+    {
+        ColorReference = Khaki,
+        DisplayName = Fluid_Name_RawHoney,
+        Categories
+        {
+            Beverage,
+        }
+        Properties
+        {
+            fatigueChange = 0.0,
+            HungerChange = -40.0,
+            StressChange = 0.0,
+            ThirstChange = 0.0,
+            UnhappyChange = 0.0,
+            Calories = 1320.0,
+            Carbohydrates = 374.0,
+            Lipids = 0.0,
+            Proteins = 0.0,
+        }
+    }
+
+    /* Book */
+    item BeeKeeperMag
+    {
+        DisplayCategory = Literature,
+        Type = Literature,
+        Weight = 0.5,
+        Icon = BeeKeeperMag,
+        BoredomChange = -20,
+        StressChange = -15,
+        StaticModel = Magazine,
+        WorldStaticModel = WeaponMag1,
+        Tags = Magazine,
+        OnCreate = SpecialLootSpawns.OnCreateHobbyMagazine,
+    }
+}
