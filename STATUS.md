@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-11 01:02:09 UTC+08:00`*
+*最后更新于：`2025-11-11 01:08:22 UTC+08:00`*
 
 ---
 
@@ -9,10 +9,10 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``70543`` 条 |
-| **待翻译条目** | ``15839`` 条 |
-| **已翻译条目** | ``54704`` 条 |
-| **待校对条目** | ``51406`` 条 |
+| **模组总条目** | ``70511`` 条 |
+| **待翻译条目** | ``15750`` 条 |
+| **已翻译条目** | ``54761`` 条 |
+| **待校对条目** | ``51475`` 条 |
 | **已支持 Mod 数量** | ``636`` 个 |
 
 ---
@@ -28,7 +28,7 @@
 | Mod 名称 | Mod ID | 待翻译条目 | 待校对条目 | 缺少原文条目 | 模组总条目 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Authentic Z | 2335368829 | 2274 | 1407 | 308 | 3777 |
-| Guns of 93: B42 Test Build (Unstable) | 3183820077 | 741 | 1762 | 1129 | 2553 |
+| Guns of 93: B42 Test Build (Unstable) | 3183820077 | 748 | 1755 | 1129 | 2553 |
 | Even More Traits | 2855320431 | 606 | 62 | 2 | 668 |
 | [B42] Buildables Expansion | 3463117260 | 525 | 622 | 7 | 1147 |
 | Conditional-Speech | 2398253681 | 493 | 0 | 0 | 493 |
@@ -50,7 +50,7 @@
 | Support Goods [B42.9] - MyAlcohol! | 3510863962 | 218 | 0 | 0 | 218 |
 | Project Fallout: GunRunner | 3434691822 | 217 | 29 | 0 | 246 |
 | [B42]Kill Cell - Armory | 3569050120 | 208 | 0 | 0 | 208 |
-| (B42) Immersive Roleplay Professions and Traits | 3387474156 | 201 | 667 | 0 | 870 |
+| (B42) Immersive Roleplay Professions and Traits | 3387474156 | 202 | 666 | 0 | 870 |
 | True Smoking [B42] | 3423984426 | 173 | 26 | 1 | 199 |
 | Somewhat Traits [B42 Compatible] | 3498347699 | 171 | 0 | 0 | 171 |
 | RaccoonCityB42 | 3388468313 | 169 | 36 | 2 | 205 |
@@ -58,7 +58,6 @@
 | Trap Manager | 3566766862 | 159 | 3 | 1 | 162 |
 | Airdrops | 3590950467 | 156 | 0 | 0 | 156 |
 | Detailed Skill Tooltips | 3572846242 | 150 | 0 | 0 | 150 |
-| Bundle Branches [B42] | 3595072546 | 148 | 0 | 0 | 148 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
 | Pocket Kittens (B42) | 3568029240 | 120 | 14 | 7 | 134 |
@@ -67,7 +66,7 @@
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
-| Lifestyle: Hobbies | 3403870858 | 84 | 4083 | 28 | 4167 |
+| Lifestyle: Hobbies | 3403870858 | 85 | 4082 | 28 | 4167 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
 | Realistic Car Physics [B42] | 3559765660 | 82 | 0 | 0 | 82 |
 | Christmas Time [b41/42 demo] | 2903870217 | 81 | 53 | 53 | 134 |
@@ -86,9 +85,9 @@
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | ST Additions - Pry Open | 3579640010 | 60 | 102 | 32 | 162 |
+| B42 Rain's Firearms & Gun Parts | 3387222454 | 59 | 361 | 0 | 421 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 59 | 20 | 2 | 79 |
 | Legendary Katana | 3418366499 | 58 | 72 | 1 | 130 |
-| B42 Rain's Firearms & Gun Parts | 3387222454 | 57 | 363 | 0 | 421 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 56 | 52 | 0 | 108 |
 | [B42] Ogrim Mod's - Machine Utils | 3555558732 | 56 | 0 | 0 | 56 |
 | Spongie's Character Customisation | 3414634809 | 53 | 16 | 0 | 69 |
@@ -116,10 +115,11 @@
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
+| Bundle Branches [B42] | 3595072546 | 28 | 0 | 0 | 28 |
+| [B42] Knox Event Expanded NPC mod [alpha v0.3.15-1] | 3397396843 | 28 | 572 | 42 | 600 |
+| [B42] Week One NPC | 3403180543 | 25 | 806 | 0 | 831 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
-| [B42] Knox Event Expanded NPC mod [alpha v0.3.15-1] | 3397396843 | 25 | 575 | 42 | 600 |
 | Random Clothing [B41/B42] | 3397182976 | 25 | 107 | 5 | 132 |
-| [B42] Week One NPC | 3403180543 | 23 | 808 | 0 | 831 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
 | Legendary DuffelBag | 3558839307 | 23 | 26 | 0 | 49 |
 | Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
@@ -169,6 +169,7 @@
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
 | [B42] Functional Gutters | 3439305933 | 7 | 46 | 0 | 53 |
+| darlak's H.E.C.U. | 3452711271 | 7 | 96 | 14 | 108 |
 | Hephas Occupations and Traits | 3256482412 | 7 | 339 | 0 | 346 |
 | [B42] Bodily Functions [v0.12.3] | 3396456841 | 7 | 328 | 0 | 335 |
 | U.S. M548 Cargo Carrier by Papa_Chad | 3424497614 | 7 | 10 | 0 | 17 |
@@ -198,9 +199,9 @@
 | [Project Fallout] The Beginning | 3461117277 | 4 | 24 | 3 | 28 |
 | [B42] Moodle Descriptions Expanded | 3389003300 | 4 | 102 | 9 | 106 |
 | '85 Pontiac Parisienne | 3413706334 | 3 | 17 | 0 | 20 |
+| [B42] Home Inventory Improved | 3522009163 | 3 | 0 | 0 | 63 |
 | Ducks+ | 3409153536 | 3 | 89 | 0 | 92 |
 | Gunpoint Redemption [B.41/B.42] | 3078291265 | 3 | 11 | 0 | 14 |
-| darlak's H.E.C.U. | 3452711271 | 3 | 100 | 14 | 108 |
 | Halo Marine Armor [B41/B42] | 3507919075 | 3 | 25 | 0 | 28 |
 | Money From Credit Cards | 3428650803 | 3 | 21 | 0 | 24 |
 | [B42]Sector-7 Breach | 3513107552 | 3 | 9 | 3 | 12 |
@@ -208,8 +209,11 @@
 | '93 Chevrolet Suburban / Silverado | 3152529790 | 2 | 150 | 0 | 152 |
 | B42 Rain's Axes & Blades | 3388380529 | 2 | 47 | 0 | 50 |
 | [B42/B41] Bandits Creator | 3469292499 | 2 | 121 | 0 | 123 |
+| Bath Towels Overhaul | 3416208765 | 2 | 82 | 1 | 84 |
+| Boots Expanded 11 for B41 and B42 | 2850935956 | 2 | 0 | 0 | 30 |
 | Mixology | 3405131820 | 2 | 356 | 0 | 358 |
 | Farming Expansion B42 | 3444499190 | 2 | 86 | 4 | 88 |
+| [B42/1] Frockin Wiseguys! | 3538760023 | 2 | 39 | 33 | 41 |
 | [B41/B42] Infection Scanner | 3332296598 | 2 | 33 | 9 | 35 |
 | [B42] Vanilla-Like Traits and Occupations | 3139034529 | 2 | 405 | 236 | 407 |
 | Thief Expansion | 2596620950 | 2 | 68 | 0 | 70 |
@@ -226,7 +230,6 @@
 | [B42] Essential Recipes [UPDATED] | 3401825906 | 1 | 127 | 0 | 128 |
 | ExtraBombs | 3425787685 | 1 | 64 | 2 | 65 |
 | ExtraMoney | 3462306255 | 1 | 65 | 0 | 66 |
-| [B42/1] Frockin Wiseguys! | 3538760023 | 1 | 40 | 33 | 41 |
 | [42] Frogtown (BETA) by TwinCrows | 3449473111 | 1 | 3 | 0 | 4 |
 | Generator Powered Buildings | 3597471949 | 1 | 9 | 0 | 61 |
 | Point Blank | 2990322197 | 1 | 16 | 0 | 17 |
@@ -235,13 +238,15 @@
 | Know Your Calories! | 3257953004 | 1 | 22 | 0 | 23 |
 | Light Switch Plus(B42) | 3418843205 | 1 | 28 | 0 | 29 |
 | Long Term Preservation Extended | 3597673472 | 1 | 0 | 0 | 51 |
+| Manage Containers | 2650547917 | 1 | 0 | 0 | 7 |
 | Melee Weapon Upgrade | 3394923321 | 1 | 1075 | 0 | 1076 |
 | [B42] Ogrim Mod's - My Own Well | 3549290115 | 1 | 14 | 0 | 15 |
 | Reduced sickness inside the vehicle | 3405033818 | 1 | 8 | 0 | 9 |
 | Excalibar | 2868777243 | 1 | 51 | 0 | 52 |
 | Seesaw Game | 3515515643 | 1 | 9 | 0 | 10 |
 | Risky Unarmed | 3434796669 | 1 | 94 | 0 | 95 |
-| Simple Skill Books | 3291799176 | 1 | 31 | 0 | 32 |
+| [B41/B42] Simple Overhaul: Traits and Occupations (SOTO) | 2840805724 | 1 | 320 | 7 | 321 |
+| Simple Skill Books | 3291799176 | 1 | 124 | 0 | 125 |
 |  Wearable Towels [B41/B42] | 3203159242 | 1 | 37 | 30 | 40 |
 | [OUTDATED] Support Corps [B42] Sweet-release Update | 3409836763 | 1 | 603 | 5 | 604 |
 | Support Goods Mega Mod [B42.10] - PREDATOR | 3512993822 | 1 | 2390 | 30 | 2391 |
@@ -250,6 +255,7 @@
 | Training Target | 3417621776 | 1 | 28 | 0 | 29 |
 | Traits Purchase System | 3211693903 | 1 | 13 | 0 | 14 |
 | True Crawl 3.0 - Fixed [B42] | 3410989950 | 1 | 10 | 6 | 11 |
+| Vehicle Military Zone | 3436499337 | 1 | 0 | 0 | 11 |
 | Livestock zones expanded | 3434810293 | 1 | 37 | 0 | 38 |
 | Wolf Extraction Quest | 2987772693 | 1 | 126 | 0 | 127 |
 | Zombaroid | 3519916139 | 1 | 41 | 1 | 42 |
@@ -257,7 +263,7 @@
 | [B42] Pack Pantry | 3416584592 | 1 | 62 | 0 | 63 |
 | [B42] Alternative Inventory Rendering | 3394402683 | 0 | 0 | 0 | 30 |
 | '04 Volkswagen Touran | 3478633453 | 0 | 0 | 0 | 48 |
-| 1993 American Vehicle Pack (BUILD .41/.42) | 2809058492 | 0 | 0 | 5 | 381 |
+| 1993 American Vehicle Pack (BUILD .41/.42) | 2809058492 | 0 | 0 | 0 | 376 |
 | '49 Dodge Power Wagon Crew Cab | 2900580391 | 0 | 0 | 0 | 57 |
 | [B42] Bicscalibur BIC Pen Weapon | 3400983311 | 0 | 0 | 2 | 7 |
 | '59 Cadillac Miller-Meteor + ECTO-1 | 2772575623 | 0 | 0 | 0 | 51 |
@@ -371,7 +377,6 @@
 | Immersive Barricaded Start [b41 & 42] | 3031475005 | 0 | 0 | 0 | 2 |
 | Barricades, Doors, Windows, and Vehicles Hurt Zombies [B42] | 3402208866 | 0 | 36 | 0 | 36 |
 | '77 Hayosiko Pace [B41/B42] | 3459200930 | 0 | 13 | 0 | 13 |
-| Bath Towels Overhaul | 3416208765 | 0 | 84 | 1 | 84 |
 | Bushcraft Gear - Rare Weapons [B41 & B42] | 2432621382 | 0 | 0 | 0 | 2 |
 | Beanie Babies (B42) | 3575855907 | 0 | 0 | 0 | 73 |
 | 未知 Mod (3388028737) | 3388028737 | 0 | 11 | 0 | 11 |
@@ -382,12 +387,10 @@
 | BM Super Speed Settings | 3440221534 | 0 | 17 | 0 | 17 |
 | Bone Scavenger[42.10] | 3399292171 | 0 | 73 | 0 | 73 |
 | Bonus Exp | 3413610665 | 0 | 6 | 0 | 6 |
-| Boots Expanded 11 for B41 and B42 | 2850935956 | 0 | 0 | 0 | 30 |
 | Auto Move Corpses [B42] | 3415416226 | 0 | 18 | 0 | 18 |
 | Vehicle Heater Sound System [B42] + Cabin Muffling | 3543941897 | 0 | 43 | 0 | 43 |
 | [B42/B41] Car Parts Repair | 3281301960 | 0 | 17 | 0 | 17 |
 | Cerberus Pack [B41/B42] | 3470478700 | 0 | 86 | 3 | 86 |
-| [B42] Home Inventory Improved | 3522009163 | 0 | 0 | 0 | 63 |
 | [B42] Cut Heavy Chains | 3413713793 | 0 | 0 | 0 | 2 |
 | [41&#124;42] ChairBarricade | 3404288341 | 0 | 0 | 0 | 3 |
 | Character Save | 2673317083 | 0 | 0 | 0 | 2 |
@@ -490,7 +493,6 @@
 | Make Burlap | 3409478949 | 0 | 0 | 0 | 1 |
 | [B42] Make Charcoal in kilns | 3392674521 | 0 | 4 | 0 | 4 |
 | [B42] Make Gunpowder from Fertilizer | 3392188086 | 0 | 0 | 0 | 2 |
-| Manage Containers | 2650547917 | 0 | 0 | 0 | 7 |
 | Mandarin's Bedding | 3431960478 | 0 | 6 | 0 | 6 |
 | Map Mod Manager (41 and 42) | 3360392628 | 0 | 55 | 0 | 55 |
 | Map Symbol Size Slider | 2734705913 | 0 | 0 | 0 | 1 |
@@ -586,7 +588,6 @@
 | [B42] Ogrim Mod's - Sewing Workbranch | 3555588616 | 0 | 231 | 0 | 231 |
 | Knife Animation | 3433660118 | 0 | 0 | 0 | 2 |
 | Show Sowing Season In Seed Tooltip | 3404461962 | 0 | 40 | 0 | 40 |
-| [B41/B42] Simple Overhaul: Traits and Occupations (SOTO) | 2840805724 | 0 | 321 | 7 | 321 |
 | Simple Show XP | 2891170430 | 0 | 28 | 0 | 28 |
 | Sit on the key | 3468159865 | 0 | 0 | 0 | 3 |
 | SixthSense | 2863908612 | 0 | 0 | 1 | 25 |
@@ -636,7 +637,6 @@
 | Vanilla Gear Expanded | 3401134276 | 0 | 46 | 4 | 46 |
 | Vanilla MRE [B41/B42] | 3100032203 | 0 | 23 | 0 | 23 |
 | [B42] Vanvival - Build's 42 Nomadic Experience | 3547444619 | 0 | 45 | 26 | 45 |
-| Vehicle Military Zone | 3436499337 | 0 | 0 | 0 | 11 |
 | [UPDATED] Ellie Voice Mod [B42] | 3464700263 | 0 | 0 | 0 | 1 |
 | Joel Voice Pack [TLOU2] [B42] | 3496043022 | 0 | 0 | 0 | 1 |
 | VSMR Face for Spongie's Character Customisation | 3415572170 | 0 | 0 | 0 | 2 |
