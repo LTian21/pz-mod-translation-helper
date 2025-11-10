@@ -1,0 +1,81 @@
+module Base
+{
+    entity Hold_Hive
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Hold_Hive,
+            uiEnabled       = true,
+        }
+
+        component CraftBenchSounds
+        {
+            AddInput = DryingRackPlantsInsert,
+            RemoveInput = DryingRackPlantsRemove,
+            StartCraft = DryingRackPlantsCraft,
+        }
+
+        component Resources
+        {
+            group queen_bee
+            {
+                Item@Any@1,
+            }
+	        group worker_bee
+            {
+                Item@Any@100,
+            }
+            group hive_frame
+            {
+                Item@Any@1,
+                Item@Any@1,
+                Item@Any@1,
+                Item@Any@1,
+                Item@Any@1,
+                Item@Any@1,
+            }
+        }
+
+        component SpriteConfig
+        {
+            OnIsValid = Hold_BuildRecipeCode.beehive.OnIsValid,
+            OnCreate = Hold_BuildRecipeCode.beehive.OnCreate,
+        	health          = 150,
+        	skillBaseHealth = 50,
+
+            face W
+            {
+                layer
+                {
+                    row = Hold_Beehive_1,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = Hold_Beehive_0,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 250,
+            category      = Farming,
+            SkillRequired = MetalWelding:3;Woodwork:3,
+            xpAward       = MetalWelding:30;Woodwork:30,
+            ToolTip       = Tooltip_Beehive_BuildBeehive,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 4 [Base.BlowTorch] flags[DontRecordInput],
+                item 8 [Base.Plank],
+                item 8 [Base.Nails],
+		        item 4 [Base.SmallSheetMetal],
+            }
+        }
+    }
+}

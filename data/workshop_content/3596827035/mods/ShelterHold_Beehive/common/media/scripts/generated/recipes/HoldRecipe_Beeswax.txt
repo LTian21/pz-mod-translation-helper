@@ -1,0 +1,48 @@
+module Hold
+{
+    imports
+    {
+        Base
+    }
+
+    craftRecipe MakeCandle /* Check */
+    {
+        timedAction = Making,
+        time = 60,
+        category = Miscellaneous,
+        Tags = AnySurfaceCraft,
+        inputs
+        {
+            item 1 [Base.ClayPipeSegment] mode:keep,
+            item 1 [Hold.Beeswax] mode:destroy,
+            item 1 [Base.Twine],
+            item 1 tags[StartFire],
+        }
+        outputs
+        {
+            item 1 Base.Candle,
+        }
+    }
+
+    craftRecipe MaintenanceWeapon /* Check */
+    {
+        time = 180,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft,
+        category = Repair,
+        timedAction = CraftWeapon1H,
+        SkillRequired = Maintenance:4
+        xpAward = Maintenance:15,
+        OnCreate = Hold_CraftRecipeCode.OnCreate.MaintenanceWeapon,
+        Tooltip = Tooltip_HoldRecipe_UseWaxMaintenanceWeapon,
+        inputs
+        {
+            item 1 tags[RepairWithGlue;RepairWithTape] mode:keep flags[Prop1],
+            item 1 [Hold.Beeswax] flags[Prop2],
+            item 1 tags[StartFire],
+        }
+        outputs
+        {
+        }
+    }
+}

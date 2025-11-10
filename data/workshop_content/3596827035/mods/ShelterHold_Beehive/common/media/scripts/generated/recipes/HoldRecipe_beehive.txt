@@ -1,0 +1,89 @@
+module Hold
+{
+    imports
+    {
+        Base
+    }
+
+	craftRecipe MakeBeehiveBasicFrame /* Check */
+	{
+		timedAction = SawLogs,
+		Time = 160,
+		Tags = AnySurfaceCraft,
+        category = Farming,
+        xpAward = Woodwork:10,
+		OnCreate = Hold_CraftRecipeCode.OnCreate.ModifyHiveFrameUses,
+		Tooltip = Tooltip_HoldRecipe_MakeBeehiveBasicFrame,
+		inputs
+		{
+			item 1 tags[Hammer] mode:keep flags[MayDegradeVeryLight],
+			item 1 tags[Saw;SmallSaw;CrudeSaw] mode:keep flags[MayDegradeLight;Prop1],
+			item 2 [Base.Plank] flags[Prop2],
+			item 4 [Base.Nails],
+			item 1 [Base.SmallHandle],
+		}
+		outputs
+		{
+			item 1 Hold.HiveFrame_Basic,
+		}
+	}
+
+	craftRecipe MakeBottleOfHoney /* Check */
+    {
+        timedAction = Making,
+        time = 80,
+        Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+        inputs
+        {
+            item 1 [Base.JuiceCranberry;Base.JuiceFruitpunch;Base.JuiceGrape;Base.JuiceLemon;Base.JuiceOrange;Base.JuiceTomato;Base.PopBottleRare;Base.MilkBottle;Base.Disinfectant;Base.FeedingBottle] flags[ItemCount;IsEmpty] mode:destroy,
+            item 1 [*],
+            -fluid 0.5 [RawHoney] mode:mixture,
+        }
+        outputs
+        {
+			item 1 Base.Honey,
+        }
+    }
+
+    craftRecipe CollectBeeswax /* Check */
+    {
+        timedAction = Making,
+        time = 80,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Farming,
+		OnCreate = Hold_CraftRecipeCode.OnCreate.ModifyHiveFrameUses,
+		Tooltip = Tooltip_HoldRecipe_CollectBeeswax,
+        inputs
+        {
+            item 1 tags[isWaxHiveFrame;isFullHiveFrame] flags[ItemCount] mode:destroy,
+        }
+        outputs
+        {
+			item 3 Hold.Beeswax,
+            item 1 Hold.HiveFrame_Basic,
+        }
+    }
+
+    craftRecipe MakeBaitHive /* Check */
+    {
+        timedAction = SawLogs,
+        time = 150,
+        SkillRequired = Woodwork:3,
+        xpAward = Woodwork:30,
+        Tags = InHandCraft;Trapper,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 tags[Saw;SmallSaw;CrudeSaw] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[Hammer] mode:keep flags[MayDegradeVeryLight],
+            item 4 [Base.Plank] flags[Prop2],
+            item 6 [Base.Nails],
+            item 1 [Base.Tarp],
+        }
+        outputs
+        {
+            item 1 Hold.BaitHive,
+        }
+    }
+}
