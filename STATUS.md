@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-11 01:08:22 UTC+08:00`*
+*最后更新于：`2025-11-11 04:04:09 UTC+08:00`*
 
 ---
 
@@ -116,7 +116,7 @@
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
 | Bundle Branches [B42] | 3595072546 | 28 | 0 | 0 | 28 |
-| [B42] Knox Event Expanded NPC mod [alpha v0.3.15-1] | 3397396843 | 28 | 572 | 42 | 600 |
+| [B42] Knox Event Expanded NPC mod [alpha v0.3.16-1] | 3397396843 | 28 | 572 | 42 | 600 |
 | [B42] Week One NPC | 3403180543 | 25 | 806 | 0 | 831 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
 | Random Clothing [B41/B42] | 3397182976 | 25 | 107 | 5 | 132 |
