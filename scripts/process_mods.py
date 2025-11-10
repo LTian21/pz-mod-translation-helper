@@ -145,8 +145,14 @@ def extract_item_display_names(text_content, prefix, source_filename: str):
         display_name_match = DISPLAY_NAME_PATTERN.search(item_content)
         if display_name_match:
             display_name_raw = display_name_match.group(1).strip()
-            display_name_escaped = display_name_raw.replace('"', '\\"')
-            key = f'{prefix}.{item_name}'; line = f'{key} = "{display_name_escaped}",'
+            key = f'{prefix}.{item_name}'
+            if display_name_raw.endswith(','):
+                display_name_raw = display_name_raw[:-1].strip()
+            if display_name_raw.startswith('"') and display_name_raw.endswith('"'):
+                line = f'{key} = {display_name_raw},'
+            else:
+                display_name_escaped = display_name_raw.replace('"', '\\"')
+                line = f'{key} = "{display_name_escaped}",'
             results[key] = line
             key_map[key] = "ItemName"
     return results, key_map
@@ -247,25 +253,28 @@ def get_translations_as_dict(file_path_or_dir, config):
             nonlocal current_key, current_value_parts, translations_dict
             if not current_key or not current_value_parts: return
 
-            full_expression = " ".join(part.strip() for part in current_value_parts)
-            if ".." in full_expression:
-                final_line = f'{current_key} = {full_expression}'
-                if not final_line.endswith(','):
-                    final_line += ','
+            value_part = " ".join(part.strip() for part in current_value_parts).strip()
+            if value_part.endswith(','):
+                value_part = value_part[:-1].strip()
+            if value_part.startswith('{') or '..' in value_part:
+                final_line = f'{current_key} = {value_part}'
             else:
-                value_part = full_expression.strip()
-                if value_part.endswith(','):
-                    value_part = value_part[:-1].strip()
-
-                if value_part.startswith('"'):
-                    value_part = value_part[1:]
-
-                if value_part.endswith('"'):
-                    value_part = value_part[:-1]
-
-                escaped_value = value_part.replace('"', '\\"')
-
-                final_line = f'{current_key} = "{escaped_value}",'
+                unescaped_quote_count = 0
+                i = 0
+                while i < len(value_part):
+                    if value_part[i] == '"':
+                        if i == 0 or value_part[i-1] != '\\':
+                            unescaped_quote_count += 1
+                    i += 1
+                # 如果未转义引号数量为奇数，且末尾不存在引号, 则在末尾补上一个引号
+                if unescaped_quote_count % 2 != 0 and not value_part.endswith('"'):
+                    value_part += '"'
+                if not value_part.startswith('"'):
+                    value_part = '"' + value_part
+                
+                final_line = f'{current_key} = {value_part}'
+            if not final_line.endswith(','):
+                final_line += ','
                     
             translations_dict[current_key] = final_line
             key_source_map[current_key] = source_filename
