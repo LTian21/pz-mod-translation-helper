@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-10 10:18:05 UTC+08:00`*
+*最后更新于：`2025-11-10 13:45:57 UTC+08:00`*
 
 ---
 
@@ -10,9 +10,9 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``70543`` 条 |
-| **待翻译条目** | ``15862`` 条 |
-| **已翻译条目** | ``54681`` 条 |
-| **待校对条目** | ``51431`` 条 |
+| **待翻译条目** | ``15839`` 条 |
+| **已翻译条目** | ``54704`` 条 |
+| **待校对条目** | ``51406`` 条 |
 | **已支持 Mod 数量** | ``636`` 个 |
 
 ---
@@ -124,7 +124,6 @@
 | Random Clothing [B41/B42] | 3397182976 | 25 | 107 | 5 | 132 |
 | [B42] Week One NPC | 3403180543 | 23 | 808 | 0 | 831 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
-| Headwear Won't Fall | 3400293227 | 23 | 0 | 0 | 23 |
 | Legendary DuffelBag | 3558839307 | 23 | 26 | 0 | 49 |
 | Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
 | The Last of Us: Factions & Gear [B41/B42] | 3348036710 | 22 | 89 | 1 | 113 |
@@ -452,6 +451,7 @@
 | Hand Crank Flashlights [41.78 and 42] | 2897115343 | 0 | 18 | 7 | 18 |
 | [B42] Harder Hotwire | 3391549481 | 0 | 0 | 0 | 5 |
 | [B42] HDCP Immersive Vehicle Paint | 3464606086 | 0 | 110 | 20 | 110 |
+| Headwear Won't Fall | 3400293227 | 0 | 0 | 0 | 23 |
 | Hybrid Gun Repair | 3562222835 | 0 | 106 | 0 | 106 |
 | Hybrid Melee Repair | 3569031613 | 0 | 32 | 0 | 32 |
 | HydeCo Unlimited Cars | 3438759949 | 0 | 132 | 12 | 132 |
@@ -592,7 +592,7 @@
 | [B41/B42] Simple Overhaul: Traits and Occupations (SOTO) | 2840805724 | 0 | 321 | 7 | 321 |
 | Simple Show XP | 2891170430 | 0 | 28 | 0 | 28 |
 | Sit on the key | 3468159865 | 0 | 0 | 0 | 3 |
-| SixthSense | 2863908612 | 0 | 25 | 1 | 25 |
+| SixthSense | 2863908612 | 0 | 0 | 1 | 25 |
 | [B42] Skateboard! | 3456675747 | 0 | 0 | 0 | 1 |
 | Smart Hutch | 3556857572 | 0 | 41 | 0 | 41 |
 | SnackTime 89 - Junk Revival | 3589560764 | 0 | 0 | 0 | 138 |
