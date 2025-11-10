@@ -259,18 +259,22 @@ def get_translations_as_dict(file_path_or_dir, config):
             if value_part.startswith('{') or '..' in value_part:
                 final_line = f'{current_key} = {value_part}'
             else:
-                unescaped_quote_count = 0
-                i = 0
-                while i < len(value_part):
-                    if value_part[i] == '"':
-                        if i == 0 or value_part[i-1] != '\\':
-                            unescaped_quote_count += 1
-                    i += 1
-                # 如果未转义引号数量为奇数，且末尾不存在引号, 则在末尾补上一个引号
-                if unescaped_quote_count % 2 != 0 and not value_part.endswith('"'):
-                    value_part += '"'
-                if not value_part.startswith('"'):
-                    value_part = '"' + value_part
+                if not value_part.startswith('"') and not value_part.endswith('"'):
+                    value_part = '"' + value_part + '"'
+                else:
+                    unescaped_quote_count = 0
+                    i = 0
+                    while i < len(value_part):
+                        if value_part[i] == '"':
+                            if i == 0 or value_part[i-1] != '\\':
+                                unescaped_quote_count += 1
+                        i += 1
+                    # 如果未转义引号数量为奇数，且末尾不存在引号, 则在末尾补上一个引号
+                    if not value_part.startswith('"'):
+                        value_part = '"' + value_part
+                        unescaped_quote_count += 1
+                    if unescaped_quote_count % 2 != 0 and not value_part.endswith('"'):
+                        value_part += '"'
                 
                 final_line = f'{current_key} = {value_part}'
             if not final_line.endswith(','):
