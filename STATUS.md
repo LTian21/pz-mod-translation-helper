@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-12 04:03:59 UTC+08:00`*
+*最后更新于：`2025-11-12 04:05:42 UTC+08:00`*
 
 ---
 
@@ -9,11 +9,11 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``71025`` 条 |
-| **待翻译条目** | ``15774`` 条 |
-| **已翻译条目** | ``55251`` 条 |
-| **待校对条目** | ``51965`` 条 |
-| **已支持 Mod 数量** | ``639`` 个 |
+| **模组总条目** | ``71737`` 条 |
+| **待翻译条目** | ``16394`` 条 |
+| **已翻译条目** | ``55343`` 条 |
+| **待校对条目** | ``52061`` 条 |
+| **已支持 Mod 数量** | ``649`` 个 |
 
 ---
 
@@ -35,6 +35,7 @@
 | Conditional-Speech | 2398253681 | 493 | 0 | 0 | 493 |
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
+| N&C's Narcotics | 3404956403 | 407 | 0 | 0 | 407 |
 | Pomp's Items - My Little Pony | 2792387747 | 377 | 586 | 1 | 963 |
 | Customizable Containers [B42/41] | 2719850086 | 352 | 1353 | 0 | 1705 |
 | Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 339 | 155 | 0 | 494 |
@@ -66,10 +67,11 @@
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
+| Realistic Car Physics [B42] | 3559765660 | 92 | 0 | 6 | 92 |
+| [B42] Mastered Traits | 3423601261 | 86 | 0 | 0 | 86 |
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
 | Lifestyle: Hobbies | 3403870858 | 85 | 4082 | 28 | 4167 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
-| Realistic Car Physics [B42] | 3559765660 | 82 | 0 | 0 | 82 |
 | Christmas Time [b41/42 demo] | 2903870217 | 81 | 53 | 53 | 134 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
 | that DAMN Library | 3171167894 | 77 | 383 | 0 | 460 |
@@ -91,6 +93,7 @@
 | Legendary Katana | 3418366499 | 58 | 72 | 1 | 130 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 56 | 52 | 0 | 108 |
 | [B42] Ogrim Mod's - Machine Utils | 3555558732 | 56 | 0 | 0 | 56 |
+| Realistic Temperature Mod [B42] | 3600401184 | 54 | 0 | 0 | 54 |
 | Spongie's Character Customisation | 3414634809 | 53 | 16 | 0 | 69 |
 | [J&G] Firefighter Uniform [B42/41] | 3521263771 | 51 | 2 | 2 | 54 |
 | [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 51 | 0 | 0 | 52 |
@@ -118,6 +121,7 @@
 | Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
 | Bundle Branches [B42] | 3595072546 | 28 | 0 | 0 | 28 |
 | [B42] Knox Event Expanded NPC mod [alpha v0.3.16-1] | 3397396843 | 28 | 572 | 42 | 600 |
+| Wash Or Rot | 3428146910 | 27 | 0 | 0 | 27 |
 | [B42] Week One NPC | 3403180543 | 25 | 806 | 0 | 831 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
 | Random Clothing [B41/B42] | 3397182976 | 25 | 107 | 5 | 132 |
@@ -158,14 +162,17 @@
 | DFMFoodMod | 3406694220 | 10 | 83 | 4 | 94 |
 | [B41/B42] I Don't Need A Lighter | 2714198296 | 10 | 0 | 0 | 10 |
 | Street Smarts | 3511535258 | 10 | 11 | 2 | 21 |
+| TEH Assembly Order for Project Summer Car [B42] | 3593757134 | 10 | 0 | 0 | 10 |
 | Undying Zombies (Immersive Respawn Replacement) | 3555199477 | 10 | 0 | 0 | 10 |
 | Immersive Suicide [B42/B41] | 3426448380 | 9 | 3 | 0 | 12 |
+| [KYR] Real Weather Mod | 3051276857 | 9 | 0 | 0 | 9 |
 | RV Life | 3553635874 | 9 | 0 | 0 | 9 |
 | Show Key Origin | 3501701205 | 9 | 0 | 0 | 9 |
 | [B41 & B42] Throw your bag across | 3391902125 | 9 | 0 | 0 | 9 |
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 9 | 45 | 2 | 55 |
 | Functional Escalators | 3462962143 | 8 | 0 | 0 | 8 |
 | Legendary Satchel | 3560352772 | 8 | 17 | 1 | 25 |
+| Military Ponchos: Reloaded | 3439247001 | 8 | 65 | 11 | 73 |
 | Mod Load Order Sorter [b42] | 3423660713 | 8 | 34 | 23 | 42 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 8 | 7 | 0 | 15 |
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
@@ -198,6 +205,7 @@
 | '85 Oldsmobile Delta 88 | 3418253716 | 4 | 17 | 0 | 21 |
 | Imperial Chops! (Extra Beard Option) | 3465865657 | 4 | 7 | 0 | 11 |
 | Ratchat's Outdoor Tiles | 3430305726 | 4 | 1 | 1 | 5 |
+| TEH Junkyard Mechanics 42 | 3591337109 | 4 | 0 | 0 | 4 |
 | [Project Fallout] The Beginning | 3461117277 | 4 | 24 | 3 | 28 |
 | [B42] Moodle Descriptions Expanded | 3389003300 | 4 | 102 | 9 | 106 |
 | '85 Pontiac Parisienne | 3413706334 | 3 | 17 | 0 | 20 |
@@ -205,6 +213,7 @@
 | Ducks+ | 3409153536 | 3 | 89 | 0 | 92 |
 | Gunpoint Redemption [B.41/B.42] | 3078291265 | 3 | 11 | 0 | 14 |
 | Halo Marine Armor [B41/B42] | 3507919075 | 3 | 25 | 0 | 28 |
+| Legendary Tactical Knife | 3575320927 | 3 | 56 | 0 | 59 |
 | Money From Credit Cards | 3428650803 | 3 | 21 | 0 | 24 |
 | [B42]Sector-7 Breach | 3513107552 | 3 | 9 | 3 | 12 |
 | [J&G] Caution Uniform [B42/41] | 3369825662 | 3 | 39 | 0 | 44 |
@@ -222,6 +231,7 @@
 | Proximity Inventory [B41/42] | 2847184718 | 2 | 19 | 0 | 21 |
 | PZK VLC (Vanilla look-like car pack) | 3217685049 | 2 | 693 | 6 | 695 |
 | Shield Mode (Secondary Hand Equip) (B41/B42) | 3383001527 | 2 | 7 | 1 | 9 |
+| Surviving the storm | 2971021306 | 2 | 0 | 0 | 2 |
 | '86 Chevrolet CUCVs + M101A2 Trailer | 3428008364 | 1 | 82 | 1 | 83 |
 | '91 Ford Ranger | 3539691958 | 1 | 49 | 0 | 50 |
 | Anthro Traits | 3025679944 | 1 | 145 | 0 | 146 |
@@ -482,6 +492,7 @@
 | Ladders!? | 2737665235 | 0 | 7 | 0 | 7 |
 | Last Of Us Hair | 3025593219 | 0 | 6 | 0 | 6 |
 | Last Push Trait | 3028253067 | 0 | 46 | 0 | 46 |
+| Legendary Naginata | 3580577925 | 0 | 40 | 0 | 40 |
 | More Traits Antique Upgrade | 3397942493 | 0 | 64 | 0 | 64 |
 | Legend Craft Evolved | 3432470769 | 0 | 304 | 0 | 304 |
 | Lethal Stealth | 3531611692 | 0 | 34 | 0 | 34 |
@@ -501,7 +512,6 @@
 | Map Symbol Size Slider | 2734705913 | 0 | 0 | 0 | 1 |
 | Metal Spears | 2927603127 | 0 | 8 | 1 | 8 |
 | Mexiox's - Mexican Firearm Weapons | 2882852956 | 0 | 70 | 22 | 70 |
-| Military Ponchos: Reloaded | 3439247001 | 0 | 65 | 11 | 65 |
 | [B41/B42] Militek Faction Clothing | 3269061047 | 0 | 125 | 41 | 125 |
 | [B41/B42] Mini Health Panel | 2866258937 | 0 | 0 | 0 | 2 |
 | Industrial Revolution = Addon = Mira's Ammo Maker | 3441855577 | 0 | 0 | 0 | 1 |
@@ -610,7 +620,7 @@
 | Starving Zombies [B42] | 3396867685 | 0 | 36 | 0 | 36 |
 | [B42/B41]Surviving Through Seasons | 2753086629 | 0 | 9 | 0 | 9 |
 | Swap It | 2366717227 | 0 | 0 | 0 | 7 |
-| [B42] Tactical Sheaths Reborn | 3569158406 | 0 | 0 | 0 | 65 |
+| [B42] Tactical Sheaths Reborn | 3569158406 | 0 | 0 | 0 | 61 |
 | [B42 & 41] Tactical Weapons | 2324223029 | 0 | 46 | 23 | 46 |
 | [B42] Tatrapan | 3402789975 | 0 | 10 | 7 | 10 |
 | TchernoLib | 3389605231 | 0 | 35 | 0 | 35 |
