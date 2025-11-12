@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-12 19:02:52 UTC+08:00`*
+*最后更新于：`2025-11-12 22:09:50 UTC+08:00`*
 
 ---
 
@@ -9,11 +9,11 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``71737`` 条 |
-| **待翻译条目** | ``16394`` 条 |
-| **已翻译条目** | ``55343`` 条 |
-| **待校对条目** | ``52061`` 条 |
-| **已支持 Mod 数量** | ``649`` 个 |
+| **模组总条目** | ``71338`` 条 |
+| **待翻译条目** | ``15723`` 条 |
+| **已翻译条目** | ``55615`` 条 |
+| **待校对条目** | ``52058`` 条 |
+| **已支持 Mod 数量** | ``648`` 个 |
 
 ---
 
@@ -34,7 +34,6 @@
 | Conditional-Speech | 2398253681 | 493 | 0 | 0 | 493 |
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
-| N&C's Narcotics | 3404956403 | 407 | 0 | 0 | 407 |
 | Pomp's Items - My Little Pony | 2792387747 | 377 | 586 | 1 | 963 |
 | Customizable Containers [B42/41] | 2719850086 | 352 | 1353 | 0 | 1705 |
 | Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 339 | 155 | 0 | 494 |
@@ -173,6 +172,7 @@
 | Mod Load Order Sorter [b42] | 3423660713 | 8 | 34 | 23 | 42 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 8 | 7 | 0 | 15 |
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
+| SnackTime 89 - Junk Revival | 3589560764 | 8 | 0 | 0 | 146 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
 | [B42] Functional Gutters | 3439305933 | 7 | 46 | 0 | 53 |
 | darlak's H.E.C.U. | 3452711271 | 7 | 96 | 14 | 108 |
@@ -417,6 +417,8 @@
 | '90 Mercedes-Benz Unimog U1550L | 2843855721 | 0 | 43 | 8 | 43 |
 | Daihatsu Hijet S83P/S110P | 3583266047 | 0 | 0 | 0 | 12 |
 | [B42]说话描述情绪 | 3446253876 | 0 | 470 | 470 | 470 |
+| [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 0 | 0 | 0 | 125 |
+| Detailed Skill Tooltips | 3572846242 | 0 | 0 | 0 | 150 |
 | Different number of fillets based on weight | 3415021115 | 0 | 0 | 0 | 2 |
 | The Division Watch | 3391186580 | 0 | 6 | 0 | 6 |
 | [B41/42] Doors Have A Chance | 3041602364 | 0 | 0 | 0 | 19 |
@@ -604,7 +606,6 @@
 | SixthSense | 2863908612 | 0 | 0 | 1 | 25 |
 | [B42] Skateboard! | 3456675747 | 0 | 0 | 0 | 1 |
 | Smart Hutch | 3556857572 | 0 | 41 | 0 | 41 |
-| SnackTime 89 - Junk Revival | 3589560764 | 0 | 0 | 0 | 138 |
 | Spear fishing &#124; Рыбалка копьём | 3539114542 | 0 | 59 | 0 | 59 |
 | Spear Traps | 2640351732 | 0 | 4 | 0 | 4 |
 | Spiffomon 3D [B42] | 3522453285 | 0 | 34 | 0 | 34 |
