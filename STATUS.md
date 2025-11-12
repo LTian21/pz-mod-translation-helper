@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-12 22:09:50 UTC+08:00`*
+*最后更新于：`2025-11-12 22:22:02 UTC+08:00`*
 
 ---
 
@@ -10,9 +10,9 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``71338`` 条 |
-| **待翻译条目** | ``15723`` 条 |
-| **已翻译条目** | ``55615`` 条 |
-| **待校对条目** | ``52058`` 条 |
+| **待翻译条目** | ``14781`` 条 |
+| **已翻译条目** | ``56557`` 条 |
+| **待校对条目** | ``51954`` 条 |
 | **已支持 Mod 数量** | ``648`` 个 |
 
 ---
@@ -31,7 +31,6 @@
 | Guns of 93: B42 Test Build (Unstable) | 3183820077 | 748 | 1755 | 1129 | 2553 |
 | Even More Traits | 2855320431 | 606 | 62 | 2 | 668 |
 | [B42] Buildables Expansion | 3463117260 | 525 | 622 | 7 | 1147 |
-| Conditional-Speech | 2398253681 | 493 | 0 | 0 | 493 |
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
 | Pomp's Items - My Little Pony | 2792387747 | 377 | 586 | 1 | 963 |
@@ -43,7 +42,6 @@
 | Vanilla Foods Expanded | 3577903007 | 271 | 1865 | 9 | 2136 |
 | Pomp's Items - Just the Food | 2792348686 | 267 | 397 | 3 | 664 |
 | [B42] WarThunderVehicleLibrary | 3399660368 | 241 | 44 | 7 | 285 |
-| Lost Media | 3572808153 | 237 | 0 | 0 | 237 |
 | UNOFFICIAL Fools New Containers for B42 | 3535295548 | 237 | 91 | 91 | 328 |
 | organizedCategories: Core | 3370707195 | 230 | 253 | 1 | 483 |
 | [B42/B41] The Motorious Zone Vehicle Pack | 2791656602 | 218 | 5 | 0 | 223 |
@@ -59,7 +57,6 @@
 | Airdrops | 3590950467 | 156 | 0 | 0 | 156 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | Pocket Kittens (B42) | 3568029240 | 120 | 14 | 7 | 134 |
-| Video Game Consoles | 2831786301 | 120 | 0 | 0 | 120 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
@@ -80,7 +77,6 @@
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 0 | 69 |
 | Skill Recovery Journal | 2503622437 | 68 | 11 | 8 | 79 |
 | SCP - Foundation pack | 3580511016 | 66 | 0 | 0 | 66 |
-| [B42] The Only Cure | 3580276809 | 65 | 0 | 0 | 66 |
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | ST Additions - Pry Open | 3579640010 | 60 | 102 | 32 | 162 |
@@ -142,7 +138,6 @@
 | [B42/B41] Motorious Zone - Hot Pursuit Add-on | 2841969842 | 15 | 0 | 0 | 15 |
 | [B42/41] Repairable Windows | 3378304610 | 15 | 2 | 0 | 17 |
 | [B42] Bag Upgrade Plus | 3403697073 | 15 | 37 | 1 | 52 |
-| Functional Car Lift | 3464551542 | 14 | 0 | 0 | 14 |
 | Gyde's Trait Magazines | 3342191739 | 14 | 58 | 0 | 72 |
 | [B41/42] Known And Collected | 2881764317 | 13 | 0 | 0 | 13 |
 | The Calm Before The Storm | 2953621037 | 12 | 0 | 0 | 61 |
@@ -166,7 +161,6 @@
 | Show Key Origin | 3501701205 | 9 | 0 | 0 | 9 |
 | [B41 & B42] Throw your bag across | 3391902125 | 9 | 0 | 0 | 9 |
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 9 | 45 | 2 | 55 |
-| Functional Escalators | 3462962143 | 8 | 0 | 0 | 8 |
 | Legendary Satchel | 3560352772 | 8 | 17 | 1 | 25 |
 | Military Ponchos: Reloaded | 3439247001 | 8 | 65 | 11 | 73 |
 | Mod Load Order Sorter [b42] | 3423660713 | 8 | 34 | 23 | 42 |
@@ -191,7 +185,6 @@
 | Driving Skill [B42] | 3407791878 | 5 | 110 | 0 | 115 |
 | Herbalist | 2875059598 | 5 | 68 | 0 | 73 |
 | Scavenger Skill [B42] | 3407792640 | 5 | 64 | 0 | 69 |
-| [B42]ShelterHold : Beehive | 3596827035 | 5 | 98 | 0 | 103 |
 | Tetriz - Arcade Minigame | 3486780625 | 5 | 6 | 0 | 11 |
 | Vehicle Repair Overhaul | 2757712197 | 5 | 50 | 3 | 55 |
 | Wandering Zombies | 2983905789 | 5 | 401 | 1 | 406 |
@@ -434,6 +427,7 @@
 | Encajar Piezas con Botin | 3591398623 | 0 | 0 | 0 | 11 |
 | Erika's Furniture Store [B41/B42] | 3363546437 | 0 | 640 | 310 | 647 |
 | [B42] eris food expiry | 3392259028 | 0 | 24 | 0 | 24 |
+| Functional Escalators | 3462962143 | 0 | 0 | 0 | 8 |
 | Excavation - Basement Expansion | 3392001801 | 0 | 16 | 0 | 16 |
 | [B42] Exercise With Corpses | 3404074048 | 0 | 7 | 0 | 7 |
 | Expanded Professions | 3440958051 | 0 | 16 | 2 | 16 |
@@ -456,6 +450,7 @@
 | [B42] Frockin Splendor! Vol.4 | 3475347500 | 0 | 135 | 127 | 135 |
 | Filibuster Rhymes' Used Cars! - Animation Alpha | 2959472220 | 0 | 405 | 0 | 405 |
 | Functional Appliances 2 | 3042138819 | 0 | 173 | 0 | 173 |
+| Functional Car Lift | 3464551542 | 0 | 0 | 0 | 14 |
 | Fitness & Workout Overhaul | 2940354599 | 0 | 43 | 29 | 43 |
 | [B42]Gauss Firearms | 3429953336 | 0 | 105 | 0 | 105 |
 | Guitar Wall Hanger [b42] | 3410972667 | 0 | 48 | 2 | 48 |
@@ -499,6 +494,7 @@
 | Lillie's Meal Combat Individual Ration Mod | 3557845788 | 0 | 106 | 0 | 106 |
 | Liv's Trusty Baseball Cap | 3477662795 | 0 | 0 | 0 | 1 |
 | Lock Interiors | 3435709471 | 0 | 0 | 0 | 3 |
+| Lost Media | 3572808153 | 0 | 0 | 0 | 237 |
 | Long-standing Metal Constructions | 3199474685 | 0 | 37 | 0 | 37 |
 | Lucille Vampire Bat | 3436159263 | 0 | 6 | 0 | 7 |
 |  Better Electronics | 2999183635 | 0 | 115 | 0 | 118 |
@@ -589,7 +585,7 @@
 | Replace Bandage [B41, B42] | 2944344655 | 0 | 0 | 1 | 3 |
 | Restore Engine Quality [B42] | 3543612325 | 0 | 6 | 0 | 6 |
 | Restore Utilities | 3409422147 | 0 | 148 | 0 | 148 |
-| RE Interface [B42] | 3598501350 | 0 | 6 | 0 | 6 |
+| RE Interface [B42] | 3598501350 | 0 | 0 | 0 | 6 |
 | Rick's MLC GunLight Patch [B42] | 3595628283 | 0 | 0 | 0 | 4 |
 | Rick's MLC Pay & Pump | 3194049112 | 0 | 20 | 0 | 20 |
 | [OBSOLETE] RollBack Rain Collector Barrel | 3392186516 | 0 | 6 | 0 | 6 |
@@ -599,6 +595,7 @@
 | [B42/41] Safe Indoor Campfire | 3591562181 | 0 | 0 | 0 | 3 |
 | Serving Plates: Make your plates useful for Build 42 | 3399320470 | 0 | 14 | 0 | 14 |
 | [B42] Ogrim Mod's - Sewing Workbranch | 3555588616 | 0 | 231 | 0 | 231 |
+| [B42]ShelterHold : Beehive | 3596827035 | 0 | 0 | 0 | 103 |
 | Knife Animation | 3433660118 | 0 | 0 | 0 | 2 |
 | Show Sowing Season In Seed Tooltip | 3404461962 | 0 | 40 | 0 | 40 |
 | Simple Show XP | 2891170430 | 0 | 28 | 0 | 28 |
@@ -622,6 +619,7 @@
 | [B42 & 41] Tactical Weapons | 2324223029 | 0 | 46 | 23 | 46 |
 | [B42] Tatrapan | 3402789975 | 0 | 10 | 7 | 10 |
 | TchernoLib | 3389605231 | 0 | 35 | 0 | 35 |
+| [B42] The Only Cure | 3580276809 | 0 | 0 | 0 | 66 |
 | The Division Equipment [B42] | 3479867929 | 0 | 101 | 8 | 101 |
 | Weapon Condition Indicator | 3412262177 | 0 | 42 | 0 | 42 |
 | [B42] They Are Watching - Schizophrenia Mod | 3559704439 | 0 | 181 | 0 | 181 |
@@ -649,6 +647,7 @@
 | Vanilla Gear Expanded | 3401134276 | 0 | 46 | 4 | 46 |
 | Vanilla MRE [B41/B42] | 3100032203 | 0 | 23 | 0 | 23 |
 | [B42] Vanvival - Build's 42 Nomadic Experience | 3547444619 | 0 | 45 | 26 | 45 |
+| Video Game Consoles | 2831786301 | 0 | 0 | 0 | 120 |
 | [UPDATED] Ellie Voice Mod [B42] | 3464700263 | 0 | 0 | 0 | 1 |
 | Joel Voice Pack [TLOU2] [B42] | 3496043022 | 0 | 0 | 0 | 1 |
 | VSMR Face for Spongie's Character Customisation | 3415572170 | 0 | 0 | 0 | 2 |
@@ -664,6 +663,7 @@
 | Woodcutting Skill [B42] | 3434440605 | 0 | 11 | 0 | 11 |
 | Yaki's Hair Salon | 2761200458 | 0 | 196 | 0 | 196 |
 | [B42]Zombies Subzero TWD | 3426132882 | 0 | 14 | 0 | 14 |
+| Conditional-Speech | 2398253681 | 0 | 0 | 0 | 493 |
 | [B42] Skizot's zRe Fix Floor Extended | 3403911096 | 0 | 0 | 0 | 1 |
 | [B42] Briefing | 3565244378 | 0 | 13 | 0 | 13 |
 | [B42][ABANDONED] FlipVehiclePlusTrailer | 3430172149 | 0 | 93 | 0 | 93 |
