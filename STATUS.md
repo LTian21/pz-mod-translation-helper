@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-12 22:22:02 UTC+08:00`*
+*最后更新于：`2025-11-13 04:04:37 UTC+08:00`*
 
 ---
 
@@ -17,9 +17,10 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251112_190251``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251113_040436``)**
 
-*   **SnackTime89 (ID: 3589560764)**: 新增 `8` 条, 移除 `0` 条。
+*   **ChristmasTime (ID: 2903870217)**: 新增 `57` 条, 移除 `16` 条。
+*   **PZKExtendedzones (ID: 3217685049)**: 新增 `3` 条, 移除 `0` 条。
 
 ---
 
@@ -65,7 +66,7 @@
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
 | Lifestyle: Hobbies | 3403870858 | 85 | 4082 | 28 | 4167 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
-| Christmas Time [b41/42 demo] | 2903870217 | 81 | 53 | 53 | 134 |
+| Christmas Time [b41/42] | 2903870217 | 81 | 53 | 53 | 134 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
 | that DAMN Library | 3171167894 | 77 | 383 | 0 | 460 |
 | The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 77 | 0 | 0 | 77 |

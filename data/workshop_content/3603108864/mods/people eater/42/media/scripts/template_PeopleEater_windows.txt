@@ -1,0 +1,137 @@
+module Base
+{
+	model PeopleEater_leftrearwindow
+	{
+		mesh = vehicles/PeopleEater|windowrl,
+		shader = vehicle,
+		scale = 1,
+		static = TRUE,
+		boneWeight = LeftRearWindowBone 1.0,
+	}
+	model PeopleEater_rightrearwindow
+	{
+		mesh = vehicles/PeopleEater|windowrr,
+		shader = vehicle,
+		scale = 1,
+		static = TRUE,
+		boneWeight = RightRearWindowBone 1.0,
+	}
+
+
+
+
+    template vehicle PeopleEater_windows
+    {
+                template = Window/part/WindowRearLeft,
+		template = Window/part/WindowRearRight,
+  
+
+
+		part WindowFrontLeft
+		{
+			area = SeatFrontLeft,
+			
+			parent = DoorFrontLeft,
+                       
+
+			model Default
+			{
+				file = PeopleEater_leftfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontLeft_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+
+		part WindowFrontRight
+		{
+			area = SeatFrontRight,
+			
+			parent = DoorFrontRight,
+                        
+
+			model Default
+			{
+				file = PeopleEater_rightfrontwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowFrontRight_open,
+				animate = FALSE,
+			}                        
+
+		}
+
+		part WindowRearLeft
+		{
+			area = SeatRearLeft,
+			
+			parent = DoorRearLeft,
+                       
+
+			model Default
+			{
+				file = PeopleEater_leftrearwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowRearLeft_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+
+  		part WindowRearRight
+		{
+			area = SeatRearRight,
+			
+			parent = DoorRearRight,
+                       
+
+			model Default
+			{
+				file = PeopleEater_rightrearwindow,
+			}
+
+                        anim ClosedToOpen
+			{
+                                
+				anim = WindowRearRight_open,
+				animate = FALSE,
+			}                        
+
+		
+		}
+              
+                             
+                
+
+
+
+           
+
+		
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			window
+			{
+				openable = true,
+			}
+		}
+    }
+}
