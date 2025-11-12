@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-12 10:08:05 UTC+08:00`*
+*最后更新于：`2025-11-12 20:05:07 UTC+08:00`*
 
 ---
 
@@ -10,9 +10,9 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``71737`` 条 |
-| **待翻译条目** | ``16394`` 条 |
-| **已翻译条目** | ``55343`` 条 |
-| **待校对条目** | ``52061`` 条 |
+| **待翻译条目** | ``16272`` 条 |
+| **已翻译条目** | ``55465`` 条 |
+| **待校对条目** | ``52058`` 条 |
 | **已支持 Mod 数量** | ``649`` 个 |
 
 ---
@@ -61,7 +61,6 @@
 | Airdrops | 3590950467 | 156 | 0 | 0 | 156 |
 | Detailed Skill Tooltips | 3572846242 | 150 | 0 | 0 | 150 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
-| [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 122 | 3 | 0 | 125 |
 | Pocket Kittens (B42) | 3568029240 | 120 | 14 | 7 | 134 |
 | Video Game Consoles | 2831786301 | 120 | 0 | 0 | 120 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
@@ -420,6 +419,7 @@
 | '90 Mercedes-Benz Unimog U1550L | 2843855721 | 0 | 43 | 8 | 43 |
 | Daihatsu Hijet S83P/S110P | 3583266047 | 0 | 0 | 0 | 12 |
 | 未知 Mod (3446253876) | 3446253876 | 0 | 470 | 470 | 470 |
+| [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 0 | 0 | 0 | 125 |
 | Different number of fillets based on weight | 3415021115 | 0 | 0 | 0 | 2 |
 | The Division Watch | 3391186580 | 0 | 6 | 0 | 6 |
 | [B41/42] Doors Have A Chance | 3041602364 | 0 | 0 | 0 | 19 |
