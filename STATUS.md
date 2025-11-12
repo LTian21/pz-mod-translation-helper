@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-13 04:04:37 UTC+08:00`*
+*最后更新于：`2025-11-13 04:06:32 UTC+08:00`*
 
 ---
 
@@ -9,11 +9,11 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``71338`` 条 |
-| **待翻译条目** | ``14781`` 条 |
-| **已翻译条目** | ``56557`` 条 |
-| **待校对条目** | ``51954`` 条 |
-| **已支持 Mod 数量** | ``648`` 个 |
+| **模组总条目** | ``71556`` 条 |
+| **待翻译条目** | ``14873`` 条 |
+| **已翻译条目** | ``56683`` 条 |
+| **待校对条目** | ``52080`` 条 |
+| **已支持 Mod 数量** | ``656`` 个 |
 
 ---
 
@@ -48,7 +48,6 @@
 | [B42/B41] The Motorious Zone Vehicle Pack | 2791656602 | 218 | 5 | 0 | 223 |
 | Support Goods [B42.9] - MyAlcohol! | 3510863962 | 218 | 0 | 0 | 218 |
 | Project Fallout: GunRunner | 3434691822 | 217 | 29 | 0 | 246 |
-| [B42]Kill Cell - Armory | 3569050120 | 208 | 0 | 0 | 208 |
 | (B42) Immersive Roleplay Professions and Traits | 3387474156 | 202 | 666 | 0 | 870 |
 | True Smoking [B42] | 3423984426 | 173 | 26 | 1 | 199 |
 | Somewhat Traits [B42 Compatible] | 3498347699 | 171 | 0 | 0 | 171 |
@@ -56,7 +55,9 @@
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
 | Trap Manager | 3566766862 | 159 | 3 | 1 | 162 |
 | Airdrops | 3590950467 | 156 | 0 | 0 | 156 |
+| [B42]Kill Cell - Armory | 3569050120 | 143 | 0 | 0 | 143 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
+| Christmas Time [b41/42] | 2903870217 | 121 | 53 | 77 | 174 |
 | Pocket Kittens (B42) | 3568029240 | 120 | 14 | 7 | 134 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
@@ -66,7 +67,6 @@
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
 | Lifestyle: Hobbies | 3403870858 | 85 | 4082 | 28 | 4167 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
-| Christmas Time [b41/42] | 2903870217 | 81 | 53 | 53 | 134 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
 | that DAMN Library | 3171167894 | 77 | 383 | 0 | 460 |
 | The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 77 | 0 | 0 | 77 |
@@ -82,6 +82,7 @@
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | ST Additions - Pry Open | 3579640010 | 60 | 102 | 32 | 162 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 59 | 361 | 0 | 421 |
+| Cap'N's Tricky Traits 🎃 | 3596746538 | 59 | 0 | 0 | 59 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 59 | 20 | 2 | 79 |
 | Legendary Katana | 3418366499 | 58 | 72 | 1 | 130 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 56 | 52 | 0 | 108 |
@@ -119,7 +120,9 @@
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
 | Random Clothing [B41/B42] | 3397182976 | 25 | 107 | 5 | 132 |
 | [B42 Port] Take a Bath | 3485349033 | 24 | 0 | 0 | 24 |
+| Where are the animals? | 3409035433 | 23 | 0 | 0 | 23 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
+| Immersive Water Shutoff | 3599665197 | 23 | 0 | 0 | 23 |
 | Legendary DuffelBag | 3558839307 | 23 | 26 | 0 | 49 |
 | Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
 | The Last of Us: Factions & Gear [B41/B42] | 3348036710 | 22 | 89 | 1 | 113 |
@@ -156,6 +159,7 @@
 | Street Smarts | 3511535258 | 10 | 11 | 2 | 21 |
 | TEH Assembly Order for Project Summer Car [B42] | 3593757134 | 10 | 0 | 0 | 10 |
 | Undying Zombies (Immersive Respawn Replacement) | 3555199477 | 10 | 0 | 0 | 10 |
+| Irrigation Pipes/Cluster Barrels | 3599339646 | 9 | 32 | 1 | 41 |
 | Immersive Suicide [B42/B41] | 3426448380 | 9 | 3 | 0 | 12 |
 | [KYR] Real Weather Mod | 3051276857 | 9 | 0 | 0 | 9 |
 | RV Life | 3553635874 | 9 | 0 | 0 | 9 |
@@ -209,6 +213,7 @@
 | [B42]Sector-7 Breach | 3513107552 | 3 | 9 | 3 | 12 |
 | [J&G] Caution Uniform [B42/41] | 3369825662 | 3 | 39 | 0 | 44 |
 | '93 Chevrolet Suburban / Silverado | 3152529790 | 2 | 150 | 0 | 152 |
+| [B42] Advanced Warfare Community Weapons FrameWork | 3434653631 | 2 | 85 | 1 | 87 |
 | B42 Rain's Axes & Blades | 3388380529 | 2 | 47 | 0 | 50 |
 | [B42/B41] Bandits Creator | 3469292499 | 2 | 121 | 0 | 123 |
 | Bath Towels Overhaul | 3416208765 | 2 | 82 | 1 | 84 |
@@ -247,6 +252,7 @@
 | Reduced sickness inside the vehicle | 3405033818 | 1 | 8 | 0 | 9 |
 | Excalibar | 2868777243 | 1 | 51 | 0 | 52 |
 | Seesaw Game | 3515515643 | 1 | 9 | 0 | 10 |
+| 1980 Mercedes Benz W123 People eater | 3603108864 | 1 | 0 | 0 | 1 |
 | Risky Unarmed | 3434796669 | 1 | 94 | 0 | 95 |
 | [B41/B42] Simple Overhaul: Traits and Occupations (SOTO) | 2840805724 | 1 | 320 | 7 | 321 |
 | Simple Skill Books | 3291799176 | 1 | 124 | 0 | 125 |
@@ -398,6 +404,7 @@
 | [41&#124;42] ChairBarricade | 3404288341 | 0 | 0 | 0 | 3 |
 | Character Save | 2673317083 | 0 | 0 | 0 | 2 |
 | [B41/B42] Check Around | 3300688173 | 0 | 157 | 1 | 157 |
+| Mod Update and Alert System | 3077900375 | 0 | 7 | 1 | 7 |
 | Soul Filcher's Clearing Time | 1926311864 | 0 | 0 | 0 | 5 |
 | Functional Clothesline | 3282215361 | 0 | 0 | 0 | 20 |
 | Cold Winters | 3577100076 | 0 | 0 | 0 | 5 |
@@ -442,6 +449,7 @@
 | Fire Resistence | 2863836591 | 0 | 0 | 0 | 5 |
 | TrueMusic addon : 8090一些歌曲 | 3444726475 | 0 | 74 | 8 | 74 |
 | First Aid VHS Tapes | 3153010942 | 0 | 129 | 0 | 129 |
+| Foraging Light Fix & Tuning (B42) | 3596478900 | 0 | 5 | 0 | 5 |
 | Filibuster Rhymes' Acceptable Guns DEMO! | 3554570236 | 0 | 606 | 0 | 606 |
 | Fridges Off! | 2853974107 | 0 | 0 | 0 | 4 |
 | [B42/1] Frockin Shirts & Ties! | 3453676250 | 0 | 29 | 21 | 29 |
@@ -474,7 +482,7 @@
 | [B41/B42] Injectors | 3437429771 | 0 | 0 | 0 | 49 |
 | Injury Indicator [B42] | 3565698092 | 0 | 33 | 0 | 33 |
 | The Survivalist's Gear | 3404876149 | 0 | 6 | 1 | 6 |
-| Inspect Weapon | 2948824747 | 0 | 25 | 0 | 25 |
+| Inspect Weapon | 2948824747 | 0 | 22 | 0 | 22 |
 | Containers! | 2625625421 | 0 | 14 | 0 | 14 |
 | JB's Fireflies - B41 and B42 | 3591708775 | 0 | 0 | 0 | 11 |
 | Joke Customisation Pack | 3415451174 | 0 | 7 | 0 | 7 |
