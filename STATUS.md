@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-12 10:08:05 UTC+08:00`*
+*最后更新于：`2025-11-12 19:02:52 UTC+08:00`*
 
 ---
 
@@ -17,10 +17,9 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251112_040359``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251112_190251``)**
 
-*   **MilitaryPonchosRELOADED (ID: 3439247001)**: 新增 `8` 条, 移除 `0` 条。
-*   **Realistic_Car_Physics (ID: 3559765660)**: 新增 `10` 条, 移除 `0` 条。
+*   **SnackTime89 (ID: 3589560764)**: 新增 `8` 条, 移除 `0` 条。
 
 ---
 
@@ -125,7 +124,7 @@
 | [B42] Week One NPC | 3403180543 | 25 | 806 | 0 | 831 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
 | Random Clothing [B41/B42] | 3397182976 | 25 | 107 | 5 | 132 |
-| 未知 Mod (3485349033) | 3485349033 | 24 | 0 | 0 | 24 |
+| [B42 Port] Take a Bath | 3485349033 | 24 | 0 | 0 | 24 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
 | Legendary DuffelBag | 3558839307 | 23 | 26 | 0 | 49 |
 | Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
@@ -419,7 +418,7 @@
 | Craft Spear With Planks | 3438621136 | 0 | 0 | 0 | 1 |
 | '90 Mercedes-Benz Unimog U1550L | 2843855721 | 0 | 43 | 8 | 43 |
 | Daihatsu Hijet S83P/S110P | 3583266047 | 0 | 0 | 0 | 12 |
-| 未知 Mod (3446253876) | 3446253876 | 0 | 470 | 470 | 470 |
+| [B42]说话描述情绪 | 3446253876 | 0 | 470 | 470 | 470 |
 | Different number of fillets based on weight | 3415021115 | 0 | 0 | 0 | 2 |
 | The Division Watch | 3391186580 | 0 | 6 | 0 | 6 |
 | [B41/42] Doors Have A Chance | 3041602364 | 0 | 0 | 0 | 19 |
@@ -592,7 +591,7 @@
 | Restore Utilities | 3409422147 | 0 | 148 | 0 | 148 |
 | RE Interface [B42] | 3598501350 | 0 | 6 | 0 | 6 |
 | Rick's MLC GunLight Patch [B42] | 3595628283 | 0 | 0 | 0 | 4 |
-| 未知 Mod (3194049112) | 3194049112 | 0 | 20 | 0 | 20 |
+| Rick's MLC Pay & Pump | 3194049112 | 0 | 20 | 0 | 20 |
 | [OBSOLETE] RollBack Rain Collector Barrel | 3392186516 | 0 | 6 | 0 | 6 |
 | S4 Economy[Shop] | 3480405054 | 0 | 503 | 2 | 503 |
 | SafeLogin | 2876897619 | 0 | 8 | 0 | 8 |
