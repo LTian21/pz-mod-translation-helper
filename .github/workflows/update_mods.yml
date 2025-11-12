@@ -423,13 +423,17 @@ jobs:
             echo "    - Removed ./data/workshop_content/$ID"
             rm -rf "./data/completed_files/$ID"
             echo "    - Removed ./data/completed_files/$ID"
+            find ./data/output_files -type d -name "*_$ID" -exec rm -rf {} +
+            echo "    - Removed matching directories in ./data/output_files"
+            find ./data -type f -name "*_$ID.*" -exec rm -f {} +
+            echo "    - Removed matching files in ./data"
             
             SUCCESSFULLY_DELETED_IDS+=("$ID")
           done
           
           mv "$TEMP_ID_LIST" id_list.txt
           
-          DELETED_IDS_JSON=$(printf '%s\n' "${SUCCESSFULLY_DELETED_IDS[@]}" | jq -R . | jq -s .)
+          DELETED_IDS_JSON=$(jq -nc '$ARGS.positional' --args "${SUCCESSFULLY_DELETED_IDS[@]}")
           echo "Successfully deleted mods: $DELETED_IDS_JSON"
           echo "deleted_ids=$DELETED_IDS_JSON" >> $GITHUB_OUTPUT
 
