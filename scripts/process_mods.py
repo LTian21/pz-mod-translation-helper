@@ -19,6 +19,10 @@ KEY_VALUE_START_PATTERN: Final[re.compile] = re.compile(r"^\s*([\w\s.\[\]()#-]+?
 ITEM_PATTERN: Final[re.compile] = re.compile(r"item\s+([\w-]+)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
 RECIPE_PATTERN: Final[re.compile] = re.compile(r"(?:recipe|craftRecipe)\s+([\w\s().\[\]-]+?)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
 ENTITY_RECIPE_PATTERN: Final[re.compile] = re.compile(r"^\s*entity\s+([\w-]+)\s*\{(?:(?!^\s*entity).)*?component\s+\w+\s*\{.*?category\s*=\s*([^,]+)", re.MULTILINE | re.IGNORECASE | re.DOTALL)
+# entity 中带DisplayName的映射（包括 ES_xxx 这种样式 entity）
+ENTITY_DISPLAYNAME_PATTERN: Final[re.Pattern] = re.compile(r"^\s*entity\s+([\w-]+)\s*\{(?:(?!^\s*entity).)*?DisplayName\s*=\s*(.*?)(?:,|\n|$)", re.MULTILINE | re.IGNORECASE | re.DOTALL)
+# entity 中UiConfig里的entityStyle
+ENTITY_STYLE_PATTERN: Final[re.Pattern] = re.compile(r"^\s*entity\s+([\w-]+)\s*\{(?:(?!^\s*entity).)*?component\s+UiConfig\s*\{(?:(?!^\s*component).)*?entityStyle\s*=\s*([\w-]+)", re.MULTILINE | re.IGNORECASE | re.DOTALL)
 CATEGORY_PATTERN: Final[re.compile] = re.compile(r"^\s*category\s*=\s*([^,]+)", re.MULTILINE | re.IGNORECASE)
 DISPLAY_NAME_PATTERN: Final[re.compile] = re.compile(r"DisplayName\s*=\s*(.*?)(?:,|\n|$)")
 RECIPE_FORMAT_PATTERN_1: Final[re.compile] = re.compile(r'([a-z\d])([A-Z])')
@@ -54,6 +58,12 @@ class Config:
             self.RECIPE_PREFIX = parser.get('Prefixes', 'recipe_prefix')
         except (configparser.NoSectionError, configparser.NoOptionError) as e:
             raise ValueError(f"错误：配置文件 '{CONFIG_FILE}' 中缺少必要的配置项: {e}")
+
+def normalize_recipe_key(key: str) -> str:
+    """标准化配方键, 移除 'Recipe_' 前缀以便于比较."""
+    if key.lower().startswith("recipe_"):
+        return key[7:]
+    return key
 
 def get_old_file_content(file_path: Path) -> str | None:
     git_path = file_path.as_posix()
@@ -169,6 +179,28 @@ def extract_recipe_names(text_content, config, source_filename: str):
     results = {}
     key_map = {}
 
+    style_display_map = {}
+    for m in ENTITY_DISPLAYNAME_PATTERN.finditer(text_content):
+        entity_name_raw, display_raw = m.groups()
+        entity_name = entity_name_raw.strip()
+
+        display_name = display_raw.strip()
+        if display_name.endswith(','):
+            display_name = display_name[:-1].strip()
+        if display_name.startswith('"') and display_name.endswith('"'):
+            display_name = display_name[1:-1]
+
+        if entity_name and display_name:
+            style_display_map[entity_name] = display_name
+
+    entity_style_map = {}
+    for m in ENTITY_STYLE_PATTERN.finditer(text_content):
+        entity_name_raw, style_name_raw = m.groups()
+        entity_name = entity_name_raw.strip()
+        style_name = style_name_raw.strip()
+        if entity_name and style_name:
+            entity_style_map[entity_name] = style_name
+
     # 处理 recipe 格式
     for recipe_match in RECIPE_PATTERN.finditer(text_content):
         original_name = recipe_match.group(1).strip()
@@ -202,8 +234,22 @@ def extract_recipe_names(text_content, config, source_filename: str):
         if not entity_name:
             continue
 
-        key = f"Recipe_{entity_name}"
-        line = f'{key} = "{entity_name}",'
+        display_name = None
+        style_name = entity_style_map.get(entity_name)
+        if style_name:
+            display_name = style_display_map.get(style_name)
+        if display_name is None:
+            display_name = style_display_map.get(entity_name)
+
+        if display_name:
+            base_id = display_name.replace(' ', '')
+            key = f"Recipe_{base_id}"
+            value = display_name
+        else:
+            key = f"Recipe_{entity_name}"
+            value = entity_name
+
+        line = f'{key} = "{value}",'
         results[key] = line
         key_map[key] = "Recipes"
 
@@ -352,7 +398,7 @@ def process_single_mod(mod_root_path, config, vanilla_keys):
 
     logging.info(f"\n--- 阶段 2: 扫描所有 Media 路径下的 Scripts (L0) ---")
     generated_data = {}
-    local_known_en_keys = set(en_data_raw.keys())
+    local_known_en_keys_normalized = {normalize_recipe_key(k) for k in en_data_raw.keys()}
 
     for media_path in active_media_paths:
         scripts_dir = find_case_insensitive_dir(media_path, "scripts")
@@ -377,11 +423,13 @@ def process_single_mod(mod_root_path, config, vanilla_keys):
                 
                 current_generated = {**items_data, **recipes_data}
                 for key, line in current_generated.items():
-                    if key not in local_known_en_keys:
+                    normalized_key = normalize_recipe_key(key)
+                    if normalized_key not in local_known_en_keys_normalized:
                         if key not in generated_data:
                             if key in items_data: new_items += 1
                             if key in recipes_data: new_recipes += 1
-                        generated_data[key] = line
+                            generated_data[key] = line
+                            local_known_en_keys_normalized.add(normalized_key)
 
             except Exception as e: logging.error(f"    处理文件 {file_path.name} 时发生错误: {e}")
             if new_items or new_recipes:
