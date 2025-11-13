@@ -55,6 +55,12 @@ class Config:
         except (configparser.NoSectionError, configparser.NoOptionError) as e:
             raise ValueError(f"错误：配置文件 '{CONFIG_FILE}' 中缺少必要的配置项: {e}")
 
+def normalize_recipe_key(key: str) -> str:
+    """标准化配方键, 移除 'Recipe_' 前缀以便于比较."""
+    if key.lower().startswith("recipe_"):
+        return key[7:]
+    return key
+
 def get_old_file_content(file_path: Path) -> str | None:
     git_path = file_path.as_posix()
     command = ["git", "show", f"HEAD:{git_path}"]
@@ -352,7 +358,7 @@ def process_single_mod(mod_root_path, config, vanilla_keys):
 
     logging.info(f"\n--- 阶段 2: 扫描所有 Media 路径下的 Scripts (L0) ---")
     generated_data = {}
-    local_known_en_keys = set(en_data_raw.keys())
+    local_known_en_keys_normalized = {normalize_recipe_key(k) for k in en_data_raw.keys()}
 
     for media_path in active_media_paths:
         scripts_dir = find_case_insensitive_dir(media_path, "scripts")
@@ -377,11 +383,13 @@ def process_single_mod(mod_root_path, config, vanilla_keys):
                 
                 current_generated = {**items_data, **recipes_data}
                 for key, line in current_generated.items():
-                    if key not in local_known_en_keys:
+                    normalized_key = normalize_recipe_key(key)
+                    if normalized_key not in local_known_en_keys_normalized:
                         if key not in generated_data:
                             if key in items_data: new_items += 1
                             if key in recipes_data: new_recipes += 1
-                        generated_data[key] = line
+                            generated_data[key] = line
+                            local_known_en_keys_normalized.add(normalized_key)
 
             except Exception as e: logging.error(f"    处理文件 {file_path.name} 时发生错误: {e}")
             if new_items or new_recipes:
