@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-14 00:34:48 UTC+08:00`*
+*最后更新于：`2025-11-14 04:13:41 UTC+08:00`*
 
 ---
 
@@ -17,25 +17,10 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251113_230814``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251114_041340``)**
 
-*   **AmmoMaker (ID: 2788256295)**: 新增 `1` 条, 移除 `1` 条。
-*   **ClothingLine (ID: 3282215361)**: 新增 `0` 条, 移除 `1` 条。
-*   **FactoryPieces (ID: 3399263137)**: 新增 `39` 条, 移除 `39` 条。
-*   **StandardizedVehicleUpgrades3Core (ID: 3403490889)**: 新增 `0` 条, 移除 `2` 条。
-*   **Training (ID: 3417621776)**: 新增 `1` 条, 移除 `1` 条。
-*   **Simple_Wall_Building (ID: 3429904483)**: 新增 `53` 条, 移除 `53` 条。
-*   **Outdoor_TIles (ID: 3430305726)**: 新增 `3` 条, 移除 `3` 条。
-*   **Farming_Expansion (ID: 3444499190)**: 新增 `1` 条, 移除 `1` 条。
-*   **Buildables_Expansion (ID: 3463117260)**: 新增 `1` 条, 移除 `482` 条。
-*   **MyOwnWell (ID: 3549290115)**: 新增 `0` 条, 移除 `1` 条。
-*   **LegendaryDuffelbag (ID: 3558839307)**: 新增 `0` 条, 移除 `5` 条。
-*   **Project_Summer_Car (ID: 3564950449)**: 新增 `0` 条, 移除 `8` 条。
-*   **TacticalSheathsReborn (ID: 3569158406)**: 新增 `0` 条, 移除 `1` 条。
-*   **Vanilla_Foods_Expanded (ID: 3577903007)**: 新增 `0` 条, 移除 `194` 条。
-*   **RicksMLC_GunLightPatch (ID: 3595628283)**: 新增 `0` 条, 移除 `2` 条。
-*   **[B42]_Rip_More_Clothing (ID: 3596259242)**: 新增 `0` 条, 移除 `11` 条。
-*   **ShelterHold_Beehive (ID: 3596827035)**: 新增 `0` 条, 移除 `2` 条。
+*   **Vanilla_Foods_Expanded (ID: 3577903007)**: 新增 `1` 条, 移除 `266` 条。
+*   **STA_PryOpen (ID: 3579640010)**: 新增 `36` 条, 移除 `1` 条。
 
 ---
 
@@ -501,7 +486,7 @@
 | Industrial Revolution Vehicle Parts | 3404745035 | 0 | 16 | 0 | 16 |
 | Industrial Revolution B42 | 3400131934 | 0 | 205 | 0 | 205 |
 | [B41/B42] I Need More Style: Clothing Edition | 2861393067 | 0 | 99 | 0 | 99 |
-| [B41/B42] Injectors | 3437429771 | 0 | 0 | 0 | 49 |
+| [B41/B42] Injectors [Tooltips Hotfix] | 3437429771 | 0 | 0 | 0 | 49 |
 | Injury Indicator [B42] | 3565698092 | 0 | 33 | 0 | 33 |
 | The Survivalist's Gear | 3404876149 | 0 | 6 | 1 | 6 |
 | Inspect Weapon | 2948824747 | 0 | 22 | 0 | 22 |
