@@ -1,0 +1,71 @@
+module Base
+{
+
+    model PeopleEater_spolier
+	{
+		mesh = vehicles/PeopleEater|spoiler,
+		shader = basicEffect,
+		scale = 1,      
+	}
+
+    model PeopleEater_weapon
+	{
+		mesh = vehicles/PeopleEater|wapon,
+        texture = Vehicles/Vehicles_Tatrapan_armor,
+		shader = basicEffect,
+		scale = 1,
+	}
+
+    template vehicle PeopleEater_accesories
+    {
+        template = ATA2Visual/part/ATA2VisualSpoilerRear,
+        part ATA2VisualSpoilerRear 
+        {
+
+           area = TireRearRight,
+            
+            model Default
+            {
+                file = PeopleEater_spoiler,
+            }
+        }
+
+        template = ATA2Visual/part/ATA2VisualSkirtsSide,
+        part ATA2VisualSkirtsSide
+        {
+            area = TireRearLeft,
+
+
+            model Default
+            {
+                file = PeopleEater_weapon,
+            }
+        }
+        part ATAVisual*
+        {
+            category = tuning,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+
+            table install
+            {
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+
+            table uninstall
+            {
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+
+            lua
+            {
+                create = ATATuning.Create.Chance15,
+                init = ATATuning.Init.Default,
+            }
+        }
+    }
+}

@@ -1,0 +1,135 @@
+module Base
+{
+    model PeopleEater_leftfrontseat
+	{
+		mesh = vehicles/PeopleEater|seatfl,
+        texture = Vehicles/interiorpa,
+		shader = basicEffect,
+		scale = 1,
+	}
+	model PeopleEater_rightfrontseat
+	{
+		mesh = vehicles/PeopleEater|seatfr,
+        texture = Vehicles/interiorpa,
+		shader = basicEffect,
+		scale = 1,
+	}
+        model PeopleEater_leftmiddleseat
+	{
+		mesh = vehicles/PeopleEater|seatrl,
+        texture = Vehicles/interiorpa,
+		shader = basicEffect,
+		scale = 1,
+	}
+        model PeopleEater_leftrearseat
+	{
+		mesh = vehicles/PeopleEater|seatrr,
+        texture = Vehicles/interiorpa,
+		shader = basicEffect,
+		scale = 1,
+	}
+        model PeopleEater_rightrearseat
+	{
+		mesh = vehicles/PeopleEater|seata,
+        texture = Vehicles/interiorpa,
+		shader = basicEffect,
+		scale = 1,
+	}
+        model PeopleEater_rightmiddleseat
+	{
+		mesh = vehicles/PeopleEater|seatb,
+        texture = Vehicles/interiorpa,
+		shader = basicEffect,
+		scale = 1,
+	}
+
+
+    template vehicle PeopleEater_seats
+    {
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+                template = Seat/part/SeatRearLeft,
+		template = Seat/part/SeatRearRight,
+                template = Seat/part/SeatMiddleLeft,
+		template = Seat/part/SeatMiddleRight,
+
+		part SeatMiddle*
+		{
+			door =,
+		}
+
+		part SeatFrontLeft
+		{
+			model leftfrontseat
+			{
+				file = PeopleEater_leftfrontseat,
+			}
+
+			area = SeatFrontLeft,
+			
+		}
+
+		part SeatFrontRight
+		{
+			model rightfrontseat
+			{
+				file = PeopleEater_rightfrontseat,
+			}
+
+			area = SeatFrontRight,
+			
+		}
+
+		part SeatMiddleLeft
+		{
+			model leftmiddleseat
+			{
+				file = PeopleEater_leftmiddleseat,
+			}
+
+			
+			
+		}
+
+		part SeatMiddleRight
+		{
+			model rightmiddleseat
+			{
+				file = PeopleEater_rightmiddleseat,
+			}
+
+			
+			
+		}
+
+		part SeatRearLeft
+		{
+			model leftrearseat
+			{
+				file = PeopleEater_leftrearseat,
+			}
+
+			area = SeatRearLeft,
+			
+		}
+
+		part SeatRearRight
+		{
+			model rightrearseat
+			{
+				file = PeopleEater_rightrearseat,
+			}
+
+			area = SeatRearRight,
+			
+		}
+
+	
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+		}
+    }
+}
