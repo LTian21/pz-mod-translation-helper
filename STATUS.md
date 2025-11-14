@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-14 13:33:59 UTC+08:00`*
+*最后更新于：`2025-11-14 13:41:07 UTC+08:00`*
 
 ---
 
@@ -212,7 +212,7 @@
 | '85 Pontiac Parisienne | 3413706334 | 3 | 17 | 0 | 20 |
 | [B42] Home Inventory Improved | 3522009163 | 3 | 0 | 0 | 63 |
 | Ducks+ | 3409153536 | 3 | 89 | 0 | 92 |
-| Gunpoint Redemption [B.41/B.42] | 3078291265 | 3 | 11 | 0 | 14 |
+| Gunpoint Redemption [B.41] | 3078291265 | 3 | 11 | 0 | 14 |
 | Halo Marine Armor [B41/B42] | 3507919075 | 3 | 25 | 0 | 28 |
 | Money From Credit Cards | 3428650803 | 3 | 21 | 0 | 24 |
 | [B42]Sector-7 Breach | 3513107552 | 3 | 9 | 3 | 12 |
