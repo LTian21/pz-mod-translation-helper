@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-14 04:15:51 UTC+08:00`*
+*最后更新于：`2025-11-14 09:47:18 UTC+08:00`*
 
 ---
 
@@ -82,7 +82,7 @@
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | [B42] Essential Recipes [UPDATED] | 3401825906 | 62 | 69 | 64 | 131 |
-| ST Additions - Pry Open | 3579640010 | 62 | 77 | 9 | 139 |
+| ST Additions - Pry Open | 3579640010 | 62 | 77 | 0 | 139 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 59 | 361 | 0 | 421 |
 | Cap'N's Tricky Traits 🎃 | 3596746538 | 59 | 0 | 0 | 59 |
 | Legendary Katana | 3418366499 | 58 | 72 | 1 | 130 |
