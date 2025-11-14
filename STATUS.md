@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-14 00:34:48 UTC+08:00`*
+*最后更新于：`2025-11-14 10:08:48 UTC+08:00`*
 
 ---
 
@@ -9,33 +9,18 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``70804`` 条 |
-| **待翻译条目** | ``14332`` 条 |
-| **已翻译条目** | ``56472`` 条 |
-| **待校对条目** | ``51893`` 条 |
-| **已支持 Mod 数量** | ``656`` 个 |
+| **模组总条目** | ``76165`` 条 |
+| **待翻译条目** | ``19707`` 条 |
+| **已翻译条目** | ``56458`` 条 |
+| **待校对条目** | ``51879`` 条 |
+| **已支持 Mod 数量** | ``660`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251113_230814``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251114_041340``)**
 
-*   **AmmoMaker (ID: 2788256295)**: 新增 `1` 条, 移除 `1` 条。
-*   **ClothingLine (ID: 3282215361)**: 新增 `0` 条, 移除 `1` 条。
-*   **FactoryPieces (ID: 3399263137)**: 新增 `39` 条, 移除 `39` 条。
-*   **StandardizedVehicleUpgrades3Core (ID: 3403490889)**: 新增 `0` 条, 移除 `2` 条。
-*   **Training (ID: 3417621776)**: 新增 `1` 条, 移除 `1` 条。
-*   **Simple_Wall_Building (ID: 3429904483)**: 新增 `53` 条, 移除 `53` 条。
-*   **Outdoor_TIles (ID: 3430305726)**: 新增 `3` 条, 移除 `3` 条。
-*   **Farming_Expansion (ID: 3444499190)**: 新增 `1` 条, 移除 `1` 条。
-*   **Buildables_Expansion (ID: 3463117260)**: 新增 `1` 条, 移除 `482` 条。
-*   **MyOwnWell (ID: 3549290115)**: 新增 `0` 条, 移除 `1` 条。
-*   **LegendaryDuffelbag (ID: 3558839307)**: 新增 `0` 条, 移除 `5` 条。
-*   **Project_Summer_Car (ID: 3564950449)**: 新增 `0` 条, 移除 `8` 条。
-*   **TacticalSheathsReborn (ID: 3569158406)**: 新增 `0` 条, 移除 `1` 条。
-*   **Vanilla_Foods_Expanded (ID: 3577903007)**: 新增 `0` 条, 移除 `194` 条。
-*   **RicksMLC_GunLightPatch (ID: 3595628283)**: 新增 `0` 条, 移除 `2` 条。
-*   **[B42]_Rip_More_Clothing (ID: 3596259242)**: 新增 `0` 条, 移除 `11` 条。
-*   **ShelterHold_Beehive (ID: 3596827035)**: 新增 `0` 条, 移除 `2` 条。
+*   **Vanilla_Foods_Expanded (ID: 3577903007)**: 新增 `1` 条, 移除 `266` 条。
+*   **STA_PryOpen (ID: 3579640010)**: 新增 `36` 条, 移除 `1` 条。
 
 ---
 
@@ -43,6 +28,7 @@
 
 | Mod 名称 | Mod ID | 待翻译条目 | 待校对条目 | 缺少原文条目 | 模组总条目 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| Transmog [Reforged] | 3599514194 | 5040 | 9 | 0 | 5049 |
 | Authentic Z | 2335368829 | 2276 | 1405 | 310 | 3777 |
 | Guns of 93: B42 Test Build (Unstable) | 3183820077 | 748 | 1755 | 1129 | 2553 |
 | Even More Traits | 2855320431 | 606 | 62 | 2 | 668 |
@@ -55,6 +41,7 @@
 | [B42] School's Out: Anime-Style Student Uniforms | 3404301631 | 285 | 1 | 6 | 286 |
 | Immersive Lore | 3000924731 | 273 | 109 | 0 | 382 |
 | Pomp's Items - Just the Food | 2792348686 | 267 | 397 | 3 | 664 |
+| Todo Caserito | 3600616323 | 265 | 0 | 0 | 265 |
 | [B42] WarThunderVehicleLibrary | 3399660368 | 243 | 42 | 9 | 285 |
 | UNOFFICIAL Fools New Containers for B42 | 3535295548 | 237 | 91 | 91 | 328 |
 | organizedCategories: Core | 3370707195 | 230 | 253 | 1 | 483 |
@@ -79,7 +66,7 @@
 | [B42] Mastered Traits | 3423601261 | 86 | 0 | 0 | 86 |
 | [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
 | Lifestyle: Hobbies | 3403870858 | 85 | 4082 | 28 | 4167 |
-| Vanilla Foods Expanded | 3577903007 | 85 | 1865 | 9 | 1950 |
+| Vanilla Foods Expanded | 3577903007 | 85 | 1859 | 3 | 1944 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
 | that DAMN Library | 3171167894 | 77 | 383 | 0 | 460 |
@@ -95,6 +82,7 @@
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | [B42] Essential Recipes [UPDATED] | 3401825906 | 62 | 69 | 64 | 131 |
+| ST Additions - Pry Open | 3579640010 | 62 | 77 | 0 | 139 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 59 | 361 | 0 | 421 |
 | Cap'N's Tricky Traits 🎃 | 3596746538 | 59 | 0 | 0 | 59 |
 | Legendary Katana | 3418366499 | 58 | 72 | 1 | 130 |
@@ -106,10 +94,10 @@
 | [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 51 | 0 | 0 | 52 |
 | Time Decreases Vehicle Condition [B42] | 3448375286 | 50 | 0 | 0 | 50 |
 | [B42]Zevon's Medieval Armory | 3540834058 | 46 | 66 | 3 | 112 |
-| ST Additions - Pry Open | 3579640010 | 45 | 94 | 9 | 139 |
 | [B42] Buildables Expansion | 3463117260 | 44 | 622 | 7 | 666 |
 | Functional Clipboard [B41/B42] | 3387382165 | 44 | 0 | 0 | 44 |
 | Red Days | 3516166810 | 43 | 61 | 15 | 104 |
+| Better Clothing Info | 3604080281 | 42 | 0 | 0 | 42 |
 | Inventory Tetris - Grid Based Inventory Overhaul [B42] | 3397561666 | 42 | 0 | 0 | 42 |
 | Factory Pieces | 3399263137 | 40 | 101 | 0 | 141 |
 | My So-Called Snack | 2877535263 | 40 | 184 | 0 | 224 |
@@ -171,6 +159,7 @@
 | Low Condition Guns [B41/B42] | 3579180724 | 11 | 0 | 0 | 11 |
 | Has Been Read | 2544353492 | 11 | 45 | 0 | 56 |
 | Stairs Alert | 3044807092 | 11 | 3 | 0 | 14 |
+| Teto Plushies | 3603577358 | 11 | 0 | 0 | 11 |
 | U.S. M998 Humvee by Papa_Chad | 3554424111 | 11 | 28 | 0 | 39 |
 | Vehicle Class Overhaul [B42 Compatible] | 3407507873 | 11 | 4 | 4 | 15 |
 | [J&G] Trauma Responder Uniform [B42/41] | 3443982326 | 11 | 46 | 0 | 63 |
@@ -501,7 +490,7 @@
 | Industrial Revolution Vehicle Parts | 3404745035 | 0 | 16 | 0 | 16 |
 | Industrial Revolution B42 | 3400131934 | 0 | 205 | 0 | 205 |
 | [B41/B42] I Need More Style: Clothing Edition | 2861393067 | 0 | 99 | 0 | 99 |
-| [B41/B42] Injectors | 3437429771 | 0 | 0 | 0 | 49 |
+| [B41/B42] Injectors [Tooltips Hotfix] | 3437429771 | 0 | 0 | 0 | 49 |
 | Injury Indicator [B42] | 3565698092 | 0 | 33 | 0 | 33 |
 | The Survivalist's Gear | 3404876149 | 0 | 6 | 1 | 6 |
 | Inspect Weapon | 2948824747 | 0 | 22 | 0 | 22 |
