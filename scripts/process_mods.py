@@ -724,6 +724,23 @@ def main():
         global_key_source_map[mod_id] = workshop_key_source_map
         logging.info(f"\n--- 已为 Mod ID {mod_id} 更新 {len(workshop_key_source_map)} 条键来源映射 ---")
         
+        if exclusion_keys:
+            logging.info(f"\n--- 正在应用 {len(exclusion_keys)} 个排除项 ---")
+            original_en_count = len(workshop_en_base)
+            original_cn_count = len(workshop_cn_base)
+            original_conflict_count = len(workshop_conflict_data)
+
+            workshop_en_base = {k: v for k, v in workshop_en_base.items() if k not in exclusion_keys}
+            workshop_cn_base = {k: v for k, v in workshop_cn_base.items() if k not in exclusion_keys}
+            workshop_conflict_data = {k: v for k, v in workshop_conflict_data.items() if k not in exclusion_keys}
+            
+            if mod_id in global_key_source_map:
+                global_key_source_map[mod_id] = {k: v for k, v in global_key_source_map[mod_id].items() if k not in exclusion_keys}
+
+            logging.info(f"    - 从英文数据中移除了 {original_en_count - len(workshop_en_base)} 个键。")
+            logging.info(f"    - 从中文数据中移除了 {original_cn_count - len(workshop_cn_base)} 个键。")
+            logging.info(f"    - 从冲突数据中移除了 {original_conflict_count - len(workshop_conflict_data)} 个键。")
+
         final_output = {**workshop_en_base, **workshop_cn_base}
         en_todo_list, cn_only_list = {}, {}
         en_keys, cn_keys = set(workshop_en_base.keys()), set(workshop_cn_base.keys())
@@ -737,7 +754,7 @@ def main():
             else:
                 current_todo_list[key] = en_line
         for key, line in current_todo_list.items():
-            if key not in completed_keys and key not in exclusion_keys:
+            if key not in completed_keys:
                 en_todo_list[key] = line
         for key, cn_line in workshop_cn_base.items():
             if key not in en_keys:

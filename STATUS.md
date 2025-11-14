@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-14 13:42:41 UTC+08:00`*
+*最后更新于：`2025-11-14 14:36:17 UTC+08:00`*
 
 ---
 
@@ -10,17 +10,16 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``76165`` 条 |
-| **待翻译条目** | ``19468`` 条 |
-| **已翻译条目** | ``56697`` 条 |
+| **待翻译条目** | ``19462`` 条 |
+| **已翻译条目** | ``56703`` 条 |
 | **待校对条目** | ``51706`` 条 |
 | **已支持 Mod 数量** | ``660`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251114_041340``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251114_143616``)**
 
-*   **Vanilla_Foods_Expanded (ID: 3577903007)**: 新增 `1` 条, 移除 `266` 条。
-*   **STA_PryOpen (ID: 3579640010)**: 新增 `36` 条, 移除 `1` 条。
+*   **TransmogDefinitiveEdition (ID: 3599514194)**: 新增 `0` 条, 移除 `5000` 条。
 
 ---
 
@@ -136,7 +135,6 @@
 | Equipment UI - Paper Doll Equipment Interface [B42/41] | 2950902979 | 18 | 0 | 0 | 18 |
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
-| ST Additions - Pry Open | 3579640010 | 18 | 0 | 0 | 139 |
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
 | [B42/41] Repairable Windows | 3378304610 | 17 | 0 | 2 | 17 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
@@ -149,6 +147,7 @@
 | [B41/42] Known And Collected | 2881764317 | 13 | 0 | 0 | 13 |
 | Legendary Satchel | 3560352772 | 13 | 12 | 6 | 25 |
 | Fallout - NCR Trooper Pack | 3508243687 | 13 | 33 | 13 | 46 |
+| ST Additions - Pry Open | 3579640010 | 12 | 0 | 0 | 139 |
 | The Calm Before The Storm | 2953621037 | 12 | 0 | 0 | 61 |
 | Willowbrook Bastion! | 3479667649 | 12 | 15 | 1 | 27 |
 | [B41\B42] DBG Crowbar Unlock | 3555407625 | 11 | 225 | 46 | 236 |
