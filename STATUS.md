@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-14 14:43:50 UTC+08:00`*
+*最后更新于：`2025-11-15 04:04:34 UTC+08:00`*
 
 ---
 
@@ -17,9 +17,10 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251114_143616``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251115_040433``)**
 
-*   **TransmogDefinitiveEdition (ID: 3599514194)**: 新增 `0` 条, 移除 `5000` 条。
+*   **More_Car_Features_+_Spawn_Zones_Expansion (ID: 3520758551)**: 新增 `2` 条, 移除 `0` 条。
+*   **LongTermPreservationExtended (ID: 3597673472)**: 新增 `0` 条, 移除 `14` 条。
 
 ---
 
