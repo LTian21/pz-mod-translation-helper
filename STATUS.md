@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-15 04:04:34 UTC+08:00`*
+*最后更新于：`2025-11-15 04:06:15 UTC+08:00`*
 
 ---
 
@@ -9,11 +9,11 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``71165`` 条 |
-| **待翻译条目** | ``14462`` 条 |
-| **已翻译条目** | ``56703`` 条 |
-| **待校对条目** | ``51706`` 条 |
-| **已支持 Mod 数量** | ``660`` 个 |
+| **模组总条目** | ``71232`` 条 |
+| **待翻译条目** | ``14600`` 条 |
+| **已翻译条目** | ``56632`` 条 |
+| **待校对条目** | ``51635`` 条 |
+| **已支持 Mod 数量** | ``661`` 个 |
 
 ---
 
@@ -55,6 +55,7 @@
 | Trap Manager | 3566766862 | 159 | 3 | 1 | 162 |
 | Airdrops | 3590950467 | 156 | 0 | 0 | 156 |
 | [B42]Kill Cell - Armory | 3569050120 | 143 | 0 | 0 | 143 |
+| [Federal Rangers] CHIMERA V9 | 3564110652 | 134 | 0 | 0 | 134 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | Christmas Time [b41/42] | 2903870217 | 121 | 53 | 77 | 174 |
 | Pocket Kittens (B42) | 3568029240 | 120 | 14 | 7 | 134 |
@@ -202,6 +203,7 @@
 | '85 Chevrolet Caprice / Impala | 3413704851 | 4 | 37 | 0 | 41 |
 | '85 Oldsmobile Delta 88 | 3418253716 | 4 | 17 | 0 | 21 |
 | Baby Animal Food | 3422249642 | 4 | 9 | 4 | 13 |
+| Gunpoint Redemption [B.41] | 3078291265 | 4 | 10 | 0 | 14 |
 | Imperial Chops! (Extra Beard Option) | 3465865657 | 4 | 7 | 0 | 11 |
 | Ratchat's Outdoor Tiles | 3430305726 | 4 | 1 | 1 | 5 |
 | B42 - Process Scrap Metal | 3392186364 | 4 | 4 | 4 | 8 |
@@ -212,9 +214,9 @@
 | '85 Pontiac Parisienne | 3413706334 | 3 | 17 | 0 | 20 |
 | [B42] Home Inventory Improved | 3522009163 | 3 | 0 | 0 | 63 |
 | Ducks+ | 3409153536 | 3 | 89 | 0 | 92 |
-| Gunpoint Redemption [B.41] | 3078291265 | 3 | 11 | 0 | 14 |
 | Halo Marine Armor [B41/B42] | 3507919075 | 3 | 25 | 0 | 28 |
 | Money From Credit Cards | 3428650803 | 3 | 21 | 0 | 24 |
+| More Car Features + Spawn Zones Expansion | 3520758551 | 3 | 19 | 0 | 22 |
 | [B42]Sector-7 Breach | 3513107552 | 3 | 9 | 3 | 12 |
 | Shield Mode (Secondary Hand Equip) (B41/B42) | 3383001527 | 3 | 6 | 2 | 9 |
 |  Wearable Towels [B41/B42] | 3203159242 | 3 | 35 | 32 | 40 |
@@ -532,7 +534,6 @@
 | [B42] More Item Information | 3494474677 | 0 | 67 | 0 | 67 |
 | More Maps [B42] | 3390897023 | 0 | 9 | 0 | 9 |
 | More Wood To Charcoal | 3425726710 | 0 | 6 | 0 | 6 |
-| More Car Features + Spawn Zones Expansion | 3520758551 | 0 | 20 | 0 | 20 |
 | [B41/B42] More Immersive Vehicles | 3162566044 | 0 | 13 | 0 | 13 |
 | MRE XIII (1993) - Meal Ready to Eat MOD Real version for build 42 | 3406930410 | 0 | 0 | 13 | 124 |
 | [Reworked] Madax Weapon Pack - B42 | 2732407704 | 0 | 73 | 0 | 73 |
@@ -555,7 +556,7 @@
 | [B42] Noir's Rifle Slings | 3388107363 | 0 | 10 | 0 | 10 |
 | Faster Tree Chopping (was: No Stress From Tree Chopping) | 3460704724 | 0 | 6 | 0 | 6 |
 | Open All Containers [B42/41] | 3465040406 | 0 | 84 | 0 | 84 |
-| Ranger Operator | 3452171674 | 0 | 142 | 59 | 142 |
+| Ranger Operator | 3452171674 | 0 | 73 | 59 | 73 |
 | Organized Plunderer | 3594804663 | 0 | 14 | 0 | 14 |
 | Addicted To Weight | 2604943386 | 0 | 18 | 2 | 18 |
 | Alarm Syndrome | 3409527910 | 0 | 8 | 0 | 8 |
