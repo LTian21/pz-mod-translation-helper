@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-14 13:41:07 UTC+08:00`*
+*最后更新于：`2025-11-14 13:42:41 UTC+08:00`*
 
 ---
 
@@ -136,7 +136,7 @@
 | Equipment UI - Paper Doll Equipment Interface [B42/41] | 2950902979 | 18 | 0 | 0 | 18 |
 | Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
-| ST Additions - Pry Open | 3579640010 | 18 | 0 | 9 | 139 |
+| ST Additions - Pry Open | 3579640010 | 18 | 0 | 0 | 139 |
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
 | [B42/41] Repairable Windows | 3378304610 | 17 | 0 | 2 | 17 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
