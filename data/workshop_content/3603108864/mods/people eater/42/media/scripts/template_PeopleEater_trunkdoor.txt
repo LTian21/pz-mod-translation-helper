@@ -1,0 +1,93 @@
+module Base
+{
+    model PeopleEater_TrunkDoor
+    {
+        mesh = vehicles/PeopleEater|trunk,
+        shader = vehicle,
+		static = TRUE,
+		scale = 1,
+		boneWeight = TrunkBone 1.0,
+    }
+
+	template vehicle PeopleEater_trunkdoor
+	{
+        template = TrunkDoor,
+
+		part TrunkDoor
+		{
+            model Default
+			{
+				file = PeopleEater_TrunkDoor,
+			}
+
+			category = bodywork,
+            
+			area = TruckBed,
+            mechanicRequireKey = true,
+			repairMechanic = true,
+
+			anim Close
+			{                        
+                                sound = VehicleTrunkCloseSportsCar,       
+				anim = Trunk_closing,
+				reverse = FALSE,
+				rate = 2.0,
+			}
+			anim Open
+			{
+                                sound = VehicleTrunkOpenSportsCar,
+				anim = Trunk_closing,
+				reverse = TRUE,
+				rate = 2.0,
+			}
+			anim Closed
+			{
+				anim = Trunk_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+			anim Opened
+			{
+				anim = Trunk_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = ATATuning2.InstallComplete.Door,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = ATATuning2.UninstallComplete.Door,
+				requireUninstalled = ATA2VisualSpoilerRear,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.DefaultModel,
+                init = ATATuning2.Init.Door,
+                update = Vehicles.Update.TrunkDoor,
+                use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}
