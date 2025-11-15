@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-16 04:04:02 UTC+08:00`*
+*最后更新于：`2025-11-16 04:05:49 UTC+08:00`*
 
 ---
 
@@ -9,11 +9,11 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``71232`` 条 |
-| **待翻译条目** | ``13488`` 条 |
-| **已翻译条目** | ``57744`` 条 |
-| **待校对条目** | ``50826`` 条 |
-| **已支持 Mod 数量** | ``661`` 个 |
+| **模组总条目** | ``71303`` 条 |
+| **待翻译条目** | ``13536`` 条 |
+| **已翻译条目** | ``57767`` 条 |
+| **待校对条目** | ``50849`` 条 |
+| **已支持 Mod 数量** | ``666`` 个 |
 
 ---
 
@@ -30,7 +30,7 @@
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Authentic Z | 2335368829 | 2276 | 1405 | 310 | 3777 |
 | Guns of 93: B42 Test Build (Unstable) | 3183820077 | 748 | 1755 | 1129 | 2553 |
-| Even More Traits | 2855320431 | 606 | 62 | 2 | 668 |
+| Even More Traits | 2855320431 | 606 | 12 | 2 | 618 |
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
 | Pomp's Items - My Little Pony | 2792387747 | 377 | 586 | 1 | 963 |
@@ -93,6 +93,7 @@
 | My So-Called Snack | 2877535263 | 40 | 184 | 0 | 224 |
 | Transmog [Reforged] | 3599514194 | 40 | 9 | 0 | 49 |
 | Tsar's Common Library B42 | 3402491515 | 40 | 339 | 122 | 379 |
+| [B42] 10 Years Later - Light edition (Just overlay / No trees) | 3390258342 | 39 | 0 | 0 | 39 |
 | The Last of Us: Factions & Gear [B41/B42] | 3348036710 | 39 | 72 | 18 | 113 |
 | Minimal Display Bars + Nutritions + Discomfort [B41/B42] | 3388844542 | 38 | 11 | 0 | 49 |
 | Logic Missing Recipes | 3540757743 | 38 | 0 | 0 | 38 |
@@ -123,7 +124,7 @@
 | Easy Drop'n'Loot | 2871469707 | 20 | 0 | 0 | 20 |
 | Common Sense | 2875848298 | 18 | 29 | 0 | 48 |
 | Equipment UI - Paper Doll Equipment Interface [B42/41] | 2950902979 | 18 | 0 | 0 | 18 |
-| Neat Crafting & Neat Building – XP Display & Mod Info | 3540503606 | 18 | 0 | 0 | 18 |
+| Neat Crafting & Neat Building – XP Display & Mod Info | 3540503606 | 18 | 12 | 2 | 30 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
 | [B42/41] Repairable Windows | 3378304610 | 17 | 0 | 2 | 17 |
@@ -186,6 +187,7 @@
 | '85 Chevrolet Caprice / Impala | 3413704851 | 4 | 37 | 0 | 41 |
 | '85 Oldsmobile Delta 88 | 3418253716 | 4 | 17 | 0 | 21 |
 | Baby Animal Food | 3422249642 | 4 | 9 | 4 | 13 |
+| Delete An Item | 3571106963 | 4 | 0 | 0 | 4 |
 | Gunpoint Redemption [B.41] | 3078291265 | 4 | 10 | 1 | 14 |
 | Imperial Chops! (Extra Beard Option) | 3465865657 | 4 | 7 | 0 | 11 |
 | Ratchat's Outdoor Tiles | 3430305726 | 4 | 1 | 1 | 5 |
@@ -216,8 +218,10 @@
 | [B42] Vanilla-Like Traits and Occupations | 3139034529 | 2 | 405 | 236 | 407 |
 | Melee Weapon Upgrade | 3394923321 | 2 | 1074 | 1 | 1076 |
 | Thief Expansion | 2596620950 | 2 | 68 | 0 | 70 |
+| AVA: Ranger Blazer | 3391400317 | 2 | 0 | 0 | 2 |
 | Proximity Inventory [B41/42] | 2847184718 | 2 | 19 | 0 | 21 |
 | PZK VLC (Vanilla look-like car pack) | 3217685049 | 2 | 693 | 6 | 695 |
+| Realistic Temperature Mod [B42] | 3600401184 | 2 | 0 | 0 | 56 |
 | Use Belt as Weapon [B42/41] | 3339423397 | 2 | 3 | 2 | 5 |
 | '86 Chevrolet CUCVs + M101A2 Trailer | 3428008364 | 1 | 82 | 1 | 83 |
 | '91 Ford Ranger | 3539691958 | 1 | 49 | 0 | 50 |
@@ -244,6 +248,7 @@
 | 1980 Mercedes Benz W123 People eater | 3603108864 | 1 | 0 | 0 | 1 |
 | Risky Unarmed | 3434796669 | 1 | 94 | 0 | 95 |
 | [OBSOLETE] RollBack Rain Collector Barrel | 3392186516 | 1 | 5 | 1 | 6 |
+| Ash's Gothic Style: Booty Skirt | 3377802217 | 1 | 0 | 0 | 1 |
 | [B41/B42] Simple Overhaul: Traits and Occupations (SOTO) | 2840805724 | 1 | 320 | 7 | 321 |
 | Simple Skill Books | 3291799176 | 1 | 124 | 0 | 125 |
 | [OUTDATED] Support Corps [B42] Sweet-release Update | 3409836763 | 1 | 603 | 5 | 604 |
@@ -583,7 +588,6 @@
 | Random Airdrops [B41/B42] | 3282789883 | 0 | 5 | 0 | 5 |
 | [B42/41] Reactive Sound Events | 2969551071 | 0 | 39 | 0 | 39 |
 | [B42/41] Read Book Bypassing Level Restrictions | 3319538177 | 0 | 0 | 0 | 11 |
-| Realistic Temperature Mod [B42] | 3600401184 | 0 | 0 | 0 | 54 |
 | Realistic Car Physics [B42] | 3559765660 | 0 | 0 | 6 | 92 |
 | Reaper's Hair & Beard | 3450583954 | 0 | 27 | 0 | 27 |
 | [B42] Rebalanced Yields: Butchering | 3564838872 | 0 | 0 | 0 | 1 |
@@ -649,6 +653,7 @@
 | Trunk Organizer | 3590632059 | 0 | 0 | 0 | 24 |
 | Ash's MK8 Trusty FireFighter Axe | 3400045232 | 0 | 5 | 0 | 5 |
 | TwisTonFire - Dude, Where Is My Car? | 3576268735 | 0 | 0 | 0 | 6 |
+| TwisTonFire - QoL Modpack | 3480305875 | 0 | 61 | 0 | 61 |
 | U.S. M113 APC by Papa_Chad | 2705655822 | 0 | 0 | 2 | 25 |
 | U.S. M163 VADS by Papa_Chad | 3598575779 | 0 | 0 | 0 | 2 |
 | [B42] UH-1B Helicopter | 3409723807 | 0 | 4 | 0 | 4 |
