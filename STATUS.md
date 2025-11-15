@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-15 18:51:41 UTC+08:00`*
+*最后更新于：`2025-11-15 22:13:58 UTC+08:00`*
 
 ---
 
@@ -10,8 +10,8 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``71232`` 条 |
-| **待翻译条目** | ``14307`` 条 |
-| **已翻译条目** | ``56925`` 条 |
+| **待翻译条目** | ``14086`` 条 |
+| **已翻译条目** | ``57146`` 条 |
 | **待校对条目** | ``51529`` 条 |
 | **已支持 Mod 数量** | ``661`` 个 |
 
@@ -52,7 +52,6 @@
 | RaccoonCityB42 | 3388468313 | 169 | 36 | 2 | 205 |
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
 | Trap Manager | 3566766862 | 159 | 3 | 1 | 162 |
-| Airdrops | 3590950467 | 156 | 0 | 0 | 156 |
 | [B42]Kill Cell - Armory | 3569050120 | 143 | 0 | 0 | 143 |
 | [Federal Rangers] CHIMERA V9 | 3564110652 | 134 | 0 | 0 | 134 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
@@ -84,7 +83,6 @@
 | Cap'N's Tricky Traits 🎃 | 3596746538 | 59 | 0 | 0 | 59 |
 | Legendary Katana | 3418366499 | 58 | 72 | 1 | 130 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 56 | 52 | 0 | 108 |
-| [B42] Ogrim Mod's - Machine Utils | 3555558732 | 56 | 0 | 0 | 56 |
 | Spongie's Character Customisation | 3414634809 | 53 | 16 | 0 | 69 |
 | [J&G] Firefighter Uniform [B42/41] | 3521263771 | 51 | 2 | 2 | 54 |
 | [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 51 | 0 | 0 | 52 |
@@ -166,7 +164,6 @@
 | [B42] Water Pipes (aka Plumbing) | 3546314080 | 10 | 44 | 0 | 54 |
 | Irrigation Pipes/Cluster Barrels | 3599339646 | 9 | 32 | 1 | 41 |
 | Immersive Suicide [B42/B41] | 3426448380 | 9 | 3 | 0 | 12 |
-| RV Life | 3553635874 | 9 | 0 | 0 | 9 |
 | Show Key Origin | 3501701205 | 9 | 0 | 0 | 9 |
 | [B41 & B42] Throw your bag across | 3391902125 | 9 | 0 | 0 | 9 |
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 9 | 45 | 2 | 55 |
@@ -350,6 +347,7 @@
 | Ada Wong - Voice [B42] | 3401470591 | 0 | 0 | 0 | 1 |
 | [B42/41] Adrenaline - Panic Counters Tiredness | 2807001835 | 0 | 4 | 0 | 4 |
 | ahz clothing b42 | 3388910383 | 0 | 30 | 10 | 30 |
+| Airdrops | 3590950467 | 0 | 0 | 0 | 156 |
 | Vanilla DuffelBag Tweak [Unsupported] | 2959854619 | 0 | 24 | 0 | 24 |
 | All In One Tool! | 3589758717 | 0 | 0 | 0 | 31 |
 | Ammo Converter B42 | 3388844065 | 0 | 17 | 0 | 17 |
@@ -554,6 +552,7 @@
 | Nodachi Mod B42.5.1 | 2166396868 | 0 | 0 | 0 | 3 |
 | [B42] Noir's Rifle Slings | 3388107363 | 0 | 10 | 0 | 10 |
 | Faster Tree Chopping (was: No Stress From Tree Chopping) | 3460704724 | 0 | 6 | 0 | 6 |
+| [B42] Ogrim Mod's - Machine Utils | 3555558732 | 0 | 0 | 0 | 56 |
 | Open All Containers [B42/41] | 3465040406 | 0 | 84 | 0 | 84 |
 | Ranger Operator | 3452171674 | 0 | 73 | 59 | 73 |
 | Organized Plunderer | 3594804663 | 0 | 14 | 0 | 14 |
@@ -601,6 +600,7 @@
 | RE Interface [B42] | 3598501350 | 0 | 0 | 0 | 6 |
 | Rick's MLC GunLight Patch [B42] | 3595628283 | 0 | 0 | 0 | 2 |
 | Rick's MLC Pay & Pump | 3194049112 | 0 | 20 | 0 | 20 |
+| RV Life | 3553635874 | 0 | 0 | 0 | 9 |
 | S4 Economy[Shop] | 3480405054 | 0 | 503 | 2 | 503 |
 | SafeLogin | 2876897619 | 0 | 8 | 0 | 8 |
 | SafeWayHamlet 途安里 | 3533315055 | 0 | 0 | 0 | 2 |
