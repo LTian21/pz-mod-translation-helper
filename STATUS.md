@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-15 10:05:53 UTC+08:00`*
+*最后更新于：`2025-11-15 18:51:28 UTC+08:00`*
 
 ---
 
@@ -10,9 +10,9 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``71232`` 条 |
-| **待翻译条目** | ``14600`` 条 |
-| **已翻译条目** | ``56632`` 条 |
-| **待校对条目** | ``51635`` 条 |
+| **待翻译条目** | ``14307`` 条 |
+| **已翻译条目** | ``56925`` 条 |
+| **待校对条目** | ``51529`` 条 |
 | **已支持 Mod 数量** | ``661`` 个 |
 
 ---
@@ -40,7 +40,6 @@
 | [B42] School's Out: Anime-Style Student Uniforms | 3404301631 | 285 | 1 | 6 | 286 |
 | Immersive Lore | 3000924731 | 273 | 109 | 0 | 382 |
 | Pomp's Items - Just the Food | 2792348686 | 267 | 397 | 3 | 664 |
-| Todo Caserito | 3600616323 | 265 | 0 | 0 | 265 |
 | [B42] WarThunderVehicleLibrary | 3399660368 | 243 | 42 | 9 | 285 |
 | UNOFFICIAL Fools New Containers for B42 | 3535295548 | 237 | 91 | 91 | 328 |
 | organizedCategories: Core | 3370707195 | 230 | 253 | 1 | 483 |
@@ -116,7 +115,6 @@
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
-| Bundle Branches [B42] | 3595072546 | 28 | 0 | 0 | 28 |
 | [B42] Knox Event Expanded NPC mod [alpha v0.3.16-1] | 3397396843 | 28 | 572 | 42 | 600 |
 | Random Clothing [B41/B42] | 3397182976 | 28 | 104 | 8 | 132 |
 | [B42] Week One NPC | 3403180543 | 25 | 806 | 0 | 831 |
@@ -406,6 +404,7 @@
 | Bone Scavenger[42.10] | 3399292171 | 0 | 73 | 0 | 73 |
 | Bonus Exp | 3413610665 | 0 | 6 | 0 | 6 |
 | Auto Move Corpses [B42] | 3415416226 | 0 | 18 | 0 | 18 |
+| Bundle Branches [B42] | 3595072546 | 0 | 0 | 0 | 28 |
 | Vehicle Heater Sound System [B42] + Cabin Muffling | 3543941897 | 0 | 43 | 0 | 43 |
 | [B42/B41] Car Parts Repair | 3281301960 | 0 | 17 | 0 | 17 |
 | Cerberus Pack [B41/B42] | 3470478700 | 0 | 86 | 3 | 86 |
@@ -643,6 +642,7 @@
 | [B42][ABANDONED] Tactical Sheaths | 3389805754 | 0 | 34 | 2 | 34 |
 | The Last Of AVA: WolfCut Hair | 3477669563 | 0 | 0 | 0 | 1 |
 | True Music Radio | 3100475013 | 0 | 65 | 0 | 65 |
+| Todo Caserito | 3600616323 | 0 | 0 | 0 | 265 |
 | Tomb's Player Body - Goth Skin | 3531765630 | 0 | 145 | 0 | 145 |
 | Tomb's Player Body Overhaul | 3429790870 | 0 | 27 | 10 | 27 |
 | Toppling Zombies [B42] | 3425038705 | 0 | 13 | 0 | 13 |
@@ -656,7 +656,7 @@
 | [B42] UH-1B Helicopter | 3409723807 | 0 | 4 | 0 | 4 |
 | Unimogs B42 | 3399870407 | 0 | 0 | 0 | 1 |
 | Universal Gun Repair | 2899457928 | 0 | 70 | 0 | 70 |
-| US Military Pack [BUILD 41/42] | 612100872 | 0 | 106 | 0 | 106 |
+| US Military Pack [BUILD 41/42] | 612100872 | 0 | 0 | 0 | 106 |
 | Vanilla Clothing Expansion | 3421271152 | 0 | 33 | 0 | 33 |
 | Vanilla Gear Expanded | 3401134276 | 0 | 46 | 4 | 46 |
 | Vanilla MRE [B41/B42] | 3100032203 | 0 | 23 | 0 | 23 |
