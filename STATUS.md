@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-15 22:13:58 UTC+08:00`*
+*最后更新于：`2025-11-15 22:28:02 UTC+08:00`*
 
 ---
 
@@ -10,9 +10,9 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``71232`` 条 |
-| **待翻译条目** | ``14086`` 条 |
-| **已翻译条目** | ``57146`` 条 |
-| **待校对条目** | ``51529`` 条 |
+| **待翻译条目** | ``13919`` 条 |
+| **已翻译条目** | ``57313`` 条 |
+| **待校对条目** | ``51039`` 条 |
 | **已支持 Mod 数量** | ``661`` 个 |
 
 ---
@@ -52,7 +52,6 @@
 | RaccoonCityB42 | 3388468313 | 169 | 36 | 2 | 205 |
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
 | Trap Manager | 3566766862 | 159 | 3 | 1 | 162 |
-| [B42]Kill Cell - Armory | 3569050120 | 143 | 0 | 0 | 143 |
 | [Federal Rangers] CHIMERA V9 | 3564110652 | 134 | 0 | 0 | 134 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | Christmas Time [b41/42] | 2903870217 | 121 | 53 | 77 | 174 |
@@ -117,7 +116,6 @@
 | Random Clothing [B41/B42] | 3397182976 | 28 | 104 | 8 | 132 |
 | [B42] Week One NPC | 3403180543 | 25 | 806 | 0 | 831 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
-| [B42 Port] Take a Bath | 3485349033 | 24 | 0 | 0 | 24 |
 | Where are the animals? | 3409035433 | 23 | 0 | 0 | 23 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
 | Immersive Water Shutoff | 3599665197 | 23 | 0 | 0 | 23 |
@@ -423,7 +421,7 @@
 | Craft Spear With Planks | 3438621136 | 0 | 0 | 0 | 1 |
 | '90 Mercedes-Benz Unimog U1550L | 2843855721 | 0 | 43 | 8 | 43 |
 | Daihatsu Hijet S83P/S110P | 3583266047 | 0 | 0 | 0 | 12 |
-| [B42]说话描述情绪 | 3446253876 | 0 | 470 | 470 | 470 |
+| [B42]说话描述情绪 | 3446253876 | 0 | 0 | 470 | 470 |
 | [B42.11] Detailed Descriptions for Occupations and Traits | 3387957272 | 0 | 0 | 0 | 125 |
 | Detailed Skill Tooltips | 3572846242 | 0 | 0 | 0 | 150 |
 | Different number of fillets based on weight | 3415021115 | 0 | 0 | 0 | 2 |
@@ -452,6 +450,7 @@
 | Fire Resistence | 2863836591 | 0 | 0 | 0 | 5 |
 | TrueMusic addon : 8090一些歌曲 | 3444726475 | 0 | 74 | 8 | 74 |
 | First Aid VHS Tapes | 3153010942 | 0 | 129 | 0 | 129 |
+| [B42 Port] Take a Bath | 3485349033 | 0 | 0 | 0 | 24 |
 | Foraging Light Fix & Tuning (B42) | 3596478900 | 0 | 5 | 0 | 5 |
 | Filibuster Rhymes' Acceptable Guns DEMO! | 3554570236 | 0 | 606 | 0 | 606 |
 | Fridges Off! | 2853974107 | 0 | 0 | 0 | 4 |
@@ -599,7 +598,7 @@
 | Restore Utilities | 3409422147 | 0 | 148 | 0 | 148 |
 | RE Interface [B42] | 3598501350 | 0 | 0 | 0 | 6 |
 | Rick's MLC GunLight Patch [B42] | 3595628283 | 0 | 0 | 0 | 2 |
-| Rick's MLC Pay & Pump | 3194049112 | 0 | 20 | 0 | 20 |
+| Rick's MLC Pay & Pump | 3194049112 | 0 | 0 | 0 | 20 |
 | RV Life | 3553635874 | 0 | 0 | 0 | 9 |
 | S4 Economy[Shop] | 3480405054 | 0 | 503 | 2 | 503 |
 | SafeLogin | 2876897619 | 0 | 8 | 0 | 8 |
@@ -679,6 +678,7 @@
 | [B42]Zombies Subzero TWD | 3426132882 | 0 | 14 | 0 | 14 |
 | Conditional-Speech | 2398253681 | 0 | 0 | 0 | 493 |
 | [B42] Skizot's zRe Fix Floor Extended | 3403911096 | 0 | 0 | 0 | 1 |
+| [B42]Kill Cell - Armory | 3569050120 | 0 | 0 | 0 | 143 |
 | [B42] Briefing | 3565244378 | 0 | 13 | 0 | 13 |
 | [B42][ABANDONED] FlipVehiclePlusTrailer | 3430172149 | 0 | 93 | 0 | 93 |
 | [B42] How Much Fuel Left | 3594286689 | 0 | 0 | 0 | 7 |
