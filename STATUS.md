@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-15 22:30:24 UTC+08:00`*
+*最后更新于：`2025-11-16 04:04:02 UTC+08:00`*
 
 ---
 
@@ -17,10 +17,10 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251115_040433``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251116_040401``)**
 
-*   **More_Car_Features_+_Spawn_Zones_Expansion (ID: 3520758551)**: 新增 `2` 条, 移除 `0` 条。
-*   **LongTermPreservationExtended (ID: 3597673472)**: 新增 `0` 条, 移除 `14` 条。
+*   **NeatBuilding_AddonXPDisplay (ID: 3540503606)**: 新增 `3` 条, 移除 `0` 条。
+*   **RealisticTemperature (ID: 3600401184)**: 新增 `2` 条, 移除 `0` 条。
 
 ---
 
@@ -123,7 +123,7 @@
 | Easy Drop'n'Loot | 2871469707 | 20 | 0 | 0 | 20 |
 | Common Sense | 2875848298 | 18 | 29 | 0 | 48 |
 | Equipment UI - Paper Doll Equipment Interface [B42/41] | 2950902979 | 18 | 0 | 0 | 18 |
-| Neat Crafting & Neat Building - Addon XP Display | 3540503606 | 18 | 0 | 0 | 18 |
+| Neat Crafting & Neat Building – XP Display & Mod Info | 3540503606 | 18 | 0 | 0 | 18 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
 | [B42/41] Repairable Windows | 3378304610 | 17 | 0 | 2 | 17 |
@@ -163,7 +163,7 @@
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
 | darlak's H.E.C.U. | 3452711271 | 7 | 96 | 14 | 108 |
-| Hephas Occupations and Traits | 3256482412 | 7 | 339 | 0 | 346 |
+|  Hephas Occupations and Traits | 3256482412 | 7 | 339 | 0 | 346 |
 | [B42] Bodily Functions [v0.12.3] | 3396456841 | 7 | 328 | 0 | 335 |
 | U.S. M548 Cargo Carrier by Papa_Chad | 3424497614 | 7 | 10 | 0 | 17 |
 | Ammo Maker | 2788256295 | 6 | 673 | 31 | 679 |
