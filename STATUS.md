@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-15 04:06:15 UTC+08:00`*
+*最后更新于：`2025-11-15 10:05:53 UTC+08:00`*
 
 ---
 
@@ -203,7 +203,7 @@
 | '85 Chevrolet Caprice / Impala | 3413704851 | 4 | 37 | 0 | 41 |
 | '85 Oldsmobile Delta 88 | 3418253716 | 4 | 17 | 0 | 21 |
 | Baby Animal Food | 3422249642 | 4 | 9 | 4 | 13 |
-| Gunpoint Redemption [B.41] | 3078291265 | 4 | 10 | 0 | 14 |
+| Gunpoint Redemption [B.41] | 3078291265 | 4 | 10 | 1 | 14 |
 | Imperial Chops! (Extra Beard Option) | 3465865657 | 4 | 7 | 0 | 11 |
 | Ratchat's Outdoor Tiles | 3430305726 | 4 | 1 | 1 | 5 |
 | B42 - Process Scrap Metal | 3392186364 | 4 | 4 | 4 | 8 |
@@ -216,7 +216,7 @@
 | Ducks+ | 3409153536 | 3 | 89 | 0 | 92 |
 | Halo Marine Armor [B41/B42] | 3507919075 | 3 | 25 | 0 | 28 |
 | Money From Credit Cards | 3428650803 | 3 | 21 | 0 | 24 |
-| More Car Features + Spawn Zones Expansion | 3520758551 | 3 | 19 | 0 | 22 |
+| More Car Features + Spawn Zones Expansion | 3520758551 | 3 | 19 | 1 | 22 |
 | [B42]Sector-7 Breach | 3513107552 | 3 | 9 | 3 | 12 |
 | Shield Mode (Secondary Hand Equip) (B41/B42) | 3383001527 | 3 | 6 | 2 | 9 |
 |  Wearable Towels [B41/B42] | 3203159242 | 3 | 35 | 32 | 40 |
