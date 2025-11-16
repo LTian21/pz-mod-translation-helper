@@ -49,16 +49,48 @@
 
 此方法适合熟悉 Git 和 GitHub 流程的资深用户。
 
+0. 首先前往 **[模组提交中心](https://asflove.icu/)** 查看模组翻译状态。
+* 请选择下图左侧这种状态的模组：
+
+  | ✅ 可领取（未锁定）        | 🔒 已锁定（翻译中）      |
+  | -------------------------- | ------------------------ |
+  | <img src=".github/assets/未锁定.png" alt="未锁定" width="60" style="margin-right: 16px;"> | <img src=".github/assets/翻译中.png" alt="翻译中" width="80"> |
+
 1.  **Fork** 本仓库到您的 GitHub 账户。
 2.  将 Fork 后的仓库克隆到本地。
-3.  创建一个新的分支 (`git checkout -b feature/your-translation`)。
+3.  创建一个新的分支 (`git checkout -b feature/your-translation`)。并在新分支上创建一个空提交来通过草稿 PR 锁定任务：
+    ```bash
+    git commit --allow-empty -m "lock"
+    ```
 4.  **核心翻译流程**:
     *   打开 `data/translations_CN.txt` 文件。
     *   **待办条目**: 行首由 **一个或多个制表符 (Tab键 `\t`)** 开头的条目，是需要进行翻译或校对的条目。
     *   **完成标志**: 当您完成某一条目的翻译或校对后，必须手动**删除该行行首的所有制表符(`\t`)及前导空格**。这是告知系统“此条目已完成”的唯一方式。
 5.  提交您的修改 (`git commit -m 'feat: Update translations for X mod'`)。
 6.  推送至您的分支 (`git push origin feature/your-translation`)。
-7.  在 GitHub 上创建一个 **Pull Request**。
+7.  在 GitHub 上创建一个 **Pull Request**（建议先创建草稿 Pull Request 用于锁定任务），并在 PR 正文中填写任务锁定信息。
+
+    填写示例（仅示范，不要直接提交这个示例）：
+    ```json
+    {
+       "lockedBy": "Laotian",
+       "language": "CN",
+       "lockedAt": "2025-11-16 17:01:58",
+       "expiresAt": "2025-11-23 17:01:58",
+       "modIds": ["2503622437","2714198296","3044807092"]
+    }
+    ```
+
+    可复制以下这段进行填写：
+    ```json
+    {
+       "lockedBy": "在这里填你的名称",
+       "language": "CN",
+       "lockedAt": "在这里填开始时间",
+       "expiresAt": "在这里填结束时间",
+       "modIds": ["在这里填你领取的ModID，多个ID使用英文逗号 , 隔开"]
+    }
+    ```
 
 ---
 
