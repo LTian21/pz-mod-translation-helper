@@ -1,0 +1,735 @@
+module Base
+{
+	model PeopleEaterBase
+	{
+		mesh = vehicles/PeopleEater|body,
+		shader = vehicle,
+		invertX = FALSE,
+		scale = 1,
+	}
+	model PeopleEater_Interior
+	{
+		mesh = vehicles/PeopleEater|interior,
+		texture = Vehicles/interiorpa,
+		shader = basicEffect,
+		scale = 1,
+	}
+	model PeopleEaterfrontwheelleft
+	{
+		mesh = vehicles/PeopleEater|wheel_lf,
+		texture = vehicles/mmmadmaxw,
+		shader = basicEffect,
+		invertX = false,
+		scale = 0.9,
+	}
+	model PeopleEaterfrontwheelright
+	{
+		mesh = vehicles/PeopleEater|wheel_lf,
+		texture = vehicles/mmmadmaxw,
+		shader = basicEffect,
+		invertX = true,
+		scale = 0.9,
+	}
+	model PeopleEaterbackwheelleft
+	{
+		mesh = vehicles/PeopleEater|wheel_rf,
+		texture = vehicles/mmmadmaxw,
+		shader = basicEffect,
+		invertX = false,
+		scale = 0.9,
+	}
+	model PeopleEaterbackwheelright
+	{
+		mesh = vehicles/PeopleEater|wheel_rf,
+		texture = vehicles/mmmadmaxw,
+		shader = basicEffect,
+		invertX = true,
+		scale = 0.9,
+	}
+	model PeopleEater_Hood
+	{
+		mesh = vehicles/PeopleEater|hood,
+		shader = vehicle_noreflect,
+		static = TRUE,
+		invertX = FALSE,
+		scale = 1,
+                boneWeight = HoodBone 1.0,
+
+	}
+	vehicle PeopleEater
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 2,
+		engineRepairLevel = 6,
+		playerDamageProtection = 0.02,
+		engineRPMType = van,
+
+		model
+		{
+			file = PeopleEaterBase,
+			scale = 0.8694,
+			offset = 0.0000 0.0000 0.1380,
+			rotate = 0 0 0,
+		}
+
+		part TCLConfig
+		{
+			category = nodisplay,
+
+			table TCLConfig
+			{
+				animType = vanilla,
+			}
+		}
+
+		spawnOffsetY = 0,
+
+		skin
+		{
+			texture = Vehicles/PeopleEater_main,
+		}
+
+		textureRust = Vehicles/PeopleEater_rust,
+		textureMask = Vehicles/PeopleEater_mask,
+		textureLights = Vehicles/PeopleEater_Lights,
+		textureDamage1Shell = Vehicles/PeopleEater_damage1,
+		textureDamage2Shell = Vehicles/PeopleEater_damage2,
+		textureDamage1Overlay = Vehicles/PeopleEater_blood,
+		textureDamage2Overlay = Vehicles/null,
+
+		sound
+		{
+			engine = VehicleEngineSUV,
+			engineStart = VehicleEngineSUV,
+			engineTurnOff = VehicleEngineSUV,
+			horn = VehicleHornSportsCar,
+			ignitionFail = VehicleIgnitionFailSUV,
+		}
+
+		extents = 2.4155 1.5643 6.3722,
+		mass = 1250,
+		physicsChassisShape = 2.4155 1.5643 6.3722,
+		centerOfMassOffset = 0.0000 0.5981 2.0244,
+		shadowExtents = 3.1333 10.9094,
+		shadowOffset = 0.0000 0.0551,
+		engineForce = 10250,
+		maxSpeed = 65f,
+		gearRatioCount = 4,
+		gearRatioR = 6.56,
+		gearRatio1 = 5.56,
+		gearRatio2 = 5.45,
+		gearRatio3 = 4.56,
+		gearRatio4 = 3.45,
+		engineLoudness = 110,
+		engineQuality = 87,
+		brakingForce = 60,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 0.40f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 75,
+		suspensionCompression = 4.80,
+		suspensionDamping = 3.80,
+		maxSuspensionTravelCm = 30,
+		suspensionRestLength = 0.16,
+		wheelFriction = 1.7f,
+		frontEndHealth = 160050,
+		rearEndHealth = 160050,
+		isSmallVehicle = false,
+		seats = 6,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 1.2767 -0.2876 3.8762,
+			radius = 0.70f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -1.2767 -0.2876 3.8762,
+			radius = 0.70f,
+			width = 0.2f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 1.1502 -0.2876 -2.4155,
+			radius = 0.70f,
+			width = 2.5f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -1.1157 -0.2876 -4.2673,
+			radius = 0.70f,
+			width = 2.5f,
+		}
+
+		template = PassengerSeat6,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorFrontLeft,
+
+			position inside
+			{
+				offset = 0.5061 0.9892 1.6908,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.7937 -1.1157 2.1164,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+
+			switchSeat RearLeft
+			{
+			}
+
+			switchSeat MiddleRight
+			{
+			}
+
+			switchSeat RearRight
+			{
+			}
+
+			switchSeat MiddleLeft
+			{
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorFrontRight,
+
+			position inside
+			{
+				offset = -0.5061 1.0582 1.6908,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.8052 -1.1272 1.8519,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+
+			switchSeat RearLeft
+			{
+			}
+
+			switchSeat MiddleRight
+			{
+			}
+
+			switchSeat RearRight
+			{
+			}
+
+			switchSeat MiddleLeft
+			{
+			}
+		}
+
+		passenger RearLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = -0.3911 0.9547 -0.3681,
+				rotate = 0.0000 0.0002 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.7706 -1.1387 -1.3803,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearLeft,
+			}
+
+			switchSeat FrontLeft
+			{
+			}
+
+			switchSeat FrontRight
+			{
+			}
+		}
+
+		passenger RearRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+
+			position inside
+			{
+				offset = 0.4486 1.0812 -0.4026,
+				rotate = 0.0000 0.0002 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.7821 -1.1272 -1.4033,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatRearRight,
+			}
+
+			switchSeat FrontLeft
+			{
+			}
+
+			switchSeat FrontRight
+			{
+			}
+		}
+
+		passenger MiddleLeft
+		{
+			door =,
+
+			position inside
+			{
+				offset = 0.0115 1.5643 0.4601,
+				rotate = 0.0000 -0.0002 0.0000,
+			}
+
+			switchSeat FrontLeft
+			{
+			}
+
+			switchSeat FrontRight
+			{
+			}
+		}
+
+		passenger MiddleRight
+		{
+			door =,
+
+			position inside
+			{
+				offset = -0.3911 1.0927 0.7937,
+				rotate = 0.0000 0.0002 0.0000,
+			}
+
+			switchSeat FrontLeft
+			{
+			}
+
+			switchSeat FrontRight
+			{
+			}
+		}
+
+		area Engine
+		{
+			xywh = 1.5873 3.4277 0.7591 1.3573,
+		}
+
+		area TruckBed
+		{
+			xywh = -1.6448 -3.6232 0.8742 2.5535,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.5413 2.0474 0.6901 1.1732,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.6218 2.0474 0.8282 1.1732,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -1.6333 -0.7016 0.8512 1.2192,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 1.5758 -0.7821 0.7361 1.1502,
+		}
+
+		area SeatMiddleRight
+		{
+			xywh = -1.5413 0.9087 0.6671 0.8512,
+		}
+
+		area SeatMiddleLeft
+		{
+			xywh = 1.6563 0.8052 0.8742 0.4831,
+		}
+
+		area GasTank
+		{
+			xywh = -1.3112 1.0812 0.1610 0.1610,
+		}
+
+		area ATARoof
+		{
+			xywh = 1.6563 -3.6232 0.8972 2.2314,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.5636 1.4953 0.0000 0.3911,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.3918 4.0603 0.0000 0.3911,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.2882 -2.4040 0.0000 0.3911,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.2652 -4.1293 0.0000 0.3911,
+		}
+
+		part GloveBox
+		{
+			model PeopleEaterInterior
+			{
+				file = PeopleEater_Interior,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			container
+			{
+				capacity = 15,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			area = GasTank,
+			category = gastank,
+			mechanicRequireKey = true,
+
+			container
+			{
+				capacity = 90,
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline,
+				conditionAffectsCapacity = false,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+				update = Vehicles.Update.GasTank,
+				checkEngine = Vehicles.CheckEngine.GasTank,
+			}
+
+			install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+		template = Window/part/WindowRearRight,
+		template = Window/part/WindowRearLeft,
+
+		part Window*
+		{
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template! = PeopleEater_doors,
+		template! = PeopleEater_seats,
+		template! = PeopleEater_windshields,
+		template! = PeopleEater_windows,
+		template! = PeopleEater_trunkdoor,
+		template! = PeopleEater_trunks,
+		template! = PeopleEater_armor,
+		template! = PeopleEater_accesories,
+		template! = PeopleEater_bumpers,
+		template = Tire,
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			model EngineDoor
+			{
+				file = PeopleEater_Hood,
+				offset = 0.0000 0.0000 0.0014,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			anim Open
+			{
+				sound = VehicleHoodOpenVan,
+				anim = Hood_closing,
+				reverse = TRUE,
+				rate = 2.0,
+			}
+
+			anim Close
+			{
+				sound = VehicleHoodCloseVan,
+				anim = Hood_closing,
+				reverse = FALSE,
+				rate = 2.0,
+			}
+
+			anim Closed
+			{
+				anim = Hood_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = Hood_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+		}
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = PeopleEaterfrontwheelleft,
+				offset = 0.0000 0.0000 0.0001,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = PeopleEaterfrontwheelright,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = PeopleEaterbackwheelleft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = PeopleEaterbackwheelright,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Radio,
+		template = Headlight,
+
+		physics box
+		{
+			offset = 0.0000 1.1184 1.0237,
+			extents = 2.2544 1.7483 2.4845,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.0000 5.3435,
+			extents = 3.1516 1.2422 0.6671,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.8397 3.9542,
+			extents = 2.1624 1.1502 2.5305,
+			rotate = 2.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 1.0007 -1.1119,
+			extents = 2.2314 0.9432 1.9324,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 1.0352 2.4793,
+			extents = 1.1502 1.6563 1.1272,
+			rotate = -47.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0345 0.0291 -2.8065,
+			extents = 1.3343 0.4371 5.2680,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.3497 -5.5632,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment attachment1
+		{
+			offset = 0.0000 -0.8054 5.5682,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment trailerTruck
+		{
+			offset = 0.0000 0.2337 -4.3415,
+			rotate = 0.0000 0.0000 0.0000,
+			canAttach = trailerTruck,
+		}
+	}
+}

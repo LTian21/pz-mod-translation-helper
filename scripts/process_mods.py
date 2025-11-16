@@ -19,6 +19,10 @@ KEY_VALUE_START_PATTERN: Final[re.compile] = re.compile(r"^\s*([\w\s.\[\]()#-]+?
 ITEM_PATTERN: Final[re.compile] = re.compile(r"item\s+([\w-]+)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
 RECIPE_PATTERN: Final[re.compile] = re.compile(r"(?:recipe|craftRecipe)\s+([\w\s().\[\]-]+?)\s*\{(.*?)\}", re.MULTILINE | re.IGNORECASE | re.DOTALL)
 ENTITY_RECIPE_PATTERN: Final[re.compile] = re.compile(r"^\s*entity\s+([\w-]+)\s*\{(?:(?!^\s*entity).)*?component\s+\w+\s*\{.*?category\s*=\s*([^,]+)", re.MULTILINE | re.IGNORECASE | re.DOTALL)
+# entity 中带DisplayName的映射（包括 ES_xxx 这种样式 entity）
+ENTITY_DISPLAYNAME_PATTERN: Final[re.Pattern] = re.compile(r"^\s*entity\s+([\w-]+)\s*\{(?:(?!^\s*entity).)*?DisplayName\s*=\s*(.*?)(?:,|\n|$)", re.MULTILINE | re.IGNORECASE | re.DOTALL)
+# entity 中UiConfig里的entityStyle
+ENTITY_STYLE_PATTERN: Final[re.Pattern] = re.compile(r"^\s*entity\s+([\w-]+)\s*\{(?:(?!^\s*entity).)*?component\s+UiConfig\s*\{(?:(?!^\s*component).)*?entityStyle\s*=\s*([\w-]+)", re.MULTILINE | re.IGNORECASE | re.DOTALL)
 CATEGORY_PATTERN: Final[re.compile] = re.compile(r"^\s*category\s*=\s*([^,]+)", re.MULTILINE | re.IGNORECASE)
 DISPLAY_NAME_PATTERN: Final[re.compile] = re.compile(r"DisplayName\s*=\s*(.*?)(?:,|\n|$)")
 RECIPE_FORMAT_PATTERN_1: Final[re.compile] = re.compile(r'([a-z\d])([A-Z])')
@@ -54,6 +58,12 @@ class Config:
             self.RECIPE_PREFIX = parser.get('Prefixes', 'recipe_prefix')
         except (configparser.NoSectionError, configparser.NoOptionError) as e:
             raise ValueError(f"错误：配置文件 '{CONFIG_FILE}' 中缺少必要的配置项: {e}")
+
+def normalize_recipe_key(key: str) -> str:
+    """标准化配方键, 移除 'Recipe_' 前缀以便于比较."""
+    if key.lower().startswith("recipe_"):
+        return key[7:]
+    return key
 
 def get_old_file_content(file_path: Path) -> str | None:
     git_path = file_path.as_posix()
@@ -145,8 +155,14 @@ def extract_item_display_names(text_content, prefix, source_filename: str):
         display_name_match = DISPLAY_NAME_PATTERN.search(item_content)
         if display_name_match:
             display_name_raw = display_name_match.group(1).strip()
-            display_name_escaped = display_name_raw.replace('"', '\\"')
-            key = f'{prefix}.{item_name}'; line = f'{key} = "{display_name_escaped}",'
+            key = f'{prefix}.{item_name}'
+            if display_name_raw.endswith(','):
+                display_name_raw = display_name_raw[:-1].strip()
+            if display_name_raw.startswith('"') and display_name_raw.endswith('"'):
+                line = f'{key} = {display_name_raw},'
+            else:
+                display_name_escaped = display_name_raw.replace('"', '\\"')
+                line = f'{key} = "{display_name_escaped}",'
             results[key] = line
             key_map[key] = "ItemName"
     return results, key_map
@@ -162,6 +178,28 @@ def format_recipe_name(name):
 def extract_recipe_names(text_content, config, source_filename: str):
     results = {}
     key_map = {}
+
+    style_display_map = {}
+    for m in ENTITY_DISPLAYNAME_PATTERN.finditer(text_content):
+        entity_name_raw, display_raw = m.groups()
+        entity_name = entity_name_raw.strip()
+
+        display_name = display_raw.strip()
+        if display_name.endswith(','):
+            display_name = display_name[:-1].strip()
+        if display_name.startswith('"') and display_name.endswith('"'):
+            display_name = display_name[1:-1]
+
+        if entity_name and display_name:
+            style_display_map[entity_name] = display_name
+
+    entity_style_map = {}
+    for m in ENTITY_STYLE_PATTERN.finditer(text_content):
+        entity_name_raw, style_name_raw = m.groups()
+        entity_name = entity_name_raw.strip()
+        style_name = style_name_raw.strip()
+        if entity_name and style_name:
+            entity_style_map[entity_name] = style_name
 
     # 处理 recipe 格式
     for recipe_match in RECIPE_PATTERN.finditer(text_content):
@@ -196,8 +234,22 @@ def extract_recipe_names(text_content, config, source_filename: str):
         if not entity_name:
             continue
 
-        key = f"Recipe_{entity_name}"
-        line = f'{key} = "{entity_name}",'
+        display_name = None
+        style_name = entity_style_map.get(entity_name)
+        if style_name:
+            display_name = style_display_map.get(style_name)
+        if display_name is None:
+            display_name = style_display_map.get(entity_name)
+
+        if display_name:
+            base_id = display_name.replace(' ', '')
+            key = f"Recipe_{base_id}"
+            value = display_name
+        else:
+            key = f"Recipe_{entity_name}"
+            value = entity_name
+
+        line = f'{key} = "{value}",'
         results[key] = line
         key_map[key] = "Recipes"
 
@@ -247,25 +299,32 @@ def get_translations_as_dict(file_path_or_dir, config):
             nonlocal current_key, current_value_parts, translations_dict
             if not current_key or not current_value_parts: return
 
-            full_expression = " ".join(part.strip() for part in current_value_parts)
-            if ".." in full_expression:
-                final_line = f'{current_key} = {full_expression}'
-                if not final_line.endswith(','):
-                    final_line += ','
+            value_part = " ".join(part.strip() for part in current_value_parts).strip()
+            if value_part.endswith(','):
+                value_part = value_part[:-1].strip()
+            if value_part.startswith('{') or '..' in value_part:
+                final_line = f'{current_key} = {value_part}'
             else:
-                value_part = full_expression.strip()
-                if value_part.endswith(','):
-                    value_part = value_part[:-1].strip()
-
-                if value_part.startswith('"'):
-                    value_part = value_part[1:]
-
-                if value_part.endswith('"'):
-                    value_part = value_part[:-1]
-
-                escaped_value = value_part.replace('"', '\\"')
-
-                final_line = f'{current_key} = "{escaped_value}",'
+                if not value_part.startswith('"') and not value_part.endswith('"'):
+                    value_part = '"' + value_part + '"'
+                else:
+                    unescaped_quote_count = 0
+                    i = 0
+                    while i < len(value_part):
+                        if value_part[i] == '"':
+                            if i == 0 or value_part[i-1] != '\\':
+                                unescaped_quote_count += 1
+                        i += 1
+                    # 如果未转义引号数量为奇数，且末尾不存在引号, 则在末尾补上一个引号
+                    if not value_part.startswith('"'):
+                        value_part = '"' + value_part
+                        unescaped_quote_count += 1
+                    if unescaped_quote_count % 2 != 0 and not value_part.endswith('"'):
+                        value_part += '"'
+                
+                final_line = f'{current_key} = {value_part}'
+            if not final_line.endswith(','):
+                final_line += ','
                     
             translations_dict[current_key] = final_line
             key_source_map[current_key] = source_filename
@@ -339,7 +398,7 @@ def process_single_mod(mod_root_path, config, vanilla_keys):
 
     logging.info(f"\n--- 阶段 2: 扫描所有 Media 路径下的 Scripts (L0) ---")
     generated_data = {}
-    local_known_en_keys = set(en_data_raw.keys())
+    local_known_en_keys_normalized = {normalize_recipe_key(k) for k in en_data_raw.keys()}
 
     for media_path in active_media_paths:
         scripts_dir = find_case_insensitive_dir(media_path, "scripts")
@@ -364,11 +423,13 @@ def process_single_mod(mod_root_path, config, vanilla_keys):
                 
                 current_generated = {**items_data, **recipes_data}
                 for key, line in current_generated.items():
-                    if key not in local_known_en_keys:
+                    normalized_key = normalize_recipe_key(key)
+                    if normalized_key not in local_known_en_keys_normalized:
                         if key not in generated_data:
                             if key in items_data: new_items += 1
                             if key in recipes_data: new_recipes += 1
-                        generated_data[key] = line
+                            generated_data[key] = line
+                            local_known_en_keys_normalized.add(normalized_key)
 
             except Exception as e: logging.error(f"    处理文件 {file_path.name} 时发生错误: {e}")
             if new_items or new_recipes:
@@ -663,6 +724,23 @@ def main():
         global_key_source_map[mod_id] = workshop_key_source_map
         logging.info(f"\n--- 已为 Mod ID {mod_id} 更新 {len(workshop_key_source_map)} 条键来源映射 ---")
         
+        if exclusion_keys:
+            logging.info(f"\n--- 正在应用 {len(exclusion_keys)} 个排除项 ---")
+            original_en_count = len(workshop_en_base)
+            original_cn_count = len(workshop_cn_base)
+            original_conflict_count = len(workshop_conflict_data)
+
+            workshop_en_base = {k: v for k, v in workshop_en_base.items() if k not in exclusion_keys}
+            workshop_cn_base = {k: v for k, v in workshop_cn_base.items() if k not in exclusion_keys}
+            workshop_conflict_data = {k: v for k, v in workshop_conflict_data.items() if k not in exclusion_keys}
+            
+            if mod_id in global_key_source_map:
+                global_key_source_map[mod_id] = {k: v for k, v in global_key_source_map[mod_id].items() if k not in exclusion_keys}
+
+            logging.info(f"    - 从英文数据中移除了 {original_en_count - len(workshop_en_base)} 个键。")
+            logging.info(f"    - 从中文数据中移除了 {original_cn_count - len(workshop_cn_base)} 个键。")
+            logging.info(f"    - 从冲突数据中移除了 {original_conflict_count - len(workshop_conflict_data)} 个键。")
+
         final_output = {**workshop_en_base, **workshop_cn_base}
         en_todo_list, cn_only_list = {}, {}
         en_keys, cn_keys = set(workshop_en_base.keys()), set(workshop_cn_base.keys())
@@ -676,7 +754,7 @@ def main():
             else:
                 current_todo_list[key] = en_line
         for key, line in current_todo_list.items():
-            if key not in completed_keys and key not in exclusion_keys:
+            if key not in completed_keys:
                 en_todo_list[key] = line
         for key, cn_line in workshop_cn_base.items():
             if key not in en_keys:

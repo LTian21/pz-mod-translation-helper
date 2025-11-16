@@ -26,6 +26,8 @@ jobs:
       mods_to_download: ${{ steps.combine_lists.outputs.mods_to_download }}
       mod_groups: ${{ steps.split_list.outputs.groups }}
       manual_ids_raw: ${{ github.event.inputs.mod_id_override }}
+      fetched_ids: ${{ steps.combine_lists.outputs.fetched_ids }}
+      deletion_ids: ${{ steps.fetch_deletion_ids.outputs.ids_to_delete }}
 
     steps:
       - name: Checkout Repository
@@ -62,6 +64,30 @@ jobs:
           fi
           echo "Fetched Mod IDs: $JSON_ARRAY"
           echo "mods_to_download=$JSON_ARRAY" >> $GITHUB_OUTPUT
+
+      - name: Fetch pending Mod IDs for deletion from server
+        id: fetch_deletion_ids
+        run: |
+          response=$(curl -s -w "%{http_code}" -X POST \
+            -H "Authorization: Bearer ${{ secrets.ACTION_SECRET_KEY }}" \
+            "${{ secrets.SERVER_URL }}/get-deletion-ids")
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          if [ "$http_code" -ne 200 ]; then
+            echo "::warning::Failed to fetch deletion IDs from server. HTTP status: $http_code. Body: $body. Proceeding without them."
+            echo "ids_to_delete=[]" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          echo "Successfully fetched deletion data from server."
+          DELETION_IDS=$(echo "$body" | jq -r '.mod_ids | select(. != null) | .[]')
+          if [ -z "$DELETION_IDS" ]; then
+            echo "No Mod IDs for deletion from server."
+            JSON_ARRAY="[]"
+          else
+            JSON_ARRAY=$(echo "$DELETION_IDS" | jq -Rsc 'split("\n") | map(select(. != ""))')
+          fi
+          echo "Fetched Mod IDs for deletion: $JSON_ARRAY"
+          echo "ids_to_delete=$JSON_ARRAY" >> $GITHUB_OUTPUT
 
       - name: Handle Manual Trigger Override
         id: manual_check
@@ -366,7 +392,50 @@ jobs:
           echo "所有Mod内容已合并并准备就绪。"
 
       - name: Clean up temporary artifacts
-        run: rm -rf temp_artifacts    
+        run: rm -rf temp_artifacts
+
+      - name: Handle Mod Deletions
+        id: handle_deletions
+        env:
+          DELETION_IDS_JSON: ${{ needs.setup_jobs.outputs.deletion_ids }}
+        run: |
+          IDS_TO_DELETE="$DELETION_IDS_JSON"
+          if [ -z "$IDS_TO_DELETE" ] || [ "$IDS_TO_DELETE" = "[]" ] || [ "$IDS_TO_DELETE" = "null" ]; then
+            echo "No mods to delete. Skipping."
+            echo "deleted_ids=[]" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "Starting deletion process for Mod IDs: $IDS_TO_DELETE"
+          TEMP_ID_LIST="id_list.txt.tmp"
+          cp id_list.txt "$TEMP_ID_LIST"
+          
+          SUCCESSFULLY_DELETED_IDS=()
+          for ID in $(echo "$IDS_TO_DELETE" | jq -r '.[]'); do
+            echo "  -> Processing deletion for ID: $ID"
+            
+            # 从 id_list.txt 中移除
+            sed -i "/^${ID}$/d" "$TEMP_ID_LIST"
+            echo "    - Removed from id_list.txt"
+            
+            # 删除相关目录
+            rm -rf "./data/workshop_content/$ID"
+            echo "    - Removed ./data/workshop_content/$ID"
+            rm -rf "./data/completed_files/$ID"
+            echo "    - Removed ./data/completed_files/$ID"
+            find ./data/output_files -type d -name "*_$ID" -exec rm -rf {} +
+            echo "    - Removed matching directories in ./data/output_files"
+            find ./data -type f -name "*_$ID.*" -exec rm -f {} +
+            echo "    - Removed matching files in ./data"
+            
+            SUCCESSFULLY_DELETED_IDS+=("$ID")
+          done
+          
+          mv "$TEMP_ID_LIST" id_list.txt
+          
+          DELETED_IDS_JSON=$(jq -nc '$ARGS.positional' --args "${SUCCESSFULLY_DELETED_IDS[@]}")
+          echo "Successfully deleted mods: $DELETED_IDS_JSON"
+          echo "deleted_ids=$DELETED_IDS_JSON" >> $GITHUB_OUTPUT
 
       - name: Add Fetched and Manual Mod IDs to id_list.txt
         env:
@@ -535,13 +604,16 @@ jobs:
           # 成功处理的 Mod ID 列表
           SUCCESSFUL_IDS_JSON: ${{ needs.setup_jobs.outputs.mods_to_download }}
           # 失败的 ID 列表 (当前版本为空，未来可扩展)
-          FAILED_IDS_JSON: "[]" 
+          FAILED_IDS_JSON: "[]"
+          # 成功删除的 Mod ID 列表
+          DELETED_IDS_JSON: ${{ steps.handle_deletions.outputs.deleted_ids }}
           API_URL: ${{ secrets.SERVER_URL }}
           API_KEY: ${{ secrets.ACTION_SECRET_KEY }}
         run: |
           echo "向服务器报告处理结果..."
           echo "成功处理的 Mod ID: $SUCCESSFUL_IDS_JSON"
           echo "失败处理的 Mod ID: $FAILED_IDS_JSON"
+          echo "成功删除的 Mod ID: $DELETED_IDS_JSON"
 
           # 发送 POST 请求到我们创建的 /api/update-status 接口
           curl -X POST "${API_URL}/update-status" \
@@ -549,7 +621,8 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{
                   "successful_ids": '"$SUCCESSFUL_IDS_JSON"',
-                  "failed_ids": '"$FAILED_IDS_JSON"'
+                  "failed_ids": '"$FAILED_IDS_JSON"',
+                  "deleted_ids": '"$DELETED_IDS_JSON"'
                 }'
 
       - name: Prepare Issue Body on Failure

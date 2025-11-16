@@ -1,0 +1,54 @@
+module Base
+{
+	model PeopleEater_RoofRack
+	{
+		mesh = vehicles/PeopleEater|roofrack,
+		texture = Vehicles/PeopleEater,
+        shader = basicEffect,
+        scale = 1,
+	}
+
+    /******************** TRUNK ********************/
+
+	
+
+	/******************** ROOFRACK ********************/
+
+	
+
+    template vehicle PeopleEater_trunks
+	{
+		template = Trunk/part/TruckBed,
+		part TruckBed
+		{
+			itemType = Base.VanSeatsTrunk,
+
+			container
+			{
+                capacity = 1000,
+                conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBedOpenInside,
+			}
+
+			lua
+            {
+                create = ATATuning.Create.DefaultATAInteractiveTrunk,
+                init = ATATuning.Init.ATAInteractiveTrunk,
+            }
+
+            
+            
+		}
+
+		template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkRoofRack,
+        part ATA2InteractiveTrunkRoofRack
+        {
+            area = ATARoof,
+            model ATARoofrack
+            {
+                file = PeopleEater_RoofRack,
+            }
+           
+        }
+	}
+}

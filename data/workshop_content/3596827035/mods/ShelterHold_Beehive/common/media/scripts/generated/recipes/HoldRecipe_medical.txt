@@ -1,0 +1,31 @@
+module Hold
+{
+    imports
+    {
+        Base
+    }
+
+	craftRecipe MakeHoneyBandage /* Check */
+	{
+		timedAction = SawLogs,
+		Time = 160,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Medical,
+        Tooltip = Tooltip_HoldRecipe_HoneyBandage,
+		inputs
+		{
+			item 1 [Base.Bandage;Base.Bandaid] mode:destroy mappers[HoneyRagType],
+            item 1 [*] mode:keep,
+            -fluid 0.2 [RawHoney],
+		}
+		outputs
+		{
+			item 1 mapper:HoneyRagType,
+		}
+        itemMapper HoneyRagType
+        {
+            Hold.HoneyBandaid = Base.Bandaid,
+            Hold.HoneyBandage = Base.Bandage,
+        }
+	}
+}
