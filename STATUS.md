@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-16 10:20:23 UTC+08:00`*
+*最后更新于：`2025-11-16 16:12:22 UTC+08:00`*
 
 ---
 
@@ -10,9 +10,9 @@
 | 指标 | 状态 |
 | :--- | :--- |
 | **模组总条目** | ``71303`` 条 |
-| **待翻译条目** | ``13536`` 条 |
-| **已翻译条目** | ``57767`` 条 |
-| **待校对条目** | ``50849`` 条 |
+| **待翻译条目** | ``12986`` 条 |
+| **已翻译条目** | ``58317`` 条 |
+| **待校对条目** | ``50521`` 条 |
 | **已支持 Mod 数量** | ``666`` 个 |
 
 ---
@@ -49,7 +49,6 @@
 | (B42) Immersive Roleplay Professions and Traits | 3387474156 | 202 | 678 | 0 | 882 |
 | True Smoking [B42] | 3423984426 | 173 | 26 | 1 | 199 |
 | Somewhat Traits [B42 Compatible] | 3498347699 | 171 | 0 | 0 | 171 |
-| RaccoonCityB42 | 3388468313 | 169 | 36 | 2 | 205 |
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
 | [Federal Rangers] CHIMERA V9 | 3564110652 | 134 | 0 | 0 | 134 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
@@ -57,8 +56,6 @@
 | Pocket Kittens (B42) | 3568029240 | 120 | 14 | 7 | 134 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
-| PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 99 | 0 | 0 | 99 |
-| [B42] Better Sorting | 3413005308 | 85 | 7 | 4 | 92 |
 | Lifestyle: Hobbies | 3403870858 | 85 | 4082 | 28 | 4167 |
 | Vanilla Foods Expanded | 3577903007 | 85 | 1859 | 3 | 1944 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
@@ -67,11 +64,9 @@
 | The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 77 | 0 | 0 | 77 |
 | [B42] Useful Barrels | 3436537035 | 77 | 1 | 0 | 78 |
 | Braven's Achievements | 3051277957 | 76 | 1 | 0 | 77 |
-| Weather Moodles [B42] | 3565697910 | 76 | 70 | 2 | 146 |
 | HydeCo. Automatic Garage Doors! | 3594285774 | 73 | 0 | 0 | 73 |
 | Mad Crafter [electric weapon and more] v0.2 | 3418701509 | 72 | 1 | 0 | 73 |
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 0 | 69 |
-| Skill Recovery Journal | 2503622437 | 68 | 11 | 8 | 79 |
 | SCP - Foundation pack | 3580511016 | 66 | 0 | 0 | 66 |
 | [B41/B42] Item Condition | 2852309899 | 64 | 0 | 0 | 64 |
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
@@ -115,7 +110,6 @@
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
 | Legendary DuffelBag | 3558839307 | 23 | 21 | 5 | 44 |
-| Better Generator Info | 3576056135 | 22 | 4 | 0 | 26 |
 | Random Zombies | 2818577583 | 21 | 0 | 0 | 21 |
 | Fancy Lanterns [B42 Compatible] | 3267733558 | 21 | 47 | 0 | 68 |
 | Milk Them All [B42] | 3568280195 | 21 | 0 | 0 | 21 |
@@ -129,7 +123,6 @@
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
 | [B42/41] Repairable Windows | 3378304610 | 17 | 0 | 2 | 17 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
-| [B42] Mod Manager | 3567084868 | 16 | 0 | 0 | 16 |
 | [B42/B41] Motorious Zone - Hot Pursuit Add-on | 2841969842 | 15 | 0 | 0 | 15 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 15 | 1 | 8 | 16 |
 | [B42] Bag Upgrade Plus | 3403697073 | 15 | 37 | 1 | 52 |
@@ -144,7 +137,6 @@
 | [B41\B42] DBG Crowbar Unlock | 3555407625 | 11 | 225 | 46 | 236 |
 | Item Stories [b42] (All in One) | 3569303590 | 11 | 0 | 0 | 11 |
 | Low Condition Guns [B41/B42] | 3579180724 | 11 | 0 | 0 | 11 |
-| Has Been Read | 2544353492 | 11 | 45 | 0 | 56 |
 | Stairs Alert | 3044807092 | 11 | 3 | 0 | 14 |
 | Teto Plushies | 3603577358 | 11 | 0 | 0 | 11 |
 | U.S. M998 Humvee by Papa_Chad | 3554424111 | 11 | 28 | 0 | 39 |
@@ -160,8 +152,8 @@
 | [B41 & B42] Throw your bag across | 3391902125 | 9 | 0 | 0 | 9 |
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 9 | 45 | 2 | 55 |
 | Military Ponchos: Reloaded | 3439247001 | 8 | 65 | 11 | 73 |
-| Mod Load Order Sorter [b42] | 3423660713 | 8 | 34 | 23 | 42 |
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
+| Skill Recovery Journal | 2503622437 | 8 | 0 | 0 | 79 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
 | darlak's H.E.C.U. | 3452711271 | 7 | 96 | 14 | 108 |
 |  Hephas Occupations and Traits | 3256482412 | 7 | 339 | 0 | 346 |
@@ -195,7 +187,6 @@
 | [Project Fallout] The Beginning | 3461117277 | 4 | 24 | 3 | 28 |
 | The Division Equipment [B42] | 3479867929 | 4 | 97 | 12 | 101 |
 | Zombaroid | 3519916139 | 4 | 38 | 4 | 42 |
-| [B42] Moodle Descriptions Expanded | 3389003300 | 4 | 102 | 9 | 106 |
 | '85 Pontiac Parisienne | 3413706334 | 3 | 17 | 0 | 20 |
 | [B42] Home Inventory Improved | 3522009163 | 3 | 0 | 0 | 63 |
 | Ducks+ | 3409153536 | 3 | 89 | 0 | 92 |
@@ -219,8 +210,8 @@
 | Melee Weapon Upgrade | 3394923321 | 2 | 1074 | 1 | 1076 |
 | Thief Expansion | 2596620950 | 2 | 68 | 0 | 70 |
 | AVA: Ranger Blazer | 3391400317 | 2 | 0 | 0 | 2 |
-| Proximity Inventory [B41/42] | 2847184718 | 2 | 19 | 0 | 21 |
 | PZK VLC (Vanilla look-like car pack) | 3217685049 | 2 | 693 | 6 | 695 |
+| RaccoonCityB42 | 3388468313 | 2 | 0 | 0 | 205 |
 | Realistic Temperature Mod [B42] | 3600401184 | 2 | 0 | 0 | 56 |
 | Use Belt as Weapon [B42/41] | 3339423397 | 2 | 3 | 2 | 5 |
 | '86 Chevrolet CUCVs + M101A2 Trailer | 3428008364 | 1 | 82 | 1 | 83 |
@@ -386,6 +377,8 @@
 | Beanie Babies (B42) | 3575855907 | 0 | 0 | 0 | 73 |
 | 未知 Mod (3388028737) | 3388028737 | 0 | 11 | 0 | 11 |
 | BetterFPS_B42 | 3423115544 | 0 | 4 | 0 | 4 |
+| [B42] Better Sorting | 3413005308 | 0 | 0 | 4 | 92 |
+| Better Generator Info | 3576056135 | 0 | 0 | 0 | 26 |
 | [B42] Bicycle! | 3461415167 | 0 | 22 | 3 | 23 |
 | Birget's Head Collection [41\42] | 3439783176 | 0 | 20 | 0 | 40 |
 | Bloodlust Trait | 3027121498 | 0 | 52 | 0 | 52 |
@@ -523,6 +516,7 @@
 | Industrial Revolution = Addon = Mira's Ammo Maker | 3441855577 | 0 | 0 | 0 | 1 |
 | Moats | 3550032314 | 0 | 0 | 0 | 6 |
 | [B41] Modern & Historical Firearms Bundle | 3383901556 | 0 | 143 | 0 | 143 |
+| Mod Load Order Sorter [b42] | 3423660713 | 0 | 0 | 23 | 42 |
 | [B42]Project RV Interior | 3543229299 | 0 | 0 | 0 | 17 |
 | Moodle Framework B41 | 2859296947 | 0 | 13 | 4 | 13 |
 | More Damaged Objects [B42/41] | 3413150945 | 0 | 0 | 0 | 1 |
@@ -560,6 +554,7 @@
 | Decoholic | 3197857648 | 0 | 10 | 3 | 10 |
 | Dried Flower | 2949777636 | 0 | 49 | 0 | 49 |
 | Excalibolg | 3070446764 | 0 | 19 | 0 | 19 |
+| Has Been Read | 2544353492 | 0 | 0 | 0 | 56 |
 | Love and Perfume | 2842359380 | 0 | 21 | 0 | 21 |
 | Medical Meister | 3173649443 | 0 | 85 | 0 | 85 |
 | My So-Called Bag | 2823166698 | 0 | 29 | 6 | 29 |
@@ -584,7 +579,9 @@
 | Pokit Paradigm Shoes And Boots | 3476595954 | 0 | 0 | 0 | 3 |
 | Project Summer Car [B42] | 3564950449 | 0 | 0 | 0 | 356 |
 | ProteinsMoodle | 2859304462 | 0 | 24 | 0 | 24 |
+| Proximity Inventory [B41/42] | 2847184718 | 0 | 0 | 0 | 21 |
 | [B42]Pallontras Crossbows | 3400528439 | 0 | 117 | 0 | 117 |
+| PZ-ClothingUI - Clothing items grid view (B41 + B42) | 2695471997 | 0 | 0 | 0 | 99 |
 | Random Airdrops [B41/B42] | 3282789883 | 0 | 5 | 0 | 5 |
 | [B42/41] Reactive Sound Events | 2969551071 | 0 | 39 | 0 | 39 |
 | [B42/41] Read Book Bypassing Level Restrictions | 3319538177 | 0 | 0 | 0 | 11 |
@@ -674,6 +671,7 @@
 | Watch Your Trunk [B42 Compatible] | 3591049094 | 0 | 0 | 0 | 3 |
 | Water Goes Bad | 2849467715 | 0 | 0 | 0 | 19 |
 | [B42] Water Filter Straw | 3418513380 | 0 | 8 | 0 | 8 |
+| Weather Moodles [B42] | 3565697910 | 0 | 0 | 2 | 146 |
 | What can I craft Addon | 3392356751 | 0 | 5 | 0 | 5 |
 | [Deprecated] What can I craft? | 3390169945 | 0 | 0 | 0 | 1 |
 | Wild Fruits | 2618566294 | 0 | 13 | 8 | 13 |
@@ -689,6 +687,8 @@
 | [B42] Intuitive Crafting | 3486217110 | 0 | 0 | 3 | 42 |
 | [B42][ABANDONED] JunkFoodsPH | 3390901679 | 0 | 24 | 0 | 24 |
 | [B42][ABANDONED] Malwart Plain Moodles | 3394582336 | 0 | 0 | 0 | 1 |
+| [B42] Mod Manager | 3567084868 | 0 | 0 | 0 | 16 |
+| [B42] Moodle Descriptions Expanded | 3389003300 | 0 | 0 | 9 | 106 |
 | [B42] Post Apocalyptic Weapons | 3472334215 | 0 | 40 | 0 | 40 |
 | [B42] Rip More Clothing | 3596259242 | 0 | 0 | 0 | 11 |
 | [B42] Wallet Fix | 3400142576 | 0 | 0 | 0 | 6 |
