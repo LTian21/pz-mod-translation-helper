@@ -1,0 +1,394 @@
+module Base
+{
+
+					/** Carving **/
+
+	craftRecipe CarveWoodenBowls
+	{
+	Time = 100,
+		Tags = AnySurfaceCraft,
+        category = Carving,
+        timedAction = SharpenStake,
+        SkillRequired = Carving:3,
+		xpAward = Carving:30,
+		inputs
+		{
+			item 1 tags[SharpKnife] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+			item 1 [Base.Log] flags[Prop2],
+		}
+		outputs
+		{
+			item 2 Base.Bowl,
+		}
+	}
+
+	craftRecipe CarveWoodenRollingPin
+	{
+	Time = 100,
+		OnCreate = Recipe.OnCreate.MinorCarving,
+		Tags = AnySurfaceCraft,
+        category = Carving,
+        timedAction = SharpenStake,
+        SkillRequired = Carving:4,
+		xpAward = Carving:40,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+			item 1 [Base.Log;Base.LargeBranch] flags[Prop2],
+		}
+		outputs
+		{
+			item 1 Base.RollingPin,
+		}
+	}
+
+					/** Packing **/
+
+	craftRecipe PutTeaInBox
+	{
+        timedAction = PackingBox,
+		Time = 80,
+		Tags = InHandCraft;Packing,
+        category = Packing,
+		inputs
+		{
+			item 12 [Base.Teabag2] flags[AllowFavorite;InheritFavorite;ItemCount],
+		}
+		outputs
+		{
+			item 1 Base.Teabag_Box,
+		}
+	}
+
+	craftRecipe OpenBoxOfTea
+	{
+        timedAction = UnPackBox,
+		Time = 80,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+		inputs
+		{
+			item 1 [Base.Teabag_Box] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 12 Base.Teabag2,
+		}
+	}
+
+					/** Cooking **/
+
+	craftRecipe MakeMarinade
+	{
+        timedAction = MixingBowl,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:10,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:destroy,
+            		-fluid 0.3 [Water],
+			item 1 [Base.Salt;Base.SeasoningSalt],
+			item 1 [Base.Pepper;Base.PowderedGarlic;Base.PowderedOnion;Base.Vinegar2;Base.Vinegar_Jug;Base.RiceVinegar;Base.BalsamicVinegar],
+			item 4 [Base.SugarBrown;Base.Sugar;Base.SugarPacket;Base.SugarCubes],
+			item 5 [Base.Honey;Base.MapleSyrup;Base.Mustard;Base.Ketchup;Base.Soysauce],
+			
+		}
+		outputs
+		{
+			item 1 Base.Marinade,
+		}
+	}
+
+	craftRecipe MakeTeabag
+	{
+	Time = 100,
+		timedAction = MixingBowl,
+		Tags = AnySurfaceCraft,
+	category = Cooking,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:3,
+		xpAward = Cooking:10,
+		inputs
+		{
+			item 1 tags[MortarPestle] mode:keep flags[Prop2],
+			item 1 tags[Scissors] mode:keep flags[MayDegradeLight;IsNotDull],
+			item 5 [Base.BlackSageDried;Base.ChamomileDried;Base.CommonMallowDried;Base.LavenderPetalsDried;Base.MarigoldDried;Base.RosePetalsDried;Base.WildGarlicDried] flags[ItemCount],
+			item 1 [Base.CheeseCloth],
+			item 3 [Base.Twine],
+		}
+		outputs
+		{
+			item 3 Base.Teabag2,
+		}
+	}
+		
+	craftRecipe RemoveOmelette
+	{
+        timedAction = EmptyPan,
+		Time = 15,
+		OnCreate = Recipe.OnCreate.RemoveOmelette,
+		ToolTip = Tooltip_Recipe_MustCookedGet,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		inputs
+		{
+			item 1 [Base.OmeletteRecipe;Base.OmeletteRecipeForged] mappers[omeletteType;panType] flags[InheritCondition;IsCookedFoodItem;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 1 mapper:omeletteType,
+			item 1 mapper:panType,
+		}
+		itemMapper panType
+		{
+			Base.Pan = Base.OmeletteRecipe,
+			Base.PanForged = Base.OmeletteRecipeForged,
+
+            	default = Base.Pan,
+		}
+		itemMapper omeletteType
+		{
+			Base.EggOmelette = Base.OmeletteRecipe,
+			Base.EggOmelette = Base.OmeletteRecipeForged,
+		}
+	}
+
+	craftRecipe Make2Plates
+	{
+        timedAction = EmptyPan,
+		Time = 80,
+		OnCreate = Recipe.OnCreate.Make2Plates,
+		ToolTip = Tooltip_Recipe_CookedPortion,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		inputs
+		{
+			item 2 [Base.Plate;Base.ClayPlate] mode:destroy flags[ItemCount],
+			item 1 [Base.RicePan;Base.RicePot;Base.WaterPotRice;Base.RicePotForged;Base.WaterPotForgedRice;Base.WaterSaucepanRice;Base.RicePanCopper;Base.WaterSaucepanRiceCopper;Base.PastaPot;Base.WaterPotPasta;Base.PastaPotForged;Base.WaterPotForgedPasta;Base.PastaPan;Base.WaterSaucepanPasta;Base.PastaPanCopper;Base.WaterSaucepanPastaCopper] mappers[plateType;potType] flags[InheritCondition;InheritCooked;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 2 mapper:plateType,
+			item 1 mapper:potType,
+		}
+		itemMapper plateType
+		{
+			Base.PastaPlate = Base.PastaPot,
+			Base.PastaPlate = Base.WaterPotPasta,
+			Base.PastaPlate = Base.PastaPotForged,
+			Base.PastaPlate = WaterPotForgedPasta,
+			Base.PastaPlate = Base.PastaPan,
+			Base.PastaPlate = Base.Base.WaterSaucepanPasta,
+			Base.PastaPlate = Base.PastaPanCopper,
+			Base.PastaPlate = Base.WaterSaucepanPastaCopper,
+			Base.RicePlate = Base.RicePot,
+			Base.RicePlate = Base.WaterPotRice,
+			Base.RicePlate = Base.RicePotForged,
+			Base.RicePlate = Base.WaterPotForgedRice,
+			Base.RicePlate = Base.RicePan,
+			Base.RicePlate = Base.WaterSaucepanRice,
+			Base.RicePlate = Base.RicePanCopper,
+			Base.RicePlate = Base.WaterSaucepanRiceCopper,
+
+            	default = Base.RicePlate,
+		}
+		itemMapper potType
+		{
+			Base.Pot = Base.PastaPot,
+			Base.Pot = WaterPotPasta,
+			Base.PotForged = Base.PastaPotForged,
+			Base.PotForged = WaterPotForgedPasta,
+			Base.Saucepan = Base.PastaPan,
+			Base.Saucepan = Base.Base.WaterSaucepanPasta,
+			Base.SaucepanCopper = Base.PastaPanCopper,
+			Base.SaucepanCopper = Base.WaterSaucepanPastaCopper,
+			Base.Pot = Base.RicePot,
+			Base.Pot = Base.WaterPotRice,
+			Base.PotForged = Base.RicePotForged,
+			Base.PotForged = Base.WaterPotForgedRice,
+			Base.Saucepan = Base.RicePan,
+			Base.Saucepan = Base.WaterSaucepanRice,
+			Base.SaucepanCopper = Base.RicePanCopper,
+			Base.SaucepanCopper = Base.WaterSaucepanRiceCopper,
+
+            	default = Base.Saucepan,
+		}
+	}
+		
+	craftRecipe Make4Plates
+	{
+        timedAction = EmptyPan,
+		Time = 80,
+		OnCreate = Recipe.OnCreate.Make4Plates,
+		ToolTip = Tooltip_Recipe_CookedPortion,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		inputs
+		{
+			item 4 [Base.Plate;Base.ClayPlate] mode:destroy flags[ItemCount],
+			item 1 [Base.RicePan;Base.RicePot;Base.WaterPotRice;Base.RicePotForged;Base.WaterPotForgedRice;Base.WaterSaucepanRice;Base.RicePanCopper;Base.WaterSaucepanRiceCopper;Base.PastaPot;Base.WaterPotPasta;Base.PastaPotForged;Base.WaterPotForgedPasta;Base.PastaPan;Base.WaterSaucepanPasta;Base.PastaPanCopper;Base.WaterSaucepanPastaCopper] mappers[plateType;potType] flags[InheritCondition;InheritCooked;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 4 mapper:plateType,
+			item 1 mapper:potType,
+		}
+		itemMapper plateType
+		{
+			Base.PastaPlate = Base.PastaPot,
+			Base.PastaPlate = Base.WaterPotPasta,
+			Base.PastaPlate = Base.PastaPotForged,
+			Base.PastaPlate = WaterPotForgedPasta,
+			Base.PastaPlate = Base.PastaPan,
+			Base.PastaPlate = Base.Base.WaterSaucepanPasta,
+			Base.PastaPlate = Base.PastaPanCopper,
+			Base.PastaPlate = Base.WaterSaucepanPastaCopper,
+			Base.RicePlate = Base.RicePot,
+			Base.RicePlate = Base.WaterPotRice,
+			Base.RicePlate = Base.RicePotForged,
+			Base.RicePlate = Base.WaterPotForgedRice,
+			Base.RicePlate = Base.RicePan,
+			Base.RicePlate = Base.WaterSaucepanRice,
+			Base.RicePlate = Base.RicePanCopper,
+			Base.RicePlate = Base.WaterSaucepanRiceCopper,
+
+            	default = Base.RicePlate,
+		}
+		itemMapper potType
+		{
+			Base.Pot = Base.PastaPot,
+			Base.Pot = WaterPotPasta,
+			Base.PotForged = Base.PastaPotForged,
+			Base.PotForged = WaterPotForgedPasta,
+			Base.Saucepan = Base.PastaPan,
+			Base.Saucepan = Base.Base.WaterSaucepanPasta,
+			Base.SaucepanCopper = Base.PastaPanCopper,
+			Base.SaucepanCopper = Base.WaterSaucepanPastaCopper,
+			Base.Pot = Base.RicePot,
+			Base.Pot = Base.WaterPotRice,
+			Base.PotForged = Base.RicePotForged,
+			Base.PotForged = Base.WaterPotForgedRice,
+			Base.Saucepan = Base.RicePan,
+			Base.Saucepan = Base.WaterSaucepanRice,
+			Base.SaucepanCopper = Base.RicePanCopper,
+			Base.SaucepanCopper = Base.WaterSaucepanRiceCopper,
+
+            	default = Base.Saucepan,
+		}
+	}
+
+					/** Meats **/
+
+	craftRecipe SaltMeat
+	{
+        timedAction = Making,
+		Time = 50,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:3,
+		OnCreate = Recipe.OnCreate.SaltedMeat,
+		inputs
+		{
+			item 1 [Base.Salt;Base.SeasoningSalt],
+			item 1 [Base.FishFillet;Base.Salmon;Base.MeatPatty;Base.MincedMeat;Base.ChickenWings;Base.Chicken;Base.ChickenFillet;Base.TurkeyWings;Base.TurkeyLegs;Base.TurkeyFillet;Base.MuttonChop;Base.PorkChop;Base.Pork;Base.Venison;Base.Beef;Base.Steak;Base.FrogMeat;Base.Rabbitmeat;Base.Smallanimalmeat;Base.Smallbirdmeat] mappers[meatType] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+		itemMapper meatType
+		{
+			FishFillet_Salted = FishFillet,
+			Salmon_Salted = Salmon,
+			MeatPatty_Salted = MeatPatty,
+			MincedMeat_Salted = MincedMeat,
+			ChickenWings_Salted = ChickenWings,
+			Chicken_Salted = Chicken,
+			ChickenFillet_Salted = ChickenFillet,
+			TurkeyWings_Salted = TurkeyWings,
+			TurkeyLegs_Salted = TurkeyLegs,
+			TurkeyFillet_Salted = TurkeyFillet,
+			MuttonChop_Salted = MuttonChop,
+			PorkChop_Salted = PorkChop,
+			Pork_Salted = Pork,
+			Venison_Salted = Venison,
+			Beef_Salted = Beef,
+			Steak_Salted = Steak,
+			FrogMeat_Salted = FrogMeat,
+			Rabbitmeat_Salted = Rabbitmeat,
+			Smallanimalmeat_Salted = Smallanimalmeat,
+			Smallbirdmeat_Salted = Smallbirdmeat,
+		}
+	}
+
+	craftRecipe MakeJerky
+	{
+        timedAction = SliceMeat_Surface,
+		Time = 100,
+		NeedToBeLearn = True,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:3,
+		AutoLearnAny = Cooking:6,
+		OnCreate = Recipe.OnCreate.MakeJerky,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[SharpnessCheck],
+			item 4 [Base.Marinade],
+			item 1 [Base.Venison;Base.Venison_Salted;Base.MeatPatty;Base.MincedMeat;Base.ChickenWings;Base.Chicken;Base.ChickenFillet;Base.TurkeyWings;Base.TurkeyLegs;Base.TurkeyFillet;Base.MuttonChop;Base.PorkChop;Base.Pork;Base.Beef;Base.Steak;Base.FrogMeat;Base.Rabbitmeat;Base.Smallanimalmeat;Base.Smallbirdmeat;Base.MeatPatty_Salted;Base.MincedMeat_Salted;Base.ChickenWings_Salted;Base.Chicken_Salted;Base.ChickenFillet_Salted;Base.TurkeyWings_Salted;Base.TurkeyLegs_Salted;Base.TurkeyFillet_Salted;Base.MuttonChop_Salted;Base.PorkChop_Salted;Base.Pork_Salted;Base.Beef_Salted;Base.Steak_Salted;Base.FrogMeat_Salted;Base.Rabbitmeat_Salted;Base.Smallanimalmeat_Salted;Base.Smallbirdmeat_Salted;Base.FishFillet;Base.Salmon;Base.FishFillet_Salted;Base.Salmon_Salted] mappers[meatType] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+		itemMapper meatType
+		{
+			Jerky_Fish = FishFillet,
+			Jerky_Fish = Salmon,
+			Jerky_Beef = MeatPatty,
+			Jerky_Beef = MincedMeat,
+			Jerky_Poultry = ChickenWings,
+			Jerky_Poultry = Chicken,
+			Jerky_Poultry = ChickenFillet,
+			Jerky_Poultry = TurkeyWings,
+			Jerky_Poultry = TurkeyLegs,
+			Jerky_Poultry = TurkeyFillet,
+			Jerky_Meat = MuttonChop,
+			Jerky_Meat = PorkChop,
+			Jerky_Meat = Pork,
+			Jerky_Venison = Venison,
+			Jerky_Beef = Beef,
+			Jerky_Beef = Steak,
+			Jerky_Game = FrogMeat,
+			Jerky_Game = Rabbitmeat,
+			Jerky_Game = Smallanimalmeat,
+			Jerky_Game = Smallbirdmeat,
+			Jerky_Fish = FishFillet_Salted,
+			Jerky_Fish = Salmon_Salted,
+			Jerky_Beef = MeatPatty_Salted,
+			Jerky_Beef = MincedMeat_Salted,
+			Jerky_Poultry = ChickenWings_Salted,
+			Jerky_Poultry = Chicken_Salted,
+			Jerky_Poultry = ChickenFillet_Salted,
+			Jerky_Poultry = TurkeyWings_Salted,
+			Jerky_Poultry = TurkeyLegs_Salted,
+			Jerky_Poultry = TurkeyFillet_Salted,
+			Jerky_Meat = MuttonChop_Salted,
+			Jerky_Meat = PorkChop_Salted,
+			Jerky_Meat = Pork_Salted,
+			Jerky_Venison = Venison_Salted,
+			Jerky_Beef = Beef_Salted,
+			Jerky_Beef = Steak_Salted,
+			Jerky_Game = FrogMeat_Salted,
+			Jerky_Game = Rabbitmeat_Salted,
+			Jerky_Game = Smallanimalmeat_Salted,
+			Jerky_Game = Smallbirdmeat_Salted,
+
+            	default = Base.Jerky_Venison,
+		}
+	}
+}
