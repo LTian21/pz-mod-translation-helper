@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-16 16:12:22 UTC+08:00`*
+*最后更新于：`2025-11-16 20:18:33 UTC+08:00`*
 
 ---
 
@@ -17,10 +17,9 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251116_040401``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251116_201833``)**
 
-*   **NeatBuilding_AddonXPDisplay (ID: 3540503606)**: 新增 `3` 条, 移除 `0` 条。
-*   **RealisticTemperature (ID: 3600401184)**: 新增 `2` 条, 移除 `0` 条。
+*   **SnackTime89 (ID: 3589560764)**: 新增 `8` 条, 移除 `0` 条。
 
 ---
 
@@ -153,7 +152,7 @@
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 9 | 45 | 2 | 55 |
 | Military Ponchos: Reloaded | 3439247001 | 8 | 65 | 11 | 73 |
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
-| Skill Recovery Journal | 2503622437 | 8 | 0 | 0 | 79 |
+| Skill Recovery Journal | 2503622437 | 8 | 0 | 8 | 79 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
 | darlak's H.E.C.U. | 3452711271 | 7 | 96 | 14 | 108 |
 |  Hephas Occupations and Traits | 3256482412 | 7 | 339 | 0 | 346 |
@@ -211,7 +210,7 @@
 | Thief Expansion | 2596620950 | 2 | 68 | 0 | 70 |
 | AVA: Ranger Blazer | 3391400317 | 2 | 0 | 0 | 2 |
 | PZK VLC (Vanilla look-like car pack) | 3217685049 | 2 | 693 | 6 | 695 |
-| RaccoonCityB42 | 3388468313 | 2 | 0 | 0 | 205 |
+| RaccoonCityB42 | 3388468313 | 2 | 0 | 2 | 205 |
 | Realistic Temperature Mod [B42] | 3600401184 | 2 | 0 | 0 | 56 |
 | Use Belt as Weapon [B42/41] | 3339423397 | 2 | 3 | 2 | 5 |
 | '86 Chevrolet CUCVs + M101A2 Trailer | 3428008364 | 1 | 82 | 1 | 83 |

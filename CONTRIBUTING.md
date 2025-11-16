@@ -59,18 +59,47 @@
 适合熟悉 Git 与 GitHub 的贡献者。整体步骤与 `README.md` 中“手动创建 Pull Request (高级选项)”一致，这里只简要列出：
 
 1. Fork 本仓库并克隆到本地；
-2. 基于 `main`（或指定分支）创建新分支：
+2. 基于 `main`创建新分支：
    ```bash
    git checkout -b feature/your-translation
-
+   ```
+   创建一个空提交用于创建草稿PR
+   ```bash
+   git commit --allow-empty -m "lock"
+   ```
+   参照以下格式填入PR正文
+   填写示例（仅示范，不要直接提交这个示例）：
+   ```json
+   {
+      "lockedBy": "Laotian",
+      "language": "CN",
+      "lockedAt": "2025-11-16 17:01:58",
+      "expiresAt": "2025-11-23 17:01:58",
+      "modIds": ["2503622437","2714198296","3044807092"]
+   }
+   ```
+   可复制以下这段进行填写
+   ```json
+   {
+      "lockedBy": "在这里填你的名称",
+      "language": "CN",
+      "lockedAt": "在这里填开始时间",
+      "expiresAt": "在这里填结束时间",
+      "modIds": ["在这里填你领取的ModID 多个ID使用,隔开"]
+   }
+   ```
 3. 编辑相关翻译文件（例如 `data/translations_CN.txt`），并按照规范：
 
    * 带前导 Tab 的条目为**待处理**；
    * 完成翻译或校对后，**删除行首所有 Tab 与前导空格**。
-4. 提交并推送分支后，在 GitHub 上发起 Pull Request，并在 PR 描述中简要说明：
+4. 当你认为本次翻译 / 校对工作已基本完成时：
+   
+   * 确认草稿 PR 中的任务锁定信息（lockedBy / modIds）与当前实际情况一致，如有变更请一并更新；
+   * 在 GitHub 上将该 Pull Request 从草稿（Draft）状态改为“Ready for review”（准备审核）；
+   * 如有需要，可在 PR 标题中补充说明：
 
-   * 翻译了哪些模组；
-   * 主要修改内容（新增 / 校对 / 修错 等）。
+     * 本次翻译/校对涉及了哪些模组；
+     * 主要修改内容（新增 / 校对 / 修错 等）。
 
 ---
 
