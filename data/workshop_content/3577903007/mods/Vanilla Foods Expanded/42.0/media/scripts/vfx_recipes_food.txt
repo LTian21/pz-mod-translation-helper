@@ -896,7 +896,7 @@ module VFX
 
     /**** Pasta and Rice ****/
 
-        craftRecipe PrepareRiceSaucepan
+        craftRecipe PrepareBrownRiceSaucepan
         {
             timedAction = VFX.SaucepanCooking,
             Time = 50,
@@ -905,9 +905,9 @@ module VFX
 
             inputs
             {
-                item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy flags[InheritCondition;ItemCount],
+                item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mappers[riceType] mode:destroy,
                 -fluid 0.6 categories[Water] mode:mixture,
-                item 10 [VFX.BrownRice;VFX.JasmineRice;VFX.BasmatiRice;VFX.ArborioRice] mappers[riceType],
+                item 10 [VFX.BrownRice],
             }
 
             outputs
@@ -917,30 +917,23 @@ module VFX
 
             itemMapper riceType
             {
-                VFX.WaterSaucepanBrownRice = VFX.BrownRice,
-                VFX.WaterSaucepanJasmineRice = VFX.JasmineRice,
-                VFX.WaterSaucepanBasmatiRice = VFX.BasmatiRice,
-                VFX.WaterSaucepanArborioRice = VFX.ArborioRice,
-
-                VFX.WaterSaucepanCopperBrownRice = VFX.BrownRice,
-                VFX.WaterSaucepanCopperJasmineRice = VFX.JasmineRice,
-                VFX.WaterSaucepanCopperBasmatiRice = VFX.BasmatiRice,
-                VFX.WaterSaucepanCopperArborioRice = VFX.ArborioRice,
+                VFX.WaterSaucepanBrownRice = Base.Saucepan,
+                VFX.WaterSaucepanCopperBrownRice = Base.SaucepanCopper,
             }
         }
 
-        craftRecipe PrepareRicePot
+        craftRecipe PrepareJasmineRiceSaucepan
         {
-            timedAction = VFX.PotCooking,
+            timedAction = VFX.SaucepanCooking,
             Time = 50,
             Tags = AnySurfaceCraft;Cooking,
             category = Cooking,
 
             inputs
             {
-                item 1 [Base.Pot;Base.PotForged] mode:destroy flags[InheritCondition;ItemCount],
-                -fluid 1.5 categories[Water] mode:mixture,
-                item 10 [VFX.BrownRice;VFX.JasmineRice;VFX.BasmatiRice;VFX.ArborioRice] mappers[riceType],
+                item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mappers[riceType] mode:destroy,
+                -fluid 0.6 categories[Water] mode:mixture,
+                item 10 [VFX.JasmineRice],
             }
 
             outputs
@@ -950,19 +943,12 @@ module VFX
 
             itemMapper riceType
             {
-                VFX.WaterPotBrownRice = VFX.BrownRice,
-                VFX.WaterPotJasmineRice = VFX.JasmineRice,
-                VFX.WaterPotBasmatiRice = VFX.BasmatiRice,
-                VFX.WaterPotArborioRice = VFX.ArborioRice,
-
-                VFX.WaterPotForgedBrownRice = VFX.BrownRice,
-                VFX.WaterPotForgedJasmineRice = VFX.JasmineRice,
-                VFX.WaterPotForgedBasmatiRice = VFX.BasmatiRice,
-                VFX.WaterPotForgedArborioRice = VFX.ArborioRice,
+                VFX.WaterSaucepanJasmineRice = Base.Saucepan,
+                VFX.WaterSaucepanCopperJasmineRice = Base.SaucepanCopper,
             }
         }
 
-        craftRecipe PrepareDryPastaSaucepan
+        craftRecipe PrepareBasmatiRiceSaucepan
         {
             timedAction = VFX.SaucepanCooking,
             Time = 50,
@@ -971,29 +957,50 @@ module VFX
 
             inputs
             {
-                item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy flags[InheritCondition;ItemCount],
+                item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mappers[riceType] mode:destroy,
                 -fluid 0.6 categories[Water] mode:mixture,
-                item 10 [VFX.Macaroni;VFX.Fettuccine;VFX.Penne] mappers[pastaType],
+                item 10 [VFX.BasmatiRice],
             }
 
             outputs
             {
-                item 1 mapper:pastaType,
+                item 1 mapper:riceType,
             }
 
-            itemMapper pastaType
+            itemMapper riceType
             {
-                VFX.WaterSaucepanMacaroni = VFX.Macaroni,
-                VFX.WaterSaucepanFettuccine = VFX.Fettuccine,
-                VFX.WaterSaucepanPenne = VFX.Penne,
-
-                VFX.WaterSaucepanCopperMacaroni = VFX.Macaroni,
-                VFX.WaterSaucepanCopperFettuccine = VFX.Fettuccine,
-                VFX.WaterSaucepanCopperPenne = VFX.Penne,
+                VFX.WaterSaucepanBasmatiRice = Base.Saucepan,
+                VFX.WaterSaucepanCopperBasmatiRice = Base.SaucepanCopper,
             }
         }
 
-        craftRecipe PrepareDryPastaPot
+        craftRecipe PrepareArborioRiceSaucepan
+        {
+            timedAction = VFX.SaucepanCooking,
+            Time = 50,
+            Tags = AnySurfaceCraft;Cooking,
+            category = Cooking,
+
+            inputs
+            {
+                item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mappers[riceType] mode:destroy,
+                -fluid 0.6 categories[Water] mode:mixture,
+                item 10 [VFX.ArborioRice],
+            }
+
+            outputs
+            {
+                item 1 mapper:riceType,
+            }
+
+            itemMapper riceType
+            {
+                VFX.WaterSaucepanArborioRice = Base.Saucepan,
+                VFX.WaterSaucepanCopperArborioRice = Base.SaucepanCopper,
+            }
+        }
+
+        craftRecipe PrepareBrownRicePot
         {
             timedAction = VFX.PotCooking,
             Time = 50,
@@ -1002,9 +1009,113 @@ module VFX
 
             inputs
             {
-                item 1 [Base.Pot;Base.PotForged] mode:destroy flags[InheritCondition;ItemCount],
+                item 1 [Base.Pot;Base.PotForged] mode:destroy flags[InheritCondition;ItemCount] mappers[riceType],
                 -fluid 1.5 categories[Water] mode:mixture,
-                item 10 [VFX.Macaroni;VFX.Fettuccine;VFX.Penne] mappers[pastaType],
+                item 10 [VFX.BrownRice],
+            }
+
+            outputs
+            {
+                item 1 mapper:riceType,
+            }
+
+            itemMapper riceType
+            {
+                VFX.WaterPotBrownRice = Base.Pot,
+                VFX.WaterPotForgedBrownRice = Base.PotForged,
+            }
+        }
+
+        craftRecipe PrepareJasmineRicePot
+        {
+            timedAction = VFX.PotCooking,
+            Time = 50,
+            Tags = AnySurfaceCraft;Cooking,
+            category = Cooking,
+
+            inputs
+            {
+                item 1 [Base.Pot;Base.PotForged] mode:destroy flags[InheritCondition;ItemCount] mappers[riceType],
+                -fluid 1.5 categories[Water] mode:mixture,
+                item 10 [VFX.JasmineRice],
+            }
+
+            outputs
+            {
+                item 1 mapper:riceType,
+            }
+
+            itemMapper riceType
+            {
+                VFX.WaterPotJasmineRice = Base.Pot,
+                VFX.WaterPotForgedBrownRice = Base.PotForged,
+            }
+        }
+
+        craftRecipe PrepareBasmatiRicePot
+        {
+            timedAction = VFX.PotCooking,
+            Time = 50,
+            Tags = AnySurfaceCraft;Cooking,
+            category = Cooking,
+
+            inputs
+            {
+                item 1 [Base.Pot;Base.PotForged] mode:destroy flags[InheritCondition;ItemCount] mappers[riceType],
+                -fluid 1.5 categories[Water] mode:mixture,
+                item 10 [VFX.BasmatiRice],
+            }
+
+            outputs
+            {
+                item 1 mapper:riceType,
+            }
+
+            itemMapper riceType
+            {
+                VFX.WaterPotBasmatiRice = Base.Pot,
+                VFX.WaterPotForgedBasmatiRice = Base.PotForged,
+            }
+        }
+
+        craftRecipe PrepareArborioRicePot
+        {
+            timedAction = VFX.PotCooking,
+            Time = 50,
+            Tags = AnySurfaceCraft;Cooking,
+            category = Cooking,
+
+            inputs
+            {
+                item 1 [Base.Pot;Base.PotForged] mode:destroy flags[InheritCondition;ItemCount] mappers[riceType],
+                -fluid 1.5 categories[Water] mode:mixture,
+                item 10 [VFX.ArborioRice],
+            }
+
+            outputs
+            {
+                item 1 mapper:riceType,
+            }
+
+            itemMapper riceType
+            {
+                VFX.WaterPotArborioRice = Base.Pot,
+                VFX.WaterPotForgedArborioRice = Base.PotForged,
+            }
+        }
+
+        craftRecipe PrepareMacaroniSaucepan
+        {
+            timedAction = VFX.SaucepanCooking,
+            Time = 50,
+            Tags = AnySurfaceCraft;Cooking,
+            category = Cooking,
+
+            inputs
+            {
+                item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mappers[pastaType] mode:destroy,
+                -fluid 0.6 categories[Water] mode:mixture,
+                item 10 [VFX.Macaroni],
             }
 
             outputs
@@ -1014,13 +1125,138 @@ module VFX
 
             itemMapper pastaType
             {
-                VFX.WaterPotMacaroni = VFX.Macaroni,
-                VFX.WaterPotFettuccine = VFX.Fettuccine,
-                VFX.WaterPotPenne = VFX.Penne,
+                VFX.WaterSaucepanMacaroni = Base.Saucepan,
+                VFX.WaterSaucepanCopperMacaroni = Base.SaucepanCopper,
+            }
+        }
 
-                VFX.WaterPotForgedMacaroni = VFX.Macaroni,
-                VFX.WaterPotForgedFettuccine = VFX.Fettuccine,
-                VFX.WaterPotForgedPenne = VFX.Penne,
+        craftRecipe PrepareFettuccineSaucepan
+        {
+            timedAction = VFX.SaucepanCooking,
+            Time = 50,
+            Tags = AnySurfaceCraft;Cooking,
+            category = Cooking,
+
+            inputs
+            {
+                item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mappers[pastaType] mode:destroy,
+                -fluid 0.6 categories[Water] mode:mixture,
+                item 10 [VFX.Fettuccine],
+            }
+
+            outputs
+            {
+                item 1 mapper:pastaType,
+            }
+
+            itemMapper pastaType
+            {
+                VFX.WaterSaucepanFettuccine = Base.Saucepan,
+                VFX.WaterSaucepanCopperFettuccine = Base.SaucepanCopper,
+            }
+        }
+
+        craftRecipe PreparePenneSaucepan
+        {
+            timedAction = VFX.SaucepanCooking,
+            Time = 50,
+            Tags = AnySurfaceCraft;Cooking,
+            category = Cooking,
+
+            inputs
+            {
+                item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mappers[pastaType] mode:destroy,
+                -fluid 0.6 categories[Water] mode:mixture,
+                item 10 [VFX.Penne],
+            }
+
+            outputs
+            {
+                item 1 mapper:pastaType,
+            }
+
+            itemMapper pastaType
+            {
+                VFX.WaterSaucepanPenne = Base.Saucepan,
+                VFX.WaterSaucepanCopperPenne = Base.SaucepanCopper,
+            }
+        }
+
+        craftRecipe PrepareMacaroniPot
+        {
+            timedAction = VFX.PotCooking,
+            Time = 50,
+            Tags = AnySurfaceCraft;Cooking,
+            category = Cooking,
+
+            inputs
+            {
+                item 1 [Base.Pot;Base.PotForged] mode:destroy flags[InheritCondition;ItemCount] mappers[pastaType],
+                -fluid 1.5 categories[Water] mode:mixture,
+                item 10 [VFX.Macaroni],
+            }
+
+            outputs
+            {
+                item 1 mapper:pastaType,
+            }
+
+            itemMapper pastaType
+            {
+                VFX.WaterPotMacaroni = Base.Pot,
+                VFX.WaterPotForgedMacaroni = Base.PotForged,
+            }
+        }
+
+        craftRecipe PrepareFettuccinePot
+        {
+            timedAction = VFX.PotCooking,
+            Time = 50,
+            Tags = AnySurfaceCraft;Cooking,
+            category = Cooking,
+
+            inputs
+            {
+                item 1 [Base.Pot;Base.PotForged] mode:destroy flags[InheritCondition;ItemCount] mappers[pastaType],
+                -fluid 1.5 categories[Water] mode:mixture,
+                item 10 [VFX.Fettuccine],
+            }
+
+            outputs
+            {
+                item 1 mapper:pastaType,
+            }
+
+            itemMapper pastaType
+            {
+                VFX.WaterPotFettuccine = Base.Pot,
+                VFX.WaterPotForgedFettuccine = Base.PotForged,
+            }
+        }
+
+        craftRecipe PreparePennePot
+        {
+            timedAction = VFX.PotCooking,
+            Time = 50,
+            Tags = AnySurfaceCraft;Cooking,
+            category = Cooking,
+
+            inputs
+            {
+                item 1 [Base.Pot;Base.PotForged] mode:destroy flags[InheritCondition;ItemCount] mappers[pastaType],
+                -fluid 1.5 categories[Water] mode:mixture,
+                item 10 [VFX.Penne],
+            }
+
+            outputs
+            {
+                item 1 mapper:pastaType,
+            }
+
+            itemMapper pastaType
+            {
+                VFX.WaterPotPenne = Base.Pot,
+                VFX.WaterPotForgedPenne = Base.PotForged,
             }
         }
 
