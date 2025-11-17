@@ -25,9 +25,14 @@ namespace 翻译工具
             {
                 // 第一轮更新：刷新最新任务状态
                 AppendOutput("[第1阶段] 尝试更新翻译文件...");
-                await RunHelperAsync("init", null);
-                await RunHelperAsync("sync", null);
-                await RunHelperAsync("listpr", null);
+                int initResult = await RunHelperAsync("init", null);
+                if (initResult == 1) return;
+                
+                int syncResult = await RunHelperAsync("sync", null);
+                if (syncResult == 1) return;
+                
+                int listResult = await RunHelperAsync("listpr", null);
+                if (listResult == 1) return;
 
                 var selected = _modItems.Where(m => m.IsSelected).ToList();
                 if (selected.Count == 0)
@@ -45,7 +50,9 @@ namespace 翻译工具
                         AppendOutput("════════════════════════════════════════");
 
                         var modIds = string.Join(",", lockedMods.Select(m => "\"" + m + "\""));
-                        await RunHelperAsync("write", modIds);
+                        int writeResult = await RunHelperAsync("write", modIds);
+                        if (writeResult == 1) return;
+                        
                         AppendOutput(" 翻译文件已生成");
                     }
                     else
@@ -70,13 +77,20 @@ namespace 翻译工具
 
                 // 尝试锁定
                 AppendOutput("\n[第2阶段] 尝试锁定所选 Mod...");
-                await RunHelperAsync("lockmod", ids);
+                int lockResult = await RunHelperAsync("lockmod", ids);
+                if (lockResult == 1) return;
 
                 // 刷新状态
                 AppendOutput("\n[第3阶段] 尝试刷新锁定结果...");
-                await RunHelperAsync("init", null);
-                await RunHelperAsync("sync", null);
-                await RunHelperAsync("listpr", null);
+                initResult = await RunHelperAsync("init", null);
+                if (initResult == 1) return;
+                
+                syncResult = await RunHelperAsync("sync", null);
+                if (syncResult == 1) return;
+                
+                listResult = await RunHelperAsync("listpr", null);
+                if (listResult == 1) return;
+                
                 await LoadTranslationInfoAsync();
 
                 AppendOutput("\n════════════════════════════════════════");
@@ -87,7 +101,9 @@ namespace 翻译工具
                 AppendOutput("\n[第4阶段] 自动生成翻译文件...");
                 var lockedModsAfter = _modItems.Where(m => m.IsLockedByMe).Select(m => m.ModId).ToHashSet();
                 var lockedIds = string.Join(",", lockedModsAfter.Select(m => "\"" + m + "\""));
-                await RunHelperAsync("write", lockedIds);
+                int writeResult2 = await RunHelperAsync("write", lockedIds);
+                if (writeResult2 == 1) return;
+                
                 AppendOutput(" 翻译文件已生成");
             }
             catch (Exception ex)
@@ -120,7 +136,8 @@ namespace 翻译工具
 
                 AppendOutput($"正在生成翻译文件...");
                 var ids = string.Join(",", lockedMods.Select(m => "\"" + m + "\""));
-                await RunHelperAsync("write", ids);
+                int writeResult = await RunHelperAsync("write", ids);
+                if (writeResult == 1) return;
 
                 var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
                 if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -178,15 +195,33 @@ namespace 翻译工具
                 AppendOutput("════════════════════════════════════════");
 
                 AppendOutput("\n[合并阶段] 正在合并用户翻译到仓库翻译文件...");
-                await RunHelperAsync("merge", null);
+                int mergeResult = await RunHelperAsync("merge", null);
+                if (mergeResult != 0)
+                {
+                    AppendOutput("\n✗ 合并阶段失败！");
+                    ShowBackupWarning("合并用户翻译失败");
+                    return;
+                }
 
                 AppendOutput("\n[提交阶段] 正在提交修改到远程仓库...");
-                await RunHelperAsync("commit", message);
+                int commitResult = await RunHelperAsync("commit", message);
+                if (commitResult != 0)
+                {
+                    AppendOutput("\n✗ 提交阶段失败！");
+                    ShowBackupWarning("提交修改到远程仓库失败");
+                    return;
+                }
 
                 AppendOutput("\n[刷新阶段] 正在刷新任务状态...");
-                await RunHelperAsync("init", null);
-                await RunHelperAsync("sync", null);
-                await RunHelperAsync("listpr", null);
+                int initResult = await RunHelperAsync("init", null);
+                int syncResult = await RunHelperAsync("sync", null);
+                int listResult = await RunHelperAsync("listpr", null);
+                
+                if (initResult != 0 || syncResult != 0 || listResult != 0)
+                {
+                    AppendOutput("\n! 刷新状态时部分操作失败，但核心保存已完成");
+                }
+                
                 await LoadTranslationInfoAsync();
 
                 AppendOutput("\n════════════════════════════════════════");
@@ -197,6 +232,7 @@ namespace 翻译工具
             {
                 AppendOutput($"\n✗ 保存进度失败: {ex.Message}");
                 AppendOutput("════════════════════════════════════════");
+                ShowBackupWarning($"保存进度时发生异常: {ex.Message}");
             }
         }
 
@@ -220,18 +256,42 @@ namespace 翻译工具
                     var commitMessage = input.Value ?? "提交审核前保存";
 
                     AppendOutput("\n[第1阶段] 合并用户翻译...");
-                    await RunHelperAsync("merge", null);
+                    int mergeResult = await RunHelperAsync("merge", null);
+                    if (mergeResult != 0)
+                    {
+                        AppendOutput("\n✗ 合并阶段失败！");
+                        ShowBackupWarning("合并用户翻译失败");
+                        return;
+                    }
 
                     AppendOutput("\n[第2阶段] 保存进度...");
-                    await RunHelperAsync("commit", commitMessage);
+                    int commitResult = await RunHelperAsync("commit", commitMessage);
+                    if (commitResult != 0)
+                    {
+                        AppendOutput("\n✗ 保存进度失败！");
+                        ShowBackupWarning("保存进度失败");
+                        return;
+                    }
 
                     AppendOutput("\n[第3阶段] 将 PR 状态改为 Ready for Review...");
-                    await RunHelperAsync("submit", null);
+                    int submitResult = await RunHelperAsync("submit", null);
+                    if (submitResult != 0)
+                    {
+                        AppendOutput("\n✗ 提交审核失败！");
+                        ShowBackupWarning("将 PR 状态改为 Ready for Review 失败");
+                        return;
+                    }
 
                     AppendOutput("\n[第4阶段] 刷新任务状态...");
-                    await RunHelperAsync("init", null);
-                    await RunHelperAsync("sync", null);
-                    await RunHelperAsync("listpr", null);
+                    int initResult = await RunHelperAsync("init", null);
+                    int syncResult = await RunHelperAsync("sync", null);
+                    int listResult = await RunHelperAsync("listpr", null);
+                    
+                    if (initResult != 0 || syncResult != 0 || listResult != 0)
+                    {
+                        AppendOutput("\n! 刷新状态时部分操作失败，但核心提交已完成");
+                    }
+                    
                     await LoadTranslationInfoAsync();
 
                     UpdateButtonStates();
@@ -259,12 +319,24 @@ namespace 翻译工具
                     AppendOutput("════════════════════════════════════════");
 
                     AppendOutput("\n[第1阶段] 将 PR 状态改为 Draft...");
-                    await RunHelperAsync("withdraw", null);
+                    int withdrawResult = await RunHelperAsync("withdraw", null);
+                    if (withdrawResult != 0)
+                    {
+                        AppendOutput("\n✗ 撤回操作失败！");
+                        ShowBackupWarning("将 PR 状态改为 Draft 失败");
+                        return;
+                    }
 
                     AppendOutput("\n[第2阶段] 尝试刷新任务状态...");
-                    await RunHelperAsync("init", null);
-                    await RunHelperAsync("sync", null);
-                    await RunHelperAsync("listpr", null);
+                    int initResult = await RunHelperAsync("init", null);
+                    int syncResult = await RunHelperAsync("sync", null);
+                    int listResult = await RunHelperAsync("listpr", null);
+                    
+                    if (initResult != 0 || syncResult != 0 || listResult != 0)
+                    {
+                        AppendOutput("\n! 刷新状态时部分操作失败，但核心撤回已完成");
+                    }
+                    
                     await LoadTranslationInfoAsync();
 
                     UpdateButtonStates();
@@ -278,6 +350,7 @@ namespace 翻译工具
             {
                 AppendOutput($"\n✗ 操作失败: {ex.Message}");
                 AppendOutput("════════════════════════════════════════");
+                ShowBackupWarning($"操作过程中发生异常: {ex.Message}");
             }
         }
 
@@ -327,6 +400,28 @@ namespace 翻译工具
             {
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 显示备份警告对话框，提示用户操作失败并建议备份翻译文件
+        /// </summary>
+        /// <param name="errorMessage">错误消息</param>
+        private void ShowBackupWarning(string errorMessage)
+        {
+            var programDir = AppDomain.CurrentDomain.BaseDirectory;
+            var suffix = string.IsNullOrWhiteSpace(_config?.LanguageSuffix) ? "CN" : _config.LanguageSuffix;
+            var translationFile = Path.Combine(programDir, $"translations_{_config?.UserName ?? "user"}_{suffix}.txt");
+
+            var message = $"操作失败：{errorMessage}\n\n" +
+                         $"建议您立即备份程序目录下的翻译文件：\n{translationFile}\n\n" +
+                         $"您可以稍后重试操作。";
+
+            System.Windows.MessageBox.Show(
+                this,
+                message,
+                "操作失败 - 请备份翻译文件",
+                System.Windows.MessageBoxButton.OK,
+                System.Windows.MessageBoxImage.Warning);
         }
     }
 }

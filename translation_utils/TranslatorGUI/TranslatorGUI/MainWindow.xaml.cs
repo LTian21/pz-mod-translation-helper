@@ -596,13 +596,13 @@ namespace 翻译工具
             return false;
         }
 
-        private async Task RunHelperAsync(string operation, string? commitMessage)
+        private async Task<int> RunHelperAsync(string operation, string? commitMessage)
         {
             // 禁用按钮，防止并发操作
             if (_isRunning)
             {
                 AppendOutput("已有 CLI 操作进行中，请等待完成。");
-                return;
+                return -1;
             }
 
             _isRunning = true;
@@ -612,6 +612,7 @@ namespace 翻译工具
             _progressWindow = new ProgressWindow(this);
             _progressWindow.Show();
 
+            int exitCode = -1;
             try
             {
                 var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
@@ -627,7 +628,7 @@ namespace 翻译工具
                 if (!File.Exists(exePath))
                 {
                     AppendOutput($"无法找到 TranslatorHelper.exe: {exePath}");
-                    return;
+                    return -1;
                 }
 
                 var argsBuilder = new StringBuilder();
@@ -694,10 +695,31 @@ namespace 翻译工具
                     proc.BeginErrorReadLine();
 
                     await Task.Run(() => proc.WaitForExit());
+                    
+                    exitCode = proc.ExitCode;
+                    if (exitCode != 0)
+                    {
+                        AppendOutput($"操作完成，退出码: {exitCode}");
+                        
+                        // 如果退出码为1，显示错误对话框
+                        if (exitCode == 1)
+                        {
+                            Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                System.Windows.MessageBox.Show(
+                                    this,
+                                    $"执行操作 '{operation}' 时遇到错误（退出码：{exitCode}）\n\n请查看输出窗口了解详细信息。",
+                                    "操作遇到错误",
+                                    System.Windows.MessageBoxButton.OK,
+                                    System.Windows.MessageBoxImage.Warning);
+                            }));
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
                     AppendOutput($"执行失败: {ex.Message}");
+                    exitCode = -1;
                 }
             }
             finally
@@ -716,6 +738,8 @@ namespace 翻译工具
                 _isRunning = false;
                 EnableAllButtons();
             }
+            
+            return exitCode;
         }
 
         // 将PAT token脱敏，只显示前缀和后10位
@@ -1056,7 +1080,7 @@ namespace 翻译工具
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
                     MessageBox.Show(this,
-                        "出现证书信任问题，通常是因为您所在的网络（如校园网、政府网或大型企业网络）可能伪造了证书以监视网络通信。这会导致您的设备无法验证该证书的有效性。建议您尝试使用手机热点或更换网络环境。",
+                        "出现证书信任问题，通常是因为您所在的网络（如校园网、政府网或大型企业网络）可能伪造了安全加密证书以监视网络通信。这会导致您的设备无法验证该证书的有效性。建议您尝试使用手机热点或更换网络环境。\n\n特别提醒：如果您更换网络环境仍然出现此提示，且您安装了由您组织提供的VPN程序用于接入组织内网，那么该错误可能是由于该VPN程序向您的系统写入了伪造的根证书导致的。目前已证实的是，国内深信服(Sangfor)公司提供的EasyConnect程序会按政企客户要求静默写入伪造的根证书用于监控通信，而该公司的产品在国内政企中应用广泛。解决方法是卸载程序并吊销所有来自深信服(Sangfor)的证书，同时将该机构列入不信任名单。其它可能的公司包括360等国内安全厂商。",
                         "网络安全提示",
                         MessageBoxButton.OK,
                         MessageBoxImage.Warning);
@@ -1069,7 +1093,7 @@ namespace 翻译工具
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
                     MessageBox.Show(this,
-                        "无法验证证书的吊销状态，可能是因为您所在的网络环境阻止了访问证书验证服务，或者您的网络管理员伪造了证书以监视网络通信。建议您使用手机热点或更换网络环境。",
+                        "无法验证证书的吊销状态，可能是因为您所在的网络环境阻止了访问证书验证服务，或者您的网络管理员伪造了证书以监视网络通信。建议您使用手机热点或更换网络环境。\n\n特别提醒：如果您更换网络环境仍然出现此提示，且您安装了由您组织提供的VPN程序用于接入组织内网，那么该错误可能是由于该VPN程序向您的系统写入了伪造的根证书导致的。目前已证实的是，国内深信服(Sangfor)公司提供的EasyConnect程序会按政企客户要求静默写入伪造的根证书用于监控通信，而该公司的产品在国内政企中应用广泛。解决方法是卸载程序并吊销所有来自深信服(Sangfor)的证书，同时将该机构列入不信任名单。其它可能的公司包括360等国内安全厂商。",
                         "网络安全提示",
                         MessageBoxButton.OK,
                         MessageBoxImage.Warning);
