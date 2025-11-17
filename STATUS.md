@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-17 04:04:13 UTC+08:00`*
+*最后更新于：`2025-11-18 04:04:52 UTC+08:00`*
 
 ---
 
@@ -9,17 +9,18 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``71402`` 条 |
-| **待翻译条目** | ``12671`` 条 |
+| **模组总条目** | ``71612`` 条 |
+| **待翻译条目** | ``12881`` 条 |
 | **已翻译条目** | ``58731`` 条 |
 | **待校对条目** | ``47230`` 条 |
-| **已支持 Mod 数量** | ``669`` 个 |
+| **已支持 Mod 数量** | ``672`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251116_201833``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251118_040451``)**
 
-*   **SnackTime89 (ID: 3589560764)**: 新增 `8` 条, 移除 `0` 条。
+*   **Vanilla_Foods_Expanded (ID: 3577903007)**: 新增 `14` 条, 移除 `0` 条。
+*   **Take_A_Bath_And_Shower (ID: 3592172476)**: 新增 `1` 条, 移除 `0` 条。
 
 ---
 
@@ -46,6 +47,7 @@
 | Support Goods [B42.9] - MyAlcohol! | 3510863962 | 218 | 0 | 0 | 218 |
 | Project Fallout: GunRunner | 3434691822 | 217 | 29 | 0 | 246 |
 | (B42) Immersive Roleplay Professions and Traits | 3387474156 | 202 | 678 | 0 | 882 |
+| [B42] Paw Low Loot Relooted | 3429902681 | 190 | 0 | 0 | 190 |
 | True Smoking [B42] | 3423984426 | 173 | 26 | 1 | 199 |
 | Somewhat Traits [B42 Compatible] | 3498347699 | 171 | 0 | 0 | 171 |
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
@@ -128,6 +130,7 @@
 | Fallout - NCR Trooper Pack | 3508243687 | 13 | 33 | 13 | 46 |
 | ST Additions - Pry Open | 3579640010 | 12 | 0 | 0 | 139 |
 | The Calm Before The Storm | 2953621037 | 12 | 0 | 0 | 61 |
+| Unseasonal Weather | 3582891045 | 12 | 0 | 0 | 12 |
 | Willowbrook Bastion! | 3479667649 | 12 | 15 | 1 | 27 |
 | [B41\B42] DBG Crowbar Unlock | 3555407625 | 11 | 225 | 46 | 236 |
 | Item Stories [b42] (All in One) | 3569303590 | 11 | 0 | 0 | 11 |
@@ -146,6 +149,7 @@
 | Military Ponchos: Reloaded | 3439247001 | 8 | 65 | 11 | 73 |
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
 | Skill Recovery Journal | 2503622437 | 8 | 0 | 8 | 79 |
+| Throw Your Watch & Alarm | 3605188264 | 8 | 0 | 0 | 8 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
 | darlak's H.E.C.U. | 3452711271 | 7 | 96 | 14 | 108 |
 | [B42] Bodily Functions [v0.12.3] | 3396456841 | 7 | 328 | 0 | 335 |
