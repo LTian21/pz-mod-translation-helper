@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-18 04:04:52 UTC+08:00`*
+*最后更新于：`2025-11-19 04:04:31 UTC+08:00`*
 
 ---
 
@@ -9,18 +9,18 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``71612`` 条 |
-| **待翻译条目** | ``12881`` 条 |
-| **已翻译条目** | ``58731`` 条 |
-| **待校对条目** | ``47230`` 条 |
-| **已支持 Mod 数量** | ``672`` 个 |
+| **模组总条目** | ``72241`` 条 |
+| **待翻译条目** | ``13455`` 条 |
+| **已翻译条目** | ``58786`` 条 |
+| **待校对条目** | ``47292`` 条 |
+| **已支持 Mod 数量** | ``683`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251118_040451``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251119_040430``)**
 
-*   **Vanilla_Foods_Expanded (ID: 3577903007)**: 新增 `14` 条, 移除 `0` 条。
-*   **Take_A_Bath_And_Shower (ID: 3592172476)**: 新增 `1` 条, 移除 `0` 条。
+*   **damnlib (ID: 3171167894)**: 新增 `4` 条, 移除 `0` 条。
+*   **SnackTime89 (ID: 3589560764)**: 新增 `16` 条, 移除 `0` 条。
 
 ---
 
@@ -32,11 +32,12 @@
 | Guns of 93: B42 Test Build (Unstable) | 3183820077 | 748 | 1755 | 1129 | 2553 |
 | Even More Traits | 2855320431 | 606 | 12 | 2 | 618 |
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
+| RV Fenix | 3587939112 | 451 | 0 | 0 | 451 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
 | Pomp's Items - My Little Pony | 2792387747 | 377 | 586 | 1 | 963 |
 | Customizable Containers [B42/41] | 2719850086 | 352 | 1353 | 0 | 1705 |
 | Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 339 | 155 | 0 | 494 |
-| [B42] Take A Bath And Shower | 3592172476 | 296 | 0 | 0 | 296 |
+| [B42] Take A Bath And Shower | 3592172476 | 297 | 0 | 0 | 297 |
 | [B42] School's Out: Anime-Style Student Uniforms | 3404301631 | 285 | 1 | 6 | 286 |
 | Immersive Lore | 3000924731 | 273 | 109 | 0 | 382 |
 | Pomp's Items - Just the Food | 2792348686 | 267 | 397 | 3 | 664 |
@@ -95,6 +96,7 @@
 | Caster Plus Fishing Mod | 3457003463 | 36 | 209 | 0 | 245 |
 | Evolving Traits World (ETW) [B41/B42] - alternative to "Dynamic Traits" | 2914075159 | 36 | 340 | 1 | 376 |
 | Table Saw[B42] | 3540297822 | 36 | 3 | 1 | 39 |
+| Severe Non-Lethal Infections [B42] | 3450825552 | 35 | 0 | 0 | 35 |
 | Better Flashlights [B42] | 3420478458 | 34 | 0 | 0 | 34 |
 | Military Tool Kit | 2705406713 | 32 | 22 | 1 | 54 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 32 | 20 | 2 | 79 |
@@ -113,12 +115,14 @@
 | Fancy Lanterns [B42 Compatible] | 3267733558 | 21 | 47 | 0 | 68 |
 | Milk Them All [B42] | 3568280195 | 21 | 0 | 0 | 21 |
 | Bianca Wardrobe [42. Out now] | 3140453034 | 20 | 803 | 0 | 823 |
+| [B42] Ogrim Mod's - Clean Rags On Clothing Washer | 3535139736 | 20 | 0 | 0 | 20 |
 | Easy Drop'n'Loot | 2871469707 | 20 | 0 | 0 | 20 |
 | Common Sense | 2875848298 | 18 | 29 | 0 | 48 |
 | Equipment UI - Paper Doll Equipment Interface [B42/41] | 2950902979 | 18 | 0 | 0 | 18 |
 | Neat Crafting & Neat Building – XP Display & Mod Info | 3540503606 | 18 | 12 | 2 | 30 |
 | BZQuickSlots | 3396010813 | 18 | 4 | 0 | 22 |
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
+| Long-standing Wooden Structures | 3205738591 | 17 | 0 | 0 | 17 |
 | [B42/41] Repairable Windows | 3378304610 | 17 | 0 | 2 | 17 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
 | [B42/B41] Motorious Zone - Hot Pursuit Add-on | 2841969842 | 15 | 0 | 0 | 15 |
@@ -128,6 +132,7 @@
 | [B41/42] Known And Collected | 2881764317 | 13 | 0 | 0 | 13 |
 | Legendary Satchel | 3560352772 | 13 | 12 | 6 | 25 |
 | Fallout - NCR Trooper Pack | 3508243687 | 13 | 33 | 13 | 46 |
+| Vanilla Vehicles Replacer (KI5) | 3423424077 | 13 | 0 | 0 | 13 |
 | ST Additions - Pry Open | 3579640010 | 12 | 0 | 0 | 139 |
 | The Calm Before The Storm | 2953621037 | 12 | 0 | 0 | 61 |
 | Unseasonal Weather | 3582891045 | 12 | 0 | 0 | 12 |
@@ -143,14 +148,17 @@
 | Street Smarts | 3511535258 | 10 | 11 | 2 | 21 |
 | Undying Zombies (Immersive Respawn Replacement) | 3555199477 | 10 | 0 | 0 | 10 |
 | [B42] Water Pipes (aka Plumbing) | 3546314080 | 10 | 44 | 0 | 54 |
+| [B41/B42] Temperature Affects Food Spoilage Rate | 3297793087 | 9 | 0 | 0 | 9 |
 | Show Key Origin | 3501701205 | 9 | 0 | 0 | 9 |
 | [B41 & B42] Throw your bag across | 3391902125 | 9 | 0 | 0 | 9 |
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 9 | 45 | 2 | 55 |
+| Gyde's Trait Magazines - Additional Magazines | 3566789292 | 8 | 38 | 0 | 46 |
 | Military Ponchos: Reloaded | 3439247001 | 8 | 65 | 11 | 73 |
 | [B42.1.1] Neon moodle levels | 3392116408 | 8 | 0 | 0 | 8 |
 | Skill Recovery Journal | 2503622437 | 8 | 0 | 8 | 79 |
 | Throw Your Watch & Alarm | 3605188264 | 8 | 0 | 0 | 8 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 8 | 37 | 0 | 46 |
+| Gunfire Causes Hearing Loss [B42+] | 3465727755 | 7 | 0 | 0 | 7 |
 | darlak's H.E.C.U. | 3452711271 | 7 | 96 | 14 | 108 |
 | [B42] Bodily Functions [v0.12.3] | 3396456841 | 7 | 328 | 0 | 335 |
 | U.S. M548 Cargo Carrier by Papa_Chad | 3424497614 | 7 | 10 | 0 | 17 |
@@ -165,7 +173,9 @@
 | Change Sandbox Options (by Star) | 2894296454 | 5 | 1 | 1 | 6 |
 | Extended Spices | 3522142755 | 5 | 7 | 5 | 12 |
 | Herbalist | 2875059598 | 5 | 70 | 0 | 75 |
+| Low Quality Zombie Clothing | 3156717285 | 5 | 0 | 0 | 5 |
 | Scavenger Skill [B42] | 3407792640 | 5 | 64 | 0 | 69 |
+| [B42] Stable Weights | 3529361118 | 5 | 0 | 0 | 5 |
 | Tetriz - Arcade Minigame | 3486780625 | 5 | 6 | 0 | 11 |
 | Vehicle Repair Overhaul | 2757712197 | 5 | 50 | 3 | 55 |
 | Wandering Zombies | 2983905789 | 5 | 401 | 1 | 406 |
@@ -181,6 +191,7 @@
 | [Project Fallout] The Beginning | 3461117277 | 4 | 24 | 3 | 28 |
 | The Division Equipment [B42] | 3479867929 | 4 | 97 | 12 | 101 |
 | Zombaroid | 3519916139 | 4 | 38 | 4 | 42 |
+| [B42] Loot-Bearing Bandits | 3491939136 | 3 | 0 | 0 | 3 |
 | [B42] Home Inventory Improved | 3522009163 | 3 | 0 | 0 | 63 |
 | Money From Credit Cards | 3428650803 | 3 | 21 | 0 | 24 |
 | More Car Features + Spawn Zones Expansion | 3520758551 | 3 | 19 | 1 | 22 |
@@ -598,7 +609,7 @@
 | Rick's MLC GunLight Patch [B42] | 3595628283 | 0 | 0 | 0 | 2 |
 | Rick's MLC Pay & Pump | 3194049112 | 0 | 0 | 0 | 20 |
 | Risky Unarmed | 3434796669 | 0 | 0 | 0 | 95 |
-| RV Life | 3553635874 | 0 | 0 | 0 | 9 |
+| RV Life | 3553635874 | 0 | 0 | 0 | 7 |
 | S4 Economy[Shop] | 3480405054 | 0 | 503 | 2 | 503 |
 | SafeLogin | 2876897619 | 0 | 8 | 0 | 8 |
 | SafeWayHamlet 途安里 | 3533315055 | 0 | 0 | 0 | 2 |
@@ -663,7 +674,7 @@
 | Use Belt as Weapon [B42/41] | 3339423397 | 0 | 0 | 2 | 5 |
 | US Military Pack [BUILD 41/42] | 612100872 | 0 | 0 | 0 | 106 |
 | Vanilla Clothing Expansion | 3421271152 | 0 | 33 | 0 | 33 |
-| Vanilla Foods Expanded | 3577903007 | 0 | 0 | 3 | 1944 |
+| Vanilla Foods Expanded | 3577903007 | 0 | 24 | 3 | 1963 |
 | Vanilla Gear Expanded | 3401134276 | 0 | 46 | 4 | 46 |
 | Vanilla MRE [B41/B42] | 3100032203 | 0 | 23 | 0 | 23 |
 | [B42] Vanvival - Build's 42 Nomadic Experience | 3547444619 | 0 | 45 | 26 | 45 |

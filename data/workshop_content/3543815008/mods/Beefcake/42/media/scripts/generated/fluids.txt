@@ -1,0 +1,584 @@
+module Base
+{
+    /*
+    -- example:
+    --for vanilla the identifier ("Test") must match a FluidType enum
+    --if the identifier doesnt match FluidType enum it is considered a modded fluid.
+    fluid Test
+    {
+        Color           = 0 : 0 : 1 ,
+        -- or a named color:
+        ColorReference  = Red,
+        DisplayName     = FLUID_TEST,
+
+        Categories
+        {
+            Beverage,
+            Industrial,
+        }
+
+        -- Optional stuff:
+
+        -- reference a filter script:
+        BlendWhiteList  = MyFluidFilter,
+        BlendBlackList  = MyFluidFilter,
+
+        -- or define anonymous
+        BlendWhiteList
+        {
+            whitelist = true,
+            fluids
+            {
+                Water,
+            }
+            categories
+            {
+                Beverage,
+            }
+        }
+
+        Properties
+        {
+            fatigueChange           = 0,
+            hungerChange            = 0,
+            stressChange            = 0,
+            thirstChange            = 0,
+            unhappyChange           = 0,
+            calories                = 0,
+            carbohydrates           = 0,
+            lipids                  = 0,
+            proteins                = 0,
+            alcohol                 = 0,
+            fluReduction            = 0,
+            painReduction           = 0,
+            enduranceChange         = 0,
+            foodSicknessReduction   = 0,
+        }
+
+        Poison
+        {
+            maxEffect       = None,
+            minAmount       = 0,
+            diluteRatio     = 0,
+        }
+
+    }
+    */
+
+    fluid Water
+    {
+        ColorReference  = LightSkyBlue,
+        DisplayName     = Fluid_Name_Water,
+
+        Categories
+        {
+            Beverage,
+	    Water,
+        }
+
+        Properties
+        {
+            thirstChange            = -50,
+        }
+    }
+
+    fluid TaintedWater
+    {
+        ColorReference  = LightSkyBlue,
+        DisplayName     = Fluid_Name_TaintedWater,
+
+        Categories
+        {
+            Beverage,
+            Hazardous,
+	        Water,
+        }
+
+        Properties
+        {
+            thirstChange            = -50,
+        }
+
+        Poison
+        {
+            maxEffect         = Medium,
+            minAmount         = 1.0,
+            diluteRatio       = 0.20,
+        }
+    }
+
+    fluid CarbonatedWater
+    {
+        ColorReference  = LightSkyBlue,
+        DisplayName     = Fluid_Name_CarbonatedWater,
+
+        Categories
+        {
+            Beverage,
+	    Water,
+        }
+
+        Properties
+        {
+            thirstChange            = -50,
+        }
+    }
+
+    fluid Petrol
+    {
+        ColorReference  = Yellow,
+        DisplayName     = Fluid_Name_Petrol,
+
+        Categories
+        {
+            Fuel,
+            Hazardous,
+            Industrial,
+        }
+
+        Poison
+        {
+            maxEffect         = Deadly,
+            minAmount         = 1.0,
+            diluteRatio       = 0.0,
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            	Fuel,
+            }
+        }
+    }
+
+    fluid Alcohol
+    {
+        ColorReference  = PowderBlue,
+        DisplayName     = Fluid_Name_Alcohol,
+
+        Categories
+        {
+            Alcoholic,
+            Medical,
+            Industrial,
+        }
+
+        Properties
+        {
+            alcohol                 = 1.0,
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            	Industrial,
+            }
+        }
+    }
+
+    fluid Cologne
+    {
+        ColorReference  = Khaki,
+        DisplayName     = Fluid_Name_Cologne,
+
+        Categories
+        {
+           Poisons,
+            Industrial,
+        }
+
+        Properties
+        {
+            alcohol                 = 0.7,
+        }
+
+        Poison
+        {
+            maxEffect         = Medium,
+            minAmount         = 0.2,
+            diluteRatio       = 0.1,
+        }
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            }
+        }
+    }
+
+    fluid Perfume
+    {
+        ColorReference  = LightPink,
+        DisplayName     = Fluid_Name_Perfume,
+
+        Categories
+        {
+           Poisons,
+            Industrial,
+        }
+
+        Properties
+        {
+            alcohol                 = 0.8,
+        }
+
+        Poison
+        {
+            maxEffect         = Medium,
+            minAmount         = 0.2,
+            diluteRatio       = 0.1,
+        }
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            }
+        }
+    }
+
+    fluid PoisonPotent
+    {
+        ColorReference  = Aquamarine,
+        DisplayName     = Fluid_Name_PoisonPotent,
+
+        Categories
+        {
+            Beverage,
+            Poisons,
+            Hazardous,
+        }
+
+        Poison
+        {
+            maxEffect         = Deadly,
+            minAmount         = 0.05,
+            diluteRatio       = 0.60,
+        }
+    }
+
+    fluid Bleach
+    {
+        ColorReference  = Lavender,
+        DisplayName     = Fluid_Name_Bleach,
+
+        Categories
+        {
+            Hazardous,
+        }
+
+        Properties
+        {
+            thirstChange            = -20,
+        }
+
+        Poison
+        {
+            maxEffect         = Deadly,
+            minAmount         = 0.2,
+            diluteRatio       = 0.1,
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            	Beverage,
+            }
+        }
+    }
+
+    fluid Blood
+    {
+        ColorReference  = DarkRed,
+        DisplayName     = Fluid_Name_Blood,
+
+        Categories
+        {
+            Industrial,
+        }
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            }
+        }
+    }
+
+    fluid CleaningLiquid
+    {
+        ColorReference  = PaleGreen,
+        DisplayName     = Fluid_Name_CleaningLiquid,
+
+        Categories
+        {
+            Hazardous,
+        }
+
+        Poison
+        {
+            maxEffect         = Medium,
+            minAmount         = 0.2,
+            diluteRatio       = 0.1,
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            }
+        }
+    }
+
+    fluid Dye
+    {
+        ColorReference  = White,
+        DisplayName     = Fluid_Name_Dye,
+
+        Categories
+        {
+            Colors,
+            Dyes,
+            Industrial,
+            Hazardous,
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+                Dyes,
+            }
+        }
+
+        Poison
+        {
+            maxEffect         = Medium,
+            minAmount         = 0.2,
+            diluteRatio       = 0.1,
+        }
+    }
+
+    fluid HairDye
+    {
+        ColorReference  = White,
+        DisplayName     = Fluid_Name_HairDye,
+
+        Categories
+        {
+            Colors,
+            HairDyes,
+            Industrial,
+            Hazardous,
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+                HairDyes,
+            }
+        }
+
+        Poison
+        {
+            maxEffect         = Medium,
+            minAmount         = 0.2,
+            diluteRatio       = 0.1,
+        }
+    }
+
+    fluid Acid
+    {
+        ColorReference  = LimeGreen,
+        DisplayName     = Fluid_Name_Acid,
+
+        Categories
+        {
+            Hazardous,
+            Industrial,
+        }
+
+        Poison
+        {
+            maxEffect         = Deadly,
+            minAmount         = 0.5,
+            diluteRatio       = 0.7,
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            	Beverage,
+            }
+        }
+    }
+
+    fluid SecretFlavoring
+    {
+        ColorReference  = Tomato,
+        DisplayName     = Fluid_Name_SecretFlavoring,
+
+        Categories
+        {
+            Hazardous,
+            Industrial,
+        }
+    }
+
+    fluid CowMilk
+    {
+        ColorReference  = White,
+        DisplayName     = Fluid_Name_CowMilk,
+
+        Categories
+        {
+            Beverage,
+        }
+
+        Properties
+        {
+            hungerChange            = -10,
+            thirstChange            = -50,
+            calories                = 615,
+            carbohydrates           = 46,
+            lipids                  = 22,
+            proteins                = 33,
+            fluReduction            = 0,
+            painReduction           = 0,
+            enduranceChange         = 0,
+            foodSicknessReduction   = 0,
+
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            	Beverage,
+            }
+        }
+    }
+
+    fluid AnimalMilk
+    {
+        ColorReference  = White,
+        DisplayName     = Fluid_Name_AnimalMilk,
+
+        Categories
+        {
+            Beverage,
+        }
+
+        Properties
+        {
+            hungerChange            = -10,
+            thirstChange            = -50,
+            calories                = 615,
+            carbohydrates           = 46,
+            lipids                  = 22,
+            proteins                = 33,
+            fluReduction            = 0,
+            painReduction           = 0,
+            enduranceChange         = 0,
+            foodSicknessReduction   = 0,
+
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            	Beverage,
+            }
+        }
+    }
+
+    fluid AnimalBlood
+    {
+        ColorReference  = Red,
+        DisplayName     = Fluid_Name_AnimalBlood,
+
+        Categories
+        {
+            Beverage,
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            	Beverage,
+            }
+        }
+    }
+
+    fluid AnimalGrease
+    {
+        ColorReference  = RosyBrown,
+        DisplayName     = Fluid_Name_AnimalGrease,
+
+        Categories
+        {
+            Beverage,
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            	Beverage,
+            }
+        }
+    }
+
+    fluid SheepMilk
+    {
+        ColorReference  = White,
+        DisplayName     = Fluid_Name_SheepMilk,
+
+        Categories
+        {
+            Beverage,
+        }
+
+        Properties
+        {
+            hungerChange            = -10,
+            thirstChange            = -50,
+            calories                = 823,
+            carbohydrates           = 23,
+            lipids                  = 17,
+            proteins                = 23,
+            fluReduction            = 0,
+            painReduction           = 0,
+            enduranceChange         = 0,
+            foodSicknessReduction   = 0,
+        }
+
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+            	Beverage,
+            }
+        }
+    }
+}
