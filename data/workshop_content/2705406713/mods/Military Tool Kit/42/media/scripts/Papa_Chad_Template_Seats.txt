@@ -76,6 +76,9 @@ module Base
 			Icon	=	M113_Seat,
 			category = seat,
 			mechanicRequireKey = true,
+			repairMechanic = true,
+			area = Engine,
+			mechanicArea = Engine,
 			durability = 3,
 			container
 			{
@@ -743,6 +746,9 @@ module Base
 			Icon	=	M113_Seat,
 			category = seat,
 			mechanicRequireKey = true,
+			repairMechanic = true,
+			area = Engine,
+			mechanicArea = Engine,
 			durability = 3,
 			container
 			{
@@ -981,6 +987,9 @@ module Base
 			Icon	=	M113_Seat,
 			category = seat,
 			mechanicRequireKey = true,
+			repairMechanic = true,
+			area = Engine,
+			mechanicArea = Engine,
 			durability = 3,
 			container
 			{
@@ -1168,6 +1177,239 @@ module Base
 		}
 	}
 	
+	template vehicle SeatM41
+	{
+		part SeatFrontLeft
+		{
+			model M41_Seat
+			{
+				file = M41_Seat,
+				scale = 1.000,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+				
+		part SeatGunner
+		{
+			area = SeatFrontRight,
+			container
+			{
+				seat = Gunner,
+			}
+		}
+		
+		part SeatRearRight
+		{
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+			
+
+		part Seat*
+		{
+			itemType = Base.M113_Seat,
+			Icon	=	M113_Seat,
+			category = seat,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			area = Engine,
+			mechanicArea = Engine,
+			durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+				capacity = 20,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+	
+	template vehicle PassengerM41
+	{
+				
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.66 0.988 0.93,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.56 0.0 1.0,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+
+			door = DoorFrontLeft,
+			area = SeatFrontLeft,
+			
+			switchSeat Gunner
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound =,
+			}
+
+			switchSeat RearRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound =,
+			}
+		}
+
+		passenger Gunner
+		{
+			position inside
+			{
+				offset = 0.0 0.93 -0.255,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.56 0.0 0.0,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+			
+			door = DoorFrontRight,
+			area = SeatFrontRight,
+			
+			switchSeat FrontLeft
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound =,
+			}
+			switchSeat RearRight
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound =,
+			}
+		}
+		
+		passenger RearRight
+		{
+			position inside
+			{
+				offset = -0.4 0.93 -1.6,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.5 0.0 -2.43,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			door = DoorFrontRight,
+			area = SeatFrontRight,
+			
+			switchSeat FrontLeft
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound =,
+			}
+			
+			switchSeat Gunner
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+				sound =,
+			}
+		}
+		
+
+		
+		passenger *
+		{
+			showPassenger = false,
+			hasRoof = true,
+
+			anim enter
+			{
+				anim = Climb_WindowA,
+				rate = 0.33,
+			}
+
+			anim idle
+			{
+				anim = Idle,
+				rate = 1.0,
+			}
+
+			anim exit
+			{
+				anim = Climb_WindowB,
+				rate = 0.23,
+			}
+
+			anim openDoor
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.3,
+			}
+
+			anim closeDoor
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+			}
+		}
+	}
+	
 	template vehicle SeatM988
 	{
 		part SeatFrontLeft
@@ -1250,6 +1492,9 @@ module Base
 			Icon	=	M113_Seat,
 			category = seat,
 			mechanicRequireKey = true,
+			repairMechanic = true,
+			area = Engine,
+			mechanicArea = Engine,
 			durability = 3,
 			container
 			{

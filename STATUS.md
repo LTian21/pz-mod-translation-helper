@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-19 04:04:31 UTC+08:00`*
+*最后更新于：`2025-11-20 04:04:03 UTC+08:00`*
 
 ---
 
@@ -9,18 +9,18 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``72241`` 条 |
-| **待翻译条目** | ``13455`` 条 |
-| **已翻译条目** | ``58786`` 条 |
-| **待校对条目** | ``47292`` 条 |
-| **已支持 Mod 数量** | ``683`` 个 |
+| **模组总条目** | ``72294`` 条 |
+| **待翻译条目** | ``10654`` 条 |
+| **已翻译条目** | ``61640`` 条 |
+| **待校对条目** | ``40631`` 条 |
+| **已支持 Mod 数量** | ``684`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251119_040430``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251120_040403``)**
 
-*   **damnlib (ID: 3171167894)**: 新增 `4` 条, 移除 `0` 条。
-*   **SnackTime89 (ID: 3589560764)**: 新增 `16` 条, 移除 `0` 条。
+*   **Military_Tool_Kit (ID: 2705406713)**: 新增 `19` 条, 移除 `0` 条。
+*   **Customizable_Containers (ID: 2719850086)**: 新增 `658` 条, 移除 `0` 条。
 
 ---
 
@@ -30,17 +30,10 @@
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Authentic Z | 2335368829 | 2276 | 1405 | 310 | 3777 |
 | Guns of 93: B42 Test Build (Unstable) | 3183820077 | 748 | 1755 | 1129 | 2553 |
-| Even More Traits | 2855320431 | 606 | 12 | 2 | 618 |
 | [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
 | RV Fenix | 3587939112 | 451 | 0 | 0 | 451 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
-| Pomp's Items - My Little Pony | 2792387747 | 377 | 586 | 1 | 963 |
-| Customizable Containers [B42/41] | 2719850086 | 352 | 1353 | 0 | 1705 |
 | Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 339 | 155 | 0 | 494 |
-| [B42] Take A Bath And Shower | 3592172476 | 297 | 0 | 0 | 297 |
-| [B42] School's Out: Anime-Style Student Uniforms | 3404301631 | 285 | 1 | 6 | 286 |
-| Immersive Lore | 3000924731 | 273 | 109 | 0 | 382 |
-| Pomp's Items - Just the Food | 2792348686 | 267 | 397 | 3 | 664 |
 | [B42] WarThunderVehicleLibrary | 3399660368 | 243 | 42 | 9 | 285 |
 | UNOFFICIAL Fools New Containers for B42 | 3535295548 | 237 | 91 | 91 | 328 |
 | organizedCategories: Core | 3370707195 | 230 | 253 | 1 | 483 |
@@ -49,7 +42,6 @@
 | Project Fallout: GunRunner | 3434691822 | 217 | 29 | 0 | 246 |
 | (B42) Immersive Roleplay Professions and Traits | 3387474156 | 202 | 678 | 0 | 882 |
 | [B42] Paw Low Loot Relooted | 3429902681 | 190 | 0 | 0 | 190 |
-| True Smoking [B42] | 3423984426 | 173 | 26 | 1 | 199 |
 | Somewhat Traits [B42 Compatible] | 3498347699 | 171 | 0 | 0 | 171 |
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
@@ -57,11 +49,9 @@
 | Pocket Kittens (B42) | 3568029240 | 120 | 14 | 7 | 134 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
-| Lifestyle: Hobbies | 3403870858 | 85 | 4082 | 28 | 4167 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
+| that DAMN Library | 3171167894 | 81 | 383 | 0 | 464 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
-| that DAMN Library | 3171167894 | 77 | 383 | 0 | 460 |
-| The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 77 | 0 | 0 | 77 |
 | [B42] Useful Barrels | 3436537035 | 77 | 1 | 0 | 78 |
 | Braven's Achievements | 3051277957 | 76 | 1 | 0 | 77 |
 | HydeCo. Automatic Garage Doors! | 3594285774 | 73 | 0 | 0 | 73 |
@@ -83,6 +73,7 @@
 | [B42] Buildables Expansion | 3463117260 | 44 | 622 | 7 | 666 |
 | Functional Clipboard [B41/B42] | 3387382165 | 44 | 0 | 0 | 44 |
 | Red Days | 3516166810 | 43 | 61 | 15 | 104 |
+| SnackTime 89 - Junk Revival | 3589560764 | 43 | 0 | 0 | 170 |
 | Inventory Tetris - Grid Based Inventory Overhaul [B42] | 3397561666 | 42 | 0 | 0 | 42 |
 | Factory Pieces | 3399263137 | 40 | 101 | 0 | 141 |
 | My So-Called Snack | 2877535263 | 40 | 184 | 0 | 224 |
@@ -91,13 +82,13 @@
 | The Last of Us: Factions & Gear [B41/B42] | 3348036710 | 39 | 72 | 18 | 113 |
 | Minimal Display Bars + Nutritions + Discomfort [B41/B42] | 3388844542 | 38 | 11 | 0 | 49 |
 | Logic Missing Recipes | 3540757743 | 38 | 0 | 0 | 38 |
-| Custom Weight | 3391228479 | 37 | 51 | 8 | 88 |
 | Smart Radial Menu | 3494108029 | 37 | 1 | 0 | 38 |
 | Caster Plus Fishing Mod | 3457003463 | 36 | 209 | 0 | 245 |
 | Evolving Traits World (ETW) [B41/B42] - alternative to "Dynamic Traits" | 2914075159 | 36 | 340 | 1 | 376 |
 | Table Saw[B42] | 3540297822 | 36 | 3 | 1 | 39 |
 | Severe Non-Lethal Infections [B42] | 3450825552 | 35 | 0 | 0 | 35 |
 | Better Flashlights [B42] | 3420478458 | 34 | 0 | 0 | 34 |
+| Beefcake Food Overhaul [B42] | 3543815008 | 33 | 0 | 0 | 33 |
 | Military Tool Kit | 2705406713 | 32 | 22 | 1 | 54 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 32 | 20 | 2 | 79 |
 | [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 0 | 0 | 29 |
@@ -106,7 +97,6 @@
 | Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
 | [B42] Knox Event Expanded NPC mod [alpha v0.3.16-1] | 3397396843 | 28 | 572 | 42 | 600 |
 | Random Clothing [B41/B42] | 3397182976 | 28 | 104 | 8 | 132 |
-| SnackTime 89 - Junk Revival | 3589560764 | 26 | 0 | 0 | 154 |
 | [B42] Week One NPC | 3403180543 | 25 | 806 | 0 | 831 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
 | Dreams | 1945359259 | 23 | 168 | 0 | 191 |
@@ -139,15 +129,12 @@
 | Willowbrook Bastion! | 3479667649 | 12 | 15 | 1 | 27 |
 | [B41\B42] DBG Crowbar Unlock | 3555407625 | 11 | 225 | 46 | 236 |
 | Item Stories [b42] (All in One) | 3569303590 | 11 | 0 | 0 | 11 |
-| Stairs Alert | 3044807092 | 11 | 3 | 0 | 14 |
 | U.S. M998 Humvee by Papa_Chad | 3554424111 | 11 | 28 | 0 | 39 |
 | Vehicle Class Overhaul [B42 Compatible] | 3407507873 | 11 | 4 | 4 | 15 |
 | [J&G] Trauma Responder Uniform [B42/41] | 3443982326 | 11 | 46 | 0 | 63 |
 | DFMFoodMod | 3406694220 | 10 | 83 | 4 | 94 |
-| [B41/B42] I Don't Need A Lighter | 2714198296 | 10 | 0 | 0 | 10 |
 | Street Smarts | 3511535258 | 10 | 11 | 2 | 21 |
 | Undying Zombies (Immersive Respawn Replacement) | 3555199477 | 10 | 0 | 0 | 10 |
-| [B42] Water Pipes (aka Plumbing) | 3546314080 | 10 | 44 | 0 | 54 |
 | [B41/B42] Temperature Affects Food Spoilage Rate | 3297793087 | 9 | 0 | 0 | 9 |
 | Show Key Origin | 3501701205 | 9 | 0 | 0 | 9 |
 | [B41 & B42] Throw your bag across | 3391902125 | 9 | 0 | 0 | 9 |
@@ -195,6 +182,7 @@
 | [B42] Home Inventory Improved | 3522009163 | 3 | 0 | 0 | 63 |
 | Money From Credit Cards | 3428650803 | 3 | 21 | 0 | 24 |
 | More Car Features + Spawn Zones Expansion | 3520758551 | 3 | 19 | 1 | 22 |
+| [B42] School's Out: Anime-Style Student Uniforms | 3404301631 | 3 | 0 | 6 | 286 |
 | Shield Mode (Secondary Hand Equip) (B41/B42) | 3383001527 | 3 | 6 | 2 | 9 |
 |  Wearable Towels [B41/B42] | 3203159242 | 3 | 35 | 32 | 40 |
 | [J&G] Caution Uniform [B42/41] | 3369825662 | 3 | 39 | 0 | 44 |
@@ -232,6 +220,7 @@
 | HydeCo. Bees! | 3430224478 | 1 | 419 | 1 | 420 |
 | [B42/41] Keep Skill Level | 3314107094 | 1 | 48 | 0 | 49 |
 | Know Your Calories! | 3257953004 | 1 | 22 | 0 | 23 |
+| Even More Traits | 2855320431 | 1 | 0 | 2 | 618 |
 | Light Switch Plus(B42) | 3418843205 | 1 | 28 | 0 | 29 |
 | [B42] Make Gunpowder from Fertilizer | 3392188086 | 1 | 0 | 1 | 2 |
 | Manage Containers | 2650547917 | 1 | 0 | 0 | 7 |
@@ -245,6 +234,7 @@
 | Simple Skill Books | 3291799176 | 1 | 124 | 0 | 125 |
 | [OUTDATED] Support Corps [B42] Sweet-release Update | 3409836763 | 1 | 603 | 5 | 604 |
 | Support Goods Mega Mod [B42.10] - PREDATOR | 3512993822 | 1 | 2391 | 30 | 2392 |
+| [B42] Take A Bath And Shower | 3592172476 | 1 | 0 | 0 | 297 |
 | [B42] The Defiler from DR2 | 3492621786 | 1 | 3 | 0 | 4 |
 | [B41/B42] Toughness Skill | 3545533939 | 1 | 20 | 0 | 21 |
 | Training Target | 3417621776 | 1 | 28 | 0 | 29 |
@@ -412,6 +402,8 @@
 | Craftable Mannequins [B42/41] | 3054341059 | 0 | 17 | 0 | 25 |
 | Craft Spear With Planks | 3438621136 | 0 | 0 | 0 | 1 |
 | Custom Gamepad UI [B42 Compatible] | 3001154607 | 0 | 0 | 0 | 37 |
+| [B42/41] Customizable Containers | 2719850086 | 0 | 1 | 0 | 1705 |
+| Custom Weight | 3391228479 | 0 | 0 | 8 | 88 |
 | '90 Mercedes-Benz Unimog U1550L | 2843855721 | 0 | 43 | 8 | 43 |
 | Daihatsu Hijet S83P/S110P | 3583266047 | 0 | 0 | 0 | 12 |
 | [B42]说话描述情绪 | 3446253876 | 0 | 0 | 470 | 470 |
@@ -476,6 +468,7 @@
 | [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 0 | 0 | 0 | 17 |
 | Immersive Suicide [B42/B41] | 3426448380 | 0 | 0 | 0 | 12 |
 | Immersive Water Shutoff | 3599665197 | 0 | 0 | 0 | 23 |
+| Immersive Lore | 3000924731 | 0 | 0 | 0 | 382 |
 | [B42/41] Improved Farming Info Window | 3470852353 | 0 | 8 | 0 | 8 |
 | Improvised Backpack! | 3586145865 | 0 | 60 | 0 | 60 |
 | Industrial Revolution Generic Add On | 3359867059 | 0 | 0 | 0 | 2 |
@@ -488,6 +481,7 @@
 | Inspect Weapon | 2948824747 | 0 | 22 | 0 | 22 |
 | Interactive Tailoring | 3522680786 | 0 | 6 | 0 | 6 |
 | Containers! | 2625625421 | 0 | 14 | 0 | 14 |
+| [B41/B42] I Don't Need A Lighter | 2714198296 | 0 | 0 | 0 | 10 |
 | JB's Fireflies - B41 and B42 | 3591708775 | 0 | 0 | 0 | 11 |
 | Joke Customisation Pack | 3415451174 | 0 | 7 | 0 | 7 |
 | Just Some Hair Styles [B41/B42] | 3116631797 | 0 | 21 | 0 | 21 |
@@ -506,6 +500,7 @@
 | Legend Craft Evolved | 3432470769 | 0 | 304 | 0 | 304 |
 | Lethal Stealth | 3531611692 | 0 | 34 | 0 | 34 |
 | Antibodies (v1.93) [B41 + B42] | 2392676812 | 0 | 230 | 0 | 230 |
+| Lifestyle: Hobbies | 3403870858 | 0 | 1 | 28 | 4167 |
 | Lillie's Meal Combat Individual Ration Mod | 3557845788 | 0 | 106 | 0 | 106 |
 | Liv's Trusty Baseball Cap | 3477662795 | 0 | 0 | 0 | 1 |
 | Lock Interiors | 3435709471 | 0 | 0 | 0 | 3 |
@@ -589,6 +584,8 @@
 | Plumb Helper PLUS [B42] | 3386961288 | 0 | 28 | 8 | 28 |
 | Pogo's Clothing Collection | 3058134369 | 0 | 19 | 0 | 19 |
 | Pokit Paradigm Shoes And Boots | 3476595954 | 0 | 0 | 0 | 3 |
+| Pomp's Items - Just the Food | 2792348686 | 0 | 0 | 3 | 664 |
+| Pomp's Items - My Little Pony | 2792387747 | 0 | 0 | 1 | 963 |
 | Project Summer Car [B42] | 3564950449 | 0 | 0 | 0 | 356 |
 | ProteinsMoodle | 2859304462 | 0 | 24 | 0 | 24 |
 | Proximity Inventory [B41/42] | 2847184718 | 0 | 0 | 0 | 21 |
@@ -633,6 +630,7 @@
 | Spongie's Character Retexture | 3340255334 | 0 | 4 | 0 | 4 |
 | Spongie's Clothing | 2684285534 | 0 | 80 | 6 | 80 |
 | Spongie's Hair | 2463184726 | 0 | 341 | 1 | 341 |
+| Stairs Alert | 3044807092 | 0 | 0 | 0 | 14 |
 | Standardized Vehicle Upgrades 3 - Vanilla Addon | 3304582091 | 0 | 0 | 0 | 3 |
 | Starlit Library | 3378285185 | 0 | 0 | 0 | 2 |
 | Starving Zombies [B42] | 3396867685 | 0 | 36 | 0 | 36 |
@@ -647,6 +645,7 @@
 | TEH Junkyard Mechanics 42 | 3591337109 | 0 | 0 | 0 | 4 |
 | Teto Plushies | 3603577358 | 0 | 0 | 0 | 11 |
 | [B42] The Only Cure | 3580276809 | 0 | 0 | 0 | 66 |
+| The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 0 | 0 | 0 | 77 |
 | Weapon Condition Indicator | 3412262177 | 0 | 42 | 0 | 42 |
 | [B42] They Are Watching - Schizophrenia Mod | 3559704439 | 0 | 181 | 0 | 181 |
 | They Knew [B42] | 3387110070 | 0 | 26 | 0 | 26 |
@@ -662,6 +661,7 @@
 | Transmog [Reforged] | 3599514194 | 0 | 0 | 0 | 49 |
 | Trap Manager | 3566766862 | 0 | 0 | 1 | 162 |
 | True Music B42 | 3397198968 | 0 | 8 | 0 | 8 |
+| True Smoking [B42] | 3423984426 | 0 | 1 | 1 | 199 |
 | Trunk Organizer | 3590632059 | 0 | 0 | 0 | 24 |
 | Ash's MK8 Trusty FireFighter Axe | 3400045232 | 0 | 5 | 0 | 5 |
 | TwisTonFire - Dude, Where Is My Car? | 3576268735 | 0 | 0 | 0 | 6 |
@@ -687,6 +687,7 @@
 | Washing Menus Improved | 3460812542 | 0 | 5 | 0 | 5 |
 | Watch Your Trunk [B42 Compatible] | 3591049094 | 0 | 0 | 0 | 3 |
 | Water Goes Bad | 2849467715 | 0 | 0 | 0 | 19 |
+| [B42] Water Pipes (aka Plumbing) | 3546314080 | 0 | 0 | 0 | 54 |
 | [B42] Water Filter Straw | 3418513380 | 0 | 8 | 0 | 8 |
 | Weather Moodles [B42] | 3565697910 | 0 | 0 | 2 | 146 |
 | What can I craft Addon | 3392356751 | 0 | 5 | 0 | 5 |

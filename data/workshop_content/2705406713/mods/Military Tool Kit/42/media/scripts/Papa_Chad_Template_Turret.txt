@@ -177,6 +177,11 @@ module Base
 		part M41_76mm
 		{
 			category = Turrent,
+			area = SeatFrontRight,
+			itemType = Base.M41_76mm,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			parent = Turrent,
 
 			model Default
 			{
@@ -210,14 +215,10 @@ module Base
 				rate = 1.5,
 			}
 
-			area = SeatFrontRight,
-			itemType = Base.GloveBox,
-			mechanicRequireKey = true,
-
 			container
 			{
 				test = Vehicles.ContainerAccess.AMMOSTOR,
-				capacity = 60,
+				capacity = 5,
 				conditionAffectsCapacity = false,
 			}
 
@@ -225,7 +226,7 @@ module Base
 
 			lua
 			{
-				create = Vehicles.Create.MACHINEGUN,
+				create = Vehicles.Create.MACHINEGUNTANKM41,
 				init = Vehicles.Init.MACHINEGUN,
 				update = Vehicles.Update.MACHINEGUN,
 			}
@@ -233,15 +234,20 @@ module Base
 
 		part M1919A4_Coax
 		{
+			
+			mechanicRequireKey = true,
 			category = Turrent,
 			area = SeatFrontRight,
-			itemType = Base.GloveBox,
-			mechanicRequireKey = true,
+			itemType = Base.M1919A4_Coax,
+			mechanicArea = SeatFrontRight,
+			repairMechanic = true,			
+			parent = Turrent,
+			durability = 10,
 
 			container
 			{
 				test = Vehicles.ContainerAccess.AMMOSTOR,
-				capacity = 60,
+				capacity = 5,
 				conditionAffectsCapacity = false,
 			}
 
@@ -249,10 +255,29 @@ module Base
 
 			lua
 			{
-				create = Vehicles.Create.MACHINEGUN,
+				create = Vehicles.Create.MACHINEGUNDefault,
 				init = Vehicles.Init.MACHINEGUN,
 				update = Vehicles.Update.MACHINEGUN,
 			}
+		}
+		
+		part AmmoStor
+		{
+			area = SeatGunner,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+			category = Turrent,
+			
+			container
+			{
+				conditionAffectsCapacity = false,
+				capacity = 60,
+				test = Vehicles.ContainerAccess.AmmoStor,
+			}	
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}			
 		}
 	}
 	

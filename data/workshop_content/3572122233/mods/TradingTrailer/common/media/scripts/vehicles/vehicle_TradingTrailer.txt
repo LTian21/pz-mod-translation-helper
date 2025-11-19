@@ -1,0 +1,313 @@
+module Base
+{
+	model Vehicles_TrailerWheel
+	{
+		mesh = vehicles/TraderTrailer|TrailerWheel,
+		texture = Vehicles/TradingTrailerWheel,
+		shader = basicEffect,
+		scale = 1,
+	}
+	model Vehicles_TrailerDoor
+	{
+		mesh = vehicles/TraderTrailer|TrailerDoor,
+		shader = vehicle_noreflect,
+		scale = 1,
+		static = FALSE,
+
+	}
+	model Vehicles_TrailerBase
+	{
+		mesh = vehicles/TraderTrailer|TrailerBase,
+		shader = vehicle_noreflect,
+		scale = 1,
+	}
+	vehicle TradingTrailer
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 0.8,
+		engineRepairLevel = 4,
+		playerDamageProtection = 0.8,
+
+		model
+		{
+			file = Vehicles_TrailerBase,
+			scale = 1.0000,
+			offset = 0.0000 0.0000 -0.1800,
+		}
+
+		spawnOffsetY = 0.0,
+
+		skin
+		{
+			texture = Vehicles/TradingTrailerTexture1,
+		}
+
+		skin
+		{
+			texture = Vehicles/TradingTrailerTexture2,
+		}
+
+		skin
+		{
+			texture = Vehicles/TradingTrailerTexture3,
+		}
+
+		skin
+		{
+			texture = Vehicles/TradingTrailerTexture4,
+		}
+
+		skin
+		{
+			texture = Vehicles/TradingTrailerTexture5,
+		}
+
+		skin
+		{
+			texture = Vehicles/TradingTrailerTexture6,
+		}
+
+		skin
+		{
+			texture = Vehicles/TradingTrailerTexture7,
+		}
+
+		skin
+		{
+			texture = Vehicles/TradingTrailerTexture8,
+		}
+
+		textureMask = Vehicles/TradingTrailerMasks,
+		textureLights = Vehicles/TradingTrailerMasks,
+		textureDamage1Overlay = Vehicles/TradingTrailerMasks,
+		textureDamage2Overlay = Vehicles/TradingTrailerMasks,
+		textureDamage1Shell = Vehicles/TradingTrailerMasks,
+		textureDamage2Shell = Vehicles/TradingTrailerMasks,
+		textureRust = Vehicles/TradingTrailerMasks,
+		extents = 1.7800 0.4600 1.9400,
+		mass = 600,
+		physicsChassisShape = 1.7400 0.4400 1.8600,
+		centerOfMassOffset = 0.0000 0.2200 -0.1800,
+		shadowExtents = 1.8264 1.9541,
+		shadowOffset = 0.0000 -0.0313,
+		engineForce = 3600,
+		engineQuality = 60,
+		engineLoudness = 55,
+		maxSpeed = 70f,
+		brakingForce = 1,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 1.0f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 40,
+		suspensionCompression = 2.83,
+		suspensionDamping = 2.88,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.2,
+		wheelFriction = 4.0f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.7500 -0.0700 0.6700,
+			radius = 0.35f,
+			width = 0.2f,
+		}
+
+		wheel RearLeft
+		{
+			front = true,
+			offset = 0.7500 -0.0700 -0.6000,
+			radius = 0.35f,
+			width = 0.2f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.7500 -0.0700 0.6700,
+			radius = 0.35f,
+			width = 0.2f,
+		}
+
+		wheel RearRight
+		{
+			front = true,
+			offset = -0.7500 -0.0700 -0.6000,
+			radius = 0.35f,
+			width = 2.2f,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0500 -0.1700 2.8400 1.9400,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.1800 0.4600 0.5800 0.6600,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.1400 0.4800 0.5000 0.6200,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.1800 -0.8200 0.5800 0.6600,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.1400 -0.8100 0.5000 0.6200,
+		}
+
+		template = TrunkDoor,
+
+		part TrunkDoor
+		{
+			table install
+			{
+				recipes = Classic Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Classic Mechanics,
+			}
+
+			model Default
+			{
+				file = Vehicles_TrailerDoor,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			anim Close
+			{
+				anim = TrailerDoor,
+				reverse = TRUE,
+				rate = 5.0,
+			}
+
+			anim Open
+			{
+				anim = TrailerDoor,
+				rate = 2.0,
+			}
+
+			anim Closed
+			{
+				anim = TrailerDoor,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = TrailerDoor,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+		}
+
+		template = Trunk/part/TruckBed,
+
+		part TruckBed
+		{
+			container
+			{
+				capacity = 400,
+				conditionAffectsCapacity = false,
+			}
+		}
+
+		template = Tire/part/TireFrontLeft,
+		template = Tire/part/TireFrontRight,
+		template = Tire/part/TireRearLeft,
+		template = Tire/part/TireRearRight,
+
+		part Tire*
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Vehicles_TrailerWheel,
+			}
+		}
+
+		part TireFrontLeft
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			table install
+			{
+				requireInstalled = SuspensionFrontRight,
+			}
+		}
+
+		template = Suspension/part/SuspensionFrontLeft,
+		template = Suspension/part/SuspensionFrontRight,
+		template = Suspension/part/SuspensionRearLeft,
+		template = Suspension/part/SuspensionRearRight,
+
+		physics box
+		{
+			offset = 0.0000 1.2600 -0.1732,
+			extents = 0.4000 1.6000 1.9200,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 1.0100 -0.1688,
+			extents = 1.4800 1.2600 1.9200,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 0.0888 2.1800,
+			rotate = 0.0000 0.0000 0.0000,
+			canAttach = trailer,
+		}
+	}
+}
