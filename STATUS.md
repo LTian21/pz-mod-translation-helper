@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-20 04:04:03 UTC+08:00`*
+*最后更新于：`2025-11-21 04:04:35 UTC+08:00`*
 
 ---
 
@@ -9,18 +9,19 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``72294`` 条 |
-| **待翻译条目** | ``10654`` 条 |
-| **已翻译条目** | ``61640`` 条 |
-| **待校对条目** | ``40631`` 条 |
-| **已支持 Mod 数量** | ``684`` 个 |
+| **模组总条目** | ``72995`` 条 |
+| **待翻译条目** | ``7909`` 条 |
+| **已翻译条目** | ``65086`` 条 |
+| **待校对条目** | ``41626`` 条 |
+| **已支持 Mod 数量** | ``686`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251120_040403``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251121_040434``)**
 
-*   **Military_Tool_Kit (ID: 2705406713)**: 新增 `19` 条, 移除 `0` 条。
-*   **Customizable_Containers (ID: 2719850086)**: 新增 `658` 条, 移除 `0` 条。
+*   **fhqwhgads'_Motorious_Zone (ID: 2791656602)**: 新增 `2` 条, 移除 `0` 条。
+*   **93fordF350 (ID: 3073430075)**: 新增 `6` 条, 移除 `0` 条。
+*   **tehjunkyard42 (ID: 3591337109)**: 新增 `3` 条, 移除 `0` 条。
 
 ---
 
@@ -28,9 +29,7 @@
 
 | Mod 名称 | Mod ID | 待翻译条目 | 待校对条目 | 缺少原文条目 | 模组总条目 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Authentic Z | 2335368829 | 2276 | 1405 | 310 | 3777 |
 | Guns of 93: B42 Test Build (Unstable) | 3183820077 | 748 | 1755 | 1129 | 2553 |
-| [B42/B41] Bandits NPC | 3268487204 | 489 | 352 | 6 | 841 |
 | RV Fenix | 3587939112 | 451 | 0 | 0 | 451 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
 | Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 339 | 155 | 0 | 494 |
@@ -65,6 +64,7 @@
 | Legendary Katana | 3418366499 | 58 | 72 | 1 | 130 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 56 | 52 | 0 | 108 |
 | Spongie's Character Customisation | 3414634809 | 53 | 16 | 0 | 69 |
+| Military Tool Kit | 2705406713 | 51 | 22 | 1 | 73 |
 | [J&G] Firefighter Uniform [B42/41] | 3521263771 | 51 | 2 | 2 | 54 |
 | [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 51 | 0 | 0 | 52 |
 | Time Decreases Vehicle Condition [B42] | 3448375286 | 50 | 0 | 0 | 50 |
@@ -89,13 +89,12 @@
 | Severe Non-Lethal Infections [B42] | 3450825552 | 35 | 0 | 0 | 35 |
 | Better Flashlights [B42] | 3420478458 | 34 | 0 | 0 | 34 |
 | Beefcake Food Overhaul [B42] | 3543815008 | 33 | 0 | 0 | 33 |
-| Military Tool Kit | 2705406713 | 32 | 22 | 1 | 54 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 32 | 20 | 2 | 79 |
 | [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 0 | 0 | 29 |
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
 | Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
-| [B42] Knox Event Expanded NPC mod [alpha v0.3.16-1] | 3397396843 | 28 | 572 | 42 | 600 |
+| [B42] Knox Event Expanded NPC mod [alpha v0.3.17-1] | 3397396843 | 28 | 572 | 42 | 600 |
 | Random Clothing [B41/B42] | 3397182976 | 28 | 104 | 8 | 132 |
 | [B42] Week One NPC | 3403180543 | 25 | 806 | 0 | 831 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 25 | 25 | 2 | 50 |
@@ -237,6 +236,7 @@
 | [B42] Take A Bath And Shower | 3592172476 | 1 | 0 | 0 | 297 |
 | [B42] The Defiler from DR2 | 3492621786 | 1 | 3 | 0 | 4 |
 | [B41/B42] Toughness Skill | 3545533939 | 1 | 20 | 0 | 21 |
+| Trading Trailer [B41/B42] | 3572122233 | 1 | 0 | 0 | 1 |
 | Training Target | 3417621776 | 1 | 28 | 0 | 29 |
 | Traits Purchase System | 3211693903 | 1 | 13 | 0 | 14 |
 | True Crawl 3.0 - Fixed [B42] | 3410989950 | 1 | 10 | 6 | 11 |
@@ -335,6 +335,7 @@
 | Autotsar Tuning Atelier - Chevalier Samara v.2.00 [B42] | 3432014439 | 0 | 0 | 0 | 1 |
 | Autotsar Tuning Atelier - DeRumba Van v.2.00 [B42] | 3432015133 | 0 | 0 | 0 | 1 |
 | [B42] Attach Bags To Sheet Rope | 3504700167 | 0 | 0 | 0 | 5 |
+| Authentic Z | 2335368829 | 0 | 2620 | 310 | 3777 |
 | Auto Cook | 3388721641 | 0 | 38 | 0 | 38 |
 | AutoExercise2 | 3435613327 | 0 | 11 | 0 | 11 |
 | Auto Loot | 3392699932 | 0 | 77 | 0 | 77 |
@@ -361,6 +362,7 @@
 | Bandit Relationship | 3431259170 | 0 | 309 | 0 | 309 |
 | Bandits Extra Options | 3412682512 | 0 | 94 | 0 | 94 |
 | [B41/B42] Day One (Bandits) | 3329251514 | 0 | 8 | 0 | 8 |
+| [B42/B41] Bandits NPC | 3268487204 | 0 | 133 | 6 | 841 |
 | Barefoot Moodle | 3435936144 | 0 | 10 | 0 | 10 |
 | Immersive Barricaded Start [b41 & 42] | 3031475005 | 0 | 0 | 0 | 2 |
 | Barricades, Doors, Windows, and Vehicles Hurt Zombies [B42] | 3402208866 | 0 | 36 | 0 | 36 |
@@ -402,7 +404,7 @@
 | Craftable Mannequins [B42/41] | 3054341059 | 0 | 17 | 0 | 25 |
 | Craft Spear With Planks | 3438621136 | 0 | 0 | 0 | 1 |
 | Custom Gamepad UI [B42 Compatible] | 3001154607 | 0 | 0 | 0 | 37 |
-| [B42/41] Customizable Containers | 2719850086 | 0 | 1 | 0 | 1705 |
+| [B42/41] Customizable Containers | 2719850086 | 0 | 0 | 0 | 2363 |
 | Custom Weight | 3391228479 | 0 | 0 | 8 | 88 |
 | '90 Mercedes-Benz Unimog U1550L | 2843855721 | 0 | 43 | 8 | 43 |
 | Daihatsu Hijet S83P/S110P | 3583266047 | 0 | 0 | 0 | 12 |
@@ -586,6 +588,7 @@
 | Pokit Paradigm Shoes And Boots | 3476595954 | 0 | 0 | 0 | 3 |
 | Pomp's Items - Just the Food | 2792348686 | 0 | 0 | 3 | 664 |
 | Pomp's Items - My Little Pony | 2792387747 | 0 | 0 | 1 | 963 |
+| Progressive Multihit | 3138387399 | 0 | 0 | 0 | 23 |
 | Project Summer Car [B42] | 3564950449 | 0 | 0 | 0 | 356 |
 | ProteinsMoodle | 2859304462 | 0 | 24 | 0 | 24 |
 | Proximity Inventory [B41/42] | 2847184718 | 0 | 0 | 0 | 21 |

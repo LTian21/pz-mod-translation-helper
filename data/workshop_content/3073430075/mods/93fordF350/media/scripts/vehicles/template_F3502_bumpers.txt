@@ -21,6 +21,21 @@ module Base
 		scale = 0.1,
 	}
 
+    model 93fordF350FrontBullbarD
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|fx50_bullbar_frontD,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 93fordF350FrontBullbarDint
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|fx50_bullbar_frontD_int,
+		texture = vehicles/Vehicles_93fordF350spec_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
 	model 93fordF350FrontBullbarA
 	{
 		mesh = vehicles/Vehicles_93fordF350_Body|f350_bullbar_frontA,
@@ -194,10 +209,20 @@ module Base
                 		file = 93fordF350FrontBullbarA,
 				}
 
+            model FrontBullbarD
+				{
+                		file = 93fordF350FrontBullbarD,
+				}
+
+            model FrontBullbarDi
+				{
+                		file = 93fordF350FrontBullbarDint,
+				}
+
 				area = Engine,
 				category = bodywork,
 				specificItem = false,
-				itemType = Base.93fordF350BumperFront0;Base.93fordF350BumperFrontB;Base.93fordF350BumperFrontC;Base.93fordF350BullbarFrontA,
+				itemType = Base.93fordF350BumperFront0;Base.93fordF350BumperFrontB;Base.93fordF350BumperFrontC;Base.93fordF350BullbarFrontA;Base.93fordF350BullbarFrontD,
 				mechanicRequireKey = false,
 
 				table install
@@ -276,10 +301,20 @@ module Base
                 		file = 93fordF350FrontBumper0,
 				}
 
+            model FrontBullbarD
+				{
+                		file = 93fordF350FrontBullbarD,
+				}
+
+            model FrontBullbarDi
+				{
+                		file = 93fordF350FrontBullbarDint,
+				}
+
 				area = Engine,
 				category = bodywork,
 				specificItem = false,
-				itemType = Base.93fordF350BullbarFrontA;Base.93fordF350BumperFrontB;Base.93fordF350BumperFrontC;Base.93fordF350BumperFront0,
+				itemType = Base.93fordF350BullbarFrontA;Base.93fordF350BumperFrontB;Base.93fordF350BumperFrontC;Base.93fordF350BumperFront0;Base.93fordF350BullbarFrontD,
 				mechanicRequireKey = false,
 
 				table install
@@ -350,6 +385,112 @@ module Base
     template vehicle F1502Bumpers
 	{
         template! = F3502Bumpers,
+
+		part F3502BumperRear
+        {
+
+			model RearBumper0
+				{
+                		file = 93fordF350RearBumper0,
+                        offset = 0.0000 0.0000 1.2800,
+				}
+        }
+    }
+
+    template vehicle F3502BullbarsS
+	{
+		part F3502BumperFront
+        	{
+
+			model FrontBullbarA
+				{
+                		file = 93fordF350FrontBullbarA,
+				}
+
+            model FrontBumperB
+				{
+                		file = 93fordF350FrontBumperB,
+				}
+
+            model FrontBumperC
+				{
+                		file = 93fordF350FrontBumperC,
+				}
+
+			model FrontBumper0
+				{
+                		file = 93fordF350FrontBumper0,
+				}
+
+            model FrontBullbarD
+				{
+                		file = 93fordF350FrontBullbarD,
+				}
+
+            model FrontBullbarDi
+				{
+                		file = 93fordF350FrontBullbarDint,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.93fordF350BullbarFrontA;Base.93fordF350BumperFrontB;Base.93fordF350BumperFrontC;Base.93fordF350BumperFront0;Base.93fordF350BullbarFrontD,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.BullbarFrontS,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.BullbarFrontS,
+            		}
+
+            		lua
+            		{
+					create = F3502.Create.BullbarFrontS,
+					init = F3502.Init.BullbarFrontS,
+					}
+			}
+
+			template! = F3502BumperRear,
+		}
+
+    template vehicle F1502BumpersS
+	{
+        template! = F3502BullbarsS,
 
 		part F3502BumperRear
         {
