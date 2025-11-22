@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-22 04:04:33 UTC+08:00`*
+*最后更新于：`2025-11-23 04:04:27 UTC+08:00`*
 
 ---
 
@@ -9,19 +9,19 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``73109`` 条 |
-| **待翻译条目** | ``8028`` 条 |
-| **已翻译条目** | ``65081`` 条 |
-| **待校对条目** | ``41621`` 条 |
-| **已支持 Mod 数量** | ``689`` 个 |
+| **模组总条目** | ``73547`` 条 |
+| **待翻译条目** | ``8399`` 条 |
+| **已翻译条目** | ``65148`` 条 |
+| **待校对条目** | ``41723`` 条 |
+| **已支持 Mod 数量** | ``692`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251122_040432``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251123_040426``)**
 
-*   **Tikitown (ID: 3037854728)**: 新增 `80` 条, 移除 `0` 条。
-*   **Guns93Test (ID: 3183820077)**: 新增 `98` 条, 移除 `38` 条。
-*   **SnackTime89 (ID: 3589560764)**: 新增 `16` 条, 移除 `0` 条。
+*   **WIP_[Build_42]_[CJ]_Vanilla_Firearms_Expansion (ID: 2874163136)**: 新增 `228` 条, 移除 `0` 条。
+*   **Tikitown (ID: 3037854728)**: 新增 `22` 条, 移除 `0` 条。
+*   **Guns93Test (ID: 3183820077)**: 新增 `21` 条, 移除 `0` 条。
 
 ---
 
@@ -29,7 +29,7 @@
 
 | Mod 名称 | Mod ID | 待翻译条目 | 待校对条目 | 缺少原文条目 | 模组总条目 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Guns of 93: B42 Test Build (Unstable) | 3183820077 | 748 | 1755 | 1129 | 2553 |
+| Guns of 93: B42 Test Build (Unstable) | 3183820077 | 847 | 1753 | 1130 | 2614 |
 | RV Fenix | 3587939112 | 451 | 0 | 0 | 451 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
 | Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 339 | 155 | 0 | 494 |
@@ -43,10 +43,12 @@
 | [B42] Paw Low Loot Relooted | 3429902681 | 190 | 0 | 0 | 190 |
 | Somewhat Traits [B42 Compatible] | 3498347699 | 171 | 0 | 0 | 171 |
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
+| [42] REMOD - Clothes  | 3541678579 | 128 | 20 | 2 | 149 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | Christmas Time [B41/42] | 2903870217 | 121 | 53 | 77 | 174 |
 | Pocket Kittens (B42) | 3568029240 | 120 | 14 | 7 | 134 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
+| Tikitown & PowerPlant (B41/B42) | 3037854728 | 108 | 142 | 14 | 251 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | Realistic Clothes | 3491510356 | 87 | 0 | 0 | 87 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
@@ -62,6 +64,7 @@
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | [B42] Essential Recipes [UPDATED] | 3401825906 | 62 | 69 | 64 | 131 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 59 | 361 | 0 | 421 |
+| SnackTime 89 - Junk Revival | 3589560764 | 59 | 0 | 0 | 186 |
 | Legendary Katana | 3418366499 | 58 | 72 | 1 | 130 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 56 | 52 | 0 | 108 |
 | Spongie's Character Customisation | 3414634809 | 53 | 16 | 0 | 69 |
@@ -74,7 +77,6 @@
 | [B42] Buildables Expansion | 3463117260 | 44 | 622 | 7 | 666 |
 | Functional Clipboard [B41/B42] | 3387382165 | 44 | 0 | 0 | 44 |
 | Red Days | 3516166810 | 43 | 61 | 15 | 104 |
-| SnackTime 89 - Junk Revival | 3589560764 | 43 | 0 | 0 | 170 |
 | Inventory Tetris - Grid Based Inventory Overhaul [B42] | 3397561666 | 42 | 0 | 0 | 42 |
 | Factory Pieces | 3399263137 | 40 | 101 | 0 | 141 |
 | My So-Called Snack | 2877535263 | 40 | 184 | 0 | 224 |
@@ -90,10 +92,10 @@
 | Severe Non-Lethal Infections [B42] | 3450825552 | 35 | 0 | 0 | 35 |
 | Better Flashlights [B42] | 3420478458 | 34 | 0 | 0 | 34 |
 | Beefcake Food Overhaul [B42] | 3543815008 | 33 | 0 | 0 | 33 |
+| Zomboid Drop More B42 | 3546452514 | 33 | 0 | 0 | 33 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 32 | 20 | 2 | 79 |
 | [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 0 | 0 | 29 |
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
-| Tikitown & PowerPlant (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
 | [B42] Knox Event Expanded NPC mod [alpha v0.3.17-1] | 3397396843 | 28 | 572 | 42 | 600 |
 | Random Clothing [B41/B42] | 3397182976 | 28 | 104 | 8 | 132 |
@@ -114,6 +116,7 @@
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
 | Long-standing Wooden Structures | 3205738591 | 17 | 0 | 0 | 17 |
 | [B42/41] Repairable Windows | 3378304610 | 17 | 0 | 2 | 17 |
+| Dynamic Backpack Upgrades [ B42/B41 ] | 2996978365 | 16 | 84 | 0 | 100 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
 | [B42/B41] Motorious Zone - Hot Pursuit Add-on | 2841969842 | 15 | 0 | 0 | 15 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 15 | 1 | 8 | 16 |

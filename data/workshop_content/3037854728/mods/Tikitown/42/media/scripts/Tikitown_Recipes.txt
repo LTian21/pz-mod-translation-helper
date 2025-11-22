@@ -90,15 +90,17 @@ module Tikitown
 		Tags = AnySurfaceCraft,
 		category = Collections,
 		OnCreate = CraftRecipeCode.GenerateTreasure.TraceCardsOnBox,
+		timedAction = Making,
 		inputs 
 		{
 			item 1 [Tikitown.Sorted_Full_Baseball_Card_Box] mode:destroy flags[Prop1],
+			item 1 [Base.SheetPaper2],
 			item 1 tags[Write;Pencil] mode:keep flags[Prop2],
 		}
 		outputs
 		{
 			item 1 Tikitown.Used_Sorted_Full_Baseball_Card_Box,
-			item 1 Tikitown.Tikitown_quest1_map3
+			item 1 Tikitown.Tikitown_quest1_map3,
 		}
 	}
 	
@@ -208,4 +210,127 @@ module Tikitown
 			item 1 Tikitown.Unsorted_Full_Baseball_Card_Box,
 		}
 	}
+	
+	craftRecipe RepairTitaniumBat
+	{
+		time = 400,
+		timedAction = Welding,
+		xpAward = MetalWelding:25;Maintenance:25,
+		AllowBatchCraft = false,
+		Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+		category = Repair,
+		OnCreate = CraftRecipeCode.GenericBetterFixing.OnCreate,
+		SkillRequired = MetalWelding:7;Maintenance:7,
+		AutoLearnAll = MetalWelding:10;Maintenance:10,
+		inputs
+		{
+			item 1 [Tikitown.Titanium_Baseball_Bat] mode:keep flags[IsDamaged],
+			item 5 [Base.LeatherStrips],
+			item 2 [Base.SmallSheetMetal],
+			item 1 [Base.MetalBar],
+			item 4 [Base.WeldingRods],
+			item 10 [Base.BlowTorch] mode:keep flags[Prop1],
+			item 1 tags[WeldingMask] mode:keep,
+		}
+		outputs
+		{
+		}
+	}
+	
+	craftRecipe MakeWoodenBatDisplayMount
+	{
+		time = 200,
+		timedAction = Making,
+		category = Carpentry,
+		SkillRequired = Carpentry:5,
+		xpAward = Carpentry:25,
+		Tags = AnySurfaceCraft,
+		
+		inputs
+		{
+			item 1 [Base.Plank] flags[Prop1],
+			item 4 [Base.Nails],
+			item 1 [Base.SmallSheetMetal],
+			item 1 [Base.Woodglue],
+			item 1 tags[Hammer]      mode:keep flags[MayDegradeLight;Prop2],
+			item 1 tags[Saw]         mode:keep flags[IsNotDull;MayDegradeLight],
+			item 1 tags[Screwdriver] mode:keep flags[IsNotDull;MayDegradeLight],
+		}
+
+		outputs
+		{
+			item 1 Tikitown.Bat_Mount_Wood,
+		}
+	}
+	
+	craftRecipe MakeGlassBatDisplayCover
+	{
+		time = 250,
+		category = Glassmaking,
+		timedAction = Making,
+		SkillRequired = Glassmaking:4,
+		xpAward = Glassmaking:25,
+		Tags = AnySurfaceCraft,
+		
+		inputs
+		{
+			item 4 [Base.GlassPanel] flags[Prop1],
+
+			item 2 [Base.SmallSheetMetal],
+			item 4 [Base.Screws],
+
+			item 1 tags[Epoxy],
+
+			item 1 [Base.Scalpel]      mode:keep flags[MayDegradeLight;Prop2],
+			item 1 tags[Screwdriver] mode:keep flags[IsNotDull;MayDegradeLight],
+		}
+
+		outputs
+		{
+			item 1 Tikitown.Bat_Mount_Glass,
+		}
+	}
+	
+	craftRecipe MountSpecialBat
+	{
+		time = 50,
+		category = Assembly,
+		timedAction = Making,
+		Tags = AnySurfaceCraft,
+		OnCreate = Recipe.OnCreate.MountSpecialBat,
+		
+		inputs 
+		{
+			item 1 [Tikitown.Bat_Mount_Glass] mode:destroy,
+			item 1 [Tikitown.Bat_Mount_Wood] mode:destroy,
+			item 1 [Tikitown.Titanium_Baseball_Bat] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Tikitown.Special_Bat_Mounted,
+		}
+	
+	}
+	
+	craftRecipe RemoveSpecialBat
+	{
+		time = 50,
+		category = Assembly,
+		timedAction = Making,
+		Tags = AnySurfaceCraft,
+		OnCreate = Recipe.OnCreate.RemoveSpecialBat,
+		
+		inputs 
+		{
+			item 1 [Tikitown.Special_Bat_Mounted] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Tikitown.Bat_Mount_Glass,
+			item 1 Tikitown.Bat_Mount_Wood,
+			item 1 Tikitown.Titanium_Baseball_Bat,
+		}
+	
+	}
+
 }
