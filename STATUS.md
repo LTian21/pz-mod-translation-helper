@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-21 04:04:35 UTC+08:00`*
+*最后更新于：`2025-11-23 04:04:27 UTC+08:00`*
 
 ---
 
@@ -9,19 +9,19 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``72995`` 条 |
-| **待翻译条目** | ``7909`` 条 |
-| **已翻译条目** | ``65086`` 条 |
-| **待校对条目** | ``41626`` 条 |
-| **已支持 Mod 数量** | ``686`` 个 |
+| **模组总条目** | ``73547`` 条 |
+| **待翻译条目** | ``8399`` 条 |
+| **已翻译条目** | ``65148`` 条 |
+| **待校对条目** | ``41723`` 条 |
+| **已支持 Mod 数量** | ``692`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251121_040434``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251123_040426``)**
 
-*   **fhqwhgads'_Motorious_Zone (ID: 2791656602)**: 新增 `2` 条, 移除 `0` 条。
-*   **93fordF350 (ID: 3073430075)**: 新增 `6` 条, 移除 `0` 条。
-*   **tehjunkyard42 (ID: 3591337109)**: 新增 `3` 条, 移除 `0` 条。
+*   **WIP_[Build_42]_[CJ]_Vanilla_Firearms_Expansion (ID: 2874163136)**: 新增 `228` 条, 移除 `0` 条。
+*   **Tikitown (ID: 3037854728)**: 新增 `22` 条, 移除 `0` 条。
+*   **Guns93Test (ID: 3183820077)**: 新增 `21` 条, 移除 `0` 条。
 
 ---
 
@@ -29,25 +29,28 @@
 
 | Mod 名称 | Mod ID | 待翻译条目 | 待校对条目 | 缺少原文条目 | 模组总条目 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Guns of 93: B42 Test Build (Unstable) | 3183820077 | 748 | 1755 | 1129 | 2553 |
+| Guns of 93: B42 Test Build (Unstable) | 3183820077 | 847 | 1753 | 1130 | 2614 |
 | RV Fenix | 3587939112 | 451 | 0 | 0 | 451 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
 | Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 339 | 155 | 0 | 494 |
 | [B42] WarThunderVehicleLibrary | 3399660368 | 243 | 42 | 9 | 285 |
 | UNOFFICIAL Fools New Containers for B42 | 3535295548 | 237 | 91 | 91 | 328 |
 | organizedCategories: Core | 3370707195 | 230 | 253 | 1 | 483 |
-| [B42/B41] The Motorious Zone Vehicle Pack | 2791656602 | 218 | 5 | 0 | 223 |
+| [B42/B41] The Motorious Zone Vehicle Pack | 2791656602 | 220 | 5 | 0 | 225 |
 | Support Goods [B42.9] - MyAlcohol! | 3510863962 | 218 | 0 | 0 | 218 |
 | Project Fallout: GunRunner | 3434691822 | 217 | 29 | 0 | 246 |
 | (B42) Immersive Roleplay Professions and Traits | 3387474156 | 202 | 678 | 0 | 882 |
 | [B42] Paw Low Loot Relooted | 3429902681 | 190 | 0 | 0 | 190 |
 | Somewhat Traits [B42 Compatible] | 3498347699 | 171 | 0 | 0 | 171 |
 | True Music Jukebox B42 | 3398874593 | 168 | 9 | 1 | 177 |
+| [42] REMOD - Clothes  | 3541678579 | 128 | 20 | 2 | 149 |
 | Immersive Solar Arrays [BETA] | 2969478819 | 127 | 10 | 0 | 137 |
 | Christmas Time [B41/42] | 2903870217 | 121 | 53 | 77 | 174 |
 | Pocket Kittens (B42) | 3568029240 | 120 | 14 | 7 | 134 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
+| Tikitown & PowerPlant (B41/B42) | 3037854728 | 108 | 142 | 14 | 251 |
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
+| Realistic Clothes | 3491510356 | 87 | 0 | 0 | 87 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
 | that DAMN Library | 3171167894 | 81 | 383 | 0 | 464 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
@@ -61,6 +64,7 @@
 | Generator Streetlights Restored | 3578735933 | 63 | 0 | 0 | 63 |
 | [B42] Essential Recipes [UPDATED] | 3401825906 | 62 | 69 | 64 | 131 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 59 | 361 | 0 | 421 |
+| SnackTime 89 - Junk Revival | 3589560764 | 59 | 0 | 0 | 186 |
 | Legendary Katana | 3418366499 | 58 | 72 | 1 | 130 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 56 | 52 | 0 | 108 |
 | Spongie's Character Customisation | 3414634809 | 53 | 16 | 0 | 69 |
@@ -73,7 +77,6 @@
 | [B42] Buildables Expansion | 3463117260 | 44 | 622 | 7 | 666 |
 | Functional Clipboard [B41/B42] | 3387382165 | 44 | 0 | 0 | 44 |
 | Red Days | 3516166810 | 43 | 61 | 15 | 104 |
-| SnackTime 89 - Junk Revival | 3589560764 | 43 | 0 | 0 | 170 |
 | Inventory Tetris - Grid Based Inventory Overhaul [B42] | 3397561666 | 42 | 0 | 0 | 42 |
 | Factory Pieces | 3399263137 | 40 | 101 | 0 | 141 |
 | My So-Called Snack | 2877535263 | 40 | 184 | 0 | 224 |
@@ -89,10 +92,10 @@
 | Severe Non-Lethal Infections [B42] | 3450825552 | 35 | 0 | 0 | 35 |
 | Better Flashlights [B42] | 3420478458 | 34 | 0 | 0 | 34 |
 | Beefcake Food Overhaul [B42] | 3543815008 | 33 | 0 | 0 | 33 |
+| Zomboid Drop More B42 | 3546452514 | 33 | 0 | 0 | 33 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 32 | 20 | 2 | 79 |
 | [B41/B42]I Might Need A Lighter | 2883633728 | 29 | 0 | 0 | 29 |
 | [B42] Show Weapon Stats Plus | 3391710239 | 29 | 0 | 0 | 29 |
-| Tikitown (B41/B42) | 3037854728 | 29 | 142 | 14 | 172 |
 | Agrotsar Farming Company v.1.01 [B42] | 3587117139 | 28 | 0 | 0 | 28 |
 | [B42] Knox Event Expanded NPC mod [alpha v0.3.17-1] | 3397396843 | 28 | 572 | 42 | 600 |
 | Random Clothing [B41/B42] | 3397182976 | 28 | 104 | 8 | 132 |
@@ -113,6 +116,7 @@
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
 | Long-standing Wooden Structures | 3205738591 | 17 | 0 | 0 | 17 |
 | [B42/41] Repairable Windows | 3378304610 | 17 | 0 | 2 | 17 |
+| Dynamic Backpack Upgrades [ B42/B41 ] | 2996978365 | 16 | 84 | 0 | 100 |
 | Minimap Style Options | 3526517370 | 16 | 31 | 14 | 47 |
 | [B42/B41] Motorious Zone - Hot Pursuit Add-on | 2841969842 | 15 | 0 | 0 | 15 |
 | Long Term Preservation [FIXED] [B42] | 3406392630 | 15 | 1 | 8 | 16 |
@@ -133,7 +137,9 @@
 | [J&G] Trauma Responder Uniform [B42/41] | 3443982326 | 11 | 46 | 0 | 63 |
 | DFMFoodMod | 3406694220 | 10 | 83 | 4 | 94 |
 | Street Smarts | 3511535258 | 10 | 11 | 2 | 21 |
+| SIMBA autoHIDE HUD | 3606878738 | 10 | 0 | 0 | 10 |
 | Undying Zombies (Immersive Respawn Replacement) | 3555199477 | 10 | 0 | 0 | 10 |
+| '93 Ford F-Series | 3073430075 | 9 | 88 | 0 | 97 |
 | [B41/B42] Temperature Affects Food Spoilage Rate | 3297793087 | 9 | 0 | 0 | 9 |
 | Show Key Origin | 3501701205 | 9 | 0 | 0 | 9 |
 | [B41 & B42] Throw your bag across | 3391902125 | 9 | 0 | 0 | 9 |
@@ -150,6 +156,7 @@
 | U.S. M548 Cargo Carrier by Papa_Chad | 3424497614 | 7 | 10 | 0 | 17 |
 | Ammo Maker | 2788256295 | 6 | 673 | 31 | 679 |
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 6 | 367 | 2 | 373 |
+| U.S. M41 Walker Bulldog by Papa_Chad | 3608725379 | 6 | 0 | 0 | 6 |
 | [J&G] Black Multicam Uniform [B42/41] | 3315302991 | 6 | 39 | 0 | 47 |
 | [J&G] Desert Uniform [B42/41] | 3299457564 | 6 | 37 | 0 | 44 |
 | [J&G] Forest Multicam Uniform [B42/41] | 3309971624 | 6 | 37 | 0 | 44 |
@@ -168,6 +175,7 @@
 | Yaki's BarberShop | 2810471370 | 5 | 0 | 0 | 5 |
 | '85 Chevrolet Caprice / Impala | 3413704851 | 4 | 37 | 0 | 41 |
 | '85 Oldsmobile Delta 88 | 3418253716 | 4 | 17 | 0 | 21 |
+| '93 Chevrolet Suburban / Silverado | 3152529790 | 4 | 148 | 2 | 152 |
 | Baby Animal Food | 3422249642 | 4 | 9 | 4 | 13 |
 | Delete An Item | 3571106963 | 4 | 0 | 0 | 4 |
 | Gunpoint Redemption [B.41] | 3078291265 | 4 | 10 | 1 | 14 |
@@ -184,8 +192,8 @@
 | [B42] School's Out: Anime-Style Student Uniforms | 3404301631 | 3 | 0 | 6 | 286 |
 | Shield Mode (Secondary Hand Equip) (B41/B42) | 3383001527 | 3 | 6 | 2 | 9 |
 |  Wearable Towels [B41/B42] | 3203159242 | 3 | 35 | 32 | 40 |
+| TEH Junkyard Mechanics 42 | 3591337109 | 3 | 0 | 0 | 7 |
 | [J&G] Caution Uniform [B42/41] | 3369825662 | 3 | 39 | 0 | 44 |
-| '93 Chevrolet Suburban / Silverado | 3152529790 | 2 | 150 | 0 | 152 |
 | B42 Rain's Axes & Blades | 3388380529 | 2 | 47 | 0 | 50 |
 | [B42/B41] Bandits Creator | 3469292499 | 2 | 121 | 0 | 123 |
 | Bath Towels Overhaul | 3416208765 | 2 | 82 | 1 | 84 |
@@ -308,7 +316,6 @@
 | '92 Jeep YJ Wrangler | 3287727378 | 0 | 86 | 0 | 86 |
 | '92 NISSAN Skyline GT-R (R32) | 2846036306 | 0 | 77 | 0 | 77 |
 | '93 Ford CF8000 Elgin Street Sweeper | 2969343830 | 0 | 49 | 0 | 49 |
-| '93 Ford F-Series | 3073430075 | 0 | 91 | 0 | 91 |
 | '93 Ford Taurus | 3088951320 | 0 | 65 | 0 | 65 |
 | '93 Ford Mustang SSP | 3001592312 | 0 | 39 | 0 | 39 |
 | '93 Lincoln Town Car + Limo | 2932547723 | 0 | 61 | 0 | 61 |
@@ -645,7 +652,6 @@
 | [B42] Tatrapan | 3402789975 | 0 | 10 | 7 | 10 |
 | TchernoLib | 3389605231 | 0 | 35 | 0 | 35 |
 | TEH Assembly Order for Project Summer Car [B42] | 3593757134 | 0 | 0 | 0 | 10 |
-| TEH Junkyard Mechanics 42 | 3591337109 | 0 | 0 | 0 | 4 |
 | Teto Plushies | 3603577358 | 0 | 0 | 0 | 11 |
 | [B42] The Only Cure | 3580276809 | 0 | 0 | 0 | 66 |
 | The Best Lockpicking aka Better Lockpicking [B42] | 3440867775 | 0 | 0 | 0 | 77 |
