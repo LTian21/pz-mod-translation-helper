@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-25 04:04:32 UTC+08:00`*
+*最后更新于：`2025-11-26 04:04:52 UTC+08:00`*
 
 ---
 
@@ -9,17 +9,17 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``74089`` 条 |
-| **待翻译条目** | ``8460`` 条 |
+| **模组总条目** | ``74192`` 条 |
+| **待翻译条目** | ``8563`` 条 |
 | **已翻译条目** | ``65629`` 条 |
 | **待校对条目** | ``41242`` 条 |
-| **已支持 Mod 数量** | ``697`` 个 |
+| **已支持 Mod 数量** | ``701`` 个 |
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251125_040431``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251126_040450``)**
 
-*   **SnackTime89 (ID: 3589560764)**: 新增 `10` 条, 移除 `1` 条。
+*   **PZKExtendedzones (ID: 3217685049)**: 新增 `5` 条, 移除 `0` 条。
 
 ---
 
@@ -50,12 +50,12 @@
 | ClothesBox Redux | 2847911733 | 101 | 15 | 2 | 116 |
 | Realistic Clothes | 3491510356 | 87 | 0 | 0 | 87 |
 | CDDA Zombies | 2749928925 | 83 | 210 | 209 | 294 |
+| SnackTime 89 - Junk Revival | 3589560764 | 83 | 0 | 0 | 210 |
 | that DAMN Library | 3171167894 | 81 | 383 | 0 | 464 |
 | ra's Professions | 2675128168 | 78 | 0 | 0 | 78 |
 | JB's Big Wood | 3583736984 | 77 | 0 | 0 | 77 |
 | [B42] Useful Barrels | 3436537035 | 77 | 1 | 0 | 78 |
 | Braven's Achievements | 3051277957 | 76 | 1 | 0 | 77 |
-| SnackTime 89 - Junk Revival | 3589560764 | 74 | 0 | 0 | 201 |
 | HydeCo. Automatic Garage Doors! | 3594285774 | 73 | 0 | 0 | 73 |
 | Mad Crafter [electric weapon and more] v0.2 | 3418701509 | 72 | 1 | 0 | 73 |
 | HydeCo. Clay! | 3551124480 | 69 | 0 | 0 | 69 |
@@ -75,6 +75,7 @@
 | Functional Clipboard [B41/B42] | 3387382165 | 44 | 0 | 0 | 44 |
 | Red Days | 3516166810 | 43 | 61 | 15 | 104 |
 | Inventory Tetris - Grid Based Inventory Overhaul [B42] | 3397561666 | 42 | 0 | 0 | 42 |
+| ALICE Gear [B41/B42] | 3610005735 | 40 | 0 | 0 | 40 |
 | Factory Pieces | 3399263137 | 40 | 101 | 0 | 141 |
 | My So-Called Snack | 2877535263 | 40 | 184 | 0 | 224 |
 | Tsar's Common Library B42 | 3402491515 | 40 | 339 | 122 | 379 |
@@ -87,6 +88,7 @@
 | Evolving Traits World (ETW) [B41/B42] - alternative to "Dynamic Traits" | 2914075159 | 36 | 340 | 1 | 376 |
 | Table Saw[B42] | 3540297822 | 36 | 3 | 1 | 39 |
 | Severe Non-Lethal Infections [B42] | 3450825552 | 35 | 0 | 0 | 35 |
+| TSY - theySEE You &#124; Run & Scream | 3609311749 | 35 | 0 | 0 | 35 |
 | Better Flashlights [B42] | 3420478458 | 34 | 0 | 0 | 34 |
 | Beefcake Food Overhaul [B42] | 3543815008 | 33 | 0 | 0 | 33 |
 | Zomboid Drop More B42 | 3546452514 | 33 | 0 | 0 | 33 |
@@ -120,6 +122,7 @@
 | Legendary Satchel | 3560352772 | 13 | 12 | 6 | 25 |
 | Fallout - NCR Trooper Pack | 3508243687 | 13 | 33 | 13 | 46 |
 | Vanilla Vehicles Replacer (KI5) | 3423424077 | 13 | 0 | 0 | 13 |
+| Tire Pressure Monitoring System (TPMS) | 3381815115 | 12 | 0 | 0 | 12 |
 | ST Additions - Pry Open | 3579640010 | 12 | 0 | 0 | 139 |
 | The Calm Before The Storm | 2953621037 | 12 | 0 | 0 | 61 |
 | Unseasonal Weather | 3582891045 | 12 | 0 | 0 | 12 |
@@ -146,6 +149,7 @@
 | Gunfire Causes Hearing Loss [B42+] | 3465727755 | 7 | 0 | 0 | 7 |
 | darlak's H.E.C.U. | 3452711271 | 7 | 96 | 14 | 108 |
 | [B42] Bodily Functions [v0.12.3] | 3396456841 | 7 | 328 | 0 | 335 |
+| Sprinters Over Time | 3608589196 | 7 | 0 | 0 | 7 |
 | U.S. M548 Cargo Carrier by Papa_Chad | 3424497614 | 7 | 10 | 0 | 17 |
 | Ammo Maker | 2788256295 | 6 | 673 | 31 | 679 |
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 6 | 367 | 2 | 373 |
