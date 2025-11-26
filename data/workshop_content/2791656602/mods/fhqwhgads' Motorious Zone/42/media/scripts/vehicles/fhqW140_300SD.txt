@@ -22,6 +22,40 @@ module Base
 		scale = 0.47,
 	}
 	
+	template vehicle fhqMZ_W140_Col
+	{
+		useChassisPhysicsCollision = false,
+
+		physics box
+		{
+			offset = 0.0000 0.1868 0.0000,
+			extents = 0.8791 0.3626 2.3736,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3022 -0.2252,
+			extents = 0.8791 0.5934 0.6484,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3791 0.2865,
+			extents = 0.8791 0.1758 0.5495,
+			rotate = 32.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3765 -0.7863,
+			extents = 0.8791 0.6264 0.1868,
+			rotate = 63.0000 0.0000 0.0000,
+		}
+		
+	}
+	
 	template vehicle fhqMZ_W140
 	{
 		mechanicType = 3,
@@ -639,6 +673,8 @@ module Base
 
 		template = Radio,
 		template = Headlight,
+		
+		template! = fhqMZ_W140_Col,
 
 		attachment trailer
 		{
@@ -654,7 +690,6 @@ module Base
 			zoffset = 1.0000,
 		}
 	}
-	
 	template vehicle fhqMZ_W140_300SD
 	{
 		template! = fhqMZ_W140,
@@ -687,32 +722,32 @@ module Base
 		
 		mass = 930,
 	}
-	
 	vehicle fhqW140_300SD
 	{
 		template! = fhqMZ_W140_300SD,
-		
+
 		skin
 		{
 			texture = Vehicles/vehicle_fhqMZ_W140_shell,
 		}
-		
+
 		skin
 		{
 			texture = Vehicles/vehicle_fhqMZ_W140_2_shell,
 		}
-		
+
 		skin
 		{
 			texture = Vehicles/vehicle_fhqMZ_W140_3_shell,
 		}
-		
+
 		extents = 0.8901 0.5824 2.3846,
 		physicsChassisShape = 0.8901 0.5824 2.3846,
 		centerOfMassOffset = 0.0000 0.2967 0.0000,
 		shadowExtents = 0.8992 2.5058,
 		shadowOffset = 0.0000 0.0000,
-		
+		engineLoudness = 62,
+
 		wheel FrontLeft
 		{
 			front = true,
@@ -863,7 +898,17 @@ module Base
 		{
 			xywh = -0.6703 -0.6319 0.4505 0.4505,
 		}
-		
+
+		part TrunkDoor
+		{
+			model Badges
+			{
+				file = fhqW140MZBadge_300SD,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
 		attachment trailer
 		{
 			offset = 0.0000 0.1484 -1.2637,
@@ -876,14 +921,6 @@ module Base
 			offset = 0.0000 0.1264 1.1154,
 			rotate = 0.0000 0.0000 0.0000,
 			zoffset = 1.0000,
-		}
-		
-		part TrunkDoor
-		{
-			model Badges
-			{
-				file = fhqW140MZBadge_300SD,
-			}
 		}
 	}
 }

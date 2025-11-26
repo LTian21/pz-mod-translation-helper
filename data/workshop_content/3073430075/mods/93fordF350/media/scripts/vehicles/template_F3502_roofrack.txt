@@ -40,6 +40,30 @@ module Base
 		scale = 0.1,
 	}
 
+    model 93fordF350GasCan2
+    {
+        mesh = vehicles/Vehicles_93fordF350_Body|fx50_gascan2,
+		texture = Vehicles/Items_USMIL_gasCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+    }
+
+    model 93fordF350WaterCan2
+    {
+        mesh = vehicles/Vehicles_93fordF350_Body|fx50_gascan2,
+		texture = Vehicles/Items_USMIL_waterCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+    }
+
+    model 93fordF350Tent2
+	{
+		mesh = vehicles/Vehicles_93fordF350_Body|fx50_tentTarp2,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
 	template vehicle F3502TruckBedAddons
 	{
 		part F3502Roofrack
@@ -97,8 +121,9 @@ module Base
 				time = 700,
 				skills = Mechanics:2,
 				recipes = Intermediate Mechanics,
-				test = Vehicles.UninstallTest.Default,
+				test = DAMN.UninstallTest.Default,
 				complete = Vehicles.UninstallComplete.Default,
+                requireUninstalled = F3502GasCanOne;F3502GasCanTwo;F3502GasCanThree;F3502Tent,
 				requireEmpty = true,
 			}
 			lua
@@ -572,4 +597,402 @@ module Base
 				}
             }
 	}
+
+    template vehicle F150Sroofrack
+	{
+		part F1502Roofrack
+		{
+			category = bodywork,
+			area = Roofrack,
+			itemType = Base.93fordF350Roofrack,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+                capacity = 75,
+				conditionAffectsCapacity = false,
+				test = F3502.ContainerAccess.Roofrack,
+			}
+
+			lua
+            {
+                create = Vehicles.Create.Default,
+            }
+		}
+
+        part F1502SideStorageL
+		{
+			category = bodywork,
+			area = StorageLeft,
+			itemType = Base.93fordF350TrunkN,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+                capacity = 15,
+				conditionAffectsCapacity = false,
+				test = F3502.ContainerAccess.StorageLeft,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part F1502SideStorageR
+		{
+			category = bodywork,
+			area = StorageRight,
+			itemType = Base.93fordF350TrunkN,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+                capacity = 15,
+				conditionAffectsCapacity = false,
+				test = F3502.ContainerAccess.StorageRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part F3502GasCanOne
+        	{
+
+			model GasCanOne
+				{
+                		file = 93fordF350GasCan2,
+				}
+
+			model GasCanOneE
+				{
+                		file = 93fordF350GasCan2,
+				}
+
+			model WaterCanOne
+				{
+                		file = 93fordF350WaterCan2,
+				}
+
+			model WaterCanOneE
+				{
+                		file = 93fordF350WaterCan2,
+				}
+
+			area = TireRearRight,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.GasCanOne,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.GasCanOne,
+            		}
+
+            		lua
+            		{
+						create = F3502.Create.GasCanOne,
+						init = F3502.Init.GasCanOne,
+					}
+		}
+
+		part F3502GasCanTwo
+        {
+
+			model GasCanTwo
+				{
+                		file = 93fordF350GasCan2,
+                		offset = 0.1441 0.0000 0.0000,
+				}
+
+			model GasCanTwoE
+				{
+                		file = 93fordF350GasCan2,
+                		offset = 0.1441 0.0000 0.0000,
+				}
+
+			model WaterCanTwo
+				{
+                		file = 93fordF350WaterCan2,
+                		offset = 0.1441 0.0000 0.0000,
+				}
+
+			model WaterCanTwoE
+				{
+                		file = 93fordF350WaterCan2,
+                		offset = 0.1441 0.0000 0.0000,
+				}
+
+			area = TireRearRight,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.GasCanTwo,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.GasCanTwo,
+            		}
+
+            		lua
+            		{
+						create = F3502.Create.GasCanTwo,
+						init = F3502.Init.GasCanTwo,
+					}
+		}
+
+		part F3502GasCanThree
+        {
+
+			model GasCanThree
+				{
+                		file = 93fordF350GasCan2,
+                		offset = 0.2768 0.0000 0.0000,
+				}
+
+			model GasCanThreeE
+				{
+                		file = 93fordF350GasCan2,
+                		offset = 0.2768 0.0000 0.0000,
+				}
+
+			model WaterCanThree
+				{
+                		file = 93fordF350WaterCan2,
+                		offset = 0.2768 0.0000 0.0000,
+				}
+
+			model WaterCanThreeE
+				{
+                		file = 93fordF350WaterCan2,
+                		offset = 0.2768 0.0000 0.0000,
+				}
+
+			area = TireRearLeft,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.GasCanThree,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.GasCanThree,
+            		}
+
+            		lua
+            		{
+						create = F3502.Create.GasCanThree,
+						init = F3502.Init.GasCanThree,
+					}
+		}
+
+        part F3502GasCanFour
+        {
+
+			model GasCanFour
+				{
+                		file = 93fordF350GasCan2,
+                		offset = 0.4128 0.0000 0.0000,
+				}
+
+			model GasCanFourE
+				{
+                		file = 93fordF350GasCan2,
+                		offset = 0.4128 0.0000 0.0000,
+				}
+
+			model WaterCanFour
+				{
+                		file = 93fordF350WaterCan2,
+                		offset = 0.4128 0.0000 0.0000,
+				}
+
+			model WaterCanFourE
+				{
+                		file = 93fordF350WaterCan2,
+                		offset = 0.4128 0.0000 0.0000,
+				}
+
+			area = TireRearLeft,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = F3502.InstallComplete.GasCanFour,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = F3502.UninstallComplete.GasCanFour,
+            		}
+
+            		lua
+            		{
+						create = F3502.Create.GasCanFour,
+						init = F3502.Init.GasCanFour,
+					}
+		}
+
+        part F3502Tent
+        	{
+				model TentyyyY
+				{
+                    file = 93fordF350Tent2,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = camping.CampingTentKit,
+				mechanicRequireKey = false,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = Vehicles.Create.Default,
+				}
+			}
+
+    part DAMNSpareTireRoof
+        	{
+                model spare1
+				{
+                    file = 93fordF350Wheel,
+                    offset = 0.2650 1.3817 -0.7051,
+                    rotate = -20.0000 0.0000 90.0000,
+				}
+
+			category = Other,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.93fordF350Tire2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				}
+		}
+    }
 }

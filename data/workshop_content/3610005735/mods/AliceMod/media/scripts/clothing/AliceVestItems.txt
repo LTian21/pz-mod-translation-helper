@@ -1,0 +1,476 @@
+module ALICE
+	{
+    item AliceCanteenEmpty
+	{
+	    DisplayCategory = WaterContainer,
+		Weight	=	0.13,
+		CanStoreWater	=	TRUE,
+		Type	=	Normal,
+		DisplayName	=	Empty Canteen,
+		ReplaceOnUseOn	=	WaterSource-AliceCanteenFull,
+		Icon	=	AliceCanteen,
+		StaticModel = AliceCanteen,
+		WorldStaticModel = AliceCanteen,
+		Tags = EmptyPetrol,
+		ReplaceTypes = WaterSource AliceCanteenFull,
+		ToolTip = Tooltip_item_OnlyPurifyMicrowave,
+        AttachmentType = AliceCanteenSlot,
+	}
+    item AliceCanteenFull
+	{
+		DisplayName = Canteen,
+		DisplayCategory = Water,
+		Type = Drainable,
+		Weight = 1.8,
+		Icon = AliceCanteen,
+		CanStoreWater = TRUE,
+		FillFromDispenserSound = GetWaterFromDispenserPlasticMedium,
+		FillFromTapSound = GetWaterFromTapPlasticMedium,
+		IsWaterSource = TRUE,
+		ReplaceOnDeplete = AliceCanteenEmpty,
+		ReplaceOnUseOn = WaterSource-AliceCanteenFull,
+		UseDelta = 0.05,
+		UseWhileEquipped = FALSE,
+		CustomEatSound = DrinkingFromBottlePlastic,
+		StaticModel = AliceCanteen,
+		WorldStaticModel = AliceCanteen,
+		Tooltip = Tooltip_item_OnlyPurifyMicrowave,
+        AttachmentType = AliceCanteenSlot,
+	}
+        item M9BayonetSheath
+	{
+	    DisplayCategory = Accessory,
+		Type = Clothing,
+		DisplayName = M9 Bayonet Sheath,
+		ClothingItem = M9Sheath,
+		BodyLocation = Sheath,
+		Icon = AliceM9BayonetSheath,
+		Weight = 0.2,
+		WorldStaticModel = M9BayonetSheath_Ground,
+        AttachmentsProvided = M9BayonetSlot,
+	}
+    item M9Bayonet
+	{
+	    DisplayCategory = Weapon,
+		MaxRange	=	1.2,
+		WeaponSprite	= ALICE.AliceM9Bayonet,
+		MinAngle	=	0.55,
+		Type	=	Weapon,
+		MinimumSwingTime	=	2,
+		KnockBackOnNoDeath	=	FALSE,
+		SwingAmountBeforeImpact	=	0.02,
+		Categories	=	SmallBlade,
+		ConditionLowerChanceOneIn	=	30,
+		Weight	=	0.46,
+		SplatNumber	=	2,
+		PushBackMod	=	0.3,
+		SubCategory	=	Stab,
+		AimingMod	=	0.8,
+		ConditionMax	=	20,
+		MaxHitCount	=	1,
+		IsAimedHandWeapon	=	TRUE,
+		DoorDamage	=	1,
+		SwingAnim	=	Stab,
+		DisplayName	=	M9 Bayonet,
+		MinRange	=	0.5,
+		CloseKillMove = Jaw_Stab,
+		SwingTime	=	2,
+		KnockdownMod	=	0,
+		SplatBloodOnNoDeath	=	TRUE,
+		Icon	=	AliceM9Bayonet,
+		RunAnim	=	Run_Weapon2,
+        IdleAnim	=	Idle_Weapon2,
+        BreakSound  =   KitchenKnifeBreak,
+        TreeDamage  =   10,
+        EnduranceMod = 0.4,
+        MetalValue = 10,
+        CriticalChance	=	25,
+        CritDmgMultiplier = 4,
+        MinDamage	=	1.5,
+        MaxDamage	=	2.5,
+		WeaponLength = 0.19,
+        DamageCategory = Slash,
+        DamageMakeHole = TRUE,
+        HitFloorSound	=	KitchenKnifeHit,
+        ImpactSound	=	KitchenKnifeHit,
+        DoorHitSound = KitchenKnifeHit,
+		HitSound	=	KitchenKnifeHit,
+		SwingSound = KitchenKnifeSwing,
+		AttachmentType = M9Sheath,
+        Tags = CutPlant;SharpKnife;Fullblade;CanOpener,
+ 	}
+	item AliceBackpack
+    {
+        DisplayCategory = Bag,
+        Type = Container,
+        Weight = 1.1,
+        Icon = BagAliceBackpack,
+        AttachmentReplacement = Bag,
+		DisplayName = ALICE Medium Field Pack,
+        BloodLocation = Bag,
+        CanBeEquipped = Back,
+        CanHaveHoles = false,
+        Capacity = 40,
+        CloseSound = CloseBag,
+        ClothingItem = AliceBackpack,
+        EquipSound = EquipBackpackLarge,
+        OpenSound = OpenBag,
+        PutInSound = PutItemInBag,
+        ReplaceInPrimaryHand = AliceBackpackRightHand holdingbagright,
+        ReplaceInSecondHand = AliceBackpackLeftHand holdingbagleft,
+        RunSpeedModifier = 1.0,
+        WeightReduction = 90,
+        WorldStaticModel = AliceBackpack_Ground,
+    }
+     item AliceFieldpack
+    {
+        Type = Container,
+        DisplayName = Field Pack. Training,
+        ClothingExtraSubmenu = AliceFieldpack,
+        Tooltip = Tooltip_clothing_DoubleClick,
+        ClothingItem = AliceFieldpack,
+        Icon	=	BagAliceButtpack,
+        CanBeEquipped = Tail,
+        RunSpeedModifier = 1,
+        BodyLocation = Tail,
+        WeightReduction	=	95,
+        Weight	=	0.6,
+        Capacity	=	17,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        WorldStaticModel= AliceFieldpack_Ground,
+    }
+    item AliceVest4P2CTight
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	85,
+        ClothingItem = AliceVest4P2CTight,
+        ClothingItemExtra = AliceVest4P2CLoosen,
+        ClothingItemExtraOption = Loosen,
+        clothingExtraSubmenu = Tight,
+        Weight	=	2.56,
+        Type	=	Container,
+        Capacity	=	13,
+        DisplayName	=	ALICE Webbing (4P2C),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest4P2C_Ground,
+        AttachmentsProvided = RightCanteenSlot;LeftCanteenSlot;LeftGrenadeSlot;RightGrenadeSlot,
+    }
+    item AliceVest4P2CLoosen
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	85,
+        ClothingItem = AliceVest4P2CLoosen,
+        ClothingItemExtra = AliceVest4P2CTight,
+        ClothingItemExtraOption = Tight,
+        clothingExtraSubmenu = Loosen,
+        Weight	=	2.56,
+        Type	=	Container,
+        Capacity	=	13,
+        DisplayName	=	ALICE Webbing (4P2C),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest4P2C_Ground,
+        AttachmentsProvided = LeftGrenadeSlot;RightGrenadeSlot;RightCanteenSlot;LeftCanteenSlot,
+    }
+
+
+
+
+item AliceVest2P2CTight
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	90,
+        ClothingItem = AliceVest2P2CTight,
+        ClothingItemExtra = AliceVest2P2CLoosen,
+        ClothingItemExtraOption = Loosen,
+        clothingExtraSubmenu = Tight,
+        Weight	=	1.73,
+        Type	=	Container,
+        Capacity	=	13,
+        DisplayName	=	ALICE Webbing (2P2C),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest2P2C_Ground,
+        AttachmentsProvided = LeftGrenadeSlot;RightGrenadeSlot;RightCanteenSlot;LeftCanteenSlot,
+    }
+    item AliceVest2P2CLoosen
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	90,
+        ClothingItem = AliceVest2P2CLoosen,
+        ClothingItemExtra = AliceVest2P2CTight,
+        ClothingItemExtraOption = Tight,
+        clothingExtraSubmenu = Loosen,
+        Weight	=	1.73,
+        Type	=	Container,
+        Capacity	=	7,
+        DisplayName	=	ALICE Webbing (2P2C),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest2P2C_Ground,
+        AttachmentsProvided = LeftGrenadeSlot;RightGrenadeSlot;RightCanteenSlot;LeftCanteenSlot,
+    }
+
+    
+        item AliceVest4P1C1ETight
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	85,
+        ClothingItem = AliceVest4P1C1ETight,
+        ClothingItemExtra = AliceVest4P1C1ELoosen,
+        ClothingItemExtraOption = Loosen,
+        clothingExtraSubmenu = Tight,
+        Weight	=	2.67,
+        Type	=	Container,
+        Capacity	=	15,
+        DisplayName	=	ALICE Webbing (4P1C1E),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest4P1C1E_Ground,
+        AttachmentsProvided = LeftGrenadeSlot;RightGrenadeSlot;RightCanteenSlot,
+    }
+    item AliceVest4P1C1ELoosen
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	85,
+        ClothingItem = AliceVest4P1C1ELoosen,
+        ClothingItemExtra = AliceVest4P1C1ETight,
+        ClothingItemExtraOption = Tight,
+        clothingExtraSubmenu = Loosen,
+        Weight	=	2.67,
+        Type	=	Container,
+        Capacity	=	15,
+        DisplayName	=	ALICE Webbing (4P1C1E),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest4P1C1E_Ground,
+        AttachmentsProvided = LeftGrenadeSlot;RightGrenadeSlot;RightCanteenSlot,
+    }
+        item AliceVest2P1C1ETight
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	85,
+        ClothingItem = AliceVest2P1C1ETight,
+        ClothingItemExtra = AliceVest2P1C1ELoosen,
+        ClothingItemExtraOption = Loosen,
+        clothingExtraSubmenu = Tight,
+        Weight	=	1.87,
+        Type	=	Container,
+        Capacity	=	9,
+        DisplayName	=	ALICE Webbing (2P1C1E),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest2P1C1E_Ground,
+        AttachmentsProvided = LeftGrenadeSlot;RightGrenadeSlot;RightCanteenSlot,
+    }
+    item AliceVest2P1C1ELoosen
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	85,
+        ClothingItem = AliceVest2P1C1ELoosen,
+        ClothingItemExtra = AliceVest2P1C1ETight,
+        ClothingItemExtraOption = Tight,
+        clothingExtraSubmenu = Loosen,
+        Weight	=	1.87,
+        Type	=	Container,
+        Capacity	=	9,
+        DisplayName	=	ALICE Webbing (2P1C1E),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest2P1C1E_Ground,
+        AttachmentsProvided = LeftGrenadeSlot;RightGrenadeSlot;RightCanteenSlot,
+    }
+    
+
+
+        item AliceVest4PTight
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	90,
+        ClothingItem = AliceVest4PTight,
+        ClothingItemExtra = AliceVest4PLoosen,
+        ClothingItemExtraOption = Loosen,
+        clothingExtraSubmenu = Tight,
+        Weight	=	2.3,
+        Type	=	Container,
+        Capacity	=	13,
+        DisplayName	=	ALICE Webbing (4P),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest4P_Ground,
+        AttachmentsProvided = LeftGrenadeSlot;RightGrenadeSlot,
+    }
+    item AliceVest4PLoosen
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	90,
+        ClothingItem = AliceVest4PLoosen,
+        ClothingItemExtra = AliceVest4PTight,
+        ClothingItemExtraOption = Tight,
+        clothingExtraSubmenu = Loosen,
+        Weight	=	2.3,
+        Type	=	Container,
+        Capacity	=	13,
+        DisplayName	=	ALICE Webbing (4P),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest4P_Ground,
+        AttachmentsProvided = LeftGrenadeSlot;RightGrenadeSlot,
+    }
+
+
+       item AliceVest2PTight
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	95,
+        ClothingItem = AliceVest2PTight,
+        ClothingItemExtra = AliceVest2PLoosen,
+        ClothingItemExtraOption = Loosen,
+        clothingExtraSubmenu = Tight,
+        Weight	=	1.5,
+        Type	=	Container,
+        Capacity	=	7,
+        DisplayName	=	ALICE Webbing (2P),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest4P_Ground,
+        AttachmentsProvided = LeftGrenadeSlot;RightGrenadeSlot,
+    }
+    item AliceVest2PLoosen
+    {
+        DisplayCategory = Bag,
+        WeightReduction	=	95,
+        ClothingItem = AliceVest2PLoosen,
+        ClothingItemExtra = AliceVest2PTight,
+        ClothingItemExtraOption = Tight,
+        clothingExtraSubmenu = Loosen,
+        Weight	=	1.5,
+        Type	=	Container,
+        Capacity	=	7,
+        DisplayName	=	ALICE Webbing (2P),
+        Icon	=	AliceWeebing,
+        OpenSound   =   OpenBag,
+        CloseSound   =   CloseBag,
+        PutInSound   =   PutItemInBag,
+        BodyLocation = AliceVest,
+        CanBeEquipped = AliceVest,
+        RunSpeedModifier = 1.0,
+        WorldStaticModel = AliceVest2P_Ground,
+        AttachmentsProvided = LeftGrenadeSlot;RightGrenadeSlot,
+    }
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    model AliceFieldpack_Ground
+	{
+		mesh = Static/Clothes/AliceFieldpack_Ground,
+	}
+    model AliceBackpack_Ground
+	{
+		mesh = Static/Clothes/AliceBackpack_Ground,
+	}
+     model AliceVest4P2C_Ground
+	{
+		mesh = Static/Clothes/AliceVest4P2C_Ground,
+	}
+     model AliceVest2P2C_Ground
+	{
+		mesh = Static/Clothes/AliceVest2P2C_Ground,
+	}
+     model AliceVest4P1C1E_Ground
+	{
+		mesh = Static/Clothes/AliceVest4P1C1E_Ground,
+	}
+     model AliceVest2P1C1E_Ground
+	{
+		mesh = Static/Clothes/AliceVest2P1C1E_Ground,
+	}
+     model AliceVest4P_Ground
+	{
+		mesh = Static/Clothes/AliceVest4P_Ground,
+	}
+     model AliceVest2P_Ground
+	{
+		mesh = Static/Clothes/AliceVest2P_Ground,
+	}
+    model M9BayonetSheath_Ground
+	{
+		mesh = Static/Clothes/M9BayonetSheath_Ground,
+	}
+     model AliceCanteen
+	{
+		mesh = AliceCanteen,
+        texture = AliceVestV1,
+	}
+    model AliceM9Bayonet
+	{
+		mesh = AliceM9Bayonet,
+        texture = M9BayonetKit,
+	}
+
+}

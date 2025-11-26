@@ -55,8 +55,6 @@ module Base
 		invertX = FALSE,
 		scale = 0.47,
 	}
-	
-	
 	model fhqW140MZBadge_300SD
 	{
 		mesh = vehicles/vehicle_fhq_MZ_w140|fhqW140_badges_300D,
@@ -85,7 +83,6 @@ module Base
 		invertX = FALSE,
 		scale = 0.47,
 	}
-	
 	model fhqW140MZBadge_400SEL
 	{
 		mesh = vehicles/vehicle_fhq_MZ_v140|fhqV140_badges_400,
@@ -114,7 +111,39 @@ module Base
 		invertX = FALSE,
 		scale = 0.47,
 	}
-	
+	template vehicle fhqMZ_V140_Col
+	{
+		useChassisPhysicsCollision = false,
+		
+		physics box
+		{
+			offset = 0.0000 0.1868 0.0134,
+			extents = 0.8791 0.3626 2.4066,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = -0.0006 0.3022 -0.2033,
+			extents = 0.8791 0.5934 0.6813,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3811 0.3220,
+			extents = 0.8791 0.1758 0.5495,
+			rotate = 32.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3765 -0.7863,
+			extents = 0.8791 0.6264 0.1868,
+			rotate = 63.0000 0.0000 0.0000,
+		}
+		
+	}
 	template vehicle fhqMZ_V140
 	{
 		mechanicType = 3,
@@ -138,7 +167,7 @@ module Base
 		shadowExtents = 0.8992 2.5498,
 		shadowOffset = 0.0000 0.0000,
 		engineForce = 5250,
-		engineLoudness = 80,
+		engineLoudness = 75,
 		engineQuality = 75,
 		maxSpeed = 110f,
 		gearRatioCount = 4,
@@ -732,6 +761,8 @@ module Base
 
 		template = Radio,
 		template = Headlight,
+		
+		template! = fhqMZ_V140_Col,
 
 		attachment trailer
 		{
@@ -747,7 +778,6 @@ module Base
 			zoffset = 1.0000,
 		}
 	}
-	
 	template vehicle fhqMZ_V140_400SEL
 	{
 		template! = fhqMZ_V140,
@@ -772,33 +802,33 @@ module Base
 		}
 		
 		mass = 1000,
+		
 	}
-	
 	vehicle fhqV140_400SEL
 	{
 		template! = fhqMZ_V140_400SEL,
-		
+
 		skin
 		{
 			texture = Vehicles/vehicle_fhqMZ_V140_shell,
 		}
-		
+
 		skin
 		{
 			texture = Vehicles/vehicle_fhqMZ_V140_2_shell,
 		}
-		
+
 		skin
 		{
 			texture = Vehicles/vehicle_fhqMZ_V140_3_shell,
 		}
-		
+
 		extents = 0.8901 0.5824 2.4286,
 		physicsChassisShape = 0.8901 0.5824 2.4286,
 		centerOfMassOffset = 0.0000 0.2967 0.0000,
 		shadowExtents = 0.8992 2.5498,
 		shadowOffset = 0.0000 0.0000,
-		
+
 		wheel FrontLeft
 		{
 			front = true,
@@ -830,7 +860,7 @@ module Base
 			radius = 0.15f,
 			width = 0.30f,
 		}
-		
+
 		passenger FrontLeft
 		{
 			position inside
@@ -894,7 +924,7 @@ module Base
 				area = SeatRearRight,
 			}
 		}
-		
+
 		area Engine
 		{
 			xywh = 0.0000 1.4286 0.8901 0.4286,
@@ -949,13 +979,57 @@ module Base
 		{
 			xywh = -0.6703 -0.6593 0.4505 0.4505,
 		}
-		
+
 		part TrunkDoor
 		{
 			model Badges
 			{
 				file = fhqW140MZBadge_400SEL,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
 			}
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.1868 0.0134,
+			extents = 0.8791 0.3626 2.4066,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = -0.0006 0.3022 -0.2033,
+			extents = 0.7582 0.5934 0.6813,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3811 0.3220,
+			extents = 0.7582 0.1758 0.5495,
+			rotate = 32.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3765 -0.7863,
+			extents = 0.7582 0.6264 0.1868,
+			rotate = 63.0000 0.0000 0.0000,
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 0.1484 -1.3187,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 0.1264 1.1154,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
 		}
 	}
 }

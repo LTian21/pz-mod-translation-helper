@@ -1,0 +1,922 @@
+module TikitownPower
+{
+	imports
+	{
+		Base
+	}
+	
+	craftRecipe Craft_Industrial_Filter
+	{
+		Time = 200,
+		AllowBatchCraft = True,
+		SkillRequired = Maintenance:3,
+		Tags = AnySurfaceCraft,
+        category = PowerPlant,
+		xpAward = Maintenance:75,
+		timedAction = Making,
+		inputs
+		{
+			item 1 [Base.AluminumScrap] mode:destroy flags[Prop1],
+			item 5 [Base.ScrapMetal] mode:destroy,
+			item 1 [Base.TirePiece],
+			item 5 [Base.RippedSheets] mode:destroy,
+			item 5 [Base.Screws] mode:destroy,
+			item 1 tags[Screwdriver;SharpKnife] mode:keep flags[MayDegradeLight;IsNotDull;Prop2],
+			
+		}
+		outputs
+		{
+			item 1 TikitownPower.IndustrialFilter,
+		}
+	}
+	
+	craftRecipe Forge_Powerplant_Pump_Blade
+	{
+		Time = 500,
+		SkillRequired = Blacksmith:5,
+        needToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:90,
+        AutoLearnAll = Blacksmith:9,
+        Tags = AdvancedForge,
+        category = PowerPlant,	
+		
+		inputs
+		{
+			item 1 [Base.PiercedSteelIngot] mode:destroy flags[Prop1],
+			item 5 [Base.ScrapMetal] mode:destroy,
+			item 4 [Base.IronBarHalf] mode:destroy,
+			
+			item 1 tags[Screwdriver;SharpKnife] mode:keep flags[MayDegradeLight;IsNotDull;Prop2],
+			
+		}
+		outputs
+		{
+			item 1 TikitownPower.PumpBlades,
+		}
+	}
+	
+	
+	craftRecipe Forge_Powerplant_Check_Valve
+	{
+		Time = 1000,
+		SkillRequired = Blacksmith:8,
+        needToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:120,
+        AutoLearnAll = Blacksmith:9,
+        Tags = AdvancedForge,
+        category = PowerPlant,	
+		
+		inputs
+		{
+			item 1 [Base.PiercedSteelIngot] mode:destroy,
+			item 2 [Base.SteelIngot] mode:destroy,
+			item 2 [Base.SteelBarQuarter],
+			
+			item 1 tags[Hammer;ClubHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[MetalworkingChisel] mode:keep flags[MayDegradeLight],
+            item 1 tags[Charcoal],
+            item 1 tags[Tongs] mode:keep flags[MayDegradeLight],
+			
+		}
+		outputs
+		{
+			item 1 TikitownPower.PumpCheckValve,
+		}
+	}
+	
+	craftRecipe Forge_Powerplant_Discharge_Nozzle
+	{
+		Time = 1000,
+		SkillRequired = Blacksmith:8,
+        needToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:120,
+        AutoLearnAll = Blacksmith:9,
+        Tags = AdvancedForge,
+        category = PowerPlant,	
+		
+		inputs
+		{
+			item 1 [Base.PiercedSteelIngot] mode:destroy,
+			item 2 [Base.SteelIngot] mode:destroy,
+			item 2 [TikitownPower.PumpSeals],
+			
+			item 1 tags[Hammer;ClubHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[MetalworkingChisel] mode:keep flags[MayDegradeLight],
+            item 1 tags[Charcoal],
+            item 1 tags[Tongs] mode:keep flags[MayDegradeLight],
+			
+		}
+		outputs
+		{
+			item 1 TikitownPower.PumpDisch,
+		}
+	}
+	
+	craftRecipe Forge_Powerplant_Suction_Nozzle
+	{
+		Time = 1000,
+		SkillRequired = Blacksmith:8,
+        needToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:120,
+        AutoLearnAll = Blacksmith:9,
+        Tags = AdvancedForge,
+        category = PowerPlant,	
+		
+		inputs
+		{
+			item 1 [Base.PiercedSteelIngot] mode:destroy,
+			item 2 [Base.SteelIngot] mode:destroy,
+			item 2 [TikitownPower.PumpSeals],
+			
+			item 1 tags[Hammer;ClubHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[MetalworkingChisel] mode:keep flags[MayDegradeLight],
+            item 1 tags[Charcoal],
+            item 1 tags[Tongs] mode:keep flags[MayDegradeLight],
+			
+		}
+		outputs
+		{
+			item 1 TikitownPower.PumpSuction,
+		}
+	}
+	
+	craftRecipe Forge_Powerplant_Impeller
+	{
+		Time = 1000,
+		SkillRequired = Blacksmith:8,
+        needToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:120,
+        AutoLearnAll = Blacksmith:9,
+        Tags = AdvancedForge,
+        category = PowerPlant,	
+		
+		inputs
+		{
+			item 1 [Base.PiercedSteelIngot] mode:destroy,
+			item 1 [Base.SteelIngot] mode:destroy,
+			item 4 [Base.SteelBlock],
+			item 2 [TikitownPower.PumpBlades],
+			
+			item 1 tags[Hammer;ClubHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[MetalworkingChisel] mode:keep flags[MayDegradeLight],
+            item 1 tags[Charcoal],
+            item 1 tags[Tongs] mode:keep flags[MayDegradeLight],
+			
+		}
+		outputs
+		{
+			item 1 TikitownPower.PumpImpeller,
+		}
+	}
+	
+	craftRecipe Forge_Powerplant_Seals
+	{
+		Time = 500,
+		SkillRequired = Blacksmith:8,
+        needToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:90,
+        AutoLearnAll = Blacksmith:9,
+        Tags = AdvancedForge,
+        category = PowerPlant,	
+		
+		inputs
+		{
+			item 1 [Base.PiercedSteelIngot] mode:destroy,
+			item 2 [Base.TirePiece],
+			item 2 [TikitownPower.PumpBlades],
+			
+			item 1 tags[Hammer;ClubHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[MetalworkingChisel] mode:keep flags[MayDegradeLight],
+            item 1 tags[Charcoal],
+            item 1 tags[Tongs] mode:keep flags[MayDegradeLight],
+			
+		}
+		outputs
+		{
+			item 1 TikitownPower.PumpSeals,
+		}
+	}
+	
+	craftRecipe Assemble_Powerplant_Rotor
+	{
+		Time = 1000,
+		SkillRequired = Maintenance:8,
+        AutoLearnAll = Maintenance:9,
+		needToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Maintenance:120,
+        category = PowerPlant,	
+		
+		inputs
+		{
+			item 2 [Base.PiercedSteelIngot] mode:destroy,
+			item 2 [Base.TirePiece],
+			item 2 [Base.SteelIngot],
+			item 4 [Base.MetalBar],
+			item 4 [Base.SteelBar],
+			item 8 [TikitownPower.TurbineBlades],
+			
+			item 1 tags[Hammer;ClubHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			
+		}
+		outputs
+		{
+			item 1 TikitownPower.TurbineRotor,
+		}
+	}
+	
+	craftRecipe Assemble_Powerplant_Stator
+	{
+		Time = 1000,
+		SkillRequired = Mechanics:6;Electricity:6,
+		AutoLearnAll = Mechanics:8;Electricity:8,
+		Tags = AnySurfaceCraft,	
+        needToBeLearn = true,
+        timedAction = MakingElectrical,
+        xpAward = Electricity:120,
+        category = PowerPlant,	
+		
+		inputs
+		{
+			item 8 [Base.SteelBarQuarter],
+			item 8 [Base.ElectricWire],
+			item 4 [Base.ElectronicsScrap],
+			item 4 [Base.SteelBar],
+			item 4 [Base.MetalBar],
+			item 1 [TikitownPower.IndustrialGrease],
+			
+			item 1 tags[Hammer;ClubHammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			
+		}
+		outputs
+		{
+			item 1 TikitownPower.TurbineStator,
+		}
+	}
+	
+	craftRecipe Slake_Lime
+	{
+		Time = 200,
+		SkillRequired = Mechanics:2;Cooking:2,
+		AutoLearnAll = Mechanics:8;Cooking:8,		
+		Tags = InHandCraft,
+        needToBeLearn = true,
+        xpAward = Cooking:20,
+        category = PowerPlant,
+		timedAction = MixingBowl,
+		
+		inputs 
+		{
+			item 1 [Base.Bucket;Base.BucketEmpty;Base.BucketWaterDebug;Base.BucketCarved;Base.BucketForged] mode:destroy mappers[TTPbucketList],
+			item 1 [*],
+            -fluid 5 [Water;TaintedWater],
+			item 1 [Base.Quicklime],
+		}
+
+		outputs
+		{
+			 item 1 mapper:TTPbucketList,
+		}
+		
+		itemMapper TTPbucketList
+        {
+            TikitownPower.BucketCarvedLimeSlurryFull = Base.BucketCarved,
+			TikitownPower.BucketCarvedLimeSlurryForged = Base.BucketForged,
+            default = TikitownPower.BucketLimeSlurryFull,
+        }
+	}
+	
+	craftRecipe Cook_Lard_Soap_Base
+    {
+        timedAction = Making,                     
+        time = 200,                               
+        tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category = PowerPlant,                     
+        ToolTip = "Combine a grease slurry from lard, oil and slaked lime.",
+
+        xpAward = Cooking:10;Mechanics:5,
+        SkillRequired = Cooking:2,                
+        needToBeLearn = true,                     
+
+        OnCreate = TikitownPower.OnCreateGreaseSlurry,
+
+        inputs
+        {
+            item 1 [Base.Lard],
+            item 1 tags[Oil;BakingFat],
+			item 1 tags[Spoon] mode:keep flags[Prop1],
+            item 1 [TikitownPower.BucketCarvedLimeSlurryFull;TikitownPower.BucketLimeSlurryFull;TikitownPower.BucketCarvedLimeSlurryForged],
+            item 1 [Base.Pot;Base.PotForged] mode:destroy mappers[GreasePotMapper] flags[Prop2],          
+        }
+
+         outputs
+		{
+			item 1 mapper:GreasePotMapper,
+		}
+
+		itemMapper GreasePotMapper
+		{
+			TikitownPower.HotGreaseSlurryForged = Base.PotForged,
+			default = TikitownPower.HotGreaseSlurry,
+		}
+    }
+	
+	craftRecipe Store_Industrial_Grease
+	{
+		
+		timedAction = Making,                     
+        time = 200,                               
+        tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category = PowerPlant,                     
+        needToBeLearn = true,                     
+	
+		inputs 
+		{
+			item 1 [TikitownPower.FinishedGreaseSlurry;TikitownPower.FinishedGreaseSlurryForged] mappers[SourcePotMapper] mode:destroy,
+			item 1 [Base.Strainer] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 [TikitownPower.EmptyIndustrialCan] mode:destroy,
+		}
+		outputs
+		{
+			item 1 TikitownPower.IndustrialGrease,
+			item 1 mapper:SourcePotMapper,
+		}
+		itemMapper SourcePotMapper
+		{
+			Base.PotForged = TikitownPower.FinishedGreaseSlurryForged,
+			default = Base.Pot,
+		}
+	}
+	
+	craftRecipe Mix_Corrosion_Inhibitor
+	{
+		Time = 200,
+		SkillRequired = Mechanics:1;Cooking:1,
+		AutoLearnAll = Mechanics:8;Cooking:8,		
+		Tags = InHandCraft,
+        needToBeLearn = true,
+        xpAward = Cooking:7.5,
+        category = PowerPlant,
+		timedAction = MixingBowl,
+		
+		inputs 
+		{
+			item 1 tags[Bowl] mappers[TTPbowlList] mode:destroy,
+			item 1 [*],
+            -fluid 0.5 [Water;TaintedWater],
+			item 1 [Base.Bleach],
+			item 1 [Base.BakingSoda],
+			item 1 tags[Spoon] mode:keep flags[Prop1],
+		}
+
+		outputs
+		{
+			 item 1 mapper:TTPbowlList,
+		}
+		
+		itemMapper TTPbowlList
+        {
+			TikitownPower.CorrosionInhibitorClay = Base.ClayBowl,
+            default = TikitownPower.CorrosionInhibitor,
+        }
+	}
+	
+	craftRecipe Mix_Coolant_Base
+	{
+		Time = 200,
+		SkillRequired = Mechanics:2;Cooking:2,
+		AutoLearnAll = Mechanics:8;Cooking:8,		
+		Tags = InHandCraft,
+        needToBeLearn = true,
+        xpAward = Cooking:10,
+        category = PowerPlant,
+		timedAction = MixingBowl,
+		
+		inputs 
+		{
+			item 1 [Base.Whiskey;Base.Vodka] mode:destroy,
+			item 1 [TikitownPower.CorrosionInhibitor;TikitownPower.CorrosionInhibitorClay],
+			item 1 [*],
+            -fluid 5 [Water;TaintedWater],
+			item 1 [Base.PaintBlack;Base.PaintBlue;Base.PaintBrown;Base.PaintCyan;Base.PaintGreen;Base.PaintGrey;Base.PaintLightBlue;Base.PaintLightBrown;Base.PaintOrange;Base.PaintPink;Base.PaintPurple;Base.PaintRed;Base.PaintTurquoise;Base.PaintWhite;Base.PaintYellow],
+			item 1 [Base.Pot;Base.PotForged] mode:destroy mappers[CoolantPotMapper] flags[Prop2],
+			item 1 tags[Spoon] mode:keep flags[Prop1],
+		}
+
+		outputs
+		{
+			 item 1 mapper:CoolantPotMapper,
+		}
+		
+		itemMapper CoolantPotMapper
+		{
+			TikitownPower.CoolantBaseForged = Base.PotForged,
+			default = TikitownPower.CoolantBase,
+		}
+	}
+	
+	craftRecipe Store_Antifreeze
+	{
+		
+		timedAction = Making,                     
+        time = 200,                               
+        tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category = PowerPlant,                     
+        needToBeLearn = true,                     
+	
+		inputs 
+		{
+			item 1 [TikitownPower.CoolantBaseForged;TikitownPower.CoolantBase] mappers[SourcePotMapper] mode:destroy,
+			item 1 [Base.Strainer] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 [TikitownPower.EmptyIndustrialCan] mode:destroy,
+		}
+		outputs
+		{
+			item 1 TikitownPower.IndustrialAntifreeze,
+			item 1 mapper:SourcePotMapper,
+		}
+		itemMapper SourcePotMapper
+		{
+			Base.PotForged = TikitownPower.CoolantBaseForged,
+			default = Base.Pot,
+		}
+	}
+	
+	craftRecipe Cond_Store_Antifreeze
+	{
+		
+		timedAction = Making,                     
+        time = 200,                               
+        tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category = PowerPlant,                     
+        needToBeLearn = true,                     
+	
+		inputs 
+		{
+			item 1 [TikitownPower.CoolantBaseForged;TikitownPower.CoolantBase] mappers[SourcePotMapper] mode:destroy,
+			item 1 [Base.Strainer] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 [TikitownPower.EmptyIndustrialCan] mode:destroy,
+		}
+		outputs
+		{
+			item 1 TikitownPower.IndustrialAntifreeze,
+			item 1 mapper:SourcePotMapper,
+		}
+		itemMapper SourcePotMapper
+		{
+			Base.PotForged = TikitownPower.CoolantBaseForged,
+			default = Base.Pot,
+		}
+	}
+	
+	
+	craftRecipe Combine_Fats_Oil
+	{
+		Time = 200,
+		SkillRequired = Mechanics:1;Cooking:2,
+		AutoLearnAll = Mechanics:8;Cooking:8,		
+		Tags = InHandCraft,
+        needToBeLearn = true,
+        xpAward = Cooking:7.5,
+        category = PowerPlant,
+		timedAction = MixingBowl,
+
+		
+		inputs 
+		{
+			item 1 tags[Oil],
+			item 1 [Base.Bucket;Base.BucketEmpty;Base.BucketWaterDebug;Base.BucketCarved;Base.BucketForged] mode:destroy mappers[TTPbucketList],
+			item 1 [Base.Lard],
+			item 1 tags[Spoon] mode:keep flags[Prop1],
+		}
+
+		outputs
+		{
+			 item 1 mapper:TTPbucketList,
+		}
+		
+		itemMapper TTPbucketList
+        {
+			TikitownPower.OilCombinedFatsForged = Base.BucketForged,
+            default = TikitownPower.OilCombinedFats,
+        }
+	}
+	
+	craftRecipe Clarify_Fats_Oil
+	{
+		Time = 200,
+		SkillRequired = Mechanics:2;Cooking:1,
+		AutoLearnAll = Mechanics:8;Cooking:8,		
+		Tags = InHandCraft,
+        needToBeLearn = true,
+        xpAward = Cooking:7.5,
+        category = PowerPlant,
+		timedAction = MixingBowl,
+
+		
+		inputs 
+		{
+			item 1 [TikitownPower.IndustrialFilter] mode:destroy,
+			item 1 [TikitownPower.OilCombinedFatsCooked;TikitownPower.OilCombinedFatsCookedForged] mode:destroy mappers[TTPSourceList] flags[Prop2],
+			item 1 tags[Spoon] mode:keep flags[Prop1],
+		}
+
+		outputs
+		{
+			 item 1 mapper:TTPSourceList,
+		}
+		
+		itemMapper TTPSourceList
+        {
+			TikitownPower.OilClarifiedOilsForged = TikitownPower.OilCombinedFatsCookedForged,
+            default = TikitownPower.OilClarifiedOils,
+        }
+	}
+	
+	craftRecipe Store_Oil
+	{
+		
+		timedAction = Making,                     
+        time = 200,                               
+        tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category = PowerPlant,                     
+        needToBeLearn = true,                     
+	
+		inputs 
+		{
+			item 1 [TikitownPower.OilClarifiedOilsForged;TikitownPower.OilCombinedFatsForged] mappers[SourcePotMapper] mode:destroy,
+			item 1 [TikitownPower.EmptyIndustrialCan] mode:destroy,
+		}
+		outputs
+		{
+			item 1 TikitownPower.IndustrialOil,
+			item 1 mapper:SourcePotMapper,
+		}
+		itemMapper SourcePotMapper
+		{
+			Base.PotForged = TikitownPower.OilClarifiedOilsForged,
+			default = Base.Pot,
+		}
+	}
+	
+	craftRecipe Craft_Turbine_Control_Sys
+	{
+		timedAction = Making,
+		time = 400,
+		tags = AnySurfaceCraft,
+		category = PowerPlant,
+		needToBeLearn = true,
+		SkillRequired = Electricity:5;Mechanics:2,
+		AutoLearnAll = Mechanics:8;Electricity:8,
+		
+		inputs
+		{
+			item 8 [Base.ElectricWire],
+			item 8 [Base.ElectronicsScrap] flags[Prop2],
+			item 20 [Base.Screws],
+			item 2 [Base.SmallSheetMetal],
+			item 1 tags[Wrench] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 tags[Pliers] mode:keep flags[MayDegradeLight],
+		}
+		
+		outputs
+		{
+			item 1 TikitownPower.TurbineControlSystem,
+		}
+	}
+	
+	craftRecipe Craft_Furnace_Control_Sys
+	{
+		timedAction = Making,
+		time = 400,
+		tags = AnySurfaceCraft,
+		category = PowerPlant,
+		needToBeLearn = true,
+		SkillRequired = Mechanics:2;Electricity:5,
+		AutoLearnAll = Mechanics:8;Cooking:8,
+		
+		inputs
+		{
+			item 8 [Base.ElectricWire],
+			item 8 [Base.ElectronicsScrap] flags[Prop2],
+			item 20 [Base.Screws],
+			item 2 [Base.SmallSheetMetal],
+			item 1 tags[Wrench] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 tags[Pliers] mode:keep flags[MayDegradeLight],
+		}
+		
+		outputs
+		{
+			item 1 TikitownPower.FurnControl,
+		}
+	}
+	
+	craftRecipe RepairTurbineRotor
+    {
+        time = 400,
+        timedAction = Welding,
+        xpAward = MetalWelding:10;Maintenance:5,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+		needToBeLearn = true,
+        category = PowerPlant,
+        OnCreate = CraftRecipeCode.GenericBetterFixing.OnCreate,
+		SkillRequired = Mechanics:7;Electricity:7,
+		AutoLearnAll = Mechanics:10;Cooking:10,
+        inputs
+        {
+            item 1 [TikitownPower.TurbineRotor] mode:keep flags[IsDamaged],
+			item 2 [TikitownPower.TurbineBlades],
+			item 4 [Base.AluminumScrap],
+			item 2 [Base.SteelBar],
+			item 2 [Base.MetalBar],
+			item 1 [Base.FiberglassTape],
+			item 1 [TikitownPower.IndustrialGrease],
+			item 3 [Base.BlowTorch] mode:keep flags[Prop1],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+    }
+	
+	craftRecipe RepairTurbineStator
+	{
+		time = 400,
+        timedAction = Making,
+        xpAward = MetalWelding:10;Maintenance:5,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+		needToBeLearn = true,
+        category = PowerPlant,
+        OnCreate = CraftRecipeCode.GenericBetterFixing.OnCreate,
+		SkillRequired = Mechanics:7;Electricity:7,
+		AutoLearnAll = Mechanics:10;Cooking:10,
+        inputs
+        {
+            item 2 [Base.SteelBar],
+			item 2 [Base.MetalBar],
+			item 4 [Base.ElectricWire],
+			item 4 [Base.ElectronicsScrap],
+			item 1 [TikitownPower.TurbineStator] mode:keep flags[IsDamaged],
+			
+			item 1 tags[Wrench] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 tags[Pliers] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+        }
+	}
+	
+	craftRecipe RepairTurbineControlSystem
+	{
+		time = 400,
+        timedAction = Making,
+        xpAward = Electricity:15;Maintenance:7.5,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft,
+		needToBeLearn = true,
+        category = PowerPlant,
+        OnCreate = CraftRecipeCode.GenericBetterFixing.OnCreate,
+		SkillRequired = Electricity:6;Maintenance:3,
+		AutoLearnAll = Mechanics:8;Maintenance:8,
+        inputs
+        {
+			item 4 [Base.ElectricWire],
+			item 4 [Base.ElectronicsScrap],
+			item 1 [TikitownPower.TurbineControlSystem] mode:keep flags[IsDamaged;Prop2],
+			
+			item 1 tags[Wrench] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 tags[Pliers] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+        }
+	}
+	
+	craftRecipe RepairFurnaceControlSystem
+	{
+		time = 400,
+        timedAction = Making,
+        xpAward = Electricity:15;Maintenance:7.5,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft,
+		needToBeLearn = true,
+        category = PowerPlant,
+        OnCreate = CraftRecipeCode.GenericBetterFixing.OnCreate,
+		SkillRequired = Electricity:6;Maintenance:3,
+		AutoLearnAll = Mechanics:8;Maintenance:8,
+        inputs
+        {
+			item 4 [Base.ElectricWire],
+			item 4 [Base.ElectronicsScrap],
+			item 1 [TikitownPower.FurnControl] mode:keep flags[IsDamaged;Prop2],
+			
+			item 1 tags[Wrench] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+			item 1 tags[Pliers] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+        }
+	}
+	
+	craftRecipe RepairPumpImpeller
+	{
+		time = 400,
+        timedAction = Welding,
+        xpAward = MetalWelding:15;Maintenance:7.5,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft,
+		needToBeLearn = true,
+        category = PowerPlant,
+        OnCreate = CraftRecipeCode.GenericBetterFixing.OnCreate,
+		SkillRequired = MetalWelding:5;Maintenance:3,
+		AutoLearnAll = MetalWelding:8;Maintenance:8,
+        inputs
+        {
+			item 1 [TikitownPower.PumpBlades],
+			item 1 [TikitownPower.PumpSeals],
+			item 1 [Base.SmallSheetMetal],
+			item 1 [TikitownPower.PumpImpeller] mode:keep flags[IsDamaged;Prop2],
+			
+			item 1 [Base.BlowTorch] mode:keep flags[Prop1],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+	
+	craftRecipe RepairPumpSeals
+	{
+		time = 400,
+        timedAction = Making,
+        xpAward = Maintenance:7.5,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft,
+		needToBeLearn = true,
+        category = PowerPlant,
+        OnCreate = CraftRecipeCode.GenericBetterFixing.OnCreate,
+		SkillRequired = Maintenance:1,
+		AutoLearnAll = Maintenance:8,
+        inputs
+        {
+			item 2 [Base.TirePiece],
+			item 1 [TikitownPower.IndustrialGrease],
+			item 1 [TikitownPower.PumpSeals] mode:keep flags[IsDamaged;Prop2],
+			
+			item 1 tags[Wrench] mode:keep flags[Prop1;MayDegradeLight],
+        }
+        outputs
+        {
+        }
+	}
+	
+	craftRecipe RepairPumpSuction
+	{
+		time = 400,
+        timedAction = Welding,
+        xpAward = MetalWelding:7.5;Maintenance:7.5,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft,
+		needToBeLearn = true,
+        category = PowerPlant,
+        OnCreate = CraftRecipeCode.GenericBetterFixing.OnCreate,
+		SkillRequired = MetalWelding:3;Maintenance:3,
+		AutoLearnAll = MetalWelding:8;Maintenance:8,
+        inputs
+        {
+			item 1 [TikitownPower.PumpBlades],
+			item 1 [TikitownPower.PumpSeals],
+			item 4 [Base.ScrapMetal],
+			item 2 [Base.SmallSheetMetal],
+			item 1 [Base.SheetMetal],
+			item 1 [TikitownPower.PumpSuction] mode:keep flags[IsDamaged;Prop2],
+			
+			item 1 [Base.BlowTorch] mode:keep flags[Prop1],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+	
+	craftRecipe RepairPumpDisch
+	{
+		time = 400,
+        timedAction = Welding,
+        xpAward = MetalWelding:7.5;Maintenance:7.5,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft,
+		needToBeLearn = true,
+        category = PowerPlant,
+        OnCreate = CraftRecipeCode.GenericBetterFixing.OnCreate,
+		SkillRequired = MetalWelding:3;Maintenance:3,
+		AutoLearnAll = MetalWelding:8;Maintenance:8,
+        inputs
+        {
+			item 1 [TikitownPower.PumpBlades],
+			item 1 [TikitownPower.PumpSeals],
+			item 4 [Base.ScrapMetal],
+			item 2 [Base.SmallSheetMetal],
+			item 1 [Base.SheetMetal],
+			item 1 [TikitownPower.PumpDisch] mode:keep flags[IsDamaged;Prop2],
+			
+			item 1 [Base.BlowTorch] mode:keep flags[Prop1],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+	
+	craftRecipe RepairPumpCheckValve
+	{
+		time = 400,
+        timedAction = Welding,
+        xpAward = MetalWelding:7.5;Maintenance:7.5,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft,
+		needToBeLearn = true,
+        category = PowerPlant,
+        OnCreate = CraftRecipeCode.GenericBetterFixing.OnCreate,
+		SkillRequired = MetalWelding:3;Maintenance:3,
+		AutoLearnAll = MetalWelding:8;Maintenance:8,
+        inputs
+        {
+			item 1 [TikitownPower.PumpSeals],
+			item 4 [Base.ScrapMetal],
+			item 2 [Base.SmallSheetMetal],
+			item 1 [TikitownPower.PumpCheckValve] mode:keep flags[IsDamaged;Prop2],
+			
+			item 1 [Base.BlowTorch] mode:keep flags[Prop1],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+	
+	}
+	
+	craftRecipe CraftTurbineBlades
+	{
+		Time = 750,
+		SkillRequired = Blacksmith:7,
+		needToBeLearn = true,
+		timedAction = MakingHammer_Surface,
+		xpAward = Blacksmith:120,
+		AutoLearnAll = Blacksmith:10,
+		Tags = AdvancedForge,
+		category = Blacksmithing,
+
+		inputs
+		{
+			item 2 [Base.PiercedSteelIngot] mode:destroy flags[Prop1],
+			item 6 [Base.ScrapMetal]       mode:destroy,
+			item 2 [Base.SteelBar]         mode:destroy,
+			item 1 tags[Screwdriver;SharpKnife] mode:keep flags[MayDegradeLight;IsNotDull;Prop2],
+		}
+
+		outputs
+		{
+			item 1 TikitownPower.TurbineBlades,
+		}
+	}
+	
+	craftRecipe EmptyIndustrialCan
+	{
+		Time = 150,
+		AllowBatchCraft = True,
+		SkillRequired = Maintenance:2,
+		Tags = AnySurfaceCraft,
+		category = PowerPlant,
+		xpAward = Maintenance:25,
+
+		inputs
+		{
+			item 2 [Base.AluminumScrap] mode:destroy,
+			item 4 [Base.ScrapMetal] mode:destroy,
+			item 4 [Base.Screws] mode:destroy,
+			item 2 [Base.RippedSheets] mode:destroy,
+			item 1 tags[Screwdriver;SharpKnife] mode:keep flags[MayDegradeLight;IsNotDull;Prop1],
+		}
+
+		outputs
+		{
+			item 1 TikitownPower.EmptyIndustrialCan,
+		}
+	}
+}
