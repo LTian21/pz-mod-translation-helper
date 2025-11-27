@@ -25,7 +25,7 @@ module Base
 		{
 			file = fhqImprezaWag,
 			scale = 0.7000,
-			offset = 0.0000 0.3521 -0.0986,
+			offset = 0.0000 0.3571 -0.1000,
 		}
 
 		spawnOffsetY = 0.12999995,
@@ -52,10 +52,10 @@ module Base
 			ignitionFail = VehicleIgnitionFailSmallCar,
 		}
 
-		extents = 2.0845 1.4648 5.4085,
+		extents = 2.0857 1.4857 5.4286,
 		mass = 820,
-		physicsChassisShape = 2.0845 1.4648 5.4085,
-		centerOfMassOffset = 0.0000 0.7183 0.0000,
+		physicsChassisShape = 2.0857 1.4857 5.4286,
+		centerOfMassOffset = 0.0000 0.7143 0.0000,
 		shadowExtents = 2.3035 5.6723,
 		shadowOffset = 0.0000 0.0260,
 		engineForce = 3000,
@@ -80,7 +80,7 @@ module Base
 		wheel FrontLeft
 		{
 			front = true,
-			offset = 0.8310 -0.4789 1.6761,
+			offset = 0.8286 -0.4857 1.6714,
 			radius = 0.37f,
 			width = 0.22f,
 		}
@@ -88,7 +88,7 @@ module Base
 		wheel FrontRight
 		{
 			front = true,
-			offset = -0.8310 -0.4789 1.6761,
+			offset = -0.8286 -0.4857 1.6714,
 			radius = 0.37f,
 			width = 0.22f,
 		}
@@ -96,7 +96,7 @@ module Base
 		wheel RearLeft
 		{
 			front = false,
-			offset = 0.8451 -0.4789 -1.4507,
+			offset = 0.8429 -0.4857 -1.4571,
 			radius = 0.37f,
 			width = 0.22f,
 		}
@@ -104,7 +104,7 @@ module Base
 		wheel RearRight
 		{
 			front = false,
-			offset = -0.8451 -0.4789 -1.4507,
+			offset = -0.8429 -0.4857 -1.4571,
 			radius = 0.37f,
 			width = 0.22f,
 		}
@@ -115,13 +115,13 @@ module Base
 		{
 			position inside
 			{
-				offset = 0.5070 0.0986 0.0704,
+				offset = 0.5000 0.1000 0.0714,
 				rotate = 0.0000 0.0000 0.0000,
 			}
 
 			position outside
 			{
-				offset = 1.5211 -0.6761 0.4930,
+				offset = 1.5143 -0.6714 0.5000,
 				rotate = 0.0000 0.0000 0.0000,
 				area = SeatFrontLeft,
 			}
@@ -131,13 +131,13 @@ module Base
 		{
 			position inside
 			{
-				offset = -0.5070 0.0845 0.0704,
+				offset = -0.5000 0.0857 0.0714,
 				rotate = 0.0000 0.0000 0.0000,
 			}
 
 			position outside
 			{
-				offset = -1.5211 -0.6620 0.4930,
+				offset = -1.5143 -0.6571 0.5000,
 				rotate = 0.0000 0.0000 0.0000,
 				area = SeatFrontRight,
 			}
@@ -147,13 +147,13 @@ module Base
 		{
 			position inside
 			{
-				offset = 0.5211 0.0845 -1.0282,
+				offset = 0.5143 0.0857 -1.0286,
 				rotate = 0.0000 0.0000 0.0000,
 			}
 
 			position outside
 			{
-				offset = 1.5211 -0.6620 -0.7606,
+				offset = 1.5143 -0.6571 -0.7571,
 				rotate = 0.0000 0.0000 0.0000,
 				area = SeatRearLeft,
 			}
@@ -163,13 +163,13 @@ module Base
 		{
 			position inside
 			{
-				offset = -0.5211 0.0845 -1.0282,
+				offset = -0.5143 0.0857 -1.0286,
 				rotate = 0.0000 0.0000 0.0000,
 			}
 
 			position outside
 			{
-				offset = -1.5211 -0.6620 -0.7606,
+				offset = -1.5143 -0.6571 -0.7571,
 				rotate = 0.0000 0.0000 0.0000,
 				area = SeatRearRight,
 			}
@@ -231,7 +231,7 @@ module Base
 		}
 
 		template = TrunkDoor,
-		
+
 		part TrunkDoor
 		{
 			anim Open
@@ -258,18 +258,23 @@ module Base
 			{
 				sound = VehicleDoorIsLockedSportsCar,
 			}
-		
+
 			table uninstall
 			{
 				requireUninstalled = WindshieldRear,
 			}
 		}
-		
+
 		template = Trunk/part/TruckBed,
 
 		part TruckBed
 		{
 			itemType = Base.BigTrunk,
+
+			container
+			{
+				test = Vehicles.ContainerAccess.TruckBedOpenInside,
+			}
 		}
 
 		template = Seat/part/SeatFrontLeft,
@@ -295,15 +300,17 @@ module Base
 		template = Battery,
 		template = Engine,
 		template = Muffler,
-		
+
 		part Muffler
 		{
 			model Default
 			{
 				file = fhqImprezaWagExh,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
 			}
 		}
-		
+
 		template = EngineDoor,
 
 		part Heater
@@ -328,7 +335,7 @@ module Base
 
 		template = Windshield/part/Windshield,
 		template = Windshield/part/WindshieldRear,
-		
+
 		part WindshieldRear
 		{
 			parent = TrunkDoor,
@@ -338,12 +345,12 @@ module Base
 				requireInstalled = TrunkDoor,
 			}
 		}
-		
+
 		template = Window/part/WindowFrontLeft,
 		template = Window/part/WindowFrontRight,
 		template = Window/part/WindowRearLeft,
 		template = Window/part/WindowRearRight,
-		
+
 		part Window*
 		{
 			anim Open
@@ -356,7 +363,7 @@ module Base
 				sound = VehicleWindowElectricClose,
 			}
 		}
-		
+
 		template = Door/part/DoorFrontLeft,
 		template = Door/part/DoorFrontRight,
 		template = Door/part/DoorRearLeft,
@@ -368,6 +375,8 @@ module Base
 			model InflatedTirePlusWheel
 			{
 				file = fhqMZImprezaWheelLeft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
 			}
 		}
 
@@ -376,6 +385,8 @@ module Base
 			model InflatedTirePlusWheel
 			{
 				file = fhqMZImprezaWheelRight,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
 			}
 		}
 
@@ -384,6 +395,8 @@ module Base
 			model InflatedTirePlusWheel
 			{
 				file = fhqMZImprezaWheelLeft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
 			}
 		}
 
@@ -392,6 +405,8 @@ module Base
 			model InflatedTirePlusWheel
 			{
 				file = fhqMZImprezaWheelRight,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = 0.0000 0.0000 0.0000,
 			}
 		}
 
@@ -399,6 +414,43 @@ module Base
 		template = Suspension,
 		template = Radio,
 		template = Headlight,
+		
+		useChassisPhysicsCollision = false,
+
+		physics box
+		{
+			offset = 0.0000 0.2714 0.0000,
+			extents = 2.0571 0.6571 5.3714,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.6930 -1.9673,
+			extents = 1.7429 1.2000 0.8286,
+			rotate = 49.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.9571 -0.8205,
+			extents = 1.7429 0.9143 1.9429,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.7519 0.6039,
+			extents = 1.7429 1.4286 0.7429,
+			rotate = -62.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.5008 1.8405,
+			extents = 2.0571 0.4286 1.4286,
+			rotate = 10.0000 0.0000 0.0000,
+		}
 
 		attachment trailer
 		{
