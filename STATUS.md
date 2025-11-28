@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-28 20:05:37 UTC+08:00`*
+*最后更新于：`2025-11-29 04:04:11 UTC+08:00`*
 
 ---
 
@@ -9,11 +9,11 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``74830`` 条 |
-| **待翻译条目** | ``1396`` 条 |
-| **已翻译条目** | ``73434`` 条 |
+| **模组总条目** | ``74846`` 条 |
+| **待翻译条目** | ``1458`` 条 |
+| **已翻译条目** | ``73388`` 条 |
 | **待校对条目** | ``26783`` 条 |
-| **已支持 Mod 数量** | ``712`` 个 |
+| **已支持 Mod 数量** | ``713`` 个 |
 
 ---
 
@@ -36,16 +36,20 @@
 | Tsar's Common Library B42 | 3402491515 | 40 | 339 | 122 | 379 |
 | Caster Plus Fishing Mod | 3457003463 | 36 | 209 | 0 | 245 |
 | Evolving Traits World (ETW) [B41/B42] - alternative to "Dynamic Traits" | 2914075159 | 36 | 340 | 1 | 376 |
+| [B42/1] Frockin Wiseguys! | 3538760023 | 32 | 0 | 0 | 40 |
 | [B42] Knox Event Expanded NPC mod [alpha v0.3.17-1] | 3397396843 | 28 | 572 | 42 | 600 |
 | Random Clothing [B41/B42] | 3397182976 | 28 | 104 | 8 | 132 |
 | [B42] Week One NPC | 3403180543 | 25 | 806 | 0 | 831 |
 | Fancy Lanterns [B42 Compatible] | 3267733558 | 21 | 47 | 0 | 68 |
 | Bianca Wardrobe [42. Out now] | 3140453034 | 20 | 803 | 0 | 823 |
 | Advanced Trajectory's Realistic Overhaul | 3036878362 | 17 | 251 | 16 | 268 |
+| [B42] Background Framework | 3405199543 | 14 | 0 | 0 | 14 |
 | Gyde's Trait Magazines | 3342191739 | 14 | 58 | 0 | 72 |
 | [B41\B42] DBG Crowbar Unlock | 3555407625 | 11 | 225 | 46 | 236 |
+| Legendary Fanny Pack | 3552050880 | 11 | 0 | 0 | 24 |
 | [B42] Bodily Functions [v0.12.3] | 3396456841 | 7 | 328 | 0 | 335 |
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 6 | 367 | 2 | 373 |
+| '86 Ford Econoline E-150 + Pop Culture vans | 2870394916 | 5 | 0 | 0 | 158 |
 | Wandering Zombies | 2983905789 | 5 | 401 | 1 | 406 |
 | Farming Expansion B42 | 3444499190 | 2 | 86 | 4 | 88 |
 | [B42/B41] The Motorious Zone Vehicle Pack | 2791656602 | 2 | 0 | 0 | 227 |
@@ -105,7 +109,6 @@
 | '85 Chevrolet Caprice / Impala | 3413704851 | 0 | 0 | 0 | 41 |
 | '85 Oldsmobile Delta 88 | 3418253716 | 0 | 0 | 0 | 21 |
 | '85 Pontiac Parisienne | 3413706334 | 0 | 0 | 0 | 20 |
-| '86 Ford Econoline E-150 + Pop Culture vans | 2870394916 | 0 | 0 | 0 | 155 |
 | '86 Oshkosh P19A + Military Trailers | 2566953935 | 0 | 0 | 0 | 68 |
 | '87 Buick Regal | 3226885926 | 0 | 48 | 0 | 48 |
 | '87 Chevrolet Suburban | 3196180339 | 0 | 0 | 0 | 36 |
@@ -318,7 +321,6 @@
 | [B42/1] Frockin Splendor! Vol.2 | 3411888105 | 0 | 132 | 104 | 132 |
 | [B42] Frockin Splendor! Vol.3 | 3431256608 | 0 | 113 | 108 | 113 |
 | [B42] Frockin Splendor! Vol.4 | 3475347500 | 0 | 135 | 127 | 135 |
-| [B42/1] Frockin Wiseguys! | 3538760023 | 0 | 0 | 33 | 41 |
 | [42] Frogtown (BETA) by TwinCrows | 3449473111 | 0 | 0 | 0 | 4 |
 | Filibuster Rhymes' Used Cars! - Animation Alpha | 2959472220 | 0 | 0 | 0 | 405 |
 | Functional Appliances 2 | 3042138819 | 0 | 0 | 0 | 173 |
@@ -396,7 +398,6 @@
 | Legendary Backpacks | 3538353228 | 0 | 0 | 0 | 30 |
 | Legendary Cap | 3549294472 | 0 | 0 | 0 | 44 |
 | Legendary DuffelBag | 3558839307 | 0 | 0 | 5 | 44 |
-| Legendary Fanny Pack | 3552050880 | 0 | 0 | 11 | 24 |
 | Legendary Katana | 3418366499 | 0 | 0 | 1 | 130 |
 | Legendary Naginata | 3580577925 | 0 | 0 | 0 | 40 |
 | Legendary Satchel | 3560352772 | 0 | 0 | 6 | 25 |
