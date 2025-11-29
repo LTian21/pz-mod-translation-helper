@@ -1,0 +1,174 @@
+module Base
+{
+
+  model Liaz300Truck_BatteryCover
+	{
+		mesh = vehicles/LIAZ300TRUCK_Body|BatteryCover,
+		shader = vehicle,
+		scale = 1.0,
+	}
+
+
+  model Liaz300Truck_Spare1
+	{
+		mesh = vehicles/LIAZ300TRUCK_Body|SpareTire1,
+        texture = Vehicles/Liaz300Fronttires,
+		shader = vehiclewheel,
+		scale = 1.0,
+	}
+
+
+  model Liaz300Truck_AeroCap
+	{
+		mesh = vehicles/LIAZ300TRUCK_Body|AeroCap,
+		shader = vehicle,
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+  model Liaz300Truck_CornerGuards
+	{
+		mesh = vehicles/LIAZ300TRUCK_Body|Corner Guards,
+		shader = vehiclewheel,
+		texture = Vehicles/LiazSemi_Interior,
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+  model Liaz300Truck_MudFlaps
+	{
+		mesh = vehicles/LIAZ300TRUCK_Body|MudFlaps,
+		shader = vehiclewheel,
+		texture = Vehicles/LiazSemi_Interior,
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+  model Liaz300Truck_TarpCover
+	{
+		mesh = vehicles/LIAZ300TRUCK_Body|TarpCover,
+		shader = vehiclewheel,
+		texture = Vehicles/LiazTRUCK_TARPGREY,
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+
+    template vehicle Liaz300Truck_accesories
+    {
+        template = ATA2Visual/part/ATA2VisualSpoilerRear,
+        part ATA2VisualSpoilerRear 
+        {
+
+           area = Engine,
+
+
+            model Default
+            {
+                file = Liaz300Truck_AeroCap,
+            }
+        }
+
+        template = ATA2Visual/part/ATA2VisualSkirtsSide,
+        part ATA2VisualSkirtsSide 
+        {
+
+           area = Engine,
+
+
+            model Default
+            {
+                file = Liaz300Truck_CornerGuards,
+            }
+        }
+
+
+             template = ATA2Visual/part/ATA2VisualWires,
+        part ATA2VisualWires
+        {
+
+           area = Engine,
+
+
+            model Default
+            {
+                file = Liaz300Truck_MudFlaps,
+            }
+        }   
+
+
+        template = ATA2Visual/part/ATA2VisualSnorkel,
+        part ATA2VisualSnorkel
+        {
+            area = TireFrontLeft,
+
+
+            model Default
+            {
+                file = Liaz300Truck_Spare1,
+            }
+        } 
+
+
+
+
+             template = ATA2Visual/part/ATA2VisualSpoilerFront,
+        part ATA2VisualSpoilerFront
+        {
+
+           area = Engine,
+
+
+            model Default
+            {
+                file = Liaz300Truck_TarpCover,
+            }
+        }   
+
+
+             template = ATA2Visual/part/ATA2VisualLadder,
+        part ATA2VisualLadder
+        {
+
+           area = Engine,
+
+
+            model Default
+            {
+                file = Liaz300Truck_BatteryCover,
+            }
+        }  
+
+ 
+        part ATAVisual*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+
+            table install
+            {
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+
+            table uninstall
+            {
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+
+            lua
+            {
+                create = ATATuning.Create.Chance15,
+                init = ATATuning.Init.Default,
+            }
+        }
+    }
+}

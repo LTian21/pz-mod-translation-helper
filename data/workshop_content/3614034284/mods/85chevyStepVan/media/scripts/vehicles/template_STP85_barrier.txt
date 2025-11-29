@@ -1,0 +1,72 @@
+module Base
+{
+	model 85chevyStepVanBarrier
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_barrier,
+		texture = Vehicles/Vehicles_85chevyStepVan_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle STP85Barrier
+		{
+		part DAMNBarrier
+        	{
+
+			model barrier0
+				{
+                		file = 85chevyStepVanBarrier,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				itemType = Base.85chevyStepVanBarrier,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+}

@@ -1,0 +1,172 @@
+module Base
+{
+
+	model 85chevyStepVanWheelFL
+	{
+		mesh = vehicles/Vehicles_93chevyK3500_models|sil93_tire,
+		texture = vehicles/Vehicles_93chevySilverado_Wheel3,
+		shader = damn_wheel_shader,
+		scale = 0.09,
+	}
+
+	model 85chevyStepVanWheelFR
+	{
+		mesh = vehicles/Vehicles_93chevyK3500_models|sil93_tire,
+		texture = vehicles/Vehicles_93chevySilverado_Wheel3,
+		shader = damn_wheel_shader,
+		scale = 0.09,
+		invertX = TRUE,
+	}
+
+	model 85chevyStepVanWheelRL
+	{
+		mesh = vehicles/Vehicles_93chevyK3500_models|sil93_tires,
+		texture = vehicles/Vehicles_93chevySilverado_Wheel3,
+		shader = damn_wheel_shader,
+		scale = 0.09,
+	}
+
+	model 85chevyStepVanWheelRR
+	{
+		mesh = vehicles/Vehicles_93chevyK3500_models|sil93_tires,
+		texture = vehicles/Vehicles_93chevySilverado_Wheel3,
+		shader = damn_wheel_shader,
+		scale = 0.09,
+		invertX = TRUE,
+	}
+
+	template vehicle STP85Tires
+	{
+		part TireFrontLeft
+		{
+			model TireFL
+			{
+				file = 85chevyStepVanWheelFL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			itemType = Base.93chevyK3500Tire2,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+			model TireFR
+			{
+				file = 85chevyStepVanWheelFR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			itemType = Base.93chevyK3500Tire2,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model TireRL
+			{
+				file = 85chevyStepVanWheelRL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			itemType = Base.93chevyK3500DoubleTires2,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			model TireRR
+			{
+				file = 85chevyStepVanWheelRR,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			itemType = Base.93chevyK3500DoubleTires2,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+            durability = 2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+	}
+}

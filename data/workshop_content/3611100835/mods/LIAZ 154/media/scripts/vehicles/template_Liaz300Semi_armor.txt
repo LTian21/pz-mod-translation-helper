@@ -1,0 +1,119 @@
+module Base
+{
+    model Liaz300Semi_Windshield_Armor
+    {
+        mesh = vehicles/LIAZ154_Body|WindshieldArmor,
+        
+		shader = vehicle,
+		scale = 1,
+    }
+ 
+	model Liaz300Semi_ProtectionWindowLeft
+    {
+        mesh = vehicles/LIAZ154_Body|FrontLeftWindowArmor,
+        
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1,
+
+        
+    }
+	model Liaz300Semi_ProtectionWindowRight
+    {
+        mesh = vehicles/LIAZ154_Body|FrontRightWindowArmor,
+	
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1,
+
+        
+    }
+
+
+ 	model Liaz300Semi_ProtectionWindowRearLeft
+    {
+        mesh = vehicles/LIAZ154_Body|RearLeftWindowArmor,
+        
+	shader = vehicle,
+        invertX = FALSE,
+        static = TRUE,
+        scale = 1,
+
+        
+    }
+	model Liaz300Semi_ProtectionWindowRearRight
+    {
+        mesh = vehicles/LIAZ154_Body|RearRightWindowArmor,
+	
+	shader = vehicle,
+        invertX = FALSE,
+        static = TRUE,
+        scale = 1,
+ 
+
+    }
+
+
+    template vehicle Liaz300Semi_armor
+    {
+        template = ATA2Protection/part/ATA2ProtectionWindshield,
+        part ATA2ProtectionWindshield
+        {
+            model Default
+            {
+                file = Liaz300Semi_Windshield_Armor,
+            }
+        }
+
+ 
+
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontLeft,
+        part ATA2ProtectionWindowFrontLeft
+        {
+                        parent = DoorFrontLeft,
+
+			model Default
+            {
+                file = Liaz300Semi_ProtectionWindowLeft,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontRight,
+        part ATA2ProtectionWindowFrontRight
+        {
+                        parent = DoorFrontRight, 
+                       
+			model Default
+            {
+                file = Liaz300Semi_ProtectionWindowRight,
+            }
+        }       
+
+        template = ATA2Protection/part/ATA2ProtectionWindowRearLeft,
+        part ATA2ProtectionWindowRearLeft
+        {
+
+
+			model Default
+            {
+                file =  Liaz300Semi_ProtectionWindowRearLeft,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindowRearRight,
+        part ATA2ProtectionWindowRearRight
+        {
+
+			model Default
+
+            {
+                file =  Liaz300Semi_ProtectionWindowRearRight,
+            }
+        }
+ 
+
+
+    }
+}

@@ -1,0 +1,58 @@
+module Base
+{
+	model Liaz300Truck_RoofRack
+	{
+		mesh = vehicles/Vehicles_hijet100|RoofRack,
+        texture = Vehicles/hijets100White,
+        shader = vehiclewheel,
+        scale = 1,
+	}
+
+   model TrunkSideModel
+    {
+        mesh = vehicles/Vehicles_hijet100|SideBox,
+		shader = vehiclewheel,
+        static = FALSE,
+		scale = 1,
+    }
+
+    /******************** TRUNK ********************/
+
+	
+
+	/******************** ROOFRACK ********************/
+
+	
+
+    template vehicle Liaz300Truck_trunks
+	{
+		template = Trunk/part/TruckBed,
+		part TruckBed
+		{
+			itemType = Base.NormalTrunk,
+
+			container
+			{
+                capacity = 650,
+                conditionAffectsCapacity = false,
+				test = ATATuning.ContainerAccess.ATAInteractiveTruckBed,
+			}
+
+			lua
+            {
+                create = ATATuning.Create.DefaultATAInteractiveTrunk,
+                init = ATATuning.Init.ATAInteractiveTrunk,
+            }
+
+            
+            
+		}
+
+
+
+
+
+
+
+	}
+}

@@ -1,0 +1,96 @@
+module Base
+{
+    model Liaz300Truck_TrunkDoor
+    {
+        mesh = vehicles/LIAZ300TRUCK_Body|TrunkDoor,
+        shader = vehicle,
+		static = FALSE,
+		boneWeight = TrunkDoorBone 1.0,
+        scale = 1,
+
+
+		
+    }
+
+	template vehicle Liaz300Truck_trunkdoor
+	{
+        template = TrunkDoor,
+
+		part TrunkDoor
+		{
+            model Default
+			{
+				file = Liaz300Truck_TrunkDoor,
+			}
+
+			category = bodywork,
+            
+			area = TruckBed,
+            mechanicRequireKey = true,
+			repairMechanic = true,
+
+			anim Close
+			{                        
+                                sound = VehicleTrunkCloseStandard,       
+				anim = DoorTrunk_closing,
+				reverse = FALSE,
+				rate = 3.0,
+			}
+			anim Open
+			{
+                                sound = VehicleTrunkOpenStandard,
+				anim = DoorTrunk_closing,
+				reverse = TRUE,
+				rate = 3.0,
+			}
+			anim Closed
+			{
+				anim = DoorTrunk_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+			anim Opened
+			{
+				anim = DoorTrunk_closing,
+				reverse = FALSE,
+				animate = FALSE,
+			}
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = ATATuning2.InstallComplete.Door,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = ATATuning2.UninstallComplete.Door,
+				requireUninstalled = ATA2VisualSpoilerRear,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.DefaultModel,
+                init = ATATuning2.Init.Door,
+                update = Vehicles.Update.TrunkDoor,
+                use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}

@@ -1,0 +1,61 @@
+module Base
+{
+    model Liaz300Truck_SeatFL
+	{
+		mesh = vehicles/LIAZ154_Body|FrontLeftSeat,
+        texture = Vehicles/LiazSemi_Interior,
+		shader = vehiclewheel,
+		scale = 1,
+	}
+	model Liaz300Truck_SeatFR
+	{
+		mesh = vehicles/LIAZ154_Body|FrontRightSeat,
+        texture = Vehicles/LiazSemi_Interior,
+		shader = vehiclewheel,
+		scale = 1,
+	}
+
+
+
+
+
+    template vehicle Liaz300Truck_seats
+    {
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+
+		
+		part SeatFrontLeft
+		{
+			model SeatFL
+			{
+				file = Liaz300Truck_SeatFL,
+			}
+
+			area = SeatFrontLeft,
+			
+		}
+
+		part SeatFrontRight
+		{
+			model SeatFR
+			{
+				file = Liaz300Truck_SeatFR,
+			}
+
+			area = SeatFrontRight,
+			
+		}
+
+
+			
+
+
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+		}
+    }
+}

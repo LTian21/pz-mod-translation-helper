@@ -1,0 +1,74 @@
+module Base
+{
+	model 85chevyStepVanrearBumper0
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle STP85RearBumpers
+		{
+		part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 85chevyStepVanrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.85chevyStepVanBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STP85.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = STP85.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = STP85.Create.RearBumper,
+					init = STP85.Init.RearBumper,
+					}
+		}
+	}
+}

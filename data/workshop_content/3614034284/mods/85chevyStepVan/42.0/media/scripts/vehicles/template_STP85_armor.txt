@@ -1,0 +1,291 @@
+module Base
+{
+    model 85chevyStepVandoorfla
+    	{
+        mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 85chevyStepVandoorfra
+    	{
+        mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 85chevyStepVanwindshielda
+    	{
+        mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_windshield_front_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 85chevyStepVanwindshieldreara
+    	{
+        mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+	template vehicle STP85Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model winda
+				{
+                		file = 85chevyStepVanwindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.85chevyStepVanWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STP85.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = STP85.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = STP85.Create.WindshieldArmor,
+					init = STP85.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model fla
+				{
+                		file = 85chevyStepVandoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.85chevyStepVanFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STP85.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = STP85.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = STP85.Create.FrontLeftArmor,
+					init = STP85.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model fra
+				{
+                		file = 85chevyStepVandoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.85chevyStepVanFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STP85.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = STP85.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = STP85.Create.FrontRightArmor,
+					init = STP85.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model windra
+				{
+                		file = 85chevyStepVanwindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			parent = TrunkDoor,
+			specificItem = false,
+			itemType = Base.85chevyStepVanWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STP85.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = STP85.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = STP85.Create.WindshieldRearArmor,
+					init = STP85.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}
