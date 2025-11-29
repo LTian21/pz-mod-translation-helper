@@ -1,0 +1,94 @@
+module Base
+{
+    model Liaz300Truck_WindowFL
+	{
+		mesh = vehicles/LIAZ154_Body|FrontLeftWindow,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+		boneWeight = FrontLeftWindowBone 1.0,
+	}
+	model Liaz300Truck_WindowFR
+	{
+		mesh = vehicles/LIAZ154_Body|FrontRightWindow,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+		boneWeight = FrontRightWindowBone 1.0,
+	}
+
+
+    template vehicle Liaz300Truck_windows
+    {
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+
+
+		part WindowFrontLeft
+		{
+			area = SeatFrontLeft,
+			
+			parent = DoorFrontLeft,
+                       
+
+			model WindowFrontLeft
+			{
+				file = Liaz300Truck_WindowFL,
+			}
+
+                        anim ClosedToOpen
+			{
+                                sound = VehicleWindowElectricOpen,
+				anim = FrontLeftWindow_open,
+				animate = FALSE,
+			}                        
+
+
+
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}		
+		}
+
+		part WindowFrontRight
+		{
+			area = SeatFrontRight,
+			
+			parent = DoorFrontRight,
+                        
+
+			model WindowFrontRight
+			{
+				file = Liaz300Truck_WindowFR,
+			}
+
+                        anim ClosedToOpen
+			{
+                                sound = VehicleWindowElectricOpen,
+				anim = FrontRightWindow_open,
+				animate = FALSE,
+			}                        
+
+
+
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+		}
+
+		
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			window
+			{
+				openable = true,
+			}
+		}
+    }
+}

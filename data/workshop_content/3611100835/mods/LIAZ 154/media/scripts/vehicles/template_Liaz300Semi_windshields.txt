@@ -1,0 +1,50 @@
+module Base
+{
+    model Liaz300Semi_Windshield
+    {
+        mesh = vehicles/LIAZ154_Body|Windshield,
+        shader = vehicle,
+        scale = 1,
+    }
+
+
+    template vehicle Liaz300Semi_windshields
+    {
+        template = Windshield/part/Windshield,
+
+
+        part Windshield
+        {
+            model windshieldFront
+			{
+				file = Liaz300Semi_Windshield,
+			}
+
+            area = Engine,
+            
+            category = bodywork,
+            mechanicRequireKey = false,
+
+			window
+			{
+				openable = false,
+			}
+
+            table install
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                requireUninstalled = ATA2ProtectionWindshield,
+			}
+        }
+
+
+        
+    }
+}
