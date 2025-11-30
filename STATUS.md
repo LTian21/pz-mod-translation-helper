@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-11-30 04:04:44 UTC+08:00`*
+*最后更新于：`2025-12-01 04:04:17 UTC+08:00`*
 
 ---
 
@@ -9,11 +9,11 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``75285`` 条 |
-| **待翻译条目** | ``1879`` 条 |
+| **模组总条目** | ``75373`` 条 |
+| **待翻译条目** | ``1967`` 条 |
 | **已翻译条目** | ``73406`` 条 |
 | **待校对条目** | ``26783`` 条 |
-| **已支持 Mod 数量** | ``715`` 个 |
+| **已支持 Mod 数量** | ``718`` 个 |
 
 ---
 
@@ -29,8 +29,9 @@
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | RV Fenix | 3587939112 | 451 | 0 | 0 | 451 |
 | More Traits | 1299328280 | 418 | 179 | 11 | 597 |
-| [42] Vanilla Firearms Expansion | 3611718925 | 381 | 0 | 0 | 381 |
+| [42] Vanilla Firearms Expansion | 3611718925 | 388 | 0 | 0 | 388 |
 | Sapph's Cooking [B42+] | 3409143790 | 108 | 1879 | 17 | 1991 |
+| '85 Chevrolet Step-Van | 3614034284 | 66 | 0 | 0 | 66 |
 | B42 Rain's Firearms & Gun Parts | 3387222454 | 59 | 361 | 0 | 421 |
 | [B42] Buildables Expansion | 3463117260 | 44 | 622 | 7 | 666 |
 | Rick Grimes - King County Sheriff Uniform from The Walking Dead Build 42 | 3613433733 | 40 | 0 | 0 | 58 |
@@ -48,7 +49,9 @@
 | Gyde's Trait Magazines | 3342191739 | 14 | 58 | 0 | 72 |
 | [B41\B42] DBG Crowbar Unlock | 3555407625 | 11 | 225 | 46 | 236 |
 | Legendary Fanny Pack | 3552050880 | 11 | 0 | 0 | 24 |
+| LIAZ 300 | 3611100835 | 9 | 0 | 0 | 9 |
 | [B42] Bodily Functions [v0.12.3] | 3396456841 | 7 | 328 | 0 | 335 |
+| Peugeot 206 [B42 / B41] | 3611236709 | 6 | 0 | 0 | 6 |
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 6 | 367 | 2 | 373 |
 | '86 Ford Econoline E-150 + Pop Culture vans | 2870394916 | 5 | 0 | 0 | 158 |
 | Wandering Zombies | 2983905789 | 5 | 401 | 1 | 406 |
