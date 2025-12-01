@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-12-01 04:04:17 UTC+08:00`*
+*最后更新于：`2025-12-02 04:05:10 UTC+08:00`*
 
 ---
 
@@ -9,11 +9,11 @@
 
 | 指标 | 状态 |
 | :--- | :--- |
-| **模组总条目** | ``75373`` 条 |
-| **待翻译条目** | ``1967`` 条 |
-| **已翻译条目** | ``73406`` 条 |
+| **模组总条目** | ``75381`` 条 |
+| **待翻译条目** | ``1977`` 条 |
+| **已翻译条目** | ``73404`` 条 |
 | **待校对条目** | ``26783`` 条 |
-| **已支持 Mod 数量** | ``718`` 个 |
+| **已支持 Mod 数量** | ``721`` 个 |
 
 ---
 
@@ -54,11 +54,14 @@
 | Peugeot 206 [B42 / B41] | 3611236709 | 6 | 0 | 0 | 6 |
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 6 | 367 | 2 | 373 |
 | '86 Ford Econoline E-150 + Pop Culture vans | 2870394916 | 5 | 0 | 0 | 158 |
+| MRE Mod [B42] | 3413627942 | 5 | 0 | 0 | 5 |
 | Wandering Zombies | 2983905789 | 5 | 401 | 1 | 406 |
 | Farming Expansion B42 | 3444499190 | 2 | 86 | 4 | 88 |
 | [B42/B41] The Motorious Zone Vehicle Pack | 2791656602 | 2 | 0 | 0 | 227 |
 | Melee Weapon Upgrade | 3394923321 | 2 | 1074 | 1 | 1076 |
 | PZK VLC (Vanilla look-like car pack) | 3217685049 | 2 | 693 | 6 | 695 |
+| Sprinters Over Time | 3608589196 | 2 | 0 | 0 | 7 |
+| LEARN HOW TO READ (B42 &#124; B41) | 3005975760 | 2 | 0 | 0 | 2 |
 | '86 Chevrolet CUCVs + M101A2 Trailer | 3428008364 | 1 | 82 | 1 | 83 |
 | Anthro Traits | 3025679944 | 1 | 145 | 0 | 146 |
 | ExtraMoney | 3462306255 | 1 | 65 | 0 | 66 |
@@ -70,6 +73,7 @@
 | Support Goods Mega Mod [B42.10] - PREDATOR | 3512993822 | 1 | 2391 | 30 | 2392 |
 | [B42] The Defiler from DR2 | 3492621786 | 1 | 3 | 0 | 4 |
 | Traits Purchase System | 3211693903 | 1 | 13 | 0 | 14 |
+| LEARN HOW TO READ Patch B42 | 3577598983 | 1 | 0 | 0 | 1 |
 | Vehicle Military Zone | 3436499337 | 1 | 0 | 0 | 11 |
 | Livestock zones expanded | 3434810293 | 1 | 37 | 0 | 38 |
 | [B42] Pack Pantry | 3416584592 | 1 | 62 | 0 | 63 |
@@ -608,7 +612,6 @@
 | Spongie's Character Retexture | 3340255334 | 0 | 4 | 0 | 4 |
 | Spongie's Clothing | 2684285534 | 0 | 0 | 6 | 80 |
 | Spongie's Hair | 2463184726 | 0 | 0 | 1 | 341 |
-| Sprinters Over Time | 3608589196 | 0 | 0 | 0 | 7 |
 | [B42] Stable Weights | 3529361118 | 0 | 0 | 0 | 5 |
 | Stairs Alert | 3044807092 | 0 | 0 | 0 | 14 |
 |  Wearable Towels [B41/B42] | 3203159242 | 0 | 0 | 32 | 40 |
@@ -706,7 +709,7 @@
 | [Deprecated] What can I craft? | 3390169945 | 0 | 0 | 0 | 1 |
 | Wild Fruits | 2618566294 | 0 | 0 | 8 | 13 |
 | Willowbrook Bastion! | 3479667649 | 0 | 0 | 1 | 27 |
-| [CJ][B41] Firearms &#124; Lore-friendly vanilla expansion | 2874163136 | 0 | 0 | 0 | 226 |
+| [B41] [B42] CJ Firearm [Discountiuned] | 2874163136 | 0 | 0 | 0 | 226 |
 | [B42] Tame-able Wolves ~ (aka, "the Dog Mod") | 3581134738 | 0 | 0 | 0 | 8 |
 | Wolf Extraction Quest | 2987772693 | 0 | 0 | 0 | 127 |
 | Woodcutting Skill [B42] | 3434440605 | 0 | 11 | 0 | 11 |

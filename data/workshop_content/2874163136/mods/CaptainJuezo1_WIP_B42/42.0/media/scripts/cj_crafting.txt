@@ -1,0 +1,72 @@
+module Base
+{
+	imports    
+    {
+		Base
+	}
+     recipe Open Tool Kit
+	{
+		CJGCK,
+		Result:OpenCJGCK,
+		Category:Firearm,		
+		Sound:PutItemInBag,
+		Time:0.5,
+	}
+	recipe Close Tool Kit
+	{
+	      OpenCJGCK,
+	      Result:CJGCK,
+		Category:Firearm,
+        	Sound:PutItemInBag,
+	      Time:0.5,
+	}
+
+     recipe Fold AK stock
+	{
+		CJ_AK74,
+		Result:CJ_AK74_Folded,
+		Category:Firearm,		
+		Sound:PutItemInBag,
+		Time:2.5,
+                OnCreate:fold_or_unfold
+	}
+	recipe Unfold AK stock
+	{
+	      CJ_AK74_Folded,
+	      Result:CJ_AK74,
+		Category:Firearm,
+        	Sound:PutItemInBag,
+	      Time:2.5,
+              OnCreate:fold_or_unfold
+	}
+	recipe Saw off the M1897 stock
+	{
+	   CJ_1897,
+	   keep Saw,
+
+	   Result:CJ_M1897_Sawn,
+	   Sound:Sawing,
+	   Time:200.0,
+	   OnCreate:ShotgunSawnoff_OnCreate,
+	}
+	recipe Saw off the M870 stock
+	{
+	   Shotgun,
+	   keep Saw,
+
+	   Result:ShotgunSawnoff,
+	   Sound:Sawing,
+	   Time:200.0,
+	   OnCreate:ShotgunSawnoff_OnCreate,
+	}
+	recipe Saw off the SKS stock
+	{
+	   CJ_SKS,
+	   keep Saw,
+
+	   Result:CJ_SKS_Sawn,
+	   Sound:Sawing,
+	   Time:200.0,
+	   OnCreate:ShotgunSawnoff_OnCreate,
+	}
+}
