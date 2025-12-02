@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2025-12-02 04:05:10 UTC+08:00`*
+*最后更新于：`2025-12-03 04:05:20 UTC+08:00`*
 
 ---
 
@@ -17,9 +17,9 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20251130_040443``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20251203_040519``)**
 
-*   **VFE (ID: 3611718925)**: 新增 `9` 条, 移除 `0` 条。
+*   **damnlib (ID: 3171167894)**: 新增 `5` 条, 移除 `0` 条。
 
 ---
 
@@ -237,6 +237,7 @@
 | Auto Move Corpses [B42] | 3415416226 | 0 | 18 | 0 | 18 |
 | Bundle Branches [B42] | 3595072546 | 0 | 0 | 0 | 28 |
 | Cap'N's Tricky Traits 🎃 | 3596746538 | 0 | 0 | 0 | 59 |
+| [B41] [B42] CJ Firearm [Discountiuned] | 2874163136 | 0 | 0 | 0 | 226 |
 | Vehicle Heater Sound System [B42] + Cabin Muffling | 3543941897 | 0 | 43 | 0 | 43 |
 | [B42/B41] Car Parts Repair | 3281301960 | 0 | 17 | 0 | 17 |
 | CDDA Zombies | 2749928925 | 0 | 0 | 209 | 294 |
@@ -709,7 +710,6 @@
 | [Deprecated] What can I craft? | 3390169945 | 0 | 0 | 0 | 1 |
 | Wild Fruits | 2618566294 | 0 | 0 | 8 | 13 |
 | Willowbrook Bastion! | 3479667649 | 0 | 0 | 1 | 27 |
-| [B41] [B42] CJ Firearm [Discountiuned] | 2874163136 | 0 | 0 | 0 | 226 |
 | [B42] Tame-able Wolves ~ (aka, "the Dog Mod") | 3581134738 | 0 | 0 | 0 | 8 |
 | Wolf Extraction Quest | 2987772693 | 0 | 0 | 0 | 127 |
 | Woodcutting Skill [B42] | 3434440605 | 0 | 11 | 0 | 11 |
