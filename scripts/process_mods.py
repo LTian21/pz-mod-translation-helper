@@ -592,6 +592,63 @@ def update_map_from_mod_info(config: Config, mods_to_process_ids: list[str]):
     else:
         logging.info("  -> 本次运行未能从任何 mod.info 文件中补全信息。")
 
+def create_workshop_id_to_mod_id_map(config: Config, mods_to_process_ids: list[str]):
+    """
+    从 mod.info 文件中提取 mod ID，并创建一个 Workshop ID 到 Mod ID 的映射文件。
+    """
+    map_file_path = Path('translation_utils') / 'workshop_id_to_mod_id_map.json'
+    logging.info(f"\n--- 正在生成 Workshop ID 到 Mod ID 的映射文件 ---")
+
+    workshop_to_mod_id_map = {}
+    if map_file_path.is_file():
+        try:
+            with open(map_file_path, 'r', encoding='utf-8') as f:
+                workshop_to_mod_id_map = json.load(f)
+        except json.JSONDecodeError:
+            logging.warning(f"  -> 警告: 无法解析现有的 '{map_file_path}'，将创建一个新的。")
+
+    update_count = 0
+    for mod_id in mods_to_process_ids:
+        mod_content_path = config.TARGET_PATH / mod_id
+        if not mod_content_path.is_dir():
+            continue
+
+        try:
+            mod_info_files = list(mod_content_path.rglob('mod.info'))
+            if not mod_info_files:
+                logging.warning(f"    -> [ID: {mod_id}] 未能找到 mod.info 文件，已跳过。")
+                continue
+
+            mod_info_file = mod_info_files[0]
+            
+            found_id = False
+            with open(mod_info_file, 'r', encoding='utf-8') as f:
+                for line in f:
+                    if line.strip().lower().startswith('id='):
+                        mod_info_id = line.split('=', 1)[1].strip()
+                        if mod_info_id and workshop_to_mod_id_map.get(mod_id) != mod_info_id:
+                            workshop_to_mod_id_map[mod_id] = mod_info_id
+                            update_count += 1
+                        found_id = True
+                        break
+            
+            if not found_id:
+                logging.warning(f"    -> [ID: {mod_id}] 在 {mod_info_file.relative_to(mod_content_path)} 中未找到 'id=' 字段。")
+
+        except Exception as e:
+            logging.error(f"    -> [ID: {mod_id}] 处理 mod.info 文件以提取 Mod ID 时发生错误: {e}")
+
+    if update_count > 0 or not map_file_path.is_file():
+        logging.info(f"  -> 成功提取或更新了 {update_count} 个 Mod ID。正在写入映射文件...")
+        try:
+            with open(map_file_path, 'w', encoding='utf-8') as f:
+                json.dump(workshop_to_mod_id_map, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            logging.error(f"  -> 错误: 写入 '{map_file_path}' 失败: {e}")
+    else:
+        logging.info("  -> 未发现需要更新的 Mod ID 映射。")
+
+
 def main():
     try:
         cfg = Config()
@@ -675,6 +732,7 @@ def main():
 
     current_run_mod_ids = [path.name for path in mods_to_process]
     update_map_from_mod_info(cfg, current_run_mod_ids)
+    create_workshop_id_to_mod_id_map(cfg, current_run_mod_ids)
 
     for mod_id_path in mods_to_process:
         mods_parent_path = mod_id_path / "mods"
