@@ -8,10 +8,23 @@ from pathlib import Path
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def escape_lua_string(value):
-    """对字符串进行LUA转义，处理引号和反斜杠。"""
-    value = value.replace('\\', '\\\\')
-    value = value.replace('"', '\\"')
-    return value
+    """
+    对字符串进行LUA转义。
+    - 基本转义: 处理引号和反斜杠。
+    - 字节转义: 将所有非ASCII字符转换为 \ddd 格式的字节序列。
+    """
+    res = []
+    for char in value:
+        if char == '"':
+            res.append('\\"')
+        elif char == '\\':
+            res.append('\\\\')
+        elif ord(char) > 127:
+            for byte in char.encode('utf-8'):
+                res.append(f'\\{byte}')
+        else:
+            res.append(char)
+    return "".join(res)
 
 def load_conflict_keys(repo_dir):
     """加载所有冲突的键。"""
