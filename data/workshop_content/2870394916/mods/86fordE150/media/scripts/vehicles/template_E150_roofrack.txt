@@ -1,0 +1,82 @@
+module Base
+{
+
+	model 86fordE150Roofrack0
+	{
+		mesh = vehicles/Vehicles_86fordE150_Body|e150_roofrack,
+		texture = Vehicles/Vehicles_86fordE150_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle E150Roofrack
+	{
+		part E150Roofrack
+		{
+
+			model E150Roofrack0
+				{
+                		file = 86fordE150Roofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.E150Roofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = Vehicles.InstallComplete.Default,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1500,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = DAMN.Create.Blank,
+				}
+		}
+	}
+}
+

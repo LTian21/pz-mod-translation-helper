@@ -1,0 +1,108 @@
+module Base
+{
+
+
+
+
+
+  model Liaz300Semi_AeroCap
+	{
+		mesh = vehicles/LIAZ154_Body|AeroCap,
+		shader = vehicle,
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+  model Liaz300Semi_CornerGuards
+	{
+		mesh = vehicles/LIAZ154_Body|Corner Guards,
+		shader = vehiclewheel,
+		texture = Vehicles/LiazSemi_Interior,
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+  model Liaz300Semi_MudFlaps
+	{
+		mesh = vehicles/LIAZ154_Body|MudFlaps,
+		shader = vehiclewheel,
+		texture = Vehicles/LiazSemi_Interior,
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+
+    template vehicle Liaz300Semi_accesories
+    {
+        template = ATA2Visual/part/ATA2VisualSpoilerRear,
+        part ATA2VisualSpoilerRear 
+        {
+
+           area = Engine,
+
+
+            model Default
+            {
+                file = Liaz300Semi_AeroCap,
+            }
+        }
+
+        template = ATA2Visual/part/ATA2VisualSkirtsSide,
+        part ATA2VisualSkirtsSide 
+        {
+
+           area = Engine,
+
+
+            model Default
+            {
+                file = Liaz300Semi_CornerGuards,
+            }
+        }
+
+
+             template = ATA2Visual/part/ATA2VisualWires,
+        part ATA2VisualWires
+        {
+
+           area = Engine,
+
+
+            model Default
+            {
+                file = Liaz300Semi_MudFlaps,
+            }
+        }   
+
+ 
+        part ATAVisual*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+
+            table install
+            {
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+
+            table uninstall
+            {
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+
+            lua
+            {
+                create = ATATuning.Create.Chance15,
+                init = ATATuning.Init.Default,
+            }
+        }
+    }
+}

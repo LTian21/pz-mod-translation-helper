@@ -1,0 +1,252 @@
+module JB_Big_Wood {
+
+	/* MAKE FIREWOOD WITH SPLITTING WEDGE AND SLEDGE OR HAMMER */
+
+	craftRecipe JBBWMakeFirewoodWedgeHammer
+	{
+		timedAction = ChoppingBlock_Hammer,
+		Time = 80,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		category = Carpentry,
+		xpAward = Woodwork:2,
+		inputs
+		{
+			item 1 [JB_Big_Wood.SmallLog],
+			item 1 [Base.OldAxeHead;Base.WoodAxeHead;Base.FireAxeHead] tags[SplittingWedge] flags[Prop2] mode:keep flags[IsNotDull;MayDegradeLight],
+			item 1 tags[ClubHammer;Sledgehammer] flags[Prop1] mode:keep flags[Prop1;MayDegradeLight],
+		}
+		outputs
+		{
+			item 4 Base.Firewood,
+			item 2 Base.Splinters,
+		}
+	}
+
+	craftRecipe JBBWMakeFirewoodWithSawSmall
+	{
+        timedAction = SawLogs,
+		Time = 70,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		category = Carpentry,
+		xpAward = Woodwork:2,
+		OnCreate = JB_Big_Wood.Recipes.MakeLogs.OnCreate,
+		inputs
+		{
+			item 1 [JB_Big_Wood.SmallLog],
+			item 1 tags[TreeSaw] mode:keep flags[MayDegradeLight;Prop1],
+		}
+		outputs
+		{
+			item 2 Base.Firewood,
+			item 1 Base.Splinters,
+		}
+	}
+
+	/* MAKE FIREWOOD WITH AXE */
+
+	craftRecipe JBBWChopLog2
+	{
+        timedAction = JB_Big_Wood.JBChopLogs,
+		Time = 60,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		category = Carpentry,
+		xpAward = Woodwork:2,
+
+		inputs
+		{
+			item 1 [JB_Big_Wood.SmallLog],
+			item 1 tags[ChopTree] mode:keep flags[IsNotDull;MayDegradeLight;Prop2],
+		}
+		outputs
+		{
+			item 2 Base.Firewood,
+			item 1 Base.Splinters,
+		}
+	}
+
+	craftRecipe JBBWChopLog3
+	{
+        timedAction = JB_Big_Wood.JBChopLogs,
+		Time = 60,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		category = Carpentry,
+		xpAward = Woodwork:5,
+		inputs
+		{
+			item 1 [Base.Log],
+			item 1 tags[ChopTree] mode:keep flags[IsNotDull;MayDegradeLight;Prop2],
+		}
+		outputs
+		{
+			item 4 Base.Firewood,
+			item 2 Base.Splinters,
+		}
+	}
+
+	/* MAKE LOGS WITH AXE */
+
+	craftRecipe JBBWMakeLogBoltWithAxeLarge
+	{
+        timedAction = JB_Big_Wood.JBChopLogs,
+		Time = 120,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		category = Carpentry,
+		xpAward = Woodwork:2,
+		OnCreate = JB_Big_Wood.Recipes.MakeLogs.OnCreate,
+		inputs
+		{
+			item 1 [JB_Big_Wood.LargeLog],
+			item 1 tags[ChopTree] mode:keep flags[IsNotDull;MayDegradeLight;Prop2],
+		}
+		outputs
+		{
+			item 2 Base.Log,
+			item 1 Base.Splinters,
+		}
+	}
+
+	craftRecipe JBBWMakeLogBoltWithAxeVeryLarge
+	{
+        timedAction = JB_Big_Wood.JBChopLogs,
+		Time = 180,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		category = Carpentry,
+		xpAward = Woodwork:2,
+		OnCreate = JB_Big_Wood.Recipes.MakeLogs.OnCreate,
+		inputs
+		{
+			item 1 [JB_Big_Wood.VeryLargeLog],
+			item 1 tags[ChopTree] mode:keep flags[IsNotDull;MayDegradeLight;Prop2],
+		}
+		outputs
+		{
+			item 5 Base.Log,
+			item 3 Base.Splinters,
+		}
+	}
+
+	craftRecipe JBBWMakeLargeLogsWithAxe
+	{
+        timedAction = JB_Big_Wood.JBChopLogs,
+		Time = 240,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		category = Carpentry,
+		xpAward = Woodwork:2,
+		OnCreate = JB_Big_Wood.Recipes.MakeLogs.OnCreate,
+		inputs
+		{
+			item 1 [JB_Big_Wood.VeryLargeLog],
+			item 1 tags[ChopTree] mode:keep flags[IsNotDull;MayDegradeLight;Prop2],
+		}
+		outputs
+		{
+			item 2 JB_Big_Wood.LargeLog,
+			item 1 Base.Splinters,
+		}
+	}
+
+	/* MAKE LOGS WITH SAW */
+
+	craftRecipe JBBWMakeLogBoltWithSaw
+	{
+        timedAction = SawLogs,
+		Time = 120,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		category = Carpentry,
+		xpAward = Woodwork:2,
+		OnCreate = JB_Big_Wood.Recipes.MakeLogs.OnCreate,
+		inputs
+		{
+			item 1 [JB_Big_Wood.LargeLog],
+			item 1 tags[TreeSaw] mode:keep flags[MayDegradeLight;Prop1],
+		}
+		outputs
+		{
+			item 2 Base.Log,
+			item 1 Base.Splinters,
+		}
+	}
+
+	craftRecipe JBBWMakeLogBoltWithSawVeryLarge
+	{
+        timedAction = SawLogs,
+		Time = 180,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		category = Carpentry,
+		xpAward = Woodwork:4,
+		OnCreate = JB_Big_Wood.Recipes.MakeLogs.OnCreate,
+		inputs
+		{
+			item 1 [JB_Big_Wood.VeryLargeLog],
+			item 1 tags[TreeSaw] mode:keep flags[MayDegradeLight;Prop1],
+		}
+		outputs
+		{
+			item 5 Base.Log,
+			item 1 Base.Splinters,
+		}
+	}
+
+	craftRecipe JBBWMakeLargeLogsWithSaw
+	{
+        timedAction = SawLogs,
+		Time = 160,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		category = Carpentry,
+		xpAward = Woodwork:3,
+		OnCreate = JB_Big_Wood.Recipes.MakeLogs.OnCreate,
+
+		inputs
+		{
+			item 1 [JB_Big_Wood.VeryLargeLog],
+			item 1 tags[TreeSaw] mode:keep flags[MayDegradeLight;Prop1],
+		}
+		outputs
+		{
+			item 2 JB_Big_Wood.LargeLog,
+			item 1 Base.Splinters,
+		}
+	}
+
+	/* MAKE PLANKS WITH SAW FROM GROUND*/
+
+	craftRecipe JBBWMakePlanksLargeFromGround
+	{
+        timedAction = SawLogs,
+		SkillRequired = Carpentry,
+		Time = 120,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+        category = Carpentry,
+		xpAward = Woodwork:3,
+		inputs
+		{
+			item 1 [JB_Big_Wood.LargeLog],
+			item 1 [JB_Big_Wood.RipSaw] mode:keep flags[MayDegradeLight;Prop1],
+		}
+		outputs
+		{
+			item 3 Base.Plank,
+			item 1 Base.UnusableWood,
+		}
+	}
+
+	craftRecipe JBBWMakePlanksVeryLargeFromGround
+	{
+        timedAction = SawLogs,
+		Time = 180,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+        category = Carpentry,
+		xpAward = Woodwork:5,
+		inputs
+		{
+			item 1 [JB_Big_Wood.VeryLargeLog],
+			item 1 [JB_Big_Wood.RipSaw] mode:keep flags[MayDegradeLight;Prop1],
+		}
+		outputs
+		{
+			item 6 Base.Plank,
+			item 2 Base.UnusableWood,
+		}
+	}
+
+}

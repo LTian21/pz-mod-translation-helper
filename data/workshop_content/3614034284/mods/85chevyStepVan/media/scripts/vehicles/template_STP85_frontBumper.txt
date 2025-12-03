@@ -1,0 +1,97 @@
+module Base
+{
+	model 85chevyStepVanfrontBumper0
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85chevyStepVanfrontBumper1
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 85chevyStepVanfrontBumperA
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle STP85FrontBumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 85chevyStepVanfrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 85chevyStepVanfrontBumper1,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 85chevyStepVanfrontBumperA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.85chevyStepVanBumperFront0;Base.85chevyStepVanBumperFrontA;Base.85chevyStepVanBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STP85.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = STP85.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = STP85.Create.FrontBumper,
+					init = STP85.Init.FrontBumper,
+					}
+		}
+	}
+}

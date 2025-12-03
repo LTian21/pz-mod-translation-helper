@@ -1,0 +1,79 @@
+module Base
+{
+
+	craftRecipe PutFilterOnM17GasMask
+	{
+		timedAction = Making,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.GasmaskFilterInsert,
+		OnTest = Recipe.OnTest.GasmaskFilterInsert,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Survival,
+		inputs
+		{
+			item 1 [Base.Hat_GasMaskM17_nofilter;Base.Hat_GasMaskM17Hood_nofilter] mappers[maskType] flags[IsNotWorn;AllowFavorite;InheritFavorite;CopyClothing],
+			item 1 tags[GasmaskFilter] flags[ItemCount] mode:destroy,
+		}
+		outputs
+		{
+			item 1 mapper:maskType,
+		}
+		itemMapper maskType
+		{
+			Base.Hat_GasMaskM17 = Base.Hat_GasMaskM17_nofilter,
+			Base.Hat_GasMaskM17Hood = Base.Hat_GasMaskM17Hood_nofilter,
+
+		}
+
+	}
+
+	craftRecipe AddNBCHood
+	{
+		timedAction = Making,
+		Time = 30,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Survival,
+		inputs
+		{
+			item 1 [Base.Hat_GasMaskM17_nofilter;Base.Hat_GasMaskM17] flags[IsNotWorn;AllowFavorite;InheritFavorite;CopyClothing] mappers[hoodType],
+			item 1 [Base.NBCHood] flags[ItemCount] mode:destroy,
+		}
+		outputs
+		{
+			item 1 mapper:hoodType,
+		}
+		itemMapper hoodType
+		{
+			Base.Hat_GasMaskM17Hood_nofilter = Base.Hat_GasMaskM17_nofilter,
+			Base.Hat_GasMaskM17Hood = Base.Hat_GasMaskM17,
+
+		}
+
+	}
+		craftRecipe RemoveNBCHood
+	{
+		timedAction = Making,
+		Time = 30,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Survival,
+		inputs
+		{
+			item 1 [Base.Hat_GasMaskM17Hood_nofilter;Base.Hat_GasMaskM17Hood] flags[IsNotWorn;AllowFavorite;InheritFavorite;CopyClothing] mappers[hoodType],
+		}
+		outputs
+		{
+			item 1 mapper:hoodType,
+			item 1 Base.NBCHood,
+		}
+		itemMapper hoodType
+		{
+			Base.Hat_GasMaskM17_nofilter = Base.Hat_GasMaskM17Hood_nofilter,
+			Base.Hat_GasMaskM17 = Base.Hat_GasMaskM17Hood,
+
+		}
+
+	}
+}

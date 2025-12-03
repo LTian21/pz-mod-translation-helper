@@ -1,0 +1,170 @@
+module Base
+{
+
+ 
+ model Trailer_LiazTruck_Generator
+	{
+		mesh = vehicles/LIAZ300TRUCKTRAILER_Body|Generator,
+		shader = vehiclewheel,
+                texture = Vehicles/GeneratorTexture,
+		 static = TRUE,
+		 scale = 1.0,
+
+	}
+
+
+
+  model Trailer_LiazTruck_SpareTire
+	{
+		mesh = vehicles/LIAZ300TRUCKTRAILER_Body|LiazTrailerSpareTire,
+		shader = vehiclewheel,
+		texture = vehicles/Liaz300Reartires,
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+
+
+  model Trailer_LiazTruck_MudFlaps
+	{
+		mesh = vehicles/LIAZ300TRUCKTRAILER_Body|MudFlaps,
+		shader = vehiclewheel,
+		texture = Vehicles/LiazSemi_Interior,
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+  model Trailer_LiazTruck_TarpCover
+	{
+		mesh = vehicles/LIAZ300TRUCKTRAILER_Body|TarpCover,
+		shader = vehicle,
+
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+
+    template vehicle Trailer_LiazTruck_accesories
+    {
+
+
+
+
+
+             template = ATA2Visual/part/ATA2VisualWires,
+        part ATA2VisualWires
+        {
+
+            area = "TireFrontLeft",
+
+
+            model Default
+            {
+                file = Trailer_LiazTruck_MudFlaps,
+            }
+        }   
+
+
+   
+
+
+
+
+             template = ATA2Visual/part/ATA2VisualSpoilerFront,
+        part ATA2VisualSpoilerFront
+        {
+
+            area = "TireFrontLeft",
+
+
+            model Default
+            {
+                file = Trailer_LiazTruck_TarpCover,
+            }
+        }   
+
+
+             template = ATA2Visual/part/ATA2VisualSnorkel,
+        part ATA2VisualSnorkel
+        {
+
+            area = "TireFrontLeft",
+
+
+            model Default
+            {
+                file = Trailer_LiazTruck_SpareTire,
+            }
+        }   
+
+
+        part LiazGenerator
+        {
+            area = TireFrontRight,
+
+
+            model LiazGenerator
+            {
+                file = Trailer_LiazTruck_Generator,
+            }
+
+          category = equipment,
+                        area = TireFrontRight,
+			specificItem = false,
+			itemType = Base.Generator,
+			mechanicRequireKey = false,
+
+            table install
+			{
+                time = 500,
+                test = Vehicles.InstallTest.Default,
+
+            }
+
+            table uninstall
+            {
+				time = 500,
+		        test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+            }
+
+            lua
+            {
+				create = ATATuning2.Create.Tuning,
+			}
+        }
+
+
+
+ 
+        part ATAVisual*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+
+            table install
+            {
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+
+            table uninstall
+            {
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+
+            lua
+            {
+                create = ATATuning.Create.Chance15,
+                init = ATATuning.Init.Default,
+            }
+        }
+    }
+}

@@ -1,0 +1,363 @@
+module Base
+{
+
+	model 85chevyStepVanRoofrack0
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_roofrack0,
+		texture = Vehicles/Vehicles_85chevyStepVan_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 85chevyStepVanGasCan0
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|TIS_GasCan0,
+		texture = Vehicles/Items_GasCan,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 85chevyStepVanGenerator
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|TIS_Generator,
+		texture = Vehicles/Items_Generator,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	model 85chevyStepVanTent
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_tentTarp,
+		texture = Vehicles/Vehicles_85chevyStepVan_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 85chevyStepVanSpare1
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_spare,
+		texture = Vehicles/Vehicles_93chevySilverado_Wheel3,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 85chevyStepVanSpare2
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_spare,
+		texture = Vehicles/Vehicles_93chevySilverado_Wheel3,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle STP85Roofrack
+	{
+		part STP85Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 85chevyStepVanRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.85chevyStepVanRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1100,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1100,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = DAMN.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireUninstalled = DAMNGasCan0;DAMNGenerator;DAMNTent;DAMNSpareTireRoof;DAMNSpareTireRoof2,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+            		create = DAMN.Create.Blank,
+				}
+		}
+
+        part DAMNGasCanOne
+        	{
+				model gascan0
+				{
+                file = 85chevyStepVanGasCan0,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = Base.EmptyPetrolCan;Base.PetrolCan,
+				mechanicRequireKey = false,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = STP85Roofrack,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part DAMNGenerator
+        	{
+				model GenX
+				{
+                file = 85chevyStepVanGenerator,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = Base.Generator,
+				mechanicRequireKey = false,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = STP85Roofrack,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part DAMNTent
+        	{
+				model Tentyyy
+				{
+                file = 85chevyStepVanTent,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = camping.CampingTentKit,
+				mechanicRequireKey = false,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = STP85Roofrack,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+            part DAMNSpareTireRoof
+        	{
+                model spare1
+				{
+                file = 85chevyStepVanSpare1,
+				}
+
+			category = Other,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.93chevyK3500Tire2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+	            lua
+	            {
+				create = DAMN.Create.Blank,
+				}
+		}
+
+        part DAMNSpareTireRoof2
+        	{
+                model spare2
+				{
+                file = 85chevyStepVanSpare2,
+				}
+
+			category = Other,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.93chevyK3500Tire2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+	            lua
+	            {
+				create = DAMN.Create.Blank,
+				}
+		}
+	}
+}
+

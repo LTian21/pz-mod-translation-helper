@@ -1,0 +1,541 @@
+module Base
+{
+	model Liaz300SemiSpecialService_Base
+	{
+		mesh = vehicles/LIAZ154_Body|Body,
+		shader = vehicle_norandom_multiuv,
+		invertX = FALSE,
+		scale = 1,
+	}
+	model Liaz300SemiSpecialService_Interior
+	{
+		mesh = vehicles/LIAZ154_Body|LiazInterior,
+		texture = Vehicles/LiazSemi_Interior,
+		shader = vehiclewheel,
+		scale = 1,
+	}
+	model Liaz300SemiSpecialService_Lightbar
+	{
+		mesh = vehicles/LIAZ154_Body|LightBar,
+		shader = vehicle,
+		scale = 1,
+	}
+	model Liaz300SemiSpecialServicefrontwheelleft
+	{
+		mesh = vehicles/LIAZ154_Body|LiazWheel,
+		texture = vehicles/Liaz300Fronttires,
+		shader = vehiclewheel,
+                invertX = TRUE,
+	}
+	model Liaz300SemiSpecialServicefrontwheelright
+	{
+		mesh = vehicles/LIAZ154_Body|LiazWheel,
+		texture = vehicles/Liaz300Fronttires,
+		shader = vehiclewheel,
+                invertX = TRUE,
+	}
+	model Liaz300SemiSpecialServicebackwheelleft
+	{
+		mesh = vehicles/LIAZ154_Body|LiazWheelRear,
+		texture = vehicles/Liaz300Reartires,
+		shader = vehiclewheel,
+	}
+	model Liaz300SemiSpecialServicebackwheelright
+	{
+		mesh = vehicles/LIAZ154_Body|LiazWheelRear,
+		texture = vehicles/Liaz300Reartires,
+		shader = vehiclewheel,
+	}
+	model Liaz300SemiSpecialService_Battery
+    {
+        mesh = vehicles/LIAZ154_Body|LiazBattery,
+		texture = vehicles/LiazSemi_Interior,
+        shader = vehiclewheel,
+        scale = 1,
+    }
+	vehicle Liaz300SemiSpecialService
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 0.75,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1.5,
+		engineRPMType = van,
+
+		model
+		{
+			file = Liaz300SemiSpecialService_Base,
+			scale = 0.9400,
+			offset = 0.0000 0.4681 1.8511,
+		}
+
+		part TCLConfig
+		{
+			category = nodisplay,
+
+			table TCLConfig
+			{
+				airbrake = true,
+				animType = vanilla,
+			}
+		}
+
+		spawnOffsetY = 0,
+
+		skin
+		{
+			texture = Vehicles/LiazSpecialService_White,
+		}
+
+		skin
+		{
+			texture = Vehicles/LiazSpecialService_Black,
+		}
+
+		skin
+		{
+			texture = Vehicles/LiazSpecialService_Green,
+		}
+
+		skin
+		{
+			texture = Vehicles/LiazSpecialService_Police,
+		}
+
+		textureRust = Vehicles/LiazSemiRust,
+		textureMask = Vehicles/LiazSpecialServiceMask,
+		textureLights = Vehicles/LiazSemiSpecialServiceLights,
+		textureDamage1Shell = Vehicles/LiazSemiDamage1,
+		textureDamage2Shell = Vehicles/LiazSemiDamage2,
+		textureDamage1Overlay = Vehicles/LiazSemiBlood,
+		textureDamage2Overlay = Vehicles/LiazSemiBlood,
+
+		lightbar
+		{
+			soundSiren = VehicleSiren,
+			leftCol = 1;0.72;0.2,
+			rightCol = 1;0.72;0.2,
+		}
+
+		sound
+		{
+			engine = VehicleEngineSUV,
+			engineStart = VehicleEngineSUV,
+			engineTurnOff = VehicleEngineSUV,
+			horn = VehicleHornVan,
+			ignitionFail = VehicleIgnitionFailSUV,
+		}
+
+		extents = 2.4894 0.5957 5.9787,
+		mass = 1000,
+		physicsChassisShape = 2.4894 0.5957 5.9787,
+		centerOfMassOffset = -0.0106 -0.5957 0.7234,
+		shadowExtents = 2.5993 6.3970,
+		shadowOffset = -0.0078 0.5623,
+		engineForce = 8000,
+		maxSpeed = 55f,
+		gearRatioCount = 5,
+		engineLoudness = 150,
+		engineQuality = 70,
+		brakingForce = 50,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 0.10f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.25,
+		suspensionStiffness = 88,
+		suspensionCompression = 4.70,
+		suspensionDamping = 3.75,
+		maxSuspensionTravelCm = 15,
+		suspensionRestLength = 0.2,
+		wheelFriction = 2.7f,
+		frontEndHealth = 3250,
+		rearEndHealth = 2200,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 1.0106 -1.0106 0.1809,
+			radius = 0.42f,
+			width = 0.3f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -1.0106 -1.0106 0.1702,
+			radius = 0.42f,
+			width = 0.3f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.9043 -1.0106 -3.3511,
+			radius = 0.42f,
+			width = 0.3f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.9043 -1.0106 -3.3511,
+			radius = 0.42f,
+			width = 0.3f,
+		}
+
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorFrontLeft,
+
+			position inside
+			{
+				offset = 0.7234 0.1489 0.3723,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 1.4362 -0.5957 0.4894,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			showPassenger = true,
+			hasRoof = true,
+			door = DoorFrontRight,
+
+			position inside
+			{
+				offset = -0.6809 0.1489 0.3723,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -1.5745 -0.5957 0.4894,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		area Engine
+		{
+			xywh = -1.5319 1.0106 0.5745 0.7021,
+		}
+
+		area TruckBed
+		{
+			xywh = 1.5745 0.8298 0.6596 0.9362,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.6489 2.3191 0.8085 1.0000,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.6489 2.5106 0.8085 1.0000,
+		}
+
+		area SeatMiddleRight
+		{
+			xywh = -1.6170 2.5106 0.8085 1.0000,
+		}
+
+		area GasTank
+		{
+			xywh = -1.4894 0.1064 0.4894 0.4894,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.4894 2.0213 0.4894 0.4894,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.4894 2.0426 0.4894 0.4894,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.4894 -1.7234 0.4894 0.4894,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.4894 -1.7234 0.4894 0.4894,
+		}
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part GloveBox
+		{
+			model Liaz300SemiSpecialService
+			{
+				file = Liaz300SemiSpecialService_Interior,
+			}
+
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			model Liaz300lightbar
+			{
+				file = Liaz300SemiSpecialService_Lightbar,
+				scale = 1.0,
+			}
+
+			container
+			{
+				capacity = 15,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			area = GasTank,
+			category = gastank,
+			mechanicRequireKey = true,
+
+			container
+			{
+				capacity = 150,
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline,
+				conditionAffectsCapacity = false,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+				update = Vehicles.Update.GasTank,
+				checkEngine = Vehicles.CheckEngine.GasTank,
+			}
+
+			install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+
+		part Battery
+		{
+			model LiazBatt
+			{
+				file = Liaz300SemiSpecialService_Battery,
+			}
+		}
+
+		template = Engine,
+		template! = Liaz300Semi_accesories,
+		template! = Liaz300Semi_seats,
+		template! = Liaz300Semi_doors,
+		template! = Liaz300Semi_windows,
+		template! = Liaz300Semi_trunkdoor,
+		template! = Liaz300Semi_trunks,
+		template! = Liaz300Semi_TruckbedRoof,
+		template! = Liaz300Semi_windshields,
+		template! = Liaz300Semi_armor,
+		template! = Liaz300Semi_bumpers,
+		template = Muffler,
+
+		part Muffler
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		part Windshield*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Liaz300SemiSpecialServicefrontwheelleft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Liaz300SemiSpecialServicefrontwheelright,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Liaz300SemiSpecialServicebackwheelleft,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Liaz300SemiSpecialServicebackwheelright,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:6,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = TV,
+		template = Counters/part/CounterFrontRight,
+		template = Fridges/part/FridgeFrontRight,
+		template = Radio,
+		template = Headlight,
+
+		physics box
+		{
+			offset = 0.0000 -0.7128 -2.1809,
+			extents = 0.7766 0.3830 0.5213,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.7340 2.3936,
+			extents = 2.3511 2.0213 1.9468,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment trailer
+		{
+			offset = -0.0213 -0.7660 -4.0638,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.0851 -2.6064,
+			rotate = 0.0000 0.0000 0.0000,
+			updateconstraint = false,
+		}
+	}
+}

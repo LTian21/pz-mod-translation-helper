@@ -1,0 +1,112 @@
+module Base
+{
+
+	model 85chevyStepVanseatfl
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_seatfl,
+		texture = Vehicles/Vehicles_85chevyStepVan_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 85chevyStepVanseatfr
+	{
+		mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_seatfr,
+		texture = Vehicles/Vehicles_85chevyStepVan_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle STP85Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 85chevyStepVanseatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			itemType = Base.85chevyStepVanSeat,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+        part SeatFrontRight
+		{
+			
+			model SeatFR
+			{
+				file = 85chevyStepVanseatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontRight,
+			itemType = Base.85chevyStepVanSeat,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
