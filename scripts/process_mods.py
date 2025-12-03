@@ -592,6 +592,85 @@ def update_map_from_mod_info(config: Config, mods_to_process_ids: list[str]):
     else:
         logging.info("  -> 本次运行未能从任何 mod.info 文件中补全信息。")
 
+def find_all_mod_ids_in_workshop_dir(workshop_dir: str | Path) -> list[str]:
+    """在一个创意工坊目录中查找所有子模组的 Mod ID。"""
+    workshop_path = Path(workshop_dir) # 确保是 Path 对象
+    found_mod_ids = []
+    mods_path = workshop_path / "mods"
+    if not mods_path.is_dir():
+        return found_mod_ids
+
+    # 使用 rglob 递归查找所有 mod.info 文件
+    mod_info_files = sorted(list(mods_path.rglob('mod.info')))
+    
+    for mod_info_path in mod_info_files:
+        try:
+            with open(mod_info_path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line_lower = line.strip().lower()
+                    if line_lower.startswith('id='):
+                        # 从原始行（保留大小写）中分割，以保留ID的原始大小写
+                        mod_id = line.strip().split('=', 1)[1].strip()
+                        if mod_id:
+                            found_mod_ids.append(mod_id)
+                        break # 每个mod.info只读取第一个ID
+        except Exception as e:
+            logging.warning(f"    -> 读取 {mod_info_path} 时出错: {e}")
+    # 返回去重并排序后的列表
+    return sorted(list(set(found_mod_ids)))
+
+def create_workshop_id_to_mod_id_map(
+    workshop_content_dir: str | Path, 
+    output_map_file: str | Path, 
+    mods_to_process_ids: list[str]
+):
+    """
+    从 mod.info 文件中提取所有相关的 mod ID，并创建一个 Workshop ID 到 Mod ID 列表的映射文件。
+    """
+    map_file_path = Path(output_map_file)
+    workshop_dir_path = Path(workshop_content_dir)
+    logging.info(f"\n--- 正在生成 Workshop ID 到 Mod ID 的映射文件 -> {map_file_path} ---")
+
+    workshop_to_mod_ids_map = {}
+    if map_file_path.is_file():
+        try:
+            with open(map_file_path, 'r', encoding='utf-8') as f:
+                workshop_to_mod_ids_map = json.load(f)
+        except json.JSONDecodeError:
+            logging.warning(f"  -> 警告: 无法解析现有的 '{map_file_path}'，将创建一个新的。")
+
+    update_count = 0
+    for workshop_id in mods_to_process_ids:
+        mod_content_path = workshop_dir_path / workshop_id
+        if not mod_content_path.is_dir():
+            logging.warning(f"    -> [ID: {workshop_id}] 找不到目录 {mod_content_path}，跳过。")
+            continue
+
+        all_found_ids = find_all_mod_ids_in_workshop_dir(mod_content_path)
+        
+        if not all_found_ids:
+            logging.warning(f"    -> [ID: {workshop_id}] 未能找到任何有效的 mod.info 文件或 Mod ID。")
+            continue
+
+        unique_sorted_ids = sorted(list(set(all_found_ids)))
+        
+        if workshop_to_mod_ids_map.get(workshop_id) != unique_sorted_ids:
+            workshop_to_mod_ids_map[workshop_id] = unique_sorted_ids
+            update_count += 1
+            logging.info(f"    -> [ID: {workshop_id}] 映射已更新/创建。所有 ID: {unique_sorted_ids}")
+
+    if update_count > 0 or not map_file_path.is_file():
+        logging.info(f"  -> 成功更新或创建了 {update_count} 个 Mod 的映射。正在写入文件...")
+        try:
+            map_file_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(map_file_path, 'w', encoding='utf-8') as f:
+                json.dump(workshop_to_mod_ids_map, f, indent=2, ensure_ascii=False)
+        except Exception as e:
+            logging.error(f"  -> 错误: 写入 '{map_file_path}' 失败: {e}")
+    else:
+        logging.info("  -> 未发现需要更新的 Mod ID 映射。")
+
+
 def main():
     try:
         cfg = Config()
@@ -675,6 +754,10 @@ def main():
 
     current_run_mod_ids = [path.name for path in mods_to_process]
     update_map_from_mod_info(cfg, current_run_mod_ids)
+    
+    # 更新调用以匹配新的函数签名
+    map_file_path = Path('translation_utils') / 'workshop_id_to_mod_id_map.json'
+    create_workshop_id_to_mod_id_map(cfg.TARGET_PATH, map_file_path, current_run_mod_ids)
 
     for mod_id_path in mods_to_process:
         mods_parent_path = mod_id_path / "mods"

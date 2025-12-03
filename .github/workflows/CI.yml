@@ -37,6 +37,14 @@ jobs:
         working-directory: ./translation_utils
         run: dotnet PostProcessing.dll
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate LUA Translation File
+        run: python scripts/generate_lua_translations.py
+
       - name: Prepare PR Body for CI
         if: github.event_name != 'pull_request'
         id: prep_ci_pr
