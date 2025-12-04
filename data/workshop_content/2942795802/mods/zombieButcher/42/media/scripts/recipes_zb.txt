@@ -1,0 +1,184 @@
+module ZombieButcher
+{
+    imports
+    {
+        Base
+    }
+
+    craftRecipe ButcherZombie
+    {
+        timedAction = SliceMeat_Surface,
+        time = 600,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Butchering:10,
+        inputs
+        {
+            item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+            item 1 [Base.CorpseMale;Base.CorpseFemale] flags[InheritFoodAge;ItemCount],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.HumanMeat,
+        }
+        OnCreate = Recipe.OnCreate.Butcher,
+        OnCanPerform = Recipe.OnCanPerform.Butcher
+    }
+
+    craftRecipe CrushBonePiecesIntoFlour
+    {
+        timedAction = Making,
+        time = 800,
+        Tags = AnySurfaceCraft,
+        category = Cooking,
+        inputs
+        {
+            item 10 [Base.SmallAnimalBone], /* Примечание: Убедитесь, что Base.SmallAnimalBone определён в items.txt */
+            item 1 [Base.MortarPestle] mode:keep flags[NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.BoneFlour,
+        }
+        OnCreate = Recipe.OnCreate.CrushBones
+    }
+
+    craftRecipe MixBoneFlour
+    {
+        timedAction = Making,
+        time = 100,
+        Tags = InHandCraft,
+        category = Cooking,
+        inputs
+        {
+            item 4 [ZombieButcher.BoneFlour],
+            item 1 [Base.Pot] mode:destroy flags[NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.MixedBoneFlour,
+        }
+        OnCreate = Recipe.OnCreate.MixBoneFlour
+    }
+
+    craftRecipe ExtractGlue
+    {
+        timedAction = Making,
+        time = 600,
+        Tags = InHandCraft,
+        category = Cooking,
+        needTobeLearn = false,
+        inputs
+        {
+            item 1 [Base.Spoon;Base.Spoon_Bone;Base.Spoon_Gold;Base.Spoon_Silver;Base.SpoonForged;Base.WoodenSpoon] mode:keep flags[NoBrokenItems],
+            item 1 [ZombieButcher.GlueInThePot],
+        }
+        outputs
+        {
+            item 1 Base.Glue,
+            item 1 Base.Pot,
+        }
+        OnCreate = Recipe.OnCreate.ExtractGlue
+    }
+
+    craftRecipe CreatePotOfBilletForSoap
+    {
+        timedAction = Making,
+        time = 300,
+        Tags = InHandCraft,
+        category = Cooking,
+        needTobeLearn = false,
+        inputs
+        {
+            item 25 [ZombieButcher.Fat],
+            item 1 [Base.Pot] mode:destroy flags[NoBrokenItems],
+            item 1 [Base.BakingSoda] flags[NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.BilletSoap,
+        }
+        OnCreate = Recipe.OnCreate.CreateBilletSoap
+    }
+
+    craftRecipe ExtractSoapFromThePot
+    {
+        timedAction = Making,
+        time = 300,
+        Tags = InHandCraft,
+        category = Cooking,
+        needTobeLearn = false,
+        inputs
+        {
+            item 1 [Base.Spoon;Base.Spoon_Bone;Base.Spoon_Gold;Base.Spoon_Silver;Base.SpoonForged;Base.WoodenSpoon] mode:keep flags[NoBrokenItems],
+            item 1 [ZombieButcher.CookedSoap],
+        }
+        outputs
+        {
+            item 1 Base.Soap2,
+            item 1 Base.Pot,
+        }
+        OnCreate = Recipe.OnCreate.ExtractSoapFromThePot
+    }
+
+    craftRecipe CreatePreparedFatForCandles
+    {
+        timedAction = Making,
+        time = 150,
+        Tags = InHandCraft,
+        category = Cooking,
+        inputs
+        {
+            item 6 [ZombieButcher.Fat],
+            item 1 [Base.Saucepan] mode:destroy flags[NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.PreparedFat,
+        }
+        OnCreate = Recipe.OnCreate.PreparedFat
+    }
+
+    craftRecipe CreateBilletForCandles
+    {
+        timedAction = Making,
+        time = 150,
+        Tags = InHandCraft,
+        category = Cooking,
+        needTobeLearn = false,
+        inputs
+        {
+            item 6 [Base.Thread],
+            item 1 [ZombieButcher.PreparedFat],
+            item 1 [Base.MuffinTray] mode:keep flags[NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 ZombieButcher.BilletCandles,
+            item 1 Base.Saucepan,
+        }
+        OnTest = Recipe.OnTest.FatIsCooked,
+        OnCreate = Recipe.OnCreate.BilletCandles
+    }
+
+    craftRecipe ExtractCandlesFromTheTray
+    {
+        timedAction = Making,
+        time = 100,
+        Tags = InHandCraft,
+        category = Cooking,
+        needTobeLearn = false,
+        inputs
+        {
+            item 1 [Base.Spoon] mode:keep flags[NoBrokenItems],
+            item 1 [ZombieButcher.BilletCandles],
+        }
+        outputs
+        {
+            item 6 Base.Candle,
+            item 1 Base.MuffinTray,
+        }
+        OnTest = Recipe.OnTest.CandlesIsFresh,
+        OnCreate = Recipe.OnCreate.ExtractCandlesFromTheTray
+    }
+}
