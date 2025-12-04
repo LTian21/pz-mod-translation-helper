@@ -1,0 +1,81 @@
+module Defecation
+{
+	item HumanFeces
+	{
+		HungerChange = -5,
+		Weight = 0.2,
+		Type = Food,
+		DaysTotallyRotten = 0,
+		DisplayName = Human Feces,
+		Icon = DHumanFeces,
+		DaysFresh = 0,
+		FoodType = NoExplicit,
+		Poison = true,
+		DisplayCategory = Junk,
+		PoisonPower = 10,
+		PoisonDetectionLevel = 10,
+		UseForPoison = 10,
+		StressChange = 25,
+		UnhappyChange = 50,
+		ThirstChange = -5,
+        Carbohydrates = 5,
+        Proteins = 0,
+        Lipids = 0,
+        Calories = 50,
+		WorldStaticModel = Defecation.D_Feces,
+	}
+	
+	item AntiDiarrhealPillBox
+	{
+		Weight = 0.2,
+		Type = Normal,
+		DisplayName = Anti Diarrheal Pill Box,
+		Icon = D_AntiDiarrhealPillBoxIcon,
+		DisplayCategory = FirstAid,
+		WorldStaticModel = Defecation.D_AntiDiarrhealPillBox,
+	}
+	
+	item AntiDiarrhealPill
+	{
+		HungerChange = -0.1,
+		Weight = 0.04,
+		Type = Food,
+		DisplayName = Anti Diarrheal Pill,
+		Icon = D_AntiDiarrhealPillsIcon,
+		DisplayCategory = FirstAid,
+		FoodType = NoExplicit,
+		ThirstChange = 5,
+		OnEat = DefecationFunctions.DEatPill,
+		Tooltip = Tooltip_AntiDiarrhealPill,
+		WorldStaticModel = Defecation.D_AntiDiarrhealPills,
+	}
+	
+	recipe Open Box of Anti Diarrheal Pills
+	{
+		AntiDiarrhealPillBox=1,
+		
+		Result:AntiDiarrhealPill=4,
+		Time:10.0,
+	}
+	
+	model D_Feces
+	{
+		mesh = D_Feces,
+		texture = D_Feces,
+		scale = 0.15,
+	}
+	
+	model D_AntiDiarrhealPills
+	{
+		mesh = WorldItems/Antibiotics,
+		texture = D_AntiDiarrhealPills,
+		scale = 0.6,
+    }
+	
+	model D_AntiDiarrhealPillBox
+	{
+		mesh = D_AntiDiarrhealPillBox,
+		texture = D_AntiDiarrhealPillBox,
+		scale = 0.6,
+    }
+}

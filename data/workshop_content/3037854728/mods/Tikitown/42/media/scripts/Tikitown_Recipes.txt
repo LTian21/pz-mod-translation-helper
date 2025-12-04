@@ -332,5 +332,96 @@ module Tikitown
 		}
 	
 	}
+		
+	craftRecipe FillPlushShelf
+	{
+		time = 50,
+		timedAction = Making,
+		category = Assembly,
+		Tags = AnySurfaceCraft,
+		
+		inputs
+		{
+			item 1 [Tikitown.PlushDisplayCase],
+			item 1 [Tikitown.Penguin],
+			item 1 [Tikitown.Rhino],
+			item 1 [Tikitown.Sheep],
+			item 1 [Tikitown.Cat],
+			item 1 [Tikitown.Dolphin],
+			item 1 [Tikitown.Pig],
+			item 1 [Tikitown.Raccoon],
+			item 1 [Tikitown.Possum],
+			item 1 [Tikitown.Beaver],
+			item 1 [Tikitown.Elephant],
+			item 1 [Tikitown.Whale],
+		}
+
+		outputs
+		{
+			item 1 Tikitown.PlushDisplayCase,
+		}
+	}
+	
+	craftRecipe CraftPlushShelf
+	{
+		time = 200,
+		timedAction = Making,
+		category = Carpentry,
+		SkillRequired = Carpentry:5,
+		xpAward = Carpentry:25,
+		Tags = AnySurfaceCraft,
+		
+		inputs
+		{
+			item 3 [Base.Plank] flags[Prop1],
+			item 10 [Base.Nails],
+			item 10 [Base.Screws],
+			item 1 [Base.SmallSheetMetal],
+			item 1 [Base.Woodglue],
+			item 1 tags[Hammer]      mode:keep flags[MayDegradeLight;Prop2],
+			item 1 tags[Saw]         mode:keep flags[IsNotDull;MayDegradeLight],
+			item 1 tags[Screwdriver] mode:keep flags[IsNotDull;MayDegradeLight],
+		}
+
+		outputs
+		{
+			item 1 Tikitown.PlushDisplayCaseOnly,
+		}
+	}
+	
+	craftRecipe OpenPocketPalsCan
+	{
+		time = 100,
+		timedAction = OpenTinCan,
+		category = Miscellaneous,
+		Tags = InHandCraft;CanBeDoneInDark,
+		
+		inputs
+		{
+			item 1 [Tikitown.PlushCanPenguin;Tikitown.PlushCanBeaver;Tikitown.PlushCanCat;Tikitown.PlushCanElephant;Tikitown.PlushCanPig;Tikitown.PlushCanPossum;Tikitown.PlushCanRaccoon;Tikitown.PlushCanRhino;Tikitown.PlushCanSheep;Tikitown.PlushCanDolphin;Tikitown.PlushCanWhale;] mappers[plushCanSorts] flags[Prop2;DontPutBack],
+			item 1 tags[CanOpener] mode:keep flags[Prop1;MayDegradeLight],
+		}
+
+		outputs
+		{
+			item 1 mapper:plushCanSorts,
+		}
+		
+		itemMapper plushCanSorts
+        {
+			
+			Tikitown.Penguin = Tikitown.PlushCanPenguin,
+			Tikitown.Beaver = Tikitown.PlushCanBeaver,
+			Tikitown.Cat = Tikitown.PlushCanCat,
+			Tikitown.Elephant = Tikitown.PlushCanElephant,
+			Tikitown.Pig = Tikitown.PlushCanPig,
+			Tikitown.Possum = Tikitown.PlushCanPossum,
+			Tikitown.Raccoon = Tikitown.PlushCanRaccoon,
+			Tikitown.Rhino = Tikitown.PlushCanRhino,
+			Tikitown.Sheep = Tikitown.PlushCanSheep,
+			Tikitown.Dolphin = Tikitown.PlushCanDolphin,
+			Tikitown.Whale = Tikitown.PlushCanWhale,
+		}
+	}
 
 }

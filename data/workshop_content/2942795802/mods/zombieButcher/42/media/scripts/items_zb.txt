@@ -1,0 +1,124 @@
+module ZombieButcher
+{
+  imports
+  {
+    Base
+  }
+
+  item HumanMeat
+  {
+    DisplayName = Human Meat,
+    DisplayCategory = Food,
+    Type = Food,
+    Weight = 0.2,
+    Icon = Steak,
+    BadInCold = true,           /* Изменено с BadCold на BadInCold для Build 42 */
+    BadInMicrowave = true,
+    DangerousUncooked = true,
+    EvolvedRecipe = Pizza:20;Stew:20;Sandwich:5|Cooked, /* ;Salad:10|Cooked;RoastedVegetables:20;Pasta:20;Rice:20;Taco:20|Cooked;Burrito:20|Cooked, */
+    FoodType = Meat,           /* Изменено с Beef на Meat для большей точности */
+    GoodHot = true,
+    IsCookable = true,
+    MinutesToCook = 20,
+    MinutesToBurn = 50,
+    DaysFresh = 0,
+    DaysTotallyRotten = 1,
+    HungerChange = -20,
+    Calories = 150,
+    Carbohydrates = 0,
+    Lipids = 7.35,
+    Proteins = 26.62,
+    Poison = true,
+    PoisonPower = 30,
+    WorldStaticModel = Steak_Ground, /* Добавлен суффикс _Ground для соответствия новым моделям */
+  }
+
+  item BoneFlour
+  {
+    DisplayCategory = Material,
+    Type = Normal,
+    DisplayName = Bone Flour,
+    Icon = Tissue,
+    Weight = 0.2,
+    WorldStaticModel = Tissue_Ground, /* Добавлен суффикс _Ground */
+  }
+
+  item MixedBoneFlour
+  {
+    DisplayName = Mixed Bone Flour,
+    Type = Food,
+    Weight = 7.5,
+    Icon = Pot_Water, /* Обновлено для соответствия новым иконкам */
+    MinutesToCook = 120,
+    BadInMicrowave = true,
+    CantBeEaten = true,       /* Заменено CantEat на CantBeEaten для Build 42 */
+    IsCookable = true,
+    ReplaceOnCooked = ZombieButcher.GlueInThePot, /* Пространство имен оставлено без изменений */
+    WorldStaticModel = CookingPotPasta_Ground,
+  }
+
+  item GlueInThePot
+  {
+    DisplayName = Glue in the Pot,
+    Type = Normal,
+    Weight = 3.0,
+    Icon = Pot_Water, /* Обновлено для соответствия новым иконкам */
+    WorldStaticModel = CookingPotPasta_Ground,
+  }
+
+  item Fat
+  {
+    DisplayName = Fat,
+    DisplayCategory = Material,
+    Type = Normal,
+    Weight = 0.1,
+    Icon = Lard,
+    WorldStaticModel = Lard_Ground,
+  }
+
+  item BilletSoap
+  {
+    DisplayName = Pot with Billet for Soap,
+    Type = Food,
+    Weight = 5.0,
+    Icon = Pot_Water,
+    MinutesToCook = 30,
+    BadInMicrowave = true,
+    CantBeEaten = true,       /* Заменено CantEat */
+    IsCookable = true,
+    ReplaceOnCooked = ZombieButcher.CookedSoap,
+    WorldStaticModel = CookingPotPasta_Ground,
+  }
+
+  item CookedSoap
+  {
+    DisplayName = Cooked Soap,
+    Type = Normal,
+    Weight = 3.0,
+    Icon = Pot_Water,
+    WorldStaticModel = CookingPotPasta_Ground,
+  }
+
+  item PreparedFat
+  {
+    DisplayName = Prepared Fat for Candles,
+    Type = Food,
+    Weight = 2.5,
+    Icon = SaucepanFilled, /* Обновлено для соответствия новым иконкам */
+    MinutesToCook = 15,
+    BadInMicrowave = true,
+    CantBeEaten = true,
+    IsCookable = true,
+	StaticModel = WaterSaucepanPasta,
+    WorldStaticModel = WaterSaucepanPasta, /* Обновлено */
+  }
+
+  item BilletCandles
+  {
+    DisplayName = Billet for Candles,
+    Type = Normal,
+    Weight = 2.0,
+    Icon = Muffintray_Batter, /* Обновлено для соответствия новым иконкам */
+    WorldStaticModel = Muffintray_Batter,
+  }
+}
