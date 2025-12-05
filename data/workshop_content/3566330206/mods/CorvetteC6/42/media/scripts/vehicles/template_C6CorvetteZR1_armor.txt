@@ -1,0 +1,91 @@
+module Base
+{
+    model C6CorvetteZR1_Windshield_Armor
+    {
+        mesh = vehicles/Vehicles_C6CorvetteZR1|C6WindshieldArmor,
+        
+		shader = vehicle,
+		scale = 1,
+    }
+    model C6CorvetteZR1_WindshieldRear_Armor
+    {
+        mesh = vehicles/Vehicles_C6CorvetteZR1|RearWindshieldArmor,
+        
+		shader = vehicle,
+                invertX = FALSE,
+                static = FALSE,
+		scale = 1,
+    }
+	model C6CorvetteZR1_ProtectionWindowLeft
+    {
+        mesh = vehicles/Vehicles_C6CorvetteZR1|FrontLeftWindowArmor,
+        
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1,
+
+        
+    }
+	model C6CorvetteZR1_ProtectionWindowRight
+    {
+        mesh = vehicles/Vehicles_C6CorvetteZR1|FrontRightWindowArmor,
+	
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1,
+
+        
+    }
+
+
+    template vehicle C6CorvetteZR1_armor
+    {
+        template = ATA2Protection/part/ATA2ProtectionWindshield,
+        part ATA2ProtectionWindshield
+        {
+            model Default
+            {
+                file = C6CorvetteZR1_Windshield_Armor,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindshieldRear,
+        part ATA2ProtectionWindshieldRear
+        {
+            
+            parent = TrunkDoor,
+
+            model Default
+            {
+                file = C6CorvetteZR1_WindshieldRear_Armor,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontLeft,
+        part ATA2ProtectionWindowFrontLeft
+        {
+                        parent = DoorFrontLeft,
+
+			model Default
+            {
+                file = C6CorvetteZR1_ProtectionWindowLeft,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontRight,
+        part ATA2ProtectionWindowFrontRight
+        {
+                        parent = DoorFrontRight, 
+                       
+			model Default
+            {
+                file = C6CorvetteZR1_ProtectionWindowRight,
+            }
+        }       
+
+
+
+    }
+}

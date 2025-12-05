@@ -1,0 +1,91 @@
+module Base
+{
+    model C6CorvetteConvertible_Windshield_Armor
+    {
+        mesh = vehicles/Vehicles_C6CorvetteConvertible|C6WindshieldArmor,
+        
+		shader = vehicle,
+		scale = 1,
+    }
+    model C6CorvetteConvertible_WindshieldRear_Armor
+    {
+        mesh = vehicles/Vehicles_C6CorvetteConvertible|RearWindshieldArmor,
+        
+		shader = vehicle,
+                invertX = FALSE,
+                static = TRUE,
+		scale = 1,
+    }
+	model C6CorvetteConvertible_ProtectionWindowLeft
+    {
+        mesh = vehicles/Vehicles_C6CorvetteConvertible|FrontLeftWindowArmor,
+        
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1,
+
+        
+    }
+	model C6CorvetteConvertible_ProtectionWindowRight
+    {
+        mesh = vehicles/Vehicles_C6CorvetteConvertible|FrontRightWindowArmor,
+	
+	shader = vehicle,
+        invertX = FALSE,
+        static = FALSE,
+        scale = 1,
+
+        
+    }
+
+
+    template vehicle C6CorvetteConvertible_armor
+    {
+        template = ATA2Protection/part/ATA2ProtectionWindshield,
+        part ATA2ProtectionWindshield
+        {
+            model Default
+            {
+                file = C6CorvetteConvertible_Windshield_Armor,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindshieldRear,
+        part ATA2ProtectionWindshieldRear
+        {
+            
+            parent = TrunkDoor,
+
+            model Default
+            {
+                file = C6CorvetteConvertible_WindshieldRear_Armor,
+            }
+        }
+
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontLeft,
+        part ATA2ProtectionWindowFrontLeft
+        {
+                        parent = DoorFrontLeft,
+
+			model Default
+            {
+                file = C6CorvetteConvertible_ProtectionWindowLeft,
+            }
+        }
+        
+        template = ATA2Protection/part/ATA2ProtectionWindowFrontRight,
+        part ATA2ProtectionWindowFrontRight
+        {
+                        parent = DoorFrontRight, 
+                       
+			model Default
+            {
+                file = C6CorvetteConvertible_ProtectionWindowRight,
+            }
+        }       
+
+
+
+    }
+}

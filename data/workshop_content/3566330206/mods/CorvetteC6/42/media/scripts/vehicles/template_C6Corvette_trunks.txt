@@ -1,0 +1,54 @@
+module Base
+{
+	model C6Corvette_RoofRack
+	{
+		mesh = vehicles/Vehicles_C6Corvette|C6roofrack,
+        texture = Vehicles/whiteartic_C6Corvette,
+        shader = basicEffect,
+        scale = 1,
+	}
+
+    /******************** TRUNK ********************/
+
+	
+
+	/******************** ROOFRACK ********************/
+
+	
+
+    template vehicle C6Corvette_trunks
+	{
+		template = Trunk/part/TruckBed,
+		part TruckBed
+		{
+			itemType = Base.NormalTrunk,
+
+			container
+			{
+                capacity = 65,
+                conditionAffectsCapacity = false,
+				test = ATATuning.ContainerAccess.ATAInteractiveTruckBed,
+			}
+
+			lua
+            {
+                create = ATATuning.Create.DefaultATAInteractiveTrunk,
+                init = ATATuning.Init.ATAInteractiveTrunk,
+            }
+
+            
+            
+		}
+
+		template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkRoofRack,
+        part ATA2InteractiveTrunkRoofRack
+        {
+            area = ATARoof,
+            model ATARoofrack
+            {
+                file = C6Corvette_RoofRack,
+            }
+           
+        }
+	}
+}

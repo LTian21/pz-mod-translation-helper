@@ -1,0 +1,118 @@
+module Base
+{
+    model C6Corvette_WindowFL
+	{
+		mesh = vehicles/Vehicles_C6Corvette|FrontLeftWindow,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+		boneWeight = FrontLeftWindowBone 1.0,
+	}
+	model C6Corvette_WindowFR
+	{
+		mesh = vehicles/Vehicles_C6Corvette|FrontRightWindow,
+		shader = vehicle,
+		scale = 1,
+		static = FALSE,
+		boneWeight = FrontRightWindowBone 1.0,
+	}
+
+
+    template vehicle C6Corvette_windows
+    {
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+
+
+		part WindowFrontLeft
+		{
+			area = SeatFrontLeft,
+			
+			parent = DoorFrontLeft,
+                       
+
+			model WindowFrontLeft
+			{
+				file = C6Corvette_WindowFL,
+			}
+
+                        anim ClosedToOpen
+			{
+                                sound = VehicleWindowElectricOpen,
+				anim = WindowFrontLeft_open,
+				animate = FALSE,
+			}                        
+
+			anim Open
+			{
+                                sound = VehicleWindowElectricOpen,
+				anim = WindowFrontLeft_open,
+				
+			}
+               
+                        anim Close
+			{
+                                sound = VehicleWindowElectricOpen,
+				anim = WindowFrontLeft_open,
+				
+			}
+
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}		
+		}
+
+		part WindowFrontRight
+		{
+			area = SeatFrontRight,
+			
+			parent = DoorFrontRight,
+                        
+
+			model WindowFrontRight
+			{
+				file = C6Corvette_WindowFR,
+			}
+
+                        anim ClosedToOpen
+			{
+                                sound = VehicleWindowElectricOpen,
+				anim = WindowFrontRight_open,
+				animate = FALSE,
+			}                        
+
+			anim Open
+			{
+                                sound = VehicleWindowElectricOpen,
+				anim = WindowFrontRight_open,
+				
+			}
+               
+                        anim Close
+			{
+                                sound = VehicleWindowElectricOpen,
+				anim = WindowFrontRight_open,
+				
+			}
+
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+		}
+
+		
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+
+			window
+			{
+				openable = true,
+			}
+		}
+    }
+}

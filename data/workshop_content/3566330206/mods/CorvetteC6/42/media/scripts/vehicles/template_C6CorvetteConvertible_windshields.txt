@@ -1,0 +1,88 @@
+module Base
+{
+    model C6CorvetteConvertible_Windshield
+    {
+        mesh = vehicles/Vehicles_C6CorvetteConvertible|Windshield,
+        shader = vehicle,
+        scale = 1,
+    }
+    model C6CorvetteConvertible_WindshieldRear
+    {
+        mesh = vehicles/Vehicles_C6CorvetteConvertible|RearWindshield,
+        shader = vehicle,
+        static = TRUE,
+        scale = 1,
+   
+    }
+
+    template vehicle C6CorvetteConvertible_windshields
+    {
+        template = Windshield/part/Windshield,
+        template = Windshield/part/WindshieldRear,
+
+        part Windshield
+        {
+            model windshieldFront
+			{
+				file = C6CorvetteConvertible_Windshield,
+			}
+
+            area = Engine,
+            
+            category = bodywork,
+            mechanicRequireKey = false,
+
+			window
+			{
+				openable = false,
+			}
+
+            table install
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                requireUninstalled = ATA2ProtectionWindshield,
+			}
+        }
+
+        part WindshieldRear
+        {
+            
+  
+            model windshieldRear
+			{
+				file = C6CorvetteConvertible_WindshieldRear,
+			}
+
+            area = TruckBed,
+            
+            category = bodywork,
+            mechanicRequireKey = false,
+
+			window
+			{
+				openable = false,
+			}
+
+            table install
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                         requireInstalled = ATA2VisualWires,
+			}
+
+			table uninstall
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                requireUninstalled = ATA2ProtectionWindshieldRear,
+			}
+        }
+    }
+}

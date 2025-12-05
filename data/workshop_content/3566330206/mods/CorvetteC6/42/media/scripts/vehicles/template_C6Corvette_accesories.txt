@@ -1,0 +1,101 @@
+module Base
+{
+
+
+  model C6Corvette_Spare1
+	{
+		mesh = vehicles/Vehicles_C6Corvette|SpareTire2,
+        texture = Vehicles/C6TIRE1,
+		shader = basicEffect,
+		scale = 1.0,
+	}
+
+  model C6Corvette_Spoiler
+	{
+		mesh = vehicles/Vehicles_C6Corvette|Spoiler,
+		shader = vehicle,
+        static = TRUE,
+		scale = 1.0,
+
+	}
+
+ model C6Corvette_CustomSpoiler
+	{
+		mesh = vehicles/Vehicles_C6Corvette|CustomSpoiler,
+        texture = Vehicles/whiteartic_C6Corvette,
+		shader = vehicle,
+		 static = TRUE,
+		 scale = 1.0,
+
+	}
+
+
+    template vehicle C6Corvette_accesories
+    {
+        template = ATA2Visual/part/ATA2VisualSpoilerRear,
+        part ATA2VisualSpoilerRear 
+        {
+
+           area = TireRearLeft,
+           parent = TrunkDoor,
+
+            model Default
+            {
+                file = C6Corvette_Spoiler,
+            }
+        }
+
+        template = ATA2Visual/part/ATA2VisualSkirtsSide,
+        part ATA2VisualSkirtsSide
+        {
+            area = TireRearLeft,
+
+
+            model Default
+            {
+                file = C6Corvette_Spare1,
+            }
+        }
+
+        
+        template = ATA2Visual/part/ATAVisualLadder,
+        part ATAVisualLadder
+        {
+            area = TireRearLeft,
+
+
+            model Default
+            {
+                file = C6Corvette_CustomSpoiler,
+            }
+        }  
+       
+ 
+        part ATAVisual*
+        {
+            category = nodisplay,
+            specificItem = false,
+            itemType = Base.LightBulb,
+            mechanicRequireKey = false,
+            repairMechanic = false,
+
+            table install
+            {
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+
+            table uninstall
+            {
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+
+            lua
+            {
+                create = ATATuning.Create.Chance15,
+                init = ATATuning.Init.Default,
+            }
+        }
+    }
+}
