@@ -1,0 +1,55 @@
+module Base
+{
+    model C6CorvetteZR1_SeatFL
+	{
+		mesh = vehicles/Vehicles_C6CorvetteZR1|SeatFrontLeft,
+        texture = Vehicles/C6CorvetteZR1_interior,
+		shader = basicEffect,
+		scale = 1,
+	}
+	model C6CorvetteZR1_SeatFR
+	{
+		mesh = vehicles/Vehicles_C6CorvetteZR1|SeatFrontRight,
+        texture = Vehicles/C6CorvetteZR1_interior,
+		shader = basicEffect,
+		scale = 1,
+	}
+
+
+    template vehicle C6CorvetteZR1_seats
+    {
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+
+		
+		part SeatFrontLeft
+		{
+			model SeatFL
+			{
+				file = C6CorvetteZR1_SeatFL,
+			}
+
+			area = SeatFrontLeft,
+			
+		}
+
+		part SeatFrontRight
+		{
+			model SeatFR
+			{
+				file = C6CorvetteZR1_SeatFR,
+			}
+
+			area = SeatFrontRight,
+			
+		}
+
+		
+
+		part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+		}
+    }
+}

@@ -11,7 +11,7 @@ module LabRecipes
         SkillRequired = Electricity:3;Woodwork:2,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearWorkbench,
-		xpAward = Electricity:20;Woodwork:15,
+		xpAward = Electricity:20,
 
         inputs
         {
@@ -39,7 +39,7 @@ module LabRecipes
         SkillRequired = Doctor:3;MetalWelding:4;Electricity:4,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearWorkbench,
-		xpAward = Doctor:20;MetalWelding:25;Electricity:25,
+		xpAward = MetalWelding:25;Electricity:25,
 
         inputs
         {
@@ -71,7 +71,7 @@ module LabRecipes
         SkillRequired = Doctor:1;MetalWelding:3;Electricity:2,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearWorkbench,
-		xpAward = Doctor:10;MetalWelding:20;Electricity:15,
+		xpAward = MetalWelding:20;Electricity:15,
 
         inputs
         {
@@ -103,7 +103,7 @@ module LabRecipes
         SkillRequired = Doctor:2;Woodwork:2,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearWorkbench,
-		xpAward = Doctor:15;Woodwork:15,
+		xpAward = Doctor:15;Glassmaking:15,
 
         inputs
         {
@@ -131,7 +131,7 @@ module LabRecipes
         SkillRequired = Doctor:2;Electricity:2,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearWorkbench,
-		xpAward = Doctor:15;Electricity:15,
+		xpAward = Electricity:15,
 
         inputs
         {
@@ -187,7 +187,7 @@ module LabRecipes
         SkillRequired = Doctor:2;Woodwork:3,
 		NeedToBeLearn = True,
 		tags = AnySurfaceCraft;CanBeDoneFromFloor,
-		xpAward = Doctor:15;Woodwork:20,
+		xpAward = Woodwork:25,
 
         inputs
         {
@@ -239,7 +239,7 @@ module LabRecipes
 		tags = InHandCraft,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearWorkbench,
-		xpAward = MetalWelding:20,
+		xpAward = MetalWelding:25,
 
         inputs
         {
@@ -280,6 +280,7 @@ module LabRecipes
             item 12 [Base.Newspaper],
             item 1  [Base.Bucket] mode:keep,
             item 3  [Base.PaintWhite],
+            item 1  [Base.Pliers] mode:keep,
             item 1  [Base.Paintbrush] mode:keep flags[Prop1],
             item 1  [Base.Hammer] mode:keep,
         }
@@ -380,6 +381,7 @@ module LabRecipes
 		tags = InHandCraft,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearEasel,
+        xpAward = Doctor:15,
 
         inputs
         {
@@ -757,7 +759,6 @@ module LabRecipes
 		tags = InHandCraft,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearCentrifuge,
-        OnCreate = LabRecipes_AddMoreBloodComponents,
 		xpAward = Doctor:10,
 
         inputs
@@ -769,6 +770,7 @@ module LabRecipes
         {
             item 1 LabItems.CmpFlaskWithBloodCells,
 			item 1 LabItems.CmpFlaskWithBloodPlasma,
+            item 5 LabItems.LabTestTubeDirty,
         }
     }
 
@@ -780,7 +782,6 @@ module LabRecipes
 		tags = AnySurfaceCraft;InHandCraft,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearMicroscope,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:10,
 
         inputs
@@ -805,7 +806,6 @@ module LabRecipes
 		tags = AnySurfaceCraft;InHandCraft,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearChromatographWithComputer,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:12,
 
         inputs
@@ -831,13 +831,12 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = Making_Surface,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:26,
 
         inputs
         {
             item 1 [LabItems.LabSyringe],
-            item 1 [LabItems.LabFlaskWater],
+            item 1 [LabItems.LabFlaskWater] mode:destroy,
             item 1 [LabItems.CmpFlaskWithBloodPlasma],
             item 2 [LabItems.CmpFlaskWithLeukocytes],
             item 1 [LabItems.CmpFlaskWithSodiumHypochlorite],
@@ -845,7 +844,7 @@ module LabRecipes
         outputs
         {
             item 1 LabItems.CmpSyringeWithPlainVaccine,
-			item 4 LabItems.LabFlaskDirty,
+			item 5 LabItems.LabFlaskDirty,
         }
     }
 
@@ -858,13 +857,12 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = Making_Surface,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:26,
 
         inputs
         {
             item 1 [LabItems.LabSyringeReusable],
-            item 1 [LabItems.LabFlaskWater],
+            item 1 [LabItems.LabFlaskWater] mode:destroy,
             item 1 [LabItems.CmpFlaskWithBloodPlasma],
             item 2 [LabItems.CmpFlaskWithLeukocytes],
             item 1 [LabItems.CmpFlaskWithSodiumHypochlorite],
@@ -872,7 +870,7 @@ module LabRecipes
         outputs
         {
             item 1 LabItems.CmpSyringeReusableWithPlainVaccine,
-			item 4 LabItems.LabFlaskDirty,
+			item 5 LabItems.LabFlaskDirty,
         }
     }
 
@@ -885,13 +883,12 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = Making_Surface,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:35,
 
         inputs
         {
             item 1 [LabItems.LabSyringe],
-            item 2 [LabItems.LabFlaskWater],
+            item 2 [LabItems.LabFlaskWater] mode:destroy,
             item 2 [LabItems.CmpFlaskWithBloodPlasma],
             item 4 [LabItems.CmpFlaskWithLeukocytes],
             item 1 [LabItems.CmpFlaskWithSodiumHypochlorite],
@@ -899,7 +896,7 @@ module LabRecipes
         outputs
         {
             item 1 LabItems.CmpSyringeWithQualityVaccine,
-			item 4 LabItems.LabFlaskDirty,
+			item 9 LabItems.LabFlaskDirty,
         }
     }
 
@@ -912,13 +909,12 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = Making_Surface,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:35,
 
         inputs
         {
             item 1 [LabItems.LabSyringeReusable],
-            item 2 [LabItems.LabFlaskWater],
+            item 2 [LabItems.LabFlaskWater] mode:destroy,
             item 2 [LabItems.CmpFlaskWithBloodPlasma],
             item 4 [LabItems.CmpFlaskWithLeukocytes],
             item 1 [LabItems.CmpFlaskWithSodiumHypochlorite],
@@ -926,7 +922,7 @@ module LabRecipes
         outputs
         {
             item 1 LabItems.CmpSyringeReusableWithQualityVaccine,
-			item 4 LabItems.LabFlaskDirty,
+			item 9 LabItems.LabFlaskDirty,
         }
     }
 
@@ -939,13 +935,12 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = Making_Surface,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:40,
 
         inputs
         {
             item 1 [LabItems.LabSyringe],
-            item 3 [LabItems.LabFlaskWater],
+            item 3 [LabItems.LabFlaskWater] mode:destroy,
             item 3 [LabItems.CmpFlaskWithBloodPlasma],
             item 5 [LabItems.CmpFlaskWithLeukocytes],
             item 1 [LabItems.CmpTestTubeWithAntibodies],
@@ -954,7 +949,8 @@ module LabRecipes
         outputs
         {
             item 1 LabItems.CmpSyringeWithAdvancedVaccine,
-			item 4 LabItems.LabFlaskDirty,
+			item 12 LabItems.LabFlaskDirty,
+            item 1 LabItems.LabTestTubeDirty,
         }
     }
 
@@ -967,13 +963,12 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = Making_Surface,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:40,
 
         inputs
         {
             item 1 [LabItems.LabSyringeReusable],
-            item 3 [LabItems.LabFlaskWater],
+            item 3 [LabItems.LabFlaskWater] mode:destroy,
             item 3 [LabItems.CmpFlaskWithBloodPlasma],
             item 5 [LabItems.CmpFlaskWithLeukocytes],
             item 1 [LabItems.CmpTestTubeWithAntibodies],
@@ -982,7 +977,8 @@ module LabRecipes
         outputs
         {
             item 1 LabItems.CmpSyringeReusableWithAdvancedVaccine,
-			item 4 LabItems.LabFlaskDirty,
+			item 12 LabItems.LabFlaskDirty,
+            item 1 LabItems.LabTestTubeDirty,
         }
     }
 
@@ -995,13 +991,12 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = Making_Surface,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:100,
 
         inputs
         {
             item 1  [LabItems.LabSyringe],
-            item 4  [LabItems.LabFlaskWater],
+            item 4  [LabItems.LabFlaskWater] mode:destroy,
             item 4  [LabItems.CmpFlaskWithBloodPlasma],
             item 12 [LabItems.CmpTestTubeWithAntibodies],
             item 2  [LabItems.CmpFlaskWithSodiumHypochlorite],
@@ -1009,7 +1004,8 @@ module LabRecipes
         outputs
         {
             item 1 LabItems.CmpSyringeWithCure,
-			item 4 LabItems.LabFlaskDirty,
+			item 10 LabItems.LabFlaskDirty,
+            item 12 LabItems.LabTestTubeDirty,
         }
     }
 
@@ -1022,13 +1018,12 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = Making_Surface,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:100,
 
         inputs
         {
             item 1  [LabItems.LabSyringeReusable],
-            item 4  [LabItems.LabFlaskWater],
+            item 4  [LabItems.LabFlaskWater] mode:destroy,
             item 4  [LabItems.CmpFlaskWithBloodPlasma],
             item 12 [LabItems.CmpTestTubeWithAntibodies],
             item 2  [LabItems.CmpFlaskWithSodiumHypochlorite],
@@ -1036,7 +1031,8 @@ module LabRecipes
         outputs
         {
             item 1 LabItems.CmpSyringeReusableWithCure,
-			item 4 LabItems.LabFlaskDirty,
+			item 10 LabItems.LabFlaskDirty,
+            item 12 LabItems.LabTestTubeDirty,
         }
     }
 
@@ -1049,16 +1045,18 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = MixingBowl,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:8,
 
         inputs
         {
             item 1 [LabItems.ChHydrochloricAcidCan],
             item 1 [LabItems.ChSodiumHydroxideBag],
-            item 1 [LabItems.LabFlaskWater],
+            item 1 [LabItems.LabFlaskWater] mode:destroy,
             item 1 [LabItems.LabFlask],
-            item 1 [Base.Gloves_LeatherGloves;Base.Gloves_LeatherGlovesBlack] mode:keep,
+            item 1 [Base.Hat_BuildersRespirator] mode:keep,
+            item 1 [Base.Glasses_SafetyGoggles;Base.Glasses_SkiGoggles;Base.Glasses_SwimmingGoggles;Base.Glasses_Shooting] mode:keep,
+            item 1 [Base.Apron_Black;Base.Apron_White;Base.Apron_IceCream;Base.Apron_PileOCrepe;Base.Apron_PizzaWhirled;Base.Apron_Spiffos;Base.Apron_WhiteTEXTURE] mode:keep,
+            item 1 [Base.Gloves_Dish;Base.Gloves_LeatherGloves;Base.Gloves_LeatherGlovesBlack] mode:keep,
         }
         outputs
         {
@@ -1076,18 +1074,18 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = MixingBowl,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:8,
 
         inputs
         {
             item 1 [LabItems.ChAmmonia],
             item 1 [LabItems.ChSulfuricAcidCan],
-            item 1 [LabItems.LabFlaskWater],
+            item 1 [LabItems.LabFlaskWater] mode:destroy,
             item 1 [LabItems.LabFlask],
+            item 1 [Base.Hat_BuildersRespirator] mode:keep,
             item 1 [Base.Glasses_SafetyGoggles;Base.Glasses_SkiGoggles;Base.Glasses_SwimmingGoggles;Base.Glasses_Shooting] mode:keep,
             item 1 [Base.Apron_Black;Base.Apron_White;Base.Apron_IceCream;Base.Apron_PileOCrepe;Base.Apron_PizzaWhirled;Base.Apron_Spiffos;Base.Apron_WhiteTEXTURE] mode:keep,
-            item 1 [Base.Gloves_LeatherGloves;Base.Gloves_LeatherGlovesBlack] mode:keep,
+            item 1 [Base.Gloves_Dish;Base.Gloves_LeatherGloves;Base.Gloves_LeatherGlovesBlack] mode:keep,
         }
         outputs
         {
@@ -1105,16 +1103,16 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = MixingBowl,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:8,
 
         inputs
         {
             item 1 [LabItems.ChSulfuricAcidCan],
+            item 1 [LabItems.LabFlaskWater] mode:destroy,
             item 1 [LabItems.LabFlask],
             item 1 [Base.Glasses_SafetyGoggles;Base.Glasses_SkiGoggles;Base.Glasses_SwimmingGoggles;Base.Glasses_Shooting] mode:keep,
             item 1 [Base.Apron_Black;Base.Apron_White;Base.Apron_IceCream;Base.Apron_PileOCrepe;Base.Apron_PizzaWhirled;Base.Apron_Spiffos;Base.Apron_WhiteTEXTURE] mode:keep,
-            item 1 [Base.Gloves_LeatherGloves;Base.Gloves_LeatherGlovesBlack] mode:keep,
+            item 1 [Base.Gloves_Dish;Base.Gloves_LeatherGloves;Base.Gloves_LeatherGlovesBlack] mode:keep,
         }
         outputs
         {
@@ -1133,7 +1131,6 @@ module LabRecipes
         NeedToBeLearn = True,
 		timedAction = UseGrindingSlab,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 		xpAward = Doctor:20,
 
         inputs
@@ -1144,6 +1141,7 @@ module LabRecipes
         outputs
         {
             item 1 LabItems.CmpAlbuminPills,
+            item 2 LabItems.LabFlaskDirty,
         }
     }
 
@@ -1154,7 +1152,6 @@ module LabRecipes
         SkillRequired = Doctor:1,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 
         inputs
         {
@@ -1175,7 +1172,6 @@ module LabRecipes
 		timedAction = Making_Surface,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 
         inputs
         {
@@ -1184,6 +1180,7 @@ module LabRecipes
         outputs
         {
             item 1 Base.Bleach,
+            item 2 LabItems.LabFlaskDirty,
         }
     }
 
@@ -1195,7 +1192,6 @@ module LabRecipes
 		timedAction = Making_Surface,
         NeedToBeLearn = True,
         OnTest = LabRecipes_IsNearChemistrySet,
-        OnCreate = LabRecipes_AddDirtyVials,
 
         inputs
         {
@@ -1205,6 +1201,7 @@ module LabRecipes
         outputs
         {
             item 1 Base.Disinfectant,
+            item 1 LabItems.LabFlaskDirty,
         }
     }
 
@@ -1220,7 +1217,7 @@ module LabRecipes
         {
             item 1 [LabItems.LabTestTubeDirty] flags[Prop1],
 			item 1 [*] flags[Prop2],
-			-fluid 0.2 [Alcohol;Vodka;Whiskey],
+			-fluid 0.1 [Alcohol;Vodka;Whiskey],
         }
         outputs
         {
@@ -1239,7 +1236,8 @@ module LabRecipes
         inputs
         {
             item 1 [LabItems.LabTestTubeDirty] flags[Prop1],
-            item 1 [Base.Disinfectant],
+            item 1 [*],
+            -fluid 0.1 [Bleach],
         }
         outputs
         {
@@ -1259,7 +1257,7 @@ module LabRecipes
         {
             item 1 [LabItems.LabFlaskDirty] flags[Prop1],
 			item 1 [*],
-			-fluid 0.2 [Alcohol;Vodka;Whiskey],
+			-fluid 0.1 [Alcohol;Vodka;Whiskey],
         }
         outputs
         {
@@ -1278,7 +1276,8 @@ module LabRecipes
         inputs
         {
             item 1 [LabItems.LabFlaskDirty],
-            item 2 [Base.Disinfectant],
+            item 1 [*],
+            -fluid 0.1 [Bleach],
         }
         outputs
         {
@@ -1390,7 +1389,7 @@ module LabRecipes
         {
             item 1 [LabItems.LabSyringeReusableUsed] flags[Prop1],
 			item 1 [*] flags[Prop2],
-			-fluid 0.2 [Alcohol;Vodka;Whiskey],
+			-fluid 0.1 [Alcohol;Vodka;Whiskey],
         }
         outputs
         {
@@ -1409,7 +1408,8 @@ module LabRecipes
         inputs
         {
             item 1 [LabItems.LabSyringeReusableUsed] flags[Prop2],
-            item 1 [Base.Disinfectant] flags[Prop1],
+            item 1 [*] flags[Prop1],
+            -fluid 0.1 [Bleach],
         }
         outputs
         {

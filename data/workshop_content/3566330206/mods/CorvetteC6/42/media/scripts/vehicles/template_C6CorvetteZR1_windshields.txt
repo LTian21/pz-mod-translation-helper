@@ -1,0 +1,87 @@
+module Base
+{
+    model C6CorvetteZR1_Windshield
+    {
+        mesh = vehicles/Vehicles_C6CorvetteZR1|Windshield,
+        shader = vehicle,
+        scale = 1,
+    }
+    model C6CorvetteZR1_WindshieldRear
+    {
+        mesh = vehicles/Vehicles_C6CorvetteZR1|RearWindshield,
+        shader = vehicle,
+        static = FALSE,
+        scale = 1,
+        boneWeight = WindShieldBone 1.0,
+    }
+
+    template vehicle C6CorvetteZR1_windshields
+    {
+        template = Windshield/part/Windshield,
+        template = Windshield/part/WindshieldRear,
+
+        part Windshield
+        {
+            model windshieldFront
+			{
+				file = C6CorvetteZR1_Windshield,
+			}
+
+            area = Engine,
+            
+            category = bodywork,
+            mechanicRequireKey = false,
+
+			window
+			{
+				openable = false,
+			}
+
+            table install
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                requireUninstalled = ATA2ProtectionWindshield,
+			}
+        }
+
+        part WindshieldRear
+        {
+            
+            parent = TrunkDoor,
+            model windshieldRear
+			{
+				file = C6CorvetteZR1_WindshieldRear,
+			}
+
+            area = TruckBed,
+            
+            category = bodywork,
+            mechanicRequireKey = false,
+
+			window
+			{
+				openable = false,
+			}
+
+            table install
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+                skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+                requireUninstalled = ATA2ProtectionWindshieldRear,
+			}
+        }
+    }
+}
