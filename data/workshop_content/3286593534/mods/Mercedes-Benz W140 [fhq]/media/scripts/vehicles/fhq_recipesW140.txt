@@ -1,0 +1,43 @@
+module Base
+{
+    recipe Make Roll Cage
+    {
+       MetalBar=4,
+	   MetalPipe=6,
+       BlowTorch=3,
+       keep [Recipe.GetItemTypes.WeldingMask],
+
+       Result:fhqRollcageFull,
+       Time:260.0,
+       Category:Welding,
+       SkillRequired:MetalWelding=4;Mechanics=4;,
+       OnGiveXP:Recipe.OnGiveXP.MetalWelding25,
+    }
+	
+	recipe Make Roof Rack Type Sport
+    {
+       MetalBar=6,
+	   MetalPipe=6,
+	   SmallSheetMetal=4,
+       BlowTorch=5,
+       keep [Recipe.GetItemTypes.WeldingMask],
+
+       Result:fhqRoofRack3,
+       Time:260.0,
+       Category:Welding,
+       SkillRequired:MetalWelding=5;Mechanics=3;,
+       OnGiveXP:Recipe.OnGiveXP.MetalWelding25,
+    }
+	
+	fixing Fix Roof Rack Welding
+	{
+	   Require : fhqRoofRack3,
+	   GlobalItem : BlowTorch=2,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3,
+       Fixer : SmallSheetMetal=2; MetalWelding=3,
+	   Fixer : MetalBar=2; MetalWelding=3,
+	   Fixer : MetalPipe=2; MetalWelding=3,
+	}
+}

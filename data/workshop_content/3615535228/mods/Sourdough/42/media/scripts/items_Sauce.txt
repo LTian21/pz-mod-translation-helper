@@ -1,0 +1,100 @@
+module TPP
+{
+	item TomatoSauce
+    {
+        DisplayName = Tomato Sauce,
+		DisplayCategory = Food,
+        Type = Food,
+        Weight = 0.5,
+        Icon = TomatoSauce,
+        EatType = 2handbowl,
+		PourType = bowl,
+		EvolvedRecipe = Pizza:3;Soup:3;Stew:3;Omelette:3;Rice:3;Pasta:3;Stir fry:3;Pie:3;Salad:3;Sandwich:3,
+        Spice = true,
+		DaysFresh = 4,
+		DaysTotallyRotten = 12,
+        HungerChange = -24.0,
+        Calories = 36.0,
+        Carbohydrates = 9.0,
+        Lipids = 2.0,
+        Proteins = 1.3,
+        FoodType = NoExplicit,
+        StaticModel = BowlSoup_Ground,
+        WorldStaticModel = BowlSoup_Ground,
+        ReplaceOnUse = Base.Bowl,
+    }
+	
+	item CheeseStart
+	{
+		DisplayName = Cheese Start,
+		DisplayCategory = Food,
+		Weight = 1.5,
+		Type = Food,
+		Icon = MilkStarter,
+		CookingSound = BoilingFood,
+		EatType = Pot,
+        PourType = Pot,
+		IsCookable = true,
+		MinutesToCook = 10,
+        MinutesToBurn = 100,
+		DaysFresh = 2,
+        DaysTotallyRotten = 4,
+		HungerChange = -20,
+		ThirstChange = -20,
+		UnhappyChange = 80,
+		Calories = 1100.0,
+        Carbohydrates = 25.0,
+        Lipids = 10.5,
+        Proteins = 24.0,
+		CustomEatSound = EatingSoup,
+        StaticModel = PotMilkTPP,
+        WorldStaticModel = PotMilkTPP,
+		Tags = HasMetal,
+		ReplaceOnCooked = TPP.Sourmilk,
+	}
+	
+	item Sourmilk
+	{
+		DisplayName = Sour milk,
+		DisplayCategory = Food,
+		Weight = 1.5,
+		Type = Food,
+		Icon = MilkStarter,
+		StaticModel = PotMilkTPP,
+        WorldStaticModel = PotMilkTPP,
+		CantEat = True,
+		IsCookable = False,
+		Tooltip = I should strain it,
+	}
+	
+	item PotVinegar
+	{
+		DisplayName = Vinegar Starter,
+		DisplayCategory = Food,
+		Type = Food,
+		CantEat = true,
+		IsCookable = false,
+		Weight = 1,
+		Icon = MilkStarter,
+		DaysFresh = 5,
+		DaysTotallyRotten = 7,
+		StaticModel = PotMilkTPP,
+        WorldStaticModel = PotMilkTPP,
+		ReplaceOnRotten = TPP.FermentedVinegar,
+		Tooltip = I should let it ferment,
+	}
+	
+	item FermentedVinegar
+	{
+		DisplayName = Fermented Vinegar,
+		DisplayCategory = Food,
+		Type = Food,
+		CantEat = true,
+		IsCookable = False,
+		Weight = 0.5,
+		Icon = MilkStarter,
+		WorldStaticModel = PotMilkTPP,
+		ReplaceOnRotten = TPP.FermentedVinegar,
+		Tooltip = I should bottle it,
+	}
+}
