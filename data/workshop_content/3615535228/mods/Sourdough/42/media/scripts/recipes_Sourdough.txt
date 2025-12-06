@@ -1,0 +1,98 @@
+module TPP
+{
+	craftRecipe Prepare Sourdough Bread
+    {
+        timedAction = MixingBowl,
+        time = 120,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 1 tags[MixingUtensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 10 tags[Flour],
+            item 2 [Base.Salt;Base.SeasoningSalt],
+            item 1 [TPP.Sourdough],
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+        outputs
+        {
+            item 1 Base.BreadDough,
+        }
+    }
+	
+		craftRecipe Make Sourdough
+    {
+        timedAction = MixingBowl,
+        time = 60,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 5 tags[Flour],
+            item 1 tags[Spoon] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid],
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+        outputs
+        {
+            item 1 TPP.SourdoughFeeded,
+        }
+    }
+	
+	    craftRecipe Sourdough Pizza
+    {
+        timedAction = MixingBowl,
+        time = 100,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        NeedToBeLearn = true,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:3,
+        inputs
+        {
+            item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[Bowl] mode:keep,
+            item 6 tags[Flour],
+            item 1 [Base.Salt],
+            item 15 [Base.Cheese] flags[InheritFoodAge],
+            item 12 [TPP.TomatoSauce],
+            item 1 [TPP.Sourdough],
+            item 1 [*],
+            -fluid 0.5 categories[Water] mode:mixture,
+        }
+        outputs
+        {
+            item 1 Base.PizzaRecipe,
+        }
+    }
+	
+	craftRecipe Feed Sourdough
+    {
+        timedAction = MixingBowl,
+        time = 20,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 1 tags[MixingUtensil] mode:keep flags[MayDegradeVeryLight],
+            item 5 tags[Flour],
+            item 1 [TPP.Sourdough] mode:destroy,
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+        outputs
+        {
+            item 1 TPP.SourdoughFeeded,
+        }
+    }
+}
