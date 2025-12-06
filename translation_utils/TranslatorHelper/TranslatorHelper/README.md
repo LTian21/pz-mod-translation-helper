@@ -2,13 +2,12 @@
 
 ## 功能说明
 
-这是一个用于管理 GitHub 仓库翻译工作的控制台应用程序，使用 LibGit2Sharp 和 Octokit 14.0 实现。
+这是一个用于管理 GitHub 仓库翻译工作的控制台应用程序，使用 MinGit 和 Octokit 14.0 实现。
 
 ## 依赖项
 
 - .NET 9.0
-- LibGit2Sharp 0.31.0
-- LibGit2Sharp.NativeBinaries 2.0.323
+- MinGit (用于 Git 操作)
 - Octokit 14.0.0
 
 ## 使用方法
@@ -255,7 +254,7 @@ TranslatorHelper https://github.com/owner/repo ghp_xxxx translator translator@em
 
 ## 技术实现
 
-- 使用 **LibGit2Sharp** 进行本地 Git 操作（克隆、提交、推送等）
+- 使用 **MinGit** 进行本地 Git 操作（克隆、提交、推送等）
 - 使用 **Octokit 14.0** 进行 GitHub API 操作（检查 PR、创建 PR 等）
 - 支持 .NET 9.0 Native AOT 编译
 - 自动处理参数中的空格（通过引号包裹）

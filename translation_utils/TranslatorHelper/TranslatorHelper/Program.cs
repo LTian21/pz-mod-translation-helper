@@ -1,5 +1,4 @@
-﻿using LibGit2Sharp;
-using Octokit;
+﻿using Octokit;
 using System;
 using System.Collections.Generic;
 using System.IO;

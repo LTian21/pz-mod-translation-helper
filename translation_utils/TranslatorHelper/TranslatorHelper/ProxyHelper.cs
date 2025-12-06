@@ -116,64 +116,35 @@ public static class ProxyHelper
     }
 
     /// <summary>
-    /// 获取 LibGit2Sharp 的代理配置选项
-    /// LibGit2Sharp 使用 libgit2 native library，代理配置通过 ProxyOptions 设置
+    /// 获取 HTTP 代理 URL (用于 Git 环境变量)
     /// </summary>
-    public static LibGit2Sharp.ProxyOptions GetLibGit2ProxyOptions()
+    public static string? GetHttpProxyUrl()
     {
-        var proxyOptions = new LibGit2Sharp.ProxyOptions();
-        
         try
         {
             var systemProxy = DetectSystemProxy();
             
             if (systemProxy != null)
             {
-                // 测试 GitHub API 地址的代理
                 var testUri = new Uri("https://api.github.com");
                 var proxyUri = systemProxy.GetProxy(testUri);
                 
                 if (proxyUri != null && proxyUri != testUri)
                 {
-                    // LibGit2Sharp 期望的代理 URL 格式
-                    string proxyUrl = proxyUri.ToString();
-                    
-                    // 检查是否需要认证
-                    var credentials = systemProxy.Credentials?.GetCredential(testUri, "Basic");
-                    
-                    if (credentials != null && !string.IsNullOrEmpty(credentials.UserName))
-                    {
-                        // 带认证的代理 URL 格式: http://username:password@host:port
-                        var uriBuilder = new UriBuilder(proxyUri);
-                        uriBuilder.UserName = credentials.UserName;
-                        uriBuilder.Password = credentials.Password;
-                        proxyUrl = uriBuilder.ToString();
-                        Console.WriteLine($"[代理] LibGit2Sharp 使用带认证的代理: {proxyUri.Host}:{proxyUri.Port}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"[代理] LibGit2Sharp 使用代理: {proxyUrl}");
-                    }
-                    
-                    proxyOptions.Url = proxyUrl;
-                }
-                else
-                {
-                    Console.WriteLine("[代理] LibGit2Sharp 使用直连（无需代理）");
+                    return proxyUri.ToString();
                 }
             }
-            else
-            {
-                Console.WriteLine("[代理] LibGit2Sharp 使用直连（未检测到代理）");
-            }
+
+            // Fallback to environment variables
+            return Environment.GetEnvironmentVariable("HTTPS_PROXY") 
+                ?? Environment.GetEnvironmentVariable("https_proxy")
+                ?? Environment.GetEnvironmentVariable("HTTP_PROXY")
+                ?? Environment.GetEnvironmentVariable("http_proxy");
         }
-        catch (Exception ex)
+        catch
         {
-            Console.WriteLine($"[代理] 配置 LibGit2Sharp 代理时出错: {ex.Message}");
-            Console.WriteLine("[代理] LibGit2Sharp 将尝试直连");
+            return null;
         }
-        
-        return proxyOptions;
     }
 
     /// <summary>

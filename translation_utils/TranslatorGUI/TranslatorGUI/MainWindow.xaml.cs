@@ -52,6 +52,48 @@ namespace 翻译工具
         private bool _warnedRevocationUnverified;
         private bool _warnedSslConnectionFailed;
 
+        // PAT 解密进度
+        private int _patDecryptionProgress = 0;
+
+        // 本地化百分比提示（用于平滑过渡）
+        private string _localizedPatDecryptProgress = string.Empty;
+
+        // 正则表达式：匹配 0-100 的百分比
+        private static readonly Regex ProgressPercentRegex = new Regex(@"(\d{1,3})\s*%", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly Regex DoneRegex = new Regex(@"\bdone\.?\b", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+        // Recognize git progress phrases
+        private static readonly string[] GitProgressPhrases = new[]
+        {
+            "Counting objects",
+            "Compressing objects",
+            "Receiving objects",
+            "Resolving deltas",
+            "Enumerating objects",
+            "Writing objects"
+        };
+
+        private static readonly Regex GitReceivingRegex = new Regex(
+            @"(?i)receiving objects\s*:\s*(\d{1,3})%\s*\(([^)]+)\)\s*,\s*([\d\.]+)\s*([kmg]?i?B)\s*\|\s*([\d\.]+)\s*([kmg]?i?B)/s",
+            RegexOptions.Compiled);
+
+        private static readonly Regex GitUpdatingRegex = new Regex(@"(?i)updating files(.*)", RegexOptions.Compiled);
+
+        private bool IsGitProgressLine(string line)
+        {
+            if (string.IsNullOrWhiteSpace(line)) return false;
+            foreach (var phrase in GitProgressPhrases)
+            {
+                if (line.IndexOf(phrase, StringComparison.OrdinalIgnoreCase) >= 0)
+                    return true;
+            }
+            if (line.IndexOf("remote:", StringComparison.OrdinalIgnoreCase) >= 0 && ProgressPercentRegex.IsMatch(line))
+                return true;
+            if (GitUpdatingRegex.IsMatch(line)) return true;
+            if (GitReceivingRegex.IsMatch(line)) return true;
+            return ProgressPercentRegex.IsMatch(line);
+        }
+
         // MainWindow 构造函数
         public MainWindow()
         {
@@ -596,172 +638,6 @@ namespace 翻译工具
             return false;
         }
 
-        private async Task<int> RunHelperAsync(string operation, string? commitMessage)
-        {
-            // 禁用按钮，防止并发操作
-            if (_isRunning)
-            {
-                AppendOutput("已有 CLI 操作进行中，请等待完成。");
-                return -1;
-            }
-
-            _isRunning = true;
-            DisableAllButtons();
-
-            // 显示进度窗口
-            _progressWindow = new ProgressWindow(this);
-            _progressWindow.Show();
-
-            int exitCode = -1;
-            try
-            {
-                var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
-                if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-
-                _config.LocalPath = basePath;
-                SaveConfig();
-
-                // Ensure we pass the repository root folder to the helper (basePath/pz-mod-translation-helper)
-                var repoRoot = Path.Combine(basePath, "pz-mod-translation-helper");
-
-                var exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "TranslatorHelper.exe");
-                if (!File.Exists(exePath))
-                {
-                    AppendOutput($"无法找到 TranslatorHelper.exe: {exePath}");
-                    return -1;
-                }
-
-                var argsBuilder = new StringBuilder();
-                argsBuilder.Append(EscapeArg(RepoUrl));
-                argsBuilder.Append(' ').Append(EscapeArg(PatToken));
-                argsBuilder.Append(' ').Append(EscapeArg(_config.UserName ?? string.Empty));
-                argsBuilder.Append(' ').Append(EscapeArg(_config.UserEmail ?? string.Empty));
-                // 语言后缀，来自配置，默认简体中文 CN
-                var langSuffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
-                argsBuilder.Append(' ').Append(EscapeArg(langSuffix));
-                // 操作
-                argsBuilder.Append(' ').Append(EscapeArg(operation));
-                // 始终附带占位的提交说明，便于传递本地路径
-                var commitArg = commitMessage ?? string.Empty;
-                argsBuilder.Append(' ').Append(EscapeArg(commitArg));
-                // 传递仓库根目录作为最后一个参数（本地路径）
-                argsBuilder.Append(' ').Append(EscapeArg(repoRoot));
-
-                // Determine encoding for child process output. Prefer GBK (code page 936) on Chinese Windows,
-                // fall back to Encoding.Default if unavailable.
-                Encoding childEncoding;
-                try
-                {
-                    childEncoding = Encoding.GetEncoding(936);
-                }
-                catch
-                {
-                    childEncoding = Encoding.Default;
-                }
-
-                var psi = new ProcessStartInfo(exePath, argsBuilder.ToString())
-                {
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                    StandardOutputEncoding = childEncoding,
-                    StandardErrorEncoding = childEncoding
-                };
-
-                // 脱敏参数日志
-                var maskedToken = MaskPatToken(PatToken);
-                var maskedArgsBuilder = new StringBuilder();
-                maskedArgsBuilder.Append(EscapeArg(RepoUrl));
-                maskedArgsBuilder.Append(' ').Append(EscapeArg(maskedToken));
-                maskedArgsBuilder.Append(' ').Append(EscapeArg(_config.UserName ?? string.Empty));
-                maskedArgsBuilder.Append(' ').Append(EscapeArg(_config.UserEmail ?? string.Empty));
-                maskedArgsBuilder.Append(' ').Append(EscapeArg(langSuffix));
-                maskedArgsBuilder.Append(' ').Append(EscapeArg(operation));
-                maskedArgsBuilder.Append(' ').Append(EscapeArg(commitArg));
-                maskedArgsBuilder.Append(' ').Append(EscapeArg(repoRoot));
-
-                AppendOutput($"运行: {exePath} {maskedArgsBuilder}");
-
-                try
-                {
-                    using var proc = new Process { StartInfo = psi, EnableRaisingEvents = true };
-
-                    proc.OutputDataReceived += (s, e) => { if (e.Data != null) AppendOutput(e.Data); };
-                    proc.ErrorDataReceived += (s, e) => { if (e.Data != null) AppendOutput(e.Data); };
-
-                    proc.Start();
-                    proc.BeginOutputReadLine();
-                    proc.BeginErrorReadLine();
-
-                    await Task.Run(() => proc.WaitForExit());
-                    
-                    exitCode = proc.ExitCode;
-                    if (exitCode != 0)
-                    {
-                        AppendOutput($"操作完成，退出码: {exitCode}");
-                        
-                        // 如果退出码为1，显示错误对话框
-                        if (exitCode == 1)
-                        {
-                            Dispatcher.BeginInvoke(new Action(() =>
-                            {
-                                System.Windows.MessageBox.Show(
-                                    this,
-                                    $"执行操作 '{operation}' 时遇到错误（退出码：{exitCode}）\n\n请查看输出窗口了解详细信息。",
-                                    "操作遇到错误",
-                                    System.Windows.MessageBoxButton.OK,
-                                    System.Windows.MessageBoxImage.Warning);
-                            }));
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    AppendOutput($"执行失败: {ex.Message}");
-                    exitCode = -1;
-                }
-            }
-            finally
-            {
-                // 关闭并销毁进度窗口
-                try
-                {
-                    if (_progressWindow != null)
-                    {
-                        _progressWindow.Close();
-                        _progressWindow = null;
-                    }
-                }
-                catch { }
-
-                _isRunning = false;
-                EnableAllButtons();
-            }
-            
-            return exitCode;
-        }
-
-        // 将PAT token脱敏，只显示前缀和后10位
-        private static string MaskPatToken(string token)
-        {
-            if (string.IsNullOrEmpty(token))
-                return "\"\"";
-
-            if (token.Length <= 10)
-                return "github_pat_***";
-
-            string lastTen = token.Substring(token.Length - 10);
-            return $"github_pat_***{lastTen}";
-        }
-
-        private static string EscapeArg(string s)
-        {
-            if (string.IsNullOrEmpty(s)) return "\"\"";
-            // Simple escape: wrap in quotes and escape inner quotes
-            return "\"" + s.Replace("\"", "\\\"") + "\"";
-        }
-
         private void AppendOutput(string line)
         {
             if (line == null) return;
@@ -1093,7 +969,7 @@ namespace 翻译工具
                 Dispatcher.BeginInvoke(new Action(() =>
                 {
                     MessageBox.Show(this,
-                        "无法验证证书的吊销状态，可能是因为您所在的网络环境阻止了访问证书验证服务，或者您的网络管理员伪造了证书以监视网络通信。建议您使用手机热点或更换网络环境。\n\n特别提醒：如果您更换网络环境仍然出现此提示，且您安装了由您组织提供的VPN程序用于接入组织内网，那么该错误可能是由于该VPN程序向您的系统写入了伪造的根证书导致的。目前已证实的是，国内深信服(Sangfor)公司提供的EasyConnect程序会按政企客户要求静默写入伪造的根证书用于监控通信，而该公司的产品在国内政企中应用广泛。解决方法是卸载程序并吊销所有来自深信服(Sangfor)的证书，同时将该机构列入不信任名单。其它可能的公司包括360等国内安全厂商。",
+                        "无法验证证书的吊销状态，可能是因为您所在的网络环境阻止了访问证书验证服务，或者您的网络管理员伪造了证书以监视网络通信。建议您使用手机 hotspot 或更换网络环境。\n\n特别提醒：如果您更换网络环境仍然出现此提示，且您安装了由您组织提供的VPN程序用于接入组织内网，那么该错误可能是由于该VPN程序向您的系统写入了伪造的根证书导致的。目前已证实的是，国内深信服(Sangfor)公司提供的EasyConnect程序会按政企客户要求静默写入伪造的根证书用于监控通信，而该公司的产品在国内政企中应用广泛。解决方法是卸载程序并吊销所有来自深信服(Sangfor)的证书，同时将该机构列入不信任名单。其它可能的公司包括360等国内安全厂商。",
                         "网络安全提示",
                         MessageBoxButton.OK,
                         MessageBoxImage.Warning);
@@ -1112,6 +988,229 @@ namespace 翻译工具
                         MessageBoxImage.Information);
                 }));
             }
+        }
+
+        private static string MaskPatToken(string token)
+        {
+            if (string.IsNullOrEmpty(token))
+                return "\"\"";
+            if (token.Length <= 10)
+                return "github_pat_***";
+            string lastTen = token.Substring(token.Length - 10);
+            return $"github_pat_***{lastTen}";
+        }
+
+        private static string EscapeArg(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return "\"\"";
+            return "\"" + s.Replace("\"", "\\\"") + "\"";
+        }
+
+        private async Task<int> RunHelperAsync(string operation, string? commitMessage)
+        {
+            if (_isRunning)
+            {
+                AppendOutput("已有 CLI 操作进行中，请等待完成。");
+                return -1;
+            }
+
+            _isRunning = true;
+            DisableAllButtons();
+
+            _progressWindow = new ProgressWindow(this);
+            _progressWindow.SetIndeterminate("命令正在执行，请稍候...");
+            _progressWindow.Show();
+
+            int exitCode = -1;
+            try
+            {
+                var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
+                if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+                _config.LocalPath = basePath;
+                SaveConfig();
+
+                var repoRoot = Path.Combine(basePath, "pz-mod-translation-helper");
+                var exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "TranslatorHelper.exe");
+                if (!File.Exists(exePath))
+                {
+                    AppendOutput($"无法找到 TranslatorHelper.exe: {exePath}");
+                    return -1;
+                }
+
+                var argsBuilder = new StringBuilder();
+                argsBuilder.Append(EscapeArg(RepoUrl));
+                argsBuilder.Append(' ').Append(EscapeArg(PatToken));
+                argsBuilder.Append(' ').Append(EscapeArg(_config.UserName ?? string.Empty));
+                argsBuilder.Append(' ').Append(EscapeArg(_config.UserEmail ?? string.Empty));
+                var langSuffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+                argsBuilder.Append(' ').Append(EscapeArg(langSuffix));
+                argsBuilder.Append(' ').Append(EscapeArg(operation));
+                var commitArg = commitMessage ?? string.Empty;
+                argsBuilder.Append(' ').Append(EscapeArg(commitArg));
+                argsBuilder.Append(' ').Append(EscapeArg(repoRoot));
+
+                Encoding childEncoding;
+                try { childEncoding = Encoding.GetEncoding(936); } catch { childEncoding = Encoding.Default; }
+
+                var psi = new ProcessStartInfo(exePath, argsBuilder.ToString())
+                {
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    StandardOutputEncoding = childEncoding,
+                    StandardErrorEncoding = childEncoding
+                };
+
+                var maskedToken = MaskPatToken(PatToken);
+                var maskedArgsBuilder = new StringBuilder();
+                maskedArgsBuilder.Append(EscapeArg(RepoUrl));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(maskedToken));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(_config.UserName ?? string.Empty));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(_config.UserEmail ?? string.Empty));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(langSuffix));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(operation));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(commitArg));
+                maskedArgsBuilder.Append(' ').Append(EscapeArg(repoRoot));
+
+                AppendOutput($"运行: {exePath} {maskedArgsBuilder}");
+
+                try
+                {
+                    using var proc = new Process { StartInfo = psi, EnableRaisingEvents = true };
+
+                    proc.OutputDataReceived += (s, e) =>
+                    {
+                        if (e.Data != null)
+                        {
+                            bool isProgress = IsGitProgressLine(e.Data);
+                            if (isProgress)
+                            {
+                                if (DoneRegex.IsMatch(e.Data))
+                                {
+                                    AppendOutput(e.Data.Trim());
+                                }
+                                else
+                                {
+                                    var recv = GitReceivingRegex.Match(e.Data);
+                                    if (recv.Success && int.TryParse(recv.Groups[1].Value, out int pct))
+                                    {
+                                        string countInfo = recv.Groups[2].Value; // 90365/90365
+                                        string sizeNum = recv.Groups[3].Value;   // 138.79
+                                        string sizeUnit = recv.Groups[4].Value;  // MiB
+                                        string speedNum = recv.Groups[5].Value;  // 10.82
+                                        string speedUnit = recv.Groups[6].Value; // MiB
+                                        string extra = $"{sizeNum} {sizeUnit} | {speedNum} {speedUnit}/s";
+                                        string desc = $"正在接收对象（{countInfo}）";
+                                        _progressWindow?.UpdateProgressWithInfo(Math.Max(0, Math.Min(100, pct)), desc, extra);
+                                    }
+                                    else if (GitUpdatingRegex.IsMatch(e.Data))
+                                    {
+                                        _progressWindow?.SetIndeterminate("正在更新文件");
+                                    }
+                                    else
+                                    {
+                                        var m = ProgressPercentRegex.Match(e.Data);
+                                        if (m.Success && int.TryParse(m.Groups[1].Value, out int pct2))
+                                        {
+                                            _progressWindow?.UpdateProgress(Math.Max(0, Math.Min(100, pct2)), LocalizeGitMessage(e.Data));
+                                        }
+                                        else
+                                        {
+                                            _progressWindow?.SetIndeterminate(LocalizeGitMessage(e.Data));
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // Normalize indentation for git remote lines without percentage
+                                string text = e.Data;
+                                if (text.StartsWith("Git: remote:", StringComparison.OrdinalIgnoreCase)
+                                    && !ProgressPercentRegex.IsMatch(text))
+                                {
+                                    text = "  " + text;
+                                }
+                                AppendOutput(text);
+                            }
+                        }
+                    };
+
+                    proc.ErrorDataReceived += (s, e) =>
+                    {
+                        if (e.Data != null)
+                        {
+                            AppendOutput(e.Data);
+                        }
+                    };
+
+                    proc.Start();
+                    proc.BeginOutputReadLine();
+                    proc.BeginErrorReadLine();
+
+                    await Task.Run(() => proc.WaitForExit());
+
+                    exitCode = proc.ExitCode;
+                    if (exitCode != 0)
+                    {
+                        AppendOutput($"操作完成，退出码: {exitCode}");
+                        if (exitCode == 1)
+                        {
+                            Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                System.Windows.MessageBox.Show(
+                                    this,
+                                    $"执行操作 '{operation}' 时遇到错误（退出码：{exitCode}）\n\n请查看输出窗口了解详细信息。",
+                                    "操作遇到错误",
+                                    System.Windows.MessageBoxButton.OK,
+                                    System.Windows.MessageBoxImage.Warning);
+                            }));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    AppendOutput($"执行失败: {ex.Message}");
+                    exitCode = -1;
+                }
+            }
+            finally
+            {
+                try
+                {
+                    if (_progressWindow != null)
+                    {
+                        _progressWindow.Close();
+                        _progressWindow = null;
+                    }
+                }
+                catch { }
+
+                _isRunning = false;
+                EnableAllButtons();
+            }
+
+            return exitCode;
+        }
+
+        private string LocalizeGitMessage(string line)
+        {
+            var l = line?.Trim() ?? string.Empty;
+            if (string.IsNullOrEmpty(l)) return string.Empty;
+            if (l.Contains("Counting objects", StringComparison.OrdinalIgnoreCase)) return "正在统计对象";
+            if (l.Contains("Compressing objects", StringComparison.OrdinalIgnoreCase)) return "正在压缩对象";
+            if (l.Contains("Receiving objects", StringComparison.OrdinalIgnoreCase)) return "正在接收对象";
+            if (l.Contains("Resolving deltas", StringComparison.OrdinalIgnoreCase)) return "正在解析增量变更";
+            if (l.Contains("Enumerating objects", StringComparison.OrdinalIgnoreCase)) return "正在枚举对象";
+            if (l.Contains("Writing objects", StringComparison.OrdinalIgnoreCase)) return "正在写入对象";
+            if (GitUpdatingRegex.IsMatch(l)) return "正在更新文件";
+            if (l.IndexOf("remote:", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                var msg = l.Substring(l.IndexOf(':') + 1).Trim();
+                return string.IsNullOrEmpty(msg) ? "远程消息" : $"远程: {msg}";
+            }
+            return l;
         }
     }
 }
