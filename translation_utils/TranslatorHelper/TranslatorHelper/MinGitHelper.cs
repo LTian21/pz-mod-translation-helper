@@ -11,24 +11,52 @@ partial class Program
     /// </summary>
     static class MinGitHelper
     {
+        // Cache detected git path and info so detection message can be printed once at startup
+        private static string? _cachedGitPath = null;
+        private static string? _cachedGitInfo = null;
+
         /// <summary>
         /// Gets the path to git.exe (either MinGit or system git)
+        /// This method no longer prints detection info to the console; use GetDetectedGitInfo() to retrieve a one-time message.
         /// </summary>
         private static string GetGitExecutablePath()
         {
+            if (!string.IsNullOrEmpty(_cachedGitPath))
+            {
+                return _cachedGitPath!;
+            }
+
             // First try MinGit location relative to current executable
             string exeDir = AppContext.BaseDirectory;
-            string mingitPath = Path.Combine(exeDir, "MinGit", "cmd", "git.exe");
-            
+            // Go up one level from the executable's directory
+            string parentDir = Path.GetFullPath(Path.Combine(exeDir, ".."));
+            string mingitPath = Path.Combine(parentDir, "MinGit", "cmd", "git.exe");
+
             if (File.Exists(mingitPath))
             {
-                Console.WriteLine($"[信息] 使用 MinGit: {mingitPath}");
-                return mingitPath;
+                _cachedGitPath = mingitPath;
+                _cachedGitInfo = $"使用 MinGit: {mingitPath}";
+                return _cachedGitPath;
             }
 
             // Fallback to system git
-            Console.WriteLine("[信息] 未找到 MinGit，尝试使用系统 Git");
-            return "git";
+            _cachedGitPath = "git";
+            _cachedGitInfo = "未找到 MinGit，尝试使用系统 Git";
+            return _cachedGitPath;
+        }
+
+        /// <summary>
+        /// Get one-time detection info string for printing at startup.
+        /// Calling this will ensure detection has been performed.
+        /// </summary>
+        public static string GetDetectedGitInfo()
+        {
+            if (_cachedGitInfo == null)
+            {
+                // Ensure detection runs
+                _ = GetGitExecutablePath();
+            }
+            return _cachedGitInfo ?? string.Empty;
         }
 
         /// <summary>
@@ -76,7 +104,7 @@ partial class Program
                 if (e.Data != null)
                 {
                     outputBuilder.AppendLine(e.Data);
-                    Console.WriteLine($"  Git: {e.Data}");
+                    Console.WriteLine($"[Git] {e.Data}");
                 }
             };
 
@@ -85,7 +113,42 @@ partial class Program
                 if (e.Data != null)
                 {
                     errorBuilder.AppendLine(e.Data);
-                    Console.WriteLine($"  Git (错误): {e.Data}");
+                    var line = e.Data;
+                    var trimmed = line.Trim();
+                    var lower = trimmed.ToLowerInvariant();
+
+                    // Common Git progress / informational prefixes that are written to stderr
+                    bool isProgress = trimmed.StartsWith("remote:", StringComparison.OrdinalIgnoreCase)
+                        || trimmed.StartsWith("cloning into", StringComparison.OrdinalIgnoreCase)
+                        || trimmed.StartsWith("receiving objects:", StringComparison.OrdinalIgnoreCase)
+                        || trimmed.StartsWith("resolving deltas:", StringComparison.OrdinalIgnoreCase)
+                        || trimmed.StartsWith("counting objects:", StringComparison.OrdinalIgnoreCase)
+                        || trimmed.StartsWith("compressing objects:", StringComparison.OrdinalIgnoreCase)
+                        || trimmed.StartsWith("already on", StringComparison.OrdinalIgnoreCase)
+                        || trimmed.IndexOf("-> fetch_head", StringComparison.OrdinalIgnoreCase) >= 0
+                        || trimmed.Equals("already up to date.", StringComparison.OrdinalIgnoreCase)
+                        || trimmed.StartsWith("warning:", StringComparison.OrdinalIgnoreCase);
+
+                    // Heuristic: consider a stderr line an actual error when it contains these keywords
+                    bool isErrorLine = lower.Contains("fatal")
+                        || lower.Contains("error")
+                        || lower.Contains("failed")
+                        || lower.Contains("permission denied")
+                        || lower.Contains("authentication")
+                        || lower.Contains("not a git repository")
+                        || lower.Contains("could not")
+                        || lower.Contains("unable to")
+                        || lower.Contains("conflict");
+
+                    if (isErrorLine && !isProgress)
+                    {
+                        Console.WriteLine($"[Git] (错误): {e.Data}");
+                    }
+                    else
+                    {
+                        // Treat as informational/progress output
+                        Console.WriteLine($"[Git] {e.Data}");
+                    }
                 }
             };
 
@@ -182,9 +245,19 @@ partial class Program
             {
                 Console.WriteLine($"[开始] 拉取并合并更新");
 
-                var pullArgs = branch != null 
-                    ? $"pull {remote} {branch}" 
-                    : $"pull {remote}";
+                // If branch is not specified, get current branch
+                if (branch == null)
+                {
+                    branch = await GetCurrentBranchAsync(repoPath);
+                    if (string.IsNullOrEmpty(branch))
+                    {
+                        Console.WriteLine("[错误] 无法获取当前分支名称");
+                        return false;
+                    }
+                    Console.WriteLine($"[信息] 当前分支: {branch}");
+                }
+
+                var pullArgs = $"pull {remote} {branch}";
 
                 var (exitCode, output, error) = await ExecuteGitCommandAsync(pullArgs, repoPath);
 
@@ -195,7 +268,7 @@ partial class Program
                 }
                 else if (error.Contains("CONFLICT") || output.Contains("CONFLICT"))
                 {
-                    Console.WriteLine("[错误] 拉取失败: 检测到合并冲突");
+                    Console.WriteLine("[错误] 拉取失败: 存在合并冲突");
                     Console.WriteLine("[提示] 请联系技术人员处理冲突");
                     return false;
                 }
