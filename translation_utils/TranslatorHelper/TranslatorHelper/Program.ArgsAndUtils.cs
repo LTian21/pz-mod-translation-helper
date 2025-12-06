@@ -6,7 +6,6 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Octokit;
-using LibGit2Sharp;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Net.Http;
