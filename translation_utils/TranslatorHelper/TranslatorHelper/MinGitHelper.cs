@@ -72,18 +72,41 @@ partial class Program
         }
 
         /// <summary>
+        /// Add common safe config flags for predictable non-interactive behavior.
+        /// </summary>
+        private static string BuildSafeConfigArgs()
+        {
+            // Disable interactive helpers/pager/LFS filter at the git config level per-invocation.
+            return string.Join(" ", new[]
+            {
+                "-c credential.helper=",
+                "-c core.pager=",
+                "-c filter.lfs.required=false"
+            });
+        }
+
+        /// <summary>
         /// Executes a git command and returns the output
         /// </summary>
         private static async Task<(int exitCode, string output, string error)> ExecuteGitCommandAsync(
-            string arguments, 
+            string arguments,
             string workingDirectory = null,
-            string input = null)
+            string input = null,
+            string pat = null)
         {
             var gitPath = GetGitExecutablePath();
+
+            // Prepend auth and safety configs once here so callers don't need to remember.
+            var authArg = string.IsNullOrEmpty(pat) ? string.Empty : BuildAuthConfigArg(pat);
+            var safeArgs = BuildSafeConfigArgs();
+            var finalArgs = string.IsNullOrEmpty(authArg)
+                ? $"{safeArgs} {arguments}".Trim()
+                : $"{authArg} {safeArgs} {arguments}".Trim();
+
             var startInfo = new ProcessStartInfo
             {
                 FileName = gitPath,
-                Arguments = arguments,
+                Arguments = finalArgs,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -107,9 +130,9 @@ partial class Program
                 Console.WriteLine($"[信息] Git 使用代理: {proxyUrl}");
             }
 
-            // Allow interactive credential prompts when PAT is insufficient
-            // Remove explicit disabling to let MinGit prompt if needed
-            // startInfo.EnvironmentVariables["GIT_TERMINAL_PROMPT"] = "0";
+            // Enforce non-interactive behavior; never pop credential dialogs.
+            startInfo.EnvironmentVariables["GIT_TERMINAL_PROMPT"] = "0";
+            startInfo.EnvironmentVariables["GIT_ASKPASS"] = "echo";
 
             using var process = new Process { StartInfo = startInfo };
             var outputBuilder = new StringBuilder();
@@ -119,8 +142,14 @@ partial class Program
             {
                 if (e.Data != null)
                 {
-                    outputBuilder.AppendLine(e.Data);
-                    Console.WriteLine($"[Git] {e.Data}");
+                    var line = e.Data;
+                    // Mask PAT if ever echoed by lower layers
+                    if (!string.IsNullOrEmpty(pat) && line.Contains(pat))
+                    {
+                        line = line.Replace(pat, "***");
+                    }
+                    outputBuilder.AppendLine(line);
+                    Console.WriteLine($"[Git] {line}");
                 }
             };
 
@@ -128,8 +157,14 @@ partial class Program
             {
                 if (e.Data != null)
                 {
-                    errorBuilder.AppendLine(e.Data);
                     var line = e.Data;
+                    // Mask PAT if ever echoed by lower layers
+                    if (!string.IsNullOrEmpty(pat) && line.Contains(pat))
+                    {
+                        line = line.Replace(pat, "***");
+                    }
+
+                    errorBuilder.AppendLine(line);
                     var trimmed = line.Trim();
                     var lower = trimmed.ToLowerInvariant();
 
@@ -145,7 +180,6 @@ partial class Program
                         || trimmed.Equals("already up to date.", StringComparison.OrdinalIgnoreCase)
                         || trimmed.StartsWith("warning:", StringComparison.OrdinalIgnoreCase);
 
-                    // Heuristic: consider a stderr line an actual error when it contains these keywords
                     bool isErrorLine = lower.Contains("fatal")
                         || lower.Contains("error")
                         || lower.Contains("failed")
@@ -158,12 +192,11 @@ partial class Program
 
                     if (isErrorLine && !isProgress)
                     {
-                        Console.WriteLine($"[Git] (错误): {e.Data}");
+                        Console.WriteLine($"[Git] (错误): {line}");
                     }
                     else
                     {
-                        // Treat as informational/progress output
-                        Console.WriteLine($"[Git] {e.Data}");
+                        Console.WriteLine($"[Git] {line}");
                     }
                 }
             };
@@ -193,14 +226,9 @@ partial class Program
                 Console.WriteLine($"[开始] 克隆仓库: {repoUrl}");
                 Console.WriteLine($"  目标路径: {targetPath}");
 
-                // Construct authenticated URL
-                var uri = new Uri(repoUrl);
-                var authenticatedUrl = $"https://x-access-token:{pat}@{uri.Host}{uri.PathAndQuery}";
-
-                // Also pass auth via header to avoid any prompt behaviour
-                var authArg = BuildAuthConfigArg(pat);
-                var args = $"{authArg} clone --progress \"{authenticatedUrl}\" \"{targetPath}\"".Trim();
-                var (exitCode, output, error) = await ExecuteGitCommandAsync(args);
+                // Use header-based auth only; do not inject PAT into URL.
+                var args = $"clone --progress \"{repoUrl}\" \"{targetPath}\"";
+                var (exitCode, output, error) = await ExecuteGitCommandAsync(args, pat: pat);
 
                 if (exitCode == 0)
                 {
@@ -229,10 +257,8 @@ partial class Program
             try
             {
                 Console.WriteLine($"[开始] 拉取远程更新: {remote}");
-                
-                var authArg = BuildAuthConfigArg(pat);
-                var args = $"{authArg} fetch {remote}".Trim();
-                var (exitCode, output, error) = await ExecuteGitCommandAsync(args, repoPath);
+                var args = $"fetch {remote}".Trim();
+                var (exitCode, output, error) = await ExecuteGitCommandAsync(args, repoPath, pat: pat);
 
                 if (exitCode == 0)
                 {
@@ -273,10 +299,8 @@ partial class Program
                     Console.WriteLine($"[信息] 当前分支: {branch}");
                 }
 
-                var authArg = BuildAuthConfigArg(pat);
-                var pullArgs = $"{authArg} pull {remote} {branch}".Trim();
-
-                var (exitCode, output, error) = await ExecuteGitCommandAsync(pullArgs, repoPath);
+                var pullArgs = $"pull {remote} {branch}".Trim();
+                var (exitCode, output, error) = await ExecuteGitCommandAsync(pullArgs, repoPath, pat: pat);
 
                 if (exitCode == 0)
                 {
@@ -362,16 +386,24 @@ partial class Program
         /// Commit changes
         /// </summary>
         public static async Task<(bool success, string commitSha)> CommitAsync(
-            string repoPath, 
-            string message, 
-            string userName, 
+            string repoPath,
+            string message,
+            string userName,
             string userEmail)
         {
             try
             {
-                // Configure user
-                await ExecuteGitCommandAsync($"config user.name \"{userName}\"", repoPath);
-                await ExecuteGitCommandAsync($"config user.email \"{userEmail}\"", repoPath);
+                // Configure user only if not present in repo config to avoid noisy rewrites.
+                var (nameCode, nameOut, _) = await ExecuteGitCommandAsync("config --get user.name", repoPath);
+                if (nameCode != 0 || string.IsNullOrWhiteSpace(nameOut))
+                {
+                    await ExecuteGitCommandAsync($"config user.name \"{userName}\"", repoPath);
+                }
+                var (emailCode, emailOut, _) = await ExecuteGitCommandAsync("config --get user.email", repoPath);
+                if (emailCode != 0 || string.IsNullOrWhiteSpace(emailOut))
+                {
+                    await ExecuteGitCommandAsync($"config user.email \"{userEmail}\"", repoPath);
+                }
 
                 Console.WriteLine($"[开始] 提交更改: {message}");
                 var escapedMessage = message.Replace("\"", "\\\"");
@@ -408,13 +440,12 @@ partial class Program
             {
                 Console.WriteLine("推送到远程仓库...");
 
-                var authArg = BuildAuthConfigArg(pat);
                 var pushArgs = branch != null 
-                    ? $"{authArg} push {remote} {branch}" 
-                    : $"{authArg} push {remote}";
+                    ? $"push {remote} {branch}" 
+                    : $"push {remote}";
                 pushArgs = pushArgs.Trim();
 
-                var (exitCode, output, error) = await ExecuteGitCommandAsync(pushArgs, repoPath);
+                var (exitCode, output, error) = await ExecuteGitCommandAsync(pushArgs, repoPath, pat: pat);
 
                 if (exitCode == 0)
                 {
