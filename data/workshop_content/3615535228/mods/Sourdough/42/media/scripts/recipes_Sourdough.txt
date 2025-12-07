@@ -14,7 +14,7 @@ module TPP
             item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
             item 10 tags[Flour],
             item 2 [Base.Salt;Base.SeasoningSalt],
-            item 1 [TPP.Sourdough],
+            item 1 [TPP.Sourdough] mode:keep,
             item 1 [*],
             -fluid 1.0 [Water],
         }
@@ -93,6 +93,87 @@ module TPP
         outputs
         {
             item 1 TPP.SourdoughFeeded,
+        }
+    }
+	
+	craftRecipe Make Sourdough Biscuits
+    {
+        timedAction = MixingBowl,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        AutoLearnAny = Cooking:3,
+        inputs
+        {
+            item 1 tags[MixingUtensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1 [Base.MuffinTray],
+            item 1 tags[Flour],
+            item 2 [Base.Salt;Base.SeasoningSalt],
+            item 1 [TPP.Sourdough],
+            item 1 tags[BakingFat],
+            item 1 [*],
+            -fluid 2.0 [Water],
+        }
+        outputs
+        {
+            item 1 Base.Muffintray_Biscuit,
+        }
+    }
+	
+	craftRecipe Make Sourdough CakeBatter
+    {
+        timedAction = MixingBowl,
+        time = 50,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:3,
+        inputs
+        {
+            item 1 tags[MixingUtensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[ItemCount],
+			item 1 [Base.BakingPan] mode:destroy,
+            item 2 tags[Flour],
+            item 1 tags[BakingFat],
+            item 2 tags[Sugar],
+            item 2 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [TPP.Sourdough],
+            item 1 [*],
+            -fluid 1.0 [CowMilk],
+        }
+        outputs
+        {
+            item 1 Base.CakeRaw,
+        }
+    }
+	
+	craftRecipe Make Sourdough Sugar Cookies Dough
+    {
+        timedAction = MixingBowl,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        AutoLearnAny = Cooking:3,
+        inputs
+        {
+            item 1 tags[MixingUtensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1 [Base.BakingTray],
+            item 2 tags[BakingFat],
+            item 10 tags[Sugar],
+            item 2 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [TPP.Sourdough],
+            item 3 tags[Flour],
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+        outputs
+        {
+            item 1 Base.CookiesSugarDough,
         }
     }
 }
