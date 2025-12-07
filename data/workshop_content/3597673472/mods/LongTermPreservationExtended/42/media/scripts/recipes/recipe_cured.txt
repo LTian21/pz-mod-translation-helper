@@ -59,7 +59,7 @@ module Skittles
     {
       item 1 [Base.Pork;Base.Beef;Base.Venison] flags[ItemCount] mode:destroy,
       item 2 [Base.Lard;Skittles.Schmaltz;Skittles.Tallow] flags[ItemCount] mode:destroy,
-      item 3 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue;Base.BeautyBerry;Base.HollyBerry;Base.WinterBerry] flags[ItemCount] mode:destroy,
+      item 3 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue;Base.BeautyBerry;Base.HollyBerry;Base.WinterBerry;Base.Strewberrie] flags[ItemCount] mode:destroy,
     }
     outputs
     {
@@ -78,7 +78,7 @@ module Skittles
     {
       item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
       item 4 [Base.Pork] flags[ItemCount],
-      item 1 [Base.Saucepan;Base.SaucepanCopper] mode:keep,
+      item 1 [Base.PanForged;Base.Pan;Base.Saucepan;Base.SaucepanCopper;Base.Pot;Base.PotForged] mode:keep,
     }
     outputs
     {
@@ -97,7 +97,7 @@ module Skittles
     {
       item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
       item 4 [Base.Smallbirdmeat;Base.ChickenFillet;Base.Chicken;Base.ChickenWings;Base.FishFillet;Base.TurkeyFillet;Base.TurkeyLegs;Base.TurkeyWings] flags[ItemCount],
-      item 1 [Base.Saucepan;Base.SaucepanCopper] mode:keep,
+      item 1 [Base.PanForged;Base.Pan;Base.Saucepan;Base.SaucepanCopper;Base.Pot;Base.PotForged] mode:keep,
     }
     outputs
     {
@@ -116,7 +116,7 @@ module Skittles
     {
       item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
       item 4 [Base.Beef;Base.Smallbirdmeat;Base.FrogMeat;Base.MuttonChop;Base.Rabbitmeat;Base.Smallanimalmeat;Base.Venison] flags[ItemCount],
-      item 1 [Base.Saucepan;Base.SaucepanCopper] mode:keep,
+      item 1 [Base.PanForged;Base.Pan;Base.Saucepan;Base.SaucepanCopper;Base.Pot;Base.PotForged] mode:keep,
     }
     outputs
     {
@@ -134,14 +134,13 @@ module Skittles
 	xpAward = Cooking:10,
     inputs
     {
-		item 1 [Base.EmptyJar] mode:destroy,
+		item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy,
 		item 1 [Base.JarLid] mode:destroy,
-		item 5 [Base.Pork;Base.Beef;Base.Venison;Base.FishFillet] flags[ItemCount] mappers[meatType] mode:destroy,
+		item 5 [Base.Beef;Base.Smallbirdmeat;Base.ChickenFillet;Base.FishFillet;Base.FrogMeat;Base.MuttonChop;Base.Pork;Base.Rabbitmeat;Base.Smallanimalmeat;Base.TurkeyFillet;Base.Venison] flags[ItemCount] mappers[meatType] mode:destroy,
 		item 2.0 tags[Vinegar],
 		item 1.0 tags[Salt],
 		item 1 [*],
 		-fluid 1.0 [Water],
-
     }
 		outputs
 		{
@@ -149,10 +148,17 @@ module Skittles
 		}
     itemMapper meatType
 		{
-	Skittles.CannedPork = Base.Pork,
-	Skittles.CannedBeef = Base.Beef,
-	Skittles.CannedVenison = Base.Venison,
-	Skittles.CannedFish = Base.FishFillet,
+			Skittles.CannedBeef = Base.Beef,
+			Skittles.CannedBird = Base.Smallbirdmeat,
+			Skittles.CannedChicken = Base.ChickenFillet,
+			Skittles.CannedFish = Base.FishFillet,
+			Skittles.CannedFrog = Base.FrogMeat,	
+			Skittles.CannedMutton = Base.MuttonChop,
+			Skittles.CannedPork = Base.Pork,
+			Skittles.CannedRabbit = Base.Rabbitmeat,
+			Skittles.CannedRodent = Base.Smallanimalmeat,
+			Skittles.CannedTurkey = Base.TurkeyFillet,
+			Skittles.CannedVenison = Base.Venison,
 		}
     
   }
@@ -167,20 +173,25 @@ module Skittles
 	xpAward = Cooking:10,
 		inputs
 		{
-			item 1 [Skittles.CannedPork;Skittles.CannedBeef;Skittles.CannedVenison;Skittles.CannedFish] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+			item 1 [Skittles.CannedBeef;Skittles.CannedBird;Skittles.CannedChicken;Skittles.CannedFish;Skittles.CannedFrog;Skittles.CannedMutton;Skittles.CannedPork;Skittles.CannedRabbit;Skittles.CannedRodent;Skittles.CannedTurkey;Skittles.CannedVenison] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
 		}
 		outputs
 		{
 			item 1 mapper:foodType,
-			item 1 Base.JarLid,
-			item 1 Base.EmptyJar,
 		}
 		itemMapper foodType
 		{
-	Skittles.CannedPork_Open = Skittles.CannedPork,
-	Skittles.CannedBeef_Open = Skittles.CannedBeef,
-	Skittles.CannedVenison_Open = Skittles.CannedVenison,
-	Skittles.CannedFish_Open = Skittles.CannedFish,
+			Skittles.CannedBeef_Open = Skittles.CannedBeef,
+			Skittles.CannedBird_Open = Skittles.CannedBird,
+			Skittles.CannedChicken_Open = Skittles.CannedChicken,
+			Skittles.CannedFish_Open = Skittles.CannedFish,
+			Skittles.CannedFrog_Open = Skittles.CannedFrog,	
+			Skittles.CannedMutton_Open = Skittles.CannedMutton,
+			Skittles.CannedPork_Open = Skittles.CannedPork,
+			Skittles.CannedRabbit_Open = Skittles.CannedRabbit,
+			Skittles.CannedRodent_Open = Skittles.CannedRodent,
+			Skittles.CannedTurkey_Open = Skittles.CannedTurkey,
+			Skittles.CannedVenison_Open = Skittles.CannedVenison,
 			
 		}
 	}
@@ -215,11 +226,30 @@ module Skittles
 		{
 
 			item 1 tags[MortarPestle] mode:keep,
-			item 5 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue] flags[ItemCount] mode:destroy,
+			item 5 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue;Base.Strewberrie] flags[ItemCount] mode:destroy,
 		}
 		outputs
 		{
 			item 1 Skittles.MashedBerries,
+		}
+  }
+  
+    craftRecipe Make Mashed Fruit
+  {
+    timedAction = Making,
+    Time = 30,
+    Tags = InHandCraft;Cooking,
+    category = Cooking,
+	xpAward = Cooking:10,
+    inputs
+		{
+
+			item 1 tags[MortarPestle] mode:keep,
+			item 1 [Base.Cherry;Base.Grapefruit;Base.Grapes;Base.Lemon;Base.Lime;Base.Mango;Base.Orange;Base.Peach;Base.Pear;Base.Pineapple;] flags[ItemCount] mode:destroy,
+		}
+		outputs
+		{
+			item 5 Skittles.MashedFruits,
 		}
   }
 
@@ -232,8 +262,10 @@ module Skittles
 	xpAward = Cooking:10,
     inputs
 		{
-			item 1 [Base.Saucepan] mode:keep,
-			item 30 [Skittles.MashedBerries],
+			item 1 [Base.PanForged;Base.Pan;Base.Saucepan;Base.SaucepanCopper;Base.Pot;Base.PotForged] mode:keep,
+			item 1 [Base.JarLid] mode:destroy,
+			item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy,
+			item 15 [Skittles.MashedBerries;Skittles.MashedFruits] flags[ItemCount] mode:destroy,
 			item 10 [Base.Sugar;Base.SugarBrown],
 		}
 		outputs
