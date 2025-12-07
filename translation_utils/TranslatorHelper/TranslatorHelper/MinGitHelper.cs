@@ -60,6 +60,18 @@ partial class Program
         }
 
         /// <summary>
+        /// Build a git -c http.extraheader argument to pass PAT for HTTPS operations.
+        /// Uses Basic auth with user x-access-token.
+        /// </summary>
+        private static string BuildAuthConfigArg(string pat)
+        {
+            if (string.IsNullOrEmpty(pat)) return string.Empty;
+            var basic = Convert.ToBase64String(Encoding.ASCII.GetBytes($"x-access-token:{pat}"));
+            // Quote carefully for git -c
+            return $"-c http.extraheader=\"Authorization: basic {basic}\"";
+        }
+
+        /// <summary>
         /// Executes a git command and returns the output
         /// </summary>
         private static async Task<(int exitCode, string output, string error)> ExecuteGitCommandAsync(
@@ -94,6 +106,10 @@ partial class Program
                 startInfo.EnvironmentVariables["HTTPS_PROXY"] = proxyUrl;
                 Console.WriteLine($"[信息] Git 使用代理: {proxyUrl}");
             }
+
+            // Allow interactive credential prompts when PAT is insufficient
+            // Remove explicit disabling to let MinGit prompt if needed
+            // startInfo.EnvironmentVariables["GIT_TERMINAL_PROMPT"] = "0";
 
             using var process = new Process { StartInfo = startInfo };
             var outputBuilder = new StringBuilder();
@@ -181,7 +197,9 @@ partial class Program
                 var uri = new Uri(repoUrl);
                 var authenticatedUrl = $"https://x-access-token:{pat}@{uri.Host}{uri.PathAndQuery}";
 
-                var args = $"clone --progress \"{authenticatedUrl}\" \"{targetPath}\"";
+                // Also pass auth via header to avoid any prompt behaviour
+                var authArg = BuildAuthConfigArg(pat);
+                var args = $"{authArg} clone --progress \"{authenticatedUrl}\" \"{targetPath}\"".Trim();
                 var (exitCode, output, error) = await ExecuteGitCommandAsync(args);
 
                 if (exitCode == 0)
@@ -212,10 +230,8 @@ partial class Program
             {
                 Console.WriteLine($"[开始] 拉取远程更新: {remote}");
                 
-                // Set up credentials helper
-                await ExecuteGitCommandAsync($"config credential.helper store", repoPath);
-                
-                var args = $"fetch {remote}";
+                var authArg = BuildAuthConfigArg(pat);
+                var args = $"{authArg} fetch {remote}".Trim();
                 var (exitCode, output, error) = await ExecuteGitCommandAsync(args, repoPath);
 
                 if (exitCode == 0)
@@ -257,7 +273,8 @@ partial class Program
                     Console.WriteLine($"[信息] 当前分支: {branch}");
                 }
 
-                var pullArgs = $"pull {remote} {branch}";
+                var authArg = BuildAuthConfigArg(pat);
+                var pullArgs = $"{authArg} pull {remote} {branch}".Trim();
 
                 var (exitCode, output, error) = await ExecuteGitCommandAsync(pullArgs, repoPath);
 
@@ -391,9 +408,11 @@ partial class Program
             {
                 Console.WriteLine("推送到远程仓库...");
 
+                var authArg = BuildAuthConfigArg(pat);
                 var pushArgs = branch != null 
-                    ? $"push {remote} {branch}" 
-                    : $"push {remote}";
+                    ? $"{authArg} push {remote} {branch}" 
+                    : $"{authArg} push {remote}";
+                pushArgs = pushArgs.Trim();
 
                 var (exitCode, output, error) = await ExecuteGitCommandAsync(pushArgs, repoPath);
 
