@@ -1,0 +1,46 @@
+module Base
+{
+	craftRecipe UnFoldStock
+	{
+		Time = 1,
+		OnCreate = onFoldStock_OnCreate_NATO,
+		ToolTip = Tooltip_Recipe_UnFoldStock,
+		Tags = InHandCraft;CanBeDoneInDark;RightClickOnly,
+		category = Weaponry,
+		inputs
+		{
+			item 1 [Base.BM59Folded;Base.FNCFolded] flags[InheritCondition;InheritAmmunition] mappers[unfoldStockType],
+		}
+		outputs
+		{
+			item 1 mapper:unfoldStockType,
+		}
+		itemMapper unfoldStockType
+		{
+			Base.BM59Folded = Base.BM59,
+			Base.FNCFolded = Base.FNC,
+		}
+	}
+
+	craftRecipe FoldStock
+	{
+		Time = 1,
+		OnCreate = onFoldStock_OnCreate_NATO,
+		ToolTip = Tooltip_Recipe_UnFoldStock,
+		Tags = InHandCraft;CanBeDoneInDark;RightClickOnly,
+		category = Weaponry,
+		inputs
+		{
+			item 1 [Base.BM59;Base.FNC] flags[InheritCondition;InheritAmmunition] mappers[foldStockType],
+		}
+		outputs
+		{
+			item 1 mapper:foldStockType,
+		}
+		itemMapper foldStockType
+		{
+			Base.BM59 = Base.BM59Folded,
+			Base.FNC = Base.FNCFolded,
+		}
+	}
+}

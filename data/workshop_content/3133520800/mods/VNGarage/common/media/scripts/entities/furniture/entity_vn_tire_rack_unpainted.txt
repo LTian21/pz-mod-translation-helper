@@ -1,0 +1,61 @@
+module Base {
+
+	xuiSkin default {
+		entity ES_TireRackUnpainted {
+			LuaWindowClass = ISEntityWindow,
+			DisplayName = Tire Rack,
+			Icon = Item_TireRackUnpainted,
+		}
+	}
+
+	entity VNGarage.TireRackUnpainted {
+		component UiConfig {
+			xuiSkin = default,
+			entityStyle = ES_TireRackUnpainted,
+			uiEnabled = false,
+		}
+
+		component SpriteConfig {
+			canBePadlocked = false,
+			OnCreate = VNGarage.TireRack.OnCreateRecipe,
+			face W {
+				layer {
+					row = vn_tire_rack_unpainted_3,
+				}
+			}
+			face N {
+				layer {
+					row = vn_tire_rack_unpainted_0,
+				}
+			}
+			face E {
+				layer {
+					row = vn_tire_rack_unpainted_1,
+				}
+			}
+			face S {
+				layer {
+					row = vn_tire_rack_unpainted_2,
+				}
+			}
+		}
+
+		component CraftRecipe {
+			timedAction   = BuildMetalStructureMedium,
+			time          = 300,
+			needToBeLearn = true,
+			SkillRequired = MetalWelding:2,
+			xpAward       = MetalWelding:20,
+			category      = Welding,
+			tags          = Welding;Furniture,
+			ToolTip       = Tooltip_craft_TireRackUnpainted,
+			AutoLearnAll  = Mechanics:5;MetalWelding:3,
+			inputs {
+				item 10 [Base.MetalPipe],
+                item 1 tags[WeldingMask] mode:keep,
+                item 1 [Base.WeldingRods] flags[DontRecordInput],
+                item 5 [Base.BlowTorch] flags[DontRecordInput],
+			}
+		}
+	}
+}
