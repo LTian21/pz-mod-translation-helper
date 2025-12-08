@@ -1,0 +1,35 @@
+module Base
+{
+	imports    
+    {
+		Base
+	}
+	
+	
+	craftRecipe (GTA) Bat Spiked
+    {
+        time            = 300,
+        tags            = AnySurfaceCraft,
+        category = Weaponry,
+        needTobeLearn = false,
+        SkillRequired = Woodwork:1,
+        timedAction = MakingHammer_Surface,
+		xpAward = Woodwork:10,
+        inputs
+        {
+            item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+            item 1 [BaseballBat;Base.GTASABETABAT;GTA3BAT;GTAVC2BAT] mappers[NailMapper] flags[Prop2;InheritCondition],
+            item 5 [Base.Nails],
+        }
+         outputs
+        {
+            item 1 mapper:NailMapper,
+        }
+        itemMapper NailMapper
+        {
+            Base.GTASABETANAILBAT = Base.GTASABETABAT;GTA3BAT;GTAVC2BAT,
+        }
+    }
+	
+	
+}
