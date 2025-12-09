@@ -7,7 +7,7 @@ module Skittles
 
   craftRecipe Make Cured Meat
   {
-    timedAction = MixingBowl,
+    timedAction = SliceMeat,
     Time = 30,
     onCreate = AdjustStates,
     onTest = TryMeat,
@@ -49,7 +49,7 @@ module Skittles
 
   craftRecipe Make Pemmican Meat
   {
-    timedAction = MixingBowl,
+    timedAction = SliceMeat,
     Time = 30,
     onCreate = AdjustStatesPemmican,
     Tags = InHandCraft;Cooking,
@@ -85,44 +85,6 @@ module Skittles
       item 8 Base.Lard,
     }
   }
-
-  craftRecipe Reduce Schmaltz
-  {
-    timedAction = MixingBowl,
-    Time = 30,
-    Tags = InHandCraft;Cooking,
-    category = Cooking,
-	xpAward = Cooking:5;Butchering:5,
-    inputs
-    {
-      item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
-      item 4 [Base.Smallbirdmeat;Base.ChickenFillet;Base.Chicken;Base.ChickenWings;Base.FishFillet;Base.TurkeyFillet;Base.TurkeyLegs;Base.TurkeyWings] flags[ItemCount],
-      item 1 [Base.PanForged;Base.Pan;Base.Saucepan;Base.SaucepanCopper;Base.Pot;Base.PotForged] mode:keep,
-    }
-    outputs
-    {
-      item 8 Skittles.Schmaltz,
-    }
-  }
-  
-  craftRecipe Reduce Tallow
-  {
-    timedAction = MixingBowl,
-    Time = 30,
-    Tags = InHandCraft;Cooking,
-    category = Cooking,
-	xpAward = Cooking:5;Butchering:5,
-    inputs
-    {
-      item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
-      item 4 [Base.Beef;Base.Smallbirdmeat;Base.FrogMeat;Base.MuttonChop;Base.Rabbitmeat;Base.Smallanimalmeat;Base.Venison] flags[ItemCount],
-      item 1 [Base.PanForged;Base.Pan;Base.Saucepan;Base.SaucepanCopper;Base.Pot;Base.PotForged] mode:keep,
-    }
-    outputs
-    {
-      item 8 Skittles.Tallow,
-    }
-  }
   
   craftRecipe Make Jarred Meat
   {
@@ -139,7 +101,6 @@ module Skittles
 		item 5 [Base.Beef;Base.Smallbirdmeat;Base.ChickenFillet;Base.FishFillet;Base.FrogMeat;Base.MuttonChop;Base.Pork;Base.Rabbitmeat;Base.Smallanimalmeat;Base.TurkeyFillet;Base.Venison] flags[ItemCount] mappers[meatType] mode:destroy,
 		item 2.0 tags[Vinegar],
 		item 1.0 tags[Salt],
-		item 1 [*],
 		-fluid 1.0 [Water],
     }
 		outputs
@@ -165,7 +126,7 @@ module Skittles
 
   craftRecipe Open Jar Of Meat
 	{
-    timedAction = Making,
+    timedAction = OpenTinCan,
 		Time = 30,
 		OnCreate = Recipe.OnCreate.OpenCannedFood,
 		Tags = InHandCraft;Cooking;CanBeDoneInDark,
@@ -217,7 +178,7 @@ module Skittles
 
   craftRecipe Make Mashed Berry
   {
-    timedAction = Making,
+    timedAction = MixingMortarPestle,
     Time = 30,
     Tags = InHandCraft;Cooking,
     category = Cooking,
@@ -230,32 +191,13 @@ module Skittles
 		}
 		outputs
 		{
-			item 1 Skittles.MashedBerries,
-		}
-  }
-  
-    craftRecipe Make Mashed Fruit
-  {
-    timedAction = Making,
-    Time = 30,
-    Tags = InHandCraft;Cooking,
-    category = Cooking,
-	xpAward = Cooking:10,
-    inputs
-		{
-
-			item 1 tags[MortarPestle] mode:keep,
-			item 1 [Base.Cherry;Base.Grapefruit;Base.Grapes;Base.Lemon;Base.Lime;Base.Mango;Base.Orange;Base.Peach;Base.Pear;Base.Pineapple;] flags[ItemCount] mode:destroy,
-		}
-		outputs
-		{
-			item 5 Skittles.MashedFruits,
+			item 15 Skittles.MashedBerries,
 		}
   }
 
   craftRecipe Make Jam
   {
-    timedAction = Making,
+    timedAction = MixingMortarPestle,
     Time = 100,
     Tags = InHandCraft;Cooking,
     category = Cooking,
