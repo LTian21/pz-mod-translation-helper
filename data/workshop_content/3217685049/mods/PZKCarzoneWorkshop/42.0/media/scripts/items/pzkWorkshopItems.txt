@@ -1,0 +1,93 @@
+module Base
+{
+
+	fluid pzkRustSolvent
+    {
+        ColorReference = LimeGreen,
+        DisplayName = Fluid_Name_pzkRustSolvent,
+        Categories
+        {
+            Hazardous,
+            Industrial,
+        }
+        Poison
+        {
+            maxEffect = Deadly,
+            minAmount = 0.5,
+            diluteRatio = 0.7,
+        }
+        BlendWhiteList
+        {
+            whitelist = true,
+            categories
+            {
+                Beverage,
+            }
+        }
+    }
+	
+	model pzkRustSolventBottle
+    {
+        mesh = BleachBottle,
+		texture = WorldItems/pzkRustSolventBottle,
+        attachment world
+        {
+            offset = 0.0 -0.1181 -0.0225,
+            rotate = 0.0 0.0 0.0,
+        }
+    }
+	
+	item pzkRustSolvent
+    {
+        DisplayCategory = Household,
+        Type = Normal,
+        Weight = 0.2,
+        Icon = pzkRustSolvent,
+        EatType = BleachBottle,
+        CustomContextMenu = Drink,
+        FillFromDispenserSound = GetWaterFromDispenserPlasticMedium,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapPlasticMedium,
+        StaticModel = BleachBottle,
+        WorldStaticModel = pzkRustSolventBottle,
+       /*
+	   component FluidContainer
+        {
+            ContainerName = pzkRustSolvent,
+            Capacity = 1.0,
+			InitialAmount = 1.0,
+            CustomDrinkSound = DrinkingFromBottlePlastic,
+            Fluids
+            {
+                fluid = pzkRustSolvent:1.0,
+            }
+        }
+		Tags = FluidContainer,
+		*/
+    }
+	
+	item pzkRustSolventBottle
+    {
+        DisplayCategory = Household,
+        Type = Normal,
+        Weight = 0.01,
+        Icon = pzkRustSolvent,
+        EatType = BleachBottle,
+        CustomContextMenu = Drink,
+        FillFromDispenserSound = GetWaterFromDispenserPlasticMedium,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapPlasticMedium,
+        StaticModel = BleachBottle,
+        WorldStaticModel = pzkRustSolventBottle,
+        component FluidContainer
+        {
+            ContainerName = pzkRustSolvent,
+            Capacity = 1.0,
+			InitialAmount = 0.0,
+            CustomDrinkSound = DrinkingFromBottlePlastic,        
+        }
+
+    }
+
+
+}
