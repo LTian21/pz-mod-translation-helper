@@ -43,6 +43,7 @@ module Base
         time = 100,
         Tags = InHandCraft;Cooking;CanBeDoneInDark,
         category = Packing,
+        recipeGroup = OpenBox,
         inputs
         {
             item 1 [Base.Macandcheese_Box;Base.TinnedBeans_Box;Base.CannedBolognese_Box;Base.CannedCarrots_Box;Base.CannedChili_Box;Base.CannedCornedBeef_Box;Base.CannedCorn_Box;Base.CannedFruitCocktail_Box;Base.CannedFruitBeverage_Box;Base.CannedMilk_Box;Base.CannedMushroomSoup_Box;Base.CannedPeaches_Box;Base.CannedPeas_Box;Base.CannedPineapple_Box;Base.CannedPotato_Box;Base.CannedSardines_Box;Base.TinnedSoup_Box;Base.CannedTomato_Box;Base.TunaTin_Box;Base.Dogfood_Box;Base.MysteryCan_Box;Base.DentedCan_Box;Base.WaterRationCan_Box] mappers[canSorts] flags[AllowFavorite;InheritFavorite],
@@ -127,6 +128,7 @@ module Base
         time = 80,
         Tags = InHandCraft;Cooking;CanBeDoneInDark,
         category = Packing,
+        recipeGroup = OpenBox,
         inputs
         {
             item 1 [Base.WineWhite_Boxed;Base.WineRed_Boxed] mappers[wineType] flags[AllowFavorite;InheritFavorite],
@@ -183,8 +185,10 @@ module Base
     {
         timedAction = UnPackBox,
         time = 15,
+        OnCreate = RecipeCodeOnCreate.unpackItemTypeFromBox,
         Tags = InHandCraft;Packing;CanBeDoneInDark,
         category = Packing,
+        recipeGroup = OpenBox,
         inputs
         {
             item 1 [Base.BoxOfJars] flags[AllowFavorite;InheritFavorite],
@@ -200,11 +204,12 @@ module Base
     {
         timedAction = PackingBox,
         time = 15,
+        OnCreate = RecipeCodeOnCreate.placeItemTypeInBox,
         Tags = InHandCraft;Packing,
         category = Packing,
         inputs
         {
-            item 6 [Base.EmptyJar] flags[AllowFavorite;InheritFavorite;ItemCount],
+            item 6 tags[base:jar] flags[AllowFavorite;InheritFavorite;ItemCount],
             item 6 [Base.JarLid] flags[IsUndamaged;AllowFavorite;InheritFavorite],
         }
         outputs
@@ -219,6 +224,7 @@ module Base
         time = 5,
         Tags = InHandCraft;Packing;CanBeDoneInDark,
         category = Packing,
+        recipeGroup = OpenBox,
         inputs
         {
             item 1 [Base.NailsBox;Base.ScrewsBox;Base.CapGunCapBox] mappers[itemType] flags[AllowFavorite;InheritFavorite],
@@ -262,6 +268,7 @@ module Base
         time = 5,
         Tags = InHandCraft;Packing;CanBeDoneInDark,
         category = Packing,
+        recipeGroup = OpenBox,
         inputs
         {
             item 1 [Base.PaperclipBox] flags[AllowFavorite;InheritFavorite],
@@ -340,6 +347,7 @@ module Base
         time = 5,
         Tags = InHandCraft;Packing;CanBeDoneInDark,
         category = Packing,
+        recipeGroup = OpenBox,
         inputs
         {
             item 1 [Base.FishingHookBox] flags[AllowFavorite;InheritFavorite],
