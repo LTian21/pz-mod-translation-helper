@@ -1,0 +1,64 @@
+module Base {
+
+	xuiSkin default {
+		entity ES_VNBatteryShelf {
+			LuaWindowClass = ISEntityWindow,
+			DisplayName = Battery Shelf,
+			Icon = Item_VNBatteryShelf,
+		}
+	}
+
+	entity VNGarage.VNBatteryShelf {
+		component UiConfig {
+			xuiSkin = default,
+			entityStyle = ES_VNBatteryShelf,
+			uiEnabled = false,
+		}
+
+		component SpriteConfig {
+			canBePadlocked = false,
+			OnCreate = VNGarage.BatteryShelf.OnCreateRecipe,
+			face W {
+				layer {
+					row = vn_battery_shelf_3,
+				}
+			}
+			face N {
+				layer {
+					row = vn_battery_shelf_0,
+				}
+			}
+			face E {
+				layer {
+					row = vn_battery_shelf_1,
+				}
+			}
+			face S {
+				layer {
+					row = vn_battery_shelf_2,
+				}
+			}
+		}
+
+		component CraftRecipe {
+			timedAction   = BuildWoodenStructureMedium,
+			time          = 150,
+			needToBeLearn = true,
+			SkillRequired = Electricity:1;Woodwork:5,
+			xpAward       = Electricity:10;Woodwork:50,
+			category      = Electrical,
+			tags          = Electrical;Furniture,
+			ToolTip       = Tooltip_craft_VNBatteryShelf,
+			AutoLearnAll  = Mechanics:6;Electricity:3;Woodwork:6,
+			inputs {
+				item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+				item 1 tags[Pliers] mode:keep,
+				item 2 [Base.Plank],
+				item 2 [Base.Nails],
+				item 1 [Base.CarBatteryCharger],
+				item 1 [Base.DuctTape],
+				item 6 [Base.ElectricWire],
+			}
+		}
+	}
+}

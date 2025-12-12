@@ -1,0 +1,985 @@
+module Base
+{
+	item HiPower
+	{
+		DisplayName                 	=	Browning Hi-Power,	
+		Icon							=	HPBrowning,
+		WeaponSprite                	=	HiPower,	
+        Weight							=	1.0,
+        MagazineType					=   HiPowerMag,
+        AmmoType						=   Bullets9mm,
+        AmmoBox							=   Bullets9mmBox,
+        MaxAmmo							=   13,
+        RecoilDelay						=	7,
+        ReloadTime						=   20,
+        AimingTime						=   10,
+        MinRange						=	0,
+        MaxRange						=	8,
+        MinAngle						=	0.965,
+        DoorDamage						=	3,
+        MinDamage						=	0.8,
+        MaxDamage						=	1.2,
+        StopPower						=   3,
+        PiercingBullets					=   TRUE,
+        KnockdownMod					=	1,
+        PushBackMod						=	0.2,
+        FireMode						=   Single,
+
+        
+        CriticalChance                  = 33,
+        AimingPerkCritModifier          = 10,
+        HitChance                       = 55,
+        AimingPerkHitChanceModifier     = 8,
+        AimingPerkMinAngleModifier      = 0.05,
+        AimingPerkRangeModifier         = 1.5,
+        
+        
+        SoundVolume	            = 35,
+        SoundRadius	            = 40,
+        SwingSound	            = M9Shoot,
+        BreakSound              = M9Break,
+        InsertAmmoSound         = M9InsertAmmo,
+        EjectAmmoSound          = M9EjectAmmo,
+        RackSound               = M9Rack,
+        BringToBearSound        = M9BringToBear,
+        HitSound                = BulletHitBody,
+	    ClickSound              = M9Jam,
+        EquipSound              = M9Equip,
+	    UnequipSound            = M9InsertAmmo,
+        InsertAmmoStartSound    = M9InsertAmmoStart,
+	    InsertAmmoStopSound     = M9InsertAmmoStop,
+	    EjectAmmoStartSound     = M9EjectAmmoStart,
+	    EjectAmmoStopSound      = M9EjectAmmoStop,
+        ShellFallSound          = M9CartridgeFall,
+
+        
+        Type	                        =	Weapon,
+        SubCategory	                    =	Firearm,
+        IsAimedFirearm	                =	TRUE,
+        UseEndurance	                =	FALSE,
+        ConditionMax	                =	10,
+        JamGunChance                    =   1,
+        Ranged	                        =	TRUE,
+        MetalValue                      =   45,
+        SwingTime	                    =	0.5,
+        MinimumSwingTime	            =	0.5,
+        ToHitModifier	                =	1.5,
+        SwingAmountBeforeImpact	        =	0,
+        MultipleHitConditionAffected	=	FALSE,
+        SplatSize	                    =	3,
+        SplatNumber	                    =	3,
+        SplatBloodOnNoDeath	            =	TRUE,
+        ImpactSound	                    =	null,
+        NPCSoundBoost	                =	1.5,
+        SoundGain                       =   2,
+        SwingAnim	                    =	Handgun,
+        RunAnim	                        =	Run_Weapon2,
+        IdleAnim	                    =	Idle_Weapon2,
+        ShareDamage	                    =	FALSE,
+        MaxHitCount	                    =	1,
+        KnockBackOnNoDeath	            =	TRUE,
+        ProjectileCount	                =	1,
+        ConditionLowerChanceOneIn	    =	60,
+        WeaponReloadType                =   handgun,
+        AttachmentType                  =   Holster,   
+
+        ModelWeaponPart					=	Base.9mmCompensator		Base.Compensator_Pistol		silencer	silencer,
+		ModelWeaponPart					=	Base.9mmSilencer		Base.Silencer				silencer	silencer,
+    }
+	model HiPower
+	{
+		mesh = weapons/firearm/Browning_HP,
+		texture = weapons/firearm/Browning_HP,
+
+		attachment muzzle
+		{
+			offset = 0.0000 -0.0250 0.1390,
+			rotate = 0.0000 0.0000 -180.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0200 0.1300 0.0000,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment silencer
+		{
+			offset = 0.0000 -0.0190 0.1520,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+	}
+	fixing Fix Browning Hi-Power
+	{			
+		Require : HiPower,		
+		Fixer : HiPower=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	item F1	
+    {
+        DisplayName	                =	Lithgow F1,
+        Icon	                    =	Lithgow_F1,
+        WeaponSprite	            =	F1_Model,
+        Weight	                    =	4.23,
+        MagazineType                =   F1_Magazine,
+        AmmoType                    =   Base.Bullets9mm,	
+        AmmoBox                     =   Bullets9mmBox,
+        MaxAmmo                     =   34,
+        RecoilDelay	                =	0,
+        ReloadTime                  =   35,
+        AimingTime                  =   25,
+        MinRange	                =	0.3,
+        MaxRange	                =	8,
+        MinAngle	                =	0.950,
+        DoorDamage	                =	10,
+	    MinDamage                   =	1.1,
+	    MaxDamage                   =	1.6,
+        StopPower                   =   2,
+        PiercingBullets             =   False,
+        KnockdownMod	            =	2,
+        PushBackMod	                =	0.2,
+        FireMode                    =   Auto,
+        FireModePossibilities       =   Auto/Single,
+        
+        CriticalChance                  = 25,
+        AimingPerkCritModifier          = 25,
+        HitChance                       = 35,
+        AimingPerkHitChanceModifier     = 15,
+        AimingPerkMinAngleModifier      = 0.01,
+        AimingPerkRangeModifier         = 2,
+        
+        
+        SoundVolume	                    =   35,
+        SoundRadius	                    =   40,
+	    BringToBearSound		        =	M16BringToBear,
+	    SwingSound      		        =	SMGShoot,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M9CartridgeFall,
+	    RackSound        		        =	M16Rack,
+
+        
+        Type	                        =	Weapon,
+        SubCategory	                    =	Firearm,
+        IsAimedFirearm	                =	TRUE,
+        UseEndurance	                =	FALSE,
+        ConditionMax	                =	15,
+        JamGunChance                    =   1,
+        Ranged	                        =	TRUE,
+        MetalValue                      =   45,
+        SwingTime	                    =	0.5,
+        MinimumSwingTime	            =	0.5,
+        ToHitModifier	                =	1.5,
+        SwingAmountBeforeImpact	        =	0,
+        MultipleHitConditionAffected	=	FALSE,
+        SplatSize	                    =	3,
+        SplatNumber	                    =	3,
+        SplatBloodOnNoDeath	            =	TRUE,
+        ImpactSound	                    =	null,
+        NPCSoundBoost	                =	1.5,
+        SoundGain                       =   2,
+        SwingAnim	                    =	Rifle,
+        RunAnim	                        =	Run_Weapon2,
+        IdleAnim	                    =	Idle_Weapon2,
+        ShareDamage	                    =	FALSE,
+        MaxHitCount	                    =	1,
+        KnockBackOnNoDeath	            =	TRUE,
+        ProjectileCount	                =	1,
+        ConditionLowerChanceOneIn	    =	60,
+        TwoHandWeapon                   =   TRUE,
+        RequiresEquippedBothHands       =   TRUE,
+        WeaponReloadType                =   TopMagazineReload,
+        AttachmentType                  =   Rifle,
+
+    }
+	model F1_Model
+	{
+		mesh = weapons/firearm/Lithgow_F1_Lowered,
+		texture = weapons/firearm/Lithgow_F1_image2,
+        scale = 1.0,
+
+		attachment muzzle
+		{
+			offset = 0.0030 0.0170 0.2620,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+	fixing Fix F1 Smg
+	{			
+		Require : F1,		
+		Fixer : F1=1;Aiming=5,		
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	item OWEN_SMG_Wood
+    {
+        
+        DisplayName	                =	Owen Gun,
+        Icon	                    =	OWEN_WOOD,
+        WeaponSprite	            =	OWEN_SMG_Wood_Model,
+        Weight	                    =	4.23,
+        MagazineType                =   OWEN_MAGAZINE,
+        AmmoType                    =   Base.Bullets9mm,	
+        AmmoBox                     =   Bullets9mmBox,
+        MaxAmmo                     =   32,
+        RecoilDelay	                =	0,
+        ReloadTime                  =   25,
+        AimingTime                  =   15,
+        MinRange	                =	0.3,
+        MaxRange	                =	8,
+        MinAngle	                =	0.950,
+        DoorDamage	                =	10,
+	    MinDamage                   =	1.1,
+	    MaxDamage                   =	1.6,
+        StopPower                   =   2,
+        PiercingBullets             =   False,
+        KnockdownMod	            =	2,
+        PushBackMod	                =	0.2,
+        FireMode                    =   Auto,
+        FireModePossibilities       =   Auto/Single,
+        
+        CriticalChance                  = 30,
+        AimingPerkCritModifier          = 25,
+        HitChance                       = 33,
+        AimingPerkHitChanceModifier     = 10,
+        AimingPerkMinAngleModifier      = 0.01,
+        AimingPerkRangeModifier         = 2,
+        
+        
+        SoundVolume	                    = 35,
+        SoundRadius	                    = 40,
+	    BringToBearSound		        =	M16BringToBear,
+	    SwingSound      		        =	SMGShoot,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M9CartridgeFall,
+	    RackSound        		        =	M16Rack,
+
+        
+        Type	                        =	Weapon,
+        SubCategory	                    =	Firearm,
+        IsAimedFirearm	                =	TRUE,
+        UseEndurance	                =	FALSE,
+        ConditionMax	                =	15,
+        JamGunChance                    =   1,
+        Ranged	                        =	TRUE,
+        MetalValue                      =   45,
+        SwingTime	                    =	0.5,
+        MinimumSwingTime	            =	0.5,
+        ToHitModifier	                =	1.5,
+        SwingAmountBeforeImpact	        =	0,
+        MultipleHitConditionAffected	=	FALSE,
+        SplatSize	                    =	3,
+        SplatNumber	                    =	3,
+        SplatBloodOnNoDeath	            =	TRUE,
+        ImpactSound	                    =	null,
+        NPCSoundBoost	                =	1.5,
+        SoundGain                       =   2,
+        SwingAnim	                    =	Rifle,
+        RunAnim	                        =	Run_Weapon2,
+        IdleAnim	                    =	Idle_Weapon2,
+        ShareDamage	                    =	FALSE,
+        MaxHitCount	                    =	1,
+        KnockBackOnNoDeath	            =	TRUE,
+        ProjectileCount	                =	1,
+        ConditionLowerChanceOneIn	    =	60,
+        TwoHandWeapon                   =   TRUE,
+        RequiresEquippedBothHands       =   TRUE,
+        WeaponReloadType                =   TopMagazineReload,
+        AttachmentType                  =   Rifle,
+
+    }
+	model OWEN_SMG_Wood_Model
+	{
+		mesh = weapons/firearm/OWEN_SMG,
+		texture = weapons/firearm/OWEN_WOOD,
+
+		attachment muzzle
+		{
+			offset = 0.0030 0.0170 0.2620,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+	fixing Fix Owen Gun
+	{			
+		Require : OWEN_SMG_Wood,		
+		Fixer : OWEN_SMG_Wood=1;Aiming=5,	
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	item OWEN_SMG_Camo	
+    {
+        
+        DisplayName	                =	Owen Gun,
+        Icon	                    =	OWEN_RHODESIA,
+        WeaponSprite	            =	OWEN_SMG_Camo_Model,
+        Weight	                    =	4.23,
+        MagazineType                =   OWEN_MAGAZINE,
+        AmmoType                    =   Base.Bullets9mm,	
+        AmmoBox                     =   Bullets9mmBox,
+        MaxAmmo                     =   32,
+        RecoilDelay	                =	0,
+        ReloadTime                  =   25,
+        AimingTime                  =   15,
+        MinRange	                =	0.3,
+        MaxRange	                =	8,
+        MinAngle	                =	0.950,
+        DoorDamage	                =	10,
+	    MinDamage                   =	1.1,
+	    MaxDamage                   =	1.6,
+        StopPower                   =   2,
+        PiercingBullets             =   False,
+        KnockdownMod	            =	2,
+        PushBackMod	                =	0.2,
+        FireMode                    =   Auto,
+        FireModePossibilities       =   Auto/Single,
+        
+        CriticalChance                  = 30,
+        AimingPerkCritModifier          = 25,
+        HitChance                       = 33,
+        AimingPerkHitChanceModifier     = 10,
+        AimingPerkMinAngleModifier      = 0.01,
+        AimingPerkRangeModifier         = 2,
+        
+        
+        SoundVolume	                    = 35,
+        SoundRadius	                    = 40,
+	    BringToBearSound		        =	M16BringToBear,
+	    SwingSound      		        =	SMGShoot,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M9CartridgeFall,
+	    RackSound        		        =	M16Rack,
+
+        
+        Type	                        =	Weapon,
+        SubCategory	                    =	Firearm,
+        IsAimedFirearm	                =	TRUE,
+        UseEndurance	                =	FALSE,
+        ConditionMax	                =	15,
+        JamGunChance                    =   1,
+        Ranged	                        =	TRUE,
+        MetalValue                      =   45,
+        SwingTime	                    =	0.5,
+        MinimumSwingTime	            =	0.5,
+        ToHitModifier	                =	1.5,
+        SwingAmountBeforeImpact	        =	0,
+        MultipleHitConditionAffected	=	FALSE,
+        SplatSize	                    =	3,
+        SplatNumber	                    =	3,
+        SplatBloodOnNoDeath	            =	TRUE,
+        ImpactSound	                    =	null,
+        NPCSoundBoost	                =	1.5,
+        SoundGain                       =   2,
+        SwingAnim	                    =	Rifle,
+        RunAnim	                        =	Run_Weapon2,
+        IdleAnim	                    =	Idle_Weapon2,
+        ShareDamage	                    =	FALSE,
+        MaxHitCount	                    =	1,
+        KnockBackOnNoDeath	            =	TRUE,
+        ProjectileCount	                =	1,
+        ConditionLowerChanceOneIn	    =	60,
+        TwoHandWeapon                   =   TRUE,
+        RequiresEquippedBothHands       =   TRUE,
+        WeaponReloadType                =   TopMagazineReload,
+        AttachmentType                  =   Rifle,
+
+    }
+	model OWEN_SMG_Camo_Model
+	{
+		mesh = weapons/firearm/OWEN_SMG,
+		texture = weapons/firearm/OWEN_RHODESIA,
+
+		attachment muzzle
+		{
+			offset = 0.0030 0.0170 0.2620,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+	fixing Fix Owen Gun
+	{			
+		Require : OWEN_SMG_Camo,		
+		Fixer : OWEN_SMG_Camo=1;Aiming=5,	
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	item OWEN_SMG
+    {
+        
+        DisplayName	                =	Owen Gun,
+        Icon	                    =	OWEN_OLIVE,
+        WeaponSprite	            =	OWEN_SMG_Green_2_Model,
+        Weight	                    =	4.23,
+        MagazineType                =   OWEN_MAGAZINE,
+        AmmoType                    =   Base.Bullets9mm,	
+        AmmoBox                     =   Bullets9mmBox,
+        MaxAmmo                     =   32,
+        RecoilDelay	                =	0,
+        ReloadTime                  =   25,
+        AimingTime                  =   15,
+        MinRange	                =	0.3,
+        MaxRange	                =	8,
+        MinAngle	                =	0.950,
+        DoorDamage	                =	10,
+	    MinDamage                   =	1.1,
+	    MaxDamage                   =	1.6,
+        StopPower                   =   2,
+        PiercingBullets             =   False,
+        KnockdownMod	            =	2,
+        PushBackMod	                =	0.2,
+        FireMode                    =   Auto,
+        FireModePossibilities       =   Auto/Single,
+        
+        CriticalChance                  = 30,
+        AimingPerkCritModifier          = 25,
+        HitChance                       = 33,
+        AimingPerkHitChanceModifier     = 10,
+        AimingPerkMinAngleModifier      = 0.01,
+        AimingPerkRangeModifier         = 2,
+        
+        
+        SoundVolume	                    = 35,
+        SoundRadius	                    = 40,
+	    BringToBearSound		        =	M16BringToBear,
+	    SwingSound      		        =	SMGShoot,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M9CartridgeFall,
+	    RackSound        		        =	M16Rack,
+
+        
+        Type	                        =	Weapon,
+        SubCategory	                    =	Firearm,
+        IsAimedFirearm	                =	TRUE,
+        UseEndurance	                =	FALSE,
+        ConditionMax	                =	15,
+        JamGunChance                    =   1,
+        Ranged	                        =	TRUE,
+        MetalValue                      =   45,
+        SwingTime	                    =	0.5,
+        MinimumSwingTime	            =	0.5,
+        ToHitModifier	                =	1.5,
+        SwingAmountBeforeImpact	        =	0,
+        MultipleHitConditionAffected	=	FALSE,
+        SplatSize	                    =	3,
+        SplatNumber	                    =	3,
+        SplatBloodOnNoDeath	            =	TRUE,
+        ImpactSound	                    =	null,
+        NPCSoundBoost	                =	1.5,
+        SoundGain                       =   2,
+        SwingAnim	                    =	Rifle,
+        RunAnim	                        =	Run_Weapon2,
+        IdleAnim	                    =	Idle_Weapon2,
+        ShareDamage	                    =	FALSE,
+        MaxHitCount	                    =	1,
+        KnockBackOnNoDeath	            =	TRUE,
+        ProjectileCount	                =	1,
+        ConditionLowerChanceOneIn	    =	60,
+        TwoHandWeapon                   =   TRUE,
+        RequiresEquippedBothHands       =   TRUE,
+        WeaponReloadType                =   TopMagazineReload,
+        AttachmentType                  =   Rifle,
+
+    }
+	model OWEN_SMG_Green_2_Model
+	{
+		mesh = weapons/firearm/OWEN_OLIVE,
+		texture = weapons/firearm/OWEN_OLIVE,
+
+		attachment muzzle
+		{
+			offset = 0.0030 0.0170 0.2620,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+	fixing Fix Owen Gun
+	{			
+		Require : OWEN_SMG,		
+		Fixer : OWEN_SMG=1;Aiming=5,	
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	item MP5K	
+	{
+		DisplayName 					=	MP5K Personal Defence Weapon,	
+        Icon                        	=	MP5K,	
+		WeaponSprite                	=	MP5K,
+        Weight							=	1.99,
+        MagazineType					=   MP5_Magazine,
+        AmmoType						=   Bullets9mm,
+        AmmoBox							=   Bullets9mmBox,
+        MaxAmmo							=   30,
+        RecoilDelay						=	0,
+        ReloadTime						=   30,
+        AimingTime						=   20,
+        MinRange						=	0,
+        MaxRange						=	8,
+        MinAngle						=	0.965,
+        DoorDamage						=	3,
+        MinDamage						=	0.8,
+        MaxDamage						=	1.2,
+        StopPower						=   3,
+        PiercingBullets					=   FALSE,
+        KnockdownMod					=	1,
+        PushBackMod						=	0.2,
+		FireMode                    	=	Auto,	
+        FireModePossibilities       	=	Auto/Single,
+        
+        CriticalChance                  = 40,
+        AimingPerkCritModifier          = 10,
+        HitChance                       = 15,
+        AimingPerkHitChanceModifier     = 10,
+        AimingPerkMinAngleModifier      = 0.05,
+        AimingPerkRangeModifier         = 1.5,
+        
+        
+        SoundVolume	                    =   35,
+        SoundRadius	                    =   40,
+        SwingSound	                    =   SMGShoot,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+
+        
+        Type	                        =	Weapon,
+        SubCategory	                    =	Firearm,
+        IsAimedFirearm	                =	TRUE,
+        UseEndurance	                =	FALSE,
+        ConditionMax	                =	15,
+        JamGunChance                    =   1,
+        Ranged	                        =	TRUE,
+        MetalValue                      =   45,
+        SwingTime	                    =	0.5,
+        MinimumSwingTime	            =	0.5,
+        ToHitModifier	                =	1.5,
+        SwingAmountBeforeImpact	        =	0,
+        MultipleHitConditionAffected	=	FALSE,
+        SplatSize	                    =	3,
+        SplatNumber	                    =	3,
+        SplatBloodOnNoDeath	            =	TRUE,
+        ImpactSound	                    =	null,
+        NPCSoundBoost	                =	1.5,
+        SoundGain                       =   2,
+        SwingAnim	                    =	Handgun,
+        RunAnim	                        =	Run_Weapon2,
+        IdleAnim	                    =	Idle_Weapon2,
+        ShareDamage	                    =	FALSE,
+        MaxHitCount	                    =	1,
+        KnockBackOnNoDeath	            =	TRUE,
+        ProjectileCount	                =	1,
+        ConditionLowerChanceOneIn	    =	60,
+        WeaponReloadType                =   handgun,
+        AttachmentType                  =   Holster,   
+        Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot RedDot_Vanilla reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+        ModelWeaponPart					=	Base.9mmCompensator		Base.Compensator_Pistol		silencer	silencer,
+		ModelWeaponPart					=	Base.9mmSilencer		Base.Silencer				silencer	silencer,
+        ModelWeaponPart					=	Base.MP5_Stock_Extended	Base.MP5_Stock_Extended		stock		stock,
+		ModelWeaponPart					=	Base.MP5_Stock_Detracted	Base.MP5_Stock_Detracted	stock		stock,
+        ModelWeaponPart					=	Base.RedDot				Reddot_PicatinnyShort		reddotb41		reddotb41,
+
+	}
+	fixing Fix MP5K			
+	{			
+		Require : MP5K,		
+		Fixer : MP5K=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5K
+	{
+		mesh = weapons/firearm/MP5K,
+		texture = weapons/firearm/MP5K_tex,
+		scale = 1.0,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0230 0.2050,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 -0.0560 -0.0060,
+			rotate = 0.0000 0.0000 -180.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 -0.0100 0.1840,
+			rotate = -90.0000 0.0000 180.0000,
+		}
+
+		attachment stock
+		{
+			offset = 0.0000 -0.0220 -0.0260,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+	item MP5A4	
+	{
+		DisplayName 					=	MP5A4,	
+        Icon                        	=	MP5A4_2,	
+		WeaponSprite                	=	MP5A4,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single/Burst,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	33,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	40,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	10,
+		AimingPerkRangeModifier     	=	2,
+        DoorDamage						=	3,
+        MinDamage						=	0.8,
+        MaxDamage						=	1.2,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	20,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.MP5_Magazine,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   35,
+        SoundRadius	                    =   40,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   SMGShoot,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot RedDot_Vanilla reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+        ModelWeaponPart					=	Base.9mmCompensator		Base.Compensator_Pistol		silencer	silencer,
+		ModelWeaponPart					=	Base.9mmSilencer		Base.Silencer				silencer	silencer,
+        ModelWeaponPart					=	Base.RedDot				Reddot_PicatinnyShort		reddotb41		reddotb41,
+        ModelWeaponPart					=	Base.x2Scope			Base.Acog					scopeB41		scopeB41,
+		ModelWeaponPart					=	Base.x4Scope			Base.Acog					scopeB41		scopeB41,
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5A4
+	{
+		mesh = weapons/firearm/MP5A4,
+		texture = weapons/firearm/MP5A4_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+	item M193849
+	{
+		DisplayName 					=	Beretta MAB1938/49 Type 5,	
+        Icon                        	=	MAB3849_Gun,	
+		WeaponSprite                	=	M193849,
+        Weight	                        =	3.25,
+        MagazineType                    =   9mmMAG30Beretta,
+        AmmoType                        =   Base.Bullets9mm,	
+        AmmoBox                         =   Bullets9mmBox,
+        MaxAmmo                         =   30,
+        RecoilDelay	                    =	0,
+        ReloadTime                      =   15,
+        AimingTime                      =   10,
+        MinRange	                    =	0.6,
+        MaxRange	                    =	10,
+        MinAngle	                    =	0.950,
+        DoorDamage	                    =	10,
+	    MinDamage                       =	1.1,
+	    MaxDamage                       =	1.3,
+        StopPower                       =   2,
+        PiercingBullets                 =   False,
+        KnockdownMod	                =	2,
+        PushBackMod	                    =	0.2,
+        FireMode                        =   Auto,
+        FireModePossibilities           =   Auto/Single,
+
+        
+        CriticalChance                  = 40,
+        AimingPerkCritModifier          = 15,
+        HitChance                       = 45,
+        AimingPerkHitChanceModifier     = 15,
+        AimingPerkMinAngleModifier      = 0.01,
+        AimingPerkRangeModifier         = 2,
+        
+        
+        SoundVolume	                = 50,
+       	SoundRadius	                = 70,
+		BringToBearSound		        =	M16BringToBear,
+	    SwingSound      		        =	SMGshoot,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M9CartridgeFall,
+	    RackSound        		        =	M16Rack,
+
+        Type	                        =	Weapon,
+        SubCategory	                    =	Firearm,
+        IsAimedFirearm	                =	TRUE,
+        UseEndurance	                =	FALSE,
+        ConditionMax	                =	15,
+        JamGunChance                    =   0.5,
+        Ranged	                        =	TRUE,
+        MetalValue                      =   45,
+        SwingTime	                    =	0.5,
+        MinimumSwingTime	            =	0.5,
+        ToHitModifier	                =	1.5,
+        SwingAmountBeforeImpact	        =	0,
+        MultipleHitConditionAffected	=	FALSE,
+        SplatSize	                    =	3,
+        SplatNumber	                    =	3,
+        SplatBloodOnNoDeath	            =	TRUE,
+        ImpactSound	                    =	null,
+        NPCSoundBoost	                =	1.5,
+        SoundGain                       =   2,
+        SwingAnim	                    =	Rifle,
+        RunAnim	                        =	Run_Weapon2,
+        IdleAnim	                    =	Idle_Weapon2,
+        ShareDamage	                    =	FALSE,
+        MaxHitCount	                    =	1,
+        KnockBackOnNoDeath	            =	TRUE,
+        ProjectileCount	                =	1,
+        ConditionLowerChanceOneIn	    =	60,
+        TwoHandWeapon                   =   TRUE,
+        RequiresEquippedBothHands       =   TRUE,
+        WeaponReloadType                =   boltaction,
+        AttachmentType                  =   Rifle,
+
+        ModelWeaponPart					=	Base.9mmCompensator		Base.Compensator_Pistol		silencer	silencer,
+		ModelWeaponPart					=	Base.9mmSilencer		Base.Silencer				silencer	silencer,
+
+	}
+	fixing Fix Beretta MAB1938/49 Type 5			
+	{			
+		Require : M193849,		
+		Fixer : M193849=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model M193849
+	{
+		mesh = weapons/firearm/MAB38_49,
+		texture = weapons/firearm/MAB38_49,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.3000,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+}

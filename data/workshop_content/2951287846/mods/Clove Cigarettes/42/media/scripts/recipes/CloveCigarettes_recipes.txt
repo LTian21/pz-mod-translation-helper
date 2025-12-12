@@ -1,0 +1,103 @@
+module Base
+{
+	craftRecipe Unpack Pack of Clove Cigarettes
+	{
+        timedAction = Making,
+		Time = 25,
+        OnTest = Recipe.OnTest.IsFull,
+		/* CanWalk = true, */
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.CigarettePack_Clove] mode:destroy flags[IsFull;AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 12 Base.CigaretteSingle_Clove,
+		}
+	}
+
+	craftRecipe Pack Clove Cigarette Into Pack
+	{
+        timedAction = Making,
+		Time = 25,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 12 [Base.CigaretteSingle_Clove] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.CigarettePack_Clove,
+		}
+	}
+
+	craftRecipe Take A Clove Cigarette
+	{
+        timedAction = Making,
+		Time = 15,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.CigarettePack_Clove] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.CigaretteSingle_Clove,
+		}
+	}
+
+	craftRecipe Add A Clove Cigarette
+	{
+        timedAction = Making,
+		Time = 15,
+		OnCreate = Recipe.OnCreate.AddToPack,
+		OnTest = Recipe.OnTest.CanAddToPack,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+		inputs
+		{
+			item 1 [Base.CigaretteSingle_Clove] flags[AllowFavorite;InheritFavorite],
+			item 1 [Base.CigarettePack_Clove] mode:keep flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+		}
+	}
+
+	craftRecipe Unpack Clove Cigarette Carton
+	{
+        timedAction = UnPackBox_Small,
+		Time = 50,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+		inputs
+		{
+			item 1 [Base.CigaretteCarton_Clove] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 10 Base.CigarettePack_Clove,
+		}
+	}
+
+	craftRecipe Pack Clove Cigarette Carton
+	{
+        timedAction = PackingBox_Small,
+		Time = 50,
+		OnTest = Recipe.OnTest.GenericPacking,
+		Tags = InHandCraft;Packing,
+        category = Packing,
+		inputs
+		{
+			item 10 [Base.CigarettePack_Clove] flags[IsFull;AllowFavorite;InheritFavorite;ItemCount],
+		}
+		outputs
+		{
+			item 1 Base.CigaretteCarton_Clove,
+		}
+	}
+}

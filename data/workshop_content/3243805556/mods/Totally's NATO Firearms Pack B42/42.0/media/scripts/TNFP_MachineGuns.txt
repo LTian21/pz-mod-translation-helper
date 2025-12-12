@@ -1,0 +1,986 @@
+module Base
+{
+	item M240G	
+	{				
+		DisplayName                 	=	M240G Medium Machine Gun,
+		DisplayCategory					=	Weapon,
+		Icon                        	=	M240_Gun,	
+		WeaponSprite                	=	M240G,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	MGReload,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,
+		CyclicRateMultiplier			=	1,
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,
+		MinSightRange					=	3.0,
+		MaxSightRange					=	20,
+		StopPower						=	10,
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	20,
+		CritDmgMultiplier            	=	5,
+		AimingPerkCritModifier      	=	6,
+		HitChance                   	=	50,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	5,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.61,
+		MaxRange                    	=	45,
+		AimingPerkRangeModifier     	=	0,
+		MinDamage                   	=	1.2,
+		MaxDamage                   	=	2,
+
+		MinAngle                     	=	0.965,
+		AimingPerkMinAngleModifier  	=	0.01,
+		ConditionMax                	=	10,	
+		ConditionLowerChanceOneIn   	=	200,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	50,
+		ReloadTime                  	=	60,	
+		SwingTime                   	=	0,
+		MinimumSwingTime            	=	0,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	15,
+		Weight                      	=	11.6,
+					
+		AmmoType                    	=	Base.308Bullets,	
+		AmmoBox                     	=	308Box,	
+		MaxAmmo                     	=	100,	
+		MagazineType                	=	Base.M240G_Magazine,	
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	1,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	4,	
+		DoorDamage                  	=	25,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	70,	
+		SoundRadius                 	=	170,	
+		SoundGain                   	=	2,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M14BringToBear,
+		SwingSound      		        =	GPMGShoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M14Jam,
+		BreakSound       		        =	M14Break,
+		EquipSound       		        =	M14Equip,
+		UnequipSound     		        =	M14UnEquip,
+		InsertAmmoSound  		        =	M14InsertAmmo,
+		EjectAmmoSound  		        =	M14EjectAmmo,
+		InsertAmmoStartSound		    =	M14InsertAmmoStart,
+		InsertAmmoStopSound		        =	M14InsertAmmoStop,
+		EjectAmmoStartSound		        =	M14EjectAmmoStart,
+		EjectAmmoStopSound		        =	M14EjectAmmoStop,
+		ShellFallSound    		        =	M14CartridgeFall,
+		RackSound        		        =	M14Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+		Tooltip							=	Marine Corps Infantry Issued M240 replacement for the M60. First Issued In 1991,
+
+		ModelWeaponPart = IronSight IronSight scope2 scope2,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = RedDot RedDot reddot reddot,
+		ModelWeaponPart = x2Scope x2Scope scope scope,
+		ModelWeaponPart = x4Scope x4Scope scope scope,
+		ModelWeaponPart = x8Scope x8Scope scope scope,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+		ModelWeaponPart = SUSAT           SUSAT Scope2 Scope2,
+		ModelWeaponPart = C79_Scope C79_Scope Scope2 Scope2,
+
+	}
+	fixing Fix M240G			
+	{			
+		Require : M240G,		
+		Fixer : FNMAG=1,Aiming=5,	
+		Fixer : M240G=1,Aiming=5,
+		Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	item FNMAG	
+	{				
+		DisplayName                 	=	FN MAG Medium Machine Gun,	
+		DisplayCategory					=	Weapon,
+		Icon                        	=	M240_Gun,	
+		WeaponSprite                	=	M240G,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	MGReload,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,
+		CyclicRateMultiplier			=	1.0,
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,
+		MinSightRange					=	3.0,
+		MaxSightRange					=	20,
+		StopPower						=	10,
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	20,
+		CritDmgMultiplier            	=	5,
+		AimingPerkCritModifier      	=	6,
+		HitChance                   	=	50,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	5,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.61,
+		MaxRange                    	=	45,
+		AimingPerkRangeModifier     	=	0,
+		MinDamage                   	=	1.2,
+		MaxDamage                   	=	2,
+
+		MinAngle                     	=	0.965,
+		AimingPerkMinAngleModifier  	=	0.01,
+		ConditionMax                	=	10,	
+		ConditionLowerChanceOneIn   	=	200,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	50,
+		ReloadTime                  	=	60,	
+		SwingTime                   	=	0,
+		MinimumSwingTime            	=	0,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	10,
+		Weight                      	=	11.8,
+					
+		AmmoType                    	=	Base.308Bullets,	
+		AmmoBox                     	=	308Box,	
+		MaxAmmo                     	=	100,	
+		MagazineType                	=	Base.M240G_Magazine,	
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	1,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	4,	
+		DoorDamage                  	=	25,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	70,	
+		SoundRadius                 	=	170,	
+		SoundGain                   	=	2,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M14BringToBear,
+		SwingSound      		        =	GPMGShoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M14Jam,
+		BreakSound       		        =	M14Break,
+		EquipSound       		        =	M14Equip,
+		UnequipSound     		        =	M14UnEquip,
+		InsertAmmoSound  		        =	M14InsertAmmo,
+		EjectAmmoSound  		        =	M14EjectAmmo,
+		InsertAmmoStartSound		    =	M14InsertAmmoStart,
+		InsertAmmoStopSound		        =	M14InsertAmmoStop,
+		EjectAmmoStartSound		        =	M14EjectAmmoStart,
+		EjectAmmoStopSound		        =	M14EjectAmmoStop,
+		ShellFallSound    		        =	M14CartridgeFall,
+		RackSound        		        =	M14Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+		Tooltip							=	One of the most common NATO GPMGs in service. Functionally the same as the M240,
+		
+		ModelWeaponPart = IronSight IronSight scope2 scope2,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = RedDot RedDot reddot reddot,
+		ModelWeaponPart = x2Scope x2Scope scope scope,
+		ModelWeaponPart = x4Scope x4Scope scope scope,
+		ModelWeaponPart = x8Scope x8Scope scope scope,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+		ModelWeaponPart = SUSAT           SUSAT scope3 scope3,
+		ModelWeaponPart = C79_Scope C79_Scope scope3 scope3,
+
+	}
+	fixing Fix FNMAG			
+	{			
+		Require : FNMAG,		
+		Fixer : FNMAG=1,Aiming=5,	
+		Fixer : M240G=1,Aiming=5,	
+		Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model M240G
+	{
+		mesh = weapons/firearm/M240G,
+		texture = weapons/firearm/M240G,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.5536 0.0419,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+
+		attachment scope
+		{
+			offset = 0.0000 0.0524 0.0667,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment scope2
+		{
+			offset = -0.0050 0.0783 0.0661,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment scope3
+		{
+			offset = 0.0000 0.0491 0.0699,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0736 0.0634,
+			rotate = 180.0000 0.0000 -180.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0206 0.4218 0.0310,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = -0.0186 -0.0000 -0.0000,
+			rotate = 0.0000 -0.0000 0.0000,
+		}
+	}
+	item MG3	
+	{				
+		DisplayName                 	=	MG 3 Medium Machine Gun,
+		DisplayCategory					=	Weapon,
+		Icon                        	=	MG3_Gun,	
+		WeaponSprite                	=	MG3,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	MGReload,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		CyclicRateMultiplier			=	1.5,
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,
+		MinSightRange					=	3.0,
+		MaxSightRange					=	20,
+		StopPower						=	10,
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	20,
+		CritDmgMultiplier            	=	5,
+		AimingPerkCritModifier      	=	6,
+		HitChance                   	=	50,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	5,
+		JamGunChance                	=	1,
+		MinRange                    	=	1.5,
+		MaxRange                    	=	45,
+		AimingPerkRangeModifier     	=	0,
+		MinDamage                   	=	1.2,
+		MaxDamage                   	=	2,
+
+		MinAngle                     	=	0.965,
+		AimingPerkMinAngleModifier  	=	0.01,
+		ConditionMax                	=	10,	
+		ConditionLowerChanceOneIn   	=	200,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	50,
+		ReloadTime                  	=	60,	
+		SwingTime                   	=	0,
+		MinimumSwingTime            	=	0,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	10,
+		Weight                      	=	11.8,
+					
+		AmmoType                    	=	Base.308Bullets,	
+		AmmoBox                     	=	308Box,	
+		MaxAmmo                     	=	50,	
+		MagazineType                	=	Base.MG3_Magazine,	
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	1,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	4,	
+		DoorDamage                  	=	25,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	70,	
+		SoundRadius                 	=	170,	
+		SoundGain                   	=	2,		
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M14BringToBear,
+		SwingSound      		        =	GPMGShoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M14Jam,
+		BreakSound       		        =	M14Break,
+		EquipSound       		        =	M14Equip,
+		UnequipSound     		        =	M14UnEquip,
+		InsertAmmoSound  		        =	M14InsertAmmo,
+		EjectAmmoSound  		        =	M14EjectAmmo,
+		InsertAmmoStartSound		    =	M14InsertAmmoStart,
+		InsertAmmoStopSound		        =	M14InsertAmmoStop,
+		EjectAmmoStartSound		        =	M14EjectAmmoStart,
+		EjectAmmoStopSound		        =	M14EjectAmmoStop,
+		ShellFallSound    		        =	M14CartridgeFall,
+		RackSound        		        =	M14Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+		ModelWeaponPart = SUSAT           SUSAT Scope2 Scope2,
+		ModelWeaponPart = C79_Scope C79_Scope Scope Scope,
+		
+	}
+	fixing Fix MG3			
+	{			
+		Require : MG3,		
+		Fixer : MG3=1,Aiming=5,	
+		Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+
+	}
+	model MG3
+	{
+		mesh = weapons/firearm/MG3,
+		texture = weapons/firearm/MG3,
+		scale = 1.0,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.5580 0.0245,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0179 0.0587,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment Scope2
+		{
+			offset = -0.0050 0.0530 0.0756,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0736 0.0570,
+			rotate = 180.0000 0.0000 -180.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0220 0.2024 -0.0225,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = -0.0186 -0.0000 -0.0000,
+			rotate = 0.0000 -0.0000 0.0000,
+		}
+	}
+	item M60	
+	{				
+		DisplayName                 	=	M60 Medium Machine Gun,	
+		DisplayCategory					=	Weapon,
+		Icon                        	=	M60,	
+		WeaponSprite                	=	M60TNFP,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	MGReload,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,
+		CyclicRateMultiplier			=	0.8,
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,
+		MinSightRange					=	3.0,
+		MaxSightRange					=	20,
+		StopPower						=	10,
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	20,
+		CritDmgMultiplier            	=	5,
+		AimingPerkCritModifier      	=	6,
+		HitChance                   	=	50,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	5,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.61,
+		MaxRange                    	=	45,
+		AimingPerkRangeModifier     	=	0,
+		MinDamage                   	=	1.2,
+		MaxDamage                   	=	2,
+
+		MinAngle                     	=	0.965,
+		AimingPerkMinAngleModifier  	=	0.01,
+		ConditionMax                	=	10,	
+		ConditionLowerChanceOneIn   	=	200,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	50,
+		ReloadTime                  	=	60,	
+		SwingTime                   	=	0,
+		MinimumSwingTime            	=	0,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	2,
+		Weight                      	=	10.5,
+					
+		AmmoType                    	=	Base.308Bullets,	
+		AmmoBox                     	=	308Box,	
+		MaxAmmo                     	=	100,	
+		MagazineType                	=	Base.M60_Magazine,	
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	1,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	4,	
+		DoorDamage                  	=	25,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	70,	
+		SoundRadius                 	=	170,	
+		SoundGain                   	=	2,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M14BringToBear,
+		SwingSound      		        =	GPMGShoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M14Jam,
+		BreakSound       		        =	M14Break,
+		EquipSound       		        =	M14Equip,
+		UnequipSound     		        =	M14UnEquip,
+		InsertAmmoSound  		        =	M14InsertAmmo,
+		EjectAmmoSound  		        =	M14EjectAmmo,
+		InsertAmmoStartSound		    =	M14InsertAmmoStart,
+		InsertAmmoStopSound		        =	M14InsertAmmoStop,
+		EjectAmmoStartSound		        =	M14EjectAmmoStart,
+		EjectAmmoStopSound		        =	M14EjectAmmoStop,
+		ShellFallSound    		        =	M14CartridgeFall,
+		RackSound        		        =	M14Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+		
+	}
+	fixing Fix M60			
+	{			
+		Require : M60,		
+		Fixer : M60=1,Aiming=5,	
+		Fixer : M60E3=1,Aiming=5,	
+		Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+
+	}
+	model M60TNFP
+	{
+		mesh = weapons/firearm/M60TNFP,
+		texture = weapons/firearm/M60_tex,
+		scale = 1.0,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.5251 0.0354,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+
+		attachment world
+		{
+			offset = -0.0272 -0.0000 -0.0088,
+			rotate = 0.0000 -17.8402 0.0000,
+		}
+	}
+	item M60E3	
+	{				
+		DisplayName                 	=	M60E3 Medium Machine Gun,	
+		DisplayCategory					=	Weapon,
+		Icon                        	=	M60E3,	
+		WeaponSprite                	=	M60E3,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	MGReload,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,
+		CyclicRateMultiplier			=	0.8,
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,
+		MinSightRange					=	3.0,
+		MaxSightRange					=	20,
+		StopPower						=	10,
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	20,
+		CritDmgMultiplier            	=	5,
+		AimingPerkCritModifier      	=	6,
+		HitChance                   	=	50,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	5,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.61,
+		MaxRange                    	=	45,
+		AimingPerkRangeModifier     	=	0,
+		MinDamage                   	=	1.2,
+		MaxDamage                   	=	2,
+
+		MinAngle                     	=	0.965,
+		AimingPerkMinAngleModifier  	=	0.01,
+		ConditionMax                	=	10,	
+		ConditionLowerChanceOneIn   	=	200,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	50,
+		ReloadTime                  	=	60,	
+		SwingTime                   	=	0,
+		MinimumSwingTime            	=	0,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	2,
+		Weight                      	=	8.96,
+					
+		AmmoType                    	=	Base.308Bullets,	
+		AmmoBox                     	=	308Box,	
+		MaxAmmo                     	=	100,	
+		MagazineType                	=	Base.M60_Magazine,	
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	1,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	4,	
+		DoorDamage                  	=	25,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	70,	
+		SoundRadius                 	=	170,	
+		SoundGain                   	=	2,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M14BringToBear,
+		SwingSound      		        =	GPMGShoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M14Jam,
+		BreakSound       		        =	M14Break,
+		EquipSound       		        =	M14Equip,
+		UnequipSound     		        =	M14UnEquip,
+		InsertAmmoSound  		        =	M14InsertAmmo,
+		EjectAmmoSound  		        =	M14EjectAmmo,
+		InsertAmmoStartSound		    =	M14InsertAmmoStart,
+		InsertAmmoStopSound		        =	M14InsertAmmoStop,
+		EjectAmmoStartSound		        =	M14EjectAmmoStart,
+		EjectAmmoStopSound		        =	M14EjectAmmoStop,
+		ShellFallSound    		        =	M14CartridgeFall,
+		RackSound        		        =	M14Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+		Tooltip							=	Improved variant of the Standard issue M60 Medium Machine Gun,
+
+		
+	}
+	fixing Fix M60E3			
+	{			
+		Require : M60E3,		
+		Fixer : M60E3=1,Aiming=5,	
+		Fixer : M60=1,Aiming=5,	
+		Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+
+	}
+	model M60E3
+	{
+		mesh = weapons/firearm/M60E3,
+		texture = weapons/firearm/M60E3_tex,
+		scale = 1.0,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.4786 0.0365,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+
+		attachment world
+		{
+			offset = -0.0240 -0.0000 -0.0063,
+			rotate = 0.0000 -14.6359 0.0000,
+		}
+	}
+	item M249E1	
+	{				
+		DisplayName                 	=	M249E1 Squad Automatic Weapon,	
+		DisplayCategory					=	Weapon,
+		Icon                        	=	M249,	
+		WeaponSprite                	=	M249E1,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	MGReload,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,
+		CyclicRateMultiplier			=	1.0,
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,
+		MinSightRange					=	2.0,
+		MaxSightRange					=	15,
+		StopPower						=	10,
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	20,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	6,
+		HitChance                   	=	50,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	5,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.61,
+		MaxRange                    	=	35,
+		AimingPerkRangeModifier     	=	0,
+		MinDamage                   	=	1.2,
+		MaxDamage                   	=	2,
+
+		MinAngle                     	=	0.965,
+		AimingPerkMinAngleModifier  	=	0.01,
+		ConditionMax                	=	10,	
+		ConditionLowerChanceOneIn   	=	200,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	50,
+		ReloadTime                  	=	60,	
+		SwingTime                   	=	0,
+		MinimumSwingTime            	=	0,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	15,
+		Weight                      	=	7.5,
+					
+		AmmoType                    	=	Base.556Bullets,	
+		AmmoBox                     	=	556Box,	
+		MaxAmmo                     	=	200,	
+		MagazineType                	=	Base.M249_Magazine,	
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	1,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	4,	
+		DoorDamage                  	=	25,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	70,	
+		SoundRadius                 	=	170,	
+		SoundGain                   	=	2,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M14BringToBear,
+		SwingSound      		        =	MGShoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M14Jam,
+		BreakSound       		        =	M14Break,
+		EquipSound       		        =	M14Equip,
+		UnequipSound     		        =	M14UnEquip,
+		InsertAmmoSound  		        =	M14InsertAmmo,
+		EjectAmmoSound  		        =	M14EjectAmmo,
+		InsertAmmoStartSound		    =	M14InsertAmmoStart,
+		InsertAmmoStopSound		        =	M14InsertAmmoStop,
+		EjectAmmoStartSound		        =	M14EjectAmmoStart,
+		EjectAmmoStopSound		        =	M14EjectAmmoStop,
+		ShellFallSound    		        =	M14CartridgeFall,
+		RackSound        		        =	M14Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+	
+		ModelWeaponPart = IronSight IronSight scope2 scope2,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = RedDot RedDot reddot reddot,
+		ModelWeaponPart = x2Scope x2Scope scope scope,
+		ModelWeaponPart = x4Scope x4Scope scope scope,
+		ModelWeaponPart = x8Scope x8Scope scope scope,
+		ModelWeaponPart = SUSAT           SUSAT Scope2 Scope2,
+		ModelWeaponPart = C79_Scope C79_Scope Scope3 Scope3,
+	}
+	fixing Fix M249E1			
+	{			
+		Require : M249E1,		
+		Fixer : M249E1=1,Aiming=5,
+		Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model M249E1
+	{
+		mesh = weapons/firearm/FN_MINIMI,
+		texture = weapons/firearm/FN_MINIMI_GREEN,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.4419 0.0365,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+
+		attachment scope
+		{
+			offset = 0.0000 0.0347 0.0815,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment scope2
+		{
+			offset = -0.0050 0.0043 0.0900,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment scope3
+		{
+			offset = 0.0000 0.0210 0.0610,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0736 0.0570,
+			rotate = 180.0000 0.0000 -180.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0220 0.2024 -0.0225,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = -0.0186 -0.0000 -0.0000,
+			rotate = 0.0000 -0.0000 0.0000,
+		}
+	}
+	item M249PIP	
+	{				
+		DisplayName                 	=	M249 PIP Squad Automatic Weapon,	
+		DisplayCategory					=	Weapon,
+		Icon                        	=	M249,	
+		WeaponSprite                	=	M249PIP,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	MGReload,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,
+		CyclicRateMultiplier			=	1.5,
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,
+		MinSightRange					=	2.0,
+		MaxSightRange					=	15,
+		StopPower						=	10,
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	20,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	6,
+		HitChance                   	=	50,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	5,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.61,
+		MaxRange                    	=	35,
+		AimingPerkRangeModifier     	=	0,
+		MinDamage                   	=	1.2,
+		MaxDamage                   	=	2,
+
+		MinAngle                     	=	0.965,
+		AimingPerkMinAngleModifier  	=	0.01,
+		ConditionMax                	=	10,	
+		ConditionLowerChanceOneIn   	=	200,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	50,
+		ReloadTime                  	=	60,	
+		SwingTime                   	=	0,
+		MinimumSwingTime            	=	0,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	15,,
+		Weight                      	=	7.5,
+					
+		AmmoType                    	=	Base.556Bullets,	
+		AmmoBox                     	=	556Box,	
+		MaxAmmo                     	=	200,	
+		MagazineType                	=	Base.M249_Magazine,	
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	1,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	4,	
+		DoorDamage                  	=	25,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	70,	
+		SoundRadius                 	=	170,	
+		SoundGain                   	=	2,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M14BringToBear,
+		SwingSound      		        =	MGShoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M14Jam,
+		BreakSound       		        =	M14Break,
+		EquipSound       		        =	M14Equip,
+		UnequipSound     		        =	M14UnEquip,
+		InsertAmmoSound  		        =	M14InsertAmmo,
+		EjectAmmoSound  		        =	M14EjectAmmo,
+		InsertAmmoStartSound		    =	M14InsertAmmoStart,
+		InsertAmmoStopSound		        =	M14InsertAmmoStop,
+		EjectAmmoStartSound		        =	M14EjectAmmoStart,
+		EjectAmmoStopSound		        =	M14EjectAmmoStop,
+		ShellFallSound    		        =	M14CartridgeFall,
+		RackSound        		        =	M14Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+	
+		ModelWeaponPart = IronSight IronSight scope2 scope2,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = RedDot RedDot reddot reddot,
+		ModelWeaponPart = x2Scope x2Scope scope scope,
+		ModelWeaponPart = x4Scope x4Scope scope scope,
+		ModelWeaponPart = x8Scope x8Scope scope scope,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+		ModelWeaponPart = SUSAT           SUSAT Scope2 Scope2,
+		ModelWeaponPart = C79_Scope C79_Scope Scope3 Scope3,
+	}
+	fixing Fix M249PIP		
+	{			
+		Require : M249PIP,		
+		Fixer : M249PIP=1,Aiming=5,
+		Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model M249PIP
+	{
+		mesh = weapons/firearm/M249,
+		texture = weapons/firearm/M249_NEW_GREEN,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.4419 0.0365,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+
+		attachment scope
+		{
+			offset = 0.0000 0.0347 0.0815,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment scope2
+		{
+			offset = -0.0050 0.0043 0.0900,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment scope3
+		{
+			offset = 0.0000 0.0210 0.0610,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0736 0.0570,
+			rotate = 180.0000 0.0000 -180.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0220 0.2024 -0.0225,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = -0.0186 -0.0000 -0.0000,
+			rotate = 0.0000 -0.0000 0.0000,
+		}
+	}
+}

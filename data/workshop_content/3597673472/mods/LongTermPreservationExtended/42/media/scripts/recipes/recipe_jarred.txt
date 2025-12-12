@@ -1,0 +1,118 @@
+module Skittles
+{
+  imports
+  {
+    Base
+  }
+
+	  craftRecipe Make Jar Of Corned Meat
+  {
+    timedAction = MixingBowl,
+		Time = 100,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+    category = Cooking,
+	xpAward = Cooking:10,
+    inputs
+    {
+		item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy,
+		item 1 [Base.JarLid] mode:destroy,
+		item 5 [Skittles.CuredBeef;Skittles.CuredBird;Skittles.CuredChickenFillet;Skittles.CuredFish;Skittles.CuredFrog;Skittles.CuredMutton;Skittles.CuredPork;Skittles.CuredPorkChop;Skittles.CuredRabbit;Skittles.CuredRodent;Skittles.CuredTurkey;Skittles.CuredVenison] flags[ItemCount] mappers[meatType] mode:destroy,
+		item 2 [Base.Lard;Skittles.Schmaltz;Skittles.Tallow] flags[ItemCount] mode:destroy,
+		item 1.0 tags[Salt],
+    }
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+    itemMapper meatType
+		{
+	Skittles.CornedBeef = Skittles.CuredBeef,
+	Skittles.CornedBird = Skittles.CuredBird,
+	Skittles.CornedChicken = Skittles.CuredChickenFillet,
+	Skittles.CornedFish = Skittles.CuredFish,
+	Skittles.CornedFrog = Skittles.CuredFrog,	
+	Skittles.CornedMutton = Skittles.CuredMutton,
+	Skittles.CornedPork = Skittles.CuredPork,
+	Skittles.CornedRabbit = Skittles.CuredRabbit,
+	Skittles.CornedRodent = Skittles.CuredRodent,
+	Skittles.CornedTurkey = Skittles.CuredTurkey,
+	Skittles.CornedVenison = Skittles.CuredVenison,
+		}
+    
+  }
+  
+    craftRecipe Open Jar Of Corned Meat
+	{
+    timedAction = OpenTinCan,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+    category = Cooking,
+	xpAward = Cooking:10,
+		inputs
+		{
+			item 1 [Skittles.CornedBeef;Skittles.CornedBird;Skittles.CornedChicken;Skittles.CornedFish;Skittles.CornedFrog;Skittles.CornedMutton;Skittles.CornedPork;Skittles.CornedRabbit;Skittles.CornedRodent;Skittles.CornedTurkey;Skittles.CornedVenison] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+		}
+		outputs
+		{
+			item 1 mapper:foodType,
+		}
+		itemMapper foodType
+		{
+	Skittles.CornedBeef_Open = Skittles.CornedBeef,
+	Skittles.CornedBird_Open = Skittles.CornedBird,
+	Skittles.CornedChicken_Open = Skittles.CornedChicken,
+	Skittles.CornedFish_Open = Skittles.CornedFish,
+	Skittles.CornedFrog_Open = Skittles.CornedFrog,	
+	Skittles.CornedMutton_Open = Skittles.CornedMutton,
+	Skittles.CornedPork_Open = Skittles.CornedPork,
+	Skittles.CornedRabbit_Open = Skittles.CornedRabbit,
+	Skittles.CornedRodent_Open = Skittles.CornedRodent,
+	Skittles.CornedTurkey_Open = Skittles.CornedTurkey,
+	Skittles.CornedVenison_Open = Skittles.CornedVenison,
+			
+		}
+	}
+  
+	  craftRecipe Make Jar Of Minced Garlic
+  {
+    timedAction = MixingBowl,
+		Time = 100,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+    category = Cooking,
+	xpAward = Cooking:10,
+    inputs
+    {
+		item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy,
+		item 1 [Base.JarLid] mode:destroy,
+		item 25 [Skittles.MincedGarlicMash] flags[ItemCount] mode:destroy,
+		item 1.0 tags[Salt],
+		item 3.0 tags[Oil],
+    }
+		outputs
+		{
+			item 1 Skittles.MincedGarlic,
+		}
+    
+  }
+  
+    craftRecipe Open Jar Of Minced Garlic
+	{
+    timedAction = OpenTinCan,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+    category = Cooking,
+	xpAward = Cooking:10,
+		inputs
+		{
+			item 1 [Skittles.MincedGarlic] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+		}
+		outputs
+		{
+			item 1 Skittles.MincedGarlic_Open,
+		}
+	}
+}
