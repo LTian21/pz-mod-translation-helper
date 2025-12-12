@@ -1,0 +1,62 @@
+/* Ammo Maker by STIMP_TM */
+
+module Base {
+
+	xuiSkin default
+	{
+		entity ES_ammomaker_BirdFeeder
+		{
+			LuaWindowClass  = ISEntityWindow,
+			DisplayName     = Bird Feeder,
+			Icon            = Build_ammomaker_BirdFeeder,
+		}
+	}
+
+    entity ammomaker_BirdFeeder
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_ammomaker_BirdFeeder,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            canBePadlocked  = true,
+            OnCreate        = BuildRecipeCode.birdFeeder.OnCreate,
+            face S
+            {
+                layer
+                {
+                    row = ammomaker_tilesheet_0_0,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = ammomaker_tilesheet_0_1,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction     = BuildWoodenStructureMedium,
+            time            = 100,
+            SkillRequired   = Woodwork:4,
+            xpAward         = Woodwork:40,
+            category        = AmmoMaker,
+            tags            = carpentry,
+            ToolTip         = Tooltip_Craft_BirdFeeder,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 1 tags[Saw;CrudeSaw] mode:keep flags[MayDegradeLight],
+                item 2 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}
