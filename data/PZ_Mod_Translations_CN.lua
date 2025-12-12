@@ -3195,6 +3195,10 @@ return {
         ["ItemName_Base.792Box"] = "7.92mm\231\155\146\232\163\133",
         ["ItemName_Base.792Bullets"] = "7.92mm\229\173\144\229\188\185",
     },
+    ["\\[B42]Chevrolet Corvette C6"] = {
+        ["IGUI_VehiclePartATA2VisualWires"] = "'\230\149\158\231\175\183\232\189\166\233\161\182",
+        ["IGUI_VehiclePartATAVisualLadder"] = "'\229\174\154\229\136\182\230\137\176\230\181\129\230\157\191",
+    },
     ["\\[B42]WalletFix"] = {
         ["ItemName_Base.Wallet2"] = "\233\146\177\229\140\133",
         ["ItemName_Base.Wallet3"] = "\233\146\177\229\140\133",
