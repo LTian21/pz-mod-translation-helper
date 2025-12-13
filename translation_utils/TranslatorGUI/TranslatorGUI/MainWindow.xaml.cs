@@ -6,12 +6,14 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows; // 用于 RoutedEventArgs
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Threading;
@@ -146,6 +148,7 @@ namespace 翻译工具
                 if (txtPath != null) txtPath.Text = displayPath;
 
                 UpdateLanguageDisplay();
+                UpdateVersionDisplay();
             }
             catch { }
 
@@ -359,6 +362,7 @@ namespace 翻译工具
 
                 if (txtPath != null) this.txtPath.Text = path;
                 UpdateLanguageDisplay();
+                UpdateVersionDisplay();
 
                 dlg.DialogResult = true;
                 dlg.Close();
@@ -732,6 +736,30 @@ namespace 翻译工具
                 txtLanguage.Text = $"{lang} ({suffix})";
             }
             catch { }
+        }
+
+        private TextBlock? VersionTextBlock => FindName("txtVersion") as TextBlock;
+
+        private void UpdateVersionDisplay()
+        {
+            var versionBlock = VersionTextBlock;
+            if (versionBlock == null) return;
+
+            try
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                var version = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+                if (string.IsNullOrWhiteSpace(version))
+                {
+                    version = assembly.GetName().Version?.ToString();
+                }
+                version = version?.Split('+')[0]?.Trim();
+                versionBlock.Text = string.IsNullOrWhiteSpace(version) ? "版本未知" : version;
+            }
+            catch
+            {
+                versionBlock.Text = "版本未知";
+            }
         }
 
         /// <summary>
