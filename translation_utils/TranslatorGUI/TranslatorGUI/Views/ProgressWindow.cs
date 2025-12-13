@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -73,22 +74,7 @@ namespace 翻译工具.Views
         /// </summary>
         public void UpdateProgress(int percentage, string description)
         {
-            if (!Dispatcher.CheckAccess())
-            {
-                Dispatcher.Invoke(() => UpdateProgress(percentage, description));
-                return;
-            }
-
-            // 切换为确定进度模式
-            if (_progressBar.IsIndeterminate)
-            {
-                _progressBar.IsIndeterminate = false;
-            }
-
-            _progressBar.Value = percentage;
-            _textBlock.Text = description;
-            _progressTextBlock.Text = $"{percentage}%";
-            _progressTextBlock.Foreground = System.Windows.Media.Brushes.Black; // 确保百分比文本颜色为黑色
+            RunOnUiThread(() => UpdateProgressInternal(percentage, description, null));
         }
 
         /// <summary>
@@ -96,13 +82,25 @@ namespace 翻译工具.Views
         /// </summary>
         public void UpdateProgressWithInfo(int percentage, string description, string? extraInfo)
         {
-            if (!Dispatcher.CheckAccess())
-            {
-                Dispatcher.Invoke(() => UpdateProgressWithInfo(percentage, description, extraInfo));
-                return;
-            }
+            RunOnUiThread(() => UpdateProgressInternal(percentage, description, extraInfo));
+        }
 
-            // 切换为确定进度模式
+        /// <summary>
+        /// 设置为不确定进度模式并更新描述。
+        /// </summary>
+        public void SetIndeterminate(string description = "命令正在执行，请稍候...")
+        {
+            RunOnUiThread(() =>
+            {
+                _progressBar.IsIndeterminate = true;
+                _textBlock.Text = description;
+                _progressTextBlock.Text = "";
+                _progressTextBlock.Foreground = System.Windows.Media.Brushes.Black; // 确保百分比文本颜色为黑色
+            });
+        }
+
+        private void UpdateProgressInternal(int percentage, string description, string? extraInfo)
+        {
             if (_progressBar.IsIndeterminate)
             {
                 _progressBar.IsIndeterminate = false;
@@ -116,20 +114,17 @@ namespace 翻译工具.Views
         }
 
         /// <summary>
-        /// 设置为不确定进度模式并更新描述。
+        /// 确保 UI 更新在 Dispatcher 线程上执行，避免重复的线程检查代码。
         /// </summary>
-        public void SetIndeterminate(string description = "命令正在执行，请稍候...")
+        private void RunOnUiThread(Action updateAction)
         {
-            if (!Dispatcher.CheckAccess())
+            if (Dispatcher.CheckAccess())
             {
-                Dispatcher.Invoke(() => SetIndeterminate(description));
+                updateAction();
                 return;
             }
 
-            _progressBar.IsIndeterminate = true;
-            _textBlock.Text = description;
-            _progressTextBlock.Text = "";
-            _progressTextBlock.Foreground = System.Windows.Media.Brushes.Black; // 确保百分比文本颜色为黑色
+            Dispatcher.Invoke(updateAction);
         }
     }
 }

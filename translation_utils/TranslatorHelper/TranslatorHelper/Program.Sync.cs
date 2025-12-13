@@ -164,10 +164,21 @@ partial class Program
 
         // Apply proxy settings
         var proxyUrl = ProxyHelper.GetHttpProxyUrl();
+        
+        // Force OpenSSL and ignore system config
+        startInfo.EnvironmentVariables["GIT_SSL_BACKEND"] = "openssl";
+        startInfo.EnvironmentVariables["GIT_CONFIG_NOSYSTEM"] = "1";
+        startInfo.EnvironmentVariables["GIT_CONFIG_GLOBAL"] = "NUL";
+
         if (!string.IsNullOrEmpty(proxyUrl))
         {
             startInfo.EnvironmentVariables["HTTP_PROXY"] = proxyUrl;
             startInfo.EnvironmentVariables["HTTPS_PROXY"] = proxyUrl;
+        }
+        else
+        {
+            startInfo.EnvironmentVariables["HTTP_PROXY"] = "";
+            startInfo.EnvironmentVariables["HTTPS_PROXY"] = "";
         }
 
         using var process = new System.Diagnostics.Process { StartInfo = startInfo };

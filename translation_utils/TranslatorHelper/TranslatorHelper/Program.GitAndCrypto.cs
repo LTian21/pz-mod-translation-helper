@@ -6,29 +6,33 @@ using System.Threading.Tasks;
 
 partial class Program
 {
-    // Git 和加密辅助
+    // Git 操作和加密解密
     static async Task<bool> PullLatestChanges(string repoPath, AppConfig config)
     {
         try
         {
-            Console.WriteLine("[开始] 拉取最新更改...");
+            Console.WriteLine("[开始] 获取最新更新...");
             
             // 使用 MinGit 拉取更新
             var success = await MinGitHelper.PullAsync(repoPath, config.Key);
             
             if (!success)
             {
-                Console.WriteLine("[错误] 拉取失败: 存在合并冲突");
-                Console.WriteLine("[提示] 请联系技术人员处理冲突");
+                Console.WriteLine("[错误] 获取失败: 可能存在合并冲突");
+                Console.WriteLine("[提示] 请联系技术人员解决冲突");
                 return false;
             }
 
-            Console.WriteLine("[成功] 代码已更新到最新版本");
+            Console.WriteLine("[成功] 本地已更新到最新版本");
             return true;
+        }
+        catch (MinGitHelper.GitNetworkException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[错误] 拉取失败: {ex.Message}");
+            Console.WriteLine($"[错误] 获取失败: {ex.Message}");
             return false;
         }
     }

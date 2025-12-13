@@ -39,6 +39,21 @@ partial class Program
         ProxyHelper.DetectSystemProxy();
         Console.WriteLine();
 
+        // 1. 强制 MinGit 使用 OpenSSL 后端，避免 schannel 证书吊销检查问题
+        Environment.SetEnvironmentVariable("GIT_SSL_BACKEND", "openssl");
+        // 2. 忽略系统和全局 Git 配置，防止外部配置干扰
+        Environment.SetEnvironmentVariable("GIT_CONFIG_NOSYSTEM", "1");
+        Environment.SetEnvironmentVariable("GIT_CONFIG_GLOBAL", "NUL");
+
+        // 3. 将检测到的代理应用到环境变量，供 MinGit 使用
+        var proxyUrl = ProxyHelper.GetHttpProxyUrl();
+        if (!string.IsNullOrEmpty(proxyUrl))
+        {
+            Environment.SetEnvironmentVariable("HTTP_PROXY", proxyUrl);
+            Environment.SetEnvironmentVariable("HTTPS_PROXY", proxyUrl);
+            Console.WriteLine($"[系统] 已设置 Git 代理环境变量: {proxyUrl}");
+        }
+
         // 少于 6 个参数进入测试模式
         isTestMode = args.Length < 6;
 

@@ -46,4 +46,5 @@ class AppConfig
     public required string Operation { get; set; }
     public required string CommitMessage { get; set; }
     public required string LocalPath { get; set; }
+    public bool UseMirror { get; set; }
 }
