@@ -1,19 +1,23 @@
-module Base
+module FTAModule
 {
+	imports
+	{
+		Base
+	}
 	craftRecipe CraftAnimalFeed
     {
         timedAction = Making,
-		time = 60,
-	    tags = AnySurfaceCraft,
+		time = 120,
+	    tags = AnySurfaceCraft;Cooking,
         category = AnimalFeed,
 		SkillRequired = Husbandry:3,
         inputs
         {
-            item 1 [15:Base.WheatSeed;15:Base.RyeSeed;15:Base.BarleySeed;15:Base.CornSeed;15:Base.SoybeansSeed] flags[ItemCount] mode:destroy,
-			item 1 [1:Base.Cabbage;1:Base.Pumpkin;2:Base.Potato;2:Base.Eggplant;2:Base.SweetPotato;3:Base.Broccoli;3:Base.Carrots;3:Base.Zucchini;10:Base.RedRadish] flags[ItemCount] mode:destroy,
-			item 30 [Base.HayTuft] flags[ItemCount] mode:destroy,
-			item 30 [Base.GrassTuft] flags[ItemCount] mode:destroy,
-			item 1 [Base.EmptySandbag;Base.Bag_DeadRats;Base.Bag_DeadMice;Base.Bag_DeadRoaches;Base.Bag_TreasureBag;Base.WheatSack;Base.WheatSeedSack] flags[ItemCount] mode:destroy,
+            item 1 [15:Base.WheatSeed;15:Base.RyeSeed;15:Base.BarleySeed;15:Base.CornSeed;15:Base.SoybeansSeed] flags[ItemCount],
+			item 1 [1:Base.Cabbage;1:Base.Pumpkin;2:Base.Potato;2:Base.Eggplant;2:Base.SweetPotato;3:Base.Broccoli;3:Base.Carrots;3:Base.Zucchini;10:Base.RedRadish] flags[ItemCount],
+			item 30 [Base.HayTuft] flags[ItemCount],
+			item 30 [Base.GrassTuft] flags[ItemCount],
+			item 1 [Base.EmptySandbag;Base.Bag_DeadRats;Base.Bag_DeadMice;Base.Bag_DeadRoaches;Base.Bag_TreasureBag;Base.WheatSack;Base.WheatSeedSack] flags[ItemCount],
 			item 1 tags[Bucket] flags[ItemCount] mode:keep,
 			item 1 tags[WoodHandle] flags[ItemCount] mode:keep,
         }
@@ -27,12 +31,12 @@ module Base
     {
         time = 10,
 	    timedAction = Making,
-		tags = AnySurfaceCraft,
+		tags = InHandCraft;CanBeDoneInDark,
         category = AnimalFeed,
 		SkillRequired = Husbandry:1,
         inputs
         {
-            item 2 [Base.GrassTuft] flags[ItemCount] mode:destroy,
+            item 2 [Base.GrassTuft] flags[ItemCount],
         }
         outputs
         {
@@ -44,17 +48,17 @@ module Base
     {
         time = 120,
 	    timedAction = Making,
-		tags = AnySurfaceCraft,
+		tags = InHandCraft;CanBeDoneInDark,
         category = AnimalFeed,
 		SkillRequired = Husbandry:1,
         inputs
         {
-            item 100 [Base.HayTuft] flags[ItemCount] mode:destroy,
-			item 5 [Base.Twine] mode:destroy,
+            item 100 [Base.HayTuft] flags[ItemCount],
+			item 5 [Base.Twine],
         }
         outputs
         {
-            item 1 Base.Haybale,
+            item 1 FTAModule.Haybale,
         }
     }
 	
@@ -69,14 +73,14 @@ module Base
         {
             item 1 [*],
 			-fluid 10.0 [CowMilk;SheepMilk],
-			item 1 [Base.Bucket;Base.BucketEmpty;Base.BucketForged;Base.BucketWaterDebug] flags[ItemCount] mode:destroy,
+			item 1 [Base.Bucket;Base.BucketEmpty;Base.BucketForged;Base.BucketWaterDebug] flags[ItemCount],
 			item 1 tags[WoodHandle;MixingUtensil] flags[ItemCount] mode:keep,
 			item 1 [Base.CheeseCloth] flags[ItemCount] mode:keep,
 			item 1 [Base.Strainer] flags[ItemCount] mode:keep,
         }
         outputs
         {
-            item 1 Base.Bucket_AnimalMilkMixture,
+            item 1 FTAModule.Bucket_AnimalMilkMixture,
         }
     }
 	
@@ -89,7 +93,7 @@ module Base
 		SkillRequired = Husbandry:4,
         inputs
         {
-            item 1 [Base.Bucket_PowderedMilk] mode:destroy,
+            item 1 [FTAModule.Bucket_PowderedMilk],
 			item 1 tags[MixingUtensil] flags[ItemCount] mode:keep,
 			item 1 [Base.Strainer] flags[ItemCount] mode:keep,
         }
