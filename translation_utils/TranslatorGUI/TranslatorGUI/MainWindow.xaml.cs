@@ -309,7 +309,7 @@ namespace 翻译工具
             // 额外选项：是否使用镜像站进行首次下载 (记住历史选择)
             var chkUseMirror = new System.Windows.Controls.CheckBox
             {
-                Content = "首次下载时使用镜像站",
+                Content = "首次下载时使用镜像站(直连镜像站，访问GitHub仍可使用代理)",
                 Margin = new System.Windows.Thickness(0, 4, 0, 8),
                 IsChecked = _config.UseMirrorSiteFirstDownload
             };

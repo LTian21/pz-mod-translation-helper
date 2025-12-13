@@ -23,7 +23,7 @@ partial class Program
             if (!localRepoExists)
             {
                 Console.WriteLine("本地仓库不存在，开始克隆...");
-                
+
                 // 确保父目录存在
                 string? parentDir = Path.GetDirectoryName(config.LocalPath);
                 if (!string.IsNullOrEmpty(parentDir) && !Directory.Exists(parentDir))
@@ -31,30 +31,92 @@ partial class Program
                     Directory.CreateDirectory(parentDir);
                 }
 
+                string cloneUrl = config.RepoUrl;
+                bool useProxy = ShouldUseGitProxy();
+                if (config.UseMirror)
+                {
+                    cloneUrl = config.RepoUrl.Replace("https://github.com/", "https://gitclone.com/github.com/");
+                    Console.WriteLine($"[提示] 使用镜像地址进行克隆: {cloneUrl}");
+                    useProxy = false;
+                }
+                else
+                {
+                    Console.WriteLine(useProxy
+                        ? "[提示] 检测到系统代理，通过代理克 clone GitHub 仓库"
+                        : "[提示] 未检测到系统代理，直接连接 GitHub 仓库");
+                }
+
                 // 使用 MinGit 克隆仓库
-                bool cloneSuccess = await MinGitHelper.CloneAsync(config.RepoUrl, config.LocalPath, config.Key);
-                
+                bool cloneSuccess = await MinGitHelper.CloneAsync(cloneUrl, config.LocalPath, config.Key, useProxy);
+
                 if (!cloneSuccess)
                 {
                     Console.WriteLine("[错误] 克隆失败");
-                    Console.WriteLine("[提示] 请检查网络连接、使用代理或稍后重试");
+                    Console.WriteLine("[提示] 请检查网络连接、代理设置或镜像地址是否可用");
                     return 1;
+                }
+
+                // 如果使用了镜像，克隆后立即修复仓库指向
+                if (config.UseMirror)
+                {
+                    Console.WriteLine("[提示] 镜像克隆完成，开始修复仓库指向...");
+                    bool repairSuccess = await RepairMirrorCloneAsync(config.LocalPath, config.RepoUrl, config.Key, githubRepo.DefaultBranch);
+                    if (!repairSuccess)
+                    {
+                        Console.WriteLine("[错误] 修复镜像仓库失败。仓库可能无法用于后续操作。");
+                        return 1;
+                    }
+                    Console.WriteLine("[成功] 仓库指向已修复。");
                 }
             }
             else
             {
-                Console.WriteLine("本地仓库已存在，检查是否需要修复...");
+                Console.WriteLine("本地仓库已存在，检查是否需要修复/更新...");
+
+                // 检查是否是镜像仓库，如果是则修复
+                string? currentRemoteUrl = await MinGitHelper.GetRemoteUrlAsync(config.LocalPath, "origin");
+                bool isMirror = !string.IsNullOrEmpty(currentRemoteUrl) && 
+                                (currentRemoteUrl.Contains("gitclone.com", StringComparison.OrdinalIgnoreCase) || 
+                                 !currentRemoteUrl.StartsWith("https://github.com/", StringComparison.OrdinalIgnoreCase));
+
+                if (isMirror)
+                {
+                    Console.WriteLine($"[提示] 检测到本地仓库远程地址 ({currentRemoteUrl}) 可能为镜像站，正在修复为 GitHub 原址...");
+                    // 使用非破坏性修复 (不重置本地修改)
+                    bool repairSuccess = await RepairExistingMirrorRepositoryAsync(config.LocalPath, config.RepoUrl, config.Key);
+                    if (!repairSuccess)
+                    {
+                        Console.WriteLine("[错误] 修复镜像仓库失败。请手动检查仓库状态。");
+                        return 1;
+                    }
+                    Console.WriteLine("[成功] 仓库指向已修复。");
+                }
                 
-                // 尝试拉取更新以验证仓库完整性
-                bool pullSuccess = await PullLatestChanges(config.LocalPath, config);
+                // 尝试拉取更新并验证仓库完整性
+                bool pullSuccess = false;
+                try
+                {
+                    pullSuccess = await PullLatestChanges(config.LocalPath, config);
+                }
+                catch (MinGitHelper.GitNetworkException ex)
+                {
+                    Console.WriteLine($"[警告] {ex.Message}");
+                    Console.WriteLine("[提示] 网络连接问题，跳过仓库修复/重建。请检查代理设置。");
+                    return 1;
+                }
+
                 if (!pullSuccess)
                 {
-                    Console.WriteLine("[警告] 本地仓库可能损坏，尝试修复或重新克隆");
+                    Console.WriteLine("[错误] 本地仓库可能损坏，尝试修复或重新克隆");
                     
                     // 尝试修复仓库
                     try
                     {
-                        await RepairRepositoryAsync(config.LocalPath, config.RepoUrl, config.Key, githubRepo.DefaultBranch);
+                        var repaired = await RepairRepositoryAsync(config.LocalPath, config.RepoUrl, config.Key, githubRepo.DefaultBranch);
+                        if (!repaired)
+                        {
+                            throw new InvalidOperationException("无法修复本地仓库");
+                        }
                     }
                     catch (Exception repairEx)
                     {
@@ -63,11 +125,15 @@ partial class Program
                         
                         // 删除并重新克隆
                         ForceDeleteDirectory(config.LocalPath);
-                        bool recloneSuccess = await MinGitHelper.CloneAsync(config.RepoUrl, config.LocalPath, config.Key);
+                        bool useProxyForReclone = ShouldUseGitProxy();
+                        Console.WriteLine(useProxyForReclone
+                            ? "[提示] 重新克隆时通过代理连接 GitHub 仓库"
+                            : "[提示] 重新克隆时直接连接 GitHub 仓库");
+                        bool recloneSuccess = await MinGitHelper.CloneAsync(config.RepoUrl, config.LocalPath, config.Key, useProxyForReclone);
                         
                         if (!recloneSuccess)
                         {
-                            Console.WriteLine("[错误] 重新克隆失败");
+                            Console.WriteLine("[错误] 重新克 clone 失败");
                             return 1;
                         }
                     }
@@ -168,6 +234,73 @@ partial class Program
     }
 
     /// <summary>
+    /// 修复已存在的镜像仓库，仅修改远程地址并拉取，不重置本地修改
+    /// </summary>
+    private static async Task<bool> RepairExistingMirrorRepositoryAsync(string repoPath, string originalRepoUrl, string pat)
+    {
+        try
+        {
+            Console.WriteLine($"[修复步骤 1/2] 重设远程 'origin' 的 URL 为: {originalRepoUrl}");
+            if (!await MinGitHelper.RemoteSetUrlAsync(repoPath, "origin", originalRepoUrl))
+            {
+                Console.WriteLine("[错误] 设置远程 URL 失败。");
+                return false;
+            }
+
+            Console.WriteLine("[修复步骤 2/2] 强制从新的 'origin' 拉取所有数据...");
+            if (!await MinGitHelper.FetchAsync(repoPath, pat, "origin", force: true, prune: true))
+            {
+                Console.WriteLine("[错误] 强制拉取失败。");
+                return false;
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[错误] 修复镜像仓库失败: {ex.Message}");
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// 修复从镜像克隆的仓库，使其指向原始GitHub地址
+    /// </summary>
+    private static async Task<bool> RepairMirrorCloneAsync(string repoPath, string originalRepoUrl, string pat, string defaultBranch)
+    {
+        try
+        {
+            Console.WriteLine($"[修复步骤 1/3] 重设远程 'origin' 的 URL 为: {originalRepoUrl}");
+            if (!await MinGitHelper.RemoteSetUrlAsync(repoPath, "origin", originalRepoUrl))
+            {
+                Console.WriteLine("[错误] 设置远程 URL 失败。");
+                return false;
+            }
+
+            Console.WriteLine("[修复步骤 2/3] 强制从新的 'origin' 拉取所有数据...");
+            if (!await MinGitHelper.FetchAsync(repoPath, pat, "origin", force: true, prune: true))
+            {
+                Console.WriteLine("[错误] 强制拉取失败。");
+                return false;
+            }
+
+            Console.WriteLine($"[修复步骤 3/3] 硬重置到远程默认分支 'origin/{defaultBranch}'...");
+            if (!await MinGitHelper.ResetToRemoteAsync(repoPath, "origin", defaultBranch))
+            {
+                Console.WriteLine("[错误] 重置到远程分支失败。");
+                return false;
+            }
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[错误] 修复镜像克 clones 发生意外错误: {ex.Message}");
+            return false;
+        }
+    }
+
+    /// <summary>
     /// 修复损坏的仓库
     /// </summary>
     private static async Task<bool> RepairRepositoryAsync(string repoPath, string remoteUrl, string pat, string defaultBranch)
@@ -176,7 +309,6 @@ partial class Program
         {
             Console.WriteLine("[提示] 尝试修复仓库...");
 
-            // 验证 .git 目录存在
             string gitDir = Path.Combine(repoPath, ".git");
             if (!Directory.Exists(gitDir))
             {
@@ -184,9 +316,19 @@ partial class Program
                 return false;
             }
 
-            // 尝试重置到远程分支
-            await MinGitHelper.FetchAsync(repoPath, pat);
-            await MinGitHelper.ResetToRemoteAsync(repoPath, "origin", defaultBranch);
+            var fetchSuccess = await MinGitHelper.FetchAsync(repoPath, pat);
+            if (!fetchSuccess)
+            {
+                Console.WriteLine("[错误] 拉取远程信息失败，无法修复");
+                return false;
+            }
+
+            var resetSuccess = await MinGitHelper.ResetToRemoteAsync(repoPath, "origin", defaultBranch);
+            if (!resetSuccess)
+            {
+                Console.WriteLine("[错误] 重置到远程分支失败");
+                return false;
+            }
 
             Console.WriteLine("[成功] 仓库修复成功");
             return true;
@@ -247,5 +389,11 @@ partial class Program
         {
             return false;
         }
+    }
+
+    private static bool ShouldUseGitProxy()
+    {
+        var proxyUrl = ProxyHelper.GetHttpProxyUrl();
+        return !string.IsNullOrWhiteSpace(proxyUrl);
     }
 }
