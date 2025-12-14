@@ -148,7 +148,7 @@ partial class Program
         string arguments,
         string workingDirectory)
     {
-        var gitPath = GetGitExecutablePath();
+        var gitPath = MinGitHelper.GetGitExecutablePath();
         var startInfo = new System.Diagnostics.ProcessStartInfo
         {
             FileName = gitPath,
@@ -207,20 +207,5 @@ partial class Program
         await process.WaitForExitAsync();
 
         return (process.ExitCode, outputBuilder.ToString(), errorBuilder.ToString());
-    }
-
-    private static string GetGitExecutablePath()
-    {
-        // First try MinGit location relative to current executable
-        string exeDir = AppContext.BaseDirectory;
-        string mingitPath = Path.Combine(exeDir, "MinGit", "cmd", "git.exe");
-
-        if (File.Exists(mingitPath))
-        {
-            return mingitPath;
-        }
-
-        // Fallback to system git
-        return "git";
     }
 }
