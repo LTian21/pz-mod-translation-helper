@@ -111,39 +111,58 @@ def find_versioned_dir(parent_path):
 def find_active_media_paths(mod_root_path):
     logging.info(f"\n--- 正在为 '{mod_root_path.name}' 动态查找 'media' 文件夹 ---")
     
-    version_dir = find_versioned_dir(mod_root_path)
-    if version_dir:
-        logging.info(f"  -> 发现版本目录: {version_dir.name}")
+    active_media_paths = []
 
     common_dir = find_case_insensitive_dir(mod_root_path, 'common')
-    
-    # 按优先级排序（common -> versioned -> root）
-    potential_sources = []
     if common_dir:
-        potential_sources.append(find_case_insensitive_dir(common_dir, 'media'))
-    if version_dir:
-        potential_sources.append(find_case_insensitive_dir(version_dir, 'media'))
-    if not version_dir:
-        potential_sources.append(find_case_insensitive_dir(mod_root_path, 'media'))
-
-    active_media_paths = []
-    for media_path in potential_sources:
+        media_path = find_case_insensitive_dir(common_dir, 'media')
         if media_path and media_path.is_dir():
-            logging.info(f"  -> 正在检查路径的有效性: {media_path}")
-
             has_scripts = find_case_insensitive_dir(media_path, "scripts")
             lua_dir = find_case_insensitive_dir(media_path, "lua")
-            shared_dir = find_case_insensitive_dir(lua_dir, "shared")
-            has_translate = find_case_insensitive_dir(shared_dir, "Translate")
-
+            has_translate = False
+            if lua_dir:
+                shared_dir = find_case_insensitive_dir(lua_dir, "shared")
+                if shared_dir:
+                    has_translate = find_case_insensitive_dir(shared_dir, "Translate")
             if has_scripts or has_translate:
-                logging.info(f"  --> 路径有效！已将其加入待处理列表。")
+                logging.info(f"  -> 找到有效 Common 路径: {media_path}")
                 active_media_paths.append(media_path)
             else:
-                logging.info(f"  --> 路径无效 (缺少 scripts 或 Translate)，已跳过。")
+                logging.info(f"  -> Common 存在但无效 (无 scripts/Translate)，已跳过。")
+    version_dirs = []
+    if mod_root_path.is_dir():
+        for d in mod_root_path.iterdir():
+            if d.is_dir() and VERSION_DIR_PATTERN.match(d.name):
+                version_dirs.append(d)
+    version_dirs.sort(key=lambda v: tuple(map(int, v.name.split('.'))), reverse=True)
+    if version_dirs:
+        logging.info(f"  -> 发现版本目录队列: {', '.join(d.name for d in version_dirs)}")
+    found_valid_version = False
+    for v_dir in version_dirs:
+        media_path = find_case_insensitive_dir(v_dir, 'media')
+        is_valid = False
+        if media_path and media_path.is_dir():
+            has_scripts = find_case_insensitive_dir(media_path, "scripts")
+            lua_dir = find_case_insensitive_dir(media_path, "lua")
+            has_translate = False
+            if lua_dir:
+                shared_dir = find_case_insensitive_dir(lua_dir, "shared")
+                if shared_dir:
+                    has_translate = find_case_insensitive_dir(shared_dir, "Translate")
+
+            if has_scripts or has_translate:
+                is_valid = True
+
+        if is_valid:
+            logging.info(f"  --> 找到最高优先级有效版本: {v_dir.name}")
+            active_media_paths.append(media_path)
+            found_valid_version = True
+            break 
+        else:
+            logging.info(f"  --> 版本 {v_dir.name} 无效或为空，尝试检查下一个低版本...")
 
     if not active_media_paths:
-        logging.warning("  --> 未能在任何优先路径中找到有效的 'media' 文件夹。")
+        logging.warning("  --> 未能在 Common 或 版本目录队列中找到任何有效的 'media' 文件夹。")
     
     return active_media_paths
 
