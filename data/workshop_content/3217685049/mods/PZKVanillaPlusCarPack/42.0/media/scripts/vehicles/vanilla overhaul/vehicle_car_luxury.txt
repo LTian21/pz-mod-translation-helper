@@ -1,0 +1,78 @@
+module Base
+{
+    vehicle CarLuxury
+    {
+        template! = CarLuxury,
+        specialKeyRing = Base.KeyRing_WestMaple,
+        model
+        {
+            file = Vehicles_LuxuryCar,
+            scale = 1.57,
+            offset = 0.0 0.3022 0.0,
+        }
+        template = PassengerSeat2,
+        template = CarLuxuryCollision,
+        passenger FrontLeft
+        {
+            position inside
+            {
+                offset = 0.1813 -0.1319 -0.1319,
+                rotate = 0.0 0.0 0.0,
+            }
+            position outside
+            {
+                offset = 0.6923 -0.4121 -0.1484,
+                rotate = 0.0 0.0 0.0,
+                area = SeatFrontLeft,
+            }
+        }
+        passenger FrontRight
+        {
+            position inside
+            {
+                offset = -0.1813 -0.1319 -0.1319,
+                rotate = 0.0 0.0 0.0,
+            }
+            position outside
+            {
+                offset = -0.6923 -0.4121 -0.1484,
+                rotate = 0.0 0.0 0.0,
+                area = SeatFrontRight,
+            }
+        }
+        area SeatFrontLeft
+        {
+            xywh = 0.7363 -0.1484 0.4725 0.4725,
+        }
+        area SeatFrontRight
+        {
+            xywh = -0.7363 -0.1484 0.4725 0.4725,
+        }
+        extents = 1.0 0.6264 2.3736,
+        physicsChassisShape = 1.0 0.6264 2.3736,
+        centerOfMassOffset = 0.0 0.3022 0.0,
+        shadowExtents = 1.0 2.3736,
+        shadowOffset = 0.0 0.0,
+		
+		part Tire*
+		{
+			model InflatedTirePlusWheel
+			{
+				scale = 1.1000,
+			}
+		}
+		
+        attachment trailer
+        {
+            offset = 0.0 -0.2747 -1.2088,
+            rotate = 0.0 0.0 0.0,
+            zoffset = -1.0,
+        }
+        attachment trailerfront
+        {
+            offset = 0.0 -0.2747 1.2143,
+            rotate = 0.0 0.0 0.0,
+            zoffset = 1.0,
+        }
+    }
+}
