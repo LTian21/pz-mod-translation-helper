@@ -92,28 +92,26 @@ partial class Program
             return false;
         }
 
-        private static string GetGitExecutablePath()
+        public static string GetGitExecutablePath()
         {
             if (!string.IsNullOrEmpty(_cachedGitPath))
             {
-                return _cachedGitPath!;
+                return _cachedGitPath;
             }
 
-            // First try MinGit location relative to current executable
             string exeDir = AppContext.BaseDirectory;
-            // Go up one level from the executable's directory
-            string parentDir = Path.GetFullPath(Path.Combine(exeDir, ".."));
-            string mingitPath = Path.Combine(parentDir, "MinGit", "cmd", "git.exe");
+            string mingitPath = Path.Combine(exeDir, "MinGit", "cmd", "git.exe");
 
-            if (!File.Exists(mingitPath))
+            if (File.Exists(mingitPath))
             {
-                _cachedGitInfo = $"未找到 MinGit，可执行文件缺失: {mingitPath}";
-                throw new FileNotFoundException(_cachedGitInfo, mingitPath);
+                _cachedGitPath = mingitPath;
+                _cachedGitInfo = $"[信息] 使用 MinGit: {mingitPath}";
+                return _cachedGitPath;
             }
 
-            _cachedGitPath = mingitPath;
-            _cachedGitInfo = $"使用 MinGit: {mingitPath}";
-            return _cachedGitPath;
+            string errorMessage = "[错误] 未找到内置 Git (MinGit)。请确认程序目录中包含 MinGit/cmd/git.exe。本程序不支持使用系统 Git（出于git行为一致性考虑）。";
+            _cachedGitInfo = errorMessage;
+            throw new FileNotFoundException(errorMessage, mingitPath);
         }
 
         /// <summary>
