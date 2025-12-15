@@ -1,0 +1,73 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_eButton
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Elevator Button,
+			Icon		= elevator_button,
+		}
+	}
+
+    entity Elevator_Button
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_eButton,
+            uiEnabled       = true,
+        }
+
+        component SpriteConfig
+        {
+            OnCreate = GE.EntityCreate,
+            face E
+            {
+                layer
+                {
+                    row = fixtures_escalators_01_56,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = NelevatorButtons_1,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = NelevatorButtons_0,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = fixtures_escalators_01_57,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = Making,
+            time          = 200,
+            SkillRequired = Electricity:7,
+            xpAward       = Electricity:10,
+            category      = Miscellaneous,
+            ToolTip       = Tooltip_MakeButton,
+            inputs
+            {
+                item 1 [Base.Screwdriver] mode:keep,
+                item 2 [Base.SmallSheetMetal],
+                item 8 [Base.Base.ElectronicsScrap],
+                item 8 [Base.Screws],
+                item 4 [Base.ElectricWire],
+            }
+        }
+    }
+}

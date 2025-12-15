@@ -1,0 +1,409 @@
+module Base
+{
+    craftRecipe Saw Off Shotgun Stock
+    {
+        timedAction = SawSmallItemMetal,
+        OnCreate    = VFEOnCreate.UseWeaponAlternate,
+        Time        = 200,
+        category    = Weapons,
+        Tags        = InHandCraft;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.ShotgunSawnoff] flags[InheritCondition;InheritAmmunition;Prop2],
+            item 1 tags[Saw] mode:keep flags[MayDegradeLight;Prop1],
+        }
+        outputs
+        {
+            item 1 Base.ShotgunSawnoffNoStock,
+        }
+    }
+    
+    craftRecipe Saw Off Double Barrel Shotgun Stock
+    {
+        timedAction = SawSmallItemMetal,
+        OnCreate    = VFEOnCreate.UseWeaponAlternate,
+        Time        = 200,
+        category    = Weapons,
+        Tags        = InHandCraft;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.DoubleBarrelShotgunSawnoff] flags[InheritCondition;InheritAmmunition;Prop2],
+            item 1 tags[Saw] mode:keep flags[MayDegradeLight;Prop1],
+        }
+        outputs
+        {
+            item 1 Base.DoubleBarrelShotgunSawnoffNoStock,
+        }
+    }
+    
+    craftRecipe Saw Off Shotgun
+    {
+        timedAction = SawSmallItemMetal,
+        OnCreate    = VFEOnCreate.UseWeaponAlternate,
+        Time        = 200,
+        category    = Weapons,
+        Tags        = InHandCraft;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.Shotgun] flags[InheritCondition;InheritAmmunition;Prop2],
+            item 1 tags[Saw] mode:keep flags[MayDegradeLight;Prop1],
+        }
+        outputs
+        {
+            item 1 Base.ShotgunSawnoff,
+        }
+    }
+    
+    craftRecipe Saw Off Double Barrel Shotgun
+    {
+        timedAction = SawSmallItemMetal,
+        OnCreate    = VFEOnCreate.UseWeaponAlternate,
+        Time        = 200,
+        category    = Weapons,
+        Tags        = InHandCraft;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.DoubleBarrelShotgunSawnoff] flags[InheritCondition;InheritAmmunition;Prop2],
+            item 1 tags[Saw] mode:keep flags[MayDegradeLight;Prop1],
+        }
+        outputs
+        {
+            item 1 Base.ShotgunSawnoff,
+        }
+    }
+    
+    craftRecipe Couple 5.56 Magazines
+    {
+        timedAction = Making,
+        OnCreate    = VFEOnCreate.KeepAmmoMagazines,
+        Time        = 50,
+        category    = Weapons,
+        Tags        = InHandCraft,
+        inputs
+        {
+            item 2 [Base.556Clip] flags[Prop2],
+            item 1 [DuctTape],
+        }
+        outputs
+        {
+            item 1 Base.Coupled556,
+        }
+    }
+    
+    craftRecipe Separate 5.56 Magazines
+    {
+        timedAction = RipClothing,
+        Time        = 50,
+        category    = Weapons,
+        Tags        = InHandCraft,
+        inputs
+        {
+            item 1 [Base.Coupled556] flags[Prop2],
+        }
+        outputs
+        {
+            item 2 Base.556Clip,
+        }
+    }
+    
+    craftRecipe Couple 7.62 Magazines
+    {
+        timedAction = Making,
+        OnCreate    = VFEOnCreate.KeepAmmoMagazines,
+        Time        = 50,
+        category    = Weapons,
+        Tags        = InHandCraft,
+        inputs
+        {
+            item 2 [Base.762Clip] flags[Prop2],
+            item 1 [DuctTape],
+        }
+        outputs
+        {
+            item 1 Base.Coupled762,
+        }
+    }
+    
+    craftRecipe Separate 7.62 Magazines
+    {
+        timedAction = RipClothing,
+        Time        = 50,
+        category    = Weapons,
+        Tags        = InHandCraft,
+        inputs
+        {
+            item 1 [Base.Coupled762] flags[Prop2],
+        }
+        outputs
+        {
+            item 2 Base.762Clip,
+        }
+    }
+    
+    craftRecipe Attach M9 Bayonet to Spear
+    {
+        timedAction = CraftKnifeSpear,
+        Time        = 100,
+        category    = Weapons,
+        Tags        = InHandCraft,
+        inputs
+        {
+            item 1 [Base.M16Bayonet] flags[Prop2],
+            item 1 [DuctTape],
+            item 1 [Base.SpearCrafted],
+        }
+        outputs
+        {
+            item 1 Base.SpearBayonet,
+        }
+    }
+    
+    craftRecipe Reclaim M9 Bayonet from Spear
+    {
+        timedAction = CraftKnifeSpear,
+        Time        = 100,
+        category    = Weapons,
+        Tags        = InHandCraft,
+        inputs
+        {
+            item 1 [Base.SpearBayonet] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 Base.M16Bayonet,
+        }
+    }
+    
+    craftRecipe Insert 308 Into M13 Ammunition Link
+    {
+        time        = 25,
+        timedAction = Making,
+        category    = Ammo,
+        tags        = InHandCraft;CanBeDoneFromFloor,
+        
+        inputs
+        {
+            item 1 [308Bullets],
+            item 1 [M60_Link],
+        }
+        outputs
+        {
+            item 1 308BulletsLinked,
+        }
+    }
+    
+    craftRecipe Remove 308 From M13 Ammunition Link
+    {
+        time        = 25,
+        timedAction = Making,
+        category    = Ammo,
+        tags        = InHandCraft;CanBeDoneFromFloor,
+        
+        inputs
+        {
+            item 1 [308BulletsLinked],
+        }
+        outputs
+        {
+            item 1 M60_Link,
+            item 1 308Bullets,
+        }
+    }
+    
+    craftRecipe Open Box of M13 Links
+    {
+        time        = 15,
+        timedAction = Making,
+        category    = Ammo,
+        tags        = InHandCraft;CanBeDoneFromFloor,
+        
+        inputs
+        {
+            item 1 [M60_Links_Box],
+        }
+        outputs
+        {
+            item 40 M60_Link,
+        }
+    }
+    
+    craftRecipe Place M13 Links in Box
+    {
+        time        = 15,
+        timedAction = Making,
+        category    = Ammo,
+        tags        = InHandCraft;CanBeDoneFromFloor,
+        
+        inputs
+        {
+            item 40 [M60_Link],
+        }
+        outputs
+        {
+            item 1 M60_Links_Box,
+        }
+    }
+    
+    craftRecipe Make M13 Links
+    {
+        time        = 1200,
+        timedAction = Making,
+        category    = Welding,
+        tags        = AnySurfaceCraft;Welding,
+        
+        SkillRequired = MetalWelding:1,
+        NeedToBeLearn = true,
+        
+        inputs
+        {
+            item 1 [M60_Link_Die] mode:keep,
+            item 1 tags[Saw] mode:keep,
+            item 1 tags[Hammer;ClubHammer;Mallet] mode:keep,
+            item 1 [SmallSheetMetal],
+        }
+        outputs
+        {
+            item 40 M60_Link,
+        }
+    }
+    
+    craftRecipe Make M60 Belt Pouch
+    {
+        time        = 300,
+        timedAction = Making,
+        category    = Tailoring,
+        tags        = AnySurfaceCraft;Tailoring,
+        
+        SkillRequired = Tailoring:2,
+        NeedToBeLearn = true,
+        
+        inputs
+        {
+            item 1 tags[SewingNeedle] mode:keep,
+            item 5 [Thread],
+            item 4 [DenimStrips],
+        }
+        outputs
+        {
+            item 1 M60Belt,
+        }
+    }
+    
+    craftRecipe Make M60 Brass Catcher
+    {
+        time        = 300,
+        timedAction = Making,
+        category    = Tailoring,
+        tags        = AnySurfaceCraft;Tailoring,
+        
+        SkillRequired = Tailoring:2,
+        NeedToBeLearn = true,
+        
+        inputs
+        {
+            item 1 tags[SewingNeedle] mode:keep,
+            item 1 tags[Saw] mode:keep,
+            item 5 [Thread],
+            item 4 [DenimStrips],
+            item 1 [MetalBar],
+        }
+        outputs
+        {
+            item 1 M60BrassCatcher,
+        }
+    }
+    
+    craftRecipe Make M13 Link Die
+    {
+        time        = 1200,
+        timedAction = Welding_Surface,
+        category    = Welding,
+        tags        = AnySurfaceCraft;Metalworking,
+        
+        SkillRequired = MetalWelding:5,
+        XpAward       = MetalWelding:25,
+        NeedToBeLearn = true,
+        
+        inputs
+        {
+            item 1 tags[WeldingMask] mode:keep,
+            item 1 tags[Saw] mode:keep,
+            item 4 [SmallSheetMetal],
+            item 2 [MetalBar],
+            item 2 [BlowTorch],
+            item 4 [WeldingRods],
+        }
+        outputs
+        {
+            item 1 M60_Link_Die,
+        }
+    }
+    
+    craftRecipe Open 556 Battle Pack
+    {
+        time        = 60,
+        timedAction = Making,
+        category    = Ammo,
+        tags        = InHandCraft;CanBeDoneFromFloor,
+        
+        inputs
+        {
+            item 1 [556BattlePack],
+        }
+        outputs
+        {
+            item 40 556Bullets,
+        }
+    }
+    
+    craftRecipe Gather Gunpowder
+    {
+        time        = 30,
+        timedAction = Making,
+        category    = Ammo,
+        tags        = InHandCraft;CanBeDoneFromFloor,
+        
+        inputs
+        {
+            item 1 [Bullets38;Bullets44;Bullets45;Bullets9mm;556Bullets;308Bullets;223Bullets;ShotgunShells;762Bullets],
+        }
+        outputs
+        {
+            item 1 GunPowder,
+        }
+    }
+    
+    craftRecipe Gather Gunpowder From 22 Bullet
+    {
+        time        = 30,
+        timedAction = Making,
+        category    = Ammo,
+        tags        = InHandCraft;CanBeDoneFromFloor,
+        
+        inputs
+        {
+            item 5 [22Bullets],
+        }
+        outputs
+        {
+            item 1 GunPowder,
+        }
+    }
+    
+    craftRecipe Gather Gunpowder From 7.62 Bullet
+    {
+        time        = 30,
+        timedAction = Making,
+        category    = Ammo,
+        tags        = InHandCraft;CanBeDoneFromFloor,
+        
+        inputs
+        {
+            item 5 [762Bullets],
+        }
+        outputs
+        {
+            item 1 GunPowder,
+        }
+    }
+}
