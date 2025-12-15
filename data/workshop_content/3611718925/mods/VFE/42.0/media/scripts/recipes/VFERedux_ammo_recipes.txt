@@ -1,205 +1,1090 @@
 module Base
 {
-    craftRecipe OpenPackOfAmmo
+    craftRecipe Open Box of 7.62 Ammo
+    {
+        timedAction = OpenAmmoBox,
+        Time        = 15,
+        category    = Ammunition,
+        Tags        = InHandCraft,
+        inputs
+        {
+            item 1 [Base.762Box] flags[Prop2],
+        }
+        outputs
+        {
+            item 20 Base.762Bullets,
+        }
+    }
+    
+    craftRecipe Place 7.62 Rounds In Box
+    {
+        timedAction = PlaceAmmoInBox,
+        Time        = 15,
+        category    = Ammunition,
+        Tags        = InHandCraft,
+        inputs
+        {
+            item 20 [Base.762Bullets] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 Base.762Box,
+        }
+    }
+    
+    craftRecipe Open Box of .22 Ammo
+    {
+        timedAction = OpenAmmoBox,
+        Time        = 15,
+        category    = Ammunition,
+        Tags        = InHandCraft,
+        inputs
+        {
+            item 1 [Base.22Box] flags[Prop2],
+        }
+        outputs
+        {
+            item 10 Base.22Bullets,
+        }
+    }
+    
+    craftRecipe Place .22 Rounds In Box
+    {
+        timedAction = PlaceAmmoInBox,
+        Time        = 15,
+        category    = Ammunition,
+        Tags        = InHandCraft,
+        inputs
+        {
+            item 10 [Base.22Bullets] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 Base.22Box,
+        }
+    }
+    
+    craftRecipe Open Carton of 7.62 Ammo
     {
         timedAction = UnPackBox,
-        Time        = 50,
+        time        = 50,
         category    = Packing,
         Tags        = InHandCraft;CanBeDoneInDark,
         inputs
         {
-            item 1 tags[base:ammo] mappers[ammoType] flags[AllowFavorite;InheritFavorite],
+            item 1 [Base.762Carton] flags[AllowFavorite;InheritFavorite],
         }
         outputs
         {
-            item 4 mapper:ammoType,
-        }
-        itemMapper ammoType
-        {
-            Base.762Box           = Base.762Pack,
-            Base.22Box            = Base.22Pack,
-            Base.308Box           = Base.308Pack,
-            Base.556Box           = Base.556Pack,
-            Base.223Box           = Base.223Pack,
-            Base.ShotgunShellsBox = Base.Base.ShotgunShellsPack,
-            Base.Bullets9mmBox    = Base.9mmPack,
-            Base.Bullets38Box     = Base.38Pack,
-            Base.Bullets44Box     = Base.44Pack,
-            Base.Bullets45Box     = Base.45Pack,
+            item 12 Base.762Box,
         }
     }
     
-    craftRecipe PackBoxesAmmo
-    {
-        timedAction = PackingBox,
-        Time        = 50,
-        category    = Packing,
-        Tags        = InHandCraft;CanBeDoneInDark,
-        inputs
-        {
-            item 4 tags[base:ammo] mappers[ammoType] flags[AllowFavorite;InheritFavorite;IsExclusive],
-        }
-        outputs
-        {
-            item 1 mapper:ammoType,
-        }
-        itemMapper ammoType
-        {
-            Base.762Pack                = Base.762Box,
-            Base.22Pack                 = Base.22Box,
-            Base.308Pack                = Base.308Box,
-            Base.556Pack                = Base.556Box,
-            Base.223Pack                = Base.223Box,
-            Base.Base.ShotgunShellsPack = Base.ShotgunShellsBox,
-            Base.9mmPack                = Base.Bullets9mmBox,
-            Base.38Pack                 = Base.Bullets38Box,
-            Base.44Pack                 = Base.Bullets44Box,
-            Base.45Pack                 = Base.Bullets45Box,
-        }
-    }
-    
-    craftRecipe OpenCaseOfAmmo
-    {
-        timedAction = UnPackBox,
-        Time        = 50,
-        category    = Packing,
-        Tags        = InHandCraft;CanBeDoneInDark,
-        inputs
-        {
-            item 1 tags[base:ammo] mappers[ammoType] flags[AllowFavorite;InheritFavorite],
-        }
-        outputs
-        {
-            item 4 mapper:ammoType,
-        }
-        itemMapper ammoType
-        {
-            Base.762Pack           = Base.762Case,
-            Base.22Pack            = Base.22Case,
-            Base.308Pack           = Base.308Case,
-            Base.556Pack           = Base.556Case,
-            Base.223Pack           = Base.223Case,
-            Base.ShotgunShellsPack = Base.Base.ShotgunShellsCase,
-            Base.9mmPack           = Base.9mmCase,
-            Base.38Pack            = Base.38Case,
-            Base.44Pack            = Base.44Case,
-            Base.45Pack            = Base.45Case,
-        }
-    }
-    
-    craftRecipe CaseBoxesAmmo
-    {
-        timedAction = PackingBox,
-        Time        = 50,
-        category    = Packing,
-        Tags        = InHandCraft;CanBeDoneInDark,
-        inputs
-        {
-            item 4 tags[base:ammo] mappers[ammoType] flags[AllowFavorite;InheritFavorite;IsExclusive],
-        }
-        outputs
-        {
-            item 1 mapper:ammoType,
-        }
-        itemMapper ammoType
-        {
-            Base.762Case           = Base.762Pack,
-            Base.22Case            = Base.22Pack,
-            Base.308Case           = Base.308Pack,
-            Base.556Case           = Base.556Pack,
-            Base.223Case           = Base.223Pack,
-            Base.ShotgunShellsCase = Base.Base.ShotgunShellsPack,
-            Base.9mmCase           = Base.9mmPack,
-            Base.38Case            = Base.38Pack,
-            Base.44Case            = Base.44Pack,
-            Base.45Case            = Base.45Pack,
-        }
-    }
-    
-    craftRecipe OpenCrateOfAmmo
-    {
-        timedAction = UnPackBox,
-        Time        = 50,
-        category    = Packing,
-        Tags        = InHandCraft;CanBeDoneInDark,
-        inputs
-        {
-            item 1 tags[base:ammo] mappers[ammoType] flags[AllowFavorite;InheritFavorite],
-        }
-        outputs
-        {
-            item 4 mapper:ammoType,
-        }
-        itemMapper ammoType
-        {
-            Base.762Case           = Base.762Crate,
-            Base.22Case            = Base.22Crate,
-            Base.308Case           = Base.308Crate,
-            Base.556Case           = Base.556Crate,
-            Base.223Case           = Base.223Crate,
-            Base.ShotgunShellsCase = Base.Base.ShotgunShellsCrate,
-            Base.9mmCase           = Base.9mmCrate,
-            Base.38Case            = Base.38Crate,
-            Base.44Case            = Base.44Crate,
-            Base.45Case            = Base.45Crate,
-        }
-    }
-    
-    craftRecipe CrateBoxesAmmo
-    {
-        timedAction = PackingBox,
-        Time        = 50,
-        category    = Packing,
-        Tags        = InHandCraft;CanBeDoneInDark,
-        inputs
-        {
-            item 4 tags[base:ammo] mappers[ammoType] flags[AllowFavorite;InheritFavorite;IsExclusive],
-        }
-        outputs
-        {
-            item 1 mapper:ammoType,
-        }
-        itemMapper ammoType
-        {
-            Base.762Crate           = Base.762Case,
-            Base.22Crate            = Base.22Case,
-            Base.308Crate           = Base.308Case,
-            Base.556Crate           = Base.556Case,
-            Base.223Crate           = Base.223Case,
-            Base.ShotgunShellsCrate = Base.Base.ShotgunShellsCase,
-            Base.9mmCrate           = Base.9mmCase,
-            Base.38Crate            = Base.38Case,
-            Base.44Crate            = Base.44Case,
-            Base.45Crate            = Base.45Case,
-        }
-    }
-    
-    craftRecipe PlaceBoxesOfAmmoInCarton
+    craftRecipe Pack Carton of 7.62 Ammo
     {
         timedAction = PackingBox,
         time        = 50,
         category    = Packing,
-        Tags        = InHandCraft,
+        Tags        = InHandCraft;CanBeDoneInDark,
         inputs
         {
-            item 12 tags[base:ammo] mappers[ammoType] flags[AllowFavorite;InheritFavorite;IsExclusive],
+            item 12 [Base.762Box] flags[AllowFavorite;InheritFavorite],
         }
         outputs
         {
-            item 1 mapper:ammoType,
+            item 1 Base.762Carton,
         }
-        itemMapper ammoType
+    }
+    
+    craftRecipe Open Carton of .22 Ammo
+    {
+        timedAction = UnPackBox,
+        time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
         {
-            Base.Bullets9mmCarton    = Base.Bullets9mmBox,
-            Base.Bullets45Carton     = Base.Bullets45Box,
-            Base.Bullets38Carton     = Base.Bullets38Box,
-            Base.Bullets44Carton     = Base.Bullets44Box,
-            Base.223Carton           = Base.223Box,
-            Base.308Carton           = Base.308Box,
-            Base.ShotgunShellsCarton = Base.ShotgunShellsBox,
-            Base.556Carton           = Base.556Box,
-            Base.762Carton           = Base.762Box,
-            Base.22Carton            = Base.22Box,
+            item 1 [Base.22Carton] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 12 Base.22Box,
+        }
+    }
+    
+    craftRecipe Pack Carton of .22 Ammo
+    {
+        timedAction = PackingBox,
+        time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 12 [Base.22Box] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.22Carton,
+        }
+    }
+    
+    craftRecipe Open Pack of 7.62 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.762Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.762Box,
+        }
+    }
+    
+    craftRecipe Pack 7.62 Boxes
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.762Box] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.762Pack,
+        }
+    }
+    
+    craftRecipe Open Pack of .308 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.308Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.308Box,
+        }
+    }
+    
+    craftRecipe Pack .308 Boxes
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.308Box] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.308Pack,
+        }
+    }
+    
+    craftRecipe Open Pack of .556 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.556Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.556Box,
+        }
+    }
+    
+    craftRecipe Pack .556 Boxes
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.556Box] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.556Pack,
+        }
+    }
+    
+    craftRecipe Open Pack of .223 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.223Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.223Box,
+        }
+    }
+    
+    craftRecipe Pack .223 Boxes
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.223Box] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.223Pack,
+        }
+    }
+    
+    craftRecipe Open Pack of Shotgun Shell Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.ShotgunShellsPack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.ShotgunShellsBox,
+        }
+    }
+    
+    craftRecipe Pack Shotgun Shell Boxes
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.ShotgunShellsBox] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.ShotgunShellsPack,
+        }
+    }
+    
+    craftRecipe Open Pack of 9mm Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.9mmPack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.Bullets9mmBox,
+        }
+    }
+    
+    craftRecipe Pack 9mm Boxes
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.Bullets9mmBox] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.9mmPack,
+        }
+    }
+    
+    craftRecipe Open Pack of .22 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.22Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.22Box,
+        }
+    }
+    
+    craftRecipe Pack .22 Boxes
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.22Box] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.22Pack,
+        }
+    }
+    
+    craftRecipe Open Pack of .38 Special Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.38Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.Bullets38Box,
+        }
+    }
+    
+    craftRecipe Pack .38 Special Boxes
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.Bullets38Box] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.38Pack,
+        }
+    }
+    
+    craftRecipe Open Pack of .44 Magnum Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.44Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.Bullets44Box,
+        }
+    }
+    
+    craftRecipe Pack .44 Magnum Boxes
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.Bullets44Box] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.44Pack,
+        }
+    }
+    
+    craftRecipe Open Pack of .45 Auto Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.45Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.Bullets45Box,
+        }
+    }
+    
+    craftRecipe Pack .45 Auto Boxes
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.Bullets45Box] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.45Pack,
+        }
+    }
+    
+    craftRecipe Open Case of 7.62 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.762Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.762Pack,
+        }
+    }
+    
+    craftRecipe Case 7.62 Packs
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.762Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.762Case,
+        }
+    }
+    
+    craftRecipe Open Case of .308 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.308Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.308Pack,
+        }
+    }
+    
+    craftRecipe Case .308 Packs
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.308Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.308Case,
+        }
+    }
+    
+    craftRecipe Open Case of .556 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.556Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.556Pack,
+        }
+    }
+    
+    craftRecipe Case .556 Packs
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.556Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.556Case,
+        }
+    }
+    
+    craftRecipe Open Case of .223 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.223Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.223Pack,
+        }
+    }
+    
+    craftRecipe Case .223 Packs
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.223Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.223Case,
+        }
+    }
+    
+    craftRecipe Open Case of Shotgun Shell Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.ShotgunShellsCase] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.ShotgunShellsPack,
+        }
+    }
+    
+    craftRecipe Case Shotgun Shell Packs
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.ShotgunShellsPack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.ShotgunShellsCase,
+        }
+    }
+    
+    craftRecipe Open Case of 9mm Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.9mmCase] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.9mmPack,
+        }
+    }
+    
+    craftRecipe Case 9mm Packs
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.9mmPack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.9mmCase,
+        }
+    }
+    
+    craftRecipe Open Case of .22 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.22Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.22Pack,
+        }
+    }
+    
+    craftRecipe Case .22 Packs
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.22Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.22Case,
+        }
+    }
+    
+    craftRecipe Open Case of .38 Special Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.38Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.38Pack,
+        }
+    }
+    
+    craftRecipe Case .38 Special Packs
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.38Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.38Case,
+        }
+    }
+    
+    craftRecipe Open Case of .44 Magnum Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.44Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.44Pack,
+        }
+    }
+    
+    craftRecipe Case .44 Magnum Packs
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.44Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.44Case,
+        }
+    }
+    
+    craftRecipe Open Case of .45 Auto Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.45Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.45Pack,
+        }
+    }
+    
+    craftRecipe Case .45 Auto Packs
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 4 [Base.45Pack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.45Case,
+        }
+    }
+    
+    craftRecipe Open Crate of 7.62 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.762Crate] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.762Case,
+        }
+    }
+    
+    craftRecipe Crate 7.62 Cases
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 4 [Base.762Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.762Crate,
+        }
+    }
+    
+    craftRecipe Open Crate of .308 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.308Crate] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.308Case,
+        }
+    }
+    
+    craftRecipe Crate .308 Cases
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 4 [Base.308Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.308Crate,
+        }
+    }
+    
+    craftRecipe Open Crate of .556 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.556Crate] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.556Case,
+        }
+    }
+    
+    craftRecipe Crate .556 Cases
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 4 [Base.556Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.556Crate,
+        }
+    }
+    
+    craftRecipe Open Crate of .223 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.223Crate] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.223Case,
+        }
+    }
+    
+    craftRecipe Crate .223 Cases
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 4 [Base.223Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.223Crate,
+        }
+    }
+    
+    craftRecipe Open Crate of Shotgun Shell Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.ShotgunShellsCrate] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.ShotgunShellsCase,
+        }
+    }
+    
+    craftRecipe Crate Shotgun Shell Cases
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 4 [Base.ShotgunShellsCase] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.ShotgunShellsCrate,
+        }
+    }
+    
+    craftRecipe Open Crate of 9mm Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.9mmCrate] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.9mmCase,
+        }
+    }
+    
+    craftRecipe Crate 9mm Cases
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 4 [Base.9mmCase] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.9mmCrate,
+        }
+    }
+    
+    craftRecipe Open Crate of .22 Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.22Crate] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.22Case,
+        }
+    }
+    
+    craftRecipe Crate .22 Cases
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 4 [Base.22Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.22Crate,
+        }
+    }
+    
+    craftRecipe Open Crate of .38 Special Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.38Crate] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.38Case,
+        }
+    }
+    
+    craftRecipe Crate .38 Special Cases
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 4 [Base.38Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.38Crate,
+        }
+    }
+    
+    craftRecipe Open Crate of .44 Magnum Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.44Crate] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.44Case,
+        }
+    }
+    
+    craftRecipe Crate .44 Magnum Cases
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 4 [Base.44Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.44Crate,
+        }
+    }
+    
+    craftRecipe Open Crate of .45 Auto Boxes
+    {
+        timedAction = UnPackBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 1 [Base.45Crate] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 4 Base.45Case,
+        }
+    }
+    
+    craftRecipe Crate .45 Auto Cases
+    {
+        timedAction = PackingBox,
+        Time        = 50,
+        category    = Packing,
+        Tags        = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        inputs
+        {
+            item 4 [Base.45Case] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.45Crate,
         }
     }
 }

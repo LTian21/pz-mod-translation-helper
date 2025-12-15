@@ -1,0 +1,64 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_eaDoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Elevator alt Door,
+			Icon		= elevator_altDoor,
+		}
+	}
+
+    entity Elevator_altDoor
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_eaDoor,
+            uiEnabled       = true,
+        }
+
+        component SpriteConfig
+        {
+            OnCreate = GE.EntityCreate,
+            face E
+            {
+                layer
+                {
+                    row = openMallDoor_2,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = openMallDoor_3,
+                }
+
+            }
+        }
+
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 250,
+            SkillRequired = MetalWelding:4,
+            xpAward       = MetalWelding:10,
+            category      = Miscellaneous,
+            ToolTip       = Tooltip_MakeButton,
+            inputs
+            {
+                item 4 [Base.WeldingRods],
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[WeldingMask] mode:keep,
+                item 1 [Base.Screwdriver] mode:keep,
+                item 6 [Base.SmallSheetMetal],
+                item 4 [Base.SheetMetal],
+                item 8 [Base.Base.ElectronicsScrap],
+                item 20 [Base.Screws],
+                item 4 [Base.ElectricWire],
+            }
+        }
+    }
+}
