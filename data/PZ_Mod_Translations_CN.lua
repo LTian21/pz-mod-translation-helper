@@ -848,7 +848,6 @@ return {
         ["UI_CraftCat_Weaponry"] = "\230\173\166\229\153\168",
     },
     ["\\B42Survival"] = {
-        ["UI_CraftCat_Knapping"] = "\231\159\179\229\153\168",
         ["UI_CraftCat_Masonry"] = "\231\159\179\229\183\165",
         ["UI_CraftCat_Pottery"] = "\233\153\182\232\137\186",
     },
@@ -2865,7 +2864,7 @@ return {
         ["ItemName_Base.M113_Seat2"] = "M113\229\186\167\230\164\133",
         ["ItemName_Base.M113_Seat3"] = "M113\229\186\167\230\164\133",
     },
-    ["\\VFExpansion2Redux"] = {
+    ["\\VFExpansion2Reduxb42"] = {
         ["IGUI_FirearmRadial_UseBayonet"] = "\228\189\191\231\148\168\229\136\186\229\136\128",
         ["ItemName_Base.22Box"] = ".22\229\173\144\229\188\185 (\230\149\180\231\155\146)",
         ["ItemName_Base.22Bullets"] = ".22\229\173\144\229\188\185",
@@ -2939,7 +2938,7 @@ return {
         ["Recipe_Saw_Off_Double_Barrel_Shotgun"] = "\233\148\175\231\159\173\229\143\140\231\174\161\233\156\176\229\188\185\230\158\170",
         ["Recipe_Saw_Off_Shotgun"] = "\233\148\175\231\159\173\233\156\176\229\188\185\230\158\170",
     },
-    ["\\VFExpansion3Redux"] = {
+    ["\\VFExpansion3Reduxb42"] = {
         ["IGUI_FirearmRadial_UseBayonet"] = "\228\189\191\231\148\168\229\136\186\229\136\128",
         ["ItemName_Base.22Box"] = ".22\229\173\144\229\188\185 (\230\149\180\231\155\146)",
         ["ItemName_Base.22Bullets"] = ".22\229\173\144\229\188\185",
@@ -3013,7 +3012,7 @@ return {
         ["Recipe_Saw_Off_Double_Barrel_Shotgun"] = "\233\148\175\231\159\173\229\143\140\231\174\161\233\156\176\229\188\185\230\158\170",
         ["Recipe_Saw_Off_Shotgun"] = "\233\148\175\231\159\173\233\156\176\229\188\185\230\158\170",
     },
-    ["\\VFExpansionRedux"] = {
+    ["\\VFExpansionReduxb42"] = {
         ["IGUI_FirearmRadial_UseBayonet"] = "\228\189\191\231\148\168\229\136\186\229\136\128",
         ["ItemName_Base.22Box"] = ".22\229\173\144\229\188\185 (\230\149\180\231\155\146)",
         ["ItemName_Base.22Bullets"] = ".22\229\173\144\229\188\185",
