@@ -1,0 +1,127 @@
+module Base
+{
+	 item MH6Battery10
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	5,
+        Type	=	Drainable,
+        UseDelta	=	0.00001,
+        UseWhileEquipped	=	FALSE,
+        DisplayName	=	MH6 Battery,
+        Icon	=	CarBattery,
+        MetalValue = 1,
+        cantBeConsolided = TRUE,
+        VehicleType =   10,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 30,
+        MechanicsItem = TRUE,
+        WorldStaticModel = CarBattery,
+		Tags = CarBattery,
+    }
+	item LittleBirdEngineDoor10
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	15.0,
+        Type	=	Normal,
+        DisplayName	=	Enigne Cover (MH6),
+        Icon	=	MH6Hatch,
+        VehicleType =   10,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = MH6LittlebirdHatch,
+    }
+	
+	item LittleBirdDoor10
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	10.0,
+        Type	=	Normal,
+        DisplayName	=	Front Door (MH6),
+        Icon	=	MH6Doors,
+        VehicleType =   10,
+        ChanceToSpawnDamaged = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = MH6LittlebirdDoors,
+    }
+    
+	item SmallGasTankForHelicopter10
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	14.0,
+        Type	=	Normal,
+        DisplayName	= Gas Tank (MH6),
+        Icon	=	CarGastank,
+        VehicleType =   10,
+        MaxCapacity = 288,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 0,
+        MechanicsItem = TRUE,
+        WorldStaticModel = BigGasTank,
+		Tags = OmitEmptyFromName,
+
+        component FluidContainer
+        {
+            ContainerName   = GasTank,
+            capacity        = 288.0,
+			InputLocked	= true,
+        }
+    }
+	fixing Fix Gas Tank Welding
+	{
+	   Require : SmallGasTankForHelicopter10,
+	   GlobalItem : BlowTorch=2,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=2,
+	}
+	fixing Fix Hood Welding
+	{
+	   Require : LittleBirdEngineDoor10,
+	   GlobalItem : BlowTorch=2,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=1;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=1;Mechanics=2,
+	}
+	fixing Fix Trunk Welding
+	{
+	   Require : BigTrunk10,
+	   GlobalItem : BlowTorch=2,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=2,
+	}
+  
+	
+		fixing Fix Door Welding
+	{
+	   Require : LittleBirdDoor10,
+	   GlobalItem : BlowTorch=2,
+	   ConditionModifier : 1.2,
+
+       Fixer : SheetMetal; MetalWelding=3;Mechanics=2,
+       Fixer : SmallSheetMetal=2; MetalWelding=3;Mechanics=2,
+	}
+
+    fixing Fix Glove box
+	{
+	   Require : GloveBox10,
+
+       Fixer : DuctTape=2;Mechanics=1,
+       Fixer : Glue=2;Mechanics=1,
+	}
+
+    fixing Fix Car seat
+	{
+	   Require : NormalCarSeat10,
+	   ConditionModifier : 0.8,
+
+       Fixer : DuctTape=2;Mechanics=1,
+       Fixer : Glue=2;Mechanics=1,
+	}
+}
