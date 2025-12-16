@@ -1484,11 +1484,6 @@ return {
     ["\\GanydeBielovzki's Frockin Shirts n Ties"] = {
         ["ContextMenu_RollDown"] = "\230\148\190\228\184\139\232\162\150\229\173\144",
         ["ContextMenu_RollUp"] = "\229\141\183\232\181\183\232\162\150\229\173\144",
-        ["ItemName_Base.Tie_BowTieFull"] = "\232\157\180\232\157\182\233\162\134\231\187\147",
-        ["ItemName_Base.Tie_BowTieWorn"] = "\232\157\180\232\157\182\233\162\134\231\187\147 \229\164\185\229\188\143",
-        ["ItemName_Base.Tie_Full"] = "\233\162\134\229\184\166",
-        ["ItemName_Base.Tie_Worn"] = "\233\162\134\229\184\166 \229\164\185\229\188\143",
-        ["ItemName_Base.Tie_Worn_Spiffo"] = "\233\162\134\229\184\166 Spiffo\229\164\185\229\188\143",
     },
     ["\\GanydeBielovzki's Frockin Splendor! Vol.2"] = {
         ["ContextMenu_Close"] = "\230\137\163\228\184\138\229\164\185\229\133\139",
