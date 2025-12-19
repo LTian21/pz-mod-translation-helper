@@ -148,7 +148,7 @@ partial class Program
         string arguments,
         string workingDirectory)
     {
-        var gitPath = GetGitExecutablePath();
+        var gitPath = MinGitHelper.GetGitExecutablePath();
         var startInfo = new System.Diagnostics.ProcessStartInfo
         {
             FileName = gitPath,
@@ -164,10 +164,21 @@ partial class Program
 
         // Apply proxy settings
         var proxyUrl = ProxyHelper.GetHttpProxyUrl();
+        
+        // Force OpenSSL and ignore system config
+        startInfo.EnvironmentVariables["GIT_SSL_BACKEND"] = "openssl";
+        startInfo.EnvironmentVariables["GIT_CONFIG_NOSYSTEM"] = "1";
+        startInfo.EnvironmentVariables["GIT_CONFIG_GLOBAL"] = "NUL";
+
         if (!string.IsNullOrEmpty(proxyUrl))
         {
             startInfo.EnvironmentVariables["HTTP_PROXY"] = proxyUrl;
             startInfo.EnvironmentVariables["HTTPS_PROXY"] = proxyUrl;
+        }
+        else
+        {
+            startInfo.EnvironmentVariables["HTTP_PROXY"] = "";
+            startInfo.EnvironmentVariables["HTTPS_PROXY"] = "";
         }
 
         using var process = new System.Diagnostics.Process { StartInfo = startInfo };
@@ -196,20 +207,5 @@ partial class Program
         await process.WaitForExitAsync();
 
         return (process.ExitCode, outputBuilder.ToString(), errorBuilder.ToString());
-    }
-
-    private static string GetGitExecutablePath()
-    {
-        // First try MinGit location relative to current executable
-        string exeDir = AppContext.BaseDirectory;
-        string mingitPath = Path.Combine(exeDir, "MinGit", "cmd", "git.exe");
-
-        if (File.Exists(mingitPath))
-        {
-            return mingitPath;
-        }
-
-        // Fallback to system git
-        return "git";
     }
 }

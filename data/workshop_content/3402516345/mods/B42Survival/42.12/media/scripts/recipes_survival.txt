@@ -1,0 +1,333 @@
+module Base
+{
+
+		/** Timed Actions **/
+
+	timedAction TorchCraft
+	{
+		metabolics = HeavyDomestic,
+		actionAnim = SharpenStake,
+		sound = rope10s,
+	}
+
+	timedAction TorchLight
+	{
+		actionAnim = SharpenStake,
+		sound = UseMatch,
+	}
+
+	timedAction TorchExtinguish
+	{
+		actionAnim = SharpenStake,
+		sound = wave1s,
+	}
+
+	timedAction CrushStone
+	{
+        	metabolics      = HeavyDomestic,
+        	actionAnim      = MakingHammer_Surface,
+        	muscleStrainFactor = 0.0133,
+        	muscleStrainSkill = Strength,
+        	muscleStrainParts = Hand_R;ForeArm_R;UpperArm_R,
+        	sound           = Hammering,
+	}
+
+	timedAction CandleCraft
+	{
+        	metabolics      = LightDomestic,
+        	actionAnim      = MixingBowl,
+        	sound		= FirstAidApplyAlcohol,
+	}
+
+	timedAction ClayCraft
+	{
+        	metabolics      = SedentaryActivity,
+        	actionAnim      = MakeChum,
+        	sound           = MakeChumBase,
+	}
+
+		/** Carving **/
+
+	craftRecipe CarveLongStickfromPlank
+	{
+	Time = 100,
+		OnCreate = Recipe.OnCreate.MinorCarving,
+		Tags = InHandCraft,
+        category = Carving,
+        timedAction = SharpenStake,
+        SkillRequired = Carving:1,
+		xpAward = Carving:5,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+			item 1 [Base.Plank] flags[Prop2],
+		}
+		outputs
+		{
+			item 1 Base.LongStick,
+		}
+	}
+
+	/** Knapping **/
+
+	craftRecipe MakeFlintFirestarter
+	{
+	timedAction = MakingHammer_Surface,
+	time = 230,
+	Tags = AnySurfaceCraft,
+        needTobeLearn = true,
+        SkillRequired = FlintKnapping:1,
+        AutoLearnAny = FlintKnapping:2,
+	xpAward = FlintKnapping:20,
+	category = Knapping,
+		OnCreate = Recipe.OnCreate.KnappFlake,
+		inputs
+		{
+            		item 1 tags[HammerStone;Mallet;KnappingTool] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 [Base.FlintNodule] flags[Prop2],
+			item 1 [Base.SteelChunk;Base.PiercedSteelChunk;Base.SteelBarQuarter;Base.SteelRodQuarter],
+			item 1 tags[Twine],
+		}
+		outputs
+		{
+			item 1 Base.Survival_FlintFirestarter,
+		}
+	}
+
+		/** Masonry **/
+
+	craftRecipe BreakSmoothFlatStoneintoStones
+	{
+        timedAction = CrushStone,
+        time            = 100,
+        Tags = InHandCraft;CanBeDoneFromFloor,
+        category      = Masonry,
+        xpAward       = Masonry:5,
+		inputs
+		{
+            		item 1 tags[ClubHammer;Sledgehammer;StoneMaul;PickAxe] mode:keep flags[MayDegradeLight;Prop1],
+			item 1 [Base.FlatStone],
+		}
+        	outputs
+		{
+            		item 3 Base.Stone2,
+		}
+	}
+
+	craftRecipe CrushStoneintoStonePieces
+	{
+        timedAction = CrushStone,
+        time            = 140,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category      = Masonry,
+        xpAward       = Masonry:5,
+		inputs
+		{
+			item 1 tags[Hammer;ClubHammer;Sledgehammer;StoneMaul] mode:keep flags[MayDegradeLight;Prop1],
+			item 1 [Base.Stone2;Base.FlintNodule] flags[AllowDestroyedItem],
+		}
+		outputs
+		{
+			item 1 Base.Survival_CrushedStone,
+		}
+	}
+
+	craftRecipe CrushStonePiecesintoGravel
+	{
+        timedAction = CrushStone,
+        time            = 300,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category      = Masonry,
+        xpAward       = Masonry:20,
+		inputs
+		{
+            		item 1 tags[Hammer;ClubHammer;Sledgehammer;StoneMaul] mode:keep flags[MayDegradeLight;Prop1],
+			item 4 [Base.Survival_CrushedStone;Base.CrushedLimestone;Base.StoneBlock;Base.SharpedStone] flags[AllowDestroyedItem],
+			item 1 tags[HoldDirt],
+		}
+        	outputs
+		{
+            		item 1 Base.Gravelbag,
+		}
+	}
+
+		/** Miscellaneous **/
+
+	craftRecipe MakeTorch
+	{
+	timedAction = TorchCraft,
+		Time = 80,
+		Tags = InHandCraft;CanBeDoneInDark;Survivalist,
+	category = Miscellaneous,
+		xpAward = Maintenance:5,
+		inputs
+		{
+			item 1 [Base.TreeBranch2;Base.WoodenStick2;Base.LongHandle;Base.Survival_TorchBurnt] mode:destroy flags[Prop2;ItemCount;AllowFavorite;InheritFavorite],
+			item 5 [Base.RippedSheets;Base.RippedSheetsDirty;Base.DenimStrips;Base.DenimStripsDirty;Base.Twigs],
+			item 2 [Base.Twine;Base.LeatherStrips;Base.LeatherStripsDirty;Base.Zipties],
+		}
+		outputs
+		{
+			item 1 Base.Survival_TorchFresh,
+		}
+	}
+
+	craftRecipe MakeTorchWire
+	{
+	timedAction = TorchCraft,
+		Time = 80,
+		Tags = InHandCraft;CanBeDoneInDark;Survivalist,
+	category = Miscellaneous,
+        SkillRequired = Maintenance:1,
+		xpAward = Maintenance:10,
+		inputs
+		{
+            		item 1 tags[Pliers] mode:keep flags[Prop1],
+			item 1 [Base.TreeBranch2;Base.WoodenStick2;Base.LongHandle;Base.Survival_TorchBurnt] mode:destroy flags[Prop2;ItemCount;AllowFavorite;InheritFavorite],
+			item 5 [Base.RippedSheets;Base.RippedSheetsDirty;Base.DenimStrips;Base.DenimStripsDirty;Base.Twigs],
+			item 2 [Base.Wire;Base.ElectricWire],
+		}
+		outputs
+		{
+			item 1 Base.Survival_TorchFresh,
+		}
+	}
+
+	craftRecipe LightTorch
+	{
+	timedAction = TorchLight,
+		Time = 10,
+		Tags = InHandCraft;CanBeDoneInDark;Survivalist,
+	category = Miscellaneous,
+	OnCreate = LightTorch_OnCreate,
+		inputs
+		{
+			item 1 [Base.Survival_TorchFresh;Base.Survival_TorchBurnt] mode:destroy flags[Prop2;InheritUses;ItemCount;AllowFavorite;InheritFavorite],
+			item 1 tags[StartFire;FireSource],
+		}
+		outputs
+		{
+			item 1 Base.Survival_TorchBurning,
+		}
+	}
+
+	craftRecipe LightTorchFire
+	{
+	timedAction = TorchLight,
+		Time = 10,
+		Tags = InHandCraft;Survivalist;RightClickOnly,
+	category = Miscellaneous,
+	OnCreate = LightTorch_OnCreate,
+        OnTest = Recipe.OnCanPerform.OpenFire,
+		inputs
+		{
+			item 1 [Base.Survival_TorchFresh;Base.Survival_TorchBurnt] mode:destroy flags[Prop2;InheritUses;ItemCount;AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.Survival_TorchBurning,
+		}
+	}
+
+	craftRecipe ExtinguishTorch
+	{
+	timedAction = TorchExtinguish,
+		Time = 10,
+		Tags = InHandCraft;CanBeDoneInDark;Survivalist,
+	category = Miscellaneous,
+	OnCreate = ExtinguishTorch_OnCreate,
+		/* CanWalk = true, */
+		inputs
+		{
+			item 1 [Base.Survival_TorchBurning] mode:destroy flags[Prop2;InheritUses;ItemCount;AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 Base.Survival_TorchBurnt,
+		}
+	}
+
+	craftRecipe MakeCandle
+	{
+	timedAction = CandleCraft,
+		time = 100,
+		Tags = InHandCraft;Survivalist,
+	category = Miscellaneous,
+        OnTest = Recipe.OnCanPerform.OpenFire,
+        ToolTip = Tooltip_Recipe_OpenFire,
+		inputs
+		{
+			item 1 [Base.EmptyJar;Base.GlassTumbler;Base.DrinkingGlass] mode:keep flags[Prop2;IsEmpty],
+			item 1 tags[DullKnife;SharpKnife] mode:keep flags[Prop1],
+			item 6 [Base.Lard],
+			item 1 tags[Twine],
+		}
+		outputs
+		{
+			item 1 Base.Candle,
+		}
+	}
+
+		/** Packing **/
+
+	craftRecipe PutClayinSack
+	{
+	timedAction = UnPackSack,
+		Time = 30,
+		Tags = InHandCraft,
+	category = Packing,
+		inputs
+		{
+			item 8 [Base.Clay],
+			item 1 tags[HoldDirt],
+		}
+		outputs
+		{
+			item 1 Base.Claybag,
+		}
+	}
+
+		/** Pottery **/
+
+	craftRecipe KneadClay
+	{
+	timedAction = ClayCraft,
+        	time = 120,
+        	tags = AnySurfaceCraft;Pottery;CanBeDoneFromFloor,
+        	xpAward = Pottery:1,
+        category = Pottery,
+        	inputs
+        	{
+			item 1 tags[Bucket] mode:keep,
+            		-fluid 2.5 categories[Water] mode:mixture,
+			item 1 [Base.Sheet;Base.CheeseCloth;Base.Strainer;] mode:keep,
+			item 1 tags[Bucket] mode:keep flags[IsEmpty],
+			item 1 [Base.Dirtbag],
+        	}
+        	outputs
+        	{
+			item 1 Base.Clay,
+        	}
+	}
+
+		/** Tailoring **/
+
+	craftRecipe SewRagSheet
+	{
+	timedAction = SewingCloth,
+		Time = 200,
+	xpAward = Tailoring:5,
+	Tags = AnySurfaceCraft,
+	category = Tailoring,
+		inputs
+		{
+			item 1 tags[SewingNeedle] mode:keep,
+			item 10 [Base.RippedSheets] flags[InheritColor],
+			item 3 tags[Thread],
+		}
+		outputs
+		{
+			item 1 Base.Sheet,
+		}
+	}
+}

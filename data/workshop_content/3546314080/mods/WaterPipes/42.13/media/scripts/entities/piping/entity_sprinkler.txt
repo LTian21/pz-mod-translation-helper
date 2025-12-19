@@ -1,0 +1,58 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WaterSprinkler
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Water Sprinkler,
+			Icon		= build_sprinkler,
+		}
+	}
+
+    entity WaterSprinkler
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WaterSprinkler,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            isThumpable     = true,
+		    OnIsValid       = BuildRecipeCode.waterSprinkler.OnIsValid,
+            OnCreate        = BuildRecipeCode.waterSprinkler.OnCreate,
+			health          = 250,
+			skillBaseHealth = 20,
+			
+            face W
+            {
+                layer
+                {
+                    row = waterpipes_01_7,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            timedAction   = BuildSprinkler,
+            time          = 300,
+            needToBeLearn = false,
+            category      = Plumbing,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:10,
+            ToolTip       = Tooltip_WP_craft_sprinklerDesc,
+            inputs
+            {
+                item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+                item 3 [Base.Screws],
+                item 1 [Base.Hinge],
+                item 4 [Base.MetalPipe],
+                item 1 [Base.RubberHose],
+            }
+        }
+    }
+}

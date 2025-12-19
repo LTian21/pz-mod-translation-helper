@@ -1,0 +1,78 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_eDoor
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Elevator Door,
+			Icon		= elevator_Door,
+		}
+	}
+
+    entity Elevator_Door
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_eDoor,
+            uiEnabled       = true,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = Closed_Elevator_1,
+                    row = Closed_Elevator_0,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = Closed_ElevatorPlain_1,
+                    row = Closed_ElevatorPlain_0,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = Closed_ElevatorPlain_2 Closed_ElevatorPlain_3,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = Closed_Elevator_2 Closed_Elevator_3,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 250,
+            SkillRequired = MetalWelding:4,
+            xpAward       = MetalWelding:10,
+            category      = Miscellaneous,
+            ToolTip       = Tooltip_MakeButton,
+            inputs
+            {
+                item 4 [Base.WeldingRods] flags[DontRecordInput],
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 1 tags[WeldingMask] mode:keep,
+                item 1 [Base.Screwdriver] mode:keep,
+                item 6 [Base.SmallSheetMetal],
+                item 4 [Base.SheetMetal],
+                item 8 [Base.Base.ElectronicsScrap],
+                item 20 [Base.Screws],
+                item 4 [Base.ElectricWire],
+            }
+        }
+    }
+}

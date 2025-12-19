@@ -1,4 +1,4 @@
-// 支持的语言与工具
+// 支持的语言枚举
 namespace TranslationSystem
 {
     public enum Language
