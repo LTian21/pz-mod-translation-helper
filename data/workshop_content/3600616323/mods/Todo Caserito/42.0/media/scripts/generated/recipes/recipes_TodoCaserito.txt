@@ -1970,5 +1970,64 @@ module Base
 			item 2 TodoCaserito.Vacipan,
 		}
 	}
+	craftRecipe MakeBowlArrozconLeche 
+	{
+        timedAction = MixingBowl,
+		Time = 25,
+		NeedToBeLearn = True,
+		category = TodoCaserito,
+		Tags = AnySurfaceCraft;Cooking,
+		SkillRequired = Cooking:1,
+		xpAward = Cooking:5,
+		AutoLearnAny = Cooking:1,
+		inputs
+		{			
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeVeryLight],
+			item 1 [Base.Bowl] flags[InheritCondition;ItemCount] mappers[BowlType] mode:destroy,
+			item 1  tags[MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 2 [Base.Cinnamon],
+			item 2 [Base.Sugar],
+			item 1 [Base.Rice] flags[IsCookedFoodItem;InheritFoodAge;ItemCount],
+			item 1 [*],
+			-fluid 0.2 [CowMilk],
+			item 1 [TodoCaserito.EsenciaVainilla],
+		}
+		outputs
+		{
+			item 1 mapper:BowlType,
+		}
+		itemMapper BowlType
+		{
+			TodoCaserito.BowlArrozconLeche = Base.Bowl,
+		}
+	}
+	craftRecipe MakeBudinFrutal
+	{
+        timedAction = MixingBowl,
+		Time = 30,
+		NeedToBeLearn = True,
+		category = TodoCaserito,
+		Tags = AnySurfaceCraft;Cooking,
+		SkillRequired = Cooking:3,
+		xpAward = Cooking:10,
+		AutoLearnAny = Cooking:3,
+		inputs
+		{
+			item 1 tags[MixingUtensil] mode:keep flags[MayDegradeVeryLight],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+			item 1 [Base.Flour2],
+			item 1 tags[Sugar],
+			item 1 [Base.Orange],
+			item 1 [Base.Honey],
+			item 4 tags[Egg] flags[IsUncookedFoodItem;ItemCount],
+			item 2 [Base.Butter],
+			item 2 [Base.Salt;Base.SeasoningSalt],
+		}
+		outputs
+		{
+			item 1 TodoCaserito.BudinFrutal,
+			item 1 Base.Bowl,
+		}
 	
+	}
 }
