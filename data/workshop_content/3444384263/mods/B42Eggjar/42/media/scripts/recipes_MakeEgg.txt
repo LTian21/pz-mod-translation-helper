@@ -1,18 +1,22 @@
-module Base
+module Trex 
 {
+    imports
+	{
+		Base
+	}
 
 	craftRecipe MakeJarEggTrex
 	{
         timedAction = MixingBowl,
-		Time = 100,
-		OnCreate = Recipe.OnCreate.CannedFood,
-		Tags = InHandCraft;Cooking,
+        time = 100,
+        OnCreate = RecipeCodeOnCreate.makeJar,
+        Tags = InHandCraft;Cooking,
         category = Cooking,
-		xpAward = Cooking:10,
+        xpAward = Cooking:10,
 		inputs
 		{
-			item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
-			item 1 [Base.EmptyJar] mode:destroy flags[ItemCount],
+            item 1 tags[base:dullknife;base:sharpknife;base:meatcleaver] mode:keep flags[MayDegradeLight],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
 			item 1 [Base.JarLid],
 			item 5 [Base.Egg;Base.WildEggs] mappers[EggType] flags[InheritFoodAge;ItemCount] mode:destroy,
 			item 2.0 tags[Vinegar],			
@@ -26,8 +30,8 @@ module Base
 		}
 		itemMapper EggType
 		{
-			Base.CannedEggTrex = Base.Egg,
-			Base.CannedEggTrex = Base.WildEggs,	
+			Trex.CannedEggTrex = Base.Egg,
+			Trex.CannedEggTrex = Base.WildEggs,	
 		}
 	}
 
@@ -35,13 +39,13 @@ module Base
 	craftRecipe OpenJarOfEggTrex
 	{
         timedAction = Making,
-		Time = 30,
-		OnCreate = Recipe.OnCreate.OpenCannedFood,
-		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        time = 30,
+        OnCreate = RecipeCodeOnCreate.applyLidCondition,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
         category = Cooking,
 		inputs
 		{
-			item 1 [Base.CannedEggTrex;Base.CannedEgg2Trex] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+			item 1 [Trex.CannedEggTrex;Trex.CannedEgg2Trex] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
 		}
 		outputs
 		{
@@ -49,13 +53,13 @@ module Base
 		}
 		itemMapper foodType
 		{
-			Base.CannedEgg_OpenTrex  = Base.CannedEggTrex,
-			Base.CannedEgg2_OpenTrex = Base.CannedEgg2Trex,
+			Trex.CannedEgg_OpenTrex  = Trex.CannedEggTrex,
+			Trex.CannedEgg2_OpenTrex = Trex.CannedEgg2Trex,
 		}
 	}
 
 
-	craftRecipe MakeEggjarpreparation_Trex
+	craftRecipe MakeEggjarpreparationTrex
 	{
         timedAction = MixingBowl,
 		Time = 50,
@@ -78,8 +82,8 @@ module Base
 		}
 		itemMapper potType
 		{
-			Base.WaterPotEggjarpreparation_Trex = Base.Pot,
-			Base.WaterPotForgedEggjarpreparation_Trex = Base.PotForged,
+			Trex.WaterPotEggjarpreparation_Trex = Base.Pot,
+			Trex.WaterPotForgedEggjarpreparation_Trex = Base.PotForged,
 		}
 	}	 
 	 
@@ -87,25 +91,26 @@ module Base
 	craftRecipe MakeEggTrex
 	{
         timedAction = MixingBowl,
-		Time = 80,
-		ToolTip = Tooltip_Recipe_MustCookedGet,
-		Tags = AnySurfaceCraft;Cooking,
-		category = Cooking,
+        time = 100,
+        OnCreate = RecipeCodeOnCreate.makeJar,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:10,
 		inputs
 		{
-			item 3 [Base.EmptyJar] mode:destroy flags[ItemCount],
+            item 3 tags[base:jar] mode:destroy flags[ItemCount],
 			item 3 [Base.JarLid],
-			item 1 [Base.WaterPotEggjarpreparation_Trex;Base.WaterPotForgedEggjarpreparation_Trex] mappers[potType] flags[IsCookedFoodItem;InheritFoodAge;ItemCount],
+			item 1 [Trex.WaterPotEggjarpreparation_Trex;Trex.WaterPotForgedEggjarpreparation_Trex] mappers[potType] flags[IsCookedFoodItem;InheritFoodAge;ItemCount],
 		}
 		outputs
 		{
-			item 3 Base.CannedEgg2Trex,
+			item 3 Trex.CannedEgg2Trex,
 			item 1 mapper:potType,		
 		}
 		itemMapper potType
 		{
-			Base.Pot = Base.WaterPotEggjarpreparation_Trex,
-			Base.PotForged = Base.WaterPotForgedEggjarpreparation_Trex,
+			Base.Pot = Trex.WaterPotEggjarpreparation_Trex,
+			Base.PotForged = Trex.WaterPotForgedEggjarpreparation_Trex,
 		}		
 	}	 
 	 

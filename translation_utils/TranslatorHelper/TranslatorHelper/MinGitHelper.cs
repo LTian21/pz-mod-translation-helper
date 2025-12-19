@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 partial class Program
@@ -11,26 +12,95 @@ partial class Program
     /// </summary>
     static class MinGitHelper
     {
-        // Cache detected git path and info so detection message can be printed once at startup
+        public class GitNetworkException : Exception
+        {
+            public GitNetworkException(string message) : base(message) { }
+        }
+
         private static string? _cachedGitPath = null;
         private static string? _cachedGitInfo = null;
 
-        /// <summary>
-        /// Gets the path to git.exe (either MinGit or system git)
-        /// This method no longer prints detection info to the console; use GetDetectedGitInfo() to retrieve a one-time message.
-        /// </summary>
-        private static string GetGitExecutablePath()
+        private static readonly string[] ProxyEnvVariables = new[]
+        {
+            "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY",
+            "http_proxy", "https_proxy", "all_proxy",
+            "NO_PROXY", "no_proxy"
+        };
+
+        private static readonly Regex GitLogSpamRegex = new Regex(
+            @"^.*?\..*?\s*\|\s*(?:[\d\s+-]+|Bin\s+\d+\s*->\s*\d+\s*bytes)$",
+            RegexOptions.Compiled);
+
+        private static readonly Lazy<string> GitSandboxHome = new(() =>
+        {
+            var baseDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            if (string.IsNullOrWhiteSpace(baseDir))
+            {
+                baseDir = AppContext.BaseDirectory;
+            }
+
+            var gitHome = Path.Combine(baseDir, "TranslatorHelper", "git-home");
+            Directory.CreateDirectory(gitHome);
+            return gitHome;
+        });
+
+        private static string NullDevicePath => OperatingSystem.IsWindows() ? "NUL" : "/dev/null";
+
+        public readonly record struct GitResult(int ExitCode, string StandardOutput, string StandardError);
+
+        private class LogSpamState
+        {
+            public bool ModeChangeLogged;
+            public bool CreateModeLogged;
+            public bool DeleteModeLogged;
+        }
+
+        private static bool CheckSpam(string line, LogSpamState state)
+        {
+            if (GitLogSpamRegex.IsMatch(line))
+            {
+                return true;
+            }
+
+            if (line.Contains("mode change", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!state.ModeChangeLogged)
+                {
+                    Console.WriteLine("[Git] 正在进行 mode change 操作...");
+                    state.ModeChangeLogged = true;
+                }
+                return true;
+            }
+            if (line.Contains("create mode", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!state.CreateModeLogged)
+                {
+                    Console.WriteLine("[Git] 正在进行 create mode 操作...");
+                    state.CreateModeLogged = true;
+                }
+                return true;
+            }
+            if (line.Contains("delete mode", StringComparison.OrdinalIgnoreCase))
+            {
+                if (!state.DeleteModeLogged)
+                {
+                    Console.WriteLine("[Git] 正在进行 delete mode 操作...");
+                    state.DeleteModeLogged = true;
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public static string GetGitExecutablePath()
         {
             if (!string.IsNullOrEmpty(_cachedGitPath))
             {
-                return _cachedGitPath!;
+                return _cachedGitPath;
             }
 
-            // First try MinGit location relative to current executable
             string exeDir = AppContext.BaseDirectory;
-            // Go up one level from the executable's directory
-            string parentDir = Path.GetFullPath(Path.Combine(exeDir, ".."));
-            string mingitPath = Path.Combine(parentDir, "MinGit", "cmd", "git.exe");
+            string mingitPath = Path.Combine(exeDir, ".." ,"MinGit", "cmd", "git.exe");
 
             if (File.Exists(mingitPath))
             {
@@ -39,10 +109,9 @@ partial class Program
                 return _cachedGitPath;
             }
 
-            // Fallback to system git
-            _cachedGitPath = "git";
-            _cachedGitInfo = "未找到 MinGit，尝试使用系统 Git";
-            return _cachedGitPath;
+            string errorMessage = $"未找到内置 Git (MinGit)。请确认程序目录中存在 {mingitPath}。";
+            _cachedGitInfo = errorMessage;
+            throw new FileNotFoundException(errorMessage, mingitPath);
         }
 
         /// <summary>
@@ -53,8 +122,14 @@ partial class Program
         {
             if (_cachedGitInfo == null)
             {
-                // Ensure detection runs
-                _ = GetGitExecutablePath();
+                try
+                {
+                    _ = GetGitExecutablePath();
+                }
+                catch (Exception ex)
+                {
+                    _cachedGitInfo = ex.Message;
+                }
             }
             return _cachedGitInfo ?? string.Empty;
         }
@@ -76,32 +151,33 @@ partial class Program
         /// </summary>
         private static string BuildSafeConfigArgs()
         {
-            // Disable interactive helpers/pager/LFS filter at the git config level per-invocation.
             return string.Join(" ", new[]
             {
                 "-c credential.helper=",
                 "-c core.pager=",
-                "-c filter.lfs.required=false"
+                "-c filter.lfs.required=false",
+                "-c http.schannelCheckRevoke=false",
+                "-c http.sslBackend=openssl"
             });
         }
 
-        /// <summary>
-        /// Executes a git command and returns the output
-        /// </summary>
-        private static async Task<(int exitCode, string output, string error)> ExecuteGitCommandAsync(
+        private static async Task<GitResult> RunGit(
             string arguments,
-            string workingDirectory = null,
-            string input = null,
-            string pat = null)
+            bool enableProxy,
+            string? proxyUrl,
+            string? workingDirectory = null,
+            string? input = null,
+            string? pat = null)
         {
             var gitPath = GetGitExecutablePath();
-
-            // Prepend auth and safety configs once here so callers don't need to remember.
             var authArg = string.IsNullOrEmpty(pat) ? string.Empty : BuildAuthConfigArg(pat);
             var safeArgs = BuildSafeConfigArgs();
-            var finalArgs = string.IsNullOrEmpty(authArg)
-                ? $"{safeArgs} {arguments}".Trim()
-                : $"{authArg} {safeArgs} {arguments}".Trim();
+
+            var finalArgsBuilder = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(authArg)) finalArgsBuilder.Append(authArg).Append(' ');
+            if (!string.IsNullOrWhiteSpace(safeArgs)) finalArgsBuilder.Append(safeArgs).Append(' ');
+            finalArgsBuilder.Append(arguments);
+            var finalArgs = finalArgsBuilder.ToString().Trim();
 
             var startInfo = new ProcessStartInfo
             {
@@ -116,88 +192,75 @@ partial class Program
                 StandardErrorEncoding = Encoding.UTF8
             };
 
-            if (!string.IsNullOrEmpty(workingDirectory))
+            if (!string.IsNullOrWhiteSpace(workingDirectory))
             {
                 startInfo.WorkingDirectory = workingDirectory;
             }
 
-            // Apply proxy settings
-            var proxyUrl = ProxyHelper.GetHttpProxyUrl();
-            if (!string.IsNullOrEmpty(proxyUrl))
-            {
-                startInfo.EnvironmentVariables["HTTP_PROXY"] = proxyUrl;
-                startInfo.EnvironmentVariables["HTTPS_PROXY"] = proxyUrl;
-                Console.WriteLine($"[信息] Git 使用代理: {proxyUrl}");
-            }
-
-            // Enforce non-interactive behavior; never pop credential dialogs.
-            startInfo.EnvironmentVariables["GIT_TERMINAL_PROMPT"] = "0";
-            startInfo.EnvironmentVariables["GIT_ASKPASS"] = "echo";
+            PrepareSandboxEnvironment(startInfo, enableProxy, proxyUrl);
 
             using var process = new Process { StartInfo = startInfo };
             var outputBuilder = new StringBuilder();
             var errorBuilder = new StringBuilder();
+            var spamState = new LogSpamState();
 
             process.OutputDataReceived += (sender, e) =>
             {
-                if (e.Data != null)
-                {
-                    var line = e.Data;
-                    // Mask PAT if ever echoed by lower layers
-                    if (!string.IsNullOrEmpty(pat) && line.Contains(pat))
-                    {
-                        line = line.Replace(pat, "***");
-                    }
-                    outputBuilder.AppendLine(line);
-                    Console.WriteLine($"[Git] {line}");
-                }
+                if (e.Data == null) return;
+                var line = MaskSecret(e.Data, pat);
+                outputBuilder.AppendLine(line);
+
+                if (CheckSpam(line, spamState)) return;
+
+                Console.WriteLine($"[Git] {line}");
             };
 
             process.ErrorDataReceived += (sender, e) =>
             {
-                if (e.Data != null)
+                if (e.Data == null) return;
+
+                var line = MaskSecret(e.Data, pat);
+                errorBuilder.AppendLine(line);
+
+                if (CheckSpam(line, spamState)) return;
+
+                var trimmed = line.Trim();
+                var lower = trimmed.ToLowerInvariant();
+
+                bool isProgress = trimmed.StartsWith("remote:", StringComparison.OrdinalIgnoreCase)
+                    || trimmed.StartsWith("cloning into", StringComparison.OrdinalIgnoreCase)
+                    || trimmed.StartsWith("receiving objects:", StringComparison.OrdinalIgnoreCase)
+                    || trimmed.StartsWith("resolving deltas:", StringComparison.OrdinalIgnoreCase)
+                    || trimmed.StartsWith("counting objects:", StringComparison.OrdinalIgnoreCase)
+                    || trimmed.StartsWith("compressing objects:", StringComparison.OrdinalIgnoreCase)
+                    || trimmed.StartsWith("already on", StringComparison.OrdinalIgnoreCase)
+                    || trimmed.IndexOf("-> fetch_head", StringComparison.OrdinalIgnoreCase) >= 0
+                    || trimmed.Equals("already up to date.", StringComparison.OrdinalIgnoreCase)
+                    || trimmed.StartsWith("warning:", StringComparison.OrdinalIgnoreCase);
+
+                bool isErrorLine = lower.Contains("fatal")
+                    || lower.Contains("error")
+                    || lower.Contains("failed")
+                    || lower.Contains("permission denied")
+                    || lower.Contains("authentication")
+                    || lower.Contains("not a git repository")
+                    || lower.Contains("could not")
+                    || lower.Contains("unable to")
+                    || lower.Contains("conflict");
+
+                if (isErrorLine && !isProgress)
                 {
-                    var line = e.Data;
-                    // Mask PAT if ever echoed by lower layers
-                    if (!string.IsNullOrEmpty(pat) && line.Contains(pat))
-                    {
-                        line = line.Replace(pat, "***");
-                    }
+                    Console.WriteLine($"[Git] (错误): {line}");
+                }
+                else
+                {
+                    Console.WriteLine($"[Git] {line}");
+                }
 
-                    errorBuilder.AppendLine(line);
-                    var trimmed = line.Trim();
-                    var lower = trimmed.ToLowerInvariant();
-
-                    // Common Git progress / informational prefixes that are written to stderr
-                    bool isProgress = trimmed.StartsWith("remote:", StringComparison.OrdinalIgnoreCase)
-                        || trimmed.StartsWith("cloning into", StringComparison.OrdinalIgnoreCase)
-                        || trimmed.StartsWith("receiving objects:", StringComparison.OrdinalIgnoreCase)
-                        || trimmed.StartsWith("resolving deltas:", StringComparison.OrdinalIgnoreCase)
-                        || trimmed.StartsWith("counting objects:", StringComparison.OrdinalIgnoreCase)
-                        || trimmed.StartsWith("compressing objects:", StringComparison.OrdinalIgnoreCase)
-                        || trimmed.StartsWith("already on", StringComparison.OrdinalIgnoreCase)
-                        || trimmed.IndexOf("-> fetch_head", StringComparison.OrdinalIgnoreCase) >= 0
-                        || trimmed.Equals("already up to date.", StringComparison.OrdinalIgnoreCase)
-                        || trimmed.StartsWith("warning:", StringComparison.OrdinalIgnoreCase);
-
-                    bool isErrorLine = lower.Contains("fatal")
-                        || lower.Contains("error")
-                        || lower.Contains("failed")
-                        || lower.Contains("permission denied")
-                        || lower.Contains("authentication")
-                        || lower.Contains("not a git repository")
-                        || lower.Contains("could not")
-                        || lower.Contains("unable to")
-                        || lower.Contains("conflict");
-
-                    if (isErrorLine && !isProgress)
-                    {
-                        Console.WriteLine($"[Git] (错误): {line}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"[Git] {line}");
-                    }
+                // Check for spammy output patterns
+                if (!isErrorLine && !isProgress)
+                {
+                    CheckSpam(line, new LogSpamState());
                 }
             };
 
@@ -213,13 +276,77 @@ partial class Program
 
             await process.WaitForExitAsync();
 
-            return (process.ExitCode, outputBuilder.ToString(), errorBuilder.ToString());
+            return new GitResult(process.ExitCode, outputBuilder.ToString(), errorBuilder.ToString());
+        }
+
+        private static void PrepareSandboxEnvironment(ProcessStartInfo startInfo, bool enableProxy, string? proxyUrl)
+        {
+            foreach (var envName in ProxyEnvVariables)
+            {
+                if (startInfo.Environment.ContainsKey(envName))
+                {
+                    startInfo.Environment.Remove(envName);
+                }
+            }
+
+            // Force OpenSSL backend to avoid schannel errors
+            startInfo.Environment["GIT_SSL_BACKEND"] = "openssl";
+
+            if (enableProxy && !string.IsNullOrWhiteSpace(proxyUrl))
+            {
+                startInfo.Environment["HTTP_PROXY"] = proxyUrl;
+                startInfo.Environment["HTTPS_PROXY"] = proxyUrl;
+                startInfo.Environment["ALL_PROXY"] = proxyUrl;
+                startInfo.Environment["http_proxy"] = proxyUrl;
+                startInfo.Environment["https_proxy"] = proxyUrl;
+                startInfo.Environment["all_proxy"] = proxyUrl;
+                Console.WriteLine($"[信息] Git 使用代理: {proxyUrl}");
+            }
+            else
+            {
+                // Explicitly set to empty to ensure no system fallback
+                startInfo.Environment["HTTP_PROXY"] = "";
+                startInfo.Environment["HTTPS_PROXY"] = "";
+            }
+
+            var gitHome = GitSandboxHome.Value;
+            startInfo.Environment["HOME"] = gitHome;
+            startInfo.Environment["USERPROFILE"] = gitHome;
+            startInfo.Environment["GIT_CONFIG_NOSYSTEM"] = "1";
+            startInfo.Environment["GIT_CONFIG_GLOBAL"] = NullDevicePath;
+            startInfo.Environment["GIT_TERMINAL_PROMPT"] = "0";
+            startInfo.Environment["GIT_ASKPASS"] = "echo";
+        }
+
+        private static string MaskSecret(string text, string? secret)
+            => string.IsNullOrEmpty(secret) ? text : text.Replace(secret, "***");
+
+        private static (bool enableProxy, string? proxyUrl) ResolveProxySettings(bool needsProxy)
+        {
+            if (!needsProxy)
+            {
+                return (false, null);
+            }
+
+            var proxyUrl = ProxyHelper.GetHttpProxyUrl();
+            return (true, proxyUrl); // Always return true to allow PrepareSandboxEnvironment to handle empty proxyUrl by setting env vars to ""
+        }
+
+        private static void CheckForNetworkError(string stderr)
+        {
+            if (string.IsNullOrEmpty(stderr)) return;
+            if (stderr.Contains("schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE") ||
+                stderr.Contains("0x80092013"))
+            {
+                Console.WriteLine("[错误] Git TLS 连接失败 (schannel 已禁用，使用 OpenSSL 重新尝试)");
+                throw new GitNetworkException($"Git TLS 连接失败: {stderr}");
+            }
         }
 
         /// <summary>
         /// Clone a repository
         /// </summary>
-        public static async Task<bool> CloneAsync(string repoUrl, string targetPath, string pat)
+        public static async Task<bool> CloneAsync(string repoUrl, string targetPath, string pat, bool useProxy = true)
         {
             try
             {
@@ -228,19 +355,25 @@ partial class Program
 
                 // Use header-based auth only; do not inject PAT into URL.
                 var args = $"clone --progress \"{repoUrl}\" \"{targetPath}\"";
-                var (exitCode, output, error) = await ExecuteGitCommandAsync(args, pat: pat);
+                var (enableProxy, proxyUrl) = ResolveProxySettings(useProxy);
+                var result = await RunGit(args, enableProxy, proxyUrl, pat: pat);
 
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     Console.WriteLine("[成功] 仓库克隆成功");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine($"[错误] 克隆失败 (退出码: {exitCode})");
-                    Console.WriteLine($"  错误信息: {error}");
+                    CheckForNetworkError(result.StandardError);
+                    Console.WriteLine($"[错误] 克隆失败 (退出码: {result.ExitCode})");
+                    Console.WriteLine($"  错误信息: {result.StandardError}");
                     return false;
                 }
+            }
+            catch (GitNetworkException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -252,28 +385,38 @@ partial class Program
         /// <summary>
         /// Fetch from remote
         /// </summary>
-        public static async Task<bool> FetchAsync(string repoPath, string pat, string remote = "origin")
+        public static async Task<bool> FetchAsync(string repoPath, string pat, string remote = "origin", bool force = false, bool prune = false)
         {
             try
             {
-                Console.WriteLine($"[开始] 拉取远程更新: {remote}");
-                var args = $"fetch {remote}".Trim();
-                var (exitCode, output, error) = await ExecuteGitCommandAsync(args, repoPath, pat: pat);
+                Console.WriteLine($"[开始] 获取远程更新: {remote}");
+                var argsBuilder = new StringBuilder("fetch");
+                if (force) argsBuilder.Append(" --force");
+                if (prune) argsBuilder.Append(" --prune");
+                argsBuilder.Append($" {remote}");
 
-                if (exitCode == 0)
+                var (useProxy, proxyUrl) = ResolveProxySettings(true);
+                var result = await RunGit(argsBuilder.ToString().Trim(), useProxy, proxyUrl, repoPath, pat: pat);
+
+                if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[成功] 远程更新拉取成功");
+                    Console.WriteLine("[成功] 远程更新获取成功");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine($"[错误] 拉取失败 (退出码: {exitCode})");
+                    CheckForNetworkError(result.StandardError);
+                    Console.WriteLine($"[错误] 获取失败 (退出码: {result.ExitCode})");
                     return false;
                 }
             }
+            catch (GitNetworkException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
-                Console.WriteLine($"[错误] 拉取过程中发生异常: {ex.Message}");
+                Console.WriteLine($"[错误] 获取过程中发生异常: {ex.Message}");
                 return false;
             }
         }
@@ -285,39 +428,48 @@ partial class Program
         {
             try
             {
-                Console.WriteLine($"[开始] 拉取并合并更新");
+                Console.WriteLine($"[开始] 拉取并合并变更");
 
-                // If branch is not specified, get current branch
                 if (branch == null)
                 {
                     branch = await GetCurrentBranchAsync(repoPath);
                     if (string.IsNullOrEmpty(branch))
                     {
-                        Console.WriteLine("[错误] 无法获取当前分支名称");
+                        Console.WriteLine("[错误] 无法获取当前分支信息");
                         return false;
                     }
                     Console.WriteLine($"[信息] 当前分支: {branch}");
                 }
 
                 var pullArgs = $"pull {remote} {branch}".Trim();
-                var (exitCode, output, error) = await ExecuteGitCommandAsync(pullArgs, repoPath, pat: pat);
+                var (useProxy, proxyUrl) = ResolveProxySettings(true);
+                var result = await RunGit(pullArgs, useProxy, proxyUrl, repoPath, pat: pat);
 
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[成功] 代码已更新到最新版本");
+                    Console.WriteLine("[成功] 仓库已更新到最新版本");
                     return true;
-                }
-                else if (error.Contains("CONFLICT") || output.Contains("CONFLICT"))
-                {
-                    Console.WriteLine("[错误] 拉取失败: 存在合并冲突");
-                    Console.WriteLine("[提示] 请联系技术人员处理冲突");
-                    return false;
                 }
                 else
                 {
-                    Console.WriteLine($"[错误] 拉取失败 (退出码: {exitCode})");
-                    return false;
+                    CheckForNetworkError(result.StandardError);
+                    if (result.StandardError.Contains("CONFLICT", StringComparison.OrdinalIgnoreCase)
+                        || result.StandardOutput.Contains("CONFLICT", StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine("[错误] 拉取失败: 出现合并冲突");
+                        Console.WriteLine("[提示] 请联系技术人员处理冲突");
+                        return false;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[错误] 拉取失败 (退出码: {result.ExitCode})");
+                        return false;
+                    }
                 }
+            }
+            catch (GitNetworkException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -333,8 +485,8 @@ partial class Program
         {
             try
             {
-                var (exitCode, output, error) = await ExecuteGitCommandAsync("status --porcelain", repoPath);
-                return exitCode == 0 && !string.IsNullOrWhiteSpace(output);
+                var result = await RunGit("status --porcelain", false, null, repoPath);
+                return result.ExitCode == 0 && !string.IsNullOrWhiteSpace(result.StandardOutput);
             }
             catch
             {
@@ -349,12 +501,12 @@ partial class Program
         {
             try
             {
-                Console.WriteLine("[开始] 暂存所有更改");
-                var (exitCode, _, _) = await ExecuteGitCommandAsync("add -A", repoPath);
-                
-                if (exitCode == 0)
+                Console.WriteLine("[开始] 暂存所有改动");
+                var result = await RunGit("add -A", false, null, repoPath);
+
+                if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[成功] 暂存所有更改");
+                    Console.WriteLine("[成功] 已暂存所有改动");
                     return true;
                 }
                 return false;
@@ -373,8 +525,8 @@ partial class Program
         {
             try
             {
-                var (exitCode, _, _) = await ExecuteGitCommandAsync($"reset HEAD \"{filePath}\"", repoPath);
-                return exitCode == 0;
+                var result = await RunGit($"reset HEAD \"{filePath}\"", false, null, repoPath);
+                return result.ExitCode == 0;
             }
             catch
             {
@@ -393,34 +545,33 @@ partial class Program
         {
             try
             {
-                // Configure user only if not present in repo config to avoid noisy rewrites.
-                var (nameCode, nameOut, _) = await ExecuteGitCommandAsync("config --get user.name", repoPath);
-                if (nameCode != 0 || string.IsNullOrWhiteSpace(nameOut))
+                var nameResult = await RunGit("config --get user.name", false, null, repoPath);
+                if (nameResult.ExitCode != 0 || string.IsNullOrWhiteSpace(nameResult.StandardOutput))
                 {
-                    await ExecuteGitCommandAsync($"config user.name \"{userName}\"", repoPath);
+                    await RunGit($"config user.name \"{userName}\"", false, null, repoPath);
                 }
-                var (emailCode, emailOut, _) = await ExecuteGitCommandAsync("config --get user.email", repoPath);
-                if (emailCode != 0 || string.IsNullOrWhiteSpace(emailOut))
+
+                var emailResult = await RunGit("config --get user.email", false, null, repoPath);
+                if (emailResult.ExitCode != 0 || string.IsNullOrWhiteSpace(emailResult.StandardOutput))
                 {
-                    await ExecuteGitCommandAsync($"config user.email \"{userEmail}\"", repoPath);
+                    await RunGit($"config user.email \"{userEmail}\"", false, null, repoPath);
                 }
 
                 Console.WriteLine($"[开始] 提交更改: {message}");
                 var escapedMessage = message.Replace("\"", "\\\"");
-                var (exitCode, output, error) = await ExecuteGitCommandAsync($"commit -m \"{escapedMessage}\"", repoPath);
+                var commitResult = await RunGit($"commit -m \"{escapedMessage}\"", false, null, repoPath);
 
-                if (exitCode == 0)
+                if (commitResult.ExitCode == 0)
                 {
-                    // Extract commit SHA
-                    var shaMatch = System.Text.RegularExpressions.Regex.Match(output, @"\[.+? ([a-f0-9]{7,40})\]");
+                    var shaMatch = System.Text.RegularExpressions.Regex.Match(commitResult.StandardOutput, @"\[.+? ([a-f0-9]{7,40})\]");
                     var commitSha = shaMatch.Success ? shaMatch.Groups[1].Value : "unknown";
-                    
+
                     Console.WriteLine($"[成功] 提交成功: {commitSha}");
                     return (true, commitSha);
                 }
                 else
                 {
-                    Console.WriteLine($"[错误] 提交失败 (退出码: {exitCode})");
+                    Console.WriteLine($"[错误] 提交失败 (退出码: {commitResult.ExitCode})");
                     return (false, null);
                 }
             }
@@ -438,30 +589,32 @@ partial class Program
         {
             try
             {
-                Console.WriteLine("推送到远程仓库...");
+                Console.WriteLine("正在推送到远程仓库...");
 
-                var pushArgs = branch != null 
-                    ? $"push {remote} {branch}" 
+                var pushArgs = branch != null
+                    ? $"push {remote} {branch}"
                     : $"push {remote}";
                 pushArgs = pushArgs.Trim();
 
-                var (exitCode, output, error) = await ExecuteGitCommandAsync(pushArgs, repoPath, pat: pat);
+                var (useProxy, proxyUrl) = ResolveProxySettings(true);
+                var result = await RunGit(pushArgs, useProxy, proxyUrl, repoPath, pat: pat);
 
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     Console.WriteLine("[成功] 推送成功");
                     return true;
                 }
-                else if (error.Contains("non-fast-forward") || output.Contains("non-fast-forward"))
+                else if (result.StandardError.Contains("non-fast-forward", StringComparison.OrdinalIgnoreCase)
+                    || result.StandardOutput.Contains("non-fast-forward", StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.WriteLine("[错误] 推送失败: 远程分支有新的提交");
-                    Console.WriteLine("[提示] 请执行 sync 操作同步最新代码");
-                    Console.WriteLine("[提示] 如果存在冲突，请联系技术人员处理");
+                    Console.WriteLine("[错误] 推送失败: 远端分支有新的提交");
+                    Console.WriteLine("[提示] 请执行 sync 操作同步后再试");
+                    Console.WriteLine("[提示] 如果仍有冲突请联系技术人员");
                     return false;
                 }
                 else
                 {
-                    Console.WriteLine($"[错误] 推送失败 (退出码: {exitCode})");
+                    Console.WriteLine($"[错误] 推送失败 (退出码: {result.ExitCode})");
                     Console.WriteLine("[提示] 请检查网络连接或稍后重试");
                     return false;
                 }
@@ -480,22 +633,22 @@ partial class Program
         {
             try
             {
-                Console.WriteLine($"[开始] 切换到分支: {branchName}");
+                Console.WriteLine($"[开始] 切换分支: {branchName}");
 
-                var checkoutArgs = createIfNotExists 
-                    ? $"checkout -b {branchName}" 
+                var checkoutArgs = createIfNotExists
+                    ? $"checkout -b {branchName}"
                     : $"checkout {branchName}";
 
-                var (exitCode, output, error) = await ExecuteGitCommandAsync(checkoutArgs, repoPath);
+                var result = await RunGit(checkoutArgs, false, null, repoPath);
 
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
                     Console.WriteLine($"[成功] 已切换到分支: {branchName}");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine($"[错误] 切换分支失败 (退出码: {exitCode})");
+                    Console.WriteLine($"[错误] 切换分支失败 (退出码: {result.ExitCode})");
                     return false;
                 }
             }
@@ -513,8 +666,8 @@ partial class Program
         {
             try
             {
-                var (exitCode, output, _) = await ExecuteGitCommandAsync("branch --show-current", repoPath);
-                return exitCode == 0 ? output.Trim() : null;
+                var result = await RunGit("branch --show-current", false, null, repoPath);
+                return result.ExitCode == 0 ? result.StandardOutput.Trim() : null;
             }
             catch
             {
@@ -529,12 +682,13 @@ partial class Program
         {
             try
             {
-                var args = checkRemote 
-                    ? $"ls-remote --heads origin {branchName}" 
+                var args = checkRemote
+                    ? $"ls-remote --heads origin {branchName}"
                     : $"rev-parse --verify {branchName}";
 
-                var (exitCode, output, _) = await ExecuteGitCommandAsync(args, repoPath);
-                return exitCode == 0 && !string.IsNullOrWhiteSpace(output);
+                var (useProxy, proxyUrl) = ResolveProxySettings(checkRemote);
+                var result = await RunGit(args, useProxy, proxyUrl, repoPath);
+                return result.ExitCode == 0 && !string.IsNullOrWhiteSpace(result.StandardOutput);
             }
             catch
             {
@@ -549,14 +703,14 @@ partial class Program
         {
             try
             {
-                Console.WriteLine($"[警告] 强制同步到远程分支: {remote}/{branch}");
-                Console.WriteLine("[警告] 这将丢弃所有本地更改！");
+                Console.WriteLine($"[警告] 强制同步到远端分支: {remote}/{branch}");
+                Console.WriteLine("[警告] 这将丢弃所有本地修改！");
 
-                var (exitCode, _, _) = await ExecuteGitCommandAsync($"reset --hard {remote}/{branch}", repoPath);
+                var result = await RunGit($"reset --hard {remote}/{branch}", false, null, repoPath);
 
-                if (exitCode == 0)
+                if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[成功] 已强制同步到远程分支");
+                    Console.WriteLine("[成功] 已强制同步到远端分支");
                     return true;
                 }
                 return false;
@@ -575,8 +729,8 @@ partial class Program
         {
             try
             {
-                var (exitCode, _, _) = await ExecuteGitCommandAsync("rev-parse --git-dir", repoPath);
-                return exitCode == 0;
+                var result = await RunGit("rev-parse --git-dir", false, null, repoPath);
+                return result.ExitCode == 0;
             }
             catch
             {
@@ -591,8 +745,60 @@ partial class Program
         {
             try
             {
-                var (exitCode, output, _) = await ExecuteGitCommandAsync($"status --porcelain \"{filePath}\"", repoPath);
-                return exitCode == 0 ? output.Trim() : null;
+                var result = await RunGit($"status --porcelain \"{filePath}\"", false, null, repoPath);
+                return result.ExitCode == 0 ? result.StandardOutput.Trim() : null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Sets the URL for a remote.
+        /// </summary>
+        public static async Task<bool> RemoteSetUrlAsync(string repoPath, string remoteName, string newUrl)
+        {
+            try
+            {
+                Console.WriteLine($"[开始] 设置远程 '{remoteName}' 的 URL 为: {newUrl}");
+                var args = $"remote set-url {remoteName} \"{newUrl}\"";
+                var result = await RunGit(args, false, null, repoPath);
+
+                if (result.ExitCode == 0)
+                {
+                    Console.WriteLine("[成功] 远程 URL 设置成功。");
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine($"[错误] 设置远程 URL 失败 (退出码: {result.ExitCode})");
+                    Console.WriteLine($"  错误信息: {result.StandardError}");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[错误] 设置远程 URL 时发生异常: {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets the URL for a remote.
+        /// </summary>
+        public static async Task<string?> GetRemoteUrlAsync(string repoPath, string remoteName = "origin")
+        {
+            try
+            {
+                var args = $"remote get-url {remoteName}";
+                var result = await RunGit(args, false, null, repoPath);
+
+                if (result.ExitCode == 0)
+                {
+                    return result.StandardOutput.Trim();
+                }
+                return null;
             }
             catch
             {

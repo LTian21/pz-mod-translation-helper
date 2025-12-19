@@ -1,0 +1,593 @@
+module Base
+{	
+    /************************ Rims ************************/
+
+    craftRecipe damnCraft.DismantleSteelRim
+	{
+        timedAction = Welding,
+        time = 100,
+        Tags = InHandCraft;Welding,
+        SkillRequired = Mechanics:2,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        OnCreate = DAMN.OnCreate.GetScrapMetal,
+
+        inputs
+        {
+            item 1 [damnCraft.SteelRimLarge;damnCraft.SteelRimMedium;damnCraft.SteelRimSmall] mode:destroy,
+			item 2 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.ScrapMetal,
+        }
+	}
+
+    /************************ Rubber Mounts ************************/
+
+    craftRecipe damnCraft.DismantleRubberMount
+	{
+        timedAction = Welding,
+        time = 100,
+        Tags = InHandCraft;Welding,
+        SkillRequired = Mechanics:2,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        OnCreate = DAMN.OnCreate.GetScrapMetal,
+
+        inputs
+        {
+            item 1 [damnCraft.TireRubberMountSmall;damnCraft.TireRubberMountLarge] mode:destroy,
+			item 3 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.ScrapMetal,
+        }
+	}
+
+    craftRecipe damnCraft.RemoveLargeRubberFromMount
+	{
+        timedAction = Making,
+        time = 20,
+        Tags = InHandCraft,
+        OnCreate = DAMN.OnCreate.DismantleTireLargeMounted,
+
+        inputs
+        {
+            item 1 [damnCraft.TireRubberMountedLarge] mode:destroy,
+        }
+        outputs
+        {
+            item 1 damnCraft.TireRubberMountLarge,
+        }
+	}
+
+    craftRecipe damnCraft.RemoveSmallRubberFromMount
+	{
+        timedAction = Making,
+        time = 20,
+        Tags = InHandCraft,
+        OnCreate = DAMN.OnCreate.DismantleTireSmallMounted,
+
+        inputs
+        {
+            item 1 [damnCraft.TireRubberMountedSmall] mode:destroy,
+        }
+        outputs
+        {
+            item 1 damnCraft.TireRubberMountSmall,
+        }
+	}
+
+    /************************ Tires ************************/
+
+    craftRecipe damnCraft.DismantleTire
+	{
+        timedAction = Making,
+        time = 90,
+        Tags = InHandCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.DismantleTireSmall,
+
+        inputs
+        {
+            item 1 tags[damnTire] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.SteelRimSmall,
+        }
+	}
+
+    craftRecipe damnCraft.DismantleTireMedium
+	{
+        timedAction = Making,
+        time = 90,
+        Tags = InHandCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.DismantleTireLargeMedium,
+
+        inputs
+        {
+            item 1 tags[damnTireMedium] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.SteelRimMedium,
+        }
+	}
+
+    craftRecipe damnCraft.DismantleTireLarge
+	{
+        timedAction = Making,
+        time = 90,
+        Tags = InHandCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.DismantleTireLargeMedium,
+
+        inputs
+        {
+            item 1 tags[damnTireLarge] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 1 damnCraft.SteelRimLarge,
+        }
+	}
+
+    /* probably not needed
+
+    craftRecipe damnCraft.DismantleTireTwo
+	{
+        timedAction = Making,
+        time = 90,
+        Tags = InHandCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.UnpackStuff,
+
+        inputs
+        {
+            item 1 tags[damnTireTwo] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 2 damnCraft.SteelRimSmall,
+        }
+	}
+
+    craftRecipe damnCraft.DismantleTireMediumTwo
+	{
+        timedAction = Making,
+        time = 90,
+        Tags = InHandCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.UnpackStuff,
+
+        inputs
+        {
+            item 1 tags[damnTireMediumTwo] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 2 damnCraft.SteelRimMedium,
+        }
+	}
+
+    craftRecipe damnCraft.DismantleTireMediumFour
+	{
+        timedAction = Making,
+        time = 90,
+        Tags = InHandCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.UnpackStuff,
+
+        inputs
+        {
+            item 1 tags[damnTireMediumFour] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 4 damnCraft.SteelRimMedium,
+        }
+	}
+
+    craftRecipe damnCraft.DismantleTireLargeTwo
+	{
+        timedAction = Making,
+        time = 90,
+        Tags = InHandCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.UnpackStuff,
+
+        inputs
+        {
+            item 1 tags[damnTireLargeTwo] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 2 damnCraft.SteelRimLarge,
+        }
+	}
+
+    craftRecipe damnCraft.DismantleTireLargeFour
+	{
+        timedAction = Making,
+        time = 90,
+        Tags = InHandCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.UnpackStuff,
+
+        inputs
+        {
+            item 1 tags[damnTireLargeFour] mode:destroy,
+            item 1 [Base.Crowbar] mode:keep,
+        }
+        outputs
+        {
+            item 4 damnCraft.SteelRimLarge,
+        }
+	}
+
+    */
+
+    /************************ Seats ************************/
+
+    craftRecipe damnCraft.DismantleLargeSeat
+    {
+        timedAction = Making,
+        time = 100,
+        Tags = AnySurfaceCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+
+        inputs
+        {
+            item 1 tags[damnSeatLarge] mode:destroy,
+            item 1 tags[SharpKnife] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 damnCraft.SeatFrameLarge,
+            item 1 damnCraft.SeatFabric,
+            item 2 damnCraft.SeatFoam,
+            item 1 Base.Screws,
+        }
+    }
+
+    craftRecipe damnCraft.DismantleSmallSeat
+    {
+        timedAction = Making,
+        time = 100,
+        Tags = AnySurfaceCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+
+        inputs
+        {
+            item 1 tags[damnSeatSmall] mode:destroy,
+            item 1 tags[SharpKnife] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 damnCraft.SeatFrameSmall,
+            item 1 damnCraft.SeatFabric,
+            item 1 damnCraft.SeatFoam,
+            item 1 Base.Screws,
+        }
+    }
+
+    /************************ Hoods ************************/
+
+    craftRecipe damnCraft.DismantleHood
+	{
+        timedAction = Welding,
+        time = 100,
+        Tags = InHandCraft;Welding,
+        category = Recycling,
+        xpAward = MetalWelding:5,
+        SkillRequired = MetalWelding:2,
+        OnCreate = DAMN.OnCreate.DismantleHood,
+
+        inputs
+        {
+            item 1 tags[damnHood] mode:destroy,
+            item 3 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+
+    /************************ Trunk Lids ************************/
+
+    craftRecipe damnCraft.DismantleTrunkLid
+	{
+        timedAction = Welding,
+        time = 100,
+        Tags = InHandCraft;Welding,
+        category = Recycling,
+        xpAward = MetalWelding:5,
+        SkillRequired = MetalWelding:2,
+        OnCreate = DAMN.OnCreate.DismantleTrunkLid,
+
+        inputs
+        {
+            item 1 tags[damnTrunkLid] mode:destroy,
+            item 3 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+
+    craftRecipe damnCraft.DismantleTrunkLids
+	{
+        timedAction = Welding,
+        time = 100,
+        Tags = InHandCraft;Welding,
+        category = Recycling,
+        xpAward = MetalWelding:5,
+        SkillRequired = MetalWelding:2,
+        OnCreate = DAMN.OnCreate.DismantleTrunkLids,
+
+        inputs
+        {
+            item 1 tags[damnTrunkLids] mode:destroy,
+            item 6 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+
+    /************************ Doors ************************/
+
+    craftRecipe damnCraft.DismantleDoorModern
+	{
+        timedAction = Welding,
+        time = 150,
+        Tags = InHandCraft;Welding,
+        category = Recycling,
+        xpAward = MetalWelding:1,
+        SkillRequired = MetalWelding:3,
+        OnCreate = DAMN.OnCreate.DismantleDoorModern,
+
+        inputs
+        {
+            item 1 tags[damnDoorModern] mode:destroy,
+            item 5 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+
+    craftRecipe damnCraft.DismantleDoorClassic
+	{
+        timedAction = Welding,
+        time = 150,
+        Tags = InHandCraft;Welding,
+        category = Recycling,
+        xpAward = MetalWelding:1,
+        SkillRequired = MetalWelding:3,
+        OnCreate = DAMN.OnCreate.DismantleDoorClassic,
+
+        inputs
+        {
+            item 1 tags[damnDoorClassic] mode:destroy,
+            item 5 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+
+    /************************ Windows ************************/
+
+    craftRecipe damnCraft.DismantleWindshield
+	{
+        timedAction = Making,
+        time = 150,
+        Tags = AnySurfaceCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.DismantleWindshield,
+
+        inputs
+        {
+            item 1 tags[damnWindshield] mode:destroy,
+            item 1 [Base.Scalpel] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+
+    craftRecipe damnCraft.DismantleWindow
+	{
+        timedAction = Making,
+        time = 100,
+        Tags = AnySurfaceCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.DismantleWindow,
+
+        inputs
+        {
+            item 1 tags[damnWindow] mode:destroy,
+            item 1 [Base.Scalpel] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+
+    /************************ Toolboxes ************************/
+
+    craftRecipe damnCraft.DismantleToolbox
+	{
+        timedAction = Welding,
+        time = 100,
+        Tags = InHandCraft;Welding,
+        category = Recycling,
+        xpAward = MetalWelding:5,
+        SkillRequired = MetalWelding:2,
+        OnCreate = DAMN.OnCreate.DismantleToolbox,
+
+        inputs
+        {
+            item 1 tags[damnToolbox] mode:destroy,
+            item 3 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+
+    /************************ Tarps ************************/
+
+    craftRecipe damnCraft.DismantleTarpSmall
+	{
+        timedAction = Making,
+        time = 100,
+        Tags = InHandCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.DismantleTarpSmall,
+
+        inputs
+        {
+            item 1 tags[damnTarpSmall] mode:destroy,
+            item 1 tags[SharpKnife] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+
+    /*craftRecipe damnCraft.DismantleTarpLarge
+	{
+        timedAction = Making,
+        time = 100,
+        Tags = InHandCraft,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        SkillRequired = Mechanics:1,
+        OnCreate = DAMN.OnCreate.DismantleTarpLarge,
+
+        inputs
+        {
+            item 1 tags[damnTarpLarge] mode:destroy,
+            item 1 tags[SharpKnife] mode:keep,
+        }
+        outputs
+        {
+        }
+	}*/
+
+    /************************ BedCaps ************************/
+
+    craftRecipe damnCraft.DismantleBedCap
+	{
+        timedAction = Welding,
+        time = 100,
+        Tags = InHandCraft;Welding,
+        category = Recycling,
+        xpAward = MetalWelding:5,
+        SkillRequired = MetalWelding:2,
+        OnCreate = DAMN.OnCreate.DismantleToolbox,
+
+        inputs
+        {
+            item 1 tags[damnBedCap;damnBedCapLarge] mode:destroy,
+            item 3 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+        }
+	}
+
+    /************************ Armor ************************/
+
+    craftRecipe damnCraft.DismantleArmor
+	{
+        timedAction = Welding,
+        time = 100,
+        Tags = InHandCraft;Welding,
+        SkillRequired = Mechanics:2,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        OnCreate = DAMN.OnCreate.GetScrapMetal,
+
+        inputs
+        {
+            item 1 tags[damnMetalArmor;damnMetalBumper;damnMetalSitesteps;damnMetalSidesteps] mode:destroy,
+			item 2 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.ScrapMetal,
+        }
+	}
+
+    /************************ Misc Metal ************************/
+
+    craftRecipe damnCraft.DismantleMetalPart
+	{
+        timedAction = Welding,
+        time = 100,
+        Tags = InHandCraft;Welding,
+        SkillRequired = Mechanics:2,
+        category = Recycling,
+        xpAward = Mechanics:1,
+        OnCreate = DAMN.OnCreate.GetScrapMetal,
+
+        inputs
+        {
+            item 1 tags[damnMetalPart] mode:destroy,
+			item 2 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.ScrapMetal,
+        }
+	}
+}

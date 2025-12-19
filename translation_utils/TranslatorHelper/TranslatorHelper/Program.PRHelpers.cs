@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -10,35 +11,44 @@ using Octokit;
 
 partial class Program
 {
-    // PR 状态切换（GraphQL 优先，REST 兜底）
+    // PR 状态切换：优先使用 GraphQL，失败后回退 REST
     static async Task<int> SubmitPR(AppConfig config, GitHubClient github, string owner, string repoName)
-    {
-        try
-        {
-            string translatorBranch = $"translation-{ConvertToValidBranchName(config.UserName)}";
-            var allPRs = await github.PullRequest.GetAllForRepository(owner, repoName, new PullRequestRequest { State = ItemStateFilter.Open });
-            var pr = allPRs.FirstOrDefault(p => p.Head.Ref == translatorBranch);
-            if (pr == null) { Console.WriteLine("[提示] 未找到属于你分支的开放 PR"); return 0; }
-            await MarkPrAsReadyForReview(config.Key, owner, repoName, pr.Number);
-            Console.WriteLine($"[成功] 已将 PR #{pr.Number} 标记为 Ready for review");
-            return 0;
-        }
-        catch (Exception ex) { Console.WriteLine($"[错误] 提交审核失败: {ex.Message}"); return 1; }
-    }
+        => await TogglePrReviewStateAsync(config, github, owner, repoName, toDraft: false);
 
     static async Task<int> WithdrawPR(AppConfig config, GitHubClient github, string owner, string repoName)
+        => await TogglePrReviewStateAsync(config, github, owner, repoName, toDraft: true);
+
+    private static async Task<int> TogglePrReviewStateAsync(AppConfig config, GitHubClient github, string owner, string repoName, bool toDraft)
     {
         try
         {
             string translatorBranch = $"translation-{ConvertToValidBranchName(config.UserName)}";
             var allPRs = await github.PullRequest.GetAllForRepository(owner, repoName, new PullRequestRequest { State = ItemStateFilter.Open });
             var pr = allPRs.FirstOrDefault(p => p.Head.Ref == translatorBranch);
-            if (pr == null) { Console.WriteLine("[提示] 未找到属于你分支的开放 PR"); return 0; }
-            await MarkPrAsDraft(config.Key, owner, repoName, pr.Number);
-            Console.WriteLine($"[成功] 已将 PR #{pr.Number} 撤回为 Draft");
+            if (pr == null)
+            {
+                Console.WriteLine("[提示] 未找到当前分支对应的开放 PR。");
+                return 0;
+            }
+
+            if (toDraft)
+            {
+                await MarkPrAsDraft(config.Key, owner, repoName, pr.Number);
+                Console.WriteLine($"[成功] 已将 PR #{pr.Number} 设为 Draft。");
+            }
+            else
+            {
+                await MarkPrAsReadyForReview(config.Key, owner, repoName, pr.Number);
+                Console.WriteLine($"[成功] 已将 PR #{pr.Number} 设为 Ready for review。");
+            }
+
             return 0;
         }
-        catch (Exception ex) { Console.WriteLine($"[错误] 撤回为草稿失败: {ex.Message}"); return 1; }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[错误] 切换 PR 状态失败: {ex.Message}");
+            return 1;
+        }
     }
 
     static async Task MarkPrAsDraft(string token, string owner, string repo, int number)
@@ -77,14 +87,14 @@ partial class Program
         if (!resp.IsSuccessStatusCode)
         {
             var body = await resp.Content.ReadAsStringAsync();
-            throw new Exception($"GitHub API 调用失败: {(int)resp.StatusCode} {resp.ReasonPhrase}. Body: {body}");
+            throw new Exception($"GitHub API 请求失败: {(int)resp.StatusCode} {resp.ReasonPhrase}. Body: {body}");
         }
     }
 
     static async Task GraphQlToggleDraft(string token, string owner, string repo, int number, bool toDraft)
     {
         string nodeId = await GetPrNodeId(token, owner, repo, number);
-        if (string.IsNullOrEmpty(nodeId)) throw new Exception("无法获取 PR 的 node_id，GraphQL 调用失败");
+        if (string.IsNullOrEmpty(nodeId)) throw new Exception("无法获取 PR 的 node_id，GraphQL 请求失败。");
         string mutation = toDraft
             ? "mutation($id:ID!){ convertPullRequestToDraft(input:{pullRequestId:$id}){ pullRequest{ id isDraft } } }"
             : "mutation($id:ID!){ markPullRequestReadyForReview(input:{pullRequestId:$id}){ pullRequest{ id isDraft } } }";
@@ -98,7 +108,7 @@ partial class Program
         http.DefaultRequestHeaders.Add("X-GitHub-Api-Version", "2022-11-28");
         var resp = await http.PostAsync("https://api.github.com/graphql", new StringContent(json, Encoding.UTF8, "application/json"));
         var respBody = await resp.Content.ReadAsStringAsync();
-        if (!resp.IsSuccessStatusCode || respBody.Contains("\"errors\""))
+        if (!resp.IsSuccessStatusCode || respBody.Contains("\"errors\"", StringComparison.Ordinal))
             throw new Exception($"GraphQL 切换 PR Draft 状态失败: {(int)resp.StatusCode} {resp.ReasonPhrase}. Body: {respBody}");
     }
 
@@ -119,6 +129,7 @@ partial class Program
     }
 
     static string EscapeJson(string s) => string.IsNullOrEmpty(s) ? s : s.Replace("\\", "\\\\").Replace("\"", "\\\"");
+
     static List<string> ParseModIds(string raw)
     {
         var result = new List<string>();
@@ -129,7 +140,7 @@ partial class Program
             if (token.Length == 0) continue;
             if ((token.StartsWith("\"") && token.EndsWith("\"")) || (token.StartsWith("\'") && token.EndsWith("\'")))
                 token = token.Substring(1, token.Length - 2);
-            token = Regex.Replace(token.Trim(), @"[^0-9A-Za-z]", "");
+            token = Regex.Replace(token.Trim(), @"[^0-9A-Za-z]", string.Empty);
             if (!string.IsNullOrWhiteSpace(token)) result.Add(token);
         }
         return result;

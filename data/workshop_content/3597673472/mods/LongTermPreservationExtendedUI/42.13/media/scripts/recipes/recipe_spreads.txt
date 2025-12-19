@@ -1,0 +1,94 @@
+module Skittles
+{
+  imports
+  {
+    Base
+  }
+  
+	craftRecipe Make Jarred Avocado Spread
+  {
+    timedAction = MixingBowl,
+		Time = 100,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+    category = Preservation,
+	xpAward = Cooking:10,
+    inputs
+    {
+		item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy,
+		item 1 [Base.JarLid] mode:destroy,
+		item 5 [Base.Avocado] flags[ItemCount] mode:destroy,
+		item 5 [Base.Lemon] flags[ItemCount] mode:destroy,
+		item 3 [Skittles.MincedGarlic_Open] mode:destroy,
+		item 1.0 tags[base:salt],
+    }
+		outputs
+		{
+			item 1 Skittles.AvocadoSpread,
+		}
+    
+  }
+
+	craftRecipe Open Jar Of Avocado Spread
+	{
+    timedAction = OpenTinCan,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+    category = Preservation,
+	xpAward = Cooking:10,
+		inputs
+		{
+			item 1 [Skittles.AvocadoSpread] flags[AllowRottenItem;InheritFoodAge;ItemCount],
+		}
+		outputs
+		{
+			item 1 Skittles.AvocadoSpread_Open,
+		}
+    
+  }
+
+	craftRecipe Make Jarred Nut Spread
+  {
+    timedAction = MixingBowl,
+		Time = 100,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+    category = Preservation,
+	xpAward = Cooking:10,
+    inputs
+    {
+		item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy,
+		item 1 [Base.JarLid] mode:destroy,
+		item 15 [Base.Acorn;Base.Peanuts] flags[ItemCount] mode:destroy,
+		item 1.0 [Base.MapleSyrup;Base.Honey],
+		item 2.0 tags[base:oil],
+		item 1.0 tags[base:salt], 
+    }
+		outputs
+		{
+			item 1 Skittles.NutSpread,
+		}
+    
+  }
+
+	craftRecipe Open Jar Of Nut Spread
+	{
+    timedAction = OpenTinCan,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+    category = Preservation,
+	xpAward = Cooking:10,
+		inputs
+		{
+			item 1 [Skittles.NutSpread] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+		}
+		outputs
+		{
+			item 1 Skittles.NutSpread_Open,
+		}
+    
+  }
+  
+}
