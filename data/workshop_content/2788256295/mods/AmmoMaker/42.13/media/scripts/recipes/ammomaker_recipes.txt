@@ -1,11 +1,6 @@
 /* Ammo Maker by STIMP_TM */
 
-module ammomaker {
-
-	imports
-	{
-		Base
-	}
+module Base {
 
 /* CORE RECIPES */
 
@@ -21,7 +16,7 @@ module ammomaker {
 		inputs
 		{
 			item 1 [Base.Pot;Base.PotForged] flags[InheritCondition;ItemIsFluid;HandcraftOnly] mappers[potType] mode:destroy,
-			-fluid 1.5 [Water;TaintedWater],
+			-fluid 1.5 categories[Water] mode:mixture,
 			item 100 [ammomaker.ammomaker_BirdExcrement;Base.Dung_Chicken;Base.Dung_Turkey],
 		}
 		outputs
@@ -138,7 +133,7 @@ module ammomaker {
 	{
 		timedAction = WeighGunpowder,
 		Time = 200,
-		Tags = AnySurfaceCraft,
+		Tags = AnySurfaceCraft;CanBeDoneFromFloor,
 		NeedToBeLearn = False,
 		category = AmmoMaker,
 		xpAward = Cooking:1,
@@ -158,7 +153,7 @@ module ammomaker {
 	{
 		timedAction = WeighGunpowder,
 		Time = 200,
-		Tags = AnySurfaceCraft,
+		Tags = AnySurfaceCraft;CanBeDoneFromFloor,
 		NeedToBeLearn = False,
 		category = AmmoMaker,
 		xpAward = Cooking:1,
@@ -431,7 +426,7 @@ module ammomaker {
 			item 1 [Base.Sandbag],
 			item 1 [Base.TinCanEmpty] mode:destroy,
 			item 1 [*] mode:keep flags[ItemIsFluid;HandcraftOnly],
-			-fluid 0.2 [Water;TaintedWater],
+			-fluid 0.2 categories[Water] mode:mixture,
 		}
 		outputs
 		{
