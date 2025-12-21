@@ -1,0 +1,132 @@
+module SapphCooking
+{
+	imports
+	{
+		Base,
+	}	
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Canned Food Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+    
+    craftRecipe OpenCannedFood
+    {
+        timedAction = OpenTinCan,
+        time            = 70,
+        tags = InHandCraft;CanBeDoneInDark,
+		category = SapphCooking,
+        inputs
+        {
+            item 1 tags[base:canopener] mode:keep flags[MayDegradeLight],
+            item 1 [SapphCooking.CanofBeets;SapphCooking.CanofKernelCorn] mappers[canSorts] flags[Prop2;ItemCount],
+        }
+        outputs
+        {
+            item 1 mapper:canSorts,
+        }
+        itemMapper canSorts
+        {
+            SapphCooking.OpenCanofBeets = SapphCooking.CanofBeets,
+            SapphCooking.OpenCanofKernelCorn = SapphCooking.CanofKernelCorn,
+        }
+    }
+
+    craftRecipe Open Canned Bacon
+    {
+        timedAction = OpenTinCan,
+        time            = 70,
+        OnCreate = RecipeCodeOnCreate.OpenCan,
+        tags = InHandCraft;CanBeDoneInDark,
+		category = SapphCooking,
+        inputs
+        {
+            item 1 tags[base:canopener;base:sharpknife] mode:keep flags[MayDegradeLight],
+            item 1 [SapphCooking.CannedBacon] mappers[canContents] flags[Prop2;ItemCount],
+        }
+        outputs
+        {
+            item 2 farming.Bacon,
+            item 1 Base.TinCanEmpty,
+        }
+    }
+
+    craftRecipe Open Canned Sausages
+    {
+        timedAction = OpenTinCan,
+        time            = 70,
+        OnCreate = RecipeCodeOnCreate.OpenCan,
+        tags = InHandCraft;CanBeDoneInDark,
+		category = SapphCooking,
+        inputs
+        {
+            item 1 tags[base:canopener;base:sharpknife] mode:keep flags[MayDegradeLight],
+            item 1 [SapphCooking.CannedSausages] flags[Prop2;ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.TinCanEmpty,
+            item 2 Base.Sausage,
+        }
+    }
+
+    craftRecipe Open Can of Refried Beans
+    {
+        timedAction = OpenTinCan,
+        time            = 70,
+        OnCreate = RecipeCodeOnCreate.OpenCan,
+        tags = InHandCraft;CanBeDoneInDark,
+		category = SapphCooking,
+        inputs
+        {
+            item 1 tags[base:canopener;base:sharpknife] mode:keep flags[MayDegradeLight],
+            item 1 [SapphCooking.CanofRefriedBeans] flags[ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.RefriedBeans,
+            item 1 Base.TinCanEmpty,
+        }
+    }
+
+    craftRecipe Open Canned Bread
+    {
+        timedAction = OpenTinCan,
+        time            = 70,
+        OnCreate = RecipeCodeOnCreate.OpenCan,
+        tags = InHandCraft;CanBeDoneInDark,
+		category = SapphCooking,
+        inputs
+        {
+            item 1 tags[base:canopener;base:sharpknife] mode:keep flags[MayDegradeLight],
+            item 1 [SapphCooking.CannedBread] flags[Prop2;ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.Bread,
+            item 1 Base.TinCanEmpty,
+        }
+    }
+
+    craftRecipe OpenCannedFoodWithKnifeOrSharpStoneFlake
+	{
+		Time = 80,
+		timedAction = OpenTinCanWithKnife,
+		OnCreate = RecipeCodeOnCreate.OpenCan,
+		ToolTip = Tooltip_Recipe_OpenCanWithKnife,
+		Tags = InHandCraft;Cooking,
+		category = SapphCooking,
+		inputs
+		{
+			item 1 tags[base:sharpknife] mode:keep flags[MayDegrade;IsNotDull],
+            item 1 [SapphCooking.CanofBeets;SapphCooking.CanofKernelCorn] mappers[canSorts] flags[Prop2;ItemCount],		
+        }
+		outputs
+		{
+			item 1 mapper:canSorts,
+		}
+		itemMapper canSorts
+		{
+			SapphCooking.OpenCanofBeets = SapphCooking.CanofBeets,
+            SapphCooking.OpenCanofKernelCorn = SapphCooking.CanofKernelCorn,
+		}
+	}
+}
