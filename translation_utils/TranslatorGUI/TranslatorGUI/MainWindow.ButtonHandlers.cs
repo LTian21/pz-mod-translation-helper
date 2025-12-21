@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,8 +22,31 @@ namespace 翻译工具
             }
 
             ClearOutput();
+            BackupUserTranslationFile("刷新/领取/追加任务");
             try
             {
+                // 第一步：备份当前翻译文件
+                AppendOutput("════════════════════════════════════════");
+                AppendOutput("正在备份当前翻译文件...");
+                AppendOutput("════════════════════════════════════════");
+
+                var programDir = AppDomain.CurrentDomain.BaseDirectory;
+                var suffix = string.IsNullOrWhiteSpace(_config?.LanguageSuffix) ? "CN" : _config.LanguageSuffix;
+                var translationFile = Path.Combine(programDir, $"translations_{_config?.UserName ?? "user"}_{suffix}.txt");
+
+                string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                string backupFile = Path.Combine(programDir, $"translations_{_config?.UserName ?? "user"}_{suffix}_backup_{timestamp}.txt");
+
+                try
+                {
+                    File.Copy(translationFile, backupFile);
+                    AppendOutput($"✓ 已备份翻译文件: {backupFile}");
+                }
+                catch (Exception ex)
+                {
+                    AppendOutput($"! 备份翻译文件失败: {ex.Message}");
+                }
+
                 // 第一轮更新：刷新最新任务状态
                 AppendOutput("[第1阶段] 尝试更新翻译文件...");
                 int initResult = await RunHelperAsync("init", null);
@@ -121,6 +145,7 @@ namespace 翻译工具
             }
 
             ClearOutput();
+            BackupUserTranslationFile("开始翻译");
             AppendOutput("开始翻译流程...");
 
             try
@@ -187,6 +212,7 @@ namespace 翻译工具
 
             var message = input.Value ?? string.Empty;
             ClearOutput();
+            BackupUserTranslationFile("保存进度");
 
             try
             {
@@ -255,6 +281,8 @@ namespace 翻译工具
                     }
                     var commitMessage = input.Value ?? "提交审核前保存";
 
+                    BackupUserTranslationFile("提交审核");
+
                     AppendOutput("\n[第1阶段] 合并用户翻译...");
                     int mergeResult = await RunHelperAsync("merge", null);
                     if (mergeResult != 0)
@@ -314,6 +342,8 @@ namespace 翻译工具
                         return;
                     }
 
+                    BackupUserTranslationFile("撤回修改");
+
                     AppendOutput("════════════════════════════════════════");
                     AppendOutput("开始撤回修改流程...");
                     AppendOutput("════════════════════════════════════════");
@@ -351,6 +381,28 @@ namespace 翻译工具
                 AppendOutput($"\n✗ 操作失败: {ex.Message}");
                 AppendOutput("════════════════════════════════════════");
                 ShowBackupWarning($"操作过程中发生异常: {ex.Message}");
+            }
+        }
+
+        private void btnOpenBackup_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var backupDir = GetBackupDirectoryPath();
+                if (!Directory.Exists(backupDir))
+                {
+                    Directory.CreateDirectory(backupDir);
+                }
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = backupDir,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                AppendOutput($"! 打开备份目录失败: {ex.Message}");
             }
         }
 
@@ -422,6 +474,25 @@ namespace 翻译工具
                 "操作失败 - 请备份翻译文件",
                 System.Windows.MessageBoxButton.OK,
                 System.Windows.MessageBoxImage.Warning);
+
+            // 打开备份文件夹
+            try
+            {
+                var backupDir = Path.GetDirectoryName(translationFile);
+                if (Directory.Exists(backupDir))
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = backupDir,
+                        UseShellExecute = true,
+                        Verb = "open"
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                AppendOutput($"! 打开备份文件夹失败: {ex.Message}");
+            }
         }
     }
 }
