@@ -25,28 +25,6 @@ namespace 翻译工具
             BackupUserTranslationFile("刷新/领取/追加任务");
             try
             {
-                // 第一步：备份当前翻译文件
-                AppendOutput("════════════════════════════════════════");
-                AppendOutput("正在备份当前翻译文件...");
-                AppendOutput("════════════════════════════════════════");
-
-                var programDir = AppDomain.CurrentDomain.BaseDirectory;
-                var suffix = string.IsNullOrWhiteSpace(_config?.LanguageSuffix) ? "CN" : _config.LanguageSuffix;
-                var translationFile = Path.Combine(programDir, $"translations_{_config?.UserName ?? "user"}_{suffix}.txt");
-
-                string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                string backupFile = Path.Combine(programDir, $"translations_{_config?.UserName ?? "user"}_{suffix}_backup_{timestamp}.txt");
-
-                try
-                {
-                    File.Copy(translationFile, backupFile);
-                    AppendOutput($"✓ 已备份翻译文件: {backupFile}");
-                }
-                catch (Exception ex)
-                {
-                    AppendOutput($"! 备份翻译文件失败: {ex.Message}");
-                }
-
                 // 第一轮更新：刷新最新任务状态
                 AppendOutput("[第1阶段] 尝试更新翻译文件...");
                 int initResult = await RunHelperAsync("init", null);
