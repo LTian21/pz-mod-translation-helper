@@ -1,0 +1,41 @@
+module Bicycle
+{
+	imports {
+		Base
+	}
+	craftRecipe ConvertFlashlightToLamp
+	{
+		timedAction = Making,
+		Time = 20,
+		SkillRequired = Electricity:1,
+		Tags = InHandCraft;Electrical,
+        category = Electrical,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeVeryLight;NoBrokenItems],
+			item 1 [Base.HandTorch] mode:destroy flags[InheritUses;ItemCount],
+		}
+		outputs
+		{
+			item 1 Bicycle.Bicycle_Lamp,
+		}
+	}
+
+	craftRecipe ConvertLampToFlashlight
+	{
+		timedAction = Making,
+		Time = 20,
+		SkillRequired = Electricity:1,
+		Tags = InHandCraft;Electrical,
+        category = Electrical,
+		inputs
+		{
+			item 1 tags[Screwdriver] mode:keep flags[MayDegradeVeryLight;NoBrokenItems],
+			item 1 [Bicycle.Bicycle_Lamp] mode:destroy flags[InheritUses;ItemCount],
+		}
+		outputs
+		{
+			item 1 Base.HandTorch,
+		}
+	}
+}
