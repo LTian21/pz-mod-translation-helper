@@ -5,6 +5,8 @@ import re
 import subprocess
 import io
 import sys
+import math
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Final
@@ -64,6 +66,28 @@ def normalize_recipe_key(key: str) -> str:
     if key.lower().startswith("recipe_"):
         return key[7:]
     return key
+
+
+def calculate_priority(subscriptions, created_at, mod_id="Unknown"):
+    # 1. 订阅优先级 (Log10)
+    sub_priority = math.log10(max(subscriptions, 0) + 0.9)
+    
+    # 2. 时间优先级 (Log2)
+    weeks = (time.time() - created_at) / (7 * 24 * 3600)
+    time_priority = min(math.log2(max(weeks, 0) + 0.9), 9.0)
+    
+    total = sub_priority + (time_priority / 6.0)
+    logging.info(f"    -> [权重分析] ID: {mod_id:12} | 订阅: {subscriptions} ({sub_priority:.2f}) | 周数: {weeks:.1f}周 (贡献: {(time_priority/6):.2f}) | 总分: {total:.3f}")
+    
+    if total >= 7.5: level = "Ultra High"
+    elif total >= 6.5: level = "Very High"
+    elif total >= 5.5: level = "High"
+    elif total >= 4.5: level = "Medium"
+    elif total >= 3.5: level = "Low"
+    elif total >= 2.5: level = "Very Low"
+    else: level = "Extremely Low"
+    
+    return round(total, 2), level
 
 def get_old_file_content(file_path: Path) -> str | None:
     git_path = file_path.as_posix()
@@ -555,7 +579,7 @@ def update_map_from_mod_info(config: Config, mods_to_process_ids: list[str]):
         logging.warning(f"  -> 警告: Mod ID映射文件 '{map_file_path}' 不存在，跳过信息补全。")
         return
 
-    logging.info(f"\n--- 正在尝试从 mod.info 文件中补全 API 访问失败的 Mod 名称 ---")
+    logging.info(f"\n--- 正在补全 Mod 名称并更新优先级数据 ---")
     
     try:
         with open(map_file_path, 'r', encoding='utf-8') as f:
@@ -564,52 +588,53 @@ def update_map_from_mod_info(config: Config, mods_to_process_ids: list[str]):
         logging.error(f"  -> 错误: 解析 '{map_file_path}' 失败。")
         return
 
-    failed_ids_in_current_run = []
+    # 查找缺失名称的 Mod 并初始化结构
+    update_count = 0
     for mod_id in mods_to_process_ids:
         entry = id_name_map.get(mod_id)
         if entry is None or (isinstance(entry, dict) and not entry.get('name')):
-            failed_ids_in_current_run.append(mod_id)
+            mod_content_path = config.TARGET_PATH / mod_id
+            if not mod_content_path.is_dir(): continue
 
-    if not failed_ids_in_current_run:
-        logging.info("  -> 本次运行没有需要从 mod.info 补全的 Mod。")
-        return
+            try:
+                mod_info_files = list(mod_content_path.rglob('mod.info'))
+                if not mod_info_files: continue
+                mod_info_file = mod_info_files[0]
+                
+                with open(mod_info_file, 'r', encoding='utf-8') as f:
+                    for line in f:
+                        if line.strip().lower().startswith('name='):
+                            mod_name = line.split('=', 1)[1].strip()
+                            if mod_name:
+                                logging.info(f"    -> [ID: {mod_id}] 成功从 mod.info 中提取名称: '{mod_name}'")
+                                if mod_id not in id_name_map or not isinstance(id_name_map[mod_id], dict):
+                                    id_name_map[mod_id] = {
+                                        "name": mod_name,
+                                        "subscriptions": 0,
+                                        "created_at": 0,
+                                        "updated_at": 0,
+                                        "views": 0,
+                                        "favorited": 0
+                                    }
+                                else:
+                                    id_name_map[mod_id]["name"] = mod_name
+                                update_count += 1
+                                break
+            except Exception as e:
+                logging.error(f"    -> [ID: {mod_id}] 处理 mod.info 时发生错误: {e}")
 
-    update_count = 0
-    for mod_id in failed_ids_in_current_run:
-        mod_content_path = config.TARGET_PATH / mod_id
-        if not mod_content_path.is_dir():
-            logging.warning(f"    -> [ID: {mod_id}] 找不到对应的Mod内容目录，跳过。")
-            continue
+    # 遍历整个映射表，计算/更新优先级字段
+    for mid, data in id_name_map.items():
+        if isinstance(data, dict) and 'subscriptions' in data:
+            timestamp = data.get('created_at') or data.get('updated_at') or 0
+            # 计算优先级
+            total, level = calculate_priority(data.get('subscriptions', 0), timestamp, mod_id=mid)
+            # 写入新字段
+            data['total_priority'] = total
+            data['priority_level'] = level
 
-        try:
-            mod_info_files = list(mod_content_path.rglob('mod.info'))
-            if not mod_info_files: continue
-            mod_info_file = mod_info_files[0]
-            
-            with open(mod_info_file, 'r', encoding='utf-8') as f:
-                for line in f:
-                    if line.strip().lower().startswith('name='):
-                        mod_name = line.split('=', 1)[1].strip()
-                        if mod_name:
-                            logging.info(f"    -> [ID: {mod_id}] 成功从 mod.info 中提取名称: '{mod_name}'")
-                            if mod_id not in id_name_map or not isinstance(id_name_map[mod_id], dict):
-                                id_name_map[mod_id] = {
-                                    "name": mod_name,
-                                    "subscriptions": 0,
-                                    "created_at": 0,
-                                    "updated_at": 0,
-                                    "views": 0,
-                                    "favorited": 0
-                                }
-                            else:
-                                id_name_map[mod_id]["name"] = mod_name
-                            update_count += 1
-                            break
-        except Exception as e:
-            logging.error(f"    -> [ID: {mod_id}] 处理 mod.info 文件时发生错误: {e}")
-
-    if update_count > 0:
-        logging.info(f"  -> 成功补全了 {update_count} 个 Mod 的名称。正在写回映射文件...")
+    if update_count > 0 or True: # 优先级计算也会导致数据变更，所以始终尝试写回
+        logging.info(f"  -> 成功补全了 {update_count} 个 Mod 的名称并更新了全量优先级。")
         with open(map_file_path, 'w', encoding='utf-8') as f:
             json.dump(id_name_map, f, indent=2, ensure_ascii=False)
 
