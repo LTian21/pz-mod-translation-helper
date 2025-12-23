@@ -97,22 +97,23 @@ def parse_translation_file_stats(file_path, mod_id_name_map):
     # 格式化为用于表格的列表
     mod_list = []
     for mod_id, stats in mod_stats.items():
-        raw_name = mod_id_name_map.get(mod_id)
-        if raw_name is None:
-            mod_name = f"无ID ({mod_id})" 
+        mod_info = mod_id_name_map.get(mod_id, {})
+        if isinstance(mod_info, dict):
+            mod_name = mod_info.get('name', f"未知 ({mod_id})")
+            subs = mod_info.get('subscriptions', 0)
         else:
-            mod_name = raw_name
+            mod_name = mod_info or f"无ID ({mod_id})"
+            subs = 0
         mod_list.append({
             'name': mod_name,
             'id': mod_id,
             'todos': len(stats['todo_keys']),
             'to_proofread': len(stats['to_proofread_keys']),
             'missing_en': stats['missing_en'],
-            'total_entries': stats['total_entries']
+            'total_entries': stats['total_entries'],
+            'subs': subs
         })
-        
-    # 按待办数量降序排序
-    sorted_mod_list = sorted(mod_list, key=lambda x: x['todos'], reverse=True)
+    sorted_mod_list = sorted(mod_list, key=lambda x: (x['todos'], x['subs']), reverse=True)
     
     return sorted_mod_list, global_stats, mod_count
 
