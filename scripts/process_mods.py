@@ -68,16 +68,17 @@ def normalize_recipe_key(key: str) -> str:
     return key
 
 
-def calculate_priority(subscriptions, created_at):
+def calculate_priority(subscriptions, created_at, mod_id="Unknown"):
     # 1. 订阅优先级 (Log10)
     sub_priority = math.log10(max(subscriptions, 0) + 0.9)
     
     # 2. 时间优先级 (Log2)
-    # 计算周数: 当前时间 - 创建时间 (秒) / 每周秒数
     weeks = (time.time() - created_at) / (7 * 24 * 3600)
     time_priority = min(math.log2(max(weeks, 0) + 0.9), 9.0)
     
     total = sub_priority + (time_priority / 6.0)
+    logging.info(f"    -> [权重分析] ID: {mod_id:12} | 订阅: {subscriptions} ({sub_priority:.2f}) | 周数: {weeks:.1f}周 (贡献: {(time_priority/6):.2f}) | 总分: {total:.3f}")
+    
     if total >= 9.0: level = "Ultra High"
     elif total >= 7.0: level = "Very High"
     elif total >= 5.0: level = "High"
@@ -625,10 +626,9 @@ def update_map_from_mod_info(config: Config, mods_to_process_ids: list[str]):
     # 遍历整个映射表，计算/更新优先级字段
     for mid, data in id_name_map.items():
         if isinstance(data, dict) and 'subscriptions' in data:
-            # 使用 updated_at，如果没有则使用 created_at
-            timestamp = data.get('updated_at') or data.get('created_at') or 0
+            timestamp = data.get('created_at') or data.get('updated_at') or 0
             # 计算优先级
-            total, level = calculate_priority(data.get('subscriptions', 0), timestamp)
+            total, level = calculate_priority(data.get('subscriptions', 0), timestamp, mod_id=mid)
             # 写入新字段
             data['total_priority'] = total
             data['priority_level'] = level
