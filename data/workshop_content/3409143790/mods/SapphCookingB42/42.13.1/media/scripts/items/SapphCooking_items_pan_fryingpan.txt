@@ -11,18 +11,24 @@ module SapphCooking
 	item FryingPanwithOil
 	{
 		ItemType = base:normal,
-		HungerChange 		= -4,
+		ReplaceOnUse = Base.Pan,
+		HungerChange 		= -8,
 		CantEat = true,
 		IsCookable = true,
 		Weight 		= 1,
-		DisplayName 		= Frying Pan with Oil,
 		Icon 		= PanwithOilIcon,
 		Tooltip 		= Tooltip_OilPan,
 		WorldStaticModel 		= FryingPanOil_Ground,
-		ReplaceOnUse = Pan,
 		DisplayCategory = Cooking,
 		MetalValue = 10,
-		Tags = base:hasmetal;base:cookable;base:smeltablesteelsmall;sapphcooking:oilpan,
+		Tags = base:hasmetal;base:cookable;base:smeltablesteelsmall;sapphcooking:oilpan;base:hideuncooked,
+		component FluidContainer
+        {
+            ContainerName = OilPan,
+            RainFactor = 0,
+            Capacity = 0,
+            CustomDrinkSound = DrinkingFromMug,
+        }
 	}
 
 	item FryingPanFriedRiceEvolved
@@ -34,7 +40,6 @@ module SapphCooking
 		StaticModel 		= H_FryingPanRice,
 		WorldStaticModel 		= FryingPanFriedRice,
 		DisplayName 		= Fried Rice,
-		
 		DaysFresh = 3,
 		DaysTotallyRotten = 6,
 		FatigueChange 		= -5,
