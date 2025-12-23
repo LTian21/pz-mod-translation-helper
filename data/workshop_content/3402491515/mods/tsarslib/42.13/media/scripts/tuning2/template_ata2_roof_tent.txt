@@ -1,13 +1,21 @@
 /* Это шаблон палатки для крыши автомобиля. Фактически, роль палатки выполняют изолированные сиденья. По-умолчанию, предполагается изолировать средние сиденья. Для установке в автомобиль палатки, в скрипт необходимо вписать строку:
+This is a car roof tent template. The insulated seats actually act as the tent. By default, the middle seats are insulated. To install the tent in the car, add the following line to the script:
     template = ATA2RoofTent/part/ATA2RoofTent,
 Спавн палатки (предмет ATARoofTentItem) уже настроен в моде. Однако, вы можете создать свой предмет и переопределить его в шаблоне, тогда спавн необходимо будет настраивать самостоятельно.
 Для отключения части функций в радиальном меню автомобиля, при нахождении игрока в палатке, служат шаблоны "InRoofTent + *название сиденья*".
 Для импортирования готового шаблона палатки, в котором изолированы средние сиденья и отключены лишние функции радиального меню, необходимо использовать строку:
+The tent spawn (ATARoofTentItem) is already configured in the mod. However, you can create your own item and override it in the template, in which case you'll need to configure the spawn yourself.
+To disable some of the functions in the car's radial menu when the player is in a tent, use the "InRoofTent + *seat name*" templates.
+To import a pre-built tent template with the middle seats isolated and unnecessary radial menu features disabled, use the line:
     template! = ATARoofMiddleTent,
 Внимание! Строка должна быть добавлена после стандартного "ванильного" шаблона с пассажирами и шаблонов с сиденьями.
+Important! This line must be added after the standard "vanilla" passenger template and the seat templates.
 
 Палатка предполагает три типа 3д-моделей: "Default" - общая рама, "Open" - открытая палатка, "Close" - закрытая палатка. Модель "Default" - не обязательна.
 Зд-модели должны быть переопределены в скрипте вашего автомобиля. Так же, в ходе этого процесса, вам следуем самостоятельно указать части автомобиля, обязательные для установки/снятия палатки. Пример переопределения:
+The tent comes with three 3D model types: "Default" (general frame), "Open" (open tent), and "Close" (closed tent). The "Default" model is optional.
+3D models must be redefined in your vehicle's script. During this process, you should also manually specify the vehicle parts required for installing and removing the tent. Example of redefinition:
+
     part ATARoofTent
     {
         model Default
@@ -30,27 +38,32 @@
     }
 */
 
-module Base
-{    
+module ATA2
+{
     item ATASleepingBag
     {
-        Weight    =    1.0,
+        Weight   = 1.0,
         ItemType = base:normal,
-        Icon    =    ATASleepingBag,
+        Icon     = ATASleepingBag,
         ChanceToSpawnDamaged = 0,
         ConditionMax = 100,
         MechanicsItem = TRUE,
     }
     
+}
+
+module Base
+{    
     template vehicle ATA2RoofTent
     {
         part ATA2RoofTent
         {
+/*            itemType = Base.CampingTentKit2;Base.ImprovisedTentKit;Base.HideTent;Base.TentYellow;Base.TentBlue;Base.TentBrown;Base.TentGreen,*/
             itemType = Base.LightBulb,
             container
             {
                 capacity = 30,
-                test = ATATuning.ContainerAccess.RoofTent,
+                test = ATATuning2.ContainerAccess.RoofTent,
             }
             area = TruckBed,
             category = nodisplay,
@@ -229,6 +242,11 @@ module Base
             {
                 sound = PutItemInBag,
             }
+            lua
+            {
+                create = ATATuning2.Create.Unlock,
+            }
+
         }
     
         template = Window/part/WindowMiddleRight,
@@ -245,11 +263,11 @@ module Base
             specificItem = false,
             container
             {
-                test = ATATuning.ContainerAccess.BlockSeat,
+                test = ATATuning2.ContainerAccess.BlockSeat,
             }
             lua
             {
-                create = ATATuning.Create.Chance0,
+                create = ATATuning2.Create.Tuning,
             }
         }
     }
