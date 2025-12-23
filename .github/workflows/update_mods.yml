@@ -476,42 +476,58 @@ jobs:
             echo "id_list.txt 无需更新。"
           fi
 
-      - name: Update Timestamps After Successful Download
+      - name: Update Timestamps (Fetch All Mods)
         env:
           STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
-          MODS_TO_DOWNLOAD_JSON_FOR_TIMESTAMP: ${{ needs.setup_jobs.outputs.mods_to_download }}
         run: |
-          MODS_DOWNLOADED="$MODS_TO_DOWNLOAD_JSON_FOR_TIMESTAMP"
+          # 从 id_list.txt 提取所有数字ID，去重并转为 JSON 数组格式
+          MODS_DOWNLOADED=$(grep -oE '[0-9]+' id_list.txt | sort -u | jq -Rsc 'split("\n") | map(select(. != ""))')
           MAP_FILE="translation_utils/mod_id_name_map.json"
 
-          if [ -z "$MODS_DOWNLOADED" ] || [ "$MODS_DOWNLOADED" = "[]" ] || [ "$MODS_DOWNLOADED" = "null" ]; then
-            echo "没有需要更新映射的Mod。"
+          # 检查列表是否为空
+          if [ -z "$MODS_DOWNLOADED" ] || [ "$MODS_DOWNLOADED" = "[]" ]; then
+            echo "id_list.txt 为空或不存在，跳过更新。"
             exit 0
           fi
           
-          # API调用以获取当前批次Mod的详情
+          # 构造 API 请求参数
           POST_DATA=$(echo "$MODS_DOWNLOADED" | jq -r 'to_entries[] | "publishedfileids[\(.key)]=\(.value)"' | paste -sd '&')
           ITEM_COUNT=$(echo "$MODS_DOWNLOADED" | jq 'length')
+          
+          echo "正在全量获取 $ITEM_COUNT 个 Mod 的统计信息..."
+
+          # 发送单次全量请求
           API_RESPONSE_BATCH=$(curl --retry 5 --retry-delay 5 --retry-all-errors -s -X POST "https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/" -d "itemcount=$ITEM_COUNT" -d "$POST_DATA")
+          
           if ! echo "$API_RESPONSE_BATCH" | jq -e '.response.publishedfiledetails' > /dev/null; then
              echo "::error::Steam API调用失败或返回无效数据。"
              exit 1
           fi
           echo "$API_RESPONSE_BATCH" > api_response.json
           
-          echo "正在对 Mod ID-名称映射文件进行增量更新"
-          if [ ! -f "$MAP_FILE" ]; then
-            echo "未找到现有映射文件，将创建一个新的。"
-            echo "{}" > "$MAP_FILE"
-          fi
+          echo "正在更新映射文件..."
+          if [ ! -f "$MAP_FILE" ]; then echo "{}" > "$MAP_FILE"; fi
           
-          # 为当前批次的Mod生成一个新的映射片段
-          NEW_MAP_CHUNK=$(jq '.response.publishedfiledetails | map(if .title and .result == 1 then {(.publishedfileid): .title} else {(.publishedfileid): null} end) | add' api_response.json)
+          NEW_MAP_CHUNK=$(jq '.response.publishedfiledetails | map(
+            if .result == 1 then 
+              {
+                (.publishedfileid): {
+                  "name": (.title // "未知Mod"),
+                  "subscriptions": ((.subscriptions // 0) | tonumber),
+                  "created_at": ((.time_created // 0) | tonumber),
+                  "updated_at": ((.time_updated // 0) | tonumber),
+                  "views": ((.views // 0) | tonumber),
+                  "favorited": ((.favorited // 0) | tonumber)
+                }
+              } 
+            else 
+              {(.publishedfileid): null} 
+            end
+          ) | add' api_response.json)
           
-          # 合并新旧数据。如果ID已存在，新值会覆盖旧值。
           jq -s '.[0] * .[1] | to_entries | sort_by(.key | tonumber) | from_entries' "$MAP_FILE" <(echo "$NEW_MAP_CHUNK") > tmp_map.json && mv tmp_map.json "$MAP_FILE"
           
-          echo "Mod ID-名称映射文件 ($MAP_FILE) 已成功增量更新。"
+          echo "全量统计信息更新完成。"
 
       - name: Run Main Translation Extractor Script
         env:

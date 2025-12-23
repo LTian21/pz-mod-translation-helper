@@ -1,6 +1,6 @@
 module TPP
 {
-	craftRecipe Prepare Tomato Sauce
+	craftRecipe PrepareTomatoSauce
     {
         timedAction = MixingBowl,
         time = 120,
@@ -25,7 +25,7 @@ module TPP
         }
     }
 	
-	craftRecipe Prepare Vinegar (Apples)
+	craftRecipe PrepareVinegar(Apples)
 	{
 		timedAction = SliceFood,
 		time = 120,
@@ -52,7 +52,7 @@ module TPP
 		}
 	}
 	
-	craftRecipe Prepare Vinegar (Pineapple)
+	craftRecipe PrepareVinegar(Pineapple)
 	{
 		timedAction = SliceFood,
 		time = 120,
@@ -79,7 +79,7 @@ module TPP
 		}
 	}
 	
-	craftRecipe Prepare Vinegar (Strewberries)
+	craftRecipe PrepareVinegar(Strewberries)
 	{
 		timedAction = SliceFood,
 		time = 120,
@@ -106,7 +106,7 @@ module TPP
 		}
 	}
 	
-	craftRecipe Prepare Vinegar (Grapes)
+	craftRecipe PrepareVinegar(Grapes)
 	{
 		timedAction = SliceFood,
 		time = 120,
@@ -133,7 +133,7 @@ module TPP
 		}
 	}
 	
-	craftRecipe Prepare Vinegar (Mangos)
+	craftRecipe PrepareVinegar(Mangos)
 	{
 		timedAction = SliceFood,
 		time = 120,
@@ -160,7 +160,7 @@ module TPP
 		}
 	}
 	
-	craftRecipe Prepare Vinegar (Bananas)
+	craftRecipe PrepareVinegar(Bananas)
 	{
 		timedAction = SliceFood,
 		time = 120,
@@ -187,7 +187,7 @@ module TPP
 		}
 	}
 	
-	craftRecipe Prepare Vinegar (Pears)
+	craftRecipe PrepareVinegar(Pears)
 	{
 		timedAction = SliceFood,
 		time = 120,
@@ -241,7 +241,7 @@ module TPP
 		}
 	}
 	
-	craftRecipe Prepare Cheese Start
+	craftRecipe PrepareCheeseStart
 	{
 		timedAction = MixingBucket,
 		time = 20,
@@ -251,8 +251,8 @@ module TPP
 		xpAward = Cooking:10,
 		inputs
 		{
-			item 1 [Base.Pot;Base.PotForged] mode:destroy flags[IsEmpty] mappers[PotMilkDiff],
-			item 1 tags[Spoon] mode:keep flags[MayDegradeVeryLight],
+			item 1 [Base.Pot;Base.PotForged] mode:destroy flags[IsEmpty;Prop2] mappers[PotMilkDiff],
+			item 1 tags[Spoon] mode:keep flags[MayDegradeVeryLight;Prop1],
 			item 2 [Base.Salt;Base.SeasoningSalt],
 			item 1 tags[Vinegar],
 			item 1 [*],
@@ -269,7 +269,7 @@ module TPP
 		}
 	}
 	
-	craftRecipe Strain Sour milk
+	craftRecipe StrainSourmilk
 	{
 		timedAction = MixingBucket,
 		time = 20,
@@ -279,13 +279,13 @@ module TPP
 		xpAward = Cooking:10,
 		inputs
 		{
-			item 1 [TPP.Sourmilk;TPP.ForgedSourmilk] mappers[PotSourMilkDiff],
+			item 1 [TPP.Sourmilk;TPP.ForgedSourmilk] mappers[PotSourMilkDiff] flags[Prop2],
 			item 1 [Base.CheeseCloth;Base.DishCloth] mode:keep,
-			item 1 tags[Spoon] mode:keep flags[MayDegradeVeryLight],
+			item 1 tags[Spoon] mode:keep flags[MayDegradeVeryLight;Prop1],
 		}
 		outputs
 		{
-			item 4 Base.Cheese,
+			item 1 TPP.FreshCheese,
 			item 1 mapper:PotSourMilkDiff,
 		}
 		itemMapper PotSourMilkDiff
@@ -295,7 +295,7 @@ module TPP
 		}
 	}
 	
-	craftRecipe Prepare Vinegar (Blackberries)
+	craftRecipe PrepareVinegar(Blackberries)
 	{
 		timedAction = SliceFood,
 		time = 120,
@@ -349,7 +349,7 @@ module TPP
 		}
 	}
 	
-	craftRecipe Bottling vinegar
+	craftRecipe Bottlingvinegar
 	{
 		timedAction = MixingBowl,
 		time = 60,
@@ -373,4 +373,75 @@ module TPP
 			Base.PotForged = TPP.ForgedFermentedVinegar,
 		}
 	}
+	
+	craftRecipe PrepareFishOilStart
+	{
+		timedAction = SliceFood,
+		time = 120,
+		NeedToBeLearn = false,
+		category = Cooking,
+		tags = AnySurfaceCraft;Cooking,
+		xpAward = Cooking:10,
+		inputs
+		{
+			item 10 [Base.FishGuts] flags[ItemCount;Prop2],
+			item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[IsNotDull;SharpnessCheck;Prop1],
+			item 1 [Base.Pot;Base.PotForged] mode:destroy flags[IsEmpty] mappers[PotDiff],
+			item 1 [*],
+			-fluid 0.5 [Water],
+		}
+		outputs
+		{
+			item 1 mapper:PotDiff,
+		}
+		itemMapper PotDiff
+		{
+			TPP.FishOilStart = Base.Pot,
+			TPP.ForgedFishOilStart = Base.PotForged,
+		}
+	}
+	
+	craftRecipe BottlingFishOil
+	{
+		timedAction = MixingBowl,
+		time = 60,
+		NeedToBeLearn = false,
+		category = Cooking,
+		tags = InHandCraft;Cooking,
+		xpAward = Cooking:10,
+		inputs
+		{
+			item 1 [TPP.FishOilPot;TPP.ForgedFishOilPot] mode:destroy mappers[PotFermDiff],
+			item 1 tags[GlassBottle;GlassBottleSmall] mode:destroy flags[IsEmpty],
+		}
+		outputs
+		{
+			item 1 TPP.FishOil,
+			item 1 mapper:PotFermDiff,
+		}
+		itemMapper PotFermDiff
+		{
+			Base.Pot = TPP.FishOilPot,
+			Base.PotForged = TPP.ForgedFishOilPot,
+		}
+	}
+	
+	craftRecipe SliceFreshCheese
+    {
+        timedAction = SliceMeat_Surface,
+        time = 50,
+        Tooltip = Tooltip_Recipe_MustCookedSlice,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:3,
+        inputs
+        {
+            item 1 tags[SharpKnife;MeatCleaver;DullKnife;PizzaCutter] mode:keep flags[SharpnessCheck;Prop1],
+            item 1 [TPP.FreshCheese] flags[InheritFoodAge;InheritFood;ItemCount;Prop2],
+        }
+        outputs
+        {
+            item 8 TPP.FreshCheeseSlice,
+        }
+    }
 }

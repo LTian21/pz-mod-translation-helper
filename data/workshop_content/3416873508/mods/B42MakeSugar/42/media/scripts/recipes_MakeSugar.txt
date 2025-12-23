@@ -1,0 +1,105 @@
+module Trex 
+{
+    imports
+	{
+		Base
+	}		
+
+	craftRecipe MakesugarwithsugarbeetTrex
+	{
+        timedAction = MixingBowl,
+		Time = 50,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		inputs
+		{
+			item 1  [Base.Pot;Base.PotForged] flags[InheritCondition;ItemCount] mappers[potType],
+			item 10 [Base.SugarBeet] flags[ItemCount],
+			item 1 [*],
+			-fluid 0.8 [Water],
+		}
+		outputs
+		{
+			item 1 mapper:potType,
+		}
+		itemMapper potType
+		{
+			Trex.WaterPotSugarBeetTrex = Base.Pot,
+			Trex.WaterPotForgedSugarBeetTrex = Base.PotForged,
+		}
+	}
+
+	craftRecipe MakeBowlsofsugarbeetTrex
+	{
+        timedAction = Making,
+        time = 60,
+        Tooltip = Tooltip_Recipe_MustCookedGet,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+		inputs
+		{
+			item 1 [Trex.WaterPotSugarBeetTrex;Trex.WaterPotForgedSugarBeetTrex] mappers[potType;bowlType] flags[IsCookedFoodItem;InheritFoodAge;ItemCount],
+			item 2 [Base.Bowl] mode:destroy,
+			item 1 [Base.CheeseCloth] mode:keep,	
+		}
+		outputs
+		{
+			item 1 mapper:potType,
+			item 2 mapper:bowlType,
+		}
+		itemMapper bowlType
+		{
+			Trex.SugarBeetBowlTrex = Trex.WaterPotSugarBeetTrex,
+			Trex.SugarBeetBowlTrex = Trex.WaterPotForgedSugarBeetTrex,
+		}		
+		itemMapper potType
+		{
+			Trex.PotofliquidsugarTrex = Trex.WaterPotSugarBeetTrex,
+			Trex.PotForgedofliquidsugarTrex = Trex.WaterPotForgedSugarBeetTrex,
+		}		
+
+	}
+
+	craftRecipe MakecubesugarTrex
+	{
+        timedAction = Making,
+        time = 60,
+        Tooltip = Tooltip_Recipe_MustCookedGet,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+		inputs
+		{
+			item 1 [Trex.PotofliquidsugarTrex;Trex.PotForgedofliquidsugarTrex] mappers[potType] flags[IsCookedFoodItem;InheritFoodAge;ItemCount],	
+		}
+		outputs
+		{
+			item 1 Trex.CubesugarTrex,		
+			item 1 mapper:potType,		
+		}
+		itemMapper potType
+		{
+			Base.Pot = Trex.PotofliquidsugarTrex,
+			Base.PotForged = Trex.PotForgedofliquidsugarTrex,
+		}		
+	}
+
+    craftRecipe MakesugarTrex
+    {
+        time = 230,
+        xpAward = FlintKnapping:10,
+        timedAction = MakingHammer_Surface,
+        Tags = AnySurfaceCraft,
+        category = Cooking,
+        OnCreate = RecipeCodeOnCreate.knappFlake,
+        inputs
+        {
+            item 1 tags[base:hammerstone;base:mallet;base:knappingtool] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 [Trex.CubesugarTrex] flags[Prop2;ItemCount],
+        }
+       outputs
+       {
+             item 5 Base.SugarCubes,
+       }
+    }
+
+}

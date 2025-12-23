@@ -1,7 +1,11 @@
-module Base
+module Trex 
 {
+    imports
+	{
+		Base
+	}
 
-	craftRecipe MakeMeatjarpreparation_Trex
+	craftRecipe MakeMeatjarpreparationTrex
 	{
         timedAction = MixingBowl,
 		Time = 50,
@@ -25,28 +29,28 @@ module Base
 		}
 		itemMapper potType
 		{
-			Base.WaterPotMeatjarpreparation_Trex = Base.Pot,
-			Base.WaterPotForgedMeatjarpreparation_Trex = Base.PotForged,
+			Trex.WaterPotMeatjarpreparationTrex = Base.Pot,
+			Trex.WaterPotForgedMeatjarpreparationTrex = Base.PotForged,
 		}
 	}	 
-	 
 	 
 	craftRecipe MakeMeatTrex
 	{
         timedAction = MixingBowl,
-		Time = 80,
-		ToolTip = Tooltip_Recipe_MustCookedGet,
-		Tags = AnySurfaceCraft;Cooking,
-		category = Cooking,
+        time = 100,
+        OnCreate = RecipeCodeOnCreate.makeJar,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:10,
 		inputs
 		{
-			item 3 [Base.EmptyJar] mode:destroy flags[ItemCount],
-			item 3 [Base.JarLid],
-			item 1 [Base.WaterPotMeatjarpreparation_Trex;Base.WaterPotForgedMeatjarpreparation_Trex;Base.PotOfStew;Base.PotForgedStew;Base.RicePot;Base.RicePotForged;Base.PastaPot;Base.PastaPotForged] mappers[potType] flags[IsCookedFoodItem;InheritFoodAge;ItemCount],
+            item 3 tags[base:jar] mode:destroy flags[ItemCount],
+            item 3 [Base.JarLid],
+			item 1 [Trex.WaterPotMeatjarpreparationTrex;Trex.WaterPotForgedMeatjarpreparationTrex;Base.PotOfStew;Base.PotForgedStew;Base.RicePot;Base.RicePotForged;Base.PastaPot;Base.PastaPotForged] mappers[potType] flags[IsCookedFoodItem;InheritFoodAge;ItemCount],
 		}
 		outputs
 		{
-			item 3 Base.CannedMeatTrex,
+			item 3 Trex.CannedMeatTrex,
 			item 1 mapper:potType,		
 		}
 		itemMapper potType
@@ -54,11 +58,11 @@ module Base
 			Base.Pot = Base.PotOfStew,
 			Base.Pot = Base.RicePot,
 			Base.Pot = Base.PastaPot,
-			Base.Pot = Base.WaterPotMeatjarpreparation_Trex,			
+			Base.Pot = Trex.WaterPotMeatjarpreparationTrex,			
 			Base.PotForged = Base.PotForgedStew,
 			Base.PotForged = Base.RicePotForged,
 			Base.PotForged = Base.PastaPotForged,
-			Base.PotForged = Base.WaterPotForgedMeatjarpreparation_Trex,			
+			Base.PotForged = Trex.WaterPotForgedMeatjarpreparationTrex,			
 		}		
 	}	 
 	 
@@ -66,17 +70,17 @@ module Base
 	craftRecipe OpenJarOfMeatTrex
 	{
         timedAction = Making,
-		Time = 30,
-		OnCreate = Recipe.OnCreate.OpenCannedFood,
-		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        time = 30,
+        OnCreate = RecipeCodeOnCreate.applyLidCondition,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
         category = Cooking,
 		inputs
 		{
-			item 1 [Base.CannedMeatTrex] flags[AllowRottenItem;InheritFoodAge;ItemCount],
+			item 1 [Trex.CannedMeatTrex] flags[AllowRottenItem;InheritFoodAge;ItemCount],
 		}
 		outputs
 		{
-			item 1 Base.CannedMeat_OpenTrex,
+			item 1 Trex.CannedMeat_OpenTrex,
 		}
 	}	 
 

@@ -1,0 +1,136 @@
+module Tsarcraft
+{
+	imports
+	{
+		Base
+
+	}
+	
+	item CassetteMainTheme
+	{
+		Type			=	Normal,
+		DisplayCategory = Entertainment,
+		Weight			=	0.02,
+		Icon			=	TCTape1,
+		DisplayName		=	Cassette Project Zomboid - Introduction,
+		WorldStaticModel = Tsarcraft.TCTape1,
+	}
+
+	item VinylMainTheme
+	{
+		Type			=	Normal,
+		DisplayCategory = Entertainment,
+		Weight			=	0.02,
+		Icon			=	TCVinylrecord1,
+		DisplayName		=	Vinyl Project Zomboid - Finally Calm,
+		WorldStaticModel = Tsarcraft.TCTape2,
+	}
+	
+	item TCBoombox
+	{
+		DisplayCategory = Electronics,
+		Type			=	Radio,
+		Weight			=	2.4,
+		Icon			=	TCBoombox,
+		ResizeWorldIcon 	= 	1.0,
+		DisplayName = Boombox,
+		StaticModel = Tsarcraft.TCBoombox,
+		WorldStaticModel = Tsarcraft.TCBoombox_Ground,
+		ConditionMax	= 100,
+		UseDelta		= 0.009, 
+		UseWhileEquipped	= FALSE,
+		DisappearOnUse		= FALSE,
+		TwoWay			= FALSE,
+		TransmitRange		= 0,
+		MicRange		= 0,
+		BaseVolumeRange		= 15,
+		IsPortable		= TRUE,
+		IsTelevision		= FALSE,
+		MinChannel		= 100,
+		MaxChannel		= 200,
+		UsesBattery		= TRUE,
+		IsHighTier		= FALSE,
+		Tooltip = Tooltip_item_Boombox,
+		AcceptMediaType = 0,
+		ReplaceInSecondHand = TC_Boombox_LHand holdingbagleft,
+		ReplaceInPrimaryHand = TC_Boombox_RHand holdingbagright,
+		UseWorldItem 	= 	TRUE,
+	}
+
+	recipe Dismantle TCWalkman
+	{
+		TCWalkman,
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+		Result:ElectronicsScrap=2,
+		Time:50.0,
+		OnTest:Recipe.OnTest.DismantleElectronics,
+		OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+		Category:Electrical,
+		AnimNode:Disassemble,
+		Prop1:Screwdriver,
+		Prop2:CDplayer,
+	}
+	
+	recipe Dismantle TruePlayers
+	{
+		TCBoombox/TCVinylplayer,
+		keep [Recipe.GetItemTypes.Screwdriver],
+
+		Result:ElectronicsScrap=4,
+		Time:90.0,
+		OnTest:Recipe.OnTest.DismantleElectronics,
+		OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+		Category:Electrical,
+		AnimNode:Disassemble,
+		Prop1:Screwdriver,
+		Prop2:CDplayer,
+	}
+
+	item TCWalkman
+	{
+		DisplayCategory = Electronics,
+		Type			=	Radio,
+		Weight			=	0.4,
+		Icon			=	TCWalkman,
+		ScaleWorldIcon 	= 	0.1,
+		DisplayName = Walkman,
+		ConditionMax	= 100,
+		UseDelta		= 0.009, 
+		UseWhileEquipped	= FALSE,
+		DisappearOnUse		= FALSE,
+		TwoWay			= FALSE,
+		TransmitRange		= 0,
+		MicRange		= 0,
+		BaseVolumeRange		= 15,
+		IsPortable		= TRUE,
+		IsTelevision		= FALSE,
+		MinChannel		= 100,
+		MaxChannel		= 200,
+		UsesBattery		= TRUE,
+		Tooltip = Tooltip_item_Walkman,
+		AcceptMediaType = 0,
+		UseWorldItem 	= 	TRUE,
+	}
+	
+	item TCVinylplayer
+	{
+		DisplayCategory = Electronics,
+		Type			=	Radio,
+		Weight			=	4.7,
+		Icon			=	TCVinylplayer,
+		ResizeWorldIcon 	= 	1.0,
+		DisplayName = Vinyl player,
+		WorldStaticModel = Tsarcraft.TCVinyl_Ground,
+		IsPortable		= FALSE,
+		ConditionMax	= 100,
+		UseDelta		= 0.009, 
+		MinChannel		= 100,
+		MaxChannel		= 200,
+		UsesBattery		= FALSE,
+		Tooltip = Tooltip_item_Vinyl,
+		AcceptMediaType = 1,
+		UseWorldItem 	= 	TRUE,
+	}
+
+}

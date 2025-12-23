@@ -1,6 +1,6 @@
 module TPP
 {
-	craftRecipe Prepare Sourdough Bread
+	craftRecipe PrepareSourdoughBread
     {
         timedAction = MixingBowl,
         time = 120,
@@ -14,7 +14,7 @@ module TPP
             item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
             item 10 tags[Flour],
             item 2 [Base.Salt;Base.SeasoningSalt],
-            item 1 [TPP.Sourdough],
+            item 1 [TPP.OpenSourdough],
             item 1 [*],
             -fluid 1.0 [Water],
         }
@@ -24,7 +24,7 @@ module TPP
         }
     }
 	
-		craftRecipe Make Sourdough
+	craftRecipe MakeSourdough
     {
         timedAction = MixingBowl,
         time = 60,
@@ -47,7 +47,24 @@ module TPP
         }
     }
 	
-	    craftRecipe Sourdough Pizza
+	craftRecipe OpenSourdough
+    {
+        timedAction = OpenTinCan,
+        time = 30,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [TPP.Sourdough] mode:destroy,
+		}
+		outputs
+		{
+			item 1 TPP.OpenSourdough,
+			item 1 Base.JarLid,
+		}
+	}
+	
+	craftRecipe SourdoughPizza
     {
         timedAction = MixingBowl,
         time = 100,
@@ -62,9 +79,9 @@ module TPP
             item 1 tags[Bowl] mode:keep,
             item 6 tags[Flour],
             item 1 [Base.Salt],
-            item 15 [Base.Cheese] flags[InheritFoodAge],
-            item 12 [TPP.TomatoSauce],
-            item 1 [TPP.Sourdough],
+            item 15 tags[Cheese] flags[InheritFoodAge],
+            item 12 tags[PizzaSauce],
+            item 1 [TPP.OpenSourdough],
             item 1 [*],
             -fluid 0.5 categories[Water] mode:mixture,
         }
@@ -74,7 +91,7 @@ module TPP
         }
     }
 	
-	craftRecipe Feed Sourdough
+	craftRecipe FeedSourdough
     {
         timedAction = MixingBowl,
         time = 20,
@@ -85,8 +102,9 @@ module TPP
         inputs
         {
             item 1 tags[MixingUtensil] mode:keep flags[MayDegradeVeryLight],
-            item 5 tags[Flour],
-            item 1 [TPP.Sourdough] mode:destroy,
+            item 2 tags[Flour],
+            item 1 [TPP.OpenSourdough] mode:destroy,
+			item 1 [Base.JarLid],
             item 1 [*],
             -fluid 0.5 [Water],
         }
@@ -96,7 +114,7 @@ module TPP
         }
     }
 	
-	craftRecipe Make Sourdough Biscuits
+	craftRecipe MakeSourdoughBiscuits
     {
         timedAction = MixingBowl,
         time = 50,
@@ -111,7 +129,7 @@ module TPP
             item 1 [Base.MuffinTray],
             item 1 tags[Flour],
             item 2 [Base.Salt;Base.SeasoningSalt],
-            item 1 [TPP.Sourdough],
+            item 1 [TPP.OpenSourdough],
             item 1 tags[BakingFat],
             item 1 [*],
             -fluid 2.0 [Water],
@@ -122,7 +140,7 @@ module TPP
         }
     }
 	
-	craftRecipe Make Sourdough CakeBatter
+	craftRecipe MakeSourdoughCakeBatter
     {
         timedAction = MixingBowl,
         time = 50,
@@ -140,7 +158,7 @@ module TPP
             item 1 tags[BakingFat],
             item 2 tags[Sugar],
             item 2 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
-            item 1 [TPP.Sourdough],
+            item 1 [TPP.OpenSourdough],
             item 1 [*],
             -fluid 1.0 [CowMilk],
         }
@@ -150,7 +168,7 @@ module TPP
         }
     }
 	
-	craftRecipe Make Sourdough Sugar Cookies Dough
+	craftRecipe MakeSourdoughSugarCookiesDough
     {
         timedAction = MixingBowl,
         time = 50,
@@ -166,7 +184,7 @@ module TPP
             item 2 tags[BakingFat],
             item 10 tags[Sugar],
             item 2 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
-            item 1 [TPP.Sourdough],
+            item 1 [TPP.OpenSourdough],
             item 3 tags[Flour],
             item 1 [*],
             -fluid 1.0 [Water],
@@ -177,7 +195,7 @@ module TPP
         }
     }
 	
-	craftRecipe Recover Jar and Lid
+	craftRecipe RecoverJarandLid
 	{
 		timedAction = OpenTinCan,
         time = 30,
