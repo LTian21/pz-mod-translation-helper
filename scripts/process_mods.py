@@ -79,12 +79,12 @@ def calculate_priority(subscriptions, created_at, mod_id="Unknown"):
     total = sub_priority + (time_priority / 6.0)
     logging.info(f"    -> [权重分析] ID: {mod_id:12} | 订阅: {subscriptions} ({sub_priority:.2f}) | 周数: {weeks:.1f}周 (贡献: {(time_priority/6):.2f}) | 总分: {total:.3f}")
     
-    if total >= 9.0: level = "Ultra High"
-    elif total >= 7.0: level = "Very High"
-    elif total >= 5.0: level = "High"
-    elif total >= 3.0: level = "Medium"
-    elif total >= 2.0: level = "Low"
-    elif total >= 1.0: level = "Very Low"
+    if total >= 7.5: level = "Ultra High"
+    elif total >= 6.5: level = "Very High"
+    elif total >= 5.5: level = "High"
+    elif total >= 4.5: level = "Medium"
+    elif total >= 3.5: level = "Low"
+    elif total >= 2.5: level = "Very Low"
     else: level = "Extremely Low"
     
     return round(total, 2), level
