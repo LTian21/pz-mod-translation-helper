@@ -1,0 +1,71 @@
+module Base
+{
+	model 89defenderGuards
+	{
+		mesh = vehicles/Vehicles_89defender_Body|wolf_guards,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DEF89Guards
+	{
+		part DEF89Guards
+        {
+        	model DEF89Guards
+			{
+                file = 89defenderGuards,
+			}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.89defenderWolfGuards,
+			mechanicRequireKey = false,
+             durability = 5,
+
+			table install
+			{
+                items
+                {
+                	1
+	            		{
+	                	tags = Wrench,
+	                	count = 1,
+	                	keep = true,
+						equip = primary,
+	            		}
+                	}
+
+                time = 150,
+                skills = Mechanics:1,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+            }
+
+            table uninstall
+            {
+                items
+                {
+                    1
+                    	{
+			  			tags = Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+                    	}
+                	}
+
+				time = 150,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+			    test = Vehicles.UninstallTest.Default,
+			    complete = Vehicles.UninstallComplete.Default,
+            }
+
+            lua
+            {
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
