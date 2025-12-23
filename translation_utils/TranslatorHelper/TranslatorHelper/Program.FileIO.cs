@@ -257,12 +257,44 @@ partial class Program
         try
         {
             string jsonContent = File.ReadAllText(filePath, Encoding.UTF8);
-            var options = new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true, TypeInfoResolver = new System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver() };
-            var mapping = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(jsonContent, options);
-            if (mapping != null) { ModNameMapping = mapping; Console.WriteLine($"[成功] 已读取 {ModNameMapping.Count} 个MOD名称映射"); }
-            else Console.WriteLine("[警告] MOD名称文件解析结果为空");
+            var options = new System.Text.Json.JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                TypeInfoResolver = new System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver()
+            };
+
+            // 文件可能是混合格式：
+            // "123": "ModName" 或 "123": { "name": "ModName", ... }
+            var root = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, System.Text.Json.JsonElement>>(jsonContent, options);
+            if (root == null) { Console.WriteLine("[警告] MOD名称文件解析结果为空"); return; }
+
+            var mapping = new Dictionary<string, string>(root.Count);
+            int ignored = 0;
+
+            foreach (var (modId, element) in root)
+            {
+                string? name = element.ValueKind switch
+                {
+                    System.Text.Json.JsonValueKind.String => element.GetString(),
+                    System.Text.Json.JsonValueKind.Object => element.TryGetProperty("name", out var n) && n.ValueKind == System.Text.Json.JsonValueKind.String ? n.GetString() : null,
+                    _ => null
+                };
+
+                if (!string.IsNullOrWhiteSpace(name))
+                    mapping[modId] = name!;
+                else
+                    ignored++;
+            }
+
+            ModNameMapping = mapping;
+            Console.WriteLine($"[成功] 已读取 {ModNameMapping.Count} 个MOD名称映射" + (ignored > 0 ? $"，忽略 {ignored} 个无效条目" : ""));
         }
         catch (Exception ex) { Console.WriteLine($"[警告] 读取MOD名称文件失败: {ex.Message}"); }
+    }
+
+    sealed class ModNameRecord
+    {
+        public string? Name { get; set; }
     }
 
     static void ReadTranslationFile(string repoDir, string fileName, TranslationSystem.Language language)
