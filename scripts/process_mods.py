@@ -593,7 +593,14 @@ def update_map_from_mod_info(config: Config, mods_to_process_ids: list[str]):
                         if mod_name:
                             logging.info(f"    -> [ID: {mod_id}] 成功从 mod.info 中提取名称: '{mod_name}'")
                             if mod_id not in id_name_map or not isinstance(id_name_map[mod_id], dict):
-                                id_name_map[mod_id] = {"name": mod_name}
+                                id_name_map[mod_id] = {
+                                    "name": mod_name,
+                                    "subscriptions": 0,
+                                    "created_at": 0,
+                                    "updated_at": 0,
+                                    "views": 0,
+                                    "favorited": 0
+                                }
                             else:
                                 id_name_map[mod_id]["name"] = mod_name
                             update_count += 1
