@@ -564,11 +564,11 @@ def update_map_from_mod_info(config: Config, mods_to_process_ids: list[str]):
         logging.error(f"  -> 错误: 解析 '{map_file_path}' 失败。")
         return
 
-    # 找出本次运行中那些 API 访问失败的 Mod ID
-    failed_ids_in_current_run = [
-        mod_id for mod_id in mods_to_process_ids
-        if id_name_map.get(mod_id) is None
-    ]
+    failed_ids_in_current_run = []
+    for mod_id in mods_to_process_ids:
+        entry = id_name_map.get(mod_id)
+        if entry is None or (isinstance(entry, dict) and not entry.get('name')):
+            failed_ids_in_current_run.append(mod_id)
 
     if not failed_ids_in_current_run:
         logging.info("  -> 本次运行没有需要从 mod.info 补全的 Mod。")
@@ -583,10 +583,7 @@ def update_map_from_mod_info(config: Config, mods_to_process_ids: list[str]):
 
         try:
             mod_info_files = list(mod_content_path.rglob('mod.info'))
-            if not mod_info_files:
-                logging.warning(f"    -> [ID: {mod_id}] 未能找到 mod.info 文件。")
-                continue
-
+            if not mod_info_files: continue
             mod_info_file = mod_info_files[0]
             
             with open(mod_info_file, 'r', encoding='utf-8') as f:
@@ -595,7 +592,17 @@ def update_map_from_mod_info(config: Config, mods_to_process_ids: list[str]):
                         mod_name = line.split('=', 1)[1].strip()
                         if mod_name:
                             logging.info(f"    -> [ID: {mod_id}] 成功从 mod.info 中提取名称: '{mod_name}'")
-                            id_name_map[mod_id] = mod_name
+                            if mod_id not in id_name_map or not isinstance(id_name_map[mod_id], dict):
+                                id_name_map[mod_id] = {
+                                    "name": mod_name,
+                                    "subscriptions": 0,
+                                    "created_at": 0,
+                                    "updated_at": 0,
+                                    "views": 0,
+                                    "favorited": 0
+                                }
+                            else:
+                                id_name_map[mod_id]["name"] = mod_name
                             update_count += 1
                             break
         except Exception as e:
@@ -603,13 +610,8 @@ def update_map_from_mod_info(config: Config, mods_to_process_ids: list[str]):
 
     if update_count > 0:
         logging.info(f"  -> 成功补全了 {update_count} 个 Mod 的名称。正在写回映射文件...")
-        try:
-            with open(map_file_path, 'w', encoding='utf-8') as f:
-                json.dump(id_name_map, f, indent=2, ensure_ascii=False)
-        except Exception as e:
-            logging.error(f"  -> 错误: 写回 '{map_file_path}' 失败: {e}")
-    else:
-        logging.info("  -> 本次运行未能从任何 mod.info 文件中补全信息。")
+        with open(map_file_path, 'w', encoding='utf-8') as f:
+            json.dump(id_name_map, f, indent=2, ensure_ascii=False)
 
 def find_all_mod_ids_in_workshop_dir(workshop_dir: str | Path) -> list[str]:
     """在一个创意工坊目录中查找所有子模组的 Mod ID。"""

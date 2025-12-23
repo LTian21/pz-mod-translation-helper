@@ -499,19 +499,29 @@ jobs:
           fi
           echo "$API_RESPONSE_BATCH" > api_response.json
           
-          echo "正在对 Mod ID-名称映射文件进行增量更新"
-          if [ ! -f "$MAP_FILE" ]; then
-            echo "未找到现有映射文件，将创建一个新的。"
-            echo "{}" > "$MAP_FILE"
-          fi
+          echo "正在对 Mod ID-详细信息映射文件进行增量更新"
+          if [ ! -f "$MAP_FILE" ]; then echo "{}" > "$MAP_FILE"; fi
           
-          # 为当前批次的Mod生成一个新的映射片段
-          NEW_MAP_CHUNK=$(jq '.response.publishedfiledetails | map(if .title and .result == 1 then {(.publishedfileid): .title} else {(.publishedfileid): null} end) | add' api_response.json)
+          NEW_MAP_CHUNK=$(jq '.response.publishedfiledetails | map(
+            if .result == 1 then 
+              {
+                (.publishedfileid): {
+                  "name": (.title // "未知Mod"),
+                  "subscriptions": ((.subscriptions // 0) | tonumber),
+                  "created_at": ((.time_created // 0) | tonumber),
+                  "updated_at": ((.time_updated // 0) | tonumber),
+                  "views": ((.views // 0) | tonumber),
+                  "favorited": ((.favorited // 0) | tonumber)
+                }
+              } 
+            else 
+              {(.publishedfileid): null} 
+            end
+          ) | add' api_response.json)
           
-          # 合并新旧数据。如果ID已存在，新值会覆盖旧值。
           jq -s '.[0] * .[1] | to_entries | sort_by(.key | tonumber) | from_entries' "$MAP_FILE" <(echo "$NEW_MAP_CHUNK") > tmp_map.json && mv tmp_map.json "$MAP_FILE"
           
-          echo "Mod ID-名称映射文件 ($MAP_FILE) 已成功增量更新。"
+          echo "Mod 详细信息映射文件($MAP_FILE)已更新。"
 
       - name: Run Main Translation Extractor Script
         env:
