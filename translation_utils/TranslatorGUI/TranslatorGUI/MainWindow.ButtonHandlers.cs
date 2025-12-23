@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using 翻译工具.Models; // 访问 TranslationEntry
-using 翻译工具.Views;  // 访问 ProgressWindow、InputBox
+using TranslatorGUI.Models; // 访问 TranslationEntry
+using TranslatorGUI.Views;  // 访问 ProgressWindow、InputBox
 
-namespace 翻译工具
+namespace TranslatorGUI
 {
     // 将按钮点击事件与直接相关的工作流程方法拆分到独立的部分类文件
     public partial class MainWindow
@@ -410,7 +410,7 @@ namespace 翻译工具
                 }
 
                 bool initialChecked = settings.SkipDiscardPrompt && userMatches;
-                var dlg = new 翻译工具.Views.ConfirmDiscardDialog(this, initialChecked);
+                var dlg = new TranslatorGUI.Views.ConfirmDiscardDialog(this, initialChecked);
                 var result = dlg.ShowDialog();
                 bool proceed = result == true;
 

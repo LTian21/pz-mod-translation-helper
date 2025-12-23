@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace 翻译工具
+namespace TranslatorGUI
 {
     /// <summary>
     /// Interaction logic for App.xaml

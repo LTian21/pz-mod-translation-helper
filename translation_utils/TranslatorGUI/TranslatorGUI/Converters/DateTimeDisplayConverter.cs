@@ -2,7 +2,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace 翻译工具
+namespace TranslatorGUI
 {
     // 将默认/无效的 DateTime 显示为空字符串，正常格式为 yyyy-MM-dd HH:mm:ss
     public class DateTimeDisplayConverter : IValueConverter

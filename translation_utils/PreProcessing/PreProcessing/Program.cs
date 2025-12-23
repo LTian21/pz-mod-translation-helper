@@ -475,7 +475,7 @@ namespace PreProcessing
             {
                 foreach (var entry in modTranslationsCopy[modId])
                 {
-                    //增加分隔符，虽然运算量增大，但能够做到保证唯一性的同時還可以反向拆分成key和文本，暫時用不到，可能後續會有用處，即便永遠用不到也無妨
+                    //增加分隔符，虽然运算量增大，但能够做到保证唯一性的同时还可以反向拆分成key和文本，暂时用不到，可能后续会有用处，即便永远用不到也无妨
                     string uniqueKey = entry.Key + SEPARATOR + entry.Value.OriginalText;
                     if (!uniqueEntries.Contains(uniqueKey))
                     {
@@ -572,7 +572,6 @@ namespace PreProcessing
                 searchDir = Path.GetDirectoryName(searchDir);
             }
 
-            //如果无法通过exe路径获取repo目录，则尝试通过工作目录获取repo目录
             //如果无法通过exe路径获取repo目录，则尝试通过工作目录获取repo目录
             if (repoDir == null)
             {
@@ -872,23 +871,39 @@ namespace PreProcessing
                 // 读取 JSON 文件内容
                 string jsonContent = File.ReadAllText(filePath, Encoding.UTF8);
 
-                // 反序列化为字典
-                var options = new JsonSerializerOptions
+                mapping = new Dictionary<string, string>();
+                using var doc = JsonDocument.Parse(jsonContent);
+                if (doc.RootElement.ValueKind != JsonValueKind.Object)
                 {
-                    PropertyNameCaseInsensitive = true,
-                    TypeInfoResolver = new System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver()
-                };
-
-                mapping = JsonSerializer.Deserialize<Dictionary<string, string>>(jsonContent, options);
-
-                if (mapping != null)
-                {
-                    Console.WriteLine($"[成功] 已读取 {mapping.Count} 个MOD名称映射");
+                    Console.WriteLine("[警告] MOD名称文件结构异常：根节点不是对象");
+                    return mapping;
                 }
-                else
+
+                foreach (var element in doc.RootElement.EnumerateObject())
                 {
-                    Console.WriteLine("[警告] MOD名称文件解析结果为空");
+                    string modId = element.Name;
+                    string modName = string.Empty;
+                    var value = element.Value;
+
+                    if (value.ValueKind == JsonValueKind.String)
+                    {
+                        modName = value.GetString() ?? string.Empty;
+                    }
+                    else if (value.ValueKind == JsonValueKind.Object &&
+                             value.TryGetProperty("name", out var nameProperty) &&
+                             nameProperty.ValueKind == JsonValueKind.String)
+                    {
+                        modName = nameProperty.GetString() ?? string.Empty;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"[警告] 无法解析MOD名称: {modId}");
+                    }
+
+                    mapping[modId] = modName;
                 }
+
+                Console.WriteLine($"[成功] 已读取 {mapping.Count} 个MOD名称映射");
                 return mapping;
             }
             catch (Exception ex)

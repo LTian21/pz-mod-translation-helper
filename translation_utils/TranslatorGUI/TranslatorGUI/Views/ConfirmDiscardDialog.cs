@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ∑≠“Îπ§æﬂ.Views
+namespace TranslatorGUI.Views
 {
     public class ConfirmDiscardDialog : Window
     {
