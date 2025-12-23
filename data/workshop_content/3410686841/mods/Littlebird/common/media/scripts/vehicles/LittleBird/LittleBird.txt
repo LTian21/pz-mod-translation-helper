@@ -1,0 +1,418 @@
+module Base
+{
+	model Littlebird_Body
+	{
+		mesh = vehicles/Littlebird|MainBody,
+		shader = vehicle,
+		static = TRUE,
+		scale = 0.01,
+	}
+	model Littlebird_HatchBack
+	{
+		mesh = vehicles/Littlebird|BackDoors,
+		texture = Vehicles/Littlebird,
+		shader = vehicle,
+		textureMask = Vehicles/LittleBirdMasks,
+		static = FALSE,
+		scale = 0.01,
+	}
+	model Littlebird_DoorLeft
+	{
+		mesh = vehicles/Littlebird|FrontDoorLeft,
+		texture = Vehicles/Littlebird,
+		shader = vehicle,
+		textureMask = Vehicles/LittleBirdMasks,
+		static = FALSE,
+		scale = 0.01,
+	}
+	model Littlebird_DoorRight
+	{
+		mesh = vehicles/Littlebird|FrontDoorRight,
+		texture = Vehicles/Littlebird,
+		shader = vehicle,
+		textureMask = Vehicles/LittleBirdMasks,
+		static = FALSE,
+		scale = 0.01,
+	}
+	vehicle Littlebird
+	{
+		mechanicType = 10,
+		offRoadEfficiency = 10.2,
+		engineRepairLevel = 8,
+		playerDamageProtection = 1.2,
+
+		model
+		{
+			file = Littlebird_Body,
+			scale = 0.2200,
+			offset = 0.0000 -3.8636 3.5455,
+		}
+
+		skin
+		{
+			texture = Vehicles/Littlebird,
+		}
+		textureRust = Vehicles/LittleBirdDirt,
+		textureShadow = Shadows/shadowLittlebird,
+		textureMask = Vehicles/LittleBirdMasks,
+		textureLights = Vehicles/LittleBirdLights,
+		spawnOffsetY = 0.24999994,
+
+		sound
+		{
+			horn = VehicleHorn,
+			engine = HeliSilence,
+			engineStart = Mi24_Engine_Start,
+			engineTurnOff = Mi24_Engine_Off,
+		}
+
+		extents = 8.9091 9.4545 21.2727,
+		mass = 500,
+		centerOfMassOffset = 0.0455 0.9545 0.0000,
+		shadowExtents = 10.6363 42.8181,
+		shadowOffset = 0.0000 -10.5182,
+		physicsChassisShape = 9.0909 9.6364 21.4545,
+		engineForce = 15500,
+		maxSpeed = 70f,
+		engineLoudness = 10,
+		engineQuality = 70,
+		brakingForce = 50,
+		stoppingMovementForce = 4.0f,
+		rollInfluence = 1.0f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 20,
+		suspensionCompression = 4.83,
+		suspensionDamping = 3.88,
+		maxSuspensionTravelCm = 14,
+		suspensionRestLength = 0.20f,
+		wheelFriction = 1.4f,
+		frontEndHealth = 165,
+		rearEndHealth = 130,
+		seats = 4,
+		template = PassengerSeat2,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 1.5909 4.3636 3.0909,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 5.2727 1.7273 4.1818,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -1.5909 4.4545 2.7727,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -5.5000 2.0000 4.2273,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		passenger RearLeft
+		{
+			position inside
+			{
+				offset = 1.5909 4.3182 -1.2727,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 5.5455 1.7727 -0.4091,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		passenger RearRight
+		{
+			position inside
+			{
+				offset = -1.5000 4.4545 -1.5000,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -5.3636 1.8636 -0.4091,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 -2.5909 14.3636 5.9091,
+		}
+
+		area TruckBed
+		{
+			xywh = -0.1364 0.3182 16.1818 11.6364,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 6.0455 7.5000 3.1818 4.0909,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -6.2273 7.5455 3.6364 4.2727,
+		}
+
+		area SeatRearLeft
+		{
+			xywh = 4.8636 2.8182 4.4545 4.9091,
+		}
+
+		area SeatRearRight
+		{
+			xywh = -5.1818 2.9091 5.1818 5.0909,
+		}
+
+		area GasTank
+		{
+			xywh = -4.6364 -3.9545 11.6364 6.6364,
+		}
+
+		template = Trunk/part/TruckBedOpen,
+
+		part TruckBedOpen
+		{
+			itemType = Base.BigTrunk,
+
+			container
+			{
+				capacity = 70,
+				conditionAffectsCapacity = false,
+			}
+		}
+		template = Headlight,
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+		template = Seat/part/SeatRearLeft,
+		template = Seat/part/SeatRearRight,
+
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		part GloveBox
+		{
+			area = SeatFrontRight,
+			itemType = Base.GloveBox,
+			mechanicRequireKey = true,
+
+			container
+			{
+				capacity = 5,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		template = SmallGasTankForHelicopter,
+
+		
+
+		template = Battery,
+		template = Engine,
+
+		template = EngineDoorMH6,
+
+		part EngineDoor
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			model Default
+			{
+				file = Littlebird_HatchBack,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}
+
+			anim Close
+			{
+				anim = HatchBack,
+				reverse = TRUE,
+				rate = 2.5,
+			}
+
+			anim Open
+			{
+				anim = HatchBack,
+				rate = 2.0,
+			}
+
+			anim Closed
+			{
+				anim = HatchBack,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = HatchBack,
+				animate = FALSE,
+				reverse = TRUE,
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+
+		part DoorFrontLeft
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+			itemType = Base.LittleBirdDoor,
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			model Default
+			{
+				file = Littlebird_DoorLeft,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}
+
+			anim Close
+			{
+				anim = DoorLeft,
+				reverse = TRUE,
+				rate = 2.5,
+			}
+
+			anim Open
+			{
+				anim = DoorLeft,
+				rate = 2.0,
+			}
+
+			anim Closed
+			{
+				anim = DoorLeft,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorLeft,
+				animate = FALSE,
+				reverse = TRUE,
+			}
+		}
+
+		part DoorFrontRight
+		{
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+			itemType = Base.LittleBirdDoor,
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			model Default
+			{
+				file = Littlebird_DoorRight,
+				offset = 0.0000 0.0000 0.0000,
+				rotate = -90.0000 0.0000 0.0000,
+			}
+
+			anim Close
+			{
+				anim = DoorRight,
+				reverse = TRUE,
+				rate = 2.5,
+			}
+
+			anim Open
+			{
+				anim = DoorRight,
+				rate = 2.0,
+			}
+
+			anim Closed
+			{
+				anim = DoorRight,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = DoorRight,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		}
+
+		template = Radio,
+		template = Littlebird_bladeSmall,
+		template = Littlebird_blade,
+	}
+}

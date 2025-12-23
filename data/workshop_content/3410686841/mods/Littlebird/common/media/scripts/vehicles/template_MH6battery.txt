@@ -1,0 +1,55 @@
+module Base
+{
+	template vehicle MH6Battery
+	{
+		part Battery
+		{
+			area = Engine,
+			itemType = Base.MH6Battery,
+			mechanicRequireKey = true,
+			category = engine,
+			durability = 2,
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 100,
+				professions = ,
+				skills = ,
+				traits = ,
+				recipes = ,
+				test = Vehicles.InstallTest.Default,
+				door = EngineDoor,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 100,
+				test = Vehicles.UninstallTest.Battery,
+			}
+			lua
+			{
+				create = Vehicles.Create.Battery,
+				update = Vehicles.Update.Battery,
+			}
+		}
+	}
+}
+

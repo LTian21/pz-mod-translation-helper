@@ -1,0 +1,109 @@
+module ATA2
+{
+    imports
+    {
+        Base
+    }
+    
+    item ATATuningFordMustang /* Spawn */ 
+    {
+        Weight    =    0.1,
+        ItemType = base:literature,
+        DisplayName    =    Autotsar Tuning - Ford Mustang,
+        Icon    =    ATATuningMagUniverseIcon,
+        LearnedRecipes  =   Basic Tuning;ATAMustangRecipes,
+        ReplaceOnUse    =   ATATuningFordMustang,
+        Tooltip = Tooltip_item_ATATuningFordMustang,
+        StaticModel = Autotsar.ATATuningMagUniverse_Reading,
+        WorldStaticModel = Autotsar.ATATuningMagUniverse_Ground,
+        OnCreate = SpecialLootSpawns.OnCreateRecipeMagazine,
+        Tags = base:magazine,
+    }
+
+/* Hoods
+█──█─████─████─████──███
+█──█─█──█─█──█─█──██─█──
+████─█──█─█──█─█──██─███
+█──█─█──█─█──█─█──██───█
+█──█─████─████─████──███
+*/
+    model ATAMustangHood2World
+    {
+        mesh = WorldItems/ATA_Mustang_items|ATAMustangHood2World,
+        texture = Vehicles/ATA_Mustang_base0,
+        scale = 0.014,
+    }
+    model ATAMustangHood3World
+    {
+        mesh = WorldItems/ATA_Mustang_items|ATAMustangHood3World,
+        texture = Vehicles/ATA_Mustang_base0,
+        scale = 0.014,
+    }
+    model ATAMustangHood4World
+    {
+        mesh = WorldItems/ATA_Mustang_items|ATAMustangHood4World,
+        texture = Vehicles/ATA_Mustang_base0,
+        scale = 0.014,
+    }
+    item ATAMustangHood2Item3 /* Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    15.0,
+        ItemType = base:normal,
+        Icon    =    EngineDoor,
+        VehicleType =   3,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = Autotsar.ATAMustangHood2World,
+        tags = ATA_Mustang_Hood,
+    }
+
+    item ATAMustangHood3Item3 /* Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    15.0,
+        ItemType = base:normal,
+        Icon    =    EngineDoor,
+        VehicleType =   3,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = Autotsar.ATAMustangHood3World,
+        tags = ATA_Mustang_Hood,
+    }
+    item ATAMustangHood4Item3 /* Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    15.0,
+        ItemType = base:normal,
+        Icon    =    EngineDoor,
+        VehicleType =   3,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = Autotsar.ATAMustangHood4World,
+        tags = ATA_Mustang_Hood,
+    }
+        craftRecipe ATAMustangHoodItem
+    {
+        timedAction = Welding,
+		Time = 350,
+		NeedToBeLearn = True,
+		SkillRequired = MetalWelding:2,
+		Tags = InHandCraft;Welding,
+        category = Autotsar,
+		xpAward = MetalWelding:25,
+		AutoLearnAny = MetalWelding:4,
+        inputs
+        {
+        item 1 tags[ATA_Mustang_Hood],
+        item 8 [Base.BlowTorch],
+		item 1 tags[WeldingMask] mode:keep,
+        }
+               outputs
+       {
+           item 6 Base.SheetMetal,
+       }       
+    }
+}

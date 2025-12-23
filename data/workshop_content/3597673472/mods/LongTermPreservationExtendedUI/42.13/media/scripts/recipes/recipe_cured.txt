@@ -1,0 +1,221 @@
+module Base
+{
+  imports
+  {
+    Base
+  }
+
+  craftRecipe Make Cured Meat
+  {
+    timedAction = SliceMeat,
+    Time = 30,
+    onCreate = AdjustStates,
+    onTest = TryMeat,
+    ToolTip = Tooltip_CuredMeat,
+    Tags = InHandCraft;Cooking,
+	category = Preservation,
+	xpAward = Cooking:10,
+    inputs
+		{
+		item 1 [Base.Beef;Base.Smallbirdmeat;Base.ChickenFillet;Base.Chicken;Base.ChickenWings;Base.FishFillet;Base.FrogMeat;Base.Pork;Base.PorkChop;Base.MuttonChop;Base.Rabbitmeat;Base.Sausage;Base.Smallanimalmeat;Base.Steak;Base.TurkeyFillet;Base.TurkeyLegs;Base.TurkeyWings;Base.Venison] mode:destroy flags[InheritFoodAge;ItemCount] mappers[meatType],
+		item 5 tags[base:salt],
+		}
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+		itemMapper meatType
+		{
+			Base.CuredBeef = Base.Beef,
+			Base.CuredBird = Base.Smallbirdmeat,
+			Base.CuredChickenFillet = Base.ChickenFillet,
+			Base.CuredChickenLeg = Base.Chicken,
+			Base.CuredChickenWing = Base.ChickenWings,
+			Base.CuredFish = Base.FishFillet,
+			Base.CuredFrog = Base.FrogMeat,	
+			Base.CuredMutton = Base.MuttonChop,
+			Base.CuredPork = Base.Pork,
+			Base.CuredPorkChop = Base.PorkChop,
+			Base.CuredRabbit = Base.Rabbitmeat,
+			Base.CuredSausage = Base.Sausage,
+			Base.CuredRodent = Base.Smallanimalmeat,
+			Base.CuredSteak = Base.Steak,
+			Base.CuredTurkey = Base.TurkeyFillet,
+			Base.CuredTurkeyLeg = Base.TurkeyLegs,
+			Base.CuredTurkeyWing = Base.TurkeyWings,
+			Base.CuredVenison = Base.Venison,
+		}
+  }
+
+  craftRecipe Make Pemmican Meat
+  {
+    timedAction = SliceMeat,
+    Time = 30,
+    onCreate = AdjustStatesPemmican,
+    Tags = InHandCraft;Cooking,
+    category = Preservation,
+	xpAward = Cooking:10,
+    inputs
+    {
+      item 1 [Base.Pork;Base.Beef;Base.Venison] flags[ItemCount] mode:destroy,
+      item 2 [Base.Lard;Base.Schmaltz;Base.Tallow] flags[ItemCount] mode:destroy,
+      item 3 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue;Base.BeautyBerry;Base.HollyBerry;Base.WinterBerry;Base.Strewberrie] flags[ItemCount] mode:destroy,
+    }
+    outputs
+    {
+      item 1 Base.Pemmican,
+    }  
+  }
+
+  craftRecipe Reduce Meat Lard
+  {
+    timedAction = MixingBowl,
+    Time = 30,
+    Tags = InHandCraft;Cooking,
+    category = Preservation,
+	xpAward = Cooking:5;Butchering:5,
+    inputs
+    {
+      item 1 tags[base:dullknife;base:sharpknife;base:meatcleaver] mode:keep flags[MayDegradeLight],
+      item 4 [Base.Pork] flags[ItemCount],
+      item 1 [Base.PanForged;Base.Pan;Base.Saucepan;Base.SaucepanCopper;Base.Pot;Base.PotForged] mode:keep,
+    }
+    outputs
+    {
+      item 8 Base.Lard,
+    }
+  }
+  
+  craftRecipe Make Jarred Meat
+  {
+    timedAction = MixingBowl,
+		Time = 100,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+    category = Preservation,
+	xpAward = Cooking:10,
+    inputs
+    {
+		item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy,
+		item 1 [Base.JarLid] mode:destroy,
+		item 5 [Base.Beef;Base.Smallbirdmeat;Base.ChickenFillet;Base.FishFillet;Base.FrogMeat;Base.MuttonChop;Base.Pork;Base.Rabbitmeat;Base.Smallanimalmeat;Base.TurkeyFillet;Base.Venison] flags[ItemCount] mappers[meatType] mode:destroy,
+		item 2.0 tags[base:vinegar],
+		item 1.0 tags[base:salt],
+		item 1 [*],
+		-fluid 1.0 [Water],
+    }
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+    itemMapper meatType
+		{
+			Base.CannedBeef = Base.Beef,
+			Base.CannedBird = Base.Smallbirdmeat,
+			Base.CannedChicken = Base.ChickenFillet,
+			Base.CannedFish = Base.FishFillet,
+			Base.CannedFrog = Base.FrogMeat,	
+			Base.CannedMutton = Base.MuttonChop,
+			Base.CannedPork = Base.Pork,
+			Base.CannedRabbit = Base.Rabbitmeat,
+			Base.CannedRodent = Base.Smallanimalmeat,
+			Base.CannedTurkey = Base.TurkeyFillet,
+			Base.CannedVenison = Base.Venison,
+		}
+    
+  }
+
+  craftRecipe Open Jar Of Meat
+	{
+    timedAction = OpenTinCan,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+    category = Preservation,
+	xpAward = Cooking:10,
+		inputs
+		{
+			item 1 [Base.CannedBeef;Base.CannedBird;Base.CannedChicken;Base.CannedFish;Base.CannedFrog;Base.CannedMutton;Base.CannedPork;Base.CannedRabbit;Base.CannedRodent;Base.CannedTurkey;Base.CannedVenison] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+		}
+		outputs
+		{
+			item 1 mapper:foodType,
+		}
+		itemMapper foodType
+		{
+			Base.CannedBeef_Open = Base.CannedBeef,
+			Base.CannedBird_Open = Base.CannedBird,
+			Base.CannedChicken_Open = Base.CannedChicken,
+			Base.CannedFish_Open = Base.CannedFish,
+			Base.CannedFrog_Open = Base.CannedFrog,	
+			Base.CannedMutton_Open = Base.CannedMutton,
+			Base.CannedPork_Open = Base.CannedPork,
+			Base.CannedRabbit_Open = Base.CannedRabbit,
+			Base.CannedRodent_Open = Base.CannedRodent,
+			Base.CannedTurkey_Open = Base.CannedTurkey,
+			Base.CannedVenison_Open = Base.CannedVenison,
+			
+		}
+	}
+
+  craftRecipe Crush Salt Rock
+  {
+    timedAction = Making,
+    Time = 30,
+    Tags = InHandCraft;Cooking,
+    category = Preservation,
+	xpAward = Cooking:10,
+    inputs
+		{
+
+			item 1 tags[base:mortarpestle] mode:keep,
+			item 2 [Base.SaltRock],
+		}
+		outputs
+		{
+			item 1 Base.Salt,
+		}
+  }
+
+  craftRecipe Make Mashed Berry
+  {
+    timedAction = MixingMortarPestle,
+    Time = 30,
+    Tags = InHandCraft;Cooking,
+    category = Preservation,
+	xpAward = Cooking:10,
+    inputs
+		{
+
+			item 1 tags[base:mortarpestle] mode:keep,
+			item 5 [Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.BerryBlack;Base.BerryBlue;Base.Strewberrie] flags[ItemCount] mode:destroy,
+		}
+		outputs
+		{
+			item 15 Base.MashedBerries,
+		}
+  }
+
+  craftRecipe Make Jam Spread
+  {
+    timedAction = MixingMortarPestle,
+    Time = 100,
+    Tags = InHandCraft;Cooking,
+    category = Preservation,
+	xpAward = Cooking:10,
+    inputs
+		{
+			item 1 [Base.PanForged;Base.Pan;Base.Saucepan;Base.SaucepanCopper;Base.Pot;Base.PotForged] mode:keep,
+			item 1 [Base.JarLid] mode:destroy,
+			item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy,
+			item 15 [Base.MashedBerries;Base.MashedFruits] flags[ItemCount] mode:destroy,
+			item 10 [Base.Sugar;Base.SugarBrown],
+		}
+		outputs
+		{
+			item 1 Base.JamSpread,
+		}
+  }
+
+  
+}

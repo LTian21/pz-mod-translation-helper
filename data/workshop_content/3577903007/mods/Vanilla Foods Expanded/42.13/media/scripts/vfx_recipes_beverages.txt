@@ -1,7 +1,7 @@
 module Base
 {
 
-    craftRecipe VFX_MakeLemonadePitcher
+    craftRecipe VFX_MakeDrinkMixPitcher
     {
         timedAction = VFX.PitcherMaking,
         Time = 30,
@@ -10,120 +10,24 @@ module Base
 
         inputs
         {
-            item 1 [VFX.DrinkMixLemonade] flags[ItemCount],
-            item 1 [VFX.PlasticPitcher] flags[ItemCount] mode:destroy,
-            -fluid 2.0 categories[Water] mode:mixture,
+            item 1 [VFX.DrinkMixLemonade;VFX.DrinkMixCherry;VFX.DrinkMixFruitPunch;VFX.DrinkMixGrape;VFX.DrinkMixPinkLemonade;VFX.DrinkMixSweetTea] mappers[DrinkMixType] flags[ItemCount],
+            item 1 [VFX.PlasticPitcher;VFX.LemonadePlasticPitcher;VFX.CherryPlasticPitcher;VFX.FruitPunchPlasticPitcher;VFX.GrapePlasticPitcher;VFX.PinkLemonadePlasticPitcher;VFX.SweetTeaPlasticPitcher] flags[ItemCount] mode:destroy,
+            -fluid 1.0 categories[Water] mode:mixture,
         }
 
         outputs
         {
-            item 1 VFX.PlasticPitcher flags[ForceEmpty],
-                + fluid 2.0 VFX_LemonadeDrink,
+            item 1 mapper:DrinkMixType,
         }
-    }
-
-    craftRecipe VFX_MakePinkLemonadePitcher
-    {
-        timedAction = VFX.PitcherMaking,
-        Time = 30,
-        Tags = InHandCraft;Cooking,
-        category = Cooking,
-
-        inputs
+        
+        itemMapper DrinkMixType
         {
-            item 1 [VFX.DrinkMixPinkLemonade] flags[ItemCount],
-            item 1 [VFX.PlasticPitcher] flags[ItemCount] mode:destroy,
-            -fluid 2.0 categories[Water] mode:mixture,
-        }
-
-        outputs
-        {
-            item 1 VFX.PlasticPitcher flags[ForceEmpty],
-                + fluid 2.0 VFX_PinkLemonadeDrink,
-        }
-    }
-
-    craftRecipe VFX_MakeFruitPunchPitcher
-    {
-        timedAction = VFX.PitcherMaking,
-        Time = 30,
-        Tags = InHandCraft;Cooking,
-        category = Cooking,
-
-        inputs
-        {
-            item 1 [VFX.DrinkMixFruitPunch] flags[ItemCount],
-            item 1 [VFX.PlasticPitcher] flags[ItemCount] mode:destroy,
-            -fluid 2.0 categories[Water] mode:mixture,
-        }
-
-        outputs
-        {
-            item 1 VFX.PlasticPitcher flags[ForceEmpty],
-                + fluid 2.0 VFX_FruitPunchDrink,
-        }
-    }
-
-    craftRecipe VFX_MakeCherryDrinkPitcher
-    {
-        timedAction = VFX.PitcherMaking,
-        Time = 30,
-        Tags = InHandCraft;Cooking,
-        category = Cooking,
-
-        inputs
-        {
-            item 1 [VFX.DrinkMixCherry] flags[ItemCount],
-            item 1 [VFX.PlasticPitcher] flags[ItemCount] mode:destroy,
-            -fluid 2.0 categories[Water] mode:mixture,
-        }
-
-        outputs
-        {
-            item 1 VFX.PlasticPitcher flags[ForceEmpty],
-                + fluid 2.0 VFX_CherryDrink,
-        }
-    }
-
-    craftRecipe VFX_MakeGrapeDrinkPitcher
-    {
-        timedAction = VFX.PitcherMaking,
-        Time = 30,
-        Tags = InHandCraft;Cooking,
-        category = Cooking,
-
-        inputs
-        {
-            item 1 [VFX.DrinkMixGrape] flags[ItemCount],
-            item 1 [VFX.PlasticPitcher] flags[ItemCount] mode:destroy,
-            -fluid 2.0 categories[Water] mode:mixture,
-        }
-
-        outputs
-        {
-            item 1 VFX.PlasticPitcher flags[ForceEmpty],
-                + fluid 2.0 VFX_GrapeDrink,
-        }
-    }
-
-    craftRecipe VFX_MakeSweetTeaPitcher
-    {
-        timedAction = VFX.PitcherMaking,
-        Time = 30,
-        Tags = InHandCraft;Cooking,
-        category = Cooking,
-
-        inputs
-        {
-            item 1 [VFX.DrinkMixSweetTea] flags[ItemCount],
-            item 1 [VFX.PlasticPitcher] flags[ItemCount] mode:destroy,
-            -fluid 2.0 categories[Water] mode:mixture,
-        }
-
-        outputs
-        {
-            item 1 VFX.PlasticPitcher flags[ForceEmpty],
-                + fluid 2.0 VFX_IcedTeaSweet,
+            VFX.LemonadePlasticPitcher = VFX.DrinkMixLemonade,
+            VFX.CherryPlasticPitcher = VFX.DrinkMixCherry,
+            VFX.FruitPunchPlasticPitcher = VFX.DrinkMixFruitPunch,
+            VFX.GrapePlasticPitcher = VFX.DrinkMixGrape,
+            VFX.PinkLemonadePlasticPitcher = VFX.DrinkMixPinkLemonade,
+            VFX.SweetTeaPlasticPitcher = VFX.DrinkMixSweetTea,
         }
     }
 
@@ -157,7 +61,7 @@ module Base
         }
     }
 
-    craftRecipe VFX_MakeVanillaProteinShake
+    craftRecipe VFX_MakeProteinShake
     {
         timedAction = VFX.ShakerMaking,
         Time = 30,
@@ -166,161 +70,104 @@ module Base
 
         inputs
         {
-            item 1 [VFX.VanillaProteinPowder],
-            item 1 [VFX.ProteinShaker] flags[ItemCount] mode:destroy,
-            item 1 [*],
-                -fluid 0.5 [Water],
+            item 1 [VFX.VanillaProteinPowder;VFX.ChocolateProteinPowder;VFX.StrawberryProteinPowder;VFX.BananaProteinPowder] mappers[ProteinType],
+            item 1 [VFX.ProteinShaker;VFX.VanillaProteinShaker;VFX.ChocolateProteinShaker;VFX.StrawberryProteinShaker;VFX.BananaProteinShaker] flags[ItemCount] mode:destroy,
+                -fluid 0.5 [Water] mode:mixture,
         }
 
         outputs
         {
-            item 1 VFX.ProteinShaker flags[ForceEmpty],
-                + fluid 0.5 VFX_VanillaProteinShake,
+            item 1 mapper:ProteinType,
+        }
+
+        itemMapper ProteinType
+        {
+            VFX.VanillaProteinShaker = VFX.VanillaProteinPowder,
+            VFX.ChocolateProteinShaker = VFX.ChocolateProteinPowder,
+            VFX.StrawberryProteinShaker = VFX.StrawberryProteinPowder,
+            VFX.BananaProteinShaker = VFX.BananaProteinPowder,
         }
     }
 
-    craftRecipe VFX_MakeChocolateProteinShake
-    {
-        timedAction = VFX.ShakerMaking,
-        Time = 30,
-        Tags = InHandCraft;Cooking,
-        category = Cooking,
+    /* These recipes have been merged into base game! */
 
-        inputs
-        {
-            item 1 [VFX.ChocolateProteinPowder],
-            item 1 [VFX.ProteinShaker] flags[ItemCount] mode:destroy,
-            item 1 [*],
-                -fluid 0.5 [Water],
-        }
+        /*
+            craftRecipe VFX_OpenBottleOfWine
+            {
+                timedAction = UncorkBottle,
+                Time = 30,
+                AllowBatchCraft = False,
+                Tags = InHandCraft;Cooking;CanBeDoneInDark,
+                category = Cooking,
 
-        outputs
-        {
-            item 1 VFX.ProteinShaker flags[ForceEmpty],
-                + fluid 0.5 VFX_ChocolateProteinShake,
-        }
-    }
+                inputs
+                {
+                    item 1 tags[base:corkscrew] mode:keep,
+                    item 1 [VFX.WineChardonnay;VFX.WineCabernetSauvignon;VFX.WineMerlot;VFX.WinePinotNoir;VFX.WineSauvignonBlanc;VFX.WinePinotGris;VFX.WineRiesling] mode:keep flags[DontPutBack;IsSealed;Prop2;Unseal;ItemCount],
+                }
 
-    craftRecipe VFX_MakeStrawberryProteinShake
-    {
-        timedAction = VFX.ShakerMaking,
-        Time = 30,
-        Tags = InHandCraft;Cooking,
-        category = Cooking,
+                outputs
+                {
+                    item 1 Base.Cork,
+                }
+            }
 
-        inputs
-        {
-            item 1 [VFX.StrawberryProteinPowder],
-            item 1 [VFX.ProteinShaker] flags[ItemCount] mode:destroy,
-            item 1 [*],
-                -fluid 0.5 [Water],
-        }
+            craftRecipe VFX_OpenBottleOfBeer
+            {
+                timedAction = OpenBeerBottle,
+                Time = 15,
+                AllowBatchCraft = False,
+                Tags = InHandCraft;Cooking;CanBeDoneInDark,
+                category = Cooking,
 
-        outputs
-        {
-            item 1 VFX.ProteinShaker flags[ForceEmpty],
-                + fluid 0.5 VFX_StrawberryProteinShake,
-        }
-    }
+                inputs
+                {
+                    item 1 [VFX.BottleAmericanLightLager;VFX.BottleAmericanLager;VFX.BottlePilsner;VFX.BottleViennaLager;VFX.BottlePaleAle;VFX.BottleAmberAle;VFX.BottlePorter;VFX.BottleStout;VFX.BottleAmericanWheatBeer] mode:keep flags[DontPutBack;IsSealed;Prop2;Unseal;ItemCount],
+                }
 
-    craftRecipe VFX_MakeBananaProteinShake
-    {
-        timedAction = VFX.ShakerMaking,
-        Time = 30,
-        Tags = InHandCraft;Cooking,
-        category = Cooking,
+                outputs
+                {
+                }
+            }
 
-        inputs
-        {
-            item 1 [VFX.BananaProteinPowder] flags[ItemCount],
-            item 1 [VFX.ProteinShaker] flags[ItemCount] mode:destroy,
-            item 1 [*],
-                -fluid 0.5 [Water],
-        }
+            craftRecipe VFX_OpenPackOfBeer
+            {
+                timedAction = VFX.SmallBagUnpacking,
+                Time = 80,
+                Tags = InHandCraft;Cooking;CanBeDoneInDark,
+                category = Packing,
+                inputs
+                {
+                    item 1 [VFX.PackAmericanLightLager;VFX.PackAmericanLager;VFX.PackPilsner;VFX.PackViennaLager;VFX.PackPaleAle;VFX.PackAmberAle;VFX.PackPorter;VFX.PackStout;VFX.PackAmericanWheatBeer;VFX.PackCanAmericanLightLager;VFX.PackCanAmericanLager;VFX.PackCanPilsner;VFX.PackCanViennaLager;VFX.PackCanPaleAle;VFX.PackCanAmberAle;VFX.PackCanPorter;VFX.PackCanStout;VFX.PackCanAmericanWheatBeer] mappers[beerType] flags[AllowFavorite;InheritFavorite;Prop2],
+                }
 
-        outputs
-        {
-            item 1 VFX.ProteinShaker flags[ForceEmpty],
-                + fluid 0.5 VFX_BananaProteinShake,
-        }
-    }
+                outputs
+                {
+                    item 6 mapper:beerType,
+                }
 
-    craftRecipe VFX_OpenBottleOfWine
-    {
-        timedAction = UncorkBottle,
-        Time = 30,
-        AllowBatchCraft = False,
-        Tags = InHandCraft;Cooking;CanBeDoneInDark,
-        category = Cooking,
+                itemMapper beerType
+                {
+                    VFX.BottleAmericanLightLager = VFX.PackAmericanLightLager,
+                    VFX.BottleAmericanLager = VFX.PackAmericanLager,
+                    VFX.BottlePilsner = VFX.PackPilsner,
+                    VFX.BottleViennaLager = VFX.PackViennaLager,
+                    VFX.BottlePaleAle = VFX.PackPaleAle,
+                    VFX.BottleAmberAle = VFX.PackAmberAle,
+                    VFX.BottlePorter = VFX.PackPorter,
+                    VFX.BottleStout = VFX.PackStout,
+                    VFX.BottleAmericanWheatBeer = VFX.PackAmericanWheatBeer,
 
-        inputs
-        {
-            item 1 tags[base:corkscrew] mode:keep,
-            item 1 [VFX.WineChardonnay;VFX.WineCabernetSauvignon;VFX.WineMerlot;VFX.WinePinotNoir;VFX.WineSauvignonBlanc;VFX.WinePinotGris;VFX.WineRiesling] mode:keep flags[DontPutBack;IsSealed;Prop2;Unseal;ItemCount],
-        }
-
-        outputs
-        {
-            item 1 Base.Cork,
-        }
-    }
-
-    craftRecipe VFX_OpenBottleOfBeer
-    {
-        timedAction = OpenBeerBottle,
-        Time = 15,
-        AllowBatchCraft = False,
-        Tags = InHandCraft;Cooking;CanBeDoneInDark,
-        category = Cooking,
-
-        inputs
-        {
-            item 1 [VFX.BottleAmericanLightLager;VFX.BottleAmericanLager;VFX.BottlePilsner;VFX.BottleViennaLager;VFX.BottlePaleAle;VFX.BottleAmberAle;VFX.BottlePorter;VFX.BottleStout;VFX.BottleAmericanWheatBeer] mode:keep flags[DontPutBack;IsSealed;Prop2;Unseal;ItemCount],
-        }
-
-        outputs
-        {
-        }
-    }
-
-	craftRecipe VFX_OpenPackOfBeer
-	{
-        timedAction = VFX.SmallBagUnpacking,
-		Time = 80,
-		Tags = InHandCraft;Cooking;CanBeDoneInDark,
-        category = Packing,
-		inputs
-		{
-			item 1 [VFX.PackAmericanLightLager;VFX.PackAmericanLager;VFX.PackPilsner;VFX.PackViennaLager;VFX.PackPaleAle;VFX.PackAmberAle;VFX.PackPorter;VFX.PackStout;VFX.PackAmericanWheatBeer;VFX.PackCanAmericanLightLager;VFX.PackCanAmericanLager;VFX.PackCanPilsner;VFX.PackCanViennaLager;VFX.PackCanPaleAle;VFX.PackCanAmberAle;VFX.PackCanPorter;VFX.PackCanStout;VFX.PackCanAmericanWheatBeer] mappers[beerType] flags[AllowFavorite;InheritFavorite;Prop2],
-		}
-
-		outputs
-		{
-			item 6 mapper:beerType,
-		}
-
-		itemMapper beerType
-		{
-			VFX.BottleAmericanLightLager = VFX.PackAmericanLightLager,
-            VFX.BottleAmericanLager = VFX.PackAmericanLager,
-			VFX.BottlePilsner = VFX.PackPilsner,
-			VFX.BottleViennaLager = VFX.PackViennaLager,
-			VFX.BottlePaleAle = VFX.PackPaleAle,
-			VFX.BottleAmberAle = VFX.PackAmberAle,
-			VFX.BottlePorter = VFX.PackPorter,
-			VFX.BottleStout = VFX.PackStout,
-			VFX.BottleAmericanWheatBeer = VFX.PackAmericanWheatBeer,
-
-            VFX.CanAmericanLightLager = VFX.PackCanAmericanLightLager,
-			VFX.CanAmericanLager = VFX.PackCanAmericanLager,
-			VFX.CanPilsner = VFX.PackCanPilsner,
-			VFX.CanViennaLager = VFX.PackCanViennaLager,
-			VFX.CanPaleAle = VFX.PackCanPaleAle,
-			VFX.CanAmberAle = VFX.PackCanAmberAle,
-			VFX.CanPorter = VFX.PackCanPorter,
-			VFX.CanStout = VFX.PackCanStout,
-			VFX.CanAmericanWheatBeer = VFX.PackCanAmericanWheatBeer,
-		}
-	}
-
+                    VFX.CanAmericanLightLager = VFX.PackCanAmericanLightLager,
+                    VFX.CanAmericanLager = VFX.PackCanAmericanLager,
+                    VFX.CanPilsner = VFX.PackCanPilsner,
+                    VFX.CanViennaLager = VFX.PackCanViennaLager,
+                    VFX.CanPaleAle = VFX.PackCanPaleAle,
+                    VFX.CanAmberAle = VFX.PackCanAmberAle,
+                    VFX.CanPorter = VFX.PackCanPorter,
+                    VFX.CanStout = VFX.PackCanStout,
+                    VFX.CanAmericanWheatBeer = VFX.PackCanAmericanWheatBeer,
+                }
+            }
+        */
 }

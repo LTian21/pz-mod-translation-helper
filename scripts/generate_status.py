@@ -97,7 +97,11 @@ def parse_translation_file_stats(file_path, mod_id_name_map):
     # 格式化为用于表格的列表
     mod_list = []
     for mod_id, stats in mod_stats.items():
-        mod_name = mod_id_name_map.get(mod_id, f"未知 Mod ({mod_id})")
+        raw_name = mod_id_name_map.get(mod_id)
+        if raw_name is None:
+            mod_name = f"无ID ({mod_id})" 
+        else:
+            mod_name = raw_name
         mod_list.append({
             'name': mod_name,
             'id': mod_id,

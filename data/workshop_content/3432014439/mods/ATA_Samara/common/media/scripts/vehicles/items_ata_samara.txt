@@ -1,0 +1,92 @@
+module Autotsar
+{
+    imports
+    {
+        Base
+    }
+    
+    item ATATuningChevalierSamara /* Spawn */ 
+    {
+        Weight    =    0.1,
+        Type    =    Literature,
+        DisplayName    =    Autotsar Tuning - Chevalier Samara,
+        Icon    =    ATATuningMagUniverseIcon,
+        TeachedRecipes  =   Basic Tuning;ATASamaraRecipes,
+        ReplaceOnUse    =   ATATuningChevalierSamara,
+        Tooltip = Tooltip_item_ATATuningChevalierSamara,
+        StaticModel = Autotsar.ATATuningMagUniverse_Reading,
+        WorldStaticModel = Autotsar.ATATuningMagUniverse_Ground,
+    }
+    
+/* Hoods
+█──█─████─████─████──███
+█──█─█──█─█──█─█──██─█──
+████─█──█─█──█─█──██─███
+█──█─█──█─█──█─█──██───█
+█──█─████─████─████──███
+*/
+    model ATASamaraHood2World
+    {
+        mesh = WorldItems/ATA_Samara_items|Hood2_obj,
+        texture = Vehicles/ATA_Samara_base_0,
+        scale = 0.014,
+    }
+    model ATASamaraHood3World
+    {
+        mesh = WorldItems/ATA_Samara_items|Hood3_obj,
+        texture = Vehicles/ATA_Samara_base_0,
+        scale = 0.014,
+    }
+
+    item ATASamaraHood2Item3 /* Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    15.0,
+        Type    =    Normal,
+        DisplayName    =    ATASamaraHood2Item,
+        Icon    =    EngineDoor,
+        VehicleType =   3,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = Autotsar.ATASamaraHood2World,
+        Tags = ATA_Samara_Hood,
+    }
+
+    item ATASamaraHood3Item3 /* Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    15.0,
+        Type    =    Normal,
+        DisplayName    =    ATASamaraHood3Item,
+        Icon    =    EngineDoor,
+        VehicleType =   3,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        WorldStaticModel = Autotsar.ATASamaraHood3World,
+        Tags = ATA_Samara_Hood,
+    }
+    
+    craftRecipe ATASamaraHoodItem
+    {
+        timedAction = Welding,
+		Time = 45,
+		NeedToBeLearn = True,
+		SkillRequired = MetalWelding:2,
+		Tags = InHandCraft;Welding,
+        category = Autotsar,
+		xpAward = MetalWelding:10,
+		AutoLearnAny = MetalWelding:4,
+        inputs
+        {
+        item 1 tags[ATA_Samara_Hood],
+        item 6 [Base.BlowTorch],
+		item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+       {
+           item 2 Base.SheetMetal,
+       }       
+    }
+}

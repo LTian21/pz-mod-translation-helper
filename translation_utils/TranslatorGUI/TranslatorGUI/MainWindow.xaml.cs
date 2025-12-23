@@ -204,6 +204,51 @@ namespace 翻译工具
             }
         }
 
+        private static string GetBackupDirectoryPath()
+        {
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "backup");
+        }
+
+        private void BackupUserTranslationFile(string triggerName)
+        {
+            try
+            {
+                if (_config == null)
+                {
+                    return;
+                }
+
+                var userName = _config.UserName?.Trim();
+                if (string.IsNullOrEmpty(userName))
+                {
+                    return;
+                }
+
+                var suffix = string.IsNullOrWhiteSpace(_config.LanguageSuffix) ? "CN" : _config.LanguageSuffix!;
+                var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                var translationFile = Path.Combine(baseDir, $"translations_{userName}_{suffix}.txt");
+                if (!File.Exists(translationFile))
+                {
+                    return;
+                }
+
+                var backupDir = GetBackupDirectoryPath();
+                Directory.CreateDirectory(backupDir);
+
+                var timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                var fileName = Path.GetFileNameWithoutExtension(translationFile);
+                var extension = Path.GetExtension(translationFile);
+                var backupPath = Path.Combine(backupDir, $"{fileName}_{timestamp}{extension}");
+
+                File.Copy(translationFile, backupPath);
+                AppendOutput($"[备份] {triggerName}前已备份翻译文件: {backupPath}");
+            }
+            catch (Exception ex)
+            {
+                AppendOutput($"[备份] 创建备份失败: {ex.Message}");
+            }
+        }
+
         private void ShowUserDialog()
         {
             // 重新加载配置以确保使用最新的本地数据来自动填充文本框
@@ -368,6 +413,7 @@ namespace 翻译工具
                 dlg.Close();
 
                 ClearOutput();
+                BackupUserTranslationFile("初始化");
                 AppendOutput("════════════════════════════════════════");
                 AppendOutput("正在初始化翻译任务列表...");
                 AppendOutput("════════════════════════════════════════");

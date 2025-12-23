@@ -1,0 +1,48 @@
+module Base
+{
+    model ATA_Jeep_palatka_base
+    {
+        mesh = vehicles/ATA_Jeep_base|palatka_base,
+        texture = Vehicles/ATA_Jeep_items,
+
+        scale = 0.03,
+    }
+    
+    model ATA_Jeep_palatka_closed
+    {
+        mesh = vehicles/ATA_Jeep_base|palatka_closed,
+        texture = Vehicles/ATA_Jeep_palatka,
+
+        scale = 0.03,
+    }
+    
+    model ATA_Jeep_palatka_open
+    {
+        mesh = vehicles/ATA_Jeep_base|palatka_open,
+        texture = Vehicles/ATA_Jeep_openpalatka,
+
+        scale = 0.03,
+    }
+    
+    template vehicle ATA_Jeep_Template_RoofTent
+    {
+        template = ATA2RoofTent/part/ATA2RoofTent,
+        template! = ATA2RoofMiddleTentSetting,
+        part ATA2RoofTent
+        {
+            itemType = Autotsar.ATAJeepRoofTentItem,
+            model Default
+            {
+                file = ATA_Jeep_palatka_base,
+            }
+            model Open
+            {
+                file = ATA_Jeep_palatka_open,
+            }
+            model Close
+            {
+                file = ATA_Jeep_palatka_closed,
+            }
+        }
+    }
+}

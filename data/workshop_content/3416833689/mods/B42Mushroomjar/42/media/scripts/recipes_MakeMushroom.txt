@@ -1,21 +1,24 @@
-
-module Base
+module Trex 
 {
+    imports
+	{
+		Base
+	}
 
 	craftRecipe MakeJarMushroomGeneric_Trex
 	{
         timedAction = MixingBowl,
-		Time = 100,
-		OnCreate = Recipe.OnCreate.CannedFood,
-		Tags = InHandCraft;Cooking,
+        time = 100,
+        OnCreate = RecipeCodeOnCreate.makeJar,
+        Tags = InHandCraft;Cooking,
         category = Cooking,
-		xpAward = Cooking:10,
+        xpAward = Cooking:10,
 		inputs
 		{
-			item 1 tags[DullKnife;SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight],
-			item 1 [Base.EmptyJar] mode:destroy flags[ItemCount],
+            item 1 tags[base:dullknife;base:sharpknife;base:meatcleaver] mode:keep flags[MayDegradeLight],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
 			item 1 [Base.JarLid],
-			item 4 [Base.MushroomGeneric1;Base.MushroomGeneric2;Base.MushroomGeneric3;Base.MushroomGeneric4;Base.MushroomGeneric5;Base.MushroomGeneric6;Base.MushroomGeneric7] mappers[MushroomType] flags[InheritFoodAge;ItemCount] mode:destroy,
+			item 4 [Base.MushroomGeneric1;Base.MushroomGeneric2;Base.MushroomGeneric3;Base.MushroomGeneric4;Base.MushroomGeneric5;Base.MushroomGeneric6;Base.MushroomGeneric7] mappers[MushroomType] flags[InheritFood;ItemCount] mode:destroy,
 			item 1.0 [Base.Salt;Base.SeasoningSalt],		
 			item 1 [*],
 			-fluid 0.8 [Water],
@@ -26,26 +29,26 @@ module Base
 		}
 		itemMapper MushroomType
 		{
-			Base.CannedMushroomGeneric_Trex = Base.MushroomGeneric1,
-			Base.CannedMushroomGeneric_Trex = Base.MushroomGeneric2,
-			Base.CannedMushroomGeneric_Trex = Base.MushroomGeneric3,
-			Base.CannedMushroomGeneric_Trex = Base.MushroomGeneric4,
-			Base.CannedMushroomGeneric_Trex = Base.MushroomGeneric5,
-			Base.CannedMushroomGeneric_Trex = Base.MushroomGeneric6,
-			Base.CannedMushroomGeneric_Trex = Base.MushroomGeneric7,		
+			Trex.CannedMushroomGeneric_Trex = Base.MushroomGeneric1,
+			Trex.CannedMushroomGeneric_Trex = Base.MushroomGeneric2,
+			Trex.CannedMushroomGeneric_Trex = Base.MushroomGeneric3,
+			Trex.CannedMushroomGeneric_Trex = Base.MushroomGeneric4,
+			Trex.CannedMushroomGeneric_Trex = Base.MushroomGeneric5,
+			Trex.CannedMushroomGeneric_Trex = Base.MushroomGeneric6,
+			Trex.CannedMushroomGeneric_Trex = Base.MushroomGeneric7,		
 		}
 	}
 
 	craftRecipe OpenJarOfmushroom_Trex
 	{
         timedAction = Making,
-		Time = 30,
-		OnCreate = Recipe.OnCreate.OpenCannedFood,
-		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        time = 30,
+        OnCreate = RecipeCodeOnCreate.applyLidCondition,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
         category = Cooking,
 		inputs
 		{
-			item 1 [Base.CannedMushroomGeneric_Trex;Base.CannedMushroomGeneric2_Trex] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+			item 1 [Trex.CannedMushroomGeneric_Trex;Trex.CannedMushroomGeneric2_Trex] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
 		}
 		outputs
 		{
@@ -53,8 +56,8 @@ module Base
 		}
 		itemMapper foodType
 		{
-			Base.CannedMushroomGeneric_Open_Trex  = Base.CannedMushroomGeneric_Trex,
-			Base.CannedMushroomGeneric2_Open_Trex = Base.CannedMushroomGeneric2_Trex,
+			Trex.CannedMushroomGeneric_Open_Trex  = Trex.CannedMushroomGeneric_Trex,
+			Trex.CannedMushroomGeneric2_Open_Trex = Trex.CannedMushroomGeneric2_Trex,
 		}
 	}
 
@@ -71,7 +74,7 @@ module Base
         }
         outputs
         {
-            item 1 Base.MushroomGenericDried_Trex,
+            item 1 Trex.MushroomGenericDried_Trex,
         }
      }
 	 
@@ -99,8 +102,8 @@ module Base
 		}
 		itemMapper potType
 		{
-			Base.WaterPotmushroomjarpreparation_Trex = Base.Pot,
-			Base.WaterPotForgedmushroomjarpreparation_Trex = Base.PotForged,
+			Trex.WaterPotmushroomjarpreparation_Trex = Base.Pot,
+			Trex.WaterPotForgedmushroomjarpreparation_Trex = Base.PotForged,
 		}
 	}	 
 	 
@@ -108,25 +111,26 @@ module Base
 	craftRecipe Makemushroomjar_Trex
 	{
         timedAction = MixingBowl,
-		Time = 80,
-		ToolTip = Tooltip_Recipe_MustCookedGet,
-		Tags = AnySurfaceCraft;Cooking,
-		category = Cooking,
+        time = 100,
+        OnCreate = RecipeCodeOnCreate.makeJar,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:10,
 		inputs
 		{
-			item 3 [Base.EmptyJar] mode:destroy flags[ItemCount],
-			item 3 [Base.JarLid],
-			item 1 [Base.WaterPotmushroomjarpreparation_Trex;Base.WaterPotForgedmushroomjarpreparation_Trex] mappers[potType] flags[IsCookedFoodItem;InheritFoodAge;ItemCount],
+            item 3 tags[base:jar] mode:destroy flags[ItemCount],
+            item 3 [Base.JarLid],
+			item 1 [Trex.WaterPotmushroomjarpreparation_Trex;Trex.WaterPotForgedmushroomjarpreparation_Trex] mappers[potType] flags[IsCookedFoodItem;InheritFoodAge;ItemCount],
 		}
 		outputs
 		{
-			item 3 Base.CannedMushroomGeneric2_Trex,
+			item 3 Trex.CannedMushroomGeneric2_Trex,
 			item 1 mapper:potType,		
 		}
 		itemMapper potType
 		{
-			Base.Pot = Base.WaterPotmushroomjarpreparation_Trex,
-			Base.PotForged = Base.WaterPotForgedmushroomjarpreparation_Trex,
+			Base.Pot = Trex.WaterPotmushroomjarpreparation_Trex,
+			Base.PotForged = Trex.WaterPotForgedmushroomjarpreparation_Trex,
 		}		
 	}	 
 	 

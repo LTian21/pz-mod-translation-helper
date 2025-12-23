@@ -1,0 +1,118 @@
+module Base
+{
+  imports
+  {
+    Base
+  }
+
+	  craftRecipe Make Jar Of Corned Meat
+  {
+    timedAction = MixingBowl,
+		Time = 100,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+    category = Preservation,
+	xpAward = Cooking:10,
+    inputs
+    {
+		item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy,
+		item 1 [Base.JarLid] mode:destroy,
+		item 5 [Base.CuredBeef;Base.CuredBird;Base.CuredChickenFillet;Base.CuredFish;Base.CuredFrog;Base.CuredMutton;Base.CuredPork;Base.CuredPorkChop;Base.CuredRabbit;Base.CuredRodent;Base.CuredTurkey;Base.CuredVenison] flags[ItemCount] mappers[meatType] mode:destroy,
+		item 2 [Base.Lard;Base.Schmaltz;Base.Tallow] flags[ItemCount] mode:destroy,
+		item 1.0 tags[base:salt],
+    }
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+    itemMapper meatType
+		{
+	Base.CornedBeef = Base.CuredBeef,
+	Base.CornedBird = Base.CuredBird,
+	Base.CornedChicken = Base.CuredChickenFillet,
+	Base.CornedFish = Base.CuredFish,
+	Base.CornedFrog = Base.CuredFrog,	
+	Base.CornedMutton = Base.CuredMutton,
+	Base.CornedPork = Base.CuredPork,
+	Base.CornedRabbit = Base.CuredRabbit,
+	Base.CornedRodent = Base.CuredRodent,
+	Base.CornedTurkey = Base.CuredTurkey,
+	Base.CornedVenison = Base.CuredVenison,
+		}
+    
+  }
+  
+    craftRecipe Open Jar Of Corned Meat
+	{
+    timedAction = OpenTinCan,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+    category = Preservation,
+	xpAward = Cooking:10,
+		inputs
+		{
+			item 1 [Base.CornedBeef;Base.CornedBird;Base.CornedChicken;Base.CornedFish;Base.CornedFrog;Base.CornedMutton;Base.CornedPork;Base.CornedRabbit;Base.CornedRodent;Base.CornedTurkey;Base.CornedVenison] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+		}
+		outputs
+		{
+			item 1 mapper:foodType,
+		}
+		itemMapper foodType
+		{
+	Base.CornedBeef_Open = Base.CornedBeef,
+	Base.CornedBird_Open = Base.CornedBird,
+	Base.CornedChicken_Open = Base.CornedChicken,
+	Base.CornedFish_Open = Base.CornedFish,
+	Base.CornedFrog_Open = Base.CornedFrog,	
+	Base.CornedMutton_Open = Base.CornedMutton,
+	Base.CornedPork_Open = Base.CornedPork,
+	Base.CornedRabbit_Open = Base.CornedRabbit,
+	Base.CornedRodent_Open = Base.CornedRodent,
+	Base.CornedTurkey_Open = Base.CornedTurkey,
+	Base.CornedVenison_Open = Base.CornedVenison,
+			
+		}
+	}
+  
+	  craftRecipe Make Jar Of Minced Garlic
+  {
+    timedAction = MixingBowl,
+		Time = 100,
+		OnCreate = Recipe.OnCreate.CannedFood,
+		Tags = InHandCraft;Cooking,
+    category = Preservation,
+	xpAward = Cooking:10,
+    inputs
+    {
+		item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy,
+		item 1 [Base.JarLid] mode:destroy,
+		item 25 [Base.MincedGarlicMash] flags[ItemCount] mode:destroy,
+		item 1.0 tags[base:salt],
+		item 3.0 tags[base:oil],
+    }
+		outputs
+		{
+			item 1 Base.MincedGarlic,
+		}
+    
+  }
+  
+    craftRecipe Open Jar Of Minced Garlic
+	{
+    timedAction = OpenTinCan,
+		Time = 30,
+		OnCreate = Recipe.OnCreate.OpenCannedFood,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+    category = Preservation,
+	xpAward = Cooking:10,
+		inputs
+		{
+			item 1 [Base.MincedGarlic] flags[AllowRottenItem;InheritFoodAge;ItemCount] mappers[foodType],
+		}
+		outputs
+		{
+			item 1 Base.MincedGarlic_Open,
+		}
+	}
+}
