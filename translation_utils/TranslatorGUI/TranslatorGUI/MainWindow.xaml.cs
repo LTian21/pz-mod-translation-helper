@@ -18,10 +18,10 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Threading;
 using TranslationSystem; // 引入语言枚举与工具
-using 翻译工具.Models; // 引入拆分后的模型
-using 翻译工具.Views; // 引入拆分后的视图窗口
+using TranslatorGUI.Models; // 引入拆分后的模型
+using TranslatorGUI.Views; // 引入拆分后的视图窗口
 
-namespace 翻译工具
+namespace TranslatorGUI
 {
     public partial class MainWindow : System.Windows.Window
     {
@@ -469,6 +469,47 @@ namespace 翻译工具
                 {
                     _modItems.Add(new ModItemView(t, _config.UserName ?? string.Empty));
                 }
+
+                // 读取并应用 mod_id_name_map.json（名称/优先级）
+                try
+                {
+                    var basePath = string.IsNullOrWhiteSpace(txtPath.Text) ? _config.LocalPath : txtPath.Text.Trim();
+                    if (string.IsNullOrWhiteSpace(basePath)) basePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+
+                    string? TryFindRepoRoot(string start)
+                    {
+                        try
+                        {
+                            var dir = new DirectoryInfo(start);
+                            if (!dir.Exists) return null;
+
+                            for (var cur = dir; cur != null; cur = cur.Parent)
+                            {
+                                var candidate = Path.Combine(cur.FullName, "translation_utils", "mod_id_name_map.json");
+                                if (File.Exists(candidate)) return cur.FullName;
+                            }
+
+                            return null;
+                        }
+                        catch
+                        {
+                            return null;
+                        }
+                    }
+
+                    var repoRoot = TryFindRepoRoot(basePath)
+                                   ?? TryFindRepoRoot(Path.Combine(basePath, "pz-mod-translation-helper"));
+
+                    if (!string.IsNullOrWhiteSpace(repoRoot))
+                    {
+                        ApplyModInfoToList(repoRoot);
+                    }
+                    else
+                    {
+                        AppendOutput("未找到 mod_id_name_map.json（translation_utils/mod_id_name_map.json），优先级将使用默认值。");
+                    }
+                }
+                catch { }
 
                 // 默认按 ModId 升序排序
                 ApplyDefaultSort();
@@ -1285,6 +1326,63 @@ namespace 翻译工具
                 return string.IsNullOrEmpty(msg) ? "远程消息" : $"远程: {msg}";
             }
             return l;
+        }
+
+        private static Dictionary<string, ModIdNameMapEntry> LoadModIdNameMapEx(string repoDir)
+        {
+            try
+            {
+                var path = Path.Combine(repoDir, "translation_utils", "mod_id_name_map.json");
+                if (!File.Exists(path)) return new Dictionary<string, ModIdNameMapEntry>();
+
+                var json = File.ReadAllText(path, Encoding.UTF8);
+                return JsonSerializer.Deserialize<Dictionary<string, ModIdNameMapEntry>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
+                       ?? new Dictionary<string, ModIdNameMapEntry>();
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    var details = new StringBuilder();
+                    details.AppendLine("mod_id_name_map.json 反序列化失败");
+                    details.AppendLine(ex.ToString());
+
+                    if (ex is JsonException jex)
+                    {
+                        details.AppendLine($"JsonException.Path: {jex.Path}");
+                        details.AppendLine($"JsonException.LineNumber: {jex.LineNumber}");
+                        details.AppendLine($"JsonException.BytePositionInLine: {jex.BytePositionInLine}");
+                    }
+
+                    // 输出到 stderr，确保即使在 GUI 模式下也能进入日志（若有重定向/捕获）
+                    try { Console.Error.WriteLine(details.ToString()); } catch { }
+                }
+                catch
+                {
+                    // ignored
+                }
+                return new Dictionary<string, ModIdNameMapEntry>();
+            }
+        }
+
+        private void ApplyModInfoToList(string repoDir)
+        {
+            var map = LoadModIdNameMapEx(repoDir);
+            foreach (var item in _modItems)
+            {
+                if (!map.TryGetValue(item.ModId, out var entry) || entry == null)
+                {
+                    item.UpdatePriority(5);
+                    continue;
+                }
+
+                if (!string.IsNullOrWhiteSpace(entry.Name))
+                {
+                    item.UpdateModTitle(entry.Name);
+                }
+
+                item.UpdatePriority(entry.TotalPriority ?? 5);
+            }
         }
     }
 }

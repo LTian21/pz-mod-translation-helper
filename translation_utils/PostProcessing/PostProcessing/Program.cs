@@ -14,7 +14,7 @@ namespace PostProcessing
         {
             public string ModId { get; set; } = "";
             public string OriginalText { get; set; } = "";
-            public string SChiinese { get; set; } = "";
+            public string SChinese { get; set; } = "";
         }
         //存储翻译条目
         static Dictionary<string, Dictionary<string, TranslationEntry>> ModTranslations = new Dictionary<string, Dictionary<string, TranslationEntry>>();
@@ -104,7 +104,7 @@ namespace PostProcessing
                             conflictKeys[vanillaEntry.Key].Add(new TranslationEntry(){ 
                                 ModId = VANILLA_MOD_ID,
                                 OriginalText = vanillaEntry.Value.EN,
-                                SChiinese = vanillaEntry.Value.CN
+                                SChinese = vanillaEntry.Value.CN
                             });
                             vanillaKeys.Add(vanillaEntry.Key);
                         }
@@ -158,7 +158,7 @@ namespace PostProcessing
                         {
                             ModId = currentModId,
                             OriginalText = originalText,
-                            SChiinese = "",
+                            SChinese = "",
                         };
 
                         continue;
@@ -179,7 +179,7 @@ namespace PostProcessing
 
                         //存储到对应的条目中
                         var entry = ModTranslations[currentModId][key];
-                        entry.SChiinese = originalText;
+                        entry.SChinese = originalText;
                         if(!conflictKeys.ContainsKey(key))
                         {
                             conflictKeys[key] = new List<TranslationEntry>();
@@ -223,7 +223,7 @@ namespace PostProcessing
                             bool allSame = true;
                             for (int i = 0; i < kvp.Value.Count - 1; i++)
                             {
-                                if (!kvp.Value[i].SChiinese.Equals(kvp.Value[i + 1].SChiinese))
+                                if (!kvp.Value[i].SChinese.Equals(kvp.Value[i + 1].SChinese))
                                 {
                                     allSame = false;
                                     break;
@@ -237,7 +237,7 @@ namespace PostProcessing
                                 foreach (var entry in kvp.Value)
                                 {
                                     writer.WriteLine($"\t{entry.ModId}::EN : \"{entry.OriginalText}\"");
-                                    writer.WriteLine($"\t{entry.ModId}::CN : \"{entry.SChiinese}\"");
+                                    writer.WriteLine($"\t{entry.ModId}::CN : \"{entry.SChinese}\"");
                                 }
                                 writer.WriteLine();
                             }
@@ -272,7 +272,7 @@ namespace PostProcessing
                                 conflictModIds.Add(entry.ModId);
                                 conflictKeyInfo += entry.ModId + "; ";
                                 writer.WriteLine($"\t{entry.ModId}::EN : \"{entry.OriginalText}\"");
-                                writer.WriteLine($"\t{entry.ModId}::CN : \"{entry.SChiinese}\"");
+                                writer.WriteLine($"\t{entry.ModId}::CN : \"{entry.SChinese}\"");
                             }
                             Console.WriteLine($"::warning:: Conflict key found: {kvp.Key}, mod ID: {conflictKeyInfo}");
                             writer.WriteLine();
@@ -466,9 +466,9 @@ namespace PostProcessing
                                     currentModId = modId;
                                 }
 
-                                if (!entry.SChiinese.Equals(""))
+                                if (!entry.SChinese.Equals(""))
                                 {
-                                    writer.WriteLine($"{key} = \"{entry.SChiinese}\",");
+                                    writer.WriteLine($"{key} = \"{entry.SChinese}\",");
                                 }
                             }
                         }

@@ -2,7 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace 翻译工具.Views
+namespace TranslatorGUI.Views
 {
     // CLI 执行期间显示的进度窗口
     public class ProgressWindow : Window

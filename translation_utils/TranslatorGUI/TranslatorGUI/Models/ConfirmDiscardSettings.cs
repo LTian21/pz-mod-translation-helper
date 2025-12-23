@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text.Json;
 
-namespace 翻译工具.Models
+namespace TranslatorGUI.Models
 {
     // 存储“下次不再提示”的选择，与当前翻译用户名绑定
     public class ConfirmDiscardSettings

@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace 翻译工具.Views
+namespace TranslatorGUI.Views
 {
     // 简单输入对话框（用于提交说明）
     public class InputBox : Window

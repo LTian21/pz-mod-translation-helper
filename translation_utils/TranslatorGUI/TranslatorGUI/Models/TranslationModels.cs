@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Threading;
 
-namespace 翻译工具.Models
+namespace TranslatorGUI.Models
 {
     // 翻译条目状态
     public enum TranslationItemStatus
@@ -92,6 +92,8 @@ namespace 翻译工具.Models
             _currentUser = currentUser ?? string.Empty;
             _isCheckBoxEnabled = true; // 默认允许复选
 
+            PriorityValue = 5;
+
             UpdateExpiredStatus();
             _allInstances.Add(this);
         }
@@ -127,7 +129,17 @@ namespace 翻译工具.Models
         private bool _isCheckBoxEnabled;
 
         public string ModId { get; }
-        public string ModTitle { get; }
+        public string ModTitle
+        {
+            get => _modTitle;
+            private set
+            {
+                if (_modTitle == value) return;
+                _modTitle = value;
+                OnPropertyChanged(nameof(ModTitle));
+            }
+        }
+        private string _modTitle = string.Empty;
         public string Language { get; }
         public int TotalEntries { get; }
         public int UntranslatedEntries { get; }
@@ -141,6 +153,30 @@ namespace 翻译工具.Models
         public int ApprovalCount { get; }
         public string PRReviewState { get; }
         public DateTime RefreshTime { get; }
+
+        public double PriorityValue
+        {
+            get => _priorityValue;
+            set
+            {
+                if (Math.Abs(_priorityValue - value) < 0.0001) return;
+                _priorityValue = value;
+                OnPropertyChanged(nameof(PriorityValue));
+                OnPropertyChanged(nameof(PriorityDisplay));
+            }
+        }
+        private double _priorityValue = 5;
+
+        public string PriorityDisplay => PriorityValue switch
+        {
+            >= 7.5 => "极高",
+            >= 6.5 => "高",
+            >= 5.5 => "中高",
+            >= 4.5 => "中",
+            >= 3.5 => "中低",
+            >= 2.5 => "低",
+            _ => "极低"
+        };
 
         // 计算属性
         public bool IsExpired => _isExpired;
@@ -175,6 +211,19 @@ namespace 翻译工具.Models
                 if (ch != ' ' && ch != '_' && ch != '-') sb.Append(ch);
             }
             return sb.ToString().ToLowerInvariant();
+        }
+
+        public void UpdateModTitle(string title)
+        {
+            if (!string.IsNullOrWhiteSpace(title))
+            {
+                ModTitle = title;
+            }
+        }
+
+        public void UpdatePriority(double priority)
+        {
+            PriorityValue = priority;
         }
     }
 }
