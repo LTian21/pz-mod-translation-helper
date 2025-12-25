@@ -1,14 +1,18 @@
-module SapphCooking
+module Base
 {
+    /*****
 	imports
 	{
 		Base,
 	}	
+    *****/
+
+
 	/**********::----------:: ::-----------:: **************/
 	/**********::-----:: General Recipes ::-----:: **************/
 	/**********::----------:: ::-----------:: **************/
 
-	craftRecipe Open Fortune Cookie
+	craftRecipe SapphCooking_Open Fortune Cookie
     {
         timedAction = UnPackBox_Small,
         time            = 20,
@@ -26,7 +30,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Ice Cubes
+    craftRecipe SapphCooking_Make Ice Cubes
     {
         timedAction = MakeIcecubes,
         time            = 20,
@@ -47,36 +51,34 @@ module SapphCooking
     }
 
 
-    craftRecipe Light Candle
+    craftRecipe SapphCooking_Light Candle
     {
-        timedAction = UnPackBox_Small,
-        time            = 20,
+        timedAction = Making,
+        time            = 5,
         category = SapphCooking,
-        OnCreate = LightHalfCandle_OnCreate,
 		CanWalk = true,
-        Tags = InHandCraft;Cooking,
+        Tags = InHandCraft;CanBeDoneInDark,
         inputs
         {
-            item 1 [SapphCooking.HalfCandle] mode:destroy flags[InheritUses;ItemCount] mode:destroy,
+            item 1 [SapphCooking.HalfCandle] mode:destroy flags[InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite],
             item 1 tags[base:startfire],
         }
        outputs
         {
-           item 1 SapphCooking.HalfCandleLit,
+           item 1 SapphCooking.HalfCandleLit flags[EquipSecondary;SetActivated],
         }
     }
 
-    craftRecipe Extinguish Candle
+    craftRecipe SapphCooking_Extinguish Candle
     {
-        timedAction = UnPackBox_Small,
-        time            = 20,
+        timedAction = Making,
+        time            = 5,
         category = SapphCooking,
-        OnCreate = ExtinguishHalfCandle_OnCreate,
 		CanWalk = true,
-        Tags = InHandCraft;Cooking,
+        Tags = InHandCraft;CanBeDoneInDark,
         inputs
         {
-            item 1 [SapphCooking.HalfCandleLit] mode:destroy flags[InheritUses;ItemCount],
+            item 1 [SapphCooking.HalfCandleLit] mode:destroy flags[InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite],
         }
        outputs
         {
@@ -84,7 +86,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Lettuce Wraps
+    craftRecipe SapphCooking_Make Lettuce Wraps
     {
         timedAction = UnPackBox_Small,
         time            = 20,
@@ -102,7 +104,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Bread Crumbs
+    craftRecipe SapphCooking_Make Bread Crumbs
     {
         timedAction = SliceFood_Surface,
         time            = 70,
@@ -121,7 +123,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Flour Dough Wrapper
+    craftRecipe SapphCooking_Make Flour Dough Wrapper
     {
         timedAction = SliceFood_Surface,
         time            = 70,
@@ -141,7 +143,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Slice Banana Bread
+    craftRecipe SapphCooking_Slice Banana Bread
     {
         timedAction = SliceFood_Surface,
         time            = 70,
@@ -160,7 +162,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Open Instant Noodles
+    craftRecipe SapphCooking_Open Instant Noodles
     {
         timedAction = UnPackBox_Small,
         time            = 20,
@@ -183,7 +185,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Open Brown Egg Carton
+    craftRecipe SapphCooking_Open Brown Egg Carton
     {
         timedAction = UnPackBox_Small,
         time            = 20,
@@ -200,7 +202,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Cutinto4Pieces
+    craftRecipe SapphCooking_Cutinto4Pieces
     {
         timedAction = UnPackBox_Small,
         time            = 20,
@@ -232,7 +234,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Cutinto8Pieces
+    craftRecipe SapphCooking_Cutinto8Pieces
     {
         timedAction = UnPackBox_Small,
         time            = 20,
@@ -264,7 +266,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Cutinto2Pieces
+    craftRecipe SapphCooking_Cutinto2Pieces
     {
         timedAction = DiceFood_Surface,
         time            = 80,
@@ -288,7 +290,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Break Gingerbread House
+    craftRecipe SapphCooking_Break Gingerbread House
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -306,37 +308,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Slice Cake
-    {
-        timedAction = UnPackBox_Small,
-        time            = 20,
-        OnCreate = SapphDivideIntoFive,
-        category = SapphCooking,
-		CanWalk = true,
-        Tags = InHandCraft;Cooking,
-        inputs
-        {
-            item 1 [SapphCooking.CakeRaw_Birthday;SapphCooking.CakePrep_BlackForestCake;SapphCooking.CakePrep_Carrot;SapphCooking.CakePrep_Chocolate;SapphCooking.CakePrep_RedVelvet;SapphCooking.CakePrep_StrawberryCake;SapphCooking.Cake_NianGao] mode:destroy mappers[resultType] flags[IsCookedFoodItem;ItemCount],
-            item 1 tags[base:sharpknife;base:metalsaw;base:smallsaw]  mode:keep,
-        }
-       outputs
-        {
-           item 5 mapper:resultType,
-           item 1 Base.BakingPan,
-        }
-        itemMapper resultType
-        {
-            SapphCooking.CakeSlice_BlackForest = SapphCooking.CakePrep_BlackForestCake,
-            SapphCooking.CakeSlice_Carrot = SapphCooking.CakePrep_Carrot,
-            SapphCooking.CakeSlice_Chocolate = SapphCooking.CakePrep_Chocolate,
-            SapphCooking.CakeSlice_RedVelvet = SapphCooking.CakePrep_RedVelvet,
-            SapphCooking.CakeSlice_Strawberry = SapphCooking.CakePrep_StrawberryCake,
-            SapphCooking.CakeSlice_NianGao = SapphCooking.Cake_NianGao,
-            SapphCooking.CakeSlice_Birthday = SapphCooking.CakeRaw_Birthday,
-        }
-    }
-
-    craftRecipe Slice Cheese Wheel
+    craftRecipe SapphCooking_Slice Cheese Wheel
     {
         timedAction = UnPackBox_Small,
         time            = 20,
@@ -364,7 +336,7 @@ module SapphCooking
 	/**********::--------------------:: Drainables ::--------------------:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
 
-    craftRecipe Take Seaweed from Bag
+    craftRecipe SapphCooking_Take Seaweed from Bag
     {
         timedAction = UnPackBox_Small,
         time            = 10,
@@ -380,7 +352,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Take Toothpick from Box
+    craftRecipe SapphCooking_Take Toothpick from Box
     {
         timedAction = UnPackBox_Small,
         time            = 10,
@@ -396,7 +368,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Take Tea Bag from Box
+    craftRecipe SapphCooking_Take Tea Bag from Box
     {
         timedAction = UnPackBox_Small,
         time            = 10,
@@ -412,7 +384,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Box of Tea Bags
+    craftRecipe SapphCooking_Make Box of Tea Bags
     {
         timedAction = PackingBox_Small,
         time            = 30,
@@ -428,7 +400,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Take Wooden Skewer from Bag
+    craftRecipe SapphCooking_Take Wooden Skewer from Bag
     {
         timedAction = UnPackBox_Small,
         time            = 10,
@@ -447,7 +419,7 @@ module SapphCooking
 
 
 /********************************************/
-    craftRecipe Take Wonton Wrappers from Bag
+    craftRecipe SapphCooking_Take Wonton Wrappers from Bag
     {
         timedAction = FryOilSaucepan,
         time            = 10,
@@ -464,7 +436,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Take Chocolate from Box
+    craftRecipe SapphCooking_Take Chocolate from Box
     {
         timedAction = UnPackBox_Small,
         time            = 10,
@@ -488,7 +460,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Box of Bonbons
+    craftRecipe SapphCooking_Make Box of Bonbons
     {
         timedAction = PackingBox_Small,
         time            = 50,
@@ -511,7 +483,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Take Marshmallow from Bag
+    craftRecipe SapphCooking_Take Marshmallow from Bag
     {
         timedAction = UnPackBox_Small,
         time            = 10,
@@ -531,7 +503,7 @@ module SapphCooking
 
     
 
-    craftRecipe Take Marshmallow from Bowl
+    craftRecipe SapphCooking_Take Marshmallow from Bowl
     {
         timedAction = UnPackBox_Small,
         time            = 10,
@@ -555,7 +527,7 @@ module SapphCooking
 	/**********::--------------------:: Coffee Making ::--------------------:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
     /****Paper**/
-    craftRecipe Take Coffee Filter from Pack
+    craftRecipe SapphCooking_Take Coffee Filter from Pack
     {
         timedAction = UnPackBox_Small,
         time            = 20,
@@ -573,7 +545,7 @@ module SapphCooking
     }
 
     /***BagBeansRemove**/
-    craftRecipe Take Coffee Beans from Bag
+    craftRecipe SapphCooking_Take Coffee Beans from Bag
     {
         timedAction = UnPackBox_Small,
         time            = 20,
@@ -591,7 +563,7 @@ module SapphCooking
     }
 
     /**anim**/
-    craftRecipe Grind Coffee Beans
+    craftRecipe SapphCooking_Grind Coffee Beans
     {
         timedAction = MixingMortarPestle,
         time            = 80,
@@ -609,7 +581,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Grind Coffee Beans2
+    craftRecipe SapphCooking_Grind Coffee Beans2
     {
         timedAction = MixingMortarPestle,
         time            = 150,
@@ -627,7 +599,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Cloth Filter
+    craftRecipe SapphCooking_Make Cloth Filter
     {
         timedAction = SapphScrubClothWithSoap,
         time            = 20,
@@ -644,7 +616,7 @@ module SapphCooking
     }
 
 
-    craftRecipe Clean Cloth Filter
+    craftRecipe SapphCooking_Clean Cloth Filter
     {
         timedAction = SapphScrubClothWithSoap,
         time            = 20,
@@ -662,7 +634,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Takeout Boxes
+    craftRecipe SapphCooking_Make Takeout Boxes
     {
         timedAction = Sapph_OpenBoxHand,
         time            = 20,
@@ -678,7 +650,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Dismantle Blender
+    craftRecipe SapphCooking_Dismantle Blender
     {
         timedAction = Dismantle,
         time            = 20,
@@ -699,7 +671,7 @@ module SapphCooking
 
     /**********************Clean stuff - probably temporary***************************/
 
-    craftRecipe CleanBowl
+    craftRecipe SapphCooking_CleanBowl
     {
         timedAction = EmptyPan,
         time            = 10,
@@ -719,7 +691,7 @@ module SapphCooking
 	/**********::--------------------:: Skewers Recipes! ::--------------------:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
 
-    craftRecipe Make Chopsticks
+    craftRecipe SapphCooking_Make Chopsticks
     {
         timedAction = FryOilSaucepan,
         time    = 10,
@@ -736,7 +708,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Wooden Skewers
+    craftRecipe SapphCooking_Make Wooden Skewers
     {
         timedAction = CraftWeapon1H,
         time    = 10,
@@ -753,7 +725,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Use as Chopsticks
+    craftRecipe SapphCooking_Use as Chopsticks
     {
         timedAction = Making,
         time    = 10,
@@ -769,7 +741,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Use as Skewers
+    craftRecipe SapphCooking_Use as Skewers
     {
         timedAction = Making,
         time    = 10,
@@ -785,7 +757,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Convert Chopsticks
+    craftRecipe SapphCooking_Convert Chopsticks
     {
         timedAction = FryOilSaucepan,
         time    = 10,
@@ -806,7 +778,7 @@ module SapphCooking
         }
     }
     
-    craftRecipe PrepareBloodSausage
+    craftRecipe SapphCooking_PrepareBloodSausage
     {
         timedAction = SliceFood_Surface,
         time            = 50,
@@ -829,7 +801,7 @@ module SapphCooking
 	/**********::--------------------:: Dough Recipes! ::--------------------:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
     
-    craftRecipe Make Flatbread Dough
+    craftRecipe SapphCooking_Make Flatbread Dough
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -851,7 +823,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Banana Bread Dough
+    craftRecipe SapphCooking_Make Banana Bread Dough
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -873,7 +845,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Wild Garlic Bread
+    craftRecipe SapphCooking_Make Wild Garlic Bread
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -893,7 +865,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Roll out Croissaint Dough
+    craftRecipe SapphCooking_Roll out Croissaint Dough
     {
         timedAction = UnPackBox_Small,
         time            = 80,
@@ -913,7 +885,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Cut Bagels
+    craftRecipe SapphCooking_Cut Bagels
     {
         timedAction = UnPackBox_Small,
         time            = 80,
@@ -933,7 +905,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Small Dough Pieces
+    craftRecipe SapphCooking_Make Small Dough Pieces
     {
         timedAction = UnPackBox_Small,
         time            = 70,
@@ -951,7 +923,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Press Dough into Tortilla Shape
+    craftRecipe SapphCooking_Press Dough into Tortilla Shape
     {
         timedAction = UnPackBox_Small,
         time            = 70,
@@ -970,7 +942,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Cut Tortilla into Nachos
+    craftRecipe SapphCooking_Cut Tortilla into Nachos
     {
         timedAction = UnPackBox_Small,
         time            = 70,
@@ -996,7 +968,7 @@ module SapphCooking
 	/**********::--------------------:: Jar Recipes! ::--------------------:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
 
-    craftRecipe Make Jar of Eggs
+    craftRecipe SapphCooking_Make Jar of Eggs
 	{
         timedAction = PackingBox_Small,
 		Time = 30,
@@ -1019,7 +991,7 @@ module SapphCooking
 		}
 	}
 
-    craftRecipe Open Jar of Eggs
+    craftRecipe SapphCooking_Open Jar of Eggs
 	{
         timedAction = UnPackBox_Small,
 		Time = 50,
@@ -1036,7 +1008,7 @@ module SapphCooking
 		}
 	}
 
-    craftRecipe Prepare Pickles
+    craftRecipe SapphCooking_Prepare Pickles
 	{
         timedAction = PackingBox_Small,
 		Time = 30,
@@ -1059,7 +1031,7 @@ module SapphCooking
 		}
 	}
 
-    craftRecipe Open Jar
+    craftRecipe SapphCooking_Open Jar
 	{
         timedAction = PackingBox_Small,
 		Time = 30,
@@ -1076,7 +1048,7 @@ module SapphCooking
 		}
 	}
 
-    craftRecipe Make Jar of Kimchi
+    craftRecipe SapphCooking_Make Jar of Kimchi
 	{
         timedAction = PackingBox_Small,
 		Time = 30,

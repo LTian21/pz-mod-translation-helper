@@ -284,7 +284,7 @@ module Base
 		xpAward = Cooking:10,
 		inputs
 		{
-			item 1 [Base.Sourmilk;Base.ForgedSourmilk] mappers[PotSourMilkDiff] flags[Prop2],
+			item 1 [Base.CheeseStart;Base.ForgedCheeseStart;Base.Sourmilk;Base.ForgedSourmilk] mode:destroy mappers[PotSourMilkDiff] flags[IsCookedFoodItem;Prop2],
 			item 1 [Base.CheeseCloth;Base.DishCloth] mode:keep,
 			item 1 tags[base:Spoon] mode:keep flags[MayDegradeVeryLight;Prop1],
 		}
@@ -295,7 +295,9 @@ module Base
 		}
 		itemMapper PotSourMilkDiff
 		{
+			Base.Pot = Base.CheeseStart,
 			Base.Pot = Base.Sourmilk,
+			Base.PotForged = Base.ForgedCheeseStart,
 			Base.PotForged = Base.ForgedSourmilk,
 		}
 	}
@@ -416,7 +418,7 @@ module Base
 		xpAward = Cooking:10,
 		inputs
 		{
-			item 1 [Base.FishOilPot;Base.ForgedFishOilPot] mode:destroy mappers[PotFermDiff],
+			item 1 [Base.FishOilStart;Base.ForgedFishOilStart] mode:destroy mappers[PotFermDiff] flags[IsCookedFoodItem],
 			item 1 tags[base:GlassBottle;base:GlassBottleSmall] mode:destroy flags[IsEmpty],
 		}
 		outputs
@@ -426,8 +428,8 @@ module Base
 		}
 		itemMapper PotFermDiff
 		{
-			Base.Pot = Base.FishOilPot,
-			Base.PotForged = Base.ForgedFishOilPot,
+			Base.Pot = Base.FishOilStart,
+			Base.PotForged = Base.ForgedFishOilStart,
 		}
 	}
 	

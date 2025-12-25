@@ -1,14 +1,82 @@
-module SapphCooking
+module Base
 {
+    /*****
 	imports
 	{
 		Base,
 	}	
+    *****/
+
+	
     /**********::---------------------------:: ::---------------------------:: **************/
 	/**********::--------------------:: Sweets - Prepping ::--------------------:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
-    
-    craftRecipe Make Smore
+
+    craftRecipe SapphCooking_Slice Cake
+    {
+        timedAction = UnPackBox_Small,
+        time            = 20,
+        OnCreate = SapphDivideIntoFive,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.CakeRaw;SapphCooking.CheeseCake_Prep;SapphCooking.CakeRaw_Birthday;SapphCooking.CakePrep_BlackForestCake;SapphCooking.CakePrep_Carrot;SapphCooking.CakePrep_Chocolate;SapphCooking.CakePrep_RedVelvet;SapphCooking.CakePrep_StrawberryCake;SapphCooking.Cake_NianGao] mode:destroy mappers[resultType] flags[IsCookedFoodItem;ItemCount],
+            item 1 tags[base:sharpknife;base:metalsaw;base:smallsaw] mode:keep,
+        }
+       outputs
+        {
+           item 5 mapper:resultType,
+           item 1 Base.BakingPan,
+        }
+        itemMapper resultType
+        {
+            SapphCooking.CakeSlice_Default = Base.CakeRaw,
+            SapphCooking.CakeSlice_BlackForest = SapphCooking.CakePrep_BlackForestCake,
+            SapphCooking.CakeSlice_Carrot = SapphCooking.CakePrep_Carrot,
+            SapphCooking.CakeSlice_Chocolate = SapphCooking.CakePrep_Chocolate,
+            SapphCooking.CakeSlice_RedVelvet = SapphCooking.CakePrep_RedVelvet,
+            SapphCooking.CakeSlice_Strawberry = SapphCooking.CakePrep_StrawberryCake,
+            SapphCooking.CakeSlice_NianGao = SapphCooking.Cake_NianGao,
+            SapphCooking.CakeSlice_Birthday = SapphCooking.CakeRaw_Birthday,
+            Base.CakeCheeseCake = SapphCooking.CheeseCake_Prep,
+        }
+    }
+
+    craftRecipe SapphCooking_SliceCake2
+    {
+        timedAction = UnPackBox_Small,
+        time            = 20,
+        OnCreate = SapphDivideIntoFive,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.CakeRaw;SapphCooking.Cheesecake_NoPan;SapphCooking.CakeRaw_Birthday;SapphCooking.CakePrep_BlackForestCake;SapphCooking.CakePrep_Carrot;SapphCooking.CakePrep_Chocolate;SapphCooking.CakePrep_RedVelvet;SapphCooking.CakePrep_StrawberryCake;SapphCooking.Cake_NianGao] mode:destroy mappers[resultType] flags[IsCookedFoodItem;ItemCount],
+            item 1 tags[base:sharpknife;base:metalsaw;base:smallsaw] mode:keep,
+        }
+       outputs
+        {
+           item 5 mapper:resultType,
+        }
+        itemMapper resultType
+        {
+            SapphCooking.CakeSlice_Default = SapphCooking.Cake_NoPan,
+            SapphCooking.CakeSlice_BlackForest = SapphCooking.Cake_BlackForest_NoPan,
+            SapphCooking.CakeSlice_Carrot = SapphCooking.Cake_Carrot_NoPan,
+            SapphCooking.CakeSlice_Chocolate = SapphCooking.Cake_Chocolate_NoPan,
+            SapphCooking.CakeSlice_RedVelvet = SapphCooking.Cake_RedVelvet_NoPan,
+            SapphCooking.CakeSlice_Strawberry = SapphCooking.Cake_Strawberry_NoPan,
+            SapphCooking.CakeSlice_NianGao = SapphCooking.Cake_NianGao_NoPan,
+            SapphCooking.CakeSlice_Birthday = SapphCooking.Cake_Birthday_NoPan,
+            SapphCooking.Sapph_CakeCheeseCake = SapphCooking.Cheesecake_NoPan,
+        }
+    }
+
+
+    craftRecipe SapphCooking_Make Smore
     {
         timedAction = SliceFood_Surface,
         time            = 40,
@@ -27,7 +95,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Icing
+    craftRecipe SapphCooking_Make Icing
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -50,7 +118,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Fill Piping Bag with Icing
+    craftRecipe SapphCooking_Fill Piping Bag with Icing
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -70,7 +138,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Fill Piping Bag with Icing
+    craftRecipe SapphCooking_Fill Piping Bag with Icing
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -91,7 +159,7 @@ module SapphCooking
     }
 
     
-    craftRecipe Make Candy Apple
+    craftRecipe SapphCooking_Make Candy Apple
     {
         timedAction = Sapph_SkewerAddHand,
         time            = 70,
@@ -111,7 +179,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Small Egg Chocolate
+    craftRecipe SapphCooking_Make Small Egg Chocolate
     {
         timedAction = UnPackBox_Small,
         time            = 70,
@@ -130,7 +198,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Medium Egg Chocolate
+    craftRecipe SapphCooking_Make Medium Egg Chocolate
     {
         timedAction = UnPackBox_Small,
         time            = 70,
@@ -149,7 +217,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Large Egg Chocolate
+    craftRecipe SapphCooking_Make Large Egg Chocolate
     {
         timedAction = UnPackBox_Small,
         time            = 70,
@@ -168,7 +236,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Bonbons
+    craftRecipe SapphCooking_Make Bonbons
     {
         timedAction = UnPackBox_Small,
         time            = 70,
@@ -187,7 +255,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Liqueur Bonbons
+    craftRecipe SapphCooking_Make Liqueur Bonbons
     {
         timedAction = UnPackBox_Small,
         time            = 70,
@@ -208,7 +276,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Heart Shaped Chocolate
+    craftRecipe SapphCooking_Make Heart Shaped Chocolate
     {
         timedAction = UnPackBox_Small,
         time            = 70,
@@ -227,7 +295,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Dip Doughnuts in Chocolate
+    craftRecipe SapphCooking_Dip Doughnuts in Chocolate
     {
         timedAction = UnPackBox_Small,
         time            = 50,
@@ -248,7 +316,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Dip Eclair in Chocolate
+    craftRecipe SapphCooking_Dip Eclair in Chocolate
     {
         timedAction = UnPackBox_Small,
         time            = 50,
@@ -269,7 +337,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Dip Eclair in White Chocolate
+    craftRecipe SapphCooking_Dip Eclair in White Chocolate
     {
         timedAction = UnPackBox_Small,
         time            = 50,
@@ -293,7 +361,7 @@ module SapphCooking
     /**********::---------------------------:: ::---------------------------:: **************/
 	/**********::--------------------:: Dough Making Recipes! ::--------------------:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
-    craftRecipe Make Gingerbread Dough
+    craftRecipe SapphCooking_Make Gingerbread Dough
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -318,7 +386,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Pastry Dough
+    craftRecipe SapphCooking_Make Pastry Dough
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -342,7 +410,7 @@ module SapphCooking
     }
     
 
-    craftRecipe Cut Doughnuts
+    craftRecipe SapphCooking_Cut Doughnuts
     {
         timedAction = UnPackBox_Small,
         time            = 80,
@@ -366,7 +434,7 @@ module SapphCooking
 	/**********::--------------------:: Skewers Recipes! ::--------------------:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
 
-    craftRecipe Make Candy Apple
+    craftRecipe SapphCooking_Make Candy Apple
     {
         timedAction = Sapph_SkewerAddHand,    
         time            = 20,
@@ -388,7 +456,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe MakePopsicle2
+    craftRecipe SapphCooking_MakePopsicle2
     {
         timedAction = Sapph_SkewerAddHand,
         time            = 20,
@@ -408,7 +476,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Put Marshmallow on a Stick
+    craftRecipe SapphCooking_Put Marshmallow on a Stick
     {
         timedAction = Sapph_SkewerAddHand,
         time    = 30,
@@ -427,7 +495,7 @@ module SapphCooking
     }
 
 
-    craftRecipe Make Rock Candy
+    craftRecipe SapphCooking_Make Rock Candy
     {
         timedAction = Sapph_SkewerAddHand,
         time            = 20,
@@ -448,7 +516,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Tanghulu Candy
+    craftRecipe SapphCooking_Make Tanghulu Candy
     {
         timedAction = Sapph_SkewerAddHand,
         time            = 20,
@@ -470,7 +538,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Popsicle
+    craftRecipe SapphCooking_Make Popsicle
     {
         timedAction = Sapph_SkewerAddHand,
         time            = 20,
@@ -489,7 +557,7 @@ module SapphCooking
         }
     }
 
-    craftRecipe Make Cotton Candy
+    craftRecipe SapphCooking_Make Cotton Candy
     {
         timedAction = Sapph_SkewerAddHand,    
         time            = 20,
@@ -513,7 +581,7 @@ module SapphCooking
 	/**********::--------------------:: Misc Recipes! ::--------------------:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
 
-    craftRecipe Make Gingerbread House
+    craftRecipe SapphCooking_Make Gingerbread House
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -533,7 +601,7 @@ module SapphCooking
     }
     
 
-    craftRecipe Take Candy Cigarette from Pack
+    craftRecipe SapphCooking_Take Candy Cigarette from Pack
     {
         timedAction = UnPackBoxSapphCigarette_Small,
         time            = 10,
