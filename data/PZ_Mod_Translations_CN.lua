@@ -2987,7 +2987,7 @@ return {
         ["ItemName_Spongie.Jacket_FlightOPEN"] = "\233\163\158\232\161\140\229\164\185\229\133\139",
         ["ItemName_Spongie.Jacket_FlightVest"] = "\233\163\158\232\161\140\232\131\140\229\191\131",
         ["ItemName_Spongie.Jacket_FlightVestOPEN"] = "\233\163\158\232\161\140\232\131\140\229\191\131",
-        ["ItemName_Spongie.Jacket_PoliceArmor"] = "\232\173\166\231\148\168\231\159\173\230\172\190\232\163\133\231\148\178\229\164\185\229\133\139",
+        ["ItemName_Spongie.Jacket_PoliceArmor"] = "\232\173\166\231\148\168\232\163\133\231\148\178\229\164\185\229\133\139",
         ["ItemName_Spongie.Jacket_SheepWool"] = "\229\134\172\229\173\163\229\164\185\229\133\139",
         ["ItemName_Spongie.Jacket_SheepWoolOPEN"] = "\229\134\172\229\173\163\229\164\185\229\133\139",
         ["ItemName_Spongie.Shorts_SpandexLong"] = "\231\180\167\232\186\171\233\149\191\232\163\164",
