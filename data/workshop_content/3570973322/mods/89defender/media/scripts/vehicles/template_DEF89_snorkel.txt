@@ -8,6 +8,14 @@ module Base
 		scale = 0.1,
 	}
 
+    model 89defenderWolfSnorkel
+	{
+		mesh = vehicles/Vehicles_89defender_Body|wolf_snorkel,
+		texture = Vehicles/Vehicles_89defenderWolf_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
 	template vehicle DEF89Snorkel
 	{
 		part DAMNSnorkel
@@ -17,9 +25,14 @@ module Base
                 file = 89defenderSnorkel,
 			}
 
+            model DEF89Snorkel2
+			{
+                file = 89defenderWolfSnorkel,
+			}
+
 			category = Other,
 			area = TireFrontRight,
-			itemType = Base.89defenderSnorkel,
+			itemType = Base.89defenderSnorkel;Base.89defenderWolfSnorkel,
 			mechanicRequireKey = false,
 
 			table install
@@ -66,6 +79,73 @@ module Base
             {
 				create = DEF89.Create.Snorkel,
 				init = DEF89.Init.Snorkel,
+			}
+		}
+	}
+
+    template vehicle DEF89SnorkelW
+	{
+		part DAMNSnorkel
+        {
+        	model DEF89Snorkel
+			{
+                file = 89defenderSnorkel,
+			}
+
+            model DEF89Snorkel2
+			{
+                file = 89defenderWolfSnorkel,
+			}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.89defenderSnorkel;Base.89defenderWolfSnorkel,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                items
+                {
+                	1
+	            		{
+	                	type = Base.Wrench,
+	                	count = 1,
+	                	keep = true,
+						equip = primary,
+	            		}
+                	}
+
+                time = 150,
+                skills = Mechanics:1,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = DEF89.InstallComplete.SnorkelW,
+            }
+
+            table uninstall
+            {
+                items
+                {
+                    1
+                    	{
+			  			type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+                    	}
+                	}
+
+				time = 150,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+			    test = Vehicles.UninstallTest.Default,
+			    complete = DEF89.UninstallComplete.SnorkelW,
+            }
+
+            lua
+            {
+				create = DEF89.Create.SnorkelW,
+				init = DEF89.Init.SnorkelW,
 			}
 		}
 	}

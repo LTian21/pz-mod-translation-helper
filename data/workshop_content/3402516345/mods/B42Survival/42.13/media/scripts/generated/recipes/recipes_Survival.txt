@@ -1,6 +1,41 @@
 module Base
 {
 
+    craftRecipe CraftRope2
+    {
+        timedAction = Making,
+        time = 140,
+        Tags = AnySurfaceCraft,
+        inputs
+        {
+            item 10 [Base.Twine] flags[Prop2],
+            item 1 [Base.WoodenStick2;Base.TreeBranch2;Base.Handle] mode:keep flags[Prop1],
+            item 1 tags[base:sharpknife;base:scissors] mode:keep flags[IsNotDull;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.Rope,
+        }
+    }
+
+    craftRecipe UnravelRope
+    {
+        timedAction = MakingHammer_Surface,
+        time = 180,
+        Tags = AnySurfaceCraft,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.Rope] flags[Prop2],
+            item 1 tags[base:hammer;base:clubhammer;base:hammerstone;base:mallet;base:knappingtool] mode:keep flags[MayDegradeLight;Prop1],
+        }
+        outputs
+        {
+            item 1 Base.HempScutched,
+            item 1 Base.FlaxTow,
+        }
+    }
+
     craftRecipe CarveLongStick2
     {
         timedAction = SharpenStakeWood,
@@ -21,7 +56,7 @@ module Base
         }
     }
 
-    craftRecipe MakeStonesfromLargeSmoothFlatStone
+    craftRecipe MakeStonesFromLargeSmoothFlatStone
     {
         timedAction = MakingHammer_Surface,
         time = 100,
@@ -108,7 +143,7 @@ module Base
             item 1 [Base.SteelBarQuarter;Base.SteelRodQuarter;Base.IronBarQuarter;Base.ScrapMetal;Base.ButterKnife;Base.Fork;Base.ForkForged;Base.Spoon;Base.SpoonForged] flags[Prop2;InheritCondition],
             item 1 tags[base:whetstone;base:file] mode:keep flags[MayDegrade;Prop1],
             item 1 [Base.SharpedStone],
-            item 2 tags[base:simpleweaponbinding] flags[DontReplace],
+            item 2 [Base.Twine;Base.RippedSheets;Base.DenimStrips;Base.LeatherStrips],
         }
         outputs
         {
@@ -116,7 +151,77 @@ module Base
         }
     }
 
-    craftRecipe MakeTorchNew
+    craftRecipe MakeImprovisedCandle
+    {
+        timedAction = Making,
+        time = 100,
+        Tags = AnySurfaceCraft,
+        category = Miscellaneous,
+        OnTest = RecipeCodeOnTest.hotFluidContainer,
+        Tooltip = Tooltip_B42Survival_NeedsToBeHot,
+        inputs
+        {
+            item 1 [Base.Twigs;Base.PlasticFork;Base.PlasticKnife;Base.PlasticSpoon;Base.WoodenSpoon;Base.Fork_Bone;Base.Spoon_Bone;Base.ButterKnife;Base.ForkForged;Base.SpoonForged;Base.Fork;Base.ButterKnife_Gold;Base.Fork_Gold;Base.Spoon_Gold;Base.ButterKnife_Silver;Base.Fork_Silver;Base.Spoon_Silver;Base.Spoon;Base.PenMultiColor;Base.Pen;Base.BluePen;Base.GreenPen;Base.RedPen;Base.Pencil;Base.PenSpiffo;Base.PencilSpiffo] mode:keep,
+            item 1 [Base.TinCanEmpty;Base.WaterRationCanEmpty] mode:destroy mappers[CanMapper] flags[IsEmpty],
+            item 6 [Base.Lard;Base.Butter],
+            item 2 [Base.Twine],
+        }
+        outputs
+        {
+            item 1 mapper:CanMapper,
+	}
+        itemMapper CanMapper
+        {
+            item 1 Base.TinCanCandle = Base.TinCanEmpty,
+            item 1 Base.WaterTinCandle = Base.WaterRationCanEmpty,
+        }
+    }
+
+    craftRecipe LightImprovisedCandle
+    {
+        timedAction = Making,
+        time = 30,
+        Tooltip = Tooltip_Recipe_EquipCandleHand,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.TinCanCandle;Base.WaterTinCandle] mode:destroy flags[InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite] mappers[CanMapper],
+            item 1 tags[base:startfire],
+        }
+        outputs
+        {
+            item 1 mapper:CanMapper flags[EquipSecondary;SetActivated],
+	}
+        itemMapper CanMapper
+        {
+            item 1 Base.TinCanCandleLit = Base.TinCanCandle,
+            item 1 Base.WaterTinCandleLit = Base.WaterTinCandle,
+        }
+    }
+
+    craftRecipe ExtinguishImprovisedCandle
+    {
+        timedAction = Making,
+        time = 5,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.TinCanCandleLit;Base.WaterTinCandleLit] mode:destroy flags[InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite] mappers[CanMapper],
+        }
+        outputs
+        {
+            item 1 mapper:CanMapper,
+	}
+        itemMapper CanMapper
+        {
+            item 1 Base.TinCanCandle = Base.TinCanCandleLit,
+            item 1 Base.WaterTinCandle = Base.WaterTinCandleLit,
+        }
+    }
+
+    craftRecipe MakeTorch
     {
         timedAction = CraftWeapon2H,
         time = 100,
@@ -125,7 +230,7 @@ module Base
         inputs
         {
             item 1 [Base.LongHandle;Base.TreeBranch2;Base.WoodenStick2] flags[Prop2;ItemCount;AllowFavorite;InheritFavorite],
-            item 5 [Base.RippedSheets;Base.DenimStrips;1:Base.Sheet;1:Base.BurlapPiece;10:Base.GrassTuft] flags[ItemCount;IsExclusive],
+            item 10 [Base.RippedSheets;Base.DenimStrips;1:Base.Sheet;1:Base.BurlapPiece;20:Base.GrassTuft] flags[ItemCount;IsExclusive],
             item 2 [Base.Twine;Base.Wire;Base.ElectricWire;Base.LeatherStrips;1:Base.Rope] flags[IsExclusive],
         }
         outputs
@@ -134,23 +239,7 @@ module Base
         }
     }
 
-    craftRecipe MakeTorchOld
-    {
-        timedAction = Making,
-        time = 5,
-        Tags = InHandCraft;CanBeDoneInDark,
-        category = Miscellaneous,
-        inputs
-        {
-            item 1 [Base.TorchLit] mode:destroy flags[Prop1;InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite],
-        }
-        outputs
-        {
-            item 1 Base.TorchOld,
-        }
-    }
-
-    craftRecipe MakeTorchLit
+    craftRecipe LightTorch
     {
         timedAction = Making,
         time = 30,
@@ -168,7 +257,23 @@ module Base
         }
     }
 
-    craftRecipe MakeTorchLit2
+    craftRecipe ExtinguishTorch
+    {
+        timedAction = Making,
+        time = 5,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.TorchLit] mode:destroy flags[Prop1;InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.TorchOld,
+        }
+    }
+
+    craftRecipe LightTorch2
     {
         timedAction = Making,
         time = 30,

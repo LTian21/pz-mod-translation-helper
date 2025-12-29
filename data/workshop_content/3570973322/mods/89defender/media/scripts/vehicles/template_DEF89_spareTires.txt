@@ -17,6 +17,14 @@ module Base
 		scale = 0.1,
 	}
 
+    model 89defenderWolfMount
+	{
+		mesh = vehicles/Vehicles_89defender_Body|wolf_cage_spare,
+		texture = Vehicles/Vehicles_89defenderWolf_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
     template vehicle DEF89SpareTire110
     {
         part DAMNSpareTire
@@ -29,8 +37,16 @@ module Base
             {
                 file = 89defender110spareRear,
             }
+            model DEF89SpareTire2
+            {
+                file = 89defender110spareRear,
+            }
+            model DEF89SpareTire3
+            {
+                file = 89defender110spareRear,
+            }
                 
-            itemType = Base.89defenderTire;Base.89defenderDakarTire,
+            itemType = Base.89defenderTire;Base.89defenderDakarTire;Base.89defenderMilitaryTire,
             parent = TrunkDoor,
             area = TruckBed,
             category = bodywork,
@@ -91,7 +107,14 @@ module Base
                 file = 89defender110spareRear,
                 offset = 0 0 0.7021,
             }
+
             model DEF89SpareTire1
+            {
+                file = 89defender110spareRear,
+                offset = 0 0 0.7021,
+            }
+
+            model DEF89SpareTire2
             {
                 file = 89defender110spareRear,
                 offset = 0 0 0.7021,
@@ -117,6 +140,13 @@ module Base
                 rotate = 0.0000 -90.0000 0.0000,
             }
 
+            model DEF89SpareTireT3
+            {
+                file = 89defenderWheel2L,
+                offset = 0.0000 0.3583 -0.8159,
+                rotate = 0.0000 -90.0000 0.0000,
+            }
+
             model DEF89SpareTireM
             {
                 file = 89defenderTrailerMount,
@@ -124,7 +154,7 @@ module Base
 
             }
                 
-            itemType = Base.89defenderTire;Base.89defenderDakarTire,
+            itemType = Base.89defenderTire;Base.89defenderDakarTire;Base.89defenderMilitary,
             area = SpareTire,
             category = bodywork,
             mechanicRequireKey = false,
@@ -168,6 +198,82 @@ module Base
             {
                 init = DEF89.Init.SpareTireT,
                 create = DEF89.Create.SpareTireT,
+            }
+        }
+    }
+
+    template vehicle DEF89SpareTireW
+    {
+        part DAMNSpareTire2
+        {
+            model DEF89SpareTire0
+            {
+                file = 89defenderWheel,
+                offset = 0.8889 0.8889 -0.4612,
+                rotate = 0.0000 0.0000 -7.0000,
+            }
+            model DEF89SpareTire1
+            {
+                file = 89defenderWheel1,
+                offset = 0.8889 0.8889 -0.4612,
+                rotate = 0.0000 0.0000 -7.0000,
+            }
+            model DEF89SpareTire2
+            {
+                file = 89defenderWheel2L,
+                offset = 0.8889 0.8889 -0.4612,
+                rotate = 0.0000 0.0000 -7.0000,
+            }
+            model DEF89Mount
+            {
+                file = 89defenderWolfMount,
+            }
+                
+            itemType = Base.89defenderTire;Base.89defenderDakarTire;Base.89defenderMilitaryTire,
+            area = StorageLeft,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 500,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = DEF89.InstallComplete.SpareTire2,
+                requireInstalled = DEF89Cage,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 500,
+                    skills = Mechanics:1,
+                    recipes = Basic Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = DEF89.UninstallComplete.SpareTire2,
+            }
+            lua
+            {
+                init = DEF89.Init.SpareTire2,
+                create = DEF89.Create.SpareTire2,
             }
         }
     }
