@@ -16,6 +16,22 @@ module Base
 		scale = 0.1,
 	}
 
+    model 89defenderWolfSideL
+	{
+		mesh = vehicles/Vehicles_89defender_Body|wolf_box_left,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+    model 89defenderWolfSideR
+	{
+		mesh = vehicles/Vehicles_89defender_Body|wolf_box_right,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
 	template vehicle DEF89TrunkDoor110
 	{
 		part TrunkDoor
@@ -281,6 +297,253 @@ module Base
 			}
 		}
 
+	}
+
+    template vehicle DEF89SideLidsW
+	{
+		part ToolboxLidLeft
+		{
+
+			model MuyBig00244
+			{
+				file = 89defenderWolfSideL,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			anim Close
+			{
+				anim = storage_left_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = storage_left_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage_left_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage_left_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageLeft,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 270.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 270.0 0.0,
+			}
+			itemType = Base.89defenderStorageLid,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+
+        part ToolboxLidRight
+		{
+
+			model MuyBig00244
+			{
+				file = 89defenderWolfSideR,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			anim Close
+			{
+				anim = storage_right_opening,
+				reverse = TRUE,
+				rate = 0.5,
+			}
+
+			anim Open
+			{
+				anim = storage_right_opening,
+				rate = 0.5,
+			}
+
+			anim Closed
+			{
+				anim = storage_right_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = storage_right_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			category = bodywork,
+			area = StorageRight,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+			}
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+			}
+			anim Lock
+			{
+				sound = LockVehicleDoorStandard,
+			}
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorStandard,
+			}
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedStandard,
+			}
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 90.0 0.0,
+			}
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 90.0 0.0,
+			}
+			itemType = Base.89defenderStorageLid,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 1000,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
 	}
 }
 

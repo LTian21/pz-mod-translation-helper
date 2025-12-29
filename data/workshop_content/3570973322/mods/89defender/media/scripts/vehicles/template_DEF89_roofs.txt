@@ -1,0 +1,84 @@
+module Base
+{
+	model 89defenderWolfHardRoof
+	{
+		mesh = vehicles/Vehicles_89defender_Body|wolf_hardcap,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 89defenderWolfSoftRoof
+	{
+		mesh = vehicles/Vehicles_89defender_Body|wolf_softcap,
+		texture = Vehicles/Vehicles_89defenderWolf_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+	template vehicle DEF89RoofW
+	{
+		part DEF89Roof
+        {
+        	model DEF89RoofH
+			{
+                file = 89defenderWolfHardRoof,
+			}
+
+            model DEF89RoofS
+			{
+                file = 89defenderWolfSoftRoof,
+			}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.89defenderWolfHardCover;Base.89defenderWolfTarpCover,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                items
+                {
+                	1
+	            		{
+	                	type = Base.Wrench,
+	                	count = 1,
+	                	keep = true,
+						equip = primary,
+	            		}
+                	}
+
+                time = 150,
+                skills = Mechanics:1,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = DEF89.InstallComplete.Roof,
+            }
+
+            table uninstall
+            {
+                items
+                {
+                    1
+                    	{
+			  			type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+                    	}
+                	}
+
+				time = 150,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+			    test = Vehicles.UninstallTest.Default,
+			    complete = DEF89.UninstallComplete.Roof,
+            }
+
+            lua
+            {
+				create = DEF89.Create.Roof,
+				init = DEF89.Init.Roof,
+			}
+		}
+	}
+}

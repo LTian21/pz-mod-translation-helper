@@ -17,6 +17,23 @@ module Base
 		scale = 0.1,
 	}
 
+    model 89defenderWheel2L
+	{
+		mesh = vehicles/Vehicles_89defender_Wheels|defender_wheel2,
+		texture = vehicles/Vehicles_89defender_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 89defenderWheel2R
+	{
+		mesh = vehicles/Vehicles_89defender_Wheels|defender_wheel2,
+		texture = vehicles/Vehicles_89defender_Wheel2,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
 	template vehicle DEF89Tires
 	{
 		part TireFrontLeft
@@ -28,6 +45,10 @@ module Base
             model Tire1
 			{
 				file = 89defenderWheel1,
+			}
+            model Tire2
+			{
+				file = 89defenderWheel2L,
 			}
 
 			area = TireFrontLeft,
@@ -62,6 +83,10 @@ module Base
 			{
 				file = 89defenderWheel1,
 			}
+            model Tire2
+			{
+				file = 89defenderWheel2R,
+			}
 
 			area = TireFrontRight,
 			wheel = FrontRight,
@@ -93,6 +118,10 @@ module Base
             model Tire1
 			{
 				file = 89defenderWheel1,
+			}
+            model Tire2
+			{
+				file = 89defenderWheel2L,
 			}
 
 			area = TireRearLeft,
@@ -127,6 +156,10 @@ module Base
 			{
 				file = 89defenderWheel1,
 			}
+            model Tire2
+			{
+				file = 89defenderWheel2R,
+			}
 
 			area = TireRearRight,
 			wheel = RearRight,
@@ -153,7 +186,7 @@ module Base
 		{
 			category = tire,
 			specificItem = false,
-			itemType = Base.89defenderTire2;Base.89defenderDakarTire2,
+			itemType = Base.89defenderTire2;Base.89defenderDakarTire2;Base.89defenderMilitaryTire2,
              
 			container
 			{
@@ -207,5 +240,55 @@ module Base
 			}
 		}
 	}
+
+    template vehicle DEF89TiresW
+	{
+        template! = DEF89Tires,
+
+        part TireFrontLeft
+		{
+			lua
+			{
+				create = DEF89.Create.TireFrontLeftW,
+				init = DEF89.Init.TireFrontLeftW,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+			lua
+			{
+				create = DEF89.Create.TireFrontRightW,
+				init = DEF89.Init.TireFrontRightW,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+			lua
+			{
+				create = DEF89.Create.TireRearLeftW,
+				init = DEF89.Init.TireRearLeftW,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+			lua
+			{
+				create = DEF89.Create.TireRearRightW,
+				init = DEF89.Init.TireRearRightW,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+    }
 }
 

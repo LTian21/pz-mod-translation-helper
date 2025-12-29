@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Octokit;
 using TranslationSystem;
@@ -64,8 +65,49 @@ partial class Program
             else
             {
                 Console.WriteLine($"找到 {allPRs.Count} 个开放的PR，正在解析锁定信息...\n");
+
+                var orderedPRs = allPRs.OrderBy(p => p.Number).ToList();
+
+                // 并行拉取每个 PR 的 Review / CI 信息（控制并发，避免触发 GitHub API 速率限制）
+                int maxParallel = Math.Clamp(Environment.ProcessorCount, 4, 8);
+                using var throttler = new SemaphoreSlim(maxParallel, maxParallel);
+
+                async Task<(int prNumber, int approvedCount, bool ciPassed, Exception? error)> FetchPrExtraAsync(PullRequest pr)
+                {
+                    await throttler.WaitAsync();
+                    try
+                    {
+                        var reviewsTask = github.PullRequest.Review.GetAll(owner, repoName, pr.Number);
+                        var checkRunsTask = github.Check.Run.GetAllForReference(owner, repoName, pr.Head.Sha);
+
+                        await Task.WhenAll(reviewsTask, checkRunsTask);
+
+                        var reviews = await reviewsTask;
+                        int approvedCount = reviews.Count(r => r.State.Value == PullRequestReviewState.Approved);
+
+                        var checkRuns = await checkRunsTask;
+                        bool ciPassed = checkRuns.TotalCount > 0 &&
+                                        checkRuns.CheckRuns.All(c => c.Conclusion?.Value == CheckConclusion.Success ||
+                                                                     c.Status.Value != CheckStatus.Completed);
+
+                        return (pr.Number, approvedCount, ciPassed, null);
+                    }
+                    catch (Exception ex)
+                    {
+                        return (pr.Number, 0, false, ex);
+                    }
+                    finally
+                    {
+                        throttler.Release();
+                    }
+                }
+
+                var extraTasks = orderedPRs.Select(FetchPrExtraAsync).ToList();
+                var extraResults = await Task.WhenAll(extraTasks);
+                var extraByNumber = extraResults.ToDictionary(x => x.prNumber);
+
                 Console.WriteLine(new string('=', 80));
-                foreach (var pr in allPRs.OrderBy(p => p.Number))
+                foreach (var pr in orderedPRs)
                 {
                     Console.WriteLine($"\nPR #{pr.Number}: {pr.Title}");
                     Console.WriteLine($"作者: {pr.User.Login}");
@@ -91,7 +133,7 @@ partial class Program
                                 Console.WriteLine($"    锁定MOD: {string.Join(", ", lockInfo.modIds)}");
                                 if (!string.IsNullOrEmpty(lockInfo.notes)) Console.WriteLine($"    备注: {lockInfo.notes}");
 
-                                // 若检测到 modIds 中存在数字，自动将 PR 正文修正为字符串格式
+                                // 若检测到 modIds 中存在数字，自动将 PR 正文修正为字符串格式（这一步保留串行，避免同时更新多个 PR 时引发冲突/速率问题）
                                 if (lockInfo.HadNonStringId)
                                 {
                                     await TryFixPrBodyModIdsToStrings(github, owner, repoName, pr, lockInfo);
@@ -116,34 +158,41 @@ partial class Program
                 Reviews:
                     try
                     {
-                        var reviews = await github.PullRequest.Review.GetAll(owner, repoName, pr.Number);
-                        var approvedCount = reviews.Count(r => r.State.Value == PullRequestReviewState.Approved);
-                        var checkRuns = await github.Check.Run.GetAllForReference(owner, repoName, pr.Head.Sha);
-                        bool ciPassed = checkRuns.TotalCount > 0 && checkRuns.CheckRuns.All(c => c.Conclusion?.Value == CheckConclusion.Success || c.Status.Value != CheckStatus.Completed);
-                        Console.WriteLine($"  审查批准数: {approvedCount}");
-                        Console.WriteLine($"  CI状态: {(ciPassed ? "通过" : "未通过或进行中")}");
-
-                        try
+                        if (extraByNumber.TryGetValue(pr.Number, out var exRes) && exRes.error == null)
                         {
-                            var jsonMatch = Regex.Match(pr.Body ?? string.Empty, @"\{[^}]*""lockedBy""[^}]*\}", RegexOptions.Singleline);
-                            if (jsonMatch.Success)
+                            Console.WriteLine($"  审查批准数: {exRes.approvedCount}");
+                            Console.WriteLine($"  CI状态: {(exRes.ciPassed ? "通过" : "未通过或进行中")}");
+
+                            // 写回到 translationInfoList（仍根据 pr.Body 的锁定 modIds）
+                            try
                             {
-                                string jsonContent = jsonMatch.Value;
-                                var lockInfo = ParseLockInfo(jsonContent);
-                                if (lockInfo?.modIds != null)
+                                var jsonMatch = Regex.Match(pr.Body ?? string.Empty, @"\{[^}]*""lockedBy""[^}]*\}", RegexOptions.Singleline);
+                                if (jsonMatch.Success)
                                 {
-                                    string prReviewState = pr.Draft ? "draft" : "readyforreview";
-                                    foreach (var modId in lockInfo.modIds)
+                                    string jsonContent = jsonMatch.Value;
+                                    var lockInfo = ParseLockInfo(jsonContent);
+                                    if (lockInfo?.modIds != null)
                                     {
-                                        var modInfo = GetOrCreateModInfo(modId);
-                                        modInfo.ApprovalCount = approvedCount;
-                                        modInfo.IsCIPassed = ciPassed;
-                                        modInfo.PRReviewState = prReviewState;
+                                        string prReviewState = pr.Draft ? "draft" : "readyforreview";
+                                        foreach (var modId in lockInfo.modIds)
+                                        {
+                                            var modInfo = GetOrCreateModInfo(modId);
+                                            modInfo.ApprovalCount = exRes.approvedCount;
+                                            modInfo.IsCIPassed = exRes.ciPassed;
+                                            modInfo.PRReviewState = prReviewState;
+                                        }
                                     }
                                 }
                             }
+                            catch (Exception ex) { Console.WriteLine($"  [警告] 获取PR审查状态失败: {ex.Message}"); }
                         }
-                        catch (Exception ex) { Console.WriteLine($"  [警告] 获取PR审查状态失败: {ex.Message}"); }
+                        else
+                        {
+                            var msg = extraByNumber.TryGetValue(pr.Number, out var exFail) && exFail.error != null
+                                ? exFail.error.Message
+                                : "未知错误";
+                            Console.WriteLine($"  [警告] 获取PR审查状态失败: {msg}");
+                        }
                     }
                     catch (Exception ex) { Console.WriteLine($"  [警告] 获取PR审查状态失败: {ex.Message}"); }
 

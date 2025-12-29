@@ -1,0 +1,73 @@
+module Base
+{
+	model 89defenderWolfCage
+	{
+		mesh = vehicles/Vehicles_89defender_Body|wolf_cage,
+		texture = Vehicles/Vehicles_89defenderWolf_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle DEF89CageW
+	{
+		part DEF89Cage
+        {
+        	model DEF89Cage
+			{
+                file = 89defenderWolfCage,
+			}
+
+			category = Other,
+			area = TireFrontRight,
+			itemType = Base.89defenderWolfRollcage,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                items
+                {
+                	1
+	            		{
+	                	tags = Wrench,
+	                	count = 1,
+	                	keep = true,
+						equip = primary,
+	            		}
+                	}
+
+                time = 150,
+                skills = Mechanics:1,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Default,
+            }
+
+            table uninstall
+            {
+                items
+                {
+                    1
+                    	{
+			  			tags = Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+                    	}
+                	}
+
+				time = 150,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+			    test = Vehicles.UninstallTest.Default,
+			    complete = Vehicles.UninstallComplete.Default,
+                requireUninstalled = DAMNSpareTire2,
+            }
+
+            lua
+            {
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
