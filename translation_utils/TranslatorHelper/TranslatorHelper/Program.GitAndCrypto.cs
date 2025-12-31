@@ -11,19 +11,33 @@ partial class Program
     {
         try
         {
-            Console.WriteLine("[开始] 获取最新更新...");
-            
-            // 使用 MinGit 拉取更新
-            var success = await MinGitHelper.PullAsync(repoPath, config.Key);
-            
-            if (!success)
+            Console.WriteLine("[开始] 获取最新更改...");
+
+            // 1) 总是先 fetch
+            var fetchOk = await MinGitHelper.FetchAsync(repoPath, config.Key, remote: "origin", force: false, prune: true);
+            if (!fetchOk)
             {
-                Console.WriteLine("[错误] 获取失败: 可能存在合并冲突");
-                Console.WriteLine("[提示] 请联系技术人员解决冲突");
+                Console.WriteLine("[错误] 获取远端更新失败");
                 return false;
             }
 
-            Console.WriteLine("[成功] 本地已更新到最新版本");
+            // 2) 为避免 divergent branches 报错，直接用远端同名分支覆盖本地当前分支
+            var currentBranch = await MinGitHelper.GetCurrentBranchAsync(repoPath);
+            if (string.IsNullOrWhiteSpace(currentBranch))
+            {
+                Console.WriteLine("[错误] 无法获取当前分支名");
+                return false;
+            }
+
+            Console.WriteLine($"[提示] 强制同步：origin/{currentBranch} -> {currentBranch}");
+            var resetOk = await MinGitHelper.ResetToRemoteAsync(repoPath, "origin", currentBranch);
+            if (!resetOk)
+            {
+                Console.WriteLine("[错误] 强制同步失败: 无法将本地分支重置到远端");
+                return false;
+            }
+
+            Console.WriteLine("[成功] 本地分支已强制与远端保持一致");
             return true;
         }
         catch (MinGitHelper.GitNetworkException)
