@@ -13,7 +13,7 @@ partial class Program
         {
             Console.WriteLine("[开始] 获取最新更改...");
 
-            // 1) 总是先 fetch
+            // 1) fetch
             var fetchOk = await MinGitHelper.FetchAsync(repoPath, config.Key, remote: "origin", force: false, prune: true);
             if (!fetchOk)
             {
@@ -21,12 +21,20 @@ partial class Program
                 return false;
             }
 
-            // 2) 为避免 divergent branches 报错，直接用远端同名分支覆盖本地当前分支
+            // 2) 当前分支可能不存在远端同名分支（例如 detached HEAD / 初次 init 创建的本地分支）。
+            //    这种情况下不应失败，后续 init/sync 会明确切换到 defaultBranch / translatorBranch 并对齐。
             var currentBranch = await MinGitHelper.GetCurrentBranchAsync(repoPath);
             if (string.IsNullOrWhiteSpace(currentBranch))
             {
-                Console.WriteLine("[错误] 无法获取当前分支名");
-                return false;
+                Console.WriteLine("[提示] 当前处于 detached HEAD 或无法识别的分支状态，跳过分支强制同步。随后流程会按默认分支/翻译者分支进行切换与对齐。 ");
+                return true;
+            }
+
+            var remoteExists = await MinGitHelper.BranchExistsAsync(repoPath, currentBranch, checkRemote: true);
+            if (!remoteExists)
+            {
+                Console.WriteLine($"[提示] 未发现远端分支 origin/{currentBranch}，跳过对当前分支的强制同步。随后流程会处理目标分支。 ");
+                return true;
             }
 
             Console.WriteLine($"[提示] 强制同步：origin/{currentBranch} -> {currentBranch}");
