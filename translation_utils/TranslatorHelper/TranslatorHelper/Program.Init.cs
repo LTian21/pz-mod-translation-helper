@@ -217,7 +217,15 @@ partial class Program
 
                 // 拉取最新代码
                 Console.WriteLine("拉取翻译者分支的最新代码...");
-                await MinGitHelper.PullAsync(config.LocalPath, config.Key, "origin", translatorBranch);
+                // 不使用 pull（可能触发 divergent branches / unrelated histories），
+                // 直接用远端同名分支覆盖本地分支。
+                await MinGitHelper.FetchAsync(config.LocalPath, config.Key, remote: "origin", force: false, prune: true);
+                var resetOk = await MinGitHelper.ResetToRemoteAsync(config.LocalPath, "origin", translatorBranch);
+                if (!resetOk)
+                {
+                    Console.WriteLine("[错误] 强制同步翻译者分支失败");
+                    return 1;
+                }
             }
 
             Console.WriteLine("[成功] 初始化完成!");
