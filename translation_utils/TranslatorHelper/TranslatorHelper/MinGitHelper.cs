@@ -583,17 +583,25 @@ partial class Program
         }
 
         /// <summary>
-        /// Push changes to remote
+        /// Push changes to remote (optionally force)
         /// </summary>
         public static async Task<bool> PushAsync(string repoPath, string pat, string remote = "origin", string branch = null)
+        {
+            return await PushAsync(repoPath, pat, remote, branch, force: false);
+        }
+
+        /// <summary>
+        /// Push changes to remote (optionally force)
+        /// </summary>
+        public static async Task<bool> PushAsync(string repoPath, string pat, string remote, string branch, bool force)
         {
             try
             {
                 Console.WriteLine("正在推送到远程仓库...");
 
                 var pushArgs = branch != null
-                    ? $"push {remote} {branch}"
-                    : $"push {remote}";
+                    ? $"push {(force ? "--force " : string.Empty)}{remote} {branch}"
+                    : $"push {(force ? "--force " : string.Empty)}{remote}";
                 pushArgs = pushArgs.Trim();
 
                 var (useProxy, proxyUrl) = ResolveProxySettings(true);
@@ -604,20 +612,19 @@ partial class Program
                     Console.WriteLine("[成功] 推送成功");
                     return true;
                 }
-                else if (result.StandardError.Contains("non-fast-forward", StringComparison.OrdinalIgnoreCase)
-                    || result.StandardOutput.Contains("non-fast-forward", StringComparison.OrdinalIgnoreCase))
+
+                if (!force && (result.StandardError.Contains("non-fast-forward", StringComparison.OrdinalIgnoreCase)
+                    || result.StandardOutput.Contains("non-fast-forward", StringComparison.OrdinalIgnoreCase)))
                 {
                     Console.WriteLine("[错误] 推送失败: 远端分支有新的提交");
                     Console.WriteLine("[提示] 请执行 sync 操作同步后再试");
                     Console.WriteLine("[提示] 如果仍有冲突请联系技术人员");
                     return false;
                 }
-                else
-                {
-                    Console.WriteLine($"[错误] 推送失败 (退出码: {result.ExitCode})");
-                    Console.WriteLine("[提示] 请检查网络连接或稍后重试");
-                    return false;
-                }
+
+                Console.WriteLine($"[错误] 推送失败 (退出码: {result.ExitCode})");
+                Console.WriteLine("[提示] 请检查网络连接或稍后重试");
+                return false;
             }
             catch (Exception ex)
             {
@@ -627,71 +634,82 @@ partial class Program
         }
 
         /// <summary>
-        /// Checkout a branch
+        /// Ensure the local branch exists and is exactly at remote/{branch}.
+        /// By default it fetches first; you can disable fetching when the caller already fetched.
         /// </summary>
-        public static async Task<bool> CheckoutAsync(string repoPath, string branchName, bool createIfNotExists = false)
+        public static async Task<bool> EnsureLocalBranchAtRemoteAsync(
+            string repoPath,
+            string pat,
+            string remote,
+            string branch,
+            bool fetchFirst = true)
         {
             try
             {
-                Console.WriteLine($"[开始] 切换分支: {branchName}");
+                if (fetchFirst)
+                {
+                    if (!await FetchAsync(repoPath, pat, remote: remote, force: false, prune: true))
+                    {
+                        return false;
+                    }
+                }
 
-                var checkoutArgs = createIfNotExists
-                    ? $"checkout -b {branchName}"
-                    : $"checkout {branchName}";
+                var localExists = await BranchExistsAsync(repoPath, branch, checkRemote: false);
 
-                var result = await RunGit(checkoutArgs, false, null, repoPath);
+                if (localExists)
+                {
+                    if (!await CheckoutAsync(repoPath, branch)) return false;
+                    return await ResetToRemoteAsync(repoPath, remote, branch);
+                }
 
+                // Create (or overwrite) local branch from remote branch.
+                var result = await RunGit($"checkout -B {branch} {remote}/{branch}", false, null, repoPath);
                 if (result.ExitCode == 0)
                 {
-                    Console.WriteLine($"[成功] 已切换到分支: {branchName}");
+                    Console.WriteLine($"[成功] 已创建/覆盖本地分支: {branch} (来自 {remote}/{branch})");
                     return true;
                 }
-                else
-                {
-                    Console.WriteLine($"[错误] 切换分支失败 (退出码: {result.ExitCode})");
-                    return false;
-                }
+
+                Console.WriteLine($"[错误] 创建本地分支失败 (退出码: {result.ExitCode})");
+                return false;
+            }
+            catch (GitNetworkException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[错误] 切换分支过程中发生异常: {ex.Message}");
+                Console.WriteLine($"[错误] 确保本地分支状态失败: {ex.Message}");
                 return false;
             }
         }
 
         /// <summary>
-        /// Get current branch name
+        /// Push current local branch to remote as branch name (optionally force).
+        /// Useful when local HEAD is prepared and you need to overwrite remote branch.
         /// </summary>
-        public static async Task<string> GetCurrentBranchAsync(string repoPath)
+        public static async Task<bool> PushHeadToRemoteBranchAsync(string repoPath, string pat, string remote, string branch, bool force)
         {
             try
             {
-                var result = await RunGit("branch --show-current", false, null, repoPath);
-                return result.ExitCode == 0 ? result.StandardOutput.Trim() : null;
-            }
-            catch
-            {
-                return null;
-            }
-        }
+                Console.WriteLine("正在推送到远程仓库...");
+                var args = $"push {(force ? "--force " : string.Empty)}{remote} HEAD:{branch}".Trim();
 
-        /// <summary>
-        /// Check if a branch exists (local or remote)
-        /// </summary>
-        public static async Task<bool> BranchExistsAsync(string repoPath, string branchName, bool checkRemote = false)
-        {
-            try
-            {
-                var args = checkRemote
-                    ? $"ls-remote --heads origin {branchName}"
-                    : $"rev-parse --verify {branchName}";
+                var (useProxy, proxyUrl) = ResolveProxySettings(true);
+                var result = await RunGit(args, useProxy, proxyUrl, repoPath, pat: pat);
 
-                var (useProxy, proxyUrl) = ResolveProxySettings(checkRemote);
-                var result = await RunGit(args, useProxy, proxyUrl, repoPath);
-                return result.ExitCode == 0 && !string.IsNullOrWhiteSpace(result.StandardOutput);
+                if (result.ExitCode == 0)
+                {
+                    Console.WriteLine("[成功] 推送成功");
+                    return true;
+                }
+
+                Console.WriteLine($"[错误] 推送失败 (退出码: {result.ExitCode})");
+                return false;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine($"[错误] 推送过程中发生异常: {ex.Message}");
                 return false;
             }
         }
@@ -803,6 +821,74 @@ partial class Program
             catch
             {
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Checkout a branch
+        /// </summary>
+        public static async Task<bool> CheckoutAsync(string repoPath, string branchName, bool createIfNotExists = false)
+        {
+            try
+            {
+                Console.WriteLine($"[开始] 切换分支: {branchName}");
+
+                var checkoutArgs = createIfNotExists
+                    ? $"checkout -b {branchName}"
+                    : $"checkout {branchName}";
+
+                var result = await RunGit(checkoutArgs, false, null, repoPath);
+
+                if (result.ExitCode == 0)
+                {
+                    Console.WriteLine($"[成功] 已切换到分支: {branchName}");
+                    return true;
+                }
+
+                Console.WriteLine($"[错误] 切换分支失败 (退出码: {result.ExitCode})");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[错误] 切换分支过程中发生异常: {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Get current branch name
+        /// </summary>
+        public static async Task<string> GetCurrentBranchAsync(string repoPath)
+        {
+            try
+            {
+                var result = await RunGit("branch --show-current", false, null, repoPath);
+                return result.ExitCode == 0 ? result.StandardOutput.Trim() : null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Check if a branch exists (local or remote)
+        /// </summary>
+        public static async Task<bool> BranchExistsAsync(string repoPath, string branchName, bool checkRemote = false)
+        {
+            try
+            {
+                var args = checkRemote
+                    ? $"ls-remote --heads origin {branchName}"
+                    : $"rev-parse --verify {branchName}";
+
+                var (useProxy, proxyUrl) = ResolveProxySettings(checkRemote);
+                var result = await RunGit(args, useProxy, proxyUrl, repoPath);
+                return result.ExitCode == 0 && !string.IsNullOrWhiteSpace(result.StandardOutput);
+            }
+            catch
+            {
+                return false;
             }
         }
     }

@@ -17,6 +17,9 @@ partial class Program
             Console.WriteLine("初始化本地仓库和翻译者分支");
             Console.WriteLine("====================================");
 
+            // 目标：init 只负责“仓库存在 + Git 可用”
+            // 不做 fetch / checkout / reset / push
+
             // 检查本地路径
             bool localRepoExists = Directory.Exists(config.LocalPath) && await MinGitHelper.IsValidRepositoryAsync(config.LocalPath);
 
@@ -46,7 +49,6 @@ partial class Program
                         : "[提示] 未检测到系统代理，直接连接 GitHub 仓库");
                 }
 
-                // 使用 MinGit 克隆仓库
                 bool cloneSuccess = await MinGitHelper.CloneAsync(cloneUrl, config.LocalPath, config.Key, useProxy);
 
                 if (!cloneSuccess)
@@ -56,7 +58,7 @@ partial class Program
                     return 1;
                 }
 
-                // 如果使用了镜像，克隆后立即修复仓库指向
+                // 如果使用了镜像：克隆后修复远程地址（此处允许 fetch/reset，因为属于“修复镜像克隆产物”）
                 if (config.UseMirror)
                 {
                     Console.WriteLine("[提示] 镜像克隆完成，开始修复仓库指向...");
@@ -71,18 +73,17 @@ partial class Program
             }
             else
             {
-                Console.WriteLine("本地仓库已存在，检查是否需要修复/更新...");
+                Console.WriteLine("本地仓库已存在，检查是否需要修复...");
 
-                // 检查是否是镜像仓库，如果是则修复
+                // 检查是否是镜像仓库，如果是则修复（仅修改 remote + fetch，不重置本地修改）
                 string? currentRemoteUrl = await MinGitHelper.GetRemoteUrlAsync(config.LocalPath, "origin");
-                bool isMirror = !string.IsNullOrEmpty(currentRemoteUrl) && 
-                                (currentRemoteUrl.Contains("gitclone.com", StringComparison.OrdinalIgnoreCase) || 
+                bool isMirror = !string.IsNullOrEmpty(currentRemoteUrl) &&
+                                (currentRemoteUrl.Contains("gitclone.com", StringComparison.OrdinalIgnoreCase) ||
                                  !currentRemoteUrl.StartsWith("https://github.com/", StringComparison.OrdinalIgnoreCase));
 
                 if (isMirror)
                 {
                     Console.WriteLine($"[提示] 检测到本地仓库远程地址 ({currentRemoteUrl}) 可能为镜像站，正在修复为 GitHub 原址...");
-                    // 使用非破坏性修复 (不重置本地修改)
                     bool repairSuccess = await RepairExistingMirrorRepositoryAsync(config.LocalPath, config.RepoUrl, config.Key);
                     if (!repairSuccess)
                     {
@@ -91,136 +92,16 @@ partial class Program
                     }
                     Console.WriteLine("[成功] 仓库指向已修复。");
                 }
-                
-                // 尝试拉取更新并验证仓库完整性
-                bool pullSuccess = false;
-                try
-                {
-                    pullSuccess = await PullLatestChanges(config.LocalPath, config);
-                }
-                catch (MinGitHelper.GitNetworkException ex)
-                {
-                    Console.WriteLine($"[警告] {ex.Message}");
-                    Console.WriteLine("[提示] 网络连接问题，跳过仓库修复/重建。请检查代理设置。");
-                    return 1;
-                }
-
-                if (!pullSuccess)
-                {
-                    Console.WriteLine("[错误] 本地仓库可能损坏，尝试修复或重新克隆");
-                    
-                    // 尝试修复仓库
-                    try
-                    {
-                        var repaired = await RepairRepositoryAsync(config.LocalPath, config.RepoUrl, config.Key, githubRepo.DefaultBranch);
-                        if (!repaired)
-                        {
-                            throw new InvalidOperationException("无法修复本地仓库");
-                        }
-                    }
-                    catch (Exception repairEx)
-                    {
-                        Console.WriteLine($"[错误] 修复仓库失败: {repairEx.Message}");
-                        Console.WriteLine("[提示] 正在删除损坏的仓库并重新克隆...");
-                        
-                        // 删除并重新克隆
-                        ForceDeleteDirectory(config.LocalPath);
-                        bool useProxyForReclone = ShouldUseGitProxy();
-                        Console.WriteLine(useProxyForReclone
-                            ? "[提示] 重新克隆时通过代理连接 GitHub 仓库"
-                            : "[提示] 重新克隆时直接连接 GitHub 仓库");
-                        bool recloneSuccess = await MinGitHelper.CloneAsync(config.RepoUrl, config.LocalPath, config.Key, useProxyForReclone);
-                        
-                        if (!recloneSuccess)
-                        {
-                            Console.WriteLine("[错误] 重新克 clone 失败");
-                            return 1;
-                        }
-                    }
-                }
             }
 
-            Console.WriteLine("拉取最新代码...");
-            if (!await PullLatestChanges(config.LocalPath, config))
+            // 再次确认仓库可用
+            if (!await MinGitHelper.IsValidRepositoryAsync(config.LocalPath))
             {
-                Console.WriteLine("[错误] 拉取失败");
-                Console.WriteLine("[提示] 请检查网络连接、使用代理或稍后重试");
+                Console.WriteLine("[错误] 本地仓库不可用（不是有效的 Git 仓库）");
                 return 1;
             }
 
-            string defaultBranch = githubRepo.DefaultBranch;
-            Console.WriteLine($"默认分支: {defaultBranch}");
-            string translatorBranch = $"translation-{ConvertToValidBranchName(config.UserName)}";
-            Console.WriteLine($"翻译者: {config.UserName}");
-            Console.WriteLine($"翻译者分支: {translatorBranch}");
-
-            // 检查远程分支是否存在
-            var remoteBranches = await github.Repository.Branch.GetAll(owner, repoName);
-            var remoteBranchExists = remoteBranches.Any(b => b.Name == translatorBranch);
-
-            if (!remoteBranchExists)
-            {
-                Console.WriteLine($"远程仓库不存在分支 {translatorBranch}，准备创建...");
-
-                // 切换到默认分支
-                await MinGitHelper.CheckoutAsync(config.LocalPath, defaultBranch);
-
-                // 检查本地分支是否存在
-                var localBranchExists = await MinGitHelper.BranchExistsAsync(config.LocalPath, translatorBranch);
-                
-                if (localBranchExists)
-                {
-                    Console.WriteLine($"[提示] 本地分支 {translatorBranch} 已存在，直接切换到该分支");
-                    await MinGitHelper.CheckoutAsync(config.LocalPath, translatorBranch);
-                }
-                else
-                {
-                    Console.WriteLine($"[提示] 从 {defaultBranch} 创建新分支 {translatorBranch}");
-                    await MinGitHelper.CheckoutAsync(config.LocalPath, translatorBranch, createIfNotExists: true);
-                }
-
-                // 推送新分支到远程
-                Console.WriteLine($"推送新分支 {translatorBranch} 到远程仓库...");
-                bool pushSuccess = await MinGitHelper.PushAsync(config.LocalPath, config.Key, "origin", translatorBranch);
-                
-                if (!pushSuccess)
-                {
-                    Console.WriteLine("[错误] 推送新分支失败");
-                    Console.WriteLine("[提示] 请检查网络连接或 GitHub PAT 权限");
-                    return 1;
-                }
-
-                Console.WriteLine($"[成功] 分支 {translatorBranch} 创建并推送到远程仓库");
-            }
-            else
-            {
-                Console.WriteLine($"远程分支 {translatorBranch} 已存在");
-                
-                // Fetch远程分支信息
-                await MinGitHelper.FetchAsync(config.LocalPath, config.Key);
-                
-                // 检查本地分支是否存在
-                var localBranchExists = await MinGitHelper.BranchExistsAsync(config.LocalPath, translatorBranch);
-                
-                if (!localBranchExists)
-                {
-                    Console.WriteLine($"本地不存在分支 {translatorBranch}，从远程创建...");
-                    
-                    // 从远程分支创建本地跟踪分支
-                    await MinGitHelper.CheckoutAsync(config.LocalPath, translatorBranch, createIfNotExists: true);
-                }
-                else
-                {
-                    Console.WriteLine($"切换到分支 {translatorBranch}");
-                    await MinGitHelper.CheckoutAsync(config.LocalPath, translatorBranch);
-                }
-
-                // 拉取最新代码
-                Console.WriteLine("拉取翻译者分支的最新代码...");
-                await MinGitHelper.PullAsync(config.LocalPath, config.Key, "origin", translatorBranch);
-            }
-
-            Console.WriteLine("[成功] 初始化完成!");
+            Console.WriteLine("[成功] init 完成：本地仓库已就绪（未做分支同步）。");
             Console.WriteLine($"本地仓库路径: {config.LocalPath}");
             Console.WriteLine($"当前分支: {await MinGitHelper.GetCurrentBranchAsync(config.LocalPath)}");
             return 0;
