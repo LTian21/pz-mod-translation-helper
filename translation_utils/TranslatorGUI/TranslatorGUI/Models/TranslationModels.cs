@@ -163,20 +163,39 @@ namespace TranslatorGUI.Models
                 _priorityValue = value;
                 OnPropertyChanged(nameof(PriorityValue));
                 OnPropertyChanged(nameof(PriorityDisplay));
+                OnPropertyChanged(nameof(PrioritySortValue));
             }
         }
         private double _priorityValue = 5;
 
-        public string PriorityDisplay => PriorityValue switch
+        public double PrioritySortValue => (UntranslatedEntries == 0 && TranslatedEntries == 0) ? -100 : PriorityValue;
+
+        public string PriorityDisplay
         {
-            >= 7.5 => "极高",
-            >= 6.5 => "高",
-            >= 5.5 => "中高",
-            >= 4.5 => "中",
-            >= 3.5 => "中低",
-            >= 2.5 => "低",
-            _ => "极低"
-        };
+            get
+            {
+                // 当没有待翻译/待校对条目时，显示“无需领取”
+                if (UntranslatedEntries == 0 && TranslatedEntries == 0)
+                    return "无需领取";
+
+                return PriorityValue switch
+                {
+                    >= 7.5 => "极高",
+                    >= 6.5 => "高",
+                    >= 5.5 => "中高",
+                    >= 4.5 => "中",
+                    >= 3.5 => "中低",
+                    >= 2.5 => "低",
+                    _ => "极低"
+                };
+            }
+        }
+
+        public void UpdatePriority(double priority)
+        {
+            PriorityValue = priority;
+            OnPropertyChanged(nameof(PrioritySortValue));
+        }
 
         // 计算属性
         public bool IsExpired => _isExpired;
@@ -219,11 +238,6 @@ namespace TranslatorGUI.Models
             {
                 ModTitle = title;
             }
-        }
-
-        public void UpdatePriority(double priority)
-        {
-            PriorityValue = priority;
         }
     }
 }
