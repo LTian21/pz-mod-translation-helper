@@ -81,6 +81,55 @@ partial class Program
         try
         {
             Console.WriteLine("开始合并翻译文件...");
+
+            // 仅允许写回「用户已领取的模组」：以 PR Body 中 lock JSON 的 modIds 为权威来源
+            HashSet<string>? allowedModIds = null;
+
+            // 尝试从本地保存的 translation_info_{lang}.json 中读取当前用户锁定的 modIds
+            // 该文件由 listpr 生成，数据源来自 GitHub PR body
+            try
+            {
+                string exeDirectory2 = AppContext.BaseDirectory;
+                string infoPath = Path.Combine(exeDirectory2, $"translation_info_{config.Language.ToSuffix()}.json");
+                if (File.Exists(infoPath))
+                {
+                    using var doc = System.Text.Json.JsonDocument.Parse(File.ReadAllText(infoPath, Encoding.UTF8));
+                    var root = doc.RootElement;
+                    if (root.TryGetProperty("Translations", out var arr) && arr.ValueKind == System.Text.Json.JsonValueKind.Array)
+                    {
+                        var ids = new HashSet<string>();
+                        foreach (var el in arr.EnumerateArray())
+                        {
+                            // 仅取“被我锁定”的 mod
+                            bool isLocked = el.TryGetProperty("IsLocked", out var lockedEl) && lockedEl.ValueKind == System.Text.Json.JsonValueKind.True;
+                            string lockedBy = el.TryGetProperty("LockedBy", out var lbEl) ? (lbEl.GetString() ?? string.Empty) : string.Empty;
+                            if (!isLocked || !string.Equals(lockedBy, config.UserName, StringComparison.OrdinalIgnoreCase))
+                                continue;
+
+                            string modId = el.TryGetProperty("ModId", out var midEl) ? (midEl.GetString() ?? string.Empty) : string.Empty;
+                            if (!string.IsNullOrWhiteSpace(modId))
+                                ids.Add(modId.Trim());
+                        }
+
+                        if (ids.Count > 0)
+                        {
+                            allowedModIds = ids;
+                            Console.WriteLine($"[提示] 从 PR Body(经 listpr 导出)解析到当前用户已领取 {allowedModIds.Count} 个MOD: {string.Join(", ", allowedModIds)}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[警告] 读取 translation_info 获取已领取 MOD 列表失败，将回退为旧行为（按文件内容合并）。原因: {ex.Message}");
+                allowedModIds = null;
+            }
+
+            if (allowedModIds == null)
+            {
+                Console.WriteLine("[警告] 未能从 PR Body 解析到已领取的MOD列表（需要先执行 listpr 刷新），将回退为旧行为（按文件内容合并）。");
+            }
+
             string sourceFileName = $"translations_{config.Language.ToSuffix()}.txt";
             string sourceFilePath = Path.Combine(config.LocalPath, "data", sourceFileName);
             if (!File.Exists(sourceFilePath)) { Console.WriteLine($"[错误] 源翻译文件不存在: {sourceFilePath}"); return 1; }
@@ -117,6 +166,7 @@ partial class Program
             Console.WriteLine($"读取用户翻译文件: {userFilePath}");
             var userTranslations = new Dictionary<string, Dictionary<string, TranslationEntry>>();
             var linesInFile = File.ReadAllLines(userFilePath, Encoding.UTF8);
+
             List<string> tempComments = new();
             string? currentModId = null;
             string? lastProcessedKey = null;
@@ -132,6 +182,8 @@ partial class Program
                 if (originalMatch1.Success)
                 {
                     currentModId = originalMatch1.Groups["modId"].Value.Trim();
+                    if (allowedModIds != null && !allowedModIds.Contains(currentModId)) { tempComments.Clear(); lastProcessedKey = null; continue; }
+
                     string matchKey = originalMatch1.Groups["key"].Value.Trim();
                     string matchText = originalMatch1.Groups["matchText"].Value;
                     if (!userTranslations.ContainsKey(currentModId)) userTranslations[currentModId] = new();
@@ -144,6 +196,8 @@ partial class Program
                 if (translationMatch1.Success)
                 {
                     string modId = translationMatch1.Groups["modId"].Value.Trim();
+                    if (allowedModIds != null && !allowedModIds.Contains(modId)) continue;
+
                     string matchKey = translationMatch1.Groups["key"].Value.Trim();
                     string matchText = translationMatch1.Groups["matchText"].Value;
                     if (userTranslations.ContainsKey(modId) && userTranslations[modId].ContainsKey(matchKey) && !string.IsNullOrEmpty(matchText))
@@ -155,6 +209,8 @@ partial class Program
                 if (originalMatch2.Success)
                 {
                     currentModId = originalMatch2.Groups["modId"].Value.Trim();
+                    if (allowedModIds != null && !allowedModIds.Contains(currentModId)) { tempComments.Clear(); lastProcessedKey = null; continue; }
+
                     string matchKey = originalMatch2.Groups["key"].Value.Trim();
                     string matchText = originalMatch2.Groups["matchText"].Value;
                     if (!userTranslations.ContainsKey(currentModId)) userTranslations[currentModId] = new();
@@ -167,6 +223,8 @@ partial class Program
                 if (translationMatch2.Success)
                 {
                     string modId = translationMatch2.Groups["modId"].Value.Trim();
+                    if (allowedModIds != null && !allowedModIds.Contains(modId)) continue;
+
                     string matchKey = translationMatch2.Groups["key"].Value.Trim();
                     string matchText = translationMatch2.Groups["matchText"].Value;
                     if (userTranslations.ContainsKey(modId) && userTranslations[modId].ContainsKey(matchKey) && !string.IsNullOrEmpty(matchText))
@@ -178,6 +236,8 @@ partial class Program
                 if (originalMatch3.Success)
                 {
                     currentModId = originalMatch3.Groups["modId"].Value.Trim();
+                    if (allowedModIds != null && !allowedModIds.Contains(currentModId)) { tempComments.Clear(); lastProcessedKey = null; continue; }
+
                     string matchKey = originalMatch3.Groups["key"].Value.Trim();
                     string matchText = originalMatch3.Groups["matchText"].Value;
                     if (!userTranslations.ContainsKey(currentModId)) userTranslations[currentModId] = new();
@@ -190,6 +250,8 @@ partial class Program
                 if (translationMatch3.Success)
                 {
                     string modId = translationMatch3.Groups["modId"].Value.Trim();
+                    if (allowedModIds != null && !allowedModIds.Contains(modId)) continue;
+
                     string matchKey = translationMatch3.Groups["key"].Value.Trim();
                     string matchText = translationMatch3.Groups["matchText"].Value;
                     if (userTranslations.ContainsKey(modId) && userTranslations[modId].ContainsKey(matchKey) && !string.IsNullOrEmpty(matchText))
@@ -202,6 +264,13 @@ partial class Program
             foreach (var modEntry in userTranslations)
             {
                 string modId = modEntry.Key;
+
+                if (allowedModIds != null && !allowedModIds.Contains(modId))
+                {
+                    ignoredCount += modEntry.Value.Count;
+                    continue;
+                }
+
                 if (!originalTranslations.ContainsKey(modId)) { Console.WriteLine($"[提示] 源文件中不存在MOD: {modId}，跳过该MOD的所有条目"); ignoredCount += modEntry.Value.Count; continue; }
                 foreach (var entry in modEntry.Value)
                 {
