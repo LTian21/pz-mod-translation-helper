@@ -55,6 +55,11 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,5">
             <Label Content="搜索 MOD ID:" VerticalAlignment="Center"/>
             <TextBox x:Name="txtSearch" Width="200" TextChanged="txtSearch_TextChanged" VerticalAlignment="Center"/>
+
+            <!-- 新增：勾选统计（跟随选择状态动态更新） -->
+            <Border Margin="10,0,0,0" Padding="8,2" CornerRadius="4" Background="#FFF3F3F3" VerticalAlignment="Center">
+                <TextBlock x:Name="txtSelectionStats" VerticalAlignment="Center" />
+            </Border>
         </StackPanel>
 
         <!-- 任务列表（可伸缩上半区域） -->
@@ -157,7 +162,7 @@
                 <DataGridTextColumn Binding="{Binding TotalEntries, Mode=OneWay}" Header="总条目" Width="50" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding UntranslatedEntries, Mode=OneWay}" Header="待翻译" Width="50" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding TranslatedEntries, Mode=OneWay}" Header="待校对" Width="50" IsReadOnly="True"/>
-                <DataGridTextColumn Header="优先级" Width="70" Binding="{Binding PriorityDisplay}" SortMemberPath="PriorityValue" />
+                <DataGridTextColumn Header="优先级" Width="70" Binding="{Binding PriorityDisplay}" SortMemberPath="PrioritySortValue" />
                 <DataGridTextColumn Binding="{Binding TaskStatus, Mode=OneWay}" Header="任务状态" Width="80" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding LockedBy, Mode=OneWay}" Header="领取人" Width="80" IsReadOnly="True"/>
                 <DataGridTextColumn Header="锁定时间" Width="300" IsReadOnly="True" Visibility="Hidden">
