@@ -157,6 +157,9 @@ namespace TranslatorGUI
             // Start timer to flush queued output to the UI periodically.
             _outputTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(100), DispatcherPriority.Background, OutputTimer_Tick, Dispatcher);
             _outputTimer.Start();
+
+            // 初始化统计显示
+            Dispatcher.BeginInvoke(new Action(UpdateSelectionStats), DispatcherPriority.Background);
         }
 
         private void LoadConfig()
@@ -511,13 +514,16 @@ namespace TranslatorGUI
                 }
                 catch { }
 
-                // 默认按 ModId 升序排序
+                // 默认按“优先级(高->低)”排序；对于“无需领取”按等效优先级 -100 排序
                 ApplyDefaultSort();
 
                 AppendOutput($"已加载 { _modItems.Count } 个 Mod 状态。");
 
                 // 更新按钮状态
                 UpdateButtonStates();
+
+                // 刷新勾选统计
+                UpdateSelectionStats();
             }
             catch (Exception ex)
             {
@@ -532,6 +538,7 @@ namespace TranslatorGUI
                 var view = CollectionViewSource.GetDefaultView(dgMods.ItemsSource);
                 if (view == null) return;
                 view.SortDescriptions.Clear();
+                view.SortDescriptions.Add(new SortDescription(nameof(ModItemView.PrioritySortValue), ListSortDirection.Descending));
                 view.SortDescriptions.Add(new SortDescription(nameof(ModItemView.ModId), ListSortDirection.Ascending));
                 view.Refresh();
             }
@@ -963,6 +970,57 @@ namespace TranslatorGUI
         public void OnModSelectionChanged()
         {
             UpdateButtonStates();
+            UpdateSelectionStats();
+        }
+
+        private void UpdateSelectionStats()
+        {
+            try
+            {
+                if (txtSelectionStats == null) return;
+
+                // 统计当前“显示范围内”(考虑搜索过滤)且已勾选的项目
+                var view = CollectionViewSource.GetDefaultView(dgMods.ItemsSource);
+                var visibleSelected = new List<ModItemView>();
+
+                if (view != null)
+                {
+                    foreach (var item in view)
+                    {
+                        if (item is ModItemView m && m.IsSelected && !m.IsLocked)
+                        {
+                            visibleSelected.Add(m);
+                        }
+                    }
+                }
+                else
+                {
+                    visibleSelected = _modItems.Where(m => m.IsSelected && !m.IsLocked).ToList();
+                }
+
+                // 用户已领取（锁定给自己）的任务也需要计入统计
+                // 合并去重：若某 Mod 同时出现在勾选列表与已领取列表（理论上不应发生），以 ModId 去重
+                var myLocked = _modItems.Where(m => m.IsLockedByMe).ToList();
+
+                var combined = visibleSelected
+                    .Concat(myLocked)
+                    .GroupBy(m => m.ModId, StringComparer.OrdinalIgnoreCase)
+                    .Select(g => g.First())
+                    .ToList();
+
+                int selectedMods = visibleSelected.Count;
+                int lockedMods = myLocked.Count;
+
+                int untranslated = combined.Sum(m => m.UntranslatedEntries);
+                int toReview = combined.Sum(m => m.TranslatedEntries);
+                int totalPending = untranslated + toReview;
+
+                txtSelectionStats.Text = $"已选: {selectedMods}  |  已领取: {lockedMods}  |  待翻译: {untranslated}  |  待校对: {toReview}  |  合计: {totalPending}";
+            }
+            catch
+            {
+                // ignore
+            }
         }
 
         private static string NormalizePrState(string s)
@@ -1057,6 +1115,8 @@ namespace TranslatorGUI
                     return false;
                 };
             }
+
+            UpdateSelectionStats();
         }
 
         // 识别常见 SSL/证书相关错误，并给出中文提示
