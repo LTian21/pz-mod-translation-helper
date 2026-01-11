@@ -1811,7 +1811,10 @@ return {
         ["ItemName_Base.VarmintRifle"] = "Varmint\230\173\165\230\158\170",
         ["ItemName_Base.x2Scope"] = "2\229\128\141\231\158\132\229\135\134\233\149\156",
         ["ItemName_Base.x8Scope"] = "8\229\128\141\231\158\132\229\135\134\233\149\156",
-        ["Sandbox_GGS"] = "GaelGunStore - \233\128\137\233\161\185",
+        ["Sandbox_GGS"] = "GaelGunStore-\233\128\137\233\161\185",
+    },
+    ["\\GaelGunStore_Leagacy"] = {
+        ["Sandbox_ADWWF"] = "\231\155\150\229\176\148\230\158\170\229\186\151",
     },
     ["\\GanydeBielovzki's Frockin Shirts n Ties"] = {
         ["ContextMenu_RollDown"] = "\230\148\190\228\184\139\232\162\150\229\173\144",
@@ -2829,6 +2832,10 @@ return {
     ["\\ProximityInventory"] = {
         ["Sandbox_ProxInv"] = "\232\158\141\229\144\136\231\137\169\229\147\129\230\160\143",
         ["UI_optionscreen_binding_ProxInv_Force_Selected"] = "\229\188\128/\229\133\179\229\188\186\229\136\182\233\128\137\228\184\173",
+    },
+    ["\\ProximityInventory4213"] = {
+        ["Sandbox_ProxInv"] = "\231\137\169\229\147\129\232\158\141\229\144\136\230\160\143",
+        ["UI_optionscreen_binding_ProxInv_Force_Selected"] = "\229\188\186\229\136\182\233\128\137\230\139\169\229\191\171\230\141\183\233\148\174",
     },
     ["\\PzkVanillaPlusCarPack"] = {
         ["IGUI_VehicleNameCarNormalSmashedFront"] = "\230\141\159\229\157\143\231\154\132\232\189\191\232\189\166",
