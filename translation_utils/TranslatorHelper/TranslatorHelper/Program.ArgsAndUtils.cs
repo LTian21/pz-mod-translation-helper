@@ -96,7 +96,7 @@ partial class Program
         {
             if (args.Length < 6)
             {
-                Console.WriteLine("[错误] 启动参数不足，请参阅使用说明。");
+                Console.WriteLine("[错误] 参数数量不足，请检查使用说明。");
                 return null;
             }
 
@@ -108,14 +108,81 @@ partial class Program
             language = LanguageHelper.FromSuffix(languageSuffix);
             operation = args[5].ToLowerInvariant();
 
-            // 查找 UseMirrorSite 参数
-            useMirror = args.Contains("UseMirrorSite", StringComparer.OrdinalIgnoreCase);
+            // 兼容 GUI/历史参数：UseMirrorSite / UseMirrorSiteFirstDownload
+            useMirror = args.Any(a => a.Equals("UseMirrorSite", StringComparison.OrdinalIgnoreCase) ||
+                                     a.Equals("UseMirrorSiteFirstDownload", StringComparison.OrdinalIgnoreCase));
 
-            // 过滤掉 UseMirrorSite 参数来处理其他参数
-            var otherArgs = args.Skip(6).Where(a => !a.Equals("UseMirrorSite", StringComparison.OrdinalIgnoreCase)).ToList();
+            // 解析可选参数（保持对旧位置参数的兼容）
+            // 支持：
+            // 1) 旧模式： [commitMessage] [localPath] [UseMirrorSite]
+            // 2) GUI 可能传： [commitMessage] UseMirrorSite [localPath]
+            // 3) 新模式： --localpath <path> / -p <path>；--message <msg>
+            string? commitMessageArg = null;
+            string? localPathArg = null;
 
-            string? commitMessageArg = otherArgs.ElementAtOrDefault(0);
-            string? localPathArg = otherArgs.ElementAtOrDefault(1);
+            // 先拿到 6 之后的参数，并过滤掉我们识别的 flag，避免位置偏移
+            var tailArgs = args.Skip(6).ToList();
+
+            // 1) 解析命名参数
+            for (int i = 0; i < tailArgs.Count; i++)
+            {
+                var a = tailArgs[i];
+                if (a.Equals("--localpath", StringComparison.OrdinalIgnoreCase) || a.Equals("-p", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (i + 1 < tailArgs.Count)
+                    {
+                        localPathArg = tailArgs[i + 1];
+                        tailArgs[i] = string.Empty;
+                        tailArgs[i + 1] = string.Empty;
+                        i++;
+                    }
+                    continue;
+                }
+
+                if (a.Equals("--message", StringComparison.OrdinalIgnoreCase) || a.Equals("-m", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (i + 1 < tailArgs.Count)
+                    {
+                        commitMessageArg = tailArgs[i + 1];
+                        tailArgs[i] = string.Empty;
+                        tailArgs[i + 1] = string.Empty;
+                        i++;
+                    }
+                    continue;
+                }
+
+                if (a.Equals("UseMirrorSite", StringComparison.OrdinalIgnoreCase) || a.Equals("UseMirrorSiteFirstDownload", StringComparison.OrdinalIgnoreCase))
+                {
+                    tailArgs[i] = string.Empty;
+                    continue;
+                }
+            }
+
+            // 2) 解析旧的“位置参数”（去掉空项、去掉已过滤的 flag）
+            var positional = tailArgs.Where(x => !string.IsNullOrWhiteSpace(x)).ToList();
+
+            if (commitMessageArg == null)
+                commitMessageArg = positional.ElementAtOrDefault(0);
+
+            if (localPathArg == null)
+            {
+                // 如果第 0 个是 commitMessage，那么 localPath 应该是第 1 个
+                // 但兼容 GUI 的“commitMessage 为空字符串”场景："" 会作为第 0 个保留下来
+                localPathArg = positional.ElementAtOrDefault(1);
+
+                // 兼容更奇怪的情况下只给了一个额外参数但它是路径（没有 commitMessage）
+                if (string.IsNullOrWhiteSpace(localPathArg) && positional.Count == 1)
+                {
+                    var only = positional[0];
+                    if (!string.IsNullOrWhiteSpace(only) &&
+                        (only.Contains(Path.DirectorySeparatorChar) || only.Contains(Path.AltDirectorySeparatorChar) || Path.IsPathRooted(only)))
+                    {
+                        localPathArg = only;
+                        // 如果它被当作 localPath，则 commitMessage 当作未指定
+                        if (commitMessageArg == only) commitMessageArg = null;
+                    }
+                }
+            }
 
             commitMessage = !string.IsNullOrWhiteSpace(commitMessageArg)
                 ? commitMessageArg

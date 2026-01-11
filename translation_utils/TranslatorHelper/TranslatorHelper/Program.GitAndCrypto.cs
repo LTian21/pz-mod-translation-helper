@@ -11,19 +11,41 @@ partial class Program
     {
         try
         {
-            Console.WriteLine("[开始] 获取最新更新...");
-            
-            // 使用 MinGit 拉取更新
-            var success = await MinGitHelper.PullAsync(repoPath, config.Key);
-            
-            if (!success)
+            Console.WriteLine("[开始] 获取最新更改...");
+
+            // 1) fetch
+            var fetchOk = await MinGitHelper.FetchAsync(repoPath, config.Key, remote: "origin", force: false, prune: true);
+            if (!fetchOk)
             {
-                Console.WriteLine("[错误] 获取失败: 可能存在合并冲突");
-                Console.WriteLine("[提示] 请联系技术人员解决冲突");
+                Console.WriteLine("[错误] 获取远端更新失败");
                 return false;
             }
 
-            Console.WriteLine("[成功] 本地已更新到最新版本");
+            // 2) 当前分支可能不存在远端同名分支（例如 detached HEAD / 初次 init 创建的本地分支）。
+            //    这种情况下不应失败，后续 init/sync 会明确切换到 defaultBranch / translatorBranch 并对齐。
+            var currentBranch = await MinGitHelper.GetCurrentBranchAsync(repoPath);
+            if (string.IsNullOrWhiteSpace(currentBranch))
+            {
+                Console.WriteLine("[提示] 当前处于 detached HEAD 或无法识别的分支状态，跳过分支强制同步。随后流程会按默认分支/翻译者分支进行切换与对齐。 ");
+                return true;
+            }
+
+            var remoteExists = await MinGitHelper.BranchExistsAsync(repoPath, currentBranch, checkRemote: true);
+            if (!remoteExists)
+            {
+                Console.WriteLine($"[提示] 未发现远端分支 origin/{currentBranch}，跳过对当前分支的强制同步。随后流程会处理目标分支。 ");
+                return true;
+            }
+
+            Console.WriteLine($"[提示] 强制同步：origin/{currentBranch} -> {currentBranch}");
+            var resetOk = await MinGitHelper.ResetToRemoteAsync(repoPath, "origin", currentBranch);
+            if (!resetOk)
+            {
+                Console.WriteLine("[错误] 强制同步失败: 无法将本地分支重置到远端");
+                return false;
+            }
+
+            Console.WriteLine("[成功] 本地分支已强制与远端保持一致");
             return true;
         }
         catch (MinGitHelper.GitNetworkException)

@@ -6,7 +6,7 @@ module Base
 
 	craftRecipe MakeImprovisedFlashlightSilencer
 	{
-    timedAction = Making,
+		timedAction = Making,
 		xpAward = MetalWelding:5,
 		AutoLearnAll = MetalWelding:3,
 		Time = 200,
@@ -18,8 +18,8 @@ module Base
 		OnTest = onImprovisedSilencer_OnTest,
 		inputs
 		{
-			item 1 tags[DrillMetal] mode:keep flags[Prop1;MayDegrade],
-			item 1 tags[SheetMetalSnips] mode:keep flags[MayDegradeLight],
+			item 1 tags[base:drillmetal] mode:keep flags[Prop1;MayDegrade],
+			item 1 tags[base:sheetmetalsnips] mode:keep flags[MayDegradeLight],
 			item 1 [HandTorch;ImprovisedSilencer_Broken] mode:destroy flags[Prop2;AllowDestroyedItem],
 			item 1 [Base.NutsBolts],
 			item 1 [Base.SmallSheetMetal;Base.UnusableMetal],
@@ -32,7 +32,7 @@ module Base
 
 	craftRecipe MakeImprovisedBottleSilencer
 	{
-    timedAction = Making,
+		timedAction = Making,
 		xpAward = Maintenance:5,
 		AutoLearnAll = Maintenance:3,
 		Time = 200,
@@ -52,54 +52,20 @@ module Base
 		}
 	}
 
-	craftRecipe ExtendStock
+	craftRecipe ToggleStock
 	{
-		Time = 15,
-		OnCreate = onExtendStock_OnCreate,
-		OnTest = onExtendStock_OnTest,
-		ToolTip = Tooltip_Recipe_ExtendStock,
-		Tags = InHandCraft;CanBeDoneInDark;RightClickOnly,
-    category = Weaponry,
-		inputs
-		{
-			item 1 [Base.MP5;Base.UZI;Base.M37;Base.Mac10;Base.SPAS12] flags[InheritCondition;InheritAmmunition] mappers[stockType],
-		}
-		outputs
-		{
-			item 1 mapper:stockType,
-		}
-		itemMapper stockType
-		{
-			Base.MP5 = Base.MP5,
-			Base.UZI = Base.UZI,
-			Base.Mac10 = Base.Mac10,
-			Base.SPAS12 = Base.SPAS12,
-		}
-	}
-
-	craftRecipe DetractStock
-	{
-		Time = 15,
-		OnCreate = onDetractStock_OnCreate,
-		OnTest = onDetractStock_OnTest,
-		ToolTip = Tooltip_Recipe_DetractStock,
-		Tags = InHandCraft;CanBeDoneInDark,
-    category = Weaponry,
-		inputs
-		{
-			item 1 [Base.MP5;Base.UZI;Base.Mac10;Base.SPAS12] flags[InheritCondition;InheritAmmunition] mappers[stockType],
-		}
-		outputs
-		{
-			item 1 mapper:stockType,
-		}
-		itemMapper stockType
-		{
-			Base.MP5 = Base.MP5,
-			Base.UZI = Base.UZI,
-			Base.Mac10 = Base.Mac10,
-			Base.SPAS12 = Base.SPAS12,
-		}
+	    Time = 3,
+	    OnCreate = onToggleStock_OnCreate,
+	    OnTest = onToggleStock_OnTest,
+	    Tags = InHandCraft;CanBeDoneInDark;RightClickOnly;KeepInHand,
+	    category = Weaponry,
+	    inputs
+	    {
+	        item 1 [Base.MP5;Base.UZI;Base.M37;Base.Mac10;Base.SPAS12] mode:keep,
+	    }
+	    outputs
+	    {
+	    }
 	}
 
 }
