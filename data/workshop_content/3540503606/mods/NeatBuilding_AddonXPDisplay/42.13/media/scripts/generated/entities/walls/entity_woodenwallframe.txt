@@ -1,0 +1,47 @@
+module Base
+{
+    entity WoodenWallFrame
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Wood_Wallframe,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            health = 50,
+            skillBaseHealth = 20,
+            face W
+            {
+                layer
+                {
+                    row = carpentry_02_100,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = carpentry_02_101,
+                }
+            }
+            corner = walls_exterior_wooden_01_27,
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildWallHammer,
+            time = 200,
+            category = Walls,
+            SkillRequired = Woodwork:2,
+            xpAward = Woodwork:20,
+            Tooltip = Tooltip_craft_woodenWallFrameDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 2 [Base.Plank],
+                item 2 [Base.Nails],
+            }
+        }
+    }
+}

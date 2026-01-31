@@ -14,7 +14,7 @@ module Base
 
 	/**********::----------:: sapph (12/16/2025): i havent looked into the fluids code that much, so i will just focus on porting this to MP! ::-----------:: **************/
 
-	craftRecipe SapphCooking_Juice
+	craftRecipe SapphCooking Juice
     {
         timedAction = MixBottle,
         time            = 20,
@@ -45,7 +45,7 @@ module Base
 		}
     }
 
-	craftRecipe SapphCooking_CleanBottle
+	craftRecipe SapphCooking CleanBottle
     {
         timedAction = MixBottle,
         time            = 20,
@@ -63,7 +63,7 @@ module Base
       	}
     }
 
-	craftRecipe SapphCooking_Make Vegetable Broth
+	craftRecipe SapphCooking Make Vegetable Broth
     {
         timedAction = EmptyPan,
         time            = 20,
@@ -83,9 +83,27 @@ module Base
 		   item 1 Base.Pot,
       	}
     }
+
 	/******maybe placeholders? not sure - liquids are iffy*********/
 
-	craftRecipe SapphCooking_BlendContents
+	craftRecipe SapphCooking PourOut
+    {
+        timedAction = EmptyPan,
+        time            = 60,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+       	{
+			item 1 [SapphCooking.Blender_Smoothie;SapphCooking.Blender_Puree;SapphCooking.Blender_Juice;SapphCooking.Blender_Milkshake;SapphCooking.Blender_Prep_Shake;SapphCooking.Blender_Prep_Juice;SapphCooking.Blender_Prep_Puree;SapphCooking.Blender_Prep_Smoothie] mode:destroy,
+       	}
+       outputs
+       	{
+           item 1 SapphCooking.Blender,
+      	}
+    }
+
+	craftRecipe SapphCooking BlendContents
     {
         timedAction = BlendContents,
         time            = 60,
@@ -111,7 +129,7 @@ module Base
     }
 
 
-	craftRecipe SapphCooking_Blend Pesto
+	craftRecipe SapphCooking Blend Pesto
     {
         timedAction = BlendContentsPesto,
         time            = 60,
@@ -132,7 +150,7 @@ module Base
       	}
     }
 
-	craftRecipe SapphCooking_Blend Pesto2
+	craftRecipe SapphCooking Blend Pesto2
     {
         timedAction = MixingMortarPestle,
         time            = 60,
@@ -153,7 +171,7 @@ module Base
       	}
     }
 	
-	craftRecipe SapphCooking_Blend Sorbet
+	craftRecipe SapphCooking Blend Sorbet
     {
         timedAction = BlendContents,
         time            = 60,
@@ -172,7 +190,7 @@ module Base
       	}
     }
 
-	craftRecipe SapphCooking_PourMilkshakeInto
+	craftRecipe SapphCooking PourMilkshakeInto
     {
         timedAction = EmptyPan,
         time            = 30,
@@ -203,7 +221,7 @@ module Base
 		}
     }
 
-	craftRecipe SapphCooking_PourSmoothieInto
+	craftRecipe SapphCooking PourSmoothieInto
     {
         timedAction = EmptyPan,
         time            = 30,
@@ -234,7 +252,7 @@ module Base
 		}
     }
 
-	craftRecipe SapphCooking_PourPureeInto
+	craftRecipe SapphCooking PourPureeInto
     {
         timedAction = EmptyPan,
         time            = 30,
@@ -259,7 +277,7 @@ module Base
 		}
     }
 
-	craftRecipe SapphCooking_PourJuiceInto
+	craftRecipe SapphCooking PourJuiceInto
     {
         timedAction = EmptyPan,
         time            = 30,
@@ -294,7 +312,7 @@ module Base
 
 	/*************************************************/
 
-	craftRecipe SapphCooking_Brew Coffee
+	craftRecipe SapphCooking Brew Coffee
     {
         timedAction = CoffeBrew,
         time            = 60,
@@ -320,7 +338,7 @@ module Base
       	}
     }
 
-	craftRecipe SapphCooking_Brew Coffee2
+	craftRecipe SapphCooking Brew Coffee2
     {
         timedAction = CoffeBrew,
         time            = 60,
@@ -346,7 +364,7 @@ module Base
       	}
     }
 
-	craftRecipe SapphCooking_Brew Coffee on French Press
+	craftRecipe SapphCooking Brew Coffee on French Press
     {
         timedAction = CoffeBrewFrenchPress,
         time            = 60,
@@ -369,17 +387,17 @@ module Base
       	}
 	}
 
-	craftRecipe SapphCooking_PourInThermos
+	craftRecipe SapphCooking PourInThermos
     {
         timedAction = EmptyPan,
         time            = 30,
         category = SapphCooking,
 		CanWalk = true,
-		OnCreate = SapphCreatePrep,
+		OnCreate = SapphCreatePrepCooked,
         Tags = InHandCraft;Cooking;CanBeDoneInDark,
         inputs
        	{
-			item 1 [Base.PotOfSoup;Base.PotOfSoupRecipe;Base.PotOfStew;SapphCooking.SaucepanStew] mappers[potType] mode:destroy flags[ItemCount],
+			item 1 [Base.PotOfSoup;Base.PotOfSoupRecipe;Base.PotOfStew;SapphCooking.SaucepanStew] mappers[potType] mode:destroy flags[ItemCount;InheritFoodAge;IsCookedFoodItem],
             item 1 [SapphCooking.EmptyThermos] mode:destroy,
        	}
        outputs
@@ -396,7 +414,7 @@ module Base
 		}
     }
 
-	craftRecipe SapphCooking_Make Protein Shake
+	craftRecipe SapphCooking Make Protein Shake
     {
         timedAction = MixBottle,
         time            = 20,
@@ -417,7 +435,7 @@ module Base
       	}
     }
 
-	craftRecipe SapphCooking_Make a Mug of Hot Chocolate
+	craftRecipe SapphCooking Make a Mug of Hot Chocolate
     {
         timedAction = EmptyPan,
         time            = 10,

@@ -1,14 +1,68 @@
 module Base
 {
 
-    craftRecipe CraftRope2
+    craftRecipe PickString
+    {
+        timedAction = SewingCloth,
+        time = 300,
+        Tags = AnySurfaceCraft,
+        category = Tailoring,
+        Tooltip = Tooltip_Survival_PickString,
+        inputs
+        {
+            item 1 [Base.Rope;Base.BurlapPiece] flags[Prop2] mode:destroy,
+            item 1 tags[base:sharpknife;base:scissors] mode:keep flags[IsNotDull;MayDegrade],
+            item 1 tags[base:awl;base:pliers] mode:keep flags[Prop1;MayDegradeLight],
+        }
+        outputs
+        {
+	    item 10 Base.String chance:0.8,
+        }
+    }
+
+    craftRecipe PlaceStringInBox
+    {
+        timedAction = PackingBox_Small,
+        time = 25,
+        OnTest = RecipeCodeOnTest.genericPacking,
+        OnCreate = RecipeCodeOnCreate.placeInBox,
+        Tags = InHandCraft;Packing,
+        category = Packing,
+        inputs
+        {
+            item 40 [Base.String] flags[AllowFavorite;InheritFavorite;IsExclusive;ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.StringBox,
+        }
+    }
+
+    craftRecipe OpenBoxOfString
+    {
+        timedAction = UnPackBox_Small,
+        time = 5,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        recipeGroup = OpenBox,
+        inputs
+        {
+            item 1 [Base.StringBox] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 40 Base.String,
+        }
+    }
+
+    craftRecipe CraftRopeTwine
     {
         timedAction = Making,
         time = 140,
         Tags = AnySurfaceCraft,
         inputs
         {
-            item 10 [Base.Twine] flags[Prop2],
+            item 10 tags[base:twine] flags[Prop2],
             item 1 [Base.WoodenStick2;Base.TreeBranch2;Base.Handle] mode:keep flags[Prop1],
             item 1 tags[base:sharpknife;base:scissors] mode:keep flags[IsNotDull;MayDegradeLight],
         }
@@ -18,21 +72,26 @@ module Base
         }
     }
 
-    craftRecipe UnravelRope
+    craftRecipe CarveButton
     {
-        timedAction = MakingHammer_Surface,
-        time = 180,
+        time = 200,
         Tags = AnySurfaceCraft,
-        category = Miscellaneous,
+        NeedToBeLearn = true,
+        timedAction = Making,
+        AutoLearnAny = Carving:3,
+        xpAward = Carving:10,
+        SkillRequired = Carving:1,
+        MetaRecipe = base:makebonearmor,
+        category = Carving,
         inputs
         {
-            item 1 [Base.Rope] flags[Prop2],
-            item 1 tags[base:hammer;base:clubhammer;base:hammerstone;base:mallet;base:knappingtool] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[base:drillwood;base:drillmetal;base:drillwoodpoor] mode:keep flags[MayDegradeLight],
+            item 1 tags[base:sharpknife] mode:keep flags[MayDegradeLight;IsNotDull;Prop1],
+            item 1 [Base.SmallHandle] flags[Prop2],
         }
         outputs
         {
-            item 1 Base.HempScutched,
-            item 1 Base.FlaxTow,
+            item 1 Base.ButtonWood,
         }
     }
 
@@ -80,7 +139,6 @@ module Base
         time = 300,
         Tags = InHandCraft;CanBeDoneFromFloor,
         category = Masonry,
-        SkillRequired = Masonry:1,
         xpAward = Masonry:20,
         inputs
         {
@@ -98,13 +156,13 @@ module Base
     {
         timedAction = Craft_PotteryBench,
         time = 120,
-        Tags = AnySurfaceCraft;Pottery,
+        Tags = AnySurfaceCraft;Pottery;CanBeDoneFromFloor,
         category = Pottery,
         xpAward = Pottery:5,
         inputs
         {
             item 1 [*],
-            -fluid 1.0 [Water],
+            -fluid 1.0 categories[Water] mode:mixture,
             item 1 tags[base:bucket] mode:keep flags[IsEmpty],
             item 1 [Base.Sheet;Base.CheeseCloth;Base.Strainer] mode:keep,
             item 1 [Base.Dirtbag],
@@ -132,18 +190,22 @@ module Base
         }
     }
 
-    craftRecipe MakeFlintFirestarter
+    craftRecipe MakeCrudeFirestarter
     {
-        timedAction = Making,
-        time = 100,
-        Tags = AnySurfaceCraft,
-        category = Miscellaneous,
+        time = 300,
+        Tags = InHandCraft,
+        category = Assembly,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:20,
+        SkillRequired = Maintenance:1,
+        NeedToBeLearn = true,
+        AutoLearnAny = Maintenance:4;FlintKnapping:4;PlantScavenging:4,
         inputs
         {
-            item 1 [Base.SteelBarQuarter;Base.SteelRodQuarter;Base.IronBarQuarter;Base.ScrapMetal;Base.ButterKnife;Base.Fork;Base.ForkForged;Base.Spoon;Base.SpoonForged] flags[Prop2;InheritCondition],
             item 1 tags[base:whetstone;base:file] mode:keep flags[MayDegrade;Prop1],
-            item 1 [Base.SharpedStone],
-            item 2 [Base.Twine;Base.RippedSheets;Base.DenimStrips;Base.LeatherStrips],
+            item 1 [Base.SteelBarQuarter;Base.IronBarQuarter;Base.ScrapMetal;Base.ButterKnife;Base.Fork;Base.ForkForged;Base.Spoon;Base.SpoonForged] flags[Prop2;InheritCondition],
+	    item 1 [Base.SharpedStone],
+            item 1 tags[base:binding] flags[DontReplace],
         }
         outputs
         {
@@ -151,20 +213,19 @@ module Base
         }
     }
 
-    craftRecipe MakeImprovisedCandle
+    craftRecipe MakeCannedCandle
     {
-        timedAction = Making,
+        timedAction = MixingBowl,
         time = 100,
         Tags = AnySurfaceCraft,
         category = Miscellaneous,
-        OnTest = RecipeCodeOnTest.hotFluidContainer,
-        Tooltip = Tooltip_B42Survival_NeedsToBeHot,
+        Tooltip = Tooltip_Survival_CanMustBeHot,
         inputs
         {
-            item 1 [Base.Twigs;Base.PlasticFork;Base.PlasticKnife;Base.PlasticSpoon;Base.WoodenSpoon;Base.Fork_Bone;Base.Spoon_Bone;Base.ButterKnife;Base.ForkForged;Base.SpoonForged;Base.Fork;Base.ButterKnife_Gold;Base.Fork_Gold;Base.Spoon_Gold;Base.ButterKnife_Silver;Base.Fork_Silver;Base.Spoon_Silver;Base.Spoon;Base.PenMultiColor;Base.Pen;Base.BluePen;Base.GreenPen;Base.RedPen;Base.Pencil;Base.PenSpiffo;Base.PencilSpiffo] mode:keep,
-            item 1 [Base.TinCanEmpty;Base.WaterRationCanEmpty] mode:destroy mappers[CanMapper] flags[IsEmpty],
-            item 6 [Base.Lard;Base.Butter],
-            item 2 [Base.Twine],
+            item 1 [Base.TinCanEmpty;Base.WaterRationCanEmpty;Base.EmptyJar;Base.JarCrafted] mode:destroy flags[Prop2] mappers[CanMapper],
+	    item 1 [Base.Paperclip;Base.Twigs;Base.Cork],
+            item 6 tags[base:bakingfat],
+            item 1 tags[base:twine],
         }
         outputs
         {
@@ -172,21 +233,23 @@ module Base
 	}
         itemMapper CanMapper
         {
-            item 1 Base.TinCanCandle = Base.TinCanEmpty,
-            item 1 Base.WaterTinCandle = Base.WaterRationCanEmpty,
+            Base.CandleTinCan = Base.TinCanEmpty,
+            Base.CandleWaterRationCan = Base.WaterRationCanEmpty,
+            Base.CandleJar = Base.EmptyJar,
+            Base.CandleJar = Base.JarCrafted,
         }
     }
 
-    craftRecipe LightImprovisedCandle
+    craftRecipe LightCannedCandle
     {
         timedAction = Making,
         time = 30,
-        Tooltip = Tooltip_Recipe_EquipCandleHand,
         Tags = InHandCraft;CanBeDoneInDark,
         category = Miscellaneous,
+        Tooltip = Tooltip_Recipe_EquipCandleHand,
         inputs
         {
-            item 1 [Base.TinCanCandle;Base.WaterTinCandle] mode:destroy flags[InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite] mappers[CanMapper],
+            item 1 [Base.CandleTinCan;Base.CandleWaterRationCan;Base.CandleJar] mode:destroy flags[InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite] mappers[CanMapper],
             item 1 tags[base:startfire],
         }
         outputs
@@ -195,12 +258,13 @@ module Base
 	}
         itemMapper CanMapper
         {
-            item 1 Base.TinCanCandleLit = Base.TinCanCandle,
-            item 1 Base.WaterTinCandleLit = Base.WaterTinCandle,
+            Base.CandleTinCanLit = Base.CandleTinCan,
+            Base.CandleWaterRationCanLit = Base.CandleWaterRationCan,
+            Base.CandleJarLit = Base.CandleJar,
         }
     }
 
-    craftRecipe ExtinguishImprovisedCandle
+    craftRecipe ExtinguishCannedCandle
     {
         timedAction = Making,
         time = 5,
@@ -208,7 +272,7 @@ module Base
         category = Miscellaneous,
         inputs
         {
-            item 1 [Base.TinCanCandleLit;Base.WaterTinCandleLit] mode:destroy flags[InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite] mappers[CanMapper],
+            item 1 [Base.CandleTinCanLit;Base.CandleWaterRationCanLit;Base.CandleJarLit] mode:destroy flags[InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite] mappers[CanMapper],
         }
         outputs
         {
@@ -216,8 +280,9 @@ module Base
 	}
         itemMapper CanMapper
         {
-            item 1 Base.TinCanCandle = Base.TinCanCandleLit,
-            item 1 Base.WaterTinCandle = Base.WaterTinCandleLit,
+            item 1 Base.CandleTinCan = Base.CandleTinCanLit,
+            item 1 Base.CandleWaterRationCan = Base.CandleWaterRationCanLit,
+            item 1 Base.CandleJar = Base.CandleJarLit,
         }
     }
 
@@ -230,12 +295,21 @@ module Base
         inputs
         {
             item 1 [Base.LongHandle;Base.TreeBranch2;Base.WoodenStick2] flags[Prop2;ItemCount;AllowFavorite;InheritFavorite],
-            item 10 [Base.RippedSheets;Base.DenimStrips;1:Base.Sheet;1:Base.BurlapPiece;20:Base.GrassTuft] flags[ItemCount;IsExclusive],
-            item 2 [Base.Twine;Base.Wire;Base.ElectricWire;Base.LeatherStrips;1:Base.Rope] flags[IsExclusive],
+            item 10 [Base.RippedSheets;Base.DenimStrips;1:Base.Sheet;1:Base.BurlapPiece;20:Base.GrassTuft] flags[ItemCount;IsExclusive] mappers[TextureMapper],
+            item 2 [Base.Twine;Base.String;Base.Wire;Base.ElectricWire;Base.LeatherStrips],
         }
         outputs
         {
-            item 1 Base.TorchNew,
+            item 1 mapper:TextureMapper,
+	}
+        itemMapper TextureMapper
+        {
+            item 1 Base.TorchCloth = Base.RippedSheets,
+            item 1 Base.TorchDenim = Base.DenimStrips,
+            item 1 Base.TorchCloth = Base.Sheet,
+            item 1 Base.TorchFiber = Base.BurlapPiece,
+            item 1 Base.TorchFiber = Base.GrassTuft,
+            default = Base.TorchCloth,
         }
     }
 
@@ -243,12 +317,12 @@ module Base
     {
         timedAction = Making,
         time = 30,
-        Tooltip = Tooltip_B42Survival_EquipTorchHand,
+        Tooltip = Tooltip_Survival_EquipTorchHand,
         Tags = InHandCraft;CanBeDoneInDark,
         category = Miscellaneous,
         inputs
         {
-            item 1 [Base.TorchNew;Base.TorchOld] mode:destroy flags[Prop1;InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite],
+            item 1 [Base.TorchCloth;Base.TorchDenim;Base.TorchFiber;Base.TorchBurnt] mode:destroy flags[Prop1;InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite],
             item 1 tags[base:startfire],
         }
         outputs
@@ -269,7 +343,7 @@ module Base
         }
         outputs
         {
-            item 1 Base.TorchOld,
+            item 1 Base.TorchBurnt,
         }
     }
 
@@ -277,13 +351,13 @@ module Base
     {
         timedAction = Making,
         time = 30,
-        Tooltip = Tooltip_B42Survival_OpenFire,
+        Tooltip = Tooltip_Survival_OpenFire,
         Tags = InHandCraft;CanBeDoneInDark;RightClickOnly,
         OnTest = RecipeCodeOnTest.openFire,
         category = Miscellaneous,
         inputs
         {
-            item 1 [Base.TorchNew;Base.TorchOld] mode:destroy flags[Prop1;InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite],
+            item 1 [Base.TorchCloth;Base.TorchDenim;Base.TorchFiber;Base.TorchBurnt] mode:destroy flags[Prop1;InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite],
         }
         outputs
         {

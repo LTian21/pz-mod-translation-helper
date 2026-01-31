@@ -1,0 +1,604 @@
+module FunctionalAppliances
+{
+	imports
+	{
+		Base,
+	}	
+
+	craftRecipe MakeBucketOfPopcorn
+	{
+		Time = 20,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		inputs
+		{
+			item 1 [Base.BucketEmpty;FunctionalAppliances.FAEmptyBucketPopcorn] mode:destroy,
+			item 3 [FunctionalAppliances.FATheaterPopcorn] mode:destroy,
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FABucketofPopcorn,
+		}
+	}
+	craftRecipe TakePopcornFromBucket
+	{
+		Time = 20,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+		category = Cooking,
+		inputs
+		{
+			item 1 [FunctionalAppliances.FABucketofPopcorn] mode:destroy,
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAEmptyBucketPopcorn,
+			item 3 FunctionalAppliances.FATheaterPopcorn,
+		}
+	}
+	craftRecipe MakeBucketOfButteredPopcorn
+	{
+		Time = 20,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		inputs
+		{
+			item 1 [Base.BucketEmpty;FunctionalAppliances.FAEmptyBucketPopcorn] mode:destroy,
+			item 3 [FunctionalAppliances.FAButteredPopcorn] mode:destroy,
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FABucketofButteredPopcorn,
+		}
+	}
+	craftRecipe TakeButteredPopcornFromBucket
+	{
+		Time = 20,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+		category = Cooking,
+		inputs
+		{
+			item 1 [FunctionalAppliances.FABucketofButteredPopcorn] mode:destroy,
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAEmptyBucketPopcorn,
+			item 3 FunctionalAppliances.FAButteredPopcorn,
+		}
+	}
+	craftRecipe ButterPopcorn
+	{
+		Time = 20,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		inputs
+		{
+			item 1 [FunctionalAppliances.FABucketofPopcorn] mode:destroy,
+			item 1 [Base.Butter] mode:destroy,
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FABucketofButteredPopcorn,
+		}
+	}
+
+	craftRecipe MakeEmptyKeg
+	{
+		timedAction = Welding,
+		Time = 400,
+		SkillRequired = MetalWelding:2,
+		Tags = InHandCraft;Welding,
+        	category = Metalworking,
+		xpAward = MetalWelding:35,
+		inputs
+		{
+			item 1 [Base.SheetMetal] mode:destroy,
+			item 2 [Base.SmallSheetMetal] mode:destroy,
+			item 1 [Base.MetalPipe] mode:destroy,
+			item 4 [Base.Screws] mode:destroy,
+			item 1 [Base.BlowTorch],
+			item 1 tags[WeldingMask] mode:keep,
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAEmptyKeg,
+		}
+	}
+  	craftRecipe CraftHomeBrewKeg
+	{
+		timedAction = MixingBowl,
+		time = 600,
+		SkillRequired = Cooking:3,
+		tags = InHandCraft;Cooking,
+        	category = Cooking,
+		xpAward = Cooking:35,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptyKeg] mode:destroy,
+			item 1 [Base.Yeast],
+			item 1 tags[Flour],
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAHomeBrewKeg,
+		}
+	}
+
+	craftRecipe MakeEmptyCO2Tank
+	{
+		timedAction = Welding,
+		Time = 400,
+		SkillRequired = MetalWelding:2,
+		Tags = InHandCraft;Welding,
+        	category = Metalworking,
+		xpAward = MetalWelding:35,
+		inputs
+		{
+			item 1 [Base.SheetMetal] mode:destroy,
+			item 2 [Base.SmallSheetMetal] mode:destroy,
+			item 1 [Base.MetalPipe] mode:destroy,
+			item 4 [Base.Screws] mode:destroy,
+			item 1 [Base.BlowTorch],
+			item 1 tags[WeldingMask] mode:keep,
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.EmptyFACO2Tank,
+		}
+	}
+	craftRecipe RefillCO2Tank
+	{
+		timedAction = Making,
+		time = 600,
+		SkillRequired = Cooking:1,
+		tags = InHandCraft;Cooking,
+        	category = Cooking,
+		xpAward = Cooking:35,
+		inputs
+		{
+			item 1 [FunctionalAppliances.EmptyFACO2Tank] mode:destroy,
+			item 1 [Base.Garbagebag;Base.Bag_TrashBag] mode:destroy,
+			item 1 [Base.DuctTape],
+			item 1 [Base.BakingSoda],
+			item 1 [Base.Vinegar2;Base.RiceVinegar;Base.BalsamicVinegar],
+			item 1 [Base.TirePump] mode:keep,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FACO2Tank,
+		}
+	}
+
+	craftRecipe CraftEmptySodaSyrupBox
+	{
+		Time = 40,
+		Tags = InHandCraft,
+        	SkillRequired = Maintenance:1,
+		category = Assembly,
+		xpAward = Maintenance:5,
+		inputs
+		{
+			item 1 [Base.ProduceBox_Medium;Base.ProduceBox_Large;Base.ProduceBox_ExtraLarge] mode:destroy,
+			item 1 [Base.Garbagebag;Base.Bag_TrashBag] mode:destroy,
+			item 1 [Base.DuctTape],
+			item 1 [Base.Glue],
+			item 1 tags[Scissors;SharpKnife] mode:keep flags[IsNotDull],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAEmptySodaSyrupBox,
+		}
+	}
+	craftRecipe CraftMixedBerriesSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.Strewberrie;Base.BerryBlack;Base.BerryBlue;Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5;Base.BeautyBerry;Base.HollyBerry;Base.WinterBerry] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAMixedBerriesSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftOrangeSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.Orange] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAOrangeSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftLemonLimeSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.Lemon] mode:destroy,
+			item 1 [Base.Lime] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FALemonLimeSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftRootBeerSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.Log] mode:destroy,
+			item 1 [Base.GingerRoot] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FARootBeerSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftKYColaSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.LicoriceBlack] mode:destroy,
+			item 1 [Base.Orange] mode:destroy,
+			item 1 [Base.Lemon] mode:destroy,
+			item 1 [Base.Lime] mode:destroy,
+			item 1 [Base.GingerRoot] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAKYColaSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftColaSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.Orange] mode:destroy,
+			item 1 [Base.Lemon] mode:destroy,
+			item 1 [Base.Lime] mode:destroy,
+			item 1 [Base.GingerRoot] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAColaSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftDietColaSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 [Base.Orange] mode:destroy,
+			item 1 [Base.Lemon] mode:destroy,
+			item 1 [Base.Lime] mode:destroy,
+			item 1 [Base.GingerRoot] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FADietColaSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftGingerAleSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.GingerRoot] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAGingerAleSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftBlueberrySodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.BerryBlue] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FABlueberrySodaSyrupBox,
+		}
+	}
+	craftRecipe CraftBubblegumSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.Gum] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FABubblegumSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftLimeSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.Lime] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FALimeSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftGrapeSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.Grapes] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAGrapeSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftPineappleSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.Pineapple] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAPineappleSodaSyrupBox,
+		}
+	}
+	craftRecipe CraftStrawberrySodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.Strewberrie] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAStrawberrySodaSyrupBox,
+		}
+	}
+	craftRecipe CraftDrPeppaSodaSyrup
+	{
+		timedAction = MixingBowl,
+		Time = 400,
+		SkillRequired = Cooking:2,
+		Tags = InHandCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:20,
+		NeedToBeLearn = True,
+		AutoLearnAny = Cooking:4,
+		inputs
+		{
+			item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+			item 1 [FunctionalAppliances.FAEmptySodaSyrupBox] mode:destroy,
+			item 1 tags[Sugar],
+			item 1 [Base.LicoriceBlack] mode:destroy,
+			item 1 [Base.Cherry] mode:destroy,
+			item 1 [Base.Lemon] mode:destroy,
+			item 1 [Base.Lime] mode:destroy,
+			item 1 [Base.GingerRoot] mode:destroy,
+			item 1 [Base.Pot;Base.PotForged] mode:keep,
+			-fluid 1.0 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FADrPeppaSodaSyrupBox,
+		}
+	}
+
+  	craftRecipe ConvertPaperNapkinsToFunctionalAppliancesPaperNapkins
+	{
+		timedAction = Making,
+		Time = 10,
+		Tags = InHandCraft;Health,
+		category = Medical,
+		inputs
+		{
+			item 1 [Base.PaperNapkins2] mode:destroy,
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAPaperNapkins,
+		}
+	}
+  	craftRecipe WetPaperNapkins
+	{
+		timedAction = Making,
+		Time = 10,
+		Tags = InHandCraft;Health,
+		category = Medical,
+		inputs
+		{
+			item 1 [FunctionalAppliances.FAPaperNapkins] mode:destroy,
+			item 1 [*],
+			-fluid 0.1 [Water],
+		}
+		outputs
+		{
+			item 1 FunctionalAppliances.FAPaperNapkinsWet,
+		}
+	}
+}
+	

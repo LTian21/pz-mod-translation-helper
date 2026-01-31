@@ -1,0 +1,72 @@
+module Base
+{
+	model Chevalier_Rhino_Bullbar
+	{
+		mesh = vehicles/Vehicles_Chevalier_Rhino_F|BullBar,
+		shader = vehicle_multiuv_noreflect,
+		invertX = FALSE,
+		scale = .4,
+	}
+
+	template vehicle RhinoArmor
+	{
+		part RhinoArmorBullBar
+		{
+			model Default
+			{
+				file = Chevalier_Rhino_Bullbar,
+			}
+			
+			area = Engine,
+			category = bodywork,
+			itemType = Base.RhinoBullBar,
+
+			lua
+            {
+				create = rhinoArmor.Create.Bullbar,
+				update = rhinoArmor.Update.Bullbar,
+			}
+		}
+		
+		part RhinoArmor*
+		{
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+		}		
+	}
+}

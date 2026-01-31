@@ -1,0 +1,60 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Vehicle_Lift_Overhead_Middle
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Vehicle Lift Overhead Middle,
+			Icon		= Build_VehicleLift,
+		}
+	}
+
+    entity BuildVehicleLiftOverheadMiddle
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Vehicle_Lift_Overhead_Middle,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = location_business_machinery_01_1,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_business_machinery_01_12,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 300,
+            needToBeLearn = false,
+            SkillRequired = MetalWelding:4,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPVehicleLiftOverheadMiddle,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SmallSheetMetal],
+                item 2 [Base.MetalBar],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

@@ -1,0 +1,67 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Robotic_Fluid_Arm
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Robotic Fluid Arm,
+			Icon		= Build_RoboticFluidArm,
+		}
+	}
+
+    entity BuildRoboticFluidArm
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Robotic_Fluid_Arm,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_0 factory_pieces_claw_02_1,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_3,
+                    row = factory_pieces_claw_02_2,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 400,
+            needToBeLearn = true,
+            SkillRequired = Electricity:5;MetalWelding:5,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPRoboticFluidArm,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SheetMetal],
+                item 2 [Base.SmallSheetMetal],
+                item 2 [Base.MetalPipe],
+                item 2 [Base.MetalBar],
+                item 2 [Base.Screws],
+                item 4 [Base.ElectricWire],
+                item 10 [Base.ElectronicsScrap],
+                item 4 [Base.WeldingRods],
+		item 1 [Base.RubberHose],
+            }
+        }
+    }
+}

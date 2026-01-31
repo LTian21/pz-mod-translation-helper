@@ -1,0 +1,78 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Conveyor_Corners
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Conveyor Corner,
+			Icon		= Build_ConveyorCorner,
+		}
+	}
+
+    entity BuildConveyorCorners
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Conveyor_Corners,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = industry_02_138,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = industry_02_137,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = industry_02_139,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = industry_02_136,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 100,
+            needToBeLearn = true,
+            SkillRequired = Electricity:1;MetalWelding:3,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPConveyorCorner,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 1 [Base.SmallSheetMetal],
+                item 1 [Base.MetalPipe],
+                item 1 [Base.MetalBar],
+                item 1 [Base.Screws],
+                item 1 [Base.ElectricWire],
+                item 10 [Base.ElectronicsScrap],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}

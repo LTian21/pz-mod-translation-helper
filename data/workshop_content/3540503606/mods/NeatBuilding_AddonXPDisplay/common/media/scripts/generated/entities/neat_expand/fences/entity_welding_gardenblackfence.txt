@@ -1,0 +1,61 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Welding_GardenBlackFence
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= NBEntityName_GardenBlackMetalFence,
+			Icon		= Build_fencing_01_1,
+		}
+	}
+
+    entity Welding_GardenBlackFence
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Welding_GardenBlackFence,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			health          = 250,
+			skillBaseHealth = 20,
+
+            face W
+            {
+                layer
+                {
+                    row = fencing_01_2,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fencing_01_1,
+                }
+            }
+            corner  =   fencing_01_0,
+        }
+		
+        component CraftRecipe
+        {
+            timedAction   = BuildSandbagWall,
+            time          = 50,
+            SkillRequired = MetalWelding:3,
+            xpAward       = MetalWelding:30,
+            category      = Fences,
+            ToolTip       = Tooltip_craft_sandBagDesc,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[DontRecordInput],
+                item 4 [Base.MetalBar],
+                item 2 [Base.WeldingRods] flags[DontRecordInput],
+                item 1 [Base.PaintBlack] flags[DontRecordInput],
+            }
+        }
+    }
+}

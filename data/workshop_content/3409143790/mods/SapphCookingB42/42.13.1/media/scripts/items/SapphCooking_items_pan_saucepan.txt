@@ -5,14 +5,12 @@ module SapphCooking
 		Base,
 	}	
     /**********::---------------------------:: ::---------------------------:: **************/
-	/**********::--------------------:: Saucepans - Prepping ::--------------------:: **************/
+	/**********::--------------------:: Saucepans (Default) - Prepping ::--------------------:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
 
 	item SaucepanwithOil
 	{
 		ItemType = base:normal,
-		HungerChange 		= -8,
-		CantEat = true,
 		Weight 		= 1,
 		Icon 		= SaucepanwithOilIcon,
 		StaticModel 		= H_SaucepanOilHand,
@@ -25,9 +23,12 @@ module SapphCooking
 		Tags = base:hasmetal;base:cookable;sapphcooking:oilpanbig;sapphcooking:oilpan;base:smeltablesteelsmall,
 		component FluidContainer
         {
-            ContainerName = OilPan,
-            RainFactor = 0,
-            Capacity = 0,
+            ContainerName = Saucepan,
+            Capacity = 0.5,
+			Fluids
+            {
+                fluid = CookingOil:0.5,
+            }
             CustomDrinkSound = DrinkingFromMug,
         }
 	}
@@ -35,8 +36,6 @@ module SapphCooking
 	item SaucepanwithOil_Copper
 	{
 		ItemType = base:normal,
-		HungerChange 		= -8,
-		CantEat = true,
 		Weight 		= 1,
 		Icon 		= SaucepanCopperwithOilIcon,
 		StaticModel 		= H_SaucepanOilHand,
@@ -48,9 +47,12 @@ module SapphCooking
 		Tags = base:nomaintenancexp;base:cookable;sapphcooking:oilpanbig;sapphcooking:oilpan;base:smeltablesteelsmall,
 		component FluidContainer
         {
-            ContainerName   = OilPan,
-            Capacity        = 0.0,
-            RainFactor	= 0,
+            ContainerName   = Saucepan,
+            Capacity = 0.5,
+            Fluids
+            {
+                fluid = CookingOil:1.0,
+            }
         }
 	}
 
@@ -108,6 +110,58 @@ module SapphCooking
 		Tags = sapphcooking:returnsaucepan,
 	}
 
+	item WaterSaucepanCopperArborioRice
+	{
+		DisplayCategory 		= Food,
+		Weight 		= 3,
+		ItemType = base:food,
+		Icon 		= SaucepanFilled,
+		HungerChange 		= -20,
+		ThirstChange 		= -30,
+		Carbohydrates 		= 108,
+		Proteins 		= 12,
+		Lipids 		= 0,
+		Calories 		= 300,
+		Tooltip = Tooltip_WaterPan,
+		IsCookable 		= true,
+		MinutesToCook 		= 30,
+		MinutesToBurn 		= 60,
+		UnhappyChange 		= 20,
+		ReplaceOnUse 		= SaucepanCopper,
+		DaysFresh 		= 3,
+		DaysTotallyRotten 		= 6,
+		BadInMicrowave 		= true,
+		GoodHot 		= true,
+		WorldStaticModel 		= WaterSaucepanRice,
+		CookingSound 		= BoilingFood,
+		Tags = sapphcooking:returnsaucepan,
+	}
+
+	item WaterSaucepanCopperBrownRice
+	{
+		DisplayCategory 		= Food,
+		Weight 		= 3,
+		ItemType = base:food,
+		Icon 		= SaucepanFilled,
+		HungerChange 		= -20,
+		ThirstChange 		= -30,
+		Carbohydrates 		= 108,
+		Proteins 		= 12,
+		Lipids 		= 0,
+		Calories 		= 400,
+		IsCookable 		= true,
+		MinutesToCook 		= 30,
+		MinutesToBurn 		= 60,
+		ReplaceOnUse 		= SaucepanCopper,
+		DaysFresh 		= 3,
+		DaysTotallyRotten 		= 6,
+		BadInMicrowave 		= true,
+		GoodHot 		= true,
+		WorldStaticModel 		= WaterSaucepanRice,
+		CookingSound 		= BoilingFood,
+		Tags = sapphcooking:returnsaucepan,
+	}
+
 	item SaucepanwithSugarKernels
 	{
 		DisplayCategory 		= Food,
@@ -142,11 +196,43 @@ module SapphCooking
 		ReplaceOnCooked 		= Saucepan;SapphCooking.HomemadePopcorn;SapphCooking.HomemadePopcorn;SapphCooking.HomemadePopcorn;SapphCooking.HomemadePopcorn;SapphCooking.HomemadePopcorn,
 	}
 	
+	item SaucepanCopperwithSugarKernels
+	{
+		DisplayCategory 		= Food,
+		Icon 		= SaucepanwithKernelsIcon,
+		ItemType = base:food,
+		IsCookable 		= true,
+		MinutesToCook 		= 20,
+		MinutesToBurn 		= 40,
+		Weight 		= 1.2,
+		CookingSound = PopcornPan,
+		StaticModel 		= SaucePanPasta,
+		WorldStaticModel 		= SaucePanCopper,
+		CantEat 		= true,
+		ReplaceOnCooked 		= SaucepanCopper;SapphCooking.CandyPopcorn;SapphCooking.CandyPopcorn;SapphCooking.CandyPopcorn;SapphCooking.CandyPopcorn;SapphCooking.CandyPopcorn,
+	}
+
+	item SaucepanCopperwithKernelCorn
+	{
+		DisplayCategory 		= Food,
+		Icon 		= SaucepanwithKernelsIcon,
+		ItemType = base:food,
+		IsCookable 		= true,
+		MinutesToCook 		= 20,
+		MinutesToBurn 		= 40,
+		Weight 		= 1.2,
+		StaticModel 		= SaucepanPasta,
+		WorldStaticModel 		= SaucepanCopper,
+		CookingSound = PopcornPan,
+		CantEat 		= true,
+		ReplaceOnCooked 		= SaucepanCopper;SapphCooking.HomemadePopcorn;SapphCooking.HomemadePopcorn;SapphCooking.HomemadePopcorn;SapphCooking.HomemadePopcorn;SapphCooking.HomemadePopcorn,
+	}
 
 
 	/**********::---------------------------:: ::---------------------------:: **************/
 	/**********::--------------------:: Saucepans - Dishes ::--------------------:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
+
 	item SaucepanwithSpaguetti
 	{
 		DisplayCategory 		= Food,
@@ -174,6 +260,34 @@ module SapphCooking
 		FatigueChange 		= -15,
 		Tags = sapphcooking:returnsaucepan,
 	}
+
+	item SaucepanCopperwithSpaguetti
+	{
+		DisplayCategory 		= Food,
+		Weight 		= 3,
+		ItemType = base:food,
+		Icon 		= SaucepanwithSpaguettiIcon,
+		HungerChange 		= -45,
+		Carbohydrates 		= 500,
+		Proteins 		= 20,
+		Lipids 		= 30,
+		Calories 		= 220,
+		ReplaceOnUse 		= SaucepanCopper,
+		DaysFresh 		= 3,
+		DaysTotallyRotten 		= 6,
+		GoodHot 		= true,
+		IsCookable 		= true,
+		MinutesToBurn 		= 60,
+		MinutesToCook 		= 30,
+		WorldStaticModel 		= WaterSaucepanPasta,
+		ThirstChange 		= -60,
+		UnhappyChange 		= -20,
+		StressChange 		= -20,
+		BoredomChange 		= -20,
+		FatigueChange 		= -15,
+		Tags = sapphcooking:returnsaucepan,
+	}
+
 	item SaucepanwithSpaguettiandMeatballs
 	{
 		DisplayCategory 		= Food,
@@ -187,6 +301,34 @@ module SapphCooking
 		Lipids 		= 28,
 		Calories 		= 200,
 		ReplaceOnUse 		= Saucepan,
+		DaysFresh 		= 3,
+		DaysTotallyRotten 		= 6,
+		GoodHot 		= true,
+		WorldStaticModel 		= WaterSaucepanPasta,
+		ThirstChange 		= -60,
+		UnhappyChange 		= -20,
+		StressChange 		= -20,
+		BoredomChange 		= -20,
+		FatigueChange 		= -15,
+		IsCookable 		= true,
+		MinutesToBurn 		= 100,
+		MinutesToCook 		= 60,
+		BadInMicrowave 		= true,
+		Tags = sapphcooking:returnsaucepan,
+	}
+
+	item SaucepanCopperwithSpaguettiandMeatballs
+	{
+		DisplayCategory 		= Food,
+		Weight 		= 3,
+		ItemType = base:food,
+		Icon 		= SaucepanwithSpaguettiMeatballsIcon,
+		HungerChange 		= -50,
+		Carbohydrates 		= 500,
+		Proteins 		= 18,
+		Lipids 		= 28,
+		Calories 		= 200,
+		ReplaceOnUse 		= SaucepanCopper,
 		DaysFresh 		= 3,
 		DaysTotallyRotten 		= 6,
 		GoodHot 		= true,
@@ -229,6 +371,32 @@ module SapphCooking
 		Tags = sapphcooking:meltedchocolate;sapphcooking:chocolate,
 	}
 
+	item SaucepanCopperChocolate
+	{
+		DisplayCategory 		= Food,
+		Weight 		= 3,
+		ItemType = base:food,
+		DisplayName 		= Saucepan with Chocolate,
+		Icon 		= SaucepanwithChocolateBarsIcon,
+		Carbohydrates 		= 115,
+		Proteins 		= 11,
+		Lipids 		= 70,
+		Calories 		= 860,
+		ReplaceOnUse 		= SaucepanCopper,
+		GoodHot 		= true,
+		HungerChange 		= -20,
+		DaysTotallyRotten 		= 4,
+		DaysFresh 		= 2,
+		EatType = plate,
+		WorldStaticModel 		= SaucepanChocolate,
+		WorldObjectSprite 		= SaucepanChocolateHand,
+		IsCookable 		= true,
+		MinutesToBurn 		= 60,
+		MinutesToCook 		= 10,
+		UnhappyChange 		= -10,
+		Tags = sapphcooking:meltedchocolate;sapphcooking:chocolate,
+	}
+
 	item Saucepan_InstantNoodles
 	{
 		DisplayCategory 		= Food,
@@ -245,6 +413,31 @@ module SapphCooking
 		Lipids 		= 30,
 		Calories 		= 220,
 		ReplaceOnUse 		= Saucepan,
+		DaysFresh 		= 3,
+		DaysTotallyRotten 		= 6,
+		GoodHot 		= true,
+		FluReduction    =   5,
+		WorldStaticModel 		= WaterSaucepanPasta,
+		ThirstChange 		= -30,
+		Tags = sapphcooking:returnsaucepan,
+	}
+
+	item SaucepanCopper_InstantNoodles
+	{
+		DisplayCategory 		= Food,
+		Weight 		= 3,
+		ItemType = base:food,
+		DisplayName 		= Instant Noodles,
+		Icon 		= SaucepanFilled,
+		HungerChange 		= -15,
+		Carbohydrates 		= 200,
+		MinutesToBurn = 40,
+		MinutesToCook = 10,
+		IsCookable = true,
+		Proteins 		= 20,
+		Lipids 		= 30,
+		Calories 		= 220,
+		ReplaceOnUse 		= SaucepanCopper,
 		DaysFresh 		= 3,
 		DaysTotallyRotten 		= 6,
 		GoodHot 		= true,

@@ -1,0 +1,64 @@
+module Base
+{
+    entity Metal_Shelves_Lvl2
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Shelves_Lvl2,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            needToBeAgainstWall = true,
+            face W
+            {
+                layer
+                {
+                    row = furniture_shelving_01_30,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = furniture_shelving_01_31,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = furniture_shelving_01_29,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = furniture_shelving_01_28,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = metalLockedSmallLvl2Test,
+            timedAction = BuildMetalStructureSmall,
+            time = 50,
+            NeedToBeLearn = true,
+            SkillRequired = MetalWelding:9,
+            xpAward = MetalWelding:90,
+            category = Furniture,
+            Tags = Welding;Furniture,
+            Tooltip = Tooltip_craft_NeedsWallDesc,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[DontRecordInput],
+                item 1 [Base.SmallSheetMetal],
+                item 2 [Base.MetalPipe],
+                item 1 [Base.ScrapMetal],
+                item 2 [Base.WeldingRods] flags[DontRecordInput],
+            }
+        }
+    }
+}

@@ -1,0 +1,71 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Orange_Line_Caution_Tile
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Orange Line Caution Tile,
+			Icon		= Build_OrangeLineCautionTile,
+		}
+	}
+
+    entity BuildOrangeLineCautionTile
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Orange_Line_Caution_Tile,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_26,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_27,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_28,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_29,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = Making,
+            time          = 100,
+            needToBeLearn = false,
+            xpAward       = Maintenance:1,
+            category      = Factory Pieces,
+            ToolTip       = Tooltip_FPOrangeLineCautionTile,
+            inputs
+            {
+		item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull;Prop1],
+                item 1 [Base.PaintOrange],
+                item 1 [Base.DuctTape],
+            }
+        }
+    }
+}

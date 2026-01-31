@@ -1,0 +1,50 @@
+module Base
+{
+    entity WoodDoorFrameLvl3
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Wood_DoorframeLvl3,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            skillBaseHealth = 300,
+            isThumpable = false,
+            OnCreate = BuildRecipeCode.canBePlastered.OnCreate,
+            OnIsValid = BuildRecipeCode.doorFrame.OnIsValid,
+            face W
+            {
+                layer
+                {
+                    row = walls_exterior_wooden_01_34,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_exterior_wooden_01_35,
+                }
+            }
+            corner = walls_exterior_wooden_01_27,
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = woodenDoorFrameLvl3Test,
+            timedAction = BuildWallHammer,
+            time = 200,
+            category = Doors,
+            SkillRequired = Woodwork:6,
+            xpAward = Woodwork:60,
+            Tooltip = Tooltip_craft_doorFrameDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

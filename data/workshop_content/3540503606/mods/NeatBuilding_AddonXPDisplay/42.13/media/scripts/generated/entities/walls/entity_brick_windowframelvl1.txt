@@ -1,0 +1,48 @@
+module Base
+{
+    entity BrickWindowFrameLvl1
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_BrickWindowFrameLvl1,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            skillBaseHealth = 300,
+            bonusHealth = 400,
+            face W
+            {
+                layer
+                {
+                    row = walls_exterior_house_01_28,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_exterior_house_01_29,
+                }
+            }
+            corner = walls_exterior_house_01_23,
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = brickWallLvl1Test,
+            timedAction = BuildWallHammer,
+            time = 200,
+            category = Windows,
+            SkillRequired = Masonry:2,
+            xpAward = Masonry:20,
+            Tooltip = Tooltip_craft_woodenFrameDesc,
+            inputs
+            {
+                item 1 tags[base:masonstrowel] mode:keep flags[Prop1;MayDegradeLight],
+                item 2 tags[base:concrete] flags[DontRecordInput],
+                item 4 [Base.ClayBrick],
+            }
+        }
+    }
+}

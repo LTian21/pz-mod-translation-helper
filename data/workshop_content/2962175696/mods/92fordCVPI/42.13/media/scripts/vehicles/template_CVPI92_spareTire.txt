@@ -1,0 +1,62 @@
+module Base
+{
+
+	template vehicle CVPI92SpareTires
+	{
+		part DAMNSpareTire
+        	{
+
+			model SpareTire1
+				{
+                		file = 92fordCVPIWheel,
+                        offset = 0.0000 -0.0667 -1.6096,
+				        rotate = 0.0000 0.0000 90.0000,
+				}
+
+            model SpareTire2
+				{
+                		file = 92fordUNIL,
+                        offset = 0.0000 -0.0667 -1.6096,
+				        rotate = 0.0000 0.0000 90.0000,
+				}
+
+			category = Other,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.fordCVPITire1;damnCraft.SmallTire1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                
+
+                	time = 550,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CVPI92.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+
+					time = 600,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = CVPI92.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = CVPI92.Create.SpareTire,
+				init = CVPI92.Init.SpareTire,
+				}
+		}
+	}
+}
+

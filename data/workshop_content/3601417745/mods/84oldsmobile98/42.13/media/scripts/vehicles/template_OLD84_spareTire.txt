@@ -1,0 +1,76 @@
+module Base
+{
+    model 84oldsmobile98Spare
+	{
+		mesh = vehicles/Vehicles_84oldsmobile98_Body|84c-platform_spare,
+		texture = Vehicles/Vehicles_84oldsmobile98_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle OLD84SpareTires
+	{
+		part DAMNSpareTire
+        	{
+                model devSpareAll
+                {
+                    file = 84oldsmobile98Spare,
+                }
+
+			category = Other,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.85gmBbodyTire0;Base.85gmBbodyTire1;Base.85gmBbodyTire3;Base.85gmBbodyTire4;Base.85gmBbodyTire5;damnCraft.SteelTire1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = OLD84.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = OLD84.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = OLD84.Create.SpareTire,
+				init = OLD84.Init.SpareTire,
+				}
+		}
+	}
+}

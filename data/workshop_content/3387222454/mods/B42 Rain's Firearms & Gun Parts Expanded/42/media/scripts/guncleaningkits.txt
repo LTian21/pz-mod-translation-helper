@@ -1,0 +1,62 @@
+module Base
+{
+
+    item GunCleaningKit
+    {
+        DisplayCategory = Container,
+        ItemType = base:drainable,
+        UseDelta = 0.1,
+        Weight = 0.4,
+        Icon = GunClean,
+        WorldStaticModel = GunClean,
+        UseWhileEquipped = false,
+	Tooltip = Tooltip_GunCleaningKit,
+    }
+
+	model GunClean
+	{
+		mesh = WorldItems/GunClean,
+		texture = WorldItems/GunClean,
+	}
+
+    item HomeMadeGunCleaningKit
+    {
+        DisplayCategory = Container,
+        ItemType = base:drainable,
+        UseDelta = 0.1,
+        Weight = 0.4,
+        Icon = GunClean,
+        WorldStaticModel = GunClean2,
+        UseWhileEquipped = false,
+	Tooltip = Tooltip_GunCleaningKit,
+    }
+
+	model GunClean2
+	{
+		mesh = WorldItems/GunClean2,
+		texture = WorldItems/GunClean2,
+	}
+
+    craftRecipe MakeGunCleaningKit
+    {
+        timedAction = OpenAmmoBox,
+        time = 150,
+        category = Packing,
+        recipeGroup = OpenBox,
+        Tags = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Toothbrush],
+            item 5 [Base.RippedSheets],
+            item 1 [Base.Scotchtape],
+            item 1 [Base.CottonBalls],
+            item 1 [Base.OilVegetable],
+        }
+        outputs
+        {
+            item 1 Base.HomeMadeGunCleaningKit,
+        }
+
+    }
+
+}
