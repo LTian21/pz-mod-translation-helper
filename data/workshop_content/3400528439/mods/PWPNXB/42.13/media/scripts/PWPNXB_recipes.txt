@@ -1,0 +1,828 @@
+module Base
+{
+	
+	craftRecipe PlaceWoodBoltsInStack
+	{
+		timedAction = PlaceAmmoInBox,
+		Time = 15,
+		category = Packing,
+        Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 20 [PWPNXB.WoodBolt],
+		}
+		outputs
+		{
+			item 1 PWPNXB.WoodBoltStack,
+		}
+	}
+	craftRecipe PlaceShortWoodBoltsInStack
+	{
+		timedAction = PlaceAmmoInBox,
+		Time = 15,
+		category = Packing,
+        Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 20 [PWPNXB.ShortWoodBolt],
+		}
+		outputs
+		{
+			item 1 PWPNXB.ShortWoodBoltStack,
+		}
+	}
+	craftRecipe PlaceIronBoltsInStack
+	{
+		timedAction = PlaceAmmoInBox,
+		Time = 15,
+		category = Packing,
+        Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 20 [PWPNXB.IronBolt],
+		}
+		outputs
+		{
+			item 1 PWPNXB.IronBoltStack,
+		}
+	}
+	craftRecipe PlaceShortIronBoltsInStack
+	{
+		timedAction = PlaceAmmoInBox,
+		Time = 15,
+		category = Packing,
+        Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 20 [PWPNXB.ShortIronBolt],
+		}
+		outputs
+		{
+			item 1 PWPNXB.ShortIronBoltStack,
+		}
+	}
+	craftRecipe UnpackBoltsStack
+	{
+		timedAction = OpenAmmoBox,
+		Time = 15,
+		category = Packing,
+        Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 1 [PWPNXB.WoodBoltStack;PWPNXB.ShortWoodBoltStack;PWPNXB.IronBoltStack;PWPNXB.ShortIronBoltStack] mappers[ammoTypes] flags[Prop2],
+		}
+		outputs
+		{
+			item 20 mapper:ammoTypes,
+		}
+        	itemMapper ammoTypes
+        {
+			PWPNXB.WoodBolt = PWPNXB.WoodBoltStack,
+			PWPNXB.ShortWoodBolt = PWPNXB.ShortWoodBoltStack,
+			PWPNXB.IronBolt = PWPNXB.IronBoltStack,
+			PWPNXB.ShortIronBolt = PWPNXB.ShortIronBoltStack,
+			
+			default = PWPNXB.WoodBolt,
+		}
+	}
+	
+	craftRecipe CarveWoodBoltShafts
+	{
+		timedAction = Making,
+		Time = 130,
+		Tags = InHandCraft,
+		xpAward = Carving:5,
+		category = Carving,
+		needTobeLearn = true,
+		AutoLearnAny = Carving:1,
+		OnCreate = PWPNXBRecipes.OnCreate.CarveWoodBolts,
+		inputs
+		{
+			item 1 tags[base:sharpknife] mode:keep flags[MayDegrade;IsNotDull],
+			item 1 [Base.TreeBranch2;Base.Handle;Base.LongStick_Broken;Base.WoodenStick2;Base.LongHandle_Broken;Base.LongHandle;Base.LongStick;Base.Plank;Base.Plunger;Base.Branch_Broken] flags[AllowDestroyedItem],
+		}
+		outputs
+		{
+            item 1 PWPNXB.WoodBoltShaft,
+        }
+    }
+		
+	craftRecipe CarveShortWoodBoltShafts
+	{
+		timedAction = Making,
+		Time = 130,
+		Tags = InHandCraft,
+		xpAward = Carving:5,
+		category = Carving,
+		needTobeLearn = true,
+		AutoLearnAny = Carving:1,
+		OnCreate = PWPNXBRecipes.OnCreate.CarveShortWoodBolts,
+		inputs
+		{
+			item 1 tags[base:sharpknife] mode:keep flags[MayDegrade;IsNotDull],
+			item 1 [Base.TreeBranch2;Base.Handle;Base.LongStick_Broken;Base.WoodenStick2;Base.LongHandle_Broken;Base.LongHandle;Base.LongStick;Base.Plank;Base.Plunger;Base.Branch_Broken] flags[AllowDestroyedItem],
+		}
+		outputs
+		{
+            item 1 PWPNXB.ShortWoodBoltShaft,
+        }
+    }
+	
+	craftRecipe MakeBoltFletchingsFromFeather
+	{
+		timedAction = Making,
+		Time = 20,
+		Tags = InHandCraft,
+		category = Carving,
+		needTobeLearn = true,
+		SkillRequired = Carving:1,
+		AutoLearnAny = Carving:2,
+		inputs
+		{
+			item 1 tags[base:sharpknife] mode:keep flags[MayDegrade;IsNotDull],
+			item 1 tags[base:feather],
+		}
+		outputs
+		{
+            item 2 PWPNXB.BoltFletchings,
+        }
+    }
+	craftRecipe MakeBoltFletchingsFromSheetPaper
+	{
+		timedAction = Making,
+		Time = 65,
+		Tags = InHandCraft,
+		category = Carving,
+		needTobeLearn = true,
+		AutoLearnAny = Maintenance:2,
+		SkillRequired = Maintenance:1,
+		inputs
+		{
+			item 1 tags[base:sharpknife] mode:keep flags[MayDegrade;IsNotDull],
+			item 1 [Base.SheetPaper2],
+		}
+		outputs
+		{
+            item 4 PWPNXB.BoltFletchings,
+        }
+    }
+	
+	craftRecipe MakeBoltFletchingsFromMagazine
+	{
+		timedAction = Making,
+		Time = 230,
+		Tags = InHandCraft,
+		category = Carving,
+		needTobeLearn = true,
+		AutoLearnAny = Maintenance:2,
+		SkillRequired = Maintenance:1,
+		inputs
+		{
+			item 1 tags[base:sharpknife] mode:keep flags[MayDegrade;IsNotDull],
+			item 1 tags[base:magazine],
+		}
+		outputs
+		{
+            item 40 PWPNXB.BoltFletchings,
+        }
+    }
+
+	craftRecipe AssembleWoodBolts
+	{
+		timedAction = Making,
+		Time = 80,
+		Tags = InHandCraft,
+		xpAward = Carving:2,
+		category = Assembly,
+		needTobeLearn = true,
+		AutoLearnAny = Carving:1,
+		inputs
+		{
+			item 1 tags[base:sharpknife] mode:keep flags[MayDegrade;IsNotDull],
+			item 10 [PWPNXB.BoltFletchings],
+			item 5 [PWPNXB.WoodBoltShaft],
+			item 1 tags[base:binding],
+			item 5 [PWPNXB.StoneBoltHead],
+		}
+		outputs
+		{
+            item 5 PWPNXB.WoodBolt,
+        }
+    }
+	
+	craftRecipe MakeStoneBoltHead
+    {
+		Time = 230,
+        needTobeLearn = true,
+        SkillRequired = FlintKnapping:2,
+		xpAward = FlintKnapping:20,
+        timedAction = MakingHammer_Surface,
+        tags = AnySurfaceCraft,
+        category = Knapping,
+        AutoLearnAny = FlintKnapping:3,
+		OnCreate = PWPNXBRecipes.OnCreate.KnapBoltHeads,
+        inputs
+        {
+            item 1 [Base.FlintNodule;Base.SharpedStone] flags[Prop2],
+            item 1 tags[base:hammerstone;base:mallet;base:knappingtool] mode:keep flags[Prop1;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 PWPNXB.StoneBoltHead,
+        }
+    }
+
+	craftRecipe MakeBoltHeadFromTin
+	{
+		timedAction = Making,
+		Time = 230,
+		Tags = AnySurfaceCraft,
+		xpAward = Maintenance:5,
+		SkillRequired = Maintenance:2,
+		needTobeLearn = true,
+		AutoLearnAny = Maintenance:3,
+		inputs
+		{
+			item 1 tags[base:sheetmetalsnips] mode:keep flags[MayDegradeLight],
+			item 1 tags[base:hammer;base:hammerstone] mode:keep,
+			item 1 tags[base:emptycan] flags[ItemCount],
+		}
+		outputs
+		{
+            item 3 PWPNXB.StoneBoltHead,
+        }
+    }
+
+	craftRecipe MakeBoltHeadFromLid
+	{
+		timedAction = Making,
+		Time = 200,
+		Tags = InHandCraft,
+		xpAward = Maintenance:10,
+		SkillRequired = Maintenance:2,
+		inputs
+		{
+			item 1 tags[base:sheetmetalsnips] mode:keep flags[MayDegradeLight],
+			item 1 [Base.JarLid],
+		}
+		outputs
+		{
+            item 10 PWPNXB.StoneBoltHead,
+        }
+    }
+	
+	craftRecipe AssembleCrudeCrossbow
+	{
+		timedAction = Making,
+		Time = 300,
+		Tags = AnySurfaceCraft,
+		xpAward = Maintenance:20,
+		SkillRequired = Maintenance:2,
+		category = Assembly,
+		needTobeLearn = true,
+		AutoLearnAny = Maintenance:3,
+		inputs
+		{
+			item 1 tags[base:screwdriver] mode:keep flags[MayDegradeLight;IsNotDull],
+			item 1 tags[base:hammerstone;base:hammer;base:clubhammer] mode:keep,
+			item 1 tags[base:saw] flags[MayDegradeLight] mode:keep,
+			item 1 [Base.SheetMetal],
+			item 5 [Base.Screws],
+			item 1 [PWPNXB.CrossBowStock],
+		}
+		outputs
+		{
+            item 1 PWPNXB.CrossbowStringless,
+        }
+    }
+	
+	craftRecipe AssembleShortWoodBolts
+	{
+		timedAction = Making,
+		Time = 80,
+		Tags = InHandCraft,
+		xpAward = Carving:5,
+		category = Assembly,
+		needTobeLearn = true,
+		AutoLearnAny = Carving:1,
+		inputs
+		{
+			item 1 tags[base:sharpknife] mode:keep flags[MayDegrade;IsNotDull],
+			item 10 [PWPNXB.BoltFletchings],
+			item 5 [PWPNXB.ShortWoodBoltShaft],
+			item 1 tags[base:binding],
+			item 5 [PWPNXB.StoneBoltHead],
+		}
+		outputs
+		{
+            item 5 PWPNXB.ShortWoodBolt,
+        }
+    }
+	
+	craftRecipe AssembleImprovedCrossbow
+	{
+		timedAction = Making,
+		Time = 400,
+		Tags = AnySurfaceCraft,
+		xpAward = Maintenance:30,
+		SkillRequired = Maintenance:4,
+		category = Assembly,
+		needTobeLearn = true,
+		AutoLearnAny = Maintenance:5,
+		inputs
+		{
+			item 1 tags[base:screwdriver] mode:keep flags[MayDegradeLight;IsNotDull],
+			item 1 tags[base:hammer;clubhammer] mode:keep,
+			item 1 tags[base:saw] flags[MayDegradeLight] mode:keep,
+			item 1 [Base.SheetMetal],
+			item 1 [Base.SmallSheetMetal],
+			item 8 [Base.Screws],
+			item 1 [PWPNXB.ImprovedCrossBowStock],
+		}
+		outputs
+		{
+            item 1 PWPNXB.ImprovedCrossBowStringless,
+        }
+    }
+	
+	craftRecipe MakeHandCrossbowMagazine
+	{
+		timedAction = Making,
+		Time = 500,
+		Tags = AnySurfaceCraft,
+		xpAward = Maintenance:20,
+		SkillRequired = Maintenance:4,
+		category = Weaponry,
+		needTobeLearn = true,
+		AutoLearnAny = Maintenance:5,
+		inputs
+		{
+			item 1 tags[base:Screwdriver] mode:keep flags[MayDegradeLight;IsNotDull],
+			item 1 tags[base:Hammer;ClubHammer] mode:keep,
+			item 1 tags[base:Saw] flags[MayDegradeLight] mode:keep,
+			item 1 [Base.SmallSheetMetal],
+			item 5 [Base.Screws],
+		}
+		outputs
+		{
+            item 1 PWPNXB.HandCrossBowMag,
+        }
+    }
+	
+	craftRecipe AssembleHandCrossbow
+	{
+		timedAction = Making,
+		Time = 300,
+		Tags = AnySurfaceCraft,
+		xpAward = Maintenance:20,
+		SkillRequired = Maintenance:4,
+		category = Assembly,
+		needTobeLearn = true,
+		AutoLearnAny = Maintenance:5,
+		inputs
+		{
+			item 1 tags[base:screwdriver] mode:keep flags[MayDegradeLight;IsNotDull],
+			item 1 tags[base:hammer;base:ClubHammer] mode:keep,
+			item 1 tags[base:saw] mode:keep flags[MayDegradeLight],
+			item 1 [Base.SheetMetal],
+			item 8 [Base.Screws],
+			item 1 [PWPNXB.HandCrossBowStock],
+		}
+		outputs
+		{
+            item 1 PWPNXB.HandCrossBowStringless,
+        }
+    }
+	
+	craftRecipe FileDownBarIntoMetalBolts
+	{
+		time = 130,
+		SkillRequired = Maintenance:1,
+		needTobeLearn = false,
+		timedAction = Making,
+		xpAward = Maintenance:5,
+		tags = InHandCraft,
+		inputs
+		{
+			item 1 tags[base:barstock] flags[Prop2],
+			item 1 tags[base:whetstone;base:file] mode:keep flags[Prop1;MayDegrade],
+		}
+		outputs
+		{
+			item 2 PWPNXB.IronBolt,
+		}
+	}
+	
+	craftRecipe FileDownBarIntoShortMetalBolts
+	{
+		time = 130,
+		SkillRequired = Maintenance:1,
+		needTobeLearn = false,
+		timedAction = Making,
+		xpAward = Maintenance:5,
+		tags = InHandCraft,
+		inputs
+		{
+			item 1 tags[base:barstockhalf] flags[Prop2],
+			item 1 tags[base:whetstone;base:file] mode:keep flags[Prop1;MayDegrade],
+		}
+		outputs
+		{
+			item 2 PWPNXB.ShortIronBolt,
+		}
+	}
+	
+	craftRecipe ForgeMetalBolts
+	{
+		time        = 130,
+        SkillRequired = Blacksmith:1,
+        needTobeLearn = true,
+        AutoLearnAny = Blacksmith:2,
+        timedAction = Making,
+        xpAward = Blacksmith:10,
+        Tags = PrimitiveForge;Forge;AdvancedForge,
+        category = Blade,
+        inputs
+        {
+            item 1 tags[base:charcoal],
+            item 1 tags[base:barstockhalf],
+            item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:tongs] mode:keep flags[Prop2],
+        }
+        outputs
+        {
+            item 2 PWPNXB.IronBolt,
+        }
+	}
+	
+	craftRecipe ForgeMetalBoltHead
+	{
+		time        = 130,
+        SkillRequired = Blacksmith:1,
+        needTobeLearn = true,
+        AutoLearnAny = Blacksmith:2,
+        timedAction = Making,
+        xpAward = Blacksmith:10,
+        Tags = PrimitiveForge;Forge;AdvancedForge,
+        category = Blade,
+        inputs
+        {
+            item 1 tags[base:charcoal],
+            item 1 tags[base:barstockquarter],
+            item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:tongs] mode:keep flags[Prop2],
+        }
+        outputs
+        {
+            item 5 PWPNXB.StoneBoltHead,
+        }
+	}
+	
+	craftRecipe ForgeShortMetalBolts
+	{
+		time        = 130,
+        SkillRequired = Blacksmith:1,
+        needTobeLearn = true,
+        AutoLearnAny = Blacksmith:2,
+        timedAction = Making,
+        xpAward = Blacksmith:10,
+        Tags = PrimitiveForge;Forge;AdvancedForge,
+        category = Blade,
+        inputs
+        {
+            item 1 tags[base:charcoal],
+            item 1 tags[base:barstockhalf],
+            item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:tongs] mode:keep flags[Prop2],
+        }
+        outputs
+        {
+            item 4 PWPNXB.ShortIronBolt,
+        }
+	}
+
+	craftRecipe RecycleBrokenMetalBolts
+	{
+		timedAction = Making,
+		Time = 60,
+		Tags = InHandCraft,
+		category = Weaponry,
+		inputs
+		{
+			item 1 tags[base:hammer;base:hammerstone] mode:keep flags[Prop1],
+			item 1 [PWPNXB.BrokenIronBolt],
+		}
+		outputs
+		{
+			item 1 Base.ScrapMetal,
+		}
+	}
+	
+	craftRecipe RecycleBrokenShortMetalBolts
+	{
+		timedAction = Making,
+		Time = 60,
+		Tags = InHandCraft,
+		category = Carving,
+		inputs
+		{
+			item 1 tags[base:hammer;base:hammerstone] mode:keep flags[Prop1],
+			item 2 [PWPNXB.BrokenShortIronBolt],
+		}
+		outputs
+		{
+			item 1 Base.ScrapMetal,
+		}
+	}
+	
+	craftRecipe UseMetalBolts
+	{
+		timedAction = Making,
+		Time = 1,
+		Tags = InHandCraft,
+		category = Weaponry,
+		OnCreate = PWPNXBRecipes.OnCreate.CrossbowsToIB,
+		inputs
+		{
+			item 1 [PWPNXB.Crossbow;PWPNXB.ImprovedCrossBow;PWPNXB.CompoundCrossBow;PWPNXB.CrossbowWire;PWPNXB.ImprovedCrossBowWire;PWPNXB.CompoundCrossBowWire],
+		}
+		outputs
+		{
+		}
+	}
+	
+	craftRecipe RecycleBrokenBolts
+	{
+		timedAction = Making,
+		Time = 30,
+		Tags = InHandCraft,
+		OnCreate = PWPNXBRecipes.OnCreate.RecycleBrokenBolts,
+		xpAward = Carving:1,
+		inputs
+		{
+			item 1 tags[base:sharpknife] mode:keep flags[Prop1;MayDegrade;IsNotDull],
+			item 1 [PWPNXB.BrokenShortBolt;PWPNXB.BrokenBolt],
+		}
+		outputs
+		{
+			item 1 Base.Splinters,
+		}
+	}
+	
+	craftRecipe UseWoodBolts
+	{
+		timedAction = Making,
+		Time = 1,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Weaponry,
+		OnCreate = PWPNXBRecipes.OnCreate.CrossbowsIBToNormal,
+		inputs
+		{
+			item 1 [PWPNXB.CrossbowIB;PWPNXB.ImprovedCrossBowIB;PWPNXB.CompoundCrossBowIB;PWPNXB.CrossbowIBWire;PWPNXB.ImprovedCrossBowIBWire;PWPNXB.CompoundCrossBowIBWire],
+		}
+		outputs
+		{
+		}
+	}
+	
+	craftRecipe UseShortMetalBoltsCB
+	{
+		timedAction = Making,
+		Time = 1,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Weaponry,
+		OnCreate = PWPNXBRecipes.OnCreate.MagCrossbowsToIB,
+		inputs
+		{
+			item 1 [PWPNXB.HandCrossBow;PWPNXB.HandCrossBowWire],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe UseShortWoodBoltsCB
+	{
+		timedAction = Making,
+		Time = 1,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Weaponry,
+		OnCreate = PWPNXBRecipes.OnCreate.MagCrossbowsToIB,
+		inputs
+		{
+			item 1 [PWPNXB.HandCrossBowIB;PWPNXB.HandCrossBowIBWire],
+		}
+		outputs
+		{
+		}
+	}
+	craftRecipe UseShortMetalBoltsMag
+	{
+		timedAction = Making,
+		Time = 1,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Weaponry,
+		OnCreate = PWPNXBRecipes.OnCreate.HandCrossBowMagToIB,
+		inputs
+		{
+			item 1 [PWPNXB.HandCrossBowMag],
+		}
+		outputs
+		{
+			item 1 PWPNXB.HandCrossBowMagIB,
+		}
+	}
+	craftRecipe UseShortWoodBoltsMag
+	{
+		timedAction = Making,
+		Time = 1,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Weaponry,
+		OnCreate = PWPNXBRecipes.OnCreate.HandCrossBowMagIBToNormal,
+		inputs
+		{
+			item 1 [PWPNXB.HandCrossBowMagIB],
+		}
+		outputs
+		{
+			item 1 PWPNXB.HandCrossBowMag,
+		}
+	}
+	
+	craftRecipe CarveCrudeCrossbowStock
+	{
+		timedAction = Making,
+		Time = 300,
+		Tags = AnySurfaceCraft,
+		needTobeLearn = true,
+		xpAward = Carving:30,
+		AutoLearnAny = Carving:6,
+		SkillRequired = Carving:4,
+		category = Carving,
+		inputs
+		{
+			item 1 [Base.Log],
+			item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[MayDegrade;Prop2;IsNotDull],
+			item 1 tags[base:hammer;base:hammerstone] mode:keep,
+			item 1 tags[base:carpentrychisel],
+		}
+		outputs
+		{
+			item 1 PWPNXB.CrossBowStock,
+		}
+	}
+	
+	craftRecipe CarveImprovedCrossbowStock
+	{
+		timedAction = Making,
+		Time = 500,
+		Tags = AnySurfaceCraft,
+		needTobeLearn = true,
+		AutoLearnAny = Carving:9,
+		xpAward = Carving:40,
+		SkillRequired = Carving:7,
+		category = Carving,
+		inputs
+		{
+			item 1 [Base.Plank;PWPNXB.CrossBowStock],
+			item 1 tags[base:drillwood;base:drillmetal;base:drillwoodpoor] mode:keep flags[MayDegrade;Prop1],
+			item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[MayDegrade;Prop2;IsNotDull],
+			item 1 tags[base:hammer;base:hammerstone] mode:keep,
+			item 1 tags[base:carpentryChisel] mode:keep flags[MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 PWPNXB.ImprovedCrossBowStock,
+		}
+	}
+	
+	craftRecipe CarveHandCrossbowStock
+	{
+		timedAction = Making,
+		Time = 500,
+		Tags = AnySurfaceCraft,
+		needTobeLearn = true,
+		AutoLearnAny = Carving:8,
+		xpAward = Carving:30,
+		SkillRequired = Carving:6,
+		category = Carving,
+		inputs
+		{
+			item 1 [Base.Plank;PWPNXB.CrossBowStock],
+			item 1 tags[base:drillwood;base:drillmetal;base:drillwoodpoor] mode:keep flags[MayDegrade;Prop1],
+			item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[MayDegrade;Prop2;IsNotDull],
+			item 1 tags[base:hammer;base:hammerstone] mode:keep,
+			item 1 tags[base:carpentrychisel] mode:keep flags[MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 PWPNXB.HandCrossBowStock,
+		}
+	}
+	
+	craftRecipe StringCrossbowWithTwine
+	{
+		timedAction = Making,
+		Time = 60,
+		category = Weaponry,
+        Tags = InHandCraft,
+		xpAward = Maintenance:5,
+		OnCreate = PWPNXBRecipes.OnCreate.StringCrossbows,
+		inputs
+		{
+			item 1 [PWPNXB.CrossbowStringless;PWPNXB.ImprovedCrossBowStringless;PWPNXB.CompoundCrossBowStringless] mappers[crossbows],
+			item 5 [Base.Twine],
+		}
+		outputs
+		{
+			item 1 mapper:crossbows,
+		}
+        	itemMapper crossbows
+        {
+			PWPNXB.Crossbow = PWPNXB.CrossbowStringless,
+			PWPNXB.ImprovedCrossBow = PWPNXB.ImprovedCrossBowStringless,
+			PWPNXB.CompoundCrossBow = PWPNXB.CompoundCrossBowStringless,
+			
+			default = PWPNXB.Crossbow,
+		}
+	}
+	
+	craftRecipe StringCrossbowWithWire
+	{
+		timedAction = Making,
+		Time = 60,
+		category = Weaponry,
+        Tags = InHandCraft,
+		xpAward = Maintenance:5,
+		OnCreate = PWPNXBRecipes.OnCreate.StringCrossbows,
+		inputs
+		{
+			item 1 [PWPNXB.CrossbowStringless;PWPNXB.ImprovedCrossBowStringless;PWPNXB.CompoundCrossBowStringless] mappers[crossbows],
+			item 5 [Base.Wire],
+		}
+		outputs
+		{
+			item 1 mapper:crossbows,
+		}
+        	itemMapper crossbows
+        {
+			PWPNXB.CrossbowWire = PWPNXB.CrossbowStringless,
+			PWPNXB.ImprovedCrossBowWire = PWPNXB.ImprovedCrossBowStringless,
+			PWPNXB.CompoundCrossBowWire = PWPNXB.CompoundCrossBowStringless,
+			
+			default = PWPNXB.CrossbowWire,
+		}
+	}
+	
+	craftRecipe StringHandCrossbowWithTwine
+	{
+		timedAction = Making,
+		Time = 60,
+		category = Weaponry,
+        Tags = InHandCraft,
+		xpAward = Maintenance:5,
+		OnCreate = PWPNXBRecipes.OnCreate.StringCrossbows,
+		inputs
+		{
+			item 1 [PWPNXB.HandCrossBowStringless;PWPNXB.HandCrossBowIBStringless] mappers[crossbows],
+			item 2 [Base.Twine],
+		}
+		outputs
+		{
+			item 1 mapper:crossbows,
+		}
+        	itemMapper crossbows
+        {
+			PWPNXB.HandCrossBow = PWPNXB.HandCrossBowStringless,
+			PWPNXB.HandCrossBowIB = PWPNXB.HandCrossBowIBStringless,
+			
+			default = PWPNXB.HandCrossBow,
+		}
+
+	}
+	
+	craftRecipe StringHandCrossbowWithWire
+	{
+		timedAction = Making,
+		Time = 60,
+		category = Weaponry,
+        Tags = InHandCraft,
+		xpAward = Maintenance:5,
+		OnCreate = PWPNXBRecipes.OnCreate.StringCrossbows,
+		inputs
+		{
+			item 1 [PWPNXB.HandCrossBowStringless;PWPNXB.HandCrossBowIBStringless] mappers[crossbows],
+			item 2 [Base.Wire],
+		}
+		outputs
+		{
+			item 1 mapper:crossbows,
+		}
+        	itemMapper crossbows
+        {
+			PWPNXB.HandCrossBowWire = PWPNXB.HandCrossBowStringless,
+			PWPNXB.HandCrossBowIBWire = PWPNXB.HandCrossBowIBStringless,
+			
+			default = PWPNXB.HandCrossBowWire,
+		}
+	}
+}

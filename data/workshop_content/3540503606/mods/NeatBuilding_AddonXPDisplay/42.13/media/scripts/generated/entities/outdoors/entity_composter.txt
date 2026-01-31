@@ -1,0 +1,92 @@
+module Base
+{
+    entity Composter
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Composter,
+            uiEnabled = false,
+        }
+        component ContextMenuConfig
+        {
+            contextEntry
+            {
+                menu = GetCompost,
+                customSubmenu = ContextMenuCode.CompostInteraction,
+            }
+        }
+        component SpriteConfig
+        {
+            OnCreate = BuildRecipeCode.composter.OnCreate,
+            face W
+            {
+                layer
+                {
+                    row = camping_01_19,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = composterLvl2Test,
+            timedAction = BuildWoodenStructureMedium,
+            time = 200,
+            category = Farming,
+            category = Farming,
+            SkillRequired = Woodwork:6,
+            xpAward = Woodwork:60,
+            Tooltip = Tooltip_craft_composterDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+
+    entity ComposterShoddy
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_ComposterShoddy,
+            uiEnabled = false,
+        }
+        component ContextMenuConfig
+        {
+            contextEntry
+            {
+                menu = GetCompost,
+                customSubmenu = ContextMenuCode.CompostInteraction,
+            }
+        }
+        component SpriteConfig
+        {
+            OnCreate = BuildRecipeCode.composter.OnCreate,
+            face W
+            {
+                layer
+                {
+                    row = carpentry_02_116,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = composterLvl1Test,
+            timedAction = BuildWoodenStructureMedium,
+            time = 200,
+            SkillRequired = Woodwork:3,
+            xpAward = Woodwork:30,
+            Tooltip = Tooltip_craft_composterDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

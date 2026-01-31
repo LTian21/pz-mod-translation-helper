@@ -1,0 +1,127 @@
+module Base
+{
+	model KI5trailerssusleft
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_small_sus_fl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model KI5trailerssusRight
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_small_sus_fl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model KI5trailerssusleftLarge
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_large_sus_fl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model KI5trailerssusRightLarge
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_large_sus_fl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+    model KI5trailerssusrleftLarge
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_large_sus_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+    model KI5trailerssusrRightLarge
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_large_sus_rl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle KI5TRSuspensionMedium
+	{
+        template! = DAMNleafSuspensionFront,
+
+		part SuspensionFrontLeft
+		{
+			model sl
+				{
+                		file = KI5trailerssusleft,
+				}
+		}
+
+		part SuspensionFrontRight
+		{
+			model sr
+				{
+                		file = KI5trailerssusRight,
+				}		
+		}
+	}
+
+    template vehicle KI5TRSuspensionSmall
+	{
+        template! = DAMNleafSuspensionFront,
+
+        part SuspensionFrontLeft
+		{
+			model sl
+				{
+                		file = KI5trailerssusleft,
+                        offset = 0.0000 0.0000 -0.1828,
+				}
+		}
+
+		part SuspensionFrontRight
+		{
+			model sr
+				{
+                		file = KI5trailerssusRight,
+                        offset = 0.0000 0.0000 -0.1828,
+				}
+		}
+    }
+
+    template vehicle KI5TRSuspensionLarge
+	{
+        template! = DAMNleafSuspensionFront,
+        template! = DAMNleafSuspensionRear,
+
+        part SuspensionFrontLeft
+		{
+			model sl
+				{
+                		file = KI5trailerssusleftLarge,
+                        offset = 0.0000 0.0000 0.0000,
+				}
+		}
+
+		part SuspensionFrontRight
+		{
+			model sr
+				{
+                		file = KI5trailerssusRightLarge,
+                        offset = 0.0000 0.0000 0.0000,
+				}
+		}
+
+        part SuspensionRearLeft
+		{
+			model srl
+				{
+                		file = KI5trailerssusrleftLarge,
+				}
+		}
+
+		part SuspensionRearRight
+		{
+			model srr
+				{
+                		file = KI5trailerssusrRightLarge,
+				}
+		}
+    }
+}

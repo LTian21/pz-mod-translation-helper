@@ -1,0 +1,60 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_AutoButcher
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Auto Butcher,
+			Icon		= Build_AutoButcher,
+		}
+	}
+
+    entity BuildAutoButcher
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_AutoButcher,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_10,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 500,
+            needToBeLearn = true,
+            SkillRequired = Electricity:1;MetalWelding:3,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPAutoButcher,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SheetMetal],
+                item 2 [Base.SmallSheetMetal],
+                item 2 [Base.MetalPipe],
+                item 4 [Base.MetalBar],
+                item 2 [Base.Screws],
+                item 4 [Base.ElectricWire],
+                item 20 [Base.ElectronicsScrap],
+                item 4 [Base.WeldingRods],
+                item 1 [Base.CircularSawblade],
+		item 1 [Base.RubberHose],
+            }
+        }
+    }
+}

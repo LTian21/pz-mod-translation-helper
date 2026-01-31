@@ -12,8 +12,6 @@ module SapphCooking
 	{
 		ItemType = base:normal,
 		ReplaceOnUse = Base.Pan,
-		HungerChange 		= -8,
-		CantEat = true,
 		IsCookable = true,
 		Weight 		= 1,
 		Icon 		= PanwithOilIcon,
@@ -24,9 +22,12 @@ module SapphCooking
 		Tags = base:hasmetal;base:cookable;base:smeltablesteelsmall;sapphcooking:oilpan;base:hideuncooked,
 		component FluidContainer
         {
-            ContainerName = OilPan,
-            RainFactor = 0,
-            Capacity = 0,
+            ContainerName = FryingPan,
+            Capacity = 0.5,
+			Fluids
+            {
+                fluid = CookingOil:0.3,
+            }
             CustomDrinkSound = DrinkingFromMug,
         }
 	}
@@ -104,5 +105,28 @@ module SapphCooking
 		Lipids 		= 18,
 		Proteins 		= 20,
 		Tags = sapphcooking:baconeggspan;sapphcooking:returnpan,
+	}
+
+
+	item FryingPan_PuffedRice
+	{
+		DisplayCategory 		= Food,
+		Icon 		= FriedRicePanIcon,
+		ItemType = base:food,
+		Weight 		= 1.2,
+		MinutesToBurn 		= 40,
+		MinutesToCook 		= 15,
+		IsCookable 		= TRUE,
+		CantEat = true,
+		StaticModel 		= H_FryingPanRice,
+		WorldStaticModel 		= FryingPanFriedRice,
+		DisplayName 		= Frying Pan with Rice Cereal,
+		HungerChange 		= -10,
+		ReplaceOnCooked		= Pan;SapphCooking.RiceCereal,
+		Calories = 140.0,
+        Carbohydrates = 28.0,
+        Lipids = 3.0,
+        Proteins = 1.0,
+		EatType = plate,
 	}
 }

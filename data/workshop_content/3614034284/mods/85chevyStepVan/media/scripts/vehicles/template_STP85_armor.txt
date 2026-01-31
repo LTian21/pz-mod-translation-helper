@@ -31,6 +31,37 @@ module Base
         static = FALSE,
     	}
 
+    model 85chevyStepVandoorflas
+    	{
+        mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_window_fl_as,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 85chevyStepVandoorfras
+    	{
+        mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_window_fr_as,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 85chevyStepVanwindshieldas
+    	{
+        mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_windshield_front_as,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 85chevyStepVanwindshieldrearas
+    	{
+        mesh = vehicles/Vehicles_85chevyStepVan_Body|85stepvan_windshield_rear_as,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
 	template vehicle STP85Armor
 		{
 		part DAMNWindshieldArmor
@@ -41,10 +72,15 @@ module Base
                 		file = 85chevyStepVanwindshielda,
 				}
 
+            model windas
+				{
+                		file = 85chevyStepVanwindshieldas,
+				}
+
 			area = Engine,
 			category = bodywork,
 			specificItem = false,
-			itemType = Base.85chevyStepVanWindshieldArmor,
+			itemType = Base.85chevyStepVanWindshieldArmor;Base.85chevyStepVanWindshieldSWATArmor,
 			mechanicRequireKey = false,
 
 			table install
@@ -103,11 +139,16 @@ module Base
                 		file = 85chevyStepVandoorfla,
 				}
 
+            model flas
+				{
+                		file = 85chevyStepVandoorflas,
+				}
+
 			area = SeatFrontLeft,
 			category = bodywork,
 			parent = DoorFrontLeft,
 			specificItem = false,
-			itemType = Base.85chevyStepVanFrontWindowArmor,
+			itemType = Base.85chevyStepVanFrontWindowArmor;Base.85chevyStepVanFrontWindowSWATArmor,
 			mechanicRequireKey = false,
 
 			table install
@@ -166,11 +207,16 @@ module Base
                 		file = 85chevyStepVandoorfra,
 				}
 
+            model fras
+				{
+                		file = 85chevyStepVandoorfras,
+				}
+
 			area = SeatFrontRight,
 			category = bodywork,
 			parent = DoorFrontRight,
 			specificItem = false,
-			itemType = Base.85chevyStepVanFrontWindowArmor,
+			itemType = Base.85chevyStepVanFrontWindowArmor;Base.85chevyStepVanFrontWindowSWATArmor,
 			mechanicRequireKey = false,
 
 			table install
@@ -229,11 +275,16 @@ module Base
                 		file = 85chevyStepVanwindshieldreara,
 				}
 
+                model windras
+				{
+                		file = 85chevyStepVanwindshieldrearas,
+				}
+
 			area = TruckBed,
 			category = bodywork,
 			parent = TrunkDoor,
 			specificItem = false,
-			itemType = Base.85chevyStepVanWindshieldRearArmor,
+			itemType = Base.85chevyStepVanWindshieldRearArmor;Base.85chevyStepVanWindshieldRearSWATArmor,
 			mechanicRequireKey = false,
 
 			table install
@@ -281,6 +332,48 @@ module Base
             		{
 					create = STP85.Create.WindshieldRearArmor,
 					init = STP85.Init.WindshieldRearArmor,
+			}
+		}
+	}
+
+    template vehicle STP85ArmorSWAT
+	{
+        template! = STP85Armor,
+
+		    part DAMNWindshieldArmor
+        	{
+
+            	lua
+            	{
+				create = STP85.Create.WindshieldArmorS,
+				init = STP85.Init.WindshieldArmorS,
+				}
+		    }
+
+            part DAMNFrontLeftArmor
+            {
+            	lua
+            	{
+				create = STP85.Create.FrontLeftArmorS,
+				init = STP85.Init.FrontLeftArmorS,
+				}
+		    }
+
+            part DAMNFrontRightArmor
+            {
+           		lua
+           		{
+				create = STP85.Create.FrontRightArmorS,
+				init = STP85.Init.FrontRightArmorS,
+				}
+		    }
+
+            part DAMNWindshieldRearArmor
+            {
+           		lua
+           		{
+				create = STP85.Create.WindshieldRearArmorS,
+				init = STP85.Init.WindshieldRearArmorS,
 			}
 		}
 	}

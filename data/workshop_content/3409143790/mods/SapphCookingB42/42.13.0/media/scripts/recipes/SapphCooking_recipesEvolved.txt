@@ -12,7 +12,7 @@ module Base
 	/**********::-----:: Evolved Recipes are here! ::-----:: **************/
 	/**********::---------------------------:: ::---------------------------:: **************/
 
-	craftRecipe SapphCooking_Make Pan of Lasagna
+	craftRecipe SapphCooking Make Pan of Lasagna
     {
         timedAction = PackingRoastPan,
         time            = 60,
@@ -35,7 +35,7 @@ module Base
         }
     }
 
-    craftRecipe SapphCooking_Prepare Focaccia
+    craftRecipe SapphCooking Prepare Focaccia
     {
         timedAction = PackingRoastPan,
         time            = 60,
@@ -60,9 +60,9 @@ module Base
         }
     }
 
-    craftRecipe SapphCooking_Slice Focaccia
+    craftRecipe SapphCooking Slice Focaccia
     {
-        timedAction = SliceFood_Surface,
+        timedAction = Sapph_SliceFood_Surface,
         time            = 20,
         OnCreate = SapphDivideIntoFive,
         category = SapphCooking,
@@ -76,12 +76,13 @@ module Base
        outputs
         {
            item 5 SapphCooking.Focaccia_Piece,
+           item 1 Base.RoastingPan,
         }
     }
 
-    craftRecipe SapphCooking_Prepare Cheesesteak
+    craftRecipe SapphCooking Prepare Cheesesteak
     {
-        timedAction = SliceFood_Surface,
+        timedAction = Sapph_SliceFood_Surface,
         time            = 60,
         category = SapphCooking,
 		OnCreate = SapphCreatePrep,
@@ -99,9 +100,9 @@ module Base
         }
     }
 
-    craftRecipe SapphCooking_Prepare Pastel
+    craftRecipe SapphCooking Prepare Pastel
     {
-        timedAction = SliceFood_Surface,
+        timedAction = Sapph_SliceFood_Surface,
         time            = 60,
         category = SapphCooking,
 		OnCreate = SapphCreatePrep,
@@ -118,9 +119,9 @@ module Base
         }
     }
 
-    craftRecipe SapphCooking_Prepare Coxinha
+    craftRecipe SapphCooking Prepare Coxinha
     {
-        timedAction = SliceFood_Surface,
+        timedAction = Sapph_SliceFood_Surface,
         time            = 60,
         category = SapphCooking,
 		OnCreate = SapphCreatePrep,
@@ -137,7 +138,7 @@ module Base
         }
     }
 
-    craftRecipe SapphCooking_Make Roasting Pan of Confit Byaldi Ratattouile
+    craftRecipe SapphCooking Make Roasting Pan of Confit Byaldi Ratattouile
     {
         timedAction = PackingRoastPan,
         time            = 60,
@@ -160,7 +161,7 @@ module Base
         }
     }
 
-    craftRecipe SapphCooking_PlaceRiceInSaucepan
+    craftRecipe SapphCooking PlaceRiceInSaucepan
 	{
         timedAction = MixingSaucepan,
 		Time = 50,
@@ -185,7 +186,32 @@ module Base
 		}
 	}
 
-    craftRecipe SapphCooking_Cut Wonton Wrappers
+    craftRecipe SapphCooking PlaceRiceInSaucepan2
+	{
+        timedAction = MixingSaucepan,
+		Time = 50,
+		OnCreate = SapphCreatePrep,
+        CanWalk = true,
+		Tags = InHandCraft;Cooking,
+		category = SapphCooking,
+		inputs
+		{
+			item 1 [Base.SaucepanCopper] flags[InheritCondition],
+            -fluid 0.2 [Water],
+			item 1 [SapphCooking.ArborioRice;SapphCooking.BrownRice] mappers[panType] flags[ItemCount],
+		}
+		outputs
+		{
+			item 1 mapper:panType,
+		}
+        itemMapper panType
+		{
+			SapphCooking.WaterSaucepanCopperArborioRice = SapphCooking.ArborioRice,
+            SapphCooking.WaterSaucepanCopperBrownRice = SapphCooking.BrownRice,
+		}
+	}
+
+    craftRecipe SapphCooking Cut Wonton Wrappers
     {
         timedAction = FryOilSaucepan,
         time            = 10,
@@ -207,7 +233,7 @@ module Base
         }
     }
 
-    craftRecipe SapphCooking_Prepare Yakisoba in Wok Pan
+    craftRecipe SapphCooking Prepare Yakisoba in Wok Pan
     {
         timedAction = CookingYakisobaWok,
         time            = 60,
@@ -217,7 +243,7 @@ module Base
         CanWalk = true,
         Tags = InHandCraft;Cooking,
 		xpAward = Cooking:3,
-		AutoLearnAny  = Cooking:2,
+		AutoLearnAny = Cooking:6,
         inputs
         {
             item 1 [SapphCooking.WokPan] flags[ItemIsFluid;IsEmpty],
@@ -230,7 +256,7 @@ module Base
         }
     }
 
-    craftRecipe SapphCooking_Prepare Cacio e Pepe
+    craftRecipe SapphCooking Prepare Cacio e Pepe
     {
         timedAction = CookingYakisobaWok,
         time            = 60,
@@ -254,7 +280,7 @@ module Base
         }
     }
 
-    craftRecipe SapphCooking_Prepare Ceviche
+    craftRecipe SapphCooking Prepare Ceviche
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -278,7 +304,7 @@ module Base
         }
     }
 
-    craftRecipe SapphCooking_PrepareCeviche
+    craftRecipe SapphCooking PrepareCeviche
     {
         timedAction = MixingBowl,
         time            = 80,
@@ -301,7 +327,7 @@ module Base
         }
     }
 
-    craftRecipe SapphCooking_PrepareCurry
+    craftRecipe SapphCooking PrepareCurry
 	{
         timedAction = MixingSaucepan,
 		Time = 50,
@@ -326,7 +352,7 @@ module Base
 		}
 	}
 
-    craftRecipe SapphCooking_Prepare Arroz con Leche
+    craftRecipe SapphCooking Prepare Arroz con Leche
 	{
         timedAction = MixingSaucepan,
 		Time = 50,
@@ -351,7 +377,7 @@ module Base
 		}
 	}
 
-    craftRecipe SapphCooking_Prepare French Toast
+    craftRecipe SapphCooking Prepare French Toast
 	{
         timedAction = MixingBowl,
 		Time = 50,
@@ -375,7 +401,7 @@ module Base
 	}
 
 
-    craftRecipe SapphCooking_Prepare Borscht
+    craftRecipe SapphCooking Prepare Borscht
 	{
         timedAction = MixingSaucepan,
 		Time = 50,
@@ -400,7 +426,7 @@ module Base
 		}
 	}
 
-    craftRecipe SapphCooking_Prepare Risotto
+    craftRecipe SapphCooking Prepare Risotto
 	{
         timedAction = MixingSaucepan,
 		Time = 50,
@@ -423,7 +449,7 @@ module Base
 		}
 	}
 
-    craftRecipe SapphCooking_Prepare Paella
+    craftRecipe SapphCooking Prepare Paella
 	{
         timedAction = MixingSaucepan,
 		Time = 50,
@@ -446,7 +472,7 @@ module Base
 		}
 	}
 
-    craftRecipe SapphCooking_Make Calzone
+    craftRecipe SapphCooking Make Calzone
 	{
         timedAction = MixingBowl,
 		Time = 100,
@@ -475,7 +501,7 @@ module Base
 		}
 	}
 
-    craftRecipe SapphCooking_Prepare Stroganoff
+    craftRecipe SapphCooking Prepare Stroganoff
 	{
         timedAction = MixingSaucepan,
 		Time = 50,
@@ -499,7 +525,7 @@ module Base
 		}
 	}
 
-    craftRecipe SapphCooking_Prepare Fried Rice
+    craftRecipe SapphCooking Prepare Fried Rice
     {
         timedAction = MixingBowl,
         time            = 100,
@@ -526,7 +552,7 @@ module Base
     }
 
 
-    craftRecipe SapphCooking_Make Pan of Spaguetti
+    craftRecipe SapphCooking Make Pan of Spaguetti
 	{
         timedAction = MixingSaucepan,
 		Time = 100,
@@ -548,7 +574,7 @@ module Base
 		}
 	}
 
-     craftRecipe SapphCooking_Dip Churros in Chocolate
+     craftRecipe SapphCooking Dip Churros in Chocolate
     {
         timedAction = UnPackBox_Small,
         time            = 40,

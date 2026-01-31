@@ -1,0 +1,877 @@
+module Base
+{
+
+    item MagazineMag
+    {
+        DisplayCategory = SkillBook,
+        ItemType = base:literature,
+        Weight = 0.5,
+        Icon = Magazine_War2,
+        BoredomChange = -20,
+        StressChange = -15,
+        LearnedRecipes = Make9mmBerettaMagazine;Make45ACPColtM1911Magazine;Make44MagnumDesertEagleMagazine;Make556STANAGMagazine;Make556ExtendedMagazine;Make762x51Magazine;Make308RemingtonM788Magazine;Make556M249Magazine;Make762x51M60Magazine;Make45ACPUSPMagazine;Make9mmSMGMagazine;Make556M249ExtendedMagazine;Make556OldPainlessMagazine;Make45ACPMAC10Magazine;Make45ACPThompsonMagazine;Make9mmWaltherP5Magazine;Make9mmP226Magazine;Make12gAA12Magazine;Make762x39Magazine;Make762x39AK105Magazine;Make556DrumMagazine;Make762x51DrumMagazine;Make762x39DrumMagazine;Make9mmDrumMagazine;Make45ACPDrumMagazine,
+        StaticModel = Magazine,
+        WorldStaticModel = ArmorMag1,
+        Tags = base:magazine,
+        OnCreate = SpecialLootSpawns.OnCreateRecipeMagazine,
+    }
+
+    item Springs
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 0.05,
+        Icon = Springs,
+        AlwaysWelcomeGift = true,
+        count = 5,
+        MetalValue = 1.0,
+        WorldStaticModel = SpringsW,
+        Tags = base:hasmetal,
+    }
+
+	model SpringsW
+	{
+		mesh = WorldItems/Spring,
+		texture = WorldItems/Spring,
+		scale = 0.01,
+		attachment world
+		{
+			offset = -0.0300 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+
+    item BoxOfSprings
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 2.0,
+        Icon = BoxOfSprings,
+        MetalValue = 100.0,
+        WorldStaticModel = SpringsBoxW,
+        Tags = base:hasmetal,
+        DoubleClickRecipe = OpenBox100,
+    }
+
+	model SpringsBoxW
+	{
+		mesh = WorldItems/SpringsBox,
+		texture = WorldItems/SpringsBox,
+		scale = 0.0045,
+		attachment world
+		{
+			offset = -0.0300 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+
+    craftRecipe OpenBoxOfSprings
+    {
+        timedAction = UnPackBox,
+        time = 25,
+        category = Packing,
+        recipeGroup = OpenBox,
+        Tags = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.BoxOfSprings] flags[Prop2;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 50 Base.Springs,
+        }
+    }
+
+    craftRecipe MakeBoxOfSprings
+    {
+        timedAction = UnPackBox,
+        time = 25,
+        category = Packing,
+        recipeGroup = OpenBox,
+        Tags = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 50 [Base.Springs] flags[Prop2;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.BoxOfSprings,
+        }
+    }
+
+    craftRecipe MakeSprings
+    {
+        timedAction = Making,
+        time = 75,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft,
+        category = Miscellaneous,
+        inputs
+        {
+            item 2 [Base.Wire],
+            item 1 tags[base:pliers] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 5 Base.Springs,
+        }
+    }
+
+    craftRecipe Make9mmBerettaMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.9mmClip,
+        }
+    }
+
+    craftRecipe Make45ACPColtM1911Magazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.45Clip,
+        }
+    }
+
+    craftRecipe Make44MagnumDesertEagleMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.44Clip,
+        }
+    }
+
+    craftRecipe Make556STANAGMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.556Clip,
+        }
+    }
+
+    craftRecipe Make556ExtendedMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 3 [Base.Springs],
+            item 2 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.556Clip50,
+        }
+    }
+
+    craftRecipe Make762x51Magazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.M14Clip,
+        }
+    }
+
+    craftRecipe Make308RemingtonM788Magazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.308Clip,
+        }
+    }
+
+    craftRecipe Make556M249Magazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 4 [Base.Springs],
+            item 2 [Base.SmallSheetMetal],
+            item 4 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.M249Clip,
+        }
+    }
+
+    craftRecipe Make762x51M60Magazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 4 [Base.Springs],
+            item 2 [Base.SmallSheetMetal],
+            item 4 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.M60Clip,
+        }
+    }
+
+    craftRecipe Make45ACPUSPMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.USPClip,
+        }
+    }
+
+    craftRecipe Make9mmSMGMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.9mm30Magazine,
+        }
+    }
+
+    craftRecipe Make556M249ExtendedMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 5 [Base.Springs],
+            item 3 [Base.SmallSheetMetal],
+            item 4 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.M249ClipDrum,
+        }
+    }
+
+    craftRecipe Make762x51M60ExtendedMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 5 [Base.Springs],
+            item 3 [Base.SmallSheetMetal],
+            item 4 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.M60ClipDrum,
+        }
+    }
+
+    craftRecipe Convert556STANAGMagazinetoAK101Magazine
+    {
+        timedAction = PlaceAmmoInBox,
+        time = 50,
+	ToolTip = Tooltip_Recipe_ConvertMagazine,
+        Tags = InHandCraft,
+        category = Ammunition,
+        inputs
+        {
+            item 1 [Base.556Clip],
+        }
+        outputs
+        {
+            item 1 Base.AK101Clip,
+        }
+    }
+
+    craftRecipe ConvertAK101Magazineto556STANAGMagazine
+    {
+        timedAction = PlaceAmmoInBox,
+        time = 50,
+	ToolTip = Tooltip_Recipe_ConvertMagazine,
+        Tags = InHandCraft,
+        category = Ammunition,
+        inputs
+        {
+            item 1 [Base.AK101Clip],
+        }
+        outputs
+        {
+            item 1 Base.556Clip,
+        }
+    }
+
+    craftRecipe Make556OldPainlessMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 6 [Base.Springs],
+            item 4 [Base.SmallSheetMetal],
+            item 4 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.OldPainlessClip,
+        }
+    }
+
+    craftRecipe Make45ACPMAC10Magazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.MAC10Clip,
+        }
+    }
+
+    craftRecipe Make45ACPThompsonMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.ThompsonMagazine,
+        }
+    }
+
+    craftRecipe ConvertMAC10MagazinetoThompsonMagazine
+    {
+        timedAction = PlaceAmmoInBox,
+        time = 50,
+	ToolTip = Tooltip_Recipe_ConvertMagazine,
+        Tags = InHandCraft,
+        category = Ammunition,
+        inputs
+        {
+            item 1 [Base.MAC10Clip],
+        }
+        outputs
+        {
+            item 1 Base.ThompsonMagazine,
+        }
+    }
+
+    craftRecipe ConvertThompsonMagazinetoMAC10Magazine
+    {
+        timedAction = PlaceAmmoInBox,
+        time = 50,
+	ToolTip = Tooltip_Recipe_ConvertMagazine,
+        Tags = InHandCraft,
+        category = Ammunition,
+        inputs
+        {
+            item 1 [Base.ThompsonMagazine],
+        }
+        outputs
+        {
+            item 1 Base.MAC10Clip,
+        }
+    }
+
+    craftRecipe Make45ACPKrissVectorMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.KrissVectorMagazine,
+        }
+    }
+
+    craftRecipe ConvertThompsonMagazinetoKrissVectorMagazine
+    {
+        timedAction = PlaceAmmoInBox,
+        time = 50,
+	ToolTip = Tooltip_Recipe_ConvertMagazine,
+        Tags = InHandCraft,
+        category = Ammunition,
+        inputs
+        {
+            item 1 [Base.ThompsonMagazine],
+        }
+        outputs
+        {
+            item 1 Base.KrissVectorMagazine,
+        }
+    }
+
+    craftRecipe ConvertKrissVectorMagazinetoThompsonMagazine
+    {
+        timedAction = PlaceAmmoInBox,
+        time = 50,
+	ToolTip = Tooltip_Recipe_ConvertMagazine,
+        Tags = InHandCraft,
+        category = Ammunition,
+        inputs
+        {
+            item 1 [Base.KrissVectorMagazine],
+        }
+        outputs
+        {
+            item 1 Base.ThompsonMagazine,
+        }
+    }
+
+    craftRecipe Make9mmWaltherP5Magazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.WaltherP5Magazine,
+        }
+    }
+
+    craftRecipe Make9mmP226Magazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.P226Magazine,
+        }
+    }
+
+    craftRecipe Make12gAA12Magazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.AA12Magazine,
+        }
+    }
+
+    craftRecipe Make762x39Magazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.762x39Clip,
+        }
+    }
+
+    craftRecipe Make762x39AK105Magazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 2 [Base.Springs],
+            item 1 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.AK105Clip,
+        }
+    }
+
+    craftRecipe Convert762x39MagazinetoAK105Magazine
+    {
+        timedAction = PlaceAmmoInBox,
+        time = 50,
+	ToolTip = Tooltip_Recipe_ConvertMagazine,
+        Tags = InHandCraft,
+        category = Ammunition,
+        inputs
+        {
+            item 1 [Base.762x39Clip],
+        }
+        outputs
+        {
+            item 1 Base.AK105Clip,
+        }
+    }
+
+    craftRecipe ConvertAK105Magazineto762x39Magazine
+    {
+        timedAction = PlaceAmmoInBox,
+        time = 50,
+	ToolTip = Tooltip_Recipe_ConvertMagazine,
+        Tags = InHandCraft,
+        category = Ammunition,
+        inputs
+        {
+            item 1 [Base.AK105Clip],
+        }
+        outputs
+        {
+            item 1 Base.762x39Clip,
+        }
+    }
+
+    craftRecipe Make556DrumMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 3 [Base.Springs],
+            item 2 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.556ClipDrum,
+        }
+    }
+
+    craftRecipe Make762x51DrumMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 3 [Base.Springs],
+            item 2 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.M14ClipDrum,
+        }
+    }
+
+    craftRecipe Make762x39DrumMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 3 [Base.Springs],
+            item 2 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.762x39ClipDrum,
+        }
+    }
+
+    craftRecipe Make9mmDrumMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 3 [Base.Springs],
+            item 2 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.9mm30MagazineDrum,
+        }
+    }
+
+    craftRecipe Make45ACPDrumMagazine
+    {
+        timedAction = Welding,
+        time = 125,
+        NeedToBeLearn = true,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Welding,
+        category = Metalworking,
+        xpAward = MetalWelding:25,
+        AutoLearnAny = MetalWelding:5,
+        inputs
+        {
+            item 3 [Base.Springs],
+            item 2 [Base.SmallSheetMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.ThompsonMagazineDrum,
+        }
+    }
+
+}

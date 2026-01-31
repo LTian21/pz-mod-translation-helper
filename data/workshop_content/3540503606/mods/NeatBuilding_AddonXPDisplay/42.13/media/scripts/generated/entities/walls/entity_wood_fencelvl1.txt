@@ -1,0 +1,48 @@
+module Base
+{
+    entity WoodFenceLvl1
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_WoodFenceLvl1,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            health = 250,
+            skillBaseHealth = 20,
+            face W
+            {
+                layer
+                {
+                    row = carpentry_02_40,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = carpentry_02_41,
+                }
+            }
+            corner = carpentry_02_43,
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = woodenFenceLvl1Test,
+            timedAction = BuildWoodenStructureSmall,
+            time = 200,
+            category = Fences,
+            SkillRequired = Woodwork:3,
+            xpAward = Woodwork:30,
+            Tooltip = Tooltip_craft_woodenFenceDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 2 [Base.Plank],
+                item 2 [Base.Nails],
+            }
+        }
+    }
+}

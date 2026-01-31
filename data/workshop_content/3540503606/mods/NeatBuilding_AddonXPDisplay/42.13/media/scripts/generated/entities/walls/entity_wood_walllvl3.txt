@@ -1,0 +1,52 @@
+module Base
+{
+    entity WoodenWallLvl3
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Wood_WallLvl3,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            LogicClass = WoodenWall,
+            health = 650,
+            skillBaseHealth = 20,
+            previousStage = WoodenWallFrame;MetalWallFrame;WoodenWallLvl1;WoodenWallLvl2,
+            BreakSound = ZombieThumpWoodCollapse,
+            OnCreate = BuildRecipeCode.canBePlastered.OnCreate,
+            face W
+            {
+                layer
+                {
+                    row = walls_exterior_wooden_01_24,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_exterior_wooden_01_25,
+                }
+            }
+            corner = walls_exterior_wooden_01_27,
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = woodenWallLvl3Test,
+            timedAction = BuildWallHammer,
+            time = 200,
+            category = Walls,
+            SkillRequired = Woodwork:6,
+            xpAward = Woodwork:60,
+            Tooltip = Tooltip_craft_NeedsWallframeDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 2 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

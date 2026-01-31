@@ -1,0 +1,119 @@
+module Base
+{   
+    model 91rangeWheel1Strap1
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|91range_spare_roof_strap,
+		texture = vehicles/Vehicles_91range_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+    model 91rangeWheel1Strap2
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|91range_spare_roof_strap,
+		texture = vehicles/Vehicles_91range_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle RR91SpareTires
+	{
+        part DAMNSpareTireTrunk
+        {
+            model RR91SpareTrunk0
+			{
+				file = 91rangeWheel1,
+                offset = 0.570 0.226 -1.539,
+				rotate = 0 0 0,
+			}
+
+            model RR91SpareTrunk1
+			{
+				file = 91rangeWheel2L,
+                offset = 0.570 0.226 -1.539,
+				rotate = 0 0 0,
+			}
+                
+            specificItem = false,
+            itemType = Base.91rangeTire2;damnCraft.SmallTire2,
+            area = TruckBed,
+            category = tire,
+            mechanicRequireKey = true,
+            durability = 3,
+            table install
+            {
+                time = 500,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = RR91.InstallComplete.SpareTire,
+            }
+            table uninstall
+            {
+                time = 500,
+                skills = Mechanics:1,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = RR91.UninstallComplete.SpareTire,
+            }
+            lua
+            {
+                init = RR91.Init.SpareTire,
+                create = RR91.Create.SpareTire,
+            }
+        }
+
+        part DAMNSpareTireRoof
+        {
+            model RR91SpareRoof0
+			{
+				file = 91rangeWheel1,
+                offset = 0.1166 1.2667 -0.6333,
+				rotate = 2.0000 0.0000 88.0000,
+			}
+            model RR91SpareRoofStrap1
+			{
+				file = 91rangeWheel1Strap1,
+			}
+
+            model RR91SpareRoof1
+			{
+				file = 91rangeWheel2L,
+                offset = 0.1166 1.2667 -0.6333,
+				rotate = 2.0000 0.0000 88.0000,
+			}
+            model RR91SpareRoofStrap2
+			{
+				file = 91rangeWheel1Strap2,
+			}
+        
+            specificItem = false,
+            itemType = Base.91rangeTire2;damnCraft.SmallTire2,
+            area = Roofrack,
+            category = tire,
+            mechanicRequireKey = false,
+            durability = 3,
+            table install
+            {
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = RR91.InstallComplete.SpareTireRoof,
+                requireInstalled = RR91Roofrack,
+            }
+            table uninstall
+            {
+                time = 700,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = RR91.UninstallComplete.SpareTireRoof,
+            }
+            lua
+                {
+                init = RR91.Init.SpareTireRoof,
+                create = RR91.Create.SpareTireRoof,
+                }
+        }
+    }
+}

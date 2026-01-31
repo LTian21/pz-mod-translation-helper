@@ -1,0 +1,72 @@
+module Base
+{
+	model 93fordElginBrushes
+	{
+		mesh = vehicles/Vehicles_93fordElgin_Body|elgin_brushes,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle CF8KSweeper
+		{
+
+		part CF8KBrushes
+        	{
+
+			model sweeperony
+				{
+                		file = 93fordElginBrushes,
+				}
+
+			anim OFF
+			{
+				anim = sweeper_sweeping,
+				rate = 0.75,
+				sound = GeneratorStopping,
+			}
+
+			anim ON
+			{
+				anim = sweeper_sweeping,
+				reverse = FALSE,
+				rate = 0.75,
+				sound = GeneratorStarting,
+			}
+
+			anim Closed
+			{
+				anim = sweeper_sweeping,
+				reverse = TRUE,
+				animate = FALSE,
+				rate = 2.0,
+			}
+
+			anim Opened
+			{
+				anim = sweeper_sweeping,
+				animate = TRUE,
+				rate = 2.0,
+			}
+		
+			door
+			{
+			}
+
+			area = TruckBed,
+			category = Other,
+			specificItem = false,
+			itemType = Base.93fordCF8000Brushes,
+			mechanicRequireKey = true,
+            durability = 10,
+			repairMechanic = true,
+			
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.Door,
+			}
+		}
+	}
+}

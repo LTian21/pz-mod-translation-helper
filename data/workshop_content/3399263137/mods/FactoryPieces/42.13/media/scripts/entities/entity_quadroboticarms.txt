@@ -1,0 +1,58 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Quad_Robotic_Arms
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Quad Robotic Arms,
+			Icon		= Build_QuadRoboticArms,
+		}
+	}
+
+    entity BuildQuadRoboticArms
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Quad_Robotic_Arms,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face E
+            {
+                layer
+                {
+                    row = factory_pieces_claw_02_8,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 500,
+            needToBeLearn = true,
+            SkillRequired = Electricity:1;MetalWelding:3,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPQuadRoboticArms,
+            inputs
+            {
+                item 4 [Base.BlowTorch] flags[Prop1],
+                item 2 [Base.SheetMetal],
+                item 2 [Base.SmallSheetMetal],
+                item 2 [Base.MetalPipe],
+                item 4 [Base.MetalBar],
+                item 2 [Base.Screws],
+                item 4 [Base.ElectricWire],
+                item 20 [Base.ElectronicsScrap],
+                item 4 [Base.WeldingRods],
+            }
+        }
+    }
+}

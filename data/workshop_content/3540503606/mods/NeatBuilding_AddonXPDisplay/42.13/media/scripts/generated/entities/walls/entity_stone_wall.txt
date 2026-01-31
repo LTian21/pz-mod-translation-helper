@@ -1,0 +1,47 @@
+module Base
+{
+    entity StoneWall
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_StoneWall,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            LogicClass = WoodenWall,
+            skillBaseHealth = 400,
+            face W
+            {
+                layer
+                {
+                    row = walls_logs_96,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_logs_97,
+                }
+            }
+            corner = walls_logs_99,
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildWallNoTool,
+            time = 200,
+            category = Walls,
+            SkillRequired = Masonry:2,
+            xpAward = Masonry:20,
+            Tooltip = Tooltip_craft_stoneWallDesc,
+            inputs
+            {
+                item 1 tags[base:masonstrowel] mode:keep flags[Prop1;MayDegradeLight],
+                item 2 tags[base:concrete] flags[DontRecordInput],
+                item 6 [Base.Stone2],
+            }
+        }
+    }
+}

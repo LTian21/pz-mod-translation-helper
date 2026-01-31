@@ -1,0 +1,102 @@
+module Base
+{
+    entity Amphora
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Amphora,
+            uiEnabled = false,
+        }
+        component ContextMenuConfig
+        {
+            contextEntry
+            {
+                menu = CloseLid,
+                customFunction = ContextMenuCode.OpenCloseAmphoraLid,
+            }
+        }
+        component FluidContainer
+        {
+            ContainerName = Amphora,
+            Capacity = 300.0,
+            RainFactor = 0.4,
+            InitialPercentMin = 0.0,
+            InitialPercentMax = 0.0,
+        }
+        component SpriteConfig
+        {
+            health = 100,
+            skillBaseHealth = 20,
+            face S
+            {
+                layer
+                {
+                    row = crafted_04_33,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = crafted_04_35,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildLowNoTool,
+            time = 50,
+            category = Pottery,
+            Tooltip = Tooltip_craft_amphoraDesc,
+            inputs
+            {
+                item 1 tags[base:masonstrowel] mode:keep flags[Prop1;MayDegradeLight],
+                item 10 [Base.Clay] flags[DontRecordInput],
+            }
+        }
+    }
+
+    entity AmphoraClosed
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Amphora,
+            uiEnabled = false,
+        }
+        component ContextMenuConfig
+        {
+            contextEntry
+            {
+                menu = OpenLid,
+                customFunction = ContextMenuCode.OpenCloseAmphoraLid,
+            }
+        }
+        component FluidContainer
+        {
+            ContainerName = Amphora,
+            Capacity = 300.0,
+            RainFactor = 0.0,
+            InitialPercentMin = 0.0,
+            InitialPercentMax = 0.0,
+        }
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = crafted_04_32,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = crafted_04_34,
+                }
+            }
+        }
+    }
+}

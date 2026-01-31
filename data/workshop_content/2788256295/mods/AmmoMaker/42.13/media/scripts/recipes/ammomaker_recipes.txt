@@ -336,7 +336,8 @@ module Base {
 		ToolTip = Tooltip_Recipe_MakeMold,
 		inputs
 		{
-			item 4 [Base.Sandbag],
+			item 3 [Base.Sandbag],
+			item 2 [Base.Clay],
 			item 1 [Base.Plank],
 			item 2 [Base.Nails],
 			item 1 tags[base:hammer] mode:keep flags[MayDegradeLight],
@@ -452,6 +453,28 @@ module Base {
 		{
 			item 1 ammomaker.ammomaker_JewelryChain,
 			/* add more jewelry chains depending on input via recipeCode */
+		}
+	}
+
+	craftRecipe RecycleBrass
+	{
+		timedAction = ChoppingBlock_Hammer,
+		Time = 50,
+		Tags = AnySurfaceCraft,
+		NeedToBeLearn = False,
+		category = AmmoMaker,
+		OnCreate = RecipeCodeOnCreate.RecycleBrass,
+		ToolTip = Tooltip_Recipe_RecycleBrass,
+		inputs
+		{
+			item 1 [Base.ToyBadge;Base.Badge;Base.Medal_Bronze;Base.Medal_Silver;Base.Medal_Gold;Base.Padlock;Base.BrassScrap;Base.BrassNameplate;Base.Doorknob;Base.Trumpet;Base.Saxophone;Base.TrophyBronze;Base.TrophySilver;Base.TrophyGold] flags[IsEmpty;ItemCount] mode:destroy,
+			item 1 tags[base:hammer] mode:keep flags[MayDegradeLight],
+			item 1 tags[base:metalworkingchisel] mode:keep flags[MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 ammomaker.ammomaker_RecBrass,
+			/* add more recycled brass depending on input via recipeCode */
 		}
 	}
 

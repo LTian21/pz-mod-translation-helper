@@ -108,4 +108,184 @@ module Base
 			}
 		}
 	}
+
+    template vehicle STP85SeatsSWAT
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 85chevyStepVanseatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			itemType = Base.85chevyStepVanSeat,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+        part SeatFrontRight
+		{
+			
+			model SeatFR
+			{
+				file = 85chevyStepVanseatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontRight,
+			itemType = Base.85chevyStepVanSeat,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part SeatCrew1
+		{
+			area = TrunkDoor,
+			container
+			{
+				seat = Crew1,
+			}
+		}
+
+		part SeatCrew2
+		{
+			area = TrunkDoor,
+			container
+			{
+				seat = Crew2,
+			}
+		}
+
+		part SeatCrew3
+		{
+			area = TrunkDoor,
+			container
+			{
+				seat = Crew3,
+			}
+		}
+
+		part SeatCrew4
+		{
+			area = TrunkDoor,
+			container
+			{
+				seat = Crew4,
+			}
+		}
+
+		part SeatCrew5
+		{
+			area = TrunkDoor,
+			container
+			{
+				seat = Crew5,
+			}
+		}
+
+		part SeatCrew6
+		{
+			area = TrunkDoor,
+			container
+			{
+				seat = Crew6,
+			}
+		}
+
+		part SeatCrew7
+		{
+			area = TrunkDoor,
+			container
+			{
+				seat = Crew7,
+			}
+		}
+
+		part SeatCrew8
+		{
+			area = TrunkDoor,
+			container
+			{
+				seat = Crew8,
+			}
+		}
+
+        part SeatCrew*
+		{
+			category = seat,
+			specificItem = false,
+			itemType = farming.Potato,
+			mechanicRequireKey = true,
+			container
+			{
+				test = DAMN.ContainerAccess.NoStorage,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
 }

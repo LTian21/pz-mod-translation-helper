@@ -1,0 +1,45 @@
+module Base
+{
+    entity BarbedWireFence
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_BarbedWireFence,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            health = 100,
+            skillBaseHealth = 20,
+            face W
+            {
+                layer
+                {
+                    row = fencing_01_20,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fencing_01_21,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildBarbedWireFence,
+            time = 200,
+            category = Fences,
+            SkillRequired = Woodwork:5,
+            xpAward = Woodwork:50,
+            Tooltip = Tooltip_craft_barbedFenceDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 1 [Base.BarbedWire],
+            }
+        }
+    }
+}

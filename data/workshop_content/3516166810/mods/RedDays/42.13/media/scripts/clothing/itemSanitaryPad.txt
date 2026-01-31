@@ -1,0 +1,60 @@
+module RedDays
+
+{
+    item Sanitary_Pad
+    {
+        DisplayCategory = FeminineHygiene,
+        ItemType = base:clothing,
+        Weight = 0.1,
+        BodyLocation = RedDays:HygieneItem,
+        ClothingItem = Sanitary_Pad,
+        Icon = sanitarypad_clean,
+		WorldStaticModel = RedDays.Pad,
+		ConditionMax = 10,
+    }
+
+    item SanitaryPadBox
+	{
+		DisplayCategory = FeminineHygiene,
+		ItemType = base:normal,
+		Weight = 1,
+        Icon	=	GenericMedicalParcel2,
+		Medical = TRUE,
+		WorldStaticModel = RedDays.Padbox,
+		Tags = base:IgnoreZombieDensity;base:IsFireFuel,
+		FireFuelRatio = 0.25,
+	}
+
+
+	craftRecipe UnpackBoxOfSantiaryPads
+	{
+        timedAction = UnPackBox_Small,
+		Time = 30,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+		inputs
+		{
+			item 1 [RedDays.SanitaryPadBox] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 12 RedDays.Sanitary_Pad,
+		}
+	}
+
+	craftRecipe PackBoxOfSantiaryPads
+	{
+        timedAction = UnPackBox_Small,
+		Time = 30,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+		inputs
+		{
+			item 12 [RedDays.Sanitary_Pad] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 1 RedDays.SanitaryPadBox,
+		}
+	}
+}

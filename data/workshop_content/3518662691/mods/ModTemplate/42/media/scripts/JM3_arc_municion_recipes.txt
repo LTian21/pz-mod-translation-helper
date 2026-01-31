@@ -8,7 +8,7 @@ module JM3
         time = 50,
         OnCreate = RecipeCodeOnCreate.minorCondition,
         Tags = InHandCraft,
-        xpAward = Carving:3;Woodwork:3,
+        xpAward = Carving:2;Woodwork:2,
         category = JM3,
         inputs
         {
@@ -27,7 +27,7 @@ module JM3
         time = 200,
         OnCreate = RecipeCodeOnCreate.minorCondition,
         Tags = InHandCraft,
-        xpAward = Carving:12;Woodwork:12,
+        xpAward = Carving:10;Woodwork:10,
         category = JM3,
         inputs
         {
@@ -105,7 +105,7 @@ module JM3
 		{
 			item 1 tags[base:metalsaw] mode:keep,
 			item 1 tags[base:whetstone;base:file] mode:keep flags[Prop1],
-			item 1 [Base.Key1;Base.KeyPadlock;Base.BreadKnife;Base.ButterKnife;Base.TinOpener_Old;Base.CarvingFork2;Base.KnifeFillet;Base.ForkForged;Base.SpoonForged;Base.Fork;Base.KnifeParing;Base.Spoon;Base.SteakKnife] mode:destroy flags[AllowDestroyedItem;Prop2],
+			item 1 [Base.UnusableMetal;Base.Hinge;Base.Doorknob;Base.Key1;Base.KeyPadlock;Base.BreadKnife;Base.ButterKnife;Base.TinOpener_Old;Base.CarvingFork2;Base.KnifeFillet;Base.ForkForged;Base.SpoonForged;Base.Fork;Base.KnifeParing;Base.Spoon;Base.SteakKnife] mode:destroy flags[AllowDestroyedItem;Prop2],
 		}
 		outputs
 		{
@@ -113,16 +113,38 @@ module JM3
 		}
 	}
 
-	/*craftRecipe Make_stone_arrowhead_(01)
-	{
+    craftRecipe Weld_metal_arrowhead_(01)
+    {
+        timedAction = Welding,
+        time = 100,
+        Tags = AnySurfaceCraft;Welding,
+        xpAward = MetalWelding:20,
         category = JM3,
-        timedAction = MakingHammer_Surface,
+        inputs
+        {
+			item 1 [Base.BlowTorch] flags[Prop1],
+            item 1 tags[base:weldingmask] mode:keep,
+			item 1 tags[base:whetstone;base:file] mode:keep,
+            item 1 [Base.ScrapMetal;Base.IronScrap;Base.SteelScrap;Base.BrassScrap;Base.AluminumScrap;Base.SilverScrap;Base.GoldScrap] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 JM3.Arrowhead,
+        }
+    }
+
+	craftRecipe Make_stone_arrowhead_(01)
+	{
+        timedAction = SawSmallItemMetal,
 		time = 100,
         tags = AnySurfaceCraft,
 		xpAward = FlintKnapping:10,
+        category = JM3,
 		inputs
 		{
-			item 1 tags[HammerStone;Mallet;KnappingTool] mode:keep flags[Prop1],
+			item 1 tags[base:hammer] mode:keep flags[Prop1],
+			item 1 tags[base:crudechisel;base:carpentrychisel;base:masonschisel;base:metalworkingchisel] mode:keep,
+			item 1 tags[base:file] mode:keep,
 			item 1 [Base.SharpedStone;Base.StoneBlade] flags[Prop2],
 		}
 		outputs
@@ -133,15 +155,15 @@ module JM3
 
 	craftRecipe Make_bone_arrowhead_(01)
 	{
-        category = JM3,
-        timedAction = SharpenStake,
+        timedAction = SharpenStakeBone,
 		time = 100,
         tags = AnySurfaceCraft,
 		xpAward = Carving:10,
+        category = JM3,
 		inputs
 		{
-            item 1 tags[Whetstone;File] mode:keep,
-            item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[Prop1;IsNotDull],
+			item 1 tags[base:whetstone;base:file] mode:keep,
+            item 1 tags[base:saw;base:smallsaw;base:crudesaw;base:sharpknife;base:meatcleaver] mode:keep,
             item 1 [Base.SharpBoneFragment;Base.DullBoneKnife;Base.Fork_Bone;Base.Spoon_Bone] flags[AllowDestroyedItem;Prop2],
 		}
 		outputs
@@ -150,7 +172,7 @@ module JM3
 		}
 	}
 	
-	craftRecipe Make_metal_arrowhead_(05)
+	/*craftRecipe Make_metal_arrowhead_(05)
 	{
         timedAction = Making,
 		time = 80,
@@ -191,5 +213,31 @@ module JM3
 			item 1 JM3.Arrow,
 		}
 	}
+
+    craftRecipe OpenBoxOfArrows
+    {
+        timedAction = OpenAmmoBox,
+        time = 15,
+        category = Packing,
+        recipeGroup = OpenBox,
+        Tags = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [JM3.Arrow_box] mappers[ammoTypes] flags[Prop2;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 50 mapper:ammoTypes,
+        }
+        itemMapper ammoTypes
+        {
+            JM3.Arrow = JM3.Arrow_box,
+        }
+    }
+
+
+
+
+
 
 }

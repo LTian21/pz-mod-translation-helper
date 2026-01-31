@@ -1,0 +1,340 @@
+module Base
+{
+
+	model 91rangeWindowfl
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_4door_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_fl_bone 1.0,
+	}
+
+	model 91rangeWindowfr
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_4door_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_fr_bone 1.0,
+	}
+
+	model 91rangeWindowrl
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_4door_window_rl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_rl_bone 1.0,
+	}
+
+	model 91rangeWindowrr
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_4door_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = window_rr_bone 1.0,
+	}
+
+	model 91rangeWindowbl
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_window_bl,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 91rangeWindowbr
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_window_br,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 91rangeWindowSunRoof
+	{
+		mesh = vehicles/Vehicles_91range_Body_mk2|range_window_sunroof,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+        boneWeight = sunroof_bone,
+	}
+
+	template vehicle RR91Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 91rangeWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.91rangeFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 91rangeWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.91rangeFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 91rangeWindowrl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.91rangeRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 91rangeWindowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.91rangeRearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNRearRightArmor,
+				}
+		}
+
+		part WindowBackLeft
+		{
+			model windowBL
+			{
+				file = 91rangeWindowbl,
+			}
+
+			area = SeatRearLeft,
+			itemType = Base.91rangeRearSideWindow,
+			table uninstall
+				{
+				requireUninstalled = DAMNBackLeftArmor,
+				}
+		}
+
+		part WindowBackRight
+		{
+			model windowBR
+			{
+				file = 91rangeWindowbr,
+			}
+
+			area = SeatRearRight,
+			itemType = Base.91rangeRearSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNBackRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            durability = 2,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+
+		part DAMNSunRoof
+		{
+			model windowSR
+			{
+				file = 91rangeWindowSunRoof,
+			}
+
+			itemType = Base.91rangeSunRoof,
+			category = door,
+			mechanicRequireKey = true,
+            durability = 3,
+			area = Sunroof,
+			door
+			{
+				}
+
+				anim Close
+				{
+					anim = sunfroof_opening,
+					reverse = TRUE,
+					rate = 0.35,
+				}
+
+				anim Open
+				{
+					anim = sunfroof_opening,
+					rate = 0.35,
+				}
+
+				anim Closed
+				{
+					anim = sunfroof_opening,
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = sunfroof_opening,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+			
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+}
+

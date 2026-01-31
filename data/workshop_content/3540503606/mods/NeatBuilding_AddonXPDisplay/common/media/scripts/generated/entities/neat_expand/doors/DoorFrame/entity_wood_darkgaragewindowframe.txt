@@ -1,0 +1,67 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Wood_DarkGarageWindowFrame
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= NBEntityName_DarkGarageWindowFrame,
+			Icon		= Build_walls_garage_01_41,
+		}
+	}
+
+    entity Wood_DarkGarageWindowFrame
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Wood_DarkGarageWindowFrame,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			LogicClass      = WoodenWall,
+			health          = 650,
+       		skillBaseHealth = 20,
+			previousStage   = WoodenWallFrame;MetalWallFrame,
+
+            face W
+            {
+                layer
+                {
+                    row = walls_garage_01_40,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_garage_01_41,
+                }
+            }
+			
+            corner = walls_garage_01_35,
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = ignoreFromBuildMenu,
+            timedAction   = BuildWallNoTool,
+            time          = 200,
+            category      = Windows,
+            SkillRequired = Woodwork:5,
+            xpAward       = Woodwork:50,
+            ToolTip       = Tooltip_craft_NeedsWallframeDesc,
+            inputs
+            inputs
+            {
+                item 1 tags[PlasterTrowel;MasonsTrowel] mode:keep flags[Prop1],
+                item 1 tags[Hammer] mode:keep flags[Prop2;MayDegradeVeryLight],
+                item 1 [Base.BucketPlasterFull] flags[DontRecordInput],
+                item 3 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

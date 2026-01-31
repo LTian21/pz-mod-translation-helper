@@ -1,0 +1,133 @@
+module Base
+{
+    entity RainCollector_Tarp
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_RainCollectorCrate_Tarp,
+            uiEnabled = false,
+        }
+        component FluidContainer
+        {
+            ContainerName = Collector,
+            Capacity = 400.0,
+            RainFactor = 0.4,
+            InitialPercentMin = 0.0,
+            InitialPercentMax = 0.0,
+        }
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = carpentry_02_120,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildWoodenStructureMedium,
+            time = 50,
+            category = Outdoors,
+            category = Outdoors,
+            Tags = Carpentry,
+            SkillRequired = Woodwork:3,
+            xpAward = Woodwork:30,
+            Tooltip = Tooltip_craft_rainCollectorDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+                item 1 [Base.Tarp],
+            }
+        }
+    }
+
+    entity RainCollectorRound_Tarp
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_RainCollectorBarrel_Tarp,
+            uiEnabled = false,
+        }
+        component ContextMenuConfig
+        {
+            contextEntry
+            {
+                menu = CloseLid,
+                customFunction = ContextMenuCode.OpenCloseLid,
+                extraParam = carpentry_02_127,
+                time = 10,
+            }
+        }
+        component FluidContainer
+        {
+            ContainerName = Collector,
+            Capacity = 600.0,
+            RainFactor = 0.25,
+            InitialPercentMin = 0.0,
+            InitialPercentMax = 0.0,
+        }
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = carpentry_02_124,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildWoodenStructureMedium,
+            time = 50,
+            Tags = Carpentry,
+            SkillRequired = Woodwork:5,
+            xpAward = Woodwork:50,
+            Tooltip = Tooltip_craft_rainCollectorDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 6 [Base.Plank],
+                item 5 [Base.Nails],
+                item 1 [Base.Tarp],
+            }
+        }
+    }
+
+    entity RainCollectorRound_TarpClosed
+    {
+        component ContextMenuConfig
+        {
+            contextEntry
+            {
+                menu = OpenLid,
+                customFunction = ContextMenuCode.OpenCloseLid,
+                extraParam = carpentry_02_124,
+                time = 15,
+            }
+        }
+        component FluidContainer
+        {
+            ContainerName = Collector,
+            Capacity = 600.0,
+            InitialPercentMin = 0.0,
+            InitialPercentMax = 0.0,
+        }
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = carpentry_02_127,
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,184 @@
+module Base
+{
+	model TrailerKI5utilityMedium
+	{
+		mesh = vehicles/Trailers_KI5utility_Body|damnTrailer_utility_medium_body,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	vehicle TrailerKI5utilityMedium
+	{
+		mechanicType = 2,
+		offRoadEfficiency = 1.0,
+		engineRepairLevel = 4,
+		playerDamageProtection = 0.8,
+
+		model
+		{
+			file = TrailerKI5utilityMedium,
+			scale = 0.9000,
+			offset = 0.0000 0.5889 0.0000,
+		}
+
+		skin
+		{
+			texture = Vehicles/Trailers_KI5utility_Shell_gray,
+		}
+
+		skin
+		{
+			texture = Vehicles/Trailers_KI5utility_Shell_white,
+		}
+
+		skin
+		{
+			texture = Vehicles/Trailers_KI5utility_Shell_green,
+		}
+
+		skin
+		{
+			texture = Vehicles/Trailers_KI5utility_Shell_black,
+		}
+
+		skin
+		{
+			texture = Vehicles/Trailers_KI5utility_Shell_red,
+		}
+
+		textureMask = Vehicles/Trailers_KI5utility_mask,
+		textureLights = Vehicles/Trailers_KI5combo_lights,
+		textureDamage1Overlay = Vehicles/Trailers_KI5utility_blood,
+		textureDamage2Overlay = Vehicles/Trailers_KI5utility_blood,
+		textureDamage1Shell = Vehicles/Trailers_KI5utility_damage,
+		textureDamage2Shell = Vehicles/Trailers_KI5utility_damage2,
+		textureRust = Vehicles/Trailers_KI5utility_rust,
+		textureShadow = Vehicles/Trailers_KI5utility_Shadow_medium,
+		extents = 1.3333 0.5556 2.4000,
+		mass = 225,
+		physicsChassisShape = 1.3333 0.5556 2.4000,
+		centerOfMassOffset = 0.0000 0.4667 0.0667,
+		shadowExtents = 1.8376 2.3562,
+		shadowOffset = 0.0000 0.0522,
+		engineForce = 3600,
+		engineQuality = 60,
+		engineLoudness = 55,
+		maxSpeed = 70f,
+		brakingForce = 1,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 0.4f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 45,
+		suspensionCompression = 4.83,
+		suspensionDamping = 3.88,
+		maxSuspensionTravelCm = 14,
+		suspensionRestLength = 0.20f,
+		wheelFriction = 4.0f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.7889 -0.5889 -0.0889,
+			radius = 0.33f,
+			width = 0.21f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.7889 -0.5889 -0.0889,
+			radius = 0.33f,
+			width = 0.21f,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -1.5222 1.2444 0.7778,
+		}
+
+		area TruckBed2
+		{
+			xywh = 0.0000 0.0444 2.8889 3.9111,
+		}
+
+		area ToolBox
+		{
+			xywh = 1.0556 0.8333 0.7778 0.9111,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.5222 -0.0667 0.4444 0.4889,
+		}
+
+		area SpareTire
+		{
+			xywh = -1.0556 0.8333 0.7778 0.9111,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.5222 -0.0667 0.4444 0.4889,
+		}
+
+		template = KI5TRTrunkDoor,
+		template = KI5TRSparesMedium,
+		template = KI5TRTarpsMedium,
+		template = KI5TRMudflapsMedium,
+		template = KI5TRTrunkCompartment,
+
+		part KI5TRTrunk
+		{
+			container
+			{
+				capacity = 140,
+			}
+		}
+
+		template = KI5TRTiresFront,
+		template = KI5TRSuspensionMedium,
+		template = KI5TRToolBoxMedium,
+		template = KI5TRGasCans,
+        template = DAMNglobal,
+        template = DAMNTrailerKI5utilityMedium,
+		useChassisPhysicsCollision = false,
+
+		physics box
+		{
+			offset = -0.0111 0.2444 1.5778,
+			extents = 0.1111 0.1111 1.1333,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics sphere
+		{
+			offset = 0.0000 0.2778 2.1444,
+			radius = 0.0889,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.4289 -0.0889,
+			extents = 1.8222 0.2667 0.8889,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.5222 0.0399,
+			extents = 1.3333 0.4667 2.3556,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.3778 2.3556,
+			rotate = 0.0000 0.0000 0.0000,
+			canAttach = trailer,
+			updateconstraint = false,
+		}
+	}
+}

@@ -1,0 +1,97 @@
+module Base
+{
+
+    item Grenade
+    {
+        DisplayCategory = Explosives,
+        ItemType = base:weapon,
+        Weight = 0.4,
+        Icon = Grenade,
+        ExplosionPower = 50,
+        ExplosionRange = 8,
+        ExplosionSound = PipeBombExplode,
+        FireStartingEnergy = 0,
+        FireStartingChance = 0,
+        MaxDamage = 0.0,
+        MaxHitcount = 0,
+        MaxRange = 15.0,
+        MinDamage = 0.0,
+        MinimumSwingtime = 1.5,
+        PhysicsObject = Base.PipeBomb,
+        PlacedSprite = constructedobjects_01_32,
+        SwingAmountBeforeImpact = 0.1,
+        SwingAnim = Throw,
+        SwingSound = Grenadepin,
+        Swingtime = 1.5,
+        Tooltip = Tooltip_Grenade,
+        UseSelf = true,
+        WeaponSprite = Grenade,
+        WorldStaticModel = Grenade,
+        ConditionMax = 1,
+        AttachmentType = Webbing,
+    }
+
+	model Grenade
+	{
+		mesh = WorldItems/Grenade,	
+		texture = WorldItems/Grenade,
+		scale = 0.16,
+	}
+
+	sound Grenadepin
+	{
+		category = Item,
+		maxInstancesPerEmitter = 2,
+		clip
+		{
+			file = media/sound/Grenadepin.ogg,
+			distanceMax = 17,
+		}
+	}
+
+    item BandolierGrenades
+    {
+        DisplayCategory = Explosives,
+        ItemType = base:normal,
+        Weight = 1.6,
+        Icon = GrenadeBandolier,
+        WorldStaticModel = Grenade,
+    }
+
+    craftRecipe RemoveGrenadesFromBandolier
+    {
+        timedAction = UnPackBox,
+        time = 50,
+        category = Ammunition,
+        recipeGroup = OpenBox,
+        Tags = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.BandolierGrenades],
+        }
+        outputs
+        {
+            item 6 Base.Grenade,
+        }
+
+    }
+
+    craftRecipe MakeGrenadeBandolier
+    {
+        timedAction = UnPackBox,
+        time = 50,
+        category = Ammunition,
+        recipeGroup = OpenBox,
+        Tags = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 6 [Base.Grenade],
+        }
+        outputs
+        {
+            item 1 Base.BandolierGrenades,
+        }
+
+    }
+
+}

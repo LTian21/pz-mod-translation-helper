@@ -1,0 +1,45 @@
+module Base
+{
+    entity Cooking_Pit
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Cooking_Pit,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            isProp = true,
+            face SINGLE
+            {
+                layer
+                {
+                    row = camping_03_19,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildCairn,
+            time = 50,
+            category = Outdoors,
+            Tags = Outdoors,
+            SkillRequired = Masonry:2,
+            xpAward = Masonry:20,
+            Tooltip = Tooltip_craft_cookingPitDesc,
+            inputs
+            {
+                item 10 [Base.StoneBlock],
+                item 1 tags[base:concrete] flags[DontRecordInput],
+                item 1 tags[base:masonstrowel] mode:keep flags[Prop1;MayDegradeLight],
+            }
+        }
+        component CraftBenchSounds
+        {
+            AddFuel = CampfireAddFuel,
+            LightFire = CampfireLight,
+            Running = CampfireRunning,
+        }
+    }
+}
