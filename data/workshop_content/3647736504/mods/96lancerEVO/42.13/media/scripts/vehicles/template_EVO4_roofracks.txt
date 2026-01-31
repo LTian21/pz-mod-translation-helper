@@ -1,0 +1,84 @@
+module Base
+{
+
+	model 96lancerEVORoofrack0
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_roofrack0,
+		texture = Vehicles/Items_damnRoofrackModern,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle EVO4Roofracks
+	{
+		part EVO4Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 96lancerEVORoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+            specificItem = false,
+			itemType = Base.ModernSmallRoofrack3,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = EVO4.InstallComplete.Roofrack,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1300,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = EVO4.UninstallComplete.Roofrack,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = EVO4.Create.Roofrack,
+					init = EVO4.Init.Roofrack,
+				}
+		}
+	}
+}

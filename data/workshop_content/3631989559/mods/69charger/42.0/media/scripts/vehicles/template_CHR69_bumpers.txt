@@ -1,0 +1,265 @@
+module Base
+{
+	model 69chargerfrontBumper0
+	{
+		mesh = vehicles/Vehicles_69charger_Body|charger_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 69chargerfrontBumper1
+	{
+		mesh = vehicles/Vehicles_69charger_Body|daytona_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 69chargerfrontBumperA
+	{
+		mesh = vehicles/Vehicles_69charger_Body|charger_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 69chargerfrontBumperB
+	{
+		mesh = vehicles/Vehicles_69charger_Body|daytona_bumper_front1,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 69chargerfrontBullbarA
+	{
+		mesh = vehicles/Vehicles_69charger_Body|charger_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 69chargerrearBumper0
+	{
+		mesh = vehicles/Vehicles_69charger_Body|charger_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CHR69BumpersRear
+		{
+
+        part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 69chargerrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.69chargerBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CHR69.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CHR69.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = CHR69.Create.RearBumper,
+					init = CHR69.Init.RearBumper,
+					}
+		}
+	}
+
+    template vehicle CHR69Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 69chargerfrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 69chargerfrontBumperA,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 69chargerfrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.69chargerBumperFront0;Base.69chargerBumperFrontA;Base.69chargerBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CHR69.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CHR69.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = CHR69.Create.FrontBumper,
+					init = CHR69.Init.FrontBumper,
+					}
+		}
+
+        template! = CHR69BumpersRear,
+	}
+
+    template vehicle CHR69BumpersD
+		{
+		part DAMNBumperFront
+        {
+
+			model FrontBumper1
+				{
+                		file = 69chargerfrontBumper1,
+				}
+
+			model FrontBumperB
+				{
+                		file = 69chargerfrontBumperB,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 69chargerfrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.69chargerBumperFront1;Base.69chargerBumperFrontB;Base.69chargerBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CHR69.InstallComplete.FrontBumperD,
+                    requireInstalled = DAMNBumperFront,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CHR69.UninstallComplete.FrontBumperD,
+            		}
+
+            		lua
+            		{
+					create = CHR69.Create.FrontBumperD,
+					init = CHR69.Init.FrontBumperD,
+					}
+		}
+
+        template! = CHR69BumpersRear,
+	}
+}

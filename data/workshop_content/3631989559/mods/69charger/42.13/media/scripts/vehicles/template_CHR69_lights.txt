@@ -1,0 +1,220 @@
+module Base
+{
+	model 69chargerCovers
+	{
+		mesh = vehicles/Vehicles_69charger_Body|charger_blinds,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = lights_bone_charger 1.0,
+	}
+
+    model 69chargerLights
+	{
+		mesh = vehicles/Vehicles_69charger_Body|daytona_lights,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = lights_bone_daytona 1.0,
+	}
+
+	template vehicle CHR69LightCovers
+	{
+		part CHR69LightsCover
+		{
+			model lights5798446144
+			{
+				file = 69chargerCovers,
+			}
+
+			anim Close
+			{
+				anim = lights_opening,
+                reverse = TRUE,
+				rate = 1.00,
+			}
+
+			anim Open
+			{
+				anim = lights_opening,
+				rate = 1.00,
+			}
+
+            anim Closed
+			{
+				anim = lights_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = lights_opening,
+                reverse = TRUE,
+				animate = FALSE,
+			}
+		
+			category = lights,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			itemType = Base.69chargerLightsCover,
+			area = Engine,
+			mechanicRequireKey = true,
+            durability = 3,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+
+    template vehicle CHR69PopupLights
+	{
+		part CHR69PopupLights
+		{
+			model lights57984461443
+			{
+				file = 69chargerLights,
+			}
+
+			anim Close
+			{
+				anim = lights_opening,
+                reverse = TRUE,
+				rate = 1.00,
+			}
+
+			anim Open
+			{
+				anim = lights_opening,
+				rate = 1.00,
+			}
+
+            anim Closed
+			{
+				anim = lights_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = lights_opening,
+                reverse = TRUE,
+				animate = FALSE,
+			}
+		
+			category = lights,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = VehicleWindowElectricOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowElectricClose,
+			}
+
+			itemType = Base.69chargerDaytonaLights,
+			area = Engine,
+			mechanicRequireKey = true,
+            durability = 3,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+                requireInstalled = DAMNBumperFront,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 700,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = DAMN.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+				requireUninstalled = HeadlightLeft;HeadlightRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+}

@@ -1,0 +1,104 @@
+module Base
+{
+
+	model m577_turret
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|m577_gun,
+		shader = damn_vehicle_noreflect_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle M577RemoteTurret
+	{
+		part M577RemoteTurret
+		{
+			model turret
+			{
+				file = m577_turret,
+			}
+
+			itemType = Base.lockMartM577Turret,
+			category = bodywork,
+			mechanicRequireKey = true,
+            durability = 5,
+			area = SeatRearRight,
+			door
+			{
+				}
+
+				anim Close
+				{
+					anim = gun_raising,
+					reverse = TRUE,
+					rate = 0.35,
+				}
+
+				anim Open
+				{
+					anim = gun_raising,
+					
+					rate = 0.35,
+				}
+
+				anim Closed
+				{
+					anim = gun_raising,
+					
+					animate = FALSE,
+				}
+
+				anim Opened
+				{
+					anim = gun_raising,
+					reverse = TRUE,
+					animate = FALSE,
+				}
+			
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 2500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Door,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 2500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Door,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+				use = Vehicles.Use.EngineDoor,
+			}
+		}
+	}
+}
+

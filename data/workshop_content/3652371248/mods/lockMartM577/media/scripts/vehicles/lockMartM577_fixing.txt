@@ -1,0 +1,46 @@
+module Base
+{
+    recipe Repair Lock-Mart Industries M577 Tire
+    	{
+		lockMartM577Tire2,
+		TireRepairTools,
+		TireRepairRubberSolution,
+		TireRepairStrips,
+
+		NoBrokenItems:false,
+		Result:TireRepairTools,
+		Time:250.0,
+		OnCreate:DAMN.OnCreate.RepairTire,
+		NeedToBeLearn:false,
+		CanBeDoneFromFloor:true,
+    }
+
+    fixing Fix Lock-Mart Industries M577 Seat
+	{
+	   Require : lockMartM577SeatLarge2;lockMartM577SeatSmall2,
+	   ConditionModifier : 0.35,
+
+       Fixer : DuctTape=2;Mechanics=1,
+	}
+
+    fixing Fix Lock-Mart Industries M577 Lid Welding
+    {
+    Require : lockMartM577EngineDoor2,
+    GlobalItem : BlowTorch=5,
+    ConditionModifier : 0.30,
+
+    	Fixer : SheetMetal; MetalWelding=4;Mechanics=4,
+    	Fixer : SmallSheetMetal=2; MetalWelding=4;Mechanics=4,
+    }
+
+    fixing Fix Lock-Mart Industries M577 Door Welding
+    {
+    Require : lockMartM577FrontDoor2;lockMartM577RearDoor2,
+    GlobalItem : BlowTorch=5,
+    ConditionModifier : 0.30,
+
+    	Fixer : SheetMetal; MetalWelding=4;Mechanics=4,
+    	Fixer : SmallSheetMetal=2; MetalWelding=4;Mechanics=4,
+    }
+
+}

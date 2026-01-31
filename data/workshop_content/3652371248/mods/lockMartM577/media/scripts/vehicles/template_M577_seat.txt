@@ -1,0 +1,402 @@
+module Base
+{
+    model lockMartM577seatL
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|m577_seat_f,
+		texture = Vehicles/Vehicles_lockMartM577_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model lockMartM577seatS
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|m577_seat_r,
+		texture = Vehicles/Vehicles_lockMartM577_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}	
+
+	template vehicle M577Seats
+	{
+		part SeatFrontLeft
+		{
+            model seatFL
+			{
+				file = lockMartM577seatL,
+                offset = 0.3889 0.0000 3.2667,
+			}
+
+			area = SeatFrontLeft,
+            itemType = Base.lockMartM577SeatLarge,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+            model seatFR
+			{
+				file = lockMartM577seatS,
+                offset = -0.4756 0.0000 2.2111,
+			}
+
+			area = SeatRearRight,
+            itemType = Base.lockMartM577SeatSmall,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+        part SeatRearLeft
+		{
+			model seatRL
+			{
+				file = lockMartM577seatL,
+                offset = 0.3889 0.0000 1.7444,
+			}
+
+			area = SeatRearRight,
+            itemType = Base.lockMartM577SeatLarge,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+			model seatRR
+			{
+				file = lockMartM577seatS,
+                offset = -0.4756 0.0000 1.7556,
+			}
+
+			area = SeatRearRight,
+            itemType = Base.lockMartM577SeatSmall,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+        part Seat*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+            durability = 5,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part M577SeatCommand1
+		{
+            model seatCO1
+			{
+				file = lockMartM577seatL,
+                offset = 0.3333 0.0000 0.0556,
+                rotate = 0.0000 -90.0000 0.0000,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = Com1,
+			}
+
+            category = seat,
+            itemType = Base.lockMartM577SeatLarge,
+			mechanicRequireKey = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part M577SeatCrew1
+		{
+            model seatCR1
+			{
+				file = lockMartM577seatS,
+                offset = -1.1556 0.0000 -0.5778,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = Crew1,
+			}
+		}
+
+		part M577SeatCrew2
+		{
+            model seatCR2
+			{
+				file = lockMartM577seatS,
+                offset = -1.1556 0.0000 -1.0333,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = Crew2,
+			}
+		}
+
+		part M577SeatCrew3
+		{
+            model seatCR3
+			{
+				file = lockMartM577seatS,
+                offset = 0.4889 0.0000 -1.4778,
+                rotate = 0.0000 180.0000 0.0000,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = Crew3,
+			}
+		}
+
+		part M577SeatCrew4
+		{
+            model seatCR4
+			{
+				file = lockMartM577seatS,
+                offset = -0.4889 0.0000 -1.5778,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = Crew4,
+			}
+		}
+
+		part M577SeatCrew5
+		{
+            model seatCR5
+			{
+				file = lockMartM577seatS,
+                offset = 0.4889 0.0000 -1.8778,
+                rotate = 0.0000 180.0000 0.0000,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = Crew5,
+			}
+		}
+
+		part M577SeatCrew6
+		{
+            model seatCR6
+			{
+				file = lockMartM577seatS,
+                offset = -0.4889 0.0000 -1.9778,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = Crew6,
+			}
+		}
+
+		part M577SeatCrew7
+		{
+            model seatCR7
+			{
+				file = lockMartM577seatS,
+                offset = 0.4889 0.0000 -2.3556,
+                rotate = 0.0000 180.0000 0.0000,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = Crew7,
+			}
+		}
+
+		part M577SeatCrew8
+		{
+            model seatCR8
+			{
+				file = lockMartM577seatS,
+                offset = -0.4889 0.0000 -2.4056,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = Crew8,
+			}
+		}
+
+        part M577SeatCrew9
+		{
+            model seatCR9
+			{
+				file = lockMartM577seatS,
+                 offset = 0.4889 0.0000 -2.7889,
+                rotate = 0.0000 180.0000 0.0000,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = Crew9,
+			}
+		}
+
+        part M577SeatCrew10
+		{
+            model seatCR10
+			{
+				file = lockMartM577seatS,
+                offset = -0.4889 0.0000 -2.7889,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = Crew10,
+			}
+		}
+
+        part M577SeatCrew*
+		{
+			category = seat,
+			mechanicRequireKey = true,
+            itemType = Base.lockMartM577SeatSmall,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}

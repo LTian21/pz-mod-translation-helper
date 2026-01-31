@@ -1,0 +1,212 @@
+module Base
+{
+
+	model 70roadRunnerWheel1L
+	{
+		mesh = vehicles/Vehicles_Mopar_Wheels|mopar_667_tire,
+		texture = vehicles/Vehicles_MoparRally667_wheel1,
+		shader = vehiclewheel,
+		scale = 0.107,
+	}
+
+    model 70roadRunnerWheel1R
+	{
+		mesh = vehicles/Vehicles_Mopar_Wheels|mopar_667_tire,
+		texture = vehicles/Vehicles_MoparRally667_wheel1,
+		shader = vehiclewheel,
+		scale = 0.107,
+        invertX = TRUE,
+	}
+
+    model 70roadRunnerWheel2L
+	{
+		mesh = vehicles/Vehicles_Mopar_Wheels|mopar_667_tire,
+		texture = vehicles/Vehicles_MoparRally667_wheel1b,
+		shader = vehiclewheel,
+		scale = 0.107,
+	}
+
+    model 70roadRunnerWheel2R
+	{
+		mesh = vehicles/Vehicles_Mopar_Wheels|mopar_667_tire,
+		texture = vehicles/Vehicles_MoparRally667_wheel1b,
+		shader = vehiclewheel,
+		scale = 0.107,
+        invertX = TRUE,
+	}
+
+	template vehicle RUN70Tires
+	{
+		part TireFrontLeft
+		{
+            model Tire1L
+			{
+				file = 70roadRunnerWheel1L,
+			}
+
+            model Tire2L
+			{
+				file = 70roadRunnerWheel2L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = RUN70.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model Tire1R
+			{
+				file = 70roadRunnerWheel1R,
+			}
+
+            model Tire2R
+			{
+				file = 70roadRunnerWheel2R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = RUN70.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model Tire1L
+			{
+				file = 70roadRunnerWheel1L,
+			}
+
+            model Tire2L
+			{
+				file = 70roadRunnerWheel2L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = RUN70.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model Tire1R
+			{
+				file = 70roadRunnerWheel1R,
+			}
+
+            model Tire2R
+			{
+				file = 70roadRunnerWheel2R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = RUN70.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.moparRally667tire3;Base.moparRally667TAtire3,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+		}
+	}
+}

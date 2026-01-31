@@ -1,0 +1,74 @@
+module Base
+{
+	
+	model 95imprezaspoiler0
+	{
+		mesh = vehicles/Vehicles_95impreza_Body|95impreza_spoiler,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    template vehicle IMP95Spoiler
+        {
+        part DAMNSpoiler
+            {
+
+            model spoiler0
+            {
+                    file = 95imprezaspoiler0,
+            }
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            itemType = Base.95imprezaSpoiler,
+            mechanicRequireKey = false,
+            durability = 2,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        tags = Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = IMP95.InstallComplete.Spoiler,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        tags = Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = IMP95.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = IMP95.Create.Spoiler,
+                init = IMP95.Init.Spoiler,
+            }
+        }
+    }
+}
