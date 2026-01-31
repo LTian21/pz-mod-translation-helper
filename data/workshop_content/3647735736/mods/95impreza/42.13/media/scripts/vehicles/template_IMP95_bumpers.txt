@@ -1,0 +1,167 @@
+module Base
+{
+	model 95imprezafrontBumper0
+	{
+		mesh = vehicles/Vehicles_95impreza_Body|95impreza_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 95imprezafrontBumperA
+	{
+		mesh = vehicles/Vehicles_95impreza_Body|95impreza_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 95imprezafrontBullbarA
+	{
+		mesh = vehicles/Vehicles_95impreza_Body|95impreza_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 95imprezarearBumper0
+	{
+		mesh = vehicles/Vehicles_95impreza_Body|95impreza_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle IMP95Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 95imprezafrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 95imprezafrontBumperA,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 95imprezafrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.95imprezaBumperFront0;Base.95imprezaBumperFrontA;Base.95imprezaBullbarFrontA,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = IMP95.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = IMP95.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = IMP95.Create.FrontBumper,
+					init = IMP95.Init.FrontBumper,
+					}
+		}
+
+        part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 95imprezarearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.95imprezaBumperRear0,
+				mechanicRequireKey = false,
+                durability = 5,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = IMP95.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = IMP95.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = IMP95.Create.RearBumper,
+					init = IMP95.Init.RearBumper,
+					}
+		}
+	}
+}

@@ -1,0 +1,434 @@
+module Base
+{
+    model 96lancerEVOdoorfla
+    	{
+        mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 96lancerEVOdoorfra
+    	{
+        mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 96lancerEVOdoorrla
+    	{
+        mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 96lancerEVOdoorrra
+    	{
+        mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 96lancerEVOwindshielda
+    	{
+        mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_windshield_front_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 96lancerEVOwindshieldreara
+    	{
+        mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle EVO4Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model winda
+				{
+                		file = 96lancerEVOwindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.96lancerEVOWindshieldArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = EVO4.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = EVO4.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = EVO4.Create.WindshieldArmor,
+					init = EVO4.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model fla
+				{
+                		file = 96lancerEVOdoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.96lancerEVOFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = EVO4.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = EVO4.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = EVO4.Create.FrontLeftArmor,
+					init = EVO4.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model fra
+				{
+                		file = 96lancerEVOdoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.96lancerEVOFrontWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = EVO4.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = EVO4.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = EVO4.Create.FrontRightArmor,
+					init = EVO4.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model rla
+				{
+                		file = 96lancerEVOdoorrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+            parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.96lancerEVORearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = EVO4.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = EVO4.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = EVO4.Create.RearLeftArmor,
+					init = EVO4.Init.RearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model rra
+				{
+                		file = 96lancerEVOdoorrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.96lancerEVORearWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = EVO4.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = EVO4.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = EVO4.Create.RearRightArmor,
+					init = EVO4.Init.RearRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model windra
+				{
+                		file = 96lancerEVOwindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.96lancerEVOWindshieldRearArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = EVO4.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = EVO4.UninstallComplete.WindshieldRearArmor,
+                    requireUninstalled = DAMNSpareTireRoof,
+            		}
+
+            		lua
+            		{
+					create = EVO4.Create.WindshieldRearArmor,
+					init = EVO4.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

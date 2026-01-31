@@ -1,0 +1,146 @@
+module Base
+{
+    model 95imprezastrap
+	{
+		mesh = vehicles/Vehicles_95impreza_Body|95impreza_strap,
+		texture = Vehicles/Vehicles_95impreza_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle IMP95SpareTire
+		{
+		part DAMNSpareTire
+        	{
+				area = TruckBed,
+				category = tire,
+				specificItem = false,
+				itemType = Base.95imprezaTire3;damnCraft.SmallTire1,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:1,
+                    door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = IMP95.InstallComplete.SpareTire,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				tags = Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+		            complete = IMP95.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+            			init = IMP95.Init.SpareTire,
+						create = IMP95.Create.SpareTire,
+					}
+			}
+
+        part DAMNSpareTireRoof
+        	{
+                model spare0
+                {
+                    file = 95imprezaWheelL,
+                    offset = 0.0000 0.7778 -1.3556,
+				    rotate = -27.0000 0.0000 90.0000,
+                }
+
+                model spare1
+                {
+                    file = 95imprezaWheel2L,
+                    offset = 0.0000 0.7778 -1.3556,
+				    rotate = -27.0000 0.0000 90.0000,
+                }
+
+                model spareStrap
+                {
+                    file = 95imprezastrap,
+                }
+
+				area = TireRearRight,
+				category = tire,
+				specificItem = false,
+				itemType = Base.95imprezaTire3;damnCraft.SmallTire1,
+				mechanicRequireKey = false,
+                durability = 4,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = IMP95.InstallComplete.SpareTireRoof,
+                    requireInstalled = DAMNWindshieldRearArmor,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				tags = Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+		            complete = IMP95.UninstallComplete.SpareTireRoof,
+            		}
+
+            		lua
+            		{
+                        init = IMP95.Init.SpareTireRoof,
+						create = IMP95.Create.SpareTireRoof,
+					}
+			}
+	}		
+}

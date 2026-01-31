@@ -1,0 +1,55 @@
+module TAD
+{
+    imports
+    {
+        Base
+    }
+
+    model Kosmotsars
+    {
+        mesh = WorldItems/Cereal,
+        texture = WorldItems/Kosmotsars,
+        scale = 0.08,
+    }
+
+    item Kosmotsars
+    {
+        DisplayCategory = Food,
+        EatType = EatBox,
+        ItemType = base:food,
+        Weight = 0.2,
+        Packaged = true,
+        AlwaysWelcomeGift = true,
+        Icon = OpenKosmotsars,
+        HungerChange = -40.0,
+        Calories = 2360.0,
+        Carbohydrates = 572.0,
+        Lipids = 26.0,
+        Proteins = 52.0,
+        WorldStaticModel = TAD.Kosmotsars,
+        Tags = TAD:CardGiver,
+    }
+
+}
+
+module Base
+{
+    craftRecipe MakeBowlOfKosmotsars
+    {
+        timedAction = MixingBowl,
+        time = 20,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.Bowl;Base.ClayBowl] mode:destroy flags[ItemCount],
+            -fluid 0.3 [CowMilk;SheepMilk],
+            item 5 [TAD.Kosmotsars],
+        }
+        outputs
+        {
+            item 1 Base.CerealBowl,
+        }
+    }
+}

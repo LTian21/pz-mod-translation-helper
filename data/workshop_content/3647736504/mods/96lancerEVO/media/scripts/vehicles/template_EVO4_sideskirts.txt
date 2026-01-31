@@ -1,0 +1,70 @@
+module Base
+{
+	
+	model 96lancerEVOsideskirts0
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_sideskirts0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    template vehicle EVO4Sideskirts
+        {
+        part DAMNSideskirts
+            {
+
+            model sideskirts0
+            {
+                    file = 96lancerEVOsideskirts0,
+            }
+
+            category = bodywork,
+            area = TireFrontRight,
+            itemType = Base.96lancerEVOSideskirts,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = EVO4.InstallComplete.Sideskirts,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = EVO4.UninstallComplete.Sideskirts,
+            }
+            lua
+            {
+                create = EVO4.Create.Sideskirts,
+                init = EVO4.Init.Sideskirts,
+            }
+        }
+    }
+}

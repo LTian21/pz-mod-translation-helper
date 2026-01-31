@@ -1,0 +1,146 @@
+module Base
+{
+    model 96lancerEVOstrap
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_strap,
+		texture = Vehicles/Vehicles_96lancerEVO_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle EVO4SpareTire
+		{
+		part DAMNSpareTire
+        	{
+				area = TruckBed,
+				category = tire,
+				specificItem = false,
+				itemType = Base.96lancerEVOTire3;damnCraft.SmallTire1,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:1,
+                    door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = EVO4.InstallComplete.SpareTire,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				tags = Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+		            complete = EVO4.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+            			init = EVO4.Init.SpareTire,
+						create = EVO4.Create.SpareTire,
+					}
+			}
+
+        part DAMNSpareTireRoof
+        	{
+                model spare0
+                {
+                    file = 96lancerEVOWheelL,
+                    offset = 0.0000 0.7778 -1.3556,
+				    rotate = -27.0000 0.0000 90.0000,
+                }
+
+                model spare1
+                {
+                    file = 96lancerEVOWheel2L,
+                    offset = 0.0000 0.7778 -1.3556,
+				    rotate = -27.0000 0.0000 90.0000,
+                }
+
+                model spareStrap
+                {
+                    file = 96lancerEVOstrap,
+                }
+
+				area = TireRearRight,
+				category = tire,
+				specificItem = false,
+				itemType = Base.96lancerEVOTire3;damnCraft.SmallTire1,
+				mechanicRequireKey = false,
+                durability = 4,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = EVO4.InstallComplete.SpareTireRoof,
+                    requireInstalled = DAMNWindshieldRearArmor,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				tags = Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+		            complete = EVO4.UninstallComplete.SpareTireRoof,
+            		}
+
+            		lua
+            		{
+                        init = EVO4.Init.SpareTireRoof,
+						create = EVO4.Create.SpareTireRoof,
+					}
+			}
+	}		
+}

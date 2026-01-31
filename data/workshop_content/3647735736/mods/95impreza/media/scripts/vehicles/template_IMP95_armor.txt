@@ -1,0 +1,428 @@
+module Base
+{
+    model 95imprezadoorfla
+    	{
+        mesh = vehicles/Vehicles_95impreza_Body|95impreza_window_fl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 95imprezadoorfra
+    	{
+        mesh = vehicles/Vehicles_95impreza_Body|95impreza_window_fr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 95imprezadoorrla
+    	{
+        mesh = vehicles/Vehicles_95impreza_Body|95impreza_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 95imprezadoorrra
+    	{
+        mesh = vehicles/Vehicles_95impreza_Body|95impreza_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
+    model 95imprezawindshielda
+    	{
+        mesh = vehicles/Vehicles_95impreza_Body|95impreza_windshield_front_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 95imprezawindshieldreara
+    	{
+        mesh = vehicles/Vehicles_95impreza_Body|95impreza_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+	template vehicle IMP95Armor
+		{
+		part DAMNWindshieldArmor
+        	{
+
+			model winda
+				{
+                		file = 95imprezawindshielda,
+				}
+
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.95imprezaWindshieldArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 550,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = IMP95.InstallComplete.WindshieldArmor,
+                	requireInstalled = Windshield,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+						time = 600,
+						skills = Mechanics:4,
+						recipes = Intermediate Mechanics,
+			            test = Vehicles.UninstallTest.Default,
+						complete = IMP95.UninstallComplete.WindshieldArmor,
+            		}
+
+            		lua
+            		{
+					create = IMP95.Create.WindshieldArmor,
+					init = IMP95.Init.WindshieldArmor,
+					}
+		}
+
+		part DAMNFrontLeftArmor
+        {
+
+			model fla
+				{
+                		file = 95imprezadoorfla,
+				}
+
+			area = SeatFrontLeft,
+			category = bodywork,
+			parent = DoorFrontLeft,
+			specificItem = false,
+			itemType = Base.95imprezaFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = IMP95.InstallComplete.FrontLeftArmor,
+                	requireInstalled = WindowFrontLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = IMP95.UninstallComplete.FrontLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = IMP95.Create.FrontLeftArmor,
+					init = IMP95.Init.FrontLeftArmor,
+					}
+		}
+
+		part DAMNFrontRightArmor
+        {
+
+			model fra
+				{
+                		file = 95imprezadoorfra,
+				}
+
+			area = SeatFrontRight,
+			category = bodywork,
+			parent = DoorFrontRight,
+			specificItem = false,
+			itemType = Base.95imprezaFrontWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = IMP95.InstallComplete.FrontRightArmor,
+                	requireInstalled = WindowFrontRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = IMP95.UninstallComplete.FrontRightArmor,
+            		}
+
+            		lua
+            		{
+					create = IMP95.Create.FrontRightArmor,
+					init = IMP95.Init.FrontRightArmor,
+					}
+		}
+
+		part DAMNRearLeftArmor
+        {
+
+			model rla
+				{
+                		file = 95imprezadoorrla,
+				}
+
+			area = SeatRearLeft,
+			category = bodywork,
+            parent = DoorRearLeft,
+			specificItem = false,
+			itemType = Base.95imprezaRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = IMP95.InstallComplete.RearLeftArmor,
+                	requireInstalled = WindowRearLeft,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = IMP95.UninstallComplete.RearLeftArmor,
+            		}
+
+            		lua
+            		{
+					create = IMP95.Create.RearLeftArmor,
+					init = IMP95.Init.RearLeftArmor,
+					}
+		}
+
+		part DAMNRearRightArmor
+        {
+
+			model rra
+				{
+                		file = 95imprezadoorrra,
+				}
+
+			area = SeatRearRight,
+			category = bodywork,
+			parent = DoorRearRight,
+			specificItem = false,
+			itemType = Base.95imprezaRearWindowArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = IMP95.InstallComplete.RearRightArmor,
+                	requireInstalled = WindowRearRight,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = IMP95.UninstallComplete.RearRightArmor,
+            		}
+
+            		lua
+            		{
+					create = IMP95.Create.RearRightArmor,
+					init = IMP95.Init.RearRightArmor,
+					}
+		}
+
+		part DAMNWindshieldRearArmor
+        {
+
+				model windra
+				{
+                		file = 95imprezawindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.95imprezaWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = IMP95.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = IMP95.UninstallComplete.WindshieldRearArmor,
+                    requireUninstalled = DAMNSpareTireRoof,
+            		}
+
+            		lua
+            		{
+					create = IMP95.Create.WindshieldRearArmor,
+					init = IMP95.Init.WindshieldRearArmor,
+			}
+		}
+	}
+}

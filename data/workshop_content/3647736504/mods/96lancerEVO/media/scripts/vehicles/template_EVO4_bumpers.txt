@@ -1,0 +1,165 @@
+module Base
+{
+	model 96lancerEVOfrontBumper0
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 96lancerEVOfrontBumperA
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 96lancerEVOfrontBullbarA
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 96lancerEVOrearBumper0
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle EVO4Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 96lancerEVOfrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 96lancerEVOfrontBumperA,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 96lancerEVOfrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.96lancerEVOBumperFront0;Base.96lancerEVOBumperFrontA;Base.96lancerEVOBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = EVO4.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = EVO4.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = EVO4.Create.FrontBumper,
+					init = EVO4.Init.FrontBumper,
+					}
+		}
+
+        part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 96lancerEVOrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.96lancerEVOBumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = EVO4.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = EVO4.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = EVO4.Create.RearBumper,
+					init = EVO4.Init.RearBumper,
+					}
+		}
+	}
+}

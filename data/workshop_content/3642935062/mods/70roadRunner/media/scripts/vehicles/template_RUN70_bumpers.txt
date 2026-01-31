@@ -1,0 +1,171 @@
+module Base
+{
+	model 70roadRunnerfrontBumper0
+	{
+		mesh = vehicles/Vehicles_70roadRunner_Body|runner_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 70roadRunnerfrontBumperA
+	{
+		mesh = vehicles/Vehicles_70roadRunner_Body|runner_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 70roadRunnerfrontBullbarA
+	{
+		mesh = vehicles/Vehicles_70roadRunner_Body|runner_bullbar_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 70roadRunnerrearBumper0
+	{
+		mesh = vehicles/Vehicles_70roadRunner_Body|runner_bumper_rear0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle RUN70BumpersRear
+		{
+
+        part DAMNBumperRear
+        	{
+
+			model RearBumper0
+				{
+                		file = 70roadRunnerrearBumper0,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.70roadRunnerBumperRear0,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RUN70.InstallComplete.RearBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = RUN70.UninstallComplete.RearBumper,
+            		}
+
+            		lua
+            		{
+					create = RUN70.Create.RearBumper,
+					init = RUN70.Init.RearBumper,
+					}
+		}
+	}
+
+    template vehicle RUN70Bumpers
+		{
+		part DAMNBumperFront
+        	{
+
+			model FrontBumper0
+				{
+                		file = 70roadRunnerfrontBumper0,
+				}
+
+			model FrontBumperA
+				{
+                		file = 70roadRunnerfrontBumperA,
+				}
+
+			model FrontBullbarA
+				{
+                		file = 70roadRunnerfrontBullbarA,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.70roadRunnerBumperFront0;Base.70roadRunnerBumperFrontA;Base.70roadRunnerBullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RUN70.InstallComplete.FrontBumper,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = RUN70.UninstallComplete.FrontBumper,
+            		}
+
+            		lua
+            		{
+					create = RUN70.Create.FrontBumper,
+					init = RUN70.Init.FrontBumper,
+					}
+		}
+
+        template! = RUN70BumpersRear,
+	}
+}

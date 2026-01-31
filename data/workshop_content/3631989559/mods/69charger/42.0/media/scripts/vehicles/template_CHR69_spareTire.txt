@@ -1,0 +1,62 @@
+module Base
+{
+	template vehicle CHR69SpareTire
+		{
+		part DAMNSpareTire
+        	{
+				area = TruckBed,
+				category = tire,
+				specificItem = false,
+				itemType = Base.69chargerTire3;Base.moparMagnum500TAtire3;damnCraft.SmallTire1,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:1,
+                    door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CHR69.InstallComplete.SpareTire,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				tags = Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+		            complete = CHR69.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+            			init = CHR69.Init.SpareTire,
+						create = CHR69.Create.SpareTire,
+					}
+			}
+	}		
+}

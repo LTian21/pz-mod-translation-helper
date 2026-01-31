@@ -1,0 +1,230 @@
+module Base
+{
+
+	model 95imprezaWheelL
+	{
+		mesh = vehicles/Vehicles_95impreza_Wheels|95impreza_tire0,
+		texture = vehicles/Vehicles_95impreza_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 95imprezaWheelR
+	{
+		mesh = vehicles/Vehicles_95impreza_Wheels|95impreza_tire0,
+		texture = vehicles/Vehicles_95impreza_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 95imprezaWheel2L
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+    model 95imprezaWheel2R
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle IMP95Tires
+	{
+		part TireFrontLeft
+		{
+            model IMPTireL
+			{
+				file = 95imprezaWheelL,
+			}
+
+            model UNITireL
+			{
+				file = 95imprezaWheel2L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = IMP95.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = IMP95.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = IMP95.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model IMPTireR
+			{
+				file = 95imprezaWheelR,
+			}
+
+            model UNITireR
+			{
+				file = 95imprezaWheel2R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = IMP95.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = IMP95.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = IMP95.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model IMPTireL
+			{
+				file = 95imprezaWheelL,
+			}
+
+            model UNITireL
+			{
+				file = 95imprezaWheel2L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = IMP95.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+            table uninstall
+			{
+				complete = IMP95.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = IMP95.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model IMPTireR
+			{
+				file = 95imprezaWheelR,
+			}
+
+            model UNITireR
+			{
+				file = 95imprezaWheel2R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = IMP95.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = IMP95.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = IMP95.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.95imprezaTire3;damnCraft.SmallTire1,
+            durability = 2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}

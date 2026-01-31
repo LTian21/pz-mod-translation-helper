@@ -1,0 +1,74 @@
+module Base
+{
+	
+	model 96lancerEVOspoiler0
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_spoiler0,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
+
+    template vehicle EVO4Spoiler
+        {
+        part DAMNSpoiler
+            {
+
+            model spoiler0
+            {
+                    file = 96lancerEVOspoiler0,
+            }
+
+            category = bodywork,
+            area = TruckBed,
+            parent = TrunkDoor,
+            itemType = Base.96lancerEVOSpoiler,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = TrunkDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = EVO4.InstallComplete.Spoiler,
+                requireInstalled = TrunkDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = EVO4.UninstallComplete.Spoiler,
+            }
+            lua
+            {
+                create = EVO4.Create.Spoiler,
+                init = EVO4.Init.Spoiler,
+            }
+        }
+    }
+}

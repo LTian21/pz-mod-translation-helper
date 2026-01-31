@@ -1,0 +1,62 @@
+module Base
+{
+	template vehicle RUN70SpareTire
+		{
+		part DAMNSpareTire
+        	{
+				area = TruckBed,
+				category = tire,
+				specificItem = false,
+				itemType = Base.moparRally667tire3;Base.moparRally667TAtire3;damnCraft.SmallTire1,
+				mechanicRequireKey = false,
+                durability = 3,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:1,
+                    door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = RUN70.InstallComplete.SpareTire,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				tags = Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = DAMN.UninstallTest.Default,
+		            complete = RUN70.UninstallComplete.SpareTire,
+            		}
+
+            		lua
+            		{
+            			init = RUN70.Init.SpareTire,
+						create = RUN70.Create.SpareTire,
+					}
+			}
+	}		
+}

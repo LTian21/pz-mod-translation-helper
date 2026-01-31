@@ -1,0 +1,213 @@
+module Base
+{
+
+	model 96lancerEVOWindowfl
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fl_bone 1.0,
+	}
+
+	model 96lancerEVOWindowfr
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fr_bone 1.0,
+	}
+
+	model 96lancerEVOWindowrl
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_window_rl,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+        boneWeight = window_rl_bone 1.0,
+	}
+
+	model 96lancerEVOWindowrr
+	{
+		mesh = vehicles/Vehicles_96lancerEVO_Body|96lancer_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_rr_bone 1.0,
+	}
+
+	template vehicle EVO4Windows
+	{
+		part WindowFrontLeft
+		{
+			model windowFL
+			{
+				file = 96lancerEVOWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			window
+			{
+				openable = true,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.96lancerEVOFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 96lancerEVOWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			window
+			{
+				openable = true,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.96lancerEVOFrontSideWindow,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+		}
+
+		part WindowRearLeft
+		{
+			model windowRL
+			{
+				file = 96lancerEVOWindowrl,
+			}
+
+            anim ClosedToOpen
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+			}
+
+			window
+			{
+				openable = true,
+			}
+
+            parent = DoorRearLeft,
+			area = SeatRearLeft,
+			itemType = Base.96lancerEVORearSideWindow,
+
+			table uninstall
+				{
+				requireUninstalled = DAMNRearLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 96lancerEVOWindowrr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			window
+			{
+				openable = true,
+			}
+
+			parent = DoorRearRight,
+			area = SeatRearRight,
+			itemType = Base.96lancerEVORearSideWindow,
+			table install
+			{
+				requireInstalled = DoorRearRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNRearRightArmor,
+				}
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            durability = 2,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}
+

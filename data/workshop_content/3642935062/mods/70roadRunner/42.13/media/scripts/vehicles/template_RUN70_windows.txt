@@ -1,0 +1,289 @@
+module Base
+{
+
+	model 70roadRunnerWindowfl
+	{
+		mesh = vehicles/Vehicles_70roadRunner_Body|runner_window_fl,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fl_bone 1.0,
+	}
+
+	model 70roadRunnerWindowfr
+	{
+		mesh = vehicles/Vehicles_70roadRunner_Body|runner_window_fr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_fr_bone 1.0,
+	}
+
+	model 70roadRunnerWindowrl
+	{
+		mesh = vehicles/Vehicles_70roadRunner_Body|runner_window_rl,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+        boneWeight = window_rl_bone 1.0,
+	}
+
+	model 70roadRunnerWindowrr
+	{
+		mesh = vehicles/Vehicles_70roadRunner_Body|runner_window_rr,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+		boneWeight = window_rr_bone 1.0,
+	}
+
+	template vehicle RUN70Windows
+	{
+		part WindowFrontLeft
+		{
+			
+            model windowFL
+			{
+				file = 70roadRunnerWindowfl,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fl_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontLeftArmor,
+				}
+		}
+
+		part WindowFrontRight
+		{
+			model windowFR
+			{
+				file = 70roadRunnerWindowfr,
+			}
+
+			anim ClosedToOpen
+			{
+				anim = window_fr_opening,
+				animate = FALSE,
+			}
+
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+		}
+
+        part WindowRearLeft
+		{
+			
+            model windowRL
+			{
+				file = 70roadRunnerWindowrl,
+			}
+
+			anim Close
+			{
+				anim = window_rl_opening,
+				reverse = TRUE,
+				rate = 0.35,
+			}
+
+			anim Open
+			{
+				anim = window_rl_opening,
+				rate = 0.35,
+			}
+
+			anim Closed
+			{
+				anim = window_rl_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = window_rl_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			area = SeatFrontLeft,
+			table install
+			{
+				requireInstalled = WindowFrontLeft,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontLeftArmor,
+				}
+		}
+
+		part WindowRearRight
+		{
+			model windowRR
+			{
+				file = 70roadRunnerWindowrr,
+			}
+
+			anim Close
+			{
+				anim = window_rr_opening,
+				reverse = TRUE,
+				rate = 0.35,
+			}
+
+			anim Open
+			{
+				anim = window_rr_opening,
+				rate = 0.35,
+			}
+
+			anim Closed
+			{
+				anim = window_rr_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = window_rr_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			area = SeatFrontRight,
+			table install
+			{
+				requireInstalled = WindowFrontRight,
+			}
+			table uninstall
+				{
+				requireUninstalled = DAMNFrontRightArmor,
+				}
+		}
+
+		part WindowFront*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            durability = 2,
+            itemType = Base.70roadRunnerFrontSideWindow,
+			window
+			{
+				openable = true,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+
+        part WindowRear*
+		{
+			category = door,
+			mechanicRequireKey = true,
+            durability = 2,
+            itemType = Base.70roadRunnerRearSideWindow,
+			door
+			{
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 500,
+				skills = Mechanics:3,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.TrunkDoor,
+				init = Vehicles.Init.Door,
+				use = Vehicles.Use.TrunkDoor,
+			}
+		}
+	}
+}
+

@@ -1,0 +1,397 @@
+module Base
+{
+
+	model 69chargerWheelL
+	{
+		mesh = vehicles/Vehicles_69charger_Wheels|charger_tire0,
+		texture = vehicles/Vehicles_69charger_Wheel,
+		shader = vehiclewheel,
+		scale = 0.097,
+	}
+
+    model 69chargerWheelR
+	{
+		mesh = vehicles/Vehicles_69charger_Wheels|charger_tire0,
+		texture = vehicles/Vehicles_69charger_Wheel,
+		shader = vehiclewheel,
+		scale = 0.097,
+        invertX = TRUE,
+	}
+
+    model 69chargerWheel2L
+	{
+		mesh = vehicles/Vehicles_69charger_Wheels_temp|mopar_magnum500_tire,
+		texture = vehicles/Vehicles_MoparMagnum500_wheel2b,
+		shader = vehiclewheel,
+		scale = 0.11,
+	}
+
+    model 69chargerWheel2R
+	{
+		mesh = vehicles/Vehicles_69charger_Wheels_temp|mopar_magnum500_tire,
+		texture = vehicles/Vehicles_MoparMagnum500_wheel2b,
+		shader = vehiclewheel,
+		scale = 0.11,
+        invertX = TRUE,
+	}
+
+	template vehicle CHR69Tires
+	{
+		part TireFrontLeft
+		{
+            model TireL
+			{
+				file = 69chargerWheelL,
+			}
+            model Tire2L
+			{
+				file = 69chargerWheel2L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CHR69.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model TireR
+			{
+				file = 69chargerWheelR,
+			}
+            model Tire2R
+			{
+				file = 69chargerWheel2R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CHR69.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model TireL
+			{
+				file = 69chargerWheelL,
+			}
+            model Tire2L
+			{
+				file = 69chargerWheel2L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+            
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CHR69.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model TireR
+			{
+				file = 69chargerWheelR,
+			}
+            model Tire2R
+			{
+				file = 69chargerWheel2R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+            
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = CHR69.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.69chargerTire3;Base.moparMagnum500TAtire3,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+		}
+	}
+
+    template vehicle CHR69Tires440
+	{
+		part TireFrontLeft
+		{
+            model TireL
+			{
+				file = 69chargerWheelL,
+			}
+            model Tire2L
+			{
+				file = 69chargerWheel2L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = CHR69.InstallComplete.TireFrontLeft440,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = CHR69.UninstallComplete.TireFrontLeft440,
+			}
+
+			lua
+			{
+				create = CHR69.Create.TireFrontLeft440,
+				init = CHR69.Init.TireFrontLeft440,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model TireR
+			{
+				file = 69chargerWheelR,
+			}
+            model Tire2R
+			{
+				file = 69chargerWheel2R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = CHR69.InstallComplete.TireFrontRight440,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = CHR69.UninstallComplete.TireFrontRight440,
+			}
+
+			lua
+			{
+				create = CHR69.Create.TireFrontRight440,
+				init = CHR69.Init.TireFrontRight440,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model TireL
+			{
+				file = 69chargerWheelL,
+			}
+            model Tire2L
+			{
+				file = 69chargerWheel2L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = CHR69.InstallComplete.TireRearLeft440,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			table uninstall
+			{
+				complete = CHR69.UninstallComplete.TireRearLeft440,
+			}
+
+			lua
+			{
+				create = CHR69.Create.TireRearLeft440,
+				init = CHR69.Init.TireRearLeft440,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model TireR
+			{
+				file = 69chargerWheelR,
+			}
+            model Tire2R
+			{
+				file = 69chargerWheel2R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = CHR69.InstallComplete.TireRearRight440,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = CHR69.UninstallComplete.TireRearRight440,
+			}
+
+			lua
+			{
+				create = CHR69.Create.TireRearRight440,
+				init = CHR69.Init.TireRearRight440,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.moparMagnum500TAtire3;Base.moparMagnum500TAtire3,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+}

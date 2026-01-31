@@ -1,0 +1,212 @@
+module Base
+{
+
+	model 69chargerSeatfl
+	{
+		mesh = vehicles/Vehicles_69charger_Body|common_seat_fl,
+		texture = Vehicles/Vehicles_69charger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 69chargerSeatfr
+	{
+		mesh = vehicles/Vehicles_69charger_Body|common_seat_fl,
+		texture = Vehicles/Vehicles_69charger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	model 69chargerSeatrl
+	{
+		mesh = vehicles/Vehicles_69charger_Body|common_seat_rl,
+		texture = Vehicles/Vehicles_69charger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 69chargerSeatrr
+	{
+		mesh = vehicles/Vehicles_69charger_Body|common_seat_rl,
+		texture = Vehicles/Vehicles_69charger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+	template vehicle CHR69Seats
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 69chargerSeatfl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 69chargerSeatfr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.69chargerFrontSeat,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part SeatRearLeft
+		{
+
+			model seatRL
+			{
+				file = 69chargerSeatrl,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearLeft,
+			container
+			{
+				seat = RearLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+
+			model seatRR
+			{
+				file = 69chargerSeatrr,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatRearRight,
+			container
+			{
+				seat = RearRight,
+			}
+		}
+
+		part SeatRear*
+		{
+			category = seat,
+			itemType = Base.69chargerRearSeat,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+            		{
+            		create = Vehicles.Create.Default,
+					}
+		}
+	}
+}
+

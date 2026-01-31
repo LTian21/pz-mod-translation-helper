@@ -1,0 +1,82 @@
+module Base
+{
+
+	model 69chargerRoofrack0
+	{
+		mesh = vehicles/Vehicles_69charger_Body|small_roofrack,
+		texture = Vehicles/Vehicles_70dodgeTA_Wheel_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle CHR69Roofracks
+	{
+		part CHR69Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 69chargerRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.OldSmallRoofrack,
+			mechanicRequireKey = false,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 1500,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	complete = Vehicles.InstallComplete.Default,
+                	test = Vehicles.InstallTest.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 1300,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = DAMN.Create.Blank,
+				}
+		}
+	}
+}

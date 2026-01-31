@@ -1,0 +1,74 @@
+module Base
+{
+
+	model 95imprezaVent
+	{
+		mesh = vehicles/Vehicles_95impreza_Body|95impreza_vents,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle IMP95Vents
+	{
+		part IMP95Vents
+		{
+
+			model vent61181524t51
+			{
+				file = 95imprezaVent,
+			}
+
+			anim Close
+			{
+				anim = vent_opening,
+				reverse = TRUE,
+				rate = 0.35,
+			}
+
+			anim Open
+			{
+				anim = vent_opening,
+				rate = 0.35,
+			}
+
+			anim Closed
+			{
+				anim = vent_opening,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = vent_opening,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+		
+			category = nodisplay,
+			door
+			{
+			}
+			anim Open
+			{
+				sound = ,
+			}
+			anim Close
+			{
+				sound = ,
+			}
+
+            specificItem = false,
+			itemType = Base.Wrench,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			area = Engine,
+			lua
+			{
+				create = Vehicles.Create.Default,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.EngineDoor,
+			}
+		}
+	}
+}

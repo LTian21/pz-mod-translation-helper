@@ -1,0 +1,474 @@
+module Base
+{
+	model lockMartM577Base
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|m577_body,
+		shader = damn_vehicle_noreflect_shader,
+		scale = 0.1,
+	}
+	model lockMartM577Base2
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|m577_interior2,
+		texture = vehicles/Vehicles_lockMartM577_Shell2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model lockMartM577Interior
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|m577_interior,
+		texture = vehicles/Vehicles_lockMartM577_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model lockMartM577Exhaust
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|m577_exhaust,
+		texture = vehicles/Vehicles_lockMartM577_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model lockMartM577sus_fl
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|m577_sus_f,
+		texture = vehicles/Vehicles_lockMartM577_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model lockMartM577sus_fr
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|m577_sus_f,
+		texture = vehicles/Vehicles_lockMartM577_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	model lockMartM577sus_rl
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|m577_sus_r,
+		texture = vehicles/Vehicles_lockMartM577_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model lockMartM577sus_rr
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|m577_sus_r,
+		texture = vehicles/Vehicles_lockMartM577_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+	model lockMartM577BatteryTIS
+	{
+		mesh = vehicles/Vehicles_lockMartM577_Body|TIS_CarBattery,
+		texture = Vehicles/Vehicles_lockMartM577_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	vehicle lockMartM577
+    {
+        mechanicType = 2,
+        offRoadEfficiency = 4,
+        engineRepairLevel = 4,
+        playerDamageProtection = 1.2,
+        engineRPMType = van,
+
+        model
+        {
+            file = lockMartM577Base,
+            scale = 0.9000,
+            offset = 0.0000 0.7444 -0.8556,
+        }
+
+        spawnOffsetY = 0,
+
+        skin
+        {
+            texture = Vehicles/Vehicles_lockMartM577_Shell,
+        }
+
+        textureRust = Vehicles/Vehicles_lockMartM577_Rust,
+        textureMask = Vehicles/Vehicles_lockMartM577_Mask,
+        textureLights = Vehicles/Vehicles_lockMartM577_Lights,
+        textureDamage1Shell = Vehicles/Vehicles_lockMartM577_Shell_Damage1,
+        textureDamage2Shell = Vehicles/Vehicles_lockMartM577_Shell_Damage2,
+        textureDamage1Overlay = Vehicles/Vehicles_lockMartM577_Blood1,
+        textureDamage2Overlay = Vehicles/Vehicles_lockMartM577_Blood1,
+        textureShadow = Vehicles/Vehicles_lockMartM577_Shadow,
+
+        sound
+        {
+            engine = VehicleEngineSUV,
+            engineStart = VehicleEngineSUV,
+            engineTurnOff = VehicleEngineSUV,
+            horn = VehicleHornStandard,
+            ignitionFail = VehicleIgnitionFailSUV,
+        }
+
+        extents = 2.8889 1.6000 8.3111,
+        mass = 1150,
+        physicsChassisShape = 2.8889 1.6000 8.3111,
+        centerOfMassOffset = 0.0000 0.8000 0.0000,
+        shadowExtents = 3.3103 7.9843,
+        shadowOffset = 0.0000 -0.0019,
+        engineForce = 5000,
+        maxSpeed = 55f,
+        engineLoudness = 60,
+        engineQuality = 90,
+        gearRatioCount = 4,
+        gearRatioR = 4,
+        gearRatio1 = 4,
+        gearRatio2 = 3,
+        gearRatio3 = 2.5,
+        gearRatio4 = 1.0,
+        brakingForce = 50,
+        stoppingMovementForce = 4.0f,
+        rollInfluence = 0.50f,
+        steeringIncrement = 0.02,
+        steeringClamp = 0.2,
+        suspensionStiffness = 37,
+        suspensionCompression = 3.83,
+        suspensionDamping = 2.88,
+        maxSuspensionTravelCm = 12,
+        suspensionRestLength = 0.5,
+        wheelFriction = 2.0f,
+        frontEndHealth = 3500,
+        rearEndHealth = 3000,
+        seats = 15,
+
+        wheel FrontLeft
+        {
+            front = true,
+            offset = 1.2222 -0.3444 2.4222,
+            radius = 0.73f,
+            width = 0.42f,
+        }
+
+        wheel FrontRight
+        {
+            front = true,
+            offset = -1.2222 -0.3444 2.4222,
+            radius = 0.73f,
+            width = 0.42f,
+        }
+
+        wheel RearLeft
+        {
+            front = false,
+            offset = 1.2222 -0.3444 -2.3333,
+            radius = 0.73f,
+            width = 0.42f,
+        }
+
+        wheel RearRight
+        {
+            front = false,
+            offset = -1.2222 -0.3444 -2.3333,
+            radius = 0.73f,
+            width = 0.42f,
+        }
+
+        template = M577Passengers,
+
+        area Engine
+        {
+            xywh = 1.8333 -0.0556 0.7778 1.1111,
+        }
+
+        area ToolboxLeft
+        {
+            xywh = 0.9556 -4.5333 1.2222 0.7556,
+        }
+
+        area ToolboxRight
+        {
+            xywh = -0.9556 -4.5333 1.2222 0.7556,
+        }
+
+        area SeatFrontLeft
+		{
+			xywh = 1.8333 3.1333 0.7778 1.1111,
+		}
+
+        area SeatRearRight
+        {
+            xywh = -2.0000 -0.4111 1.1111 1.3333,
+        }
+
+        area GasTank
+        {
+            xywh = 1.8778 -1.5333 0.4222 0.4222,
+        }
+
+        area TireFrontLeft
+        {
+            xywh = 2.1556 1.5667 0.4222 0.4222,
+        }
+
+        area TireFrontRight
+        {
+            xywh = -2.1556 1.5667 0.4222 0.4222,
+        }
+
+        area TireRearLeft
+        {
+            xywh = 2.1556 -3.2000 0.4222 0.4222,
+        }
+
+        area TireRearRight
+        {
+            xywh = -2.1556 -3.2000 0.4222 0.4222,
+        }
+
+        template = M577Tires,
+        template = runFlatTires,
+        template = centralTireInflation,
+        template = M577TrunkCompartment,
+        template = M577GunCab,
+        template = M577Seats,
+
+        part GloveBox
+        {
+            model M577Interior
+            {
+                file = lockMartM577Interior,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            model M577Base2
+            {
+                file = lockMartM577Base2,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            area = SeatFrontRight,
+            itemType = Base.GloveBox,
+            mechanicRequireKey = true,
+
+            container
+            {
+                capacity = 10,
+                test = Vehicles.ContainerAccess.GloveBox,
+            }
+
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        template = GasTank,
+
+        part GasTank
+        {
+            container
+            {
+                conditionAffectsCapacity = false,
+                capacity = 150,
+            }
+
+            install
+            {
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+            }
+
+            uninstall
+            {
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+            }
+        }
+
+        template = Battery,
+
+        part Battery
+        {
+            model M577bat
+            {
+                file = lockMartM577BatteryTIS,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        template = Engine,
+        template = Muffler,
+
+        part Muffler
+        {
+            model M577exhaust
+            {
+                file = lockMartM577Exhaust,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            table install
+            {
+                recipes = Intermediate Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Intermediate Mechanics,
+            }
+        }
+
+        template = M577Hood,
+
+        part Heater
+        {
+            category = engine,
+
+            lua
+            {
+                update = Vehicles.Update.Heater,
+            }
+        }
+
+        part PassengerCompartment
+        {
+            category = nodisplay,
+
+            lua
+            {
+                update = Vehicles.Update.PassengerCompartment,
+            }
+        }
+
+        
+        template = M577Doors,
+        template = Brake,
+
+        part Brake*
+        {
+            table install
+            {
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+            }
+        }
+
+        template = Suspension,
+
+        part SuspensionFrontLeft
+        {
+            model susFL
+            {
+                file = lockMartM577sus_fl,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        part SuspensionFrontRight
+        {
+            model susFR
+            {
+                file = lockMartM577sus_fr,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        part SuspensionRearLeft
+        {
+            model susRL
+            {
+                file = lockMartM577sus_rl,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        part SuspensionRearRight
+        {
+            model susRR
+            {
+                file = lockMartM577sus_rr,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        part Suspension*
+        {
+            table install
+            {
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:4,
+                recipes = Intermediate Mechanics,
+            }
+        }
+
+        template = Radio_HAM,
+        template = M577RemoteTurret,
+        template = Headlight,
+        template = M577Windshield,
+        template = DAMNglobal,
+		template = DAMNlockMartM577,
+        useChassisPhysicsCollision = false,
+
+        physics box
+        {
+            offset = 0.0000 0.8663 -0.7000,
+            extents = 2.8889 1.7333 6.8222,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.4814 3.4333,
+            extents = 2.2444 0.7333 1.4444,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.9556 0.4814 3.3667,
+            extents = 0.7111 0.7333 1.4667,
+            rotate = 0.0000 -11.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = -0.9556 0.4814 3.3667,
+            extents = 0.7111 0.7333 1.4667,
+            rotate = 0.0000 11.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.8828 3.1889,
+            extents = 2.2444 0.9556 1.6889,
+            rotate = 31.0000 0.0000 0.0000,
+        }
+
+        attachment trailer
+        {
+            offset = 0.0000 -0.4778 -3.6444,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = -1.0000,
+        }
+
+        attachment trailerfront
+        {
+            offset = 0.0000 -0.4778 5.1667,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = 1.0000,
+        }
+    }
+}
