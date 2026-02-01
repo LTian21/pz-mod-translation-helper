@@ -1,0 +1,56 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity ES_SolarFailsafe
+        {
+            LuaWindowClass = ISEntityWindow,
+            DisplayName    = Solar Fail Safe,
+        }
+    }
+
+    entity SolarFailsafe
+    {
+        component UiConfig
+        {
+            xuiSkin     = default,
+            entityStyle = ES_SolarFailsafe,
+            uiEnabled   = true,
+        }
+
+        component SpriteConfig
+        {
+            isThumpable = true,
+            health      = 80,
+            skillBaseHealth = 5,
+
+            OnIsValid = BuildRecipeCode.ISA_SolarFailsafe.OnIsValid,
+            OnCreate  = BuildRecipeCode.ISA_SolarFailsafe.OnCreate,
+
+            face SINGLE
+            {
+                layer
+                {
+                    row = solarmod_tileset_01_15,
+                }
+            }
+        }
+
+        component CraftRecipe
+        {
+            timedAction   = MakingElectrical,
+            time          = 120,
+            category      = Solar,
+            SkillRequired = Electricity:3,
+            xpAward       = Electricity:75,
+
+            inputs
+            {
+                item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+                item 2 [Base.ElectricWire],
+                item 1 [Base.Remote],
+                item 4 [ISA.WiredCarBattery] flags[Destroy],
+            }
+        }
+    }
+}

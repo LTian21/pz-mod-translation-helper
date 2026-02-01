@@ -1,0 +1,66 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity ES_SolarPanelMounted
+        {
+            LuaWindowClass = ISEntityWindow,
+            DisplayName    = Mounted Solar Panel,
+        }
+    }
+
+    entity SolarPanelMounted
+    {
+        component UiConfig
+        {
+            xuiSkin     = default,
+            entityStyle = ES_SolarPanelMounted,
+            uiEnabled   = false,
+        }
+
+        component SpriteConfig
+        {
+            isThumpable = true,
+            health      = 160,
+            skillBaseHealth = 15,
+
+            OnIsValid = BuildRecipeCode.ISA_SolarPanelMounted.OnIsValid,
+            OnCreate  = BuildRecipeCode.ISA_SolarPanelMounted.OnCreate,
+
+            face W
+            {
+                layer
+                {
+                    row = solarmod_tileset_01_9,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = solarmod_tileset_01_10,
+                }
+            }
+        }
+
+        component CraftRecipe
+        {
+            timedAction   = MakingElectrical,
+            time          = 120,
+            category      = Solar,
+            needToBeLearn = true,
+            autoLearnAny  = Electricity:4,
+            SkillRequired = Electricity:3,
+            xpAward       = Electricity:75,
+
+            inputs
+            {
+                item 1 [ISA.SolarPanel],
+                item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+                item 3 [Base.ElectricWire],
+                item 4 [Base.MetalBar],
+                item 4 [Base.Screws],
+            }
+        }
+    }
+}

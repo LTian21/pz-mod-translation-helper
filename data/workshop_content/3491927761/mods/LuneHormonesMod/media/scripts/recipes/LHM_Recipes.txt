@@ -1,0 +1,94 @@
+module Base
+{
+	imports
+	{
+		HRT
+	}
+	recipe Disinfect Syringe
+    	{
+        	destroy LHM_DirtySyringe,
+        	[Recipe.GetItemTypes.Liquor];10,
+
+        	Result:LHM_Syringe,
+        	Time:40.0,
+		OnCreate:Recipe.OnCreate.InheritCondition,
+        	Category:Health,
+    	}
+	recipe Disinfect Syringe
+    	{
+        	destroy LHM_DirtySyringe,
+        	[Recipe.GetItemTypes.Disinfectant]=3,
+
+        	Result:LHM_Syringe,
+        	Time:40.0,
+		OnCreate:Recipe.OnCreate.InheritCondition,
+        	Category:Health,
+    	}
+	recipe Open Box of Syringes
+    	{
+        	LHM_SyringeBox,
+
+        	Result:LHM_Syringe=10,
+		Sound:PutItemInBag,
+        	Time:20.0,
+        	Category:Health,
+    	}
+	recipe Fill Syringe with Estradiol
+    	{
+        	LHM_Syringe,
+		LHM_EstrogenVial=1,
+
+        	Result:LHM_EstrogenSyringe,
+        	Time:60.0,
+		OnCreate:Recipe.OnCreate.InheritCondition,
+        	Category:Health,
+    	}
+	recipe Fill Dirty Syringe with Estradiol
+    	{
+        	LHM_DirtySyringe,
+		LHM_EstrogenVial=1,
+
+        	Result:LHM_DirtyEstrogenSyringe,
+        	Time:60.0,
+		OnCreate:Recipe.OnCreate.InheritCondition,
+        	Category:Health,
+    	}
+	recipe Fill Syringe with Testosterone
+    	{
+        	LHM_Syringe,
+		LHM_TestosteroneVial=1,
+
+        	Result:LHM_TestosteroneSyringe,
+        	Time:60.0,
+		OnCreate:Recipe.OnCreate.InheritCondition,
+        	Category:Health,
+    	}
+	recipe Fill Dirty Syringe with Testosterone
+    	{
+        	LHM_Syringe,
+		LHM_TestosteroneVial=1,
+
+        	Result:LHM_TestosteroneSyringe,
+        	Time:60.0,
+		OnCreate:Recipe.OnCreate.InheritCondition,
+        	Category:Health,
+    	}
+	recipe Empty out Syringe
+    	{
+        	LHM_EstrogenSyringe/LHM_TestosteroneSyringe,
+
+        	Result:LHM_Syringe,
+        	Time:30.0,
+		OnCreate:Recipe.OnCreate.InheritCondition,
+        	Category:Health,
+    	}
+	recipe Empty out Dirty Syringe
+    	{
+        	LHM_DirtyEstrogenSyringe/LHM_DirtyTestosteroneSyringe,
+
+        	Result:LHM_DirtySyringe,
+        	Time:30.0,
+		OnCreate:Recipe.OnCreate.InheritCondition,
+        	Category:Health,
+    	}
+}

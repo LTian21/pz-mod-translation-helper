@@ -1,0 +1,107 @@
+module Base
+{
+
+/* MEDICAL */
+	craftRecipe zReLabMedImprovisedCottonBalls
+    {
+        time = 300,
+        category = Medical,
+        NeedToBeLearn = true,
+
+        Tags = AnySurfaceCraft;CannotBeResearched,
+        timedAction = Making_Surface,
+        SkillRequired = Doctor:1,
+		xpAward = Doctor:10,
+
+        inputs
+        {
+            item 6 [Base.RippedSheets] mode:destroy,
+            item 1 tags[base:sharpknife] mode:keep flags[IsNotDull;MayDegradeLight],
+        }
+        outputs
+        {
+            item 16 Base.CottonBalls,
+        }
+    }
+
+	craftRecipe zReLabChmGetAnInjection
+    {
+        time = 10,
+        category = Medical,
+		
+        Tags = InHandCraft;CanBeDoneInDark,
+        timedAction = zReVAC2TimedActionInjection,	/* Making */
+		CanWalk = true,
+		
+		OnCreate = zReVAC2_LabRecipes_ChmGetAnInjection,
+		
+        inputs
+        {
+            item 1 [zReLabItems.CmpSyringeWithPlainVaccine;zReLabItems.CmpSyringeReusableWithPlainVaccine;zReLabItems.CmpSyringeWithQualityVaccine;zReLabItems.CmpSyringeReusableWithQualityVaccine;zReLabItems.CmpSyringeWithCure;zReLabItems.CmpSyringeReusableWithCure;zReLabItems.CmpSyringeWithSerum;zReLabItems.CmpSyringeReusableWithSerum] mode:destroy mappers[itemType],
+        }
+        outputs
+        {
+            item 1 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            zReLabItems.LabSyringeUsed = zReLabItems.CmpSyringeWithPlainVaccine,
+            zReLabItems.LabSyringeUsed = zReLabItems.CmpSyringeWithQualityVaccine,
+            zReLabItems.LabSyringeUsed = zReLabItems.CmpSyringeWithCure,
+            zReLabItems.LabSyringeUsed = zReLabItems.CmpSyringeWithSerum,
+            zReLabItems.LabSyringeReusableUsed = zReLabItems.CmpSyringeReusableWithPlainVaccine,
+            zReLabItems.LabSyringeReusableUsed = zReLabItems.CmpSyringeReusableWithQualityVaccine,
+            zReLabItems.LabSyringeReusableUsed = zReLabItems.CmpSyringeReusableWithCure,
+            zReLabItems.LabSyringeReusableUsed = zReLabItems.CmpSyringeReusableWithSerum,
+        }
+    }
+
+	craftRecipe zReLabChmGetAnAlbumin
+    {
+        time = 30,
+        category = Medical,
+		
+        Tags = InHandCraft;CanBeDoneInDark,
+        timedAction = zReVAC2TimedActionAlbumin,
+		CanWalk = true,
+		
+		OnCreate = zReVAC2_LabRecipes_ChmGetAnAlbumin,
+		
+        inputs
+        {
+            item 1 [zReLabItems.CmpAlbuminPills],
+        }
+        outputs
+        {
+        }
+    }
+	
+	craftRecipe zReLabChmTakeBloodForNextWork
+    {
+        time = 20,
+        category = Chemistry,
+        NeedToBeLearn = true,
+		
+        Tags = InHandCraft;CannotBeResearched,
+        timedAction = zReVAC2TimedActionInjection,
+        SkillRequired = Doctor:1,
+		xpAward = Doctor:10,
+		
+		OnCreate = LabRecipes_ChmTakeBloodForNextWork,
+		
+        inputs
+        {
+            item 1 [zReLabItems.LabSyringe;zReLabItems.LabSyringeReusable] mode:destroy mappers[itemType] flags[Prop1],
+            item 1 [Base.AlcoholedCottonBalls],
+        }
+        outputs
+        {
+            item 1 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            zReLabItems.CmpSyringeWithBlood = zReLabItems.LabSyringe,
+            zReLabItems.CmpSyringeReusableWithBlood = zReLabItems.LabSyringeReusable,
+        }
+    }
+}

@@ -1,0 +1,296 @@
+module Base
+{
+
+	recipe Saw Off Shotgun Stock
+    {
+	  ShotgunSawnoff,
+      keep [Recipe.GetItemTypes.Saw],
+
+      Result:ShotgunSawnoffNoStock,
+      Sound:Sawing,
+	  Time:200.0,
+	  AnimNode:SawLog,
+	  Prop1:Source=2,
+	  Prop2:ShotgunSawing2,
+	  OnCreate:VFEShotgunSawnoff_OnCreate,
+    }
+	
+	recipe Saw Off Double Barrel Shotgun Stock
+	{
+	   DoubleBarrelShotgunSawnoff,
+	   keep [Recipe.GetItemTypes.Saw],
+
+	   Result:DoubleBarrelShotgunSawnoffNoStock,
+	   Sound:Sawing,
+	   Time:200.0,
+	   AnimNode:SawLog,
+	   Prop1:Source=2,
+	   Prop2:ShotgunDBSawing2,
+	   OnCreate:VFEShotgunSawnoff_OnCreate,
+	}
+	
+	recipe Saw Off Shotgun
+	{
+	   Shotgun,
+	   keep Saw,
+
+	   Result:ShotgunSawnoff,
+	   Sound:Sawing,
+	   Time:200.0,
+	   AnimNode:SawLog,
+	   Prop1:Source=2,
+	   Prop2:ShotgunSawing,
+	   OnCreate:VFEShotgunSawnoff_OnCreate,
+	   
+	   Override:true,
+	}
+	recipe Saw Off Double Barrel Shotgun
+	{
+	   DoubleBarrelShotgun,
+	   keep Saw,
+
+	   Result:DoubleBarrelShotgunSawnoff,
+	   Sound:Sawing,
+	   Time:200.0,
+	   AnimNode:SawLog,
+	   Prop1:Source=2,
+	   Prop2:ShotgunDBSawing,
+	   OnCreate:VFEShotgunSawnoff_OnCreate,
+	   
+	   Override:true,
+	}
+	
+	
+    recipe Open Box of 7.62 Ammo
+    {
+        762Box,
+
+        Result:762Bullets=8,
+        Sound:BoxOfRoundsOpenOne,
+        Time:15.0,
+    }
+
+    recipe Place 7.62 Ammo in Box
+    {
+        762Bullets=40,
+
+        Result:762Box,
+        Sound:BoxOfRoundsOpenOne,
+        Time:15.0,
+    }
+
+    recipe Open Box of .22 Ammo
+    {
+        22Box,
+
+        Result:22Bullets=10,
+        Sound:BoxOfRoundsOpenOne,
+        Time:15.0,
+    }
+
+    recipe Place .22 Ammo in Box
+    {
+        22Bullets=100,
+
+        Result:22Box,
+        Sound:BoxOfRoundsOpenOne,
+        Time:15.0,
+    }
+	
+	recipe Open Box of .44 Magnum Bullets
+    {
+        Bullets44Box,
+
+        Result:Bullets44=8,
+        Sound:BoxOfRoundsOpenOne,
+        Time:15.0,
+		
+		Override:true,
+    }
+	
+	recipe Place .44 Magnum Bullets in Box
+    {
+        Bullets44=24,
+
+        Result:Bullets44Box,
+        Sound:BoxOfRoundsOpenOne,
+        Time:15.0,
+		
+		Override:true,
+    }
+
+		
+ 	recipe Couple 5.56 Magazines
+    {
+      556Clip=2,
+      DuctTape,	
+
+      Result:Coupled556,
+      Time:50,
+	  Prop1:DuctTape,
+	  Prop2:Coupled556_Ground,
+	  OnCreate:onMagazineCouple_OnCreate,
+    }
+	
+	recipe Separate 5.56 Magazines
+    {
+      Coupled556,
+
+      Result:556Clip=2,
+      Time:50,
+	  AnimNode:RipSheets,
+	  Prop1:Magazine_M16,
+	  Prop2:Magazine_M16,
+    }
+
+ 	recipe Couple 7.62 Magazines
+    {
+      762Clip=2,
+      DuctTape,	
+
+      Result:Coupled762,
+      Time:50,
+	  Prop1:DuctTape,
+	  Prop2:Coupled762_Ground,
+	  OnCreate:onMagazineCouple_OnCreate,
+    }
+	
+	recipe Separate 7.62 Magazines
+    {
+      Coupled762,
+
+      Result:762Clip=2,
+      Time:50,
+	  AnimNode:RipSheets,
+	  Prop1:Magazine_AK47,
+	  Prop2:Magazine_AK47,
+    }
+	
+	recipe Attach M9 Bayonet to Spear
+    {
+        SpearCrafted,
+        M16Bayonet,
+        DuctTape=2,
+
+        Result:SpearBayonet,
+        Time:100.0,
+        OnCreate:Recipe.OnCreate.UpgradeSpear,
+        Category:Survivalist,
+    }
+	
+	recipe Reclaim M9 Bayonet from Spear
+    {
+        SpearBayonet,
+
+        Result:M16Bayonet,
+        OnCreate:Recipe.OnCreate.DismantleSpear,
+        Time:60.0,
+        Category:Survivalist,
+        AllowDestroyedItem:true,
+    }
+	
+	recipe Insert .308 into M13 Ammunition Link
+    {
+      308Bullets,
+      M60_Link,	
+
+      Result:308BulletsLinked,
+      Time:50,
+    }
+	
+	recipe Remove .308 from M13 Ammunition Link
+    {
+      308BulletsLinked,
+
+      Result:M60_Link,
+      Time:100,
+	  OnCreate:VFEUnlinkAmmo_OnCreate,
+    }
+	
+	recipe Open Box of M13 Links
+    {
+        M60_Links_Box,
+
+        Result:M60_Link=40,
+        Sound:BoxOfRoundsOpenOne,
+        Time:15.0,
+    }
+	
+	recipe Place M13 Links in Box
+    {
+        M60_Link=40,
+
+        Result:M60_Links_Box,
+        Sound:BoxOfRoundsOpenOne,
+        Time:15.0,
+    }
+	
+	recipe Make M13 Links
+    {
+        keep M60_Link_Die,
+		keep Saw,
+		keep [Recipe.GetItemTypes.Hammer],
+		SmallSheetMetal,
+
+        Result:M60_Link = 20,
+        Time:1200.0,
+		SkillRequired:MetalWelding=1,
+		
+		NeedToBeLearn:true,
+    }
+	
+	recipe Make M60 Belt Pouch
+    {
+        keep [Recipe.GetItemTypes.SewingNeedle],
+        Thread=5,
+        DenimStrips=4,
+
+        Result:M60Belt,
+        Time:300.0,
+		SkillRequired:Tailoring=2,
+		
+		NeedToBeLearn:true,
+    }
+	
+	recipe Make M60 Brass Catcher
+    {
+        keep [Recipe.GetItemTypes.SewingNeedle],
+		keep Saw,
+        Thread=5,
+        DenimStrips=4,
+		MetalBar,
+
+        Result:M60BrassCatcher,
+        Time:300.0,
+		SkillRequired:Tailoring=2,
+		
+		NeedToBeLearn:true,
+    }
+	
+	recipe Make M13 Link Die
+    {
+       keep [Recipe.GetItemTypes.WeldingMask],
+	   keep Saw,
+	   SmallSheetMetal=4,
+	   MetalBar=2,
+       BlowTorch=2,
+	   WeldingRods=4,
+
+       Result:M60_Link_Die,
+       Time:1200.0,
+       Category:Welding,
+       SkillRequired:MetalWelding=5,
+       OnGiveXP:Recipe.OnGiveXP.MetalWelding25,
+	   
+       NeedToBeLearn:true,
+    }
+	
+	recipe Open 5.56 Battle Pack
+    {
+        556BattlePack,
+
+        Result:556Bullets=40,
+        Sound:BoxOfRoundsOpenOne,
+        Time:60.0,
+    }
+}

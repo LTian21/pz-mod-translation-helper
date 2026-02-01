@@ -1,0 +1,53 @@
+module Base
+{
+
+    craftRecipe zReLabOthUnpacking
+    {
+        time = 15,
+        category = Packing,
+        recipeGroup = OpenBox,
+		
+        Tags = InHandCraft;Packing,
+        timedAction = UnPackBox_Small,
+		
+        inputs
+        {
+            item 1 [zReLabItems.LabFlaskPack;zReLabItems.LabTestTubePack;zReLabItems.LabSyringePack] mappers[itemType] flags[Prop2;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 10 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            zReLabItems.LabFlask = zReLabItems.LabFlaskPack,
+            zReLabItems.LabTestTube = zReLabItems.LabTestTubePack,
+            zReLabItems.LabSyringe = zReLabItems.LabSyringePack,
+        }
+    }
+
+
+	craftRecipe zReLabOthPacking
+    {
+        time = 15,
+        category = Packing,
+		
+        Tags = InHandCraft;Packing,
+        timedAction = PackingBox_Small,
+		
+        inputs
+        {
+            item 10 [zReLabItems.LabFlask;zReLabItems.LabTestTube;zReLabItems.LabSyringe] mappers[itemType] flags[Prop2;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            zReLabItems.LabFlaskPack = zReLabItems.LabFlask,
+            zReLabItems.LabTestTubePack = zReLabItems.LabTestTube,
+            zReLabItems.LabSyringePack = zReLabItems.LabSyringe,
+        }
+    }
+}

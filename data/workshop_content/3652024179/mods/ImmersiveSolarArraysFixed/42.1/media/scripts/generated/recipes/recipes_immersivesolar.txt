@@ -1,0 +1,95 @@
+module Base {
+    craftRecipe WireCarBattery {
+        timedAction = MakingElectrical,
+        time = 80,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        onCreate = OnCreate_ISA_wireCarBattery,
+        xpAward = Electricity:1,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 1 [Base.ElectricWire],
+            item 1 tags[CarBattery] mode:destroy flags[NoBrokenItems],
+        }
+        outputs {
+            item 1 ISA.WiredCarBattery,
+        }
+    }
+    craftRecipe UnWireCarBattery {
+        timedAction = MakingElectrical,
+        time = 80,
+        category = Electrical,
+        needToBeLearn = true,
+        autoLearnAny = Electricity:4,
+        skillRequired = Electricity:3,
+        onCreate = OnCreate_ISA_unwireCarBattery,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 1 [ISA.WiredCarBattery] mode:destroy flags[MayDegrade],
+        }
+        outputs {
+
+        }
+    }
+    craftRecipe Make DIY Battery {
+        timedAction = MakingElectrical,
+        time = 80,
+        category = Electrical,
+        needToBeLearn = true,
+        skillRequired = Electricity:5,
+        onCreate = OnCreate_ISA_createDiyBattery,
+        xpAward = Electricity:1,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 1 tags[CarBattery] mode:destroy flags[NoBrokenItems],
+            item 1 [Base.ElectronicsScrap],
+        }
+        outputs {
+            item 1 ISA.DIYBattery,
+        }
+    }
+    craftRecipe Make Solar Panel {
+        category = Electrical,
+        timedAction = MakingElectrical,
+        time = 250,
+        needToBeLearn = true,
+        skillRequired = Electricity:5,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 2 [Base.ElectricWire],
+            item 10 [Base.Screws],
+            item 10 [Base.ElectronicsScrap],
+            item 3 [Base.SheetMetal],
+            item 5 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs {
+            item 1 ISA.SolarPanel,
+        }
+    }
+    craftRecipe Make Inverter {
+        category = Electrical,
+        timedAction = MakingElectrical,
+        time = 250,
+        needToBeLearn = true,
+        skillRequired = Electricity:5,
+        tags = AnySurfaceCraft,
+        inputs {
+            item 1 tags[Screwdriver] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
+            item 4 [Base.SmallSheetMetal],
+            item 5 [Base.ScrapMetal],
+            item 25 [Base.ElectronicsScrap],
+            item 5 [Base.ElectricWire],
+            item 10 [Base.Screws],
+        }
+        outputs {
+            item 1 ISA.ISAInverter,
+        }
+    }
+}

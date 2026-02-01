@@ -1,0 +1,60 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity ES_PowerBank
+        {
+            LuaWindowClass = ISEntityWindow,
+            DisplayName    = Power Bank,
+        }
+    }
+
+    entity PowerBank
+    {
+        component UiConfig
+        {
+            xuiSkin     = default,
+            entityStyle = ES_PowerBank,
+            uiEnabled   = true,
+        }
+
+        component SpriteConfig
+        {
+            isThumpable = true,
+            health      = 400,
+            skillBaseHealth = 25,
+
+            OnIsValid   = BuildRecipeCode.ISA_PowerBank.OnIsValid,
+            OnCreate    = BuildRecipeCode.ISA_PowerBank.OnCreate,
+
+            face SINGLE
+            {
+                layer
+                {
+                    row = solarmod_tileset_01_0,
+                }
+            }
+        }
+
+        component CraftRecipe
+        {
+            timedAction   = MakingElectrical,
+            time          = 900,
+            category      = Solar,
+            SkillRequired = Electricity:3,
+            xpAward       = Electricity:75,
+            ToolTip       = Tooltip_PowerBank,
+
+            inputs
+            {
+                item 1 tags[Screwdriver] mode:keep flags[MayDegradeLight],
+                item 1 [ISA.ISAInverter],
+                item 3 [Base.ElectricWire],
+                item 6 [Base.ElectronicsScrap],
+                item 4 [Base.MetalBar],
+                item 4 [Base.Screws],
+                item 5 [Base.SmallSheetMetal],
+            }
+        }
+    }
+}
