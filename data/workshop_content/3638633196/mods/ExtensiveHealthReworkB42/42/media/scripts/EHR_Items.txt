@@ -1,0 +1,658 @@
+module ExtensiveHealth
+{
+    /** ===========================================
+        EXTENSIVE HEALTH REWORK - MEDICAL ITEMS
+        Blood Bags, Saline, and Medication System
+        Updated for B42 with realistic pill counts
+    =========================================== **/
+
+    /** =========================================
+        BLOOD BAGS (Single Use - Perishable)
+        Fresh for ~21 days refrigerated, rotten by day 35
+        Spoils MUCH faster at room temperature!
+        Using spoiled blood causes severe illness.
+
+        STORAGE:
+        - Room temp: Spoils in ~3 days (DaysFresh=3 base, modified by temp)
+        - Fridge: Lasts ~21 days (FridgeLife modifier)
+        - Freezer: Can be frozen for long-term storage
+    ========================================= **/
+
+    item BloodBagONeg
+    {
+        DisplayCategory = FirstAid,
+        Type = Food,
+        DisplayName = Blood Bag (O-),
+        Icon = BloodBagONeg,
+        Weight = 0.5,
+        Tooltip = Tooltip_BloodBagONeg,
+        WorldStaticModel = MedicalParcel_Red,
+        Medical = true,
+        DaysFresh = 3,
+        DaysTotallyRotten = 7,
+        FridgeLife = 21,
+        FreezerLife = 180,
+        RequireInFreezer = true,
+        CantEat = true,
+        BadInMicrowave = true,
+        IsCookable = false,
+    }
+
+    item BloodBagOPos
+    {
+        DisplayCategory = FirstAid,
+        Type = Food,
+        DisplayName = Blood Bag (O+),
+        Icon = BloodBagOPos,
+        Weight = 0.5,
+        Tooltip = Tooltip_BloodBagOPos,
+        WorldStaticModel = MedicalParcel_Red,
+        Medical = true,
+        DaysFresh = 3,
+        DaysTotallyRotten = 7,
+        FridgeLife = 21,
+        FreezerLife = 180,
+        RequireInFreezer = true,
+        CantEat = true,
+        BadInMicrowave = true,
+        IsCookable = false,
+    }
+
+    item BloodBagANeg
+    {
+        DisplayCategory = FirstAid,
+        Type = Food,
+        DisplayName = Blood Bag (A-),
+        Icon = BloodBagANeg,
+        Weight = 0.5,
+        Tooltip = Tooltip_BloodBagANeg,
+        WorldStaticModel = MedicalParcel_Red,
+        Medical = true,
+        DaysFresh = 3,
+        DaysTotallyRotten = 7,
+        FridgeLife = 21,
+        FreezerLife = 180,
+        RequireInFreezer = true,
+        CantEat = true,
+        BadInMicrowave = true,
+        IsCookable = false,
+    }
+
+    item BloodBagAPos
+    {
+        DisplayCategory = FirstAid,
+        Type = Food,
+        DisplayName = Blood Bag (A+),
+        Icon = BloodBagAPos,
+        Weight = 0.5,
+        Tooltip = Tooltip_BloodBagAPos,
+        WorldStaticModel = MedicalParcel_Red,
+        Medical = true,
+        DaysFresh = 3,
+        DaysTotallyRotten = 7,
+        FridgeLife = 21,
+        FreezerLife = 180,
+        RequireInFreezer = true,
+        CantEat = true,
+        BadInMicrowave = true,
+        IsCookable = false,
+    }
+
+    item BloodBagBNeg
+    {
+        DisplayCategory = FirstAid,
+        Type = Food,
+        DisplayName = Blood Bag (B-),
+        Icon = BloodBagBNeg,
+        Weight = 0.5,
+        Tooltip = Tooltip_BloodBagBNeg,
+        WorldStaticModel = MedicalParcel_Red,
+        Medical = true,
+        DaysFresh = 3,
+        DaysTotallyRotten = 7,
+        FridgeLife = 21,
+        FreezerLife = 180,
+        RequireInFreezer = true,
+        CantEat = true,
+        BadInMicrowave = true,
+        IsCookable = false,
+    }
+
+    item BloodBagBPos
+    {
+        DisplayCategory = FirstAid,
+        Type = Food,
+        DisplayName = Blood Bag (B+),
+        Icon = BloodBagBPos,
+        Weight = 0.5,
+        Tooltip = Tooltip_BloodBagBPos,
+        WorldStaticModel = MedicalParcel_Red,
+        Medical = true,
+        DaysFresh = 3,
+        DaysTotallyRotten = 7,
+        FridgeLife = 21,
+        FreezerLife = 180,
+        RequireInFreezer = true,
+        CantEat = true,
+        BadInMicrowave = true,
+        IsCookable = false,
+    }
+
+    item BloodBagABNeg
+    {
+        DisplayCategory = FirstAid,
+        Type = Food,
+        DisplayName = Blood Bag (AB-),
+        Icon = BloodBagABNeg,
+        Weight = 0.5,
+        Tooltip = Tooltip_BloodBagABNeg,
+        WorldStaticModel = MedicalParcel_Red,
+        Medical = true,
+        DaysFresh = 3,
+        DaysTotallyRotten = 7,
+        FridgeLife = 21,
+        FreezerLife = 180,
+        RequireInFreezer = true,
+        CantEat = true,
+        BadInMicrowave = true,
+        IsCookable = false,
+    }
+
+    item BloodBagABPos
+    {
+        DisplayCategory = FirstAid,
+        Type = Food,
+        DisplayName = Blood Bag (AB+),
+        Icon = BloodBagABPos,
+        Weight = 0.5,
+        Tooltip = Tooltip_BloodBagABPos,
+        WorldStaticModel = MedicalParcel_Red,
+        Medical = true,
+        DaysFresh = 3,
+        DaysTotallyRotten = 7,
+        FridgeLife = 21,
+        FreezerLife = 180,
+        RequireInFreezer = true,
+        CantEat = true,
+        BadInMicrowave = true,
+        IsCookable = false,
+    }
+
+    /** =========================================
+        EMPTY BLOOD BAG (For self-donation)
+        Can be filled with player's own blood
+    ========================================= **/
+
+    item EmptyBloodBag
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = Empty Blood Bag,
+        Icon = BloodBagEmpty,
+        Weight = 0.2,
+        Tooltip = Tooltip_EmptyBloodBag,
+        WorldStaticModel = MedicalParcel_White,
+        Medical = true,
+    }
+
+    /** =========================================
+        IV SUPPLIES (Single/Limited Use)
+    ========================================= **/
+
+    item SalineBag
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = Saline IV Bag,
+        Icon = SalineBag,
+        Weight = 0.4,
+        Tooltip = Tooltip_SalineBag,
+        WorldStaticModel = MedicalParcel_Green,
+        Medical = true,
+        DaysFresh = 180,
+        DaysTotallyRotten = 365,
+    }
+
+    item IVKit
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = IV Administration Kit,
+        Icon = IVKit,
+        Weight = 0.3,
+        Tooltip = Tooltip_IVKit,
+        UseDelta = 0.2,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item Syringe
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Sterile Syringe (Pack),
+        Icon = Syringe,
+        Weight = 0.1,
+        Tooltip = Tooltip_Syringe,
+        UseDelta = 0.1,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item Epinephrine
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = Epinephrine Auto-Injector,
+        Icon = Epinephrine,
+        Weight = 0.1,
+        Tooltip = Tooltip_Epinephrine,
+        Medical = true,
+    }
+
+    /** =========================================
+        TIER 1 - OTC (OVER THE COUNTER)
+        US Standard Bottle Sizes
+    ========================================= **/
+
+    item ColdFluTablets
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Cold and Flu Tablets,
+        Icon = ColdFluTablets,
+        Weight = 0.1,
+        Tooltip = Tooltip_ColdFluTablets,
+        UseDelta = 0.0417,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item CoughSyrup
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Cough Syrup,
+        Icon = CoughSyrup,
+        Weight = 0.3,
+        Tooltip = Tooltip_CoughSyrup,
+        UseDelta = 0.1,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item ElectrolytePowder
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Electrolyte Powder (Box),
+        Icon = ElectrolytePowder,
+        Weight = 0.15,
+        Tooltip = Tooltip_ElectrolytePowder,
+        UseDelta = 0.1667,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item BronchodilatorInhaler
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Bronchodilator Inhaler,
+        Icon = BronchodilatorInhaler,
+        Weight = 0.1,
+        Tooltip = Tooltip_BronchodilatorInhaler,
+        UseDelta = 0.005,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item AntiNauseaTablets
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Anti-Nausea Tablets,
+        Icon = AntiNauseaTablets,
+        Weight = 0.1,
+        Tooltip = Tooltip_AntiNauseaTablets,
+        UseDelta = 0.0417,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item AntiInflammatory
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Anti-Inflammatory Pills,
+        Icon = AntiInflammatory,
+        Weight = 0.1,
+        Tooltip = Tooltip_AntiInflammatory,
+        UseDelta = 0.0333,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item AntiDiarrheal
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Anti-Diarrheal Tablets,
+        Icon = AntiDiarrheal,
+        Weight = 0.1,
+        Tooltip = Tooltip_AntiDiarrheal,
+        UseDelta = 0.0417,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item MuscleRelaxants
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Muscle Relaxants,
+        Icon = MuscleRelaxants,
+        Weight = 0.1,
+        Tooltip = Tooltip_MuscleRelaxants,
+        UseDelta = 0.0333,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item CoughSuppressant
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Cough Suppressant,
+        Icon = CoughSuppressant,
+        Weight = 0.1,
+        Tooltip = Tooltip_CoughSuppressant,
+        UseDelta = 0.05,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item AntisepticCream
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Antiseptic Cream,
+        Icon = AntisepticCream,
+        Weight = 0.1,
+        Tooltip = Tooltip_AntisepticCream,
+        UseDelta = 0.1,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    /** =========================================
+        TIER 2 - PRESCRIPTION MEDICATION
+        Standard prescription bottle sizes
+    ========================================= **/
+
+    item AntiviralCapsules
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Antiviral Capsules,
+        Icon = AntiviralCapsules,
+        Weight = 0.1,
+        Tooltip = Tooltip_AntiviralCapsules,
+        UseDelta = 0.1,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item PrescriptionAntibiotics
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Prescription Antibiotics,
+        Icon = PrescriptionAntibiotics,
+        Weight = 0.1,
+        Tooltip = Tooltip_PrescriptionAntibiotics,
+        UseDelta = 0.0714,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item AntifungalTablets
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Antifungal Tablets,
+        Icon = AntifungalTablets,
+        Weight = 0.1,
+        Tooltip = Tooltip_AntifungalTablets,
+        UseDelta = 0.0714,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item ActivatedCharcoal
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Activated Charcoal,
+        Icon = ActivatedCharcoal,
+        Weight = 0.2,
+        Tooltip = Tooltip_ActivatedCharcoal,
+        UseDelta = 0.5,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item AntiparasiticPills
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Antiparasitic Pills,
+        Icon = AntiparasiticPills,
+        Weight = 0.1,
+        Tooltip = Tooltip_AntiparasiticPills,
+        UseDelta = 0.1667,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item OralRehydrationKit
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Oral Rehydration Kit,
+        Icon = OralRehydrationKit,
+        Weight = 0.2,
+        Tooltip = Tooltip_OralRehydrationKit,
+        UseDelta = 0.25,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item TetanusAntitoxin
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = Tetanus Antitoxin,
+        Icon = TetanusAntitoxin,
+        Weight = 0.1,
+        Tooltip = Tooltip_TetanusAntitoxin,
+        Medical = true,
+    }
+
+    item TBAntibiotics
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = TB Antibiotics (Isoniazid),
+        Icon = TBAntibiotics,
+        Weight = 0.1,
+        Tooltip = Tooltip_TBAntibiotics,
+        UseDelta = 0.0333,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item AntibioticOintment
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Antibiotic Ointment,
+        Icon = AntibioticOintment,
+        Weight = 0.1,
+        Tooltip = Tooltip_AntibioticOintment,
+        UseDelta = 0.1,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item BroadSpectrumAntibiotics
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Broad Spectrum Antibiotics,
+        Icon = BroadSpectrumAntibiotics,
+        Weight = 0.1,
+        Tooltip = Tooltip_BroadSpectrumAntibiotics,
+        UseDelta = 0.05,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    /** =========================================
+        TIER 3 - CLINICAL GRADE MEDICATION
+        Hospital supplies (mostly single-use)
+    ========================================= **/
+
+    item CorticosteroidInjection
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = Corticosteroid Injection,
+        Icon = CorticosteroidInjection,
+        Weight = 0.1,
+        Tooltip = Tooltip_CorticosteroidInjection,
+        Medical = true,
+    }
+
+    item IVAntibiotics
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = IV Antibiotics,
+        Icon = IVAntibiotics,
+        Weight = 0.4,
+        Tooltip = Tooltip_IVAntibiotics,
+        WorldStaticScale = 0.06,
+        Medical = true,
+    }
+
+    item IVMetronidazole
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = IV Metronidazole,
+        Icon = IVMetronidazole,
+        Weight = 0.4,
+        Tooltip = Tooltip_IVMetronidazole,
+        WorldStaticScale = 0.06,
+        Medical = true,
+    }
+
+    item IVAmphotericin
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = IV Amphotericin B,
+        Icon = IVAmphotericin,
+        Weight = 0.4,
+        Tooltip = Tooltip_IVAmphotericin,
+        WorldStaticScale = 0.06,
+        Medical = true,
+    }
+
+    item ChelationKit
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = Chelation Therapy Kit,
+        Icon = ChelationKit,
+        Weight = 0.5,
+        Tooltip = Tooltip_ChelationKit,
+        Medical = true,
+    }
+
+    item AlbendazoleInjection
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = Albendazole Injection,
+        Icon = AlbendazoleInjection,
+        Weight = 0.1,
+        Tooltip = Tooltip_AlbendazoleInjection,
+        Medical = true,
+    }
+
+    item IVCiprofloxacin
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = IV Ciprofloxacin,
+        Icon = IVCiprofloxacin,
+        Weight = 0.4,
+        Tooltip = Tooltip_IVCiprofloxacin,
+        WorldStaticScale = 0.06,
+        Medical = true,
+    }
+
+    item TetanusImmunoglobulin
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = Tetanus Immunoglobulin,
+        Icon = TetanusImmunoglobulin,
+        Weight = 0.2,
+        Tooltip = Tooltip_TetanusImmunoglobulin,
+        Medical = true,
+    }
+
+    item RifampicinComboPack
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:drainable,
+        DisplayName = Rifampicin Combination Pack,
+        Icon = RifampicinComboPack,
+        Weight = 0.2,
+        Tooltip = Tooltip_RifampicinComboPack,
+        UseDelta = 0.0333,
+        UseWhileEquipped = false,
+        Medical = true,
+    }
+
+    item IVVancomycin
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = IV Vancomycin,
+        Icon = IVVancomycin,
+        Weight = 0.4,
+        Tooltip = Tooltip_IVVancomycin,
+        WorldStaticScale = 0.06,
+        Medical = true,
+    }
+
+    item EmergencySepsisKit
+    {
+        DisplayCategory = FirstAid,
+        ItemType = base:normal,
+        DisplayName = Emergency Sepsis Kit,
+        Icon = EmergencySepsisKit,
+        Weight = 0.6,
+        Tooltip = Tooltip_EmergencySepsisKit,
+        Medical = true,
+    }
+
+    /** =========================================
+        KNOX INFECTION TREATMENT
+        Moved to EHR_KnoxItems.txt
+    ========================================= **/
+}

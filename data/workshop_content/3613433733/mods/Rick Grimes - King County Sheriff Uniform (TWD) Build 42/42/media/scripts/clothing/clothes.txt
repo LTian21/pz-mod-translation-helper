@@ -1,0 +1,112 @@
+module Spongie
+{
+    /* === ТРЮК С МОДЕЛЯМИ НА ПОЛУ === */
+    /* Мы берем ванильные модели (mesh) и натягиваем твою текстуру */
+
+    model Jacket_Ground
+    {
+        mesh = WorldItems/Clothing/Jacket_PaddedDOWN, 
+        texture = clothes/S1Sheriff/Jacket/jacket,
+        scale = 1.0
+    }
+
+    model Trousers_Ground
+    {
+        mesh = WorldItems/Clothing/Trousers_Jeans,
+        texture = clothes/trousers_mesh/trousersmesh_s1_sheriff,
+        scale = 1.0
+    }
+
+    model TShirt_Ground
+    {
+        mesh = WorldItems/Clothing/TShirt,
+        texture = clothes/shirt_tshirt_textures/tshirt_s1_sheriff,
+        scale = 1.0
+    }
+
+    /* === ПРЕДМЕТЫ === */
+
+    item RickGrimes_S1SheriffJacket
+    {
+        ItemType = base:Clothing,
+        DisplayName = King County Sheriff Dept. Jacket,
+        DisplayCategory = Clothing,
+        ClothingItem = RickGrimes_S1SheriffJacket,
+        BodyLocation = base:Jacket,
+        IconsForTexture = S1SheriffIcon,
+        BloodLocation = Jacket,
+        FabricType = Leather,
+        
+        ClothingItemExtra = RickGrimes_S1SheriffJacketOpen,
+        ClothingItemExtraOption = OpenJacket,
+        clothingExtraSubmenu = CloseJacket,
+        
+        RunSpeedModifier = 0.95,
+        CombatSpeedModifier = 0.97,
+        BiteDefense = 15,
+        ScratchDefense = 25,
+        NeckProtectionModifier = 0.25,
+        Insulation = 0.85,
+        WindResistance = 0.6,
+        WaterResistance = 0.2,
+        Weight = 1.5,
+        WorldStaticModel = Jacket_Ground,
+    }
+
+    item RickGrimes_S1SheriffJacketOpen
+    {
+        ItemType = base:Clothing,
+        DisplayName = King County Sheriff Dept. Jacket (Open),
+        DisplayCategory = Clothing,
+        ClothingItem = RickGrimes_S1SheriffJacketOpen,
+        BodyLocation = base:Jacket,
+        IconsForTexture = S1SheriffIconOpen,
+        BloodLocation = Jacket,
+        FabricType = Leather,
+        
+        ClothingItemExtra = RickGrimes_S1SheriffJacket,
+        ClothingItemExtraOption = CloseJacket,
+        clothingExtraSubmenu = OpenJacket,
+        
+        RunSpeedModifier = 0.95,
+        CombatSpeedModifier = 0.97,
+        BiteDefense = 15,
+        ScratchDefense = 25,
+        NeckProtectionModifier = 0.25,
+        Insulation = 0.65,
+        WindResistance = 0.4,
+        WaterResistance = 0.1,
+        Weight = 1.5,
+        WorldStaticModel = Jacket_Ground,
+    }
+
+    item Trousers_S1_Sheriff
+    {
+        ItemType = base:Clothing,
+        DisplayName = King County Sheriff Dept. Pants,
+        DisplayCategory = Clothing,
+        ClothingItem = Trousers_S1_Sheriff,
+        BodyLocation = base:Pants,
+        Icon = Trousers_S1_Sheriff,
+        BloodLocation = Trousers,
+        Insulation = 0.6,
+        WindResistance = 0.3,
+        FabricType = Cotton,
+        WorldStaticModel = Trousers_Ground,
+    }
+
+    item TShirt_S1_Sheriff
+    {
+        ItemType = base:Clothing,
+        DisplayName = King County Sheriff Dept. T-Shirt,
+        DisplayCategory = Clothing,
+        ClothingItem = TShirt_S1_Sheriff,
+        BodyLocation = base:Tshirt,
+        Icon = TShirt_S1_Sheriff,
+        BloodLocation = Shirt,
+        Insulation = 0.2,
+        WindResistance = 0.2,
+        FabricType = Cotton,
+        WorldStaticModel = TShirt_Ground,
+    }
+}

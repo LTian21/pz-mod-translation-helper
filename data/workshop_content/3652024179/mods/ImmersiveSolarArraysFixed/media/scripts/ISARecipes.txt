@@ -1,0 +1,160 @@
+module ISA
+{
+    recipe WireCarBattery
+    {
+        keep [Recipe.GetItemTypes.Screwdriver],
+        Radio.ElectricWire,
+        destroy [Recipe.GetItemTypes.wireCarBattery],
+        Result: WiredCarBattery,
+        SkillRequired:Electricity=3,
+        Time:80,
+        NeedToBeLearn:true,
+        Category:Electrical,
+        OnCreate:Recipe.OnCreate.ISA_wireCarBattery,
+        OnGiveXP:Recipe.OnGiveXP.ISA_minorElectricalXP,
+    }
+    recipe UnwireCarBattery
+    {
+        keep [Recipe.GetItemTypes.Screwdriver],
+        destroy WiredCarBattery,
+        Result:WiredCarBattery,
+        RemoveResultItem:true,
+        SkillRequired:Electricity=3,
+        Time:80,
+        NeedToBeLearn:true,
+        NoBrokenItems:false,
+        Category:Electrical,
+        OnCreate:Recipe.OnCreate.ISA_unwireCarBattery,
+        OnGiveXP:Recipe.OnGiveXP.ISA_minorElectricalXP,
+    }
+    recipe Make DIY Battery
+    {
+        keep [Recipe.GetItemTypes.Screwdriver],
+        Base.ElectronicsScrap,
+        destroy WiredCarBattery = 4,
+        SkillRequired:Electricity=5,
+        Result: DIYBattery,
+        Time:80,
+        NeedToBeLearn:true,
+        Category:Electrical,
+        OnCreate:Recipe.OnCreate.ISA_createDiyBattery,
+        OnGiveXP:Recipe.OnGiveXP.ISA_minorElectricalXP,
+    }
+
+    recipe Make Solar Roof Tile
+    {
+        keep [Recipe.GetItemTypes.Screwdriver],
+        SolarPanel,
+        Radio.ElectricWire = 3,
+        CanBeDoneFromFloor:false,
+        Time:120,
+        SkillRequired:Electricity=3,
+        Result: Moveables.solarmod_tileset_01_8,
+        NeedToBeLearn:true,
+        Category:Electrical,
+    }
+    recipe Make Wall-Mounted Solar Panel
+    {
+        keep [Recipe.GetItemTypes.Screwdriver],
+        SolarPanel,
+        Radio.ElectricWire = 3,
+        Base.MetalBar = 4,
+        Base.Screws = 4,
+        CanBeDoneFromFloor:false,
+        Time:120,
+        SkillRequired:Electricity=3,
+        Result: Moveables.solarmod_tileset_01_6,
+        NeedToBeLearn:true,
+        Category:Electrical,
+    }
+    recipe Make Floor-Mounted Solar Panel
+    {
+        keep [Recipe.GetItemTypes.Screwdriver],
+        SolarPanel,
+        Radio.ElectricWire = 3,
+        Base.Screws = 4,
+        Base.MetalBar = 4,
+        CanBeDoneFromFloor:false,
+        Time:120,
+        SkillRequired:Electricity=3,
+        Result: Moveables.solarmod_tileset_01_9,
+        NeedToBeLearn:true,
+        Category:Electrical,
+    }
+    recipe Reverse Solar Panel
+    {
+        keep [Recipe.GetItemTypes.Screwdriver],
+        Moveables.solarmod_tileset_01_6/Moveables.solarmod_tileset_01_7/Moveables.solarmod_tileset_01_8/Moveables.solarmod_tileset_01_9/Moveables.solarmod_tileset_01_10,
+        Time:80,
+        SkillRequired:Electricity=3,
+        Result: SolarPanel,
+        OnCreate:Recipe.OnCreate.ISA_ReverseSolarPanel,
+        NeedToBeLearn:true,
+        Category:Electrical,
+    }
+
+    recipe Create Battery Bank
+    {
+        keep [Recipe.GetItemTypes.Screwdriver],
+        ISAInverter = 1,
+        Radio.ElectricWire = 3,
+        Base.ElectronicsScrap = 6,
+        Base.MetalBar = 4,
+        Base.SmallSheetMetal = 5,
+        CanBeDoneFromFloor:false,
+        Time:400,
+        OnGiveXP:Recipe.OnGiveXP.ISA_CreateBatteryBank,
+        SkillRequired:Electricity=4;MetalWelding=2,
+        Result: Moveables.solarmod_tileset_01_0,
+        NeedToBeLearn:true,
+        Category:Electrical,
+    }
+    recipe Create Solar Failsafe
+    {
+        keep [Recipe.GetItemTypes.Screwdriver],
+        Radio.ElectricWire = 2,
+        Base.RemoteCraftedV3 = 1,
+        destroy WiredCarBattery,
+        Time:120,
+        SkillRequired:Electricity=3,
+        Result: SolarFailsafe,
+        NeedToBeLearn:true,
+        Category:Electrical,
+    }
+
+    recipe Make Solar Panel {
+        keep [Recipe.GetItemTypes.Screwdriver],
+        keep Base.BlowTorch=5,
+        destroy Base.SheetMetal=3,
+        destroy Base.ElectronicsScrap=10,
+        destroy Radio.ElectricWire=2,
+        destroy Base.Screws=10,
+
+        Result:ISA.SolarPanel,
+        SkillRequired:Electricity=5,
+        Time:250.0,
+        Category:Electrical,
+        AllowDestroyedItem:false,
+        NeedToBeLearn:true,
+        OnCanPerform:returnFalse,
+        IsHidden:true,
+    }
+    recipe Make Inverter {
+        keep [Recipe.GetItemTypes.Screwdriver],
+        destroy Base.SmallSheetMetal=4,
+        destroy Base.ScrapMetal=5,
+        destroy Base.ElectronicsScrap=25,
+        destroy Radio.ElectricWire=5,
+        destroy Base.Screws=10,
+
+        Result:ISA.ISAInverter,
+        SkillRequired:Electricity=5,
+        Time:250.0,
+        Category:Electrical,
+        AllowDestroyedItem:false,
+        NeedToBeLearn:true,
+        OnCanPerform:returnFalse,
+        IsHidden:true,
+    }
+
+}

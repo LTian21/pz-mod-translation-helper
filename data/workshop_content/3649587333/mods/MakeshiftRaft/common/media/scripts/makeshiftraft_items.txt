@@ -1,0 +1,57 @@
+module MakeshiftRaft
+{
+
+    imports
+    {
+        Base
+    }
+    
+    item MakeshiftRaft
+    {
+        Weight   = 20.0,
+        ItemType = base:clothing,
+        ClothingItem = makeshiftRaft,
+        DisplayCategory = Camping,
+        BodyLocation = MakeshiftRaft:Vehicle,
+        Icon = MakeshiftRaft,
+        WorldStaticModel = MakeshiftRaft_Ground,
+        Tags = MakeshiftRaft:Raft,
+    }
+
+    model MakeshiftRaft_Ground
+    {
+        mesh = other/MakeshiftRaft,
+        texture = other/MakeshiftRaftTexture,
+        scale = 1.0,
+        attachment world
+        {
+            offset = 0.0 0.0 0.0,
+            rotate = 90.0 0.0 0.0,
+        }
+    }
+}
+
+module Base
+{
+    craftRecipe MakeRaft
+    {
+        timedAction = Making,
+        time = 150,
+        xpAward = Woodwork:60;Tailoring:10,
+        Tags = InHandCraft;CanBeDoneFromFloor,
+        category = Carpentry,
+        SkillRequired = Tailoring:1;Woodwork:2,
+        NeedToBeLearn = false,
+        inputs
+        {
+            item 5 tags[base:log],
+            item 1 tags[base:sheet],
+            item 3 tags[base:rope],
+            item 1 tags[base:saw;base:smallsaw;base:crudesaw] mode:keep flags[MayDegradeLight;Prop1],
+        }
+        outputs
+        {
+            item 1 MakeshiftRaft.MakeshiftRaft,
+        }
+    }
+}

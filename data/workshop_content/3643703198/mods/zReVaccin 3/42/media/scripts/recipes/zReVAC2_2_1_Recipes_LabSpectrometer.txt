@@ -1,0 +1,68 @@
+module Base
+{
+/* СДЕЛАТЬ ПРОСТО ТЕСТ НА ЗАРАЖЕНИЕ С РУКИ */
+	craftRecipe zReLabChmDoBloodTest
+    {
+        time = 250,
+        category = Chemistry,
+        NeedToBeLearn = true,
+		
+		Tags = zReVAC2:Spectrometer;CannotBeResearched,
+		timedAction = Making_Surface,
+        SkillRequired = Doctor:1,
+		xpAward = Doctor:10,
+		
+		OnTest = zReVAC2_LabRecipes_ElectricityCheck,
+		OnCreate = zReVAC2_LabRecipes_ChmDoBloodTest,
+		Tooltip = Tooltip_zReVC_Electricity,
+
+        inputs
+        {
+            item 1 [zReLabItems.LabSyringe;zReLabItems.LabSyringeReusable] mappers[itemType],
+            item 1 [Base.SheetPaper2],
+        }
+        outputs
+        {
+			item 1 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            zReLabItems.LabSyringeUsed = zReLabItems.LabSyringe,
+            zReLabItems.LabSyringeReusableUsed = zReLabItems.LabSyringeReusable,
+        }
+    }
+
+/* А ЭТО ИМЕННО ДОБЫТОГО ОБРАЗЦА */
+	craftRecipe zReLabChmDoBloodAnalysis
+    {
+        time = 250,
+        category = Chemistry,
+        NeedToBeLearn = true,
+		
+		Tags = zReVAC2:Spectrometer;CannotBeResearched,
+		timedAction = Making_Surface,
+        SkillRequired = Doctor:1,
+		xpAward = Doctor:10,
+		
+		OnTest = zReVAC2_LabRecipes_ElectricityCheck,
+		OnCreate = zReVAC2_LabRecipes_ChmDoBloodAnalysis,
+		Tooltip = Tooltip_zReVC_Electricity,
+
+        inputs
+        {
+            item 1 [zReLabItems.CmpSyringeWithBlood;zReLabItems.CmpSyringeReusableWithBlood] mappers[itemType],
+            item 1 [zReLabItems.LabTestTube],
+            item 1 [zReLabItems.LabCorks],
+        }
+        outputs
+        {
+            item 1 zReLabItems.CmpTestTubeWithInfectedBlood,
+			item 1 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            zReLabItems.LabSyringeUsed = zReLabItems.CmpSyringeWithBlood,
+            zReLabItems.LabSyringeReusableUsed = zReLabItems.CmpSyringeReusableWithBlood,
+        }
+    }
+}
