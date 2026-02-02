@@ -672,10 +672,29 @@ namespace PreProcessing
         {
             if (string.IsNullOrEmpty(modId))
             {
-                return modId;
+                return "00";
             }
 
-            return modId.Length <= 2 ? modId : modId.Substring(modId.Length - 2);
+            string suffixSource = modId.PadLeft(2, '0');
+            string suffix = suffixSource.Substring(suffixSource.Length - 2);
+            suffix = SanitizeFileNameSegment(suffix);
+            return string.IsNullOrEmpty(suffix) ? "00" : suffix;
+        }
+
+        static string SanitizeFileNameSegment(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return value;
+            }
+
+            var invalidChars = Path.GetInvalidFileNameChars();
+            var builder = new StringBuilder(value.Length);
+            foreach (var ch in value)
+            {
+                builder.Append(Array.IndexOf(invalidChars, ch) >= 0 ? '_' : ch);
+            }
+            return builder.ToString();
         }
 
         static int ExtractENText(string outputFilePath, string modId, Dictionary<string, FixRule> errorFixes)
