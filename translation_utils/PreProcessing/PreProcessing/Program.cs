@@ -541,6 +541,74 @@ namespace PreProcessing
                 }
             }
 
+            //旁路输出：按modId后两位拆分生成翻译文件
+            string bypassOutputDir = Path.Combine(repoDir, "data", "translations_CN_bypass");
+            if (!Directory.Exists(bypassOutputDir))
+            {
+                Directory.CreateDirectory(bypassOutputDir);
+            }
+
+            var modIdsBySuffix = new Dictionary<string, List<string>>();
+            foreach (var modId in modTranslationsCopy.Keys)
+            {
+                if (!modInfos.ContainsKey(modId))
+                {
+                    continue;
+                }
+
+                string suffix = GetModIdSuffix(modId);
+                if (!modIdsBySuffix.ContainsKey(suffix))
+                {
+                    modIdsBySuffix[suffix] = new List<string>();
+                }
+                modIdsBySuffix[suffix].Add(modId);
+            }
+
+            foreach (var suffix in modIdsBySuffix.Keys)
+            {
+                string bypassOutputPath = Path.Combine(bypassOutputDir, $"translations_CN_{suffix}.txt");
+                using (var writer = new StreamWriter(bypassOutputPath, false))
+                {
+                    foreach (var modId in modIdsBySuffix[suffix])
+                    {
+                        string modName = modInfos[modId];
+                        writer.WriteLine();
+                        writer.WriteLine($"------ {modId} :: {modName} ------");
+                        writer.WriteLine();
+                        foreach (var key in modTranslationsCopy[modId].Keys)
+                        {
+                            var entry = modTranslationsCopy[modId][key];
+                            string prefix;
+                            switch (entry.SChineseStatus)
+                            {
+                                case TranslationStatus.Untranslated:
+                                    prefix = "\t\t";
+                                    break;
+                                case TranslationStatus.Translated:
+                                    prefix = "\t";
+                                    break;
+                                case TranslationStatus.Approved:
+                                    prefix = "";
+                                    break;
+                                default:
+                                    prefix = "\t\t";
+                                    break;
+                            }
+                            //写入注释
+                            foreach (var comment in entry.Comment)
+                            {
+                                writer.WriteLine(prefix + comment.Trim());
+                            }
+                            //写入原文行
+                            writer.WriteLine($"{prefix}{modId}::EN::{key} = \"{entry.OriginalText}\",");
+                            //写入翻译文本行
+                            writer.WriteLine($"{prefix}{modId}::CN::{key} = \"{entry.SChinese}\",");
+                        }
+                        writer.WriteLine();
+                    }
+                }
+            }
+
             // 3. 在 Main 方法结尾检查错误并退出
             if (errorCount > 0)
             {
@@ -598,6 +666,16 @@ namespace PreProcessing
                 throw new DirectoryNotFoundException("Error: directory not found <repo_dir>\translation_utils");
             }
             return repoDir;
+        }
+
+        static string GetModIdSuffix(string modId)
+        {
+            if (string.IsNullOrEmpty(modId))
+            {
+                return modId;
+            }
+
+            return modId.Length <= 2 ? modId : modId.Substring(modId.Length - 2);
         }
 
         static int ExtractENText(string outputFilePath, string modId, Dictionary<string, FixRule> errorFixes)
