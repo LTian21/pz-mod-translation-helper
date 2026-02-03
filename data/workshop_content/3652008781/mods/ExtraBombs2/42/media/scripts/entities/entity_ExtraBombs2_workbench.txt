@@ -1,0 +1,65 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ExtraBombs_ElecWorkbench
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= ExtraBombs Workbench,
+			Icon		= Build_ExtraBombsWorkbench,
+		}
+	}
+
+    entity ElecWorkbench
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ExtraBombs_ElecWorkbench,
+            uiEnabled       = true,
+        }
+
+        component CraftBench
+        {
+            Recipes         = ExtraBombsWorkbench,
+        }
+
+        component SpriteConfig
+        {
+            isThumpable = false,
+            face S
+            {
+                layer
+                {
+                    row = ExtraBombs_Tiles_0 ExtraBombs_Tiles_1,
+					
+                }
+            }
+
+            face E
+            {
+                layer
+                {
+                    row = ExtraBombs_Tiles_3,
+					row = ExtraBombs_Tiles_2,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildWoodenStructureMedium,
+            time          = 500,
+            xpAward       = Woodwork:50,
+            category      = ExtraBombs,
+            ToolTip       = Tooltip_craft_ExtraBombsWorkbench,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+				item 4 [Base.Plank],
+                item 4 [Base.Nails],
+				item 1 [ExtraBombs.EngiToolBox],
+            }
+        }
+    }
+}

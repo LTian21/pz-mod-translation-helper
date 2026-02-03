@@ -1,0 +1,32 @@
+module Base
+{
+ craftRecipe ChmExtractAntibodiesFromLeukocytes
+    {
+        time = 300,
+        category = Chemistry,
+        timedAction = LabTyping,
+        SkillRequired = Doctor:5,
+		Tags = ZVirusVaccine42BETA:Chromatograph,
+        NeedToBeLearn = True,
+		xpAward = Doctor:15,
+        OnTest = LabRecipes_IsNearComputer,
+        OnCreate = Lab_Recipes_ChmExtractAntibodiesFromLeukocytes,
+        Tooltip = Tooltip_ChmExtractAntibodiesFromLeukocytes,
+        
+        inputs
+        {
+            item 1 tags[base:charcoal],
+            item 1 [LabItems.LabTestTube] mode:destroy,
+
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.2 [Leukocytes],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.2 [AmmoniumSulfate],
+        }
+        outputs
+        {
+			item 2 LabItems.LabFlaskDirty,
+        }
+    }
+}
