@@ -1,0 +1,446 @@
+module Base
+{
+      /************************* CHEMISTRY / HEALTH *************************/
+
+	craftRecipe ChmDiscardBloodFromSyringe
+    {
+        time 			= 25,
+        category 		= Health,
+		timedAction 	= PourLiqOut,
+		Tags 			= InHandCraft,
+        NeedToBeLearn 	= false,
+		Tags 			= InHandCraft,
+
+        inputs
+        {
+            item 1 [LabItems.CmpSyringeReusableWithBlood;LabItems.CmpSyringeReusableWithTaintedBlood] mode:destroy,
+        }
+        outputs
+        {
+            item 1 LabItems.LabSyringeReusableUsed,
+        }
+    }
+
+    craftRecipe ChmCollectInfectedBlood
+    {
+        time 			= 30,
+        category 		= Chemistry,
+		timedAction 	= CollectingBlood,
+		Tags 			= InHandCraft;CannotBeResearched,
+        NeedToBeLearn 	= false,
+		xpAward 		= Doctor:2,
+        OnCreate 		= Lab_Recipes_ChmCollectInfectedBlood,
+
+        inputs
+        {
+            item 1 [LabItems.LabTestTube] mode:destroy flags[IsEmpty;Prop2],
+            item 1 [LabItems.MatInfectedBlood],
+        }
+        outputs
+        {
+        }
+    }
+
+    craftRecipe ChmSterilizeGlasses
+    {
+        time 			= 30,
+		Tags 			= InHandCraft,
+        category 		= Chemistry,
+		timedAction 	= SterilizeTubes,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 1 [LabItems.LabTestTubeDirty;LabItems.LabFlaskDirty] flags[Prop1] mappers[zType],
+			item 1 [*],
+			-fluid 0.1 [Alcohol;Vodka;Whiskey;Bleach;Cologne],
+        }
+        outputs
+        {
+            item 1 mapper:zType,
+        }
+        itemMapper zType
+        {
+            LabItems.LabTestTube = LabItems.LabTestTubeDirty,
+            LabItems.LabFlask = LabItems.LabFlaskDirty,
+
+        }
+    }
+
+    craftRecipe ChmSterilizeGlassesHW
+    {
+        time 			= 30,
+		Tags 			= InHandCraft,
+        category 		= Chemistry,
+		timedAction 	= SterilizeTubes,
+        OnTest          = RecipeCodeOnTest.hotFluidContainer,
+        Tooltip         = Tooltip_needsToBeHot,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 1 [LabItems.LabTestTubeDirty;LabItems.LabFlaskDirty] flags[Prop1] mappers[zType],
+			item 1 [*],
+			-fluid 0.2 [Water;PurifiedWater],
+        }
+        outputs
+        {
+            item 1 mapper:zType,
+        }
+        itemMapper zType
+        {
+            LabItems.LabTestTube = LabItems.LabTestTubeDirty,
+            LabItems.LabFlask = LabItems.LabFlaskDirty,
+        }
+    }
+	
+	craftRecipe ChmSterilizeGlassesHWPot
+    {
+        time 			= 40,
+		Tags 			= InHandCraft,
+        category 		= Chemistry,
+		timedAction 	= SterilizeTubes,
+        OnTest          = RecipeCodeOnTest.hotFluidContainer,
+        Tooltip         = Tooltip_needsToBeHot,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 5 [LabItems.LabTestTubeDirty] flags[Prop1],
+			item 1 [Pot;Bucket],
+			-fluid 1.5 [Water],
+        }
+        outputs
+        {
+            item 5 LabItems.LabTestTube,
+        }
+    }
+
+    craftRecipe ChmSterilizeGlassesHWPot2
+    {
+        time 			= 40,
+		Tags 			= InHandCraft,
+        category 		= Chemistry,
+		timedAction 	= SterilizeTubes,
+        OnTest          = RecipeCodeOnTest.hotFluidContainer,
+        Tooltip         = Tooltip_needsToBeHot,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 5 [LabItems.LabFlaskDirty] flags[Prop1],
+			item 1 [Pot;Bucket],
+			-fluid 1.5 [Water],
+        }
+        outputs
+        {
+            item 5 LabItems.LabFlask,
+        }
+    }
+
+    craftRecipe ChmSterilizeGlassesHWBucket
+    {
+        time 			= 60,
+		Tags 			= InHandCraft,
+        category 		= Chemistry,
+		timedAction 	= SterilizeTubes,
+        OnTest          = RecipeCodeOnTest.hotFluidContainer,
+        Tooltip         = Tooltip_needsToBeHot,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 15 [LabItems.LabTestTubeDirty] flags[Prop1],
+			item 1 [Pot;Bucket],
+			-fluid 5.0 [Water],
+        }
+        outputs
+        {
+            item 15 LabItems.LabTestTube,
+        }
+    }
+
+    craftRecipe ChmSterilizeGlassesHWBucket2
+    {
+        time 			= 60,
+		Tags 			= InHandCraft,
+        category 		= Chemistry,
+		timedAction 	= SterilizeTubes,
+        OnTest          = RecipeCodeOnTest.hotFluidContainer,
+        Tooltip         = Tooltip_needsToBeHot,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 15 [LabItems.LabFlaskDirty] flags[Prop1],
+			item 1 [Pot;Bucket],
+			-fluid 5.0 [Water],
+        }
+        outputs
+        {
+            item 15 LabItems.LabFlask,
+        }
+    }
+
+	craftRecipe OthClearWithChlorineTablets
+    {
+        time 			= 15,
+        category 		= Chemistry,
+		Tags 			= InHandCraft,
+		timedAction 	= LabClearWater,
+        NeedToBeLearn 	= false,
+        OnCreate 		= Lab_Recipes_OthClearWithChlorineTablets,
+
+        inputs
+        {
+        item 1 [LabItems.CmpChlorineTablets;WaterPurificationTablets] flags[Prop1],
+		item 1 [LabItems.LabFlask] flags[IsFull] mode:destroy flags[Prop2],
+		-fluid 0.2 [Water],
+        }
+        outputs
+        {
+        }
+    }
+
+    craftRecipe ChmSterilizeLabSyringeReusable
+    {
+        time 			= 50,
+		Tags 			= InHandCraft,
+		timedAction 	= SterilizeTubes,
+        category 		= Chemistry,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 1 [LabItems.LabSyringeReusableUsed] flags[Prop1],
+			item 1 [*] flags[Prop2],
+			-fluid 0.1 [Alcohol;Vodka;Whiskey;Bleach],
+        }
+        outputs
+        {
+            item 1 LabItems.LabSyringeReusable,
+        }
+    }
+
+    craftRecipe ChmMakeSyringe
+    {
+        time 			= 45,
+        category 		= Chemistry,
+		timedAction 	= BlowTorchC2,
+		tags 			= InHandCraft;CannotBeResearched,
+        SkillRequired 	= Doctor:3;Glassmaking:2,
+        NeedToBeLearn 	= true,
+		xpAward 		= Glassmaking:15;Doctor:10,
+
+        inputs
+        {
+            item 1 [LabItems.MatShatteredGlass],
+            item 1 [BlowTorch],
+            item 1 [Needle;SutureNeedle] flags[Prop1],
+        }
+        outputs
+        {
+            item 1 LabItems.LabSyringeReusable,
+        }
+    }
+
+    craftRecipe ChmLabFlaskPourWaterOut
+    {
+        time 			= 30,
+        category 		= Chemistry,
+		timedAction 	= PourLiqOut,
+		tags 			= InHandCraft,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 1 [LabItems.LabFlask] mode:destroy flags[Prop1],
+            -fluid 0.01 [Water;PurifiedWater],
+        }
+        outputs
+        {
+            item 1 LabItems.LabFlask,
+        }
+    }
+
+    craftRecipe ChmLabTestTubePourWaterOut
+    {
+        time 			= 30,
+        category 		= Chemistry,
+		timedAction 	= PourLiqOut,
+		tags 			= InHandCraft,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 1 [LabItems.LabTestTube] mode:destroy flags[Prop1],
+            -fluid 0.01 [Water;PurifiedWater],
+        }
+        outputs
+        {
+            item 1 LabItems.LabTestTube,
+        }
+    }
+
+    /************************* OTHER *************************/
+
+    craftRecipe OthShatterEmptyBottle
+    {
+        time 			= 40,
+		timedAction 	= LabBreakGlass,
+		Tags 			= InHandCraft,
+        category 		= Other,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 1 tags[base:glassbottle;base:glassbottlesmall] mode:destroy flags[IsEmpty;Prop2],
+            item 1 tags[base:hammer] mode:keep flags[Prop1],
+        }
+        outputs
+        {
+            item 1 LabItems.MatShatteredGlass,
+        }
+    }
+
+    craftRecipe OthShatterCarGlass
+    {
+        time 			= 40,
+		Tags 			= InHandCraft,
+		timedAction 	= LabBreakGlass,
+        category 		= Other,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 1 [FrontWindow1;FrontWindow2;FrontWindow3;RearWindow1;RearWindow2;RearWindow3] mode:destroy flags[Prop2],
+            item 1 tags[base:hammer;base:ballpeenhammer] mode:keep flags[Prop1],
+        }
+        outputs
+        {
+            item 2 LabItems.MatShatteredGlass,
+        }
+    }
+
+    craftRecipe OthShatterCarGlassWindshields
+    {
+        time 			= 40,
+		Tags 			= InHandCraft,
+		timedAction 	= LabBreakGlass,
+        category 		= Other,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 1 [RearWindshield1;RearWindshield2;RearWindshield3;Windshield1;Windshield2;Windshield3] mode:destroy flags[Prop2],
+            item 1 tags[base:hammer;base:ballpeenhammer] mode:keep flags[Prop1],
+        }
+        outputs
+        {
+            item 4 LabItems.MatShatteredGlass,
+        }
+    }
+
+    craftRecipe OthUnpackSyringes
+    {
+        time 			= 60,
+		Tags 			= InHandCraft,
+		timedAction 	= UnPackBox_Small,
+        category 		= Medical,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 1 [LabItems.LabSyringePack] flags[Prop1],
+        }
+        outputs
+        {
+            item 10 LabItems.LabSyringe,
+        }
+    }
+
+    craftRecipe OthPackSyringes
+    {
+        time 			= 60,
+		Tags 			= InHandCraft,
+		timedAction 	= PackingBox_Small,
+        category 		= Medical,
+        NeedToBeLearn 	= false,
+
+        inputs
+        {
+            item 10 [LabItems.LabSyringe] flags[Prop1],
+        }
+        outputs
+        {
+            item 1 LabItems.LabSyringePack,
+        }
+    }
+
+    craftRecipe OthMakeCottonBalls
+    {
+        time 			= 150,
+        category 		= Medical,
+        NeedToBeLearn 	= true,
+        Tags 			= InHandCraft,
+        timedAction 	= Making_Surface,
+        SkillRequired 	= Doctor:1,
+		xpAward 		= Doctor:5,
+        AutoLearnAny 	= Doctor:4,
+        inputs
+        {
+            item 3 [RippedSheets] mode:destroy,
+            item 1 tags[base:sharpknife] mode:keep flags[IsNotDull;MayDegradeLight],
+        }
+        outputs
+        {
+            item 6 Base.CottonBalls,
+        }
+    }
+
+    craftRecipe ChmExtractBrainFromSkull
+    {
+        time 			= 30,
+        category 		= Chemistry,
+        NeedToBeLearn 	= true,
+        Tags 			= InHandCraft;CannotBeResearched,
+        timedAction 	= LabSawOffSkull,
+        SkillRequired 	= Doctor:4,
+		xpAward 		= Doctor:15,
+        OnCreate 		= Lab_Recipes_ChmExtractBrainFromSkull,
+
+        inputs
+        {
+            item 1 tags[base:saw] mode:keep flags[MayDegradeLight],
+            item 1 [LabItems.LabHumanSkullWithBrain] mode:destroy,
+            item 1 [Hat_BuildersRespirator;Hat_GasMask;Hat_ImprovisedGasMask;Hat_NBCmask;Hat_DustMask;Hat_SurgicalMask] mode:keep,
+            item 1 [Gloves_Surgical;Gloves_LeatherGloves;Gloves_LeatherGlovesBlack] mode:keep,
+            item 1 [Glasses_SafetyGoggles;Glasses_SkiGoggles;Glasses_SwimmingGoggles;Glasses_Shooting] mode:keep,
+        }
+        outputs
+        {
+            item 1 LabItems.LabHumanSkull,
+            item 1 LabItems.LabHumanSkullPart,
+        }
+    }
+	
+	craftRecipe OthFixSkull
+    {
+        time 			= 15,
+        category 		= Chemistry,
+        NeedToBeLearn 	= false,
+        Tags 			= InHandCraft,
+        timedAction 	= Making_Surface,
+
+        inputs
+        {
+            item 1 [LabItems.LabHumanSkull],
+            item 1 [LabItems.LabHumanSkullPart],
+			item 1 [Epoxy;DuctTape],
+        }
+        outputs
+        {
+            item 1 LabItems.LabHumanSkullFixed,
+        }
+    }
+}

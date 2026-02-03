@@ -1,0 +1,705 @@
+module Base
+{
+
+    item TobaccoWet
+    {
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        Icon = Tobacco_Dried,
+        ItemWhenDry = Base.TobaccoDried,
+        Wet = true,
+        WetCooldown = 8000.0,
+        Weight = 0.2,
+        WorldStaticModel = TobaccoLeafDried,
+    }
+
+    item Saucepan_Syrup
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 3.0,
+        Icon = Saucepan_Syrup,
+        EatType = Plate,
+        PourType = saucepan,
+        BadCold = true,
+        BadInMicrowave = true,
+        CookingSound = BoilingFood,
+        IsCookable = true,
+        CantEat = true,
+        ConditionMax = 5,
+        ReplaceOnUse = Base.Saucepan,
+        MinutesToCook = 20,
+        MinutesToBurn = 50,
+        HungerChange = -30.0,
+        UnhappyChange = 10,
+        Calories = 330.0,
+        Carbohydrates = 90.0,
+        Lipids = 0.0,
+        Proteins = 0.0,
+        StaticModel = Saucepan_Syrup,
+        WorldStaticModel = Saucepan_Syrup,
+        Tags = base:hidehungerchange;base:hasmetal,
+        Tooltip = Tooltip_Cooking_NeedToBeCooked,
+    }
+
+    item SaucepanCopper_Syrup
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 3.0,
+        Icon = SaucepanCopper_Syrup,
+        EatType = Plate,
+        PourType = saucepan,
+        BadCold = true,
+        BadInMicrowave = true,
+        CookingSound = BoilingFood,
+        IsCookable = true,
+        CantEat = true,
+        ConditionMax = 5,
+        ReplaceOnUse = Base.SaucepanCopper,
+        MinutesToCook = 20,
+        MinutesToBurn = 50,
+        HungerChange = -30.0,
+        UnhappyChange = 10,
+        Calories = 330.0,
+        Carbohydrates = 90.0,
+        Lipids = 0.0,
+        Proteins = 0.0,
+        StaticModel = SaucepanCopper_Syrup,
+        WorldStaticModel = SaucepanCopper_Syrup,
+        Tags = base:hidehungerchange;base:hasmetal,
+        Tooltip = Tooltip_Cooking_NeedToBeCooked,
+    }
+
+    item SimpleSugarSyrup
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 0.2,
+        Icon = SimpleSugarSyrup,
+	UseDelta = 0.1,
+        CantBeFrozen = true,
+        EatType = GlugFood,
+        EvolvedRecipe = Pancakes:3;ConeIcecream:3;Oatmeal:3,
+        Packaged = true,
+        Spice = true,
+        HungerChange = -30.0,
+        UnhappyChange = -10,
+        Calories = 330.0,
+        Carbohydrates = 90.0,
+        Lipids = 0.0,
+        Proteins = 0.0,
+        CustomContextMenu = Drink,
+        CustomEatSound = DrinkingFromCan,
+        StaticModel = SimpleSugarSyrup,
+        WorldStaticModel = SimpleSugarSyrup,
+        Tags = horticulture:syrup,
+    }
+
+    item TobaccoChewing_Tin
+    {
+        DisplayCategory = Junk,
+        Weight = 0.3,
+        UseDelta = 0.05,
+        ItemType = base:drainable,
+        UseWhileEquipped = false,
+        Icon = ChewingTobacco_Tin,
+        StaticModel = ChewingTobacco_Tin,
+        WorldStaticModel = ChewingTobacco_Tin,
+        Tags = base:ignorezombiedensity;base:consumable;base:chewingtobacco;base:lessfull,
+        CustomContextMenu = Chew,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        EatType = EatBox,
+        StressChange = -10,
+        FoodSicknessChange = 14,
+        ReplaceOnDeplete = Base.TinCanEmpty,
+    }
+
+    item TobaccoChewing_WaterTin
+    {
+        DisplayCategory = Junk,
+        Weight = 0.3,
+        UseDelta = 0.05,
+        ItemType = base:drainable,
+        UseWhileEquipped = false,
+        Icon = ChewingTobacco_WaterTin,
+        StaticModel = ChewingTobacco_WaterTin,
+        WorldStaticModel = ChewingTobacco_WaterTin,
+        Tags = base:ignorezombiedensity;base:consumable;base:chewingtobacco;base:lessfull,
+        CustomContextMenu = Chew,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        EatType = EatBox,
+        StressChange = -10,
+        FoodSicknessChange = 14,
+        ReplaceOnDeplete = Base.WaterRationCanEmpty,
+    }
+
+    item TobaccoChewing_Jar
+    {
+        DisplayCategory = Junk,
+        Weight = 0.3,
+        UseDelta = 0.05,
+        ItemType = base:drainable,
+        UseWhileEquipped = false,
+        Icon = CannedTobacco,
+        StaticModel = TobaccoChewing_Jar,
+        WorldStaticModel = TobaccoChewing_Jar,
+        Tags = base:ignorezombiedensity;base:consumable;base:chewingtobacco;base:lessfull,
+        CustomContextMenu = Chew,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        EatType = EatBox,
+        StressChange = -10,
+        FoodSicknessChange = 14,
+        ReplaceOnDeplete = Base.EmptyJar,
+    }
+
+    item HempStalks
+    {
+        Weight = 0.2,
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Icon = HempStalks,
+        WorldStaticModel = HempStalks,
+    }
+
+    item HempLeaves
+    {
+        DisplayCategory = Food,
+        EatType = EatSmall,
+        ItemType = base:food,
+        Weight = 0.1,
+        Icon = HempLeaves,
+        EvolvedRecipe = Soup:1;Stew:1;Stir fry:1;Rice:1;HotDrink:1,
+        Spice = true,
+        HungerChange = -1.0,
+        Calories = 0.1,
+        Carbohydrates = 0.0,
+        Lipids = 0.0,
+        Proteins = 0.0,
+        WorldStaticModel = HempLeaves,
+        FoodType = Herb,
+        EvolvedRecipeName = Hemp,
+        Tags = base:iscutting;base:herbaltea;horticulture:organicleaves,
+        ReduceInfectionPower = 1.0,
+        AnimalFeedType = Grass,
+    }
+
+    item HempBuds
+    {
+        Weight = 0.1,
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Icon = HempBuds,
+        IsCookable = true,
+        MinutesToCook = 30,
+        MinutesToBurn = 60,
+        ReplaceOnCooked = Base.HempBuds_Decarbed,
+        WorldStaticModel = HempBuds,
+        CantEat = true,
+        Tags = horticulture:buds;base:hideuncooked,
+        Tooltip = Tooltip_HempBuds,
+    }
+
+    item HempBuds_Cured
+    {
+        Weight = 0.1,
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Icon = HempBuds_Cured,
+        IsCookable = true,
+        MinutesToCook = 30,
+        MinutesToBurn = 60,
+        ReplaceOnCooked = Base.HempBuds_Decarbed,
+        CookingSound = FryingFood,
+        CantEat = true,
+        WorldStaticModel = HempBuds_Cured,
+        Tags = horticulture:budscured;base:hideuncooked,
+    }
+
+    item HempBuds_Decarbed
+    {
+        Weight = 0.1,
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Icon = HempBuds_Decarbed,
+        CantEat = true,
+        WorldStaticModel = HempBuds_Decarbed,
+        Tags = horticulture:budscooked;base:alreadycooked;base:hidecooked,
+    }
+
+    item CannedHempBuds
+    {
+        Weight = 0.8,
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Icon = CannedHemp,
+        IsCookable = true,
+        MinutesToCook = 30,
+        MinutesToBurn = 60,
+        ReplaceOnCooked = Base.CannedHempBuds_Decarbed,
+        CookingSound = FryingFood,
+        CantEat = true,
+        DaysFresh = 14,
+        DaysTotallyRotten = 14,
+        ReplaceOnRotten = Base.CannedHempBuds_Cured,
+        WorldStaticModel = CannedHempBuds,
+        Tags = base:hasmetal;base:hideuncooked,
+        Tooltip = Tooltip_CannedHempBuds,
+    }
+
+    item CannedHempBuds_Cured
+    {
+        Weight = 0.8,
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Icon = CannedHemp_Cured,
+        IsCookable = true,
+        MinutesToCook = 30,
+        MinutesToBurn = 60,
+        ReplaceOnCooked = Base.CannedHempBuds_Decarbed,
+        CookingSound = FryingFood,
+        CantEat = true,
+        WorldStaticModel = CannedHempBuds_Cured,
+        CantEat = true,
+        Tags = base:hasmetal;base:hideuncooked,
+    }
+
+    item CannedHempBuds_Decarbed
+    {
+        Weight = 0.8,
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Icon = CannedHemp_Decarbed,
+        WorldStaticModel = CannedHempBuds_Decarbed,
+        CantEat = true,
+        Tags = base:hasmetal;base:alreadycooked;base:hidecooked,
+    }
+
+    item CannedHempBuds_Open
+    {
+        DisplayCategory = Food,
+        ItemType = base:drainable,
+        Weight = 0.8,
+	UseDelta = 0.2,
+        Icon = CannedHemp_Cured,
+        StaticModel = CannedHempBuds_Open,
+        WorldStaticModel = CannedHempBuds_Open,
+        Tags = horticulture:budscured,
+        ReplaceOnDeplete = Base.EmptyJar,
+    }
+
+    item CannedHempBuds_Decarbed_Open
+    {
+        DisplayCategory = Food,
+        ItemType = base:drainable,
+        Weight = 0.8,
+	UseDelta = 0.2,
+        Icon = CannedHemp_Decarbed,
+        StaticModel = CannedHempBuds_Decarbed_Open,
+        WorldStaticModel = CannedHempBuds_Decarbed_Open,
+        Tags = horticulture:budscooked,
+        ReplaceOnDeplete = Base.EmptyJar,
+    }
+
+    item HempLoose
+    {
+        DisplayCategory = Junk,
+        ItemType = base:drainable,
+        Weight = 0.3,
+        Icon = HempLoose,
+        UseDelta = 0.02,
+        UseWhileEquipped = false,
+        WorldStaticModel = HempLoose,
+        Tags = horticulture:hemp;base:ignorezombiedensity;base:lessfull,
+    }
+
+    item OilHemp
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 0.2,
+        Icon = OilHemp,
+        CantBeFrozen = true,
+        EatType = GlugFood,
+        EvolvedRecipe = Sandwich:2;Burger:2;Rice:2;Pasta:2;Stir fry:2;Salad:2;Taco:2;Burrito:2;Soup:5;Stew:5,
+        Packaged = true,
+        Spice = true,
+        HungerChange = -30.0,
+        StressChange = -30,
+        UnhappyChange = 50,
+        painReduction = 70,
+        Calories = 2120.0,
+        Carbohydrates = 0.0,
+        Lipids = 130.0,
+        Proteins = 0.0,
+        CustomContextMenu = Drink,
+        CustomEatSound = DrinkingFromCan,
+        StaticModel = OilHemp,
+        WorldStaticModel = OilHemp,
+        Tags = base:bakingfat;base:oil;base:minoringredient,
+        FoodType = Oil,
+        Tooltip = Tooltip_OilHemp,
+    }
+
+    item PaperPulp_Pot
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 3.0,
+        Icon = PaperPulp_Pot,
+        CookingSound = BoilingFood,
+        PourType = Pot,
+        IsCookable = true,
+        ReplaceOnUse = Base.Pot,
+        MinutesToCook = 70,
+        MinutesToBurn = 140,
+        WorldStaticModel = PaperPulp_Pot,
+        Tags = base:hasmetal,
+        SoundMap = DumpContents EmptyPot,
+        Tooltip = Tooltip_Cooking_NeedToBeCooked,
+    }
+
+    item PaperPulp_PotForged
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 3.0,
+        Icon = PaperPulp_PotForged,
+        CookingSound = BoilingFood,
+        IsCookable = true,
+        ReplaceOnUse = Base.PotForged,
+        MinutesToCook = 70,
+        MinutesToBurn = 140,
+        WorldStaticModel = PaperPulp_PotForged,
+        Tags = base:hasmetal,
+        SoundMap = DumpContents EmptyPot,
+        Tooltip = Tooltip_Cooking_NeedToBeCooked,
+    }
+
+    item PaperPulp
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Icon = PaperPulp,
+        Weight = 0.2,
+        WorldStaticModel = PaperPulp,
+        Tags = horticulture:organicpulp,
+    }
+
+    item MouldAndDeckle
+    {
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        Weight = 1.0,
+        Icon = MouldAndDeckle,
+        WorldStaticModel = MouldAndDeckle,
+        Tooltip = Tooltip_MouldAndDeckle,
+    }
+
+    item MouldAndDeckle_PaperSheet
+    {
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        Weight = 1.0,
+        Icon = MouldAndDeckle_PaperSheet,
+        WorldStaticModel = MouldAndDeckle_PaperSheet,
+    }
+
+    item PaperSheet
+    {
+        DisplayCategory = Literature,
+        ItemType = base:literature,
+        Weight = 0.1,
+        Icon = PaperSheet,
+        CanBeWrite = true,
+        PageToWrite = 1,
+        StaticModel = PaperSheet,
+        WorldStaticModel = PaperSheet,
+        ReadType = newspaper,
+        Tags = horticulture:organicpaper,
+    }
+
+    item PaperSheetWet
+    {
+        DisplayCategory = Literature,
+        ItemType = base:normal,
+        Weight = 0.1,
+        Icon = PaperSheet,
+        ItemWhenDry = Base.PaperSheet,
+        Wet = true,
+        WetCooldown = 8000.0,
+        StaticModel = PaperSheetWet,
+        WorldStaticModel = PaperSheetWet,
+        Tooltip = Tooltip_PaperSheetWet,
+        Tags = horticulture:organicpaperwet,
+    }
+
+    item PaperSheetPressed
+    {
+        DisplayCategory = Literature,
+        ItemType = base:literature,
+        Weight = 0.1,
+        Icon = PaperSheetPressed,
+        CanBeWrite = true,
+        PageToWrite = 1,
+        StaticModel =  PaperSheetPressed,
+        WorldStaticModel =  PaperSheetPressed,
+        ReadType = newspaper,
+        Tags = horticulture:organicpaperpressed,
+    }
+
+    item RawRollingPapers
+    {
+        DisplayCategory = Junk,
+        ItemType = base:drainable,
+        Weight = 0.1,
+        Icon = RawRollingPapers,
+        UseDelta = 0.02,
+        UseWhileEquipped = false,
+        WorldStaticModel = RawRollingPapers,
+        Tags = base:rollingpaper;base:lessfull;base:fitswallet,
+    }
+
+    item SmokingPipe_Hemp
+    {
+        DisplayCategory = Junk,
+        Weight = 0.3,
+        ItemType = base:food,
+        Icon = Ceramic_SmokingPipe_Unfired,
+        CantBeFrozen = true,
+        CustomContextMenu = Smoke,
+        EatType = Pipe,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        CustomEatSound = ,
+        RequireInHandOrInventory = Base.CandleLit/Base.Matches/Base.Matchbox/Base.LighterDisposable/Base.Lighter/Base.LighterBBQ/Base.Lighter_Battery,
+        HungerChange = 0.0,
+        fatigueChange = 8.0,
+        StressChange = -15,
+        UnhappyChange = -20,
+        BoredomChange = -14,
+        painReduction = 14,
+        StaticModel = SmokingPipeFired,
+        WorldStaticModel = SmokingPipe_Hemp,
+        ReplaceOnUse = Base.SmokingPipe,
+        Eattime = 920,
+        InverseCoughProbability = 10,
+        InverseCoughProbabilitySmoker = 4,
+        Tooltip = Tooltip_HempMild,
+    }
+
+    item SmokingPipeGlass
+    {
+        DisplayCategory = Material,
+        Weight = 0.3,
+        ItemType = base:normal,
+        Icon = SmokingPipeGlass,
+        StaticModel = SmokingPipeGlass,
+        WorldStaticModel = SmokingPipeGlass,
+        Tags = base:glass,
+    }
+
+    item SmokingPipeGlass_Hemp
+    {
+        DisplayCategory = Junk,
+        Weight = 0.3,
+        ItemType = base:food,
+        Icon = SmokingPipeGlass,
+        CantBeFrozen = true,
+        CustomContextMenu = Smoke,
+        EatType = Pipe,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        CustomEatSound = ,
+        RequireInHandOrInventory = Base.CandleLit/Base.Matches/Base.Matchbox/Base.LighterDisposable/Base.Lighter/Base.LighterBBQ/Base.Lighter_Battery,
+        HungerChange = 0.0,
+        fatigueChange = 8.0,
+        StressChange = -15,
+        UnhappyChange = -20,
+        BoredomChange = -14,
+        painReduction = 14,
+        StaticModel = SmokingPipeGlass_Lit,
+        WorldStaticModel = SmokingPipeGlass_Hemp,
+        ReplaceOnUse = Base.SmokingPipeGlass,
+        Eattime = 920,
+        InverseCoughProbability = 10,
+        InverseCoughProbabilitySmoker = 4,
+        Tooltip = Tooltip_HempMild,
+    }
+
+    item SmokingPipeGlass_Tobacco
+    {
+        DisplayCategory = Junk,
+        Weight = 0.3,
+        ItemType = base:food,
+        Icon = SmokingPipeGlass,
+        CantBeFrozen = true,
+        CustomContextMenu = Smoke,
+        EatType = Pipe,
+        CustomEatSound = ,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        RequireInHandOrInventory = Base.CandleLit/Base.Matches/Base.Matchbox/Base.LighterDisposable/Base.Lighter/Base.LighterBBQ/Base.Lighter_Battery,
+        HungerChange = 0.0,
+        StressChange = -15,
+        StaticModel = SmokingPipeGlass_Lit,
+        WorldStaticModel = SmokingPipeGlass_Tobacco,
+        ReplaceOnUse = Base.SmokingPipe,
+        Eattime = 920,
+        FoodSicknessChange = 21,
+        InverseCoughProbability = 5,
+        InverseCoughProbabilitySmoker = 2,
+    }
+
+    item CanPipe_Hemp
+    {
+        DisplayCategory = Junk,
+        Weight = 0.3,
+        ItemType = base:food,
+        Icon = Pipe_BeerCan,
+        CantBeFrozen = true,
+        CustomContextMenu = Smoke,
+        EatType = Pipe,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        CustomEatSound = ,
+        RequireInHandOrInventory = Base.CandleLit/Base.Matches/Base.Matchbox/Base.LighterDisposable/Base.Lighter/Base.LighterBBQ/Base.Lighter_Battery,
+        HungerChange = 0.0,
+        fatigueChange = 8.0,
+        StressChange = -15,
+        UnhappyChange = -20,
+        BoredomChange = -14,
+        painReduction = 14,
+        StaticModel = CanPipe,
+        WorldStaticModel = CanPipe,
+        ReplaceOnUse = Base.CanPipe,
+        Eattime = 920,
+        InverseCoughProbability = 10,
+        InverseCoughProbabilitySmoker = 4,
+        Tooltip = Tooltip_HempMild,
+    }
+
+    item CigarHemp
+    {
+        DisplayCategory = Junk,
+        ItemType = base:food,
+        Weight = 0.2,
+        Icon = CigarTobacco,
+        CantBeFrozen = true,
+        CustomContextMenu = Smoke,
+        EatType = Cigarettes,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        RequireInHandOrInventory = Base.CandleLit/Base.Matches/Base.Matchbox/Base.LighterDisposable/Base.Lighter/Base.LighterBBQ/Base.Lighter_Battery,
+        HungerChange = 0.0,
+        fatigueChange = 15.0,
+        StressChange = -10,
+        UnhappyChange = -40,
+        BoredomChange = -30,
+        painReduction = 28,
+        StaticModel = CigarRolled_Lit,
+        WorldStaticModel = CigarRolled,
+        CustomEatSound = ,
+        Tags = base:ignorezombiedensity;base:useall;base:smokable,
+        Eattime = 920,
+        InverseCoughProbability = 8,
+        InverseCoughProbabilitySmoker = 4,
+        Tooltip = Tooltip_HempModerate,
+    }
+
+    item CigarRolled
+    {
+        DisplayCategory = Junk,
+        ItemType = base:food,
+        Weight = 0.2,
+        Icon = CigarTobacco,
+        CantBeFrozen = true,
+        CustomContextMenu = Smoke,
+        EatType = Cigarettes,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        RequireInHandOrInventory = Base.CandleLit/Base.Matches/Base.Matchbox/Base.LighterDisposable/Base.Lighter/Base.LighterBBQ/Base.Lighter_Battery,
+        HungerChange = 0.0,
+        StressChange = -10,
+        UnhappyChange = -40,
+        BoredomChange = -20,
+        StaticModel = CigarRolled_Lit,
+        WorldStaticModel = CigarRolled,
+        CustomEatSound = ,
+        Tags = base:ignorezombiedensity;base:useall;base:smokable,
+        Eattime = 920,
+        FoodSicknessChange = 28,
+        InverseCoughProbability = 4,
+        InverseCoughProbabilitySmoker = 2,
+    }
+
+    item CigaretteHemp
+    {
+        DisplayCategory = Junk,
+        ItemType = base:food,
+        Weight = 0.01,
+        Icon = CigaretteHemp,
+        CantBeFrozen = true,
+        CustomContextMenu = Smoke,
+        EatType = Cigarettes,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        RequireInHandOrInventory = Base.CandleLit/Base.Matches/Base.Matchbox/Base.LighterDisposable/Base.Lighter/Base.LighterBBQ/Base.Lighter_Battery,
+        HungerChange = 0.0,
+        fatigueChange = 4.0,
+        StressChange = -4,
+        UnhappyChange = -10,
+        BoredomChange = -7,
+        painReduction = 7,
+        StaticModel = CigaretteHemp_Lit,
+        WorldStaticModel = CigaretteHemp,
+        CustomEatSound = ,
+        Tags = base:useall;base:smokable,
+        Eattime = 460,
+        InverseCoughProbability = 20,
+        InverseCoughProbabilitySmoker = 4,
+        Tooltip = Tooltip_HempMild,
+    }
+
+    item CigarettePack_Hemp
+    {
+        DisplayCategory = Junk,
+        Weight = 0.2,
+        UseDelta = 0.05,
+        ItemType = base:drainable,
+        UseWhileEquipped = false,
+        KeepOnDeplete = false,
+        Icon = CigarettePack_Hemp,
+        WorldStaticModel = CigarettePack_Hemp,
+        Tags = base:packed;base:lessfull;base:consumable;base:smokable,
+        EatType = Cigarettes,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        fatigueChange = 4.0,
+        StressChange = -4,
+        UnhappyChange = -10,
+        BoredomChange = -7,
+        painReduction = 7,
+        CustomEatSound = ,
+        Eattime = 460,
+        RequireInHandOrInventory = Base.CandleLit/Base.Matches/Base.Matchbox/Base.LighterDisposable/Base.Lighter/Base.LighterBBQ/Base.Lighter_Battery,
+        CustomContextMenu = Smoke,
+        InverseCoughProbability = 20,
+        InverseCoughProbabilitySmoker = 4,
+    }
+
+    item CigarettePack_Rolled
+    {
+        DisplayCategory = Junk,
+        Weight = 0.2,
+        UseDelta = 0.05,
+        ItemType = base:drainable,
+        UseWhileEquipped = false,
+        KeepOnDeplete = false,
+        Icon = CigarettePack_Rolled,
+        WorldStaticModel = CigarettePack_Rolled,
+        Tags = base:packed;base:lessfull;base:consumable;base:smokable,
+        EatType = Cigarettes,
+        OnEat = RecipeCodeOnEat.consumeNicotine,
+        StressChange = -4,
+        CustomEatSound = ,
+        Eattime = 460,
+        RequireInHandOrInventory = Base.CandleLit/Base.Matches/Base.Matchbox/Base.LighterDisposable/Base.Lighter/Base.LighterBBQ/Base.Lighter_Battery,
+        CustomContextMenu = Smoke,
+        FoodSicknessChange = 14,
+        InverseCoughProbability = 10,
+        InverseCoughProbabilitySmoker = 2,
+    }
+}
