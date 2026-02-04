@@ -1,0 +1,40 @@
+module Base
+{
+    craftRecipe Assemble Pickaxe
+    {
+        time = 120,
+        category = Assembly,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Carving:3,
+        inputs
+        {
+            item 1 [Base.PickAxeHead],
+            item 1 [Base.LongHandle],
+            item 3 [Base.Twine],
+        }
+        outputs
+        {
+            item 1 Base.PickAxe,
+        }
+    }
+
+    craftRecipe Forge Pick Axe Head
+    {
+        time = 240,
+        SkillRequired = FlintKnapping:3;Blacksmithing:2,
+        timedAction = MakingHammer_Surface,
+        Tags = PrimitiveForge,
+        category = Blacksmithing,
+        inputs
+        {
+            item 2 tags[base:charcoal],
+            item 1 [Base.SteelBar],
+            item 1 tags[base:hammer;base:clubhammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:crudetongs;base:tongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.PickAxeHead flags[IsBlunt],
+        }
+    }
+}
