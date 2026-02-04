@@ -36,4 +36,60 @@ module Base
         Icon	         = SaltRock,
         WorldStaticModel = SaltRocks_Ground,
 	}
+
+    craftRecipe MakeAcornCoffeeMug
+    {
+        timedAction = MakeCoffee,
+        time = 40,
+        OnCreate = RecipeCodeOnCreate.makeCoffee,
+        category = Cooking,
+        Tags = CoffeeMachine,
+        inputs
+        {
+            item 5 [Herbalist.AcornCoffee],
+            item 1 tags[base:coffeemaker] mode:destroy flags[InheritColor;InheritModelVariation] mappers[mugShot],
+            -fluid 0.2 categories[Water] mode:mixture,
+        }
+        outputs
+        {
+            item 1 mapper:mugShot,
+        }
+        itemMapper mugShot
+        {
+            Base.HotDrink = Base.Mugl,
+            Base.HotDrinkWhite = Base.MugWhite,
+            Base.HotDrinkSpiffo = Base.MugSpiffo,
+            Base.HotDrinkClay = Base.ClayMug,
+            Base.HotDrinkCopper = Base.CopperCup,
+            Base.HotDrinkGold = Base.GoldCup,
+            Base.HotDrinkMetal = Base.MetalCup,
+            Base.HotDrinkSilver = Base.SilverCup,
+            Base.HotDrinkTumbler = Base.GlassTumbler,
+            default = Base.HotDrinkWhite,
+        }
+    }
+
+    craftRecipe MakeAcornCoffeeTeacup
+    {
+        timedAction = MakeCoffee,
+        time = 20,
+        OnCreate = RecipeCodeOnCreate.makeCoffee,
+        category = Cooking,
+        Tags = CoffeeMachine,
+        inputs
+        {
+            item 5 [Herbalist.AcornCoffee],
+            item 1 [Base.Teacup;Base.CeramicTeacup] mode:destroy flags[InheritColor] mappers[mugShot],
+            -fluid 0.1 categories[Water] mode:mixture,
+        }
+        outputs
+        {
+            item 1 mapper:mugShot,
+        }
+        itemMapper mugShot
+        {
+            Base.HotDrinkTeaCeramic = Base.CeramicTeacup,
+            default = Base.HotDrinkTea,
+        }
+    }
 }
