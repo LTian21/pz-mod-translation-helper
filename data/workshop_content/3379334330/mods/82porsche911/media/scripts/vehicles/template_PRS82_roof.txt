@@ -1,0 +1,72 @@
+module Base
+{
+    model 82porsche911roof
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911ta_roof,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	template vehicle PRS82RoofTA
+		{
+		part PRS82Roof
+        	{
+
+			model Roof
+				{
+                		file = 82porsche911roof,
+				}
+
+				area = Engine,
+				category = bodywork,
+				itemType = Base.82porsche911targaRoof,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+                    requireUninstalled = PRS82Roofrack,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+	}
+}

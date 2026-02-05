@@ -27,7 +27,7 @@ module Base
 			container
 			{
 				conditionAffectsCapacity = false,
-				test = PRS82.ContainerAccess.Roofrack,
+				test = DAMN.ContainerAccess.Roofrack,
 			}
 
 			table install
@@ -48,6 +48,77 @@ module Base
                 	recipes = Intermediate Mechanics,
                 	test = Vehicles.InstallTest.Default,
                 	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireEmpty = true,
+
+            		}
+
+            lua
+            	{
+					create = DAMN.Create.Blank,
+				}
+		}
+	}
+
+    template vehicle PRS82RoofrackTA
+	{
+		part PRS82Roofrack
+		{
+
+			model PRS82Roofrack0
+				{
+                		file = 82porsche911Roofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+			itemType = Base.OldSmallRoofrack,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+                    requireInstalled = PRS82Roof,
             		}
 
             table uninstall

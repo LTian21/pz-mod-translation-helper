@@ -16,8 +16,8 @@
 ## ✨ 项目状态
 
 <!--START_STATUS_BADGES-->
-![翻译进度](https://img.shields.io/badge/%E7%BF%BB%E8%AF%91%E8%BF%9B%E5%BA%A6-86349%20/%2097818%20%2888.28%25%29-yellow)
-![支持模组](https://img.shields.io/badge/%E6%94%AF%E6%8C%81%E6%A8%A1%E7%BB%84-850%20%E4%B8%AA-blue)
+![翻译进度](https://img.shields.io/badge/%E7%BF%BB%E8%AF%91%E8%BF%9B%E5%BA%A6-86348%20/%2098333%20%2887.81%25%29-yellow)
+![支持模组](https://img.shields.io/badge/%E6%94%AF%E6%8C%81%E6%A8%A1%E7%BB%84-855%20%E4%B8%AA-blue)
 <!--END_STATUS_BADGES-->
 
 *以上数据由脚本自动生成，反映了当前仓库的最新状态。*
