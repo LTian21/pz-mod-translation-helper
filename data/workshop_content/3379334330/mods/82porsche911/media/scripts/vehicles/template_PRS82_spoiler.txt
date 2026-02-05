@@ -1,5 +1,12 @@
 module Base
 {
+    model 82porsche911scspoiler0
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911sc_spoiler,
+		shader = damn_vehicle_shader,
+        static = FALSE,
+		scale = 0.1,
+	}
 	
 	model 82porsche911rwbspoiler0
 	{
@@ -69,6 +76,71 @@ module Base
             {
                 create = PRS82.Create.SpoilerRWB,
                 init = PRS82.Init.SpoilerRWB,
+            }
+        }
+	}
+
+    template vehicle PRS82SpoilerSC
+		{
+		part PRS82Spoiler
+       		{
+
+            model PRS82Spoiler0
+			{
+                	file = 82porsche911scspoiler0,
+			}
+
+            category = bodywork,
+            area = Engine,
+            parent = EngineDoor,
+        
+            specificItem = false,
+            itemType = Base.82porsche911SCSpoiler1,
+            mechanicRequireKey = false,
+
+            table install
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                requireInstalled = EngineDoor,
+                test = Vehicles.InstallTest.Default,
+                complete = PRS82.InstallComplete.SpoilerSC,
+                requireInstalled = EngineDoor,
+                
+            }
+            table uninstall
+            {
+                items
+                {
+                    item
+                    {
+                        type = Base.Wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 1000,
+                skills = Mechanics:4,
+                recipes = Advanced Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                complete = PRS82.UninstallComplete.SpoilerSC,
+            }
+            lua
+            {
+                create = PRS82.Create.SpoilerSC,
+                init = PRS82.Init.SpoilerSC,
             }
         }
 	}

@@ -609,9 +609,177 @@ module Base
 			}
 		}
 
+        template vehicle DEF89BackArmor110U
+		{
+
+		part DAMNBackLeftArmor
+        {
+
+			model DEF89leftwindowba
+				{
+                		file = 89defenderWindowblA,
+				}
+
+			area = StorageLeft,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.89defenderBackWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+             container
+			    {
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			    }
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.BackLeftArmor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.BackLeftArmor,
+                    requireEmpty = true,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.BackLeftArmor,
+					init = DEF89.Init.BackLeftArmor,
+					}
+		}
+
+		part DAMNBackRightArmor
+        {
+
+			model DEF89rightwindowba
+				{
+                		file = 89defenderWindowbrA,
+				}
+
+			area = StorageRight,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.89defenderBackWindowArmor,
+			mechanicRequireKey = false,
+            durability = 5,
+
+            container
+			    {
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			    }
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DEF89.InstallComplete.BackRightArmor,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 550,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = DEF89.UninstallComplete.BackRightArmor,
+                    requireEmpty = true,
+            		}
+
+            		lua
+            		{
+					create = DEF89.Create.BackRightArmor,
+					init = DEF89.Init.BackRightArmor,
+					}
+			}
+		}
+
 		template vehicle DEF89BackArmor90
 		{
 			template! = DEF89BackArmor110,
+
+			part DAMNBackLeftArmor
+	        {
+
+				model DEF89leftwindowba
+					{
+	                		file = 89defenderWindowblA,
+	                		offset = 0.0000 0.0000 0.7019,
+					}
+			}
+
+			part DAMNBackRightArmor
+	        {
+
+				model DEF89rightwindowba
+					{
+	                		file = 89defenderWindowbrA,
+	                		offset = 0.0000 0.0000 0.7019,
+					}
+			}
+
+		}
+
+        template vehicle DEF89BackArmor90U
+		{
+			template! = DEF89BackArmor110U,
 
 			part DAMNBackLeftArmor
 	        {
@@ -643,12 +811,29 @@ module Base
 			template! = DEF89WindshieldRearArmor90,
 		}
 
+        template vehicle DEF89Armor90U
+		{
+			template! = DEF89WindshieldArmor,
+			template! = DEF89FrontArmor,
+			template! = DEF89BackArmor90U,
+			template! = DEF89WindshieldRearArmor90,
+		}
+
 		template vehicle DEF89Armor110
 		{
 			template! = DEF89WindshieldArmor,
 			template! = DEF89FrontArmor,
 			template! = DEF89RearArmor,
 			template! = DEF89BackArmor110,
+			template! = DEF89WindshieldRearArmor110,
+		}
+
+        template vehicle DEF89Armor110U
+		{
+			template! = DEF89WindshieldArmor,
+			template! = DEF89FrontArmor,
+			template! = DEF89RearArmor,
+			template! = DEF89BackArmor110U,
 			template! = DEF89WindshieldRearArmor110,
 		}
 

@@ -1,0 +1,168 @@
+module Base
+{
+
+    craftRecipe GlueM13Bo1
+    {
+        timedAction = M13BoStaves.CarveBoStaff,
+        Time = 100,
+        Tags = AnySurfaceCraft,
+        category = M-13's Bo Staves,
+        xpAward = Maintenance:5,
+        inputs
+        {
+            item 2 [Base.LongHandle;Base.LongStick_Broken;Base.WoodenStick2] flags[InheritCondition],
+            item 1 tags[base:sharpknife] mode:keep flags[IsNotDull;MayDegradeLight],
+            item 1 [Base.Epoxy],
+        }
+        outputs
+        {
+            item 1 M13BoStaves.M13Bo1,
+        }
+    }
+
+    craftRecipe SawM13Bo1
+    {
+        timedAction = SawLogs,
+        Time = 50,
+        Tags = InHandCraft,
+        category = M-13's Bo Staves,
+        xpAward = Woodwork:1,
+        inputs
+        {
+            item 1 [Base.Rake;Base.LeafRake;Base.Gaffhook;Base.GardenHoe;Base.GardenHoeForged;Base.Scythe;Base.ScytheForged;Base.IceHockeyStick;Base.Mop;Base.Broom;Base.Broom_Twig] mappers[ToolHeadReturn] flags[InheritCondition;InheritSharpness;Prop2],
+            item 1 tags[base:saw;base:smallsaw] mode:keep flags[MayDegradeLight;Prop1],
+        }
+        itemMapper ToolHeadReturn
+        {
+            Base.RakeHead = Base.Rake,
+            Base.ScrapMetal = Base.Gaffhook,
+            Base.GardenHoeHead = Base.GardenHoe,
+            Base.GardenHoeHead = Base.GardenHoeForged,
+            Base.ScytheBlade = Base.Scythe,
+            Base.ScytheBlade = Base.ScytheForged,
+            default = Base.UnusableWood,            
+        }
+        outputs
+        {
+            item 1 M13BoStaves.M13Bo1,
+            item 1 mapper:ToolHeadReturn,
+        }
+	}
+    
+    craftRecipe CarveM13Bo1
+    {
+        timedAction = M13BoStaves.CarveBoStaff,
+        Time = 100,
+        Tags = InHandCraft,
+        category = M-13's Bo Staves,
+        xpAward = Carving:15,
+        inputs
+        {
+            item 1 [Base.LongStick;Base.Sapling;Base.IceHockeyStick] flags[InheritCondition],
+            item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[MayDegradeLight;IsNotDull],
+        }
+        outputs
+        {
+            item 1 M13BoStaves.M13Bo1,
+        }
+    }
+    
+    craftRecipe UpgradeM13Bo1
+    {
+        timedAction = CraftWeapon2H,
+        Time = 100,
+        Tags = AnySurfaceCraft,
+        category = M-13's Bo Staves,
+        xpAward = Maintenance:5,
+        inputs
+        {
+            item 1 [M13BoStaves.M13Bo1] flags[Prop2;InheritCondition],
+            item 1 tags[Glue],
+            item 3 [Base.RippedSheets] mode:destroy,
+        }
+        outputs
+        {
+            item 1 M13BoStaves.M13Bo2,
+        }
+    }
+    
+    craftRecipe UpgradeM13Bo2
+    {
+        timedAction = CraftWeapon2H,
+        Time = 150,
+        Tags = AnySurfaceCraft,
+        category = M-13's Bo Staves,
+        xpAward = Maintenance:5,
+        inputs
+        {
+            item 1 [M13BoStaves.M13Bo2] flags[Prop2;InheritCondition],
+            item 1 [Base.BarbedWire],
+            item 1 tags[Pliers] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 [Base.Gloves_LeatherGloves;Base.Gloves_LeatherGlovesBlack;Base.Gloves_LeatherGlovesBrown] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 M13BoStaves.M13Bo3,
+        }
+    }
+
+    craftRecipe CreateM13Bo4
+    {
+        timedAction = Welding_Surface,
+        Time = 100,
+        SkillRequired = MetalWelding:3,
+        Tags = AnySurfaceCraft;Welding,
+        category = M-13's Bo Staves,
+        xpAward = MetalWelding:10,
+        inputs
+        {
+            item 2 [Base.MetalPipe],
+            item 1 [Base.ScrapMetal],
+            item 2 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 M13BoStaves.M13Bo4,
+        }
+    }
+
+    craftRecipe UpgradeM13Bo4
+    {
+        timedAction = CraftWeapon2H,
+        Time = 100,
+        Tags = AnySurfaceCraft,
+        category = M-13's Bo Staves,
+        xpAward = Maintenance:5,
+        inputs
+        {
+            item 1 [M13BoStaves.M13Bo4] flags[Prop2;InheritCondition],
+            item 1 tags[Glue],
+            item 3 [Base.LeatherStrips] mode:destroy,
+        }
+        outputs
+        {
+        item 1 M13BoStaves.M13Bo5,
+        }
+    }
+
+    craftRecipe UpgradeM13Bo5
+    {
+        timedAction = CraftWeapon2H,
+        Time = 150,
+        Tags = AnySurfaceCraft,
+        category = M-13's Bo Staves,
+        xpAward = Maintenance:5,
+        inputs
+        {
+            item 1 [M13BoStaves.M13Bo5] flags[Prop2;InheritCondition],
+            item 1 [Base.BarbedWire],
+            item 1 tags[Pliers] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 [Base.Gloves_LeatherGloves;Base.Gloves_LeatherGlovesBlack;Base.Gloves_LeatherGlovesBrown] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+        item 1 M13BoStaves.M13Bo6,
+        }
+    }
+}

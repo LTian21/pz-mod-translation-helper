@@ -1,5 +1,33 @@
 module Base
 {
+    model 82porsche911scfrontBumper0
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911sc_bumper_front0,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+	model 82porsche911scfrontBumperA
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911sc_bumper_frontA,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 82porsche911scfrontBumperLip
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911sc_bumper_lip,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 82porsche911scfrontBumperFogs
+	{
+		mesh = vehicles/Vehicles_82porsche911_Body|p911sc_bumper_lights,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
 	model 82porsche911frontBumper0
 	{
 		mesh = vehicles/Vehicles_82porsche911_Body|p911_bumper_front1,
@@ -179,6 +207,202 @@ module Base
             		{
 					create = PRS82.Create.FrontBumperRWB,
 					init = PRS82.Init.FrontBumperRWB,
+					}
+		}
+	}
+
+    template vehicle PRS82FrontBumpersSC
+		{
+		part PRS82FrontBumper
+        	{
+
+			model FrontBumper0
+				{
+                		file = 82porsche911scfrontBumper0,
+				}
+
+			model FrontBumper1
+				{
+                		file = 82porsche911scfrontBumperA,
+				}
+
+			model FrontBumper2
+				{
+                		file = 82porsche911frontBullbarA,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82porsche911SCBumperFront0;Base.82porsche911SCBumperFrontA;Base.82porsche911BullbarFrontA,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRS82.InstallComplete.FrontBumperSC,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PRS82.UninstallComplete.FrontBumperSC,
+            		}
+
+            		lua
+            		{
+					create = PRS82.Create.FrontBumperSC,
+					init = PRS82.Init.FrontBumperSC,
+					}
+		}
+
+        part PRS82FrontLip
+        	{
+
+			model FrontBumperLip
+				{
+                		file = 82porsche911scfrontBumperLip,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82porsche911SClip,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRS82.InstallComplete.FrontBumperLip,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PRS82.UninstallComplete.FrontBumperLip,
+            		}
+
+            		lua
+            		{
+					create = PRS82.Create.FrontBumperLip,
+					init = PRS82.Init.FrontBumperLip,
+					}
+		}
+
+        part PRS82FrontFogs
+        	{
+
+			model FrontBumperFogs
+				{
+                		file = 82porsche911scfrontBumperFogs,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.82porsche911SCfogs,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = PRS82.InstallComplete.FrontBumperFogs,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = PRS82.UninstallComplete.FrontBumperFogs,
+            		}
+
+            		lua
+            		{
+					create = PRS82.Create.FrontBumperFogs,
+					init = PRS82.Init.FrontBumperFogs,
 					}
 		}
 	}

@@ -1,0 +1,161 @@
+module G11
+{
+	item G11Rifle
+    {
+        DisplayCategory = Weapon,
+        ItemType = base:weapon,
+        Weight = 3.6,
+        Icon = G11Rifle,
+        AimingPerkCritModifier = 6,
+        AimingPerkHitChanceModifier = 5,
+        AimingPerkMinAngleModifier = 0.01,
+        AimingPerkRangeModifier = 0,
+        AimReleaseSound = M16AimRelease,
+        Aimingtime = 40,
+        AmmoBox = Base.556Box,
+        AmmoType = base:bullets_556,
+        AttachmentType = Rifle,
+        BreakSound = M16Break,
+        BringToBearSound = M16BringToBear,
+        ClickSound = M16Jam,
+        ConditionLowerChanceOneIn = 200,
+        ConditionMax = 10,
+        CritDmgMultiplier = 4.0,
+        CriticalChance = 20.0,
+        DoorDamage = 5,
+        DropSound = M16Drop,
+        EjectAmmoSound = G11Unload,
+        EjectAmmoStartSound = G11EjectAmmoStart,
+        EjectAmmoStopSound = G11EjectAmmoStop,
+        EquipSound = M16Equip,
+        FireMode = Auto,
+        FireModePossibilities = Auto/Single,
+        CyclicRateMultiplier = 1.0,
+        HitChance = 55,
+        HitSound = BulletImpact,
+        IdleAnim = Idle_Weapon2,
+        ImpactSound = null,
+        InsertAmmoSound = G11Load,
+        InsertAmmoStartSound = G11InsertAmmoStart,
+        InsertAmmoStopSound = G11InsertAmmoStop,
+        IsAimedFirearm = true,
+        JamGunChance = 1,
+        KnockBackOnNoDeath = true,
+        KnockdownMod = 4.0,
+        MagazineType = G11.G11Magazine,
+        MaxAmmo = 50,
+        MaxDamage = 1.6,
+        MaxHitcount = 2,
+        MaxRange = 30.0,
+        MinSightRange = 2,
+        MaxSightRange = 10.0,
+        MetalValue = 45.0,
+        MinAngle = 0.965,
+        MinDamage = 1.0,
+        MinRange = 0.61,
+        MinimumSwingtime = 0.5,
+        MultipleHitConditionAffected = false,
+        MuzzleFlashModelKey = muzzle_flash_assault_rifle,
+        NPCSoundBoost = 1.5,
+        PiercingBullets = true,
+        Projectilecount = 1,
+        PushBackMod = 0.3,
+        RackSound = G11Rack,
+        Ranged = true,
+        RecoilDelay = 200,
+        Reloadtime = 25,
+        RequiresEquippedBothHands = true,
+        RunAnim = Run_Weapon2,
+        ShellFallSound = G11CartridgeFall,
+        SoundGain = 2.0,
+        SoundRadius = 150,
+        SoundVolume = 35,
+        SplatBloodOnNoDeath = true,
+        SplatNumber = 3,
+        SplatSize = 3,
+        StopPower = 2.0,
+        SubCategory = Firearm,
+        SwingAmountBeforeImpact = 0.0,
+        SwingAnim = Rifle,
+        SwingSound = M16Shoot,
+        Swingtime = 0.5,
+        ToHitModifier = 1.5,
+        TwoHandWeapon = true,
+        UnequipSound = M16UnEquip,
+        UseEndurance = false,
+        WeaponReloadType = g11reload,
+        WeaponSprite = G11.G11Rifle,
+        Tags = base:hasmetal;base:firearm,
+    }
+	model G11Rifle
+	{
+		mesh = HKG11K2/G11Rifle,
+		texture = HKG11K2/G11Rifle,
+
+		attachment muzzle
+		{
+			offset = 0.0000 0.2655 0.0302,
+			rotate = -90.0000 0.0560 -180.0000,
+		}
+
+		attachment rifle_back
+		{
+			offset = 0.0000 0.0767 0.0394,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment rifle_back_bag
+		{
+			offset = 0.0000 0.0810 -0.0066,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+	model G11Rifle_NoMag
+	{
+		mesh = HKG11K2/G11Rifle_NoMag,
+		texture = HKG11K2/G11Rifle,
+
+		attachment muzzle
+		{
+			offset = 0.0000 0.2655 0.0302,
+			rotate = -90.0000 0.0560 -180.0000,
+		}
+	}
+	model G11Magazine_Ground
+    {
+        mesh = HKG11K2/G11Magazine_Ground,
+        texture = HKG11K2/G11Rifle,
+    }
+	model G11Magazine
+    {
+        mesh = HKG11K2/G11Magazine,
+        texture = HKG11K2/G11Rifle,
+        attachment Bip01_Prop2 {
+            offset = 0.0000 0.0000 0.0000,
+            offset = 0.0000 0.0000 0.0000,
+        }
+    }
+	item G11Magazine
+    {
+        DisplayCategory = Ammo,
+        ItemType = base:normal,
+        Weight = 0.1,
+        Icon = G11Magazine,
+        AmmoType = base:bullets_556,
+        CanStack = false,
+        GunType = G11.G11Rifle,
+        MaxAmmo = 50,
+        StaticModel = G11.G11Magazine,
+        WorldStaticModel = G11.G11Magazine_Ground,
+        Tags = base:hasmetal;base:riflemagazine,
+    }
+	item G11ReloadMagazine
+    {
+        DisplayCategory = Accessory,
+        Hidden = true,
+        ItemType = base:normal,
+        Icon = G11Magazine,
+        StaticModel = G11.G11Magazine,
+        WorldStaticModel = G11.G11Magazine_Ground,
+    }
+}
