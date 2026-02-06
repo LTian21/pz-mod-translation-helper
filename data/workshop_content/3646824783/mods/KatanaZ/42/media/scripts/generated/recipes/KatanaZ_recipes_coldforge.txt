@@ -1,0 +1,494 @@
+module Base
+{
+	craftRecipe Cold Forge Nails From Wire
+    {
+        time = 500,
+        SkillRequired = Blacksmith:1,
+        NeedToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:5;Maintenance:3,
+        AutoLearnAll = Blacksmith:2,
+        Tags = AnySurfaceCraft,
+        category = Ancient Smithing (Cold),
+        inputs
+        {
+            item 1 [Base.Wire] mode:destroy,
+            item 1 tags[ballpeenhammer;hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 2 Base.Nails,
+        }
+    }
+
+    craftRecipe Cold Forge Needle
+    {
+        time = 400,
+        SkillRequired = Blacksmith:2,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:1;Maintenance:2,
+        Tags = AnySurfaceCraft,
+        category = Ancient Smithing (Cold),
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+        inputs
+        {
+            item 1 tags[wire],
+            item 1 tags[ballpeenhammer] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.Needle_Forged,
+        }
+    }
+
+    craftRecipe Forge Nails From Ingot
+    {
+        time = 500,
+        SkillRequired = Blacksmith:3;Strength:3,
+        NeedToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:10;Maintenance:3,
+        AutoLearnAll = Blacksmith:2,
+        Tags = PrimitiveForge,
+        category = Ancient Smithing,
+        inputs
+        {
+            item 2 tags[charcoal],
+            item 1 [Base.IronIngot;Base.SteelIngot],
+            item 1 tags[smithinghammer] mode:keep flags[MayDegradeHeavy],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[MayDegradeHeavy],
+            item 1 tags[headingtool] mode:keep,
+            item 1 tags[Whetstone;File] mode:keep flags[MayDegradeLight],			
+        }
+        outputs
+        {
+            item 25 Base.Nails,
+        }
+    }
+
+    craftRecipe Forge Lesser Nails From Ingot
+    {
+        time = 500,
+        SkillRequired = Blacksmith:1,
+        NeedToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:5;Maintenance:3,
+        AutoLearnAll = Blacksmith:2,
+        Tags = PrimitiveForge,
+        category = Ancient Smithing,
+        inputs
+        {
+            item 2 tags[charcoal],
+            item 1 [Base.IronIngot;Base.CopperIngot],
+            item 1 tags[smithinghammer] mode:keep flags[MayDegradeHeavy],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[MayDegradeHeavy],
+            item 1 tags[headingtool] mode:keep,
+            item 1 tags[Whetstone;File] mode:keep flags[MayDegradeHeavy],			
+        }
+        outputs
+        {
+            item 10 Base.Nails,
+        }
+    }
+	
+	craftRecipe Cold Forge Aluminum Scrap
+    {
+        category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+		xpAward = Blacksmith:10;Maintenance:3,
+        timedAction = MakingHammer_Surface,
+        time = 400,
+        inputs
+        {
+            item 8 [Base.AluminumFragments],
+            item 1 tags[ballpeenhammer;hammer;hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[tongs;metalworkingpliers;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.AluminumScrap,
+        }
+    }
+
+	craftRecipe Cold Forge Scrap Into Bar Quarter
+    {
+        time = 300,
+        timedAction = MakingHammer_Surface,
+		SkillRequired = Strength:2,
+        Tags = AnySurfaceCraft,
+		xpAward = Blacksmith:10;Maintenance:3,		
+        category = Ancient Smithing (Cold),
+        inputs
+        {
+            item 2 [Base.IronScrap;1:Base.ScrapMetal;1:Base.UnusableMetal] flags[DontReplace],
+            item 1 tags[ballpeenhammer;smithinghammer] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeHeavy],
+        }
+        outputs
+        {
+			item 1 Base.IronBarQuarter,
+		}
+    }
+
+    craftRecipe Cold Forge Wire From Bar Quarter
+    {
+        time = 600,
+        timedAction = MakingHammer_Surface,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Blacksmith:1;Strength:3,		
+        xpAward = Blacksmith:10;Maintenance:3,		
+        category = Ancient Smithing (Cold),
+        inputs
+        {
+            item 1 [Base.IronBarQuarter],
+            item 1 tags[ballpeenhammer] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.Wire flags[HasOneUse],
+        }
+    }
+
+	craftRecipe Cold Forge Iron Bar Half
+    {
+        category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        SkillRequired = Blacksmith:1;Strength:2,		
+		xpAward = Blacksmith:10;Maintenance:3,
+        timedAction = MakingHammer_Surface,
+        time = 400,
+        inputs
+        {
+            item 2 [Base.ScrapMetal;1:Base.UnusableMetal],
+            item 1 tags[ballpeenhammer;hammer;hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[tongs;metalworkingpliers;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.IronBarHalf,
+        }
+    }
+
+	craftRecipe Cold Forge Small Copper Sheets
+    {
+        category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+		xpAward = Blacksmith:10;Maintenance:3,
+        timedAction = MakingHammer_Surface,
+        time = 400,
+        inputs
+        {
+            item 2 [Base.CopperScrap;5:Base.ElectricWire],
+            item 1 tags[ballpeenhammer;hammer] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[tongs;metalworkingpliers;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.SmallCopperSheet,
+        }
+    }
+
+    craftRecipe Cold Forge Copper Sheet
+    {
+        category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+		xpAward = Blacksmith:10;Maintenance:3,		
+        timedAction = MakingHammer_Surface,
+        time = 400,
+        inputs
+        {
+            item 12 [Base.CopperScrap],
+            item 1 tags[ballpeenhammer;hammer] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[tongs;metalworkingpliers;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.CopperSheet,
+        }
+    }
+
+    craftRecipe Cold Forge Saucepan
+    {
+        category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        SkillRequired = Blacksmith:1,
+        xpAward = Blacksmith:25;Maintenance:3,
+        timedAction = MakingHammer_Surface,
+        time = 600,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 2 [Base.CopperSheet],
+			item 1 [Base.SmallCopperSheet],
+            item 1 tags[ballpeenhammer] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[tongs;metalworkingpliers;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+            item 1 tags[metalworkingchisel] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.SaucepanCopper,
+        }
+    }
+
+    craftRecipe Cold Forge Kettle
+    {
+        category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        SkillRequired = Blacksmith:2,
+        xpAward = Blacksmith:5;Maintenance:3,
+        timedAction = MakingHammer_Surface,
+        time = 600,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 [Base.SmallCopperSheet],
+			item 1 [Base.CopperSheet],
+            item 1 tags[ballpeenhammer] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[tongs;metalworkingpliers;crudetongs] mode:keep flags[Prop2;MayDegradeHeavy],
+            item 1 tags[metalworkingchisel] mode:keep flags[MayDegradeLight],
+            item 1 [Base.SmallHandle],
+        }
+        outputs
+        {
+            item 1 Base.Kettle_Copper,
+        }
+    }
+
+    craftRecipe Cold Forge Metalworking Punch
+    {
+        category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        SkillRequired = Blacksmith:1,
+        xpAward = Blacksmith:5;Maintenance:3,
+        timedAction = MakingHammer_Surface,
+        time = 400,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 [Base.IronBarHalf],
+            item 1 tags[smithinghammer;ballpeenhammer] mode:keep flags[MayDegradeHeavy],
+            item 1 tags[whetstone;file] mode:keep flags[MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.MetalworkingPunch,
+        }
+    }
+
+    craftRecipe Cold Forge Heading Tool
+    {
+        category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        SkillRequired = Blacksmith:2,
+        xpAward = Blacksmith:5;Maintenance:3,
+        timedAction = MakingHammer_Surface,
+        time = 400,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 [Base.IronBarHalf],
+            item 1 tags[smithinghammer;ballpeenhammer] mode:keep flags[MayDegradeHeavy],
+            item 1 tags[whetstone;file] mode:keep flags[MayDegradeHeavy],
+            item 1 [Base.MetalworkingPunch] mode:keep flags[MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.HeadingTool,
+        }
+    }
+
+    craftRecipe Cold Forge Metalworking Chisel
+    {
+        category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        SkillRequired = Blacksmith:2,
+        xpAward = Blacksmith:5;Maintenance:3,
+        timedAction = MakingHammer_Surface,
+        time = 400,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 [Base.IronBarHalf],
+            item 1 tags[smithinghammer;ballpeenhammer] mode:keep flags[MayDegradeHeavy],
+            item 1 tags[whetstone;file] mode:keep flags[MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.MetalworkingChisel,
+        }
+    }
+
+    craftRecipe Cold Forge Scrap Metal
+    {
+        category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        SkillRequired = Blacksmith:1;Strength:4,		
+        xpAward = Blacksmith:10;Maintenance:3,		
+        timedAction = MakingHammer_Surface,
+        time = 400,
+        inputs
+        {
+			item 2 [1:Base.UnusableMetal;Base.IronScrap] flags[DontReplace],
+            item 1 tags[ballpeenhammer;hammer] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.ScrapMetal,
+        }
+    }
+
+    craftRecipe Cold Forge Soft Scrap Metal
+    {
+        category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        SkillRequired = Blacksmith:1;Strength:2,		
+        xpAward = Blacksmith:10;Maintenance:3,		
+        timedAction = MakingHammer_Surface,
+        time = 600,
+        inputs
+        {
+			item 4 [Base.CopperScrap] flags[DontReplace],
+            item 1 tags[ballpeenhammer;hammer;hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.ScrapMetal,
+        }
+    }
+
+    craftRecipe Cold Forge Crude Blade
+    {
+		category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = true,
+        SkillRequired = Blacksmith:1;Strength:4,
+        AutoLearnAll = Blacksmith:2;SmallBlade:1,
+        xpAward = Blacksmith:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,
+        time = 500,
+        OnCreate = RecipeCodeOnCreate.minorCondition,	
+        inputs
+        {
+            item 1 [Base.IronBarHalf] flags[Prop2],
+            item 1 [Base.SmithingHammer;Base.BlockMace] mode:keep flags[Prop1;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.LongCrudeBlade flags[IsBlunt],
+        }
+    }
+
+    craftRecipe Cold Deep Forge Crude Blade 
+    {
+		category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = true,
+        SkillRequired = Blacksmith:1;Strength:3,
+        AutoLearnAll = Blacksmith:2;SmallBlade:1,
+        xpAward = Blacksmith:15;Maintenance:3,
+        timedAction = MakingHammer_Surface,
+        time = 600,
+        inputs
+        {
+            item 1 [Base.IronBarHalf],
+            item 1 tags[ballpeenhammer] mode:keep flags[Prop1;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.LongCrudeBlade flags[IsBlunt],
+        }
+    }
+
+    craftRecipe Cold Forge Scrap Shortsword
+    {
+		category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = true,
+        SkillRequired = Blacksmith:3;Strength:4,
+        AutoLearnAll = Blacksmith:4;LongBlade:2,
+        xpAward = Blacksmith:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,
+        time = 1000,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+        inputs
+        {
+            item 1 [Base.IronBar;Base.SwordBlade;Base.SwordBlade_NoTang;Base.CrudeSwordBlade;Base.CrudeSwordBlade_NoTang],
+            item 1 [Base.SmithingHammer;Base.BlockMace] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 [Base.RippedSheets;Base.DenimStrips;Base.LeatherStrips] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.ShortSword_Scrap flags[IsBlunt],
+        }
+    }
+
+    craftRecipe Cold Deep Forge Scrap Shortsword
+    {
+		category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = true,
+        SkillRequired = Blacksmith:3;Strength:3,
+        AutoLearnAll = Blacksmith:4;LongBlade:2,
+        xpAward = Blacksmith:15;Maintenance:3,
+        timedAction = MakingHammer_Surface,
+        time = 1200,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+		inputs
+        {
+            item 1 [Base.IronBar;Base.SwordBlade;Base.SwordBlade_NoTang;Base.CrudeSwordBlade;Base.CrudeSwordBlade_NoTang],
+            item 1 tags[ballpeenhammer] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 [Base.RippedSheets;Base.DenimStrips;Base.LeatherStrips] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.ShortSword_Scrap flags[IsBlunt],
+        }
+    }
+
+    craftRecipe Cold Forge Large Knife Blade
+    {
+		category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = true,
+        SkillRequired = Blacksmith:2;Strength:4,
+        AutoLearnAll = Blacksmith:3;SmallBlade:2,
+        xpAward = Blacksmith:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,
+        time = 700,
+        inputs
+        {
+            item 1 [Base.IronBarHalf;Base.MeatCleaverBlade;Base.HuntingKnifeBlade],
+            item 1 [Base.SmithingHammer;Base.BlockMace] mode:keep flags[Prop1;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.LargeKnifeBlade flags[IsBlunt],
+        }
+    }
+
+    craftRecipe Cold Deep Forge Large Knife Blade
+    {
+		category = Ancient Smithing (Cold),
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = true,
+        SkillRequired = Blacksmith:3;Strength:3,
+        AutoLearnAll = Blacksmith:4;SmallBlade:2,
+        xpAward = Blacksmith:15;Maintenance:3,
+        timedAction = MakingHammer_Surface,
+        time = 800,
+        inputs
+        {
+            item 1 [Base.IronBarHalf;Base.MeatCleaverBlade;Base.HuntingKnifeBlade],
+            item 1 tags[ballpeenhammer] mode:keep flags[Prop1;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.LargeKnifeBlade flags[IsBlunt],
+        }
+    }
+}	

@@ -1,0 +1,1034 @@
+module Base
+{
+	craftRecipe Carve Primitive Pencil
+	{
+		category = Ancient Survival,
+		Tags = AnySurfaceCraft;Survivalist;CanBeDoneInDark,
+		timedAction = SharpenStakeWood,
+		xpAward = Carving:2;Maintenance:1,
+		time = 150,
+		inputs
+		{
+			item 1 tags[charcoal] mode:destroy,
+            item 1 tags[sharpknife] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 KatanaZ.CharPencil,
+		}
+	}
+
+	craftRecipe Make Primitive Pencil
+	{
+		category = Ancient Survival,
+		Tags = AnySurfaceCraft;Survivalist;CanBeDoneInDark,
+		timedAction = SharpenStakeWood,
+		xpAward = Carving:2;Maintenance:2,
+		OnCreate = RecipeCodeOnCreate.minorCondition,
+		time = 250,
+		inputs
+		{
+			item 1 [KatanaZ.CharPencil] mode:destroy,
+            item 1 tags[sharpknife] mode:keep flags[IsNotDull;MayDegradeLight],
+			item 1 tags[hammerstone;hammer] mode:keep flags[Prop1;MayDegradeHeavy],
+			item 12 [KatanaZ.SoftTwigs],
+			item 1 [Base.Limestone],
+		}
+		outputs
+		{
+			item 1 Base.Pencil,
+		}
+	}
+
+    craftRecipe Twist Twine By Hand
+    {
+		category = Ancient Survival,
+        Tags = InHandCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Maintenance:1,
+        time = 340,
+        inputs
+        {
+            item 1 [Base.Dogbane] flags[Prop2],
+            item 1 tags[sharpknife;scissors] mode:keep flags[IsNotDull;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.Twine flags[HasOneUse],
+        }
+    }
+
+	craftRecipe Twist Wire Paperclip
+	{
+		category = Ancient Survival,
+		Tags = AnySurfaceCraft;CanBeDoneInDark,
+		timedAction = Making,
+		xpAward = Maintenance:1,
+		time = 240,
+		inputs
+		{
+            item 1 tags[tongs;metalworkingpliers;crudetongs] mode:keep flags[Prop2;MayDegradeLight],		
+			item 4 [Base.Wire;Base.ElectricWire],
+		}
+		outputs
+		{
+			item 2 Base.Paperclip,
+		}
+	}
+
+	craftRecipe Twist Wire Needle
+	{
+		timedAction	= Making,
+		time = 590,
+		Tags = AnySurfaceCraft,
+		category = Ancient Tools,
+		xpAward = Maintenance:2,
+		AllowBatchCraft = false,
+		inputs
+		{
+            item 1 tags[tongs;metalworkingpliers;crudetongs] mode:keep flags[Prop2;MayDegradeLight],			
+			item 1 tags[whetstone;file] mode:keep flags[Prop1;MayDegradeHeavy],
+			item 1 [Base.Twigs] mode:destroy,
+			item 2 [Base.Wire;Base.ElectricWire],
+		}
+		outputs
+		{
+			item 1 KatanaZ.TwistedNeedle,
+		}
+	}
+
+    craftRecipe Twist Rope
+    {
+		category = Ancient Survival,
+        Tags = AnySurfaceCraft,
+        timedAction = Making,
+		xpAward = Maintenance:1,
+        time = 340,
+        inputs
+        {
+            item 10 [Base.Twine] flags[Prop2],
+            item 1 [Base.WoodenStick2;Base.TreeBranch2;Base.Handle] mode:keep flags[Prop1],
+            item 1 tags[sharpknife;scissors] mode:keep flags[IsNotDull;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.Rope,
+        }
+    }
+
+    craftRecipe Make Grass Charcoal Small
+    {
+        time = 200,
+        timedAction = Making_With_Kiln,
+        Tags = WoodCharcoal,
+        inputs
+        {
+            item 36 [Base.GrassTuft],
+        }
+        outputs
+        {
+            item 4 Base.CharcoalCrafted,
+        }
+    }
+
+    craftRecipe Make Grass Charcoal 
+    {
+        time = 200,
+        timedAction = Making_With_Kiln,
+        Tags = WoodCharcoal,
+        inputs
+        {
+            item 100 [Base.GrassTuft],
+			item 5 [Base.Twigs],		
+        }
+        outputs
+        {
+            item 12 Base.CharcoalCrafted,
+        }
+    }
+
+    craftRecipe Drill Branch
+    {
+        timedAction = Making,
+        time = 100,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        xpAward = Carving:1;Maintenance:2,
+        inputs
+        {
+            item 1 [Base.TreeBranch2] flags[Prop2],
+            item 1 tags[screwdriver;dullknife;sharpknife;drillwood;drillwoodpoor] mode:keep flags[Prop1;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 Base.PercedWood,
+        }
+    }
+
+	craftRecipe Shake Out Damp Lighter
+	{
+		timedAction = Making,
+		time = 80,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Ancient Survival,
+		xpAward = Maintenance:1,
+		inputs
+		{
+			item 1 [KatanaZ.WetLighter] flags[IsCookedFoodItem],
+		}
+		outputs
+		{
+			item 1 Base.Lighter flags[HasOneUse],
+		}
+	}
+
+	craftRecipe Crush Used Lighter
+	{
+		timedAction = MakingHammer_Surface,
+		time = 180,
+		Tags = AnySurfaceCraft,
+		category = Ancient Survival,
+		xpAward = Maintenance:1,
+		SkillRequired = Strength:2,
+		inputs
+		{
+			item 1 tags[hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+			item 1 [Base.Lighter] mode:destroy flags[IsEmpty],
+		}
+		outputs
+		{
+			item 1 Base.ScrapMetal,
+			item 1 KatanaZ.FlintShavings,
+		}
+	}	
+		
+    craftRecipe Carve Long Sticks
+    {
+        category = Carving,
+        Tags = InHandCraft,
+        SkillRequired = Carving:1,
+        xpAward = Carving:5;Maintenance:2,
+        timedAction = SharpenStakeWood,
+        time = 300,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+        inputs
+        {
+            item 1 tags[sharpknife;meatcleaver] mode:keep flags[Prop1;MayDegradeHeavy;IsNotDull],
+            item 1 [Base.LargeBranch] flags[Prop2;InheritCondition],
+        }
+        outputs
+        {
+            item 2 Base.LongStick,
+        }
+    }
+
+    craftRecipe Carve Wooden Rods
+    {
+        category = Carving,
+        Tags = InHandCraft,
+        SkillRequired = Carving:2,
+        xpAward = Carving:5;Maintenance:2,
+        timedAction = SharpenStakeWood,
+        time = 300,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+        inputs
+        {
+            item 1 tags[sharpknife;meatcleaver] mode:keep flags[MayDegradeHeavy;IsNotDull],
+            item 1 tags[saw;crudesaw] mode:keep flags[Prop1;MayDegradeHeavy;IsNotDull],
+            item 1 [Base.Plank] flags[Prop2;InheritCondition],
+        }
+        outputs
+        {
+            item 2 Base.WoodenStick2,
+        }
+    }
+
+    craftRecipe Make Ancient Firestriker
+    {
+        category = Ancient Survival,
+        Tags = AnySurfaceCraft,
+        timedAction = Making,
+		OnCreate = RecipeCodeOnCreate.minorCondition,
+		xpAward = Maintenance:1,
+        time = 200,
+        inputs
+        {
+            item 1 [Base.SteelBarQuarter;Base.SteelRodQuarter;Base.IronBarQuarter;5:Base.IronScrap;4:Base.SteelScrap;2:Base.ScrapMetal;Base.UnusableMetal] flags[Prop2;InheritCondition;DontReplace],
+            item 1 tags[whetstone;file] mode:keep flags[MayDegradeHeavy;Prop1],
+            item 1 [Base.SharpedStone;KatanaZ.SharpedStones] mode:destroy,
+            item 1 [Base.Twine;Base.RippedSheets;Base.DenimStrips;Base.LeatherStrips],
+        }
+        outputs
+        {
+            item 1 Base.MagnesiumFirestarter,
+        }
+    }
+
+    craftRecipe Make Glue Tape
+    {
+        category = Ancient Survival,
+        Tags = AnySurfaceCraft,
+        timedAction = MixingBowl,
+        time = 90,
+        inputs
+        {
+            item 2 [KatanaZ.BoneGlue;Base.Glue;Base.Woodglue] mode:destroy,
+            item 1 [Base.RippedSheets],
+			item 1 tags[mixingutensil] mode:keep,
+			item 1 [Base.Bowl] mode:keep,			
+        }
+        outputs
+        {
+            item 1 Base.DuctTape flags[HasOneUse],
+        }
+    }
+
+    craftRecipe Repair With Glue
+    {
+        category = Repair,
+        Tags = AnySurfaceCraft,
+        xpAward = Maintenance:2,
+        timedAction = CraftWeapon1H,
+        time = 200,
+        AllowBatchCraft = false,
+        OnCreate = RecipeCodeOnCreate.genericFixing,
+        Tooltip = Tooltip_Recipe_CanFailAndDamage,
+        inputs
+        {
+            item 1 tags[repairwithglue] mode:keep flags[Prop2;IsDamaged],
+            item 2 tags[glue] flags[Prop1],
+        }
+        outputs
+        {
+		
+        }
+    }
+
+    craftRecipe Make Ancient Candles
+    {
+        category = Ancient Survival,
+        Tags = InHandCraft;CanBeDoneInDark,
+        timedAction = CraftWeapon1H,
+        time = 400,
+        inputs
+        {
+            item 1 [Base.TinCanEmpty;Base.WaterRationCanEmpty] mode:keep flags[IsEmpty],
+            item 6 [Base.Lard;Base.Butter],
+            item 2 [Base.Twine],
+        }
+        outputs
+        {
+            item 2 Base.Candle,
+        }
+    }
+
+	craftRecipe Check Can
+	{
+        category = Ancient Survival,
+		Tags = InHandCraft,
+        timedAction = Making,
+		time = 65,
+		RemoveResultItem:true,
+		AllowBatchCraft = false,
+		OnCreate = KZCanPool_OnCreate,
+		inputs
+		{
+			item 1 [KatanaZ.TinCanTreasure],
+		}
+		outputs
+		{
+			item 1 Base.TinCanEmpty,
+		}
+	}
+
+    craftRecipe Scrape Wood For Bark
+    {
+        category = Ancient Survival,
+        Tags = InHandCraft;CanBeDoneInDark,
+        NeedToBeLearn = false,
+        xpAward = Carving:5;Maintenance:2,
+        timedAction = SharpenStakeWood,
+        time = 300,
+        inputs
+        {
+            item 1 tags[sharpknife;meatcleaver;crudechisel;masonschisel] mode:keep flags[MayDegradeHeavy;Prop1],
+            item 1 [Base.Splinters;Base.UnusableWood;Base.Twigs] flags[Prop2],
+        }
+        outputs
+        {
+            item 2 KatanaZ.PineShavings,
+        }
+    }
+
+    craftRecipe Whittle Wood
+    {
+        category = Ancient Survival,
+        Tags = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        NeedToBeLearn = false,
+        xpAward = Carving:5;Maintenance:2,
+        timedAction = SharpenStakeWood,
+        time = 400,
+        inputs
+        {
+            item 1 tags[sharpknife;meatcleaver] mode:keep flags[MayDegradeHeavy;IsNotDull;Prop1],
+            item 1 [Base.TreeBranch2;Base.Handle;Base.LongStick_Broken;Base.WoodenStick2;Base.LongHandle_Broken;Base.LongHandle;Base.LongStick;Base.Plunger;Base.Branch_Broken] flags[AllowDestroyedItem;Prop2],
+        }
+        outputs
+        {
+            item 2 Base.Splinters,
+        }
+    }
+
+    craftRecipe Make Primitive Snare Trap
+    {
+        category = Ancient Tools,
+        Tags = InHandCraft,
+        xpAward = Woodwork:5;Maintenance:2,
+        timedAction = SharpenStakeWood,
+        time = 130,
+        inputs
+        {
+            item 1 tags[sharpknife] mode:keep flags[MayDegradeHeavy;IsNotDull;Prop1],
+            item 1 [Base.Plank] flags[Prop2],
+			item 1 [Base.FishingHook_Bone;Base.Paperclip;Base.Nails;Base.FishingHook;KatanaZ.WoodenHook;KatanaZ.PrimitiveHook;KatanaZ.PrimitiveTwineHook] mode:destroy,
+            item 2 [Base.Twine],
+        }
+        outputs
+        {
+            item 1 Base.TrapSnare,
+        }
+    }
+
+    craftRecipe Unbundle Firewood (Rope)
+    {
+        timedAction = Making,
+        time = 60,
+        OnCreate = RecipeCodeOnCreate.splitLogStack,
+        Tags = InHandCraft;CanBeDoneFromFloor;CanBeDoneInDark,
+        category = Carpentry,
+        inputs
+        {
+            item 1 [Base.FirewoodBundle] flags[Prop2],
+        }
+        outputs
+        {
+            item 6 Base.Firewood,
+			item 1 Base.Rope,
+        }
+    }
+
+    craftRecipe Whittle Large Branch
+    {
+        category = Ancient Survival,
+        Tags = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        NeedToBeLearn = false,
+        xpAward = Carving:10;Maintenance:1,
+        timedAction = SharpenStakeWood,
+        time = 700,
+        inputs
+        {
+            item 1 tags[sharpknife;meatcleaver] mode:keep flags[MayDegradeHeavy;IsNotDull;Prop1],
+            item 1 [Base.LargeBranch] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 4 Base.Splinters,
+			item 1 Base.Firewood,
+        }
+    }
+
+    craftRecipe Whittle Firewood
+    {
+        category = Ancient Survival,
+        Tags = InHandCraft;CanBeDoneInDark;CanBeDoneFromFloor,
+        NeedToBeLearn = false,
+        xpAward = Carving:10;Maintenance:1,
+        timedAction = SharpenStakeWood,
+        time = 500,
+        inputs
+        {
+            item 1 tags[sharpknife;meatcleaver] mode:keep flags[MayDegradeHeavy;IsNotDull;Prop1],
+            item 1 [Base.Firewood] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 3 Base.Splinters,
+        }
+    }
+	
+	craftRecipe Make Digging Branch
+	{
+        category = Ancient Survival,
+        Tags = InHandCraft,
+        NeedToBeLearn = false,
+        SkillRequired = Maintenance:1;Strength:2,
+        xpAward = Maintenance:2,
+        timedAction = CraftWeapon1H,
+		time = 230,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+		{
+			item 1 [Base.LargeBranch] mode:destroy flags[Prop1],
+			item 1 tags[sharpknife;crudechisel;masonschisel] mode:keep flags[Prop2;MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 KatanaZ.DiggingBranch,
+		}
+	}
+
+    craftRecipe Carve Wooden Mugs
+    {
+        time = 300,
+        Tags = AnySurfaceCraft,
+        xpAward = Carving:15;Maintenance:1,
+        timedAction = SharpenStakeWood,
+        category = Carving,
+        inputs
+        {
+            item 1 tags[sharpknife] mode:keep flags[Prop1;IsNotDull;MayDegradeHeavy],
+            item 1 [Base.Log] flags[Prop2],
+            item 2 [Base.SmallHandle],			
+        }
+        outputs
+        {
+            item 2 KatanaZ.Woodenmug,
+        }
+    }
+	
+    craftRecipe Assemble Clay Hammer
+    {
+        category = Ancient Tools,
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = false,
+        SkillRequired = Maintenance:1,
+        xpAward = Maintenance:2,
+        timedAction = CraftWeapon1H,
+        time = 230,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 [Base.SmallHandle;Base.TreeBranch2] flags[Prop2;InheritCondition],
+            item 1 [KatanaZ.ClayBlockPierced] flags[Prop1;IsHeadPart],
+            item 1 tags[simpleweaponbinding] flags[DontReplace],
+			item 1 tags[glue] flags[DontReplace],
+            item 1 tags[sharpknife;crudechisel;masonschisel] mode:keep flags[IsNotDull;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 KatanaZ.HammerClay,
+        }
+    }
+
+    craftRecipe Assemble Ancient Smithing Hammer
+    {
+        category = Ancient Tools,
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = true,
+        SkillRequired = Maintenance:1,
+        AutoLearnAll = Blacksmith:1,
+        xpAward = Blacksmith:5;Maintenance:1,
+        timedAction = CraftWeapon1H,
+        time = 300,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 [Base.SmallHandle;Base.TreeBranch2] flags[Prop2],
+			item 1 [KatanaZ.BallPeenHammerHeadCasted] mode:destroy flags[InheritCondition;IsHeadPart],
+			item 1 tags[simpleweaponbinding] flags[DontReplace;Prop1],
+			item 1 tags[glue] flags[DontReplace],
+        }
+        outputs
+        {
+            item 1 KatanaZ.AncientHammerCasted,
+        }
+    }
+
+    craftRecipe Assemble Ancient Trowel
+    {
+        category = Ancient Tools,
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = true,
+        SkillRequired = Maintenance:1,
+        AutoLearnAll = Blacksmith:1,
+        xpAward = Blacksmith:5;Maintenance:1,
+        timedAction = CraftWeapon1H,
+        time = 400,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 [Base.SmallHandle;Base.TreeBranch2] flags[Prop2],
+			item 1 [Base.MasonsTrowel_Wood] mode:destroy flags[InheritCondition;IsHeadPart],
+			item 1 tags[simpleweaponbinding] flags[DontReplace;Prop1],
+			item 1 tags[glue] flags[DontReplace],	
+		}
+        outputs
+        {
+            item 1 KatanaZ.AncientTrowel,
+        }
+    }
+
+    craftRecipe Pick Rope For Thread
+    {
+        timedAction = SewingCloth,
+        time = 400,
+        NeedToBeLearn = false,		
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Ancient Survival,			
+        SkillRequired = Tailoring:2,
+		xpAward = Tailoring:10;Maintenance:2,
+		AllowBatchCraft = false,		
+        inputs
+        {
+            item 1 [Base.Rope] flags[Prop2] mode:destroy,
+            item 1 tags[sewingneedle;tweezers;awl] mode:destroy flags[Prop1],
+        }
+        outputs
+        {
+            item 1 Base.Thread,
+        }
+    }	
+
+    craftRecipe Pick Twine For Thread
+    {
+        timedAction = SewingCloth,
+        time = 200,
+        NeedToBeLearn = false,		
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Ancient Survival,
+		xpAward = Tailoring:5;Maintenance:1,
+		AllowBatchCraft = true,		
+        inputs
+        {
+            item 1 [Base.Twine] flags[Prop2],
+            item 1 tags[sewingneedle;tweezers;awl] mode:keep flags[Prop1],
+        }
+        outputs
+        {
+            item 1 Base.Thread flags[HasOneUse],
+        }
+    }	
+
+	craftRecipe Sew Piece of Burlap
+    {
+        timedAction = SewingCloth,
+        time = 400,
+        Tags = InHandCraft,
+        category = Ancient Survival,
+        xpAward = Tailoring:15;Maintenance:1,
+        NeedToBeLearn = false,
+        inputs
+        {
+            item 1 tags[sewingneedle] mode:keep flags[MayDegradeLight],
+            item 5 tags[thread],
+			item 2 [Base.RippedSheets] flags[IsExclusive],
+			item 2 [Base.DuctTape;Base.LeatherStrips;Base.DenimStrips] mode:destroy flags[DontReplace;IsExclusive],
+        }
+        outputs
+        {
+            item 1 Base.BurlapPiece,
+        }
+    }
+
+	craftRecipe Drill Holes In Planks
+    {
+        time = 400,
+        timedAction = Making,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Strength:2,		
+        xpAward = Carving:10;Maintenance:2,		
+        category = Ancient Survival,
+        inputs
+		{
+			item 4 [Base.Plank],
+            item 1 tags[drillwood;drillmetal;drillwoodpoor] mode:keep flags[MayDegradeHeavy],
+			item 2 tags[glue],
+            item 1 tags[hammer;clubhammer;smithinghammer;hammerstone] mode:keep flags[MayDegradeHeavy],
+		}
+		outputs
+		{
+			item 5 Base.Splinters,
+			item 1 Base.Mov_WoodPegboard,
+		}
+	}
+	
+	craftRecipe Plant Bonsai Tree
+	{
+        time = 400,
+        timedAction = Making,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Strength:2,		
+        xpAward = Carving:10;Maintenance:2,		
+        category = Ancient Survival,
+        inputs
+		{
+			item 1 [Base.ClayIngotMold] mode:destroy flags[AllowDestroyedItem],
+			item 1 [Base.Dirtbag],
+            item 1 tags[diggrave] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[scissors] mode:keep flags[IsNotDull;MayDegradeHeavy],
+			item 1 [Base.TreeBranch2] mode:destroy,
+		}
+		outputs
+		{
+			item 2 Base.Splinters,		
+			item 1 Base.Mov_BonsaiTree,
+		}
+	}	
+	
+    craftRecipe Salvage Object
+    {
+        timedAction = Making,
+        time = 200,
+        Tags = InHandCraft,
+		xpAward = Maintenance:1,
+        category = Ancient Survival,
+        inputs
+        {
+            item 1 [Base.Leash],
+        }
+        outputs
+        {
+            item 1 Base.Wire flags[HasOneUse],
+			item 1 Base.Buckle,
+			item 1 Base.LeatherStrips,
+        }
+    }
+
+	craftRecipe Glue Paper Bag
+	{
+		timedAction = Making,
+		time = 100,
+		Tags = AnySurfaceCraft,
+		xpAward = Maintenance:1,
+		category = Ancient Survival,
+		inputs
+		{
+			item 1 tags[glue],
+			item 1 tags[mixingutensil] mode:keep,
+			item 4 [Base.SheetPaper2],
+		}
+		outputs
+		{
+			item 1 Base.PaperBag,
+		}
+	}
+
+    craftRecipe Chop and Wrap Firewood Bundle
+    {
+        timedAction = MakingHammer_Surface,
+        time = 200,
+		SkillRequired = Strength:3,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+		xpAward	= Maintenance:1,
+        category = Ancient Survival,
+        inputs
+        {
+            item 1 [Base.Log] flags[Prop2],
+            item 1 tags[choptree] mode:keep flags[IsNotDull;MayDegradeLight;Prop1],
+            item 1 tags[rope],
+        }
+        outputs
+        {
+            item 1 Base.FirewoodBundle,
+			item 1 Base.Splinters,
+        }
+    }
+
+    craftRecipe Carve Primitive Bowls
+    {
+        time = 400,
+        Tags = AnySurfaceCraft,
+        xpAward = Carving:5,
+        SkillRequired = Carving:1;Maintenance:3,
+        NeedToBeLearn = true,
+        timedAction = SharpenStakeWood,
+        category = Ancient Tools,
+        AutoLearnAny = Carving:2,
+        inputs
+        {
+            item 1 tags[sharpknife] mode:keep flags[Prop1;IsNotDull;MayDegradeHeavy],
+            item 1 [Base.Log] flags[Prop2],
+            item 1 tags[crudechisel;masonschisel;metalworkingchisel] mode:keep flags[MayDegradeHeavy],			
+            item 1 tags[hammer;clubhammer;smithinghammer;hammerstone] mode:keep flags[MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 2 Base.Bowl,
+        }
+    }
+
+    craftRecipe Carve Primitive Bucket
+    {
+        time = 500,
+        Tags = AnySurfaceCraft,
+        xpAward = Carving:10;Maintenance:3,
+        SkillRequired = Carving:1,
+        NeedToBeLearn = true,
+        timedAction = SharpenStakeWood,
+        category = Ancient Tools,
+        AutoLearnAny = Carving:2,
+        inputs
+        {
+            item 1 tags[sharpknife] mode:keep flags[Prop1;IsNotDull;MayDegradeHeavy],
+            item 1 [Base.Log] flags[Prop2],
+            item 1 tags[crudechisel;masonschisel;metalworkingchisel] mode:keep flags[MayDegradeHeavy],			
+            item 1 tags[hammer;clubhammer;smithinghammer;hammerstone] mode:keep flags[MayDegradeHeavy],
+            item 1 tags[simpleweaponbinding],
+            item 1 [Base.Handle;Base.TreeBranch2;Base.WoodenStick2],
+        }
+        outputs
+        {
+            item 1 Base.BucketCarved,
+        }
+    }
+
+    craftRecipe Make Primitive Bucket
+    {
+        timedAction = Making,
+        time = 450,
+        category = Ancient Tools,
+        Tags = AnySurfaceCraft;Carpentry,
+        xpAward = Woodwork:10;Maintenance:2,
+        SkillRequired = Woodwork:2,
+        inputs
+        {
+            item 1 tags[hammer;clubhammer;smithinghammer;hammerstone] mode:keep flags[MayDegradeHeavy],
+            item 1 tags[saw;smallsaw;crudesaw] mode:keep flags[MayDegradeHeavy;Prop1],
+            item 2 [Base.Plank;Base.Log] flags[Prop2],
+            item 4 tags[concrete],
+            item 1 tags[simpleweaponbinding],
+            item 1 [Base.SmallHandle;Base.TreeBranch2],
+            item 2 [Base.Twine],
+        }
+        outputs
+        {
+            item 1 Base.BucketCarved,
+        }
+    }
+
+    craftRecipe Make Primitive Wooden Bucket
+    {
+        timedAction = Making,
+        time = 450,
+        category = Ancient Tools,
+        Tags = AnySurfaceCraft;Carpentry,
+        xpAward = Woodwork:5;Maintenance:2,
+        SkillRequired = Woodwork:2,
+        inputs
+        {
+            item 1 tags[hammer;clubhammer;smithinghammer;hammerstone] mode:keep flags[MayDegradeHeavy],
+            item 1 tags[saw;smallsaw;crudesaw] mode:keep flags[MayDegradeHeavy;Prop1],
+            item 4 [Base.Plank] flags[Prop2],
+            item 4 tags[concrete],
+            item 2 [Base.Twine],
+            item 1 [Base.SmallHandle;Base.TreeBranch2],
+            item 1 tags[awl],
+        }
+        outputs
+        {
+            item 1 Base.BucketLargeWood,
+        }
+    }
+			
+	craftRecipe Smash Compass
+	{
+		category = Ancient Smithing,
+		Tags = InHandCraft;CanBeDoneInDark,
+		timedAction = Making,
+		xpAward = Maintenance:1,
+		time = 90,
+		inputs
+		{
+			item 1 tags[hammerstone;hammer] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 [Base.CompassDirectional] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.BrokenGlass,
+			item 1 Base.UnusableMetal,
+		}
+	}		
+	
+    craftRecipe Make Ancient Saw
+    {
+		category = Ancient Tools,		
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = false,
+        SkillRequired = FlintKnapping:1;Blacksmith:1;Strength:2,
+        xpAward = FlintKnapping:5;Blacksmith:5;Maintenance:3,
+        timedAction = MakingHammer_Surface,	
+        time = 430,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+        inputs
+        {
+            item 1 [Base.TreeBranch2;Base.Handle] flags[Prop2;InheritCondition],		
+            item 1 tags[sharpknife] mode:keep flags[MayDegradeHeavy],			
+			item 2 [Base.CopperScrap;Base.SteelScrap;Base.IronScrap] flags[DontReplace],
+            item 2 tags[simpleweaponbinding] flags[DontReplace],
+			item 1 tags[glue],
+            item 1 tags[hammer;clubhammer;mallet;hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 KatanaZ.AncientSaw,
+        }
+    }
+
+    craftRecipe Make Ancient Stone Saw
+    {
+		category = Ancient Tools,		
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = false,
+        SkillRequired = FlintKnapping:1;Strength:3,
+        xpAward = FlintKnapping:5;Blacksmith:5;Maintenance:3,
+        timedAction = MakingHammer_Surface,	
+        time = 230,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+        inputs
+        {
+            item 1 [Base.TreeBranch2;Base.Handle] flags[Prop2;InheritCondition],		
+            item 1 tags[sharpknife] mode:keep flags[MayDegradeHeavy],			
+			item 3 [Base.SharpedStone;KatanaZ.SharpedStones] mode:destroy,
+            item 2 tags[simpleweaponbinding] flags[DontReplace],
+            item 1 tags[hammer;clubhammer;mallet;hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 KatanaZ.AncientSaw,
+        }
+    }
+
+    craftRecipe Harden Brick Mold
+    {
+        category = Ancient Pottery,
+        Tags = AnySurfaceCraft;Pottery;CanBeDoneFromFloor,
+		SkillRequired = Strength:2,
+        xpAward = Woodwork:5;Maintenance:3,
+        timedAction = SawLogs,
+        time = 350,
+        inputs
+        {
+            item 1 tags[saw;smallsaw;crudesaw] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[hammer;clubhammer;mallet;smithinghammer;hammerstone] mode:keep flags[MayDegradeVeryLight],
+            item 2 [Base.Plank] flags[Prop2],
+			item 1 tags[crudechisel;masonschisel] flags[MayDegradeLight],			
+            item 1 tags[concrete],
+        }
+        outputs
+        {
+            item 1 Base.WoodenBrickMold,
+        }
+    }
+
+    craftRecipe Harden Wooden Ingot Cast Mold
+    {
+        category = Ancient Pottery,
+        Tags = AnySurfaceCraft;Pottery;CanBeDoneFromFloor,
+		SkillRequired = Strength:2,
+        xpAward = Woodwork:5;Maintenance:2,
+        timedAction = SawLogs,
+        time = 350,
+        inputs
+        {
+            item 1 tags[hammer;clubhammer;mallet;smithinghammer;hammerstone] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[saw;smallsaw;crudesaw] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 [Base.Plank] flags[Prop2],
+            item 1 tags[concrete],
+        }
+        outputs
+        {
+            item 1 Base.WoodenIngotCastMold,
+        }
+    }
+
+    craftRecipe Harden Wooden Crucible Mold
+    {
+        category = Ancient Pottery,
+        Tags = AnySurfaceCraft;Carpentry;CanBeDoneFromFloor,
+        SkillRequired = Woodwork:1;Strength:2,
+        xpAward = Woodwork:5;Maintenance:3,
+        timedAction = Making,
+        time = 350,
+        inputs
+        {
+            item 1 tags[hammer;clubhammer;mallet;smithinghammer;hammerstone] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[saw;smallsaw;crudesaw] mode:keep flags[MayDegradeHeavy;Prop1],
+            item 2 [Base.Plank] flags[Prop2],
+			item 1 tags[crudechisel;masonschisel] flags[MayDegradeLight],
+            item 2 tags[concrete],
+        }
+        outputs
+        {
+            item 1 Base.WoodenCrucibleMold,
+        }
+    }
+
+    craftRecipe Harden Wooden Blacksmith Anvil Mold
+    {
+        category = Ancient Pottery,
+        Tags = AnySurfaceCraft;Carpentry;CanBeDoneFromFloor,
+        SkillRequired = Woodwork:2;Strength:2,
+        xpAward = Woodwork:5;Maintenance:3,
+        timedAction = Making,
+        time = 450,
+        inputs
+        {
+            item 1 tags[hammer;clubhammer;mallet;smithinghammer;hammerstone] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[saw;smallsaw;crudesaw] mode:keep flags[MayDegradeLight;Prop1],
+            item 4 [Base.Plank] flags[Prop2],
+			item 1 tags[crudechisel;masonschisel] flags[MayDegradeLight],
+            item 2 tags[concrete],
+        }
+        outputs
+        {
+            item 1 Base.WoodenBlacksmithAnvilMold,
+        }
+    }
+	
+    craftRecipe Assemble Ancient Hatchet
+    {
+        category = Ancient Tools,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:1,
+        xpAward = Maintenance:2,
+        timedAction = ChoppingBlock_Hammer,
+        time = 100,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 tags[hammer;clubhammer;mallet;hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[sharpknife] mode:keep flags[SharpnessCheck;IsNotDull],
+            item 1 [KatanaZ.AncientAxeHead] flags[IsHeadPart;InheritSharpness],
+            item 1 [Base.Handle] flags[Prop2;InheritCondition],
+        }
+        outputs
+        {
+            item 1 KatanaZ.AncientAxe,
+        }
+	}
+
+    craftRecipe Assemble Primitive Hatchet
+    {
+        category = Ancient Tools,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:1,
+        xpAward = Maintenance:2,
+        timedAction = SharpenStakeWood,
+        time = 200,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 [Base.JawboneBovide] flags[IsHeadPart],
+			item 1 tags[simpleweaponbinding],
+			item 1 tags[glue] flags[DontReplace],
+            item 1 tags[sharpknife] mode:keep flags[Prop1;SharpnessCheck;IsNotDull],
+            item 1 [Base.Handle;Base.TreeBranch2] flags[Prop2;InheritCondition],
+        }
+        outputs
+        {
+            item 1 KatanaZ.PrimitiveAxe flags[IsBlunt],
+        }
+	}
+}
+			
