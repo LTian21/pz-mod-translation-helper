@@ -1,0 +1,519 @@
+module Base
+{
+    craftRecipe Cast Metal Ingot Mold
+    {
+        category = Ancient Smithing,
+        Tags = PrimitiveFurnace,
+		xpAward = Maintenance:2,
+        SkillRequired = Blacksmith:2,		
+		timedAction = Making,
+        time = 200,
+        inputs
+        {
+            item 12 [Base.CeramicCrucible_Iron;Base.CeramicCrucible_Steel] flags[ItemCount]  mappers[SmeltMapper],
+            item 1 tags[crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 2 tags[charcoal],
+            item 1 [KatanaZ.ClayIngotCast] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 1 mapper:SmeltMapper,
+        }
+        itemMapper SmeltMapper
+        {
+			Base.CeramicCrucible_Steel = Base.SteelIngotMold,
+			Base.CeramicCrucible_Iron = Base.IronIngotMold,
+            default = Base.IronIngotMold,
+        }
+    }
+	
+	craftRecipe Cast Steel Rod
+    {
+		category = Ancient Smithing,
+        Tags = Furnace,
+		xpAward = Maintenance:1,
+        time = 300,
+        inputs
+        {
+            item 12 [Base.CeramicCrucible_Steel;Base.CeramicCrucibleSmall_Steel] flags[ItemCount],
+            item 1 tags[crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 4 tags[charcoal],
+            item 1 [KatanaZ.ClayRodMold] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.MetalBar,
+        }
+    }
+
+    craftRecipe Smelt Steel Ingot
+    {
+		category = Ancient Smithing,
+        Tags = Furnace,
+        time = 200,
+		xpAward = Maintenance:1,		
+        OnCreate = RecipeCodeOnCreate.smeltIronOrSteelMedium,
+        inputs
+        {
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall;Base.CeramicCrucible_Steel;Base.CeramicCrucibleSmall_Steel] mode:destroy flags[NotFull;ItemCount] mappers[SmeltMapper],
+            item 1 tags[crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 2 tags[log;charcoal],
+            item 1 tags[startfire],			
+            item 1 [Base.SteelIngot] mode:destroy flags[ItemCount],
+        }
+        outputs
+        {
+            item 1 mapper:SmeltMapper,
+        }
+        itemMapper SmeltMapper
+        {
+			Base.CeramicCrucible_Steel = Base.CeramicCrucible_Steel,
+			Base.CeramicCrucible_Steel = Base.CeramicCrucible,
+            Base.CeramicCrucibleSmall_Steel = Base.CeramicCrucibleSmall,
+            Base.CeramicCrucibleSmall_Steel = Base.CeramicCrucibleSmall_Steel,
+            default = Base.CeramicCrucible_Steel,
+        }
+    }
+	
+    craftRecipe Cast Steel Ingots
+    {
+		category = Ancient Smithing,
+        Tags = Furnace,
+		SkillRequired = Blacksmith:4,
+		xpAward = Blacksmith:15;Maintenance:1,
+        time = 400,
+        inputs
+        {
+            item 2 [KatanaZ.BronzeIngot;Base.BrassIngot],
+            item 12 [Base.CeramicCrucible_Iron;Base.CeramicCrucibleSmall_Iron] flags[ItemCount],
+            item 1 tags[crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 4 tags[charcoal],
+            item 1 [Base.ClayIngotMold;Base.IronIngotMold;Base.SteelIngotMold] mode:keep,			
+        }
+        outputs
+        {
+            item 2 Base.SteelIngot,
+        }
+    }
+
+    craftRecipe Cast Silver Ingot
+    {
+		category = Ancient Smithing,	
+        Tags = Furnace,
+        SkillRequired = Blacksmith:3,		
+        xpAward = Blacksmith:15;Maintenance:1,
+        time = 200,
+		AllowBatchCraft = false,		
+        inputs
+        {
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],		
+            item 16 [Base.SilverScrap],
+            item 1 tags[startfire],				
+            item 1 tags[metalworkingpliers;crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 3 tags[charcoal],
+            item 1 [Base.ClayIngotMold;Base.IronIngotMold;Base.SteelIngotMold] mode:keep,
+        }
+        outputs
+        {
+            item 1 	Base.SilverBar,
+        }
+    }
+
+    craftRecipe Cast Tin Ingot
+    {
+		category = Ancient Smithing,	
+        Tags = PrimitiveFurnace,
+        SkillRequired = Blacksmith:2,		
+        xpAward = Blacksmith:5;Maintenance:1,
+        time = 200,
+		AllowBatchCraft = false,		
+        inputs
+        {
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],		
+            item 8 [KatanaZ.TinScrap],
+            item 1 tags[startfire],				
+            item 1 tags[metalworkingpliers;crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 1 tags[charcoal],
+            item 1 [Base.ClayIngotMold;Base.IronIngotMold;Base.SteelIngotMold] mode:keep,
+        }
+        outputs
+        {
+            item 1 	KatanaZ.TinIngot,
+        }
+    }
+
+    craftRecipe Cast Bronze Ingot
+    {
+		category = Ancient Smithing,	
+        Tags = PrimitiveFurnace,
+        SkillRequired = Blacksmith:2,		
+        xpAward = Blacksmith:5;Maintenance:1,
+        time = 250,
+		AllowBatchCraft = false,		
+        inputs
+        {
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],		
+            item 2 [KatanaZ.TinIngot],
+            item 1 [Base.CopperIngot],
+            item 1 tags[startfire],				
+            item 1 tags[metalworkingpliers;crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 2 tags[charcoal],
+            item 1 [Base.ClayIngotMold;Base.IronIngotMold;Base.SteelIngotMold] mode:keep,
+        }
+        outputs
+        {
+            item 1 	KatanaZ.BronzeIngot,
+        }
+    }
+
+    craftRecipe Cast Brass Ingot
+    {
+		category = Ancient Smithing,	
+        Tags = PrimitiveFurnace,
+        SkillRequired = Blacksmith:2,		
+        xpAward = Blacksmith:5;Maintenance:1,
+        time = 250,
+		AllowBatchCraft = false,		
+        inputs
+        {
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],		
+            item 2 [KatanaZ.AluminumIngot],
+            item 1 [Base.CopperIngot],
+            item 1 tags[startfire],				
+            item 1 tags[metalworkingpliers;crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 2 tags[charcoal],
+            item 1 [Base.ClayIngotMold;Base.IronIngotMold;Base.SteelIngotMold] mode:keep,
+        }
+        outputs
+        {
+            item 1 	Base.BrassIngot,
+        }
+    }
+
+    craftRecipe Cast Aluminum Ingot
+    {
+		category = Ancient Smithing,	
+        Tags = PrimitiveFurnace,
+        SkillRequired = Blacksmith:1,		
+        xpAward = Blacksmith:5;Maintenance:1,
+        time = 200,
+		AllowBatchCraft = false,		
+        inputs
+        {
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],		
+            item 8 [Base.AluminumScrap],
+            item 1 tags[startfire],				
+            item 1 tags[metalworkingpliers;crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 1 tags[charcoal],
+            item 1 [Base.ClayIngotMold;Base.IronIngotMold;Base.SteelIngotMold] mode:keep,
+        }
+        outputs
+        {
+            item 1 	KatanaZ.AluminumIngot,
+        }
+    }
+
+    craftRecipe Press Aluminum Ingot
+    {
+        time = 100,
+        timedAction = UseHandPress,
+        Tags = HandPress,
+        xpAward = Blacksmith:1,
+		category = Ancient Smithing,
+        inputs
+        {
+            item 1 [KatanaZ.AluminumIngot],
+        }
+        outputs
+        {
+            item 2 Base.Aluminum,
+        }
+    }
+
+    craftRecipe Press Copper Ingot
+    {
+        time = 100,
+        timedAction = UseHandPress,
+        Tags = HandPress,
+        xpAward = Blacksmith:1,
+		category = Ancient Smithing,
+        inputs
+        {
+            item 1 [Base.CopperIngot],
+        }
+        outputs
+        {
+            item 1 Base.CopperSheet,
+        }
+    }
+	
+    craftRecipe Cast Gold Ingot
+    {
+		category = Ancient Smithing,
+        Tags = Furnace,
+        SkillRequired = Blacksmith:2,		
+        xpAward = Blacksmith:15;Maintenance:1,
+        time = 200,
+		AllowBatchCraft = false,		
+        inputs
+        {
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],		
+            item 16 [Base.GoldScrap],
+            item 1 tags[startfire],				
+            item 1 tags[metalworkingpliers;crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 3 tags[charcoal],
+            item 1 [Base.ClayIngotMold;Base.IronIngotMold;Base.SteelIngotMold] mode:keep,
+        }
+        outputs
+        {
+            item 1 	Base.GoldBar,
+        }
+    }	
+	
+    craftRecipe Cast Copper Ingot
+    {		
+		category = Ancient Smithing,	
+        Tags = PrimitiveFurnace,
+        SkillRequired = Blacksmith:2,		
+        xpAward = Blacksmith:5;Maintenance:1,
+        time = 200,
+		AllowBatchCraft = false,		
+        inputs
+        {
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],		
+            item 4 [Base.CopperScrap],
+            item 1 tags[startfire],				
+            item 1 tags[metalworkingpliers;crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 3 tags[charcoal],
+            item 1 [Base.ClayIngotMold;Base.IronIngotMold;Base.SteelIngotMold] mode:keep,
+        }
+        outputs
+        {
+            item 1 	Base.CopperIngot,
+        }
+    }	
+
+    craftRecipe Cast Steel Ingot
+    {		
+		category = Ancient Smithing,	
+        Tags = Furnace,
+        SkillRequired = Blacksmith:3,		
+        xpAward = Blacksmith:10;Maintenance:1,
+        time = 200,
+		AllowBatchCraft = false,		
+        inputs
+        {
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],		
+            item 2 [Base.ScrapMetal;1:KatanaZ.BronzeIngot;1:Base.BrassIngot] flags[DontReplace],
+            item 1 tags[startfire],
+            item 2 tags[charcoal],			
+            item 1 tags[metalworkingpliers;crudetongs;tongs] mode:keep flags[MayDegradeLight],
+			item 2 [KatanaZ.LowCarbonChunk;1:KatanaZ.HighCarbonChunk] flags[DontReplace],			
+            item 1 [Base.ClayIngotMold;Base.IronIngotMold;Base.SteelIngotMold] mode:keep,
+        }
+        outputs
+        {
+            item 1 	Base.SteelIngot,
+        }
+    }	
+	
+    craftRecipe Smelt Small Iron Item
+    {
+        time = 200,
+        Tags = PrimitiveFurnace,
+        category = Blacksmithing,
+		xpAward = Maintenance:1,
+        OnCreate = RecipeCodeOnCreate.smeltIronOrSteelSmall,
+        inputs
+        {
+            item 1 [Base.CeramicCrucibleSmall;Base.CeramicCrucibleSmall_Iron] mode:destroy flags[NotFull;ItemCount] mappers[SmeltMapper],
+            item 1 tags[crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 2 tags[charcoal],
+            item 1 tags[smeltableironsmall] mode:destroy flags[ItemCount;AllowDestroyedItem],
+        }
+        outputs
+        {
+            item 1 mapper:SmeltMapper,
+        }
+        itemMapper SmeltMapper
+        {
+            Base.CeramicCrucibleSmall_Iron = Base.CeramicCrucibleSmall,
+            Base.CeramicCrucibleSmall_Iron = Base.CeramicCrucibleSmall_Iron,
+            default = Base.CeramicCrucibleSmall_Iron,
+        }
+    }
+	
+	    craftRecipe Smelt Iron Ingot
+    {
+		category = Ancient Smithing,
+        Tags = PrimitiveFurnace,
+        time = 200,
+		xpAward = Maintenance:1,
+        OnCreate = RecipeCodeOnCreate.smeltIronOrSteelMedium,
+        inputs
+        {
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall;Base.CeramicCrucible_Iron;Base.CeramicCrucibleSmall_Iron] mode:destroy flags[NotFull;ItemCount] mappers[SmeltMapper],
+            item 1 tags[crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 2 tags[charcoal],
+			item 1 tags[startfire],
+            item 1 [Base.IronIngot] mode:destroy flags[ItemCount],
+        }
+        outputs
+        {
+            item 1 mapper:SmeltMapper,
+        }
+        itemMapper SmeltMapper
+        {
+			Base.CeramicCrucible_Iron = Base.CeramicCrucible_Iron, 
+			Base.CeramicCrucible_Iron = Base.CeramicCrucible,
+            Base.CeramicCrucibleSmall_Iron = Base.CeramicCrucibleSmall,
+            Base.CeramicCrucibleSmall_Iron = Base.CeramicCrucibleSmall_Iron,
+            default = Base.CeramicCrucible_Iron,
+        }
+    }
+
+	craftRecipe Smelt Molten Steel
+    {
+		category = Ancient Smithing,
+        Tags = Furnace,
+		SkillRequired = Blacksmith:4,
+		xpAward = Maintenance:1,
+        time = 280,
+        OnCreate = RecipeCodeOnCreate.smeltIronOrSteelMedium,
+        inputs
+        {
+            item 1 [Base.CeramicCrucible_Iron;Base.CeramicCrucibleSmall_Iron] mode:destroy flags[NotFull;ItemCount] mappers[SmeltMapper],
+            item 1 tags[crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 2 tags[charcoal],
+			item 1 tags[startfire],
+            item 2 [KatanaZ.BronzeIngot;Base.BrassIngot] mode:destroy flags[ItemCount],
+        }
+        outputs
+        {
+            item 1 mapper:SmeltMapper,
+        }
+        itemMapper SmeltMapper
+        {
+			Base.CeramicCrucible_Steel = Base.CeramicCrucible_Iron, 
+            Base.CeramicCrucibleSmall_Steel = Base.CeramicCrucibleSmall_Iron,
+            default = Base.CeramicCrucible_Steel,
+        }
+    }
+
+	craftRecipe Crush Can
+	{
+        category = Ancient Survival,
+		Tags = InHandCraft;CanBeDoneInDark,
+		SkillRequired = Strength:2,
+		timedAction = Making,
+		time = 120,
+		AllowBatchCraft = true,
+		inputs
+		{
+			item 1 [Base.PopEmpty;Base.Pop2Empty;Base.Pop3Empty;Base.BeerCanEmpty] mode:destroy flags[Prop1],
+		}
+		outputs
+		{
+			item 2 Base.AluminumFragments,
+		}
+	}
+
+	craftRecipe Cut Can
+	{
+        category = Ancient Survival,
+		Tags = AnySurfaceCraft,
+		SkillRequired = Blacksmith:2,
+		xpAward = Maintenance:1,
+		timedAction = SawSmallItemMetal,
+		time = 220,
+		AllowBatchCraft = true,
+		inputs
+		{
+			item 1 [Base.TinCanEmpty;Base.WaterRationCanEmpty] mode:destroy flags[Prop2],
+            item 1 tags[saw;smallsaw;crudesaw] mode:keep flags[MayDegradeHeavy;Prop1],			
+		}
+		outputs
+		{
+			item 2 KatanaZ.TinScrap,		
+		}
+	}
+
+    craftRecipe Cast Ball-Peen Hammer Head
+    {
+        category = Ancient Smithing,
+        Tags = PrimitiveFurnace,
+        SkillRequired = Blacksmith:1,		
+		xpAward = Maintenance:1,
+		timedAction = Making,
+        time = 200,
+        inputs
+        {
+            item 12 [Base.CeramicCrucible_Iron;Base.CeramicCrucibleSmall_Iron] flags[ItemCount],
+            item 1 tags[crudetongs;tongs] mode:keep flags[MayDegradeLight],
+            item 2 tags[charcoal],
+            item 1 [KatanaZ.Ball-PeenHeadMold] mode:keep flags[Prop2],
+        }
+        outputs
+        {
+            item 1 KatanaZ.BallPeenHammerHeadCasted,
+        }
+    }
+	
+    craftRecipe Extract Iron From Stone
+    {
+        time = 400,
+        Tags = PrimitiveFurnace,
+        category = Blacksmithing,
+		xpAward = Blacksmith:10;Maintenance:2,
+        inputs
+        {
+            item 1 [Base.CeramicCrucible] mode:keep flags[IsEmpty],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeHeavy],
+            item 4 tags[charcoal],
+            item 1 [Base.LargeStone] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.IronBloom,
+        }
+    }
+
+    craftRecipe Extract Iron From Stones
+    {
+        time = 400,
+        Tags = PrimitiveFurnace,
+        category = Blacksmithing,
+		xpAward = Blacksmith:15;Maintenance:2,
+        inputs
+        {
+            item 1 [Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeHeavy],
+            item 2 tags[charcoal],
+            item 4 [KatanaZ.SharpedStones] mode:destroy flags[ItemCount;AllowDestroyedItem],
+        }
+        outputs
+        {
+            item 2 Base.IronPiece,
+        }
+    }
+
+    craftRecipe Extract Copper From Stones
+    {
+        time = 400,
+        Tags = PrimitiveFurnace,
+        category = Blacksmithing,
+		SkillRequired = Blacksmith:2,
+		xpAward = Blacksmith:20;Maintenance:2,
+        inputs
+        {
+            item 1 [Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeHeavy],
+            item 2 tags[charcoal],
+            item 8 [KatanaZ.SharpedStones] mode:destroy flags[AllowDestroyedItem],
+        }
+        outputs
+        {
+            item 2 Base.CopperScrap,
+        }
+    }
+}	

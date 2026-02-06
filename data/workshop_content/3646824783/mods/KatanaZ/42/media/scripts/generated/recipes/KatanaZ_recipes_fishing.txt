@@ -1,0 +1,231 @@
+module Base
+{
+    craftRecipe Salvage Fishing Nets
+    {
+        timedAction = Making,
+        time = 200,
+        OnCreate = RecipeCodeOnCreate.dismantleFishingNet,
+        Tags = InHandCraft;Fishing,
+		xpAward = Fishing:1;Maintenance:1,
+        category = Fishing,
+        inputs
+        {
+            item 2 [Base.BrokenFishingNet] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.Wire flags[HasOneUse],
+        }
+    }
+	
+	craftRecipe Sift For Worms
+	{
+        category = Ancient Survival,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		timedAction = UnPackSack,
+		xpAward = Maintenance:1,
+		time = 250,
+		inputs
+		{
+			item 2 [Base.Dirtbag] flags[Prop2],
+			item 1 tags[fork;awl;fishinghook] mode:keep flags[MayDegradeVeryLight],
+            item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,
+			item 1 [Base.Plank;Base.PercedWood;Base.FlatStone] mode:keep,
+		}
+		outputs
+		{
+			item 2 Base.Worm,
+		}
+	}	
+
+	craftRecipe Sift For Bunch Of Worms
+	{
+        category = Ancient Survival,
+		Tags = InHandCraft;CanBeDoneFromFloor,
+		timedAction = UnPackSack,
+		xpAward = Maintenance:1,
+		time = 550,
+		inputs
+		{
+			item 4 [Base.Dirtbag] flags[Prop2],
+			item 1 tags[fork;awl;fishinghook] mode:keep flags[MayDegradeVeryLight],
+            item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,
+			item 1 tags[bowl;cookable] mode:keep flags[IsEmpty],
+		}
+		outputs
+		{
+			item 4 Base.Worm,
+		}
+	}		
+
+	craftRecipe Twist Wicker Basket
+	{
+		timedAction = Making,
+		time = 600,
+		Tags = InHandCraft,
+		category = Ancient Survival,
+		xpAward = Tailoring:5;Maintenance:1,
+		inputs
+		{
+			item 24 [Base.Twigs],
+			item 4 [Base.Twine],
+			item 1 tags[dullknife;sharpknife] mode:keep flags[Prop1;MayDegradeHeavy],
+		}
+		outputs
+		{
+			item 1 Base.Bag_BirthdayBasket,
+		}
+	}
+	
+	craftRecipe Sew Fishing Basket
+	{
+		timedAction = Making,
+		time = 600,
+		Tags = AnySurfaceCraft,
+		category = Ancient Survival,
+		SkillRequired = Tailoring:2;Fishing:2,
+		NeedToBeLearn = True,
+		AutoLearnAll = Fishing:2,
+		xpAward = Tailoring:5;Maintenance:1,
+		inputs
+		{
+			item 1 [Base.Bag_BirthdayBasket] mode:destroy,
+			item 4 [Base.Thread],
+			item 12 [Base.Twigs],
+			item 1 tags[dullknife;sharpknife] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[leathercrudetannedsmall;leatherfurtannedsmall] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.Bag_FishingBasket,
+		}
+	}	
+
+	craftRecipe Repair Fishing Net
+    {
+        timedAction = Making,
+        time = 250,
+        NeedToBeLearn = true,
+        Tags = InHandCraft;Fishing,
+        category = Fishing,
+		xpAward = Fishing:5;Maintenance:1,
+        AutoLearnAny = Fishing:1,
+        inputs
+        {
+            item 10 [Base.Twine],
+            item 5 [Base.Wire],
+			item 1 [Base.BrokenFishingNet],
+        }
+        outputs
+        {
+            item 1 Base.FishingNet,
+        }
+    }
+
+    craftRecipe Tie Primitive Hook
+    {
+        category = Ancient Survival,
+        Tags = InHandCraft,
+		xpAward = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        time = 200,
+        inputs
+        {
+            item 1 tags[sharpknife] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+			item 2 [Base.Twine],
+			item 1 [Base.SharpedStone;KatanaZ.SharpedStones] mode:destroy flags[Prop2],
+			item 1 [Base.AluminumFragments],
+        }
+        outputs
+        {
+            item 1 KatanaZ.PrimitiveHook,
+        }
+    }
+
+    craftRecipe Carve Wooden Hook
+    {
+        category = Ancient Survival,
+        Tags = InHandCraft;Survivalist,
+        NeedToBeLearn = true,
+        AutoLearnAny = Carving:1,
+        xpAward = Carving:2;Maintenance:1,
+        timedAction = SharpenStakeWood,
+        time = 300,
+        inputs
+        {
+            item 1 tags[sharpknife] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+            item 1 [Base.SmallHandle;Base.TreeBranch2] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 KatanaZ.WoodenHook,
+        }
+    }
+
+    craftRecipe Twist Twine Hook By Hand
+    {
+		category = Ancient Survival,
+        Tags = AnySurfaceCraft;CanBeDoneInDark,
+        timedAction = Making,
+		xpAward = Maintenance:1,
+        time = 340,
+        inputs
+        {
+            item 3 [Base.Twine] flags[Prop2],
+            item 1 tags[sharpknife;scissors] mode:keep flags[IsNotDull;MayDegradeHeavy],
+        }
+        outputs
+        {
+            item 1 KatanaZ.PrimitiveTwineHook,
+        }
+    }
+
+
+    craftRecipe Make Primitive Fishing Rod
+    {
+        category = Fishing,
+        Tags = InHandCraft;Fishing,
+        xpAward = Carving:5;Maintenance:2,
+        timedAction = SharpenStakeWood,
+        time = 380,
+        OnCreate = Fishing.onCreateFishingRod,
+        inputs
+        {
+            item 1 tags[sharpknife;meatcleaver] mode:keep flags[Prop1;MayDegradeLight;IsNotDull],
+            item 1 [Base.TreeBranch2],
+            item 2 tags[fishingline],
+            item 2 tags[simpleweaponbinding] flags[DontReplace],			
+            item 1 [Base.Paperclip;Base.Nails;Base.FishingHook;Base.FishingHook_Forged;Base.FishingHook_Bone;KatanaZ.PrimitiveHook;KatanaZ.WoodenHook;KatanaZ.PrimitiveTwineHook],
+        }
+        outputs
+        {
+            item 1 Base.CraftedFishingRod,
+        }
+    }
+
+    craftRecipe Make Hand Crafted Fishing Rod
+    {
+        category = Fishing,
+        Tags = InHandCraft;Fishing,
+        xpAward = Carving:5;Fishing:10;Maintenance:2,
+		NeedToBeLearn = true,
+		AutoLearnAll = Fishing:2,
+        timedAction = SharpenStakeWood,
+        time = 380,
+        OnCreate = Fishing.onCreateFishingRod,
+        inputs
+        {
+            item 1 tags[sharpknife;meatcleaver] mode:keep flags[MayDegradeHeavy;IsNotDull],
+            item 1 [Base.LongStick],
+            item 2 [Base.FishingLine;1:Base.PremiumFishingLine],
+            item 1 tags[simpleweaponbinding] flags[DontReplace],			
+            item 1 [Base.Paperclip;Base.Nails;Base.FishingHook;Base.FishingHook_Forged;Base.FishingHook_Bone;KatanaZ.PrimitiveHook;KatanaZ.WoodenHook;KatanaZ.PrimitiveTwineHook],
+        }
+        outputs
+        {
+            item 1 Base.FishingRod,
+        }
+    }
+}	

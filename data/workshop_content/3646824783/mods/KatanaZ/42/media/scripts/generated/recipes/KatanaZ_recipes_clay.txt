@@ -1,0 +1,572 @@
+module Base
+{
+    craftRecipe Pack Wet Clay
+    {
+        timedAction = UnPackSack,
+        time = 30,
+        Tags = InHandCraft,
+        category = Ancient Pottery,
+        inputs
+        {
+            item 8 [Base.Clay],
+            item 1 tags[holddirt;holdcompost;burlapbag] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.Claybag,
+        }
+    }
+	
+	craftRecipe Draw Clay From Dirt
+    {
+        timedAction = Craft_PotteryBench,
+        time = 420,
+        Tags = AnySurfaceCraft;Pottery,
+        category = Ancient Pottery,
+        xpAward = Pottery:5;Maintenance:1,
+        inputs
+        {
+            item 1 [*],
+            -fluid 0.5 [Water],
+            item 1 tags[bucket] mode:keep flags[IsEmpty],
+            item 1 [Base.Sheet;Base.CheeseCloth;Base.Strainer] mode:keep,
+            item 1 [Base.Dirtbag],
+        }
+        outputs
+        {
+            item 2 Base.Clay,
+        }
+    }
+
+    craftRecipe Make Bag Of Clay
+    {
+        timedAction = MixingBucket,
+        time = 350,
+        Tags = AnySurfaceCraft,
+        category = Ancient Pottery,	
+        SkillRequired = Masonry:1;Pottery:1;Strength:2,		
+		xpAward = Masonry:10;Pottery:5;Maintenance:1,
+        inputs
+        {
+            item 1 [Base.Bucket;Base.BucketEmpty;Base.BucketWaterDebug;Base.BucketCarved;Base.BucketLargeWood] mode:destroy mappers[bucketList],
+            -fluid 2.0 categories[Water] mode:mixture,
+            item 2 [Base.Dirtbag],
+            item 2 [Base.Sandbag],
+            item 1 [Base.EmptySandbag],
+        }
+        outputs
+        {
+			item 1 Base.Claybag,
+            item 1 mapper:bucketList,
+        }
+        itemMapper bucketList
+        {
+            Base.BucketLargeWood = Base.BucketLargeWood,
+			Base.BucketCarved = Base.BucketCarved,
+            default = Base.BucketEmpty,
+        }
+    }
+	
+	craftRecipe Sculpt Mortar & Pestle by Hand
+	{
+		timedAction = Making,
+		time = 450,
+		Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+		category = Ancient Pottery,
+		xpAward = Pottery:5;Maintenance:1,
+		inputs
+		{
+			item 1 [Base.Bowl] mode:keep flags[Prop2],
+			item 1 tags[claytool] mode:keep flags[Prop1],
+			item 2 [Base.Clay;Base.Claybag],
+		}
+		outputs
+		{
+			item 1 Base.CeramicMortarandPestleUnfired,
+		}
+	}
+	
+	craftRecipe Press Blacksmith Anvil Mold by Hand
+    {
+        category = Ancient Pottery,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+		SkillRequired = Strength:3,
+        xpAward = Pottery:5;Maintenance:1,
+		timedAction = Making,
+        time = 400,
+        inputs
+        {
+            item 8 [Base.Clay],
+            item 1 tags[hammer;clubhammer;mallet;smithinghammer;hammerstone] mode:keep flags[MayDegradeVeryLight],			
+            item 1 [Base.WoodenBlacksmithAnvilMold] mode:keep,
+			item 1 [Base.FlatStone;Base.LargeStone] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.ClayBlacksmithAnvilMoldUnfired,
+        }
+    }
+
+	craftRecipe Carve Ball-Peen Head Mold
+    {
+        category = Ancient Pottery,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        SkillRequired = Pottery:1,
+        xpAward = Pottery:5;Maintenance:1,
+        timedAction = Making,
+        time = 400,
+        inputs
+        {
+            item 1 tags[claytool] mode:keep flags[Prop2],			
+            item 1 [KatanaZ.ClayBlockUnfired],
+            item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,					
+        }
+        outputs
+        {
+            item 1 KatanaZ.Ball-PeenHeadMoldUnfired,
+        }
+    }
+
+    craftRecipe Fire Ball-Peen Head Mold
+    {
+        category = Ancient Pottery,
+        Tags = KilnSmall,
+        xpAward = Pottery:5,		
+        timedAction = Making_With_Kiln,
+        time = 260,
+        inputs
+        {
+            item 1 [KatanaZ.Ball-PeenHeadMoldUnfired],
+            item 1 tags[startfire],
+            item 1 tags[log;charcoal],
+        }
+        outputs
+        {
+            item 1 KatanaZ.Ball-PeenHeadMold,
+        }
+    }
+	
+	craftRecipe Smash Broken Ceramic
+	{
+		timedAction = MixingMortarPestle,
+		time = 100,
+		category = Ancient Pottery,
+		Tags = AnySurfaceCraft;CanBeDoneInDark,
+		xpAward = Pottery:1;Maintenance:1,
+		inputs
+		{
+			item 1 [Base.ClayIngotMold] flags[AllowDestroyedItem],
+			item 1 tags[MortarPestle] mode:keep flags[Prop2],
+            item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,
+		}
+		outputs
+		{
+			item 1 Base.Clay,
+		}
+	}
+
+    craftRecipe Press Metal Ingot Mold
+    {
+        time = 100,
+        timedAction = UseHandPress,
+        Tags = HandPress,
+        xpAward = Pottery:1,
+        category = Pottery,
+        inputs
+        {
+            item 2 [Base.Clay],
+            item 1 [Base.WoodenIngotCastMold] mode:keep,
+        }
+        outputs
+        {
+            item 1 KatanaZ.ClayIngotCastUnfired,
+        }
+    }
+
+    craftRecipe Fire Metal Ingot Mold Cast
+    {
+        time = 260,
+        timedAction = Making_With_Kiln,
+        Tags = KilnSmall,
+        xpAward = Pottery:1,		
+        category = Ancient Pottery,
+        inputs
+        {
+            item 1 [KatanaZ.ClayIngotCastUnfired],
+            item 1 tags[startfire],
+            item 1 tags[log;charcoal],
+        }
+        outputs
+        {
+            item 1 KatanaZ.ClayIngotCast,
+        }
+    }	
+	
+    craftRecipe Press Clay Block
+    {
+        time = 220,
+        timedAction = UseHandPress,
+        Tags = HandPress,
+        xpAward = Pottery:1,
+        category = Ancient Pottery,
+        inputs
+        {
+            item 2 [Base.ClayBrickUnfired],
+            item 1 [Base.WoodenCrucibleMold] mode:keep,
+            item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,				
+        }
+        outputs
+        {
+            item 1 KatanaZ.ClayBlockUnfired,
+        }
+    }
+
+    craftRecipe Press Clay Block by Hand
+    {
+        time = 320,
+        timedAction = Making,
+        Tags = AnySurfaceCraft;Pottery,
+        xpAward = Pottery:1;Maintenance:1,
+        category = Ancient Pottery,
+        inputs
+        {
+            item 2 [Base.ClayBrickUnfired],
+            item 1 [Base.WoodenCrucibleMold] mode:keep,
+            item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,				
+        }
+        outputs
+        {
+            item 1 KatanaZ.ClayBlockUnfired,
+        }
+    }
+
+    craftRecipe Press Heavy Clay Block by Hand
+    {
+        time = 420,
+        timedAction = Making,
+        Tags = AnySurfaceCraft;Pottery,
+        xpAward = Pottery:1;Maintenance:1,
+        category = Ancient Pottery,
+        inputs
+        {
+            item 2 [KatanaZ.ClayBlockUnfired],
+            item 1 [Base.WoodenCrucibleMold] mode:keep,
+            item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,				
+        }
+        outputs
+        {
+            item 1 KatanaZ.ClayBlockHeavyUnfired,
+        }
+    }
+
+    craftRecipe Fire Heavy Clay Blocks
+    {
+        time = 260,
+        timedAction = Making_With_Kiln,
+        Tags = KilnSmall,
+        xpAward = Pottery:1,		
+        category = Ancient Pottery,
+        inputs
+        {
+            item 2 [KatanaZ.ClayBlockHeavyUnfired],
+            item 1 tags[startfire],
+            item 1 tags[log;charcoal],
+        }
+        outputs
+        {
+            item 2 KatanaZ.ClayBlock,
+        }
+    }
+
+    craftRecipe Fire Set of Heavy Clay Blocks
+    {
+        time = 260,
+        timedAction = Making_With_Kiln,
+        Tags = KilnLarge,
+        xpAward = Pottery:1,		
+        category = Ancient Pottery,
+        inputs
+        {
+            item 4 [KatanaZ.ClayBlockHeavyUnfired],
+            item 1 tags[startfire],
+            item 1 tags[log;charcoal],
+        }
+        outputs
+        {
+            item 4 KatanaZ.ClayBlock,
+        }
+    }
+
+    craftRecipe Cut Hard Clay
+    {
+        time = 400,
+        Tags = AnySurfaceCraft,
+        category = Masonry,
+        xpAward = Masonry:10;Maintenance:3,
+        SkillRequired = Masonry:1;Strength:2,
+		timedAction = ChoppingBlock_Hammer,
+        inputs
+        {
+            item 1 tags[hammer;clubhammer;smithinghammer;hammerstone] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[crudechisel;masonschisel;metalworkingchisel] mode:keep flags[MayDegradeLight;Prop2],
+            item 1 tags[crudesaw;saw] mode:keep flags[MayDegradeLight],			
+            item 1 [KatanaZ.ClayBlock],
+        }
+        outputs
+        {
+            item 4 Base.StoneBlock,
+        }
+    }
+
+    craftRecipe Make Clay Wheel
+    {
+        time = 500,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category = Ancient Pottery,
+        xpAward = Pottery:30;Maintenance:2,
+        SkillRequired = Pottery:1,
+        timedAction = ChoppingBlock_Hammer,
+        inputs
+        {
+            item 1 tags[hammer;clubhammer;smithinghammer;hammerstone] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[crudechisel;masonschisel;metalworkingchisel] mode:keep flags[MayDegradeLight;Prop2],
+            item 1 tags[claytool] mode:keep,			
+            item 1 [KatanaZ.ClayBlockHeavyUnfired],
+            item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,					
+        }
+        outputs
+        {
+            item 1 KatanaZ.ClayWheel,
+        }
+    }
+
+    craftRecipe Make Small Clay Wheels
+    {
+        time = 400,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category = Ancient Pottery,
+        xpAward = Pottery:30;Maintenance:3,
+        SkillRequired = Pottery:1,
+        timedAction = ChoppingBlock_Hammer,
+        inputs
+        {
+            item 1 tags[hammer;clubhammer;smithinghammer;hammerstone] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[crudechisel;masonschisel;metalworkingchisel] mode:keep flags[MayDegradeLight;Prop2],
+            item 1 tags[claytool] mode:keep,
+            item 1 tags[crudesaw;saw] mode:keep flags[MayDegradeLight],				
+            item 1 [KatanaZ.ClayBlockHeavyUnfired],
+            item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,					
+        }
+        outputs
+        {
+            item 2 KatanaZ.ClayWheelSmall,
+        }
+    }
+
+    craftRecipe Fire Clay Wheel
+    {
+        time = 200,
+        timedAction = Making_With_Kiln,
+        Tags = KilnLarge,
+        category = Ancient Pottery,
+        inputs
+        {
+            item 1 [KatanaZ.ClayWheel],
+            item 1 tags[startfire],
+            item 1 tags[log;charcoal],
+        }
+        outputs
+        {
+            item 1 Base.StoneWheel,
+        }
+    }
+
+    craftRecipe Fire Clay Wheel Small
+    {
+        time = 200,
+        timedAction = Making_With_Kiln,
+        Tags = KilnSmall;KilnLarge,
+        category = Ancient Pottery,
+        inputs
+        {
+            item 1 [KatanaZ.ClayWheelSmall],
+            item 1 tags[startfire],
+            item 1 tags[log;charcoal],
+        }
+        outputs
+        {
+            item 1 Base.StoneWheelSmall,
+        }
+    }
+
+    craftRecipe Fire Clay Anvil
+    {
+        time = 400,
+        timedAction = ChoppingBlock_Hammer,
+        Tags = KilnLarge,
+		xpAward = Maintenance:2,
+        category = Ancient Pottery,
+        inputs
+        {
+            item 1 [KatanaZ.ClayBlockHeavyUnfired],
+            item 1 [KatanaZ.ClayBlockUnfired],
+			item 1 tags[hammer;clubhammer;mallet;hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],			
+			item 1 [Base.ClayBlacksmithAnvilMold] mode:keep,
+            item 1 tags[claytool] mode:keep,			
+            item 1 tags[startfire],
+            item 1 tags[log;charcoal],
+        }
+        outputs
+        {
+            item 1 Base.StoneAnvil,
+        }
+    }
+
+    craftRecipe Cut Stones From Clay Anvil
+    {
+        time = 600,
+        timedAction = ChoppingBlock_Hammer,
+		SkillRequired = Strength:3,		
+        Tags = AnySurfaceCraft,
+		xpAward = Masonry:20;Pottery:10;Maintenance:3,
+        category = Ancient Pottery,
+        inputs
+        {
+            item 1 [Base.StoneAnvil],
+			item 1 tags[crudechisel;masonschisel] mode:keep flags[MayDegradeLight;Prop2],
+            item 1 tags[crudesaw;saw] mode:keep flags[MayDegradeLight],	
+            item 1 [KatanaZ.ClayBlockUnfired],
+			item 1 tags[smithinghammer;hammer;clubhammer] mode:keep flags[Prop1;MayDegradeHeavy],			
+        }
+        outputs
+        {
+            item 8 Base.StoneBlock,
+        }
+    }
+
+	craftRecipe Sculpt Clay Chisel
+    {
+        time = 230,
+        NeedToBeLearn = true,
+        Tags = AnySurfaceCraft,
+        category = Ancient Pottery,
+        timedAction = Making,
+        SkillRequired = Pottery:1,
+        xpAward = Pottery:5;Maintenance:1,
+        AutoLearnAny = Pottery:2,
+        inputs
+        {
+            item 1 [KatanaZ.ClayBlockUnfired] mode:destroy,
+            item 1 tags[claytool] mode:keep,
+        }
+        outputs
+        {
+            item 2 KatanaZ.ClayChiselUnfired,
+        }
+    }
+
+    craftRecipe Fire Clay Chisel
+    {
+        time = 200,
+        NeedToBeLearn = true,		
+        timedAction = Making_With_Kiln,
+        Tags = KilnSmall;KilnLarge,
+        category = Ancient Pottery,
+        AutoLearnAny = Pottery:2,		
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 [KatanaZ.ClayChiselUnfired],		
+            item 1 tags[startfire],
+            item 1 tags[log;charcoal],
+        }
+        outputs
+        {
+            item 1 KatanaZ.ClayChisel,
+        }
+    }
+
+    craftRecipe Press Rod Mold
+    {
+        time = 100,
+        timedAction = UseHandPress,
+        Tags = HandPress,
+        xpAward = Pottery:5;Maintenance:2,
+        category = Ancient Pottery,
+        inputs
+        {
+            item 2 [Base.Clay],
+            item 1 [Base.WoodenBarCastMold] mode:keep,
+			item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,	
+        }
+        outputs
+        {
+            item 1 KatanaZ.ClayRodMoldUnfired,
+        }
+    }
+
+    craftRecipe Fire Clay Rod Mold
+    {
+        time = 200,
+        timedAction = Making_With_Kiln,
+        Tags = KilnSmall;KilnLarge,
+        category = Ancient Pottery,
+        inputs
+        {
+            item 1 [KatanaZ.ClayRodMoldUnfired],
+            item 1 tags[startfire],
+            item 1 tags[log;charcoal],
+        }
+        outputs
+        {
+            item 1 KatanaZ.ClayRodMold,
+        }
+    }
+
+    craftRecipe Pierce Clay Block
+    {
+        time = 200,
+        SkillRequired = Pottery:2,
+        timedAction = MakingHammer_Surface,
+        Tags = AnySurfaceCraft,
+        category = Ancient Pottery,
+        xpAward = Pottery:10;Maintenance:2,
+        inputs
+        {
+            item 1 [KatanaZ.ClayBlockUnfired],
+			item 1 tags[hammer;clubhammer;mallet;smithinghammer;hammerstone] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[crudetongs;tongs] mode:keep flags[Prop2;MayDegradeLight],
+            item 1 tags[awl] mode:keep flags[MayDegrade],
+        }
+        outputs
+        {
+            item 1 KatanaZ.ClayBlockUnfiredPierced,
+        }
+    }
+
+    craftRecipe Fire Clay Block Pierced
+    {
+        time = 200,
+        timedAction = Making_With_Kiln,
+        Tags = KilnSmall;KilnLarge,
+        category = Ancient Pottery,
+        inputs
+        {
+            item 1 [KatanaZ.ClayBlockUnfiredPierced],
+            item 1 tags[startfire],
+            item 1 tags[log;charcoal],
+        }
+        outputs
+        {
+            item 1 KatanaZ.ClayBlockPierced,
+        }
+    }
+}

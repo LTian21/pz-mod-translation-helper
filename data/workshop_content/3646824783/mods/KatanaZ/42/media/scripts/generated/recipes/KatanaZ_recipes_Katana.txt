@@ -1,0 +1,453 @@
+module Base
+{
+	craftRecipe Forge Spine
+    {
+        timedAction = MakingHammer_Surface,	
+        time = 650,
+        NeedToBeLearn = true,		
+        Tags = PrimitiveForge,
+		category = Ancient Smithing,		
+        SkillRequired = Blacksmith:2;Strength:4,
+		AutoLearnAll = Blacksmith:3,
+        xpAward = Blacksmith:15;Maintenance:3,
+		AllowBatchCraft = false,
+        inputs
+        {
+            item 2 [Base.MetalBar;Base.SteelBar;Base.IronBar;Base.IronIngot;Base.SteelIngot;Base.Katana_Blade_Broken],
+            item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,				
+            item 1 tags[startfire],			
+            item 2 tags[log;charcoal],			
+            item 1 tags[hammer;clubhammer;smithinghammer] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 KatanaZ.KatanaSpine flags[IsBlunt],
+        }
+    }
+	
+	craftRecipe Wrap Handle
+    {
+        timedAction = CraftWeapon1H,	
+        time = 190,
+        NeedToBeLearn = true,		
+        Tags = AnySurfaceCraft,
+        category = Ancient Tools,		
+        SkillRequired = Blacksmith:2;Tailoring:2,
+        xpAward = Maintenance:1;Tailoring:5,
+		AllowBatchCraft = false,
+        inputs
+        {
+            item 1 [Base.SmallHandle] flags[Prop2],
+            item 2 tags[glue] flags[DontReplace],
+			item 2 [Base.LeatherStrips],
+        }
+		outputs
+        {
+            item 1 Base.Katana_Handle,
+        }
+    }
+
+    craftRecipe Assemble Replica
+    {
+        category = Ancient Tools,
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = true,
+        SkillRequired = Blacksmith:2,
+		AutoLearnAll = Blacksmith:3,		
+        xpAward = Blacksmith:15;Maintenance:2,
+        timedAction = ChoppingBlock_Hammer,	
+        time = 220,
+		AllowBatchCraft = false,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 [KatanaZ.KatanaSpine;KatanaZ.KatanaSpineQuenched;Base.Katana_Blade] flags[Prop2;InheritSharpness;InheritCondition],
+            item 1 [Base.Katana_Handle],
+            item 2 tags[simpleweaponbinding] flags[DontReplace],
+			item 2 tags[glue] flags[DontReplace],
+			item 1 tags[hammer;clubhammer;mallet;smithinghammer;hammerstone] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[Whetstone;File] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 KatanaZ.ReplicaKatana,
+        }
+    }
+
+    craftRecipe Assemble Katana
+    {
+        category = Ancient Tools,
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = true,		
+        SkillRequired = Blacksmith:4,
+		AutoLearnAll = Blacksmith:5,		
+        xpAward = Blacksmith:25;Maintenance:5,
+        timedAction = ChoppingBlock_Hammer,	
+        time = 330,
+		AllowBatchCraft = false,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+        inputs
+        {
+            item 1 [KatanaZ.MasterKatanaBlade] flags[Prop2;InheritSharpness;InheritCondition],
+            item 1 [Base.Katana_Handle],
+			item 1 [KatanaZ.KFluxOil],			
+            item 2 tags[simpleweaponbinding] flags[DontReplace],
+			item 2 tags[glue] flags[DontReplace],
+			item 1 tags[mallet] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[Whetstone;File] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 KatanaZ.MasterWorkKatana,
+        }
+    }
+	
+	craftRecipe Grind Flux Powder
+	{
+        timedAction = MixingMortarPestle,	
+		time = 280,
+        NeedToBeLearn = false,
+		Tags = AnySurfaceCraft,
+		category = Ancient Smithing,		
+        SkillRequired = Blacksmith:2;Cooking:1;Strength:2,		
+        xpAward = Blacksmith:5;Cooking:1;Maintenance:1,
+		AllowBatchCraft = true,
+		inputs
+		{
+            item 2 tags[Charcoal],
+            item 1 tags[startfire],			
+            item 2 [Base.SilverScrap;Base.GoldScrap] flags[DontReplace],			
+            item 1 tags[MortarPestle] mode:keep flags[Prop2],			
+		}
+		outputs
+		{
+			item 2 KatanaZ.KFlux,
+		}
+	}
+
+	craftRecipe Press Flux Oil by Hand
+	{
+        timedAction = MixingMortarPestle,	
+		time = 280,
+        NeedToBeLearn = true,
+		Tags = AnySurfaceCraft,
+		category = Ancient Smithing,			
+        SkillRequired = Blacksmith:2;Cooking:2;Strength:3,		
+        xpAward = Blacksmith:5;Cooking:1;Maintenance:1,
+		AllowBatchCraft = true,
+		inputs
+		{
+            item 2 [KatanaZ.KFlux],
+            item 1 tags[MortarPestle] mode:keep flags[Prop2],			
+            item 1 [Base.SilverScrap],
+			item 1 [Base.GoldScrap],
+            item 1 [*],
+            -fluid 0.5 categories[Water] mode:mixture,			
+		}
+		outputs
+		{
+			item 1 KatanaZ.KFluxOil,
+		}
+	}
+
+	craftRecipe Press Flux Oil
+	{
+        timedAction = UseHandPress,	
+		time = 80,
+        NeedToBeLearn = false,
+		Tags = HandPress,
+		category = Ancient Smithing,			
+        SkillRequired = Blacksmith:2;Cooking:3;Strength:2,		
+        xpAward = Blacksmith:5;Cooking:1,
+		AllowBatchCraft = true,
+		inputs
+		{
+            item 2 [KatanaZ.KFlux],			
+            item 1 [Base.SilverScrap],
+			item 1 [Base.GoldScrap],
+            item 1 [*],
+            -fluid 0.5 categories[Water] mode:mixture,			
+		}
+		outputs
+		{
+			item 1 KatanaZ.KFluxOil,
+		}
+	}
+	
+	craftRecipe Mash Flux Clay
+	{
+        timedAction = MixingMortarPestle,	
+		time = 480,
+        NeedToBeLearn = true,
+		Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+		category = Ancient Smithing,		
+        SkillRequired = Pottery:2;Cooking:3,		
+        xpAward = Pottery:5,
+		AutoLearnAll = Pottery:3,		
+		AllowBatchCraft = false,
+		inputs
+		{
+            item 5 [Base.Clay],
+            item 2 [Base.Sandbag],			
+            item 2 [Base.SilverScrap;Base.GoldScrap] flags[DontReplace],
+			item 1 tags[MortarPestle] mode:keep flags[Prop1],
+            item 1 [*],
+            -fluid 0.5 categories[Water] mode:mixture,			
+		}
+		outputs
+		{
+			item 1 KatanaZ.KFluxClay,
+		}
+	}
+
+	craftRecipe Combine Carbon Small
+	{
+		category = Ancient Smithing,	
+		Tags = PrimitiveFurnace,
+        NeedToBeLearn = true,
+        SkillRequired = Blacksmith:2;Strength:3,
+		AutoLearnAll = Blacksmith:3,
+        xpAward = Blacksmith:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,	
+		time = 250,
+		AllowBatchCraft = false,
+		inputs
+		{
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],		
+			item 1 tags[smithinghammer] mode:keep flags[Prop1;MayDegradeHeavy],		
+			item 4 [KatanaZ.LowCarbonChunk],
+            item 2 tags[Charcoal],
+            item 1 tags[startfire],			
+			item 2 [KatanaZ.KFlux],
+			item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 KatanaZ.MedCarbonChunk,
+			item 2 Base.IronScrap,			
+		}
+	}
+
+	craftRecipe Combine Carbon Medium
+	{
+		category = Ancient Smithing,	
+		Tags = PrimitiveFurnace,
+        NeedToBeLearn = true,
+        SkillRequired = Blacksmith:3;Strength:4,
+		AutoLearnAll = Blacksmith:4,		
+        xpAward = Blacksmith:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,	
+		time = 350,
+		AllowBatchCraft = false,
+		inputs
+		{
+            item 1 [Base.CeramicCrucible;Base.CeramicCrucibleSmall] mode:keep flags[IsEmpty],		
+			item 1 tags[smithinghammer] mode:keep flags[Prop1;MayDegradeHeavy],		
+			item 4 [KatanaZ.MedCarbonChunk],
+            item 2 tags[Charcoal],
+            item 1 tags[startfire],			
+			item 4 [KatanaZ.KFlux],
+			item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 KatanaZ.HighCarbonChunk,
+			item 4 Base.IronScrap,
+		}
+	}
+
+	craftRecipe Break Carbon Medium
+	{
+		category = Ancient Smithing,
+		Tags = PrimitiveForge,
+        NeedToBeLearn = false,
+        SkillRequired = Blacksmith:4;Strength:3,		
+        xpAward = Blacksmith:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,	
+		time = 150,
+		AllowBatchCraft = false,
+		inputs
+		{
+			item 1 tags[smithinghammer;ballpeenhammer;hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],		
+			item 1 [KatanaZ.MedCarbonChunk],
+            item 2 tags[Charcoal],
+            item 1 tags[startfire],	
+			item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+		}
+		outputs
+		{
+			item 2 KatanaZ.LowCarbonChunk,
+			item 1 Base.IronScrap,
+		}
+	}
+
+	craftRecipe Break Carbon High
+	{
+		category = Ancient Smithing,
+		Tags = PrimitiveForge,
+        NeedToBeLearn = false,
+        SkillRequired = Blacksmith:4;Strength:3,		
+        xpAward = Blacksmith:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,	
+		time = 150,
+		AllowBatchCraft = false,
+		inputs
+		{
+			item 1 tags[smithinghammer;ballpeenhammer;hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],		
+			item 1 [KatanaZ.HighCarbonChunk],
+            item 2 tags[Charcoal],
+            item 1 tags[startfire],			
+			item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 KatanaZ.MedCarbonChunk,
+			item 3 Base.IronScrap,
+		}
+	}
+	
+	craftRecipe Clay & Quench
+	{
+		category = Ancient Smithing,	
+		Tags = PrimitiveFurnace,
+        NeedToBeLearn = true,
+        SkillRequired = Blacksmith:3;Maintenance:1,		
+		AutoLearnAll = Blacksmith:5,
+        xpAward = Blacksmith:5;Pottery:5,
+        timedAction = Making,	
+		time = 300,
+		AllowBatchCraft = false,
+        OnCreate = RecipeCodeOnCreate.minorCondition,		
+		inputs
+		{
+			item 1 [KatanaZ.KatanaSpine] flags[Prop2;InheritCondition;InheritSharpness],
+            item 2 tags[log;charcoal],
+            item 1 tags[startfire],			
+			item 1 [KatanaZ.KFluxOil],
+			item 1 [KatanaZ.KFluxClay],
+			item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 [*],
+            -fluid 1.0 categories[Water] mode:mixture,				
+		}
+		outputs
+		{
+			item 1 KatanaZ.KatanaSpineQuenched,
+		}
+	}
+
+	craftRecipe Composite Weld (Warped)
+	{
+		category = Ancient Smithing,
+		Tags = Forge,
+        NeedToBeLearn = false,
+        SkillRequired = Blacksmith:4;Strength:2,		
+        AutoLearnAll = Blacksmith:5,		
+        xpAward = Blacksmith:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,	
+		time = 380,
+		AllowBatchCraft = false,
+		inputs
+		{
+			item 1 [KatanaZ.HighCarbonChunk],
+			item 1 [KatanaZ.MedCarbonChunk],
+			item 1 [KatanaZ.KFluxOil],
+            item 2 tags[log;charcoal],
+            item 1 tags[startfire],			
+			item 1 tags[smithinghammer] mode:keep flags[Prop1;MayDegradeHeavy],
+			item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 KatanaZ.CompositeBilletWarped,
+		}
+	}
+
+	craftRecipe Composite Weld (Cracked)
+	{
+		category = Ancient Smithing,
+		Tags = Forge,
+        NeedToBeLearn = false,
+        SkillRequired = Blacksmith:6;Strength:3,		
+        AutoLearnAll = Blacksmith:7,		
+        xpAward = Blacksmith:1;Maintenance:2,
+        timedAction = MakingHammer_Surface,	
+		time = 150,
+		AllowBatchCraft = false,
+		inputs
+		{
+			item 1 [KatanaZ.HighCarbonChunk],
+			item 1 [KatanaZ.MedCarbonChunk],
+			item 2 [KatanaZ.KFlux],
+            item 2 tags[log;charcoal],
+            item 1 tags[startfire],			
+			item 1 tags[smithinghammer] mode:keep flags[Prop1;MayDegradeHeavy],
+			item 1 tags[metalworkingpliers;tongs;crudetongs] mode:keep flags[Prop2;MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 KatanaZ.CompositeBilletCracked,
+		}
+	}
+
+	craftRecipe Composite Weld (Master)
+	{
+		category = Ancient Smithing,	
+		Tags = Forge,
+        NeedToBeLearn = true,
+        SkillRequired = Blacksmith:8;Strength:3,		
+        AutoLearnAll = Blacksmith:7;Maintenance:2,		
+        xpAward = Blacksmith:15,
+        timedAction = MakingHammer_Surface,	
+		time = 400,
+		AllowBatchCraft = false,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+		inputs
+		{
+			item 2 [KatanaZ.LowCarbonChunk],
+			item 1 [KatanaZ.MedCarbonChunk;KatanaZ.HighCarbonChunk],
+			item 2 [KatanaZ.KFlux],
+			item 1 [KatanaZ.KFluxOil],	
+            item 2 tags[log;charcoal],
+            item 1 tags[startfire],			
+			item 1 tags[smithinghammer] mode:keep flags[Prop1;MayDegradeHeavy],
+			item 1 tags[metalworkingpliers;tongs] mode:keep flags[Prop2;MayDegradeLight],
+		}
+		outputs
+		{
+			item 1 KatanaZ.CompositeBilletMaster,
+		}
+	}
+
+    craftRecipe Forge Master Work Blade
+    {
+		category = Ancient Smithing,	
+        Tags = Forge,
+		NeedToBeLearn = false,
+        SkillRequired = Blacksmith:5;Strength:4,
+        AutoLearnAll = Blacksmith:7,		
+        xpAward = Blacksmith:15;Maintenance:5,
+        timedAction = MakingHammer_Surface,	
+        time = 550,
+		AllowBatchCraft = false,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+        inputs
+        {
+            item 1 [KatanaZ.CompositeBilletMaster;KatanaZ.CompositeBilletCracked;KatanaZ.CompositeBilletWarped;Base.Katana_Blade;Base.Katana_Blade_Broken] flags[InheritSharpness],
+            item 1 [KatanaZ.KatanaSpineQuenched;KatanaZ.KatanaSpine] flags[InheritCondition],
+			item 4 [KatanaZ.KFlux],
+			item 1 [KatanaZ.KFluxOil],
+            item 2 tags[log;charcoal],
+            item 1 tags[startfire],
+            item 1 [*],
+            -fluid 1.0 categories[Water] mode:mixture,
+            item 1 [Base.SmithingHammer;Base.BlockMace] mode:keep flags[Prop1;MayDegradeHeavy],
+			item 1 tags[metalworkingpliers;tongs] mode:keep flags[Prop2;MayDegradeLight],
+			}
+        outputs
+        {
+            item 1 KatanaZ.MasterKatanaBlade,
+		}
+    }
+}

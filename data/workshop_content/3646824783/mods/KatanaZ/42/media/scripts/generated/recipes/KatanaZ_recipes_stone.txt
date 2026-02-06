@@ -1,0 +1,253 @@
+module Base
+{
+	craftRecipe Break Stones from Stone
+    {
+        time = 400,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor;CanBeDoneInDark,
+        category = Knapping,
+        xpAward = Masonry:10;FlintKnapping:5;Maintenance:1,
+        timedAction = MakingHammer_Surface,
+        inputs
+        {
+            item 1 tags[hammerstone;knappingtool] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 [Base.Stone2] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+			item 2 KatanaZ.SharpedStones,
+        }
+    }
+
+    craftRecipe Break Flakes Of Rocks 
+    {
+        time = 300,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor;CanBeDoneInDark,
+        category = Knapping,
+        xpAward = Masonry:10;FlintKnapping:5;Maintenance:1,
+        timedAction = MakingHammer_Surface,
+        inputs
+        {
+            item 1 tags[hammerstone;knappingtool] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 [Base.SharpedStone;KatanaZ.SharpedStones] mode:destroy flags[Prop2;AllowDestroyedItem],
+        }
+        outputs
+        {
+
+        }
+    }
+
+    craftRecipe Break Flakes On Flake
+    {
+        time = 300,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category = Knapping,
+        xpAward = Masonry:5;FlintKnapping:10;Maintenance:1,
+        timedAction = MakingHammer_Surface,
+        inputs
+        {
+            item 1 [Base.SharpedStone;KatanaZ.SharpedStones] mode:destroy flags[Prop1;AllowDestroyedItem],
+            item 1 [Base.SharpedStone;KatanaZ.SharpedStones] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+
+        }
+    }
+
+    craftRecipe Make Broken Whetstone
+    {
+        time = 530,
+        xpAward = Maintenance:2,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category = Repair,
+		OnCreate = RecipeCodeOnCreate.minorCondition,		
+        timedAction = Making,
+        inputs
+        {
+            item 4 [Base.Stone2] flags[Prop2;Prop1],
+        }
+        outputs
+        {
+            item 1 Base.CrudeWhetstone,
+			item 2 Base.SharpedStone,
+        }
+    }
+	
+	craftRecipe Grind Stones
+	{
+        timedAction = MixingMortarPestle,	
+		time = 480,
+        NeedToBeLearn = false,
+		Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category = Knapping,			
+        SkillRequired = FlintKnapping:1;Masonry:1;Strength:2,		
+        xpAward = FlintKnapping:5;Pottery:5;Masonry:10;Maintenance:2,
+		AllowBatchCraft = false,
+		inputs
+		{
+            item 5 [Base.SharpedStone;KatanaZ.SharpedStones],
+            item 1 [Base.EmptySandbag],		
+			item 1 tags[MortarPestle] mode:keep,
+			item 1 tags[hammer;clubhammer;smithinghammer;hammerstone] mode:keep flags[MayDegradeHeavy],			
+		}
+		outputs
+		{
+			item 1 Base.Sandbag,
+		}
+	}
+
+	craftRecipe Crush Gravel
+	{
+        timedAction = MakingHammer_Surface,	
+		time = 580,
+        NeedToBeLearn = false,
+		Tags = AnySurfaceCraft;CanBeDoneFromFloor,
+        category = Knapping,			
+        SkillRequired = Masonry:1;Strength:3,		
+        xpAward = FlintKnapping:5;Pottery:5;Masonry:10;Maintenance:2,
+		AllowBatchCraft = false,
+		inputs
+		{
+            item 2 [Base.Gravelbag] flags[Prop2],		
+			item 1 tags[hammer;clubhammer;smithinghammer] mode:keep flags[Prop1;MayDegradeHeavy],			
+		}
+		outputs
+		{
+			item 1 Base.Sandbag flags[HasOneUse],
+		}
+	}
+	
+	craftRecipe Knap Stone Chisel
+    {
+        time = 500,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor;CanBeDoneInDark,
+        category = Ancient Tools,
+        xpAward = Masonry:10;FlintKnapping:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+		inputs
+        {
+            item 1 tags[hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 [Base.SharpedStone;KatanaZ.SharpedStones] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+			item 1 Base.StoneChisel,
+        }
+    }
+
+    craftRecipe Knap Stone Awl
+    {
+        time = 200,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor;CanBeDoneInDark,
+        category = Ancient Tools,
+        xpAward = Masonry:10;FlintKnapping:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+		inputs
+        {
+            item 1 tags[hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 [Base.SharpedStone;KatanaZ.SharpedStones] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+			item 1 Base.Awl_Stone,
+        }
+    }
+	
+	craftRecipe Break Smaller Stones into Gravel
+    {
+        time = 200,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor;CanBeDoneInDark,
+        category = Knapping,
+        xpAward = Masonry:10;FlintKnapping:10;Maintenance:2,
+        timedAction = MakingHammer_Surface,
+        inputs
+        {
+            item 1 tags[hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 4 [Base.SharpedStone;KatanaZ.SharpedStones] mode:destroy flags[Prop2],
+			item 1 [Base.EmptySandbag] mode:destroy,
+        }
+        outputs
+        {
+			item 1 Base.Gravelbag flags[HasOneUse],
+        }
+    }
+
+    craftRecipe Break Stones from Flat Stone
+    {
+        time = 300,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor;CanBeDoneInDark,
+        category = Knapping,
+        xpAward = Masonry:10;FlintKnapping:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,
+        inputs
+        {
+            item 1 tags[hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 [Base.FlatStone] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 1 Base.Stone2,
+			item 2 KatanaZ.SharpedStones,
+        }
+    }
+	
+	craftRecipe Break Stones into Gravel
+    {
+        time = 300,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor;CanBeDoneInDark,
+        category = Knapping,
+		SkillRequired = FlintKnapping:2,
+        xpAward = Masonry:10;FlintKnapping:10;Maintenance:2,
+        timedAction = MakingHammer_Surface,
+        inputs
+        {
+            item 1 tags[hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 2 [Base.Stone2;1:Base.FlatStone] mode:destroy flags[Prop2;DontReplace],
+			item 1 [Base.EmptySandbag] mode:destroy,
+        }
+        outputs
+        {
+			item 1 Base.Gravelbag,
+        }
+    }
+	
+    craftRecipe Break Stones from Large Stone
+    {
+        time = 500,
+        Tags = AnySurfaceCraft;CanBeDoneFromFloor;CanBeDoneInDark,
+        category = Knapping,
+		SkillRequired = Strength:3,
+        xpAward = Masonry:10;FlintKnapping:5;Maintenance:2,
+        timedAction = MakingHammer_Surface,
+        inputs
+        {
+            item 1 tags[hammerstone] mode:keep flags[Prop1;MayDegradeHeavy],
+            item 1 [Base.LargeStone] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 3 Base.Stone2,
+			item 2 KatanaZ.SharpedStones,
+        }
+    }
+	
+	craftRecipe Scrape Flint Flake
+	{
+		timedAction = SharpenStakeWood,
+		time = 190,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Ancient Survival,
+		xpAward = Maintenance:1;FlintKnapping:2,
+		inputs
+		{
+			item 1 [Base.SharpedStone] mode:keep flags[Prop1;MayDegradeHeavy],
+			item 1 tags[sharpknife] mode:keep flags[Prop2;IsNotDull;MayDegradeHeavy],
+		}
+		outputs
+		{
+			item 2 KatanaZ.FlintShavings,
+		}
+	}
+}
