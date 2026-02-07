@@ -1532,6 +1532,95 @@ module Base
             }
         }
 	}
+
+	template vehicle SeatM548
+	{
+		part SeatFrontLeft
+		{
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+		
+		part SeatFrontRight
+		{
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+		
+		part SeatGunner
+		{
+			area = SeatFrontRight,
+			container
+			{
+				seat = Gunner,
+			}
+		}
+				
+
+		part Seat*
+		{
+			itemType = Base.M113_Seat,
+			Icon	=	M113_Seat,
+			category = seat,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			area = Engine,
+			mechanicArea = Engine,
+			durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+				capacity = 20,
+			}
+			            
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = Vehicles.InstallTest.Default,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = Vehicles.UninstallTest.Default,
+                requireEmpty = true,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default, 
+				init = Vehicles.Create.Default,
+            }
+		}
+	}
 	
 	template vehicle PassengerM548
 	{

@@ -10,7 +10,7 @@ module Base
 
 	craftRecipe MakeBladeII
 	{
-		time          = 150,
+		time          = 75,
 		Tags          = InHandCraft,
 		category      = Weaponry,
 		NeedToBeLearn = false,
@@ -22,8 +22,9 @@ module Base
 		{
 			item 1 tags[Hammer] mode:keep flags[MayDegradeVeryLight],
 			item 5 [Nails],
-			item 2 [CrudeShortSword;CrudeSword;CrudeSword_Broken;Katana;Katana_Broken;Machete;Machete_Crude;MacheteForged;ShortSword;ShortSword_Scrap;Sword;Sword_Broken;Sword_Scrap;Sword_Scrap_Broken]
+			item 1 [CrudeShortSword;CrudeSword;CrudeSword_Broken;Katana;Katana_Broken;Machete;Machete_Crude;MacheteForged;ShortSword;ShortSword_Scrap;Sword;Sword_Broken;Sword_Scrap;Sword_Scrap_Broken]
 			mappers[LongBladeMapper2] flags[Prop2],
+			item 2 [CMU_longblade.CMULongBladeUpgradeKit],
 		}
 
 		outputs
@@ -49,13 +50,36 @@ module Base
 			CMU_longblade.CMUSword_Scrap_Broken2 = Sword_Scrap_Broken,
 		}
 	}
+	
+	
+	craftRecipe MakeBladeUpgradeKit2
+	{
+		time          = 75,
+		Tags          = InHandCraft,
+		category      = Weaponry,
+		NeedToBeLearn = false,
+		SkillRequired = Maintenance:1;LongBlade:1,
+		timedAction   = CraftWeapon2H,
+		xpAward       = Maintenance:10,
+
+		inputs
+		{
+			item 1 [CrudeShortSword;CrudeSword;CrudeSword_Broken;Katana;Katana_Broken;Machete;Machete_Crude;MacheteForged;ShortSword;ShortSword_Scrap;Sword;Sword_Broken;Sword_Scrap;Sword_Scrap_Broken]
+			flags[Prop2],
+		}
+
+		outputs
+		{
+			item 2 CMU_longblade.CMULongBladeUpgradeKit,
+		}
+	}
 
 
 /****************** Long Blade Tier III ******************/
 
 	craftRecipe MakeBladeIII
 	{
-		time          = 200,
+		time          = 100,
 		Tags          = InHandCraft,
 		category      = Weaponry,
 		NeedToBeLearn = false,
@@ -69,8 +93,7 @@ module Base
 			item 10 [Nails],
 			item 1 [CMU_longblade.CMUCrudeShortSword2;CMU_longblade.CMUCrudeSword2;CMU_longblade.CMUCrudeSword_Broken2;CMU_longblade.CMUKatana2;CMU_longblade.CMUKatana_Broken2;CMU_longblade.CMUMachete2;CMU_longblade.CMUMachete_Crude2;CMU_longblade.CMUMacheteForged2;CMU_longblade.CMUShortSword2;CMU_longblade.CMUShortSword_Scrap2;CMU_longblade.CMUSword2;CMU_longblade.CMUSword_Broken2;CMU_longblade.CMUSword_Scrap2;CMU_longblade.CMUSword_Scrap_Broken2]
 			mappers[LongBladeMapper3] flags[Prop2],
-			item 1 [CrudeShortSword;CrudeSword;CrudeSword_Broken;Katana;Katana_Broken;Machete;Machete_Crude;MacheteForged;ShortSword;ShortSword_Scrap;Sword;Sword_Broken;Sword_Scrap;Sword_Scrap_Broken]
-			mappers[LongBladeMapper3],
+			item 2 [CMU_longblade.CMULongBladeUpgradeKit],
 		}
 
 		outputs
@@ -80,20 +103,43 @@ module Base
 
 		itemMapper LongBladeMapper3
 		{
-			CMU_longblade.CMUCrudeShortSword3 = CMU_longblade.CMUCrudeShortSword2;CrudeShortSword,
-			CMU_longblade.CMUCrudeSword3 = CMU_longblade.CMUCrudeSword2;CrudeSword,
-			CMU_longblade.CMUCrudeSword_Broken3 = CMU_longblade.CMUCrudeSword_Broken2;CrudeSword_Broken,
-			CMU_longblade.CMUKatana3 = CMU_longblade.CMUKatana2;Katana,
-			CMU_longblade.CMUKatana_Broken3 = CMU_longblade.CMUKatana_Broken2;Katana_Broken,
-			CMU_longblade.CMUMachete3 = CMU_longblade.CMUMachete2;Machete,
-			CMU_longblade.CMUMachete_Crude3 = CMU_longblade.CMUMachete_Crude2;Machete_Crude,
-			CMU_longblade.CMUMacheteForged3 = CMU_longblade.CMUMacheteForged2;MacheteForged,
-			CMU_longblade.CMUShortSword3 = CMU_longblade.CMUShortSword2;ShortSword,
-			CMU_longblade.CMUShortSword_Scrap3 = CMU_longblade.CMUShortSword_Scrap2;ShortSword_Scrap,
-			CMU_longblade.CMUSword3 = CMU_longblade.CMUSword2;Sword,
-			CMU_longblade.CMUSword_Broken3 = CMU_longblade.CMUSword_Broken2;Sword_Broken,
-			CMU_longblade.CMUSword_Scrap3 = CMU_longblade.CMUSword_Scrap2;Sword_Scrap,
-			CMU_longblade.CMUSword_Scrap_Broken3 = CMU_longblade.CMUSword_Scrap_Broken2;Sword_Scrap_Broken,
+			CMU_longblade.CMUCrudeShortSword3 = CMU_longblade.CMUCrudeShortSword2,
+			CMU_longblade.CMUCrudeSword3 = CMU_longblade.CMUCrudeSword2,
+			CMU_longblade.CMUCrudeSword_Broken3 = CMU_longblade.CMUCrudeSword_Broken2,
+			CMU_longblade.CMUKatana3 = CMU_longblade.CMUKatana2,
+			CMU_longblade.CMUKatana_Broken3 = CMU_longblade.CMUKatana_Broken2,
+			CMU_longblade.CMUMachete3 = CMU_longblade.CMUMachete2,
+			CMU_longblade.CMUMachete_Crude3 = CMU_longblade.CMUMachete_Crude2,
+			CMU_longblade.CMUMacheteForged3 = CMU_longblade.CMUMacheteForged2,
+			CMU_longblade.CMUShortSword3 = CMU_longblade.CMUShortSword2,
+			CMU_longblade.CMUShortSword_Scrap3 = CMU_longblade.CMUShortSword_Scrap2,
+			CMU_longblade.CMUSword3 = CMU_longblade.CMUSword2,
+			CMU_longblade.CMUSword_Broken3 = CMU_longblade.CMUSword_Broken2,
+			CMU_longblade.CMUSword_Scrap3 = CMU_longblade.CMUSword_Scrap2,
+			CMU_longblade.CMUSword_Scrap_Broken3 = CMU_longblade.CMUSword_Scrap_Broken2,
+		}
+	}
+	
+	
+	craftRecipe MakeBladeUpgradeKit4
+	{
+		time          = 100,
+		Tags          = InHandCraft,
+		category      = Weaponry,
+		NeedToBeLearn = false,
+		SkillRequired = Maintenance:1;LongBlade:2,
+		timedAction   = CraftWeapon2H,
+		xpAward       = Maintenance:15,
+
+		inputs
+		{
+			item 1 [CMU_longblade.CMUCrudeShortSword2;CMU_longblade.CMUCrudeSword2;CMU_longblade.CMUCrudeSword_Broken2;CMU_longblade.CMUKatana2;CMU_longblade.CMUKatana_Broken2;CMU_longblade.CMUMachete2;CMU_longblade.CMUMachete_Crude2;CMU_longblade.CMUMacheteForged2;CMU_longblade.CMUShortSword2;CMU_longblade.CMUShortSword_Scrap2;CMU_longblade.CMUSword2;CMU_longblade.CMUSword_Broken2;CMU_longblade.CMUSword_Scrap2;CMU_longblade.CMUSword_Scrap_Broken2]
+			flags[Prop2],
+		}
+
+		outputs
+		{
+			item 4 CMU_longblade.CMULongBladeUpgradeKit,
 		}
 	}
 
@@ -102,7 +148,7 @@ module Base
 
 	craftRecipe MakeBladeIV
 	{
-		time          = 200,
+		time          = 100,
 		Tags          = InHandCraft,
 		category      = Weaponry,
 		NeedToBeLearn = false,
@@ -116,8 +162,7 @@ module Base
 			item 15 [Nails],
 			item 1 [CMU_longblade.CMUCrudeShortSword3;CMU_longblade.CMUCrudeSword3;CMU_longblade.CMUCrudeSword_Broken3;CMU_longblade.CMUKatana3;CMU_longblade.CMUKatana_Broken3;CMU_longblade.CMUMachete3;CMU_longblade.CMUMachete_Crude3;CMU_longblade.CMUMacheteForged3;CMU_longblade.CMUShortSword3;CMU_longblade.CMUShortSword_Scrap3;CMU_longblade.CMUSword3;CMU_longblade.CMUSword_Broken3;CMU_longblade.CMUSword_Scrap3;CMU_longblade.CMUSword_Scrap_Broken3]
 			mappers[LongBladeMapper4] flags[Prop2],
-			item 1 [CrudeShortSword;CrudeSword;CrudeSword_Broken;Katana;Katana_Broken;Machete;Machete_Crude;MacheteForged;ShortSword;ShortSword_Scrap;Sword;Sword_Broken;Sword_Scrap;Sword_Scrap_Broken]
-			mappers[LongBladeMapper4],
+			item 2 [CMU_longblade.CMULongBladeUpgradeKit],
 		}
 
 		outputs
@@ -127,20 +172,43 @@ module Base
 
 		itemMapper LongBladeMapper4
 		{
-			CMU_longblade.CMUCrudeShortSword4 = CMU_longblade.CMUCrudeShortSword3;CrudeShortSword,
-			CMU_longblade.CMUCrudeSword4 = CMU_longblade.CMUCrudeSword3;CrudeSword,
-			CMU_longblade.CMUCrudeSword_Broken4 = CMU_longblade.CMUCrudeSword_Broken3;CrudeSword_Broken,
-			CMU_longblade.CMUKatana4 = CMU_longblade.CMUKatana3;Katana,
-			CMU_longblade.CMUKatana_Broken4 = CMU_longblade.CMUKatana_Broken3;Katana_Broken,
-			CMU_longblade.CMUMachete4 = CMU_longblade.CMUMachete3;Machete,
-			CMU_longblade.CMUMachete_Crude4 = CMU_longblade.CMUMachete_Crude3;Machete_Crude,
-			CMU_longblade.CMUMacheteForged4 = CMU_longblade.CMUMacheteForged3;MacheteForged,
-			CMU_longblade.CMUShortSword4 = CMU_longblade.CMUShortSword3;ShortSword,
-			CMU_longblade.CMUShortSword_Scrap4 = CMU_longblade.CMUShortSword_Scrap3;ShortSword_Scrap,
-			CMU_longblade.CMUSword4 = CMU_longblade.CMUSword3;Sword,
-			CMU_longblade.CMUSword_Broken4 = CMU_longblade.CMUSword_Broken3;Sword_Broken,
-			CMU_longblade.CMUSword_Scrap4 = CMU_longblade.CMUSword_Scrap3;Sword_Scrap,
-			CMU_longblade.CMUSword_Scrap_Broken4 = CMU_longblade.CMUSword_Scrap_Broken3;Sword_Scrap_Broken,
+			CMU_longblade.CMUCrudeShortSword4 = CMU_longblade.CMUCrudeShortSword3,
+			CMU_longblade.CMUCrudeSword4 = CMU_longblade.CMUCrudeSword3,
+			CMU_longblade.CMUCrudeSword_Broken4 = CMU_longblade.CMUCrudeSword_Broken3,
+			CMU_longblade.CMUKatana4 = CMU_longblade.CMUKatana3,
+			CMU_longblade.CMUKatana_Broken4 = CMU_longblade.CMUKatana_Broken3,
+			CMU_longblade.CMUMachete4 = CMU_longblade.CMUMachete3,
+			CMU_longblade.CMUMachete_Crude4 = CMU_longblade.CMUMachete_Crude3,
+			CMU_longblade.CMUMacheteForged4 = CMU_longblade.CMUMacheteForged3,
+			CMU_longblade.CMUShortSword4 = CMU_longblade.CMUShortSword3,
+			CMU_longblade.CMUShortSword_Scrap4 = CMU_longblade.CMUShortSword_Scrap3,
+			CMU_longblade.CMUSword4 = CMU_longblade.CMUSword3,
+			CMU_longblade.CMUSword_Broken4 = CMU_longblade.CMUSword_Broken3,
+			CMU_longblade.CMUSword_Scrap4 = CMU_longblade.CMUSword_Scrap3,
+			CMU_longblade.CMUSword_Scrap_Broken4 = CMU_longblade.CMUSword_Scrap_Broken3,
+		}
+	}
+	
+	
+	craftRecipe MakeBladeUpgradeKit8
+	{
+		time          = 100,
+		Tags          = InHandCraft,
+		category      = Weaponry,
+		NeedToBeLearn = false,
+		SkillRequired = Maintenance:2;LongBlade:2,
+		timedAction   = CraftWeapon2H,
+		xpAward       = Maintenance:20,
+
+		inputs
+		{
+			item 1 [CMU_longblade.CMUCrudeShortSword3;CMU_longblade.CMUCrudeSword3;CMU_longblade.CMUCrudeSword_Broken3;CMU_longblade.CMUKatana3;CMU_longblade.CMUKatana_Broken3;CMU_longblade.CMUMachete3;CMU_longblade.CMUMachete_Crude3;CMU_longblade.CMUMacheteForged3;CMU_longblade.CMUShortSword3;CMU_longblade.CMUShortSword_Scrap3;CMU_longblade.CMUSword3;CMU_longblade.CMUSword_Broken3;CMU_longblade.CMUSword_Scrap3;CMU_longblade.CMUSword_Scrap_Broken3]
+			flags[Prop2],
+		}
+
+		outputs
+		{
+			item 8 CMU_longblade.CMULongBladeUpgradeKit,
 		}
 	}
 
@@ -149,7 +217,7 @@ module Base
 
 	craftRecipe MakeBladeV
 	{
-		time          = 250,
+		time          = 125,
 		Tags          = InHandCraft,
 		category      = Weaponry,
 		NeedToBeLearn = false,
@@ -163,8 +231,7 @@ module Base
 			item 20 [Nails],
 			item 1 [CMU_longblade.CMUCrudeShortSword4;CMU_longblade.CMUCrudeSword4;CMU_longblade.CMUCrudeSword_Broken4;CMU_longblade.CMUKatana4;CMU_longblade.CMUKatana_Broken4;CMU_longblade.CMUMachete4;CMU_longblade.CMUMachete_Crude4;CMU_longblade.CMUMacheteForged4;CMU_longblade.CMUShortSword4;CMU_longblade.CMUShortSword_Scrap4;CMU_longblade.CMUSword4;CMU_longblade.CMUSword_Broken4;CMU_longblade.CMUSword_Scrap4;CMU_longblade.CMUSword_Scrap_Broken4]
 			mappers[LongBladeMapper5] flags[Prop2],
-			item 1 [CrudeShortSword;CrudeSword;CrudeSword_Broken;Katana;Katana_Broken;Machete;Machete_Crude;MacheteForged;ShortSword;ShortSword_Scrap;Sword;Sword_Broken;Sword_Scrap;Sword_Scrap_Broken]
-			mappers[LongBladeMapper5],
+			item 2 [CMU_longblade.CMULongBladeUpgradeKit],
 		}
 
 		outputs
@@ -174,20 +241,43 @@ module Base
 
 		itemMapper LongBladeMapper5
 		{
-			CMU_longblade.CMUCrudeShortSword5 = CMU_longblade.CMUCrudeShortSword4;CrudeShortSword,
-			CMU_longblade.CMUCrudeSword5 = CMU_longblade.CMUCrudeSword4;CrudeSword,
-			CMU_longblade.CMUCrudeSword_Broken5 = CMU_longblade.CMUCrudeSword_Broken4;CrudeSword_Broken,
-			CMU_longblade.CMUKatana5 = CMU_longblade.CMUKatana4;Katana,
-			CMU_longblade.CMUKatana_Broken5 = CMU_longblade.CMUKatana_Broken4;Katana_Broken,
-			CMU_longblade.CMUMachete5 = CMU_longblade.CMUMachete4;Machete,
-			CMU_longblade.CMUMachete_Crude5 = CMU_longblade.CMUMachete_Crude4;Machete_Crude,
-			CMU_longblade.CMUMacheteForged5 = CMU_longblade.CMUMacheteForged4;MacheteForged,
-			CMU_longblade.CMUShortSword5 = CMU_longblade.CMUShortSword4;ShortSword,
-			CMU_longblade.CMUShortSword_Scrap5 = CMU_longblade.CMUShortSword_Scrap4;ShortSword_Scrap,
-			CMU_longblade.CMUSword5 = CMU_longblade.CMUSword4;Sword,
-			CMU_longblade.CMUSword_Broken5 = CMU_longblade.CMUSword_Broken4;Sword_Broken,
-			CMU_longblade.CMUSword_Scrap5 = CMU_longblade.CMUSword_Scrap4;Sword_Scrap,
-			CMU_longblade.CMUSword_Scrap_Broken5 = CMU_longblade.CMUSword_Scrap_Broken4;Sword_Scrap_Broken,
+			CMU_longblade.CMUCrudeShortSword5 = CMU_longblade.CMUCrudeShortSword4,
+			CMU_longblade.CMUCrudeSword5 = CMU_longblade.CMUCrudeSword4,
+			CMU_longblade.CMUCrudeSword_Broken5 = CMU_longblade.CMUCrudeSword_Broken4,
+			CMU_longblade.CMUKatana5 = CMU_longblade.CMUKatana4,
+			CMU_longblade.CMUKatana_Broken5 = CMU_longblade.CMUKatana_Broken4,
+			CMU_longblade.CMUMachete5 = CMU_longblade.CMUMachete4,
+			CMU_longblade.CMUMachete_Crude5 = CMU_longblade.CMUMachete_Crude4,
+			CMU_longblade.CMUMacheteForged5 = CMU_longblade.CMUMacheteForged4,
+			CMU_longblade.CMUShortSword5 = CMU_longblade.CMUShortSword4,
+			CMU_longblade.CMUShortSword_Scrap5 = CMU_longblade.CMUShortSword_Scrap4,
+			CMU_longblade.CMUSword5 = CMU_longblade.CMUSword4,
+			CMU_longblade.CMUSword_Broken5 = CMU_longblade.CMUSword_Broken4,
+			CMU_longblade.CMUSword_Scrap5 = CMU_longblade.CMUSword_Scrap4,
+			CMU_longblade.CMUSword_Scrap_Broken5 = CMU_longblade.CMUSword_Scrap_Broken4,
+		}
+	}
+	
+	
+	craftRecipe MakeBladeUpgradeKit16
+	{
+		time          = 125,
+		Tags          = InHandCraft,
+		category      = Weaponry,
+		NeedToBeLearn = false,
+		SkillRequired = Maintenance:2;LongBlade:3,
+		timedAction   = CraftWeapon2H,
+		xpAward       = Maintenance:25,
+
+		inputs
+		{
+			item 1 [CMU_longblade.CMUCrudeShortSword4;CMU_longblade.CMUCrudeSword4;CMU_longblade.CMUCrudeSword_Broken4;CMU_longblade.CMUKatana4;CMU_longblade.CMUKatana_Broken4;CMU_longblade.CMUMachete4;CMU_longblade.CMUMachete_Crude4;CMU_longblade.CMUMacheteForged4;CMU_longblade.CMUShortSword4;CMU_longblade.CMUShortSword_Scrap4;CMU_longblade.CMUSword4;CMU_longblade.CMUSword_Broken4;CMU_longblade.CMUSword_Scrap4;CMU_longblade.CMUSword_Scrap_Broken4]
+			flags[Prop2],
+		}
+
+		outputs
+		{
+			item 16 CMU_longblade.CMULongBladeUpgradeKit,
 		}
 	}
 
@@ -196,7 +286,7 @@ module Base
 
 	craftRecipe MakeBladeVI
 	{
-		time          = 300,
+		time          = 150,
 		Tags          = InHandCraft,
 		category      = Weaponry,
 		NeedToBeLearn = false,
@@ -210,8 +300,7 @@ module Base
 			item 25 [Nails],
 			item 1 [CMU_longblade.CMUCrudeShortSword5;CMU_longblade.CMUCrudeSword5;CMU_longblade.CMUCrudeSword_Broken5;CMU_longblade.CMUKatana5;CMU_longblade.CMUKatana_Broken5;CMU_longblade.CMUMachete5;CMU_longblade.CMUMachete_Crude5;CMU_longblade.CMUMacheteForged5;CMU_longblade.CMUShortSword5;CMU_longblade.CMUShortSword_Scrap5;CMU_longblade.CMUSword5;CMU_longblade.CMUSword_Broken5;CMU_longblade.CMUSword_Scrap5;CMU_longblade.CMUSword_Scrap_Broken5]
 			mappers[LongBladeMapper6] flags[Prop2],
-			item 1 [CrudeShortSword;CrudeSword;CrudeSword_Broken;Katana;Katana_Broken;Machete;Machete_Crude;MacheteForged;ShortSword;ShortSword_Scrap;Sword;Sword_Broken;Sword_Scrap;Sword_Scrap_Broken]
-			mappers[LongBladeMapper6],
+			item 2 [CMU_longblade.CMULongBladeUpgradeKit],
 		}
 
 		outputs
@@ -221,20 +310,43 @@ module Base
 
 		itemMapper LongBladeMapper6
 		{
-			CMU_longblade.CMUCrudeShortSword6 = CMU_longblade.CMUCrudeShortSword5;CrudeShortSword,
-			CMU_longblade.CMUCrudeSword6 = CMU_longblade.CMUCrudeSword5;CrudeSword,
-			CMU_longblade.CMUCrudeSword_Broken6 = CMU_longblade.CMUCrudeSword_Broken5;CrudeSword_Broken,
-			CMU_longblade.CMUKatana6 = CMU_longblade.CMUKatana5;Katana,
-			CMU_longblade.CMUKatana_Broken6 = CMU_longblade.CMUKatana_Broken5;Katana_Broken,
-			CMU_longblade.CMUMachete6 = CMU_longblade.CMUMachete5;Machete,
-			CMU_longblade.CMUMachete_Crude6 = CMU_longblade.CMUMachete_Crude5;Machete_Crude,
-			CMU_longblade.CMUMacheteForged6 = CMU_longblade.CMUMacheteForged5;MacheteForged,
-			CMU_longblade.CMUShortSword6 = CMU_longblade.CMUShortSword5;ShortSword,
-			CMU_longblade.CMUShortSword_Scrap6 = CMU_longblade.CMUShortSword_Scrap5;ShortSword_Scrap,
-			CMU_longblade.CMUSword6 = CMU_longblade.CMUSword5;Sword,
-			CMU_longblade.CMUSword_Broken6 = CMU_longblade.CMUSword_Broken5;Sword_Broken,
-			CMU_longblade.CMUSword_Scrap6 = CMU_longblade.CMUSword_Scrap5;Sword_Scrap,
-			CMU_longblade.CMUSword_Scrap_Broken6 = CMU_longblade.CMUSword_Scrap_Broken5;Sword_Scrap_Broken,
+			CMU_longblade.CMUCrudeShortSword6 = CMU_longblade.CMUCrudeShortSword5,
+			CMU_longblade.CMUCrudeSword6 = CMU_longblade.CMUCrudeSword5,
+			CMU_longblade.CMUCrudeSword_Broken6 = CMU_longblade.CMUCrudeSword_Broken5,
+			CMU_longblade.CMUKatana6 = CMU_longblade.CMUKatana5,
+			CMU_longblade.CMUKatana_Broken6 = CMU_longblade.CMUKatana_Broken5,
+			CMU_longblade.CMUMachete6 = CMU_longblade.CMUMachete5,
+			CMU_longblade.CMUMachete_Crude6 = CMU_longblade.CMUMachete_Crude5,
+			CMU_longblade.CMUMacheteForged6 = CMU_longblade.CMUMacheteForged5,
+			CMU_longblade.CMUShortSword6 = CMU_longblade.CMUShortSword5,
+			CMU_longblade.CMUShortSword_Scrap6 = CMU_longblade.CMUShortSword_Scrap5,
+			CMU_longblade.CMUSword6 = CMU_longblade.CMUSword5,
+			CMU_longblade.CMUSword_Broken6 = CMU_longblade.CMUSword_Broken5,
+			CMU_longblade.CMUSword_Scrap6 = CMU_longblade.CMUSword_Scrap5,
+			CMU_longblade.CMUSword_Scrap_Broken6 = CMU_longblade.CMUSword_Scrap_Broken5,
+		}
+	}
+	
+	
+	craftRecipe MakeBladeUpgradeKitVI
+	{
+		time          = 150,
+		Tags          = InHandCraft,
+		category      = Weaponry,
+		NeedToBeLearn = false,
+		SkillRequired = Maintenance:3;LongBlade:3,
+		timedAction   = CraftWeapon2H,
+		xpAward       = Maintenance:30,
+
+		inputs
+		{
+			item 1 [CMU_longblade.CMUCrudeShortSword5;CMU_longblade.CMUCrudeSword5;CMU_longblade.CMUCrudeSword_Broken5;CMU_longblade.CMUKatana5;CMU_longblade.CMUKatana_Broken5;CMU_longblade.CMUMachete5;CMU_longblade.CMUMachete_Crude5;CMU_longblade.CMUMacheteForged5;CMU_longblade.CMUShortSword5;CMU_longblade.CMUShortSword_Scrap5;CMU_longblade.CMUSword5;CMU_longblade.CMUSword_Broken5;CMU_longblade.CMUSword_Scrap5;CMU_longblade.CMUSword_Scrap_Broken5]
+			flags[Prop2],
+		}
+
+		outputs
+		{
+			item 32 CMU_longblade.CMULongBladeUpgradeKit,
 		}
 	}
 
