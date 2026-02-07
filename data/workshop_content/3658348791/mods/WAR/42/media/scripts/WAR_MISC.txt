@@ -1,0 +1,494 @@
+module Base
+{
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+model WAR_ARROW      				                    {
+mesh = weapons/firearms/WAR_TENPOINT_CROSSBOW|WAR_TENPOINT_CROSSBOW_ARROW,
+texture = weapons/firearms/PALETTE/WAR_LP_ATLAS,        }
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+craftRecipe Prepair Feathers For Arrow Fletching
+    {
+        timedAction = CraftWeapon1H,
+        Time = 160,
+        category = Ammunition,
+        Tags = InHandCraft,
+        inputs
+        {
+            item 1 [Base.ChickenFeather] flags[Prop2],
+            item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull],
+        }
+        outputs
+        {
+            item 2 Base.FletchedChickenFeather,
+        }
+    }
+
+craftRecipe Carve Arrow Tip
+    {
+        timedAction = CraftWeapon1H,
+        Time = 360,
+        category = Ammunition,
+        Tags = InHandCraft,
+        inputs
+        {
+            item 1 [Base.SharpedStone] flags[Prop2],
+            item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull],
+        }
+        outputs
+        {
+            item 1 Base.Primitive_ArrowShard,
+        }
+    }
+
+
+craftRecipe Carve Arrow From TreeBranch
+    {
+        timedAction = CraftWeapon1H,
+        Time = 560,
+        category = Ammunition,
+        Tags = InHandCraft,
+        inputs
+        {
+            item 1 [Base.TreeBranch2] flags[Prop2],
+            item 1 [Base.Primitive_ArrowShard],
+            item 1 tags[SharpKnife] mode:keep flags[SharpnessCheck;IsNotDull],
+            item 3 [Base.FletchedChickenFeather],
+        }
+        outputs
+        {
+            item 1 Base.WoodShaft_Arrow,
+        }
+    }
+
+
+
+
+
+
+
+
+
+    item Primitive_ArrowShard
+    {
+        DisplayCategory = Material,
+        ItemType = base:normal,
+		DisplayName	=	[Primitive] Metal ArrowTip,
+        Weight = 0.2,
+        Icon = Sword_Forged_01_Tip,
+        Tags = HasMetal;ShowCondition;SmeltableIronSmall,
+        StaticModel = CrudeSword_Shard,
+        WorldStaticModel = CrudeSword_Shard,
+        ConditionMax = 10,
+        Sharpness = 1.0,
+    }
+
+
+    item FletchedChickenFeather
+    {
+        DisplayCategory = AnimalPart,
+        Weight = 0.001,
+		DisplayName	=	[Fletched] Feather Half,
+		ItemType = base:normal,
+        Icon = Feather_Chicken,
+        Tags = Feather,
+        WorldStaticModel = Chicken_Feather,
+    }
+
+    item Primitive_DrawString
+    {
+        DisplayCategory = Material,
+		DisplayName	=	[Primitive] Draw String,
+		ItemType = base:normal,
+        Icon = Dogbane,
+        Weight = 0.4,
+        WorldStaticModel = Dogbane_Ground,
+        Tooltip = Tooltip_item_Dogbane,
+    }
+
+
+    item WoodShaft_Arrow
+    {
+        DisplayCategory = Ammo,
+        ItemType = base:normal,
+        Weight = 0.08,
+        DisplayName	=	Arrow,
+        Icon = WAR_ARROW,
+        count = 12,
+		AttachmentType = REX5,
+        MetalValue = 1.0,
+        WorldStaticModel = WAR_ARROW,
+        StaticModel = WAR_ARROW,
+        Tags = base:ammo,
+    }
+
+
+
+
+
+
+
+
+
+
+ 
+    item GunAttParts
+    {
+        ItemType = base:normal,
+        DisplayCategory = Material,
+        Count	=	5,
+        Weight	=	0.01,
+        ItemType = base:normal,
+        DisplayName	=	GunAttParts,
+        Icon	=	GunAttParts,
+        MetalValue = 1,
+        StaticModel = WAR_DEFAULT_NOMODEL,
+        WorldStaticModel = WAR_DEFAULT_NOMODEL,
+    }
+
+    
+    item TempNilItem
+    {
+        ItemType = base:weapon,
+        DisplayCategory = Weapon,
+        ImpactSound	=	null,
+        MaxRange	=	40,
+        WeaponSprite	=	TempNilItem,
+        SoundVolume	=	40,
+        MinAngle	=	0.965,
+        Type	=	Weapon,
+        MinimumSwingTime	=	0.5,
+        ToHitModifier	=	1.5,
+        NPCSoundBoost	=	1.5,
+        KnockBackOnNoDeath	=	TRUE,
+        Ranged	=	TRUE,
+        SwingAmountBeforeImpact	=	0,
+        ProjectileCount	=	1,
+        ConditionLowerChanceOneIn	=	130,
+        Weight	=	1.9,
+        SplatNumber	=	3,
+        PushBackMod	=	0.3,
+        SubCategory	=	Firearm,
+        ConditionMax	=	25,
+        ShareDamage	=	FALSE,
+        MaxHitCount	=	3,
+        PiercingBullets = TRUE,
+        IsAimedFirearm	=	TRUE,
+        DoorDamage	=	20,
+        UseEndurance	=	FALSE,
+        SwingAnim	=	Rifle,
+        DisplayName	=	Useless testing weapons,
+        MinRange	=	0.0,
+        SwingTime	=	0.7,
+        MultipleHitConditionAffected	=	FALSE,
+		BringToBearSound = M16BringToBear,
+        SwingSound	=	TempNilItem,
+        HitSound = BulletHitBody,
+		ClickSound = M16Jam,
+        SoundRadius	=	100,
+        MinDamage	=	2,
+        MaxDamage	=	3,
+        SplatSize	=	3,
+        KnockdownMod	=	4,
+        SplatBloodOnNoDeath	=	TRUE,
+        Icon	=	TempNilItem,
+        RunAnim	=	Run_Weapon2,
+        IdleAnim	=	Idle_Weapon2,
+        CriticalChance = 30,
+        CritDmgMultiplier = 3,
+        AimingPerkCritModifier = 2,
+        HitChance = 100,
+        AimingPerkHitChanceModifier = 1,
+        AimingPerkMinAngleModifier = 0,
+        AimingPerkRangeModifier = 0,
+        RecoilDelay = 12,
+        SoundGain = 2,
+        ReloadTime = 18,
+        AimingTime = 15,
+        RequiresEquippedBothHands = TRUE,
+        BreakSound = M16Break,
+        TwoHandWeapon = TRUE,
+        MetalValue = 45,
+        AmmoBox = 308Box,
+        MaxAmmo = 30,
+		EquipSound = M16Equip,
+		UnequipSound = M16UnEquip,
+        InsertAmmoSound = AKplayReloadSound,
+        EjectAmmoSound = M16EjectAmmo,
+		InsertAmmoStartSound = ,
+		InsertAmmoStopSound = M16InsertAmmoStop,
+		EjectAmmoStartSound = M16EjectAmmoStart,
+		EjectAmmoStopSound = M16EjectAmmoStop,
+        ShellFallSound = M16CartridgeFall,
+        RackSound = M16Rack,
+        MagazineType = Base.308ClipU,
+        AmmoType = Base.308Bullets,
+        WeaponReloadType = boltaction,
+        JamGunChance = 0,
+        AttachmentType = Rifle,
+        FireMode = Auto,
+        FireModePossibilities = Auto/Single,
+        StopPower = 2,
+        WorldRender = FALSE,
+    } 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    item x2Scope
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = Scope2x,
+        Weight = 0.3,
+        WeightModifier = 0.3,
+        AimingTimeModifier = 5,
+        MaxSightRange = 12.0,
+        MinSightRange = 4,
+        Tags = base:optics,
+        MountOn = Base.TempNilItem,
+        PartType = Scope,
+        Tooltip = Tooltip_Scope,
+        MetalValue = 22.0,
+        WorldStaticModel = Rifle_2XScope_Ground,
+
+    }
+
+    item x4Scope
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = Scope4x,
+        Weight = 0.4,
+        WeightModifier = 0.4,
+        AimingTimeModifier = 10,
+        MaxSightRange = 16.0,
+        MinSightRange = 8,
+        Tags = base:optics,
+        MountOn = Base.TempNilItem,
+        PartType = Scope,
+        Tooltip = Tooltip_Scope,
+        MetalValue = 22.0,
+        WorldStaticModel = Rifle_4XScope_Ground,
+
+    }
+
+    item x8Scope
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = Scope8x,
+        Weight = 0.8,
+        WeightModifier = 0.8,
+        AimingTimeModifier = 20,
+        MaxSightRange = 22.0,
+        MinSightRange = 15,
+        Tags = base:optics,
+        MountOn = Base.TempNilItem,
+        PartType = Scope,
+        Tooltip = Tooltip_Scope,
+        MetalValue = 22.0,
+        WorldStaticModel = Rifle_8XScope_Ground,
+
+    }
+
+    item AmmoStraps
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = AmmoStrap,
+        Weight = 0.5,
+        WeightModifier = 0.5,
+        ReloadTimeModifier = -5,
+        MountOn = Base.TempNilItem,
+        PartType = Sling,
+        Tooltip = Tooltip_AmmoStrap,
+        WorldStaticModel = AmmoStrap_Ground,
+    }
+
+    item TritiumSights
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = ScopeIronSight,
+        Weight = 0.1,
+        WeightModifier = 0.0,
+        AimingTimeModifier = -3,
+        LowLightBonus = 5.0,
+        MountOn = Base.TempNilItem,
+        MinSightRange = 2,
+        MaxSightRange = 6.0,
+        PartType = Scope,
+        Tooltip = Tooltip_IronSight,
+        MetalValue = 15.0,
+        WorldStaticModel = Rifle_IronSights_Ground,
+
+    }
+
+    item RecoilPad
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = RifleRecoilPad,
+        Weight = 0.1,
+        WeightModifier = 0.1,
+        RecoilDelayModifier = -2.0,
+        MountOn = Base.TempNilItem,
+        PartType = RecoilPad,
+        Tooltip = Tooltip_RecoilPad,
+        WorldStaticModel = Rifle_RecoilPad_Ground,
+
+    }
+
+    item Laser
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = HandgunLaser,
+        Weight = 0.6,
+        WeightModifier = 0.6,
+        HitChanceModifier = 5,
+        AimingTimeModifier = -10,
+        MountOn = Base.TempNilItem,
+        PartType = Canon,
+        Tooltip = Tooltip_Laser,
+        MetalValue = 15.0,
+        WorldStaticModel = Handgun_Laser_Ground,
+
+    }
+
+    item RedDot
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = RedDot,
+        Weight = 0.4,
+        WeightModifier = 0.2,
+        AimingTimeModifier = -10,
+        MinSightRange = 2,
+        MaxSightRange = 10.0,
+        MountOn = Base.TempNilItem,
+        PartType = Scope,
+        Tooltip = Tooltip_RedDot,
+        StaticModel = RedDot,
+        Tags = base:optics,
+        MetalValue = 15.0,
+        WorldStaticModel = Handgun_RedDotScope_Ground,
+
+    }
+
+    item GunLight
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = Flashlight2,
+        Weight = 0.2,
+        WeightModifier = 0.2,
+        AimingTimeModifier = 5,
+        MountOn = Base.TempNilItem,
+        PartType = Canon,
+        StaticModel = GunLight,
+        MetalValue = 10.0,
+        WorldStaticModel = Handgun_Light_Ground,
+        ActivatedItem = true,
+        LightDistance = 15,
+        LightStrength = 1.3,
+        TorchCone = true,
+        TorchDot = 0.66,
+        SoundMap = Activate FlashlightOn,
+        SoundMap = Deactivate FlashlightOff,
+        primaryAnimMask = HoldingTorchRight,
+        secondaryAnimMask = HoldingTorchLeft,
+        DisappearOnUse = false,
+        UseDelta = 0.001,
+        Tags = base:flashlight;base:usesbattery,
+    }
+
+    item ChokeTubeFull
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = ShotgunChoke,
+        Weight = 0.1,
+        WeightModifier = 0.1,
+        ProjectileSpreadModifier = -0.4,
+        MaxRangeModifier = 2,
+        MountOn = Base.TempNilItem,
+        PartType = Canon,
+        Tooltip = Tooltip_ChokeTubeFull,
+        MetalValue = 12.0,
+        WorldStaticModel = Shotgun_Choke_Ground,
+
+    }
+
+    item ChokeTubeImproved
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = ShotgunChoke,
+        Weight = 0.1,
+        WeightModifier = 0.1,
+        ProjectileSpreadModifier = -0.2,
+        MaxRangeModifier = 1,
+        MountOn = Base.TempNilItem,
+        PartType = Canon,
+        Tooltip = Tooltip_ChokeTubeImproved,
+        MetalValue = 12.0,
+        WorldStaticModel = Shotgun_Choke_Ground,
+
+    }
+
+
+
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+model shells_casing     							    {
+mesh = weapons/firearms/WAR_CARTRIDGES|WAR_12G_SHELL,
+texture = weapons/firearms/CARTRIDGES/WAR_12G_SHELL_RED_USED,}
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+model rifle_casing       							    {
+mesh = weapons/firearms/WAR_CARTRIDGES|WAR_CASING_308_FIRED,
+texture = weapons/firearms/CARTRIDGES/WAR_CASING_GEN_FMJ_DAMAGED,}
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+model revolver_casing     							    {
+mesh = weapons/firearms/WAR_CARTRIDGES|WAR_9X19_CASING,
+texture = weapons/firearms/CARTRIDGES/WAR_CASING_GEN_STN,}
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+model WAR_pistol_casing     							{
+mesh = weapons/firearms/WAR_CARTRIDGES|WAR_9X19_CASING,
+texture = weapons/firearms/CARTRIDGES/WAR_CASING_GEN_STN,}
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+model TempNilItem      				                    {
+mesh = weapons/firearms/WAR_M4A1|WAR_DEFAULT_NOMODEL,
+texture = weapons/firearms/WAR_PARTS/WAR_PMAG_30,       }
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+model WAR_DEFAULT_NOMODEL      				            {
+mesh = weapons/firearms/WAR_M4A1|WAR_DEFAULT_NOMODEL,
+texture = weapons/firearms/WAR_PARTS/WAR_PMAG_30,       }
+/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
+
+}

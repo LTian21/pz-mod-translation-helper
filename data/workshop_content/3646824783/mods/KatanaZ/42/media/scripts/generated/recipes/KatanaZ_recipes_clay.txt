@@ -167,6 +167,46 @@ module Base
 		}
 	}
 
+	craftRecipe Sculpt Clay Canteen
+	{
+		timedAction = Making,
+		time = 200,
+		category = Ancient Pottery,
+		Tags = AnySurfaceCraft,
+		xpAward = Pottery:1;Maintenance:1,
+		inputs
+		{
+			item 1 [Base.ClayJarUnfired] mode:destroy,
+			item 1 tags[claytool] mode:keep flags[Prop2],
+			item 1 tags[simpleweaponbinding],
+            item 1 [*],
+            -fluid 0.2 categories[Water] mode:mixture,
+		}
+		outputs
+		{
+			item 1 KatanaZ.UnfiredCanteenClay,
+		}
+	}
+
+    craftRecipe Fire Clay Canteen
+    {
+        time = 260,
+        timedAction = Making_With_Kiln,
+        Tags = KilnSmall,
+        xpAward = Pottery:1,		
+        category = Ancient Pottery,
+        inputs
+        {
+            item 1 [KatanaZ.UnfiredCanteenClay],
+            item 1 tags[startfire],
+            item 1 tags[log;charcoal],
+        }
+        outputs
+        {
+            item 1 Base.CanteenClay,
+        }
+    }
+
     craftRecipe Press Metal Ingot Mold
     {
         time = 100,
