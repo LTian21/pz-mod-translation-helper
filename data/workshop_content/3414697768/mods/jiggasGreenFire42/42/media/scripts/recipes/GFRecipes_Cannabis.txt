@@ -1,0 +1,443 @@
+module Greenfire
+{
+    imports
+    {
+        Base
+    }
+    
+    craftRecipe InvestigateObject
+    {
+        timedAction = Making,
+        Icon        = GFSuspect1,
+        Time        = 120,
+        OnCreate    = Recipe.OnCreate.RevealSuspectItem,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 [Greenfire.GFSuspect1],
+        }
+        outputs
+        {
+        }
+    }
+    
+    craftRecipe TearCannabis
+    {
+        timedAction = Making,
+        Time        = 120,
+        OnCreate    = MakeShake,
+        Tags        = InHandCraft,
+        category    = Farming,
+        inputs
+        {
+            item 1 [Greenfire.Cannabis],
+        }
+        outputs
+        {
+            item 1 Greenfire.CannabisShake,
+        }
+    }
+    
+    craftRecipe CutCannabis
+    {
+        timedAction = Making,
+        Time        = 60,
+        Tags        = InHandCraft,
+        category    = Farming,
+        inputs
+        {
+            item 1 [Greenfire.Cannabis],
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[IsNotDull],
+        }
+        outputs
+        {
+            item 1 Greenfire.CannabisShake,
+        }
+    }
+    
+    craftRecipe GrindCannabis
+    {
+        timedAction = Making,
+        Time        = 30,
+        OnCreate    = Recipe.OnCreate.Grind_Cannabis,
+        Tags        = InHandCraft,
+        category    = Farming,
+        inputs
+        {
+            item 1 [Greenfire.Cannabis],
+            Item 1 [Greenfire.GFGrinder] mode:keep,
+        }
+        outputs
+        {
+            item 1 Greenfire.CannabisShake,
+        }
+    }
+    
+    craftRecipe PackCannabisIntoBag
+        {
+            timedAction = Making,
+            Time        = 120,
+            Tags        = InHandCraft,
+            category    = GreenFireItem,
+            
+            inputs
+            {
+                item 28 [Greenfire.Cannabis],
+            }
+            
+            outputs
+            {
+                item 1 Greenfire.OzCannabis,
+            }
+        }
+        
+        craftRecipe UnpackBagofCannabis
+        {
+            timedAction = Making,
+            Time        = 90,
+            Tags        = InHandCraft,
+            category    = GreenFireItem,
+            
+            inputs
+            {
+                item 1 [Greenfire.OzCannabis],
+            }
+            
+            outputs
+            {
+                item 28 Greenfire.Cannabis,
+            }
+        }
+    
+    craftRecipe PackBagsofCannabisintoKilo
+    {
+        timedAction = Making,
+        Time        = 150,
+        Tags        = InHandCraft,
+        category    = GreenFireItem,
+        
+        inputs
+        {
+            item 37 [Greenfire.OzCannabis],
+        }
+        
+        outputs
+        {
+            item 1 Greenfire.KgCannabis,
+        }
+    }
+    
+    craftRecipe UnpackKiloofCannabis
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = GreenFireItem,
+        
+        inputs
+        {
+            item 1 [Greenfire.KgCannabis],
+        }
+        
+        outputs
+        {
+            item 37 Greenfire.OzCannabis,
+        }
+    }
+    
+    craftRecipe RollBlunt
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 2 [Greenfire.CannabisShake],
+            item 1 [Greenfire.BluntWrap],
+        }
+        outputs
+        {
+            item 1 Greenfire.Blunt,
+        }
+    }
+    
+    craftRecipe BreakBlunt
+    {
+        timedAction = Making,
+        Time        = 15,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 [Greenfire.Blunt],
+        }
+        outputs
+        {
+            item 2 Greenfire.CannabisShake,
+        }
+    }
+    
+    craftRecipe OpenBlunt
+    {
+        timedAction = Making,
+        Time        = 20,
+        OnCreate    = OpenBlunt,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 tags[SharpKnife;MeatCleaver;DullKnife;PizzaCutter;Scissors] mode:keep,
+            item 1 [Greenfire.Blunt],
+        }
+        outputs
+        {
+            item 2 Greenfire.CannabisShake,
+        }
+    }
+    
+    craftRecipe RollMixedBlunt
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 tags[Tobacco],
+            item 1 [Greenfire.CannabisShake],
+            item 1 [Greenfire.BluntWrap],
+        }
+        outputs
+        {
+            item 1 Greenfire.MixedBlunt,
+        }
+    }
+    
+    craftRecipe RollKiefBlunt
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 [Greenfire.Kief],
+            item 2 [Greenfire.CannabisShake],
+            item 1 [Greenfire.BluntWrap],
+        }
+        outputs
+        {
+            item 1 Greenfire.KiefBlunt,
+        }
+    }
+    
+    craftRecipe RollHashishBlunt
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 [Greenfire.Hashish],
+            item 2 [Greenfire.CannabisShake],
+            item 1 [Greenfire.BluntWrap],
+        }
+        outputs
+        {
+            item 1 Greenfire.HashBlunt,
+        }
+    }
+    
+    craftRecipe RollSpaceBlunt
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 [Greenfire.Hashish],
+            item 1 [Greenfire.Kief],
+            item 2 [Greenfire.CannabisShake],
+            item 1 [Greenfire.BluntWrap],
+        }
+        outputs
+        {
+            item 1 Greenfire.SpaceBlunt,
+        }
+    }
+    
+    craftRecipe RollSpliff
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 tags[Tobacco],
+            item 1 [Greenfire.CannabisShake],
+            item 2 tags[RollingPaper],
+        }
+        outputs
+        {
+            item 1 Greenfire.Spliff,
+        }
+    }
+    
+    craftRecipe RollJoint
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 [Greenfire.CannabisShake],
+            item 1 tags[RollingPaper],
+        }
+        outputs
+        {
+            item 1 Greenfire.Joint,
+        }
+    }
+    
+    craftRecipe BreakJoint
+    {
+        timedAction = Making,
+        Time        = 60,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 [Greenfire.Joint],
+        }
+        outputs
+        {
+            item 1 Greenfire.CannabisShake,
+        }
+    }
+    
+    craftRecipe RollKiefJoint
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 [Greenfire.CannabisShake],
+            item 1 [Greenfire.Kief],
+            item 1 tags[RollingPaper],
+        }
+        outputs
+        {
+            item 1 Greenfire.KiefJoint,
+        }
+    }
+    
+    craftRecipe RollHashishJoint
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 [Greenfire.CannabisShake],
+            item 1 [Greenfire.Hashish],
+            item 1 tags[RollingPaper],
+        }
+        outputs
+        {
+            item 1 Greenfire.HashJoint,
+        }
+    }
+    
+    craftRecipe RollCannabisCigar
+    {
+        timedAction   = Making,
+        Time          = 100,
+        NeedToBeLearn = true,
+        OnCreate      = RollCigar,
+        Tags          = InHandCraft,
+        category      = Drugs,
+        inputs
+        {
+            item 4 [Greenfire.CannabisShake],
+            item 2 [Greenfire.FreshCannabisFanLeaf],
+            item 4 [Greenfire.FreshCannabisSugarLeaf],
+        }
+        outputs
+        {
+            item 1 Greenfire.UncuredCannaCigar,
+        }
+    }
+    
+    craftRecipe RollPremiumCannabisCigar
+    {
+        timedAction   = Making,
+        Time          = 100,
+        NeedToBeLearn = true,
+        OnCreate      = RollCigar,
+        Tags          = InHandCraft,
+        category      = Drugs,
+        inputs
+        {
+            item 4 [Greenfire.CannabisShake],
+            item 1 [Greenfire.Kief],
+            item 2 [Greenfire.FreshCannabisFanLeaf],
+            item 4 [Greenfire.FreshCannabisSugarLeaf],
+        }
+        outputs
+        {
+            item 1 Greenfire.UncuredPreCannaCigar,
+        }
+    }
+    
+    craftRecipe RollPremiumCannabisCigar
+    {
+        timedAction   = Making,
+        Time          = 100,
+        NeedToBeLearn = true,
+        OnCreate      = RollCigar,
+        Tags          = InHandCraft,
+        category      = Drugs,
+        inputs
+        {
+            item 4 [Greenfire.CannabisShake],
+            item 1 [Greenfire.Hashish],
+            item 2 [Greenfire.FreshCannabisFanLeaf],
+            item 4 [Greenfire.FreshCannabisSugarLeaf],
+        }
+        outputs
+        {
+            item 1 Greenfire.UncuredDelCannaCigar,
+        }
+    }
+    
+    craftRecipe RollReserveCannabisCigar
+    {
+        timedAction   = Making,
+        Time          = 100,
+        NeedToBeLearn = true,
+        OnCreate      = RollCigar,
+        Tags          = InHandCraft,
+        category      = Drugs,
+        inputs
+        {
+            item 4 [Greenfire.CannabisShake],
+            item 1 [Greenfire.Hashish],
+            item 1 [Greenfire.Kief],
+            item 2 [Greenfire.FreshCannabisFanLeaf],
+            item 4 [Greenfire.FreshCannabisSugarLeaf],
+        }
+        outputs
+        {
+            item 1 Greenfire.UncuredResCannaCigar,
+        }
+    }
+}

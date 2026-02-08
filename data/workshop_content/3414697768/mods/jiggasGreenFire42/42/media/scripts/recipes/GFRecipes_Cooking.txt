@@ -1,0 +1,273 @@
+module Greenfire
+{
+    imports
+    {
+        Base
+    }   
+	craftRecipe CutNiceCrispiez
+	{
+        timedAction = SliceFood_Surface,
+		Time = 40,
+		/** Sound:SliceBread, **/
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:3,
+		OnCreate = GFCutPan_OnCreate,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver;DullKnife;PizzaCutter],
+			item 1 [Greenfire.NiceCrispiezPan],
+		}
+		outputs
+		{
+			item 16 Greenfire.NiceCrispiez,
+			item 1 Base.BakingPan,
+		}
+	}
+
+	craftRecipe CutSpecialBrownies
+	{
+        timedAction = SliceFood_Surface,
+		Time = 40,
+		/** Sound:SliceBread, **/
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		xpAward = Cooking:3,
+		OnCreate = GFCutPan_OnCreate,
+		inputs
+		{
+			item 1 tags[SharpKnife;MeatCleaver;DullKnife;PizzaCutter],
+			item 1 [Greenfire.SBrowniePan],
+		}
+		outputs
+		{
+			item 16 Greenfire.SBrownie,
+			item 1 Base.BakingPan,
+		}
+	}
+
+	/** craftRecipe EmptyPan **/	
+	craftRecipe DumpBrownies
+    {
+        timedAction = Making,
+        Time = 30,
+        Tags = InHandCraft,
+        category = Cooking,
+        inputs
+        {
+			item 1 [Greenfire.SBrowniePan] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.BakingPan,
+        }
+    }
+	
+	craftRecipe OpenMarshmallows
+	{
+        timedAction = UnPackBox_Small,
+		Time = 30,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+		inputs
+		{
+			item 1 [Greenfire.Marshmallows],
+			/** flags[AllowFavorite;InheritFavorite], **/
+		}
+		outputs
+		{
+			item 67 Base.Marshmallows,
+		}
+	}
+	
+	/** PackBagOfMarshmallows **/
+	craftRecipe PackBagofMarshmallows
+	{
+        timedAction = PackingBox_Small,
+		Time = 30,
+		OnTest = Recipe.OnTest.GenericPacking,
+		Tags = InHandCraft;Packing,
+        category = Packing,
+		inputs
+		{
+			item 67 [Base.Marshmallows],
+			/** flags[IsFull;AllowFavorite;InheritFavorite;ItemCount], **/
+		}
+		outputs
+		{
+			item 1 Greenfire.Marshmallows,
+		}
+	}
+
+	/** craftRecipe EmptyPan **/	
+	craftRecipe DumpNiceCrispiez
+    {
+        timedAction = Making,
+        Time = 30,
+        Tags = InHandCraft,
+        category = Cooking,
+        inputs
+        {
+			item 1 [Greenfire.NiceCrispiezPan] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.BakingPan,
+        }
+    }
+	
+	craftRecipe MakeCannaButter
+	{
+        timedAction = MixingBowl,
+		Time = 40,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		NeedToBeLearn = True,
+		xpAward = Cooking:5,
+		AutoLearnAny = Cooking:6,
+		inputs
+		{
+			item 1 [Base.Butter],			
+ 			item 16 [Greenfire.Cannabis],
+		}
+		outputs
+		{
+			item 1 Greenfire.CannaButter,
+		}
+	}
+
+	/** MakeCannaButterWithShake **/	
+	craftRecipe MakeCannaButterwithShake
+	{
+        timedAction = MixingBowl,
+		Time = 40,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		NeedToBeLearn = True,
+		xpAward = Cooking:5,
+		AutoLearnAny = Cooking:6,
+		inputs
+		{
+			item 1 [Base.Butter],			
+ 			item 16 [Greenfire.CannabisShake],
+		}
+		outputs
+		{
+			item 1 Greenfire.CannaButter,
+		}
+	}
+
+	/** MakeCannaButterWithKief **/	
+	craftRecipe MakeCannaButterwithKief
+	{
+        timedAction = MixingBowl,
+		Time = 40,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		NeedToBeLearn = True,
+		xpAward = Cooking:5,
+		AutoLearnAny = Cooking:6,
+		inputs
+		{
+			item 1 [Base.Butter],			
+ 			item 8 [Greenfire.Kief],
+		}
+		outputs
+		{
+			item 1 Greenfire.CannaButter,
+		}
+	}
+
+	/** MakeCannaButterWithHashish **/	
+	craftRecipe MakeCannaButterwithHashish
+	{
+        timedAction = MixingBowl,
+		Time = 40,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		NeedToBeLearn = True,
+		xpAward = Cooking:5,
+		AutoLearnAny = Cooking:6,
+		inputs
+		{
+			item 1 [Base.Butter],			
+ 			item 4 [Greenfire.Hashish],
+		}
+		outputs
+		{
+			item 1 Greenfire.CannaButter,
+		}
+	}
+	
+	craftRecipe MakeNiceCrispiez
+	{
+        timedAction = MixingBowl,
+		Time = 40,
+		OnCreate = GFNiceCrispiez_OnCreate,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		NeedToBeLearn = True,
+		xpAward = Cooking:10,
+		AutoLearnAny = Cooking:6,
+		inputs
+		{
+			item 1 [Greenfire.CannaButter],			
+ 			item 1 [Greenfire.Marshmallows],
+			item 1 [Base.Cereal],
+			item 1 [Base.BakingPan],
+		}
+		outputs
+		{
+			item 1 Greenfire.NiceCrispiezPan,
+		}
+	}
+
+	/** MakeNiceCrispiezFromIndividualMarshmallows **/	
+	craftRecipe MakeNiceCrispiezfromindividualMarshmallows
+	{
+        timedAction = MixingBowl,
+		Time = 40,
+		OnCreate = GFNiceCrispiez_OnCreate,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		NeedToBeLearn = True,
+		xpAward = Cooking:10,
+		AutoLearnAny = Cooking:6,
+		inputs
+		{
+			item 1 [Greenfire.CannaButter],			
+ 			item 67 [Base.Marshmallows],
+			item 1 [Base.Cereal],
+			item 1 [Base.BakingPan],
+		}
+		outputs
+		{
+			item 1 Greenfire.NiceCrispiezPan,
+		}
+	}
+	
+	craftRecipe MakeSpecialBrownies
+	{
+        timedAction = MixingBowl,
+		Time = 120,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+		NeedToBeLearn = True,
+		xpAward = Cooking:10,
+		AutoLearnAny = Cooking:6,
+		inputs
+		{
+			item 1 tags[Flour],			
+			item 1 tags[Egg] flags[IsUncookedFoodItem;InheritFoodAge],
+			item 1 [Greenfire.CannaButter],
+			item 1 tags[Sugar],
+			item 1 [Base.Salt],
+			item 1 [Base.Chocolate],
+			item 1 [Base.BakingPan],
+		}
+		outputs
+		{
+			item 1 Greenfire.SBrowniePan,
+		}
+	}	
+}

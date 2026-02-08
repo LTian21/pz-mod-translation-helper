@@ -1,0 +1,82 @@
+module AbuelitaLinda
+{
+	imports
+	{
+		Base
+	}
+	
+	craftRecipe MakeChocolateCaliente
+    {
+        timedAction = MixingBowl,
+        time = 40,
+        category = Cooking,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [AbuelitaLinda.ChocolateCalienteBar],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mappers[saucepanType] mode:destroy,
+			-fluid 0.5 [CowMilk;SheepMilk] mode:mixture,
+        }
+        outputs
+        {
+            item 1 mapper:saucepanType,
+        }
+        itemMapper saucepanType
+        {
+            AbuelitaLinda.ChocolateCaliente = Base.Saucepan,
+			AbuelitaLinda.ChocolateCalienteCopper = Base.SaucepanCopper,
+        }
+    }
+	
+	craftRecipe MakeAtoleVainilla
+    {
+        timedAction = MixingBowl,
+        time = 40,
+        category = Cooking,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Cornmeal2],
+			item 1 tags[base:sugar],
+			item 1 [AbuelitaLinda.VanillaExtract],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mappers[saucepanType] mode:destroy,
+			-fluid 0.5 [CowMilk;SheepMilk] mode:mixture,
+        }
+        outputs
+        {
+            item 1 mapper:saucepanType,
+        }
+        itemMapper saucepanType
+        {
+            AbuelitaLinda.AtoleVainilla = Base.Saucepan,
+			AbuelitaLinda.AtoleVainillaCopper = Base.SaucepanCopper,
+        }
+    }
+	
+	craftRecipe MakeAtoleChocolate
+    {
+        timedAction = MixingBowl,
+        time = 40,
+        category = Cooking,
+		Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Cornmeal2],
+			item 1 [Base.Chocolate] flags[ItemCount],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount] mappers[saucepanType] mode:destroy,
+			-fluid 0.5 [CowMilk;SheepMilk] mode:mixture,
+        }
+        outputs
+        {
+            item 1 mapper:saucepanType,
+        }
+        itemMapper saucepanType
+        {
+            AbuelitaLinda.AtoleChocolate = Base.Saucepan,
+			AbuelitaLinda.AtoleChocolateCopper = Base.SaucepanCopper,
+        }
+    }
+}
