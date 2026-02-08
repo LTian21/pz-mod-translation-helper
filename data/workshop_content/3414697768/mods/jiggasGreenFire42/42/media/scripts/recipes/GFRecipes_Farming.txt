@@ -1,0 +1,583 @@
+module Greenfire
+{
+    imports
+    {
+        Base
+    }
+    
+    craftRecipe BuildHashishPress
+    {
+        timedAction   = Welding,
+        Time          = 250,
+        NeedToBeLearn = True,
+        SkillRequired = MetalWelding:1,
+        Tags          = InHandCraft;Welding,
+        category      = Metalworking,
+        xpAward       = MetalWelding:25,
+        AutoLearnAny  = MetalWelding:6,
+        inputs
+        {
+            item 1 [Base.SmallSheetMetal],
+            item 1 [Base.MetalPipe],
+            item 1 [Base.BlowTorch],
+            item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Greenfire.HashPress,
+        }
+    }
+    
+    craftRecipe PressKief
+    {
+        timedAction   = Making,
+        Time          = 120,
+        Tags          = InHandCraft;Farming,
+        OnCreate      = SiftShake,
+        NeedToBeLearn = True,
+        /** Sound:PutItemInBag, **/
+        category     = Drugs,
+        AutoLearnAny = Farming:2,
+        inputs
+        {
+            item 20 [Greenfire.Kief],
+            item 1 [Greenfire.HashPress] mode:keep,
+        }
+        outputs
+        {
+            item 1 Greenfire.Hashish,
+        }
+    }
+    
+    craftRecipe BuildSilkscreen
+    {
+        timedAction   = Making,
+        Time          = 120,
+        category      = Carpentry,
+        tags          = AnySurfaceCraft;Carpentry,
+        xpAward       = Woodwork:20,
+        SkillRequired = Woodwork:1,
+        inputs
+        {
+            item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
+            item 1 tags[Saw;SmallSaw] mode:keep flags[MayDegradeLight],
+            item 1 [Base.Plank],
+            item 8 [Base.Nails],
+            item 1 [Greenfire.RollNylon],
+        }
+        outputs
+        {
+            item 1 Greenfire.SilkScreen,
+        }
+    }
+    
+    craftRecipe SiftShake
+    {
+        timedAction   = Making,
+        Time          = 120,
+        Tags          = InHandCraft;Farming,
+        OnCreate      = SiftShake,
+        NeedToBeLearn = True,
+        /** Sound:PutItemInBag, **/
+        category     = Drugs,
+        AutoLearnAny = Farming:2,
+        inputs
+        {
+            item 40 [Greenfire.CannabisShake],
+            item 1 [Greenfire.SilkScreen] mode:keep,
+        }
+        outputs
+        {
+            item 1 Greenfire.Kief,
+        }
+    }
+    
+    craftRecipe DryFreshTobacco
+    {
+        time     = 60,
+        tags     = DryingRackGrain;DryingRackHerb,
+        category = Farming,
+        inputs
+        {
+            item 1 [Greenfire.FreshUnCanna],
+        }
+        outputs
+        {
+            item 1 Greenfire.DryUnCanna,
+        }
+    }
+    
+    craftRecipe TrimFreshCannabis
+    {
+        timedAction   = Making,
+        Time          = 200,
+        NeedToBeLearn = true,
+        OnCreate      = Recipe.OnCreate.TrimFresh,
+        Tags          = InHandCraft,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 [Greenfire.FreshUnCanna],
+            Item 1 tags[Scissors;SharpKnife] mode:keep,
+        }
+        outputs
+        {
+            item 1 Greenfire.FreshTCanna,
+        }
+    }
+    
+    craftRecipe TrimDryCannabis
+    {
+        timedAction   = Making,
+        Time          = 200,
+        NeedToBeLearn = true,
+        OnCreate      = Recipe.OnCreate.TrimDry,
+        Tags          = InHandCraft,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 [Greenfire.DryUnCanna],
+            Item 1 tags[Scissors;SharpKnife] mode:keep,
+        }
+        outputs
+        {
+            item 1 Greenfire.DryTCanna,
+        }
+    }
+    
+    craftRecipe CrushSugarLeaf
+    {
+        timedAction = Making,
+        Time        = 30,
+        Tags        = InHandCraft,
+        category    = Farming,
+        inputs
+        {
+            item 2 [Greenfire.DryCannabisSugarLeaf],
+        }
+        outputs
+        {
+            item 1 Greenfire.CannabisShake,
+        }
+    }
+    
+    craftRecipe GrindSugarLeaf
+    {
+        timedAction = Making,
+        Time        = 10,
+        OnCreate    = Recipe.OnCreate.Grind_Leaf,
+        Tags        = InHandCraft,
+        category    = Farming,
+        inputs
+        {
+            item 2 [Greenfire.DryCannabisSugarLeaf],
+            Item 1 [Greenfire.GFGrinder] mode:keep,
+        }
+        outputs
+        {
+            item 1 Greenfire.CannabisShake,
+        }
+    }
+    
+    craftRecipe PrepareCannabisCuringJar
+    {
+        timedAction   = MixingBowl,
+        Time          = 120,
+        NeedToBeLearn = True,
+        OnCreate      = Recipe.OnCreate.JarCanna,
+        Tags          = InHandCraft;Farming,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+            item 1 [Base.EmptyJar],
+            item 1 [Base.JarLid],
+            item 1 [Greenfire.DryTCanna],
+            /** flags[InheritFoodAge] mode:destroy, **/
+        }
+        outputs
+        {
+            item 1 Greenfire.UnCannaJar,
+        }
+    }
+    
+    craftRecipe PrepareHalfFullCannabisCuringJar
+    {
+        timedAction   = MixingBowl,
+        Time          = 120,
+        NeedToBeLearn = True,
+        OnCreate      = Recipe.OnCreate.JarCanna,
+        Tags          = InHandCraft;Farming,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+            item 1 [Base.EmptyJar],
+            item 1 [Base.JarLid],
+            item 2 [Greenfire.DryTCanna],
+            /** flags[InheritFoodAge] mode:destroy, **/
+        }
+        outputs
+        {
+            item 1 Greenfire.UnCannaJar2,
+        }
+    }
+    
+    /** AddCannabisToCuringJar **/
+    craftRecipe AddCannabistoCuringJar
+    {
+        timedAction   = MixingBowl,
+        Time          = 120,
+        NeedToBeLearn = True,
+        OnCreate      = Recipe.OnCreate.JarCanna,
+        Tags          = InHandCraft;Farming,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 tags[Scissors;SharpKnife;SharpKnife] mode:keep flags[IsNotDull],
+            item 1 [Greenfire.UnCannaJar],
+            item 1 [Greenfire.DryTCanna],
+            /** flags[InheritFoodAge] mode:destroy, **/
+        }
+        outputs
+        {
+            item 1 Greenfire.UnCannaJar2,
+        }
+    }
+    
+    craftRecipe PrepareNearlyFullCannabisCuringJar
+    {
+        timedAction   = MixingBowl,
+        Time          = 120,
+        NeedToBeLearn = True,
+        OnCreate      = Recipe.OnCreate.JarCanna,
+        Tags          = InHandCraft;Farming,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+            item 1 [Base.EmptyJar],
+            item 1 [Base.JarLid],
+            item 3 [Greenfire.DryTCanna],
+            /** flags[InheritFoodAge] mode:destroy, **/
+        }
+        outputs
+        {
+            item 1 Greenfire.UnCannaJar3,
+        }
+    }
+    
+    /** AddMoreCannabisToCuringJar **/
+    craftRecipe AddMoreCannabistoCuringJar
+    {
+        timedAction   = MixingBowl,
+        Time          = 120,
+        NeedToBeLearn = True,
+        OnCreate      = Recipe.OnCreate.JarCanna,
+        Tags          = InHandCraft;Farming,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+            item 1 [Greenfire.UnCannaJar2],
+            item 1 [Greenfire.DryTCanna],
+            /** flags[InheritFoodAge] mode:destroy, **/
+        }
+        outputs
+        {
+            item 1 Greenfire.UnCannaJar3,
+        }
+    }
+    
+    /** AddTwoMoreCannabisToCuringJar **/
+    craftRecipe AddTwoMoreCannabistoCuringJar
+    {
+        timedAction   = MixingBowl,
+        Time          = 120,
+        NeedToBeLearn = True,
+        OnCreate      = Recipe.OnCreate.JarCanna,
+        Tags          = InHandCraft;Farming,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+            item 1 [Greenfire.UnCannaJar],
+            item 2 [Greenfire.DryTCanna],
+            /** flags[InheritFoodAge] mode:destroy, **/
+        }
+        outputs
+        {
+            item 1 Greenfire.UnCannaJar3,
+        }
+    }
+    
+    craftRecipe PrepareFullCannabisCuringJar
+    {
+        timedAction   = MixingBowl,
+        Time          = 120,
+        NeedToBeLearn = True,
+        OnCreate      = Recipe.OnCreate.JarCanna,
+        Tags          = InHandCraft;Farming,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+            item 1 [Base.EmptyJar],
+            item 1 [Base.JarLid],
+            item 4 [Greenfire.DryTCanna],
+            /** flags[InheritFoodAge] mode:destroy, **/
+        }
+        outputs
+        {
+            item 1 Greenfire.UnCannaJar4,
+        }
+    }
+    
+    craftRecipe FillCannabisCuringJar
+    {
+        timedAction   = MixingBowl,
+        Time          = 120,
+        NeedToBeLearn = True,
+        OnCreate      = Recipe.OnCreate.JarCanna,
+        Tags          = InHandCraft;Farming,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+            item 1 [Greenfire.UnCannaJar3],
+            item 1 [Greenfire.DryTCanna],
+            /** flags[InheritFoodAge] mode:destroy, **/
+        }
+        outputs
+        {
+            item 1 Greenfire.UnCannaJar4,
+        }
+    }
+    
+    /** AddThreeMoreCannabisToCuringJar **/
+    craftRecipe AddThreeMoreCannabistoCuringJar
+    {
+        timedAction   = MixingBowl,
+        Time          = 120,
+        NeedToBeLearn = True,
+        OnCreate      = Recipe.OnCreate.JarCanna,
+        Tags          = InHandCraft;Farming,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+            item 1 [Greenfire.UnCannaJar],
+            item 3 [Greenfire.DryTCanna],
+            /** flags[InheritFoodAge] mode:destroy, **/
+        }
+        outputs
+        {
+            item 1 Greenfire.UnCannaJar4,
+        }
+    }
+    
+    /** AddTwoCannabisToHalfFullCuringJar **/
+    craftRecipe AddTwoCannabistoHalfFullCuringJar
+    {
+        timedAction   = MixingBowl,
+        Time          = 120,
+        NeedToBeLearn = True,
+        OnCreate      = Recipe.OnCreate.JarCanna,
+        Tags          = InHandCraft;Farming,
+        category      = Farming,
+        AutoLearnAny  = Farming:2,
+        inputs
+        {
+            item 1 tags[Scissors;SharpKnife] mode:keep flags[MayDegradeLight],
+            item 1 [Greenfire.UnCannaJar2],
+            item 2 [Greenfire.DryTCanna],
+            /** flags[InheritFoodAge] mode:destroy, **/
+        }
+        outputs
+        {
+            item 1 Greenfire.UnCannaJar4,
+        }
+    }
+    
+    craftRecipe OpenJarofCannabis
+    {
+        timedAction = MixingBowl,
+        Time        = 15,
+        OnCreate    = Recipe.OnCreate.OpenCannaJar,
+        Tags        = InHandCraft;Farming,
+        category    = Farming,
+        inputs
+        {
+            item 1 [Greenfire.CannaJar],
+        }
+        outputs
+        {
+            item 5 Greenfire.Cannabis,
+            item 1 Base.EmptyJar,
+            item 1 Base.JarLid,
+        }
+    }
+    
+    craftRecipe OpenHalfFullJarofCannabis
+    {
+        timedAction = MixingBowl,
+        Time        = 15,
+        OnCreate    = Recipe.OnCreate.OpenCannaJar,
+        Tags        = InHandCraft;Farming,
+        category    = Farming,
+        inputs
+        {
+            item 1 [Greenfire.CannaJar2],
+        }
+        outputs
+        {
+            item 10 Greenfire.Cannabis,
+            item 1 Base.EmptyJar,
+            item 1 Base.JarLid,
+        }
+    }
+    
+    craftRecipe OpenNearlyFullJarofCannabis
+    {
+        timedAction = MixingBowl,
+        Time        = 15,
+        OnCreate    = Recipe.OnCreate.OpenCannaJar,
+        Tags        = InHandCraft;Farming,
+        category    = Farming,
+        inputs
+        {
+            item 1 [Greenfire.CannaJar3],
+        }
+        outputs
+        {
+            item 15 Greenfire.Cannabis,
+            item 1 Base.EmptyJar,
+            item 1 Base.JarLid,
+        }
+    }
+    
+    craftRecipe OpenFullJarofCannabis
+    {
+        timedAction = MixingBowl,
+        Time        = 15,
+        OnCreate    = Recipe.OnCreate.OpenCannaJar,
+        Tags        = InHandCraft;Farming,
+        category    = Farming,
+        inputs
+        {
+            item 1 [Greenfire.CannaJar4],
+        }
+        outputs
+        {
+            item 20 Greenfire.Cannabis,
+            item 1 Base.EmptyJar,
+            item 1 Base.JarLid,
+        }
+    }
+    
+    
+    craftRecipe MakeFlyCure
+    {
+        timedAction   = Making,
+        Time          = 40,
+        NeedToBeLearn = True,
+        Tags          = InHandCraft;Farming,
+        category      = Farming,
+        AutoLearnAny  = Farming:6,
+        inputs
+        {
+            item 5 [Greenfire.BluntWrap],
+            item 5 tags[Tobacco],
+            item 1 [Base.GardeningSprayEmpty],
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+        outputs
+        {
+            item 1 Base.GardeningSprayCigarettes,
+        }
+    }
+    
+    craftRecipe PutSeedsInPacket
+    {
+        timedAction = PutSeedsInPacket,
+        Time        = 10,
+        Tags        = InHandCraft;Farming,
+        category    = Farming,
+        
+        inputs
+        {
+            item 5 [Greenfire.CannabisSeed] mappers[seedType]flags[IsExclusive],
+            item 1 [Greenfire.CannabisBagSeed_Empty] flags[Prop2] mappers[seedType],
+        }
+        
+        outputs
+        {
+            item 1 mapper:seedType,
+        }
+        itemMapper seedType
+        {
+            Greenfire.CannabisBagSeed = Greenfire.CannabisSeed;Greenfire.CannabisBagSeed_Empty,
+        }
+    }
+    
+    craftRecipe OpenPacketOfSeeds
+    {
+        timedAction = PutSeedsInPacket,
+        Time        = 20,
+        Tags        = InHandCraft;Farming;CanBeDoneInDark,
+        category    = Farming,
+        
+        inputs
+        {
+            item 1 [Greenfire.CannabisBagSeed] mappers[seedTypes;packetTypes],
+        }
+        
+        outputs
+        {
+            item 5 mapper:seedTypes,
+            item 1 mapper:packetTypes,
+        }
+        
+        itemMapper seedTypes
+        {
+            Greenfire.CannabisSeed = Greenfire.CannabisBagSeed,
+        }
+        
+        itemMapper packetTypes
+        {
+            Greenfire.CannabisBagSeed_Empty = Greenfire.CannabisBagSeed,
+        }
+    }
+}
+/**    craftRecipe MakeFlyCure
+{
+timedAction   = Making,
+Time          = 40,
+NeedToBeLearn = True,
+Tags          = InHandCraft;Farming,
+category      = Farming,
+AutoLearnAny  = Farming:6,
+inputs
+{
+item 5 [Greenfire.CigarLeaf],
+item 1 [Base.GardeningSprayEmpty],
+item 1 [*],
+-fluid 3.0 [Water],
+}
+outputs
+{
+item 1 Base.GardeningSprayCigarettes,
+}
+    }**/

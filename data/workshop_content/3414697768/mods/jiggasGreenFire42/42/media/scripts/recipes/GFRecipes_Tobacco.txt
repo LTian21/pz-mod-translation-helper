@@ -1,0 +1,299 @@
+module Greenfire
+{
+    imports
+    {
+        Base
+    }
+    
+    craftRecipe BreakCigarette
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 [Base.CigaretteSingle;Base.CigaretteRolled],
+        }
+        outputs
+        {
+            item 1 Base.Tobacco,
+        }
+    }
+    
+    craftRecipe MakeBluntWrap
+    {
+        timedAction   = MixingBowl,
+        Time          = 40,
+        OnCreate      = MakeWrap,
+        Tags          = AnySurfaceCraft;Cooking,
+        category      = Cooking,
+        NeedToBeLearn = True,
+        xpAward       = Cooking:10,
+        AutoLearnAny  = Cooking:6,
+        inputs
+        {
+            item 1 tags[Scissors] mode:keep,
+            item 1 [Greenfire.CigarLeaf],
+            item 1 tags[Flour],
+            -fluid 1.0 [Water],
+        }
+        outputs
+        {
+            item 2 Greenfire.BluntWrap,
+        }
+    }
+    
+    craftRecipe MakeBluntWrap
+    {
+        timedAction   = MixingMortarPestle,
+        Time          = 60,
+        NeedToBeLearn = True,
+        Tags          = AnySurfaceCraft;Health,
+        category      = Drugs,
+        AutoLearnAny  = Farming:4;PlantScavenging:2,
+        inputs
+        {
+            item 1 tags[MortarPestle] mode:keep flags[MayDegradeLight],
+            item 5 tags[Tobacco],
+        }
+        outputs
+        {
+            item 1 Greenfire.BluntWrap,
+        }
+    }
+    
+    craftRecipe CrushBluntWrap
+    {
+        timedAction = Making,
+        Time        = 20,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 [Greenfire.BluntWrap],
+        }
+        outputs
+        {
+            item 1 Base.Tobacco,
+        }
+    }
+    
+    craftRecipe RollBluntCigar
+    {
+        timedAction = Making,
+        Time        = 120,
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 2 tags[Tobacco],
+            item 1 [Greenfire.BluntWrap],
+        }
+        outputs
+        {
+            item 1 Greenfire.BluntCigar,
+        }
+    }
+    
+    craftRecipe OpenBluntCigar
+    {
+        timedAction = Making,
+        Time        = 20,
+        OnCreate    = OpenBlunt, 
+        Tags        = InHandCraft,
+        category    = Drugs,
+        inputs
+        {
+            item 1 tags[SharpKnife;MeatCleaver;DullKnife;PizzaCutter;Scissors] mode:keep,
+            item 1 [Greenfire.BluntCigar],
+        }
+        outputs
+        {
+            item 2 Base.Tobacco,
+			item 1 Greenfire.BluntWrap,
+        }
+    }
+    
+/**	Keeping In Case I Need To Reference -OgnirRats
+
+OpenPackOfCigarettes
+craftRecipe OpenPackofCigarettes
+{
+timedAction = UnPackBox_Small,
+Time        = 10,
+OnCreate    = GF_GiveGFCigs,
+Tags        = InHandCraft;Packing;CanBeDoneInDark,
+category    = Packing,
+inputs
+{
+item 1 [Greenfire.GFCigarettes],
+}
+outputs
+{
+item 1 Greenfire.GFCigarette,
+}
+}
+
+// PlaceCigarettesIntoPack
+craftRecipe PlaceCigarettesintoPack
+{
+timedAction = PackingBox_Small,
+Time        = 5,
+OnTest      = Recipe.OnTest.GenericPacking,
+Tags        = InHandCraft;Packing,
+category    = Packing,
+inputs
+{
+item 20 [Greenfire.GFCigarette],
+}
+outputs
+{
+item 1 Greenfire.GFCigarettes,
+}
+}
+
+// PackBagOfTobacco
+craftRecipe PackBagofTobacco
+{
+timedAction = PackingBox_Small,
+Time        = 20,
+OnTest      = Recipe.OnTest.GenericPacking,
+Tags        = InHandCraft;Packing,
+category    = Packing,
+inputs
+{
+item 1 tags[Tobacco],
+}
+outputs
+{
+item 1 Greenfire.PipeTobaccoBag,
+}
+}
+// item 1 tags[Fork;MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],	item 1 tags[Bowl] mode:keep,	item 1 [*], **/
+/**    craftRecipe OpenCigaretteCase
+{
+timedAction = UnPackBox_Small,
+Time        = 10,
+Tags        = InHandCraft;Packing;CanBeDoneInDark,
+category    = Packing,
+inputs
+{
+item 1 [Greenfire.GFCigaretteCase],
+}
+outputs
+{
+item 50 Greenfire.GFCigaretteCarton,
+}
+}
+
+//     PlaceCigaretteCartonsIntoCase
+craftRecipe PlaceCigaretteCartonsintoCase
+{
+timedAction = PackingBox_Small,
+Time        = 10,
+OnTest      = Recipe.OnTest.GenericPacking,
+Tags        = InHandCraft;Packing,
+category    = Packing,
+inputs
+{
+item 50 [Greenfire.GFCigaretteCarton], // flags[IsFull;AllowFavorite;InheritFavorite;ItemCount],
+}
+outputs
+{
+item 1 Greenfire.GFCigaretteCase,
+}
+}
+
+craftRecipe OpenCigaretteCarton
+{
+timedAction = UnPackBox_Small,
+Time        = 10,
+Tags        = InHandCraft;Packing;CanBeDoneInDark,
+category    = Packing,
+inputs
+{
+item 1 [Greenfire.GFCigaretteCarton],
+}
+outputs
+{
+item 10 Greenfire.GFCigarettes,
+}
+}
+
+craftRecipe OpenUsedCigaretteCarton
+{
+timedAction = UnPackBox_Small,
+Time        = 10,
+OnCreate    = Create_Cigs,
+Tags        = InHandCraft;Packing;CanBeDoneInDark,
+category    = Packing,
+inputs
+{
+item 1 [Greenfire.GFUsedCigaretteCarton],
+}
+outputs
+{
+item 1 Greenfire.GFEmptyCigaretteCarton,
+}
+}
+
+//     PlaceCigarettePacksIntoCarton
+craftRecipe PlaceCigarettePacksintoCarton
+{
+timedAction = PackingBox_Small,
+Time        = 10,
+OnTest      = Recipe.OnTest.GenericPacking,
+Tags        = InHandCraft;Packing,
+category    = Packing,
+inputs
+{
+item 10 [Greenfire.GFCigarettes],
+//             flags[IsFull;AllowFavorite;InheritFavorite;ItemCount],
+}
+outputs
+{
+item 1 Greenfire.GFCigaretteCarton,
+}
+}
+
+craftRecipe CutTobacco
+{
+timedAction = Making,
+Time        = 120,
+OnCreate    = CutTobacco,
+Tags        = InHandCraft,
+category    = Farming,
+inputs
+{
+item 1 [Greenfire.DryBTobacco],
+item 1 tags[SharpKnife;MeatCleaver;DullKnife;PizzaCutter;Scissors] mode:keep, // Scalpel
+}
+outputs
+{
+item 20 Base.Tobacco,
+}
+}
+
+craftRecipe RollCigar
+{
+timedAction   = Making,
+Time          = 120,
+NeedToBeLearn = true,
+OnCreate      = RollCigar,
+Tags          = InHandCraft,
+category      = Drugs,
+inputs
+{
+item 4 [Greenfire.CigarLeaf],
+item 1 [*],
+-fluid 1.0 [Water],
+item 1 tags[Flour],
+}
+outputs
+{
+item 1 Greenfire.UncuredCigar,
+}
+}
+    **/
+}

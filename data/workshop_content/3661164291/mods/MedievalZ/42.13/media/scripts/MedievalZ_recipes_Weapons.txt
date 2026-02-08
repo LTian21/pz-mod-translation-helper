@@ -1,0 +1,426 @@
+module Base
+{   
+    
+    craftRecipe ForgeWarHammerHead
+    {
+        time = 1000,
+        SkillRequired = Blacksmith:5,
+        NeedToBeLearn = true,
+        timedAction = ChoppingBlock_Hammer,
+        xpAward = Blacksmith:90,
+        AutoLearnAll = Blacksmith:5,
+        Tags = AdvancedForge,
+        category = Tools,
+        inputs
+        {
+            item 6 tags[base:charcoal],
+            item 1 tags[base:piercedblock],
+            item 1 tags[base:ballpeenhammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:tongs] mode:keep flags[Prop2;MayDegradeLight],
+            item 1 tags[base:metalworkingpunch] mode:keep flags[MayDegradeLight],
+            item 1 tags[base:metalworkingchisel] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 MZ.WarhammerHead,
+        }
+    }
+    craftRecipe MakeWarHammerHandle
+    {
+        time = 100,
+        OnCreate = NikCreate,
+        SkillRequired = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:5,
+        Tags = InHandCraft,
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+            item 1 [Base.Handle],
+            item 1 [Base.LeatherStrips],
+            item 1 [Base.ScrapMetal],
+        }
+        outputs
+        {
+            item 1 MZ.WarhammerHandle,
+        }
+    }
+    craftRecipe RemoveBrokenBlade
+    {
+        time = 400,
+        timedAction = ChoppingBlock_Hammer,
+        xpAward = Maintenance:5,
+        Tags = AnySurfaceCraft,
+        category = Blade,
+        inputs
+        {
+             item 1 [MZ.LongSword1HalfBroken;MZ.LongSword2HalfBroken;MZ.LongSword3HalfBroken;MZ.LongSword4HalfBroken;MZ.BastardSword1HalfBroken;MZ.BastardSword2HalfBroken;MZ.BastardSword3HalfBroken;MZ.BastardSword4HalfBroken] flags[Prop1] mappers[SwordType],
+             item 1 tags[base:hammer] mode:keep,
+        }
+         outputs
+        {
+            item 1 mapper:SwordType,
+        }
+        itemMapper SwordType
+        {
+            MZ.LongSword1Handle = MZ.LongSword1HalfBroken,
+            MZ.LongSword2Handle = MZ.LongSword2HalfBroken,
+            MZ.LongSword3Handle = MZ.LongSword3HalfBroken,
+            MZ.LongSword4Handle = MZ.LongSword4HalfBroken,
+            MZ.BastardSword1Handle = MZ.BastardSword1HalfBroken,
+            MZ.BastardSword2Handle = MZ.BastardSword2HalfBroken,
+            MZ.BastardSword3Handle = MZ.BastardSword3HalfBroken,
+            MZ.BastardSword4Handle = MZ.BastardSword4HalfBroken,
+            default = MZ.LongSword1Handle,
+        }
+    }
+    craftRecipe AssembleMedievalSpear
+    {
+        time = 100,
+        category = Assembly,
+        
+        SkillRequired = Maintenance:1,
+        timedAction = ChoppingBlock_Hammer,
+        xpAward = Maintenance:1,
+        inputs
+        {
+            item 1 tags[base:hammer;base:clubhammer;base:mallet] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:sharpknife] mode:keep flags[SharpnessCheck;IsNotDull],
+            item 1 [MZ.MedievalSpearHead] flags[IsHeadPart;InheritSharpness],
+            item 1 [Base.LongStick] flags[Prop2;InheritCondition],
+        }
+        outputs
+        {
+            item 1 MZ.MedievalSpear,
+        }
+    }
+
+    craftRecipe ForgeMedievalSpearHead
+    {
+        time = 400,
+        SkillRequired = Blacksmith:5,
+        NeedToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:60,
+        AutoLearnAll = Blacksmith:6;Spear:2,
+        Tags = AdvancedForge,
+        category = Blade,
+        inputs
+        {
+            item 5 tags[base:charcoal],
+            item 1 [Base.SteelBarQuarter;Base.Katana_Shard;Base.Sword_Shard;Base.MeatCleaverBlade;Base.HuntingKnifeBlade],
+            item 1 tags[base:ballpeenhammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:metalworkingpliers;base:tongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 MZ.MedievalSpearHead flags[IsBlunt],
+        }
+    }
+    craftRecipe ForgeDaggerBlade
+    {
+        time = 2000,
+        SkillRequired = Blacksmith:5,
+        NeedToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:60,
+        AutoLearnAll = Blacksmith:6,
+        Tags = AdvancedForge,
+        category = Blade,
+        inputs
+        {
+            item 6 tags[base:charcoal],
+            item 1 [Base.SteelBar;Base.Katana;Base.Katana_Blade;Base.SwordBlade;Base.SwordBlade_NoTang;Base.MacheteBlade;Base.MacheteBlade_NoTang],
+            item 1 tags[base:ballpeenhammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:tongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 MZ.DaggerBlade flags[IsBlunt],
+        }
+    }
+    craftRecipe ForgeLongSwordBlade
+    {
+        time = 2000,
+        SkillRequired = Blacksmith:9,
+        NeedToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:150,
+        AutoLearnAll = Blacksmith:10;LongBlade:5,
+        Tags = AdvancedForge,
+        category = Blade,
+        inputs
+        {
+            item 8 tags[base:charcoal],
+            item 2 [Base.SteelBar;Base.Katana;Base.Katana_Blade;Base.SwordBlade;Base.SwordBlade_NoTang;Base.MacheteBlade;Base.MacheteBlade_NoTang],
+            item 1 tags[base:ballpeenhammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:tongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 MZ.LongSwordBlade flags[IsBlunt],
+        }
+    }
+    craftRecipe ForgeBastardSwordBlade
+    {
+        time = 1200,
+        SkillRequired = Blacksmith:8,
+        NeedToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:130,
+        AutoLearnAll = Blacksmith:9;LongBlade:4,
+        Tags = AdvancedForge,
+        category = Blade,
+        inputs
+        {
+            item 8 tags[base:charcoal],
+            item 1 [Base.SteelBar;Base.Katana;Base.Katana_Blade;Base.SwordBlade;Base.SwordBlade_NoTang;Base.MacheteBlade;Base.MacheteBlade_NoTang],
+            item 1 tags[base:ballpeenhammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:tongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 MZ.BastardSwordBlade flags[IsBlunt],
+        }
+    }
+    craftRecipe ForgeArmingSwordBlade
+    {
+        time = 900,
+        SkillRequired = Blacksmith:7,
+        NeedToBeLearn = true,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:120,
+        AutoLearnAll = Blacksmith:8;LongBlade:3,
+        Tags = AdvancedForge,
+        category = Blade,
+        inputs
+        {
+            item 8 tags[base:charcoal],
+            item 1 [Base.SteelBar;Base.Katana;Base.Katana_Blade;Base.SwordBlade;Base.SwordBlade_NoTang;Base.MacheteBlade;Base.MacheteBlade_NoTang],
+            item 1 tags[base:ballpeenhammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:tongs] mode:keep flags[Prop2;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 MZ.ArmingSwordBlade flags[IsBlunt],
+        }
+    }
+
+    craftRecipe MakeLongSwordHandle
+    {
+        time = 100,
+        OnCreate = NikCreate,
+        SkillRequired = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:5,
+        Tags = InHandCraft,
+        AutoLearnAll = Blacksmith:10;LongBlade:5,
+        NeedToBeLearn = true,
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+            item 1 [Base.SmallHandle] flags[AllowDestroyedItem;Prop2],
+            item 2 [Base.LeatherStrips],
+            item 1 [Base.IronBarQuarter],
+        }
+        outputs
+        {
+            item 1 MZ.LongSword1Handle,
+            item 1 MZ.LongSword2Handle,
+            item 1 MZ.LongSword3Handle,
+            item 1 MZ.LongSword4Handle,
+        }
+    }
+    craftRecipe MakeBastardSwordHandle
+    {
+        time = 100,
+        OnCreate = NikCreate,
+        SkillRequired = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:5,
+        Tags = InHandCraft,
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+            item 1 [Base.SmallHandle] flags[AllowDestroyedItem;Prop2],
+            item 1 [Base.LeatherStrips],
+            item 1 [Base.IronBarQuarter],
+        }
+        outputs
+        {
+            item 1 MZ.BastardSword1Handle,
+            item 1 MZ.BastardSword2Handle,
+            item 1 MZ.BastardSword3Handle,
+            item 1 MZ.BastardSword4Handle,
+        }
+    }
+
+    craftRecipe MakeArmingSwordHandle
+    {
+        time = 100,
+        OnCreate = NikCreate,
+        SkillRequired = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:5,
+        Tags = InHandCraft,
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+            item 1 [Base.SmallHandle] flags[AllowDestroyedItem;Prop2],
+            item 1 [Base.LeatherStrips],
+            item 1 [Base.IronBarQuarter],
+        }
+        outputs
+        {
+            item 1 MZ.ArmingSword1Handle,
+            item 1 MZ.ArmingSword2Handle,
+            item 1 MZ.ArmingSword3Handle,
+            item 1 MZ.ArmingSword4Handle,
+        }
+    }
+    craftRecipe MakeDaggerHandle
+    {
+        time = 100,
+        SkillRequired = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:5,
+        Tags = InHandCraft,
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[Prop1;IsNotDull;MayDegradeLight],
+            item 1 [Base.SmallHandle] flags[AllowDestroyedItem;Prop2],
+            item 1 [Base.LeatherStrips],
+            item 1 [Base.IronBarQuarter],
+        }
+        outputs
+        {
+            item 1 MZ.DaggerHandle,
+        }
+    }
+
+
+
+
+
+    craftRecipe AssembleLongSword
+    {
+        time = 100,
+        category = Assembly,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:1,
+        inputs
+        {
+            item 1 tags[base:hammer;base:clubhammer;base:mallet] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 [MZ.LongSword1Handle;MZ.LongSword2Handle;MZ.LongSword3Handle;MZ.LongSword4Handle;] mappers[HandleMapper],
+            item 1 [MZ.LongSwordBlade] flags[Prop2;InheritCondition;InheritSharpness],
+        }
+        outputs
+        {
+            item 1 mapper:HandleMapper,
+        }
+        itemMapper HandleMapper
+        {
+            MZ.LongSword1 = MZ.LongSword1Handle,
+            MZ.LongSword2 = MZ.LongSword2Handle,
+            MZ.LongSword3 = MZ.LongSword3Handle,
+            MZ.LongSword4 = MZ.LongSword4Handle,
+            
+        }
+    }
+    craftRecipe AssembleBastardSword
+    {
+        time = 100,
+        category = Assembly,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:1,
+        inputs
+        {
+            item 1 tags[base:hammer;base:clubhammer;base:mallet] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 [MZ.BastardSword1Handle;MZ.BastardSword2Handle;MZ.BastardSword3Handle;MZ.BastardSword4Handle;] mappers[HandleMapper],
+            item 1 [MZ.BastardSwordBlade] flags[Prop2;InheritCondition;InheritSharpness],
+        }
+        outputs
+        {
+            item 1 mapper:HandleMapper,
+        }
+        itemMapper HandleMapper
+        {
+            MZ.BastardSword1 = MZ.BastardSword1Handle,
+            MZ.BastardSword2 = MZ.BastardSword2Handle,
+            MZ.BastardSword3 = MZ.BastardSword3Handle,
+            MZ.BastardSword4 = MZ.BastardSword4Handle,
+            
+        }
+    }
+    craftRecipe AssembleArmingSword
+    {
+        time = 100,
+        category = Assembly,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:1,
+        inputs
+        {
+            item 1 tags[base:hammer;base:clubhammer;base:mallet] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 [MZ.ArmingSword1Handle;MZ.ArmingSword2Handle;MZ.ArmingSword3Handle;MZ.ArmingSword4Handle;] mappers[HandleMapper],
+            item 1 [MZ.ArmingSwordBlade] flags[Prop2;InheritCondition;InheritSharpness],
+        }
+        outputs
+        {
+            item 1 mapper:HandleMapper,
+        }
+        itemMapper HandleMapper
+        {
+            MZ.ArmingSword1 = MZ.ArmingSword1Handle,
+            MZ.ArmingSword2 = MZ.ArmingSword2Handle,
+            MZ.ArmingSword3 = MZ.ArmingSword3Handle,
+            MZ.ArmingSword4 = MZ.ArmingSword4Handle,
+            
+        }
+    }
+    craftRecipe AssembleDagger
+    {
+        time = 100,
+        category = Assembly,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:1,
+        inputs
+        {
+            item 1 tags[base:hammer;base:clubhammer;base:mallet] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 [MZ.DaggerHandle],
+            item 1 [MZ.DaggerBlade],
+        }
+        outputs
+        {
+            item 1 MZ.Dagger,
+        }
+    }
+    craftRecipe AssembleWarhammer
+    {
+        time = 100,
+        category = Assembly,
+        Tags = AnySurfaceCraft,
+        SkillRequired = Maintenance:1,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:1,
+        inputs
+        {
+            item 1 tags[base:hammer;base:clubhammer;base:mallet] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 [MZ.WarhammerHandle] flags[Prop2;InheritCondition],
+            item 1 [MZ.WarhammerHead]  flags[IsHeadPart],
+        }
+        outputs
+        {
+            item 1 MZ.Warhammer,
+        }
+    }
+   
+
+}

@@ -1,0 +1,136 @@
+module Base
+{
+	model Chevalier_Rhino_LeftWindow
+	{
+		mesh = vehicles/Vehicles_Chevalier_Rhino_F|WindowFrontLeft,
+		shader = vehicle_multiuv_reflect,
+		static = FALSE,
+		scale = .4,
+		boneWeight = LeftWindowBone 1.0,
+	}
+	
+	model Chevalier_Rhino_RightWindow
+	{
+		mesh = vehicles/Vehicles_Chevalier_Rhino_F|WindowFrontRight,
+		shader = vehicle_multiuv_reflect,
+		static = FALSE,
+		scale = .4,
+		boneWeight = RightWindowBone 1.0,
+	}
+	
+	template vehicle RhinoWindow
+	{
+		part WindowFrontLeft
+		{
+			model Default
+			{
+				file = Chevalier_Rhino_LeftWindow,
+			}
+			parent = DoorFrontLeft,
+			area = SeatFrontLeft,
+			itemType = Base.FrontWindow,
+			
+			anim ClosedToOpen
+			{
+				anim = anim_leftwindow,
+				animate = FALSE,
+			}
+			
+			table install
+			{
+				requireInstalled = DoorFrontLeft,
+			}
+			table uninstall
+			{
+			    requireUninstalled = ATA2ProtectionWindowFrontLeft,
+			}
+		}
+
+		part WindowFrontRight
+		{
+			model Default
+			{
+				file = Chevalier_Rhino_RightWindow,
+			}		
+			parent = DoorFrontRight,
+			area = SeatFrontRight,
+			itemType = Base.FrontWindow,
+			
+			anim ClosedToOpen
+			{
+				anim = anim_rightwindow,
+				animate = FALSE,
+			}			
+			
+			table install
+			{
+				requireInstalled = DoorFrontRight,
+			}
+			table uninstall
+			{
+			    requireUninstalled = ATA2ProtectionWindowFrontRight,
+			}			
+		}
+
+		part Window*
+		{
+			category = door,
+			mechanicRequireKey = true,
+			durability = 2,
+			window
+			{
+				openable = true,
+			}
+			anim Open
+			{
+				sound = VehicleWindowHandleOpen,
+			}
+			anim Close
+			{
+				sound = VehicleWindowHandleClose,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Window,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:3,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,			
+				complete = Vehicles.UninstallComplete.Default,
+			}
+			lua
+			{
+				create = Vehicles.Create.Window,
+				init = Vehicles.Init.Window,
+			}
+		}
+	}
+}
+

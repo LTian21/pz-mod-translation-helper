@@ -1,0 +1,41 @@
+module AbuelitaLinda
+{
+
+	imports
+	{
+		Base
+	}
+	
+    craftRecipe MakeCafeOlla
+    {
+        timedAction = MakeCoffee,
+        time = 40,
+        OnCreate = RecipeCodeOnCreate.makeCoffee,
+        category = Cooking,
+        Tags = CoffeeMachine,
+        inputs
+        {
+            item 5 [Base.Coffee2],
+			item 1 [AbuelitaLinda.Piloncillo],
+            item 1 tags[CoffeeMaker] mode:destroy flags[InheritColor;InheritModelVariation] mappers[mugShot],
+			-fluid 0.2 categories[Water] mode:mixture,
+        }
+        outputs
+        {
+            item 1 mapper:mugShot,
+        }
+        itemMapper mugShot
+        {
+            AbuelitaLinda.CafeOlla = Base.Mugl,
+            AbuelitaLinda.CafeOllaWhite = Base.MugWhite,
+            AbuelitaLinda.CafeOllaSpiffo = Base.MugSpiffo,
+            AbuelitaLinda.CafeOllaClay = Base.ClayMug,
+            AbuelitaLinda.CafeOllaCopper = Base.CopperCup,
+            AbuelitaLinda.CafeOllaGold = Base.GoldCup,
+            AbuelitaLinda.CafeOllaMetal = Base.MetalCup,
+            AbuelitaLinda.CafeOllaSilver = Base.SilverCup,
+            AbuelitaLinda.CafeOllaTumbler = Base.GlassTumbler,
+            default = AbuelitaLinda.CafeOllaWhite,
+        }
+    }
+}

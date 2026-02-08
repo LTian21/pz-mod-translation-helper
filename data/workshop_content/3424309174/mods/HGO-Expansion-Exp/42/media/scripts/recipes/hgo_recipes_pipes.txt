@@ -1,0 +1,105 @@
+/****************************** WWW.THEHIGHGUYSOFFICIAL.CO.UK ******************************/
+/******************* CODE BY KRACKEN / ART BY TYIUS & @DZYR_DESIGNS (INSTAGRAM) ************/
+/****************************** https://discord.gg/AB75nEhSpx ******************************/
+
+module Base
+	{
+
+		craftRecipe Carve Fruit/Vegetable Pipe
+		{
+			Time = 200,
+			SkillRequired = Carving:1,
+			timedAction = SharpenBlade,
+			Tags = InHandCraft,
+			Category = Carving,
+			needTobeLearn = false,
+			AutoLearnAny = Carving:4,
+			xpAward = Carving:10,
+
+			inputs
+			{
+				item 1 tags[base:sharpknife] mode:keep flags[IsNotDull;MayDegradeLight;Prop1],
+				item 1 [Base.Apple;Base.Carrots;Base.Eggplant;Base.Watermelon;Base.Banana;Base.Lemon;Base.Lime;Base.Orange;Base.Pineapple] mappers[PipeCarveMap] flags[Prop2],
+			}
+			outputs
+			{
+				item 1 mapper:PipeCarveMap,
+			}
+			itemMapper PipeCarveMap
+			{
+				HGO.ApplePipe_Empty = Base.Apple,
+				HGO.CarrotPipe_Empty = Base.Carrots,
+				HGO.EggplantPipe_Empty = Base.Eggplant,
+				HGO.WatermelonPipe_Empty = Base.Watermelon,
+				HGO.BananaPipe_Empty = Base.Banana,
+				HGO.LemonPipe_Empty = Base.Lemon,
+				HGO.LimePipe_Empty = Base.Lime,
+				HGO.OrangePipe_Empty = Base.Orange,
+				HGO.PineapplePipe_Empty = Base.Pineapple,
+			}
+		}
+
+		craftRecipe Fill Pipe Cannabis
+		{
+			timedAction = Making,
+			Time = 60,
+			Tags = InHandCraft;CanBeDoneInDark,
+			category = Miscellaneous,
+			OnCreate:recipeFillPipeCannabis,			
+			inputs
+			{
+				item 1 tags[hgo:cannabis;hgo:weedJar],
+				item 1 [Base.SmokingPipe;Base.CanPipe;HGO.ApplePipe_Empty;HGO.CarrotPipe_Empty;HGO.EggplantPipe_Empty;HGO.WatermelonPipe_Empty;HGO.BananaPipe_Empty;HGO.LemonPipe_Empty;HGO.LimePipe_Empty;HGO.OrangePipe_Empty;HGO.PineapplePipe_Empty] mappers[PipeMapper] mode:destroy,
+			}
+			outputs
+			{
+				item 1 mapper:PipeMapper,
+			}
+			itemMapper PipeMapper
+			{
+				HGO.CanPipe_Cannabis = Base.CanPipe,
+				HGO.SmokingPipe_Cannabis = Base.SmokingPipe,
+				HGO.ApplePipe_Cannabis = HGO.ApplePipe_Empty,
+				HGO.CarrotPipe_Cannabis = HGO.CarrotPipe_Empty,
+				HGO.EggplantPipe_Cannabis = HGO.EggplantPipe_Empty,
+				HGO.WatermelonPipe_Cannabis = HGO.WatermelonPipe_Empty,
+				HGO.BananaPipe_Cannabis = HGO.BananaPipe_Empty,
+				HGO.LemonPipe_Cannabis = HGO.LemonPipe_Empty,
+				HGO.LimePipe_Cannabis = HGO.LimePipe_Empty,
+				HGO.OrangePipe_Cannabis = HGO.OrangePipe_Empty,
+				HGO.PineapplePipe_Cannabis = HGO.PineapplePipe_Empty,
+			}
+		}	
+
+		craftRecipe Fill Pipe Mixed
+		{
+			timedAction = Making,
+			Time = 60,
+			Tags = InHandCraft;CanBeDoneInDark,
+			category = Miscellaneous,
+			OnCreate:recipeFillPipeMixed,
+			inputs
+			{
+				item 1 tags[hgo:mixedsmoke],
+				item 1 [Base.SmokingPipe;Base.CanPipe;HGO.ApplePipe_Empty;HGO.CarrotPipe_Empty;HGO.EggplantPipe_Empty;HGO.WatermelonPipe_Empty;HGO.BananaPipe_Empty;HGO.LemonPipe_Empty;HGO.LimePipe_Empty;HGO.OrangePipe_Empty;HGO.PineapplePipe_Empty] mappers[PipeMapper] mode:destroy,
+			}
+			outputs
+			{
+				item 1 mapper:PipeMapper,
+			}
+			itemMapper PipeMapper
+			{
+				HGO.CanPipe_Mixed = Base.CanPipe,
+				HGO.SmokingPipe_Mixed = Base.SmokingPipe,
+				HGO.ApplePipe_Mixed = HGO.ApplePipe_Empty,
+				HGO.CarrotPipe_Mixed = HGO.CarrotPipe_Empty,
+				HGO.EggplantPipe_Mixed = HGO.EggplantPipe_Empty,
+				HGO.WatermelonPipe_Mixed = HGO.WatermelonPipe_Empty,
+				HGO.BananaPipe_Mixed = HGO.BananaPipe_Empty,
+				HGO.LemonPipe_Mixed = HGO.LemonPipe_Empty,
+				HGO.LimePipe_Mixed = HGO.LimePipe_Empty,
+				HGO.OrangePipe_Mixed = HGO.OrangePipe_Empty,
+				HGO.PineapplePipe_Mixed = HGO.PineapplePipe_Empty,
+			}
+		}		
+	}
