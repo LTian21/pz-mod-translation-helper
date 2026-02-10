@@ -1488,6 +1488,7 @@ return {
         ["IGUI_ItemCat_Animal"] = "\229\138\168\231\137\169",
         ["IGUI_ItemCat_AnimalPart"] = "\229\138\168\231\137\169\230\157\144\230\150\153",
         ["IGUI_ItemCat_FireSource"] = "\231\129\171\231\167\141",
+        ["IGUI_ItemCat_MaterialWeapon"] = "\230\157\144\230\150\153 - \230\173\166\229\153\168",
         ["IGUI_ItemCat_Memento"] = "\231\186\170\229\191\181\229\147\129",
         ["IGUI_ItemCat_ProtectiveGear"] = "\233\152\178\230\138\164",
     },
