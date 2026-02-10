@@ -1,0 +1,56 @@
+module Base
+{
+    xuiSkin default
+    {
+	    entity RecreationalCoinPusher
+    {
+        LuaWindowClass = ISEntityWindow,
+        DisplayName = RecreationalCoinPusher,
+        Icon = item_recreational_pusher,
+    }
+
+
+    }
+entity RecreationalCoinPusher
+{
+    component UiConfig
+    {
+        xuiSkin = default,
+        entityStyle = RecreationalCoinPusher,
+        uiEnabled = false,
+    }
+
+    component SpriteConfig
+    {
+        isThumpable = false,
+
+        face S { layer { row = pa_recreational_6, } }
+		face E { layer { row = pa_recreational_7, } }
+    }
+
+    component CraftRecipe
+    {
+        timedAction = BuildWallMetal,
+        time = 100,
+        category = Project Arcade,
+        SkillRequired = Electricity:5,
+        xpAward = Electricity:75,
+        Tooltip = Tooltip_RecreativeCoinPusher,
+
+        inputs
+        {
+            item 2 [Base.BlowTorch] mode:destroy,
+            item 1 tags[base:weldingmask] mode:keep,
+            item 1 tags[base:screwdriver] mode:keep flags[MayDegradeVeryLight;NoBrokenItems],
+
+            item 25 [Base.SilverCoin] mode:destroy,
+            item 3 [Base.GlassPanel] mode:destroy,
+            item 4 [Base.Screws] mode:destroy,
+            item 3 [Base.ElectronicsScrap] mode:destroy,
+            item 5 [Base.SheetMetal] mode:destroy,
+			item 1 [Base.Amplifier] mode:destroy,
+        }
+    }
+}
+
+}
