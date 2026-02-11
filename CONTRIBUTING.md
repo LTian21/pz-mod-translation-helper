@@ -89,6 +89,7 @@
    }
    ```
 3. 编辑相关翻译文件（例如 `data/translations_CN.txt`），并按照规范：
+3. 编辑相关翻译文件（例如 `data/translations_CN_split/*.txt`），并按照规范：
 
    * 带前导 Tab 的条目为**待处理**；
    * 完成翻译或校对后，**删除行首所有 Tab 与前导空格**。
