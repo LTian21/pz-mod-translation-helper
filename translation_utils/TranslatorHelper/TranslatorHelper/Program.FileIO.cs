@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -15,15 +16,13 @@ partial class Program
         try
         {
             Console.WriteLine("开始写入翻译文件...");
-            string sourceFileName = $"translations_{config.Language.ToSuffix()}.txt";
-            string sourceFilePath = Path.Combine(config.LocalPath, "data", sourceFileName);
-            if (!File.Exists(sourceFilePath)) { Console.WriteLine($"[错误] 源翻译文件不存在: {sourceFilePath}"); return 1; }
 
             Console.WriteLine("读取MOD名称映射文件...");
             ReadModNameFile(config.LocalPath);
 
-            Console.WriteLine($"读取源翻译文件: {sourceFilePath}");
-            ReadTranslationFile(config.LocalPath, sourceFileName, config.Language);
+            var modIdsForSplit = ParseModIds(config.CommitMessage);
+            Console.WriteLine("读取翻译文件...");
+            ReadTranslationFile(config.LocalPath, config.Language);
             Console.WriteLine($"[成功] 已读取 {ModTranslations.Count} 个MOD的翻译数据");
 
             string exeDirectory = AppContext.BaseDirectory;
@@ -41,7 +40,7 @@ partial class Program
             }
 
             Console.WriteLine($"要写入的MOD列表: {string.Join(", ", modIds)}");
-            using var writer = new StreamWriter(outputFilePath, false, Encoding.UTF8);
+            using var writer = new StreamWriter(outputFilePath, false);
             int entryCount = 0, modCount = 0;
             foreach (var modId in modIds)
             {
@@ -74,6 +73,116 @@ partial class Program
             return 0;
         }
         catch (Exception ex) { Console.WriteLine($"[错误] 写入翻译文件失败: {ex.Message}"); Console.WriteLine($"[提示] {ex.StackTrace}"); return 1; }
+    }
+
+    static string GetTranslationFilePath(string repoDir, string modId, TranslationSystem.Language language)
+    {
+        string suffix = language.ToSuffix();
+        string id2 = (modId ?? string.Empty).Trim();
+        id2 = id2.Length >= 2 ? id2[^2..] : id2.PadLeft(2, '0');
+        string fileName = $"translations_{suffix}_{id2}.txt";
+        return Path.Combine(repoDir, "data", $"translations_{suffix}_split", fileName);
+    }
+
+    static void ReadTranslationFile(string repoDir, TranslationSystem.Language language)
+    {
+        ModTranslations = new Dictionary<string, Dictionary<string, TranslationEntry>>();
+
+        string suffix = language.ToSuffix();
+        string translationSplitDir = Path.Combine(repoDir, "data", $"translations_{suffix}_split");
+
+        if (!Directory.Exists(translationSplitDir))
+        {
+            Console.WriteLine($"[警告] 分片翻译目录不存在: {translationSplitDir}");
+            return;
+        }
+
+        var splitFiles = Directory.GetFiles(translationSplitDir, $"translations_{suffix}_*.txt", SearchOption.TopDirectoryOnly);
+        Console.WriteLine($"Loading split translations from: {translationSplitDir}, files: {splitFiles.Length}");
+
+        string langSuffix = language.ToSuffix();
+        string langSuffixEscaped = Regex.Escape(langSuffix);
+
+        foreach (var splitFile in splitFiles)
+        {
+            List<string> tempComments = new();
+
+            foreach (var rawLine in File.ReadAllLines(splitFile, Encoding.UTF8))
+            {
+                if (string.IsNullOrWhiteSpace(rawLine) || rawLine.StartsWith("------"))
+                    continue;
+
+                if (IsNullOrCommentLine(rawLine))
+                {
+                    tempComments.Add(rawLine);
+                    continue;
+                }
+
+                int tabCount = 0;
+                while (tabCount < rawLine.Length && rawLine[tabCount] == '\t')
+                    tabCount++;
+
+                TranslationStatus status = tabCount switch
+                {
+                    0 => TranslationStatus.Approved,
+                    1 => TranslationStatus.Translated,
+                    _ => TranslationStatus.Untranslated
+                };
+
+                string line = rawLine.TrimStart('\t');
+
+                var originalMatchSplit = Regex.Match(line, @"^(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*");
+                if (originalMatchSplit.Success)
+                {
+                    string currentModId = originalMatchSplit.Groups["modId"].Value.Trim();
+                    string key = originalMatchSplit.Groups["key"].Value.Trim();
+                    string originalText = originalMatchSplit.Groups["text"].Value;
+
+                    if (!ModTranslations.ContainsKey(currentModId))
+                    {
+                        ModTranslations[currentModId] = new Dictionary<string, TranslationEntry>();
+                    }
+
+                    ModTranslations[currentModId][key] = new TranslationEntry
+                    {
+                        OriginalText = originalText,
+                        SChinese = "",
+                        SChineseStatus = status,
+                        Comment = new List<string>(tempComments)
+                    };
+                    tempComments.Clear();
+                    continue;
+                }
+
+                var translationMatchSplit = Regex.Match(line, $@"^(?<modId>[^:]+)::({langSuffixEscaped})::(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*");
+                if (translationMatchSplit.Success)
+                {
+                    string currentModId = translationMatchSplit.Groups["modId"].Value.Trim();
+                    string key = translationMatchSplit.Groups["key"].Value.Trim();
+                    string translatedText = translationMatchSplit.Groups["text"].Value;
+
+                    if (!ModTranslations.ContainsKey(currentModId))
+                    {
+                        ModTranslations[currentModId] = new Dictionary<string, TranslationEntry>();
+                    }
+                    if (!ModTranslations[currentModId].ContainsKey(key))
+                    {
+                        ModTranslations[currentModId][key] = new TranslationEntry
+                        {
+                            OriginalText = "",
+                            SChinese = "",
+                            SChineseStatus = status,
+                            Comment = new List<string>(tempComments)
+                        };
+                    }
+
+                    var entry = ModTranslations[currentModId][key];
+                    entry.SChinese = translatedText;
+                    ModTranslations[currentModId][key] = entry;
+                    continue;
+                }
+            }
+        }
     }
 
     static async Task<int> MergeTranslationFile(AppConfig config)
@@ -127,18 +236,14 @@ partial class Program
 
             if (allowedModIds == null)
             {
-                Console.WriteLine("[警告] 未能从 PR Body 解析到已领取的MOD列表（需要先执行 listpr 刷新），将回退为旧行为（按文件内容合并）。");
+                Console.WriteLine("[警告] 未能从 PR Body 解析到已领取的MOD列表（需要先执行 listpr 刷新）。将继续执行：读取全量分片并按用户文件内容合并。");
             }
-
-            string sourceFileName = $"translations_{config.Language.ToSuffix()}.txt";
-            string sourceFilePath = Path.Combine(config.LocalPath, "data", sourceFileName);
-            if (!File.Exists(sourceFilePath)) { Console.WriteLine($"[错误] 源翻译文件不存在: {sourceFilePath}"); return 1; }
 
             Console.WriteLine("读取MOD名称映射文件...");
             ReadModNameFile(config.LocalPath);
 
-            Console.WriteLine($"读取源翻译文件: {sourceFilePath}");
-            ReadTranslationFile(config.LocalPath, sourceFileName, config.Language);
+            Console.WriteLine("读取翻译文件... ");
+            ReadTranslationFile(config.LocalPath, config.Language);
             Console.WriteLine($"[成功] 已读取 {ModTranslations.Count} 个MOD的翻译数据");
 
             var originalTranslations = new Dictionary<string, Dictionary<string, TranslationEntry>>();
@@ -167,6 +272,8 @@ partial class Program
             var userTranslations = new Dictionary<string, Dictionary<string, TranslationEntry>>();
             var linesInFile = File.ReadAllLines(userFilePath, Encoding.UTF8);
 
+            // 全量写回策略：用户文件只用于“覆盖更新”。
+            // 若用户文件缺少某些条目，则保留分片中的原始条目，避免写回时误删除。
             List<string> tempComments = new();
             string? currentModId = null;
             string? lastProcessedKey = null;
@@ -182,13 +289,17 @@ partial class Program
                 if (originalMatch1.Success)
                 {
                     currentModId = originalMatch1.Groups["modId"].Value.Trim();
-                    if (allowedModIds != null && !allowedModIds.Contains(currentModId)) { tempComments.Clear(); lastProcessedKey = null; continue; }
-
                     string matchKey = originalMatch1.Groups["key"].Value.Trim();
                     string matchText = originalMatch1.Groups["matchText"].Value;
                     if (!userTranslations.ContainsKey(currentModId)) userTranslations[currentModId] = new();
                     if (!userTranslations[currentModId].ContainsKey(matchKey))
                         userTranslations[currentModId][matchKey] = new TranslationEntry { OriginalText = matchText, SChineseStatus = TranslationStatus.Untranslated, Comment = new List<string>(tempComments) };
+                    else
+                    {
+                        userTranslations[currentModId][matchKey].OriginalText = matchText;
+                        userTranslations[currentModId][matchKey].SChineseStatus = TranslationStatus.Untranslated;
+                        userTranslations[currentModId][matchKey].Comment = new List<string>(tempComments);
+                    }
                     tempComments.Clear(); lastProcessedKey = matchKey; continue;
                 }
 
@@ -196,8 +307,6 @@ partial class Program
                 if (translationMatch1.Success)
                 {
                     string modId = translationMatch1.Groups["modId"].Value.Trim();
-                    if (allowedModIds != null && !allowedModIds.Contains(modId)) continue;
-
                     string matchKey = translationMatch1.Groups["key"].Value.Trim();
                     string matchText = translationMatch1.Groups["matchText"].Value;
                     if (userTranslations.ContainsKey(modId) && userTranslations[modId].ContainsKey(matchKey) && !string.IsNullOrEmpty(matchText))
@@ -209,13 +318,17 @@ partial class Program
                 if (originalMatch2.Success)
                 {
                     currentModId = originalMatch2.Groups["modId"].Value.Trim();
-                    if (allowedModIds != null && !allowedModIds.Contains(currentModId)) { tempComments.Clear(); lastProcessedKey = null; continue; }
-
                     string matchKey = originalMatch2.Groups["key"].Value.Trim();
                     string matchText = originalMatch2.Groups["matchText"].Value;
                     if (!userTranslations.ContainsKey(currentModId)) userTranslations[currentModId] = new();
                     if (!userTranslations[currentModId].ContainsKey(matchKey))
                         userTranslations[currentModId][matchKey] = new TranslationEntry { OriginalText = matchText, SChineseStatus = TranslationStatus.Translated, Comment = new List<string>(tempComments) };
+                    else
+                    {
+                        userTranslations[currentModId][matchKey].OriginalText = matchText;
+                        userTranslations[currentModId][matchKey].SChineseStatus = TranslationStatus.Translated;
+                        userTranslations[currentModId][matchKey].Comment = new List<string>(tempComments);
+                    }
                     tempComments.Clear(); lastProcessedKey = matchKey; continue;
                 }
 
@@ -223,8 +336,6 @@ partial class Program
                 if (translationMatch2.Success)
                 {
                     string modId = translationMatch2.Groups["modId"].Value.Trim();
-                    if (allowedModIds != null && !allowedModIds.Contains(modId)) continue;
-
                     string matchKey = translationMatch2.Groups["key"].Value.Trim();
                     string matchText = translationMatch2.Groups["matchText"].Value;
                     if (userTranslations.ContainsKey(modId) && userTranslations[modId].ContainsKey(matchKey) && !string.IsNullOrEmpty(matchText))
@@ -236,13 +347,17 @@ partial class Program
                 if (originalMatch3.Success)
                 {
                     currentModId = originalMatch3.Groups["modId"].Value.Trim();
-                    if (allowedModIds != null && !allowedModIds.Contains(currentModId)) { tempComments.Clear(); lastProcessedKey = null; continue; }
-
                     string matchKey = originalMatch3.Groups["key"].Value.Trim();
                     string matchText = originalMatch3.Groups["matchText"].Value;
                     if (!userTranslations.ContainsKey(currentModId)) userTranslations[currentModId] = new();
                     if (!userTranslations[currentModId].ContainsKey(matchKey))
                         userTranslations[currentModId][matchKey] = new TranslationEntry { OriginalText = matchText, SChineseStatus = TranslationStatus.Approved, Comment = new List<string>(tempComments) };
+                    else
+                    {
+                        userTranslations[currentModId][matchKey].OriginalText = matchText;
+                        userTranslations[currentModId][matchKey].SChineseStatus = TranslationStatus.Approved;
+                        userTranslations[currentModId][matchKey].Comment = new List<string>(tempComments);
+                    }
                     tempComments.Clear(); lastProcessedKey = matchKey; continue;
                 }
 
@@ -250,8 +365,6 @@ partial class Program
                 if (translationMatch3.Success)
                 {
                     string modId = translationMatch3.Groups["modId"].Value.Trim();
-                    if (allowedModIds != null && !allowedModIds.Contains(modId)) continue;
-
                     string matchKey = translationMatch3.Groups["key"].Value.Trim();
                     string matchText = translationMatch3.Groups["matchText"].Value;
                     if (userTranslations.ContainsKey(modId) && userTranslations[modId].ContainsKey(matchKey) && !string.IsNullOrEmpty(matchText))
@@ -265,11 +378,9 @@ partial class Program
             {
                 string modId = modEntry.Key;
 
+                // 若存在 allowedModIds：只允许“覆盖更新”已领取模组；但仍然要全量写回所有模组的分片文件。
                 if (allowedModIds != null && !allowedModIds.Contains(modId))
-                {
-                    ignoredCount += modEntry.Value.Count;
                     continue;
-                }
 
                 if (!originalTranslations.ContainsKey(modId)) { Console.WriteLine($"[提示] 源文件中不存在MOD: {modId}，跳过该MOD的所有条目"); ignoredCount += modEntry.Value.Count; continue; }
                 foreach (var entry in modEntry.Value)
@@ -284,32 +395,84 @@ partial class Program
             }
             Console.WriteLine($"[成功] 已合并 {mergedCount} 条翻译记录，忽略 {ignoredCount} 条不存在的记录");
 
-            Console.WriteLine($"写回翻译文件: {sourceFilePath}");
-            using var writer = new StreamWriter(sourceFilePath, false, Encoding.UTF8);
-            foreach (var modId in originalTranslations.Keys)
+            Console.WriteLine("写回分片翻译文件...");
+
+            string langSuffix2 = config.Language.ToSuffix();
+            string splitDir2 = Path.Combine(config.LocalPath, "data", $"translations_{langSuffix2}_split");
+            if (!Directory.Exists(splitDir2))
             {
-                var entries = originalTranslations[modId];
-                string modName = ModNameMapping.TryGetValue(modId, out var name) ? name : "";
-                writer.WriteLine();
-                writer.WriteLine($"------ {modId} :: {modName} ------");
-                writer.WriteLine();
-                foreach (var entry in entries)
-                {
-                    string key = entry.Key; var translationEntry = entry.Value;
-                    foreach (var comment in translationEntry.Comment) writer.WriteLine(comment);
-                    string indent = translationEntry.SChineseStatus switch
-                    {
-                        TranslationStatus.Approved => "",
-                        TranslationStatus.Translated => "\t",
-                        _ => "\t\t"
-                    };
-                    writer.WriteLine($"{indent}{modId}::EN::{key} = \"{translationEntry.OriginalText}\",");
-                    writer.WriteLine($"{indent}{modId}::{config.Language.ToSuffix()}::{key} = \"{translationEntry.SChinese}\",");
-                }
-                writer.WriteLine();
+                Directory.CreateDirectory(splitDir2);
             }
 
-            Console.WriteLine($"[成功] 翻译文件已更新: {sourceFilePath}");
+            // 按 modId 后两位分组（不排序，保持 Dictionary 默认遍历顺序）
+            var modIdsById2 = new Dictionary<string, List<string>>();
+            foreach (var modId in originalTranslations.Keys)
+            {
+                string id2 = (modId ?? string.Empty).Trim();
+                id2 = id2.Length >= 2 ? id2[^2..] : id2.PadLeft(2, '0');
+                if (!modIdsById2.ContainsKey(id2))
+                {
+                    modIdsById2[id2] = new List<string>();
+                }
+                modIdsById2[id2].Add(modId);
+            }
+
+            foreach (var id2 in modIdsById2.Keys)
+            {
+                string splitFilePath = Path.Combine(splitDir2, $"translations_{langSuffix2}_{id2}.txt");
+                using var writerSplit = new StreamWriter(splitFilePath, false);
+
+                int writtenMods = 0;
+                int writtenEntries = 0;
+
+                foreach (var modId in modIdsById2[id2])
+                {
+                    if (!originalTranslations.TryGetValue(modId, out var entries))
+                    {
+                        continue;
+                    }
+
+                    string modName = ModNameMapping.TryGetValue(modId, out var name) ? name : "";
+                    writerSplit.WriteLine();
+                    writerSplit.WriteLine($"------ {modId} :: {modName} ------");
+                    writerSplit.WriteLine();
+
+                    foreach (var key in entries.Keys)
+                    {
+                        var translationEntry = entries[key];
+                        string indent;
+                        switch (translationEntry.SChineseStatus)
+                        {
+                            case TranslationStatus.Untranslated:
+                                indent = "\t\t";
+                                break;
+                            case TranslationStatus.Translated:
+                                indent = "\t";
+                                break;
+                            case TranslationStatus.Approved:
+                                indent = "";
+                                break;
+                            default:
+                                indent = "\t\t";
+                                break;
+                        }
+
+                        foreach (var comment in translationEntry.Comment)
+                        {
+                            writerSplit.WriteLine(indent + (comment ?? string.Empty).Trim());
+                        }
+
+                        writerSplit.WriteLine($"{indent}{modId}::EN::{key} = \"{translationEntry.OriginalText}\",");
+                        writerSplit.WriteLine($"{indent}{modId}::{langSuffix2}::{key} = \"{translationEntry.SChinese}\",");
+                        writtenEntries++;
+                    }
+
+                    writerSplit.WriteLine();
+                    writtenMods++;
+                }
+
+                Console.WriteLine($"[成功] 已写回分片: {splitFilePath} (MOD {writtenMods}, 条目 {writtenEntries})");
+            }
             Console.WriteLine("[成功] 合并完成!");
             return 0;
         }
@@ -359,100 +522,5 @@ partial class Program
             Console.WriteLine($"[成功] 已读取 {ModNameMapping.Count} 个MOD名称映射" + (ignored > 0 ? $"，忽略 {ignored} 个无效条目" : ""));
         }
         catch (Exception ex) { Console.WriteLine($"[警告] 读取MOD名称文件失败: {ex.Message}"); }
-    }
-
-    sealed class ModNameRecord
-    {
-        public string? Name { get; set; }
-    }
-
-    static void ReadTranslationFile(string repoDir, string fileName, TranslationSystem.Language language)
-    {
-        if (string.IsNullOrEmpty(fileName)) { Console.WriteLine("[错误] 未提供翻译文件名"); return; }
-        string filePath = Path.Combine(repoDir, "data", fileName);
-        if (!File.Exists(filePath)) { Console.WriteLine($"[错误] 翻译文件不存在: {filePath}"); return; }
-
-        var linesInFile = File.ReadAllLines(filePath);
-        ModTranslations = new();
-        List<string> tempComments = new();
-        string? currentModId = null;
-        string? lastProcessedKey = null;
-
-        string langSuffix = language.ToSuffix();
-        string langSuffixEscaped = Regex.Escape(langSuffix);
-        foreach (var line in linesInFile)
-        {
-            if (string.IsNullOrWhiteSpace(line) || line.StartsWith("------")) continue;
-            if (IsNullOrCommentLine(line)) { tempComments.Add(line); continue; }
-
-            var originalMatch1 = Regex.Match(line, @"^\t\t(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-            if (originalMatch1.Success)
-            {
-                currentModId = originalMatch1.Groups["modId"].Value.Trim();
-                string matchKey = originalMatch1.Groups["key"].Value.Trim();
-                string matchText = originalMatch1.Groups["matchText"].Value;
-                if (!ModTranslations.ContainsKey(currentModId)) ModTranslations[currentModId] = new();
-                if (!ModTranslations[currentModId].ContainsKey(matchKey))
-                    ModTranslations[currentModId][matchKey] = new TranslationEntry { OriginalText = matchText, SChineseStatus = TranslationStatus.Untranslated, Comment = new List<string>(tempComments) };
-                tempComments.Clear(); lastProcessedKey = matchKey; continue;
-            }
-
-            var translationMatch1 = Regex.Match(line, $@"^\t\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-            if (translationMatch1.Success)
-            {
-                string modId = translationMatch1.Groups["modId"].Value.Trim();
-                string matchKey = translationMatch1.Groups["key"].Value.Trim();
-                string matchText = translationMatch1.Groups["matchText"].Value;
-                if (ModTranslations.ContainsKey(modId) && ModTranslations[modId].ContainsKey(matchKey) && !string.IsNullOrEmpty(matchText))
-                    ModTranslations[modId][matchKey].SChinese = matchText;
-                continue;
-            }
-
-            var originalMatch2 = Regex.Match(line, @"^\t(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-            if (originalMatch2.Success)
-            {
-                currentModId = originalMatch2.Groups["modId"].Value.Trim();
-                string matchKey = originalMatch2.Groups["key"].Value.Trim();
-                string matchText = originalMatch2.Groups["matchText"].Value;
-                if (!ModTranslations.ContainsKey(currentModId)) ModTranslations[currentModId] = new();
-                if (!ModTranslations[currentModId].ContainsKey(matchKey))
-                    ModTranslations[currentModId][matchKey] = new TranslationEntry { OriginalText = matchText, SChineseStatus = TranslationStatus.Translated, Comment = new List<string>(tempComments) };
-                tempComments.Clear(); lastProcessedKey = matchKey; continue;
-            }
-
-            var translationMatch2 = Regex.Match(line, $@"^\t(?<modId>[^:]+)::({langSuffixEscaped})::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-            if (translationMatch2.Success)
-            {
-                string modId = translationMatch2.Groups["modId"].Value.Trim();
-                string matchKey = translationMatch2.Groups["key"].Value.Trim();
-                string matchText = translationMatch2.Groups["matchText"].Value;
-                if (ModTranslations.ContainsKey(modId) && ModTranslations[modId].ContainsKey(matchKey) && !string.IsNullOrEmpty(matchText))
-                    ModTranslations[modId][matchKey].SChinese = matchText;
-                continue;
-            }
-
-            var originalMatch3 = Regex.Match(line, @"^(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-            if (originalMatch3.Success)
-            {
-                currentModId = originalMatch3.Groups["modId"].Value.Trim();
-                string matchKey = originalMatch3.Groups["key"].Value.Trim();
-                string matchText = originalMatch3.Groups["matchText"].Value;
-                if (!ModTranslations.ContainsKey(currentModId)) ModTranslations[currentModId] = new();
-                if (!ModTranslations[currentModId].ContainsKey(matchKey))
-                    ModTranslations[currentModId][matchKey] = new TranslationEntry { OriginalText = matchText, SChineseStatus = TranslationStatus.Approved, Comment = new List<string>(tempComments) };
-                tempComments.Clear(); lastProcessedKey = matchKey; continue;
-            }
-
-            var translationMatch3 = Regex.Match(line, $@"^(?<modId>[^:]+)::({langSuffixEscaped})::(?<key>[^=]+)=\s*""(?<matchText>.*)""\s*,?\S*");
-            if (translationMatch3.Success)
-            {
-                string modId = translationMatch3.Groups["modId"].Value.Trim();
-                string matchKey = translationMatch3.Groups["key"].Value.Trim();
-                string matchText = translationMatch3.Groups["matchText"].Value;
-                if (ModTranslations.ContainsKey(modId) && ModTranslations[modId].ContainsKey(matchKey) && !string.IsNullOrEmpty(matchText))
-                    ModTranslations[modId][matchKey].SChinese = matchText;
-                continue;
-            }
-        }
     }
 }
