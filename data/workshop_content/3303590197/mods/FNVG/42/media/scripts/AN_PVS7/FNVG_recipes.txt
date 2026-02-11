@@ -1,0 +1,87 @@
+module FNVG
+{
+	imports
+	{
+		Base
+	}
+
+	craftRecipe RemoveBatteryPVS7
+	{
+        timedAction = Making,
+		Time = 30,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Electrical,
+		OnTest = FNVG_CanRemoveBattery,
+		OnCreate = FNVG_OnRemoveBattery,
+
+		inputs
+		{
+			item 1 [FNVG.AN_PVS7;FNVG.AN_PVS7_UP;FNVG.AN_PVS7_PART] mode:keep,
+		}
+		outputs
+		{
+			item 1 Base.Battery,
+		}
+	}
+
+	craftRecipe InsertBatteryPVS7
+	{
+        timedAction = Making,
+		Time = 30,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Electrical,
+		OnTest = FNVG_CanInsertBattery,
+		OnCreate = FNVG_OnInsertBattery,
+
+		inputs
+		{
+			item 1 [Base.Battery] mode:destroy,
+			item 1 [FNVG.AN_PVS7;FNVG.AN_PVS7_UP;FNVG.AN_PVS7_PART] mode:keep,
+		}
+		outputs
+		{
+			item 1 FNVG.AN_PVS7,
+		}
+	}
+
+	craftRecipe AttachRhinoMountPVS7
+	{
+        timedAction = Making,
+		Time = 30,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Electrical,
+		OnCreate = FNVG_OnMountAttach,
+
+		inputs
+		{
+			item 1 [FNVG.AN_PVS7_PART] mode:destroy,
+			item 1 [FNVG.RhinoMount;FNVG.RhinoMount_UP] mode:destroy,
+		}
+		outputs
+		{
+			item 1 FNVG.AN_PVS7,
+		}
+	}
+
+	craftRecipe DetachRhinoMountPVS7
+	{
+       	timedAction = Making,
+		Time = 30,
+		AllowBatchCraft = False,
+		Tags = InHandCraft;CanBeDoneInDark,
+        category = Electrical,
+		OnCreate = FNVG_OnMountDetach,
+
+		inputs
+		{
+			item 1 [FNVG.AN_PVS7;FNVG.AN_PVS7_UP] mode:destroy,
+		}
+		outputs
+		{
+			item 1 FNVG.AN_PVS7_PART,
+		}
+	}
+}

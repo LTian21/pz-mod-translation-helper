@@ -1,0 +1,107 @@
+module Base
+{
+	craftRecipe VLUnpackEmptySyringePack
+    {
+        timedAction = Making,
+        time = 40,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.VLEmptySyringePack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 10 Base.VLEmptySyringe,
+        }
+    }
+	
+	craftRecipe VLPackEmptySyringe
+    {
+        timedAction = PackingBox,
+        time = 50,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 10 [Base.VLEmptySyringe] mode:destroy flags[AllowFavorite;InheritFavorite;IsSealed;ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.VLEmptySyringePack,
+        }
+    }
+	
+	craftRecipe VLUnpackEmptySpecimenContainerPack
+    {
+        timedAction = Making,
+        time = 40,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 1 [Base.VLEmptySpecimenContainerPack] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 10 Base.VLEmptySpecimenContainer,
+        }
+    }
+	
+	craftRecipe VLPackEmptySpecimenContainer
+    {
+        timedAction = PackingBox,
+        time = 50,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Packing,
+        inputs
+        {
+            item 10 [Base.VLEmptySpecimenContainer] mode:destroy flags[AllowFavorite;InheritFavorite;IsSealed;ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.VLEmptySpecimenContainerPack,
+        }
+    }
+
+    craftRecipe VLUseUpgradeStrengthSerum1
+    {
+        timedAction = Making,
+        time = 30,
+        xpAward = Doctor:10,
+        OnCreate = RecipeCodeOnCreate.UseUpgradeStrengthSerum1,
+        Tags = InHandCraft,
+        inputs
+        {
+            item 1 [Base.VLUpgradeStrengthSerum1] mode:destroy flags[Prop1],
+            item 1 [Base.VLEmptySyringe] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 1 Base.VLUsedSyringe,
+            item 1 Base.VLEmptyTestTube,
+        }
+    }
+
+    craftRecipe VLUseUpgradeFitnessSerum1
+    {
+        timedAction = Making,
+        time = 30,
+        xpAward = Doctor:10,
+        OnCreate = RecipeCodeOnCreate.UseUpgradeFitnessSerum1,
+        Tags = InHandCraft,
+        inputs
+        {
+            item 1 [Base.VLUpgradeFitnessSerum1] mode:destroy flags[Prop1],
+            item 1 [Base.VLEmptySyringe] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 1 Base.VLUsedSyringe,
+            item 1 Base.VLEmptyTestTube,
+        }
+    }
+	
+    
+
+}
