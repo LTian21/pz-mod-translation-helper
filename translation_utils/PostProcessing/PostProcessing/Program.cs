@@ -119,14 +119,118 @@ namespace PostProcessing
                     Console.WriteLine($"::warning:: Vanilla translation source file does not exist: {vanillaSourcePath}");
                 }
 
+                /*
                 // 拼接  translation 文件路径
                 string translationFilePath = Path.Combine(repoDir, "data", "translations_CN.txt");
-                //检查repoDir\data\translations_CN.txt是否存在，不存在则爬出异常并退出
+                //检查repoDir\data\translations_CN.txt是否存在
                 if (!File.Exists(translationFilePath))
                 {
-                    Console.WriteLine($"::error:: Error: file not found: {translationFilePath}");
+                    Console.WriteLine($"::warning:: translations_CN.txt not found: {translationFilePath}");
+                }
+                */
+
+                // 旁路：读取 split 目录下的翻译条目（将作为后续处理的数据源）
+                string translationSplitDir = Path.Combine(repoDir, "data", "translations_CN_split");
+                var ModTranslationsSplit = new Dictionary<string, Dictionary<string, TranslationEntry>>();
+                var conflictKeysSplit = new Dictionary<string, List<TranslationEntry>>();
+                //检查repoDir\data\translations_CN_split是否存在，不存在则抛出异常并退出
+                if (!Directory.Exists(translationSplitDir))
+                {
+                    Console.WriteLine($"::error:: Error: directory not found: {translationSplitDir}");
                     return 1;
                 }
+
+                if (Directory.Exists(translationSplitDir))
+                {
+                    try
+                    {
+                        var splitFiles = Directory.GetFiles(translationSplitDir, "*.txt", SearchOption.TopDirectoryOnly);
+                        Console.WriteLine($"Loading split translations from: {translationSplitDir}, files: {splitFiles.Length}");
+
+                        foreach (var splitFile in splitFiles)
+                        {
+                            foreach (var line in File.ReadAllLines(splitFile))
+                            {
+                                if (IsNullOrCommentLine(line))
+                                {
+                                    continue;
+                                }
+
+                                var originalMatchSplit = Regex.Match(line, @"^(?<modId>[^:]+)::EN::(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*");
+                                if (originalMatchSplit.Success)
+                                {
+                                    string currentModId = originalMatchSplit.Groups["modId"].Value.Trim();
+                                    string key = originalMatchSplit.Groups["key"].Value.Trim();
+                                    string originalText = originalMatchSplit.Groups["text"].Value;
+
+                                    if (vanillaKeys.Contains(key))
+                                    {
+                                        continue;
+                                    }
+
+                                    if (!ModTranslationsSplit.ContainsKey(currentModId))
+                                    {
+                                        ModTranslationsSplit[currentModId] = new Dictionary<string, TranslationEntry>();
+                                    }
+                                    ModTranslationsSplit[currentModId][key] = new TranslationEntry
+                                    {
+                                        ModId = currentModId,
+                                        OriginalText = originalText,
+                                        SChinese = "",
+                                    };
+                                    continue;
+                                }
+
+                                var translationMatchSplit = Regex.Match(line, @"^(?<modId>[^:]+)::CN::(?<key>[^=]+)=\s*""(?<text>.*)""\s*,?\S*");
+                                if (translationMatchSplit.Success)
+                                {
+                                    string currentModId = translationMatchSplit.Groups["modId"].Value.Trim();
+                                    string key = translationMatchSplit.Groups["key"].Value.Trim();
+                                    string originalText = translationMatchSplit.Groups["text"].Value;
+
+                                    if (vanillaKeys.Contains(key))
+                                    {
+                                        continue;
+                                    }
+
+                                    if (!ModTranslationsSplit.ContainsKey(currentModId))
+                                    {
+                                        ModTranslationsSplit[currentModId] = new Dictionary<string, TranslationEntry>();
+                                    }
+                                    if (!ModTranslationsSplit[currentModId].ContainsKey(key))
+                                    {
+                                        ModTranslationsSplit[currentModId][key] = new TranslationEntry
+                                        {
+                                            ModId = currentModId,
+                                            OriginalText = "",
+                                            SChinese = "",
+                                        };
+                                    }
+
+                                    var entry = ModTranslationsSplit[currentModId][key];
+                                    entry.SChinese = originalText;
+                                    if (!conflictKeysSplit.ContainsKey(key))
+                                    {
+                                        conflictKeysSplit[key] = new List<TranslationEntry>();
+                                    }
+                                    conflictKeysSplit[key].Add(entry);
+                                    ModTranslationsSplit[currentModId][key] = entry;
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"::error:: Error reading split translations from {translationSplitDir}: {ex.Message}");
+                        return 1;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"::warning:: Split translations directory does not exist: {translationSplitDir}");
+                }
+
+                /*
                 //打开repoDir\data\translations_CN.txt，读取内容
                 var linesInFile = File.ReadAllLines(translationFilePath);
                 foreach (var line in linesInFile)
@@ -189,11 +293,129 @@ namespace PostProcessing
                     }
                 }
 
-                //如果warnings目录不存在则创建
+                // 如果warnings目录不存在则创建（旁路对比输出也使用此目录）
                 string warningsDir = Path.Combine(repoDir, "warnings");
                 if (!Directory.Exists(warningsDir))
                 {
                     Directory.CreateDirectory(warningsDir);
+                }
+
+                // 旁路对比：split vs translations_CN.txt
+                try
+                {
+                    string compareReportPath = Path.Combine(repoDir, "warnings", "compare_translations_CN_split_vs_translations_CN.txt");
+                    using (var writer = new StreamWriter(compareReportPath, false))
+                    {
+                        int totalModIdsFile = ModTranslations.Count;
+                        int totalModIdsSplit = ModTranslationsSplit.Count;
+
+                        int totalKeysFile = 0;
+                        foreach (var m in ModTranslations.Values)
+                        {
+                            totalKeysFile += m.Count;
+                        }
+                        int totalKeysSplit = 0;
+                        foreach (var m in ModTranslationsSplit.Values)
+                        {
+                            totalKeysSplit += m.Count;
+                        }
+
+                        writer.WriteLine($"translations_CN.txt modIds={totalModIdsFile}, keys={totalKeysFile}");
+                        writer.WriteLine($"translations_CN_split modIds={totalModIdsSplit}, keys={totalKeysSplit}");
+                        writer.WriteLine();
+
+                        int onlyInFile = 0;
+                        int onlyInSplit = 0;
+                        int textMismatch = 0;
+                        int cnMismatch = 0;
+
+                        var allModIds = new HashSet<string>(ModTranslations.Keys);
+                        foreach (var modId in ModTranslationsSplit.Keys)
+                        {
+                            allModIds.Add(modId);
+                        }
+
+                        foreach (var modId in allModIds)
+                        {
+                            var dictFile = ModTranslations.ContainsKey(modId) ? ModTranslations[modId] : null;
+                            var dictSplit = ModTranslationsSplit.ContainsKey(modId) ? ModTranslationsSplit[modId] : null;
+
+                            var allKeys = new HashSet<string>();
+                            if (dictFile != null)
+                            {
+                                foreach (var k in dictFile.Keys)
+                                {
+                                    allKeys.Add(k);
+                                }
+                            }
+                            if (dictSplit != null)
+                            {
+                                foreach (var k in dictSplit.Keys)
+                                {
+                                    allKeys.Add(k);
+                                }
+                            }
+
+                            foreach (var key in allKeys)
+                            {
+                                bool inFile = dictFile != null && dictFile.ContainsKey(key);
+                                bool inSplit = dictSplit != null && dictSplit.ContainsKey(key);
+
+                                if (inFile && !inSplit)
+                                {
+                                    onlyInFile++;
+                                    var e = dictFile![key];
+                                    writer.WriteLine($"ONLY_IN_FILE\t{modId}\t{key}\tEN=\"{e.OriginalText}\"\tCN=\"{e.SChinese}\"");
+                                    continue;
+                                }
+                                if (!inFile && inSplit)
+                                {
+                                    onlyInSplit++;
+                                    var e = dictSplit![key];
+                                    writer.WriteLine($"ONLY_IN_SPLIT\t{modId}\t{key}\tEN=\"{e.OriginalText}\"\tCN=\"{e.SChinese}\"");
+                                    continue;
+                                }
+
+                                var ef = dictFile![key];
+                                var es = dictSplit![key];
+                                if (!string.Equals(ef.OriginalText, es.OriginalText, StringComparison.Ordinal))
+                                {
+                                    textMismatch++;
+                                    writer.WriteLine($"EN_MISMATCH\t{modId}\t{key}\tFILE=\"{ef.OriginalText}\"\tSPLIT=\"{es.OriginalText}\"");
+                                }
+                                if (!string.Equals(ef.SChinese, es.SChinese, StringComparison.Ordinal))
+                                {
+                                    cnMismatch++;
+                                    writer.WriteLine($"CN_MISMATCH\t{modId}\t{key}\tFILE=\"{ef.SChinese}\"\tSPLIT=\"{es.SChinese}\"");
+                                }
+                            }
+                        }
+
+                        writer.WriteLine();
+                        writer.WriteLine($"Summary: ONLY_IN_FILE={onlyInFile}, ONLY_IN_SPLIT={onlyInSplit}, EN_MISMATCH={textMismatch}, CN_MISMATCH={cnMismatch}");
+
+                        Console.WriteLine($"Split compare summary: ONLY_IN_FILE={onlyInFile}, ONLY_IN_SPLIT={onlyInSplit}, EN_MISMATCH={textMismatch}, CN_MISMATCH={cnMismatch}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"::warning:: Failed to write split compare report: {ex.Message}");
+                }
+                */
+
+                // 如果warnings目录不存在则创建（旁路对比输出也使用此目录）
+                string warningsDir = Path.Combine(repoDir, "warnings");
+                if (!Directory.Exists(warningsDir))
+                {
+                    Directory.CreateDirectory(warningsDir);
+                }
+
+                // 将后处理来源切换到 split（非临时）：后续逻辑使用旁路读取的条目
+                if (ModTranslationsSplit.Count > 0)
+                {
+                    ModTranslations = ModTranslationsSplit;
+                    conflictKeys = conflictKeysSplit;
+                    Console.WriteLine("Switched post-processing source to translations_CN_split.");
                 }
 
                 //移除所有不存在冲突的key

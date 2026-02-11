@@ -63,7 +63,7 @@
     git commit --allow-empty -m "lock"
     ```
 4.  **核心翻译流程**:
-    *   打开 `data/translations_CN.txt` 文件。
+    *   打开 `data/translations_CN_split/*.txt` 文件。(为了避免单一大文件带来的卡顿，因此将翻译文件按照模组ID的后两位拆分到不同的子文件中。可以通过在文件夹内搜索对应的模组id找到对应的文件。)
     *   **待办条目**: 行首由 **一个或多个制表符 (Tab键 `\t`)** 开头的条目，是需要进行翻译或校对的条目。
     *   **完成标志**: 当您完成某一条目的翻译或校对后，必须手动**删除该行行首的所有制表符(`\t`)及前导空格**。这是告知系统“此条目已完成”的唯一方式。
 5.  提交您的修改 (`git commit -m 'feat: Update translations for X mod'`)。
@@ -98,7 +98,7 @@
 
 本节内容面向希望了解项目自动化原理的开发者。
 
--   `data/`: 存放所有翻译相关的数据文件。自动化脚本会读取 `workshop_content` 中的原始模组文件，并与 `translations_CN.txt` 结合，最终生成可用于发布的翻译文件。
+-   `data/`: 存放所有翻译相关的数据文件。自动化脚本会读取 `workshop_content` 中的原始模组文件，并与 `data/translations_CN_split/*.txt` 中的翻译条目结合，最终生成可用于发布的翻译文件。
 -   `scripts/`: 存放用于自动化处理的核心 Python 脚本，负责检查更新、合并文件、生成报告等。
 -   `translation_utils/`: 包含翻译过程中使用的辅助工具、配置文件和映射表。
 -   `warnings/`: 存放由脚本生成的各类警告和冲突报告文件，用于问题排查。
