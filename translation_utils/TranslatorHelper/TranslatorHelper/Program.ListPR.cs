@@ -21,9 +21,38 @@ partial class Program
             Console.WriteLine("读取MOD名称映射文件...");
             ReadModNameFile(config.LocalPath);
 
-            string fileName = $"translations_{config.Language.ToSuffix()}.txt";
-            Console.WriteLine($"读取翻译文件: {fileName}");
-            ReadTranslationFile(config.LocalPath, fileName, config.Language);
+            var allPRs = await github.PullRequest.GetAllForRepository(owner, repoName, new PullRequestRequest { State = ItemStateFilter.Open });
+
+            // 主输出(旧)：<repodir>\data\translations_{lang}.txt 已弃用。
+            var modIdsForSplit = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var pr0 in allPRs)
+            {
+                if (string.IsNullOrWhiteSpace(pr0.Body))
+                    continue;
+
+                try
+                {
+                    var jsonMatch0 = Regex.Match(pr0.Body, @"\{[^}]*""lockedBy""[^}]*\}", RegexOptions.Singleline);
+                    if (!jsonMatch0.Success)
+                        continue;
+
+                    var lockInfo0 = ParseLockInfo(jsonMatch0.Value);
+                    if (lockInfo0?.modIds == null)
+                        continue;
+
+                    foreach (var id in lockInfo0.modIds)
+                        if (!string.IsNullOrWhiteSpace(id))
+                            modIdsForSplit.Add(id.Trim());
+                }
+                catch
+                {
+                    // 解析某个 PR 失败不影响整体
+                }
+            }
+
+            ModTranslations = new();
+            Console.WriteLine("读取翻译文件...");
+            ReadTranslationFile(config.LocalPath, config.Language);
             Console.WriteLine($"[成功] 已读取 {ModTranslations.Count} 个MOD的翻译数据");
 
             var translationInfoList = new List<TranslationInfo>();
@@ -57,7 +86,6 @@ partial class Program
                 return mod;
             }
 
-            var allPRs = await github.PullRequest.GetAllForRepository(owner, repoName, new PullRequestRequest { State = ItemStateFilter.Open });
             if (!allPRs.Any())
             {
                 Console.WriteLine("[提示] 当前没有开放的PR");

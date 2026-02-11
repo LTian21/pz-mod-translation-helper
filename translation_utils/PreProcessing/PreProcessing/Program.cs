@@ -130,20 +130,7 @@ namespace PreProcessing
                 }
             }
 
-            // ==============================
-            // 主输出 (data\translations_CN.txt)
-            // 已禁用：为彻底消除对主文件的任何依赖，所有相关操作保留为注释，便于未来快速恢复。
-            // ==============================
-            //检查repoDir\data\translations_CN.txt是否存在，不存在则创建一个空文件
-            //string outputTranslationFilePath = Path.Combine(repoDir, "data", "translations_CN.txt");
-            //if (!File.Exists(outputTranslationFilePath))
-            //{
-            //    File.Create(outputTranslationFilePath).Close();
-            //}
-            ////打开repoDir\data\translations_CN.txt，读取内容
-            //var linesInFile = File.ReadAllLines(outputTranslationFilePath);
-
-            // 改为从旁路输出目录读取历史内容
+            // 从输出目录读取内容
             var linesInFile = ReadAllSplitTranslationLines(repoDir);
             //复制一份ModTranslations
             var modTranslationsCopy = new Dictionary<string, Dictionary<string, TranslationEntry>>(ModTranslations);
@@ -501,58 +488,7 @@ namespace PreProcessing
             }
             modTranslationsCopy = modTranslationsUnique;
 
-            // ==============================
-            // 主输出写回 (data\translations_CN.txt)
-            // 已禁用：旁路输出为唯一输出，主文件不再创建、写入或修改。
-            // ==============================
-            ////打开repoDir\data\translations_CN.txt，清空文件，写入新内容
-            //using (var writer = new StreamWriter(outputTranslationFilePath, false))
-            //{
-            //    foreach (var modId in modTranslationsCopy.Keys)
-            //    {
-            //        if (!modInfos.ContainsKey(modId))
-            //        {
-            //            continue;
-            //        }
-            //
-            //        string modName = modInfos[modId];
-            //        writer.WriteLine();
-            //        writer.WriteLine($"------ {modId} :: {modName} ------");
-            //        writer.WriteLine();
-            //        foreach (var key in modTranslationsCopy[modId].Keys)
-            //        {
-            //            var entry = modTranslationsCopy[modId][key];
-            //            string prefix;
-            //            switch (entry.SChineseStatus)
-            //            {
-            //                case TranslationStatus.Untranslated:
-            //                    prefix = "\t\t";
-            //                    break;
-            //                case TranslationStatus.Translated:
-            //                    prefix = "\t";
-            //                    break;
-            //                case TranslationStatus.Approved:
-            //                    prefix = "";
-            //                    break;
-            //                default:
-            //                    prefix = "\t\t";
-            //                    break;
-            //            }
-            //            //写入注释
-            //            foreach (var comment in entry.Comment)
-            //            {
-            //                writer.WriteLine(prefix + comment.Trim());
-            //            }
-            //            //写入原文行
-            //            writer.WriteLine($"{prefix}{modId}::EN::{key} = \"{entry.OriginalText}\",");
-            //            //写入翻译文本行
-            //            writer.WriteLine($"{prefix}{modId}::CN::{key} = \"{entry.SChinese}\",");
-            //        }
-            //        writer.WriteLine();
-            //    }
-            //}
-
-            //旁路输出：按modId后两位拆分生成翻译文件
+            //按modId后两位拆分生成翻译文件
             string bypassOutputDir = Path.Combine(repoDir, "data", "translations_CN_split");
             if (!Directory.Exists(bypassOutputDir))
             {
