@@ -7,7 +7,11 @@ from collections import defaultdict
 import urllib.parse
 
 # --- 配置 ---
-TRANSLATIONS_FILE = Path('data/translations_CN.txt')
+# 主输出（已弃用，保留便于快速恢复）
+# TRANSLATIONS_FILE = Path('data/translations_CN.txt')
+
+# 旁路输出（当前唯一数据源）
+TRANSLATIONS_SPLIT_DIR = Path('data/translations_CN_split')
 LOG_DIR = Path('data/logs')
 MOD_ID_NAME_MAP = Path('translation_utils/mod_id_name_map.json')
 UPDATE_LOG_JSON = LOG_DIR / 'update_log.json'
@@ -48,7 +52,7 @@ STATUS_TEMPLATE = """# 汉化中心状态仪表盘
 
 def parse_translation_file_stats(file_path, mod_id_name_map):
     """
-    一次性遍历 translations_CN.txt 文件，计算所有需要的统计数据。
+    一次性遍历主输出翻译文件（已弃用），计算所有需要的统计数据。
     """
     mod_stats = defaultdict(lambda: {
         'total_entries': 0, 
@@ -115,6 +119,86 @@ def parse_translation_file_stats(file_path, mod_id_name_map):
         })
     sorted_mod_list = sorted(mod_list, key=lambda x: (x['todos'], x['subs']), reverse=True)
     
+    return sorted_mod_list, global_stats, mod_count
+
+
+def _iter_split_translation_lines(split_dir: Path):
+    """按文件名顺序遍历 split 目录下的所有 .txt 行。"""
+    split_files = sorted(p for p in split_dir.glob('*.txt') if p.is_file())
+    for split_file in split_files:
+        with open(split_file, 'r', encoding='utf-8') as f:
+            yield from f
+
+
+def parse_translation_split_dir_stats(split_dir: Path, mod_id_name_map):
+    """
+    遍历 data/translations_CN_split 目录下的分片文件，计算所有需要的统计数据。
+    """
+    mod_stats = defaultdict(lambda: {
+        'total_entries': 0,
+        'missing_en': 0,
+        'todo_keys': set(),
+        'to_proofread_keys': set()
+    })
+
+    if not split_dir.is_dir():
+        print(f"错误: 旁路翻译目录 '{split_dir}' 未找到。")
+        return [], {'total_entries': 0, 'total_todos': 0, 'total_to_proofread': 0, 'total_translated': 0}, 0
+
+    split_files = sorted(p for p in split_dir.glob('*.txt') if p.is_file())
+    if not split_files:
+        print(f"警告: 旁路翻译目录 '{split_dir}' 下未找到任何 .txt 分片文件。")
+        return [], {'total_entries': 0, 'total_todos': 0, 'total_to_proofread': 0, 'total_translated': 0}, 0
+
+    for line in _iter_split_translation_lines(split_dir):
+        match = re.search(r'(\d+)::(?:EN|CN)::([\w\.\-]+)', line)
+        if not match:
+            continue
+
+        mod_id, key = match.groups()
+        stats = mod_stats[mod_id]
+
+        # 统计总条目和缺失原文 (仅计算 EN 行)
+        if '::EN::' in line:
+            stats['total_entries'] += 1
+            if "======Original Text Missing====" in line:
+                stats['missing_en'] += 1
+
+        # 统计待翻译和待校对
+        if re.match(r'^\t\t', line):
+            stats['todo_keys'].add(key)
+        elif re.match(r'^\t(?!\t)', line):
+            stats['to_proofread_keys'].add(key)
+
+    # --- 后处理和格式化 ---
+    global_stats = {
+        'total_entries': sum(s['total_entries'] for s in mod_stats.values()),
+        'total_todos': sum(len(s['todo_keys']) for s in mod_stats.values()),
+        'total_to_proofread': sum(len(s['to_proofread_keys']) for s in mod_stats.values())
+    }
+    global_stats['total_translated'] = global_stats['total_entries'] - global_stats['total_todos']
+    mod_count = len(mod_stats)
+
+    mod_list = []
+    for mod_id, stats in mod_stats.items():
+        mod_info = mod_id_name_map.get(mod_id, {})
+        if isinstance(mod_info, dict):
+            mod_name = mod_info.get('name', f"未知 ({mod_id})")
+            subs = mod_info.get('subscriptions', 0)
+        else:
+            mod_name = mod_info or f"无ID ({mod_id})"
+            subs = 0
+        mod_list.append({
+            'name': mod_name,
+            'id': mod_id,
+            'todos': len(stats['todo_keys']),
+            'to_proofread': len(stats['to_proofread_keys']),
+            'missing_en': stats['missing_en'],
+            'total_entries': stats['total_entries'],
+            'subs': subs
+        })
+
+    sorted_mod_list = sorted(mod_list, key=lambda x: (x['todos'], x['subs']), reverse=True)
     return sorted_mod_list, global_stats, mod_count
 
 
@@ -228,7 +312,11 @@ def main():
     beijing_time = datetime.now(timezone(timedelta(hours=8)))
     update_time_str = beijing_time.strftime('%Y-%m-%d %H:%M:%S %Z')
     
-    mod_todo_list, global_stats, mod_count = parse_translation_file_stats(TRANSLATIONS_FILE, mod_id_name_map)
+    # --- 主输出（已弃用，保留便于快速恢复）---
+    # mod_todo_list, global_stats, mod_count = parse_translation_file_stats(TRANSLATIONS_FILE, mod_id_name_map)
+
+    # --- 旁路输出（当前唯一数据源）---
+    mod_todo_list, global_stats, mod_count = parse_translation_split_dir_stats(TRANSLATIONS_SPLIT_DIR, mod_id_name_map)
 
     # 3. 从日志文件获取摘要
     run_id, detailed_summary = get_latest_run_summary(UPDATE_LOG_JSON)

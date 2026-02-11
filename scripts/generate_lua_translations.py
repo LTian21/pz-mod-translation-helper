@@ -65,8 +65,12 @@ def main():
     """主函数，用于生成LUA翻译文件。"""
     try:
         repo_dir = Path(__file__).parent.parent.resolve()
-        
-        translations_path = repo_dir / 'data' / 'translations_CN.txt'
+
+        # --- 主输出（已弃用，保留便于快速恢复）---
+        # translations_path = repo_dir / 'data' / 'translations_CN.txt'
+
+        # --- 旁路输出（当前唯一数据源）---
+        translations_split_dir = repo_dir / 'data' / 'translations_CN_split'
         map_path = repo_dir / 'translation_utils' / 'workshop_id_to_mod_id_map.json'
         output_dir = repo_dir / 'data'
         output_path = output_dir / 'PZ_Mod_Translations_CN.lua'
@@ -86,23 +90,31 @@ def main():
         translations = {}
         translation_regex = re.compile(r'^\s*(?P<workshop_id>\d+)::CN::(?P<key>[^=]+?)\s*=\s*"(?P<value>.*)"\s*,?\s*$')
         
-        logging.info(f"开始解析翻译文件: {translations_path}")
-        with open(translations_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                match = translation_regex.match(line)
-                if match:
-                    key = match.group('key').strip()
-                    # 只有当键是冲突键时才处理
-                    if key in conflict_keys:
-                        workshop_id = match.group('workshop_id')
-                        value = match.group('value')
+        if not translations_split_dir.is_dir():
+            raise FileNotFoundError(f"旁路翻译目录未找到: {translations_split_dir}")
 
-                        associated_mod_ids = workshop_to_mod_ids_map.get(workshop_id)
-                        if associated_mod_ids:
-                            for mod_id in associated_mod_ids:
-                                if mod_id not in translations:
-                                    translations[mod_id] = {}
-                                translations[mod_id][key] = value
+        split_files = sorted(p for p in translations_split_dir.glob('*.txt') if p.is_file())
+        logging.info(f"开始解析旁路翻译目录: {translations_split_dir} (files={len(split_files)})")
+        for split_file in split_files:
+            try:
+                with open(split_file, 'r', encoding='utf-8') as f:
+                    for line in f:
+                        match = translation_regex.match(line)
+                        if match:
+                            key = match.group('key').strip()
+                            # 只有当键是冲突键时才处理
+                            if key in conflict_keys:
+                                workshop_id = match.group('workshop_id')
+                                value = match.group('value')
+
+                                associated_mod_ids = workshop_to_mod_ids_map.get(workshop_id)
+                                if associated_mod_ids:
+                                    for mod_id in associated_mod_ids:
+                                        if mod_id not in translations:
+                                            translations[mod_id] = {}
+                                        translations[mod_id][key] = value
+            except Exception as e:
+                logging.error(f"解析文件 {split_file} 时出错: {e}")
         logging.info(f"翻译文件解析完成，共为 {len(translations)} 个Mod ID 准备了冲突翻译数据。")
 
         # 4. 生成LUA文件内容
