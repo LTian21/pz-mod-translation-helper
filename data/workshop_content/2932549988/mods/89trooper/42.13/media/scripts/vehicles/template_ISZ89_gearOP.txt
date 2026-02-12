@@ -1,0 +1,149 @@
+module Base
+{
+	model 89trooperGasCan0
+	{
+		mesh = vehicles/Vehicles_89trooper_Body|TIS_GasCan0,
+		texture = Vehicles/Items_GasCan,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 89trooperGasCan1
+	{
+		mesh = vehicles/Vehicles_89trooper_Body|TIS_GasCan1,
+		texture = Vehicles/Items_GasCan,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 89trooperGenerator
+	{
+		mesh = vehicles/Vehicles_89trooper_Body|TIS_Generator,
+		texture = Vehicles/Items_Generator,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle ISZ89OPgear
+	{
+			part DAMNGasCanOne
+        	{
+				model gascan0
+				{
+                file = 89trooperGasCan0,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.PetrolCan,
+				mechanicRequireKey = false,
+                durability = 2,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = ISZ89Roofrack,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part DAMNGasCanTwo
+        	{
+				model gascan1
+				{
+                file = 89trooperGasCan1,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.PetrolCan,
+				mechanicRequireKey = false,
+                durability = 2,
+
+				table install
+				{
+
+                	time = 350,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = ISZ89Roofrack,
+            	}
+
+            	table uninstall
+            	{
+
+					time = 250,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+
+			part DAMNGenerator
+        	{
+				model GenX
+				{
+                file = 89trooperGenerator,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.Generator;Base.Generator_Old;Base.Generator_Yellow;Base.Generator_Blue,
+				mechanicRequireKey = false,
+                durability = 2,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	requireInstalled = ISZ89Roofrack,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
+	}	
+}

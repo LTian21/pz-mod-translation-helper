@@ -1,0 +1,246 @@
+module Base
+{
+
+	model 87toyotaMR2Wheel0
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Wheel|mr2_tire0,
+		texture = vehicles/Vehicles_87toyotaMR2_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	model 87toyotaMR2Wheel1
+	{
+		mesh = vehicles/Vehicles_87toyotaMR2_Wheel|mr2_tire0,
+		texture = vehicles/Vehicles_87toyotaMR2_Wheel2,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 87toyotaMR2UNIL
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.088,
+	}
+    model 87toyotaMR2UNIR
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.088,
+        invertX = TRUE,
+	}
+
+	template vehicle MR2Tires
+	{
+		part TireFrontLeft
+		{
+            model MR2Tire0
+			{
+				file = 87toyotaMR2Wheel0,
+			}
+
+			model MR2Tire1
+			{
+				file = 87toyotaMR2Wheel1,
+			}
+
+            model MR2Tire2
+			{
+				file = 87toyotaMR2UNIL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = MR2.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = MR2.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = MR2.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model MR2Tire0
+			{
+				file = 87toyotaMR2Wheel0,
+			}
+
+			model MR2Tire1
+			{
+				file = 87toyotaMR2Wheel1,
+			}
+
+            model MR2Tire2
+			{
+				file = 87toyotaMR2UNIR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			{
+				complete = MR2.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = MR2.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = MR2.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model MR2Tire0
+			{
+				file = 87toyotaMR2Wheel0,
+			}
+
+			model MR2Tire1
+			{
+				file = 87toyotaMR2Wheel1,
+			}
+
+            model MR2Tire2
+			{
+				file = 87toyotaMR2UNIL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = MR2.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = MR2.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model MR2Tire0
+			{
+				file = 87toyotaMR2Wheel0,
+			}
+
+			model MR2Tire1
+			{
+				file = 87toyotaMR2Wheel1,
+			}
+
+            model MR2Tire2
+			{
+				file = 87toyotaMR2UNIR,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = MR2.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = MR2.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = MR2.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+            specificItem = false,
+			itemType = Base.87toyotaMR2TireT13;Base.87toyotaMR2TireT23;damnCraft.SmallTire1,
+            durability = 2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+
+			}
+		}
+	}
+}
