@@ -1,0 +1,165 @@
+module THOMPSON
+{
+	imports
+	{
+		Base
+	}
+	
+    item Thompson
+    {
+		DisplayName = "[TP] ПП Томпсон М1921"
+        DisplayCategory = Weapon,			
+        ItemType = base:weapon,				
+        SubCategory = Firearm,				
+        Weight = 4.0,						
+        Icon = Thompson,				
+        WeaponSprite = Thompson,
+        		
+        Tags = base:hasmetal;base:firearm,	
+        MetalValue = 60.0,					
+		
+		
+        
+        MaxDamage = 1.4,					
+        MinDamage = 0.9,					
+        HitChance = 55,						
+        CriticalChance = 25.0,				
+        CritDmgMultiplier = 5.0,			
+        MaxHitcount = 2,					
+        Projectilecount = 1,				
+        StopPower = 3.5,					
+        PiercingBullets = false,				
+        DoorDamage = 6,						
+        
+       
+        MaxRange = 20.0,					
+        MinRange = 0.4,					
+        MinAngle = 0.85,					
+        MinSightRange = 2,					
+        MaxSightRange = 8.0,				
+        
+        
+        FireMode = Auto,					
+        FireModePossibilities = Auto/Single,
+        MaxAmmo = 100,						
+        CyclicRateMultiplier = 1.2,			
+        RecoilDelay = 15,					
+        
+		
+		
+        IdleAnim = Idle_Weapon2,			
+        RunAnim = Run_Weapon2,				
+        SwingAnim = Rifle,					
+        MuzzleFlashModelKey = muzzle_flash_assault_rifle, 
+        
+        
+        ModelWeaponPart = null,
+
+		
+		
+		
+        AimReleaseSound = M16AimRelease,	
+        BreakSound = M16Break,				
+        BringToBearSound = M16BringToBear,	
+        ClickSound = M16Jam,				
+        DropSound = M16Drop,				
+        EjectAmmoSound = M16EjectAmmo,		
+        EjectAmmoStartSound = M16EjectAmmoStart, 
+        EjectAmmoStopSound = M16EjectAmmoStop,   
+        EquipSound = M16Equip,				
+        HitSound = BulletImpact,			
+        ImpactSound = null,					
+        InsertAmmoSound = M16InsertAmmo,	
+        InsertAmmoStartSound = M16InsertAmmoStart, 
+        InsertAmmoStopSound = M16InsertAmmoStop,   
+        RackSound = M16Rack,				
+        ShellFallSound = M16CartridgeFall,	
+        SwingSound = M16Shoot,				
+        UnequipSound = M16UnEquip,			
+        
+        
+        SoundGain = 2.2,					
+        SoundRadius = 180,					
+        SoundVolume = 40,					
+        NPCSoundBoost = 2.0,				
+		
+		
+        AimingPerkCritModifier = 7,			
+        AimingPerkHitChanceModifier = 3,	
+        AimingPerkMinAngleModifier = 0.01,	
+        AimingPerkRangeModifier = 0,		
+        Aimingtime = 45,					
+        IsAimedFirearm = true,				
+        Ranged = true,						
+        ToHitModifier = 1.5,				
+		
+		
+        AmmoBox = Base.Bullets45Box,				
+        AmmoType = base:bullets_45,		
+        MagazineType = ThompsonMagazine,
+        MagazineType = ThompsonDrum,		
+        WeaponReloadType = boltaction,		
+        Reloadtime = 25,					
+        ConditionMax = 8,					
+        ConditionLowerChanceOneIn = 150,	
+        JamGunChance = 3,					
+        MultipleHitConditionAffected = false, 
+		
+		
+        KnockBackOnNoDeath = true,			
+        KnockdownMod = 5.0,					
+        PushBackMod = 0.4,					
+        SplatBloodOnNoDeath = true,			
+        SplatNumber = 4,					
+        SplatSize = 4,						
+		
+		
+        MinimumSwingtime = 0.6,				
+        Swingtime = 0.6,					
+        SwingAmountBeforeImpact = 0.0,		
+        RequiresEquippedBothHands = true,	
+        TwoHandWeapon = true,				
+        AttachmentType = Rifle,				
+        UseEndurance = false,				
+    }
+
+	
+  
+	
+	item ThompsonDrum
+    {
+        DisplayName = "[TP] Барабан ПП Томпсон .45",	
+        DisplayCategory = Ammo,					
+        ItemType = base:normal,					
+        Weight = 1.0,							
+        CanStack = FALSE,						
+        Icon = thompsondrum,						
+        MaxAmmo = 100,							
+        AmmoType = base:bullets_45,			
+        WorldStaticModel = Mag100,	
+        Tags = base:hasmetal;base:riflemagazine, 
+    }
+	
+    item ThompsonCase
+    {
+        DisplayName = "[TP] - Оружейный кейс Томпсон М1921", 
+        DisplayCategory = Container,			
+        ItemType = base:container,				
+        Weight = 0.5,							
+        WeightReduction = 5,					
+        Capacity = 7,							
+        Icon = ProtectiveCase,						
+        MetalValue = 15,						
+        ReplaceInSecondHand = Bag_PistolCase_LHand holdingbagleft,  
+        ReplaceInPrimaryHand = Bag_PistolCase_RHand holdingbagright, 
+        WorldStaticModel = ProtectiveCase_Ground,		
+        Tags = base:hasmetal,					
+    }
+
+	
+    fixing Fix Thompson
+    {
+       Require : Thompson,					
+       Fixer : Thompson; Aiming=3,			
+    }
+}
