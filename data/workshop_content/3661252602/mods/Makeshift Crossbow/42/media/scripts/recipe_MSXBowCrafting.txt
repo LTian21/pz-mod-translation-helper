@@ -1,0 +1,143 @@
+module Base
+{
+	
+	craftRecipe BoltShaft
+    {
+        timedAction = SharpenStakeWood,
+        time = 120,
+		SkillRequired = Carving:2,
+        Tags = AnySurfaceCraft,
+		category = Weaponry,
+		xpAward = Carving:5,
+		NeedToBeLearn = true,
+		metaRecipe = Bolt,
+        inputs
+        {
+			item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[MayDegradeLight;NoBrokenItems;Prop1;IsNotDull],
+            item 1 [Base.SmallHandle;Base.Stake] mode:destroy flags[NoBrokenItems;Prop2],
+			
+		}
+        outputs
+		{
+			item 1 MSXBow.BoltShaft,
+		}
+	}
+	
+	craftRecipe BoltFlights
+	{
+		timedAction = ApplyGlaze,
+		time = 90,
+		Tags = InHandCraft,
+		category = Weaponry,
+		NeedToBeLearn = true,
+		metaRecipe = Bolt,
+		inputs
+		{
+			item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[NoBrokenItems;Prop1;IsNotDull],
+			item 2 [Base.ChickenFeather;Base.TurkeyFeather;1:Base.Brochure;1:Base.Flier;1:Base.IndexCard;1:Base.MenuCard;1:Base.Phonebook] tags[magazine] flags[Prop2],
+		}
+		outputs
+		{
+			item 4 MSXBow.BoltFlights,
+		}
+	}
+	
+	craftRecipe Bolt
+	{
+		timedAction = CraftWeapon1H,
+		time = 90,
+		Tags = AnySurfaceCraft,
+		category = Weaponry,
+		NeedToBeLearn = true,
+		autoLearnAny = Carving:4,
+		inputs
+		{
+			item 1 [MSXBow.BoltShaft] mode:destroy flags[Prop1],
+			item 8 [Base.Staples;1:Base.Thread_Sinew;2:Base.Twine;1:Base.Glue;1:Base.Woodglue],
+			item 3 [MSXBow.BoltFlights],
+			item 1 [Base.Nails;Base.Screws],
+			item 1 tags[hammer;hammerstone] mode:keep flags[NoBrokenItems],
+		}
+		outputs
+		{
+			item 1 MSXBow.CrossbowBolt,
+		}
+	}
+	
+	craftRecipe MakeshiftCrossbow
+	{
+		timedAction = CraftWeapon2H,
+		time = 320,
+		Tags = AnySurfaceCraft,
+		category = Weaponry,
+		SkillRequired = Maintenance:4,
+		xpAward = Maintenance:35,
+		NeedToBeLearn = true,
+		autoLearnAny = Maintenance:6,
+		inputs
+		{
+			item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[MayDegradeLight;NoBrokenItems;Prop1;IsNotDull],
+			item 1 [Base.LargeBranch] flags[NoBrokenItems;Prop2;InheritCondition],
+			item 6 [Base.LeatherStrips;8:Base.DuctTape],
+			item 6 [Base.RubberBand;12:Base.Twine;2:Base.RubberHose],
+			item 1 [Base.Latch;2:Base.Buckle],
+			item 1 [Base.Hinge;Base.DrawPlate],
+			item 1 [Base.LongStick;2:Base.WoodenStick2] flags[NoBrokenItems],
+		}
+		outputs
+		{
+			item 1 MSXBow.Makeshift_Crossbow,
+		}
+	}
+	
+	craftRecipe FixCrossbowWithWoodGlue
+    {
+        time = 180,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft,
+        category = Repair,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:15,
+		SkillRequired = Maintenance:4,
+		NeedToBeLearn = true,
+		metaRecipe = MakeshiftCrossbow,
+        OnCreate = RecipeCodeOnCreate.genericBetterFixing,
+        Tooltip = Tooltip_Recipe_CanFailAndDamage,
+        inputs
+        {
+            item 2 [Base.Woodglue] flags[Prop1],
+			item 1 [MSXBow.Makeshift_Crossbow] mode:keep flags[Prop2;IsDamaged],
+        }
+        outputs
+        {
+        }
+    }
+	
+	craftRecipe RestringCrossbow
+    {
+        time = 180,
+        AllowBatchCraft = false,
+        Tags = AnySurfaceCraft,
+        category = Repair,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:15,
+        SkillRequired = Maintenance:4,
+		NeedToBeLearn = true,
+		metaRecipe = MakeshiftCrossbow,
+        OnCreate = RecipeCodeOnCreate.genericEvenBetterFixing,
+        Tooltip = Tooltip_Recipe_CanFailAndDamage,
+        inputs
+        {
+			item 6 [Base.RubberBand;12:Base.Twine] flags[Prop1],
+            item 1 tags[base:scissors;base:sharpknife] mode:keep flags[IsNotDull],
+            item 1 [MSXBow.Makeshift_Crossbow] mode:keep flags[Prop2;IsDamaged],   
+ 
+        }
+        outputs
+        {
+        }
+    }
+        }
+    }
+	
+}
