@@ -1,0 +1,57 @@
+module Base
+{
+    template vehicle VehicleFreezer
+    {
+        part FreezerFrontLeft
+        {
+            area = SeatFrontLeft,
+            category = bodywork,
+            specificItem = false,
+            itemType = Base.TransportFreezer,
+            container
+            {
+                capacity = 488,
+            }
+            table install
+            {
+                items
+                {
+                        1
+                        {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                        }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.InstallTest.multiRequire,
+            }
+            table uninstall
+            {
+                items
+                {
+                        1
+                        {
+                            type = Base.Screwdriver,
+                            count = 1,
+                            keep = true,
+                equip = primary,
+                        }
+                }
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = ATATuning.UninstallTest.multiRequire,
+            }
+            lua
+            {
+                init = CommonTemplates.Init.VehicleFreezer,
+                update = CommonTemplates.Update.VehicleFreezer,
+            }
+        }
+    }
+}
+
