@@ -1,0 +1,85 @@
+module Rotators
+{
+	template vehicle SemiVanSpareTire
+	{
+		part SpareTire
+		{
+			category = bodywork,
+			area = SpareTire,
+			itemType = Base.OldTire;Base.NormalTire;Base.ModernTire,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+         
+			/*anim Closed
+			{
+				anim = Toolbox_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = Toolbox_closing,
+				animate = FALSE,
+			}*/
+         
+			table install
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 100,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					item
+					{
+						type = Base.Wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 100,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+			}
+         
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+   
+	template vehicle SemiVanRefrigerator
+	{
+		part RefrigeratorUnit
+		{
+			category = bodywork,
+			area = GasTank,
+			itemType = Base.OldTire,
+			mechanicRequireKey = false,
+			repairMechanic = true,       
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}
+
+
