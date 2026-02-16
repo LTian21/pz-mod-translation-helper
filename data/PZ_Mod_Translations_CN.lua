@@ -1496,10 +1496,18 @@ return {
     ["\\CAExtendedCategories"] = {
         ["IGUI_ItemCat_Animal"] = "\229\138\168\231\137\169",
         ["IGUI_ItemCat_AnimalPart"] = "\229\138\168\231\137\169\230\157\144\230\150\153",
+        ["IGUI_ItemCat_Cartography"] = "\229\156\176\229\155\190",
         ["IGUI_ItemCat_FireSource"] = "\231\129\171\231\167\141",
+        ["IGUI_ItemCat_Household"] = "\229\174\182\231\148\168",
+        ["IGUI_ItemCat_Instrument"] = "\228\185\144\229\153\168",
         ["IGUI_ItemCat_MaterialWeapon"] = "\230\157\144\230\150\153 - \230\173\166\229\153\168",
         ["IGUI_ItemCat_Memento"] = "\231\186\170\229\191\181\229\147\129",
         ["IGUI_ItemCat_ProtectiveGear"] = "\233\152\178\230\138\164",
+        ["IGUI_ItemCat_Sports"] = "\232\191\144\229\138\168\229\153\168\230\162\176",
+        ["IGUI_ItemCat_Stock"] = "\233\171\152\230\177\164",
+        ["IGUI_ItemCat_VehicleMaintenance"] = "\230\177\189\228\191\174",
+        ["IGUI_ItemCat_WeaponCrafted"] = "\230\173\166\229\153\168 - \232\135\170\229\136\182",
+        ["IGUI_perks_Farming"] = "\229\134\156\229\138\161",
     },
     ["\\CLBM"] = {
         ["UI_CraftCat_Furniture"] = "\229\174\182\229\133\183",
