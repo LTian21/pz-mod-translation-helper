@@ -1,0 +1,2233 @@
+module Base
+{
+    /*****
+	imports
+	{
+		Base,
+	}	
+    *****/
+
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::-----:: Pan Recipes are here! ::-----:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+
+     craftRecipe SapphCooking Put Oil in Frying Pan
+    {
+        timedAction = MixingFryingPan,
+        time            = 10,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+			item 1 tags[base:bakingfat],
+			item 1 [Base.Pan] mode:destroy,
+        }
+       outputs
+        {
+		   item 1 SapphCooking.FryingPanwithOil,
+        }
+    }
+
+    craftRecipe SapphCooking Fill Saucepan with Oil
+    {
+        timedAction = MixingSaucepan,
+        time            = 10,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+			item 2 tags[base:bakingfat],
+			item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy mappers[panType],
+        }
+       outputs
+        {
+		   item 1 mapper:panType,
+        }
+
+        itemMapper panType
+	    {
+            SapphCooking.SaucepanwithOil = Base.Saucepan,
+            SapphCooking.SaucepanwithOil_Copper = Base.SaucepanCopper,
+            
+        }
+    }
+    
+    craftRecipe SapphCooking Put Oil in Wok Pan
+    {
+        timedAction = MixingWokpan,
+        time            = 10,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+			item 2 tags[base:bakingfat],
+			item 1 [SapphCooking.WokPan] mode:destroy,
+        }
+       outputs
+        {
+		   item 1 SapphCooking.WokPan_Oil,
+        }
+    }
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Frying Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+	
+	craftRecipe SapphCooking Fry Potato Fries
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [farming.Potato] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep,
+        }
+       outputs
+        {
+		   item 1 Base.FrenchFries,
+        }
+    }
+
+    craftRecipe SapphCooking Make Taco Shell
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [Base.Tortilla] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep,
+        }
+       outputs
+        {
+		   item 1 Base.TacoShell,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Mozzarela Sticks
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCookingTwoResult,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [SapphCooking.MozzarelaCheese] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 2 SapphCooking.MozzarelaSticks,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Chicken Nuggets
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = SapphDivideThreeCooked,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [SapphCooking.MincedMeat_Chicken] flags[ItemCount],
+            item 1 [SapphCooking.BreadCrumbs],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 3 Base.ChickenNuggets,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Scotch Egg
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [SapphCooking.ScotchEggRaw] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.ScotchEgg,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Churros
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = SapphDivideFourCooked,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [SapphCooking.PastryDough] flags[ItemCount],
+            item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 3 SapphCooking.ChurrosPlain,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Falafel
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = SapphDivideFourCooked,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [SapphCooking.Falafel_Uncooked] flags[ItemCount],
+            item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.Falafel_Fried,
+        }
+    }
+
+
+
+    craftRecipe SapphCooking Fry Potato Pancakes
+    {
+        timedAction = CookingPotatoPancakePan,
+        time            = 80,
+        ToolTip = Tooltip_OilPan,
+        category = SapphCooking,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [farming.Potato] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 2 Base.PotatoPancakes,
+        }
+    }
+
+    craftRecipe SapphCooking Smash Burger
+    {
+        timedAction = CookingBurgerPan,
+        time            = 80,
+        ToolTip = Tooltip_OilPan,
+        category = SapphCooking,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [SapphCooking.Meatballs] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.SmashBurger,
+        }
+    }
+
+    craftRecipe SapphCooking Cook Egg in a Hole
+    {
+        timedAction = CookingEggBreadPan,
+        time            = 80,
+        ToolTip = Tooltip_OilPan,
+        category = SapphCooking,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [Base.BreadSlices] flags[ItemCount],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.Bread_Egginhole,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Crepes
+    {
+        timedAction = CookingCrepePan,
+        time            = 80,
+        ToolTip = Tooltip_OilPan,
+        category = SapphCooking,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [SapphCooking.FryBatter],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 2 SapphCooking.Crepe,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Eggplant
+    {
+        timedAction = CookingCrepePan,
+        time            = 80,
+        ToolTip = Tooltip_OilPan,
+        category = SapphCooking,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [SapphCooking.SlicedEggplant] flags[ItemCount],
+            item 1 [SapphCooking.BreadCrumbs] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.FriedEggplant,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Blooming Onion
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        ToolTip = Tooltip_OilPan,
+        category = SapphCooking,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [SapphCooking.FryBatter],
+            item 1 [Base.Onion] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep,
+        }
+       outputs
+        {
+		   item 1 SapphCooking.BloomingOnion,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Small Bird Meat
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        ToolTip = Tooltip_OilPan,
+        category = SapphCooking,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [Base.Smallbirdmeat;Base.Chicken;Base.ChickenFillet;Base.ChickenWings;Base.ChickenWhole] mappers[fryResult] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+            item 1 [SapphCooking.FryBatter],
+        }
+       outputs
+        {
+		   item 1 mapper:fryResult,
+        }
+       itemMapper fryResult
+	    {
+            SapphCooking.FriedBirdMeat = Base.Smallbirdmeat,
+            SapphCooking.FriedBirdMeat = Base.Chicken,
+            SapphCooking.FriedBirdMeat_Fillet = Base.ChickenFillet,
+            SapphCooking.FriedBirdMeat_Wings = Base.ChickenWings,
+            SapphCooking.FriedBirdMeat_Whole = Base.ChickenWhole,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Schnitzel
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [SapphCooking.TenderizedMeat] flags[ItemCount],
+            item 1 [SapphCooking.BreadCrumbs] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.Schnitzel,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Sausage
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [Base.Sausage;SapphCooking.SausageEvolved;SapphCooking.SausageBlood] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+            item 1 [SapphCooking.FryBatter],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.SapphCorndog,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Butter
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpan],
+            -fluid 0.05 [CookingOil],
+			item 1 [Base.Butter] flags[ItemCount],
+            item 1 [SapphCooking.WoodenSkewers],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.WoodenSkewers_Butter,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Tornado Potato
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+			item 1 [farming.Potato] flags[ItemCount],
+            item 1 [SapphCooking.WoodenSkewers],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.Skewer_TornadoPotato,
+        }
+    }
+
+
+    craftRecipe SapphCooking Fry Rat
+    {
+        timedAction = FryOilSaucepan,
+        time            = 60,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+			item 1 [Base.DeadRat;SapphCooking.WoodenSkewersRat] mappers[results] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+            item 1 [SapphCooking.FryBatter],
+        }
+       outputs
+        {
+		   item 1 mapper:results,
+        }
+        itemMapper results
+        {
+            SapphCooking.WoodenSkewersRatCooked = SapphCooking.WoodenSkewersRat,
+            SapphCooking.FriedRat = Base.DeadRat,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Nachos
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+			item 3 [SapphCooking.CutTortilla] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 Base.TortillaChipsBaked,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Fish Fillet
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+			item 1 [Base.FishFillet] flags[ItemCount],
+            item 1 [SapphCooking.FryBatter],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 Base.FishFried,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Egg
+    {
+        timedAction = CookingEggPan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 [*],
+            -fluid 0.05 [CookingOil],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.FriedEgg,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Egg2
+    {
+        timedAction = CookingEggWok,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.FriedEgg,
+        }
+    }
+
+
+    craftRecipe SapphCooking Cook Omelette
+    {
+        timedAction = CookingEggPan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 [*],
+            -fluid 0.05 [CookingOil],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+        }
+       outputs
+        {
+		   item 1 Base.EggOmelette,
+        }
+    }
+
+    craftRecipe SapphCooking CookOmelette2
+    {
+        timedAction = CookingEggWok,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+        }
+       outputs
+        {
+		   item 1 Base.EggOmelette,
+        }
+    }
+
+    craftRecipe SapphCooking Cook Bacon and Eggs
+    {
+        timedAction = CookingBaconEggsWok,
+        time            = 250,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+		item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+            item 1 [farming.Bacon] flags[ItemCount],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.Wokpan_BaconandEggs,
+        }
+    }
+
+    craftRecipe SapphCooking CookBaconandEggs2
+    {
+        timedAction = CookingBaconEggsPan,
+        time            = 250,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 [SapphCooking.FryingPanwithOil] mode:destroy,
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+            item 1 [farming.Bacon] flags[ItemCount],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.FryingPan_BaconandEggs,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Doughnut
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+            item 1 [SapphCooking.DoughnutShapedDough] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 Base.DoughnutPlain,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Coxinha
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+            item 1 [SapphCooking.CoxinhaPrep] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.CoxinhaFried,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Pastel
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+            item 1 [SapphCooking.PastelPrep] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.PastelFried,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Funnel Cakes
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+            item 1 [SapphCooking.FryBatter],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.FunnelCake,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Crab Rangoon
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+            item 1 [SapphCooking.CrabRangoon] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.CrabRangoon,
+        }
+    }
+
+    craftRecipe SapphCooking Fry Arancini
+    {
+        timedAction = FryOilSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        ToolTip = Tooltip_OilPan,
+		OnTest = IsHotPan,
+		OnCreate = FryingCookingTwoResult,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark;CanBeDoneFromFloor,
+        xpAward = Cooking:3,
+        inputs
+        {
+			item 1 tags[sapphcooking:oilpanbig],
+            -fluid 0.05 [CookingOil],
+            item 1 [SapphCooking.BowlofRisotto;SapphCooking.SaucepanwithRisotto] mappers[resultType] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.Arancini,
+           item 1 mapper:resultType,
+        }
+        itemMapper resultType
+        {
+            Base.Saucepan = SapphCooking.SaucepanwithRisotto,
+            Base.Bowl = SapphCooking.BowlofRisotto,
+        }
+    }
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Wok Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Cook Kung Pao Chicken in Wok Pan
+    {
+        timedAction = CookingYakisobaWok,
+        time            = 60,
+		NeedToBeLearn = True,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+		AutoLearnAny = Cooking:6,
+        inputs
+        {
+            item 1 [SapphCooking.WokPan] mode:destroy flags[ItemIsFluid;IsEmpty],
+            item 1 tags[base:bakingfat],
+            item 1 [Base.ChickenFillet;Base.Chicken;Base.ChickenWings;SapphCooking.Seitan;SapphCooking.SlicedChicken] flags[InheritFoodAge;ItemCount],
+            item 5 [Base.Pepper;Base.BellPepper;SapphCooking.DicedBellPepper;SapphCooking.SlicedBellPepper;SapphCooking.HotsaucePacket;Base.Hotsauce],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 SapphCooking.WokPan_KungPaoChicken,
+        }
+    }
+
+    craftRecipe SapphCooking CookScrambledEggs
+    {
+        timedAction = CookingOmeletteWok,
+        time            = 60,
+        category = SapphCooking,
+        OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneFromFloor,
+        ToolTip = Tooltip_OilPan,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [SapphCooking.WokPan_Oil],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 Base.EggScrambled,
+        }
+    }
+
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Saucepan Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+        craftRecipe SapphCooking PrepareRavioli
+    {
+        timedAction = MixingSaucepan,
+        time            = 60,
+		NeedToBeLearn = True,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+		AutoLearnAny  = Cooking:2,
+        inputs
+        {
+            item 1 [Base.Saucepan] mode:destroy,
+            item 1 [SapphCooking.ChickenBroth;SapphCooking.BeefBroth;SapphCooking.VegetableBroth] flags[ItemCount],
+            item 1 [SapphCooking.Ravioli] flags[InheritFoodAge;ItemCount],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 SapphCooking.SaucepanwithRavioli,
+        }
+    }
+
+    craftRecipe SapphCooking Put Chocolate in Saucepan
+    {
+        timedAction = MixingSaucepan,
+        time            = 10,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        CanWalk = true,
+    	OnCreate = SapphCreatePrep,
+        inputs
+        {
+			item 1 [Base.Saucepan] mode:destroy,
+			item 1 [4:Base.ChocolateChips;Base.Chocolate_Butterchunkers;Base.Chocolate_Crackle;Base.Chocolate_Deux;Base.Chocolate_Smirkers;Base.Chocolate_RoysPBPucks;Base.Chocolate_GalacticDairy;Base.Chocolate_SnikSnak;Base.Chocolate;SapphCooking.Box_Bonbon;SapphCooking.Box_HeartChocolate;SapphCooking.Box_LiqueurBonbons;Base.Chocolate_HeartBox] flags[ItemCount],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.SaucepanChocolate,
+        }
+    }
+
+    craftRecipe SapphCooking Put White Chocolate in Saucepan
+    {
+        timedAction = MixingSaucepan,
+        time            = 10,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        CanWalk = true,
+    	OnCreate = SapphCreatePrep,
+        inputs
+        {
+			item 1 [Base.Saucepan] mode:destroy,
+			item 1 [SapphCooking.WhiteChocolate] flags[ItemCount],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.SaucepanWhiteChocolate,
+        }
+    }
+
+    craftRecipe SapphCooking Prepare Instant Noodles
+    {
+        timedAction = MixingSaucepan,
+        time            = 10,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        CanWalk = true,
+    	OnCreate = SapphCreatePrep,
+        inputs
+        {
+			item 1 [Base.Saucepan] mode:destroy,
+            item 1 [Base.Ramen] flags[ItemCount],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.Saucepan_InstantNoodles,
+        }
+    }
+
+
+
+    craftRecipe SapphCooking Make Pan of Popcorn
+    {
+        timedAction = MixingSaucepan,
+        time            = 60,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking,
+        CanWalk = true,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.Saucepan] mode:destroy,
+            item 1 [SapphCooking.OpenCanofKernelCorn;2:Base.Corn] flags[ItemCount],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 SapphCooking.SaucepanwithKernelCorn,
+        }
+    }
+
+    craftRecipe SapphCooking Cook Chicken Noodle Soup
+    {
+        timedAction = MixingSaucepan,
+        time            = 60,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneFromFloor,
+        OnCreate = SapphCreatePrep,
+        CanWalk = true,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.Saucepan] mode:destroy,
+            item 1 [Base.Pasta] flags[ItemCount],
+            item 1 [SapphCooking.ChickenBroth;SapphCooking.BeefBroth;SapphCooking.VegetableBroth] flags[ItemCount],
+            item 1 [Base.Chicken;Base.ChickenFillet;Base.ChickenWings;Base.ChickenWhole] flags[ItemCount],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+        outputs
+        {
+           item 1 SapphCooking.SaucepanwithNoodleSoup,
+        }
+    }
+
+    craftRecipe SapphCooking Make Saucepan with Shui Zhu Yu in Stock
+    {
+        timedAction = MixingSaucepan,
+        time            = 60,
+		NeedToBeLearn = True,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+		AutoLearnAny = Cooking:6,
+        inputs
+        {
+            item 1 [Base.Saucepan] mode:destroy,
+            item 1 [SapphCooking.ChickenBroth;SapphCooking.BeefBroth;SapphCooking.VegetableBroth] flags[ItemCount],
+            item 1 [Base.FishFillet] flags[InheritFoodAge;ItemCount],
+            item 6 [Base.Pepper;Base.BellPepper;SapphCooking.DicedBellPepper;SapphCooking.SlicedBellPepper;SapphCooking.HotsaucePacket;Base.Hotsauce],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 SapphCooking.Saucepan_ShuiZhuYuUn,
+        }
+    }
+
+
+    craftRecipe SapphCooking Make Mashed Potato
+    {
+        timedAction = MixingSaucepan,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.Saucepan] mode:destroy,
+            item 1 [Base.Potato;Base.CannedPotatoOpen] flags[InheritFoodAge;ItemCount],
+            item 1 [Base.Butter] flags[ItemCount],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 SapphCooking.SaucepanwithMashedPotatoes,
+        }
+    }
+
+
+    craftRecipe SapphCooking Make Hot Chocolate
+    {
+        timedAction = MixingSaucepan,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.Saucepan] mode:destroy,
+            item 1 [SapphCooking.Syrup_Chocolate;4:Base.ChocolateChips;Base.Chocolate_Butterchunkers;Base.Chocolate_Crackle;Base.Chocolate_Deux;Base.Chocolate_Smirkers;Base.Chocolate_RoysPBPucks;Base.Chocolate_GalacticDairy;Base.Chocolate_SnikSnak;Base.Chocolate;SapphCooking.WhiteChocolate;SapphCooking.Box_Bonbon;SapphCooking.Box_HeartChocolate;SapphCooking.Box_LiqueurBonbons;Base.Chocolate_HeartBox] flags[ItemCount],
+            item 1 [*],
+            -fluid 0.2 [CowMilk;SheepMilk],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 SapphCooking.SaucepanHotChocolate,
+        }
+    }
+
+    craftRecipe SapphCooking Make Spaguetti and Meatballs
+    {
+        timedAction = MixingSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.Meatballs] flags[ItemCount],
+            item 1 [SapphCooking.SaucepanwithSpaguetti] mode:destroy flags[ItemCount],
+        }
+        outputs
+        {
+           item 1 SapphCooking.SaucepanwithSpaguettiandMeatballs,
+        }
+    }
+
+    craftRecipe SapphCooking Make Pan of Queso Dip
+    {
+        timedAction = MixingSaucepan,
+        time            = 80,
+        category = SapphCooking,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 1 tags[base:cheese] flags[ItemCount],
+            item 1 [*],
+            -fluid 0.1 [CowMilk;SheepMilk],
+            item 1 [Base.Saucepan] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.SaucepanwithCheese,
+        }
+    }
+
+    craftRecipe SapphCooking Make Saucepan of Custard Cream
+    {
+        timedAction = MixingSaucepan,
+        time            = 80,
+        category = SapphCooking,
+CanWalk = true,
+        OnCreate = SapphCreatePrep,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+            item 1 [Base.Saucepan] mode:destroy,
+            item 4 tags[base:sugar],
+            item 1 [*],
+            -fluid 0.1 [CowMilk;SheepMilk],
+            item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+        outputs
+        {
+           item 1 SapphCooking.Saucepan_Custard,
+        }
+    }
+
+    craftRecipe SapphCooking Make Pan of Sweet Popcorn
+    {
+        timedAction = MixingSaucepan,
+        time            = 60,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.Saucepan] mode:destroy,
+            item 4 tags[base:sugar],
+            item 1 [SapphCooking.OpenCanofKernelCorn;2:Base.Corn] flags[ItemCount],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 SapphCooking.SaucepanwithKernelCorn,
+        }
+    }
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Frying Pan Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+   craftRecipe SapphCooking Cook Refried Beans
+    {
+        timedAction = CookingRefriedBeansPan,
+        time            = 60,
+        category = SapphCooking,
+        OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneFromFloor,
+        ToolTip = Tooltip_OilPan,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [Base.BeanBowl;Base.OpenBeans] flags[InheritFoodAge;ItemCount],
+            item 1 [Base.Pan] mode:keep,
+            item 1 tags[base:bakingfat],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 Base.RefriedBeans,
+        }
+    }
+
+    craftRecipe SapphCooking Cook Scrambled Eggs
+    {
+        timedAction = CookingOmelettePan,
+        time            = 60,
+        category = SapphCooking,
+        OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneFromFloor,
+        ToolTip = Tooltip_OilPan,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [*],
+            -fluid 0.05 [CookingOil],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+			item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 Base.EggScrambled,
+        }
+    }
+
+    craftRecipe SapphCooking Boil Eggs
+    {
+        timedAction = CookingOmelettePan,
+        time            = 60,
+        category = SapphCooking,
+        OnTest = IsHotPan,
+		OnCreate = FryingCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneFromFloor,
+        ToolTip = Tooltip_OilPan,
+		xpAward = Cooking:3,
+        inputs
+        {
+            item 1 [*],
+            -fluid 0.2 [Water],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+        }
+       outputs
+        {
+           item 1 Base.EggBoiled,
+        }
+    }
+
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Baking Tray Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+	craftRecipe SapphCooking Make Tray of Croissants
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 3 [SapphCooking.CroissaintDough] flags[InheritFoodAge;ItemCount],
+            item 1 [Base.BakingTray] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_Croissant,
+        }
+    }
+
+    craftRecipe SapphCooking MakeTrayofBeefJerky
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 3 [SapphCooking.SlicedSteak] flags[InheritFoodAge;ItemCount],
+            item 2 tags[base:sugar],
+
+            item 1 [Base.BakingTray] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_Jerky,
+        }
+    }
+
+    craftRecipe SapphCooking Make Tray of Gingerbread Man
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.Gingerbread_Dough] flags[InheritFoodAge;ItemCount],
+            item 1 [Base.BakingTray] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_Gingerbread_Man,
+        }
+    }
+
+    craftRecipe SapphCooking Make Tray of Gingerbread Walls
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.Gingerbread_Dough] flags[InheritFoodAge;ItemCount],
+            item 1 [Base.BakingTray] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_Gingerbread_Wall,
+        }
+    }
+
+    craftRecipe SapphCooking Make Tray of Eclairs
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.Saucepan_Custard] flags[InheritFoodAge;ItemCount],
+            item 1 [SapphCooking.PipingBag_PastryDough] flags[ItemCount],
+            item 1 [Base.BakingTray] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_Eclair,
+        }
+    }
+
+    craftRecipe SapphCooking Make Tray of Pretzels
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.BreadDough] flags[InheritFoodAge;ItemCount],
+            item 1 [Base.BakingTray] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.Pretzel_Tray,
+        }
+    }
+
+    craftRecipe SapphCooking Make Tray of Creme Brulee Bowls
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [*],
+            -fluid 0.2 [CowMilk;SheepMilk],
+            item 3 [Base.Bowl] mode:destroy,
+            item 1 [Base.BakingTray] mode:destroy,
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 2 tags[base:sugar],
+
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_CremeBrulee,
+        }
+    }
+
+    craftRecipe SapphCooking Make Tray of Caramel Pudding
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [*],
+            -fluid 0.2 [CowMilk;SheepMilk],
+            item 3 [Base.Bowl] mode:destroy,
+            item 1 [Base.BakingTray] mode:destroy,
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 tags[base:sugar],
+
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_CaramelPudding,
+        }
+    }
+
+    craftRecipe SapphCooking Make Tray of Chocolate Pudding
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [*],
+            -fluid 0.2 [CowMilk;SheepMilk],
+            item 3 [Base.Bowl] mode:destroy,
+            item 1 [Base.BakingTray] mode:destroy,
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [SapphCooking.Syrup_Chocolate;4:Base.ChocolateChips;Base.Chocolate_Butterchunkers;Base.Chocolate_Crackle;Base.Chocolate_Deux;Base.Chocolate_Smirkers;Base.Chocolate_RoysPBPucks;Base.Chocolate_GalacticDairy;Base.Chocolate_SnikSnak;Base.Chocolate;SapphCooking.WhiteChocolate;SapphCooking.Box_Bonbon;SapphCooking.Box_HeartChocolate;SapphCooking.Box_LiqueurBonbons;Base.Chocolate_HeartBox] flags[ItemCount],
+            item 2 tags[base:sugar],
+
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_ChocolatePudding,
+        }
+    }
+
+
+    craftRecipe SapphCooking Make Tray of Hotdog Buns
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.BreadDough] flags[InheritFoodAge;ItemCount],
+            item 1 [Base.BakingTray] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_Hotdog,
+        }
+    }
+
+    craftRecipe SapphCooking Prepare Pao de Queijo
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.BreadDough] flags[InheritFoodAge;ItemCount],
+            item 1 tags[base:cheese] flags[ItemCount],
+            item 1 [Base.BakingTray] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_PaodeQueijo,
+        }
+    }
+
+    craftRecipe SapphCooking Make Tray of Bagels
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 3 [SapphCooking.BagelShapedDough] flags[InheritFoodAge;ItemCount],
+            item 1 [Base.BakingTray] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_Bagel,
+        }
+    }
+
+    craftRecipe SapphCooking Make Tray of Ladyfingers
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [*],
+            -fluid 0.2 [CowMilk;SheepMilk],
+            item 2 tags[base:sugar],
+
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [Base.BakingTray] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_Ladyfingers,
+        }
+    }
+
+    craftRecipe SapphCooking Make Macaron Cookies
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 3 tags[base:sugar],
+            item 3 tags[base:flour],
+            item 8 [Base.Icing;SapphCooking.PipingBag_Icing;SapphCooking.WhippedCream_Can],
+            item 1 [Base.BakingTray] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.BakingTray_MacaronCookies1,
+        }
+    }
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Baking Pan Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Make Pan of Tiramisu
+    {
+        timedAction = PackingTray_Small,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [*],
+            -fluid 0.2 [CowMilk;SheepMilk],
+            item 1 [SapphCooking.GrindedCoffee] flags[ItemCount],
+            item 3 tags[base:sugar],
+
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 tags[base:cheese] flags[ItemCount],
+            item 2 [SapphCooking.Ladyfingers] flags[ItemCount],
+            item 1 [Base.BakingPan] mode:destroy,
+        }
+       outputs
+        {
+           item 1 SapphCooking.TiramisuPan,
+        }
+    }
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Pot Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Prepare Feijoada
+    {
+        timedAction = MixingPot,
+        time            = 60,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        ToolTip = Tooltip_OilPan,
+        inputs
+        {
+            item 1 tags[sapphcooking:mincedmeat] flags[InheritFoodAge;ItemCount],
+            item 1 [Base.Blackbeans;Base.OpenBeans] mode:destroy flags[ItemCount],
+            item 1 [Base.Pot],
+            -fluid 0.4 [Water],
+        }
+       outputs
+        {
+           item 1 SapphCooking.FeijoadaPrep,
+        }
+    }
+
+    craftRecipe SapphCooking Make Cheese Preparation
+    {
+        timedAction = MixingPot,
+        time            = 80,
+        category = SapphCooking,
+        CanWalk = true,
+		OnCreate = SapphCreatePrep,
+        AutoLearnAny  = Cooking:4,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.Pot] mode:destroy,
+            item 1 [*],
+            -fluid 0.4 [CowMilk;SheepMilk],
+            item 1 [Base.Vinegar2;Base.Vinegar_Jug],
+        }
+       outputs
+        {
+           item 1 SapphCooking.Pot_CheesePreparation,
+        }
+    }
+
+    craftRecipe SapphCooking Make Mozzarela Cheese
+    {
+        timedAction = MixingPot,
+        time            = 60,
+        category = SapphCooking,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        ToolTip = Tooltip_OilPan,
+        AutoLearnAny  = Cooking:4,
+        inputs
+        {
+            item 1 [SapphCooking.Pot_CheeseCurds;SapphCooking.Wooden_CheeseMoldsCurds;SapphCooking.Bucket_CheeseCurds] mode:destroy mappers[potType] flags[ItemCount],
+            item 1 [Base.CheeseCloth;SapphCooking.ClothFilter] mode:keep,
+        }
+       outputs
+        {
+           item 1 SapphCooking.MozzarelaCheese,
+           item 1 mapper:potType,
+        }
+        itemMapper potType
+        {
+            Base.Pot = SapphCooking.Pot_CheeseCurds,
+            Base.Bucket = SapphCooking.Bucket_CheeseCurds,
+            SapphCooking.Wooden_CheeseMolds = SapphCooking.Wooden_CheeseMoldsCurds,
+        }
+    }
+
+    craftRecipe SapphCooking Pour Cheese Preparation
+    {
+        timedAction = EmptyPan,
+        time            = 80,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        AutoLearnAny  = Cooking:4,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.Pot_CheeseCurds] mode:destroy flags[ItemCount],
+            item 1 [SapphCooking.Wooden_CheeseMolds;Base.BucketEmpty;Base.Bucket] mode:destroy mappers[resultType],
+        }
+       outputs
+        {
+           item 1 mapper:resultType,
+           item 1 Base.Pot,
+        }
+        itemMapper resultType
+        {
+           SapphCooking.Bucket_CheeseCurds = Base.Bucket,
+           SapphCooking.Bucket_CheeseCurds = Base.BucketEmpty,
+           SapphCooking.Wooden_CheeseMoldsCurds = SapphCooking.Wooden_CheeseMolds,
+        }
+    }
+
+    craftRecipe SapphCooking Remove Cheese Wheel
+    {
+        timedAction = EmptyPan,
+        time            = 80,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        AutoLearnAny  = Cooking:4,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.Pot_Cheese;SapphCooking.Bucket_Cheese;SapphCooking.Wooden_CheeseMoldsFull;SapphCooking.Pot_CheeseBlue;SapphCooking.Bucket_CheeseBlue;SapphCooking.Wooden_CheeseMoldsBlue] mode:destroy mappers[cheeseType;potType] flags[AllowRottenItem;ItemCount],
+        }
+       outputs
+        {
+           item 1 mapper:cheeseType,
+           item 1 mapper:potType,
+        }
+        itemMapper cheeseType
+        {
+           SapphCooking.Parmesan_CheeseWheel = SapphCooking.Pot_Cheese,
+           SapphCooking.Parmesan_CheeseWheel = SapphCooking.Bucket_Cheese,
+           SapphCooking.Parmesan_CheeseWheel = SapphCooking.Wooden_CheeseMoldsFull,
+           SapphCooking.Blue_CheeseWheel = SapphCooking.Pot_CheeseBlue,
+           SapphCooking.Blue_CheeseWheel = SapphCooking.Bucket_CheeseBlue,
+           SapphCooking.Blue_CheeseWheel = SapphCooking.Wooden_CheeseMoldsBlue,
+        }
+        itemMapper potType
+        {
+           Base.Pot = SapphCooking.Pot_Cheese,
+           Base.Bucket = SapphCooking.Bucket_Cheese,
+           SapphCooking.Wooden_CheeseMolds = SapphCooking.Wooden_CheeseMoldsFull,
+           Base.Pot = SapphCooking.Pot_CheeseBlue,
+           Base.Bucket = SapphCooking.Bucket_CheeseBlue,
+           SapphCooking.Wooden_CheeseMolds = SapphCooking.Wooden_CheeseMoldsBlue,
+        }
+    }
+
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Clean Up Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Clean Pan
+    {
+        timedAction = EmptyPan,
+        time            = 10,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+			item 1 [SapphCooking.FryingPanwithOil;SapphCooking.WokPan_Oil;SapphCooking.SaucepanwithOil_Copper;SapphCooking.SaucepanwithOil;] mode:destroy flags[AllowRottenItem;ItemIsFluid;IsEmpty;ItemCount] mappers[panType] flags[Prop1],
+        }
+       outputs
+        {
+		   item 1 mapper:panType,
+        }
+       itemMapper panType
+		{
+			SapphCooking.WokPan = SapphCooking.WokPan_Oil,
+            Base.Pan = SapphCooking.FryingPanwithOil,
+            Base.Saucepan = SapphCooking.SaucepanwithOil,
+            Base.SaucepanCopper = SapphCooking.SaucepanwithOil_Copper,
+		}
+    }
+
+    craftRecipe SapphCooking Remove from Tray
+    {
+        timedAction = EmptyPan,
+        time            = 10,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        OnCreate = SapphDivideThreeCooked,
+        inputs
+        {
+			item 1 [SapphCooking.BakingTray_ChocolatePudding;SapphCooking.BakingTray_Jerky;SapphCooking.BakingTray_Gingerbread_Man;SapphCooking.BakingTray_Gingerbread_Wall;SapphCooking.BakingTray_Eclair;SapphCooking.Pretzel_Tray;SapphCooking.BakingTray_Ladyfingers;SapphCooking.BakingTray_CaramelPudding;SapphCooking.BakingTray_CremeBrulee;SapphCooking.BakingTray_Hotdog;SapphCooking.BakingTray_PaodeQueijo;SapphCooking.BakingTray_Croissant;SapphCooking.BakingTray_Bagel] mode:destroy flags[AllowRottenItem] mappers[panType;foodResult] flags[Prop1;ItemCount],
+        }
+        outputs
+        {
+		   item 1 mapper:panType,
+           item 3 mapper:foodResult,
+        }
+        itemMapper panType
+		{
+			Base.BakingTray = SapphCooking.BakingTray_Croissant,
+            Base.BakingTray = SapphCooking.BakingTray_Bagel,
+            Base.BakingTray = SapphCooking.BakingTray_PaodeQueijo,
+            Base.BakingTray = SapphCooking.BakingTray_Hotdog,
+            Base.BakingTray = SapphCooking.BakingTray_CremeBrulee,
+            Base.BakingTray = SapphCooking.BakingTray_CaramelPudding,
+            Base.BakingTray = SapphCooking.BakingTray_ChocolatePudding,
+            Base.BakingTray = SapphCooking.BakingTray_Ladyfingers,
+            Base.BakingTray = SapphCooking.Pretzel_Tray,
+            Base.BakingTray = SapphCooking.BakingTray_Eclair,
+            Base.BakingTray = SapphCooking.BakingTray_Gingerbread_Man,
+            Base.BakingTray = SapphCooking.BakingTray_Gingerbread_Wall,
+            Base.BakingTray = SapphCooking.BakingTray_Jerky,
+		}
+        itemMapper foodResult
+		{
+			SapphCooking.SapphCroissant = SapphCooking.BakingTray_Croissant,
+            SapphCooking.PaodeQueijo = SapphCooking.BakingTray_PaodeQueijo,
+            SapphCooking.CremeBruleeBowl = SapphCooking.BakingTray_CremeBrulee,
+            SapphCooking.CaramelPuddingBowl = SapphCooking.BakingTray_CaramelPudding,
+            SapphCooking.ChocolatePuddingBowl = SapphCooking.BakingTray_ChocolatePudding,
+            SapphCooking.Ladyfingers = SapphCooking.BakingTray_Ladyfingers,
+            SapphCooking.Pretzel = SapphCooking.Pretzel_Tray,
+            SapphCooking.Eclair = SapphCooking.BakingTray_Eclair,  
+            Base.Gingerbreadman = SapphCooking.BakingTray_Gingerbread_Man,
+            SapphCooking.Gingerbread_Wall = SapphCooking.BakingTray_Gingerbread_Wall,
+            Base.BagelPlain = SapphCooking.BakingTray_Bagel,
+            Base.BunsHotdog_single = SapphCooking.BakingTray_Hotdog,  
+            Base.BeefJerky = SapphCooking.BakingTray_Jerky, 
+		}
+    }
+
+    craftRecipe SapphCooking RemoveMacaronsfromTray
+    {
+        timedAction = UnPackBox_Small,
+        time            = 10,
+        OnCreate = SapphDivideIntoSix,
+        category = SapphCooking,
+CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.BakingTray_MacaronCookies1] mode:destroy flags[IsCookedFoodItem;ItemCount],
+        }
+       outputs
+        {
+           item 1 Base.BakingTray,
+           item 1 SapphCooking.Macaron_Cookies_Blue,
+           item 1 SapphCooking.Macaron_Cookies_Green,
+           item 1 SapphCooking.Macaron_Cookies_Pink,
+           item 1 SapphCooking.Macaron_Cookies_Purple,
+           item 1 SapphCooking.Macaron_Cookies_Red,
+           item 1 SapphCooking.Macaron_Cookies_Yellow,
+        }
+    }
+
+
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Cakes Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Prepare Chocolate Cake
+    {
+        timedAction = PackingRoastPan,
+        time            = 60,
+        category = SapphCooking,
+        SkillRequired = Cooking:1,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.CakeBatter] flags[ItemCount],
+            item 1 [Base.BakingPan] mode:destroy,
+            item 1 [SapphCooking.SaucepanChocolate] flags[IsCookedFoodItem;ItemCount],
+        }
+       outputs
+        {
+           item 1 SapphCooking.CakePrep_Chocolate,
+           item 1 Base.Bowl,
+           item 1 Base.Saucepan,
+        }
+    }
+
+    craftRecipe SapphCooking Prepare Carrot Cake
+    {
+        timedAction = PackingRoastPan,
+        time            = 60,
+        category = SapphCooking,
+        SkillRequired = Cooking:1,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.CakeBatter] flags[ItemCount],
+            item 1 [Base.BakingPan] mode:destroy,
+            item 1 [SapphCooking.DicedCarrots] flags[ItemCount],
+        }
+       outputs
+        {
+           item 1 SapphCooking.CakePrep_Carrot,
+           item 1 Base.Bowl,
+        }
+    }
+
+    craftRecipe SapphCooking Prepare Red Velvet Cake
+    {
+        timedAction = PackingRoastPan,
+        time            = 60,
+        category = SapphCooking,
+        SkillRequired = Cooking:1,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.CakeBatter] flags[ItemCount],
+            item 1 [Base.BakingPan] mode:destroy,
+            item 4 [Base.CocoaPowder],
+        }
+       outputs
+        {
+           item 1 SapphCooking.CakePrep_RedVelvet,
+           item 1 Base.Bowl,
+        }
+    }
+
+    craftRecipe SapphCooking Prepare Black Forest Cake
+    {
+        timedAction = PackingRoastPan,
+        time            = 60,
+        category = SapphCooking,
+        SkillRequired = Cooking:1,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.CakeBatter] flags[ItemCount],
+            item 1 [Base.BakingPan] mode:destroy,
+            item 1 [Base.Cherry] flags[ItemCount],
+            item 6 [Base.Icing;SapphCooking.PipingBag_Icing;SapphCooking.WhippedCream_Can],
+        }
+       outputs
+        {
+           item 1 SapphCooking.CakePrep_BlackForestCake,
+           item 1 Base.Bowl,
+        }
+    }
+
+    craftRecipe SapphCooking Prepare Strawberry Cake
+    {
+        timedAction = PackingRoastPan,
+        time            = 60,
+        category = SapphCooking,
+        SkillRequired = Cooking:1,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.CakeBatter] flags[ItemCount],
+            item 1 [Base.BakingPan] mode:destroy,
+            item 1 [farming.Strewberrie] flags[ItemCount],
+        }
+       outputs
+        {
+           item 1 SapphCooking.CakePrep_StrawberryCake,
+           item 1 Base.Bowl,
+        }
+    }
+
+    craftRecipe SapphCooking Make Birthday Cake
+    {
+        timedAction = PackingRoastPan,
+        time            = 60,
+        category = SapphCooking,
+        SkillRequired = Cooking:1,
+		OnCreate = SapphCreatePrep,
+        Tooltip = Tooltip_WaterPan,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.CakeRaw;SapphCooking.CakePrep_BlackForestCake;SapphCooking.CakePrep_Carrot;SapphCooking.CakePrep_Chocolate;SapphCooking.CakePrep_RedVelvet;SapphCooking.CakePrep_StrawberryCake] mode:destroy flags[IsCookedFoodItem;ItemCount],
+            item 8 [Base.Icing;SapphCooking.PipingBag_Icing;SapphCooking.WhippedCream_Can],
+        }
+       outputs
+        {
+           item 1 SapphCooking.CakeRaw_Birthday,
+        }
+    }
+
+    craftRecipe SapphCooking Make New Year Cake
+    {
+        timedAction = PackingRoastPan,
+        time            = 60,
+        category = SapphCooking,
+        SkillRequired = Cooking:1,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {   
+            item 3 tags[base:flour],
+            item 3 tags[base:sugar],
+            item 1 [*],
+            -fluid 0.1 [CowMilk;SheepMilk],
+            item 1 [Base.BakingPan] mode:destroy,
+            item 8 [Base.Icing;SapphCooking.PipingBag_Icing;SapphCooking.WhippedCream_Can],
+        }
+       outputs
+        {
+           item 1 SapphCooking.Cake_NianGao,
+        }
+    }
+
+    craftRecipe SapphCooking RemoveFromBakingPan
+    {
+        timedAction = UnPackBox_Small,
+        time            = 10,
+        category = SapphCooking,
+        CanWalk = true,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.CakeRaw;SapphCooking.Cheesecake_StrawberryPrep;SapphCooking.Cheesecake_ChocolatePrep;SapphCooking.Cheesecake_TeaPrep;SapphCooking.Cheesecake_Prep;SapphCooking.Cake_NianGao;SapphCooking.CakeRaw_Birthday;SapphCooking.CakePrep_BlackForestCake;SapphCooking.CakePrep_Carrot;SapphCooking.CakePrep_Chocolate;SapphCooking.CakePrep_RedVelvet;SapphCooking.CakePrep_StrawberryCake] mode:destroy mappers[resultType] flags[IsCookedFoodItem;ItemCount;InheritFood],
+        }
+       outputs
+        {
+           item 1 mapper:resultType,
+           item 1 Base.BakingPan,
+        }
+        itemMapper resultType
+        {
+            SapphCooking.Cake_NoPan = Base.CakeRaw,
+            SapphCooking.Cake_BlackForest_NoPan = SapphCooking.CakePrep_BlackForestCake,
+            SapphCooking.Cake_Carrot_NoPan = SapphCooking.CakePrep_Carrot,
+            SapphCooking.Cake_Chocolate_NoPan = SapphCooking.CakePrep_Chocolate,
+            SapphCooking.Cake_RedVelvet_NoPan = SapphCooking.CakePrep_RedVelvet,
+            SapphCooking.Cake_Strawberry_NoPan = SapphCooking.CakePrep_StrawberryCake,
+            SapphCooking.Cake_Birthday_NoPan = SapphCooking.CakeRaw_Birthday,
+            SapphCooking.Cake_NianGao_NoPan = SapphCooking.Cake_NianGao,
+            SapphCooking.Cheesecake_NoPan = SapphCooking.Cheesecake_Prep,
+            SapphCooking.Cheesecake_TeaNoPan = SapphCooking.Cheesecake_TeaPrep,
+            SapphCooking.Cheesecake_StrawberryNoPan = SapphCooking.Cheesecake_StrawberryPrep,
+            SapphCooking.Cheesecake_ChocolateNoPan = SapphCooking.Cheesecake_ChocolatePrep,
+        }
+    }
+
+    craftRecipe SapphCooking Add Candle on Cake
+    {
+        timedAction = UnPackBox_Small,
+        time            = 10,
+        OnCreate = SapphCakeAddCandle,
+        category = SapphCooking,
+CanWalk = true,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.CakeRaw;SapphCooking.Cake_Carrot_NoPan;SapphCooking.Cake_Chocolate_NoPan;SapphCooking.Cake_NoPan;SapphCooking.Cake_Strawberry_NoPan;SapphCooking.Cake_Birthday_NoPan;SapphCooking.Cake_BlackForest_NoPan;SapphCooking.CakeRaw_Birthday;SapphCooking.CakePrep_BlackForestCake;SapphCooking.CakePrep_Carrot;SapphCooking.CakePrep_Chocolate;SapphCooking.CakePrep_RedVelvet;SapphCooking.CakePrep_StrawberryCake] mode:destroy mappers[resultType] flags[IsCookedFoodItem;ItemCount],
+            item 1 [Base.Candle] flags[ItemCount],
+        }
+       outputs
+        {
+           item 1 mapper:resultType,
+        }
+        itemMapper resultType
+        {
+            SapphCooking.Cake_Candle = Base.CakeRaw,
+            SapphCooking.CakeBlackForest_Candle = SapphCooking.CakePrep_BlackForestCake,
+            SapphCooking.CakeCarrot_Candle = SapphCooking.CakePrep_Carrot,
+            SapphCooking.CakeChocolate_Candle = SapphCooking.CakePrep_Chocolate,
+            SapphCooking.CakeRedVelvet_Candle = SapphCooking.CakePrep_RedVelvet,
+            SapphCooking.CakeStrawberry_Candle = SapphCooking.CakePrep_StrawberryCake,
+            SapphCooking.CakeBirthday_Candle = SapphCooking.CakeRaw_Birthday,
+            SapphCooking.Cake_CandleNoPan = SapphCooking.Cake_NoPan,
+            SapphCooking.CakeChocolate_CandleNoPan = SapphCooking.Cake_Chocolate_NoPan,
+            SapphCooking.CakeCarrot_CandleNoPan = SapphCooking.Cake_Carrot_NoPan,
+            SapphCooking.CakeRedVelvet_CandleNoPan = SapphCooking.Cake_RedVelvet_NoPan,
+            SapphCooking.CakeBlackForest_CandleNoPan = SapphCooking.Cake_BlackForest_NoPan,
+            SapphCooking.CakeStrawberry_CandleNoPan = SapphCooking.Cake_Strawberry_NoPan,
+            SapphCooking.CakeBirthday_CandleNoPan = SapphCooking.Cake_Birthday_NoPan,
+
+        }
+    }
+
+    craftRecipe SapphCooking Make a Wish
+    {
+        timedAction = SapphWishCake_Carrot,
+        time            = 10,
+        OnCreate = SapphCakeRemoveCandle,
+        category = SapphCooking,
+    CanWalk = true,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [SapphCooking.CakeStrawberry_CandleNoPan;SapphCooking.CakeBirthday_CandleNoPan;SapphCooking.CakeCarrot_CandleNoPan;SapphCooking.CakeRedVelvet_CandleNoPan;SapphCooking.CakeBlackForest_CandleNoPan;SapphCooking.CakeChocolate_CandleNoPan;SapphCooking.Cake_Candle;SapphCooking.CakeBirthday_Candle;SapphCooking.CakeBlackForest_Candle;SapphCooking.CakeCarrot_Candle;SapphCooking.CakeChocolate_Candle;SapphCooking.CakeRedVelvet_Candle;SapphCooking.CakeStrawberry_Candle] mode:destroy mappers[resultType] flags[Prop1;IsCookedFoodItem;ItemCount;InheritFood],
+        }
+       outputs
+        {
+           item 1 mapper:resultType,
+        }
+        itemMapper resultType
+        {
+            Base.CakeRaw = SapphCooking.Cake_Candle,
+            SapphCooking.CakeRaw_BlackForestCake = SapphCooking.CakeBlackForest_Candle,
+            SapphCooking.CakeRaw_Carrot = SapphCooking.CakeCarrot_Candle,
+            SapphCooking.CakeRaw_Chocolate = SapphCooking.CakeChocolate_Candle,
+            SapphCooking.CakeRaw_RedVelvet = SapphCooking.CakeRedVelvet_Candle,
+            SapphCooking.CakeRaw_Strawberry = SapphCooking.CakeStrawberry_Candle,
+            SapphCooking.CakeRaw_Birthday = SapphCooking.CakeBirthday_Candle,
+            
+            SapphCooking.Cake_Chocolate_NoPan = SapphCooking.CakeChocolate_CandleNoPan,
+            SapphCooking.Cake_Carrot_NoPan = SapphCooking.CakeCarrot_CandleNoPan,
+            SapphCooking.Cake_RedVelvet_NoPan = SapphCooking.CakeRedVelvet_CandleNoPan,
+            SapphCooking.Cake_BlackForest_NoPan = SapphCooking.CakeBlackForest_CandleNoPan,
+            SapphCooking.Cake_Strawberry_NoPan = SapphCooking.CakeStrawberry_CandleNoPan,
+            SapphCooking.Cake_Birthday_NoPan = SapphCooking.CakeBirthday_CandleNoPan,
+        }
+    }
+
+    
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Creating/Welding Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Make Wooden Cheese Mold
+    {
+        timedAction = Making,
+        time            = 20,
+        category = SapphCooking,
+        SkillRequired = Woodwork:5,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 2 [Base.Plank],
+            item 1 tags[base:hammer] mode:keep,
+            item 5 [Base.Nails],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.Wooden_CheeseMolds,
+        }
+    }
+
+    craftRecipe SapphCooking Make Cocktail Mixer
+    {
+        timedAction = Making,
+        time            = 20,
+        category = SapphCooking,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 2 [Base.SmallSheetMetal],
+            item 1 [Base.BlowTorch],
+			item 1 tags[base:weldingmask] mode:keep,
+        }
+       outputs
+        {
+		   item 1 SapphCooking.CocktailMixer,
+        }
+    }
+
+    craftRecipe SapphCooking Make Meatgrinder
+    {
+        timedAction = Making,
+        time            = 20,
+        category = SapphCooking,
+        SkillRequired = MetalWelding:3,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 2 [Base.SmallSheetMetal],
+            item 1 [Base.BlowTorch],
+			item 1 tags[base:weldingmask] mode:keep,
+        }
+       outputs
+        {
+		   item 1 SapphCooking.Meatgrinder,
+        }
+    }
+
+    craftRecipe SapphCooking Make Electrical Blender
+    {
+        timedAction = Making,
+        time            = 60,
+        category = SapphCooking,
+        SkillRequired = MetalWelding:2;Electricity:1,
+        Tags = InHandCraft,
+        inputs
+        {
+			item 2 [Base.SmallSheetMetal],
+            item 2 [Base.ElectronicsScrap],
+            item 1 [Base.ElectricWire],
+			item 1 tags[base:screwdriver] mode:keep,
+        }
+       outputs
+        {
+		   item 1 SapphCooking.Blender,
+        }
+    }
+
+    craftRecipe SapphCooking Make Metal Mug
+    {
+        timedAction = Making,
+        time            = 20,
+        category = SapphCooking,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 2 [Base.SmallSheetMetal],
+            item 1 [Base.BlowTorch],
+			item 1 tags[base:weldingMask] mode:keep,
+        }
+       outputs
+        {
+		   item 1 SapphCooking.Mug_Metal,
+        }
+    }
+
+    craftRecipe SapphCooking Make Thermos
+    {
+        timedAction = Making,
+        time            = 20,
+        category = SapphCooking,
+        SkillRequired = MetalWelding:2,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 2 [Base.SmallSheetMetal],
+            item 1 [Base.BlowTorch],
+			item 1 tags[base:weldingMask] mode:keep,
+        }
+       outputs
+        {
+		   item 1 SapphCooking.EmptyThermos,
+        }
+    }
+
+    /**********
+    craftRecipe SapphCooking Make Chef Apron
+	{
+		timedAction = SewingCloth,
+		Time = 60,
+		Tags = AnySurfaceCraft,
+        SkillRequired = Tailoring:3,
+        category = SapphCooking,
+        xpAward = Tailoring:2,
+		inputs
+		{
+			item 1 tags[base:scissors] mode:keep,
+            item 1 tags[base:sewingneedle] mode:keep,
+            item 1 [Base.Thread],
+			item 2 [Base.RippedSheets],
+		}
+		outputs
+		{
+			item 1 SapphCooking.Apron_Chef_White,
+		}
+	}
+
+    *******/
+}
+
+	

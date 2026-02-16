@@ -1,0 +1,1221 @@
+module SapphCooking
+{
+	imports
+	{
+		Base,
+	}	
+	
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Food - In General ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+	item BagofWontonWrappers
+	{
+		DisplayName 		= Bag of Wonton Wrappers,
+		DisplayCategory 		= Food,
+		ItemType = base:food,
+		CantEat = true,
+		Icon 		= BagofWontonIcon,
+		WorldStaticModel 		= BagofWontonWrappers_Ground,
+		DaysFresh = 15,
+		DaysTotallyRotten = 30,
+		Carbohydrates 		= 300,
+		Proteins 		= 85,
+		Lipids 		= 33,
+		Calories 		= 1040,
+		Weight 		= 0.5,
+	}
+	item BagofFlourTortillas
+	{
+		DisplayName 		= Bag of Flour Tortillas,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Icon 		= BagofTortillasIcon,
+		WorldStaticModel 		= BagTortilla_Ground,
+		HungerChange = -20,
+		Weight 		= 0.6,
+		DaysFresh = 3,
+		DaysTotallyRotten = 5,
+		Calories = 200,
+		Carbohydrates = 0,
+		Lipids = 10,
+		Proteins = 10,
+		Packaged 		= true,
+	}
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Dough ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+	item SmallDough
+	{
+		DisplayCategory 		= Food,
+		ItemType = base:food,
+		DisplayName 		= Small Dough,
+		Icon 		= Dough,
+		Weight 		= 0.1,
+		HungerChange 		= -5,
+		UnhappyChange 		= 5,
+		ThirstChange 		= 10,
+		DaysTotallyRotten 		= 9,
+		Carbohydrates 		= 18,
+		Proteins 		= 7,
+		Lipids 		= 2,
+		Calories 		= 130,
+		DaysFresh 		= 4,
+		WorldStaticModel 		= SmallDough,
+	}
+	
+	item FlatbreadDough
+	{
+		DisplayName = Flatbread,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Weight = 0.3,
+		Icon = DoughRolled,
+		IsCookable = TRUE,
+		RemoveNegativeEffectOnCooked = TRUE,
+		ReplaceOnCooked = SapphCooking.Flatbread,
+		MinutesToCook = 20,
+		MinutesToBurn = 50,
+		DaysFresh = 3,
+		DaysTotallyRotten = 6,
+		HungerChange = -24,
+		ThirstChange = 15,
+		UnhappyChange = 10,
+		Calories = 532,
+		Carbohydrates = 99,
+		Lipids = 6.66,
+		Proteins = 17.7,
+		WorldStaticModel = BreadDough,
+	}
+
+
+	item CroissaintDough
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -15,
+		Weight 		= 0.3,
+		ItemType = base:food,
+		DisplayName 		= Croissant Shaped Dough,
+		Icon 		= CroissantDoughIcon,
+		UnhappyChange 		= -20,
+		ThirstChange 		= 20,
+		UnhappyChange 		= -20,
+		ThirstChange 		= 20,
+		Carbohydrates 		= 30,
+		Proteins 		= 4,
+		Lipids 		= 15,
+		Calories 		= 300,
+		DaysFresh = 5,
+		DaysTotallyRotten = 15,
+		WorldStaticModel 		= CroissantDough,
+	}
+
+	item WontonWrappersDough
+	{
+		DisplayCategory 		= Food,
+		ItemType = base:food,
+		DisplayName 		= Wonton Wrappers Dough,
+		Icon 		= Dough,
+		Weight 		= 0.2,
+		HungerChange 		= -10,
+		UnhappyChange 		= 5,
+		ThirstChange 		= 5,
+		DaysFresh = 15,
+		DaysTotallyRotten 		= 30,
+		Carbohydrates 		= 99,
+		Proteins 		= 14.7,
+		Lipids 		= 6.22,
+		Calories 		= 511,
+		DaysFresh 		= 4,
+		WorldStaticModel 		= BreadDough,
+	}
+
+	item BagelShapedDough
+	{
+		ItemType = base:food,
+		DisplayName 		= Bagel Shaped Dough,
+		Icon 		= DoughnutDoughIcon,
+		Weight 		= 0.1,
+		HungerChange 		= -5,
+		UnhappyChange 		= 5,
+		Carbohydrates 		= 35,
+		Proteins 		= 3,
+		Lipids 		= 15,
+		Calories 		= 150,
+		WorldStaticModel 		= DoughnutDough,
+		DaysFresh = 5,
+		DaysTotallyRotten = 10,
+	}
+
+		item CutTortilla
+	{
+		HungerChange 		= -5,
+		Weight 		= 0.2,
+		ItemType = base:food,
+		DisplayName 		= Cut Tortillas,
+		Icon 		= CutTortillaIcon,
+		Carbohydrates 		= 20,
+		Proteins 		= 2,
+		Lipids 		= 2,
+		Calories 		= 40,
+		CantBeFrozen 		= TRUE,
+		DaysFresh = 2,
+		DaysTotallyRotten = 6,
+		WorldStaticModel 		= CutTortilla,
+		CustomEatSound 		= EatingCrispy,
+		WorldStaticModel 		= CutTortilla,
+	}
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Dough/Pastry - Cooked ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+	item PaodeQueijo
+	{
+		DisplayCategory 		= Food,
+		ItemType = base:food,
+		DisplayName 		= Pao de Queijo,
+		Icon 		= PaoQueijoIcon,
+		Weight 		= 0.2,
+		Carbohydrates 		= 16.8,
+		EvolvedRecipe = BowlOfFood:12,
+		Proteins 		= 2.6,
+		Lipids 		= 3.5,
+		Calories 		= 190,
+		DaysFresh 		= 3,
+		DaysTotallyRotten 		= 5,
+		BadInMicrowave 		= true,
+		GoodHot 		= true,
+		StaticModel 		= H_PaodeQueijo,
+		WorldStaticModel 		= PaodeQueijo_Ground,
+		HungerChange 		= -8,
+		UnhappyChange 		= -4,
+		BoredomChange 		= -4,
+		StressChange 		= -4,
+		GoodHot 		= true,
+	}
+
+	item Arancini
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -18,
+		Weight 		= 0.3,
+		ItemType = base:food,
+		DisplayName 		= Arancini,
+		EvolvedRecipe = BowlOfFood:12,
+		Icon 		= AranciniIcon,
+		DaysTotallyRotten 		= 4,
+		DaysFresh 		= 2,
+		Carbohydrates 		= 5,
+		Proteins 		= 10,
+		Lipids 		= 10,
+		Calories 		= 100,
+		BadInMicrowave 		= true,
+		StaticModel 		= H_Arancini,
+		RemoveNegativeEffectOnCooked = TRUE,
+		WorldStaticModel 		= Arancini_Ground,
+	}
+
+	item CalzoneRecipe
+	{
+		DisplayName = Calzone,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Weight = 1.5,
+		Icon = CalzoneWholeIcon,
+		DaysFresh = 3,
+		DaysTotallyRotten = 5,
+		EvolvedRecipe = BowlOfFood:12,
+		HungerChange = -70,
+		Calories = 1350,
+		Carbohydrates = 231,
+		Lipids = 34,
+		Proteins = 41.8,
+		WorldStaticModel = Calzone_Ground,
+		StaticModel = H_Calzone,
+		IsCookable = TRUE,
+		MinutesToCook = 20,
+		MinutesToBurn = 50,
+		RemoveNegativeEffectOnCooked = TRUE,
+		UnhappyChange = 10,
+		BadInMicrowave = true,
+	}
+
+	item SapphCroissant
+	{
+		ItemType = base:food,
+		DisplayName 		= Croissant,
+		Icon 		= Croissant,
+		Weight 		= 0.1,
+		HungerChange 		= -9,
+		EvolvedRecipe = BowlOfFood:12,
+		UnhappyChange 		= -15,
+		Carbohydrates 		= 32,		
+		Proteins 		= 4,
+		Lipids 		= 15,
+		Calories 		= 600,
+		DaysFresh		= 2,
+		DaysTotallyRotten	= 4,
+		WorldStaticModel 		= Croissant_Ground,
+		StaticModel 		= H_Croissant,
+		StressChange 		= -15,
+		BoredomChange 		= -15,
+		CustomEatSound 		= EatingCrispy,
+	}
+	item SapphTortillaChips
+	{
+		HungerChange 		= -10,
+		Weight 		= 0.2,
+		ItemType = base:food,
+		DisplayName 		= Tortilla Chips,
+		EvolvedRecipe = BowlOfFood:12,
+		Icon 		= TortillaChips,
+		Carbohydrates 		= 20,
+		Proteins 		= 1,
+		Lipids 		= 25,
+		Calories 		= 300,
+		Packaged 		= TRUE,
+		CantBeFrozen 		= TRUE,
+		WorldStaticModel 		= Chips,
+		CustomEatSound 		= EatingCrispy,
+		WorldStaticModel 		= TortillaChips_Ground,
+		UnhappyChange 		= -5,
+	}
+	
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Dough - Cooked ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+	item SpringrollEvolved
+	{
+		DisplayName = Spring roll,
+		DisplayCategory = Food,
+		ItemType = base:food,		
+		Weight = 0.1,
+		EvolvedRecipe = BowlOfFood:12,
+		Icon = Springroll,
+		DaysFresh = 2,
+		DaysTotallyRotten = 4,
+		HungerChange = -5,
+		UnhappyChange = -10,
+		Calories = 100,
+		Carbohydrates = 22,
+		Lipids = 17,
+		Proteins = 9,
+		WorldStaticModel = Springroll_Ground,
+		StaticModel = H_Springroll,
+	}
+
+	item Pretzel
+	{
+		HungerChange 		= -5,
+		Weight 		= 0.1,
+		ItemType = base:food,
+		DaysFresh 		= 1,
+		DaysTotallyRotten 		= 2,
+		EvolvedRecipe = BowlOfFood:12,
+		DisplayName 		= Pretzel,
+		Icon = Pretzel,
+		Calories = 240,
+		Carbohydrates = 25,
+		Lipids = 2,
+		Proteins = 8,
+		WorldStaticModel = Pretzel_Ground,
+		StaticModel = H_Pretzel,
+		UnhappyChange 		= -5,
+		StressChange 		= -5,
+		BoredomChange 		= -5,
+	}
+
+	item SlicedBanana_Bread
+	{
+		DisplayCategory = Food,
+		HungerChange	=	-5,
+		StressChange 		= -5,
+		FatigueChange 		= -5,
+		Weight	=	0.3,
+		EvolvedRecipe = BowlOfFood:12,
+		ItemType = base:food,
+		DaysTotallyRotten	=	6,
+		DisplayName	=	Slice of Banana Bread,
+		Icon	=	BananaBreadSliceIcon,
+		DaysFresh	=	3,
+        Carbohydrates = 40,
+        Proteins = 6,
+        Lipids = 2.66,
+        Calories = 190,
+        WorldStaticModel = SlicedBananaBread_Ground,
+		StaticModel = H_BananaBreadPiece,
+	}
+
+	item Banana_Bread
+	{
+		DisplayName = Banana Bread,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		EvolvedRecipe = BowlOfFood:12,
+		Weight = 0.3,
+		Icon = BananaBreadIcon,
+		IsCookable 		= TRUE,
+		MinutesToBurn 		= 90,
+		MinutesToCook 		= 60,
+		FoodType = Bread,
+		DaysFresh = 5,
+		DaysTotallyRotten = 10,
+		HungerChange = -40,
+		UnhappyChange = -20,
+		StressChange = -20,
+		BoredomChange = -20,
+		Calories = 600,
+		Carbohydrates = 100,
+		Lipids = 6.66,
+		Proteins = 17.7,
+		WorldStaticModel = BananaBread_Ground,
+		StaticModel = H_BananaBreadPiece,
+	}
+
+	item SapphCutSandwich
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -7,
+		Weight 		= 0.3,
+		ItemType = base:food,
+		EvolvedRecipe = BowlOfFood:12,
+		DisplayName 		= Cut Sandwich,
+		Carbohydrates 		= 0.93,
+		Icon 		= CheeseSandwichCutIcon,
+		DaysFresh 		= 2,
+		DaysTotallyRotten 		= 4,
+		Proteins 		= 4.2,
+		Lipids 		= 6.18,
+		Calories 		= 350.5,
+		WorldStaticModel 		= BreadCheeseSlice_Ground,
+		StaticModel 		= H_SandwichPiece,
+		UnhappyChange 		= -2,
+		BadCold 		= TRUE,
+		CustomEatSound 		= EatingCrispy,
+	}
+	item SapphCutGrilledCheese
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -10,
+		Weight 		= 0.3,
+		EvolvedRecipe = BowlOfFood:12,
+		ItemType = base:food,
+		DisplayName 		= Cut Grilled Cheese Sandwich,
+		Carbohydrates 		= 14,
+		Icon 		= GrilledSandwitchCutIcon,
+		Proteins 		= 6,
+		Lipids 		= 11.2,
+		Calories 		= 183,
+		DaysTotallyRotten 		= 4,
+		DaysFresh 		= 2,
+		WorldStaticModel 		= BreadGrilledCheeseSlice_Ground,
+		StaticModel 		= H_CheeseSandwichPiece,
+		UnhappyChange 		= -2,
+		BadCold 		= TRUE,
+		CustomEatSound 		= EatingCrispy,
+	}
+
+	item WildGarlicBreadUn
+	{
+		DisplayCategory = Food,
+		HungerChange	=	-35,
+		Weight	=	0.3,
+		ItemType = base:food,
+		EvolvedRecipe = BowlOfFood:12,
+		MinutesToCook	=	25,
+		MinutesToBurn	=	50,
+		IsCookable	=	TRUE,
+		DaysTotallyRotten	=	6,
+		DisplayName	=	Garlic Bread,
+		Icon	=	GarlicBreadIcon,
+		DaysFresh	=	3,
+        Carbohydrates = 105,
+        Proteins = 18.7,
+        Lipids = 7.66,
+        Calories = 550,
+		StaticModel = H_WildGarlicBreadPiece,
+        WorldStaticModel = WildGarlicBread_Ground,
+	}
+	item Focaccia_Piece
+	{
+		DisplayName = Focaccia Piece,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		EvolvedRecipe = BowlOfFood:12,
+		Weight = 0.5,
+		Icon = FocacciaPieceIcon,
+		DaysFresh = 4,
+		DaysTotallyRotten = 7,
+		HungerChange = -10,
+		UnhappyChange = -5,
+		FatigueChange 	= -5,
+		BoredomChange 	= -5,
+		StressChange 	= -5,
+		Calories = 1,
+		Carbohydrates = 1,
+		Lipids = 1,
+		Proteins = 1,
+		StaticModel = H_FocacciaPiece,
+		WorldStaticModel = FocacciaPiece_Ground,
+	}
+
+	item Focaccia_Sandwich
+	{
+		DisplayName = Focaccia Sandwich,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		EvolvedRecipe = BowlOfFood:12,
+		Weight = 0.5,
+		Icon = FocacciaSandwichIcon,
+		DaysFresh = 4,
+		DaysTotallyRotten = 7,
+		HungerChange = -10,
+		UnhappyChange = -5,
+		FatigueChange 	= -5,
+		BoredomChange 	= -5,
+		StressChange 	= -5,
+		Calories = 1,
+		Carbohydrates = 1,
+		Lipids = 1,
+		Proteins = 1,
+		StaticModel = H_FocacciaSandwich,
+		WorldStaticModel = FocacciaSandwich_Ground,
+	}
+	item Sandwich_CheesesteakPrep
+	{
+		DisplayName = Cheesesteak,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		EvolvedRecipe = BowlOfFood:12,
+		Weight = 0.2,
+		Icon = CheesesteakIcon,
+		EatType = 2handforced,
+		DaysFresh = 3,
+		DaysTotallyRotten = 6,
+		HungerChange = -10,
+		Calories = 360,
+		Carbohydrates = 42,
+		Lipids = 8.5,
+		Proteins = 5.8,
+		StaticModel = H_Cheesesteak,
+		WorldStaticModel = Cheesesteak_Ground,
+	}
+
+	item FrenchToast_Evolved
+	{
+		DisplayName = French Toast,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Weight = 0.1,
+		EvolvedRecipe = BowlOfFood:12,
+		Icon = FrenchToastIcon,
+		FoodType = Bread,
+		DaysFresh = 3,
+		DaysTotallyRotten = 6,
+		HungerChange = -10,
+		Calories = 250,
+		Carbohydrates = 35,
+		Lipids = 4.22,
+		Proteins = 6.9,
+		WorldStaticModel = FrenchToast_Sapph_Ground,
+		StaticModel = H_FrenchToast_Sapph,
+		Tags = base:hidecooked,
+	}
+	
+	item Flatbread
+	{
+		DisplayName = Flatbread,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Weight = 0.3,
+		Icon = FlatbreadIcon,
+		EvolvedRecipe = BowlOfFood:12;Soup:5;Stew:5;Salad:5,
+		FoodType = Bread,
+		DaysFresh = 3,
+		DaysTotallyRotten = 6,
+		HungerChange = -30,
+		Calories = 532,
+		Carbohydrates = 99,
+		Lipids = 6.66,
+		Proteins = 17.7,
+		WorldStaticModel = Sapph_Flatbread_Ground,
+		StaticModel = H_Sapph_Flatbread,
+	}
+	item FlatbreadEvolved
+	{
+		DisplayName = Flatbread,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Weight = 0.3,
+		Icon = CrepeEvolvedIcon,
+		EvolvedRecipe = BowlOfFood:12;Soup:5;Stew:5;Salad:5,
+		FoodType = Bread,
+		DaysFresh = 3,
+		DaysTotallyRotten = 6,
+		HungerChange = -30,
+		Calories = 532,
+		Carbohydrates = 99,
+		Lipids = 6.66,
+		Proteins = 17.7,
+		WorldStaticModel = Sapph_FlatbreadEvolved_Ground,
+		StaticModel = H_Sapph_Flatbread,
+	}
+
+	item WildGarlicBreadPiece
+	{
+		DisplayCategory = Food,
+		HungerChange	=	-15,
+		StressChange 		= -10,
+		FatigueChange 		= -10,
+		Weight	=	0.3,
+		ItemType = base:food,
+		EvolvedRecipe = BowlOfFood:12;Soup:5;Stew:5;Salad:5,
+		DaysTotallyRotten	=	6,
+		DisplayName	=	Slice of Garlic Bread,
+		Icon	=	GarlicBreadSlicesIcon,
+		DaysFresh	=	3,
+        Carbohydrates = 40,
+        Proteins = 6,
+        Lipids = 2.66,
+        Calories = 186,
+        WorldStaticModel = WildGarlicBreadPiece_Ground,
+		StaticModel = H_WildGarlicBreadPiece,
+	}
+	item Bread_Egginhole
+	{
+		DisplayName = Egg in a Nest,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Weight = 0.2,
+		Icon = EgginNestIcon,
+		EvolvedRecipe = BowlOfFood:12;Soup:5;Stew:5;Salad:5,
+		FoodType = Bread,
+		DaysFresh = 3,
+		DaysTotallyRotten = 6,
+		HungerChange = -25,
+		Calories = 385,
+		Carbohydrates = 41,
+		Lipids = 3.22,
+		Proteins = 7.9,
+		WorldStaticModel = BreadEgg_Ground,
+		StaticModel = H_BreadEgg,
+		EvolvedRecipeName = Bread,
+	}
+
+	item BreadCrumbs
+	{
+        DisplayCategory         = Food,
+		HungerChange		= -10,
+		Weight			= 0.1,
+		ItemType = base:food,
+		DaysTotallyRotten	= 2,
+		EvolvedRecipe = BowlOfFood:5;Soup:5;Stew:5;Salad:5,
+		DisplayName		= Bread Crumbs,
+		Icon			= BreadCrumbsIcon,
+		DaysFresh		= 1,
+        Carbohydrates 		= 33,
+        Proteins 		= 5.9,
+        Lipids 			= 2.22,
+       	Calories 		= 177,
+        WorldStaticModel        = BreadCrumbs_Ground,
+	}
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Wrappers ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+	item WontonWrappers
+	{
+		DisplayCategory 		= Food,
+		ItemType = base:food,
+		DisplayName 		= Wonton Wrappers,
+		Icon 		= WontonWrappersIcon,
+		Weight 		= 0.2,
+		HungerChange 		= -5,
+		UnhappyChange 		= 5,
+		ThirstChange 		= 5,
+		DaysFresh = 15,
+		DaysTotallyRotten 		= 30,
+		Carbohydrates 		= 60,
+		Proteins 		= 17.7,
+		Lipids 		= 6.66,
+		Calories 		= 208,
+		WorldStaticModel 		= WontonWrappers_Ground,
+	}
+	item SpringrollWrapper
+	{
+		DisplayName = Flour Wrapper,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Weight = 0.1,
+		Icon = RicePaper,
+		DaysTotallyRotten 		= 9,
+		DaysFresh 		= 5,
+		HungerChange = -4,
+		Calories = 10,
+		Carbohydrates = 0,
+		Lipids = 0,
+		Proteins = 0,
+		WorldStaticModel = RicePaper_Ground,
+	}
+	
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Pieces/Slices ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+	item RatattouilePiece
+	{
+		DisplayCategory 		= Food,
+		ItemType = base:food,
+		DisplayName 		= Piece of Ratattouile,
+		Icon 		= RatattouillePieceIcon,
+		EvolvedRecipe = BowlOfFood:12,
+		Weight 		= 0.2,
+		Carbohydrates 		= 66,
+		Proteins 		= 14,
+		Lipids 		= 12,
+		Calories 		= 350,
+		DaysFresh 		= 3,
+		DaysTotallyRotten 		= 5,
+		StaticModel 		= H_RatatouillePiece,
+		WorldStaticModel 		= RatatouillePiece_Ground,
+		HungerChange 		= -10,
+		UnhappyChange 		= -5,
+		BoredomChange 		= -5,
+		StressChange 		= -5,
+		FatigueChange 		= -5,
+	}
+
+	item SapphSushiEgg
+	{
+		HungerChange 		= -15,
+		Weight 		= 0.1,
+		ItemType = base:food,
+		DaysTotallyRotten 		= 4,
+		DisplayName 		= Egg Sushi,
+		Icon 		= SushiEgg,
+		DaysFresh 		= 2,
+		Carbohydrates 		= 7,
+		Proteins 		= 12,
+		Lipids 		= 3,
+		Calories 		= 99,
+		UnhappyChange 		= -10,
+		StressChange 		= -5,
+		FatigueChange 		= -3,
+	}
+	
+	item SapphOnigiri
+	{
+		HungerChange 		= -14,
+		Weight 		= 0.1,
+		ItemType = base:food,
+		DaysTotallyRotten 		= 4,
+		DisplayName 		= Onigiri,
+		Icon 		= Onigiri,
+		DaysFresh 		= 2,
+		Carbohydrates 		= 15,
+		Proteins 		= 10,
+		Lipids 		= 5,
+		Calories 		= 100,
+		UnhappyChange 		= -10,
+		BoredomChange 		= -10,
+		StressChange 		= -10,
+		WorldStaticModel 		= Onigiri,
+		StaticModel 		= H_Onigiri,
+		EatType = 2handforced,
+	}
+
+	
+	
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Cheeses ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+	item CheeseSpray_Can
+	{
+		DisplayName = Spray Cheese,
+		ItemType = base:food,
+		Icon 		= SprayCheeseCanIcon,
+		Weight 		= 0.5,
+		EvolvedRecipe 		= BowlOfFood:10;Stir fry Griddle Pan:10;Stir fry:10;Salad:9;Roasted Vegetables:10;Soup:10;Sandwich:5;Sandwich Baguette:5;Burger:5;Salad:5;PastaPot:15;PastaPan:15;Taco:5;Burrito:5;Toast:5;Bread:5,
+		HungerChange = -10,
+		UnhappyChange = -10,
+		Calories = 210,
+		Carbohydrates = 0,
+		Lipids = 6,
+		Proteins = 8,
+		CustomEatSound 		= EatingWhippedCream,
+		EatType = bottle,
+		EvolvedRecipeName = Cheese,
+		StaticModel = H_CheeseCan,
+		WorldStaticModel 		=  CheeseCan_Ground,
+		EatType 		= Bourbon,
+		CustomContextMenu 		= Drink,
+		Tags = base:cheese,
+	}
+
+	item Parmesan_CheeseWheel
+	{
+		DisplayName = Cheese Wheel,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Weight = 0.2,
+		Icon = CheeseWheelIcon,
+		EvolvedRecipe = BowlOfFood:10;Stir fry Griddle Pan:10;Stir fry:10;Salad:9;Roasted Vegetables:10;Pizza:15;Soup:10;Sandwich:5;Sandwich Baguette:5;Burger:5;Salad:5;PastaPot:10;PastaPan:10;Taco:5;Burrito:5;Bread:5;Toast:5,
+		FoodType = Cheese,
+		DaysFresh = 10,
+		DaysTotallyRotten = 20,
+		HungerChange = -50,
+		ThirstChange = -20,
+		UnhappyChange = -20,
+		Calories = 480,
+		Carbohydrates = 0.95,
+		Lipids = 15.8,
+		Proteins = 8.4,
+		EatType = 2handforced,
+		WorldStaticModel = CheeseWheel_Ground,
+		StaticModel = H_CheeseWheel,
+		Tags = base:cheese,
+	}
+
+	item Blue_CheeseWheel
+	{
+		DisplayName = Blue Cheese Wheel,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Weight = 0.2,
+		Icon = BlueCheeseWheelIcon,
+		EvolvedRecipe = BowlOfFood:10;Stir fry Griddle Pan:10;Stir fry:10;Salad:9;Roasted Vegetables:10;Pizza:15;Soup:10;Sandwich:5;Sandwich Baguette:5;Burger:5;Salad:5;PastaPot:10;PastaPan:10;Taco:5;Burrito:5;Bread:5;Toast:5,
+		FoodType = Cheese,
+		DaysFresh = 60,
+		DaysTotallyRotten = 30,
+		HungerChange = -60,
+		ThirstChange = -20,
+		UnhappyChange = -20,
+		Calories = 680,
+		Carbohydrates = 1.2,
+		Lipids = 18.8,
+		Proteins = 10.5,
+		EatType = 2handforced,
+		WorldStaticModel = BlueCheeseWheel_Ground,
+		StaticModel = H_CheeseWheelBlue,
+		Tags = base:cheese,
+	}
+	item BlueCheese
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -15,
+		Weight 		= 0.2,
+		ItemType = base:food,
+		DaysTotallyRotten 		= 30,
+		DisplayName 		= Blue Cheese,
+		Icon 		= BlueCheeseSliceIcon,
+		DaysFresh 		= 60,
+		EvolvedRecipe 		= BowlOfFood:10;Stir fry Griddle Pan:10;Stir fry:10;Salad:9;Roasted Vegetables:10;Soup:10;Sandwich:5;Sandwich Baguette:5;Burger:5;Salad:5;PastaPot:15;PastaPan:15;Taco:5;Burrito:5;Toast:5;Bread:5,
+		FoodType 		= NoExplicit,
+		Carbohydrates 		= 0.87,
+		Proteins 		= 6.4,
+		Lipids 		= 9.33,
+		Calories 		= 260,
+		WorldStaticModel 		= BlueCheeseSlice_Ground,
+		StaticModel = H_BlueCheeseSlice,
+		Tags 		= base:cheese,
+	}
+
+	item MozzarelaSticks
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -15,
+		Weight 		= 0.2,
+		ItemType = base:food,
+		DisplayName 		= Mozzarela Sticks,
+		Icon 		= MozzarelaStickIcon,
+		EvolvedRecipe 		= BowlOfFood:10;Stir fry Griddle Pan:10;Stir fry:10;Salad:9;Roasted Vegetables:10;Soup:10;Sandwich:5;Sandwich Baguette:5;Burger:5;Salad:5;PastaPot:15;PastaPan:15;Taco:5;Burrito:5;Toast:5;Bread:5,
+		DaysFresh 		= 14,
+		DaysTotallyRotten 		= 20,
+		FoodType 		= NoExplicit,
+		Carbohydrates 		= 0.87,
+		Proteins 		= 6.4,
+		Lipids 		= 9.33,
+		Calories 		= 182,
+		WorldStaticModel 		= MozzarelaSticks_Ground,
+		StaticModel 		= H_MozzarelaSticks,
+	}
+
+
+	item ParmesanCheese
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -15,
+		Weight 		= 0.2,
+		ItemType = base:food,
+		DaysTotallyRotten 		= 20,
+		DisplayName 		= Parmesan Cheese,
+		Icon 		= ParmesianCheeseIcon,
+		DaysFresh 		= 14,
+		EvolvedRecipe 		= BowlOfFood:10;Stir fry Griddle Pan:10;Stir fry:10;Salad:9;Roasted Vegetables:10;Soup:10;Sandwich:5;Sandwich Baguette:5;Burger:5;Salad:5;PastaPot:15;PastaPan:15;Taco:5;Burrito:5;Toast:5;Bread:5,
+		FoodType 		= NoExplicit,
+		Carbohydrates 		= 0.87,
+		Proteins 		= 6.4,
+		Lipids 		= 9.33,
+		Calories 		= 260,
+		WorldStaticModel 		= ParmesanSlice_Ground,
+		StaticModel = H_ParmesanSlice,
+		Tags 		= base:cheese,
+	}
+	item MozzarelaCheese
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -15,
+		Weight 		= 0.2,
+		ItemType = base:food,
+		DaysTotallyRotten 		= 20,
+		DisplayName 		= Mozzarela Cheese,
+		Icon 		= MozzarelaCheeseIcon,
+		DaysFresh 		= 14,
+		EvolvedRecipe 		= BowlOfFood:10;Stir fry Griddle Pan:10;Stir fry:10;Salad:9;Roasted Vegetables:10;Soup:10;Sandwich:5;Sandwich Baguette:5;Burger:5;Salad:5;PastaPot:15;PastaPan:15;Taco:5;Burrito:5;Toast:5;Bread:5,
+		FoodType 		= NoExplicit,
+		Carbohydrates 		= 0.87,
+		Proteins 		= 6.4,
+		Lipids 		= 9.33,
+		Calories 		= 283,
+		WorldStaticModel 		= CheeseSapph,
+		StaticModel 		= H_MozzarelaSapph,
+		Tags 		= base:cheese,
+	}
+	
+	item CreamCheese
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -15,
+		Weight 		= 0.2,
+		ItemType = base:food,
+		DaysTotallyRotten 		= 30,
+		DisplayName 		= Cream Cheese,
+		EvolvedRecipe 		= BowlOfFood:10;Stir fry Griddle Pan:10;Stir fry:10;Salad:9;Roasted Vegetables:10;Soup:10;Sandwich:5;Sandwich Baguette:5;Burger:5;Salad:5;PastaPot:15;PastaPan:15;Taco:5;Burrito:5;Toast:5;Bread:5,
+		Icon 		= CreamCheeseIcon,
+		DaysFresh 		= 14,
+		Carbohydrates 		= 3,
+		Proteins 		= 15,
+		Lipids 		= 20,
+		Calories 		= 250,
+		EatType = 		= 2hand,
+		WorldStaticModel 		= CreamCheese_Ground,
+		StaticModel = H_SourCream,
+		Tags 		= base:cheese,
+	}
+	
+	item BagelCreamCheese
+	{
+		HungerChange 		= -14,
+		Weight 		= 0.1,
+		ItemType = base:food,
+		DaysTotallyRotten 		= 2,
+		DisplayName 		= Bagel with Cream Cheese,
+		Icon 		= BagelCreamCheeseIcon,
+		EvolvedRecipe 		= BowlOfFood:10;Stir fry Griddle Pan:10;Stir fry:10;Salad:9;Roasted Vegetables:10;Soup:10;Sandwich:5;Sandwich Baguette:5;Burger:5;Salad:5;PastaPot:15;PastaPan:15;Taco:5;Burrito:5;Toast:5;Bread:5,
+		DaysFresh 		= 1,
+		Carbohydrates 		= 38,
+		Proteins 		= 6,
+		Lipids 		= 3,
+		Calories 		= 290,
+		WorldStaticModel 		= BagelCreamCheese,
+		UnhappyChange 		= -5,
+		StressChange 		= -5,
+		BoredomChange 		= -5,
+	}
+
+	item SourCream
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -15,
+		Weight 		= 0.2,
+		ItemType = base:food,
+		DaysFresh 		= 7,
+		DaysTotallyRotten 		= 20,
+		DisplayName 		= Sour Cream,
+		EvolvedRecipe = BowlOfFood:5;Pizza:5;Soup:5;Stew:5;Pie:5;Stir fry Griddle Pan:5;Stir fry:5;Sandwich:5;Sandwich Baguette:5;Burger:5;Salad:5;Roasted Vegetables:5;RicePot:5;RicePan:5;PastaPot:5;PastaPan:5;Taco:5;Burrito:5,
+		Icon 		=  SourCreamIcon,
+		Carbohydrates 		= 5,
+		Proteins 		= 19,
+		Lipids 		= 30,
+		Calories 		= 244,
+		WorldStaticModel 		= SourCream_Ground,
+		StaticModel 		= H_SourCream,
+		Tags 		= base:cheese,
+	}
+	
+	item HomemadeSourCream
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -15,
+		Weight 		= 0.2,
+		ItemType = base:food,
+		DaysFresh 		= 7,
+		DaysTotallyRotten 		= 20,
+		DisplayName 		= Sour Cream,
+		ReplaceOnUse = Bowl,
+		EvolvedRecipe = BowlOfFood:5;Pizza:5;Soup:5;Stew:5;Pie:5;Stir fry Griddle Pan:5;Stir fry:5;Sandwich:5;Sandwich Baguette:5;Burger:5;Salad:5;Roasted Vegetables:5;RicePot:5;RicePan:5;PastaPot:5;PastaPan:5;Taco:5;Burrito:5,
+		Icon 		=  BowlWhiteIcon,
+		Carbohydrates 		= 5,
+		Proteins 		= 19,
+		Lipids 		= 30,
+		Calories 		= 244,
+		StaticModel 		=  H_BowlCream,
+		WorldStaticModel 		= BowlofSourCream_Ground,
+		Tags 		= base:cheese,
+	}
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Skewers - Misc ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+	item WoodenSkewersInsect
+	{
+		DisplayName = Skewer,
+		DisplayCategory = Food,
+		EatType = eatOffStick,
+		ItemType = base:food,
+		Weight = 0.1,
+		Icon = WoodenSkewerInsectIcon,
+		MinutesToCook 		= 10,
+		MinutesToBurn 		= 30,
+		EvolvedRecipe = BowlOfFood:8|Cooked;Pizza:5;Soup:5;Stew:5;Pie:5;Stir fry Griddle Pan:5;Stir fry:5;Sandwich:5|Cooked;Sandwich Baguette:5|Cooked;Burger:5|Cooked;Salad:5|Cooked;Roasted Vegetables:5;RicePot:5;RicePan:5;PastaPot:5;PastaPan:5;Taco:5|Cooked;Burrito:5|Cooked,
+		HungerChange = -1,
+		BoredomChange 		= 10,
+		ThirstChange = 10,
+		UnhappyChange 		= 20,
+		DaysFresh = 1,
+		DaysTotallyRotten = 3,
+		Calories = 30,
+		Carbohydrates = 1,
+		Lipids = 5,
+		Proteins = 2,
+		WorldStaticModel = WoodSkewer_InsectGround,
+		StaticModel = H_WoodSkewer_Insect,
+	}
+	
+	item WoodenSkewers_Butter
+	{
+		DisplayName = Deep Fried Butter,
+		DisplayCategory = Food,
+		EatType = eatOffStick,
+		ItemType = base:food,
+		Weight = 0.1,
+		Icon = WoodenSkewerButterIcon,
+		HungerChange = -10,
+		MinutesToCook 		= 20,
+		MinutesToBurn 		= 60,
+		DaysFresh = 3,
+		DaysTotallyRotten = 4,
+		Calories = 120,
+		Carbohydrates = 5,
+		Lipids = 2,
+		Proteins = 20,
+		WorldStaticModel = WoodSkewer_Butter_Ground,
+		StaticModel = H_WoodSkewer_Butter,
+	}
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Eggs ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+	item FriedEgg
+	{
+		HungerChange 		= -10,
+		Weight 		= 0.1,
+		ItemType = base:food,
+		DaysFresh 		= 14,
+		DaysTotallyRotten 		= 21,
+		DisplayName 		= Fried Egg,
+		Icon 		= FriedEggIcon,
+		EvolvedRecipe 		= Stir fry Griddle Pan:10;Stir fry:10;Sandwich:10;Sandwich Baguette:10;Burger:10;Salad:10;Roasted Vegetables:10;RicePot:10;RicePan:10;PastaPot:10;PastaPan:10,
+		FoodType 		= Egg,
+		Carbohydrates 		= 0.32,
+		Proteins 		= 5.55,
+		Lipids 		= 4.18,
+		Calories 		= 243,
+		ThirstChange 		= -5,
+		UnhappyChange 		= -6,
+		BoredomChange 		= -6,
+		WorldStaticModel 		= FriedEgg,
+	}
+	
+	item BrownEggCarton
+	{
+		DisplayCategory 		= Food,
+		Weight 		= 1,
+		ItemType = base:food,
+		DisplayName 		= Brown Egg Carton,
+		Icon 		= BrownEggCartonIcon,
+		DaysFresh 		= 14,
+		DaysTotallyRotten 		= 21,
+		WorldStaticModel 		= EggCarton,
+	}
+	item BrownEgg
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -7,
+		Weight 		= 0.1,
+		ItemType = base:food,
+		DangerousUncooked 		= TRUE,
+		DaysFresh 		= 14,
+		DaysTotallyRotten 		= 21,
+		IsCookable = TRUE,
+		MinutesToBurn 		= 60,
+		MinutesToCook 		= 30,
+		DisplayName 		= Brown Egg,
+		Icon 		= BrownEggIcon,
+		EvolvedRecipe 		= Stir fry Griddle Pan:10;Stir fry:10;Sandwich:10|Cooked;Sandwich Baguette:10|Cooked;Burger:10;Salad:10|Cooked;Roasted Vegetables:10;RicePot:10;RicePan:10;PastaPot:10;PastaPan:10,
+		FoodType 		= Egg,
+		Carbohydrates 		= 0.32,
+		Proteins 		= 5.55,
+		Lipids 		= 4.18,
+		Calories 		= 63,
+		WorldStaticModel 		= BrownEgg,
+		Tags 		= base:egg,
+	}
+	
+	item EggPowder
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -10,
+		ThirstChange 		= 40,
+		Weight 		= 0.05,
+		ItemType = base:food,
+		DisplayName 		= Powdered Eggs,
+		Icon 		= BreadCrumbsYellowIcon,
+		EvolvedRecipe 		= Stir fry Griddle Pan:7;Stir fry:7;Sandwich:7;Sandwich Baguette:7;Burger:7;Salad:7;Roasted Vegetables:7;RicePot:7;RicePan:10;PastaPot:10;PastaPan:10,
+		FoodType 		= Egg,
+		Carbohydrates 		= 3,
+		Proteins 		= 30,
+		Lipids 		= 14,
+		Calories 		= 200,
+	}
+	
+	item ScotchEggRaw
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -20,
+		Weight 		= 0.1,
+		ItemType = base:food,
+		DangerousUncooked 		= TRUE,
+		DaysFresh 		= 14,
+		DaysTotallyRotten 		= 21,
+		DisplayName 		= Raw Scotch Egg,
+		Icon 		= ScotchEggsRawIcon,
+		FoodType 		= Egg,
+		Carbohydrates 		= 0.8,
+		Proteins 		= 10.55,
+		Lipids 		= 7.18,
+		Calories 		= 250,
+		WorldStaticModel 		= ScotchEgg_Ground,
+		StaticModel 		= H_ScotchEgg,
+	}
+	item ScotchEgg
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -30,
+		UnhappyChange = -10,
+		BoredomChange 	= -10,
+		StressChange 	= -10,
+		Weight 		= 0.1,
+		ItemType = base:food,
+		DaysFresh 		= 8,
+		DaysTotallyRotten 		= 15,
+		DisplayName 		= Scotch Egg,
+		Icon 		= ScotchEggsIcon,
+		EvolvedRecipe 		= Stir fry Griddle Pan:10;Stir fry:10;Sandwich:10;Sandwich Baguette:10;Burger:10;Salad:10;Roasted Vegetables:10;RicePot:10;RicePan:10;PastaPot:10;PastaPan:10,
+		FoodType 		= Egg,
+		Carbohydrates 		= 0.8,
+		Proteins 		= 10.55,
+		Lipids 		= 7.18,
+		Calories 		= 300,
+		WorldStaticModel 		= ScotchEgg_Ground,
+		StaticModel 		= H_ScotchEgg,
+	}
+
+	item DeviledEgg
+	{
+		DisplayCategory 		= Food,
+		HungerChange 		= -30,
+		UnhappyChange = -10,
+		BoredomChange 	= -10,
+		StressChange 	= -10,
+		Weight 		= 0.1,
+		ItemType = base:food,
+		DaysFresh 		= 8,
+		DaysTotallyRotten 		= 15,
+		DisplayName 		= Scotch Egg,
+		Icon 		= DeviledEggIcon,
+		EvolvedRecipe 		= Stir fry Griddle Pan:10;Stir fry:10;Sandwich:10;Sandwich Baguette:10;Burger:10;Salad:10;Roasted Vegetables:10;RicePot:10;RicePan:10;PastaPot:10;PastaPan:10,
+		FoodType 		= Egg,
+		Carbohydrates 		= 0.8,
+		Proteins 		= 10.55,
+		Lipids 		= 7.18,
+		Calories 		= 300,
+		WorldStaticModel 		= DeviledEgg_Ground,
+		StaticModel 		= H_DeviledEgg,
+	}
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Misc ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+	item IceCubes
+	{
+		Weight 		= 0.1,
+		ItemType = base:food,
+		DisplayName 		= Ice Cubes,
+		Spice = true,
+		Icon 		= IceCubesIcon,
+		EvolvedRecipe = HotDrink:2;HotDrinkSpiffo:2;HotDrinkTea:2,
+		HungerChange = -1,
+		ThirstChange 		= -5,
+		BoredomChange 		= -1,
+		FoodType = Ice,
+		EvolvedRecipeName = Ice,
+		Carbohydrates 		= 0,
+		Proteins 		= 0,
+		Lipids 		= 0,
+		Calories 		= 1,
+		StaticModel 		= H_IceCubes,
+		WorldStaticModel 		=  IceCubes_Ground,
+		CantBeFrozen = TRUE,
+		CustomEatSound 		= EatingIce,
+		CustomContextMenu 		= Sapph_Eat,
+		EatType = eat,
+	}
+	
+	item FortuneCookie
+	{
+		DisplayName = Fortune Cookie,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Weight = 0.1,
+		Icon = FortuneCookieIcon,
+		FoodType 		= NoExplicit,
+		Calories = 30,
+		Carbohydrates = 50,
+		Lipids = 0.1,
+		Proteins = 0.4,
+		WorldStaticModel = FortuneCookie_Ground,
+	}
+	item Broken_FortuneCookie
+	{
+		DisplayName = Broken Fortune Cookie,
+		DisplayCategory = Food,
+		ItemType = base:food,
+		Weight = 0.1,
+		Icon = FortuneCookieBrokenIcon,
+		FoodType 		= NoExplicit,
+		HungerChange = -2,
+		UnhappyChange = -2,
+		StressChange = -2,
+		BoredomChange = -2,
+		Calories = 30,
+		Carbohydrates = 50,
+		Lipids = 0.1,
+		Proteins = 0.4,
+		WorldStaticModel = FortuneCookieBroken_Ground,
+	}
+}

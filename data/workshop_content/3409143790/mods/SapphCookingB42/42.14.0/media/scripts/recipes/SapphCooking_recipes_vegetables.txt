@@ -1,0 +1,138 @@
+module Base
+{
+    /*****
+	imports
+	{
+		Base,
+	}	
+    *****/
+	
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Vegetables - Prepping! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking SliceVegetables
+    {
+        timedAction = Sapph_SliceFood,
+        time            = 20,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.Eggplant;Base.Zucchini;farming.Tomato;Base.Carrots;Base.BellPepper] mappers[resultType] flags[Prop2;ItemCount],
+            item 1 tags[base:sharpknife;base:metalsaw;base:smallsaw]  mode:keep,
+        }
+       outputs
+        {
+		   item 1 mapper:resultType,
+        }
+	   itemMapper resultType
+		{
+			SapphCooking.SlicedEggplant = Base.Eggplant,
+            SapphCooking.SlicedZucchini = Base.Zucchini,
+            SapphCooking.SlicedTomato = farming.Tomato,
+            SapphCooking.SlicedCarrots = Base.Carrots,
+            SapphCooking.SlicedBellPepper = Base.BellPepper,
+
+        }
+    }
+
+	craftRecipe SapphCooking DiceVegetables
+    {
+        timedAction = Sapph_SliceFood,
+        time            = 20,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+			item 1 [SapphCooking.SlicedTomato;SapphCooking.SlicedCarrots;SapphCooking.SlicedBellPepper;Base.Broccoli] mappers[resultType] flags[Prop2;ItemCount],
+            item 1 tags[base:sharpknife;base:metalsaw;base:smallsaw]  mode:keep,
+        }
+       outputs
+        {
+		   item 1 mapper:resultType,
+        }
+	   itemMapper resultType
+		{
+            SapphCooking.DicedTomato = SapphCooking.SlicedTomato,
+            SapphCooking.DicedCarrots = SapphCooking.SlicedCarrots,
+            SapphCooking.DicedBellPepper = SapphCooking.SlicedBellPepper,
+            SapphCooking.DicedBroccoli = Base.Broccoli,
+
+        }
+    }
+
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Prepare Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+	craftRecipe SapphCooking Make Baked Potato
+    {
+        timedAction = CookingPotatoPancakePan,
+        time            = 30,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+			item 1 [farming.Potato] flags[ItemCount],
+            item 1 tags[base:sharpKnife;base:metalsaw;base:smallsaw;base:fork;base:mixingutensil;base:spoon] mode:keep,
+        }
+       outputs
+        {
+		   item 1 SapphCooking.BakedPotato,
+        }
+    }
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Skewers Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+	
+	craftRecipe SapphCooking Make Corn on the Cob
+    {
+        timedAction = Sapph_SkewerAddHand,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = true,
+        OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.Corn] flags[Prop1;ItemCount],
+            item 1 [SapphCooking.WoodenSkewers],
+        }
+        outputs
+        {
+           item 1 SapphCooking.Corn_Cob,
+        }
+    }
+
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Meat Grinder Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+	craftRecipe SapphCooking Grind Falafel
+    {
+        timedAction = SapphMeatgrinder,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = true,
+        OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 15 [Base.Edamame;Base.Peas;Base.DriedChickpeas;Base.DriedSplitPeas],
+            item 1 [SapphCooking.Meatgrinder] mode:keep,
+        }
+       outputs
+        {
+           item 1 SapphCooking.Falafel_Uncooked,
+        }
+    }
+
+
+}

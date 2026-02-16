@@ -1,0 +1,632 @@
+module Base
+{
+    /*****
+	imports
+	{
+		Base,
+	}	
+    *****/
+
+	
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Sweets - Prepping ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Slice Cake
+    {
+        timedAction = UnPackBox_Small,
+        time            = 20,
+        OnCreate = SapphDivideIntoFive,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.Cheesecake_TeaPrep;SapphCooking.Cheesecake_StrawberryPrep;SapphCooking.Cheesecake_ChocolatePrep;Base.CakeRaw;SapphCooking.Cheesecake_Prep;SapphCooking.CakeRaw_Birthday;SapphCooking.CakePrep_BlackForestCake;SapphCooking.CakePrep_Carrot;SapphCooking.CakePrep_Chocolate;SapphCooking.CakePrep_RedVelvet;SapphCooking.CakePrep_StrawberryCake;SapphCooking.Cake_NianGao] mode:destroy mappers[resultType] flags[IsCookedFoodItem;ItemCount],
+            item 1 tags[base:sharpknife;base:metalsaw;base:smallsaw] mode:keep,
+        }
+       outputs
+        {
+           item 5 mapper:resultType,
+           item 1 Base.BakingPan,
+        }
+        itemMapper resultType
+        {
+            SapphCooking.CakeSlice_Default = Base.CakeRaw,
+            SapphCooking.CakeSlice_BlackForest = SapphCooking.CakePrep_BlackForestCake,
+            SapphCooking.CakeSlice_Carrot = SapphCooking.CakePrep_Carrot,
+            SapphCooking.CakeSlice_Chocolate = SapphCooking.CakePrep_Chocolate,
+            SapphCooking.CakeSlice_RedVelvet = SapphCooking.CakePrep_RedVelvet,
+            SapphCooking.CakeSlice_Strawberry = SapphCooking.CakePrep_StrawberryCake,
+            SapphCooking.CakeSlice_NianGao = SapphCooking.Cake_NianGao,
+            SapphCooking.CakeSlice_Birthday = SapphCooking.CakeRaw_Birthday,
+            SapphCooking.Sapph_CakeCheesecake = SapphCooking.Cheesecake_Prep,
+            SapphCooking.Sapph_CakeChocolateCheesecake = SapphCooking.Cheesecake_ChocolatePrep,
+            SapphCooking.Sapph_CakeStrawberryCheesecake = SapphCooking.Cheesecake_StrawberryPrep,
+            SapphCooking.Sapph_CakeTeaCheesecake = SapphCooking.Cheesecake_TeaPrep,
+        }
+    }
+
+    craftRecipe SapphCooking SliceCake2
+    {
+        timedAction = UnPackBox_Small,
+        time            = 20,
+        OnCreate = SapphDivideIntoFive,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.Cake_NoPan;SapphCooking.Cheesecake_TeaNoPan;SapphCooking.Cheesecake_StrawberryPrep;SapphCooking.Cheesecake_ChocolateNoPan;SapphCooking.Cheesecake_NoPan;SapphCooking.CakeRaw_Birthday;SapphCooking.CakePrep_BlackForestCake;SapphCooking.CakePrep_Carrot;SapphCooking.CakePrep_Chocolate;SapphCooking.CakePrep_RedVelvet;SapphCooking.CakePrep_StrawberryCake;SapphCooking.Cake_NianGao] mode:destroy mappers[resultType] flags[IsCookedFoodItem;ItemCount],
+            item 1 tags[base:sharpknife;base:metalsaw;base:smallsaw] mode:keep,
+        }
+       outputs
+        {
+           item 5 mapper:resultType,
+        }
+        itemMapper resultType
+        {
+            SapphCooking.CakeSlice_Default = SapphCooking.Cake_NoPan,
+            SapphCooking.CakeSlice_BlackForest = SapphCooking.Cake_BlackForest_NoPan,
+            SapphCooking.CakeSlice_Carrot = SapphCooking.Cake_Carrot_NoPan,
+            SapphCooking.CakeSlice_Chocolate = SapphCooking.Cake_Chocolate_NoPan,
+            SapphCooking.CakeSlice_RedVelvet = SapphCooking.Cake_RedVelvet_NoPan,
+            SapphCooking.CakeSlice_Strawberry = SapphCooking.Cake_Strawberry_NoPan,
+            SapphCooking.CakeSlice_NianGao = SapphCooking.Cake_NianGao_NoPan,
+            SapphCooking.CakeSlice_Birthday = SapphCooking.Cake_Birthday_NoPan,
+            SapphCooking.Sapph_CakeCheesecake = SapphCooking.Cheesecake_NoPan,
+            SapphCooking.Sapph_CakeChocolateCheesecake = SapphCooking.Cheesecake_ChocolateNoPan,
+            SapphCooking.Sapph_CakeStrawberryCheesecake = SapphCooking.Cheesecake_StrawberryNoPan,
+            SapphCooking.Sapph_CakeTeaCheesecake = SapphCooking.Cheesecake_TeaNoPan,
+        }
+    }
+
+
+    craftRecipe SapphCooking Make Smore
+    {
+        timedAction = Sapph_SliceFood_Surface,
+        time            = 40,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+			item 1 [Base.Marshmallows] flags[ItemCount],
+            item 1 [Base.Crackers;Base.GrahamCrackers] flags[ItemCount],
+            item 1 [SapphCooking.Syrup_Chocolate;Base.ChocolateChips;Base.Chocolate_Butterchunkers;Base.Chocolate_Crackle;Base.Chocolate_Deux;Base.Chocolate_Smirkers;Base.Chocolate_RoysPBPucks;Base.Chocolate_GalacticDairy;Base.Chocolate_SnikSnak;Base.Chocolate;SapphCooking.WhiteChocolate;SapphCooking.Box_Bonbon;SapphCooking.Box_HeartChocolate;SapphCooking.Box_LiqueurBonbons;Base.Chocolate_HeartBox] flags[ItemCount],
+        }
+        outputs
+        {
+            item 1 SapphCooking.SapphSmore,
+        }
+    }
+
+    craftRecipe SapphCooking Make Icing
+    {
+        timedAction = MixingBowl,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        OnCreate = SapphCreatePrep,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+            item 1 [Base.Bowl] mode:keep,
+            item 1 [*],
+            -fluid 0.1 [CowMilk;SheepMilk],
+            item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+        outputs
+        {
+           item 1 Base.Icing,
+        }
+    }
+
+    craftRecipe SapphCooking Fill Piping Bag with Icing
+    {
+        timedAction = MixingBowl,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        OnCreate = SapphCreatePrep,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.Icing] flags[ItemCount],
+            item 1 [SapphCooking.PipingBags] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.PipingBag_Icing,
+        }
+    }
+
+    craftRecipe SapphCooking Fill Piping Bag with Icing
+    {
+        timedAction = MixingBowl,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        OnCreate = SapphCreatePrep,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.PastryDough] flags[ItemCount],
+            item 1 [SapphCooking.PipingBags] mode:destroy,
+        }
+        outputs
+        {
+           item 1 SapphCooking.PipingBag_PastryDough,
+        }
+    }
+
+    
+    craftRecipe SapphCooking Make Candy Apple
+    {
+        timedAction = Sapph_SkewerAddHand,
+        time            = 70,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.WoodenSkewers] mode:destroy,
+            item 1 [Base.Apple] flags[Prop1;InheritFoodAge;ItemCount],
+            item 8 [SapphCooking.Syrup_Caramel;SapphCooking.Syrup_Chocolate;SapphCooking.Syrup_Strawberry;Base.MapleSyrup],
+        }
+       outputs
+        {
+           item 1 Base.CandiedApple,
+        }
+    }
+
+    craftRecipe SapphCooking Make Small Egg Chocolate
+    {
+        timedAction = UnPackBox_Small,
+        time            = 70,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphDivideFour,
+        inputs
+        {
+            item 1 [SapphCooking.SaucepanChocolate;SapphCooking.SaucepanWhiteChocolate] flags[ItemCount],
+            item 1 [SapphCooking.BakingMolds] flags[InheritFoodAge],
+        }
+       outputs
+        {
+           item 4 SapphCooking.ChocolateEgg_Small,
+        }
+    }
+
+    craftRecipe SapphCooking Make Medium Egg Chocolate
+    {
+        timedAction = UnPackBox_Small,
+        time            = 70,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphMake2Result,
+        inputs
+        {
+            item 1 [SapphCooking.SaucepanChocolate;SapphCooking.SaucepanWhiteChocolate] flags[ItemCount],
+            item 1 [SapphCooking.BakingMolds] flags[InheritFoodAge],
+        }
+       outputs
+        {
+           item 2 SapphCooking.ChocolateEgg_Small,
+        }
+    }
+
+    craftRecipe SapphCooking Make Large Egg Chocolate
+    {
+        timedAction = UnPackBox_Small,
+        time            = 70,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.SaucepanChocolate;SapphCooking.SaucepanWhiteChocolate] flags[ItemCount],
+            item 1 [SapphCooking.BakingMolds] flags[InheritFoodAge],
+        }
+       outputs
+        {
+           item 1 SapphCooking.ChocolateEgg_Small,
+        }
+    }
+
+    craftRecipe SapphCooking Make Bonbons
+    {
+        timedAction = UnPackBox_Small,
+        time            = 70,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphDivideIntoFive,
+        inputs
+        {
+            item 1 [SapphCooking.SaucepanChocolate;SapphCooking.SaucepanWhiteChocolate] flags[ItemCount],
+            item 1 [SapphCooking.BakingMolds] flags[InheritFoodAge],
+        }
+       outputs
+        {
+           item 5 SapphCooking.Bonbon,
+        }
+    }
+
+    craftRecipe SapphCooking Make Liqueur Bonbons
+    {
+        timedAction = UnPackBox_Small,
+        time            = 70,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphDivideIntoFive,
+        inputs
+        {
+            item 1 [SapphCooking.SaucepanChocolate;SapphCooking.SaucepanWhiteChocolate] flags[ItemCount],
+            item 1 [SapphCooking.BakingMolds] flags[InheritFoodAge],
+            item 1 [*],
+            -fluid 0.1 [Scotch],
+        }
+       outputs
+        {
+           item 5 SapphCooking.Bonbon_Liqueur,
+        }
+    }
+
+    craftRecipe SapphCooking Make Heart Shaped Chocolate
+    {
+        timedAction = UnPackBox_Small,
+        time            = 70,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphDivideIntoFive,
+        inputs
+        {
+            item 1 [SapphCooking.SaucepanChocolate;SapphCooking.SaucepanWhiteChocolate] flags[ItemCount],
+            item 1 [SapphCooking.BakingMolds] flags[InheritFoodAge],
+        }
+       outputs
+        {
+           item 5 SapphCooking.Heart_Chocolate,
+        }
+    }
+
+    craftRecipe SapphCooking Dip Doughnuts in Chocolate
+    {
+        timedAction = UnPackBox_Small,
+        time            = 50,
+        category = SapphCooking,
+		CanWalk = false,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 3 [Base.DoughnutPlain] flags[ItemCount],
+            item 8 [SapphCooking.SaucepanChocolate] flags[Prop2;IsCookedFoodItem],
+        }
+       outputs
+        {
+           item 3 SapphCooking.DoughnutShapedDough,
+           item 1 Base.Saucepan,
+        }
+    }
+
+    craftRecipe SapphCooking Dip Eclair in Chocolate
+    {
+        timedAction = UnPackBox_Small,
+        time            = 50,
+        category = SapphCooking,
+		CanWalk = false,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 3 [SapphCooking.Eclair] flags[ItemCount],
+            item 8 [SapphCooking.SaucepanChocolate] flags[Prop2;IsCookedFoodItem],
+        }
+       outputs
+        {
+           item 3 SapphCooking.Eclair_Chocolate,
+           item 1 Base.Saucepan,
+        }
+    }
+
+    craftRecipe SapphCooking Dip Eclair in White Chocolate
+    {
+        timedAction = UnPackBox_Small,
+        time            = 50,
+        category = SapphCooking,
+		CanWalk = false,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 3 [SapphCooking.Eclair] flags[ItemCount],
+            item 8 [SapphCooking.SaucepanWhiteChocolate] flags[Prop2;IsCookedFoodItem],
+        }
+       outputs
+        {
+           item 3 SapphCooking.Eclair_WhiteChocolate,
+           item 1 Base.Saucepan,
+        }
+    }
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Dough Making Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+    craftRecipe SapphCooking Make Gingerbread Dough
+    {
+        timedAction = MixingBowl,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        OnCreate = SapphCreatePrep,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+            item 2 tags[base:sugar],
+            item 1 [Base.Butter] flags[ItemCount],
+            item 2 tags[base:flour],
+            item 1 [*],
+            -fluid 0.2 [Water],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+        outputs
+        {
+           item 1 SapphCooking.Gingerbread_Dough,
+        }
+    }
+
+    craftRecipe SapphCooking Make Pastry Dough
+    {
+        timedAction = MixingBowl,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        OnCreate = SapphCreatePrep,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+            item 3 tags[base:sugar],
+            item 1 [Base.Butter] flags[ItemCount],
+            item 2 tags[base:flour],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+        outputs
+        {
+           item 1 SapphCooking.PastryDough,
+        }
+    }
+    
+
+    craftRecipe SapphCooking Cut Doughnuts
+    {
+        timedAction = UnPackBox_Small,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphDivideFour, /******this********/
+        inputs
+        {
+            item 1 [Base.BreadDough] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 4 SapphCooking.DoughnutShapedDough,
+        }
+    }
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Skewers Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Make Candy Apple
+    {
+        timedAction = Sapph_SkewerAddHand,    
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking,
+        SkillRequired = Cooking:2,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+			item 1 [Base.Saucepan],
+            -fluid 0.1 [Water],
+            item 1 [SapphCooking.WoodenSkewers],
+            item 4 tags[base:sugar],
+            item 1 [Base.Apple],
+        }
+       outputs
+        {
+            item 1 SapphCooking.CandyApple,
+        }
+    }
+
+    craftRecipe SapphCooking MakePopsicle2
+    {
+        timedAction = Sapph_SkewerAddHand,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+			item 1 [SapphCooking.Blender_Juice] mode:destroy,
+            item 1 [SapphCooking.WoodenSkewers],
+            item 2 [SapphCooking.IceCubes] flags[ItemCount],
+        }
+       outputs
+        {
+            item 1 Base.Popsicle,
+            item 1 SapphCooking.Blender,
+        }
+    }
+
+    craftRecipe SapphCooking Put Marshmallow on a Stick
+    {
+        timedAction = Sapph_SkewerAddHand,
+        time    = 30,
+        category = SapphCooking,
+        OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+			item 1 [Base.Marshmallows] flags[Prop1;InheritFoodAge;ItemCount],
+            item 1 [SapphCooking.WoodenSkewers],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.WoodenSkewersMarshmallows,
+        }
+    }
+
+
+    craftRecipe SapphCooking Make Rock Candy
+    {
+        timedAction = Sapph_SkewerAddHand,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking,
+        AutoLearnAny  = Cooking:6,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.WoodenSkewers],
+            item 4 tags[base:sugar],
+            item 1 [*],
+            -fluid 0.1 [Water],
+        }
+        outputs
+        {
+            item 1 Base.RockCandy,
+        }
+    }
+
+    craftRecipe SapphCooking Make Tanghulu Candy
+    {
+        timedAction = Sapph_SkewerAddHand,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking,
+        AutoLearnAny  = Cooking:6,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+			item 1 [Base.BerryBlack;Base.BerryBlue;Base.BerryGeneric1;Base.BerryGeneric2;Base.BerryGeneric3;Base.BerryGeneric4;Base.BerryGeneric5] flags[ItemCount],
+            item 1 [SapphCooking.WoodenSkewers],
+            item 4 tags[base:sugar],
+            item 1 [*],
+            -fluid 0.1 [Water],
+        }
+        outputs
+        {
+            item 1 SapphCooking.Tanghulu,
+        }
+    }
+
+    craftRecipe SapphCooking Make Popsicle
+    {
+        timedAction = Sapph_SkewerAddHand,
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [*],
+            -fluid 0.3 [MilkStrawberry;JuicePineapple;JuiceWatermelon;JuiceStrawberry;JuiceApple;JuiceCranberry;JuiceFruitpunch;JuiceGrape;JuiceLemon;JuicePeach;JuiceOrange;SpiffoJuice],
+            item 1 [SapphCooking.WoodenSkewers],
+            item 2 [SapphCooking.IceCubes] flags[ItemCount],
+        }
+       outputs
+        {
+            item 1 Base.Popsicle,
+        }
+    }
+
+    craftRecipe SapphCooking Make Cotton Candy
+    {
+        timedAction = Sapph_SkewerAddHand,    
+        time            = 20,
+        category = SapphCooking,
+        Tags = InHandCraft;Cooking,
+        SkillRequired = Cooking:6,
+        OnCreate = SapphCottonCandy,
+        inputs
+        {
+			item 1 [Base.Saucepan],
+            -fluid 0.1 [Water],
+            item 1 [SapphCooking.WoodenSkewers],
+            item 4 tags[base:sugar],
+        }
+       outputs
+        {
+        }
+    }
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Misc Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Make Gingerbread House
+    {
+        timedAction = MixingBowl,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 3 [SapphCooking.Gingerbread_Wall] flags[ItemCount],
+            item 5 [Base.Icing;SapphCooking.PipingBag_Icing;SapphCooking.WhippedCream_Can],
+        }
+        outputs
+        {
+           item 1 SapphCooking.Gingerbread_House,
+        }
+    }
+    
+
+    craftRecipe SapphCooking Take Candy Cigarette from Pack
+    {
+        timedAction = UnPackBoxSapphCigarette_Small,
+        time            = 10,
+        category = SapphCooking,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphDivideEight,
+        inputs
+        {
+            item 1 [SapphCooking.PackofCandyCigarretes] flags[ItemCount],
+        }
+       outputs
+        {
+           item 8 SapphCooking.CandyCigarette,
+        }
+    }
+
+
+
+
+
+}
