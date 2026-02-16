@@ -1,0 +1,298 @@
+module SapphCooking
+{
+	imports
+	{
+		Base,
+	}		
+
+	/**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Wok Pans are Here::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+	
+	item WokPan
+	{
+		DisplayCategory 		= Cooking,
+		Weight 		= 1.3,
+		Tooltip 		= Tooltip_item_RainFromGround,
+		ItemType = base:normal,
+		DisplayName 		= Wok Pan,
+		Icon 		= WokIcon,
+		IconFluidMask = WokIcon_Mask,
+		GoodHot = true,
+		MetalValue 		= 60,
+		WorldStaticModel 		= WokPanGround,
+		Tags = base:hasmetal;base:cookable,
+
+		component FluidContainer
+        {
+            ContainerName   = WokPan,
+            Capacity        = 2.0,
+            RainFactor	= 1,
+        }
+	}
+
+	item WokPan_Oil
+	{
+		ItemType = base:normal,
+		Weight 		= 1,
+		Icon 		= WokIcon,
+		WorldStaticModel 		= WokPanOilGround,
+		Tooltip 		= Tooltip_OilPan,
+		ReplaceOnUse = WokPan,
+		IsCookable = true,
+		DisplayCategory = Cooking,
+		MetalValue = 10,
+		Tags = base:hasmetal;base:cookable;sapphcooking:oilpanbig;sapphcooking:oilpan;base:smeltablesteelsmall,
+
+		component FluidContainer
+        {
+            ContainerName   = OilPan,
+            Capacity = 0.6,
+			Fluids
+            {
+                fluid = CookingOil:0.6,
+            }
+        }
+	}
+	
+	item WokPan_RoastVeg
+	{
+		DisplayCategory 		= Food,
+		Icon 		= WokYakisobaIcon,
+		ItemType = base:food,
+		Weight 		= 1.5,
+		StaticModel 		= H_WokRoast,
+		WorldStaticModel 		= WokRoast_Ground,
+		DisplayName 		= Roasted Vegetables,
+		FatigueChange 		= -5,
+		UnhappyChange 		= -5,
+		HungerChange 		= -5,
+		ReplaceOnUse 		= WokPan,
+		DaysFresh = 2,
+		DaysTotallyRotten = 4,
+		Calories 		= 15,
+		Carbohydrates 		= 10,
+		Lipids 		= 5,
+		Proteins 		= 2,
+		EatType = plate,
+		IsCookable 		= true,
+		MinutesToCook 		= 20,
+		MinutesToBurn 		= 40,
+		CookingSound 		= BoilingFood,
+	}
+	
+	item WokPan_CacioPepePrep
+	{
+		DisplayCategory 		= Food,
+		Icon 		= WokPanFriedRiceIcon,
+		ItemType = base:food,
+		Weight 		= 1.5,
+		StaticModel 		= H_WokPan_Noodle,
+		WorldStaticModel 		= WokPan_Noodle,
+		DisplayName 		= Wok Pan with Cacio e Pepe,
+		FatigueChange 		= -10,
+		UnhappyChange 		= -10,
+		ThirstChange 		= -10,
+		StressChange 		= -5,
+		HungerChange 		= -24,
+		DaysFresh = 2,
+		DaysTotallyRotten = 4,
+		ReplaceOnUse 		= WokPan,
+		Calories 		= 460,
+		EatType = plate,
+		Carbohydrates 		= 400,
+		Lipids 		= 20,
+		Proteins 		= 30,
+		IsCookable 		= true,
+		MinutesToCook 		= 20,
+		MinutesToBurn 		= 40,
+		CookingSound 		= BoilingFood,
+	}
+	item WokPan_CacioPepeEvolved
+	{
+		DisplayCategory 		= Food,
+		Icon 		= WokPanFriedRiceIcon,
+		ItemType = base:food,
+		Weight 		= 1.5,
+		StaticModel 		= H_WokPan_Noodle,
+		WorldStaticModel 		= WokPan_Noodle,
+		DisplayName 		= Wok Pan with Cacio e Pepe,
+		FatigueChange 		= -10,
+		UnhappyChange 		= -10,
+		ThirstChange 		= -10,
+		StressChange 		= -5,
+		HungerChange 		= -24,
+		ReplaceOnUse 		= WokPan,
+		IsCookable	=	TRUE,
+		MinutesToCook	=	60,
+		MinutesToBurn	=	90,
+		DaysFresh = 2,
+		DaysTotallyRotten = 4,
+		Calories 		= 460,
+		EatType = plate,
+		Carbohydrates 		= 400,
+		Lipids 		= 20,
+		Proteins 		= 30,
+	}
+	
+	item Wokpan_BaconandEggs
+	{
+		DisplayCategory 		= Food,
+		Icon 		= WokEggIcon,
+		ItemType = base:food,
+		Weight 		= 1.2,
+		StaticModel 		= H_WokPanBaconEggs,
+		WorldStaticModel 		= WokPanBaconEggs_Ground,
+		DisplayName 		= Wok Pan with Bacon and Eggs,
+		FatigueChange 		= -5,
+		UnhappyChange 		= -5,
+		HungerChange 		= -30,
+		BoredomChange 		= -5,
+		StressChange 		= -5,
+		ReplaceOnUse 		= Pan,
+		Calories 		= 580,
+		DaysFresh = 4,
+		DaysTotallyRotten = 4,
+		Carbohydrates 		= 15,
+		EatType = plate,
+		Lipids 		= 18,
+		Proteins 		= 20,
+		Tags = sapphcooking:baconeggspan;sapphcooking:returnwokpan,
+	}	
+
+	item WokPanwithFriedRice
+	{
+		DisplayCategory 		= Food,
+		Icon 		= WokPanFriedRiceIcon,
+		ItemType = base:food,
+		Weight 		= 1.5,
+		StaticModel 		= H_WokFriedRice,
+		WorldStaticModel 		= WokGroundFriedRice,
+		DisplayName 		= Wok Pan with Fried Rice,
+		FatigueChange 		= -5,
+		UnhappyChange 		= -10,
+		HungerChange 		= -20,
+		ReplaceOnUse 		= WokPan,
+		IsCookable	=	TRUE,
+		MinutesToCook	=	20,
+		MinutesToBurn	=	60,
+		Calories 		= 200,
+		Carbohydrates 		= 100,
+		Lipids 		= 10,
+		Proteins 		= 20,
+		DaysFresh = 3,
+		DaysTotallyRotten = 6,
+		EatType = plate,
+	}
+
+	item WokPan_YakisobaEvolved
+	{
+		DisplayCategory 		= Food,
+		Icon 		= WokYakisobaIcon,
+		ItemType = base:food,
+		Weight 		= 1.5,
+		StaticModel 		= H_WokPanYakisoba,
+		WorldStaticModel 		= WokPanYakisoba_Ground,
+		DisplayName 		= Yakisoba,
+		FatigueChange 		= -10,
+		UnhappyChange 		= -10,
+		ThirstChange 		= -10,
+		StressChange 		= -5,
+		HungerChange 		= -24,
+		ReplaceOnUse 		= WokPan,
+		MinutesToBurn 		= 60,
+		MinutesToCook 		= 30,
+		DaysFresh = 3,
+		DaysTotallyRotten = 6,
+		Calories 		= 460,
+		EatType = 2hand,
+		Carbohydrates 		= 400,
+		Lipids 		= 20,
+		Proteins 		= 30,
+	}
+
+	item WokFriedRiceEvolved
+	{
+		DisplayCategory 		= Food,
+		Icon 		= WokPanFriedRiceIcon,
+		ItemType = base:food,
+		Weight 		= 1.5,
+		StaticModel 		= H_WokFriedRice,
+		DaysFresh = 3,
+		DaysTotallyRotten = 6,
+		WorldStaticModel 		= WokGroundFriedRice,
+		DisplayName 		= Fried Rice,
+		FatigueChange 		= -5,
+		UnhappyChange 		= -10,
+		HungerChange 		= -20,
+		ReplaceOnUse 		= WokPan,
+		Calories 		= 350,
+		Carbohydrates 		= 100,
+		Lipids 		= 10,
+		MinutesToBurn 		= 60,
+		MinutesToCook 		= 30,
+		Proteins 		= 20,
+		IsCookable 		= TRUE,
+		EatType 		= plate,
+	}
+
+	item WokPan_Yakisoba
+	{
+		DisplayCategory 		= Food,
+		Icon 		= WokYakisobaIcon,
+		ItemType = base:food,
+		Weight 		= 1.5,
+		StaticModel 		= H_WokPanYakisoba,
+		WorldStaticModel 		= WokPanYakisoba_Ground,
+		DisplayName 		= Wok Pan with Yakisoba,
+		FatigueChange 		= -10,
+		UnhappyChange 		= -10,
+		ThirstChange 		= -10,
+		StressChange 		= -5,
+		HungerChange 		= -24,
+		ReplaceOnUse 		= WokPan,
+		Calories 		= 460,
+		EatType = plate,
+		Carbohydrates 		= 300,
+		DaysFresh = 2,
+		DaysTotallyRotten = 3,
+		Lipids 		= 20,
+		Proteins 		= 30,
+		IsCookable 		= true,
+		MinutesToCook 		= 20,
+		MinutesToBurn 		= 40,
+		CookingSound 		= BoilingFood,
+	}
+
+	item WokPan_KungPaoChicken
+	{
+		DisplayCategory 		= Food,
+		Icon 		= WokKungPaoChickenIcon,
+		ItemType = base:food,
+		Weight 		= 1.5,
+		StaticModel 		= H_WokPanKungPao,
+		WorldStaticModel 		= WokPanKungPao_Ground,
+		DisplayName 		= Wok Pan with Kung Pao Chicken,
+		DangerousUncooked 		= TRUE,
+		FatigueChange 		= -10,
+		UnhappyChange 		= -20,
+		ThirstChange 		= -10,
+		StressChange 		= -10,
+		HungerChange 		= -40,
+		ReplaceOnUse 		= WokPan,
+		Calories 		= 550,
+		Carbohydrates 		= 30,
+		EatType = plate,
+		DaysFresh = 2,
+		DaysTotallyRotten = 3,
+		Lipids 		= 31,
+		Proteins 		= 30,
+		IsCookable 		= true,
+		MinutesToCook 		= 20,
+		MinutesToBurn 		= 40,
+		CookingSound 		= BoilingFood,
+	}
+
+
+}

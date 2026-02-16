@@ -1,0 +1,693 @@
+module Rotators
+{
+	template vehicle SemiTruckTemplate
+	{
+		mechanicType = 2,
+		engineRepairLevel = 5,
+		playerDamageProtection = 0.5,
+		engineRPMType = SemiTruckRPM,
+      
+		frontEndHealth = 1500,
+		rearEndHealth = 1000,
+
+		spawnOffsetY = 0.35,
+
+		isSmallVehicle = false,
+
+		sound
+		{
+			engine = VehicleEngineStepVan,
+			engineStart = VehicleEngineStepVan,
+			engineTurnOff = VehicleEngineStepVan,
+			horn = VehicleHornSemiTruck,
+			ignitionFail = VehicleIgnitionFailStepVan,
+			backSignal = VehicleBackUpBeeper,
+		}
+
+		textureRust = Vehicles/Vehicles_rSemiTruck_Rust,
+		textureMask = Vehicles/Vehicles_rSemiTruck_Mask,
+		textureLights = Vehicles/Vehicles_rSemiTruck_Lights,
+		textureDamage1Shell = Vehicles/vehicles_rSemiTruck_Shell_Damaged01,
+		textureDamage2Shell = Vehicles/vehicles_rSemiTruck_Shell_Damaged02,
+		textureDamage1Overlay = Vehicles/vehicles_rSemiTruck_Overlay_Damaged01,
+		textureDamage2Overlay = Vehicles/vehicles_rSemiTruck_Overlay_Damaged02,
+		textureShadow = Vehicles/Vehicles_rSemiTruck_Shadow,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.7624 -0.8614 2.5050,
+			radius = 0.40f,
+			width = 0.30f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.7624 -0.8614 2.5050,
+			radius = 0.40f,
+			width = 0.30f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.0000 -0.8713 -1.4950,
+			radius = 0.40f,
+			width = 3.00f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = 0.0000 -0.8713 -2.5347,
+			radius = 0.40f,
+			width = 3.00f,
+		}    
+
+		area Engine
+		{
+			xywh = 0.0000 2.8158 3.4386 1.7018,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 1.3168 1.1980 0.7921 0.8119,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -1.3168 1.1980 0.7921 0.8119,
+		}
+
+		area GasTank
+		{
+			xywh = -1.1287 0.2871 0.4158 0.4158,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 1.1842 2.5175 0.4211 0.4211,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.1667 2.5175 0.4211 0.4211,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.1667 -1.5088 0.4211 0.4211,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.1842 -2.5263 0.4211 0.4211,
+		}
+
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+		part Seat*
+		{
+			table install
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:2,
+				recipes = Intermediate Mechanics,
+			}
+		}
+      
+		template = Radio,
+
+		part Radio*
+		{
+			model Radio.HamRadio1
+			{
+				file = Rotators.SemiTruckAntenna,
+			}
+
+			itemType = Base.RadioBlack;Base.RadioRed;Base.RadioMakeShift;Base.HamRadio1;Base.HamRadio2;Base.HamRadioMakeShift,
+
+			table install
+			{
+				complete = rLib.Vehicles.Functions.InstallComplete.DefaultWithItemTypeModel,
+			}
+
+			table uninstall
+			{
+				complete = rLib.Vehicles.Functions.UninstallComplete.DefaultWithItemTypeModel,
+			}
+
+			lua
+			{
+				create = rLib.Vehicles.Functions.Create.RadioWithItemTypeModel,
+				init = rLib.Vehicles.Functions.Init.DefaultWithItemTypeModel,
+				update = Vehicles.Update.Radio,
+			}
+		}
+
+		template = GasTank,
+
+		part GasTank
+		{
+			table install
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:7,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Battery,
+		template = Engine,
+
+		part Engine
+		{
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+
+				needs =
+				{
+					part = ArmorBullbar,
+					condition = 1,
+				}
+
+				lua =
+				{
+					check = rLib.Vehicles.Armor.Callback.TrueOnEngine,
+					repair = rLib.Vehicles.Armor.Callback.FalseOnZero,
+				}
+			}
+		}
+
+		template = Muffler,
+		part Muffler
+		{
+         /*setAllModelsVisible = false;*/
+         
+			model Base.OldCarMuffler2
+			{
+				file = Rotators.SemiTruckMuffler1,
+			}
+
+			model Base.NormalCarMuffler2
+			{
+				file = Rotators.SemiTruckMuffler2,
+			}
+
+			model Base.ModernCarMuffler2
+			{
+				file = Rotators.SemiTruckMuffler3,
+			}
+
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+				anim = Muffler_anim,
+				rate = 1.0,
+			}
+
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+				anim = Muffler_anim,
+				rate = 1.0,
+			}
+
+			anim Closed
+			{
+				anim = Muffler_anim,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = Muffler_anim,
+				animate = FALSE,
+			}
+
+			table install
+			{
+				recipes = Intermediate Mechanics,
+				complete = rLib.Vehicles.Functions.InstallComplete.DefaultWithItemTypeModel,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+				complete = rLib.Vehicles.Functions.UninstallComplete.DefaultWithItemTypeModel,
+			}
+
+			lua
+			{
+				create = rLib.Vehicles.Functions.Create.DefaultWithItemTypeModel,
+				init = rLib.Vehicles.Functions.Init.DefaultWithItemTypeModel,
+			}
+		}
+
+		template = EngineDoor,
+
+		part EngineDoor
+		{
+			model hood
+			{
+				file = Rotators.SemiTruckHood,
+				rotate = 0 0 0,
+				scale = 1,
+				offset = 0 0 0,
+			}
+
+			anim Open
+			{
+				sound = VehicleHoodOpenJeep,
+				anim = Hood_closing,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Close
+			{
+				sound = VehicleHoodCloseJeep,
+				anim = Hood_closing,
+				rate = 2.6,
+			}
+
+			anim Closed
+			{
+				anim = Hood_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = Hood_closing,
+				animate = FALSE,
+			}
+
+			table install
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Advanced Mechanics,
+			}
+
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+				needs =
+				{
+					part = ArmorBullbar,
+					condition = 1,
+				}
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
+			}
+		}
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+
+		part Windshield*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = ArmorFront,
+				recipes = Intermediate Mechanics,
+			}
+
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+				needs =
+				{
+					part = ArmorFront,
+					condition = 1,
+				}
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
+			}
+		}
+		template = Rotators.SemiTruckArmor/part/ArmorFront,
+
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+
+		part WindowFrontLeft
+		{
+			table uninstall
+			{
+				requireUninstalled = ArmorDoorL,
+			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+
+				needs =
+				{
+					part = ArmorDoorL,
+					condition = 1,
+				}
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
+			}
+		}
+
+		part WindowFrontRight
+		{
+			table uninstall
+			{
+				requireUninstalled = ArmorDoorR,
+			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+				needs =
+				{
+					part = ArmorDoorR,
+					condition = 1,
+				}
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
+			}
+		}
+
+		part Window*
+		{
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Door/part/DoorFrontLeft,
+		template = Rotators.SemiTruckArmor/part/ArmorDoorL,
+
+		template = Door/part/DoorFrontRight,
+		template = Rotators.SemiTruckArmor/part/ArmorDoorR,
+
+		part DoorFrontLeft
+		{
+			table uninstall
+			{
+				requireUninstalled = ArmorDoorL,
+			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+				needs =
+				{
+					part = ArmorDoorL,
+					condition = 1,
+				}
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
+			}
+		}
+
+		part DoorFrontRight
+		{
+			table uninstall
+			{
+				requireUninstalled = ArmorDoorR,
+			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+				needs =
+				{
+					part = ArmorDoorR,
+               condition = 1,
+				}
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
+			}
+		}
+
+		part Door*
+		{
+			anim Lock
+			{
+				sound = LockVehicleDoorVan,
+			}
+			
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorVan,
+			}
+
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedVan,
+			}
+			table install
+			{
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+       template = Tire,
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Rotators.SemiTruckBaseFrontWheelLeft,
+			}
+			model ATAProtection
+            {
+                file = Rotators.SemiTruckArmorTireFL,
+            }
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Rotators.SemiTruckBaseFrontWheelRight,
+			}
+			model ATAProtection
+            {
+                file = Rotators.SemiTruckArmorTireFR,
+				invertX = TRUE,
+            }
+			
+		}
+		template = Rotators.Axle4Tires,
+		template = Rotators.SemiTruckArmor/part/ArmorTires,
+		part Tire*
+		{
+		
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+				needs =
+				{
+				part = ArmorTires,
+                condition = 1,
+				}
+			}
+			table uninstall
+			{
+				requireUninstalled = ArmorTires,
+				recipes = Basic Mechanics,
+			}
+		setAllModelsVisible = false,
+        
+		
+		table install
+         {
+             complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+         }
+         table uninstall
+         {
+             requireUninstalled = ATA2ProtectionWheels,
+             complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+         }
+         lua
+         {
+             create = Vehicles.Create.Tire,
+             init = ATATuning2.Init.TireNotAllModelsVisible,
+             checkOperate = Vehicles.CheckOperate.Tire,
+             update = Vehicles.Update.Tire,
+         }
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Rotators.SemiTruckBaseBackWheelLeft,
+			}
+			model ATAProtection
+			{
+				file = Rotators.SemiTruckArmorTireRR,
+				offset = -0.85 0 0,
+				rotate = 0 0 180,
+			}
+			model ATAProtection2
+			{
+				file = Rotators.SemiTruckArmorTireRR,
+				offset = 0.85 0 0,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = Rotators.SemiTruckBaseBackWheelRight,
+			}
+			model ATAProtection
+			{
+				file = Rotators.SemiTruckArmorTireRL,
+				offset = -0.85 0 0,
+				rotate = 0 0 180,
+			}
+			model ATAProtection2
+			{
+				file = Rotators.SemiTruckArmorTireRL,
+				offset = 0.85 0 0,
+			}
+		}
+
+		template = Brake,
+
+		part Brake*
+		{
+			table install
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+		}
+
+		template = Suspension,
+
+		part Suspension*
+		{
+			table install
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:4,
+				recipes = Intermediate Mechanics,
+			}
+		}
+		template = Rotators.SemiTruckArmor/part/ArmorBullbar,
+		template = Headlight,
+
+		part HeadlightLeft
+		{
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+				needs =
+				{
+					part = ArmorBullbar,
+					condition = 35,
+				}
+			}
+			table headlight
+            {
+                xOffset = 0.5,
+                yOffset = 1.5,
+                distance = 60,
+                intensity = 1.75,
+				focusing = 45,
+            }
+		}
+
+		part HeadlightRight
+		{
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+				needs =
+				{
+					part = ArmorBullbar,
+               condition = 35,
+				}
+			}
+		}
+	}
+}

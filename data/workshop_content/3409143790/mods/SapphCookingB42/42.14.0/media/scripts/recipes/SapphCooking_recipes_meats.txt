@@ -1,0 +1,382 @@
+module Base
+{
+    /*****
+	imports
+	{
+		Base,
+	}	
+    *****/
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Meats Prepping Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+    
+    craftRecipe SapphCooking Make Crab Rangoons
+    {
+        timedAction = Sapph_SliceFood_Surface,
+        time            = 80,
+        category = SapphCooking,
+        OnCreate = SapphCreatePrep,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.WontonWrappers] flags[ItemCount],
+            item 1 [SapphCooking.CrabStick] flags[ItemCount],
+        }
+       outputs
+        {
+           item 2 SapphCooking.CrabRangoon,
+        }
+    }
+
+    craftRecipe SapphCooking SliceMeat
+    {
+        timedAction = DiceFood_Surface,
+        time            = 20,
+        category = SapphCooking,
+		OnCreate = SapphMake2Result,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.Chicken;Base.Smallbirdmeat;Base.Steak;Base.Venison;Base.Beef] mappers[resultType] flags[Prop2;ItemCount],
+            item 1 tags[base:sharpknife;base:metalsaw;base:smallsaw]  mode:keep,
+        }
+       outputs
+        {
+		   item 2 mapper:resultType,
+        }
+	   itemMapper resultType
+		{
+			SapphCooking.SlicedChicken = Base.Chicken,
+            SapphCooking.SlicedChicken = Base.Smallbirdmeat,
+            SapphCooking.SlicedSteak = Base.Steak,
+            SapphCooking.SlicedSteak = Base.Venison,
+            SapphCooking.SlicedSteak = Base.Beef,
+        }
+    }
+
+    craftRecipe SapphCooking Tenderize Meat
+    {
+        timedAction = Sapph_SliceFood_Surface,
+        time            = 50,
+        category = SapphCooking,
+		OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.WoodenMallet;SapphCooking.MeatTenderizer_Wood;SapphCooking.MeatTenderizer] mode:keep,
+            item 1 [Base.Smallbirdmeat;Base.Chicken;Base.Steak;Base.PorkChop;Base.MuttonChop;SapphCooking.SlicedSteak;Base.Rabbitmeat] flags[ItemCount],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.TenderizedMeat,
+        }
+    }
+
+    craftRecipe SapphCooking Make Seitan
+    {
+        timedAction = UnPackBox_Small,
+        time            = 200,
+        category = SapphCooking,
+		CanWalk = false,
+        AutoLearnAny  = Cooking:8,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 6 tags[base:flour],
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+       outputs
+        {
+           item 1 SapphCooking.Seitan,
+        }
+    }
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Prepare Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+
+    craftRecipe SapphCooking Make Hotdog
+    {
+        timedAction = Making,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:3,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 1 [Base.BunsHotdog_single] flags[InheritFoodAge;ItemCount],
+            item 1 [SapphCooking.SausageEvolved;SapphCooking.SausageBlood;Base.Sausage] flags[ItemCount],
+
+        }
+       outputs
+        {
+           item 1 Base.Hotdog,
+        }
+    }
+
+    craftRecipe SapphCooking Make Beef Wellington
+    {
+        timedAction = Making,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:3,
+        AutoLearnAny  = Cooking:4,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 1 [Base.BreadDough] flags[InheritFoodAge;ItemCount],
+            item 1 tags[sapphcooking:beef] flags[InheritFoodAge;ItemCount],
+            item 1 tags[sapphcooking:mushroom] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep,
+        }
+       outputs
+        {
+           item 1 SapphCooking.BeefWellington,
+        }
+    }
+    
+    craftRecipe SapphCooking Make Pigs in a Blanket
+    {
+        timedAction = MixingBowl,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        OnCreate = SapphCreatePrepThree,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 tags[sapphcooking:sausage] flags[ItemCount],
+            item 1 [Base.Dough] flags[ItemCount],
+        }
+        outputs
+        {
+           item 3 SapphCooking.Sausage_PigBlanket,
+        }
+    }
+    
+    craftRecipe SapphCooking Make Meatballs
+    {
+        timedAction = Sapph_SliceFood_Surface,
+        time            = 70,
+        category = SapphCooking,
+        OnCreate = SapphMake2Result,
+        xpAward = Cooking:3,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 tags[sapphcooking:mincedmeat] flags[ItemCount],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+        }
+       outputs
+        {
+		   item 2 SapphCooking.Meatballs,
+        }
+    }
+
+    craftRecipe SapphCooking Prepare Scotch Egg
+    {
+        timedAction = Sapph_SliceFood_Surface,
+        time            = 70,
+        category = SapphCooking,
+        OnCreate = SapphCreatePrep,
+        xpAward = Cooking:3,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 tags[sapphcooking:mincedmeat] flags[ItemCount],
+            item 1 tags[base:egg] flags[IsCookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [SapphCooking.BreadCrumbs] flags[ItemCount],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.ScotchEggRaw,
+        }
+    }
+
+    craftRecipe SapphCooking Prepare Scotch Egg2
+    {
+        timedAction = Sapph_SliceFood_Surface,
+        time            = 70,
+        category = SapphCooking,
+        OnCreate = SapphCreatePrep,
+        xpAward = Cooking:3,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 tags[sapphcooking:mincedmeat] flags[ItemCount],
+            item 1 [Base.EggBoiled] flags[ItemCount],
+            item 1 [SapphCooking.BreadCrumbs] flags[ItemCount],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.ScotchEggRaw,
+        }
+    }
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Skewers Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Put Rat on a Stick
+    {
+        timedAction = Sapph_SkewerAddRatHand,
+        time    = 10,
+        category = SapphCooking,
+        OnCreate = SapphCreatePrep,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        inputs
+        {
+			item 1 [Base.DeadRat;Base.DeadRatBaby;Base.DeadRatSkinned;Base.DeadRatBabySkinned] flags[InheritFoodAge;ItemCount],
+            item 1 [SapphCooking.WoodenSkewers],
+        }
+       outputs
+        {
+		   item 1 SapphCooking.WoodenSkewersRat,
+        }
+    }
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Butchering Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Make Sausage Casings
+	{
+        timedAction = SliceMeat_Surface,
+		Time = 150,
+		OnCreate = CutAnimal,
+		Tags = AnySurfaceCraft;Cooking,
+		category = SapphCooking,
+		xpAward = Butchering:10,
+        NeedToBeLearn = True,
+        AutoLearnAny  = Cooking:3,
+		inputs
+		{
+			item 1 tags[base:sharpKnife;base:metalsaw;base:smallsaw] mode:keep flags[MayDegradeLight;IsNotDull;SharpnessCheck],
+			item 1 [Base.DeadBird;Base.DeadMouse;Base.DeadSquirrel;Base.DeadRat] mappers[animalType] flags[InheritFoodAge;ItemCount],
+			item 2 [Base.Butter],
+		}
+		outputs
+		{
+			item 1 mapper:animalType,
+            item 3 SapphCooking.SausageCasing,
+		}
+		itemMapper animalType
+		{
+			Base.FrogMeat = Base.Frog,
+			Base.Smallbirdmeat = Base.DeadBird,
+			default = Base.Smallanimalmeat,
+		}
+	}
+
+    craftRecipe SapphCooking Make Sausage Casings2
+	{
+        timedAction = SliceMeat_Surface,
+ 		Time = 150,
+ 		OnCreate = CutChicken,
+ 		/*OnTest = Recipe.OnTest.CutChicken,*/
+ 		Tags = AnySurfaceCraft;Cooking,
+		category = SapphCooking,
+ 		xpAward = Cooking:10,
+        NeedToBeLearn = True,
+        AutoLearnAny  = Cooking:3,
+ 		inputs
+ 		{
+ 			item 1 tags[base:sharpKnife;base:meatcleaver] mode:keep flags[IsNotDull;SharpnessCheck],
+ 			item 1 [Base.ChickenWhole;Base.TurkeyWhole] mappers[animalType;animalType2;animalType3] flags[InheritFoodAge;ItemCount],
+ 		}
+ 		outputs
+ 		{
+ 			item 2 mapper:animalType,
+ 			item 2 mapper:animalType2,
+ 			item 2 mapper:animalType3,
+            item 4 SapphCooking.SausageCasing,
+ 		}
+        itemMapper animalType
+		{
+			Base.Chicken = Base.ChickenWhole,
+			Base.TurkeyLegs = Base.TurkeyWhole,
+		}
+        itemMapper animalType2
+		{
+			Base.ChickenWings = Base.ChickenWhole,
+			Base.TurkeyWings = Base.TurkeyWhole,
+		}
+		itemMapper animalType3
+		{
+			Base.ChickenFillet = Base.ChickenWhole,
+			Base.TurkeyFillet = Base.TurkeyWhole,
+		}
+	}
+
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Meat Grinder Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Grind Meat
+	{
+		Time = 80,
+		timedAction = SapphMeatgrinder,
+        OnCreate = SapphMake2Result,
+		Tags = InHandCraft;Cooking,
+		category = SapphCooking,
+		inputs
+		{
+			item 1 [SapphCooking.Meatgrinder] mode:keep,
+            item 1 [Base.TurkeyFillet;Base.TurkeyWings;SapphCooking.SlicedChicken;SapphCooking.SlicedSteak;Base.MuttonChop;Base.PorkChop;Base.Pork;Base.Venison;Base.Beef;Base.Steak;Base.Rabbitmeat;Base.Smallanimalmeat;Base.Chicken;Base.ChickenFillet;Base.ChickenWings;Base.Smallbirdmeat;Base.ChickenWhole] mappers[grindMeat] flags[ItemCount],		
+        }
+		outputs
+		{
+			item 2 mapper:grindMeat,
+		}
+		itemMapper grindMeat
+		{
+            Base.MincedMeat = SapphCooking.SlicedSteak,
+			Base.MincedMeat = Base.MuttonChop,
+            Base.MincedMeat = Base.Venison,
+            Base.MincedMeat = Base.Beef,
+            Base.MincedMeat = Base.Steak,
+            Base.MincedMeat = Base.Rabbitmeat,
+            Base.MincedMeat = Base.Smallanimalmeat,
+            SapphCooking.MincedMeat_Pork = Base.PorkChop,
+            SapphCooking.MincedMeat_Pork = Base.Pork,
+            SapphCooking.MincedMeat_Turkey = Base.TurkeyFillet,
+            SapphCooking.MincedMeat_Turkey = Base.TurkeyWings,
+            SapphCooking.MincedMeat_Chicken = SapphCooking.SlicedChicken,
+            SapphCooking.MincedMeat_Chicken = Base.Chicken,
+            SapphCooking.MincedMeat_Chicken = Base.ChickenFillet,
+            SapphCooking.MincedMeat_Chicken = Base.ChickenWings,
+            SapphCooking.MincedMeat_Chicken = Base.ChickenWhole,
+            SapphCooking.MincedMeat_Chicken = Base.Smallbirdmeat,
+		}
+	}
+
+    craftRecipe SapphCooking Make Crab Sticks
+    {
+        timedAction = SapphMeatgrinder,
+        time            = 80,
+        category = SapphCooking,
+        OnCreate = SapphMake2Result,
+		CanWalk = true,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [Base.FishFillet] flags[ItemCount],
+            item 1 [SapphCooking.Meatgrinder] mode:keep,
+        }
+       outputs
+        {
+           item 2 SapphCooking.CrabStick,
+        }
+    }
+
+}

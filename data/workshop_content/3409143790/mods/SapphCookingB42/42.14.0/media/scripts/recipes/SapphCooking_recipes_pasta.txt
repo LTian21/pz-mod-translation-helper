@@ -1,0 +1,100 @@
+module Base
+{
+    /*****
+	imports
+	{
+		Base,
+	}	
+    *****/
+
+    /**********::---------------------------:: ::---------------------------:: **************/
+	/**********::--------------------:: Pasta Dough Making Recipes! ::--------------------:: **************/
+	/**********::---------------------------:: ::---------------------------:: **************/
+
+    craftRecipe SapphCooking Make Pasta Dough
+    {
+        timedAction = UnPackBox_Small,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        AutoLearnAny  = Cooking:2,
+        NeedToBeLearn = True,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;ItemCount],
+            item 6 tags[base:flour],
+        }
+       outputs
+        {
+           item 1 SapphCooking.PastaDough,
+        }
+    }
+
+
+	craftRecipe SapphCooking Cut Pasta Dough
+    {
+        timedAction = UnPackBox_Small,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        AutoLearnAny  = Cooking:2,
+        NeedToBeLearn = True,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+            item 1 [SapphCooking.PastaDough] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep,
+            
+        }
+       outputs
+        {
+           item 2 Base.Pasta,
+        }
+    }
+
+    craftRecipe SapphCooking Cut Ravioli
+    {
+        timedAction = UnPackBox_Small,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        AutoLearnAny  = Cooking:2,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.PastaDough] flags[ItemCount],
+            item 1 [SapphCooking.MincedMeat_Chicken;Base.MincedMeat] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+        }
+       outputs
+        {
+           item 1 SapphCooking.Ravioli,
+        }
+    }
+
+    craftRecipe SapphCooking Cut Pasta Dough into Sheets
+    {
+        timedAction = UnPackBox_Small,
+        time            = 80,
+        category = SapphCooking,
+		CanWalk = false,
+        AutoLearnAny  = Cooking:2,
+        xpAward = Cooking:3,
+        Tags = InHandCraft;Cooking,
+        OnCreate = SapphCreatePrep,
+        inputs
+        {
+            item 1 [SapphCooking.PastaDough] flags[ItemCount],
+            item 1 tags[base:sharpknife;base:saw;base:meatcleaver;base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop2],
+
+        }
+       outputs
+        {
+           item 2 SapphCooking.PastaSheets,
+        }
+    }
+
+
+}
