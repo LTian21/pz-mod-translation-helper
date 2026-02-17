@@ -1,0 +1,97 @@
+module Base
+{
+    craftRecipe MakeHBoneClub
+    {
+        time = 200,
+        Tags = AnySurfaceCraft,
+        category = Weaponry,
+        xpAward = Maintenance:10,
+        SkillRequired = Maintenance:1,
+        NeedToBeLearn = true,
+        timedAction = CraftWeapon1H,
+        AutoLearnAll = Maintenance:3;SmallBlunt:1,
+        inputs
+        {
+            item 1 [LabItems.LabRegularHumanBone;LabItems.LabHumanBoneLarge;LabItems.LabRegularHumanBoneWP;LabItems.LabHumanBoneLargeWP] mappers[ClubMapper] flags[Prop2;InheritCondition],
+            item 2 [Base.LeatherStrips],
+        }
+        outputs
+        {
+            item 1 mapper:ClubMapper,
+        }
+        itemMapper ClubMapper
+        {
+            Base.BoneClub = LabItems.LabRegularHumanBone,
+            Base.LargeBoneClub = LabItems.LabHumanBoneLarge,
+            Base.BoneClub = LabItems.LabRegularHumanBoneWP,
+            Base.LargeBoneClub = LabItems.LabHumanBoneLargeWP,
+            default = Base.LargeBoneClub,
+        }
+    }
+
+    craftRecipe MakeHScrapMorningstar
+    {
+        time = 600,
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = false,
+        SkillRequired = MetalWelding:7,
+        timedAction = Welding_Surface,
+        xpAward = MetalWelding:70,
+        category = Weaponry,
+        inputs
+        {
+            item 1 [LabItems.LabRegularHumanBone;LabItems.LabHumanBoneLarge;LabItems.LabRegularHumanBoneWP;LabItems.LabHumanBoneLargeWP] mappers[HandleMapper] flags[Prop2;InheritCondition],
+            item 8 [Base.BlowTorch],
+            item 1 tags[base:weldingmask] mode:keep,
+            item 1 tags[base:sheetmetalsnips;base:metalsaw] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 [Base.SmallSheetMetal],
+            item 1 [Base.RippedSheets;Base.DenimStrips;Base.LeatherStrips] mode:destroy,
+        }
+        outputs
+        {
+            item 1 mapper:HandleMapper,
+        }
+        itemMapper HandleMapper
+        {
+            Base.BoneClub_Spiked = LabItems.LabRegularHumanBone,
+            Base.BoneClub_Spiked = LabItems.LabRegularHumanBoneWP,
+            Base.LargeBoneClub_Spiked = LabItems.LabHumanBoneLarge,
+            Base.LargeBoneClub_Spiked = LabItems.LabHumanBoneLargeWP,
+            default = Base.BoneClub_Spiked,
+        }
+    }
+
+    craftRecipe MakeHSpikedClub
+    {
+        time = 500,
+        SkillRequired = Blacksmith:5,
+        NeedToBeLearn = true,
+        AutoLearnAll = Blacksmith:8,
+        timedAction = MakingHammer_Surface,
+        xpAward = Blacksmith:50,
+        Tags = Forge,
+        category = Weaponry,
+        inputs
+        {
+            item 4 tags[base:charcoal],
+            item 1 [Base.IronBandSmall],
+            item 5 tags[base:metalpiece],
+            item 1 tags[base:smithinghammer] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 tags[base:tongs] mode:keep flags[Prop2;MayDegradeLight],
+            item 1 tags[base:metalworkingpunch] mode:keep flags[MayDegradeLight],
+            item 1 [LabItems.LabRegularHumanBone;LabItems.LabHumanBoneLarge;LabItems.LabRegularHumanBoneWP;LabItems.LabHumanBoneLargeWP] flags[InheritCondition] mappers[ClubMapper],
+        }
+        outputs
+        {
+            item 1 mapper:ClubMapper,
+        }
+        itemMapper ClubMapper
+        {
+            Base.BoneClub_Spiked = LabItems.LabRegularHumanBone,
+            Base.LargeBoneClub_Spiked = LabItems.LabHumanBoneLarge,
+            Base.BoneClub_Spiked = LabItems.LabRegularHumanBoneWP,
+            Base.LargeBoneClub_Spiked = LabItems.LabHumanBoneLargeWP,
+            default = Base.BoneClub_Spiked,
+        }
+    }
+}

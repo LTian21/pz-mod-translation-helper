@@ -191,6 +191,34 @@ craftRecipe TradeOldItems3
         }
     }
 
+    craftRecipe TurnHBoneIntoWP
+    {
+        time = 5,
+        category = Weaponry,
+        timedAction = Making,
+        Tags = InHandCraft,
+        NeedToBeLearn = false,
+
+        inputs
+        {
+            item 1 [LabItems.LabRegularHumanBone;LabItems.LabHumanBoneLarge] mode:destroy mappers[BoneToWPMapper] flags[Prop2;InheritCondition],
+        }
+
+        outputs
+        {
+            item 1 mapper:BoneToWPMapper,
+        }
+
+        itemMapper BoneToWPMapper
+        {
+            LabItems.LabRegularHumanBoneWP = LabItems.LabRegularHumanBone,
+            LabItems.LabHumanBoneLargeWP = LabItems.LabHumanBoneLarge,
+            default = LabItems.LabRegularHumanBoneWP,
+        }
+    }
+
+
+
 /*
     craftRecipe LabTradeTickets
     {
@@ -318,7 +346,7 @@ craftRecipe TradeOldItems3
         }
     }
 	
-	    craftRecipe ChmAddTransferBrainFluidLow
+	craftRecipe ChmAddTransferBrainFluidLow
     {
         time 			= 15,
         category 		= Chemistry,

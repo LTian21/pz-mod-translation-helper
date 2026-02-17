@@ -1,0 +1,91 @@
+module Defecation
+{
+	model D_Feces
+	{
+		mesh = D_Feces,
+		texture = D_Feces,
+		scale = 0.15,
+	}
+	
+	model D_AntiDiarrhealPills
+	{
+		mesh = WorldItems/Antibiotics,
+		texture = D_AntiDiarrhealPills,
+		scale = 0.6,
+	}
+	
+	model D_AntiDiarrhealPillBox
+	{
+		mesh = D_AntiDiarrhealPillBox,
+		texture = D_AntiDiarrhealPillBox,
+		scale = 0.6,
+	}
+	
+	item HumanFeces
+	{
+		DisplayCategory = Junk,
+		ItemType = base:food,
+		Weight = 0.2,
+		Icon = DHumanFeces,
+		DaysFresh = 0,
+		DaysTotallyRotten = 0,
+		HungerChange = -5,
+		Calories = 50,
+		Carbohydrates = 5,
+		Lipids = 0,
+		Proteins = 0,
+		WorldStaticModel = Defecation.D_Feces,
+		StaticModel = Defecation.D_Feces,
+		UnhappyChange = 50,
+		StressChange = 25,
+		ThirstChange = -5,
+		Tags = base:iscompostable;base:showpoison,
+		FoodSicknessChange = 10,
+		FoodType = NoExplicit,
+		Poison = true,
+		PoisonPower = 10,
+		PoisonDetectionLevel = 10,
+		UseForPoison = 10,
+		EatType = EatSmall,
+		CustomEatSound = EatingMushy,
+	}
+	
+	item AntiDiarrhealPillBox
+	{
+		Weight = 0.2,
+		ItemType = base:normal,
+		Icon = D_AntiDiarrhealPillBoxIcon,
+		DisplayCategory = FirstAid,
+		WorldStaticModel = Defecation.D_AntiDiarrhealPillBox,
+	}
+	
+	item AntiDiarrhealPill
+	{
+		HungerChange = -0.1,
+		Weight = 0.04,
+		ItemType = base:food,
+		Icon = D_AntiDiarrhealPillsIcon,
+		DisplayCategory = FirstAid,
+		FoodType = NoExplicit,
+		ThirstChange = 5,
+		OnEat = DefecationEatPill,
+		Tooltip = Tooltip_AntiDiarrhealPill,
+		WorldStaticModel = Defecation.D_AntiDiarrhealPills,
+	}
+	
+	craftRecipe OpenBoxOfAntiDiarrhealPills
+	{
+		timedAction = UnPackBox_Small,
+		Time = 15,
+		category = Packing,
+		Tags = InHandCraft;Packing;CanBeDoneInDark,
+		inputs
+		{
+			item 1 [Defecation.AntiDiarrhealPillBox],
+		}
+		outputs
+		{
+			item 4 Defecation.AntiDiarrhealPill,
+		}
+	}
+}
