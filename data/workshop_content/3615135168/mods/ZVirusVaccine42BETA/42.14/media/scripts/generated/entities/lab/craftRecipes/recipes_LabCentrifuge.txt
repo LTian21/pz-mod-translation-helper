@@ -1,0 +1,26 @@
+module Base
+{
+ craftRecipe ChmDivideBloodIntoComponents
+    {
+        time = 200,
+        category = Chemistry,
+        timedAction = ApplianceA,
+        SkillRequired = Doctor:1,
+		Tags = ZVirusVaccine42BETA:Centrifuge;CannotBeResearched,
+        NeedToBeLearn = True,
+		xpAward = Doctor:10,
+        OnCreate = Lab_Recipes_DivideBloodIntoComponents,
+
+        inputs
+        {
+            item 2 [LabItems.LabFlask] mode:destroy,
+            item 1 [LabItems.LabTestTube] mode:destroy flags[IsFull],
+            -fluid 0.5 [InfectedBlood],
+            
+        }
+        outputs
+        {
+            item 5 LabItems.LabTestTubeDirty,
+        }
+    }
+}

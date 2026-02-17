@@ -1,0 +1,362 @@
+module Base
+{
+ craftRecipe ChmSynthesizePlainVaccine
+    {
+        time            = 200,
+        category        = Vaccines,
+        SkillRequired   = Doctor:4,
+		Tags            = ZVirusVaccine42BETA:ChemistrySet;CannotBeResearched,
+        NeedToBeLearn   = True,
+		timedAction     = MixingB,
+		xpAward         = Doctor:25,
+
+        inputs
+        {
+            item 1 [LabItems.LabSyringe;LabItems.LabSyringeReusable] mappers[Vaccine],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.2 [PurifiedWater],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.2 [BloodPlasma],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.4 [Leukocytes],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.2 [SodiumHypochlorite],
+
+            item 1 [LabItems.CmpSyringeWithBrainFluidLow;LabItems.CmpSyringeWithBrainFluidMid;LabItems.CmpSyringeWithBrainFluidHigh;LabItems.CmpSyringeReusableWithBrainFluidLow;LabItems.CmpSyringeReusableWithBrainFluidMid;LabItems.CmpSyringeReusableWithBrainFluidHigh] mappers[syringeType],
+        }
+        outputs
+        {
+            item 1 mapper:Vaccine,
+			item 5 LabItems.LabFlaskDirty,
+			item 1 mapper:syringeType,
+        }
+        itemMapper Vaccine
+        {
+            LabItems.CmpSyringeWithPlainVaccine = LabItems.LabSyringe,
+            LabItems.CmpSyringeReusableWithPlainVaccine = LabItems.LabSyringeReusable,
+        }
+        itemMapper syringeType
+        {
+            LabItems.LabSyringeUsed = LabItems.CmpSyringeWithBrainFluidLow,
+            LabItems.LabSyringeUsed = LabItems.CmpSyringeWithBrainFluidMid,
+            LabItems.LabSyringeUsed = LabItems.CmpSyringeWithBrainFluidHigh,
+            LabItems.LabSyringeReusableUsed = LabItems.CmpSyringeReusableWithBrainFluidLow,
+            LabItems.LabSyringeReusableUsed = LabItems.CmpSyringeReusableWithBrainFluidMid,
+            LabItems.LabSyringeReusableUsed = LabItems.CmpSyringeReusableWithBrainFluidHigh,
+        }
+    }
+
+    craftRecipe ChmSynthesizeQualityVaccine
+    {
+        time            = 300,
+        category        = Vaccines,
+		Tags            = ZVirusVaccine42BETA:ChemistrySet;CannotBeResearched,
+        SkillRequired   = Doctor:5,
+        NeedToBeLearn   = True,
+		timedAction     = MixingB,
+		xpAward         = Doctor:35,
+
+        inputs
+        {
+            item 1 [LabItems.LabSyringe;LabItems.LabSyringeReusable] mappers[qualityVaccine],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.4 [PurifiedWater],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.4 [BloodPlasma],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.8 [Leukocytes],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.2 [SodiumHypochlorite],
+
+            item 1 [LabItems.CmpSyringeWithBrainFluidMid;LabItems.CmpSyringeWithBrainFluidHigh;LabItems.CmpSyringeReusableWithBrainFluidMid;LabItems.CmpSyringeReusableWithBrainFluidHigh],
+        }
+        outputs
+        {
+            item 1 mapper:qualityVaccine,
+			item 9 LabItems.LabFlaskDirty,
+			item 1 LabItems.LabSyringeUsed,
+        }
+        itemMapper qualityVaccine
+        {
+            LabItems.CmpSyringeWithQualityVaccine = LabItems.LabSyringe,
+            LabItems.CmpSyringeReusableWithQualityVaccine = LabItems.LabSyringeReusable,
+        }
+    }
+
+    craftRecipe ChmSynthesizeAdvancedVaccine
+    {
+        time            = 400,
+        category        = Vaccines,
+        SkillRequired   = Doctor:6,
+		Tags            = ZVirusVaccine42BETA:ChemistrySet;CannotBeResearched,
+        NeedToBeLearn   = True,
+		timedAction     = MixingB,
+		xpAward         = Doctor:45,
+
+        inputs
+        {
+            item 1 [LabItems.LabSyringe;LabItems.LabSyringeReusable] mappers[advVaccine],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.6 [PurifiedWater],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.6 [BloodPlasma],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 1.0 [Leukocytes],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.2 [SodiumHypochlorite],
+            
+            item 1 [LabItems.LabTestTube] mode:destroy flags[IsFull],
+            -fluid 0.1 [Antibodies],
+
+            item 1 [LabItems.CmpSyringeWithBrainFluidHigh;LabItems.CmpSyringeReusableWithBrainFluidHigh],
+        }
+        outputs
+        {
+            item 1 mapper:advVaccine,
+			item 12 LabItems.LabFlaskDirty,
+            item 1 LabItems.LabTestTubeDirty,
+			item 1 LabItems.LabSyringeUsed,
+        }
+        itemMapper advVaccine
+        {
+            LabItems.CmpSyringeWithAdvancedVaccine = LabItems.LabSyringe,
+            LabItems.CmpSyringeReusableWithAdvancedVaccine = LabItems.LabSyringeReusable,
+        }
+    }
+
+    craftRecipe ChmSynthesizeCure
+    {
+        time            = 500,
+        category        = Vaccines,
+        SkillRequired   = Doctor:8,
+		Tags            = ZVirusVaccine42BETA:ChemistrySet;CannotBeResearched,
+        NeedToBeLearn   = True,
+		timedAction     = MixingB,
+		xpAward         = Doctor:100,
+
+        inputs
+        {
+            item 1  [LabItems.LabSyringe;LabItems.LabSyringeReusable] mappers[theCure],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.8 [PurifiedWater],
+
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.8 [BloodPlasma],
+
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.4 [SodiumHypochlorite],
+
+            item 1 [LabItems.LabTestTube] mode:destroy flags[IsFull],
+            -fluid 1.2 [Antibodies],
+
+            item 2 [LabItems.CmpSyringeWithBrainFluidHigh;LabItems.CmpSyringeReusableWithBrainFluidHigh],
+        }
+        outputs
+        {
+            item 1 mapper:theCure,
+			item 10 LabItems.LabFlaskDirty,
+            item 12 LabItems.LabTestTubeDirty,
+			item 2 LabItems.LabSyringeUsed,
+        }
+        itemMapper theCure
+        {
+            LabItems.CmpSyringeWithCure = LabItems.LabSyringe,
+            LabItems.CmpSyringeReusableWithCure = LabItems.LabSyringeReusable,
+        }
+    }
+
+    craftRecipe ChmMixFlaskOfSodiumHypochlorite
+    {
+        time            = 150,
+        category        = Chemistry,
+        SkillRequired   = Doctor:1,
+		Tags            = ZVirusVaccine42BETA:ChemistrySet;CannotBeResearched,
+        NeedToBeLearn   = True,
+		timedAction     = MixingChm,
+		xpAward         = Doctor:5,
+        OnCreate        = Lab_Recipes_ChmMixFlaskOfSodiumHypochlorite,
+
+        inputs
+        {
+            item 1 [Hat_BuildersRespirator;Hat_GasMask;Hat_ImprovisedGasMask;Hat_NBCmask;Hat_DustMask;Hat_SurgicalMask] mode:keep,
+            item 1 [Glasses_SafetyGoggles;Glasses_SkiGoggles;Glasses_SwimmingGoggles;Glasses_Shooting] mode:keep,
+            item 1 [Apron_Black;Apron_White;Apron_IceCream;Apron_PileOCrepe;Apron_PizzaWhirled;Apron_Spiffos;Apron_WhiteTEXTURE] mode:keep,
+            item 1 [Gloves_Dish;Gloves_LeatherGloves;Gloves_LeatherGlovesBlack] mode:keep,
+
+            item 1 [LabItems.ChHydrochloricAcidCan],
+            item 1 [LabItems.ChSodiumHydroxideBag],
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsEmpty],
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+		    -fluid 0.2 [PurifiedWater],
+        }
+        outputs
+        {
+            item 1 LabItems.LabFlaskDirty,
+        }
+    }
+
+    craftRecipe ChmMixFlaskOfAmmoniumSulfate
+    {
+        time            = 150,
+        category        = Chemistry,
+		Tags            = ZVirusVaccine42BETA:ChemistrySet;CannotBeResearched,
+        SkillRequired   = Doctor:1,
+        NeedToBeLearn   = True,
+		timedAction     = MixingChm,
+		xpAward         = Doctor:5,
+        OnCreate        = Lab_Recipes_ChmMixFlaskOfAmmoniumSulfate,
+
+        inputs
+        {
+            item 1 [Hat_BuildersRespirator;Hat_GasMask;Hat_ImprovisedGasMask;Hat_NBCmask;Hat_DustMask;Hat_SurgicalMask] mode:keep,
+            item 1 [Glasses_SafetyGoggles;Glasses_SkiGoggles;Glasses_SwimmingGoggles;Glasses_Shooting] mode:keep,
+            item 1 [Apron_Black;Apron_White;Apron_IceCream;Apron_PileOCrepe;Apron_PizzaWhirled;Apron_Spiffos;Apron_WhiteTEXTURE] mode:keep,
+            item 1 [Gloves_Dish;Gloves_LeatherGloves;Gloves_LeatherGlovesBlack] mode:keep,
+
+            item 1 [LabItems.ChAmmonia],
+            item 1 [LabItems.ChSulfuricAcidCan],
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsEmpty],
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+		    -fluid 0.2 [PurifiedWater],
+        }
+        outputs
+        {
+			item 1 LabItems.LabFlaskDirty,
+        }
+    }
+
+    craftRecipe ChmMixFlaskOfHydrogenPeroxide
+    {
+        time            = 150,
+        category        = Chemistry,
+		Tags            = ZVirusVaccine42BETA:ChemistrySet;CannotBeResearched,
+        SkillRequired   = Doctor:1,
+        NeedToBeLearn   = True,
+		timedAction     = MixingChm,
+		xpAward         = Doctor:5,
+        OnCreate        = Lab_Recipes_ChmMixFlaskOfHydrogenPeroxide,
+
+        inputs
+        {
+            item 1 [Glasses_SafetyGoggles;Glasses_SkiGoggles;Glasses_SwimmingGoggles;Glasses_Shooting] mode:keep,
+            item 1 [Apron_Black;Apron_White;Apron_IceCream;Apron_PileOCrepe;Apron_PizzaWhirled;Apron_Spiffos;Apron_WhiteTEXTURE] mode:keep,
+            item 1 [Gloves_Dish;Gloves_LeatherGloves;Gloves_LeatherGlovesBlack] mode:keep,
+
+            item 1 [LabItems.ChSulfuricAcidCan],
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsEmpty],
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+		    -fluid 0.2 [PurifiedWater],
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+		    -fluid 0.2 [SodiumHypochlorite],
+        }
+        outputs
+        {
+			item 2 LabItems.LabFlaskDirty,
+        }
+    }
+
+    craftRecipe ChmMakeAlbumin
+    {
+        time            = 200,
+        category        = Pills,
+		Tags            = ZVirusVaccine42BETA:ChemistrySet;CannotBeResearched,
+        SkillRequired   = Doctor:5,
+		AutoLearnAny    = Doctor:7,
+        NeedToBeLearn   = True,
+		timedAction     = MakingPills,
+		xpAward         = Doctor:10,
+
+        inputs
+        {
+            item 1 [SheetPaper2],
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+		    -fluid 0.4 [BloodPlasma],
+        }
+        outputs
+        {
+            item 1 LabItems.CmpAlbuminPills,
+            item 2 LabItems.LabFlaskDirty,
+        }
+    }
+
+	    craftRecipe ChmMakeBottleOfBleach
+    {
+        time            = 250,
+        category        = Chemistry,
+		Tags            = ZVirusVaccine42BETA:ChemistrySet;CannotBeResearched,
+		timedAction     = MakingChm2,
+        NeedToBeLearn   = True,
+        xpAward         = Doctor:2,
+        inputs
+        {
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.4 [SodiumHypochlorite],
+            item 1 [Bleach] mode:destroy,
+		    -fluid 1.0 [Water],
+        }
+        outputs
+        {
+            item 1 Bleach,
+            item 2 LabItems.LabFlaskDirty,
+        }
+    }
+
+    craftRecipe ChmMakeBottleOfDisinfectant
+    {
+        time            = 250,
+        category        = Chemistry,
+		Tags            = ZVirusVaccine42BETA:ChemistrySet;CannotBeResearched,
+		timedAction     = MakingChm3,
+        NeedToBeLearn   = True,
+        xpAward         = Doctor:2,
+        inputs
+        {
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+		    -fluid 0.2 [HydrogenPeroxide],
+            item 1 [Disinfectant] mode:destroy,
+            -fluid 0.5 [Water],
+        }
+        outputs
+        {
+            item 1 Disinfectant,
+            item 1 LabItems.LabFlaskDirty,
+        }
+    }
+
+    craftRecipe ChmMakeChlorineTablets
+    {
+        time            = 200,
+        category        = Pills,
+        SkillRequired   = Doctor:1,
+		Tags            = ZVirusVaccine42BETA:ChemistrySet;CannotBeResearched,
+		timedAction     = MakingPills,
+        xpAward         = Doctor:2,
+        NeedToBeLearn   = True,
+
+        inputs
+        {
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+		    -fluid 0.4 [SodiumHypochlorite],
+            item 1 [EmptyJar],
+        }
+        outputs
+        {
+            item 1 LabItems.CmpChlorineTablets,
+            item 2 LabItems.LabFlaskDirty,
+        }
+	}
+}

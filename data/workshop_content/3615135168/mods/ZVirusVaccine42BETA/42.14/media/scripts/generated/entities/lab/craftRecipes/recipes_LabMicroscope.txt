@@ -1,0 +1,74 @@
+module Base
+{
+ craftRecipe ChmExtractLeukocytesFromBloodCells
+    {
+        time = 250,
+        category = Chemistry,
+        timedAction = MixingB,
+        SkillRequired = Doctor:2,
+		Tags = ZVirusVaccine42BETA:Microscope,
+        NeedToBeLearn = True,
+		xpAward = Doctor:10,
+        OnCreate = Lab_Recipes_ChmExtractLeukocytesFromBloodCells,
+
+        inputs
+        {
+            item 2 [Base.AlcoholRippedSheets;Base.AlcoholBandage;Base.AlcoholWipes] mappers[itemType],
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsEmpty],
+
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.2 [BloodCells],
+            
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.2 [AmmoniumSulfate],
+        }
+        outputs
+        {
+			item 2 LabItems.LabFlaskDirty,
+            item 2 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            Base.RippedSheetsDirty = Base.AlcoholRippedSheets,
+            Base.BandageDirty = Base.AlcoholBandage,
+            Base.RippedSheetsDirty = Base.Base.AlcoholWipes,
+        }
+    }
+
+    craftRecipe ChmExtractFluidFromBrain
+    {
+        time = 250,
+        category = Chemistry,
+        timedAction = Making,
+        SkillRequired = Doctor:4,
+		Tags = ZVirusVaccine42BETA:Microscope,
+        NeedToBeLearn = True,
+		xpAward = Doctor:15,
+        OnCreate = Lab_Recipes_ChmExtractFluidFromBrain,
+
+        inputs
+        {
+            item 1 [LabItems.HumanBrainLow;LabItems.HumanBrainMid;LabItems.HumanBrainHigh] mode:destroy mappers[itemType] flags[Prop2],
+            item 3 [LabItems.LabSyringe;LabItems.LabSyringeReusable] mappers[itemType],
+            item 1 [Scalpel] mode:keep flags[MayDegradeLight] flags[Prop1],
+            item 1 [Tweezers] mode:keep flags[MayDegradeLight],
+            item 1 [Gloves_Surgical;Gloves_LeatherGloves;Gloves_LeatherGlovesBlack] mode:keep,
+            item 1 [LabItems.LabFlask] mode:destroy flags[IsFull],
+            -fluid 0.2 [PurifiedWater],
+        }
+        outputs
+        {
+			item 1 LabItems.LabFlaskDirty,
+            item 3 mapper:itemType,
+        }
+        itemMapper itemType
+        {
+            LabItems.CmpSyringeWithBrainFluidLow = LabItems.HumanBrainLow;LabItems.LabSyringe,
+            LabItems.CmpSyringeWithBrainFluidMid = LabItems.HumanBrainMid;LabItems.LabSyringe,
+            LabItems.CmpSyringeWithBrainFluidHigh = LabItems.HumanBrainHigh;LabItems.LabSyringe,
+            LabItems.CmpSyringeReusableWithBrainFluidLow = LabItems.HumanBrainLow;LabItems.LabSyringeReusable,
+            LabItems.CmpSyringeReusableWithBrainFluidMid = LabItems.HumanBrainMid;LabItems.LabSyringeReusable,
+            LabItems.CmpSyringeReusableWithBrainFluidHigh = LabItems.HumanBrainHigh;LabItems.LabSyringeReusable,
+        }
+    }
+}
