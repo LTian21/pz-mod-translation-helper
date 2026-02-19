@@ -23,7 +23,7 @@ module Base
 	}
 	template vehicle fhq78BRAT
     {
-        mechanicType = 1,
+        mechanicType = 2,
         offRoadEfficiency = 0.8,
         engineRepairLevel = 4,
         playerDamageProtection = 0.8,
@@ -56,10 +56,10 @@ module Base
         }
 
         extents = 0.7473 0.5165 1.9780,
-        mass = 915,
+        mass = 730,
         physicsChassisShape = 0.7473 0.5165 1.9780,
         centerOfMassOffset = 0.0000 0.2692 -0.0110,
-        shadowExtents = 0.8347 2.0824,
+        shadowExtents = 0.7688 2.0824,
         shadowOffset = 0.0000 -0.0440,
         engineForce = 3150,
         engineLoudness = 80,
@@ -168,7 +168,7 @@ module Base
 
         area GasTank
         {
-            xywh = -0.6264 -0.5385 0.5055 0.5055,
+            xywh = 0.6264 -0.5385 0.5055 0.5055,
         }
 
         area TireFrontLeft
@@ -191,25 +191,70 @@ module Base
             xywh = -0.6319 -0.5549 0.5165 0.5165,
         }
 
-        template = Trunk/part/TruckBedOpen,
-
-        part TruckBedOpen
-        {
-            container
-            {
-                capacity = 100,
-            }
-        }
-
         template = Seat/part/SeatFrontLeft,
         template = Seat/part/SeatFrontRight,
+		
+		part Seat*
+        {
+            table install
+            {
+                skills = Mechanics:2,
+                recipes = Intermediate Mechanics,
+            }
+            table uninstall
+            {
+                skills = Mechanics:2,
+                recipes = Intermediate Mechanics,
+            }
+        }
+		
         template = GloveBox,
 
         template = GasTank,
+		
+		part GasTank
+        {
+            table install
+            {
+                skills = Mechanics:7,
+                recipes = Intermediate Mechanics,
+            }
+            table uninstall
+            {
+                skills = Mechanics:7,
+                recipes = Intermediate Mechanics,
+            }
+        }
+		
         template = Battery,
         template = Engine,
         template = Muffler,
+		
+		part Muffler
+        {
+            table install
+            {
+                recipes = Intermediate Mechanics,
+            }
+            table uninstall
+            {
+                recipes = Intermediate Mechanics,
+            }
+        }
+		
         template = EngineDoor,
+		
+		part EngineDoor
+        {
+            table install
+            {
+                recipes = Intermediate Mechanics,
+            }
+            table uninstall
+            {
+                recipes = Intermediate Mechanics,
+            }
+        }
 
         part Heater
         {
@@ -233,8 +278,33 @@ module Base
 
         template = Windshield/part/Windshield,
         template = Windshield/part/WindshieldRear,
+		
+		part Windshield*
+        {
+            table install
+            {
+                recipes = Intermediate Mechanics,
+            }
+            table uninstall
+            {
+                recipes = Intermediate Mechanics,
+            }
+        }
+		
         template = Window/part/WindowFrontLeft,
         template = Window/part/WindowFrontRight,
+		
+		part Window*
+        {
+            table install
+            {
+                recipes = Intermediate Mechanics,
+            }
+            table uninstall
+            {
+                recipes = Intermediate Mechanics,
+            }
+        }
 
         part WindshieldRear
         {
@@ -262,6 +332,18 @@ module Base
                 file = fhq78BRAT_DoorR,
                 offset = 0.0000 0.0000 0.0000,
                 rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+		
+		part Door*
+        {
+            table install
+            {
+                recipes = Intermediate Mechanics,
+            }
+            table uninstall
+            {
+                recipes = Intermediate Mechanics,
             }
         }
 
@@ -308,7 +390,37 @@ module Base
         }
 
         template = Brake,
+		
+		part Brake*
+        {
+            table install
+            {
+                skills = Mechanics:6,
+                recipes = Intermediate Mechanics,
+            }
+            table uninstall
+            {
+                skills = Mechanics:6,
+                recipes = Intermediate Mechanics,
+            }
+        }
+		
         template = Suspension,
+		
+		part Suspension*
+        {
+            table install
+            {
+                skills = Mechanics:6,
+                recipes = Intermediate Mechanics,
+            }
+            table uninstall
+            {
+                skills = Mechanics:6,
+                recipes = Intermediate Mechanics,
+            }
+        }
+		
         template = Radio,
         template = Headlight,
 		
@@ -358,7 +470,7 @@ module Base
 
         attachment trailer
         {
-            offset = 0.0000 0.1339 -0.9784,
+            offset = 0.0000 0.1339 -1.0052,
             rotate = 0.0000 0.0000 0.0000,
             zoffset = -1.0000,
         }
@@ -381,54 +493,28 @@ module Base
 
         area TruckBed
         {
-            xywh = 0.0000 -0.9321 1.7582 1.4396,
+            xywh = 0.0000 -0.9341 1.7582 1.4396,
         }
 
-        physics box
-        {
-            offset = 0.0000 0.1357 0.0000,
-            extents = 0.7253 0.2637 1.9451,
-            rotate = 0.0000 0.0000 0.0000,
-        }
+        extents = 0.7473 0.5165 1.9780,
+        physicsChassisShape = 0.7473 0.5165 1.9780,
+        centerOfMassOffset = 0.0000 0.2692 -0.0110,
+        shadowExtents = 0.7688 2.0824,
+        shadowOffset = 0.0000 -0.0440,
+		
+		template = Trunk/part/TruckBedOpen,
 
-        physics box
+        part TruckBedOpen
         {
-            offset = 0.0000 0.3297 0.2114,
-            extents = 0.6703 0.2857 0.2637,
-            rotate = -45.0000 0.0000 0.0000,
-        }
-
-        physics box
-        {
-            offset = 0.0000 0.3867 0.0000,
-            extents = 0.6703 0.2747 0.4066,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-
-        physics box
-        {
-            offset = 0.0000 0.2502 0.6484,
-            extents = 0.7253 0.1099 0.5824,
-            rotate = 7.0000 0.0000 0.0000,
-        }
-
-        physics box
-        {
-            offset = 0.0000 0.2477 -0.5659,
-            extents = 0.7253 0.1758 0.7802,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-
-        physics box
-        {
-            offset = 0.0000 0.3736 -0.2285,
-            extents = 0.6703 0.2747 0.1429,
-            rotate = 49.0000 0.0000 0.0000,
+            container
+            {
+                capacity = 100,
+            }
         }
 
         attachment trailer
         {
-            offset = 0.0000 0.1339 -0.9784,
+            offset = 0.0000 0.1339 -1.0052,
             rotate = 0.0000 0.0000 0.0000,
             zoffset = -1.0000,
         }
@@ -439,11 +525,5 @@ module Base
             rotate = 0.0000 0.0000 0.0000,
             zoffset = 1.0000,
         }
-
-        extents = 0.7473 0.5165 1.9780,
-        physicsChassisShape = 0.7473 0.5165 1.9780,
-        centerOfMassOffset = 0.0000 0.2692 -0.0110,
-        shadowExtents = 0.8347 2.0824,
-        shadowOffset = 0.0000 -0.0440,
     }
 }

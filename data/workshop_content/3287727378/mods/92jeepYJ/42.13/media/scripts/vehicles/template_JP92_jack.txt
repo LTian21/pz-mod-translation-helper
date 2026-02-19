@@ -1,0 +1,57 @@
+module Base
+{
+    model 92jeepYJJack
+	{
+		mesh = vehicles/Vehicles_92jeepYJ_Body|wrangler_jack,
+		texture = Vehicles/Vehicles_92jeepYJ_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle JP92Jack
+		{
+		part JP92Jack
+        	{
+
+			model Jack0
+				{
+                		file = 92jeepYJJack,
+				}
+
+			category = Other,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.Jack,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+
+                	time = 800,
+                	skills = Mechanics:1,
+                    door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                    complete = JP92.InstallComplete.Jack,
+            		}
+
+            		table uninstall
+            		{
+
+                    time = 750,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = JP92.UninstallComplete.Jack,
+
+            		}
+
+            		lua
+            		{
+                    create = JP92.Create.Jack,
+                    init = JP92.Init.Jack,
+                    }
+		}
+	}
+}

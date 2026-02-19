@@ -1,0 +1,75 @@
+module Base
+{
+	model 81deloreanDMC12Spare1
+	{
+		mesh = vehicles/Vehicles_81deloreanDMC12_Wheels|dmc_tire,
+		texture = vehicles/Vehicles_81deloreanDMC12_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 81deloreanDMC12Spare2
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.105,
+	}
+
+	template vehicle DMC12SpareTires
+	{
+		part DAMNSpareTire
+        	{
+        	model DMC12Spare0
+			{
+				file = 81deloreanDMC12Spare1,
+				offset = -0.2000 -0.1000 1.4060,
+				rotate = 0.0000 0.0000 -90.0000,
+			}
+
+			model DMC12Spare1
+			{
+				file = 81deloreanDMC12Spare2,
+				offset = -0.2000 -0.1000 1.4060,
+				rotate = 0.0000 0.0000 -90.0000,
+			}
+
+			category = tire,
+			area = TruckBed,
+			specificItem = false,
+			itemType = Base.81deloreanDMC12Tire3;damnCraft.SmallTire1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = DMC12.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = DMC12.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = DMC12.Create.SpareTire,
+				init = DMC12.Init.SpareTire,
+				}
+		}
+	}
+
+}
+
