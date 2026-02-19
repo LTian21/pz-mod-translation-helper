@@ -1,0 +1,139 @@
+module Base
+{
+	model fhq78BRAT_Camp_Body
+	{
+		mesh = vehicles/vehicle_fhq78BRAT_camp|fhq78BRAT_CampCap,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.47,
+	}
+	template vehicle fhq78BRAT_Camp
+    {
+		template! = fhq78BRAT,
+		
+		model
+        {
+            file = fhq78BRAT_Camp_Body,
+            scale = 1.8200,
+            offset = 0.0000 -0.0549 0.0165,
+        }
+		
+		mass = 733,
+        engineLoudness = 90,
+        engineQuality = 80,
+		
+		area TruckBed
+        {
+            xywh = 0.0000 -1.2033 0.7473 0.4066,
+        }
+		
+		template = TrunkDoor,
+		
+		part TrunkDoor
+		{
+			table uninstall
+			{
+				requireUninstalled = WindshieldRear,
+			}
+		}
+		
+        template = Trunk/part/TruckBed,
+		
+		part TruckBed
+        {
+            container
+            {
+                capacity = 115,
+            }
+        }
+		
+		part WindshieldRear
+		{
+			table install
+			{
+				requireInstalled = TrunkDoor,
+			}
+		}
+		
+		template = WindowNoDoor/part/WindowRearLeft,
+        template = WindowNoDoor/part/WindowRearRight,
+		
+		part WindowRear*
+        {
+            table install
+            {
+                recipes = Intermediate Mechanics,
+            }
+            table uninstall
+            {
+                recipes = Intermediate Mechanics,
+            }
+        }
+		
+		physics box
+        {
+            offset = 0.0000 0.1357 0.0000,
+            extents = 0.7253 0.2637 1.9451,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.3297 0.2114,
+            extents = 0.6703 0.2857 0.2637,
+            rotate = -45.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.3867 0.0000,
+            extents = 0.6703 0.2747 0.4066,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.2502 0.6484,
+            extents = 0.7253 0.1099 0.5824,
+            rotate = 7.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.4890 -0.1419,
+            extents = 0.7253 0.1868 0.2198,
+            rotate = -54.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.3956 -0.7762,
+            extents = 0.6703 0.4396 0.1868,
+            rotate = 33.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.4451 -0.4448,
+            extents = 0.6703 0.3736 0.5824,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+	vehicle fhq78BRAT_DL_Camp
+    {
+        template! = fhq78BRAT_Camp,
+		
+        textureMask = Vehicles/vehicle_fhq78BRAT_DL_Camp_mask,
+
+        skin
+        {
+            texture = Vehicles/vehicle_fhq78BRAT_DL_Camp_shell,
+        }
+
+        extents = 0.7473 0.5165 1.9780,
+        physicsChassisShape = 0.7473 0.5165 1.9780,
+        centerOfMassOffset = 0.0000 0.2692 -0.0110,
+		
+        useChassisPhysicsCollision = false,
+    }
+}

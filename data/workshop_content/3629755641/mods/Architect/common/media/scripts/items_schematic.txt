@@ -1,0 +1,60 @@
+module Arc
+{
+    /****************************** OTHERS ******************************/
+    item Blueprint
+    {
+        DisplayCategory = Literature,
+        Weight  =   0.01,
+        ItemType    =   base:Literature,
+        Icon    =   Blueprint,
+        CanBeWrite  =   true,
+        PageToWrite =   10,
+        StaticModel = BlueprintHand,
+        WorldStaticModel = BlueprintModel,
+        Tags = Arc:Blueprint,
+    }
+    
+    model BlueprintModel
+    {
+        mesh = WorldItems/SheetOfPaper,
+        texture = WorldItems/BlueprintTexture,
+        scale = 0.01,
+    }
+    
+    model BlueprintHand
+    {
+        mesh = BlueprintInHand,
+        texture = WorldItems/BlueprintTexture,
+        scale = 0.01,
+    }
+}
+module Base
+{ 
+    /*recipe Create Blueprint                    */
+    /*{                                          */
+    /*    keep [Recipe.GetItemTypes.Write],      */
+    /*    [Recipe.GetItemTypes.LiteratureSource],*/
+    /*                                           */
+    /*    Result:Blueprint,                      */
+    /*    Time:40.0,                             */
+    /*    NeedToBeLearn:false,                   */
+    /*}                                          */
+    
+    craftRecipe CreateBlueprint
+    {
+        timedAction = Making,
+        time        = 40,
+        Tags = InHandCraft,
+
+        inputs
+        {
+            item 1 tags[Write] mode:keep,
+            item 1 tags[Magazine;Hardcover;Picturebook;Newspaper;Softcover],
+        }
+        outputs
+        {
+            item 1 Arc.Blueprint,
+        }
+    }
+    
+}

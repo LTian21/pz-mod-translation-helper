@@ -1,0 +1,61 @@
+module Base
+{
+    craftRecipe fhqMakeRollCage
+    {
+	   timedAction = Making,
+	   tags = AnySurfaceCraft,
+       Time = 260,
+       category = Metalworking,
+       SkillRequired = MetalWelding:4;Mechanics:4,
+       xpAward = MetalWelding:10,
+	   
+	   inputs
+	   {
+			item 3 [Base.BlowTorch],
+			item 1 tags[WeldingMask] mode:keep,
+            item 4 [Base.IronBar],
+			item 6 [Base.MetalPipe],
+        }
+		
+		outputs
+		{
+			item 1 Base.fhqW140RollcageFull,
+		}
+    }
+	
+	craftRecipe fhqMakeRoofRackTypeSport
+    {
+	   timedAction = Making,
+	   tags = AnySurfaceCraft,
+       Time = 260,
+       category = Metalworking,
+       SkillRequired = MetalWelding:5;Mechanics:3,
+       xpAward = MetalWelding:10,
+	   
+	   inputs
+	   {
+			item 5 [Base.BlowTorch],
+			item 1 tags[WeldingMask] mode:keep,
+            item 6 [Base.IronBar],
+			item 6 [Base.MetalPipe],
+			item 4 [Base.SmallSheetMetal],
+        }
+		
+		outputs
+		{
+			item 1 Base.fhqW140RoofRack3,
+		}
+    }
+	
+	fixing Fix Roof Rack Welding
+	{
+	   Require = fhqW140RoofRack3,
+	   GlobalItem = BlowTorch=2,
+	   ConditionModifier = 1.2,
+
+       Fixer = SheetMetal; MetalWelding=3,
+       Fixer = SmallSheetMetal=2; MetalWelding=3,
+	   Fixer = IronBar=2; MetalWelding=3,
+	   Fixer = MetalPipe=2; MetalWelding=3,
+	}
+}

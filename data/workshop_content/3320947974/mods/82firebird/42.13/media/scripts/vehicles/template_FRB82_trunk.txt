@@ -1,0 +1,42 @@
+module Base
+{
+	template vehicle FRB82TrunkCompartment
+	{
+		part FRB82Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+                capacity = 65,
+				test = DAMN.ContainerAccess.TrunkSecondRow,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+            durability = 5,
+			container
+			{
+				test = DAMN.ContainerAccess.TrunkSecondRow,
+			}
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+	}
+}

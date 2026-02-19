@@ -1,0 +1,248 @@
+module Base
+{
+
+	model 81deloreanDMC12FrontWheel
+	{
+		mesh = vehicles/Vehicles_81deloreanDMC12_Wheels|dmc_tire,
+		texture = vehicles/Vehicles_81deloreanDMC12_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.093,
+	}
+
+	model 81deloreanDMC12RearWheel
+	{
+		mesh = vehicles/Vehicles_81deloreanDMC12_Wheels|dmc_tire,
+		texture = vehicles/Vehicles_81deloreanDMC12_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 81deloreanDMC12FrontWheelUFL
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.097,
+	}
+
+    model 81deloreanDMC12FrontWheelUFR
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.097,
+        invertX = TRUE,
+	}
+
+    model 81deloreanDMC12RearWheelURL
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.105,
+	}
+    model 81deloreanDMC12RearWheelURR
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.105,
+        invertX = TRUE,
+	}
+
+	template vehicle DMC12Tires
+	{
+		part TireFrontLeft
+		{
+            model DMC12Tire0FL
+			{
+				file = 81deloreanDMC12FrontWheel,
+			}
+
+			model DMC12Tire1FL
+			{
+				file = 81deloreanDMC12FrontWheelUFL,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = DMC12.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = DMC12.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = DMC12.Create.TireFrontLeft,
+				init = DMC12.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model DMC12Tire0FR
+			{
+				file = 81deloreanDMC12FrontWheel,
+			}
+
+			model DMC12Tire1FR
+			{
+				file = 81deloreanDMC12FrontWheelUFR,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = DMC12.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = DMC12.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = DMC12.Create.TireFrontRight,
+				init = DMC12.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model DMC12Tire0RL
+			{
+				file = 81deloreanDMC12RearWheel,
+			}
+
+			model DMC12Tire1RL
+			{
+				file = 81deloreanDMC12RearWheelURL,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = DMC12.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+			table uninstall
+			{
+				complete = DMC12.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = DMC12.Create.TireRearLeft,
+				init = DMC12.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model DMC12Tire0RR
+			{
+				file = 81deloreanDMC12RearWheel,
+			}
+
+			model DMC12Tire1RR
+			{
+				file = 81deloreanDMC12RearWheelURL,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = DMC12.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = DMC12.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = DMC12.Create.TireRearRight,
+				init = DMC12.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+            specificItem = false,
+			itemType = Base.81deloreanDMC12Tire3;damnCraft.SmallTire1,
+            durability = 2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+			}
+
+		}
+	}
+}
+

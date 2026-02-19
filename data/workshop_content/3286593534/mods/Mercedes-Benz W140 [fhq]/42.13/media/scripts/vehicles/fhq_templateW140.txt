@@ -1,0 +1,1119 @@
+module Base
+{
+	template vehicle fhqW140Muffler
+	{
+		template = Muffler,
+		
+		part Muffler
+		{
+			setAllModelsVisible = false,
+			
+			table install
+			{
+				skills = Mechanics:5,
+				recipes = Advanced Mechanics,
+				
+				complete = ATATuning.InstallComplete.DefaultModel,
+			}
+
+			table uninstall
+			{
+				skills = Mechanics:5,
+				recipes = Advanced Mechanics,
+				
+				complete = ATATuning.UninstallComplete.DefaultModel,
+			}
+
+			model Default
+			{
+				file = fhqW140_Exhaust,
+			}
+			
+			model Performance
+			{
+				file = fhqW140_Exhaust_Sport,
+			}
+			
+			table ataModels
+			{
+				ModernCarMuffler3 = Performance,
+				NormalCarMuffler3 = Default,
+				OldCarMuffler3 = Default,
+			}
+
+			lua
+			{
+				create = ATATuning.Create.DefaultModel,
+				init = ATATuning.Init.DefaultModel,
+				update = Vehicles.Update.Muffler,
+			}
+		}
+	}
+	template vehicle fhqW140Wheels
+	{
+		template = Tire,
+		
+		part TireFrontLeft
+		{
+			model ValuTire
+			{
+				file = fhqW140_Wheel_Steelie_L,
+			}
+
+			model StandardTire
+			{
+				file = fhqW140_WheelL,
+			}
+
+			model SportTire
+			{
+				file = fhqW140_Wheel_Sport_L,
+			}
+
+			table ATA2ItemToModel
+			{
+				OldTire3 = ValuTire,
+				NormalTire3 = StandardTire,
+				ModernTire3 = SportTire,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model ValuTire
+			{
+				file = fhqW140_Wheel_Steelie_L,
+			}
+
+			model StandardTire
+			{
+				file = fhqW140_WheelL,
+			}
+
+			model SportTire
+			{
+				file = fhqW140_Wheel_Sport_L,
+			}
+
+			table ATA2ItemToModel
+			{
+				OldTire3 = ValuTire,
+				NormalTire3 = StandardTire,
+				ModernTire3 = SportTire,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model ValuTire
+			{
+				file = fhqW140_Wheel_Steelie_R,
+			}
+
+			model StandardTire
+			{
+				file = fhqW140_WheelR,
+			}
+
+			model SportTire
+			{
+				file = fhqW140_Wheel_Sport_R,
+			}
+
+			table ATA2ItemToModel
+			{
+				OldTire3 = ValuTire,
+				NormalTire3 = StandardTire,
+				ModernTire3 = SportTire,
+			}
+		}
+
+		part TireRearRight
+		{
+			model ValuTire
+			{
+				file = fhqW140_Wheel_Steelie_R,
+			}
+
+			model StandardTire
+			{
+				file = fhqW140_WheelR,
+			}
+
+			model SportTire
+			{
+				file = fhqW140_Wheel_Sport_R,
+			}
+
+			table ATA2ItemToModel
+			{
+				OldTire3 = ValuTire,
+				NormalTire3 = StandardTire,
+				ModernTire3 = SportTire,
+			}
+		}
+
+		part Tire*
+		{
+			setAllModelsVisible = false,
+
+			table install
+			{
+				complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+			}
+
+			table uninstall
+			{
+				complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = ATATuning2.Init.TireNotAllModelsVisible,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+	}
+	/****************************************************** Addon parts Template ******************************************************/
+	
+	template vehicle fhqW140Addons
+	{
+		part fhqBumperFront
+		{
+			area = Engine,
+			setAllModelsVisible = false,
+			category = nodisplay,
+			specificItem = true,
+			itemType = Base.fhqW140FBumpStock,
+			mechanicRequireKey = false,
+
+			table install
+			{
+				test = ATATuning2.InstallTest.Tuning,
+				complete = ATATuning2.InstallComplete.Tuning,
+			}
+
+			table uninstall
+			{
+				test = ATATuning2.UninstallTest.Tuning,
+				complete = ATATuning2.UninstallComplete.Tuning,
+			}
+
+			model Stock
+			{
+				file = fhqW140_BumperF,
+			}
+
+			model Perf
+			{
+				file = fhqW140_BumperF_AMG,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.Tuning,
+				init = ATATuning2.Init.Tuning,
+			}
+		}
+		
+		part fhqBumperRear
+		{
+			area = TruckBed,
+			setAllModelsVisible = false,
+			category = nodisplay,
+			specificItem = true,
+			itemType = Base.fhqW140RBumpStock,
+			mechanicRequireKey = false,
+			itemType = Base.fhqW140RBumpStock,
+
+			model Stock
+			{
+				file = fhqW140_BumperR,
+			}
+
+			model Perf
+			{
+				file = fhqW140_BumperR_AMG,
+			}
+
+			table install
+			{
+				test = ATATuning2.InstallTest.Tuning,
+				complete = ATATuning2.InstallComplete.Tuning,
+			}
+
+			table uninstall
+			{
+				test = ATATuning2.UninstallTest.Tuning,
+				complete = ATATuning2.UninstallComplete.Tuning,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.Tuning,
+				init = ATATuning2.Init.Tuning,
+			}
+		}
+		
+		part fhqSideskirts
+		{
+			area = SeatFrontLeft,
+			setAllModelsVisible = false,
+			category = nodisplay,
+			specificItem = false,
+			itemType = Base.MetalBar,
+			mechanicRequireKey = false,
+
+			model Perf
+			{
+				file = fhqW140_Sideskirts_AMG,
+			}
+
+			table install
+			{
+				test = ATATuning2.InstallTest.Tuning,
+				complete = ATATuning2.InstallComplete.Tuning,
+			}
+
+			table uninstall
+			{
+				test = ATATuning2.UninstallTest.Tuning,
+				complete = ATATuning2.UninstallComplete.Tuning,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.Tuning,
+				init = ATATuning2.Init.Tuning,
+			}
+		}
+		
+		part fhqSpoiler
+		{
+			parent = TrunkDoor,
+			area = TruckBed,
+			setAllModelsVisible = false,
+			category = nodisplay,
+			specificItem = true,
+			itemType = Base.fhqW140SpoilerSmall,
+			mechanicRequireKey = false,
+
+			table install
+			{
+				test = ATATuning2.InstallTest.Tuning,
+				complete = ATATuning2.InstallComplete.Tuning,
+			}
+
+			table uninstall
+			{
+				test = ATATuning2.UninstallTest.Tuning,
+				complete = ATATuning2.UninstallComplete.Tuning,
+			}
+
+			model SpoilerLip
+			{
+				file = fhqW140_WingR_Lip,
+			}
+			
+			model SpoilerSmall
+			{
+				file = fhqW140_WingR_Small,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.Tuning,
+				init = ATATuning2.Init.Tuning,
+			}
+		}
+		
+		part fhqLicPlateHolderF
+		{
+			area = Engine,
+			setAllModelsVisible = false,
+			category = nodisplay,
+			itemType = Base.fhqW140LicensePlateHolderF,
+			specificItem = false,
+			mechanicRequireKey = false,
+
+			model US
+			{
+				file = fhqW140_FPlateHolder,
+			}
+
+			model EU
+			{
+				file = fhqW140_FPlateHolderEU,
+			}
+
+			table install
+			{
+				test = ATATuning2.InstallTest.Tuning,
+				complete = ATATuning2.InstallComplete.Tuning,
+			}
+
+			table uninstall
+			{
+				test = ATATuning2.UninstallTest.Tuning,
+				complete = ATATuning2.UninstallComplete.Tuning,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.Tuning,
+				init = ATATuning2.Init.Tuning,
+			}
+		}
+		
+		part fhqLicPlateFront
+		{
+			area = Engine,
+			setAllModelsVisible = false,
+			category = nodisplay,
+			specificItem = false,
+			mechanicRequireKey = false,
+			itemType = Base.fhqW140LicensePlate,
+
+			model US
+			{
+				file = fhqW140_FPlate,
+			}
+
+			model Vanity
+			{
+				file = fhqW140_FPlateVanity,
+			}
+
+			model EU
+			{
+				file = fhqW140_FPlateEU,
+			}
+
+			table install
+			{
+				test = ATATuning2.InstallTest.Tuning,
+				complete = ATATuning2.InstallComplete.Tuning,
+			}
+
+			table uninstall
+			{
+				test = ATATuning2.UninstallTest.Tuning,
+				complete = ATATuning2.UninstallComplete.Tuning,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.Tuning,
+				init = ATATuning2.Init.Tuning,
+			}
+		}
+		
+		part fhqLicPlateRear
+		{
+			area = TruckBed,
+			setAllModelsVisible = false,
+			category = nodisplay,
+			specificItem = false,
+			mechanicRequireKey = false,
+			itemType = Base.fhqW140LicensePlate,
+			parent = TrunkDoor,
+
+			model US
+			{
+				file = fhqW140_RPlate,
+			}
+
+			model Vanity
+			{
+				file = fhqW140_RPlateVanity,
+			}
+
+			model EU
+			{
+				file = fhqW140_RPlateEU,
+			}
+
+			table install
+			{
+				test = ATATuning2.InstallTest.Tuning,
+				complete = ATATuning2.InstallComplete.Tuning,
+			}
+
+			table uninstall
+			{
+				test = ATATuning2.UninstallTest.Tuning,
+				complete = ATATuning2.UninstallComplete.Tuning,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.Tuning,
+				init = ATATuning2.Init.Tuning,
+			}
+		}
+		
+		part fhqSpareTire
+		{
+			area = TruckBed,
+			category = bodywork,
+			itemType = Base.OldTire;Base.NormalTire;Base.ModernTire,
+			mechanicRequireKey = false,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 200,
+				test = Vehicles.InstallTest.Default,
+			}
+
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 200,
+				test = Vehicles.UninstallTest.Default,
+			}
+
+			model Default
+			{
+				file = fhqW140_Wheel_Steelie_L,
+				offset = 0.0000 0.1653 -1.0589,
+				rotate = 0.0000 0.0000 270.0000,
+			}
+		}
+		
+		part fhqCenterConsole
+		{
+			area = SeatFrontRight,
+			itemType = Base.fhqW140CenterConsole,
+			mechanicRequireKey = true,
+			specificItem = true,
+			category = nodisplay,
+
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.GloveBox,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part fhqCenterContainerRear
+		{
+			area = SeatRearRight,
+			itemType = Base.fhqW140CenterConsoleRear,
+			mechanicRequireKey = true,
+			specificItem = true,
+			category = nodisplay,
+
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.fhqRearSeat,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part fhqRearCompartmentFirstAid
+		{
+			area = TruckBed,
+			category = nodisplay,
+			itemType = Base.fhqW140FirstAidCompartment,
+			mechanicRequireKey = true,
+			specificItem = true,
+
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.fhqRearSeat,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part fhqTrunkCompartmentTools
+		{
+			area = TruckBed,
+			category = nodisplay,
+			itemType = Base.fhqW140ToolboxCompartment,
+			mechanicRequireKey = true,
+			specificItem = true,
+
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+		
+		part fhqHoodBadge
+		{
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.fhqW140CarBadge,
+			mechanicRequireKey = false,
+			parent = EngineDoor,
+
+			table install
+			{
+				requireInstalled = EngineDoor,
+
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 80,
+				test = Vehicles.InstallTest.Default,
+			}
+
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 200,
+				test = Vehicles.UninstallTest.Default,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+
+			model Default
+			{
+				file = fhqW140_Badge,
+			}
+		}
+		
+		part fhqTrunkBadge
+		{
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.fhqW140CarBadge,
+			mechanicRequireKey = false,
+			parent = TrunkDoor,
+
+			table install
+			{
+				requireInstalled = TrunkDoor,
+
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 80,
+				test = Vehicles.InstallTest.Default,
+			}
+
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 200,
+				test = Vehicles.UninstallTest.Default,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+
+			model Default
+			{
+				file = fhqW140_BadgeR_300SE,
+			}
+		}
+		
+		part fhqLightWiper
+		{
+			area = Engine,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.fhqW140CarSmallWiper,
+			mechanicRequireKey = false,
+
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 50,
+				test = Vehicles.InstallTest.Default,
+			}
+
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+
+				time = 50,
+				test = Vehicles.UninstallTest.Default,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+
+			model Default
+			{
+				file = fhqW140_LightWipers,
+			}
+		}
+		
+		part fhqSteeringWheel
+		{
+			area = SeatFrontLeft,
+			category = nodisplay,
+			setAllModelsVisible = false,
+			specificItem = false,
+			itemType = Base.fhqW140SteeringWheelStock,
+			mechanicRequireKey = true,
+
+			table install
+			{
+				test = ATATuning2.InstallTest.Tuning,
+				complete = ATATuning2.InstallComplete.Tuning,
+			}
+
+			table uninstall
+			{
+				test = ATATuning2.UninstallTest.Tuning,
+				complete = ATATuning2.UninstallComplete.Tuning,
+			}
+
+			model Stock
+			{
+				file = fhqW140_SteeringWheel,
+			}
+
+			model Perf
+			{
+				file = fhqW140_SteeringWheelAMG,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.Tuning,
+				init = ATATuning2.Init.Tuning,
+			}
+		}
+		
+		part fhqRollCage
+		{
+			area = SeatFrontLeft,
+			category = nodisplay,
+			setAllModelsVisible = false,
+			specificItem = false,
+			itemType = Base.MetalBar,
+			mechanicRequireKey = true,
+
+			table install
+			{
+				test = ATATuning2.InstallTest.Tuning,
+				complete = ATATuning2.InstallComplete.Tuning,
+			}
+
+			table uninstall
+			{
+				test = ATATuning2.UninstallTest.Tuning,
+				complete = ATATuning2.UninstallComplete.Tuning,
+			}
+
+			model Stock
+			{
+				file = fhqW140_RollCage,
+			}
+
+			lua
+			{
+				create = ATATuning2.Create.Tuning,
+				init = ATATuning2.Init.Tuning,
+			}
+		}
+		
+		template = ATA2InteractiveTrunk/part/ATA2InteractiveTrunkRoofRack,
+
+		part ATA2InteractiveTrunkRoofRack
+		{
+			setAllModelsVisible = false,
+			itemType = Base.fhqW140RoofRack,
+			mechanicRequireKey = false,
+			specificItem = true,
+			area = RoofRack,
+
+			model Roofrack
+			{
+				file = fhqW140_RoofRack,
+			}
+
+			model Tire
+			{
+				file = fhqW140_RoofRackSpare,
+			}
+
+			model GasCan
+			{
+				file = fhqW140_RoofGasCan,
+				/**offset = 0.1693 0.6393 -0.1429,
+				scale = 0.8,**/
+			}
+
+			model BackPack
+			{
+				file = fhqW140_RoofBigBag,
+				/**offset = -0.1429 0.6574 -0.1208,
+				rotate = 0.0000 135.0000 -35.0000,
+				scale = 0.8,**/
+			}
+
+			model DuffelBag
+			{
+				file = fhqW140_RoofDuffelBag,
+				/**offset = -0.0405 0.6374 -0.1868,
+				rotate = 0.0000 126.0000 0.0000,
+				scale = 0.8,**/
+			}
+
+			model Jack
+			{
+				file = fhqW140_RoofJack,
+				/**offset = 0.1393 0.6393 -0.4129,
+				rotate = 0.0000 90.0000 0.0000,
+				scale = 0.8,**/
+			}
+			
+			model TirePump
+			{
+				file = fhqW140_RoofTirePump,
+				/**offset = 0.1393 0.6393 -0.4129,
+				rotate = 0.0000 90.0000 0.0000,
+				scale = 0.8,**/
+			}
+			
+			model LugWrench
+			{
+				file = fhqW140_RoofLugWrench,
+				/**offset = 0.1393 0.6393 -0.4129,
+				rotate = 0.0000 90.0000 0.0000,
+				scale = 0.8,**/
+			}
+		}
+		
+		template = ATAHeadlights,
+
+		part ATAHeadlightsPopUP
+		{
+			model Default
+			{
+				file = fhqW140_Sunroof,
+			}
+
+			anim Open
+			{
+				anim = SunroofOpening,
+				reverse = FALSE,
+				rate = 1.0,
+			}
+
+			anim Close
+			{
+				anim = SunroofOpening,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Opened
+			{
+				anim = SunroofOpening,
+				animate = FALSE,
+				reverse = TRUE,
+				rate = 1.0,
+			}
+
+			anim Closed
+			{
+				anim = SunroofOpening,
+				animate = FALSE,
+				reverse = FALSE,
+				rate = 1.0,
+			}
+		}
+		
+		template = ATA2RoofLights/part/ATA2RoofLightFront,
+		
+		part ATA2RoofLightFront
+		{
+			model RoofLightBase
+			{
+				file = fhqW140_RoofLights,
+			}
+			
+			model RoofLightBulbs
+			{
+				file = fhqW140_RoofLightsBulbs,
+			}
+		}
+		
+		template = ATA2RoofLights/part/ATA2RoofLampFront,
+	
+	}
+	/****************************************************** ATA Armor Template ******************************************************/
+	
+	template vehicle fhqW140Armor
+	{
+		template = ATA2Protection/part/ATA2ProtectionWindshield,
+
+		part ATA2ProtectionWindshield
+		{
+			model Default
+			{
+				file = fhqW140_Armor_Windshield,
+			}
+		}
+
+		template = ATA2Protection/part/ATA2ProtectionWindshieldRear,
+
+		part ATA2ProtectionWindshieldRear
+		{
+			model Default
+			{
+				file = fhqW140_Armor_WindshieldR,
+			}
+		}
+
+		template = ATA2Protection/part/ATA2ProtectionWindowFrontLeft,
+
+		part ATA2ProtectionWindowFrontLeft
+		{
+			parent = DoorFrontLeft,
+
+			model Default
+			{
+				file = fhqW140_Armor_WindowFL,
+			}
+		}
+
+		template = ATA2Protection/part/ATA2ProtectionWindowFrontRight,
+
+		part ATA2ProtectionWindowFrontRight
+		{
+			parent = DoorFrontRight,
+
+			model Default
+			{
+				file = fhqW140_Armor_WindowFR,
+			}
+		}
+
+		template = ATA2Protection/part/ATA2ProtectionWindowRearLeft,
+
+		part ATA2ProtectionWindowRearLeft
+		{
+			parent = DoorRearLeft,
+
+			model Default
+			{
+				file = fhqW140_Armor_WindowRL,
+			}
+		}
+
+		template = ATA2Protection/part/ATA2ProtectionWindowRearRight,
+
+		part ATA2ProtectionWindowRearRight
+		{
+			parent = DoorRearRight,
+
+			model Default
+			{
+				file = fhqW140_Armor_WindowRR,
+			}
+		}
+
+		template = ATA2Protection/part/ATA2ProtectionHood,
+
+		part ATA2ProtectionHood
+		{
+			model Default
+			{
+				file = fhqW140_Armor_Front_Light,
+			}
+		}
+
+		template = ATA2Bullbars/part/ATA2Bullbar,
+
+		part ATA2Bullbar
+		{
+			model BullbarMed
+			{
+				file = fhqW140_BullbarMed,
+			}
+
+			model BullbarMedLights
+			{
+				file = fhqW140_BullbarMedLights,
+			}
+
+			model BullbarLight
+			{
+				file = fhqW140_Armor_Front_Light,
+			}
+		}
+	}
+	
+/****************************************************** Physics Col Template ******************************************************/
+		
+	template vehicle fhqW140_Col
+	{
+		useChassisPhysicsCollision = false,
+		
+		physics box
+		{
+			offset = 0.0000 0.1868 0.0000,
+			extents = 0.8791 0.3626 2.3736,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3022 -0.2252,
+			extents = 0.8791 0.5934 0.6484,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3791 0.2865,
+			extents = 0.8791 0.1758 0.5495,
+			rotate = 32.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3765 -0.7863,
+			extents = 0.8791 0.6264 0.1868,
+			rotate = 63.0000 0.0000 0.0000,
+		}
+	}
+	
+	template vehicle fhqV140_Col
+	{
+		useChassisPhysicsCollision = false,
+		
+		physics box
+		{
+			offset = 0.0000 0.1868 0.0000,
+			extents = 0.8791 0.3626 2.3736,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3022 -0.2252,
+			extents = 0.8791 0.5934 0.6484,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3791 0.2865,
+			extents = 0.8791 0.1758 0.5495,
+			rotate = 32.0000 0.0000 0.0000,
+		}
+
+		physics box
+		{
+			offset = 0.0000 0.3765 -0.7863,
+			extents = 0.8791 0.6264 0.1868,
+			rotate = 63.0000 0.0000 0.0000,
+		}
+	}
+}
+

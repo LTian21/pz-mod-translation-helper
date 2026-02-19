@@ -1,0 +1,44 @@
+module Base
+{
+	template vehicle STAGEASpareTires
+	{
+		part DAMNSpareTire
+        	{
+
+			category = tire,
+			area = TruckBed,
+            specificItem = false,
+			itemType = Base.98stageaTire3;damnCraft.SmallTire1,
+			mechanicRequireKey = false,
+            durability = 3,
+
+			table install
+			{
+
+                	time = 150,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = STAGEA.InstallComplete.SpareTire,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = STAGEA.UninstallComplete.SpareTire,
+
+            		}
+
+	            lua
+	            {
+				create = STAGEA.Create.SpareTire,
+				init = STAGEA.Init.SpareTire,
+				}
+		}
+	}
+}
