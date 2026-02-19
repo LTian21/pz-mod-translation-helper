@@ -1870,7 +1870,6 @@ return {
         ["ItemName_Base.Clip_556Clip"] = "5.56x45mm\229\188\185\229\140\163 (30\229\143\145)",
         ["ItemName_Base.Clip_9mmClip"] = "9mm\229\188\185\229\140\163 (15\229\143\145)",
         ["ItemName_Base.Clip_9x39Clip"] = "9x39mm\229\188\185\229\140\163 (15\229\143\145)",
-        ["ItemName_Base.Clip_Pistol"] = "\230\137\139\230\158\170\229\188\185\229\140\163",
         ["ItemName_Base.DoubleBarrelShotgun"] = "\229\143\140\231\174\161\233\156\176\229\188\185\230\158\170",
         ["ItemName_Base.DoubleBarrelShotgunSawnoff"] = "\231\159\173\231\174\161\229\143\140\231\174\161\233\156\176\229\188\185\230\158\170",
         ["ItemName_Base.GunLight"] = "\230\158\170\231\129\175",
@@ -2460,6 +2459,7 @@ return {
     },
     ["\\MHFirearms"] = {
         ["ItemName_Base.FAMAS"] = "FAMAS",
+        ["ItemName_Base.FedorovAvtomat"] = "Fedorov Avtomat",
         ["ItemName_Base.MP18"] = "MP18",
         ["ItemName_Base.MP40"] = "MP40",
         ["ItemName_Base.MP9"] = "MP9",
@@ -2468,6 +2468,7 @@ return {
     },
     ["\\MHFirearmsBeta"] = {
         ["ItemName_Base.FAMAS"] = "FAMAS",
+        ["ItemName_Base.FedorovAvtomat"] = "Fedorov Avtomat",
         ["ItemName_Base.MP18"] = "MP18",
         ["ItemName_Base.MP40"] = "MP40",
         ["ItemName_Base.MP9"] = "MP9",
