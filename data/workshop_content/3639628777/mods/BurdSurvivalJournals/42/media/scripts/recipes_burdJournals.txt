@@ -15,7 +15,8 @@ module Base
     /*   - Adhesive + Any Cover: 10x binding + tape/glue             */
     /*     No skill requirement, uses more materials                 */
     /*                                                               */
-    /*   RESTORE (Worn/Bloody -> Clean Filled):                      */
+    /*   RESTORE (Worn/Bloody/Cursed -> Blank Personal Journal):      */
+    /*   Discards loot contents; produces a fresh blank journal.     */
     /*   - Thread + Any Cover: 1x binding + thread + needle          */
     /*     Requires Tailoring 1, awards 3 Tailoring XP               */
     /*   - Adhesive + Any Cover: 5x binding + tape/glue              */
@@ -97,7 +98,7 @@ module Base
         {
             item 1 [Base.Journal;Base.Notebook],
             item 10 tags[base:binding],
-            item 1 tags[base:tape;base:glue],
+            item 1 [Base.DuctTape;Base.Scotchtape;Base.Glue],
         }
         outputs
         {
@@ -111,6 +112,7 @@ module Base
     /* ============================================================ */
 
     /* Restore Journal: Thread + Any Cover */
+    /* Converts a Worn, Bloody, or Cursed loot journal into a blank personal journal, discarding loot contents */
     craftRecipe RestoreJournal_Thread_AnyCover
     {
         timedAction = Making,
@@ -119,17 +121,17 @@ module Base
         category = Miscellaneous,
         SkillRequired = Tailoring:1,
         xpAward = Tailoring:3,
-        OnCreate = BurdJournals.OnCreateFilledCleanFromWornOrBloody,
+        OnCreate = BurdJournals.OnCreateBlankClean,
         inputs
         {
-            item 1 [BurdJournals.FilledSurvivalJournal_Worn;BurdJournals.FilledSurvivalJournal_Bloody],
+            item 1 [BurdJournals.FilledSurvivalJournal_Worn;BurdJournals.FilledSurvivalJournal_Bloody;BurdJournals.CursedJournal],
             item 1 tags[base:binding],
             item 1 tags[base:thread],
             item 1 tags[base:sewingneedle] mode:keep flags[MayDegradeLight],
         }
         outputs
         {
-            item 1 BurdJournals.FilledSurvivalJournal,
+            item 1 BurdJournals.BlankSurvivalJournal,
         }
     }
 
@@ -138,22 +140,23 @@ module Base
     /* ============================================================ */
 
     /* Restore Journal: Adhesive + Any Cover */
+    /* Converts a Worn, Bloody, or Cursed loot journal into a blank personal journal, discarding loot contents */
     craftRecipe RestoreJournal_Adhesive_AnyCover
     {
         timedAction = Making,
         time = 45,
         Tags = AnySurfaceCraft,
         category = Miscellaneous,
-        OnCreate = BurdJournals.OnCreateFilledCleanFromWornOrBloody,
+        OnCreate = BurdJournals.OnCreateBlankClean,
         inputs
         {
-            item 1 [BurdJournals.FilledSurvivalJournal_Worn;BurdJournals.FilledSurvivalJournal_Bloody],
+            item 1 [BurdJournals.FilledSurvivalJournal_Worn;BurdJournals.FilledSurvivalJournal_Bloody;BurdJournals.CursedJournal],
             item 5 tags[base:binding],
-            item 1 tags[base:tape;base:glue],
+            item 1 [Base.DuctTape;Base.Scotchtape;Base.Glue],
         }
         outputs
         {
-            item 1 BurdJournals.FilledSurvivalJournal,
+            item 1 BurdJournals.BlankSurvivalJournal,
         }
     }
 }
