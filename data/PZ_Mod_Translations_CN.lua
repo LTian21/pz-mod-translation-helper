@@ -1860,6 +1860,7 @@ return {
     },
     ["\\GaelGunStore_B42"] = {
         ["ItemName_Base.545x39Clip30"] = "5.45x39mm\229\188\185\229\140\163 (30\229\143\145)",
+        ["ItemName_Base.792x57Clip40"] = "7.92x57mm\229\188\185\229\140\163",
         ["ItemName_Base.ChokeTubeFull"] = "\229\133\168\231\188\169\229\150\137\231\174\161",
         ["ItemName_Base.ChokeTubeImproved"] = "\230\148\185\232\137\175\229\150\137\231\174\161",
         ["ItemName_Base.Clip_22LRClip"] = ".22 LR\229\188\185\229\140\163 (15\229\143\145)",
