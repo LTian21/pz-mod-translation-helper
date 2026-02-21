@@ -1,0 +1,48 @@
+module Base
+{
+    entity Wooden_Windows
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Wooden_Windows,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            needWindowFrame = true,
+            OnCreate = BuildRecipeCode.windowGlass.OnCreate,
+            face W
+            {
+                layer
+                {
+                    row = fixtures_windows_01_0,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = fixtures_windows_01_1,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildWoodenStructureMedium,
+            time = 50,
+            SkillRequired = Woodwork:5,
+            xpAward = Woodwork:15,
+            category = Windows,
+            Tags = Carpentry;Furniture,
+            Tooltip = Tooltip_craft_WindowDesc,
+            inputs
+            {
+                item 4 [Base.GlassPanel],
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 2 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

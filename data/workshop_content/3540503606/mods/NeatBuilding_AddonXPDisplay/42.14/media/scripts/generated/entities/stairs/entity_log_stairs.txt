@@ -1,0 +1,52 @@
+module Base
+{
+    entity Log_Stairs
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Log_Stairs,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            OnCreate = BuildRecipeCode.stairs.OnCreate,
+            OnIsValid = BuildRecipeCode.stairs.OnIsValid,
+            health = 150,
+            skillBaseHealth = 50,
+            face S
+            {
+                layer
+                {
+                    row = crafted_02_104 crafted_02_105 crafted_02_106,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = crafted_02_98,
+                    row = crafted_02_97,
+                    row = crafted_02_96,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildWallHammer,
+            time = 200,
+            SkillRequired = Woodwork:3,
+            xpAward = Woodwork:30,
+            category = Stairs,
+            Tags = Carpentry,
+            Tooltip = Tooltip_craft_stairsDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[MayDegradeVeryLight],
+                item 12 [Base.Log],
+                item 1 tags[base:choptree;base:saw;base:crudesaw] mode:keep flags[Prop1;MayDegradeLight;IsNotDull],
+                item 12 [Base.RippedSheets;Base.RippedSheetsDirty;Base.Twine;Base.Rope;Base.SheetRope] flags[DontReplace],
+            }
+        }
+    }
+}

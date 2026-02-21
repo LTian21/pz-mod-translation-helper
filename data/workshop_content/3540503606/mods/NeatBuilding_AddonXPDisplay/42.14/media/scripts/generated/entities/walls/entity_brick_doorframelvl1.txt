@@ -1,0 +1,49 @@
+module Base
+{
+    entity BrickDoorFrameLvl1
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_BrickDoorFrameLvl1,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            skillBaseHealth = 300,
+            isThumpable = false,
+            OnIsValid = BuildRecipeCode.doorFrame.OnIsValid,
+            face W
+            {
+                layer
+                {
+                    row = walls_exterior_house_01_30,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_exterior_house_01_31,
+                }
+            }
+            corner = walls_exterior_house_01_7,
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = brickWallLvl1Test,
+            timedAction = BuildWallHammer,
+            time = 200,
+            category = Doors,
+            SkillRequired = Masonry:2,
+            xpAward = Masonry:20,
+            Tooltip = Tooltip_craft_doorFrameDesc,
+            inputs
+            {
+                item 1 tags[base:masonstrowel] mode:keep flags[Prop1;MayDegradeLight],
+                item 2 tags[base:concrete] flags[DontRecordInput],
+                item 4 [Base.ClayBrick],
+            }
+        }
+    }
+}
