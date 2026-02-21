@@ -1,0 +1,49 @@
+module Base
+{
+    entity WoodenWindowFrameLvl2
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Wood_WindowframeLvl2,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            health = 550,
+            skillBaseHealth = 20,
+            previousStage = WoodenWallFrame;MetalWallFrame;WoodenWindowFrameLvl1,
+            face W
+            {
+                layer
+                {
+                    row = walls_exterior_wooden_01_48,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_exterior_wooden_01_49,
+                }
+            }
+            corner = walls_exterior_wooden_01_27,
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = woodenWallLvl2Test,
+            timedAction = BuildWallHammer,
+            time = 200,
+            category = Windows,
+            SkillRequired = Woodwork:4,
+            xpAward = Woodwork:40,
+            Tooltip = Tooltip_craft_NeedsWallframeDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 2 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}

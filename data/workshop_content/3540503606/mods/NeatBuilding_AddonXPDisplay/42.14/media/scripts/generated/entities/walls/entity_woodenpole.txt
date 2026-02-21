@@ -1,0 +1,39 @@
+module Base
+{
+    entity WoodenPole
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Wood_Pole,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            health = 50,
+            isPole = true,
+            face SINGLE
+            {
+                layer
+                {
+                    row = walls_exterior_wooden_01_27,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildWallHammer,
+            time = 200,
+            category = Walls,
+            SkillRequired = Woodwork:2,
+            xpAward = Woodwork:20,
+            Tooltip = Tooltip_craft_woodenPoleDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 1 [Base.Plank],
+                item 1 [Base.Nails],
+            }
+        }
+    }
+}

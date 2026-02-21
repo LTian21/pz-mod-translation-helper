@@ -1,0 +1,63 @@
+module Base
+{
+    entity WoodenDoorLvl3
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Wood_DoorLvl3,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            skillBaseHealth = 300,
+            BreakSound = BreakDoor,
+            face W
+            {
+                layer
+                {
+                    row = carpentry_01_56,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = carpentry_01_57,
+                }
+            }
+            face W_OPEN
+            {
+                layer
+                {
+                    row = carpentry_01_58,
+                }
+            }
+            face N_OPEN
+            {
+                layer
+                {
+                    row = carpentry_01_59,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = woodenDoorLvl3Test,
+            timedAction = BuildWallHammer,
+            time = 200,
+            category = Doors,
+            SkillRequired = Woodwork:7,
+            xpAward = Woodwork:70,
+            Tooltip = Tooltip_craft_woodenDoorDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+                item 2 [Base.Hinge],
+                item 1 [Base.Doorknob],
+            }
+        }
+    }
+}

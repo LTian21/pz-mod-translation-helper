@@ -1,0 +1,50 @@
+module Base
+{
+    entity BrickWallLvl2
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_BrickWallLvl2,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            LogicClass = WoodenWall,
+            health = 800,
+            skillBaseHealth = 70,
+            OnCreate = BuildRecipeCode.canBePlastered.OnCreate,
+            face W
+            {
+                layer
+                {
+                    row = walls_exterior_house_01_4,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_exterior_house_01_5,
+                }
+            }
+            corner = walls_exterior_house_01_7,
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = brickWallLvl2Test,
+            timedAction = BuildWallNoTool,
+            time = 200,
+            category = Walls,
+            SkillRequired = Masonry:5,
+            xpAward = Masonry:50,
+            Tooltip = Tooltip_craft_brickWallDesc,
+            inputs
+            {
+                item 1 tags[base:masonstrowel] mode:keep flags[Prop1;MayDegradeLight],
+                item 2 tags[base:concrete] flags[DontRecordInput],
+                item 4 [Base.ClayBrick],
+            }
+        }
+    }
+}

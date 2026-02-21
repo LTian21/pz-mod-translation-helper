@@ -1,0 +1,61 @@
+module Base
+{
+    entity Wood_Shelves_Lvl2
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Wood_Shelves_Lvl2,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            needToBeAgainstWall = true,
+            face W
+            {
+                layer
+                {
+                    row = carpentry_02_70,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = carpentry_02_71,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = carpentry_02_68,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = carpentry_02_69,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = woodenShelvesLvl2Test,
+            timedAction = BuildWoodenStructureSmall,
+            time = 50,
+            SkillRequired = Woodwork:5,
+            xpAward = Woodwork:50,
+            category = Furniture,
+            Tags = Carpentry;Furniture,
+            Tooltip = Tooltip_craft_NeedsWallDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 1 [Base.Plank],
+                item 2 [Base.Nails],
+            }
+        }
+    }
+}

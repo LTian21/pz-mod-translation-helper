@@ -1,0 +1,48 @@
+module Base
+{
+    entity StoneWindowFrame
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_StoneWindowFrame,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            skillBaseHealth = 300,
+            bonusHealth = 400,
+            face W
+            {
+                layer
+                {
+                    row = walls_logs_104,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_logs_105,
+                }
+            }
+            corner = walls_logs_99,
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildWallNoTool,
+            time = 200,
+            category = Windows,
+            Tags = Masonry,
+            SkillRequired = Masonry:2,
+            xpAward = Masonry:20,
+            Tooltip = Tooltip_craft_woodenFrameDesc,
+            inputs
+            {
+                item 1 tags[base:masonstrowel] mode:keep flags[Prop1;MayDegradeLight],
+                item 2 tags[base:concrete] flags[DontRecordInput],
+                item 5 [Base.StoneBlock],
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+module Base
+{
+    entity Wood_TableLvl2
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_Wood_TableLvl2,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            face S
+            {
+                layer
+                {
+                    row = carpentry_01_28 carpentry_01_29,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = carpentry_01_31,
+                    row = carpentry_01_30,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = woodenTableLvl2Test,
+            timedAction = BuildWallHammer,
+            time = 50,
+            SkillRequired = Woodwork:3,
+            xpAward = Woodwork:30,
+            category = Furniture,
+            Tags = Carpentry;Furniture,
+            Tooltip = Tooltip_craft_tableDesc,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}
