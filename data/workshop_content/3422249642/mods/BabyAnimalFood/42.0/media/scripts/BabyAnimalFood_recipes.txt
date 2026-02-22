@@ -10,13 +10,18 @@ module Base
 		category = Farming,
         inputs
         {			
-			item 1 [Base.Bowl] mode:destroy flags[IsEmpty],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:destroy mappers[bowlList] flags[IsEmpty],
 			item 1 [*],
 			-fluid 0.3 [CowMilk;SheepMilk],
         }
-       outputs
+		outputs
         {
-			item 1 BabyAnimalFood.FeedForPiglet,
+			item 1 mapper:bowlList,
+        }
+		itemMapper bowlList
+        {
+            BabyAnimalFood.FeedForPigletInClayBowl = Base.ClayBowl,
+            default = BabyAnimalFood.FeedForPiglet,
         }
     }
 	
@@ -29,13 +34,18 @@ module Base
 		category = Farming,
         inputs
         {			
-			item 1 [Base.Bowl] mode:destroy flags[IsEmpty],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:destroy mappers[bowlList] flags[IsEmpty],
 			item 1 [*],
 			-fluid 0.1 [CowMilk;SheepMilk],
         }
        outputs
         {
-			item 1 BabyAnimalFood.FeedForRabkitten,
+			item 1 mapper:bowlList,
+        }
+	   itemMapper bowlList
+        {
+            BabyAnimalFood.FeedForRabkittenInClayBowl = Base.ClayBowl,
+            default = BabyAnimalFood.FeedForRabkitten,
         }
     }
 	

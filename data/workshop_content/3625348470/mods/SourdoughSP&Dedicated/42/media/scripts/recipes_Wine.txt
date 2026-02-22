@@ -1,0 +1,425 @@
+module Base
+{
+	imports
+	{
+		Base
+	}
+
+	craftRecipe MakeGrapeJuice
+	{
+		timedAction = UseHandPress,
+		Time = 20,
+		category = Cooking,
+		Tags = HandPress;Cooking,
+		inputs
+    {
+        item 30 [Base.Grapes],
+        item 1 [*],
+        +fluid 1 JuiceGrape,
+    }
+		outputs
+		{
+			item 1 MashGrapesTPP,
+		}
+	}
+	
+	craftRecipe MakeBlackberryJuice
+	{
+		timedAction = UseHandPress,
+		Time = 20,
+		category = Cooking,
+		Tags = HandPress;Cooking,
+		inputs
+    {
+        item 30 [Base.BerryBlack],
+        item 1 [*],
+        +fluid 1 JuiceBlackberry,
+    }
+		outputs
+		{
+			item 1 MashBlackberryTPP,
+		}
+	}
+
+	craftRecipe MakeBeautyberryTPP
+	{
+		timedAction = UseHandPress,
+		Time = 20,
+		category = Cooking,
+		Tags = HandPress;Cooking,
+		inputs
+    {
+        item 30 [Base.BeautyBerry],
+        item 1 [*],
+        +fluid 1 JuiceBeautyberry,
+    }
+		outputs
+		{
+			item 1 MashBeautyberryTPP,
+		}
+	}
+	
+	craftRecipe MakeBarrelTPP
+    {
+        time = 600,
+        SkillRequired = Woodwork:2,
+        NeedToBeLearn = false,
+        timedAction = HammerMetalStanding,
+        xpAward = Woodwork:10,
+        Tags = InHandCraft,
+        category = Tools,
+        inputs
+        {
+            item 3 [Base.Plank],
+            item 1 [Base.IronBand],
+            item 1 tags[base:smithinghammer] mode:keep flags[MayDegradeLight],
+            item 1 tags[base:tongs] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 BarrelTPP,
+        }
+    }
+	
+	craftRecipe MakeWineStartTPP
+	{
+        timedAction = MixingBowl,
+        time = 120,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 1 [Base.OpenSourdough;Base.Yeast],
+            item 1 [Base.BarrelTPP] mode:destroy flags:[IsFull],
+            -fluid 10.0 [JuiceGrape],
+        }
+        outputs
+        {
+            item 1 Base.WineStartTPP,
+        }
+    }
+	
+	craftRecipe OpenWineFermentedTPP
+    {
+        timedAction = OpenTinCan,
+        time = 30,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.WineFermentedTPP] mode:destroy,
+            item 1 [Base.WateredCan;Base.CeramicCrucible;Base.Bucket;Base.BucketWood;Base.BucketCarved;Base.BucketForged;Base.PetrolCan;Base.JerryCan;Base.PaintbucketEmpty;Base.WaterDispenserBottle;Base.BucketLargeWood;Base.BarrelTPP] flags:[IsEmpty],
+            +fluid 10.0 Wine,
+		}
+		outputs
+		{
+			item 1 Base.BarrelTPP,
+		}
+	}
+
+	craftRecipe MakeBeautyberryWineStartTPP
+	{
+        timedAction = MixingBowl,
+        time = 120,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 1 [Base.OpenSourdough;Base.Yeast],
+            item 1 [Base.BarrelTPP] mode:destroy flags:[IsFull],
+            -fluid 10.0 [JuiceBeautyberry],
+        }
+        outputs
+        {
+            item 1 Base.BeautyberryWineStartTPP,
+        }
+    }
+	
+	craftRecipe OpenBeautyberryWineFermentedTPP
+    {
+        timedAction = OpenTinCan,
+        time = 30,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.BeautyberryWineFermentedTPP] mode:destroy,
+            item 1 [Base.WateredCan;Base.CeramicCrucible;Base.Bucket;Base.BucketWood;Base.BucketCarved;Base.BucketForged;Base.PetrolCan;Base.JerryCan;Base.PaintbucketEmpty;Base.WaterDispenserBottle;Base.BucketLargeWood;Base.BarrelTPP] flags:[IsEmpty],
+            +fluid 10.0 BeautyberryWine,
+		}
+		outputs
+		{
+			item 1 Base.BarrelTPP,
+		}
+	}
+	
+	craftRecipe MakeBlackberryWineStartTPP
+	{
+        timedAction = MixingBowl,
+        time = 120,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 1 [Base.OpenSourdough;Base.Yeast],
+            item 1 [Base.BarrelTPP] mode:destroy flags:[IsFull],
+            -fluid 10.0 [JuiceBlackberry],
+        }
+        outputs
+        {
+            item 1 Base.BlackberryWineStartTPP,
+        }
+    }
+	
+	craftRecipe OpenBlackberryWineFermentedTPP
+    {
+        timedAction = OpenTinCan,
+        time = 30,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.BlackberryWineFermentedTPP] mode:destroy,
+            item 1 [Base.WateredCan;Base.CeramicCrucible;Base.Bucket;Base.BucketWood;Base.BucketCarved;Base.BucketForged;Base.PetrolCan;Base.JerryCan;Base.PaintbucketEmpty;Base.WaterDispenserBottle;Base.BucketLargeWood;Base.BarrelTPP] flags:[IsEmpty],
+            +fluid 10.0 BlackberryWine,
+		}
+		outputs
+		{
+			item 1 Base.BarrelTPP,
+		}
+	}
+
+	craftRecipe MakeBlackberryJarTPP
+	{
+        timedAction = MixingBowl,
+        time = 120,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 1 [Base.OpenSourdough;Base.Yeast],
+            item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy flags:[IsFull],
+            -fluid 1.0 [JuiceBlackberry],
+        }
+        outputs
+        {
+            item 1 base.JuiceDarkPurple,
+        }
+    }
+
+	craftRecipe MakeBeautyberryJarTPP
+	{
+        timedAction = MixingBowl,
+        time = 120,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 1 [Base.OpenSourdough;Base.Yeast],
+            item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy flags:[IsFull],
+            -fluid 1.0 [JuiceBeautyberry],
+        }
+        outputs
+        {
+            item 1 Base.JuiceSalmon,
+        }
+    }
+
+	craftRecipe MakeGrapeJarTPP
+	{
+        timedAction = MixingBowl,
+        time = 120,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 1 [Base.OpenSourdough;Base.Yeast],
+            item 1 [Base.EmptyJar;Base.JarCrafted] mode:destroy flags:[IsFull],
+            -fluid 1.0 [JuiceGrape],
+        }
+        outputs
+        {
+            item 1 Base.JuicePurple,
+        }
+    }
+	
+	craftRecipe OpenJarClothGrapeWine
+    {
+        timedAction = OpenTinCan,
+        time = 30,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.JarClothGrapeWine] mode:destroy,
+            item 1 [*],
+            +fluid 1.0 Wine,
+		}
+		outputs
+		{
+			item 1 Base.EmptyJar,
+		}
+	}
+
+	craftRecipe OpenJarClothBlackberryWine
+    {
+        timedAction = OpenTinCan,
+        time = 30,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.JarClothBlackberryWine] mode:destroy,
+            item 1 [*],
+            +fluid 1.0 BlackberryWine,
+		}
+		outputs
+		{
+			item 1 Base.EmptyJar,
+		}
+	}
+
+	craftRecipe OpenJarClothBeautyberryWine
+    {
+        timedAction = OpenTinCan,
+        time = 30,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.JarClothBeautyberryWine] mode:destroy,
+            item 1 [*],
+            +fluid 1.0 BeautyberryWine,
+		}
+		outputs
+		{
+			item 1 Base.EmptyJar,
+		}
+	}
+
+	craftRecipe MakeGrapeClayJarTPP
+	{
+        timedAction = MixingBowl,
+        time = 120,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 1 [Base.OpenSourdough;Base.Yeast],
+            item 1 [Base.ClayJar] mode:destroy flags:[IsFull],
+            -fluid 2.5 [JuiceGrape],
+        }
+        outputs
+        {
+            item 1 Base.ClayJarPurple,
+        }
+    }
+
+	craftRecipe MakeBlackberryClayJarTPP
+	{
+        timedAction = MixingBowl,
+        time = 120,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 1 [Base.OpenSourdough;Base.Yeast],
+            item 1 [Base.ClayJar] mode:destroy flags:[IsFull],
+            -fluid 2.5 [JuiceBlackberry],
+        }
+        outputs
+        {
+            item 1 Base.ClayJarDarkPurple,
+        }
+    }
+
+	craftRecipe MakeBeautyberryClayJarTPP
+	{
+        timedAction = MixingBowl,
+        time = 120,
+        NeedToBeLearn = false,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:10,
+        inputs
+        {
+            item 1 [Base.OpenSourdough;Base.Yeast],
+            item 1 [Base.ClayJar] mode:destroy flags:[IsFull],
+            -fluid 2.5 [JuiceBeautyberry],
+        }
+        outputs
+        {
+            item 1 Base.ClayJarSalmon,
+        }
+    }
+
+	craftRecipe OpenClayJarGrapeWine
+    {
+        timedAction = OpenTinCan,
+        time = 30,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.ClayJarGrapeWine] mode:destroy,
+            item 1 [*],
+            +fluid 2.5 Wine,
+		}
+		outputs
+		{
+			item 1 Base.ClayJar,
+		}
+	}
+
+	craftRecipe OpenClayJarBlackberryWine
+    {
+        timedAction = OpenTinCan,
+        time = 30,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.ClayJarBlackberryWine] mode:destroy,
+            item 1 [*],
+            +fluid 2.5 BlackberryWine,
+		}
+		outputs
+		{
+			item 1 Base.ClayJar,
+		}
+	}
+
+	craftRecipe OpenClayJarBeautyberryWine
+    {
+        timedAction = OpenTinCan,
+        time = 30,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        inputs
+        {
+			item 1 [Base.ClayJarBeautyberryWine] mode:destroy,
+            item 1 [*],
+            +fluid 2.5 BeautyberryWine,
+		}
+		outputs
+		{
+			item 1 Base.ClayJar,
+		}
+	}
+}
