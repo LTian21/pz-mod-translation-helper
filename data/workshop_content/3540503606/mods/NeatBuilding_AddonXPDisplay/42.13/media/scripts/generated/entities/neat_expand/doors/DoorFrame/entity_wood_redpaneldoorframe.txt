@@ -1,0 +1,65 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Wood_RedPanelDoorFrame
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= NBEntityName_RedPanelDoorFrame,
+			Icon		= Build_walls_exterior_house_02_79,
+		}
+	}
+
+    entity Wood_RedPanelDoorFrame
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Wood_RedPanelDoorFrame,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			isThumpable     = false,
+			OnIsValid = BuildRecipeCode.doorFrame.OnIsValid,
+            face W
+            {
+                layer
+                {
+                    row = walls_exterior_house_02_78,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_exterior_house_02_79,
+                }
+            }
+			
+            corner = walls_exterior_house_02_71,
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = ignoreFromBuildMenu,
+            timedAction   = BuildWallHammer,
+            time          = 200,
+            category      = Doors,
+            SkillRequired = Woodwork:6,
+            xpAward       = Woodwork:60,
+            ToolTip       = Tooltip_craft_NeedsWallframeDesc,
+            inputs
+            {
+                item 1 tags[PlasterTrowel;MasonsTrowel] mode:keep flags[Prop1],
+                item 1 tags[base:hammer;Hammer] mode:keep flags[Prop2;MayDegradeVeryLight],
+                item 1 [Base.PaintRed] flags[DontRecordInput],
+                item 1 [Base.BucketPlasterFull] flags[DontRecordInput],
+                item 2 [Base.Plank],
+                item 4 [Base.Nails],
+            }
+        }
+    }
+}
