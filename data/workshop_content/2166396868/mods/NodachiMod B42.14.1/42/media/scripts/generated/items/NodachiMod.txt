@@ -1,0 +1,160 @@
+/* Made by SmokeAnDrink */
+
+/* Tested for BUILD 42.14.1 */
+
+module NodachiMod{
+
+	imports{
+		Base,
+	}
+	
+	item Nodachi{
+		DisplayName = Nodachi,
+		DisplayCategory = Weapon,
+        ItemType = base:weapon,
+        Weight = 3.0,
+        Icon = Katana,
+        AttachmentType = BigBlade,
+        BaseSpeed = 1.0,
+        BreakSound = KatanaBreak,
+        Categories = base:longblade,
+        ConditionLowerChanceOneIn = 15,
+        ConditionMax = 20,
+        CritDmgMultiplier = 6.0,
+        CriticalChance = 50.0,
+        DamageCategory = Slash,
+        DamageMakeHole = true,
+        DoorDamage = 10,
+        DoorHitSound = KatanaHit,
+        DropSound = KatanaDrop,
+        HitAngleMod = -30.0,
+        HitFloorSound = KatanaHit,
+        HitSound = KatanaHit,
+        ImpactSound = KatanaHit,
+        KnockBackOnNoDeath = true,
+        KnockdownMod = 0.0,
+        MaxDamage = 9.0,
+        MaxHitcount = 3,
+        MaxRange = 1.6,
+        MinAngle = 0.8,
+        MinDamage = 9.0,
+        MinRange = 0.61,
+        MinimumSwingtime = 4.0,
+        PushBackMod = 0.5,
+        RunAnim = Run_Weapon2,
+        SubCategory = Swinging,
+        SwingAmountBeforeImpact = 0.04,
+        SwingAnim = Bat,
+        SwingSound = KatanaSwing,
+        Swingtime = 4.0,
+		Tags = base:ignorezombiedensity;base:hasmetal;base:fullblade;base:sharpenable;base:killanimal;base:cutplant;base:smeltableironlarge,
+        TreeDamage = 1,
+        TwoHandWeapon = true,
+        WeaponLength = 0.4,
+        WeaponSprite = Nodachi,
+        Sharpness = 1.0,
+        OnBreak = OnBreak.Nodachi,
+    }
+	
+	item Nodachi_Broken{
+		DisplayName = Broken Nodachi,
+		DisplayCategory = BrokenWeapon,
+        ItemType = base:weapon,
+        Weight = 2.0,
+        Icon = Katana_Broken,
+        AttachmentType = Sword,
+        BaseSpeed = 1.0,
+        BreakSound = BrokenKatanaBreak,
+        Categories = base:longblade,
+        ConditionLowerChanceOneIn = 10,
+        ConditionMax = 10,
+        CritDmgMultiplier = 4.0,
+        CriticalChance = 20.0,
+        DamageCategory = Slash,
+        DamageMakeHole = true,
+        DoorDamage = 5,
+        DoorHitSound = BrokenKatanaHit,
+        DropSound = BrokenKatanaDrop,
+        HitAngleMod = -30.0,
+        HitFloorSound = BrokenKatanaHit,
+        HitSound = BrokenKatanaHit,
+        ImpactSound = BrokenKatanaHit,
+        KnockBackOnNoDeath = true,
+        KnockdownMod = 0.0,
+        MaxDamage = 3.0,
+        MaxHitcount = 3,
+        MaxRange = 1.3,
+        MinAngle = 0.8,
+        MinDamage = 2.0,
+        MinRange = 0.61,
+        MinimumSwingtime = 3.0,
+        PushBackMod = 0.5,
+        RunAnim = Run_Weapon2,
+        SubCategory = Swinging,
+        SwingAmountBeforeImpact = 0.02,
+        SwingAnim = Bat,
+        SwingSound = BrokenKatanaSwing,
+        Swingtime = 3.0,
+		Tags = base:ignorezombiedensity;base:hasmetal;base:fullblade;base:sharpenable;base:killanimal;base:cutplant;base:smeltableironlarge,
+        TreeDamage = 1,
+        TwoHandWeapon = true,
+        WeaponLength = 0.3,
+        WeaponSprite = Nodachi_Broken,
+        Sharpness = 1.0,
+        OnBreak = OnBreak.Nodachi_Broken,
+    }
+}
+
+module Base{
+	model Nodachi{
+		mesh = weapons/2Handed/Nodachi,
+		texture = weapons/2Handed/nodachi_albedo,	
+		attachment world{
+			offset = -0.07 0.1 0.01,
+			rotate = 180.0000 0.0000 0.0000,
+		}
+	}
+	
+	model Nodachi_Broken{
+		mesh = weapons/2Handed/Nodachi_Broken,
+		texture = weapons/2Handed/nodachi_albedo,
+		attachment world{
+			offset = -0.07 0.1 0.01,
+			rotate = 180.0000 0.0000 0.0000,
+		}
+	}
+}
+
+module NodachiMod{
+	
+	imports{
+		Base,
+	}
+	
+	craftRecipe Nodachi{
+	
+		time = 1000,
+        SkillRequired = Blacksmith:9,
+        NeedToBeLearn = false,
+        timedAction = HammerMetalStanding,
+        xpAward = Blacksmith:200,
+        AutoLearnAll = Blacksmith:10;LongBlade:5,
+        Tags = AdvancedForge,
+        category = Blade,
+		
+		inputs{
+	
+			item 2 tags[BarStock],
+			item 8 tags[base:charcoal],
+			item 1 tags[base:ballpeenhammer] mode:keep flags[Prop1;MayDegradeLight],
+			item 1 tags[base:tongs] mode:keep flags[Prop2;MayDegradeLight],
+			item 1 tags[base:whetstone;base:file] mode:keep flags[MayDegradeLight],
+			item 10 [Base.ScrapMetal] mode:destroy,
+			item 5 [Base.LeatherStrips] mode:destroy,
+		}
+		outputs{
+			item 1 NodachiMod.Nodachi flags[IsBlunt],
+		}
+	}
+
+}

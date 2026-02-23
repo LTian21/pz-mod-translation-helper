@@ -1,0 +1,64 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_Commercial_GlassRedDoorFrame
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= NBEntityName_CommercialGlassRedDoorFrame,
+			Icon		= Build_walls_commercial_01_65,
+		}
+	}
+
+    entity Commercial_GlassRedDoorFrame
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Commercial_GlassRedDoorFrame,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+			skillBaseHealth = 300,
+			isThumpable     = false,
+			OnIsValid = BuildRecipeCode.doorFrame.OnIsValid,
+
+            face W
+            {
+                layer
+                {
+                    row = walls_commercial_01_8,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = walls_commercial_01_9,
+                }
+            }
+			corner = walls_commercial_01_2,
+        }
+		
+        component CraftRecipe
+        {
+            OnAddToMenu   = ignoreFromBuildMenu,
+            timedAction   = BuildWallMetal,
+            time          = 200,
+            category      = Doors,
+            SkillRequired = MetalWelding:6;Glassmaking:3,
+            xpAward       = MetalWelding:60;Glassmaking:30,
+            ToolTip       = Tooltip_craft_NeedsWallframeDesc,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[DontRecordInput],
+                item 1 tags[Pliers] mode:keep flags[Prop2;MayDegradeVeryLight],
+                item 1 [Base.WeldingRods] flags[DontRecordInput],
+                item 2 [Base.SmallSheetMetal],
+                item 1 [Base.GlassPanel],
+            }
+        }
+    }
+}
