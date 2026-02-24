@@ -1,0 +1,78 @@
+module CC
+{
+
+imports
+	{
+		Base
+	}
+
+	craftRecipe ChocolateCoveredCoffeeBeans
+	{
+        timedAction = Making,
+		Time = 100,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Food,
+		inputs
+		{
+			item 1 [CC.CowffeeBean],
+			item 1 [Base.Chocolate] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.ChocolateCoveredCoffeeBeans,
+		}
+	}
+
+
+
+	craftRecipe MakeCowffeeJar
+	{
+        timedAction = Making,
+		Time = 100,
+		Tags = InHandCraft,
+		NeedToBeLearn = False,
+        category = Food,
+		inputs
+		{
+			item 15 [CC.CowffeeBean],
+			item 1 [CC.EmptyCowffeeJar;Base.EmptyJar] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.Coffee2,
+		}
+	}
+
+	craftRecipe OpenPacketOfCCSeeds
+	{
+		timedAction = Making,
+	Time = 10,
+	OnCreate = DebugOpenPacketCC,
+	Tags = InHandCraft;Farming;CanBeDoneInDark,
+	NeedToBeLearn = False,
+	category = Drugs,
+		inputs
+		{ 
+			item 1 [CC.CowffeeBagSeed] mappers[seedTypes;packetTypes],
+		}
+		outputs
+		{
+			item 5 mapper:seedTypes,
+			item 1 mapper:packetTypes,
+		}
+        itemMapper seedTypes
+       {
+			CC.SeedsCowffee = CC.CowffeeBagSeed,
+
+		}
+        itemMapper packetTypes
+        {
+			CC.CowffeeBagSeed_Empty = CC.CowffeeBagSeed,
+
+		}
+	}
+
+
+
+}
