@@ -249,7 +249,7 @@ module Base
         category = Packing,
         inputs
         {
-            item 1 [Base.NailsCarton;Base.ScrewsCarton] mappers[boxType] flags[AllowFavorite;InheritFavorite],
+            item 1 [Base.NailsCarton;Base.ScrewsCarton;Base.Bullets9mmCarton;Base.Bullets45Carton;Base.Bullets38Carton;Base.Bullets357Carton;Base.Bullets44Carton;Base.308Carton;Base.ShotgunShellsCarton;Base.556Carton;Base.3030Carton] mappers[boxType] flags[AllowFavorite;InheritFavorite],
         }
         outputs
         {
@@ -259,6 +259,15 @@ module Base
         {
             Base.NailsBox = Base.NailsCarton,
             Base.ScrewsBox = Base.ScrewsCarton,
+            Base.Bullets9mmBox = Base.Bullets9mmCarton,
+            Base.Bullets45Box = Base.Bullets45Carton,
+            Base.Bullets38Box = Base.Bullets38Carton,
+            Base.Bullets357Box = Base.Bullets357Carton,
+            Base.Bullets44Box = Base.Bullets44Carton,
+            Base.308Box = Base.308Carton,
+            Base.ShotgunShellsBox = Base.ShotgunShellsCarton,
+            Base.556Box = Base.556Carton,
+            Base.3030Box = Base.3030Carton,
         }
     }
 
@@ -328,7 +337,7 @@ module Base
         category = Packing,
         inputs
         {
-            item 12 [Base.NailsBox;Base.ScrewsBox] mappers[itemType] flags[AllowFavorite;InheritFavorite;IsExclusive],
+            item 12 [Base.NailsBox;Base.ScrewsBox;Base.Bullets44Box;Base.308Box;Base.ShotgunShellsBox;Base.556Box;Base.Bullets9mmBox;Base.Bullets45Box;Base.Bullets38Box;Base.Bullets357Box;Base.3030Box] mappers[itemType] flags[AllowFavorite;InheritFavorite;IsExclusive],
         }
         outputs
         {
@@ -338,6 +347,15 @@ module Base
         {
             Base.NailsCarton = Base.NailsBox,
             Base.ScrewsCarton = Base.ScrewsBox,
+            Base.Bullets44Carton = Base.Bullets44Box,
+            Base.308Carton = Base.308Box,
+            Base.ShotgunShellsCarton = Base.ShotgunShellsBox,
+            Base.556Carton = Base.556Box,
+            Base.Bullets9mmCarton = Base.Bullets9mmBox,
+            Base.Bullets45Carton = Base.Bullets45Box,
+            Base.Bullets38Carton = Base.Bullets38Box,
+            Base.Bullets357Carton = Base.Bullets357Box,
+            Base.3030Carton = Base.3030Box,
         }
     }
 
@@ -710,7 +728,7 @@ module Base
 
     craftRecipe UnpackCigarettes
     {
-        timedAction = Making,
+        timedAction = UnpackCigarettes,
         time = 25,
         Tags = InHandCraft;CanBeDoneInDark,
         category = Miscellaneous,
@@ -726,7 +744,7 @@ module Base
 
     craftRecipe PackCigarettes
     {
-        timedAction = Making,
+        timedAction = PackCigarettes,
         time = 25,
         Tags = InHandCraft;CanBeDoneInDark,
         category = Miscellaneous,
@@ -742,7 +760,7 @@ module Base
 
     craftRecipe TakeACigarette
     {
-        timedAction = Making,
+        timedAction = TakeCigarette,
         time = 15,
         Tags = InHandCraft;CanBeDoneInDark,
         category = Miscellaneous,
@@ -758,7 +776,7 @@ module Base
 
     craftRecipe AddACigarette
     {
-        timedAction = Making,
+        timedAction = AddCigarette,
         time = 25,
         OnCreate = RecipeCodeOnCreate.addToPack,
         OnTest = RecipeCodeOnTest.canAddToPack,

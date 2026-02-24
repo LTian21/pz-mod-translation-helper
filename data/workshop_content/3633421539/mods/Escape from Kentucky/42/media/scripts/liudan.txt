@@ -1,0 +1,56 @@
+module Base
+{
+
+   item GrenadeAmmo
+    {
+        DisplayCategory = Ammo,
+        Count	=	1,
+        Weight	=	0.02,
+        AlwaysWelcomeGift	=	TRUE,
+        ItemType = base:normal,
+        DisplayName	=	GrenadeAmmo,
+        Icon	=	M406HE_cat,
+        MetalValue = 1,
+        WorldStaticModel = GrenadeAmmo,
+    }
+    model GrenadeAmmo
+    {
+        mesh = WorldItems/GrenadeAmmo_cat,
+		texture = GunTexture/M406HE_cat,
+		scale = 0.06,
+    }
+
+item GrenadeAmmoClip
+    {
+        DisplayCategory = Ammo,
+        CanStack	=	FALSE,
+        Weight	=	0.5,
+        ItemType = base:normal,
+        InsertAllBulletsLoad		= TRUE,
+        DisplayName	=	GrenadeAmmo榴弹弹匣,
+        Icon	=	Bullets50Clip,
+        MaxAmmo = 5,
+        AmmoType = efk:cat_grenadeammo,
+        StaticModel = GunMagazine,
+        Tags = base:gunmagazine,
+        GunType = Base.MTL30_cat,
+        WorldStaticModel = Bullets50Clip,
+    }
+
+craftRecipe GrenadeAmmo
+    {
+        timedAction = OpenAmmoBox,
+        time = 100,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+        Tags = InHandCraft,
+        category = 现代枪械系统ModernFirearmsSystem,
+        inputs
+        {
+            item 1 [Base.Bullets9mmBox;Base.Bullets44Box;Base.Bullets45Box;Base.Bullets50Box;Base.58Box;Base.Bullets86Box;Base.223Box;Base.545Box;Base.556Box;Base.308Box] flags[AllowDestroyedItem],
+        }
+        outputs
+        {
+            item 1 Base.GrenadeAmmo,
+        }
+    }
+}

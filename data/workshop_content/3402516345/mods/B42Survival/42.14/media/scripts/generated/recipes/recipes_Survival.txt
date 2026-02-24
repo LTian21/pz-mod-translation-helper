@@ -1,0 +1,367 @@
+module Base
+{
+
+    craftRecipe PickString
+    {
+        timedAction = SewingCloth,
+        time = 300,
+        Tags = AnySurfaceCraft,
+        category = Tailoring,
+        Tooltip = Tooltip_Survival_PickString,
+        inputs
+        {
+            item 1 [Base.Rope;Base.BurlapPiece] flags[Prop2] mode:destroy,
+            item 1 tags[base:sharpknife;base:scissors] mode:keep flags[IsNotDull;MayDegrade],
+            item 1 tags[base:awl;base:pliers] mode:keep flags[Prop1;MayDegradeLight],
+        }
+        outputs
+        {
+	    item 10 Base.String chance:0.8,
+        }
+    }
+
+    craftRecipe PlaceStringInBox
+    {
+        timedAction = PackingBox_Small,
+        time = 25,
+        OnTest = RecipeCodeOnTest.genericPacking,
+        OnCreate = RecipeCodeOnCreate.placeInBox,
+        Tags = InHandCraft;Packing,
+        category = Packing,
+        inputs
+        {
+            item 40 [Base.String] flags[AllowFavorite;InheritFavorite;IsExclusive;ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.StringBox,
+        }
+    }
+
+    craftRecipe OpenBoxOfString
+    {
+        timedAction = UnPackBox_Small,
+        time = 5,
+        Tags = InHandCraft;Packing;CanBeDoneInDark,
+        category = Packing,
+        recipeGroup = OpenBox,
+        inputs
+        {
+            item 1 [Base.StringBox] flags[AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 40 Base.String,
+        }
+    }
+
+    craftRecipe CraftRopeTwine
+    {
+        timedAction = Making,
+        time = 140,
+        Tags = AnySurfaceCraft,
+        inputs
+        {
+            item 10 tags[base:twine] flags[Prop2],
+            item 1 [Base.WoodenStick2;Base.TreeBranch2;Base.Handle] mode:keep flags[Prop1],
+            item 1 tags[base:sharpknife;base:scissors] mode:keep flags[IsNotDull;MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 Base.Rope,
+        }
+    }
+
+    craftRecipe CarveButton
+    {
+        time = 200,
+        Tags = AnySurfaceCraft,
+        NeedToBeLearn = true,
+        timedAction = Making,
+        AutoLearnAny = Carving:3,
+        xpAward = Carving:10,
+        SkillRequired = Carving:1,
+        MetaRecipe = base:makebonearmor,
+        category = Carving,
+        inputs
+        {
+            item 1 tags[base:drillwood;base:drillmetal;base:drillwoodpoor] mode:keep flags[MayDegradeLight],
+            item 1 tags[base:sharpknife] mode:keep flags[MayDegradeLight;IsNotDull;Prop1],
+            item 1 [Base.SmallHandle] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 Base.ButtonWood,
+        }
+    }
+
+    craftRecipe CarveLongStick2
+    {
+        timedAction = SharpenStakeWood,
+        time = 100,
+        Tags = InHandCraft,
+        category = Carving,
+        SkillRequired = Carving:1,
+        xpAward = Carving:5,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[Prop1;MayDegradeLight;IsNotDull],
+            item 1 [Base.Plank] flags[Prop2;InheritCondition],
+        }
+        outputs
+        {
+            item 1 Base.LongStick,
+        }
+    }
+
+    craftRecipe MakeStonesFromLargeSmoothFlatStone
+    {
+        timedAction = HammerStoneStanding,
+        time = 100,
+        Tags = InHandCraft;CanBeDoneFromFloor,
+        category = Masonry,
+        xpAward = Masonry:10,
+        inputs
+        {
+            item 1 tags[base:clubhammer;base:sledgehammer;base:stonemaul;base:pickaxe] mode:keep flags[Prop1;MayDegradeLight],
+            item 1 [Base.FlatStone],
+        }
+        outputs
+        {
+            item 3 Base.Stone2,
+        }
+    }
+
+    craftRecipe MakeSackofGravel
+    {
+        timedAction = HammerStoneStanding,
+        time = 300,
+        Tags = InHandCraft;CanBeDoneFromFloor,
+        category = Masonry,
+        xpAward = Masonry:20,
+        inputs
+        {
+            item 1 tags[base:clubhammer;base:sledgehammer;base:stonemaul;base:pickaxe] mode:keep flags[Prop1;MayDegradeLight],
+            item 4 [Base.Stone2;Base.SharpedStone;Base.Limestone] flags[AllowDestroyedItem],
+            item 1 tags[base:holddirt;base:holdcompost;base:burlapbag] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.Gravelbag,
+        }
+    }
+
+    craftRecipe ExtractClay
+    {
+        timedAction = Craft_PotteryBench,
+        time = 120,
+        Tags = AnySurfaceCraft;Pottery;CanBeDoneFromFloor,
+        category = Pottery,
+        xpAward = Pottery:5,
+        inputs
+        {
+            item 1 [*],
+            -fluid 1.0 categories[Water] mode:mixture,
+            item 1 tags[base:bucket] mode:keep flags[IsEmpty],
+            item 1 [Base.Sheet;Base.CheeseCloth;Base.Strainer] mode:keep,
+            item 1 [Base.Dirtbag],
+        }
+        outputs
+        {
+            item 1 Base.Clay,
+        }
+    }
+
+    craftRecipe PutClayinSack
+    {
+        timedAction = UnPackSack,
+        time = 30,
+        Tags = InHandCraft,
+        category = Packing,
+        inputs
+        {
+            item 8 [Base.Clay],
+            item 1 tags[base:holddirt;base:holdcompost;base:burlapbag] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.Claybag,
+        }
+    }
+
+    craftRecipe MakeCrudeFirestarter
+    {
+        time = 300,
+        Tags = InHandCraft,
+        category = Assembly,
+        timedAction = CraftWeapon1H,
+        xpAward = Maintenance:20,
+        SkillRequired = Maintenance:1,
+        NeedToBeLearn = true,
+        AutoLearnAny = Maintenance:4;FlintKnapping:4;PlantScavenging:4,
+        inputs
+        {
+            item 1 tags[base:whetstone;base:file] mode:keep flags[MayDegrade;Prop1],
+            item 1 [Base.SteelBarQuarter;Base.IronBarQuarter;Base.ScrapMetal;Base.ButterKnife;Base.Fork;Base.ForkForged;Base.Spoon;Base.SpoonForged] flags[Prop2;InheritCondition],
+	    item 1 [Base.SharpedStone],
+            item 1 tags[base:binding] flags[DontReplace],
+        }
+        outputs
+        {
+            item 1 Base.FlintFirestarter,
+        }
+    }
+
+    craftRecipe MakeCannedCandle
+    {
+        timedAction = MixingBowl,
+        time = 100,
+        Tags = AnySurfaceCraft,
+        category = Miscellaneous,
+        Tooltip = Tooltip_Survival_CanMustBeHot,
+        inputs
+        {
+            item 1 [Base.TinCanEmpty;Base.WaterRationCanEmpty;Base.EmptyJar;Base.JarCrafted] mode:destroy flags[Prop2] mappers[CanMapper],
+	    item 1 [Base.Paperclip;Base.Twigs;Base.Cork],
+            item 6 tags[base:bakingfat],
+            item 1 tags[base:twine],
+        }
+        outputs
+        {
+            item 1 mapper:CanMapper,
+	}
+        itemMapper CanMapper
+        {
+            Base.CandleTinCan = Base.TinCanEmpty,
+            Base.CandleWaterRationCan = Base.WaterRationCanEmpty,
+            Base.CandleJar = Base.EmptyJar,
+            Base.CandleJar = Base.JarCrafted,
+        }
+    }
+
+    craftRecipe LightCannedCandle
+    {
+        timedAction = Making,
+        time = 30,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        Tooltip = Tooltip_Recipe_EquipCandleHand,
+        inputs
+        {
+            item 1 [Base.CandleTinCan;Base.CandleWaterRationCan;Base.CandleJar] mode:destroy flags[InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite] mappers[CanMapper],
+            item 1 tags[base:startfire],
+        }
+        outputs
+        {
+            item 1 mapper:CanMapper flags[EquipSecondary;SetActivated],
+	}
+        itemMapper CanMapper
+        {
+            Base.CandleTinCanLit = Base.CandleTinCan,
+            Base.CandleWaterRationCanLit = Base.CandleWaterRationCan,
+            Base.CandleJarLit = Base.CandleJar,
+        }
+    }
+
+    craftRecipe ExtinguishCannedCandle
+    {
+        timedAction = Making,
+        time = 5,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.CandleTinCanLit;Base.CandleWaterRationCanLit;Base.CandleJarLit] mode:destroy flags[InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite] mappers[CanMapper],
+        }
+        outputs
+        {
+            item 1 mapper:CanMapper,
+	}
+        itemMapper CanMapper
+        {
+            item 1 Base.CandleTinCan = Base.CandleTinCanLit,
+            item 1 Base.CandleWaterRationCan = Base.CandleWaterRationCanLit,
+            item 1 Base.CandleJar = Base.CandleJarLit,
+        }
+    }
+
+    craftRecipe MakeTorch
+    {
+        timedAction = CraftWeapon2H,
+        time = 100,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.LongHandle;Base.TreeBranch2;Base.WoodenStick2] flags[Prop2;ItemCount;AllowFavorite;InheritFavorite],
+            item 10 [Base.RippedSheets;Base.DenimStrips;1:Base.Sheet;1:Base.BurlapPiece;20:Base.GrassTuft] flags[ItemCount;IsExclusive] mappers[TextureMapper],
+            item 2 [Base.Twine;Base.String;Base.Wire;Base.ElectricWire;Base.LeatherStrips],
+        }
+        outputs
+        {
+            item 1 mapper:TextureMapper,
+	}
+        itemMapper TextureMapper
+        {
+            item 1 Base.TorchCloth = Base.RippedSheets,
+            item 1 Base.TorchDenim = Base.DenimStrips,
+            item 1 Base.TorchCloth = Base.Sheet,
+            item 1 Base.TorchFiber = Base.BurlapPiece,
+            item 1 Base.TorchFiber = Base.GrassTuft,
+            default = Base.TorchCloth,
+        }
+    }
+
+    craftRecipe LightTorch
+    {
+        timedAction = Making,
+        time = 30,
+        Tooltip = Tooltip_Survival_EquipTorchHand,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.TorchCloth;Base.TorchDenim;Base.TorchFiber;Base.TorchBurnt] mode:destroy flags[Prop1;InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite],
+            item 1 tags[base:startfire],
+        }
+        outputs
+        {
+            item 1 Base.TorchLit flags[EquipSecondary;SetActivated],
+        }
+    }
+
+    craftRecipe ExtinguishTorch
+    {
+        timedAction = Making,
+        time = 5,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.TorchLit] mode:destroy flags[Prop1;InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.TorchBurnt,
+        }
+    }
+
+    craftRecipe LightTorch2
+    {
+        timedAction = Making,
+        time = 30,
+        Tooltip = Tooltip_Survival_OpenFire,
+        Tags = InHandCraft;CanBeDoneInDark;RightClickOnly,
+        OnTest = RecipeCodeOnTest.openFire,
+        category = Miscellaneous,
+        inputs
+        {
+            item 1 [Base.TorchCloth;Base.TorchDenim;Base.TorchFiber;Base.TorchBurnt] mode:destroy flags[Prop1;InheritUses;InheritCondition;ItemCount;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 1 Base.TorchLit flags[EquipSecondary;SetActivated],
+        }
+    }
+}
