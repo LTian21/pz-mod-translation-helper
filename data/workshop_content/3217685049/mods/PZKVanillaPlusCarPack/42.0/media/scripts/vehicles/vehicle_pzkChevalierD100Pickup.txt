@@ -1,0 +1,103 @@
+module Base
+{
+	model pzkChevalierD100Pickup
+	{
+		mesh = vehicles/Vehicles_pzkPickupD100,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.01,
+	}
+	
+	model pzkChevalierD100PickupBoards
+	{
+		mesh = vehicles/customParts/pzkPickupD100_Boards,
+		shader = vehicle_multiuv,
+		scale = 0.01,
+
+	}
+	
+	vehicle pzkChevalierD100Pickup
+	{
+		
+		
+	    template! = pzkPickUpTruckWoodboardedTemplate,
+		model
+        {
+            file = pzkChevalierD100Pickup,
+            scale = 1.8200,
+            offset = 0.0000 0.3022 0.0000,
+        }
+		
+
+		skin
+		{
+			texture = Vehicles/Trucks/Vehicles_pzkChevalierD100shell,
+			textureMask = Vehicles/Trucks/Vehicles_pzkChevalierD100_mask,
+			textureLights = Vehicles/Trucks/Vehicles_pzkChevalierD100_lights,
+		}
+		skin
+		{
+			texture = Vehicles/Trucks/Vehicles_pzkChevalierD100-2shell,
+			textureMask = Vehicles/Trucks/Vehicles_pzkChevalierD100_mask,
+			textureLights = Vehicles/Trucks/Vehicles_pzkChevalierD100_lights,
+		}
+		
+		part pzkPickupWoodboards
+		{
+			model Default
+			{
+				file = pzkChevalierD100PickupBoards,
+			}
+		
+		}
+		part TruckBedOpen
+        {
+            container
+            {
+                capacity = 100,
+            }
+        }
+	}
+	
+	vehicle pzkChevalierD100PickupCustom
+	{
+		
+		
+	    template! = pzkPickUpTruckWoodboardedTemplate,
+		model
+        {
+            file = pzkChevalierD100Pickup,
+            scale = 1.8200,
+            offset = 0.0000 0.3022 0.0000,
+        }
+		
+
+
+		skin
+		{
+			texture = Vehicles/Trucks/Vehicles_pzkChevalierD100-flameshell,
+			textureMask = Vehicles/Trucks/Vehicles_pzkChevalierD100_mask,
+			textureLights = Vehicles/Trucks/Vehicles_pzkChevalierD100_lights,
+		}
+		engineForce = 4200,
+		engineQuality = 85,
+		engineLoudness = 120,
+		maxSpeed = 90f,
+		
+		part pzkPickupWoodboards
+		{
+			model Default
+			{
+				file = pzkChevalierD100PickupBoards,
+			}
+		
+		}
+		part TruckBedOpen
+        {
+            container
+            {
+                capacity = 100,
+            }
+        }
+	}
+}

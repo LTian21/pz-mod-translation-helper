@@ -1,0 +1,298 @@
+module Base
+{
+	model Vehicles_pzkHorizon30
+    {
+        mesh = vehicles/Vehicles_pzkHorizon30,
+        shader = vehicle_multiuv,
+        invertX = false,
+        scale = 0.01,
+    }
+	
+    template vehicle SmallCar02
+    {
+	 model
+        {
+            file = Vehicles_pzkHorizon30,
+            scale = 1.82,
+            offset = 0.0 0.3022 0.0,
+        }
+        template = PassengerSeat4,
+        template = CarSmall02Collision,
+        passenger FrontLeft
+        {
+            position inside
+            {
+                offset = 0.1758 -0.1374 -0.0604,
+                rotate = 0.0 0.0 0.0,
+            }
+            position outside
+            {
+                offset = 0.5989 -0.4176 -0.0989,
+                rotate = 0.0 0.0 0.0,
+                area = SeatFrontLeft,
+            }
+        }
+        passenger FrontRight
+        {
+            position inside
+            {
+                offset = -0.1758 -0.1374 -0.0604,
+                rotate = 0.0 0.0 0.0,
+            }
+            position outside
+            {
+                offset = -0.5989 -0.4176 -0.0989,
+                rotate = 0.0 0.0 0.0,
+                area = SeatFrontRight,
+            }
+        }
+        passenger RearLeft
+        {
+            position inside
+            {
+                offset = 0.1758 -0.1374 -0.4725,
+                rotate = 0.0 0.0 0.0,
+            }
+            position outside
+            {
+            }
+        }
+        passenger RearRight
+        {
+            position inside
+            {
+                offset = -0.1758 -0.1374 -0.4725,
+                rotate = 0.0 0.0 0.0,
+            }
+            position outside
+            {
+            }
+        }
+        area SeatFrontLeft
+        {
+            xywh = 0.6429 -0.1099 0.4725 0.4725,
+        }
+        area SeatFrontRight
+        {
+            xywh = -0.6429 -0.1099 0.4725 0.4725,
+        }
+
+        shadowExtents = 0.8791 2.2088,
+        shadowOffset = 0.0 0.0,
+
+		
+        mechanicType = 1,
+        offRoadEfficiency = 0.8,
+        engineRepairLevel = 4,
+        playerDamageProtection = 0.8,
+        spawnOffsetY = 0.5,
+        
+        textureMask = Vehicles/vehicle_smallcar2_mask,
+		textureLights = Vehicles/vehicle_smallcar2_lights,
+        textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+        textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+        textureDamage1Shell = Vehicles/pzkVeh_Damage1,
+        textureDamage2Shell = Vehicles/pzkVeh_Damage2,
+        textureRust = Vehicles/Veh_Rust,
+        sound
+        {
+            alarmLoop = VehicleAlarmA VehicleAlarmB VehicleAlarmC VehicleAlarmD VehicleAlarmE,
+            engine = VehicleEngineSmallCar02,
+            engineStart = VehicleEngineSmallCar02,
+            engineTurnOff = VehicleEngineSmallCar02,
+            horn = VehicleHornStandard,
+            ignitionFail = VehicleIgnitionFailSmallCar02,
+        }
+        extents = 0.8791 0.6484 2.2088,
+        mass = 650,
+        physicsChassisShape = 0.8791 0.6484 2.2088,
+        centerOfMassOffset = 0.0 0.3077 0.0,
+        engineForce = 3600,
+        maxSpeed = 90.0,
+        engineLoudness = 55,
+        engineQuality = 70,
+        brakingForce = 90,
+        stoppingMovementForce = 4.0,
+        rollInfluence = 1.0,
+        steeringIncrement = 0.04,
+        steeringClamp = 0.3,
+        suspensionStiffness = 40.0,
+        suspensionCompression = 3.83,
+        suspensionDamping = 2.88,
+        maxSuspensionTravelCm = 10.0,
+        suspensionRestLength = 0.2,
+        wheelFriction = 1.4,
+        frontEndHealth = 150,
+        rearEndHealth = 150,
+        seats = 4,
+        wheel FrontLeft
+        {
+            front = true,
+            offset = 0.316 -0.29 0.665,
+            radius = 0.15,
+            width = 0.2,
+        }
+        wheel FrontRight
+        {
+            front = true,
+            offset = -0.316 -0.29 0.665,
+            radius = 0.15,
+            width = 0.2,
+        }
+        wheel RearLeft
+        {
+            front = false,
+            offset = 0.316 -0.29 -0.59,
+            radius = 0.15,
+            width = 0.2,
+        }
+        wheel RearRight
+        {
+            front = false,
+            offset = -0.316 -0.29 -0.59,
+            radius = 0.15,
+            width = 0.2,
+        }
+        area Engine
+        {
+            xywh = 0.0 1.3516 0.8132 0.4725,
+        }
+        area TruckBed
+        {
+            xywh = 0.0 -1.3516 0.8132 0.4725,
+        }
+        area GasTank
+        {
+            xywh = -0.6429 -0.6868 0.4725 0.4725,
+        }
+        area TireFrontLeft
+        {
+            xywh = 0.6429 0.5989 0.4725 0.4725,
+        }
+        area TireFrontRight
+        {
+            xywh = -0.6429 0.5989 0.4725 0.4725,
+        }
+        area TireRearLeft
+        {
+            xywh = 0.6429 -0.6868 0.4725 0.4725,
+        }
+        area TireRearRight
+        {
+            xywh = -0.6429 -0.6868 0.4725 0.4725,
+        }
+        template = TrunkDoor,
+        template = Trunk/part/TruckBed,
+        template = Seat/part/SeatFrontLeft,
+        template = Seat/part/SeatFrontRight,
+        template = Seat/part/SeatRearLeft,
+        template = Seat/part/SeatRearRight,
+        template = GloveBox,
+        template = GasTank,
+        template = Battery,
+        template = Engine,
+        template = Muffler,
+        template = EngineDoor,
+        template = Heater,
+        template = Windshield/part/Windshield,
+        template = Windshield/part/WindshieldRear,
+        template = Window/part/WindowFrontLeft,
+        template = Window/part/WindowFrontRight,
+        template = Door/part/DoorFrontLeft,
+        template = Door/part/DoorFrontRight,
+        template = Tire,
+        template = Brake,
+        template = Suspension,
+        template = Radio,
+        template = Headlight,
+        template = CarSmall02Collision,
+        part TruckBed
+        {
+            itemType = Base.SmallTrunk,
+            container
+            {
+                capacity = 40,
+            }
+        }
+        part SeatRearLeft
+        {
+            table install
+            {
+                area = SeatFrontLeft,
+            }
+            table uninstall
+            {
+                area = SeatFrontLeft,
+            }
+        }
+        part SeatRearRight
+        {
+            table install
+            {
+                area = SeatFrontRight,
+            }
+            table uninstall
+            {
+                area = SeatFrontRight,
+            }
+        }
+        part Seat*
+        {
+            container
+            {
+                capacity = 20,
+            }
+            table install
+            {
+                skills = Mechanics:2,
+            }
+            table uninstall
+            {
+                skills = Mechanics:2,
+            }
+        }
+        part EngineDoor
+        {
+            mechanicRequireKey = false,
+        }
+        part Heater
+        {
+            category = engine,
+            lua
+            {
+                update = Vehicles.Update.Heater,
+            }
+        }
+        part PassengerCompartment
+        {
+            category = nodisplay,
+            lua
+            {
+                update = Vehicles.Update.PassengerCompartment,
+            }
+        }
+        part Door*
+        {
+            table install
+            {
+                mechanicRequireKey = false,
+            }
+            table uninstall
+            {
+                mechanicRequireKey = false,
+            }
+        }
+        attachment trailer
+        {
+            offset = 0.0 -0.2747 -1.0989,
+            rotate = 0.0 0.0 0.0,
+            zoffset = -1.0,
+        }
+        attachment trailerfront
+        {
+            offset = 0.0 -0.2747 1.1319,
+            rotate = 0.0 0.0 0.0,
+            zoffset = 1.0,
+        }
+    }
+}
