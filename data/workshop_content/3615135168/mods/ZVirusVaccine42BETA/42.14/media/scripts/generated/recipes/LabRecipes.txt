@@ -26,8 +26,9 @@ module Base
         category 		= Chemistry,
 		timedAction 	= CollectingBlood,
 		Tags 			= InHandCraft;CannotBeResearched,
-        NeedToBeLearn 	= true,
-		xpAward 		= Doctor:2,
+        NeedToBeLearn 	= false,
+		xpAward 		= Doctor:1,
+        SkillRequired   = Doctor:1,
         OnCreate 		= Lab_Recipes_ChmCollectInfectedBlood,
 
         inputs
@@ -243,44 +244,6 @@ module Base
         }
     }
 
-    craftRecipe ChmLabFlaskPourWaterOut
-    {
-        time 			= 30,
-        category 		= Chemistry,
-		timedAction 	= PourLiqOut,
-		tags 			= InHandCraft,
-        NeedToBeLearn 	= false,
-
-        inputs
-        {
-            item 1 [LabItems.LabFlask] mode:destroy flags[Prop1],
-            -fluid 0.01 [Water;PurifiedWater],
-        }
-        outputs
-        {
-            item 1 LabItems.LabFlask,
-        }
-    }
-
-    craftRecipe ChmLabTestTubePourWaterOut
-    {
-        time 			= 30,
-        category 		= Chemistry,
-		timedAction 	= PourLiqOut,
-		tags 			= InHandCraft,
-        NeedToBeLearn 	= false,
-
-        inputs
-        {
-            item 1 [LabItems.LabTestTube] mode:destroy flags[Prop1],
-            -fluid 0.01 [Water;PurifiedWater],
-        }
-        outputs
-        {
-            item 1 LabItems.LabTestTube,
-        }
-    }
-
     /************************* OTHER *************************/
 
     craftRecipe OthShatterEmptyBottle
@@ -404,8 +367,7 @@ module Base
         NeedToBeLearn 	= true,
         Tags 			= InHandCraft;CannotBeResearched,
         timedAction 	= LabSawOffSkull,
-        SkillRequired 	= Doctor:4,
-		xpAward 		= Doctor:15,
+        SkillRequired 	= Doctor:4;Butchering:1,
         OnCreate 		= Lab_Recipes_ChmExtractBrainFromSkull,
 
         inputs
