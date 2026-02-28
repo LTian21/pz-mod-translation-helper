@@ -1,0 +1,112 @@
+module Base
+{
+    craftRecipe GatherGunpowder
+    {
+        timedAction = Making,
+        time = 30,
+        category = Packing,
+        Tags = AnySurfaceCraft,
+        inputs
+        {
+            item 1 tags[base:pliers;base:visegrips] mode:keep,
+            item 1 tags[base:ammo] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.GunPowder flags[HasOneUse],
+        }
+    }
+
+    craftRecipe OpenBoxOfBullets50
+    {
+        timedAction = OpenAmmoBox,
+        time = 15,
+        category = Packing,
+        recipeGroup = OpenBox,
+        Tags = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Bullets9mmBox;Base.Bullets45Box;Base.Bullets38Box;Base.Bullets357Box] mappers[ammoTypes] flags[Prop2;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 50 mapper:ammoTypes,
+        }
+        itemMapper ammoTypes
+        {
+            Base.Bullets9mm = Base.Bullets9mmBox,
+            Base.Bullets45 = Base.Bullets45Box,
+            Base.Bullets38 = Base.Bullets38Box,
+            Base.Bullets357 = Base.Bullets357Box,
+        }
+    }
+
+    craftRecipe OpenBoxOfBullets20
+    {
+        timedAction = OpenAmmoBox,
+        time = 15,
+        category = Packing,
+        recipeGroup = OpenBox,
+        Tags = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.Bullets44Box;Base.308Box;Base.556Box;Base.3030Box] mappers[ammoTypes] flags[Prop2;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 50 mapper:ammoTypes,
+        }
+        itemMapper ammoTypes
+        {
+            Base.Bullets44 = Base.Bullets44Box,
+            Base.308Bullets = Base.308Box,
+            Base.556Bullets = Base.556Box,
+            Base.3030Bullets = Base.3030Box,
+        }
+    }
+
+    craftRecipe OpenBoxOfShotgunShells
+    {
+        timedAction = OpenShellsBox,
+        time = 15,
+        category = Packing,
+        recipeGroup = OpenBox,
+        Tags = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [Base.ShotgunShellsBox] flags[Prop2;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 25 Base.ShotgunShells,
+        }
+    }
+
+    craftRecipe place_ammo_in_box
+    {
+        timedAction = PlaceAmmoInBox,
+        time = 15,
+        category = Packing,
+        Tags = InHandCraft,
+        inputs
+        {
+            item 50 [Base.Bullets44;Base.308Bullets;25:Base.ShotgunShells;Base.556Bullets;50:Base.Bullets9mm;50:Base.Bullets45;50:Base.Bullets38;50:Base.Bullets357;Base.3030Bullets] mappers[ammoType] flags[AllowFavorite;InheritFavorite;IsExclusive],
+        }
+        outputs
+        {
+            item 1 mapper:ammoType,
+        }
+        itemMapper ammoType
+        {
+            Base.Bullets44Box = Base.Bullets44,
+            Base.308Box = Base.308Bullets,
+            Base.ShotgunShellsBox = Base.ShotgunShells,
+            Base.556Box = Base.556Bullets,
+            Base.Bullets9mmBox = Base.Bullets9mm,
+            Base.Bullets45Box = Base.Bullets45,
+            Base.Bullets38Box = Base.Bullets38,
+            Base.Bullets357Box = Base.Bullets357,
+            Base.3030Box = Base.3030Bullets,
+        }
+    }
+}
