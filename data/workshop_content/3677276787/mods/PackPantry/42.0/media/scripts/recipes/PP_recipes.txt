@@ -1,0 +1,468 @@
+module Base
+{
+    imports { PackPantry }
+/***** BASE *****/	
+    craftRecipe PP-OpenCannedFood 
+	{
+        timedAction                         = OpenTinCan,
+        time                                = 100,
+		OnCreate                            = RecipeCodeOnCreate.PP_OpenSealedCan,
+        tags                                = InHandCraft;CanBeDoneInDark,
+		category                            = Canning,
+        inputs
+        {
+            item 1 tags[base:canopener] mode:keep flags[MayDegradeLight],
+            item 1 [Base.TinnedBeans;Base.CannedBolognese;Base.CannedCarrots2;Base.CannedChili;Base.CannedCornedBeef;Base.CannedCorn;Base.CannedFruitCocktail;Base.CannedFruitBeverage;Base.CannedMilk;Base.CannedMushroomSoup;Base.CannedPeaches;Base.CannedPeas;Base.CannedPineapple;Base.CannedPotato2;Base.CannedSardines;Base.TinnedSoup;Base.CannedTomato2;Base.TunaTin;Base.Dogfood;PackPantry.CannedCarrots;PackPantry.CannedTomatos;PackPantry.CannedPotatos;PackPantry.CannedPeaches;PackPantry.CannedPineapples;PackPantry.CannedFishFillet;PackPantry.CannedBass;PackPantry.CannedBluegill;PackPantry.CannedCatfish;PackPantry.CannedPerch;PackPantry.CannedSauger;PackPantry.CannedSunfish;PackPantry.CannedWalleye] mappers[canSorts] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 mapper:canSorts,
+        }
+        itemMapper canSorts
+        {
+			Base.OpenBeans              = Base.TinnedBeans,
+            Base.CannedBologneseOpen    = Base.CannedBolognese,
+            Base.CannedCarrotsOpen      = Base.CannedCarrots2,
+            Base.CannedChiliOpen        = Base.CannedChili,
+            Base.CannedCornedBeefOpen   = Base.CannedCornedBeef,
+            Base.CannedCornOpen         = Base.CannedCorn,
+            Base.CannedFruitCocktailOpen = Base.CannedFruitCocktail,
+            Base.CannedFruitBeverageOpen = Base.CannedFruitBeverage,
+            Base.CannedMilkOpen         = Base.CannedMilk,
+            Base.CannedMushroomSoupOpen = Base.CannedMushroomSoup,
+            Base.CannedPeachesOpen      = Base.CannedPeaches,
+            Base.CannedPeasOpen         = Base.CannedPeas,
+            Base.CannedPineappleOpen    = Base.CannedPineapple,
+            Base.CannedPotatoOpen       = Base.CannedPotato2,
+            Base.CannedSardinesOpen     = Base.CannedSardines,
+            Base.TinnedSoupOpen         = Base.TinnedSoup,
+            Base.CannedTomatoOpen       = Base.CannedTomato2,
+            Base.TunaTinOpen            = Base.TunaTin,
+            Base.DogfoodOpen            = Base.Dogfood,
+		
+            PackPantry.CannedCarrotsOpen    = PackPantry.CannedCarrots,
+            PackPantry.CannedTomatosOpen    = PackPantry.CannedTomatos,
+            PackPantry.CannedPotatosOpen    = PackPantry.CannedPotatos,
+            PackPantry.CannedPeachesOpen    = PackPantry.CannedPeaches,
+            PackPantry.CannedPineapplesOpen = PackPantry.CannedPineapples,
+            
+            PackPantry.CannedFishFilletOpen = PackPantry.CannedFishFillet, 
+            PackPantry.CannedBassOpen       = PackPantry.CannedBass,
+            PackPantry.CannedBluegillOpen   = PackPantry.CannedBluegill,
+            PackPantry.CannedCatfishOpen    = PackPantry.CannedCatfish,
+            PackPantry.CannedPerchOpen      = PackPantry.CannedPerch, 
+            PackPantry.CannedSaugerOpen     = PackPantry.CannedSauger, 
+            PackPantry.CannedSunfishOpen    = PackPantry.CannedSunfish, 
+            PackPantry.CannedWalleyeOpen    = PackPantry.CannedWalleye,             
+        }
+	}
+    
+    craftRecipe PP-OpenCannedFoodWithKnifeOrSharpStoneFlake
+	{
+		Time                                = 80,
+		timedAction                         = OpenTinCanWithKnife,
+		OnCreate                            = RecipeCodeOnCreate.PP_OpenSealedCan
+		ToolTip                             = Tooltip_Recipe_OpenCanWithKnife,
+		Tags                                = InHandCraft;Cooking,
+		category                            = Canning,
+		inputs
+		{
+			item 1 tags[base:sharpknife] mode:keep flags[Prop1;MayDegrade;IsNotDull],
+            item 1 [Base.TinnedBeans;Base.CannedBolognese;Base.CannedCarrots2;Base.CannedChili;Base.CannedCornedBeef;Base.CannedCorn;Base.CannedFruitCocktail;Base.CannedFruitBeverage;Base.CannedMilk;Base.CannedMushroomSoup;Base.CannedPeaches;Base.CannedPeas;Base.CannedPineapple;Base.CannedPotato2;Base.CannedSardines;Base.TinnedSoup;Base.CannedTomato2;Base.TunaTin;Base.Dogfood;PackPantry.CannedCarrots;PackPantry.CannedTomatos;PackPantry.CannedPotatos;PackPantry.CannedPeaches;PackPantry.CannedPineapples;PackPantry.CannedFishFillet;PackPantry.CannedBass;PackPantry.CannedBluegill;PackPantry.CannedCatfish;PackPantry.CannedPerch;PackPantry.CannedSauger;PackPantry.CannedSunfish;PackPantry.CannedWalleye] mappers[foodType] flags[Prop2],
+		}
+		outputs
+		{
+			item 1 mapper:foodType,
+		}
+		itemMapper foodType
+		{
+			Base.OpenBeans              = Base.TinnedBeans,
+            Base.CannedBologneseOpen    = Base.CannedBolognese,
+            Base.CannedCarrotsOpen      = Base.CannedCarrots2,
+            Base.CannedChiliOpen        = Base.CannedChili,
+            Base.CannedCornedBeefOpen   = Base.CannedCornedBeef,
+            Base.CannedCornOpen         = Base.CannedCorn,
+            Base.CannedFruitCocktailOpen = Base.CannedFruitCocktail,
+            Base.CannedFruitBeverageOpen = Base.CannedFruitBeverage,
+            Base.CannedMilkOpen         = Base.CannedMilk,
+            Base.CannedMushroomSoupOpen = Base.CannedMushroomSoup,
+            Base.CannedPeachesOpen      = Base.CannedPeaches,
+            Base.CannedPeasOpen         = Base.CannedPeas,
+            Base.CannedPineappleOpen    = Base.CannedPineapple,
+            Base.CannedPotatoOpen       = Base.CannedPotato2,
+            Base.CannedSardinesOpen     = Base.CannedSardines,
+            Base.TinnedSoupOpen         = Base.TinnedSoup,
+            Base.CannedTomatoOpen       = Base.CannedTomato2,
+            Base.TunaTinOpen            = Base.TunaTin,
+            Base.DogfoodOpen            = Base.Dogfood,		
+		
+            PackPantry.CannedCarrotsOpen    = PackPantry.CannedCarrots,
+            PackPantry.CannedTomatosOpen    = PackPantry.CannedTomatos,
+            PackPantry.CannedPotatosOpen    = PackPantry.CannedPotatos,
+            PackPantry.CannedPeachesOpen    = PackPantry.CannedPeaches,
+            PackPantry.CannedPineapplesOpen = PackPantry.CannedPineapples,
+            
+            PackPantry.CannedFishFilletOpen = PackPantry.CannedFishFillet, 
+            PackPantry.CannedBassOpen       = PackPantry.CannedBass,
+            PackPantry.CannedBluegillOpen   = PackPantry.CannedBluegill,
+            PackPantry.CannedCatfishOpen    = PackPantry.CannedCatfish, 
+            PackPantry.CannedPerchOpen      = PackPantry.CannedPerch,
+            PackPantry.CannedSaugerOpen     = PackPantry.CannedSauger, 
+            PackPantry.CannedSunfishOpen    = PackPantry.CannedSunfish, 
+            PackPantry.CannedWalleyeOpen    = PackPantry.CannedWalleye, 
+		}
+	}
+    
+    craftRecipe PP-SealCannedFood 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+		OnCreate                            = RecipeCodeOnCreate.sealCan,
+        tags 		                        = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+		category 	                        = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.OpenBeans;Base.CannedBologneseOpen;Base.CannedCarrotsOpen;Base.CannedChiliOpen;Base.CannedCornedBeefOpen;Base.CannedCornOpen;Base.CannedFruitCocktailOpen;Base.CannedFruitBeverageOpen;Base.CannedMilkOpen;Base.CannedMushroomSoupOpen;Base.CannedPeachesOpen;Base.CannedPeasOpen;Base.CannedPineappleOpen;Base.CannedPotatoOpen;Base.CannedSardinesOpen;Base.TinnedSoupOpen;Base.CannedTomatoOpen;Base.TunaTinOpen;Base.DogfoodOpen;PackPantry.CannedCarrotsOpen;PackPantry.CannedTomatosOpen;PackPantry.CannedPotatosOpen;PackPantry.CannedPeachesOpen;PackPantry.CannedPineapplesOpen] mappers[canSorts] mode:destroy flags[Prop2],
+        }
+        outputs
+        {
+            item 1 mapper:canSorts,
+        }
+        itemMapper canSorts
+        {
+            Base.TinnedBeans 			    = Base.OpenBeans,
+            Base.CannedBolognese 		    = Base.CannedBologneseOpen,
+            Base.CannedCarrots2 		    = Base.CannedCarrotsOpen,
+            Base.CannedChili			    = Base.CannedChiliOpen,
+            Base.CannedCornedBeef		    = Base.CannedCornedBeefOpen,
+            Base.CannedCorn				    = Base.CannedCornOpen,
+            Base.CannedFruitCocktail	    = Base.CannedFruitCocktailOpen,
+            Base.CannedFruitBeverage	    = Base.CannedFruitBeverageOpen,
+            Base.CannedMilk				    = Base.CannedMilkOpen,
+            Base.CannedMushroomSoup		    = Base.CannedMushroomSoupOpen,
+            Base.CannedPeaches			    = Base.CannedPeachesOpen,
+            Base.CannedPeas				    = Base.CannedPeasOpen,
+            Base.CannedPineapple		    = Base.CannedPineappleOpen,
+            Base.CannedPotato2			    = Base.CannedPotatoOpen,
+            Base.CannedSardines			    = Base.CannedSardinesOpen,
+            Base.TinnedSoup				    = Base.TinnedSoupOpen,
+            Base.CannedTomato2			    = Base.CannedTomatoOpen,
+            Base.TunaTin				    = Base.TunaTinOpen,
+            Base.Dogfood				    = Base.DogfoodOpen,
+
+            PackPantry.CannedCarrots        = PackPantry.CannedCarrotsOpen,
+            PackPantry.CannedTomatos        = PackPantry.CannedTomatosOpen,
+            PackPantry.CannedPotatos        = PackPantry.CannedPotatosOpen,
+            PackPantry.CannedPeaches        = PackPantry.CannedPeachesOpen,
+            PackPantry.CannedPineapples     = PackPantry.CannedPineapplesOpen,
+
+            PackPantry.CannedFishFillet     = PackPantry.CannedFishFilletOpen, 
+            PackPantry.CannedBass           = PackPantry.CannedBassOpen,
+            PackPantry.CannedBluegill       = PackPantry.CannedBluegillOpen,
+            PackPantry.CannedCatfish        = PackPantry.CannedCatfishOpen, 
+            PackPantry.CannedPerch          = PackPantry.CannedPerchOpen,
+            PackPantry.CannedSauger         = PackPantry.CannedSaugerOpen, 
+            PackPantry.CannedSunfish        = PackPantry.CannedSunfishOpen, 
+            PackPantry.CannedWalleye        = PackPantry.CannedWalleyeOpen, 
+        }
+	}
+
+/***** VEGETABLES *****/    
+    craftRecipe PP-PreserveCarrots 
+	{
+        timedAction                         = OpenTinCan,
+        time 	                            = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Carrots] mappers[foodSorts] mode:destroy,
+            item 1 tags[Vinegar],
+			item 1 [Base.Salt],
+			item 1 [*],
+			-fluid 0.3 [Water],
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedCarrots,
+        }
+	}
+
+    craftRecipe PP-PreserveTomatos 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [farming.Tomato] mode:destroy,
+            item 1 tags[Vinegar],
+			item 1 [Base.Salt],
+			item 1 [*],
+			-fluid 0.3 [Water],
+        }
+        outputs
+        {
+            item 1 Base.CannedTomato2,
+        }
+	}
+
+    craftRecipe PP-PreservePotatos 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [farming.Potato] mode:destroy,
+            item 1 tags[Vinegar],
+			item 1 [Base.Salt],
+			item 1 [*],
+			-fluid 0.3 [Water],
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedPotatos,
+        }
+	}
+    
+    craftRecipe PP-PreservePeaches 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Peach] mappers[foodSorts] mode:destroy,
+            item 1 tags[Vinegar],
+			item 1 [Base.Salt],
+			item 1 [*],
+			-fluid 0.3 [Water],
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedPeaches,
+        } 
+	}
+
+    craftRecipe PP-PreservePineapples 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Pineapple] mappers[foodSorts] mode:destroy,
+            item 1 tags[Vinegar],
+			item 1 [Base.Salt],
+			item 1 [*],
+			-fluid 0.3 [Water],
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedPineapples,
+        } 
+	}
+
+/**** FISH ****/
+    craftRecipe PP-PreserveFishFillet 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.FishFillet] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedFishFillet,
+        } 
+	}
+
+    craftRecipe PP-PreserveBass 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.WhiteBass;Base.LargemouthBass;Base.SmallmouthBass;Base.SpottedBass;Base.StripedBass] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedBass,
+        } 
+	}
+
+    craftRecipe PP-PreserveBluegill 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Bluegill] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedBluegill,
+        } 
+	}
+
+    craftRecipe PP-PreserveCatfish 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.BlueCatfish;Base.ChannelCatfish;Base.FlatheadCatfish] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedCatfish,
+        } 
+	}
+    
+    craftRecipe PP-PreserveCrappie 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.BlackCrappie;Base.WhiteCrappie] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedCrappie,
+        } 
+	}
+
+    craftRecipe PP-PreservePerch 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.YellowPerch] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedPerch,
+        } 
+	}
+
+    craftRecipe PP-PreserveSauger 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Sauger] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedSauger,
+        } 
+	}
+
+    craftRecipe PP-PreserveSunfish 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.RedearSunfish;Base.GreenSunfish] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedSunfish,
+        } 
+	}
+
+    craftRecipe PP-PreserveWalleye 
+	{
+        timedAction                         = OpenTinCan,
+        time 		                        = 150,
+        Tags                                = InHandCraft;CanBeDoneInDark;Cooking,
+        xpAward                             = Cooking:3,
+        category                            = Canning,
+        inputs
+        {
+            item 1 [PackPantry.TinSealer] mode:keep,
+            item 1 [Base.TinCanEmpty] mode:destroy,
+            item 2 [Base.Walleye] mappers[foodSorts] mode:destroy,
+            item 1 [Base.OilVegetable] mode:destroy,
+        }
+        outputs
+        {
+            item 1 PackPantry.CannedWalleye,
+        } 
+	}
+}
