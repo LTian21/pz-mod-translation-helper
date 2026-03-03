@@ -5,11 +5,10 @@ module Base
 	craftRecipe ChmDiscardBloodFromSyringe
     {
         time 			= 25,
-        category 		= Health,
+        category 		= Chemistry,
 		timedAction 	= PourLiqOut,
 		Tags 			= InHandCraft,
         NeedToBeLearn 	= false,
-		Tags 			= InHandCraft,
 
         inputs
         {
@@ -28,7 +27,8 @@ module Base
 		timedAction 	= CollectingBlood,
 		Tags 			= InHandCraft;CannotBeResearched,
         NeedToBeLearn 	= false,
-		xpAward 		= Doctor:2,
+		xpAward 		= Doctor:1,
+        SkillRequired   = Doctor:1,
         OnCreate 		= Lab_Recipes_ChmCollectInfectedBlood,
 
         inputs
@@ -70,12 +70,12 @@ module Base
     craftRecipe ChmSterilizeGlassesHW
     {
         time 			= 30,
-		Tags 			= InHandCraft,
+		Tags 			= InHandCraft;CannotBeResearched,
         category 		= Chemistry,
 		timedAction 	= SterilizeTubes,
         OnTest          = RecipeCodeOnTest.hotFluidContainer,
         Tooltip         = Tooltip_needsToBeHot,
-        NeedToBeLearn 	= false,
+        NeedToBeLearn 	= true,
 
         inputs
         {
@@ -97,12 +97,12 @@ module Base
 	craftRecipe ChmSterilizeGlassesHWPot
     {
         time 			= 40,
-		Tags 			= InHandCraft,
+		Tags 			= InHandCraft;CannotBeResearched,
         category 		= Chemistry,
 		timedAction 	= SterilizeTubes,
         OnTest          = RecipeCodeOnTest.hotFluidContainer,
         Tooltip         = Tooltip_needsToBeHot,
-        NeedToBeLearn 	= false,
+        NeedToBeLearn 	= true,
 
         inputs
         {
@@ -119,12 +119,12 @@ module Base
     craftRecipe ChmSterilizeGlassesHWPot2
     {
         time 			= 40,
-		Tags 			= InHandCraft,
+		Tags 			= InHandCraft;CannotBeResearched,
         category 		= Chemistry,
 		timedAction 	= SterilizeTubes,
         OnTest          = RecipeCodeOnTest.hotFluidContainer,
         Tooltip         = Tooltip_needsToBeHot,
-        NeedToBeLearn 	= false,
+        NeedToBeLearn 	= true,
 
         inputs
         {
@@ -141,12 +141,12 @@ module Base
     craftRecipe ChmSterilizeGlassesHWBucket
     {
         time 			= 60,
-		Tags 			= InHandCraft,
+		Tags 			= InHandCraft;CannotBeResearched,
         category 		= Chemistry,
 		timedAction 	= SterilizeTubes,
         OnTest          = RecipeCodeOnTest.hotFluidContainer,
         Tooltip         = Tooltip_needsToBeHot,
-        NeedToBeLearn 	= false,
+        NeedToBeLearn 	= true,
 
         inputs
         {
@@ -163,12 +163,12 @@ module Base
     craftRecipe ChmSterilizeGlassesHWBucket2
     {
         time 			= 60,
-		Tags 			= InHandCraft,
+		Tags 			= InHandCraft;CannotBeResearched,
         category 		= Chemistry,
 		timedAction 	= SterilizeTubes,
         OnTest          = RecipeCodeOnTest.hotFluidContainer,
         Tooltip         = Tooltip_needsToBeHot,
-        NeedToBeLearn 	= false,
+        NeedToBeLearn 	= true,
 
         inputs
         {
@@ -241,44 +241,6 @@ module Base
         outputs
         {
             item 1 LabItems.LabSyringeReusable,
-        }
-    }
-
-    craftRecipe ChmLabFlaskPourWaterOut
-    {
-        time 			= 30,
-        category 		= Chemistry,
-		timedAction 	= PourLiqOut,
-		tags 			= InHandCraft,
-        NeedToBeLearn 	= false,
-
-        inputs
-        {
-            item 1 [LabItems.LabFlask] mode:destroy flags[Prop1],
-            -fluid 0.01 [TaintedWater;Water;PurifiedWater],
-        }
-        outputs
-        {
-            item 1 LabItems.LabFlask,
-        }
-    }
-
-    craftRecipe ChmLabTestTubePourWaterOut
-    {
-        time 			= 30,
-        category 		= Chemistry,
-		timedAction 	= PourLiqOut,
-		tags 			= InHandCraft,
-        NeedToBeLearn 	= false,
-
-        inputs
-        {
-            item 1 [LabItems.LabTestTube] mode:destroy flags[Prop1],
-            -fluid 0.01 [TaintedWater;Water;PurifiedWater],
-        }
-        outputs
-        {
-            item 1 LabItems.LabTestTube,
         }
     }
 
@@ -382,7 +344,7 @@ module Base
         time 			= 150,
         category 		= Medical,
         NeedToBeLearn 	= true,
-        Tags 			= InHandCraft,
+        Tags 			= InHandCraft;CannotBeResearched,
         timedAction 	= Making_Surface,
         SkillRequired 	= Doctor:1,
 		xpAward 		= Doctor:5,
@@ -405,8 +367,7 @@ module Base
         NeedToBeLearn 	= true,
         Tags 			= InHandCraft;CannotBeResearched,
         timedAction 	= LabSawOffSkull,
-        SkillRequired 	= Doctor:4,
-		xpAward 		= Doctor:15,
+        SkillRequired 	= Doctor:4;Butchering:1,
         OnCreate 		= Lab_Recipes_ChmExtractBrainFromSkull,
 
         inputs
