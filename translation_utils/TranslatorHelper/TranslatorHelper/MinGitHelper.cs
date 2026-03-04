@@ -66,7 +66,7 @@ partial class Program
             {
                 if (!state.ModeChangeLogged)
                 {
-                    Console.WriteLine("[Git] ÕıÔÚ½øĞĞ mode change ²Ù×÷...");
+                    Console.WriteLine("[Git] ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½ mode change ï¿½ï¿½ï¿½ï¿½...");
                     state.ModeChangeLogged = true;
                 }
                 return true;
@@ -75,7 +75,7 @@ partial class Program
             {
                 if (!state.CreateModeLogged)
                 {
-                    Console.WriteLine("[Git] ÕıÔÚ½øĞĞ create mode ²Ù×÷...");
+                    Console.WriteLine("[Git] ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½ create mode ï¿½ï¿½ï¿½ï¿½...");
                     state.CreateModeLogged = true;
                 }
                 return true;
@@ -84,7 +84,7 @@ partial class Program
             {
                 if (!state.DeleteModeLogged)
                 {
-                    Console.WriteLine("[Git] ÕıÔÚ½øĞĞ delete mode ²Ù×÷...");
+                    Console.WriteLine("[Git] ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½ delete mode ï¿½ï¿½ï¿½ï¿½...");
                     state.DeleteModeLogged = true;
                 }
                 return true;
@@ -100,18 +100,50 @@ partial class Program
             }
 
             string exeDir = AppContext.BaseDirectory;
-            string mingitPath = Path.Combine(exeDir, ".." ,"MinGit", "cmd", "git.exe");
 
+            // 1) Try bundled MinGit (Windows)
+            string mingitPath = Path.Combine(exeDir, ".." ,"MinGit", "cmd", "git.exe");
             if (File.Exists(mingitPath))
             {
                 _cachedGitPath = mingitPath;
-                _cachedGitInfo = $"Ê¹ÓÃ MinGit: {mingitPath}";
+                _cachedGitInfo = $"ä½¿ç”¨ MinGit: {mingitPath}";
                 return _cachedGitPath;
             }
 
-            string errorMessage = $"Î´ÕÒµ½ÄÚÖÃ Git (MinGit)¡£ÇëÈ·ÈÏ³ÌĞòÄ¿Â¼ÖĞ´æÔÚ {mingitPath}¡£";
+            // 2) On non-Windows platforms (Linux/macOS), look for system git in PATH
+            if (!OperatingSystem.IsWindows())
+            {
+                string? systemGit = FindInPath("git");
+                if (!string.IsNullOrEmpty(systemGit))
+                {
+                    _cachedGitPath = systemGit;
+                    _cachedGitInfo = $"ä½¿ç”¨ç³»ç»Ÿ Git: {systemGit}";
+                    return _cachedGitPath;
+                }
+            }
+
+            string errorMessage = OperatingSystem.IsWindows()
+                ? $"æœªæ‰¾åˆ°å†…ç½® Git (MinGit)ï¼Œè¯·ç¡®è®¤ç¨‹åºç›®å½•ä¸‹å­˜åœ¨ {mingitPath}ã€‚"
+                : "æœªæ‰¾åˆ°ç³»ç»Ÿ Gitï¼Œè¯·å…ˆå®‰è£… gitï¼ˆä¾‹å¦‚ï¼šsudo apt install git æˆ– brew install gitï¼‰ã€‚";
             _cachedGitInfo = errorMessage;
-            throw new FileNotFoundException(errorMessage, mingitPath);
+            throw new FileNotFoundException(errorMessage, OperatingSystem.IsWindows() ? mingitPath : "git");
+        }
+
+        /// <summary>
+        /// Search for an executable in the system PATH.
+        /// </summary>
+        private static string? FindInPath(string executableName)
+        {
+            var pathEnv = Environment.GetEnvironmentVariable("PATH");
+            if (string.IsNullOrEmpty(pathEnv)) return null;
+
+            char separator = OperatingSystem.IsWindows() ? ';' : ':';
+            foreach (var dir in pathEnv.Split(separator, StringSplitOptions.RemoveEmptyEntries))
+            {
+                var fullPath = Path.Combine(dir.Trim(), executableName);
+                if (File.Exists(fullPath)) return fullPath;
+            }
+            return null;
         }
 
         /// <summary>
@@ -250,7 +282,7 @@ partial class Program
 
                 if (isErrorLine && !isProgress)
                 {
-                    Console.WriteLine($"[Git] (´íÎó): {line}");
+                    Console.WriteLine($"[Git] (ï¿½ï¿½ï¿½ï¿½): {line}");
                 }
                 else
                 {
@@ -300,7 +332,7 @@ partial class Program
                 startInfo.Environment["http_proxy"] = proxyUrl;
                 startInfo.Environment["https_proxy"] = proxyUrl;
                 startInfo.Environment["all_proxy"] = proxyUrl;
-                Console.WriteLine($"[ĞÅÏ¢] Git Ê¹ÓÃ´úÀí: {proxyUrl}");
+                Console.WriteLine($"[ï¿½ï¿½Ï¢] Git Ê¹ï¿½Ã´ï¿½ï¿½ï¿½: {proxyUrl}");
             }
             else
             {
@@ -338,8 +370,8 @@ partial class Program
             if (stderr.Contains("schannel: next InitializeSecurityContext failed: CRYPT_E_REVOCATION_OFFLINE") ||
                 stderr.Contains("0x80092013"))
             {
-                Console.WriteLine("[´íÎó] Git TLS Á¬½ÓÊ§°Ü (schannel ÒÑ½ûÓÃ£¬Ê¹ÓÃ OpenSSL ÖØĞÂ³¢ÊÔ)");
-                throw new GitNetworkException($"Git TLS Á¬½ÓÊ§°Ü: {stderr}");
+                Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] Git TLS ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ (schannel ï¿½Ñ½ï¿½ï¿½Ã£ï¿½Ê¹ï¿½ï¿½ OpenSSL ï¿½ï¿½ï¿½Â³ï¿½ï¿½ï¿½)");
+                throw new GitNetworkException($"Git TLS ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½: {stderr}");
             }
         }
 
@@ -350,8 +382,8 @@ partial class Program
         {
             try
             {
-                Console.WriteLine($"[¿ªÊ¼] ¿ËÂ¡²Ö¿â: {repoUrl}");
-                Console.WriteLine($"  Ä¿±êÂ·¾¶: {targetPath}");
+                Console.WriteLine($"[ï¿½ï¿½Ê¼] ï¿½ï¿½Â¡ï¿½Ö¿ï¿½: {repoUrl}");
+                Console.WriteLine($"  Ä¿ï¿½ï¿½Â·ï¿½ï¿½: {targetPath}");
 
                 // Use header-based auth only; do not inject PAT into URL.
                 var args = $"clone --progress \"{repoUrl}\" \"{targetPath}\"";
@@ -360,14 +392,14 @@ partial class Program
 
                 if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[³É¹¦] ²Ö¿â¿ËÂ¡³É¹¦");
+                    Console.WriteLine("[ï¿½É¹ï¿½] ï¿½Ö¿ï¿½ï¿½Â¡ï¿½É¹ï¿½");
                     return true;
                 }
                 else
                 {
                     CheckForNetworkError(result.StandardError);
-                    Console.WriteLine($"[´íÎó] ¿ËÂ¡Ê§°Ü (ÍË³öÂë: {result.ExitCode})");
-                    Console.WriteLine($"  ´íÎóĞÅÏ¢: {result.StandardError}");
+                    Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½Â¡Ê§ï¿½ï¿½ (ï¿½Ë³ï¿½ï¿½ï¿½: {result.ExitCode})");
+                    Console.WriteLine($"  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢: {result.StandardError}");
                     return false;
                 }
             }
@@ -377,7 +409,7 @@ partial class Program
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[´íÎó] ¿ËÂ¡¹ı³ÌÖĞ·¢ÉúÒì³£: {ex.Message}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½Â¡ï¿½ï¿½ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½ï¿½ì³£: {ex.Message}");
                 return false;
             }
         }
@@ -389,7 +421,7 @@ partial class Program
         {
             try
             {
-                Console.WriteLine($"[¿ªÊ¼] »ñÈ¡Ô¶³Ì¸üĞÂ: {remote}");
+                Console.WriteLine($"[ï¿½ï¿½Ê¼] ï¿½ï¿½È¡Ô¶ï¿½Ì¸ï¿½ï¿½ï¿½: {remote}");
                 var argsBuilder = new StringBuilder("fetch");
                 if (force) argsBuilder.Append(" --force");
                 if (prune) argsBuilder.Append(" --prune");
@@ -400,13 +432,13 @@ partial class Program
 
                 if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[³É¹¦] Ô¶³Ì¸üĞÂ»ñÈ¡³É¹¦");
+                    Console.WriteLine("[ï¿½É¹ï¿½] Ô¶ï¿½Ì¸ï¿½ï¿½Â»ï¿½È¡ï¿½É¹ï¿½");
                     return true;
                 }
                 else
                 {
                     CheckForNetworkError(result.StandardError);
-                    Console.WriteLine($"[´íÎó] »ñÈ¡Ê§°Ü (ÍË³öÂë: {result.ExitCode})");
+                    Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½È¡Ê§ï¿½ï¿½ (ï¿½Ë³ï¿½ï¿½ï¿½: {result.ExitCode})");
                     return false;
                 }
             }
@@ -416,7 +448,7 @@ partial class Program
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[´íÎó] »ñÈ¡¹ı³ÌÖĞ·¢ÉúÒì³£: {ex.Message}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½ï¿½ì³£: {ex.Message}");
                 return false;
             }
         }
@@ -428,17 +460,17 @@ partial class Program
         {
             try
             {
-                Console.WriteLine($"[¿ªÊ¼] À­È¡²¢ºÏ²¢±ä¸ü");
+                Console.WriteLine($"[ï¿½ï¿½Ê¼] ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½");
 
                 if (branch == null)
                 {
                     branch = await GetCurrentBranchAsync(repoPath);
                     if (string.IsNullOrEmpty(branch))
                     {
-                        Console.WriteLine("[´íÎó] ÎŞ·¨»ñÈ¡µ±Ç°·ÖÖ§ĞÅÏ¢");
+                        Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] ï¿½Ş·ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½Ö§ï¿½ï¿½Ï¢");
                         return false;
                     }
-                    Console.WriteLine($"[ĞÅÏ¢] µ±Ç°·ÖÖ§: {branch}");
+                    Console.WriteLine($"[ï¿½ï¿½Ï¢] ï¿½ï¿½Ç°ï¿½ï¿½Ö§: {branch}");
                 }
 
                 var pullArgs = $"pull {remote} {branch}".Trim();
@@ -447,7 +479,7 @@ partial class Program
 
                 if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[³É¹¦] ²Ö¿âÒÑ¸üĞÂµ½×îĞÂ°æ±¾");
+                    Console.WriteLine("[ï¿½É¹ï¿½] ï¿½Ö¿ï¿½ï¿½Ñ¸ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½Â°æ±¾");
                     return true;
                 }
                 else
@@ -456,13 +488,13 @@ partial class Program
                     if (result.StandardError.Contains("CONFLICT", StringComparison.OrdinalIgnoreCase)
                         || result.StandardOutput.Contains("CONFLICT", StringComparison.OrdinalIgnoreCase))
                     {
-                        Console.WriteLine("[´íÎó] À­È¡Ê§°Ü: ³öÏÖºÏ²¢³åÍ»");
-                        Console.WriteLine("[ÌáÊ¾] ÇëÁªÏµ¼¼ÊõÈËÔ±´¦Àí³åÍ»");
+                        Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½È¡Ê§ï¿½ï¿½: ï¿½ï¿½ï¿½ÖºÏ²ï¿½ï¿½ï¿½Í»");
+                        Console.WriteLine("[ï¿½ï¿½Ê¾] ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»");
                         return false;
                     }
                     else
                     {
-                        Console.WriteLine($"[´íÎó] À­È¡Ê§°Ü (ÍË³öÂë: {result.ExitCode})");
+                        Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½È¡Ê§ï¿½ï¿½ (ï¿½Ë³ï¿½ï¿½ï¿½: {result.ExitCode})");
                         return false;
                     }
                 }
@@ -473,7 +505,7 @@ partial class Program
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[´íÎó] À­È¡¹ı³ÌÖĞ·¢ÉúÒì³£: {ex.Message}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½ï¿½ì³£: {ex.Message}");
                 return false;
             }
         }
@@ -501,19 +533,19 @@ partial class Program
         {
             try
             {
-                Console.WriteLine("[¿ªÊ¼] Ôİ´æËùÓĞ¸Ä¶¯");
+                Console.WriteLine("[ï¿½ï¿½Ê¼] ï¿½İ´ï¿½ï¿½ï¿½ï¿½Ğ¸Ä¶ï¿½");
                 var result = await RunGit("add -A", false, null, repoPath);
 
                 if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[³É¹¦] ÒÑÔİ´æËùÓĞ¸Ä¶¯");
+                    Console.WriteLine("[ï¿½É¹ï¿½] ï¿½ï¿½ï¿½İ´ï¿½ï¿½ï¿½ï¿½Ğ¸Ä¶ï¿½");
                     return true;
                 }
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[´íÎó] Ôİ´æÊ§°Ü: {ex.Message}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½İ´ï¿½Ê§ï¿½ï¿½: {ex.Message}");
                 return false;
             }
         }
@@ -557,7 +589,7 @@ partial class Program
                     await RunGit($"config user.email \"{userEmail}\"", false, null, repoPath);
                 }
 
-                Console.WriteLine($"[¿ªÊ¼] Ìá½»¸ü¸Ä: {message}");
+                Console.WriteLine($"[ï¿½ï¿½Ê¼] ï¿½á½»ï¿½ï¿½ï¿½ï¿½: {message}");
                 var escapedMessage = message.Replace("\"", "\\\"");
                 var commitResult = await RunGit($"commit -m \"{escapedMessage}\"", false, null, repoPath);
 
@@ -566,18 +598,18 @@ partial class Program
                     var shaMatch = System.Text.RegularExpressions.Regex.Match(commitResult.StandardOutput, @"\[.+? ([a-f0-9]{7,40})\]");
                     var commitSha = shaMatch.Success ? shaMatch.Groups[1].Value : "unknown";
 
-                    Console.WriteLine($"[³É¹¦] Ìá½»³É¹¦: {commitSha}");
+                    Console.WriteLine($"[ï¿½É¹ï¿½] ï¿½á½»ï¿½É¹ï¿½: {commitSha}");
                     return (true, commitSha);
                 }
                 else
                 {
-                    Console.WriteLine($"[´íÎó] Ìá½»Ê§°Ü (ÍË³öÂë: {commitResult.ExitCode})");
+                    Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½á½»Ê§ï¿½ï¿½ (ï¿½Ë³ï¿½ï¿½ï¿½: {commitResult.ExitCode})");
                     return (false, null);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[´íÎó] Ìá½»¹ı³ÌÖĞ·¢ÉúÒì³£: {ex.Message}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½á½»ï¿½ï¿½ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½ï¿½ì³£: {ex.Message}");
                 return (false, null);
             }
         }
@@ -597,7 +629,7 @@ partial class Program
         {
             try
             {
-                Console.WriteLine("ÕıÔÚÍÆËÍµ½Ô¶³Ì²Ö¿â...");
+                Console.WriteLine("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½Ô¶ï¿½Ì²Ö¿ï¿½...");
 
                 var pushArgs = branch != null
                     ? $"push {(force ? "--force " : string.Empty)}{remote} {branch}"
@@ -609,26 +641,26 @@ partial class Program
 
                 if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[³É¹¦] ÍÆËÍ³É¹¦");
+                    Console.WriteLine("[ï¿½É¹ï¿½] ï¿½ï¿½ï¿½Í³É¹ï¿½");
                     return true;
                 }
 
                 if (!force && (result.StandardError.Contains("non-fast-forward", StringComparison.OrdinalIgnoreCase)
                     || result.StandardOutput.Contains("non-fast-forward", StringComparison.OrdinalIgnoreCase)))
                 {
-                    Console.WriteLine("[´íÎó] ÍÆËÍÊ§°Ü: Ô¶¶Ë·ÖÖ§ÓĞĞÂµÄÌá½»");
-                    Console.WriteLine("[ÌáÊ¾] ÇëÖ´ĞĞ sync ²Ù×÷Í¬²½ºóÔÙÊÔ");
-                    Console.WriteLine("[ÌáÊ¾] Èç¹ûÈÔÓĞ³åÍ»ÇëÁªÏµ¼¼ÊõÈËÔ±");
+                    Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½: Ô¶ï¿½Ë·ï¿½Ö§ï¿½ï¿½ï¿½Âµï¿½ï¿½á½»");
+                    Console.WriteLine("[ï¿½ï¿½Ê¾] ï¿½ï¿½Ö´ï¿½ï¿½ sync ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+                    Console.WriteLine("[ï¿½ï¿½Ê¾] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ³ï¿½Í»ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±");
                     return false;
                 }
 
-                Console.WriteLine($"[´íÎó] ÍÆËÍÊ§°Ü (ÍË³öÂë: {result.ExitCode})");
-                Console.WriteLine("[ÌáÊ¾] Çë¼ì²éÍøÂçÁ¬½Ó»òÉÔºóÖØÊÔ");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ (ï¿½Ë³ï¿½ï¿½ï¿½: {result.ExitCode})");
+                Console.WriteLine("[ï¿½ï¿½Ê¾] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½ï¿½");
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[´íÎó] ÍÆËÍ¹ı³ÌÖĞ·¢ÉúÒì³£: {ex.Message}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½Í¹ï¿½ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½ï¿½ì³£: {ex.Message}");
                 return false;
             }
         }
@@ -666,11 +698,11 @@ partial class Program
                 var result = await RunGit($"checkout -B {branch} {remote}/{branch}", false, null, repoPath);
                 if (result.ExitCode == 0)
                 {
-                    Console.WriteLine($"[³É¹¦] ÒÑ´´½¨/¸²¸Ç±¾µØ·ÖÖ§: {branch} (À´×Ô {remote}/{branch})");
+                    Console.WriteLine($"[ï¿½É¹ï¿½] ï¿½Ñ´ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½Ç±ï¿½ï¿½Ø·ï¿½Ö§: {branch} (ï¿½ï¿½ï¿½ï¿½ {remote}/{branch})");
                     return true;
                 }
 
-                Console.WriteLine($"[´íÎó] ´´½¨±¾µØ·ÖÖ§Ê§°Ü (ÍË³öÂë: {result.ExitCode})");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½Ö§Ê§ï¿½ï¿½ (ï¿½Ë³ï¿½ï¿½ï¿½: {result.ExitCode})");
                 return false;
             }
             catch (GitNetworkException)
@@ -679,7 +711,7 @@ partial class Program
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[´íÎó] È·±£±¾µØ·ÖÖ§×´Ì¬Ê§°Ü: {ex.Message}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] È·ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½Ö§×´Ì¬Ê§ï¿½ï¿½: {ex.Message}");
                 return false;
             }
         }
@@ -692,7 +724,7 @@ partial class Program
         {
             try
             {
-                Console.WriteLine("ÕıÔÚÍÆËÍµ½Ô¶³Ì²Ö¿â...");
+                Console.WriteLine("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½Ô¶ï¿½Ì²Ö¿ï¿½...");
                 var args = $"push {(force ? "--force " : string.Empty)}{remote} HEAD:{branch}".Trim();
 
                 var (useProxy, proxyUrl) = ResolveProxySettings(true);
@@ -700,16 +732,16 @@ partial class Program
 
                 if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[³É¹¦] ÍÆËÍ³É¹¦");
+                    Console.WriteLine("[ï¿½É¹ï¿½] ï¿½ï¿½ï¿½Í³É¹ï¿½");
                     return true;
                 }
 
-                Console.WriteLine($"[´íÎó] ÍÆËÍÊ§°Ü (ÍË³öÂë: {result.ExitCode})");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ (ï¿½Ë³ï¿½ï¿½ï¿½: {result.ExitCode})");
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[´íÎó] ÍÆËÍ¹ı³ÌÖĞ·¢ÉúÒì³£: {ex.Message}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½Í¹ï¿½ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½ï¿½ì³£: {ex.Message}");
                 return false;
             }
         }
@@ -721,21 +753,21 @@ partial class Program
         {
             try
             {
-                Console.WriteLine($"[¾¯¸æ] Ç¿ÖÆÍ¬²½µ½Ô¶¶Ë·ÖÖ§: {remote}/{branch}");
-                Console.WriteLine("[¾¯¸æ] Õâ½«¶ªÆúËùÓĞ±¾µØĞŞ¸Ä£¡");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] Ç¿ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½Ë·ï¿½Ö§: {remote}/{branch}");
+                Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] ï¿½â½«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½ï¿½ï¿½Ş¸Ä£ï¿½");
 
                 var result = await RunGit($"reset --hard {remote}/{branch}", false, null, repoPath);
 
                 if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[³É¹¦] ÒÑÇ¿ÖÆÍ¬²½µ½Ô¶¶Ë·ÖÖ§");
+                    Console.WriteLine("[ï¿½É¹ï¿½] ï¿½ï¿½Ç¿ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½Ë·ï¿½Ö§");
                     return true;
                 }
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[´íÎó] ÖØÖÃÊ§°Ü: {ex.Message}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½: {ex.Message}");
                 return false;
             }
         }
@@ -779,25 +811,25 @@ partial class Program
         {
             try
             {
-                Console.WriteLine($"[¿ªÊ¼] ÉèÖÃÔ¶³Ì '{remoteName}' µÄ URL Îª: {newUrl}");
+                Console.WriteLine($"[ï¿½ï¿½Ê¼] ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ '{remoteName}' ï¿½ï¿½ URL Îª: {newUrl}");
                 var args = $"remote set-url {remoteName} \"{newUrl}\"";
                 var result = await RunGit(args, false, null, repoPath);
 
                 if (result.ExitCode == 0)
                 {
-                    Console.WriteLine("[³É¹¦] Ô¶³Ì URL ÉèÖÃ³É¹¦¡£");
+                    Console.WriteLine("[ï¿½É¹ï¿½] Ô¶ï¿½ï¿½ URL ï¿½ï¿½ï¿½Ã³É¹ï¿½ï¿½ï¿½");
                     return true;
                 }
                 else
                 {
-                    Console.WriteLine($"[´íÎó] ÉèÖÃÔ¶³Ì URL Ê§°Ü (ÍË³öÂë: {result.ExitCode})");
-                    Console.WriteLine($"  ´íÎóĞÅÏ¢: {result.StandardError}");
+                    Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ URL Ê§ï¿½ï¿½ (ï¿½Ë³ï¿½ï¿½ï¿½: {result.ExitCode})");
+                    Console.WriteLine($"  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢: {result.StandardError}");
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[´íÎó] ÉèÖÃÔ¶³Ì URL Ê±·¢ÉúÒì³£: {ex.Message}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ URL Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ì³£: {ex.Message}");
                 return false;
             }
         }
@@ -831,7 +863,7 @@ partial class Program
         {
             try
             {
-                Console.WriteLine($"[¿ªÊ¼] ÇĞ»»·ÖÖ§: {branchName}");
+                Console.WriteLine($"[ï¿½ï¿½Ê¼] ï¿½Ğ»ï¿½ï¿½ï¿½Ö§: {branchName}");
 
                 var checkoutArgs = createIfNotExists
                     ? $"checkout -b {branchName}"
@@ -841,16 +873,16 @@ partial class Program
 
                 if (result.ExitCode == 0)
                 {
-                    Console.WriteLine($"[³É¹¦] ÒÑÇĞ»»µ½·ÖÖ§: {branchName}");
+                    Console.WriteLine($"[ï¿½É¹ï¿½] ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½Ö§: {branchName}");
                     return true;
                 }
 
-                Console.WriteLine($"[´íÎó] ÇĞ»»·ÖÖ§Ê§°Ü (ÍË³öÂë: {result.ExitCode})");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½Ğ»ï¿½ï¿½ï¿½Ö§Ê§ï¿½ï¿½ (ï¿½Ë³ï¿½ï¿½ï¿½: {result.ExitCode})");
                 return false;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[´íÎó] ÇĞ»»·ÖÖ§¹ı³ÌÖĞ·¢ÉúÒì³£: {ex.Message}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½Ğ»ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½ï¿½ì³£: {ex.Message}");
                 return false;
             }
         }

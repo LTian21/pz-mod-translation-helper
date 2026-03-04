@@ -254,11 +254,65 @@ TranslatorHelper https://github.com/owner/repo ghp_xxxx translator translator@em
 
 ## 技术实现
 
-- 使用 **MinGit** 进行本地 Git 操作（克隆、提交、推送等）
+- 使用 **MinGit**（Windows）或 **系统 Git**（Linux/macOS）进行本地 Git 操作（克隆、提交、推送等）
 - 使用 **Octokit 14.0** 进行 GitHub API 操作（检查 PR、创建 PR 等）
 - 支持 .NET 9.0 Native AOT 编译
 - 自动处理参数中的空格（通过引号包裹）
 - 智能转换用户名为有效的 Git 分支名
+
+## Linux / macOS 使用说明
+
+### 前提条件
+
+1. 安装 **.NET 9.0 SDK**（用于构建）：参见 https://dotnet.microsoft.com/download/dotnet/9.0
+2. 安装 **系统 Git**：
+   - Debian/Ubuntu: `sudo apt install git`
+   - Fedora: `sudo dnf install git`
+   - macOS: `brew install git` 或 `xcode-select --install`
+
+### 构建方式
+
+**无需修改代码**，仅需指定目标平台 `RuntimeIdentifier` 即可构建 Linux 原生可执行文件：
+
+```bash
+# Linux x64（常见的桌面/服务器 Linux）
+dotnet publish -c Release -r linux-x64
+
+# Linux ARM64（如 Raspberry Pi 4、Apple Silicon 虚拟机等）
+dotnet publish -c Release -r linux-arm64
+
+# macOS x64
+dotnet publish -c Release -r osx-x64
+
+# macOS ARM64（Apple Silicon）
+dotnet publish -c Release -r osx-arm64
+```
+
+> **提示：** 项目已启用 `PublishAot`（Native AOT），上述命令将生成独立的原生可执行文件，无需目标机器安装 .NET 运行时。如果 AOT 编译环境不满足，可以加上 `-p:PublishAot=false` 使用标准发布模式。
+
+### 运行方式
+
+构建完成后，在输出目录中找到 `TranslatorHelper` 可执行文件（无 `.exe` 后缀），赋予执行权限并运行：
+
+```bash
+chmod +x ./TranslatorHelper
+./TranslatorHelper "https://github.com/owner/repo" "ghp_xxxx" "translator" "translator@email.com" CN init
+```
+
+### 平台差异说明
+
+| 差异项 | Windows | Linux / macOS |
+|--------|---------|--------------|
+| Git 来源 | 内置 MinGit（`../MinGit/cmd/git.exe`） | 系统 PATH 中的 `git` |
+| 默认本地路径 | `C:\Users\{用户名}\{仓库名}` | `/home/{用户名}/{仓库名}` |
+| null 设备路径 | `NUL` | `/dev/null` |
+| 可执行文件名 | `TranslatorHelper.exe` | `TranslatorHelper` |
+
+### 注意事项
+
+- Linux 下**不需要**捆绑 MinGit 目录，程序会自动检测并使用系统已安装的 `git`。
+- 如果同时存在 MinGit 目录和系统 Git，优先使用 MinGit（保持兼容性）。
+- 代理配置方式与 Windows 相同，支持 `HTTP_PROXY` / `HTTPS_PROXY` 环境变量。
 
 ## 许可证
 

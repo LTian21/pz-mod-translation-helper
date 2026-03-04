@@ -43,7 +43,8 @@ partial class Program
         Environment.SetEnvironmentVariable("GIT_SSL_BACKEND", "openssl");
         // 2. 忽略系统和全局 Git 配置，防止外部配置干扰
         Environment.SetEnvironmentVariable("GIT_CONFIG_NOSYSTEM", "1");
-        Environment.SetEnvironmentVariable("GIT_CONFIG_GLOBAL", "NUL");
+        Environment.SetEnvironmentVariable("GIT_CONFIG_GLOBAL",
+            OperatingSystem.IsWindows() ? "NUL" : "/dev/null");
 
         // 3. 将检测到的代理应用到环境变量，供 MinGit 使用
         var proxyUrl = ProxyHelper.GetHttpProxyUrl();

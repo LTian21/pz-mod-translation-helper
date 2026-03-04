@@ -11,69 +11,69 @@ partial class Program
     {
         try
         {
-            Console.WriteLine("¿ªÊ¼Í¬²½±¾µØ²Ö¿â...");
+            Console.WriteLine("ï¿½ï¿½Ê¼Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ø²Ö¿ï¿½...");
 
             if (!Directory.Exists(config.LocalPath) || !await MinGitHelper.IsValidRepositoryAsync(config.LocalPath))
             {
-                Console.WriteLine("[´íÎó] ±¾µØ²Ö¿â²»´æÔÚ£¬ÇëÏÈÖ´ÐÐ init ²Ù×÷");
+                Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½Ø²Ö¿â²»ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ init ï¿½ï¿½ï¿½ï¿½");
                 return 1;
             }
 
             string translatorBranch = $"translation-{ConvertToValidBranchName(config.UserName)}";
-            Console.WriteLine($"·­ÒëÕß·ÖÖ§: {translatorBranch}");
+            Console.WriteLine($"ï¿½ï¿½ï¿½ï¿½ï¿½ß·ï¿½Ö§: {translatorBranch}");
 
             var githubRepo = await github.Repository.Get(owner, repoName);
             string defaultBranch = githubRepo.DefaultBranch;
-            Console.WriteLine($"Ä¬ÈÏ·ÖÖ§: {defaultBranch}");
+            Console.WriteLine($"Ä¬ï¿½Ï·ï¿½Ö§: {defaultBranch}");
 
             var currentBranch = await MinGitHelper.GetCurrentBranchAsync(config.LocalPath);
-            Console.WriteLine($"µ±Ç°·ÖÖ§: {currentBranch}");
+            Console.WriteLine($"ï¿½ï¿½Ç°ï¿½ï¿½Ö§: {currentBranch}");
 
-            // 0) fetch Ò»´Î£¬ºóÐøËùÓÐÅÐ¶Ï/²Ù×÷¾ù»ùÓÚ±¾´Î»ñÈ¡µÄ refs
-            Console.WriteLine("[µÚ 0 ½×¶Î] »ñÈ¡Ô¶¶Ë¸üÐÂ...");
+            // 0) fetch Ò»ï¿½Î£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú±ï¿½ï¿½Î»ï¿½È¡ï¿½ï¿½ refs
+            Console.WriteLine("[ï¿½ï¿½ 0 ï¿½×¶ï¿½] ï¿½ï¿½È¡Ô¶ï¿½Ë¸ï¿½ï¿½ï¿½...");
             if (!await MinGitHelper.FetchAsync(config.LocalPath, config.Key, remote: "origin", force: false, prune: true))
             {
-                Console.WriteLine("[´íÎó] »ñÈ¡Ô¶¶Ë¸üÐÂÊ§°Ü");
+                Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½È¡Ô¶ï¿½Ë¸ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
                 return 1;
             }
 
-            // 1) ÏÈ²é PR£¨Ô¶¶Ë·ÖÖ§²»´æÔÚÊ±£¬ÐèÒª¾ö¶¨ÊÇ·ñÔÊÐíÖØ½¨²¢ force push£©
-            Console.WriteLine("¼ì²éÊÇ·ñ´æÔÚ¿ª·ÅµÄ PR...");
+            // 1) ï¿½È²ï¿½ PRï¿½ï¿½Ô¶ï¿½Ë·ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½ force pushï¿½ï¿½
+            Console.WriteLine("ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½Åµï¿½ PR...");
             var allPRs = await github.PullRequest.GetAllForRepository(owner, repoName);
             var existingPR = allPRs.FirstOrDefault(pr =>
                 pr.Head.Ref == translatorBranch && pr.State == ItemState.Open);
 
-            // 2) ¼ì²éÔ¶¶Ë·ÖÖ§ÊÇ·ñ´æÔÚ£¨¿ÉÄÜ±»ºÏ²¢ºóÉ¾³ý£¬»ò±»¹ÜÀíÔ±ÇåÀí£©
+            // 2) ï¿½ï¿½ï¿½Ô¶ï¿½Ë·ï¿½Ö§ï¿½Ç·ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½Ü±ï¿½ï¿½Ï²ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ò±»¹ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             var remoteTranslatorExists = await MinGitHelper.BranchExistsAsync(config.LocalPath, translatorBranch, checkRemote: true);
             if (!remoteTranslatorExists)
             {
-                // ³¡¾°£ºÔ¶¶ËÒÑÉ¾³ý·ÖÖ§
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Ö§
                 if (existingPR != null)
                 {
-                    // ÓÐ¿ª·Å PR£¬µ«Ô¶¶Ë·ÖÖ§²»´æÔÚ£ºÕâÍ¨³£ÒâÎ¶×Å PR ÒÑÒì³£/¹Ø±Õ¡¢È¨ÏÞÎÊÌâ»ò refs ²»Ò»ÖÂ¡£
-                    // ´ËÊ±Ã¤Ä¿ÖØ½¨²¢Ç¿ÍÆ¿ÉÄÜµ¼ÖÂ PR Ö¸Ïò´íÎó/ÀúÊ·¶ªÊ§£¬Òò´ËÖ±½ÓÊ§°Ü²¢ÌáÊ¾ÈË¹¤´¦Àí¡£
-                    Console.WriteLine($"[´íÎó] ·¢ÏÖ¿ª·Å PR (#{existingPR.Number})£¬µ«Ô¶¶Ë·ÖÖ§ origin/{translatorBranch} ²»´æÔÚ¡£\n" +
-                                      "ÇëÔÚ GitHub ÉÏ¼ì²é¸Ã PR ×´Ì¬/·ÖÖ§ÊÇ·ñ±»É¾³ý»òÖØÃüÃû¡£Îª±ÜÃâÆÆ»µ PR£¬sync ÒÑÖÐÖ¹¡£");
+                    // ï¿½Ð¿ï¿½ï¿½ï¿½ PRï¿½ï¿½ï¿½ï¿½Ô¶ï¿½Ë·ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½Î¶ï¿½ï¿½ PR ï¿½ï¿½ï¿½ì³£/ï¿½Ø±Õ¡ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ refs ï¿½ï¿½Ò»ï¿½Â¡ï¿½
+                    // ï¿½ï¿½Ê±Ã¤Ä¿ï¿½Ø½ï¿½ï¿½ï¿½Ç¿ï¿½Æ¿ï¿½ï¿½Üµï¿½ï¿½ï¿½ PR Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½Ê·ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½Ê§ï¿½Ü²ï¿½ï¿½ï¿½Ê¾ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                    Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½Ö¿ï¿½ï¿½ï¿½ PR (#{existingPR.Number})ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½Ë·ï¿½Ö§ origin/{translatorBranch} ï¿½ï¿½ï¿½ï¿½ï¿½Ú¡ï¿½\n" +
+                                      "ï¿½ï¿½ï¿½ï¿½ GitHub ï¿½Ï¼ï¿½ï¿½ï¿½ PR ×´Ì¬/ï¿½ï¿½Ö§ï¿½Ç·ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Æ»ï¿½ PRï¿½ï¿½sync ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½");
                     return 1;
                 }
 
-                Console.WriteLine($"[ÌáÊ¾] Î´ÕÒµ½Ô¶³Ì·ÖÖ§ origin/{translatorBranch}£¨¿ÉÄÜÒÑ±»É¾³ý/ÇåÀí£©£¬½«´Ó {defaultBranch} ÖØ½¨²¢ÍÆËÍ...");
+                Console.WriteLine($"[ï¿½ï¿½Ê¾] Î´ï¿½Òµï¿½Ô¶ï¿½Ì·ï¿½Ö§ origin/{translatorBranch}ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ±ï¿½É¾ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ {defaultBranch} ï¿½Ø½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...");
 
-                // 2.1) ¶ÔÆëÄ¬ÈÏ·ÖÖ§×÷ÎªÖØ½¨»ùÏß
+                // 2.1) ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ï·ï¿½Ö§ï¿½ï¿½Îªï¿½Ø½ï¿½ï¿½ï¿½ï¿½ï¿½
                 if (!await MinGitHelper.EnsureLocalBranchAtRemoteAsync(config.LocalPath, config.Key, "origin", defaultBranch, fetchFirst: false))
                 {
-                    Console.WriteLine("[´íÎó] Ç¿ÖÆÍ¬²½Ä¬ÈÏ·ÖÖ§Ê§°Ü");
+                    Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] Ç¿ï¿½ï¿½Í¬ï¿½ï¿½Ä¬ï¿½Ï·ï¿½Ö§Ê§ï¿½ï¿½");
                     return 1;
                 }
 
-                // 2.2) Èç¹û±¾µØ»¹²ÐÁôÍ¬Ãû·ÖÖ§£¬ÓÅÏÈÉ¾³ýÔÙÖØ½¨£¨±ÜÃâ±¾µØÀúÊ·¡°ÎÛÈ¾¡±ÖØ½¨·ÖÖ§£©
-                //      ×¢Òâ£ºÈôµ±Ç°Õý´¦ÓÚ¸Ã·ÖÖ§£¬ÎÞ·¨É¾³ý£»´ËÊ±ÎÒÃÇÒÑ¾­ÇÐ»»/¶ÔÆëµ½ÁË defaultBranch¡£
+                // 2.2) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â±¾ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½
+                //      ×¢ï¿½â£ºï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸Ã·ï¿½Ö§ï¿½ï¿½ï¿½Þ·ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Ð»ï¿½/ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ defaultBranchï¿½ï¿½
                 bool localTranslatorExists = await MinGitHelper.BranchExistsAsync(config.LocalPath, translatorBranch, checkRemote: false);
                 if (localTranslatorExists)
                 {
                     if (!string.Equals(currentBranch, defaultBranch, StringComparison.OrdinalIgnoreCase))
                     {
-                        // EnsureLocalBranchAtRemoteAsync ÀíÂÛÉÏÒÑÔÚ defaultBranch£¬µ«ÕâÀï×öÒ»´Î±£»¤
+                        // EnsureLocalBranchAtRemoteAsync ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ defaultBranchï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î±ï¿½ï¿½ï¿½
                         currentBranch = await MinGitHelper.GetCurrentBranchAsync(config.LocalPath);
                     }
 
@@ -82,26 +82,26 @@ partial class Program
                         var del = await ExecuteGitCommandAsync($"branch -D \"{translatorBranch}\"", config.LocalPath);
                         if (del.exitCode == 0)
                         {
-                            Console.WriteLine($"[ÌáÊ¾] ÒÑÉ¾³ý±¾µØ²ÐÁô·ÖÖ§: {translatorBranch}");
+                            Console.WriteLine($"[ï¿½ï¿½Ê¾] ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½ï¿½ï¿½Ö§: {translatorBranch}");
                         }
                         else
                         {
-                            // É¾³ýÊ§°Ü²»Ò»¶¨ÖÂÃü£¨¿ÉÄÜ·ÖÖ§²»´æÔÚ/±»Ëø/ÆäËûÔ­Òò£©£¬ºóÐø checkout -B ÈÔ¿ÉÄÜ³É¹¦
-                            Console.WriteLine($"[¾¯¸æ] É¾³ý±¾µØ·ÖÖ§Ê§°Ü£¨½«¼ÌÐø³¢ÊÔÖØ½¨£©: {del.error.Trim()}");
+                            // É¾ï¿½ï¿½Ê§ï¿½Ü²ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü·ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ò£©£ï¿½ï¿½ï¿½ï¿½ï¿½ checkout -B ï¿½Ô¿ï¿½ï¿½Ü³É¹ï¿½
+                            Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] É¾ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½Ö§Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½: {del.error.Trim()}");
                         }
                     }
                 }
 
-                // 2.3) ´´½¨/ÖØ½¨·­Òë·ÖÖ§²¢ force push »Ö¸´Ô¶¶Ë
+                // 2.3) ï¿½ï¿½ï¿½ï¿½/ï¿½Ø½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ force push ï¿½Ö¸ï¿½Ô¶ï¿½ï¿½
                 if (!await MinGitHelper.CheckoutAsync(config.LocalPath, translatorBranch, createIfNotExists: true))
                 {
-                    Console.WriteLine($"[´íÎó] ÎÞ·¨´´½¨/ÇÐ»»µ½·ÖÖ§ {translatorBranch}");
+                    Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ {translatorBranch}");
                     return 1;
                 }
 
                 if (!await MinGitHelper.PushHeadToRemoteBranchAsync(config.LocalPath, config.Key, "origin", translatorBranch, force: true))
                 {
-                    Console.WriteLine("[´íÎó] ÖØ½¨²¢ÍÆËÍ·­ÒëÕß·ÖÖ§Ê§°Ü");
+                    Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] ï¿½Ø½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ß·ï¿½Ö§Ê§ï¿½ï¿½");
                     return 1;
                 }
 
@@ -109,80 +109,80 @@ partial class Program
                 remoteTranslatorExists = true;
             }
 
-            // 3) Ô¶¶Ë·ÖÖ§´æÔÚ£º±£Ö¤±¾µØ¹¤×÷ÇøÎ»ÓÚ·­Òë·ÖÖ§
+            // 3) Ô¶ï¿½Ë·ï¿½Ö§ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½Ø¹ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ú·ï¿½ï¿½ï¿½ï¿½Ö§
             if (!string.Equals(currentBranch, translatorBranch, StringComparison.OrdinalIgnoreCase))
             {
-                Console.WriteLine($"ÇÐ»»µ½·­Òë·ÖÖ§: {translatorBranch}");
+                Console.WriteLine($"ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§: {translatorBranch}");
                 if (!await MinGitHelper.CheckoutAsync(config.LocalPath, translatorBranch, createIfNotExists: false))
                 {
-                    Console.WriteLine($"[´íÎó] ÎÞ·¨ÇÐ»»µ½·ÖÖ§ {translatorBranch}");
+                    Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½Þ·ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ {translatorBranch}");
                     return 1;
                 }
                 currentBranch = translatorBranch;
             }
 
-            // 4) Ç¿ÖÆÍ¬²½Ç°£º¼ì²éÊÇ·ñÓÐÎ´Ìá½»ÐÞ¸Ä
+            // 4) Ç¿ï¿½ï¿½Í¬ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Î´ï¿½á½»ï¿½Þ¸ï¿½
             bool hasLocalChanges = await MinGitHelper.HasChangesAsync(config.LocalPath);
             if (hasLocalChanges)
             {
-                Console.WriteLine("[¾¯¸æ] ¼ì²âµ½±¾µØ´æÔÚÎ´Ìá½»ÐÞ¸Ä£¬½ÓÏÂÀ´½«Ö´ÐÐÓ²ÖØÖÃ²¢¶ªÆúÕâÐ©ÐÞ¸Ä¡£");
-                Console.WriteLine("[ÌáÊ¾] ÈçÐè±£Áô£¬ÇëÏÈ±¸·Ý/¸´ÖÆÐÞ¸ÄÎÄ¼þ£¬ÔÙÖØÐÂÖ´ÐÐ sync¡£");
+                Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½âµ½ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½Î´ï¿½á½»ï¿½Þ¸Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½Ó²ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð©ï¿½Þ¸Ä¡ï¿½");
+                Console.WriteLine("[ï¿½ï¿½Ê¾] ï¿½ï¿½ï¿½è±£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È±ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ syncï¿½ï¿½");
             }
 
-            // 5) ·ÖÖ§¶ÔÆë²ßÂÔ
+            // 5) ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (existingPR != null)
             {
-                // ³¡¾° 3/5£ºÒÑÓÐÌá½» + Ô¶¶Ë¿ÉÄÜ rebase/force push
-                // ÓÐ PR£ºÖ»¶ÔÆëµ½Ô¶¶Ë·ÖÖ§£¨²»»Øµ½Ä¬ÈÏ·ÖÖ§»ùÏß£©
-                Console.WriteLine($"[Í¬²½] reset --hard µ½ origin/{translatorBranch}");
+                // ï¿½ï¿½ï¿½ï¿½ 3/5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½á½» + Ô¶ï¿½Ë¿ï¿½ï¿½ï¿½ rebase/force push
+                // ï¿½ï¿½ PRï¿½ï¿½Ö»ï¿½ï¿½ï¿½ëµ½Ô¶ï¿½Ë·ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½Ä¬ï¿½Ï·ï¿½Ö§ï¿½ï¿½ï¿½ß£ï¿½
+                Console.WriteLine($"[Í¬ï¿½ï¿½] reset --hard ï¿½ï¿½ origin/{translatorBranch}");
                 if (!await MinGitHelper.ResetToRemoteAsync(config.LocalPath, "origin", translatorBranch))
                 {
-                    Console.WriteLine("[´íÎó] ÖØÖÃµ½Ô¶³Ì·­ÒëÕß·ÖÖ§Ê§°Ü");
+                    Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½Ãµï¿½Ô¶ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ß·ï¿½Ö§Ê§ï¿½ï¿½");
                     return 1;
                 }
 
-                Console.WriteLine("[³É¹¦] ÒÑÍ¬²½µ½Ô¶¶Ë·­ÒëÕß·ÖÖ§£¨±£Áô PR ¹¤×÷Á÷£©");
-                Console.WriteLine("[³É¹¦] Í¬²½Íê³É!");
+                Console.WriteLine("[ï¿½É¹ï¿½] ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½Ë·ï¿½ï¿½ï¿½ï¿½ß·ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PR ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+                Console.WriteLine("[ï¿½É¹ï¿½] Í¬ï¿½ï¿½ï¿½ï¿½ï¿½!");
                 return 0;
             }
 
-            // ÎÞ PR£ºÄã¿ÉÄÜÖ»ÊÇ¡°¸Õ´´½¨·ÖÖ§Î´Ìá½»¡±»ò¡°ÈÎÎñÒÑºÏ²¢ÇÒ·ÖÖ§±»ÇåÀíºóÖØ½¨¡±¡£
-            // ÕâÀïµÄ²ßÂÔÊÇ£ºÈÃ·­Òë·ÖÖ§Ê¼ÖÕ´Ó×îÐÂ defaultBranch ÅÉÉú£¬±£Ö¤¸É¾»»ùÏß¡£
-            // ÓÉÓÚÉÏÃæ remoteTranslatorExists ÒÑÈ·±£´æÔÚ£¬Òò´Ë¿ÉÒÔÖ±½ÓÓÃ defaultBranch ÖØÖÃ²¢ force push¡£
+            // ï¿½ï¿½ PRï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½Ç¡ï¿½ï¿½Õ´ï¿½ï¿½ï¿½ï¿½ï¿½Ö§Î´ï¿½á½»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÑºÏ²ï¿½ï¿½Ò·ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½ï¿½ï¿½
+            // ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Ö§Ê¼ï¿½Õ´ï¿½ï¿½ï¿½ï¿½ï¿½ defaultBranch ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½É¾ï¿½ï¿½ï¿½ï¿½ß¡ï¿½
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ remoteTranslatorExists ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ defaultBranch ï¿½ï¿½ï¿½Ã²ï¿½ force pushï¿½ï¿½
 
             if (!await MinGitHelper.EnsureLocalBranchAtRemoteAsync(config.LocalPath, config.Key, "origin", defaultBranch, fetchFirst: false))
             {
-                Console.WriteLine("[´íÎó] Ç¿ÖÆÍ¬²½Ä¬ÈÏ·ÖÖ§Ê§°Ü");
+                Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] Ç¿ï¿½ï¿½Í¬ï¿½ï¿½Ä¬ï¿½Ï·ï¿½Ö§Ê§ï¿½ï¿½");
                 return 1;
             }
 
-            Console.WriteLine($"[Í¬²½] ½« {translatorBranch} ÖØÖÃµ½Ä¬ÈÏ·ÖÖ§ {defaultBranch} ²¢Ç¿ÖÆÍÆËÍµ½Ô¶¶Ë...");
+            Console.WriteLine($"[Í¬ï¿½ï¿½] ï¿½ï¿½ {translatorBranch} ï¿½ï¿½ï¿½Ãµï¿½Ä¬ï¿½Ï·ï¿½Ö§ {defaultBranch} ï¿½ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½Ô¶ï¿½ï¿½...");
             if (!await MinGitHelper.PushHeadToRemoteBranchAsync(config.LocalPath, config.Key, "origin", translatorBranch, force: true))
             {
-                Console.WriteLine("[´íÎó] Ç¿ÖÆÍÆËÍ·­ÒëÕß·ÖÖ§Ê§°Ü");
+                Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] Ç¿ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ß·ï¿½Ö§Ê§ï¿½ï¿½");
                 return 1;
             }
 
             if (!await MinGitHelper.CheckoutAsync(config.LocalPath, translatorBranch, createIfNotExists: false))
             {
-                Console.WriteLine($"[´íÎó] ÎÞ·¨ÇÐ»»»Ø·­Òë·ÖÖ§ {translatorBranch}");
+                Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] ï¿½Þ·ï¿½ï¿½Ð»ï¿½ï¿½Ø·ï¿½ï¿½ï¿½ï¿½Ö§ {translatorBranch}");
                 return 1;
             }
 
-            Console.WriteLine($"[Í¬²½] reset --hard µ½ origin/{translatorBranch}");
+            Console.WriteLine($"[Í¬ï¿½ï¿½] reset --hard ï¿½ï¿½ origin/{translatorBranch}");
             if (!await MinGitHelper.ResetToRemoteAsync(config.LocalPath, "origin", translatorBranch))
             {
-                Console.WriteLine("[´íÎó] ÖØÖÃµ½Ô¶³Ì·­ÒëÕß·ÖÖ§Ê§°Ü");
+                Console.WriteLine("[ï¿½ï¿½ï¿½ï¿½] ï¿½ï¿½ï¿½Ãµï¿½Ô¶ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ß·ï¿½Ö§Ê§ï¿½ï¿½");
                 return 1;
             }
 
-            Console.WriteLine("[³É¹¦] Í¬²½Íê³É!");
+            Console.WriteLine("[ï¿½É¹ï¿½] Í¬ï¿½ï¿½ï¿½ï¿½ï¿½!");
             return 0;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[´íÎó] Í¬²½Ê§°Ü: {ex.Message}");
-            Console.WriteLine($"[¶ÑÕ»¸ú×Ù] {ex.StackTrace}");
+            Console.WriteLine($"[ï¿½ï¿½ï¿½ï¿½] Í¬ï¿½ï¿½Ê§ï¿½ï¿½: {ex.Message}");
+            Console.WriteLine($"[ï¿½ï¿½Õ»ï¿½ï¿½ï¿½ï¿½] {ex.StackTrace}");
             return 1;
         }
     }
@@ -212,7 +212,7 @@ partial class Program
         // Force OpenSSL and ignore system config
         startInfo.EnvironmentVariables["GIT_SSL_BACKEND"] = "openssl";
         startInfo.EnvironmentVariables["GIT_CONFIG_NOSYSTEM"] = "1";
-        startInfo.EnvironmentVariables["GIT_CONFIG_GLOBAL"] = "NUL";
+        startInfo.EnvironmentVariables["GIT_CONFIG_GLOBAL"] = OperatingSystem.IsWindows() ? "NUL" : "/dev/null";
 
         if (!string.IsNullOrEmpty(proxyUrl))
         {
