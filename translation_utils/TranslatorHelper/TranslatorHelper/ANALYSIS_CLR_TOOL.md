@@ -220,14 +220,14 @@ TranslatorHelper <仓库URL> <PAT_Token> <翻译者名字> <翻译者邮箱> <�
 # 1. 初始化仓库
 TranslatorHelper https://github.com/owner/repo ghp_xxx "Zhang San" zhang@email.com CN init
 
-# 2. 锁定 MOD（认领翻译任务）
-TranslatorHelper https://github.com/owner/repo ghp_xxx "Zhang San" zhang@email.com CN lockmod '"1234567","8901234"'
+# 2. 锁定 MOD（认领翻译任务）- MOD ID 以逗号分隔
+TranslatorHelper https://github.com/owner/repo ghp_xxx "Zhang San" zhang@email.com CN lockmod "1234567,8901234"
 
 # 3. 刷新 PR 列表（获取锁定信息）
 TranslatorHelper https://github.com/owner/repo ghp_xxx "Zhang San" zhang@email.com CN listpr
 
-# 4. 导出待翻译文件
-TranslatorHelper https://github.com/owner/repo ghp_xxx "Zhang San" zhang@email.com CN write '"1234567","8901234"'
+# 4. 导出待翻译文件 - MOD ID 以逗号分隔
+TranslatorHelper https://github.com/owner/repo ghp_xxx "Zhang San" zhang@email.com CN write "1234567,8901234"
 
 # 5. （手动编辑翻译文件）
 
