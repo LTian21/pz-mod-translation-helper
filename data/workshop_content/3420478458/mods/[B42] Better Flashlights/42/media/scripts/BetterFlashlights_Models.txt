@@ -130,7 +130,7 @@ module Base
     {
         mesh = HandTorch,
 		texture = HandTorch1,
-		scale = 1.3,
+		scale = 1.0,
     }
 	
 	model HandTorch1Ground
@@ -144,7 +144,7 @@ module Base
     {
         mesh = HandTorch,
 		texture = HandTorch2,
-		scale = 1.2,
+		scale = 1.0,
     }
 	
 	model HandTorch2Ground
@@ -153,19 +153,46 @@ module Base
         texture = HandTorch2,
         scale = 0.45,
     }
-	
 	model HandTorchCKLED
-    {
+	{
         mesh = HandTorch,
-		texture = HandTorch3,
-		scale = 0.5,
+        texture = HandTorch3,
+        scale = 0.45,
+	}
+	model BF_Handtorch_LED_L
+    {
+        mesh = BF_Handtorch_LED_L,
+        texture = HandTorch3,
+        scale = 0.005,
+	}
+	model BF_Handtorch_LED_R
+    {
+        mesh = BF_Handtorch_LED_R,
+        texture = HandTorch3,
+        scale = 0.005,
+	}	
+	model MaleBody
+    {
+        mesh = Skinned/MaleBody,
+        -- Эти точки теперь "видят" наш Lua-скрипт
+        attachment BF_LED_Point_L { bone = Bip01_Pelvis, }
+        attachment BF_LED_Point_R { bone = Bip01_Pelvis, }
     }
-		
+	model FemaleBody
+    {
+        mesh = Skinned/FemaleBody,
+        -- Эти точки теперь "видят" наш Lua-скрипт
+        attachment BF_LED_Point_L { bone = Bip01_Pelvis, }
+        attachment BF_LED_Point_R { bone = Bip01_Pelvis, }
+    }
+    /* Не забудь продублировать блок для FemaleBody, если нужно */
+    /* Не забудь продублировать блок для FemaleBody, если нужно */
 	model HandTorch3Ground
     {
-        mesh = WorldItems/HandTorch,
+        mesh = HandTorch,
         texture = HandTorch3,
-        scale = 0.2,
+        scale = 0.005,
+		offset = 0.0500 0000 0000
     }
 	
 	model HandTorchManLite
@@ -174,12 +201,29 @@ module Base
 		texture = HandTorch4,
 		scale = 1.0,
     }
-	
+	model BF_HandtorchManLite_L
+    {
+        mesh = BF_HandTorchManLite_L,
+        texture = HandTorch4,
+        scale = 0.01,
+--		attachment world
+--		{
+--			offset = 0.0000 0.0000 0.0000,
+--			rotate = 0.0000 0.9000 0.0000,
+--		}
+		
+	}
+	model BF_HandtorchManLite_R
+    {
+        mesh = BF_HandTorchManLite_R,
+        texture = HandTorch4,
+        scale = 0.01,
+	}	
 	model HandTorch4Ground
     {
         mesh = WorldItems/HandTorch,
         texture = HandTorch4,
-        scale = 0.4,
+        scale = 0.45,
     }
 
 	model BF_EgenerexLite
@@ -221,7 +265,7 @@ module Base
 		}
     }
 	
-	model BF_OldFlashlight
+model BF_OldFlashlight
 	{
         mesh = WorldItems/BF_OldFlashlight,
         texture = BF_OldFlashlight,
