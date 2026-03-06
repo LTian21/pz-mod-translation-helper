@@ -1,0 +1,24 @@
+module Base
+{
+    // FIX: Updated fixing definitions from B41 format to B42 format.
+    // CS original used "Require : Plunger," (colon + no namespace) which
+    // causes Fixing.getRequiredItem() to return null in B42, triggering
+    // NullPointerException in FixingManager.getFixes() and crashing the
+    // Vehicle Mechanics menu.
+    // B42 format: "Require = Base.ItemName," (equals + Base. namespace)
+    // Also removed GlobalItem and ConditionModifier (no longer supported).
+
+    fixing Fix Plunger
+    {
+        Require = Base.Plunger,
+        Fixer = Base.Woodglue; Maintenance=2,
+        Fixer = Base.DuctTape; Maintenance=1,
+    }
+
+    fixing Fix Nightstick
+    {
+        Require = Base.Nightstick,
+        Fixer = Base.Woodglue; Maintenance=2,
+        Fixer = Base.DuctTape; Maintenance=1,
+    }
+}

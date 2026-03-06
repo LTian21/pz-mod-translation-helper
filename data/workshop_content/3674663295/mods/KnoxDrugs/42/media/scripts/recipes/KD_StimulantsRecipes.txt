@@ -1,0 +1,194 @@
+module KD
+{
+    imports { Base }
+
+    craftRecipe CookCrackPoor
+    {
+        timedAction = MixingBowl,
+        time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Drugs,
+        NeedToBeLearn = True,
+        inputs
+        {
+            item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount;IsCookedFoodItem;InheritFoodAge] mappers[saucepanType] mode:destroy,
+            -fluid 1.0 categories[Water] mode:mixture,
+            item 0.5 [KD.CocaineBaggie],
+            item 0.1 [KD.Ammonia],
+			item 1 tags[Base:MixingUtensil] mode:keep,
+        }
+        outputs
+        {
+            item 1 mapper:saucepanType,
+        }
+        itemMapper saucepanType
+        {
+            KD.CrackSaucepanPoor = Base.Saucepan,
+            KD.CrackSaucepanPoorCopper = Base.SaucepanCopper,
+        }
+    }
+
+    craftRecipe CookCrackGood
+    {
+        timedAction = MixingBowl,
+        time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Drugs,
+        NeedToBeLearn = True,
+        inputs
+        {
+            item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount;IsCookedFoodItem;InheritFoodAge] mappers[saucepanType] mode:destroy,
+            -fluid 0.6 categories[Water] mode:mixture,
+            item 0.5 [KD.CocaineBaggie],
+            item 0.1 [Base.BakingSoda]
+        }
+        outputs
+        {
+            item 1 mapper:saucepanType,
+        }
+        itemMapper saucepanType
+        {
+            KD.CrackSaucepanGood = Base.Saucepan,
+            KD.CrackSaucepanGoodCopper = Base.SaucepanCopper,
+        }
+    }
+
+    craftRecipe GetCrackPoor
+    {
+        timedAction = EmptyPan,
+        time = 5,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Drugs,
+        NeedToBeLearn = True,
+        inputs
+        {
+            item 1 [KD.CrackSaucepanPoor;KD.CrackSaucepanPoorCopper] flags[InheritCondition;ItemCount] mappers[saucepanType] mode:destroy,
+			item 1 tags[Base:MixingUtensil] mode:keep,
+        }
+        outputs
+        {
+            item 10 KD.CrackRockPoor,
+        }
+        itemMapper wichsaucepan
+        {
+            KD.CrackSaucepanPoor = Base.Saucepan,
+            KD.CrackSaucepanPoorCopper = Base.SaucepanCopper,
+        }
+    }
+
+    craftRecipe GetCrackGood
+    {
+        timedAction = EmptyPan,
+        time = 5,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Drugs,
+        NeedToBeLearn = True,
+        inputs
+        {
+            item 1 [KD.CrackSaucepanGood;KD.CrackSaucepanGoodCopper] flags[InheritCondition;ItemCount] mappers[saucepanType] mode:destroy,
+			item 1 tags[Base:MixingUtensil] mode:keep,
+        }
+        outputs
+        {
+            item 10 KD.CrackRockGood,
+        }
+        itemMapper saucepanType
+        {
+            KD.CrackSaucepanGood = Base.Saucepan,
+            KD.CrackSaucepanGoodCopper = Base.SaucepanCopper,
+        }
+    }
+
+    craftRecipe OpenBrick
+	{
+        timedAction = UnPackBox,
+		Time = 10,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+            item 1 [KD.CokeBrick;KD.CrackBrickGood;KD.CrackBrickPoor] flags[InheritCondition;ItemCount] mappers[BrickMapper] mode:destroy,
+            item 1 tags[base:sharpknife;base:saw;base:crudesaw;base:meatcleaver] mode:keep flags[SharpnessCheck],
+		}
+		outputs
+		{
+			item 100 mapper:BrickMapper,
+		}
+        itemMapper BrickMapper
+        {
+            KD.CocaineBaggie = KD.CokeBrick,
+            KD.CrackRockGood = KD.CrackBrickGood,
+            KD.CrackRockPoor = KD.CrackBrickPoor,
+        }
+	}
+
+    craftRecipe PackBricks
+	{
+        timedAction = UnPackBox,
+		Time = 20,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [Base.Garbagebag] mode:destroy,
+            item 1 [Base.DuctTape] mode:destroy,
+            item 100 [KD.CocaineBaggie;KD.CrackRockGood;KD.CrackRockPoor] flags[InheritCondition;ItemCount] mappers[PackMapper] mode:destroy,
+		}
+		outputs
+		{
+			item 1 mapper:PackMapper,
+		}
+        itemMapper PackMapper
+        {
+            KD.CokeBrick = KD.CocaineBaggie,
+            KD.CrackBrickGood = KD.CrackRockGood,
+            KD.CrackBrickPoor = KD.CrackRockPoor,
+        }
+	}
+
+    craftRecipe FillPipeCrackGood
+    {
+        timedAction = Making,
+        time = 60,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 1 [KD.CrackRockGood],
+            item 1 [Base.SmokingPipe;Base.CanPipe] mode:destroy mappers[PipeMapper],
+        }
+        outputs
+        {
+            item 1 mapper:PipeMapper,
+        }
+        itemMapper PipeMapper
+        {
+            KD.CrackPipeGood = Base.SmokingPipe,
+            KD.CrackCanPipeGood = Base.CanPipe,
+        }
+    }
+
+    craftRecipe FillPipeCrackPoor
+    {
+        timedAction = Making,
+        time = 60,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 1 [KD.CrackRockPoor],
+            item 1 [Base.SmokingPipe;Base.CanPipe] mode:destroy mappers[PipeMapper],
+        }
+        outputs
+        {
+            item 1 mapper:PipeMapper,
+        }
+        itemMapper PipeMapper
+        {
+            KD.CrackPipePoor = Base.SmokingPipe,
+            KD.CrackCanPipePoor = Base.CanPipe,
+        }
+    }
+}
