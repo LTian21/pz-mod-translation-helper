@@ -1,0 +1,24 @@
+module Base
+{
+    // CS Feature: Cut cotton clothing into sheets using scissors.
+    // This is in a separate file (CSP_recipes.txt) because the original CS mod's
+    // CS_recipes.txt contains CleanBandageWithAlcohol with "-fluid 0.1 [Alcohol]"
+    // which causes a parse error in B42.14 (Alcohol fluid removed).
+    // That parse error may corrupt the entire CS_recipes.txt file load.
+	craftRecipe CSP_CutClothingToSheet
+	{
+		timedAction = SewingCloth,
+		time = 60,
+		Tags = AnySurfaceCraft,
+        category = Tailoring,
+		inputs
+		{
+            item 1 tags[base:scissors] mode:keep flags[SharpnessCheck;IsNotDull],
+			item 1 tags[base:ripclothingcotton] flags[AllowDestroyedItem;IsNotWorn],
+		}
+		outputs
+		{
+			item 1 Base.Sheet,
+		}
+	}
+}
