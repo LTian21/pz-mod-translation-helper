@@ -1,8 +1,5 @@
-module MoneyFromCreditCard
+module Base
 {
-	imports {
-		Base
-	}
 
 	craftRecipe GetMoneyFromCard
 	{
@@ -14,24 +11,24 @@ module MoneyFromCreditCard
 		OnTest = MoneyFromCreditCard.OnTest.CheckBankTile,
 		inputs
 		{
-			item 1 [Base.CreditCard] mode:keep,
+			item 1 [Base.CreditCard;Base.CreditCard_Stolen] mode:keep,
 		}
 		outputs
 		{
 		}
 	}
 
-	craftRecipe ChargeCreditCard
+	craftRecipe DepositOnCreditCard
 	{
         timedAction = Making,
 		Time = 20,
 		Tags = InHandCraft;CanBeDoneInDark,
 		category = Miscellaneous,
-		OnCreate = MoneyFromCreditCard.OnCreate.ChargeCreditCard,
+		OnCreate = MoneyFromCreditCard.OnCreate.DepositOnCreditCard,
 		OnTest = MoneyFromCreditCard.OnTest.InventoryHasMoney,
 		inputs
 		{
-			item 1 [Base.CreditCard] mode:keep,
+			item 1 [Base.CreditCard;Base.CreditCard_Stolen] mode:keep,
 		}
 		outputs
 		{
