@@ -5249,9 +5249,6 @@ return {
     ["\\rSemiTruck"] = {
         ["IGUI_VehiclePartTrunkDoorLeft"] = "\229\183\166\232\161\140\230\157\142\231\174\177\231\155\150",
     },
-    ["\\rSemiTruckRCP"] = {
-        ["IGUI_VehiclePartTrunkDoorLeft"] = "\229\183\166\232\161\140\230\157\142\231\174\177\231\155\150",
-    },
     ["\\randomairdropsASV"] = {
         ["Sandbox_RandomAirdrops_AirdropConsoleDebug"] = "\232\176\131\232\175\149\230\151\165\229\191\151",
         ["Sandbox_RandomAirdrops_AirdropConsoleDebug_tooltip"] = "\229\156\168\230\142\167\229\136\182\229\143\176\230\137\147\229\141\176\231\169\186\230\138\149\231\188\147\229\173\152\232\176\131\232\175\149\228\191\161\230\129\175",
