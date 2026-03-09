@@ -409,7 +409,7 @@ namespace PostProcessing
                 }
 
                 // 按文件名组织翻译条目
-                var fileContent = new Dictionary<string, List<(string modId, string key, TranslationEntry entry)>>();
+                var fileContent = new Dictionary<string, List<(string modId, string key, TranslationEntry entry)>>(StringComparer.OrdinalIgnoreCase);
 
                 foreach (var modId in ModTranslations.Keys)
                 {
@@ -467,11 +467,12 @@ namespace PostProcessing
                         }
 
                         // 添加到对应文件的内容列表
-                        if (!fileContent.ContainsKey(fileName))
+                        if (!fileContent.TryGetValue(fileName, out var groupedEntries))
                         {
-                            fileContent[fileName] = new List<(string, string, TranslationEntry)>();
+                            groupedEntries = new List<(string, string, TranslationEntry)>();
+                            fileContent[fileName] = groupedEntries;
                         }
-                        fileContent[fileName].Add((modId, key, entry));
+                        groupedEntries.Add((modId, key, entry));
                     }
                 }
 
@@ -482,14 +483,14 @@ namespace PostProcessing
                     var entries = kvp.Value;
                     string filePath = Path.Combine(outputDir, fileName);
                     
-                    Console.WriteLine($"Writting file: {fileName}");
-                    
+                    Console.WriteLine($"Writting TEXT file: {fileName}");
+
                     try
                     {
-                        using (var writer = new StreamWriter(filePath, true))
+                        using (var writer = new StreamWriter(filePath, false))
                         {
                             string? currentModId = null;
-                            
+
                             foreach (var (modId, key, entry) in entries)
                             {
                                 // 当遇到新的 modId 时，添加分隔符
@@ -516,7 +517,40 @@ namespace PostProcessing
                         Console.WriteLine($"::error:: Error Writting file {fileName}: {ex.Message}");
                         errorCount++;
                     }
+
+                    // 输出 JSON 文件
+                    string jsonFileName = Path.ChangeExtension(fileName, ".json");
+                    string jsonFilePath = Path.Combine(outputDir, jsonFileName);
+                    Console.WriteLine($"Writting JSON file: {jsonFileName}");
+
+                    try
+                    {
+                        var jsonContent = new SortedDictionary<string, string>();
+                        foreach (var (modId, key, entry) in entries)
+                        {
+                            if (!string.IsNullOrEmpty(entry.SChinese))
+                            {
+                                jsonContent[key] = entry.SChinese;
+                            }
+                        }
+
+                        var options = new JsonSerializerOptions
+                        {
+                            WriteIndented = true,
+                            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                        };
+
+                        string jsonString = JsonSerializer.Serialize(jsonContent, options);
+                        File.WriteAllText(jsonFilePath, jsonString);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"::error:: Error Writting JSON file {jsonFileName}: {ex.Message}");
+                        errorCount++;
+                    }
                 }
+
+                errorCount += ValidateOutputFiles(outputDir);
 
                 if (errorCount > 0)
                 {
@@ -540,6 +574,158 @@ namespace PostProcessing
                 return true;
             // 匹配以 //, #, /*, */, * 或 -- 开头的注释行（忽略前导空格和\t等空白字符）
             return Regex.IsMatch(line, @"^\s*(//|#|/\*|\*/|\*|--)");
+        }
+
+        static int ValidateOutputFiles(string outputDir)
+        {
+            int errorCount = 0;
+            Console.WriteLine("Validating output text and json files.");
+
+            var txtFiles = Directory.GetFiles(outputDir, "*.txt", SearchOption.TopDirectoryOnly);
+            var jsonFiles = Directory.GetFiles(outputDir, "*.json", SearchOption.TopDirectoryOnly);
+
+            var txtMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var txtFile in txtFiles)
+            {
+                txtMap[Path.GetFileNameWithoutExtension(txtFile)] = txtFile;
+            }
+
+            var jsonMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            foreach (var jsonFile in jsonFiles)
+            {
+                jsonMap[Path.GetFileNameWithoutExtension(jsonFile)] = jsonFile;
+            }
+
+            foreach (var txtName in txtMap.Keys)
+            {
+                if (!jsonMap.ContainsKey(txtName))
+                {
+                    Console.WriteLine($"::error:: Missing json file for txt file: {Path.GetFileName(txtMap[txtName])}");
+                    errorCount++;
+                }
+            }
+
+            foreach (var jsonName in jsonMap.Keys)
+            {
+                if (!txtMap.ContainsKey(jsonName))
+                {
+                    Console.WriteLine($"::error:: Missing txt file for json file: {Path.GetFileName(jsonMap[jsonName])}");
+                    errorCount++;
+                }
+            }
+
+            foreach (var txtEntry in txtMap)
+            {
+                if (!jsonMap.TryGetValue(txtEntry.Key, out var jsonFilePath))
+                {
+                    continue;
+                }
+
+                if (!TryReadTxtTranslations(txtEntry.Value, out var txtContent, out var txtError))
+                {
+                    Console.WriteLine($"::error:: {txtError}");
+                    errorCount++;
+                    continue;
+                }
+
+                if (!TryReadJsonTranslations(jsonFilePath, out var jsonContent, out var jsonError))
+                {
+                    Console.WriteLine($"::error:: {jsonError}");
+                    errorCount++;
+                    continue;
+                }
+
+                foreach (var txtItem in txtContent)
+                {
+                    if (!jsonContent.TryGetValue(txtItem.Key, out var jsonValue))
+                    {
+                        Console.WriteLine($"::error:: Missing key in json file {Path.GetFileName(jsonFilePath)}: {txtItem.Key}");
+                        errorCount++;
+                        continue;
+                    }
+
+                    if (!string.Equals(txtItem.Value, jsonValue, StringComparison.Ordinal))
+                    {
+                        Console.WriteLine($"::error:: Value mismatch in {Path.GetFileName(jsonFilePath)} for key {txtItem.Key}");
+                        errorCount++;
+                    }
+                }
+
+                foreach (var jsonItem in jsonContent)
+                {
+                    if (!txtContent.ContainsKey(jsonItem.Key))
+                    {
+                        Console.WriteLine($"::error:: Extra key in json file {Path.GetFileName(jsonFilePath)}: {jsonItem.Key}");
+                        errorCount++;
+                    }
+                }
+            }
+
+            if (errorCount == 0)
+            {
+                Console.WriteLine("Validation passed: txt/json outputs match.");
+            }
+
+            return errorCount;
+        }
+
+        static bool TryReadTxtTranslations(string filePath, out Dictionary<string, string> content, out string error)
+        {
+            content = new Dictionary<string, string>(StringComparer.Ordinal);
+            error = string.Empty;
+
+            try
+            {
+                foreach (var line in File.ReadAllLines(filePath))
+                {
+                    if (string.IsNullOrWhiteSpace(line))
+                    {
+                        continue;
+                    }
+
+                    if (line.StartsWith("------ ", StringComparison.Ordinal))
+                    {
+                        continue;
+                    }
+
+                    var match = Regex.Match(line, @"^(?<key>[^=]+)=\s*\""(?<text>.*)\"",\s*$");
+                    if (!match.Success)
+                    {
+                        error = $"Unable to parse txt output file {Path.GetFileName(filePath)}: {line}";
+                        return false;
+                    }
+
+                    string key = match.Groups["key"].Value.Trim();
+                    string value = match.Groups["text"].Value;
+
+                    content[key] = value;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                error = $"Unable to read txt output file {Path.GetFileName(filePath)}: {ex.Message}";
+                return false;
+            }
+        }
+
+        static bool TryReadJsonTranslations(string filePath, out Dictionary<string, string> content, out string error)
+        {
+            content = new Dictionary<string, string>(StringComparer.Ordinal);
+            error = string.Empty;
+
+            try
+            {
+                string json = File.ReadAllText(filePath);
+                content = JsonSerializer.Deserialize<Dictionary<string, string>>(json) ?? new Dictionary<string, string>(StringComparer.Ordinal);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                error = $"Unable to read json output file {Path.GetFileName(filePath)}: {ex.Message}";
+                return false;
+            }
         }
     }
     public class VanillaTranslation
