@@ -1,0 +1,129 @@
+module Base
+{
+
+  item XNTreeRecipes
+  {
+    Weight	=	0.1,
+    ItemType = base:Literature,
+    DisplayName	=	Farming: Trees,
+    Icon	=	XNTreeMag,
+    LearnedRecipes  =   CollectTreeSeeds,
+    ReplaceOnUse    =   XNTreeRecipes,
+
+  }
+
+
+
+/************************Seeds************************/
+
+  item XNSaplingApple
+	{
+		ItemType = base:Normal,
+		DisplayName	=	Sapling Apple,
+		Icon		=	XNSaplingApple,
+		Weight		=	1,
+    AnimalFeedItemType = base:Seeds,
+    Tags = isseed,
+    CantBeFrozen = true,
+	}
+
+  item XNSaplingBanana
+  {
+    ItemType = base:Normal,
+    DisplayName	=	Sapling Banana,
+    Icon		=	XNSaplingBanana,
+		Weight	=	1,
+    AnimalFeedItemType = base:Seeds,
+    Tags = isseed,
+    CantBeFrozen = true,
+
+  }
+
+  item XNSaplingCherry
+  {
+		ItemType = base:Normal,
+		DisplayName	=	Sapling Cherry,
+		Icon		=	XNSaplingCherry,
+		Weight		=	1,
+    AnimalFeedItemType = base:Seeds,
+    Tags = isseed,
+    CantBeFrozen = true,
+	}
+
+  item XNSaplingLemon
+  {
+		ItemType = base:Normal,
+		DisplayName	=	Sapling Lemon,
+		Icon		=	XNSaplingLemon,
+		Weight		=	1,
+    AnimalFeedItemType = base:Seeds,
+    Tags = isseed,
+    CantBeFrozen = true,
+	}
+
+  item XNSaplingOrange
+  {
+		ItemType = base:Normal,
+		DisplayName	=	Sapling Orange,
+		Icon		=	XNSaplingOrange,
+		Weight		=	1,
+    AnimalFeedItemType = base:Seeds,
+    Tags = isseed,
+    CantBeFrozen = true,
+	}
+
+  item XNSaplingPeach
+  {
+		ItemType = base:Normal,
+		DisplayName	=	Sapling Peach,
+		Icon		=	XNSaplingPeach,
+		Weight		=	1,
+    AnimalFeedItemType = base:Seeds,
+    Tags = isseed,
+    CantBeFrozen = true,
+	}
+
+  item XNSaplingPineapple
+  {
+		ItemType = base:Normal,
+		DisplayName	=	Sapling Pineapple,
+		Icon		=	XNSaplingPineapple,
+		Weight		=	1,
+    AnimalFeedItemType = base:Seeds,
+    Tags = isseed,
+    CantBeFrozen = true,
+	}
+
+
+/************************Recipe************************/
+
+
+    craftRecipe CollectTreeSeeds
+    {
+        timedAction = Making,
+        time = 65,
+        Tooltip = Tooltip_Recipe_RequireWholeVegetable,
+        Tags = InHandCraft;Farming,
+        NeedToBeLearn = true,
+        category = Farming,
+        inputs
+        {
+            item 1 tags[base:tweezers;base:dullknife;base:sharpknife] mode:keep flags[MayDegradeLight;Prop1;IsNotDull],
+            item 1 [Base.Apple;Base.Banana;Base.Cherry;Base.Lemon;Base.Orange;Base.Peach;Base.Pineapple] flags[AllowRottenItem;ItemCount] mappers[fruit] mode:destroy,
+        }
+        outputs
+        {
+            item 1 mapper:fruit,
+        }
+        itemMapper fruit
+        {
+            Base.XNSaplingApple = Base.Apple,
+            Base.XNSaplingBanana = Base.Banana,
+            Base.XNSaplingCherry = Base.Cherry,
+            Base.XNSaplingLemon = Base.Lemon,
+            Base.XNSaplingOrange = Base.Orange,
+            Base.XNSaplingPeach = Base.Peach,
+            Base.XNSaplingPineapple = Base.Pineapple,
+        }
+    }
+}
