@@ -1,4 +1,4 @@
-module RepairableWindows {
+module Base {
     craftRecipe MakeLargeSheetMold {
         timedAction = Craft_PotteryBench,
         time = 100,
@@ -8,7 +8,7 @@ module RepairableWindows {
 
         inputs {
             item 12 [Base.Clay],
-            item 1 [Base.ClayTool] mode:keep,
+            item 1 tags[base:claytool] mode:keep,
         }
 
         outputs {
@@ -18,13 +18,14 @@ module RepairableWindows {
 
     craftRecipe FireClayLargeSheetMold {
         time = 20,
+        timedAction = Making_With_Kiln,
         Tags = KilnSmall;KilnLarge,
         category = Pottery,
 
         inputs {
             item 1 [RepairableWindows.ClayLargeSheetMoldUnfired],
             item 1 tags[base:startfire],
-            item 1 [Base.Log;Base.Charcoal],
+            item 1 tags[base:log;base:charcoal],
         }
 
         outputs {

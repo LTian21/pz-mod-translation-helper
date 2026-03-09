@@ -1,0 +1,73 @@
+module Base
+{
+
+    /*  ================================================================
+        Prepare Zombie Stew
+        Combines a cooking pot, water, and Rotten Flesh into a pot of
+        Zombie Stew that can be placed on a stove or campfire to cook.
+        Supports both regular and forged cooking pots.
+        ================================================================ */
+
+    craftRecipe JH_PrepareZombieStew
+    {
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [Base.Pot;Base.PotForged] mode:destroy flags[InheritCondition;ItemCount] mappers[potType],
+            -fluid 1.5 categories[Water] mode:mixture,
+            item 1 [JeevesHordes.RottenFlesh],
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            JeevesHordes.ZombieStewPot = Base.Pot,
+            JeevesHordes.ZombieStewPotForged = Base.PotForged,
+        }
+    }
+
+    /*  ================================================================
+        Serve Zombie Stew
+        Distributes a pot of Zombie Stew into 2 bowls.
+        Returns the empty pot to the player.
+        Pattern matches VFX_Make2Bowls from VanillaFoodsExpanded.
+        ================================================================ */
+
+    craftRecipe JH_ServeZombieStew
+    {
+        Time = 40,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 2 [Base.Bowl;Base.ClayBowl] mode:destroy flags[ItemCount],
+            item 1 [JeevesHordes.ZombieStewPot;JeevesHordes.ZombieStewPotForged] mappers[bowlType;potType] flags[InheritCondition;InheritCooked;InheritFood;IsCookedFoodItem;ItemCount],
+        }
+
+        outputs
+        {
+            item 2 mapper:bowlType,
+            item 1 mapper:potType,
+        }
+
+        itemMapper bowlType
+        {
+            JeevesHordes.BowlZombieStew = JeevesHordes.ZombieStewPot,
+            JeevesHordes.BowlZombieStew = JeevesHordes.ZombieStewPotForged,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = JeevesHordes.ZombieStewPot,
+            Base.PotForged = JeevesHordes.ZombieStewPotForged,
+        }
+    }
+}

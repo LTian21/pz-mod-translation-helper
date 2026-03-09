@@ -1,0 +1,311 @@
+module Base
+{
+	vehicle SemiTruck_mil
+    {
+        template! = Rotators.SemiTruckTemplate,
+        offRoadEfficiency = 1,
+
+        model
+        {
+            file = Rotators.SemiTruckBase,
+            scale = 1.1400,
+            offset = 0.0000 0.6579 0.0000,
+        }
+
+        skin
+        {
+            texture = Vehicles/CamoG/Vehicles_rSemiTruck_Green_camo,
+        }
+
+        skin
+        {
+            texture = Vehicles/CamoG/Vehicles_rSemiTruck_Green_camo2,
+        }
+
+        skin
+        {
+            texture = Vehicles/CamoG/Vehicles_rSemiTruck_Green_camo3,
+        }
+
+        skin
+        {
+            texture = Vehicles/CamoD/Vehicles_rSemiTruck_DesertTan_camo,
+        }
+
+        skin
+        {
+            texture = Vehicles/CamoD/Vehicles_rSemiTruck_DesertTan_camo2,
+        }
+
+        skin
+        {
+            texture = Vehicles/CamoD/Vehicles_rSemiTruck_DesertTan_camo3,
+        }
+
+        extents = 1.8596 0.0877 6.2632,
+        mass = 850,
+        physicsChassisShape = 1.8596 0.0877 6.2632,
+        centerOfMassOffset = 0.0000 0.0960 0.0000,
+        shadowExtents = 2.1890 7.0329,
+        shadowOffset = 0.0000 0.0479,
+        engineForce = 4500,
+        maxSpeed = 65f,
+        engineLoudness = 125,
+        engineQuality = 85,
+        brakingForce = 28,
+        stoppingMovementForce = 7.0f,
+        rollInfluence = 0.2f,
+        steeringIncrement = 0.04,
+        steeringClamp = 0.25,
+        suspensionStiffness = 65,
+        suspensionCompression = 4.83,
+        suspensionDamping = 3.88,
+        maxSuspensionTravelCm = 15,
+        suspensionRestLength = 0.16f,
+        wheelFriction = 0.9f,
+        seats = 4,
+        template = PassengerSeat4,
+
+        passenger FrontLeft
+        {
+            position inside
+            {
+                offset = 0.3158 -0.0439 1.1053,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = 1.1491 -0.5526 0.9561,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontLeft,
+            }
+        }
+
+        passenger FrontRight
+        {
+            position inside
+            {
+                offset = -0.3158 -0.0175 1.1316,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = -1.1228 -0.5526 0.9649,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontRight,
+            }
+        }
+
+        passenger RearLeft
+        {
+            position inside
+            {
+                offset = 0.3772 0.0000 -0.2193,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = 1.1491 -0.5526 0.9561,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontLeft,
+            }
+        }
+
+        passenger RearRight
+        {
+            position inside
+            {
+                offset = -0.3421 0.0000 -0.2193,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = -1.1228 -0.5526 0.9649,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontRight,
+            }
+        }
+
+        area SeatRearLeft
+        {
+            xywh = 1.2982 1.1930 0.8246 0.8421,
+        }
+
+        area SeatRearRight
+        {
+            xywh = -1.3158 1.1930 0.8246 0.8421,
+        }
+
+        area TruckBed
+        {
+            xywh = -1.3070 0.2281 0.8421 1.1930,
+        }
+
+        area TrunkLeft
+        {
+            xywh = 1.3070 0.2281 0.8421 1.1930,
+        }
+
+        template = Rotators.SemiTruckTrunk/part/TrunkLeft,
+        template = Rotators.SemiTruckTrunk/part/TrunkDoorLeft,
+
+        part TrunkDoorLeft
+        {
+            model TrunkDoorLeft
+            {
+                file = Rotators.SemiTruckTrunkLeft,
+                rotate = 0.0000 0.0000 0.0000,
+                scale = 1,
+                offset = 0.0000 0.0000 0.0000,
+            }
+
+            anim Open
+            {
+                sound = VehicleTrunkOpenVan,
+            }
+
+            anim Close
+            {
+                sound = VehicleTrunkCloseVan,
+                rate = 1.8,
+            }
+        }
+
+        template = Trunk/part/TruckBed,
+
+        part TruckBed
+        {
+            itemType = Base.BigTrunk,
+
+            container
+            {
+                conditionAffectsCapacity = false,
+                capacity = 20,
+            }
+        }
+
+        template = TrunkDoor,
+
+        part TrunkDoor
+        {
+            model TrunkDoor
+            {
+                file = Rotators.SemiTruckTrunkRight,
+                rotate = 0.0000 0.0000 0.0000,
+                scale = 1,
+                offset = 0.0000 0.0000 0.0000,
+            }
+
+            table install
+            {
+                recipes = Intermediate Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Intermediate Mechanics,
+            }
+
+            anim Close
+            {
+                sound = VehicleTrunkCloseVan,
+                anim = TrunkRight_closing,
+                rate = 1.8,
+            }
+
+            anim Open
+            {
+                sound = VehicleTrunkOpenVan,
+                anim = TrunkRight_closing,
+                reverse = TRUE,
+                rate = 2.0,
+            }
+
+            anim Closed
+            {
+                anim = TrunkRight_closing,
+                reverse = TRUE,
+                animate = FALSE,
+            }
+
+            anim Opened
+            {
+                anim = TrunkRight_closing,
+                animate = FALSE,
+            }
+
+            mechanicRequireKey = false,
+
+            anim ActorOpen
+            {
+                anim = WindowOpenSuccess,
+                rate = 0.15,
+                angle = 0.0 90.0 0.0,
+            }
+
+            anim ActorClose
+            {
+                anim = Attack_Shove,
+                rate = 0.3,
+                angle = 0.0 90.0 0.0,
+            }
+        }
+
+        template = Seat/part/SeatRearLeft,
+        template = Seat/part/SeatRearRight,
+
+        part Seat*
+        {
+            table install
+            {
+                skills = Mechanics:2,
+                recipes = Intermediate Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:2,
+                recipes = Intermediate Mechanics,
+            }
+        }
+
+        template = Mattresses/part/MattressRearLeft,
+        template = Mattresses/part/MattressRearRight,
+        template = Microwaves/part/MicrowaveRearRight,
+        template = Fridges/part/FridgeRearLeft,
+        template = Counters/part/CounterRearRight,
+        template = GloveBox,
+
+        physics box
+        {
+            offset = 0.0000 0.8300 1.4800,
+            extents = 1.8381 1.3810 3.2857,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment trailerfront
+        {
+            offset = 0.0000 -0.9211 3.2456,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = 1.0000,
+        }
+
+        attachment trailerTruck
+        {
+            offset = 0.0000 -0.3158 -1.9649,
+            rotate = 0.0000 0.0000 0.0000,
+            canAttach = trailerTruck,
+        }
+
+        attachment trailer
+        {
+            offset = 0.0000 -0.9208 -3.1386,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = -1.0000,
+        }
+    }
+}

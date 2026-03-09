@@ -1,0 +1,155 @@
+module Agrotsar
+{
+    imports
+    {
+        Base
+    }
+
+	fixing Fix Seeder Tank Welding
+	{
+	   Require = ASeederTankSmall;ASeederTankMedium;ASeederTankLarge,
+	   GlobalItem = BlowTorch=5,
+	   ConditionModifier = 1.2,
+
+       Fixer = SheetMetal; MetalWelding=4,
+       Fixer = SmallSheetMetal=2; MetalWelding=4,
+	}
+
+	fixing Fix Seeder Flap Welding
+	{
+	   Require = ASeederPlate,
+	   GlobalItem = BlowTorch=5,
+	   ConditionModifier = 1.2,
+
+       Fixer = SmallSheetMetal; MetalWelding=4,
+       Fixer = ScrapMetal=2; MetalWelding=4,
+	}
+
+	fixing Fix Plowshare Welding
+	{
+	   Require = APlowshare,
+	   GlobalItem = BlowTorch=5,
+	   ConditionModifier = 1.2,
+
+       Fixer = MetalBar=2; MetalWelding=4,
+	}
+
+    craftRecipe Make ASeederTankSmall
+    {
+        Category        = Farming,
+        SkillRequired   = MetalWelding:3,
+        xpAward 	    = MetalWelding:25,
+        needTobeLearn   = true,
+        timedAction     = CutClothing,
+        tags 		    = AnySurfaceCraft,
+        Time=60,
+
+        inputs	
+        {
+			item 3 [Base.SheetMetal],
+			item 5 [Base.Screws],
+            item 8 [Base.BlowTorch] flags[Prop1],
+			item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Agrotsar.ASeederTankSmall,
+        }
+
+    }
+
+    craftRecipe Make ASeederTankMedium
+    {
+
+        Category        = Farming,
+        SkillRequired   = MetalWelding:5,
+        xpAward 	    = MetalWelding:25,
+        needTobeLearn   = true,
+        timedAction     = CutClothing,
+        tags 		    = AnySurfaceCraft,
+        Time=120,
+
+        inputs	
+        {
+			item 4 [Base.SheetMetal],
+			item 7 [Base.Screws],
+            item 10 [Base.BlowTorch] flags[Prop1],
+			item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Agrotsar.ASeederTankMedium,
+        }
+    }
+
+    craftRecipe Make ASeederTankLarge
+    {
+
+        Category        = Farming,
+        SkillRequired   = MetalWelding:6,
+        xpAward 	    = MetalWelding:25,
+        needTobeLearn   = true,
+        timedAction     = CutClothing,
+        tags 		    = AnySurfaceCraft,
+        Time=180,
+
+        inputs	
+        {
+			item 5 [Base.SheetMetal],
+			item 9 [Base.Screws],
+            item 12 [Base.BlowTorch] flags[Prop1],
+			item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Agrotsar.ASeederTankLarge,
+        }
+    }
+
+    craftRecipe Make ASeederPlate
+    {
+
+        Category        = Farming,
+        SkillRequired   = MetalWelding:6,
+        xpAward 	    = MetalWelding:25,
+        needTobeLearn   = true,
+        timedAction     = CutClothing,
+        tags 		    = AnySurfaceCraft,
+        Time=80,
+
+        inputs	
+        {
+			item 2 [Base.SmallSheetMetal],
+			item 2 [Base.ScrapMetal],
+            item 10 [Base.BlowTorch] flags[Prop1],
+			item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Agrotsar.ASeederPlate,
+        }
+    }
+
+    craftRecipe Make APlowshare
+    {
+
+        Category        = Farming,
+        SkillRequired   = MetalWelding:6,
+        xpAward 	    = MetalWelding:25,
+        needTobeLearn   = true,
+        timedAction     = CutClothing,
+        tags 		    = AnySurfaceCraft,
+        Time=100,
+
+        inputs	
+        {
+			item 2 [Base.MetalBar],
+            item 10 [Base.BlowTorch] flags[Prop1],
+			item 1 tags[WeldingMask] mode:keep,
+        }
+        outputs
+        {
+            item 1 Agrotsar.APlowshare,
+        }
+    }
+}
