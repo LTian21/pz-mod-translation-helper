@@ -52,6 +52,7 @@ class Config:
             self.CONFLICT_KEYS_FILENAME = parser.get('Output', 'conflict_keys_filename')
             self.CN_OUTPUT_FILENAME = parser.get('Output', 'cn_output_filename')
             self.EN_OUTPUT_FILENAME = parser.get('Output', 'en_output_filename')
+            self.EN_OUTPUT_JSON_FILENAME = parser.get('Output', 'en_output_json_filename')
             self.LOG_FILENAME_TPL = parser.get('Output', 'log_filename_tpl')
             self.UPDATE_LOG_FILENAME = parser.get('Output', 'update_log_filename')
             self.KEY_SOURCE_MAP_FILENAME = parser.get('Output', 'key_source_map_filename')
@@ -310,10 +311,16 @@ def get_translations_as_dict(file_path_or_dir, config):
     if isinstance(file_path_or_dir, Path) and file_path_or_dir.is_dir():
         all_translations = {}
         logging.info(f"  -> 扫描目录: {file_path_or_dir}")
-        for file_path in sorted(file_path_or_dir.glob(f"*{config.TRANSLATION_FILE_EXT}")):
+        # 优先读取 JSON，然后再读取 TXT 以实现去重
+        json_files = sorted(file_path_or_dir.glob("*.json"))
+        txt_files = sorted(file_path_or_dir.glob("*.txt"))
+        
+        for file_path in json_files + txt_files:
             translations, key_map = get_translations_as_dict(file_path, config)
-            all_translations.update(translations)
-            key_source_map.update(key_map)
+            for k, v in translations.items():
+                if k not in all_translations:
+                    all_translations[k] = v
+                    key_source_map[k] = key_map[k]
         return all_translations, key_source_map
 
     translations_dict = {}
@@ -337,6 +344,20 @@ def get_translations_as_dict(file_path_or_dir, config):
         if isinstance(file_path_or_dir, Path):
             base_filename = file_path_or_dir.stem
             source_filename = re.sub(r'_(?:' + re.escape(config.BASE_LANGUAGE) + r'|' + re.escape(config.PRIORITY_LANGUAGE) + r')$', '', base_filename, flags=re.IGNORECASE)
+
+        if isinstance(file_path_or_dir, Path) and file_path_or_dir.suffix.lower() == '.json':
+            try:
+                data = json.loads(content)
+                for k, v in data.items():
+                    if isinstance(v, str):
+                        v_repr = json.dumps(v, ensure_ascii=False)
+                        final_line = f'{k} = {v_repr},'
+                        translations_dict[k] = final_line
+                        key_source_map[k] = source_filename
+            except json.JSONDecodeError as e:
+                logging.error(f"    解析 JSON 文件 {file_path_or_dir.name} 时发生错误: {e}")
+            logging.info(f"     -> 在 '{file_path_or_dir.name}' 中找到 {len(translations_dict)} 个键。")
+            return translations_dict, key_source_map
 
         def save_current_entry():
             nonlocal current_key, current_value_parts, translations_dict
@@ -529,6 +550,27 @@ def load_exclusion_keys(file_path: Path) -> set:
 
 def write_output_file(path, data):
     path.write_text("\n".join(data[k] for k in sorted(data.keys())), encoding='utf-8')
+
+def write_json_output_file(path, data):
+    json_data = {}
+    for k in sorted(data.keys()):
+        line = data[k]
+        val = extract_value_from_line(line)
+        if val is not None:
+            try:
+                json_data[k] = json.loads(f'"{val}"')
+            except:
+                json_data[k] = val.replace('\\"', '"')
+        else:
+            match = re.search(r"=\s*(.*)", line, re.DOTALL)
+            if match:
+                raw_val = match.group(1).strip()
+                if raw_val.endswith(','):
+                    raw_val = raw_val[:-1].strip()
+                if raw_val.startswith('"') and raw_val.endswith('"'):
+                    raw_val = raw_val[1:-1]
+                json_data[k] = raw_val
+    path.write_text(json.dumps(json_data, ensure_ascii=False, indent=2), encoding='utf-8')
 
 def get_file_last_commit_sha(file_path: Path) -> str | None:
     """获取指定文件的最新一次提交的SHA。"""
@@ -900,6 +942,7 @@ def main():
         try:
             write_output_file(output_dir / cfg.OUTPUT_FILENAME, final_output)
             write_output_file(output_dir / cfg.EN_OUTPUT_FILENAME, workshop_en_base)
+            write_json_output_file(output_dir / cfg.EN_OUTPUT_JSON_FILENAME, workshop_en_base)
             write_output_file(output_dir / cfg.CN_OUTPUT_FILENAME, workshop_cn_base)
             write_output_file(output_dir / cfg.EN_TODO_FILENAME, en_todo_list)
             write_output_file(output_dir / cfg.CN_ONLY_FILENAME, cn_only_list)
