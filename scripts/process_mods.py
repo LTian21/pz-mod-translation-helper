@@ -46,12 +46,12 @@ class Config:
             self.TRANSLATION_FILE_EXT = parser.get('Settings', 'translation_file_ext')
             self.SCRIPTS_FILE_EXT = parser.get('Settings', 'scripts_file_ext')
             self.OUTPUT_FILENAME = parser.get('Output', 'output_filename')
-            self.EN_TODO_FILENAME = parser.get('Output', 'en_todo_filename')
             self.COMPLETED_FILENAME = parser.get('Output', 'completed_filename')
             self.CN_ONLY_FILENAME = parser.get('Output', 'cn_only_filename')
             self.CONFLICT_KEYS_FILENAME = parser.get('Output', 'conflict_keys_filename')
             self.CN_OUTPUT_FILENAME = parser.get('Output', 'cn_output_filename')
             self.EN_OUTPUT_FILENAME = parser.get('Output', 'en_output_filename')
+            self.EN_OUTPUT_JSON_FILENAME = parser.get('Output', 'en_output_json_filename')
             self.LOG_FILENAME_TPL = parser.get('Output', 'log_filename_tpl')
             self.UPDATE_LOG_FILENAME = parser.get('Output', 'update_log_filename')
             self.KEY_SOURCE_MAP_FILENAME = parser.get('Output', 'key_source_map_filename')
@@ -310,7 +310,11 @@ def get_translations_as_dict(file_path_or_dir, config):
     if isinstance(file_path_or_dir, Path) and file_path_or_dir.is_dir():
         all_translations = {}
         logging.info(f"  -> 扫描目录: {file_path_or_dir}")
-        for file_path in sorted(file_path_or_dir.glob(f"*{config.TRANSLATION_FILE_EXT}")):
+        # 读取 JSON 和 TXT 格式的文件
+        json_files = sorted(file_path_or_dir.glob("*.json"))
+        txt_files = sorted(file_path_or_dir.glob("*.txt"))
+        
+        for file_path in json_files + txt_files:
             translations, key_map = get_translations_as_dict(file_path, config)
             all_translations.update(translations)
             key_source_map.update(key_map)
@@ -337,6 +341,20 @@ def get_translations_as_dict(file_path_or_dir, config):
         if isinstance(file_path_or_dir, Path):
             base_filename = file_path_or_dir.stem
             source_filename = re.sub(r'_(?:' + re.escape(config.BASE_LANGUAGE) + r'|' + re.escape(config.PRIORITY_LANGUAGE) + r')$', '', base_filename, flags=re.IGNORECASE)
+
+        if isinstance(file_path_or_dir, Path) and file_path_or_dir.suffix.lower() == '.json':
+            try:
+                data = json.loads(content)
+                for k, v in data.items():
+                    if isinstance(v, str):
+                        v_repr = json.dumps(v, ensure_ascii=False)
+                        final_line = f'{k} = {v_repr},'
+                        translations_dict[k] = final_line
+                        key_source_map[k] = source_filename
+            except json.JSONDecodeError as e:
+                logging.error(f"    解析 JSON 文件 {file_path_or_dir.name} 时发生错误: {e}")
+            logging.info(f"     -> 在 '{file_path_or_dir.name}' 中找到 {len(translations_dict)} 个键。")
+            return translations_dict, key_source_map
 
         def save_current_entry():
             nonlocal current_key, current_value_parts, translations_dict
@@ -529,6 +547,27 @@ def load_exclusion_keys(file_path: Path) -> set:
 
 def write_output_file(path, data):
     path.write_text("\n".join(data[k] for k in sorted(data.keys())), encoding='utf-8')
+
+def write_json_output_file(path, data):
+    json_data = {}
+    for k in sorted(data.keys()):
+        line = data[k]
+        val = extract_value_from_line(line)
+        if val is not None:
+            try:
+                json_data[k] = json.loads(f'"{val}"')
+            except:
+                json_data[k] = val.replace('\\"', '"')
+        else:
+            match = re.search(r"=\s*(.*)", line, re.DOTALL)
+            if match:
+                raw_val = match.group(1).strip()
+                if raw_val.endswith(','):
+                    raw_val = raw_val[:-1].strip()
+                if raw_val.startswith('"') and raw_val.endswith('"'):
+                    raw_val = raw_val[1:-1]
+                json_data[k] = raw_val
+    path.write_text(json.dumps(json_data, ensure_ascii=False, indent=2), encoding='utf-8')
 
 def get_file_last_commit_sha(file_path: Path) -> str | None:
     """获取指定文件的最新一次提交的SHA。"""
@@ -871,67 +910,53 @@ def main():
             logging.info(f"    - 从冲突数据中移除了 {original_conflict_count - len(workshop_conflict_data)} 个键。")
 
         final_output = {**workshop_en_base, **workshop_cn_base}
-        en_todo_list, cn_only_list = {}, {}
+        cn_only_list = {}
         en_keys, cn_keys = set(workshop_en_base.keys()), set(workshop_cn_base.keys())
-        current_todo_list = {}
-        for key, en_line in workshop_en_base.items():
-            if key in cn_keys:
-                cn_line = workshop_cn_base[key]
-                en_val, cn_val = extract_value_from_line(en_line), extract_value_from_line(cn_line)
-                if en_val is not None and en_val == cn_val:
-                    current_todo_list[key] = en_line
-            else:
-                current_todo_list[key] = en_line
-        for key, line in current_todo_list.items():
-            if key not in completed_keys:
-                en_todo_list[key] = line
         for key, cn_line in workshop_cn_base.items():
             if key not in en_keys:
                 cn_only_list[key] = cn_line
 
         logging.info(f"\n--- 正在为 Mod '{main_mod_name}' 生成输出文件 ---")
         logging.info(f"    - 最终合并 (output.txt): {len(final_output)} 条")
-        logging.info(f"    - 纯净英文 (EN_output.txt): {len(workshop_en_base)} 条")
+        logging.info(f"    - 纯净英文 (EN_output.txt/json): {len(workshop_en_base)} 条")
         logging.info(f"    - 纯净中文 (CN_output.txt): {len(workshop_cn_base)} 条")
-        logging.info(f"    - 英文待办 (en_todo.txt): {len(en_todo_list)} 条 (增量)")
         logging.info(f"    - 中文独有 (cn_only.txt): {len(cn_only_list)} 条 (增量)")
         logging.info(f"    - 冲突键 (conflict_keys.txt): {len(workshop_conflict_data)} 条")
         
         try:
             write_output_file(output_dir / cfg.OUTPUT_FILENAME, final_output)
             write_output_file(output_dir / cfg.EN_OUTPUT_FILENAME, workshop_en_base)
+            write_json_output_file(output_dir / cfg.EN_OUTPUT_JSON_FILENAME, workshop_en_base)
             write_output_file(output_dir / cfg.CN_OUTPUT_FILENAME, workshop_cn_base)
-            write_output_file(output_dir / cfg.EN_TODO_FILENAME, en_todo_list)
             write_output_file(output_dir / cfg.CN_ONLY_FILENAME, cn_only_list)
             if workshop_conflict_data:
                 write_output_file(output_dir / cfg.CONFLICT_KEYS_FILENAME, workshop_conflict_data)
-            write_output_file(completed_mod_path / cfg.EN_TODO_FILENAME, en_todo_list)
             
-            new_todo_file_path = output_dir / cfg.EN_TODO_FILENAME
-            old_todo_content = get_old_file_content(new_todo_file_path)
+            new_en_file_path = output_dir / cfg.EN_OUTPUT_FILENAME
+            old_en_content = get_old_file_content(new_en_file_path)
             
             log_archive_dir = Path('data/logs/archive')
             log_archive_dir.mkdir(parents=True, exist_ok=True)
 
             timestamp = datetime.now().isoformat()
 
-            if old_todo_content is None:
-                if en_todo_list:
+            if old_en_content is None:
+                if workshop_en_base:
                     baseline_log_entry = {
                         "run_id": run_id,
                         "timestamp": timestamp,
                         "mod_name": main_mod_name,
                         "mod_id": mod_id,
                         "status": "baseline",
-                        "added_count": len(en_todo_list),
-                        "added_keys": sorted(list(en_todo_list.keys()))
+                        "added_count": len(workshop_en_base),
+                        "added_keys": sorted(list(workshop_en_base.keys()))
                     }
                     archive_file = log_archive_dir / f"{main_mod_name}_{mod_id}_baseline_{run_id}.json"
                     with open(archive_file, 'w', encoding='utf-8') as f:
                         json.dump(baseline_log_entry, f, ensure_ascii=False, indent=2)
                     logging.info(f"    -> 基线日志已存档到: {archive_file}")
             else:
-                new_keys = set(en_todo_list.keys())
+                new_keys = set(workshop_en_base.keys())
                 old_keys = set()
                 try:
                     class StringPath:
@@ -943,11 +968,11 @@ def main():
                         @property
                         def parent(self): return Path('.')
 
-                    old_todo_stream_obj = StringPath(old_todo_content, f"{cfg.EN_TODO_FILENAME} (旧版本)")
-                    old_todo_data, _ = get_translations_as_dict(old_todo_stream_obj, cfg)
-                    old_keys = set(old_todo_data.keys())
+                    old_en_stream_obj = StringPath(old_en_content, f"{cfg.EN_OUTPUT_FILENAME} (旧版本)")
+                    old_en_data, _ = get_translations_as_dict(old_en_stream_obj, cfg)
+                    old_keys = set(old_en_data.keys())
                 except Exception as e:
-                    logging.warning(f"解析旧版 todo 文件内容时出错: {e}。将视为全新文件处理。")
+                    logging.warning(f"解析旧版英文原文件内容时出错: {e}。将视为全新文件处理。")
                 
                 added_keys = new_keys - old_keys
                 removed_keys = old_keys - new_keys

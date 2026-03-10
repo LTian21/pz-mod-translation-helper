@@ -1,0 +1,68 @@
+module Base
+{
+    craftRecipe MakeFancyFlashlight
+    {
+        timedAction = MakingElectrical,
+        time = 200,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        Category = Electrical,
+        SkillRequired = Electricity:3,
+        xpAward = Electricity:10,
+        inputs
+        {
+            item 1 [Base.Torch] mode:destroy flags[Prop2],
+            item 2 [Base.ElectronicsScrap] mode:destroy,
+            item 1 [Base.ElectricWire] mode:destroy,
+            item 1 tags[base:glue],
+            item 1 tags[base:screwdriver] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[base:pliers] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 SWFancyLanterns.Fancy_Torch,
+        }
+    }
+    craftRecipe MakeFancyHandTorch
+    {
+        timedAction = MakingElectrical,
+        time = 200,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        Category = Electrical,
+        SkillRequired = Electricity:3,
+        xpAward = Electricity:10,
+        inputs
+        {
+            item 1 [Base.HandTorch] mode:destroy flags[Prop2],
+            item 2 [Base.ElectronicsScrap] mode:destroy,
+            item 1 [Base.ElectricWire] mode:destroy,
+            item 1 tags[base:glue],
+            item 1 tags[base:screwdriver] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[base:pliers] mode:keep flags[MayDegradeLight],
+        }
+        outputs
+        {
+            item 1 SWFancyLanterns.Fancy_HandTorch,
+        }
+    }
+
+    craftRecipe DismantleFancyFlashlight
+    {
+        timedAction = DismantleElectrical,
+        time = 400,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        Category = Electrical,
+        xpAward = Electricity:3,
+        inputs
+        {
+            item 1 [SWFancyLanterns.Fancy_Torch;SWFancyLanterns.Fancy_HandTorch] mode:destroy flags[Prop2],
+            item 1 tags[base:screwdriver] mode:keep flags[MayDegradeLight;NoBrokenItems;Prop1],
+        }
+        outputs
+        {
+            item 2 Base.ElectronicsScrap,
+        }
+    }
+}
