@@ -101,7 +101,8 @@ namespace PostProcessing
                             {
                                 conflictKeys[vanillaEntry.Key] = new List<TranslationEntry>();
                             }
-                            conflictKeys[vanillaEntry.Key].Add(new TranslationEntry(){ 
+                            conflictKeys[vanillaEntry.Key].Add(new TranslationEntry()
+                            {
                                 ModId = VANILLA_MOD_ID,
                                 OriginalText = vanillaEntry.Value.EN,
                                 SChinese = vanillaEntry.Value.CN
@@ -289,7 +290,7 @@ namespace PostProcessing
                 {
                     conflictKeys.Remove(key);
                 }
-                
+
                 Console.WriteLine($"Removed {keysToRemove.Count} keys with identical translations from conflict list.");
 
                 // 输出剩余有冲突的key到文件，同时向控制台输出警告信息
@@ -330,7 +331,7 @@ namespace PostProcessing
                 // 读取 key_source_map.json 文件
                 string keySourceMapPath = Path.Combine(repoDir, "translation_utils", "key_source_map.json");
                 Dictionary<string, Dictionary<string, string>>? keySourceMap = null;
-                
+
                 if (File.Exists(keySourceMapPath))
                 {
                     try
@@ -482,7 +483,7 @@ namespace PostProcessing
                     string fileName = kvp.Key;
                     var entries = kvp.Value;
                     string filePath = Path.Combine(outputDir, fileName);
-                    
+
                     Console.WriteLine($"Writting TEXT file: {fileName}");
 
                     try
@@ -519,7 +520,7 @@ namespace PostProcessing
                     }
 
                     // 输出 JSON 文件
-                    string jsonFileName = Path.ChangeExtension(fileName, ".json");
+                    string jsonFileName = fileName.Replace("_CN.txt", ".json");
                     string jsonFilePath = Path.Combine(outputDir, jsonFileName);
                     Console.WriteLine($"Writting JSON file: {jsonFileName}");
 
@@ -587,7 +588,15 @@ namespace PostProcessing
             var txtMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             foreach (var txtFile in txtFiles)
             {
-                txtMap[Path.GetFileNameWithoutExtension(txtFile)] = txtFile;
+                string txtName = Path.GetFileName(txtFile);
+                if (txtName.EndsWith("_CN.txt", StringComparison.OrdinalIgnoreCase))
+                {
+                    txtMap[txtName[..^"_CN.txt".Length]] = txtFile;
+                }
+                else
+                {
+                    txtMap[Path.GetFileNameWithoutExtension(txtFile)] = txtFile;
+                }
             }
 
             var jsonMap = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
