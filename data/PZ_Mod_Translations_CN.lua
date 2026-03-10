@@ -2073,6 +2073,7 @@ return {
         ["ContextMenu_OneArm"] = "\229\143\170\231\169\191\228\184\128\230\157\161\230\137\139\232\135\130",
         ["ContextMenu_OneLeg"] = "\229\143\170\231\169\191\228\184\128\230\157\161\232\133\191",
         ["ContextMenu_Open"] = "\230\139\137\229\188\128\229\164\185\229\133\139",
+        ["ContextMenu_OtherSide"] = "\231\169\191\229\136\176\229\143\166\228\184\128\232\190\185",
         ["ContextMenu_RollDown"] = "\230\148\190\228\184\139\232\162\150\229\173\144",
         ["ContextMenu_RollUp"] = "\229\141\183\232\181\183\232\162\150\229\173\144",
         ["ContextMenu_Shorter"] = "\231\169\191\231\159\173\228\184\128\228\186\155",
@@ -2080,15 +2081,15 @@ return {
         ["ContextMenu_WearOutside"] = "\231\169\191\229\156\168\229\164\150\233\157\162",
         ["ContextMenu_YesBelt"] = "\231\179\187\228\184\138\232\133\176\229\184\166",
         ["ContextMenu_YesSuspender"] = "\231\179\187\228\184\138\229\144\138\229\184\166",
+        ["IGUI_ItemCat_FrockinFootwear"] = "Frockin\233\158\139\229\177\165",
+        ["IGUI_ItemCat_FrockinLeather"] = "Frockin\231\154\174\233\157\169\232\163\133",
     },
     ["\\GanydeBielovzki's Frockin Splendor! Vol.4"] = {
-        ["ContextMenu_OtherSide"] = "\231\169\191\229\136\176\229\143\166\228\184\128\232\190\185",
+        ["ContextMenu_Holes"] = "\230\140\150\229\135\160\228\184\170\230\180\158\239\188\129",
         ["IGUI_ItemCat_FrockinFishnets"] = "Frockin \230\184\148\231\189\145\232\162\156",
         ["IGUI_ItemCat_FrockinNylon"] = "Frockin \229\176\188\233\190\153\232\162\156",
     },
     ["\\GanydeBielovzki's Frockin Wiseguys"] = {
-        ["ContextMenu_Close"] = "\229\133\179\233\151\173",
-        ["ContextMenu_Open"] = "\230\137\147\229\188\128",
         ["IGUI_ItemCat_FrockinFineClothes"] = "Frockin\231\178\190\229\147\129\230\156\141\233\165\176",
     },
     ["\\GaussRifle"] = {
