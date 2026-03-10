@@ -310,16 +310,14 @@ def get_translations_as_dict(file_path_or_dir, config):
     if isinstance(file_path_or_dir, Path) and file_path_or_dir.is_dir():
         all_translations = {}
         logging.info(f"  -> 扫描目录: {file_path_or_dir}")
-        # 优先读取 JSON，然后再读取 TXT 以实现去重
+        # 读取 JSON 和 TXT 格式的文件
         json_files = sorted(file_path_or_dir.glob("*.json"))
         txt_files = sorted(file_path_or_dir.glob("*.txt"))
         
         for file_path in json_files + txt_files:
             translations, key_map = get_translations_as_dict(file_path, config)
-            for k, v in translations.items():
-                if k not in all_translations:
-                    all_translations[k] = v
-                    key_source_map[k] = key_map[k]
+            all_translations.update(translations)
+            key_source_map.update(key_map)
         return all_translations, key_source_map
 
     translations_dict = {}
