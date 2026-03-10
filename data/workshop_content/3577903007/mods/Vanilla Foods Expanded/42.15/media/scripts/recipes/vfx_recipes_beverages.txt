@@ -1,0 +1,111 @@
+module Base
+{
+
+    craftRecipe VFX_MakeDrinkMixPitcher
+    {
+        timedAction = VFX.PitcherMaking,
+        Time = 30,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.DrinkMixLemonade;VFX.DrinkMixCherry;VFX.DrinkMixFruitPunch;VFX.DrinkMixGrape;VFX.DrinkMixPinkLemonade;VFX.DrinkMixSweetTea] mappers[DrinkMixType] flags[ItemCount],
+            item 1 [VFX.PlasticPitcher;VFX.LemonadePlasticPitcher;VFX.CherryPlasticPitcher;VFX.FruitPunchPlasticPitcher;VFX.GrapePlasticPitcher;VFX.PinkLemonadePlasticPitcher;VFX.SweetTeaPlasticPitcher] flags[ItemCount] mode:destroy,
+            -fluid 1.0 categories[Water] mode:mixture,
+        }
+
+        outputs
+        {
+            item 1 mapper:DrinkMixType,
+        }
+        
+        itemMapper DrinkMixType
+        {
+            VFX.LemonadePlasticPitcher = VFX.DrinkMixLemonade,
+            VFX.CherryPlasticPitcher = VFX.DrinkMixCherry,
+            VFX.FruitPunchPlasticPitcher = VFX.DrinkMixFruitPunch,
+            VFX.GrapePlasticPitcher = VFX.DrinkMixGrape,
+            VFX.PinkLemonadePlasticPitcher = VFX.DrinkMixPinkLemonade,
+            VFX.SweetTeaPlasticPitcher = VFX.DrinkMixSweetTea,
+        }
+    }
+
+    craftRecipe VFX_TakeTeaBagFromBox
+    {
+        timedAction = VFX.UnpackingSmall,
+        Time = 10,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.BlackTeaBox;VFX.GreenTeaBox;VFX.BreakfastTeaBox;VFX.EarlGrayTeaBox;VFX.ChamomileTeaBox;VFX.PeppermintTeaBox;VFX.GingerTeaBox;VFX.LemonTeaBox] mappers[TeaType] flags[Prop2],
+        }
+
+        outputs
+        {
+            item 1 mapper:TeaType,
+        }
+
+        itemMapper TeaType
+        {
+            Base.Teabag2 = VFX.BlackTeaBox,
+            VFX.GreenTeaBag_2 = VFX.GreenTeaBox,
+            VFX.BreakfastTeaBag_2 = VFX.BreakfastTeaBox,
+            VFX.EarlGrayTeaBag_2 = VFX.EarlGrayTeaBox,
+            VFX.ChamomileTeaBag_2 = VFX.ChamomileTeaBox,
+            VFX.PeppermintTeaBag_2 = VFX.PeppermintTeaBox,
+            VFX.GingerTeaBag_2 = VFX.GingerTeaBox,
+            VFX.LemonTeaBag_2 = VFX.LemonTeaBox,
+        }
+    }
+
+    craftRecipe VFX_MakeProteinShake
+    {
+        timedAction = VFX.ShakerMaking,
+        Time = 30,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.VanillaProteinPowder;VFX.ChocolateProteinPowder;VFX.StrawberryProteinPowder;VFX.BananaProteinPowder] mappers[ProteinType],
+            item 1 [VFX.ProteinShaker;VFX.VanillaProteinShaker;VFX.ChocolateProteinShaker;VFX.StrawberryProteinShaker;VFX.BananaProteinShaker] flags[ItemCount] mode:destroy,
+                -fluid 0.5 [Water] mode:mixture,
+        }
+
+        outputs
+        {
+            item 1 mapper:ProteinType,
+        }
+
+        itemMapper ProteinType
+        {
+            VFX.VanillaProteinShaker = VFX.VanillaProteinPowder,
+            VFX.ChocolateProteinShaker = VFX.ChocolateProteinPowder,
+            VFX.StrawberryProteinShaker = VFX.StrawberryProteinPowder,
+            VFX.BananaProteinShaker = VFX.BananaProteinPowder,
+        }
+    }
+
+    craftRecipe VFX_OpenBottleOfBeer
+    {
+        timedAction = OpenBeerBottle,
+        time = 15,
+        AllowBatchCraft = false,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 tags[base:bottleopener] mode:keep,
+            item 1 tags[VFX:BeerBottle] mode:keep flags[DontPutBack;IsSealed;Prop2;Unseal;ItemCount],
+        }
+
+        outputs
+        {
+        }
+    }
+
+}

@@ -1,0 +1,43 @@
+module SZ
+ {
+
+craftRecipe Secure documents in briefcase
+    {
+	Tags = InHandCraft,
+	timedAction = Making,
+       NeedToBeLearn = false,
+       Time = 60,
+       Category = SZ,
+		inputs
+		{
+			item 1 [SZ.SZ_ImportantNotes1] mode:destroy,
+			item 1 [SZ.SZ_ImportantNotes2] mode:destroy,
+			item 1 [SZ.SZ_ImportantNotes3] mode:destroy,
+			item 1 [SZ.SZ_ImportantNotes4] mode:destroy,
+			item 1 [SZ.SZ_ImportantNotes5] mode:destroy,
+			item 1 [SZ.SZ_ImportantNotes6] mode:destroy,
+		}
+		outputs
+		{
+			item 1 SZ.SZ_SecBriefcase1_Filled,
+		}
+    }
+
+craftRecipe Get documents from briefcase
+    {
+	Tags = InHandCraft,
+	timedAction = Making,
+       NeedToBeLearn = false,
+       Time = 60,
+       OnCreate = Recipe.OnCreate.SZ_DocsSecBriefcase1,
+       Category = SZ,
+		inputs
+		{
+			item 1 [SZ.SZ_SecBriefcase1_Filled] mode:destroy,
+		}
+		outputs
+		{
+			item 1 SZ.SZ_SecBriefcase1_Open,
+		}
+    }
+}
