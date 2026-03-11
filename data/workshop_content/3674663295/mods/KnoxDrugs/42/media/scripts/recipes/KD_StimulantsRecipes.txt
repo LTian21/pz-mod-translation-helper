@@ -109,7 +109,6 @@ module KD
 		inputs
 		{
             item 1 [KD.CokeBrick;KD.CrackBrickGood;KD.CrackBrickPoor] flags[InheritCondition;ItemCount] mappers[BrickMapper] mode:destroy,
-            item 1 tags[base:sharpknife;base:saw;base:crudesaw;base:meatcleaver] mode:keep flags[SharpnessCheck],
 		}
 		outputs
 		{
@@ -189,6 +188,128 @@ module KD
         {
             KD.CrackPipePoor = Base.SmokingPipe,
             KD.CrackCanPipePoor = Base.CanPipe,
+        }
+    }
+
+    craftRecipe CraftMethMixBottle
+    {
+        timedAction = Making,
+        time = 10,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 0.2 [KD.MiniThins],
+            item 1 [Base.Battery],
+            item 0.1 [KD.Ammonia],
+            item 1 [Base.PopBottle],
+            -fluid 0.5 [Petrol],
+        }
+        outputs
+        {
+            item 1 KD.MethBottle,
+        }
+    }
+
+    craftRecipe ShakeAndBakeMeth
+    {
+        timedAction = Making,
+        time = 10,
+        Tags = InHandCraft; CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 1 [KD.MethBottle],
+        }
+        outputs
+        {
+            item 1 KD.MethBottleReady,
+        }
+    }
+
+    craftRecipe GetMethPoor
+    {
+        timedAction = Making,
+        time = 10,
+        Tags = InHandCraft; CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 1 [KD.MethBottleReady],
+        }
+        outputs
+        {
+            item 10 KD.MethCrystalPoor,
+        }
+    }
+
+    craftRecipe GetMethPoor
+    {
+        timedAction = Making,
+        time = 10,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 1 [KD.MethBottleReady],
+        }
+        outputs
+        {
+            item 10 KD.MethCrystalPoor,
+        }
+    }
+
+    craftRecipe CraftMethMixPot
+    {
+        timedAction = Making,
+        time = 60,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 20 [Base.Matches],
+            item 1 [KD.PseudoEphedrinePills],
+            item 0.1 [KD.AcidBottle],
+            item 0.1 [KD.EtherBottle],
+			item 1 [Base.Gloves_Dish;Base.Gloves_Surgical] mode:keep,
+			item 1 tags[Base:MortarPestle] mode:keep,
+			-fluid 1.0 [Water],
+        }
+        outputs
+        {
+            item 1 KD.MethPot,
+        }
+    }
+
+    craftRecipe PutMethOnTray
+    {
+        timedAction = Making,
+        time = 10,
+        Tags = InHandCraft,
+        category = Drugs,
+        inputs
+        {
+            item 1 [KD.MethPot],
+        }
+        outputs
+        {
+            item 1 KD.MethBakingTray,
+        }
+    }
+
+    craftRecipe GetMethGood
+    {
+        timedAction = Making,
+        time = 10,
+        Tags = CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 1 [KD.MethBakingTray],
+        }
+        outputs
+        {
+            item 10 KD.MethCrystalGood,
         }
     }
 }
