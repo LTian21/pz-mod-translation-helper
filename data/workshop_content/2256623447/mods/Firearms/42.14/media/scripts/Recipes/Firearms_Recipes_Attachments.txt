@@ -1,0 +1,71 @@
+module Base
+{
+
+
+	/************************Guns************************/
+
+	craftRecipe MakeImprovisedFlashlightSilencer
+	{
+		timedAction = Making,
+		xpAward = MetalWelding:5,
+		AutoLearnAll = MetalWelding:3,
+		Time = 200,
+		AllowBatchCraft = False,
+		Tags = InHandCraft,
+		category = Weaponry,
+		OnCreate = onImprovisedSilencer_OnCreate,
+		Tooltip = Tooltip_Recipe_ImprovisedSilencer,
+		OnTest = onImprovisedSilencer_OnTest,
+		inputs
+		{
+			item 1 tags[base:drillmetal] mode:keep flags[Prop1;MayDegrade],
+			item 1 tags[base:sheetmetalsnips] mode:keep flags[MayDegradeLight],
+			item 1 [HandTorch;ImprovisedSilencer_Broken] mode:destroy flags[Prop2;AllowDestroyedItem],
+			item 1 [Base.NutsBolts],
+			item 1 [Base.SmallSheetMetal;Base.UnusableMetal],
+		}
+		outputs
+		{
+			item 1 Base.ImprovisedSilencer,
+		}
+	}
+
+	craftRecipe MakeImprovisedBottleSilencer
+	{
+		timedAction = Making,
+		xpAward = Maintenance:5,
+		AutoLearnAll = Maintenance:3,
+		Time = 200,
+		AllowBatchCraft = False,
+		Tags = InHandCraft,
+		category = Weaponry,
+		Tooltip = Tooltip_Recipe_ImprovisedSilencer,
+		OnTest = onImprovisedSilencer_OnTest,
+		inputs
+		{
+			item 1 [Base.PopBottle;Base.WaterBottle] mode:destroy flags[Prop1;IsEmpty],
+			item 1 [DuctTape] flags[Prop2],
+		}
+		outputs
+		{
+			item 1 Base.Silencer_PopBottle,
+		}
+	}
+
+	craftRecipe ToggleStock
+	{
+	    Time = 3,
+	    OnCreate = onToggleStock_OnCreate,
+	    OnTest = onToggleStock_OnTest,
+	    Tags = InHandCraft;CanBeDoneInDark;RightClickOnly;KeepInHand,
+	    category = Weaponry,
+	    inputs
+	    {
+	        item 1 [Base.MP5;Base.UZI;Base.JS3T_Shotgun;Base.Mac10;Base.SPAS12] mode:keep,
+	    }
+	    outputs
+	    {
+	    }
+	}
+
+}
