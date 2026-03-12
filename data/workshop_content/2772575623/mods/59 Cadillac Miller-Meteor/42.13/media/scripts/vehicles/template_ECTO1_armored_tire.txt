@@ -1,0 +1,241 @@
+module Base
+{
+    model ECTO1wheel1
+	{
+		mesh = vehicles/Vehicles_ECTO1_Wheel,
+		texture = vehicles/Vehicles_ECTO1_Wheel,
+		shader = damn_wheel_shader,
+	}
+
+    model ECTO1wheelA
+	{
+		mesh = vehicles/Vehicles_ECTO1_Wheel,
+		texture = vehicles/Vehicles_ECTO1_Wheel,
+		shader = damn_wheel_shader,
+	}
+
+    model ECTO1wheel2L
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.106,
+	}
+    model ECTO1wheel2R
+	{
+		mesh = vehicles/Vehicles_damnBasic_tires|damn_stock_tire0,
+		texture = vehicles/Vehicles_damnBasic_Wheel1,
+		shader = damn_wheel_shader,
+		scale = 0.106,
+        invertX = TRUE,
+	}
+
+	template vehicle TireECTO1
+	{
+
+		part TireFrontLeft
+		{
+            model Tire1
+			{
+				file = ECTO1wheel1,
+			}
+            model Tire2
+			{
+				file = ECTO1wheelA,
+			}
+            model Tire3
+			{
+				file = ECTO1wheel2L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				complete = ECTO1.InstallComplete.TireFrontLeft,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = ECTO1.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = ECTO1.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model Tire1
+			{
+				file = ECTO1wheel1,
+			}
+            model Tire2
+			{
+				file = ECTO1wheelA,
+			}
+            model Tire3
+			{
+				file = ECTO1wheel2R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				complete = ECTO1.InstallComplete.TireFrontRight,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = ECTO1.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = ECTO1.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model Tire1
+			{
+				file = ECTO1wheel1,
+			}
+            model Tire2
+			{
+				file = ECTO1wheelA,
+			}
+            model Tire3
+			{
+				file = ECTO1wheel2L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				complete = ECTO1.InstallComplete.TireRearLeft,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+            table uninstall
+			{
+				complete = ECTO1.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = ECTO1.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+            model Tire1
+			{
+				file = ECTO1wheel1,
+			}
+            model Tire2
+			{
+				file = ECTO1wheelA,
+			}
+            model Tire3
+			{
+				file = ECTO1wheel2R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				complete = ECTO1.InstallComplete.TireRearRight,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = ECTO1.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = ECTO1.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.ECTO1tire1;Base.ECTO1tire2;damnCraft.SmallTire1,
+            durability = 2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+				complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				complete = Vehicles.UninstallComplete.Tire,
+			}
+		}
+	}
+}

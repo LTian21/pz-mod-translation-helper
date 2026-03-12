@@ -1,5 +1,33 @@
 module KD
 {
+  fluid Ammonia
+  {
+    ColorReference = LightSkyBlue,
+    DisplayName = Fluid_Name_Ammonia,
+    Categories
+    {
+      Hazardous,
+    }
+    Properties
+    {
+      ThirstChange = -20.0,
+    }
+    Poison
+    {
+      maxEffect = Deadly,
+      minAmount = 0.2,
+      diluteRatio = 0.1,
+    }
+    BlendWhiteList
+    {
+      whitelist = true,
+      categories
+      {
+        Beverage,
+      }
+    }
+  }
+
   item BaggieEmpty
   {
 		ItemType = base:normal,
@@ -12,13 +40,29 @@ module KD
 
   item Ammonia
   {
-    ItemType = base:drainable,
     DisplayCategory = Household,
-    Weight = 1.0,
-    UseDelta = 0.1,
-      
+    ItemType = base:normal,
+    Weight = 0.2,
     Icon = Ammonia,
+    EatType = BleachBottle,
+    CustomContextMenu = Drink,
+    FillFromDispenserSound = GetWaterFromDispenserPlasticMedium,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapPlasticMedium,
+    StaticModel = BleachBottle,
+    WorldStaticModel = BleachBottle,
+    component FluidContainer
+    {
+      ContainerName = BottleAmmonia,
+      Capacity = 1.0,
+      CustomDrinkSound = DrinkingFromBottlePlastic,
+      Fluids
+      {
+        fluid = Ammonia:1.0,
+      }
+    }
   }
+
 
   item AcidBottle
   {
