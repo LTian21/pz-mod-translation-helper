@@ -1,0 +1,38 @@
+module Base
+{
+	craftRecipe UseBeltAsWeapon
+	{
+		time = 20,
+		AllowBatchCraft = false,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Weaponry,
+		timedAction = CraftWeapon1H,
+		OnCreate = RecipeCodeOnCreate_UBAW.RestoreBeltWeaponConditionAndEquipToPrimaryHand,
+		inputs
+		{
+			item 1 [Base.Belt2] flags[Prop1] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.BeltInHand,
+		}
+	}
+	
+	craftRecipe NotUseBeltAsWeapon
+	{
+		time = 20,
+		AllowBatchCraft = false,
+		Tags = InHandCraft;CanBeDoneInDark,
+		category = Weaponry,
+		timedAction = CraftWeapon1H,
+		OnCreate = RecipeCodeOnCreate_UBAW.StoreBeltWeaponCondition,
+		inputs
+		{
+			item 1 [Base.BeltInHand] flags[Prop1] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.Belt2,
+		}
+	}
+}
