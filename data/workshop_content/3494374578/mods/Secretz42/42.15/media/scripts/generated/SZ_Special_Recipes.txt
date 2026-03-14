@@ -1,0 +1,202 @@
+module SZ
+ {
+
+craftRecipe Prepare Special Comms Station
+    {
+	Tags = InHandCraft,
+       timedAction = Making,
+       NeedToBeLearn = false,
+       Time = 500,
+       Category = Electrical,
+		inputs
+		{
+			item 1 [SZ.SpecialCommsKit1] mode:destroy,
+			item 1 [SZ.SpecialCommsKit2] mode:destroy,
+			item 1 [Base.Screwdriver] mode:keep,
+		}
+		outputs
+		{
+			item 1 SZ.SZ_SpecCommStation,
+		}
+    }
+
+craftRecipe Pack Special Comms Station
+    {
+	Tags = InHandCraft,
+       timedAction = Making,
+       NeedToBeLearn = false,
+       Time = 500,
+       OnCreate = Recipe.OnCreate.SpecCommStation,
+       Category = SZ,
+		inputs
+		{
+			item 1 [SZ.SZ_SpecCommStation] mode:destroy,
+			item 1 [Base.Screwdriver] mode:keep,
+		}
+		outputs
+		{
+			item 1 SZ.SpecialCommsKit1,
+		}
+    }
+
+craftRecipe Open equipment bag
+    {
+       Tags = InHandCraft,
+       timedAction = Making,
+       NeedToBeLearn = false,
+       Time = 50,
+       Category = SZ,
+		inputs
+		{
+			item 1 [SZ.SecEquipmentKit1] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.Bag_Military,
+			item 1 Base.ShotgunShellsBox,
+			item 1 Base.ShotgunShellsBox,
+			item 1 Base.ShotgunShellsBox,
+			item 1 Base.Nightstick,
+			item 1 Base.Shotgun,
+			item 1 Base.WalkieTalkie5,
+			item 1 SZ.SpecialHazmatSuit,
+			item 1 Base.AlcoholBandage,
+			item 1 Base.HandTorch,
+			item 1 Base.Matches,	
+		}
+
+    }
+
+craftRecipe Open Army Heavy Bag
+    {
+       Tags = InHandCraft,
+       timedAction = Making,
+       OnCreate = RecipeCodeOnCreate.SecEquipmentKit2,
+       Time = 50,
+       Category = SZ,
+		inputs
+		{
+			item 1 [SZ.SecEquipmentKit2] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.Bag_Military,
+			item 1 Base.Bullets9mmBox,
+    		item 1 Base.Bullets9mmBox,
+   			item 1 Base.Bullets9mmBox,
+    		item 1 Base.9mmClip,
+    		item 1 Base.9mmClip,
+    		item 1 Base.Nightstick,
+    		item 1 Base.Pistol,
+    		item 1 Base.WalkieTalkie5,
+    		item 1 SZ.SpecialHazmatSuit,
+    		item 1 Base.AlcoholBandage,
+    		item 1 Base.HandTorch,
+    		item 1 Base.Matches,
+		}
+
+    }
+
+craftRecipe Open Army Bag
+    {
+	Tags = InHandCraft,
+       timedAction = Making,
+	OnCreate = RecipeCodeOnCreate.ArmyEquipmentKit1,
+       Time = 50,
+       Category = SZ,
+		inputs
+		{
+			item 1 [SZ.ArmyEquipmentKit1] mode:destroy,
+		}
+		outputs
+		{
+			item 1 Base.Bag_Military,
+			item 1 Base.Tshirt_Profession_VeterenGreen,
+    		item 1 Base.Shirt_CamoGreen,
+    		item 1 Base.Vest_BulletArmy,
+    		item 1 Base.Trousers_CamoGreen,
+    		item 1 Base.Shoes_ArmyBoots,
+   			item 1 Base.Hat_Army,
+    		item 1 Base.Jacket_ArmyCamoGreen,
+    		item 1 Base.Necklace_DogTag,
+    		item 1 Base.Hat_GasMask,
+    		item 1 SZ.SZ_SpecialMilitaryPass,
+    		item 1 Base.Bag_Military,
+		}
+
+    }
+
+craftRecipe Open Documents Folder
+    {
+
+	Tags = InHandCraft,
+       timedAction = Making,
+       Time = 25,
+       OnCreate = Recipe.OnCreate.DocumentsFolder01,
+       Category = SZ,
+		inputs
+		{
+			item 1 [SZ.DocumentsFolder01] mode:destroy,
+		}
+		outputs
+		{
+			item 1 SZ.SZ_LabNotes01,
+		}
+
+    }
+
+craftRecipe Combine code fragments
+    {
+	Tags = InHandCraft,
+	timedAction = Making,
+       NeedToBeLearn = false,
+       Time = 60,
+       Category = SZ,
+		inputs
+		{
+			item 1 [SZ.CodeFragment01] mode:destroy,
+			item 1 [SZ.CodeFragment02] mode:destroy,
+			item 1 [SZ.CodeFragment03] mode:destroy,
+		}
+		outputs
+		{
+			item 1 SZ.CodeCheckTable01,
+		}
+    }
+
+craftRecipe RemoveBatteryPack
+    {
+        timedAction = DismantleElectrical,
+        time = 30,
+        AllowBatchCraft = false,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Electrical,
+        inputs
+        {
+            item 1 [SZ.HackingDevice] mode:keep flags[NotEmpty;ItemCount;InheritUsesAndEmpty],
+        }
+        outputs
+        {
+            item 1 Base.Battery,
+        }
+    }
+
+    craftRecipe InsertBattery
+    {
+        timedAction = MakingElectrical,
+        time = 30,
+        OnCreate = RecipeCodeOnCreate.torchBatteryInsert,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Electrical,
+        inputs
+        {
+            item 1 [SZ.HackingDevice] flags[IsEmpty;AllowFavorite;ItemCount] mode:keep,
+            item 1 [Base.Battery] flags[ItemCount] mode:destroy,
+        }
+        outputs
+        {
+        }
+    }
+
+
+}
