@@ -38,11 +38,11 @@ module KD
 		Tooltip = Tooltip_KD_Baggie,
   }
 
-  item Ammonia
+  item AmmoniaBottle
   {
     DisplayCategory = Household,
     ItemType = base:normal,
-    Weight = 0.2,
+    Weight = 1.0,
     Icon = Ammonia,
     EatType = BleachBottle,
     CustomContextMenu = Drink,
@@ -63,20 +63,50 @@ module KD
     }
   }
 
-
-  item AcidBottle
+  item AmmoniaBottle
   {
-    ItemType = base:drainable,
     DisplayCategory = Household,
+    ItemType = base:normal,
     Weight = 1.0,
-    UseDelta = 0.1,
-
     Icon = AcidBottle,
+    EatType = BleachBottle,
+    CustomContextMenu = Drink,
+    FillFromDispenserSound = GetWaterFromDispenserPlasticMedium,
+    FillFromLakeSound = GetWaterFromLakeBottle,
+    FillFromTapSound = GetWaterFromTapPlasticMedium,
+    StaticModel = BleachBottle,
+    WorldStaticModel = BleachBottle,
+    component FluidContainer
+    {
+      ContainerName = BottleAcid,
+      Capacity = 1.0,
+      CustomDrinkSound = DrinkingFromBottlePlastic,
+      Fluids
+      {
+        fluid = Acid:1.0,
+      }
+    }
   }
 
-    -- item Syringe
-    -- item Grinder
+  item Syringe
+  {
+		ItemType = base:normal,
+		DisplayCategory = Medical,
+		Weight = 0.05,
+
+		Icon = Syringe,
+		Tooltip = Tooltip_KD_Syringe,
+  }
+
+  item Grinder
+  {
+		ItemType = base:normal,
+		DisplayCategory = Drugs,
+		Weight = 0.2,
+
+		Icon = Grinder,
+		Tooltip = Tooltip_KD_Grinder,
+  }
+
     -- item AcidBottle
-    -- item Ammonia
-    -- item Baggie
 }

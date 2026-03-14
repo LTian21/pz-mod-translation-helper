@@ -11,9 +11,62 @@ module KD
         inputs
         {
             item 1 [Base.SuspiciousPackage],
+            item 1 tags[base:sharpknife] mode:keep flags[IsNotDull],
         }
         outputs
         {
         }
     }
+
+    craftRecipe OpenBrick
+	{
+        timedAction = UnPackBox,
+		Time = 10,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+            item 1 [KD.CokeBrick;KD.CrackBrickGood;KD.CrackBrickPoor;KD.MethBrickPoor;KD.MethBrickGood] flags[InheritCondition;ItemCount] mappers[BrickMapper] mode:destroy,
+		}
+		outputs
+		{
+			item 100 mapper:BrickMapper,
+		}
+        itemMapper BrickMapper
+        {
+            KD.CocaineBaggie = KD.CokeBrick,
+            KD.CrackRockGood = KD.CrackBrickGood,
+            KD.CrackRockPoor = KD.CrackBrickPoor,
+            KD.MethCrystalGood = KD.MethBrickGood,
+            KD.MethBaggiePoor = KD.MethBrickPoor,
+        }
+	}
+
+    craftRecipe PackBrick
+	{
+        timedAction = UnPackBox,
+		Time = 20,
+		Tags = InHandCraft;CanBeDoneInDark,
+		NeedToBeLearn = False,
+        category = Drugs,
+		inputs
+		{
+			item 1 [Base.Garbagebag] mode:destroy,
+            item 1 [Base.DuctTape] mode:destroy,
+            item 100 [KD.CocaineBaggie;KD.CrackRockGood;KD.CrackRockPoor;KD.MethCrystalGood;KD.MethCrystalPoor] flags[InheritCondition;ItemCount] mappers[PackMapper] mode:destroy,
+		}
+		outputs
+		{
+			item 1 mapper:PackMapper,
+		}
+        itemMapper PackMapper
+        {
+            KD.CokeBrick = KD.CocaineBaggie,
+            KD.CrackBrickGood = KD.CrackRockGood,
+            KD.CrackBrickPoor = KD.CrackRockPoor,
+            KD.MethBrickGood = KD.MethCrystalGood,
+            KD.MethBrickPoor = KD.MethCrystalPoor,
+        }
+	}
 }

@@ -14,7 +14,8 @@ module KD
             item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount;IsCookedFoodItem;InheritFoodAge] mappers[saucepanType] mode:destroy,
             -fluid 1.0 categories[Water] mode:mixture,
             item 0.5 [KD.CocaineBaggie],
-            item 0.1 [KD.Ammonia],
+            item 1 [*],
+            -fluid 0.1 [Ammonia],
 			item 1 tags[Base:MixingUtensil] mode:keep,
         }
         outputs
@@ -40,7 +41,8 @@ module KD
             item 1 [Base.Saucepan;Base.SaucepanCopper] flags[InheritCondition;ItemCount;IsCookedFoodItem;InheritFoodAge] mappers[saucepanType] mode:destroy,
             -fluid 0.6 categories[Water] mode:mixture,
             item 0.5 [KD.CocaineBaggie],
-            item 0.1 [Base.BakingSoda]
+            item 0.1 [Base.BakingSoda],
+			item 1 tags[Base:MixingUtensil] mode:keep,
         }
         outputs
         {
@@ -99,54 +101,6 @@ module KD
         }
     }
 
-    craftRecipe OpenBrick
-	{
-        timedAction = UnPackBox,
-		Time = 10,
-		Tags = InHandCraft;CanBeDoneInDark,
-		NeedToBeLearn = False,
-        category = Drugs,
-		inputs
-		{
-            item 1 [KD.CokeBrick;KD.CrackBrickGood;KD.CrackBrickPoor] flags[InheritCondition;ItemCount] mappers[BrickMapper] mode:destroy,
-		}
-		outputs
-		{
-			item 100 mapper:BrickMapper,
-		}
-        itemMapper BrickMapper
-        {
-            KD.CocaineBaggie = KD.CokeBrick,
-            KD.CrackRockGood = KD.CrackBrickGood,
-            KD.CrackRockPoor = KD.CrackBrickPoor,
-        }
-	}
-
-    craftRecipe PackBrick
-	{
-        timedAction = UnPackBox,
-		Time = 20,
-		Tags = InHandCraft;CanBeDoneInDark,
-		NeedToBeLearn = False,
-        category = Drugs,
-		inputs
-		{
-			item 1 [Base.Garbagebag] mode:destroy,
-            item 1 [Base.DuctTape] mode:destroy,
-            item 100 [KD.CocaineBaggie;KD.CrackRockGood;KD.CrackRockPoor] flags[InheritCondition;ItemCount] mappers[PackMapper] mode:destroy,
-		}
-		outputs
-		{
-			item 1 mapper:PackMapper,
-		}
-        itemMapper PackMapper
-        {
-            KD.CokeBrick = KD.CocaineBaggie,
-            KD.CrackBrickGood = KD.CrackRockGood,
-            KD.CrackBrickPoor = KD.CrackRockPoor,
-        }
-	}
-
     craftRecipe FillPipeCrackGood
     {
         timedAction = Making,
@@ -191,6 +145,50 @@ module KD
         }
     }
 
+    craftRecipe FillPipeMethGood
+    {
+        timedAction = Making,
+        time = 60,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 1 [KD.MethCrystalGood],
+            item 1 [Base.SmokingPipe;Base.CanPipe] mode:destroy mappers[PipeMapper],
+        }
+        outputs
+        {
+            item 1 mapper:PipeMapper,
+        }
+        itemMapper PipeMapper
+        {
+            KD.MethPipeGood = Base.SmokingPipe,
+            KD.MethCanPipeGood = Base.CanPipe,
+        }
+    }
+
+    craftRecipe FillPipeMethPoor
+    {
+        timedAction = Making,
+        time = 60,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 1 [KD.MethCrystalPoor],
+            item 1 [Base.SmokingPipe;Base.CanPipe] mode:destroy mappers[PipeMapper],
+        }
+        outputs
+        {
+            item 1 mapper:PipeMapper,
+        }
+        itemMapper PipeMapper
+        {
+            KD.MethPipePoor = Base.SmokingPipe,
+            KD.MethCanPipePoor = Base.CanPipe,
+        }
+    }
+
     craftRecipe CraftMethMixBottle
     {
         timedAction = Making,
@@ -201,7 +199,8 @@ module KD
         {
             item 0.2 [KD.MiniThins],
             item 1 [Base.Battery],
-            item 0.1 [KD.Ammonia],
+            item 1 [*],
+            -fluid 0.5 [Ammonia],
             item 1 [Base.PopBottle],
             item 1 [*],
             -fluid 0.5 [Petrol],
@@ -254,7 +253,8 @@ module KD
         {
             item 20 [Base.Matches],
             item 1 [KD.PseudoEphedrinePills],
-            item 0.1 [KD.AcidBottle],
+            item 1 [*],
+			-fluid 0.5 [Acid],
             item 0.1 [KD.EtherBottle],
 			item 1 [Base.Gloves_Dish;Base.Gloves_Surgical] mode:keep,
 			item 1 tags[Base:MortarPestle] mode:keep,
@@ -292,10 +292,47 @@ module KD
         inputs
         {
             item 1 [KD.MethBakingTray],
+            item 1 tags[base:hammerstone;base:mallet;base:knappingtool] mode:keep,
         }
         outputs
         {
             item 10 KD.MethCrystalGood,
+        }
+    }
+
+    craftRecipe CrushCrystalMeth
+    {
+        timedAction = Making,
+        time = 10,
+        Tags = CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 1 [KD.MethCrystalGood],
+            item 1 [KD.BaggieEmpty],
+            item 1 tags[base:hammerstone;base:mallet;base:knappingtool] mode:keep,
+        }
+        outputs
+        {
+            item 1 KD.MethBaggieGood,
+        }
+    }
+
+    craftRecipe CrushCrystalMethPoor
+    {
+        timedAction = Making,
+        time = 10,
+        Tags = CanBeDoneInDark,
+        category = Drugs,
+        inputs
+        {
+            item 1 [KD.MethCrystalPoor],
+            item 1 [KD.BaggieEmpty],
+            item 1 tags[base:hammerstone;base:mallet;base:knappingtool] mode:keep,
+        }
+        outputs
+        {
+            item 1 KD.MethBaggiePoor,
         }
     }
 }
