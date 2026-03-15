@@ -1,0 +1,47 @@
+module Ivmakk
+{
+	imports
+	{
+		Base,
+	}
+
+    craftRecipe BoilEgg
+    {
+		timedAction = Making,
+		Time = 75,
+        Tags = InHandCraft;CanBeDoneFromFloor;Cooking,
+		category = Cooking,
+		OnTest = RecipeCodeOnTest.hotFluidContainer,
+		Tooltip = Tooltip_needsToBeHot,
+		inputs
+		{
+			item 1 tags[Egg] flags[AllowFrozenItem;IsUncookedFoodItem] mode:destroy,
+			item 1 [*] mode:keep,
+			-fluid 0.1 categories[Water],
+		}
+		outputs
+		{
+			item 1 Base.EggBoiled,
+		}
+	}
+
+    craftRecipe PoachEgg
+    {
+		timedAction = Making,
+		Time = 50,
+        Tags = InHandCraft;CanBeDoneFromFloor;Cooking,
+		category = Cooking,
+		OnTest = RecipeCodeOnTest.hotFluidContainer,
+		Tooltip = Tooltip_needsToBeHot,
+		inputs
+		{
+			item 1 tags[Egg] flags[AllowFrozenItem;IsUncookedFoodItem] mode:destroy,
+			item 1 [*] mode:keep,
+			-fluid 0.2 categories[Water],
+		}
+		outputs
+		{
+			item 1 Base.EggPoached,
+		}
+	}
+}
