@@ -1,0 +1,77 @@
+module Base
+{
+
+	xuiSkin default
+	{
+		entity ES_Vehicle_Lift_Overhead_Endcap
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Vehicle Lift Overhead Endcap,
+			Icon		= Build_VehicleLift,
+		}
+	}
+
+    entity BuildVehicleLiftOverheadEndcap
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_Vehicle_Lift_Overhead_Endcap,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            face W
+            {
+                layer
+                {
+                    row = location_business_machinery_01_2,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = location_business_machinery_01_13,
+                }
+            }
+            face E
+            {
+                layer
+                {
+                    row = location_business_machinery_01_0,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = location_business_machinery_01_11,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureMedium,
+            time          = 300,
+            needToBeLearn = false,
+            SkillRequired = Electricity:1;MetalWelding:4,
+            xpAward       = MetalWelding:20,
+            category      = Factory Pieces,
+            tags          = Welding,
+            ToolTip       = Tooltip_FPVehicleLiftOverheadEndcap,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[Prop1],
+                item 4 [Base.SmallSheetMetal],
+                item 4 [Base.MetalBar],
+                item 2 [Base.Screws],
+                item 1 [Base.ElectricWire],
+                item 2 [Base.ElectronicsScrap],
+                item 2 [Base.WeldingRods],
+            }
+        }
+    }
+}
