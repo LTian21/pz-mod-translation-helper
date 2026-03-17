@@ -1,0 +1,456 @@
+module Base
+{
+	model fhqFBMustangHatchBase
+	{
+		mesh = vehicles/vehicles_fhqFBMustangLX|fhqFoxBodyLXHatch,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.43,
+	}
+	model fhqFBMustang23Exhaust
+	{
+		mesh = vehicles/vehicles_fhqFBMustangLX|fhqFoxBodyLX23Exhaust,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.43,
+	}
+	model fhqFBMustangHatchWing
+	{
+		mesh = vehicles/vehicles_fhqFBMustangLX|fhqFoxBodyLXHatchWing,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.43,
+	}
+	model fhqFBMustangWheelLeft
+	{
+		mesh = vehicles/vehicles_fhqFBMustangWheel,
+		texture = vehicles/vehicle_fhqFBMustangWheel,
+		invertX = FALSE,
+		scale = 0.43,
+	}
+	model fhqFBMustangWheelRight
+	{
+		mesh = vehicles/vehicles_fhqFBMustangWheel,
+		texture = vehicles/vehicle_fhqFBMustangWheel,
+		invertX = TRUE,
+		scale = 0.43,
+	}
+	vehicle fhqFBMustangLX
+	{
+		mechanicType = 1,
+		offRoadEfficiency = 0.8,
+		engineRepairLevel = 4,
+		playerDamageProtection = 0.8,
+
+		model
+		{
+			file = fhqFBMustangHatchBase,
+			scale = 1.8200,
+			offset = 0.0000 0.2473 0.0000,
+		}
+
+		spawnOffsetY = 0.12999995,
+
+		skin
+		{
+			texture = Vehicles/vehicle_fhqFBMustangLXHatch_shell,
+		}
+
+		textureMask = Vehicles/vehicle_fhqFBMustangLX_Mask,
+		textureLights = Vehicles/vehicle_fhqFBMustangLX_Lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/Veh_Damage1,
+		textureDamage2Shell = Vehicles/Veh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		sound
+		{
+			engine = VehicleEngineCarNormal,
+			engineStart = VehicleEngineCarNormal,
+			engineTurnOff = VehicleEngineCarNormal,
+			horn = VehicleHornStandard,
+			ignitionFail = VehicleIgnitionFailCarNormal,
+		}
+
+		extents = 0.8242 0.5604 2.1319,
+		mass = 770,
+		physicsChassisShape = 0.8242 0.5604 2.1319,
+		centerOfMassOffset = 0.0000 0.2418 -0.0055,
+		shadowExtents = 0.8490 2.2867,
+		shadowOffset = 0.0000 0.0000,
+		engineForce = 4250,
+		engineLoudness = 60,
+		engineQuality = 60,
+		maxSpeed = 100f,
+		gearRatioCount = 4,
+		stoppingMovementForce = 3.0f,
+		rollInfluence = 0.7f,
+		steeringIncrement = 0.04,
+		steeringClamp = 0.3,
+		suspensionStiffness = 35,
+		suspensionCompression = 3.0,
+		suspensionDamping = 2.95,
+		maxSuspensionTravelCm = 10,
+		suspensionRestLength = 0.2f,
+		wheelFriction = 1.6f,
+		frontEndHealth = 150,
+		rearEndHealth = 150,
+		seats = 4,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.3242 -0.2802 0.5824,
+			radius = 0.15f,
+			width = 0.25f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.3242 -0.2802 0.5824,
+			radius = 0.15f,
+			width = 0.25f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.3242 -0.2802 -0.6154,
+			radius = 0.15f,
+			width = 0.25f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.3242 -0.2802 -0.6154,
+			radius = 0.15f,
+			width = 0.25f,
+		}
+
+		template = PassengerSeat4,
+
+		passenger FrontLeft
+		{
+			position inside
+			{
+				offset = 0.1758 -0.1154 -0.0604,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = 0.5659 -0.4396 -0.0275,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontLeft,
+			}
+		}
+
+		passenger FrontRight
+		{
+			position inside
+			{
+				offset = -0.1758 -0.1154 -0.0604,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+				offset = -0.5659 -0.4396 -0.0275,
+				rotate = 0.0000 0.0000 0.0000,
+				area = SeatFrontRight,
+			}
+		}
+
+		passenger RearLeft
+		{
+			position inside
+			{
+				offset = 0.1758 -0.1154 -0.3791,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+			}
+		}
+
+		passenger RearRight
+		{
+			position inside
+			{
+				offset = -0.1758 -0.1154 -0.3791,
+				rotate = 0.0000 0.0000 0.0000,
+			}
+
+			position outside
+			{
+			}
+		}
+
+		area Engine
+		{
+			xywh = 0.0000 1.3022 0.8242 0.4835,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -1.3132 0.8242 0.4835,
+		}
+
+		area SeatFrontLeft
+		{
+			xywh = 0.6538 -0.0440 0.4835 0.4835,
+		}
+
+		area SeatFrontRight
+		{
+			xywh = -0.6538 -0.0440 0.4835 0.4835,
+		}
+
+		area GasTank
+		{
+			xywh = -0.6319 -0.8626 0.4396 0.4396,
+		}
+
+		area TireFrontLeft
+		{
+			xywh = 0.6538 0.5879 0.4835 0.4835,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -0.6538 0.5879 0.4835 0.4835,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 0.6538 -0.6154 0.4835 0.4835,
+		}
+
+		area TireRearRight
+		{
+			xywh = -0.6538 -0.6154 0.4835 0.4835,
+		}
+
+		template = TrunkDoor,
+		
+		part TrunkDoor
+		{
+			anim Open
+			{
+				sound = VehicleTrunkOpenSportsCar,
+			}
+
+			anim Close
+			{
+				sound = VehicleTrunkCloseSportsCar,
+			}
+
+			anim Lock
+			{
+				sound = LockVehicleDoorSportsCar,
+			}
+
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorSportsCar,
+			}
+
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedSportsCar,
+			}
+			
+			table uninstall
+			{
+				requireUninstalled = WindshieldRear,
+			}
+			
+			model Default
+			{
+				file = fhqFBMustangHatchWing,
+			}
+		}
+		
+		template = Trunk/part/TruckBed,
+		template = Seat/part/SeatFrontLeft,
+		template = Seat/part/SeatFrontRight,
+		template = Seat/part/SeatRearLeft,
+		template = Seat/part/SeatRearRight,
+
+		part SeatRearLeft
+		{
+			table install
+			{
+				area = SeatFrontLeft,
+			}
+
+			table uninstall
+			{
+				area = SeatFrontLeft,
+			}
+		}
+
+		part SeatRearRight
+		{
+			table install
+			{
+				area = SeatFrontRight,
+			}
+
+			table uninstall
+			{
+				area = SeatFrontRight,
+			}
+		}
+
+		template = GloveBox,
+		template = GasTank,
+		template = Battery,
+		template = Engine,
+		template = Muffler,
+		
+		part Muffler
+		{
+			model Default
+			{
+				file = fhqFBMustang23Exhaust,
+			}
+		}
+		
+		template = EngineDoor,
+
+		part Heater
+		{
+			category = engine,
+
+			lua
+			{
+				update = Vehicles.Update.Heater,
+			}
+		}
+
+		part PassengerCompartment
+		{
+			category = nodisplay,
+
+			lua
+			{
+				update = Vehicles.Update.PassengerCompartment,
+			}
+		}
+
+		template = Windshield/part/Windshield,
+		template = Windshield/part/WindshieldRear,
+		
+		part WindshieldRear
+		{
+			table install
+			{
+				requireInstalled = TrunkDoor,
+			}
+		}
+		
+		template = Window/part/WindowFrontLeft,
+		template = Window/part/WindowFrontRight,
+		template = Window/part/WindowRearLeft,
+		template = Window/part/WindowRearRight,
+
+		part WindowRearLeft
+		{
+			area = TireRearLeft,
+			parent =,
+
+			table install
+			{
+				requireInstalled =,
+			}
+		}
+
+		part WindowRearRight
+		{
+			area = TireRearRight,
+			parent =,
+
+			table install
+			{
+				requireInstalled =,
+			}
+		}
+
+		template = Door/part/DoorFrontLeft,
+		template = Door/part/DoorFrontRight,
+		
+		part DoorFrontLeft
+		{
+			model Default
+			{
+				file = fhqFBMustangMirrorL,
+			}
+		}
+		
+		part DoorFrontRight
+		{
+			model Default
+			{
+				file = fhqFBMustangMirrorR,
+			}
+		}
+		
+		template = Tire,
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqFBMustangWheelLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqFBMustangWheelRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqFBMustangWheelLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqFBMustangWheelRight,
+			}
+		}
+
+		template = Suspension,
+		template = Brake,
+		template = Radio,
+		template = Headlight,
+
+		attachment trailer
+		{
+			offset = 0.0000 -0.1264 -1.0769,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = -1.0000,
+		}
+
+		attachment trailerfront
+		{
+			offset = 0.0000 -0.1374 1.0495,
+			rotate = 0.0000 0.0000 0.0000,
+			zoffset = 1.0000,
+		}
+	}
+}
