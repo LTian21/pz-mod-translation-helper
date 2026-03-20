@@ -1,4 +1,8 @@
-module P4PrismPower
+/* Workaround (B42.13.1 MP):
+ * CraftRecipe must currently be defined in Base module due to engine issue.
+ * TODO: Move back to custom module (P4PrismPower) once fixed upstream.
+ */
+module Base
 {
 	imports
 	{
@@ -9,13 +13,13 @@ module P4PrismPower
 	{
 		timedAction = P4PrismPower.P4MakeupEyeshadow,
 		time = 40,
-		onTest = P4PrismPowerRecipes.OnTest.MakeupEyeshadowRefill,
-		onCreate = P4PrismPowerRecipes.OnCreate.MakeupEyeshadowRefill,
-		tags = InHandCraft,
+		/* OnTest = P4PrismPowerRecipes.OnTest.MakeupEyeshadowRefill, */
+		OnCreate = P4PrismPowerRecipes.OnCreate.MakeupEyeshadowRefill,
+		Tags = InHandCraft,
 		category = Packing,
 		inputs
 		{
-			item 1 [P4PrismPower.P4MakeupEyeshadow] mode:keep flags[NotFull],
+			item 1 [P4PrismPower.P4MakeupEyeshadow] mode:keep flags[NotFull;AllowFavorite],
 			item 1 [Base.MakeupEyeshadow;Base.MakeupFoundation;Base.Lipstick] mode:keep flags[NotEmpty],
 		}
 		outputs

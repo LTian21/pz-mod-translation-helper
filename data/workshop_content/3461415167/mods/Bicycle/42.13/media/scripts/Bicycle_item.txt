@@ -8,16 +8,19 @@ module Bicycle
         Weight                      = 0,
         ItemType                    = base:weapon,
         WeaponSprite                = Bicycle_Frame,
-        DisplayName                 = BicycleBike,
         Icon                        = Bicycle2Icon,
 		DisplayCategory	            = SportsWeapon,
         RequiresEquippedBothHands   = true,
         TwoHandWeapon               = TRUE,
-        OnCreate                    = BicycleMenu.onCreateBicycle,
+        OnCreate                    = BicycleItemInitializer.onCreateBicycle,
         ModelWeaponPart = Bicycle_StreetWheelFrontItem Bicycle_StreetWheel FrontWheel FrontWheel,
         ModelWeaponPart = Bicycle_StreetWheelRearItem Bicycle_StreetWheel RearWheel RearWheel,
         ModelWeaponPart = Bicycle_OffroadWheelFrontItem Bicycle_OffroadWheel FrontWheel FrontWheel,
         ModelWeaponPart = Bicycle_OffroadWheelRearItem Bicycle_OffroadWheel RearWheel RearWheel,
+        ModelWeaponPart = Bicycle_StreetWheelFrontFlatItem Bicycle_StreetWheel FrontWheel FrontWheel,
+        ModelWeaponPart = Bicycle_StreetWheelRearFlatItem Bicycle_StreetWheel RearWheel RearWheel,
+        ModelWeaponPart = Bicycle_OffroadWheelFrontFlatItem Bicycle_OffroadWheel FrontWheel FrontWheel,
+        ModelWeaponPart = Bicycle_OffroadWheelRearFlatItem Bicycle_OffroadWheel RearWheel RearWheel,
         ModelWeaponPart = Bicycle_Saddlebag Bicycle_SaddlebagModel1 Saddlebag Saddlebag,
         ModelWeaponPart = Bicycle_Basket Bicycle_BasketModel1 Basket Basket,
         ModelWeaponPart = Bicycle_Crate Bicycle_CrateModel1 Crate Crate,
@@ -39,7 +42,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleFrontWheel,
         Icon = Bicycle2WheelIcon,
         Weight = 0.2,
         UseDelta = 0.001,
@@ -52,7 +54,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleRearWheel,
         Icon = Bicycle2WheelIcon,
         Weight = 0.2,
         UseDelta = 0.001,
@@ -65,7 +66,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleFrontWheel,
         Icon = Bicycle2WheelIcon,
         Weight = 0.2,
         UseDelta = 0.001,
@@ -78,7 +78,54 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleRearWheel,
+        Icon = Bicycle2WheelIcon,
+        Weight = 0.2,
+        UseDelta = 0.001,
+        ConditionMax = 127,
+        MountOn = Bicycle;Bicycle_RedStreet,
+        WorldStaticModel = Bicycle_OffroadWheel,
+        PartType = RearWheel,
+    }
+    item Bicycle_StreetWheelFrontFlatItem
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = Bicycle2WheelIcon,
+        Weight = 0.2,
+        UseDelta = 0.001,
+        ConditionMax = 127,
+        MountOn = Bicycle;Bicycle_RedStreet,
+        WorldStaticModel = Bicycle_StreetWheel,
+        PartType = FrontWheel,
+    }
+    item Bicycle_StreetWheelRearFlatItem
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = Bicycle2WheelIcon,
+        Weight = 0.2,
+        UseDelta = 0.001,
+        ConditionMax = 127,
+        MountOn = Bicycle;Bicycle_RedStreet,
+        WorldStaticModel = Bicycle_StreetWheel,
+        PartType = RearWheel,
+    }
+    item Bicycle_OffroadWheelFrontFlatItem
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
+        Icon = Bicycle2WheelIcon,
+        Weight = 0.2,
+        UseDelta = 0.001,
+        ConditionMax = 127,
+        MountOn = Bicycle;Bicycle_RedStreet,
+        WorldStaticModel = Bicycle_OffroadWheel,
+        PartType = FrontWheel,
+    }
+    item Bicycle_OffroadWheelRearFlatItem
+    {
+        DisplayCategory = WeaponPart,
+        ItemType = base:weaponpart,
         Icon = Bicycle2WheelIcon,
         Weight = 0.2,
         UseDelta = 0.001,
@@ -91,7 +138,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleSaddlebags,
         Icon = Bicycle2BagsIcon,
         Weight = 0.2,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -102,7 +148,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicyclePedals,
         Icon = Pedals,
         Weight = 0.2,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -113,7 +158,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleChain,
         Icon = BicycleChainIcon,
         Weight = 0.1,
         UseDelta = 0.001,
@@ -126,7 +170,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleKickstand,
         Icon = BicycleKickstandIcon,
         Weight = 0.1,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -137,7 +180,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleKickstand,
         Icon = BicycleKickstandIcon,
         Weight = 0.1,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -148,7 +190,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleBell,
         Icon = BicycleBellIcon,
         Weight = 0.1,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -159,7 +200,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleLamp,
         Icon = Bicycle2LampIcon,
         Weight = 0.2,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -180,7 +220,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleTapedFlashlight,
         Icon = Bicycle2LampIcon,
         Weight = 0.2,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -201,7 +240,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleImprovisedTapedFlashlight,
         Icon = Bicycle2LampIcon,
         Weight = 0.2,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -222,7 +260,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleBasket,
         Icon = Bicycle2FrontBasketIcon,
         Weight = 0.2,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -233,7 +270,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleCrate,
         Icon = Bicycle2WoodenCrateIcon,
         Weight = 0.2,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -244,7 +280,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleToolbox,
         Icon = Toolbox,
         Weight = 0.2,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -255,7 +290,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicyclePlasticBag,
         Icon = Plasticbag,
         Weight = 0.1,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -266,7 +300,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicyclePlasticBag,
         Icon = Plasticbag,
         Weight = 0.1,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -277,7 +310,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleBottleHolder,
         Icon = BottleHolderIcon,
         Weight = 0.1,
         MountOn = Bicycle;Bicycle_RedStreet,
@@ -288,7 +320,6 @@ module Bicycle
     {
         DisplayCategory = WeaponPart,
         ItemType = base:weaponpart,
-        DisplayName = BicycleSportsbottle,
         Icon = Sportsbottle,
         Weight = 0.1,
         MountOn = Bicycle;Bicycle_RedStreet,

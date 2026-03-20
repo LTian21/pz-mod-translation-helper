@@ -1,10 +1,6 @@
-module Bicycle
+module Base
 {
-	imports {
-		Base
-	}
-	craftRecipe ConvertFrontWheel
-	{
+    craftRecipe ConvertFrontWheel {
 		timedAction = Making,
 		Time = 2,
 		Tags = InHandCraft;CanBeDoneInDark,
@@ -15,12 +11,11 @@ module Bicycle
 		}
 		outputs
 		{
-			item 1 Bicycle.Bicycle_StreetWheelRearItem,
+			item 1 Bicycle.Bicycle_StreetWheelFrontItem,
 		}
 	}
 
-	craftRecipe ConvertRearWheel
-	{
+	craftRecipe ConvertRearWheel {
 		timedAction = Making,
 		Time = 2,
 		Tags = InHandCraft;CanBeDoneInDark,
@@ -32,6 +27,74 @@ module Bicycle
 		outputs
 		{
 			item 1 Bicycle.Bicycle_StreetWheelFrontItem,
+		}
+	}
+
+	craftRecipe RepairFlatStreetWheelFront {
+		timedAction = Making,
+		time = 5,
+		Tags = InHandCraft,
+		category = Survival,
+		inputs
+		{
+			item 1 [Bicycle.Bicycle_StreetWheelFrontFlatItem] mode:destroy flags[InheritCondition],
+			item 1 [Base.RubberHose] mode:destroy,
+			item 1 [Base.TirePump] mode:keep,
+		}
+		outputs
+		{
+			item 1 Bicycle.Bicycle_StreetWheelFrontItem,
+		}
+	}
+
+	craftRecipe RepairFlatStreetWheelRear {
+		timedAction = Making,
+		time = 5,
+		Tags = InHandCraft,
+		category = Survival,
+		inputs
+		{
+			item 1 [Bicycle.Bicycle_StreetWheelRearFlatItem] mode:destroy flags[InheritCondition],
+			item 1 [Base.RubberHose] mode:destroy,
+			item 1 [Base.TirePump] mode:keep,
+		}
+		outputs
+		{
+			item 1 Bicycle.Bicycle_StreetWheelRearItem,
+		}
+	}
+
+	craftRecipe RepairFlatOffroadWheelFront {
+		timedAction = Making,
+		time = 5,
+		Tags = InHandCraft,
+		category = Survival,
+		inputs
+		{
+			item 1 [Bicycle.Bicycle_OffroadWheelFrontFlatItem] mode:destroy flags[InheritCondition],
+			item 1 [Base.RubberHose] mode:destroy,
+			item 1 [Base.TirePump] mode:keep,
+		}
+		outputs
+		{
+			item 1 Bicycle.Bicycle_OffroadWheelFrontItem,
+		}
+	}
+
+	craftRecipe RepairFlatOffroadWheelRear {
+		timedAction = Making,
+		time = 5,
+		Tags = InHandCraft,
+		category = Survival,
+		inputs
+		{
+			item 1 [Bicycle.Bicycle_OffroadWheelRearFlatItem] mode:destroy flags[InheritCondition],
+			item 1 [Base.RubberHose] mode:destroy,
+			item 1 [Base.TirePump] mode:keep,
+		}
+		outputs
+		{
+			item 1 Bicycle.Bicycle_OffroadWheelRearItem,
 		}
 	}
 }

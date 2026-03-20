@@ -15,6 +15,14 @@ module Base
         scale = 0.1,
     }
 
+    model 93mustangGTWindshieldRear
+    {
+        mesh = vehicles/Vehicles_93mustangSSP_Body|gt_windshield_rear,
+        shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    }
+
 	template vehicle SSP93Windshields
 	{
 
@@ -88,6 +96,65 @@ module Base
                 
             itemType = Base.93mustangSSPRearWindshield,
             area = TruckBed,
+            category = bodywork,
+            mechanicRequireKey = false,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 700,
+                skills = Mechanics:5,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Window,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:5,
+                    requireUninstalled = SSP93WindshieldRearArmor,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+            }
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+    }
+
+    template vehicle SSP93WindshieldsGT
+	{
+        template! = SSP93Windshields,
+
+        part WindshieldRear
+        {
+            model windshieldRear
+            {
+                file = 93mustangGTWindshieldRear,
+            }
+                
+            itemType = Base.93mustangSSPRearWindshield,
+            area = TruckBed,
+            parent = TrunkDoor,
             category = bodywork,
             mechanicRequireKey = false,
             table install
