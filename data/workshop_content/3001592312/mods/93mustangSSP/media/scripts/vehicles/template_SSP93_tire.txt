@@ -1,69 +1,291 @@
 module Base
 {
 
-	model 93mustangSSPWheel
+	model 93mustangSSPWheelL
 	{
-		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire,
+		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire0,
 		texture = vehicles/Vehicles_93mustangSSP_Wheel,
 		shader = vehiclewheel,
 		scale = 0.1,
 	}
 
-    model 93mustangSSPWheelDark
+    model 93mustangSSPWheelR
 	{
-		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire,
+		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire0,
+		texture = vehicles/Vehicles_93mustangSSP_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 93mustangSSPWheelDarkL
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire0,
 		texture = vehicles/Vehicles_93mustangSSP_Wheel_dark,
 		shader = vehiclewheel,
 		scale = 0.1,
+	}
+
+    model 93mustangSSPWheelDarkR
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire0,
+		texture = vehicles/Vehicles_93mustangSSP_Wheel_dark,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 93mustangGTWheelL
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire1,
+		texture = vehicles/Vehicles_93mustangGT_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 93mustangGTWheelR
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire1,
+		texture = vehicles/Vehicles_93mustangGT_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 93mustangGTWheelDarkL
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire1,
+		texture = vehicles/Vehicles_93mustangGT_Wheel_dark,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 93mustangGTWheelDarkR
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire1,
+		texture = vehicles/Vehicles_93mustangGT_Wheel_dark,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
+    model 93mustangSVTWheelL
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire2,
+		texture = vehicles/Vehicles_93mustangSVT_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 93mustangSVTWheelR
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Wheel|ssp_tire2,
+		texture = vehicles/Vehicles_93mustangSVT_Wheel,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
 	}
 
 	template vehicle SSP93Tires
 	{
 		part TireFrontLeft
 		{
+            model Tire1
+			{
+				file = 93mustangSSPWheelL,
+			}
+
+			model Tire2
+			{
+				file = 93mustangSSPWheelDarkL,
+			}
+
+            model Tire3
+			{
+				file = 93mustangGTWheelL,
+			}
+
+            model Tire4
+			{
+				file = 93mustangGTWheelDarkL,
+			}
+
+            model Tire5
+			{
+				file = 93mustangSVTWheelL,
+			}
+
 			area = TireFrontLeft,
 			wheel = FrontLeft,
 			table install
 			{
+				complete = SSP93.InstallComplete.TireFrontLeft,
 				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = SSP93.UninstallComplete.TireFrontLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = SSP93.Init.TireFrontLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
 			}
 
 		}
 
 		part TireFrontRight
 		{
+            model Tire1
+			{
+				file = 93mustangSSPWheelR,
+			}
+
+			model Tire2
+			{
+				file = 93mustangSSPWheelDarkR,
+			}
+
+            model Tire3
+			{
+				file = 93mustangGTWheelR,
+			}
+
+            model Tire4
+			{
+				file = 93mustangGTWheelDarkR,
+			}
+
+            model Tire5
+			{
+				file = 93mustangSVTWheelR,
+			}
+
 			area = TireFrontRight,
 			wheel = FrontRight,
-			table install
+            table install
 			{
+				complete = SSP93.InstallComplete.TireFrontRight,
 				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = SSP93.UninstallComplete.TireFrontRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = SSP93.Init.TireFrontRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
 			}
 		}
 
 		part TireRearLeft
 		{
+            model Tire1
+			{
+				file = 93mustangSSPWheelL,
+			}
+
+			model Tire2
+			{
+				file = 93mustangSSPWheelDarkL,
+			}
+
+            model Tire3
+			{
+				file = 93mustangGTWheelL,
+			}
+
+            model Tire4
+			{
+				file = 93mustangGTWheelDarkL,
+			}
+
+            model Tire5
+			{
+				file = 93mustangSVTWheelL,
+			}
+
 			area = TireRearLeft,
 			wheel = RearLeft,
 			table install
 			{
+				complete = SSP93.InstallComplete.TireRearLeft,
 				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+            table uninstall
+			{
+				complete = SSP93.UninstallComplete.TireRearLeft,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = SSP93.Init.TireRearLeft,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
 			}
 		}
 
 		part TireRearRight
 		{
+            model Tire1
+			{
+				file = 93mustangSSPWheelR,
+			}
+
+			model Tire2
+			{
+				file = 93mustangSSPWheelDarkR,
+			}
+
+            model Tire3
+			{
+				file = 93mustangGTWheelR,
+			}
+
+            model Tire4
+			{
+				file = 93mustangGTWheelDarkR,
+			}
+
+            model Tire5
+			{
+				file = 93mustangSVTWheelR,
+			}
+
 			area = TireRearRight,
 			wheel = RearRight,
 			table install
 			{
+				complete = SSP93.InstallComplete.TireRearRight,
 				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = SSP93.UninstallComplete.TireRearRight,
+			}
+
+			lua
+			{
+				create = Vehicles.Create.Tire,
+				init = SSP93.Init.TireRearRight,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
 			}
 		}
 
 		part Tire*
 		{
 			category = tire,
-			itemType = Base.93mustangSSPTire,
+            specificItem = false,
+			itemType = Base.93mustangSSPTire1;Base.93mustangSSPTireB1;Base.93mustangGTTire3;Base.93mustangGTTireB3;Base.93mustangSVTTire3,
 			container
 			{
 				capacity = 35,
@@ -91,7 +313,6 @@ module Base
 				time = 400,
 				skills = Mechanics:1,
 				test = Vehicles.InstallTest.Default,
-				complete = Vehicles.InstallComplete.Tire,
 			}
 			table uninstall
 			{
@@ -114,22 +335,97 @@ module Base
 				time = 400,
 				skills = Mechanics:1,
 				test = Vehicles.UninstallTest.Default,
-				complete = Vehicles.UninstallComplete.Tire,
 			}
+		}
+	}
 
-			model 93mustangSSPTire
+    template vehicle SSP93TiresPD
+	{   
+        template! = SSP93Tires,
+
+		part TireFrontLeft
+		{
+			table install
 			{
-				file = 93mustangSSPWheel,
+				complete = SSP93.InstallComplete.TireFrontLeftPD,
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+			table uninstall
+			{
+				complete = SSP93.UninstallComplete.TireFrontLeftPD,
 			}
 
 			lua
 			{
-				create = Vehicles.Create.Tire,
-				init = Vehicles.Init.Tire,
+				create = SSP93.Create.TireFrontLeftPD,
+				init = SSP93.Init.TireFrontLeftPD,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            table install
+			{
+				complete = SSP93.InstallComplete.TireFrontRightPD,
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+			table uninstall
+			{
+				complete = SSP93.UninstallComplete.TireFrontRightPD,
+			}
+
+			lua
+			{
+				create = SSP93.Create.TireFrontRightPD,
+				init = SSP93.Init.TireFrontRightPD,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearLeft
+		{
+			table install
+			{
+				complete = SSP93.InstallComplete.TireRearLeftPD,
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+            table uninstall
+			{
+				complete = SSP93.UninstallComplete.TireRearLeftPD,
+			}
+
+			lua
+			{
+				create = SSP93.Create.TireRearLeftPD,
+				init = SSP93.Init.TireRearLeftPD,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
+			}
+		}
+
+		part TireRearRight
+		{
+			table install
+			{
+				complete = SSP93.InstallComplete.TireRearRightPD,
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+			table uninstall
+			{
+				complete = SSP93.UninstallComplete.TireRearRightPD,
+			}
+
+			lua
+			{
+				create = SSP93.Create.TireRearRightPD,
+				init = SSP93.Init.TireRearRightPD,
 				checkOperate = Vehicles.CheckOperate.Tire,
 				update = Vehicles.Update.Tire,
 			}
 		}
 	}
 }
-

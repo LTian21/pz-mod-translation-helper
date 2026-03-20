@@ -1,0 +1,45 @@
+module Base
+{
+	template vehicle SSP93TrunkCompartment
+	{
+		part SSP93Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+                capacity = 60,
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+            durability = 5,
+			container
+			{
+				test = Vehicles.ContainerAccess.TruckBed,
+			}
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+
+	}
+
+}
+

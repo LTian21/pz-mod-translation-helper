@@ -44,6 +44,28 @@ module Base
         scale = 0.1,
     	}
 
+    model 93mustangGTDoorrla
+    	{
+        mesh = vehicles/Vehicles_93mustangSSP_Body|gt_window_rl_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93mustangGTDoorrra
+    	{
+        mesh = vehicles/Vehicles_93mustangSSP_Body|gt_window_rr_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+    	}
+
+    model 93mustangGTWindshieldreara
+    	{
+        mesh = vehicles/Vehicles_93mustangSSP_Body|gt_windshield_rear_a,
+		shader = damn_vehicle_shader,
+        scale = 0.1,
+        static = FALSE,
+    	}
+
 	template vehicle SSP93Armor
 		{
 		part SSP93WindshieldArmor
@@ -364,6 +386,91 @@ module Base
 				model SSP93windra
 				{
                 		file = 93mustangSSPWindshieldreara,
+				}
+
+			area = TruckBed,
+			category = bodywork,
+			specificItem = false,
+			itemType = Base.93mustangSSPWindshieldRearArmor,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Screwdriver,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 700,
+                	skills = Mechanics:4,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = SSP93.InstallComplete.WindshieldRearArmor,
+                	requireInstalled = WindshieldRear,
+            }
+
+            table uninstall
+            {
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Screwdriver,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:4,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = SSP93.UninstallComplete.WindshieldRearArmor,
+            		}
+
+            		lua
+            		{
+					create = SSP93.Create.WindshieldRearArmor,
+					init = SSP93.Init.WindshieldRearArmor,
+					}
+		}
+	}
+
+    template vehicle SSP93ArmorGT
+		{
+            template! = SSP93Armor,
+
+		part SSP93WindowRearLeftArmor
+        {
+
+			model SSP93leftdoorra
+				{
+                		file = 93mustangGTDoorrla,
+				}
+		}
+
+		part SSP93WindowRearRightArmor
+        {
+
+			model SSP93rightdoorra
+				{
+                		file = 93mustangGTDoorrra,
+				}
+		}
+
+		part SSP93WindshieldRearArmor
+        {
+
+				model SSP93windra
+				{
+                		file = 93mustangGTWindshieldreara,
 				}
 
 			area = TruckBed,

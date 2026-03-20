@@ -1,0 +1,209 @@
+module Base
+{
+	model fhqPreviaBullbarOR
+	{
+		mesh = vehicles/vehicle_fhqprevia|fhqpreviaOffroadBullbar,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.47,
+	}
+	vehicle fhqPreviaOffroad
+    {
+        template! = fhqPrevia,
+        offRoadEfficiency = 1.4,
+        engineRepairLevel = 5,
+
+        model
+        {
+            file = fhqPrevia,
+            scale = 1.8200,
+            offset = 0.0000 0.3187 0.0110,
+        }
+
+        spawnOffsetY = 0.12999995,
+
+        skin
+        {
+            texture = Vehicles/vehicle_fhqPrevia_shell,
+        }
+
+        textureMask = Vehicles/vehicle_fhqPrevia_mask,
+        textureLights = Vehicles/vehicle_fhqPrevia_lights,
+        textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+        textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+        textureDamage1Shell = Vehicles/Veh_Damage1,
+        textureDamage2Shell = Vehicles/Veh_Damage2,
+        textureRust = Vehicles/Veh_Rust,
+        mass = 900,
+        engineForce = 3550,
+        engineLoudness = 85,
+        maxSpeed = 95f,
+        gearRatioCount = 5,
+        stoppingMovementForce = 2.0f,
+        rollInfluence = 0.7f,
+        steeringIncrement = 0.03,
+        steeringClamp = 0.3,
+        suspensionStiffness = 25,
+        suspensionCompression = 3.21,
+        suspensionDamping = 2.92,
+        maxSuspensionTravelCm = 18,
+        suspensionRestLength = 0.35f,
+        wheelFriction = 1.5f,
+        frontEndHealth = 150,
+        rearEndHealth = 150,
+
+        wheel FrontLeft
+        {
+            front = true,
+            offset = 0.3571 -0.3729 0.7253,
+            radius = 0.17f,
+            width = 0.25f,
+        }
+
+        wheel FrontRight
+        {
+            front = true,
+            offset = -0.3571 -0.3729 0.7253,
+            radius = 0.17f,
+            width = 0.25f,
+        }
+
+        wheel RearLeft
+        {
+            front = false,
+            offset = 0.3571 -0.3729 -0.6593,
+            radius = 0.17f,
+            width = 0.25f,
+        }
+
+        wheel RearRight
+        {
+            front = false,
+            offset = -0.3571 -0.3745 -0.6593,
+            radius = 0.17f,
+            width = 0.25f,
+        }
+
+        part TrunkDoor
+        {
+            model Default
+            {
+                file = fhqPreviaWing,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        part GloveBox
+        {
+            model Default
+            {
+                file = fhqPreviaRails,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            model BullbarMed
+            {
+                file = fhqPreviaBullbarOR,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        part TireFrontLeft
+        {
+            model InflatedTirePlusWheel
+            {
+                file = fhqMZOffroadWheelLeft,
+                scale = 0.40,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        part TireFrontRight
+        {
+            model InflatedTirePlusWheel
+            {
+                file = fhqMZOffroadWheelRight,
+                scale = 0.40,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        part TireRearLeft
+        {
+            model InflatedTirePlusWheel
+            {
+                file = fhqMZOffroadWheelLeft,
+                scale = 0.40,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        part TireRearRight
+        {
+            model InflatedTirePlusWheel
+            {
+                file = fhqMZOffroadWheelRight,
+                scale = 0.40,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        useChassisPhysicsCollision = false,
+        template! = fhqPrevia_Col,
+
+        physics box
+        {
+            offset = 0.0000 0.1737 0.0000,
+            extents = 0.8681 0.3297 2.2088,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.4780 -0.8709,
+            extents = 0.7802 0.4835 0.2418,
+            rotate = 33.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.5330 -0.2222,
+            extents = 0.7802 0.4286 1.2308,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.3901 0.6593,
+            extents = 0.7802 0.8242 0.3516,
+            rotate = -60.0000 0.0000 0.0000,
+        }
+
+        attachment trailer
+        {
+            offset = 0.0000 -0.1910 -1.1647,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = -1.0000,
+        }
+
+        attachment trailerfront
+        {
+            offset = 0.0000 -0.1992 1.1366,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = 1.0000,
+        }
+
+        extents = 0.8681 0.7473 2.2967,
+        physicsChassisShape = 0.8681 0.7473 2.2967,
+        centerOfMassOffset = 0.0000 0.3791 0.0000,
+        shadowExtents = 0.8656 2.4332,
+        shadowOffset = 0.0000 0.0000,
+    }
+}

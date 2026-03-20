@@ -1,0 +1,145 @@
+module Base
+{
+	model fhqPreviaLivery
+	{
+		mesh = vehicles/vehicle_fhqprevia|fhqprevia,
+		shader = vehicle_norandom_multiuv,
+		invertX = FALSE,
+		scale = 0.47,
+	}
+	
+	model fhqPreviaFoglight
+	{
+		mesh = vehicles/vehicle_fhqprevia|Cibie_T353,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.47,
+	}
+	
+	vehicle fhqPreviaFujiwara
+	{
+		template! = fhqPrevia,
+		
+		mechanicType = 1,
+		offRoadEfficiency = 0.8,
+		engineRepairLevel = 4,
+		playerDamageProtection = 0.8,
+		engineRPMType = van,
+
+		model
+		{
+			file = fhqPreviaLivery,
+			scale = 1.8200,
+            offset = 0.0000 0.3187 0.0110,
+		}
+
+		spawnOffsetY = 0.12999995,
+
+		skin
+		{
+			texture = Vehicles/vehicle_fhqPrevia_Fuji_shell,
+		}
+
+		textureMask = Vehicles/vehicle_fhqPrevia_mask,
+		textureLights = Vehicles/vehicle_fhqPrevia_lights,
+		textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
+		textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
+		textureDamage1Shell = Vehicles/Veh_Damage1,
+		textureDamage2Shell = Vehicles/Veh_Damage2,
+		textureRust = Vehicles/Veh_Rust,
+
+		mass = 875,
+		engineForce = 2750,
+		engineLoudness = 80,
+		maxSpeed = 75f,
+		gearRatioCount = 4,
+
+		wheel FrontLeft
+        {
+            front = true,
+            offset = 0.3571 -0.3513 0.7253,
+            radius = 0.17f,
+            width = 0.25f,
+        }
+
+        wheel FrontRight
+        {
+            front = true,
+            offset = -0.3571 -0.3513 0.7253,
+            radius = 0.17f,
+            width = 0.25f,
+        }
+
+        wheel RearLeft
+        {
+            front = false,
+            offset = 0.3571 -0.3513 -0.6593,
+            radius = 0.17f,
+            width = 0.25f,
+        }
+
+        wheel RearRight
+        {
+            front = false,
+            offset = -0.3571 -0.3513 -0.6593,
+            radius = 0.17f,
+            width = 0.25f,
+        }
+
+		part TrunkDoor
+		{
+			model Default
+			{
+				file = fhqPreviaWing,
+			}
+		}
+		
+		part GloveBox
+		{
+			model Default
+			{
+				file = fhqPreviaFoglight,
+			}
+		}
+
+		part TireFrontLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqoneviadriftfrontwheelleft,
+				scale = 0.40,
+			}
+		}
+
+		part TireFrontRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqoneviadriftfrontwheelright,
+				scale = 0.40,
+			}
+		}
+
+		part TireRearLeft
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqoneviadriftrearwheelleft,
+				scale = 0.40,
+			}
+		}
+
+		part TireRearRight
+		{
+			model InflatedTirePlusWheel
+			{
+				file = fhqoneviadriftfrontwheelright,
+				scale = 0.40,
+			}
+		}
+		
+		useChassisPhysicsCollision = false,
+		
+		template! = fhqPrevia_Col,
+	}
+}
