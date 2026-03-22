@@ -1,0 +1,27 @@
+module Base
+{
+    character_trait_definition base:burglar
+    {
+        IsProfessionTrait = true,
+        DisabledInMultiplayer = false,
+        CharacterTrait = base:burglar,
+        Cost = 0,
+        UIName = UI_prof_Burglar,
+        UIDescription = UI_trait_BurglarDesc,
+		GrantedRecipes = Create BobbyPin;Create BobbyPin2;Lockpicking;Alarm check,
+		MutuallyExclusiveTraits = betlock:nimblefingers,
+    }
+	
+	character_trait_definition betlock:nimblefingers
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = betlock:nimblefingers,
+        Cost = 3,
+        UIName = UI_trait_nimblefingers,
+        UIDescription = UI_trait_nimblefingersDesc,
+		XPBoosts = Lockpicking=2,
+		GrantedRecipes = Create BobbyPin;Create BobbyPin2;Lockpicking;Alarm check,
+		MutuallyExclusiveTraits = base:burglar,
+    }
+}
