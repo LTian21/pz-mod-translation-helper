@@ -1,16 +1,18 @@
 module Rotators
 {
+   /* Wheels 4 Axle */
+
 	template vehicle SemiTruckTemplate
 	{
 		mechanicType = 2,
 		engineRepairLevel = 5,
-		playerDamageProtection = 0.5,
+		playerDamageProtection = 0.85,
 		engineRPMType = SemiTruckRPM,
       
-		frontEndHealth = 1500,
-		rearEndHealth = 1000,
+		frontEndHealth = 750,
+		rearEndHealth = 500,
 
-		spawnOffsetY = 0.35,
+		
 
 		isSmallVehicle = false,
 
@@ -33,36 +35,36 @@ module Rotators
 		textureDamage2Overlay = Vehicles/vehicles_rSemiTruck_Overlay_Damaged02,
 		textureShadow = Vehicles/Vehicles_rSemiTruck_Shadow,
 
-		wheel FrontLeft
-		{
-			front = true,
-			offset = 0.7624 -0.8614 2.5050,
-			radius = 0.40f,
-			width = 0.30f,
-		}
+        wheel FrontLeft
+        {
+            front = true,
+            offset = 0.76 -0.8504 2.51,
+            radius = 0.38f,
+            width = 0.3f,
+        }
 
-		wheel FrontRight
-		{
-			front = true,
-			offset = -0.7624 -0.8614 2.5050,
-			radius = 0.40f,
-			width = 0.30f,
-		}
+        wheel FrontRight
+        {
+            front = true,
+            offset = -0.76 -0.8504 2.51,
+            radius = 0.38f,
+            width = 0.3f,
+        }
 
         wheel RearLeft
         {
             front = false,
-            offset = -0.794 -1.0000 -1.4912,
-            radius = 0.42f,
-            width = 3.00f,
+            offset = 0.76 -0.9504 -1.49,
+            radius = 0.38f,
+            width = 0.18f,
         }
 
         wheel RearRight
         {
             front = false,
-            offset = 0.7934 -1.0000 -2.5351,
-            radius = 0.42f,
-            width = 3.00f,
+            offset = -0.76 -0.9504 -2.53,
+            radius = 0.38f,
+            width = 0.18f,
         }
  
 
@@ -506,111 +508,33 @@ module Rotators
 				recipes = Intermediate Mechanics,
 			}
 		}
-
-       template = Tire,
-		part TireFrontLeft
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.SemiTruckBaseFrontWheelLeft,
-			}
-			model ATAProtection
-            {
-                file = Rotators.SemiTruckArmorTireFL,
-            }
-		}
-
-		part TireFrontRight
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.SemiTruckBaseFrontWheelRight,
-			}
-			model ATAProtection
-            {
-                file = Rotators.SemiTruckArmorTireFR,
-				invertX = TRUE,
-            }
-			
-		}
 		template = Rotators.Axle4Tires,
-		template = Rotators.SemiTruckArmor/part/ArmorTires,
+		template = Rotators.SemiTruckArmor/part/WheelChainFrontLeft,
+		template = Rotators.SemiTruckArmor/part/WheelChainFrontRight,
+		template = Rotators.SemiTruckArmor/part/WheelChainMiddleLeft,
+		template = Rotators.SemiTruckArmor/part/WheelChainMiddleRight,
+		template = Rotators.SemiTruckArmor/part/WheelChainRearLeft,
+		template = Rotators.SemiTruckArmor/part/WheelChainRearRight,
 		part Tire*
 		{
-		
-			table armor
-			{
-				logic = RotatorsLib,
-				condition = 100,
-				needs =
-				{
-				part = ArmorTires,
-                condition = 1,
-				}
-			}
-			table uninstall
-			{
-				requireUninstalled = ArmorTires,
-				recipes = Basic Mechanics,
-			}
 		setAllModelsVisible = false,
         
 		
 		table install
          {
-             complete = ATATuning2.InstallComplete.TireNotAllModelsVisible,
+			 complete = rSemiTruck.ATATuning.InstallComplete.SafeTireNotAllModelsVisible,
          }
          table uninstall
          {
-             requireUninstalled = ATA2ProtectionWheels,
-             complete = ATATuning2.UninstallComplete.TireNotAllModelsVisible,
+			 complete = rSemiTruck.ATATuning.UninstallComplete.SafeTireNotAllModelsVisible,
          }
          lua
          {
              create = Vehicles.Create.Tire,
-             init = ATATuning2.Init.TireNotAllModelsVisible,
+			 init = rSemiTruck.ATATuning.Init.SafeTireNotAllModelsVisible,
              checkOperate = Vehicles.CheckOperate.Tire,
              update = Vehicles.Update.Tire,
          }
-		}
-
-		part TireRearLeft
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.SemiTruckBaseBackWheelLeft,
-			}
-			model ATAProtection
-			{
-				file = Rotators.SemiTruckArmorTireRR,
-				offset = -0.075 0 0,
-				rotate = 0 0 180,
-			}
-			model ATAProtection2
-			{
-				file = Rotators.SemiTruckArmorTireRR,
-				offset = 0.85 0 0,
-			}
-		}
-
-		part TireRearRight
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.SemiTruckBaseBackWheelRight,
-				offset = -0.7932 0 0,
-			}
-			model ATAProtection
-			{
-				file = Rotators.SemiTruckArmorTireRL,
-				offset = -1.65 0 0,
-				rotate = 0 0 180,
-			}
-			model ATAProtection2
-			{
-				file = Rotators.SemiTruckArmorTireRL,
-				offset = 1.7 0 0,
-			}
 		}
 
 		template = Brake,
@@ -692,5 +616,15 @@ module Rotators
 				focusing = 25,
             }
 		}
+		part HeadlightRearLeft
+        {
+            mechanicArea = Back,
+            area = TruckBed,
+        }
+        part HeadlightRearRight
+        {
+            mechanicArea = Back,
+            area = TruckBed,
+        }
 	}
 }
