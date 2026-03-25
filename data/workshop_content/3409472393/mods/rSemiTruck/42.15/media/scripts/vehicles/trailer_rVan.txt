@@ -65,6 +65,8 @@ module Base
 		{
 			texture = Vehicles/Trailers_rVan_CaspianBlue_hot_orange,
 		}
+
+		
 		template = Door/part/DoorRear,
 
 		part DoorRear
@@ -119,6 +121,22 @@ module Base
 				anim = Attack_Shove,
 				rate = 0.3,
 				angle = 0.0 0.0 0.0,
+			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+
+				needs =
+				{
+					part = ArmorTrailerVan,
+					condition = 1,
+				}
+
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
 			}
 		}
 
@@ -498,7 +516,7 @@ module Base
 		template = Suspension/part/SuspensionRearLeft,
 		template = Suspension/part/SuspensionRearRight,
 		template = Trunk/part/TruckBed,
-
+		template = Rotators.SemiTrailerArmor/part/ArmorTrailerVan,
 		part TruckBed
 		{
 			echanicRequireKey = false,
@@ -506,6 +524,38 @@ module Base
 			{
 				conditionAffectsCapacity = true,
 				capacity = 1500,
+			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+
+				needs =
+				{
+					part = ArmorTrailerVan,
+					condition = 1,
+				}
+
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
+			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+
+				needs =
+				{
+					part = ArmorTrailerVan,
+					condition = 1,
+				}
+
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
 			}
 		}
 

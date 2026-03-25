@@ -1,8 +1,64 @@
 module Rotators
 {
+
+	template vehicle SemiTrailerArmor{
+		part ArmorTrailerVan
+		{
+			model Default
+			{
+				file = Rotators.ArmorTrailerVan,
+			}
+			area = TruckBed,
+			table install
+			{
+				requireInstalled = DoorRear,
+			}
+			category = bodywork,
+			itemType = Base.SemiTrailerArmor,
+		}
+
+		part Armor*
+		{
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+		}}
 	template vehicle SemiTruckArmor
-	{
-		part ArmorDoorL
+	{		part ArmorDoorL
 		{
 			model Default
 			{
@@ -49,8 +105,6 @@ module Rotators
 			category = bodywork,
 			itemType = Base.SemiTruckArmorRear_Item,
 		}
-
-
 
 		part ArmorBullbar
 		{
