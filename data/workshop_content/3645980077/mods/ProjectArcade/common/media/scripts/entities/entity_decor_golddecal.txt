@@ -1,0 +1,47 @@
+module Base
+{
+    xuiSkin default
+    {
+	    entity DecorGoldDecal
+    {
+        LuaWindowClass = ISEntityWindow,
+        DisplayName = DecorGoldDecal,
+        Icon = decor_golddecal,
+    }
+
+
+    }
+	entity DecorGoldDecal
+	{
+		component UiConfig
+		{
+			xuiSkin = default,
+			entityStyle = DecorGoldDecal,
+			uiEnabled = false,
+		}
+
+		component SpriteConfig
+		{
+			isThumpable = false,
+			needToBeAgainstWall = true,
+
+			face E { layer { row = pa_decorations_1, } }
+			face S { layer { row = pa_decorations_2, } }
+		}
+
+		component CraftRecipe
+		{
+			timedAction = Paint,
+			time = 10,
+			category = Project Arcade Decor,
+			Tooltip = Tooltip_DecorDecal,
+
+			inputs
+			{
+				item 1 tags[base:paintbrush] mode:keep,
+				item 1 [Base.PaintBrown;Base.PaintLightBrown;Base.PaintOrange;Base.PaintRed;Base.PaintYellow],
+			}
+		}
+	}
+
+}
