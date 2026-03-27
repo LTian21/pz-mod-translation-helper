@@ -85,7 +85,7 @@ module HydeCoBees
         DisplayName = Wild Beehive,
         DisplayCategory = Material,
         ItemType = base:normal,
-        Weight = 10.0,
+        Weight = 4.0,
         Icon = Beehive,
         StaticModel = Beehive,
         WorldStaticModel = Beehive,
@@ -93,17 +93,17 @@ module HydeCoBees
         Tags = base:iscraftingmaterial,
     }
 
-    item CultivatedBeehive
+    item BeehiveSmoked
     {
-        DisplayName = Cultivated Beehive,
-        DisplayCategory = Trapping,
+        DisplayName = Smoked Wild Beehive,
+        DisplayCategory = Material,
         ItemType = base:normal,
-        Weight = 8.0,
-        Icon = CultivatedBeehive,
-        Trap = true,
-        StaticModel = CultivatedBeehive,
-        WorldStaticModel = CultivatedBeehive,
-        Tooltip = Tooltip_HydeCoBees_CultivatedBeehive,
+        Weight = 4.0,
+        Icon = Beehive,
+        StaticModel = Beehive,
+        WorldStaticModel = Beehive,
+        Tooltip = Tooltip_HydeCoBees_Beehive,
+        Tags = base:iscraftingmaterial,
     }
 
     item QueenBee
@@ -125,6 +125,71 @@ module HydeCoBees
         Proteins = 0.5,
         FishingLure = true,
         Tags = base:nocookingxp,
+    }
+
+    item QueenLarvae
+    {
+        DisplayName = Queen Larvae,
+        DisplayCategory = Material,
+        ItemType = base:food,
+        Weight = 0.03,
+        Icon = QueenBeeLarvae,
+        Tooltip = Tooltip_HydeCoBees_QueenLarvae,
+        EvolvedRecipe = AddBaitToChum:1,
+        StaticModel = Insect_Honeybee,
+        WorldStaticModel = Insect_Honeybee,
+        HungerChange = -0.2,
+        Calories = 1.0,
+        Carbohydrates = 0.0,
+        Lipids = 0.1,
+        Proteins = 0.3,
+        FishingLure = true,
+        Tags = base:nocookingxp,
+    }
+
+    item Propolis
+    {
+        DisplayName = Propolis,
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 0.03,
+        Icon = Propolis,
+        Tooltip = Tooltip_HydeCoBees_Propolis,
+        Tags = base:iscraftingmaterial,
+    }
+
+    item RoyalJelly
+    {
+        DisplayName = Royal Jelly,
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 0.05,
+        Icon = RoyalJelly,
+        HungerChange = -3,
+        UnhappyChange = -8,
+        StressChange = -5,
+        Calories = 45,
+        Carbohydrates = 6,
+        Lipids = 0,
+        Proteins = 1,
+        Tooltip = Tooltip_HydeCoBees_RoyalJelly,
+    }
+
+    item BeekeepingMagazine
+    {
+        DisplayName = Beekeeping Magazine,
+        DisplayCategory = RecipeResource,
+        ItemType = base:literature,
+        Weight = 0.4,
+        BoredomChange = -20,
+        StressChange = -15,
+        LearnedRecipes = Base.HydeCoBees_CultivatedHive;Base.HydeCoBees_RearQueenLarvae;Base.CraftQueenCage;Base.MakeBeeSmoker;Base.LightBeeSmoker;Base.RefuelBeeSmoker,
+        Icon = Magazine,
+        StaticModel = Magazine,
+        WorldStaticModel = MagazineGround,
+        Tags = base:magazine,
+        OnCreate = ItemCodeOnCreate.onCreateRecipeMagazine,
+        Tooltip = Tooltip_HydeCoBees_BeekeepingMagazine,
     }
 
     item Mead
@@ -224,7 +289,20 @@ module HydeCoBees
         DisplayName = Wasp Nest,
         DisplayCategory = Material,
         ItemType = base:normal,
-        Weight = 8.0,
+        Weight = 4.0,
+        Icon = WaspNest,
+        StaticModel = Beehive,
+        WorldStaticModel = WaspNest,
+        Tooltip = Tooltip_HydeCoBees_WaspNest,
+        Tags = base:iscraftingmaterial,
+    }
+
+    item WaspNestSmoked
+    {
+        DisplayName = Smoked Wasp Nest,
+        DisplayCategory = Material,
+        ItemType = base:normal,
+        Weight = 4.0,
         Icon = WaspNest,
         StaticModel = Beehive,
         WorldStaticModel = WaspNest,
@@ -727,14 +805,27 @@ module HydeCoBees
     {
         DisplayName = Bee Smoker,
         DisplayCategory = Tool,
-        ItemType = base:drainable,
+        ItemType = base:normal,
+        CanBeEquipped = Primary,
         Weight = 1.0,
         Icon = BeeSmoker,
-        UseDelta = 0.01,
-        cantBeConsolided = true,
         StaticModel = BeeSmoker,
         WorldStaticModel = BeeSmoker,
         Tooltip = Tooltip_HydeCoBees_BeeSmoker,
+        Tags = base:iscraftingmaterial,
+    }
+
+    item BeeSmoker_Fueled
+    {
+        DisplayName = Fueled Bee Smoker,
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        CanBeEquipped = Primary,
+        Weight = 1.0,
+        Icon = BeeSmoker,
+        StaticModel = BeeSmoker,
+        WorldStaticModel = BeeSmoker,
+        Tooltip = Tooltip_HydeCoBees_BeeSmokerFueled,
         Tags = base:iscraftingmaterial,
     }
 
@@ -743,19 +834,31 @@ module HydeCoBees
         DisplayName = Lit Bee Smoker,
         DisplayCategory = Tool,
         ItemType = base:drainable,
+        CanBeEquipped = Primary,
         Weight = 1.0,
         Icon = BeeSmoker,
-        ActivatedItem = true,
-        LightDistance = 3,
-        LightStrength = 0.8,
-        TorchCone = false,
         UseDelta = 0.01,
+        DisappearOnUse = false,
         UseWhileUnequipped = true,
+        ReplaceOnDeplete = HydeCoBees.BeeSmoker,
         cantBeConsolided = true,
         StaticModel = BeeSmoker,
         WorldStaticModel = BeeSmoker,
         Tags = base:iscraftingmaterial,
         Tooltip = Tooltip_HydeCoBees_BeeSmokerLit,
+    }
+
+    item QueenCage
+    {
+        DisplayName = Queen Cage,
+        DisplayCategory = Tool,
+        ItemType = base:normal,
+        Weight = 0.3,
+        Icon = QueenCage,
+        ConditionMax = 5,
+        ConditionLowerChanceOneIn = 1,
+        Tooltip = Tooltip_HydeCoBees_QueenCage,
+        Tags = base:iscraftingmaterial,
     }
 }
 
