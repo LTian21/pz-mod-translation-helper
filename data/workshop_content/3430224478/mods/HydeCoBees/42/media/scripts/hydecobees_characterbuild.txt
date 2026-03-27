@@ -1,0 +1,38 @@
+module HydeCoBees
+{
+    character_trait_definition hydecobees:beekeeper
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = hydecobees:beekeeper,
+        Cost = 4,
+        UIName = UI_trait_HCB_Beekeeper,
+        UIDescription = UI_trait_HCB_BeekeeperDesc,
+        XPBoosts = Farming=1;PlantScavenging=1,
+        GrantedRecipes = Base.HydeCoBees_CultivatedHive;Base.HydeCoBees_RearQueenLarvae;Base.CraftQueenCage;Base.MakeBeeSmoker;Base.LightBeeSmoker;Base.RefuelBeeSmoker,
+        MutuallyExclusiveTraits = hydecobees:apiphobia,
+    }
+
+    character_trait_definition hydecobees:apiphobia
+    {
+        IsProfessionTrait = false,
+        DisabledInMultiplayer = false,
+        CharacterTrait = hydecobees:apiphobia,
+        Cost = -5,
+        UIName = UI_trait_HCB_Apiphobia,
+        UIDescription = UI_trait_HCB_ApiphobiaDesc,
+        MutuallyExclusiveTraits = hydecobees:beekeeper,
+    }
+
+    character_profession_definition hydecobees:beekeeper
+    {
+        CharacterProfession = hydecobees:beekeeper,
+        Cost = -6,
+        UIName = UI_prof_HCB_Beekeeper,
+        UIDescription = UI_profdesc_HCB_Beekeeper,
+        IconPathName = profession_hcb_beekeeper,
+        XPBoosts = Farming=2;PlantScavenging=2,
+        GrantedRecipes = Base.HydeCoBees_CultivatedHive;Base.HydeCoBees_RearQueenLarvae;Base.CraftQueenCage;Base.MakeBeeSmoker;Base.LightBeeSmoker;Base.RefuelBeeSmoker,
+        GrantedTraits = hydecobees:beekeeper,
+    }
+}

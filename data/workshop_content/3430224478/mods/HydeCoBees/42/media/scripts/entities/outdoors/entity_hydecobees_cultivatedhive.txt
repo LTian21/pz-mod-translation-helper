@@ -1,0 +1,44 @@
+module Base
+{
+    entity HydeCoBees_CultivatedHive
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_HydeCoBees_CultivatedHive,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            -- Initialize hive modData as soon as the build is created.
+            OnCreate = HydeCoBees_CultivatedHive_OnCreate,
+            face W
+            {
+                layer
+                {
+                    row = Cultivatedbeehivetiles_0,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = HydeCoBees_CultivatedHive_OnAddToMenu,
+            timedAction = BuildWoodenStructureMedium,
+            time = 60,
+            NeedToBeLearn = true,
+            category = Farming,
+            Tags = Farming;Outdoors,
+            SkillRequired = Woodwork:2,
+            xpAward = Woodwork:20,
+            Tooltip = Tooltip_HydeCoBees_CultivatedBeehive,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 4 [Base.Plank],
+                item 4 [Base.Nails],
+                item 1 [HydeCoBees.BallOfBeesWax],
+                item 1 [HydeCoBees.HoneycombEmpty],
+            }
+        }
+    }
+}
