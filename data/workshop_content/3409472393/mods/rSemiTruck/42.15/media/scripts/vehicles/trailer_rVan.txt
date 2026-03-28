@@ -2,14 +2,9 @@ module Base
 {
 	vehicle SemiTrailerVan
 	{
-		template! = Base.TrailerBase,
 
-		model
-		{
-			file = Rotators.TrailerVanBase,
-			scale = 1.1500,
-			offset = 0.0000 0.7826 -1.3652,
-		}
+		template! = Base.TrailerBase,
+		template = SemiTruckTrailerCollision,
 
 		skin
 		{
@@ -65,154 +60,17 @@ module Base
 		{
 			texture = Vehicles/Trailers_rVan_CaspianBlue_hot_orange,
 		}
-
-		
-		template = Door/part/DoorRear,
-
-		part DoorRear
-		{
-			model DoorRear
-			{
-				file = Rotators.TrailerVanTrunk,
-				rotate = 0 0 0,
-				scale = 1,
-				offset = 0 0 0,
-			}
-
-			anim Close
-			{
-				sound = VehicleTrunkCloseStandard,
-				anim = Trunk_closing,
-				rate = 1.5,
-			}
-
-			anim Open
-			{
-				sound = VehicleTrunkOpenStandard,
-				anim = Trunk_closing,
-				reverse = TRUE,
-				rate = 0.75,
-			}
-
-			anim Closed
-			{
-				anim = Trunk_closing,
-				reverse = TRUE,
-				animate = FALSE,
-			}
-
-			anim Opened
-			{
-				anim = Trunk_closing,
-				animate = FALSE,
-			}
-
-			mechanicRequireKey = false,
-
-			anim ActorOpen
-			{
-				anim = WindowOpenSuccess,
-				rate = 0.15,
-				angle = 0.0 0.0 0.0,
-			}
-
-			anim ActorClose
-			{
-				anim = Attack_Shove,
-				rate = 0.3,
-				angle = 0.0 0.0 0.0,
-			}
-			table armor
-			{
-				logic = RotatorsLib,
-				condition = 100,
-
-				needs =
-				{
-					part = ArmorTrailerVan,
-					condition = 1,
-				}
-
-				lua =
-				{
-					repair = rSemiTruck.Event.PostAutoRepair,
-				}
-			}
-		}
-
-		extents = 1.9130 1.8087 8.1565,
-		physicsChassisShape = 1.9130 1.8087 8.1565,
-		centerOfMassOffset = 0.0000 1.4609 0.7043,
-		shadowExtents = 1.8266 8.9786,
-		shadowOffset = 0.0000 0.7123,
-
-		area TireFrontLeft
-		{
-			xywh = 1.3304 -1.0957 0.4522 0.5043,
-		}
-
-		area TireFrontRight
-		{
-			xywh = -1.3130 -1.0957 0.4522 0.5043,
-		}
-
-		area TireRearLeft
-		{
-			xywh = 1.3304 -2.0957 0.4522 0.5043,
-		}
-
-		area TireRearRight
-		{
-			xywh = -1.3130 -2.0957 0.4522 0.5043,
-		}
-
-		area TruckBed
-		{
-			xywh = 0.0000 -3.5652 3.3565 1.4957,
-		}
-
-		area Toolbox
-		{
-			xywh = -1.1565 0.2174 0.5739 1.0957,
-		}
-
-		area SpareTire
-		{
-			xywh = 1.1565 0.2000 0.5739 1.0957,
-		}
-
-		attachment trailerTruck
-		{
-			offset = 0.0000 -0.4000 5.6435,
-			rotate = 0.0000 0.0000 0.0000,
-			canAttach = trailerTruck,
-		}
-        useChassisPhysicsCollision = false,
-
-        physics box
-        {
-            offset = 0.3652 0.6485 2.3478,
-            extents = 0.0870 2.2783 0.0870,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-
-        physics box
-        {
-            offset = -0.3565 0.6469 2.3478,
-            extents = 0.0870 2.2783 0.0870,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-
-        physics box
-        {
-            offset = 0.0000 1.5428 0.7304,
-            extents = 1.7826 1.7913 8.4435,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-
 	}
 	template vehicle TrailerBase
 	{
+
+		model
+		{
+			file = Rotators.TrailerVanBase,
+			scale = 1.1500,
+			offset = 0.0000 0.7826 -1.3652,
+		}
+
 		mechanicType = 2,
 		offRoadEfficiency = 1,
 		engineRepairLevel = 4,
@@ -245,7 +103,7 @@ module Base
 		suspensionDamping = 3.88,
 		maxSuspensionTravelCm = 15,
 		suspensionRestLength = 0.16f,
-		wheelFriction = 0.45f,
+		wheelFriction = 0.51f,
 		frontEndHealth = 300,
 		rearEndHealth = 300,
 		seats = 2,
@@ -494,8 +352,79 @@ module Base
              update = Vehicles.Update.Tire,
          }
 		}
+	
+		template = Door/part/DoorRear,
 
+		part DoorRear
+		{
+			model DoorRear
+			{
+				file = Rotators.TrailerVanTrunk,
+				rotate = 0 0 0,
+				scale = 1,
+				offset = 0 0 0,
+			}
 
+			anim Close
+			{
+				sound = VehicleTrunkCloseStandard,
+				anim = Trunk_closing,
+				rate = 1.5,
+			}
+
+			anim Open
+			{
+				sound = VehicleTrunkOpenStandard,
+				anim = Trunk_closing,
+				reverse = TRUE,
+				rate = 0.75,
+			}
+
+			anim Closed
+			{
+				anim = Trunk_closing,
+				reverse = TRUE,
+				animate = FALSE,
+			}
+
+			anim Opened
+			{
+				anim = Trunk_closing,
+				animate = FALSE,
+			}
+
+			mechanicRequireKey = false,
+
+			anim ActorOpen
+			{
+				anim = WindowOpenSuccess,
+				rate = 0.15,
+				angle = 0.0 0.0 0.0,
+			}
+
+			anim ActorClose
+			{
+				anim = Attack_Shove,
+				rate = 0.3,
+				angle = 0.0 0.0 0.0,
+			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+
+				needs =
+				{
+					part = ArmorTrailerVan,
+					condition = 1,
+				}
+
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
+			}
+		}
 
       template = Battery,
 		part Battery
@@ -586,6 +515,53 @@ module Base
 			}
 		}
 
+        extents = 1.9130 2.4870 8.1565,
+        physicsChassisShape = 1.9130 2.4870 8.1565,
+        centerOfMassOffset = 0.0000 1.1800 0.6179,
+        shadowExtents = 1.8266 8.9786,
+        shadowOffset = 0.0000 0.7123,
+
+		area TireFrontLeft
+		{
+			xywh = 1.3304 -1.0957 0.4522 0.5043,
+		}
+
+		area TireFrontRight
+		{
+			xywh = -1.3130 -1.0957 0.4522 0.5043,
+		}
+
+		area TireRearLeft
+		{
+			xywh = 1.3304 -2.0957 0.4522 0.5043,
+		}
+
+		area TireRearRight
+		{
+			xywh = -1.3130 -2.0957 0.4522 0.5043,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -3.5652 3.3565 1.4957,
+		}
+
+		area Toolbox
+		{
+			xywh = -1.1565 0.2174 0.5739 1.0957,
+		}
+
+		area SpareTire
+		{
+			xywh = 1.1565 0.2000 0.5739 1.0957,
+		}
+
+		attachment trailerTruck
+		{
+			offset = 0.0000 -0.4000 5.6435,
+			rotate = 0.0000 0.0000 0.0000,
+			canAttach = trailerTruck,
+		}
 		area Toolbox
 		{
 			xywh = -1.1584 -0.4455 0.5743 1.0891,
