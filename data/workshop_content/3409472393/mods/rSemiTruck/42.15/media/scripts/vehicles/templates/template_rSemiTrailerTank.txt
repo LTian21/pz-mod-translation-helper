@@ -1,9 +1,10 @@
-module Rotators
+module Rotators /* Legacy */
 {
 	item Tank750_2
     {
         Weight	=	15.0,
         itemType	=	base:normal,
+		DisplayCategory = VehicleMantenance,
         Icon	=	CarGastank,
         VehicleType =   1,
         MaxCapacity = 2000,
@@ -17,6 +18,7 @@ module Rotators
     {
         Weight	=	15.0,
         itemType	=	base:normal,
+		DisplayCategory = VehicleMantenance,
         Icon	=	CarGastank,
         VehicleType =   1,
         MaxCapacity = 125,
@@ -29,6 +31,7 @@ module Rotators
     {
         Weight	=	15.0,
         itemType	=	base:normal,
+		DisplayCategory = VehicleMantenance,
         Icon	=	CarGastank,
         VehicleType =   1,
         MaxCapacity = 125,
@@ -54,27 +57,206 @@ module Rotators
 	   Fixer = Base.SheetMetal; MetalWelding=3;Mechanics=3,
        Fixer = Base.SmallSheetMetal=2; MetalWelding=3;Mechanics=3,
 	}
+}
+
+
+module Base
+{
+	item Tank2000_2
+    {
+        Weight	=	15.0,
+        itemType	=	base:normal,
+		DisplayCategory = VehicleMantenance,
+        Icon	=	CarGastank,
+        VehicleType =   1,
+		MaxCapacity = 2000,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 45,
+        MechanicsItem = TRUE,
+		contentType = Gasoline,
+		component FluidContainer
+        {
+            ContainerName = GasTankTrailer,
+            Capacity = 2000.0,
+            Fluids
+            {
+            }
+        }
+    }
+	item Tank2000W_2
+    {
+        Weight	=	15.0,
+        itemType	=	base:normal,
+		DisplayCategory = VehicleMantenance,
+        Icon	=	CarGastank,
+        VehicleType =   1,
+		MaxCapacity = 2000,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 45,
+        MechanicsItem = TRUE,
+		contentType = Water,
+		component FluidContainer
+        {
+            ContainerName = WaterTankTrailer,
+            Capacity = 2000.0,
+            Fluids
+            {
+            }
+        }
+    }
+	item Tank125_2
+    {
+        Weight	=	15.0,
+        itemType	=	base:normal,
+		DisplayCategory = VehicleMantenance,
+        Icon	=	CarGastank,
+        VehicleType =   1,
+        MaxCapacity = 125,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 80,
+        MechanicsItem = TRUE,
+    }
+	fixing Fix CisternTank Welding
+	{
+	   Require = Base.Tank125_2;Base.Tank2000W_2;Base.Tank2000_2,
+	   GlobalItem = Base.BlowTorch=5,
+	   ConditionModifier = 1.2,
+	   Fixer = Base.SheetMetal; MetalWelding=3;Mechanics=3,
+       Fixer = Base.SmallSheetMetal=2; MetalWelding=3;Mechanics=3,
+	}
 
 	template vehicle TruckTank
 	{
-		part 750FuelTank
+		part 2000TankG
 		{
 			area = GasTank,
 			category = gastank,
-			itemType = Rotators.Tank750_2,
+			itemType = Base.Tank2000_,
 			mechanicRequireKey = false,
 			repairMechanic = true,
 			container
 			{
 				test = Vehicles.ContainerAccess.GasTank,
-				contentType = Gasoline Storage,
+				contentType = Gasoline,
 				conditionAffectsCapacity = true,
+				capacity = 2000,
 			}
-			
-			lua
+			table install
 			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.W900MutuallyExclusiveTank,
+				requireUninstalled = 2000TankW,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{ 
 				create = Vehicles.Create.GasTank,
 			}
+		}
+		part 2000TankW
+		{
+			area = GasTank,
+			category = gastank,
+			itemType = Base.Tank2000W_,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Water,
+				conditionAffectsCapacity = true,
+				capacity = 2000,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.W900MutuallyExclusiveTank,
+				requireUninstalled =  2000TankG,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						type = Base.LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+				
+			}
+			
 		}
 	}
 }

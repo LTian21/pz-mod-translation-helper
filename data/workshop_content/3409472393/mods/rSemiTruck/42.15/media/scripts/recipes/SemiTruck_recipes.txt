@@ -366,7 +366,31 @@ module Base
 	}
         outputs
         {
-		item 1 Rotators.Tank125_2,
+		item 1 Base.Tank125_2,
+        }
+	}
+    craftRecipe ConvertTank2000Type
+	{
+        timedAction = Making,
+        time = 50,
+        Tags = InHandCraft;AnySurfaceCraft,
+        category = W900,
+        SkillRequired = Mechanics:3,
+        NeedToBeLearn = false,
+		
+        inputs
+        {
+            item 1 [Base.Tank2000_2;Base.Tank2000W_2] mode:destroy flags[IsEmpty;InheritCondition;ItemCount] mappers[Tank2000TypeMapper],
+            item 1 tags[base:wrench] mode:keep flags[MayDegradeVeryLight;Prop1],
+	}
+        outputs
+        {
+            item 1 mapper:Tank2000TypeMapper,
+        }
+        itemMapper Tank2000TypeMapper
+        {
+            Base.Tank2000W_2 = Base.Tank2000_2,
+            Base.Tank2000_2 = Base.Tank2000W_2,
         }
 	}
 }
