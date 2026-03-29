@@ -47,7 +47,7 @@ module Base
 		{
 			item 1 tags[base:file] mode:keep flags[MayDegrade],
 			item 1 tags[base:metalsaw;base:smallsaw] mode:keep flags[MayDegrade],
-			item 1 [Base.AR15Trigger;Base.AR15MatchTrigger;Base.AKTrigger;Base.AR180Trigger;Base.M14Trigger;Base.M14MatchTrigger;Base.M1CarTrigger;Base.HKTrigger;Base.CalicoTrigger;Base.Mini14Trigger;Base.SKSTrigger;Base.FALTrigger] mappers[crudetriggertype],
+			item 1 [Base.AR15Trigger;Base.AR15MatchTrigger;Base.AKTrigger;Base.AR180Trigger;Base.M14Trigger;Base.M14MatchTrigger;Base.M1CarTrigger;Base.HKTrigger;Base.CalicoTrigger;Base.Mini14Trigger;Base.Mini14TriggerSS;Base.SKSTrigger;Base.FALTrigger] mappers[crudetriggertype],
 		}
 		outputs
 		{
@@ -65,6 +65,7 @@ module Base
 			Base.CrudeAR18Trigger = Base.HKTrigger,
 			Base.CrudeCalicoAutoTrigger = Base.CalicoTrigger,
 			Base.CrudeMini14AutoTrigger = Base.Mini14Trigger,
+			Base.CrudeMini14AutoTriggerSS = Base.Mini14TriggerSS,
 			Base.CrudeSKSAutoTrigger = Base.SKSTrigger,
 			Base.CrudeFALAutoTrigger = Base.FALTrigger,
 		}
@@ -114,7 +115,7 @@ module Base
 			item 1 [Base.ScrapMetal],
 			item 1 tags[base:file] mode:keep flags[MayDegrade],
 			item 1 tags[base:metalsaw;base:smallsaw] mode:keep flags[MayDegrade],
-			item 1 [Base.AR15Trigger;Base.AR15MatchTrigger;Base.AKTrigger;Base.AR180Trigger;Base.HKTrigger;Base.Mini14Trigger;Base.FALTrigger] mappers[autotriggertype],
+			item 1 [Base.AR15Trigger;Base.AR15MatchTrigger;Base.AKTrigger;Base.AR180Trigger;Base.HKTrigger;Base.FALTrigger] mappers[autotriggertype],
 		}
 		outputs
 		{
@@ -127,7 +128,6 @@ module Base
 			Base.AKAutoTrigger = Base.AKTrigger,
 			Base.AR180Trigger = Base.AR180Trigger,
 			Base.HKAutoTrigger = Base.HKTrigger,
-			Base.Mini14AutoTrigger = Base.Mini14Trigger,
 			Base.FALAutoTrigger = Base.FALTrigger,
 		}
 	}
@@ -148,7 +148,7 @@ module Base
 			item 1 [Base.ScrapMetal],
 			item 1 tags[base:file] mode:keep flags[MayDegrade],
 			item 1 tags[base:metalsaw;base:smallsaw] mode:keep flags[MayDegrade],
-			item 1 [Base.AR15Trigger;Base.AR15MatchTrigger;Base.HKTrigger;Base.Mini14Trigger] mappers[bursttriggertype],
+			item 1 [Base.AR15Trigger;Base.AR15MatchTrigger;Base.HKTrigger] mappers[bursttriggertype],
 		}
 		outputs
 		{
@@ -159,7 +159,6 @@ module Base
 			Base.AR15BurstTrigger = Base.AR15Trigger,
 			Base.AR15BurstTrigger = Base.AR15MatchTrigger,
 			Base.HKBurstTrigger = Base.HKTrigger,
-			Base.Mini14BurstTrigger = Base.Mini14Trigger,
 		}
 	}
 
@@ -287,6 +286,52 @@ module Base
 		outputs
 		{
 			item 1 Base.M14AutoPart,
+		}
+	}
+
+	craftRecipe Mini14AutoPart
+	{
+		timedAction = Welding,
+		Time = 200,
+        Tooltip = Tooltip_Recipe_NeedSawMetal,
+		NeedToBeLearn = True,
+		SkillRequired = MetalWelding:5,
+		Tags = AnySurfaceCraft;Welding,
+        category = Metalworking,
+		xpAward = MetalWelding:25,
+		AutoLearnAny = Aiming:6,
+		inputs
+		{
+			item 1 [Base.ScrapMetal],
+			item 1 tags[base:file] mode:keep flags[MayDegrade],
+			item 1 tags[base:metalsaw;base:smallsaw] mode:keep flags[MayDegrade],
+		}
+		outputs
+		{
+			item 1 Base.Mini14AutoPart,
+		}
+	}
+
+	craftRecipe Mini14AutoBurstPart
+	{
+		timedAction = Welding,
+		Time = 200,
+        Tooltip = Tooltip_Recipe_NeedSawMetal,
+		NeedToBeLearn = True,
+		SkillRequired = MetalWelding:7,
+		Tags = AnySurfaceCraft;Welding,
+        category = Metalworking,
+		xpAward = MetalWelding:25,
+		AutoLearnAny = Aiming:6,
+		inputs
+		{
+			item 1 [Base.ScrapMetal],
+			item 1 tags[base:file] mode:keep flags[MayDegrade],
+			item 1 tags[base:metalsaw;base:smallsaw] mode:keep flags[MayDegrade],
+		}
+		outputs
+		{
+			item 1 Base.Mini14AutoBurstPart,
 		}
 	}
 

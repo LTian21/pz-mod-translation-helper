@@ -23,7 +23,7 @@ module JM3
 		}
 		outputs
 		{
-			item 1 JM3.WoodCrossbow,
+			item 1 JM3.WoodCrossbowArrow,
 		}
 	}
 
@@ -48,10 +48,9 @@ module JM3
 		}
 		outputs
 		{
-			item 1 JM3.WoodBow,
+			item 1 JM3.WoodBowArrow,
 		}
 	}
-
 
 	craftRecipe Make_metal_crossbow
 	{
@@ -75,7 +74,7 @@ module JM3
 		}
 		outputs
 		{
-			item 1 JM3.MetalCrossbow,
+			item 1 JM3.MetalCrossbowArrow,
 		}
 	}
 
@@ -97,12 +96,100 @@ module JM3
 			item 1 [Base.Rope],
 			item 6 [Base.Screws],
 			item 6 [Base.LeatherStrips],
-
 		}
 		outputs
 		{
-			item 1 JM3.MetalBow,
+			item 1 JM3.MetalBowArrow,
 		}
 	}
+
+	craftRecipe AjustWeaponToShaft
+    {
+        time = 100,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        category = Repair,
+        timedAction = Welding,
+        SkillRequired = MetalWelding:0,
+        xpAward = MetalWelding:5,
+        OnCreate = Ajustar_Arma_Astiles,
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1],
+            item 1 [JM3.WoodBowArrow;JM3.MetalBowArrow;JM3.WoodCrossbowArrow;JM3.MetalCrossbowArrow],
+        }
+        outputs
+        {
+        }
+    }
+	
+	craftRecipe AjustWeaponToArrow
+    {
+        time = 100,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        category = Repair,
+        timedAction = Welding,
+        SkillRequired = MetalWelding:0,
+        xpAward = MetalWelding:5,
+        OnCreate = Ajustar_Arma_Flechas,
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1],
+            item 1 [JM3.WoodBowShaft;JM3.MetalBowShaft;JM3.WoodCrossbowShaft;JM3.MetalCrossbowShaft;JM3.TacticCrossbowIncendiaryarrow;JM3.TacticCrossbowExplosivearrow],
+        }
+        outputs
+        {
+        }
+    }
+	
+	
+	
+	craftRecipe AjustWeaponToIncendiaryArrow
+    {
+        time = 100,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        category = Repair,
+        timedAction = Welding,
+        SkillRequired = MetalWelding:0,
+        xpAward = MetalWelding:5,
+        OnCreate = Ajustar_Arma_Incendiaria,
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1],
+            item 1 [JM3.TacticCrossbowArrow;JM3.TacticCrossbowExplosivearrow],
+        }
+        outputs
+        {
+        }
+    }
+	
+	
+	
+	craftRecipe AjustWeaponToExplosiveArrow
+    {
+        time = 100,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        category = Repair,
+        timedAction = Welding,
+        SkillRequired = MetalWelding:0,
+        xpAward = MetalWelding:5,
+        OnCreate = Ajustar_Arma_Explosiva,
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1],
+            item 1 [JM3.TacticCrossbowArrow;JM3.TacticCrossbowIncendiaryarrow],
+        }
+        outputs
+        {
+        }
+    }
+	
+	
+
+
+
 
 }
