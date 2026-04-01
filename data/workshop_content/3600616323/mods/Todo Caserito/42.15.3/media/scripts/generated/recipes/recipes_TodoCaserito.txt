@@ -1346,7 +1346,7 @@ module TodoCaserito
 	}	
 	craftRecipe MakeChoripanArg
 	{
-        timedAction = SliceBread_Surface,
+        timedAction = UnPackSmallBag,
 		Time = 35,
 		NeedToBeLearn = True,
         category = Cooking,
@@ -1364,7 +1364,7 @@ module TodoCaserito
 			item 2 TodoCaserito.ChoripanArg,
 		}
 	}
-	craftRecipe Minced Meat
+	craftRecipe MincedMeat
 	{
         timedAction = SliceMeat_Surface,
 		Time = 50,
@@ -1375,11 +1375,11 @@ module TodoCaserito
 		inputs
 		{
 			item 1 tags[MeatCleaver] mode:keep flags[MayDegradeLight;SharpnessCheck],
-			item 40 [MuttonChop;Venison;Beef;Steak] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+			item 1 [TodoCaserito.RoastBeef] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
 		}
 		outputs
 		{
-			item 1 Base.MincedMeat,
+			item 3 Base.MincedMeat,
 		}
 	}
 	craftRecipe Make Mayonesacasera
@@ -1407,7 +1407,7 @@ module TodoCaserito
 	}
 	craftRecipe MakeJugodelimon
 	{
-		timedAction = Making,
+		timedAction = UnPackSmallBag,
 		Time = 40,
 		Tags = InHandCraft;Cooking,
         category = Cooking,
@@ -1427,7 +1427,7 @@ module TodoCaserito
 	}
 	craftRecipe MakeJugodenaranja
 	{
-		timedAction = Making,
+		timedAction = UnPackSmallBag,
 		Time = 40,
 		Tags = InHandCraft;Cooking,
         category = Cooking,
@@ -1447,7 +1447,7 @@ module TodoCaserito
 	}
 	craftRecipe MakeJugodeUva
 	{
-		timedAction = Making,
+		timedAction = UnPackSmallBag,
 		Time = 40,
 		Tags = InHandCraft;Cooking,
         category = Cooking,
@@ -2217,4 +2217,183 @@ module TodoCaserito
 			item 1 TodoCaserito.MortadelaCasera,
 		}
 	}
+    craftRecipe Make Peanut Butter
+    {
+        timedAction = UnPackSmallBag,
+        time = 90,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        inputs
+        {
+            item 1 tags[Base:MortarPestle] mode:keep,
+            item 1 [Base.EmptyJar;Base.JarCrafted],
+            item 1 [Base.JarLid],
+            item 1 [Base.Salt],
+            item 5 [Base.Peanuts] flags[ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.PeanutButter,
+        }
+    }
+    craftRecipe Make Pasta
+    {
+        timedAction = UnPackSmallBag,
+        time = 80,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:8,
+        AutoLearnAny = Cooking:6,
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[IsNotDull;SharpnessCheck;MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[ItemCount],
+            item 3 tags[base:flour],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [*],
+            -fluid 0.3 categories[Water] mode:mixture,
+        }
+        outputs
+        {
+            item 1 Base.Pasta,
+        }
+    }
+    craftRecipe Make Tomato Paste
+    {
+        timedAction = MixingBowl,
+        time = 60,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:12,
+        AutoLearnAny = Cooking:6,
+        inputs
+        {
+            item 1 [Base.Pot;Base.PotForged] mode:keep,
+            item 1 tags[base:spoon;base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Salt],
+            item 8 [Base.Tomato] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+        }
+
+         outputs
+        {
+        item 1 Base.TomatoPaste,
+        }
+    }
+    craftRecipe Make Waffles
+    {
+        timedAction = MixingBowl,
+        time = 70,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:8,
+        AutoLearnAny = Cooking:4,
+        inputs
+        {
+            item 1 tags[base:bowl] mode:keep,
+            item 1 tags[base:spoon;base:mixingutensil;base:fork] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] mode:keep,
+            item 2 tags[base:flour],
+            item 1 [Base.Sugar],
+            item 1 [Base.OilVegetable],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [*],
+            -fluid 0.3 [CowMilk;SheepMilk] mode:mixture,
+        }
+        outputs
+        {
+            item 4 Base.Waffles,
+        }
+    }
+    craftRecipe Make Icecream
+    {
+        timedAction = MixingBowl,
+        time = 180,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        inputs
+        {
+            item 1 tags[base:bowl] mode:keep,
+            item 1 tags[base:spoon;base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Coldpack] mode:keep,
+            item 4 [Base.Sugar],
+            item 1 [*],
+            -fluid 1.0 [CowMilk;SheepMilk] mode:mixture,
+        }
+        outputs
+        {
+            item 1 Base.Icecream,
+        }
+    }
+    craftRecipe Make Yoghurt
+    {
+        timedAction = MixingBowl,
+        time = 90,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:5,
+        inputs
+        {
+            item 1 tags[base:bowl] mode:keep,
+            item 1 tags[base:spoon;base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 2 [Base.Sugar],
+			item 1 [Base.Yoghurt],
+            item 1 [*],
+            -fluid 0.5 [CowMilk;SheepMilk] mode:mixture,
+        }
+        outputs
+        {
+            item 3 Base.Yoghurt,
+        }
+    }
+    craftRecipe Make Cheese
+    {
+        timedAction = UnPackSmallBag,
+        time = 300,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:6,
+        AutoLearnAny = Cooking:6,
+        inputs
+        {
+            item 1 [Base.CheeseCloth] mode:keep,
+            item 1 [Base.Vinegar2;Base.Lemon],
+            item 1 [Base.Pot;Base.PotForged] mode:keep,
+            item 1 [*],
+            -fluid 0.5 [CowMilk;SheepMilk] mode:mixture,
+        }
+        outputs
+        {
+            item 1 Base.Cheese,
+        }
+    }
+    craftRecipe Make Bagels
+    {
+        timedAction = MixingBowl,
+        time = 90,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:7,
+        AutoLearnAny = Cooking:6,
+        inputs
+        {
+            item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+            item 1 [Base.BakingTray] mode:keep,
+            item 4 tags[base:flour],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [Base.Yeast],
+            item 1 [*],
+            -fluid 0.1 categories[Water] mode:mixture,
+        }
+        outputs
+        {
+            item 4 Base.Base.BagelPlain,
+        }
+    }
 }

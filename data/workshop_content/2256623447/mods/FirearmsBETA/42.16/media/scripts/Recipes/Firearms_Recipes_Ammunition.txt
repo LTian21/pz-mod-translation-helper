@@ -1,0 +1,127 @@
+module Base
+{
+
+		/* Boxes */
+
+	craftRecipe firearmsOpenBoxOfBullets50
+	{
+		timedAction = OpenAmmoBox,
+		Time = 15,
+		category = Packings,
+		recipeGroup = OpenBox,
+		Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 1 [Base.Bullets10mmBox;Base.Bullets357Box;Base.Bullets4440Box;Base.Bullets22Box] mappers[ammoTypes] flags[Prop2;AllowFavorite;InheritFavorite;IsExclusive],
+		}
+		outputs
+		{
+			item 50 mapper:ammoTypes,
+		}
+		itemMapper ammoTypes
+		{
+			Base.Bullets10mm = Base.Bullets10mmBox,
+			Base.Bullets357 = Base.Bullets357Box,
+			Base.Bullets4440 = Base.Bullets4440Box,
+			Base.Bullets22 = Base.Bullets22Box,
+		}
+	}
+
+	craftRecipe firearmsOpenBoxOfBullets20
+	{
+		timedAction = OpenAmmoBox,
+		Time = 15,
+		category = Packing,
+		recipeGroup = OpenBox,
+		Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 1 [Base.762x39Box;Base.Bullets3006Box] mappers[ammoTypes] flags[Prop2;AllowFavorite;InheritFavorite;IsExclusive],
+		}
+		outputs
+		{
+			item 20 mapper:ammoTypes,
+		}
+		itemMapper ammoTypes
+		{
+			Base.762x39Bullets = Base.762x39Box,
+			Base.Bullets3006 = Base.Bullets3006Box,
+		}
+	}
+
+	craftRecipe firearmsPlaceAmmoInBox
+	{
+		timedAction		=	PlaceAmmoInBox,
+		Time					=	15,
+		Category			=	Packing,
+		Tags					=	InHandCraft,
+		inputs
+		{
+			item 20 [Base.762x39Bullets;50:Base.Bullets10mm;50:Base.Bullets22;50:Base.Bullets357;50:Base.Bullets4440;Base.Bullets3006] mappers[ammoType] flags[AllowFavorite;InheritFavorite;IsExclusive],
+		}
+		outputs
+		{
+				item 1 mapper:ammoType,
+		}
+		itemMapper ammoType
+		{
+				Base.762x39Box = Base.762x39Bullets,
+				Base.Bullets10mmBox = Base.Bullets10mm,
+				Base.Bullets22Box = Base.Bullets22,
+				Base.Bullets357Box = Base.Bullets357,
+				Base.Bullets4440Box = Base.Bullets4440,
+				Base.Bullets3006Box = Base.Bullets3006,
+		}
+	}
+
+	craftRecipe firearmsOpenCartonOfBullets
+	{
+		timedAction = UnPackBox,
+		Time = 50,
+		category = Packing,
+		Tags = InHandCraft;CanBeDoneInDark,
+		inputs
+		{
+			item 1 [Base.Bullets10mmCarton;Base.Bullets4440Carton;Base.Bullets357Carton;Base.762x39BulletsCarton;Base.Bullets22Carton;Base.Bullets3006Carton] mappers[ammoTypes] flags[AllowFavorite;InheritFavorite],
+		}
+		outputs
+		{
+			item 12 mapper:ammoTypes,
+		}
+			itemMapper ammoTypes
+			{
+			Base.Bullets10mmBox = Base.Bullets10mmCarton,
+			Base.Bullets4440Box = Base.Bullets4440Carton,
+			Base.Bullets357Box = Base.Bullets357Carton,
+			Base.762x39Box = Base.762x39BulletsCarton,
+			Base.Bullets22Box = Base.Bullets22Carton,
+			Base.Bullets3006Box = Base.Bullets3006Carton,
+		}
+	}
+
+	craftRecipe firearmsPlaceBoxesOfAmmoInCarton
+	{
+		timedAction = OpenAmmoBox,
+		Time = 50,
+		category = Ammunition,
+		Tags = InHandCraft,
+		inputs
+		{
+			item 12 [Base.Bullets10mmBox;Base.Bullets4440Box;Base.Bullets357Box;Base.762x39Box;Base.Bullets22Box;Base.Bullets3006Box] mappers[ammoTypes] flags[AllowFavorite;InheritFavorite;IsExclusive],
+		}
+		outputs
+		{
+			item 1 mapper:ammoTypes,
+		}
+			itemMapper ammoTypes
+			{
+			Base.Bullets10mmCarton = Base.Bullets10mmBox,
+			Base.Bullets4440Carton = Base.Bullets4440Box,
+			Base.Bullets357Carton = Base.Bullets357Box,
+			Base.762x39BulletsCarton = Base.762x39Box,
+			Base.Bullets22Carton = Base.Bullets22Box,
+			Base.Bullets3006Carton = Base.Bullets3006Box,
+		}
+	}
+
+}
