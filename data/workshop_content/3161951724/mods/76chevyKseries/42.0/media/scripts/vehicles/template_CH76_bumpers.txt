@@ -28,6 +28,21 @@ module Base
 		scale = 0.1,
 	}
 
+    model 76chevyKseriesFrontBullbarD1
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|K30_spec_bullbar_pt1,
+		texture = vehicles/Vehicles_93fordF350spec_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 76chevyKseriesFrontBullbarD2
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|K30_spec_bullbar_pt2,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
 	model 76chevyK20RearBumper0
 	{
 		mesh = vehicles/Vehicles_76chevyKseries_Body|76chevyK20_bumper_rear,
@@ -69,10 +84,20 @@ module Base
                 		file = 76chevyKseriesFrontBullbarB,
 				}
 
+                model FrontBullbarD1
+				{
+                		file = 76chevyKseriesFrontBullbarD1,
+				}
+
+            model FrontBullbarD2
+				{
+                		file = 76chevyKseriesFrontBullbarD2,
+				}
+
 				area = Engine,
 				category = bodywork,
 				specificItem = false,
-				itemType = Base.3rdGenChevyCKseriesBumperFront0;Base.76chevyKseriesBullbarFrontA;Base.76chevyKseriesBullbarFrontB,
+				itemType = Base.3rdGenChevyCKseriesBumperFront0;Base.76chevyKseriesBullbarFrontA;Base.76chevyKseriesBullbarFrontB;Base.93fordF350BullbarFrontD,
 				mechanicRequireKey = false,
                 durability = 5,
 
@@ -191,6 +216,16 @@ module Base
 		}
 	}
 
+    template vehicle CH76BumpersK10U
+	{
+        template! = CH76BumpersK10,
+
+		part CH76BumperFront
+        	{
+				itemType = Base.76chevyKseriesBumperFront0;Base.76chevyKseriesBullbarFrontA;Base.76chevyKseriesBullbarFrontB,
+            }
+    }
+
 	template vehicle CH76BumpersK20
 	{
 		template! = CH76BumpersK10,
@@ -229,6 +264,32 @@ module Base
                         offset = 0.0000 0.0000 -1.1123,
 				}	
 			}
+	}
+
+    template vehicle CH76BumpersK30S
+	{
+		template! = CH76BumpersK30,
+
+        part DAMNBumperFront
+        	{
+
+			table install
+				{
+                complete = CH76.InstallComplete.BumperFrontS,
+            	}
+
+            table uninstall
+                {
+				complete = CH76.UninstallComplete.BumperFrontS,
+            	}
+
+            lua
+            	{
+				create = CH76.Create.BumperFrontS,
+				init = CH76.Init.BumperFrontS,
+				}
+		}
+
 	}
 
     template vehicle CH76BumpersUtility
