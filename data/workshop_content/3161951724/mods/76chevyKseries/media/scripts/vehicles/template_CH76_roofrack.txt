@@ -24,6 +24,38 @@ module Base
 		scale = 0.1,
 	}
 
+    model 76chevyKseriesGasCanS
+    {
+        mesh = vehicles/Vehicles_76chevyKseries_Body|K30_spec_gascan0,
+		texture = Vehicles/Items_USMIL_gasCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+    }
+
+    model 76chevyKseriesWaterCanS
+    {
+        mesh = vehicles/Vehicles_76chevyKseries_Body|K30_spec_gascan0,
+		texture = Vehicles/Items_USMIL_waterCan0,
+		shader = vehiclewheel,
+		scale = 0.1,
+    }
+
+    model 76chevyKseriesTent2
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|K30_spec_tentTarp2,
+		texture = Vehicles/Vehicles_93fordF350_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
+    model 76chevyKseriesGenerator
+	{
+		mesh = vehicles/Vehicles_76chevyKseries_Body|K30_spec_TIS_Generator,
+		texture = Vehicles/Items_Generator,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+
 	template vehicle CH76Roofrack
 	{
 		part CH76Roofrack
@@ -206,5 +238,542 @@ module Base
                     offset = 0.0000 0.0000 -0.7995,
 				}
         }
+    }
+
+    template vehicle CH76Sroofrack
+	{
+		part CH76SRoofrack
+		{
+			category = bodywork,
+			area = Roofrack,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+                capacity = 85,
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			lua
+            {
+                create = Vehicles.Create.Default,
+            }
+		}
+
+        part CH76SSideStorageFL
+		{
+			category = bodywork,
+			area = StorageLeft,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+                capacity = 15,
+				conditionAffectsCapacity = false,
+				test = CH76.ContainerAccess.StorageLeft,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part CH76SSideStorageFR
+		{
+			category = bodywork,
+			area = StorageRight,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+                capacity = 15,
+				conditionAffectsCapacity = false,
+				test = CH76.ContainerAccess.StorageRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part CH76SSideStorageRL
+		{
+			category = bodywork,
+			area = StorageLeft,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+                capacity = 15,
+				conditionAffectsCapacity = false,
+				test = CH76.ContainerAccess.StorageLeft,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part CH76SSideStorageRR
+		{
+			category = bodywork,
+			area = StorageRight,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+			repairMechanic = true,
+			container
+			{
+                capacity = 15,
+				conditionAffectsCapacity = false,
+				test = CH76.ContainerAccess.StorageRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+        part DAMNGasCanOne
+        	{
+
+			model GasCanOne
+				{
+                		file = 76chevyKseriesGasCanS,
+				}
+
+			model GasCanOneE
+				{
+                		file = 76chevyKseriesGasCanS,
+				}
+
+			model WaterCanOne
+				{
+                		file = 76chevyKseriesWaterCanS,
+				}
+
+			model WaterCanOneE
+				{
+                		file = 76chevyKseriesWaterCanS,
+				}
+
+			area = TireRearRight,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.GasCanOneS,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.GasCanOneS,
+            		}
+
+            		lua
+            		{
+						create = CH76.Create.GasCanOneS,
+						init = CH76.Init.GasCanOneS,
+					}
+		}
+
+		part DAMNGasCanTwo
+        {
+
+			model GasCanTwo
+				{
+                		file = 76chevyKseriesGasCanS,
+                		offset = 0.1441 0.0000 0.0300,
+				}
+
+			model GasCanTwoE
+				{
+                		file = 76chevyKseriesGasCanS,
+                		offset = 0.1441 0.0000 0.0300,
+				}
+
+			model WaterCanTwo
+				{
+                		file = 76chevyKseriesWaterCanS,
+                		offset = 0.1441 0.0000 0.0300,
+				}
+
+			model WaterCanTwoE
+				{
+                		file = 76chevyKseriesWaterCanS,
+                		offset = 0.1441 0.0000 0.0300,
+				}
+
+			area = TireRearRight,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.GasCanTwoS,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.GasCanTwoS,
+            		}
+
+            		lua
+            		{
+						create = CH76.Create.GasCanTwoS,
+						init = CH76.Init.GasCanTwoS,
+					}
+		}
+
+		part DAMNGasCanThree
+        {
+
+			model GasCanThree
+				{
+                		file = 76chevyKseriesGasCanS,
+                		offset = 0.2768 0.0000 0.0000,
+				}
+
+			model GasCanThreeE
+				{
+                		file = 76chevyKseriesGasCanS,
+                		offset = 0.2768 0.0000 0.0000,
+				}
+
+			model WaterCanThree
+				{
+                		file = 76chevyKseriesWaterCanS,
+                		offset = 0.2768 0.0000 0.0000,
+				}
+
+			model WaterCanThreeE
+				{
+                		file = 76chevyKseriesWaterCanS,
+                		offset = 0.2768 0.0000 0.0000,
+				}
+
+			area = TireRearLeft,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.GasCanThreeS,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.GasCanThreeS,
+            		}
+
+            		lua
+            		{
+						create = CH76.Create.GasCanThreeS,
+						init = CH76.Init.GasCanThreeS,
+					}
+		}
+
+        part DAMNGasCanFour
+        {
+
+			model GasCanFour
+				{
+                		file = 76chevyKseriesGasCanS,
+                		offset = 0.4128 0.0000 0.0500,
+				}
+
+			model GasCanFourE
+				{
+                		file = 76chevyKseriesGasCanS,
+                		offset = 0.4128 0.0000 0.0500,
+				}
+
+			model WaterCanFour
+				{
+                		file = 76chevyKseriesWaterCanS,
+                		offset = 0.4128 0.0000 0.0500,
+				}
+
+			model WaterCanFourE
+				{
+                		file = 76chevyKseriesWaterCanS,
+                		offset = 0.4128 0.0000 0.0500,
+				}
+
+			area = TireRearLeft,
+			category = Other,
+			specificItem = false,
+			itemType = USMIL.GasCan0;USMIL.emptyGasCan0;USMIL.emptyWaterCan0;USMIL.WaterCan0,
+			mechanicRequireKey = false,
+
+			table install
+			{
+
+                	time = 200,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = CH76.InstallComplete.GasCanFourS,
+            		}
+
+            		table uninstall
+            		{
+
+					time = 200,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = CH76.UninstallComplete.GasCanFourS,
+            		}
+
+            		lua
+            		{
+						create = CH76.Create.GasCanFourS,
+						init = CH76.Init.GasCanFourS,
+					}
+		}
+
+        part DAMNTent
+        	{
+				model TentyyyY
+				{
+                    file = 76chevyKseriesTent2,
+				}
+
+				category = Other,
+				area = Roofrack,
+				specificItem = false,
+				itemType = camping.CampingTentKit,
+				mechanicRequireKey = false,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = Vehicles.Create.Default,
+				}
+			}
+
+    part DAMNSpareTireRoof
+        	{
+                model spare1
+				{
+                    file = 76chevyKseriesWheel1L,
+                    offset = -0.2436 1.1707 -2.0721,
+                    rotate = 0.0000 0.0000 90.0000,
+				}
+
+			category = Other,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.76chevyKseriesTire2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				}
+		}
+
+        part DAMNSpareTireRoof2
+        	{
+                model spare1
+				{
+                    file = 76chevyKseriesWheel1L,
+                    offset = 0.2408 1.1707 -1.4257,
+                    rotate = 0.0000 0.0000 90.0000,
+				}
+
+			category = Other,
+			area = Roofrack,
+			specificItem = false,
+			itemType = Base.76chevyKseriesTire2,
+			mechanicRequireKey = false,
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 750,
+                	skills = Mechanics:1,
+                	recipes = Basic Mechanics,
+                	door = TrunkDoor,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Basic Mechanics,
+	            	test = Vehicles.UninstallTest.Default,
+	            	complete = Vehicles.UninstallComplete.Default,
+
+            		}
+
+	            lua
+	            {
+				create = Vehicles.Create.Default,
+				}
+		}
+
+        part DAMNGenerator
+        	{
+				model GenX
+				{
+                file = 76chevyKseriesGenerator,
+				}
+
+				category = Other,
+				area = TruckBed,
+				specificItem = false,
+				itemType = Base.Generator,
+				mechanicRequireKey = false,
+
+				table install
+				{
+ 
+                	time = 650,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+            	}
+
+            	table uninstall
+            	{
+ 
+					time = 550,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            	}
+
+            	lua
+            	{
+				create = DAMN.Create.Blank,
+				}
+			}
     }
 }
