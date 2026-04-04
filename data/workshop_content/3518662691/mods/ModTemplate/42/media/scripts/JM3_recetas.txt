@@ -1,0 +1,279 @@
+module JM3
+{
+    imports{Base}
+
+	craftRecipe Make_WoodCrossbow
+	{
+        timedAction = CraftWeapon1H,
+		Time = 150,
+        tags = AnySurfaceCraft;Carpentry,
+        SkillRequired = Woodwork:2,
+		xpAward = Woodwork:100,
+        category = Archery,
+		inputs
+		{
+			item 1 tags[Hammer] mode:keep,
+			item 1 tags[Saw;SmallSaw;CrudeSaw] mode:keep flags[MayDegradeLight],
+			item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[MayDegradeLight;IsNotDull;Prop1],
+			item 2 [Base.LongStick;Base.Plank] flags[Prop2],
+			item 1 [Base.Rope],
+			item 2 [Base.Nails],
+			item 4 [Base.LeatherStrips],
+			item 1 [Base.Woodglue],
+		}
+		outputs
+		{
+			item 1 JM3.WoodCrossbowArrow,
+		}
+	}
+
+	craftRecipe Make_WoodBow
+	{
+        timedAction = CraftWeapon1H,
+		Time = 150,
+        tags = AnySurfaceCraft;Carpentry,
+        SkillRequired = Woodwork:2,
+		xpAward = Woodwork:100,
+        category = Archery,
+		inputs
+		{
+			item 1 tags[Hammer] mode:keep,
+			item 1 tags[Saw;SmallSaw;CrudeSaw] mode:keep flags[MayDegradeLight],
+			item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[MayDegradeLight;IsNotDull;Prop1],
+			item 2 [Base.LongStick;Base.Plank] flags[Prop2],
+			item 1 [Base.Rope],
+			item 2 [Base.Nails],
+			item 4 [Base.LeatherStrips],
+			item 1 [Base.Woodglue],
+		}
+		outputs
+		{
+			item 1 JM3.WoodBowArrow,
+		}
+	}
+
+	craftRecipe Make_MetalCrossbow
+	{
+        timedAction = Welding,
+		Time = 150,
+        tags = AnySurfaceCraft;Welding,
+        SkillRequired = MetalWelding:2,
+		xpAward = MetalWelding:150,
+        category = Archery,
+		inputs
+		{	
+			item 5 [Base.BlowTorch] flags[Prop1],
+			item 1 tags[base:weldingmask] mode:keep,
+			item 1 tags[base:screwdriver] mode:keep,
+			item 2 [Base.MetalPipe] flags[Prop2],
+			item 1 [Base.SmallSheetMetal],
+			item 1 [Base.Rope],
+			item 6 [Base.Screws],
+			item 6 [Base.LeatherStrips],
+
+		}
+		outputs
+		{
+			item 1 JM3.MetalCrossbowArrow,
+		}
+	}
+
+	craftRecipe Make_MetalBow
+	{
+        timedAction = Welding,
+		Time = 150,
+        tags = AnySurfaceCraft;Welding,
+        SkillRequired = MetalWelding:2,
+		xpAward = MetalWelding:150,
+        category = Archery,
+		inputs
+		{	
+			item 5 [Base.BlowTorch] flags[Prop1],
+			item 1 tags[base:weldingmask] mode:keep,
+			item 1 tags[base:screwdriver] mode:keep,
+			item 2 [Base.MetalPipe] flags[Prop2],
+			item 1 [Base.SmallSheetMetal],
+			item 1 [Base.Rope],
+			item 6 [Base.Screws],
+			item 6 [Base.LeatherStrips],
+		}
+		outputs
+		{
+			item 1 JM3.MetalBowArrow,
+		}
+	}
+
+	craftRecipe AjustWeaponToShaft
+    {
+        time = 100,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        category = Archery,
+        timedAction = CraftWeapon1H,
+        OnCreate = Ajustar_Arma_Astiles,
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1],
+            item 1 [JM3.WoodBowArrow;JM3.MetalBowArrow;JM3.WoodCrossbowArrow;JM3.MetalCrossbowArrow] flags[Prop2;AllowFavorite],
+        }
+        outputs
+        {
+        }
+    }
+	
+	craftRecipe AjustWeaponToArrow
+    {
+        time = 100,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        category = Archery,
+        timedAction = CraftWeapon1H,
+        OnCreate = Ajustar_Arma_Flechas,
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1],
+            item 1 [JM3.WoodBowAshaft;JM3.MetalBowAshaft;JM3.WoodCrossbowAshaft;JM3.MetalCrossbowAshaft;JM3.TacticCrossbowIncendiaryarrow;JM3.TacticCrossbowExplosivearrow] flags[Prop2;AllowFavorite],
+        }
+        outputs
+        {
+        }
+    }
+
+	craftRecipe AjustWeaponToIncendiaryArrow
+    {
+        time = 100,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        timedAction = CraftWeapon1H,
+        category = Archery,
+        OnCreate = Ajustar_Arma_Incendiaria,
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1],
+            item 1 [JM3.TacticCrossbowArrow;JM3.TacticCrossbowExplosivearrow] flags[Prop2;AllowFavorite],
+        }
+        outputs
+        {
+        }
+    }
+
+	craftRecipe AjustWeaponToExplosiveArrow
+    {
+        time = 100,
+        AllowBatchCraft = false,
+        Tags = InHandCraft,
+        timedAction = CraftWeapon1H,
+        category = Archery,
+        OnCreate = Ajustar_Arma_Explosiva,
+        inputs
+        {
+            item 1 tags[base:screwdriver] mode:keep flags[Prop1],
+            item 1 [JM3.TacticCrossbowArrow;JM3.TacticCrossbowIncendiaryarrow] flags[Prop2;AllowFavorite],
+        }
+        outputs
+        {
+        }
+    }
+	
+
+	craftRecipe Make_Arrow_Fletching
+	{
+        AllowBatchCraft = true,
+        timedAction = CraftKnifeSpear,
+		time = 5,
+		Tags = InHandCraft,
+		xpAward = Maintenance:1,
+        category = Archery,
+        OnCreate = Crear_Plumas,
+		inputs
+		{
+			item 1 tags[base:sharpknife;base:meatcleaver;base:scissors] mode:keep flags[IsNotDull;Prop1],
+			item 1 [Base.Brochure;Base.BusinessCard;Base.BusinessCard_Nolans;Base.BusinessCard_Personal;Base.ChickenFeather;Base.CreditCard;Base.CreditCard_Stolen;Base.Doodle;Base.DoodleKids;Base.GenericMail;Base.GraphPaper;Base.IDcard;Base.IDcard_Female;Base.IDcard_Male;Base.IDcard_Stolen;Base.IndexCard;Base.LetterHandwritten;Base.Note;Base.Notebook;Base.Notepad;Base.PaperNapkins2;Base.Paperwork;Base.ParkingTicket;Base.Passport;Base.Photo_VeryOld;Base.PlasticCup;Base.PressID;Base.Receipt;Base.ScratchTicket;Base.ScratchTicket_Loser;Base.ScratchTicket_Winner;Base.SheetPaper2;Base.SpeedingTicket;Base.TurkeyFeather;Base.Card_Birthday;Base.Card_Christmas;Base.Card_Easter;Base.Card_Halloween;Base.Card_Hanukkah;Base.Card_LunarYear;Base.Card_StPatrick;Base.Card_Sympathy;Base.Card_Valentine;Base.Diary1;Base.Diary2;Base.MenuCard;Base.Photo;Base.Photo_Hass;Base.Photo_Racy;Base.Photo_Secret;Base.Postcard;Base.StockCertificate] mode:destroy flags[Prop2],
+
+
+        }
+		outputs
+		{
+			item 1 JM3.Arrow_fletching,
+		}
+	}
+
+	craftRecipe Make_Metal_Arrowhead
+	{
+        timedAction = SawSmallItemMetal,
+		time = 50,
+        tags = AnySurfaceCraft,
+		xpAward = Metalworking:10,
+        category = Archery,
+		inputs
+		{
+			item 1 tags[base:metalsaw] mode:keep,
+			item 1 tags[base:whetstone;base:file] mode:keep flags[Prop1],
+			item 1 [Base.UnusableMetal;Base.Hinge;Base.Doorknob;Base.Key1;Base.KeyPadlock;Base.BreadKnife;Base.ButterKnife;Base.TinOpener_Old;Base.CarvingFork2;Base.KnifeFillet;Base.ForkForged;Base.SpoonForged;Base.Fork;Base.KnifeParing;Base.Spoon;Base.SteakKnife] mode:destroy flags[AllowDestroyedItem;Prop2],
+		}
+		outputs
+		{
+			item 1 JM3.Arrowhead,
+		}
+	}
+
+    craftRecipe Weld_Metal_Arrowhead
+    {
+        timedAction = Welding,
+        time = 100,
+        Tags = AnySurfaceCraft;Welding,
+        xpAward = MetalWelding:20,
+        category = Archery,
+        inputs
+        {
+			item 1 [Base.BlowTorch] flags[Prop1],
+            item 1 tags[base:weldingmask] mode:keep,
+			item 1 tags[base:whetstone;base:file] mode:keep,
+            item 1 [Base.ScrapMetal;Base.IronScrap;Base.SteelScrap;Base.BrassScrap;Base.AluminumScrap;Base.SilverScrap;Base.GoldScrap] flags[Prop2],
+        }
+        outputs
+        {
+            item 1 JM3.Arrowhead,
+        }
+    }
+
+	craftRecipe Make_Stone_Arrowhead
+	{
+        timedAction = SawSmallItemMetal,
+		time = 100,
+        tags = AnySurfaceCraft,
+		xpAward = FlintKnapping:10,
+        category = Archery,
+		inputs
+		{
+			item 1 tags[base:hammer] mode:keep flags[Prop1],
+			item 1 tags[base:crudechisel;base:carpentrychisel;base:masonschisel;base:metalworkingchisel] mode:keep,
+			item 1 tags[base:file] mode:keep,
+			item 1 [Base.SharpedStone;Base.StoneBlade] flags[Prop2],
+		}
+		outputs
+		{
+			item 1 JM3.Arrowhead,
+		}
+	}
+
+	craftRecipe Make_Bone_Arrowhead
+	{
+        timedAction = SharpenStakeBone,
+		time = 100,
+        tags = AnySurfaceCraft,
+		xpAward = Carving:10,
+        category = Archery,
+		inputs
+		{
+			item 1 tags[base:whetstone;base:file] mode:keep,
+            item 1 tags[base:saw;base:smallsaw;base:crudesaw;base:sharpknife;base:meatcleaver] mode:keep,
+            item 1 [Base.SharpBoneFragment;Base.DullBoneKnife;Base.Fork_Bone;Base.Spoon_Bone] flags[AllowDestroyedItem;Prop2],
+		}
+		outputs
+		{
+			item 1 JM3.Arrowhead,
+		}
+	}
+
+}
