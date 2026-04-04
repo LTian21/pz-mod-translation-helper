@@ -1,0 +1,69 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity ES_WaterPump
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Water Pump,
+			Icon		= build_pump,
+		}
+	}
+
+    entity WaterPump
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_WaterPump,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+            isThumpable     = true,
+		    OnIsValid       = BuildRecipeCode.waterPump.OnIsValid,
+            OnCreate        = BuildRecipeCode.waterPump.OnCreate,
+			health          = 250,
+			skillBaseHealth = 20,
+			
+            face W
+            {
+                layer
+                {
+                    row = waterpipes_01_24,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = waterpipes_01_25,
+                }
+            }
+        }
+		
+		component CraftRecipe
+        {
+            timedAction   = BuildPump,
+            time          = 800,
+            needToBeLearn = false,
+            category      = Plumbing,
+            SkillRequired = MetalWelding:2,
+            xpAward       = MetalWelding:60,
+            ToolTip       = Tooltip_WP_craft_pumpDesc,
+            inputs
+            {
+                item 2 [Base.BlowTorch] flags[DontRecordInput],
+                item 1 [Base.MetalPipe],
+                item 16 [Base.Screws],
+                item 4 [Base.SmallSheetMetal],
+                item 4 [Base.SheetMetal],
+                item 4 [Base.ElectronicsScrap],
+                item 6 [Base.ScrapMetal],
+                item 2 [Base.EngineParts],
+                item 2 [Base.WeldingRods] flags[DontRecordInput],
+            }
+        }
+    }
+}
