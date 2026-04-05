@@ -1,0 +1,51 @@
+module Base
+{
+	xuiSkin default
+	{
+		entity FloorBeigeCarpet
+		{
+			LuaWindowClass	= ISEntityWindow,
+			DisplayName	= Floor Beige Carpet,
+			Icon		= floor_interior_carpet_01_45,
+		}
+	}
+
+    entity FloorBeigeCarpet
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = FloorBeigeCarpet,
+            uiEnabled       = false,
+        }
+
+        component SpriteConfig
+        {
+		    isThumpable     = false,
+		    OnIsValid = BuildRecipeCode.floor.OnIsValid,
+		    OnCreate  = ProjectArcade.RecipeBridge.Floors.OnCreate,
+		    			
+            face SINGLE
+            {
+                layer
+                {
+                    row = floor_interior_carpet_01_45,
+                }
+            }
+        }
+		
+        component CraftRecipe
+        {
+            
+            OnAddToMenu = debugTest,
+            time = 10,
+            category = Debug,
+            inputs
+            {
+                item 1 tags[base:sewingNeedle] mode:keep flags[Prop1],
+                item 1 [Base.RippedSheets] mode:destroy flags[Prop2],
+                item 2 [Base.Thread],
+            }
+        }
+    }
+}

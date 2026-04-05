@@ -72,9 +72,9 @@ module Base
         inputs
         {
             item 1 [Base.Journal;Base.Notebook],
-            item 3 [Base.LeatherStrips;Base.RippedSheets;Base.RippedSheetsDirty;Base.DenimStrips],
-            item 1 [Base.Thread],
-            item 1 [Base.Needle] mode:keep flags[MayDegradeLight],
+            item 3 tags[base:binding],
+            item 1 tags[base:thread],
+            item 1 tags[base:sewingneedle] mode:keep flags[MayDegradeLight],
         }
         outputs
         {
@@ -98,7 +98,7 @@ module Base
         inputs
         {
             item 1 [Base.Journal;Base.Notebook],
-            item 10 [Base.LeatherStrips;Base.RippedSheets;Base.RippedSheetsDirty;Base.DenimStrips],
+            item 10 tags[base:binding],
             item 1 [Base.DuctTape;Base.Scotchtape;Base.Glue],
         }
         outputs
@@ -113,7 +113,7 @@ module Base
     /* ============================================================ */
 
     /* Restore Journal: Thread + Any Cover */
-    /* Converts a Worn, Bloody, or Cursed loot journal into a blank personal journal, discarding loot contents */
+    /* Converts a Worn, Bloody, Cursed, or unwrapped Yuletide loot journal into a blank personal journal, discarding loot contents */
     craftRecipe RestoreJournal_Thread_AnyCover
     {
         timedAction = Making,
@@ -122,14 +122,14 @@ module Base
         category = Miscellaneous,
         SkillRequired = Tailoring:1,
         xpAward = Tailoring:3,
-        OnTest = BurdJournals_CanCraftPlayerJournal,
+        OnTest = BurdJournals_CanCraftRestorableJournal,
         OnCreate = BurdJournals.OnCreateBlankClean,
         inputs
         {
-            item 1 [BurdJournals.FilledSurvivalJournal_Worn;BurdJournals.FilledSurvivalJournal_Bloody;BurdJournals.CursedJournal],
-            item 1 [Base.LeatherStrips;Base.RippedSheets;Base.RippedSheetsDirty;Base.DenimStrips],
-            item 1 [Base.Thread],
-            item 1 [Base.Needle] mode:keep flags[MayDegradeLight],
+            item 1 [BurdJournals.FilledSurvivalJournal_Worn;BurdJournals.FilledSurvivalJournal_Bloody;BurdJournals.CursedJournal;BurdJournals.YuletideJournal],
+            item 1 tags[base:binding],
+            item 1 tags[base:thread],
+            item 1 tags[base:sewingneedle] mode:keep flags[MayDegradeLight],
         }
         outputs
         {
@@ -142,19 +142,19 @@ module Base
     /* ============================================================ */
 
     /* Restore Journal: Adhesive + Any Cover */
-    /* Converts a Worn, Bloody, or Cursed loot journal into a blank personal journal, discarding loot contents */
+    /* Converts a Worn, Bloody, Cursed, or unwrapped Yuletide loot journal into a blank personal journal, discarding loot contents */
     craftRecipe RestoreJournal_Adhesive_AnyCover
     {
         timedAction = Making,
         time = 45,
         Tags = AnySurfaceCraft,
         category = Miscellaneous,
-        OnTest = BurdJournals_CanCraftPlayerJournal,
+        OnTest = BurdJournals_CanCraftRestorableJournal,
         OnCreate = BurdJournals.OnCreateBlankClean,
         inputs
         {
-            item 1 [BurdJournals.FilledSurvivalJournal_Worn;BurdJournals.FilledSurvivalJournal_Bloody;BurdJournals.CursedJournal],
-            item 5 [Base.LeatherStrips;Base.RippedSheets;Base.RippedSheetsDirty;Base.DenimStrips],
+            item 1 [BurdJournals.FilledSurvivalJournal_Worn;BurdJournals.FilledSurvivalJournal_Bloody;BurdJournals.CursedJournal;BurdJournals.YuletideJournal],
+            item 5 tags[base:binding],
             item 1 [Base.DuctTape;Base.Scotchtape;Base.Glue],
         }
         outputs
