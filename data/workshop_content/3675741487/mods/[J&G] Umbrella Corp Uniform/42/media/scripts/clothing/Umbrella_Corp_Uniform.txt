@@ -290,6 +290,31 @@ module Base
         WorldStaticModel = Jacket_WinterHood_Ground,
         }
 
+    item Umbrella_Corp_ElbowPads
+	{
+	DisplayCategory = KATTAJ1_ArmsProtectionLower,
+	Type = Clothing,
+	DisplayName = Umbrella Corp Elbow Pads,
+   	ClothingItem = Umbrella_Corp_ElbowPads,
+	BodyLocation = KATTAJ1LowerArms,
+	BloodLocation = LowerArms,
+	Icon = Umbrella_Corp_Pads,
+        ScratchDefense = 20,
+        BiteDefense = 20,
+        BulletDefense = 15,
+        Insulation = 0.15,
+        WindResistance = 0.2,
+	Weight = 0.5,
+        FabricType= Leather,
+        WorldStaticModel = ArmsProtectionLower_Patriot_Light_Ground,
+	}
+
+    model Umbrella_Corp_ElbowPads_Ground
+        {
+        mesh = WorldItems/Clothing/Umbrella_Corp_ElbowPads_Ground,
+        scale = 1,
+        }
+
      item Umbrella_Corp_Gloves
 	{
         DisplayCategory = Accessory,
@@ -388,6 +413,31 @@ module Base
         WorldStaticModel = Pants_Shorts_Ground,
         }
 
+    item Umbrella_Corp_KneePads
+        {
+        DisplayCategory = KATTAJ1_LegsProtectionLower,
+        Type = Clothing,
+        DisplayName = Umbrella Corp Knee Pads,
+        ClothingItem = Umbrella_Corp_KneePads,
+        BodyLocation = KATTAJ1LowerLegs,
+        BloodLocation = LowerLegs,
+        Icon = Umbrella_Corp_Pads,
+        ScratchDefense = 20,
+        BiteDefense = 20,
+        BulletDefense = 15, 
+        Insulation = 0.15,
+        WindResistance = 0.2,
+        Weight = 0.5,
+        FabricType= Leather,
+        WorldStaticModel = LegsProtectionLower_Patriot_Light_Ground,
+        }
+
+    model Umbrella_Corp_KneePads_Ground
+        {
+        mesh = WorldItems/Clothing/Umbrella_Corp_KneePads_Ground,
+        scale = 1,
+        }
+
     item Umbrella_Corp_Boots
         {
         DisplayCategory = Clothing,
@@ -466,15 +516,33 @@ module Base
         scale = 1,
         }
 
-     item Umbrella_Corp_LegHolster
+     item Umbrella_Corp_LegHolster_Right
         {
         Weight	=	0.1,
         Type	=	Clothing,
-        DisplayName	= Umbrella Corp Leg Holster,
+        DisplayName	= Umbrella Corp Leg Holster [Right],
 	IconsForTexture = Umbrella_Corp_LegHolster,
         BodyLocation = KATTAJ1BeltRight,
-        ClothingItem = Umbrella_Corp_LegHolster,
+        ClothingItem = Umbrella_Corp_LegHolster_Right,
         AttachmentsProvided = JordanalhipRightHolster,
+        ClothingItemExtra = Umbrella_Corp_LegHolster_Left,
+        ClothingItemExtraOption = Left_Holster,
+        clothingExtraSubmenu = Right_Holster,
+	WorldStaticModel = Umbrella_Corp_LegHolster_Ground,
+        }
+
+     item Umbrella_Corp_LegHolster_Left
+        {
+        Weight	=	0.1,
+        Type	=	Clothing,
+        DisplayName	= Umbrella Corp Leg Holster [Left],
+	IconsForTexture = Umbrella_Corp_LegHolster,
+        BodyLocation = KATTAJ1BeltLeft,
+        ClothingItem = Umbrella_Corp_LegHolster_Left,
+        AttachmentsProvided = JordanalhipLeftHolster,
+        ClothingItemExtra = Umbrella_Corp_LegHolster_Right,
+        ClothingItemExtraOption = Right_Holster,
+        clothingExtraSubmenu = Left_Holster,
 	WorldStaticModel = Umbrella_Corp_LegHolster_Ground,
         }
 
@@ -484,7 +552,7 @@ module Base
         scale = 1,
         }
 
-     item Umbrella_Corp_LegPouch
+     item Umbrella_Corp_LegPouch_Left
         {
         Weight	= 0.5,
 	DisplayCategory = Bag,
@@ -494,12 +562,38 @@ module Base
         DisplayName = Umbrella Corp Leg Pouch,
 	IconsForTexture = Umbrella_Corp_LegPouch,
 	CanBeEquipped = KATTAJ1BeltLeft,
-	ClothingItem = Umbrella_Corp_LegPouch,	
+	ClothingItem = Umbrella_Corp_LegPouch_Left,	
 	OpenSound = OpenBag,
         CloseSound = CloseBag,
         PutInSound = PutItemInBag,
         CanHaveHoles = false,
-	WorldStaticModel = BagLeg_MagSecure_Small_Ground,
+        ClothingItemExtra = Umbrella_Corp_LegPouch_Right,
+        ClothingItemExtraOption = Wear_Right_Leg,
+        clothingExtraSubmenu = Wear_Left_Leg,
+	WorldStaticModel = Umbrella_Corp_LegPouch_Ground,
+ 	ReplaceInSecondHand = Umbrella_Corp_LegPouch_LHand holdingbagleft,
+        ReplaceInPrimaryHand = Umbrella_Corp_LegPouch_RHand holdingbagright,
+        }
+
+     item Umbrella_Corp_LegPouch_Right
+        {
+        Weight	= 0.5,
+	DisplayCategory = Bag,
+        Type = Container,
+	WeightReduction	= 75,
+	Capacity = 6,
+        DisplayName = Umbrella Corp Leg Pouch,
+	IconsForTexture = Umbrella_Corp_LegPouch,
+	CanBeEquipped = KATTAJ1BeltRight,
+	ClothingItem = Umbrella_Corp_LegPouch_Right,	
+	OpenSound = OpenBag,
+        CloseSound = CloseBag,
+        PutInSound = PutItemInBag,
+        CanHaveHoles = false,
+        ClothingItemExtra = Umbrella_Corp_LegPouch_Left,
+        ClothingItemExtraOption = Wear_Left_Leg,
+        clothingExtraSubmenu = Wear_Right_Leg,
+	WorldStaticModel = Umbrella_Corp_LegPouch_Ground,
  	ReplaceInSecondHand = Umbrella_Corp_LegPouch_LHand holdingbagleft,
         ReplaceInPrimaryHand = Umbrella_Corp_LegPouch_RHand holdingbagright,
         }
@@ -584,6 +678,31 @@ craftRecipe Umbrella Corp Jacket
 		item 1 Base.Umbrella_Corp_Jacket,
 	}
 }
+
+	craftRecipe Craft Umbrella Corp Elbow Pads
+	{
+        timedAction = Making,
+	Time = 120,
+        SkillRequired = Tailoring:6,
+	NeedToBeLearn = True,
+        tags = AnySurfaceCraft,
+        category = Tailoring,
+        xpAward = Tailoring:1,
+	AutoLearnAny = Tailoring:6,
+		inputs
+		{
+			item 1 tags[SewingNeedle] mode:keep,
+			item 1 tags[Scissors] mode:keep,
+			item 2 [Base.LeatherStrips],
+			item 4 [Base.Thread],
+			item 2 [Base.RippedSheets],
+			item 1 [Base.SmallSheetMetal],
+		}
+		outputs
+		{
+			item 1 Base.Umbrella_Corp_ElbowPads,
+		}
+	}
 
 craftRecipe Umbrella Corp Vest
 {
@@ -685,6 +804,31 @@ craftRecipe Umbrella Corp Pants
 		item 1 Base.Umbrella_Corp_Shorts,
 	}
 }
+
+	craftRecipe Craft Umbrella Corp Knee Pads
+	{
+        timedAction = Making,
+	Time = 120,
+        SkillRequired = Tailoring:6,
+	NeedToBeLearn = True,
+        tags = AnySurfaceCraft,
+        category = Tailoring,
+        xpAward = Tailoring:1,
+	AutoLearnAny = Tailoring:6,
+		inputs
+		{
+			item 1 tags[SewingNeedle] mode:keep,
+			item 1 tags[Scissors] mode:keep,
+			item 2 [Base.LeatherStrips],
+			item 4 [Base.Thread],
+			item 2 [Base.RippedSheets],
+			item 1 [Base.SmallSheetMetal],
+		}
+		outputs
+		{
+			item 1 Base.Umbrella_Corp_KneePads,
+		}
+	}
 
 	craftRecipe Umbrella Corp Thermals
 {
@@ -828,7 +972,7 @@ craftRecipe Umbrella Corp Leg Pouch
 	}
 	outputs
 	{
-		item 1 Base.Umbrella_Corp_LegPouch,
+		item 1 Base.Umbrella_Corp_LegPouch_Right,
 	}
 }
 
@@ -852,7 +996,7 @@ craftRecipe Umbrella Corp Leg Holster
 	}
 	outputs
 	{
-		item 1 Base.Umbrella_Corp_LegHolster,
+		item 1 Base.Umbrella_Corp_LegHolster_Right,
 	}
 }
 
