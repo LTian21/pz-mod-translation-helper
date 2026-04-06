@@ -1,0 +1,42 @@
+module Base
+{
+    entity HydeCoBees_MeadFermentationBarrel
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_HydeCoBees_MeadFermentationBarrel,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            OnCreate = HydeCoBees_MeadFermentationBarrel_OnCreate,
+            face W
+            {
+                layer
+                {
+                    row = Cultivatedbeehivetiles_4,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            OnAddToMenu = HydeCoBees_MeadFermentationBarrel_OnAddToMenu,
+            timedAction = BuildWoodenStructureMedium,
+            time = 70,
+            NeedToBeLearn = true,
+            category = Farming,
+            Tags = Farming;Outdoors,
+            SkillRequired = Woodwork:2,
+            xpAward = Woodwork:25,
+            Tooltip = Tooltip_HydeCoBees_MeadFermentationBarrel,
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeVeryLight],
+                item 6 [Base.Plank],
+                item 8 [Base.Nails],
+                item 1 [HydeCoBees.BallOfBeesWax],
+            }
+        }
+    }
+}

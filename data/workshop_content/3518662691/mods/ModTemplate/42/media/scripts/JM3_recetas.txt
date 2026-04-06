@@ -176,27 +176,6 @@ module JM3
     }
 	
 
-	craftRecipe Make_Arrow_Fletching
-	{
-        AllowBatchCraft = true,
-        timedAction = CraftKnifeSpear,
-		time = 5,
-		Tags = InHandCraft,
-		xpAward = Maintenance:1,
-        category = Archery,
-        OnCreate = Crear_Plumas,
-		inputs
-		{
-			item 1 tags[base:sharpknife;base:meatcleaver;base:scissors] mode:keep flags[IsNotDull;Prop1],
-			item 1 [Base.Brochure;Base.BusinessCard;Base.BusinessCard_Nolans;Base.BusinessCard_Personal;Base.ChickenFeather;Base.CreditCard;Base.CreditCard_Stolen;Base.Doodle;Base.DoodleKids;Base.GenericMail;Base.GraphPaper;Base.IDcard;Base.IDcard_Female;Base.IDcard_Male;Base.IDcard_Stolen;Base.IndexCard;Base.LetterHandwritten;Base.Note;Base.Notebook;Base.Notepad;Base.PaperNapkins2;Base.Paperwork;Base.ParkingTicket;Base.Passport;Base.Photo_VeryOld;Base.PlasticCup;Base.PressID;Base.Receipt;Base.ScratchTicket;Base.ScratchTicket_Loser;Base.ScratchTicket_Winner;Base.SheetPaper2;Base.SpeedingTicket;Base.TurkeyFeather;Base.Card_Birthday;Base.Card_Christmas;Base.Card_Easter;Base.Card_Halloween;Base.Card_Hanukkah;Base.Card_LunarYear;Base.Card_StPatrick;Base.Card_Sympathy;Base.Card_Valentine;Base.Diary1;Base.Diary2;Base.MenuCard;Base.Photo;Base.Photo_Hass;Base.Photo_Racy;Base.Photo_Secret;Base.Postcard;Base.StockCertificate] mode:destroy flags[Prop2],
-
-
-        }
-		outputs
-		{
-			item 1 JM3.Arrow_fletching,
-		}
-	}
 
 	craftRecipe Make_Metal_Arrowhead
 	{
@@ -275,5 +254,91 @@ module JM3
 			item 1 JM3.Arrowhead,
 		}
 	}
+
+	craftRecipe Make_Arrow_Fletching
+	{
+        AllowBatchCraft = true,
+        timedAction = CraftKnifeSpear,
+		time = 5,
+		Tags = InHandCraft,
+		xpAward = Maintenance:1,
+        category = Archery,
+        OnCreate = Crear_Materiales,
+		inputs
+		{
+			item 1 tags[base:sharpknife;base:meatcleaver;base:scissors] mode:keep flags[IsNotDull;Prop1],
+			item 1 [Base.Brochure;Base.BusinessCard;Base.BusinessCard_Nolans;Base.BusinessCard_Personal;Base.ChickenFeather;Base.CreditCard;Base.CreditCard_Stolen;Base.Doodle;Base.DoodleKids;Base.GenericMail;Base.GraphPaper;Base.IDcard;Base.IDcard_Female;Base.IDcard_Male;Base.IDcard_Stolen;Base.IndexCard;Base.LetterHandwritten;Base.Note;Base.Notebook;Base.Notepad;Base.PaperNapkins2;Base.Paperwork;Base.ParkingTicket;Base.Passport;Base.Photo_VeryOld;Base.PlasticCup;Base.PressID;Base.Receipt;Base.ScratchTicket;Base.ScratchTicket_Loser;Base.ScratchTicket_Winner;Base.SheetPaper2;Base.SpeedingTicket;Base.TurkeyFeather;Base.Card_Birthday;Base.Card_Christmas;Base.Card_Easter;Base.Card_Halloween;Base.Card_Hanukkah;Base.Card_LunarYear;Base.Card_StPatrick;Base.Card_Sympathy;Base.Card_Valentine;Base.Diary1;Base.Diary2;Base.MenuCard;Base.Photo;Base.Photo_Hass;Base.Photo_Racy;Base.Photo_Secret;Base.Postcard;Base.StockCertificate] mode:destroy flags[Prop2],
+
+
+        }
+		outputs
+		{
+			item 1 JM3.Arrow_fletching,
+		}
+	}
+
+    craftRecipe Make_arrow_shaft
+    {
+        timedAction = SharpenStakeWood,
+        AllowBatchCraft = true,
+        time = 50,
+        OnCreate = RecipeCodeOnCreate.minorCondition,
+        Tags = InHandCraft,
+        xpAward = Carving:2;Woodwork:2,
+        category = Archery,
+        OnCreate = Crear_Materiales,
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[IsNotDull;Prop1],
+            item 1 [Base.UnusableWood;Base.TreeBranch2;Base.Handle;Base.LongStick_Broken;Base.WoodenStick2;Base.LongHandle_Broken;Base.LongHandle;Base.LongStick;Base.Plunger;Base.LongStick;Base.PercedWood;Base.Plank;Base.SpadeWood] flags[AllowDestroyedItem;Prop2],
+        }
+        outputs
+        {
+            item 1 JM3.Ashaft,
+        }
+    }
+
+	craftRecipe Make_arrow
+	{
+        timedAction = CraftKnifeSpear,
+		Time = 20,
+		Tags = InHandCraft,
+		SkillRequired = Maintenance:1,
+		xpAward = Maintenance:1,
+        category = Archery,
+		inputs
+		{
+			item 1 [JM3.Ashaft] flags[Prop2],
+			item 3 [JM3.Arrow_fletching],
+			item 1 [JM3.Arrowhead],
+			item 1 [Base.Thread],
+		}
+		outputs
+		{
+			item 1 JM3.Arrow,
+		}
+	}
+
+    craftRecipe Open_box_arrows
+    {
+        timedAction = OpenAmmoBox,
+        time = 15,
+        category = Packing,
+        recipeGroup = OpenBox,
+        Tags = InHandCraft;CanBeDoneInDark,
+        inputs
+        {
+            item 1 [JM3.Arrow_box] flags[Prop2;AllowFavorite;InheritFavorite],
+        }
+        outputs
+        {
+            item 50 JM3.Arrow,
+        }
+
+    }
+
+
+
+
 
 }
