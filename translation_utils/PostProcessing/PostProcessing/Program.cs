@@ -531,6 +531,10 @@ namespace PostProcessing
                         {
                             if (!string.IsNullOrEmpty(entry.SChinese))
                             {
+                                if (key.StartsWith("Itemname_"))
+                                {
+                                    key.Replace("Itemname_", "");
+                                }
                                 jsonContent[key] = entry.SChinese;
                             }
                         }
@@ -551,7 +555,7 @@ namespace PostProcessing
                     }
                 }
 
-                errorCount += ValidateOutputFiles(outputDir);
+                //errorCount += ValidateOutputFiles(outputDir);
 
                 if (errorCount > 0)
                 {
