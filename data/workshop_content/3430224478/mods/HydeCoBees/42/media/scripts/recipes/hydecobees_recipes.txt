@@ -501,6 +501,44 @@ module Base
         }
     }
 
+    craftRecipe BottleHoney
+    {
+        timedAction = Making,
+        time = 10,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = BeeKeeping,
+        NeedToBeLearn = false,
+        inputs
+        {
+            item 1 [HydeCoBees.WildBottle] mode:destroy flags[Prop2;IsEmpty;ItemCount],
+            item 1 [*] mode:keep flags[ItemIsFluid;NotEmpty],
+                -fluid 1.0 [Honey],
+        }
+        outputs
+        {
+            item 1 Base.Honey,
+        }
+    }
+
+    craftRecipe CraftWildBottle
+    {
+        timedAction = Making,
+        time = 30,
+        Tags = InHandCraft;CanBeDoneInDark,
+        category = BeeKeeping,
+        NeedToBeLearn = false,
+        Tooltip = Tooltip_HydeCoBees_CraftWildBottle,
+        inputs
+        {
+            item 1 [HydeCoBees.BeeswaxStickyResin] mode:destroy,
+            item 1 [Base.GlassBlowingPipe;Base.Straw2] mode:keep flags[Prop2],
+        }
+        outputs
+        {
+            item 1 HydeCoBees.WildBottle,
+        }
+    }
+
     craftRecipe CrushEmptyHoneycomb
     {
         timedAction = Making,
@@ -673,7 +711,7 @@ module Base
         {
             item 1 [*],
             -fluid 0.15 [Honey],
-            item 1 tags[base:glassbottle] mode:destroy flags[Prop2;IsEmpty;ItemCount],
+            item 1 tags[base:glassbottle;hydeco:wildbottle] mode:destroy flags[Prop2;IsEmpty;ItemCount],
             item 1 [*],
             -fluid 0.15 [Water],
             item 1 [Base.Yeast] mode:destroy,
