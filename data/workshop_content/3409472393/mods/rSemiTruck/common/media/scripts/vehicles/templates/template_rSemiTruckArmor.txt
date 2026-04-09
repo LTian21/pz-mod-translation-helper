@@ -1,8 +1,64 @@
 module Rotators
 {
+
+	template vehicle SemiTrailerArmor{
+		part ArmorTrailerVan
+		{
+			model Default
+			{
+				file = Rotators.ArmorTrailerVan,
+			}
+			area = TruckBed,
+			table install
+			{
+				requireInstalled = DoorRear,
+			}
+			category = bodywork,
+			itemType = Base.SemiTrailerArmor,
+		}
+
+		part Armor*
+		{
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+		}}
 	template vehicle SemiTruckArmor
-	{
-		part ArmorDoorL
+	{		part ArmorDoorL
 		{
 			model Default
 			{
@@ -36,7 +92,7 @@ module Rotators
 			}
 			area = SeatFrontLeft,
 			category = bodywork,
-			itemType = Rotators.SemiTruckArmorFront_Item,
+			itemType = Base.SemiTruckArmorFront_Item,
 		}
 
 		part ArmorRear
@@ -47,10 +103,8 @@ module Rotators
 			}
 			area = SeatFrontLeft,
 			category = bodywork,
-			itemType = Rotators.SemiTruckArmorRear_Item,
+			itemType = Base.SemiTruckArmorRear_Item,
 		}
-
-
 
 		part ArmorBullbar
 		{
@@ -60,7 +114,7 @@ module Rotators
 			}
 			area = Engine,
 			category = bodywork,
-			itemType = Rotators.SemiTruckBullbar_Item,
+			itemType = Base.SemiTruckBullbar_Item,
 			lua
 			{
 				create = rSemiTruck.Vehicle.CreateBullbar,
@@ -69,14 +123,16 @@ module Rotators
 		part ArmorDoor*
 		{
 			category = door,
-			itemType = Rotators.SemiTruckArmorDoor_Item,
+			itemType = Base.SemiTruckArmorDoor_Item,
 		}
 
 		part ArmorTires
 		{
+			mechanicRequireKey = false,
+			repairMechanic = true,
 			area = TireFrontLeft,
 			category = tire,
-			itemType = Rotators.SemiTruckArmorTires_Item,
+			itemType = Base.SemiTruckArmorTires_Item,
             table install
             {
 				complete = rSemiTruck.ATATuning.InstallComplete.MiddleAxleWheelsProtection,
@@ -91,19 +147,14 @@ module Rotators
 				init = rSemiTruck.ATATuning.Init.MiddleAxleWheelsProtection,
                 update = ATATuning.Update.CommonProtection,
             }
-		}
 
-		part Armor*
-		{
-			mechanicRequireKey = false,
-			repairMechanic = true,
 			table install
 			{
 				items
 				{
 					1
 					{
-						type = Base.Screwdriver,
+						tags = base:wrench,
 						count = 1,
 						keep = true,
 						equip = primary,
@@ -120,7 +171,49 @@ module Rotators
 				{
 					1
 					{
-						type = Base.Screwdriver,
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+
+		}
+
+		part Armor*
+		{
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = base:wrench,
 						count = 1,
 						keep = true,
 						equip = primary,
