@@ -2,14 +2,9 @@ module Base
 {
 	vehicle SemiTrailerVan
 	{
-		template! = Base.TrailerBase,
 
-		model
-		{
-			file = Rotators.TrailerVanBase,
-			scale = 1.1500,
-			offset = 0.0000 0.7826 -1.3652,
-		}
+		template! = Base.TrailerBase,
+		template = SemiTruckTrailerCollision,
 
 		skin
 		{
@@ -45,7 +40,319 @@ module Base
 		{
 			texture = Vehicles/Trailers_rVan_USMCgreen,
 		}
+		skin
+		{
+			texture = Vehicles/Trailers_rVan_CaspianBlue_magenta,
+		}
+		skin
+		{
+			texture = Vehicles/Trailers_rVan_CaspianBlue_amber,
+		}
+		skin
+		{
+			texture = Vehicles/Trailers_rVan_CaspianBlue_crimson,
+		}
+		skin
+		{
+			texture = Vehicles/Trailers_rVan_CaspianBlue_lime,
+		}
+		skin
+		{
+			texture = Vehicles/Trailers_rVan_CaspianBlue_hot_orange,
+		}
+	}
+	template vehicle TrailerBase
+	{
 
+		model
+		{
+			file = Rotators.TrailerVanBase,
+			scale = 1.1500,
+			offset = 0.0000 0.7826 -1.3652,
+		}
+
+		mechanicType = 2,
+		offRoadEfficiency = 1,
+		engineRepairLevel = 4,
+		playerDamageProtection = 1,
+      
+      isSmallVehicle = false,
+
+		textureRust = Vehicles/Trailers_rVan_Rust,
+		textureMask = Vehicles/Trailers_rVan_Mask,
+		textureLights = Vehicles/Trailers_rVan_Lights,
+		textureDamage1Overlay = Vehicles/Trailers_rVan_Overlay_Damaged01,
+		textureDamage2Overlay = Vehicles/Trailers_rVan_Overlay_Damaged02,
+		textureDamage1Shell = Vehicles/Trailers_rVan_Shell_Damaged01,
+		textureDamage2Shell = Vehicles/Trailers_rVan_Shell_Damaged02,
+		extents = 1.7426 1.4851 5.8020,
+		shadowExtents = 1.8266 8.9786,
+		shadowOffset = 0.0000 0.0514,
+		physicsChassisShape = 1.7624 1.4851 5.8020,
+		centerOfMassOffset = 0.0000 0.2871 -1.2277,
+		mass = 100,
+
+
+		brakingForce = 1,
+		stoppingMovementForce = 2.0f,
+		rollInfluence = 0.15f,
+		steeringIncrement = 0.03,
+		steeringClamp = 0.3,
+		suspensionStiffness = 40,
+		suspensionCompression = 4.83,
+		suspensionDamping = 3.88,
+		maxSuspensionTravelCm = 15,
+		suspensionRestLength = 0.16f,
+		wheelFriction = 0.51f,
+		frontEndHealth = 300,
+		rearEndHealth = 300,
+		seats = 2,
+
+		wheel FrontLeft
+		{
+			front = true,
+			offset = 0.600 -0.9010 0.2673,
+			radius = 0.40f,
+			width = 0.90f,
+		}
+
+		wheel FrontRight
+		{
+			front = true,
+			offset = -0.600 -0.9010 0.2673,
+			radius = 0.40f,
+			width = 0.90f,
+		}
+
+		wheel RearLeft
+		{
+			front = false,
+			offset = 0.600 -0.9010 -0.7129,
+			radius = 0.40f,
+			width = 0.90f,
+		}
+
+		wheel RearRight
+		{
+			front = false,
+			offset = -0.600 -0.9010 -0.7129,
+			radius = 0.40f,
+			width = 0.90f,
+		}
+
+		area TruckBed
+		{
+			xywh = 0.0000 -4.2475 3.3465 1.8020,
+		}
+
+		template = Rotators.DoubleTires,
+
+
+		part TireFrontLeft
+		{
+			table uninstall
+			{
+				requireUninstalled = WheelChainFrontLeft,
+				recipes = Basic Mechanics,
+			}
+			model InflatedTirePlusWheel
+			{
+				file = Rotators.TrailerVanFrontWheelLeft,
+				rotate = 0 0 0,
+			}
+			model ATAProtection
+			{
+				file = Rotators.SemiTruckArmorTireTrailer,
+				offset = -0.00 0 0,
+				rotate = 0 0 0,
+			}
+		}
+
+		part WheelChainFrontLeft
+		{
+			parent = TireFrontLeft,
+			area = TireFrontLeft,
+			table install
+			{
+				requireInstalled = TireFrontLeft,
+			}
+			table uninstall
+			{
+				requireInstalled = TireFrontLeft,
+			}
+		}
+
+		part TireFrontRight
+		{
+			table uninstall
+			{
+				requireUninstalled = WheelChainFrontRight,
+				recipes = Basic Mechanics,
+			}
+			model InflatedTirePlusWheel
+			{
+				file = Rotators.TrailerVanFrontWheelRight,
+			}
+			model ATAProtection
+			{
+				file = Rotators.SemiTruckArmorTireTrailer,
+				offset = 0.0 0 0,
+				rotate = 0 0 0,
+			}
+		}
+
+		part WheelChainFrontRight
+		{
+			parent = TireFrontRight,
+			area = TireFrontRight,
+			table install
+			{
+				requireInstalled = TireFrontRight,
+			}
+			table uninstall
+			{
+				requireInstalled = TireFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+			table uninstall
+			{
+				requireUninstalled = WheelChainRearLeft,
+				recipes = Basic Mechanics,
+			}
+			model InflatedTirePlusWheel
+			{
+				file = Rotators.TrailerVanRearWheelLeft,
+			}
+			model ATAProtection
+			{
+				file = Rotators.SemiTruckArmorTireTrailer,
+				offset = -0.0 0 0,
+				rotate = 0 0 0,
+			}
+		}
+
+		part WheelChainRearLeft
+		{
+			parent = TireRearLeft,
+			area = TireRearLeft,
+			table install
+			{
+				requireInstalled = TireRearLeft,
+			}
+			table uninstall
+			{
+				requireInstalled = TireRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+			table uninstall
+			{
+				requireUninstalled = WheelChainRearRight,
+				recipes = Basic Mechanics,
+			}
+			model InflatedTirePlusWheel
+			{
+				file = Rotators.TrailerVanRearWheelRight,
+			}
+			model ATAProtection
+			{
+				file = Rotators.SemiTruckArmorTireTrailer,
+				offset = 0.00 0 0,
+				rotate = 0 0 0,
+			}
+		}
+
+		part WheelChainRearRight
+		{
+			parent = TireRearRight,
+			area = TireRearRight,
+			table install
+			{
+				requireInstalled = TireRearRight,
+			}
+			table uninstall
+			{
+				requireInstalled = TireRearRight,
+			}
+		}
+
+		part WheelChain*
+		{
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			category = tire,
+			itemType = Base.SemiTruckArmorTires_Item,
+			table install
+			{
+				complete = rSemiTruck.ATATuning.InstallComplete.IndividualWheelProtection,
+				items
+				{
+					1
+					{
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = rSemiTruck.ATATuning.InstallTest.IndividualWheelProtection,
+			}
+			table uninstall
+			{
+				complete = rSemiTruck.ATATuning.UninstallComplete.IndividualWheelProtection,
+				items
+				{
+					1
+					{
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = rSemiTruck.ATATuning.UninstallTest.IndividualWheelProtection,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = ATATuning.Create.Chance0,
+				init = rSemiTruck.ATATuning.Init.IndividualWheelProtection,
+				update = rSemiTruck.ATATuning.Update.IndividualWheelProtection,
+			}
+		}
+		part Tire*
+		{
+		setAllModelsVisible = false,
+        
+		
+		table install
+         {
+			 complete = rSemiTruck.ATATuning.InstallComplete.SafeTireNotAllModelsVisible,
+         }
+         table uninstall
+         {
+			 complete = rSemiTruck.ATATuning.UninstallComplete.SafeTireNotAllModelsVisible,
+         }
+         lua
+         {
+             create = Vehicles.Create.Tire,
+			 init = rSemiTruck.ATATuning.Init.SafeTireNotAllModelsVisible,
+             checkOperate = Vehicles.CheckOperate.Tire,
+             update = Vehicles.Update.Tire,
+         }
+		}
+	
 		template = Door/part/DoorRear,
 
 		part DoorRear
@@ -101,48 +408,118 @@ module Base
 				rate = 0.3,
 				angle = 0.0 0.0 0.0,
 			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+
+				needs =
+				{
+					part = ArmorTrailerVan,
+					condition = 1,
+				}
+
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
+			}
 		}
 
-		physics box
+      template = Battery,
+		part Battery
 		{
-			offset = 0.0000 0.1826 -0.6522,
-			extents = 1.7826 0.4870 5.6087,
-			rotate = 0.0000 0.0000 0.0000,
-		}
+         category = nodisplay,
+			lua
+			{
+				create = Vehicles.Create.Battery,
+				update = Vehicles.Update.Battery,
+			}
+      }
 
-		physics box
+      template = Headlight/part/HeadlightRearLeft,
+      template = Headlight/part/HeadlightRearRight,
+      
+		template = Suspension/part/SuspensionFrontLeft,
+		template = Suspension/part/SuspensionFrontRight,
+		template = Suspension/part/SuspensionRearLeft,
+		template = Suspension/part/SuspensionRearRight,
+		template = Trunk/part/TruckBed,
+		template = Rotators.SemiTrailerArmor/part/ArmorTrailerVan,
+		part TruckBed
 		{
-			offset = 0.0000 -0.0435 2.3478,
-			extents = 0.1130 0.8261 0.1565,
-			rotate = 0.0000 0.0000 0.0000,
+			echanicRequireKey = false,
+			container
+			{
+				conditionAffectsCapacity = true,
+				capacity = 1500,
+			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+
+				needs =
+				{
+					part = ArmorTrailerVan,
+					condition = 1,
+				}
+
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
+			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+
+				needs =
+				{
+					part = ArmorTrailerVan,
+					condition = 1,
+				}
+
+				lua =
+				{
+					repair = rSemiTruck.Event.PostAutoRepair,
+				}
+			}
 		}
 
-		physics box
+		template = Rotators.SemiVanSpareTire/part/SpareTire,
+
+		part SpareTire
 		{
-			offset = 0.0000 1.1913 -3.0174,
-			extents = 0.1130 2.4609 0.9043,
-			rotate = 0.0000 0.0000 0.0000,
+			model SpareTire
+			{
+				file = Rotators.TrailerVanSpareTire,
+				rotate = 0 0 0,
+				scale = 1,
+				offset = 0 0 0,
+			}
 		}
 
-		physics box
+		template = Rotators.SemiVanToolbox/part/TrunkToolbox,
+		template = Rotators.SemiVanToolbox/part/ToolboxDoor,
+
+		part ToolboxDoor
 		{
-			offset = 0.0000 1.1913 -3.0174,
-			extents = 0.1130 2.4609 0.9043,
-			rotate = 0.0000 0.0000 0.0000,
+			model ToolboxDoor
+			{
+				file = Rotators.TrailerVanToolbox,
+				rotate = 0 0 0,
+				scale = 1,
+				offset = 0 0 0,
+			}
 		}
 
-		physics box
-		{
-			offset = 0.0000 1.1913 -3.0174,
-			extents = 0.1130 2.4609 0.9043,
-			rotate = 0.0000 0.0000 0.0000,
-		}
-
-		extents = 1.9130 1.8087 8.1565,
-		physicsChassisShape = 1.9130 1.8087 8.1565,
-		centerOfMassOffset = 0.0000 1.4609 0.7043,
-		shadowExtents = 1.8266 8.9786,
-		shadowOffset = 0.0000 0.7123,
+        extents = 1.9130 2.4870 8.1565,
+        physicsChassisShape = 1.9130 2.4870 8.1565,
+        centerOfMassOffset = 0.0000 1.1800 0.6179,
+        shadowExtents = 1.8266 8.9786,
+        shadowOffset = 0.0000 0.7123,
 
 		area TireFrontLeft
 		{
@@ -185,240 +562,6 @@ module Base
 			rotate = 0.0000 0.0000 0.0000,
 			canAttach = trailerTruck,
 		}
-	}
-	template vehicle TrailerBase
-	{
-		mechanicType = 2,
-		offRoadEfficiency = 2,
-		engineRepairLevel = 4,
-		playerDamageProtection = 1,
-      
-      isSmallVehicle = false,
-
-		textureRust = Vehicles/Trailers_rVan_Rust,
-		textureMask = Vehicles/Trailers_rVan_Mask,
-		textureLights = Vehicles/Trailers_rVan_Lights,
-		textureDamage1Overlay = Vehicles/Trailers_rVan_Overlay_Damaged01,
-		textureDamage2Overlay = Vehicles/Trailers_rVan_Overlay_Damaged02,
-		textureDamage1Shell = Vehicles/Trailers_rVan_Shell_Damaged01,
-		textureDamage2Shell = Vehicles/Trailers_rVan_Shell_Damaged02,
-		extents = 1.7426 1.4851 5.8020,
-		shadowExtents = 1.8266 8.9786,
-		shadowOffset = 0.0000 0.0514,
-		mass = 310,
-		physicsChassisShape = 1.7624 1.4851 5.8020,
-		centerOfMassOffset = 0.0000 0.2871 -1.2277,
-		brakingForce = 1,
-		stoppingMovementForce = 1.0f,
-		rollInfluence = 0.15f,
-		steeringIncrement = 0.03,
-		steeringClamp = 0.3,
-		suspensionStiffness = 40,
-		suspensionCompression = 4.83,
-		suspensionDamping = 3.88,
-		maxSuspensionTravelCm = 15,
-		suspensionRestLength = 0.16f,
-		wheelFriction = 0.5f,
-		frontEndHealth = 150,
-		rearEndHealth = 150,
-		seats = 2,
-
-		wheel FrontLeft
-		{
-			front = true,
-			offset = -0.5941 -0.9010 0.2673,
-			radius = 0.40f,
-			width = 0.90f,
-		}
-
-		wheel FrontRight
-		{
-			front = true,
-			offset = 0.6040 -0.9010 0.2673,
-			radius = 0.40f,
-			width = 0.90f,
-		}
-
-		wheel RearLeft
-		{
-			front = false,
-			offset = -0.5941 -0.9010 -0.7129,
-			radius = 0.40f,
-			width = 0.90f,
-		}
-
-		wheel RearRight
-		{
-			front = false,
-			offset = 0.6040 -0.9010 -0.7129,
-			radius = 0.40f,
-			width = 0.90f,
-		}
-
-		area TruckBed
-		{
-			xywh = 0.0000 -4.2475 3.3465 1.8020,
-		}
-
-		template = Rotators.DoubleTires,
-
-
-		part TireFrontLeft
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.TrailerVanFrontWheelLeft,
-			}
-			model ATAProtection
-			{
-				file = Rotators.SemiTruckArmorTireTrailer,
-				offset = -0.13 0 0,
-				rotate = 0 0 180,
-			}
-		}
-
-		part TireFrontRight
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.TrailerVanFrontWheelRight,
-			}
-			model ATAProtection
-			{
-				file = Rotators.SemiTruckArmorTireTrailer,
-				offset = 0.13 0 0,
-				rotate = 0 0 0,
-			}
-		}
-
-		part TireRearLeft
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.TrailerVanRearWheelLeft,
-			}
-			model ATAProtection
-			{
-				file = Rotators.SemiTruckArmorTireTrailer,
-				offset = -0.13 0 0,
-				rotate = 0 0 180,
-			}
-		}
-
-		part TireRearRight
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.TrailerVanRearWheelRight,
-			}
-			model ATAProtection
-			{
-				file = Rotators.SemiTruckArmorTireTrailer,
-				offset = 0.13 0 0,
-				rotate = 0 0 0,
-			}
-		}
-
-
-		template = Rotators.SemiTruckArmor/part/ArmorTires,
-		part Tire*
-		{
-		
-			table armor
-			{
-				logic = RotatorsLib,
-				condition = 100,
-				needs =
-				{
-				part = ArmorTires,
-                condition = 1,
-				}
-			}
-			table uninstall
-			{
-				requireUninstalled = ArmorTires,
-				recipes = Basic Mechanics,
-			}
-		setAllModelsVisible = false,
-        
-		
-		table install
-         {
-			 complete = rSemiTruck.ATATuning.InstallComplete.SafeTireNotAllModelsVisible,
-         }
-         table uninstall
-         {
-             requireUninstalled = ATA2ProtectionWheels,
-			 complete = rSemiTruck.ATATuning.UninstallComplete.SafeTireNotAllModelsVisible,
-         }
-         lua
-         {
-             create = Vehicles.Create.Tire,
-			 init = rSemiTruck.ATATuning.Init.SafeTireNotAllModelsVisible,
-             checkOperate = Vehicles.CheckOperate.Tire,
-             update = Vehicles.Update.Tire,
-         }
-		}
-
-
-
-      template = Battery,
-		part Battery
-		{
-         category = nodisplay,
-			lua
-			{
-				create = Vehicles.Create.Battery,
-				update = Vehicles.Update.Battery,
-			}
-      }
-
-      template = Headlight/part/HeadlightRearLeft,
-      template = Headlight/part/HeadlightRearRight,
-      
-		template = Suspension/part/SuspensionFrontLeft,
-		template = Suspension/part/SuspensionFrontRight,
-		template = Suspension/part/SuspensionRearLeft,
-		template = Suspension/part/SuspensionRearRight,
-		template = Trunk/part/TruckBed,
-
-		part TruckBed
-		{
-			echanicRequireKey = false,
-			container
-			{
-				conditionAffectsCapacity = false,
-				capacity = 1000,
-			}
-		}
-
-		template = Rotators.SemiVanSpareTire/part/SpareTire,
-
-		part SpareTire
-		{
-			model SpareTire
-			{
-				file = Rotators.TrailerVanSpareTire,
-				rotate = 0 0 0,
-				scale = 1,
-				offset = 0 0 0,
-			}
-		}
-
-		template = Rotators.SemiVanToolbox/part/TrunkToolbox,
-		template = Rotators.SemiVanToolbox/part/ToolboxDoor,
-
-		part ToolboxDoor
-		{
-			model ToolboxDoor
-			{
-				file = Rotators.TrailerVanToolbox,
-				rotate = 0 0 0,
-				scale = 1,
-				offset = 0 0 0,
-			}
-		}
-
 		area Toolbox
 		{
 			xywh = -1.1584 -0.4455 0.5743 1.0891,

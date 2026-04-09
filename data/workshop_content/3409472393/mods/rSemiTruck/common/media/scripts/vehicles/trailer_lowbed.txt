@@ -118,6 +118,38 @@ module Base
 		rearEndHealth = 150,
 		seats = 2,
 
+        wheel FrontLeft
+        {
+            front = true,
+            offset = 0.6000 -0.8870 0.2609,
+            radius = 0.40f,
+            width = 0.90f,
+        }
+
+        wheel FrontRight
+        {
+            front = true,
+            offset = -0.6000 -0.8870 0.2609,
+            radius = 0.40f,
+            width = 0.90f,
+        }
+
+        wheel RearLeft
+        {
+            front = false,
+            offset = 0.6000 -0.8870 -0.7217,
+            radius = 0.40f,
+            width = 0.90f,
+        }
+
+        wheel RearRight
+        {
+            front = false,
+            offset = -0.6000 -0.8870 -0.7217,
+            radius = 0.40f,
+            width = 0.90f,
+        }
+
         part ATAMultiSlotWrecker
         {
 			area = TruckBed,
@@ -285,41 +317,16 @@ module Base
                 time = 100,
             }
         }
-		wheel FrontLeft
-		{
-			front = true,
-			offset = -0.5913 -0.9043 0.2696,
-			radius = 0.40f,
-			width = 0.90f,
-		}
-
-		wheel FrontRight
-		{
-			front = true,
-			offset = 0.6000 -0.9043 0.2696,
-			radius = 0.40f,
-			width = 0.90f,
-		}
-
-		wheel RearLeft
-		{
-			front = false,
-			offset = -0.5913 -0.9043 -0.7130,
-			radius = 0.40f,
-			width = 0.90f,
-		}
-
-		wheel RearRight
-		{
-			front = false,
-			offset = 0.6000 -0.9043 -0.7130,
-			radius = 0.40f,
-			width = 0.90f,
-		}
 		template = Rotators.DoubleTires,
 
 		part TireFrontLeft
 		{
+			table uninstall
+			{
+				requireUninstalled = WheelChainFrontLeft,
+				recipes = Basic Mechanics,
+			}
+
 			model InflatedTirePlusWheel
 			{
 				file = Rotators.TrailerVanFrontWheelLeft,
@@ -330,13 +337,33 @@ module Base
 			model ATAProtection
 			{
 				file = Rotators.SemiTruckArmorTireTrailer,
-				offset = -0.1300 0.0000 0.0000,
+				offset = -0.0 0.0000 0.0000,
 				rotate = 0.0000 0.0000 180.0000,
+			}
+		}
+
+		part WheelChainFrontLeft
+		{
+			parent = TireFrontLeft,
+			area = TireFrontLeft,
+			table install
+			{
+				requireInstalled = TireFrontLeft,
+			}
+			table uninstall
+			{
+				requireInstalled = TireFrontLeft,
 			}
 		}
 
 		part TireFrontRight
 		{
+			table uninstall
+			{
+				requireUninstalled = WheelChainFrontRight,
+				recipes = Basic Mechanics,
+			}
+
 			model InflatedTirePlusWheel
 			{
 				file = Rotators.TrailerVanFrontWheelRight,
@@ -347,13 +374,33 @@ module Base
 			model ATAProtection
 			{
 				file = Rotators.SemiTruckArmorTireTrailer,
-				offset = 0.1300 0.0000 0.0000,
+				offset = 0.0 0.0000 0.0000,
 				rotate = 0.0000 0.0000 0.0000,
+			}
+		}
+
+		part WheelChainFrontRight
+		{
+			parent = TireFrontRight,
+			area = TireFrontRight,
+			table install
+			{
+				requireInstalled = TireFrontRight,
+			}
+			table uninstall
+			{
+				requireInstalled = TireFrontRight,
 			}
 		}
 
 		part TireRearLeft
 		{
+			table uninstall
+			{
+				requireUninstalled = WheelChainRearLeft,
+				recipes = Basic Mechanics,
+			}
+
 			model InflatedTirePlusWheel
 			{
 				file = Rotators.TrailerVanRearWheelLeft,
@@ -364,13 +411,33 @@ module Base
 			model ATAProtection
 			{
 				file = Rotators.SemiTruckArmorTireTrailer,
-				offset = -0.1300 0.0000 0.0000,
+				offset = -0.0 0.0000 0.0000,
 				rotate = 0.0000 0.0000 180.0000,
+			}
+		}
+
+		part WheelChainRearLeft
+		{
+			parent = TireRearLeft,
+			area = TireRearLeft,
+			table install
+			{
+				requireInstalled = TireRearLeft,
+			}
+			table uninstall
+			{
+				requireInstalled = TireRearLeft,
 			}
 		}
 
 		part TireRearRight
 		{
+			table uninstall
+			{
+				requireUninstalled = WheelChainRearRight,
+				recipes = Basic Mechanics,
+			}
+
 			model InflatedTirePlusWheel
 			{
 				file = Rotators.TrailerVanRearWheelRight,
@@ -381,33 +448,78 @@ module Base
 			model ATAProtection
 			{
 				file = Rotators.SemiTruckArmorTireTrailer,
-				offset = 0.1300 0.0000 0.0000,
+				offset = 0.0 0.0000 0.0000,
 				rotate = 0.0000 0.0000 0.0000,
 			}
 		}
 
-		template = Rotators.SemiTruckArmor/part/ArmorTires,
+		part WheelChainRearRight
+		{
+			parent = TireRearRight,
+			area = TireRearRight,
+			table install
+			{
+				requireInstalled = TireRearRight,
+			}
+			table uninstall
+			{
+				requireInstalled = TireRearRight,
+			}
+		}
+
+		part WheelChain*
+		{
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			category = tire,
+			itemType = Base.SemiTruckArmorTires_Item,
+			table install
+			{
+				complete = rSemiTruck.ATATuning.InstallComplete.IndividualWheelProtection,
+				items
+				{
+					1
+					{
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = rSemiTruck.ATATuning.InstallTest.IndividualWheelProtection,
+			}
+			table uninstall
+			{
+				complete = rSemiTruck.ATATuning.UninstallComplete.IndividualWheelProtection,
+				items
+				{
+					1
+					{
+						tags = base:wrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Basic Mechanics,
+				test = rSemiTruck.ATATuning.UninstallTest.IndividualWheelProtection,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = ATATuning.Create.Chance0,
+				init = rSemiTruck.ATATuning.Init.IndividualWheelProtection,
+				update = rSemiTruck.ATATuning.Update.IndividualWheelProtection,
+			}
+		}
 
 		part Tire*
 		{
-			table armor
-			{
-				logic = RotatorsLib,
-				condition = 100,
-
-				needs =
-				{
-					part = ArmorTires,
-					condition = 1,
-				}
-			}
-
-			table uninstall
-			{
-				requireUninstalled = ArmorTires,
-				recipes = Basic Mechanics,
-			}
-
 			setAllModelsVisible = false,
 
 			table install
@@ -417,7 +529,6 @@ module Base
 
 			table uninstall
 			{
-				requireUninstalled = ATA2ProtectionWheels,
 				complete = rSemiTruck.ATATuning.UninstallComplete.SafeTireNotAllModelsVisible,
 			}
 

@@ -1,46 +1,18 @@
 module Rotators
 {
-	vehicleEngineRPM SemiTruckRPM
-	{
-		VERSION = 1,
-		data
-		{
-			gearChange = 3500,
-			afterGearChange = 1800,
-		}
-		data
-		{
-			gearChange = 3750,
-			afterGearChange = 2200,
-		}
-		data
-		{
-			gearChange = 3900,
-			afterGearChange = 2300,
-		}
-		data
-		{
-			gearChange = 4400,
-			afterGearChange = 2400,
-		}
-		data
-		{
-			gearChange = 6000,
-			afterGearChange = 2500,
-		}
-	}
+   /* Wheels 4 Axle */
 
 	template vehicle SemiTruckTemplate
 	{
 		mechanicType = 2,
 		engineRepairLevel = 5,
-		playerDamageProtection = 0.5,
-		engineRPMType = Rotators.SemiTruckRPM,
+		playerDamageProtection = 0.85,
+		engineRPMType = SemiTruckRPM,
       
-		frontEndHealth = 1500,
-		rearEndHealth = 1000,
+		frontEndHealth = 750,
+		rearEndHealth = 500,
 
-		spawnOffsetY = 0.35,
+		
 
 		isSmallVehicle = false,
 
@@ -49,7 +21,7 @@ module Rotators
 			engine = VehicleEngineStepVan,
 			engineStart = VehicleEngineStepVan,
 			engineTurnOff = VehicleEngineStepVan,
-			horn = VehicleHornSemiTruck,
+			horn = truckhorn1,
 			ignitionFail = VehicleIgnitionFailStepVan,
 			backSignal = VehicleBackUpBeeper,
 		}
@@ -63,37 +35,38 @@ module Rotators
 		textureDamage2Overlay = Vehicles/vehicles_rSemiTruck_Overlay_Damaged02,
 		textureShadow = Vehicles/Vehicles_rSemiTruck_Shadow,
 
-		wheel FrontLeft
-		{
-			front = true,
-			offset = 0.7624 -0.8614 2.5050,
-			radius = 0.40f,
-			width = 0.30f,
-		}
+        wheel FrontLeft
+        {
+            front = true,
+            offset = 0.76 -0.8504 2.51,
+            radius = 0.38f,
+            width = 0.3f,
+        }
 
-		wheel FrontRight
-		{
-			front = true,
-			offset = -0.7624 -0.8614 2.5050,
-			radius = 0.40f,
-			width = 0.30f,
-		}
+        wheel FrontRight
+        {
+            front = true,
+            offset = -0.76 -0.8504 2.51,
+            radius = 0.38f,
+            width = 0.3f,
+        }
 
-		wheel RearLeft
-		{
-			front = false,
-			offset = 0.0000 -0.8713 -1.4950,
-			radius = 0.40f,
-			width = 3.00f,
-		}
+        wheel RearLeft
+        {
+            front = false,
+            offset = 0.76 -0.9504 -1.49,
+            radius = 0.38f,
+            width = 0.18f,
+        }
 
-		wheel RearRight
-		{
-			front = false,
-			offset = 0.0000 -0.8713 -2.5347,
-			radius = 0.40f,
-			width = 3.00f,
-		}    
+        wheel RearRight
+        {
+            front = false,
+            offset = -0.76 -0.9504 -2.53,
+            radius = 0.38f,
+            width = 0.18f,
+        }
+ 
 
 		area Engine
 		{
@@ -125,15 +98,26 @@ module Rotators
 			xywh = -1.1667 2.5175 0.4211 0.4211,
 		}
 
-		area TireRearLeft
+		area TireMiddleLeft
 		{
 			xywh = 1.1667 -1.5088 0.4211 0.4211,
 		}
 
+		area TireMiddleRight
+		{
+			xywh = -1.1842 -1.5088 0.4211 0.4211,
+		}
 		area TireRearRight
 		{
 			xywh = -1.1842 -2.5263 0.4211 0.4211,
 		}
+
+		area TireRearLeft
+		{
+			xywh = 1.1667 -2.5263 0.4211 0.4211,
+		}
+
+
 
 		template = Seat/part/SeatFrontLeft,
 		template = Seat/part/SeatFrontRight,
@@ -161,7 +145,7 @@ module Rotators
 				file = Rotators.SemiTruckAntenna,
 			}
 
-			itemType = Base.RadioBlack;Base.RadioRed;Base.RadioMakeShift;Base.HamRadio1;Base.HamRadio2;Base.HamRadioMakeShift,
+			itemType = Base.RadioBlack;Base.RadioRed;Base.RadioMakeShift;Base.HamRadioMakeShift;Base.HamRadio1,
 
 			table install
 			{
@@ -182,19 +166,12 @@ module Rotators
 		}
 
 		template = GasTank,
-
 		part GasTank
-		{
-			install
+		{	
+			itemType = Rotators.Tank125_;Base.Tank125_;Base.SmallGasTank;Base.NormalGasTank;Base.BigGasTank,
+			model GasTank
 			{
-				skills = Mechanics:7,
-				recipes = Intermediate Mechanics,
-			}
-
-			uninstall
-			{
-				skills = Mechanics:7,
-				recipes = Intermediate Mechanics,
+				file = Rotators.SemiTruckGasTank,
 			}
 		}
 
@@ -206,7 +183,7 @@ module Rotators
 			table armor
 			{
 				logic = RotatorsLib,
-				condition = 25,
+				condition = 100,
 
 				needs =
 				{
@@ -344,7 +321,7 @@ module Rotators
 				needs =
 				{
 					part = ArmorBullbar,
-					condition = 15,
+					condition = 1,
 				}
 				lua =
 				{
@@ -391,7 +368,7 @@ module Rotators
 			table armor
 			{
 				logic = RotatorsLib,
-				condition = 55,
+				condition = 100,
 				needs =
 				{
 					part = ArmorFront,
@@ -417,7 +394,7 @@ module Rotators
 			table armor
 			{
 				logic = RotatorsLib,
-				condition = 55,
+				condition = 100,
 
 				needs =
 				{
@@ -440,7 +417,7 @@ module Rotators
 			table armor
 			{
 				logic = RotatorsLib,
-				condition = 55,
+				condition = 100,
 				needs =
 				{
 					part = ArmorDoorR,
@@ -481,7 +458,7 @@ module Rotators
 			table armor
 			{
 				logic = RotatorsLib,
-				condition =  55,
+				condition = 100,
 				needs =
 				{
 					part = ArmorDoorL,
@@ -503,7 +480,7 @@ module Rotators
 			table armor
 			{
 				logic = RotatorsLib,
-				condition =  55,
+				condition = 100,
 				needs =
 				{
 					part = ArmorDoorR,
@@ -542,53 +519,15 @@ module Rotators
 				recipes = Intermediate Mechanics,
 			}
 		}
-
-       template = Tire,
-		part TireFrontLeft
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.SemiTruckBaseFrontWheelLeft,
-			}
-			model ATAProtection
-            {
-                file = Rotators.SemiTruckArmorTireFL,
-            }
-		}
-
-		part TireFrontRight
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.SemiTruckBaseFrontWheelRight,
-			}
-			model ATAProtection
-            {
-                file = Rotators.SemiTruckArmorTireFR,
-				invertX = TRUE,
-            }
-			
-		}
 		template = Rotators.Axle4Tires,
-		template = Rotators.SemiTruckArmor/part/ArmorTires,
+		template = Rotators.SemiTruckArmor/part/WheelChainFrontLeft,
+		template = Rotators.SemiTruckArmor/part/WheelChainFrontRight,
+		template = Rotators.SemiTruckArmor/part/WheelChainMiddleLeft,
+		template = Rotators.SemiTruckArmor/part/WheelChainMiddleRight,
+		template = Rotators.SemiTruckArmor/part/WheelChainRearLeft,
+		template = Rotators.SemiTruckArmor/part/WheelChainRearRight,
 		part Tire*
 		{
-		
-			table armor
-			{
-				logic = RotatorsLib,
-				condition = 100,
-				needs =
-				{
-				part = ArmorTires,
-                condition = 1,
-				}
-			}
-			table uninstall
-			{
-				requireUninstalled = ArmorTires,
-				recipes = Basic Mechanics,
-			}
 		setAllModelsVisible = false,
         
 		
@@ -598,7 +537,6 @@ module Rotators
          }
          table uninstall
          {
-             requireUninstalled = ATA2ProtectionWheels,
 			 complete = rSemiTruck.ATATuning.UninstallComplete.SafeTireNotAllModelsVisible,
          }
          lua
@@ -608,44 +546,6 @@ module Rotators
              checkOperate = Vehicles.CheckOperate.Tire,
              update = Vehicles.Update.Tire,
          }
-		}
-
-		part TireRearLeft
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.SemiTruckBaseBackWheelLeft,
-			}
-			model ATAProtection
-			{
-				file = Rotators.SemiTruckArmorTireRR,
-				offset = -0.85 0 0,
-				rotate = 0 0 180,
-			}
-			model ATAProtection2
-			{
-				file = Rotators.SemiTruckArmorTireRR,
-				offset = 0.85 0 0,
-			}
-		}
-
-		part TireRearRight
-		{
-			model InflatedTirePlusWheel
-			{
-				file = Rotators.SemiTruckBaseBackWheelRight,
-			}
-			model ATAProtection
-			{
-				file = Rotators.SemiTruckArmorTireRL,
-				offset = -0.85 0 0,
-				rotate = 0 0 180,
-			}
-			model ATAProtection2
-			{
-				file = Rotators.SemiTruckArmorTireRL,
-				offset = 0.85 0 0,
-			}
 		}
 
 		template = Brake,
@@ -693,9 +593,17 @@ module Rotators
 				needs =
 				{
 					part = ArmorBullbar,
-					condition = 50,
+					condition = 35,
 				}
 			}
+			table headlight
+            {
+                xOffset = 0.0,
+                yOffset = 1.7,
+                distance = 28,
+                intensity = 1.75,
+				focusing = 25,
+            }
 		}
 
 		part HeadlightRight
@@ -707,9 +615,27 @@ module Rotators
 				needs =
 				{
 					part = ArmorBullbar,
-               condition = 50,
+               condition = 35,
 				}
 			}
+			table headlight
+            {
+                xOffset = 0.0,
+                yOffset = 1.7,
+                distance = 28,
+                intensity = 1.75,
+				focusing = 25,
+            }
 		}
+		part HeadlightRearLeft
+        {
+            mechanicArea = Back,
+            area = TruckBed,
+        }
+        part HeadlightRearRight
+        {
+            mechanicArea = Back,
+            area = TruckBed,
+        }
 	}
 }
