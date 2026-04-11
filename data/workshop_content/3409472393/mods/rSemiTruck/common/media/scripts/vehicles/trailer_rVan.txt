@@ -1,82 +1,87 @@
 module Base
 {
 	vehicle SemiTrailerVan
-	{
+    {
+        template! = Base.TrailerBase,
 
-		template! = Base.TrailerBase,
-		template = SemiTruckTrailerCollision,
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_White,
+        }
 
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_White,
-		}
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_Black,
+        }
 
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_Black,
-		}
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_Red,
+        }
 
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_Red,
-		}
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_Blue,
+        }
 
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_Blue,
-		}
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_Green,
+        }
 
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_Green,
-		}
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_Yellow,
+        }
 
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_Yellow,
-		}
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_USMCgreen,
+        }
 
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_USMCgreen,
-		}
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_CaspianBlue_magenta,
-		}
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_CaspianBlue_amber,
-		}
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_CaspianBlue_crimson,
-		}
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_CaspianBlue_lime,
-		}
-		skin
-		{
-			texture = Vehicles/Trailers_rVan_CaspianBlue_hot_orange,
-		}
-	}
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_CaspianBlue_magenta,
+        }
+
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_CaspianBlue_amber,
+        }
+
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_CaspianBlue_crimson,
+        }
+
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_CaspianBlue_lime,
+        }
+
+        skin
+        {
+            texture = Vehicles/Trailers_rVan_CaspianBlue_hot_orange,
+        }
+
+    }
 	template vehicle TrailerBase
 	{
 
-		model
-		{
-			file = Rotators.TrailerVanBase,
-			scale = 1.1500,
-			offset = 0.0000 0.7826 -1.3652,
-		}
+        model
+        {
+            file = Rotators.TrailerVanBase,
+            scale = 1.1500,
+            offset = 0.0000 1.3228 0.2120,
+        }
 
+		template = SemiTruckTrailerCollision,
+		neverSpawnKey = true,
 		mechanicType = 2,
 		offRoadEfficiency = 1,
-		engineRepairLevel = 4,
 		playerDamageProtection = 1,
       
-      isSmallVehicle = false,
+        isSmallVehicle = false,
 
 		textureRust = Vehicles/Trailers_rVan_Rust,
 		textureMask = Vehicles/Trailers_rVan_Mask,
@@ -85,27 +90,27 @@ module Base
 		textureDamage2Overlay = Vehicles/Trailers_rVan_Overlay_Damaged02,
 		textureDamage1Shell = Vehicles/Trailers_rVan_Shell_Damaged01,
 		textureDamage2Shell = Vehicles/Trailers_rVan_Shell_Damaged02,
-		extents = 1.7426 1.4851 5.8020,
-		shadowExtents = 1.8266 8.9786,
-		shadowOffset = 0.0000 0.0514,
-		physicsChassisShape = 1.7624 1.4851 5.8020,
-		centerOfMassOffset = 0.0000 0.2871 -1.2277,
-		mass = 100,
+		mass = 400,
 
+        extents = 1.9130 1.3217 8.3478,
+        physicsChassisShape = 1.9130 1.3391 8.3304,
+        centerOfMassOffset = 0.0000 1.9826 2.2609,
+        shadowExtents = 1.8266 8.5960,
+        shadowOffset = 0.0000 2.3457,
 
 		brakingForce = 1,
 		stoppingMovementForce = 2.0f,
 		rollInfluence = 0.15f,
-		steeringIncrement = 0.03,
-		steeringClamp = 0.3,
-		suspensionStiffness = 40,
-		suspensionCompression = 4.83,
-		suspensionDamping = 3.88,
+		steeringIncrement = 0.001f,
+		steeringClamp = 0.3f,
+		suspensionStiffness = 55,
+		suspensionCompression = 2.83f,
+		suspensionDamping = 2.88f,
 		maxSuspensionTravelCm = 15,
-		suspensionRestLength = 0.16f,
-		wheelFriction = 0.51f,
-		frontEndHealth = 300,
-		rearEndHealth = 300,
+		suspensionRestLength = 0.4f,
+		wheelFriction = 0.5f,
+		frontEndHealth = 650,
+		rearEndHealth = 450,
 		seats = 2,
 
 		wheel FrontLeft
@@ -113,7 +118,7 @@ module Base
 			front = true,
 			offset = 0.600 -0.9010 0.2673,
 			radius = 0.40f,
-			width = 0.90f,
+			width = 2.0,
 		}
 
 		wheel FrontRight
@@ -121,23 +126,23 @@ module Base
 			front = true,
 			offset = -0.600 -0.9010 0.2673,
 			radius = 0.40f,
-			width = 0.90f,
+			width = 2.0,
 		}
 
 		wheel RearLeft
 		{
-			front = false,
+			front = true,
 			offset = 0.600 -0.9010 -0.7129,
 			radius = 0.40f,
-			width = 0.90f,
+			width = 2.0,
 		}
 
 		wheel RearRight
 		{
-			front = false,
+			front = true,
 			offset = -0.600 -0.9010 -0.7129,
 			radius = 0.40f,
-			width = 0.90f,
+			width = 2.0,
 		}
 
 		area TruckBed
@@ -393,6 +398,14 @@ module Base
 				animate = FALSE,
 			}
 
+			lua
+			{
+				create = Vehicles.Create.TrunkDoorOpen,
+				init = Vehicles.Init.Door,
+				update = Vehicles.Update.TrunkDoor,
+				use = Vehicles.Use.TrunkDoor,
+			}
+
 			mechanicRequireKey = false,
 
 			anim ActorOpen
@@ -515,53 +528,69 @@ module Base
 			}
 		}
 
-        extents = 1.9130 2.4870 8.1565,
-        physicsChassisShape = 1.9130 2.4870 8.1565,
-        centerOfMassOffset = 0.0000 1.1800 0.6179,
-        shadowExtents = 1.8266 8.9786,
-        shadowOffset = 0.0000 0.7123,
+        area TireFrontLeft
+        {
+            xywh = 1.3304 0.4791 0.4522 0.5043,
+        }
 
-		area TireFrontLeft
-		{
-			xywh = 1.3304 -1.0957 0.4522 0.5043,
-		}
+        area TireFrontRight
+        {
+            xywh = -1.3130 0.4779 0.4522 0.5043,
+        }
 
-		area TireFrontRight
-		{
-			xywh = -1.3130 -1.0957 0.4522 0.5043,
-		}
+        area TireRearLeft
+        {
+            xywh = 1.3304 -0.5186 0.4522 0.5043,
+        }
 
-		area TireRearLeft
-		{
-			xywh = 1.3304 -2.0957 0.4522 0.5043,
-		}
+        area TireRearRight
+        {
+            xywh = -1.3130 -0.5186 0.4522 0.5043,
+        }
 
-		area TireRearRight
-		{
-			xywh = -1.3130 -2.0957 0.4522 0.5043,
-		}
+        area TruckBed
+        {
+            xywh = 0.0000 -2.1548 1.9130 0.6609,
+        }
 
-		area TruckBed
-		{
-			xywh = 0.0000 -3.5652 3.3565 1.4957,
-		}
+        area Toolbox
+        {
+            xywh = -1.1565 1.7858 0.5739 1.0957,
+        }
 
-		area Toolbox
-		{
-			xywh = -1.1565 0.2174 0.5739 1.0957,
-		}
+        area SpareTire
+        {
+            xywh = 1.1565 1.7858 0.5739 1.0957,
+        }
+		useChassisPhysicsCollision = false,
+        physics box
+        {
+            offset = 0.0000 1.4637 -0.8087,
+            extents = 1.7826 2.1043 2.2000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
 
-		area SpareTire
-		{
-			xywh = 1.1565 0.2000 0.5739 1.0957,
-		}
+        physics box
+        {
+            offset = 0.0000 1.9185 1.6870,
+            extents = 1.7826 2.1043 2.7913,
+            rotate = 0.0000 0.0000 0.0000,
+        }
 
-		attachment trailerTruck
-		{
-			offset = 0.0000 -0.4000 5.6435,
-			rotate = 0.0000 0.0000 0.0000,
-			canAttach = trailerTruck,
-		}
+        physics box
+        {
+            offset = 0.0000 2.1130 4.0516,
+            extents = 1.7826 1.7217 3.4348,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment trailerTruck
+        {
+            offset = 0.0000 -0.3304 5.6435,
+            rotate = 0.0000 0.0000 0.0000,
+            canAttach = trailerTruck,
+            updateconstraint = false,
+        }
 		area Toolbox
 		{
 			xywh = -1.1584 -0.4455 0.5743 1.0891,
