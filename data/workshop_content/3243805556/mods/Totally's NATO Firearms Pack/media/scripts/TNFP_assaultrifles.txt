@@ -9,7 +9,7 @@ module Base
 		SubCategory                 	=	Firearm,	
 		Ranged                      	=	TRUE,	
 		IsAimedFirearm              	=	TRUE,	
-		WeaponReloadType            	=	BullpupReload,	
+		WeaponReloadType            	=	boltaction,	
 		FireMode                    	=	Auto,	
 		FireModePossibilities       	=	Auto/Single,	
 		AttachmentType              	=	Rifle,	
@@ -19,8 +19,8 @@ module Base
 		isBullpup                       =   TRUE,
 				
 		PiercingBullets             	=	True,
-		CriticalChance              	=	33,
-		CritDmgMultiplier            	=	4,
+		CriticalChance              	=	40,
+		CritDmgMultiplier            	=	5,
 		AimingPerkCritModifier      	=	20,
 		HitChance                   	=	35,	
 		ToHitModifier               	=	1.5,
@@ -35,7 +35,7 @@ module Base
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
 		ConditionMax                	=	30,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	12,
@@ -43,7 +43,7 @@ module Base
 		SwingTime                   	=	0.5,
 		MinimumSwingTime            	=	0.5,
 		SwingAmountBeforeImpact     	=	0,	
-		RecoilDelay                 	=	3,
+		RecoilDelay                 	=	0,
 		Weight                      	=	3.6,
 					
 		AmmoType                    	=	Base.556Bullets,	
@@ -88,9 +88,9 @@ module Base
 		Tags                            =   Gun,
 	
 		ModelWeaponPart = Bayonnet Bayonnet bayonnet bayonnet,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
-		ModelWeaponPart					=	Base.223Silencer		Base.Silencer				silencer	silencer,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = 556Silencer 556Silencer silencerTNFP silencerTNFP,
 	}
 	model AUG_A1
 	{
@@ -101,12 +101,6 @@ module Base
 		{
 			offset = 0.0010 0.0180 0.3310,
 			rotate = 0.0000 0.0000 180.0000,
-		}
-
-		attachment silencer
-		{
-			offset = 0.0010 0.0200 0.3310,
-			rotate = -90.0000 0.0000 180.0000,
 		}
 
 		attachment bayonnet
@@ -125,6 +119,56 @@ module Base
 		{
 			offset = -0.0010 0.0360 0.1750,
 			rotate = -90.0000 0.0000 180.0000,
+		}
+
+		attachment silencerTNFP
+		{
+			offset = 0.0010 0.0200 0.3310,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+	}
+	fixing Fix Steyr AUG A1		
+	{			
+		Require : AUG_A1,		
+		Fixer : AUG_A1=1;Aiming=5,
+		Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model AUG_A1
+	{
+		mesh = weapons/firearm/AUG_A1,
+		texture = weapons/firearm/AUG_A1_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0180 0.3310,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0020 0.2410,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = -0.0210 0.0290 0.1010,
+			rotate = 180.0000 0.0000 -70.0000,
+		}
+
+		attachment silencerTNFP
+		{
+			offset = 0.0010 0.0200 0.3310,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 	}
 	fixing Fix Steyr AUG A1		
@@ -145,41 +189,41 @@ module Base
 		SubCategory                 	=	Firearm,	
 		Ranged                      	=	TRUE,	
 		IsAimedFirearm              	=	TRUE,	
-		WeaponReloadType            	=	BullpupReload,
+		WeaponReloadType            	=	boltaction,	
 		FireMode                    	=	Auto,	
 		FireModePossibilities       	=	Auto/Single,	
 		AttachmentType              	=	Rifle,	
 		UseEndurance                	=	FALSE,	
 		TwoHandWeapon               	=	TRUE,	
 		RequiresEquippedBothHands   	=	TRUE,
-		isBullpup                       =   TRUE,
+		isBullpup                       =   TRUE,	
 				
 		PiercingBullets             	=	TRUE,
-		CriticalChance              	=	20,
-		CritDmgMultiplier            	=	3,
-		AimingPerkCritModifier      	=	10,
-		HitChance                   	=	15,	
+		CriticalChance              	=	30,
+		CritDmgMultiplier            	=	5,
+		AimingPerkCritModifier      	=	15,
+		HitChance                   	=	20,	
 		ToHitModifier               	=	1.5,
 		AimingPerkHitChanceModifier 	=	10,
-		JamGunChance                	=	8,
+		JamGunChance                	=	5,
 		MinRange                    	=	0.4,
-		MaxRange                    	=	10,
+		MaxRange                    	=	13,
 		AimingPerkRangeModifier     	=	3,
 		MinDamage                   	=	0.8,
 		MaxDamage                   	=	1.4,	
 	
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
-		ConditionMax                	=	10,	
-		ConditionLowerChanceOneIn   	=	45,	
+		ConditionMax                	=	8,	
+		ConditionLowerChanceOneIn   	=	60,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
-		AimingTime                  	=	15,
+		AimingTime                  	=	10,
 		ReloadTime                  	=	20,	
 		SwingTime                   	=	0.5,
 		MinimumSwingTime            	=	0.5,
 		SwingAmountBeforeImpact     	=	0,	
-		RecoilDelay                 	=	2,
+		RecoilDelay                 	=	0,
 		Weight                      	=	3.66,
 					
 		AmmoType                    	=	Base.556Bullets,	
@@ -222,32 +266,24 @@ module Base
 		RackSound        		        =	M16Rack,
 		Impact                 		    =	null,
 		Tags                            =   Gun,
-		Tooltip							= Very Unaccurate without Carryhandle Iron Sights/SUSAT Scope. Prone to Jam,
+		Tooltip = Very Unaccurate without Carryhandle Iron Sights/SUSAT Scope. Prone to Jam,
 	
 		ModelWeaponPart = SUSATL85           SUSAT Scope1 Scope1,
 		ModelWeaponPart = L85A1_Carrying_Handle           L85A1_Carrying_Handle Scope2 Scope2,
 		ModelWeaponPart = Bayonnet Bayonnet bayonnet bayonnet,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
-		ModelWeaponPart					=	Base.223Silencer		Base.Silencer				silencer	silencer,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = 556Silencer 556Silencer silencerTNFP silencerTNFP,
 	}
-
 	model L85A1
 	{
 		mesh = weapons/firearm/L85A1,
 		texture = weapons/firearm/L85A1_tex,
-		scale = 1.0,
 
 		attachment muzzle
 		{
-			offset = 0.0010 0.0250 0.3590,
+			offset = 0.0010 0.0180 0.3550,
 			rotate = 0.0000 0.0000 180.0000,
-		}
-
-		attachment silencer
-		{
-			offset = 0.0010 0.0210 0.3590,
-			rotate = -90.0000 0.0000 180.0000,
 		}
 
 		attachment Scope1
@@ -258,7 +294,7 @@ module Base
 
 		attachment Scope2
 		{
-			offset = 0.0010 0.0500 0.0050,
+			offset = 0.0010 0.0550 0.0050,
 			rotate = 180.0000 0.0000 180.0000,
 		}
 
@@ -270,14 +306,20 @@ module Base
 
 		attachment laser
 		{
-			offset = 0.0000 0.0000 0.3570,
-			rotate = 90.0000 0.0000 0.0000,
+			offset = 0.0000 0.0480 0.1330,
+			rotate = -180.0000 0.0000 180.0000,
 		}
 
 		attachment bayonnet
 		{
 			offset = 0.0000 -0.0010 0.2440,
 			rotate = -89.0000 -3.0000 180.0000,
+		}
+
+		attachment silencerTNFP
+		{
+			offset = 0.0010 0.0210 0.3590,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 	}
 	fixing Fix Enfield L85A1		
@@ -323,7 +365,7 @@ module Base
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
 		ConditionMax                	=	15,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	25,
@@ -375,15 +417,14 @@ module Base
 		Impact                 		    =	null,
 		Tags                            =   Gun,
 	
-		ModelWeaponPart = Delph_AI_Scope           Delph_AI_Scope Scope1 Scope1,
-		ModelWeaponPart = x2Scope x2Scope_Vanilla Scope1 Scope1,
-		ModelWeaponPart = x4Scope x4Scope_Vanilla Scope1 Scope1,
-		ModelWeaponPart = x8Scope x8Scope_Vanilla Scope1 Scope1,
-		ModelWeaponPart = RedDot RedDot_Vanilla reddot reddot,
-		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
-		ModelWeaponPart					=	Base.308Silencer		Base.Silencer				muzzle	muzzle,
+		ModelWeaponPart = Delph_AI_Scope           Delph_AI_Scope AI_Scope AI_Scope,
+		ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,	
+
 	
 	}
 	model AR10
@@ -397,10 +438,28 @@ module Base
 			rotate = 0.0000 0.0000 180.0000,
 		}
 
-		attachment Scope1
+		attachment sling
+		{
+			offset = 0.0000 0.0130 0.3490,
+			rotate = 96.0000 18.0000 -2.0000,
+		}
+
+		attachment AI_Scope
 		{
 			offset = 0.0010 0.0800 0.0870,
 			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment scope
+		{
+			offset = 0.0000 0.0830 0.1010,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment scope1
+		{
+			offset = 0.0000 0.0860 0.0650,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 
 		attachment reddot
@@ -411,8 +470,8 @@ module Base
 
 		attachment laser
 		{
-			offset = 0.0000 0.0000 0.3570,
-			rotate = 90.0000 0.0000 0.0000,
+			offset = 0.0000 0.0420 0.2010,
+			rotate = 180.0000 0.0000 -180.0000,
 		}
 
 		attachment world
@@ -471,7 +530,7 @@ module Base
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
 		ConditionMax                	=	30,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	30,
@@ -523,15 +582,12 @@ module Base
 		Impact                 		    =	null,
 		Tags                            =   Gun,
 	
-		ModelWeaponPart = x2Scope x2Scope_Vanilla scope2 scope2,
-		ModelWeaponPart = x4Scope x8Scope_Vanilla scope2 scope2,
-		ModelWeaponPart = x8Scope Vanilla_x12Scope scope1 scope1,
-		ModelWeaponPart = RedDot RedDot_Vanilla reddot reddot,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
-		ModelWeaponPart					=	Base.308Silencer		Base.Silencer				muzzle	muzzle,
-
-	
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope Bushnell_4xScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,	
 	}
 	model BM59
 	{
@@ -550,22 +606,16 @@ module Base
 			rotate = 0.0000 0.0000 0.0000,
 		}
 
-		attachment scope1
+		attachment scope
 		{
-			offset = 0.0000 0.0550 0.0400,
-			rotate = -1.0000 1.0000 0.0000,
-		}
-
-		attachment scope2
-		{
-			offset = 0.0000 0.0520 0.1410,
-			rotate = -1.0000 1.0000 0.0000,
+			offset = 0.0160 0.0550 0.1010,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 
 		attachment reddot
 		{
 			offset = 0.0000 0.0330 0.2280,
-			rotate = 179.0000 0.0000 -180.0000,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 
 		attachment recoilpad
@@ -576,8 +626,8 @@ module Base
 
 		attachment laser
 		{
-			offset = 0.0200 0.0180 0.3080,
-			rotate = -90.0000 0.0000 180.0000,
+			offset = 0.0000 0.0350 0.2010,
+			rotate = 180.0000 0.0000 -180.0000,
 		}
 	}
 	fixing Fix Beretta BM59			
@@ -623,7 +673,7 @@ module Base
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
 		ConditionMax                	=	30,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	15,
@@ -675,15 +725,12 @@ module Base
 		Impact                 		    =	null,
 		Tags                            =   Gun,
 	
-		ModelWeaponPart = x2Scope x2Scope_Vanilla scope2 scope2,
-		ModelWeaponPart = x4Scope x8Scope_Vanilla scope2 scope2,
-		ModelWeaponPart = x8Scope Vanilla_x12Scope scope1 scope1,
-		ModelWeaponPart = RedDot RedDot_Vanilla reddot reddot,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
-		ModelWeaponPart					=	Base.308Silencer		Base.Silencer				muzzle	muzzle,
-
-	
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,	
 	}
 	model BM59Folded
 	{
@@ -702,22 +749,16 @@ module Base
 			rotate = 0.0000 0.0000 0.0000,
 		}
 
-		attachment scope1
+		attachment scope
 		{
-			offset = 0.0000 0.0550 0.0400,
-			rotate = -1.0000 1.0000 0.0000,
-		}
-
-		attachment scope2
-		{
-			offset = 0.0000 0.0520 0.1410,
-			rotate = -1.0000 1.0000 0.0000,
+			offset = 0.0160 0.0550 0.1010,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 
 		attachment reddot
 		{
 			offset = 0.0000 0.0330 0.2280,
-			rotate = 179.0000 0.0000 -180.0000,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 
 		attachment recoilpad
@@ -728,9 +769,10 @@ module Base
 
 		attachment laser
 		{
-			offset = 0.0200 0.0180 0.3080,
-			rotate = -90.0000 0.0000 180.0000,
+			offset = 0.0000 0.0350 0.2010,
+			rotate = 180.0000 0.0000 -180.0000,
 		}
+
 	}
 	item FAMAS	
 	{				
@@ -741,7 +783,7 @@ module Base
 		SubCategory                 	=	Firearm,	
 		Ranged                      	=	TRUE,	
 		IsAimedFirearm              	=	TRUE,	
-		WeaponReloadType            	=	BullpupReload,	
+		WeaponReloadType            	=	boltaction,	
 		FireMode                    	=	Auto,	
 		FireModePossibilities       	=	Auto/Burst/Single,	
 		AttachmentType              	=	Rifle,	
@@ -752,7 +794,7 @@ module Base
 				
 		PiercingBullets             	=	True,
 		CriticalChance              	=	35,
-		CritDmgMultiplier            	=	4,
+		CritDmgMultiplier            	=	10,
 		AimingPerkCritModifier      	=	10,
 		HitChance                   	=	30,	
 		ToHitModifier               	=	1.5,
@@ -767,7 +809,7 @@ module Base
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
 		ConditionMax                	=	25,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	15,
@@ -821,10 +863,9 @@ module Base
 	
 		ModelWeaponPart = J4F1_Scope           J4F1_Scope Scope1 Scope1,
 		ModelWeaponPart = Bayonnet Bayonnet bayonnet bayonnet,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
-		ModelWeaponPart					=	Base.223Silencer		Base.Silencer				silencer	silencer,
-
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = 556Silencer 556Silencer silencerTNFP silencerTNFP,
 	}
 	model FAMAS
 	{
@@ -835,12 +876,6 @@ module Base
 		{
 			offset = 0.0010 0.0200 0.3330,
 			rotate = 0.0000 0.0000 180.0000,
-		}
-
-		attachment silencer
-		{
-			offset = 0.0010 0.0220 0.2990,
-			rotate = -90.0000 0.0000 180.0000,
 		}
 
 		attachment Scope1
@@ -863,8 +898,14 @@ module Base
 
 		attachment laser
 		{
-			offset = 0.0190 0.0260 0.1810,
-			rotate = 90.0000 0.0000 0.0000,
+			offset = -0.0010 0.0360 0.1750,
+			rotate = -90.0000 0.0000 180.0000,
+		}
+
+		attachment silencerTNFP
+		{
+			offset = 0.0010 0.0220 0.2990,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 	}
 	fixing Fix FAMAS			
@@ -878,114 +919,127 @@ module Base
 	}
 	item FNFAL
 	{				
-	DisplayName                 	=	FN FAL,	
-	Icon                        	=	FNFAL_Gun,	
-	WeaponSprite                	=	FNFALTNFP,	
-	Type                        	=	Weapon,	
-	SubCategory                 	=	Firearm,	
-	Ranged                      	=	TRUE,	
-	IsAimedFirearm              	=	TRUE,	
-	WeaponReloadType            	=	boltaction,	
-	FireMode                    	=	Auto,	
-	FireModePossibilities       	=	Auto/Single,	
-	AttachmentType              	=	Rifle,	
-	UseEndurance                	=	FALSE,	
-	TwoHandWeapon               	=	TRUE,	
-	RequiresEquippedBothHands   	=	TRUE,	
+		DisplayName                 	=	FN FAL,	
+		Icon                        	=	FNFAL_Gun,	
+		WeaponSprite                	=	FNFALTNFP,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
 				
-    PiercingBullets             	=	TRUE,
-    CriticalChance              	=	25,
-    CritDmgMultiplier            	=	5,
-    AimingPerkCritModifier      	=	10,
-    HitChance                   	=	30,	
-	ToHitModifier               	=	1.5,
-	AimingPerkHitChanceModifier 	=	15,
-	JamGunChance                	=	1,
-	MinRange                    	=	0.61,
-	MaxRange                    	=	13,
-	AimingPerkRangeModifier     	=	3,
-	MinDamage                   	=	1.4,
-	MaxDamage                   	=	2.1,	
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	25,
+		CritDmgMultiplier            	=	5,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	30,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	15,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.61,
+		MaxRange                    	=	13,
+		AimingPerkRangeModifier     	=	3,
+		MinDamage                   	=	1.4,
+		MaxDamage                   	=	2.1,	
 	
-	MinAngle                     	=	0.950,
-	AimingPerkMinAngleModifier  	=	0.005,
-	ConditionMax                	=	30,	
-	ConditionLowerChanceOneIn   	=	60,	
-	MultipleHitConditionAffected	=	FALSE,	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	30,	
+		ConditionLowerChanceOneIn   	=	75,	
+		MultipleHitConditionAffected	=	FALSE,	
 		
-	AimingTime                  	=	22,
-	ReloadTime                  	=	25,	
-	SwingTime                   	=	0.5,
-	MinimumSwingTime            	=	0.5,
-	SwingAmountBeforeImpact     	=	0,	
-	RecoilDelay                 	=	3,
-	Weight                      	=	4.25,
+		AimingTime                  	=	22,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	3,
+		Weight                      	=	4.25,
 					
-	AmmoType                    	=	Base.308Bullets,	
-	AmmoBox                     	=	308Box,		
-	MaxAmmo                     	=	20,	
-	MagazineType                	=	Base.FAL_Magazine,	
-	ProjectileCount             	=	1,	
-	MaxHitCount                 	=	1,	
-	ShareDamage                 	=	FALSE,	
-	SplatSize                   	=	3,	
-	SplatNumber                 	=	3,	
-	SplatBloodOnNoDeath         	=	TRUE,	
-	PushBackMod                 	=	0.3,	
-	KnockBackOnNoDeath          	=	TRUE,	
-	KnockdownMod                	=	4,	
-	DoorDamage                  	=	14,	
+		AmmoType                    	=	Base.308Bullets,	
+		AmmoBox                     	=	308Box,		
+		MaxAmmo                     	=	20,	
+		MagazineType                	=	Base.FAL_Magazine,	
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	1,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	4,	
+		DoorDamage                  	=	14,	
 				
-	RunAnim                     	=	Run_Weapon2,	
-	IdleAnim                    	=	Idle_Weapon2,	
-	SwingAnim                   	=	Rifle,	
-	MetalValue                  	=	45,	
-	SoundVolume                 	=	70,	
-	SoundRadius                 	=	70,	
-	SoundGain                   	=	1,	
-	NPCSoundBoost               	=	1.5,	
-	BringToBearSound		        =	M14BringToBear,
-	SwingSound      		        =	BattleRifleShoot,
-	HitSound            		    =	BulletHitBody,
-	ClickSound         		        =	M14Jam,
-	BreakSound       		        =	M14Break,
-	EquipSound       		        =	M14Equip,
-	UnequipSound     		        =	M14UnEquip,
-	InsertAmmoSound  		        =	M14InsertAmmo,
-	EjectAmmoSound  		        =	M14EjectAmmo,
-	InsertAmmoStartSound		    =	M14InsertAmmoStart,
-	InsertAmmoStopSound		        =	M14InsertAmmoStop,
-	EjectAmmoStartSound		        =	M14EjectAmmoStart,
-	EjectAmmoStopSound		        =	M14EjectAmmoStop,
-	ShellFallSound    		        =	M14CartridgeFall,
-	RackSound        		        =	M14Rack,
-	Impact                 		    =	null,
-	Tags                            =   Gun,
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	70,	
+		SoundRadius                 	=	70,	
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M14BringToBear,
+		SwingSound      		        =	BattleRifleShoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M14Jam,
+		BreakSound       		        =	M14Break,
+		EquipSound       		        =	M14Equip,
+		UnequipSound     		        =	M14UnEquip,
+		InsertAmmoSound  		        =	M14InsertAmmo,
+		EjectAmmoSound  		        =	M14EjectAmmo,
+		InsertAmmoStartSound		    =	M14InsertAmmoStart,
+		InsertAmmoStopSound		        =	M14InsertAmmoStop,
+		EjectAmmoStartSound		        =	M14EjectAmmoStart,
+		EjectAmmoStopSound		        =	M14EjectAmmoStop,
+		ShellFallSound    		        =	M14CartridgeFall,
+		RackSound        		        =	M14Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
 
 
 		ModelWeaponPart = Hensoldt_Scope          Hensoldt_Scope Scope1 Scope1,
 		ModelWeaponPart = L1A2_SUITScope           L1A2_SUITScope Scope2 Scope2,
 		ModelWeaponPart = FN_Scope                  FN_Scope Scope3 Scope3,
 		ModelWeaponPart = Bayonnet Bayonnet bayonnet bayonnet,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
-		ModelWeaponPart					=	Base.308Silencer		Base.Silencer				silencer	silencer,
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = Sling Sling_FAL sling sling,
+		ModelWeaponPart = Sling2 Sling2_FAL sling sling,
+		
 	}
 	model FNFALTNFP
 	{
 		mesh = weapons/firearm/FN_FALTNFP,
 		texture = weapons/firearm/FN_FALTNFP,
 
-		attachment silencer
-		{
-			offset = 0.0010 0.0160 0.4970,
-			rotate = -90.0000 0.0000 180.0000,
-		}
-
 		attachment muzzle
 		{
 			offset = 0.0010 0.0200 0.5890,
 			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment scope
+		{
+			offset = 0.0050 0.0560 0.0790,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0050 0.0560 0.0790,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 
 		attachment Scope1
@@ -1008,8 +1062,8 @@ module Base
 
 		attachment laser
 		{
-			offset = 0.0000 0.0000 0.3110,
-			rotate = 90.0000 0.0000 0.0000,
+			offset = -0.0080 0.0180 0.2810,
+			rotate = -180.0000 0.0000 90.0000,
 		}
 
 		attachment world
@@ -1022,6 +1076,18 @@ module Base
 		{
 			offset = 0.0000 0.0030 0.4730,
 			rotate = -89.0000 -3.0000 180.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0050 0.0150 0.0514,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment sling
+		{
+			offset = 0.0000 0.0130 0.0020,
+			rotate = -90.0000 -18.0000 -179.0000,
 		}
 	}
 	fixing Fix FN FAL		
@@ -1052,7 +1118,7 @@ module Base
 				
 		PiercingBullets             	=	TRUE,
 		CriticalChance              	=	30,
-		CritDmgMultiplier            	=	5,
+		CritDmgMultiplier            	=	10,
 		AimingPerkCritModifier      	=	15,
 		HitChance                   	=	35,	
 		ToHitModifier               	=	1.5,
@@ -1067,7 +1133,7 @@ module Base
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
 		ConditionMax                	=	30,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	20,
@@ -1122,25 +1188,29 @@ module Base
 		ModelWeaponPart = Hensoldt_Scope          Hensoldt_Scope Scope1 Scope1,
 		ModelWeaponPart = L1A2_SUITScope           L1A2_SUITScope Scope2 Scope2,
 		ModelWeaponPart = FN_Scope                  FN_Scope Scope3 Scope3,
-		ModelWeaponPart = Bayonnet Bayonnet bayonnet bayonnet,
-		ModelWeaponPart					=	Base.308Silencer		Base.Silencer				silencer	silencer,
+		ModelWeaponPart = Bayonnet Bayonnet bayonnet bayonnet,		
 	}
 	model L1A1
 	{
 		mesh = weapons/firearm/FN_FALTNFP,
 		texture = weapons/firearm/FN_FAL_L1A1,
 
-		
-		attachment silencer
-		{
-			offset = 0.0010 0.0160 0.4970,
-			rotate = -90.0000 0.0000 180.0000,
-		}
-
 		attachment muzzle
 		{
 			offset = 0.0010 0.0200 0.5890,
 			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment scope
+		{
+			offset = 0.0050 0.0560 0.0790,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0050 0.0560 0.0790,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 
 		attachment Scope1
@@ -1161,10 +1231,22 @@ module Base
 			rotate = 0.0000 0.0000 0.0000,
 		}
 
+		attachment laser
+		{
+			offset = -0.0080 0.0180 0.2810,
+			rotate = -180.0000 0.0000 90.0000,
+		}
+
 		attachment world
 		{
 			offset = 0.0000 0.0000 0.0000,
 			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment sling
+		{
+			offset = 0.0000 0.0130 0.0020,
+			rotate = -90.0000 -18.0000 -179.0000,
 		}
 
 		attachment bayonnet
@@ -1181,6 +1263,340 @@ module Base
 		Fixer : FireKlean; Aiming=2,
 		Fixer : GunToolKit=1; Aiming=3,
 		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	item StG58Wood
+    {
+		DisplayName                 	=	Austrian StG 58 - Wood Furniture,	
+		Icon                        	=	STG58_Wood,	
+		WeaponSprite                	=	StG58Wood,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	25,
+		CritDmgMultiplier            	=	5,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	30,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	15,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.61,
+		MaxRange                    	=	13,
+		AimingPerkRangeModifier     	=	3,
+		MinDamage                   	=	1.4,
+		MaxDamage                   	=	2.1,	
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	30,	
+		ConditionLowerChanceOneIn   	=	75,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	22,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	3,
+		Weight                      	=	4.25,
+					
+		AmmoType                    	=	Base.308Bullets,	
+		AmmoBox                     	=	308Box,		
+		MaxAmmo                     	=	20,	
+		MagazineType                	=	Base.FAL_Magazine,	
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	1,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	4,	
+		DoorDamage                  	=	14,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	70,	
+		SoundRadius                 	=	70,	
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M14BringToBear,
+		SwingSound      		        =	BattleRifleShoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M14Jam,
+		BreakSound       		        =	M14Break,
+		EquipSound       		        =	M14Equip,
+		UnequipSound     		        =	M14UnEquip,
+		InsertAmmoSound  		        =	M14InsertAmmo,
+		EjectAmmoSound  		        =	M14EjectAmmo,
+		InsertAmmoStartSound		    =	M14InsertAmmoStart,
+		InsertAmmoStopSound		        =	M14InsertAmmoStop,
+		EjectAmmoStartSound		        =	M14EjectAmmoStart,
+		EjectAmmoStopSound		        =	M14EjectAmmoStop,
+		ShellFallSound    		        =	M14CartridgeFall,
+		RackSound        		        =	M14Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+
+		ModelWeaponPart = Hensoldt_Scope          Hensoldt_Scope Scope1 Scope1,
+		ModelWeaponPart = L1A2_SUITScope           L1A2_SUITScope Scope2 Scope2,
+		ModelWeaponPart = FN_Scope                  FN_Scope Scope3 Scope3,
+		ModelWeaponPart = Bayonnet Bayonnet bayonnet bayonnet,
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = Sling Sling_FAL sling sling,
+		ModelWeaponPart = Sling2 Sling2_FAL sling sling,
+	}
+	model StG58Wood
+	{
+		mesh = weapons/firearm/STG58,
+		texture = weapons/firearm/STG58_WOOD,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0200 0.5890,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment scope
+		{
+			offset = 0.0050 0.0560 0.0790,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0050 0.0560 0.0790,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment Scope1
+		{
+			offset = 0.0030 0.0710 0.0570,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment Scope2
+		{
+			offset = 0.0020 0.0740 0.0330,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment Scope3
+		{
+			offset = 0.0010 0.0660 0.0680,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = -0.0080 0.0180 0.2810,
+			rotate = -180.0000 0.0000 90.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment sling
+		{
+			offset = 0.0000 0.0130 0.0020,
+			rotate = -90.0000 -18.0000 -179.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+	item StG58Bakerlite
+    {
+		DisplayName                 	=	Austrian StG 58 - Bakelite Furniture,	
+		Icon                        	=	STG58_Bakelite,	
+		WeaponSprite                	=	StG58Bakerlite,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	25,
+		CritDmgMultiplier            	=	5,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	30,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	15,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.61,
+		MaxRange                    	=	13,
+		AimingPerkRangeModifier     	=	3,
+		MinDamage                   	=	1.4,
+		MaxDamage                   	=	2.1,	
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	30,	
+		ConditionLowerChanceOneIn   	=	75,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	22,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	3,
+		Weight                      	=	4.25,
+					
+		AmmoType                    	=	Base.308Bullets,	
+		AmmoBox                     	=	308Box,		
+		MaxAmmo                     	=	20,	
+		MagazineType                	=	Base.FAL_Magazine,	
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	1,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	4,	
+		DoorDamage                  	=	14,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	70,	
+		SoundRadius                 	=	70,	
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M14BringToBear,
+		SwingSound      		        =	BattleRifleShoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M14Jam,
+		BreakSound       		        =	M14Break,
+		EquipSound       		        =	M14Equip,
+		UnequipSound     		        =	M14UnEquip,
+		InsertAmmoSound  		        =	M14InsertAmmo,
+		EjectAmmoSound  		        =	M14EjectAmmo,
+		InsertAmmoStartSound		    =	M14InsertAmmoStart,
+		InsertAmmoStopSound		        =	M14InsertAmmoStop,
+		EjectAmmoStartSound		        =	M14EjectAmmoStart,
+		EjectAmmoStopSound		        =	M14EjectAmmoStop,
+		ShellFallSound    		        =	M14CartridgeFall,
+		RackSound        		        =	M14Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+
+		ModelWeaponPart = Hensoldt_Scope          Hensoldt_Scope Scope1 Scope1,
+		ModelWeaponPart = L1A2_SUITScope           L1A2_SUITScope Scope2 Scope2,
+		ModelWeaponPart = FN_Scope                  FN_Scope Scope3 Scope3,
+		ModelWeaponPart = Bayonnet Bayonnet bayonnet bayonnet,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = Sling Sling_FAL sling sling,
+		ModelWeaponPart = Sling2 Sling2_FAL sling sling,
+	}
+	model StG58Bakerlite
+	{
+		mesh = weapons/firearm/STG58,
+		texture = weapons/firearm/STG58_BAKELITE,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0200 0.5890,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment scope
+		{
+			offset = 0.0050 0.0560 0.0790,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0050 0.0560 0.0790,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment Scope1
+		{
+			offset = 0.0030 0.0710 0.0570,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment Scope2
+		{
+			offset = 0.0020 0.0740 0.0330,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment Scope3
+		{
+			offset = 0.0010 0.0660 0.0680,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = -0.0080 0.0180 0.2810,
+			rotate = -180.0000 0.0000 90.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment sling
+		{
+			offset = 0.0000 0.0130 0.0020,
+			rotate = -90.0000 -18.0000 -179.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
 	}
 	item L2A1_Bipod	
 	{				
@@ -1216,7 +1632,7 @@ module Base
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
 		ConditionMax                	=	30,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	22,
@@ -1225,7 +1641,7 @@ module Base
 		MinimumSwingTime            	=	0.5,
 		SwingAmountBeforeImpact     	=	0,	
 		RecoilDelay                 	=	3,
-		Weight                      	=	4.9,
+		Weight                      	=	4.25,
 					
 		AmmoType                    	=	Base.308Bullets,	
 		AmmoBox                     	=	308Box,		
@@ -1271,19 +1687,12 @@ module Base
 		ModelWeaponPart = Hensoldt_Scope          Hensoldt_Scope Scope1 Scope1,
 		ModelWeaponPart = L1A2_SUITScope           L1A2_SUITScope Scope2 Scope2,
 		ModelWeaponPart = FN_Scope                  FN_Scope Scope3 Scope3,
-		ModelWeaponPart					=	Base.308Silencer		Base.Silencer				silencer	silencer,	
+		
 	}
 	model L2A1_Bipod
 	{
 		mesh = weapons/firearm/FN_FAL_L2A1,
 		texture = weapons/firearm/FN_FAL_L2A1,
-
-		
-		attachment silencer
-		{
-			offset = 0.0010 0.0160 0.4970,
-			rotate = -90.0000 0.0000 180.0000,
-		}
 
 		attachment muzzle
 		{
@@ -1307,6 +1716,12 @@ module Base
 		{
 			offset = 0.0010 0.0660 0.0680,
 			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = -0.0080 0.0180 0.2810,
+			rotate = -180.0000 0.0000 90.0000,
 		}
 
 		attachment world
@@ -1343,30 +1758,30 @@ module Base
 				
 		PiercingBullets             	=	TRUE,
 		CriticalChance              	=	25,
-		CritDmgMultiplier            	=	10,
+		CritDmgMultiplier            	=	5,
 		AimingPerkCritModifier      	=	10,
 		HitChance                   	=	20,	
 		ToHitModifier               	=	1.5,
 		AimingPerkHitChanceModifier 	=	14,
-		JamGunChance                	=	1,
+		JamGunChance                	=	0.15,
 		MinRange                    	=	0.61,
-		MaxRange                    	=	10,
-		AimingPerkRangeModifier     	=	3,
+		MaxRange                    	=	10.5,
+		AimingPerkRangeModifier     	=	2.5,
 		MinDamage                   	=	0.7,
 		MaxDamage                   	=	1.4,	
 	
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
-		ConditionMax                	=	10,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionMax                	=	25,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
-		AimingTime                  	=	22,
+		AimingTime                  	=	25,
 		ReloadTime                  	=	28,	
 		SwingTime                   	=	0.5,
 		MinimumSwingTime            	=	0.5,
 		SwingAmountBeforeImpact     	=	0,	
-		RecoilDelay                 	=	2,
+		RecoilDelay                 	=	0,
 		Weight                      	=	3.8,
 					
 		AmmoType                    	=	Base.556Bullets,	
@@ -1413,14 +1828,14 @@ module Base
 		ModelWeaponPart = Hensoldt_Scope          Hensoldt_Scope Scope1 Scope1,
 		ModelWeaponPart = FN_Scope                  FN_Scope Scope1 Scope1,
 		ModelWeaponPart = SUSAT           SUSAT Scope2 Scope2,
-		ModelWeaponPart = x2Scope x2Scope_Vanilla ScopeVanilla ScopeVanilla,
-		ModelWeaponPart = x4Scope x4Scope_Vanilla ScopeVanilla ScopeVanilla,
-		ModelWeaponPart = x8Scope x8Scope_Vanilla ScopeVanilla ScopeVanilla,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
 		ModelWeaponPart = Bayonnet Bayonnet bayonnet bayonnet,
-		ModelWeaponPart					=	Base.223Silencer		Base.Silencer				silencer	silencer,
-
 	}
 	model FNC
 	{
@@ -1433,10 +1848,16 @@ module Base
 			rotate = 0.0000 0.0000 180.0000,
 		}
 
-		attachment silencer
+		attachment scope
 		{
-			offset = 0.0010 0.0250 0.4290,
-			rotate = -90.0000 0.0000 180.0000,
+			offset = 0.0050 0.0670 0.0790,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0030 0.0560 0.0570,
+			rotate = 0.0000 0.0000 0.0000,
 		}
 
 		attachment Scope1
@@ -1451,22 +1872,10 @@ module Base
 			rotate = 0.0000 0.0000 0.0000,
 		}
 
-		attachment ScopeVanilla
-		{
-			offset = 0.0030 0.0610 0.0370,
-			rotate = 0.0000 0.0000 0.0000,
-		}
-
-		attachment reddot
-		{
-			offset = 0.0030 0.0560 0.0570,
-			rotate = 0.0000 0.0000 0.0000,
-		}
-
 		attachment laser
 		{
-			offset = 0.0000 0.0080 0.3100,
-			rotate = 90.0000 0.0000 0.0000,
+			offset = -0.0080 0.0180 0.2810,
+			rotate = -180.0000 0.0000 90.0000,
 		}
 
 		attachment world
@@ -1514,8 +1923,8 @@ module Base
 		HitChance                   	=	10,	
 		ToHitModifier               	=	1.5,
 		AimingPerkHitChanceModifier 	=	11,
-		JamGunChance                	=	1,
-		MinRange                    	=	0.61,
+		JamGunChance                	=	0.15,
+		MinRange                    	=	0.25,
 		MaxRange                    	=	7,
 		AimingPerkRangeModifier     	=	2,
 		MinDamage                   	=	0.7,
@@ -1523,8 +1932,8 @@ module Base
 	
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
-		ConditionMax                	=	10,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionMax                	=	25,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	15,
@@ -1579,12 +1988,16 @@ module Base
 		ModelWeaponPart = Hensoldt_Scope          Hensoldt_Scope Scope1 Scope1,
 		ModelWeaponPart = FN_Scope                  FN_Scope Scope1 Scope1,
 		ModelWeaponPart = SUSAT           SUSAT Scope2 Scope2,
-		ModelWeaponPart = x2Scope x2Scope_Vanilla ScopeVanilla ScopeVanilla,
-		ModelWeaponPart = x4Scope x4Scope_Vanilla ScopeVanilla ScopeVanilla,
-		ModelWeaponPart = x8Scope x8Scope_Vanilla ScopeVanilla ScopeVanilla,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
-		ModelWeaponPart					=	Base.223Silencer		Base.Silencer				silencer	silencer,
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = SR25Scope SR25Scope scope scope,
+        ModelWeaponPart = ACOG ACOG scope1 scope1,
+		ModelWeaponPart = Bayonnet Bayonnet bayonnet bayonnet,
 
 	}
 	model FNCFolded
@@ -1598,10 +2011,16 @@ module Base
 			rotate = 0.0000 0.0000 180.0000,
 		}
 
-		attachment silencer
+		attachment scope
 		{
-			offset = 0.0010 0.0250 0.4290,
-			rotate = -90.0000 0.0000 180.0000,
+			offset = 0.0050 0.0560 0.0790,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0050 0.0560 0.0790,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 
 		attachment Scope1
@@ -1622,17 +2041,10 @@ module Base
 			rotate = 0.0000 0.0000 0.0000,
 		}
 
-		attachment reddot
-		{
-			offset = 0.0030 0.0750 0.0570,
-			rotate = 0.0000 0.0000 0.0000,
-		}
-
-
 		attachment laser
 		{
-			offset = 0.0000 0.0000 0.3610,
-			rotate = 90.0000 0.0000 0.0000,
+			offset = -0.0080 0.0180 0.2810,
+			rotate = -180.0000 0.0000 90.0000,
 		}
 
 		attachment world
@@ -1733,13 +2145,17 @@ module Base
 		Tags                            =   Gun,
 		Tooltip							=	The Vietnam Era M16A1. Still issued to National Gaurd and Army reserves,
 	
-        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
-        ModelWeaponPart = x4Scope x4Scope_Vanilla scope scope,
-        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
-        ModelWeaponPart = RedDot RedDot_Vanilla reddot reddot,
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
 		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = SR25Scope SR25Scope scope scope,
+        ModelWeaponPart = ACOG ACOG scope1 scope1,
+        ModelWeaponPart = M4A1Foregrip M4A1Foregrip Bipod Bipod,
+		ModelWeaponPart = 556Silencer 556Silencer silencerTNFP silencerTNFP,
 	}
 	fixing Fix M16A1			
 	{			
@@ -1761,22 +2177,58 @@ module Base
 			rotate = 0.0000 0.0000 180.0000,
 		}
 
+		attachment sling
+		{
+			offset = 0.0000 0.0130 0.3490,
+			rotate = 96.0000 18.0000 -2.0000,
+		}
+
 		attachment scope
 		{
-			offset = 0.0000 0.0830 0.0410,
+			offset = 0.0040 0.0220 0.1510,
 			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment scope1
+		{
+			offset = 0.0000 0.0860 0.0650,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment scopeb41
+		{
+			offset = 0.0000 0.0710 0.0820,
+			rotate = 90.0000 0.0000 0.0000,
 		}
 
 		attachment reddot
 		{
-			offset = 0.0000 0.0640 0.0410,
-			rotate = 0.0000 0.0000 0.0000,
+			offset = 0.0000 0.0640 0.0830,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment gunlight
+		{
+			offset = 0.0000 0.4020 0.0270,
+			rotate = -90.0000 0.0000 -180.0000,
 		}
 
 		attachment laser
 		{
-			offset = 0.0000 0.0000 0.3570,
-			rotate = 90.0000 0.0000 0.0000,
+			offset = 0.0000 0.0420 0.2010,
+			rotate = 180.0000 0.0000 -180.0000,
+		}
+
+		attachment stock
+		{
+			offset = 0.0000 0.4020 0.0270,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+
+		attachment silencer
+		{
+			offset = 0.0000 0.0210 0.5950,
+			rotate = 90.0000 0.0000 180.0000,
 		}
 
 		attachment world
@@ -1785,16 +2237,16 @@ module Base
 			rotate = 0.0000 0.0000 0.0000,
 		}
 
-		attachment bayonnet
+		attachment silencerTNFP
 		{
-			offset = 0.0000 0.0030 0.3760,
-			rotate = -89.0000 -3.0000 180.0000,
+			offset = 0.0010 0.0190 0.5240,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 	}
 	item M16A3
     {
 		DisplayName                 	=	M16A3,	
-		Icon							=	M16A2_Gun,
+		Icon							=	M16a1_Gun,
 		WeaponSprite                	=	M16A2TNFP,	
 		Type                        	=	Weapon,	
 		SubCategory                 	=	Firearm,	
@@ -1825,7 +2277,7 @@ module Base
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
 		ConditionMax                	=	15,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	20,
@@ -1833,7 +2285,7 @@ module Base
 		SwingTime                   	=	0.5,
 		MinimumSwingTime            	=	0.5,
 		SwingAmountBeforeImpact     	=	0,	
-		RecoilDelay                 	=	3,
+		RecoilDelay                 	=	0,
 		Weight                      	=	3.8,
 					
 		AmmoType                    	=	Base.556Bullets,	
@@ -1865,8 +2317,6 @@ module Base
 		ClickSound         		        =	M16Jam,
 		BreakSound       		        =	M16Break,
 		EquipSound       		        =	M16Equip,
-
-
 		UnequipSound     		        =	M16UnEquip,
 		InsertAmmoSound  		        =	M16InsertAmmo,
 		EjectAmmoSound  		        =	M16EjectAmmo,
@@ -1880,19 +2330,18 @@ module Base
 		Tags                            =   Gun,
 		Tooltip							=	A modified version of the M16A2 with a M16A1 selective fire trigger group allowing Full Auto fire,
 
-        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
-        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
-        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
-        ModelWeaponPart = RedDot RedDot_Vanilla reddot reddot,
-		ModelWeaponPart					=	Base.x2Scope			Base.Acog					scope		scope,
-		ModelWeaponPart					=	Base.x4Scope			Base.Acog					scope		scope,
-		ModelWeaponPart					=	Base.x8Scope			Base.12xScope				scope		scope,
-		ModelWeaponPart					=	Base.x4-x12Scope		Base.12xScope				scope		scope,
-		ModelWeaponPart = RedDot Base.Reddot_PicatinnyShort reddot reddot
+	
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
 		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
-		ModelWeaponPart	=	Base.223Silencer		Base.Silencer				silencer	silencer,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = SR25Scope SR25Scope scope scope,
+        ModelWeaponPart = ACOG ACOG scope1 scope1,
+        ModelWeaponPart = M4A1Foregrip M4A1Foregrip Bipod Bipod,
+		ModelWeaponPart = 556Silencer 556Silencer silencerTNFP silencerTNFP,
     }
 	model M16A2TNFP
 	{
@@ -1907,8 +2356,14 @@ module Base
 
 		attachment scope
 		{
-			offset = 0.0000 0.0830 0.0410,
-			rotate = 0.0000 0.0000 0.0000,
+			offset = 0.0000 0.0830 0.1010,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment scope1
+		{
+			offset = 0.0000 0.0860 0.0650,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 
 		attachment scopeB41
@@ -1925,8 +2380,8 @@ module Base
 
 		attachment laser
 		{
-			offset = 0.0000 0.0000 0.3610,
-			rotate = 90.0000 0.0000 0.0000,
+			offset = 0.0000 0.0420 0.2010,
+			rotate = 180.0000 0.0000 -180.0000,
 		}
 
 		attachment world
@@ -1939,6 +2394,71 @@ module Base
 		{
 			offset = 0.0000 0.0030 0.3760,
 			rotate = -89.0000 -3.0000 180.0000,
+		}
+
+		attachment silencerTNFP
+		{
+			offset = 0.0010 0.0190 0.5240,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+	}
+	model M16A2TNFPWithBayonet
+	{
+		mesh = weapons/firearm/M16A2_Bayonet,
+		texture = weapons/firearm/M16A2TNFP_Bayonet,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.4910,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment scope
+		{
+			offset = 0.0000 0.0830 0.1010,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment scope1
+		{
+			offset = 0.0000 0.0860 0.0650,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment scopeB41
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0640 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0420 0.2010,
+			rotate = 180.0000 0.0000 -180.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+
+		attachment silencerTNFP
+		{
+			offset = 0.0010 0.0190 0.5240,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 	}
 	fixing Fix M16A3			
@@ -1953,15 +2473,15 @@ module Base
 	item AssaultRifle
     {
 		DisplayName                 	=	M16A2,	
-		Icon							=	M16A2_Gun,
+		Icon							=	M16a1_Gun,
 		WeaponSprite                	=	M16A2TNFP,	
 		Type                        	=	Weapon,	
 		SubCategory                 	=	Firearm,	
 		Ranged                      	=	TRUE,	
 		IsAimedFirearm              	=	TRUE,	
 		WeaponReloadType            	=	boltaction,	
-		FireMode                    	=	BurstM16A2,	
-		FireModePossibilities       	=	BurstM16A2/Single,	
+		FireMode                    	=	Burst,	
+		FireModePossibilities       	=	Burst/Single,	
 		AttachmentType              	=	Rifle,	
 		UseEndurance                	=	FALSE,	
 		TwoHandWeapon               	=	TRUE,	
@@ -1984,7 +2504,7 @@ module Base
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
 		ConditionMax                	=	10,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	25,
@@ -2037,29 +2557,31 @@ module Base
 		Tags                            =   Gun,
 		Tooltip							= The Standard Issue M16A2,
 
-        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
-        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
-        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
-        ModelWeaponPart = RedDot RedDot_Vanilla reddot reddot,
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
 		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
-		ModelWeaponPart = Laser Laser laser laser,
-		ModelWeaponPart = LaserOn LaserOn laser laser,
-		ModelWeaponPart = GunLight Base.TacticalLight laser laser,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = SR25Scope SR25Scope scope scope,
+        ModelWeaponPart = ACOG ACOG scope1 scope1,
+        ModelWeaponPart = M4A1Foregrip M4A1Foregrip Bipod Bipod,
+		ModelWeaponPart = 556Silencer 556Silencer silencerTNFP silencerTNFP,
         StopPower = 2,
-		ModelWeaponPart					=	Base.223Silencer		Base.Silencer				silencer	silencer,
     }
-	item C7A1
+	item M16A2PlusBayonet_Rifle
     {
-		DisplayName                 	=	Colt Canada C7A1,	
-		Icon							=	C7A1_Gun,
-		WeaponSprite                	=	C7A1,	
+		DisplayName                 	=	M16A2 With M9 Bayonet,	
+		Icon							=	M16a1_Gun,
+		WeaponSprite                	=	M16A2TNFPWithBayonet,	
 		Type                        	=	Weapon,	
 		SubCategory                 	=	Firearm,	
 		Ranged                      	=	TRUE,	
 		IsAimedFirearm              	=	TRUE,	
 		WeaponReloadType            	=	boltaction,	
 		FireMode                    	=	Burst,	
-		FireModePossibilities       	=	Auto/Single/Burst,
+		FireModePossibilities       	=	Burst/Single,	
 		AttachmentType              	=	Rifle,	
 		UseEndurance                	=	FALSE,	
 		TwoHandWeapon               	=	TRUE,	
@@ -2067,9 +2589,9 @@ module Base
 				
 		PiercingBullets             	=	TRUE,
 		CriticalChance              	=	33,
-		CritDmgMultiplier            	=	10,
+		CritDmgMultiplier            	=	3,
 		AimingPerkCritModifier      	=	10,
-		HitChance                   	=	35,	
+		HitChance                   	=	27,	
 		ToHitModifier               	=	1.5,
 		AimingPerkHitChanceModifier 	=	15,
 		JamGunChance                	=	1,
@@ -2082,7 +2604,7 @@ module Base
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
 		ConditionMax                	=	10,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	25,
@@ -2133,19 +2655,123 @@ module Base
 		RackSound        		        =	M16Rack,
 		Impact                 		    =	null,
 		Tags                            =   Gun,
+		Tooltip							=   The Standard Issue M16A2 with Bayonet,
+
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = SR25Scope SR25Scope scope scope,
+        ModelWeaponPart = ACOG ACOG scope1 scope1,
+        ModelWeaponPart = M4A1Foregrip M4A1Foregrip Bipod Bipod,
+		ModelWeaponPart = 556Silencer 556Silencer silencerTNFP silencerTNFP,
+        StopPower = 2,
+    }
+	item C7A1
+    {
+		DisplayName                 	=	Colt Canada C7A1,	
+		Icon							=	C7A1_Gun,
+		WeaponSprite                	=	C7A1,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Burst,	
+		FireModePossibilities       	=	Auto/Single/Burst,
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	33,
+		CritDmgMultiplier            	=	5,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	35,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	15,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.5,
+		MaxRange                    	=	12,
+		AimingPerkRangeModifier     	=	2.5,
+		MinDamage                   	=	0.7,
+		MaxDamage                   	=	1.4,	
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	20,	
+		ConditionLowerChanceOneIn   	=	75,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	25,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	3.8,
+					
+		AmmoType                    	=	Base.556Bullets,	
+		AmmoBox                     	=	556Box,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.556Clip,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+		DoorDamage                  	=	20,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	35,	
+		SoundRadius                 	=	70,	
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M16BringToBear,
+		SwingSound      		        =	M16Shoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M16Jam,
+		BreakSound       		        =	M16Break,
+		EquipSound       		        =	M16Equip,
+		UnequipSound     		        =	M16UnEquip,
+		InsertAmmoSound  		        =	M16InsertAmmo,
+		EjectAmmoSound  		        =	M16EjectAmmo,
+		InsertAmmoStartSound		    =	M16InsertAmmoStart,
+		InsertAmmoStopSound		        =	M16InsertAmmoStop,
+		EjectAmmoStartSound		        =	M16EjectAmmoStart,
+		EjectAmmoStopSound		        =	M16EjectAmmoStop,
+		ShellFallSound    		        =	M16CartridgeFall,
+		RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+		StopPower						=	2,
 		Tooltip							=	The Canadian Standard Issue C7A1,
 
-
-        ModelWeaponPart = C79_Scope C79_Scope scope scope,
-        ModelWeaponPart = Laser Laser laser laser,
         StopPower = 2,
-		ModelWeaponPart					=	Base.223Silencer		Base.Silencer				silencer	silencer,
-		ModelWeaponPart = Sling Base.Sling sling sling,
-		ModelWeaponPart = Sling_Leather Base.Sling_Leather sling sling,
-		ModelWeaponPart = Sling_Olive Base.Sling_Olive sling sling,
-		ModelWeaponPart = Sling_Camo Base.Sling_Camo sling sling,
-		ModelWeaponPart = Base.223Silencer Base.Silencer silencer silencer,
-
+		ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope ColtScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+		ModelWeaponPart = C79_Scope C79_Scope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = SR25Scope SR25Scope scope scope,
+        ModelWeaponPart = ACOG ACOG scope scope,
+		ModelWeaponPart = HOLO_EOTECH HOLO_EOTECH scope scope,
+        ModelWeaponPart = M4A1Foregrip M4A1Foregrip Bipod Bipod,
+		ModelWeaponPart = 556Silencer 556Silencer silencerTNFP silencerTNFP,
     }
 	model C7A1
 	{
@@ -2158,29 +2784,16 @@ module Base
 			rotate = 0.0000 0.0000 180.0000,
 		}
 
-		attachment silencer
+		attachment Bipod
 		{
-			offset = 0.0010 0.0200 0.4660,
-			rotate = -90.0000 0.0000 180.0000,
-		}
-
-		
-		attachment sling
-		{
-			offset = 0.0000 0.0130 0.3490,
-			rotate = 96.0000 18.0000 -2.0000,
+			offset = 0.0000 0.0000 0.2010,
+			rotate = 0.0000 0.0000 0.0000,
 		}
 
 		attachment scope
 		{
 			offset = 0.0010 0.0600 0.0590,
 			rotate = 180.0000 0.0000 180.0000,
-		}
-
-		attachment scopeVanilla
-		{
-			offset = 0.0010 0.0600 0.0280,
-			rotate = 0.0000 1.0000 0.0000,
 		}
 
 		attachment world
@@ -2191,8 +2804,14 @@ module Base
 
 		attachment laser
 		{
-			offset = 0.0000 0.0000 0.3610,
-			rotate = 90.0000 0.0000 0.0000,
+			offset = 0.0000 0.0420 0.2010,
+			rotate = 180.0000 0.0000 -180.0000,
+		}
+
+		attachment silencerTNFP
+		{
+			offset = 0.0010 0.0190 0.5240,
+			rotate = 180.0000 0.0000 180.0000,
 		}
 	}
 	fixing Fix Colt Canada C7A1	
@@ -2209,7 +2828,7 @@ module Base
         DisplayCategory = Weapon,
         ImpactSound	=	null,
         MaxRange	=	10,
-		WeaponSprite = M14TNFP,
+		WeaponSprite = M14VFECompat,
         SoundVolume	=	40,
         MinAngle	=	0.95,
         Type	=	Weapon,
@@ -2283,13 +2902,18 @@ module Base
         FireMode = Single,
         AmmoBox = 308Box,
         MaxAmmo = 20,
-        ModelWeaponPart = x2Scope x2Scope_Vanilla scope2 scope2,
-        ModelWeaponPart = x4Scope x8Scope_Vanilla scope2 scope2,
-        ModelWeaponPart = x8Scope Vanilla_x12Scope scope1 scope1,
-        ModelWeaponPart = RedDot RedDot_Vanilla reddot1 reddot1,
-        ModelWeaponPart = Laser Laser laser1 laser1,
-        ModelWeaponPart = LaserOn LaserOn laser1 laser1,
-		ModelWeaponPart					=	Base.308Silencer		Base.Silencer				silencer	silencer,
+		ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope Bushnell_4xScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+		ModelWeaponPart = x2Scope_M14 M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope_M14 Bushnell_4xScope scope scope,
+        ModelWeaponPart = x8Scope_M14 LeupoldVariXScope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		ModelWeaponPart = Rifle_Bipod Bipod Bipod Bipod,
+		ModelWeaponPart = Bipod Bipod Bipod Bipod,
         StopPower = 2,
     }
 	item M14A1	
@@ -2326,7 +2950,7 @@ module Base
 		MinAngle                     	=	0.950,
 		AimingPerkMinAngleModifier  	=	0.005,
 		ConditionMax                	=	30,	
-		ConditionLowerChanceOneIn   	=	60,	
+		ConditionLowerChanceOneIn   	=	75,	
 		MultipleHitConditionAffected	=	FALSE,	
 		
 		AimingTime                  	=	22,
@@ -2378,13 +3002,15 @@ module Base
 		Impact                 		    =	null,
 		Tags                            =   Gun,
 	
-        ModelWeaponPart = x2Scope x2Scope_Vanilla scope2 scope2,
-        ModelWeaponPart = x4Scope x8Scope_Vanilla scope2 scope2,
-        ModelWeaponPart = x8Scope Vanilla_x12Scope scope1 scope1,
-        ModelWeaponPart = RedDot RedDot_Vanilla reddot1 reddot1,
-        ModelWeaponPart = Laser Laser laser1 laser1,
-        ModelWeaponPart = LaserOn LaserOn laser1 laser1,
-		ModelWeaponPart					=	Base.308Silencer		Base.Silencer				silencer	silencer,	
+        ModelWeaponPart = x2Scope M8_2x_EER_Scope_Model scope scope,
+        ModelWeaponPart = x4Scope Bushnell_4xScope scope scope,
+        ModelWeaponPart = x8Scope LeupoldVariXScope scope scope,
+		ModelWeaponPart = C79_Scope C79_Scope scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser ANPAQ4C laser laser,
+		ModelWeaponPart = LaserOn ANPAQ4C laser laser,
+		
 	}
 	model M14A1_Model
 	{
@@ -2395,12 +3021,6 @@ module Base
 		{
 			offset = 0.0010 0.0200 0.5890,
 			rotate = 0.0000 0.0000 180.0000,
-		}
-
-		attachment silencer
-		{
-			offset = 0.0010 0.0200 0.5890,
-			rotate = -90.0000 0.0000 180.0000,
 		}
 
 		attachment scope1
@@ -2432,17 +3052,17 @@ module Base
 			offset = 0.0200 0.0180 0.3080,
 			rotate = -90.0000 0.0000 180.0000,
 		}
-		
-		attachment silencer
-		{
-			offset = 0.0000 0.5490 -0.0360,
-			rotate = 0.0000 0.0000 0.0000,
-		}
 
 		attachment world
 		{
 			offset = 0.0000 0.0000 0.0000,
 			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0420 0.2010,
+			rotate = 180.0000 0.0000 -180.0000,
 		}
 	}
 	fixing Fix M14A1 SAW
@@ -2454,4 +3074,442 @@ module Base
 		Fixer : GunToolKit=1; Aiming=3,
 		Fixer : ImprovisedGunToolKit=2; Aiming=1,
 	}
+
+	item M4
+    {
+		DisplayName                 	=	M4 Carbine,	
+		Icon							=	XM177_Gun,
+		WeaponSprite                	=	M4TNFP,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Burst,	
+		FireModePossibilities       	=	Burst/Single,
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	40,
+		CritDmgMultiplier            	=	3,
+		AimingPerkCritModifier      	=	35,
+		HitChance                   	=	30,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	15,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.5,
+		MaxRange                    	=	12,
+		AimingPerkRangeModifier     	=	1.75,
+		MinDamage                   	=	0.8,
+		MaxDamage                   	=	1.4,	
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	15,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	15,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.9,
+					
+		AmmoType                    	=	Base.556Bullets,	
+		AmmoBox                     	=	556Box,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.556Clip,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+		DoorDamage                  	=	20,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	45,	
+		SoundRadius                 	=	70,	
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M16BringToBear,
+		SwingSound      		        =	M16Shoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M16Jam,
+		BreakSound       		        =	M16Break,
+		EquipSound       		        =	M16Equip,
+
+
+		UnequipSound     		        =	M16UnEquip,
+		InsertAmmoSound  		        =	M16InsertAmmo,
+		EjectAmmoSound  		        =	M16EjectAmmo,
+		InsertAmmoStartSound		    =	M16InsertAmmoStart,
+		InsertAmmoStopSound		        =	M16InsertAmmoStop,
+		EjectAmmoStartSound		        =	M16EjectAmmoStart,
+		EjectAmmoStopSound		        =	M16EjectAmmoStop,
+		ShellFallSound    		        =	M16CartridgeFall,
+		RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+		Tooltip							=	Colt 779 - A short carbine form of M16A2 adopted by the Marines in '87,
+		StopPower = 2,
+
+		ModelWeaponPart = SR25Scope SR25Scope scope scope,
+        ModelWeaponPart = ACOG ACOG scope scope,
+        ModelWeaponPart = M4A1Foregrip M4A1Foregrip Bipod Bipod,
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope1 scope1,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope1 scope1,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope1 scope1,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+		ModelWeaponPart = GunLight Base.TacticalLight laser laser,
+		ModelWeaponPart = 556Silencer 556Silencer silencer silencer,
+
+    }
+
+	item XM177
+    {
+		DisplayName                 	=	Model 653 Colt Carbine "CAR-15",	
+		Icon							=	XM177_Gun,
+		WeaponSprite                	=	M4TNFP,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	40,
+		CritDmgMultiplier            	=	3,
+		AimingPerkCritModifier      	=	35,
+		HitChance                   	=	30,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	15,
+		JamGunChance                	=	1,
+		MinRange                    	=	0.5,
+		MaxRange                    	=	12,
+		AimingPerkRangeModifier     	=	1.75,
+		MinDamage                   	=	0.8,
+		MaxDamage                   	=	1.4,	
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	15,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	15,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.9,
+					
+		AmmoType                    	=	Base.556Bullets,	
+		AmmoBox                     	=	556Box,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.556Clip,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+		DoorDamage                  	=	20,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	45,	
+		SoundRadius                 	=	70,	
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M16BringToBear,
+		SwingSound      		        =	M16Shoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M16Jam,
+		BreakSound       		        =	M16Break,
+		EquipSound       		        =	M16Equip,
+
+
+		UnequipSound     		        =	M16UnEquip,
+		InsertAmmoSound  		        =	M16InsertAmmo,
+		EjectAmmoSound  		        =	M16EjectAmmo,
+		InsertAmmoStartSound		    =	M16InsertAmmoStart,
+		InsertAmmoStopSound		        =	M16InsertAmmoStop,
+		EjectAmmoStartSound		        =	M16EjectAmmoStart,
+		EjectAmmoStopSound		        =	M16EjectAmmoStop,
+		ShellFallSound    		        =	M16CartridgeFall,
+		RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+		Tooltip							=	Colt 653 - A short carbine form of M16A1 used by forces requiring a Short 556 Carbine,
+		StopPower = 2,
+
+		ModelWeaponPart = SR25Scope SR25Scope scope scope,
+        ModelWeaponPart = ACOG ACOG scope scope,
+        ModelWeaponPart = M4A1Foregrip M4A1Foregrip Bipod Bipod,
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope1 scope1,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope1 scope1,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope1 scope1,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+		ModelWeaponPart = GunLight Base.TacticalLight laser laser,
+		ModelWeaponPart = 556Silencer 556Silencer silencer silencer,
+
+    }
+
+	model M4TNFP
+	{
+		mesh = weapons/firearm/CAR15_TNFP,
+		texture = weapons/firearm/CAR15_TNFP,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.3990,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment sling
+		{
+			offset = 0.0000 0.0130 0.3490,
+			rotate = 96.0000 18.0000 -2.0000,
+		}
+
+		attachment scope
+		{
+			offset = 0.0000 0.0860 0.0650,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment scope1
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0640 0.0830,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment gunlight
+		{
+			offset = 0.0000 0.4020 0.0270,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+
+		attachment laser
+		{
+			offset = -0.0010 0.0170 0.4010,
+			rotate = 90.0000 0.0000 180.0000,
+		}
+
+		attachment stock
+		{
+			offset = 0.0000 0.4020 0.0270,
+			rotate = -90.0000 0.0000 -180.0000,
+		}
+
+		attachment silencer
+		{
+			offset = 0.0000 0.0210 0.4520,
+			rotate = 180.0000 0.0000 180.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+	fixing Fix M4 Carbine			
+	{			
+		Require : M4,		
+		Fixer : M4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+
+	item CETME
+	{				
+		DisplayName                 	=	CETME L,	
+		Icon                        	=	CETME_L,	
+		WeaponSprite                	=	CETME_L_Model,	
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode						=	Auto,
+		FireModePossibilities           =	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	TRUE,
+		CriticalChance              	=	20,
+		CritDmgMultiplier            	=	5,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	30,	
+		ToHitModifier               	=	1.5,
+		AimingPerkHitChanceModifier 	=	15,
+		JamGunChance                	=	3,
+		MinRange                    	=	0.61,
+		MaxRange                    	=	10,
+		AimingPerkRangeModifier     	=	3,
+		MinDamage                   	=	0.7,
+		MaxDamage                   	=	1.4,	
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	10,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	20,
+		ReloadTime                  	=	40,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	3.55,
+					
+		AmmoType                    	=	Base.556Bullets,	
+		AmmoBox                     	=	556Box,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.556Clip,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	1,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	4,	
+		DoorDamage                  	=	15,	
+				
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+		SoundVolume                 	=	70,	
+		SoundRadius                 	=	70,	
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+		BringToBearSound		        =	M16BringToBear,
+		SwingSound      		        =	M16Shoot,
+		HitSound            		    =	BulletHitBody,
+		ClickSound         		        =	M16Jam,
+		BreakSound       		        =	M16Break,
+		EquipSound       		        =	M16Equip,
+		UnequipSound     		        =	M16UnEquip,
+		InsertAmmoSound  		        =	M16InsertAmmo,
+		EjectAmmoSound  		        =	M16EjectAmmo,
+		InsertAmmoStartSound		    =	M16InsertAmmoStart,
+		InsertAmmoStopSound		        =	M16InsertAmmoStop,
+		EjectAmmoStartSound		        =	M16EjectAmmoStart,
+		EjectAmmoStopSound		        =	M16EjectAmmoStop,
+		ShellFallSound    		        =	M16CartridgeFall,
+		RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+	
+		ModelWeaponPart = Hensoldt_Scope          Hensoldt_Scope Scope1 Scope1,
+		ModelWeaponPart = FN_Scope                  FN_Scope Scope1 Scope1,
+		ModelWeaponPart = SUSAT           SUSAT Scope2 Scope2,
+		ModelWeaponPart = x2Scope x2Scope_Vanilla ScopeVanilla ScopeVanilla,
+		ModelWeaponPart = x4Scope x4Scope_Vanilla ScopeVanilla ScopeVanilla,
+		ModelWeaponPart = x8Scope x8Scope_Vanilla ScopeVanilla ScopeVanilla,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+		ModelWeaponPart = Bayonnet Bayonnet bayonnet bayonnet,
+
+	}
+	model CETME_L_Model
+	{
+		mesh = weapons/firearm/CETME_L,
+		texture = weapons/firearm/CETME_L,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0240 0.4570,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope1
+		{
+			offset = 0.0030 0.0750 0.0570,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment Scope2
+		{
+			offset = 0.0030 0.0570 0.0570,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment ScopeVanilla
+		{
+			offset = 0.0030 0.0610 0.0370,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0030 0.0560 0.0570,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0080 0.3100,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0120 0.3420,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+
 }

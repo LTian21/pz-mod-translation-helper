@@ -1,0 +1,2313 @@
+module Base
+{
+	item MP5K	
+	{
+		DisplayName 					=	MP5K Personal Defence Weapon,	
+        Icon                        	=	MP5K,	
+		WeaponSprite                	=	MP5K,
+        Weight							=	1.99,
+        MagazineType					=   9mmClip30,
+        AmmoType						=   Bullets9mm,
+        AmmoBox							=   Bullets9mmBox,
+        MaxAmmo							=   30,
+        RecoilDelay						=	0,
+        ReloadTime						=   30,
+        AimingTime						=   20,
+        MinRange						=	0,
+        MaxRange						=	8,
+        MinAngle						=	0.965,
+        DoorDamage						=	3,
+        MinDamage						=	0.8,
+        MaxDamage						=	1.2,
+        StopPower						=   3,
+        PiercingBullets					=   FALSE,
+        KnockdownMod					=	1,
+        PushBackMod						=	0.2,
+		FireMode                    	=	Single,	
+
+        
+        CriticalChance                  = 40,
+        AimingPerkCritModifier          = 10,
+        HitChance                       = 15,
+        AimingPerkHitChanceModifier     = 10,
+        AimingPerkMinAngleModifier      = 0.05,
+        AimingPerkRangeModifier         = 1.5,
+        
+        
+        SoundVolume	                    =   40,
+        SoundRadius	                    =   45,
+        SwingSound	                    =   SMGShoot,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+
+        
+        Type	                        =	Weapon,
+        SubCategory	                    =	Firearm,
+        IsAimedFirearm	                =	TRUE,
+        UseEndurance	                =	FALSE,
+        ConditionMax	                =	15,
+        JamGunChance                    =   1,
+        Ranged	                        =	TRUE,
+        MetalValue                      =   45,
+        SwingTime	                    =	0.5,
+        MinimumSwingTime	            =	0.5,
+        ToHitModifier	                =	1.5,
+        SwingAmountBeforeImpact	        =	0,
+        MultipleHitConditionAffected	=	FALSE,
+        SplatSize	                    =	3,
+        SplatNumber	                    =	3,
+        SplatBloodOnNoDeath	            =	TRUE,
+        ImpactSound	                    =	null,
+        NPCSoundBoost	                =	1.5,
+        SoundGain                       =   2,
+        SwingAnim	                    =	Handgun,
+        RunAnim	                        =	Run_Weapon2,
+        IdleAnim	                    =	Idle_Weapon2,
+        ShareDamage	                    =	FALSE,
+        MaxHitCount	                    =	1,
+        KnockBackOnNoDeath	            =	TRUE,
+        ProjectileCount	                =	1,
+        ConditionLowerChanceOneIn	    =	60,
+        WeaponReloadType                =   handgun,
+        AttachmentType                  =   Holster,   
+        Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5K			
+	{			
+		Require : MP5K,		
+		Fixer : MP5K=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5K
+	{
+		mesh = weapons/firearm/MP5K,
+		texture = weapons/firearm/MP5K_tex,
+		scale = 1.0,
+
+		attachment muzzle
+		{
+			offset = 0.0010 -0.0310 0.2210,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 -0.0560 -0.0060,
+			rotate = 0.0000 0.0000 -180.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 -0.0100 0.1840,
+			rotate = -90.0000 0.0000 180.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+	}
+
+	item MP5A1NoStock	
+	{
+		DisplayName 					=	MP5A1,	
+        Icon                        	=	MP5A1,	
+		WeaponSprite                	=	MP5A1NoStock,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	30,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	7,
+		HitChance                   	=	25,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	9,
+		AimingPerkRangeModifier     	=	2,
+        DoorDamage						=	3,
+        MinDamage						=	0.8,
+        MaxDamage						=	1.2,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	20,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	5,
+		ReloadTime                  	=	30,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.5,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   40,
+        SoundRadius	                    =   45,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   SMGShoot,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5A1NoStock
+	{
+		mesh = weapons/firearm/MP5A1,
+		texture = weapons/firearm/MP5A1_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+	item MP5A1Stock	
+	{
+		DisplayName 					=	MP5A1 With Stock,	
+        Icon                        	=	MP5_STOCK,	
+		WeaponSprite                	=	MP5A1Stock,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	33,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	35,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	10,
+		AimingPerkRangeModifier     	=	2,
+        DoorDamage						=	3,
+        MinDamage						=	0.8,
+        MaxDamage						=	1.2,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	20,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   40,
+        SoundRadius	                    =   45,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   SMGShoot,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5A1Stock
+	{
+		mesh = weapons/firearm/MP5A1_STOCK,
+		texture = weapons/firearm/MP5A1_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+	item MP5A2	
+	{
+		DisplayName 					=	MP5A2,	
+        Icon                        	=	MP5A4_2,	
+		WeaponSprite                	=	MP5A2,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	33,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	40,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	10,
+		AimingPerkRangeModifier     	=	2,
+        DoorDamage						=	3,
+        MinDamage						=	0.8,
+        MaxDamage						=	1.2,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	20,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   40,
+        SoundRadius	                    =   45,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   SMGShoot,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5A2
+	{
+		mesh = weapons/firearm/MP5A2_STOCK,
+		texture = weapons/firearm/MP5A2_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+	item MP5A3	
+	{
+		DisplayName 					=	MP5A3,	
+        Icon                        	=	MP5_RSTOCK_UNFOLDED,	
+		WeaponSprite                	=	MP5A3_Unfolded,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	27,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	9,
+		HitChance                   	=	35,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	10,
+		AimingPerkRangeModifier     	=	1.75,
+        DoorDamage						=	3,
+        MinDamage						=	0.8,
+        MaxDamage						=	1.2,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	20,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	3.1,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   40,
+        SoundRadius	                    =   45,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   SMGShoot,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5A3_Unfolded
+	{
+		mesh = weapons/firearm/MP5A3_RSTOCK_UNFOLDED,
+		texture = weapons/firearm/MP5A3_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+	item MP5A3_folded	
+	{
+		DisplayName 					=	MP5A3 (Retracted Stock),	
+        Icon                        	=	MP5_RSTOCK_FOLDED,	
+		WeaponSprite                	=	MP5A3_folded,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	40,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	15,	
+		AimingPerkHitChanceModifier 	=	5,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	10,
+		AimingPerkRangeModifier     	=	2,
+        DoorDamage						=	3,
+        MinDamage						=	0.8,
+        MaxDamage						=	1.2,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	20,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	5,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.25,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   40,
+        SoundRadius	                    =   45,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   SMGShoot,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5A3_folded
+	{
+		mesh = weapons/firearm/MP5A3_RSTOCK_FOLDED,
+		texture = weapons/firearm/MP5A3_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+	item MP5A5	
+	{
+		DisplayName 					=	MP5A5,	
+        Icon                        	=	MP5_RSTOCK_UNFOLDED,	
+		WeaponSprite                	=	MP5A5_Unfolded,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single/Burst,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	33,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	40,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	10,
+		AimingPerkRangeModifier     	=	1.75,
+        DoorDamage						=	3,
+        MinDamage						=	0.8,
+        MaxDamage						=	1.2,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	20,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   40,
+        SoundRadius	                    =   45,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   SMGShoot,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5A5_Unfolded
+	{
+		mesh = weapons/firearm/MP5A5_RSTOCK_UNFOLDED,
+		texture = weapons/firearm/MP5A5_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+	item MP5A5_Restocked
+	{
+		DisplayName 					=	MP5A5 (Retracted Stock),	
+        Icon                        	=	MP5_RSTOCK_FOLDED,	
+		WeaponSprite                	=	MP5A5_folded,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single/Burst,		
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	40,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	20,	
+		AimingPerkHitChanceModifier 	=	7,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	9,
+		AimingPerkRangeModifier     	=	1.25,
+        DoorDamage						=	3,
+        MinDamage						=	0.8,
+        MaxDamage						=	1.2,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	20,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   40,
+        SoundRadius	                    =   45,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   SMGShoot,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5A5_folded
+	{
+		mesh = weapons/firearm/MP5A5_RSTOCK_FOLDED,
+		texture = weapons/firearm/MP5A5_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+	item MP5SD	
+	{
+		DisplayName 					=	MP5SD,	
+        Icon                        	=	MP5SD,	
+		WeaponSprite                	=	MP5SD1,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	30,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	7,
+		HitChance                   	=	25,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	9,
+		AimingPerkRangeModifier     	=	2,
+        DoorDamage						=	3,
+        MinDamage						=	0.6,
+        MaxDamage						=	1.0,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	15,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	5,
+		ReloadTime                  	=	30,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.8,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   30,
+        SoundRadius	                    =   30,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   MP5SDSilenced,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5SD1
+	{
+		mesh = weapons/firearm/MP5SD1,
+		texture = weapons/firearm/MP5SD1_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+	item MP5SD2	
+	{
+		DisplayName 					=	MP5SD2,	
+        Icon                        	=	MP5SD_STOCK,	
+		WeaponSprite                	=	MP5SD2,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	33,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	35,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	9,
+		AimingPerkRangeModifier     	=	2,
+        DoorDamage						=	3,        
+		MinDamage						=	0.6,
+        MaxDamage						=	1.0,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	15,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   30,
+        SoundRadius	                    =   30,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   MP5SDSilenced,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5SD2
+	{
+		mesh = weapons/firearm/MP5SD2,
+		texture = weapons/firearm/MP5SD2_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+	item MP5SD3	
+	{
+		DisplayName 					=	MP5SD3,	
+        Icon                        	=	MP5SD_RSTOCK_UNFOLDED,	
+		WeaponSprite                	=	MP5SD_UNFOLDED,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	30,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	30,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	10,
+		AimingPerkRangeModifier     	=	1.75,
+        DoorDamage						=	3,
+        MinDamage						=	0.6,
+        MaxDamage						=	1.0,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	15,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   30,
+        SoundRadius	                    =   30,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   MP5SDSilenced,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5SD_UNFOLDED
+	{
+		mesh = weapons/firearm/MP5SD3_RSTOCK_FOLDED,
+		texture = weapons/firearm/MP5SD3_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+	item MP5SD3_StockRetracted
+	{
+		DisplayName 					=	MP5SD3,	
+        Icon                        	=	MP5SD_RSTOCK_FOLDED,	
+		WeaponSprite                	=	MP5SD3_StockRetracted,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	30,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	20,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	7.5,
+		AimingPerkRangeModifier     	=	1.25,
+        DoorDamage						=	3,
+        MinDamage						=	0.6,
+        MaxDamage						=	1.0,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	15,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   30,
+        SoundRadius	                    =   30,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   MP5SDSilenced,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5SD3_StockRetracted
+	{
+		mesh = weapons/firearm/MP5SD3_RSTOCK_FOLDED,
+		texture = weapons/firearm/MP5SD3_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+	item MP5SD4	
+	{
+		DisplayName 					=	MP5SD4,	
+        Icon                        	=	MP5SD,	
+		WeaponSprite                	=	MP5SD4,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	33,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	40,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	9,
+		AimingPerkRangeModifier     	=	2,
+        DoorDamage						=	3,
+        MinDamage						=	0.6,
+        MaxDamage						=	1.0,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	15,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   30,
+        SoundRadius	                    =   30,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   MP5SDSilenced,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5SD4
+	{
+		mesh = weapons/firearm/MP5SD4,
+		texture = weapons/firearm/MP5SD4_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+	item MP5SD5	
+	{
+		DisplayName 					=	MP5SD5,	
+        Icon                        	=	MP5SD_STOCK,	
+		WeaponSprite                	=	MP5SD5,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single/Burst,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	33,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	40,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	10,
+		AimingPerkRangeModifier     	=	2,
+        DoorDamage						=	3,
+        MinDamage						=	0.6,
+        MaxDamage						=	1.0,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	15,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   30,
+        SoundRadius	                    =   30,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   MP5SDSilenced,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5SD5
+	{
+		mesh = weapons/firearm/MP5SD5,
+		texture = weapons/firearm/MP5SD5_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+
+	item MP5SD6	
+	{
+		DisplayName 					=	MP5SD6,	
+        Icon                        	=	MP5SD_RSTOCK_UNFOLDED,	
+		WeaponSprite                	=	MP5SD6,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single/Burst,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	40,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	35,	
+		AimingPerkHitChanceModifier 	=	10,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	9,
+		AimingPerkRangeModifier     	=	2,
+        DoorDamage						=	3,
+        MinDamage						=	0.6,
+        MaxDamage						=	1.0,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	15,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   30,
+        SoundRadius	                    =   30,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   MP5SDSilenced,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5SD6
+	{
+		mesh = weapons/firearm/MP5SD6_RSTOCK_UNFOLDED,
+		texture = weapons/firearm/MP5SD6_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+	item MP5SD6_RetractedStock	
+	{
+		DisplayName 					=	MP5SD6 (Retracted Stock),	
+        Icon                        	=	MP5SD_RSTOCK_FOLDED,	
+		WeaponSprite                	=	MP5SD6_RetractedStock,
+		Type                        	=	Weapon,	
+		SubCategory                 	=	Firearm,	
+		Ranged                      	=	TRUE,	
+		IsAimedFirearm              	=	TRUE,	
+		WeaponReloadType            	=	boltaction,	
+		FireMode                    	=	Auto,	
+		FireModePossibilities       	=	Auto/Single/Burst,	
+		AttachmentType              	=	Rifle,	
+		UseEndurance                	=	FALSE,	
+		TwoHandWeapon               	=	TRUE,	
+		RequiresEquippedBothHands   	=	TRUE,	
+				
+		PiercingBullets             	=	FALSE,
+		CriticalChance              	=	40,
+		CritDmgMultiplier            	=	4,
+		AimingPerkCritModifier      	=	10,
+		HitChance                   	=	20,	
+		AimingPerkHitChanceModifier 	=	7,
+		JamGunChance                	=	0.5,
+		MinRange                    	=	0.3,
+		MaxRange                    	=	7.5,
+		AimingPerkRangeModifier     	=	1.25,
+        DoorDamage						=	3,
+        MinDamage						=	0.6,
+        MaxDamage						=	1.0,
+	
+		MinAngle                     	=	0.950,
+		AimingPerkMinAngleModifier  	=	0.005,
+		ConditionMax                	=	15,	
+		ConditionLowerChanceOneIn   	=	60,	
+		MultipleHitConditionAffected	=	FALSE,	
+		
+		AimingTime                  	=	10,
+		ReloadTime                  	=	25,	
+		SwingTime                   	=	0.5,
+		MinimumSwingTime            	=	0.5,
+		SwingAmountBeforeImpact     	=	0,	
+		RecoilDelay                 	=	0,
+		Weight                      	=	2.89,
+					
+		AmmoType                    	=	Base.Bullets9mm,	
+		AmmoBox                     	=	Bullets9mmBox,	
+		MaxAmmo                     	=	30,	
+		MagazineType					=	Base.9mmClip30,
+		ProjectileCount             	=	1,	
+		MaxHitCount                 	=	2,	
+		ShareDamage                 	=	FALSE,	
+		SplatSize                   	=	3,	
+		SplatNumber                 	=	3,	
+		SplatBloodOnNoDeath         	=	TRUE,	
+		PushBackMod                 	=	0.3,	
+		KnockBackOnNoDeath          	=	TRUE,	
+		KnockdownMod                	=	3,	
+        
+		RunAnim                     	=	Run_Weapon2,	
+		IdleAnim                    	=	Idle_Weapon2,	
+		SwingAnim                   	=	Rifle,	
+		MetalValue                  	=	45,	
+        SoundVolume	                    =   30,
+        SoundRadius	                    =   30,
+		SoundGain                   	=	1,	
+		NPCSoundBoost               	=	1.5,	
+        SwingSound	                    =   MP5SDSilenced,
+        BringToBearSound				=   M9BringToBear,
+	    HitSound            		    =	BulletHitBody,
+	    ClickSound         		        =	M16Jam,
+	    BreakSound       		        =	M16Break,
+	    EquipSound       		        =	M16Equip,
+	    UnequipSound     		        =	M16UnEquip,
+	    InsertAmmoSound  		        =	M16InsertAmmo,
+	    EjectAmmoSound  		        =	M16EjectAmmo,
+	    InsertAmmoStartSound		    =	M16InsertAmmoStart,
+	    InsertAmmoStopSound		        =	M16InsertAmmoStop,
+	    EjectAmmoStartSound		        =	M16EjectAmmoStart,
+	    EjectAmmoStopSound		        =	M16EjectAmmoStop,
+	    ShellFallSound    		        =	M16CartridgeFall,
+	    RackSound        		        =	M16Rack,
+		Impact                 		    =	null,
+		Tags                            =   Gun,
+
+        ModelWeaponPart = x2Scope x2Scope_Vanilla scope scope,
+        ModelWeaponPart = x4Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = x8Scope x8Scope_Vanilla scope scope,
+        ModelWeaponPart = RedDot Aimpoint_RedDot reddot reddot,
+		ModelWeaponPart = RecoilPad RecoilPad recoilpad recoilpad,
+		ModelWeaponPart = Laser Laser laser laser,
+		ModelWeaponPart = LaserOn LaserOn laser laser,
+
+	}
+	fixing Fix MP5A4			
+	{			
+		Require : MP5A4,		
+		Fixer : MP5A4=1;Aiming=5,
+        Fixer : CleaningKit=1; Aiming=3,
+		Fixer : FireKlean; Aiming=2,
+		Fixer : GunToolKit=1; Aiming=3,
+		Fixer : ImprovisedGunToolKit=2; Aiming=1,
+	}
+	model MP5SD6_RetractedStock
+	{
+		mesh = weapons/firearm/MP5SD6_RSTOCK_UNFOLDED,
+		texture = weapons/firearm/MP5SD6_tex,
+
+		attachment muzzle
+		{
+			offset = 0.0010 0.0220 0.2870,
+			rotate = 0.0000 0.0000 180.0000,
+		}
+
+		attachment Scope
+		{
+			offset = 0.0000 0.0830 0.0410,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment reddot
+		{
+			offset = 0.0000 0.0530 -0.0110,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment laser
+		{
+			offset = 0.0000 0.0000 0.2180,
+			rotate = 90.0000 0.0000 0.0000,
+		}
+
+		attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment bayonnet
+		{
+			offset = 0.0000 0.0030 0.3760,
+			rotate = -89.0000 -3.0000 180.0000,
+		}
+	}
+}
