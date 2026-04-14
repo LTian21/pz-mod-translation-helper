@@ -1,0 +1,606 @@
+module Base
+{
+	vehicle SemiTrailerCartrailer
+    {
+        template! = Base.TrailerLowBed,
+
+        skin
+        {
+            texture = vehicles/Trailers_CarTrailer,
+        }
+
+        model
+        {
+            file = Rotators.TrailerCartrailerBase,
+            scale = 1.4000,
+            offset = 0.0000 1.6212 1.3106,
+        }
+
+        neverSpawnKey = true,
+        mechanicType = 2,
+        offRoadEfficiency = 2,
+        engineRepairLevel = 4,
+        playerDamageProtection = 1,
+        isSmallVehicle = false,
+        mass = 310,
+        extents = 1.7727 1.9697 8.3939,
+        physicsChassisShape = 1.7727 1.9697 8.4091,
+        centerOfMassOffset = 0.0000 1.9773 1.8333,
+        shadowExtents = 1.8266 8.9786,
+        shadowOffset = 0.0000 2.3846,
+        brakingForce = 1,
+        stoppingMovementForce = 1.0f,
+        rollInfluence = 0.15f,
+        steeringIncrement = 0.03,
+        steeringClamp = 0.3,
+        suspensionStiffness = 40,
+        suspensionCompression = 4.83,
+        suspensionDamping = 3.88,
+        maxSuspensionTravelCm = 15,
+        suspensionRestLength = 0.16f,
+        wheelFriction = 0.5f,
+        frontEndHealth = 150,
+        rearEndHealth = 150,
+        seats = 2,
+
+        wheel FrontLeft
+        {
+            front = false,
+            offset = 0.5985 -1.2879 -1.2576,
+            radius = 0.30f,
+            width = 0.90f,
+        }
+
+        wheel FrontRight
+        {
+            front = false,
+            offset = -0.5985 -1.2879 -1.2652,
+            radius = 0.30f,
+            width = 0.90f,
+        }
+
+        wheel RearLeft
+        {
+            front = false,
+            offset = 0.5985 -1.2727 -2.0682,
+            radius = 0.30f,
+            width = 0.90f,
+        }
+
+        wheel RearRight
+        {
+            front = false,
+            offset = -0.5985 -1.2727 -2.0530,
+            radius = 0.30f,
+            width = 0.90f,
+        }
+
+        part ATAMultiSlotWrecker
+        {
+            area = TruckBed,
+            specificItem = false,
+            category = nodisplay,
+            itemType = Base.LightBulb,
+
+/*            model Default
+            {
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }*/
+
+            table ATAMultiSlotWrecker
+            {
+                slots = 3,
+                spawnDist = 4,
+                spawnSize = 2,
+            }
+
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+
+                skills = Mechanics:6,
+                time = 400,
+                test = ATATuning.InstallTest.multiRequire,
+                complete = ATATuning.InstallComplete.DefaultModel,
+            }
+
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+
+                skills = Mechanics:5,
+                time = 400,
+                test = ATATuning.UninstallTest.multiRequire,
+                complete = ATATuning.UninstallComplete.DefaultModel,
+            }
+
+            lua
+            {
+                create = ATATuning.Create.Chance0,
+                init = ATATuning.Init.Default,
+            }
+        }
+
+        part wrecker_TireMiddleLeft
+        {
+        }
+
+        part wrecker_TireMiddleRight
+        {
+        }
+
+        part wrecker_BrakeMiddleRight
+        {
+        }
+
+        part wrecker_BrakeMiddleLeft
+        {
+        }
+
+        part wrecker_SuspensionMiddleRight
+        {
+        }
+
+        part wrecker_SuspensionMiddleLeft
+        {
+        }
+
+        part wrecker_MatressRearLeft
+        {
+        }
+
+        part wrecker_MatressRearRight
+        {
+        }
+
+        part wrecker_ArmorFront
+        {
+        }
+
+        part wrecker_ArmorDoorL
+        {
+        }
+
+        part wrecker_ArmorDoorR
+        {
+        }
+
+        part wrecker_ArmorRear
+        {
+        }
+
+        part wrecker_ArmorBullbar
+        {
+        }
+
+        part wrecker_ArmorTires
+        {
+        }
+
+        part wrecker_TrunkLeft
+        {
+        }
+
+        part wrecker_TrunkDoorLeft
+        {
+            itemType = Rotators.TrunkDoorLeft,
+        }
+
+        part wrecker_TruckBed
+        {
+        }
+
+        part wrecker_PassengerCompartment
+        {
+        }
+
+        part wrecker_RefrigeratorUnit
+        {
+        }
+
+        part wrecker_MattressRearLeft
+        {
+        }
+
+        part wrecker_MattressRearRight
+        {
+        }
+
+        part wrecker_MicrowaveRearRight
+        {
+        }
+
+        part wrecker_FridgeRearLeft
+        {
+        }
+
+        part wrecker_CounterRearRight
+        {
+        }
+
+        part wrecker*
+        {
+            itemType = Base.LightBulb,
+            category = nodisplay,
+
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+
+                time = 100,
+            }
+
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        type = Base.Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+
+                time = 100,
+            }
+        }
+
+        template = Rotators.DoubleTires,
+
+        part TireFrontLeft
+        {
+            table uninstall
+            {
+                requireUninstalled = WheelChainFrontLeft,
+                recipes = Basic Mechanics,
+            }
+
+            model InflatedTirePlusWheel
+            {
+                file = Rotators.TrailerVanFrontWheelLeft,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+                scale = 0.75,
+            }
+
+            model ATAProtection
+            {
+                file = Rotators.SemiTruckArmorTireTrailer,
+                offset = -0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 180.0000,
+                scale = 0.75,
+            }
+        }
+
+        part WheelChainFrontLeft
+        {
+            parent = TireFrontLeft,
+            area = TireFrontLeft,
+
+            table install
+            {
+                requireInstalled = TireFrontLeft,
+            }
+
+            table uninstall
+            {
+                requireInstalled = TireFrontLeft,
+            }
+        }
+
+        part TireFrontRight
+        {
+            table uninstall
+            {
+                requireUninstalled = WheelChainFrontRight,
+                recipes = Basic Mechanics,
+            }
+
+            model InflatedTirePlusWheel
+            {
+                file = Rotators.TrailerVanFrontWheelRight,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+                scale = 0.75,
+            }
+
+            model ATAProtection
+            {
+                file = Rotators.SemiTruckArmorTireTrailer,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+                scale = 0.75,
+            }
+        }
+
+        part WheelChainFrontRight
+        {
+            parent = TireFrontRight,
+            area = TireFrontRight,
+
+            table install
+            {
+                requireInstalled = TireFrontRight,
+            }
+
+            table uninstall
+            {
+                requireInstalled = TireFrontRight,
+            }
+        }
+
+        part TireRearLeft
+        {
+            table uninstall
+            {
+                requireUninstalled = WheelChainRearLeft,
+                recipes = Basic Mechanics,
+            }
+
+            model InflatedTirePlusWheel
+            {
+                file = Rotators.TrailerVanRearWheelLeft,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+                scale = 0.75,
+            }
+
+            model ATAProtection
+            {
+                file = Rotators.SemiTruckArmorTireTrailer,
+                offset = -0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 180.0000,
+                scale = 0.75,
+            }
+        }
+
+        part WheelChainRearLeft
+        {
+            parent = TireRearLeft,
+            area = TireRearLeft,
+
+            table install
+            {
+                requireInstalled = TireRearLeft,
+            }
+
+            table uninstall
+            {
+                requireInstalled = TireRearLeft,
+            }
+        }
+
+        part TireRearRight
+        {
+            table uninstall
+            {
+                requireUninstalled = WheelChainRearRight,
+                recipes = Basic Mechanics,
+            }
+
+            model InflatedTirePlusWheel
+            {
+                file = Rotators.TrailerVanRearWheelRight,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+                scale = 0.75,
+            }
+
+            model ATAProtection
+            {
+                file = Rotators.SemiTruckArmorTireTrailer,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+                scale = 0.75,
+            }
+        }
+
+        part WheelChainRearRight
+        {
+            parent = TireRearRight,
+            area = TireRearRight,
+
+            table install
+            {
+                requireInstalled = TireRearRight,
+            }
+
+            table uninstall
+            {
+                requireInstalled = TireRearRight,
+            }
+        }
+
+        part WheelChain*
+        {
+            mechanicRequireKey = false,
+            repairMechanic = true,
+            category = tire,
+            itemType = Base.SemiTruckArmorTires_Item,
+
+            table install
+            {
+                complete = rSemiTruck.ATATuning.InstallComplete.IndividualWheelProtection,
+
+                items
+                {
+                    1
+                    {
+                        tags = base:wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = rSemiTruck.ATATuning.InstallTest.IndividualWheelProtection,
+            }
+
+            table uninstall
+            {
+                complete = rSemiTruck.ATATuning.UninstallComplete.IndividualWheelProtection,
+
+                items
+                {
+                    1
+                    {
+                        tags = base:wrench,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+
+                time = 300,
+                skills = Mechanics:1,
+                recipes = Basic Mechanics,
+                test = rSemiTruck.ATATuning.UninstallTest.IndividualWheelProtection,
+                requireEmpty = true,
+            }
+
+            lua
+            {
+                create = ATATuning.Create.Chance0,
+                init = rSemiTruck.ATATuning.Init.IndividualWheelProtection,
+                update = rSemiTruck.ATATuning.Update.IndividualWheelProtection,
+            }
+        }
+
+        part Tire*
+        {
+            setAllModelsVisible = false,
+
+            table install
+            {
+                complete = rSemiTruck.ATATuning.InstallComplete.SafeTireNotAllModelsVisible,
+            }
+
+            table uninstall
+            {
+                complete = rSemiTruck.ATATuning.UninstallComplete.SafeTireNotAllModelsVisible,
+            }
+
+            lua
+            {
+                create = Vehicles.Create.Tire,
+                init = rSemiTruck.ATATuning.Init.SafeTireNotAllModelsVisible,
+                checkOperate = Vehicles.CheckOperate.Tire,
+                update = Vehicles.Update.Tire,
+            }
+        }
+
+        template = Battery,
+
+        part Battery
+        {
+            lua
+            {
+                create = Vehicles.Create.Battery,
+                update = Vehicles.Update.Battery,
+            }
+        }
+
+        template = Headlight/part/HeadlightRearLeft,
+        template = Headlight/part/HeadlightRearRight,
+        template = Suspension/part/SuspensionFrontLeft,
+        template = Suspension/part/SuspensionFrontRight,
+        template = Suspension/part/SuspensionRearLeft,
+        template = Suspension/part/SuspensionRearRight,
+
+        area TireFrontLeft
+        {
+            xywh = 1.3333 0.4848 0.4545 0.5152,
+        }
+
+        area TireFrontRight
+        {
+            xywh = -1.3106 0.4773 0.4545 0.5152,
+        }
+
+        area TireRearLeft
+        {
+            xywh = 1.3333 -0.5152 0.4545 0.5152,
+        }
+
+        area TireRearRight
+        {
+            xywh = -1.3106 -0.5152 0.4545 0.5152,
+        }
+
+        area Toolbox
+        {
+            xywh = -1.1591 1.7576 0.5758 1.1061,
+        }
+
+        useChassisPhysicsCollision = false,
+
+        physics box
+        {
+            offset = 0.0000 1.7424 -0.1006,
+            extents = 1.7803 2.6439 7.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 1.8788 3.6281,
+            extents = 1.7826 1.9478 2.7043,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = -0.4427 0.5227 4.0985,
+            extents = 0.0870 0.8696 0.0870,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.4465 0.5227 4.0909,
+            extents = 0.0870 0.8696 0.0870,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment trailerTruck
+        {
+            offset = 0.0000 -0.9356 4.0360,
+            rotate = 0.0000 0.0000 0.0000,
+            canAttach = trailerTruck,
+            updateconstraint = false,
+        }
+    }
+}
