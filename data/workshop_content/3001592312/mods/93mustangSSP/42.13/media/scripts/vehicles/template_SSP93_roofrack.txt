@@ -1,0 +1,84 @@
+module Base
+{
+
+	model 93mustangSSPRoofrack0
+	{
+		mesh = vehicles/Vehicles_93mustangSSP_Body|small_roofrack,
+		texture = Vehicles/Vehicles_70dodgeTA_Wheel_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+	template vehicle SSP93Roofrack
+	{
+		part SSP93Roofrack
+		{
+
+			model Roofrack0
+				{
+                		file = 93mustangSSPRoofrack0,
+				}
+
+			category = Other,
+			area = Roofrack,
+            specificItem = false,
+			itemType = Base.OldSmallRoofrack3,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+            durability = 3,
+			container
+			{
+				conditionAffectsCapacity = false,
+				test = DAMN.ContainerAccess.Roofrack,
+			}
+
+			table install
+			{
+                	items
+                	{
+                    	1
+                    		{
+                        	tags = Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 800,
+                	skills = Mechanics:1,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				tags = Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 800,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+            		test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+					requireEmpty = true,
+                    
+
+            		}
+
+            lua
+            	{
+					create = DAMN.Create.Blank,
+				}
+		}
+	}
+}
