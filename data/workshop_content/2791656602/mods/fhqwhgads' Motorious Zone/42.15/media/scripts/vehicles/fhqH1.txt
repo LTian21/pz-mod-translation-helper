@@ -21,6 +21,27 @@ module Base
 		invertX = FALSE,
 		scale = 0.47,
 	}
+	model fhqH1Bullbar
+	{
+		mesh = vehicles/vehicle_fhq_h1|fhqH1_Bullbar,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.47,
+	}
+	model fhqH1Rooflights
+	{
+		mesh = vehicles/vehicle_fhq_h1|fhqH1_RoofLights,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.47,
+	}
+	model fhqH1RoofRack
+	{
+		mesh = vehicles/vehicle_fhq_h1|fhqH1_RoofRack,
+		texture = Vehicles/vehicle_fhqH1_shell,
+		invertX = FALSE,
+		scale = 0.47,
+	}
 	model fhqH1WheelL
 	{
 		mesh = vehicles/vehicles_WheelfhqMZOffroad2,
@@ -53,7 +74,7 @@ module Base
             engineStart = VehicleEngineOffRoad,
             engineTurnOff = VehicleEngineOffRoad,
             handBrake = VehicleHandBrakeChunky,
-            horn = VehicleHornJeep,
+            horn = VehicleHornSportsCar,
             ignitionFail = VehicleIgnitionFailOffRoad,
         }
 
@@ -234,51 +255,6 @@ module Base
         {
             xywh = -0.7253 -0.7253 0.4396 0.4396,
         }
-
-		template = TrunkDoor,
-
-		part TrunkDoor
-		{
-			anim Open
-			{
-				sound = VehicleTrunkOpenJeep,
-			}
-
-			anim Close
-			{
-				sound = VehicleTrunkCloseJeep,
-			}
-
-			anim Lock
-			{
-				sound = LockVehicleDoorJeep,
-			}
-
-			anim Unlock
-			{
-				sound = UnlockVehicleDoorJeep,
-			}
-
-			anim IsLocked
-			{
-				sound = VehicleDoorIsLockedJeep,
-			}
-
-			table uninstall
-			{
-				requireUninstalled = WindshieldRear,
-			}
-		}
-
-		template = Trunk/part/TruckBed,
-
-		part TruckBed
-		{
-			container
-            {
-                test = Vehicles.ContainerAccess.TruckBedOpenInside,
-            }
-		}
 
 		template = Seat/part/SeatFrontLeft,
 		template = Seat/part/SeatFrontRight,
@@ -543,10 +519,76 @@ module Base
 		template = Radio,
 		template = Headlight,
 		
+        attachment trailer
+        {
+            offset = 0.0000 0.0961 -1.1173,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = -1.0000,
+        }
+
+        attachment trailerfront
+        {
+            offset = 0.0000 0.0950 1.0184,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = 1.0000,
+        }
+		
 	}
+	
+	template vehicle fhqH1Wagon
+	{
+		template! = fhqH1Base,
+		
+		template = TrunkDoor,
+
+		part TrunkDoor
+		{
+			anim Open
+			{
+				sound = VehicleTrunkOpenJeep,
+			}
+
+			anim Close
+			{
+				sound = VehicleTrunkCloseJeep,
+			}
+
+			anim Lock
+			{
+				sound = LockVehicleDoorJeep,
+			}
+
+			anim Unlock
+			{
+				sound = UnlockVehicleDoorJeep,
+			}
+
+			anim IsLocked
+			{
+				sound = VehicleDoorIsLockedJeep,
+			}
+
+			table uninstall
+			{
+				requireUninstalled = WindshieldRear,
+			}
+		}
+		
+		template = Trunk/part/TruckBed,
+
+		part TruckBed
+		{
+			container
+            {
+                test = Vehicles.ContainerAccess.TruckBedOpenInside,
+            }
+		}
+		
+	}
+	
 	vehicle fhqH1
     {
-        template! = fhqH1Base,
+        template! = fhqH1Wagon,
 
         model
         {
