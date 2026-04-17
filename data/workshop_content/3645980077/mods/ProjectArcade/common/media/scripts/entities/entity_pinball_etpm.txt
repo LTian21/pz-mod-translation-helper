@@ -1,0 +1,55 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity PinballElviraPartyMonsters
+        {
+            LuaWindowClass = ISEntityWindow,
+            DisplayName = PinballElviraPartyMonsters,
+            Icon = item_pinball_etpm,
+        }
+    }
+
+    entity PinballElviraPartyMonsters
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = PinballElviraPartyMonsters,
+            uiEnabled = false,
+        }
+
+        component SpriteConfig
+        {
+            isThumpable = false,
+
+            face S { layer { row = pa_pinballs_21, row = pa_pinballs_20, } }
+            face E { layer { row = pa_pinballs_22 pa_pinballs_23, } }
+        }
+
+        component CraftRecipe
+        {
+            timedAction = BuildWallMetal,
+            time = 100,
+            category = Project Arcade,
+            SkillRequired = Electricity:4,
+            xpAward = Electricity:75,
+            Tooltip = Tooltip_PinballElviraPartyMonsters,
+
+            inputs
+            {
+                item 1 tags[base:hammer] mode:keep flags[MayDegradeVeryLight],
+                item 1 tags[base:saw;base:smallsaw;base:crudesaw] mode:keep flags[MayDegradeLight;Prop1],
+                item 1 tags[base:screwdriver] mode:keep flags[MayDegradeVeryLight;NoBrokenItems],
+
+                item 1 [Base.Doorknob] mode:destroy,
+                item 3 [Base.IronBandSmall] mode:destroy,
+                item 1 [Base.GlassPanel] mode:destroy,
+                item 2 [Base.SteelBar] mode:destroy,
+                item 4 [Base.Plank] mode:destroy,
+                item 4 [Base.ElectronicsScrap] mode:destroy,
+                item 1 [Base.Bell] mode:destroy,
+            }
+        }
+    }
+}

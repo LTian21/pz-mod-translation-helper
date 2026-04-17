@@ -1,0 +1,59 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity ComplexStarWars
+        {
+            LuaWindowClass = ISEntityWindow,
+            DisplayName = ComplexStarWars,
+            Icon = item_complex_sw,
+        }
+    }
+
+    entity ComplexStarWars
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ComplexStarWars,
+            uiEnabled = false,
+        }
+
+        component SpriteConfig
+        {
+            isThumpable = false,
+
+            face E { layer { row = pa_complex_2 pa_complex_3, } }
+            face S { layer { row = pa_complex_5, row = pa_complex_4, } }
+            face W { layer { row = pa_complex_6 pa_complex_7, } }
+            face N { layer { row = pa_complex_9, row = pa_complex_8, } }
+        }
+
+        component CraftRecipe
+        {
+        timedAction = BuildWallMetal,
+        time = 100,
+        category = Project Arcade,
+        SkillRequired = Electricity:6,
+        xpAward = Electricity:175,
+        Tooltip = Tooltip_ComplexStarWars,
+
+        inputs
+        {
+            item 1 tags[base:hammer] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:saw;base:smallsaw;base:crudesaw] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[base:screwdriver] mode:keep flags[MayDegradeVeryLight;NoBrokenItems],
+
+            item 1 [ProjectArcade.ArcadeROM_StarWars] mode:destroy,
+            item 8 [Base.Plank] mode:destroy,
+            item 24 [Base.Nails] mode:destroy,
+            item 8 [Base.Screws] mode:destroy,
+            item 1 [Base.TvAntique;Base.TvWideScreen;Base.TvBlack] flags[NoBrokenItems] mode:destroy,
+            item 7 [Base.ElectronicsScrap] mode:destroy,
+            item 3 [Base.Amplifier] mode:destroy,
+        }
+    }
+}
+
+
+}
