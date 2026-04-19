@@ -1,6 +1,18 @@
 module SaucedCarts
 {
-    imports {Base}
+    /* Deliberately no `imports {Base}` here.
+     *
+     * The recipe file declares `module Base { imports {SaucedCarts} }` so
+     * the recipe deserializes cleanly server-side in MP (vanilla's
+     * NetTimedAction.parse looks up the recipe by module.name and expects
+     * `module Base`). If we ALSO imported Base here, the two files form a
+     * cycle and PZ's ScriptBucket.get infinite-recurses → stack overflow.
+     *
+     * Item defs below reference Base items via the `base:` prefix
+     * (e.g. `ItemType = base:container`, `Tags = ...;base:heavyitem`),
+     * which PZ resolves independently of the `imports` clause. So the
+     * import isn't actually needed here.
+     */
 
     /* ==================== SHOPPING CART ==================== */
     /* Large metal cart for hauling supplies from stores */

@@ -1,0 +1,107 @@
+module Base
+{
+    xuiSkin default
+    {
+        entity ES_PumpWell
+        {
+            LuaWindowClass      = ISEntityTabWindow,
+            DisplayName         = PumpWellsConstructionDisplay,
+            Description         = Entity_Desc_Default,
+            BuildDescription    = Entity_BuildDesc_Default,
+            Icon                = Build_PumpWellsConstruction,
+        }
+    }
+
+    entity PumpWell
+    {
+        component UiConfig
+        {
+            xuiSkin         = default,
+            entityStyle     = ES_PumpWell,
+            uiEnabled       = true,
+        }
+
+        component FluidContainer
+        {
+            ContainerName          = PumpWell,
+            capacity               = 20000.0,
+            RainFactor	           = 0.15,
+            FillsWithCleanWater    = true,
+            HiddenAmount           = false,
+            InitialPercentMin      = 0.05,
+            InitialPercentMax      = 0.15,
+            Fluids
+            {
+                fluid = Water:1.0,
+                fluid = TaintedWater:0.0,
+            }
+            whitelist
+            {
+                fluid = Water,
+                fluid = TaintedWater,
+            }
+        }
+
+        component SpriteConfig
+        {
+			OnCreate = MyOwnWell.events.OnCreate,
+			skillBaseHealth = 1500,
+            face E
+            {
+                layer
+                {
+                    row = camping_01_64,
+                }
+            }
+            face S
+            {
+                layer
+                {
+                    row = camping_01_65,
+                }
+            }
+            face W
+            {
+                layer
+                {
+                    row = camping_01_66,
+                }
+            }
+            face N
+            {
+                layer
+                {
+                    row = camping_01_67,
+                }
+            }
+        }
+        
+        component CraftRecipe
+        {
+            timedAction   = BuildMetalStructureSmall,
+            time          = 5000,
+            category      = Outdoors,
+            needToBeLearn = false,
+            SkillRequired = MetalWelding:8;Blacksmith:6,
+            xpAward       = MetalWelding:80;Blacksmith:60,
+            ToolTip       = Tooltip_PumpWellsConstruction,
+            inputs
+            {
+                item 1 tags[Hammer] mode:keep flags[Prop1;MayDegradeLight],
+                item 1 tags[PickAxe] mode:keep flags[MayDegradeHeavy],
+                item 1 tags[DigGrave] mode:keep flags[MayDegradeHeavy],
+				item 1 tags[boltcutters] mode:keep flags[MayDegradeLight],
+				item 1 tags[pipewrench] mode:keep flags[MayDegradeLight],                
+                item 10 [Base.BlowTorch],
+			    item 1 tags[WeldingMask] mode:keep,
+                item 8 [Base.LeadPipe;Base.MetalPipe],
+                item 16 [Base.SmallSheetMetal],
+                item 64 [Base.Screws],
+                item 32 [Base.WeldingRods] flags[DontRecordInput],
+                item 4 [Base.IronBar;Base.IronBarHalf;Base.SteelBarHalf;Base.SteelBar],
+                item 1 [Base.TirePump],
+            }
+        }
+    }
+
+}

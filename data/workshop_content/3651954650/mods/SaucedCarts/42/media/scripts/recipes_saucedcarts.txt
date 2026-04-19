@@ -1,6 +1,21 @@
-module SaucedCarts
+/*
+ * B42 MP crafting note:
+ *   This recipe is deliberately declared under `module Base` so that
+ *   vanilla's NetTimedAction.parse (zombie.core.NetTimedAction:168)
+ *   can deserialize the ISHandcraftAction's craftRecipe argument
+ *   server-side. PZ looks up the recipe by full name (module.name); if
+ *   we put the recipe in `module SaucedCarts`, the server's lookup
+ *   returns null → ISHandcraftAction.lua:400 throws
+ *   `attempted index: isCanWalk of non-table: null` → craft never
+ *   completes in dedicated MP.
+ *
+ *   Paired with items_saucedcarts.txt removing its `imports {Base}`
+ *   to break the module-import cycle that would otherwise cause
+ *   PZ's ScriptBucket.get to infinite-recurse.
+ */
+module Base
 {
-    imports {Base}
+    imports {SaucedCarts}
 
     /* ==================== SHOPPING CART ASSEMBLY ==================== */
     /* Weld together a functional shopping cart from scrap metal.       */
