@@ -33,10 +33,12 @@ module Base
             Fluids
             {
                 fluid = Water:1.0,
+                fluid = TaintedWater:0.0,
             }
             whitelist
             {
                 fluid = Water,
+                fluid = TaintedWater,
             }
         }
 
@@ -55,12 +57,12 @@ module Base
         
         component CraftRecipe
         {
-            timedAction   = Make_With_Brick_Low,
+            timedAction   = BuildLowNoTool,
             time          = 5000,
-            category      = Masonry,
+            category      = Outdoors,
             needToBeLearn = false,
-            SkillRequired = Woodwork:6;Masonry:8;MetalWelding:4;Blacksmith:2,
-            xpAward       = Woodwork:60;Masonry:80;MetalWelding:40;Blacksmith:20,
+            SkillRequired = Masonry:8;Woodwork:6,
+            xpAward       = Masonry:80;Woodwork:60,
             ToolTip       = Tooltip_WellsConstruction,
             inputs
             {
@@ -68,13 +70,13 @@ module Base
                 item 1 tags[PickAxe] mode:keep flags[MayDegradeHeavy],
                 item 1 tags[DigGrave] mode:keep flags[MayDegradeHeavy],
 				item 1 tags[SharpKnife;MeatCleaver] mode:keep flags[IsNotDull;SharpnessCheck;MayDegradeLight],
-                item 10 [Base.BlowTorch],
-			    item 1 tags[WeldingMask] mode:keep,
                 item 8 [Base.Log],
                 item 16 [Base.Plank],
                 item 64 [Base.Nails],
                 item 32 [Base.StoneBlock],
-                item 4 [Base.IronBar;Base.IronBarHalf;Base.SteelBarHalf;Base.SteelBar],
+                item 2 tags[longstick],
+                item 2 [Base.StoneWheelSmall],
+                item 1 tags[woodhandle],
                 item 1 tags[Bucket],
 				item 2 [Base.SheetRope;Base.Rope], 
             }
