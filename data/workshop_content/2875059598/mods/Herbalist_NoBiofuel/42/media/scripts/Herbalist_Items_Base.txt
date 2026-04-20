@@ -1,22 +1,103 @@
 module Base
 {
-        item HoneyComb
+    item HoneyComb
     {
         DisplayCategory = Food,
-        Weight          = 0.5,
-        ItemType        = base:normal,
+        Weight          = 0.2,
+        ItemType        = base:food,
         DisplayName     = Honey Comb,
         Icon            = HoneycombIcon,
         Tooltip         = Tooltip_Honey,
+        CantBeFrozen    = true,
+        HungerChange    = -8.0,
+        UnhappyChange   = 5,
+        Calories        = 220.0,
+        Carbohydrates   = 62.0,
+        Lipids          = 0.0,
+        Proteins        = 0.0,
+        Tags            = base:boostsflurecovery,
     }
     
     item Sap
     {
         DisplayCategory = Food,
-        Weight          = 0.5,
+        Weight          = 0.3,
         ItemType        = base:normal,
         DisplayName     = Tree Sap,
         Icon            = SapIcon,
         Tooltip         = Tooltip_Sap,
+    }
+    
+    model SaltRocks_Ground
+    {
+        mesh = WorldItems/Marshmallows,
+        texture = WorldItems/Leather,
+        scale = 1.0,
+    }
+    
+    item Saltrock
+    {
+        DisplayCategory  = Material,
+        Weight           = 0.3,
+        ItemType         = base:normal,
+        DisplayName      = Salt Rock,
+        Icon             = SaltRock,
+        WorldStaticModel = SaltRocks_Ground,
+    }
+    
+    craftRecipe MakeAcornCoffeeMug
+    {
+        timedAction = MakeCoffee,
+        time        = 40,
+        OnCreate    = RecipeCodeOnCreate.makeCoffee,
+        category    = Cooking,
+        Tags        = CoffeeMachine,
+        inputs
+        {
+            item 5 [Herbalist.AcornCoffee],
+            item 1 tags[base:coffeemaker] mode:destroy flags[InheritColor;InheritModelVariation] mappers[mugShot],
+            -fluid 0.2 categories[Water] mode:mixture,
+        }
+        outputs
+        {
+            item 1 mapper:mugShot,
+        }
+        itemMapper mugShot
+        {
+            Base.HotDrink        = Base.Mugl,
+            Base.HotDrinkWhite   = Base.MugWhite,
+            Base.HotDrinkSpiffo  = Base.MugSpiffo,
+            Base.HotDrinkClay    = Base.ClayMug,
+            Base.HotDrinkCopper  = Base.CopperCup,
+            Base.HotDrinkGold    = Base.GoldCup,
+            Base.HotDrinkMetal   = Base.MetalCup,
+            Base.HotDrinkSilver  = Base.SilverCup,
+            Base.HotDrinkTumbler = Base.GlassTumbler,
+            default              = Base.HotDrinkWhite,
+        }
+    }
+    
+    craftRecipe MakeAcornCoffeeTeacup
+    {
+        timedAction = MakeCoffee,
+        time        = 20,
+        OnCreate    = RecipeCodeOnCreate.makeCoffee,
+        category    = Cooking,
+        Tags        = CoffeeMachine,
+        inputs
+        {
+            item 5 [Herbalist.AcornCoffee],
+            item 1 [Base.Teacup;Base.CeramicTeacup] mode:destroy flags[InheritColor] mappers[mugShot],
+            -fluid 0.1 categories[Water] mode:mixture,
+        }
+        outputs
+        {
+            item 1 mapper:mugShot,
+        }
+        itemMapper mugShot
+        {
+            Base.HotDrinkTeaCeramic = Base.CeramicTeacup,
+            default                 = Base.HotDrinkTea,
+        }
     }
 }

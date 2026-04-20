@@ -12,7 +12,7 @@ module Base
         Tags          = InHandCraft;Health,
         inputs
         {
-            item 1 tags[MortarPestle] mode:keep,
+            item 1 tags[base:mortarpestle] mode:keep,
             item 5 [Base.BlackSage],
             item 3 [Base.Plantain],
         }
@@ -31,7 +31,7 @@ module Base
         Tags          = InHandCraft;Health,
         inputs
         {
-            item 1 tags[MortarPestle] mode:keep,
+            item 1 tags[base:mortarpestle] mode:keep,
             item 5 [Base.Ginseng],
             item 3 [Base.LemonGrass],
             
@@ -51,14 +51,34 @@ module Base
         Tags          = InHandCraft;Health,
         inputs
         {
-            item 1 tags[MortarPestle] mode:keep,
+            item 1 tags[base:mortarpestle] mode:keep,
             item 5 [Base.CommonMallow],
             item 3 [Base.WildGarlic2],
+            item 1 [5:Base.GingerPickled],
+            item 1 [1:Base.Honey],
             
         }
         outputs
         {
             item 1 Herbalist.CommonMallowCataplasm,
+        }
+    }
+    
+    craftRecipe MakeGingerPickled
+    {
+        timedAction = SliceFood_Surface,
+        time        = 70,
+        Tags        = AnySurfaceCraft;Cooking,
+        category    = Herbalist,
+        xpAward     = Cooking:1,
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:saw;base:crudesaw;base:meatcleaver] mode:keep flags[SharpnessCheck],
+            item 1 [5:Base.GingerRoot] flags[AllowRottenItem],
+        }
+        outputs
+        {
+            item 1 Base.GingerPickled,
         }
     }
     
@@ -75,7 +95,7 @@ module Base
             item 2 [Herbalist.BlackSageCataplasm],
             item 1 tags[Hammer] mode:keep,
             item 1 [Base.Gloves_Surgical] mode:keep,
-            item 1 [Base.ScrapMetal],
+            item 1 [Base.IronChunk],
         }
         outputs
         {
@@ -96,7 +116,7 @@ module Base
             item 2 [Herbalist.GinsengCataplasm],
             item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
             item 1 [Base.Gloves_Surgical] mode:keep,
-            item 1 [Base.ScrapMetal],
+            item 1 [Base.IronChunk],
         }
         outputs
         {
@@ -114,10 +134,10 @@ module Base
         xpAward       = Doctor:5,
         inputs
         {
-            item 1 [Herbalist.CommonMallowCataplasm],
+            item 2 [Herbalist.CommonMallowCataplasm],
             item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
             item 1 [Base.Gloves_Surgical] mode:keep,
-            item 1 [Base.ScrapMetal],
+            item 1 [Base.IronChunk],
         }
         outputs
         {
@@ -135,12 +155,11 @@ module Base
         xpAward       = Cooking:5,
         inputs
         {
-            item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy flags[InheritCondition;IsEmpty],
+            item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy flags[InheritCondition;IsFull],
+            -fluid 0.6 [Water],
             item 1 tags[base:sharpknife;base:meatcleaver] flags[SharpnessCheck] mode:keep,
             item 5 [Base.LemonGrass],
             item 3 [Base.Rosemary],
-            item 1 [*],
-            -fluid 1.0 [Water],
         }
         outputs
         {
@@ -158,11 +177,10 @@ module Base
         xpAward       = Cooking:5,
         inputs
         {
-            item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy flags[InheritCondition;IsEmpty],
+            item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy flags[InheritCondition;IsFull],
+            -fluid 0.6 [Water],
             item 1 tags[base:sharpknife;base:meatcleaver] flags[SharpnessCheck] mode:keep,
             item 5 [Base.CommonMallow],
-            item 1 [*],
-            -fluid 1.0 [Water],
         }
         outputs
         {
@@ -179,12 +197,12 @@ module Base
         category      = Herbalist,
         inputs
         {
-            item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy flags[InheritCondition;IsEmpty],
+            item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy flags[InheritCondition;IsFull],
+            -fluid 0.6 [Water],
             item 3 [Base.Thyme],
             item 3 [Base.Sage],
             item 5 [Base.Oregano],
-            item 1 [*],
-            -fluid 1.0 [Water],
+            
         }
         outputs
         {
@@ -208,7 +226,7 @@ module Base
             item 1 tags[Base:bowl] mode:keep,
             item 1 [Base.BakingTray] mode:destroy,
             item 1 [6:Base.BerryBlack;6:Base.BerryBlue;6:Base.BerryGeneric1;6:Base.BerryGeneric2;6:Base.BerryGeneric3;6:Base.BerryGeneric4;6:Base.BerryGeneric5;6:Base.WinterBerry;6:Base.HollyBerry;6:BeautyBerry] mappers[berryType] flags[InheritFoodAge] mode:destroy,
-            item 1 [Base.Honey],
+            item 1 [5:Base.Honey],
             item 1 [Base.OatsRaw],
         }
         outputs
@@ -240,8 +258,8 @@ module Base
         category      = Herbalist,
         inputs
         {
-            item 3 [Base.HoneyComb],
-            item 1 [Base.PopBottle;Base.WaterBottle;Base.PopBottleRare] flags[IsEmpty],
+            item 1 [24:Base.HoneyComb],
+            item 1 [Base.PopBottle;Base.WaterBottle;Base.PopBottleRare] flags[IsEmpty] mode:destroy,
             item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[SharpnessCheck],
             item 1 [Base.Pot;Base.Bucket;Base.BucketLargeWood;Base.BucketWood;Base.BucketCarved;Base.BucketForged] flags[IsEmpty] mode:keep,
             item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeLight],
@@ -304,10 +322,9 @@ module Base
         xpAward       = Doctor:5,
         inputs
         {
-            item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy flags[InheritCondition;IsEmpty],
+            item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy flags[InheritCondition;IsFull],
+            -fluid 0.6 [Water],
             item 5 [Base.Ginseng],
-            item 1 [*],
-            -fluid 1.0 [Water],
         }
         outputs
         {
@@ -326,7 +343,7 @@ module Base
         inputs
         {
             item 1 tags[Base:bowl] mode:keep,
-            item 1 tags[MortarPestle] mode:keep,
+            item 1 tags[base:mortarpestle] mode:keep,
             item 1 [Base.RippedSheets],
             item 1 [30:Base.MushroomGeneric1;30:Base.MushroomGeneric2;30:Base.MushroomGeneric3;30:Base.MushroomGeneric4;30:Base.MushroomGeneric5;30:Base.MushroomGeneric6;30:Base.MushroomGeneric7;30:Base.MushroomsButton] mappers[mushroomType] flags[IsUncookedFoodItem] mode:destroy,
             item 1 [*],
@@ -389,14 +406,34 @@ module Base
         category      = Herbalist,
         inputs
         {
-            item 1 tags[MortarPestle] mode:keep,
+            item 1 tags[base:mortarpestle] mode:keep,
             item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[SharpnessCheck],
             item 1 [Base.RippedSheets],
-            item 3 [Base.Corn],
+            item 1 [42:Base.Corn] mode:destroy,
         }
         outputs
         {
             item 1 Base.Cornflour2,
+        }
+    }
+    
+    craftRecipe MakeSalt
+    {
+        timedAction   = MixingMortarPestle,
+        time          = 200,
+        Tags          = AnySurfaceCraft;Cooking,
+        skillRequired = Cooking:2,
+        xpAward       = Cooking:3,
+        category      = Herbalist,
+        inputs
+        {
+            item 1 tags[base:mortarpestle] mode:keep,
+            item 1 tags[base:hammer] mode:keep flags[MayDegradeLight],
+            item 2 [Base.Saltrock] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.Salt,
         }
     }
     
@@ -541,7 +578,7 @@ module Base
         inputs
         {
             item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeLight],
-            item 1 tags[MortarPestle] mode:keep,
+            item 1 tags[base:mortarpestle] mode:keep,
             item 1 [Herbalist.ToastedAcorn],
         }
         outputs
@@ -563,13 +600,12 @@ module Base
         category      = Herbalist,
         inputs
         {
-            item 1 [Base.Saucepan;Base.SaucepanCopper] flags[IsEmpty] mode:keep,
+            item 1 [Base.Saucepan;Base.SaucepanCopper] flags[IsFull] mode:keep,
+            -fluid 0.6 [Water],
             item 1 [5:Base.Violets;5:Base.GrapeLeaves;5:Base.Rosehips] mappers[flowerType] mode:destroy,
             item 1 [Base.BakingSoda],
             item 1 [Base.OilVegetable],
             item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeLight],
-            item 1 [*],
-            -fluid 1 [Water],
         }
         outputs
         {
@@ -600,7 +636,8 @@ module Base
             item 1 Base.HerbalistMag,
         }
     }
-       
+    
+    
     craftRecipe MakeVegetableOil
     {
         timedAction = MixingMortarPestle,
@@ -610,12 +647,11 @@ module Base
         xpAward     = Cooking:3,
         inputs
         {
-            item 1 [Base.Saucepan;Base.SaucepanCopper] mode:keep,
+            item 1 [Base.Saucepan;Base.SaucepanCopper] mode:keep flags[IsFull],
+            -fluid 0.3 [Water],
             item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[SharpnessCheck],
             item 1 [Base.PopBottle;Base.WaterBottle;Base.PopBottleRare] flags[IsEmpty],
             item 1 [25:Base.Tomato;25:Base.RedRadish;25:Base.Carrots] mappers[oilType] mode:destroy,
-            item 1 [*],
-            -fluid 0.3 [Water],
         }
         outputs
         {
@@ -641,7 +677,7 @@ module Base
         {
             item 1 [Base.Saucepan;Base.SaucepanCopper;Base.Pan;Base.PanForged] mode:keep,
             item 1 [Base.BakingTray] mode:destroy,
-            item 3 [Base.HoneyComb],
+            item 1 [24:Base.HoneyComb],
             item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeLight],
         }
         outputs
