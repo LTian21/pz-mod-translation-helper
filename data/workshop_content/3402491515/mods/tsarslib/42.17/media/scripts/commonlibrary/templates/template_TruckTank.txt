@@ -1,0 +1,144 @@
+module ATA2
+{
+    item 500Tank1
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	15.0,
+        ItemType = base:normal,
+        Icon	=	CarGastank,
+        VehicleType =   1,
+        MaxCapacity = 500,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 80,
+        MechanicsItem = TRUE,
+    }
+
+    item 500Tank2
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	22.0,
+        ItemType = base:normal,
+        Icon	=	CarGastank,
+        VehicleType =   2,
+        MaxCapacity = 500,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 80,
+        MechanicsItem = TRUE,
+    }
+
+    item 500Tank3
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	14.0,
+        ItemType = base:normal,
+        Icon	=	CarGastank,
+        VehicleType =   3,
+        MaxCapacity = 500,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 80,
+        MechanicsItem = TRUE,
+    }
+
+
+    item 1000Tank1
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	15.0,
+        ItemType = base:normal,
+        Icon	=	CarGastank,
+        VehicleType =   1,
+        MaxCapacity = 1000,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 60,
+        MechanicsItem = TRUE,
+    }
+
+    item 1000Tank2
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	22.0,
+        ItemType = base:normal,
+        Icon	=	CarGastank,
+        VehicleType =   2,
+        MaxCapacity = 1000,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 60,
+        MechanicsItem = TRUE,
+    }
+
+    item 1000Tank3
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	14.0,
+        ItemType = base:normal,
+        Icon	=	CarGastank,
+        VehicleType =   3,
+        MaxCapacity = 1000,
+        ConditionAffectsCapacity = true,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 60,
+        MechanicsItem = TRUE,
+    }
+}
+
+module Base
+{
+	fixing Fix BigTank Welding
+	{
+	   Require = ATA2.500Tank1;ATA2.500Tank2;ATA2.500Tank3;ATA2.1000Tank1;ATA2.1000Tank2;ATA2.1000Tank3,
+	   GlobalItem = Base.BlowTorch=2,
+	   ConditionModifier = 1.2,
+	   Fixer = Base.SheetMetal; MetalWelding=6;Mechanics=7,
+       Fixer = Base.SmallSheetMetal=2; MetalWelding=6;Mechanics=7,
+	}
+
+	template vehicle TruckTank
+	{
+		part 500FuelTank
+		{
+			area = GasTank,
+			category = gastank,
+			itemType = ATA2.500Tank,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline Storage,
+				conditionAffectsCapacity = true,
+			}
+			
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+			}
+		}
+		
+		part 1000FuelTank
+		{
+			area = GasTank,
+			category = gastank,
+			itemType = ATA2.1000Tank,
+			mechanicRequireKey = false,
+			repairMechanic = true,
+			container
+			{
+				test = Vehicles.ContainerAccess.GasTank,
+				contentType = Gasoline Storage,
+				conditionAffectsCapacity = true,
+			}
+			
+			lua
+			{
+				create = Vehicles.Create.GasTank,
+			}
+		}
+	}
+}
+
+

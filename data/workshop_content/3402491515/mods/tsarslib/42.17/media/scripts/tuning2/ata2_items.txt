@@ -1,0 +1,325 @@
+module ATA2
+{
+    imports
+    {
+        Base
+    }
+
+
+    item ATA2ItemContainer
+    {
+        DisplayCategory = Tuning,
+        Weight    =    1.0,
+        ItemType = base:normal,
+        Icon = media/ui/Container_Counter,
+        VehicleType = 1,
+        MaxCapacity = 35,
+        ConditionAffectsCapacity = false,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+    }
+
+
+/* Bullbars
+████──█─█─█───█───████──████─████─███
+█──██─█─█─█───█───█──██─█──█─█──█─█──
+████──█─█─█───█───████──████─████─███
+█──██─█─█─█───█───█──██─█──█─█─█────█
+████──███─███─███─████──█──█─█─█──███
+*/
+    model ATABullbar1World
+    {
+        mesh = WorldItems/ATA_BullbarPolice_1,
+        texture = Vehicles/ATA_Dodge_items,
+        scale = 0.014,
+    }
+    item ATABullbarPoliceItem1 /* Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    10.0,
+        ItemType = base:normal,
+        Icon    =    ATABullbarPoliceItem1,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 25,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATA2.ATABullbar1World,
+    }
+
+    model ATABullbar1World
+    {
+        mesh = WorldItems/ATA_Muscle_items|ATAMustangBullbar1World,
+        texture = Vehicles/ATA_Muscle_items,
+        scale = 0.014,
+    }
+    item ATABullbar1Item /* Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    10.0,
+        ItemType = base:normal,
+        Icon    =    ATABullbar1Item,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 25,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATA2.ATABullbar1World,
+    }
+
+    model ATABullbar2World
+    {
+        mesh = WorldItems/ATA_Muscle_items|ATAMustangBullbar2World,
+        texture = Vehicles/ATA_Muscle_items,
+        scale = 0.014,
+    }
+    item ATABullbar2Item /* Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    10.0,
+        ItemType = base:normal,
+        Icon    =    ATABullbar2Item,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 25,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATA2.ATABullbar2World,
+    }
+
+    model ATABullbar3World
+    {
+        mesh = WorldItems/ATA_Datsun_Mustang_Items|Bullbar_light,
+        texture = WorldItems/ATA_Datsun_details,
+        scale = 0.5,
+    }
+    item ATABullbar3Item /* Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    10.0,
+        ItemType = base:normal,
+        Icon    =    ATABullbar3Item,
+        ConditionMax = 100,
+        ChanceToSpawnDamaged = 25,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATA2.ATABullbar3World,
+    }
+
+    fixing Fix ATABullbar
+    {
+        Require = ATA2.ATABullbarPoliceItem1;ATA2.ATABullbar1Item;ATA2.ATABullbar2Item,
+        GlobalItem = Base.BlowTorch=2,
+        ConditionModifier = 1.2,
+
+        Fixer = Base.MetalBar=2; MetalWelding=3;Mechanics=2,
+        Fixer = Base.MetalPipe=2; MetalWelding=3;Mechanics=2,
+    }
+
+
+/*
+████─█──█─████─███─█──█─███─████
+█──█─██─█─█──█──█──█──█─█───█──█
+████─█─██─█──█──█──████─███─████
+█──█─█──█─█──█──█──█──█─█───█─█─
+█──█─█──█─████──█──█──█─███─█─█─
+*/
+    model ATAFendersWideWorld
+    {
+        mesh = WorldItems/ATA_Muscle_items|ATAMustangFendersWideWorld,
+        texture = Vehicles/ATA_Muscle_items,
+        scale = 0.014,
+    }
+    item ATAFendersWideItem /* Spawn */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    2.0,
+        ItemType = base:normal,
+        Icon    =    ATAFendersWide,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATA2.ATAFendersWideWorld,
+    }
+
+
+    model ATASkirtsSideWorld
+    {
+        mesh = WorldItems/ATA_Muscle_items|ATAMustangSkirtsSideWorld,
+        texture = Vehicles/ATA_Muscle_items,
+        scale = 0.014,
+    }
+    item ATASkirtsSideItem /* Spawn */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    2.0,
+        ItemType = base:normal,
+        Icon    =    ATASkirtsSide,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATA2.ATASkirtsSideWorld,
+    }
+
+    model ATAFrontRoofLightWorld
+    {
+        mesh = WorldItems/ATA_Datsun_Mustang_Items|Roof_light,
+        texture = WorldItems/ATA_Datsun_details,
+        scale = 0.5,
+    }
+    item ATAFrontRoofLightItem /* Spawn */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    2.0,
+        ItemType = base:normal,
+        Icon    =    ATAFrontRoofLightItem,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATA2.ATAFrontRoofLightWorld,
+    }
+
+    model ATASpoilerFrontWorld
+    {
+        mesh = WorldItems/ATA_Muscle_items|ATAMustangSpoilerFrontWorld,
+        texture = Vehicles/ATA_Muscle_items,
+        scale = 0.014,
+    }
+    item ATASpoilerFrontItem /* Spawn + Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    2.0,
+        ItemType = base:normal,
+        Icon    =    ATASpoilerFront,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATA2.ATASpoilerFrontWorld,
+    }
+
+
+    model ATASpoilerRear1World
+    {
+        mesh = WorldItems/ATA_Muscle_items|ATAMustangSpoilerRear1World,
+        texture = Vehicles/ATA_Muscle_items,
+        scale = 0.014,
+    }
+    item ATASpoilerRear1Item /* Spawn + Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    2.0,
+        ItemType = base:normal,
+        Icon    =    ATASpoilerRear1,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATA2.ATASpoilerRear1World,
+    }
+
+
+    model ATASpoilerRear2World
+    {
+        mesh = WorldItems/ATA_Muscle_items|ATAMustangSpoilerRear2World,
+        texture = Vehicles/ATA_Muscle_items,
+        scale = 0.014,
+    }
+    item ATASpoilerRear2Item /* Spawn + Vehicle */
+    {
+        DisplayCategory = Tuning,
+        Weight    =    2.0,
+        ItemType = base:normal,
+        Icon    =    ATASpoilerRear2,
+        ChanceToSpawnDamaged = 25,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+        Tooltip = Tooltip_item_tuning,
+        WorldStaticModel = ATA2.ATASpoilerRear2World,
+    }
+}
+
+module Base
+{
+    craftRecipe Cut_ATABullbar1Item
+    {
+        time = 350,
+        timedAction = BuildLowNoTool,
+        Tags = InHandCraft,
+        needToBeLearn = false,
+        SkillRequired = MetalWelding:2,
+        category = Welding,
+        xpAward = MetalWelding:10,
+        inputs
+        {
+            item 2 [Base.BlowTorch] flags[Prop1],
+            item 1 [ATA2.ATABullbar1Item;ATA2.ATABullbarPoliceItem1],
+        }
+        outputs
+        {
+            item 4 Base.MetalPipe,
+            item 3 Base.UnusableMetal,
+        }
+    }
+
+    craftRecipe Cut_ATABullbar2Item
+    {
+        time = 350,
+        timedAction = BuildLowNoTool,
+        Tags = InHandCraft,
+        needToBeLearn = false,
+        SkillRequired = MetalWelding:2,
+        category = Welding,
+        xpAward = MetalWelding:10,
+        inputs
+        {
+            item 4 [Base.BlowTorch] flags[Prop1],
+            item 1 [ATA2.ATABullbar2Item;ATA2.ATABullbar3Item],
+        }
+        outputs
+        {
+            item 6 Base.MetalPipe,
+            item 3 Base.UnusableMetal,
+        }
+    }
+
+    craftRecipe Cut_ATAFendersWideItem
+    {
+        time = 350,
+        timedAction = BuildLowNoTool,
+        Tags = InHandCraft,
+        needToBeLearn = false,
+        SkillRequired = MetalWelding:2,
+        category = Welding,
+        xpAward = MetalWelding:10,
+        inputs
+        {
+            item 3 [Base.BlowTorch] flags[Prop1],
+            item 1 [ATA2.ATAFendersWideItem;ATA2.ATASkirtsSideItem;ATA2.ATAFrontRoofLightItem;ATA2.ATAFrontRoofLightItem;ATA2.ATASpoilerFrontItem],
+        }
+        outputs
+        {
+            item 4 Base.UnusableMetal,
+        }
+    }
+
+    craftRecipe Cut_ATASpoilerRear1Item
+    {
+        time = 350,
+        timedAction = BuildLowNoTool,
+        Tags = InHandCraft,
+        needToBeLearn = false,
+        SkillRequired = MetalWelding:2,
+        category = Welding,
+        xpAward = MetalWelding:10,
+        inputs
+        {
+            item 3 [Base.BlowTorch] flags[Prop1],
+            item 1 [ATA2.ATASpoilerRear2Item;ATA2.ATASpoilerRear1Item],
+        }
+        outputs
+        {
+            item 5 Base.SmallSheetMetal,
+        }
+    }
+}

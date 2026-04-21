@@ -1,0 +1,232 @@
+module ATA2
+{
+    item TransportCounter /* Craft */
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	10.0,
+        ItemType = base:normal,
+        Tooltip = Tooltip_Compact_Appliance,
+        Icon	=	media/ui/Container_Counter,
+        MaxCapacity = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+    }
+    
+    item TransportCupboard /* Craft */
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight    =    10.0,
+        ItemType = base:normal,
+        Tooltip = Tooltip_Compact_Appliance,
+        Icon    =    media/ui/Container_Cabinet,
+        MaxCapacity = 30,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+    }
+    
+    item TransportDrawer /* Vanilla */
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight    =    10.0,
+        ItemType = base:normal,
+        Tooltip = Tooltip_Compact_Appliance,
+        Icon    =    media/ui/Container_Drawer,
+        MaxCapacity = 10,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+    }
+    
+    item TransportFreezer /* Convert */
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight    =    15.0,
+        ItemType = base:normal,
+        Tooltip = Tooltip_Compact_Appliance,
+        Icon    =    media/ui/Container_Freezer,
+        MaxCapacity = 15,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+    }
+    
+    item TransportFridge /* Convert */
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight    =    15.0,
+        ItemType = base:normal,
+        Tooltip = Tooltip_Compact_Appliance,
+        Icon    =    media/ui/Container_Fridge,
+        MaxCapacity = 15,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+    }
+    
+    item TransportMedicine /* Convert */
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight    =    10.0,
+        ItemType = base:normal,
+        Tooltip = Tooltip_Compact_Appliance,
+        Icon    =    media/ui/Container_Medicine,
+        MaxCapacity = 10,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+    }
+    
+    item TransportMicrowave /* Convert */
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	5.0,
+        ItemType = base:normal,
+        Tooltip = Tooltip_Compact_Appliance,
+        Icon	=	media/ui/Container_Microwave,
+        MaxCapacity = 10,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+    }
+    
+    item TransportOven /* Convert */
+	{
+        DisplayCategory = VehicleMaintenance,
+		Weight	=	15.0,
+		ItemType = base:normal,
+		Tooltip = Tooltip_Compact_Appliance,
+		Icon	=	media/ui/Container_Oven,
+		MaxCapacity = 10,
+		ConditionMax = 100,
+		MechanicsItem = TRUE,
+	}
+
+    item TransportShelve /* Convert */
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight    =    10.0,
+        ItemType = base:normal,
+        Tooltip = Tooltip_Compact_Appliance,
+        Icon    =    media/ui/Container_Shelf,
+        MaxCapacity = 20,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+    }
+    
+    item TransportSeatBoxWooden  /* Spawn */
+    {
+        DisplayCategory = VehicleMaintenance,
+        Weight	=	10.0,
+        ItemType = base:normal,
+        Tooltip = Tooltip_Compact_Appliance,
+        Icon	=	media/ui/Container_seatBoxWooden,
+        MaxCapacity = 15,
+        ConditionMax = 100,
+        MechanicsItem = TRUE,
+    }
+    
+}
+module Base
+{
+    craftRecipe Make_TransportCounter
+    {
+        time = 150,
+        timedAction = UseHandPress,
+        tags          = carpentry;Furniture,
+        SkillRequired = Woodwork:4,
+        category = Woodwork,
+        inputs
+        {
+            item 4 [Base.Plank],
+            item 4 [Base.Nails],
+            item 1 [Base.Doorknob],
+            item 2 [Base.Hinge],
+        }
+        outputs
+        {
+            item 1 ATA2.TransportCounter,
+        }
+    }
+
+    craftRecipe Make_TransportCupboard
+    {
+        time = 150,
+        timedAction = BuildLowNoTool,
+        tags          = carpentry;Furniture,
+        SkillRequired = Woodwork:6,
+        category = Woodwork,
+        inputs
+        {
+            item 7 [Base.Plank],
+            item 7 [Base.Nails],
+            item 2 [Base.Doorknob],
+            item 4 [Base.Hinge],
+        }
+        outputs
+        {
+            item 1 ATA2.TransportCupboard,
+        }
+    }
+    
+    craftRecipe Make_TransportShelve
+    {
+        time = 150,
+        timedAction = BuildLowNoTool,
+        tags          = carpentry;Furniture,
+        SkillRequired = Woodwork:3,
+        category = Woodwork,
+        inputs
+        {
+            item 3 [Base.Plank],
+            item 3 [Base.Nails],
+        }
+        outputs
+        {
+            item 1 ATA2.TransportShelve,
+        }
+    }
+    
+    /* recipe Make_a_compact_fridge
+    {
+        appliances_refrigeration_01_15/MovBlueFridge/MovSteelFridge/MovGreenFridge/MovPlainFridge/MovRedFridge,
+        BlowTorch=2,
+        WeldingRods=5,
+        keep WeldingMask,
+        keep Hammer,
+        keep Saw,
+        
+        Result:TransportFridge,
+        Time:1000.0,
+        Sound:BlowTorch,
+        Category:Welding,
+        SkillRequired:MetalWelding=3;Electricity=2,
+        OnGiveXP:Recipe.OnGiveXP.MetalWelding25,
+        OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+    }
+	
+	recipe Make_a_compact_microwave
+    {
+        MovWhiteMicrowave/MovChromeMicrowave,
+        keep Screwdriver,
+		Result:TransportMicrowave,
+		Time:500.0,
+		Category:Electrical,
+		SkillRequired:Electricity=2,
+		OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+    }
+	*/
+    
+	/* recipe Make_a_compact_stove
+    {
+        MovGreenOven/MovGreyOven/MovRedOven/MovModernOven/MovIndustrialOven,
+		BlowTorch=2,
+		WeldingRods=5,
+        keep WeldingMask,
+		keep Hammer,
+		keep Saw,
+				
+		Result:TransportOven,
+		Time:1000.0,
+		Sound:BlowTorch,
+		Category:Welding,
+		SkillRequired:MetalWelding=3;Electricity=2,
+        OnGiveXP:Recipe.OnGiveXP.MetalWelding25,
+		OnGiveXP:Recipe.OnGiveXP.DismantleElectronics,
+    }
+	*/
+}
