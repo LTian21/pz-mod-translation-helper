@@ -254,14 +254,13 @@ module Base
         time          = 200,
         Tags          = AnySurfaceCraft;Cooking,
         skillRequired = PlantScavenging:2;Cooking:1,
-        xpAward       = Cooking:3,
+        xpAward       = Cooking:5,
         category      = Herbalist,
         inputs
         {
-            item 1 [24:Base.HoneyComb],
-            item 1 [Base.PopBottle;Base.WaterBottle;Base.PopBottleRare] flags[IsEmpty] mode:destroy,
+            item 24 [Base.HoneyComb],
             item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[SharpnessCheck],
-            item 1 [Base.Pot;Base.Bucket;Base.BucketLargeWood;Base.BucketWood;Base.BucketCarved;Base.BucketForged] flags[IsEmpty] mode:keep,
+            item 1 [Base.Pot;Base.Bucket;Base.BucketLargeWood;Base.BucketWood;Base.BucketCarved;Base.BucketForged;Base.PotForged] flags[IsEmpty] mode:keep,
             item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeLight],
             
         }
@@ -295,15 +294,14 @@ module Base
     {
         timedAction = MixingBucket,
         time        = 50,
-        Tags        = AnySurfaceCraft;InHandCraft;Cooking,
+        Tags        = AnySurfaceCraft,
         category    = Herbalist,
         inputs
         {
             item 135 [Herbalist.PotofMapleSyrup],
-            item 3  [Base.PopBottle;Base.WaterBottle;Base.PopBottleRare] mode:destroy flags[IsEmpty],
-            item 1 [Base.RippedSheets],
+            item 1 [Base.Sheet],
             item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop1],
-            item 1 [Base.Funnel] mode:keep,
+
         }
         outputs
         {
@@ -319,7 +317,7 @@ module Base
         SkillRequired = PlantScavenging:2;Doctor:1,
         Tags          = AnySurfaceCraft;Health,
         category      = Herbalist,
-        xpAward       = Doctor:5,
+        xpAward       = Cooking:3,
         inputs
         {
             item 1 [Base.Saucepan;Base.SaucepanCopper] mode:destroy flags[InheritCondition;IsFull],
@@ -372,7 +370,7 @@ module Base
         time          = 200,
         Tags          = AnySurfaceCraft;Cooking,
         skillRequired = PlantScavenging:1;Cooking:2,
-        xpAward       = Cooking:3,
+        xpAward       = Cooking:5,
         category      = Herbalist,
         inputs
         {
@@ -402,7 +400,7 @@ module Base
         time          = 200,
         Tags          = AnySurfaceCraft;Cooking,
         skillRequired = Cooking:2,
-        xpAward       = Cooking:3,
+        xpAward       = Cooking:5,
         category      = Herbalist,
         inputs
         {
@@ -443,7 +441,7 @@ module Base
         time          = 200,
         Tags          = AnySurfaceCraft;Cooking,
         skillRequired = Cooking:2,
-        xpAward       = Cooking:3,
+        xpAward       = Cooking:5,
         category      = Herbalist,
         inputs
         {
@@ -467,7 +465,7 @@ module Base
         NeedToBeLearn = True,
         category      = Herbalist,
         Tags          = AnySurfaceCraft;Cooking,
-        xpAward       = Cooking:3,
+        xpAward       = Cooking:5,
         AutoLearnAny  = Cooking:1,
         inputs
         {
@@ -491,7 +489,7 @@ module Base
         time          = 100,
         Tags          = AnySurfaceCraft;Cooking,
         skillRequired = Cooking:1,
-        xpAward       = Cooking:3,
+        xpAward       = Cooking:10,
         category      = Herbalist,
         inputs
         {
@@ -512,7 +510,7 @@ module Base
         time          = 100,
         Tags          = AnySurfaceCraft;Campfire;Cooking,
         skillRequired = Cooking:3,
-        xpAward       = Cooking:3,
+        xpAward       = Cooking:5,
         category      = Herbalist,
         inputs
         {
@@ -534,7 +532,7 @@ module Base
         time          = 200,
         Tags          = AnySurfaceCraft;Cooking,
         skillRequired = Cooking:4,
-        xpAward       = Cooking:3,
+        xpAward       = Cooking:10,
         category      = Herbalist,
         inputs
         {
@@ -574,6 +572,7 @@ module Base
         time          = 80,
         Tags          = InHandCraft,
         skillRequired = Cooking:1,
+        xpAward       = Cooking:2,
         category      = Herbalist,
         inputs
         {
@@ -637,32 +636,62 @@ module Base
         }
     }
     
-    
-    craftRecipe MakeVegetableOil
+    craftRecipe HandPressSeedsPaste
     {
         timedAction = MixingMortarPestle,
-        time        = 300,
+        time        = 250,
+        tags        = InHandCraft,
+        category    = Herbalist,
+        xpAward     = Cooking:10,
+        inputs
+        {
+            item 1 tags[base:mortarpestle] mode:keep flags[Prop2],
+            item 40 [Base.FlaxSeed;Base.HempSeed;Base.SunflowerSeeds;Base.CornSeed;Base.SoybeansSeed;Base.PumpkinSeed] flags[ItemCount],
+        }
+        outputs
+        {
+            item 1 Base.SeedPaste,
+        }
+    }
+
+    craftRecipe MakePanAvocadoPasteUncooked
+    {
+        timedAction = SliceFood_Surface,
+        time        = 100,
         tags        = AnySurfaceCraft,
         category    = Herbalist,
         xpAward     = Cooking:3,
         inputs
         {
-            item 1 [Base.Saucepan;Base.SaucepanCopper] mode:keep flags[IsFull],
-            -fluid 0.3 [Water],
-            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[SharpnessCheck],
-            item 1 [Base.PopBottle;Base.WaterBottle;Base.PopBottleRare] flags[IsEmpty],
-            item 1 [25:Base.Tomato;25:Base.RedRadish;25:Base.Carrots] mappers[oilType] mode:destroy,
+            item 1 [Base.Pan;Base.PanForged] mode:destroy flags[IsEmpty],
+            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[SharpnessCheck;Prop1],
+            item 10 [Base.Avocado] flags[ItemCount;Prop2;AllowRottenItem],
+            
         }
         outputs
         {
-            item 1 mapper:oilType,
+            item 1 Herbalist.PanAvocadoPasteUncooked,
         }
-        itemMapper oilType
+        
+    }
+
+    craftRecipe MakeAvocadoOil
+    {
+        timedAction = Making,
+        time        = 150,
+        tags        = AnySurfaceCraft,
+        category    = Herbalist,
+        xpAward     = Cooking:5,
+        inputs
         {
-            Base.OilVegetable = Base.Tomato,
-            Base.OilVegetable = Base.RedRadish,
-            Base.OilVegetable = Base.Carrots,
+            item 1 [Herbalist.AvocadoPaste],
+            item 1 [Base.Sheet] mode:keep,
         }
+        outputs
+        {
+            item 1 Base.OilVegetable,
+        }
+        
     }
     
     craftRecipe MakeHoneySugarTrayUncooked
@@ -677,7 +706,7 @@ module Base
         {
             item 1 [Base.Saucepan;Base.SaucepanCopper;Base.Pan;Base.PanForged] mode:keep,
             item 1 [Base.BakingTray] mode:destroy,
-            item 1 [24:Base.HoneyComb],
+            item 24 [Base.HoneyComb],
             item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeLight],
         }
         outputs
