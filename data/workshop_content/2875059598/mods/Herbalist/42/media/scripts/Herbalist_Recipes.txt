@@ -54,7 +54,7 @@ module Base
             item 1 tags[base:mortarpestle] mode:keep,
             item 5 [Base.CommonMallow],
             item 3 [Base.WildGarlic2],
-            item 1 [5:Base.GingerPickled],
+            item 1 [5:Base.GingerRoot],
             item 1 [1:Base.Honey],
             
         }
@@ -75,6 +75,7 @@ module Base
         {
             item 1 tags[base:sharpknife;base:saw;base:crudesaw;base:meatcleaver] mode:keep flags[SharpnessCheck],
             item 1 [5:Base.GingerRoot] flags[AllowRottenItem],
+            item 1 tags[base:vinegar],
         }
         outputs
         {
@@ -94,7 +95,7 @@ module Base
         {
             item 2 [Herbalist.BlackSageCataplasm],
             item 1 tags[Hammer] mode:keep,
-            item 1 [Base.Gloves_Surgical] mode:keep,
+            item 1 [Base.Gloves_Surgical;Base.Gloves_Dish] mode:keep,
             item 1 [Base.IronChunk],
         }
         outputs
@@ -115,7 +116,7 @@ module Base
         {
             item 2 [Herbalist.GinsengCataplasm],
             item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
-            item 1 [Base.Gloves_Surgical] mode:keep,
+            item 1 [Base.Gloves_Surgical;Base.Gloves_Dish] mode:keep,
             item 1 [Base.IronChunk],
         }
         outputs
@@ -136,7 +137,7 @@ module Base
         {
             item 2 [Herbalist.CommonMallowCataplasm],
             item 1 tags[Hammer] mode:keep flags[MayDegradeLight],
-            item 1 [Base.Gloves_Surgical] mode:keep,
+            item 1 [Base.Gloves_Surgical;Base.Gloves_Dish] mode:keep,
             item 1 [Base.IronChunk],
         }
         outputs
@@ -301,7 +302,7 @@ module Base
             item 135 [Herbalist.PotofMapleSyrup],
             item 1 [Base.Sheet],
             item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop1],
-
+            
         }
         outputs
         {
@@ -448,7 +449,7 @@ module Base
             item 1 [Base.Saucepan;Base.SaucepanCopper;Base.Pan;Base.PanForged] flags[IsEmpty] mode:keep,
             item 1 tags[Base:bowl] mode:destroy,
             item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[SharpnessCheck],
-            item 1 [Base.OilVegetable],
+            item 1 tags[base:oil],
             item 3 [Base.Potato] flags[InheritFoodAge] mode:destroy,
             item 1 tags[Salt],
         }
@@ -471,9 +472,9 @@ module Base
         {
             item 1 tags[MixingUtensil] mode:keep flags[MayDegradeLight],
             item 1 tags[Base:bowl] mode:keep,
-            item 1 [Base.OilVegetable],
+            item 1 tags[base:oil],
             item 1 tags[Flour],
-            item 1 [Base.Salt],
+            item 1 tags[base:salt],
             item 1 [*],
             -fluid 1.0 [Water],
         }
@@ -517,7 +518,7 @@ module Base
             item 1 [Base.Saucepan;Base.SaucepanCopper;Base.Pan;Base.PanForged] flags[IsEmpty] mode:keep,
             item 1 tags[Fork;Spoon] mode:keep flags[MayDegradeLight],
             item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[SharpnessCheck],
-            item 1 [Base.OilVegetable],
+            item 1 tags[base:oil],
             item 1 [Base.Tortilla],
         }
         outputs
@@ -603,7 +604,7 @@ module Base
             -fluid 0.6 [Water],
             item 1 [5:Base.Violets;5:Base.GrapeLeaves;5:Base.Rosehips] mappers[flowerType] mode:destroy,
             item 1 [Base.BakingSoda],
-            item 1 [Base.OilVegetable],
+            item 1 tags[base:oil],
             item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeLight],
         }
         outputs
@@ -653,7 +654,7 @@ module Base
             item 1 Base.SeedPaste,
         }
     }
-
+    
     craftRecipe MakePanAvocadoPasteUncooked
     {
         timedAction = SliceFood_Surface,
@@ -674,7 +675,7 @@ module Base
         }
         
     }
-
+    
     craftRecipe MakeAvocadoOil
     {
         timedAction = Making,
@@ -732,6 +733,88 @@ module Base
         {
             item 1 Base.SugarBrown,
             item 1 Base.BakingTray,
+        }
+    }
+    
+    craftRecipe MakeWoodglueUncooked
+    {
+        timedAction   = MixingBowl,
+        time          = 100,
+        SkillRequired = Cooking:2,
+        Tags          = AnySurfaceCraft,
+        category      = Herbalist,
+        xpAward       = Cooking:5,
+        inputs
+        {
+            item 1 [Base.Saucepan;Base.SaucepanCopper] flags[IsFull] mode:destroy,
+            -fluid 0.6 [Water],
+            item 1 tags[base:mixingutensil] mode:keep,
+            item 10 tags[base:flour],
+            item 1 tags[base:salt],
+        }
+        outputs
+        {
+            item 1 Herbalist.WoodglueUncooked,
+        }
+    }
+    
+    craftRecipe MakeWoodglue
+    {
+        timedAction = Making,
+        time        = 50,
+        Tags        = InHandCraft,
+        category    = Herbalist,
+        inputs
+        {
+            item 1 [Herbalist.WoodglueCooked] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Base.Woodglue,
+            item 1 Base.Saucepan,
+        }
+    }
+    
+    craftRecipe CarveWoodBowl
+    {
+        time          = 100,
+        Tags          = InHandCraft,
+        timedAction   = SawLogs,
+        category      = Herbalist,
+        SkillRequired = Carving:1,
+        xpAward       = Carving:10,
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[MayDegradeLight;IsNotDull],
+            item 1 tags[base:saw;base:metalsaw] mode:keep flags[MayDegradeLight;Prop1],
+            item 1 tags[base:log] flags[Prop2],
+            
+        }
+        outputs
+        {
+            item 3 Base.Bowl,
+        }
+    }
+
+    craftRecipe MakeImprovisedTape
+    {
+        time          = 150,
+        Tags          = AnySurfaceCraft,
+        timedAction   = Making,
+        category      = Herbalist,
+        SkillRequired = Maintenance:2,
+        xpAward       = Maintenance:10,
+        inputs
+        {
+            item 1 tags[base:sharpknife] mode:keep flags[MayDegradeLight;IsNotDull],
+            item 1 tags[base:garbagebag] mode:destroy,
+            item 2 [Base.BurlapPiece] mode:destroy,
+            item 1 tags[base:glue],
+            
+        }
+        outputs
+        {
+            item 1 Herbalist.ImprovisedTape,
         }
     }
     
