@@ -1,8 +1,6 @@
 module Base
 {
-
-
-    item Primitive_ArrowShard
+	item Primitive_ArrowShard
     {
         DisplayCategory = Material,
         ItemType = base:normal,
@@ -15,9 +13,7 @@ module Base
         ConditionMax = 10,
         Sharpness = 1.0,
     }
-
-
-    item FletchedChickenFeather
+	item FletchedChickenFeather
     {
         DisplayCategory = AnimalPart,
         Weight = 0.001,
@@ -27,56 +23,42 @@ module Base
         Tags = Feather,
         WorldStaticModel = Chicken_Feather,
     }
-
-    item Primitive_DrawString
-    {
-        DisplayCategory = Material,
-		DisplayName	=	[Primitive] Draw String,
-		ItemType = base:normal,
-        Icon = Dogbane,
-        Weight = 0.4,
-        WorldStaticModel = Dogbane_Ground,
-        Tooltip = Tooltip_item_Dogbane,
-    }
-
-
-    item WoodShaft_Arrow
+	item Arrow_fly
     {
         DisplayCategory = Ammo,
         ItemType = base:normal,
-        Weight = 0.08,
-        DisplayName	=	Arrow Wood Shaft,
+        Weight = 0.01,
+        DisplayName = Arrow Flight Visual,
         Icon = PrimitiveArrow,
-        count = 12,
-		AttachmentType = REX5,
-        MetalValue = 1.0,
-        WorldStaticModel = REX5_MD_BOW_ARROW,
-        StaticModel = QUIVER_ARROW,
+        WorldStaticModel = Arrow_fly,
+        StaticModel = Arrow_fly,
         Tags = base:ammo,
     }
-
-
-
-	item Primitive_Bow
+	item Bow_hunting
 	{
-		DisplayName = [Primitive] Hunting Bow,
+		DisplayName = Hunting Bow,
 		DisplayCategory = Weapon,
 		ItemType = base:weapon,
-		Weight = 2,
-		Icon = Hunter_Bow,
-		ProjectileCount = 1,
+		Weight = 1.6,
+		Icon = Bow_hunting,
+		ProjectileCount = 0,
 		AimReleaseSound = M9AimRelease,
-		ProjectileSpread = 1.1,
-		ProjectileWeightCenter = 1.6,
+		ProjectileSpread = 0,
+		ProjectileWeightCenter = 0,
 		MinSightRange = 1,
-		MaxSightRange = 127,
-		AimingPerkCritModifier = 4,
-		AimingPerkHitChanceModifier = 33,
+		MaxSightRange = 30,
+		AimingPerkCritModifier = 2,
+		AimingPerkHitChanceModifier = 0,
 		AimingPerkMinAngleModifier = 0.05,
-		AimingPerkRangeModifier = 15,
+		AimingPerkRangeModifier = 3,
 		AimingTime = 22,
-		AmmoBox = Bullets9mmBox,
-        AmmoType = archerynexus:woodshaft_arrow,
+		AmmoBox = arrow_wood_pack,
+        AmmoType = ggs:arrow_wood,
+        ArrowAmmoItemType = Base.arrow_wood,
+        TensionPower = 5,
+        ArrowDropStartRange = 14.0,
+        ArrowDropPerTile = 0.065,
+        ArrowGroundImpactEpsilon = 0.04,
 		AttachmentType = REX5BowBack,
 		BreakSound = MagnumBreak,
 		BringToBearSound = CrossbowLoad,
@@ -85,9 +67,9 @@ module Base
 		ConditionLowerChanceOneIn = 42,
 		ConditionMax = 13,
         FireMode = REX5Single,
-		CritDmgMultiplier = 3,
-		CriticalChance = 40,
-		DoorDamage = 5,
+		CritDmgMultiplier = 0,
+		CriticalChance = 0,
+		DoorDamage = 0,
 		DropSound = BowNull,
 		EjectAmmoSound = BowNull,
 		EjectAmmoStartSound = BowNull,
@@ -96,30 +78,30 @@ module Base
 		HaveChamber = false,
         InsertAllBulletsReload = true,
         needtobeclosedoncereload = true,
-		HitChance = 32,
+		HitChance = 0,
 		HitSound = BowNull,
 		ImpactSound = BowNull,
 		InsertAmmoSound = BowReload,
 		InsertAmmoStartSound = BowNull,
 		InsertAmmoStopSound = BowNull,
-		IsAimedFirearm = true,
+		IsAimedFirearm = false,
 		JamGunChance = 0,
-		KnockBackOnNoDeath = true,
-		KnockdownMod = 2,
+		KnockBackOnNoDeath = false,
+		KnockdownMod = 0,
 		IsAimedHandWeapon	=	true,
 		MaxAmmo = 1,
-		MaxDamage = 8.6,
-		MaxHitCount = 1,
-		MaxRange = 55,
+		MaxDamage = 0.0,
+		MaxHitCount = 0,
+		MaxRange = 10,
 		MetalValue = 30,
 		MinAngle=0.965,
-		MinDamage = 1,
+		MinDamage = 0.0,
 		MinRange = 0.61,
 		MinimumSwingTime = 1,
 		MultipleHitConditionAffected = false,
 		NPCSoundBoost = 1.5,
-		ProjectileCount = 1,
-		PushBackMod = 0.3,
+		ProjectileCount = 0,
+		PushBackMod = 0.0,
         RackAfterShoot = false,
         ClipSize = 0,
 		Ranged = true,
@@ -134,7 +116,7 @@ module Base
 		SplatBloodOnNoDeath = true,
 		SplatNumber = 3,
 		SplatSize = 3,
-		StopPower = 12,
+		StopPower = 0,
 		SubCategory = Firearm,
 		SwingAmountBeforeImpact = 2,
 		SwingAnim = Rifle,
@@ -144,29 +126,78 @@ module Base
 		UnequipSound = BowNull,
 		UseEndurance = false,
 		WeaponReloadType = REX5,
-		WeaponSprite = Primitive_Bow,
-		Tags = base:hasmetal;base:firearm,
+		WeaponSprite = Bow_hunting,
+        ModelWeaponPart = Base.AMMO_arrow_wood_part Base.AMMO_arrow_wood_part AMMO AMMO,
+        ModelWeaponPart = Base.AMMO_arrow_metal_part Base.AMMO_arrow_metal_part AMMO AMMO,
+        ModelWeaponPart = Base.AMMO_arrow_carbon_part Base.AMMO_arrow_carbon_part AMMO AMMO,
+		Tags = HasMetal;Firearm,
+		RangeFalloff = TRUE,
 	}
-	item Sport_Bow
+	model Bow_hunting
+    {
+        mesh = weapons/firearms/Ranged_Weaponry_Misc|Bow_hunting,
+        texture = weapons/firearms/Bow_hunting_tex,
+
+        attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment muzzle
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}  
+    }
+	model Bow_hunting_ready
+    {
+        mesh = weapons/firearms/Ranged_Weaponry_Misc|Bow_hunting_ready,
+        texture = weapons/firearms/Bow_hunting_tex,
+
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment muzzle
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment AMMO
+        {
+            offset = 0 0 0.0000,
+            rotate = 0.0000 0.0000 0,
+        }
+    }
+	item Bow_crafted
 	{
-		DisplayName = [Primitive] Sport Bow,
+		DisplayName = crafted Bow,
 		DisplayCategory = Weapon,
 		ItemType = base:weapon,
-		Weight = 2,
-		Icon = Hunter_Bow,
-		ProjectileCount = 1,
+		Weight = 1.3,
+		Icon = Bow_crafted,
+		ProjectileCount = 0,
 		AimReleaseSound = M9AimRelease,
-		ProjectileSpread = 1.1,
-		ProjectileWeightCenter = 1.6,
+		ProjectileSpread = 0,
+		ProjectileWeightCenter = 0,
 		MinSightRange = 1,
-		MaxSightRange = 127,
-		AimingPerkCritModifier = 4,
-		AimingPerkHitChanceModifier = 33,
+		MaxSightRange = 30,
+		AimingPerkCritModifier = 2,
+		AimingPerkHitChanceModifier = 0,
 		AimingPerkMinAngleModifier = 0.05,
-		AimingPerkRangeModifier = 15,
+		AimingPerkRangeModifier = 3,
 		AimingTime = 22,
-		AmmoBox = Bullets9mmBox,
-        AmmoType = archerynexus:woodshaft_arrow,
+		AmmoBox = arrow_wood_pack,
+        AmmoType = ggs:arrow_wood,
+        ArrowAmmoItemType = Base.arrow_wood,
+        TensionPower = 5,
+        ArrowDropStartRange = 14.0,
+        ArrowDropPerTile = 0.065,
+        ArrowGroundImpactEpsilon = 0.04,
 		AttachmentType = REX5BowBack,
 		BreakSound = MagnumBreak,
 		BringToBearSound = CrossbowLoad,
@@ -175,9 +206,9 @@ module Base
 		ConditionLowerChanceOneIn = 42,
 		ConditionMax = 13,
         FireMode = REX5Single,
-		CritDmgMultiplier = 3,
-		CriticalChance = 40,
-		DoorDamage = 5,
+		CritDmgMultiplier = 0,
+		CriticalChance = 0,
+		DoorDamage = 0,
 		DropSound = BowNull,
 		EjectAmmoSound = BowNull,
 		EjectAmmoStartSound = BowNull,
@@ -186,30 +217,30 @@ module Base
 		HaveChamber = false,
         InsertAllBulletsReload = true,
         needtobeclosedoncereload = true,
-		HitChance = 32,
+		HitChance = 0,
 		HitSound = BowNull,
 		ImpactSound = BowNull,
 		InsertAmmoSound = BowReload,
 		InsertAmmoStartSound = BowNull,
 		InsertAmmoStopSound = BowNull,
-		IsAimedFirearm = true,
+		IsAimedFirearm = false,
 		JamGunChance = 0,
-		KnockBackOnNoDeath = true,
-		KnockdownMod = 2,
+		KnockBackOnNoDeath = false,
+		KnockdownMod = 0,
 		IsAimedHandWeapon	=	true,
 		MaxAmmo = 1,
-		MaxDamage = 8.6,
-		MaxHitCount = 1,
-		MaxRange = 55,
+		MaxDamage = 0.0,
+		MaxHitCount = 0,
+		MaxRange = 10,
 		MetalValue = 30,
 		MinAngle=0.965,
-		MinDamage = 1,
+		MinDamage = 0.0,
 		MinRange = 0.61,
 		MinimumSwingTime = 1,
 		MultipleHitConditionAffected = false,
 		NPCSoundBoost = 1.5,
-		ProjectileCount = 1,
-		PushBackMod = 0.3,
+		ProjectileCount = 0,
+		PushBackMod = 0.0,
         RackAfterShoot = false,
         ClipSize = 0,
 		Ranged = true,
@@ -224,7 +255,7 @@ module Base
 		SplatBloodOnNoDeath = true,
 		SplatNumber = 3,
 		SplatSize = 3,
-		StopPower = 12,
+		StopPower = 0,
 		SubCategory = Firearm,
 		SwingAmountBeforeImpact = 2,
 		SwingAnim = Rifle,
@@ -234,58 +265,474 @@ module Base
 		UnequipSound = BowNull,
 		UseEndurance = false,
 		WeaponReloadType = REX5,
-		WeaponSprite = Sport_Bow,
-		Tags = base:hasmetal;base:firearm,
+		WeaponSprite = Bow_crafted,
+        ModelWeaponPart = Base.AMMO_arrow_wood_part Base.AMMO_arrow_wood_part AMMO AMMO,
+        ModelWeaponPart = Base.AMMO_arrow_metal_part Base.AMMO_arrow_metal_part AMMO AMMO,
+        ModelWeaponPart = Base.AMMO_arrow_carbon_part Base.AMMO_arrow_carbon_part AMMO AMMO,
+		Tags = HasMetal;Firearm,
+		RangeFalloff = TRUE,
 	}
-	model Sport_Bow
-	{
-		cullFace = None,
-		mesh = weapons/firearms/Ranged_Weaponry_Misc|Sport_M_Bow,
-		texture = weapons/firearms/Sport_Bow_tex,
-		attachment world
+	model Bow_crafted
+    {
+        mesh = weapons/firearms/Ranged_Weaponry_Misc|Bow_crafted,
+        texture = weapons/firearms/Bow_crafted_tex,
+
+        attachment world
 		{
 			offset = 0.0000 0.0000 0.0000,
 			rotate = 0.0000 0.0000 0.0000,
 		}
+
 		attachment muzzle
 		{
 			offset = 0.0000 0.0000 0.0000,
 			rotate = 0.0000 0.0000 0.0000,
-		}
-	}
-	model Sport_MD_Bow
+		}  
+    }
+	model Bow_crafted_ready
+    {
+        mesh = weapons/firearms/Ranged_Weaponry_Misc|Bow_crafted_ready,
+        texture = weapons/firearms/Bow_crafted_tex,
+
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment muzzle
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment AMMO
+        {
+            offset = 0 0 0.0000,
+            rotate = 0.0000 0.0000 0,
+        }
+    }
+	item Bow_compbound
 	{
-		mesh = weapons/firearms/Ranged_Weaponry_Misc|Sport_MD_Bow,
-		cullFace = None,
-		texture = weapons/firearms/Sport_Bow_tex,
-		attachment world
+		DisplayName = Hunting Bow,
+		DisplayCategory = Weapon,
+		ItemType = base:weapon,
+		Weight = 1.8,
+		Icon = Bow_compbound,
+		ProjectileCount = 0,
+		AimReleaseSound = M9AimRelease,
+		ProjectileSpread = 0,
+		ProjectileWeightCenter = 0,
+		MinSightRange = 1,
+		MaxSightRange = 30,
+		AimingPerkCritModifier = 2,
+		AimingPerkHitChanceModifier = 0,
+		AimingPerkMinAngleModifier = 0.05,
+		AimingPerkRangeModifier = 3,
+		AimingTime = 22,
+		AmmoBox = arrow_wood_pack,
+        AmmoType = ggs:arrow_wood,
+        ArrowAmmoItemType = Base.arrow_wood,
+        TensionPower = 5,
+        ArrowDropStartRange = 14.0,
+        ArrowDropPerTile = 0.065,
+        ArrowGroundImpactEpsilon = 0.04,
+		AttachmentType = REX5BowBack,
+		BreakSound = MagnumBreak,
+		BringToBearSound = CrossbowLoad,
+		ClickSound = BowNull,
+		ClipSize = 0,
+		ConditionLowerChanceOneIn = 42,
+		ConditionMax = 13,
+        FireMode = REX5Single,
+		CritDmgMultiplier = 0,
+		CriticalChance = 0,
+		DoorDamage = 0,
+		DropSound = BowNull,
+		EjectAmmoSound = BowNull,
+		EjectAmmoStartSound = BowNull,
+		EjectAmmoStopSound = BowNull,
+		EquipSound = BowNull,
+		HaveChamber = false,
+        InsertAllBulletsReload = true,
+        needtobeclosedoncereload = true,
+		HitChance = 0,
+		HitSound = BowNull,
+		ImpactSound = BowNull,
+		InsertAmmoSound = BowReload,
+		InsertAmmoStartSound = BowNull,
+		InsertAmmoStopSound = BowNull,
+		IsAimedFirearm = false,
+		JamGunChance = 0,
+		KnockBackOnNoDeath = false,
+		KnockdownMod = 0,
+		IsAimedHandWeapon	=	true,
+		MaxAmmo = 1,
+		MaxDamage = 0.0,
+		MaxHitCount = 0,
+		MaxRange = 10,
+		MetalValue = 30,
+		MinAngle=0.965,
+		MinDamage = 0.0,
+		MinRange = 0.61,
+		MinimumSwingTime = 1,
+		MultipleHitConditionAffected = false,
+		NPCSoundBoost = 1.5,
+		ProjectileCount = 0,
+		PushBackMod = 0.0,
+        RackAfterShoot = false,
+        ClipSize = 0,
+		Ranged = true,
+		RecoilDelay = 45,
+		ReloadTime = 56,
+		RunAnim = Run_Weapon2,
+		ShareDamage = false,
+		ShellFallSound = BowNull,
+		SoundGain = 1.5,
+		SoundRadius = 1,
+		SoundVolume = 75,
+		SplatBloodOnNoDeath = true,
+		SplatNumber = 3,
+		SplatSize = 3,
+		StopPower = 0,
+		SubCategory = Firearm,
+		SwingAmountBeforeImpact = 2,
+		SwingAnim = Rifle,
+		SwingSound = CrossbowFire,
+		SwingTime = 1,
+		AimingMod = 45,
+		UnequipSound = BowNull,
+		UseEndurance = false,
+		WeaponReloadType = REX5,
+		WeaponSprite = Bow_compbound,
+        ModelWeaponPart = Base.AMMO_arrow_wood_part Base.AMMO_arrow_wood_part AMMO AMMO,
+        ModelWeaponPart = Base.AMMO_arrow_metal_part Base.AMMO_arrow_metal_part AMMO AMMO,
+        ModelWeaponPart = Base.AMMO_arrow_carbon_part Base.AMMO_arrow_carbon_part AMMO AMMO,
+		Tags = HasMetal;Firearm,
+		RangeFalloff = TRUE,
+	}
+	model Bow_compbound
+    {
+        mesh = weapons/firearms/Ranged_Weaponry_Misc|Bow_compbound,
+        texture = weapons/firearms/Bow_compbound_tex,
+
+        attachment world
 		{
 			offset = 0.0000 0.0000 0.0000,
 			rotate = 0.0000 0.0000 0.0000,
 		}
+
 		attachment muzzle
 		{
 			offset = 0.0000 0.0000 0.0000,
 			rotate = 0.0000 0.0000 0.0000,
-		}
-		attachment Bipod_HandleGrip
+		}  
+    }
+	model Bow_compbound_ready
+    {
+        mesh = weapons/firearms/Ranged_Weaponry_Misc|Bow_compbound_ready,
+        texture = weapons/firearms/Bow_compbound_tex,
+
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment muzzle
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment AMMO
+        {
+            offset = 0 0 0.0000,
+            rotate = 0.0000 0.0000 0,
+        }
+    }
+	item Bow_compbound2
+	{
+		DisplayName = Hunting Bow,
+		DisplayCategory = Weapon,
+		ItemType = base:weapon,
+		Weight = 1.9,
+		Icon = Bow_compbound2,
+		ProjectileCount = 0,
+		AimReleaseSound = M9AimRelease,
+		ProjectileSpread = 0,
+		ProjectileWeightCenter = 0,
+		MinSightRange = 1,
+		MaxSightRange = 30,
+		AimingPerkCritModifier = 2,
+		AimingPerkHitChanceModifier = 0,
+		AimingPerkMinAngleModifier = 0.05,
+		AimingPerkRangeModifier = 3,
+		AimingTime = 22,
+		AmmoBox = arrow_wood_pack,
+        AmmoType = ggs:arrow_wood,
+        ArrowAmmoItemType = Base.arrow_wood,
+        TensionPower = 5,
+        ArrowDropStartRange = 14.0,
+        ArrowDropPerTile = 0.065,
+        ArrowGroundImpactEpsilon = 0.04,
+		AttachmentType = REX5BowBack,
+		BreakSound = MagnumBreak,
+		BringToBearSound = CrossbowLoad,
+		ClickSound = BowNull,
+		ClipSize = 0,
+		ConditionLowerChanceOneIn = 42,
+		ConditionMax = 13,
+        FireMode = REX5Single,
+		CritDmgMultiplier = 0,
+		CriticalChance = 0,
+		DoorDamage = 0,
+		DropSound = BowNull,
+		EjectAmmoSound = BowNull,
+		EjectAmmoStartSound = BowNull,
+		EjectAmmoStopSound = BowNull,
+		EquipSound = BowNull,
+		HaveChamber = false,
+        InsertAllBulletsReload = true,
+        needtobeclosedoncereload = true,
+		HitChance = 0,
+		HitSound = BowNull,
+		ImpactSound = BowNull,
+		InsertAmmoSound = BowReload,
+		InsertAmmoStartSound = BowNull,
+		InsertAmmoStopSound = BowNull,
+		IsAimedFirearm = false,
+		JamGunChance = 0,
+		KnockBackOnNoDeath = false,
+		KnockdownMod = 0,
+		IsAimedHandWeapon	=	true,
+		MaxAmmo = 1,
+		MaxDamage = 0.0,
+		MaxHitCount = 0,
+		MaxRange = 10,
+		MetalValue = 30,
+		MinAngle=0.965,
+		MinDamage = 0.0,
+		MinRange = 0.61,
+		MinimumSwingTime = 1,
+		MultipleHitConditionAffected = false,
+		NPCSoundBoost = 1.5,
+		ProjectileCount = 0,
+		PushBackMod = 0.0,
+        RackAfterShoot = false,
+        ClipSize = 0,
+		Ranged = true,
+		RecoilDelay = 45,
+		ReloadTime = 56,
+		RunAnim = Run_Weapon2,
+		ShareDamage = false,
+		ShellFallSound = BowNull,
+		SoundGain = 1.5,
+		SoundRadius = 1,
+		SoundVolume = 75,
+		SplatBloodOnNoDeath = true,
+		SplatNumber = 3,
+		SplatSize = 3,
+		StopPower = 0,
+		SubCategory = Firearm,
+		SwingAmountBeforeImpact = 2,
+		SwingAnim = Rifle,
+		SwingSound = CrossbowFire,
+		SwingTime = 1,
+		AimingMod = 45,
+		UnequipSound = BowNull,
+		UseEndurance = false,
+		WeaponReloadType = REX5,
+		WeaponSprite = Bow_compbound2,
+        ModelWeaponPart = Base.AMMO_arrow_wood_part Base.AMMO_arrow_wood_part AMMO AMMO,
+        ModelWeaponPart = Base.AMMO_arrow_metal_part Base.AMMO_arrow_metal_part AMMO AMMO,
+        ModelWeaponPart = Base.AMMO_arrow_carbon_part Base.AMMO_arrow_carbon_part AMMO AMMO,
+		Tags = HasMetal;Firearm,
+		RangeFalloff = TRUE,
+	}
+	model Bow_compbound2
+    {
+        mesh = weapons/firearms/Ranged_Weaponry_Misc|Bow_compbound2,
+        texture = weapons/firearms/Bow_compbound2_tex,
+
+        attachment world
 		{
 			offset = 0.0000 0.0000 0.0000,
 			rotate = 0.0000 0.0000 0.0000,
 		}
+
+		attachment muzzle
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}  
+    }
+	model Bow_compbound2_ready
+    {
+        mesh = weapons/firearms/Ranged_Weaponry_Misc|Bow_compbound2_ready,
+        texture = weapons/firearms/Bow_compbound2_tex,
+
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment muzzle
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment AMMO
+        {
+            offset = 0 0 0.0000,
+            rotate = 0.0000 0.0000 0,
+        }
+    }
+    item Bow_medieval
+	{
+		DisplayName = Hunting Bow,
+		DisplayCategory = Weapon,
+		ItemType = base:weapon,
+		Weight = 1.8,
+		Icon = Bow_medieval,
+		ProjectileCount = 0,
+		AimReleaseSound = M9AimRelease,
+		ProjectileSpread = 0,
+		ProjectileWeightCenter = 0,
+		MinSightRange = 1,
+		MaxSightRange = 30,
+		AimingPerkCritModifier = 2,
+		AimingPerkHitChanceModifier = 0,
+		AimingPerkMinAngleModifier = 0.05,
+		AimingPerkRangeModifier = 3,
+		AimingTime = 22,
+		AmmoBox = arrow_wood_pack,
+        AmmoType = ggs:arrow_wood,
+        ArrowAmmoItemType = Base.arrow_wood,
+        TensionPower = 5,
+        ArrowDropStartRange = 14.0,
+        ArrowDropPerTile = 0.065,
+        ArrowGroundImpactEpsilon = 0.04,
+		AttachmentType = REX5BowBack,
+		BreakSound = MagnumBreak,
+		BringToBearSound = CrossbowLoad,
+		ClickSound = BowNull,
+		ClipSize = 0,
+		ConditionLowerChanceOneIn = 42,
+		ConditionMax = 13,
+        FireMode = REX5Single,
+		CritDmgMultiplier = 0,
+		CriticalChance = 0,
+		DoorDamage = 0,
+		DropSound = BowNull,
+		EjectAmmoSound = BowNull,
+		EjectAmmoStartSound = BowNull,
+		EjectAmmoStopSound = BowNull,
+		EquipSound = BowNull,
+		HaveChamber = false,
+        InsertAllBulletsReload = true,
+        needtobeclosedoncereload = true,
+		HitChance = 0,
+		HitSound = BowNull,
+		ImpactSound = BowNull,
+		InsertAmmoSound = BowReload,
+		InsertAmmoStartSound = BowNull,
+		InsertAmmoStopSound = BowNull,
+		IsAimedFirearm = false,
+		JamGunChance = 0,
+		KnockBackOnNoDeath = false,
+		KnockdownMod = 0,
+		IsAimedHandWeapon	=	true,
+		MaxAmmo = 1,
+		MaxDamage = 0.0,
+		MaxHitCount = 0,
+		MaxRange = 10,
+		MetalValue = 30,
+		MinAngle=0.965,
+		MinDamage = 0.0,
+		MinRange = 0.61,
+		MinimumSwingTime = 1,
+		MultipleHitConditionAffected = false,
+		NPCSoundBoost = 1.5,
+		ProjectileCount = 0,
+		PushBackMod = 0.0,
+        RackAfterShoot = false,
+        ClipSize = 0,
+		Ranged = true,
+		RecoilDelay = 45,
+		ReloadTime = 56,
+		RunAnim = Run_Weapon2,
+		ShareDamage = false,
+		ShellFallSound = BowNull,
+		SoundGain = 1.5,
+		SoundRadius = 1,
+		SoundVolume = 75,
+		SplatBloodOnNoDeath = true,
+		SplatNumber = 3,
+		SplatSize = 3,
+		StopPower = 0,
+		SubCategory = Firearm,
+		SwingAmountBeforeImpact = 2,
+		SwingAnim = Rifle,
+		SwingSound = CrossbowFire,
+		SwingTime = 1,
+		AimingMod = 45,
+		UnequipSound = BowNull,
+		UseEndurance = false,
+		WeaponReloadType = REX5,
+		WeaponSprite = Bow_medieval,
+        ModelWeaponPart = Base.AMMO_arrow_wood_part Base.AMMO_arrow_wood_part AMMO AMMO,
+        ModelWeaponPart = Base.AMMO_arrow_metal_part Base.AMMO_arrow_metal_part AMMO AMMO,
+        ModelWeaponPart = Base.AMMO_arrow_carbon_part Base.AMMO_arrow_carbon_part AMMO AMMO,
+		Tags = HasMetal;Firearm,
+		RangeFalloff = TRUE,
 	}
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-model REX5_MD_BOW_ARROW						        	{
-cullFace = None,	
-mesh = weapons/firearms/Ranged_Weaponry_Misc|REX5_MD_BOW_ARROW,
-texture = weapons/firearms/Primitive_Bow,         	    }
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-model QUIVER_ARROW						        		{
-cullFace = None,	
-mesh = weapons/firearms/Ranged_Weaponry_Misc|QUIVER_ARROW,
-texture = weapons/firearms/Primitive_Bow,         	    }
-/*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX*/
-model REX5_MD_BOW_ARROW_GND						        {
-cullFace = None,
-mesh = weapons/firearms/Ranged_Weaponry_Misc|REX5_MD_BOW_ARROW,
-texture = weapons/firearms/Primitive_Bow,         	   }}
+	model Bow_medieval
+    {
+        mesh = weapons/firearms/Ranged_Weaponry_Misc|Bow_medieval,
+        texture = weapons/firearms/Bow_medieval_tex,
+
+        attachment world
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}
+
+		attachment muzzle
+		{
+			offset = 0.0000 0.0000 0.0000,
+			rotate = 0.0000 0.0000 0.0000,
+		}  
+    }
+	model Bow_medieval_ready
+    {
+        mesh = weapons/firearms/Ranged_Weaponry_Misc|Bow_medieval_ready,
+        texture = weapons/firearms/Bow_medieval_tex,
+
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment muzzle
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        attachment AMMO
+        {
+            offset = 0 0 0.0000,
+            rotate = 0.0000 0.0000 0,
+        }
+    }       	    
+	model QUIVER_ARROW
+    {				        		
+        cullFace = None,	
+        mesh = weapons/firearms/Ranged_Weaponry_Misc|QUIVER_ARROW,
+        texture = weapons/firearms/Primitive_Bow,
+    }
+}

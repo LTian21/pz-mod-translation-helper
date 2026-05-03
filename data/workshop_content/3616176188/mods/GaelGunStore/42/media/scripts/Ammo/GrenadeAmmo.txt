@@ -6,23 +6,46 @@ module Base
         ItemType = base:normal,
         DisplayCategory = Ammo,
         Count	=	1,
-        Weight	=	0.02,
+        Weight	=	0.25,
         AlwaysWelcomeGift	=	TRUE,
         Tags = base:ammo,
         DisplayName	=	GrenadeAmmo,
         Icon	=	40mm_ammo,
         MetalValue = 1,
-        WorldStaticModel = GrenadeAmmo,
+        WorldStaticModel = 40ammo_world,
     }
     model GrenadeAmmo
     {
         mesh = Ammo/40mm_ammo,
 		texture = GunTexture/40mm_ammo_tex,
     }
+    model 40ammo_world
+    {
+        mesh = Ammo/40ammo_world,
+		texture = GunTexture/40mm_ammo_tex,
+    }
+    item GrenadeAmmo_incendiary
+    {
+        ItemType = base:normal,
+        DisplayCategory = Ammo,
+        Count	=	1,
+        Weight	=	0.28,
+        AlwaysWelcomeGift	=	TRUE,
+        Tags = base:ammo,
+        DisplayName	=	GrenadeAmmo_incendiary,
+        Icon	=	GrenadeAmmo_incendiary,
+        MetalValue = 1,
+        WorldStaticModel = GrenadeAmmo_incendiary,
+    }
+    model GrenadeAmmo_incendiary
+    {
+        mesh = Ammo/Grenades/GrenadeAmmo_incendiary,
+		texture = GunTexture/GrenadeAmmo_incendiary_tex,
+    }
     item GrenadeAmmoBox
     {
         ItemType = base:normal,
-        Weight	=	0.2,
+        Weight	=	1.5,
         DisplayName	=	Box of HE grenades 40mm,
         DisplayCategory = Ammo,
         Icon	=	GrenadeAmmoBox,
@@ -31,8 +54,70 @@ module Base
         PlaceOneSound = BoxOfRoundsPlaceOne,
         PlaceMultipleSound = BoxOfRoundsPlaceAll,
     }
-    model GrenadeAmmoBox{
+    model GrenadeAmmoBox
+    {
         mesh = Ammo/GrenadeAmmoBox,
         texture = GunTexture/Ammo556,
     }
+
+    item RPG7_RocketAmmo
+    {
+        ItemType = base:normal,
+        DisplayCategory = Ammo,
+        Count	=	1,
+        Weight	=	2.2,
+        AlwaysWelcomeGift	=	TRUE,
+        Tags = base:ammo,
+        DisplayName	=	Rocket,
+        Icon	=	Rocket,
+        MetalValue = 1,
+        WorldStaticModel = RPG7_RocketAmmo_world,
+    }
+    model RPG7_RocketAmmo_world
+    {
+        mesh = Explosives/Boom|rocket,
+		texture = GunTexture/rocket_tex,
+    }
+    item RocketAmmoBox
+    {
+        ItemType = base:normal,
+        Weight	=	6.5,
+        DisplayName	=	Box of rockets,
+        DisplayCategory = Ammo,
+        Icon	=	RocketAmmoBox,
+        MetalValue = 30,
+        WorldStaticModel = RocketAmmoBox,
+        PlaceOneSound = BoxOfRoundsPlaceOne,
+        PlaceMultipleSound = BoxOfRoundsPlaceAll,
+    }
+    model RocketAmmoBox
+    {
+        mesh = Explosives/Boom|40ammo_world,
+		texture = GunTexture/rocket_tex,
+    }
+    model Rocket_world
+    {
+        mesh = Explosives/Boom|40ammo_world,
+		texture = GunTexture/rocket_tex,
+    }
+    item AMMO_rocket_part
+    {
+        Type = WeaponPart,
+        ItemType = base:weaponpart,
+        DisplayName = AMMO_rocket_part,
+        Icon = AMMO_rocket_part,
+        PartType = AMMO,
+        Weight = 0.2,
+        Tags = GunParts,
+        MountOn = Base.RPG7;,
+        Tooltip = "AMMO_rocket_part",
+        StaticModel = AMMO_rocket_part,
+        WorldStaticModel = AMMO_rocket_part,
+    }
+    model AMMO_rocket_part
+    {
+        mesh = Explosives/Boom|rocket_part,
+		texture = GunTexture/rocket_tex,
+    }
+
 }
