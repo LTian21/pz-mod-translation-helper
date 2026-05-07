@@ -1,0 +1,81 @@
+module Base
+{
+	template vehicle B700TrunkCompartment
+	{
+		part B700Trunk
+		{
+			category = bodywork,
+			area = TruckBed,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				capacity = 100,
+				test = DAMN.ContainerAccess.TrunkInner,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part B700TrunkLeft
+		{
+			category = bodywork,
+			area = StorageLeft,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				capacity = 12,
+				test = B700.ContainerAccess.TrunkLeft,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part B700TrunkRight
+		{
+			category = bodywork,
+			area = StorageRight,
+			itemType = damnCraft.Trunk,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+                capacity = 12,
+				test = B700.ContainerAccess.TrunkRight,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+
+		part TruckBed
+		{
+			category = nodisplay,
+			area = TruckBed,
+			itemType = nil,
+			mechanicRequireKey = true,
+            durability = 5,
+			repairMechanic = true,
+			container
+			{
+				test = B700.ContainerAccess.Trunk,
+			}
+			lua
+			{
+				create = DAMN.Create.Blank,
+			}
+		}
+	}
+}
+
