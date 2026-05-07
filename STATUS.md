@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2026-05-07 05:13:01 UTC+08:00`*
+*最后更新于：`2026-05-08 05:06:18 UTC+08:00`*
 
 ---
 
@@ -17,11 +17,12 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20260507_051300``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20260508_050617``)**
 
-*   **AshenMPRanking (ID: 2857273296)**: 新增 `2` 条, 移除 `0` 条。
-*   **XVirus (ID: 3673979113)**: 新增 `2` 条, 移除 `0` 条。
-*   **JeevesJournals (ID: 3674452315)**: 新增 `1` 条, 移除 `0` 条。
+*   **87fordB700 (ID: 3110911330)**: 新增 `95` 条, 移除 `46` 条。
+*   **LootboxChallenge (ID: 3385343596)**: 新增 `8` 条, 移除 `0` 条。
+*   **More_Car_Features_+_Spawn_Zones_Expansion (ID: 3520758551)**: 新增 `1` 条, 移除 `0` 条。
+*   **ERS_-_Energy_Routing_System (ID: 3665315101)**: 新增 `12` 条, 移除 `0` 条。
 
 ---
 
@@ -470,8 +471,8 @@
 | Mod Update and Alert System | 3077900375 | 0 | 0 | 1 | 7 |
 | Ladders!? | 2737665235 | 0 | 0 | 0 | 7 |
 | '87 Ford B700/F700 Trucks | 3110911330 | 0 | 0 | 0 | 148 |
-| PZ-ClothingUI - Clothing items grid view (B41 + B42 Updated) | 2695471997 | 0 | 3 | 0 | 102 |
 | [B42] Bandits NPC | 3268487204 | 0 | 0 | 0 | 835 |
+| PZ-ClothingUI - Clothing items grid view (B41 + B42 Updated) | 2695471997 | 0 | 3 | 0 | 102 |
 | Fitness & Workout Overhaul | 2940354599 | 0 | 0 | 29 | 43 |
 | '93 Lincoln Town Car + Limo | 2932547723 | 0 | 0 | 0 | 61 |
 | Yaki's Hair Salon | 2761200458 | 0 | 0 | 0 | 196 |
@@ -524,9 +525,9 @@
 | [B42] Drag Bodies Faster | 3393821407 | 0 | 0 | 3 | 3 |
 | Autotsar Bus B42 | 3402812859 | 0 | 0 | 0 | 1 |
 | Tikitown & PowerPlant (B41/B42) | 3037854728 | 0 | 0 | 24 | 307 |
+| U.S. M998 Humvee by Papa_Chad | 3554424111 | 0 | 0 | 0 | 39 |
 | They Knew [B42] | 3387110070 | 0 | 0 | 0 | 26 |
 | Soul Filcher's Exploring Time | 2244879881 | 0 | 0 | 7 | 23 |
-| U.S. M998 Humvee by Papa_Chad | 3554424111 | 0 | 0 | 0 | 39 |
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 0 | 0 | 2 | 373 |
 | Even More Traits | 2855320431 | 0 | 0 | 2 | 618 |
 | Simple Lockpicking [B41/B42MP] | 2991923398 | 0 | 19 | 0 | 19 |
@@ -539,8 +540,8 @@
 | True Music Radio | 3100475013 | 0 | 0 | 0 | 65 |
 | Auto Tailoring | 3388183573 | 0 | 0 | 0 | 4 |
 | Trees Have Loot | 2951270166 | 0 | 0 | 0 | 2 |
-| Picking Meister | 3422220305 | 0 | 0 | 0 | 26 |
 | RaccoonCityB42 | 3388468313 | 0 | 0 | 2 | 205 |
+| Picking Meister | 3422220305 | 0 | 0 | 0 | 26 |
 | Fridges Off! | 2853974107 | 0 | 0 | 0 | 4 |
 | [B42MP] FlipVehiclePlusTrailer | 3430172149 | 0 | 0 | 0 | 93 |
 | [B41] Known And Collected | 2881764317 | 0 | 0 | 0 | 13 |
@@ -565,9 +566,9 @@
 | Functional Clothesline | 3282215361 | 0 | 0 | 4 | 19 |
 | [J&G] SWAT Uniform [B42/41] | 3457969588 | 0 | 0 | 2 | 55 |
 | Nepenthe's High Beams | 3438126404 | 0 | 0 | 16 | 37 |
+| Autotsar Tuning Atelier - Jaap Wrungel [B42] | 3407042038 | 0 | 0 | 0 | 4 |
 | True Music B42 *outdated* | 3397198968 | 0 | 0 | 0 | 8 |
 | Random Airdrops [Discontinued] | 3282789883 | 0 | 0 | 0 | 5 |
-| Autotsar Tuning Atelier - Jaap Wrungel [B42] | 3407042038 | 0 | 0 | 0 | 4 |
 | Big Size Spice : Bigger Salt & Pepper | 3004563786 | 0 | 0 | 0 | 150 |
 | Auto Reload | 3389448389 | 0 | 0 | 0 | 1 |
 |  Better Electronics | 2999183635 | 0 | 0 | 72 | 184 |
@@ -579,8 +580,8 @@
 | Easy Drop'n'Loot | 2871469707 | 0 | 0 | 0 | 20 |
 | SixthSense | 2863908612 | 0 | 0 | 1 | 25 |
 | [B42] UH-1B Helicopter | 3409723807 | 0 | 0 | 0 | 4 |
-| [B42/B41] Motorious Zone - Hot Pursuit Add-on | 2841969842 | 0 | 0 | 0 | 15 |
 | Auto Cook | 3388721641 | 0 | 0 | 0 | 38 |
+| [B42/B41] Motorious Zone - Hot Pursuit Add-on | 2841969842 | 0 | 0 | 0 | 15 |
 | [B42] WarThunderVehicleLibrary | 3399660368 | 0 | 0 | 9 | 285 |
 | [ABANDONED][B42] Better Sorting | 3413005308 | 0 | 0 | 4 | 90 |
 | U.S. M41 Walker Bulldog by Papa_Chad | 3608725379 | 0 | 0 | 0 | 6 |
@@ -590,8 +591,8 @@
 | Long-standing Metal Constructions | 3199474685 | 0 | 0 | 0 | 37 |
 | [B42] Item Details | 3477237184 | 0 | 0 | 0 | 31 |
 | [42MP] Water Goes Bad | 2849467715 | 0 | 0 | 4 | 22 |
-| Reactive Sound Events [LEGACY] | 2969551071 | 0 | 0 | 0 | 39 |
 | U.S. M548 Cargo Carrier by Papa_Chad | 3424497614 | 0 | 0 | 0 | 17 |
+| Reactive Sound Events [LEGACY] | 2969551071 | 0 | 0 | 0 | 39 |
 | [B42MP] Simple Show XP | 2891170430 | 0 | 0 | 0 | 28 |
 | Renault Trafic 1990 [B42.13 & B41] | 3006496838 | 0 | 0 | 0 | 23 |
 | Cold Winters | 3577100076 | 0 | 0 | 0 | 5 |
@@ -603,12 +604,12 @@
 | Keep Inventory & Respawn [B42 NOT WORKING] | 2879960829 | 0 | 0 | 0 | 56 |
 | True Crawl 3.0 - Fixed [B42] | 3410989950 | 0 | 0 | 6 | 11 |
 | Ammo Loot Drop · Zombies Drop Ammo & Ammo Box B42 | 3389050623 | 0 | 0 | 0 | 9 |
-| The Last of Us: Factions & Gear [B41/B42.12][DISCONTINUED] | 3348036710 | 0 | 0 | 18 | 113 |
 | Legendary Fanny Pack | 3552050880 | 0 | 35 | 0 | 46 |
+| The Last of Us: Factions & Gear [B41/B42.12][DISCONTINUED] | 3348036710 | 0 | 0 | 18 | 113 |
 | Lynx Pack [B41/B42MP] | 3470485566 | 0 | 0 | 1 | 93 |
 | Soul Filcher's Beautifying Time | 2425267353 | 0 | 0 | 21 | 39 |
-| Autotsar Tuning Atelier - Chevalier Samara v.2.00 [B42] | 3432014439 | 0 | 0 | 0 | 1 |
 | Asakusa lake town | 3482962418 | 0 | 0 | 19 | 19 |
+| Autotsar Tuning Atelier - Chevalier Samara v.2.00 [B42] | 3432014439 | 0 | 0 | 0 | 1 |
 | LIAZ 300 | 3611100835 | 0 | 0 | 0 | 9 |
 | [B42][MP]Table Saw | 3540297822 | 0 | 2 | 1 | 41 |
 | [J&G] Desert Uniform [B42/41] | 3299457564 | 0 | 0 | 0 | 44 |
@@ -621,12 +622,12 @@
 | [B42 Port] Take a Bath | 3485349033 | 0 | 0 | 0 | 24 |
 | [B42][B41] Collapsible Ladder | 3438123707 | 0 | 0 | 0 | 5 |
 | The Calm Before The Storm | 2953621037 | 0 | 0 | 0 | 61 |
-| Item Rarity UI (Build 41 + 42) | 3662387304 | 0 | 11 | 0 | 11 |
 | TwisTonFire - Improved Soundoptions | 3575778063 | 0 | 12 | 0 | 12 |
+| Item Rarity UI (Build 41 + 42) | 3662387304 | 0 | 11 | 0 | 11 |
 | Autotsar Tuning Atelier - DeRumba Van v.2.00 [B42] | 3432015133 | 0 | 0 | 0 | 1 |
 | Bianca Wardrobe [42. Out now] | 3140453034 | 0 | 0 | 0 | 814 |
-| Tatrapan [B42] | 3402789975 | 0 | 0 | 7 | 10 |
 | [B42] Dark/Invisible Weapon Slings | 3488113291 | 0 | 13 | 0 | 13 |
+| Tatrapan [B42] | 3402789975 | 0 | 0 | 7 | 10 |
 | RV Life | 3553635874 | 0 | 0 | 0 | 7 |
 | PZK VLC (Vanilla look-like car pack) | 3217685049 | 0 | 0 | 6 | 684 |
 | Ford Excursion 2005 by Papa_Chad | 3588624649 | 0 | 0 | 2 | 50 |
@@ -637,10 +638,10 @@
 | [B42] ZuperCarts - Carts & Trolleys (forked) | 3433203442 | 0 | 0 | 4 | 18 |
 | Knife animation overhaul | 3433660118 | 0 | 0 | 2 | 2 |
 | Last Of Us Hair | 3025593219 | 0 | 0 | 0 | 6 |
-| Immersive Solar Arrays [BETA] | 2969478819 | 0 | 0 | 0 | 5 |
-| Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 0 | 0 | 1 | 494 |
-| [B42.1.1] Neon moodle levels | 3392116408 | 0 | 0 | 0 | 8 |
 | dustinguished bolt cutters | 3671176591 | 0 | 21 | 0 | 21 |
+| Autotsar Tuning Atelier - Petyarbuilt 379 [B42] | 3403314193 | 0 | 0 | 1 | 494 |
+| Immersive Solar Arrays [BETA] | 2969478819 | 0 | 0 | 0 | 5 |
+| [B42.1.1] Neon moodle levels | 3392116408 | 0 | 0 | 0 | 8 |
 | Dreams | 1945359259 | 0 | 0 | 0 | 191 |
 | Ultimate Generator Overhaul | 3478628177 | 0 | 63 | 0 | 63 |
 | Detailed Skill Tooltips | 3572846242 | 0 | 0 | 0 | 150 |
@@ -651,14 +652,14 @@
 | Lillie's Enhanced Militaria | 3396622780 | 0 | 0 | 0 | 152 |
 | Hanabi's Food | 3043243994 | 0 | 0 | 0 | 78 |
 | [42+] [MP] Frogtown by TwinCrows | 3449473111 | 0 | 0 | 3 | 3 |
-| [B41/B42] Check Around | 3300688173 | 0 | 0 | 1 | 157 |
 | [B42.14+] Exercise With Corpses (SP/MP) | 3404074048 | 0 | 0 | 0 | 7 |
+| [B41/B42] Check Around | 3300688173 | 0 | 0 | 1 | 157 |
 | Trading Trailer [B41/B42] | 3572122233 | 0 | 0 | 0 | 1 |
 | [J&G] Alpine Uniform [B42/41] | 3303746488 | 0 | 0 | 0 | 46 |
 | More Maps [B42] | 3390897023 | 0 | 0 | 0 | 9 |
 | BetterFPS_B42 | 3423115544 | 0 | 0 | 0 | 4 |
-| [J&G] Forest Multicam Uniform [B42/41] | 3309971624 | 0 | 0 | 0 | 44 |
 | Auto Loot | 3392699932 | 0 | 0 | 0 | 77 |
+| [J&G] Forest Multicam Uniform [B42/41] | 3309971624 | 0 | 0 | 0 | 44 |
 | Mandarin's Bedding | 3431960478 | 0 | 0 | 0 | 6 |
 | Washing Menus Improved [B42] | 3460812542 | 0 | 2 | 0 | 9 |
 | Bandits Extra Options | 3412682512 | 0 | 0 | 0 | 94 |
@@ -718,8 +719,8 @@
 | [B41/B42] Infection Scanner | 3332296598 | 0 | 0 | 9 | 35 |
 | [B42] Vanvival - Build's 42 Nomadic Experience  [BROKEN in 42.13 MP] | 3547444619 | 0 | 0 | 26 | 45 |
 | Pain Sense - Injury Feedback System | 3599368309 | 0 | 0 | 0 | 3 |
-| MRE Mod [B42] | 3413627942 | 0 | 0 | 0 | 5 |
 | Immersive Lore | 3000924731 | 0 | 0 | 0 | 382 |
+| MRE Mod [B42] | 3413627942 | 0 | 0 | 0 | 5 |
 | Sit on the key | 3468159865 | 0 | 0 | 0 | 3 |
 | [B41/B42.16] Hephas Vitamins | 3494803855 | 0 | 0 | 0 | 39 |
 |  Wearable Towels [B41/B42] | 3203159242 | 0 | 0 | 32 | 40 |
@@ -735,8 +736,8 @@
 | Eat Smart | 3456212729 | 0 | 0 | 4 | 30 |
 | Expanded Professions | 3440958051 | 0 | 0 | 2 | 16 |
 | [41&#124;42] ChairBarricade | 3404288341 | 0 | 0 | 0 | 3 |
-| Nodachi Mod B42.14.1 | 2166396868 | 0 | 0 | 0 | 2 |
 | Generator Streetlights Restored [42.13] | 3578735933 | 0 | 0 | 0 | 63 |
+| Nodachi Mod B42.14.1 | 2166396868 | 0 | 0 | 0 | 2 |
 | Dodge | 3391244620 | 0 | 0 | 0 | 1 |
 | Craftable Mannequins [B42/41] | 3054341059 | 0 | 0 | 0 | 25 |
 | Essential Car Notifications [42.17] | 3350173580 | 0 | 9 | 0 | 9 |
@@ -763,12 +764,12 @@
 | Sound Stress Soother (thumping stress reduction) | 3460381012 | 0 | 0 | 0 | 5 |
 | Lock Interiors | 3435709471 | 0 | 0 | 0 | 3 |
 | Filibuster Rhymes' Acceptable Guns DEMO! | 3554570236 | 0 | 0 | 0 | 606 |
-| Custom Weight | 3391228479 | 0 | 0 | 8 | 88 |
 | Sprinters Over Time [42.17] | 3608589196 | 0 | 0 | 0 | 9 |
+| Custom Weight | 3391228479 | 0 | 0 | 8 | 88 |
 | [OUTDATED] Support Corps [B42] Sweet-release Update | 3409836763 | 0 | 0 | 5 | 604 |
 | [B42.13] Bodily Functions [v0.13.1] | 3396456841 | 0 | 0 | 114 | 425 |
-| Airdrops | 3590950467 | 0 | 0 | 0 | 156 |
 | Low Condition Guns [B41/B42] | 3579180724 | 0 | 0 | 0 | 11 |
+| Airdrops | 3590950467 | 0 | 0 | 0 | 156 |
 | [ABANDONNED] The Last of Us Infected | 3409434765 | 0 | 0 | 8 | 165 |
 | [B41/B42] Nik's Hairstyles | 3401996053 | 0 | 0 | 0 | 31 |
 | Craftable Long Sticks | 3390529497 | 0 | 0 | 0 | 1 |
@@ -790,15 +791,15 @@
 | Legend Craft Evolved | 3432470769 | 0 | 0 | 0 | 304 |
 | Last Push Trait [B41] | 3028253067 | 0 | 0 | 0 | 46 |
 | [B42] Wallet Fix | 3400142576 | 0 | 0 | 0 | 6 |
-| BZQuickSlots | 3396010813 | 0 | 0 | 0 | 22 |
 | The Last Of AVA: Ellie's Clothing Pack [B42.14+] | 3477685382 | 0 | 0 | 3 | 4 |
+| BZQuickSlots | 3396010813 | 0 | 0 | 0 | 22 |
 | Tetriz - Arcade Minigame | 3486780625 | 0 | 0 | 0 | 11 |
-| [B42] Make Charcoal in kilns | 3392674521 | 0 | 0 | 2 | 4 |
 | [B42] Bag Upgrade Ultra | 3407793320 | 0 | 0 | 2 | 41 |
 | [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 0 | 0 | 0 | 17 |
+| [B42] Make Charcoal in kilns | 3392674521 | 0 | 0 | 2 | 4 |
 | [B41/B42] I WANT TO EAT ICECREAM FOREVER | 2754525193 | 0 | 0 | 0 | 38 |
-| [B42] Make Gunpowder from Fertilizer | 3392188086 | 0 | 0 | 1 | 2 |
 | Zomboid Drop More B42 | 3546452514 | 0 | 0 | 0 | 33 |
+| [B42] Make Gunpowder from Fertilizer | 3392188086 | 0 | 0 | 1 | 2 |
 | Better Animal Care | 3582024827 | 0 | 5 | 0 | 5 |
 | Show Weapon Stats Plus | 3635921724 | 0 | 15 | 0 | 15 |
 | Metal Spears | 2927603127 | 0 | 0 | 1 | 8 |
@@ -811,9 +812,9 @@
 | Functional Escalators | 3462962143 | 0 | 0 | 0 | 8 |
 | [42.12/42.13] Mystic's Face Retexture for Spongie's Character Customisation | 3415470189 | 0 | 0 | 0 | 1 |
 | B42 PZLinux [BETA] | 3414468585 | 0 | 0 | 2 | 5 |
+| Better Dressed - Transmog | 3599514194 | 0 | 0 | 0 | 49 |
 | RE Interface [B42] | 3598501350 | 0 | 0 | 0 | 71 |
 | [B42] Simple Player Stats Bars Enhanced Functionality (Unofficial) | 3619295009 | 0 | 0 | 0 | 14 |
-| Better Dressed - Transmog | 3599514194 | 0 | 0 | 0 | 49 |
 | Fallout - NCR Trooper Pack | 3508243687 | 0 | 0 | 13 | 46 |
 | Trap Manager | 3566766862 | 0 | 0 | 1 | 162 |
 | Where are the animals? | 3409035433 | 0 | 0 | 0 | 23 |
@@ -853,8 +854,8 @@
 | The Division Backpack | 3391306957 | 0 | 0 | 0 | 22 |
 | Ada Wong - Voice [B42] | 3401470591 | 0 | 0 | 0 | 1 |
 | Context Cleaner [B41/B42] | 3617485838 | 0 | 0 | 0 | 60 |
-| [B42] Ammo Crafting (Simple) | 3396542795 | 0 | 0 | 8 | 26 |
 | VSMR Face for Spongie's Character Customisation | 3415572170 | 0 | 0 | 0 | 2 |
+| [B42] Ammo Crafting (Simple) | 3396542795 | 0 | 0 | 8 | 26 |
 | TEH Assembly Order for Project Summer Car [B42] | 3593757134 | 0 | 0 | 0 | 10 |
 | Woodcutting Skill [B42] | 3434440605 | 0 | 0 | 0 | 11 |
 | Mindset - B42 | 3554341903 | 0 | 8 | 0 | 8 |
@@ -862,8 +863,8 @@
 | [B42] Rebalanced Yields: Butchering | 3564838872 | 0 | 0 | 0 | 1 |
 | Realistic Clothes | 3491510356 | 0 | 0 | 0 | 87 |
 | [B41/B42] Temperature Affects Food Spoilage Rate | 3297793087 | 0 | 0 | 0 | 9 |
-| Lost Media | 3572808153 | 0 | 0 | 0 | 237 |
 | Delete Item(s) | 3571106963 | 0 | 0 | 0 | 4 |
+| Lost Media | 3572808153 | 0 | 0 | 0 | 237 |
 | Training Target | 3417621776 | 0 | 0 | 0 | 29 |
 | MRE XIII (1993) - Meal Ready to Eat MOD Real version for build 42 | 3406930410 | 0 | 0 | 13 | 124 |
 | [B42.17]Grab and Drop | 3395614151 | 0 | 0 | 0 | 33 |
@@ -906,8 +907,8 @@
 | Lillie's Meal Combat Individual Ration Mod | 3557845788 | 0 | 0 | 0 | 106 |
 | JB's Big Wood | 3583736984 | 0 | 0 | 0 | 77 |
 | Simple Wall Building (Now with objects from planks) | 3429904483 | 0 | 0 | 2 | 79 |
-| Smart Hutch | 3556857572 | 0 | 0 | 0 | 41 |
 | [Project Fallout] The Beginning | 3461117277 | 0 | 0 | 3 | 28 |
+| Smart Hutch | 3556857572 | 0 | 0 | 0 | 41 |
 | WeldingTorchBalanced [B42] | 3429392198 | 0 | 0 | 3 | 6 |
 | Show Key Origin [B42] | 3501701205 | 0 | 0 | 0 | 9 |
 | [B42] Ammo Reloading Toolset (Realistic) | 3397215647 | 0 | 0 | 44 | 136 |
