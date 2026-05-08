@@ -1,0 +1,47 @@
+module Base
+{
+    entity LS_DiscoFloor
+    {
+        component UiConfig
+        {
+            xuiSkin = default,
+            entityStyle = ES_LS_DiscoFloor,
+            uiEnabled = false,
+        }
+        component SpriteConfig
+        {
+            isThumpable = false,
+            OnIsValid = BuildRecipeCode.floor.OnIsValid,
+            OnCreate = BuildRecipeCode.floor.OnCreate,
+            face W
+            {
+                layer
+                {
+                    row = LS_Disco_0,
+                }
+            }
+        }
+        component CraftRecipe
+        {
+            timedAction = BuildLowMetal,
+            time = 200,
+            category = Furniture,
+            NeedToBeLearn = true,
+            xpAward = MetalWelding:10,
+            Tooltip = Tooltip_craft_DiscoFloorDesc,
+            inputs
+            {
+                item 1 [Base.BlowTorch] flags[DontRecordInput],
+                item 1 [Base.SmallSheetMetal],
+                item 2 [Base.Mirror],
+                item 2 [Base.ElectronicsScrap],
+                item 5 [Base.Aluminum],
+                item 2 [Base.ElectricWire],
+                item 1 [Base.LightBulb],
+                item 1 [Base.LightBulbGreen],
+                item 1 [Base.LightBulbRed],
+                item 1 [Base.WeldingRods] flags[DontRecordInput],
+            }
+        }
+    }
+}

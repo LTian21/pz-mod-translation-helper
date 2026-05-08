@@ -240,7 +240,7 @@ module Lifestyle
 	item PowerAxe
 	{
 	    DisplayCategory = ToolWeapon,
-		DisplayName	= Powered Axe,
+		DisplayName	= Power Axe,
 		ItemType = base:weapon,
 		Weight = 5.0,
 		Icon = InvPowerAxe,
@@ -264,12 +264,12 @@ module Lifestyle
 		IdleAnim = Idle_Weapon2,
 		KnockBackOnNoDeath = true,
 		KnockdownMod = 3.0,
-		MaxDamage = 3.0,
+		MaxDamage = 0.7,
 		MaxHitCount	= 3,
 		MaxRange = 1.35,
 		MetalValue = 120.0,
 		MinAngle = 0.8,
-		MinDamage = 1.3,
+		MinDamage = 0.3,
 		MinRange = 0.61,
 		MinimumSwingTime = 0.5,
 		PushBackMod	= 0.3,
@@ -292,7 +292,7 @@ module Lifestyle
 
 	item ToyChicken
 	{
-	    DisplayCategory = Toy,
+	    DisplayCategory = WeaponImprovised,
 		MaxRange	=	0.8,
 		WeaponSprite	=	Lifestyle.LSToyChicken,
 		MinAngle	=	0.65,
@@ -315,7 +315,7 @@ module Lifestyle
 		SwingTime	=	2,
 		KnockdownMod	=	0,
 		SplatBloodOnNoDeath	=	false,
-		Icon	=	ToyBear,
+		Icon	=	LS_ToyChicken,
 		RunAnim	=	Run_Weapon2,
         IdleAnim	=	Idle_Weapon2,
         BreakSound  =   NightstickBreak,
@@ -341,7 +341,7 @@ module Lifestyle
 
 	item WoodToyHorse
 	{
-	    DisplayCategory = Toy,
+	    DisplayCategory = WeaponImprovised,
 		MaxRange	=	1.35,
 		WeaponSprite	=	Lifestyle.LSWoodToyHorse,
 		MinAngle	=	0.75,
@@ -366,7 +366,7 @@ module Lifestyle
 		KnockdownMod	=	1,
 		SplatBloodOnNoDeath	=	false,
 		TwoHandWeapon = true,
-		Icon	=	ToyBear,
+		Icon	=	LS_ToyHorse,
 		RunAnim	=	Run_Weapon2,
         IdleAnim	=	Idle_Weapon2,
         BreakSound  =   BaseballBatBreak,
@@ -391,7 +391,7 @@ module Lifestyle
 		Weight =           0.2,
 		ItemType = base:normal,
 		DisplayName =      Newton Cradle,
-		Icon =             ToyBear,
+		Icon =             LS_ToyNewton,
 		StaticModel =      Lifestyle.ToyNewtonCradle,
 		WorldStaticModel = Lifestyle.ToyNewtonCradle,
 		Tags = base:smeltablesteelsmall;base:hasmetal,
@@ -403,7 +403,7 @@ module Lifestyle
 		Weight =           0.2,
 		ItemType = base:normal,
 		DisplayName =      Toy Penguin,
-		Icon =             ToyBear,
+		Icon =             LS_PenguinDoll,
 		StaticModel =      Lifestyle.ClothToyPenguin,
 		WorldStaticModel = Lifestyle.ClothToyPenguin,
 		Tags = base:isfirefuel;base:isfiretinder,
@@ -415,7 +415,7 @@ module Lifestyle
 		Weight =           0.2,
 		ItemType = base:normal,
 		DisplayName =      Toy Rocket,
-		Icon =             ToyBear,
+		Icon =             LS_ToyRocket,
 		StaticModel =      Lifestyle.MetalToyRocket,
 		WorldStaticModel = Lifestyle.MetalToyRocket,
 		Tags = base:smeltablesteelsmall;base:hasmetal,
@@ -444,6 +444,108 @@ module Lifestyle
 		WorldStaticModel = Lifestyle.WoodToyRabbit,
 		Tags = base:isfirefuel,
 	}
+
+    item PasteBurger
+    {
+        DisplayCategory = Food,
+		DisplayName = Paste Burger,
+        ItemType = base:food,
+        Weight = 0.3,
+        Icon = PasteBurger,
+		IconsForTexture = PasteBurger;PasteBurger_Red;PasteBurger_Green;PasteBurger_Blue;PasteBurger_Yellow;PasteBurger_Orange,
+        EatType = 2handforced,
+		CantBeFrozen = true,
+		FoodType = NoExplicit,
+        HungerChange = -60.0,
+		ThirstChange = 10.0,
+        UnhappyChange = -30,
+        Calories = 640.0,
+        Carbohydrates = 99.0,
+        Lipids = 37.0,
+        Proteins = 25.0,
+        StaticModelsByIndex = Lifestyle.PasteBurger;Lifestyle.PasteBurger_Red;Lifestyle.PasteBurger_Green;Lifestyle.PasteBurger_Blue;Lifestyle.PasteBurger_Yellow;Lifestyle.PasteBurger_Orange,
+        WorldStaticModelsByIndex = Lifestyle.PasteBurger;Lifestyle.PasteBurger_Red;Lifestyle.PasteBurger_Green;Lifestyle.PasteBurger_Blue;Lifestyle.PasteBurger_Yellow;Lifestyle.PasteBurger_Orange,
+		Tooltip = Tooltip_item_PasteBurger,
+    }
+
+    item PasteGrub
+    {
+        DisplayCategory = Food,
+		DisplayName = Nutrient Paste,
+		EatType = GlugFood,
+        ItemType = base:food,
+        Weight = 1.0,
+        Icon = PasteGrub,
+		BadInMicrowave = true,
+		CantBeFrozen = true,
+        FoodType = NoExplicit,
+        HungerChange = -30.0,
+		ThirstChange = 10.0,
+		UnhappyChange = 20,
+        Calories = 232.0,
+        Carbohydrates = 6.0,
+        Lipids = 6.66,
+        Proteins = 7.7,
+        StaticModel = Lifestyle.PasteGrub,
+        WorldStaticModel = Lifestyle.PasteGrub,
+		Tooltip = Tooltip_item_PasteGrub,
+		Tags = base:hasmetal,
+    }
+
+    item PasteRuined
+    {
+        DisplayCategory = Junk,
+		DisplayName = Ruined Paste Blob,
+		EatType = GlugFood,
+        ItemType = base:food,
+        Icon = PasteRuined,
+        Weight = 0.1,
+		BadInMicrowave = true,
+		CantBeFrozen = true,
+        FoodType = NoExplicit,
+        HungerChange = -1.0,
+		ThirstChange = 30.0,
+		UnhappyChange = 40,
+        Calories = 0,
+        Carbohydrates = 0,
+        Lipids = 0,
+        Proteins = 0,
+		FoodSicknessChange = 60,
+		StaticModel = Lifestyle.PasteRuined,
+        WorldStaticModel = Lifestyle.PasteRuined,
+		Tooltip = Tooltip_item_PasteRuined,
+		Tags = base:hasmetal;base:showpoison,
+    }
+
+    item UmbrellaHat
+    {
+	    DisplayCategory = Curio,
+		ItemType = base:clothing,
+		Weight = 1.4,
+		ClothingItem = LS_UmbrellaHat,
+		BodyLocation = base:hat,
+		Icon = LS_UmbrellaHat,
+		ProtectFromRainWhenEquipped = true,
+		CanHaveHoles = false,
+		BloodLocation = Head,
+		ChanceToFall = 15,
+		Insulation = 0.1,
+		WaterResistance = 1.0,
+		WindResistance = 0.15,
+		WorldStaticModel= Lifestyle.UmbrellaHat,
+    }
+
+    item ToothpasteCurio
+    {
+		DisplayCategory = Curio,
+		ItemType = base:drainable,
+		Tooltip = Tooltip_item_ToothpasteCurio,
+		UseWhileEquipped	=	TRUE,
+		UseDelta	=	0.1,
+		Weight = 1.0,
+		Icon = LS_ToothpasteCurio,
+		WorldStaticModel = Lifestyle.ToothpasteCurio,
+    }
 
     /****************************** TEMP ******************************/
 
