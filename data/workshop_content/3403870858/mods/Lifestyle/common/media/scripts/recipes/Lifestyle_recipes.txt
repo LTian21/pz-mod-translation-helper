@@ -26,6 +26,81 @@ module Base
       }
     }
 
+	/* ---------------------------------- Improv Parts -------------------------------- */
+
+    craftRecipe ConvertPartsMech
+    {
+      Tags = AnySurfaceCraft,
+	  needToBeLearn = true,
+      time = 150,
+	  category = Assembly,
+	  timedAction = ChoppingBlock_Hammer,
+	  xpAward = Maintenance:1,
+      inputs
+      {
+         item 1 tags[base:hammer;base:clubhammer;base:mallet] mode:keep flags[Prop1;MayDegradeLight],
+		 item 3 [Lifestyle.upgradeElectric;Lifestyle.upgradePlumbing;Lifestyle.upgradeWood] mode:destroy flags[ItemCount],
+      }
+      outputs
+      {
+         item 1 Lifestyle.upgradeMechanical,
+      }
+    }
+    craftRecipe ConvertPartsElec
+    {
+      Tags = AnySurfaceCraft,
+	  needToBeLearn = true,
+      time = 150,
+	  category = Assembly,
+	  timedAction = ChoppingBlock_Hammer,
+	  xpAward = Maintenance:1,
+      inputs
+      {
+         item 1 tags[base:hammer;base:clubhammer;base:mallet] mode:keep flags[Prop1;MayDegradeLight],
+		 item 3 [Lifestyle.upgradeMechanical;Lifestyle.upgradePlumbing;Lifestyle.upgradeWood] mode:destroy flags[ItemCount],
+      }
+      outputs
+      {
+         item 1 Lifestyle.upgradeElectric,
+      }
+    }
+    craftRecipe ConvertPartsPlumb
+    {
+      Tags = AnySurfaceCraft,
+	  needToBeLearn = true,
+      time = 150,
+	  category = Assembly,
+	  timedAction = ChoppingBlock_Hammer,
+	  xpAward = Maintenance:1,
+      inputs
+      {
+         item 1 tags[base:hammer;base:clubhammer;base:mallet] mode:keep flags[Prop1;MayDegradeLight],
+		 item 3 [Lifestyle.upgradeMechanical;Lifestyle.upgradeElectric;Lifestyle.upgradeWood] mode:destroy flags[ItemCount],
+      }
+      outputs
+      {
+         item 1 Lifestyle.upgradePlumbing,
+      }
+    }
+    craftRecipe ConvertPartsWood
+    {
+      Tags = AnySurfaceCraft,
+	  needToBeLearn = true,
+      time = 150,
+	  category = Assembly,
+	  timedAction = ChoppingBlock_Hammer,
+	  xpAward = Maintenance:1,
+      inputs
+      {
+         item 1 tags[base:hammer;base:clubhammer;base:mallet] mode:keep flags[Prop1;MayDegradeLight],
+		 item 3 [Lifestyle.upgradeMechanical;Lifestyle.upgradeElectric;Lifestyle.upgradePlumbing] mode:destroy flags[ItemCount],
+      }
+      outputs
+      {
+         item 1 Lifestyle.upgradeWood,
+      }
+    }
+
 	/* -------------------------------- Carpentry -- Carving -------------------------------- */
 
     craftRecipe Carve_Art_Paintbrush
@@ -120,157 +195,12 @@ module Base
 
 	/* -------------------------------- Carpentry -------------------------------- */
 
-    craftRecipe Craft_Art_Easel
-    {
-      Tags = InHandCraft;Carpentry,
-      needToBeLearn = true,
-      SkillRequired = Woodwork:2,
-      timedAction = BuildLowHammer,
-      time = 600,
-      category = Carpentry,
-      xpAward = Woodwork:30,
-      inputs
-      {
-         item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
-		 item 4 [Base.Plank],
-         item 4 [Base.Woodglue],
-		 item 30 [Base.Nails],
-      }
-      outputs
-      {
-         item 1 Lifestyle.Mov_ArtEasel,
-      }
-    }
+
 
 	/* -------------------------------- Electronics -------------------------------- */
 
-    craftRecipe Assemble_DJ_Booth
-    {
-      Tags = InHandCraft;Electrical,
-      needToBeLearn = true,
-      SkillRequired = Electricity:4,
-      timedAction = MakingElectrical,
-      time = 800,
-      category = Electrical,
-      xpAward = Electricity:50,
-      inputs
-      {
-         item 1 tags[base:hammer] mode:keep flags[Prop1;MayDegradeLight;NoBrokenItems],
-		 item 1 tags[base:screwdriver] mode:keep flags[NoBrokenItems],
-		 item 4 [Base.Plank],
-         item 40 [Base.ElectronicsScrap],
-		 item 10 [Base.Aluminum],
-		 item 4 [Base.Amplifier],
-		 item 6 [Base.ElectricWire],
-      }
-      outputs
-      {
-         item 1 Lifestyle.LS_DJBooth01,
-      }
-    }
-
-    craftRecipe Craft_Disco_Floor
-    {
-      Tags = InHandCraft;Electrical,
-      needToBeLearn = true,
-      SkillRequired = Electricity:3,
-      timedAction = MakingElectrical,
-      time = 600,
-      category = Electrical,
-      xpAward = Electricity:30,
-      inputs
-      {
-         item 1 tags[base:screwdriver] mode:keep flags[Prop1;NoBrokenItems],
-		 item 2 [Base.Mirror],
-         item 30 [Base.ElectronicsScrap],
-		 item 5 [Base.Aluminum],
-		 item 2 [Base.ElectricWire],
-		 item 3 [Base.LightBulb],
-		 item 3 [Base.LightBulbGreen],
-		 item 3 [Base.LightBulbRed],
-      }
-      outputs
-      {
-         item 1 Lifestyle.Mov_DiscoFloor,
-      }
-    }
-
-    craftRecipe Craft_Standing_Disco_Ball
-    {
-      Tags = InHandCraft;Electrical,
-      needToBeLearn = true,
-      SkillRequired = Electricity:3,
-      timedAction = MakingElectrical,
-      time = 600,
-      category = Electrical,
-      xpAward = Electricity:30,
-      inputs
-      {
-         item 1 tags[base:screwdriver] mode:keep flags[Prop1;NoBrokenItems],
-		 item 1 [Base.Mirror],
-         item 20 [Base.ElectronicsScrap],
-		 item 5 [Base.Aluminum],
-		 item 4 [Base.ElectricWire],
-		 item 1 [Base.LightBulb],
-		 item 1 [Base.LightBulbGreen],
-		 item 1 [Base.LightBulbRed],
-      }
-      outputs
-      {
-         item 1 Lifestyle.LS_Discoball,
-      }
-    }
-
-    craftRecipe Craft_Standing_Microphone
-    {
-      Tags = InHandCraft;Electrical,
-      needToBeLearn = true,
-      SkillRequired = Electricity:3,
-      timedAction = MakingElectrical,
-      time = 600,
-      category = Electrical,
-      xpAward = Electricity:20,
-      inputs
-      {
-         item 1 tags[base:screwdriver] mode:keep flags[Prop1;NoBrokenItems],
-         item 25 [Base.ElectronicsScrap],
-		 item 5 [Base.Aluminum],
-		 item 1 [Base.Amplifier],
-		 item 1 [Base.ElectricWire],
-      }
-      outputs
-      {
-         item 1 Lifestyle.Mov_Microphone,
-      }
-    }
 
 	/* -------------------------------- MetalWorking -------------------------------- */
 
-    craftRecipe Assemble_Sculpting_Station
-    {
-      Tags = AnySurfaceCraft,
-      needToBeLearn = true,
-      SkillRequired = MetalWelding:4,
-      timedAction = BuildLowMetal,
-      time = 600,
-      category = Metalworking,
-      xpAward = MetalWelding:40,
-      inputs
-      {
-         item 2 [Base.BlowTorch] flags[Prop1],
-		 item 1 tags[base:weldingmask] mode:keep,
-		 item 1 tags[base:pliers] mode:keep flags[MayDegradeLight],
-		 item 1 tags[base:hammer] mode:keep flags[MayDegradeLight],
-         item 6 [Base.MetalPipe],
-		 item 4 [Base.MetalBar],
-		 item 3 [Base.SheetMetal],
-		 item 3 [Base.SmallSheetMetal],
-		 item 20 [Base.Screws],
-      }
-      outputs
-      {
-         item 1 Lifestyle.Mov_SculptingStation,
-      }
-    }
 
 }
