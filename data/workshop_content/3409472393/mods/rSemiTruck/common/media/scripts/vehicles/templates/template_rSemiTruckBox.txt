@@ -136,7 +136,6 @@ module Rotators
 		
 		template = Trunk/part/TruckBed,
 		template = Door/part/DoorRear,
-
 		part TruckBed
 		{
 			itemType = Base.BigTrunk,
@@ -152,23 +151,6 @@ module Rotators
 				create = CommonTemplates.Create.VehicleFreezer,
 				init = CommonTemplates.Init.VehicleFreezer,
                 update = CommonTemplates.Update.VehicleFreezer,
-			}
-			table armor
-			{
-				logic = RotatorsLib,
-				condition = 100,
-
-				needs =
-				{
-					part = ArmorBullbar,
-					condition = 15,
-				}
-
-				lua =
-				{
-					check = rSemiTruck.Event.TruckBedBullbarCheck,
-					repair = rSemiTruck.Event.TruckBedBullbarRepair,
-				}
 			}
 		}
 
@@ -235,6 +217,23 @@ module Rotators
 				anim = Attack_Shove,
 				rate = 0.3,
 				angle = 0.0 0.0 0.0,
+			}
+			table armor
+			{
+				logic = RotatorsLib,
+				condition = 100,
+
+				needs =
+				{
+					part = ArmorBullbar,
+					condition = 15,
+				}
+
+				lua =
+				{
+					check = rSemiTruck.Event.DoorRearBullbarCheck,
+					repair = rSemiTruck.Event.DoorRearBullbarRepair,
+				}
 			}
 		}
 		part Battery1
@@ -461,10 +460,10 @@ module Rotators
 		  xywh = -1.2119 1.2684 0.4737 0.8246,
         }
 
-		area GasTank
-		{
-			xywh = -1.1316 0.1632 0.4211 0.4211,
-		}
+        area GasTank
+        {
+            xywh = -1.1316 0.1228 0.4211 1.1404,
+        }
 
 		area TireFrontLeft
 		{
@@ -500,22 +499,22 @@ module Rotators
 
         physics box
         {
-            offset = 0.0000 0.2126 1.9,
+            offset = 0.0000 0.2126 1.9000,
             extents = 1.4211 0.8772 2.4912,
             rotate = 0.0000 0.0000 0.0000,
         }
 
         physics box
         {
-            offset = 0.0000 1.3596 1.21,
+            offset = 0.0000 1.0170 1.2105,
             extents = 1.4211 0.7193 1.1404,
             rotate = 0.0000 0.0000 0.0000,
         }
 
         physics box
         {
-            offset = 0.0000 0.7399 -1.7281,
-            extents = 1.8070 2.0877 4.7193,
+            offset = 0.0000 0.5728 -1.7281,
+            extents = 1.8070 1.6140 4.7193,
             rotate = 0.0000 0.0000 0.0000,
         }
 
