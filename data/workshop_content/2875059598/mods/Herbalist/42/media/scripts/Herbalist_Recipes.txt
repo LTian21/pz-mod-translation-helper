@@ -300,7 +300,7 @@ module Base
         inputs
         {
             item 135 [Herbalist.PotofMapleSyrup],
-            item 1 [Base.Sheet],
+            item 1 [Base.Sheet] mode:keep,
             item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop1],
             
         }
@@ -538,7 +538,7 @@ module Base
         inputs
         {
             item 1 [Base.WaterSaucepanRice],
-            item 1 [Base.Sheet],
+            item 1 [Base.Sheet] mode:keep,
             item 1 tags[Salt],
             item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[MayDegradeLight],
         }
@@ -795,7 +795,7 @@ module Base
             item 3 Base.Bowl,
         }
     }
-
+    
     craftRecipe MakeImprovisedTape
     {
         time          = 150,
@@ -817,7 +817,7 @@ module Base
             item 1 Herbalist.ImprovisedTape,
         }
     }
-
+    
     craftRecipe MakeWoodenMortarandPestle
     {
         time          = 100,
@@ -838,13 +838,13 @@ module Base
             item 1 Herbalist.WoodenMortarandPestle,
         }
     }
-
+    
     craftRecipe EmptySaucepan
     {
-        timedAction   = EmptyPan,
-        time          = 10,
-        Tags          = InHandCraft,
-        category      = Herbalist,
+        timedAction = EmptyPan,
+        time        = 10,
+        Tags        = InHandCraft,
+        category    = Herbalist,
         inputs
         {
             item 1 [Herbalist.DisinfectantSaucepan;Herbalist.MallowHerbalTea;Herbalist.LemongrassRemedy;Herbalist.GinsengInfusion] mode:destroy flags[IsEmpty;Prop1],
@@ -852,6 +852,70 @@ module Base
         outputs
         {
             item 1 Base.Saucepan,
+        }
+    }
+    
+    craftRecipe MakeAmmonia
+    {
+        timedAction   = Making,
+        time          = 100,
+        Tags          = AnySurfaceCraft,
+        skillRequired = PlantScavenging:2;Cooking:2,
+        xpAward       = Cooking:10,
+        category      = Herbalist,
+        inputs
+        {
+            item 1 tags[base:compost],
+            item 1 tags[base:fork;base:mixingutensil;base:spoon] mode:keep flags[Prop1],
+            item 1 [Base.Pot;Base.PotForged] flags[IsEmpty] mode:keep flags[Prop2],
+            item 1 [Base.RubberHose] mode:keep,
+            item 1 tags[base:glassbottle] mode:destroy flags[IsEmpty],
+        }
+        outputs
+        {
+            item 1 Herbalist.Ammonia,
+        }
+    }
+
+    craftRecipe MakePotofBakingSodaUnboiled
+    {
+        timedAction   = Making,
+        time          = 100,
+        Tags          = AnySurfaceCraft,
+        skillRequired = Cooking:2,
+        xpAward       = Cooking:10,
+        category      = Herbalist,
+        inputs
+        {
+            item 1 [Base.Pot] mode:destroy flags[IsEmpty],
+            item 1 tags[base:mixingutensil;base:spoon] mode:keep flags[Prop1],
+            item 1 tags[Hammer] mode:keep,
+            item 1 [*],
+            -fluid 0.5 [Ammonia],
+            item 1 [Base.Limestone] mode:destroy,
+            item 2 [Base.Saltrock] mode:destroy,
+        }
+        outputs
+        {
+            item 1 Herbalist.PotofBakingSodaUnboiled,
+        }
+    }
+
+    craftRecipe MakeBakingSoda
+    {
+        timedAction   = Making,
+        time          = 60,
+        Tags          = AnySurfaceCraft,
+        category      = Herbalist,
+        inputs
+        {
+            item 1 [Herbalist.PotofBakingSodaUnfiltered],            
+            item 1 [Base.Sheet] mode:keep,
+        }
+        outputs
+        {
+            item 1 Base.BakingSoda,
+            item 1 Base.Pot,
         }
     }
     
