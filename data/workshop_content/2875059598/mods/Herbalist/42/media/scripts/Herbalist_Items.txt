@@ -239,6 +239,32 @@ module Herbalist
         Tags              = HasMetal,
     }
     
+    item Ammonia
+    {
+        DisplayCategory        = WaterContainer,
+        Weight                 = 0.3,
+        ItemType               = base:normal,
+        Icon                   = GlassBottle,
+        IconFluidMask          = GlassBottle_Mask,
+        WorldStaticModel       = BottleCrafted_Ground,
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound      = GetWaterFromLakeBottle,
+        FillFromTapSound       = GetWaterFromTapGlass,
+        FillFromToiletSound    = GetWaterFromToilet,
+        Tags                   = base:glass;base:glassbottle,
+        component FluidContainer
+        {
+            ContainerName    = BottleGlass,
+            Opened           = true,
+            Capacity         = 1.0,
+            CustomDrinkSound = DrinkingFromBottleGlass,
+            Fluids
+            {
+                fluid = Ammonia:1.0,
+            }
+        }
+    }
+    
     /******* INFUSI E BOLLITI *******/
     
     item GinsengInfusionUnboiled
@@ -690,17 +716,54 @@ module Herbalist
         WorldStaticModel  = ImprovisedTape,
         Tags              = base:tape;base:inferiorbinding;base:simpleweaponbinding,
     }
-
+    
     item WoodenMortarandPestle
     {
-        DisplayCategory = FirstAid,
-        DisplayName       = WoodenMortarandPestle,
-        ItemType = base:normal,
-        Weight = 0.8,
-        Icon = WoodMortarIcon,
-        StaticModel = MortarFired,
+        DisplayCategory  = FirstAid,
+        DisplayName      = WoodenMortarandPestle,
+        ItemType         = base:normal,
+        Weight           = 0.8,
+        Icon             = WoodMortarIcon,
+        StaticModel      = MortarFired,
         WorldStaticModel = MortarFired_Ground,
-        Tags = base:mortarpestle,
+        Tags             = base:mortarpestle,
+    }
+
+    item PotofBakingSodaUnboiled
+    {
+        DisplayName       = Pot of Baking Soda Unboiled,
+        DisplayCategory   = Food,
+        ItemType          = base:food,
+        Weight            = 3,
+        Icon              = PotFull,
+        CantBeFrozen      = TRUE,
+        BadInMicrowave    = true,
+        CookingSound      = BoilingFood,
+        CantEat           = true,
+        IsCookable        = TRUE,
+        MinutesToCook     = 10,
+        MinutesToBurn     = 30,
+        DaysFresh         = 30,
+        DaysTotallyRotten = 90,
+        ReplaceOnCooked   = Herbalist.PotofBakingSodaUnfiltered,
+        StaticModel       = CookingPot,
+        WorldStaticModel  = CookingPotSoup_Ground,
+        Tags              = HasMetal,
+    }
+
+    item PotofBakingSodaUnfiltered
+    {
+        DisplayName       = Pot of Baking Soda Unfiltered,
+        DisplayCategory   = Normal,
+        ItemType          = base:normal,
+        Weight            = 2,
+        Icon              = PotFull,
+        CantBeFrozen      = TRUE,
+        BadInMicrowave    = true,
+        CantEat           = true,
+        StaticModel       = CookingPot,
+        WorldStaticModel  = CookingPotSoup_Ground,
+        Tags              = HasMetal,
     }
     
     }/*FINE CODICE*/

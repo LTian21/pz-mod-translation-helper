@@ -1,7 +1,7 @@
 # 汉化中心状态仪表盘
 
 ![最后运行状态](https://img.shields.io/badge/Last%20Run-Success-green)
-*最后更新于：`2026-05-15 05:12:17 UTC+08:00`*
+*最后更新于：`2026-05-16 05:01:13 UTC+08:00`*
 
 ---
 
@@ -17,14 +17,9 @@
 
 ---
 
-### ⚡ **最近一次运行详情 (Run ID: ``run_20260515_051214``)**
+### ⚡ **最近一次运行详情 (Run ID: ``run_20260516_050113``)**
 
-*   **78amgeneralM35A2 (ID: 2799152995)**: 新增 `36` 条, 移除 `17` 条。
-*   **90pierceArrow (ID: 2942793445)**: 新增 `21` 条, 移除 `0` 条。
-*   **90fordF350ambulance (ID: 2952802178)**: 新增 `18` 条, 移除 `0` 条。
-*   **92fordCVPI (ID: 2962175696)**: 新增 `16` 条, 移除 `0` 条。
-*   **93fordElgin (ID: 2969343830)**: 新增 `19` 条, 移除 `0` 条。
-*   **Lifestyle (ID: 3403870858)**: 新增 `5` 条, 移除 `0` 条。
+*   **Herbalist (ID: 2875059598)**: 新增 `9` 条, 移除 `0` 条。
 
 ---
 
@@ -523,15 +518,15 @@
 | [Deprecated] What can I craft? | 3390169945 | 0 | 0 | 0 | 1 |
 | [B42] Noir's Rifle Slings | 3388107363 | 0 | 0 | 0 | 10 |
 | Universal Gun Repair | 2899457928 | 0 | 0 | 7 | 70 |
-| Change Sandbox Options (by Star) | 2894296454 | 0 | 0 | 1 | 6 |
 | [B42] Drag Bodies Faster | 3393821407 | 0 | 0 | 3 | 3 |
+| Change Sandbox Options (by Star) | 2894296454 | 0 | 0 | 1 | 6 |
 | Tikitown & PowerPlant (B41/B42) | 3037854728 | 0 | 0 | 24 | 307 |
 | U.S. M998 Humvee by Papa_Chad | 3554424111 | 0 | 0 | 0 | 39 |
 | Autotsar Bus B42 | 3402812859 | 0 | 0 | 0 | 1 |
 | Standardized Vehicle Upgrades 3 - Core - B42 | 3403490889 | 0 | 0 | 2 | 373 |
 | They Knew [B42] | 3387110070 | 0 | 0 | 0 | 26 |
-| Soul Filcher's Exploring Time | 2244879881 | 0 | 0 | 7 | 23 |
 | Simple Lockpicking [B41/B42MP] | 2991923398 | 0 | 19 | 0 | 19 |
+| Soul Filcher's Exploring Time | 2244879881 | 0 | 0 | 7 | 23 |
 | Even More Traits | 2855320431 | 0 | 0 | 2 | 618 |
 | [B41] [B42] CJ Firearm [Discountiuned] | 2874163136 | 0 | 0 | 0 | 226 |
 | Better Generator Info | 3576056135 | 0 | 0 | 0 | 26 |
@@ -544,8 +539,8 @@
 | Picking Meister | 3422220305 | 0 | 0 | 0 | 26 |
 | True Music Radio | 3100475013 | 0 | 0 | 0 | 65 |
 | Trees Have Loot | 2951270166 | 0 | 0 | 0 | 2 |
-| Fridges Off! | 2853974107 | 0 | 0 | 0 | 4 |
 | [B42MP] FlipVehiclePlusTrailer | 3430172149 | 0 | 0 | 0 | 93 |
+| Fridges Off! | 2853974107 | 0 | 0 | 0 | 4 |
 | [B41] Known And Collected | 2881764317 | 0 | 0 | 0 | 13 |
 | Vanilla Clothing Expansion | 3421271152 | 0 | 0 | 0 | 41 |
 | [KYR] Real Weather Mod | 3051276857 | 0 | 0 | 0 | 9 |
@@ -604,8 +599,8 @@
 | [J&G] Trauma Responder Uniform [B42/41] | 3443982326 | 0 | 0 | 0 | 63 |
 | [J&G] Flecktarn Gear [B42/41] | 3206579556 | 0 | 0 | 0 | 31 |
 | Keep Inventory & Respawn [B42 NOT WORKING] | 2879960829 | 0 | 0 | 0 | 56 |
-| True Crawl 3.0 - Fixed [B42] | 3410989950 | 0 | 0 | 6 | 11 |
 | Legendary Fanny Pack | 3552050880 | 0 | 35 | 0 | 46 |
+| True Crawl 3.0 - Fixed [B42] | 3410989950 | 0 | 0 | 6 | 11 |
 | Ammo Loot Drop · Zombies Drop Ammo & Ammo Box B42 | 3389050623 | 0 | 0 | 0 | 9 |
 | The Last of Us: Factions & Gear [B41/B42.12][DISCONTINUED] | 3348036710 | 0 | 0 | 18 | 113 |
 | Lynx Pack [B41/B42MP] | 3470485566 | 0 | 0 | 1 | 93 |
@@ -616,14 +611,14 @@
 | [B42][MP]Table Saw | 3540297822 | 0 | 2 | 1 | 41 |
 | LIAZ 300 | 3611100835 | 0 | 0 | 0 | 9 |
 | [J&G] Desert Uniform [B42/41] | 3299457564 | 0 | 0 | 0 | 44 |
-| [B42] Extended Battery Life | 3387462212 | 0 | 0 | 0 | 3 |
 | Injury Indicator [B42] | 3565698092 | 0 | 0 | 0 | 33 |
+| [B42] Extended Battery Life | 3387462212 | 0 | 0 | 0 | 3 |
 | Alarm Syndrome | 3409527910 | 0 | 0 | 0 | 8 |
-| [B42/1] '73 Winnebago Chieftain/Outdated | 3488174689 | 0 | 0 | 0 | 1 |
-| Item Rarity UI (Build 41 + 42) | 3662387304 | 0 | 11 | 0 | 11 |
-| [B42] Survival HUD | 3495906499 | 0 | 7 | 1 | 17 |
-| TwisTonFire - Improved Soundoptions | 3575778063 | 0 | 12 | 0 | 12 |
 | dustinguished bolt cutters | 3671176591 | 0 | 21 | 0 | 21 |
+| Item Rarity UI (Build 41 + 42) | 3662387304 | 0 | 11 | 0 | 11 |
+| TwisTonFire - Improved Soundoptions | 3575778063 | 0 | 12 | 0 | 12 |
+| [B42/1] '73 Winnebago Chieftain/Outdated | 3488174689 | 0 | 0 | 0 | 1 |
+| [B42] Survival HUD | 3495906499 | 0 | 7 | 1 | 17 |
 | [B42 Port] Take a Bath | 3485349033 | 0 | 0 | 0 | 24 |
 | [B42] Dark/Invisible Weapon Slings | 3488113291 | 0 | 13 | 0 | 13 |
 | [B42][B41] Collapsible Ladder | 3438123707 | 0 | 0 | 0 | 5 |
@@ -653,10 +648,10 @@
 | Lillie's Enhanced Militaria | 3396622780 | 0 | 0 | 0 | 152 |
 | Immersive Barricaded Start [b41 & 42] | 3031475005 | 0 | 0 | 0 | 2 |
 | [B42.14+] Exercise With Corpses (SP/MP) | 3404074048 | 0 | 0 | 0 | 7 |
-| Hanabi's Food | 3043243994 | 0 | 0 | 0 | 78 |
 | [42+] [MP] Frogtown by TwinCrows | 3449473111 | 0 | 0 | 3 | 3 |
-| [J&G] Alpine Uniform [B42/41] | 3303746488 | 0 | 0 | 0 | 46 |
+| Hanabi's Food | 3043243994 | 0 | 0 | 0 | 78 |
 | BetterFPS_B42 | 3423115544 | 0 | 0 | 0 | 4 |
+| [J&G] Alpine Uniform [B42/41] | 3303746488 | 0 | 0 | 0 | 46 |
 | Trading Trailer [B41/B42] | 3572122233 | 0 | 0 | 0 | 1 |
 | [B41/B42] Check Around | 3300688173 | 0 | 0 | 1 | 157 |
 | Auto Loot | 3392699932 | 0 | 0 | 0 | 77 |
@@ -667,29 +662,29 @@
 | Bandits Extra Options | 3412682512 | 0 | 0 | 0 | 94 |
 | [B42]Pallontras Crossbows | 3400528439 | 0 | 0 | 0 | 117 |
 | Functional Car Lift | 3464551542 | 0 | 0 | 0 | 14 |
-| [B42] Chevrolet Corvette C6 | 3566330206 | 0 | 0 | 0 | 5 |
 | [J&G] Firefighter Uniform [B42/41] | 3521263771 | 0 | 0 | 2 | 54 |
+| [B42] Chevrolet Corvette C6 | 3566330206 | 0 | 0 | 0 | 5 |
 | Climb | 3389681224 | 0 | 0 | 0 | 1 |
 | Long Term Preservation Extended | 3597673472 | 0 | 0 | 0 | 145 |
 | [B42] Tatra 815 | 3404869345 | 0 | 0 | 0 | 4 |
+| Serving Plates: Make your plates useful for Build 42 | 3399320470 | 0 | 0 | 0 | 14 |
 | Jump | 3389606570 | 0 | 0 | 0 | 1 |
 | [B42] Kick Scooter! | 3453879909 | 0 | 0 | 0 | 8 |
-| Serving Plates: Make your plates useful for Build 42 | 3399320470 | 0 | 0 | 0 | 14 |
 | Night Vision [B.41/B.42] | 3383603346 | 0 | 0 | 0 | 26 |
 | Vehicle Class Overhaul [42.18] | 3407507873 | 0 | 0 | 4 | 15 |
 | Military Ponchos: RELOADED | 3439247001 | 0 | 0 | 63 | 185 |
 | JB's Fireflies - B41 and B42 + MP | 3591708775 | 0 | 0 | 0 | 11 |
 | Tire Pressure Monitoring System (TPMS) | 3381815115 | 0 | 0 | 0 | 12 |
 | Pogo's Clothing Collection | 3058134369 | 0 | 0 | 0 | 19 |
-| LEARN HOW TO READ (B42 &#124; B41) | 3005975760 | 0 | 0 | 0 | 2 |
 | [J&G] Neon Vandals Uniform [B42/41] | 3497172953 | 0 | 0 | 0 | 52 |
+| LEARN HOW TO READ (B42 &#124; B41) | 3005975760 | 0 | 0 | 0 | 2 |
 | [A&M] New Frontier: Hair Salon | 3387569160 | 0 | 0 | 0 | 59 |
 | Soul Filcher's Clearing Time | 1926311864 | 0 | 0 | 0 | 5 |
 | [B42] Computer | 3548006452 | 0 | 0 | 0 | 1 |
 | [J&G] XKU Uniform [B42/41] | 3276134387 | 0 | 0 | 0 | 31 |
+| Generator Powered Buildings | 3597471949 | 0 | 0 | 0 | 61 |
 | darlak's Full Ghillie Sniper Operator [B41/B42] | 2740991142 | 0 | 0 | 0 | 57 |
 | Scavenger Skill [B42] | 3407792640 | 0 | 0 | 0 | 69 |
-| Generator Powered Buildings | 3597471949 | 0 | 0 | 0 | 61 |
 | SafeLogin | 2876897619 | 0 | 0 | 0 | 8 |
 | [B42] Bag Upgrade Plus | 3403697073 | 0 | 0 | 1 | 52 |
 | Zomboid Storylines | 3620552991 | 0 | 0 | 1 | 196 |
@@ -747,9 +742,9 @@
 | Ash's Gothic Style: Booty Skirt | 3377802217 | 0 | 0 | 0 | 1 |
 | Combat Mastering Skill | 3435985650 | 0 | 0 | 0 | 28 |
 | Melee Weapon Upgrade | 3394923321 | 0 | 0 | 1 | 1051 |
-| [B42] Push Cars by Hand (SP-Only) | 3393104411 | 0 | 0 | 0 | 13 |
-| [B42] Mastered Traits | 3423601261 | 0 | 0 | 0 | 70 |
 | Auto Move Corpses [B42] | 3415416226 | 0 | 0 | 0 | 18 |
+| [B42] Mastered Traits | 3423601261 | 0 | 0 | 0 | 70 |
+| [B42] Push Cars by Hand (SP-Only) | 3393104411 | 0 | 0 | 0 | 13 |
 | Long-standing Wooden Structures | 3205738591 | 0 | 0 | 0 | 17 |
 | Mexiox's - Light Sabers [B42] | 2927454765 | 0 | 0 | 0 | 139 |
 | Lucille Vampire Bat | 3436159263 | 0 | 0 | 0 | 6 |
@@ -798,22 +793,22 @@
 | [B42] Wallet Fix | 3400142576 | 0 | 0 | 0 | 6 |
 | [B42] Bag Upgrade Ultra | 3407793320 | 0 | 0 | 2 | 41 |
 | [B42] Immersive Preservation: Canning and Jarring (of evolved recipes) | 3560836822 | 0 | 0 | 0 | 17 |
-| [B42] Make Charcoal in kilns | 3392674521 | 0 | 0 | 2 | 4 |
 | [B41/B42] I WANT TO EAT ICECREAM FOREVER | 2754525193 | 0 | 0 | 0 | 38 |
+| [B42] Make Charcoal in kilns | 3392674521 | 0 | 0 | 2 | 4 |
 | Zomboid Drop More B42 | 3546452514 | 0 | 0 | 0 | 33 |
 | Better Animal Care | 3582024827 | 0 | 5 | 0 | 5 |
 | [B42] Make Gunpowder from Fertilizer | 3392188086 | 0 | 0 | 1 | 2 |
 | Show Weapon Stats Plus | 3635921724 | 0 | 15 | 0 | 15 |
-| Metal Spears | 2927603127 | 0 | 0 | 1 | 8 |
 | Better Dressed - Transmog | 3599514194 | 0 | 0 | 0 | 49 |
+| Metal Spears | 2927603127 | 0 | 0 | 1 | 8 |
 | [UPDATED] Ellie Voice Mod [B42] | 3464700263 | 0 | 0 | 0 | 1 |
 | [B42/B41] Car Parts Repair | 3281301960 | 0 | 0 | 0 | 17 |
 | Shield Mode (Secondary Hand Equip) (B41/B42) | 3383001527 | 0 | 0 | 2 | 9 |
 | [B42] Pack Pantry | 3416584592 | 0 | 32 | 0 | 62 |
 | KatanaStance2 | 3308966632 | 0 | 0 | 0 | 11 |
+| [B42] Fallout - NCR Trooper Pack UPDATED! | 3508243687 | 0 | 0 | 13 | 46 |
 | (REDUNDANT) More Wood To Charcoal | 3425726710 | 0 | 0 | 0 | 6 |
 | [42.12/42.13] Mystic's Face Retexture for Spongie's Character Customisation | 3415470189 | 0 | 0 | 0 | 1 |
-| [B42] Fallout - NCR Trooper Pack UPDATED! | 3508243687 | 0 | 0 | 13 | 46 |
 | Functional Escalators | 3462962143 | 0 | 0 | 0 | 8 |
 | B42 PZLinux [BETA] | 3414468585 | 0 | 0 | 2 | 5 |
 | RE Interface [B42] | 3598501350 | 0 | 0 | 0 | 71 |
@@ -821,15 +816,15 @@
 | TSY - theySEE You &#124; Run & Scream | 3609311749 | 0 | 0 | 0 | 35 |
 | Trap Manager | 3566766862 | 0 | 0 | 1 | 162 |
 | Where are the animals? | 3409035433 | 0 | 0 | 0 | 23 |
+| Project Fallout: GunRunner | 3434691822 | 0 | 0 | 0 | 246 |
 | CDC Rapid Response 2 [B42 & B41] | 3389707527 | 0 | 0 | 0 | 268 |
 | Unimogs B42 | 3399870407 | 0 | 0 | 0 | 1 |
-| Project Fallout: GunRunner | 3434691822 | 0 | 0 | 0 | 246 |
-| [B42] Water Filter Straw | 3418513380 | 0 | 0 | 0 | 8 |
 | [B42]说话描述情绪(B42.12) | 3446253876 | 0 | 0 | 470 | 470 |
+| [B42] Water Filter Straw | 3418513380 | 0 | 0 | 0 | 8 |
 | [OBSOLETE] RollBack Rain Collector Barrel | 3392186516 | 0 | 0 | 1 | 6 |
 | [B42] Essential Recipes [OBSOLET] | 3401825906 | 0 | 0 | 63 | 129 |
-| Milk Them All [B42] | 3568280195 | 0 | 0 | 0 | 21 |
 | Tactical Organization Solutions Continued | 3626886187 | 0 | 0 | 0 | 28 |
+| Milk Them All [B42] | 3568280195 | 0 | 0 | 0 | 21 |
 | Excalibolg | 3070446764 | 0 | 0 | 0 | 19 |
 | Toppling Zombies [B42] | 3425038705 | 0 | 0 | 0 | 13 |
 | The Plaid Sherry Shorty Dress | 3419265871 | 0 | 0 | 1 | 8 |
@@ -837,13 +832,13 @@
 | Joel Voice Pack [TLOU2] [B42] | 3496043022 | 0 | 0 | 0 | 1 |
 | Simulated Antibodies (42.13.1 MP) Alpha 1.6.1 | 3623275770 | 0 | 123 | 0 | 123 |
 | Low Quality Zombie Clothing | 3156717285 | 0 | 0 | 0 | 5 |
-| [B42] Tame-able Wolves ~ LEGACY | 3581134738 | 0 | 0 | 0 | 8 |
 | All-in-One Backpacking Shelter | 3417917173 | 0 | 0 | 5 | 15 |
+| [B42] Tame-able Wolves ~ LEGACY | 3581134738 | 0 | 0 | 0 | 8 |
 | Bloodlust Trait [B41] | 3027121498 | 0 | 0 | 0 | 52 |
 | Food Brazil - Comida Brasil B42/B41 [DESATUALIZADO] | 3469279808 | 0 | 0 | 0 | 77 |
 | Craft Spear With Planks | 3438621136 | 0 | 0 | 0 | 1 |
-| Simple Skill Books | 3291799176 | 0 | 0 | 0 | 126 |
 | [B42] Alternative Inventory Rendering | 3394402683 | 0 | 0 | 0 | 30 |
+| Simple Skill Books | 3291799176 | 0 | 0 | 0 | 126 |
 | [Project Fallout] The Caravan Shotgun | 3400681835 | 0 | 0 | 12 | 15 |
 | H.E.V. Suits | 3624858124 | 0 | 0 | 0 | 3 |
 | Zombie Infection Vaccine (Build 42.14+ SP+MP) | 3656879408 | 0 | 20 | 0 | 20 |
@@ -854,8 +849,8 @@
 | My So-Called Toy | 3540268758 | 0 | 0 | 0 | 102 |
 | B42 - Process Scrap Metal | 3392186364 | 0 | 0 | 4 | 8 |
 | The Division Backpack | 3391306957 | 0 | 0 | 0 | 22 |
-| VSMR Face for Spongie's Character Customisation | 3415572170 | 0 | 0 | 0 | 2 |
 | Ada Wong - Voice [B42] | 3401470591 | 0 | 0 | 0 | 1 |
+| VSMR Face for Spongie's Character Customisation | 3415572170 | 0 | 0 | 0 | 2 |
 | Context Cleaner [B41/B42] | 3617485838 | 0 | 0 | 0 | 60 |
 | [B42] Ammo Crafting (Simple) | 3396542795 | 0 | 0 | 8 | 26 |
 | TEH Assembly Order for Project Summer Car [B42] | 3593757134 | 0 | 0 | 0 | 10 |
@@ -900,11 +895,11 @@
 | AVA: Ranger Blazer | 3391400317 | 0 | 0 | 0 | 2 |
 | 1980 Mercedes Benz W123 People eater | 3603108864 | 0 | 0 | 0 | 1 |
 | [B42] Cut Heavy Chains | 3413713793 | 0 | 0 | 0 | 2 |
-| Support Goods [B42.9] - MyAlcohol! | 3510863962 | 0 | 0 | 0 | 218 |
 | ExtraMoney | 3462306255 | 0 | 0 | 0 | 66 |
+| Support Goods [B42.9] - MyAlcohol! | 3510863962 | 0 | 0 | 0 | 218 |
 | H&K VP70 | 2470321383 | 0 | 0 | 0 | 5 |
-| Sound Scouter | 3366600816 | 0 | 0 | 0 | 30 |
 | Gunfire Causes Hearing Loss [B42+] | 3465727755 | 0 | 0 | 0 | 7 |
+| Sound Scouter | 3366600816 | 0 | 0 | 0 | 30 |
 | [B42] Cannibal Trait | 3414013160 | 0 | 0 | 0 | 1 |
 | Lillie's Meal Combat Individual Ration Mod | 3557845788 | 0 | 0 | 0 | 106 |
 | [Project Fallout] The Beginning | 3461117277 | 0 | 0 | 3 | 28 |
@@ -919,9 +914,9 @@
 | [B42.15.2] [SP-Only] Ogrim Mod's - Machine Utils | 3555558732 | 0 | 0 | 0 | 56 |
 | Make Burlap | 3409478949 | 0 | 0 | 0 | 1 |
 | [B42]Gauss Firearms | 3429953336 | 0 | 0 | 0 | 105 |
-| Rick's MLC GunLight Patch [B42] | 3595628283 | 0 | 0 | 0 | 2 |
-| Irrigation Pipes/Cluster Barrels | 3599339646 | 0 | 0 | 1 | 41 |
 | Ratchat's Outdoor Tiles | 3430305726 | 0 | 0 | 1 | 4 |
+| Irrigation Pipes/Cluster Barrels | 3599339646 | 0 | 0 | 1 | 41 |
+| Rick's MLC GunLight Patch [B42] | 3595628283 | 0 | 0 | 0 | 2 |
 | Industrial Revolution Generic Add On | 3359867059 | 0 | 0 | 0 | 2 |
 | B42 Insect Foraging | 3437552077 | 0 | 0 | 0 | 3 |
 | More Traits Antique Upgrade | 3397942493 | 0 | 0 | 0 | 64 |
