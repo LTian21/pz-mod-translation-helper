@@ -274,6 +274,8 @@ module AuthenticZBackpacksPlus {
 		Carbohydrates = 10,
 		Lipids = 0.5,
 		Proteins = 0,
+		primaryAnimMask 			= 	HoldingUmbrellaRight,
+        secondaryAnimMask 			= 	HoldingUmbrellaLeft,
 	    AttachmentType 				= 	Hammer,		
 		StaticModel 	 			= 	BigLollipop,			
 		WorldStaticModel 			=   WorldItem-BigLollipop,
@@ -871,38 +873,48 @@ module AuthenticZBackpacksPlus {
 		cantBeConsolided 		=	TRUE,		
 		WorldStaticModel 		= 	WorldItem_RoadsideTriangle,			
     }
-   
 	item AuthenticSmokeBomb
     {
-        DisplayCategory = Devices,	
-        MaxRange				=	10,
-        ItemType				= base:Weapon,
-        MinimumSwingTime		=	1.5,
-		SwingAnim				=	Throw,
+        DisplayCategory 		= 	Devices,
+		ItemType				=	base:Weapon,
+		Icon					=	SmokeGrenadeIcon,        Weight					=	1.5,
         WeaponSprite 			= 	AuthenticSmokeGrenade,
+        CanBePlaced 			= 	TRUE,
         UseSelf					=	TRUE,
-        SwingTime				=	1.5,
-        SwingAmountBeforeImpact	=	0.1,
-        PhysicsObject			=	ExplosiveTrap,
+		ConditionMax 			=	1,
+
+        PhysicsObject			=	Base.SmokeBomb,
+
         MinDamage				=	0,
-        Weight					=	1.5,
         MaxDamage				=	0,
         MaxHitCount				=	0,
-        Icon					=	SmokeGrenadeIcon,
-        TriggerExplosionTimer   =   50,
-        SmokeRange  			=   10,
-        CanBePlaced 			= 	TRUE,
-        PlacedSprite 			= 	constructedobjects_01_36,
+        MaxRange				=	10.0,
+        MinimumSwingtime		=	1.5,
+        Swingtime		=	1.5,
+        SwingAmountBeforeImpact	=	0.1,
+        SwingAnim				=	Throw,
+		SwingSound 				=	SmokeBombThrow,
+		ExplosionSound 			=	SmokeBombLoop,
+		ExplosionDuration 		= 	10,
+
+		NoiseDuration 			= 10,
+		NoiseRange 				= 10,
+		FireStartingEnergy 		= 40,
+		FireStartingChance 		= 50,
+        SmokeRange  			=	5,
+
+        PlacedSprite 			= 	constructedobjects_01_40,
+
         Tooltip 				= 	Tooltip_Trap,
         WorldStaticModel		= 	AuthenticSmokeGrenade,
-        AttachmentType  		= 	AuthenticExplosive,			
+        AttachmentType  		= 	AuthenticExplosive,
     }
 
 	item AuthenticSmokeBombRemote
     {
-        DisplayCategory = Devices,	
+        DisplayCategory = Devices,
         MaxRange				=	10,
-        ItemType				= base:Weapon,
+		ItemType				=	base:Weapon,
         MinimumSwingTime		=	1.5,
 		SwingAnim				=	Throw,
         WeaponSprite 			= 	AuthenticSmokeGrenade,
@@ -917,11 +929,12 @@ module AuthenticZBackpacksPlus {
         Icon					=	SmokeGrenadeIcon,
         SmokeRange  			=   5,
         CanBePlaced				= 	TRUE,
-        CanBeRemote 			= 	TRUE,
-        PlacedSprite 			= 	constructedobjects_01_36,
-        WorldStaticModel 		= 	SmokeBombSensor,
-        AttachmentType  		= 	AuthenticExplosive,			
-    }	
+        CanBeRemote 			= 	true,
+        PlacedSprite 			= 	constructedobjects_01_40,
+        WorldStaticModel 		= 	AuthenticSmokeGrenade,
+        AttachmentType  		= 	AuthenticExplosive,
+		Tooltip 				= 	Tooltip_Trap,
+    }
 
 	item GroguCarriage
 	{
