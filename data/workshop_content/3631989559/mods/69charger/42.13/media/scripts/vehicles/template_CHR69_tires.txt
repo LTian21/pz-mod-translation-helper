@@ -50,6 +50,23 @@ module Base
         invertX = TRUE,
 	}
 
+    model 69chargerWheel4L
+	{
+		mesh = vehicles/Vehicles_69chargerDemon_Wheels|demon_wheel0,
+		texture = vehicles/Vehicles_69chargerDemon_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+
+    model 69chargerWheel4R
+	{
+		mesh = vehicles/Vehicles_69chargerDemon_Wheels|demon_wheel0,
+		texture = vehicles/Vehicles_69chargerDemon_Wheel,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
+
 	template vehicle CHR69Tires
 	{
 		part TireFrontLeft
@@ -448,6 +465,138 @@ module Base
 				time = 400,
 				skills = Mechanics:1,
 				test = Vehicles.UninstallTest.Default,
+			}
+		}
+	}
+
+    template vehicle CHR69TiresD
+	{
+		part TireFrontLeft
+		{
+            model TireL
+			{
+				file = 69chargerWheel4L,
+			}
+
+			area = TireFrontLeft,
+			wheel = FrontLeft,
+			table install
+			{
+				requireInstalled = BrakeFrontLeft;SuspensionFrontLeft,
+			}
+
+		}
+
+		part TireFrontRight
+		{
+            model TireR
+			{
+				file = 69chargerWheel4R,
+			}
+
+			area = TireFrontRight,
+			wheel = FrontRight,
+			table install
+			{
+				requireInstalled = BrakeFrontRight;SuspensionFrontRight,
+			}
+		}
+
+		part TireRearLeft
+		{
+            model TireL
+			{
+				file = 69chargerWheel4L,
+			}
+
+			area = TireRearLeft,
+			wheel = RearLeft,
+			table install
+			{
+				requireInstalled = BrakeRearLeft;SuspensionRearLeft,
+			}
+		}
+
+		part TireRearRight
+		{
+            model TireR
+			{
+				file = 69chargerWheel4R,
+			}
+
+			area = TireRearRight,
+			wheel = RearRight,
+			table install
+			{
+				requireInstalled = BrakeRearRight;SuspensionRearRight,
+			}
+		}
+
+		part Tire*
+		{
+			category = tire,
+			specificItem = false,
+			itemType = Base.69chargerDemonTire2,
+            durability = 2,
+			container
+			{
+				capacity = 35,
+				test = Vehicles.ContainerAccess.Tire,
+				contentType = Air,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.InstallTest.Default,
+                complete = Vehicles.InstallComplete.Tire,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						type = Base.Jack,
+						count = 1,
+						keep = true,
+					}
+					2
+					{
+						tags = LugWrench,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 400,
+				skills = Mechanics:1,
+				test = Vehicles.UninstallTest.Default,
+                complete = Vehicles.UninstallComplete.Tire,
+			}
+
+            lua
+			{
+				create = Vehicles.Create.Tire,
+				init = Vehicles.Init.Tire,
+				checkOperate = Vehicles.CheckOperate.Tire,
+				update = Vehicles.Update.Tire,
 			}
 		}
 	}

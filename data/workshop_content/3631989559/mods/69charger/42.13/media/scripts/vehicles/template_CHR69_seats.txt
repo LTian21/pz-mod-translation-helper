@@ -31,6 +31,21 @@ module Base
 		scale = 0.1,
         invertX = TRUE,
 	}
+    model 69chargerSeatflD
+	{
+		mesh = vehicles/Vehicles_69charger_Body|demon_seat_fr,
+		texture = Vehicles/Vehicles_69charger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 69chargerSeatfrD
+	{
+		mesh = vehicles/Vehicles_69charger_Body|demon_seat_fr,
+		texture = Vehicles/Vehicles_69charger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+        invertX = TRUE,
+	}
 
 	template vehicle CHR69Seats
 	{
@@ -208,5 +223,94 @@ module Base
 					}
 		}
 	}
-}
 
+    template vehicle CHR69SeatsD
+	{
+		part SeatFrontLeft
+		{
+			
+			model SeatFL
+			{
+				file = 69chargerSeatflD,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+			
+			area = SeatFrontLeft,
+			container
+			{
+				seat = FrontLeft,
+			}
+		}
+
+		part SeatFrontRight
+		{
+
+			model seatFR
+			{
+				file = 69chargerSeatfrD,
+				offset = 0 0 0,
+				rotate = 0 0 0,
+				scale = 1.0,
+			}
+
+			area = SeatFrontRight,
+			container
+			{
+				seat = FrontRight,
+			}
+		}
+
+		part SeatFront*
+		{
+			category = seat,
+			itemType = Base.69chargerDemonFrontSeat,
+			mechanicRequireKey = true,
+            durability = 3,
+			container
+			{
+				test = Vehicles.ContainerAccess.Seat,
+			}
+			table install
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.InstallTest.Default,
+			}
+			table uninstall
+			{
+				items
+				{
+					1
+					{
+						tags = Screwdriver,
+						count = 1,
+						keep = true,
+						equip = primary,
+					}
+				}
+				time = 300,
+				skills = Mechanics:1,
+				recipes = Intermediate Mechanics,
+				test = Vehicles.UninstallTest.Default,
+				requireEmpty = true,
+			}
+			lua
+			{
+				create = Vehicles.Create.Default,
+			}
+		}
+	}
+}

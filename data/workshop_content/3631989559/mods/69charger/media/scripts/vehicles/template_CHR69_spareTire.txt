@@ -1,5 +1,20 @@
 module Base
 {
+    model 69chargerDemonStrapL
+	{
+		mesh = vehicles/Vehicles_69charger_Body|demon_strap,
+		texture = Vehicles/Vehicles_69charger_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+	}
+    model 69chargerDemonStrapR
+	{
+		mesh = vehicles/Vehicles_69charger_Body|demon_strap,
+		texture = Vehicles/Vehicles_69charger_Interior,
+		shader = vehiclewheel,
+		scale = 0.1,
+        invertX = TRUE,
+	}
 	template vehicle CHR69SpareTire
 		{
 		part DAMNSpareTire
@@ -55,6 +70,143 @@ module Base
             		{
             			init = CHR69.Init.SpareTire,
 						create = CHR69.Create.SpareTire,
+					}
+			}
+	}
+
+    template vehicle CHR69SpareTiresD
+		{
+		part DAMNSpareTire
+        	{
+                model spareL
+            {
+                file = 69chargerWheel3L,
+                offset = 0.2444 0.3000 -1.9728,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+                model strapL
+                {
+                    file = 69chargerDemonStrapL,
+                }
+
+				area = TruckBed,
+				category = tire,
+				specificItem = false,
+				itemType = Base.69chargerDemonTire2,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:1,
+                    door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+		            complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+						create = Vehicles.Create.Default,
+					}
+			}
+
+            part DAMNSpareTire2
+        	{
+                model spareR
+                {
+                    file = 69chargerWheel3L,
+                    offset = -0.2444 0.3000 -1.9728,
+                    rotate = 0.0000 0.0000 0.0000,
+                }
+
+                model 69chargerDemonStrapR
+                {
+                    file = 69chargerDemonStrapR,
+                }
+
+				area = TruckBed,
+				category = tire,
+				specificItem = false,
+				itemType = Base.69chargerDemonTire2,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 500,
+                	skills = Mechanics:1,
+                    door = TrunkDoor,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            	table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+				  				type = Base.Wrench,
+								count = 1,
+								keep = true,
+								equip = primary,
+                    		}
+                	}
+
+					time = 750,
+					skills = Mechanics:1,
+					recipes = Intermediate Mechanics,
+		            test = Vehicles.UninstallTest.Default,
+		            complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+						create = Vehicles.Create.Default,
 					}
 			}
 	}		
