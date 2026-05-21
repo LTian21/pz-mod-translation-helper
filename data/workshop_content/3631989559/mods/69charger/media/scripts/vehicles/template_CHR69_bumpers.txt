@@ -42,6 +42,20 @@ module Base
 		scale = 0.1,
 	}
 
+    model 69chargerfrontBullbarFrontD
+	{
+		mesh = vehicles/Vehicles_69charger_Body|demon_bullbar_front,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
+    model 69chargerfrontBullbarRearD
+	{
+		mesh = vehicles/Vehicles_69charger_Body|demon_bullbar_rear,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+
 	template vehicle CHR69BumpersRear
 		{
 
@@ -258,5 +272,129 @@ module Base
 		}
 
         template! = CHR69BumpersRear,
+	}
+
+    template vehicle CHR69BumpersDD
+		{
+
+        part DAMNBumperFront
+        	{
+
+			model FrontBullbarD
+				{
+                		file = 69chargerfrontBullbarFrontD,
+				}
+
+				area = Engine,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.69chargerDemonBullbarFrontD,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
+
+        part DAMNBumperRear
+        	{
+
+			model RearBumperD
+				{
+                		file = 69chargerfrontBullbarRearD,
+				}
+
+				area = TruckBed,
+				category = bodywork,
+				specificItem = false,
+				itemType = Base.69chargerDemonBullbarRearD,
+				mechanicRequireKey = false,
+
+				table install
+				{
+                	items
+                	{
+                    	1
+                    		{
+                        	type = Base.Wrench,
+                        	count = 1,
+                        	keep = true,
+							equip = primary,
+                    		}
+                	}
+
+                	time = 450,
+                	skills = Mechanics:3,
+                	recipes = Intermediate Mechanics,
+                	test = Vehicles.InstallTest.Default,
+                	complete = Vehicles.InstallComplete.Default,
+            		}
+
+            		table uninstall
+            		{
+                	items
+                	{
+                    	1
+                    		{
+			  				type = Base.Wrench,
+							count = 1,
+							keep = true,
+							equip = primary,
+                    		}
+                	}
+
+					time = 500,
+					skills = Mechanics:3,
+					recipes = Intermediate Mechanics,
+                	test = Vehicles.UninstallTest.Default,
+					complete = Vehicles.UninstallComplete.Default,
+            		}
+
+            		lua
+            		{
+					create = Vehicles.Create.Default,
+					}
+		}
 	}
 }

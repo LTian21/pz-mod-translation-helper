@@ -1,0 +1,415 @@
+module Base
+{
+	model 69chargerDemonBase
+	{
+		mesh = vehicles/Vehicles_69charger_Body|demon_body,
+		shader = damn_vehicle_shader,
+		scale = 0.1,
+	}
+	model 69chargerDemonInterior
+	{
+		mesh = vehicles/Vehicles_69charger_Body|demon_interior,
+		texture = Vehicles/Vehicles_69charger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	model 69chargerTISBattery
+	{
+		mesh = vehicles/Vehicles_69charger_Body|TIS_CarBattery,
+		texture = Vehicles/Vehicles_69charger_Interior,
+		shader = damn_wheel_shader,
+		scale = 0.1,
+	}
+	vehicle 69chargerDemon
+    {
+        mechanicType = 3,
+        offRoadEfficiency = 1.0,
+        engineRepairLevel = 4,
+        playerDamageProtection = 1.2,
+        engineRPMType = firebird,
+
+        model
+        {
+            file = 69chargerDemonBase,
+            scale = 0.9000,
+            offset = 0.0000 0.5667 -0.3000,
+        }
+
+        spawnOffsetY = 0,
+
+        skin
+        {
+            texture = Vehicles/Vehicles_69charger_Shell_demonChild,
+        }
+
+        textureRust = Vehicles/Vehicles_69charger_Rust,
+        textureMask = Vehicles/Vehicles_69chargerDemon_Mask,
+        textureLights = Vehicles/Vehicles_69charger_Lights,
+        textureDamage1Shell = Vehicles/Vehicles_69charger_Damage1,
+        textureDamage2Shell = Vehicles/Vehicles_69charger_Damage2,
+        textureDamage1Overlay = Vehicles/Vehicles_69charger_Blood,
+        textureDamage2Overlay = Vehicles/Vehicles_69charger_Blood,
+        textureShadow = Vehicles/Vehicles_69chargerDemon_Shadow,
+
+        sound
+        {
+            engine = VehicleEngineSportsCar,
+            engineStart = VehicleEngineSportsCar,
+            engineTurnOff = VehicleEngineSportsCar,
+            horn = VehicleHornSportsCar,
+            ignitionFail = VehicleIgnitionFailSportsCar,
+        }
+
+        extents = 1.8889 1.1333 5.2222,
+        mass = 740,
+        physicsChassisShape = 1.8222 1.1333 5.2222,
+        centerOfMassOffset = 0.0000 0.7000 -0.2333,
+        shadowExtents = 2.1687 5.1236,
+        shadowOffset = 0.0000 -0.2232,
+        engineForce = 5800,
+        maxSpeed = 120f,
+        gearRatioCount = 4,
+        gearRatioR = 14.1,
+        gearRatio1 = 13.2,
+        gearRatio2 = 9.7,
+        gearRatio3 = 5.8,
+        gearRatio4 = 3.5,
+        engineLoudness = 84,
+        engineQuality = 82,
+        brakingForce = 60,
+        stoppingMovementForce = 4.0f,
+        rollInfluence = 0.99f,
+        steeringIncrement = 0.04,
+        steeringClamp = 0.3,
+        suspensionStiffness = 21,
+        suspensionCompression = 3.83,
+        suspensionDamping = 2.88,
+        maxSuspensionTravelCm = 20,
+        suspensionRestLength = 0.3,
+        wheelFriction = 1.85f,
+        frontEndHealth = 250,
+        rearEndHealth = 150,
+        seats = 2,
+
+        wheel FrontLeft
+        {
+            front = true,
+            offset = 0.8444 -0.6333 1.6889,
+            radius = 0.43f,
+            width = 0.25f,
+        }
+
+        wheel FrontRight
+        {
+            front = true,
+            offset = -0.8444 -0.6333 1.6889,
+            radius = 0.43f,
+            width = 0.25f,
+        }
+
+        wheel RearLeft
+        {
+            front = false,
+            offset = 0.8444 -0.5889 -1.2444,
+            radius = 0.43f,
+            width = 0.25f,
+        }
+
+        wheel RearRight
+        {
+            front = false,
+            offset = -0.8444 -0.5889 -1.2444,
+            radius = 0.43f,
+            width = 0.25f,
+        }
+
+        template = PassengerSeat2,
+
+        passenger FrontLeft
+        {
+            showPassenger = true,
+            hasRoof = true,
+
+            position inside
+            {
+                offset = 0.3889 -0.1556 0.0333,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = 1.1778 -0.9778 -0.1222,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontLeft,
+            }
+        }
+
+        passenger FrontRight
+        {
+            showPassenger = true,
+            hasRoof = true,
+
+            position inside
+            {
+                offset = -0.3889 -0.1556 0.0333,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            position outside
+            {
+                offset = -1.1667 -0.9778 -0.1111,
+                rotate = 0.0000 0.0000 0.0000,
+                area = SeatFrontRight,
+            }
+        }
+
+        area Engine
+        {
+            xywh = 0.0000 2.7667 1.5778 0.7778,
+        }
+
+        area TruckBed
+        {
+            xywh = 0.0000 -3.2333 1.5333 0.7778,
+        }
+
+        area Roofrack
+        {
+            xywh = 0.0000 -0.1000 3.0889 1.6222,
+        }
+
+        area SeatFrontLeft
+        {
+            xywh = 1.3000 0.0667 0.7778 1.3778,
+        }
+
+        area SeatFrontRight
+        {
+            xywh = -1.3000 0.0667 0.7778 1.3778,
+        }
+
+        area SeatRearRight
+        {
+            xywh = -1.3000 -1.0889 0.7778 0.9333,
+        }
+
+        area SeatRearLeft
+        {
+            xywh = 1.3000 -1.0889 0.7778 0.9333,
+        }
+
+        area GasTank
+        {
+            xywh = 1.4556 -2.2111 0.7778 0.7778,
+        }
+
+        area TireFrontLeft
+        {
+            xywh = 1.4778 1.3889 0.4222 0.4222,
+        }
+
+        area TireFrontRight
+        {
+            xywh = -1.4778 1.3889 0.4222 0.4222,
+        }
+
+        area TireRearLeft
+        {
+            xywh = 1.4778 -1.5444 0.4222 0.4222,
+        }
+
+        area TireRearRight
+        {
+            xywh = -1.4778 -1.5444 0.4222 0.4222,
+        }
+
+        template = CHR69TrunkCompartmentD,
+        template = CHR69TiresD,
+        template = CHR69SeatsD,
+        template = CHR69BumpersDD,
+        template = CHR69EngineDoorD,
+        template = CHR69Doors,
+        template = CHR69Armor,
+        template = CHR69Roofracks,
+        template = CHR69SpareTiresD,
+
+        part GloveBox
+        {
+            area = SeatFrontRight,
+            itemType = Base.GloveBox,
+            mechanicRequireKey = true,
+
+            model CHR69intd
+            {
+                file = 69chargerDemonInterior,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            model CHR69intRTr
+            {
+                file = 69chargerInteriorRTrear,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+
+            container
+            {
+                capacity = 7,
+                test = Vehicles.ContainerAccess.GloveBox,
+            }
+
+            lua
+            {
+                create = Vehicles.Create.Default,
+            }
+        }
+
+        template = GasTank,
+
+        part GasTank
+        {
+            table install
+            {
+                recipes = Intermediate Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Intermediate Mechanics,
+            }
+        }
+
+        template = Battery,
+
+        part Battery
+        {
+            model tisbat
+            {
+                file = 69chargerTISBattery,
+                offset = 0.0000 0.0000 0.0000,
+                rotate = 0.0000 0.0000 0.0000,
+            }
+        }
+
+        template = Engine,
+        template = Muffler,
+
+        part Muffler
+        {
+            table install
+            {
+                recipes = Intermediate Mechanics,
+            }
+
+            table uninstall
+            {
+                recipes = Intermediate Mechanics,
+            }
+        }
+
+        part Heater
+        {
+            category = engine,
+
+            lua
+            {
+                update = Vehicles.Update.Heater,
+            }
+        }
+
+        part PassengerCompartment
+        {
+            category = nodisplay,
+
+            lua
+            {
+                update = Vehicles.Update.PassengerCompartment,
+            }
+        }
+
+        template = Brake,
+
+        part Brake*
+        {
+            table install
+            {
+                skills = Mechanics:6,
+                recipes = Intermediate Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:6,
+                recipes = Intermediate Mechanics,
+            }
+        }
+
+        template = Suspension,
+
+        part Suspension*
+        {
+            table install
+            {
+                skills = Mechanics:6,
+                recipes = Intermediate Mechanics,
+            }
+
+            table uninstall
+            {
+                skills = Mechanics:6,
+                recipes = Intermediate Mechanics,
+            }
+        }
+
+        template = Radio,
+        template = Headlight,
+        template = CHR69Windows,
+        template = CHR69Windshields,
+        template = DAMNglobal,
+        template = DAMN69chargerDemon,
+        useChassisPhysicsCollision = false,
+
+        physics box
+        {
+            offset = 0.0000 0.5073 -0.2333,
+            extents = 1.8667 0.7111 5.1778,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 1.0266 -0.5444,
+            extents = 1.4667 0.4000 1.5111,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.8559 0.3444,
+            extents = 1.4667 0.4222 0.6667,
+            rotate = 38.0000 0.0000 0.0000,
+        }
+
+        physics box
+        {
+            offset = 0.0000 0.8318 -1.4111,
+            extents = 1.4667 0.6667 0.5111,
+            rotate = 54.0000 0.0000 0.0000,
+        }
+
+        attachment trailer
+        {
+            offset = 0.0000 -0.2000 -2.5889,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = -1.0000,
+        }
+
+        attachment trailerfront
+        {
+            offset = 0.0000 -0.2000 2.7556,
+            rotate = 0.0000 0.0000 0.0000,
+            zoffset = 1.0000,
+        }
+    }
+}
