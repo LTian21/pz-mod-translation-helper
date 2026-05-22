@@ -1,20 +1,27 @@
 module Base
 {
-	model fhq91CutlassCruiser_Body
+	model fhq91CutlassCiera_Body
 	{
-		mesh = vehicles/vehicle_fhq91cutlasscruiser|fhq91CutlassCruiser,
+		mesh = vehicles/vehicle_fhq91cutlassciera|fhq91CutlassCiera,
 		shader = vehicle_multiuv,
 		invertX = FALSE,
 		scale = 0.47,
 	}
-	model fhq91CutlassCruiser_TrunkLid
+	model fhq91CutlassCiera_DoorL
 	{
-		mesh = vehicles/vehicle_fhq91cutlasscruiser|fhq91CutlassCruiser_Trunk,
+		mesh = vehicles/vehicle_fhq91cutlassciera|fhq91CutlassCiera_DoorL,
 		shader = vehicle_multiuv,
 		invertX = FALSE,
 		scale = 0.47,
 	}
-	template vehicle fhq91CutlassCruiser
+	model fhq91CutlassCiera_DoorR
+	{
+		mesh = vehicles/vehicle_fhq91cutlassciera|fhq91CutlassCiera_DoorR,
+		shader = vehicle_multiuv,
+		invertX = FALSE,
+		scale = 0.47,
+	}
+	template vehicle fhq91CutlassCiera
     {
         mechanicType = 1,
         offRoadEfficiency = 0.7,
@@ -22,10 +29,17 @@ module Base
         playerDamageProtection = 0.8,
         engineRPMType = firebird,
 
+        model
+        {
+            file = fhq91CutlassCiera_Body,
+            scale = 1.8200,
+            offset = 0.0000 -0.0549 0.0165,
+        }
+
         spawnOffsetY = 0.12999995,
 
-        textureMask = Vehicles/vehicle_fhq91CutlassCruiser_mask,
-        textureLights = Vehicles/vehicle_fhq91CutlassCruiser_lights,
+        textureMask = Vehicles/vehicle_fhq91CutlassCiera_mask,
+        textureLights = Vehicles/vehicle_fhq91CutlassCiera_lights,
         textureDamage1Overlay = Vehicles/Veh_Blood_Mask,
         textureDamage2Overlay = Vehicles/Veh_Blood_Hvy,
         textureDamage1Shell = Vehicles/Veh_Damage1,
@@ -230,15 +244,6 @@ module Base
 		}
 		
         template = Trunk/part/TruckBed,
-
-        part TruckBed
-        {
-            container
-            {
-                capacity = 60,
-            }
-        }
-
         template = Seat/part/SeatFrontLeft,
         template = Seat/part/SeatFrontRight,
 		template = Seat/part/SeatRearLeft,
@@ -295,30 +300,10 @@ module Base
         template = Windshield/part/Windshield,
         template = Windshield/part/WindshieldRear,
 		
-		part WindshieldRear
-		{
-			table install
-			{
-				requireInstalled = TrunkDoor,
-			}
-			
-			model Default
-            {
-                file = fhq91CutlassCruiser_TrunkLid,
-                offset = 0.0000 0.0000 0.0000,
-                rotate = 0.0000 0.0000 0.0000,
-            }
-		}
-		
         template = Window/part/WindowFrontLeft,
         template = Window/part/WindowFrontRight,
 		template = Window/part/WindowRearLeft,
         template = Window/part/WindowRearRight,
-
-        part WindshieldRear
-        {
-            requireInstalled = TrunkDoor,
-        }
 
         template = Door/part/DoorFrontLeft,
 
@@ -414,21 +399,13 @@ module Base
             zoffset = 1.0000,
         }
     }
-	vehicle fhq91CutlassCruiser
+	vehicle fhq91CutlassCiera
     {
-        template! = fhq91CutlassCruiser,
-		
-		
-        model
-        {
-            file = fhq91CutlassCruiser_Body,
-            scale = 1.8200,
-            offset = 0.0000 -0.0549 0.0165,
-        }
+        template! = fhq91CutlassCiera,
 
         skin
         {
-            texture = Vehicles/vehicle_fhq91CutlassCruiser_shell,
+            texture = Vehicles/vehicle_fhq91CutlassCiera_shell,
         }
 
         wheel FrontLeft
@@ -470,7 +447,7 @@ module Base
 
         area TruckBed
         {
-            xywh = 0.0000 -1.3681 0.8022 0.4066,
+            xywh = 0.0000 -1.3242 0.8022 0.4066,
         }
 
         area SeatFrontLeft
@@ -485,12 +462,12 @@ module Base
 
         area SeatRearLeft
         {
-            xywh = 0.6319 -0.2967 0.5165 0.5165,
+            xywh = 0.6593 -0.2967 0.5165 0.5165,
         }
 
         area SeatRearRight
         {
-            xywh = -0.6319 -0.2967 0.5165 0.5165,
+            xywh = -0.6593 -0.2967 0.5165 0.5165,
         }
 
         area GasTank
@@ -582,15 +559,15 @@ module Base
             }
         }
 
-        extents = 0.8022 0.5165 2.2967,
-        physicsChassisShape = 0.8022 0.5165 2.2967,
-        centerOfMassOffset = 0.0000 0.2418 -0.0165,
+        extents = 0.8022 0.5165 2.2527,
+        physicsChassisShape = 0.8022 0.5165 2.2527,
+        centerOfMassOffset = 0.0000 0.2418 0.0055,
         shadowExtents = 0.8237 2.3846,
         shadowOffset = 0.0000 -0.0195,
 
         attachment trailer
         {
-            offset = 0.0000 0.1085 -1.1869,
+            offset = 0.0000 0.1378 -1.1332,
             rotate = 0.0000 0.0000 0.0000,
             zoffset = -1.0000,
         }
