@@ -1,0 +1,140 @@
+module Base
+{
+	model 93chevySuburbanTailgatePanel
+	{
+		mesh = vehicles/Vehicles_93chevySuburban_Body|sil93_trunkDoorPanel,
+		shader = damn_vehicle_shader,
+		static = FALSE,
+		scale = 0.1,
+	}
+
+	template vehicle SUB93TailgatePanelCC
+	{
+		part SUB93TailgatePanel
+        {
+            model panel112435548
+            {
+                file = 93chevySuburbanTailgatePanel,
+            }
+                
+            itemType = Base.93chevyTailgatePanel,
+            area = Engine,
+            parent = TrunkDoor,
+            category = bodywork,
+            mechanicRequireKey = false,
+            durability = 2,
+            table install
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                time = 310,
+                skills = Mechanics:1,
+                recipes = Intermediate Mechanics,
+                test = Vehicles.InstallTest.Default,
+                complete = SUB93.InstallComplete.TailgatePanel,
+                requireInstalled = TrunkDoor,
+            }
+            table uninstall
+            {
+                items
+                {
+                    1
+                    {
+                        tags = Screwdriver,
+                        count = 1,
+                        keep = true,
+                        equip = primary,
+                    }
+                }
+                    time = 700,
+                    skills = Mechanics:1,
+                    recipes = Intermediate Mechanics,
+                    test = Vehicles.UninstallTest.Default,
+                    complete = SUB93.UninstallComplete.TailgatePanel,
+            }
+            lua
+            {
+                create = SUB93.Create.TailgatePanel,
+				init = SUB93.Init.TailgatePanel,
+            }
+        }
+	}
+
+    template vehicle SUB93TailgatePanelXC
+	{
+        template! = SUB93TailgatePanelCC,
+
+		part SUB93TailgatePanel
+		{
+			model panel112435548
+            {
+                file = 93chevySuburbanTailgatePanel,
+                offset = 0.0000 0.0000 0.2800,
+			}
+        }
+    }
+
+    template vehicle SUB93TailgatePanelCCshort
+	{
+        template! = SUB93TailgatePanelCC,
+
+		part SUB93TailgatePanel
+		{
+			model panel112435548
+            {
+                file = 93chevySuburbanTailgatePanel,
+                offset = 0.0000 0.0000 0.4678,
+			}
+        }
+    }
+
+    template vehicle SUB93TailgatePanelSC
+	{
+        template! = SUB93TailgatePanelCC,
+
+		part SUB93TailgatePanel
+		{
+			model panel112435548
+            {
+                file = 93chevySuburbanTailgatePanel,
+                offset = 0.0000 0.0000 0.9100,
+			}
+        }
+    }
+
+    template vehicle SUB93TailgatePanelXCS
+	{
+        template! = SUB93TailgatePanelCC,
+
+		part SUB93TailgatePanel
+		{
+			model panel112435548
+            {
+                file = 93chevySuburbanTailgatePanel,
+                offset = 0.0000 0.0000 0.7478,
+			}
+        }
+    }
+
+    template vehicle SUB93TailgatePanelSCS
+	{
+        template! = SUB93TailgatePanelCC,
+
+		part SUB93TailgatePanel
+		{
+			model panel112435548
+            {
+                file = 93chevySuburbanTailgatePanel,
+                offset = 0.0000 0.0000 1.3778,
+			}
+        }
+    }
+}
