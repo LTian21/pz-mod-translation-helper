@@ -349,7 +349,7 @@ module TodoCaserito
 			item 6 TodoCaserito.Medialuna,
 		}
 	}	
-	craftRecipe OpenChicharronPackagePackage
+	craftRecipe OpenChicharronPackage
 	{
         timedAction = UnPackSmallBag,
 		Time = 50,
@@ -391,7 +391,7 @@ module TodoCaserito
 			item 1 TodoCaserito.PanCaseroChicharron,
 		}
 	}	
-	craftRecipe OpenMondongoPackagePackage
+	craftRecipe OpenMondongoPackage
 	{
         timedAction = UnPackSmallBag,
 		Time = 50,
@@ -1351,7 +1351,7 @@ module TodoCaserito
 	}	
 	craftRecipe MakeChoripanArg
 	{
-        timedAction = UnPackSmallBag,
+        timedAction = Making,
 		Time = 35,
 		NeedToBeLearn = True,
         category = Cooking,
@@ -1470,7 +1470,7 @@ module TodoCaserito
 			item 1 Base.JuiceGrape,
 		}
 	}
-	craftRecipe ChurrascoHigado
+	craftRecipe MakeChurrascoHigado
 	{
         timedAction = SliceFish,
 		Time = 50,
@@ -1908,11 +1908,14 @@ module TodoCaserito
     craftRecipe MakeMorcillaCasera
     {
         timedAction = MixingBowl,
-        time = 40,
+		Time = 45,
+		NeedToBeLearn = True,
         category = Cooking,
-        AutoLearnAny  = Cooking:3,
-        Tags = InHandCraft;Cooking,
-        inputs
+		Tags = AnySurfaceCraft;Cooking,
+		SkillRequired = Cooking:3,
+		xpAward = Cooking:7,
+		AutoLearnAny = Cooking:2,
+		inputs
         {
 			item 1 [TodoCaserito.Tripas] flags[IsUncookedFoodItem;ItemCount;InheritFoodAge],
 			item 1 [TodoCaserito.RellenoMorcillaCasera] flags[IsCookedFoodItem;InheritFoodAge;ItemCount],
@@ -1925,7 +1928,7 @@ module TodoCaserito
     }
 	craftRecipe MakeMorcipan
 	{
-        timedAction = SliceBread_Surface,
+        timedAction = Making,
 		Time = 35,
 		NeedToBeLearn = True,
         category = Cooking,
@@ -1943,7 +1946,7 @@ module TodoCaserito
 			item 2 TodoCaserito.Morcipan,
 		}
 	}
-	craftRecipe CortarVacio
+	craftRecipe MakeCortarVacio
 	{
         timedAction = SliceMeat_Surface,
 		Time = 50,
@@ -1963,7 +1966,7 @@ module TodoCaserito
 	}
 	craftRecipe MakeVacipan
 	{
-        timedAction = SliceBread_Surface,
+        timedAction = Making,
 		Time = 35,
 		NeedToBeLearn = True,
         category = Cooking,
@@ -2101,7 +2104,7 @@ module TodoCaserito
         category = Cooking,
 		Tags = AnySurfaceCraft;Cooking,
 		SkillRequired = Cooking:3,
-		xpAward = Cooking:5,
+		xpAward = Cooking:8,
 		AutoLearnAny = Cooking:2,
 		inputs
 		{
@@ -2152,7 +2155,7 @@ module TodoCaserito
 			item 6 TodoCaserito.Bolasdefraile,
 		}
 	}
-	craftRecipe PanRalladoCasero
+	craftRecipe MakePanRalladoCasero
     {
         timedAction = SharpenStakeWood,
         time = 30,
@@ -2514,5 +2517,68 @@ module TodoCaserito
 			item 1 TodoCaserito.LemonPie,
 		}
 	
+	}
+	craftRecipe MakeSandwichChinchulines
+	{
+        timedAction = Making,
+		Time = 35,
+		NeedToBeLearn = True,
+        category = Cooking,
+		Tags = AnySurfaceCraft;Cooking,
+		SkillRequired = Cooking:4,
+		xpAward = Cooking:8,
+		AutoLearnAny = Cooking:3,
+		inputs
+		{
+			item 1 	[Base.Baguette] flags[IsCookedFoodItem;ItemCount;InheritFoodAge],		
+			item 5  [TodoCaserito.Chinchulines] flags[IsCookedFoodItem;ItemCount;InheritFoodAge],
+		}
+		outputs
+		{
+			item 1 TodoCaserito.SandwichChinchulines,
+		}
+	}
+	craftRecipe MakeBondiolaShreddedBowl
+	{
+        timedAction = Making,
+		Time = 30,
+		NeedToBeLearn = True,
+        category = Cooking,
+		Tags = AnySurfaceCraft;Cooking,
+		SkillRequired = Cooking:3,
+		xpAward = Cooking:8,
+		AutoLearnAny = Cooking:2,
+		inputs
+		{			
+			item 2 [Base.Bowl] flags[InheritCondition;ItemCount] mappers[BowlType] mode:destroy,
+			item 2 tags[MixingUtensil;Spoon] mode:keep flags[MayDegradeLight],
+            item 1 [TodoCaserito.Bondiola] flags[IsCookedFoodItem;ItemCount;InheritFoodAge],
+			item 1 [Base.Onion] flags[InheritFoodAge],
+		}
+		outputs
+		{
+			item 2 TodoCaserito.BondiolaShreddedBowl,
+		}
+	}
+	craftRecipe MakeSandwichBondiola
+	{
+        timedAction = Making,
+		Time = 35,
+		NeedToBeLearn = True,
+        category = Cooking,
+		Tags = AnySurfaceCraft;Cooking,
+		SkillRequired = Cooking:4,
+		xpAward = Cooking:8,
+		AutoLearnAny = Cooking:3,
+		inputs
+		{
+			item 1 	[Base.Baguette] flags[IsCookedFoodItem;ItemCount;InheritFoodAge],		
+			item 2  [TodoCaserito.BondiolaShreddedBowl] flags[IsCookedFoodItem;ItemCount;InheritFoodAge],
+		}
+		outputs
+		{
+			item 2 TodoCaserito.SandwichBondiola,
+			item 2 Base.Bowl,
+		}
 	}
 }
