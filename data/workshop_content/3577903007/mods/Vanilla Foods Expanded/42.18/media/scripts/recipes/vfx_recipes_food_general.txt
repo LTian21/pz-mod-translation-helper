@@ -1,0 +1,2390 @@
+module Base
+{
+
+/* <<<<<  Fruit and Vegetables >>>>> */
+
+    craftRecipe VFX_SlicePotato
+    {
+        timedAction = SliceFood_Surface,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:sharpknife] mode:keep flags[SharpnessCheck],
+            item 1 [Base.Potato] flags[ItemCount],
+        }
+
+        outputs
+        {
+            item 1 VFX.SlicedPotato,
+        }
+    }
+
+    craftRecipe VFX_PrepareMashedPotato
+    {
+        timedAction = VFX.BowlMixing,
+        Time = 100,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:2,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[ItemCount],
+            item 2 [Base.Potato] flags[ItemCount;IsCookedFoodItem],
+            item 4 [Base.Butter],
+            item 1 [*],
+                    -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.MashedPotato,
+        }
+    }
+
+/* <<<<<  Flour  >>>>> */
+
+    craftRecipe VFX_MillRyeFlour
+    {
+        time = 100,
+        timedAction = UseStoneQuern,
+        Tags = Stone_Mill,
+        category = Farming,
+
+        inputs
+        {
+            item 12 [Base.RyeSeed],
+        }
+
+        outputs
+        {
+            item 1 VFX.RyeFlour,
+        }
+    }
+
+    craftRecipe VFX_GrindRyeFlour
+    {
+        time = 300,
+        timedAction = UseStoneQuern,
+        Tags = Stone_Quern,
+        category = Farming,
+
+        inputs
+        {
+            item 12 [Base.RyeSeed],
+        }
+
+        outputs
+        {
+            item 1 VFX.RyeFlour,
+        }
+    }
+
+    craftRecipe VFX_MillBarleyFlour
+    {
+        time = 100,
+        timedAction = UseStoneQuern,
+        Tags = Stone_Mill,
+        category = Farming,
+
+        inputs
+        {
+            item 12 [Base.BarleySeed],
+        }
+
+        outputs
+        {
+            item 1 VFX.BarleyFlour,
+        }
+    }
+
+    craftRecipe VFX_GrindBarleyFlour
+    {
+        time = 300,
+        timedAction = UseStoneQuern,
+        Tags = Stone_Quern,
+        category = Farming,
+
+        inputs
+        {
+            item 12 [Base.BarleySeed],
+        }
+
+        outputs
+        {
+            item 1 VFX.BarleyFlour,
+        }
+    }
+
+    craftRecipe VFX_GrindOatFlour
+    {
+        time = 300,
+        timedAction = UseStoneQuern,
+        Tags = Stone_Quern,
+        category = Farming,
+
+        inputs
+        {
+            item 25 [VFX.RolledOats;Base.OatsRaw] flags[IsExclusive],
+        }
+
+        outputs
+        {
+            item 1 VFX.OatFlour,
+        }
+    }
+
+    craftRecipe VFX_GrindAcornFlour
+    {
+        time = 300,
+        timedAction = UseStoneQuern,
+        Tags = Stone_Quern,
+        category = Farming,
+
+        inputs
+        {
+            item 30 [Base.Acorn] flags[IsCookedFoodItem],
+        }
+
+        outputs
+        {
+            item 1 VFX.AcornFlour,
+        }
+    }
+
+    craftRecipe VFX_GrindFlourMortarPestle
+    {
+        timedAction = VFX.MixingBowl,
+        time = 600,
+        tags = AnySurfaceCraft,
+        category = Farming,
+
+        inputs
+        {
+            item 1 tags[base:mortarpestle] mode:keep,
+            item 1 [12:Base.WheatSeed;12:Base.RyeSeed;12:Base.BarleySeed;50:VFX.RolledOats;50:Base.OatsRaw] flags[IsExclusive] mappers[FlourType],
+        }
+
+        outputs
+        {
+            item 1 mapper:FlourType,
+        }
+
+        itemMapper FlourType
+        {
+            Base.Flour2 = Base.WheatSeed,
+            VFX.RyeFlour = Base.RyeSeed,
+            VFX.BarleyFlour = Base.BarleySeed,
+            VFX.OatFlour = VFX.RolledOats,
+            VFX.OatFlour = Base.OatsRaw,
+            VFX.AcornFlour = Base.Acorn,
+        }
+    }
+
+    craftRecipe VFX_GrindAcornFlourMortarPestle
+    {
+        timedAction = VFX.MixingBowl,
+        time = 600,
+        tags = AnySurfaceCraft,
+        category = Farming,
+
+        inputs
+        {
+            item 1  tags[base:mortarpestle] mode:keep,
+            item 30 [Base.Acorn] flags[IsCookedFoodItem],
+        }
+
+        outputs
+        {
+            item 1 VFX.AcornFlour,
+        }
+    }
+
+/* <<<<<  Sugar Beets  >>>>> */
+
+	craftRecipe MakeSugarBeetPulpPot
+    {
+        timedAction = SliceFood_Surface,
+        time = 60,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:4,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver;base:grater] mode:keep flags[MayDegradeVeryLight],
+            item 9 [Base.SugarBeet] flags[InheritFoodAge;ItemCount],
+			item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            -fluid 1.5 [Water] mode:mixture,
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            VFX.SugarBeetPulpPot = Base.Pot,
+            VFX.SugarBeetPulpPotForged  = Base.PotForged,
+        }
+    }
+	
+	craftRecipe GetSugarBeetSugar
+    {
+        timedAction = Making,
+        time = 30,
+        Tooltip = Tooltip_Recipe_MustCookedGet,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+
+        inputs
+        {
+            item 1 [VFX.SugarBeetSyrupPot;VFX.SugarBeetSyrupPotForged] mappers[potType] flags[InheritFood;ItemCount;InheritCondition],
+			item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+			item 1 [Base.RippedSheets;Base.CheeseCloth] mode:keep,
+        }
+
+        outputs
+        {
+			item 1 VFX.SugarBeetSugar,
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = VFX.SugarBeetSyrupPot,
+            Base.PotForged = VFX.SugarBeetSyrupPotForged,
+        }
+    }
+
+    craftRecipe GetSugarBeetMolasses
+    {
+        timedAction = Making,
+        time = 20,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+
+        inputs
+        {
+            item 1 [VFX.SugarBeetMolassesPotForged;VFX.SugarBeetMolassesPot] mappers[potType] mode:destroy flags[InheritFood;InheritCondition],
+        }
+
+        outputs
+        {
+            item 1 VFX.Molasses,
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            Base.PotForged = VFX.SugarBeetMolassesPotForged,
+            Base.Pot = VFX.SugarBeetMolassesPot,
+        }
+    }
+
+/* <<<<<  Homemade Jams and Spreads  >>>>> */
+
+    craftRecipe VFX_PrepareHomemadeJam
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:2,
+        AutoLearnAny = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [VFX.EmptyJamJar] mode:destroy,
+            item 20 tags[base:sugar],
+            item 1  [1:VFX.CannedAppleSlicesOpen;1:VFX.CannedApricotsOpen;1:VFX.CannedLycheesOpen;1:VFX.CannedPassionfruitOpen;1:Base.CannedPineappleOpen;1:VFX.CannedPearSlicesOpen;1:Base.CannedPeachesOpen;1:VFX.CannedMangoSlicesOpen;1:VFX.JarApricotsOpen;1:VFX.JarPlumsOpen;1:VFX.JarPearOpen;1:VFX.JarPeachOpen;1:VFX.JarCherryOpen;2:Base.Apple;1:VFX.Blackberries;1:VFX.PunnetBlackberries;1:VFX.Blueberries;1:VFX.PunnetBlueberries;8:VFX.Cranberries;1:VFX.PunnetRaspberries;1:VFX.Raspberries;1:VFX.SlicedStrawberries;1:VFX.WholeStrawberries;8:Base.Strewberrie;8:Base.BeautyBerry;8:Base.BerryBlack;8:Base.BerryBlue;8:Base.BerryGeneric1;8:Base.BerryGeneric2;8:Base.BerryGeneric3;8:Base.BerryGeneric4;8:Base.BerryGeneric5;8:Base.HollyBerry;8:Base.WinterBerry;1:VFX.BerryMedley;5:Base.Cherry;1:Base.Grapefruit;1:Base.Grapes;2:Base.Lemon;3:Base.Lime;1:Base.Mango;2:Base.Peach;2:Base.Pear;1:Base.Pineapple;1:VFX.PineappleChunks] flags[IsExclusive;AllowFrozenItem;ItemCount] mappers[FruitType],
+        }
+
+        outputs
+        {
+            item 1 mapper:FruitType,
+        }
+
+        itemMapper FruitType
+        {
+            Base.VFXHomemadeJam = Base.Apple,
+            Base.VFXHomemadeJam = VFX.CannedAppleSlicesOpen,
+            Base.VFXHomemadeJam = VFX.Blackberries,
+            Base.VFXHomemadeJam = VFX.Blueberries,
+            Base.VFXHomemadeJam = VFX.Cranberries,
+            Base.VFXHomemadeJam = VFX.PunnetBlackberries,
+            Base.VFXHomemadeJam = VFX.PunnetBlueberries,
+            Base.VFXHomemadeJam = VFX.PunnetRaspberries,
+            Base.VFXHomemadeJam = VFX.Raspberries,
+            Base.VFXHomemadeJam = VFX.SlicedStrawberries,
+            Base.VFXHomemadeJam = VFX.WholeStrawberries,
+            Base.VFXHomemadeJam = Base.BeautyBerry,
+            Base.VFXHomemadeJam = Base.BerryBlack,
+            Base.VFXHomemadeJam = Base.BerryBlue,
+            Base.VFXHomemadeJam = Base.BerryGeneric1,
+            Base.VFXHomemadeJam = Base.BerryGeneric2,
+            Base.VFXHomemadeJam = Base.BerryGeneric3,
+            Base.VFXHomemadeJam = Base.BerryGeneric4,
+            Base.VFXHomemadeJam = Base.BerryGeneric5,
+            Base.VFXHomemadeJam = Base.HollyBerry,
+            Base.VFXHomemadeJam = Base.WinterBerry,
+            Base.VFXHomemadeJam = VFX.BerryMedley,
+            Base.VFXHomemadeJam = Base.Cherry,
+            Base.VFXHomemadeJam = VFX.JarCherryOpen,
+            Base.VFXHomemadeJam = Base.Grapefruit,
+            Base.VFXHomemadeJam = Base.Grapes,
+            Base.VFXHomemadeJam = Base.Lemon,
+            Base.VFXHomemadeJam = Base.Lime,
+            Base.VFXHomemadeJam = Base.Mango,
+            Base.VFXHomemadeJam = VFX.CannedMangoSlicesOpen,
+            Base.VFXHomemadeJam = Base.CannedPeachesOpen,
+            Base.VFXHomemadeJam = Base.Peach,
+            Base.VFXHomemadeJam = VFX.JarPeachOpen,
+            Base.VFXHomemadeJam = Base.Pear,
+            Base.VFXHomemadeJam = VFX.CannedPearSlicesOpen,
+            Base.VFXHomemadeJam = VFX.JarPearOpen,
+            Base.VFXHomemadeJam = Base.CannedPineappleOpen,
+            Base.VFXHomemadeJam = Base.Pineapple,
+            Base.VFXHomemadeJam = VFX.PineappleChunks,
+            Base.VFXHomemadeJam = Base.Strewberrie,
+            Base.VFXHomemadeJam = VFX.CannedApricotsOpen,
+            Base.VFXHomemadeJam = VFX.CannedLycheesOpen,
+            Base.VFXHomemadeJam = VFX.CannedPassionfruitOpen,
+            Base.VFXHomemadeJam = VFX.JarApricotsOpen,
+            Base.VFXHomemadeJam = VFX.JarPlumsOpen,
+            Base.VFXHomemadeJam = VFX.CannedAppleSlicesOpen,
+            Base.VFXHomemadeJam = VFX.CannedApricotsOpen,
+            Base.VFXHomemadeJam = VFX.CannedLycheesOpen,
+            Base.VFXHomemadeJam = VFX.CannedPassionfruitOpen,
+            Base.VFXHomemadeJam = Base.CannedPineappleOpen,
+            Base.VFXHomemadeJam = VFX.CannedPearSlicesOpen,
+            Base.VFXHomemadeJam = Base.CannedPeachesOpen,
+            Base.VFXHomemadeJam = VFX.CannedMangoSlicesOpen,
+            Base.VFXHomemadeJam = VFX.JarApricotsOpen,
+            Base.VFXHomemadeJam = VFX.JarPlumsOpen,
+            Base.VFXHomemadeJam = VFX.JarPearOpen,
+            Base.VFXHomemadeJam = VFX.JarPeachOpen,
+            Base.VFXHomemadeJam = VFX.JarCherryOpen,
+            Base.VFXHomemadeJam = Base.Apple,
+            Base.VFXHomemadeJam = VFX.Blackberries,
+            Base.VFXHomemadeJam = VFX.PunnetBlackberries,
+            Base.VFXHomemadeJam = VFX.Blueberries,
+            Base.VFXHomemadeJam = VFX.PunnetBlueberries,
+            Base.VFXHomemadeJam = VFX.Cranberries,
+            Base.VFXHomemadeJam = VFX.PunnetRaspberries,
+            Base.VFXHomemadeJam = VFX.Raspberries,
+            Base.VFXHomemadeJam = VFX.SlicedStrawberries,
+            Base.VFXHomemadeJam = VFX.WholeStrawberries,
+            Base.VFXHomemadeJam = Base.Strewberrie,
+            Base.VFXHomemadeJam = Base.BeautyBerry,
+            Base.VFXHomemadeJam = Base.BerryBlack,
+            Base.VFXHomemadeJam = Base.BerryBlue,
+            Base.VFXHomemadeJam = Base.BerryGeneric1,
+            Base.VFXHomemadeJam = Base.BerryGeneric2,
+            Base.VFXHomemadeJam = Base.BerryGeneric3,
+            Base.VFXHomemadeJam = Base.BerryGeneric4,
+            Base.VFXHomemadeJam = Base.BerryGeneric5,
+            Base.VFXHomemadeJam = Base.HollyBerry,
+            Base.VFXHomemadeJam = Base.WinterBerry,
+            Base.VFXHomemadeJam = VFX.BerryMedley,
+            Base.VFXHomemadeJam = Base.Cherry,
+            Base.VFXHomemadeJam = Base.Grapefruit,
+            Base.VFXHomemadeJam = Base.Grapes,
+            Base.VFXHomemadeJam = Base.Lemon,
+            Base.VFXHomemadeJam = Base.Lime,
+            Base.VFXHomemadeJam = Base.Mango,
+            Base.VFXHomemadeJam = Base.Peach,
+            Base.VFXHomemadeJam = Base.Pear,
+            Base.VFXHomemadeJam = Base.Pineapple,
+            Base.VFXHomemadeJam = VFX.PineappleChunks,
+        }
+    }
+
+    craftRecipe VFX_PrepareHomemadeButter
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        AutoLearnAny = Cooking:1,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [VFX.EmptyJamJar] mode:destroy,
+            item 10 tags[base:sugar],
+            item 8 [Base.Butter],
+            item 1 [16:Base.Apple;10:VFX.CannedAppleSlices;10:Base.MapleSyrup;5:Base.Cinnamon;5:VFX.CinnamonSugar] mappers[ButterType] mode:destroy flags[IsExclusive],
+        }
+
+        outputs
+        {
+            item 1 mapper:ButterType,
+        }
+        
+        itemMapper ButterType
+        {
+            VFX.AppleButter = Base.Apple,
+            VFX.AppleButter = VFX.CannedAppleSlices,
+            VFX.MapleButter = Base.MapleSyrup,
+            VFX.CinnamonButter = Base.Cinnamon,
+            VFX.CinnamonButter = VFX.CinnamonSugar,
+        }
+    }
+
+/* <<<<<  Recipes to Make Staples  >>>>> */
+
+    craftRecipe VFX_PreparePowderedSugar
+    {
+        timedAction = VFX.MixingBowl,
+        time = 150,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [Base.MortarPestle] mode:keep,
+            item 1 [Base.Sugar] flags[ItemCount],
+        }
+
+        outputs
+        {
+            item 1 VFX.PowderedSugar,
+        }
+    }
+
+    craftRecipe VFX_PrepareBrownSugar
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+            item 1 [Base.Sugar] flags[ItemCount],
+            item 2 [VFX.Molasses],
+        }
+
+        outputs
+        {
+            item 1 Base.SugarBrown,
+        }
+    }
+
+    craftRecipe VFX_MakeBreadcrumbs
+    {
+		timedAction = SliceFood_Surface,
+        time = 60,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:sharpknife;base:dullknife;base:grater] mode:keep flags[MayDegradeLight],
+            item 10 [Base.Bread;Base.Toast;Base.Baguette;Base.BreadSlices;VFX.HomestyleBiscuit;VFX.Crumpet;VFX.Croissant;VFX.SourdoughSlice;VFX.RyeBreadSlice;VFX.RyeSourdoughSlice;VFX.PumpernickelSlice;VFX.BarleyBreadSlice;VFX.BarleySourdoughSlice;VFX.BeerBreadSlice;VFX.MilkBreadSlice;VFX.BriocheSlice;VFX.FocacciaBreadSlice;Base.VFXSourdoughToast;Base.VFXRyeBreadToast;Base.VFXRyeSourdoughToast;Base.VFXPumpernickelToast;Base.VFXBarleyBreadToast;Base.VFXBarleySourdoughToast;Base.VFXBeerBreadToast;Base.VFXMilkBreadToast;Base.VFXBriocheToast;Base.VFXFocacciaBreadToast],
+        }
+
+        outputs
+        {
+            item 1 VFX.Breadcrumbs,
+        }
+    }
+
+    craftRecipe VFX_MakeBreadcrumbsCooked
+    {
+		timedAction = SliceFood_Surface,
+        time = 60,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:sharpknife;base:dullknife;base:grater] mode:keep flags[MayDegradeLight],
+            item 10 [Base.BreadDough;VFX.Sourdough;VFX.SourdoughBaguette;VFX.SourdoughBreadstick;VFX.SourdoughHamburgerBun;VFX.SourdoughHotdogBun;VFX.Brioche;VFX.BeerBread;VFX.MilkBread;VFX.Frybread;VFX.EnglishMuffin;VFX.PitaBread;VFX.FocacciaBread;VFX.NaanBread;VFX.Breadstick;VFX.Pretzel;VFX.RyeBread;VFX.RyeSourdough;VFX.Pumpernickel;VFX.BarleyBread;VFX.BarleySourdough;VFX.Flatbread;VFX.Scone] flags[IsCookedFoodItem],
+        }
+
+        outputs
+        {
+            item 1 VFX.Breadcrumbs,
+        }
+    }
+
+    craftRecipe VFX_MakeTomatoPulp
+    {
+        timedAction = VFX.PotCooking,
+        time = 60,
+        needToBeLearn = TRUE,
+        xpAward = Cooking:2,
+        AutoLearnAny = Cooking:3,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+    
+        inputs
+        {
+            item 1  [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            item 1  tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeLight],
+            item 48 [Base.Tomato;Base.CannedTomato_Open;Base.CannedTomatoOpen] flags[AllowFrozenItem],
+        }
+    
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+    
+        itemMapper potType
+        {
+            VFX.TomatoPulpPot = Base.Pot,
+            VFX.TomatoPulpPotForged = Base.PotForged,
+        }
+    }
+    
+    craftRecipe VFX_GetTomatoPaste
+    {
+        timedAction = VFX.PotCooking,
+        time = 15,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+    
+        inputs
+        {
+            item 1 [VFX.TomatoPastePot;VFX.TomatoPastePotForged] mappers[potType] mode:destroy flags[ItemCount;InheritCondition;InheritFood;InheritFoodAge],
+        }
+    
+        outputs
+        {
+            item 1 Base.TomatoPaste,
+            item 1 mapper:potType,
+        }
+    
+        itemMapper potType
+        {
+            Base.Pot = VFX.TomatoPastePot,
+            Base.PotForged = VFX.TomatoPastePotForged,
+        }
+    }
+
+/* <<<<<  Homemade Sauce  >>>>> */
+
+    craftRecipe VFX_PrepareHomemadeSauceTomato
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 1 [1:Base.CannedTomato_Open;1:Base.CannedTomatoOpen;3:Base.Tomato;1:Base.TomatoPaste] flags[ItemCount;IsExclusive],
+        }
+
+        outputs
+        {
+            item 1 Base.VFXHomemadeSauceTomato,
+        }
+    }
+
+    craftRecipe VFX_PrepareHomemadeSauceOil
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 10 [Base.SesameOil;Base.OilVegetable;Base.OilOlive] flags[IsExclusive],
+        }
+
+        outputs
+        {
+            item 1 Base.VFXHomemadeSauceOil,
+        }
+    }
+
+    craftRecipe VFX_PrepareHomemadeSauceCream
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 1 [VFX.HeavyCream;VFX.HeavyCreamHomemade] flags[ItemCount],
+        }
+
+        outputs
+        {
+            item 1 Base.VFXHomemadeSauceCream,
+        }
+    }
+
+    craftRecipe VFX_PrepareHomemadeSauceStock
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 1 [2:Base.BouillonCube;2:VFX.BeefBouillonCube;2:VFX.FishBouillonCube;2:VFX.VegetableBouillonCube] flags[ItemCount;IsExclusive],
+            item 1 [*],
+                -fluid 0.3 [Water],
+        }
+
+        outputs
+        {
+            item 1 Base.VFXHomemadeSauceStock,
+        }
+    }
+
+    craftRecipe VFX_PrepareHomemadeSauceVinegar
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 10 [Base.Vinegar_Jug;Base.Vinegar2] flags[IsExclusive],
+        }
+
+        outputs
+        {
+            item 1 Base.VFXHomemadeSauceVinegar,
+        }
+    }
+ 
+/* <<<<<  Pasta Sauce  >>>>> */
+
+    craftRecipe VFX_PrepareMarinara
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        AutoLearnAny = Cooking:4,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  tags[base:jar] mode:destroy flags[ItemCount],
+            item 1  [Base.JarLid] mode:destroy flags[ItemCount],
+            item 48 [Base.Tomato;Base.CannedTomato_Open;Base.CannedTomatoOpen],
+            item 10 [Base.Onion;VFX.JarOnionOpen],
+            item 2  [Base.Garlic;Base.PowderedGarlic;Base.WildGarlic2;Base.WildGarlicDried;VFX.GarlicSalt;VFX.JarGarlicOpen],
+            item 1  [Base.Seasoning_Oregano;Base.Oregano;Base.OreganoDried],
+            item 1  [Base.Salt],
+            item 5  [Base.OilOlive],
+        }
+
+        outputs
+        {
+            item 1 VFX.HomemadeMarinara,
+        }
+    }
+
+    craftRecipe VFX_PrepareSpicyMarinara
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        AutoLearnAny = Cooking:4,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  tags[base:jar] mode:destroy flags[ItemCount],
+            item 1  [Base.JarLid] mode:destroy,
+            item 48 [Base.Tomato;Base.CannedTomato_Open;Base.CannedTomatoOpen],
+            item 10 [Base.Onion;VFX.JarOnionOpen],
+            item 2  [Base.Garlic;Base.PowderedGarlic;Base.WildGarlic2;Base.WildGarlicDried;VFX.GarlicSalt;VFX.JarGarlicOpen],
+            item 1  [Base.Seasoning_Oregano;Base.Oregano;Base.OreganoDried],
+            item 3  [VFX.ChiliFlakes;VFX.GroundChili],
+            item 1  [Base.Salt],
+            item 5  [Base.OilOlive],
+        }
+
+        outputs
+        {
+            item 1 VFX.HomemadeSpicyMarinara,
+        }
+    }
+
+    craftRecipe VFX_PrepareMeatSauce
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        AutoLearnAny = Cooking:4,
+        ToolTip = Tooltip_VFX_Recipe_MeatCooked,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  tags[base:jar] mode:destroy flags[ItemCount],
+            item 1  [Base.JarLid] mode:destroy,
+            item 15 tags[VFX:GroundMeat] flags[IsCookedFoodItem],
+            item 48 [Base.Tomato;Base.CannedTomato_Open;Base.CannedTomatoOpen],
+            item 10 [Base.Onion;VFX.JarOnionOpen],
+            item 2  [Base.Garlic;Base.PowderedGarlic;Base.WildGarlic2;Base.WildGarlicDried;VFX.GarlicSalt;VFX.JarGarlicOpen],
+            item 1  [Base.Seasoning_Oregano;Base.Oregano;Base.OreganoDried],
+            item 1  [Base.Salt],
+            item 5  [Base.OilOlive],
+        }
+
+        outputs
+        {
+            item 1 VFX.HomemadeMeatSauce,
+        }
+    }
+
+    craftRecipe VFX_PrepareBasilPesto
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        AutoLearnAny = Cooking:5,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 4 [VFX.PineNuts],
+            item 8 [VFX.ParmesanCheese;VFX.ParmesanCheeseHomemade],
+            item 5 [Base.Basil;Base.BasilDried],
+            item 2  [Base.Garlic;Base.PowderedGarlic;Base.WildGarlic2;Base.WildGarlicDried;VFX.GarlicSalt;VFX.JarGarlicOpen] flags[IsExclusive],
+            item 5 [Base.OilOlive],
+        }
+
+        outputs
+        {
+            item 1 VFX.HomemadeBasilPestoSauce,
+        }
+    }
+
+    craftRecipe VFX_PrepareAlfredoSauce
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        AutoLearnAny = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 8 [VFX.ParmesanCheese;VFX.ParmesanCheeseHomemade],
+            item 5 [VFX.HeavyCream;VFX.HeavyCreamHomemade],
+            item 1 [Base.Pepper],
+            item 2  [Base.Garlic;Base.PowderedGarlic;Base.WildGarlic2;Base.WildGarlicDried;VFX.GarlicSalt;VFX.JarGarlicOpen] flags[IsExclusive],
+            item 4 [Base.Butter],
+        }
+
+        outputs
+        {
+            item 1 VFX.HomemadeAlfredoSauce,
+        }
+    }
+
+    craftRecipe VFX_PrepareBechamelSauce
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        AutoLearnAny = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 5 tags[VFX:AnyFlour],
+            item 4 [Base.Butter],
+            item 1 [Base.Salt],
+            item 1 [Base.Pepper],
+            item 1 [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.HomemadeBechamelSauce,
+        }
+    }
+
+/* <<<<<  Base Game Homemade  >>>>> */
+
+    craftRecipe VFX_MakePizza
+    {
+        timedAction = VFX.MixingBowl,
+        time = 100,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:10,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:6,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[VFX:PizzaDough],
+            item 15 tags[base:cheese] flags[InheritFoodAge],
+            item 15 tags[base:pizzasauce] flags[InheritFoodAge],
+        }
+
+        outputs
+        {
+            item 1 Base.PizzaRecipe,
+        }
+    }
+
+    craftRecipe VFX_MakeFriedFood
+	{
+		timedAction = VFX.BowlMixing,
+		Time = 60,
+		Tags = AnySurfaceCraft;Cooking,
+		category = Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:4,
+
+		inputs
+		{
+			item 1 tags[base:sharpknife] mode:keep flags[IsNotDull;SharpnessCheck],
+			item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+			item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+
+            item 1 [Base.Oysters;Base.FishFillet;Base.Tofu;VFX.ChickenDrumsticks] mappers[FoodType] flags[ItemCount;InheritFoodAge],
+			
+			item 1 tags[base:flour],
+            item 1 [*],
+                -fluid 0.2 [Water],
+		}
+
+		outputs
+		{
+			item 1 mapper:FoodType,
+		}
+
+        itemMapper FoodType
+        {
+            VFX.BatteredOysters = Base.Oysters,
+            VFX.BatteredFish = Base.FishFillet,
+            VFX.BatteredTofu = Base.Tofu,
+            VFX.BatteredChicken = VFX.ChickenDrumsticks,
+        }
+	}
+
+    craftRecipe VFX_MakeDumplingWrappers
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:8,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+            item 1 [Base.RollingPin] mode:keep flags[MayDegradeVeryLight],
+
+            item 2 [Base.Flour2],
+            item 1 [Base.Salt],
+
+            item 1 [*],
+            -fluid 0.2 [Water],
+        }
+
+        outputs
+        {
+            item 2 VFX.DumplingWrappers,
+        }
+    }
+
+    craftRecipe VFX_MakeMeatDumplings
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:8,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+            item 1 [Base.RollingPin] mode:keep flags[MayDegradeVeryLight],
+
+            item 5 [VFX.DumplingWrappers],
+
+            item 10 tags[VFX:GroundMeat],
+            item 1 [Base.Soysauce],
+            item 1 [Base.Garlic;Base.WildGarlic2;VFX.JarGarlicOpen],
+            item 1 [Base.GreenOnions],
+            item 1 [Base.SesameOil],
+        }
+
+        outputs
+        {
+            item 2 VFX.HomemadeMeatDumpling,
+        }
+    }
+
+    craftRecipe VFX_MakeShrimpDumplings
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:8,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+            item 1 [Base.RollingPin] mode:keep flags[MayDegradeVeryLight],
+
+            item 5 [VFX.DumplingWrappers],
+
+            item 4 [Base.Shrimp],
+            item 1 [Base.Soysauce],
+            item 1 [Base.Garlic;Base.WildGarlic2;VFX.JarGarlicOpen],
+            item 1 [Base.GreenOnions],
+            item 1 [Base.SesameOil],
+        }
+
+        outputs
+        {
+            item 2 Base.ShrimpDumpling,
+        }
+    }
+
+    craftRecipe VFX_MakePotatoPancakes
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:4,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+            item 1  [Base.CheeseGrater] mode:keep,
+
+            item 1 [Base.Potato] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 2 tags[VFX:TraditionalFlour],
+            item 1 [Base.Salt],
+            item 1 [Base.Pepper],
+        }
+
+        outputs
+        {
+            item 2 VFX.HomemadePotatoPancakes,
+        }
+    }
+
+    craftRecipe VFX_MakeGravy
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:2,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+
+            item 1 tags[VFX:BouillionCube] flags[ItemCount],
+            item 2 [Base.Butter],
+            item 2 tags[VFX:AnyFlour],
+
+            item 1 [*],
+                -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 1 Base.Gravy,
+        }
+    }
+
+    craftRecipe VFX_MakeGravyStock
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:3,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:2,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.VFXStockPot;Base.VFXStockPotForged;Base.VFXBoneBrothPot;Base.VFXBoneBrothPotForged] mappers[PotType] flags[IsCookedFoodItem],
+            item 2 [Base.Butter],
+            item 2 tags[VFX:AnyFlour],
+        }
+
+        outputs
+        {
+            item 1 Base.Gravy,
+            item 1 mapper:PotType,
+        }
+
+        itemMapper PotType
+        {
+            Base.Pot = Base.VFXStockPot,
+            Base.Pot = Base.VFXBoneBrothPot,
+
+            Base.PotForged = Base.VFXStockPotForged,
+            Base.PotForged = Base.VFXBoneBrothPotForged,
+        }
+    }
+
+/* <<<<<  Vinegar  >>>>> */
+
+    craftRecipe VFX_MakeVinegarStarterBeer
+    {
+        timedAction = VFX.JarCanning,
+        time = 30,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 1 [*],
+                -fluid 0.6 [VFX_AmericanLightLager;VFX_AmericanLager;VFX_Pilsner;VFX_ViennaLager;VFX_PaleAle;VFX_AmberAle;VFX_Porter;VFX_Stout;VFX_AmericanWheatBeer;Beer;Cider],
+            item 2 tags[base:vinegar],
+        }
+
+        outputs
+        {
+            item 1 VFX.VinegarStarterFermenting,
+        }
+    }
+
+    craftRecipe VFX_MakeVinegarStarterWine
+    {
+        timedAction = VFX.JarCanning,
+        time = 30,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 1 [*],
+                -fluid 0.3 [VFX_CabernetSauvignon;VFX_Merlot;VFX_PinotNoir;VFX_Chardonnay;VFX_SauvignonBlanc;VFX_PinotGris;VFX_Riesling;Wine;Mead;Port;Sherry;Vermouth],
+            item 1 [*],
+                -fluid 0.3 [Water],
+            item 2 tags[base:vinegar],
+        }
+
+        outputs
+        {
+            item 1 VFX.VinegarStarterFermenting,
+        }
+    }
+
+    craftRecipe VFX_MakeVinegarStarterSpirits
+    {
+        timedAction = VFX.JarCanning,
+        time = 30,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 1 [*],
+                -fluid 0.1 [Brandy;Gin;Rum;Scotch;Vodka;Whiskey],
+            item 1 [*],
+                -fluid 0.5 [Water],
+            item 2 tags[base:vinegar],
+        }
+
+        outputs
+        {
+            item 1 VFX.VinegarStarterFermenting,
+        }
+    }
+
+    craftRecipe VFX_MakeVinegarPreparation
+    {
+        timedAction = VFX.PotCooking,
+        time = 30,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+                -fluid 1.5 categories[Water] mode:mixture,
+            item 15 tags[base:sugar],
+            item 1 tags[VFX:Yeast],
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            VFX.VinegarPreparationPot = Base.Pot,
+            VFX.VinegarPreparationPotForged = Base.PotForged,
+        }
+    }
+
+    craftRecipe VFX_MakeVinegarYeast
+    {
+        timedAction = VFX.JarCanning,
+        time = 30,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.VinegarPreparationPot;VFX.VinegarPreparationPotForged] mappers[potType] mode:destroy flags[IsCookedFoodItem],
+            item 2 tags[VFX:VinegarStarter],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+            item 1 VFX.HomemadeVinegarFermentingYeast,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = VFX.VinegarPreparationPot,
+            Base.PotForged = VFX.VinegarPreparationPotForged,
+        }
+    }
+
+    craftRecipe VFX_MakeVinegarAlcohol
+    {
+        timedAction = VFX.JarCanning,
+        time = 30,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [*],
+                -fluid 0.3 [VFX_AmericanLightLager;VFX_AmericanLager;VFX_Pilsner;VFX_ViennaLager;VFX_PaleAle;VFX_AmberAle;VFX_Porter;VFX_Stout;VFX_AmericanWheatBeer;Beer;Cider;VFX_CabernetSauvignon;VFX_Merlot;VFX_PinotNoir;VFX_Chardonnay;VFX_SauvignonBlanc;VFX_PinotGris;VFX_Riesling;Wine;Mead;Port;Sherry;Vermouth],
+            item 1 [*],
+                -fluid 0.3 [Water],
+            item 2 tags[VFX:VinegarStarter],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+        }
+
+        outputs
+        {
+            item 1 VFX.HomemadeVinegarFermentingAlcohol,
+        }
+    }
+
+/* <<<<<  Beer  >>>>> */
+
+    craftRecipe VFX_MakePotMash
+    {
+        timedAction = VFX.PotCooking,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 4 [Base.BarleySheafDried] flags[ItemCount],
+            item 1 [Base.Hops;Base.HopsDried] flags[ItemCount],
+            item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+                -fluid 1.5 categories[Water] mode:mixture,
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            VFX.MashPot = Base.Pot,
+            VFX.MashPotForged = Base.PotForged,
+        }
+    }
+
+    craftRecipe VFX_MakeJarBeerPreparation
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.WortPot;VFX.WortPotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            item 1 tags[VFX:Yeast],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,    
+            item 1 VFX.HomemadeBeerPreparationFermenting,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = VFX.WortPot,
+            Base.PotForged = VFX.WortPotForged,
+        }
+    }
+
+    craftRecipe VFX_MakeHomemadeBeer
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.HomemadeBeerPreparation] mode:destroy flags[ItemCount;InheritFoodAge],
+            item 4 tags[base:sugar],
+            item 4 [VFX.BottleAmericanLightLager;VFX.BottleAmericanLager;VFX.BottlePilsner;VFX.BottleViennaLager;VFX.BottlePaleAle;VFX.BottleAmberAle;VFX.BottlePorter;VFX.BottleStout;VFX.BottleAmericanWheatBeer;VFX.BottleHomemadeBeer;Base.BeerBottle;Base.BeerImported] mode:destroy flags[IsEmpty;ItemCount],
+            item 1 [Base.Funnel] mode:keep,
+        }
+
+        outputs
+        {
+            item 4 VFX.BottleHomemadeBeerUnsealed,
+            item 1 Base.EmptyJar,
+            item 1 Base.JarLid,
+        }
+    }
+
+    craftRecipe VFX_SealHomemadeBeer
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        tags = HandPress,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.BottleHomemadeBeerUnsealed] mode:destroy flags[ItemCount],
+            item 1 [VFX.BottleCap],
+        }
+
+        outputs
+        {
+            item 1 VFX.BottleHomemadeBeerFermenting,
+        }
+    }
+
+/* <<<<<  Wine  >>>>> */
+
+    craftRecipe VFX_MakeJarWinePreparation
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 1 tags[VFX:Yeast],
+            item 20 tags[base:sugar],
+            item 1 [3:Base.Apple;10:Base.BeautyBerry;10:Base.BerryBlack;10:Base.BerryBlue;10:Base.BerryGeneric1;10:Base.BerryGeneric2;10:Base.BerryGeneric3;10:Base.BerryGeneric4;10:Base.BerryGeneric5;10:Base.WinterBerry;6:Base.Cherry;2:Base.Grapefruit;2:Base.Grapes;2:Base.Lemon;3:Base.Lime;2:Base.Mango;2:Base.Orange;3:Base.Peach;2:Base.Pear;1:Base.Pineapple;8:Base.Rosehips;8:Base.Strewberrie;3:Base.WatermelonSmashed;5:VFX.Apricot;5:VFX.GoldKiwi;5:VFX.GreenKiwi;2:VFX.Papaya;4:VFX.Plum;2:VFX.Pomegranate;10:VFX.Cranberries;2:VFX.PunnetBlackberries;2:VFX.PunnetBlueberries;2:VFX.PunnetRaspberries;4:VFX.Figs;4:VFX.Nectarines;4:VFX.Tangerines] mode:destroy flags[IsExclusive;ItemCount],
+        }
+
+        outputs
+        {
+            item 1 VFX.HomemadeWinePreparationFermenting,
+        }
+    }
+
+    craftRecipe VFX_SealHomemadeWine
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        tags = HandPress,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.HomemadeWinePreparation] mode:destroy flags[ItemCount],
+            item 1 [Base.Cork] mode:destroy,
+            item 1 [Base.Funnel] mode:keep,
+            item 1 [VFX.WineChardonnay;VFX.WineCabernetSauvignon;VFX.WineMerlot;VFX.WinePinotNoir;VFX.WineSauvignonBlanc;VFX.WinePinotGris;VFX.WineRiesling;VFX.BottleHomemadeWine;Base.Wine;Base.Wine2;Base.WineAged] mode:destroy flags[IsEmpty;ItemCount],
+        }
+
+        outputs
+        {
+            item 1 VFX.BottleHomemadeWine,
+            item 1 Base.EmptyJar,
+            item 1 Base.JarLid,
+        }
+    }
+
+/* <<<<<  Yeast  >>>>> */
+
+    craftRecipe VFX_MakeYeastStarter
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 5 tags[base:sugar],
+            item 1 [3:Base.Apple;10:Base.BeautyBerry;10:Base.BerryBlack;10:Base.BerryBlue;10:Base.BerryGeneric1;10:Base.BerryGeneric2;10:Base.BerryGeneric3;10:Base.BerryGeneric4;10:Base.BerryGeneric5;10:Base.WinterBerry;6:Base.Cherry;2:Base.Grapefruit;2:Base.Grapes;2:Base.Lemon;3:Base.Lime;2:Base.Mango;2:Base.Orange;3:Base.Peach;2:Base.Pear;1:Base.Pineapple;8:Base.Rosehips;8:Base.Strewberrie;3:Base.WatermelonSmashed;5:VFX.Apricot;5:VFX.GoldKiwi;5:VFX.GreenKiwi;2:VFX.Papaya;4:VFX.Plum;2:VFX.Pomegranate;10:VFX.Cranberries;2:VFX.PunnetBlackberries;2:VFX.PunnetBlueberries;2:VFX.PunnetRaspberries;4:VFX.Figs;4:VFX.Nectarines;4:VFX.Tangerines] mode:destroy flags[IsExclusive;ItemCount],
+            item 1 [*],
+                -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.YeastStarterFermenting,
+        }
+    }
+
+    craftRecipe VFX_FeedYeastStarter
+    {
+        timedAction = VFX.JarCanning,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.YeastStarterUnfed] mode:destroy,
+            item 5 tags[base:sugar],
+            item 1 [*],
+                -fluid 0.2 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.YeastStarterFermenting,
+        }
+    }
+
+/* <<<<<  Meat  >>>>> */
+
+    craftRecipe VFX_PrepareMinceMeat
+	{
+		timedAction = SliceFood_Surface,
+		time = 300,
+		category = Cooking,
+		Tags = AnySurfaceCraft;Cooking,
+		xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+		inputs
+		{
+			item 30 [Base.Beef;Base.Steak;VFX.BeefBrisket;VFX.BeefShank;VFX.BeefShortRibs;Base.MuttonChop;VFX.LambLeg;Base.Chicken;Base.ChickenWings;Base.ChickenFillet;VFX.ChickenThighs;VFX.ChickenDrumsticks;Base.Pork;Base.PorkChop;VFX.PorkRibs;VFX.PorkBelly;Base.TurkeyLegs;Base.TurkeyWings;Base.TurkeyFillet;Base.Rabbitmeat;Base.Smallanimalmeat;Base.Venison;Base.Salmon;Base.FrogMeat;Base.FishFillet;Base.Smallbirdmeat] mappers[meatType] flags[InheritFoodAge;InheritWeight;IsUncookedFoodItem;IsExclusive],
+			item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+		}
+
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+
+		itemMapper meatType
+		{
+			Base.MincedMeat = Base.Beef,
+			Base.MincedMeat = Base.Steak,
+			Base.MincedMeat = VFX.BeefBrisket,
+			Base.MincedMeat = VFX.BeefShank,
+			Base.MincedMeat = VFX.BeefShortRibs,
+			VFX.GroundLamb = Base.MuttonChop,
+			VFX.GroundLamb = VFX.LambLeg,
+			VFX.GroundChicken = Base.Chicken,
+			VFX.GroundChicken = Base.ChickenWings,
+			VFX.GroundChicken = Base.ChickenFillet,
+            VFX.GroundChicken = VFX.ChickenThighs,
+            VFX.GroundChicken = VFX.ChickenDrumsticks,
+			VFX.GroundPork = Base.Pork,
+			VFX.GroundPork = Base.PorkChop,
+			VFX.GroundPork = VFX.PorkRibs,
+			VFX.GroundPork = VFX.PorkBelly,
+			VFX.GroundTurkey = Base.TurkeyLegs,
+			VFX.GroundTurkey = Base.TurkeyWings,
+			VFX.GroundTurkey = Base.TurkeyFillet,
+			VFX.GroundRabbit = Base.Rabbitmeat,
+			VFX.GroundRodent = Base.Smallanimalmeat,
+			VFX.GroundVenison = Base.Venison,
+			VFX.GroundSalmon = Base.Salmon,
+			VFX.GroundFrog = Base.FrogMeat,
+			VFX.GroundFish = Base.FishFillet,
+			VFX.GroundSmallBird = Base.Smallbirdmeat,
+		}
+	}
+
+    craftRecipe VFX_PreparePatty
+	{
+		timedAction = SliceFood_Surface,
+		time = 30,
+		category = Cooking,
+		Tags = AnySurfaceCraft;Cooking,
+		OnCreate = VFX.TransferNutrition,
+
+		inputs
+		{
+			item 30 [VFX.GroundChicken;VFX.GroundPork;VFX.GroundLamb;VFX.GroundTurkey;VFX.GroundVenison;VFX.GroundRabbit;VFX.GroundRodent;VFX.GroundSmallBird;VFX.GroundFish;VFX.GroundSalmon;VFX.GroundFrog] mappers[meatType] flags[IsUncookedFoodItem;IsExclusive;InheritFoodAge],
+		}
+
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+
+		itemMapper meatType
+		{
+			VFX.PattyChicken = VFX.GroundChicken,
+			VFX.PattyPork = VFX.GroundPork,
+			VFX.PattyLamb = VFX.GroundLamb,
+			VFX.PattyTurkey = VFX.GroundTurkey,
+			VFX.PattyVenison = VFX.GroundVenison,
+			VFX.PattyRabbit = VFX.GroundRabbit,
+			VFX.PattyRodent = VFX.GroundRodent,
+			VFX.PattySmallBird = VFX.GroundSmallBird,
+			VFX.PattyFish = VFX.GroundFish,
+			VFX.PattySalmon = VFX.GroundSalmon,
+			VFX.PattyFrog = VFX.GroundFrog,
+		}
+	}
+
+	craftRecipe VFX_PrepareMeatball
+	{
+		timedAction = SliceFood_Surface,
+		time = 6,
+		category = Cooking,
+		Tags = AnySurfaceCraft;Cooking,
+		OnCreate = VFX.TransferNutrition,
+
+		inputs
+		{
+			item 8 [VFX.GroundChicken;VFX.GroundPork;VFX.GroundLamb;VFX.GroundTurkey;VFX.GroundVenison;VFX.GroundRabbit;VFX.GroundRodent;VFX.GroundSmallBird;VFX.GroundFish;VFX.GroundSalmon;VFX.GroundFrog;Base.MincedMeat] mappers[meatType] flags[IsUncookedFoodItem;IsExclusive;InheritFoodAge],
+		}
+
+		outputs
+		{
+			item 1 mapper:meatType,
+		}
+
+		itemMapper meatType
+		{
+            VFX.BeefMeatball = Base.MincedMeat,	
+            VFX.ChickenMeatball = VFX.GroundChicken,
+            VFX.TurkeyMeatball = VFX.GroundTurkey,
+			VFX.PorkMeatball = VFX.GroundPork,
+			VFX.MeatballLamb = VFX.GroundLamb,
+			VFX.MeatballVenison = VFX.GroundVenison,
+			VFX.MeatballRabbit = VFX.GroundRabbit,
+			VFX.MeatballRodent = VFX.GroundRodent,
+			VFX.MeatballSmallBird = VFX.GroundSmallBird,
+			VFX.MeatballFish = VFX.GroundFish,
+			VFX.MeatballSalmon = VFX.GroundSalmon,
+			VFX.MeatballFrog = VFX.GroundFrog,
+		}
+	}
+
+    craftRecipe VFX_SplitChickenLeg
+    {
+        timedAction = SliceFood_Surface,
+        time = 15,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferHungerNutrition,
+
+        inputs
+        {
+            item 1 [Base.Chicken] flags[InheritCooked;ItemCount;InheritWeight],
+            item 1 tags[base:sharpknife;base:meatcleaver] mode:keep flags[IsNotDull;SharpnessCheck],
+        }
+
+        outputs
+        {
+            item 1 VFX.ChickenThighs,
+            item 1 VFX.ChickenDrumsticks,
+        }
+    }
+
+/* <<<<<  Prepare Soup Sachets  >>>>> */
+
+    craftRecipe VFX_PrepareSoup_Pumpkin
+    {
+        timedAction = VFX.SoupPreparing,
+        time = 40,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [Base.Bowl;Base.Mugl;Base.MugWhite;Base.MugSpiffo;Base.ClayMug] mappers[MugBowl] mode:destroy flags[ItemCount;InheritCondition],
+            -fluid 0.3 categories[Water] mode:mixture,
+            item 1 [VFX.PumpkinSoupSachet] mode:destroy flags[ItemCount;Prop1],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+        }
+
+        outputs
+        {
+            item 1 mapper:MugBowl,
+        }
+
+        itemMapper MugBowl
+        {
+            VFX.BowlPumpkinSoup = Base.Bowl,
+            VFX.MugPumpkinSoup = Base.Mugl,
+            VFX.MugPumpkinSoup_White = Base.MugWhite,
+            VFX.MugPumpkinSoup_Spiffo = Base.MugSpiffo,
+            VFX.MugPumpkinSoup_Clay = Base.ClayMug,
+        }
+    }
+
+    craftRecipe VFX_PrepareSoup_PeaAndHam
+    {
+        timedAction = VFX.SoupPreparing,
+        time = 40,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [Base.Bowl;Base.Mugl;Base.MugWhite;Base.MugSpiffo;Base.ClayMug] mappers[MugBowl] mode:destroy flags[ItemCount;InheritCondition],
+            -fluid 0.3 categories[Water] mode:mixture,
+            item 1 [VFX.PeaAndHamSoupSachet] mode:destroy flags[ItemCount;Prop1],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+        }
+
+        outputs
+        {
+            item 1 mapper:MugBowl,
+        }
+
+        itemMapper MugBowl
+        {
+            VFX.BowlPeaAndHamSoup = Base.Bowl,
+            VFX.MugPeaAndHamSoup = Base.Mugl,
+            VFX.MugPeaAndHamSoup_White = Base.MugWhite,
+            VFX.MugPeaAndHamSoup_Spiffo = Base.MugSpiffo,
+            VFX.MugPeaAndHamSoup_Clay = Base.ClayMug,
+        }
+    }
+
+    craftRecipe VFX_PrepareSoup_ChickenNoodle
+    {
+        timedAction = VFX.SoupPreparing,
+        time = 40,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [Base.Bowl;Base.Mugl;Base.MugWhite;Base.MugSpiffo;Base.ClayMug] mappers[MugBowl] mode:destroy flags[ItemCount;InheritCondition],
+            -fluid 0.3 categories[Water] mode:mixture,
+            item 1 [VFX.ChickenNoodleSoupSachet] mode:destroy flags[ItemCount;Prop1],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+        }
+
+        outputs
+        {
+            item 1 mapper:MugBowl,
+        }
+
+        itemMapper MugBowl
+        {
+            VFX.BowlChickenNoodleSoup = Base.Bowl,
+            VFX.MugChickenNoodleSoup = Base.Mugl,
+            VFX.MugChickenNoodleSoup_White = Base.MugWhite,
+            VFX.MugChickenNoodleSoup_Spiffo = Base.MugSpiffo,
+            VFX.MugChickenNoodleSoup_Clay = Base.ClayMug,
+        }
+    }
+
+    craftRecipe VFX_PrepareSoup_Tomato
+    {
+        timedAction = VFX.SoupPreparing,
+        time = 40,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [Base.Bowl;Base.Mugl;Base.MugWhite;Base.MugSpiffo;Base.ClayMug] mappers[MugBowl] mode:destroy flags[ItemCount;InheritCondition],
+            -fluid 0.3 categories[Water] mode:mixture,
+            item 1 [VFX.TomatoSoupSachet] mode:destroy flags[ItemCount;Prop1],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+        }
+
+        outputs
+        {
+            item 1 mapper:MugBowl,
+        }
+
+        itemMapper MugBowl
+        {
+            VFX.BowlTomatoSoup = Base.Bowl,
+            VFX.MugTomatoSoup = Base.Mugl,
+            VFX.MugTomatoSoup_White = Base.MugWhite,
+            VFX.MugTomatoSoup_Spiffo = Base.MugSpiffo,
+            VFX.MugTomatoSoup_Clay = Base.ClayMug,
+        }
+    }
+
+/* <<<<<  Ramen  >>>>> */
+
+    craftRecipe VFX_PrepareRamen
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [VFX.ChickenRamenFlavourSachet;VFX.BeefRamenFlavourSachet;VFX.ShrimpRamenFlavourSachet;VFX.PorkRamenFlavourSachet;VFX.HotAndSpicyRamenFlavourSachet;VFX.SoySauceRamenFlavourSachet] mappers[RamenBowlType] mode:destroy flags[ItemCount],
+            item 1 [Base.Ramen] mode:destroy flags[ItemCount],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:destroy flags[ItemCount],
+            -fluid 0.3 categories[Water] mode:mixture,
+        }
+
+        outputs
+        {
+            item 1 mapper:RamenBowlType,
+        }
+
+        itemMapper RamenBowlType
+        {
+            VFX.BowlChickenRamen = VFX.ChickenRamenFlavourSachet,
+            VFX.BowlBeefRamen = VFX.BeefRamenFlavourSachet,
+            VFX.BowlShrimpRamen = VFX.ShrimpRamenFlavourSachet,
+            VFX.BowlPorkRamen = VFX.PorkRamenFlavourSachet,
+            VFX.BowlHotAndSpicyRamen = VFX.HotAndSpicyRamenFlavourSachet,
+            VFX.BowlSoySauceRamen = VFX.SoySauceRamenFlavourSachet,
+        }
+    }
+
+/* <<<<<  Pasta and Rice Meals  >>>>> */
+
+    craftRecipe VFX_PreparePacketPasta
+    {
+        timedAction = VFX.SaucepanCooking,
+        time = 50,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [VFX.PMCheddarBroccoli;VFX.PMParmesan;VFX.PMCreamyChicken;VFX.PMCreamyPesto;VFX.PMAlfredo;VFX.PMMacCheese] mappers[PastaMeal] mode:destroy flags[ItemCount],
+            item 1 [Base.Saucepan] mode:destroy flags[InheritCondition;ItemCount],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 4 tags[base:bakingfat],
+            item 1 [*],
+            -fluid 0.3 [CowMilk;SheepMilk;VFX_SoyMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:PastaMeal,
+        }
+
+        itemMapper PastaMeal
+        {
+            VFX.PMSaucepanCheddarBroccoli = VFX.PMCheddarBroccoli,
+            VFX.PMSaucepanParmesan = VFX.PMParmesan,
+            VFX.PMSaucepanCreamyChicken = VFX.PMCreamyChicken,
+            VFX.PMSaucepanCreamyPesto = VFX.PMCreamyPesto,
+            VFX.PMSaucepanAlfredo = VFX.PMAlfredo,
+            VFX.PMSaucepanMacCheese = VFX.PMMacCheese,
+        }
+    }
+
+    craftRecipe VFX_PreparePacketPastaCopper
+    {
+        timedAction = VFX.SaucepanCooking,
+        time = 50,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [VFX.PMCheddarBroccoli;VFX.PMParmesan;VFX.PMCreamyChicken;VFX.PMCreamyPesto;VFX.PMAlfredo;VFX.PMMacCheese] mappers[PastaMeal] mode:destroy flags[ItemCount],
+            item 1 [Base.SaucepanCopper] mode:destroy flags[InheritCondition;ItemCount],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 4 tags[base:bakingfat],
+            item 1 [*],
+            -fluid 0.3 [CowMilk;SheepMilk;VFX_SoyMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:PastaMeal,
+        }
+
+        itemMapper PastaMeal
+        {
+            VFX.PMCopperSaucepanCheddarBroccoli = VFX.PMCheddarBroccoli,
+            VFX.PMCopperSaucepanParmesan = VFX.PMParmesan,
+            VFX.PMCopperSaucepanCreamyChicken = VFX.PMCreamyChicken,
+            VFX.PMCopperSaucepanCreamyPesto = VFX.PMCreamyPesto,
+            VFX.PMCopperSaucepanAlfredo = VFX.PMAlfredo,
+            VFX.PMCopperSaucepanMacCheese = VFX.PMMacCheese,
+        }
+    }
+
+    craftRecipe VFX_PreparePacketRice
+    {
+        timedAction = VFX.SaucepanCooking,
+        time = 50,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [VFX.RMChicken;VFX.RMMexican;VFX.RMMedley;VFX.RMFried] mappers[RiceMeal] mode:destroy flags[ItemCount],
+            item 1 [Base.Saucepan] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 0.6 categories[Water] mode:mixture,
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 4 tags[base:bakingfat],
+        }
+
+        outputs
+        {
+            item 1 mapper:RiceMeal,
+        }
+
+        itemMapper RiceMeal
+        {
+            VFX.RMSaucepanChicken = VFX.RMChicken,
+            VFX.RMSaucepanMexican = VFX.RMMexican,
+            VFX.RMSaucepanMedley = VFX.RMMedley,
+            VFX.RMSaucepanFried = VFX.RMFried,
+
+            VFX.RMCopperSaucepanChicken = VFX.RMChicken,
+            VFX.RMCopperSaucepanMexican = VFX.RMMexican,
+            VFX.RMCopperSaucepanMedley = VFX.RMMedley,
+            VFX.RMCopperSaucepanFried = VFX.RMFried,
+        }
+    }
+
+    craftRecipe VFX_PreparePacketRiceCopper
+    {
+        timedAction = VFX.SaucepanCooking,
+        time = 50,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [VFX.RMChicken;VFX.RMMexican;VFX.RMMedley;VFX.RMFried] mappers[RiceMeal] mode:destroy flags[ItemCount],
+            item 1 [Base.SaucepanCopper] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 0.6 categories[Water] mode:mixture,
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 4 tags[base:bakingfat],
+        }
+
+        outputs
+        {
+            item 1 mapper:RiceMeal,
+        }
+
+        itemMapper RiceMeal
+        {
+            VFX.RMCopperSaucepanChicken = VFX.RMChicken,
+            VFX.RMCopperSaucepanMexican = VFX.RMMexican,
+            VFX.RMCopperSaucepanMedley = VFX.RMMedley,
+            VFX.RMCopperSaucepanFried = VFX.RMFried,
+        }
+    }
+
+/* <<<<<  Pasta and Rice  >>>>> */
+
+    craftRecipe VFX_PrepareFreshPastaSaucepan
+    {
+        timedAction = VFX.SaucepanCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.Saucepan] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 0.6 categories[Water] mode:mixture,
+            item 1 [VFX.Gnocchi;VFX.HomemadeGnocchi;VFX.GroundBeefRavioli;VFX.SpinachRicottaRavioli;VFX.ThreeCheeseRavioli;VFX.PumpkinRavioli;VFX.LobsterRavioli;VFX.ChickenMushroomRavioli;VFX.FourCheeseTortellini;VFX.PepperedPorkTortellini;VFX.SpinachRicottaTortellini;VFX.GroundBeefTortellini] mappers[pastaType] flags[ItemCount],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterSaucepanGnocchi = VFX.Gnocchi,
+            VFX.WaterSaucepanGnocchi = VFX.HomemadeGnocchi,
+            VFX.SaucepanGroundBeefRavioli = VFX.GroundBeefRavioli,
+            VFX.SaucepanSpinachRicottaRavioli = VFX.SpinachRicottaRavioli,
+            VFX.SaucepanThreeCheeseRavioli = VFX.ThreeCheeseRavioli,
+            VFX.SaucepanPumpkinRavioli = VFX.PumpkinRavioli,
+            VFX.SaucepanLobsterRavioli = VFX.LobsterRavioli,
+            VFX.SaucepanChickenMushroomRavioli = VFX.ChickenMushroomRavioli,
+            VFX.SaucepanFourCheeseTortellini = VFX.FourCheeseTortellini,
+            VFX.SaucepanPepperedPorkTortellini = VFX.PepperedPorkTortellini,
+            VFX.SaucepanSpinachRicottaTortellini = VFX.SpinachRicottaTortellini,
+            VFX.SaucepanGroundBeefTortellini = VFX.GroundBeefTortellini,
+        }
+    }
+
+    craftRecipe VFX_PrepareFreshPastaSaucepanCopper
+    {
+        timedAction = VFX.SaucepanCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.SaucepanCopper] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 0.6 categories[Water] mode:mixture,
+            item 1 [VFX.Gnocchi;VFX.HomemadeGnocchi;VFX.GroundBeefRavioli;VFX.SpinachRicottaRavioli;VFX.ThreeCheeseRavioli;VFX.PumpkinRavioli;VFX.LobsterRavioli;VFX.ChickenMushroomRavioli;VFX.FourCheeseTortellini;VFX.PepperedPorkTortellini;VFX.SpinachRicottaTortellini;VFX.GroundBeefTortellini] mappers[pastaType] flags[ItemCount],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterSaucepanCopperGnocchi = VFX.Gnocchi,
+            VFX.WaterSaucepanCopperGnocchi = VFX.HomemadeGnocchi,
+            VFX.CopperSaucepanGroundBeefRavioli = VFX.GroundBeefRavioli,
+            VFX.CopperSaucepanSpinachRicottaRavioli = VFX.SpinachRicottaRavioli,
+            VFX.CopperSaucepanThreeCheeseRavioli = VFX.ThreeCheeseRavioli,
+            VFX.CopperSaucepanPumpkinRavioli = VFX.PumpkinRavioli,
+            VFX.CopperSaucepanLobsterRavioli = VFX.LobsterRavioli,
+            VFX.CopperSaucepanChickenMushroomRavioli = VFX.ChickenMushroomRavioli,
+            VFX.CopperSaucepanFourCheeseTortellini = VFX.FourCheeseTortellini,
+            VFX.CopperSaucepanPepperedPorkTortellini = VFX.PepperedPorkTortellini,
+            VFX.CopperSaucepanSpinachRicottaTortellini = VFX.SpinachRicottaTortellini,
+            VFX.CopperSaucepanGroundBeefTortellini = VFX.GroundBeefTortellini,
+        }
+    }
+
+    craftRecipe VFX_PrepareFreshPastaPot
+    {
+        timedAction = VFX.PotCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.Pot] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 1.5 categories[Water] mode:mixture,
+            item 1 [VFX.Gnocchi;VFX.HomemadeGnocchi;VFX.GroundBeefRavioli;VFX.SpinachRicottaRavioli;VFX.ThreeCheeseRavioli;VFX.PumpkinRavioli;VFX.LobsterRavioli;VFX.ChickenMushroomRavioli;VFX.FourCheeseTortellini;VFX.PepperedPorkTortellini;VFX.SpinachRicottaTortellini;VFX.GroundBeefTortellini] mappers[pastaType] flags[ItemCount],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterPotGnocchi = VFX.Gnocchi,
+            VFX.WaterPotGnocchi = VFX.HomemadeGnocchi,
+            VFX.PotGroundBeefRavioli = VFX.GroundBeefRavioli,
+            VFX.PotSpinachRicottaRavioli = VFX.SpinachRicottaRavioli,
+            VFX.PotThreeCheeseRavioli = VFX.ThreeCheeseRavioli,
+            VFX.PotPumpkinRavioli = VFX.PumpkinRavioli,
+            VFX.PotLobsterRavioli = VFX.LobsterRavioli,
+            VFX.PotChickenMushroomRavioli = VFX.ChickenMushroomRavioli,
+            VFX.PotFourCheeseTortellini = VFX.FourCheeseTortellini,
+            VFX.PotPepperedPorkTortellini = VFX.PepperedPorkTortellini,
+            VFX.PotSpinachRicottaTortellini = VFX.SpinachRicottaTortellini,
+            VFX.PotGroundBeefTortellini = VFX.GroundBeefTortellini,
+        }
+    }
+
+    craftRecipe VFX_PrepareFreshPastaPotForged
+    {
+        timedAction = VFX.PotCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.PotForged] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 1.5 categories[Water] mode:mixture,
+            item 1 [VFX.Gnocchi;VFX.HomemadeGnocchi;VFX.GroundBeefRavioli;VFX.SpinachRicottaRavioli;VFX.ThreeCheeseRavioli;VFX.PumpkinRavioli;VFX.LobsterRavioli;VFX.ChickenMushroomRavioli;VFX.FourCheeseTortellini;VFX.PepperedPorkTortellini;VFX.SpinachRicottaTortellini;VFX.GroundBeefTortellini] mappers[pastaType] flags[ItemCount],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterPotForgedGnocchi = VFX.Gnocchi,
+            VFX.WaterPotForgedGnocchi = VFX.HomemadeGnocchi,
+            VFX.PotForgedGroundBeefRavioli = VFX.GroundBeefRavioli,
+            VFX.PotForgedSpinachRicottaRavioli = VFX.SpinachRicottaRavioli,
+            VFX.PotForgedThreeCheeseRavioli = VFX.ThreeCheeseRavioli,
+            VFX.PotForgedPumpkinRavioli = VFX.PumpkinRavioli,
+            VFX.PotForgedLobsterRavioli = VFX.LobsterRavioli,
+            VFX.PotForgedChickenMushroomRavioli = VFX.ChickenMushroomRavioli,
+            VFX.PotForgedFourCheeseTortellini = VFX.FourCheeseTortellini,
+            VFX.PotForgedPepperedPorkTortellini = VFX.PepperedPorkTortellini,
+            VFX.PotForgedSpinachRicottaTortellini = VFX.SpinachRicottaTortellini,
+            VFX.PotForgedGroundBeefTortellini = VFX.GroundBeefTortellini,
+        }
+    }
+
+    craftRecipe VFX_PreparePastaSaucepan
+    {
+        timedAction = VFX.SaucepanCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.Saucepan] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 0.6 categories[Water] mode:mixture,
+            item 10 tags[VFX:Pasta] mappers[pastaType],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterSaucepanMacaroni = VFX.Macaroni,
+            VFX.WaterSaucepanFettuccine = VFX.Fettuccine,
+            VFX.WaterSaucepanPenne = VFX.Penne,
+            VFX.WaterSaucepanHomemadePasta = VFX.HomemadePasta,
+        }
+    }
+
+    craftRecipe VFX_PreparePastaSaucepanCopper
+    {
+        timedAction = VFX.SaucepanCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.SaucepanCopper] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 0.6 categories[Water] mode:mixture,
+            item 10 tags[VFX:Pasta] mappers[pastaType],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterSaucepanCopperMacaroni = VFX.Macaroni,
+            VFX.WaterSaucepanCopperFettuccine = VFX.Fettuccine,
+            VFX.WaterSaucepanCopperPenne = VFX.Penne,
+            VFX.WaterSaucepanCopperHomemadePasta = VFX.HomemadePasta,
+        }
+    }
+
+    craftRecipe VFX_PreparePastaPot
+    {
+        timedAction = VFX.PotCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.Pot] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 1.5 categories[Water] mode:mixture,
+            item 10 tags[VFX:Pasta] mappers[pastaType],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterPotMacaroni = VFX.Macaroni,
+            VFX.WaterPotFettuccine = VFX.Fettuccine,
+            VFX.WaterPotPenne = VFX.Penne,
+            VFX.WaterPotHomemadePasta = VFX.HomemadePasta,
+        }
+    }
+
+    craftRecipe VFX_PreparePastaPotForged
+    {
+        timedAction = VFX.PotCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.PotForged] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 1.5 categories[Water] mode:mixture,
+            item 10 tags[VFX:Pasta] mappers[pastaType],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterPotForgedMacaroni = VFX.Macaroni,
+            VFX.WaterPotForgedFettuccine = VFX.Fettuccine,
+            VFX.WaterPotForgedPenne = VFX.Penne,
+            VFX.WaterPotForgedHomemadePasta = VFX.HomemadePasta,
+        }
+    }
+
+    craftRecipe VFX_PrepareRiceSaucepan
+    {
+        timedAction = VFX.SaucepanCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.Saucepan] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 0.6 categories[Water] mode:mixture,
+            item 10 tags[VFX:Rice] mappers[pastaType],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterSaucepanBrownRice = VFX.BrownRice,
+            VFX.WaterSaucepanJasmineRice = VFX.JasmineRice,
+            VFX.WaterSaucepanBasmatiRice = VFX.BasmatiRice,
+            VFX.WaterSaucepanArborioRice = VFX.ArborioRice,
+        }
+    }
+
+    craftRecipe VFX_PrepareRiceSaucepanCopper
+    {
+        timedAction = VFX.SaucepanCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.SaucepanCopper] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 0.6 categories[Water] mode:mixture,
+            item 10 tags[VFX:Rice] mappers[pastaType],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterSaucepanCopperBrownRice = VFX.BrownRice,
+            VFX.WaterSaucepanCopperJasmineRice = VFX.JasmineRice,
+            VFX.WaterSaucepanCopperBasmatiRice = VFX.BasmatiRice,
+            VFX.WaterSaucepanCopperArborioRice = VFX.ArborioRice,
+        }
+    }
+
+    craftRecipe VFX_PrepareRicePot
+    {
+        timedAction = VFX.PotCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.Pot] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 1.5 categories[Water] mode:mixture,
+            item 10 tags[VFX:Rice] mappers[pastaType],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterPotBrownRice = VFX.BrownRice,
+            VFX.WaterPotJasmineRice = VFX.JasmineRice,
+            VFX.WaterPotBasmatiRice = VFX.BasmatiRice,
+            VFX.WaterPotArborioRice = VFX.ArborioRice,
+        }
+    }
+
+    craftRecipe VFX_PrepareRicePotForged
+    {
+        timedAction = VFX.PotCooking,
+        Time = 50,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.Pot] mode:destroy flags[InheritCondition;ItemCount],
+            -fluid 1.5 categories[Water] mode:mixture,
+            item 10 tags[VFX:Rice] mappers[pastaType],
+        }
+
+        outputs
+        {
+            item 1 mapper:pastaType,
+        }
+
+        itemMapper pastaType
+        {
+            VFX.WaterPotForgedBrownRice = VFX.BrownRice,
+            VFX.WaterPotForgedJasmineRice = VFX.JasmineRice,
+            VFX.WaterPotForgedBasmatiRice = VFX.BasmatiRice,
+            VFX.WaterPotForgedArborioRice = VFX.ArborioRice,
+        }
+    }
+
+    craftRecipe VFX_OpenHomemadePastaSauce
+    {
+        timedAction = VFX.JarOpening,
+        time = 15,
+        tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.HomemadeMarinara;VFX.HomemadeSpicyMarinara;VFX.HomemadeMeatSauce;VFX.HomemadeBasilPestoSauce;VFX.HomemadeAlfredoSauce;VFX.HomemadeBechamelSauce] mode:destroy mappers[HomemadePastaSauceType] flags[InheritFood;Prop2],
+        }
+
+        outputs
+        {
+            item 1 mapper:HomemadePastaSauceType,
+            item 1 Base.JarLid,
+        }
+
+        itemMapper HomemadePastaSauceType
+        {
+            VFX.HomemadeMarinara_Open = VFX.HomemadeMarinara,
+            VFX.HomemadeSpicyMarinara_Open = VFX.HomemadeSpicyMarinara,
+            VFX.HomemadeMeatSauce_Open = VFX.HomemadeMeatSauce,
+            VFX.HomemadeBasilPestoSauce_Open = VFX.HomemadeBasilPestoSauce,
+            VFX.HomemadeAlfredoSauce_Open = VFX.HomemadeAlfredoSauce,
+            VFX.HomemadeBechamelSauce_Open = VFX.HomemadeBechamelSauce,
+        }
+    }
+
+/* <<<<<  Cereal and Granola  >>>>> */
+
+    craftRecipe VFX_MakeBowlOfCereal
+    {
+        timedAction = VFX.PourInBowl,
+        Time = 30,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 5 [VFX.OatyOs;VFX.HoneyOatyOs;Base.Cereal;VFX.RiceKrisps;VFX.FrostyCrunch;VFX.FruityLoops;VFX.UnluckyCharms;VFX.AdmiralChomp;VFX.CocoaPuffs;VFX.Wheaties] mappers[cerealType] flags[Prop1],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:destroy flags[ItemCount],
+            -fluid 0.3 [CowMilk;SheepMilk;VFX_SoyMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:cerealType,
+        }
+
+        itemMapper cerealType
+        {
+            VFX.OatyOsBowl = VFX.OatyOs,
+            VFX.HoneyOatyOsBowl = VFX.HoneyOatyOs,
+            Base.CerealBowl = Base.Cereal,
+            VFX.RiceKrispsBowl = VFX.RiceKrisps,
+            VFX.FrostyCrunchBowl = VFX.FrostyCrunch,
+            VFX.FruityLoopsBowl = VFX.FruityLoops,
+            VFX.UnluckyCharmsBowl = VFX.UnluckyCharms,
+            VFX.AdmiralChompBowl = VFX.AdmiralChomp,
+            VFX.CocoaPuffsBowl = VFX.CocoaPuffs,
+            VFX.WheatiesBowl = VFX.Wheaties,
+        }
+    }
+
+    craftRecipe VFX_MakeBowlOfGranola
+    {
+        timedAction = VFX.PourInBowl,
+        Time = 30,
+        Tags = InHandCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 5 [VFX.HoneyOatsGranola;VFX.FruitNutGranola;VFX.MaplePecanGranola;VFX.CoconutAlmondGranola;VFX.ChocolateChipGranola] mappers[granolaType] flags[Prop1],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:destroy flags[ItemCount],
+            -fluid 0.3 [CowMilk;SheepMilk;VFX_SoyMilk],
+        }
+        outputs
+        {
+            item 1 mapper:granolaType,
+        }
+        itemMapper granolaType
+        {
+            VFX.HoneyOatsGranolaBowl = VFX.HoneyOatsGranola,
+            VFX.FruitNutGranolaBowl = VFX.FruitNutGranola,
+            VFX.MaplePecanGranolaBowl = VFX.MaplePecanGranola,
+            VFX.CoconutAlmondGranolaBowl = VFX.CoconutAlmondGranola,
+            VFX.ChocolateChipGranolaBowl = VFX.ChocolateChipGranola,
+        }
+    }
+
+}

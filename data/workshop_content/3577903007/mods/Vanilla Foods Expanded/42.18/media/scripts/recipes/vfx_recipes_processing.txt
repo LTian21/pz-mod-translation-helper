@@ -1,0 +1,2533 @@
+module Base
+{
+
+/* <<<<<  Cans and Jars  >>>>> */
+
+    craftRecipe VFX_OpenInsectCan
+    {
+        timedAction = VFX.OpenCanInsect,
+        time = 20,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.CannedWorms;VFX.CannedSnails;VFX.CannedCrickets] mappers[VFXInsectCanType] flags[Prop2],
+        }
+
+        outputs
+        {
+            item 6 mapper:VFXInsectCanType,
+            item 1 VFX.SmallTinCanEmpty,
+        }
+
+        itemMapper VFXInsectCanType
+        {
+            Base.Worm = VFX.CannedWorms,
+            Base.Snail = VFX.CannedSnails,
+            Base.Cricket = VFX.CannedCrickets,
+        }
+    }
+
+    craftRecipe VFX_OpenBoxOfSmallCannedFood
+    {
+        timedAction = UnPackBox_Small,
+        time = 100,
+        tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Packing,
+
+        inputs
+        {
+            item 1 [VFX.CannedHam_Box;VFX.CannedSalmon_Box;VFX.CannedAnchovies_Box;VFX.CannedCatFood_Box;VFX.CannedChicken_Box] mappers[VFXSmallCanType] flags[AllowFavorite;InheritFavorite],
+        }
+
+        outputs
+        {
+            item 6 mapper:VFXSmallCanType,
+        }
+
+        itemMapper VFXSmallCanType
+        {
+            VFX.CannedHam = VFX.CannedHam_Box,
+            VFX.CannedSalmon = VFX.CannedSalmon_Box,
+            VFX.CannedAnchovies = VFX.CannedAnchovies_Box,
+            VFX.CannedCatFood = VFX.CannedCatFood_Box,
+            VFX.CannedChicken = VFX.CannedChicken_Box,
+        }
+    }
+
+    craftRecipe VFX_PackBoxOfSmallCannedFood
+    {
+        timedAction = PackingBox_Small,
+        time = 100,
+        tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Packing,
+
+        inputs
+        {
+            item 6 [VFX.CannedHam;VFX.CannedSalmon;VFX.CannedAnchovies;VFX.CannedCatFood;VFX.CannedChicken] mappers[VFXSmallCanType] flags[AllowFavorite;InheritFavorite;IsExclusive],
+        }
+
+        outputs
+        {
+            item 1 mapper:VFXSmallCanType,
+        }
+
+        itemMapper VFXSmallCanType
+        {
+            VFX.CannedHam_Box = VFX.CannedHam,
+            VFX.CannedSalmon_Box = VFX.CannedSalmon,
+            VFX.CannedAnchovies_Box = VFX.CannedAnchovies,
+            VFX.CannedCatFood_Box = VFX.CannedCatFood,
+            VFX.CannedChicken_Box = VFX.CannedChicken,
+        }
+    }
+
+    craftRecipe VFX_OpenJar
+    {
+        timedAction = VFX.JarOpening,
+        time = 15,
+        tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.JarBlackOlives;VFX.JarGreenOlives;VFX.JarSundriedTomatoes;VFX.JarPickledPeppers;VFX.JarPickledEggs] mappers[VFXJars] flags[Prop2],
+        }
+
+        outputs
+        {
+            item 1 mapper:VFXJars,
+            item 1 Base.JarLid,
+        }
+
+        itemMapper VFXJars
+        {
+            VFX.JarBlackOlivesOpen = VFX.JarBlackOlives,
+            VFX.JarGreenOlivesOpen = VFX.JarGreenOlives,
+            VFX.JarSundriedTomatoesOpen = VFX.JarSundriedTomatoes,
+            VFX.JarPickledPeppersOpen = VFX.JarPickledPeppers,
+            VFX.JarPickledEggsOpen = VFX.JarPickledEggs,
+        }
+    }
+
+    craftRecipe VFX_OpenJarofPickles
+    {
+        timedAction = VFX.JarOpening,
+        time = 15,
+        tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.JarPickles] flags[InheritFoodAge;Prop2],
+        }
+
+        outputs
+        {
+            item 1  VFX.JarPickleJuiceOpen,
+            item 10 Base.Pickles,
+        }
+    }
+
+/* <<<<<  Actions - Open  >>>>> */
+
+    craftRecipe VFX_OpenBoxSoupSachet
+    {
+        timedAction = VFX.SmallBagUnpacking,
+        time = 30,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.BoxPumpkinSoupSachets;VFX.BoxPeaAndHamSoupSachets;VFX.BoxChickenNoodleSoupSachets;VFX.BoxTomatoSoupSachets] mappers[BoxSoupSachet] flags[Prop2],
+        }
+
+        outputs
+        {
+            item 4 mapper:BoxSoupSachet,
+        }
+
+        itemMapper BoxSoupSachet
+        {
+            VFX.PumpkinSoupSachet = VFX.BoxPumpkinSoupSachets,
+            VFX.PeaAndHamSoupSachet = VFX.BoxPeaAndHamSoupSachets,
+            VFX.ChickenNoodleSoupSachet = VFX.BoxChickenNoodleSoupSachets,
+            VFX.TomatoSoupSachet = VFX.BoxTomatoSoupSachets,
+        }
+    }
+
+    craftRecipe VFX_OpenBoxRamen
+    {
+        timedAction = VFX.Unpacking,
+        time = 30,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.BoxChickenRamen;VFX.BoxBeefRamen;VFX.BoxShrimpRamen;VFX.BoxPorkRamen;VFX.BoxHotAndSpicyRamen;VFX.BoxSoySauceRamen] mappers[RamenType] mode:destroy flags[ItemCount;Prop2],
+        }
+
+        outputs
+        {
+            item 5 mapper:RamenType,
+        }
+
+        itemMapper RamenType
+        {
+            VFX.ChickenRamen = VFX.BoxChickenRamen,
+            VFX.BeefRamen = VFX.BoxBeefRamen,
+            VFX.ShrimpRamen = VFX.BoxShrimpRamen,
+            VFX.PorkRamen = VFX.BoxPorkRamen,
+            VFX.HotAndSpicyRamen = VFX.BoxHotAndSpicyRamen,
+            VFX.SoySauceRamen = VFX.BoxSoySauceRamen,
+        }
+    }
+
+    craftRecipe VFX_OpenPacketRamen
+    {
+        timedAction = VFX.UnpackingSmall,
+        time = 10,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.ChickenRamen;VFX.BeefRamen;VFX.ShrimpRamen;VFX.PorkRamen;VFX.HotAndSpicyRamen;VFX.SoySauceRamen] mappers[FlavorType] mode:destroy flags[ItemCount;Prop2],
+        }
+
+        outputs
+        {
+            item 1 Base.Ramen,
+            item 1 mapper:FlavorType,
+        }
+
+        itemMapper FlavorType
+        {
+            VFX.ChickenRamenFlavourSachet = VFX.ChickenRamen,
+            VFX.BeefRamenFlavourSachet = VFX.BeefRamen,
+            VFX.ShrimpRamenFlavourSachet = VFX.ShrimpRamen,
+            VFX.PorkRamenFlavourSachet = VFX.PorkRamen,
+            VFX.HotAndSpicyRamenFlavourSachet = VFX.HotAndSpicyRamen,
+            VFX.SoySauceRamenFlavourSachet = VFX.SoySauceRamen,
+        }
+    }
+
+    craftRecipe VFX_TakeBouillonCubeFromBox
+    {
+        timedAction = VFX.UnpackingSmall,
+        Time = 10,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.BoxChickenBouillonCube;VFX.BoxBeefBouillonCube;VFX.BoxFishBouillonCube;VFX.BoxVegetableBouillonCube] mappers[BouillonType] flags[Prop2],
+        }
+
+        outputs
+        {
+            item 1 mapper:BouillonType,
+        }
+
+        itemMapper BouillonType
+        {
+            Base.BouillonCube = VFX.BoxChickenBouillonCube,
+            VFX.BeefBouillonCube = VFX.BoxBeefBouillonCube,
+            VFX.FishBouillonCube = VFX.BoxFishBouillonCube,
+            VFX.VegetableBouillonCube = VFX.BoxVegetableBouillonCube,
+        }
+    }
+
+    craftRecipe VFX_OpenSnackCakeBox
+    {
+        timedAction = VFX.Unpacking,
+        Time = 15,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+        inputs
+        {
+            item 1 [VFX.ZebraCakesBox;VFX.SwissRollsBox;VFX.FudgeRoundsBox;VFX.CoffeeCakesBox;VFX.CosmicBrowniesBox;VFX.OatmealCremePiesBox] mappers[SnackCakeType] flags[Prop2] mode:destroy,
+        }
+        outputs
+        {
+            item 5 mapper:SnackCakeType,
+        }
+        itemMapper SnackCakeType
+        {
+            VFX.QuaggaCakes = VFX.ZebraCakesBox,
+            VFX.SwissRoll = VFX.SwissRollsBox,
+            VFX.FudgeRound = VFX.FudgeRoundsBox,
+            VFX.CoffeeCake = VFX.CoffeeCakesBox,
+            VFX.CosmicBrownie = VFX.CosmicBrowniesBox,
+            VFX.OatmealCremePie = VFX.OatmealCremePiesBox,
+        }
+    }
+
+    craftRecipe VFX_OpenToasterStrudelBox
+    {
+        timedAction = VFX.UnpackingSmall,
+        Time = 15,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+        inputs
+        {
+            item 1 [VFX.StrawberryStrudelsBox;VFX.CherryStrudelsBox;VFX.BlueberryStrudelsBox;VFX.CookiesAndCreamStrudelsBox;VFX.BrownSugarStrudelsBox] mappers[StrudelType] flags[Prop2] mode:destroy,
+        }
+        outputs
+        {
+            item 5 mapper:StrudelType,
+        }
+        itemMapper StrudelType
+        {
+            VFX.PackagedStrawberryStrudel = VFX.StrawberryStrudelsBox,
+            VFX.PackagedCherryStrudel = VFX.CherryStrudelsBox,
+            VFX.PackagedBlueberryStrudel = VFX.BlueberryStrudelsBox,
+            VFX.PackagedCookiesAndCreamStrudel = VFX.CookiesAndCreamStrudelsBox,
+            VFX.PackagedBrownSugarStrudel = VFX.BrownSugarStrudelsBox,
+        }
+    }
+
+    craftRecipe VFX_OpenPackagedStrudel
+    {
+        timedAction = VFX.UnpackingSmall,
+        Time = 10,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+        inputs
+        {
+            item 1 [VFX.PackagedStrawberryStrudel;VFX.PackagedCherryStrudel;VFX.PackagedBlueberryStrudel;VFX.PackagedCookiesAndCreamStrudel;VFX.PackagedBrownSugarStrudel] mappers[OpenStrudel] flags[Prop2] mode:destroy,
+        }
+        outputs
+        {
+            item 1 mapper:OpenStrudel,
+        }
+        itemMapper OpenStrudel
+        {
+            VFX.StrawberryToasterStrudel = VFX.PackagedStrawberryStrudel,
+            VFX.CherryToasterStrudel = VFX.PackagedCherryStrudel,
+            VFX.BlueberryToasterStrudel = VFX.PackagedBlueberryStrudel,
+            VFX.CookiesAndCreamToasterStrudel = VFX.PackagedCookiesAndCreamStrudel,
+            VFX.BrownSugarToasterStrudel = VFX.PackagedBrownSugarStrudel,
+        }
+    }
+
+    craftRecipe VFX_OpenPuddingBox
+    {
+        timedAction = VFX.Unpacking,
+        Time = 15,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+        inputs
+        {
+            item 1 [VFX.ChocolatePuddingBox;VFX.VanillaPuddingBox;VFX.CustardPuddingBox;VFX.StrawberryPuddingBox;VFX.BananaCreamPuddingBox] mappers[PuddingType] flags[Prop2] mode:destroy,
+        }
+        outputs
+        {
+            item 4 mapper:PuddingType,
+        }
+        itemMapper PuddingType
+        {
+            VFX.ChocolatePuddingCup = VFX.ChocolatePuddingBox,
+            VFX.VanillaPuddingCup = VFX.VanillaPuddingBox,
+            VFX.CustardPuddingCup = VFX.CustardPuddingBox,
+            VFX.StrawberryPuddingCup = VFX.StrawberryPuddingBox,
+            VFX.BananaCreamPuddingCup = VFX.BananaCreamPuddingBox,
+        }
+    }
+
+    craftRecipe VFX_OpenJelloBox
+    {
+        timedAction = VFX.Unpacking,
+        Time = 15,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+        inputs
+        {
+            item 1 [VFX.StrawberryJelloBox;VFX.LemonLimeJelloBox;VFX.OrangeJelloBox;VFX.CherryJelloBox;VFX.PineappleJelloBox;VFX.BerryBlueJelloBox;VFX.RaspberryJelloBox;VFX.LimeJelloBox;VFX.PeachJelloBox;VFX.GrapeJelloBox;VFX.LemonJelloBox] mappers[JelloType] flags[Prop2] mode:destroy,
+        }
+        outputs
+        {
+            item 4 mapper:JelloType,
+        }
+        itemMapper JelloType
+        {
+            VFX.StrawberryJelloCup = VFX.StrawberryJelloBox,
+            VFX.LemonLimeJelloCup = VFX.LemonLimeJelloBox,
+            VFX.OrangeJelloCup = VFX.OrangeJelloBox,
+            VFX.CherryJelloCup = VFX.CherryJelloBox,
+            VFX.PineappleJelloCup = VFX.PineappleJelloBox,
+            VFX.BerryBlueJelloCup = VFX.BerryBlueJelloBox,
+            VFX.RaspberryJelloCup = VFX.RaspberryJelloBox,
+            VFX.LimeJelloCup = VFX.LimeJelloBox,
+            VFX.PeachJelloCup = VFX.PeachJelloBox,
+            VFX.GrapeJelloCup = VFX.GrapeJelloBox,
+            VFX.LemonJelloCup = VFX.LemonJelloBox,
+        }
+    }
+
+    craftRecipe VFX_OpenFruitCupBox
+    {
+        timedAction = VFX.Unpacking,
+        Time = 15,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.PeachSyrupFruitBox;VFX.PeachJellyFruitBox;VFX.PearSyrupFruitBox;VFX.PearJellyFruitBox;VFX.FruitSaladSyrupFruitBox;VFX.FruitSaladJellyFruitBox;VFX.MandarinSyrupFruitBox;VFX.MandarinJellyFruitBox;VFX.PineappleSyrupFruitBox;VFX.PineappleJellyFruitBox;VFX.TropicalSyrupFruitBox;VFX.TropicalJellyFruitBox] mappers[fruitCupType] flags[Prop2] mode:destroy,
+        }
+
+        outputs
+        {
+            item 4 mapper:fruitCupType,
+        }
+
+        itemMapper fruitCupType
+        {
+            VFX.PeachSyrupFruitCup = VFX.PeachSyrupFruitBox,
+            VFX.PeachJellyFruitCup = VFX.PeachJellyFruitBox,
+
+            VFX.PearSyrupFruitCup = VFX.PearSyrupFruitBox,
+            VFX.PearJellyFruitCup = VFX.PearJellyFruitBox,
+
+            VFX.FruitSaladSyrupFruitCup = VFX.FruitSaladSyrupFruitBox,
+            VFX.FruitSaladJellyFruitCup = VFX.FruitSaladJellyFruitBox,
+
+            VFX.MandarinSyrupFruitCup = VFX.MandarinSyrupFruitBox,
+            VFX.MandarinJellyFruitCup = VFX.MandarinJellyFruitBox,
+
+            VFX.PineappleSyrupFruitCup = VFX.PineappleSyrupFruitBox,
+            VFX.PineappleJellyFruitCup = VFX.PineappleJellyFruitBox,
+
+            VFX.TropicalSyrupFruitCup = VFX.TropicalSyrupFruitBox,
+            VFX.TropicalJellyFruitCup = VFX.TropicalJellyFruitBox,
+        }
+    }
+
+    craftRecipe VFX_OpenGranolaBarBox
+    {
+        timedAction = VFX.UnpackingSmall,
+        time = 15,
+        tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.AlmondGranolaBarBox;VFX.ChocolateChipGranolaBarBox;VFX.NuttyGranolaBarBox;VFX.OatGranolaBarBox;VFX.PeanutButterGranolaBarBox] mappers[granolaBarType] flags[Prop2] mode:destroy,
+        }
+
+        outputs
+        {
+            item 5 mapper:granolaBarType,
+        }
+
+        itemMapper granolaBarType
+        {
+            VFX.AlmondGranolaBar = VFX.AlmondGranolaBarBox,
+            VFX.ChocolateChipGranolaBar = VFX.ChocolateChipGranolaBarBox,
+            VFX.NuttyGranolaBar = VFX.NuttyGranolaBarBox,
+            VFX.OatGranolaBar = VFX.OatGranolaBarBox,
+            Base.GranolaBar = VFX.PeanutButterGranolaBarBox,
+        }
+    }
+
+    craftRecipe VFX_OpenUncrustablesBox
+    {
+        timedAction = VFX.SmallBagUnpacking,
+        Time = 15,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+        inputs
+        {
+            item 1 [VFX.PBJUncrustable_Box;VFX.PBFUncrustable_Box;VFX.CSUncrustable_Box;VFX.CHUncrustable_Box] mappers[boxType] mode:destroy flags[ItemCount;AllowFrozenItem;InheritFoodAge;InheritFreezingTime;Prop2],
+        }
+        outputs
+        {
+            item 5 mapper:boxType,
+        }
+        itemMapper boxType
+        {
+            VFX.PBJUncrustable = VFX.PBJUncrustable_Box,
+            VFX.PBFUncrustable = VFX.PBFUncrustable_Box,
+            VFX.CSUncrustable = VFX.CSUncrustable_Box,
+            VFX.CHUncrustable = VFX.CHUncrustable_Box,
+        }
+    }
+
+    craftRecipe VFX_OpenPizzaRollBox
+    {
+        timedAction = VFX.SmallBagUnpacking,
+        Time = 15,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+        inputs
+        {
+            item 1 [VFX.CheesePizzaRoll_Box;VFX.PepperoniPizzaRoll_Box;VFX.SupremePizzaRoll_Box;VFX.MeatLoversPizzaRoll_Box] mode:destroy flags[ItemCount;AllowFrozenItem;InheritFoodAge;InheritFreezingTime;Prop2] mappers[boxType],
+        }
+        outputs
+        {
+            item 4 mapper:boxType,
+        }
+        itemMapper boxType
+        {
+            VFX.CheesePizzaRoll = VFX.CheesePizzaRoll_Box,
+            VFX.PepperoniPizzaRoll = VFX.PepperoniPizzaRoll_Box,
+            VFX.SupremePizzaRoll = VFX.SupremePizzaRoll_Box,
+            VFX.MeatLoversPizzaRoll = VFX.MeatLoversPizzaRoll_Box,
+        }
+    }
+
+    craftRecipe VFX_OpenBreakfastSandwichBox
+    {
+        timedAction = VFX.SmallBagUnpacking,
+        Time = 15,
+        Tags = InHandCraft;Cooking;CanBeDoneInDark,
+        category = Cooking,
+        inputs
+        {
+            item 1 [VFX.SECBreakfastSandwich_Box;VFX.BECBreakfastSandwich_Box;VFX.TECBreakfastSandwich_Box;VFX.ECBreakfastSandwich_Box] mode:destroy flags[ItemCount;AllowFrozenItem;InheritFoodAge;InheritFreezingTime;Prop2] mappers[boxType],
+        }
+        outputs
+        {
+            item 4 mapper:boxType,
+        }
+        itemMapper boxType
+        {
+            VFX.SECBreakfastSandwich = VFX.SECBreakfastSandwich_Box,
+            VFX.BECBreakfastSandwich = VFX.BECBreakfastSandwich_Box,
+            VFX.TECBreakfastSandwich = VFX.TECBreakfastSandwich_Box,
+            VFX.ECBreakfastSandwich = VFX.ECBreakfastSandwich_Box,
+        }
+    }
+
+    craftRecipe VFX_OpenPackSausages
+    {
+        timedAction = VFX.UnpackingSmall,
+        time = 20,
+        category = Cooking,
+        tags = InHandCraft;Cooking,
+
+        inputs
+        {
+            item 1 [VFX.PorkSausagePack;VFX.BeefSausagePack;VFX.BeefPorkSausagePack;VFX.ChickenSausagePack;VFX.SmokedSausagePack;VFX.SpicySausagePack;VFX.ChorizoPack;VFX.CheeseSausagePack] mappers[Sausage] flags[ItemCount;AllowFrozenItem;InheritFoodAge;InheritFreezingTime;Prop2] mode:destroy,
+        }
+
+        outputs
+        {
+            item 4 mapper:Sausage,
+        }
+
+        itemMapper Sausage
+        {
+            VFX.PorkSausage = VFX.PorkSausagePack,
+            VFX.BeefSausage = VFX.BeefSausagePack,
+            VFX.BeefPorkSausage = VFX.BeefPorkSausagePack,
+            VFX.ChickenSausage = VFX.ChickenSausagePack,
+            VFX.SmokedSausage = VFX.SmokedSausagePack,
+            VFX.SpicySausage = VFX.SpicySausagePack,
+            VFX.Chorizo = VFX.ChorizoPack,
+            VFX.CheeseSausage = VFX.CheeseSausagePack,
+        }
+    }
+
+    craftRecipe VFX_OpenPackMeatballs
+    {
+        timedAction = VFX.SmallBagUnpacking,
+        time = 20,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.BeefMeatballsBag;VFX.PorkMeatballsBag;VFX.VealMeatballsBag;VFX.TurkeyMeatballsBag;VFX.ChickenMeatballsBag] mappers[Meatballs] flags[ItemCount;AllowFrozenItem;InheritFoodAge;InheritFreezingTime;Prop2] mode:destroy,
+        }
+
+        outputs
+        {
+            item 12 mapper:Meatballs,
+        }
+
+        itemMapper Meatballs
+        {
+            VFX.BeefMeatball = VFX.BeefMeatballsBag,
+            VFX.PorkMeatball = VFX.PorkMeatballsBag,
+            VFX.VealMeatball = VFX.VealMeatballsBag,
+            VFX.TurkeyMeatball = VFX.TurkeyMeatballsBag,
+            VFX.ChickenMeatball = VFX.ChickenMeatballsBag,
+        }
+    }
+
+    craftRecipe VFX_OpenCandyBag
+    {
+        timedAction = VFX.SmallBagUnpacking,
+        time = 30,
+        tags = InHandCraft;CanBeDoneInDark,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [VFX.BagGummyBears;VFX.BagSourGummyBears;VFX.BagGummyFish;VFX.BagGummyWorms;VFX.BagSourGummyWorms;VFX.BagPeachRings;VFX.BagColaGummies] mappers[CandyType] flags[ItemCount;Prop2],
+        }
+
+        outputs
+        {
+            item 5 mapper:CandyType,
+        }
+        
+        itemMapper CandyType
+        {
+            Base.GummyBears = VFX.BagGummyBears,
+            VFX.GummySourBears = VFX.BagSourGummyBears,
+            Base.CandyGummyfish = VFX.BagGummyFish,
+            Base.GummyWorms = VFX.BagGummyWorms,
+            VFX.GummySourWorms = VFX.BagSourGummyWorms,
+            VFX.GummyPeachRings = VFX.BagPeachRings,
+            VFX.GummyCola = VFX.BagColaGummies,
+        }
+    }
+
+    craftRecipe VFX_UnpackStarterBox
+    {
+        timedAction = UnPackBox,
+        time = 15,
+        Tags = InHandCraft;CanBeDoneInDark;Packing,
+        category = Packing,
+
+        inputs
+        {
+            item 1 [VFX.StarterBoxBasic;VFX.StarterBoxButtermilk;VFX.StarterBoxSwiss;VFX.StarterBoxFrench;VFX.StarterBoxParmesan;VFX.StarterBoxMozzarella;VFX.StarterBoxBlue] mappers[boxType],
+        }
+
+        outputs
+        {
+            item 6 mapper:boxType,
+        }
+
+        itemMapper boxType
+        {
+            VFX.StarterBasic = VFX.StarterBoxBasic,
+            VFX.StarterButtermilk = VFX.StarterBoxButtermilk,
+            VFX.StarterSwiss = VFX.StarterBoxSwiss,
+            VFX.StarterFrench = VFX.StarterBoxFrench,
+            VFX.StarterParmesan = VFX.StarterBoxParmesan,
+            VFX.StarterMozzarella = VFX.StarterBoxMozzarella,
+            VFX.StarterBlue = VFX.StarterBoxBlue,
+        }
+    }
+    
+    craftRecipe VFX_UnpackStarterBoxVariety
+    {
+        timedAction = UnPackBox,
+        time = 15,
+        Tags = InHandCraft;CanBeDoneInDark;Packing,
+        category = Packing,
+
+        inputs
+        {
+            item 1 [VFX.StarterBoxVariety],
+        }
+
+        outputs
+        {
+            item 1 VFX.StarterBasic,
+            item 1 VFX.StarterSwiss,
+            item 1 VFX.StarterFrench,
+            item 1 VFX.StarterParmesan,
+            item 1 VFX.StarterMozzarella,
+            item 1 VFX.StarterBlue,
+        }
+    }
+    
+    craftRecipe VFX_UnpackCheeseKit
+    {
+        timedAction = UnPackBox,
+        time = 15,
+        Tags = InHandCraft;CanBeDoneInDark;Packing,
+        category = Packing,
+
+        inputs
+        {
+            item 1 [VFX.CheeseKitBasic;VFX.CheeseKitSwiss;VFX.CheeseKitFrench] mappers[kitType;kitType2],
+        }
+
+        outputs
+        {
+            item 2 mapper:kitType,
+            item 1 mapper:kitType2,
+            item 1 VFX.WoodenCheeseMold,
+            item 1 VFX.Rennet,
+            item 1 Base.Salt,
+            item 1 Base.PlasticKnife,
+            item 1 Base.PlasticSpoon,
+        }
+
+        itemMapper kitType
+        {
+            VFX.StarterBasic = VFX.CheeseKitBasic,
+            VFX.StarterSwiss = VFX.CheeseKitSwiss,
+            VFX.StarterFrench = VFX.CheeseKitFrench,
+        }
+        
+        itemMapper kitType2
+        {
+            Base.CheeseCloth = VFX.CheeseKitBasic,
+            Base.CheeseCloth = VFX.CheeseKitSwiss,
+            Base.Ladle = VFX.CheeseKitFrench,
+        }
+    }
+    
+    craftRecipe VFX_UnpackCheeseKitItalian
+    {
+        timedAction = UnPackBox,
+        time = 15,
+        Tags = InHandCraft;CanBeDoneInDark;Packing,
+        category = Packing,
+
+        inputs
+        {
+            item 1 [VFX.CheeseKitItalian],
+        }
+
+        outputs
+        {
+            item 1 VFX.StarterParmesan,
+            item 1 VFX.StarterMozzarella,
+            item 1 VFX.WoodenCheeseMold,
+            item 1 VFX.Rennet,
+            item 1 Base.Salt,
+            item 1 Base.Strainer,
+            item 1 Base.Gloves_Dish,
+            item 1 Base.PlasticKnife,
+            item 1 Base.PlasticSpoon,
+        }
+    }
+    
+    craftRecipe VFX_UnpackCheeseKitBlue
+    {
+        timedAction = UnPackBox,
+        time = 15,
+        Tags = InHandCraft;CanBeDoneInDark;Packing,
+        category = Packing,
+
+        inputs
+        {
+            item 1 [VFX.CheeseKitBlue],
+        }
+
+        outputs
+        {
+            item 2 VFX.StarterBlue,
+            item 1 VFX.WoodenCheeseMold,
+            item 1 VFX.Rennet,
+            item 1 Base.Salt,
+            item 1 Base.CheeseCloth,
+            item 1 Base.Needle,
+            item 1 Base.PlasticKnife,
+            item 1 Base.PlasticSpoon,
+        }
+    }
+    
+    craftRecipe VFX_UnpackCheeseKitMaster
+    {
+        timedAction = UnPackBox,
+        time = 15,
+        Tags = InHandCraft;CanBeDoneInDark;Packing,
+        category = Packing,
+
+        inputs
+        {
+            item 1 [VFX.CheeseKitMaster],
+        }
+
+        outputs
+        {
+            item 1 VFX.StarterBasic,
+            item 1 VFX.StarterSwiss,
+            item 1 VFX.StarterFrench,
+            item 1 VFX.StarterParmesan,
+            item 1 VFX.StarterMozzarella,
+            item 1 VFX.StarterBlue,
+            item 1 VFX.WoodenCheeseMold,
+            item 1 VFX.Rennet,
+            item 1 Base.Salt,
+            item 1 Base.Strainer,
+            item 1 Base.CheeseCloth,
+            item 1 Base.Ladle,
+            item 1 Base.Gloves_Dish,
+            item 1 Base.PlasticKnife,
+            item 1 Base.PlasticSpoon,
+        }
+    }
+
+/* <<<<<  Actions - Slice / Scoop  >>>>> */
+
+    craftRecipe VFX_SlicePizza
+    {
+        timedAction = SliceMeat_Surface,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_MustCookedSlice,
+
+        inputs
+        {
+            item 1 [VFX.FrozenCheesePizza;VFX.FrozenThreeMeatPizza;VFX.FrozenPepperoniPizza;VFX.FrozenBuffaloChickenPizza;VFX.FrozenSupremePizza] mappers[sliceType] mode:destroy flags[IsCookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 tags[base:sharpknife;base:meatcleaver;base:dullknife;base:pizzacutter] mode:keep flags[MayDegradeLight;SharpnessCheck],
+        }
+
+        outputs
+        {
+            item 6 mapper:sliceType,
+        }
+
+        itemMapper sliceType
+        {
+            VFX.CheesePizzaSlice = VFX.FrozenCheesePizza,
+            VFX.ThreeMeatPizzaSlice = VFX.FrozenThreeMeatPizza,
+            VFX.PepperoniPizzaSlice = VFX.FrozenPepperoniPizza,
+            VFX.BuffaloChickenPizzaSlice = VFX.FrozenBuffaloChickenPizza,
+            VFX.SupremePizzaSlice = VFX.FrozenSupremePizza,
+        }
+    }
+
+    craftRecipe VFX_ScoopIceCream
+    {
+        timedAction = VFX.BowlMixing,
+        time = 30,
+        tags = InHandCraft;Cooking,
+        category = Cooking,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:spoon] mode:keep,
+            item 1 [Base.Cone] flags[AllowFrozenItem;ItemCount],
+            item 10 [VFX.ChocolateIceCream;VFX.ChocolateChipIceCream;VFX.StrawberryIceCream;VFX.NeapolitanIceCream;VFX.ButterPecanIceCream;VFX.MintChocolateChipIceCream;VFX.CookiesAndCreamIceCream;VFX.RockyRoadIceCream;VFX.PistachioIceCream;VFX.IcecreamHomemade] mappers[IceCreamConeType] flags[IsExclusive;AllowFrozenItem;InheritFoodAge],
+        }
+
+        outputs
+        {
+            item 1 mapper:IceCreamConeType,
+        }
+
+        itemMapper IceCreamConeType
+        {
+            VFX.ChocolateIceCreamCone = VFX.ChocolateIceCream,
+            VFX.ChocolateChipIceCreamCone = VFX.ChocolateChipIceCream,
+            VFX.StrawberryIceCreamCone = VFX.StrawberryIceCream,
+            VFX.NeapolitanIceCreamCone = VFX.NeapolitanIceCream,
+            VFX.ButterPecanIceCreamCone = VFX.ButterPecanIceCream,
+            VFX.MintChocolateChipIceCreamCone = VFX.MintChocolateChipIceCream,
+            VFX.CookiesAndCreamIceCreamCone = VFX.CookiesAndCreamIceCream,
+            VFX.RockyRoadIceCreamCone = VFX.RockyRoadIceCream,
+            VFX.PistachioIceCreamCone = VFX.PistachioIceCream,
+            VFX.HomemadeIceCreamCone = VFX.IcecreamHomemade,
+        }
+    }
+
+    craftRecipe VFX_SliceFrozenPie
+    {
+        time = 40,
+        timedAction = SliceFood_Surface,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 tags[base:sharpknife] mode:keep flags[MayDegrade],
+            item 1 [VFX.WholeFrozenPieApple;VFX.WholeFrozenPieCherry;VFX.WholeFrozenPieBlueberry;VFX.WholeFrozenPieStrawberry;VFX.WholeFrozenPiePeach;VFX.WholeFrozenPieMixedBerry;VFX.WholeFrozenPieLemonCream;VFX.WholeFrozenPieBlackberry;VFX.WholeFrozenPieRaspberry] mappers[PieType] flags[InheritCooked;InheritFood;InheritFoodAge;IsCookedFoodItem;ItemCount;Prop2] mode:destroy,
+        }
+
+        outputs
+        {
+            item 5 mapper:PieType,
+        }
+
+        itemMapper PieType
+        {
+            VFX.SlicePieApple = VFX.WholeFrozenPieApple,
+            VFX.SlicePieCherry = VFX.WholeFrozenPieCherry,
+            VFX.SlicePieBlueberry = VFX.WholeFrozenPieBlueberry,
+            VFX.SlicePieStrawberry = VFX.WholeFrozenPieStrawberry,
+            VFX.SlicePiePeach = VFX.WholeFrozenPiePeach,
+            VFX.SlicePieMixedBerry = VFX.WholeFrozenPieMixedBerry,
+            VFX.SlicePieLemonCream = VFX.WholeFrozenPieLemonCream,
+            VFX.SlicePieBlackberry = VFX.WholeFrozenPieBlackberry,
+            VFX.SlicePieRaspberry = VFX.WholeFrozenPieRaspberry,
+        }
+    }
+
+/* <<<<<  Bowls and Plates  >>>>> */
+
+    craftRecipe VFX_Make2Bowls
+    {
+        timedAction = VFX.BowlMixing,
+        Time = 80,
+        OnCreate = RecipeCodeOnCreate.inheritFoodNameBowl,
+        Tooltip = Tooltip_Recipe_CookedPortion,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 2 [Base.Bowl;Base.ClayBowl] mode:destroy flags[ItemCount],
+            item 1 [VFX.WaterSaucepanBrownRice;VFX.WaterSaucepanJasmineRice;VFX.WaterSaucepanBasmatiRice;VFX.WaterSaucepanArborioRice;VFX.WaterSaucepanMacaroni;VFX.WaterSaucepanFettuccine;VFX.WaterSaucepanPenne;VFX.WaterSaucepanGnocchi;VFX.WaterSaucepanCopperBrownRice;VFX.WaterSaucepanCopperJasmineRice;VFX.WaterSaucepanCopperBasmatiRice;VFX.WaterSaucepanCopperArborioRice;VFX.WaterSaucepanCopperMacaroni;VFX.WaterSaucepanCopperFettuccine;VFX.WaterSaucepanCopperPenne;VFX.WaterSaucepanCopperGnocchi;VFX.WaterPotBrownRice;VFX.WaterPotJasmineRice;VFX.WaterPotBasmatiRice;VFX.WaterPotArborioRice;VFX.WaterPotMacaroni;VFX.WaterPotFettuccine;VFX.WaterPotPenne;VFX.WaterPotGnocchi;VFX.WaterPotForgedBrownRice;VFX.WaterPotForgedJasmineRice;VFX.WaterPotForgedBasmatiRice;VFX.WaterPotForgedArborioRice;VFX.WaterPotForgedMacaroni;VFX.WaterPotForgedFettuccine;VFX.WaterPotForgedPenne;VFX.WaterPotForgedGnocchi;Base.VFXBrownRiceSaucepanEvolved;Base.VFXJasmineRiceSaucepanEvolved;Base.VFXBasmatiRiceSaucepanEvolved;Base.VFXArborioRiceSaucepanEvolved;Base.VFXMacaroniSaucepanEvolved;Base.VFXFettuccineSaucepanEvolved;Base.VFXPenneSaucepanEvolved;Base.VFXGnocchiSaucepanEvolved;Base.VFXBrownRiceSaucepanCopperEvolved;Base.VFXJasmineRiceSaucepanCopperEvolved;Base.VFXBasmatiRiceSaucepanCopperEvolved;Base.VFXArborioRiceSaucepanCopperEvolved;Base.VFXMacaroniSaucepanCopperEvolved;Base.VFXFettuccineSaucepanCopperEvolved;Base.VFXPenneSaucepanCopperEvolved;Base.VFXGnocchiSaucepanCopperEvolved;Base.VFXBrownRicePotEvolved;Base.VFXJasmineRicePotEvolved;Base.VFXBasmatiRicePotEvolved;Base.VFXArborioRicePotEvolved;Base.VFXMacaroniPotEvolved;Base.VFXFettuccinePotEvolved;Base.VFXPennePotEvolved;Base.VFXGnocchiPotEvolved;Base.VFXBrownRicePotForgedEvolved;Base.VFXJasmineRicePotForgedEvolved;Base.VFXBasmatiRicePotForgedEvolved;Base.VFXArborioRicePotForgedEvolved;Base.VFXMacaroniPotForgedEvolved;Base.VFXFettuccinePotForgedEvolved;Base.VFXPennePotForgedEvolved;Base.VFXGnocchiPotForgedEvolved;VFX.SaucepanGroundBeefRavioli;VFX.CopperSaucepanGroundBeefRavioli;VFX.PotGroundBeefRavioli;VFX.PotForgedGroundBeefRavioli;VFX.SaucepanSpinachRicottaRavioli;VFX.CopperSaucepanSpinachRicottaRavioli;VFX.PotSpinachRicottaRavioli;VFX.PotForgedSpinachRicottaRavioli;VFX.SaucepanThreeCheeseRavioli;VFX.CopperSaucepanThreeCheeseRavioli;VFX.PotThreeCheeseRavioli;VFX.PotForgedThreeCheeseRavioli;VFX.SaucepanPumpkinRavioli;VFX.CopperSaucepanPumpkinRavioli;VFX.PotPumpkinRavioli;VFX.PotForgedPumpkinRavioli;VFX.SaucepanLobsterRavioli;VFX.CopperSaucepanLobsterRavioli;VFX.PotLobsterRavioli;VFX.PotForgedLobsterRavioli;VFX.SaucepanChickenMushroomRavioli;VFX.CopperSaucepanChickenMushroomRavioli;VFX.PotChickenMushroomRavioli;VFX.PotForgedChickenMushroomRavioli;VFX.SaucepanFourCheeseTortellini;VFX.CopperSaucepanFourCheeseTortellini;VFX.PotFourCheeseTortellini;VFX.PotForgedFourCheeseTortellini;VFX.SaucepanPepperedPorkTortellini;VFX.CopperSaucepanPepperedPorkTortellini;VFX.PotPepperedPorkTortellini;VFX.PotForgedPepperedPorkTortellini;VFX.SaucepanSpinachRicottaTortellini;VFX.CopperSaucepanSpinachRicottaTortellini;VFX.PotSpinachRicottaTortellini;VFX.PotForgedSpinachRicottaTortellini;VFX.SaucepanGroundBeefTortellini;VFX.CopperSaucepanGroundBeefTortellini;VFX.PotGroundBeefTortellini;VFX.PotForgedGroundBeefTortellini;VFX.PMSaucepanCheddarBroccoli;VFX.PMSaucepanParmesan;VFX.PMSaucepanCreamyChicken;VFX.PMSaucepanCreamyPesto;VFX.PMSaucepanAlfredo;VFX.PMSaucepanMacCheese;VFX.PMCopperSaucepanCheddarBroccoli;VFX.PMCopperSaucepanParmesan;VFX.PMCopperSaucepanCreamyChicken;VFX.PMCopperSaucepanCreamyPesto;VFX.PMCopperSaucepanAlfredo;VFX.PMCopperSaucepanMacCheese;VFX.RMSaucepanChicken;VFX.RMSaucepanMexican;VFX.RMSaucepanMedley;VFX.RMSaucepanFried;VFX.RMCopperSaucepanChicken;VFX.RMCopperSaucepanMexican;VFX.RMCopperSaucepanMedley;VFX.RMCopperSaucepanFried;VFX.PotButterChicken;VFX.PotThaiGreenCurry;VFX.PotMassamanCurry;VFX.PotChanaMasala;VFX.PotSweetPotatoChickpeaCurry;VFX.PotTofuCurry;Base.VFXFriedRicePreparation;Base.VFXFriedRiceEvolved;Base.VFXChiliSaucepanEvolved;Base.VFXChiliSaucepanCopperEvolved;Base.VFXChiliPotEvolved;Base.VFXChiliPotForgedEvolved;Base.VFXCurrySaucepanEvolved;Base.VFXCurrySaucepanCopperEvolved;Base.VFXCurryPotEvolved;Base.VFXCurryPotForgedEvolved;VFX.FoodStorageContainerSoup;VFX.FoodStorageContainerStew;VFX.FoodStorageContainerSpaghetti;VFX.FoodStorageContainerRice;VFX.FoodStorageContainerBrownRice;VFX.FoodStorageContainerJasmineRice;VFX.FoodStorageContainerBasmatiRice;VFX.FoodStorageContainerArborioRice;VFX.FoodStorageContainerMacaroni;VFX.FoodStorageContainerFettuccine;VFX.FoodStorageContainerPenne;VFX.FoodStorageContainerGnocchi;VFX.FoodStorageContainerChili;VFX.FoodStorageContainerCurry;VFX.FoodStorageContainerFriedRice;VFX.MetalFoodStorageContainerSoup;VFX.MetalFoodStorageContainerStew;VFX.MetalFoodStorageContainerSpaghetti;VFX.MetalFoodStorageContainerRice;VFX.MetalFoodStorageContainerBrownRice;VFX.MetalFoodStorageContainerJasmineRice;VFX.MetalFoodStorageContainerBasmatiRice;VFX.MetalFoodStorageContainerArborioRice;VFX.MetalFoodStorageContainerMacaroni;VFX.MetalFoodStorageContainerFettuccine;VFX.MetalFoodStorageContainerPenne;VFX.MetalFoodStorageContainerGnocchi;VFX.MetalFoodStorageContainerChili;VFX.MetalFoodStorageContainerCurry;VFX.MetalFoodStorageContainerFriedRice;VFX.WaterSaucepanHomemadePasta;VFX.WaterSaucepanCopperHomemadePasta;VFX.WaterPotHomemadePasta;VFX.WaterPotForgedHomemadePasta] mappers[bowlType;potType] flags[InheritCondition;InheritCooked;InheritFood;IsCookedFoodItem;ItemCount],
+        }
+
+        outputs
+        {
+            item 2 mapper:bowlType,
+            item 1 mapper:potType,
+        }
+
+        itemMapper bowlType
+        {
+            VFX.ArborioRiceBowl = VFX.WaterSaucepanArborioRice,
+            VFX.ArborioRiceBowl = VFX.WaterSaucepanCopperArborioRice,
+            VFX.ArborioRiceBowl = VFX.WaterPotArborioRice,
+            VFX.ArborioRiceBowl = VFX.WaterPotForgedArborioRice,
+            VFX.ArborioRiceBowl = Base.VFXArborioRiceSaucepanEvolved,
+            VFX.ArborioRiceBowl = Base.VFXArborioRiceSaucepanCopperEvolved,
+            VFX.ArborioRiceBowl = Base.VFXArborioRicePotEvolved,
+            VFX.ArborioRiceBowl = Base.VFXArborioRicePotForgedEvolved,
+
+            VFX.BasmatiRiceBowl = VFX.WaterSaucepanBasmatiRice,
+            VFX.BasmatiRiceBowl = VFX.WaterSaucepanCopperBasmatiRice,
+            VFX.BasmatiRiceBowl = VFX.WaterPotBasmatiRice,
+            VFX.BasmatiRiceBowl = VFX.WaterPotForgedBasmatiRice,
+            VFX.BasmatiRiceBowl = Base.VFXBasmatiRiceSaucepanEvolved,
+            VFX.BasmatiRiceBowl = Base.VFXBasmatiRiceSaucepanCopperEvolved,
+            VFX.BasmatiRiceBowl = Base.VFXBasmatiRicePotEvolved,
+            VFX.BasmatiRiceBowl = Base.VFXBasmatiRicePotForgedEvolved,
+
+            VFX.BrownRiceBowl = VFX.WaterSaucepanBrownRice,
+            VFX.BrownRiceBowl = VFX.WaterSaucepanCopperBrownRice,
+            VFX.BrownRiceBowl = VFX.WaterPotBrownRice,
+            VFX.BrownRiceBowl = VFX.WaterPotForgedBrownRice,
+            VFX.BrownRiceBowl = Base.VFXBrownRiceSaucepanEvolved,
+            VFX.BrownRiceBowl = Base.VFXBrownRiceSaucepanCopperEvolved,
+            VFX.BrownRiceBowl = Base.VFXBrownRicePotEvolved,
+            VFX.BrownRiceBowl = Base.VFXBrownRicePotForgedEvolved,
+
+            VFX.FettuccineBowl = VFX.WaterSaucepanFettuccine,
+            VFX.FettuccineBowl = VFX.WaterSaucepanCopperFettuccine,
+            VFX.FettuccineBowl = VFX.WaterPotFettuccine,
+            VFX.FettuccineBowl = VFX.WaterPotForgedFettuccine,
+            VFX.FettuccineBowl = Base.VFXFettuccineSaucepanEvolved,
+            VFX.FettuccineBowl = Base.VFXFettuccineSaucepanCopperEvolved,
+            VFX.FettuccineBowl = Base.VFXFettuccinePotEvolved,
+            VFX.FettuccineBowl = Base.VFXFettuccinePotForgedEvolved,
+
+            VFX.GnocchiBowl = VFX.WaterSaucepanGnocchi,
+            VFX.GnocchiBowl = VFX.WaterSaucepanCopperGnocchi,
+            VFX.GnocchiBowl = VFX.WaterPotGnocchi,
+            VFX.GnocchiBowl = VFX.WaterPotForgedGnocchi,
+            VFX.GnocchiBowl = Base.VFXGnocchiSaucepanEvolved,
+            VFX.GnocchiBowl = Base.VFXGnocchiSaucepanCopperEvolved,
+            VFX.GnocchiBowl = Base.VFXGnocchiPotEvolved,
+            VFX.GnocchiBowl = Base.VFXGnocchiPotForgedEvolved,
+
+            VFX.JasmineRiceBowl = VFX.WaterSaucepanJasmineRice,
+            VFX.JasmineRiceBowl = VFX.WaterSaucepanCopperJasmineRice,
+            VFX.JasmineRiceBowl = VFX.WaterPotJasmineRice,
+            VFX.JasmineRiceBowl = VFX.WaterPotForgedJasmineRice,
+            VFX.JasmineRiceBowl = Base.VFXJasmineRiceSaucepanEvolved,
+            VFX.JasmineRiceBowl = Base.VFXJasmineRiceSaucepanCopperEvolved,
+            VFX.JasmineRiceBowl = Base.VFXJasmineRicePotEvolved,
+            VFX.JasmineRiceBowl = Base.VFXJasmineRicePotForgedEvolved,
+
+            VFX.MacaroniBowl = VFX.WaterSaucepanMacaroni,
+            VFX.MacaroniBowl = VFX.WaterSaucepanCopperMacaroni,
+            VFX.MacaroniBowl = VFX.WaterPotMacaroni,
+            VFX.MacaroniBowl = VFX.WaterPotForgedMacaroni,
+            VFX.MacaroniBowl = Base.VFXMacaroniSaucepanEvolved,
+            VFX.MacaroniBowl = Base.VFXMacaroniSaucepanCopperEvolved,
+            VFX.MacaroniBowl = Base.VFXMacaroniPotEvolved,
+            VFX.MacaroniBowl = Base.VFXMacaroniPotForgedEvolved,
+
+            VFX.PenneBowl = VFX.WaterSaucepanPenne,
+            VFX.PenneBowl = VFX.WaterSaucepanCopperPenne,
+            VFX.PenneBowl = VFX.WaterPotPenne,
+            VFX.PenneBowl = VFX.WaterPotForgedPenne,
+            VFX.PenneBowl = Base.VFXPenneSaucepanEvolved,
+            VFX.PenneBowl = Base.VFXPenneSaucepanCopperEvolved,
+            VFX.PenneBowl = Base.VFXPennePotEvolved,
+            VFX.PenneBowl = Base.VFXPennePotForgedEvolved,
+
+            VFX.HomemadePastaBowl = VFX.WaterSaucepanHomemadePasta,
+            VFX.HomemadePastaBowl = VFX.WaterSaucepanCopperHomemadePasta,
+            VFX.HomemadePastaBowl = VFX.WaterPotHomemadePasta,
+            VFX.HomemadePastaBowl = VFX.WaterPotForgedHomemadePasta,
+
+            VFX.BowlGroundBeefRavioli = VFX.SaucepanGroundBeefRavioli,
+            VFX.BowlGroundBeefRavioli = VFX.CopperSaucepanGroundBeefRavioli,
+            VFX.BowlGroundBeefRavioli = VFX.PotGroundBeefRavioli,
+            VFX.BowlGroundBeefRavioli = VFX.PotForgedGroundBeefRavioli,
+
+            VFX.BowlSpinachRicottaRavioli = VFX.SaucepanSpinachRicottaRavioli,
+            VFX.BowlSpinachRicottaRavioli = VFX.CopperSaucepanSpinachRicottaRavioli,
+            VFX.BowlSpinachRicottaRavioli = VFX.PotSpinachRicottaRavioli,
+            VFX.BowlSpinachRicottaRavioli = VFX.PotForgedSpinachRicottaRavioli,
+
+            VFX.BowlThreeCheeseRavioli = VFX.SaucepanThreeCheeseRavioli,
+            VFX.BowlThreeCheeseRavioli = VFX.CopperSaucepanThreeCheeseRavioli,
+            VFX.BowlThreeCheeseRavioli = VFX.PotThreeCheeseRavioli,
+            VFX.BowlThreeCheeseRavioli = VFX.PotForgedThreeCheeseRavioli,
+
+            VFX.BowlPumpkinRavioli = VFX.SaucepanPumpkinRavioli,
+            VFX.BowlPumpkinRavioli = VFX.CopperSaucepanPumpkinRavioli,
+            VFX.BowlPumpkinRavioli = VFX.PotPumpkinRavioli,
+            VFX.BowlPumpkinRavioli = VFX.PotForgedPumpkinRavioli,
+
+            VFX.BowlLobsterRavioli = VFX.SaucepanLobsterRavioli,
+            VFX.BowlLobsterRavioli = VFX.CopperSaucepanLobsterRavioli,
+            VFX.BowlLobsterRavioli = VFX.PotLobsterRavioli,
+            VFX.BowlLobsterRavioli = VFX.PotForgedLobsterRavioli,
+
+            VFX.BowlChickenMushroomRavioli = VFX.SaucepanChickenMushroomRavioli,
+            VFX.BowlChickenMushroomRavioli = VFX.CopperSaucepanChickenMushroomRavioli,
+            VFX.BowlChickenMushroomRavioli = VFX.PotChickenMushroomRavioli,
+            VFX.BowlChickenMushroomRavioli = VFX.PotForgedChickenMushroomRavioli,
+
+            VFX.BowlFourCheeseTortellini = VFX.SaucepanFourCheeseTortellini,
+            VFX.BowlFourCheeseTortellini = VFX.CopperSaucepanFourCheeseTortellini,
+            VFX.BowlFourCheeseTortellini = VFX.PotFourCheeseTortellini,
+            VFX.BowlFourCheeseTortellini = VFX.PotForgedFourCheeseTortellini,
+
+            VFX.BowlPepperedPorkTortellini = VFX.SaucepanPepperedPorkTortellini,
+            VFX.BowlPepperedPorkTortellini = VFX.CopperSaucepanPepperedPorkTortellini,
+            VFX.BowlPepperedPorkTortellini = VFX.PotPepperedPorkTortellini,
+            VFX.BowlPepperedPorkTortellini = VFX.PotForgedPepperedPorkTortellini,
+
+            VFX.BowlSpinachRicottaTortellini = VFX.SaucepanSpinachRicottaTortellini,
+            VFX.BowlSpinachRicottaTortellini = VFX.CopperSaucepanSpinachRicottaTortellini,
+            VFX.BowlSpinachRicottaTortellini = VFX.PotSpinachRicottaTortellini,
+            VFX.BowlSpinachRicottaTortellini = VFX.PotForgedSpinachRicottaTortellini,
+
+            VFX.BowlGroundBeefTortellini = VFX.SaucepanGroundBeefTortellini,
+            VFX.BowlGroundBeefTortellini = VFX.CopperSaucepanGroundBeefTortellini,
+            VFX.BowlGroundBeefTortellini = VFX.PotGroundBeefTortellini,
+            VFX.BowlGroundBeefTortellini = VFX.PotForgedGroundBeefTortellini,
+
+            VFX.PMBowlAlfredo = VFX.PMSaucepanAlfredo,
+            VFX.PMBowlAlfredo = VFX.PMCopperSaucepanAlfredo,
+            VFX.PMBowlCheddarBroccoli = VFX.PMSaucepanCheddarBroccoli,
+            VFX.PMBowlCheddarBroccoli = VFX.PMCopperSaucepanCheddarBroccoli,
+            VFX.PMBowlCreamyChicken = VFX.PMSaucepanCreamyChicken,
+            VFX.PMBowlCreamyChicken = VFX.PMCopperSaucepanCreamyChicken,
+            VFX.PMBowlCreamyPesto = VFX.PMSaucepanCreamyPesto,
+            VFX.PMBowlCreamyPesto = VFX.PMCopperSaucepanCreamyPesto,
+            VFX.PMBowlMacCheese = VFX.PMSaucepanMacCheese,
+            VFX.PMBowlMacCheese = VFX.PMCopperSaucepanMacCheese,
+            VFX.PMBowlParmesan = VFX.PMSaucepanParmesan,
+            VFX.PMBowlParmesan = VFX.PMCopperSaucepanParmesan,
+
+            VFX.RMBowlChicken = VFX.RMSaucepanChicken,
+            VFX.RMBowlChicken = VFX.RMCopperSaucepanChicken,
+            VFX.RMBowlFried = VFX.RMSaucepanFried,
+            VFX.RMBowlFried = VFX.RMCopperSaucepanFried,
+            VFX.RMBowlMedley = VFX.RMSaucepanMedley,
+            VFX.RMBowlMedley = VFX.RMCopperSaucepanMedley,
+            VFX.RMBowlMexican = VFX.RMSaucepanMexican,
+            VFX.RMBowlMexican = VFX.RMCopperSaucepanMexican,
+
+            VFX.BowlButterChicken = VFX.PotButterChicken,
+            VFX.BowlThaiGreenCurry = VFX.PotThaiGreenCurry,
+            VFX.BowlMassamanCurry = VFX.PotMassamanCurry,
+            VFX.BowlChanaMasala = VFX.PotChanaMasala,
+            VFX.BowlSweetPotatoChickpeaCurry = VFX.PotSweetPotatoChickpeaCurry,
+            VFX.BowlTofuCurry = VFX.PotTofuCurry,
+
+            Base.VFXBowlFriedRice = Base.VFXFriedRicePreparation,
+            Base.VFXBowlFriedRice = Base.VFXFriedRiceEvolved,
+
+            Base.VFXBowlChili = Base.VFXChiliSaucepanEvolved,
+            Base.VFXBowlChili = Base.VFXChiliSaucepanCopperEvolved,
+            Base.VFXBowlChili = Base.VFXChiliPotEvolved,
+            Base.VFXBowlChili = Base.VFXChiliPotForgedEvolved,
+
+            Base.VFXBowlCurry = Base.VFXCurrySaucepanEvolved,
+            Base.VFXBowlCurry = Base.VFXCurrySaucepanCopperEvolved,
+            Base.VFXBowlCurry = Base.VFXCurryPotEvolved,
+            Base.VFXBowlCurry = Base.VFXCurryPotForgedEvolved,
+
+            Base.SoupBowl = VFX.FoodStorageContainerSoup,
+            Base.StewBowl = VFX.FoodStorageContainerStew,
+            Base.PastaBowl = VFX.FoodStorageContainerSpaghetti,
+            Base.RiceBowl = VFX.FoodStorageContainerRice,
+            VFX.BrownRiceBowl = VFX.FoodStorageContainerBrownRice,
+            VFX.JasmineRiceBowl = VFX.FoodStorageContainerJasmineRice,
+            VFX.BasmatiRiceBowl = VFX.FoodStorageContainerBasmatiRice,
+            VFX.ArborioRiceBowl = VFX.FoodStorageContainerArborioRice,
+            VFX.MacaroniBowl = VFX.FoodStorageContainerMacaroni,
+            VFX.FettuccineBowl = VFX.FoodStorageContainerFettuccine,
+            VFX.PenneBowl = VFX.FoodStorageContainerPenne,
+            VFX.GnocchiBowl = VFX.FoodStorageContainerGnocchi,
+            Base.VFXBowlChili = VFX.FoodStorageContainerChili,
+            Base.VFXBowlCurry = VFX.FoodStorageContainerCurry,
+            Base.VFXBowlFriedRice = VFX.FoodStorageContainerFriedRice,
+            Base.SoupBowl = VFX.MetalFoodStorageContainerSoup,
+            Base.StewBowl = VFX.MetalFoodStorageContainerStew,
+            Base.PastaBowl = VFX.MetalFoodStorageContainerSpaghetti,
+            Base.RiceBowl = VFX.MetalFoodStorageContainerRice,
+            VFX.BrownRiceBowl = VFX.MetalFoodStorageContainerBrownRice,
+            VFX.JasmineRiceBowl = VFX.MetalFoodStorageContainerJasmineRice,
+            VFX.BasmatiRiceBowl = VFX.MetalFoodStorageContainerBasmatiRice,
+            VFX.ArborioRiceBowl = VFX.MetalFoodStorageContainerArborioRice,
+            VFX.MacaroniBowl = VFX.MetalFoodStorageContainerMacaroni,
+            VFX.FettuccineBowl = VFX.MetalFoodStorageContainerFettuccine,
+            VFX.PenneBowl = VFX.MetalFoodStorageContainerPenne,
+            VFX.GnocchiBowl = VFX.MetalFoodStorageContainerGnocchi,
+            Base.VFXBowlChili = VFX.MetalFoodStorageContainerChili,
+            Base.VFXBowlCurry = VFX.MetalFoodStorageContainerCurry,
+            Base.VFXBowlFriedRice = VFX.MetalFoodStorageContainerFriedRice,
+        }
+
+        itemMapper potType
+        {
+            Base.Saucepan = VFX.WaterSaucepanBrownRice,
+            Base.Saucepan = VFX.WaterSaucepanJasmineRice,
+            Base.Saucepan = VFX.WaterSaucepanBasmatiRice,
+            Base.Saucepan = VFX.WaterSaucepanArborioRice,
+            Base.Saucepan = VFX.WaterSaucepanMacaroni,
+            Base.Saucepan = VFX.WaterSaucepanFettuccine,
+            Base.Saucepan = VFX.WaterSaucepanPenne,
+            Base.Saucepan = VFX.WaterSaucepanGnocchi,
+            Base.Saucepan = VFX.WaterSaucepanHomemadePasta,
+
+            Base.Saucepan = Base.VFXBrownRiceSaucepanEvolved,
+            Base.Saucepan = Base.VFXJasmineRiceSaucepanEvolved,
+            Base.Saucepan = Base.VFXBasmatiRiceSaucepanEvolved,
+            Base.Saucepan = Base.VFXArborioRiceSaucepanEvolved,
+            Base.Saucepan = Base.VFXMacaroniSaucepanEvolved,
+            Base.Saucepan = Base.VFXFettuccineSaucepanEvolved,
+            Base.Saucepan = Base.VFXPenneSaucepanEvolved,
+            Base.Saucepan = Base.VFXGnocchiSaucepanEvolved,
+
+            Base.Saucepan = VFX.SaucepanGroundBeefRavioli,
+            Base.Saucepan = VFX.SaucepanSpinachRicottaRavioli,
+            Base.Saucepan = VFX.SaucepanThreeCheeseRavioli,
+            Base.Saucepan = VFX.SaucepanPumpkinRavioli,
+            Base.Saucepan = VFX.SaucepanLobsterRavioli,
+            Base.Saucepan = VFX.SaucepanChickenMushroomRavioli,
+            Base.Saucepan = VFX.SaucepanFourCheeseTortellini,
+            Base.Saucepan = VFX.SaucepanPepperedPorkTortellini,
+            Base.Saucepan = VFX.SaucepanSpinachRicottaTortellini,
+            Base.Saucepan = VFX.SaucepanGroundBeefTortellini,
+
+            Base.Saucepan = VFX.PMSaucepanCheddarBroccoli,
+            Base.Saucepan = VFX.PMSaucepanParmesan,
+            Base.Saucepan = VFX.PMSaucepanCreamyChicken,
+            Base.Saucepan = VFX.PMSaucepanCreamyPesto,
+            Base.Saucepan = VFX.PMSaucepanAlfredo,
+            Base.Saucepan = VFX.PMSaucepanMacCheese,
+            Base.Saucepan = VFX.RMSaucepanChicken,
+            Base.Saucepan = VFX.RMSaucepanMexican,
+            Base.Saucepan = VFX.RMSaucepanMedley,
+            Base.Saucepan = VFX.RMSaucepanFried,
+
+            Base.Saucepan = Base.VFXChiliSaucepanEvolved,
+            Base.Saucepan = Base.VFXCurrySaucepanEvolved,
+
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperBrownRice,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperJasmineRice,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperBasmatiRice,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperArborioRice,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperMacaroni,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperFettuccine,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperPenne,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperGnocchi,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperHomemadePasta,
+
+            Base.SaucepanCopper = Base.VFXBrownRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXJasmineRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXBasmatiRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXArborioRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXMacaroniSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXFettuccineSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXPenneSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXGnocchiSaucepanCopperEvolved,
+
+            Base.SaucepanCopper = VFX.CopperSaucepanGroundBeefRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanSpinachRicottaRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanThreeCheeseRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanPumpkinRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanLobsterRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanChickenMushroomRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanFourCheeseTortellini,
+            Base.SaucepanCopper = VFX.CopperSaucepanPepperedPorkTortellini,
+            Base.SaucepanCopper = VFX.CopperSaucepanSpinachRicottaTortellini,
+            Base.SaucepanCopper = VFX.CopperSaucepanGroundBeefTortellini,
+
+            Base.SaucepanCopper = VFX.PMCopperSaucepanCheddarBroccoli,
+            Base.SaucepanCopper = VFX.PMCopperSaucepanParmesan,
+            Base.SaucepanCopper = VFX.PMCopperSaucepanCreamyChicken,
+            Base.SaucepanCopper = VFX.PMCopperSaucepanCreamyPesto,
+            Base.SaucepanCopper = VFX.PMCopperSaucepanAlfredo,
+            Base.SaucepanCopper = VFX.PMCopperSaucepanMacCheese,
+            Base.SaucepanCopper = VFX.RMCopperSaucepanChicken,
+            Base.SaucepanCopper = VFX.RMCopperSaucepanMexican,
+            Base.SaucepanCopper = VFX.RMCopperSaucepanMedley,
+            Base.SaucepanCopper = VFX.RMCopperSaucepanFried,
+
+            Base.SaucepanCopper = Base.VFXChiliSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXCurrySaucepanCopperEvolved,
+
+            Base.Pot = VFX.WaterPotBrownRice,
+            Base.Pot = VFX.WaterPotJasmineRice,
+            Base.Pot = VFX.WaterPotBasmatiRice,
+            Base.Pot = VFX.WaterPotArborioRice,
+            Base.Pot = VFX.WaterPotMacaroni,
+            Base.Pot = VFX.WaterPotFettuccine,
+            Base.Pot = VFX.WaterPotPenne,
+            Base.Pot = VFX.WaterPotGnocchi,
+            Base.Pot = VFX.WaterPotHomemadePasta,
+
+            Base.Pot = Base.VFXBrownRicePotEvolved,
+            Base.Pot = Base.VFXJasmineRicePotEvolved,
+            Base.Pot = Base.VFXBasmatiRicePotEvolved,
+            Base.Pot = Base.VFXArborioRicePotEvolved,
+            Base.Pot = Base.VFXMacaroniPotEvolved,
+            Base.Pot = Base.VFXFettuccinePotEvolved,
+            Base.Pot = Base.VFXPennePotEvolved,
+            Base.Pot = Base.VFXGnocchiPotEvolved,
+
+            Base.Pot = VFX.PotGroundBeefRavioli,
+            Base.Pot = VFX.PotSpinachRicottaRavioli,
+            Base.Pot = VFX.PotThreeCheeseRavioli,
+            Base.Pot = VFX.PotPumpkinRavioli,
+            Base.Pot = VFX.PotLobsterRavioli,
+            Base.Pot = VFX.PotChickenMushroomRavioli,
+            Base.Pot = VFX.PotFourCheeseTortellini,
+            Base.Pot = VFX.PotPepperedPorkTortellini,
+            Base.Pot = VFX.PotSpinachRicottaTortellini,
+            Base.Pot = VFX.PotGroundBeefTortellini,
+
+            Base.Pot = VFX.PotButterChicken,
+            Base.Pot = VFX.PotThaiGreenCurry,
+            Base.Pot = VFX.PotMassamanCurry,
+            Base.Pot = VFX.PotChanaMasala,
+            Base.Pot = VFX.PotSweetPotatoChickpeaCurry,
+            Base.Pot = VFX.PotTofuCurry,
+
+            Base.Pot = Base.VFXChiliPotEvolved,
+            Base.Pot = Base.VFXCurryPotEvolved,
+
+            Base.PotForged = VFX.WaterPotForgedBrownRice,
+            Base.PotForged = VFX.WaterPotForgedJasmineRice,
+            Base.PotForged = VFX.WaterPotForgedBasmatiRice,
+            Base.PotForged = VFX.WaterPotForgedArborioRice,
+            Base.PotForged = VFX.WaterPotForgedMacaroni,
+            Base.PotForged = VFX.WaterPotForgedFettuccine,
+            Base.PotForged = VFX.WaterPotForgedPenne,
+            Base.PotForged = VFX.WaterPotForgedGnocchi,
+            Base.PotForged = VFX.WaterPotForgedHomemadePasta,
+
+            Base.PotForged = Base.VFXBrownRicePotForgedEvolved,
+            Base.PotForged = Base.VFXJasmineRicePotForgedEvolved,
+            Base.PotForged = Base.VFXBasmatiRicePotForgedEvolved,
+            Base.PotForged = Base.VFXArborioRicePotForgedEvolved,
+            Base.PotForged = Base.VFXMacaroniPotForgedEvolved,
+            Base.PotForged = Base.VFXFettuccinePotForgedEvolved,
+            Base.PotForged = Base.VFXPennePotForgedEvolved,
+            Base.PotForged = Base.VFXGnocchiPotForgedEvolved,
+
+            Base.PotForged = VFX.PotForgedGroundBeefRavioli,
+            Base.PotForged = VFX.PotForgedSpinachRicottaRavioli,
+            Base.PotForged = VFX.PotForgedThreeCheeseRavioli,
+            Base.PotForged = VFX.PotForgedPumpkinRavioli,
+            Base.PotForged = VFX.PotForgedLobsterRavioli,
+            Base.PotForged = VFX.PotForgedChickenMushroomRavioli,
+            Base.PotForged = VFX.PotForgedFourCheeseTortellini,
+            Base.PotForged = VFX.PotForgedPepperedPorkTortellini,
+            Base.PotForged = VFX.PotForgedSpinachRicottaTortellini,
+            Base.PotForged = VFX.PotForgedGroundBeefTortellini,
+
+            Base.PotForged = Base.VFXChiliPotForgedEvolved,
+            Base.PotForged = Base.VFXCurryPotForgedEvolved,
+
+            Base.Pan = Base.VFXFriedRicePreparation,
+            Base.Pan = Base.VFXFriedRiceEvolved,
+
+            Base.PanForged = Base.VFXFriedRicePreparationForged,
+            Base.PanForged = Base.VFXFriedRiceEvolvedForged,
+
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerSoup,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerStew,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerSpaghetti,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerRice,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerBrownRice,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerJasmineRice,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerBasmatiRice,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerArborioRice,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerMacaroni,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerFettuccine,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerPenne,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerGnocchi,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerChili,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerCurry,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerFriedRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerSoup,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerStew,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerSpaghetti,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerBrownRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerJasmineRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerBasmatiRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerArborioRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerMacaroni,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerFettuccine,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerPenne,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerGnocchi,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerChili,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerCurry,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerFriedRice,
+        }
+    }
+
+    craftRecipe VFX_Make4Bowls
+    {
+        timedAction = VFX.BowlMixing,
+        Time = 80,
+        OnCreate = RecipeCodeOnCreate.inheritFoodNameBowl,
+        Tooltip = Tooltip_Recipe_CookedPortion,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 4 [Base.Bowl;Base.ClayBowl] mode:destroy flags[ItemCount],
+            item 1 [VFX.WaterSaucepanBrownRice;VFX.WaterSaucepanJasmineRice;VFX.WaterSaucepanBasmatiRice;VFX.WaterSaucepanArborioRice;VFX.WaterSaucepanMacaroni;VFX.WaterSaucepanFettuccine;VFX.WaterSaucepanPenne;VFX.WaterSaucepanGnocchi;VFX.WaterSaucepanCopperBrownRice;VFX.WaterSaucepanCopperJasmineRice;VFX.WaterSaucepanCopperBasmatiRice;VFX.WaterSaucepanCopperArborioRice;VFX.WaterSaucepanCopperMacaroni;VFX.WaterSaucepanCopperFettuccine;VFX.WaterSaucepanCopperPenne;VFX.WaterSaucepanCopperGnocchi;VFX.WaterPotBrownRice;VFX.WaterPotJasmineRice;VFX.WaterPotBasmatiRice;VFX.WaterPotArborioRice;VFX.WaterPotMacaroni;VFX.WaterPotFettuccine;VFX.WaterPotPenne;VFX.WaterPotGnocchi;VFX.WaterPotForgedBrownRice;VFX.WaterPotForgedJasmineRice;VFX.WaterPotForgedBasmatiRice;VFX.WaterPotForgedArborioRice;VFX.WaterPotForgedMacaroni;VFX.WaterPotForgedFettuccine;VFX.WaterPotForgedPenne;VFX.WaterPotForgedGnocchi;Base.VFXBrownRiceSaucepanEvolved;Base.VFXJasmineRiceSaucepanEvolved;Base.VFXBasmatiRiceSaucepanEvolved;Base.VFXArborioRiceSaucepanEvolved;Base.VFXMacaroniSaucepanEvolved;Base.VFXFettuccineSaucepanEvolved;Base.VFXPenneSaucepanEvolved;Base.VFXGnocchiSaucepanEvolved;Base.VFXBrownRiceSaucepanCopperEvolved;Base.VFXJasmineRiceSaucepanCopperEvolved;Base.VFXBasmatiRiceSaucepanCopperEvolved;Base.VFXArborioRiceSaucepanCopperEvolved;Base.VFXMacaroniSaucepanCopperEvolved;Base.VFXFettuccineSaucepanCopperEvolved;Base.VFXPenneSaucepanCopperEvolved;Base.VFXGnocchiSaucepanCopperEvolved;Base.VFXBrownRicePotEvolved;Base.VFXJasmineRicePotEvolved;Base.VFXBasmatiRicePotEvolved;Base.VFXArborioRicePotEvolved;Base.VFXMacaroniPotEvolved;Base.VFXFettuccinePotEvolved;Base.VFXPennePotEvolved;Base.VFXGnocchiPotEvolved;Base.VFXBrownRicePotForgedEvolved;Base.VFXJasmineRicePotForgedEvolved;Base.VFXBasmatiRicePotForgedEvolved;Base.VFXArborioRicePotForgedEvolved;Base.VFXMacaroniPotForgedEvolved;Base.VFXFettuccinePotForgedEvolved;Base.VFXPennePotForgedEvolved;Base.VFXGnocchiPotForgedEvolved;VFX.SaucepanGroundBeefRavioli;VFX.CopperSaucepanGroundBeefRavioli;VFX.PotGroundBeefRavioli;VFX.PotForgedGroundBeefRavioli;VFX.SaucepanSpinachRicottaRavioli;VFX.CopperSaucepanSpinachRicottaRavioli;VFX.PotSpinachRicottaRavioli;VFX.PotForgedSpinachRicottaRavioli;VFX.SaucepanThreeCheeseRavioli;VFX.CopperSaucepanThreeCheeseRavioli;VFX.PotThreeCheeseRavioli;VFX.PotForgedThreeCheeseRavioli;VFX.SaucepanPumpkinRavioli;VFX.CopperSaucepanPumpkinRavioli;VFX.PotPumpkinRavioli;VFX.PotForgedPumpkinRavioli;VFX.SaucepanLobsterRavioli;VFX.CopperSaucepanLobsterRavioli;VFX.PotLobsterRavioli;VFX.PotForgedLobsterRavioli;VFX.SaucepanChickenMushroomRavioli;VFX.CopperSaucepanChickenMushroomRavioli;VFX.PotChickenMushroomRavioli;VFX.PotForgedChickenMushroomRavioli;VFX.SaucepanFourCheeseTortellini;VFX.CopperSaucepanFourCheeseTortellini;VFX.PotFourCheeseTortellini;VFX.PotForgedFourCheeseTortellini;VFX.SaucepanPepperedPorkTortellini;VFX.CopperSaucepanPepperedPorkTortellini;VFX.PotPepperedPorkTortellini;VFX.PotForgedPepperedPorkTortellini;VFX.SaucepanSpinachRicottaTortellini;VFX.CopperSaucepanSpinachRicottaTortellini;VFX.PotSpinachRicottaTortellini;VFX.PotForgedSpinachRicottaTortellini;VFX.SaucepanGroundBeefTortellini;VFX.CopperSaucepanGroundBeefTortellini;VFX.PotGroundBeefTortellini;VFX.PotForgedGroundBeefTortellini;VFX.PMSaucepanCheddarBroccoli;VFX.PMSaucepanParmesan;VFX.PMSaucepanCreamyChicken;VFX.PMSaucepanCreamyPesto;VFX.PMSaucepanAlfredo;VFX.PMSaucepanMacCheese;VFX.PMCopperSaucepanCheddarBroccoli;VFX.PMCopperSaucepanParmesan;VFX.PMCopperSaucepanCreamyChicken;VFX.PMCopperSaucepanCreamyPesto;VFX.PMCopperSaucepanAlfredo;VFX.PMCopperSaucepanMacCheese;VFX.RMSaucepanChicken;VFX.RMSaucepanMexican;VFX.RMSaucepanMedley;VFX.RMSaucepanFried;VFX.RMCopperSaucepanChicken;VFX.RMCopperSaucepanMexican;VFX.RMCopperSaucepanMedley;VFX.RMCopperSaucepanFried;VFX.PotButterChicken;VFX.PotThaiGreenCurry;VFX.PotMassamanCurry;VFX.PotChanaMasala;VFX.PotSweetPotatoChickpeaCurry;VFX.PotTofuCurry;Base.VFXFriedRicePreparation;Base.VFXFriedRiceEvolved;Base.VFXChiliSaucepanEvolved;Base.VFXChiliSaucepanCopperEvolved;Base.VFXChiliPotEvolved;Base.VFXChiliPotForgedEvolved;Base.VFXCurrySaucepanEvolved;Base.VFXCurrySaucepanCopperEvolved;Base.VFXCurryPotEvolved;Base.VFXCurryPotForgedEvolved;VFX.FoodStorageContainerSoup;VFX.FoodStorageContainerStew;VFX.FoodStorageContainerSpaghetti;VFX.FoodStorageContainerRice;VFX.FoodStorageContainerBrownRice;VFX.FoodStorageContainerJasmineRice;VFX.FoodStorageContainerBasmatiRice;VFX.FoodStorageContainerArborioRice;VFX.FoodStorageContainerMacaroni;VFX.FoodStorageContainerFettuccine;VFX.FoodStorageContainerPenne;VFX.FoodStorageContainerGnocchi;VFX.FoodStorageContainerChili;VFX.FoodStorageContainerCurry;VFX.FoodStorageContainerFriedRice;VFX.MetalFoodStorageContainerSoup;VFX.MetalFoodStorageContainerStew;VFX.MetalFoodStorageContainerSpaghetti;VFX.MetalFoodStorageContainerRice;VFX.MetalFoodStorageContainerBrownRice;VFX.MetalFoodStorageContainerJasmineRice;VFX.MetalFoodStorageContainerBasmatiRice;VFX.MetalFoodStorageContainerArborioRice;VFX.MetalFoodStorageContainerMacaroni;VFX.MetalFoodStorageContainerFettuccine;VFX.MetalFoodStorageContainerPenne;VFX.MetalFoodStorageContainerGnocchi;VFX.MetalFoodStorageContainerChili;VFX.MetalFoodStorageContainerCurry;VFX.MetalFoodStorageContainerFriedRice;VFX.WaterSaucepanHomemadePasta;VFX.WaterSaucepanCopperHomemadePasta;VFX.WaterPotHomemadePasta;VFX.WaterPotForgedHomemadePasta] mappers[bowlType;potType] flags[InheritCondition;InheritCooked;InheritFood;IsCookedFoodItem;ItemCount],
+        }
+
+        outputs
+        {
+            item 4 mapper:bowlType,
+            item 1 mapper:potType,
+        }
+
+        itemMapper bowlType
+        {
+            VFX.ArborioRiceBowl = VFX.WaterSaucepanArborioRice,
+            VFX.ArborioRiceBowl = VFX.WaterSaucepanCopperArborioRice,
+            VFX.ArborioRiceBowl = VFX.WaterPotArborioRice,
+            VFX.ArborioRiceBowl = VFX.WaterPotForgedArborioRice,
+            VFX.ArborioRiceBowl = Base.VFXArborioRiceSaucepanEvolved,
+            VFX.ArborioRiceBowl = Base.VFXArborioRiceSaucepanCopperEvolved,
+            VFX.ArborioRiceBowl = Base.VFXArborioRicePotEvolved,
+            VFX.ArborioRiceBowl = Base.VFXArborioRicePotForgedEvolved,
+
+            VFX.BasmatiRiceBowl = VFX.WaterSaucepanBasmatiRice,
+            VFX.BasmatiRiceBowl = VFX.WaterSaucepanCopperBasmatiRice,
+            VFX.BasmatiRiceBowl = VFX.WaterPotBasmatiRice,
+            VFX.BasmatiRiceBowl = VFX.WaterPotForgedBasmatiRice,
+            VFX.BasmatiRiceBowl = Base.VFXBasmatiRiceSaucepanEvolved,
+            VFX.BasmatiRiceBowl = Base.VFXBasmatiRiceSaucepanCopperEvolved,
+            VFX.BasmatiRiceBowl = Base.VFXBasmatiRicePotEvolved,
+            VFX.BasmatiRiceBowl = Base.VFXBasmatiRicePotForgedEvolved,
+
+            VFX.BrownRiceBowl = VFX.WaterSaucepanBrownRice,
+            VFX.BrownRiceBowl = VFX.WaterSaucepanCopperBrownRice,
+            VFX.BrownRiceBowl = VFX.WaterPotBrownRice,
+            VFX.BrownRiceBowl = VFX.WaterPotForgedBrownRice,
+            VFX.BrownRiceBowl = Base.VFXBrownRiceSaucepanEvolved,
+            VFX.BrownRiceBowl = Base.VFXBrownRiceSaucepanCopperEvolved,
+            VFX.BrownRiceBowl = Base.VFXBrownRicePotEvolved,
+            VFX.BrownRiceBowl = Base.VFXBrownRicePotForgedEvolved,
+
+            VFX.FettuccineBowl = VFX.WaterSaucepanFettuccine,
+            VFX.FettuccineBowl = VFX.WaterSaucepanCopperFettuccine,
+            VFX.FettuccineBowl = VFX.WaterPotFettuccine,
+            VFX.FettuccineBowl = VFX.WaterPotForgedFettuccine,
+            VFX.FettuccineBowl = Base.VFXFettuccineSaucepanEvolved,
+            VFX.FettuccineBowl = Base.VFXFettuccineSaucepanCopperEvolved,
+            VFX.FettuccineBowl = Base.VFXFettuccinePotEvolved,
+            VFX.FettuccineBowl = Base.VFXFettuccinePotForgedEvolved,
+
+            VFX.GnocchiBowl = VFX.WaterSaucepanGnocchi,
+            VFX.GnocchiBowl = VFX.WaterSaucepanCopperGnocchi,
+            VFX.GnocchiBowl = VFX.WaterPotGnocchi,
+            VFX.GnocchiBowl = VFX.WaterPotForgedGnocchi,
+            VFX.GnocchiBowl = Base.VFXGnocchiSaucepanEvolved,
+            VFX.GnocchiBowl = Base.VFXGnocchiSaucepanCopperEvolved,
+            VFX.GnocchiBowl = Base.VFXGnocchiPotEvolved,
+            VFX.GnocchiBowl = Base.VFXGnocchiPotForgedEvolved,
+
+            VFX.JasmineRiceBowl = VFX.WaterSaucepanJasmineRice,
+            VFX.JasmineRiceBowl = VFX.WaterSaucepanCopperJasmineRice,
+            VFX.JasmineRiceBowl = VFX.WaterPotJasmineRice,
+            VFX.JasmineRiceBowl = VFX.WaterPotForgedJasmineRice,
+            VFX.JasmineRiceBowl = Base.VFXJasmineRiceSaucepanEvolved,
+            VFX.JasmineRiceBowl = Base.VFXJasmineRiceSaucepanCopperEvolved,
+            VFX.JasmineRiceBowl = Base.VFXJasmineRicePotEvolved,
+            VFX.JasmineRiceBowl = Base.VFXJasmineRicePotForgedEvolved,
+
+            VFX.MacaroniBowl = VFX.WaterSaucepanMacaroni,
+            VFX.MacaroniBowl = VFX.WaterSaucepanCopperMacaroni,
+            VFX.MacaroniBowl = VFX.WaterPotMacaroni,
+            VFX.MacaroniBowl = VFX.WaterPotForgedMacaroni,
+            VFX.MacaroniBowl = Base.VFXMacaroniSaucepanEvolved,
+            VFX.MacaroniBowl = Base.VFXMacaroniSaucepanCopperEvolved,
+            VFX.MacaroniBowl = Base.VFXMacaroniPotEvolved,
+            VFX.MacaroniBowl = Base.VFXMacaroniPotForgedEvolved,
+
+            VFX.PenneBowl = VFX.WaterSaucepanPenne,
+            VFX.PenneBowl = VFX.WaterSaucepanCopperPenne,
+            VFX.PenneBowl = VFX.WaterPotPenne,
+            VFX.PenneBowl = VFX.WaterPotForgedPenne,
+            VFX.PenneBowl = Base.VFXPenneSaucepanEvolved,
+            VFX.PenneBowl = Base.VFXPenneSaucepanCopperEvolved,
+            VFX.PenneBowl = Base.VFXPennePotEvolved,
+            VFX.PenneBowl = Base.VFXPennePotForgedEvolved,
+
+            VFX.HomemadePastaBowl = VFX.WaterSaucepanHomemadePasta,
+            VFX.HomemadePastaBowl = VFX.WaterSaucepanCopperHomemadePasta,
+            VFX.HomemadePastaBowl = VFX.WaterPotHomemadePasta,
+            VFX.HomemadePastaBowl = VFX.WaterPotForgedHomemadePasta,
+
+            VFX.BowlGroundBeefRavioli = VFX.SaucepanGroundBeefRavioli,
+            VFX.BowlGroundBeefRavioli = VFX.CopperSaucepanGroundBeefRavioli,
+            VFX.BowlGroundBeefRavioli = VFX.PotGroundBeefRavioli,
+            VFX.BowlGroundBeefRavioli = VFX.PotForgedGroundBeefRavioli,
+
+            VFX.BowlSpinachRicottaRavioli = VFX.SaucepanSpinachRicottaRavioli,
+            VFX.BowlSpinachRicottaRavioli = VFX.CopperSaucepanSpinachRicottaRavioli,
+            VFX.BowlSpinachRicottaRavioli = VFX.PotSpinachRicottaRavioli,
+            VFX.BowlSpinachRicottaRavioli = VFX.PotForgedSpinachRicottaRavioli,
+
+            VFX.BowlThreeCheeseRavioli = VFX.SaucepanThreeCheeseRavioli,
+            VFX.BowlThreeCheeseRavioli = VFX.CopperSaucepanThreeCheeseRavioli,
+            VFX.BowlThreeCheeseRavioli = VFX.PotThreeCheeseRavioli,
+            VFX.BowlThreeCheeseRavioli = VFX.PotForgedThreeCheeseRavioli,
+
+            VFX.BowlPumpkinRavioli = VFX.SaucepanPumpkinRavioli,
+            VFX.BowlPumpkinRavioli = VFX.CopperSaucepanPumpkinRavioli,
+            VFX.BowlPumpkinRavioli = VFX.PotPumpkinRavioli,
+            VFX.BowlPumpkinRavioli = VFX.PotForgedPumpkinRavioli,
+
+            VFX.BowlLobsterRavioli = VFX.SaucepanLobsterRavioli,
+            VFX.BowlLobsterRavioli = VFX.CopperSaucepanLobsterRavioli,
+            VFX.BowlLobsterRavioli = VFX.PotLobsterRavioli,
+            VFX.BowlLobsterRavioli = VFX.PotForgedLobsterRavioli,
+
+            VFX.BowlChickenMushroomRavioli = VFX.SaucepanChickenMushroomRavioli,
+            VFX.BowlChickenMushroomRavioli = VFX.CopperSaucepanChickenMushroomRavioli,
+            VFX.BowlChickenMushroomRavioli = VFX.PotChickenMushroomRavioli,
+            VFX.BowlChickenMushroomRavioli = VFX.PotForgedChickenMushroomRavioli,
+
+            VFX.BowlFourCheeseTortellini = VFX.SaucepanFourCheeseTortellini,
+            VFX.BowlFourCheeseTortellini = VFX.CopperSaucepanFourCheeseTortellini,
+            VFX.BowlFourCheeseTortellini = VFX.PotFourCheeseTortellini,
+            VFX.BowlFourCheeseTortellini = VFX.PotForgedFourCheeseTortellini,
+
+            VFX.BowlPepperedPorkTortellini = VFX.SaucepanPepperedPorkTortellini,
+            VFX.BowlPepperedPorkTortellini = VFX.CopperSaucepanPepperedPorkTortellini,
+            VFX.BowlPepperedPorkTortellini = VFX.PotPepperedPorkTortellini,
+            VFX.BowlPepperedPorkTortellini = VFX.PotForgedPepperedPorkTortellini,
+
+            VFX.BowlSpinachRicottaTortellini = VFX.SaucepanSpinachRicottaTortellini,
+            VFX.BowlSpinachRicottaTortellini = VFX.CopperSaucepanSpinachRicottaTortellini,
+            VFX.BowlSpinachRicottaTortellini = VFX.PotSpinachRicottaTortellini,
+            VFX.BowlSpinachRicottaTortellini = VFX.PotForgedSpinachRicottaTortellini,
+
+            VFX.BowlGroundBeefTortellini = VFX.SaucepanGroundBeefTortellini,
+            VFX.BowlGroundBeefTortellini = VFX.CopperSaucepanGroundBeefTortellini,
+            VFX.BowlGroundBeefTortellini = VFX.PotGroundBeefTortellini,
+            VFX.BowlGroundBeefTortellini = VFX.PotForgedGroundBeefTortellini,
+
+            VFX.PMBowlAlfredo = VFX.PMSaucepanAlfredo,
+            VFX.PMBowlAlfredo = VFX.PMCopperSaucepanAlfredo,
+            VFX.PMBowlCheddarBroccoli = VFX.PMSaucepanCheddarBroccoli,
+            VFX.PMBowlCheddarBroccoli = VFX.PMCopperSaucepanCheddarBroccoli,
+            VFX.PMBowlCreamyChicken = VFX.PMSaucepanCreamyChicken,
+            VFX.PMBowlCreamyChicken = VFX.PMCopperSaucepanCreamyChicken,
+            VFX.PMBowlCreamyPesto = VFX.PMSaucepanCreamyPesto,
+            VFX.PMBowlCreamyPesto = VFX.PMCopperSaucepanCreamyPesto,
+            VFX.PMBowlMacCheese = VFX.PMSaucepanMacCheese,
+            VFX.PMBowlMacCheese = VFX.PMCopperSaucepanMacCheese,
+            VFX.PMBowlParmesan = VFX.PMSaucepanParmesan,
+            VFX.PMBowlParmesan = VFX.PMCopperSaucepanParmesan,
+
+            VFX.RMBowlChicken = VFX.RMSaucepanChicken,
+            VFX.RMBowlChicken = VFX.RMCopperSaucepanChicken,
+            VFX.RMBowlFried = VFX.RMSaucepanFried,
+            VFX.RMBowlFried = VFX.RMCopperSaucepanFried,
+            VFX.RMBowlMedley = VFX.RMSaucepanMedley,
+            VFX.RMBowlMedley = VFX.RMCopperSaucepanMedley,
+            VFX.RMBowlMexican = VFX.RMSaucepanMexican,
+            VFX.RMBowlMexican = VFX.RMCopperSaucepanMexican,
+
+            VFX.BowlButterChicken = VFX.PotButterChicken,
+            VFX.BowlThaiGreenCurry = VFX.PotThaiGreenCurry,
+            VFX.BowlMassamanCurry = VFX.PotMassamanCurry,
+            VFX.BowlChanaMasala = VFX.PotChanaMasala,
+            VFX.BowlSweetPotatoChickpeaCurry = VFX.PotSweetPotatoChickpeaCurry,
+            VFX.BowlTofuCurry = VFX.PotTofuCurry,
+
+            Base.VFXBowlFriedRice = Base.VFXFriedRicePreparation,
+            Base.VFXBowlFriedRice = Base.VFXFriedRiceEvolved,
+
+            Base.VFXBowlChili = Base.VFXChiliSaucepanEvolved,
+            Base.VFXBowlChili = Base.VFXChiliSaucepanCopperEvolved,
+            Base.VFXBowlChili = Base.VFXChiliPotEvolved,
+            Base.VFXBowlChili = Base.VFXChiliPotForgedEvolved,
+
+            Base.VFXBowlCurry = Base.VFXCurrySaucepanEvolved,
+            Base.VFXBowlCurry = Base.VFXCurrySaucepanCopperEvolved,
+            Base.VFXBowlCurry = Base.VFXCurryPotEvolved,
+            Base.VFXBowlCurry = Base.VFXCurryPotForgedEvolved,
+
+            Base.SoupBowl = VFX.FoodStorageContainerSoup,
+            Base.StewBowl = VFX.FoodStorageContainerStew,
+            Base.PastaBowl = VFX.FoodStorageContainerSpaghetti,
+            Base.RiceBowl = VFX.FoodStorageContainerRice,
+            VFX.BrownRiceBowl = VFX.FoodStorageContainerBrownRice,
+            VFX.JasmineRiceBowl = VFX.FoodStorageContainerJasmineRice,
+            VFX.BasmatiRiceBowl = VFX.FoodStorageContainerBasmatiRice,
+            VFX.ArborioRiceBowl = VFX.FoodStorageContainerArborioRice,
+            VFX.MacaroniBowl = VFX.FoodStorageContainerMacaroni,
+            VFX.FettuccineBowl = VFX.FoodStorageContainerFettuccine,
+            VFX.PenneBowl = VFX.FoodStorageContainerPenne,
+            VFX.GnocchiBowl = VFX.FoodStorageContainerGnocchi,
+            Base.VFXBowlChili = VFX.FoodStorageContainerChili,
+            Base.VFXBowlCurry = VFX.FoodStorageContainerCurry,
+            Base.VFXBowlFriedRice = VFX.FoodStorageContainerFriedRice,
+            Base.SoupBowl = VFX.MetalFoodStorageContainerSoup,
+            Base.StewBowl = VFX.MetalFoodStorageContainerStew,
+            Base.PastaBowl = VFX.MetalFoodStorageContainerSpaghetti,
+            Base.RiceBowl = VFX.MetalFoodStorageContainerRice,
+            VFX.BrownRiceBowl = VFX.MetalFoodStorageContainerBrownRice,
+            VFX.JasmineRiceBowl = VFX.MetalFoodStorageContainerJasmineRice,
+            VFX.BasmatiRiceBowl = VFX.MetalFoodStorageContainerBasmatiRice,
+            VFX.ArborioRiceBowl = VFX.MetalFoodStorageContainerArborioRice,
+            VFX.MacaroniBowl = VFX.MetalFoodStorageContainerMacaroni,
+            VFX.FettuccineBowl = VFX.MetalFoodStorageContainerFettuccine,
+            VFX.PenneBowl = VFX.MetalFoodStorageContainerPenne,
+            VFX.GnocchiBowl = VFX.MetalFoodStorageContainerGnocchi,
+            Base.VFXBowlChili = VFX.MetalFoodStorageContainerChili,
+            Base.VFXBowlCurry = VFX.MetalFoodStorageContainerCurry,
+            Base.VFXBowlFriedRice = VFX.MetalFoodStorageContainerFriedRice,
+        }
+
+        itemMapper potType
+        {
+            Base.Saucepan = VFX.WaterSaucepanBrownRice,
+            Base.Saucepan = VFX.WaterSaucepanJasmineRice,
+            Base.Saucepan = VFX.WaterSaucepanBasmatiRice,
+            Base.Saucepan = VFX.WaterSaucepanArborioRice,
+            Base.Saucepan = VFX.WaterSaucepanMacaroni,
+            Base.Saucepan = VFX.WaterSaucepanFettuccine,
+            Base.Saucepan = VFX.WaterSaucepanPenne,
+            Base.Saucepan = VFX.WaterSaucepanGnocchi,
+            Base.Saucepan = VFX.WaterSaucepanHomemadePasta,
+
+            Base.Saucepan = Base.VFXBrownRiceSaucepanEvolved,
+            Base.Saucepan = Base.VFXJasmineRiceSaucepanEvolved,
+            Base.Saucepan = Base.VFXBasmatiRiceSaucepanEvolved,
+            Base.Saucepan = Base.VFXArborioRiceSaucepanEvolved,
+            Base.Saucepan = Base.VFXMacaroniSaucepanEvolved,
+            Base.Saucepan = Base.VFXFettuccineSaucepanEvolved,
+            Base.Saucepan = Base.VFXPenneSaucepanEvolved,
+            Base.Saucepan = Base.VFXGnocchiSaucepanEvolved,
+
+            Base.Saucepan = VFX.SaucepanGroundBeefRavioli,
+            Base.Saucepan = VFX.SaucepanSpinachRicottaRavioli,
+            Base.Saucepan = VFX.SaucepanThreeCheeseRavioli,
+            Base.Saucepan = VFX.SaucepanPumpkinRavioli,
+            Base.Saucepan = VFX.SaucepanLobsterRavioli,
+            Base.Saucepan = VFX.SaucepanChickenMushroomRavioli,
+            Base.Saucepan = VFX.SaucepanFourCheeseTortellini,
+            Base.Saucepan = VFX.SaucepanPepperedPorkTortellini,
+            Base.Saucepan = VFX.SaucepanSpinachRicottaTortellini,
+            Base.Saucepan = VFX.SaucepanGroundBeefTortellini,
+
+            Base.Saucepan = VFX.PMSaucepanCheddarBroccoli,
+            Base.Saucepan = VFX.PMSaucepanParmesan,
+            Base.Saucepan = VFX.PMSaucepanCreamyChicken,
+            Base.Saucepan = VFX.PMSaucepanCreamyPesto,
+            Base.Saucepan = VFX.PMSaucepanAlfredo,
+            Base.Saucepan = VFX.PMSaucepanMacCheese,
+            Base.Saucepan = VFX.RMSaucepanChicken,
+            Base.Saucepan = VFX.RMSaucepanMexican,
+            Base.Saucepan = VFX.RMSaucepanMedley,
+            Base.Saucepan = VFX.RMSaucepanFried,
+
+            Base.Saucepan = Base.VFXChiliSaucepanEvolved,
+            Base.Saucepan = Base.VFXCurrySaucepanEvolved,
+
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperBrownRice,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperJasmineRice,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperBasmatiRice,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperArborioRice,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperMacaroni,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperFettuccine,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperPenne,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperGnocchi,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperHomemadePasta,
+
+            Base.SaucepanCopper = Base.VFXBrownRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXJasmineRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXBasmatiRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXArborioRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXMacaroniSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXFettuccineSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXPenneSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXGnocchiSaucepanCopperEvolved,
+
+            Base.SaucepanCopper = VFX.CopperSaucepanGroundBeefRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanSpinachRicottaRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanThreeCheeseRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanPumpkinRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanLobsterRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanChickenMushroomRavioli,
+            Base.SaucepanCopper = VFX.CopperSaucepanFourCheeseTortellini,
+            Base.SaucepanCopper = VFX.CopperSaucepanPepperedPorkTortellini,
+            Base.SaucepanCopper = VFX.CopperSaucepanSpinachRicottaTortellini,
+            Base.SaucepanCopper = VFX.CopperSaucepanGroundBeefTortellini,
+
+            Base.SaucepanCopper = VFX.PMCopperSaucepanCheddarBroccoli,
+            Base.SaucepanCopper = VFX.PMCopperSaucepanParmesan,
+            Base.SaucepanCopper = VFX.PMCopperSaucepanCreamyChicken,
+            Base.SaucepanCopper = VFX.PMCopperSaucepanCreamyPesto,
+            Base.SaucepanCopper = VFX.PMCopperSaucepanAlfredo,
+            Base.SaucepanCopper = VFX.PMCopperSaucepanMacCheese,
+            Base.SaucepanCopper = VFX.RMCopperSaucepanChicken,
+            Base.SaucepanCopper = VFX.RMCopperSaucepanMexican,
+            Base.SaucepanCopper = VFX.RMCopperSaucepanMedley,
+            Base.SaucepanCopper = VFX.RMCopperSaucepanFried,
+
+            Base.SaucepanCopper = Base.VFXChiliSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXCurrySaucepanCopperEvolved,
+
+            Base.Pot = VFX.WaterPotBrownRice,
+            Base.Pot = VFX.WaterPotJasmineRice,
+            Base.Pot = VFX.WaterPotBasmatiRice,
+            Base.Pot = VFX.WaterPotArborioRice,
+            Base.Pot = VFX.WaterPotMacaroni,
+            Base.Pot = VFX.WaterPotFettuccine,
+            Base.Pot = VFX.WaterPotPenne,
+            Base.Pot = VFX.WaterPotGnocchi,
+            Base.Pot = VFX.WaterPotHomemadePasta,
+
+            Base.Pot = Base.VFXBrownRicePotEvolved,
+            Base.Pot = Base.VFXJasmineRicePotEvolved,
+            Base.Pot = Base.VFXBasmatiRicePotEvolved,
+            Base.Pot = Base.VFXArborioRicePotEvolved,
+            Base.Pot = Base.VFXMacaroniPotEvolved,
+            Base.Pot = Base.VFXFettuccinePotEvolved,
+            Base.Pot = Base.VFXPennePotEvolved,
+            Base.Pot = Base.VFXGnocchiPotEvolved,
+
+            Base.Pot = VFX.PotGroundBeefRavioli,
+            Base.Pot = VFX.PotSpinachRicottaRavioli,
+            Base.Pot = VFX.PotThreeCheeseRavioli,
+            Base.Pot = VFX.PotPumpkinRavioli,
+            Base.Pot = VFX.PotLobsterRavioli,
+            Base.Pot = VFX.PotChickenMushroomRavioli,
+            Base.Pot = VFX.PotFourCheeseTortellini,
+            Base.Pot = VFX.PotPepperedPorkTortellini,
+            Base.Pot = VFX.PotSpinachRicottaTortellini,
+            Base.Pot = VFX.PotGroundBeefTortellini,
+
+            Base.Pot = VFX.PotButterChicken,
+            Base.Pot = VFX.PotThaiGreenCurry,
+            Base.Pot = VFX.PotMassamanCurry,
+            Base.Pot = VFX.PotChanaMasala,
+            Base.Pot = VFX.PotSweetPotatoChickpeaCurry,
+            Base.Pot = VFX.PotTofuCurry,
+
+            Base.Pot = Base.VFXChiliPotEvolved,
+            Base.Pot = Base.VFXCurryPotEvolved,
+
+            Base.PotForged = VFX.WaterPotForgedBrownRice,
+            Base.PotForged = VFX.WaterPotForgedJasmineRice,
+            Base.PotForged = VFX.WaterPotForgedBasmatiRice,
+            Base.PotForged = VFX.WaterPotForgedArborioRice,
+            Base.PotForged = VFX.WaterPotForgedMacaroni,
+            Base.PotForged = VFX.WaterPotForgedFettuccine,
+            Base.PotForged = VFX.WaterPotForgedPenne,
+            Base.PotForged = VFX.WaterPotForgedGnocchi,
+            Base.PotForged = VFX.WaterPotForgedHomemadePasta,
+
+            Base.PotForged = Base.VFXBrownRicePotForgedEvolved,
+            Base.PotForged = Base.VFXJasmineRicePotForgedEvolved,
+            Base.PotForged = Base.VFXBasmatiRicePotForgedEvolved,
+            Base.PotForged = Base.VFXArborioRicePotForgedEvolved,
+            Base.PotForged = Base.VFXMacaroniPotForgedEvolved,
+            Base.PotForged = Base.VFXFettuccinePotForgedEvolved,
+            Base.PotForged = Base.VFXPennePotForgedEvolved,
+            Base.PotForged = Base.VFXGnocchiPotForgedEvolved,
+
+            Base.PotForged = VFX.PotForgedGroundBeefRavioli,
+            Base.PotForged = VFX.PotForgedSpinachRicottaRavioli,
+            Base.PotForged = VFX.PotForgedThreeCheeseRavioli,
+            Base.PotForged = VFX.PotForgedPumpkinRavioli,
+            Base.PotForged = VFX.PotForgedLobsterRavioli,
+            Base.PotForged = VFX.PotForgedChickenMushroomRavioli,
+            Base.PotForged = VFX.PotForgedFourCheeseTortellini,
+            Base.PotForged = VFX.PotForgedPepperedPorkTortellini,
+            Base.PotForged = VFX.PotForgedSpinachRicottaTortellini,
+            Base.PotForged = VFX.PotForgedGroundBeefTortellini,
+
+            Base.PotForged = Base.VFXChiliPotForgedEvolved,
+            Base.PotForged = Base.VFXCurryPotForgedEvolved,
+
+            Base.Pan = Base.VFXFriedRicePreparation,
+            Base.Pan = Base.VFXFriedRiceEvolved,
+
+            Base.PanForged = Base.VFXFriedRicePreparationForged,
+            Base.PanForged = Base.VFXFriedRiceEvolvedForged,
+
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerSoup,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerStew,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerSpaghetti,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerRice,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerBrownRice,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerJasmineRice,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerBasmatiRice,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerArborioRice,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerMacaroni,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerFettuccine,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerPenne,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerGnocchi,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerChili,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerCurry,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerFriedRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerSoup,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerStew,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerSpaghetti,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerBrownRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerJasmineRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerBasmatiRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerArborioRice,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerMacaroni,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerFettuccine,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerPenne,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerGnocchi,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerChili,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerCurry,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerFriedRice,
+        }
+    }
+
+    craftRecipe VFX_Make2Plates
+    {
+        timedAction = VFX.PlateCooking,
+        Time = 80,
+        Tooltip = Tooltip_Recipe_CookedPortion,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 2 [Base.Plate] mode:destroy flags[ItemCount],
+            item 1 [VFX.TrayShepherdsPie;VFX.TrayTunaCasserole;VFX.TrayBakedZiti;VFX.TrayStuffedBellPepper;VFX.PanChickenPotPie;VFX.TrayMoussaka;VFX.TrayChickenDivan;VFX.TraySalisburySteak;VFX.TraySausageAppleFry;Base.VFXLasagnaEvolved;Base.VFXCasseroleEvolved;Base.VFXMeatloafPreparation;Base.VFXMeatloafEvolved;Base.VFXScallopedPotatoBakePreparation;Base.VFXScallopedPotatoBakeEvolved;Base.VFXQuichePreparation;Base.VFXQuicheEvolved;Base.VFXNachosPreparation;Base.VFXNachosEvolved;Base.VFXEnchiladaPreparation;Base.VFXEnchiladaEvolved;VFX.FoodStorageContainerLasagna;VFX.FoodStorageContainerCasserole;VFX.FoodStorageContainerMeatloaf;VFX.FoodStorageContainerScallopedPotatoBake;VFX.MetalFoodStorageContainerLasagna;VFX.MetalFoodStorageContainerCasserole;VFX.MetalFoodStorageContainerMeatloaf;VFX.MetalFoodStorageContainerScallopedPotatoBake] mappers[plateType;potType] flags[InheritCondition;InheritCooked;InheritFood;IsCookedFoodItem;ItemCount],
+        }
+
+        outputs
+        {
+            item 2 mapper:plateType,
+            item 1 mapper:potType,
+        }
+
+        itemMapper plateType
+        {
+            VFX.PlateShepherdsPie = VFX.TrayShepherdsPie,
+            VFX.PlateTunaCasserole = VFX.TrayTunaCasserole,
+            VFX.PlateBakedZiti = VFX.TrayBakedZiti,
+            VFX.PlateStuffedBellPepper = VFX.TrayStuffedBellPepper,
+            VFX.PlateChickenPotPie = VFX.PanChickenPotPie,
+            VFX.PlateMoussaka = VFX.TrayMoussaka,
+            VFX.PlateChickenDivan = VFX.TrayChickenDivan,
+            VFX.PlateSalisburySteak = VFX.TraySalisburySteak,
+            VFX.PlateSausageAppleFry = VFX.TraySausageAppleFry,
+
+            Base.VFXPlateLasagna = Base.VFXLasagnaEvolved,
+            Base.VFXPlateCasserole = Base.VFXCasseroleEvolved,
+            Base.VFXPlateMeatloaf = Base.VFXMeatloafPreparation,
+            Base.VFXPlateMeatloaf = Base.VFXMeatloafEvolved,
+            Base.VFXPlateScallopedPotatoBake = Base.VFXScallopedPotatoBakePreparation,
+            Base.VFXPlateScallopedPotatoBake = Base.VFXScallopedPotatoBakeEvolved,
+            Base.VFXPlateQuiche = Base.VFXQuichePreparation,
+            Base.VFXPlateQuiche = Base.VFXQuicheEvolved,
+            Base.VFXPlateNachos = Base.VFXNachosPreparation,
+            Base.VFXPlateNachos = Base.VFXNachosEvolved,
+            Base.VFXPlateEnchilada = Base.VFXEnchiladaPreparation,
+            Base.VFXPlateEnchilada = Base.VFXEnchiladaEvolved,
+
+            Base.VFXPlateLasagna = VFX.FoodStorageContainerLasagna,
+            Base.VFXPlateCasserole = VFX.FoodStorageContainerCasserole,
+            Base.VFXPlateMeatloaf = VFX.FoodStorageContainerMeatloaf,
+            Base.VFXPlateScallopedPotatoBake = VFX.FoodStorageContainerScallopedPotatoBake,
+            Base.VFXPlateLasagna = VFX.MetalFoodStorageContainerLasagna,
+            Base.VFXPlateCasserole = VFX.MetalFoodStorageContainerCasserole,
+            Base.VFXPlateMeatloaf = VFX.MetalFoodStorageContainerMeatloaf,
+            Base.VFXPlateScallopedPotatoBake = VFX.MetalFoodStorageContainerScallopedPotatoBake,
+        }
+
+        itemMapper potType
+        {
+            Base.RoastingPan = VFX.TrayShepherdsPie,
+            Base.RoastingPan = VFX.TrayTunaCasserole,
+            Base.RoastingPan = VFX.TrayBakedZiti,
+            Base.RoastingPan = VFX.TrayStuffedBellPepper,
+            Base.RoastingPan = VFX.TrayMoussaka,
+            Base.RoastingPan = VFX.TrayChickenDivan,
+            Base.RoastingPan = VFX.TraySalisburySteak,
+            Base.RoastingPan = VFX.TraySausageAppleFry,
+
+            Base.RoastingPan = Base.VFXLasagnaEvolved,
+            Base.RoastingPan = Base.VFXCasseroleEvolved,
+            Base.RoastingPan = Base.VFXMeatloafPreparation,
+            Base.RoastingPan = Base.VFXMeatloafEvolved,
+            Base.RoastingPan = Base.VFXScallopedPotatoBakePreparation,
+            Base.RoastingPan = Base.VFXScallopedPotatoBakeEvolved,
+            Base.RoastingPan = Base.VFXNachosPreparation,
+            Base.RoastingPan = Base.VFXNachosEvolved,
+            Base.RoastingPan = Base.VFXEnchiladaPreparation,
+            Base.RoastingPan = Base.VFXEnchiladaEvolved,
+
+            Base.BakingPan = VFX.PanChickenPotPie,
+            Base.BakingPan = Base.VFXQuichePreparation,
+            Base.BakingPan = Base.VFXQuicheEvolved,
+
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerLasagna,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerCasserole,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerMeatloaf,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerScallopedPotatoBake,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerLasagna,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerCasserole,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerMeatloaf,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerScallopedPotatoBake,
+        }
+    }
+
+    craftRecipe VFX_Make4Plates
+    {
+        timedAction = VFX.PlateCooking,
+        Time = 80,
+        Tooltip = Tooltip_Recipe_CookedPortion,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 4 [Base.Plate] mode:destroy flags[ItemCount],
+            item 1 [VFX.TrayShepherdsPie;VFX.TrayTunaCasserole;VFX.TrayBakedZiti;VFX.TrayStuffedBellPepper;VFX.PanChickenPotPie;VFX.TrayMoussaka;VFX.TrayChickenDivan;VFX.TraySalisburySteak;VFX.TraySausageAppleFry;Base.VFXLasagnaEvolved;Base.VFXCasseroleEvolved;Base.VFXMeatloafPreparation;Base.VFXMeatloafEvolved;Base.VFXScallopedPotatoBakePreparation;Base.VFXScallopedPotatoBakeEvolved;Base.VFXQuichePreparation;Base.VFXQuicheEvolved;Base.VFXNachosPreparation;Base.VFXNachosEvolved;Base.VFXEnchiladaPreparation;Base.VFXEnchiladaEvolved;VFX.FoodStorageContainerLasagna;VFX.FoodStorageContainerCasserole;VFX.FoodStorageContainerMeatloaf;VFX.FoodStorageContainerScallopedPotatoBake;VFX.MetalFoodStorageContainerLasagna;VFX.MetalFoodStorageContainerCasserole;VFX.MetalFoodStorageContainerMeatloaf;VFX.MetalFoodStorageContainerScallopedPotatoBake] mappers[plateType;potType] flags[InheritCondition;InheritCooked;InheritFood;IsCookedFoodItem;ItemCount],
+        }
+
+        outputs
+        {
+            item 4 mapper:plateType,
+            item 1 mapper:potType,
+        }
+
+        itemMapper plateType
+        {
+            VFX.PlateShepherdsPie = VFX.TrayShepherdsPie,
+            VFX.PlateTunaCasserole = VFX.TrayTunaCasserole,
+            VFX.PlateBakedZiti = VFX.TrayBakedZiti,
+            VFX.PlateStuffedBellPepper = VFX.TrayStuffedBellPepper,
+            VFX.PlateChickenPotPie = VFX.PanChickenPotPie,
+            VFX.PlateMoussaka = VFX.TrayMoussaka,
+            VFX.PlateChickenDivan = VFX.TrayChickenDivan,
+            VFX.PlateSalisburySteak = VFX.TraySalisburySteak,
+            VFX.PlateSausageAppleFry = VFX.TraySausageAppleFry,
+
+            Base.VFXPlateLasagna = Base.VFXLasagnaEvolved,
+            Base.VFXPlateCasserole = Base.VFXCasseroleEvolved,
+            Base.VFXPlateMeatloaf = Base.VFXMeatloafPreparation,
+            Base.VFXPlateMeatloaf = Base.VFXMeatloafEvolved,
+            Base.VFXPlateScallopedPotatoBake = Base.VFXScallopedPotatoBakePreparation,
+            Base.VFXPlateScallopedPotatoBake = Base.VFXScallopedPotatoBakeEvolved,
+            Base.VFXPlateQuiche = Base.VFXQuichePreparation,
+            Base.VFXPlateQuiche = Base.VFXQuicheEvolved,
+            Base.VFXPlateNachos = Base.VFXNachosPreparation,
+            Base.VFXPlateNachos = Base.VFXNachosEvolved,
+            Base.VFXPlateEnchilada = Base.VFXEnchiladaPreparation,
+            Base.VFXPlateEnchilada = Base.VFXEnchiladaEvolved,
+
+            Base.VFXPlateLasagna = VFX.FoodStorageContainerLasagna,
+            Base.VFXPlateCasserole = VFX.FoodStorageContainerCasserole,
+            Base.VFXPlateMeatloaf = VFX.FoodStorageContainerMeatloaf,
+            Base.VFXPlateScallopedPotatoBake = VFX.FoodStorageContainerScallopedPotatoBake,
+            Base.VFXPlateLasagna = VFX.MetalFoodStorageContainerLasagna,
+            Base.VFXPlateCasserole = VFX.MetalFoodStorageContainerCasserole,
+            Base.VFXPlateMeatloaf = VFX.MetalFoodStorageContainerMeatloaf,
+            Base.VFXPlateScallopedPotatoBake = VFX.MetalFoodStorageContainerScallopedPotatoBake,
+        }
+
+        itemMapper potType
+        {
+            Base.RoastingPan = VFX.TrayShepherdsPie,
+            Base.RoastingPan = VFX.TrayTunaCasserole,
+            Base.RoastingPan = VFX.TrayBakedZiti,
+            Base.RoastingPan = VFX.TrayStuffedBellPepper,
+            Base.RoastingPan = VFX.TrayMoussaka,
+            Base.RoastingPan = VFX.TrayChickenDivan,
+            Base.RoastingPan = VFX.TraySalisburySteak,
+            Base.RoastingPan = VFX.TraySausageAppleFry,
+
+            Base.RoastingPan = Base.VFXLasagnaEvolved,
+            Base.RoastingPan = Base.VFXCasseroleEvolved,
+            Base.RoastingPan = Base.VFXMeatloafPreparation,
+            Base.RoastingPan = Base.VFXMeatloafEvolved,
+            Base.RoastingPan = Base.VFXScallopedPotatoBakePreparation,
+            Base.RoastingPan = Base.VFXScallopedPotatoBakeEvolved,
+            Base.RoastingPan = Base.VFXNachosPreparation,
+            Base.RoastingPan = Base.VFXNachosEvolved,
+            Base.RoastingPan = Base.VFXEnchiladaPreparation,
+            Base.RoastingPan = Base.VFXEnchiladaEvolved,
+
+            Base.BakingPan = VFX.PanChickenPotPie,
+            Base.BakingPan = Base.VFXQuichePreparation,
+            Base.BakingPan = Base.VFXQuicheEvolved,
+
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerLasagna,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerCasserole,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerMeatloaf,
+            VFX.FoodStorageContainer = VFX.FoodStorageContainerScallopedPotatoBake,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerLasagna,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerCasserole,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerMeatloaf,
+            VFX.MetalFoodStorageContainer = VFX.MetalFoodStorageContainerScallopedPotatoBake,
+        }
+    }
+
+    craftRecipe VFX_MakeCannedBowl
+    {
+        timedAction = VFX.BowlMixing,
+        time = 80,
+        tags = InHandCraft;Cooking,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 [Base.Bowl;Base.ClayBowl] mode:destroy flags[ItemCount],
+            item 1 [VFX.CannedSavoryMinceOpen;VFX.CannedBeefRavioliOpen;VFX.CannedSpinachRavioliOpen;VFX.CannedSpaghettiAndMeatballsOpen;VFX.CannedSpaghettiOpen;VFX.CannedSloppyJoeOpen;VFX.CannedMeatloafOpen;VFX.CannedVegetarianChiliOpen;VFX.CannedRedBeansAndRiceOpen;VFX.CannedClamChowderOpen;VFX.CannedMushroomRavioliOpen;VFX.CannedBroccoliCheddarSoupOpen;VFX.CannedChickenNoodleSoupOpen;VFX.CannedFrenchOnionSoupOpen;VFX.CannedLaksaNoodleSoupOpen;VFX.CannedLentilSoupOpen;VFX.CannedMinestroneSoupOpen;VFX.CannedPeaHamSoupOpen;VFX.CannedPotatoLeekSoupOpen;VFX.CannedPumpkinSoupOpen;VFX.CannedTomatoSoupOpen;VFX.CannedBeefMushroomStewOpen;VFX.CannedChiliBeanStewOpen;VFX.CannedIrishStewOpen;VFX.CannedPepperSteakStewOpen;VFX.CannedSteakOnionStewOpen;VFX.CannedVegetableStewOpen] mappers[CanType] mode:destroy flags[InheritFood;ItemCount;InheritCooked;InheritFoodAge],
+        }
+
+        outputs
+        {
+            item 1 mapper:CanType,
+        }
+
+        itemMapper CanType
+        {
+            VFX.BowlSavoryMince = VFX.CannedSavoryMinceOpen,
+            VFX.BowlBeefRavioli = VFX.CannedBeefRavioliOpen,
+            VFX.BowlSpinachRavioli = VFX.CannedSpinachRavioliOpen,
+            VFX.BowlSpaghettiAndMeatballs = VFX.CannedSpaghettiAndMeatballsOpen,
+            VFX.BowlSpaghetti = VFX.CannedSpaghettiOpen,
+            VFX.BowlSloppyJoe = VFX.CannedSloppyJoeOpen,
+            VFX.BowlMeatloaf = VFX.CannedMeatloafOpen,
+            VFX.BowlVegetarianChili = VFX.CannedVegetarianChiliOpen,
+            VFX.BowlRedBeansAndRice = VFX.CannedRedBeansAndRiceOpen,
+            VFX.BowlClamChowder = VFX.CannedClamChowderOpen,
+            VFX.BowlMushroomRavioli = VFX.CannedMushroomRavioliOpen,
+            VFX.BowlBroccoliCheddarSoup = VFX.CannedBroccoliCheddarSoupOpen,
+            VFX.BowlChickenNoodleSoup = VFX.CannedChickenNoodleSoupOpen,
+            VFX.BowlFrenchOnionSoup = VFX.CannedFrenchOnionSoupOpen,
+            VFX.BowlLaksaNoodleSoup = VFX.CannedLaksaNoodleSoupOpen,
+            VFX.BowlLentilSoup = VFX.CannedLentilSoupOpen,
+            VFX.BowlMinestroneSoup = VFX.CannedMinestroneSoupOpen,
+            VFX.BowlPeaHamSoup = VFX.CannedPeaHamSoupOpen,
+            VFX.BowlPotatoLeekSoup = VFX.CannedPotatoLeekSoupOpen,
+            VFX.BowlPumpkinSoup = VFX.CannedPumpkinSoupOpen,
+            VFX.BowlTomatoSoup = VFX.CannedTomatoSoupOpen,
+            VFX.BowlBeefMushroomStew = VFX.CannedBeefMushroomStewOpen,
+            VFX.BowlChiliBeanStew = VFX.CannedChiliBeanStewOpen,
+            VFX.BowlIrishStew = VFX.CannedIrishStewOpen,
+            VFX.BowlPepperSteakStew = VFX.CannedPepperSteakStewOpen,
+            VFX.BowlSteakOnionStew = VFX.CannedSteakOnionStewOpen,
+            VFX.BowlVegetableStew = VFX.CannedVegetableStewOpen,
+        }
+    }
+
+/* <<<<<  Food Storage Container  >>>>> */
+
+    craftRecipe VFX_MakeFoodContainer
+    {
+        timedAction = VFX.MixingBowl,
+        time = 10,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        ToolTip = Tooltip_Recipe_CookedPortion,
+
+        inputs
+        {
+            item 1 [VFX.FoodStorageContainer],
+            item 1 [Base.PotOfSoupRecipe;Base.BucketOfSoup;Base.PotForgedSoupRecipe;Base.PotOfSoup;Base.PotOfStew;Base.BucketOfStew;Base.PotForgedStew;Base.PanFriedVegetables;Base.GriddlePanFriedVegetables;Base.PanFriedVegetablesForged;Base.PanFriedVegetables2;Base.Salad;Base.SaladClay;Base.FruitSalad;Base.FruitSaladClay;Base.WaterSaucepanPasta;Base.PastaPan;Base.WaterSaucepanPastaCopper;Base.PastaPanCopper;Base.WaterPotPasta;Base.PastaPot;Base.WaterPotForgedPasta;Base.PastaPotForged;Base.WaterSaucepanRice;Base.RicePan;Base.WaterSaucepanRiceCopper;Base.RicePanCopper;Base.WaterPotRice;Base.RicePot;Base.WaterPotForgedRice;Base.RicePotForged;VFX.WaterSaucepanBrownRice;Base.VFXBrownRiceSaucepanEvolved;VFX.WaterSaucepanCopperBrownRice;Base.VFXBrownRiceSaucepanCopperEvolved;VFX.WaterPotBrownRice;Base.VFXBrownRicePotEvolved;VFX.WaterPotForgedBrownRice;Base.VFXBrownRicePotForgedEvolved;VFX.WaterSaucepanJasmineRice;Base.VFXJasmineRiceSaucepanEvolved;VFX.WaterSaucepanCopperJasmineRice;Base.VFXJasmineRiceSaucepanCopperEvolved;VFX.WaterPotJasmineRice;Base.VFXJasmineRicePotEvolved;VFX.WaterPotForgedJasmineRice;Base.VFXJasmineRicePotForgedEvolved;VFX.WaterSaucepanBasmatiRice;Base.VFXBasmatiRiceSaucepanEvolved;VFX.WaterSaucepanCopperBasmatiRice;Base.VFXBasmatiRiceSaucepanCopperEvolved;VFX.WaterPotBasmatiRice;Base.VFXBasmatiRicePotEvolved;VFX.WaterPotForgedBasmatiRice;Base.VFXBasmatiRicePotForgedEvolved;VFX.WaterSaucepanArborioRice;Base.VFXArborioRiceSaucepanEvolved;VFX.WaterSaucepanCopperArborioRice;Base.VFXArborioRiceSaucepanCopperEvolved;VFX.WaterPotArborioRice;Base.VFXArborioRicePotEvolved;VFX.WaterPotForgedArborioRice;Base.VFXArborioRicePotForgedEvolved;VFX.WaterSaucepanMacaroni;Base.VFXMacaroniSaucepanEvolved;VFX.WaterSaucepanCopperMacaroni;Base.VFXMacaroniSaucepanCopperEvolved;VFX.WaterPotMacaroni;Base.VFXMacaroniPotEvolved;VFX.WaterPotForgedMacaroni;Base.VFXMacaroniPotForgedEvolved;VFX.WaterSaucepanFettuccine;Base.VFXFettuccineSaucepanEvolved;VFX.WaterSaucepanCopperFettuccine;Base.VFXFettuccineSaucepanCopperEvolved;VFX.WaterPotFettuccine;Base.VFXFettuccinePotEvolved;VFX.WaterPotForgedFettuccine;Base.VFXFettuccinePotForgedEvolved;VFX.WaterSaucepanPenne;Base.VFXPenneSaucepanEvolved;VFX.WaterSaucepanCopperPenne;Base.VFXPenneSaucepanCopperEvolved;VFX.WaterPotPenne;Base.VFXPennePotEvolved;VFX.WaterPotForgedPenne;Base.VFXPennePotForgedEvolved;VFX.WaterSaucepanGnocchi;Base.VFXGnocchiSaucepanEvolved;VFX.WaterSaucepanCopperGnocchi;Base.VFXGnocchiSaucepanCopperEvolved;VFX.WaterPotGnocchi;Base.VFXGnocchiPotEvolved;VFX.WaterPotForgedGnocchi;Base.VFXGnocchiPotForgedEvolved;VFX.LasagnaPreparation;Base.VFXLasagnaEvolved;Base.VFXChiliSaucepanEvolved;Base.VFXChiliSaucepanCopperEvolved;Base.VFXChiliPotEvolved;Base.VFXChiliPotForgedEvolved;Base.VFXCurrySaucepanEvolved;Base.VFXCurrySaucepanCopperEvolved;Base.VFXCurryPotEvolved;Base.VFXCurryPotForgedEvolved;Base.VFXCasseroleEvolved;Base.VFXMeatloafPreparation;Base.VFXMeatloafEvolved;Base.VFXScallopedPotatoBakePreparation;Base.VFXScallopedPotatoBakeEvolved;Base.VFXFriedRicePreparation;Base.VFXFriedRiceEvolved;Base.VFXFriedRicePreparationForged;Base.VFXFriedRiceEvolvedForged] mappers[EvolvedRecipe;PotType] mode:destroy flags[InheritFood;IsCookedFoodItem;InheritFoodAge],
+        }
+
+        outputs
+        {
+            item 1 mapper:EvolvedRecipe,
+            item 1 mapper:PotType,
+        }
+
+        itemMapper EvolvedRecipe
+        {
+            VFX.FoodStorageContainerSoup = Base.PotOfSoupRecipe,
+            VFX.FoodStorageContainerSoup = Base.BucketOfSoup,
+            VFX.FoodStorageContainerSoup = Base.PotForgedSoupRecipe,
+            VFX.FoodStorageContainerSoup = Base.PotOfSoup,
+
+            VFX.FoodStorageContainerStew = Base.PotOfStew,
+            VFX.FoodStorageContainerStew = Base.BucketOfStew,
+            VFX.FoodStorageContainerStew = Base.PotForgedStew,
+
+            VFX.FoodStorageContainerStirFry = Base.PanFriedVegetables,
+            VFX.FoodStorageContainerStirFry = Base.GriddlePanFriedVegetables,
+            VFX.FoodStorageContainerStirFry = Base.PanFriedVegetablesForged,
+
+            VFX.FoodStorageContainerRoastVegetables = Base.PanFriedVegetables2,
+
+            VFX.FoodStorageContainerSalad = Base.Salad,
+            VFX.FoodStorageContainerSalad = Base.SaladClay,
+
+            VFX.FoodStorageContainerFruitSalad = Base.FruitSalad,
+            VFX.FoodStorageContainerFruitSalad = Base.FruitSaladClay,
+
+            VFX.FoodStorageContainerSpaghetti = Base.WaterSaucepanPasta,
+            VFX.FoodStorageContainerSpaghetti = Base.PastaPan,
+            VFX.FoodStorageContainerSpaghetti = Base.WaterSaucepanPastaCopper,
+            VFX.FoodStorageContainerSpaghetti = Base.PastaPanCopper,
+            VFX.FoodStorageContainerSpaghetti = Base.WaterPotPasta,
+            VFX.FoodStorageContainerSpaghetti = Base.PastaPot,
+            VFX.FoodStorageContainerSpaghetti = Base.WaterPotForgedPasta,
+            VFX.FoodStorageContainerSpaghetti = Base.PastaPotForged,
+
+            VFX.FoodStorageContainerRice = Base.WaterSaucepanRice,
+            VFX.FoodStorageContainerRice = Base.RicePan,
+            VFX.FoodStorageContainerRice = Base.WaterSaucepanRiceCopper,
+            VFX.FoodStorageContainerRice = Base.RicePanCopper,
+            VFX.FoodStorageContainerRice = Base.WaterPotRice,
+            VFX.FoodStorageContainerRice = Base.RicePot,
+            VFX.FoodStorageContainerRice = Base.WaterPotForgedRice,
+            VFX.FoodStorageContainerRice = Base.RicePotForged,
+
+            VFX.FoodStorageContainerBrownRice = VFX.WaterSaucepanBrownRice,
+            VFX.FoodStorageContainerBrownRice = Base.VFXBrownRiceSaucepanEvolved,
+            VFX.FoodStorageContainerBrownRice = VFX.WaterSaucepanCopperBrownRice,
+            VFX.FoodStorageContainerBrownRice = Base.VFXBrownRiceSaucepanCopperEvolved,
+            VFX.FoodStorageContainerBrownRice = VFX.WaterPotBrownRice,
+            VFX.FoodStorageContainerBrownRice = Base.VFXBrownRicePotEvolved,
+            VFX.FoodStorageContainerBrownRice = VFX.WaterPotForgedBrownRice,
+            VFX.FoodStorageContainerBrownRice = Base.VFXBrownRicePotForgedEvolved,
+
+            VFX.FoodStorageContainerJasmineRice = VFX.WaterSaucepanJasmineRice,
+            VFX.FoodStorageContainerJasmineRice = Base.VFXJasmineRiceSaucepanEvolved,
+            VFX.FoodStorageContainerJasmineRice = VFX.WaterSaucepanCopperJasmineRice,
+            VFX.FoodStorageContainerJasmineRice = Base.VFXJasmineRiceSaucepanCopperEvolved,
+            VFX.FoodStorageContainerJasmineRice = VFX.WaterPotJasmineRice,
+            VFX.FoodStorageContainerJasmineRice = Base.VFXJasmineRicePotEvolved,
+            VFX.FoodStorageContainerJasmineRice = VFX.WaterPotForgedJasmineRice,
+            VFX.FoodStorageContainerJasmineRice = Base.VFXJasmineRicePotForgedEvolved,
+
+            VFX.FoodStorageContainerBasmatiRice = VFX.WaterSaucepanBasmatiRice,
+            VFX.FoodStorageContainerBasmatiRice = Base.VFXBasmatiRiceSaucepanEvolved,
+            VFX.FoodStorageContainerBasmatiRice = VFX.WaterSaucepanCopperBasmatiRice,
+            VFX.FoodStorageContainerBasmatiRice = Base.VFXBasmatiRiceSaucepanCopperEvolved,
+            VFX.FoodStorageContainerBasmatiRice = VFX.WaterPotBasmatiRice,
+            VFX.FoodStorageContainerBasmatiRice = Base.VFXBasmatiRicePotEvolved,
+            VFX.FoodStorageContainerBasmatiRice = VFX.WaterPotForgedBasmatiRice,
+            VFX.FoodStorageContainerBasmatiRice = Base.VFXBasmatiRicePotForgedEvolved,
+
+            VFX.FoodStorageContainerArborioRice = VFX.WaterSaucepanArborioRice,
+            VFX.FoodStorageContainerArborioRice = Base.VFXArborioRiceSaucepanEvolved,
+            VFX.FoodStorageContainerArborioRice = VFX.WaterSaucepanCopperArborioRice,
+            VFX.FoodStorageContainerArborioRice = Base.VFXArborioRiceSaucepanCopperEvolved,
+            VFX.FoodStorageContainerArborioRice = VFX.WaterPotArborioRice,
+            VFX.FoodStorageContainerArborioRice = Base.VFXArborioRicePotEvolved,
+            VFX.FoodStorageContainerArborioRice = VFX.WaterPotForgedArborioRice,
+            VFX.FoodStorageContainerArborioRice = Base.VFXArborioRicePotForgedEvolved,
+
+            VFX.FoodStorageContainerMacaroni = VFX.WaterSaucepanMacaroni,
+            VFX.FoodStorageContainerMacaroni = Base.VFXMacaroniSaucepanEvolved,
+            VFX.FoodStorageContainerMacaroni = VFX.WaterSaucepanCopperMacaroni,
+            VFX.FoodStorageContainerMacaroni = Base.VFXMacaroniSaucepanCopperEvolved,
+            VFX.FoodStorageContainerMacaroni = VFX.WaterPotMacaroni,
+            VFX.FoodStorageContainerMacaroni = Base.VFXMacaroniPotEvolved,
+            VFX.FoodStorageContainerMacaroni = VFX.WaterPotForgedMacaroni,
+            VFX.FoodStorageContainerMacaroni = Base.VFXMacaroniPotForgedEvolved,
+
+            VFX.FoodStorageContainerFettuccine = VFX.WaterSaucepanFettuccine,
+            VFX.FoodStorageContainerFettuccine = Base.VFXFettuccineSaucepanEvolved,
+            VFX.FoodStorageContainerFettuccine = VFX.WaterSaucepanCopperFettuccine,
+            VFX.FoodStorageContainerFettuccine = Base.VFXFettuccineSaucepanCopperEvolved,
+            VFX.FoodStorageContainerFettuccine = VFX.WaterPotFettuccine,
+            VFX.FoodStorageContainerFettuccine = Base.VFXFettuccinePotEvolved,
+            VFX.FoodStorageContainerFettuccine = VFX.WaterPotForgedFettuccine,
+            VFX.FoodStorageContainerFettuccine = Base.VFXFettuccinePotForgedEvolved,
+
+            VFX.FoodStorageContainerPenne = VFX.WaterSaucepanPenne,
+            VFX.FoodStorageContainerPenne = Base.VFXPenneSaucepanEvolved,
+            VFX.FoodStorageContainerPenne = VFX.WaterSaucepanCopperPenne,
+            VFX.FoodStorageContainerPenne = Base.VFXPenneSaucepanCopperEvolved,
+            VFX.FoodStorageContainerPenne = VFX.WaterPotPenne,
+            VFX.FoodStorageContainerPenne = Base.VFXPennePotEvolved,
+            VFX.FoodStorageContainerPenne = VFX.WaterPotForgedPenne,
+            VFX.FoodStorageContainerPenne = Base.VFXPennePotForgedEvolved,
+
+            VFX.FoodStorageContainerGnocchi = VFX.WaterSaucepanGnocchi,
+            VFX.FoodStorageContainerGnocchi = Base.VFXGnocchiSaucepanEvolved,
+            VFX.FoodStorageContainerGnocchi = VFX.WaterSaucepanCopperGnocchi,
+            VFX.FoodStorageContainerGnocchi = Base.VFXGnocchiSaucepanCopperEvolved,
+            VFX.FoodStorageContainerGnocchi = VFX.WaterPotGnocchi,
+            VFX.FoodStorageContainerGnocchi = Base.VFXGnocchiPotEvolved,
+            VFX.FoodStorageContainerGnocchi = VFX.WaterPotForgedGnocchi,
+            VFX.FoodStorageContainerGnocchi = Base.VFXGnocchiPotForgedEvolved,
+
+            VFX.FoodStorageContainerLasagna = VFX.LasagnaPreparation,
+            VFX.FoodStorageContainerLasagna = Base.VFXLasagnaEvolved,
+
+            VFX.FoodStorageContainerChili = Base.VFXChiliSaucepanEvolved,
+            VFX.FoodStorageContainerChili = Base.VFXChiliSaucepanCopperEvolved,
+            VFX.FoodStorageContainerChili = Base.VFXChiliPotEvolved,
+            VFX.FoodStorageContainerChili = Base.VFXChiliPotForgedEvolved,
+
+            VFX.FoodStorageContainerCurry = Base.VFXCurrySaucepanEvolved,
+            VFX.FoodStorageContainerCurry = Base.VFXCurrySaucepanCopperEvolved,
+            VFX.FoodStorageContainerCurry = Base.VFXCurryPotEvolved,
+            VFX.FoodStorageContainerCurry = Base.VFXCurryPotForgedEvolved,
+
+            VFX.FoodStorageContainerCasserole = Base.VFXCasseroleEvolved,
+
+            VFX.FoodStorageContainerMeatloaf = Base.VFXMeatloafPreparation,
+            VFX.FoodStorageContainerMeatloaf = Base.VFXMeatloafEvolved,
+
+            VFX.FoodStorageContainerScallopedPotatoBake = Base.VFXScallopedPotatoBakePreparation,
+            VFX.FoodStorageContainerScallopedPotatoBake = Base.VFXScallopedPotatoBakeEvolved,
+            
+            VFX.FoodStorageContainerFriedRice = Base.VFXFriedRicePreparation,
+            VFX.FoodStorageContainerFriedRice = Base.VFXFriedRiceEvolved,
+            VFX.FoodStorageContainerFriedRice = Base.VFXFriedRicePreparationForged,
+            VFX.FoodStorageContainerFriedRice = Base.VFXFriedRiceEvolvedForged,
+        }
+
+        itemMapper PotType
+        {
+            Base.Saucepan = Base.WaterSaucepanPasta,
+            Base.Saucepan = Base.PastaPan,
+            Base.Saucepan = Base.WaterSaucepanRice,
+            Base.Saucepan = Base.RicePan,
+            Base.Saucepan = VFX.WaterSaucepanBrownRice,
+            Base.Saucepan = Base.VFXBrownRiceSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanJasmineRice,
+            Base.Saucepan = Base.VFXJasmineRiceSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanBasmatiRice,
+            Base.Saucepan = Base.VFXBasmatiRiceSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanArborioRice,
+            Base.Saucepan = Base.VFXArborioRiceSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanMacaroni,
+            Base.Saucepan = Base.VFXMacaroniSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanFettuccine,
+            Base.Saucepan = Base.VFXFettuccineSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanPenne,
+            Base.Saucepan = Base.VFXPenneSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanGnocchi,
+            Base.Saucepan = Base.VFXGnocchiSaucepanEvolved,
+            Base.Saucepan = Base.VFXChiliSaucepanEvolved,
+            Base.Saucepan = Base.VFXCurrySaucepanEvolved,
+
+            Base.SaucepanCopper = Base.WaterSaucepanPastaCopper,
+            Base.SaucepanCopper = Base.PastaPanCopper,
+            Base.SaucepanCopper = Base.WaterSaucepanRiceCopper,
+            Base.SaucepanCopper = Base.RicePanCopper,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperBrownRice,
+            Base.SaucepanCopper = Base.VFXBrownRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperJasmineRice,
+            Base.SaucepanCopper = Base.VFXJasmineRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperBasmatiRice,
+            Base.SaucepanCopper = Base.VFXBasmatiRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperArborioRice,
+            Base.SaucepanCopper = Base.VFXArborioRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperMacaroni,
+            Base.SaucepanCopper = Base.VFXMacaroniSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperFettuccine,
+            Base.SaucepanCopper = Base.VFXFettuccineSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperPenne,
+            Base.SaucepanCopper = Base.VFXPenneSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperGnocchi,
+            Base.SaucepanCopper = Base.VFXGnocchiSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXChiliSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXCurrySaucepanCopperEvolved,
+
+            Base.Pot = Base.PotOfSoupRecipe,
+            Base.Pot = Base.PotOfSoup,
+            Base.Pot = Base.PotOfStew,
+            Base.Pot = Base.WaterPotPasta,
+            Base.Pot = Base.PastaPot,
+            Base.Pot = Base.WaterPotRice,
+            Base.Pot = Base.RicePot,
+            Base.Pot = VFX.WaterPotBrownRice,
+            Base.Pot = Base.VFXBrownRicePotEvolved,
+            Base.Pot = VFX.WaterPotJasmineRice,
+            Base.Pot = Base.VFXJasmineRicePotEvolved,
+            Base.Pot = VFX.WaterPotBasmatiRice,
+            Base.Pot = Base.VFXBasmatiRicePotEvolved,
+            Base.Pot = VFX.WaterPotArborioRice,
+            Base.Pot = Base.VFXArborioRicePotEvolved,
+            Base.Pot = VFX.WaterPotMacaroni,
+            Base.Pot = Base.VFXMacaroniPotEvolved,
+            Base.Pot = VFX.WaterPotFettuccine,
+            Base.Pot = Base.VFXFettuccinePotEvolved,
+            Base.Pot = VFX.WaterPotPenne,
+            Base.Pot = Base.VFXPennePotEvolved,
+            Base.Pot = VFX.WaterPotGnocchi,
+            Base.Pot = Base.VFXGnocchiPotEvolved,
+            Base.Pot = Base.VFXChiliPotEvolved,
+            Base.Pot = Base.VFXCurryPotEvolved,
+
+            Base.PotForged = Base.PotForgedSoupRecipe,
+            Base.PotForged = Base.PotForgedStew,
+            Base.PotForged = Base.WaterPotForgedPasta,
+            Base.PotForged = Base.PastaPotForged,
+            Base.PotForged = Base.WaterPotForgedRice,
+            Base.PotForged = Base.RicePotForged,
+            Base.PotForged = VFX.WaterPotForgedBrownRice,
+            Base.PotForged = Base.VFXBrownRicePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedJasmineRice,
+            Base.PotForged = Base.VFXJasmineRicePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedBasmatiRice,
+            Base.PotForged = Base.VFXBasmatiRicePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedArborioRice,
+            Base.PotForged = Base.VFXArborioRicePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedMacaroni,
+            Base.PotForged = Base.VFXMacaroniPotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedFettuccine,
+            Base.PotForged = Base.VFXFettuccinePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedPenne,
+            Base.PotForged = Base.VFXPennePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedGnocchi,
+            Base.PotForged = Base.VFXGnocchiPotForgedEvolved,
+            Base.PotForged = Base.VFXChiliPotForgedEvolved,
+            Base.PotForged = Base.VFXCurryPotForgedEvolved,
+
+            Base.Pan = Base.PanFriedVegetables,
+            Base.Pan = Base.VFXFriedRicePreparation,
+            Base.Pan = Base.VFXFriedRiceEvolved,
+
+            Base.PanForged = Base.PanFriedVegetablesForged,
+            Base.PanForged = Base.VFXFriedRicePreparationForged,
+            Base.PanForged = Base.VFXFriedRiceEvolvedForged,
+
+            Base.GridlePan = Base.GriddlePanFriedVegetables,
+
+            Base.RoastingPan = Base.PanFriedVegetables2,
+            Base.RoastingPan = VFX.LasagnaPreparation,
+            Base.RoastingPan = Base.VFXLasagnaEvolved,
+            Base.RoastingPan = Base.VFXCasseroleEvolved,
+            Base.RoastingPan = Base.VFXMeatloafPreparation,
+            Base.RoastingPan = Base.VFXMeatloafEvolved,
+            Base.RoastingPan = Base.VFXScallopedPotatoBakePreparation,
+            Base.RoastingPan = Base.VFXScallopedPotatoBakeEvolved,
+
+            Base.Bowl = Base.Salad,
+            Base.Bowl = Base.FruitSalad,
+
+            Base.ClayBowl = Base.SaladClay,
+            Base.ClayBowl = Base.FruitSaladClay,
+
+            Base.BucketEmpty = Base.BucketOfSoup,
+            Base.BucketEmpty = Base.BucketOfStew,
+        }
+    }
+
+    craftRecipe VFX_MakeMetalFoodContainer
+    {
+        timedAction = VFX.MixingBowl,
+        time = 10,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        ToolTip = Tooltip_Recipe_CookedPortion,
+
+        inputs
+        {
+            item 1 [VFX.MetalFoodStorageContainer],
+            item 1 [Base.PotOfSoupRecipe;Base.BucketOfSoup;Base.PotForgedSoupRecipe;Base.PotOfSoup;Base.PotOfStew;Base.BucketOfStew;Base.PotForgedStew;Base.PanFriedVegetables;Base.GriddlePanFriedVegetables;Base.PanFriedVegetablesForged;Base.PanFriedVegetables2;Base.Salad;Base.SaladClay;Base.FruitSalad;Base.FruitSaladClay;Base.WaterSaucepanPasta;Base.PastaPan;Base.WaterSaucepanPastaCopper;Base.PastaPanCopper;Base.WaterPotPasta;Base.PastaPot;Base.WaterPotForgedPasta;Base.PastaPotForged;Base.WaterSaucepanRice;Base.RicePan;Base.WaterSaucepanRiceCopper;Base.RicePanCopper;Base.WaterPotRice;Base.RicePot;Base.WaterPotForgedRice;Base.RicePotForged;VFX.WaterSaucepanBrownRice;Base.VFXBrownRiceSaucepanEvolved;VFX.WaterSaucepanCopperBrownRice;Base.VFXBrownRiceSaucepanCopperEvolved;VFX.WaterPotBrownRice;Base.VFXBrownRicePotEvolved;VFX.WaterPotForgedBrownRice;Base.VFXBrownRicePotForgedEvolved;VFX.WaterSaucepanJasmineRice;Base.VFXJasmineRiceSaucepanEvolved;VFX.WaterSaucepanCopperJasmineRice;Base.VFXJasmineRiceSaucepanCopperEvolved;VFX.WaterPotJasmineRice;Base.VFXJasmineRicePotEvolved;VFX.WaterPotForgedJasmineRice;Base.VFXJasmineRicePotForgedEvolved;VFX.WaterSaucepanBasmatiRice;Base.VFXBasmatiRiceSaucepanEvolved;VFX.WaterSaucepanCopperBasmatiRice;Base.VFXBasmatiRiceSaucepanCopperEvolved;VFX.WaterPotBasmatiRice;Base.VFXBasmatiRicePotEvolved;VFX.WaterPotForgedBasmatiRice;Base.VFXBasmatiRicePotForgedEvolved;VFX.WaterSaucepanArborioRice;Base.VFXArborioRiceSaucepanEvolved;VFX.WaterSaucepanCopperArborioRice;Base.VFXArborioRiceSaucepanCopperEvolved;VFX.WaterPotArborioRice;Base.VFXArborioRicePotEvolved;VFX.WaterPotForgedArborioRice;Base.VFXArborioRicePotForgedEvolved;VFX.WaterSaucepanMacaroni;Base.VFXMacaroniSaucepanEvolved;VFX.WaterSaucepanCopperMacaroni;Base.VFXMacaroniSaucepanCopperEvolved;VFX.WaterPotMacaroni;Base.VFXMacaroniPotEvolved;VFX.WaterPotForgedMacaroni;Base.VFXMacaroniPotForgedEvolved;VFX.WaterSaucepanFettuccine;Base.VFXFettuccineSaucepanEvolved;VFX.WaterSaucepanCopperFettuccine;Base.VFXFettuccineSaucepanCopperEvolved;VFX.WaterPotFettuccine;Base.VFXFettuccinePotEvolved;VFX.WaterPotForgedFettuccine;Base.VFXFettuccinePotForgedEvolved;VFX.WaterSaucepanPenne;Base.VFXPenneSaucepanEvolved;VFX.WaterSaucepanCopperPenne;Base.VFXPenneSaucepanCopperEvolved;VFX.WaterPotPenne;Base.VFXPennePotEvolved;VFX.WaterPotForgedPenne;Base.VFXPennePotForgedEvolved;VFX.WaterSaucepanGnocchi;Base.VFXGnocchiSaucepanEvolved;VFX.WaterSaucepanCopperGnocchi;Base.VFXGnocchiSaucepanCopperEvolved;VFX.WaterPotGnocchi;Base.VFXGnocchiPotEvolved;VFX.WaterPotForgedGnocchi;Base.VFXGnocchiPotForgedEvolved;VFX.LasagnaPreparation;Base.VFXLasagnaEvolved;Base.VFXChiliSaucepanEvolved;Base.VFXChiliSaucepanCopperEvolved;Base.VFXChiliPotEvolved;Base.VFXChiliPotForgedEvolved;Base.VFXCurrySaucepanEvolved;Base.VFXCurrySaucepanCopperEvolved;Base.VFXCurryPotEvolved;Base.VFXCurryPotForgedEvolved;Base.VFXCasseroleEvolved;Base.VFXMeatloafPreparation;Base.VFXMeatloafEvolved;Base.VFXScallopedPotatoBakePreparation;Base.VFXScallopedPotatoBakeEvolved;Base.VFXFriedRicePreparation;Base.VFXFriedRiceEvolved;Base.VFXFriedRicePreparationForged;Base.VFXFriedRiceEvolvedForged] mappers[EvolvedRecipe;PotType] mode:destroy flags[InheritFood;IsCookedFoodItem;InheritFoodAge],
+        }
+
+        outputs
+        {
+            item 1 mapper:EvolvedRecipe,
+            item 1 mapper:PotType,
+        }
+
+        itemMapper EvolvedRecipe
+        {
+            VFX.FoodStorageContainerSoup = Base.PotOfSoupRecipe,
+            VFX.FoodStorageContainerSoup = Base.BucketOfSoup,
+            VFX.FoodStorageContainerSoup = Base.PotForgedSoupRecipe,
+            VFX.FoodStorageContainerSoup = Base.PotOfSoup,
+
+            VFX.FoodStorageContainerStew = Base.PotOfStew,
+            VFX.FoodStorageContainerStew = Base.BucketOfStew,
+            VFX.FoodStorageContainerStew = Base.PotForgedStew,
+
+            VFX.FoodStorageContainerStirFry = Base.PanFriedVegetables,
+            VFX.FoodStorageContainerStirFry = Base.GriddlePanFriedVegetables,
+            VFX.FoodStorageContainerStirFry = Base.PanFriedVegetablesForged,
+
+            VFX.FoodStorageContainerRoastVegetables = Base.PanFriedVegetables2,
+
+            VFX.FoodStorageContainerSalad = Base.Salad,
+            VFX.FoodStorageContainerSalad = Base.SaladClay,
+
+            VFX.FoodStorageContainerFruitSalad = Base.FruitSalad,
+            VFX.FoodStorageContainerFruitSalad = Base.FruitSaladClay,
+
+            VFX.FoodStorageContainerSpaghetti = Base.WaterSaucepanPasta,
+            VFX.FoodStorageContainerSpaghetti = Base.PastaPan,
+            VFX.FoodStorageContainerSpaghetti = Base.WaterSaucepanPastaCopper,
+            VFX.FoodStorageContainerSpaghetti = Base.PastaPanCopper,
+            VFX.FoodStorageContainerSpaghetti = Base.WaterPotPasta,
+            VFX.FoodStorageContainerSpaghetti = Base.PastaPot,
+            VFX.FoodStorageContainerSpaghetti = Base.WaterPotForgedPasta,
+            VFX.FoodStorageContainerSpaghetti = Base.PastaPotForged,
+
+            VFX.FoodStorageContainerRice = Base.WaterSaucepanRice,
+            VFX.FoodStorageContainerRice = Base.RicePan,
+            VFX.FoodStorageContainerRice = Base.WaterSaucepanRiceCopper,
+            VFX.FoodStorageContainerRice = Base.RicePanCopper,
+            VFX.FoodStorageContainerRice = Base.WaterPotRice,
+            VFX.FoodStorageContainerRice = Base.RicePot,
+            VFX.FoodStorageContainerRice = Base.WaterPotForgedRice,
+            VFX.FoodStorageContainerRice = Base.RicePotForged,
+
+            VFX.FoodStorageContainerBrownRice = VFX.WaterSaucepanBrownRice,
+            VFX.FoodStorageContainerBrownRice = Base.VFXBrownRiceSaucepanEvolved,
+            VFX.FoodStorageContainerBrownRice = VFX.WaterSaucepanCopperBrownRice,
+            VFX.FoodStorageContainerBrownRice = Base.VFXBrownRiceSaucepanCopperEvolved,
+            VFX.FoodStorageContainerBrownRice = VFX.WaterPotBrownRice,
+            VFX.FoodStorageContainerBrownRice = Base.VFXBrownRicePotEvolved,
+            VFX.FoodStorageContainerBrownRice = VFX.WaterPotForgedBrownRice,
+            VFX.FoodStorageContainerBrownRice = Base.VFXBrownRicePotForgedEvolved,
+
+            VFX.FoodStorageContainerJasmineRice = VFX.WaterSaucepanJasmineRice,
+            VFX.FoodStorageContainerJasmineRice = Base.VFXJasmineRiceSaucepanEvolved,
+            VFX.FoodStorageContainerJasmineRice = VFX.WaterSaucepanCopperJasmineRice,
+            VFX.FoodStorageContainerJasmineRice = Base.VFXJasmineRiceSaucepanCopperEvolved,
+            VFX.FoodStorageContainerJasmineRice = VFX.WaterPotJasmineRice,
+            VFX.FoodStorageContainerJasmineRice = Base.VFXJasmineRicePotEvolved,
+            VFX.FoodStorageContainerJasmineRice = VFX.WaterPotForgedJasmineRice,
+            VFX.FoodStorageContainerJasmineRice = Base.VFXJasmineRicePotForgedEvolved,
+
+            VFX.FoodStorageContainerBasmatiRice = VFX.WaterSaucepanBasmatiRice,
+            VFX.FoodStorageContainerBasmatiRice = Base.VFXBasmatiRiceSaucepanEvolved,
+            VFX.FoodStorageContainerBasmatiRice = VFX.WaterSaucepanCopperBasmatiRice,
+            VFX.FoodStorageContainerBasmatiRice = Base.VFXBasmatiRiceSaucepanCopperEvolved,
+            VFX.FoodStorageContainerBasmatiRice = VFX.WaterPotBasmatiRice,
+            VFX.FoodStorageContainerBasmatiRice = Base.VFXBasmatiRicePotEvolved,
+            VFX.FoodStorageContainerBasmatiRice = VFX.WaterPotForgedBasmatiRice,
+            VFX.FoodStorageContainerBasmatiRice = Base.VFXBasmatiRicePotForgedEvolved,
+
+            VFX.FoodStorageContainerArborioRice = VFX.WaterSaucepanArborioRice,
+            VFX.FoodStorageContainerArborioRice = Base.VFXArborioRiceSaucepanEvolved,
+            VFX.FoodStorageContainerArborioRice = VFX.WaterSaucepanCopperArborioRice,
+            VFX.FoodStorageContainerArborioRice = Base.VFXArborioRiceSaucepanCopperEvolved,
+            VFX.FoodStorageContainerArborioRice = VFX.WaterPotArborioRice,
+            VFX.FoodStorageContainerArborioRice = Base.VFXArborioRicePotEvolved,
+            VFX.FoodStorageContainerArborioRice = VFX.WaterPotForgedArborioRice,
+            VFX.FoodStorageContainerArborioRice = Base.VFXArborioRicePotForgedEvolved,
+
+            VFX.FoodStorageContainerMacaroni = VFX.WaterSaucepanMacaroni,
+            VFX.FoodStorageContainerMacaroni = Base.VFXMacaroniSaucepanEvolved,
+            VFX.FoodStorageContainerMacaroni = VFX.WaterSaucepanCopperMacaroni,
+            VFX.FoodStorageContainerMacaroni = Base.VFXMacaroniSaucepanCopperEvolved,
+            VFX.FoodStorageContainerMacaroni = VFX.WaterPotMacaroni,
+            VFX.FoodStorageContainerMacaroni = Base.VFXMacaroniPotEvolved,
+            VFX.FoodStorageContainerMacaroni = VFX.WaterPotForgedMacaroni,
+            VFX.FoodStorageContainerMacaroni = Base.VFXMacaroniPotForgedEvolved,
+
+            VFX.FoodStorageContainerFettuccine = VFX.WaterSaucepanFettuccine,
+            VFX.FoodStorageContainerFettuccine = Base.VFXFettuccineSaucepanEvolved,
+            VFX.FoodStorageContainerFettuccine = VFX.WaterSaucepanCopperFettuccine,
+            VFX.FoodStorageContainerFettuccine = Base.VFXFettuccineSaucepanCopperEvolved,
+            VFX.FoodStorageContainerFettuccine = VFX.WaterPotFettuccine,
+            VFX.FoodStorageContainerFettuccine = Base.VFXFettuccinePotEvolved,
+            VFX.FoodStorageContainerFettuccine = VFX.WaterPotForgedFettuccine,
+            VFX.FoodStorageContainerFettuccine = Base.VFXFettuccinePotForgedEvolved,
+
+            VFX.FoodStorageContainerPenne = VFX.WaterSaucepanPenne,
+            VFX.FoodStorageContainerPenne = Base.VFXPenneSaucepanEvolved,
+            VFX.FoodStorageContainerPenne = VFX.WaterSaucepanCopperPenne,
+            VFX.FoodStorageContainerPenne = Base.VFXPenneSaucepanCopperEvolved,
+            VFX.FoodStorageContainerPenne = VFX.WaterPotPenne,
+            VFX.FoodStorageContainerPenne = Base.VFXPennePotEvolved,
+            VFX.FoodStorageContainerPenne = VFX.WaterPotForgedPenne,
+            VFX.FoodStorageContainerPenne = Base.VFXPennePotForgedEvolved,
+
+            VFX.FoodStorageContainerGnocchi = VFX.WaterSaucepanGnocchi,
+            VFX.FoodStorageContainerGnocchi = Base.VFXGnocchiSaucepanEvolved,
+            VFX.FoodStorageContainerGnocchi = VFX.WaterSaucepanCopperGnocchi,
+            VFX.FoodStorageContainerGnocchi = Base.VFXGnocchiSaucepanCopperEvolved,
+            VFX.FoodStorageContainerGnocchi = VFX.WaterPotGnocchi,
+            VFX.FoodStorageContainerGnocchi = Base.VFXGnocchiPotEvolved,
+            VFX.FoodStorageContainerGnocchi = VFX.WaterPotForgedGnocchi,
+            VFX.FoodStorageContainerGnocchi = Base.VFXGnocchiPotForgedEvolved,
+
+            VFX.FoodStorageContainerLasagna = VFX.LasagnaPreparation,
+            VFX.FoodStorageContainerLasagna = Base.VFXLasagnaEvolved,
+
+            VFX.FoodStorageContainerChili = Base.VFXChiliSaucepanEvolved,
+            VFX.FoodStorageContainerChili = Base.VFXChiliSaucepanCopperEvolved,
+            VFX.FoodStorageContainerChili = Base.VFXChiliPotEvolved,
+            VFX.FoodStorageContainerChili = Base.VFXChiliPotForgedEvolved,
+
+            VFX.FoodStorageContainerCurry = Base.VFXCurrySaucepanEvolved,
+            VFX.FoodStorageContainerCurry = Base.VFXCurrySaucepanCopperEvolved,
+            VFX.FoodStorageContainerCurry = Base.VFXCurryPotEvolved,
+            VFX.FoodStorageContainerCurry = Base.VFXCurryPotForgedEvolved,
+
+            VFX.FoodStorageContainerCasserole = Base.VFXCasseroleEvolved,
+
+            VFX.FoodStorageContainerMeatloaf = Base.VFXMeatloafPreparation,
+            VFX.FoodStorageContainerMeatloaf = Base.VFXMeatloafEvolved,
+
+            VFX.FoodStorageContainerScallopedPotatoBake = Base.VFXScallopedPotatoBakePreparation,
+            VFX.FoodStorageContainerScallopedPotatoBake = Base.VFXScallopedPotatoBakeEvolved,
+            
+            VFX.FoodStorageContainerFriedRice = Base.VFXFriedRicePreparation,
+            VFX.FoodStorageContainerFriedRice = Base.VFXFriedRiceEvolved,
+            VFX.FoodStorageContainerFriedRice = Base.VFXFriedRicePreparationForged,
+            VFX.FoodStorageContainerFriedRice = Base.VFXFriedRiceEvolvedForged,
+        }
+
+        itemMapper PotType
+        {
+            Base.Saucepan = Base.WaterSaucepanPasta,
+            Base.Saucepan = Base.PastaPan,
+            Base.Saucepan = Base.WaterSaucepanRice,
+            Base.Saucepan = Base.RicePan,
+            Base.Saucepan = VFX.WaterSaucepanBrownRice,
+            Base.Saucepan = Base.VFXBrownRiceSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanJasmineRice,
+            Base.Saucepan = Base.VFXJasmineRiceSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanBasmatiRice,
+            Base.Saucepan = Base.VFXBasmatiRiceSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanArborioRice,
+            Base.Saucepan = Base.VFXArborioRiceSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanMacaroni,
+            Base.Saucepan = Base.VFXMacaroniSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanFettuccine,
+            Base.Saucepan = Base.VFXFettuccineSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanPenne,
+            Base.Saucepan = Base.VFXPenneSaucepanEvolved,
+            Base.Saucepan = VFX.WaterSaucepanGnocchi,
+            Base.Saucepan = Base.VFXGnocchiSaucepanEvolved,
+            Base.Saucepan = Base.VFXChiliSaucepanEvolved,
+            Base.Saucepan = Base.VFXCurrySaucepanEvolved,
+
+            Base.SaucepanCopper = Base.WaterSaucepanPastaCopper,
+            Base.SaucepanCopper = Base.PastaPanCopper,
+            Base.SaucepanCopper = Base.WaterSaucepanRiceCopper,
+            Base.SaucepanCopper = Base.RicePanCopper,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperBrownRice,
+            Base.SaucepanCopper = Base.VFXBrownRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperJasmineRice,
+            Base.SaucepanCopper = Base.VFXJasmineRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperBasmatiRice,
+            Base.SaucepanCopper = Base.VFXBasmatiRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperArborioRice,
+            Base.SaucepanCopper = Base.VFXArborioRiceSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperMacaroni,
+            Base.SaucepanCopper = Base.VFXMacaroniSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperFettuccine,
+            Base.SaucepanCopper = Base.VFXFettuccineSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperPenne,
+            Base.SaucepanCopper = Base.VFXPenneSaucepanCopperEvolved,
+            Base.SaucepanCopper = VFX.WaterSaucepanCopperGnocchi,
+            Base.SaucepanCopper = Base.VFXGnocchiSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXChiliSaucepanCopperEvolved,
+            Base.SaucepanCopper = Base.VFXCurrySaucepanCopperEvolved,
+
+            Base.Pot = Base.PotOfSoupRecipe,
+            Base.Pot = Base.PotOfSoup,
+            Base.Pot = Base.PotOfStew,
+            Base.Pot = Base.WaterPotPasta,
+            Base.Pot = Base.PastaPot,
+            Base.Pot = Base.WaterPotRice,
+            Base.Pot = Base.RicePot,
+            Base.Pot = VFX.WaterPotBrownRice,
+            Base.Pot = Base.VFXBrownRicePotEvolved,
+            Base.Pot = VFX.WaterPotJasmineRice,
+            Base.Pot = Base.VFXJasmineRicePotEvolved,
+            Base.Pot = VFX.WaterPotBasmatiRice,
+            Base.Pot = Base.VFXBasmatiRicePotEvolved,
+            Base.Pot = VFX.WaterPotArborioRice,
+            Base.Pot = Base.VFXArborioRicePotEvolved,
+            Base.Pot = VFX.WaterPotMacaroni,
+            Base.Pot = Base.VFXMacaroniPotEvolved,
+            Base.Pot = VFX.WaterPotFettuccine,
+            Base.Pot = Base.VFXFettuccinePotEvolved,
+            Base.Pot = VFX.WaterPotPenne,
+            Base.Pot = Base.VFXPennePotEvolved,
+            Base.Pot = VFX.WaterPotGnocchi,
+            Base.Pot = Base.VFXGnocchiPotEvolved,
+            Base.Pot = Base.VFXChiliPotEvolved,
+            Base.Pot = Base.VFXCurryPotEvolved,
+
+            Base.PotForged = Base.PotForgedSoupRecipe,
+            Base.PotForged = Base.PotForgedStew,
+            Base.PotForged = Base.WaterPotForgedPasta,
+            Base.PotForged = Base.PastaPotForged,
+            Base.PotForged = Base.WaterPotForgedRice,
+            Base.PotForged = Base.RicePotForged,
+            Base.PotForged = VFX.WaterPotForgedBrownRice,
+            Base.PotForged = Base.VFXBrownRicePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedJasmineRice,
+            Base.PotForged = Base.VFXJasmineRicePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedBasmatiRice,
+            Base.PotForged = Base.VFXBasmatiRicePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedArborioRice,
+            Base.PotForged = Base.VFXArborioRicePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedMacaroni,
+            Base.PotForged = Base.VFXMacaroniPotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedFettuccine,
+            Base.PotForged = Base.VFXFettuccinePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedPenne,
+            Base.PotForged = Base.VFXPennePotForgedEvolved,
+            Base.PotForged = VFX.WaterPotForgedGnocchi,
+            Base.PotForged = Base.VFXGnocchiPotForgedEvolved,
+            Base.PotForged = Base.VFXChiliPotForgedEvolved,
+            Base.PotForged = Base.VFXCurryPotForgedEvolved,
+
+            Base.Pan = Base.PanFriedVegetables,
+            Base.Pan = Base.VFXFriedRicePreparation,
+            Base.Pan = Base.VFXFriedRiceEvolved,
+
+            Base.PanForged = Base.PanFriedVegetablesForged,
+            Base.PanForged = Base.VFXFriedRicePreparationForged,
+            Base.PanForged = Base.VFXFriedRiceEvolvedForged,
+
+            Base.GridlePan = Base.GriddlePanFriedVegetables,
+
+            Base.RoastingPan = Base.PanFriedVegetables2,
+            Base.RoastingPan = VFX.LasagnaPreparation,
+            Base.RoastingPan = Base.VFXLasagnaEvolved,
+            Base.RoastingPan = Base.VFXCasseroleEvolved,
+            Base.RoastingPan = Base.VFXMeatloafPreparation,
+            Base.RoastingPan = Base.VFXMeatloafEvolved,
+            Base.RoastingPan = Base.VFXScallopedPotatoBakePreparation,
+            Base.RoastingPan = Base.VFXScallopedPotatoBakeEvolved,
+
+            Base.Bowl = Base.Salad,
+            Base.Bowl = Base.FruitSalad,
+
+            Base.ClayBowl = Base.SaladClay,
+            Base.ClayBowl = Base.FruitSaladClay,
+
+            Base.BucketEmpty = Base.BucketOfSoup,
+            Base.BucketEmpty = Base.BucketOfStew,
+        }
+
+    }   
+
+}

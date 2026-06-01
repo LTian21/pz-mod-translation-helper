@@ -1,0 +1,894 @@
+module Base
+{
+
+/* <<<<<  Heavy Cream  >>>>> */
+
+    craftRecipe VFX_MakeHeavyCream
+    {
+        timedAction = MixingBowl,
+        time = 240,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:3,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [VFX.SmallJar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy flags[ItemCount],
+            item 15 [Base.Butter],
+            item 1 [*],
+            -fluid 0.25 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.HeavyCreamHomemade,
+        }
+    }
+
+/* <<<<<  Sour Cream  >>>>> */
+
+    craftRecipe VFX_MakeSourCream
+    {
+        timedAction = MixingBowl,
+        time = 120,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:4,
+        xpAward = Cooking:3,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+        
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [VFX.SmallJar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy flags[ItemCount],
+            item 6 [VFX.HeavyCream;VFX.HeavyCreamHomemade],
+            item 1 [Base.Vinegar2;Base.Vinegar_Jug;VFX.LemonJuice;VFX.CulturedButtermilk],
+        }
+        
+        outputs
+        {
+            item 1 VFX.SourCreamHomemade,
+        }
+    }
+
+/* <<<<<  Evaporated Milk  >>>>> */
+
+    craftRecipe VFX_MakeEvaporatedMilkPreparation
+    {
+        timedAction = VFX.PotCooking,
+        time = 15,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:1,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+    
+        inputs
+        {
+            item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            item 1 [*],
+            -fluid 1.5 [CowMilk],
+        }
+    
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+    
+        itemMapper potType
+        {
+            VFX.EvaporatedMilkPreparationPot = Base.Pot,
+            VFX.EvaporatedMilkPreparationPotForged = Base.PotForged,
+        }
+    }
+    
+    craftRecipe VFX_GetEvaporatedMilk
+    {
+        timedAction = VFX.PotCooking,
+        time = 15,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+    
+        inputs
+        {
+            item 1 [VFX.EvaporatedMilkPot;VFX.EvaporatedMilkPotForged] mappers[potType] mode:destroy flags[ItemCount;InheritCondition;InheritFood;InheritFoodAge],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+        }
+    
+        outputs
+        {
+            item 1 VFX.EvaporatedMilkHomemade,
+            item 1 mapper:potType,
+        }
+    
+        itemMapper potType
+        {
+            Base.Pot = VFX.EvaporatedMilkPot,
+            Base.PotForged = VFX.EvaporatedMilkPotForged,
+        }
+    }
+
+/* <<<<<  Buttermilk  >>>>> */
+
+    craftRecipe VFX_MakeCulturedButtermilk
+    {
+        timedAction = MixingBowl,
+        time = 60,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:3,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1 tags[VFX:StarterMesophilic],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+            item 1 [*],
+            -fluid 1.0 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.CulturedButtermilk,
+        }
+    }
+
+/* <<<<<  Yogurt  >>>>> */
+
+    craftRecipe VFX_MakeYogurtPreparation
+    {
+        timedAction = VFX.PotCooking,
+        time = 15,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:5,
+        xpAward = Cooking:3,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.Saucepan;Base.SaucepanCopper] mappers[panType] mode:destroy flags[InheritCondition],
+            item 1 [*],
+            -fluid 0.6 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:panType,
+        }
+
+        itemMapper panType
+        {
+            VFX.YogurtPreparationPan = Base.Saucepan,
+            VFX.YogurtPreparationPanCopper = Base.SaucepanCopper,
+        }
+    }
+    
+    craftRecipe VFX_MakeYogurt
+    {
+        timedAction = VFX.PotCooking,
+        time = 60,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1 tags[VFX:StarterThermophilic],
+            item 1 [VFX.YogurtPreparationPan;VFX.YogurtPreparationPanCopper] mappers[panType] flags[InheritFood;IsCookedFoodItem;ItemCount;InheritCondition],
+            item 1 tags[base:jar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy,
+        }
+
+        outputs
+        {
+            item 1 VFX.YogurtHomemade,
+            item 1 mapper:panType,
+        }
+
+        itemMapper panType
+        {
+            Base.Saucepan = VFX.YogurtPreparationPan,
+            Base.SaucepanCopper = VFX.YogurtPreparationPanCopper,
+        }
+    }
+
+    craftRecipe VFX_MakeGreekYogurt
+    {
+        timedAction = MixingBowl,
+        time = 60,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:1,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+
+        inputs
+        {
+            item 1 [VFX.YogurtHomemade] mode:destroy flags[ItemCount;InheritFoodAge;InheritFood],
+            item 1 [Base.RippedSheets;Base.CheeseCloth] mode:keep,
+        }
+
+        outputs
+        {
+            item 1 VFX.GreekYogurtHomemade,
+        }
+    }
+
+/* <<<<<  Ice Cream  >>>>> */
+
+    craftRecipe VFX_MakeIceCream
+    {
+        timedAction = MixingBowl,
+        time = 180,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:5,
+        xpAward = Cooking:3,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Pot;Base.PotForged] mode:keep,
+            item 12 [VFX.HeavyCream;VFX.HeavyCreamHomemade],
+            item 7  tags[vfx:evaporatedmilk],
+            item 1  tags[base:salt],
+            item 20 tags[base:sugar],
+            item 1  tags[base:jar] mode:destroy flags[ItemCount],
+            item 1  [Base.JarLid] mode:destroy,
+        }
+
+        outputs
+        {
+            item 1 VFX.IcecreamHomemade,
+        }
+    }
+
+/* <<<<<  Cheese - Actions  >>>>> */
+
+    craftRecipe VFX_CutCheeseWheeel
+    {
+        timedAction = SliceFood_Surface,
+        time = 30,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        OnCreate = VFX_CutCheeseWheel,
+
+        inputs
+        {
+            item 1 tags[base:sharpknife] mode:keep flags[MayDegradeVeryLight],
+            item 1 [VFX.WheelSwissCheeseHomemade;VFX.WheelParmesanCheeseHomemade;VFX.WheelBlueCheeseHomemade;VFX.WheelCheddarCheeseHomemade] mappers[CheeseType] mode:destroy flags[InheritFoodAge;ItemCount],
+        }
+
+        outputs
+        {
+            item 5 mapper:CheeseType,
+        }
+
+        itemMapper CheeseType
+        {
+            VFX.SwissCheeseHomemade = VFX.WheelSwissCheeseHomemade,
+            VFX.ParmesanCheeseHomemade = VFX.WheelParmesanCheeseHomemade,
+            VFX.BlueCheeseHomemade = VFX.WheelBlueCheeseHomemade,
+            VFX.CheddarCheeseHomemade = VFX.WheelCheddarCheeseHomemade,
+        }
+    }
+
+/* <<<<<  Cheese - Cottage and Cream  >>>>> */
+
+    craftRecipe VFX_MakeCottageCheesePreparation
+    {
+        timedAction = VFX.PotCooking,
+        time = 30,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:5,
+        xpAward = Cooking:3,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            item 1 [Base.Vinegar2;Base.Vinegar_Jug;VFX.LemonJuice;VFX.CulturedButtermilk],
+            item 1 tags[base:salt],
+            item 1 [*],
+            -fluid 1.0 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            VFX.CottageCheesePreparationPot = Base.Pot,
+            VFX.CottageCheesePreparationPotForged = Base.PotForged,
+        }
+    }
+
+    craftRecipe VFX_StrainCottageCheese
+    {
+        timedAction = VFX.PotCooking,
+        time = 60,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+
+
+        inputs
+        {
+            item 1 [VFX.CottageCheeseCurdPot;VFX.CottageCheeseCurdPotForged] mappers[cheeseType;potType] flags[InheritFood;ItemCount;InheritCondition;InheritFoodAge],
+            item 1 [Base.Strainer] mode:keep,
+            item 1 [Base.RippedSheets;Base.CheeseCloth] mode:keep,
+            item 1 [VFX.SmallJar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy flags[ItemCount],
+        }
+
+        outputs
+        {
+            item 1 mapper:cheeseType,
+            item 1 mapper:potType,
+        }
+
+        itemMapper cheeseType
+        {
+            VFX.CottageCheeseHomemade = VFX.CottageCheeseCurdPot,
+            VFX.CottageCheeseHomemade = VFX.CottageCheeseCurdPotForged,
+        }
+        
+        itemMapper potType
+        {
+            Base.Pot = VFX.CottageCheeseCurdPot,
+            Base.PotForged = VFX.CottageCheeseCurdPotForged,
+        }
+    }
+    
+    craftRecipe VFX_MakeCreamCheese
+    {
+        timedAction = VFX.MixingBowl,
+        time = 30,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:6,
+        xpAward = Cooking:5,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1 [Base.Strainer] mode:keep,
+            item 1 [Base.RippedSheets;Base.CheeseCloth] mode:keep,
+            item 1 [VFX.SmallJar] mode:destroy flags[ItemCount],
+            item 1 [Base.JarLid] mode:destroy flags[ItemCount],
+            item 10 [VFX.HeavyCream;VFX.HeavyCreamHomemade],
+            item 1 tags[base:salt],
+            item 1 tags[VFX:StarterMesophilic],
+        }
+
+        outputs
+        {
+            item 1 VFX.CreamCheeseHomemade,
+        }
+    }
+
+/* <<<<<  Cheese - French  >>>>> */
+
+    craftRecipe VFX_MakeFrenchCheeseCurds
+    {
+        timedAction = VFX.PotCooking,
+        time = 30,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:6,
+        xpAward = Cooking:5,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            item 1 tags[VFX:StarterFrench],
+            item 1 [VFX.Rennet],
+            item 1 [*],
+            -fluid 1.5 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            VFX.FrenchCheeseCurdsPot = Base.Pot,
+            VFX.FrenchCheeseCurdsPotForged = Base.PotForged,
+        }
+    }
+    
+    craftRecipe VFX_PressBrieCheese
+    {
+        timedAction = MixingBowl,
+        time = 120,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [VFX.FrenchCheeseCurdsPot;VFX.FrenchCheeseCurdsPotForged] mappers[potType] flags[ItemCount;InheritCondition],
+            item 1 [VFX.WoodenCheeseMold] mode:keep,
+            item 1 tags[base:dullknife;base:sharpknife] mode:keep,
+            item 1 tags[base:salt],
+        }
+
+        outputs
+        {
+            item 1 VFX.BrieCheeseHomemade,
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = VFX.FrenchCheeseCurdsPot,
+            Base.PotForged = VFX.FrenchCheeseCurdsPotForged,
+        }
+    }
+    
+    craftRecipe VFX_PressCamembertCheese
+    {
+        timedAction = MixingBowl,
+        time = 120,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [VFX.FrenchCheeseCurdsPot;VFX.FrenchCheeseCurdsPotForged] mappers[potType] flags[ItemCount;InheritCondition],
+            item 1 [VFX.WoodenCheeseMold] mode:keep,
+            item 1 [Base.Ladle] mode:keep,
+            item 1 tags[base:salt],
+        }
+
+        outputs
+        {
+            item 1 VFX.CamembertCheeseHomemade,
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = VFX.FrenchCheeseCurdsPot,
+            Base.PotForged = VFX.FrenchCheeseCurdsPotForged,
+        }
+    }
+
+/* <<<<<  Cheese - Mozzarella  >>>>> */
+
+    craftRecipe VFX_PressMozzarellaCheeseCurds
+    {
+        timedAction = MixingBowl,
+        time = 60,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutritionTag,
+
+        inputs
+        { 
+            item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            item 1 tags[base:dullknife;base:sharpknife] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:mixingutensil] mode:keep,
+            item 1 [Base.Strainer] mode:keep,
+            item 1 [Base.RippedSheets;Base.CheeseCloth] mode:keep,
+            item 1 tags[VFX:StarterThermophilic],
+            item 1 [VFX.Rennet],
+            item 1 [*],
+            -fluid 1.5 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+            item 1 VFX.MozzarellaWhey,
+        }
+
+        itemMapper potType
+        {
+            VFX.MozzarellaCurdsPot = Base.Pot,
+            VFX.MozzarellaCurdsPotForged = Base.PotForged,
+        }
+    }
+    
+    craftRecipe VFX_StretchMozzarella
+    {
+        timedAction = MixingBowl,
+        time = 30,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnTest = RecipeCodeOnTest.hotFluidContainer,
+        Tooltip = Tooltip_needsToBeHot,
+
+        inputs
+        {
+            item 1 [VFX.MozzarellaCurdsPot;VFX.MozzarellaCurdsPotForged] mappers[potType] flags[InheritFood;ItemCount;InheritCondition],
+            item 1 tags[base:salt],
+            item 1 [Base.Gloves_Dish] mode:keep,
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.MozzarellaCheeseHomemade,
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = VFX.MozzarellaCurdsPot,
+            Base.PotForged = VFX.MozzarellaCurdsPotForged,
+        }
+    }
+
+/* <<<<<  Cheese - Swiss  >>>>> */
+
+    craftRecipe VFX_MakeSwissCheeseCurds
+    {
+        timedAction = VFX.PotCooking,
+        time = 45,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:5,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            item 1 tags[base:dullknife;base:sharpknife] mode:keep,
+            item 1 tags[VFX:StarterSwiss],
+            item 1 [VFX.Rennet],
+            item 1 [*],
+            -fluid 1.5 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            VFX.SwissCheeseCurdsPot = Base.Pot,
+            VFX.SwissCheeseCurdsPotForged = Base.PotForged,
+        }
+    }
+    
+    craftRecipe VFX_PressSwissCheese
+    {
+        timedAction = MixingBowl,
+        time = 180,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutritionTag,
+
+        inputs
+        {
+            item 1 [VFX.SwissCheeseCurdsPot;VFX.SwissCheeseCurdsPotForged] mappers[potType] flags[ItemCount;InheritCondition],
+            item 1 [Base.RippedSheets;Base.CheeseCloth] mode:keep,
+            item 1 [VFX.WoodenCheeseMold] mode:keep,
+            item 1 tags[base:salt],
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.WheelSwissCheeseHomemade,
+            item 1 VFX.SwissWhey,
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = VFX.SwissCheeseCurdsPot,
+            Base.PotForged = VFX.SwissCheeseCurdsPotForged,
+        }
+    }
+
+/* <<<<<  Cheese - Parmesan  >>>>> */
+
+    craftRecipe VFX_MakeParmesanCheeseCurds
+    {
+        timedAction = VFX.PotCooking,
+        time = 60,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:8,
+        xpAward = Cooking:10,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            item 1 tags[base:dullknife;base:sharpknife] mode:keep,
+            item 1 tags[VFX:StarterParmesan],
+            item 1 [VFX.Rennet],
+            item 1 [*],
+            -fluid 1.5 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            VFX.ParmesanCheeseCurdsPot = Base.Pot,
+            VFX.ParmesanCheeseCurdsPotForged = Base.PotForged,
+        }
+    }
+    
+    craftRecipe VFX_PressParmesanCheese
+    {
+        timedAction = MixingBowl,
+        time = 240,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutritionTag,
+
+        inputs
+        {
+            item 1 [VFX.ParmesanCheeseCurdsPot;VFX.ParmesanCheeseCurdsPotForged] mappers[potType] flags[ItemCount;InheritCondition],
+            item 1 [Base.Strainer] mode:keep,
+            item 1 [Base.RippedSheets;Base.CheeseCloth] mode:keep,
+            item 1 [VFX.WoodenCheeseMold] mode:keep,
+            item 1 tags[base:salt],
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.WheelParmesanCheeseHomemade,
+            item 1 VFX.ParmesanWhey,
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = VFX.ParmesanCheeseCurdsPot,
+            Base.PotForged = VFX.ParmesanCheeseCurdsPotForged,
+        }
+    }
+
+/* <<<<<  Cheese - Feta  >>>>> */
+
+    craftRecipe VFX_MakeFetaCurds
+    {
+        timedAction = VFX.PotCooking,
+        time = 45,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:5,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            item 1 tags[base:dullknife;base:sharpknife] mode:keep,
+            item 1 tags[VFX:StarterMesophilic],
+            item 1 [VFX.Rennet],
+            item 1 [*],
+            -fluid 1.5 [SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            VFX.FetaCheeseCurdsPot = Base.Pot,
+            VFX.FetaCheeseCurdsPotForged = Base.PotForged,
+        }
+    }
+    
+    craftRecipe VFX_PressFetaCheese
+    {
+        timedAction = MixingBowl,
+        time = 180,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutritionTag,
+
+        inputs
+        {
+            item 1 [VFX.FetaCheeseCurdsPot;VFX.FetaCheeseCurdsPotForged] mappers[potType] flags[ItemCount;InheritCondition],
+            item 1 [Base.RippedSheets;Base.CheeseCloth] mode:keep,
+            item 1 [Base.Ladle] mode:keep,
+            item 1 [VFX.WoodenCheeseMold] mode:keep,
+            item 4 tags[base:salt],
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.FetaCheeseHomemade,
+            item 1 VFX.FetaWhey,
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = VFX.FetaCheeseCurdsPot,
+            Base.PotForged = VFX.FetaCheeseCurdsPotForged,
+        }
+    }
+
+/* <<<<<  Cheese - Blue  >>>>> */
+
+    craftRecipe VFX_MakeBlueCheeseCurds
+    {
+        timedAction = VFX.PotCooking,
+        time = 45,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:8,
+        xpAward = Cooking:10,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            item 1 tags[VFX:StarterBlue],
+            item 1 [VFX.Rennet],
+            item 1 [*],
+            -fluid 1.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            VFX.BlueCheeseCurdsPot = Base.Pot,
+            VFX.BlueCheeseCurdsPotForged = Base.PotForged,
+        }
+    }
+    
+    craftRecipe VFX_PressBlueCheese
+    {
+        timedAction = MixingBowl,
+        time = 180,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [VFX.BlueCheeseCurdsPot;VFX.BlueCheeseCurdsPotForged] mappers[potType] flags[ItemCount;InheritCondition],
+            item 1 [Base.RippedSheets;Base.CheeseCloth] mode:keep,
+            item 1 [VFX.WoodenCheeseMold] mode:keep,
+            item 1 tags[base:SewingNeedle;base:Knittingneedles] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:salt],
+        }
+
+        outputs
+        {
+            item 1 VFX.WheelBlueCheeseHomemade,
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = VFX.BlueCheeseCurdsPot,
+            Base.PotForged = VFX.BlueCheeseCurdsPotForged,
+        }
+    }
+
+/* <<<<<  Cheese - Cheddar  >>>>> */
+
+    craftRecipe VFX_MakeCheddarCheeseCurds
+    {
+        timedAction = VFX.PotCooking,
+        time = 60,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:5,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Pot;Base.PotForged] mappers[potType] mode:destroy flags[InheritCondition],
+            item 1 tags[base:dullknife;base:sharpknife] mode:keep,
+            item 1 tags[VFX:StarterMesophilic],
+            item 1 [VFX.Rennet],
+            item 1 [*],
+            -fluid 1.5 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            VFX.CheddarCheeseCurdsPot = Base.Pot,
+            VFX.CheddarCheeseCurdsPotForged = Base.PotForged,
+        }
+    }
+    
+    craftRecipe VFX_PressCheddarCheese
+    {
+        timedAction = MixingBowl,
+        time = 240,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        OnCreate = VFX.TransferNutritionTag,
+
+        inputs
+        {
+            item 1 [VFX.CheddarCheeseCurdsPot;VFX.CheddarCheeseCurdsPotForged] mappers[potType] flags[ItemCount;InheritCondition],
+            item 1 [Base.RippedSheets;Base.CheeseCloth] mode:keep,
+            item 1 [VFX.WoodenCheeseMold] mode:keep,
+            item 1 tags[base:salt],
+        }
+
+        outputs
+        {
+            item 1 VFX.WheelCheddarCheeseHomemade,
+            item 1 VFX.CheddarWhey,
+            item 1 mapper:potType,
+        }
+
+        itemMapper potType
+        {
+            Base.Pot = VFX.CheddarCheeseCurdsPot,
+            Base.PotForged = VFX.CheddarCheeseCurdsPotForged,
+        }
+    }
+
+
+
+/* <<<<<  Cheese -   >>>>> */
+
+}

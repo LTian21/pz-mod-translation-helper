@@ -1,0 +1,3507 @@
+module Base
+{
+
+/* <<<<<  Baking Actions  >>>>> */
+
+    craftRecipe VFX_PutCakeInBakingPan
+    {
+        timedAction = VFX.PutInBakingPan,
+        time = 20,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.BakingPan],
+            item 1 [VFX.FrenchVanillaCakeBatter_2;VFX.CarrotCakeBatter_2;VFX.ChocolateCakeBatter_2;VFX.RedVelvetCakeBatter_2;VFX.StrawberryCakeBatter_2;VFX.CaramelCakeBatter_2;VFX.OrangePoppyseedCakeBatter_2;VFX.ConfettiCakeBatter_2;VFX.SpiceCakeBatter_2;VFX.YellowCakeBatter_2] mappers[CakeBatterType] flags[ItemCount;InheritFoodAge;Prop1],
+        }
+
+        outputs
+        {
+            item 1 mapper:CakeBatterType,
+            item 1 Base.Bowl,
+        }
+
+        itemMapper CakeBatterType
+        {
+            VFX.FrenchVanillaCakePrep = VFX.FrenchVanillaCakeBatter_2,
+            VFX.CarrotCakePrep = VFX.CarrotCakeBatter_2,
+            VFX.ChocolateCakePrep = VFX.ChocolateCakeBatter_2,
+            VFX.RedVelvetCakePrep = VFX.RedVelvetCakeBatter_2,
+            VFX.StrawberryCakePrep = VFX.StrawberryCakeBatter_2,
+            VFX.CaramelCakePrep = VFX.CaramelCakeBatter_2,
+            VFX.OrangePoppyseedCakePrep = VFX.OrangePoppyseedCakeBatter_2,
+            VFX.ConfettiCakePrep = VFX.ConfettiCakeBatter_2,
+            VFX.SpiceCakePrep = VFX.SpiceCakeBatter_2,
+            VFX.YellowCakePrep = VFX.YellowCakeBatter_2,
+        }
+    }
+
+    craftRecipe VFX_SliceCake
+    {
+        timedAction = SliceFood_Surface,
+        time = 20,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        ToolTip = Tooltip_Recipe_MustCookedGet,
+
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeLight],
+            item 1 [VFX.FrenchVanillaCakePrep;VFX.CarrotCakePrep;VFX.ChocolateCakePrep;VFX.RedVelvetCakePrep;VFX.StrawberryCakePrep;VFX.CaramelCakePrep;VFX.OrangePoppyseedCakePrep;VFX.ConfettiCakePrep;VFX.SpiceCakePrep;VFX.YellowCakePrep] mappers[CakeSliceType] flags[InheritFood;IsCookedFoodItem;InheritFoodAge;ItemCount],
+        }
+
+        outputs
+        {
+            item 5 mapper:CakeSliceType,
+            item 1 Base.BakingPan,
+        }
+
+        itemMapper CakeSliceType
+        {
+            VFX.FrenchVanillaCakeSlice = VFX.FrenchVanillaCakePrep,
+            Base.CakeCarrot = VFX.CarrotCakePrep,
+            Base.CakeChocolate = VFX.ChocolateCakePrep,
+            Base.CakeRedVelvet = VFX.RedVelvetCakePrep,
+            Base.CakeStrawberryShortcake = VFX.StrawberryCakePrep,
+            VFX.CaramelCakeSlice = VFX.CaramelCakePrep,
+            VFX.OrangePoppyseedCakeSlice = VFX.OrangePoppyseedCakePrep,
+            VFX.ConfettiCakeSlice = VFX.ConfettiCakePrep,
+            VFX.SpiceCakeSlice = VFX.SpiceCakePrep,
+            VFX.YellowCakeSlice = VFX.YellowCakePrep,
+        }
+    }
+
+    craftRecipe VFX_PrepareMuffinTray
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.MuffinTray],
+            item 1 [VFX.AppleCinnamonMuffinBatter_2;VFX.BlueberryMuffinBatter_2;VFX.ChocolateChipMuffinBatter_2;VFX.DoubleChocolateMuffinBatter_2;VFX.CornMuffinBatter_2;VFX.LemonPoppyMuffinBatter_2;VFX.BranMuffinBatter_2] mappers[MuffinPrepType] flags[InheritFoodAge],
+        }
+
+        outputs
+        {
+            item 1 mapper:MuffinPrepType,
+            item 1 Base.Bowl,
+        }
+
+        itemMapper MuffinPrepType
+        {
+            VFX.AppleCinnamonMuffinPrep = VFX.AppleCinnamonMuffinBatter_2,
+            VFX.BlueberryMuffinPrep = VFX.BlueberryMuffinBatter_2,
+            VFX.ChocolateChipMuffinPrep = VFX.ChocolateChipMuffinBatter_2,
+            VFX.DoubleChocolateMuffinPrep = VFX.DoubleChocolateMuffinBatter_2,
+            VFX.CornMuffinPrep = VFX.CornMuffinBatter_2,
+            VFX.LemonPoppyMuffinPrep = VFX.LemonPoppyMuffinBatter_2,
+            VFX.BranMuffinPrep = VFX.BranMuffinBatter_2,
+        }
+    }
+
+    craftRecipe VFX_GetMuffinsFromTray
+    {
+        timedAction = VFX.Unpacking,
+        time = 60,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        ToolTip = Tooltip_Recipe_MustCookedGet,
+
+        inputs
+        {
+            item 1 [VFX.AppleCinnamonMuffinPrep;VFX.BlueberryMuffinPrep;VFX.ChocolateChipMuffinPrep;VFX.DoubleChocolateMuffinPrep;VFX.CornMuffinPrep;VFX.LemonPoppyMuffinPrep;VFX.BranMuffinPrep] mappers[MuffinType] flags[InheritFood;IsCookedFoodItem;InheritFoodAge;ItemCount;Prop2],
+        }
+
+        outputs
+        {
+            item 6 mapper:MuffinType,
+            item 1 Base.MuffinTray,
+        }
+
+        itemMapper MuffinType
+        {
+            VFX.AppleCinnamonMuffin = VFX.AppleCinnamonMuffinPrep,
+            VFX.BlueberryMuffin = VFX.BlueberryMuffinPrep,
+            VFX.ChocolateChipMuffin = VFX.ChocolateChipMuffinPrep,
+            VFX.DoubleChocolateMuffin = VFX.DoubleChocolateMuffinPrep,
+            VFX.CornMuffin = VFX.CornMuffinPrep,
+            VFX.LemonPoppyMuffin = VFX.LemonPoppyMuffinPrep,
+            VFX.BranMuffin = VFX.BranMuffinPrep,
+        }
+    }
+
+    craftRecipe VFX_PrepareBrownieTray
+    {
+        timedAction = VFX.BrowniesPourInTray,
+        time = 60,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.BakingTray],
+            item 1 [VFX.BrownieBatter_2] flags[InheritFoodAge],
+        }
+
+        outputs
+        {
+            item 1 VFX.BrowniePrep,
+            item 1 Base.Bowl,
+        }
+    }
+
+    craftRecipe VFX_GetBrowniesFromTray
+    {
+        timedAction = VFX.TakeBrownies,
+        time = 60,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        ToolTip = Tooltip_Recipe_MustCookedGet,
+
+        inputs
+        {
+            item 1 [VFX.BrowniePrep] flags[InheritFood;IsCookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeLight],
+        }
+
+        outputs
+        {
+            item 6 VFX.Brownie,
+            item 1 Base.BakingTray,
+        }
+    }
+
+    craftRecipe VFX_Get6Cookies
+    {
+        timedAction = VFX.TakeCookies,
+        time = 60,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+        ToolTip = Tooltip_Recipe_MustCookedGet,
+
+        inputs
+        {
+            item 1 [VFX.PeanutButterCookieDough;VFX.GingerbreadCookieDough;VFX.SnickerdoodleCookieDough] mappers[CookieType] flags[InheritFood;IsCookedFoodItem;InheritFoodAge;ItemCount],
+        }
+
+        outputs
+        {
+            item 6 mapper:CookieType,
+            item 1 Base.BakingTray,
+        }
+
+        itemMapper CookieType
+        {
+            VFX.CookiesPeanutButter = VFX.PeanutButterCookieDough,
+            VFX.CookiesGingerbread = VFX.GingerbreadCookieDough,
+            VFX.CookiesSnickerdoodle = VFX.SnickerdoodleCookieDough,
+        }
+    }
+
+    craftRecipe VFX_SliceDessertBread
+    {
+        timedAction = SliceFood_Surface,
+        time = 20,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        Tooltip = Tooltip_Recipe_MustCookedGet,
+
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeLight],
+            item 1 [VFX.BananaBreadPrep;VFX.PumpkinBreadPrep;VFX.ChocolateSwirlBreadPrep;VFX.CinnamonSwirlBreadPrep;VFX.CranberryBreadPrep] mappers[DessertBreadSliceType] flags[InheritFood;IsCookedFoodItem;InheritFoodAge;ItemCount],
+        }
+
+        outputs
+        {
+            item 5 mapper:DessertBreadSliceType,
+        }
+
+        itemMapper DessertBreadSliceType
+        {
+            VFX.BananaBreadSlice = VFX.BananaBreadPrep,
+            VFX.PumpkinBreadSlice = VFX.PumpkinBreadPrep,
+            VFX.ChocolateSwirlBreadSlice = VFX.ChocolateSwirlBreadPrep,
+            VFX.CinnamonSwirlBreadSlice = VFX.CinnamonSwirlBreadPrep,
+            VFX.CranberryBreadSlice = VFX.CranberryBreadPrep,
+        }
+    }
+
+    craftRecipe VFX_Get6Biscuits
+    {
+        timedAction = VFX.TakeCookies,
+        time = 60,
+        ToolTip = Tooltip_Recipe_MustCookedGet,
+        category = Cooking,
+        Tags = InHandCraft;Cooking,
+
+        inputs
+        {
+            item 1 [VFX.CheddarBiscuitPrep;VFX.HomestyleBiscuitPrep] mappers[BiscuitType] flags[InheritFood;IsCookedFoodItem;InheritFoodAge;ItemCount],
+        }
+
+        outputs
+        {
+            item 6 mapper:BiscuitType,
+            item 1 Base.BakingTray,
+        }
+
+        itemMapper BiscuitType
+        {
+            VFX.CheddarBiscuit = VFX.CheddarBiscuitPrep,
+            VFX.HomestyleBiscuit = VFX.HomestyleBiscuitPrep,
+        }
+    }
+
+    craftRecipe VFX_SliceBakingPie
+    {
+        time = 40,
+        timedAction = SliceFood_Surface,
+        tags = AnySurfaceCraft,
+        category = Cooking,
+
+        inputs
+        {
+            item 1 tags[base:sharpknife] mode:keep flags[MayDegrade],
+            item 1 [VFX.WholePieApple;VFX.WholePieCherry;VFX.WholePieBlueberry;VFX.WholePieStrawberry;VFX.WholePiePeach;VFX.WholePieMixedBerry;VFX.WholePieLemonCream;VFX.WholePieBlackberry;VFX.WholePieRaspberry;VFX.WholePiePumpkin;VFX.WholePieSweetPotato;VFX.WholePiePecan] mappers[PieType] flags[InheritCooked;InheritFood;InheritFoodAge;IsCookedFoodItem;ItemCount;Prop2] mode:destroy,
+        }
+
+        outputs
+        {
+            item 5 mapper:PieType,
+            item 1 Base.BakingPan,
+        }
+
+        itemMapper PieType
+        {
+            VFX.SlicePieApple = VFX.WholePieApple,
+            VFX.SlicePieCherry = VFX.WholePieCherry,
+            VFX.SlicePieBlueberry = VFX.WholePieBlueberry,
+            VFX.SlicePieStrawberry = VFX.WholePieStrawberry,
+            VFX.SlicePiePeach = VFX.WholePiePeach,
+            VFX.SlicePieMixedBerry = VFX.WholePieMixedBerry,
+            VFX.SlicePieLemonCream = VFX.WholePieLemonCream,
+            VFX.SlicePieBlackberry = VFX.WholePieBlackberry,
+            VFX.SlicePieRaspberry = VFX.WholePieRaspberry,
+            VFX.SlicePiePumpkin = VFX.WholePiePumpkin,
+            VFX.SlicePieSweetPotato = VFX.WholePieSweetPotato,
+            VFX.SlicePiePecan = VFX.WholePiePecan,
+        }
+    }
+
+/* <<<<<  Cake  >>>>> */
+
+    craftRecipe VFX_MakeCakeBatter
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+            item 1 [VFX.FrenchVanillaCakeMix_2;VFX.CarrotCakeMix_2;VFX.ChocolateCakeMix_2;VFX.RedVelvetCakeMix_2;VFX.StrawberryCakeMix_2;VFX.CaramelCakeMix_2;VFX.OrangePoppyseedCakeMix_2;VFX.ConfettiCakeMix_2;VFX.SpiceCakeMix_2;VFX.YellowCakeMix_2] mappers[CakeMixType] flags[ItemCount],
+            item 5 tags[base:bakingfat],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [*],
+                -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 1 mapper:CakeMixType,
+        }
+
+        itemMapper CakeMixType
+        {
+            VFX.FrenchVanillaCakeBatter_2 = VFX.FrenchVanillaCakeMix_2,
+            VFX.CarrotCakeBatter_2 = VFX.CarrotCakeMix_2,
+            VFX.ChocolateCakeBatter_2 = VFX.ChocolateCakeMix_2,
+            VFX.RedVelvetCakeBatter_2 = VFX.RedVelvetCakeMix_2,
+            VFX.StrawberryCakeBatter_2 = VFX.StrawberryCakeMix_2,
+            VFX.CaramelCakeBatter_2 = VFX.CaramelCakeMix_2,
+            VFX.OrangePoppyseedCakeBatter_2 = VFX.OrangePoppyseedCakeMix_2,
+            VFX.ConfettiCakeBatter_2 = VFX.ConfettiCakeMix_2,
+            VFX.SpiceCakeBatter_2 = VFX.SpiceCakeMix_2,
+            VFX.YellowCakeBatter_2 = VFX.YellowCakeMix_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareFrenchVanillaCake
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 8  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 10 tags[base:sugar],
+
+            item 2  [VFX.VanillaExtract],
+            item 1  [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.FrenchVanillaCakeBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareCarrotCake
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.CheeseGrater] mode:keep,
+            item 1  [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 8  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 10 tags[base:sugar],
+
+            item 1  [3:Base.Carrots;Base.CannedCarrots_Open;Bsae.CannedCarrotsOpen] flags[ItemCount;IsExclusive;InheritFoodAge],
+            item 1  [Base.Cinnamon;VFX.CinnamonSugar],
+            item 1  [VFX.Nutmeg],
+            item 1  [VFX.Allspice],
+            item 1  [VFX.Cloves],
+            item 1  [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.CarrotCakeBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareChocolateCake
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 8  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 10 tags[base:sugar],
+
+            item 10 [Base.CocoaPowder],
+            item 1 [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.ChocolateCakeBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareRedVelvetCake
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 8  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 10 tags[base:sugar],
+
+            item 15 [Base.CocoaPowder],
+            item 1 [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.RedVelvetCakeBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareStrawberryCake
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 8  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 10 tags[base:sugar],
+
+            item 16 [Base.Strewberrie;VFX.WholeStrawberries;VFX.SlicedStrawberries] flags[AllowFrozenItem;InheritFoodAge],
+            item 2  [VFX.VanillaExtract],
+            item 1  [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.StrawberryCakeBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareCaramelCake
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 8  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 10 [Base.Sugar],
+
+            item 10 [Base.SugarBrown],
+            item 2  [VFX.VanillaExtract],
+            item 1  [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.CaramelCakeBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareOrangePoppyseedCake
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.CheeseGrater] mode:keep,
+            item 1  [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 8  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 10 tags[base:sugar],
+
+            item 24 [Base.Orange],
+            item 2  [Base.PoppySeed] flags[ItemCount],
+            item 1  [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.OrangePoppyseedCakeBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareConfettiCake
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 8  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 10 tags[base:sugar],
+
+            item 2  [VFX.VanillaExtract],
+            item 5  [VFX.Sprinkles],
+            item 1  [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.ConfettiCakeBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareSpiceCake
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 8  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 10 [Base.Sugar],
+
+            item 10 [Base.SugarBrown],
+            item 2  [VFX.VanillaExtract],
+            item 1  [Base.Cinnamon;VFX.CinnamonSugar],
+            item 1  [VFX.GroundGingerBase.GingerRoot],
+            item 1  [VFX.Nutmeg],
+            item 1  [VFX.Cloves],
+            item 1  [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.SpiceCakeBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareYellowCake
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 8  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 10 tags[base:sugar],
+            
+            item 2  [VFX.VanillaExtract],
+            item 1  [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.YellowCakeBatter_2,
+        }
+    }
+
+/* <<<<<  Muffins  >>>>> */
+
+    craftRecipe VFX_MakeMuffinBatter
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+            item 1 [VFX.AppleCinnamonMuffinMix_2;VFX.BlueberryMuffinMix_2;VFX.ChocolateChipMuffinMix_2;VFX.DoubleChocolateMuffinMix_2;VFX.CornMuffinMix_2;VFX.LemonPoppyMuffinMix_2;VFX.BranMuffinMix_2] mappers[MuffinBatterType] flags[ItemCount],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [*],
+                -fluid 0.5 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:MuffinBatterType,
+        }
+
+        itemMapper MuffinBatterType
+        {
+            VFX.AppleCinnamonMuffinBatter_2 = VFX.AppleCinnamonMuffinMix_2,
+            VFX.BlueberryMuffinBatter_2 = VFX.BlueberryMuffinMix_2,
+            VFX.ChocolateChipMuffinBatter_2 = VFX.ChocolateChipMuffinMix_2,
+            VFX.DoubleChocolateMuffinBatter_2 = VFX.DoubleChocolateMuffinMix_2,
+            VFX.CornMuffinBatter_2 = VFX.CornMuffinMix_2,
+            VFX.LemonPoppyMuffinBatter_2 = VFX.LemonPoppyMuffinMix_2,
+            VFX.BranMuffinBatter_2 = VFX.BranMuffinMix_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareAppleCinnamonMuffins
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1 [Base.MuffinTray],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 6 tags[base:bakingfat],
+            item 10 tags[base:sugar],
+            item 6 tags[VFX:TraditionalFlour],
+
+            item 1 [2:Base.Apple;VFX.CannedAppleSlicesOpen;VFX.CannedApplePieFillingOpen] flags[ItemCount;IsExclusive;InheritFoodAge],
+            item 1 [Base.Cinnamon;VFX.CinnamonSugar],
+            item 1 [VFX.Nutmeg],
+            item 1 [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.AppleCinnamonMuffinBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareBlueberryMuffins
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1 [Base.MuffinTray],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 6 tags[base:bakingfat],
+            item 10 tags[base:sugar],
+            item 6 tags[VFX:TraditionalFlour],
+
+            item 1 [16:Base.BerryBlue;VFX.PunnetBlueberries;VFX.Blueberries] flags[ItemCount;IsExclusive;AllowFrozenItem;InheritFoodAge],
+            item 1 [VFX.VanillaExtract],
+            item 1 [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.BlueberryMuffinBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareChocolateChipMuffins
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1 [Base.MuffinTray],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 6 tags[base:bakingfat],
+            item 5 tags[base:sugar],
+            item 6 tags[VFX:TraditionalFlour],
+
+            item 12 [Base.ChocolateChips] flags[ItemCount],
+            item 1  [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.ChocolateChipMuffinBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareDoubleChocolateMuffins
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1 [Base.MuffinTray],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 6 tags[base:bakingfat],
+            item 5 tags[base:sugar],
+            item 6 tags[VFX:TraditionalFlour],
+
+            item 10 [Base.CocoaPowder],
+            item 1  [Base.ChocolateChips] flags[ItemCount],
+            item 1  [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.DoubleChocolateMuffinBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareCornMuffins
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1 [Base.MuffinTray],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 6 tags[base:bakingfat],
+            item 5 tags[base:sugar],
+            item 5 [Base.Cornflour2],
+            item 5 [Base.Cornmeal2],
+
+            item 1 [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.CornMuffinBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareLemonPoppyMuffins
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.CheeseGrater] mode:keep,
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1 [Base.MuffinTray],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 6 tags[base:bakingfat],
+            item 5 tags[base:sugar],
+            item 6 tags[VFX:TraditionalFlour],
+
+            item 10 [Base.Lemon],
+            item 1 [Base.PoppySeed] flags[ItemCount],
+            item 1 [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.LemonPoppyMuffinBatter_2,
+        }
+    }
+
+/* <<<<<  Brownies  >>>>> */
+
+    craftRecipe VFX_MakeBrownieBatter
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+            item 1 [VFX.BrownieMix_2] flags[ItemCount],
+            item 8 tags[base:bakingfat],
+            item 2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+        }
+
+        outputs
+        {
+            item 1 VFX.BrownieBatter_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareBrownies
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:5,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 8  tags[base:bakingfat],
+            item 15 tags[base:sugar],
+            item 15 tags[VFX:TraditionalFlour],
+            item 15 [Base.CocoaPowder],
+            item 1  [Base.ChocolateChips] flags[ItemCount],
+            item 2  [VFX.VanillaExtract],
+        }
+
+        outputs
+        {
+            item 1 VFX.BrownieBatter_2,
+        }
+    }
+
+/* <<<<<  Cookies  >>>>> */
+
+    craftRecipe VFX_MakeCookieDough
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+            item 1 [Base.BakingTray],
+            item 1 [VFX.SugarCookieMix_2;VFX.ShortbreadCookieMix_2;VFX.PeanutButterCookieMix_2;VFX.GingerbreadCookieMix_2;VFX.SnickerdoodleCookieMix_2;VFX.ChocolateChipCookieMix_2;VFX.ChocolateCookieMix_2;VFX.OatmealCookieMix_2] mappers[CookieDoughType] flags[ItemCount],
+            item 4 tags[base:bakingfat],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+        }
+
+        outputs
+        {
+            item 1 mapper:CookieDoughType,
+        }
+
+        itemMapper CookieDoughType
+        {
+            Base.CookieChocolateChipDough = VFX.ChocolateChipCookieMix_2,
+            Base.CookiesChocolateDough = VFX.ChocolateCookieMix_2,
+            Base.CookiesOatmealDough = VFX.OatmealCookieMix_2,
+            Base.CookiesSugarDough = VFX.SugarCookieMix_2,
+            Base.CookiesShortbreadDough = VFX.ShortbreadCookieMix_2,
+            VFX.PeanutButterCookieDough = VFX.PeanutButterCookieMix_2,
+            VFX.GingerbreadCookieDough = VFX.GingerbreadCookieMix_2,
+            VFX.SnickerdoodleCookieDough = VFX.SnickerdoodleCookieMix_2,
+        }
+    }
+
+    craftRecipe VFX_PreparePeanutButterCookieDough
+    {
+        timedAction = VFX.BowlMixing,
+        time = 40,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1  [Base.BakingTray],
+            item 4  tags[base:bakingfat],
+            item 10 tags[base:sugar],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1  [Base.BakingSoda],
+            item 10 tags[VFX:TraditionalFlour],
+
+            item 8  [Base.PeanutButter],
+            item 1  [*],
+                -fluid 0.3 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.PeanutButterCookieDough,
+        }
+    }
+
+    craftRecipe VFX_PrepareGingerbreadCookieDough
+    {
+        timedAction = VFX.BowlMixing,
+        time = 40,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item  1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item  1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item  1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item  1 [Base.BakingTray],
+            item  4 tags[base:bakingfat],
+            item 10 tags[base:sugar],
+            item  2 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item  1 [Base.BakingSoda],
+            item 10 tags[VFX:TraditionalFlour],
+
+            item  2 [VFX.GroundGinger;Base.GingerRoot],
+            item  1 [Base.Cinnamon;VFX.CinnamonSugar],
+            item  1 [VFX.Cloves],
+            item  1 [VFX.Nutmeg],
+            item  1 [*],
+                -fluid 0.3 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.GingerbreadCookieDough,
+        }
+    }
+
+    craftRecipe VFX_PrepareSnickerdoodleCookieDough
+    {
+        timedAction = VFX.BowlMixing,
+        time = 40,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1  [Base.BakingTray],
+            item 4  tags[base:bakingfat],
+            item 10 tags[base:sugar],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1  [Base.BakingSoda],
+            item 10 tags[VFX:TraditionalFlour],
+            
+            item 2  [Base.Cinnamon;VFX.CinnamonSugar],
+            item 1  [VFX.VanillaExtract],
+            item 1  [*],
+                -fluid 0.3 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.SnickerdoodleCookieDough,
+        }
+    }
+
+/* <<<<<  Dessert Bread  >>>>> */
+
+    craftRecipe VFX_PrepareDessertBread
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 5 tags[base:bakingfat],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1 [VFX.BananaBreadMix_2;VFX.PumpkinBreadMix_2;VFX.ChocolateSwirlBreadMix_2;VFX.CinnamonSwirlBreadMix_2;VFX.CranberryBreadMix_2] mappers[DessertBreadType] flags[ItemCount],
+            item 1 [*],
+                -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:DessertBreadType,
+        }
+
+        itemMapper DessertBreadType
+        {
+            VFX.BananaBreadPrep = VFX.BananaBreadMix_2,
+            VFX.PumpkinBreadPrep = VFX.PumpkinBreadMix_2,
+            VFX.ChocolateSwirlBreadPrep = VFX.ChocolateSwirlBreadMix_2,
+            VFX.CinnamonSwirlBreadPrep = VFX.CinnamonSwirlBreadMix_2,
+            VFX.CranberryBreadPrep = VFX.CranberryBreadMix_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareBananaBread
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:6,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1  [Base.RollingPin] mode:keep flags[MayDegrade],
+            item 10 tags[VFX:TraditionalFlour],
+            item 4  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1  tags[VFX:Yeast],
+            item 8  [Base.Sugar],
+            item 8  [Base.SugarBrown],
+            item 16 [Base.Banana;VFX.SlicedBananas] flags[InheritFoodAge],
+            item 2  [Base.Cinnamon;VFX.CinnamonSugar],
+
+            item 1  [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.BananaBreadPrep,
+        }
+    }
+
+    craftRecipe VFX_PreparePumpkinBread
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:6,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1  [Base.RollingPin] mode:keep flags[MayDegrade],
+            item 10 tags[VFX:TraditionalFlour],
+            item 4  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1  tags[VFX:Yeast],
+            item 15 tags[base:sugar],
+            item 8  [Base.Pumpkin;Base.PumpkinSliced;Base.PumpkinSmashed;VFX.CannedPumpkinPureeOpen;VFX.JarPumpkinOpen;VFX.PackagedPumpkin] flags[InheritFoodAge;AllowFrozenItem],
+            item 1  [Base.Cinnamon;VFX.CinnamonSugar],
+            item 1  [VFX.Nutmeg],
+            item 1  [VFX.Cloves],
+
+            item 1  [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.PumpkinBreadPrep,
+        }
+    }
+
+    craftRecipe VFX_PrepareChocolateSwirlBread
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:6,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1  [Base.RollingPin] mode:keep flags[MayDegrade],
+            item 10 tags[VFX:TraditionalFlour],
+            item 4  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1  tags[VFX:Yeast],
+            item 15 tags[base:sugar],
+            item 2  [VFX.VanillaExtract],
+            item 15 [VFX.CocoaPowder],
+            item 1  [Base.Chocolate;Base.ChocolateChips] flags[ItemCount],
+
+            item 1  [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.ChocolateSwirlBreadPrep,
+        }
+    }
+
+    craftRecipe VFX_PrepareCinnamonSwirlBread
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:6,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1  [Base.RollingPin] mode:keep flags[MayDegrade],
+            item 10 tags[VFX:TraditionalFlour],
+            item 4  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1  tags[VFX:Yeast],
+            item 15 tags[base:sugar],
+            item 2  [VFX.VanillaExtract],
+            item 3  [Base.Cinnamon;VFX.CinnamonSugar] flags[ItemCount],
+
+            item 1 [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.CinnamonSwirlBreadPrep,
+        }
+    }
+
+    craftRecipe VFX_PrepareCranberryBread
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        Tooltip = Tooltip_Recipe_RequireWholeEggs,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:6,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1  [Base.RollingPin] mode:keep flags[MayDegrade],
+            item 10 tags[VFX:TraditionalFlour],
+            item 4  tags[base:bakingfat],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1  tags[VFX:Yeast],
+            item 15 tags[base:sugar],
+            item 40 [VFX.Cranberries],
+            item 1  [VFX.VanillaExtract],
+
+            item 1  [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.CranberryBreadPrep,
+        }
+    }
+
+/* <<<<<  Biscuits  >>>>> */
+
+    craftRecipe VFX_PrepareBiscuits
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+            item 1 [Base.BakingTray] flags[ItemCount],
+            item 1 [VFX.CheddarBiscuitMix_2;VFX.HomestyleBiscuitMix_2] mappers[BiscuitTrayType] flags[ItemCount],
+            item 1 [*],
+                -fluid 0.3 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 mapper:BiscuitTrayType,
+        }
+
+        itemMapper BiscuitTrayType
+        {
+            VFX.CheddarBiscuitPrep = VFX.CheddarBiscuitMix_2,
+            VFX.HomestyleBiscuitPrep = VFX.HomestyleBiscuitMix_2,
+        }
+    }
+
+    craftRecipe VFX_PrepareCheddarBiscuits
+    {
+        timedAction = VFX.BowlMixing,
+        time = 40,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+            item 1  [Base.BakingTray] flags[ItemCount],
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 1  [Base.BakingSoda],
+            item 2  tags[base:sugar],
+            item 1  [Base.Salt],
+            item 4  [Base.Butter],
+            item 3  [Base.Cheese;VFX.CheddarCheeseHomemade] flags[ItemCount],
+            item 1  [*],
+                -fluid 0.3 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.CheddarBiscuitPrep,
+        }
+    }
+
+    craftRecipe VFX_PrepareHomestyleBiscuits
+    {
+        timedAction = VFX.BowlMixing,
+        time = 40,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] flags[ItemCount],
+            item 1  [Base.BakingTray] flags[ItemCount],
+            item 15 tags[VFX:TraditionalFlour],
+            item 1  [VFX.BakingPowder],
+            item 1  [Base.BakingSoda],
+            item 3  tags[base:sugar],
+            item 1  [Base.Salt],
+            item 4  [Base.Butter],
+            item 1  [*],
+                -fluid 0.3 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.HomestyleBiscuitPrep,
+        }
+    }
+
+/* <<<<<  Pudding Mix  >>>>> */
+
+    craftRecipe VFX_PreparePuddingMix
+    {
+        timedAction = VFX.BowlMixing,
+        Time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 [Base.Bowl;Base.ClayBowl],
+            item 1 [VFX.VanillaPuddingMix_2;VFX.CustardPuddingMix_2;VFX.BananaCreamPuddingMix_2;VFX.ButterscotchPuddingMix_2;VFX.PistachioPuddingMix_2;VFX.ChocolateMousseMix] mappers[PuddingType] flags[ItemCount] mode:destroy,
+            item 1 [*],
+                -fluid 0.5 [CowMilk;SheepMilk;VFX_SoyMilk],
+        }
+
+        outputs
+        {
+            item 2 mapper:PuddingType,
+        }
+
+        itemMapper PuddingType
+        {
+            VFX.BowlVanillaPudding = VFX.VanillaPuddingMix_2,
+            VFX.BowlCustardPudding = VFX.CustardPuddingMix_2,
+            VFX.BowlBananaCreamPudding = VFX.BananaCreamPuddingMix_2,
+            VFX.BowlButterscotchPudding = VFX.ButterscotchPuddingMix_2,
+            VFX.BowlPistachioPudding = VFX.PistachioPuddingMix_2,
+            VFX.BowlChocolateMousse = VFX.ChocolateMousseMix,
+        }
+    }
+
+/* <<<<<  Frosting  >>>>> */
+
+    craftRecipe VFX_PrepareCaramelFrosting
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:5,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 2  [Base.Butter],
+            item 5  [Base.SugarBrown],
+            item 10 [VFX.PowderedSugar],
+            item 1  [VFX.VanillaExtract],
+            item 1  [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.CaramelFrosting,
+        }
+    }
+
+    craftRecipe VFX_PrepareChocolateFrosting
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:5,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 2  [Base.Butter],
+            item 10 [VFX.CocoaPowder],
+            item 10 [VFX.PowderedSugar],
+            item 1  [VFX.VanillaExtract],
+            item 1  [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.ChocolateFrosting,
+        }
+    }
+
+    craftRecipe VFX_PrepareLemonFrosting
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:5,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 2  [Base.Butter],
+            item 6  [VFX.LemonJuice],
+            item 10 [VFX.PowderedSugar],
+            item 1  [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.LemonFrosting,
+        }
+    }
+
+    craftRecipe VFX_PrepareStrawberryFrosting
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:5,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 8  [Base.Strewberrie;VFX.WholeStrawberries;VFX.SlicedStrawberries] flags[AllowFrozenItem;InheritFoodAge],
+            item 2  [Base.Butter],
+            item 10 [VFX.PowderedSugar],
+            item 1  [VFX.VanillaExtract],
+            item 1  [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.StrawberryFrosting,
+        }
+    }
+
+    craftRecipe VFX_PrepareCreamCheeseFrosting
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:5,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 1  [VFX.CreamCheese;VFX.CreamCheeseHomemade] flags[ItemCount],
+            item 2  [Base.Butter],
+            item 10 [VFX.PowderedSugar],
+            item 1  [VFX.VanillaExtract],
+            item 1  [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.CreamCheeseFrosting,
+        }
+    }
+
+    craftRecipe VFX_PrepareConfettiFrosting
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:5,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 2  [Base.Butter],
+            item 10 [VFX.PowderedSugar],
+            item 1  [VFX.VanillaExtract],
+            item 1  [VFX.Sprinkles] flags[ItemCount],
+            item 1  [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.ConfettiFrosting,
+        }
+    }
+
+    craftRecipe VFX_PrepareVanillaFrosting
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:5,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1  tags[base:mixingutensil] mode:keep flags[MayDegradeLight],
+            item 1  [Base.Bowl;Base.ClayBowl] mode:keep,
+            item 2  [Base.Butter],
+            item 10 [VFX.PowderedSugar],
+            item 2  [VFX.VanillaExtract],
+            item 1  [*],
+                -fluid 0.2 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 Base.Icing,
+        }
+    }
+
+/* <<<<<  Pies  >>>>> */
+
+    craftRecipe VFX_PreparePieFilling
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:2,
+        xpAward = Cooking:5,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+            item 2 [VFX.CannedApplePieFillingOpen;VFX.CannedCherryPieFillingOpen;VFX.CannedBlueberryPieFillingOpen;VFX.CannedStrawberryPieFillingOpen;VFX.CannedPeachPieFillingOpen;VFX.CannedMixedBerryPieFillingOpen;VFX.CannedLemonCreamPieFillingOpen;VFX.CannedBlackberryPieFillingOpen;VFX.CannedRaspberryPieFillingOpen] mappers[PieType] flags[IsExclusive;ItemCount;InheritFoodAge],
+        }
+
+        outputs
+        {
+            item 1 mapper:PieType,
+        }
+
+        itemMapper PieType
+        {
+            VFX.WholePieApple = VFX.CannedApplePieFillingOpen,
+            VFX.WholePieCherry = VFX.CannedCherryPieFillingOpen,
+            VFX.WholePieBlueberry = VFX.CannedBlueberryPieFillingOpen,
+            VFX.WholePieStrawberry = VFX.CannedStrawberryPieFillingOpen,
+            VFX.WholePiePeach = VFX.CannedPeachPieFillingOpen,
+            VFX.WholePieMixedBerry = VFX.CannedMixedBerryPieFillingOpen,
+            VFX.WholePieLemonCream = VFX.CannedLemonCreamPieFillingOpen,
+            VFX.WholePieBlackberry = VFX.CannedBlackberryPieFillingOpen,
+            VFX.WholePieRaspberry = VFX.CannedRaspberryPieFillingOpen,
+        }
+    }
+
+    craftRecipe VFX_PrepareApplePie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] mode:destroy flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 2  [4:Base.Apple;VFX.CannedAppleSlicesOpen] flags[ItemCount;IsExclusive;InheritFoodAge],
+            item 10 tags[base:sugar],
+            item 4  [Base.Butter],
+            item 1  [Base.Cinnamon;VFX.CinnamonSugar],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePieApple,
+        }
+    }
+
+    craftRecipe VFX_PrepareCherryPie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] mode:destroy flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 32 [Base.Cherry;VFX.JarCherryOpen;VFX.DarkSweetCherries;VFX.RedTartCherries] flags[AllowFrozenItem;InheritFoodAge],
+            item 10 tags[base:sugar],
+            item 4  [Base.Butter],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePieCherry,
+        }
+    }
+
+    craftRecipe VFX_PrepareBlueberryPie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 2  [16:Base.BerryBlue;VFX.PunnetBlueberries;VFX.Blueberries] flags[ItemCount;IsExclusive;AllowFrozenItem;InheritFoodAge],
+            item 10 tags[base:sugar],
+            item 4  [Base.Butter],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePieBlueberry,
+        }
+    }
+
+    craftRecipe VFX_PrepareStrawberryPie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 16 [Base.Strewberrie;VFX.WholeStrawberries;VFX.SlicedStrawberries] flags[AllowFrozenItem;InheritFoodAge],
+            item 10 tags[base:sugar],
+            item 4  [Base.Butter],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePieStrawberry,
+        }
+    }
+
+    craftRecipe VFX_PreparePeachPie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 1  [5:Base.Peach;VFX.JarPeachOpen;2:Base.CannedPeachesOpen] flags[IsExclusive;InheritFoodAge],
+            item 10 tags[base:sugar],
+            item 4  [Base.Butter],
+            item 1  [Base.Cinnamon;VFX.CinnamonSugar],
+            item 1  [VFX.Nutmeg],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePiePeach,
+        }
+    }
+
+    craftRecipe VFX_PrepareMixedBerryPie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 1  [8:Base.BerryBlue;VFX.PunnetBlueberries;VFX.Blueberries] flags[ItemCount;IsExclusive;AllowFrozenItem;InheritFoodAge],
+            item 8  [Base.Strewberrie;VFX.WholeStrawberries;VFX.SlicedStrawberries] flags[AllowFrozenItem;InheritFoodAge],
+            item 1  [8:Base.BerryBlack;VFX.Blackberries;VFX.PunnetBlackberries] flags[ItemCount;IsExclusive;AllowFrozenItem;InheritFoodAge],
+            item 8  [VFX.PunnetRaspberries;VFX.Raspberries] flags[AllowFrozenItem;InheritFoodAge],
+            item 10 tags[base:sugar],
+            item 4  [Base.Butter],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePieMixedBerry,
+        }
+    }
+
+    craftRecipe VFX_PrepareLemonCreamPie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 40 [Base.Lemon] flags[InheritFoodAge],
+            item 20 tags[base:sugar],
+            item 1  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 4  [Base.Butter],
+            item 1 [*],
+                -fluid 0.3 [CowMilk;SheepMilk;VFX_SoyMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePieLemonCream,
+        }
+    }
+
+    craftRecipe VFX_PrepareBlackberryPie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 2  [16:Base.BerryBlack;VFX.Blackberries;VFX.PunnetBlackberries] flags[ItemCount;IsExclusive;AllowFrozenItem;InheritFoodAge],
+            item 10 tags[base:sugar],
+            item 4  [Base.Butter],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePieBlackberry,
+        }
+    }
+
+    craftRecipe VFX_PrepareRaspberryPie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 16 [VFX.PunnetRaspberries;VFX.Raspberries] flags[AllowFrozenItem;InheritFoodAge],
+            item 10 tags[base:sugar],
+            item 4  [Base.Butter],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePieRaspberry,
+        }
+    }
+
+    craftRecipe VFX_PreparePumpkinPie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 12 [Base.Pumpkin;Base.PumpkinSliced;Base.PumpkinSmashed;VFX.CannedPumpkinPureeOpen;VFX.JarPumpkinOpen;VFX.PackagedPumpkin] flags[InheritFoodAge;AllowFrozenItem],
+            item 20 tags[base:sugar],
+            item 1  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 1  [Base.Cinnamon;VFX.CinnamonSugar],
+            item 1  [VFX.Nutmeg],
+            item 1  [VFX.GroundGinger;Base.GingerRoot],
+            item 1  [*],
+                -fluid 0.3 [CowMilk;SheepMilk;VFX_SoyMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePiePumpkin,
+        }
+    }
+
+    craftRecipe VFX_PrepareSweetPotatoPie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 32 [Base.SweetPotato] flags[InheritFoodAge;IsCookedFoodItem],
+            item 20 tags[base:sugar],
+            item 1  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 4  [Base.Butter],
+            item 1  [Base.Cinnamon;VFX.CinnamonSugar],
+            item 1  [VFX.Nutmeg],
+            item 1  [*],
+                -fluid 0.3 [CowMilk;SheepMilk;VFX_SoyMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePieSweetPotato,
+        }
+    }
+
+    craftRecipe VFX_PreparePecanPie
+    {
+        timedAction = VFX.BakingPanCooking,
+        time = 80,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegrade],
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.BakingPan] flags[InheritCondition],
+            item 1 [Base.PieDough] flags[ItemCount;InheritFoodAge],
+
+            item 2  [VFX.Pecans] flags[ItemCount],
+            item 20 tags[base:sugar],
+            item 1  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 4  [Base.Butter],
+            item 2  [Base.Honey],
+            item 1  [VFX.VanillaExtract],
+        }
+
+        outputs
+        {
+            item 1 VFX.WholePiePecan,
+        }
+    }
+
+/* <<<<<  Base Game Baking  >>>>> */
+
+    craftRecipe VFX_MakePancakes
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:2,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 2 tags[VFX:TraditionalFlour],
+            item 1 tags[base:sugar],
+
+            item 1 [*],
+                -fluid 0.3 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 Base.PancakesCraft,
+        }
+    }
+
+    craftRecipe VFX_MakeFrostedDoughnuts
+    {
+        timedAction = VFX.BowlMixing,
+        time = 30,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:6,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 2 [Base.DoughnutPlain] flags[InheritFoodAge;ItemCount],
+            item 5 tags[VFX:Frosting],
+            item 2 [VFX.Sprinkles],
+        }
+
+        outputs
+        {
+            item 2 Base.DoughnutFrosted,
+        }
+    }
+
+    craftRecipe VFX_MakeWaffles
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:3,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:2,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 2 tags[VFX:TraditionalFlour],
+            item 1 tags[base:sugar],
+            item 1 [Base.BakingSoda],
+
+            item 1 [*],
+                -fluid 0.3 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.HomemadeWaffles,
+        }
+    }
+
+    craftRecipe VFX_MakeBagelDough
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:4,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+            item 1 [Base.RollingPin] mode:keep flags[MayDegradeVeryLight],
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  tags[VFX:Yeast],
+            item 1  tags[base:sugar],
+            item 1  [Base.Salt],
+            item 1  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+
+            item 1 [*],
+                -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 2 VFX.BagelDough,
+        }
+    }
+
+    craftRecipe VFX_MakeBagels
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:2,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:4,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+            item 1 [Base.RollingPin] mode:keep flags[MayDegradeVeryLight],
+
+            item 1 [VFX.BagelDough],
+            item 1 [Base.PoppySeed;VFX.SesameSeeds] mappers[BagelType],
+        }
+
+        outputs
+        {
+            item 1 mapper:BagelType,
+        }
+
+        itemMapper BagelType
+        {
+            Base.BagelPoppy = Base.PoppySeed,
+            Base.BagelSesame = VFX.SesameSeeds,
+        }
+    }
+
+    craftRecipe VFX_MakeCornbread
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:6,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+
+            item 3 [Base.Cornmeal2],
+            item 4 tags[VFX:AnyFlour],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 4 [Base.Butter],
+            item 5 tags[base:sugar],
+            item 1 [VFX.BakingPowder],
+            item 1 [Base.Salt],
+
+            item 1 [*],
+            -fluid 0.3 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 4 VFX.HomemadeCornbread,
+        }
+    }
+
+    craftRecipe VFX_MakeCroissantDough
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:8,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+            item 1 [Base.RollingPin] mode:keep flags[MayDegradeVeryLight],
+
+            item 10 [Base.Flour2],
+            item 1  tags[VFX:Yeast],
+            item 8  [Base.Butter],
+            item 1  tags[base:sugar],
+            item 1  [Base.Salt],
+            item 1  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+
+            item 1 [*],
+            -fluid 0.3 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.CroissantDough,
+        }
+    }
+
+    craftRecipe VFX_MakeCroissants
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:8,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+            item 1 [Base.RollingPin] mode:keep flags[MayDegradeVeryLight],
+
+            item 1  [VFX.CroissantDough] flags[InheritFoodAge;ItemCount],
+            item 16 [Base.Butter],
+        }
+
+        outputs
+        {
+            item 4 VFX.HomemadeCroissant,
+        }
+    }
+
+    craftRecipe VFX_MakeTortillas
+    {
+        timedAction = VFX.BowlMixing,
+        time = 50,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:4,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+            item 1 [Base.RollingPin] mode:keep flags[MayDegradeVeryLight],
+
+            item 5 tags[VFX:TraditionalFlour],
+            item 1 [VFX.BakingPowder],
+            item 1 [Base.Salt],
+            item 5 tags[base:bakingfat],
+
+            item 1 [*],
+            -fluid 0.2 [Water],
+        }
+
+        outputs
+        {
+            item 4 VFX.HomemadeTortilla,
+        }
+    }
+
+    craftRecipe VFX_MakeDoughnutDough
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:5,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:6,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 [Base.Bowl;Base.ClayBowl] mode:keep flags[IsEmpty],
+            item 1 [Base.RollingPin] mode:keep flags[MayDegradeVeryLight],
+
+            item 5 tags[VFX:TraditionalFlour],
+            item 1 tags[VFX:Yeast],
+            item 5 tags[base:sugar],
+            item 1 [Base.Salt],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+            item 4 tags[base:bakingfat],
+
+            item 1 [*],
+            -fluid 0.5 [CowMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.DoughnutDough,
+        }
+    }
+
+    craftRecipe VFX_MakeChocolateDoughnut
+    {
+        timedAction = VFX.BowlMixing,
+        time = 60,
+        category = Cooking,
+        tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:2,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:6,
+
+        inputs
+        {
+            item 1 tags[base:sharpknife;base:dullknife;base:meatcleaver] mode:keep flags[MayDegradeVeryLight],
+
+            item 1 [Base.DoughnutPlain],
+            item 1 [VFX.ChocolateFrostingTub;VFX.ChocolateFrosting],
+        }
+
+        outputs
+        {
+            item 1 Base.DoughnutChocolate,
+        }
+    }
+
+/* <<<<<  Sourdough Starter  >>>>> */
+
+    craftRecipe VFX_MakeSourdoughStarter
+    {
+        timedAction = VFX.JarCanning,
+        time = 30,
+        category = Cooking,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:1,
+        Tags = AnySurfaceCraft,
+
+        inputs
+        {
+            item 1  tags[base:jar] mode:destroy flags[ItemCount],
+            item 1  [Base.JarLid] mode:destroy,,
+            item 10 tags[VFX:TraditionalFlour],
+
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.SourdoughStarter,
+        }
+    }
+
+    craftRecipe VFX_FeedSourdoughStarter
+    {
+        timedAction = VFX.JarCanning,
+        time = 30,
+        category = Cooking,
+        needToBeLearn = true,
+        AutoLearnAny = Cooking:1,
+        Tags = AnySurfaceCraft,
+
+        inputs
+        {
+            item 1 [VFX.SourdoughStarterUnfed] mode:destroy,
+            item 5 tags[VFX:TraditionalFlour],
+            
+            item 1 [*],
+            -fluid 0.2 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.SourdoughStarter,
+        }
+    }
+
+/* <<<<<  Bread - Sourdough  >>>>> */
+
+    craftRecipe VFX_MakeSourdough
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 8  [VFX.SourdoughStarter],
+            item 10 [Base.Flour2],
+            item 2  [Base.Salt;Base.SeasoningSalt],
+
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.Sourdough,
+        }
+    }
+
+    craftRecipe VFX_MakeSourdoughBaguette
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 8  [VFX.SourdoughStarter],
+            item 10 tags[VFX:TraditionalFlour],
+            item 2  [Base.Salt;Base.SeasoningSalt],
+
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.SourdoughBaguette,
+        }
+    }
+
+    craftRecipe VFX_MakeSourdoughHamburgerBuns
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 8  [VFX.SourdoughStarter],
+            item 10 tags[VFX:TraditionalFlour],
+            item 2  [Base.Salt;Base.SeasoningSalt],
+            item 4  [Base.Butter],
+
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 4 VFX.SourdoughHamburgerBun,
+        }
+    }
+
+    craftRecipe VFX_MakeSourdoughHotdogBuns
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 8  [VFX.SourdoughStarter],
+            item 10 tags[VFX:TraditionalFlour],
+            item 2  [Base.Salt;Base.SeasoningSalt],
+            item 4  [Base.Butter],
+
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 4 VFX.SourdoughHotdogBun,
+        }
+    }
+
+    craftRecipe VFX_MakeSourdoughBreadsticks
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 8 [VFX.SourdoughStarter],
+            item 10 tags[VFX:TraditionalFlour],
+            item 2 [Base.Salt;Base.SeasoningSalt],
+            item 4 tags[base:bakingfat],
+
+            item 1 [*],
+                -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 6 VFX.SourdoughBreadstick,
+        }
+    }
+
+/* <<<<<  Bread - Wheat Flour  >>>>> */
+
+    craftRecipe VFX_MakeHamburgerBuns
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 [Base.Flour2],
+            item 2  [Base.Salt;Base.SeasoningSalt],
+            item 1  tags[VFX:Yeast],
+            item 4  [Base.Butter],
+
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 4 VFX.HomemadeHamburgerBun,
+        }
+    }
+
+    craftRecipe VFX_MakeHotdogBuns
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+            
+            item 10 [Base.Flour2],
+            item 2  [Base.Salt;Base.SeasoningSalt],
+            item 1  tags[VFX:Yeast],
+            item 4  [Base.Butter],
+
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 4 VFX.HomemadeHotdog,
+        }
+    }
+
+    craftRecipe VFX_MakeBrioche
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 [Base.Flour2],
+            item 1  [Base.Salt;Base.SeasoningSalt],
+            item 1  tags[VFX:Yeast],
+            item 8  [Base.Butter],
+            item 5  tags[base:sugar],
+            item 2  tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+
+            item 1 [*],
+                -fluid 1.0 [CowMilk],
+        }
+
+
+        outputs
+        {
+            item 1 VFX.Brioche,
+        }
+    }
+
+/* <<<<<  Bread - Traditional Flour  >>>>> */
+
+    craftRecipe VFX_MakeBeerBread
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+            
+            item 10 tags[VFX:TraditionalFlour],
+            item 2 [Base.Salt;Base.SeasoningSalt],
+            item 5 tags[base:sugar],
+
+            item 1 [*],
+            -fluid 0.3 [VFX_AmericanLightLager;VFX_AmericanLager;VFX_Pilsner;VFX_ViennaLager;VFX_PaleAle;VFX_AmberAle;VFX_Porter;VFX_Stout;VFX_AmericanWheatBeer],
+        }
+
+        outputs
+        {
+            item 1 VFX.BeerBread,
+        }
+    }
+
+    craftRecipe VFX_MakeMilkBread
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 2 [Base.Salt;Base.SeasoningSalt],
+            item 5 tags[base:sugar],
+            item 1 tags[VFX:Yeast],
+            item 6 [Base.Butter],
+
+            item 1 [*],
+            -fluid 1.0 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 1 VFX.MilkBread,
+        }
+    }
+
+    craftRecipe VFX_MakeFrybread
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1 [Base.Salt;Base.SeasoningSalt],
+            item 1 [VFX.BakingPowder],
+
+            item 1 [*],
+            -fluid 0.3 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.Frybread,
+        }
+    }
+
+    craftRecipe VFX_MakeEnglishMuffins
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 2 [Base.Cornmeal2],
+            item 2 [Base.Salt;Base.SeasoningSalt],
+            item 1 tags[VFX:Yeast],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+
+            item 1 [*],
+            -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 4 VFX.EnglishMuffin,
+        }
+    }
+
+    craftRecipe VFX_MakePitaBread
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1 [Base.Salt;Base.SeasoningSalt],
+            item 1 tags[VFX:Yeast],
+            item 1 tags[base:egg] flags[IsUncookedFoodItem;InheritFoodAge;ItemCount],
+
+            item 1 [*],
+            -fluid 0.5 [CowMilk;SheepMilk],
+        }
+
+        outputs
+        {
+            item 4 VFX.PitaBread,
+        }
+    }
+
+    craftRecipe VFX_MakeFocaccia
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 2 [Base.Salt;Base.SeasoningSalt],
+            item 1 tags[VFX:Yeast],
+            item 5 [Base.OilOlive],
+
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.FocacciaBread,
+        }
+    }
+
+    craftRecipe VFX_MakeNaanBread
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1  [Base.Salt;Base.SeasoningSalt],
+            item 10 [VFX.GreekYogurtPot],
+
+            item 1 [*],
+            -fluid 0.3 [Water],
+        }
+
+        outputs
+        {
+            item 2 VFX.NaanBread,
+        }
+    }
+
+    craftRecipe VFX_MakeCrumpets
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1 [Base.Salt;Base.SeasoningSalt],
+            item 1 tags[VFX:Yeast],
+            item 5 [Base.BakingSoda],
+
+            item 1 [*],
+                -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 4 VFX.CrumpetDough,
+        }
+    }
+
+    craftRecipe VFX_MakeBreadsticks
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 1 [Base.Salt;Base.SeasoningSalt],
+            item 1 tags[VFX:Yeast],
+            item 4 tags[base:bakingfat],
+
+            item 1 [*],
+                -fluid 0.3 [Water],
+        }
+
+        outputs
+        {
+            item 6 VFX.Breadstick,
+        }
+    }
+
+    craftRecipe VFX_MakePretzels
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:TraditionalFlour],
+            item 2 [Base.Salt;Base.SeasoningSalt],
+            item 1 tags[VFX:Yeast],
+            item 5 [Base.BakingSoda],
+
+            item 1 [*],
+                -fluid 0.3 [Water],
+        }
+
+        outputs
+        {
+            item 2 VFX.Pretzel,
+        }
+    }
+
+/* <<<<<  Bread - Rye Flour  >>>>> */
+
+    craftRecipe VFX_MakeRyeBread
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 [VFX.RyeFlour],
+            item 2  [Base.Salt;Base.SeasoningSalt],
+            item 1  tags[VFX:Yeast],
+
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.RyeBread,
+        }
+    }
+
+    craftRecipe VFX_MakeRyeSourdough
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 8  [VFX.SourdoughStarter],
+            item 10 [VFX.RyeFlour],
+            item 2  [Base.Salt;Base.SeasoningSalt],
+
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.RyeSourdough,
+        }
+    }
+
+    craftRecipe VFX_MakePumpernickel
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 [VFX.RyeFlour],
+            item 2  [Base.Salt;Base.SeasoningSalt],
+            item 1  tags[VFX:Yeast],
+            item 5  [VFX.Molasses],
+
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.Pumpernickel,
+        }
+    }
+
+/* <<<<<  Bread - Barley Flour  >>>>> */
+
+    craftRecipe VFX_MakeBarleyBread
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 [VFX.BarleyFlour],
+            item 2  [Base.Salt;Base.SeasoningSalt],
+            item 1  tags[VFX:Yeast],
+
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.BarleyBread,
+        }
+    }
+
+    craftRecipe VFX_MakeBarleySourdough
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 8  [VFX.SourdoughStarter],
+            item 10 [VFX.BarleyFlour],
+            item 2  [Base.Salt;Base.SeasoningSalt],
+
+            item 1 [*],
+            -fluid 1.0 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.BarleySourdough,
+        }
+    }
+
+/* <<<<<  Bread - Any Flour  >>>>> */
+
+    craftRecipe VFX_MakeFlatbread
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:AnyFlour],
+            item 1  [*],
+            -fluid 0.3 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.Flatbread,
+        }
+    }
+
+    craftRecipe VFX_MakeSoupDumplings
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 5 tags[VFX:AnyFlour],
+            item 4 [Base.Butter],
+            item 2 [Base.Salt;Base.SeasoningSalt],
+            item 1 [VFX.BakingPowder],
+            item 1 [*],
+            -fluid 0.2 [Water],
+        }
+
+        outputs
+        {
+            item 2 VFX.SoupDumplings,
+        }
+    }
+
+    craftRecipe VFX_MakeScones
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:AnyFlour],
+            item 1 [Base.Salt;Base.SeasoningSalt],
+            item 5 tags[base:sugar],
+            item 1 [VFX.BakingPowder],
+            item 4 [Base.Butter],
+
+            item 1 [*],
+            -fluid 1.0 [CowMilk;SheepMilk],
+        }
+
+
+        outputs
+        {
+            item 4 VFX.Scone,
+        }
+    }
+
+/* <<<<<  Dough  >>>>> */
+
+    craftRecipe VFX_MakePizzaDough
+    {
+        timedAction = VFX.MixingBowl,
+        time = 100,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        NeedToBeLearn = true,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 5 tags[VFX:TraditionalFlour],
+            item 1 [Base.Salt;Base.SeasoningSalt],
+            item 1 tags[VFX:Yeast],
+
+            item 1 [*],
+            -fluid 0.5 categories[Water],
+        }
+        outputs
+        {
+            item 1 VFX.PizzaDough,
+        }
+    }
+
+    craftRecipe VFX_MakeSourdoughPizzaDough
+    {
+        timedAction = VFX.MixingBowl,
+        time = 100,
+        Tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        NeedToBeLearn = true,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 8 [VFX.SourdoughStarter],
+            item 5 tags[VFX:TraditionalFlour],
+            item 1 [Base.Salt;Base.SeasoningSalt],
+
+            item 1 [*],
+            -fluid 0.5 categories[Water],
+        }
+        outputs
+        {
+            item 1 VFX.SourdoughPizzaDough,
+        }
+    }
+
+    craftRecipe VFX_MakeFlatbreadPizzaDough
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        NeedToBeLearn = true,
+        category = Cooking,
+        Tags = AnySurfaceCraft;Cooking,
+        xpAward = Cooking:10,
+        AutoLearnAny = Cooking:7,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 10 tags[VFX:AnyFlour],
+            item 1 [*],
+            -fluid 0.5 [Water],
+        }
+
+        outputs
+        {
+            item 1 VFX.FlatbreadPizzaDough,
+        }
+    }
+
+    craftRecipe VFX_MakeHomemadePasta
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+
+            item 8 tags[VFX:AnyFlour],
+            item 2 tags[base:egg] flags[ItemCount;IsUncookedFoodItem;InheritFoodAge],
+        }
+
+
+        outputs
+        {
+            item 1 VFX.HomemadePasta,
+        }
+    }
+
+    craftRecipe VFX_MakeHomemadeGnocchi
+    {
+        timedAction = VFX.MixingBowl,
+        time = 50,
+        tags = AnySurfaceCraft;Cooking,
+        category = Cooking,
+        needToBeLearn = TRUE,
+        AutoLearnAny = Cooking:7,
+        xpAward = Cooking:10,
+        OnCreate = VFX.TransferNutrition,
+
+        inputs
+        {
+            item 1 tags[base:mixingutensil] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:rollingpin] mode:keep flags[MayDegradeVeryLight],
+            item 1 tags[base:bowl] mode:keep,
+            
+            item 8 tags[VFX:AnyFlour],
+            item 1 tags[base:egg] flags[ItemCount;IsUncookedFoodItem;InheritFoodAge],
+            item 1 [VFX.MashedPotato] flags[ItemCount],
+        }
+
+
+        outputs
+        {
+            item 1 VFX.HomemadeGnocchi,
+        }
+    }
+
+}
