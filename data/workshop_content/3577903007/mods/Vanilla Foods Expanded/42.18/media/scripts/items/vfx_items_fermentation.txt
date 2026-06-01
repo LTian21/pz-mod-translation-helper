@@ -1,0 +1,751 @@
+module VFX
+{
+    imports
+    {
+        Base,
+    }
+
+/* <<<<<  Sourdough Starter >>>>> */
+
+    item SourdoughStarter
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+        UseWhileEquipped = FALSE,
+
+        CantEat = TRUE,
+        CantBeFrozen = TRUE,
+        HungerChange = -10,
+
+        ReplaceOnUse = VFX.JarWithLid,
+        OnCreate = VFX.AgingOnCreate,
+
+        DaysTotallyRotten = 2,
+
+        Icon = VFX_Baking_SourdoughStarter,
+        StaticModel = Base.VFX_SourdoughStarter,
+        WorldStaticModel = Base.VFX_SourdoughStarter,
+    }
+
+    item SourdoughStarterUnfed
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+        UseWhileEquipped = FALSE,
+
+        CantEat = TRUE,
+        CantBeFrozen = TRUE,
+        HungerChange = -10,
+
+        ReplaceOnUse = VFX.JarWithLid,
+        OnCreate = VFX.AgingOnCreate,
+
+        DaysTotallyRotten = 2,
+
+        Tooltip = Tooltip_VFXSourdoughStarterUnfed,
+
+        Icon = VFX_Baking_SourdoughStarter,
+        StaticModel = Base.VFX_SourdoughStarter,
+        WorldStaticModel = Base.VFX_SourdoughStarter,
+    }
+
+    item DeadSourdoughStarter
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 0.5,
+
+        CantEat = TRUE,
+        CantBeFrozen = TRUE,
+
+        ReplaceOnUse = VFX.JarWithLid,
+
+        Tooltip = Tooltip_VFXSourdoughStarterDead,
+
+        Icon = VFX_Baking_SourdoughStarterDead,
+        StaticModel = Base.VFX_DeadSourdoughStarter,
+        WorldStaticModel = Base.VFX_DeadSourdoughStarter,
+    }
+
+/* <<<<<  Vinegar >>>>> */
+
+    item VinegarStarterFermenting
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+
+        CantBeFrozen = TRUE,
+        CantEat = TRUE,
+
+        ReplaceOnUse = VFX.JarWithLid,
+        OnCreate = VFX.AgingOnCreate,
+
+        DaysFresh = 30,
+        DaysTotallyRotten = 32,
+
+        HungerChange = -10,
+
+        Tooltip = Tooltip_VFXVinegarFermenting30,
+
+        Icon = VFX_Homemade_VinegarJar,
+        StaticModel = Base.VFX_VinegarJar,
+        WorldStaticModel = Base.VFX_VinegarJar,
+    }
+
+    item VinegarStarter
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+
+        CantBeFrozen = TRUE,
+        CantEat = TRUE,
+
+        ReplaceOnUse = VFX.JarWithLid,
+
+        DaysFresh = 180,
+        DaysTotallyRotten = 195,
+
+        HungerChange = -10,
+
+        Tags = VFX:VinegarStarter,
+
+        Icon = VFX_Homemade_VinegarJar,
+        StaticModel = Base.VFX_VinegarJar,
+        WorldStaticModel = Base.VFX_VinegarJar,
+    }
+
+    item VinegarPreparationPot
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        FoodType = NoExplicit,
+        PourType = Pot,
+        EatType = Pot,
+        Weight = 2.0,
+
+        IsCookable = TRUE,
+
+        MinutesToCook = 30,
+        MinutesToBurn = 60,
+
+        ReplaceOnUse = Base.Pot,
+
+        DaysFresh = 1,
+        DaysTotallyRotten = 2,
+
+        HungerChange = -10.0,
+
+        Tags = base:hasmetal,
+
+        Icon = VFX_Homemade_VinegarPot,
+        StaticModel = Base.VFX_VinegarPot,
+        WorldStaticModel = Base.VFX_VinegarPot,
+    }
+
+    item VinegarPreparationPotForged
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        FoodType = NoExplicit,
+        PourType = Pot,
+        EatType = Pot,
+        Weight = 2.0,
+
+        IsCookable = TRUE,
+
+        MinutesToCook = 30,
+        MinutesToBurn = 60,
+
+        ReplaceOnUse = Base.PotForged,
+
+        DaysFresh = 1,
+        DaysTotallyRotten = 2,
+
+        HungerChange = -10.0,
+
+        Tags = base:hasmetal,
+
+        Icon = VFX_Homemade_VinegarPotForged,
+        StaticModel = Base.VFX_VinegarPotForged,
+        WorldStaticModel = Base.VFX_VinegarPotForged,
+    }
+
+    item HomemadeVinegarFermentingYeast
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+
+        CantBeFrozen = TRUE,
+        CantEat = TRUE,
+
+        ReplaceOnUse = VFX.JarWithLid,
+        OnCreate = VFX.AgingOnCreate,
+
+        DaysFresh = 32,
+
+        HungerChange = -10,
+
+        Tooltip = Tooltip_VFXVinegarFermenting30,
+
+        Icon = VFX_Homemade_VinegarJar,
+        StaticModel = Base.VFX_VinegarJar,
+        WorldStaticModel = Base.VFX_VinegarJar,
+    }
+
+    item HomemadeVinegarFermentingAlcohol
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+
+        CantBeFrozen = TRUE,
+        CantEat = TRUE,
+
+        ReplaceOnUse = VFX.JarWithLid,
+        OnCreate = VFX.AgingOnCreate,
+
+        DaysFresh = 92,
+
+        HungerChange = -10,
+
+        Tooltip = Tooltip_VFXVinegarFermenting90,
+
+        Icon = VFX_Homemade_VinegarJar,
+        StaticModel = Base.VFX_VinegarJar,
+        WorldStaticModel = Base.VFX_VinegarJar,
+    }
+
+    item HomemadeVinegar
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        EatType = GlugFood,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+
+        CantBeFrozen = TRUE,
+
+        CustomContextMenu = Drink,
+        CustomEatSound = DrinkingFromBottleGlass,
+
+        ReplaceOnUse = VFX.JarWithLid,
+
+        DaysFresh = 700,
+
+        HungerChange = -10,
+        Calories = 0.0,
+        Carbohydrates = 0.0,
+        Lipids = 0.0,
+        Proteins = 0.0,
+
+        Tags = VFX:VinegarStarter;base:vinegar;base:minoringredient,
+
+        Icon = VFX_Homemade_VinegarJar,
+        StaticModel = Base.VFX_VinegarJar,
+        WorldStaticModel = Base.VFX_VinegarJar,
+    }
+
+/* <<<<<  Yeast >>>>> */
+
+    item YeastStarterFermenting
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+        UseWhileEquipped = FALSE,
+
+        CantEat = TRUE,
+        CantBeFrozen = TRUE,
+        HungerChange = -3,
+
+        ReplaceOnUse = VFX.JarWithLid,
+        OnCreate = VFX.AgingOnCreate,
+
+        DaysTotallyRotten = 7,
+
+        Tooltip = Tooltip_VFXYeastStarterFermenting,
+
+        Icon = VFX_Homemade_YeastStarter,
+        StaticModel = Base.VFX_YeastStarter,
+        WorldStaticModel = Base.VFX_YeastStarter,
+    }
+
+    item YeastStarter
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+        UseWhileEquipped = FALSE,
+
+        CantBeFrozen = TRUE,
+        CantEat = TRUE,
+
+        ReplaceOnUse = VFX.JarWithLid,
+        OnCreate = VFX.AgingOnCreate,
+
+        DaysTotallyRotten = 4,
+
+        HungerChange = -3,
+
+        Tags = VFX:Yeast,
+
+        Icon = VFX_Homemade_YeastStarter,
+        StaticModel = Base.VFX_YeastStarter,
+        WorldStaticModel = Base.VFX_YeastStarter,
+    }
+
+    item YeastStarterUnfed
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+        UseWhileEquipped = FALSE,
+
+        CantEat = TRUE,
+        CantBeFrozen = TRUE,
+        HungerChange = -3,
+
+        ReplaceOnUse = VFX.JarWithLid,
+        OnCreate = VFX.AgingOnCreate,
+
+        DaysTotallyRotten = 4,
+
+        Tags = VFX:Yeast,
+
+        Tooltip = Tooltip_VFXYeastStarterUnfed,
+
+        Icon = VFX_Homemade_YeastStarter,
+        StaticModel = Base.VFX_YeastStarter,
+        WorldStaticModel = Base.VFX_YeastStarter,
+    }
+
+    item DeadYeastStarter
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 0.5,
+
+        CantEat = TRUE,
+        CantBeFrozen = TRUE,
+
+        ReplaceOnUse = VFX.JarWithLid,
+
+        Tooltip = Tooltip_VFXYeastStarterDead,
+
+        Icon = VFX_Homemade_YeastStarterDead,
+        StaticModel = Base.VFX_DeadYeastStarter,
+        WorldStaticModel = Base.VFX_DeadYeastStarter,
+    }
+
+/* <<<<<  Beer >>>>> */
+
+    item MashPot
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        FoodType = NoExplicit,
+        PourType = Pot,
+        EatType = Pot,
+        Weight = 2.0,
+
+        IsCookable = TRUE,
+
+        MinutesToCook = 60,
+        MinutesToBurn = 120,
+
+        ReplaceOnUse = Base.Pot,
+        ReplaceOnCooked = VFX.WortPot,
+
+        DaysFresh = 1,
+        DaysTotallyRotten = 2,
+
+        HungerChange = -10.0,
+
+        Tooltip = Tooltip_VFXCookMash,
+
+        Tags = base:hasmetal,
+
+        Icon = VFX_Homemade_BeerMashPot,
+        StaticModel = Base.VFX_MashPot,
+        WorldStaticModel = Base.VFX_MashPot,
+    }
+
+    item MashPotForged
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        FoodType = NoExplicit,
+        PourType = Pot,
+        EatType = Pot,
+        Weight = 2.0,
+
+        IsCookable = TRUE,
+
+        MinutesToCook = 60,
+        MinutesToBurn = 120,
+
+        ReplaceOnUse = Base.PoForged,
+        ReplaceOnCooked = VFX.WortPotForged,
+
+        DaysFresh = 1,
+        DaysTotallyRotten = 2,
+
+        HungerChange = -10.0,
+
+        Tooltip = Tooltip_VFXCookMash,
+
+        Tags = base:hasmetal,
+
+        Icon = VFX_Homemade_BeerMashPotForged,
+        StaticModel = Base.VFX_MashPotForged,
+        WorldStaticModel = Base.VFX_MashPotForged,
+    }
+
+    item WortPot
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        FoodType = NoExplicit,
+        PourType = Pot,
+        EatType = Pot,
+        Weight = 2.0,
+
+        IsCookable = TRUE,
+
+        MinutesToBurn = 60,
+
+        ReplaceOnUse = Base.Pot,
+
+        DaysFresh = 1,
+        DaysTotallyRotten = 2,
+
+        HungerChange = -10.0,
+
+        Tags = base:hasmetal;base:hideuncooked;base:alreadycooked,
+
+        Icon = VFX_Homemade_BeerWortPot,
+        StaticModel = Base.VFX_WortPot,
+        WorldStaticModel = Base.VFX_WortPot,
+    }
+
+    item WortPotForged
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        FoodType = NoExplicit,
+        PourType = Pot,
+        EatType = Pot,
+        Weight = 2.0,
+
+        IsCookable = TRUE,
+
+        MinutesToBurn = 60,
+
+        ReplaceOnUse = Base.PotForged,
+
+        DaysFresh = 1,
+        DaysTotallyRotten = 2,
+
+        HungerChange = -10.0,
+
+        Tags = base:hasmetal;base:hideuncooked;base:alreadycooked,
+
+        Icon = VFX_Homemade_BeerWortPotForged,
+        StaticModel = Base.VFX_WortPotForged,
+        WorldStaticModel = Base.VFX_WortPotForged,
+    }
+
+    item HomemadeBeerPreparationFermenting
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+
+        CantBeFrozen = TRUE,
+        CantEat = TRUE,
+
+        ReplaceOnUse = VFX.JarWithLid,
+        OnCreate = VFX.AgingOnCreate,
+
+        DaysTotallyRotten = 9,
+
+        HungerChange = -10,
+
+        Tooltip = Tooltip_VFXBeerPrepFermenting,
+
+        Icon = VFX_Homemade_BeerJar,
+        StaticModel = Base.VFX_BeerJar,
+        WorldStaticModel = Base.VFX_BeerJar,
+    }
+
+    item HomemadeBeerPreparation
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+
+        CantBeFrozen = TRUE,
+        CantEat = TRUE,
+
+        ReplaceOnUse = VFX.JarWithLid,
+
+        DaysFresh = 7,
+        DaysTotallyRotten = 30,
+
+        HungerChange = -10,
+
+        Icon = VFX_Homemade_BeerJar,
+        StaticModel = Base.VFX_BeerJar,
+        WorldStaticModel = Base.VFX_BeerJar,
+    }
+
+    item BottleHomemadeBeerUnsealed
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+
+        CantBeFrozen = TRUE,
+        CantEat = TRUE,
+
+        DaysFresh = 7,
+        DaysTotallyRotten = 30,
+
+        HungerChange = -10,
+
+        Tooltip = Tooltip_VFXPressBottle,
+
+        Icon = VFX_Homemade_BeerBottleUnsealed,
+        StaticModel = Base.VFX_BeerBottleUnsealed,
+        WorldStaticModel = Base.VFX_BeerBottleUnsealed,
+    }
+    
+    item BottleHomemadeBeerFermenting
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+
+        CantBeFrozen = TRUE,
+        CantEat = TRUE,
+
+        OnCreate = VFX.AgingOnCreate,
+
+        DaysTotallyRotten = 7,
+
+        HungerChange = -10,
+
+        Tooltip = Tooltip_VFXHomemadeBeerFermenting,
+
+        Icon = VFX_Homemade_BeerBottle,
+        StaticModel = Base.VFX_BeerBottle,
+        WorldStaticModel = Base.VFX_BeerBottle,
+    }
+
+    item BottleHomemadeBeer
+    {
+        DisplayCategory = Food,
+        ItemType = base:normal,
+        Weight = 0.4,
+        EatType = Bourbon,
+        OpeningRecipe = VFX.OpenBottleOfBeer,
+
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+
+        Tags = base:glass;base:glassbottlesmall;VFX:BeerBottle,
+
+        Icon = VFX_Homemade_BeerBottle,
+        StaticModel = Base.VFX_BeerBottle,
+        WorldStaticModel = Base.VFX_BeerBottle,
+
+        component FluidContainer
+        {
+            ContainerName = BottleBeer,
+            Capacity = 0.3,
+            Opened = false,
+            CustomDrinkSound = DrinkingFromBottleGlass,
+
+            Fluids
+            {
+                fluid = VFX_HomemadeBeer:1.0,
+            }
+        }
+
+        component Durability
+        {
+            Material = Glass_Light,
+            MaxHitPoints = 1.0,
+        }
+    }
+
+    item BottleBeerEmpty
+    {
+        DisplayCategory = Food,
+        ItemType = base:normal,
+        Weight = 0.4,
+        EatType = Bourbon,
+
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+
+        Tags = base:glass;base:glassbottlesmall;VFX:BeerBottle,
+
+        Icon = VFX_Homemade_BeerBottle,
+        StaticModel = Base.VFX_BeerBottle,
+        WorldStaticModel = Base.VFX_BeerBottle,
+
+        component FluidContainer
+        {
+            ContainerName = BottleBeer,
+            Capacity = 0.3,
+            CustomDrinkSound = DrinkingFromBottleGlass,
+        }
+
+        component Durability
+        {
+            Material = Glass_Light,
+            MaxHitPoints = 1.0,
+        }
+    }
+
+/* <<<<<  Wine >>>>> */
+
+    item HomemadeWinePreparationFermenting
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+
+        CantBeFrozen = TRUE,
+        CantEat = TRUE,
+
+        ReplaceOnUse = VFX.JarWithLid,
+        OnCreate = VFX.AgingOnCreate,
+
+        HungerChange = -10,
+
+        Tooltip = Tooltip_VFXWinePrepFermenting,
+
+        Icon = VFX_Homemade_WineJar,
+        StaticModel = Base.VFX_WineJar,
+        WorldStaticModel = Base.VFX_WineJar,
+    }
+
+    item HomemadeWinePreparation
+    {
+        DisplayCategory = Food,
+        ItemType = base:food,
+        EatType = GlugFood,
+        Weight = 1.0,
+        WeightEmpty = 0.2,
+
+        CantBeFrozen = TRUE,
+        CantEat = TRUE,
+
+        ReplaceOnUse = VFX.JarWithLid,
+
+        HungerChange = -10,
+
+        Icon = VFX_Homemade_WineJar,
+        StaticModel = Base.VFX_WineJar,
+        WorldStaticModel = Base.VFX_WineJar,
+
+        component FluidContainer
+        {
+            ContainerName = Jar,
+            RainFactor = 0.5,
+            Capacity = 1.0,
+            CustomDrinkSound = DrinkingFromMug,
+
+            Fluids
+            {
+                fluid = VFX_HomemadeWine:1.0,
+            }
+        }
+    }
+
+    item BottleHomemadeWine
+    {
+        DisplayCategory = Food,
+        ItemType = base:normal,
+        Weight = 0.3,
+        OpeningRecipe = OpenBottleOfWine,
+
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+
+        Tags = base:glass;base:glassbottle,
+
+        IconFluidMask = Wine_Mask,
+        Icon = VFX_Homemade_BottleWine,
+        StaticModel = Base.VFX_BottleHomemadeWine,
+        WorldStaticModel = Base.VFX_BottleHomemadeWine,
+
+        component FluidContainer
+        {
+            ContainerName = BottleGlass,
+            Opened	= false,
+            Capacity = 1.0,
+            CustomDrinkSound = DrinkingFromBottleGlass,
+
+            Fluids
+            {
+                fluid = VFX_HomemadeWine:1.0,
+            }
+        }
+    }
+
+    item BottleWineEmpty
+    {
+        DisplayCategory = Food,
+        ItemType = base:normal,
+        Weight = 0.3,
+        OpeningRecipe = OpenBottleOfWine,
+
+        FillFromDispenserSound = GetWaterFromDispenserGlass,
+        FillFromLakeSound = GetWaterFromLakeBottle,
+        FillFromTapSound = GetWaterFromTapGlass,
+        FillFromToiletSound = GetWaterFromToilet,
+
+        Tags = base:glass;base:glassbottle,
+
+        IconFluidMask = Wine_Mask,
+        Icon = VFX_Homemade_BottleWine,
+        StaticModel = Base.VFX_BottleHomemadeWine,
+        WorldStaticModel = Base.VFX_BottleHomemadeWine,
+
+        component FluidContainer
+        {
+            ContainerName = BottleGlass,
+            Capacity = 1.0,
+            CustomDrinkSound = DrinkingFromBottleGlass,
+        }
+    }
+
+}
